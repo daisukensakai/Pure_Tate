@@ -1,0 +1,38 @@
+{
+  "attempt_id": "ATT-0004",
+  "checked_claims": [
+    "The load-bearing chain is: extend CKgP to M_7,4 by gonality strata; reduce the tetragonal stratum to the pointed Hurwitz stack; handle the evaluation-surjective F=(4,6) locus by a bundle tower; prove CKgP for its complement Bad; then use Lemma 4.3 and the boundary induction. The chain stops at Bad, as the attempt acknowledges.",
+    "Claim A correctly observes that 16=2g-2+n for (g,n)=(7,4), so this pair lies exactly on the nonvanishing threshold in SRC-0002 equation (6.1). It does not discharge the other listed degree-16 base cases or the stable boundary pairs needed by the induction.",
+    "Claims B and L contain a degree and duality error. Since dim_C M_7,4=22, Poincare duality gives H^{BM}_16(M_7,4) isomorphic to H^28(M_7,4)(22), not to the dual of H^16(M_7,4). Thus W_-16 H^{BM}_16 corresponds to W_28 H^28(22). The relevant algebraic cohomology would be a sum of Q(-14), becoming Q(8) after twisting by (22). Showing W_16 H^16 is a sum of Q(-8) does not control the required Borel-Moore group. CKgP could repair this by applying Lemma 4.3 in degree 28, but that argument is absent.",
+    "Claims D and E match the supplied sources: the trigonal range reaches n=14, and the Mukai construction for the exact-gonality-5 locus reaches n=4.",
+    "Claim F is slightly inaccurate set-theoretically: the hyperelliptic Z locus lies in beta^{-1}(M^3) and hence is removed from H^diamond. The published decomposition relevant to H^diamond is X union Y, not a stratification of H^diamond containing Z.",
+    "Claim G correctly computes the Lemma 10.6 bound n<=7 for F=(5,5).",
+    "Claim H survives checking. For F=(4,6), n=4 and g=7, only the f_2=6 summand has degree zero, and O_PE(1)|C=omega_C tensor gamma^*O(2) gives the obstruction line omega_C^{-1}(2D+Gamma). Evaluation therefore fails precisely when Gamma is linearly equivalent to K_C-2D.",
+    "Claim I is false as stated. Completeness of a g^1_4 does not imply that |2D| is only the pullback of |O_P1(2)| or that h^0(2D)=3. The supplied SRC-0005 places bielliptic covers inside the F=(4,6), E=(2,4,4) and E=(2,3,5) strata. For a bielliptic factorization C -> E -> P1, write D=pi^*A with deg A=2. Then h^0(C,2D)=h^0(E,2A)=4 because pi_*O_C=O_E plus a negative-degree summand. Riemann-Roch gives h^0(K_C-2D)=2, so the residual divisors form a pencil. Consequently the bad locus over such a cover has a positive-dimensional family of ordered residual divisors, not 24 isolated points. This moving-residual locus is additional to the acknowledged multiple-point locus.",
+    "Claims J and K establish at most CKgP on the evaluation-surjective open. CKgP does not ascend from a base to an arbitrary finite etale cover, and the attempted degree-24 description is valid only after proving a unique relative reduced residual divisor in families. That uniqueness fails on the bielliptic sublocus.",
+    "No coarse-moduli argument is needed in the cited CKgP reductions: the sources work with algebraic or Deligne-Mumford stacks. If one passed to coarse spaces, the asserted degree 24 could change in the presence of stabilizers; the attempt supplies no such passage.",
+    "The rational-coefficient scope is explicit and essential. Nothing proves an integral statement; averaging between invariants and coinvariants under finite graph automorphism groups and rational Chow results cannot be promoted integrally.",
+    "The attempt does not track the codimension-one Gysin cohomological shift by 2 and its Tate twist, nor all Kunneth degrees and graph-automorphism invariants in the degree-16 boundary induction. SRC-0002 supplies the rational right-exact sequence, but the proposed extension does not reconstruct all stable-graph terms or differentials.",
+    "No spectral-sequence degeneration, predicted motive, point-count prediction, or Galois semisimplification is used as an unconditional theorem. For a correctly identified pure polarizable Hodge structure, being spanned by algebraic classes would give an actual sum of Tate structures, not merely a semisimplification.",
+    "The attempt correctly avoids inferring tautological generation merely from pure Tate. Lemma 4.3 would provide algebraicity from CKgP, while A^*=R^* would require the additional Chow argument that remains missing."
+  ],
+  "created_on": "2026-07-30",
+  "id": "REV-0007",
+  "independent": true,
+  "reviewer_engine": "codex",
+  "scope_checks": [
+    "stack versus coarse moduli: stack arguments are appropriate, but no coarse-space degree statement is justified",
+    "rational versus integral coefficients: rational only; no integral promotion",
+    "cohomology versus Borel-Moore degree: incorrect degree-16 identification; degree 28 is required",
+    "Poincare duality and Tate twists: missing dimension-22 twist; Q(-14)(22)=Q(8)",
+    "Gysin and Kunneth shifts: not reconstructed for the degree-16 boundary induction",
+    "degeneration or spectral-sequence differentials: no new degeneration proved or needed locally; global differential audit omitted",
+    "graph automorphisms: rational invariants are cited in SRC-0002, but the attempt does not track them; integral coinvariants would differ",
+    "semisimplification versus actual Hodge isomorphism: no improper semisimplification upgrade, but the asserted actual Tate group is the wrong group",
+    "predicted motives: none used unconditionally",
+    "pure Tate versus algebraic or tautological generation: algebraicity would follow from CKgP; tautological generation remains unproved",
+    "omitted stable pairs: the other degree-16 base cases and stable boundary factors remain outstanding"
+  ],
+  "strongest_attack": "Claim I's residual-divisor geometry is false on a supplied, relevant sublocus: bielliptic F=(4,6) covers have h^0(2D)=4 and a pencil |K_C-2D|, so Bad is positive-dimensional over the unpointed cover rather than a degree-24 finite etale cover. This adds an uncontrolled moving-residual stratum and defeats the proposed route to the missing CKgP statement. Independently, Claims B and L identify the required degree-16 Borel-Moore group with the wrong cohomological degree and omit the Poincare twist.",
+  "verdict": "incomplete"
+}

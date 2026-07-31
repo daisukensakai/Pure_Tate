@@ -1,0 +1,98 @@
+{
+  "attempt_id": "ATT-0014",
+  "checked_claims": [
+    "TARGET-DICT [verified] \u2014 Task target and attempt target agree field-for-field, and the attempt's packet_sha256 equals the task's e6758c68\u2026f88e. Internal consistency re-derived: d=3*6-3+6=21; 2d-16=26; H^BM_16(U) = H^26(U)(21) so weight 26-42=-16 and Q(8) untwists to Q(8)(-21)=Q(-13), weight 26, Chow codimension d-8=13; dually H_16(Mbar)=H^16(Mbar)^dual = +Q(8) is consistent with compact_tate_type Q(-8). No dictionary error found.",
+    "A1 [verified, but 'expected' is conjectural] \u2014 The degree/twist identification is exactly FND-0001 (mechanically_verified) plus arithmetic. The Tate type Q(8) is only the prediction of CONJ-0001/RED-0001 (conjectural / inferred); the attempt does mark it 'expected', so no predicted motive is smuggled in as a theorem here.",
+    "A2 [arithmetic correct, logic inverted] \u2014 2g-2+n = 10+6 = 16 = k, so the equality does hold. But THM-0004 as recorded is a necessary condition ('only n=0,1 with k>=2g or n>=2 with k>=2g-2+n require open-stratum base cases'); it does not assert that every pair meeting the inequality is a genuine unresolved base case. The attempt's 'precisely when' converts necessity into sufficiency. The conclusion survives only because RED-0001 independently lists (6,6), and RED-0001's truth status is 'inferred', not 'established'.",
+    "A3 [verified] \u2014 c(6)=5 < 6=n under THM-0005, so the CKgP/Proposition-4.5 algebraicity route is genuinely unavailable. Correctly flagged; the attempt does not silently upgrade pure Tate to algebraic or tautological generation anywhere.",
+    "A4 [verified, reconstructed independently] \u2014 With X=Mbar compact and D the boundary, H^BM_k(D)=H_k(D) and H^BM_k(X)=H_k(X). The image of H_k(X) lands in W_{-k}H^BM_k(U) since H_k(X) is pure of weight -k; conversely W_{-k}H^BM_k(U) dies in H_{k-1}(D) because the latter has weights >= -(k-1) > -k, so by exactness and strictness W_{-k}H^BM_k(U) = im(H_k(X)) = coker(H_k(D) -> H_k(X)). Claim D is correct as stated.",
+    "A5 [true but far weaker than the attempt's use of it] \u2014 The Deligne weight spectral sequence exists and does compute gr^W. But the attempt never indexes it. Reconstructing E_1^{-m,w} = H^{w-2m}(D^{(m)})(-m), total degree w-m, all terms pure of weight w, with d_1 the codimension-one Gysin maps: gr^W_w H^n(U) = E_2^{n-w,w}. For our corner w=n=26 this forces m=0, so the only contributing terms are H^{26}(Mbar_{6,6}) and the Gysin image from the boundary divisors D^{(1)}. Deligne's E_2-degeneration then makes it an equality, not merely a subquotient. See finding candidate 'pure-corner-depth-one-only'.",
+    "A6 [essentially correct, with a slip] \u2014 Boundary strata are finite quotients of products of Mbar_{g(v),n(v)}, and over Q cohomology of the quotient is the Aut(Gamma)-invariants (invariants = coinvariants over Q, so that particular attack does not land). Two defects: the attempt writes M_Gamma as a quotient of products of the OPEN M_{g(v),n(v)} while needing the smooth proper Mbar_Gamma for purity (it repairs this only informally), and the Getzler-Kapranov generator is described as a plain Aut(Gamma)-invariant tensor, omitting the determinant/sign twist det(E(Gamma)) on the edge set. Automorphisms acting by an odd permutation of edges, or swapping the two branches of a non-separating node, act by -1, so the correct E_1 term is (H^*(Mbar_Gamma) tensor det E_Gamma)^{Aut Gamma}. This can vanish where naive invariants do not, and any future enumeration built on the attempt's description would overcount.",
+    "A7 [not proved; the 'only if' direction is false] \u2014 Sufficiency holds: if every E_1 summand in the weight-26 row is +Q(-13) then the E_2 subquotient is too. Necessity fails: a non-Tate summand can be killed by d_1 and leave a Tate subquotient, so the target being +Q(8) does not force every contributing summand to be Tate. Marking a false biconditional 'proved' is a real defect, though it does not affect the (unreached) conclusion.",
+    "A8 [false as stated, not merely conditional] \u2014 The CGP/tropical complex computes the weight-0 part of H^*_c, equivalently the top-weight part gr^W_{2d} = gr^W_{42} of ordinary cohomology. The target is gr^W_{26}H^{26}, the LOWEST weight in its degree (H^26 of a smooth 21-fold has weights in [26,42]). These are opposite ends of the weight filtration and coincide only if 2d=26, i.e. d=13; here d=21. GAP-DEGREE-MATCH is therefore not an unwritten reference chain but a match that cannot be made. See 'cgp-top-weight-wrong-corner'.",
+    "A9 [gap, correctly self-declared] \u2014 Not established, and the attempt does not claim it. Status 'proposed' and gap_markers are honest; the attempt does not assert CONJ-0001 for (6,6).",
+    "GAP-EXTENSIONS [spurious] \u2014 The target is pure of weight -16 and polarizable, and the whole weight-26 E_1 row is pure of weight 26. Polarizable pure Q-Hodge structures of fixed weight form a semisimple abelian category, so any subquotient of a direct sum of copies of Q(-13) is again such a direct sum. There is no extension problem in this corner and no semisimplification-versus-isomorphism gap to close. See 'pure-corner-semisimple-no-extensions'.",
+    "GAP-DIFFERENTIALS [over-stated] \u2014 Deligne's weight spectral sequence for a smooth variety/DM stack with NCD compactification degenerates at E_2, so only the single d_1 out of H^{24}(D^{(1)})(-1) can act on this corner; there are no higher differentials to compute. The attempt never invokes the degeneration theorem it needs and instead treats all pages as unknown.",
+    "STACK-VS-COARSE [no error found] \u2014 Work is with Mbar_{6,6} as a DM stack, boundary normal crossings in the stack sense, Q coefficients throughout; coarse space and stack agree rationally. Gluing maps of degree |Aut(Gamma)| are harmless over Q. The Q-coefficient hypothesis is explicitly listed in the assumptions, so the rational/integral attack does not land.",
+    "BM-VS-COHOMOLOGY-DEGREE [no error found] \u2014 BM degree 16, ordinary degree 26, compact degree 16 are used consistently; the attempt does not confuse H^BM_16 with H^16 or drop the (21)."
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "weight-spectral-sequence-or-graph-complex"
+      ],
+      "key": "pure-corner-depth-one-only",
+      "kind": "obstruction",
+      "statement": "In the Deligne weight spectral sequence of (Mbar_{g,n}, boundary), the corner gr^W_{2d-16}H^{2d-16}(M_{g,n}) computing the RED-0001 open input sits at spectral-sequence depth m = weight - degree = 0. Hence only the m=0 term H^{2d-16}(Mbar_{g,n}) and the single d_1 Gysin map from the codimension-one strata H^{2d-18}(D^{(1)})(-1) can contribute; strata of codimension >= 2, multi-edge stable graphs, and higher differentials (E_2-degeneration) are all irrelevant to this corner. Dualizing, the resulting cokernel is identical to the boundary sequence of THM-0003, so the weight spectral sequence and the Getzler-Kapranov graph complex yield no information beyond THM-0003 at this corner and cannot break the circularity: they express the open input in terms of the still-unknown H^{16}(Mbar_{g,n}). Any attempt of this approach type must add an independent input for the m=0 term or attack a different corner.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "weight-spectral-sequence-or-graph-complex"
+      ],
+      "key": "cgp-top-weight-wrong-corner",
+      "kind": "obstruction",
+      "statement": "The CGP / tropical-moduli / commutative-graph-complex computation controls gr^W_0 H^*_c(M_{g,n}), equivalently the top-weight piece gr^W_{2d}H^*(M_{g,n}), whereas the RED-0001 open input W_{-16}H^{BM}_{16} = gr^W_{2d-16}H^{2d-16}(M_{g,n})(d) is the LOWEST weight in its degree (H^{2d-16} of a smooth d-fold has weights in [2d-16, 2d]). The two corners coincide only when 2d = 2d-16, i.e. never. For (6,6), d=21: CGP computes weight 42, the target is weight 26. No twist or dimension-shift bookkeeping can reconcile them, so 'match the CGP degree index to the target' is not an unwritten reference chain but an impossible identification; the undecorated top-weight regime is never the surviving corner for any pair in RED-0001.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "weight-spectral-sequence-or-graph-complex"
+      ],
+      "key": "pure-corner-semisimple-no-extensions",
+      "kind": "lemma",
+      "statement": "The RED-0001 target W_{-16}H^{BM}_{16}(M_{g,n}) is a PURE polarizable Q-Hodge structure of weight -16, and the entire weight-(2d-16) row of the E_1 page is pure of that single weight. Since polarizable pure Q-Hodge structures of a fixed weight form a semisimple abelian category, any subquotient of a direct sum of Tate objects in that row is again a direct sum of the same Tate object. Consequently there is no non-split-extension obstruction and no semisimplification-versus-actual-isomorphism gap in this corner: proving Tate type on the associated graded of the contributing terms is already an honest Hodge-structure isomorphism. Attempts should not spend a gap marker on ruling out exotic extensions here, and reviewers should not credit such a gap as substantive.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "weight-spectral-sequence-or-graph-complex"
+      ],
+      "key": "nonsep-divisor-is-5-8",
+      "kind": "obstruction",
+      "statement": "For (g,n)=(6,6) the non-separating boundary divisor has normalization Mbar_{5,8}, not Mbar_{5,7} as ATT-0014 states: the genus drops by one and the normalization gains TWO legs at the node, 6+2=8, and dim Mbar_{5,8} = 3*5-3+8 = 20 = 21-1 confirms codimension one while dim Mbar_{5,7} = 19 does not. This matters beyond arithmetic: combined with the depth-one restriction above, the only Gysin source into H^{26}(Mbar_{6,6}) other than separating-divisor products is Mbar_{5,8}, and (5,8) is itself an unresolved pair in RED-0001. Any depth-one attack on (6,6) therefore couples directly to the (5,8) case rather than to strictly simpler discharged inputs, and the correct edge-decorated E_1 term is (H^*(Mbar_Gamma) tensor det E_Gamma)^{Aut(Gamma)} -- the determinant twist on the edge set, omitted by ATT-0014, kills contributions whose automorphisms permute edges oddly or swap the two branches of the non-separating node.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0021",
+  "independent": true,
+  "packet_id": "CASE-6-6-v2",
+  "packet_sha256": "e6758c6886696d915814dc718f28af0e6b44088916881055c88a6276f55af88e",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0014-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse space",
+    "cohomology versus homology degree",
+    "weight and Tate twist",
+    "Gysin and Kunneth shifts",
+    "conditional prediction versus theorem",
+    "rational versus integral coefficients",
+    "weight spectral sequence indexing and E_2 degeneration",
+    "invariants versus coinvariants and the edge determinant twist",
+    "semisimplicity of pure polarizable Hodge structures versus extension gaps",
+    "pure Tate versus algebraic or tautological generation",
+    "packet sha256 and target dictionary agreement",
+    "omitted or misidentified boundary strata"
+  ],
+  "strongest_attack": "The approach is circular at exactly the corner it targets. Indexing the weight spectral sequence properly (E_1^{-m,w} = H^{w-2m}(D^{(m)})(-m), total degree w-m, gr^W_w H^n = E_2^{n-w,w}) shows that for w = n = 26 only m = 0 survives, so gr^W_{26}H^{26}(M_{6,6}) = coker(H^{24}(D^{(1)})(-1) -> H^{26}(Mbar_{6,6})) by E_2-degeneration. Dualizing by Poincare duality on the smooth proper 21-dimensional Mbar_{6,6} (H^{26}(Mbar) = H_{16}(Mbar)(-21), H^{24}(D^{(1)})(-1) = H_{16}(D^{(1)})(-21)), that cokernel is literally the cokernel of THM-0003 / SRC-0002 (6.1) that the attempt already quoted as Claim D. So the spectral-sequence machinery returns its own hypothesis: it expresses the open input in terms of H^{16}(Mbar_{6,6}), which is precisely the degree-16 compactified statement the induction was supposed to deduce FROM the open input. No new information is produced. The escape route the attempt gestures at -- the undecorated CGP/tropical top-weight complex -- is a different corner of the weight filtration (weight 2d = 42, not 26), so it cannot supply the missing input either. Everything downstream (graph enumeration, decoration purity, higher differentials, extensions) is therefore work on the wrong object or on non-problems. Verdict is 'incomplete' rather than 'refuted' only because the attempt itself claims status 'proposed' and marks A9 a gap; but A7 and A8 are marked 'proved'/'conditional' while being false and mis-targeted respectively.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "verdict": "incomplete"
+}

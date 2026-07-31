@@ -1,0 +1,74 @@
+{
+  "schema_version": 2,
+  "prover_rotation": [
+    "grok",
+    "claude",
+    "grok",
+    "codex",
+    "grok",
+    "gemini"
+  ],
+  "escalation_order": [
+    "grok",
+    "gemini",
+    "codex",
+    "claude"
+  ],
+  "engines": {
+    "claude": {
+      "binary": "claude",
+      "family": "claude",
+      "model": "claude-opus-5",
+      "max_output_tokens": 64000,
+      "declared_capabilities": {
+        "research": ["filesystem_read", "web_search", "web_fetch"],
+        "finding-audit": ["filesystem_read", "web_search", "web_fetch"],
+        "novelty": ["filesystem_read", "web_search", "web_fetch"],
+        "mathematics": ["filesystem_read"],
+        "review": ["filesystem_read"]
+      }
+    },
+    "codex": {
+      "binary": "codex",
+      "family": "openai",
+      "model": "gpt-5.6-sol",
+      "declared_capabilities": {
+        "research": ["filesystem_read"],
+        "finding-audit": ["filesystem_read"],
+        "novelty": ["filesystem_read"],
+        "mathematics": ["filesystem_read"],
+        "review": ["filesystem_read"]
+      }
+    },
+    "gemini": {
+      "binary": "gemini",
+      "family": "gemini",
+      "model": "gemini-3.5-flash",
+      "max_task_seconds": 3600,
+      "inactivity_timeout_seconds": 300,
+      "abort_stderr_pattern_counts": {
+        "status: 503": 3
+      },
+      "requires_health_attestation": ["mathematics", "review"],
+      "declared_capabilities": {
+        "research": ["filesystem_read"],
+        "finding-audit": ["filesystem_read"],
+        "novelty": ["filesystem_read"],
+        "mathematics": ["filesystem_read"],
+        "review": ["filesystem_read"]
+      }
+    },
+    "grok": {
+      "binary": "grok",
+      "family": "grok",
+      "model": "grok-4.5",
+      "declared_capabilities": {
+        "research": ["filesystem_read", "web_search", "web_fetch"],
+        "finding-audit": ["filesystem_read", "web_search", "web_fetch"],
+        "novelty": ["filesystem_read", "web_search", "web_fetch"],
+        "mathematics": ["filesystem_read"],
+        "review": ["filesystem_read"]
+      }
+    }
+  }
+}

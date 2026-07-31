@@ -1,0 +1,38 @@
+{
+  "attempt_id": "ATT-0007",
+  "checked_claims": [
+    "The base-case inequality is correct: for (g,n,k)=(8,2,16), one has 2g-2+n=16, so the Borel\u2013Moore vanishing quoted from SRC-0002 does not remove this case.",
+    "The strongest obstruction is Step D. Neither proposed alternative proves CKgP for the pointed pentagonal stratum M_{8,2} minus M^4_{8,2}: SRC-0005 Lemma 5.7 gives only unpointed rational Chow generation, while the supplied Mukai construction in SRC-0002 is for genus 7. D1 and D2 are research programs, not load-bearing lemmas.",
+    "Step C is likewise incomplete. SRC-0004 Lemma 10.11 applies to H^f_{4,g,n}, the union where the smaller summand f1 of F satisfies f1 at least f. For g=8 and n=2, f=5 covers the balanced F=(5,6) locus because 2 <= 4(5)-16+1, but it does not cover the F=(4,7) or F=(2,9) strata. The reference to a balanced f approximately 5\u20136 does not establish all five splitting types, especially the cone and bielliptic loci.",
+    "There is a substantive degree error in the stated equivalence. Since dim_C M_{8,2}=23, Poincare duality identifies H^{BM}_{16}(M_{8,2}) with H^{30}(M_{8,2})(23). Thus its weight -16 piece is controlled by the weight-30 part of ordinary H^{30}, not by W_{16}H^{16}. Its dual is the weight-16 part of H_c^{16}, but ordinary H^{16} is not interchangeable with H_c^{16}.",
+    "The Tate twists must therefore be recorded as follows: CKgP applied in ordinary degree 30 would make W_{30}H^{30} a sum of Q(-15); after the Poincare-duality twist (23), the corresponding Borel\u2013Moore piece is a sum of Q(8), of weight -16. Dually, the compactly supported piece is a sum of Q(-8). The attempt's route through ordinary Q(-8) classes in degree 16 is not valid, although proving full CKgP would incidentally repair the conclusion by applying Lemma 4.3 in degree 30.",
+    "In cohomological form the boundary Gysin map relevant to this homology class is H^{28} of the normalized boundary, with twist (-1), mapping to H^{30} of the compactification. Equivalently, equation (6.1) is degree-preserving in Borel\u2013Moore homological degree 16. Any Kunneth expansion of a boundary component must therefore have cohomological degrees summing to 28 before the codimension-one Gysin shift, not degree 16. The attempt does not perform this bookkeeping.",
+    "The stack/coarse distinction is handled correctly at the level of stated assumptions: the cited CKgP, Hurwitz, and quotient presentations concern algebraic or Deligne\u2013Mumford stacks. No coarse-moduli replacement is justified or needed. Any eventual proof must retain the stack maps required by Proposition 4.2, including representability where invoked.",
+    "All cited Chow and cohomology conclusions are rational. Proper-surjective Chow surjectivity, finite-quotient averaging, gerbe invariance, and some orthogonal-Grassmannian generation arguments use rational coefficients. Nothing in the attempt proves an integral statement, but the attempt explicitly restricts to Q, so there is no coefficient overclaim.",
+    "For graph-normalized boundary terms, SRC-0002 uses invariants under graph automorphisms; oriented higher-edge terms also carry det E(Gamma). Coinvariants cannot silently replace these integrally. Over Q invariants and coinvariants are isomorphic by averaging, but the attempt never reaches a graph-complex calculation and therefore establishes no such boundary formula.",
+    "No spectral-sequence degeneration is needed for the quoted right-exact localization sequences or for CKgP inheritance under a finite stratification. Conversely, the attempt supplies no analysis of differentials that could substitute for its missing pointed tetragonal and pentagonal geometry.",
+    "The Hodge-structure conclusion from CKgP is stronger than a semisimplified prediction: a surjection from algebraic cycle classes onto a pure weight piece makes that piece an actual direct sum of Tate Hodge structures. This is valid conditionally. It does not establish semisimplicity of an arbitrary l-adic representation, and the attempt appropriately makes no such claim.",
+    "The attempt does not use the Chenevier\u2013Lannes predictions as theorems and explicitly acknowledges that degrees 16, 18, and 20 remain open in the supplied literature.",
+    "CKgP alone gives algebraicity and hence pure Tate type for the relevant even pure-weight piece. It does not give tautological generation. The separate equality A_*=R_* is needed for the tautological upgrade, and pure Tate by itself would not imply algebraic or tautological generation. The attempt recognizes this distinction, but neither CKgP nor A_*=R_* is proved for M_{8,2}.",
+    "The stability condition is satisfied for (8,2). The attempt also correctly lists the unresolved stable genus-at-least-three degree-16 pairs outside the published CKgP table: (3,12), (5,8), (6,6), (7,4), (8,0), (8,1), and (8,2); genus 4 contributes none because its required range is covered. These pairs are not silently omitted from the list, but all except the selected case are substantively left untreated, so the global reduction is not discharged."
+  ],
+  "created_on": "2026-07-30",
+  "id": "REV-0013",
+  "independent": true,
+  "reviewer_engine": "codex",
+  "scope_checks": [
+    "stack versus coarse space: stack conventions retained; no coarse-space theorem established",
+    "rational versus integral coefficients: valid only over Q",
+    "cohomology versus Borel\u2013Moore degree: ordinary degree 30, not 16, controls H^{BM}_{16}",
+    "Poincare duality and Tate twists: H^{BM}_{16}=H^{30}(23); Q(-15)(23)=Q(8), dual compact-support type Q(-8)",
+    "Gysin and Kunneth shifts: boundary H^{28}(-1) maps to compactification H^{30}; Kunneth degrees must sum to 28",
+    "degeneration and differentials: no degeneration used or proved; no differential argument fills the geometric gaps",
+    "graph automorphisms: boundary normalization requires invariants and higher-edge determinant signs",
+    "semisimplification: conditional Hodge-Tate conclusion is an actual pure Hodge-structure statement, not merely semisimplified",
+    "predicted motives: explicitly not used as unconditional input",
+    "pure Tate versus algebraic or tautological: only CKgP gives algebraicity; A_*=R_* is separately required for tautological generation",
+    "stable pairs: the remaining stable degree-16 pairs are listed but not solved"
+  ],
+  "strongest_attack": "The pointed pentagonal maximal-gonality stratum is wholly unproved: Step D offers two possible future constructions, neither present in the corpus. This alone prevents CKgP for M_{8,2}; independently, the proof also targets ordinary degree 16 when Poincare duality shows that the Borel\u2013Moore input is controlled by ordinary degree 30 with twist (23).",
+  "verdict": "incomplete"
+}

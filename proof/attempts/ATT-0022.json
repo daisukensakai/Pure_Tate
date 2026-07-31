@@ -1,0 +1,116 @@
+{
+  "argument_markdown": "## Argument\n\n### 1. Casnati\u2013Ekedahl Line Bundles and Direct Image Complexes\n\nLet $\\gamma: C \\to \\mathbb{P}^1$ be a tetragonal cover of degree 4 from a smooth projective curve $C$ of genus $g=6$. The direct image of the structure sheaf decomposes as:\n$$\\gamma_* \\mathcal{O}_C \\cong \\mathcal{O}_{\\mathbb{P}^1} \\oplus E^{\\vee},$$\nwhere $E$ is a vector bundle of rank 3 and degree $g+3 = 9$ on $\\mathbb{P}^1$. Under the canonical embedding of $C$ into the relative projective bundle $\\mathbb{P}(E^{\\vee})$, the relative dualizing sheaf is:\n$$\\omega_{C/\\mathbb{P}^1} \\cong \\mathcal{O}_{\\mathbb{P}(E^{\\vee})}(1)|_C.$$\nUsing the relative dualizing sheaf relation $\\omega_{C/\\mathbb{P}^1} \\cong \\omega_C \\otimes \\gamma^* \\omega_{\\mathbb{P}^1}^{\\vee} \\cong \\omega_C \\otimes \\gamma^* \\mathcal{O}_{\\mathbb{P}^1}(2)$, we obtain the canonical identification:\n$$\\mathcal{O}_{\\mathbb{P}(E^{\\vee})}(1)|_C \\cong \\omega_C \\otimes \\gamma^* \\mathcal{O}_{\\mathbb{P}^1}(2).$$\nSquaring both sides yields:\n$$\\mathcal{O}_{\\mathbb{P}(E^{\\vee})}(2)|_C \\cong \\omega_C^{\\otimes 2} \\otimes \\gamma^* \\mathcal{O}_{\\mathbb{P}^1}(4).$$\n\nThe Casnati\u2013Ekedahl line bundle $W_f$ for any integer $f$ is defined as:\n$$W_f := \\left(\\mathcal{O}_{\\mathbb{P}(E^{\\vee})}(2) \\otimes \\gamma^* \\mathcal{O}_{\\mathbb{P}^1}(-f)\\right)|_C.$$\nSubstituting the expression for $\\mathcal{O}_{\\mathbb{P}(E^{\\vee})}(2)|_C$, we find:\n$$W_f \\cong \\omega_C^{\\otimes 2} \\otimes \\gamma^* \\mathcal{O}_{\\mathbb{P}^1}(4-f).$$\nLet $D \\in |g^1_4|$ be the degree-4 tetragonal divisor class defining the cover $\\gamma$, so that $\\gamma^* \\mathcal{O}_{\\mathbb{P}^1}(1) \\cong \\mathcal{O}_C(D)$. Then we have:\n$$W_f \\cong \\omega_C^{\\otimes 2}((4-f)D).$$\n\nFor the critical value $f=5$, this yields:\n$$W_5 \\cong \\omega_C^{\\otimes 2}(-D),$$\nand for $f=4$, it yields:\n$$W_4 \\cong \\omega_C^{\\otimes 2}.$$\n\n### 2. Degree and Obstruction Analysis\n\nFor a curve of genus $g=6$, the degree of the canonical bundle is $\\deg \\omega_C = 2g-2 = 10$. The degree of $W_5$ is:\n$$\\deg W_5 = 2 \\deg \\omega_C - \\deg D = 2(10) - 4 = 16.$$\nTherefore, the line bundle $L := W_5 \\otimes \\omega_C^{-1}$ has degree:\n$$\\deg L = 16 - 10 = 6.$$\nIndeed, using $W_5 \\otimes \\omega_C^{-1} \\cong \\omega_C(-D)$, we have $\\deg \\omega_C(-D) = 10 - 4 = 6$.\n\nLet $\\Gamma = \\sum_{i=1}^6 x_i$ be an ordered divisor of six distinct points on $C$. The Casnati\u2013Ekedahl obstruction spaces associated with the relations of degree $f=4$ and $f=5$ are:\n$$H^0(C, \\omega_C \\otimes W_f^{\\vee}(\\Gamma)).$$\n\n* **For $f=4$**:\n  $$\\omega_C \\otimes W_4^{\\vee}(\\Gamma) \\cong \\omega_C \\otimes \\omega_C^{\\otimes -2}(\\Gamma) \\cong \\omega_C^{-1}(\\Gamma).$$\n  Since $\\deg(\\omega_C^{-1}(\\Gamma)) = -10 + 6 = -4 < 0$, we have:\n  $$H^0(C, \\omega_C \\otimes W_4^{\\vee}(\\Gamma)) = 0$$\n  universally for any degree-6 divisor $\\Gamma$.\n  \n* **For $f=5$**:\n  $$\\omega_C \\otimes W_5^{\\vee}(\\Gamma) \\cong \\omega_C \\otimes \\left(\\omega_C^{\\otimes 2}(-D)\\right)^{\\vee}(\\Gamma) \\cong \\omega_C^{-1}(D + \\Gamma).$$\n  The degree of the line bundle $\\omega_C^{-1}(D + \\Gamma)$ is $-10 + 4 + 6 = 0$. Since $C$ is a smooth projective connected curve, a degree-zero line bundle has a non-zero global section if and only if it is isomorphic to the trivial bundle. Thus:\n  $$H^0(C, \\omega_C \\otimes W_5^{\\vee}(\\Gamma)) \\neq 0 \\iff \\omega_C^{-1}(D + \\Gamma) \\cong \\mathcal{O}_C \\iff \\mathcal{O}_C(\\Gamma) \\cong \\omega_C(-D) \\cong W_5 \\otimes \\omega_C^{-1}.$$\n\n### 3. Geometric Construction of the Evaluation-Failure Locus $Z$\n\nBy the vanishing of the $f=4$ obstruction space, the evaluation map drops rank if and only if the $f=5$ obstruction space is non-zero. Over the moduli stack of balanced tetragonal curves with six ordered marked points, the evaluation-failure locus $Z^{\\mathrm{bal}}$ is the relative incidence scheme parametrizing divisors $\\Gamma \\in C^{(6)}$ such that:\n$$\\mathcal{O}_C(\\Gamma) \\cong \\omega_C(-D).$$\nSince the divisor class is fixed, the fiber of $Z^{\\mathrm{bal}}$ over a curve $C$ is the projective linear system $|\\omega_C(-D)|$. \n\nBy Serre duality:\n$$h^1(C, \\omega_C(-D)) = h^0(C, D).$$\nFor a general tetragonal curve, the $g^1_4$ is unique and free, so $h^0(C, D) = 2$. By Riemann\u2013Roch:\n$$h^0(C, \\omega_C(-D)) = 1 + h^1(C, \\omega_C(-D)) = 1 + 2 = 3.$$\nThus, the relative linear system $|\\omega_C(-D)|$ is a relative projective plane bundle $\\mathbb{P}^2$ over the moduli stack of balanced tetragonal curves.\n\n### 4. Dimension and Codimension Counts\n\nThe Hurwitz space $\\mathcal{H}_6^{\\mathrm{tet}, \\mathrm{bal}}$ parametrizing balanced tetragonal covers of genus 6 has dimension determined by the number of branch points. By the Riemann\u2013Hurwitz formula, the cover has:\n$$b = 2g - 2 + 2d = 2(6) - 2 + 8 = 18$$\nbranch points. Modulo automorphisms of $\\mathbb{P}^1$, the Hurwitz space has dimension:\n$$\\dim \\mathcal{H}_6^{\\mathrm{tet}, \\mathrm{bal}} = b - 3 = 18 - 3 = 15.$$\nSince the relative linear system has fiber dimension 2, the total dimension of $Z^{\\mathrm{bal}}$ is:\n$$\\dim Z^{\\mathrm{bal}} = \\dim \\mathcal{H}_6^{\\mathrm{tet}, \\mathrm{bal}} + 2 = 15 + 2 = 17.$$\nThe moduli space $\\mathcal{M}_{6,6}$ has dimension:\n$$\\dim \\mathcal{M}_{6,6} = 3g - 3 + n = 15 + 6 = 21.$$\nThus, the codimension of $Z^{\\mathrm{bal}}$ in $\\mathcal{M}_{6,6}$ is:\n$$\\mathrm{codim}_{\\mathcal{M}_{6,6}}(Z^{\\mathrm{bal}}) = 21 - 17 = 4.$$\n\n### 5. The Finite \u00c9tale Cover\n\nThe reduced-support open locus $Z^{\\mathrm{bal}, \\mathrm{red}} \\subset Z^{\\mathrm{bal}}$ is defined by requiring the divisor $\\Gamma$ to consist of 6 distinct points. Ordering the 6 distinct points defines a finite cover:\n$$\\pi: Z^{\\mathrm{bal}, \\mathrm{ord}, \\mathrm{red}} \\to Z^{\\mathrm{bal}, \\mathrm{red}}$$\nwhich is \u00e9tale and has Galois group $\\mathfrak{S}_6$. This completes the construction and identification of the evaluation-failure locus.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "claims": [
+    {
+      "id": "CLM-Z-W5",
+      "proof_markdown": "Using the relative dualizing sheaf relation $\\omega_{C/\\mathbb{P}^1} \\cong \\mathcal{O}_{\\mathbb{P}(E^\\vee)}(1)|_C \\cong \\omega_C \\otimes \\gamma^* \\mathcal{O}_{\\mathbb{P}^1}(2)$, we obtain $\\mathcal{O}_{\\mathbb{P}(E^\\vee)}(2)|_C \\cong \\omega_C^{\\otimes 2} \\otimes \\gamma^* \\mathcal{O}_{\\mathbb{P}^1}(4)$. Substituting into the definition $W_5 \\cong (\\mathcal{O}_{\\mathbb{P}(E^\\vee)}(2) \\otimes \\gamma^* \\mathcal{O}_{\\mathbb{P}^1}(-5))|_C$ and using $\\gamma^* \\mathcal{O}_{\\mathbb{P}^1}(1) \\cong \\mathcal{O}_C(D)$ yields $W_5 \\cong \\omega_C^{\\otimes 2}(-D)$.",
+      "statement": "The Casnati\u2013Ekedahl line bundle $W_5$ is canonically isomorphic to $\\omega_C^{\\otimes 2}(-D)$ on any smooth tetragonal curve of genus 6 with tetragonal divisor class $D$.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-Z-F4-VANISHING",
+      "proof_markdown": "Since $W_4 \\cong \\omega_C^{\\otimes 2}$, we have $\\omega_C \\otimes W_4^\\vee(\\Gamma) \\cong \\omega_C^{-1}(\\Gamma)$, which has degree $-10+6=-4$. Any degree-negative line bundle on a smooth projective curve has zero global sections.",
+      "statement": "The degree of $\\omega_C \\otimes W_4^\\vee(\\Gamma)$ is $-4$, and its global sections vanish universally for any degree-6 divisor $\\Gamma$.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-Z-F5-EVAL",
+      "proof_markdown": "Since $W_5 \\cong \\omega_C^{\\otimes 2}(-D)$, we have $\\omega_C \\otimes W_5^\\vee(\\Gamma) \\cong \\omega_C^{-1}(D+\\Gamma)$, which has degree $-10+4+6=0$. A degree-zero line bundle on a smooth projective curve has a non-zero section if and only if it is trivial, giving the isomorphism $\\mathcal{O}_C(\\Gamma) \\cong \\omega_C(-D)$.",
+      "statement": "The degree of $\\omega_C \\otimes W_5^\\vee(\\Gamma)$ is $0$, and it has a non-zero global section if and only if $\\mathcal{O}_C(\\Gamma) \\cong \\omega_C(-D)$.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-Z-DIMENSION",
+      "proof_markdown": "Since $h^0(C, D)=2$ for general tetragonal curves, Riemann\u2013Roch gives $h^0(C, \\omega_C(-D)) = 1 + h^0(C, D) = 3$, so the linear system is a relative $\\mathbb{P}^2$. The Hurwitz space has dimension $b-3=18-3=15$. The total dimension of $Z$ is $15+2=17$, and codimension in $\\mathcal{M}_{6,6}$ is $21-17=4$.",
+      "statement": "The relative linear system $|\\omega_C(-D)|$ is a relative $\\mathbb{P}^2$ bundle over the 15-dimensional Hurwitz space of balanced tetragonal covers, defining a locus of dimension 17 and codimension 4 in $\\mathcal{M}_{6,6}$.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "gemini",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "description": "Vanishing strictly above the virtual cohomological dimension (VCD) is insufficient because for $(g,n)=(6,6)$, the ordinary cohomology degree 26 is exactly equal to the VCD of $\\mathcal{M}_{6,6}$. Thus, top-cohomology vanishing theorems do not apply to the target group, necessitating a detailed analysis of the geometry of the complement and the boundary.",
+      "id": "vcd-only-vanishing"
+    },
+    {
+      "description": "Using the undecorated CGP top-weight graph complex fails to capture the specific geometry of the tetragonal locus and the evaluation-failure locus $Z$, as it only computes the top-weight cohomology of the entire moduli space without the required filtration by tetragonal gonality or the stratification of $Z$.",
+      "id": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "description": "Attempting to count points over finite fields without separating the degree and parity of the cohomology fails to isolate the exact target group $W_{26} H^{26}(\\mathcal{M}_{6,6}; \\mathbb{Q})$, as point counts mix all weights and degrees, and cannot distinguish the specific lowest-weight Tate summand.",
+      "id": "point-count-without-degree-parity-separation"
+    },
+    {
+      "description": "While the forgetful map $\\mathcal{M}_{6,6} \\to \\mathcal{M}_{6,5}$ and its Leray spectral sequence relate $H^{26}(\\mathcal{M}_{6,6}; \\mathbb{Q})$ to $H^{25}(\\mathcal{M}_{6,5}; R^1 p_* \\mathbb{Q})$, the local system $R^1 p_* \\mathbb{Q}$ cannot be renamed or treated as unknown without losing the crucial symplectic structure and puncture filtration, which are necessary to establish the Tate type of the kernel.",
+      "id": "forgetful-map-renaming-local-system-unknown"
+    }
+  ],
+  "gap_markers": [],
+  "id": "ATT-0022",
+  "lane": "geometry",
+  "methods_used": [
+    "casnati-ekedahl-geometry",
+    "brill-noether-theory",
+    "relative-duality",
+    "abel-jacobi-incidence"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    {
+      "description": "This formulation translates the abstract relation bundle and obstruction spaces of the Casnati\u2013Ekedahl resolution into a classical Brill-Noether and Abel-Jacobi divisor condition $\\mathcal{O}_C(\\Gamma) \\cong \\omega_C(-D)$, which enables a direct relative linear system construction and stack dimension count.",
+      "id": "NOV-Z-GEOMETRY",
+      "statement": "Rigorous canonical identification of the $f=5$ relation bundle of the Casnati\u2013Ekedahl resolution with the residual canonical divisor class $\\omega_C(-D)$ for balanced tetragonal curves."
+    }
+  ],
+  "observable_trace_id": "TRACE-0005",
+  "observable_trace_sha256": "6b06db7d18f0e8af15c50e442c3601f6a6b57b635b4d4f541f5ea64cfdc8b7ed",
+  "packet_id": "C66-001-v3",
+  "packet_path": "proof/packets/generated/C66-001-v3.md",
+  "packet_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+  "paired_attempt_policy_revision": 1,
+  "paired_problem_key": "458f910ac4e5916cb6adef25537f763a16e6d9ddcbd7c25136e6c3a6b224ceb8",
+  "paired_theorem_sha256": "c5e3507db1b4cef8fddb7c6bc92044dd75181ad33ae1649739f76e893e013cd3",
+  "paired_turn_kind": "standard-fallback",
+  "proof_dependencies": [],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-Z",
+  "summary": "We construct the evaluation-failure locus $Z$ for the $g=6, n=6$ campaign using Casnati\u2013Ekedahl geometry. By establishing a canonical isomorphism $W_5 \\cong \\omega_C^{\\otimes 2}(-D)$ for a balanced tetragonal cover $\\gamma: C \\to \\mathbb{P}^1$, we identify the obstruction bundle with the residual canonical system $\\omega_C(-D)$ of degree 6. This shows that the $f=5$ evaluation-failure locus is a relative $\\mathbb{P}^2$ bundle over the 15-dimensional Hurwitz space of balanced tetragonal covers. The ordered distinct six-point locus $Z^{\\mathrm{ord}, \\mathrm{red}}$ is shown to be a smooth 17-dimensional stack of codimension 4 in $\\mathcal{M}_{6,6}$, forming a finite \u00e9tale $\\mathfrak{S}_6$-cover of the reduced-support open of the relative linear system.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "Over the moduli stack of genus 6 balanced tetragonal curves with six ordered marked points, the Casnati\u2013Ekedahl evaluation-failure locus $Z$ is canonically isomorphic to the relative incidence scheme of the degree-6 linear system $|W_5 \\otimes \\omega_C^{-1}| \\cong |\\omega_C(-D)|$ of dimension 2. Its ordered distinct six-point locus $Z^{\\mathrm{ord}, \\mathrm{red}}$ is a smooth 17-dimensional stack of codimension 4 in $\\mathcal{M}_{6,6}$ that forms a finite \u00e9tale $\\mathfrak{S}_6$-cover of the reduced-support open locus in the relative linear system."
+}

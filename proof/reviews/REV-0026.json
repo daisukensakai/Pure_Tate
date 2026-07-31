@@ -1,0 +1,159 @@
+{
+  "attempt_id": "ATT-0021",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0001",
+      "note": "Forgetful Leray with only q=0,1 fiber rows, vcd(M_{6,5})=25 killing H^{26}(M_{6,5}), and no d_2 into/out of total degree 26 matches FND-0036; the single surviving E_2^{25,1} term yields an MHS identification H^{26}(M_{6,6})\u2245H^{25}(M_{6,5};R^1 p_* Q) and likewise on W_26. This is only a reduction, not a resolution of the target.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0002",
+      "note": "The puncture SES 0\u2192H\u2192R^1 p_* Q\u2192Q(-1)^4\u21920 and the vanishing W_26 H^{25}(M_{6,5};Q(-1)^4)=0 are standard, so the surjection W_26 H^{25}(H)\u21a0W_26 H^{25}(R^1 p_* Q) is fine. The pure-Tate kernel of type Q(-13) is not proved: it requires W_24 H^{24}(M_{6,5};Q) to be pure Tate, which is itself a near-top-weight Tate claim for (g,n)=(6,5) and is asserted without argument. Compact-support duality is also mistwisted as (21) rather than dim M_{6,5}=20.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0003",
+      "note": "Degree bookkeeping deg(W_5)=16 and deg(W_5\u2297\u03c9^{-1})=6 matches SRC-0004/packet, and the balanced free-pencil count dim=15+2=17 is a plausible main-component dimension. The argument never constructs the closed evaluation-failure locus, never stratifies by h^0, never treats unbalanced CE splittings or non-reduced support, and never identifies components, stabilizers, or stack-versus-coarse automorphisms. Packet-mandated C66-GEO-Z/H0/COMP work is absent; the balanced reduced relative |L| is treated as if it were already the closed pure-codimension-4 locus Z.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0004",
+      "note": "Load-bearing purity of both U and Z is unjustified. U pure Tate is a non sequitur from the CE resolution. Z pure Tate is deduced from an unproved \u2018Hurwitz space is rational/Tate\u2019 claim plus a category error that rational irreps of S_6 kill non-Tate geometric monodromy. Gysin H^{18}(Z)(-4)\u2192H^{26}(M)\u2192H^{26}(U) therefore has unidentified inputs; assembly to W_26 H^{26}\u2245\u2295Q(-13) and the Poincar\u00e9 dual \u2295Q(8) does not go through.",
+      "verdict": "failed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-31",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate",
+      "attack_class": "omitted_stable_pairs_or_strata",
+      "evidence": "ATT-0021 Part 3\u20134 sets dim Z=15+2=17 from the balanced free pencil only, writes U=M_{6,6}\\Z, and applies codim-4 Gysin, while the packet explicitly warns not to call the reduced-support open closed and requires C66-GEO-H0/COMP.",
+      "key": "ce-open-vs-closed-failure-locus",
+      "severity": "blocking",
+      "statement": "For the (6,6) CE evaluation-failure locus, the balanced reduced-support relative linear system over the Hurwitz space is an open piece of the failure locus, not a closed pure-codimension-4 subvariety of M_{6,6}; Gysin for (M_{6,6},Z) requires a closed (stratified) embedding after h^0 and splitting-type stratification.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate",
+      "attack_class": "invariants_vs_coinvariants_graph_automorphisms",
+      "evidence": "ATT-0021 Part 4: \u2018The finite S_6-cover does not introduce any non-Tate local systems because S_6 has only rational representations.\u2019",
+      "key": "s6-rational-reps-not-monodromy",
+      "severity": "blocking",
+      "statement": "That S_6 has rational irreducible representations does not imply that an S_6-cover of a relative configuration/linear-system space carries only Tate local systems; geometric monodromy of the tetragonal family and configuration-space coefficients can still produce non-Tate summands.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate",
+      "attack_class": "predicted_motives_as_theorems",
+      "evidence": "ATT-0021 Part 4 asserts Hurwitz is rational/Tate and concludes pure Tate lowest-weight pieces of H^*(Z)(-4) with no reference or reduction.",
+      "key": "hurwitz-tate-used-as-theorem",
+      "severity": "blocking",
+      "statement": "Declaring the genus-6 balanced tetragonal Hurwitz space \u2018rational/Tate\u2019 and deducing pure-Tate cohomology of Z upgrades a predicted/possible motive to an unconditional theorem and is not a substitute for C66-TATE-SUPPORT.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate",
+      "attack_class": "pure_tate_upgraded_to_algebraic_generation",
+      "evidence": "ATT-0021 Part 4: \u2018On U, the CE resolution ensures that the lowest-weight cohomology of U is pure Tate\u2019 with no spectral sequence, compactification, or boundary analysis.",
+      "key": "ce-does-not-force-U-tate",
+      "severity": "blocking",
+      "statement": "Vanishing of H^0(C,\u03c9\u2297W_5^\u2228(\u0393)) on the complementary open U does not by itself force W_26 H^{26}(U) (or lowest-weight BM of U) to be pure Tate; CE syzygy vanishing is not a purity theorem for open moduli cohomology.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate",
+      "attack_class": "semisimplification_vs_hodge_isomorphism",
+      "evidence": "ATT-0021 Part 2 / CLM-0002 asserts purity of W_24 H^{24}(M_{6,5}) without proof; duality is also written with Tate twist (21) instead of dim M_{6,5}=20.",
+      "key": "m65-top-weight-kernel-circular",
+      "severity": "major",
+      "statement": "The puncture-filtration reduction that the kernel of W_26 H^{25}(M_{6,5};H)\u21a0W_26 H^{25}(R^1 p_* Q) is pure Tate assumes W_24 H^{24}(M_{6,5};Q) is pure Tate, which is not supplied and is of the same difficulty class as residual top-weight claims on M_{g,n}.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate",
+      "attack_class": "omitted_stable_pairs_or_strata",
+      "evidence": "ATT-0021 proof_dependencies empty; completion_attestation.no_undischarged_dependencies true; packet subproblem graph for C66-001-v3 lists those geometry/Tate nodes as prerequisites for weakest-sufficient proof.",
+      "key": "empty-deps-full-resolution-attestation",
+      "severity": "major",
+      "statement": "A claimed_complete C66-FULL argument with proof_dependencies=[] and no_undischarged_dependencies=true is inconsistent with the campaign graph requiring GEO-Z\u2192GEO-H0\u2192GEO-COMP\u2192TATE-SUPPORT\u2192TATE-ASSEMBLY before assembly into the exact target.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0026",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "C66-GEO-Z",
+      "note": "Failure locus is only sketched for balanced free pencils; closed determinantal definition, CE f_2=5 convention, and maps to tetragonal moduli are not constructed.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "C66-GEO-H0",
+      "note": "No stratification of the relative degree-six linear system by h^0(W_5\u2297\u03c9^{-1}); only the h^0=3 balanced case is mentioned.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "C66-GEO-COMP",
+      "note": "Components, dimensions, stabilizers, stack/coarse issues, and finite-cover behavior of ordered reduced support are not identified; open reduced-support locus is used as if closed.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "C66-TATE-SUPPORT",
+      "note": "Codimension-13/Tate contribution supported on Z is not proved; purity of Z is assumed via predicted Hurwitz motives and an S_6 representation fallacy.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "C66-TATE-ASSEMBLY",
+      "note": "Gysin assembly into the exact lowest-weight target fails because both Z and U lowest-weight purity remain undischarged; proof_dependencies is empty despite C66-FULL claim.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "C66-CEX-LOCAL",
+      "note": "No search on Z for non-Tate local systems or motivic summands; counterexample lane not engaged.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "C66-CEX-SURVIVE",
+      "note": "No survival test of a non-Tate candidate in the exact W_{-16}H^{BM}_{16} target.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "C66-COMP-RANK",
+      "note": "No determinantal rank-drop ideals or fibre-dimension computations supplied.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "C66-COMP-COMP",
+      "note": "No computational test of component decompositions.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0021-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Gysin assembly (CLM-0004) is load-bearing and collapses: the proof treats the balanced reduced relative linear system as a closed pure-codimension-4 locus Z, asserts pure-Tate lowest weight for Z from an unconditionalized \u2018Hurwitz=rational/Tate\u2019 prediction and the false principle that rational S_6-representations preclude non-Tate monodromy, and asserts pure-Tate lowest weight for U by pure non sequitur from the CE resolution\u2014without packet-required h^0/component stratification\u2014so neither Gysin input is identified and W_26 H^{26}(M_{6,6})\u2245\u2295Q(-13) (hence \u2295Q(8) after (21)) is not proved.",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "incomplete"
+}

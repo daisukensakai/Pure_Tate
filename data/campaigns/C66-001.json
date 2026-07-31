@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "id": "C66-001",
+  "campaign_revision": 3,
+  "context_revision": 2,
+  "case": {"g": 6, "n": 6},
+  "target_claim_id": "RED-0001",
+  "goal": "Resolve the exact (6,6) open input as Tate or exhibit a surviving non-Tate summand.",
+  "paired_attempt_policy": {
+    "revision": 1,
+    "engine_order": ["grok", "gemini", "codex", "claude"],
+    "exact_theorem": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group."
+  },
+  "batch_step_limit": 12,
+  "proof_confirmation_count": 2,
+  "novelty_audit_count": 2,
+  "primary_source_ids": ["SRC-0002", "SRC-0004"],
+  "bottleneck": {
+    "splitting": "F=O_{P1}(4) direct-sum O_{P1}(5)",
+    "ce_line_bundle": "W_5 := (O_{P(E^vee)}(2) tensor gamma^*O_{P1}(-5))|_C, the f_2=5 summand of (O(2) tensor gamma^*F^vee)|_C; it is not the O_{P1}(5) summand of F",
+    "degree_formula": "deg(W_f|_C)=4g+12-4f, hence deg(W_5)=16 and deg(W_5 tensor omega_C^{-1})=6 for g=6",
+    "failure_locus": "O_C(Gamma) isomorphic to W_5 tensor omega_C^{-1}",
+    "degree": 6,
+    "program": [
+      "Derive the failure condition from the f_2=5 summand in SRC-0004 Lemma 10.6, including the sign in gamma^*O(-5).",
+      "Stratify by h^0(W_5 tensor omega_C^{-1}).",
+      "Model ordered distinct reduced divisors as a finite etale S_6-cover of the reduced-support open in the relative linear system; do not call that open locus closed.",
+      "Identify components, dimensions, stabilizers, and maps to tetragonal moduli."
+    ]
+  },
+  "blocked_routes": [
+    "vcd-only-vanishing",
+    "undecorated-cgp-top-weight-graph-complex",
+    "point-count-without-degree-parity-separation",
+    "forgetful-map-renaming-local-system-unknown"
+  ],
+  "subproblems": [
+    {"id": "C66-GEO-Z", "lane": "geometry", "title": "Construct and identify the evaluation-failure locus Z", "dependencies": []},
+    {"id": "C66-GEO-H0", "lane": "geometry", "title": "Stratify the relative degree-six linear system by h0", "dependencies": ["C66-GEO-Z"]},
+    {"id": "C66-GEO-COMP", "lane": "geometry", "title": "Determine components, dimensions, stabilizers, and finite-cover behavior", "dependencies": ["C66-GEO-Z", "C66-GEO-H0"]},
+    {"id": "C66-TATE-SUPPORT", "lane": "weakest-sufficient-proof", "title": "Prove Tate type for the exact codimension-13 contribution supported on Z", "dependencies": ["C66-GEO-COMP"]},
+    {"id": "C66-TATE-ASSEMBLY", "lane": "weakest-sufficient-proof", "title": "Assemble the tetragonal contribution into the exact lowest-weight target", "dependencies": ["C66-TATE-SUPPORT"]},
+    {"id": "C66-CEX-LOCAL", "lane": "counterexample", "title": "Search Z for a non-Tate local system or motivic summand", "dependencies": ["C66-GEO-COMP"]},
+    {"id": "C66-CEX-SURVIVE", "lane": "counterexample", "title": "Test survival of a non-Tate candidate in the exact target", "dependencies": ["C66-CEX-LOCAL"]},
+    {"id": "C66-COMP-RANK", "lane": "computation", "title": "Compute determinantal rank-drop ideals and fibre dimensions", "dependencies": ["C66-GEO-Z"], "experiment_id": "EXP-C66-RANK"},
+    {"id": "C66-COMP-COMP", "lane": "computation", "title": "Test proposed component decompositions", "dependencies": ["C66-GEO-H0"], "experiment_id": "EXP-C66-COMP"}
+  ],
+  "experiments": [
+    {
+      "id": "EXP-C66-RANK",
+      "subproblem_id": "C66-COMP-RANK",
+      "script": "experiments/C66-001/rank-drop.m2",
+      "image": "unlhcc/macaulay2@sha256:47100825afff023efa5ef187264499e89dd680069ddd9e0a6c0e6add28a1437f",
+      "platform": "linux/amd64",
+      "software_version": "1.24.05"
+    },
+    {
+      "id": "EXP-C66-COMP",
+      "subproblem_id": "C66-COMP-COMP",
+      "script": "experiments/C66-001/components.m2",
+      "image": "unlhcc/macaulay2@sha256:47100825afff023efa5ef187264499e89dd680069ddd9e0a6c0e6add28a1437f",
+      "platform": "linux/amd64",
+      "software_version": "1.24.05"
+    }
+  ]
+}

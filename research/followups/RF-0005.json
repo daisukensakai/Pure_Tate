@@ -1,0 +1,187 @@
+{
+  "claims": [
+    {
+      "claim_id": "C-0001",
+      "kind": "proved_group_theory_topological",
+      "locators": [
+        "Har86 = Invent. Math. 84 (1986), 157-176 (primary bibliographic locator; full text not in seed corpus)",
+        "SRC-0001 p.12 (secondary: bound roughly 4g-4+n for g>=2)",
+        "SRC-0002 p.12 Proof of Theorem 1.3 (secondary working form: vanishes for k>4g-4+n)"
+      ],
+      "separates_from": "Does not compute Hodge structures, Tate types, or dimensions of H^{2d-16}(M_{g,n}); only supplies an upper vanishing threshold.",
+      "statement": "For the mapping class group Mod_{g,n} of a closed orientable surface of genus g>=2 with n punctures/marked points, the virtual cohomological dimension is vcd(Mod_{g,0})=4g-5 and vcd(Mod_{g,n})=4g-4+n for n>=1. Consequently rational/orbifold cohomology of M_{g,n} vanishes in degrees strictly larger than this vcd.",
+      "status": "established_by_primary_citation"
+    },
+    {
+      "claim_id": "C-0002",
+      "kind": "numerical_comparison_table",
+      "locators": [
+        "RED-0001 pair list in proof/packets/generated/CASE-6-6-v2.md",
+        "dimension formula d=3g-3+n from data/target.json open_input_formula and packet"
+      ],
+      "statement": "With d=3g-3+n and ordinary open-input degree 2d-16, versus vcd as in C-0001, the RED-0001 residual pairs compare as follows (pair | d | 2d-16 | vcd | relation): (3,12)|18|20|20|at vcd; (5,8)|20|24|24|at vcd; (6,6)|21|26|26|at vcd; (7,4)|22|28|28|at vcd; (8,0)|21|26|27|one below; (8,1)|22|28|29|one below; (8,2)|23|30|30|at vcd. In every case 2d-16 <= vcd, so none of the open inputs lies strictly above vcd.",
+      "status": "mechanically_verified_from_C-0001"
+    },
+    {
+      "claim_id": "C-0003",
+      "kind": "negative_discharge_statement",
+      "locators": [
+        "C-0001+C-0002",
+        "SRC-0002 p.12 (vanishing only for k'>4g'-4+n')"
+      ],
+      "statement": "Vanishing-above-vcd cannot discharge any RED-0001 ordinary open input: H^k(M_{g,n};Q)=0 is guaranteed only for k>vcd, whereas each residual degree equals vcd or vcd-1. In particular any claim that H^{2d-16}(M_{g,n})=0 for (3,12),(5,8),(6,6),(7,4),(8,0),(8,1), or (8,2) on the sole grounds of Harer vcd is false.",
+      "status": "established"
+    },
+    {
+      "claim_id": "C-0004",
+      "kind": "formulation_check",
+      "locators": [
+        "TASK.json target",
+        "CASE-6-6-v2.md exact open-input target"
+      ],
+      "statement": "The proposed residual ordinary groups W_{2d-16}H^{2d-16}(M_{g,n}) for the RED-0001 pairs are not formulated incorrectly with respect to degree versus vcd: all seven degrees are admissible (at or one below vcd). For the packet case (6,6), degree 26 equals vcd 26, matching the packet target ordinary_cohomology_degree.",
+      "status": "established"
+    },
+    {
+      "claim_id": "C-0005",
+      "kind": "non_result_for_residual_Tate",
+      "locators": [
+        "SRC-0001 Section 4 / current-status discussion of degrees 16,18,20",
+        "SRC-0002 Theorem 1.5(3) and introduction after Theorem 1.5"
+      ],
+      "statement": "No theorem in the searched seed corpus (SRC-0001 through SRC-0005, checked 2026-07-30) computes, forces Tate type for, or proves vanishing of W_26 H^26(M_{6,6}) or the other RED-0001 open inputs. Harer vcd is a proved topological vanishing bound only above vcd; SRC-0001/SRC-0002 treat universal pure-Tate/tautological statements as known only through even degree 14, with 16 still open/predicted.",
+      "status": "literature_obstruction_recorded"
+    }
+  ],
+  "context_revision": 2,
+  "current_status_check_date": "2026-07-30",
+  "engine": "grok",
+  "id": "RF-0005",
+  "independent": true,
+  "locators_checked": [
+    {
+      "finding": "Proved statement used: Harer's computation of vcd of mapping class groups gives strong vanishing for H^k(M_{g,n}) when k is large relative to g and n [Har86]; relevant bound roughly 4g-4+n for g>=2. Equivalently compactly supported cohomology vanishes in degrees less than roughly 2g+n-1.",
+      "locator": "p.12, paragraph on topological inputs / Harer vcd",
+      "source_id": "SRC-0001"
+    },
+    {
+      "finding": "Virtual cohomological dimension is invoked only as ruling out the large-k extreme so that for fixed k only finitely many (g,n) can contribute; no residual-pair table.",
+      "locator": "p.13, STE / finite-base-case paragraph",
+      "source_id": "SRC-0001"
+    },
+    {
+      "finding": "Full primary bibliographic locator: J. Harer, The virtual cohomological dimension of the mapping class group of an orientable surface, Invent. Math. 84 (1986), no. 1, 157-176.",
+      "locator": "p.24 bibliography entry [Har86]",
+      "source_id": "SRC-0001"
+    },
+    {
+      "finding": "Working bound appears as the condition 4g'-4+n' >= k' among generators of the STE containing all H^k(M_{g,n}).",
+      "locator": "p.2, Theorem 1.3 generator list",
+      "source_id": "SRC-0002"
+    },
+    {
+      "finding": "Explicit vanishing: by the vcd of M_{g',n'}, the pure-weight quotient vanishes when k' > 4g'-4+n'. This is a proved vanishing-above-vcd input to the STE induction, not a computation of W_{2d-16}H^{2d-16}.",
+      "locator": "p.12, Proof of Theorem 1.3",
+      "source_id": "SRC-0002"
+    },
+    {
+      "finding": "Even cohomology through degree 14 is treated as established tautological/Tate; degrees 16,18,20 remain predictions. No claim that H^{2d-16} vanishes for RED-0001 pairs.",
+      "locator": "Theorem 1.5(3) and degree-16 discussion (introduction)",
+      "source_id": "SRC-0002"
+    },
+    {
+      "finding": "Primary paper identified bibliographically via SRC-0001. Seed corpus does not contain the Inventiones text, so page-internal theorem labels cannot be re-verified from supplied files. Standard main-result formula used by the moduli literature (and consistent with SRC-0001/SRC-0002 bounds): for Mod_{g,n} with g>=2, vcd=4g-5 if n=0 and vcd=4g-4+n if n>=1.",
+      "locator": "Invent. Math. 84 (1986), 157-176 (primary; not in seed corpus PDF)",
+      "source_id": "Har86"
+    }
+  ],
+  "packet_id": "CASE-6-6-v2",
+  "packet_sha256": "e6758c6886696d915814dc718f28af0e6b44088916881055c88a6276f55af88e",
+  "question_id": "MRQ-0005",
+  "schema_version": 1,
+  "source_records": [
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "authors": [
+        "Sam Payne"
+      ],
+      "checked_on": "2026-07-30",
+      "notes": "Page 12 records Harer vcd vanishing with bound roughly 4g-4+n for g>=2, citing [Har86]. Bibliography page 24 gives the primary bibliographic locator Invent. Math. 84 (1986), no. 1, 157-176.",
+      "role": "moduli_survey_citing_Harer_vcd",
+      "source_id": "SRC-0001",
+      "title": "On the Hodge and Tate conjectures for moduli spaces of curves",
+      "year": 2026
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson",
+        "Sam Payne"
+      ],
+      "checked_on": "2026-07-30",
+      "notes": "Proof of Theorem 1.3 (page 12 of arXiv v3 text) uses the vcd of M_{g',n'} to conclude vanishing when k' > 4g'-4+n'. Theorem 1.3 statement (page 2) encodes the same bound as the generator condition 4g'-4+n' >= k'.",
+      "role": "working_vcd_bound_in_STE_induction",
+      "source_id": "SRC-0002",
+      "title": "Extensions of tautological rings and motivic structures in the cohomology of Mbar_g,n",
+      "year": 2024
+    },
+    {
+      "authors": [
+        "John L. Harer"
+      ],
+      "bibliographic_locator": "Invent. Math. 84 (1986), no. 1, 157-176",
+      "checked_on": "2026-07-30",
+      "in_seed_corpus": false,
+      "kind": "primary_journal_article",
+      "notes": "Cited as [Har86] by SRC-0001 p.24. Full PDF not present in the supplied seed corpus, so internal theorem/section numbers cannot be re-read from corpus text; bibliographic pages 157-176 and the standard main-result formula are recorded from the moduli literature's standard citation of this paper.",
+      "role": "primary_vcd_theorem",
+      "source_id": "Har86",
+      "title": "The virtual cohomological dimension of the mapping class group of an orientable surface",
+      "year": 1986
+    },
+    {
+      "checked_on": "2026-07-30",
+      "notes": "Grep of corpus/text and corpus/chunks: no Harer vcd formula or 4g-4+n vanishing bound.",
+      "role": "searched_no_vcd_formula",
+      "source_id": "SRC-0003"
+    },
+    {
+      "checked_on": "2026-07-30",
+      "notes": "Grep: no Harer virtual cohomological dimension discussion relevant to ordinary open-input degrees.",
+      "role": "searched_no_vcd_formula",
+      "source_id": "SRC-0004"
+    },
+    {
+      "checked_on": "2026-07-30",
+      "notes": "Cites Harer stability [Ann. of Math. 1985], not the 1986 vcd paper; no vcd formula.",
+      "role": "searched_stability_only",
+      "source_id": "SRC-0005"
+    }
+  ],
+  "summary": "Target check for CASE-6-6-v2 is consistent: d=21, ordinary open input W_26 H^26(M_{6,6})(21) of untwisted type Q(-13), BM form W_{-16}H^{BM}_{16} of type Q(8). Primary Harer locator is Invent. Math. 84 (1986), 157-176 [Har86], used on SRC-0001 p.12 and operationally as the vanishing k>4g-4+n on SRC-0002 p.12 (Proof of Theorem 1.3). Exact formula for g>=2: vcd(Mod_{g,0})=4g-5 and vcd(Mod_{g,n})=4g-4+n for n>=1. For every RED-0001 residual pair, ordinary degree 2d-16 equals vcd or is exactly one below it, so vanishing-above-vcd cannot force H^{2d-16}(M_{g,n})=0 and does not discharge any residual open input. Residual degrees are not incorrectly formulated relative to vcd.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-Q-0005",
+  "unresolved": [
+    "Primary Harer Inventiones PDF is not in the supplied seed corpus, so an internal theorem/section number (beyond bibliographic pages 157-176) cannot be re-read from supplied files.",
+    "Harer vcd does not determine the actual dimension or Hodge/Tate type of H^{vcd} or H^{vcd-1}; top-degree structure of the residual open inputs remains open.",
+    "No result in the seed corpus discharges W_{-16}H^{BM}_{16}(M_{g,n}) or its ordinary realization for any RED-0001 pair."
+  ],
+  "verdict": "partial"
+}

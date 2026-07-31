@@ -1,0 +1,127 @@
+{
+  "attempt_id": "ATT-0017",
+  "checked_claims": [
+    {
+      "adversarial_result": "partially_accepted_with_gaps",
+      "id": "A1",
+      "notes": "Existence of a Leray spectral sequence for the smooth DM forgetful morphism and the abutment degree filter p+q=28 for ordinary H^{28} are standard. The fiber identification as scheme-theoretic F(C,4) is only safe over locus of automorphism-free curves; at stacky points the fiber of the stack map is a configuration stack, so R^q f_* must be formed in the stack topos. Claim status 'proved' is therefore overstated, but the gap is not by itself a disproof of the Tate target.",
+      "statement": "Forgetting the four ordered markings gives a Leray spectral sequence with fiber the ordered configuration space F(C,4), and any class relevant to the ordinary target has total degree 28.",
+      "status_in_attempt": "proved"
+    },
+    {
+      "adversarial_result": "attacked_overstated",
+      "id": "A2",
+      "notes": "Two independent failures of the load-bearing identification. (1) Weight bookkeeping: V is pure of weight 1, so V^{\\otimes4} is pure of weight 4; on the smooth stack M_7 the groups H^{24}(M_7,V^{\\otimes4}) have weights at least 28, so the literal piece W_24 vanishes. Writing W_24 of a weight-4 coefficient system and then adding +4 again double-counts or silently reindexes V as a weight-0 local system. (2) Source geometry: H^1(C)^{\\otimes4} lives in H^4(C^4), not automatically in R^4 f_*Q. Pairwise diagonals have complex codimension 1 in C^4, so restriction H^4(C^4)->H^4(F(C,4)) is not an isomorphism and Gysin/Kunneth shifts are mandatory. The 'only evident place' claim also fails to exhaust other bidegrees (p,q) with p+q=28 and mixed weights on nonproper configuration-space cohomology.",
+      "statement": "The Kunneth term H^1(C)^{\\otimes4} identifies W_24 H^24(M_7,V^{\\otimes4}) in bidegree (24,4) as a possible source of total-degree-28, total-weight-28 non-Tate classes.",
+      "status_in_attempt": "proved_as_candidate_source"
+    },
+    {
+      "adversarial_result": "confirmed_unproved",
+      "id": "A3",
+      "notes": "No equivariant computation of R^4 f_*Q, no Gysin exact sequence for the diagonal stratification, and no invariants-versus-coinvariants analysis under monodromy or residual automorphisms. Survival of a nontrivial irreducible summand of V^{\\otimes4} is entirely open.",
+      "statement": "A nontrivial irreducible symplectic-local-system summand survives the diagonal relations into R^4f_*Q.",
+      "status_in_attempt": "unproved"
+    },
+    {
+      "adversarial_result": "confirmed_unproved",
+      "id": "A4",
+      "notes": "No nonvanishing, no semisimplification-versus-actual-MHS comparison, and the weight index W_24 is itself suspect under standard VHS weight conventions. No non-Tate pure summand is exhibited.",
+      "statement": "The relevant nontrivial summand has nonzero non-Tate W_24 H^24 on M_7.",
+      "status_in_attempt": "unproved"
+    },
+    {
+      "adversarial_result": "confirmed_unproved",
+      "id": "A5",
+      "notes": "No differential analysis on the Leray page, no extension/cancellation control to the abutment, and no class in the exact Borel-Moore target. Poincare duality degree/twist match the packet (d=22, ordinary degree 28, BM degree 16, twists 22 and Tate types Q(-14)/Q(8)), but that only identifies the target group; it does not produce a non-Tate summand.",
+      "statement": "A resulting class survives every Leray differential and defines a non-Tate summand of W_28 H^28(M_7,4)(22), equivalently W_-16 H^BM_16(M_7,4).",
+      "status_in_attempt": "unproved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "search-for-surviving-non-tate-motive"
+      ],
+      "key": "vhs-weight-index-vs-leray-bidegree",
+      "kind": "obstruction",
+      "statement": "For the forgetful Leray analysis of ordinary weight-28 degree-28 cohomology on M_{g,n}, a pure summand of V^{\\otimes n} has coefficient weight n; base cohomology H^p(M_g, L) then has weights at least p+n. Labeling a candidate source as W_p H^p(M_g,V^{\\otimes n}) while also adding fiber weight n is an inconsistent weight convention and, under the standard VHS convention, the piece W_p vanishes.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "search-for-surviving-non-tate-motive"
+      ],
+      "key": "product-kunneth-not-config-direct-image",
+      "kind": "obstruction",
+      "statement": "Kunneth summands of H^*(C^n), including H^1(C)^{\\otimes n}, are not automatically direct summands of R^*f_*Q for f:M_{g,n}->M_g. Pairwise diagonals have complex codimension 1, so passage to the ordered configuration space requires explicit Gysin/restriction sequences; without them, V^{\\otimes n} is only a candidate before diagonal relations, not a coefficient system on M_g.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "search-for-surviving-non-tate-motive"
+      ],
+      "key": "config-space-mixed-weights-other-bidegrees",
+      "kind": "obstruction",
+      "statement": "The ordered configuration fiber F(C,n) is nonproper, so R^q f_*Q carries mixed Hodge modules/variations. Non-Tate contributions to gr^W_{2d-16} H^{2d-16}(M_{g,n}) may sit in any Leray bidegree (p,q) with p+q=2d-16 compatible with the weight filtration; isolating a single slot such as (2d-16-n,n) does not exhaust possible non-Tate sources.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "search-for-surviving-non-tate-motive"
+      ],
+      "key": "stack-fiber-vs-scheme-configuration-space",
+      "kind": "obstruction",
+      "statement": "For the forgetful map of smooth DM stacks M_{g,n}->M_g, geometric fibers over curves with nontrivial automorphisms are configuration stacks rather than the scheme F(C,n). Claims that identify R^q f_*Q with the monodromy representation on H^q(F(C,n)) must either restrict to the automorphism-free locus and control the complement, or work entirely with stacky direct images.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "search-for-surviving-non-tate-motive"
+      ],
+      "key": "no-exhibited-non-tate-in-exact-bm-target",
+      "kind": "obstruction",
+      "statement": "A disproof of the degree-16 pure-Tate reduction for a listed open pair requires an exhibited nonzero non-Tate summand in the exact group W_{-16}H^{BM}_{16}(M_{g,n}) (equivalently its ordinary realization after the dimension-dependent Poincare twist). A Leray-source heuristic with unproved survival, nonvanishing, and differentials does not meet that bar.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0023",
+  "independent": true,
+  "packet_id": "CASE-7-4-v2",
+  "packet_sha256": "d567165606b1f886205fc07f263aedee77be75a8374221d209d511c91a855f98",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0017-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse space",
+    "rational versus integral coefficients",
+    "cohomology versus Borel-Moore homology degree",
+    "Poincare duality and every Tate twist",
+    "Gysin and Kunneth shifts",
+    "degeneration or spectral-sequence differentials",
+    "invariants versus coinvariants under graph automorphisms",
+    "semisimplification versus actual Hodge-structure isomorphism",
+    "conditional prediction versus theorem",
+    "pure Tate silently upgraded to algebraic or tautological generation",
+    "omitted stable pairs"
+  ],
+  "strongest_attack": "The candidate E_2 slot W_24 H^{24}(M_7,V^{\\otimes4})subseteq E_2^{24,4} is not correctly identified: with V pure of weight 1 the coefficient system V^{\\otimes4} has weight 4, so H^{24}(M_7,V^{\\otimes4}) has weights >=28 and the literal W_24 piece vanishes (or else the argument silently treats V as weight 0 and double-counts). Independently, the Kunneth summand of C^4 is not shown to survive the codimension-1 diagonal Gysin relations into R^4 f_*Q, and A3-A5 supply no nonvanishing, no differential survival, and no class in W_{-16}H^{BM}_{16}(M_{7,4}). The attempt therefore neither refutes nor proves the Tate target and is incomplete.",
+  "target": {
+    "chow_codimension": 14,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 22,
+    "g": 7,
+    "n": 4,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 28,
+    "ordinary_tate_type": "Q(-14)",
+    "ordinary_weight": 28,
+    "poincare_twist": 22
+  },
+  "verdict": "incomplete"
+}

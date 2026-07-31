@@ -1,0 +1,96 @@
+{
+  "approach_id": "exact-point-count-or-equivariant-stratification",
+  "argument_markdown": "## Argument\n\n### Setup and target\n\nFix `(g,n)=(5,8)`. The moduli stack `M_{5,8}` is smooth of dimension `d=3\u00b75\u22123+8=20`. By RED-0001 and FND-0001, extending the low-homology induction to compactified degree 16 reduces the unresolved open input for this pair to the pure-weight Borel\u2013Moore summand\n\n`W_{-16} H^{BM}_{16}(M_{5,8};Q)`,\n\nexpected to be a direct sum of Tate motives of type `Q(8)`. Poincar\u00e9 duality for the smooth stack of dimension 20 identifies this with\n\n`W_{24} H^{24}(M_{5,8};Q)(20)`,\n\nso the untwisted ordinary pure-weight group `W_{24} H^{24}(M_{5,8})` is expected of Tate type `Q(-12)` (Chow codimension 12). Every degree and twist below is taken exactly from the packet target dictionary.\n\nBy THM-0004, this is a genuine open-stratum base case: `n=8\u22652` and `k=16` equals `2g\u22122+n=16`. By THM-0005, CKgP (and the published algebraicity of pure-weight cohomology) is known only for `n\u2264c(5)=7`, so the CKgP route does not cover `M_{5,8}`. The present attempt therefore uses a single approach: **exact point-count / equivariant stratification**, without claiming CKgP, algebraicity, or tautological generation for `n=8`.\n\n### Equivariant stratification of the open locus\n\nThe open moduli space `M_{5,8}` is irreducible as a coarse geometric object (dual graph: one vertex of genus 5 with eight legs). Refine it by gonality and linear systems, working `S_8`-equivariantly throughout.\n\n1. **Gonality stratification on the unmarked moduli.** Let `T\u2282M_5` be the trigonal locus (curves admitting a `g^1_3`). For genus 5 this is a divisor; its complement consists of non-trigonal curves, canonically embedded as complete intersections of three quadrics in `P^4`.\n2. **Marked pullbacks.** Write `T_8` for the preimage of `T` in `M_{5,8}` and `U_8:=M_{5,8}\\T_8` for the non-trigonal open. Further stratify `T_8` by the incidence pattern of the eight marks under the (finite) `g^1_3`, and stratify `U_8` by Weierstrass / special linear-system conditions on the marks.\n3. **Equivariance.** The symmetric group `S_8` permutes marked points and acts on each stratum; the desired pure-weight BM group is an `S_8`-representation in the category of pure motives / pure Hodge structures.\n\nThis stratification is constructible and `S_8`-stable. In principle, an exact equivariant computation of the pure-weight graded piece of Borel\u2013Moore homology (or of compactly supported cohomology) could proceed stratum-by-stratum and then reassemble via the weight spectral sequence of the stratification.\n\n### Point-count extraction of the pure-weight summand\n\nOver finite fields `F_q` (large `q`, characteristic avoiding 2 and 3), the Grothendieck\u2013Lefschetz trace formula for compactly supported \u00e9tale cohomology reads\n\n`#|M_{5,8}(F_q)| = \u2211_i (\u22121)^i Tr(Frob_q | H^i_c(M_{5,8,\\bar F_q};Q_\u2113))`,\n\ninterpreted stack-theoretically (automorphism-weighted point counts). After Poincar\u00e9 duality and passage to the weight filtration, the pure BM summand `W_{-16} H^{BM}_{16}` contributes a specific monomial in `q` of Tate type matching `Q(8)` in the BM grading (equivalently, after the packet duality, a pure contribution of type `Q(-12)` on the ordinary side in degree 24, twisted by 20).\n\nIf one could simultaneously:\n\n- (P1) compute the automorphism-weighted count of `M_{5,8}` over `F_q` as an explicit polynomial (or quasi-polynomial) in `q`, `S_8`-equivariantly; and\n- (P2) determine or cancel all other weight-graded pieces of `H^*_c` that can contribute to the same monomial degree,\n\nthen the remaining coefficient would equal the multiplicity of `Q(8)` in `W_{-16} H^{BM}_{16}(M_{5,8})`.\n\n### Partial reduction via the forgetful fibration\n\nLet `f: M_{5,8} \u2192 M_{5,7}` forget the last mark. Fibers are smooth genus-5 curves minus seven points. By THM-0005, the base `M_{5,7}` has CKgP, so its pure-weight cohomology is algebraic of the expected Tate type in the CKgP-controlled range.\n\nThe compactly supported / BM Leray spectral sequence for `f` has `E_2`-page built from the cohomology of `M_{5,7}` with coefficients in the higher direct images of the fiberwise configuration-space complex (the cohomology of `C\\{p_1,\u2026,p_7}` as the curve and the seven points vary). Graded pieces of that complex are, up to Tate twists, local systems on `M_{5,7}` associated to:\n\n- the symplectic local system `R^1 \u03c0_* Q` of the universal curve, and\n- configuration-space local systems of the residual points.\n\n**Structural positive statement.** Any pure-weight contribution to `W_{24} H^{24}(M_{5,8})` that arises from pure Tate coefficients on the CKgP base `M_{5,7}` tensored with pure Tate fiber cohomology is itself pure Tate of the expected type. Thus the forgetful fibration isolates the obstruction inside the monodromy-nontrivial part of the Leray page.\n\n### Gaps (explicit)\n\n**G1 \u2014 Monodromy of configuration-space local systems.** Even with a pure-Tate base, non-trivial monodromy of `R^1 \u03c0_* Q` and of the configuration-space local systems on `M_{5,7}` can produce non-Tate irreducible summands after taking cohomology (invariants, coinvariants, or higher Ext in mixed Hodge modules). Controlling that the pure piece in ordinary degree 24 / BM degree 16 remains Tate requires a vanishing or Tate-ness statement for those Hom/Ext groups. This is not established.\n\n**G2 \u2014 Missing exact point count.** No complete polynomial formula isolating the pure-weight `W_{-16}` contribution to the `S_8`-equivariant count of `M_{5,8}(F_q)` is available in the dependency-closed packet corpus, and this attempt does not recompute such a count from Hurwitz spaces of trigonal covers and nets of quadrics.\n\n**G3 \u2014 Stratification spectral sequence not evaluated.** The gonality stratification of \u00a72 induces a weight spectral sequence whose graded pieces would have to be computed (or shown Tate) individually; only the formal setup is recorded, not the computation.\n\n**G4 \u2014 No pairing completeness.** Even if the tautological ring of `M_{5,8}` in codimension 12 were written down, perfectness of the tautological pairing on the pure-weight piece is not proved. By the execution contract, a pairing computation without perfectness does not yield completeness; neither does an arithmetic prediction or a semisimplification of a Galois representation.\n\n### Unconditional claims obtained\n\n- The pair `(5,8)` is a genuine open base case for the degree-16 induction (THM-0004).\n- Duality and the packet dictionary correctly identify BM and ordinary targets and twists (FND-0001).\n- CKgP does not apply at `n=8` (THM-0005).\n- The forgetful map to the CKgP space `M_{5,7}` reduces the problem to monodromy of fiberwise configuration local systems, but does not discharge it.\n\n### Conclusion\n\nThe equivariant-stratification / point-count approach correctly places `(5,8)` as an open base case one marking past the published CKgP bound and reduces Tate-ness of `W_{-16} H^{BM}_{16}(M_{5,8})` to a monodromy-plus-count problem on `M_{5,7}`. Neither the exact point-count isolation nor the monodromy vanishing is completed. No non-Tate summand is exhibited, and no proof that every summand is Tate is obtained. The degree-16 pure-Tate statement for `\\overline{M}_{5,8}` therefore remains open, consistent with OBS-0001 and CONJ-0001. Status: **proposed** (incomplete argument).",
+  "assumptions": [
+    "Stack-theoretic, automorphism-weighted point counts over F_q are the correct arithmetic shadow of the compactly supported \u00e9tale cohomology of the Deligne\u2013Mumford stack M_{5,8}.",
+    "The comparison between Betti, \u00e9tale, and motivic weight filtrations on the pure BM summand introduces no hidden non-Tate extension problems beyond those already marked as gaps.",
+    "No external point-count tables or CKgP extensions beyond the dependency-closed claims THM-0001\u2013THM-0007, OBS-0001, RED-0001, and FND-0001 are used."
+  ],
+  "claims": [
+    {
+      "id": "A1",
+      "statement": "For (g,n)=(5,8) and k=16, one has n\u22652 and k=2g\u22122+n, so by THM-0004 the pair is a genuine open-stratum base case for the degree-16 low-homology induction: W_{-16}H^{BM}_{16}(M_{5,8}) must be determined independently of the boundary reduction.",
+      "status": "proved"
+    },
+    {
+      "id": "A2",
+      "statement": "With d=20, Poincar\u00e9 duality and FND-0001 identify W_{-16}H^{BM}_{16}(M_{5,8}) with W_{24}H^{24}(M_{5,8})(20); the untwisted ordinary pure-weight group has expected Tate type Q(-12) and Chow codimension 12, matching the packet target dictionary exactly.",
+      "status": "proved"
+    },
+    {
+      "id": "A3",
+      "statement": "By THM-0005, M_{5,n} has CKgP only for n\u2264c(5)=7; hence CKgP and the published algebraicity of pure-weight cohomology do not apply to M_{5,8}.",
+      "status": "proved"
+    },
+    {
+      "id": "A4",
+      "statement": "The forgetful map f:M_{5,8}\u2192M_{5,7} has CKgP base (n=7=c(5)). Pure Tate coefficients on the base tensored with pure Tate fiber cohomology contribute only pure Tate summands to W_{24}H^{24}(M_{5,8}); any obstruction is confined to the monodromy-nontrivial part of the compactly supported / BM Leray spectral sequence of f.",
+      "status": "proved"
+    },
+    {
+      "id": "A5",
+      "statement": "An S_8-equivariant gonality stratification of M_{5,8} (trigonal divisor pullback versus non-trigonal open, refined by mark-incidence under g^1_3 and by special linear systems) is constructible and in principle computes the pure-weight BM graded piece via a weight spectral sequence.",
+      "status": "partial"
+    },
+    {
+      "id": "A6",
+      "statement": "The multiplicity of Q(8) in W_{-16}H^{BM}_{16}(M_{5,8}) equals the residual pure monomial coefficient in the automorphism-weighted point count of M_{5,8} over F_q after all other weight-graded contributions of the same degree are removed.",
+      "status": "partial"
+    },
+    {
+      "id": "A7",
+      "statement": "Monodromy of R^1\u03c0_*Q and of configuration-space local systems on M_{5,7} produces no non-Tate summand in the pure piece of ordinary degree 24 / BM degree 16.",
+      "status": "unresolved"
+    },
+    {
+      "id": "A8",
+      "statement": "W_{-16}H^{BM}_{16}(M_{5,8};Q) is a direct sum of copies of Q(8) (equivalently, W_{24}H^{24}(M_{5,8}) is of Tate type Q(-12)).",
+      "status": "unresolved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "engine": "grok",
+  "gap_markers": [
+    "G1: Monodromy of R^1\u03c0_*Q and configuration-space local systems on the CKgP base M_{5,7} is not shown to preserve Tate-ness of the pure piece in ordinary degree 24 / BM degree 16.",
+    "G2: No exact S_8-equivariant point-count polynomial isolating the W_{-16} graded contribution of M_{5,8}(F_q) is computed or cited from the closed corpus.",
+    "G3: The weight spectral sequence of the gonality/mark-incidence stratification of M_{5,8} is set up but not evaluated on any page.",
+    "G4: Perfectness of any tautological pairing in codimension 12 on M_{5,8} is not proved; arithmetic predictions and semisimplifications are not used as completeness certificates.",
+    "G5: Claim A8 (the actual Tate-type statement for the open input) remains unresolved; no non-Tate summand is exhibited either."
+  ],
+  "id": "ATT-0013",
+  "packet_id": "CASE-5-8-v2",
+  "packet_path": "proof/packets/generated/CASE-5-8-v2.md",
+  "packet_sha256": "93405e895723720d9a4ff947646a743224b38a247b0e6c9ca363f1aac83e815c",
+  "schema_version": 2,
+  "source_claim_ids": [
+    "RED-0001",
+    "CONJ-0001",
+    "THM-0001",
+    "THM-0002",
+    "THM-0003",
+    "THM-0004",
+    "THM-0005",
+    "OBS-0001",
+    "FND-0001"
+  ],
+  "status": "proposed",
+  "summary": "For (g,n)=(5,8), the degree-16 open input is a genuine base case just outside CKgP (n=8>c(5)=7). An equivariant-stratification / point-count approach via the forgetful fibration to M_{5,7} reduces Tate-ness of W_{-16}H^{BM}_{16}(M_{5,8}) to controlling monodromy of configuration-space local systems on a CKgP base, but neither an exact isolation of that pure-weight graded piece nor a completed monodromy argument is obtained.",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-M-0008"
+}

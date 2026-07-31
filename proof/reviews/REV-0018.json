@@ -1,0 +1,163 @@
+{
+  "attempt_id": "ATT-0011",
+  "checked_claims": [
+    {
+      "claim_id": "packet_sha256",
+      "note": "TASK.json packet_sha256 e6758c68...5af88e matches ATT-0011.packet_sha256 exactly; packet_id CASE-6-6-v2 and packet_path agree.",
+      "status": "verified"
+    },
+    {
+      "claim_id": "target_dictionary",
+      "note": "ATT-0011.target is key-for-key identical to TASK.json.target and to the packet's embedded JSON block. No silent retargeting.",
+      "status": "verified"
+    },
+    {
+      "claim_id": "A1",
+      "note": "d=3*6-3+6=21; 2d-16=26; twisting H^26 by Q(21) moves weight 26 to 26-42=-16 and type Q(-13) to Q(-13+21)=Q(8); Chow codimension d-8=13 matches ordinary weight 26=2*13. Every degree, weight and twist checks out. Duality is applied on the smooth DM stack, consistent with THM-0001/FND-0001.",
+      "status": "verified"
+    },
+    {
+      "claim_id": "A2",
+      "note": "THM-0004 branch n>=2 requires k>=2g-2+n; here 2g-2+n=16=k, so (6,6) is a genuine open base case, at the boundary of the inequality rather than strictly inside it.",
+      "status": "verified"
+    },
+    {
+      "claim_id": "A3",
+      "note": "Forgetful map is smooth of relative dimension 1 with fibre C minus 5 points; rank R^1 = 2g+(n-1)=12+4=16 and R^q=0 for q>=2 are correct. Caveat: fibres are quotient stacks [C-S / Aut(C,x)], so 'L is a rank-16 local system' holds only in the orbifold sense; assumption 4 justifies stack-vs-coarse agreement for constant Q coefficients and is silently extended to local-system coefficients, where the correct statement is passage to Aut-invariants.",
+      "status": "verified_with_caveat"
+    },
+    {
+      "claim_id": "A4",
+      "note": "The two-row Leray conclusion is right, but the section-2 parenthetical asserts that L has stalks 'pure of weight 1 as H^1 of a smooth curve with punctures' and directs the comparison to W_25 H^25(M_{6,5};L). Both are wrong and contradict section 5, which correctly presents L as an extension of a rank-4 weight-2 Tate residue system by the rank-12 weight-1 V. Since L has weights in {1,2}, H^25(M_{6,5};L) has weights >= 26, so the W_25 group named in section 2 is identically zero; the correct comparison group is Gr^W_26, as A7 in fact uses. A4 is also marked 'proved' while resting on assumption 2 (weight-exactness of Leray for a non-proper smooth morphism), which has no supporting entry in the packet.",
+      "status": "defective_as_written"
+    },
+    {
+      "claim_id": "A5",
+      "note": "Two independent problems. (i) M_{6,5} has virtual cohomological dimension 4g-4+n=25, so E_2^{26,0}=H^26(M_{6,5};Q)=0 and the claim is about the zero group; the CKgP input it advertises does no work. (ii) The stated derivation reads THM-0005 as CKgP for the open M_{6,5} and jumps directly to Tate-ness of the open pure-weight group W_26 H^26(M_{6,5}); CKgP is a property of the smooth proper compactification, and the passage compact-to-open plus algebraicity-to-Hodge-Tate is asserted, not argued. The supporting paragraph invoking THM-0002 'through degree 14 on compact moduli' for boundary contributions is pure hand-waving and is not used to close anything.",
+      "status": "vacuous_and_misjustified"
+    },
+    {
+      "claim_id": "A6",
+      "note": "Correctly marked 'gap'. Understated because no localization/Gysin assembly is set up at all: the hyperelliptic locus has codimension 4 in M_6, so its contribution enters H^25(M_{6,5};L) as H^17 of the stratum twisted by Q(-4), and no such shift or twist appears anywhere. Also, for g=6 gonality takes only values 2,3,4, so the posited 'lower Brill-Noether loci' are not additional gonality strata, and U (gonality >= 4) is mislabelled Brill-Noether-general: plane quintics have a g^2_5 with rho=-3 and lie inside U.",
+      "status": "gap_correctly_declared_but_understated"
+    },
+    {
+      "claim_id": "A7",
+      "note": "Correctly marked 'gap'. Even if granted, the claim as phrased does not force the conclusion: Gr^W_26 H^25 of the open stratum U is neither a sub nor a quotient of Gr^W_26 H^25(M_{6,5};L) without the closed-stratum terms and the differentials of the localization spectral sequence, none of which are constructed. The genuinely usable statement is the one in section 6, whose hypothesis is about all of M_{6,5}, not about U.",
+      "status": "gap_correctly_declared_but_non_sequitur"
+    },
+    {
+      "claim_id": "A8",
+      "note": "The target claim is explicitly not proved. Section 6's conditional is logically sound in the direction used (subquotients of sums of Q(-13) are sums of Q(-13)), and no non-Tate summand is exhibited either, so this is neither a proof nor a disproof under the packet's execution boundary.",
+      "status": "gap_correctly_declared"
+    },
+    {
+      "claim_id": "A9",
+      "note": "Correctly marked 'refuted'. The refusal to upgrade a point count or an equivariant Euler characteristic from a semisimplification / Grothendieck-ring constraint to an identification of a weight-graded piece inside a mixed structure is exactly right, and is the strongest part of the attempt. CONJ-0001 and RED-0001 are likewise kept as prediction, never used as theorem.",
+      "status": "verified"
+    },
+    {
+      "claim_id": "approach_scope",
+      "note": "The approach id promises an exact point count or an S_6-equivariant stratification. Neither is produced (G3 concedes this), and the Leray route only respects the S_5 stabilizer of the sixth mark, so no equivariant conclusion is available. No invariants-versus-coinvariants error results, because no equivariant statement is claimed.",
+      "status": "not_delivered"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "open-input-degree-equals-vcd",
+      "kind": "structural",
+      "statement": "The RED-0001 base-case inequalities coincide with the virtual cohomological dimension boundary for M_{g,n}. For n>=2 the condition k>=2g-2+n is equivalent to 2d-k<=4g-4+n with d=3g-3+n, and for n<=1 the condition k>=2g is equivalent to 2d-k<=4g-6; that is, the ordinary realization degree of every unresolved open input lies at or one below the vcd (for (6,6): degree 26 equals vcd 26; for (6,5): vcd 25). Any forgetful-Leray or stratification route therefore has its higher-degree terms killed for free, and top-degree tools rather than local-system evaluations are the natural attack. Corroboration needed against a primary source for Harer's vcd formula, which is not in the packet corpus.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "top-degree-vanishing-may-settle-open-input",
+      "kind": "candidate-resolution",
+      "statement": "Because the ordinary realization of the (6,6) open input sits exactly at the vcd, a top-degree rational vanishing theorem for mapping class groups (H^{vcd}(M_{g,n};Q)=0 for g>=2, as in the Church-Farb-Putman line of work) would give W_26 H^26(M_{6,6};Q)=0 and hence W_{-16}H^BM_16(M_{6,6})=0, which is vacuously a direct sum of copies of Q(8) and would discharge this pair outright. This is flagged as a line to verify, not as an established input: no such theorem appears in the supplied packet, its exact hypotheses at n>0 must be checked, the g=0 case is a known counterexample, and the top-degree group is coinvariants of a Steinberg-type dualizing module, so invariants-versus-coinvariants must be handled explicitly. Requires independent source verification before any attempt relies on it.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "forgetful-leray-base-term-vanishes",
+      "kind": "obstruction",
+      "statement": "For the forgetful map M_{g,n} -> M_{g,n-1} used at an open input in ordinary degree D=2d-k, the Leray E_2 term E_2^{D,0}=H^D(M_{g,n-1};Q) vanishes whenever D exceeds the vcd of the base, which is the case at (6,6) with D=26 and base vcd 25. The two-row spectral sequence then degenerates to an isomorphism H^D(M_{g,n}) = H^{D-1}(M_{g,n-1};R^1 pi_* Q) with no differentials. Consequently any argument of the form 'the base summand is Tate by published CKgP for n-1' is vacuous, and this style of forgetful reduction transports the entire difficulty into local-system cohomology without reducing it. Future attempts using this route should be required to state the vanishing explicitly rather than presenting the base term as discharged progress.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "punctured-curve-local-system-is-mixed-not-pure",
+      "kind": "error-pattern",
+      "statement": "R^1 pi_* Q for the universal n-punctured curve is mixed of weights 1 and 2 (an extension of a rank n-1 Tate system of weight 2 by the rank 2g weight-1 system), never pure of weight 1. The correct weight floor is therefore H^p(base;L) of weight >= p+1, so at p=2d-k-1 the relevant graded piece is Gr^W_{p+1}, and any 'W_p' group named at that spot is identically zero. Attempts that describe the punctured-curve system as pure of weight 1 will be off by exactly one unit of weight and will target a zero group. ATT-0011 exhibits this error in section 2 while stating the correct description in section 5.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "ckgp-compact-to-open-pure-weight-gap",
+      "kind": "obstruction",
+      "statement": "Invoking the published CKgP marking bounds to conclude that an open pure-weight group W_{2m}H^{2m}(M_{g,n}) is a sum of Q(-m) skips two steps that must be argued rather than asserted: CKgP is a property of the smooth proper compactification, and the lowest-weight part of the open cohomology is the image from a smooth compactification, so one needs both the compact-to-open comparison and the implication algebraicity implies Hodge-Tate for a pure weight-2m structure. ATT-0011 section 3 asserts the composite in one line and marks it 'proved'. Any attempt using THM-0005 to Tate-ify open pure-weight cohomology should be required to exhibit these two steps.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "gonality-stratification-lacks-gysin-assembly",
+      "kind": "obstruction",
+      "statement": "A gonality or Brill-Noether stratification of M_{g,n-1} does not by itself bound the pure-weight cohomology of a local system on the total space: one needs the localization spectral sequence with the correct codimension shifts and Tate twists (in genus 6 the hyperelliptic locus has codimension 4 in M_6, contributing via degree p-8 cohomology of the stratum twisted by Q(-4)) together with control of its differentials. Evaluating only the open stratum is insufficient, since restriction to it is in general neither injective nor surjective. ATT-0011 supplies no shift, twist, or differential bookkeeping, and its stratification is additionally mislabelled: for g=6 gonality takes only values 2, 3, 4, the posited residual Brill-Noether strata are not separate gonality strata, and the gonality-4 open contains the Brill-Noether-special plane quintic locus.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0018",
+  "independent": true,
+  "packet_id": "CASE-6-6-v2",
+  "packet_sha256": "e6758c6886696d915814dc718f28af0e6b44088916881055c88a6276f55af88e",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0011-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse space",
+    "rational versus integral coefficients",
+    "cohomology versus homology degree",
+    "weight and Tate twist",
+    "Poincare duality twist by dimension d=21",
+    "Gysin and Kunneth shifts",
+    "spectral sequence differentials and degeneration",
+    "invariants versus coinvariants under mark permutations",
+    "semisimplification versus Hodge-structure isomorphism",
+    "conditional prediction versus theorem",
+    "pure Tate versus algebraic or tautological generation",
+    "omitted stable pairs",
+    "packet hash and target dictionary match"
+  ],
+  "strongest_attack": "The strongest attack is that the whole reduction is degenerate at the vcd boundary, which makes the attempt's advertised progress and its advertised obstruction both largely artifacts. For (g,n)=(6,6) the ordinary realization degree 2d-16=26 is exactly the virtual cohomological dimension 4g-4+n=26 of M_{6,6}, and the base of the forgetful fibration has vcd 4g-4+5=25. Hence E_2^{26,0}=H^26(M_{6,5};Q)=0, the q>=2 rows are empty, and both incoming and outgoing d_2 land in zero groups, so the Leray filtration collapses to a bare isomorphism W_26 H^26(M_{6,6}) = W_26 H^25(M_{6,5};L). Consequences: (i) A5, the only substantive step marked 'proved', is a statement about the zero group, so the published CKgP input for n=5 contributes nothing, and the attempt's claim to have discharged the base summand is empty; (ii) the 'reduction' is an identity, replacing one unknown group by an isomorphic unknown group, so G2 is not a reduction of difficulty; (iii) most seriously, because the target sits precisely at the vcd, top-degree vanishing results for the rational cohomology of mapping class groups are directly applicable and, if they apply at (6,6), would make the target group zero and therefore vacuously a sum of Q(8) - meaning the attempt's declared 'main obstruction', non-Tate symplectic local-system cohomology on the Brill-Noether-general open, may not be an obstruction at all but a feature of the route chosen. Outcome: this attack does not overturn the verdict, since the attempt claims no theorem and its conditional in section 6 is valid; it does show the attempt's negative conclusion is weak evidence that (6,6) is hard. The sharpest concrete defect found is independent of this: section 2 asserts that L is pure of weight 1 and instructs the reader to compare W_25 H^25(M_{6,5};L), which contradicts section 5's own correct mixed description and names a group that is identically zero because weights of H^25(M_{6,5};L) are at least 26. That is a real one-unit weight error inside a claim marked 'proved', repaired only implicitly by A7's use of Gr^W_26.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "verdict": "incomplete"
+}

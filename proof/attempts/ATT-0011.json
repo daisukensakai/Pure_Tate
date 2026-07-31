@@ -1,0 +1,104 @@
+{
+  "approach_id": "exact-point-count-or-equivariant-stratification",
+  "argument_markdown": "## Argument (approach: exact point-count / equivariant stratification)\n\n### 0. Target and conventions\n\nFix the stable pair `(g,n)=(6,6)`. Write `M=M_{6,6}` and `d=dim M=3\u00b76-3+6=21`. By the packet and `FND-0001`, the open induction input is\n\n```text\nW_{-16} H^{BM}_{16}(M_{6,6})  \u2245  W_{26} H^{26}(M_{6,6})(21),\n```\n\nwith expected Borel\u2013Moore Tate type `Q(8)`. Equivalently, the untwisted ordinary pure-weight group `W_{26} H^{26}(M_{6,6})` is expected of type `Q(-13)` (Chow codimension `d-8=13`). We attempt only this pure-weight Tate statement for the open input, via an `S_6`-equivariant stratification compatible with the forgetful map; we do **not** claim CKgP for `n=6`.\n\nBy `THM-0004`, the degree-`16` low-homology induction requires an open base case precisely when `n\u22652` and `k\u22652g-2+n`. Here `2g-2+n=16`, so `(6,6)` is a genuine base case at `k=16`.\n\nBy `THM-0005`, `c(6)=5`, so `M_{6,5}` has CKgP and tautological Chow ring, while `M_{6,6}` lies exactly one marking beyond the published range.\n\n### 1. Forgetful fibration and equivariant stratification\n\nLet `\u03c0: M_{6,6} \u2192 M_{6,5}` be the forgetful morphism of smooth Deligne\u2013Mumford stacks (forget the last mark). Then:\n\n- `\u03c0` is smooth and surjective of relative dimension `1`;\n- the fibre over `[C;x_1,\u2026,x_5]` is the noncompact curve `F=C\u2216{x_1,\u2026,x_5}`;\n- `H^0(F;Q)\u2245Q`, `H^1(F;Q)\u2245Q^{2g+4}=Q^{16}`, and `H^{q}(F;Q)=0` for `q\u22652`.\n\nThus the higher direct images are concentrated in degrees `0` and `1`:\n\n- `R^0 \u03c0_* Q \u2245 Q` (constant);\n- `L := R^1 \u03c0_* Q` is a local system of rank `16` on `M_{6,5}` (stalkwise `H^1(C\u2216{x_1,\u2026,x_5})`).\n\nThe symmetric group `S_5` acts on the base `M_{6,5}` by permuting marks, and `S_6` acts on the total space. The local system `L` is `S_5`-equivariant. We work throughout with rational coefficients and mixed Hodge / weight structures on (orbifold) cohomology of smooth DM stacks over `C`.\n\n**Stratification used.** Refine the base by the classical gonality / Brill\u2013Noether stratification of genus-`6` curves, pulled back to pointed moduli:\n\n```text\nM_{6,5} = U \u2294 T \u2294 H \u2294 (lower BN loci),\n```\n\nwhere (on coarse underlying types, up to finite gerbe issues that do not affect rational cohomology):\n\n- `H` is the hyperelliptic locus (gonality `2`);\n- `T` is the strictly trigonal locus (gonality `3`);\n- `U` is the open locus of curves of gonality `\u22654` (Brill\u2013Noether general type for `g=6`);\n- residual closed loci of higher Brill\u2013Noether specialty have strictly smaller dimension and will be absorbed into the inductive filtration below.\n\nPulling back along `\u03c0` gives an `S_6`-equivariant stratification of `M_{6,6}` by the same combinatorial types of the underlying unmarked curve, with fibres the corresponding five-punctured curves. This is the equivariant stratification underlying the computation.\n\n### 2. Leray filtration in ordinary degree 26\n\nThe Leray spectral sequence for `\u03c0` reads\n\n```text\nE_2^{p,q} = H^p(M_{6,5}; R^q \u03c0_* Q)  \u21d2  H^{p+q}(M_{6,6}),\n```\n\nwith only `q\u2208{0,1}` nonzero. In total degree `26` the abutment filtration therefore has graded pieces subquotients of\n\n```text\nE_2^{26,0} = H^{26}(M_{6,5}; Q),    E_2^{25,1} = H^{25}(M_{6,5}; L).\n```\n\nSince `M_{6,6}` is smooth, ordinary cohomology `H^{26}(M_{6,6})` carries a mixed Hodge structure with weights `\u226526`, and the pure piece of interest is the lowest weight graded\n\n```text\nGr^W_{26} H^{26}(M_{6,6}) = W_{26} H^{26}(M_{6,6}).\n```\n\nThe Leray filtration is compatible with weights (smooth morphism of smooth DM stacks). Consequently `W_{26} H^{26}(M_{6,6})` is filtered with graded pieces injecting into / subquotienting pure-weight pieces\n\n```text\nW_{26} H^{26}(M_{6,5}; Q)     and     W_{26} H^{25}(M_{6,5}; L)\n```\n\n(up to the standard weight shift conventions on the local system `L`, whose stalks are pure of weight `1` as `H^1` of a smooth curve with punctures; after accounting for that shift one compares `W_{25} H^{25}(M_{6,5}; L)` against the Tate expectation\u2014see Gap G2).\n\n### 3. Base contribution from `M_{6,5}` is Tate\n\n**Claim (base Tate input).** By `THM-0005`, `M_{6,5}` has CKgP. Combined with the pure-weight algebraicity package recorded in `THM-0005` / `SRC-0002` Proposition 4.5, every pure-weight graded piece of the cohomology of `M_{6,5}` (in particular `W_{26} H^{26}(M_{6,5})`) is a direct sum of Tate structures `Q(-m)`.\n\nMoreover, under the low-homology / pure-weight calculus of `THM-0002`\u2013`THM-0003`, contributions coming from boundary strata of the compactification of `M_{6,5}` that could feed the open pure-weight quotient in the relevant range are already known to be Tate through the published induction up to degree `14` on compact moduli, and CKgP supplies algebraicity of the remaining pure-weight open input for `n=5`.\n\nThus the graded piece of `W_{26} H^{26}(M_{6,6})` arising from `E_2^{26,0}` is a Tate sum of copies of `Q(-13)` after the global Poincar\u00e9 identification of the packet (or `0`). This summand does **not** obstruct the expected type.\n\n### 4. What an exact point-count would give \u2014 and what it would not\n\nWrite `N(q)=#|M_{6,6}(F_q)|` for the stacky point count (automorphism-weighted). An exact closed formula expressing `N(q)` as a polynomial in `q` with integer coefficients, or more generally as an integer linear combination of point counts of Tate motives `q^m`, would determine the **semisimplification** of the compactly supported cohomology motive of `M_{6,6}` (alternating sum of Frobenius traces).\n\nEquivariantly, the same applies to the `S_6`-character-valued count.\n\n**Hard stop (explicit non-claim).** Even a complete polynomial point count, or a complete `S_6`-equivariant Euler characteristic computation for every stratum of \u00a71, yields only:\n\n1. the virtual motive / Grothendieck-ring class of `M_{6,6}`;\n2. after semisimplification, the multiset of Frobenius eigenvalues on `\u2295_k H_c^k`.\n\nIt does **not**, by itself, identify the pure weight piece `W_{-16} H^{BM}_{16}` inside the mixed structure, nor prove that this piece is pure Tate of type `Q(8)` rather than a nontrivial extension or a non-Tate simple of the same weight. By the execution contract we therefore refuse to upgrade any arithmetic prediction, any Euler-characteristic matching, or any semisimplification of `L`-cohomology to a completeness claim.\n\nNo exact closed point-count formula for `#M_{6,6}(F_q)`, and no complete `S_6`-equivariant stratification table for the pure weight graded of `H^{25}(M_{6,5};L)`, is supplied in the task corpus. We do not invent one.\n\n### 5. Local-system contribution: reduction, not evaluation\n\nThe remaining graded piece is controlled by\n\n```text\nW_\u2022 H^{25}(M_{6,5}; L),    L = R^1 \u03c0_* Q.\n```\n\n**Geometric description of `L`.** For `[C;x_1,\u2026,x_5]\u2208M_{6,5}`, the stalk sits in the exact sequence of mixed Hodge structures\n\n```text\n0 \u2192 H^1(C;Q) \u2192 H^1(C\u2216{x_1,\u2026,x_5};Q) \u2192 Ker(\u2295_{i=1}^5 Q(-1) \u2192 Q(-1)) \u2192 0,\n```\n\ni.e. `L` is an extension of a punctual Tate local system of rank `4` (weight `2` after the usual Tate twist conventions on residue maps) by the geometric monodromy local system `V:=R^1 f_* Q` of the universal curve over `M_{6,5}` (rank `12`, weight `1`). Equivariantly with respect to `S_5`, the residue quotient is the augmentation submodule of the permutation representation minus the diagonal.\n\n**Stratified attack on `H^*(M_{6,5};L)`.** Restrict `L` to the gonality strata of \u00a71.\n\n- On the hyperelliptic locus `H\u2282M_{6,5}`, the monodromy of `V` factors through the hyperelliptic mapping class group; the pure-weight cohomology of hyperelliptic local systems in this range is known to be Tate by the genus-`2` and hyperelliptic reductions already used for low-degree tautologicality (`THM-0006`, `THM-0007` supply the compact genus-`\u22642` endpoints; the hyperelliptic open contributes through a finite quotient of a configuration space of branch points on `P^1`). After a standard weight spectral sequence along the stratification, the contribution of `H` to `W_{26} H^{25}(M_{6,5};L)` is expected Tate \u2014 **but** the precise vanishing/Tate identification in degree `25` is not re-proved here from primary sources in the packet (Gap G1).\n- On the trigonal locus `T`, monodromy factors through a Hurwitz space of degree-`3` covers of `P^1`. Configuration-space cohomology of branch points again yields only Tate pure-weight pieces in the range needed for total weight `26` on the total space, **conditional** on the same configuration-space input (Gap G1).\n- On the open Brill\u2013Noether-general locus `U`, the geometric monodromy of `V` on `H^1(C)` is the full symplectic group `Sp(12,Z)` (standard for `g=6` on a Zariski-open of `M_6`, and the five markings do not reduce the connected monodromy of the unpunctured local system). Cohomology of finite-index symplectic local systems on open moduli of curves is **not** known to be pure Tate in the degree/weight window `(p,w)=(25,26)` relevant here.\n\n**Gap G2 (main obstruction).** There is no supplied computation \u2014 point-count, representation-theoretic, or Gysin \u2014 that evaluates\n\n```text\nGr^W_{26} H^{25}(U; L|_U)\n```\n\nas a sum of Tate structures `Q(-13)` (after the fibrewise weight of `L`). In particular:\n\n- the symplectic local-system cohomology may a priori contain non-Tate simple factors (e.g. motives attached to Siegel modular forms of genus `6` / level structures cut out by markings);\n- even if the Euler characteristic of `U` with coefficients in `L` were known and matched a Tate virtual class, that would be only a semisimplification constraint (forbidden as a completeness argument).\n\n### 6. Assembly and Poincar\u00e9 dual form\n\nGranting Gaps G1\u2013G2 as open, the Leray filtration gives only the conditional statement:\n\n> If `W_{26} H^{25}(M_{6,5};L)` is a direct sum of Tate structures of the expected type, then so is `W_{26} H^{26}(M_{6,6})`, hence by `FND-0001` the Borel\u2013Moore open input `W_{-16} H^{BM}_{16}(M_{6,6})` is a direct sum of `Q(8)`.\n\nThe base summand from `H^{26}(M_{6,5})` is Tate by CKgP (`THM-0005`). The local-system summand is not evaluated. Therefore the equivariant-stratification approach **reduces** the missing pointed case `(6,6)` to a single pure-weight local-system computation on `M_{6,5}`, but does **not** discharge it.\n\nNo non-Tate summand is exhibited, and no complete Tate identification is proved. The compactified statement `H^{16}(Mbar_{6,6};Q)\u2245\u2295 Q(-8)` (`CONJ-0001` for this pair) remains open, consistent with `OBS-0001`.\n\n### 7. Explicit non-claims\n\n- We do not claim CKgP, tautological generation, or algebraicity of the full Chow ring of `M_{6,6}`.\n- We do not claim that a point-count polynomial exists in the literature and settles the weight piece.\n- We do not claim perfectness of any tautological pairing on codimension-`13` classes.\n- We do not claim vanishing of `W_{-16} H^{BM}_{16}(M_{6,6})`; only its expected Tate type is under discussion, and even that is not proved.\n\n### Conclusion\n\nThe forgetful equivariant stratification yields a clean reduction\n\n```text\nW_{26} H^{26}(M_{6,6})\n  \u0589 / \u21aa  graded pieces in  { W_{26} H^{26}(M_{6,5}) , W_\u2022 H^{25}(M_{6,5}; L) },\n```\n\nwith the first piece Tate by published CKgP for `(6,5)`. The second piece \u2014 pure-weight cohomology of the rank-`16` punctured-curve local system on `M_{6,5}`, especially over the Brill\u2013Noether-general open \u2014 is not computed. The open input for `(g,n)=(6,6)` therefore remains unresolved under this approach.",
+  "assumptions": [
+    "Rational coefficients and standard mixed Hodge structures on cohomology of smooth DM stacks over C as in THM-0001.",
+    "Weight-exactness of the Leray filtration for the smooth forgetful map \u03c0 (standard for smooth morphisms of smooth varieties/stacks).",
+    "Geometric monodromy of the unpunctured genus-6 local system V is the full symplectic group on a Zariski-open of M_6 (standard; used only to flag that non-Tate automorphic contributions are not a priori excluded on U).",
+    "Finite gerbe/stacky automorphism issues do not change rational cohomology or pure-weight graded pieces relative to coarse moduli."
+  ],
+  "claims": [
+    {
+      "id": "A1",
+      "statement": "For (g,n)=(6,6), d=21 and the open induction input is W_{-16} H^{BM}_{16}(M_{6,6}) \u2245 W_{26} H^{26}(M_{6,6})(21), with expected types Q(8) and (untwisted ordinary) Q(-13) respectively; Chow codimension of the ordinary class is 13.",
+      "status": "proved"
+    },
+    {
+      "id": "A2",
+      "statement": "The pair (6,6) is a genuine open base case for the degree-16 low-homology induction: n=6\u22652 and 16=2g-2+n.",
+      "status": "proved"
+    },
+    {
+      "id": "A3",
+      "statement": "The forgetful map \u03c0: M_{6,6}\u2192M_{6,5} is smooth of relative dimension 1 with R^q \u03c0_* Q vanishing for q\u22652, R^0 \u03c0_* Q \u2245 Q, and L:=R^1 \u03c0_* Q a rank-16 local system, yielding a two-row Leray spectral sequence abutting to H^*(M_{6,6}).",
+      "status": "proved"
+    },
+    {
+      "id": "A4",
+      "statement": "In total ordinary degree 26, W_{26} H^{26}(M_{6,6}) is filtered with graded pieces controlled by pure-weight pieces of H^{26}(M_{6,5};Q) and H^{25}(M_{6,5};L), compatibly with the mixed Hodge / weight structure.",
+      "status": "proved"
+    },
+    {
+      "id": "A5",
+      "statement": "By published CKgP for n\u2264c(6)=5, the pure-weight group W_{26} H^{26}(M_{6,5}) is a direct sum of Tate structures; its contribution to W_{26} H^{26}(M_{6,6}) does not obstruct type Q(-13).",
+      "status": "proved"
+    },
+    {
+      "id": "A6",
+      "statement": "On hyperelliptic and strictly trigonal strata of M_{6,5}, the restriction of L has monodromy factoring through Hurwitz/configuration data whose pure-weight cohomology in the window feeding W_{26} H^{26}(M_{6,6}) is Tate.",
+      "status": "gap"
+    },
+    {
+      "id": "A7",
+      "statement": "The pure-weight graded Gr^W_{26} H^{25}(U; L|_U) on the Brill\u2013Noether-general open U\u2282M_{6,5} is a direct sum of Tate structures of the type required to force W_{26} H^{26}(M_{6,6}) \u2245 \u2295 Q(-13).",
+      "status": "gap"
+    },
+    {
+      "id": "A8",
+      "statement": "W_{-16} H^{BM}_{16}(M_{6,6}) is a direct sum of copies of Q(8).",
+      "status": "gap"
+    },
+    {
+      "id": "A9",
+      "statement": "An exact (S_6-equivariant) point count of M_{6,6} over finite fields, or an equivariant Euler characteristic matching a Tate virtual class, would by itself prove the pure-weight Tate identification of the open input.",
+      "status": "refuted"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "engine": "grok",
+  "gap_markers": [
+    "G1: Tate identification of pure-weight cohomology of L on hyperelliptic and trigonal strata of M_{6,5} in the degree/weight window feeding W_26 H^{26}(M_{6,6}) is not re-derived from primary packet sources.",
+    "G2 (main): No evaluation of Gr^W_26 H^{25}(U; L|_U) on the Brill\u2013Noether-general open; symplectic local-system cohomology may contain non-Tate factors.",
+    "G3: No exact point-count polynomial or complete S_6-equivariant pure-weight stratification table for M_{6,6} is available in the supplied corpus; none is invented.",
+    "G4: Conditional reduction (A5 + Tate of H^{25}(M_{6,5};L) \u21d2 A8) is not discharged; A8 remains unproved.",
+    "G5: Completeness is not claimed from semisimplification, arithmetic prediction, Euler-characteristic matching, or any tautological pairing."
+  ],
+  "id": "ATT-0011",
+  "packet_id": "CASE-6-6-v2",
+  "packet_path": "proof/packets/generated/CASE-6-6-v2.md",
+  "packet_sha256": "e6758c6886696d915814dc718f28af0e6b44088916881055c88a6276f55af88e",
+  "schema_version": 2,
+  "source_claim_ids": [
+    "RED-0001",
+    "FND-0001",
+    "THM-0001",
+    "THM-0002",
+    "THM-0003",
+    "THM-0004",
+    "THM-0005",
+    "THM-0006",
+    "THM-0007",
+    "OBS-0001",
+    "CONJ-0001"
+  ],
+  "status": "proposed",
+  "summary": "Equivariant forgetful stratification reduces W_26 H^26(M_{6,6}) to base Tate data on M_{6,5} plus pure-weight cohomology of the rank-16 local system L=R^1 \u03c0_* Q; the local-system summand is not evaluated, so the Tate statement for the open input remains incomplete.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-M-0013"
+}

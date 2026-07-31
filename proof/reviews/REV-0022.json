@@ -1,0 +1,109 @@
+{
+  "attempt_id": "ATT-0015",
+  "checked_claims": [
+    {
+      "claim_id": "A1",
+      "comment": "The packet-supported Borel-Moore quotient and the identification W_{-16}H^{BM}_{16}(U) = W_{24}H^{24}(U)(20) have the stated degree and twist. However, the asserted equivalent formulation using Gr^W_{24}H_c^{24}(U) is not equivalent: duality pairs H^{24}(U) with H_c^{16}(U), with the dimension-20 twist.",
+      "outcome": "partially_confirmed"
+    },
+    {
+      "claim_id": "A2",
+      "comment": "For the displayed indexing E_1^{-p,q}=H^{q-2p}(D^{(p)})(-p), d_1 has bidegree (1,0). Thus the one-edge term E_1^{-1,24}=H^{22}(D^{(1)})(-1) maps into E_1^{0,24}=H^{24}(X). There is no outgoing p=0 differential to a one-edge term. Consequently E_2^{0,24}, and hence E_infinity^{0,24} after the stated E_2 degeneration, is the cokernel of the incoming Gysin map, not the claimed kernel of a map from H^{24}(X) to the boundary.",
+      "outcome": "refuted"
+    },
+    {
+      "claim_id": "A3",
+      "comment": "The attempt gives range heuristics but no exhaustive stable-graph and decoration check. It also switches between open Borel-Moore vertex decorations and compactified vertex cohomology without constructing the intervening filtration or checking every Poincare, Kunneth, Gysin, degree, and Tate shift. The packet theorems therefore do not by themselves prove the universal positive-edge assertion as written.",
+      "outcome": "not_established"
+    },
+    {
+      "claim_id": "A4",
+      "comment": "This depends on A3 and on an unspecified decorated graph spectral sequence. The formula uses Aut(Gamma)-coinvariants, whereas quotient-stack cohomology naturally gives invariants. Over Q averaging can identify invariants and coinvariants for a finite group, but the attempt does not specify the canonical transfer, orientation/sign representation, or compatibility with graph differentials.",
+      "outcome": "not_established"
+    },
+    {
+      "claim_id": "A5",
+      "comment": "No differential computation is supplied. Deligne's displayed ordinary-cohomology weight spectral sequence is stated to degenerate at E_2, but that does not compute d_1, and no corresponding degeneration theorem is established for the separately asserted decorated graph complex.",
+      "outcome": "gap_correctly_acknowledged"
+    },
+    {
+      "claim_id": "A6",
+      "comment": "The r=0 term is the target itself, so the proposed graph-complex reduction is circular until that term is independently removed or computed. The global top-weight dual-complex theorem does not apply to weight 24 when 2d=40.",
+      "outcome": "gap_correctly_acknowledged"
+    },
+    {
+      "claim_id": "A7",
+      "comment": "The attempt explicitly leaves the target unresolved and does not claim completeness. It does not improperly promote the conjectural degree-16 prediction to a theorem or upgrade Tate type to algebraic or tautological generation.",
+      "outcome": "not_proved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "weight-spectral-sequence-or-graph-complex"
+      ],
+      "key": "weight-ss-gysin-direction-reversed",
+      "kind": "mathematical_error",
+      "statement": "In the stated Deligne indexing, the codimension-one Gysin differential enters E_1^{0,24}=H^{24}(X), making the relevant graded piece a cokernel; the attempt instead reverses the arrow and calls it a kernel.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "weight-spectral-sequence-or-graph-complex"
+      ],
+      "key": "compact-support-duality-degree-16-not-24",
+      "kind": "degree_twist_error",
+      "statement": "For a smooth complex stack of dimension 20, the dual compact-support degree corresponding to H^{24}(U) is 16, not 24; therefore Gr^W_{24}H_c^{24}(U) is not an equivalent reformulation of the stated Borel-Moore target.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "weight-spectral-sequence-or-graph-complex"
+      ],
+      "key": "decorated-graph-page-not-constructed",
+      "kind": "justification_gap",
+      "statement": "The asserted decorated graph spectral sequence, its degree formula, edge twists, automorphism action including orientation signs, and its relation to the Deligne spectral sequence are not constructed; consequently the claim that every positive-edge contribution is Tate is not established by the supplied range discussion.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0022",
+  "independent": true,
+  "packet_id": "CASE-5-8-v2",
+  "packet_sha256": "93405e895723720d9a4ff947646a743224b38a247b0e6c9ca363f1aac83e815c",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0015-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse space: quotient-stack strata require invariants; the attempt writes coinvariants without transfer or sign conventions",
+    "rational versus integral coefficients: the argument is only over Q; finite-group averaging would not justify an integral analogue",
+    "cohomology versus Borel-Moore homology degree: BM degree 16 corresponds to ordinary degree 24, while the dual compact-support degree is 16",
+    "Poincare duality and Tate twists: the packet twist (20) is respected in the BM-to-ordinary formula but not in the claimed H_c^24 equivalence",
+    "Gysin and Kunneth shifts: the displayed d_1 Gysin arrow is reversed, and the vertex shift budget is asserted rather than derived",
+    "degeneration and spectral-sequence differentials: E_2 degeneration does not remove the need to compute d_1; no degeneration result is supplied for the graph complex",
+    "invariants versus coinvariants under graph automorphisms: harmless only after a rational transfer with all orientation actions included, which is omitted",
+    "semisimplification versus actual Hodge-structure isomorphism: no semisimplification establishes the target; pure rational Hodge structures would be semisimple only after the correct graded piece is obtained",
+    "predicted motives used as unconditional theorems: the attempt correctly treats the target as open and does not invoke the prediction as proof",
+    "pure Tate versus algebraic or tautological generation: the attempt notes that Tate type alone is the target and does not claim the missing CKgP statement",
+    "omitted stable pairs: no exhaustive enumeration of stable graphs, stable mark distributions, and admissible decorations is provided"
+  ],
+  "strongest_attack": "The spectral-sequence differential is reversed at the load-bearing step. With the attempt's own indexing, the one-edge Gysin differential is H^{22}(D^{(1)})(-1) -> H^{24}(X), so Gr^W_{24}H^{24}(U) is obtained as its cokernel, not as a kernel of H^{24}(X) -> H^{22}(D^{(1)})(-1). The accompanying replacement by Gr^W_{24}H_c^{24}(U) also has the wrong compact-support degree; Poincare duality uses H_c^{16}(U). Thus Claims A1-A2 do not consistently reconstruct the packet target, even though the attempt independently acknowledges enough residual gaps to warrant an incomplete verdict.",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "verdict": "incomplete"
+}

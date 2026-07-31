@@ -1,0 +1,136 @@
+{
+  "attempt_id": "ATT-0009",
+  "checked_claims": [
+    {
+      "attacks_applied": [
+        "cohomology versus Borel-Moore degree",
+        "Poincare duality and Tate twists",
+        "stack versus coarse with Q coefficients"
+      ],
+      "attempt_status": "proved",
+      "claim_id": "A1",
+      "note": "For d=18, FND-0001/RED-0001 give W_{-16}H^{BM}_{16} \u2245 W_{20}H^{20}(18); untwisted ordinary type Q(-10) and BM type Q(8) match Q(-10)(18)\u2245Q(8). No ordinary H^{16} of the open stack is required. Rational coefficients make stack/coarse agreement acceptable for this bookkeeping.",
+      "outcome": "holds"
+    },
+    {
+      "attacks_applied": [
+        "conditional prediction versus theorem"
+      ],
+      "attempt_status": "proved",
+      "claim_id": "A2",
+      "note": "THM-0005 supplies c(3)=11 as an established bound; n=12 is outside the published CKgP range. CONJ-0001 is not used as a theorem.",
+      "outcome": "holds"
+    },
+    {
+      "attacks_applied": [
+        "invariants versus coinvariants under graph/ordering automorphisms",
+        "Gysin and Kunneth shifts"
+      ],
+      "attempt_status": "proved",
+      "claim_id": "A3",
+      "note": "Finite etale ordering Y\u2192X controls only the permutation-invariant summand via pullback/transfer; packet FND-0002 corroborates that permanence does not upgrade unordered incidence CKgP to the ordered cover. This blocks automatic ascent but does not by itself exhibit a non-Tate summand.",
+      "outcome": "holds_as_negative_obstruction"
+    },
+    {
+      "attacks_applied": [
+        "omitted equivariant stratification",
+        "invariants versus coinvariants"
+      ],
+      "attempt_status": "unproved",
+      "claim_id": "A4",
+      "note": "No equivariant CKgP stratification of the ordered twelve-point incidence locus, and no vanishing of nontrivial S_{12}-isotypics in the target bidegree, appears in the packet or attempt.",
+      "outcome": "gap_confirmed"
+    },
+    {
+      "attacks_applied": [
+        "pure Tate silently upgraded to algebraic/tautological generation",
+        "semisimplification versus actual Hodge isomorphism",
+        "predicted motives used as theorems"
+      ],
+      "attempt_status": "unproved",
+      "claim_id": "A5",
+      "note": "Target pure-Tate statement remains open. Attempt correctly does not upgrade a missing CKgP step into Tate type, algebraicity, or tautological generation, and does not treat CONJ-0001 as unconditional.",
+      "outcome": "gap_confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "extend-ckgp-or-gonality-stratification"
+      ],
+      "key": "ckgp-no-ascent-finite-etale-ordering",
+      "kind": "obstruction",
+      "statement": "CKgP (and likewise full rational Chow generation) need not ascend along the finite etale S_n-ordering cover of an unordered incidence stack; transfer/pullback controls only the invariant summand, leaving nontrivial isotypics unchecked."
+    },
+    {
+      "impacts_approach_ids": [
+        "extend-ckgp-or-gonality-stratification"
+      ],
+      "key": "m312-degree-twist-bookkeeping",
+      "kind": "bookkeeping",
+      "statement": "For (g,n)=(3,12) with d=18, the open input is W_{-16}H^{BM}_{16}, dual to W_{20}H^{20}(18); expected types are BM Q(8) and untwisted ordinary Q(-10) at Chow codimension 10. Ordinary H^{16} of the open stack is not the inductive input."
+    },
+    {
+      "impacts_approach_ids": [
+        "extend-ckgp-or-gonality-stratification"
+      ],
+      "key": "genus3-ckgp-bound-c3-equals-11",
+      "kind": "scope-limit",
+      "statement": "Published CKgP/tautological-Chow coverage in genus 3 stops at n\u226411 (c(3)=11); any n=12 argument requires new geometric input beyond THM-0005."
+    },
+    {
+      "impacts_approach_ids": [
+        "extend-ckgp-or-gonality-stratification"
+      ],
+      "key": "tate-without-ckgp-boundary",
+      "kind": "method-boundary",
+      "statement": "Failure of a CKgP-extension route leaves the pure-Tate claim for W_{-16}H^{BM}_{16}(M_{3,12}) unproved but does not by itself produce a non-Tate summand; conversely, a pure-Tate proof would not automatically yield CKgP or tautological generation."
+    },
+    {
+      "impacts_approach_ids": [
+        "extend-ckgp-or-gonality-stratification"
+      ],
+      "key": "no-ordered-incidence-stratification-supplied",
+      "kind": "gap",
+      "statement": "The packet and attempt supply neither an equivariant CKgP stratification of the ordered twelve-point cubic incidence locus nor a computation showing vanishing of non-invariant contributions in the target weight/degree."
+    }
+  ],
+  "id": "REV-0016",
+  "independent": true,
+  "packet_id": "CASE-3-12-v2",
+  "packet_sha256": "6d42c3196c34c652c2e2e34d3f8a7dbcaf1654d8f59adba388806c101e5b2415",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0009-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse space: attempt works with the moduli stack and Q coefficients; no illicit coarse-space substitution detected in degree bookkeeping",
+    "cohomology versus homology degree: correctly targets BM degree 16 / ordinary degree 20, not ordinary H^{16}",
+    "weight and Tate twist: W_{-16} with Q(8) matches W_{20}H^{20}(18) with untwisted Q(-10); Poincare twist d=18 checked",
+    "Gysin and Kunneth shifts: not used constructively; gap is permanence along finite etale ordering rather than a mis-shifted Gysin",
+    "invariants versus coinvariants: load-bearing correct obstruction for unordered-to-ordered ascent",
+    "semisimplification versus Hodge isomorphism: no semisimplification claimed",
+    "conditional prediction versus theorem: CONJ-0001 kept conjectural; THM-0005 used as established range",
+    "pure Tate versus algebraic/tautological generation: execution boundary respected; no silent upgrade",
+    "omitted stable pairs: attempt scoped to (3,12) only, matching this packet; other RED-0001 pairs untouched"
+  ],
+  "strongest_attack": "Ordering-cover isotypics: even if an unordered twelve-point incidence stack had CKgP, finite-etale permanence yields only S_{12}-invariant control; nontrivial isotypic summands of the ordered cover in the exact group W_{-16}H^{BM}_{16}(M_{3,12}) \u2245 W_{20}H^{20}(M_{3,12})(18) are neither computed nor shown to be Tate, and no equivariant CKgP/localization stratification of the ordered incidence locus is supplied\u2014so this approach cannot establish the target.",
+  "target": {
+    "chow_codimension": 10,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 18,
+    "g": 3,
+    "n": 12,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 20,
+    "ordinary_tate_type": "Q(-10)",
+    "ordinary_weight": 20,
+    "poincare_twist": 18
+  },
+  "verdict": "incomplete"
+}

@@ -1,0 +1,75 @@
+{
+  "argv": [
+    "grok",
+    "-p",
+    "<prompt-sha256:602c9a26dad7caba08cc0cdca274341db8bd97c4d86fd8bd284316868968a37a>",
+    "--output-format",
+    "streaming-json",
+    "--max-turns",
+    "2",
+    "--permission-mode",
+    "dontAsk",
+    "--always-approve",
+    "--tools",
+    "",
+    "--disallowed-tools",
+    "run_terminal_command,write,web_fetch,web_search,open_page",
+    "--disable-web-search",
+    "--model",
+    "grok-4.5"
+  ],
+  "elapsed_seconds": 5.454,
+  "executed_at": "2026-07-31T06:22:17.139169+00:00",
+  "model": "grok-4.5",
+  "probe": "basic",
+  "prompt_sha256": "602c9a26dad7caba08cc0cdca274341db8bd97c4d86fd8bd284316868968a37a",
+  "returncode": 0,
+  "schema_version": 1,
+  "stderr_path": "CLI_test/results/basic.stderr.txt",
+  "stderr_sha256": "8e0c39aef2104847cd6913fadc6f926ddc983e6f8333c3e52408f86b8516b679",
+  "stdout_path": "CLI_test/results/basic.stdout.jsonl",
+  "stdout_sha256": "1d18aa7bc0b170daad3b597912d4d68fe10688dc2f4583e476c39d4ce61386aa",
+  "summary": {
+    "event_key_shapes": {
+      "data,type": 44,
+      "modelUsage,num_turns,requestId,sessionId,stopReason,total_cost_usd,total_cost_usd_ticks,type,usage": 1
+    },
+    "event_type_counts": {
+      "end": 1,
+      "text": 21,
+      "thought": 23
+    },
+    "first_event": {
+      "data": "The",
+      "type": "thought"
+    },
+    "invalid_lines": [],
+    "last_event": {
+      "modelUsage": {
+        "grok-4.5-build": {
+          "cacheReadInputTokens": 3968,
+          "costUSD": 0.0196104,
+          "inputTokens": 8958,
+          "modelCalls": 1,
+          "outputTokens": 84
+        }
+      },
+      "num_turns": 1,
+      "requestId": "93eb864d-bc01-44b0-87df-fca59d5a952e",
+      "sessionId": "019fb6d6-692d-7493-9087-5ff935ae0a24",
+      "stopReason": "EndTurn",
+      "total_cost_usd": 0.0196104,
+      "total_cost_usd_ticks": 196104000,
+      "type": "end",
+      "usage": {
+        "cache_read_input_tokens": 3968,
+        "input_tokens": 8958,
+        "output_tokens": 84,
+        "reasoning_tokens": 59,
+        "total_tokens": 13010
+      }
+    },
+    "line_count": 45,
+    "parsed_event_count": 45
+  }
+}

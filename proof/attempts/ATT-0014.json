@@ -1,0 +1,106 @@
+{
+  "approach_id": "weight-spectral-sequence-or-graph-complex",
+  "argument_markdown": "## Setup and exact target\n\nFix the stable pair `(g,n)=(6,6)`. Then\n\n```text\nd = 3g \u2212 3 + n = 21.\n```\n\nBy the revision-2 packet dictionary and `FND-0001`, the unresolved open input for the degree-16 pure-Tate induction at this pair is the pure-weight Borel\u2013Moore group\n\n```text\nW_{-16} H^{BM}_{16}(M_{6,6}) \u2245 W_{26} H^{26}(M_{6,6})(21),\n```\n\nexpected of Tate type `Q(8)`. Untwisted, the ordinary pure piece `W_{26} H^{26}(M_{6,6})` is expected of type `Q(\u221213)`, corresponding to Chow codimension `d \u2212 8 = 13`.\n\nBy `THM-0001`, `H^k(Mbar_{6,6})` is pure of weight `k`. By `THM-0003`, the boundary long exact sequence yields a right-exact sequence\n\n```text\nH_{16}(\u2202Mbar_{6,6}) \u2192 H_{16}(Mbar_{6,6}) \u2192 W_{-16} H^{BM}_{16}(M_{6,6}) \u2192 0.\n```\n\nThus the open pure-weight quotient is precisely the cokernel of boundary homology into compactified homology. The compactified pure-Tate conjecture `CONJ-0001` at this pair is equivalent, after the induction package of `RED-0001`, to showing that this cokernel is a direct sum of `Q(8)`.\n\n## Why this pair is a genuine open base case\n\nBy `THM-0004`, in the low-homology induction at degree `k=16`, an open-stratum base case occurs for `n \u2265 2` precisely when\n\n```text\nk \u2265 2g \u2212 2 + n.\n```\n\nHere `2g \u2212 2 + n = 12 \u2212 2 + 6 = 16`, so equality holds: `(6,6)` is an open base case and cannot be absorbed into vanishing ranges.\n\nBy `THM-0005`, the published CKgP bound is `c(6)=5`. Hence `M_{6,6}` lies strictly outside the range where pure-weight cohomology is known to be algebraic/tautological by the CKgP route of `SRC-0002`, Proposition 4.5. The present attempt therefore does **not** extend CKgP; it attacks only the pure-weight Tate type via the weight spectral sequence / decorated graph complex.\n\n## Weight spectral sequence from the normal-crossings compactification\n\nWrite `X = Mbar_{6,6}`, `U = M_{6,6}`, and `D = X \\ U` for the boundary divisor (normal crossings as a Deligne\u2013Mumford stack). Deligne\u2019s weight spectral sequence for the smooth pair `(X,D)` computes the mixed Hodge structure on the cohomology of `U` (and dually on Borel\u2013Moore / compactly supported cohomology) from the cohomology of the strata\n\n```text\nD^{(p)} = disjoint union of codimension-p boundary strata,\n```\n\nwith differentials given by Gysin/residue maps along inclusions of deeper strata.\n\nBecause `U` is smooth of dimension `21`, ordinary cohomology `H^{26}(U)` has weights `\u2265 26`, so\n\n```text\nW_{26} H^{26}(U) = gr^W_{26} H^{26}(U).\n```\n\nUnder the Poincar\u00e9 duality identification of the packet, this graded piece is the ordinary realization of the BM target `W_{-16} H^{BM}_{16}(U)`. On the spectral-sequence page, only those `E_1` summands whose internal cohomological degree and Tate twist sum to weight `26` in total degree `26` (equivalently, weight `\u221216` in BM degree `16`) can contribute to this graded piece.\n\nConcretely, boundary strata are indexed by stable dual graphs `\u0393` of type `(6,6)`:\n\n```text\nM_\u0393 \u2245 (\u220f_{v \u2208 V(\u0393)} M_{g(v), n(v)}) / Aut(\u0393),\n```\n\nwith gluing maps from the corresponding compactified products into `D \u2282 X`. Separating nodes give products of two lower moduli stacks; a non-separating node gives a single factor of type `(5,7)` (genus drop by one, marking increase by two legs at the node).\n\n## Decorated graph complex (Getzler\u2013Kapranov form)\n\nThe same data assemble into the Getzler\u2013Kapranov decorated graph complex computing the associated graded of the weight filtration on `H^\u2022(M_{g,n})` (equivalently on BM/c-support via duality). A generator in graph degree corresponding to a stable graph `\u0393` is an `Aut(\u0393)`-invariant pure tensor\n\n```text\n\u2297_{v \u2208 V(\u0393)} \u03b1_v ,    \u03b1_v \u2208 H^{\u2022}(M_{g(v), n(v)}),\n```\n\nwith edge decorations recording the gluing/residue Tate twists `Q(\u22121)` per node, and with differential the sum of edge contractions and vertex expansions compatible with the modular operad structure.\n\n**Numerical constraints for the pure corner at `(6,6)`.** For a decorated graph to contribute to `gr^W_{26} H^{26}(M_{6,6})` (equivalently to `W_{-16} H^{BM}_{16}`), one must have:\n\n1. `\u2211_v g(v) + h_1(\u0393) = 6` and total legs `n = 6`;\n2. stability at every vertex;\n3. weight additivity\n\n```text\n\u2211_v wt(\u03b1_v) + 2\u00b7(# edges contributing Gysin twists) = 26\n```\n\nin ordinary cohomological degree `26` after accounting for the dimension shifts on strata;\n4. after Poincar\u00e9 twist by `(21)`, the resulting pure Hodge structure must be compared to `Q(8)`.\n\nTwo regimes appear:\n\n- **Top-weight / undecorated regime.** If every vertex is genus `0` and every decoration `\u03b1_v` is a unit class, the complex reduces to the commutative graph complex / tropical moduli complex of Chan\u2013Galatius\u2013Payne type. Its cohomology computes top-weight compactly supported graded pieces. Dualizing, this controls a definite corner of the weight filtration, but matching that corner exactly to BM degree `16` / ordinary degree `26` for `(6,6)` is a non-trivial degree check (`GAP-DEGREE-MATCH` below).\n- **Decorated regime.** If some vertex has `g(v) > 0` or a positive-degree decoration, the factor `H^{\u2022}(M_{g(v),n(v)})` must itself be pure Tate in the relevant degree for the tensor product to be Tate. Low-degree Tate input is available from `THM-0002` (compactified even degrees `\u2264 14`), from `THM-0006`\u2013`THM-0007` in genera `1` and `2`, and from CKgP ranges `THM-0005` when `n(v) \u2264 c(g(v))`. Outside those ranges, the decoration may re-introduce an open base case from the finite list in `RED-0001`.\n\n## What can be proved unconditionally from the packet\n\n**Claim A (target identification).** The open input is exactly `W_{-16} H^{BM}_{16}(M_{6,6}) \u2245 W_{26} H^{26}(M_{6,6})(21)`, expected `Q(8)`. This is the packet dictionary plus `FND-0001`.\n\n**Claim B (base-case membership).** `(6,6)` satisfies `k = 2g \u2212 2 + n = 16`, hence is an open base case for the degree-16 induction (`THM-0004`).\n\n**Claim C (CKgP unavailable).** `n = 6 > c(6) = 5`, so the published CKgP algebraicity route does not apply (`THM-0005`).\n\n**Claim D (right-exact reduction).** `W_{-16} H^{BM}_{16}(M_{6,6}) \u2245 coker( H_{16}(\u2202Mbar_{6,6}) \u2192 H_{16}(Mbar_{6,6}) )` as mixed Hodge structures (`THM-0003`).\n\n**Claim E (spectral sequence existence).** The Deligne weight spectral sequence of `(Mbar_{6,6}, \u2202)` and the Getzler\u2013Kapranov decorated graph complex both compute the associated graded of the weight filtration on the cohomology of `M_{6,6}`; the pure piece of interest is an `E_\u221e` subquotient of a finite direct sum of decorated-stratum cohomologies for stable graphs of type `(6,6)`.\n\n**Claim F (boundary strata are products).** Every irreducible boundary stratum is a finite quotient of a product of moduli stacks of strictly simpler stable type (lower total dimension, or lower genus, or a product decomposition). K\u00fcnneth and purity (`THM-0001`) apply on each compactified factor.\n\n## Reduction of the Tate statement to a finite graph-complex computation\n\nCombining D\u2013F, the pure Tate claim\n\n```text\nW_{-16} H^{BM}_{16}(M_{6,6}) \u2245 \u2295 Q(8)\n```\n\nis equivalent to the following finite statement:\n\n> In the weight spectral sequence / decorated graph complex for `(g,n)=(6,6)`, every `E_1` (resp. graph-complex) summand that can contribute to the pure corner of weight `\u221216` in BM degree `16` is itself pure Tate of type `\u2295 Q(8)` after the packet\u2019s Poincar\u00e9 twist, and all differentials in that corner preserve the Tate subcategory and create no non-split exotic extensions in the `E_\u221e` subquotient isomorphic to the BM pure piece.\n\nIf in addition the undecorated top-weight corner is the only surviving corner (i.e. all positively decorated contributions cancel or land in other weights), the claim further reduces to a single graph-complex cohomology group being a direct sum of trivial Hodge structures of the expected Tate type.\n\n## Explicit gaps (no completeness claimed)\n\nThe argument stops short of evaluating that finite complex. The following steps are **not** proved here:\n\n1. **`GAP-DEGREE-MATCH`.** Exact matching of the CGP top-weight degree index to BM degree `16` / ordinary degree `26` for `(6,6)` (including all Tate twists and dimension shifts) is not written out with a complete reference chain inside the supplied packet.\n2. **`GAP-GRAPH-ENUMERATION`.** The finite list of stable graphs `\u0393` of type `(6,6)` whose numerical weight can hit the pure corner is not enumerated, nor are their automorphism groups and orbit counts.\n3. **`GAP-DECORATION-TAUT`.** For decorated vertices with `g(v) > 0`, purity of type of `\u03b1_v` is not checked case-by-case; some decorations may require other open pairs from `RED-0001` (e.g. factors related to `(5,8)`, `(7,4)`, `(8,*)`) and are not discharged inside this single-pair packet.\n4. **`GAP-DIFFERENTIALS`.** Vanishing or Tate-preserving properties of Gysin/residue differentials (edge contraction in the graph complex) on the pure corner are not computed.\n5. **`GAP-EXTENSIONS`.** Even if every graded `E_1` summand is Tate, non-trivial extensions in the mixed Hodge structure could in principle produce non-Tate subquotients only after semisimplification; the packet forbids claiming completeness from a semisimplification. No argument ruling out non-split non-Tate extensions is given.\n6. **`GAP-NO-POINTCOUNT`.** No exact point-count, no equivariant stratification rank computation, and no tautological pairing perfectness proof is supplied; none of these is used to claim ranks.\n\n## Conclusion\n\nThe weight spectral sequence / decorated graph complex correctly organizes the pure open input for `(6,6)` as an `E_\u221e` subquotient of a finite decorated-stratum complex, and the packet\u2019s duality dictionary fixes all degrees and twists. Establishing that this subquotient is `\u2295 Q(8)` requires a graph-by-graph computation that is not carried out. Accordingly the attempt is **proposed**, not complete, and does not assert `CONJ-0001` for `(6,6)`.\n",
+  "assumptions": [
+    "The standard Deligne weight spectral sequence for a smooth DM stack with normal-crossings compactification computes the weight filtration on H^*(M_{g,n}) and, dually, on Borel\u2013Moore homology, with E_1 page built from cohomology of boundary strata M_\u0393.",
+    "The Getzler\u2013Kapranov modular-operad graph complex is a valid computational model for the associated graded of that weight filtration on M_{g,n} with rational coefficients.",
+    "K\u00fcnneth and Poincar\u00e9 duality for mixed Hodge structures hold for the smooth proper DM stacks Mbar_{g',n'} appearing as vertex factors, with the Tate twist conventions of the packet (Poincar\u00e9 twist d=21 for (6,6)).",
+    "Inductive Tate input for strictly simpler compactified pairs in degrees \u226414 (THM-0002) and for genus 1\u20132 even cohomology (THM-0006, THM-0007) may be used as decorations when those pairs appear as vertex factors."
+  ],
+  "claims": [
+    {
+      "id": "A1",
+      "statement": "For (g,n)=(6,6) one has d=21 and the open induction input is exactly W_{-16} H^{BM}_{16}(M_{6,6}) \u2245 W_{26} H^{26}(M_{6,6})(21), expected of Tate type Q(8), with untwisted ordinary type Q(-13) and Chow codimension 13.",
+      "status": "proved"
+    },
+    {
+      "id": "A2",
+      "statement": "The pair (6,6) is an open-stratum base case for the degree-16 low-homology induction because n\u22652 and k=16 equals 2g-2+n=16.",
+      "status": "proved"
+    },
+    {
+      "id": "A3",
+      "statement": "Published CKgP does not apply to M_{6,6}, since c(6)=5 < 6; algebraicity of the pure-weight piece cannot be quoted from the CKgP table.",
+      "status": "proved"
+    },
+    {
+      "id": "A4",
+      "statement": "As mixed Hodge structures, W_{-16} H^{BM}_{16}(M_{6,6}) is the cokernel of H_{16}(\u2202Mbar_{6,6}) \u2192 H_{16}(Mbar_{6,6}).",
+      "status": "proved"
+    },
+    {
+      "id": "A5",
+      "statement": "The Deligne weight spectral sequence of the normal-crossings compactification Mbar_{6,6} \u2283 \u2202, equivalently the Getzler\u2013Kapranov decorated graph complex of stable graphs of type (6,6), computes gr^W of the cohomology of M_{6,6}; the pure piece W_{26} H^{26}(M_{6,6}) is an E_\u221e subquotient of that page.",
+      "status": "proved"
+    },
+    {
+      "id": "A6",
+      "statement": "Every boundary stratum of Mbar_{6,6} is a finite quotient of a product of moduli stacks of strictly simpler stable type, so K\u00fcnneth and purity apply to compactified stratum cohomology.",
+      "status": "proved"
+    },
+    {
+      "id": "A7",
+      "statement": "W_{-16} H^{BM}_{16}(M_{6,6}) is a direct sum of Q(8) if and only if, in the pure weight corner of the weight spectral sequence / decorated graph complex for (6,6), every contributing summand is pure Tate of the expected type and all differentials/extensions on that corner remain within the Tate subcategory.",
+      "status": "proved"
+    },
+    {
+      "id": "A8",
+      "statement": "The undecorated (all vertices genus 0) Getzler\u2013Kapranov / CGP graph complex computes the top-weight compactly supported graded pieces of M_{6,6}, which after Poincar\u00e9 duality and the packet twist (21) control one definite corner of the weight filtration relevant to the BM pure piece.",
+      "status": "conditional"
+    },
+    {
+      "id": "A9",
+      "statement": "The pure corner for BM degree 16 / ordinary degree 26 on (6,6) receives no non-Tate contribution from positively decorated vertices, and all Gysin/residue differentials on that corner vanish or are split Tate morphisms, yielding W_{-16} H^{BM}_{16}(M_{6,6}) \u2245 \u2295 Q(8).",
+      "status": "gap"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "engine": "grok",
+  "gap_markers": [
+    "GAP-DEGREE-MATCH: exact identification of the CGP/top-weight degree index with W_{-16} H^{BM}_{16} / W_{26} H^{26}(21) for (6,6) is not fully written out from the supplied packet alone",
+    "GAP-GRAPH-ENUMERATION: stable graphs \u0393 of type (6,6) that can hit the pure corner are not enumerated; Aut(\u0393)-orbit counts are missing",
+    "GAP-DECORATION-TAUT: purity of type for positive-genus or positive-degree vertex decorations is not checked; decorations may re-introduce other RED-0001 open pairs",
+    "GAP-DIFFERENTIALS: Gysin/residue (edge-contraction) differentials on the pure corner are not computed",
+    "GAP-EXTENSIONS: non-split mixed-Hodge extensions are not ruled out; semisimplification alone is not used to claim Tate type",
+    "GAP-NO-POINTCOUNT: no exact point-count, equivariant stratification rank, or perfect tautological pairing is proved",
+    "A9 remains a gap: the equality W_{-16} H^{BM}_{16}(M_{6,6}) \u2245 \u2295 Q(8) is not established"
+  ],
+  "id": "ATT-0014",
+  "packet_id": "CASE-6-6-v2",
+  "packet_path": "proof/packets/generated/CASE-6-6-v2.md",
+  "packet_sha256": "e6758c6886696d915814dc718f28af0e6b44088916881055c88a6276f55af88e",
+  "schema_version": 2,
+  "source_claim_ids": [
+    "RED-0001",
+    "FND-0001",
+    "CONJ-0001",
+    "THM-0001",
+    "THM-0002",
+    "THM-0003",
+    "THM-0004",
+    "THM-0005",
+    "THM-0006",
+    "THM-0007",
+    "OBS-0001"
+  ],
+  "status": "proposed",
+  "summary": "Sets up the Deligne weight spectral sequence and Getzler\u2013Kapranov decorated graph complex for the pure open input W_{-16}H^{BM}_{16}(M_{6,6}) \u2245 W_{26}H^{26}(M_{6,6})(21), reduces contributions to stable dual graphs of type (6,6), and isolates the Tate claim as a finite E_\u221e computation that is not carried out.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-M-0014"
+}

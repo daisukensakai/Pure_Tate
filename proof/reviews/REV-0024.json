@@ -1,0 +1,140 @@
+{
+  "attempt_id": "ATT-0019",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-Z-DEG",
+      "reason": "Using the supplied SRC-0004 formula, deg(W_5)=4\u00b76+12\u22124\u00b75=16 and deg(W_5\u2297\u03c9_C^{-1})=16\u221210=6.",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-F4-VANISH",
+      "reason": "The supplied formula gives deg(\u03c9_C\u2297W_4^\u2228(\u0393))=\u22124, so its H^0 vanishes on every smooth projective geometric fibre.",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-F5-CRIT",
+      "reason": "The obstruction line bundle has degree zero; on a smooth projective connected geometric fibre it has a nonzero section exactly when it is trivial, yielding the stated residual isomorphism.",
+      "status": "confirmed_fibrewise"
+    },
+    {
+      "claim_id": "CLM-Z-CHI",
+      "reason": "Riemann\u2013Roch gives \u03c7(L)=6\u22126+1=1 and therefore h^0(L)\u22651 on each smooth geometric fibre.",
+      "status": "confirmed_fibrewise"
+    },
+    {
+      "claim_id": "CLM-Z-IDENT",
+      "reason": "Steps C\u2013D identify the geometric points where an obstruction vector space is nonzero, but Step F does not compare the determinantal/Fitting scheme structure of the evaluation-failure locus with the Abel\u2013Jacobi incidence scheme. It also invokes Proj of \u03c0_*L despite acknowledged h^0-jumping, without proving local freeness, cohomology-and-base-change, or equivalence with the relative effective-divisor Hilbert functor. Thus the claimed equality over an arbitrary, possibly nonreduced base is stronger than the proof.",
+      "status": "not_established"
+    },
+    {
+      "claim_id": "CLM-Z-NOT-UNIQUE-SOURCE",
+      "reason": "The attempt does not claim that Z exhausts the campaign's Borel\u2013Moore target.",
+      "status": "confirmed_as_limitation"
+    },
+    {
+      "claim_id": "CLM-Z-DIM-OPEN",
+      "reason": "No component, dimension, stabilizer, or h^0-stratification argument is supplied.",
+      "status": "confirmed_as_gap"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-31",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate",
+      "evidence": "ATT-0019 Steps C\u2013D prove only fibrewise H^0 criteria, while Step F immediately declares equality of loci and supplies no obstruction complex, Fitting ideal, or scheme-structure comparison.",
+      "impact": "Blocks CLM-Z-IDENT and the exact theorem's word 'precisely', while leaving the degree computations and geometric-point criterion intact.",
+      "key": "relative-ce-failure-requires-scheme-structure-comparison",
+      "statement": "A fibrewise equivalence between nonvanishing of a CE obstruction space and triviality of a degree-zero line bundle establishes equality only on geometric points. Identifying the relative evaluation-failure locus with an Abel\u2013Jacobi incidence locus over an arbitrary base additionally requires comparison of their determinantal/Fitting scheme structures.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate",
+      "evidence": "ATT-0019 Step F states 'Proj of the pushforward of L, or the corresponding Hilbert scheme' while simultaneously acknowledging that fibres may jump and deferring the h^0-stratification.",
+      "impact": "Leaves the relative object and its claimed arbitrary-base functoriality underconstructed.",
+      "key": "jumping-h0-invalidates-naive-proj-pushforward-linear-system",
+      "statement": "When h^0(L) jumps, a relative linear system cannot be identified without qualification with Proj of \u03c0_*L; one must use a compatible divisor/Hilbert or Abel\u2013Jacobi construction or prove cohomology-and-base-change hypotheses.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0024",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+  "proof_dependency_checks": [
+    {
+      "dependency": "Declared proof_dependencies",
+      "dependency_id": "Declared proof_dependencies",
+      "reason": "ATT-0019 declares proof_dependencies as an empty array and TASK.json supplies no input artifacts.",
+      "status": "confirmed_empty",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency": "SRC-0004 Lemma 10.6 excerpt",
+      "dependency_id": "SRC-0004 Lemma 10.6 excerpt",
+      "reason": "The supplied packet excerpt supports the degree formula, direct-sum decomposition, and sign convention used in Steps A\u2013D. It does not supply the relative scheme-theoretic identification asserted in Step F.",
+      "status": "available_but_limited",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency": "Relative linear-system and base-change construction",
+      "dependency_id": "Relative linear-system and base-change construction",
+      "reason": "This is an undeclared load-bearing dependency. The proof acknowledges jumping h^0 but supplies no theorem establishing the proposed Proj construction or its compatibility with arbitrary base change.",
+      "status": "missing",
+      "verdict": "failed"
+    },
+    {
+      "dependency": "Scheme-theoretic comparison of evaluation failure and residual incidence",
+      "dependency_id": "Scheme-theoretic comparison of evaluation failure and residual incidence",
+      "reason": "No map of obstruction complexes, Fitting-ideal computation, or local argument proves equality of scheme structures.",
+      "status": "missing",
+      "verdict": "failed"
+    },
+    {
+      "dependency": "Experiment receipts",
+      "dependency_id": "Experiment receipts",
+      "reason": "experiment_ids and experiment_uses are empty. The two arithmetic hashes mentioned in prose are expressly not used as experiment receipts; their relevant arithmetic is independently reproduced in the proof.",
+      "status": "confirmed_none",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency": "Stack/coarse-moduli distinction",
+      "dependency_id": "Stack/coarse-moduli distinction",
+      "reason": "The theorem is phrased relative to an arbitrary base rather than a constructed moduli stack, so no stack-to-coarse passage is used. The missing universal stack construction prevents upgrading the result to a global moduli assertion.",
+      "status": "not_applicable_to_confirmed_fibrewise_claims_but_unresolved_globally",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency": "Rational/integral coefficients, Poincare duality, Tate twists, Gysin/Kunneth shifts, spectral sequences, graph automorphisms, semisimplification, motives, algebraic or tautological generation, and stable pairs",
+      "dependency_id": "Rational/integral coefficients, Poincare duality, Tate twists, Gysin/Kunneth shifts, spectral sequences, graph automorphisms, semisimplification, motives, algebraic or tautological generation, and stable pairs",
+      "reason": "None of these mechanisms enters the fibrewise CE lemma. The attempt explicitly does not prove the campaign cohomology target, so they cannot repair or refute the missing scheme-theoretic Step F.",
+      "status": "not_used",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0019-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is the unsupported upgrade from a correct fibrewise, set-theoretic criterion to equality of relative schemes over every base. Nonzero H^0 detects geometric failure points, but it does not identify nilpotents or multiplicities in the determinantal failure locus. With h^0(L) allowed to jump, Proj(\u03c0_*L) is also not justified as the required relative linear system without base-change control. The finite \u00e9tale ordering cover exists over a properly constructed reduced-divisor incidence space, but the proof has not shown that this space is the evaluation-failure scheme claimed by the theorem.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B be any base carrying a smooth family of genus-6 curves with balanced tetragonal Casnati\u2013Ekedahl data of splitting type F \u2245 O_{P^1}(4) \u2295 O_{P^1}(5), and write \u03b3 for the scroll projection. Define W_f := (O_{P(E^\u2228)}(2) \u2297 \u03b3^* O_{P^1}(\u2212f))|_C for f \u2208 {4,5} as in SRC-0004 Lemma 10.6 (including the minus sign). For an ordered 6-tuple of distinct points (p_1,\u2026,p_6) on a fibre C with \u0393 = \u2211 p_i, the f=4 CE obstruction space H^0(C, \u03c9_C \u2297 W_4^\u2228(\u0393)) vanishes identically, while H^0(C, \u03c9_C \u2297 W_5^\u2228(\u0393)) is nonzero if and only if O_C(\u0393) \u2245 W_5 \u2297 \u03c9_C^{\u22121}. Consequently the evaluation-failure locus Z over B is precisely the finite \u00e9tale S_6-cover of the reduced-support open in the relative linear system |W_5 \u2297 \u03c9_C^{\u22121}| \u2192 B; in particular Z is cut out inside the ordered distinct-point configuration space by the single residual isomorphism condition O(\u0393) \u2245 W_5 \u2297 \u03c9_C^{\u22121} coming from the f_2=5 summand.",
+  "verdict": "incomplete"
+}

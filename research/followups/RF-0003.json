@@ -1,0 +1,242 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-0001",
+      "kind": "degree_weight_twist_verification",
+      "locators": [
+        "CASE-6-6-v2 Exact open-input target",
+        "TASK.json target",
+        "data/target.json open_input_formula"
+      ],
+      "residual_formulation_correct": true,
+      "statement": "For (g,n)=(6,6), dim M_{6,6}=21 and the RED-0001 open input is W_{-16}H^{BM}_{16}(M_{6,6}) \u2245 W_{26}H^{26}(M_{6,6})(21), with untwisted ordinary Tate type Q(-13).",
+      "status": "proved_bookkeeping"
+    },
+    {
+      "claim_id": "CLM-0002",
+      "kind": "proved_topological_vanishing_bound",
+      "locators": [
+        "SRC-0001 p.12 and bibl. [Har86]",
+        "SRC-0002 Theorem 1.3 proof, p.12"
+      ],
+      "note": "Full Harer text not in supplied corpus; formula used as cited by SRC-0001/SRC-0002.",
+      "primary_reference": "Harer, Invent. Math. 84 (1986), 157-176 [Har86]",
+      "statement": "Harer's virtual cohomological dimension gives vanishing of H^k(M_{g,n}) for k larger than roughly 4g-4+n (g>=2); CLP24 uses the operational bound that open pure-weight quotients vanish for k>4g-4+n. In particular vcd(M_{6,6})=4*6-4+6=26.",
+      "status": "established_via_secondary_citation"
+    },
+    {
+      "claim_id": "CLM-0003",
+      "kind": "numerical_coincidence",
+      "locators": [
+        "RED-0001 list in CASE-6-6-v2",
+        "vcd formula from SRC-0001/SRC-0002"
+      ],
+      "statement": "For every RED-0001 residual pair with n>=2, ordinary open degree 2d-16 equals vcd=4g-4+n; for (8,0) one has 26=vcd-1 and for (8,1) one has 28=vcd-1. Especially for (6,6), degree 26 equals vcd 26.",
+      "status": "verified_numerically"
+    },
+    {
+      "claim_id": "CLM-0004",
+      "kind": "proved_Hodge_structure_absence",
+      "locators": [
+        "SRC-0002 Table 1 c(6)=5 and Prop 4.5",
+        "SRC-0002 Thm 1.5(3) only to even k<=14",
+        "SRC-0001 p.17 degrees 16,18,20 open"
+      ],
+      "statement": "No theorem in the searched corpus proves vanishing, pure Tate type, or tautological generation of W_26 H^{26}(M_{6,6}) (equivalently W_{-16}H^{BM}_{16}(M_{6,6})). Top-degree vcd, hard Lefschetz on Mbar, and published CKgP ranges do not discharge this residual.",
+      "status": "obstruction_recorded"
+    },
+    {
+      "claim_id": "CLM-0005",
+      "kind": "prediction_or_conjecture",
+      "locators": [
+        "SRC-0001 p.17",
+        "SRC-0002 after Thm 1.5 and Conjecture 1.8"
+      ],
+      "statement": "Even-degree pure Tate for H^{16}(Mbar_{g,n}) remains an open prediction (Chenevier-Lannes / Conjecture 1.8 / survey status), not a proved Hodge-structure theorem, as of SRC-0001 (May 2026) and SRC-0002 (2024).",
+      "status": "prediction_not_theorem"
+    }
+  ],
+  "context_revision": 2,
+  "current_status_check_date": "2026-07-30",
+  "engine": "grok",
+  "id": "RF-0003",
+  "independent": true,
+  "locators_checked": [
+    {
+      "claim": "degree/weight/twist verification for (6,6)",
+      "result": "d=3*6-3+6=21; open BM target W_{-16}H^{BM}_{16} expected Q(8); ordinary dual W_{26}H^{26}(M_{6,6})(21) with untwisted Tate type Q(-(21-8))=Q(-13); chow codim d-8=13. Residual group W_26 H^{26}(M_{6,6}) is correctly formulated (not misstated).",
+      "sources": [
+        "TASK.json target",
+        "CASE-6-6-v2.md",
+        "data/target.json open_input_formula"
+      ]
+    },
+    {
+      "claim": "Harer virtual cohomological dimension formula",
+      "result": "Primary classical reference cited in corpus as Harer, Invent. Math. 84 (1986), 157-176 [Har86]. Survey states vanishing for large k with relevant bound roughly 4g-4+n (g>=2). Operational use in CLP24: pure-weight open quotients vanish for k'>4g'-4+n'. Full Harer paper text is not in the supplied corpus; secondary locators only.",
+      "sources": [
+        "SRC-0001 p.12 and bibl. [Har86]",
+        "SRC-0002 Thm 1.3 proof p.12"
+      ]
+    },
+    {
+      "claim": "numerical coincidence 2d-16 vs vcd for RED-0001 residual pairs",
+      "result": "Using vcd=4g-4+n for n>=1 and vcd=4g-5 for n=0: (3,12): 2d-16=20=vcd; (5,8):24=24; (6,6):26=26 (AT vcd); (7,4):28=28; (8,0):26 vs vcd 27 (ONE BELOW); (8,1):28 vs vcd 29 (ONE BELOW); (8,2):30=30. All n>=2 RED-0001 pairs sit exactly at vcd; unpointed/once-pointed genus-8 pairs sit one below.",
+      "sources": [
+        "CASE-6-6-v2 RED-0001",
+        "SRC-0001/SRC-0002 vcd bounds"
+      ]
+    },
+    {
+      "claim": "top-degree vanishing discharges W_26 H^{26}(M_6,6)?",
+      "result": "No. vcd=26 only forces H^k(M_6,6)=0 for k>26; it permits nonzero top-degree H^{26}. No cited theorem forces vanishing or pure-Tate type of W_26 H^{26}(M_6,6).",
+      "sources": [
+        "SRC-0001 p.12",
+        "SRC-0002 p.12"
+      ]
+    },
+    {
+      "claim": "hard Lefschetz / tautological generation in top degree on compactification?",
+      "result": "Hard Lefschetz and tautological generation results in SRC-0001/SRC-0002 apply to H^*(Mbar_g,n). Even k<=14 on Mbar is proved pure Tate/tautological (Thm 1.5(3)); k=16 remains open (prediction only). Duality on Mbar does not compute the open pure-weight piece W_26 H^{26}(M_6,6). Fontanari-type vanishing of H^{16,0} is weaker than pure Tate and does not discharge the residual.",
+      "sources": [
+        "SRC-0002 Thm 1.5(3), Conj 1.8, p.3 Fontanari note",
+        "SRC-0001 p.17"
+      ]
+    },
+    {
+      "claim": "CKgP algebraicity for open M_6,6?",
+      "result": "Table 1 gives c(6)=5; Prop 4.5 algebraicity of W_k H^k(M_g,n) applies only for n<=5 in genus 6. Pair (6,6) is outside published CKgP range, so open pure-weight algebraicity is unavailable.",
+      "sources": [
+        "SRC-0002 Table 1 p.13, Prop 4.5 p.14"
+      ]
+    },
+    {
+      "claim": "low-homology induction at k=16 for (6,6)",
+      "result": "Extending Eq (6.1) and the base-case inequalities of Thm 1.5(3) proof to k=16 leaves open W_{-16}H^{BM}_{16}(M_6,6) because 16=2g-2+n for (6,6) and CKgP fails for n=6. Ordinary dual is exactly W_26 H^{26}(M_6,6)(21).",
+      "sources": [
+        "SRC-0002 Eq (6.1) and proof p.24",
+        "CASE-6-6-v2 RED-0001"
+      ]
+    }
+  ],
+  "packet_id": "CASE-6-6-v2",
+  "packet_sha256": "e6758c6886696d915814dc718f28af0e6b44088916881055c88a6276f55af88e",
+  "question_id": "MRQ-0003",
+  "schema_version": 1,
+  "source_records": [
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "authors": [
+        "Sam Payne"
+      ],
+      "checked_on": "2026-07-30",
+      "locators": [
+        "p.12 (Harer vcd bound roughly 4g-4+n for g>=2; cites [Har86])",
+        "p.13 (vcd rules out high-degree open pure-weight contributions for fixed k)",
+        "p.17 (pure Tate for even k<=20 confirmed only through k<=14; 16,18,20 open)",
+        "p.24 bibliography entry [Har86] Invent. Math. 84 (1986), 157-176"
+      ],
+      "role": "survey_status_and_Harer_citation",
+      "source_id": "SRC-0001",
+      "title": "On the Hodge and Tate conjectures for moduli spaces of curves",
+      "year": 2026
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson",
+        "Sam Payne"
+      ],
+      "checked_on": "2026-07-30",
+      "locators": [
+        "Theorem 1.3 / p.12 proof: vanishing of open pure-weight quotients when k'>4g'-4+n' by vcd of M_g',n'",
+        "Theorem 1.5(3): even homology tautological for even k<=14",
+        "pp.2-3 after Thm 1.5: pure Tate / L^{k/2} for k=16,18,20 only predicted, not proved",
+        "Equation (6.1), p.24: boundary LES reducing to W_{-k} H^{BM}_k(M_g,n)",
+        "Proof of Thm 1.5(3), p.24: open-stratum base cases when n=0,1 and k>=2g, or n>=2 and k>=2g-2+n",
+        "Table 1, p.13: c(6)=5 so CKgP/A^*=R^* only for n<=5 in genus 6",
+        "Proposition 4.5: W_k H^k(M_g,n)=RH^k only for n<=c(g)"
+      ],
+      "role": "operational_vcd_bound_low_homology_induction_CKgP_table",
+      "source_id": "SRC-0002",
+      "title": "Extensions of tautological rings and motivic structures in the cohomology of Mbar_g,n",
+      "year": 2024
+    },
+    {
+      "arxiv_id": "2209.03113",
+      "arxiv_version": "v2",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson",
+        "Sam Payne"
+      ],
+      "checked_on": "2026-07-30",
+      "locators": [
+        "no Harer/vcd formula for M_6,6; no computation of W_26 H^26(M_6,6)"
+      ],
+      "role": "low_degree_Hodge_Tate_context_only",
+      "source_id": "SRC-0003",
+      "title": "The eleventh cohomology group of Mbar_g,n",
+      "year": 2023
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson"
+      ],
+      "checked_on": "2026-07-30",
+      "locators": [
+        "results supplying c(g) ranges used in SRC-0002 Table 1; does not treat open top-degree W_26 H^26(M_6,6)"
+      ],
+      "role": "primary_CKgP_ranges_feeding_Table_1",
+      "source_id": "SRC-0004",
+      "title": "On the Chow and cohomology rings of moduli spaces of stable curves",
+      "year": 2024
+    },
+    {
+      "arxiv_id": "2104.05820",
+      "arxiv_version": "v2",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson"
+      ],
+      "checked_on": "2026-07-30",
+      "locators": [
+        "Harer [14] cited only for Pic stability, not for vcd of M_6,6"
+      ],
+      "role": "unpointed_low_genus_Chow_only",
+      "source_id": "SRC-0005",
+      "title": "The Chow rings of the moduli spaces of curves of genus 7, 8, and 9",
+      "year": 2024
+    }
+  ],
+  "summary": "Degree/weight check for (6,6) is correct: d=21, ordinary open input W_26 H^{26}(M_{6,6}) of weight 26 and untwisted Tate type Q(-13), dual to W_{-16}H^{BM}_{16} expected Q(8). The residual group is not formulated incorrectly. Harer's vcd is cited as [Har86] (Invent. Math. 84); the corpus operationally uses vanishing for k>4g-4+n (n>=1), giving vcd(M_{6,6})=26. Thus the ordinary open-input degree 2d-16 equals vcd for (6,6) and for every n>=2 RED-0001 residual pair; (8,0) and (8,1) sit one below. No proved Hodge-structure theorem discharges W_26 H^{26}(M_{6,6}): top-degree vcd vanishing only kills degrees >26; CKgP/Prop 4.5 stop at n<=5 in genus 6; compactified even cohomology is proved pure Tate only through degree 14, with 16/18/20 still open predictions as of the May 2026 survey. Point counts, Euler characteristics, semisimplifications, and Chenevier-Lannes/Taut-20 predictions were not treated as discharges.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-Q-0003",
+  "unresolved": [
+    "No primary-text extract of Harer's Invent. Math. 84 theorem statement is in the supplied corpus (only secondary citations).",
+    "No theorem computes or forces Tate type of W_26 H^{26}(M_{6,6}).",
+    "Extending CKgP in genus 6 from n<=5 to n=6 (or otherwise controlling the open pure-weight top-degree piece) remains open and would be needed to discharge this residual by the low-homology induction method.",
+    "Hard Lefschetz / tautological generation results for complementary degrees on Mbar do not transfer to a discharge of the open pure-weight residual at degree 26."
+  ],
+  "verdict": "partial"
+}

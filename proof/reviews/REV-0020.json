@@ -1,0 +1,162 @@
+{
+  "attempt_id": "ATT-0013",
+  "checked_claims": [
+    {
+      "id": "target-dictionary",
+      "note": "Attempt target block is byte-identical to TASK.json and to the packet JSON; packet_sha256 matches the task. Independently recomputed: d=3*5-3+8=20; PD for a smooth DM stack with Q-coefficients gives H^BM_16 = H^{2d-16}(20) = H^24(20); Q(20) has weight -40 so weight 24-40=-16 matches open_bm_weight; Q(-12)(20)=Q(8) matches open_bm_tate_type; codim 12 = d-8 matches RED-0001's Q(-(d-8)). No twist or degree slip found.",
+      "review_verdict": "consistent",
+      "status_claimed": "n/a"
+    },
+    {
+      "id": "A1",
+      "note": "n=8>=2 and 2g-2+n=10-2+8=16=k, so THM-0004 puts (5,8) exactly at the extremal open-stratum base case. Cross-check: every n>=2 entry of RED-0001 satisfies 2g-2+n=16, i.e. 2g+n=18.",
+      "review_verdict": "confirmed",
+      "status_claimed": "proved"
+    },
+    {
+      "id": "A2",
+      "note": "Duality bookkeeping is correct (see target-dictionary). Caveat: the attempt never records the consequence that W_24 H^24(M_{5,8}) is the LOWEST-weight piece of H^24, i.e. the image of H^24(Mbar_{5,8};Q) -> H^24(M_{5,8};Q) (weights of H^k of a smooth variety lie in [k,2k]). That identification is what actually constrains the group and is unused.",
+      "review_verdict": "confirmed_with_caveat",
+      "status_claimed": "proved"
+    },
+    {
+      "id": "A3",
+      "note": "c(5)=7 < 8, so THM-0005 does not cover M_{5,8}. The attempt correctly declines to claim CKgP, algebraicity, or tautological generation at n=8, consistent with the execution boundary.",
+      "review_verdict": "confirmed",
+      "status_claimed": "proved"
+    },
+    {
+      "id": "A4",
+      "note": "Three independent defects. (i) Vacuity at the target degree: fibers of f are affine curves so E_2^{p,q}=0 for q>=2, and Harer's vcd(M_{g,n})=4g-4+n gives vcd(M_{5,7})=23, hence E_2^{24,0}=H^24(M_{5,7},R^0 f_*Q)=0 and (no differentials can reach or leave E_2^{23,1}) H^24(M_{5,8}) = H^23(M_{5,7},R^1 f_*Q) in full; the 'pure Tate base tensor pure Tate fiber' contribution A4 controls is the zero group, so nothing is isolated. (ii) Category error: H^1 of a genus-5 curve minus 7 points is a non-split weight extension 0 -> H^1(C) -> H^1(C\\S) -> ker(Q(-1)^7 -> Q(-1)) -> 0, so R^1 f_*Q is not a direct sum of a Tate part and a symplectic part and 'tensored with pure Tate fiber cohomology' presumes an unavailable splitting. (iii) Range/object slip: THM-0005 + SRC-0002 Prop 4.5 is a CKgP/tautological-Chow statement yielding algebraicity of pure-weight cohomology of the compactified moduli inside the induction-controlled range; A4 uses it as Tate-ness of the pure-weight cohomology of the OPEN M_{5,7} in unbounded degree (up to 23). Status must be downgraded from 'proved'.",
+      "review_verdict": "not_proved",
+      "status_claimed": "proved"
+    },
+    {
+      "id": "A5",
+      "note": "Geometric inputs check out: the trigonal locus in M_5 has dimension 2g+1=11=dim M_5 - 1 (a divisor), non-trigonal genus-5 canonical curves are (2,2,2) complete intersections in P^4, and the g^1_3 is unique for g>=5 so mark-incidence refinement is well posed. But the target is a lowest-weight graded piece = image from a smooth compactification; that is not stratum-local, so no stratification weight spectral sequence computes it without global differential information. G3 concedes no page was evaluated.",
+      "review_verdict": "geometry_correct_but_no_content",
+      "status_claimed": "partial"
+    },
+    {
+      "id": "A6",
+      "note": "The trace formula sees only the virtual (alternating) Frobenius trace on H^*_c, so removing 'other weight-graded pieces that can contribute to the same monomial degree' is not sufficient: a non-Tate summand of weight 16 sitting in odd-degree H^*_c cancels against Tate contributions of the same absolute value, and polynomiality of the count over all F_{q^m} constrains only the virtual motive, never a single (degree, weight) multiplicity. Separately, a plain automorphism-weighted count of M_{5,8}(F_q) yields the character at the identity of S_8 only; genuinely S_8-equivariant information needs counts of twisted forms, which is never stated. The dualization H^BM_16 = (H^16_c)^dual is also never performed, so the monomial the target would contribute (q^8, from the top-weight piece gr^W_16 H^16_c of type Q(-8)) is left unpinned.",
+      "review_verdict": "false_as_stated",
+      "status_claimed": "partial"
+    },
+    {
+      "id": "A7",
+      "note": "Honest: monodromy/Ext control on M_{5,7} is neither cited nor proved. Note it is also the wrong target after defect (i) above, since the whole group lives in E^{23,1}, not just an 'obstruction part' of it.",
+      "review_verdict": "correctly_labelled",
+      "status_claimed": "unresolved"
+    },
+    {
+      "id": "A8",
+      "note": "The Tate-type statement for the open input is not established and no non-Tate summand is exhibited. Consistent with OBS-0001 and with CONJ-0001 remaining conjectural; the attempt does not use CONJ-0001 or RED-0001 (truth status 'inferred') as a theorem anywhere in a load-bearing step.",
+      "review_verdict": "correctly_labelled",
+      "status_claimed": "unresolved"
+    },
+    {
+      "id": "assumptions",
+      "note": "Stack-vs-coarse is handled correctly: with Q-coefficients H^*(stack)=H^*(coarse) and automorphism-weighted counts compute the stacky H^*_c, so the 'irreducible as a coarse geometric object' aside is harmless. No integral-coefficient claim is made anywhere, so no Z/Q conflation. The Betti/etale/motivic comparison assumption is flagged rather than used to smuggle a semisimplification into a Hodge-structure isomorphism, and G4 explicitly refuses semisimplification and arithmetic prediction as completeness certificates.",
+      "review_verdict": "acceptable",
+      "status_claimed": "n/a"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "open-input-sits-in-vcd-degree",
+      "kind": "structural_observation",
+      "statement": "For every RED-0001 entry with n>=2 the extremality k=2g-2+n=16 forces 2g+n=18, hence the ordinary realization degree 2d-16=6g+2n-22 equals Harer's vcd(M_{g,n})=4g-4+n exactly: (3,12)->20, (5,8)->24, (6,6)->26, (7,4)->28, (8,2)->30; the n=0,1 entries (8,0)->26 and (8,1)->28 sit at vcd-1. The open input is therefore top-degree (or next-to-top-degree) rational cohomology of the open moduli, well above its complex dimension. If the known vanishing of H^{vcd}(M_{g,n};Q) for g>=2 applies, the open input is zero, hence trivially a (empty) direct sum of Q(8), and the entire point-count/monodromy program is unnecessary. The vcd input is reviewer-supplied and outside the dependency-closed corpus; this must be corroborated against a citable source before use.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "forgetful-leray-top-row-vanishes",
+      "kind": "obstruction",
+      "statement": "The forgetful fibration f:M_{g,n}->M_{g,n-1} cannot isolate the degree-16 open input in the RED-0001 base cases: fibers are affine curves so the Leray page is concentrated in q<=1, and vcd(M_{g,n-1})=4g-5+n=(2d-16)-1 kills the q=0 column in the target degree, so H^{2d-16}(M_{g,n}) equals H^{2d-17}(M_{g,n-1},R^1f_*Q) with no room for differentials. Any argument of the form 'pure Tate base tensor pure Tate fiber gives pure Tate' controls the zero group and yields no progress.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "r1-punctured-curve-non-split-extension",
+      "kind": "defect",
+      "statement": "Reductions that split R^1f_*Q for a punctured-curve fibration into 'symplectic part plus Tate part' are invalid: H^1(C minus {p_1..p_m}) is a non-split extension of ker(Q(-1)^m -> Q(-1)) by H^1(C), so tensor-decomposition language on the Leray page presumes a splitting that does not exist as a variation of mixed Hodge structure. Purity of a graded piece must be argued through the extension, not around it.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "ckgp-is-compact-and-range-bounded",
+      "kind": "misuse_of_source",
+      "statement": "THM-0005 together with SRC-0002 Prop 4.5 licenses algebraicity of pure-weight cohomology of the compactified moduli within the range the low-homology induction controls. It does not license 'the open M_{g,n} with n<=c(g) has pure Tate cohomology in all degrees'. Any step that uses a CKgP marking bound as a blanket Tate-ness statement about an open moduli space, or in unbounded degree, is a silent upgrade of pure Tate to algebraic/tautological generation and violates the execution boundary.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "trace-formula-cannot-separate-degrees",
+      "kind": "obstruction",
+      "statement": "Point counts over F_q determine only the virtual Frobenius trace on H^*_c, so no count - however exact, and even if polynomial over all F_{q^m} - pins the multiplicity of a Tate class in one prescribed (degree, weight) pair. Removing 'other weight-graded pieces of the same monomial degree' is insufficient because non-Tate summands of the same weight in odd-degree H^*_c cancel against Tate summands of the same absolute value. Genuine S_n-isotypic information additionally requires counts of twisted forms, not automorphism-weighted counts of M_{g,n}(F_q). A completed exact count is therefore necessary but not sufficient for a Tate-type conclusion, and a point-count approach needs an independent parity/degree-separation input.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "exact-point-count-or-equivariant-stratification"
+      ],
+      "key": "bm-target-dualizes-to-top-weight-hc",
+      "kind": "bookkeeping_hazard",
+      "statement": "Before any arithmetic argument, the Borel-Moore target must be dualized explicitly: H^BM_16(X) = (H^16_c(X))^dual for X smooth, so the group is gr^W_16 H^16_c(M_{g,n}) of Tate type Q(-8), contributing +q^8 to the count; equivalently, on the ordinary side W_{2d-16}H^{2d-16}(M_{g,n}) is the LOWEST-weight piece, i.e. the image of H^{2d-16} of a smooth compactification. Skipping this step leaves the expected Frobenius monomial unpinned and invites conflating gr^W_16 H^16_c(M_{g,n}) with the packet's compact target H^16(Mbar_{g,n}), which is a different group that also carries type Q(-8).",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0020",
+  "independent": true,
+  "packet_id": "CASE-5-8-v2",
+  "packet_sha256": "93405e895723720d9a4ff947646a743224b38a247b0e6c9ca363f1aac83e815c",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0013-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse space: Q-coefficients make stack and coarse cohomology agree and the automorphism-weighted count computes the stacky H^*_c; no error found",
+    "rational versus integral coefficients: no integral statement is made or needed; no conflation found",
+    "cohomology versus homology degree: BM degree 16 versus ordinary degree 24=2d-16 verified against d=20; open-stratum condition k=2g-2+n=16 verified",
+    "weight and Tate twist: Q(20) weight -40, 24-40=-16, Q(-12)(20)=Q(8), codim d-8=12 all recomputed and consistent with the task and packet",
+    "Poincare duality direction and the H^BM_i = (H^i_c)^dual dualization: duality verified; the dualization needed for the trace formula is missing from the attempt",
+    "Gysin and Kunneth shifts: Leray range q<=1 for the affine-curve fibration checked; the E_2^{24,0}=0 collapse and the absence of usable differentials verified",
+    "degeneration and spectral-sequence differentials: stratification weight spectral sequence set up but never evaluated (G3); the lowest-weight target is not stratum-local",
+    "invariants versus coinvariants under graph automorphisms: the attempt never enters the boundary reduction, so no invariants/coinvariants error; but its S_8-equivariance is decorative and unsupported by plain point counts",
+    "semisimplification versus actual Hodge-structure isomorphism: explicitly refused in G4; no violation",
+    "predicted motives used as unconditional theorems: CONJ-0001 and the 'inferred' RED-0001 are cited as framing only, not as load-bearing theorems",
+    "pure Tate silently upgraded to algebraic or tautological generation: violated once, in A4's use of THM-0005 for the open base M_{5,7} in unbounded degree",
+    "omitted stable pairs: RED-0001's seven pairs re-derived from THM-0004 and THM-0005 (2g+n=18 for n>=2, k>=2g for n=0,1, genus 8 uncovered by c(g)); none missing, and the attempt correctly scopes itself to (5,8)"
+  ],
+  "strongest_attack": "Strongest attack: the only claim in the attempt that is both marked 'proved' and does real work, A4's 'structural positive statement' about the forgetful fibration f:M_{5,8}->M_{5,7}, is simultaneously vacuous and unjustified. Vacuous because the fibers are affine curves (E_2^{p,q}=0 for q>=2) and Harer's vcd(M_{5,7})=4g-4+n=23 forces E_2^{24,0}=0, so with no differentials available H^24(M_{5,8}) equals H^23(M_{5,7},R^1f_*Q) entirely: the 'pure Tate base tensor pure Tate fiber' summand A4 certifies is the zero group and the claimed confinement of the obstruction to the monodromy-nontrivial part is a restatement of the target, not a reduction. Unjustified because it presumes R^1f_*Q splits off its Tate part (it is a non-split weight extension of Q(-1)^6 by the weight-1 symplectic system) and because it upgrades packet THM-0005/Prop 4.5 - a CKgP/tautological-Chow statement about the compactified moduli within the induction-controlled range - into Tate-ness of the pure-weight cohomology of the OPEN M_{5,7} in every degree. Outcome: the attack lands but does not change the verdict; A4's status should be downgraded from 'proved' to 'partial', and A6's stated equality is false as written (trace formula gives only virtual traces). Runner-up attack, and the one that could reverse the framing rather than the verdict: the extremality 16=2g-2+n forces 2g+n=18, hence ordinary degree 2d-16=6g+2n-22=4g-4+n=vcd(M_{g,n}) exactly for every n>=2 entry of RED-0001, so the open input is top-degree rational cohomology of M_{g,n} and known vcd-degree vanishing results would make it zero - trivially Tate - and the (5,8) 'obstruction' vacuous. That relies on a theorem outside the closed corpus and is filed as a candidate needing corroboration, not asserted.",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "verdict": "incomplete"
+}

@@ -1,0 +1,110 @@
+{
+  "attempt_id": "ATT-0010",
+  "checked_claims": [
+    {
+      "claim_id": "A1",
+      "note": "Dimension d=20 matches 3*5-3+8. Packet duality W_24 H^24(20) \u2245 W_-16 H^BM_16 and Q(-12)(20)=Q(8) are applied correctly; no degree/twist off-by-one found.",
+      "outcome": "accepted",
+      "status_in_attempt": "proved"
+    },
+    {
+      "claim_id": "A2",
+      "note": "Fiber of forgetful f:M_{5,8}\u2192M_{5,7} is a 7-punctured genus-5 curve, so fiberwise H^q=0 for q>1 and only Leray rows q=0,1 contribute to total degree 24. Stack-versus-coarse is harmless at Q coefficients; non-properness of f is standard for this Leray setup.",
+      "outcome": "accepted_with_caveat",
+      "status_in_attempt": "proved"
+    },
+    {
+      "claim_id": "A3",
+      "note": "The fiber sequence 0\u2192H^1(C)\u2192H^1(C\\{p_i})\u2192Q(-1)^{\u22956}\u21920 is the correct rank-(n-1)=6 puncture quotient; H denotes the genus-five symplectic local system on M_{5,7}.",
+      "outcome": "accepted",
+      "status_in_attempt": "proved"
+    },
+    {
+      "claim_id": "A4",
+      "note": "THM-0005 gives CKgP and tautological Chow for M_{5,7} (c(5)=7). Packet language derives algebraicity of pure-weight constant-coefficient cohomology, so W_24 H^24(M_{5,7};Q) being Tate of type Q(-12) is the intended reading. This does not upgrade pure Tate to a full tautological-generation theorem beyond what the packet already ties to CKgP.",
+      "outcome": "conditionally_accepted",
+      "status_in_attempt": "proved"
+    },
+    {
+      "claim_id": "A5",
+      "note": "Sufficiency is only relative to still-open controls: the puncture-quotient parity argument, possible nonsplit extension effects in 0\u2192H\u2192R^1f_*Q\u2192Q(-1)^6\u21920, and Leray differentials affecting the weight-24 subquotient. Reduction is therefore not cleaned down to a single vanishing.",
+      "outcome": "overstated",
+      "status_in_attempt": "proved"
+    },
+    {
+      "claim_id": "A6",
+      "note": "No supplied claim (THM-0005 or otherwise) yields vanishing or Tate-ness of W_24 H^23(M_{5,7};H). Attempt status is proposed with explicit gap_markers; the target pure-weight statement is not proved.",
+      "outcome": "confirmed_gap",
+      "status_in_attempt": "gap"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "prove-pure-weight-tate-only"
+      ],
+      "key": "symplectic-localsystem-H23-uncontrolled",
+      "kind": "obstruction",
+      "statement": "For the forgetful reduction M_{5,8}\u2192M_{5,7}, the load-bearing term W_24 H^23(M_{5,7};H) with H the rank-10 genus-five symplectic variation is not constrained by THM-0005 CKgP/tautological Chow, which address constant-coefficient pure-weight algebraicity on M_{5,7}, not nonconstant local systems. Without an independent vanishing or Tate theorem for this group, the pure-weight Tate claim for M_{5,8} does not follow.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "prove-pure-weight-tate-only"
+      ],
+      "key": "leray-extension-and-differential-gap",
+      "kind": "gap",
+      "statement": "Even granting graded control of H and of Q(-1)^\u22956 separately, the possibly nonsplit extension 0\u2192H\u2192R^1f_*Q\u2192Q(-1)^\u22956\u21920 and nonzero Leray differentials between the (24,0) and (23,1) lines can alter the weight-24 pure subquotient of H^24(M_{5,8}). Strictness of weights alone does not eliminate or force Tate-ness of that subquotient.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "prove-pure-weight-tate-only"
+      ],
+      "key": "puncture-quotient-parity-ckgp-incomplete",
+      "kind": "gap",
+      "statement": "The constant puncture-quotient contribution through H^23(M_{5,7};Q(-1)^\u22956) to weight 24 relies on a parity-sensitive form of the CKgP-to-pure-cohomology implication that the abbreviated THM-0005 statement does not independently supply; odd-degree pure pieces of the needed weight are not discharged by the packet text alone.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0017",
+  "independent": true,
+  "packet_id": "CASE-5-8-v2",
+  "packet_sha256": "93405e895723720d9a4ff947646a743224b38a247b0e6c9ca363f1aac83e815c",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0010-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse space: argument uses Deligne\u2013Mumford stacks with Q coefficients; no coarse-space discrepancy found that would change the rational pure-weight claim",
+    "rational versus integral coefficients: all claims are over Q; no integral-lattice obstruction is engaged",
+    "cohomology versus Borel\u2013Moore degree: ordinary degree 24 dualizes with twist 20 to BM degree 16; matches packet target",
+    "weight and Tate twist: W_24 with Q(-12), after (20), gives W_-16 and Q(8); no off-by-one in the duality dictionary",
+    "Gysin and Kunneth shifts: not used; forgetful Leray only",
+    "degeneration or spectral-sequence differentials: not established for total degree 24; residual gap",
+    "invariants versus coinvariants under graph automorphisms: not used",
+    "semisimplification versus actual Hodge-structure isomorphism: attempt does not pass from graded/ss pieces to an HS isomorphism for the target",
+    "conditional prediction versus theorem: CONJ-0001 is not treated as proved; CKgP range is not illegally extended to M_{5,8}",
+    "pure Tate silently upgraded to algebraic or tautological generation: avoided for M_{5,8}; A4 stays within packet CKgP algebraicity for M_{5,7}",
+    "omitted stable pairs: attempt addresses only (5,8), which is the task target"
+  ],
+  "strongest_attack": "The Leray (23,1) contribution W_24 H^23(M_{5,7};H) from the nonconstant genus-five symplectic local system is uncontrolled by packet CKgP/algebraicity (constant-coefficient only). Together with uncomputed extension class and possible Leray differentials on the weight-24 graded piece, this blocks any conclusion that W_24 H^24(M_{5,8}) is a Tate sum of Q(-12); the attempt correctly leaves A6 open and is therefore incomplete, not a proof.",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "verdict": "incomplete"
+}

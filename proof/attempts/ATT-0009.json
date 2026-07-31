@@ -1,0 +1,73 @@
+{
+  "approach_id": "extend-ckgp-or-gonality-stratification",
+  "argument_markdown": "## Attempt: extend the genus-three CKgP stratification\n\nLet \\(d=3g-3+n=18\\). The open input required by the compactification induction is exactly\n\\[\nW_{-16}H^{BM}_{16}(\\mathcal M_{3,12}),\n\\]\nand Poincar\u00e9 duality identifies it with\n\\[\nW_{20}H^{20}(\\mathcal M_{3,12})(18).\n\\]\nConsequently the untwisted ordinary group has degree \\(20\\), weight \\(20\\), expected Tate type \\(\\mathbf Q(-10)\\), and Chow codimension \\(10\\). No degree-16 ordinary-cohomology group of the open moduli stack is involved.\n\nThe published CKgP range in genus three reaches \\(\\mathcal M_{3,n}\\) only for \\(n\\leq 11\\). To extend that argument to \\(n=12\\), one must treat the additional ordered-point stratum arising in the genus-three incidence stratification. The relevant geometric construction first controls an unordered incidence stack and then passes to the finite \u00e9tale cover that orders the twelve marked points.\n\nThat passage is not justified by the available CKgP permanence statements. In general, a finite \u00e9tale morphism \\(Y\\to X\\) with \\(X\\) satisfying CKgP does not imply that \\(Y\\) satisfies CKgP: the pullback on Chow groups need not generate all classes of the cover, and the transfer identity only controls the invariant part after averaging over the ordering group. Thus CKgP for the unordered incidence stack proves, at most, control of the permutation-invariant contribution; it does not control nontrivial isotypic summands of the ordered cover.\n\nOne could finish this approach by constructing an explicit equivariant stratification of the ordered incidence space whose strata have CKgP and then applying localization. No such stratification, nor a theorem showing that every nontrivial ordering-group isotypic contribution vanishes in the required degree, is contained in the packet. This is the precise missing step.\n\nTherefore the genus-three CKgP argument cannot presently be extended from eleven to twelve markings using the supplied results. In particular, this attempt proves neither CKgP for \\(\\mathcal M_{3,12}\\) nor the weaker assertion that \\(W_{-16}H^{BM}_{16}(\\mathcal M_{3,12})\\) is a sum of \\(\\mathbf Q(8)\\).",
+  "assumptions": [],
+  "claims": [
+    {
+      "id": "A1",
+      "statement": "For (g,n)=(3,12), the required open group is W_{-16}H^{BM}_{16}(M_{3,12})=W_{20}H^{20}(M_{3,12})(18), with expected Borel\u2013Moore Tate type Q(8), untwisted ordinary Tate type Q(-10), and Chow codimension 10.",
+      "status": "proved"
+    },
+    {
+      "id": "A2",
+      "statement": "The published genus-three CKgP bound covers at most eleven markings, so the twelve-point case requires a new geometric input.",
+      "status": "proved"
+    },
+    {
+      "id": "A3",
+      "statement": "CKgP of the unordered twelve-point incidence stack does not, from the supplied permanence results, imply CKgP of its finite \u00e9tale ordered-point cover.",
+      "status": "proved"
+    },
+    {
+      "id": "A4",
+      "statement": "The ordered twelve-point incidence locus admits a CKgP stratification sufficient to establish CKgP for M_{3,12}.",
+      "status": "unproved"
+    },
+    {
+      "id": "A5",
+      "statement": "The target W_{-16}H^{BM}_{16}(M_{3,12}) is a direct sum of Q(8).",
+      "status": "unproved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "engine": "codex",
+  "gap_markers": [
+    "No CKgP proof is supplied for the ordered twelve-point incidence locus.",
+    "No permanence theorem is available that makes CKgP ascend from the unordered incidence stack along the finite \u00e9tale ordering cover.",
+    "The nontrivial permutation-group isotypic contributions to the ordered cover are not computed or shown to vanish.",
+    "Accordingly, Tate type of W_{-16}H^{BM}_{16}(M_{3,12}) is not established."
+  ],
+  "id": "ATT-0009",
+  "packet_id": "CASE-3-12-v2",
+  "packet_path": "proof/packets/generated/CASE-3-12-v2.md",
+  "packet_sha256": "6d42c3196c34c652c2e2e34d3f8a7dbcaf1654d8f59adba388806c101e5b2415",
+  "schema_version": 2,
+  "source_claim_ids": [
+    "FND-0001",
+    "FND-0002",
+    "THM-0003",
+    "THM-0005",
+    "OBS-0001",
+    "RED-0001"
+  ],
+  "status": "proposed",
+  "summary": "The CKgP extension reduces to proving an ordered twelve-point incidence stratum has CKgP. The supplied permanence results do not establish that step, because CKgP need not ascend along the finite \u00e9tale ordering cover. Thus this approach does not prove the target.",
+  "target": {
+    "chow_codimension": 10,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 18,
+    "g": 3,
+    "n": 12,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 20,
+    "ordinary_tate_type": "Q(-10)",
+    "ordinary_weight": 20,
+    "poincare_twist": 18
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-M-0001"
+}

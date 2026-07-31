@@ -1,0 +1,32 @@
+{
+  "attempt_id": "ATT-0003",
+  "checked_claims": [
+    "The load-bearing chain is: the degree-16 boundary induction isolates M_6,6; the published CKgP range stops at n=5; the hyperelliptic, trigonal, and plane-quintic strata remain controlled at n=6; the tetragonal construction fails exactly when the (4,5)-splitting summand produces a degree-zero Serre-dual line bundle; deleting its failure locus Z restores the bundle presentation; control of Z would then be needed to glue the argument.",
+    "The threshold computation 2g-2+n=16 for (g,n)=(6,6) is correct, and SRC-0002 only gives Borel-Moore vanishing under a strict inequality, so this pair is a genuine base case.",
+    "The published CKgP and Chow-tautological range c(6)=5 is correctly reported. The cited trigonal bound n<=g+7 and plane-quintic bound n<=3d-1 both include n=6.",
+    "For F=(4,5), the Serre-duality degrees are -4 and 0 at n=6. Thus evaluation surjectivity is no longer automatic. On a smooth connected curve, the degree-zero summand has a section precisely when it is trivial; the attempt correctly leaves this possibility unresolved.",
+    "The claimed equivalence between W_{-16}H^{BM}_{16}(M_6,6) and W_{16}H^{16}(M_6,6) is false. Since dim_C M_6,6=21, Poincare duality gives H^{BM}_{16}(M_6,6) isomorphic to H^{26}(M_6,6)(21), and therefore W_{-16}H^{BM}_{16} isomorphic to W_{26}H^{26}(21). An algebraic codimension-13 class has type Q(-13) before the twist and Q(8) afterward. CKgP of M_6,6 would still control the required group, but through degree 26, not degree 16.",
+    "The assertion that classes on U_ok push forward along beta to its image is not justified as written: restricting the proper Hurwitz map to the open U_ok need not remain proper, so a Chow pushforward to that image is not available. A repair would pass to the target complement of the closed set beta(Z) and use the proper base change of the full map; the attempt does not formulate or verify this repair.",
+    "No conclusion about CKgP of the tetragonal stratum follows without a geometric model and CKgP for Z. Consequently CKgP of M_6,6, algebraicity of the required pure-weight group, and the degree-16 global induction remain unproved.",
+    "The remaining genus-at-least-three degree-16 exceptions are correctly listed as M_3,12, M_5,8, M_7,4, and M_8,n for n=0,1,2. They are explicitly omitted rather than silently discharged."
+  ],
+  "created_on": "2026-07-30",
+  "id": "REV-0005",
+  "independent": true,
+  "reviewer_engine": "codex",
+  "scope_checks": [
+    "Stack versus coarse moduli: the argument consistently uses Deligne-Mumford stacks and does not replace them by coarse spaces. The remaining concern is properness after restricting beta to U_ok, not a stack/coarse comparison.",
+    "Rational versus integral coefficients: rational coefficients are stated throughout and are essential for proper-surjective descent on Chow groups and the cited tautological calculations. No integral conclusion is supported or claimed.",
+    "Cohomology versus Borel-Moore homology degree: failed. Degree-16 Borel-Moore homology is dualized to cohomological degree 26, not 16.",
+    "Poincare duality and Tate twists: failed. For dimension 21 the correct formula is H^{BM}_{16}=H^{26}(21), carrying weight 26 to weight -16.",
+    "Gysin and Kunneth shifts: no new Gysin or Kunneth calculation is performed in the local argument. The cited boundary map is homological and degree-preserving; any cohomological reformulation would require the codimension-one shift and Tate twist that the attempt does not supply.",
+    "Degeneration or spectral-sequence differentials: no spectral-sequence degeneration is asserted. The attempt relies only on the published right-exact boundary sequence, so it does not independently establish any stronger degeneration statement.",
+    "Graph automorphisms, invariants, and coinvariants: no stable-graph decomposition is reconstructed here. Thus no invariants/coinvariants error is made locally, but the attempt also supplies no independent verification of the automorphism conventions behind RED-0001.",
+    "Semisimplification versus actual Hodge structures: no semisimplified Galois representation is promoted to an actual Hodge-structure isomorphism. The only proposed Hodge-Tate conclusion is conditional on CKgP.",
+    "Predicted motives versus theorems: arithmetic and motivic predictions are explicitly excluded and are not used to close the argument.",
+    "Pure Tate versus algebraic or tautological generation: SRC-0002 Lemma 4.3 would give algebraicity of the pure-weight piece from CKgP, but tautological generation additionally requires Chow control. The attempt mostly preserves this distinction and explicitly does not prove A^*=R^*.",
+    "Omitted stable pairs: the attempt treats only (6,6) and correctly records the other unresolved pairs, so it cannot prove the global degree-16 claim."
+  ],
+  "strongest_attack": "Poincare duality is applied in the wrong degree with the Tate twist suppressed: the required W_{-16}H^{BM}_{16}(M_6,6) corresponds to W_{26}H^{26}(M_6,6)(21), not to W_{16}H^{16}(M_6,6). This is an actual false identification, independent of the openly admitted gap at Z.",
+  "verdict": "incomplete"
+}

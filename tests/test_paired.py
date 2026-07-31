@@ -1,0 +1,392 @@
+import copy
+import json
+import tempfile
+import unittest
+from pathlib import Path
+from types import SimpleNamespace
+from unittest import mock
+
+from pure_tate.agents import _engine_argv, _validate_artifact, run_task
+from pure_tate.campaigns import load_campaign, write_campaign_packet
+from pure_tate.paired import (
+    POLICY_REVISION,
+    _safe_math_rows,
+    dry_run_preview,
+    forced_task,
+    model_visible_task,
+    pair_state,
+    problem_key,
+)
+from pure_tate.store import ROOT
+
+
+class PairedAttemptPolicyTests(unittest.TestCase):
+    def setUp(self):
+        self.campaign = load_campaign("C66-001")
+        self.packet = write_campaign_packet("C66-001")
+        self.task = forced_task(self.campaign, self.packet, [])
+
+    def full_artifact(self):
+        return {
+            "schema_version": 3,
+            "id": "ATT-9999",
+            "task_id": self.task["id"],
+            "campaign_id": "C66-001",
+            "campaign_revision": 3,
+            "subproblem_id": "C66-FULL",
+            "lane": "full-resolution",
+            "result_type": "proof",
+            "target_claim_id": "RED-0001",
+            "context_revision": 2,
+            "packet_id": self.task["packet_id"],
+            "packet_path": self.task["input_packet"],
+            "packet_sha256": self.task["packet_sha256"],
+            "target": self.task["target"],
+            "theorem_statement": self.campaign[
+                "paired_attempt_policy"
+            ]["exact_theorem"],
+            "theorem_scope": {"g": 6, "n": 6},
+            "summary": "Complete exact proof.",
+            "argument_markdown": "A complete argument.",
+            "claims": [{"statement": "Exact conclusion.", "status": "proved"}],
+            "proof_dependencies": [],
+            "experiment_ids": [],
+            "experiment_uses": [],
+            "novelty_claims": [],
+            "gap_markers": [],
+            "failed_approaches_addressed": [],
+            "methods_used": [],
+            "new_inputs": [],
+            "completion_attestation": {
+                "resolves_exact_target": True,
+                "no_undischarged_dependencies": True,
+                "not_reduction_only": True,
+                "no_problem_status_claim": True,
+                "exact_problem_web_search_used": False,
+            },
+            "status": "claimed_complete",
+            "source_claim_ids": [],
+            "engine": "grok",
+        }
+
+    def test_model_task_strips_scheduler_state(self):
+        task = {
+            **self.task,
+            "paired_scheduler_state": "standard_ready",
+            "paired_source_engine": "grok",
+            "selected_engine": "grok",
+        }
+        visible = model_visible_task(task)
+        rendered = str(visible).lower()
+        self.assertNotIn("scheduler", rendered)
+        self.assertNotIn("fallback", rendered)
+        self.assertNotIn("previous-attempt", rendered)
+        self.assertNotIn("paired_source_engine", visible)
+        self.assertNotIn("selected_engine", visible)
+
+    def test_forced_contract_accepts_only_complete_exact_result(self):
+        output = ROOT / "proof" / "attempts" / "ATT-9999.json"
+        artifact = self.full_artifact()
+        _validate_artifact(
+            "mathematics", self.task, artifact, output, "grok"
+        )
+        for field, value, message in (
+            ("result_type", "lemma", "proof or disproof"),
+            ("status", "proposed", "complete resolution"),
+            ("gap_markers", ["gap"], "gap markers"),
+        ):
+            invalid = copy.deepcopy(artifact)
+            invalid[field] = value
+            with self.assertRaisesRegex(ValueError, message):
+                _validate_artifact(
+                    "mathematics", self.task, invalid, output, "grok"
+                )
+
+    def test_forced_search_is_tool_enforced_offline(self):
+        for engine in ("grok", "claude", "gemini", "codex"):
+            argv = _engine_argv(
+                engine,
+                "prove the theorem",
+                Path("/tmp/paired-last-message"),
+                phase="mathematics",
+            )
+            joined = " ".join(argv)
+            if engine == "grok":
+                self.assertIn("--disable-web-search", argv)
+            if engine == "claude":
+                self.assertNotIn("WebSearch", argv)
+                self.assertNotIn("WebFetch", argv)
+            self.assertNotIn("web_search,web_fetch", joined)
+
+    def test_dry_run_shows_one_conditional_pair_per_engine(self):
+        with mock.patch(
+            "pure_tate.paired.pair_state",
+            return_value={"state": "forced_untried"},
+        ):
+            preview = dry_run_preview(
+                self.campaign,
+                self.packet,
+                ["grok", "gemini", "codex", "claude"],
+                12,
+            )
+        self.assertEqual(len(preview), 8)
+        for index, engine in enumerate(
+            ["grok", "gemini", "codex", "claude"]
+        ):
+            forced = preview[index * 2]
+            fallback = preview[index * 2 + 1]
+            self.assertEqual(forced["engine"], engine)
+            self.assertEqual(forced["phase"], "forced-proof")
+            self.assertEqual(fallback["engine"], engine)
+            self.assertEqual(fallback["phase"], "standard-fallback")
+            self.assertEqual(
+                fallback["condition"],
+                "only_after_substantive_forced_failure",
+            )
+
+    def test_digest_rendering_rejects_provenance(self):
+        with self.assertRaisesRegex(ValueError, "leaks provenance"):
+            _safe_math_rows(
+                [{"statement": "The previous attempt used ATT-0017."}]
+            )
+        self.assertEqual(
+            _safe_math_rows([{"statement": "The determinant has rank five."}]),
+            ["The determinant has rank five."],
+        )
+
+    def test_problem_key_includes_current_packet_revision(self):
+        key = problem_key(self.campaign)
+        self.assertEqual(len(key), 64)
+        self.assertEqual(self.campaign["paired_attempt_policy"]["revision"], POLICY_REVISION)
+        with mock.patch(
+            "pure_tate.campaigns.campaign_packet_record",
+            side_effect=[
+                {"packet_sha256": "a" * 64},
+                {"packet_sha256": "b" * 64},
+            ],
+        ):
+            self.assertNotEqual(
+                problem_key(self.campaign), problem_key(self.campaign)
+            )
+
+    def test_external_state_machine_opens_exactly_one_fallback(self):
+        def event_for(_campaign, _engine, event_type):
+            if event_type == "forced_substantive_rejected":
+                return {"trace_id": "TRACE-0001"}
+            return None
+
+        with mock.patch(
+            "pure_tate.paired.load_artifacts", return_value=[]
+        ), mock.patch("pure_tate.paired._event", side_effect=event_for):
+            self.assertEqual(
+                pair_state(self.campaign, "grok")["state"],
+                "forced_trace_mining",
+            )
+
+        def ready_event(_campaign, _engine, event_type):
+            values = {
+                "forced_substantive_rejected": {"trace_id": "TRACE-0001"},
+                "forced_digest_written": {"digest_id": "DIGEST-0001"},
+            }
+            return values.get(event_type)
+
+        with mock.patch(
+            "pure_tate.paired.load_artifacts", return_value=[]
+        ), mock.patch("pure_tate.paired._event", side_effect=ready_event):
+            self.assertEqual(
+                pair_state(self.campaign, "grok")["state"],
+                "standard_ready",
+            )
+
+        def exhausted_event(_campaign, _engine, event_type):
+            values = {
+                "forced_substantive_rejected": {"trace_id": "TRACE-0001"},
+                "forced_digest_written": {"digest_id": "DIGEST-0001"},
+                "standard_substantive_rejected": {"trace_id": "TRACE-0002"},
+                "standard_digest_written": {"digest_id": "DIGEST-0002"},
+            }
+            return values.get(event_type)
+
+        with mock.patch(
+            "pure_tate.paired.load_artifacts", return_value=[]
+        ), mock.patch("pure_tate.paired._event", side_effect=exhausted_event):
+            self.assertEqual(
+                pair_state(self.campaign, "grok")["state"],
+                "pair_exhausted",
+            )
+
+    def test_infrastructure_progress_is_mined_before_retry(self):
+        def infrastructure_event(_campaign, _engine, event_type):
+            if event_type == "forced-proof_infrastructure_failure":
+                return {"trace_id": "TRACE-0099"}
+            return None
+
+        with mock.patch(
+            "pure_tate.paired.load_artifacts", return_value=[]
+        ), mock.patch(
+            "pure_tate.paired._event", side_effect=infrastructure_event
+        ), mock.patch(
+            "pure_tate.paired._event_for_trace", return_value=None
+        ):
+            state = pair_state(self.campaign, "claude")
+            self.assertEqual(state["state"], "infrastructure_trace_mining")
+            self.assertEqual(state["retry_turn"], "forced-proof")
+
+        with mock.patch(
+            "pure_tate.paired.load_artifacts", return_value=[]
+        ), mock.patch(
+            "pure_tate.paired._event", side_effect=infrastructure_event
+        ), mock.patch(
+            "pure_tate.paired._event_for_trace",
+            return_value={"digest_id": "DIGEST-0099"},
+        ):
+            self.assertEqual(
+                pair_state(self.campaign, "claude")["state"],
+                "forced_untried",
+            )
+
+    def test_substantive_invalid_output_is_traced_but_not_written(self):
+        output = ROOT / "proof" / "attempts" / "ATT-9999.json"
+        incomplete = self.full_artifact()
+        incomplete["status"] = "proposed"
+        process = SimpleNamespace(
+            returncode=0,
+            stdout=json.dumps(
+                {
+                    "text": json.dumps(incomplete),
+                    "stopReason": "endTurn",
+                    "sessionId": "official-session-envelope",
+                }
+            ),
+            stderr="",
+        )
+        with tempfile.TemporaryDirectory(
+            dir=ROOT / "research"
+        ) as directory, mock.patch(
+            "pure_tate.paired.TRACE_DIR", Path(directory)
+        ), mock.patch(
+            "pure_tate.agents.shutil.which", return_value="/usr/bin/grok"
+        ), mock.patch(
+            "pure_tate.agents.run_captured_process", return_value=process
+        ):
+            from pure_tate.paired import SubstantiveAttemptError
+
+            with self.assertRaises(SubstantiveAttemptError):
+                run_task(self.task, "grok", output)
+            traces = list(Path(directory).glob("TRACE-*.json"))
+            self.assertEqual(len(traces), 1)
+            trace = json.loads(traces[0].read_text())
+            self.assertIn("complete resolution", trace["validation_error"])
+            self.assertFalse(output.exists())
+
+    def test_backend_error_creates_infrastructure_trace_without_artifact(self):
+        output = ROOT / "proof" / "attempts" / "ATT-9999.json"
+        process = SimpleNamespace(
+            returncode=0,
+            stdout=json.dumps(
+                {
+                    "is_error": True,
+                    "api_error_status": "status: 503",
+                    "result": "backend unavailable",
+                }
+            ),
+            stderr="",
+        )
+        with tempfile.TemporaryDirectory(
+            dir=ROOT / "research"
+        ) as directory, mock.patch(
+            "pure_tate.paired.TRACE_DIR", Path(directory)
+        ), mock.patch(
+            "pure_tate.agents.shutil.which", return_value="/usr/bin/grok"
+        ), mock.patch(
+            "pure_tate.agents.run_captured_process", return_value=process
+        ):
+            from pure_tate.paired import PairedInfrastructureError
+
+            with self.assertRaisesRegex(
+                PairedInfrastructureError, "backend unavailable"
+            ):
+                run_task(self.task, "grok", output)
+            traces = list(Path(directory).glob("TRACE-*.json"))
+            self.assertEqual(len(traces), 1)
+            trace = json.loads(traces[0].read_text())
+            self.assertEqual(trace["classification"], "parse_failure")
+            self.assertIn("backend unavailable", trace["validation_error"])
+            self.assertFalse(output.exists())
+
+    def test_nonzero_stream_preserves_partial_claude_progress(self):
+        output = ROOT / "proof" / "attempts" / "ATT-9999.json"
+        partial = json.dumps(
+            {
+                "type": "stream_event",
+                "event": {
+                    "type": "content_block_delta",
+                    "delta": {
+                        "type": "text_delta",
+                        "text": "Provisional lemma: the boundary map vanishes.",
+                    },
+                },
+            }
+        )
+        process = SimpleNamespace(
+            returncode=1,
+            stdout=partial,
+            stderr="response exceeded output token maximum",
+        )
+        with tempfile.TemporaryDirectory(
+            dir=ROOT / "research"
+        ) as directory, mock.patch(
+            "pure_tate.paired.TRACE_DIR", Path(directory)
+        ), mock.patch(
+            "pure_tate.agents.shutil.which", return_value="/usr/bin/claude"
+        ), mock.patch(
+            "pure_tate.agents.run_captured_process", return_value=process
+        ):
+            from pure_tate.paired import PairedInfrastructureError
+
+            with self.assertRaises(PairedInfrastructureError):
+                run_task(self.task, "claude", output)
+            traces = list(Path(directory).glob("TRACE-*.json"))
+            self.assertEqual(len(traces), 1)
+            trace = json.loads(traces[0].read_text())
+            self.assertEqual(trace["classification"], "infrastructure")
+            self.assertIn("Provisional lemma", trace["observable_stdout"])
+            self.assertFalse(output.exists())
+
+    def test_codex_final_file_is_parsed_while_jsonl_progress_is_traced(self):
+        artifact = self.full_artifact()
+        artifact["engine"] = "codex"
+        progress = json.dumps(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "reasoning",
+                    "text": "Derived a boundary-map identity.",
+                },
+            }
+        )
+
+        def fake_process(command, **_kwargs):
+            final_path = Path(command[command.index("-o") + 1])
+            final_path.write_text(json.dumps(artifact), encoding="utf-8")
+            return SimpleNamespace(returncode=0, stdout=progress, stderr="")
+
+        with tempfile.TemporaryDirectory(
+            dir=ROOT / "research"
+        ) as directory, mock.patch(
+            "pure_tate.paired.TRACE_DIR", Path(directory) / "traces"
+        ), mock.patch(
+            "pure_tate.agents._validate_output_path"
+        ), mock.patch(
+            "pure_tate.agents.shutil.which", return_value="/usr/bin/codex"
+        ), mock.patch(
+            "pure_tate.agents.run_captured_process", side_effect=fake_process
+        ):
+            output = Path(directory) / "ATT-9999.json"
+            result = run_task(self.task, "codex", output)
+            self.assertEqual(result["id"], "ATT-9999")
+            traces = list((Path(directory) / "traces").glob("TRACE-*.json"))
+            self.assertEqual(len(traces), 1)
+            trace = json.loads(traces[0].read_text())
+            self.assertIn("boundary-map identity", trace["observable_stdout"])
+            self.assertEqual(trace["parsed_artifact"]["id"], "ATT-9999")

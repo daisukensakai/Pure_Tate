@@ -1,0 +1,61 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-07-31T00:30:50.842129+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex"
+    ],
+    "research": [
+      "grok",
+      "claude"
+    ],
+    "review": [
+      "grok",
+      "claude",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 73263,
+      "artifact_sha256": "9d3cc55606e4989708667445df90ef9d60b1e50239e8fb0e4b527cccbcbf49dc",
+      "completed_at": "2026-07-31T00:29:10.252916+00:00",
+      "engine": "codex",
+      "last_activity_at": "2026-07-31T00:29:10.121997+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0002.json",
+      "phase": "trace-mining",
+      "started_at": "2026-07-31T00:28:01.976528+00:00",
+      "state": "completed",
+      "step": 1,
+      "task_id": "TASK-C66-001-MINE-GROK-STANDARD_FALLBACK",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-4916d72dc34c6c7c.md",
+        "sha256": "4916d72dc34c6c7cb037c7863ed85218ad36d48eec96b15c5e798ef87a20969a"
+      }
+    },
+    {
+      "activity_bytes": 28888,
+      "artifact_sha256": "512764ce0a5a26b5c6257e1a3eab25c74dcb96e405e9aab30557c12bc646cd01",
+      "completed_at": "2026-07-31T00:30:50.841395+00:00",
+      "engine": "codex",
+      "last_activity_at": "2026-07-31T00:30:50.695178+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/attempts/ATT-0020.json",
+      "phase": "forced-proof",
+      "started_at": "2026-07-31T00:29:10.402726+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-C66-001-FORCED-FULL"
+    }
+  ],
+  "executed_steps": 2,
+  "requested_steps": 2,
+  "run_id": "RUN-C66-001-20260731T002801837654Z-3814",
+  "schema_version": 1,
+  "started_at": "2026-07-31T00:28:01.837654+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

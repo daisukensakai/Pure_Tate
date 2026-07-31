@@ -1,0 +1,91 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-07-31T01:34:02.561522+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ],
+    "research": [
+      "grok",
+      "claude"
+    ],
+    "review": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 38482,
+      "artifact_sha256": "bcb654f2a29e31e46c184d3a1392a172d5d42840648e21c6c53551024328e461",
+      "completed_at": "2026-07-31T01:15:16.105490+00:00",
+      "engine": "gemini",
+      "last_activity_at": "2026-07-31T01:15:16.073038+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/attempts/ATT-0021.json",
+      "phase": "forced-proof",
+      "started_at": "2026-07-31T01:12:33.904208+00:00",
+      "state": "completed",
+      "step": 1,
+      "task_id": "TASK-C66-001-FORCED-FULL"
+    },
+    {
+      "activity_bytes": 16176,
+      "artifact_sha256": "d3e1c5a8e19913ecce8c200b30435c5897958695dc80aa0fd6141672b4630341",
+      "completed_at": "2026-07-31T01:17:41.343539+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-07-31T01:17:40.922944+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/reviews/REV-0026.json",
+      "phase": "review",
+      "started_at": "2026-07-31T01:15:16.267829+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-V-ATT-0021-P1"
+    },
+    {
+      "activity_bytes": 11437,
+      "artifact_sha256": "d16b99453050aa17bd4944e2133eaedb92d03de8b5ed97b5a9dca8f69d8628fd",
+      "completed_at": "2026-07-31T01:19:02.285666+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-07-31T01:19:01.860416+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0003.json",
+      "phase": "trace-mining",
+      "started_at": "2026-07-31T01:17:41.558126+00:00",
+      "state": "completed",
+      "step": 3,
+      "task_id": "TASK-C66-001-MINE-GEMINI-FORCED_PROOF",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-11878baf5e96cb76.md",
+        "sha256": "11878baf5e96cb760b0e211fe013e2c37f9f03c4c177465b6443410ae79583ca"
+      }
+    },
+    {
+      "activity_bytes": 23016,
+      "completed_at": "2026-07-31T01:34:02.554387+00:00",
+      "engine": "gemini",
+      "error": "agent watchdog: total timeout after 900.0s; stderr: Warning: Basic terminal detected (TERM=dumb). Visual rendering will be limited. For the best experience, use a terminal emulator with truecolor support.\nWarning: 256-color support not detected. Using a terminal with at least 256-color support is recommended for a better visual experience.\nRipgrep is not available. Falling back to GrepTool.\nAttempt 1 failed. Retrying with backoff... Error: exception TypeError: fetch failed sending request\n    at file:///opt/homebrew/lib/node_modules/@google/gemini-cli/bundle/chunk-F3VE7C53.js:267022:13\n    at async Models.generateContent (file:///opt/homebrew/lib/node_modules/@google/gemini-cli/bundle/chunk-F3VE7C53.js:267994:16)\n    at async file:///opt/homebrew/lib/node_modules/@google/gemini-cli/bundle/chunk-F3VE7C53.js:310174:26\n    at async file:///opt",
+      "last_activity_at": "2026-07-31T01:33:13.736710+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/attempts/ATT-0023.json",
+      "phase": "standard-fallback",
+      "started_at": "2026-07-31T01:19:02.506050+00:00",
+      "state": "failed",
+      "step": 4,
+      "task_id": "TASK-C66-M-001"
+    }
+  ],
+  "executed_steps": 4,
+  "requested_steps": 4,
+  "run_id": "RUN-C66-001-20260731T011233723708Z-7475",
+  "schema_version": 1,
+  "started_at": "2026-07-31T01:12:33.723708+00:00",
+  "status": "stopped",
+  "stop_reason": "engine_failure"
+}

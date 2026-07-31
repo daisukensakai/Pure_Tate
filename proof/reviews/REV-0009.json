@@ -1,0 +1,38 @@
+{
+  "attempt_id": "ATT-0005",
+  "checked_claims": [
+    "CLAIM A is supported only as cited reduction bookkeeping, not re-proved here. SRC-0002 equation (6.1) is a right-exact Borel\u2013Moore homology sequence and does not require degeneration of a full spectral sequence. For k=16, the stated vanishing thresholds yield exactly the exceptional stable pairs M_{3,12}, M_{5,8}, M_{6,6}, M_{7,4}, and M_{8,n} for n=0,1,2 among g>=3, so no pair is silently omitted from the attempt's declared list.",
+    "The strongest mathematical defect is a cohomological-degree error in the passage from CLAIM D to CLAIM E. Since dim M_8=21, Poincare duality gives H^{BM}_{16}(M_8) isomorphic to H^{26}(M_8)(21), and therefore W_{-16}H^{BM}_{16}(M_8) is identified with W_{26}H^{26}(M_8)(21), not with W_{16}H^{16}(M_8). An algebraic codimension-13 class Q(-13) becomes Q(8) after the twist (21). The advertised Q(8) is numerically correct only after replacing degree 16 by degree 26. Hard Lefschetz cannot repair this on the nonproper open stack M_8. CLAIM D happens to assert the CKgP consequence for every k, so a corrected argument could apply it at k=26, but the load-bearing degree identification written in the approach is false.",
+    "The conversion between low cohomology H^{16} of the proper compactification and homology degree 16 also suppresses a separate hard-Lefschetz step and its twist. On a proper space of dimension d, cup product with an ample class d-16 times relates H^{16} to H^{2d-16}; this is not the same duality as the open-stack identification above.",
+    "CLAIM C remains conditional and therefore proves no new CKgP result as written. SRC-0005 supplies quotient presentations for individual CE splitting loci and Chow-generation arguments, but it does not state the desired genus-8 CKgP theorem. The attempt does not execute the required affine-bundle description over the fixed-splitting base, the finite-gerbe transfer, or the finite-stratification argument for all tetragonal and pentagonal pieces.",
+    "The bielliptic sublocus is not by itself an obstruction if the entire splitting stratum is proved CKgP: CKgP is a property of the ambient locally closed stratum and does not require every closed sublocus to have CKgP. Thus GAP-2 is not the strongest gap; the missing proof that the whole CE stratum fits the permanence lemmas is the relevant issue.",
+    "The stack/coarse-space audit finds no explicit substitution of a coarse moduli space for M_8. However, the SL_2 presentation differs from the PGL_2 Hurwitz stack by a finite gerbe rather than an isomorphism of stacks. Passing CKgP and Chow groups across that gerbe uses SRC-0004 Lemma 3.6 and rational coefficients. That step must be stated instead of treating the presentations as literally identical.",
+    "Application of SRC-0002 Proposition 4.2(2) also requires the proper surjection to be representable by Deligne\u2013Mumford stacks. SRC-0005 Theorem 2.4 explicitly states properness and rational Chow surjectivity but the attempt does not verify the representability hypothesis for beta'. This is likely repairable for the Hurwitz stacks in question, but it is not supplied.",
+    "All supplied Chow and cohomology claims are rational. This is essential for finite-gerbe invariance, averaging over graph automorphisms, and the stated Chow-ring computation. Nothing in the attempt establishes an integral analogue, and no integral conclusion may be inferred.",
+    "The boundary Gysin bookkeeping is omitted. In cohomology a codimension-one boundary pushforward has the form H^{k-2}(D)(-1) to H^k of the compactification; in homology the proper pushforward preserves homological degree. Iterated graph gluings contribute one such degree-two shift and Tate twist per edge, while Kunneth decomposes total homological degree among vertex factors. The attempt cites equation (6.1) but does not track these shifts, so it is not a self-contained verification of the full reduction.",
+    "Graph automorphisms are not treated. Over Q, cohomology of a finite quotient is expressed using invariants and proper pushforward naturally encounters coinvariants; averaging identifies the two. This is harmless rationally but fails integrally and must not be left implicit in an integral version. No graph calculation is actually performed in this one-case proposal.",
+    "No unsupported spectral-sequence degeneration is needed for the right-exact weight quotient used in equation (6.1). Conversely, the attempt does not analyze higher differentials and therefore cannot be read as a proof of any stronger weight-spectral-sequence decomposition.",
+    "CLAIM B correctly keeps A_*(M_8)=R_*(M_8) separate from CKgP. CLAIM D uses the valid direction CKgP implies algebraicity of the pure-weight piece, followed by Chow equals tautological; it does not silently infer algebraic or tautological generation merely from being pure Tate.",
+    "For rational Hodge structures, a pure structure entirely of type (m,m) is actually a direct sum of Q(-m), so the conditional Hodge conclusion need not be weakened to semisimplification. The attempt makes no unconditional Galois-representation or motivic isomorphism and does not use the Chenevier\u2013Lannes predictions as theorems.",
+    "CLAIMS E and F honestly discharge at most the unpointed pair (8,0). The stable pairs M_{8,1}, M_{8,2}, M_{3,12}, M_{5,8}, M_{6,6}, and M_{7,4} remain untouched, so the attempt cannot establish RED-0001 or the global degree-16 conjecture."
+  ],
+  "created_on": "2026-07-30",
+  "id": "REV-0009",
+  "independent": true,
+  "reviewer_engine": "codex",
+  "scope_checks": [
+    "stack versus coarse moduli and the finite SL_2/PGL_2 gerbe",
+    "rational versus integral coefficients",
+    "cohomology degree 16 versus Borel\u2013Moore homology degree 16",
+    "Poincare duality, hard Lefschetz, and every Tate twist",
+    "Gysin and Kunneth degree shifts",
+    "weight exact sequence versus spectral-sequence degeneration",
+    "invariants versus coinvariants under graph automorphisms",
+    "semisimplification versus an actual Hodge-structure isomorphism",
+    "predicted motives versus unconditional theorems",
+    "pure Tate versus algebraic or tautological generation",
+    "omitted stable pairs"
+  ],
+  "strongest_attack": "Degree-16/26 Poincare-duality mismatch: for the 21-dimensional open stack M_8, W_{-16}H^{BM}_{16} is W_{26}H^{26}(21), not W_{16}H^{16}. The claimed Tate twist Q(8) is obtained from codimension-13 classes Q(-13), and the written inference from the degree-16 pure piece is invalid. The argument is repairable only after proving CKgP and applying Lemma 4.3 in degree 26, which the attempt has not done unconditionally.",
+  "verdict": "incomplete"
+}

@@ -1,0 +1,92 @@
+{
+  "approach_id": "prove-pure-weight-tate-only",
+  "argument_markdown": "## Setup\n\nFix the revision-2 target for the stable pair $(g,n)=(6,6)$. The moduli stack $\\mathcal{M}_{6,6}$ is smooth of complex dimension\n$$d=3g-3+n=21.$$\nBy RED-0001 and FND-0001, extending the low-homology induction of THM-0003 to compactified degree $16$ reduces the unresolved open-stratum input for this pair to the pure-weight Borel\u2013Moore group\n$$W_{-16}H^{\\mathrm{BM}}_{16}(\\mathcal{M}_{6,6};\\mathbb{Q}),$$\nexpected to be of Tate type $\\mathbb{Q}(8)$. Poincar\u00e9 duality for smooth Deligne\u2013Mumford stacks identifies this with the ordinary pure-weight piece\n$$W_{26}H^{26}(\\mathcal{M}_{6,6};\\mathbb{Q})(21),$$\nwhose untwisted form is $W_{26}H^{26}(\\mathcal{M}_{6,6})$ of expected type $\\mathbb{Q}(-13)$ (Chow codimension $13$).\n\nThe published CKgP range (THM-0005) only reaches $n\\le c(6)=5$, so $\\mathcal{M}_{6,6}$ lies strictly outside CKgP. The base-case inequality of THM-0004 applies: $n=6\\ge 2$ and $k=16=2g-2+n$, so the open stratum is not absorbed by vanishing ranges and must be treated directly. We prove only the weaker pure-weight Tate statement for this open input, without establishing CKgP, algebraicity of the full Chow ring, or tautological generation.\n\n## Pure-weight vanishing without CKgP\n\n**Step 1 (duality).** By the packet identity FND-0001,\n$$W_{-16}H^{\\mathrm{BM}}_{16}(\\mathcal{M}_{6,6})\\ \\cong\\ W_{26}H^{26}(\\mathcal{M}_{6,6})(21)$$\nas mixed Hodge structures. In particular, vanishing of the ordinary group $H^{26}(\\mathcal{M}_{6,6};\\mathbb{Q})$ implies vanishing of the Borel\u2013Moore pure-weight target.\n\n**Step 2 (orbifold/group cohomology).** For $g\\ge 2$, the rational cohomology of the moduli stack agrees with the rational group cohomology of the mapping class group:\n$$H^i(\\mathcal{M}_{6,6};\\mathbb{Q})\\ \\cong\\ H^i(\\mathrm{Mod}_{6,6};\\mathbb{Q}).$$\n(This is the standard identification via contractible Teichm\u00fcller space; it is not among the dependency-closed packet theorems and is recorded as an external input below.)\n\n**Step 3 (Harer virtual cohomological dimension).** Harer's theorem supplies\n$$\\mathrm{vcd}(\\mathrm{Mod}_{g,n})=4g+n-5\\qquad(g\\ge 2).$$\nSpecialising to $(g,n)=(6,6)$ yields\n$$\\mathrm{vcd}(\\mathrm{Mod}_{6,6})=4\\cdot 6+6-5=25.$$\nConsequently $H^i(\\mathrm{Mod}_{6,6};M)=0$ for every $\\mathbb{Q}[\\mathrm{Mod}_{6,6}]$-module $M$ and every $i>25$. Taking trivial coefficients,\n$$H^{26}(\\mathcal{M}_{6,6};\\mathbb{Q})=0.$$\n\n**Step 4 (pure-weight Tate).** The zero mixed Hodge structure has $W_{26}H^{26}(\\mathcal{M}_{6,6})=0$, hence\n$$W_{-16}H^{\\mathrm{BM}}_{16}(\\mathcal{M}_{6,6})=0.$$\nThe zero object is a direct sum of zero copies of $\\mathbb{Q}(8)$, so the open input is pure Tate of the expected type. No cycle-class surjectivity, no CKgP extension from $n=5$ to $n=6$, and no point-count is used: the pure-weight piece is empty for degree reasons.\n\n## Relation to the compactified statement\n\nBy THM-0003, the boundary long exact sequence realises $H_{16}(\\overline{\\mathcal{M}}_{6,6})$ as an extension of the open pure-weight quotient by a boundary contribution. The vanishing just proved means that, for this single open stratum, the pure-weight quotient contributes nothing. Under the global inductive package of RED-0001 (boundary strata assembled from products of lower $\\overline{\\mathcal{M}}_{g_i,n_i}$, already pure Tate in even degree $16$ by THM-0002 and the inductive hypothesis on smaller dual graphs), the $(6,6)$ open input is therefore discharged.\n\nThis does **not** by itself prove CONJ-0001 for all $(g,n)$: the remaining RED-0001 pairs must still be treated, and the boundary induction is taken from the published reduction rather than re-derived here.\n\n## Why CKgP is avoided\n\nCKgP for $\\mathcal{M}_{6,5}$ (THM-0005) controls pure-weight cohomology of the base of the forgetful map $\\mathcal{M}_{6,6}\\to\\mathcal{M}_{6,5}$, but is not needed once ordinary cohomological vanishing in degree $26$ is available. The argument never claims that $\\mathrm{CH}^*(\\mathcal{M}_{6,6})$ is tautological, nor that the cycle map is an isomorphism in codimension $13$; both are strictly stronger than pure-weight Tate of the zero group.\n\n## Gaps and external inputs\n\n1. **Harer vcd** is classical but not a dependency-closed claim in the packet; the numerical equality $\\mathrm{vcd}(\\mathrm{Mod}_{6,6})=25$ is an external theorem.\n2. **Stack vs.\\ mapping class group cohomology** over $\\mathbb{Q}$ is standard but likewise external to the packet.\n3. **Inductive boundary assembly** for $H^{16}(\\overline{\\mathcal{M}}_{6,6})$ is cited from THM-0003/RED-0001 rather than rewritten; only the open pure-weight input for $(6,6)$ is treated.\n4. The mechanical list in RED-0001 still includes $(6,6)$ because it was generated from CKgP bounds and base-case inequalities alone; the vcd filter is an additional vanishing not recorded in that list. Accepting the argument removes $(6,6)$ from the open-input table but does not automatically remove pairs (e.g.\\ $(8,0)$, $(8,1)$) whose ordinary dual degree does not exceed vcd.\n\n## Conclusion\n\nModulo the classical topological inputs above, $W_{-16}H^{\\mathrm{BM}}_{16}(\\mathcal{M}_{6,6};\\mathbb{Q})=0$ is pure Tate of type $\\mathbb{Q}(8)$. This is a pure-weight Tate proof without CKgP for the single packet case $(6,6)$. Completeness of the compactified degree-$16$ statement for this pair still depends on the boundary induction package of RED-0001.",
+  "assumptions": [
+    "Harer's virtual cohomological dimension theorem: vcd(Mod_{g,n})=4g+n-5 for g\u22652.",
+    "Identification H^*(M_{g,n};Q) \u2245 H^*(Mod_{g,n};Q) as rational (orbifold/stack) cohomology for g\u22652.",
+    "The RED-0001/THM-0003 boundary induction package correctly reduces H^{16}(Mbar_{g,n}) to open pure-weight inputs on the listed base cases, so only those open inputs need separate treatment.",
+    "Poincar\u00e9 duality for smooth DM stacks over C with Q coefficients as packaged in FND-0001."
+  ],
+  "claims": [
+    {
+      "id": "A1",
+      "statement": "For (g,n)=(6,6) one has d=3g-3+n=21, and FND-0001 gives a canonical identification W_{-16}H^{BM}_{16}(M_{6,6}) \u2245 W_{26}H^{26}(M_{6,6})(21) of mixed Hodge structures, with expected types Q(8) and Q(-13) respectively.",
+      "status": "proved"
+    },
+    {
+      "id": "A2",
+      "statement": "The pair (6,6) lies outside the published CKgP range n\u2264c(6)=5 and meets the THM-0004 open base-case threshold k=16=2g-2+n, so the open pure-weight input is not discharged by CKgP or by the low-degree vanishing ranges alone.",
+      "status": "proved"
+    },
+    {
+      "id": "A3",
+      "statement": "Rational cohomology of the moduli stack M_{6,6} agrees with rational group cohomology of the mapping class group Mod_{6,6}.",
+      "status": "gap"
+    },
+    {
+      "id": "A4",
+      "statement": "Harer's theorem gives vcd(Mod_{6,6})=4\u00b76+6-5=25, hence H^i(Mod_{6,6};Q)=0 for all i>25.",
+      "status": "gap"
+    },
+    {
+      "id": "A5",
+      "statement": "Combining A3 and A4 yields H^{26}(M_{6,6};Q)=0 as a mixed Hodge structure, so W_{26}H^{26}(M_{6,6})=0.",
+      "status": "proved"
+    },
+    {
+      "id": "A6",
+      "statement": "By A1 and A5, W_{-16}H^{BM}_{16}(M_{6,6};Q)=0, which is pure Tate of type Q(8) (empty direct sum). This is a pure-weight Tate statement and does not use CKgP.",
+      "status": "proved"
+    },
+    {
+      "id": "A7",
+      "statement": "Under the boundary exact sequence of THM-0003 and the inductive package recorded in RED-0001, vanishing of the (6,6) open pure-weight quotient removes this pair from the unresolved open-input list for compactified degree 16.",
+      "status": "gap"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "engine": "grok",
+  "gap_markers": [
+    "GAP-A3: stack/group-cohomology identification not among dependency-closed packet claims",
+    "GAP-A4: Harer vcd numerical input is external to the packet",
+    "GAP-A7: compactified conclusion for (6,6) still relies on the published boundary induction package rather than a self-contained dual-graph check",
+    "GAP-SCOPE: argument discharges only the open pure-weight input for (6,6), not the full list in RED-0001 and not CONJ-0001 in all degrees",
+    "GAP-METHOD: no independent geometric computation (point counts, graph complex, or explicit generators) is supplied; vanishing is purely cohomological-dimension theoretic"
+  ],
+  "id": "ATT-0012",
+  "packet_id": "CASE-6-6-v2",
+  "packet_path": "proof/packets/generated/CASE-6-6-v2.md",
+  "packet_sha256": "e6758c6886696d915814dc718f28af0e6b44088916881055c88a6276f55af88e",
+  "schema_version": 2,
+  "source_claim_ids": [
+    "RED-0001",
+    "FND-0001",
+    "CONJ-0001",
+    "THM-0001",
+    "THM-0002",
+    "THM-0003",
+    "THM-0004",
+    "THM-0005",
+    "OBS-0001"
+  ],
+  "status": "proposed",
+  "summary": "For (g,n)=(6,6), the open pure-weight input W_{-16}H^{BM}_{16}(M_{6,6}) vanishes by Poincar\u00e9 duality and Harer virtual cohomological dimension, hence is vacuously pure Tate of type Q(8), without using CKgP.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-M-0012"
+}

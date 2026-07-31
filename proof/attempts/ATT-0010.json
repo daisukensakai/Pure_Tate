@@ -1,0 +1,80 @@
+{
+  "approach_id": "prove-pure-weight-tate-only",
+  "argument_markdown": "## Argument\n\nLet\n\n\\[\nf:\\mathcal M_{5,8}\\longrightarrow \\mathcal M_{5,7}\n\\]\n\nforget the eighth marking. Its fiber over \\((C;p_1,\\ldots,p_7)\\) is\n\\(C\\setminus\\{p_1,\\ldots,p_7\\}\\). Since the fiber is a noncompact curve, only\n\\(R^0f_*\\mathbf Q\\) and \\(R^1f_*\\mathbf Q\\) occur. Writing \\(\\mathbb H=R^1\\pi_*\\mathbf Q\\) for the usual genus-five variation on \\(\\mathcal M_{5,7}\\), the cohomology of a seven-punctured curve gives an exact sequence of variations of mixed Hodge structure\n\n\\[\n0\\longrightarrow \\mathbb H\\longrightarrow R^1f_*\\mathbf Q\n\\longrightarrow \\mathbf Q(-1)^{\\oplus 6}\\longrightarrow 0.\n\\]\n\nThe Leray spectral sequence therefore shows that every contribution to\n\\(H^{24}(\\mathcal M_{5,8})\\) is obtained from\n\n\\[\nH^{24}(\\mathcal M_{5,7};\\mathbf Q)\n\\quad\\text{or}\\quad\nH^{23}(\\mathcal M_{5,7};R^1f_*\\mathbf Q).\n\\]\n\nThe packet records CKgP and tautological Chow for \\(\\mathcal M_{5,7}\\). Thus the pure weight-24 part of the first group is Tate of type \\(\\mathbf Q(-12)\\). For the puncture quotient of \\(R^1f_*\\mathbf Q\\), the relevant possible contribution is obtained from constant-coefficient cohomology after a Tate twist. CKgP rules out a nonzero odd-degree pure piece of the required algebraic type, provided the usual CKgP-to-pure-cohomology implication is applied in its full parity-sensitive form.\n\nWhat remains is the contribution arising from\n\n\\[\nH^{23}(\\mathcal M_{5,7};\\mathbb H).\n\\]\n\nNeither THM-0005 nor any other result supplied in the packet asserts the required vanishing or Tate property for this nonconstant symplectic local system. Moreover, the exact sequence for \\(R^1f_*\\mathbf Q\\) can have nontrivial extension and Leray-differential effects; strictness of weights alone does not remove a weight-24 subquotient coming from the \\(\\mathbb H\\)-term. Consequently the desired conclusion\n\n\\[\nW_{24}H^{24}(\\mathcal M_{5,8})\\cong \\mathbf Q(-12)^{\\oplus r}\n\\]\n\nwould follow from the additional statement\n\n\\[\nW_{24}H^{23}(\\mathcal M_{5,7};\\mathbb H)=0\n\\]\n\n(or from a proof that this group is Tate of type \\(\\mathbf Q(-12)\\)), together with the necessary compatibility with the Leray filtration. No such statement is contained in the supplied packet, and it is not proved here.\n\nFinally, since \\(\\dim\\mathcal M_{5,8}=3\\cdot5-3+8=20\\), Poincare duality converts the unresolved ordinary target exactly into\n\n\\[\nW_{24}H^{24}(\\mathcal M_{5,8})(20)\n= W_{-16}H^{BM}_{16}(\\mathcal M_{5,8}),\n\\]\n\nwhere \\(\\mathbf Q(-12)(20)=\\mathbf Q(8)\\). Thus the unresolved local-system term lies in precisely the target specified by the packet, not in an irrelevant degree or weight.",
+  "assumptions": [
+    "Standard mixed-Hodge Leray spectral sequence for the forgetful morphism is available and is strictly compatible with weights.",
+    "The CKgP-to-algebraicity implication cited in THM-0005 applies to the indicated pure constant-coefficient cohomology of M_{5,7}."
+  ],
+  "claims": [
+    {
+      "id": "A1",
+      "statement": "The target ordinary realization is W_24 H^24(M_{5,8})(20), and an untwisted Tate summand Q(-12) becomes Q(8) after the recorded twist.",
+      "status": "proved"
+    },
+    {
+      "id": "A2",
+      "statement": "For the forgetful morphism M_{5,8} to M_{5,7}, only the q=0 and q=1 rows occur in the Leray spectral sequence.",
+      "status": "proved"
+    },
+    {
+      "id": "A3",
+      "statement": "The variation R^1f_*Q is an extension of the genus-five symplectic variation H by Q(-1)^{oplus 6}.",
+      "status": "proved"
+    },
+    {
+      "id": "A4",
+      "statement": "The constant-coefficient weight-24 contribution from H^24(M_{5,7};Q) is Tate of type Q(-12), using the packet's CKgP result and its stated implication to algebraicity of pure-weight cohomology.",
+      "status": "proved"
+    },
+    {
+      "id": "A5",
+      "statement": "It suffices, in addition to controlling the constant puncture quotient and Leray extensions, to prove that W_24 H^23(M_{5,7};H) vanishes or is Tate of type Q(-12).",
+      "status": "proved"
+    },
+    {
+      "id": "A6",
+      "statement": "The group W_24 H^23(M_{5,7};H) vanishes or is Tate.",
+      "status": "gap"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "engine": "codex",
+  "gap_markers": [
+    "No vanishing or Tate theorem is supplied or proved for W_24 H^23(M_{5,7};H), where H is the standard symplectic variation.",
+    "The effect of the extension 0 -> H -> R^1f_*Q -> Q(-1)^6 -> 0 on the relevant weight-24 Leray subquotient is not computed.",
+    "The parity-sensitive vanishing needed for the constant puncture quotient is not independently proved from the packet's abbreviated CKgP statement.",
+    "Degeneration and extension data for the Leray filtration in total degree 24 are not fully established."
+  ],
+  "id": "ATT-0010",
+  "packet_id": "CASE-5-8-v2",
+  "packet_path": "proof/packets/generated/CASE-5-8-v2.md",
+  "packet_sha256": "93405e895723720d9a4ff947646a743224b38a247b0e6c9ca363f1aac83e815c",
+  "schema_version": 2,
+  "source_claim_ids": [
+    "FND-0001",
+    "THM-0003",
+    "THM-0005",
+    "OBS-0001",
+    "RED-0001"
+  ],
+  "status": "proposed",
+  "summary": "The forgetful morphism M_{5,8} to M_{5,7} reduces the weight-24 part of H^24 to a constant-coefficient term controlled by the known CKgP case and a single symplectic-local-system term. The latter is not controlled by the supplied results, so the pure-weight Tate statement is not proved.",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-M-0007"
+}

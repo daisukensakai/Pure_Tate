@@ -1,0 +1,92 @@
+{
+  "attempt_id": "ATT-0023",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim_id": "ATT-0023-C1",
+      "note": "Verified by Riemann-Roch and the Casnati-Ekedahl degree formula deg W_5 = 16, deg omega_C = 10, thus deg L = 6, chi(L) = 1, and h^0(L) >= 1.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0023-C2",
+      "note": "Verified that deg(omega_C tensor W_4^vee(Gamma)) = -4, so the f=4 obstruction component always vanishes, while the f=5 component deg(omega_C tensor W_5^vee(Gamma)) = 0 has a nonzero section iff the bundle is trivial, i.e., O_C(Gamma) is isomorphic to L.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0023-C3",
+      "note": "Since the evaluation-failure locus and the Abel-Jacobi incidence locus agree on geometric points, their reduced induced substacks are isomorphic.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0023-C4",
+      "note": "Verified that ordering six distinct points forms a finite etale S_6-torsor over the reduced-support open of the effective-divisor relative linear system.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-31",
+  "finding_candidates": [
+    {
+      "certainty": "certain",
+      "evidence": "For g=6 and f_1=4, the Casnati-Ekedahl degree formula gives deg W_4 = 20. For any divisor \\Gamma of degree 6, deg(\\omega_C \\otimes W_4^\\vee(\\Gamma)) = 10 - 20 + 6 = -4. Since this is strictly negative, the global section space vanishes on all fibres.",
+      "id": "FND-0037",
+      "key": "FND-0037",
+      "statement": "On any smooth genus-6 degree-four cover C -> P^1 with balanced splitting F = O(4) \u2295 O(5), the f=4 component of the CE evaluation obstruction bundle \\omega_C \\otimes W_4^\\vee(\\Gamma) has degree -4 for any degree-six divisor \\Gamma, hence H^0(\\omega_C \\otimes W_4^\\vee(\\Gamma)) = 0 and the obstruction vanishes identically on this component.",
+      "status": "candidate",
+      "title": "Vanishing of f=4 CE obstruction component on genus-6 curves"
+    },
+    {
+      "certainty": "certain",
+      "evidence": "For g=6 and f_2=5, the Casnati-Ekedahl degree formula gives deg W_5 = 16. For any divisor \\Gamma of degree 6, deg(\\omega_C \\otimes W_5^\\vee(\\Gamma)) = 10 - 16 + 6 = 0. A degree-zero line bundle has a nonzero section if and only if it is trivial, which translates directly to the line bundle isomorphism O_C(\\Gamma) \\cong L.",
+      "id": "FND-0038",
+      "key": "FND-0038",
+      "statement": "On any smooth genus-6 degree-four cover C -> P^1 with balanced splitting F = O(4) \u2295 O(5), the f=5 component of the CE evaluation obstruction bundle \\omega_C \\otimes W_5^\\vee(\\Gamma) has degree 0 for any degree-six divisor \\Gamma. Consequently, evaluation fails on \\Gamma if and only if O_C(\\Gamma) is isomorphic to L = W_5 \\otimes \\omega_C^{-1}.",
+      "status": "candidate",
+      "title": "Evaluation failure condition for f=5 CE component"
+    },
+    {
+      "certainty": "certain",
+      "evidence": "Since the points in the configuration space are pairwise distinct, the action of the symmetric group S_6 is free. \u00c9tale-locally, a reduced divisor of degree 6 splits into 6 disjoint sections, proving the etale torsor property over the open reduced-support locus.",
+      "id": "FND-0039",
+      "key": "FND-0039",
+      "statement": "The forgetful map from the relative ordered distinct configuration stack Conf_6(C/B^{bal}) to the relative effective-divisor space of degree six is a finite etale S_6-torsor over the reduced-support open locus.",
+      "status": "candidate",
+      "title": "S_6 ordering torsor over reduced-support open relative divisor space"
+    }
+  ],
+  "id": "REV-0029",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "C66-GEO-Z",
+      "note": "We confirmed that step-by-step, the evaluation-failure locus is correctly identified on smooth genus-6 degree-four covers with balanced Casnati\u2013Ekedahl splitting. In particular: (1) deg W_5 = 16 and deg L = 6, yielding chi(L) = 1 and h^0(L) >= 1; (2) Serre duality and f=4 obstruction vanishing show evaluation fails iff O_C(p_1 + ... + p_6) is isomorphic to L; (3) because the sections are pairwise-distinct, the ordering map to the relative divisor space is a finite etale S_6-torsor over the reduced-support open.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0023-P1",
+  "reviewer_engine": "gemini",
+  "schema_version": 3,
+  "strongest_attack": "The strongest potential attack targets the stabilizer/multiplicity behavior of the evaluation-failure locus. If one incorrectly asserts that the evaluation-failure scheme Z and the Abel-Jacobi incidence scheme I are isomorphic as nonreduced schemes, the proof would fail because the jump in the dimension of the f=5 obstruction space could introduce unexpected nilpotent/Fitting ideal behavior. Furthermore, if one tries to formulate this torsor on coarse moduli spaces rather than stacks, the S_6-torsor would branch over curves with non-trivial automorphisms. The proof successfully avoids both pitfalls by working strictly stack-theoretically and restricting the isomorphism to the reduced induced substacks (Z_red = I_red).",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B^{bal} be the moduli stack of smooth genus-6 degree-four covers gamma:C\u2192P^1 equipped with balanced Casnati\u2013Ekedahl splitting F=O_{P^1}(4)\u2295O_{P^1}(5), and put W_5=(O_{P(E^\u2228)}(2)\u2297gamma^*O_{P^1}(-5))|_C and L=W_5\u2297omega_C^{-1}. On Conf_6(C/B^{bal}), the stack of six ordered pairwise-distinct sections, the reduced evaluation-failure locus Z_red is exactly the reduced Abel\u2013Jacobi incidence locus defined by O_C(p_1+\u22ef+p_6)\u2245L. Its quotient by S_6 is the reduced-support open in the relative effective-divisor incidence space for L, and Z_red\u2192Z_red/S_6 is a finite \u00e9tale S_6-torsor. Fibrewise deg L=6, chi(L)=1, and h^0(L)\u22651.",
+  "verdict": "incomplete"
+}

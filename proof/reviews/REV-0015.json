@@ -1,0 +1,35 @@
+{
+  "attempt_id": "ATT-0008",
+  "checked_claims": [
+    "Fatal degree mismatch: dim M_{3,12}=18, so Poincare duality gives H^{BM}_{16}(M_{3,12}) congruent to H^{20}(M_{3,12})(18). Therefore Gr^W_{-16} H^{BM}_{16} corresponds to Gr^W_{20} H^{20}(18), not to W_{16}H^{16}. A Q(-10) class in H^{20} becomes Q(8) after twisting by (18). Step C analyzes the wrong cohomological degree and weight.",
+    "The forgetful Leray reduction is consequently wrong. For U to U_{11}, only R^0 and R^1 occur. The fiber is a genus-3 curve punctured at 11 ordered points, and R^1 has graded pieces V and Q(-1)^{10}; a single forgetful map does not produce arbitrary tensor powers or symplectic local systems V_lambda. The relevant possible non-Tate term is Gr^W_{20}H^{19}(U_{11},V), not W_{16-q}H^{16-q}(M_{3,11},L).",
+    "Leray degeneration is asserted without proof. With only rows q=0,1, a possible d_2 remains, and its effect must be checked using strictness and weights. Extensions at E_infinity are not the same issue as unproved differentials. Thus Claim C is not established even as the stated conditional reduction.",
+    "The hyperelliptic conclusion can be repaired but is not proved with the advertised bookkeeping. Hyp_{3,12} has dimension 17, so its relevant term is Gr^W_{18}H^{18}(Hyp_{3,12})(17), which CKgP makes a sum of Q(-9)(17)=Q(8). In Borel-Moore homology the closed pushforward preserves degree and has no codimension twist; after Poincare duality it becomes a cohomological Gysin map shifting degree by 2 and carrying twist (1). The attempt instead leaves these shifts as an unspecified 'standard' correction.",
+    "The localization equivalence also requires the exact graded-weight sequence and the vanishing Gr^W_{-16}H^{BM}_{15}(Hyp_{3,12})=0. That vanishing follows from the general weight bound, but it is omitted. Once supplied, the hyperelliptic/non-hyperelliptic equivalence is valid over Q.",
+    "Stack usage is acceptable: the cited CKgP statements concern Deligne-Mumford stacks, and the attempt does not silently replace them by coarse spaces. Any finite-gerbe, quotient, or stack/coarse comparison used here is only justified rationally.",
+    "All source results used are rational. Nothing in the argument proves an integral statement; finite stabilizers and averaging over automorphisms would invalidate an unqualified integral upgrade.",
+    "The claimed equivalence between a rational Hodge-structure isomorphism and an l-adic Galois-representation isomorphism is false without additional algebraicity or comparison input. Hodge realization being Tate does not by itself prove that the Galois representation is an actual direct sum of Tate characters.",
+    "The attempt correctly refuses to promote semisimplified motivic calculations or Chenevier-Lannes predictions to actual isomorphisms, and it does not silently upgrade pure Tate to algebraic or tautological generation. These cautions do not repair the degree and Leray failures.",
+    "No graph-level calculation is performed, so invariants versus coinvariants and Kunneth shifts are not independently established by this attempt. Over Q, invariants and coinvariants for finite graph automorphism groups are related by averaging, but normalization factors would have to be retained in any explicit boundary argument.",
+    "The attempt treats only (g,n)=(3,12). It explicitly leaves the other stated stable base pairs (5,8), (6,6), (7,4), and (8,0), (8,1), (8,2) untouched, so it cannot prove the full target claim."
+  ],
+  "created_on": "2026-07-30",
+  "id": "REV-0015",
+  "independent": true,
+  "reviewer_engine": "codex",
+  "scope_checks": [
+    "stack versus coarse space: confirmed only for rational stack statements; no coarse substitution detected",
+    "rational versus integral coefficients: rational only; no integral conclusion is supported",
+    "cohomology versus Borel-Moore homology degree: failed, with 16 incorrectly replacing 20",
+    "Poincare duality and Tate twists: failed in Step C and omitted in Step A",
+    "Gysin and Kunneth shifts: hyperelliptic Gysin shifts are not written; no independent graph-Kunneth audit is possible",
+    "degeneration or spectral-sequence differentials: degeneration is unsupported and d_2 is untreated",
+    "invariants versus coinvariants under graph automorphisms: not used explicitly; rational averaging would be required",
+    "semisimplification versus actual isomorphism: correctly distinguished, except for the unjustified Hodge-to-Galois equivalence",
+    "predicted motives used as unconditional theorems: correctly avoided",
+    "pure Tate upgraded to algebraic or tautological generation: correctly avoided",
+    "omitted stable pairs: all base pairs other than (3,12) remain unproved"
+  ],
+  "strongest_attack": "Degree-20, not degree-16: Poincare duality identifies Gr^W_{-16}H^{BM}_{16}(M_{3,12}) with Gr^W_{20}H^{20}(M_{3,12})(18). The proof's load-bearing Leray analysis instead studies weight-16 degree-16 cohomology, so its stated local-system obstruction is unrelated to the target.",
+  "verdict": "incomplete"
+}

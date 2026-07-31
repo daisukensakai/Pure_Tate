@@ -1,0 +1,166 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "On Conf_6(C/B^{bal}) for smooth genus-6 degree-four covers with balanced splitting F=O(4) direct-sum O(5), the reduced evaluation-failure locus Z_red equals the reduced Abel\u2013Jacobi incidence locus defined by O_C(p_1+...+p_6) isomorphic to L=W_5 tensor omega_C^{-1}."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "For every geometric ordered pairwise-distinct degree-six divisor Gamma, evaluation fails if and only if O_C(Gamma) isomorphic to W_5 tensor omega_C^{-1}."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The quotient of Z_red by S_6 is the reduced-support open in the relative effective-divisor incidence space for L, and Z_red to Z_red/S_6 is a finite etale S_6-torsor."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "On any smooth genus-6 degree-four cover with balanced splitting F=O(4) direct-sum O(5), the f=4 component of the CE evaluation obstruction bundle omega_C tensor W_4^vee(Gamma) has degree -4 for any degree-six divisor Gamma, so H^0 of that component vanishes identically."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "On any smooth genus-6 degree-four cover with balanced splitting F=O(4) direct-sum O(5), the f=5 component of the CE evaluation obstruction bundle has degree 0 for any degree-six divisor Gamma, and evaluation fails on Gamma if and only if O_C(Gamma) isomorphic to L=W_5 tensor omega_C^{-1}."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The forgetful map from the relative ordered distinct configuration stack Conf_6(C/B^{bal}) to the relative effective-divisor space of degree six is a finite etale S_6-torsor over the reduced-support open locus."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Agreement of the evaluation-failure locus and the Abel\u2013Jacobi incidence locus on geometric points implies equality of their reduced induced substacks."
+    }
+  ],
+  "engine": "grok",
+  "established_facts": [
+    {
+      "evidence": "SRC-0004 Lemma 10.6 degree/Serre-duality calculation in packet C66-001-v3",
+      "evidence_class": "source",
+      "statement": "Under the Casnati\u2013Ekedahl convention W_{f_i}=O_{P(E^vee)}(2) tensor gamma^*O(-f_i)|_C, the degree formula deg(W_{f_i}|_C)=4g+12-4f_i holds."
+    },
+    {
+      "evidence": "Packet C66-001-v3 canonical geometric bottleneck CE line-bundle convention",
+      "evidence_class": "source",
+      "statement": "For g=6 and the balanced splitting F=O_{P^1}(4) direct-sum O_{P^1}(5), the f_2=5 summand is W_5:=(O_{P(E^vee)}(2) tensor gamma^*O_{P^1}(-5))|_C; it is not the O_{P^1}(5) summand of F."
+    },
+    {
+      "evidence": "deg W_5=4*6+12-4*5=16; deg omega_C=2g-2=10; deg L=16-10=6",
+      "evidence_class": "mechanical",
+      "statement": "For g=6, deg(W_5)=16 and deg(W_5 tensor omega_C^{-1})=6."
+    },
+    {
+      "evidence": "Riemann\u2013Roch: chi(L)=deg L-g+1=6-6+1=1, so h^0(L)=1+h^1(L)>=1",
+      "evidence_class": "mechanical",
+      "statement": "On each smooth connected genus-6 fibre, for L=W_5 tensor omega_C^{-1} one has chi(L)=1 and therefore h^0(L)=1+h^1(L)>=1."
+    },
+    {
+      "evidence": "deg W_4=4*6+12-4*4=20; deg(omega_C tensor W_4^vee(Gamma))=10-20+6=-4<0",
+      "evidence_class": "mechanical",
+      "statement": "For any degree-six divisor Gamma on a smooth genus-6 fibre, deg(omega_C tensor W_4^vee(Gamma))=-4, hence H^0(omega_C tensor W_4^vee(Gamma))=0 and the f=4 obstruction component vanishes identically."
+    },
+    {
+      "evidence": "deg W_5=16; deg(omega_C tensor W_5^vee(Gamma))=10-16+6=0",
+      "evidence_class": "mechanical",
+      "statement": "For any degree-six divisor Gamma on a smooth genus-6 fibre, deg(omega_C tensor W_5^vee(Gamma))=0."
+    },
+    {
+      "evidence": "Degree-zero line-bundle lemma used in the observable obstruction comparison for the f=5 summand",
+      "evidence_class": "mechanical",
+      "statement": "A degree-zero line bundle on a smooth projective connected curve admits a nonzero global section if and only if it is isomorphic to O_C."
+    },
+    {
+      "evidence": "Packet C66-001-v3 canonical geometric bottleneck: six-point failure locus and SRC-0004 Lemma 10.6 f_2=5 summand with sign gamma^*O(-5)",
+      "evidence_class": "source",
+      "statement": "The packet six-point failure criterion equates geometric evaluation failure with the isomorphism O_C(Gamma) isomorphic to W_5 tensor omega_C^{-1}."
+    },
+    {
+      "evidence": "Packet C66-001-v3 canonical geometric bottleneck ordering model",
+      "evidence_class": "source",
+      "statement": "The model for ordered distinct reduced divisors is a finite etale S_6-cover of the reduced-support open in the relative linear system; that reduced-support locus is open, not closed."
+    },
+    {
+      "evidence": "Packet C66-001-v3 adjudicated finding FND-0001 (mechanically_verified)",
+      "evidence_class": "source",
+      "statement": "For d=3g-3+n, the open input is W_{-16}H^{BM}_{16}(M_{g,n}), identified by Poincare duality with W_{2d-16}H^{2d-16}(M_{g,n})(d)."
+    },
+    {
+      "evidence": "Packet C66-001-v3 adjudicated finding FND-0035",
+      "evidence_class": "source",
+      "statement": "For the RED-0001 residual list over Q, the required ordinary degree 2d-16 equals vcd for (3,12),(5,8),(6,6),(7,4),(8,2) and equals vcd-1 for (8,0),(8,1); it never exceeds vcd."
+    },
+    {
+      "evidence": "Packet C66-001-v3 adjudicated finding FND-0036 (mechanically_verified)",
+      "evidence_class": "source",
+      "statement": "For the forgetful map M_{6,6} to M_{6,5}, the q=0 term H^{26}(M_{6,5};Q) vanishes because 26 exceeds vcd(M_{6,5})=25; with fibre cohomology only in degrees q=0,1, no Leray differential enters or leaves total degree 26."
+    },
+    {
+      "evidence": "Packet C66-001-v3 exact target and exact theorem statements",
+      "evidence_class": "source",
+      "statement": "The exact target group is W_{-16}H^{BM}_{16}(M_{6,6}), equivalently W_{26}H^{26}(M_{6,6})(21); the stated theorem asserts this group is a direct sum of Q(8)."
+    }
+  ],
+  "id": "DIGEST-0006",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "Geometric-point agreement determines only the underlying reduced support; nilpotent structure and Fitting ideals of a determinantal rank-drop locus need not match the ideal of the Abel\u2013Jacobi fibre product, especially where the f=5 obstruction dimension jumps.",
+      "statement": "Conclude that the full determinantal/Fitting evaluation-failure scheme Z equals the Abel\u2013Jacobi incidence scheme I as nonreduced schemes solely from agreement on geometric points."
+    },
+    {
+      "mathematical_reason": "The sheaf pi_*L has fibrewise rank equal to h^0(L), which may jump; only the reduced-support open of the relative effective-divisor incidence space is modeled by the linear system of L, not a global Proj construction.",
+      "statement": "Identify the entire relative incidence space with Proj of pi_*L."
+    },
+    {
+      "mathematical_reason": "On coarse spaces the S_6-action need not be free: curves with nontrivial automorphisms produce nontrivial stabilizers, so the ordering map ramifies and is not an etale S_6-torsor.",
+      "statement": "Formulate the S_6 ordering comparison as a finite etale torsor on coarse moduli spaces rather than on stacks with pairwise-distinct sections."
+    },
+    {
+      "mathematical_reason": "The locus of reduced-support effective divisors is open in the relative effective-divisor space; treating it as closed misstates its scheme-theoretic position and its finite etale S_6-cover model.",
+      "statement": "Call the reduced-support locus in the relative effective-divisor space a closed locus."
+    }
+  ],
+  "packet_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+  "problem_key": "458f910ac4e5916cb6adef25537f763a16e6d9ddcbd7c25136e6c3a6b224ceb8",
+  "reusable_computations": [],
+  "reviewer_engine": "grok",
+  "sanitized": true,
+  "schema_version": 1,
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+  "unresolved_dependencies": [
+    {
+      "statement": "Comparison of determinantal/Fitting ideals of the evaluation-failure scheme with the Abel\u2013Jacobi incidence ideal, including nilpotents and multiplicities before reduction."
+    },
+    {
+      "statement": "Stratification of the relative degree-six linear system by h^0(W_5 tensor omega_C^{-1})."
+    },
+    {
+      "statement": "Determination of components, dimensions, stabilizers, special tetragonal loci, and maps of Z to tetragonal moduli."
+    },
+    {
+      "statement": "Identification W_5 isomorphic to omega_C^2(-D) on the relevant fibres."
+    },
+    {
+      "statement": "Closure of the reduced incidence description across nonreduced markings and across non-balanced Casnati\u2013Ekedahl splitting types."
+    },
+    {
+      "statement": "Proof that the exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8) with no surviving non-Tate summand."
+    },
+    {
+      "statement": "Tate type for the exact codimension-13 contribution supported on Z, and assembly of the tetragonal contribution into the exact lowest-weight target."
+    }
+  ]
+}

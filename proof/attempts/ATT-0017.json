@@ -1,0 +1,74 @@
+{
+  "approach_id": "search-for-surviving-non-tate-motive",
+  "argument_markdown": "## Attempt: search for a surviving non-Tate motive\n\nLet\n\n\\[\nf:\\mathcal M_{7,4}\\longrightarrow \\mathcal M_7\n\\]\n\nforget the four ordered markings. Over a smooth genus-seven curve \\(C\\), its fiber is the ordered configuration space\n\n\\[\nF(C,4)=C^4\\setminus\\bigcup_{i<j}\\Delta_{ij}.\n\\]\n\nThe Leray spectral sequence is\n\n\\[\nE_2^{p,q}=H^p(\\mathcal M_7,R^qf_*\\mathbf Q)\\Longrightarrow H^{p+q}(\\mathcal M_{7,4};\\mathbf Q).\n\\]\n\nThe exact ordinary target from the packet is\n\n\\[\nW_{28}H^{28}(\\mathcal M_{7,4})(22),\n\\]\n\nwhich is equivalent by Poincare duality in dimension \\(22\\) to\n\n\\[\nW_{-16}H^{BM}_{16}(\\mathcal M_{7,4}).\n\\]\n\nWrite \\(\\mathbb V=R^1\\pi_*\\mathbf Q\\) for the standard weight-one symplectic variation on \\(\\mathcal M_7\\). Before imposing the diagonal-complement relations, the Kunneth decomposition of \\(H^4(C^4)\\) contains\n\n\\[\nH^1(C)^{\\otimes4}.\n\\]\n\nThus the only evident place in this forgetful-map analysis where a genuinely non-Tate motive could contribute with total degree and weight \\(28\\) is a nontrivial symplectic-local-system summand of\n\n\\[\nW_{24}H^{24}(\\mathcal M_7,\\mathbb V^{\\otimes4})\n\\subseteq E_2^{24,4}.\n\\]\n\nIndeed, the coefficient variation has weight \\(4\\), so its weight-24 base contribution would have total weight \\(28\\), and \\(24+4=28\\). The invariant contraction summands of \\(\\mathbb V^{\\otimes4}\\) are Tate and therefore cannot themselves disprove the target; a counterexample would have to lie in a nontrivial irreducible symplectic summand.\n\nThis does not produce a counterexample. Passing from \\(C^4\\) to \\(F(C,4)\\) introduces diagonal Gysin relations, and the supplied packet gives no computation showing that a chosen nontrivial summand of \\(\\mathbb V^{\\otimes4}\\) survives in \\(R^4f_*\\mathbf Q\\). Even if it does, one must still establish a nonzero non-Tate class in the exact group \\(W_{24}H^{24}(\\mathcal M_7,-)\\), control all Leray differentials entering or leaving \\(E_r^{24,4}\\), and rule out extensions or cancellations before obtaining a class in \\(W_{28}H^{28}(\\mathcal M_{7,4})\\).\n\nNo such survival or nonvanishing theorem is present in the supplied files. Therefore no non-Tate summand has been exhibited in the exact target, and this attempt is incomplete. In particular, it does not refute the expected Tate type \\(\\mathbf Q(-14)\\) before twisting, or \\(\\mathbf Q(8)\\) in Borel\u2013Moore homology.",
+  "assumptions": [
+    "Standard Leray and mixed-Hodge-structure functoriality for the forgetful morphism of smooth Deligne-Mumford stacks.",
+    "The standard variation V=R^1 pi_*Q has weight one."
+  ],
+  "claims": [
+    {
+      "id": "A1",
+      "statement": "Forgetting the four ordered markings gives a Leray spectral sequence with fiber the ordered configuration space F(C,4), and any class relevant to the ordinary target has total degree 28.",
+      "status": "proved"
+    },
+    {
+      "id": "A2",
+      "statement": "The Kunneth term H^1(C)^{\\otimes4} identifies W_24 H^24(M_7,V^{\\otimes4}) in bidegree (24,4) as a possible source of total-degree-28, total-weight-28 non-Tate classes.",
+      "status": "proved_as_candidate_source"
+    },
+    {
+      "id": "A3",
+      "statement": "A nontrivial irreducible symplectic-local-system summand survives the diagonal relations into R^4f_*Q.",
+      "status": "unproved"
+    },
+    {
+      "id": "A4",
+      "statement": "The relevant nontrivial summand has nonzero non-Tate W_24 H^24 on M_7.",
+      "status": "unproved"
+    },
+    {
+      "id": "A5",
+      "statement": "A resulting class survives every Leray differential and defines a non-Tate summand of W_28 H^28(M_7,4)(22), equivalently W_-16 H^BM_16(M_7,4).",
+      "status": "unproved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "engine": "codex",
+  "gap_markers": [
+    "No equivariant computation of R^4f_*Q is supplied, so survival of a nontrivial summand of V^{\\otimes4} through the diagonal Gysin relations is unproved.",
+    "No nonvanishing or Hodge-type calculation for W_24 H^24(M_7,L) with the required nontrivial symplectic local system L is supplied.",
+    "No analysis of Leray differentials or extensions proves that a candidate E_2 class reaches W_28 H^28(M_7,4).",
+    "No surviving non-Tate summand in the exact Borel\u2013Moore target has been exhibited."
+  ],
+  "id": "ATT-0017",
+  "packet_id": "CASE-7-4-v2",
+  "packet_path": "proof/packets/generated/CASE-7-4-v2.md",
+  "packet_sha256": "d567165606b1f886205fc07f263aedee77be75a8374221d209d511c91a855f98",
+  "schema_version": 2,
+  "source_claim_ids": [
+    "FND-0001",
+    "RED-0001",
+    "THM-0003",
+    "OBS-0001"
+  ],
+  "status": "proposed",
+  "summary": "The forgetful-map Leray spectral sequence isolates a possible source of non-Tate weight-28 classes in degree 28, namely weight-24 cohomology of M_7 with nontrivial summands of the fourth tensor power of the standard symplectic local system. The supplied packet contains no calculation proving that such a class exists, survives the configuration-space diagonal relations, and reaches the abutment. Consequently this approach neither refutes nor proves the Tate target.",
+  "target": {
+    "chow_codimension": 14,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 22,
+    "g": 7,
+    "n": 4,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 28,
+    "ordinary_tate_type": "Q(-14)",
+    "ordinary_weight": 28,
+    "poincare_twist": 22
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-M-0020"
+}

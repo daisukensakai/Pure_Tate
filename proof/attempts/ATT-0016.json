@@ -1,0 +1,151 @@
+{
+  "argument_markdown": "## Exact theorem (weakest sufficient for C66-GEO-Z)\n\nConstruct and identify the evaluation-failure locus Z on balanced tetragonal (6,6) Casnati\u2013Ekedahl geometry with F=(4,5) by the isomorphism condition O_C(\u0393)\u2245W_5|_C\u2297\u03c9_C^{-1}, and realize ordered distinct six-point divisors as an open finite cover of the relative linear system of L:=W_5|_C\u2297\u03c9_C^{-1}. No purity/Tate statement for RED-0001 is claimed here.\n\n## Setup (source-backed inputs)\n\n- Packet canonical bottleneck: balanced tetragonal splitting F=(4,5); six-point failure locus O_C(\u0393)\u2245W_5|_C\u2297\u03c9_C^{-1}; model ordered distinct divisors as an open finite cover of the relative linear systems (packet C66-001-v1).\n- CE scroll geometry (SRC-0004 excerpt): after base change to a single curve C, C is a complete intersection on P(E^\u2228) in class O(2)\u2297\u03b3^*F^\u2228 (Casnati\u2013Ekedahl). This legitimates working with the CE pair (E,F) and the balanced summand data of F.\n- Exact target identification only as ambient context (FND-0001): d=3\u00b76\u22123+6=21 and the open input is W_{-16}H^{BM}_{16}(M_{6,6})\u2245W_{26}H^{26}(M_{6,6})(21). Used solely to fix the campaign target; not used to force vanishing.\n- FND-0035: VCD comparison shows vanishing-above-vcd cannot settle (6,6). Recorded to forbid reuse of VCD-only routes.\n\n## Proved / standard steps (gap-auditable)\n\nP1. On a smooth curve C of genus 6 with tetragonal map f:C\u2192P^1 of degree 4, the CE bundle F is a rank-2 vector bundle on P^1. Balanced type means F\u2245O_{P^1}(4)\u2295O_{P^1}(5). Write W_5 for the unique O(5) summand (unique as a subbundle because the summand degrees are distinct).\n\nP2. Pullback/restriction along the CE geometry yields a line bundle W_5|_C on C. Set L:=W_5|_C\u2297\u03c9_C^{-1}. Because deg \u03c9_C=10 and the CE degree calculus for the balanced (4,5) splitting forces deg(W_5|_C)=16 on smooth tetragonal genus-6 curves, one has deg L=6. (Degree identity is recorded as a CE input; see Gap G1 if a full local-coordinate CE degree check is demanded from the packet alone.)\n\nP3. For an ordered tuple of distinct points (x_1,\u2026,x_6) on C, the divisor \u0393=x_1+\u22ef+x_6 is effective of degree 6. The condition O_C(\u0393)\u2245L is a closed condition on the configuration space: it is the vanishing of the two Hom sheaves' obstruction (equivalently, the locus where \u0393 lies in the complete linear system |L|, i.e. the section space H^0(C,L(\u2212\u0393)) is nonzero and the unique-up-to-scalar section cuts exactly \u0393 when h^0(L)=1, and more generally the incidence condition in |L|).\n\nP4. Relative construction: over T^{bal}_6, the sheaf \u03c0_*L is coherent and, on the open where its formation commutes with base change and has constant rank r=h^0(L), the projectivization P(\u03c0_*L) parametrizes relative effective divisors in |L|. The ordered configuration incidence\n  Z^ord := {(C,x_1,\u2026,x_6) : x_i distinct, O(\u2211x_i)\u2245L}\n is closed in the ordered configuration space of the universal curve and is stable under the residual S_6-action of permuting labels. Define Z as this closed incidence stack (the evaluation-failure locus).\n\nP5. Finite-cover identification: the forgetful map from ordered distinct tuples in |L| to the relative symmetric product (or to P(\u03c0_*L)) is etale of degree 6! onto the open locus of reduced support, hence an open finite cover of a closed subscheme of the relative linear system. This is exactly the packet's prescribed model of ordered distinct divisors as an open finite cover of the relative linear systems.\n\nP6. Consequently Z is identified, not merely named: it is the CE six-point failure locus for F=(4,5), cut out by O(\u0393)\u2245L, and presented as an open finite cover of a closed subscheme of P(\u03c0_*L)\u2192T^{bal}_6. Maps from Z to tetragonal moduli are the structure morphism Z\u2192T^{bal}_6 (further component/stabilizer analysis is deferred to C66-GEO-COMP).\n\n## Computational hypotheses (not proofs)\n\nH1. On a dense open of T^{bal}_6 one expects h^0(L)\u2208{1,2} with determinantal rank-drop loci describing jumps; this is a hypothesis for C66-GEO-H0 / C66-COMP-RANK and is not used to close the present lemma.\nH2. Finite Macaulay2/point-count probes of fibre dimensions may suggest component dimensions of Z but cannot prove a universal component statement (execution boundary).\n\n## Gaps (explicit)\n\nG1. Full CE degree computation deg(W_5|_C)=16 is standard in the CE literature but is only partially witnessed by the SRC-0004 fragment in-packet; a complete citation-level degree check remains a proof dependency.\nG2. Stack-theoretic representability of T^{bal}_6 and flatness/base-change for \u03c0_*L on all of T^{bal}_6 (including loci where h^0 jumps) need a reference-grade deformation argument; the present writeup treats the constant-rank open and closes Z by closure.\nG3. Irreducibility, dimensions, stabilizers, and the precise map to tetragonal moduli components are out of scope for C66-GEO-Z (assigned to C66-GEO-H0 and C66-GEO-COMP).\nG4. No claim is made that the contribution of Z to W_{26}H^{26}(M_{6,6}) is Tate; that is C66-TATE-SUPPORT / C66-TATE-ASSEMBLY.\n\n## Separation from blocked and failed routes\n\n- Not ATT-0012 / not `vcd-only-vanishing`: FND-0035 already records that for (6,6) the ordinary degree equals vcd, so VCD vanishing does not prove the target; this attempt never invokes Harer VCD to kill W_{-16}H^{BM}_{16}.\n- Not ATT-0014 / not `undecorated-cgp-top-weight-graph-complex`: no weight spectral sequence or Getzler\u2013Kapranov graph complex is used.\n- Not ATT-0011 / not `forgetful-map-renaming-local-system-unknown`: no reduction M_{6,6}\u2192M_{6,5} renaming the problem into an unevaluated local system R^1\u03c0_*Q.\n- Not `point-count-without-degree-parity-separation`: no point-count arithmetic is used as evidence.\n\n## Role in the exact target\n\nThe lemma only builds the geometric carrier Z on which any later codimension-13 / lowest-weight tetragonal contribution must be supported. It is the weakest sufficient geometric construction for C66-GEO-Z and the mandatory input to C66-GEO-H0 and C66-GEO-COMP. Finite experiments are recorded only as hypotheses and do not close the lemma.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 1,
+  "claims": [
+    {
+      "depends_on": [
+        "G1"
+      ],
+      "id": "CLM-Z-001",
+      "kind": "construction",
+      "statement": "For balanced tetragonal genus-6 CE data with F\u2245O(4)\u2295O(5), the line bundle L:=W_5|_C\u2297\u03c9_C^{-1} has degree 6 on every smooth fibre.",
+      "status": "conditional"
+    },
+    {
+      "id": "CLM-Z-002",
+      "kind": "identification",
+      "statement": "The evaluation-failure locus Z\u2282T^{bal}_{6,6} is the closed incidence stack of ordered distinct effective divisors \u0393 with O_C(\u0393)\u2245L.",
+      "status": "proposed"
+    },
+    {
+      "id": "CLM-Z-003",
+      "kind": "structure",
+      "statement": "Ordered distinct six-point divisors in |L| form an open finite cover of a closed subscheme of the relative linear system P(\u03c0_*L) over T^{bal}_6.",
+      "status": "proposed"
+    },
+    {
+      "id": "CLM-Z-004",
+      "kind": "scope-limit",
+      "statement": "This lemma does not assert Tate type, purity, or vanishing for W_{-16}H^{BM}_{16}(M_{6,6}) or W_{26}H^{26}(M_{6,6})(21).",
+      "status": "proved"
+    }
+  ],
+  "context_revision": 2,
+  "engine": "grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "how_addressed": "Does not reduce via M_{6,6}\u2192M_{6,5} or rename the problem into the unevaluated local system R^1\u03c0_*Q; works only with CE incidence geometry of Z.",
+      "id": "ATT-0011",
+      "route": "forgetful-map-renaming-local-system-unknown"
+    },
+    {
+      "how_addressed": "Does not claim vanishing of W_{-16}H^{BM}_{16} from Harer VCD; FND-0035 is cited to forbid that route for (6,6).",
+      "id": "ATT-0012",
+      "route": "vcd-only-vanishing"
+    },
+    {
+      "how_addressed": "Does not set up Deligne weight spectral sequences or Getzler\u2013Kapranov graph complexes; no E_\u221e computation is attempted.",
+      "id": "ATT-0014",
+      "route": "undecorated-cgp-top-weight-graph-complex"
+    }
+  ],
+  "gap_markers": [
+    {
+      "claim_ids": [
+        "CLM-Z-001"
+      ],
+      "description": "Packet SRC-0004 witnesses CE complete-intersection geometry but does not itself spell the numerical degree computation deg(W_5|_C)=16; that step needs a full CE citation or local computation.",
+      "id": "G1",
+      "severity": "reference"
+    },
+    {
+      "claim_ids": [
+        "CLM-Z-002",
+        "CLM-Z-003"
+      ],
+      "description": "Base-change and flatness for \u03c0_*L across h^0-jump loci are not fully proved here; Z is defined by closure from the constant-rank open.",
+      "id": "G2",
+      "severity": "technical"
+    },
+    {
+      "claim_ids": [],
+      "description": "Component dimensions, stabilizers, and maps to tetragonal moduli strata are deferred to C66-GEO-H0 and C66-GEO-COMP.",
+      "id": "G3",
+      "severity": "scope"
+    },
+    {
+      "claim_ids": [
+        "CLM-Z-004"
+      ],
+      "description": "No Tate/purity contribution of Z to the exact target is proved; blocked from being smuggled in via VCD, graph complexes, or forgetful local systems.",
+      "id": "G4",
+      "severity": "scope"
+    }
+  ],
+  "id": "ATT-0016",
+  "lane": "geometry",
+  "methods_used": [
+    "casnati-ekedahl-balanced-splitting-F-4-5",
+    "evaluation-failure-locus-by-line-bundle-isomorphism",
+    "relative-complete-linear-system-incidence",
+    "ordered-configuration-open-finite-cover"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Identifies Z for the exact (6,6) balanced CE bottleneck as the O(\u0393)\u2245W_5|_C\u2297\u03c9_C^{-1} incidence stack with ordered open finite-cover model, without claiming Tate assembly."
+  ],
+  "packet_id": "C66-001-v1",
+  "packet_path": "proof/packets/generated/C66-001-v1.md",
+  "packet_sha256": "3bc514459280a34c259f8ac6822eb6d6d9395d8cfdd98338c8ec63b8dc02d081",
+  "proof_dependencies": [
+    {
+      "id": "DEP-CE-BAL",
+      "source": "SRC-0004; standard CE",
+      "statement": "Casnati\u2013Ekedahl structure theorem for tetragonal covers and balanced splitting type F=(4,5) on genus-6 curves, including the complete-intersection description on P(E^\u2228) in class O(2)\u2297\u03b3^*F^\u2228."
+    },
+    {
+      "id": "DEP-DEG-L",
+      "source": "CE degree calculus; gap G1 relative to packet fragments",
+      "statement": "Degree identity deg(W_5|_C)=16 hence deg L=6 for balanced (4,5) genus-6 tetragonal curves."
+    },
+    {
+      "id": "DEP-REL-LS",
+      "source": "standard relative algebraic geometry",
+      "statement": "Formation of relative complete linear systems P(\u03c0_*L) and incidence of ordered configuration spaces as open finite covers on the reduced-support locus."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0001",
+    "FND-0035"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-Z",
+  "summary": "Constructs and identifies the balanced tetragonal evaluation-failure locus Z for (6,6) as the O(\u0393)\u2245W_5|_C\u2297\u03c9_C^{-1} incidence stack, realized as an open finite cover of a closed subscheme of the relative |L|. Pure geometry lemma only; no Tate, VCD, graph-complex, or forgetful local-system claim.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "Let T^{bal}_6 be the moduli stack of smooth genus-6 curves equipped with a balanced tetragonal structure whose Casnati\u2013Ekedahl bundle F on P^1 has splitting type (4,5), and let T^{bal}_{6,6} be its ordered six-point enhancement (distinct marked points). Write pi:C\to T^{bal}_6 for the universal curve, let W_5 be the degree-5 summand of F in the CE data, and set L:=W_5|_C\u2297\u03c9_C^{-1}. Define the evaluation-failure locus Z\u2282T^{bal}_{6,6} by the closed condition O_C(x_1+\u22ef+x_6)\u2245L_{(C)}. Then: (i) L is a fibrewise line bundle of degree 6 on the universal curve over T^{bal}_6; (ii) Z is a closed substack of T^{bal}_{6,6}, equal to the incidence locus of ordered distinct effective divisors of the relative complete linear system |L|; (iii) if U\u2282P(\u03c0_*L) denotes the open locus of reduced support and Conf^o_6(C/T^{bal}_6) the ordered configuration space of distinct points, the natural S_6-quotient map from the ordered incidence open realizes Z as an open finite cover of a closed subscheme of P(\u03c0_*L) over T^{bal}_6. This identifies Z as the six-point CE failure locus for the balanced splitting F=(4,5) and supplies the geometric input required by later stratification and component subproblems toward the exact target W_{-16}H^{BM}_{16}(M_{6,6})\u2245W_{26}H^{26}(M_{6,6})(21)."
+}

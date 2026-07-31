@@ -1,0 +1,93 @@
+{
+  "approach_id": "weight-spectral-sequence-or-graph-complex",
+  "argument_markdown": "## Argument (approach: weight spectral sequence / decorated graph complex)\n\n### Target\n\nFix the revision-2 packet data for `(g,n)=(5,8)`:\n\n- `d = 3g-3+n = 20`;\n- open Borel\u2013Moore input `W_{-16} H^{BM}_{16}(M_{5,8})`, expected pure Tate type `Q(8)`;\n- ordinary realization `W_{24} H^{24}(M_{5,8})(20)`, untwisted type `Q(-12)`, Chow codimension `12` (FND-0001).\n\nBy RED-0001 and THM-0003, the degree-16 pure-Tate induction for `H^{16}(\\overline{\\mathcal{M}}_{g,n})` admits this open pure-weight quotient as the only residual input at `(5,8)`. The present attempt attacks that residual by the Deligne weight spectral sequence of the normal-crossings pair `(\\overline{\\mathcal{M}}_{5,8},\\partial)` and by the equivalent Getzler\u2013Kapranov decorated graph complex, not by extending CKgP.\n\n### Step A \u2014 Exact sequences and duality\n\nWrite `X=\\overline{\\mathcal{M}}_{5,8}`, `U=\\mathcal{M}_{5,8}`, `D=X\\setminus U`. Smooth proper DM stacks carry pure Hodge structures of weight equal to cohomological degree (THM-0001). The boundary long exact sequence of THM-0003 supplies a right-exact sequence of pure weight `-16` structures\n\n```text\nH_{16}(D;Q) \u2192 H_{16}(X;Q) \u2192 W_{-16} H^{BM}_{16}(U;Q) \u2192 0.\n```\n\nPoincar\u00e9 duality on the smooth stack `U` of dimension `20` identifies the target with the ordinary pure-weight piece in the packet:\n\n```text\nW_{-16} H^{BM}_{16}(U) \u2245 W_{24} H^{24}(U)(20)\n```\n\n(FND-0001). Equivalently, after dualizing and twisting, it is enough to show that the top-weight graded piece `Gr^W_{24} H_c^{24}(U)` is pure Tate of type `Q(-12)`.\n\n### Step B \u2014 Deligne weight spectral sequence\n\nLet `D^{(p)}` be the disjoint union of the normalizations of the codimension-`p` boundary strata of `X` (empty for `p` large). Deligne\u2019s weight spectral sequence for the snc compactification reads, in the usual indexing,\n\n```text\nE_1^{-p,q} = H^{q-2p}(D^{(p)};Q)(-p)  \u21d2  H^{q-p}(U;Q),\n```\n\nwith `E_1^{-p,q}` pure of weight `q`, differentials of bidegree `(1,0)`, degeneration at `E_2`, and\n\n```text\nGr^W_q H^n(U) \u2245 \u2295_{p: q-p=n} E_\u221e^{-p,q}.\n```\n\nFor the lowest-weight piece of ordinary cohomology in degree `24`,\n\n```text\nn=24, q=24  \u21d2  p=0,\n```\n\nso only the column `p=0` can contribute:\n\n```text\nGr^W_{24} H^{24}(U) \u2245 E_\u221e^{0,24} \u2286 E_1^{0,24} = H^{24}(X).\n```\n\nConcretely, `E_\u221e^{0,24}` is the kernel of the first Gysin/restriction differential\n\n```text\nd_1: H^{24}(X) \u2192 \u2295_{\u0393 : |E(\u0393)|=1} H^{22}(\\overline{\\mathcal{M}}_\u0393)(-1),\n```\n\nthe sum running over stable dual graphs of type `(5,8)` with a single edge (i.e. irreducible boundary divisors, up to automorphism). Dualizing back through Step A, the same kernel/cokernel computation is the pure-weight BM quotient of THM-0003.\n\n**Claim A1.** The packet target is isomorphic, as a pure Hodge structure of weight `-16`, to the cokernel of the pushforward/Gysin map from one-edge boundary strata (and, after resolving the filtration on `D`, from the full stratified boundary) into `H_{16}(X)`.\n\nThis is the standard translation of THM-0003 into the `E_1` page; no new geometry yet.\n\n### Step C \u2014 Decorated graph complex / stratification of the boundary\n\nThe strata of `D` are indexed by stable graphs `\u0393` of genus `5` with `8` legs and at least one edge. The normalized stratum for `\u0393` is\n\n```text\n\\overline{\\mathcal{M}}_\u0393 \u2245 \\Big( \u220f_{v\u2208V(\u0393)} \\overline{\\mathcal{M}}_{g_v,n_v} \\Big) / Aut(\u0393),\n```\n\nand the open stratum is the corresponding product of open moduli spaces `\\mathcal{M}_\u0393`. Filtering the dual-graph stratification by number of edges (or running the Getzler\u2013Kapranov modular operad graph complex with vertex decorations in compactly supported / Borel\u2013Moore chains) produces a spectral sequence abutting to the pure-weight graded pieces of `H^{BM}_*(U)`:\n\n```text\nE^1_{r,s} = \u2295_{|E(\u0393)|=r} \\Big( \u2297_{v} W_{-k_v} H^{BM}_{k_v}(\\mathcal{M}_{g_v,n_v}) \\Big)_{Aut(\u0393)}\n\u21d2 Gr^W_{-16} H^{BM}_{16}(U),\n```\n\nwhere the sum is restricted to decorations with `\u2211_v k_v + 2r = 16` (each edge contributes weight/degree `2` via the Gysin/Tate twist `(1)`). This is the decorated graph complex computing the residual pure-weight BM group; its `r=0` term is the single-vertex graph and is tautologically the unknown itself, while every positive-edge term is a product of strictly simpler moduli data.\n\n### Step D \u2014 Positive-edge decorations are in published Tate ranges\n\nWe check that every stable graph `\u0393` of type `(5,8)` with `r=|E(\u0393)|\u22651` and decoration degrees summing to the pure-weight budget has vertex data in ranges already known to be pure Tate.\n\n**One-edge graphs.**\n\n1. Non-separating edge: single vertex of type `(4,10)` (two additional legs for the branches of the node). The pure-weight decoration needed on that vertex has BM degree `\u226414` after the edge twist, or compact/ordinary degree in the range covered by THM-0002 after K\u00fcnneth/PD. Genus `4` with the induced markings also lies inside the CKgP bound `c(4)=11` of THM-0005 whenever the effective open input on the vertex is a pure-weight piece controlled by algebraicity of Chow; even without CKgP, THM-0002 already forces all even compact cohomology through degree `14` on every component to be Tate, and the Gysin twist `(-1)` preserves Tate type.\n\n2. Separating edge: partitions `(g_1,g_2)` with `g_1+g_2=5`, `g_1\u2264g_2`, so `(0,5),(1,4),(2,3)`, and a partition of the eight marks. Each factor is a product\n   `\\overline{\\mathcal{M}}_{g_1,n_1+1}\u00d7\\overline{\\mathcal{M}}_{g_2,n_2+1}`.\n   - Genus `0` factors are rational tautological (unrestricted `c(0)` in THM-0005).\n   - Genus `1` even cohomology is tautological for every marking number (THM-0006).\n   - Genus `2` even cohomology through degree `20` is tautological (THM-0007), hence pure Tate.\n   - Genus `3` and `4` factors that appear have strictly fewer marks than the open residual list of RED-0001, or else fall under `n\u2264c(g)` (THM-0005: `c(3)=11`, `c(4)=11`) or under the degree-`\u226414` Tate theorem (THM-0002).\n\n**Multi-edge graphs.** Each additional edge either lowers vertex genera, splits marks, or increases the number of rational/elliptic vertices. After distributing the degree budget `\u2211 k_v + 2r = 16` with `r\u22652`, every vertex degree `k_v` is at most `12`, so THM-0002 applies directly to all compactified vertex cohomologies; open pure-weight decorations on vertices are then Tate by the already-completed low-degree induction (OBS-0001: degrees `\u226414` are settled).\n\n**Claim A2.** Every positive-edge term on the `E^1` page of the decorated graph complex / weight spectral sequence contributing to total pure weight `-16` in BM degree `16` is a pure Tate structure of type `Q(8)` (up to the global Tate twist normalizing the edge contributions).\n\n### Step E \u2014 What the spectral sequence would give if it degenerated cleanly\n\nIf one knew, in addition, that\n\n1. the spectral sequence degenerates at `E^2` with no exotic extensions of pure Hodge structures of the same weight, and\n2. the single-vertex (`r=0`) contribution either vanishes in this bidegree or is identified with a combinatorial (dual-complex) Tate vector space,\n\nthen Claim A2 would force `W_{-16} H^{BM}_{16}(\\mathcal{M}_{5,8})` itself to be pure Tate of type `Q(8)`, discharging the `(5,8)` entry of RED-0001.\n\nThe dual complex `\u0394_{5,8}` of `D` is a finite rational polyhedral complex; its reduced homology is a weight-`0` rational vector space and therefore Tate. In the *global top-weight* range `Gr^W_{2d}` the Chan\u2013Galatius\u2013Payne identification with `\\widetilde{H}^{\u2022}(\u0394_{g,n})\u2297Q(-d)` makes Tate-ness automatic. The present bidegree is *not* global top weight: one needs `Gr^W_{24} H_c^{24}` (weight `24`, not `2d=40`), so the dual-complex isomorphism does **not** apply off the shelf. The decorated graph complex of Step C is the correct replacement, but its differential and extension data are not evaluated here.\n\n### Step F \u2014 Explicit gaps (no completeness claim)\n\nThe following steps are **not** supplied by the published claims in the packet and are recorded as gaps.\n\n1. **GAP-E2.** Computation of the `d_1` (and higher) differentials on the pure-weight page for graphs of type `(5,8)` in BM degree `16`. Without these differentials one cannot pass from \u201call positive-edge `E^1` terms are Tate\u201d to \u201c`E^\u221e` is Tate of the expected rank.\u201d\n\n2. **GAP-EXT.** Absence of nontrivial extensions / mixed structures inside the single weight `-16`: same-weight extensions of Tate structures by Tate structures are classified by `Ext^1_{MHS}(Q(8),Q(8))=0`, so extensions between pure Tate pieces of equal weight are necessarily split. This part is safe. What is *not* safe is contamination from non-pure or wrong-weight terms incorrectly included on the page \u2014 i.e. a misidentification of which decorations contribute to pure weight `-16`.\n\n3. **GAP-SV.** The single-vertex residual: the graph complex still formally contains a decoration by `W_{-16} H^{BM}_{16}(\\mathcal{M}_{5,8})` itself. Closing the argument requires either a vanishing statement for that term in the associated-graded (e.g. by showing the pure-weight BM group is carried entirely by positive-edge graphs / by the dual complex in this degree) or an independent evaluation of that decoration. No such vanishing is proved here. Note that `(5,8)` lies strictly outside the CKgP range `c(5)=7` (THM-0005), so one cannot quote algebraicity of the pure-weight piece from CKgP.\n\n4. **GAP-RANK.** Even if Tate type were granted, the argument does not compute the multiplicity of `Q(8)`. Multiplicity is not required by CONJ-0001, but any claim of a complete determination of the graded piece would need it.\n\n5. **GAP-CGP-RANGE.** The tropical/top-weight theorems that make Tate-ness formal apply to `Gr^W_{40}`, not to `Gr^W_{24} H_c^{24}`. Promoting those theorems to the per-degree top-weight line `Gr^W_k H_c^k` for `k=24<40` is precisely the missing geometric input.\n\n### Conclusion\n\nThe weight spectral sequence and decorated graph complex reduce the `(5,8)` open input to a finite complex whose positive-edge vertex decorations lie in the published pure-Tate ranges (THM-0002, THM-0005\u20130007, and the completed induction through degree `14`). This is a genuine structural reduction of RED-0001 at `(5,8)`, but it stops short of a proof: the differentials on the pure-weight page, the single-vertex residual outside `c(5)=7`, and the non-applicability of global top-weight tropical comparison remain open. Status is therefore `proposed`, not `claimed_complete`. No arithmetic point-count, semisimplification, or unproved tautological pairing is used to assert completeness.\n",
+  "assumptions": [
+    "Deligne\u2019s weight spectral sequence for smooth proper DM stacks with snc boundary applies to Mbar_{5,8} exactly as for smooth proper varieties (standard in the packet\u2019s sources).",
+    "Edge contributions in the decorated graph complex each impose a Tate twist (1) and degree shift 2, so the pure-weight budget is \u2211_v k_v + 2|E| = 16.",
+    "Same-weight Ext^1 between pure Tate structures Q(8) vanishes in MHS, so the only obstructions are wrong-weight contamination, nontrivial differentials, or a non-Tate single-vertex residual."
+  ],
+  "claims": [
+    {
+      "id": "A1",
+      "statement": "By THM-0003 and FND-0001, W_{-16}H^{BM}_{16}(M_{5,8}) is the pure weight -16 cokernel of boundary pushforward into H_{16}(Mbar_{5,8}), and is isomorphic as MHS to W_{24}H^{24}(M_{5,8})(20).",
+      "status": "proved"
+    },
+    {
+      "id": "A2",
+      "statement": "In Deligne\u2019s weight spectral sequence for (Mbar_{5,8}, \u2202), the graded piece Gr^W_{24}H^{24}(M_{5,8}) is identified with E_\u221e^{0,24}, a subquotient of H^{24}(Mbar_{5,8}) cut out by Gysin maps from one-edge boundary strata.",
+      "status": "proved"
+    },
+    {
+      "id": "A3",
+      "statement": "Every positive-edge stable graph of type (5,8) contributing to pure weight -16 in BM degree 16 has vertex decorations in ranges forced to be pure Tate by THM-0002, THM-0005, THM-0006, and THM-0007 (after edge Tate twists and K\u00fcnneth).",
+      "status": "proved"
+    },
+    {
+      "id": "A4",
+      "statement": "The decorated graph complex / edge filtration spectral sequence therefore has pure Tate E^1 terms in all positive-edge bidegrees contributing to W_{-16}H^{BM}_{16}(M_{5,8}).",
+      "status": "proved"
+    },
+    {
+      "id": "A5",
+      "statement": "The d_1 and higher differentials of that pure-weight page vanish or preserve a Tate E^\u221e of type Q(8) for (g,n)=(5,8).",
+      "status": "gap"
+    },
+    {
+      "id": "A6",
+      "statement": "The single-vertex residual in the graph complex vanishes in this bidegree, or is identified with reduced homology of the dual complex \u0394_{5,8} (hence Tate of type Q(8)).",
+      "status": "gap"
+    },
+    {
+      "id": "A7",
+      "statement": "W_{-16}H^{BM}_{16}(M_{5,8}) is pure Tate of type Q(8), discharging the (5,8) entry of RED-0001.",
+      "status": "gap"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "engine": "grok",
+  "gap_markers": [
+    "GAP-E2: differentials on the pure-weight decorated graph complex page for (5,8) in BM degree 16 are not computed",
+    "GAP-EXT: contribution list for pure weight -16 must be checked against wrong-weight contamination",
+    "GAP-SV: single-vertex residual W_{-16}H^{BM}_{16}(M_{5,8}) is not shown to vanish or to match dual-complex homology; (5,8) lies outside c(5)=7",
+    "GAP-RANK: multiplicity of Q(8) is not determined",
+    "GAP-CGP-RANGE: global top-weight tropical comparison (weight 2d=40) does not apply to Gr^W_{24}H_c^{24}",
+    "A5-A7 remain open; argument is not claimed complete"
+  ],
+  "id": "ATT-0015",
+  "packet_id": "CASE-5-8-v2",
+  "packet_path": "proof/packets/generated/CASE-5-8-v2.md",
+  "packet_sha256": "93405e895723720d9a4ff947646a743224b38a247b0e6c9ca363f1aac83e815c",
+  "schema_version": 2,
+  "source_claim_ids": [
+    "RED-0001",
+    "FND-0001",
+    "THM-0001",
+    "THM-0002",
+    "THM-0003",
+    "THM-0005",
+    "THM-0006",
+    "THM-0007",
+    "OBS-0001",
+    "CONJ-0001"
+  ],
+  "status": "proposed",
+  "summary": "Proposed weight-spectral-sequence / decorated-graph-complex reduction of W_{-16}H^{BM}_{16}(M_{5,8}) to pure-weight vertex decorations on stable graphs of type (5,8); boundary and lower-genus decorations are Tate by published ranges, but the E_2/E_\\infty identification and the single-vertex residual are not closed.",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-M-0009"
+}

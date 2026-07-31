@@ -1,0 +1,91 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-07-31T04:21:00.419042+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ],
+    "research": [
+      "grok",
+      "claude"
+    ],
+    "review": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 15298,
+      "completed_at": "2026-07-31T03:55:37.544413+00:00",
+      "engine": "grok",
+      "error": "finding_candidates[0] needs a nonempty key",
+      "last_activity_at": "2026-07-31T03:55:37.098146+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/reviews/REV-0028.json",
+      "phase": "review",
+      "started_at": "2026-07-31T03:53:18.615308+00:00",
+      "state": "failed",
+      "step": 1,
+      "task_id": "TASK-V-ATT-0023-P1"
+    },
+    {
+      "activity_bytes": 22033,
+      "artifact_sha256": "2a7cb6d9a6a31309fd8fda327eb95201733966c7290cebb63a8e6a3465d59ae3",
+      "completed_at": "2026-07-31T03:57:03.181990+00:00",
+      "engine": "gemini",
+      "last_activity_at": "2026-07-31T03:57:03.153053+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/reviews/REV-0029.json",
+      "phase": "review",
+      "started_at": "2026-07-31T03:55:37.749090+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-V-ATT-0023-P1"
+    },
+    {
+      "activity_bytes": 12591,
+      "artifact_sha256": "65adb55537486aa111cae850d8a49ab783c6fa871dbdca130daf7d087b995d2c",
+      "completed_at": "2026-07-31T03:58:17.990733+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-07-31T03:58:17.511553+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0006.json",
+      "phase": "trace-mining",
+      "started_at": "2026-07-31T03:57:03.444897+00:00",
+      "state": "completed",
+      "step": 3,
+      "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-1165d29cb1c06a7d.md",
+        "sha256": "1165d29cb1c06a7d7ec8975be2a96da21e2a9b3afccb9b0f8b62b70a2f65ead6"
+      }
+    },
+    {
+      "activity_bytes": 1677,
+      "completed_at": "2026-07-31T04:21:00.405804+00:00",
+      "engine": "claude",
+      "error": "agent failed with exit 1: API Error: Claude's response exceeded the 32000 output token maximum. To configure this behavior, set the CLAUDE_CODE_MAX_OUTPUT_TOKENS environment variable.",
+      "last_activity_at": "2026-07-31T04:20:59.964899+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/attempts/ATT-0024.json",
+      "phase": "forced-proof",
+      "started_at": "2026-07-31T03:58:18.268697+00:00",
+      "state": "failed",
+      "step": 4,
+      "task_id": "TASK-C66-001-FORCED-FULL"
+    }
+  ],
+  "executed_steps": 4,
+  "requested_steps": 4,
+  "run_id": "RUN-C66-001-20260731T035318410309Z-14433",
+  "schema_version": 1,
+  "started_at": "2026-07-31T03:53:18.410309+00:00",
+  "status": "stopped",
+  "stop_reason": "engine_failure"
+}

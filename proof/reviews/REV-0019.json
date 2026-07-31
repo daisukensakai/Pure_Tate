@@ -1,0 +1,89 @@
+{
+  "attempt_id": "ATT-0012",
+  "checked_claims": [
+    "TARGET-MATCH: confirmed - ATT-0012.target agrees field-for-field with TASK.target (d=21, open_bm_degree=16, open_bm_weight=-16, open_bm_tate_type=Q(8), ordinary_cohomology_degree=26, ordinary_weight=26, ordinary_tate_type=Q(-13), poincare_twist=21, chow_codimension=13); packet_id CASE-6-6-v2 and context_revision 2 agree.",
+    "HASH-CHECK: declared-consistent - ATT-0012.packet_sha256 equals TASK.packet_sha256 (e6758c68...f55af88e). The workspace is read-only with no shell, so the digest of proof/packets/generated/CASE-6-6-v2.md was NOT recomputed; the packet's inline target JSON does match the task target dictionary, which is a content-level (not cryptographic) check.",
+    "A1: confirmed - d=3g-3+n=21 is correct, and the Poincare identification is arithmetically clean. H^BM_16 of a smooth DM stack of complex dimension 21 is dual to H^{2*21-16}=H^26 with twist (21); weight 26-2*21=-16 matches open_bm_weight; Tate type Q(-13)(21)=Q(8) matches open_bm_tate_type. No degree/twist slip found here. Homological vs cohomological indexing is used consistently (H_16(Mbar) dual to H^16(Mbar) as a vector space, distinct from the PD statement on the open stack) - the attempt does not conflate the two.",
+    "A2: confirmed - n=6 > c(6)=5 places (6,6) outside the published CKgP range of THM-0005, and 2g-2+n = 12-2+6 = 16 = k, so THM-0004's n>=2, k>=2g-2+n base-case condition is met exactly. The pair genuinely is an open-stratum base case.",
+    "A3: accepted-with-scope - H^*(M_{g,n};Q) = H^*(Mod_{g,n};Q) is standard for g>=2 via contractible Teichmueller space and is correctly flagged as external to the packet. Note this identification is RATIONAL only: with Z coefficients the stack, the coarse space, and the group all differ, and Mod_{g,n} has torsion so its integral cohomological dimension is infinite. The attempt stays over Q throughout, so no integral-coefficient error is committed, but the step has no integral analogue.",
+    "A4: REFUTED - this is the fatal error. Harer's virtual cohomological dimension is vcd(Mod_{g,n}) = 4g-5 for g>=2, n=0, and vcd(Mod_{g,n}) = 4g-4+n for g>=1, n>0 (and n-3 for g=0). The attempt states a single interpolated formula 4g+n-5 'for g>=2', which is the n=0 formula extended illegitimately and is off by one for every n>=1. Sanity check of the correct formula: Mod_{1,1} = SL_2(Z) has vcd 1 = 4-4+1. Hence vcd(Mod_{6,6}) = 4*6-4+6 = 26, not 25. Cohomological-dimension vanishing gives H^i = 0 only for i > 26, and the target degree is exactly 26 - the bound gives no information at i = vcd.",
+    "A5: REFUTED (derived) - H^26(M_{6,6};Q) = 0 does not follow. The degree needed sits precisely at the virtual cohomological dimension, the top degree in which rational cohomology can be nonzero. The conditional logic of A5 is sound and the mixed-Hodge-structure step (the zero MHS has zero weight-26 part) is unobjectionable; only its input A4 is false.",
+    "A6: REFUTED (derived) - unsupported once A4 falls. The proof strategy itself is admissible: the packet's execution boundary requires a disproof to exhibit a surviving non-Tate summand, so a genuine vanishing WOULD discharge the target vacuously (the zero MHS is an empty direct sum of Q(8)). The defect is factual, not logical - the argument's single novel input is a false numerical statement.",
+    "A7: gap-as-declared - correctly self-marked. The attempt only asserts the compactified consequence modulo the RED-0001/THM-0003 induction package. THM-0003 is stated as right-exact (boundary homology -> H_k(Mbar) -> W_{-k}H^BM_k -> 0), so the sub-object is the IMAGE of boundary homology, not boundary homology itself; the attempt's phrase 'extension ... by a boundary contribution' is loose but not wrong, since sub-objects and quotients of a pure Tate Hodge structure are again pure Tate (semisimplicity of pure HS). Moot given the A4 refutation.",
+    "SCOPE-KUNNETH: not-exercised - the attempt cites THM-0002 (even k <= 14) for boundary strata in degree 16, where Kuenneth summands H^a x H^b with a+b=16 and a,b <= 14 are covered but the a=16 summand needs the dual-graph induction. This is inside the attempt's declared assumption 3 rather than an independent error, but it means no part of the boundary assembly was verified here.",
+    "SCOPE-AUTOMORPHISMS: not-addressed - graph-automorphism invariants vs coinvariants on boundary strata are never discussed. Harmless for a Tate conclusion over Q (a direct summand of a Tate structure is Tate, and over Q invariants = coinvariants for a finite group), but the attempt inherits rather than checks this.",
+    "SCOPE-SEMISIMPLIFICATION: clean - the attempt claims an actual vanishing, not an isomorphism up to semisimplification, so it does not smuggle in a graded-piece-only statement.",
+    "SCOPE-CONJECTURAL-INPUTS: clean - CONJ-0001 (conjectural) is never used as a theorem, and RED-0001 (truth status 'inferred') is used only as a reduction whose dependence is explicitly declared. The attempt does not upgrade pure Tate to algebraicity, CKgP, or tautological generation; it is explicit that it proves strictly less."
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-30",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "prove-pure-weight-tate-only"
+      ],
+      "key": "harer-vcd-punctured-formula",
+      "kind": "correction",
+      "statement": "Harer's virtual cohomological dimension for mapping class groups is vcd(Mod_{g,n}) = 4g-4+n for g>=1, n>0, and 4g-5 only for g>=2, n=0 (with n-3 for g=0, n>=3). The interpolated form 4g+n-5 used in ATT-0012 is the n=0 formula illegitimately extended and understates the vcd by exactly 1 for every n>=1; independent check: Mod_{1,1} = SL_2(Z) has vcd 1 = 4-4+1, not 4+1-5 = 0. For (g,n)=(6,6) the correct value is 26, so no vanishing is available in ordinary degree 26.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "prove-pure-weight-tate-only"
+      ],
+      "key": "red0001-pairs-sit-at-or-below-vcd",
+      "kind": "obstruction",
+      "statement": "No cohomological-dimension argument can discharge any open input in the RED-0001 list. With the correct Harer vcd, the gap vcd(Mod_{g,n}) - (2d-16) for d=3g-3+n equals 18-2g-n when n>=1 and 17-2g when n=0, which is 0 for (3,12), (5,8), (6,6), (7,4), (8,2) and 1 for (8,0), (8,1). Hence the required ordinary degree 2d-16 never exceeds the vcd for any listed pair, and lands exactly on it for five of the seven: the reduction's unresolved inputs sit at the very top of the virtual cohomological dimension, which is structurally why they are hard. Any future attempt whose engine is degree-based vanishing (vcd, affineness, or homotopy-dimension bounds) can be rejected on arithmetic alone without examining its Hodge theory.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "prove-pure-weight-tate-only"
+      ],
+      "key": "open-input-is-lowest-weight-image-not-full-group",
+      "kind": "scope-clarification",
+      "statement": "Evidence refining the FND-0001 identification: because M_{g,n} is smooth, the ordinary realisation W_{2d-16}H^{2d-16}(M_{g,n}) is the LOWEST weight piece of that cohomology group (weights of H^m on a smooth stack lie in [m, 2m]), and by Deligne it equals the image of H^{2d-16}(Mbar_{g,n}) -> H^{2d-16}(M_{g,n}). Two consequences for reviewing future attempts. Proving the full ordinary group vanishes is strictly stronger than the target and is therefore a legitimate but unnecessarily demanding route; and non-vanishing of the full group H^{2d-16}(M_{g,n}) does NOT refute the packet's expected Q(8), so a refuted vanishing argument must not be recorded as evidence against the target itself.",
+      "supports_finding_id": "FND-0001"
+    }
+  ],
+  "id": "REV-0019",
+  "independent": true,
+  "packet_id": "CASE-6-6-v2",
+  "packet_sha256": "e6758c6886696d915814dc718f28af0e6b44088916881055c88a6276f55af88e",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0012-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse space",
+    "rational versus integral coefficients",
+    "cohomology versus homology degree",
+    "weight and Tate twist",
+    "Poincare duality direction and dimension",
+    "Gysin and Kunneth shifts",
+    "graph-automorphism invariants versus coinvariants",
+    "semisimplification versus genuine Hodge-structure isomorphism",
+    "conditional prediction versus theorem",
+    "pure Tate versus algebraic or tautological generation",
+    "omitted stable pairs and scope of the discharged list",
+    "external topological inputs (Harer vcd, Teichmueller identification)",
+    "task target dictionary and declared packet hash"
+  ],
+  "strongest_attack": "The proof has exactly one novel step, and that step is numerically false. Step 3 / claim A4 asserts Harer's virtual cohomological dimension as vcd(Mod_{g,n}) = 4g+n-5 for g>=2, giving vcd(Mod_{6,6}) = 25 and hence H^26(M_{6,6};Q) = 0. Harer's theorem is 4g-5 only when n=0; for g>=1 and n>0 it is 4g-4+n. The attempt has grafted the unpunctured formula onto the punctured case, losing one degree. Correctly, vcd(Mod_{6,6}) = 4*6-4+6 = 26, which is exactly the ordinary degree the target lives in, so the dimension bound yields nothing precisely where it is needed and the vanishing in A5/A6 collapses. Everything else in the attempt survives scrutiny - the d=21 arithmetic, the Poincare identification H^BM_16 = H^26(21), the weight -16 and the Q(-13)(21)=Q(8) twist, the CKgP-range and base-case placement of (6,6), and the honest labelling of external inputs - which makes the off-by-one the sole load-bearing failure. Two independent corroborations, neither requiring outside literature. (i) Internal reductio: applying the attempt's own formula across the RED-0001 list discharges (3,12), (5,8), (6,6), (7,4) and (8,2) - five of the seven unresolved open inputs - by a 1986 theorem, which flatly contradicts OBS-0001's record that degree 16 is open as of May 2026 and would make the published reduction largely vacuous on arrival. (ii) Structural fingerprint: with the CORRECT formula, vcd - (2d-16) = 18-2g-n for n>=1 and 17-2g for n=0, which evaluates to 0 for (3,12), (5,8), (6,6), (7,4), (8,2) and to 1 for (8,0), (8,1). Every listed pair sits at or one below the vcd - the list is precisely the locus where dimension-counting cannot help, and the correct formula explains the list's shape while the attempt's does not. A secondary, non-fatal observation: the argument targets vanishing of the entire ordinary group H^26, which is strictly stronger than the required lowest-weight piece W_26 H^26; conversely, non-vanishing of H^26(M_{6,6}) would not refute the target, so this refutation of the argument is not a refutation of the packet's expected Q(8).",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "verdict": "refuted"
+}

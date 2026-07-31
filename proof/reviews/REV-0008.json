@@ -1,0 +1,94 @@
+{
+  "attempt_id": "ATT-0004",
+  "checked_claims": [
+    {
+      "claim": "CLAIM A",
+      "finding": "The criterion is unsourced in the attempt but is independently correct. Harer's bound cd(M_{g,n}) = 4g-4+n for n>=1 (4g-5 for n=0), with d = 3g-3+n, gives H^k_c(M_{g,n}) = 0 for k < 2d-cd = 2g-2+n (resp. 2g-1). Since W_k H^k(M_{g,n}) = gr^W_k H^k_c(M_{g,n}), a nonzero pure-weight input at k=16 requires 16 >= 2g-2+n, and for n=0 requires 16 >= 2g-1, i.e. g <= 8 -- exactly the two-clause form stated, and exactly what excludes (9,0). For (7,4), 2g-2+n = 16, so the base case is genuinely required. Caveat: RED-0001.md is not in the supplied file set, so the enumeration itself is unverifiable here. Taken literally, CLAIM A's criterion plus Table 1 (c(1)=c(2)=10) also flags (1,11)-(1,16) and (2,11)-(2,14) as required inputs beyond the published CKgP range. Genus 1 is harmless -- SRC-0002 Sec. 2 gives W_k H^k(M_{1,n}) = S_{k+1} tensor V_{...}, and S_17 = 0, so W_16 H^16(M_{1,n}) = 0 for all n -- but the genus-2 cases (2,11)-(2,14) are omitted from the list quoted in CLAIM M/GAP-6 with no stated justification. CKgP is sufficient, not necessary, for pure Tate, so these may well be settled by the genus-2 results in SRC-0002 Sec. 2; the attempt should say so rather than leave the enumeration to inspection.",
+      "status": "confirmed"
+    },
+    {
+      "claim": "CLAIM B",
+      "finding": "Correctly read against SRC-0002 Lemma 4.3 (corpus/text/SRC-0002.txt:581-591): CKgP for X open in a smooth proper DM stack gives surjectivity of cl: sum_i A^i(X) -> sum_k W_k H^k(X), hence W_k H^k pure Hodge-Tate for k even, with no A* = R* input. The distinction from Prop. 4.5 (SRC-0002:643-644), which does need A* = R*, is drawn accurately, and the GAP note is honest. This claim correctly resists the 'pure Tate silently upgraded to tautological' failure mode. Blemish: 'W_16 H^16(M_7,4) (equivalently the dual pure piece W_{-16} H^BM_16) ... is a direct sum of Tate twists Q(-8)' conflates a Hodge structure with its dual. H^BM_k = (H^k_c)^dual, so W_{-16} H^BM_16 is the dual of W_16 H^16 and is a sum of Q(8), not Q(-8). Separately, dim M_7,4 = 22, so Poincare duality sends H^BM_16 to H^{28}(22), not to H^16 -- the correspondence with H^16 is duality, not PD-in-place. Non-fatal, since Lemma 4.3 delivers all W_k H^k at once and the induction's third term (SRC-0002:167, 652) is W_16 H^16 anyway; the Borel-Moore avatar is gratuitous here and only creates a chance to slip a sign.",
+      "status": "confirmed with a twist-bookkeeping blemish"
+    },
+    {
+      "claim": "CLAIM C",
+      "finding": "Maximal gonality 5 in genus 7 and the reduction via Prop. 4.2(3) match SRC-0002:664-677 verbatim. The stratification into k = 2,3,4,5 is finite and exhaustive.",
+      "status": "confirmed"
+    },
+    {
+      "claim": "CLAIM D",
+      "finding": "SRC-0004 Lemma 9.9 (corpus/text/SRC-0004.txt:1863-1866) reads 'g >= 4 and n <= g+7'. At g=7 that is n <= 14, so n=4 is comfortably inside the published range. Citation accurate.",
+      "status": "confirmed"
+    },
+    {
+      "claim": "CLAIM E",
+      "finding": "Checked directly and this is the attempt's most important true 'free lunch'. SRC-0002 Lemma 5.13 (corpus/text/SRC-0002.txt:1084-1091) is genuinely stated for n <= 4, not n <= 3, even though the section is titled 'at most 3 marked points'. The independence argument (SRC-0002:1098-1103) needs only the absence of a g^1_n for n <= 4, which holds on the exact-gonality-5 locus: 4 dependent points in the canonical P^6 force h^0(K - sum p_i) >= 4, hence h^0(sum p_i) >= 2, a g^1_4, contradicting gonality 5. So the pentagonal stratum of M_7,4 really is already settled in the literature.",
+      "status": "confirmed"
+    },
+    {
+      "claim": "CLAIM F",
+      "finding": "The stratification matches SRC-0002:748-766 and SRC-0005 Sec. 4.4 (corpus/text/SRC-0005.txt:1181-1191): (Psi_0) E=(3,3,4), F=(5,5); (Psi_1) E=(3,3,4), F=(4,6); (Sigma_2) E=(2,4,4), F=(4,6); (Sigma_3) E=(2,3,5), F=(4,6); plus the maximally unbalanced hyperelliptic Z. deg E = deg F = g+3 = 10. The properness of beta'_n and the Prop. 4.2(2) reduction match SRC-0002:698-712.",
+      "status": "confirmed"
+    },
+    {
+      "claim": "CLAIM G",
+      "finding": "SRC-0004 Lemma 10.6 (corpus/text/SRC-0004.txt:2145-2150) is stated with f_1 <= f_2 and n <= 4f_1 - 2g + 1. For F=(5,5), f_1 = 5 gives n <= 7, so n=4 is inside. {f_1 >= 5} is open by semicontinuity, so H^5_{4,7,4} is a legitimate Definition 10.8 stratum, and Lemmas 10.11/10.12 (SRC-0004:2226-2243) apply with f=5. No new gap here. Worth noting explicitly, though the attempt does not: the F=(4,6) part of X_4 has f_1 = 4, giving n <= 3, so X_4 is NOT wholly covered by CLAIM G -- that residue is what CLAIM H/I must absorb.",
+      "status": "confirmed"
+    },
+    {
+      "claim": "CLAIM H",
+      "finding": "This is the strongest part of the attempt and it holds up under exact recomputation. SRC-0004:2169 gives deg(omega_C tensor W_{f_i}|_C^dual(Gamma)) = 4f_i + n - 2g - 14; at (g,n,f_2) = (7,4,6) this is 24 + 4 - 14 - 14 = 0, so the strict inequality degenerates exactly at n=4. The restriction O_{PE^dual}(1)|_C = omega_C tensor gamma^*O(2) is cited verbatim in SRC-0004:2153-2155 (via omega_{P^1}^dual), so GAP-5's self-doubt is over-cautious. Recomputing: W_{f_2}|_C = omega_C^2 tensor gamma^*O(4-6) = omega_C^2(-2D), hence omega_C tensor W_{f_2}^dual(Gamma) = omega_C^{-1}(2D+Gamma), of degree -12+8+4 = 0. Failure iff this is O_C iff Gamma ~ K_C - 2D. Correct. Omitted step: 'evaluation fails if and only if' needs h^1(W_{f_2}|_C) = 0 (else H^1(W(-Gamma)) could inject into H^1(W|_C) and evaluation would still be surjective). It does vanish -- deg(omega_C tensor W_{f_2}^dual) = 12 - 24 = -4 < 0 -- and H^0(PE^dual,W) -> H^0(C,W|_C) is onto since H^1(PE^dual,O) = 0, so the 'iff' survives. The attempt should state this.",
+      "status": "confirmed (one step omitted)"
+    },
+    {
+      "claim": "CLAIM I",
+      "finding": "False on exactly the strata that matter. See strongest_attack. h^0(2D) = 3 holds only when every e_i >= 3, i.e. only on E=(3,3,4); on Sigma_2 and Sigma_3 it is 4, so h^0(K-2D) = 2 and the residual system is a pencil, not a unique divisor R.",
+      "status": "REFUTED"
+    },
+    {
+      "claim": "CLAIM J",
+      "finding": "The tower H^good subset Y|_{U_4} -> U_4 subset (PE^dual)^4 -> P -> B_{e,f} is the one in SRC-0002:823-828 and SRC-0004 (10.10) at SRC-0004:2222-2224, and B_{e,f} has the CKgP by SRC-0002:789-793. Prop. 4.2(1)(4)(5) applies. The claim is sound as stated -- but note it is a statement about the evaluation-surjective open only, so its content shrinks exactly as Bad grows, and CLAIM I understates Bad.",
+      "status": "confirmed conditionally"
+    },
+    {
+      "claim": "CLAIM K",
+      "finding": "The permanence direction is correctly diagnosed: SRC-0004 Lemma 3.10 (corpus/text/SRC-0004.txt:767-769) transports CKgP from domain to target along proper surjections representable by DM stacks, so a finite etale cover of a CKgP base gets nothing for free. That objection is right. However the claim asserts 'Bad^0 is finite etale over an open of the unpointed stratum Sigma_ell' and names Sigma_ell explicitly -- and Sigma_2, Sigma_3 are precisely where that is false (fibers are 1-dimensional, not finite). So the proposed repair is not merely incomplete; it is aimed at the wrong object over the majority of the F=(4,6) region.",
+      "status": "self-criticism accurate, but premised on a false geometric picture"
+    },
+    {
+      "claim": "CLAIM L",
+      "finding": "Stated as a conditional and explicitly limited to the pure-Tate (not tautological) consequence. One point in its favor that the attempt does not make: the semisimplification worry is harmless here, because H^16(Mbar_7,4) is pure of weight 16 and pure Hodge structures of a fixed weight form a semisimple category, so an extension of pure Tate by pure Tate along the right-exact sequence splits. The Gysin twist is also fine: H^{k-2}(boundary)(-1) -> H^k lands in weight k. SRC-0002:167 and :652 both suppress the (-1), so the attempt is no worse than its source.",
+      "status": "conditional, correctly hedged"
+    },
+    {
+      "claim": "CLAIM M",
+      "finding": "The non-claims are accurate and the attempt does not overreach: it does not assert CKgP of M_7,4, does not assert A* = R*, does not use point counts or Galois semisimplifications, and does not treat the other RED-0001 cases. No predicted motive is used as an unconditional theorem anywhere in the attempt.",
+      "status": "confirmed"
+    },
+    {
+      "claim": "GAP-3",
+      "finding": "GAP-3 flags only non-reduced or small-support residual divisors -- a multiplicity degeneration on a closed subset. The real excess is a dimension jump on two full open strata (Sigma_{2,4}, Sigma_{3,4}). A reader working from the gap list would believe Bad has codimension 4 in the marking directions everywhere with a small closed degeneracy; in fact it has codimension 3 over roughly half the F=(4,6) region.",
+      "status": "mischaracterizes the actual obstruction"
+    }
+  ],
+  "created_on": "2026-07-30",
+  "id": "REV-0008",
+  "independent": true,
+  "reviewer_engine": "claude",
+  "scope_checks": [
+    "stack versus coarse space -- clean; everything is stated for the DM stacks M_7,4 and Mbar_7,4, and SRC-0002 Lemma 4.3 requires only 'open substack of a smooth proper DM stack', which Mbar_7,4 satisfies. No coarse-space substitution detected.",
+    "rational versus integral coefficients -- clean; Q is declared in assumption 1 and is required both for CKgP/Chow-of-stacks arguments and for stack-equals-coarse-space comparisons. No integral statement is smuggled in.",
+    "cohomology degree versus Borel-Moore homology degree -- one blemish. dim M_7,4 = 22, so H^BM_16 corresponds to H^28(22), not H^16; the correct link to W_16 H^16 is duality (H^BM_k = (H^k_c)^dual), which is what CLAIM B's word 'dual' rescues. The needed object for SRC-0002's right-exact sequence is W_16 H^16, so the Borel-Moore phrasing adds only risk.",
+    "Poincare duality and every Tate twist -- one sign error. W_{-16} H^BM_16 is a sum of Q(8) (weight -16), not Q(-8) (weight 16); the latter is right for W_16 H^16 only. The suppressed Gysin twist (-1) in the boundary sequence is inherited from SRC-0002:167 and is harmless since weight (k-2)+2 = k.",
+    "Gysin and Kunneth shifts -- clean. The degree-2 Gysin shift in H^{k-2}(normalized boundary) -> H^k(Mbar) matches SRC-0002:167. Kunneth across boundary vertices is not used in this attempt beyond isolating the (7,4) input.",
+    "degeneration or spectral-sequence differentials -- not applicable in substance; the attempt uses only the right-exact sequence, not a full spectral sequence, and GAP-7 honestly declines to check extensions at every degree-16 boundary stratum.",
+    "invariants versus coinvariants under graph automorphisms -- not addressed by the attempt. SRC-0002:196-197 takes invariants under dual-graph automorphisms, so what the induction strictly needs at a vertex is W_16 H^16(M_7,4)^G for G a subgroup of S_4. The attempt's ungraded statement is stronger than required, so this is harmless for sufficiency but makes CLAIM A's word 'required' imprecise.",
+    "semisimplification versus an actual Hodge-structure isomorphism -- no error found, and in fact the attempt is safer than it realizes: H^16(Mbar_7,4) is pure of weight 16, and pure Hodge structures of fixed weight form a semisimple category, so the pure-Tate-by-pure-Tate extension in GAP-7 splits. No semisimplified statement is passed off as an isomorphism.",
+    "predicted motives used as unconditional theorems -- clean. Every cited input (SRC-0002 Prop. 4.2, Lemma 4.3, Lemma 5.13; SRC-0004 Lemmas 3.10, 9.9, 10.6, 10.11, 10.12) was checked against the corpus text and is a proved statement in range. CONJ-0001 is invoked only as the target, never as a hypothesis.",
+    "pure Tate silently upgraded to algebraic or tautological generation -- clean, and this is a genuine strength. CLAIM B explicitly separates Lemma 4.3 (pure Tate, algebraic, no A*=R* needed) from Prop. 4.5 (W = RH, needs A*=R*), and GAP-4 keeps the tautological statement out of scope. This is the trap the attempt most successfully avoids.",
+    "omitted stable pairs / omitted strata -- FAILURE, and the source of the strongest attack. The F=(4,6) analysis in CLAIMS H-I-K silently treats all F=(4,6) covers as if E=(3,3,4). The strata Sigma_2 = (2,4,4)/(4,6) and Sigma_3 = (2,3,5)/(4,6) carry F=(4,6) but have h^0(2D) = 4, so h^0(K-2D) = 2 and the residual system is a pencil; on Sigma_3 in particular K ~ 3D, so the bad locus is the 'four markings in one fiber of gamma' locus. The bad locus is one dimension larger than CLAIM I computes over both strata, and GAP-3 names the wrong degeneracy (multiplicity rather than dimension)."
+  ],
+  "strongest_attack": "CLAIM I is false on exactly the strata where CLAIM H's evaluation defect lives, and the error is a sheaf computation that can be checked in one line. For a degree-4 cover gamma: C -> P^1 the Casnati-Ekedahl bundle satisfies gamma_*O_C = O_{P^1} + E^dual with E of rank 3 and degree g+3 = 10 (SRC-0002:715-716); one checks the convention via chi(gamma^*O(m)) = (m+1) + sum_i (m-e_i+1) = 4m-6 = 4m-g+1. Hence h^0(C,2D) = h^0(gamma^*O(2)) = 3 + sum_i max(0, 3-e_i). CLAIM I asserts h^0(2D) = 3 for every 'smooth irreducible non-trigonal tetragonal genus-7 curve', i.e. that |2D| is exactly the pullback of |O_{P^1}(2)|. That holds if and only if every e_i >= 3, i.e. only on E = (3,3,4). But the genus-7 splitting list (SRC-0005:1181-1191, reproduced by the attempt itself in CLAIM F) is: Psi_0 = (3,3,4)/(5,5); Psi_1 = (3,3,4)/(4,6); Sigma_2 = (2,4,4)/(4,6); Sigma_3 = (2,3,5)/(4,6). Both Sigma_2 and Sigma_3 have e_1 = 2 and both carry F = (4,6). So on all of Y_4 = Sigma_{2,4} + Sigma_{3,4} -- precisely the part of the F=(4,6) locus that CLAIM G does not cover and that CLAIM H's degree-0 defect therefore governs -- one gets h^0(2D) = 4, and Riemann-Roch gives h^0(K_C - 2D) = h^0(2D) - 2 = 2, not 1. There is no unique residual divisor R. |K_C - 2D| is a pencil of degree 4, and it is base-point-free (a base point would leave a g^1_3 and force trigonality, excluded on H^diamond), so it is a second g^1_4. Consequently the bad locus Bad = {Gamma ~ K_C - 2D} does not meet the fibers of H^diamond_{4,7,4} -> H^diamond_{4,7} in 4! = 24 points; it meets them in a 1-dimensional family (a P^1 of divisors, each with 24 orderings). Bad has codimension 3, not 4, in the marking directions over Y_4, and Bad -> Sigma_ell is not even quasi-finite. This directly refutes CLAIM I's 'degree-24 (=4!) finite etale cover' and its closing sentence that the remaining locus is 'of strictly smaller dimension', and it destroys the premise of CLAIM K's proposed repair, which is stated over Sigma_ell by name. The Sigma_3 case sharpens the point to something unmistakable. There h^0(3D) = 4 + max(0,2) + max(0,1) + 0 = 7 = h^0(K_C), and Riemann-Roch forces h^0(K_C - 3D) = 1 with deg(K_C - 3D) = 0, so K_C ~ 3D and therefore K_C - 2D ~ D. On Sigma_{3,4}, evaluation fails exactly when the four marked points form a fiber of the tetragonal map gamma itself. That is the single most natural degeneracy in a Hurwitz space with markings, it consists of four distinct points so it is squarely inside Lemma 10.6's hypotheses, and CLAIM I's framing misses it entirely. On Sigma_2 the second pencil is genuinely new (h^0(3D) = 6, so K is not ~ 3D); note also that SRC-0005:1186-1191 records that the general and special bielliptic loci sit inside Sigma_2 and Sigma_3, and SRC-0005:204 records that these authors' techniques cannot access the bielliptic locus -- the attempt's Bad locus runs straight into the known hard case without remarking on it. Verdict impact: the attempt already concedes it does not prove the target (CLAIM M), so the overall verdict remains incomplete rather than refuted. But GAP-1 through GAP-3 understate the obstruction rather than merely leaving it open, and the attempt's central new geometric claim is wrong on the majority of the region it was written to analyze. Runner-up attacks, both weaker: (i) the Q(-8)/Q(8) duality slip in CLAIM B, cosmetic because Lemma 4.3 delivers every W_k H^k simultaneously; (ii) the unverifiable RED-0001 enumeration, where CLAIM A's own criterion plus Table 1 also flags (2,11)-(2,14) with no stated disposition. Neither is load-bearing the way CLAIM I is.",
+  "verdict": "incomplete"
+}

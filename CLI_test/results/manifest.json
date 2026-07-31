@@ -1,0 +1,156 @@
+{
+  "model": "grok-4.5",
+  "probes": [
+    {
+      "argv": [
+        "grok",
+        "-p",
+        "<prompt-sha256:602c9a26dad7caba08cc0cdca274341db8bd97c4d86fd8bd284316868968a37a>",
+        "--output-format",
+        "streaming-json",
+        "--max-turns",
+        "2",
+        "--permission-mode",
+        "dontAsk",
+        "--always-approve",
+        "--tools",
+        "",
+        "--disallowed-tools",
+        "run_terminal_command,write,web_fetch,web_search,open_page",
+        "--disable-web-search",
+        "--model",
+        "grok-4.5"
+      ],
+      "elapsed_seconds": 5.454,
+      "executed_at": "2026-07-31T06:22:17.139169+00:00",
+      "model": "grok-4.5",
+      "probe": "basic",
+      "prompt_sha256": "602c9a26dad7caba08cc0cdca274341db8bd97c4d86fd8bd284316868968a37a",
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/basic.stderr.txt",
+      "stderr_sha256": "8e0c39aef2104847cd6913fadc6f926ddc983e6f8333c3e52408f86b8516b679",
+      "stdout_path": "CLI_test/results/basic.stdout.jsonl",
+      "stdout_sha256": "1d18aa7bc0b170daad3b597912d4d68fe10688dc2f4583e476c39d4ce61386aa",
+      "summary": {
+        "event_key_shapes": {
+          "data,type": 44,
+          "modelUsage,num_turns,requestId,sessionId,stopReason,total_cost_usd,total_cost_usd_ticks,type,usage": 1
+        },
+        "event_type_counts": {
+          "end": 1,
+          "text": 21,
+          "thought": 23
+        },
+        "first_event": {
+          "data": "The",
+          "type": "thought"
+        },
+        "invalid_lines": [],
+        "last_event": {
+          "modelUsage": {
+            "grok-4.5-build": {
+              "cacheReadInputTokens": 3968,
+              "costUSD": 0.0196104,
+              "inputTokens": 8958,
+              "modelCalls": 1,
+              "outputTokens": 84
+            }
+          },
+          "num_turns": 1,
+          "requestId": "93eb864d-bc01-44b0-87df-fca59d5a952e",
+          "sessionId": "019fb6d6-692d-7493-9087-5ff935ae0a24",
+          "stopReason": "EndTurn",
+          "total_cost_usd": 0.0196104,
+          "total_cost_usd_ticks": 196104000,
+          "type": "end",
+          "usage": {
+            "cache_read_input_tokens": 3968,
+            "input_tokens": 8958,
+            "output_tokens": 84,
+            "reasoning_tokens": 59,
+            "total_tokens": 13010
+          }
+        },
+        "line_count": 45,
+        "parsed_event_count": 45
+      }
+    },
+    {
+      "argv": [
+        "grok",
+        "-p",
+        "<prompt-sha256:58517aa46f29ed6b2ff66a08840bbe25a46a002e0df5d5fd4dd7c6185d24ed37>",
+        "--output-format",
+        "streaming-json",
+        "--max-turns",
+        "4",
+        "--permission-mode",
+        "dontAsk",
+        "--always-approve",
+        "--tools",
+        "read_file",
+        "--disallowed-tools",
+        "run_terminal_command,write,web_fetch,web_search,open_page",
+        "--disable-web-search",
+        "--model",
+        "grok-4.5"
+      ],
+      "elapsed_seconds": 7.863,
+      "executed_at": "2026-07-31T06:22:25.004447+00:00",
+      "model": "grok-4.5",
+      "probe": "read_tool",
+      "prompt_sha256": "58517aa46f29ed6b2ff66a08840bbe25a46a002e0df5d5fd4dd7c6185d24ed37",
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/read_tool.stderr.txt",
+      "stderr_sha256": "d395d80ff208634481740f89c09b51b65613b80c409044a02fdf890f74b55a17",
+      "stdout_path": "CLI_test/results/read_tool.stdout.jsonl",
+      "stdout_sha256": "a54fa155494140f87276512bd21ee557d888ff25f75ac83c4cbf339e7ab2ee80",
+      "summary": {
+        "event_key_shapes": {
+          "data,type": 110,
+          "modelUsage,num_turns,requestId,sessionId,stopReason,total_cost_usd,total_cost_usd_ticks,type,usage": 1
+        },
+        "event_type_counts": {
+          "end": 1,
+          "text": 72,
+          "thought": 38
+        },
+        "first_event": {
+          "data": "The",
+          "type": "thought"
+        },
+        "invalid_lines": [],
+        "last_event": {
+          "modelUsage": {
+            "grok-4.5-build": {
+              "cacheReadInputTokens": 6016,
+              "costUSD": 0.0093688,
+              "inputTokens": 2747,
+              "modelCalls": 2,
+              "outputTokens": 345
+            }
+          },
+          "num_turns": 2,
+          "requestId": "6c9619a8-fa15-4f9e-bc50-d973cd1f41c1",
+          "sessionId": "019fb6d6-7d52-72a3-bc51-ae292b630b10",
+          "stopReason": "EndTurn",
+          "total_cost_usd": 0.0093688,
+          "total_cost_usd_ticks": 93688000,
+          "type": "end",
+          "usage": {
+            "cache_read_input_tokens": 6016,
+            "input_tokens": 2747,
+            "output_tokens": 345,
+            "reasoning_tokens": 252,
+            "total_tokens": 9108
+          }
+        },
+        "line_count": 111,
+        "parsed_event_count": 111
+      }
+    }
+  ],
+  "schema_version": 1
+}

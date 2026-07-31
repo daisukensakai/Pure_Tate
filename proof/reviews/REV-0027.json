@@ -1,0 +1,105 @@
+{
+  "attempt_id": "ATT-0022",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-Z-W5",
+      "note": "Relative dualizing identification O_{P(E^vee)}(1)|_C \u2245 \u03c9_C \u2297 \u03b3^*O(2) and the packet CE convention W_5 := (O(2) \u2297 \u03b3^*O(-5))|_C correctly yield W_5 \u2245 \u03c9_C^{\u22972}(-D) and deg 16, matching SRC-0004 degree arithmetic deg(W_f)=4g+12-4f.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-F4-VANISHING",
+      "note": "With W_4 \u2245 \u03c9_C^{\u22972}, the bundle \u03c9_C \u2297 W_4^vee(\u0393) \u2245 \u03c9_C^{-1}(\u0393) has degree -4 for any degree-6 \u0393, so H^0 vanishes universally on smooth curves.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-F5-EVAL",
+      "note": "Degree-zero criterion is correct: H^0(\u03c9_C \u2297 W_5^vee(\u0393)) \u2260 0 iff O_C(\u0393) \u2245 \u03c9_C(-D) \u2245 W_5 \u2297 \u03c9_C^{-1}. This discharges the Serre-duality/degree half of the failure condition; the remaining gap is whether these H^0 spaces are exactly the CE evaluation obstruction (asserted, not re-derived from the evaluation map).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-DIMENSION",
+      "note": "Relative P^2-bundle, pure dimension 17, codimension 4 in M_{6,6}, and smoothness of Z^{ord,red} are not established. The proof only uses h^0(D)=2 for general tetragonal curves, never proves constancy of h^0(\u03c9_C(-D)) on the full balanced stack, never produces a rank-3 vector bundle whose projectivization is the relative system, and gives no local criterion for smoothness of the ordered reduced incidence locus. Coarse Hurwitz dimension b-3=15 is used as if it were the stack dimension of the image locus in M_{6,6}.",
+      "verdict": "failed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-31",
+  "finding_candidates": [
+    {
+      "adjudication_status": "candidate",
+      "attack_class": "stack-versus-coarse-moduli; omitted-stratification-by-h0",
+      "evidence": "ATT-0022 \u00a73\u20134 and CLM-Z-DIMENSION explicitly invoke h^0(C,D)=2 only for general tetragonal curves, then conclude a relative P^2 over the full balanced Hurwitz stack and dim Z=15+2=17. Packet subproblem C66-GEO-H0 exists precisely to stratify by h^0, which this attempt never does.",
+      "id": "FC-0027-01",
+      "key": "relative-P2-requires-h0-constancy",
+      "severity": "high",
+      "statement": "On the balanced tetragonal stack for (g,n)=(6,6), the identification of the CE evaluation-failure locus with a relative P^2-bundle |\u03c9_C(-D)| (fiber dimension exactly 2) requires proof that h^0(\u03c9_C(-D))=1+h^0(D) is constantly 3 on the whole balanced locus, not merely for general tetragonal curves; without that, pure dimension 17 and codimension 4 in M_{6,6} are not established.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication_status": "candidate",
+      "attack_class": "omitted-local-analysis; stack-versus-coarse-moduli",
+      "evidence": "ATT-0022 \u00a75 defines Z^{bal,red} by distinct support and asserts the ordered cover is \u00e9tale Galois with group S_6, then claims the theorem's smooth 17-dimensional stack without any \u00e9tale-local or deformation-theoretic argument.",
+      "id": "FC-0027-02",
+      "key": "smoothness-of-Z-ord-red-unproved",
+      "severity": "high",
+      "statement": "Smoothness of the ordered distinct six-point failure locus Z^{ord,red} as a stack is an independent load-bearing claim: finite \u00e9tale S_6-covering of a reduced-support open does not yield smoothness unless that open (and the relative linear system) is already smooth, which requires local freeness of the residual system and a smoothness criterion for the incidence of six distinct points.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication_status": "candidate",
+      "attack_class": "stack-versus-coarse-moduli; invariants-versus-coinvariants",
+      "evidence": "ATT-0022 \u00a74 equates Riemann\u2013Hurwitz branch count b=18 and dim=b-3=15 with the dimension entering codim_{M_{6,6}}(Z)=4, while the theorem statement is stack-theoretic.",
+      "id": "FC-0027-03",
+      "key": "hurwitz-b-minus-3-is-coarse",
+      "severity": "medium",
+      "statement": "The count dim H_6^{tet,bal}=b-3=15 is a coarse moduli dimension for branched covers modulo Aut(P^1); promoting it to the dimension of a moduli stack of balanced tetragonal curves with marked points, and to codimension inside the stack M_{6,6}, requires a stabilizer/automorphism analysis that ATT-0022 omits.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication_status": "candidate",
+      "attack_class": "predicted-structure-used-as-theorem; omitted-reference-discharge",
+      "evidence": "ATT-0022 \u00a72\u20133 names the H^0 groups as CE obstruction spaces and asserts evaluation drops rank iff the f=5 summand is nonzero after f=4 vanishes, without reconstructing the evaluation map or quoting the lemma beyond matching degree formulas.",
+      "id": "FC-0027-04",
+      "key": "obstruction-spaces-not-identified-with-evaluation-map",
+      "severity": "medium",
+      "statement": "Degree and Serre-duality control of H^0(C, \u03c9_C \u2297 W_f^vee(\u0393)) for f=4,5 is not by itself a complete identification of the Casnati\u2013Ekedahl evaluation-failure locus unless those groups are shown to be exactly the obstruction spaces of the CE evaluation map (packet: derive failure from the f_2=5 summand of SRC-0004 Lemma 10.6).",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0027",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "C66-GEO-Z",
+      "note": "Subproblem has no upstream dependencies, but the attempt does not complete C66-GEO-Z: identification of the failure condition as O(\u0393)\u2245W_5\u2297\u03c9^{-1} is essentially in place, while the theorem's pure-dimension, smoothness, relative P^2, and stack-codimension clauses remain undischarged.",
+      "verdict": "failed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0022-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Stack-versus-coarse and h^0-constancy attack on the dimension clause: the theorem requires Z^{ord,red} to be a smooth 17-dimensional stack of codimension 4 in M_{6,6} that is a finite \u00e9tale S_6-cover of the reduced-support open in a relative dimension-2 linear system. The attempt only checks h^0(C,D)=2 for general tetragonal curves (hence h^0(\u03c9_C(-D))=3 only generically), then adds the coarse Hurwitz count dim=b-3=15 and asserts a relative P^2-bundle of total dimension 17. Without constancy of h^0 on the entire balanced tetragonal stack, \u03c0_* of the residual system need not be a rank-3 vector bundle, fibers can jump (e.g. whenever the tetragonal pencil is incomplete), the locus need not be pure of dimension 17 or smooth, and the \u00e9tale S_6-cover statement is only configuration-space reasoning over an unproved smooth base. Smoothness and stack stabilizers are never analyzed. Outcome: CLM-Z-DIMENSION fails; attempt is incomplete for the exact GEO-Z theorem (Pass 1 ends ordinary review).",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Over the moduli stack of genus 6 balanced tetragonal curves with six ordered marked points, the Casnati\u2013Ekedahl evaluation-failure locus $Z$ is canonically isomorphic to the relative incidence scheme of the degree-6 linear system $|W_5 \\otimes \\omega_C^{-1}| \\cong |\\omega_C(-D)|$ of dimension 2. Its ordered distinct six-point locus $Z^{\\mathrm{ord}, \\mathrm{red}}$ is a smooth 17-dimensional stack of codimension 4 in $\\mathcal{M}_{6,6}$ that forms a finite \u00e9tale $\\mathfrak{S}_6$-cover of the reduced-support open locus in the relative linear system.",
+  "verdict": "incomplete"
+}

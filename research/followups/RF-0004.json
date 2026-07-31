@@ -1,0 +1,268 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-0001",
+      "evidence_type": "hodge_structure_theorem",
+      "locators": [
+        "CASE-5-8-v2 exact open-input target JSON",
+        "SRC-0002 Eq. (6.1) and FND-0001 duality convention"
+      ],
+      "notes": "Matches RF-0001 bookkeeping; not reopened.",
+      "statement": "For (g,n)=(5,8) one has d=3g-3+n=20, so the RED-0001 ordinary open input is W_24 H^24(M_5,8) with Poincare dual BM form W_{-16} H^{BM}_16(M_5,8) and expected untwisted ordinary Tate type Q(-12) (equivalently BM type Q(8) after twist (20)).",
+      "status": "proved_in_literature"
+    },
+    {
+      "claim_id": "CLM-0002",
+      "evidence_type": "weight_bookkeeping",
+      "locators": [
+        "SRC-0002 Lemma 3.1 and \u00a72.2.1 mixed R^i decomposition template",
+        "SRC-0003 \u00a72 genus-1 mixed R^1 model"
+      ],
+      "notes": "Correction is mathematical bookkeeping of the Leray fibre; not discharged by a named theorem computing the group.",
+      "statement": "The forgetful residual for M_5,8\u2192M_5,7 is the mixed local system R^1=R^1 \u03c0_* Q of weights 1 and 2 on M_5,7 (Gr^W_1 symplectic of rank 2g=10; Gr^W_2 the puncture/Tate quotient), and the weight-24 package feeding W_24 H^24(M_5,8) includes Gr^W_24 H^23(M_5,7;R^1). The pure weight-one residual Gr^W_24 H^23(M_5,7;H) of ATT-0010/MRQ-0001 was formulated incorrectly.",
+      "status": "corrected_reduction"
+    },
+    {
+      "claim_id": "CLM-0003",
+      "evidence_type": "hodge_structure_theorem",
+      "locators": [
+        "SRC-0002 Table 1 p.13",
+        "SRC-0002 Proposition 4.5 p.14",
+        "SRC-0004 Theorem 1.4 / CKgP inputs"
+      ],
+      "notes": "Constant coefficients only; does not force Tate type of H^*(M_5,7;R^1).",
+      "statement": "Open M_5,n has the CKgP and A_*=R_* for n<=c(5)=7; hence by Proposition 4.5, W_k H^k(M_5,7) is pure Hodge--Tate (and vanishes for odd k) for constant rational coefficients.",
+      "status": "proved_in_literature"
+    },
+    {
+      "claim_id": "CLM-0004",
+      "evidence_type": "search_negative",
+      "locators": [
+        "SRC-0001 \u00a74 p.17 open degrees 16/18/20",
+        "SRC-0002 Theorem 1.5(3) stops at even 14",
+        "SRC-0002 Lemma 3.1 (framework only)",
+        "SRC-0002 \u00a7\u00a72.2.1--2.2.2 genus 1--2 only",
+        "SRC-0003 Theorem 1.2",
+        "SRC-0004/SRC-0005 no twisted (5,7) result"
+      ],
+      "notes": "Corpus-only search of seed papers plus in-corpus forward citations through 2026-07-30; no external web search permitted in this harness.",
+      "statement": "No theorem in the searched corpus computes or forces Tate type of the full package Gr^W_24 H^23(M_5,7;R^1), or separately of its weight-one symplectic and weight-two puncture graded pieces, as actual mixed Hodge structures.",
+      "status": "literature_obstruction"
+    },
+    {
+      "claim_id": "CLM-0005",
+      "evidence_type": "non_discharge",
+      "locators": [
+        "SRC-0001 bibliography BvdG08, BFvdG14",
+        "SRC-0003 Corollary 1.3",
+        "SRC-0004 Proposition 3.15"
+      ],
+      "notes": "Explicitly rejected by task checks.",
+      "statement": "Euler characteristics, polynomial point counts, and semisimplified Galois predictions for local systems (e.g. BvdG08, BFvdG14, point-count results in SRC-0003/0004) do not discharge the Hodge-structure residual.",
+      "status": "methodological_exclusion"
+    }
+  ],
+  "context_revision": 2,
+  "current_status_check_date": "2026-07-30",
+  "engine": "grok",
+  "id": "RF-0004",
+  "independent": true,
+  "locators_checked": [
+    {
+      "finding": "Unconditional pure Tate for even k<=14; cases k=16,18,20 remain open as of May 2026 survey.",
+      "locator": "Section 4, page 17, paragraph after Theorem 4.1 / Remark 4.2",
+      "source_id": "SRC-0001"
+    },
+    {
+      "finding": "Establishes purity conventions for Mbar only; does not address open-stratum local-system packages.",
+      "locator": "Section 2.1, pure Hodge structure for smooth proper stacks",
+      "source_id": "SRC-0001"
+    },
+    {
+      "finding": "Forward pointers to local-system Euler characteristics and low-genus symplectic computations; none state a result for Gr^W_24 H^23(M_5,7;R^1).",
+      "locator": "Bibliography entries BvdG08, BFvdG14, FvdG04a/b, Pet15",
+      "source_id": "SRC-0001"
+    },
+    {
+      "finding": "Hk(Mbar_g,n) tautological for even k<=14 for all g,n; predicts k=16,18,20 but does not prove them.",
+      "locator": "Theorem 1.5(3), pages 2--3",
+      "source_id": "SRC-0002"
+    },
+    {
+      "finding": "c(5)=7: open M_5,n has CKgP and A=R for n<=7, so M_5,7 is covered for constant coefficients.",
+      "locator": "Table 1, page 13",
+      "source_id": "SRC-0002"
+    },
+    {
+      "finding": "For n<=c(g), W_k H^k(M_g,n)=RH_k (constant Q); odd pure weight vanishes. Does not apply to non-constant R^1 coefficients.",
+      "locator": "Proposition 4.5, page 14",
+      "source_id": "SRC-0002"
+    },
+    {
+      "finding": "Leray--Kunneth identifies pure-weight quotients of M_g,n with W_* H_*(M_g,V_\u03bb) for symplectic local systems; framework only, no evaluation at (g,n,k)=(5,7,23) with mixed R^1.",
+      "locator": "Lemma 3.1(a)--(b), pages 10--11, equations (3.1)--(3.3)",
+      "source_id": "SRC-0002"
+    },
+    {
+      "finding": "Boundary BM exact sequence and CKgP base cases discharge even homology through degree 14; (5,8) open input W_24 H^24 is outside that range.",
+      "locator": "Equation (6.1) and Proof of Theorem 1.5(3), page 24",
+      "source_id": "SRC-0002"
+    },
+    {
+      "finding": "Full local-system control only for g=1 (Eichler--Shimura) and low-degree g=2; not genus 5.",
+      "locator": "Section 2.2.1--2.2.2, pages 6--9 (genus 1--2 local systems)",
+      "source_id": "SRC-0002"
+    },
+    {
+      "finding": "Even k<=12 pure Hodge--Tate on Mbar; weaker than SRC-0002 and silent on twisted coefficients on M_5,7.",
+      "locator": "Theorem 1.2, pages 1--2",
+      "source_id": "SRC-0003"
+    },
+    {
+      "finding": "Mixed R^1 analysis is genus-1 only.",
+      "locator": "Section 2, pages 6--8 (V=R^1 f_* Q on M_1,1)",
+      "source_id": "SRC-0003"
+    },
+    {
+      "finding": "CKgP and tautological generation in low (g,n); supplies the c(g) inputs of SRC-0002 Table 1; no local-system cohomology of M_5,7.",
+      "locator": "Theorem 1.4 / abstract and filling criteria through page 40",
+      "source_id": "SRC-0004"
+    },
+    {
+      "finding": "No statement about M_5,n or symplectic local systems on M_5.",
+      "locator": "entire paper (genus 7--9 Chow)",
+      "source_id": "SRC-0005"
+    },
+    {
+      "finding": "Packet target W_24 H^24(M_5,8)(20) with untwisted Tate type Q(-12); residual pair (5,8) among seven open RED-0001 base cases.",
+      "locator": "Exact open-input target and RED-0001",
+      "source_id": "CASE-5-8-v2"
+    }
+  ],
+  "packet_id": "CASE-5-8-v2",
+  "packet_sha256": "93405e895723720d9a4ff947646a743224b38a247b0e6c9ca363f1aac83e815c",
+  "question_id": "MRQ-0004",
+  "schema_version": 1,
+  "source_records": [
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "authors": [
+        "Sam Payne"
+      ],
+      "checked_on": "2026-07-30",
+      "role": "current-status survey for even degrees 16/18/20 and local-system references",
+      "source_id": "SRC-0001",
+      "title": "On the Hodge and Tate conjectures for moduli spaces of curves"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson",
+        "Sam Payne"
+      ],
+      "checked_on": "2026-07-30",
+      "role": "primary for CKgP table c(5)=7, Prop 4.5 constant-coefficient purity, Lemma 3.1 local-system reduction, Thm 1.5(3) through degree 14 only",
+      "source_id": "SRC-0002",
+      "title": "Extensions of tautological rings and motivic structures in the cohomology of Mbar_g,n"
+    },
+    {
+      "arxiv_id": "2209.03113",
+      "arxiv_version": "v2",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson",
+        "Sam Payne"
+      ],
+      "checked_on": "2026-07-30",
+      "role": "low-degree pure Hodge-Tate through even degree 12; genus-1 R^1 local-system analysis only",
+      "source_id": "SRC-0003",
+      "title": "The eleventh cohomology group of Mbar_g,n"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson"
+      ],
+      "checked_on": "2026-07-30",
+      "role": "primary CKgP/tautological ranges feeding Table 1 of SRC-0002; no twisted-coefficient cohomology for M_5,7",
+      "source_id": "SRC-0004",
+      "title": "On the Chow and cohomology rings of moduli spaces of stable curves"
+    },
+    {
+      "arxiv_id": "2104.05820",
+      "arxiv_version": "v2",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson"
+      ],
+      "checked_on": "2026-07-30",
+      "role": "genus 7--9 Chow; no genus-5 local-system residual",
+      "source_id": "SRC-0005",
+      "title": "The Chow rings of the moduli spaces of curves of genus 7, 8, and 9"
+    },
+    {
+      "authors": [
+        "Jonas Bergstr\u00f6m",
+        "Gerard van der Geer"
+      ],
+      "checked_on": "2026-07-30",
+      "citation_in_corpus": "SRC-0001 p.23 bibliography",
+      "role": "cited Euler-characteristic local-system work (genus 3); not a Hodge-structure theorem for (5,7)",
+      "source_id": "BIB-BvdG08",
+      "title": "The Euler characteristic of local systems on the moduli of curves and abelian varieties of genus three"
+    },
+    {
+      "authors": [
+        "Jonas Bergstr\u00f6m",
+        "Carel Faber",
+        "Gerard van der Geer"
+      ],
+      "checked_on": "2026-07-30",
+      "citation_in_corpus": "SRC-0001 p.23 bibliography",
+      "role": "cited local-system cohomology in low genus; does not treat M_5,n or weight-24 residual",
+      "source_id": "BIB-BFvdG14",
+      "title": "Siegel modular forms of degree three and the cohomology of local systems"
+    },
+    {
+      "authors": [
+        "Dan Petersen",
+        "Mehdi Tavakol",
+        "Qizheng Yin"
+      ],
+      "checked_on": "2026-07-30",
+      "citation_in_corpus": "SRC-0002 Ref. 29",
+      "role": "framework for symplectic local systems V_\u03bb on M_g used in Lemma 3.1; no computation of H^23(M_5,7;R^1)",
+      "source_id": "BIB-PTY21",
+      "title": "Tautological classes with twisted coefficients"
+    }
+  ],
+  "summary": "Degree/weight bookkeeping for (5,8) is confirmed: d=20, ordinary open input W_24 H^24(M_5,8) of expected Tate type Q(-12). Under the forgetful map M_5,8\u2192M_5,7 the fibre is a 7-punctured genus-five curve, so the residual local system R^1:=R^1 \u03c0_* Q is mixed of weights 1 and 2 (weight-one standard symplectic summand plus weight-two puncture quotient). The pure-weight residual package is therefore the full graded piece Gr^W_24 H^23(M_5,7;R^1), not the pure weight-one group Gr^W_24 H^23(M_5,7;H) proposed in ATT-0010/MRQ-0001; that earlier residual was formulated incorrectly by dropping the weight-two summand. After searching the five seed sources (arXiv versions through their corpus check dates, with survey SRC-0001 current as of 2026-05-19 and rechecked 2026-07-30) and their in-corpus forward citations to local-system literature, no published theorem computes, forces Tate type for, or proves vanishing of Gr^W_24 H^23(M_5,7;R^1), nor of its weight-one or weight-two graded pieces separately. Available theorems give only constant-coefficient purity on M_5,7 (CKgP, n<=7) and a general reduction of pure-weight open cohomology to symplectic local systems on M_g; Euler/point-count/semisimple substitutes are rejected.",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "task_id": "TASK-Q-0004",
+  "unresolved": [
+    "No locator-level computation of Gr^W_24 H^23(M_5,7;R^1) as a mixed Hodge structure.",
+    "No separate Hodge-structure determination of H^23(M_5,7;Gr^W_1 R^1) (weight-one symplectic) or H^22/H^23 pieces with Gr^W_2 R^1 (weight-two puncture quotient) that would force the weight-24 package to be Tate.",
+    "Constant-coefficient CKgP on M_5,7 and Lemma 3.1 do not upgrade to non-constant R^1 at virtual top degree 23=vcd(M_5,7).",
+    "Global degree-16 pure Tate for Mbar remains open (SRC-0001, May 2026); the (5,8) residual is one RED-0001 obstruction and is not removed by current literature."
+  ],
+  "verdict": "partial"
+}

@@ -1,0 +1,224 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-0001",
+      "evidence_type": "proved_hodge_structure_identity",
+      "kind": "degree_weight_verification",
+      "locators": [
+        "TASK.json target block",
+        "proof/packets/generated/CASE-6-6-v2.md Exact open-input target",
+        "data/target.json open_input_formula"
+      ],
+      "statement": "For (g,n)=(6,6), d=3g-3+n=21, the open input is W_{-16}H^{BM}_{16}(M_{6,6}) expected Q(8), equivalently W_26 H^26(M_{6,6})(21) with untwisted ordinary Tate type Q(-13) and Chow codimension 13.",
+      "status": "established"
+    },
+    {
+      "claim_id": "CLM-0002",
+      "evidence_type": "standard_mixed_hodge_structure",
+      "kind": "mixed_weights_on_fibre",
+      "locators": [
+        "Deligne mixed Hodge theory for smooth curves with punctures; fibre description of forgetful maps as used in SRC-0002 Lemma 3.1 Leray-Kunneth analysis, pp. 10-11"
+      ],
+      "statement": "For pi:M_{6,6}->M_{6,5}, the fibre is a smooth genus-six curve minus five marked points; H^1 of that fibre is mixed of weights one and two, with Gr^W_1 isomorphic to the standard symplectic local system H of weight one (rank 12) and Gr^W_2 the puncture quotient of weight two (rank 4).",
+      "status": "established"
+    },
+    {
+      "claim_id": "CLM-0003",
+      "evidence_type": "corrected_reduction_not_discharged",
+      "kind": "residual_identification",
+      "locators": [
+        "SRC-0002 Lemma 3.1 and Equations (3.1)-(3.3), pp. 10-11",
+        "SRC-0002 Table 1 c(6)=5 and Proposition 4.5, pp. 13-14",
+        "SRC-0002 Lemma 4.3, pp. 12-13",
+        "SRC-0002 vcd vanishing bound in proof of Theorem 1.3, p. 12"
+      ],
+      "statement": "The lowest-weight local-system term feeding W_26 H^26(M_{6,6}) under M_{6,6}->M_{6,5} is Gr^W_26 H^25(M_{6,5};H) with H the weight-one standard symplectic variation. The weight-two puncture graded piece of R^1 does not contribute to weight 26. The constant-coefficient R^0 contribution H^26(M_{6,5}) vanishes by the vcd bound k>4g-4+n of SRC-0002 p. 12. The R^2\u2245Q(-1) contribution reduces to W_24 H^24(M_{6,5}), which is pure Tate/algebraic by CKgP of M_{6,5}. Thus the proposed residual Gr^W_26 H^25(M_{6,5};H) is correctly formulated when H means the weight-one symplectic variation; it is incorrectly formulated if H is taken to be the full mixed R^1 of the five-punctured fibre or the weight-two puncture quotient alone.",
+      "status": "corrected_reduction"
+    },
+    {
+      "claim_id": "CLM-0004",
+      "evidence_type": "proved_hodge_structure",
+      "kind": "supporting_but_insufficient_theorem",
+      "locators": [
+        "SRC-0002 Table 1, p. 13",
+        "SRC-0002 Proposition 4.5, p. 14",
+        "SRC-0002 Lemma 4.3, pp. 12-13",
+        "SRC-0004 Theorem 1.4 (primary CKgP source)"
+      ],
+      "statement": "For n<=c(6)=5, M_{6,n} has CKgP and W_k H^k(M_{6,n})=RH^k(M_{6,n}) is pure Hodge-Tate for even k (and vanishes for odd k). This discharges constant-coefficient pure-weight pieces on M_{6,5}, including the forgetful R^2 contribution, but does not control H^*(M_{6,5};H) for nontrivial symplectic H and does not cover M_{6,6}.",
+      "status": "established_insufficient"
+    },
+    {
+      "claim_id": "CLM-0005",
+      "evidence_type": "absence_after_search",
+      "kind": "non_discharge",
+      "locators": [
+        "SRC-0002 Theorem 1.5(3), p. 2 and proof pp. 24-25 Equation (6.1)",
+        "SRC-0002 Conjecture 1.8, p. 3",
+        "SRC-0001 Section 4, p. 17",
+        "SRC-0002 references to Petersen local systems (genus 1/2), pp. 6-9, 32-33",
+        "full-corpus grep of chunks/text for M_{6,6}, H^25, W_26, local systems on M_6"
+      ],
+      "statement": "No theorem in the supplied primary corpus computes Gr^W_26 H^25(M_{6,5};H), proves it is pure Tate, or proves it vanishes. Local-system computations cited in the corpus (Petersen for genus 1/2 and A_2; Bergstrom-van der Geer Euler characteristics in genus 3) do not reach genus-six symplectic coefficients in degree 25. Even homology is proved pure Tate/tautological only through degree 14 (SRC-0002 Theorem 1.5(3)); degree 16 remains an open prediction (SRC-0001 Section 4; SRC-0002 Conjecture 1.8).",
+      "status": "open"
+    }
+  ],
+  "context_revision": 2,
+  "current_status_check_date": "2026-07-30",
+  "engine": "grok",
+  "id": "RF-0002",
+  "independent": true,
+  "locators_checked": [
+    {
+      "locator": "Section 4, p. 17, paragraph stating pure Tate for even k<=20 confirmed for k<=14 while 16,18,20 remain open",
+      "result": "global degree-16 pure-Tate statement open as of survey date 2026-05-19; no discharge of W_26 H^26(M_{6,6}) or Gr^W_26 H^25(M_{6,5};H)",
+      "source_id": "SRC-0001"
+    },
+    {
+      "locator": "Table 1, pp. 3-4 (known GHC/GTC cases through 2d-15)",
+      "result": "even homology through degree 14 listed as L^{k/2}; no entry for degree-16 open BM base cases",
+      "source_id": "SRC-0001"
+    },
+    {
+      "locator": "Theorem 1.5(3), p. 2 / proof pp. 24-25 with Equation (6.1)",
+      "result": "proved pure-weight/tautological even homology only through k=14 via BM right-exact sequence; k=16 not covered",
+      "source_id": "SRC-0002"
+    },
+    {
+      "locator": "Table 1, p. 13: c(6)=5; Proposition 4.5, p. 14",
+      "result": "M_{6,n} has CKgP and W_k H^k = RH^k for n<=5, so M_{6,5} pure-weight constant-coefficient cohomology is algebraic/Tate; M_{6,6} (n=6>5) not covered",
+      "source_id": "SRC-0002"
+    },
+    {
+      "locator": "Lemma 4.3, pp. 12-13",
+      "result": "CKgP implies surjectivity of cycle class onto pure-weight W_k H^k for smooth opens; discharges constant-coefficient pure pieces on M_{6,5}, not local-system coefficients",
+      "source_id": "SRC-0002"
+    },
+    {
+      "locator": "Lemma 3.1(a)-(b), pp. 10-11, Equations (3.1)-(3.3)",
+      "result": "Leray-Kunneth reduction of pure W_k H^k(M_{g,n}) to symplectic local systems on M_g; supplies framework but no vanishing/computation for g=6, n=6, k=26 or for H^25(M_{6,5}; standard H)",
+      "source_id": "SRC-0002"
+    },
+    {
+      "locator": "vcd bound in proof of Theorem 1.3, p. 12: vanishes for k'>4g'-4+n'",
+      "result": "H^26(M_{6,5})=0 since 26>4*6-4+5=25; constant R^0 term in forgetful Leray does not feed the residual",
+      "source_id": "SRC-0002"
+    },
+    {
+      "locator": "Introduction after Theorem 1.5, pp. 2-3; Conjecture 1.8",
+      "result": "prediction that even k=16,18,20 are Tate/tautological; conjecture only, not a theorem discharging (6,6)",
+      "source_id": "SRC-0002"
+    },
+    {
+      "locator": "Theorem 1.2 / abstract: pure Hodge-Tate for even k<=12",
+      "result": "insufficient degree; no local-system residual for genus 6",
+      "source_id": "SRC-0003"
+    },
+    {
+      "locator": "Theorem 1.4 and CKgP discussion; open M_{g,n} ranges including genus 6",
+      "result": "confirms open CKgP/tautological coverage through n<=5 in genus 6; no cohomology of M_{6,5} with nontrivial symplectic coefficients",
+      "source_id": "SRC-0004"
+    },
+    {
+      "locator": "full text search for M_{6,6}, local systems, H^25, W_26",
+      "result": "no computation controlling the residual local-system term",
+      "source_id": "SRC-0005"
+    }
+  ],
+  "packet_id": "CASE-6-6-v2",
+  "packet_sha256": "e6758c6886696d915814dc718f28af0e6b44088916881055c88a6276f55af88e",
+  "question_id": "MRQ-0002",
+  "schema_version": 1,
+  "source_records": [
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "authors": [
+        "Sam Payne"
+      ],
+      "checked_on": "2026-07-30",
+      "role": "current-status survey; degrees 16/18/20 open",
+      "source_id": "SRC-0001",
+      "title": "On the Hodge and Tate conjectures for moduli spaces of curves",
+      "year": 2026
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson",
+        "Sam Payne"
+      ],
+      "checked_on": "2026-07-30",
+      "role": "CKgP table, pure-weight algebraicity, Leray/Kunneth local-system reduction, degree-14 theorem, BM exact sequence",
+      "source_id": "SRC-0002",
+      "title": "Extensions of tautological rings and motivic structures in the cohomology of Mbar_g,n",
+      "year": 2024
+    },
+    {
+      "arxiv_id": "2209.03113",
+      "arxiv_version": "v2",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson",
+        "Sam Payne"
+      ],
+      "checked_on": "2026-07-30",
+      "role": "low-degree pure Hodge-Tate through 12; no (6,6) local-system residual",
+      "source_id": "SRC-0003",
+      "title": "The eleventh cohomology group of Mbar_g,n",
+      "year": 2023
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson"
+      ],
+      "checked_on": "2026-07-30",
+      "role": "primary CKgP ranges; genus-6 open coverage n<=5",
+      "source_id": "SRC-0004",
+      "title": "On the Chow and cohomology rings of moduli spaces of stable curves",
+      "year": 2024
+    },
+    {
+      "arxiv_id": "2104.05820",
+      "arxiv_version": "v2",
+      "authors": [
+        "Samir Canning",
+        "Hannah Larson"
+      ],
+      "checked_on": "2026-07-30",
+      "role": "unpointed high-genus Chow; no local-system cohomology for (6,5)/(6,6)",
+      "source_id": "SRC-0005",
+      "title": "The Chow rings of the moduli spaces of curves of genus 7, 8, and 9",
+      "year": 2024
+    }
+  ],
+  "summary": "Verified target for (g,n)=(6,6): dim d=21, ordinary group W_26 H^26(M_{6,6}) of expected untwisted type Q(-13), dual to W_{-16} H^{BM}_{16} with type Q(8) and Chow codimension 13. Under the forgetful map pi:M_{6,6}->M_{6,5}, the fibre is a five-punctured genus-six curve, so H^1(fibre) is mixed of weights one and two: Gr^W_1 is the weight-one standard symplectic variation H=R^1 of the universal compact curve, while Gr^W_2 is the weight-two puncture quotient. Only the weight-one graded piece feeds lowest weight 26 in total degree 26; the weight-two puncture quotient contributes weights >=27 and is not residual for W_26. After discarding the vanishing R^0 term (vcd of M_{6,5}) and the R^2\u2245Q(-1) term (pure Tate by CKgP of M_{6,5}, n=5=c(6)), the residual local-system obstruction is correctly Gr^W_26 H^25(M_{6,5};H) with H the weight-one symplectic variation\u2014not the full mixed R^1 and not the puncture quotient. Formulating the residual as cohomology with coefficients in the mixed punctured-fibre local system, or as the weight-two puncture quotient, is incorrect. No cited theorem computes, forces Tate type for, or vanishes this group; constant-coefficient results through degree 14 and CKgP on M_{6,5} are relevant but insufficient. Global pure-Tate degree 16 remains open in SRC-0001 as of 2026-05-19, rechecked in corpus on 2026-07-30.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-Q-0002",
+  "unresolved": [
+    "No primary computation, vanishing theorem, exact point count, or equivariant stratification in the corpus controls Gr^W_26 H^25(M_{6,5};H) with H the weight-one standard symplectic variation on M_{6,5}.",
+    "Equivalent full forgetful residual package via SRC-0002 Lemma 3.1\u2014direct sum over |lambda|=6 of W_26 H^{20}(M_6;V_lambda)\u2014is likewise uncomputed; CKgP of M_6 controls only constant coefficients.",
+    "Global statement that H^16(Mbar_{g,n}) is pure Tate of type Q(-8) remains open as of SRC-0001 (arXiv 2605.20453v1, 2026-05-19), rechecked against corpus on 2026-07-30.",
+    "Point-count, Euler-characteristic, semisimplified Galois, and Conjecture 1.8 predictions do not discharge the exact residual Hodge structure."
+  ],
+  "verdict": "partial"
+}

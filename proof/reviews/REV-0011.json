@@ -1,0 +1,38 @@
+{
+  "attempt_id": "ATT-0006",
+  "checked_claims": [
+    "The attempt correctly works with rational coefficients and Deligne\u2013Mumford stacks rather than coarse moduli spaces. However, the pointed Hurwitz stacks and maps used in Steps B and C are not actually constructed, so properness, surjectivity, and the representability-by-DM-stacks hypothesis required by SRC-0002 Proposition 4.2(2) remain unchecked.",
+    "SRC-0004 Lemma 9.9 does establish CKgP for the trigonal locus M^3_{8,1} and tautologicality of rational Chow classes supported there, since 1 <= 8+7.",
+    "SRC-0005 Lemmas 4.9 and 5.7 establish only unpointed rational Chow-generation statements for the relevant open Hurwitz stacks and supported loci in M_8. They do not establish CKgP for H_{4,8,1}, H_{5,8,1}, or their pointed gonality images.",
+    "The pentagonal exact-gonality stratum is load-bearing: without CKgP for M^5_{8,1} minus M^4_{8,1}, Proposition 4.2(3) cannot yield CKgP for M_{8,1}. The attempt explicitly leaves this as GAP-C1 and therefore proves no new pure-weight result.",
+    "Step D uses the wrong ordinary-cohomology degree in its written justification. For d=dim M_{8,1}=22, Poincare duality gives H^{BM}_{16}(M_{8,1}) congruent to H^{28}(M_{8,1})(22), so W_{-16}H^{BM}_{16} is controlled by W_{28}H^{28}(22), not by W_{16}H^{16}. Equivalently, it is dual to gr^W_{16}H_c^{16}.",
+    "The Step D conclusion is repairable if CKgP is assumed: SRC-0002 Lemma 4.3 makes W_{28}H^{28} algebraic of type Q(-14), and twisting by (22) gives Q(8), of weight -16. This is an actual rational Hodge-structure conclusion, not merely a semisimplified one.",
+    "Lemma 4.3 proves algebraicity and Hodge\u2013Tate type for the lowest-weight ordinary cohomology. It does not prove a decomposition in a category of motives. Calling the resulting Hodge structures 'Tate motives' would be an unjustified motivic upgrade.",
+    "The argument consistently uses Q, including the Chow pushforward statements. Nothing supplied supports an integral CKgP, integral cycle-class, or integral invariant/coinvariant conclusion.",
+    "No spectral-sequence degeneration is invoked in the single-stratum argument. Conversely, no analysis of possible differentials is supplied for any broader spectral-sequence reconstruction of RED-0001.",
+    "No graph-automorphism invariants or coinvariants are computed here. Thus the attempt avoids confusing them locally, but it also does not reconstruct the automorphism-quotient step needed for a global boundary-graph induction.",
+    "No Gysin or Kunneth degree calculation is actually supplied beyond the vague bookkeeping sentence in Step D. Any global boundary assembly would still require codimension shifts, Tate twists, and graph-automorphism quotients to be checked separately.",
+    "The attempt does not use the Chenevier\u2013Lannes prediction or a semisimplified Galois representation as a theorem, and it correctly distinguishes unpointed tautological Chow generation from CKgP.",
+    "The implication used conditionally is CKgP to algebraicity to Hodge\u2013Tate type. The reverse implication from pure Tate to algebraic or tautological generation is not established and must not be inferred.",
+    "The attempt treats only the stable pair (8,1) and explicitly omits the other listed degree-16 cases, including (8,0), (8,2), (7,4), (6,6), (5,8), and (3,12). It therefore cannot prove RED-0001 or the global degree-16 claim even if its local gaps were repaired."
+  ],
+  "created_on": "2026-07-30",
+  "id": "REV-0011",
+  "independent": true,
+  "reviewer_engine": "codex",
+  "scope_checks": [
+    "Stack versus coarse moduli: stack language is maintained, but the hypothetical pointed maps are not verified to satisfy the required stack-theoretic representability hypothesis.",
+    "Rational versus integral coefficients: rational arguments are consistent; no integral conclusion is justified.",
+    "Cohomology versus Borel\u2013Moore homology: Step D confuses ordinary degree 16 with the required ordinary degree 28.",
+    "Poincare duality and Tate twists: for dimension 22, H^{BM}_{16}=H^{28}(22), taking Q(-14) to Q(8).",
+    "Gysin and Kunneth shifts: not checked; any global boundary argument remains unsupported on this axis.",
+    "Degeneration and spectral-sequence differentials: no degeneration is used or proved.",
+    "Graph automorphisms: invariants and coinvariants are not analyzed.",
+    "Semisimplification: no semisimplification is substituted, but the claimed result remains conditional.",
+    "Predicted motives: predictions are disclaimed, and no motivic decomposition follows from Lemma 4.3.",
+    "Pure Tate versus algebraic or tautological generation: the conditional forward implication is valid, while no converse or tautological upgrade is available.",
+    "Omitted stable pairs: all degree-16 cases other than (8,1) remain untreated."
+  ],
+  "strongest_attack": "The load-bearing pointed CKgP premise is absent: the cited sources prove unpointed Chow generation, not CKgP for the pointed tetragonal and pentagonal Hurwitz strata or their images. Consequently Proposition 4.2 cannot establish CKgP for M_{8,1}, and Lemma 4.3 never becomes applicable. Independently, Step D names W_{16}H^{16} when duality actually requires W_{28}H^{28}(22).",
+  "verdict": "incomplete"
+}

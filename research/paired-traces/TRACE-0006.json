@@ -1,0 +1,151 @@
+{
+  "campaign_id": "C66-001",
+  "created_at": "2026-07-31T02:09:36.578168+00:00",
+  "engine": "codex",
+  "id": "TRACE-0006",
+  "observable_stderr": "Reading additional input from stdin...\n",
+  "observable_stdout": "{\n  \"schema_version\": 3,\n  \"id\": \"ATT-0023\",\n  \"task_id\": \"TASK-C66-M-001\",\n  \"campaign_id\": \"C66-001\",\n  \"campaign_revision\": 3,\n  \"subproblem_id\": \"C66-GEO-Z\",\n  \"lane\": \"geometry\",\n  \"result_type\": \"lemma\",\n  \"target_claim_id\": \"RED-0001\",\n  \"context_revision\": 2,\n  \"packet_id\": \"C66-001-v3\",\n  \"packet_path\": \"proof/packets/generated/C66-001-v3.md\",\n  \"packet_sha256\": \"cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944\",\n  \"target\": {\n    \"g\": 6,\n    \"n\": 6,\n    \"dimension\": 21,\n    \"open_bm_degree\": 16,\n    \"open_bm_weight\": -16,\n    \"open_bm_tate_type\": \"Q(8)\",\n    \"ordinary_cohomology_degree\": 26,\n    \"ordinary_weight\": 26,\n    \"ordinary_tate_type\": \"Q(-13)\",\n    \"poincare_twist\": 21,\n    \"chow_codimension\": 13,\n    \"compact_cohomology_degree\": 16,\n    \"compact_tate_type\": \"Q(-8)\"\n  },\n  \"theorem_statement\": \"Let B^{bal} be the moduli stack of smooth genus-6 degree-four covers gamma:C\u2192P^1 equipped with balanced Casnati\u2013Ekedahl splitting F=O_{P^1}(4)\u2295O_{P^1}(5), and put W_5=(O_{P(E^\u2228)}(2)\u2297gamma^*O_{P^1}(-5))|_C and L=W_5\u2297omega_C^{-1}. On Conf_6(C/B^{bal}), the stack of six ordered pairwise-distinct sections, the reduced evaluation-failure locus Z_red is exactly the reduced Abel\u2013Jacobi incidence locus defined by O_C(p_1+\u22ef+p_6)\u2245L. Its quotient by S_6 is the reduced-support open in the relative effective-divisor incidence space for L, and Z_red\u2192Z_red/S_6 is a finite \u00e9tale S_6-torsor. Fibrewise deg L=6, chi(L)=1, and h^0(L)\u22651.\",\n  \"theorem_scope\": {\n    \"g\": 6,\n    \"n\": 6,\n    \"splitting\": \"F=O(4)\u2295O(5)\",\n    \"support\": \"ordered, reduced, pairwise-distinct markings\",\n    \"scheme_structure\": \"reduced induced structure only\"\n  },\n  \"summary\": \"The ordered reduced evaluation-failure locus is constructed and identified, at the weakest scheme-theoretic level justified by the packet, as the reduced Abel\u2013Jacobi incidence locus for the degree-six bundle W_5\u2297omega_C^{-1}. No claim is made about nilpotent or determinantal multiplicities, global components, dimensions, or the exact Tate target.\",\n  \"argument_markdown\": \"Proved steps.\\n\\n1. With the packet convention W_f=(O_{P(E^\u2228)}(2)\u2297gamma^*O(-f))|_C, SRC-0004 gives deg W_f=4g+12-4f. Thus deg W_5=4\u00b76+12-20=16 and deg L=16-deg omega_C=16-10=6.\\n\\n2. Riemann\u2013Roch on each smooth connected genus-6 fibre gives chi(L)=6-6+1=1, hence h^0(L)=1+h^1(L)\u22651. This excludes an h^0=0 stratum but does not determine the jumping strata.\\n\\n3. For Gamma=p_1+\u22ef+p_6, SRC-0004 gives deg(omega_C\u2297W_4^\u2228(Gamma))=-4, so the f=4 obstruction space vanishes. For f=5 the corresponding degree is zero. A degree-zero line bundle on a smooth projective connected curve has a nonzero section exactly when it is trivial. Therefore H^0(omega_C\u2297W_5^\u2228(Gamma))\u22600 iff omega_C\u2297W_5^\u2228(Gamma)\u2245O_C, equivalently O_C(Gamma)\u2245W_5\u2297omega_C^{-1}=L. By the packet's six-point failure criterion, this is exactly evaluation failure on geometric fibres.\\n\\n4. The Abel map from the ordered relative configuration stack sends (C,p_1,\u2026,p_6) to O_C(Gamma) in Pic^6. The line bundle L supplies a section of the same relative Picard stack. Define I as their fibre product and define Z as the determinantal evaluation-failure locus. Step 3 shows |I|=|Z| on geometric points. Consequently their reduced induced substacks agree: I_red=Z_red. This conclusion deliberately does not identify their nonreduced scheme structures.\\n\\n5. Forgetting the ordering maps the ordered distinct-divisor incidence locus onto the reduced-support open of the effective-divisor incidence space. Permuting the six disjoint sections acts freely, and \u00e9tale-locally a reduced degree-six divisor splits into its six sections. Hence the ordering map is a finite \u00e9tale S_6-torsor. The reduced-support locus is open, not closed.\\n\\nSource-backed inputs.\\n\\nThe CE convention, its negative twist gamma^*O(-5), the degree formula, the balanced splitting, the six-point failure criterion, and the finite \u00e9tale ordering description are supplied by packet C66-001-v3 through SRC-0004 and its canonical geometric bottleneck.\\n\\nWorking contexts checked but not treated as proof.\\n\\nThe candidate and warning material in artifacts db338b111f175f57, 4916d72dc34c6c7c, 11878baf5e96cb76, a97039011ecf21cc, and 56648a8465662b01 was read. In particular, their warnings against inferring scheme equality from geometric points and against writing the whole incidence space as Proj(pi_*L) are respected by passing only to reduced substacks and using the Abel\u2013Jacobi fibre product.\\n\\nComputational hypotheses.\\n\\nNone.\\n\\nGaps.\\n\\nThe equality of the full determinantal/Fitting scheme with the Abel\u2013Jacobi incidence scheme, including nilpotents and multiplicities, is not proved. The identification W_5\u2245omega_C^2(-D), the h^0-stratification, components, dimensions, stabilizers beyond the free S_6-action, closure across nonreduced markings or other splitting types, and every cohomological/Tate assertion remain open.\",\n  \"claims\": [\n    {\n      \"claim_id\": \"ATT-0023-C1\",\n      \"statement\": \"deg(W_5\u2297omega_C^{-1})=6 and chi(W_5\u2297omega_C^{-1})=1.\",\n      \"status\": \"proved\",\n      \"evidence\": [\n        \"SRC-0004\",\n        \"C66-001-v3\"\n      ]\n    },\n    {\n      \"claim_id\": \"ATT-0023-C2\",\n      \"statement\": \"For every geometric ordered distinct degree-six divisor Gamma, evaluation fails exactly when O_C(Gamma)\u2245W_5\u2297omega_C^{-1}.\",\n      \"status\": \"proved\",\n      \"evidence\": [\n        \"SRC-0004\",\n        \"C66-001-v3\"\n      ]\n    },\n    {\n      \"claim_id\": \"ATT-0023-C3\",\n      \"statement\": \"The reduced evaluation-failure substack equals the reduced Abel\u2013Jacobi incidence substack.\",\n      \"status\": \"proved\",\n      \"evidence\": [\n        \"ATT-0023-C2\"\n      ]\n    },\n    {\n      \"claim_id\": \"ATT-0023-C4\",\n      \"statement\": \"Ordering the six points gives a finite \u00e9tale S_6-torsor over the reduced-support open.\",\n      \"status\": \"source_backed\",\n      \"evidence\": [\n        \"C66-001-v3\"\n      ]\n    }\n  ],\n  \"proof_dependencies\": [],\n  \"experiment_ids\": [],\n  \"experiment_uses\": [],\n  \"novelty_claims\": [\n    \"The reduced-substack formulation gives a rigorous weakest identification while avoiding the unsupported equality of determinantal and Abel\u2013Jacobi nonreduced scheme structures.\"\n  ],\n  \"gap_markers\": [\n    {\n      \"gap_id\": \"GAP-ATT-0023-1\",\n      \"statement\": \"No comparison of determinantal/Fitting ideals with the Abel\u2013Jacobi incidence ideal is supplied, so equality before reduction is unproved.\"\n    },\n    {\n      \"gap_id\": \"GAP-ATT-0023-2\",\n      \"statement\": \"The h^0-strata, components, dimensions, special tetragonal loci, closures, and stabilizers are not determined.\"\n    },\n    {\n      \"gap_id\": \"GAP-ATT-0023-3\",\n      \"statement\": \"This geometry lemma does not prove that the exact group W_{-16}H^{BM}_{16}(M_{6,6};Q) is Tate.\"\n    }\n  ],\n  \"failed_approaches_addressed\": [\n    {\n      \"route\": \"vcd-only-vanishing\",\n      \"disposition\": \"not used; it cannot settle the degree-26 group at vcd\"\n    },\n    {\n      \"route\": \"undecorated-cgp-top-weight-graph-complex\",\n      \"disposition\": \"not used\"\n    },\n    {\n      \"route\": \"point-count-without-degree-parity-separation\",\n      \"disposition\": \"not used; no experiment is offered as proof\"\n    },\n    {\n      \"route\": \"forgetful-map-renaming-local-system-unknown\",\n      \"disposition\": \"not used\"\n    }\n  ],\n  \"methods_used\": [\n    \"Casnati\u2013Ekedahl degree calculation\",\n    \"Serre-duality obstruction criterion\",\n    \"degree-zero line-bundle lemma\",\n    \"Riemann\u2013Roch\",\n    \"relative Abel\u2013Jacobi incidence\",\n    \"reduction of finite-type substacks\",\n    \"finite \u00e9tale ordering torsor\"\n  ],\n  \"new_inputs\": [],\n  \"completion_attestation\": {\n    \"resolves_exact_target\": false,\n    \"no_undischarged_dependencies\": true,\n    \"not_reduction_only\": true,\n    \"no_problem_status_claim\": true,\n    \"exact_problem_web_search_used\": false\n  },\n  \"status\": \"partial\",\n  \"source_claim_ids\": [\n    \"SRC-0004\"\n  ],\n  \"engine\": \"codex\"\n}",
+  "packet_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+  "parsed_artifact": {
+    "argument_markdown": "Proved steps.\n\n1. With the packet convention W_f=(O_{P(E^\u2228)}(2)\u2297gamma^*O(-f))|_C, SRC-0004 gives deg W_f=4g+12-4f. Thus deg W_5=4\u00b76+12-20=16 and deg L=16-deg omega_C=16-10=6.\n\n2. Riemann\u2013Roch on each smooth connected genus-6 fibre gives chi(L)=6-6+1=1, hence h^0(L)=1+h^1(L)\u22651. This excludes an h^0=0 stratum but does not determine the jumping strata.\n\n3. For Gamma=p_1+\u22ef+p_6, SRC-0004 gives deg(omega_C\u2297W_4^\u2228(Gamma))=-4, so the f=4 obstruction space vanishes. For f=5 the corresponding degree is zero. A degree-zero line bundle on a smooth projective connected curve has a nonzero section exactly when it is trivial. Therefore H^0(omega_C\u2297W_5^\u2228(Gamma))\u22600 iff omega_C\u2297W_5^\u2228(Gamma)\u2245O_C, equivalently O_C(Gamma)\u2245W_5\u2297omega_C^{-1}=L. By the packet's six-point failure criterion, this is exactly evaluation failure on geometric fibres.\n\n4. The Abel map from the ordered relative configuration stack sends (C,p_1,\u2026,p_6) to O_C(Gamma) in Pic^6. The line bundle L supplies a section of the same relative Picard stack. Define I as their fibre product and define Z as the determinantal evaluation-failure locus. Step 3 shows |I|=|Z| on geometric points. Consequently their reduced induced substacks agree: I_red=Z_red. This conclusion deliberately does not identify their nonreduced scheme structures.\n\n5. Forgetting the ordering maps the ordered distinct-divisor incidence locus onto the reduced-support open of the effective-divisor incidence space. Permuting the six disjoint sections acts freely, and \u00e9tale-locally a reduced degree-six divisor splits into its six sections. Hence the ordering map is a finite \u00e9tale S_6-torsor. The reduced-support locus is open, not closed.\n\nSource-backed inputs.\n\nThe CE convention, its negative twist gamma^*O(-5), the degree formula, the balanced splitting, the six-point failure criterion, and the finite \u00e9tale ordering description are supplied by packet C66-001-v3 through SRC-0004 and its canonical geometric bottleneck.\n\nWorking contexts checked but not treated as proof.\n\nThe candidate and warning material in artifacts db338b111f175f57, 4916d72dc34c6c7c, 11878baf5e96cb76, a97039011ecf21cc, and 56648a8465662b01 was read. In particular, their warnings against inferring scheme equality from geometric points and against writing the whole incidence space as Proj(pi_*L) are respected by passing only to reduced substacks and using the Abel\u2013Jacobi fibre product.\n\nComputational hypotheses.\n\nNone.\n\nGaps.\n\nThe equality of the full determinantal/Fitting scheme with the Abel\u2013Jacobi incidence scheme, including nilpotents and multiplicities, is not proved. The identification W_5\u2245omega_C^2(-D), the h^0-stratification, components, dimensions, stabilizers beyond the free S_6-action, closure across nonreduced markings or other splitting types, and every cohomological/Tate assertion remain open.",
+    "campaign_id": "C66-001",
+    "campaign_revision": 3,
+    "claims": [
+      {
+        "claim_id": "ATT-0023-C1",
+        "evidence": [
+          "SRC-0004",
+          "C66-001-v3"
+        ],
+        "statement": "deg(W_5\u2297omega_C^{-1})=6 and chi(W_5\u2297omega_C^{-1})=1.",
+        "status": "proved"
+      },
+      {
+        "claim_id": "ATT-0023-C2",
+        "evidence": [
+          "SRC-0004",
+          "C66-001-v3"
+        ],
+        "statement": "For every geometric ordered distinct degree-six divisor Gamma, evaluation fails exactly when O_C(Gamma)\u2245W_5\u2297omega_C^{-1}.",
+        "status": "proved"
+      },
+      {
+        "claim_id": "ATT-0023-C3",
+        "evidence": [
+          "ATT-0023-C2"
+        ],
+        "statement": "The reduced evaluation-failure substack equals the reduced Abel\u2013Jacobi incidence substack.",
+        "status": "proved"
+      },
+      {
+        "claim_id": "ATT-0023-C4",
+        "evidence": [
+          "C66-001-v3"
+        ],
+        "statement": "Ordering the six points gives a finite \u00e9tale S_6-torsor over the reduced-support open.",
+        "status": "source_backed"
+      }
+    ],
+    "completion_attestation": {
+      "exact_problem_web_search_used": false,
+      "no_problem_status_claim": true,
+      "no_undischarged_dependencies": true,
+      "not_reduction_only": true,
+      "resolves_exact_target": false
+    },
+    "context_revision": 2,
+    "engine": "codex",
+    "experiment_ids": [],
+    "experiment_uses": [],
+    "failed_approaches_addressed": [
+      {
+        "disposition": "not used; it cannot settle the degree-26 group at vcd",
+        "route": "vcd-only-vanishing"
+      },
+      {
+        "disposition": "not used",
+        "route": "undecorated-cgp-top-weight-graph-complex"
+      },
+      {
+        "disposition": "not used; no experiment is offered as proof",
+        "route": "point-count-without-degree-parity-separation"
+      },
+      {
+        "disposition": "not used",
+        "route": "forgetful-map-renaming-local-system-unknown"
+      }
+    ],
+    "gap_markers": [
+      {
+        "gap_id": "GAP-ATT-0023-1",
+        "statement": "No comparison of determinantal/Fitting ideals with the Abel\u2013Jacobi incidence ideal is supplied, so equality before reduction is unproved."
+      },
+      {
+        "gap_id": "GAP-ATT-0023-2",
+        "statement": "The h^0-strata, components, dimensions, special tetragonal loci, closures, and stabilizers are not determined."
+      },
+      {
+        "gap_id": "GAP-ATT-0023-3",
+        "statement": "This geometry lemma does not prove that the exact group W_{-16}H^{BM}_{16}(M_{6,6};Q) is Tate."
+      }
+    ],
+    "id": "ATT-0023",
+    "lane": "geometry",
+    "methods_used": [
+      "Casnati\u2013Ekedahl degree calculation",
+      "Serre-duality obstruction criterion",
+      "degree-zero line-bundle lemma",
+      "Riemann\u2013Roch",
+      "relative Abel\u2013Jacobi incidence",
+      "reduction of finite-type substacks",
+      "finite \u00e9tale ordering torsor"
+    ],
+    "new_inputs": [],
+    "novelty_claims": [
+      "The reduced-substack formulation gives a rigorous weakest identification while avoiding the unsupported equality of determinantal and Abel\u2013Jacobi nonreduced scheme structures."
+    ],
+    "packet_id": "C66-001-v3",
+    "packet_path": "proof/packets/generated/C66-001-v3.md",
+    "packet_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+    "proof_dependencies": [],
+    "result_type": "lemma",
+    "schema_version": 3,
+    "source_claim_ids": [
+      "SRC-0004"
+    ],
+    "status": "proposed",
+    "subproblem_id": "C66-GEO-Z",
+    "summary": "The ordered reduced evaluation-failure locus is constructed and identified, at the weakest scheme-theoretic level justified by the packet, as the reduced Abel\u2013Jacobi incidence locus for the degree-six bundle W_5\u2297omega_C^{-1}. No claim is made about nilpotent or determinantal multiplicities, global components, dimensions, or the exact Tate target.",
+    "target": {
+      "chow_codimension": 13,
+      "compact_cohomology_degree": 16,
+      "compact_tate_type": "Q(-8)",
+      "dimension": 21,
+      "g": 6,
+      "n": 6,
+      "open_bm_degree": 16,
+      "open_bm_tate_type": "Q(8)",
+      "open_bm_weight": -16,
+      "ordinary_cohomology_degree": 26,
+      "ordinary_tate_type": "Q(-13)",
+      "ordinary_weight": 26,
+      "poincare_twist": 21
+    },
+    "target_claim_id": "RED-0001",
+    "task_id": "TASK-C66-M-001",
+    "theorem_scope": {
+      "g": 6,
+      "n": 6,
+      "scheme_structure": "reduced induced structure only",
+      "splitting": "F=O(4)\u2295O(5)",
+      "support": "ordered, reduced, pairwise-distinct markings"
+    },
+    "theorem_statement": "Let B^{bal} be the moduli stack of smooth genus-6 degree-four covers gamma:C\u2192P^1 equipped with balanced Casnati\u2013Ekedahl splitting F=O_{P^1}(4)\u2295O_{P^1}(5), and put W_5=(O_{P(E^\u2228)}(2)\u2297gamma^*O_{P^1}(-5))|_C and L=W_5\u2297omega_C^{-1}. On Conf_6(C/B^{bal}), the stack of six ordered pairwise-distinct sections, the reduced evaluation-failure locus Z_red is exactly the reduced Abel\u2013Jacobi incidence locus defined by O_C(p_1+\u22ef+p_6)\u2245L. Its quotient by S_6 is the reduced-support open in the relative effective-divisor incidence space for L, and Z_red\u2192Z_red/S_6 is a finite \u00e9tale S_6-torsor. Fibrewise deg L=6, chi(L)=1, and h^0(L)\u22651."
+  },
+  "problem_key": "458f910ac4e5916cb6adef25537f763a16e6d9ddcbd7c25136e6c3a6b224ceb8",
+  "schema_version": 1,
+  "source_boundary": "Official subprocess output only; no provider-private session files or hidden chain-of-thought.",
+  "task_id": "TASK-C66-M-001",
+  "turn_kind": "standard-fallback",
+  "validation_error": null
+}

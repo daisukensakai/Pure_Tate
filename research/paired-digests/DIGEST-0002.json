@@ -1,0 +1,115 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "After constructing a suitable relative divisor or Abel\u2013Jacobi incidence space and comparing scheme structures, the relative evaluation-failure scheme may equal the finite \u00e9tale S_6-cover of its reduced-support locus."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "For a tetragonal g^1_4 divisor D, one may have W_5\u2245\u03c9_C^{\u22972}(-D)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The numerical package dim(Hurwitz)=15, dim(Z)=17, and codim_{M_{6,6}}(Z)=4 may describe the relevant incidence geometry."
+    }
+  ],
+  "engine": "codex",
+  "established_facts": [
+    {
+      "evidence": "SRC-0004 Lemma 10.6 excerpt gives the degree formula and the sign in \u03b3^*O(-f).",
+      "evidence_class": "source",
+      "statement": "For W_f=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_{P^1}(-f))|_C on a smooth genus-6 curve, deg(W_f)=4g+12-4f."
+    },
+    {
+      "evidence": "Substitution gives 4\u00b76+12-4\u00b75=16 and 16-(2\u00b76-2)=6.",
+      "evidence_class": "mechanical",
+      "statement": "For f=5, deg(W_5)=16 and deg(W_5\u2297\u03c9_C^{-1})=6."
+    },
+    {
+      "evidence": "The degree is 4\u00b74+6-2\u00b76-14=-4; a negative-degree line bundle on a smooth projective curve has no nonzero global section.",
+      "evidence_class": "mechanical",
+      "statement": "For every ordered reduced degree-six divisor \u0393, H^0(C,\u03c9_C\u2297W_4^\u2228(\u0393))=0."
+    },
+    {
+      "evidence": "The obstruction line bundle has degree 4\u00b75+6-2\u00b76-14=0. A degree-zero line bundle on a smooth projective connected curve has a nonzero section exactly when it is trivial.",
+      "evidence_class": "mechanical",
+      "statement": "Fibrewise, H^0(C,\u03c9_C\u2297W_5^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245W_5\u2297\u03c9_C^{-1}."
+    },
+    {
+      "evidence": "Riemann\u2013Roch gives \u03c7(L)=deg(L)-g+1=6-6+1=1, so h^0(L)=1+h^1(L)\u22651.",
+      "evidence_class": "mechanical",
+      "statement": "For L=W_5\u2297\u03c9_C^{-1}, \u03c7(L)=1 and h^0(L)\u22651 on every smooth geometric fibre."
+    },
+    {
+      "evidence": "The canonical geometric bottleneck specifies the reduced-support open and its finite \u00e9tale S_6 ordering cover.",
+      "evidence_class": "source",
+      "statement": "The locus of reduced degree-six divisors with six distinct support points is open, and ordering their support defines a finite \u00e9tale S_6-cover."
+    }
+  ],
+  "id": "DIGEST-0002",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "Equality on geometric points does not determine nilpotents, multiplicities, or determinantal scheme structure; a comparison of obstruction complexes or Fitting ideals is required.",
+      "statement": "A fibrewise equivalence on geometric points implies equality of the relative evaluation-failure scheme and the residual Abel\u2013Jacobi incidence scheme over an arbitrary base."
+    },
+    {
+      "mathematical_reason": "Without local freeness and cohomology-and-base-change hypotheses, Proj(\u03c0_*L) need not have the required fibres or commute with base change; a compatible Hilbert or Abel\u2013Jacobi construction is needed.",
+      "statement": "When h^0(L) may jump, the relative linear system is automatically Proj(\u03c0_*L), interchangeably with the relative effective-divisor Hilbert functor."
+    }
+  ],
+  "packet_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+  "problem_key": "458f910ac4e5916cb6adef25537f763a16e6d9ddcbd7c25136e6c3a6b224ceb8",
+  "reusable_computations": [
+    {
+      "sha256": "6f4294cbc7166beabebcf00a625753ea71d2e5e71e458ad128f6458235bc972b",
+      "statement": "Degree arithmetic for W_5 and W_5\u2297\u03c9_C^{-1}: 4\u00b76+12-4\u00b75=16 and 16-(2\u00b76-2)=6."
+    },
+    {
+      "sha256": "0a749db765a4f0dbac4708d2dd3de1e406f25c54511d5cc9a8d72a152d0a049e",
+      "statement": "Obstruction-degree arithmetic for n=6: deg(\u03c9_C\u2297W_5^\u2228(\u0393))=0 and deg(\u03c9_C\u2297W_4^\u2228(\u0393))=-4."
+    }
+  ],
+  "sanitized": true,
+  "schema_version": 1,
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-GROK-STANDARD_FALLBACK",
+  "unresolved_dependencies": [
+    {
+      "statement": "Construct a relative effective-divisor or Abel\u2013Jacobi incidence space compatible with arbitrary base change when h^0(L) jumps."
+    },
+    {
+      "statement": "Compare the determinantal or Fitting scheme structure of the CE evaluation-failure locus with the residual incidence scheme."
+    },
+    {
+      "statement": "Construct the relevant universal moduli stack of balanced tetragonal Casnati\u2013Ekedahl data and the global map of the incidence locus to M_{6,6}."
+    },
+    {
+      "statement": "Determine the h^0-stratification of |W_5\u2297\u03c9_C^{-1}|."
+    },
+    {
+      "statement": "Determine the components, dimensions, stabilizers, and finite-cover behavior of the incidence locus."
+    },
+    {
+      "statement": "Determine whether the exact codimension-13 contribution supported on the incidence locus is Tate and whether any non-Tate summand survives in W_{-16}H^{BM}_{16}(M_{6,6};Q)."
+    },
+    {
+      "statement": "Assemble the tetragonal contribution into the exact lowest-weight group W_{-16}H^{BM}_{16}(M_{6,6};Q)."
+    }
+  ]
+}

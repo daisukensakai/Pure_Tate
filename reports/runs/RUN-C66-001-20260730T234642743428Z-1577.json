@@ -1,0 +1,77 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-07-30T23:57:39.741236+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex"
+    ],
+    "research": [
+      "grok",
+      "claude"
+    ],
+    "review": [
+      "grok",
+      "claude",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 28696,
+      "completed_at": "2026-07-30T23:54:16.115535+00:00",
+      "engine": "grok",
+      "error": "forced result has an undischarged proof dependency",
+      "last_activity_at": "2026-07-30T23:54:15.786898+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/attempts/ATT-0018.json",
+      "phase": "forced-proof",
+      "started_at": "2026-07-30T23:46:42.869131+00:00",
+      "state": "substantive_rejected",
+      "step": 1,
+      "task_id": "TASK-C66-001-FORCED-FULL",
+      "trace_id": "TRACE-0001",
+      "trace_path": "research/paired-traces/TRACE-0001.json"
+    },
+    {
+      "activity_bytes": 108589,
+      "artifact_sha256": "143417171a8ead94e4ad77e2b57307a97d02274ba1c7da46feab5ac451e860ef",
+      "completed_at": "2026-07-30T23:56:01.514849+00:00",
+      "engine": "codex",
+      "last_activity_at": "2026-07-30T23:56:01.377362+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0001.json",
+      "phase": "trace-mining",
+      "started_at": "2026-07-30T23:54:16.261445+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-C66-001-MINE-GROK-FORCED_PROOF",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-db338b111f175f57.md",
+        "sha256": "db338b111f175f571ecac96f72e220184c0869b4978db4532f25b1d2ed0eae08"
+      }
+    },
+    {
+      "activity_bytes": 17852,
+      "artifact_sha256": "9b6ad50383c136b785ee7ef4022f38a04212e73f187767081e1304c78b33fcb7",
+      "completed_at": "2026-07-30T23:57:39.740287+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-07-30T23:57:39.316821+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/attempts/ATT-0019.json",
+      "phase": "standard-fallback",
+      "started_at": "2026-07-30T23:56:01.651547+00:00",
+      "state": "completed",
+      "step": 3,
+      "task_id": "TASK-C66-M-001"
+    }
+  ],
+  "executed_steps": 3,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260730T234642743428Z-1577",
+  "schema_version": 1,
+  "started_at": "2026-07-30T23:46:42.743428+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}
