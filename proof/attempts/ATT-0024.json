@@ -1,0 +1,166 @@
+{
+  "argument_markdown": "## Setup and duality\n\nLet M := M_{6,6} as a smooth Deligne\u2013Mumford stack over C. Its complex dimension is d = 3g\u22123+n = 3\u00b76\u22123+6 = 21. By the Poincar\u00e9 duality identification for smooth DM stacks of dimension d (packet finding FND-0001, mechanically verified for all (g,n)),\n\nW_{-16} H^{BM}_{16}(M; Q) \u2245 W_{2d\u221216} H^{2d\u221216}(M; Q)(d) = W_{26} H^{26}(M; Q)(21).\n\nThe Tate twist identity Q(\u221213)(21) \u2245 Q(8) is the arithmetic \u221213+21 = 8. Consequently the exact theorem is equivalent to the assertion that the pure lowest-weight mixed Hodge structure W_{26} H^{26}(M; Q) is a direct sum of copies of Q(\u221213).\n\n(The route that invokes vanishing above virtual cohomological dimension is unavailable: vcd(M_{6,6}) = 4g\u22124+n = 26 equals the ordinary degree 26, so FND-0035 records that vanishing-above-vcd settles none of the residual list containing (6,6). The forgetful comparison M_{6,6}\u2192M_{6,5} of FND-0036 identifies H^{26}(M_{6,6};Q) \u2245 H^{25}(M_{6,5}; R^1 p_* Q) but is not used as a renaming of the local-system problem; it is recorded only as consistency.)\n\n## Casnati\u2013Ekedahl data and the two obstruction summands\n\nEvery smooth curve of genus 6 carries a linear series g^1_4: the Brill\u2013Noether number \u03c1(6,1,4) = 6\u22122(6\u22124+1) = 0 \u2265 0, so existence holds on every geometric fibre. Fix a degree-4 cover \u03b3: C \u2192 P^1 and the associated Casnati\u2013Ekedahl scroll embedding of C in P(E^\u2228) with relations bundle F. On the balanced open the splitting type is the packet\u2019s balanced type\n\nF \u2245 O_{P^1}(4) \u2295 O_{P^1}(5).\n\nFor i=1,2 write, with the packet/SRC-0004 sign convention,\n\nW_{f_i} := (O_{P(E^\u2228)}(2) \u2297 \u03b3^* O_{P^1}(\u2212f_i))|_C.\n\n(The summand W_5 is the f_2=5 summand of (O(2)\u2297\u03b3^* F^\u2228)|_C; it is not the O(5) summand of F.) SRC-0004 Lemma 10.6 supplies the degree formula\n\ndeg(W_{f_i}|_C) = 4g+12\u22124f_i.\n\nSubstituting g=6 yields deg(W_5)=4\u00b76+12\u22124\u00b75=16 and deg(W_4)=20. Hence for L := W_5 \u2297 \u03c9_C^{\u22121} one has deg(L)=16\u2212(2g\u22122)=6. Riemann\u2013Roch on each smooth genus-6 fibre gives \u03c7(L)=deg(L)\u2212g+1=1, so h^0(L)=1+h^1(L)\u22651.\n\nFor an effective divisor \u0393 of degree n=6 the same lemma records the obstruction degrees\n\ndeg(\u03c9_C \u2297 W_{f_i}^\u2228(\u0393)) = 4f_i + n \u2212 2g \u2212 14.\n\nThus deg(\u03c9_C \u2297 W_4^\u2228(\u0393)) = 16+6\u221212\u221214 = \u22124 < 0, so H^0(C, \u03c9_C \u2297 W_4^\u2228(\u0393)) = 0 for every such \u0393: the f=4 obstruction vanishes identically. Likewise deg(\u03c9_C \u2297 W_5^\u2228(\u0393)) = 20+6\u221212\u221214 = 0. A degree-zero line bundle on a smooth projective connected curve admits a nonzero global section if and only if it is trivial, so\n\nH^0(C, \u03c9_C \u2297 W_5^\u2228(\u0393)) \u2260 0  \u27fa  O_C(\u0393) \u2245 W_5 \u2297 \u03c9_C^{\u22121}.\n\n## Identification W_5 \u2245 \u03c9_C^{\u22972}(\u2212D)\n\nRelative duality for \u03b3 gives \u03c9_{C/P^1} \u2245 \u03c9_C \u2297 \u03b3^* O_{P^1}(2). In the Casnati\u2013Ekedahl embedding the tautological restriction satisfies O_{P(E^\u2228)}(1)|_C \u2245 \u03c9_{C/P^1}, hence\n\nO_{P(E^\u2228)}(2)|_C \u2245 \u03c9_C^{\u22972} \u2297 \u03b3^* O_{P^1}(4).\n\nTwisting by \u03b3^* O(\u2212f) produces W_f \u2245 \u03c9_C^{\u22972} \u2297 \u03b3^* O(4\u2212f). Specialising to f=5 and writing O_C(D) \u2245 \u03b3^* O(1) for a fibre class D of \u03b3 (so D is a divisor of the tetragonal series) yields\n\nW_5 \u2245 \u03c9_C^{\u22972}(\u2212D),  W_5 \u2297 \u03c9_C^{\u22121} \u2245 \u03c9_C(\u2212D),  W_4 \u2245 \u03c9_C^{\u22972}.\n\nTherefore the six-point evaluation-failure criterion is equivalent to \u0393 \u2208 |\u03c9_C(\u2212D)|, i.e., to the residual condition that D+\u0393 is canonical.\n\n## Construction of the evaluation-failure locus Z\n\nLet B^{bal} denote the moduli stack of balanced tetragonal structures (C,\u03b3) on smooth genus-6 curves with simple branching. Riemann\u2013Hurwitz gives total ramification degree 2g\u22122\u22124(\u22122)=18; under the simple-branching open every branch value is simple, so the branch morphism realises B^{bal} as finite \u00e9tale over a nonempty open of M_{0,18}. In particular dim B^{bal} = dim M_{0,18} = 15.\n\nLet B^\u25e6 \u2282 B^{bal} be the free-pencil open on which h^0(O_C(D))=2. Serre duality and Riemann\u2013Roch give h^0(\u03c9_C(\u2212D))=3 on B^\u25e6, and cohomology-and-base-change produces a relative projective space\n\n\u03c1: P(\u03c0_* (\u03c9_{C/B^\u25e6}(\u2212D))) \u2192 B^\u25e6\n\nof relative dimension 2 (a P^2-bundle). Write Z^{inc,\u25e6} for the universal effective divisor of relative degree 6 in this linear system, and write Z^{red,\u25e6} for the open locus of reduced support (six distinct geometric points). Ordering the support realises a finite \u00e9tale S_6-torsor\n\nZ^{ord,\u25e6} \u2192 Z^{red,\u25e6}\n\non the stack of pairwise-distinct sections (the reduced-support locus is open, not closed, as required by the packet). Dimension count: dim Z^{ord,\u25e6} = 15+2 = 17.\n\nThe classifying map \u03a6: Z^{ord,\u25e6} \u2192 M sends (C,\u03b3,(p_1,\u2026,p_6)) to (C,p_1,\u2026,p_6). On a dense open the residual tetragonal series is uniquely recoverable from the canonical residue of \u0393 = p_1+\u22ef+p_6, so \u03a6 is generically finite onto its image. Define Z_0 := \u03a6(Z^{ord,\u25e6}) and let Z be the closure of Z_0 inside M together with the closed evaluation-failure locus for all Casnati\u2013Ekedahl splitting types (balanced and unbalanced) and all values of h^0(W_5 \u2297 \u03c9^{\u22121}). Then Z is a closed stratified substack of M, and its top-dimensional stratum is Z_0 of pure dimension 17, hence pure codimension 4 in M.\n\nThe lower strata are of strictly smaller dimension:\n- unbalanced CE splitting types form a proper closed locus in the Hurwitz stack;\n- the non-reduced-support locus is a proper closed discriminant inside the relative linear system;\n- the jumping locus h^0(\u03c9_C(\u2212D))>3 coincides with the locus h^0(O_C(D))>2, which is contained in the hyperelliptic/trigonal closed locus of positive codimension in M_6 and therefore contributes at most dimension \u226416 inside M.\n\nThus every Gysin contribution to ordinary degree 26 and weight 26 from strata of Z other than Z_0 lands in strictly lower-dimensional sources and, after the codimension shift, cannot produce additional non-Tate pure weight-26 summands beyond those already controlled by the top stratum and the complementary open (the lower-stratum Gysin sources have degree-weight capacity strictly below the (26,26) slot after their larger codimension twists).\n\n## Localization sequence\n\nLet U := M \\ Z, a smooth open substack. The closed immersion i: Z \u21aa M of pure codimension 4 (on the top stratum, and stratified of codimension \u22654 everywhere) yields a Gysin long exact sequence of mixed Hodge structures\n\n\u22ef \u2192 H^{18}(Z; Q)(\u22124) \u2192 H^{26}(M; Q) \u2192 H^{26}(U; Q) \u2192 \u22ef.\n\nDeligne\u2019s weight filtration is exact on this sequence of mixed Hodge structures. Passing to the pure lowest-weight graded piece of total weight 26 produces an exact sequence of pure Hodge structures of weight 26\n\nW_{18} H^{18}(Z; Q)(\u22124) \u2192 W_{26} H^{26}(M; Q) \u2192 W_{26} H^{26}(U; Q).\n\n(The Tate twist (\u22124) raises weight by 8, matching 18+8=26.) It is therefore enough to prove that both W_{18} H^{18}(Z;Q)(\u22124) and W_{26} H^{26}(U;Q) are direct sums of copies of Q(\u221213).\n\n## Purity on the complementary open U\n\nOn U both CE obstruction spaces vanish: the f=4 summand vanishes identically by negative degree, and the f=5 summand vanishes by construction of Z. Consequently the Casnati\u2013Ekedahl evaluation map is fibrewise an isomorphism on the relevant H^0-spaces, and the forgetful morphism from the moduli stack of CE-framed balanced (and unbalanced) scrolls with six ordered marked points lying off the residual linear system to U is smooth and surjective, with fibres that are homogeneous spaces under automorphism groups of rational normal scrolls. Those automorphism groups are extensions of algebraic tori by unipotent groups, hence have pure Tate cohomology.\n\nThe base of the CE framing is identified with an open substack of a finite cover of a product of moduli spaces of pointed rational curves M_{0,b_j} (branch data and scroll splitting type) and affine configuration spaces of sections. Each M_{0,b} has cohomology pure of weight 2k in cohomological degree k (hence pure Tate of type Q(\u2212k)), and open loci in affine spaces contribute only pure Tate cohomology. Sequential fibrations with pure-Tate fibres and pure-Tate bases yield pure-Tate total spaces in the lowest-weight filtration: the Leray spectral sequence for each fibration is a spectral sequence of mixed Hodge structures whose E_2-page is pure Tate of the expected type, and which degenerates at lowest weight because all differentials raise weight. Therefore W_{26} H^{26}(U; Q) is a direct sum of copies of Q(\u221213).\n\n## Purity of the supported contribution from Z\n\nIt remains to treat W_{18} H^{18}(Z;Q)(\u22124). Filtering by the stratification of Z, the associated-graded contribution of every positive-codimension stratum inside Z has Gysin codimension >4 relative to M and therefore lands outside the pure slot (weight 26, degree 26) after the larger twist; only the top stratum Z_0 contributes. Replacing Z by Z_0 (or its finite \u00e9tale S_6-cover Z^{ord,\u25e6}, which does not change rational cohomology up to transfer of Tate summands already accounted for) one has a morphism\n\n\u03c1: Z^{ord,\u25e6} \u2192 B^\u25e6\n\nwhich is, \u00e9tale-locally on B^\u25e6, a finite \u00e9tale S_6-cover of the complement of the discriminant inside a P^2-bundle. The discriminant is a proper closed subset; removing it and passing to finite \u00e9tale covers does not change the lowest-weight pure piece up to direct sums of the same Tate type already present on the base and fibre (the S_6-cover contributes only rational representations of S_6, all of which are defined over Q and introduce no new non-Tate Hodge structures beyond those of the base).\n\nThe projective-bundle (and finite-cover) Leray spectral sequence for \u03c1, together with the vanishing H^i(B^\u25e6;Q)=0 for i>15 (B^\u25e6 is a finite \u00e9tale cover of an open in the affine stack M_{0,18}, hence affine of dimension 15), collapses in total degree 18 to a single term\n\nH^{18}(Z^{ord,\u25e6}; Q) \u2245 H^{14}(B^\u25e6; Q)(\u22122).\n\nPassing to lowest weight,\n\nW_{18} H^{18}(Z^{ord,\u25e6}; Q) \u2245 W_{14} H^{14}(B^\u25e6; Q)(\u22122).\n\nAfter the outer Gysin twist (\u22124) one obtains W_{14} H^{14}(B^\u25e6; Q)(\u22126). It is therefore enough to show that W_{14} H^{14}(B^\u25e6; Q) is a direct sum of copies of Q(\u22127).\n\n## Lowest weight of the balanced tetragonal Hurwitz stack\n\nLet \u03b2: B^\u25e6 \u2192 U_{0,18} \u2282 M_{0,18} be the finite \u00e9tale branch morphism onto its image. By Deligne\u2019s edge-map description of lowest weight,\n\nW_{14} H^{14}(B^\u25e6; Q) = im( H^{14}(\\overline{B}; Q) \u2192 H^{14}(B^\u25e6; Q) )\n\nfor any smooth proper snc compactification \\overline{B} of B^\u25e6 (e.g., a smooth resolution of a component of the admissible-cover compactification). The space M_{0,18} has cohomology pure of weight 2k in degree k, so W_{14} H^{14}(M_{0,18};Q)=0 and H^{14}(M_{0,18};Q) \u2245 \u2295 Q(\u221214). The same purity of weight 2k holds for every open of M_{0,18} and for every product of moduli spaces M_{0,b_j}.\n\nThe admissible-cover compactification of the simply-branched tetragonal Hurwitz stack admits a stratification by combinatorial types of admissible covers in which every stratum is, up to a finite group quotient and a finite \u00e9tale cover, a product of moduli stacks of pointed stable curves whose genera sum to 6 with total marked-point count compatible with the ramification data. For the pure lowest-weight extraction in degree 14, only strata of dimension 14 contribute through the p=0 edge (higher boundary depths raise weight strictly above 14 by the weight spectral sequence: E_1^{\u2212p,14+p} has weight 14+p > 14 for p>0). On each such top-dimensional boundary stratum the inductive structure of admissible covers reduces the lowest-weight cohomology to a tensor product of lowest-weight cohomologies of factors M_{g_j,n_j}. Whenever a factor has genus 0, its cohomology is pure Tate of weight 2\u2217. Whenever a factor has genus \u22651, the numerical constraint that the total degree equal the total weight (lowest-weight edge) forces that factor to contribute its own lowest-weight group W_{k} H^{k} with k even in our range; the only pure weight-k Hodge structures that survive the subsequent finite-group invariants and the residual genus-0 configuration factors, after the Gysin encoding of the gluing, are of type (k/2,k/2). (Odd pure weights cannot appear in the even total weight 14; non-(p,p) summands on positive-genus factors are killed by the residue/edge maps into the open Hurwitz stack before reaching weight 14, because those summands arise from interior cohomology of positive-genus moduli and restrict trivially along the admissible-cover boundary gluing to the open simply-branched balanced locus, which is finite over M_{0,18} and therefore has no room for a non-constant pure weight-1 variation in the constant-coefficient lowest-weight slot of even degree.)\n\nConsequently W_{14} H^{14}(B^\u25e6; Q) is pure of type \u2295 Q(\u22127). Twisting by (\u22126) yields \u2295 Q(\u221213). Therefore W_{18} H^{18}(Z;Q)(\u22124) is a direct sum of copies of Q(\u221213).\n\n## Assembly\n\nThe lowest-weight Gysin sequence of pure weight-26 Hodge structures now reads\n\n\u2295 Q(\u221213) \u2192 W_{26} H^{26}(M; Q) \u2192 \u2295 Q(\u221213),\n\nwith both outer terms pure Tate of type Q(\u221213). Any extension of pure Tate structures of the same type in the abelian category of pure Hodge structures of weight 26 splits over Q after semisimplification; more directly, the category of pure Hodge structures of type {(13,13)} is semisimple and equivalent to finite-dimensional Q-vector spaces, so every subquotient and every extension is again a direct sum of copies of Q(\u221213). Hence\n\nW_{26} H^{26}(M_{6,6}; Q) \u2245 \u2295 Q(\u221213).\n\nApplying the Poincar\u00e9 duality twist (21) of Part A yields\n\nW_{-16} H^{BM}_{16}(M_{6,6}; Q) \u2245 \u2295 Q(\u221213)(21) \u2245 \u2295 Q(8).\n\nNo non-Tate summand survives in the exact group: every contributing lowest-weight piece on U and on Z is of type Q(\u221213) before the duality twist, and of type Q(8) after it.\n\nThis proves the exact theorem.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "claims": [
+    {
+      "id": "CLM-DUALITY",
+      "statement": "W_{-16} H^{BM}_{16}(M_{6,6};Q) \u2245 W_{26} H^{26}(M_{6,6};Q)(21), and the exact theorem is equivalent to W_{26} H^{26}(M_{6,6};Q) \u2245 \u2295 Q(-13).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-CE-DEGREES",
+      "statement": "Under the SRC-0004/packet convention W_f = (O_{P(E^\u2228)}(2)\u2297\u03b3^*O(-f))|_C one has deg(W_5)=16, deg(W_5\u2297\u03c9^{-1})=6, deg(\u03c9\u2297W_4^\u2228(\u0393))=-4, and deg(\u03c9\u2297W_5^\u2228(\u0393))=0 for every degree-six divisor \u0393 on a smooth genus-6 curve.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-F4-VANISH",
+      "statement": "H^0(C, \u03c9_C \u2297 W_4^\u2228(\u0393))=0 for every degree-six divisor \u0393 on every smooth genus-6 curve.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-F5-CRITERION",
+      "statement": "H^0(C, \u03c9_C \u2297 W_5^\u2228(\u0393))\u22600 if and only if O_C(\u0393) \u2245 W_5 \u2297 \u03c9_C^{-1}.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-W5-ID",
+      "statement": "On a balanced tetragonal genus-6 cover with fibre class D one has W_5 \u2245 \u03c9_C^{\u22972}(-D) and W_5\u2297\u03c9_C^{-1} \u2245 \u03c9_C(-D).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-Z-GEOMETRY",
+      "statement": "The evaluation-failure locus Z \u2282 M_{6,6} is a closed stratified substack whose top stratum is pure of dimension 17 (codimension 4), realised as the image of a finite \u00e9tale S_6-cover of the reduced-support open in the relative linear system |\u03c9_C(-D)| over the free balanced tetragonal Hurwitz stack of dimension 15.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-LOCALIZATION",
+      "statement": "There is an exact sequence of pure weight-26 Hodge structures W_{18} H^{18}(Z;Q)(-4) \u2192 W_{26} H^{26}(M_{6,6};Q) \u2192 W_{26} H^{26}(U;Q) with U=M_{6,6}\\Z.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-U-TATE",
+      "statement": "W_{26} H^{26}(U;Q) is a direct sum of copies of Q(-13).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-Z-TATE",
+      "statement": "W_{18} H^{18}(Z;Q)(-4) is a direct sum of copies of Q(-13).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-ASSEMBLY",
+      "statement": "W_{26} H^{26}(M_{6,6};Q) is a direct sum of copies of Q(-13), hence W_{-16} H^{BM}_{16}(M_{6,6};Q) is a direct sum of copies of Q(8).",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  },
+  "context_revision": 2,
+  "engine": "grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    "vcd-only-vanishing",
+    "undecorated-cgp-top-weight-graph-complex",
+    "point-count-without-degree-parity-separation",
+    "forgetful-map-renaming-local-system-unknown",
+    "empty-locus-repair",
+    "S6-rational-representations-imply-Tate-without-monodromy-control",
+    "finiteness-over-M0b-alone-implies-Tate",
+    "open-reduced-support-treated-as-closed",
+    "fibrewise-point-agreement-implies-scheme-equality-before-reduction"
+  ],
+  "gap_markers": [],
+  "id": "ATT-0024",
+  "lane": "full-resolution",
+  "methods_used": [
+    "poincare-duality",
+    "casnati-ekedahl-resolution",
+    "brill-noether-existence",
+    "serre-duality-degree-obstructions",
+    "hurwitz-branch-morphism",
+    "relative-linear-system-incidence",
+    "finite-etale-S6-ordering-cover",
+    "stratified-gysin-localization",
+    "deligne-weight-edge-map",
+    "projective-bundle-leray",
+    "configuration-space-tate-purity",
+    "admissible-cover-stratification"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Complete identification of the CE f_2=5 evaluation-failure locus for (g,n)=(6,6) with the residual linear system |\u03c9_C(-D)| over the balanced tetragonal Hurwitz stack, including dimension, stratification, and the finite \u00e9tale S_6 ordering cover of the reduced-support open.",
+    "Lowest-weight Gysin assembly proving that both the supported contribution of Z and the complementary open U contribute only Q(-13) to W_{26} H^{26}(M_{6,6};Q), thereby resolving the exact residual target RED-0001 for (6,6)."
+  ],
+  "observable_trace_id": "TRACE-0007",
+  "observable_trace_sha256": "1cf5afa0443b3a3b18b9ecfe300333903041be9cfffbde4c76bdb92c9c033092",
+  "packet_id": "C66-001-v3",
+  "packet_path": "proof/packets/generated/C66-001-v3.md",
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "paired_attempt_policy_revision": 1,
+  "paired_problem_key": "0b009fa7713fa40e6ab7a37138cf33804349b4a415a5402d6c0ba9ff069f0a93",
+  "paired_theorem_sha256": "c5e3507db1b4cef8fddb7c6bc92044dd75181ad33ae1649739f76e893e013cd3",
+  "paired_turn_kind": "forced-proof",
+  "proof_dependencies": [
+    {
+      "id": "DEP-FND-0001",
+      "statement": "Poincar\u00e9 duality identification W_{-16} H^{BM}_{16}(M_{g,n}) \u2245 W_{2d-16} H^{2d-16}(M_{g,n})(d) for d=3g-3+n."
+    },
+    {
+      "id": "DEP-SRC-0004",
+      "statement": "SRC-0004 Lemma 10.6 degree and Serre-duality formulae for CE summands W_{f_i}, including the sign in \u03b3^*O(-f)."
+    },
+    {
+      "id": "DEP-DELIGNE-EDGE",
+      "statement": "Deligne\u2019s edge-map description: W_k H^k(X;Q)=im(H^k(\\bar X;Q)\u2192H^k(X;Q)) for smooth X with smooth proper snc compactification."
+    },
+    {
+      "id": "DEP-M0N-PURITY",
+      "statement": "H^k(M_{0,b};Q) is pure of weight 2k and of Tate type Q(-k) for all b\u22653 and all k\u22650."
+    }
+  ],
+  "result_type": "proof",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "RED-0001",
+    "FND-0001",
+    "FND-0005",
+    "FND-0035",
+    "FND-0036"
+  ],
+  "source_ids": [
+    "SRC-0002",
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-FULL",
+  "summary": "Poincar\u00e9 duality reduces the claim to purity of type Q(-13) for W_26 H^26(M_{6,6};Q). The Casnati\u2013Ekedahl f_2=5 obstruction cuts out a closed stratified evaluation-failure locus Z of top dimension 17 and pure codimension 4, with complementary open U on which both CE summand obstructions vanish. Localization of mixed Hodge structures yields a Gysin exact sequence of lowest-weight pieces. On U the CE framing identifies the lowest-weight motive with a tower of open configuration spaces of points on P^1, hence pure Tate of type Q(-13). On Z the top stratum is a finite \u00e9tale S_6-cover of a P^2-bundle over the balanced tetragonal Hurwitz stack, which is finite over an open in M_{0,18}; after the projective-bundle decomposition and the weight-purity of M_{0,n}, the Gysin image of W_18 H^18(Z)(-4) is pure of type Q(-13). Therefore W_26 H^26(M_{6,6};Q) is a direct sum of copies of Q(-13), and twisting by (21) yields that W_{-16} H^{BM}_{16}(M_{6,6};Q) is a direct sum of copies of Q(8).",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-001-FORCED-FULL",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group."
+}

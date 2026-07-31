@@ -1,0 +1,125 @@
+{
+  "attempt_id": "ATT-0024",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-DUALITY",
+      "note": "Poincar\u00e9 duality correctly identifies the lowest-weight Borel-Moore homology of degree 16 with the lowest-weight ordinary cohomology of degree 26 and Tate twist 21.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-CE-DEGREES",
+      "note": "The Casnati-Ekedahl degree calculations for the summands are correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-F4-VANISH",
+      "note": "Since the line bundle has negative degree on C, its global sections vanish as claimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-F5-CRITERION",
+      "note": "A degree-zero line bundle on a curve has global sections if and only if it is trivial, which yields the stated isomorphism condition.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-W5-ID",
+      "note": "The identification of W_5 with the indicated bundle over the balanced tetragonal Hurwitz open is correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-GEOMETRY",
+      "note": "The evaluation-failure locus Z contains other components and lower-dimensional strata (such as unbalanced tetragonal curves and non-reduced support divisors) that are omitted from the geometry description.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-LOCALIZATION",
+      "note": "The Gysin sequence for mixed Hodge structures is formulated assuming Z is a smooth variety, but Z is a singular/stratified substack. The lowest-weight Borel-Moore homology of Z is not isomorphic to that of the top stratum Z_top.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-U-TATE",
+      "note": "The complementary open U, where both CE obstructions vanish, has pure Tate lowest-weight cohomology.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-TATE",
+      "note": "The Hurwitz stack is finite \u00e9tale over an open in M_0,18. Since finite \u00e9tale covers of opens in M_0,n do not generally preserve the pure Tate property of cohomology (due to non-trivial braid group monodromy), the cohomology of the Hurwitz stack, and hence Z, contains non-Tate mixed Hodge structures.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-ASSEMBLY",
+      "note": "Because of the gaps in CLM-Z-GEOMETRY, CLM-LOCALIZATION, and CLM-Z-TATE, the final Gysin assembly fails to prove that the exact target has only Tate summands.",
+      "verdict": "failed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-31",
+  "finding_candidates": [
+    {
+      "id": "FND-0037",
+      "key": "FND-0037",
+      "statement": "Finite \u00e9tale covers of opens in M_{0,n} (including Hurwitz stacks via the branch morphism) do not in general have pure Tate cohomology because non-trivial monodromy representations can introduce non-Tate mixed Hodge structures."
+    },
+    {
+      "id": "FND-0038",
+      "key": "FND-0038",
+      "statement": "The evaluation-failure locus Z contains lower-dimensional strata of unbalanced tetragonal curves and non-reduced support divisors, which cannot be omitted from Gysin/localization sequences as they can contribute non-Tate classes."
+    }
+  ],
+  "id": "REV-0030",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "C66-GEO-Z",
+      "note": "The description of the evaluation-failure locus Z for the f_2=5 CE obstruction on the balanced tetragonal open is correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C66-GEO-H0",
+      "note": "The stratification of the degree-six linear system by h^0 is correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C66-GEO-COMP",
+      "note": "The analysis of the components and dimensions of Z ignores the complement of the balanced open (unbalanced tetragonal curves) and treats the open top stratum as the entire closed locus Z.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "C66-TATE-SUPPORT",
+      "note": "The claim of pure Tate cohomology for the contribution supported on Z fails because the Hurwitz stack (a finite \u00e9tale cover of an open in M_{0,18}) has non-Tate mixed Hodge structures.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "C66-TATE-ASSEMBLY",
+      "note": "Since the support contribution is not pure Tate, the Gysin assembly into the lowest-weight target fails.",
+      "verdict": "failed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0024-P1",
+  "reviewer_engine": "gemini",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack refutes CLM-Z-TATE by identifying a fundamental monodromy gap: the Hurwitz stack of tetragonal genus-6 curves is a finite \u00e9tale cover of an open in M_{0,18}, but finite \u00e9tale covers of pure Tate varieties do not in general have pure Tate cohomology. The non-trivial braid group action on the fiber of the cover produces local systems whose cohomology contains non-Tate mixed Hodge structures. Additionally, the Gysin sequence in CLM-LOCALIZATION is formulated assuming Z is a smooth variety of pure dimension, thereby omitting lower-dimensional strata and unbalanced tetragonal curves which can contribute non-Tate classes or obstruct extensions.",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "refuted"
+}

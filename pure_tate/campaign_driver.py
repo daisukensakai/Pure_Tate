@@ -547,6 +547,9 @@ def drive_campaign(
         )
 
     for index in range(steps):
+        # Finding audits (and other ledger writes) can change the campaign
+        # packet mid-batch; always bind tasks to the current packet hash.
+        packet = write_campaign_packet(campaign_id)
         current = campaign_status(campaign_id)
         if current["structural_integrity"] != "ready":
             stop_reason = "validation_failure"
@@ -948,7 +951,7 @@ def drive_campaign(
                         )
                 elif phase == "finding-audit":
                     _apply_finding_audit(artifact)
-                    write_campaign_packet(campaign_id)
+                    packet = write_campaign_packet(campaign_id)
                 elif phase == "trace-mining":
                     context_record = publish_working_context(
                         campaign, task, artifact
