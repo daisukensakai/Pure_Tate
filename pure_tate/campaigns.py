@@ -3,7 +3,7 @@ import hashlib
 import json
 from collections import Counter
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 
 from .artifacts import load_artifacts, sha256_file
 from .findings import findings_for_case, load_findings
@@ -18,6 +18,28 @@ CAMPAIGN_DIR = DATA / "campaigns"
 CAMPAIGN_ARTIFACT_DIR = ROOT / "proof" / "campaign-attempts"
 NOVELTY_DIR = ROOT / "research" / "novelty-audits"
 EXPERIMENT_RESULT_DIR = ROOT / "experiments" / "results"
+
+
+BLOCKED_ROUTE_METHOD_ALIASES = {
+    "vcd-only-vanishing": {
+        "vcd-only-vanishing",
+        "top-vcd-vanishing",
+        "vanishing-at-vcd",
+        "top-degree-rational-vanishing-for-mapping-class-groups",
+    },
+    "undecorated-cgp-top-weight-graph-complex": {
+        "undecorated-cgp-top-weight-graph-complex",
+        "undecorated-top-weight-graph-complex",
+    },
+    "point-count-without-degree-parity-separation": {
+        "point-count-without-degree-parity-separation",
+        "point-count-only",
+    },
+    "forgetful-map-renaming-local-system-unknown": {
+        "forgetful-map-renaming-local-system-unknown",
+        "forgetful-map-only-reduction",
+    },
+}
 
 
 def load_campaign(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
@@ -40,6 +62,111 @@ def load_campaign(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
     ):
         raise ValueError("campaign has an invalid paired-attempt policy")
     return campaign
+
+
+def used_blocked_routes(
+    campaign: Dict[str, Any], methods: Any
+) -> Set[str]:
+    """Map model-supplied method labels onto canonical blocked routes.
+
+    Method labels remain extensible, so exact string comparison is too weak:
+    an engine can otherwise rename ``vcd-only-vanishing`` and bypass the gate.
+    The conservative semantic checks below cover the known route families while
+    leaving unrelated methods alone.
+    """
+    labels = {
+        item.strip().lower().replace("_", "-").replace(" ", "-")
+        for item in (methods if isinstance(methods, list) else [])
+        if isinstance(item, str) and item.strip()
+    }
+    used: Set[str] = set()
+    blocked = set(campaign.get("blocked_routes", []))
+    for route in blocked:
+        aliases = BLOCKED_ROUTE_METHOD_ALIASES.get(route, {route})
+        if labels & aliases:
+            used.add(route)
+    for label in labels:
+        if (
+            "vcd-only-vanishing" in blocked
+            and "vanish" in label
+            and (
+                "vcd" in label
+                or "virtual-cohomological-dimension" in label
+                or "top-degree-rational" in label
+            )
+        ):
+            used.add("vcd-only-vanishing")
+        if (
+            "undecorated-cgp-top-weight-graph-complex" in blocked
+            and "graph-complex" in label
+            and "undecorated" in label
+        ):
+            used.add("undecorated-cgp-top-weight-graph-complex")
+        if (
+            "point-count-without-degree-parity-separation" in blocked
+            and "point-count" in label
+            and "degree-separation" not in label
+            and "parity-separation" not in label
+        ):
+            used.add("point-count-without-degree-parity-separation")
+        if (
+            "forgetful-map-renaming-local-system-unknown" in blocked
+            and "forgetful" in label
+            and "local-system" in label
+        ):
+            used.add("forgetful-map-renaming-local-system-unknown")
+    return used
+
+
+def verified_new_input_routes(artifact: Dict[str, Any]) -> Set[str]:
+    """Return blocked routes reopened by evidence admitted through Stage 1.
+
+    Free-form citations are not enough to overturn an adjudicated route block.
+    A new input must name the canonical route, explain the evidence, and point
+    to at least one source-verified or cross-checked claim in the repository.
+    """
+    from .store import load_repository
+
+    _config, _target, _sources, claims, _edges = load_repository()
+    verified_claims = {
+        claim_id
+        for claim_id, claim in claims.items()
+        if claim.verification_status in {"source_verified", "cross_checked"}
+    }
+    reopened: Set[str] = set()
+    for item in artifact.get("new_inputs", []):
+        if not isinstance(item, dict):
+            continue
+        route = item.get("route")
+        evidence = item.get("evidence")
+        evidence_claim_ids = item.get("evidence_claim_ids")
+        if (
+            isinstance(route, str)
+            and route.strip()
+            and isinstance(evidence, str)
+            and evidence.strip()
+            and isinstance(evidence_claim_ids, list)
+            and any(
+                isinstance(claim_id, str) and claim_id in verified_claims
+                for claim_id in evidence_claim_ids
+            )
+        ):
+            reopened.add(route)
+    return reopened
+
+
+def campaign_route_policy_errors(
+    campaign: Dict[str, Any], artifact: Dict[str, Any]
+) -> List[str]:
+    used = used_blocked_routes(campaign, artifact.get("methods_used"))
+    reopened = verified_new_input_routes(artifact)
+    unsupported = sorted(used - reopened)
+    if not unsupported:
+        return []
+    return [
+        "blocked campaign route used without source-verified new evidence: %s"
+        % ", ".join(unsupported)
+    ]
 
 
 def campaign_packet_path(campaign_id: str = DEFAULT_CAMPAIGN) -> Path:
@@ -287,6 +414,8 @@ def case_verified(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
             attempt.get("paired_turn_kind")
             and attempt.get("paired_problem_key") != problem_key(campaign)
         ):
+            continue
+        if campaign_route_policy_errors(campaign, attempt):
             continue
         attached = [
             item

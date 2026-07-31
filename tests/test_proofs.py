@@ -94,7 +94,34 @@ class ProofAuditTests(unittest.TestCase):
                 result = audit_proofs(self.claims)
             self.assertEqual(result.errors, [])
 
+    def test_packet_visible_finding_is_allowed_in_source_ids(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._write(
+                root / "proof" / "attempts" / "ATT-0001.json",
+                {
+                    "id": "ATT-0001",
+                    "target_claim_id": "RED-0001",
+                    "approach": "test",
+                    "status": "proposed",
+                    "source_claim_ids": ["THM-0002"],
+                    "source_ids": ["FND-TEST"],
+                    "gap_markers": ["test gap"],
+                },
+            )
+            finding = {
+                "id": "FND-TEST",
+                "status": "corroborated",
+                "statement": "A packet-visible test finding.",
+            }
+            with mock.patch("pure_tate.proofs.ROOT", root), mock.patch(
+                "pure_tate.proofs.load_findings", return_value=[finding]
+            ):
+                result = audit_proofs(self.claims)
+            self.assertFalse(
+                any("unknown source FND-TEST" in item for item in result.errors)
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
-

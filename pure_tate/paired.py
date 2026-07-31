@@ -300,6 +300,12 @@ def _event_for_trace(
 
 
 def _review_state(attempt: Dict[str, Any]) -> str:
+    if attempt.get("campaign_id"):
+        from .campaigns import campaign_route_policy_errors, load_campaign
+
+        campaign = load_campaign(str(attempt["campaign_id"]))
+        if campaign_route_policy_errors(campaign, attempt):
+            return "rejected"
     reviews = _attached_reviews(str(attempt.get("id")))
     if any(
         review.get("verdict") in {"incomplete", "refuted"}

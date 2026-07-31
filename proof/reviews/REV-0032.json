@@ -1,0 +1,118 @@
+{
+  "schema_version": 3,
+  "id": "REV-0032",
+  "review_task_id": "TASK-V-ATT-0025-P2",
+  "review_pass": 2,
+  "attempt_id": "ATT-0025",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "subproblem_id": "C66-FULL",
+  "context_revision": 2,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "reviewer_engine": "codex",
+  "independent": true,
+  "verdict": "refuted",
+  "strongest_attack": "The unique load-bearing step, CLM-0025-05 / DEP-05, attributes to Church-Farb-Putman a theorem for Mod_{g,n} with every n>=1 that the cited paper does not state or prove. Theorem 1 of arXiv:1108.0622v3 proves H^{4g-5}(Mod_g;Q)=0 for the closed unpunctured mapping class group and further gives top-vcd vanishing for the once-marked group Mod_{g,*} and the one-boundary-component group Mod_{g,1}. Its proof uses the Steinberg module St_g and actions factoring through Mod_g. It contains no arbitrary-n theorem and gives no vanishing for the pure six-puncture group PMod_{6,6}, whose top degree is 4g-4+n=26. Consequently H^{26}(M_{6,6};Q)=0 is unsupported; CLM-0025-06 and CLM-0025-07 do not follow. The zero mixed Hodge structure would indeed be an empty direct sum of Q(8), but ATT-0025 never proves that the target group is zero.",
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0025-01",
+      "verdict": "confirmed",
+      "note": "The finite level cover and quotient-stack presentation are standard and are not implicated in the fatal scope error."
+    },
+    {
+      "claim_id": "CLM-0025-02",
+      "verdict": "confirmed",
+      "note": "The Poincare-duality dictionary and Tate-twist arithmetic for d=21 are correct."
+    },
+    {
+      "claim_id": "CLM-0025-03",
+      "verdict": "confirmed",
+      "note": "The rational orbifold/group-cohomology comparison is adequate for the vector-space implication attempted later."
+    },
+    {
+      "claim_id": "CLM-0025-04",
+      "verdict": "confirmed",
+      "note": "Harer's formula gives vcd(PMod_{6,6})=4g-4+n=26, so the target lies at rather than above vcd."
+    },
+    {
+      "claim_id": "CLM-0025-05",
+      "verdict": "failed",
+      "note": "Church-Farb-Putman Theorem 1 covers Mod_g, Mod_{g,*}, and Mod_{g,1}; it does not assert H^{4g-4+n}(PMod_{g,n};Q)=0 for arbitrary n. In particular it supplies no H^{26}(M_{6,6};Q)=0 theorem."
+    },
+    {
+      "claim_id": "CLM-0025-06",
+      "verdict": "failed",
+      "note": "The conclusion W_{-16}H^{BM}_{16}(M_{6,6};Q)=0 depends entirely on the unproved CLM-0025-05 vanishing."
+    },
+    {
+      "claim_id": "CLM-0025-07",
+      "verdict": "failed",
+      "note": "The categorical statement that zero is an empty direct sum of Q(8) is correct, but the attempt does not establish that the exact group is zero, so the claimed proof of the target fails."
+    },
+    {
+      "claim_id": "CLM-0025-08",
+      "verdict": "confirmed",
+      "note": "The Casnati-Ekedahl degree arithmetic is a non-load-bearing consistency check and does not repair the missing top-vcd theorem."
+    }
+  ],
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "DEP-01",
+      "verdict": "confirmed",
+      "note": "Poincare duality for the smooth level cover is standard."
+    },
+    {
+      "dependency_id": "DEP-02",
+      "verdict": "confirmed",
+      "note": "The level-structure representability input is standard."
+    },
+    {
+      "dependency_id": "DEP-03",
+      "verdict": "confirmed",
+      "note": "The Teichmuller-space comparison is standard."
+    },
+    {
+      "dependency_id": "DEP-04",
+      "verdict": "confirmed",
+      "note": "Harer's vcd value 26 is correct but provides only vanishing above degree 26."
+    },
+    {
+      "dependency_id": "DEP-05",
+      "verdict": "failed",
+      "note": "The cited Church-Farb-Putman paper does not prove arbitrary-puncture top-vcd vanishing; its Theorem 1 stops at the unpunctured, once-marked, and one-boundary cases."
+    },
+    {
+      "dependency_id": "DEP-06",
+      "verdict": "confirmed",
+      "note": "The packet findings are valid bookkeeping; FND-0035 specifically does not assert the arbitrary-puncture theorem required by the attempt."
+    }
+  ],
+  "finding_candidates": [
+    {
+      "key": "cfp-scope-stops-before-arbitrary-punctures",
+      "statement": "Church-Farb-Putman, arXiv:1108.0622v3, Theorem 1 proves top-vcd vanishing for Mod_g and additionally for the once-marked and one-boundary-component mapping class groups; it does not prove top-vcd vanishing for PMod_{g,n} with arbitrary n and therefore does not discharge H^{26}(M_{6,6};Q).",
+      "adjudication": "supports_existing_correction",
+      "supports_finding_id": "FND-0018",
+      "attack_surface": "theorem scope; puncture conventions; pure versus full mapping class groups",
+      "evidence": "Primary-source inspection of arXiv:1108.0622v3, page 1 Theorem 1 and page 2 duality discussion."
+    }
+  ],
+  "created_on": "2026-07-31"
+}

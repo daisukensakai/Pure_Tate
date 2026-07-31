@@ -1,0 +1,126 @@
+{
+  "attempt_id": "ATT-0025",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0025-01",
+      "note": "Level-l>=3 cover of M_{6,6} is a smooth quasi-projective scheme of dimension 21 with finite etale Galois group Sp(12,Z/l) by Serre; stack is the quotient stack. Stack-versus-coarse distinction is handled correctly.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0025-02",
+      "note": "Poincare duality H^{BM}_k(Y;Q)\u2245H^{2d-k}(Y;Q)(d) for smooth Y=M_{6,6}[l], d=21, is G-equivariant; Q-invariants are exact on MHS. Weight shift under (21) is -42, so W_{-16} on BM matches W_{26} on ordinary cohomology. No Tate-twist off-by-one.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0025-03",
+      "note": "Teichmueller contractibility plus finite stabilizers yields H^*(M_{6,6};Q)\u2245H^*(PMod_{6,6};Q) as Q-vector spaces. Only vector-space vanishing is later used, so absence of MHS comparison is not a gap.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0025-04",
+      "note": "Harer gives vcd(Mod_{6,6})=4g-4+n=26; equals ordinary target degree 2d-16=26. Correctly records that vanishing strictly above vcd is unavailable (FND-0035).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0025-05",
+      "note": "Church-Farb-Putman IMRN 2012 supplies H^{4g-4+n}(Mod_{g,n};Q)=0 for g>=2, n>=1. At (6,6) this is H^{26}=0. Transport via CLM-0025-03 yields H^{26}(M_{6,6};Q)=0. Not the blocked above-vcd inference; g>=2 hypothesis is essential and correctly flagged.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0025-06",
+      "note": "Whole-group vanishing forces every weight subquotient, including W_{26}H^{26} and its (21)-twist, and equivalently W_{-16}H^{BM}_{16}, to vanish. No semisimplification step is required.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0025-07",
+      "note": "In the abelian category of Q-MHS, 0\u2245\u2295_{\u2205}Q(8). The theorem's disproof clause only requires a surviving non-Tate summand; the zero object has none. Empty-sum reading is forced by the stated dichotomy, not a silent upgrade of pure Tate to algebraic generation.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0025-08",
+      "note": "Consistency only: CE degree arithmetic matches SRC-0004; nonemptiness of Z (FND-0005) does not obstruct vanishing of H^{26}. Geometric subproblems are not load-bearing.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-31",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate_from_confirmed_attempt",
+      "attack_surface": "invariants-versus-coinvariants under finite deck/S_n actions; rational versus integral coefficients; blocked-route adjacency to vcd-only-vanishing",
+      "evidence_from_attempt": "ATT-0025 CLM-0025-05 through CLM-0025-07 and NEWIN-01/DEP-05; does not restate FND-0035 (which only records that above-vcd vanishing is unavailable and that no top-vcd theorem is packet-asserted).",
+      "key": "cfp-at-vcd-vanishing-kills-exact-group-M66",
+      "statement": "For (g,n)=(6,6), the ordinary target degree 2d-16 equals vcd(M_{6,6})=26, and the Church\u2013Farb\u2013Putman theorem H^{4g-4+n}(Mod_{g,n};Q)=0 for g>=2 forces H^{26}(M_{6,6};Q)=0 as Q-vector spaces and hence as mixed Hodge structures; Poincare duality then yields W_{-16}H^{BM}_{16}(M_{6,6};Q)=0, i.e. an empty direct sum of Q(8) with no surviving non-Tate summand.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate_from_confirmed_attempt",
+      "attack_surface": "pure-Tate silently upgraded; theorem-statement parsing",
+      "evidence_from_attempt": "ATT-0025 section 0 reading and CLM-0025-07.",
+      "key": "empty-direct-sum-of-Q8-satisfies-exact-theorem",
+      "statement": "Under the packet theorem's operational disproof clause (exhibit a surviving non-Tate summand), the zero mixed Hodge structure satisfies 'is a direct sum of Q(8)' as \u2295_{i in emptyset} Q(8) and cannot be disproved by a non-Tate summand.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0031",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "DEP-01",
+      "note": "Poincare duality as MHS for smooth complex varieties of pure dimension d, used G-equivariantly on the level cover, is standard Deligne/topological PD.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "DEP-02",
+      "note": "Serre's lemma for l>=3 and representability of level moduli are standard; Sp(12,Z/l) for g=6 is correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "DEP-03",
+      "note": "Contractibility of Teichmueller space and proper discontinuous finite-stabilizer action are standard; rational orbifold/group-cohomology comparison holds.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "DEP-04",
+      "note": "Harer virtual duality: vcd(Mod_{g,n})=4g-4+n for n>=1 is the classical published theorem; dualising module is the Steinberg module as stated.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "DEP-05",
+      "note": "Church-Farb-Putman top-degree rational vanishing for g>=2 (all n>=1) is a published theorem matching the cited reference; applied at pure/ordered Mod_{6,6} with degree 26=vcd. Distinct from blocked vcd-only (above-vcd) vanishing.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "DEP-06",
+      "note": "FND-0001 is independently re-derived as CLM-0025-02; FND-0035/FND-0036 are consistency bookkeeping only and are not load-bearing for the vanishing argument.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0025-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: misapplication of Church\u2013Farb\u2013Putman via pure-versus-full mapping class groups (ordered stack M_{6,6} has \u03c0_1^{orb}=PMod_{6,6}, while some notations take Mod_{g,n} as the S_n-extension; with Q-coefficients H^*(full)\u2245H^*(pure)^{S_n}, so vanishing of full-group cohomology would kill only S_6-invariants and might leave a non-invariant non-Tate summand in H^{26}(PMod)). Secondary prong: empty-index reading of 'direct sum of Q(8)' as sophistry. Outcome: both fail \u2014 CFP is the standard at-vcd vanishing used for the pure/ordered mapping class group of M_{g,n} (vcd=4g-4+n, g>=2), vector-space vanishing of H^{26} forces the MHS and all weight pieces to vanish with no room for hidden non-invariant summands, and the theorem's own disproof clause makes absence of non-Tate summands the sole falsification criterion, so 0\u2245\u2295_\u2205Q(8) confirms the exact statement. Poincare dualities, Tate twists, and stack-level G-invariants were re-checked and hold with Q coefficients.",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "confirmed"
+}

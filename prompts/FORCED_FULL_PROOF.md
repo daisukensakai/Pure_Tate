@@ -27,4 +27,9 @@ Include:
 }
 ```
 
+If genuinely new evidence reopens a blocked route named in the packet, record the
+canonical `route`, a nonempty `evidence` explanation, and `evidence_claim_ids`
+naming source-verified or cross-checked claims already admitted through the research
+gate. A free-form citation or renamed method does not reopen a blocked route.
+
 Return exactly one JSON proof artifact and no surrounding prose.

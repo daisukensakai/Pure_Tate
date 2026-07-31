@@ -1078,29 +1078,12 @@ def _validate_artifact(
             raise ValueError("mathematics gap_markers must be a list")
         _normalize_source_references(artifact)
         if is_campaign:
-            from .campaigns import load_campaign
+            from .campaigns import campaign_route_policy_errors, load_campaign
 
             campaign = load_campaign(str(task["campaign_id"]))
-            blocked = set(campaign.get("blocked_routes", []))
-            used = {
-                method
-                for method in artifact.get("methods_used", [])
-                if isinstance(method, str)
-            }
-            declared_new_inputs = {
-                item.get("route")
-                for item in artifact.get("new_inputs", [])
-                if isinstance(item, dict)
-                and isinstance(item.get("route"), str)
-                and isinstance(item.get("evidence"), str)
-                and item["evidence"].strip()
-            }
-            unsupported = sorted((blocked & used) - declared_new_inputs)
-            if unsupported:
-                raise ValueError(
-                    "blocked campaign route used without genuinely new evidence: %s"
-                    % ", ".join(unsupported)
-                )
+            route_errors = campaign_route_policy_errors(campaign, artifact)
+            if route_errors:
+                raise ValueError(route_errors[0])
         if task.get("paired_turn_kind") == "forced-proof":
             if artifact.get("result_type") not in {"proof", "disproof"}:
                 raise ValueError(

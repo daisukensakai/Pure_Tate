@@ -214,7 +214,7 @@ class FocusedCampaignTests(unittest.TestCase):
             bad[0]["content_sha256"] = "0" * 64
             self.assertFalse(verify_source_records(bad)["ok"])
 
-    def test_blocked_route_requires_new_evidence(self):
+    def test_blocked_route_requires_source_verified_new_evidence(self):
         task = campaign_mathematics_tasks("C66-001")[0]
         artifact = {
             "schema_version": 3,
@@ -252,11 +252,70 @@ class FocusedCampaignTests(unittest.TestCase):
                 "mathematics", task, artifact, ROOT / "proof" / "attempts" / "ATT-9999.json", "codex"
             )
         artifact["new_inputs"] = [
-            {"route": "vcd-only-vanishing", "evidence": "A genuinely new theorem."}
+            {
+                "route": "vcd-only-vanishing",
+                "evidence": "A genuinely new theorem.",
+                "evidence_claim_ids": ["THM-0002"],
+            }
         ]
         _validate_artifact(
             "mathematics", task, artifact, ROOT / "proof" / "attempts" / "ATT-9999.json", "codex"
         )
+
+    def test_blocked_route_alias_cannot_bypass_research_gate(self):
+        task = next(
+            item
+            for item in campaign_mathematics_tasks("C66-001")
+            if item["status"] == "ready"
+        )
+        artifact = {
+            "schema_version": 3,
+            "id": "ATT-9999",
+            "task_id": task["id"],
+            "campaign_id": "C66-001",
+            "campaign_revision": 3,
+            "subproblem_id": task["subproblem_id"],
+            "lane": task["lane"],
+            "result_type": "lemma",
+            "target_claim_id": "RED-0001",
+            "context_revision": 2,
+            "packet_id": task["packet_id"],
+            "packet_path": task["input_packet"],
+            "packet_sha256": task["packet_sha256"],
+            "target": task["target"],
+            "theorem_statement": "A test theorem.",
+            "summary": "A test.",
+            "argument_markdown": "Argument.",
+            "claims": [{"statement": "Claim."}],
+            "status": "proposed",
+            "source_claim_ids": [],
+            "gap_markers": ["Not complete."],
+            "engine": "codex",
+            "proof_dependencies": [],
+            "experiment_ids": [],
+            "experiment_uses": [],
+            "novelty_claims": [],
+            "failed_approaches_addressed": [],
+            "methods_used": [
+                "top-degree-rational-vanishing-for-mapping-class-groups"
+            ],
+            "new_inputs": [
+                {
+                    "source": "A free-form bibliographic assertion.",
+                    "statement": "An alleged theorem.",
+                }
+            ],
+        }
+        with self.assertRaisesRegex(
+            ValueError, "without source-verified new evidence"
+        ):
+            _validate_artifact(
+                "mathematics",
+                task,
+                artifact,
+                ROOT / "proof" / "attempts" / "ATT-9999.json",
+                "codex",
+            )
 
     def test_driver_is_bounded_balanced_and_no_spend_in_dry_run(self):
         before = {

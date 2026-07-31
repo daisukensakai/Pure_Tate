@@ -90,6 +90,7 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
     from .artifacts import load_artifacts
     from .campaigns import (
         campaign_packet_record,
+        campaign_route_policy_errors,
         load_campaign,
         load_campaign_attempts,
     )
@@ -108,6 +109,7 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
             or attempt.get("status") not in {"claimed_complete", "verified"}
             or attempt.get("gap_markers")
             or attempt.get("packet_sha256") != packet["packet_sha256"]
+            or campaign_route_policy_errors(campaign, attempt)
         ):
             continue
         confirmations = [
@@ -363,7 +365,11 @@ def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
         if attempt.get("id") in legacy or not (current or compatibility_fixture):
             continue
         if attempt.get("campaign_id"):
-            from .campaigns import campaign_packet_record, load_campaign
+            from .campaigns import (
+                campaign_packet_record,
+                campaign_route_policy_errors,
+                load_campaign,
+            )
 
             campaign = load_campaign(str(attempt["campaign_id"]))
             if attempt.get("campaign_revision") != campaign.get(
@@ -373,6 +379,8 @@ def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
             if attempt.get("packet_sha256") != campaign_packet_record(
                 str(attempt["campaign_id"])
             )["packet_sha256"]:
+                continue
+            if campaign_route_policy_errors(campaign, attempt):
                 continue
         if attempt_id and attempt.get("id") != attempt_id:
             continue

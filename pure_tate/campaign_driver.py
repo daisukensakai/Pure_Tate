@@ -770,7 +770,12 @@ def drive_campaign(
                 research_engines, phase, dry_run
             )
             engine = next(
-                (item for item in eligible_research if item not in used), None
+                (
+                    item
+                    for item in eligible_research
+                    if item not in used and item not in failed_engines
+                ),
+                None,
             )
             if engine is None:
                 blocker = _research_capability_blocker(
@@ -1013,6 +1018,8 @@ def drive_campaign(
                 "novelty",
                 "trace-mining",
             }:
+                if isinstance(engine, str) and engine:
+                    failed_engines.add(engine)
                 planned_tasks.discard(task["id"])
                 continue
             stop_reason = "artifact_validation_failure"

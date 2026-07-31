@@ -14,4 +14,10 @@ hypotheses, and gaps. Finite experiments cannot close a proof. Address the appli
 failed routes listed by the task; do not silently reuse them. A counterexample lane
 must show survival in the exact target, not merely locate non-Tate geometry.
 
+If genuinely new evidence reopens a blocked route, record it in `new_inputs` with
+the canonical `route`, a nonempty `evidence` explanation, and
+`evidence_claim_ids` naming source-verified or cross-checked claims already admitted
+through the research gate. A free-form citation or renamed method does not reopen a
+blocked route.
+
 Return exactly one JSON artifact.

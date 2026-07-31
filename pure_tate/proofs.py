@@ -459,6 +459,13 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
                     % (attempt_id, claim_id)
                 )
         for source_id in attempt.get("source_ids", []):
+            if source_id in findings_by_id:
+                if findings_by_id[source_id].get("status") not in PACKET_VISIBLE_STATUSES:
+                    result.errors.append(
+                        "%s cites finding %s below corroborated"
+                        % (attempt_id, source_id)
+                    )
+                continue
             if source_id not in known_source_ids:
                 result.errors.append(
                     "%s cites unknown source %s" % (attempt_id, source_id)
