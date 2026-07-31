@@ -1,0 +1,137 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "The balanced tetragonal splitting F=O_{P^1}(4)\u2295O_{P^1}(5) controls the geometric bottleneck for the exact lowest-weight contribution on M_{6,6}."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The six-point evaluation-failure locus is cut out by O_C(\u0393)\u2245W_5\u2297\u03c9_C^{-1}, derived from the f_2=5 summand of SRC-0004 Lemma 10.6 including the sign in \u03b3^*O(-5)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The proposed evaluation-failure locus Z is nonempty by the indicated Riemann-Roch computation for (g,n)=(6,6)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Ordered distinct reduced divisors form a finite \u00e9tale S_6-cover of the reduced-support open in the relative linear system (that open is not closed)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The exact codimension-13 contribution supported on Z is of pure Tate type Q(8)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The tetragonal contribution on Z assembles into the exact lowest-weight target W_{-16}H^{BM}_{16}(M_{6,6};Q)\u2245\u2295Q(8)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Stratification of the relative degree-six linear system by h^0(W_5\u2297\u03c9_C^{-1}) yields the component, dimension, stabilizer, and finite-cover data needed for the Tate-type argument."
+    }
+  ],
+  "engine": "grok",
+  "established_facts": [
+    {
+      "evidence": "C66-001-v3 exact target line",
+      "evidence_class": "source",
+      "statement": "The exact target identity is W_{-16}H^{BM}_{16}(M_{6,6}) = W_{26}H^{26}(M_{6,6})(21)."
+    },
+    {
+      "evidence": "C66-001-v3 exact theorem line",
+      "evidence_class": "source",
+      "statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is asserted to be a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group."
+    },
+    {
+      "evidence": "FND-0001 [mechanically_verified; cases=all]",
+      "evidence_class": "mechanical",
+      "statement": "For d=3g-3+n, the open input is W_{-16}H^{BM}_{16}(M_{g,n}), identified by Poincare duality with W_{2d-16}H^{2d-16}(M_{g,n})(d)."
+    },
+    {
+      "evidence": "FND-0036 [mechanically_verified; degree=26; map=M_6,6 to M_6,5]",
+      "evidence_class": "mechanical",
+      "statement": "For the forgetful map M_{6,6}\u2192M_{6,5}, the q=0 term H^{26}(M_{6,5};Q) vanishes because 26 exceeds vcd(M_{6,5})=25; with fibre cohomology only in q=0,1, no Leray differential enters or leaves total degree 26."
+    },
+    {
+      "evidence": "SRC-0004 Lemma 10.6 degree/Serre-duality calculation",
+      "evidence_class": "source",
+      "statement": "For i=1,2, set W_{f_i}=O_{P(E^\u2228)}(2)\u2297\u03b3^*O(f_i) so that W=W_{f_1}\u2295W_{f_2}; then deg(W_{f_i}|_C)=deg(O_{P(E^\u2228)}(2)|_C\u2297\u03b3^*O(-f_i)|_C)=2(2g-2+4\u00b72)-4f_i=4g+12-4f_i."
+    },
+    {
+      "evidence": "SRC-0004 Lemma 10.6",
+      "evidence_class": "source",
+      "statement": "H^0(C,\u03c9_C\u2297W^\u2228|_C(\u0393))=H^0(C,\u03c9_C\u2297W_{f_1}^\u2228|_C(\u0393))\u2295H^0(C,\u03c9_C\u2297W_{f_2}^\u2228|_C(\u0393)), and the required vanishing holds if 0>deg(\u03c9_C\u2297W_{f_i}^\u2228|_C(\u0393))=2g-2-(4g+12-4f_i)+n=4f_i+n-2g-14."
+    },
+    {
+      "evidence": "C66-001-v3 Canonical geometric bottleneck degree calculation",
+      "evidence_class": "source",
+      "statement": "With the packet degree formula deg(W_f|_C)=4g+12-4f, one has deg(W_5)=16 and deg(W_5\u2297\u03c9_C^{-1})=6 for g=6."
+    },
+    {
+      "evidence": "C66-001-v3 CE line-bundle convention",
+      "evidence_class": "source",
+      "statement": "CE convention: W_5:=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_{P^1}(-5))|_C is the f_2=5 summand of (O(2)\u2297\u03b3^*F^\u2228)|_C and is not the O_{P^1}(5) summand of F."
+    },
+    {
+      "evidence": "FND-0035 [corroborated; RED-0001 residual list; coefficients Q]",
+      "evidence_class": "source",
+      "statement": "For the RED-0001 residual list over Q, the required ordinary degree 2d-16 equals vcd for (g,n)\u2208{(3,12),(5,8),(6,6),(7,4),(8,2)} and equals vcd-1 for (8,0),(8,1); it never exceeds vcd, so vanishing-above-vcd proves none of these seven cases."
+    },
+    {
+      "evidence": "SRC-0002 [5, Theorem 1.4] and Theorem 1.10",
+      "evidence_class": "source",
+      "statement": "For n\u2264c(g), one has \u2217(M_{g,n})=R\u2217(M_{g,n}) by the cited comparison theorems in the primary locator excerpt."
+    }
+  ],
+  "id": "DIGEST-0008",
+  "invalid_steps": [],
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "problem_key": "0b009fa7713fa40e6ab7a37138cf33804349b4a415a5402d6c0ba9ff069f0a93",
+  "reusable_computations": [],
+  "reviewer_engine": "grok",
+  "sanitized": true,
+  "schema_version": 1,
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-CLAUDE-INFRASTRUCTURE_FORCED_PROOF",
+  "unresolved_dependencies": [
+    {
+      "statement": "Construct and identify the evaluation-failure locus Z for the f_2=5 summand (C66-GEO-Z)."
+    },
+    {
+      "statement": "Stratify the relative degree-six linear system by h^0(W_5\u2297\u03c9_C^{-1}) (C66-GEO-H0; depends on Z)."
+    },
+    {
+      "statement": "Determine components, dimensions, stabilizers, and finite-cover behavior of the stratified locus (C66-GEO-COMP; depends on Z and the h^0 stratification)."
+    },
+    {
+      "statement": "Prove Tate type for the exact codimension-13 contribution supported on Z (C66-TATE-SUPPORT; depends on component data)."
+    },
+    {
+      "statement": "Assemble the tetragonal contribution into the exact lowest-weight target W_{-16}H^{BM}_{16}(M_{6,6};Q) (C66-TATE-ASSEMBLY; depends on Tate support)."
+    },
+    {
+      "statement": "Compute determinantal rank-drop ideals and fibre dimensions on Z (C66-COMP-RANK)."
+    },
+    {
+      "statement": "Test proposed component decompositions of the h^0 stratification (C66-COMP-COMP)."
+    },
+    {
+      "statement": "Independently confirm nonemptiness of Z via the Riemann-Roch computation for (g,n)=(6,6)."
+    }
+  ]
+}

@@ -1380,6 +1380,9 @@ def run_task(
         abort_patterns = config.get("abort_stderr_pattern_counts")
         if not isinstance(abort_patterns, dict):
             abort_patterns = None
+        activity_streams = config.get("activity_streams")
+        if not isinstance(activity_streams, list) or not activity_streams:
+            activity_streams = None
         try:
             process = run_captured_process(
                 command,
@@ -1390,6 +1393,7 @@ def run_task(
                 timeout=task_timeout,
                 inactivity_timeout=inactivity,
                 abort_stderr_pattern_counts=abort_patterns,
+                activity_streams=activity_streams,
                 on_activity=progress_callback,
             )
         except ProcessWatchdogError as exc:

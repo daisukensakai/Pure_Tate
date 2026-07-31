@@ -530,6 +530,7 @@ def drive_campaign(
     planned_tasks: Set[str] = set()
     planned_reviewers: Dict[str, Set[str]] = {}
     planned_research_engines: Dict[Tuple[str, str], Set[str]] = {}
+    failed_engines: Set[str] = set()
     used_by_subproblem = _existing_engines_for_subproblem(campaign_id)
     campaign_attempt_count = len(load_campaign_attempts(campaign_id))
     planned_math_count = 0
@@ -600,16 +601,18 @@ def drive_campaign(
                     eligible_engine_pool(
                         list(prover_engines), "mathematics", dry_run=False
                     )
-                )
+                ) - failed_engines
                 allowed_miners = set(
                     eligible_engine_pool(
                         list(review_engines), "review", dry_run=False
                     )
-                )
+                ) - failed_engines
                 for paired_engine in campaign[
                     "paired_attempt_policy"
                 ]["engine_order"]:
                     if paired_engine not in set(prover_engines):
+                        continue
+                    if paired_engine in failed_engines:
                         continue
                     state = pair_state(campaign, paired_engine)
                     state_name = state["state"]
@@ -734,9 +737,13 @@ def drive_campaign(
                 task.get("prover_engine"),
                 used,
                 routing["escalation_order"],
-                allowed=eligible_engine_pool(
-                    list(review_engines), "review", dry_run=dry_run
-                ),
+                allowed=[
+                    item
+                    for item in eligible_engine_pool(
+                        list(review_engines), "review", dry_run=dry_run
+                    )
+                    if item not in failed_engines
+                ],
             )
             if engine is None:
                 stop_reason = (
@@ -1045,6 +1052,17 @@ def drive_campaign(
             event["state"] = "failed"
             event["completed_at"] = _timestamp()
             detail = str(exc).lower()
+            if isinstance(engine, str) and engine:
+                failed_engines.add(engine)
+            if phase in {
+                "review",
+                "finding-audit",
+                "novelty",
+                "trace-mining",
+            }:
+                # Leave the underlying work queued for another engine.
+                planned_tasks.discard(task["id"])
+                continue
             if "interrupted" in detail:
                 stop_reason = "interrupted"
             elif "capabilit" in detail or "attestation" in detail:

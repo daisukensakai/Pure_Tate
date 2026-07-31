@@ -1,0 +1,162 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "Use the relative linear system |omega_C(-D)| over the free balanced tetragonal locus to model the top-dimensional ordered failure locus as a relative P^2 with its discriminant removed."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Prove the complementary locus has Tate lowest-weight cohomology by constructing a precise Casnati-Ekedahl framing and controlling every base, fibre, local system, and splitting-type stratum."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Analyze an admissible-cover compactification and its boundary maps to determine whether the degree-14 lowest-weight cohomology of the balanced tetragonal Hurwitz locus is Tate."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Use a stratified localization or Borel-Moore formalism to assemble contributions from every component and stratum of the evaluation-failure locus."
+    }
+  ],
+  "engine": "codex",
+  "established_facts": [
+    {
+      "evidence": "Substitution into W_{-16}H^{BM}_{16}(M_{g,n}) = W_{2d-16}H^{2d-16}(M_{g,n})(d), with d=3g-3+n=21, gives 2d-16=26.",
+      "evidence_class": "mechanical",
+      "statement": "For M_{6,6} of dimension 21, Poincare duality identifies W_{-16}H^{BM}_{16}(M_{6,6};Q) with W_{26}H^{26}(M_{6,6};Q)(21)."
+    },
+    {
+      "evidence": "SRC-0004 Lemma 10.6 gives deg(W_f)=4g+12-4f, including the negative sign in gamma^*O(-f).",
+      "evidence_class": "source",
+      "statement": "Under W_f=(O_{P(E^vee)}(2) tensor gamma^*O(-f))|_C, one has deg(W_5)=16 and deg(W_4)=20 in genus 6."
+    },
+    {
+      "evidence": "SRC-0004's degree formula gives deg(omega_C tensor W_4^vee(Gamma))=-4; a negative-degree line bundle on a smooth projective connected curve has no nonzero global section.",
+      "evidence_class": "mechanical",
+      "statement": "For every effective degree-six divisor Gamma, H^0(C,omega_C tensor W_4^vee(Gamma))=0."
+    },
+    {
+      "evidence": "The obstruction line bundle has degree zero, and a degree-zero line bundle on a smooth projective connected curve has a nonzero section exactly when it is trivial.",
+      "evidence_class": "mechanical",
+      "statement": "For every effective degree-six divisor Gamma, H^0(C,omega_C tensor W_5^vee(Gamma)) is nonzero exactly when O_C(Gamma) is isomorphic to W_5 tensor omega_C^{-1}."
+    },
+    {
+      "evidence": "Relative duality gives O_{P(E^vee)}(1)|_C = omega_C tensor gamma^*O(2); squaring and tensoring by gamma^*O(-5), with gamma^*O(1)=O_C(D), yields the identities.",
+      "evidence_class": "mechanical",
+      "statement": "On a balanced tetragonal genus-six cover with fibre divisor D, W_5 is isomorphic to omega_C^{tensor 2}(-D), so W_5 tensor omega_C^{-1} is isomorphic to omega_C(-D)."
+    },
+    {
+      "evidence": "Combine O_C(Gamma)=W_5 tensor omega_C^{-1} with W_5 tensor omega_C^{-1}=omega_C(-D).",
+      "evidence_class": "mechanical",
+      "statement": "The degree-six failure condition on the balanced tetragonal locus is Gamma in |omega_C(-D)|, equivalently D+Gamma is canonical."
+    },
+    {
+      "evidence": "Reducedness and pairwise distinctness form the complement of the relative discriminant; the free permutation action on six ordered distinct points has quotient the unordered reduced divisor.",
+      "evidence_class": "mechanical",
+      "statement": "The reduced-support locus in a relative degree-six linear system is open, and ordering six distinct support points gives a finite etale S_6-cover."
+    }
+  ],
+  "id": "DIGEST-0007",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "Finite etale pushforward introduces nontrivial local systems. Monodromy, including braid-group monodromy, can produce non-Tate mixed Hodge structures even when the base has Tate cohomology.",
+      "statement": "A finite etale cover of an open subset of M_{0,n} has pure Tate cohomology because the base has pure Tate cohomology."
+    },
+    {
+      "mathematical_reason": "The field of definition of the deck-group representations does not determine their Hodge type; cohomology with the associated monodromic local systems can be non-Tate.",
+      "statement": "Passing to a finite etale S_6-cover changes rational cohomology only by additional Tate summands because all rational S_6-representations are defined over Q."
+    },
+    {
+      "mathematical_reason": "Unbalanced splitting types, non-reduced divisors, and jumping-linear-system strata remain in the closed locus and may contribute to Borel-Moore homology and boundary maps.",
+      "statement": "The closed evaluation-failure locus may be replaced by its balanced reduced-support top stratum in localization."
+    },
+    {
+      "mathematical_reason": "That purity-form Gysin map requires suitable smoothness or a regular pure-codimension embedding. For a singular, non-pure stratified locus one must use cohomology with supports or Borel-Moore homology and account separately for all strata.",
+      "statement": "A singular stratified closed locus of top codimension four yields the displayed ordinary-cohomology Gysin sequence H^{18}(Z)(-4) to H^{26}(M)."
+    },
+    {
+      "mathematical_reason": "Dimension alone does not eliminate their appropriately shifted cohomology or the connecting and residue maps in a stratification spectral sequence.",
+      "statement": "Positive-codimension strata cannot contribute to the weight-26 degree-26 term solely because they have smaller dimension."
+    },
+    {
+      "mathematical_reason": "The discriminant complement has additional cohomology and monodromy; the projective-bundle formula applies to the full projective bundle, not automatically to its open discriminant complement.",
+      "statement": "Removing the discriminant from a P^2-bundle leaves only the projective-bundle cohomology relevant to the lowest-weight calculation."
+    },
+    {
+      "mathematical_reason": "An open subset of an affine space or stack is generally only quasi-affine; affineness and the asserted cohomological-dimension bound require separate justification.",
+      "statement": "An open subset of an affine stack is automatically affine, so its cohomology vanishes above the dimension of the ambient affine stack."
+    },
+    {
+      "mathematical_reason": "Even weight permits non-diagonal Hodge types (p,q) with p+q even; eliminating them requires an actual calculation of monodromy, invariants, and boundary maps.",
+      "statement": "Even total weight forces every contributing positive-genus factor to have Hodge type (p,p)."
+    }
+  ],
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "problem_key": "0b009fa7713fa40e6ab7a37138cf33804349b4a415a5402d6c0ba9ff069f0a93",
+  "reusable_computations": [
+    {
+      "sha256": "618eab0c9358e0bb5a9387e77a46a2f081a24d745e13869f79713de32e2a5df6",
+      "statement": "For g=6 and n=6, d=3g-3+n=21 and 2d-16=26."
+    },
+    {
+      "sha256": "206494921a62c47555473286612852fce99ecb51c2b877f535a232e6b9cf0483",
+      "statement": "Using deg(W_f)=4g+12-4f at g=6 gives deg(W_5)=16 and deg(W_4)=20."
+    },
+    {
+      "sha256": "e0ccb83d8c3bc905da06df1be85bd2e0f683c00cdcc2c1dfd00cb6b96cff2d44",
+      "statement": "For a degree-six divisor Gamma, 4f+n-2g-14 equals -4 for f=4 and 0 for f=5."
+    },
+    {
+      "sha256": "dc9dcf854e8555eb33fe36e3a270cb5986fe4bd6b200aaf79d572778afd6ad34",
+      "statement": "For L=W_5 tensor omega_C^{-1}, deg(L)=6 and chi(L)=deg(L)-g+1=1."
+    },
+    {
+      "sha256": "5257b07ee3e02095ec4aac557b0ea36851f1a2c7bbba5bd7b7a6b3a0d996499e",
+      "statement": "Simple degree-four ramification in genus 6 has total degree 2g-2-4(-2)=18, and dim M_{0,18}=15."
+    },
+    {
+      "sha256": "8c90de182f401f0f0a1c6dd2f65228efca367200381bca914a35710c7edcc1d3",
+      "statement": "A relative P^2 over a 15-dimensional base has dimension 17, hence codimension 4 in a 21-dimensional ambient space."
+    }
+  ],
+  "reviewer_engine": "codex",
+  "sanitized": true,
+  "schema_version": 1,
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-GROK-FORCED_PROOF",
+  "unresolved_dependencies": [
+    {
+      "statement": "Determine all balanced and unbalanced components of the closed evaluation-failure locus, their dimensions, intersections, stabilizers, and maps to tetragonal moduli."
+    },
+    {
+      "statement": "Prove the required cohomological statement for every non-reduced-support and h^0-jumping stratum."
+    },
+    {
+      "statement": "Compute the monodromy local systems arising from the Hurwitz branch cover and determine their degree-14 lowest-weight Hodge structures."
+    },
+    {
+      "statement": "Provide a valid localization formalism for the singular stratified support and track all weight shifts and boundary maps into degree 26."
+    },
+    {
+      "statement": "Establish that the complementary open contributes only Q(-13), including the effects of finite covers, configuration-space discriminants, and unbalanced splitting types."
+    },
+    {
+      "statement": "Determine whether any non-Tate summand from the support strata survives in W_{26}H^{26}(M_{6,6};Q)."
+    }
+  ]
+}

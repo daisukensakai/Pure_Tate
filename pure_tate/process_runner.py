@@ -51,11 +51,13 @@ def run_captured_process(
     inactivity_timeout: Optional[int] = None,
     on_activity: Optional[Callable[[str, int, float], None]] = None,
     abort_stderr_pattern_counts: Optional[Dict[str, int]] = None,
+    activity_streams: Optional[List[str]] = None,
 ) -> subprocess.CompletedProcess:
     started = time.monotonic()
     last_activity = started
     stdout_parts: List[bytes] = []
     stderr_parts: List[bytes] = []
+    counted_streams = set(activity_streams or ("stdout", "stderr"))
     process = subprocess.Popen(
         command,
         cwd=str(cwd),
@@ -110,8 +112,16 @@ def run_captured_process(
                     selector.unregister(stream)
                     continue
                 streams[stream].append(chunk)
-                last_activity = time.monotonic()
-                if key.data == "stderr" and abort_stderr_pattern_counts:
+                stream_name = str(key.data)
+                if stream_name in counted_streams:
+                    last_activity = time.monotonic()
+                    if on_activity is not None:
+                        on_activity(
+                            stream_name,
+                            len(chunk),
+                            last_activity - started,
+                        )
+                if stream_name == "stderr" and abort_stderr_pattern_counts:
                     stderr_text = b"".join(stderr_parts).decode(
                         "utf-8", "replace"
                     )
@@ -122,16 +132,12 @@ def run_captured_process(
                         ):
                             raise ProcessWatchdogError(
                                 "repeated stderr pattern %r" % pattern,
-                                last_activity - started,
+                                time.monotonic() - started,
                                 b"".join(stdout_parts).decode(
                                     "utf-8", "replace"
                                 ),
                                 stderr_text,
                             )
-                if on_activity is not None:
-                    on_activity(
-                        str(key.data), len(chunk), last_activity - started
-                    )
         try:
             returncode = process.wait(timeout=3)
         except subprocess.TimeoutExpired as exc:

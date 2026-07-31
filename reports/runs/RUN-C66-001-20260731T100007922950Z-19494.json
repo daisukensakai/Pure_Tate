@@ -1,0 +1,63 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-07-31T10:03:23.347733+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ],
+    "research": [
+      "grok",
+      "claude"
+    ],
+    "review": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 8354,
+      "completed_at": "2026-07-31T10:01:42.462611+00:00",
+      "engine": "gemini",
+      "error": "agent watchdog: repeated stderr pattern 'status: 503' after 94.3s; stderr: Warning: Basic terminal detected (TERM=dumb). Visual rendering will be limited. For the best experience, use a terminal emulator with truecolor support.\nWarning: 256-color support not detected. Using a terminal with at least 256-color support is recommended for a better visual experience.\nRipgrep is not available. Falling back to GrepTool.\n[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics.\n[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset).\nAttempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again lat",
+      "last_activity_at": "2026-07-31T10:01:42.435377+00:00",
+      "last_activity_stream": "stderr",
+      "output": "research/paired-digests/DIGEST-0007.json",
+      "phase": "trace-mining",
+      "started_at": "2026-07-31T10:00:08.129056+00:00",
+      "state": "failed",
+      "step": 1,
+      "task_id": "TASK-C66-001-MINE-GROK-FORCED_PROOF"
+    },
+    {
+      "activity_bytes": 467131,
+      "artifact_sha256": "57b408662c17d7cd0a6938ae977bcfdbaa30a770b215efef0486a76aeda6efb2",
+      "completed_at": "2026-07-31T10:03:23.347191+00:00",
+      "engine": "codex",
+      "last_activity_at": "2026-07-31T10:03:23.105578+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0007.json",
+      "phase": "trace-mining",
+      "started_at": "2026-07-31T10:01:42.673333+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-C66-001-MINE-GROK-FORCED_PROOF",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-810731e06cc655e5.md",
+        "sha256": "810731e06cc655e57cd55c3de9fbd8e77a22fc3c1bb51f90c4085d26a22ef71d"
+      }
+    }
+  ],
+  "executed_steps": 2,
+  "requested_steps": 2,
+  "run_id": "RUN-C66-001-20260731T100007922950Z-19494",
+  "schema_version": 1,
+  "started_at": "2026-07-31T10:00:07.922950+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

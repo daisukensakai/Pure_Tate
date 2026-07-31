@@ -20,6 +20,13 @@
       "family": "claude",
       "model": "claude-opus-5",
       "max_output_tokens": 64000,
+      "max_task_seconds": 3600,
+      "inactivity_timeout_seconds": 120,
+      "activity_streams": ["stdout"],
+      "abort_stderr_pattern_counts": {
+        "exceeded the 32000 output token maximum": 1,
+        "exceeded the output token maximum": 1
+      },
       "declared_capabilities": {
         "research": ["filesystem_read", "web_search", "web_fetch"],
         "finding-audit": ["filesystem_read", "web_search", "web_fetch"],

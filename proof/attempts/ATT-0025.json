@@ -1,0 +1,193 @@
+{
+  "argument_markdown": "# Resolution of C66-001: the exact group vanishes, hence is a direct sum of Q(8)\n\n## 0. Exact theorem and outcome\n\n**Exact theorem.** *The exact group `W_{-16}H^{BM}_{16}(M_{6,6};Q)`, equivalently `W_{26}H^{26}(M_{6,6};Q)(21)`, is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.*\n\n**Outcome: the theorem is true.** We prove the sharp form\n\n> `W_{-16}H^{BM}_{16}(M_{6,6};Q) = 0`,\n\nand `0` is the direct sum of the empty family of copies of `Q(8)`. In particular the exact group has **no** nonzero direct summand whatsoever, so in particular no surviving non-Tate summand; the disproof clause is therefore unsatisfiable.\n\n**Reading of the phrase 'is a direct sum of Q(8)'.** A Q-mixed Hodge structure `V` *is a direct sum of Q(8)* means `V` is isomorphic to `\u2295_{i\u2208I} Q(8)` for some index set `I`. The case `I = \u2205` gives `V = 0`. This is the standard reading, and it is exactly the reading forced by the packet's own dichotomy: the packet states that the theorem is falsified precisely by exhibiting *a surviving non-Tate summand in this exact group*. The zero object has no nonzero summand, hence no non-Tate summand, hence lies on the Tate side of the packet's dichotomy. (Nothing in the packet asserts that the exact group is nonzero: `FND-0005` asserts nonemptiness of a geometric locus `Z \u2282 M_{6,6}`, which is a statement about a codimension-4 subvariety and carries no implication about the cohomology of `M_{6,6}` in degree 26; see \u00a76.3.)\n\nThroughout, all (co)homology has `Q`-coefficients; `Q(m)` is the Tate Hodge structure of weight `-2m`; `M_{g,n}` is the moduli stack of smooth `n`-pointed genus-`g` curves with **ordered** distinct markings, a smooth separated Deligne-Mumford stack over `C` of pure dimension `d = 3g-3+n`; `W_\\bullet` is Deligne's weight filtration.\n\n---\n\n## 1. Numerical setup\n\nFor `(g,n) = (6,6)`:\n\n- `d := dim_C M_{6,6} = 3g-3+n = 18-3+6 = 21`.\n- `2d-16 = 42-16 = 26`.\n- `vcd(M_{6,6}) = 4g-4+n = 24-4+6 = 26`.\n- Tate-twist bookkeeping: `Q(-13)(21) = Q(-13+21) = Q(8)`.\n\nThese are the packet's own target data (`dimension 21`, `ordinary_cohomology_degree 26`, `poincare_twist 21`, `ordinary_tate_type Q(-13)`, `open_bm_tate_type Q(8)`), re-derived here by direct substitution.\n\n**The decisive numerical coincidence.** The ordinary degree attached to the target, `2d-16 = 26`, is *equal* to `vcd(M_{6,6}) = 4g-4+n = 26`. The packet's `FND-0035` records exactly this and correctly observes that vanishing *strictly above* the virtual cohomological dimension therefore proves nothing here. The present proof does **not** use vanishing strictly above vcd. It uses vanishing **exactly at** vcd, which is a strictly deeper and logically independent statement (it fails, for instance, for `g = 1`: `vcd(M_{1,11}) = 11` and `H^{11}(M_{1,11};Q) \u2260 0`). See \u00a77 for the audit of this point against the packet's blocked routes.\n\n---\n\n## 2. Step 1: Poincar\u00e9 duality for `M_{6,6}` as an identification of mixed Hodge structures\n\nThis step re-derives, in the exact case at hand and without appeal to the adjudicated finding, the identification recorded as `FND-0001`.\n\n**Lemma 2.1 (global quotient presentation by a smooth quasi-projective variety).** Fix an integer `l \u2265 3`. Let `M_{6,6}[l]` denote the moduli space of smooth 6-pointed genus-6 curves equipped with a full symplectic level-`l` structure on `H_1(C;Z/l)`. Then `M_{6,6}[l]` is a smooth quasi-projective complex variety of dimension 21, the forgetful morphism `M_{6,6}[l] \u2192 M_{6,6}` is finite \u00e9tale and Galois with deck group `G := Sp(12, Z/l)`, and `M_{6,6} \u2245 [ M_{6,6}[l] / G ]`.\n\n*Proof.* By Serre's lemma, a nontrivial automorphism of a smooth projective curve of genus `g \u2265 1` acts nontrivially on `H_1(C;Z/l)` for `l \u2265 3`. Hence a 6-pointed genus-6 curve with level-`l` structure has no nontrivial automorphisms, so the level-`l` moduli stack is representable by a scheme; it is smooth because `M_{6,6}` is smooth and the level cover is \u00e9tale, and quasi-projective by standard GIT/Hilbert-scheme constructions of level moduli. The level-`l` structures on a fixed curve form a torsor under `Sp(12,Z/l)`, whence the finite \u00e9tale Galois property and the quotient presentation. \u220e\n\n**Lemma 2.2 (invariants).** For every `k`, `H^k(M_{6,6};Q) \u2245 H^k(M_{6,6}[l];Q)^{G}` and `H^{BM}_k(M_{6,6};Q) \u2245 H^{BM}_k(M_{6,6}[l];Q)^{G}`, both as mixed Hodge structures.\n\n*Proof.* For a finite group `G` acting on a variety `Y`, the (co)homology of the quotient stack `[Y/G]` with `Q`-coefficients is the `G`-invariant part of that of `Y`; this is the standard Leray/descent computation for the finite \u00e9tale Galois cover `Y \u2192 [Y/G]`, valid with `Q`-coefficients because `|G|` is invertible. The `G`-action is by algebraic automorphisms, hence acts by morphisms of mixed Hodge structures, and taking `G`-invariants is an exact functor on `Q`-mixed Hodge structures (it is a direct summand cut out by the idempotent `|G|^{-1} \u03a3_{g\u2208G} g`), so it commutes with `W_\\bullet` and preserves the mixed Hodge structure. \u220e\n\n**Lemma 2.3 (Poincar\u00e9 duality).** `H^{BM}_{16}(M_{6,6};Q) \u2245 H^{26}(M_{6,6};Q)(21)` as mixed Hodge structures, and consequently\n\n`W_{-16} H^{BM}_{16}(M_{6,6};Q) \u2245 ( W_{26} H^{26}(M_{6,6};Q) )(21)`.\n\n*Proof.* Let `Y := M_{6,6}[l]`, a smooth complex variety of pure dimension `d = 21`. Poincar\u00e9 duality for a smooth complex variety gives a natural isomorphism of mixed Hodge structures `H^{BM}_k(Y;Q) \u2245 H^{2d-k}(Y;Q)(d)` (Deligne; the duality between Borel-Moore homology and cohomology of a smooth oriented manifold, upgraded to mixed Hodge structures by the standard functoriality of Deligne's construction). It is natural, hence `G`-equivariant. Taking `G`-invariants and applying Lemma 2.2 on both sides gives `H^{BM}_{16}(M_{6,6};Q) \u2245 H^{26}(M_{6,6};Q)(21)`. Since the weight filtration is functorial and `V \u21a6 V(21)` shifts weights by `-42`, the weight-`(-16)` part on the left corresponds to the weight-`(-16+42) = 26` part on the right, giving the displayed consequence. \u220e\n\nLemma 2.3 is precisely the packet's exact-target identification `W_{-16}H^{BM}_{16}(M_{6,6}) = W_{26}H^{26}(M_{6,6})(21)`, now proved rather than assumed. It also verifies the twist dictionary: a summand `Q(-13)` of `W_{26}H^{26}` corresponds to `Q(-13)(21) = Q(8)` in the Borel-Moore normalisation.\n\n---\n\n## 3. Step 2: `M_{6,6}` is a rational classifying space for the pure mapping class group\n\n**Lemma 3.1.** For every `k` there is an isomorphism of `Q`-vector spaces `H^k(M_{6,6};Q) \u2245 H^k(Mod_{6,6};Q)`, where `Mod_{6,6}` is the pure mapping class group of a genus-6 orientable surface with 6 punctures (orientation-preserving mapping classes fixing each puncture).\n\n*Proof.* The Teichm\u00fcller space `T_{6,6}` is a contractible complex manifold of complex dimension 21, `Mod_{6,6}` acts on it properly discontinuously with finite stabilisers, and the analytification of the stack `M_{6,6}` is the quotient orbifold `[T_{6,6}/Mod_{6,6}]`. For a group `\u0393` acting properly discontinuously with finite stabilisers on a contractible space `X`, the natural map `H^*(\u0393;Q) \u2192 H^*(X/\u0393;Q)` is an isomorphism (the Borel construction `X \u00d7_\u0393 E\u0393 \u2192 X/\u0393` has `Q`-acyclic fibres `B\u0393_x` for finite `\u0393_x`, and `X \u00d7_\u0393 E\u0393 \u2243 B\u0393` since `X` is contractible). Finally the comparison `H^*(M_{6,6};Q) \u2245 H^*(M_{6,6}^{an};Q)` holds for the smooth Deligne-Mumford stack `M_{6,6}`. \u220e\n\n(Only the underlying `Q`-vector-space statement is used below; no Hodge-theoretic content is claimed for Lemma 3.1.)\n\n---\n\n## 4. Step 3: virtual cohomological dimension\n\n**Theorem 4.1 (Harer).** For `g \u2265 1` and `n \u2265 1`, `Mod_{g,n}` is a virtual duality group of dimension `4g-4+n`; in particular `vcd(Mod_{g,n}) = 4g-4+n` and `H^k(Mod_{g,n};Q) = 0` for `k > 4g-4+n`. (For `g \u2265 2`, `n = 0`, the value is `4g-5`.)\n\nThis is Harer's theorem on the virtual cohomological dimension of the mapping class group, obtained from the action of `Mod_{g,n}` on the (contractible) arc complex, whose quotient by the non-filling part yields a spine of dimension `4g-4+n`, together with the virtual duality statement whose dualising module is the Steinberg module `St_{g,n}` (the top reduced homology of the subcomplex of non-filling arc systems).\n\n**Corollary 4.2.** `vcd(Mod_{6,6}) = 4\u00b76-4+6 = 26`, so `H^k(M_{6,6};Q) = 0` for `k > 26`, and `26` is the top degree in which `H^*(M_{6,6};Q)` can be nonzero.\n\nBecause the exact target lives in degree `26 = vcd`, Corollary 4.2 alone is inert \u2014 this is precisely the content of `FND-0035`. Step 4 supplies the extra input.\n\n---\n\n## 5. Step 4: vanishing exactly in the virtual cohomological dimension\n\n**Theorem 5.1 (Church-Farb-Putman).** Let `g \u2265 2`. Then\n\n- `H^{4g-4+n}(Mod_{g,n};Q) = 0` for every `n \u2265 1`, and\n- `H^{4g-5}(Mod_{g};Q) = 0`.\n\nThat is, the rational cohomology of the mapping class group vanishes in its virtual cohomological dimension.\n\n*Source and status.* T. Church, B. Farb, A. Putman, *The rational cohomology of the mapping class group vanishes in its virtual cohomological dimension*, Int. Math. Res. Not. IMRN **2012**, no. 21, 5025-5030. (The unpunctured case `n = 0` was obtained independently by Morita-Sakasai-Suzuki.) This is a published theorem, cited here as an external input; it is declared explicitly in `new_inputs` as the genuinely new input relative to the packet's context revision 2, in which no top-vcd vanishing theorem was asserted (`FND-0035`: 'no arbitrary-puncture top-vcd vanishing theorem is asserted').\n\n*Structure of the input, for auditability.* By Harer's virtual duality (Theorem 4.1) with dualising module the Steinberg module `St_{g,n}`, one has `H^{vcd}(Mod_{g,n};Q) \u2245 H_0(Mod_{g,n}; St_{g,n} \u2297 Q) = (St_{g,n} \u2297 Q)_{Mod_{g,n}}`, the module of coinvariants. Theorem 5.1 is the statement that these rational coinvariants vanish; the proof proceeds by exhibiting a generating set of `St_{g,n}` consisting of classes each of which is negated by some element of the mapping class group, so that each generator dies in the rational coinvariants.\n\n*Sharpness / non-triviality of the hypothesis `g \u2265 2`.* The hypothesis is essential and marks the theorem as strictly stronger than any 'degree exceeds vcd' vanishing: for `g = 1` one has `vcd(Mod_{1,11}) = 4\u00b71-4+11 = 11` and `H^{11}(M_{1,11};Q) \u2260 0` (it carries the weight-11, non-Tate motive attached to the cusp form of weight 12). Thus the top-degree vanishing is a genuine theorem about genus at least two and not a formal consequence of the dimension bound.\n\n**Corollary 5.2.** `H^{26}(M_{6,6};Q) = 0`.\n\n*Proof.* Apply Theorem 5.1 with `g = 6 \u2265 2` and `n = 6 \u2265 1`: `4g-4+n = 26`, so `H^{26}(Mod_{6,6};Q) = 0`. By Lemma 3.1, `H^{26}(M_{6,6};Q) \u2245 H^{26}(Mod_{6,6};Q) = 0`. \u220e\n\n---\n\n## 6. Step 5: conclusion, and consistency with the packet\n\n### 6.1 The exact group\n\n**Theorem 6.1.** `W_{-16}H^{BM}_{16}(M_{6,6};Q) = 0`. Equivalently, `W_{26}H^{26}(M_{6,6};Q)(21) = 0`. In particular the exact group is the direct sum `\u2295_{i\u2208\u2205} Q(8)` of the empty family of copies of `Q(8)`, and it possesses no nonzero direct summand; a fortiori it possesses no surviving non-Tate summand.\n\n*Proof.* By Corollary 5.2, `H^{26}(M_{6,6};Q) = 0`. Every subquotient of the zero vector space is zero, so `W_{26}H^{26}(M_{6,6};Q) = 0` and hence `W_{26}H^{26}(M_{6,6};Q)(21) = 0`. By Lemma 2.3, `W_{-16}H^{BM}_{16}(M_{6,6};Q) \u2245 (W_{26}H^{26}(M_{6,6};Q))(21) = 0`. (Alternatively and even more directly: by Lemma 2.3 the whole group `H^{BM}_{16}(M_{6,6};Q) \u2245 H^{26}(M_{6,6};Q)(21)` vanishes, hence so does any weight-graded piece of it.)\n\nA direct sum decomposition `0 = \u2295_{i\u2208I} V_i` in the abelian category of `Q`-mixed Hodge structures forces `V_i = 0` for all `i`; therefore the exact group has no nonzero summand of any kind, Tate or non-Tate. Taking `I = \u2205` and `V_i = Q(8)` exhibits the exact group as a direct sum of copies of `Q(8)`, which is the assertion of the exact theorem. \u220e\n\nThis resolves the exact target `RED-0001` for `(g,n) = (6,6)` in the affirmative, i.e. as a **proof**, not a disproof: the disproof clause requires exhibiting a surviving non-Tate summand in this exact group, and Theorem 6.1 shows no such summand can exist.\n\n### 6.2 Consistency with `FND-0036` (and a corollary)\n\n`FND-0036` records that for the forgetful map `p : M_{6,6} \u2192 M_{6,5}` the term `H^{26}(M_{6,5};Q)` vanishes (since `26 > 25 = vcd(M_{6,5}) = 4\u00b76-4+5`) and that, fibre cohomology being concentrated in `q = 0,1`, no Leray differential enters or leaves total degree 26. Consequently `H^{26}(M_{6,6};Q) \u2245 H^{25}(M_{6,5}; R^1p_*Q)`. Our Corollary 5.2 is therefore *equivalent*, along this route, to `H^{25}(M_{6,5}; R^1p_*Q) = 0`, which is what Theorem 5.1 delivers after transport. There is no conflict: `FND-0036` is a reduction, and Theorem 5.1 is the input that closes it. (Note also that the constant-coefficient statement `H^{25}(M_{6,5};Q) = 0`, i.e. Theorem 5.1 at `(6,5)`, does *not* by itself close the reduction, since the surviving Leray term carries the rank-16 coefficient system `R^1p_*Q`; this is why the input is applied at `(6,6)` directly.)\n\n### 6.3 Consistency with `FND-0005` and the tetragonal/Casnati-Ekedahl bottleneck\n\nThe packet's canonical geometric bottleneck constructs an evaluation-failure locus `Z \u2286 M_{6,6}` from the balanced tetragonal splitting `F = O_{P^1}(4) \u2295 O_{P^1}(5)` and the `f_2 = 5` Casnati-Ekedahl summand `W_5 := (O_{P(E^\u2228)}(2) \u2297 \u03b3^*O_{P^1}(-5))|_C`, with the six-point failure condition `O_C(\u0393) \u2245 W_5 \u2297 \u03c9_C^{-1}`. The degree arithmetic of `SRC-0004` Lemma 10.6 is correct and we reproduce it: `deg(W_f|_C) = 4g+12-4f`, so for `g = 6`, `deg(W_5) = 4\u00b76+12-20 = 16` and `deg(W_5 \u2297 \u03c9_C^{-1}) = 16-(2\u00b76-2) = 6`; and `deg(\u03c9_C \u2297 W_f^\u2228(\u0393)) = 4f+n-2g-14` equals `-4` for `f = 4` and `0` for `f = 5` when `n = 6, g = 6`. Hence the `f = 4` obstruction vanishes identically and the `f = 5` obstruction is nonzero exactly when the degree-zero bundle `\u03c9_C \u2297 W_5^\u2228(\u0393)` is trivial, i.e. exactly when `O_C(\u0393) \u2245 W_5 \u2297 \u03c9_C^{-1}`. In particular `FND-0005` (nonemptiness of `Z`) is entirely compatible with our result.\n\nThe key point is that **nonemptiness of a positive-codimension locus `Z \u2282 M_{6,6}` implies nothing about `H^{26}(M_{6,6};Q)`**. All of the packet's subproblems `C66-GEO-Z`, `C66-GEO-H0`, `C66-GEO-COMP`, `C66-TATE-SUPPORT`, `C66-TATE-ASSEMBLY`, `C66-CEX-LOCAL`, `C66-CEX-SURVIVE` are strategies for *computing or bounding* a group that we have now shown to be zero. They are therefore unnecessary for the exact target, and their unresolved dependencies (comparison of determinantal/Fitting ideals with the Abel-Jacobi incidence scheme, the `h^0`-stratification of `|W_5 \u2297 \u03c9_C^{-1}|`, control of Hurwitz monodromy, Gysin/localisation bookkeeping, weight-zero finite-monodromy local systems) are not dependencies of the present proof. In particular, the counterexample lanes `C66-CEX-LOCAL` and `C66-CEX-SURVIVE` are closed: even if a non-Tate local system exists on some stratum of `Z` (a possibility the packet correctly refuses to exclude), it cannot survive into a zero group.\n\n---\n\n## 7. Audit: inputs used, inputs not used, blocked routes\n\n**Inputs used.**\n\n1. Serre's lemma and the existence of smooth quasi-projective level-`l` moduli with finite Galois group (Lemma 2.1) \u2014 standard.\n2. Poincar\u00e9 duality for smooth complex varieties as an isomorphism of mixed Hodge structures, plus exactness of finite-group invariants over `Q` (Lemmas 2.2, 2.3) \u2014 standard.\n3. Contractibility of Teichm\u00fcller space and the rational-classifying-space property (Lemma 3.1) \u2014 standard.\n4. Harer's virtual duality and `vcd(Mod_{g,n}) = 4g-4+n` for `n \u2265 1` (Theorem 4.1) \u2014 published.\n5. Church-Farb-Putman top-degree vanishing for `g \u2265 2` (Theorem 5.1) \u2014 published; declared as new input.\n\nEvery one of these is a proved statement; none is conjectural, none is conditional, and none is a candidate idea imported unproved from the working context. All statements taken from the working contexts that are used at all (the Poincar\u00e9-duality dictionary, the numerical values `d = 21`, `2d-16 = 26`, the Casnati-Ekedahl degree arithmetic quoted in \u00a76.3) are re-derived here from first principles or from the primary-source excerpt.\n\n**Blocked routes: compliance.**\n\n- `vcd-only-vanishing`. The blocked route is the inference 'degree exceeds vcd, therefore the group vanishes'. That inference is *unavailable* here and we do not use it: `26 = vcd(M_{6,6})` exactly, as `FND-0035` records. What we use instead is vanishing **at** vcd (Theorem 5.1), a strictly stronger and logically independent theorem \u2014 as shown by the `g = 1`, `n = 11` counterexample in \u00a75, where vanishing above vcd holds but vanishing at vcd fails. Insofar as this route is considered adjacent to the blocked one, the required *genuinely new input* is declared explicitly (Theorem 5.1, `NEWIN-01`), consistent with `FND-0035`'s statement that 'no arbitrary-puncture top-vcd vanishing theorem is asserted' in the packet.\n- `undecorated-cgp-top-weight-graph-complex`. Not used. We make no appeal to tropical moduli, `\u0394_{g,n}`, or graph complexes. (Consistency check only, not used in the proof: the top-weight piece `Gr^W_{42}H^{26}(M_{6,6};Q)` would be `\\tilde H_{25}(\u0394_{6,6};Q)`, which vanishes because `dim \u0394_{6,6} = 3g-4+n = 20 < 25`; this is compatible with, and weaker than, Corollary 5.2.)\n- `point-count-without-degree-parity-separation`. Not used. No point counts, no finite-field computations, and no experiments of any kind enter this proof (`experiment_ids` is empty).\n- `forgetful-map-renaming-local-system-unknown`. Not used. We do not close the argument by renaming `H^{26}(M_{6,6})` as `H^{25}(M_{6,5};R^1p_*Q)` and leaving the latter unknown; \u00a76.2 is a consistency remark only, and the actual vanishing is obtained directly at `(6,6)`.\n\n**Fallacious inferences flagged in the working contexts: none is used.** We do not claim `M_{0,b}` has only even cohomology; we do not propagate pure-Tateness along finite \u00e9tale covers; we do not deduce Tate type from rationality of `S_6`-representations or from finiteness over `M_{0,b}`; we do not assert an `r = 0` stratum for a degree-six bundle with `\u03c7 = 1`; we do not assume non-Tate variations have positive weight; we do not assume a non-Tate local system automatically survives a Gysin map; we do not infer from the vanishing of the `f = 4` obstruction that the `f = 5` condition is the unique global source of the target cohomology; we do not identify determinantal and Abel-Jacobi scheme structures from agreement on geometric points; we do not treat the relative linear system as `Proj(\u03c0_*L)` when `h^0` jumps; we do not treat the reduced-support open locus as closed; we do not apply a smooth codimension-4 Gysin sequence to a singular stratified locus; and we do not claim the balanced tetragonal Hurwitz space is rational or Tate. None of these enter, because the geometric route is not used at all.\n\n**Execution boundary.** No finite computation is used to prove a universal claim; indeed no computation beyond the elementary arithmetic of \u00a71 is used. Every proof dependency is listed above and in the structured fields.\n\n---\n\n## 8. Statement of the result in the packet's normalisations\n\n- Ordinary normalisation: `W_{26}H^{26}(M_{6,6};Q) = 0`, a direct sum of `0` copies of `Q(-13)`.\n- Borel-Moore normalisation: `W_{-16}H^{BM}_{16}(M_{6,6};Q) = 0`, a direct sum of `0` copies of `Q(8)`.\n- Compactly supported dual normalisation: `Gr^W_{16}H^{16}_c(M_{6,6};Q) = 0`, a direct sum of `0` copies of `Q(-8)`.\n\nIn every normalisation the exact group is Tate (vacuously, as the zero object), and no non-Tate summand survives. **The exact theorem of packet `C66-001-v3` is proved.**",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "claims": [
+    {
+      "id": "CLM-0025-01",
+      "justification": "Serre's lemma (an automorphism of a genus >= 1 curve acting trivially on H_1(C;Z/l), l >= 3, is trivial) makes the level-l moduli functor representable by a smooth quasi-projective scheme; level-l structures on a fixed curve form an Sp(12,Z/l)-torsor. Argument section 2, Lemma 2.1.",
+      "statement": "M_{6,6} admits a presentation as the quotient stack [M_{6,6}[l]/Sp(12,Z/l)] for l >= 3, with M_{6,6}[l] a smooth quasi-projective complex variety of dimension 21 and the covering map finite etale Galois.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0025-02",
+      "justification": "Poincare duality H^{BM}_k(Y;Q) = H^{2d-k}(Y;Q)(d) for the smooth 21-dimensional variety Y = M_{6,6}[l] is natural, hence equivariant for the finite Galois group G; taking G-invariants is exact on Q-mixed Hodge structures and computes the stack invariants. Argument section 2, Lemmas 2.2 and 2.3.",
+      "statement": "H^{BM}_{16}(M_{6,6};Q) is isomorphic, as a mixed Hodge structure, to H^{26}(M_{6,6};Q)(21); hence W_{-16}H^{BM}_{16}(M_{6,6};Q) = (W_{26}H^{26}(M_{6,6};Q))(21). This re-proves FND-0001 in the exact case (g,n)=(6,6), d=21, 2d-16=26.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0025-03",
+      "justification": "Teichmueller space T_{6,6} is contractible, Mod_{6,6} acts properly discontinuously with finite stabilizers, and rationally the Borel construction identifies group cohomology with orbifold cohomology of the quotient. Argument section 3, Lemma 3.1.",
+      "statement": "For every k, H^k(M_{6,6};Q) is isomorphic as a Q-vector space to H^k(Mod_{6,6};Q), where Mod_{6,6} is the pure mapping class group of a genus-6 surface with 6 punctures.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0025-04",
+      "justification": "Harer's virtual duality theorem gives vcd(Mod_{g,n}) = 4g-4+n for g >= 1, n >= 1; substitution gives 24-4+6 = 26, and d = 3g-3+n = 21 gives 2d-16 = 26. Argument sections 1 and 4. This is consistent with packet finding FND-0035.",
+      "statement": "vcd(Mod_{6,6}) = 4g-4+n = 26, and the ordinary degree attached to the exact target, 2d-16 = 26, equals it exactly; hence no vanishing-strictly-above-vcd argument can resolve the target.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0025-05",
+      "justification": "The Church-Farb-Putman theorem (IMRN 2012, no. 21, 5025-5030) states H^{4g-4+n}(Mod_{g,n};Q) = 0 for g >= 2 and n >= 1. With g = 6, n = 6 the degree is 26 and the group vanishes; transport across CLM-0025-03. Argument section 5, Corollary 5.2. The hypothesis g >= 2 is essential and the statement is strictly stronger than vanishing above vcd, as the case (g,n) = (1,11) shows.",
+      "statement": "H^{26}(M_{6,6};Q) = 0.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0025-06",
+      "justification": "CLM-0025-05 gives H^{26}(M_{6,6};Q) = 0; every subquotient of the zero vector space is zero, and CLM-0025-02 transports this to the Borel-Moore normalisation. Argument section 6, Theorem 6.1.",
+      "statement": "W_{-16}H^{BM}_{16}(M_{6,6};Q) = 0, equivalently W_{26}H^{26}(M_{6,6};Q)(21) = 0.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0025-07",
+      "justification": "By CLM-0025-06 the group is the zero mixed Hodge structure. In the abelian category of Q-mixed Hodge structures a direct sum decomposition of the zero object has all summands zero, so no non-Tate summand exists; and 0 = sum over the empty index set of copies of Q(8). Argument section 6, Theorem 6.1, together with the reading of the phrase fixed in section 0.",
+      "statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8) (namely the direct sum of the empty family), and it admits no nonzero direct summand, hence in particular no surviving non-Tate summand. The exact theorem of packet C66-001-v3 is therefore proved and cannot be disproved.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0025-08",
+      "justification": "The degree formulas are reproduced from SRC-0004 Lemma 10.6 and checked by direct substitution; a negative-degree line bundle on a smooth projective curve has no nonzero section, and a degree-zero one has a nonzero section iff it is trivial, giving the stated f=4 vanishing and f=5 criterion O_C(Gamma) = W_5 tensor omega_C^{-1}. Nonemptiness of a codimension-4 closed subvariety of M_{6,6} imposes no lower bound on cohomology in degree 26, which vanishes by CLM-0025-05. Argument section 6.3.",
+      "statement": "The packet's tetragonal Casnati-Ekedahl bottleneck is consistent with, and not needed for, the exact result: the degree arithmetic deg(W_f|_C) = 4g+12-4f, deg(W_5) = 16, deg(W_5 tensor omega_C^{-1}) = 6, deg(omega_C tensor W_f^vee(Gamma)) = 4f+n-2g-14 (= 0 for f=5, = -4 for f=4 at g=n=6) is correct, and the nonemptiness of the evaluation-failure locus Z recorded in FND-0005 carries no implication for H^{26}(M_{6,6};Q).",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  },
+  "context_revision": 2,
+  "engine": "claude",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    "Tetragonal Casnati-Ekedahl evaluation-failure locus Z with the f_2 = 5 summand and the condition O_C(Gamma) = W_5 tensor omega_C^{-1}: its degree arithmetic is verified correct in section 6.3, but the whole route is bypassed because the ambient cohomology group vanishes.",
+    "Gysin/localisation assembly of a codimension-4 locus Z into Gr^W_{26}H^{26}(M_{6,6};Q): not used; the packet's own objection that Z is not a closed pure-codimension-4 smooth embedding is therefore moot.",
+    "Deducing Tate type on a finite etale S_6-ordering cover from rationality of S_6-representations: not used.",
+    "Declaring the genus-6 balanced tetragonal Hurwitz space rational or Tate: not used.",
+    "Inferring purity of the complementary open U = M_{6,6} minus Z from Casnati-Ekedahl evaluation vanishing: not used.",
+    "The route through W_{24}H^{24}(M_{6,5};Q) and the puncture-filtration kernel of W_{26}H^{25}(M_{6,5};H) -> W_{26}H^{25}(M_{6,5};R^1p_*Q): not used; the (incorrect) duality twist (21) for M_{6,5} flagged in the working context is avoided since dim M_{6,5} = 20.",
+    "Forgetful-map renaming that leaves H^{25}(M_{6,5};R^1p_*Q) unknown: avoided; section 6.2 uses FND-0036 only as a consistency check while the vanishing is proved directly at (6,6).",
+    "Vanishing strictly above the virtual cohomological dimension: correctly unavailable here since 26 = vcd, and not used."
+  ],
+  "gap_markers": [],
+  "id": "ATT-0025",
+  "lane": "full-resolution",
+  "methods_used": [
+    "finite-level-cover-and-finite-group-invariants",
+    "poincare-duality-for-smooth-deligne-mumford-stacks",
+    "mixed-hodge-structure-weight-filtration-and-tate-twist-bookkeeping",
+    "teichmueller-space-rational-classifying-space-identification",
+    "harer-virtual-duality-and-virtual-cohomological-dimension",
+    "top-degree-rational-vanishing-for-mapping-class-groups",
+    "consistency-audit-against-packet-blocked-routes-and-flagged-fallacies"
+  ],
+  "new_inputs": [
+    {
+      "id": "NEWIN-01",
+      "source": "T. Church, B. Farb, A. Putman, The rational cohomology of the mapping class group vanishes in its virtual cohomological dimension, Int. Math. Res. Not. IMRN 2012, no. 21, 5025-5030; the case n = 0 independently by S. Morita, T. Sakasai, M. Suzuki.",
+      "statement": "For g >= 2 and n >= 1, H^{4g-4+n}(Mod_{g,n};Q) = 0 (rational cohomology of the pure mapping class group vanishes exactly in its virtual cohomological dimension); for g >= 2, n = 0, H^{4g-5}(Mod_g;Q) = 0.",
+      "status": "established-published-theorem",
+      "why_new": "The packet's context revision 2 records at FND-0035 that 'no arbitrary-puncture top-vcd vanishing theorem is asserted'. This input supplies exactly such a theorem, and it is logically strictly stronger than the blocked route 'vcd-only-vanishing' (vanishing in degrees strictly above vcd), as witnessed by (g,n) = (1,11), where vcd = 11 and H^{11}(M_{1,11};Q) is nonzero and non-Tate."
+    },
+    {
+      "id": "NEWIN-02",
+      "source": "J. Harer, The virtual cohomological dimension of the mapping class group of an orientable surface, Invent. Math. 84 (1986), 157-176.",
+      "statement": "Harer's virtual duality theorem: Mod_{g,n} is a virtual duality group of dimension 4g-4+n for g >= 1, n >= 1, with dualising module the Steinberg module obtained from the arc complex.",
+      "status": "established-published-theorem",
+      "why_new": "Supplies vcd(M_{6,6}) = 26 as a theorem rather than as bookkeeping, and supplies the duality framework in which NEWIN-01 is formulated."
+    }
+  ],
+  "novelty_claims": [
+    "The residual case (g,n) = (6,6) of RED-0001 sits at ordinary degree 26 = vcd(M_{6,6}) exactly, and is therefore killed outright by top-degree (at-vcd) rational vanishing for mapping class groups of genus at least two; the packet's context revision 2 had only recorded that vanishing strictly above vcd is unavailable.",
+    "Consequently the entire balanced-tetragonal Casnati-Ekedahl evaluation-failure programme (subproblems C66-GEO-Z, C66-GEO-H0, C66-GEO-COMP, C66-TATE-SUPPORT, C66-TATE-ASSEMBLY) and both counterexample lanes (C66-CEX-LOCAL, C66-CEX-SURVIVE) are unnecessary for the exact target: the group they were designed to analyse is zero.",
+    "The same input resolves, by identical reasoning, every residual pair on the RED-0001 list whose ordinary degree 2d-16 equals vcd and whose genus is at least two, i.e. (3,12), (5,8), (6,6), (7,4), (8,2); the pairs (8,0) and (8,1), where 2d-16 = vcd-1, are not touched by it."
+  ],
+  "observable_trace_id": "TRACE-0009",
+  "observable_trace_sha256": "b0f36d6d399aa369df978375d1cabf8241a80fc53a82f02dd6641a9f41302b3b",
+  "packet_id": "C66-001-v3",
+  "packet_path": "proof/packets/generated/C66-001-v3.md",
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "paired_attempt_policy_revision": 1,
+  "paired_problem_key": "0b009fa7713fa40e6ab7a37138cf33804349b4a415a5402d6c0ba9ff069f0a93",
+  "paired_theorem_sha256": "c5e3507db1b4cef8fddb7c6bc92044dd75181ad33ae1649739f76e893e013cd3",
+  "paired_turn_kind": "forced-proof",
+  "proof_dependencies": [
+    {
+      "discharge": "Standard (Deligne's mixed Hodge theory together with topological Poincare duality); used only through its naturality, which supplies equivariance for the finite Galois group of the level cover.",
+      "id": "DEP-01",
+      "kind": "established-published-theorem",
+      "statement": "Poincare duality H^{BM}_k(Y;Q) = H^{2d-k}(Y;Q)(d) as mixed Hodge structures for a smooth complex variety Y of pure dimension d."
+    },
+    {
+      "discharge": "Standard; used to present M_{6,6} as a finite quotient stack.",
+      "id": "DEP-02",
+      "kind": "established-published-theorem",
+      "statement": "Serre's lemma: for l >= 3 an automorphism of a smooth projective curve of genus >= 1 acting trivially on H_1(C;Z/l) is the identity; consequently the level-l moduli space is a smooth quasi-projective scheme."
+    },
+    {
+      "discharge": "Standard (Teichmueller theory); used to identify H^*(M_{6,6};Q) with H^*(Mod_{6,6};Q).",
+      "id": "DEP-03",
+      "kind": "established-published-theorem",
+      "statement": "Contractibility of Teichmueller space T_{g,n} and proper discontinuity of the Mod_{g,n}-action with finite stabilizers."
+    },
+    {
+      "discharge": "J. Harer, The virtual cohomological dimension of the mapping class group of an orientable surface, Invent. Math. 84 (1986), 157-176. Cited as a proved theorem.",
+      "id": "DEP-04",
+      "kind": "established-published-theorem",
+      "statement": "Harer: Mod_{g,n} is a virtual duality group of dimension 4g-4+n for g >= 1, n >= 1, with dualising module the Steinberg module; in particular vcd(Mod_{g,n}) = 4g-4+n."
+    },
+    {
+      "discharge": "T. Church, B. Farb, A. Putman, The rational cohomology of the mapping class group vanishes in its virtual cohomological dimension, Int. Math. Res. Not. IMRN 2012, no. 21, 5025-5030 (unpunctured case also by Morita-Sakasai-Suzuki). Cited as a proved theorem; declared as NEWIN-01.",
+      "id": "DEP-05",
+      "kind": "established-published-theorem",
+      "statement": "Church-Farb-Putman: for g >= 2, H^{4g-4+n}(Mod_{g,n};Q) = 0 for all n >= 1, and H^{4g-5}(Mod_g;Q) = 0."
+    },
+    {
+      "discharge": "Used only as cross-checks; FND-0001 is independently re-proved as CLM-0025-02, and FND-0035/FND-0036 are used only for consistency remarks, not as load-bearing steps.",
+      "id": "DEP-06",
+      "kind": "packet-adjudicated-finding",
+      "statement": "Packet finding FND-0001 (Poincare-duality dictionary) and FND-0035, FND-0036 (degree/vcd bookkeeping for the residual list and the forgetful map)."
+    }
+  ],
+  "result_type": "proof",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "RED-0001"
+  ],
+  "source_ids": [
+    "FND-0001",
+    "FND-0005",
+    "FND-0035",
+    "FND-0036",
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-FULL",
+  "summary": "Proof. The exact target sits in ordinary cohomological degree 26, which is exactly the virtual cohomological dimension 4g-4+n = 26 of M_{6,6}. The whole group H^{26}(M_{6,6};Q) vanishes: M_{6,6} is a rational classifying space for the pure mapping class group Mod_{6,6}, Harer's virtual duality gives vcd(Mod_{6,6}) = 26, and the Church-Farb-Putman top-degree vanishing theorem (g >= 2, n >= 1) gives H^{4g-4+n}(Mod_{g,n};Q) = 0. Poincare duality on the smooth 21-dimensional Deligne-Mumford stack M_{6,6} (realised via a level-l cover and finite-group invariants, so that the identification is one of mixed Hodge structures) transports this to H^{BM}_{16}(M_{6,6};Q) = H^{26}(M_{6,6};Q)(21) = 0. Hence W_{-16}H^{BM}_{16}(M_{6,6};Q) = 0, which is the direct sum of the empty family of copies of Q(8); in particular no summand at all, and a fortiori no non-Tate summand, survives in the exact group. The tetragonal Casnati-Ekedahl evaluation-failure apparatus of the packet is not needed and is shown to be consistent with (not contradicted by) this outcome. The proof does not use vanishing strictly above the virtual cohomological dimension; it uses vanishing exactly at the virtual cohomological dimension, which is declared as new input.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-001-FORCED-FULL",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group."
+}
