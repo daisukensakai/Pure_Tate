@@ -1,0 +1,307 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "The h^0-stratification of the relative degree-six system for L is equivalent to the h^0-stratification of the degree-4 line bundle M = omega_C^{tensor 2} tensor W_5^vee, i.e. a degree-4 Brill-Noether question rather than a degree-6 one, with h^0(L) = 3 (fibrewise |L| = P^2) precisely where h^0(M) = 2, and with h^0(L) = 3 generically."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "For balanced g=6, n=6 is the unique borderline puncture number at which the Casnati-Ekedahl failure condition is a single divisor-class (Abel-Jacobi) condition: for n <= 5 the f=5 obstruction has negative degree and the failure locus is empty, while for n >= 7 the obstruction has positive degree and the condition becomes a Brill-Noether condition, so the (6,6) identification does not transport to neighbouring n by the same argument."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The balanced splitting F = O_{P^1}(4) direct-sum O_{P^1}(5) is non-canonical (the Harder-Narasimhan filtration gives a canonical sub O(5) and quotient O(4), so in F^vee the 'O(-5) summand' is canonically only a quotient), yet on geometric fibres the isomorphism class of the relevant summand is O_{P^1}(-5) for every choice of splitting, so W_5, L, and dim H^0 of the obstruction are independent of the chosen splitting."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Descent of a cohomology or weight computation from the ordered model Conf_6 to the unordered reduced-support open is harmless with Q-coefficients because S_6-invariants and S_6-coinvariants agree rationally on the stack of pairwise-distinct sections."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Relative duality in the form O_{P(E^vee)}(1)|_C = omega_C tensor gamma^*O(2) yields the residual identification W_5 = omega_C^{tensor 2}(-D), so the failure condition takes the residual shape Gamma in |omega_C(-D)| with D+Gamma canonical."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The residual system has constant relative dimension 2 (a P^2-bundle) over the whole balanced tetragonal moduli, via h^0(omega_C(-D)) = 3 whenever h^0(O_C(D)) = 2; this fails where the pencil jumps."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "On fibres where the residual pencil is base-point free, the reduced-support divisors are dense in |L|, so the ordered reduced failure locus is nonempty on those fibres."
+    }
+  ],
+  "engine": "claude",
+  "established_facts": [
+    {
+      "candidate_id": null,
+      "evidence": "Packet C66-001-v3, 'Primary locator excerpts' / SRC-0004 Lemma 10.6: 'deg Wfi|C = deg(OPE(2)|C tensor gamma*O(-fi)|C) = 2(2g - 2 + 4 . 2) - 4fi = 4g + 12 - 4fi'; restated in packet bullet 'Degree calculation: deg(W_f|_C)=4g+12-4f'.",
+      "evidence_class": "source",
+      "statement": "For a degree-4 cover with Casnati-Ekedahl line bundles W_f = (O_{P(E^vee)}(2) tensor gamma^*O_{P^1}(-f))|_C, one has deg(W_f|_C) = 2(2g-2+4*2) - 4f = 4g+12-4f."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Packet C66-001-v3, SRC-0004 Lemma 10.6 excerpt: 'H 0(C, omegaC tensor W |vee C(Gamma)) = H 0(C, omegaC tensor Wf1|vee C(Gamma)) direct-sum H 0(C, omegaC tensor Wf2|vee C(Gamma))'.",
+      "evidence_class": "source",
+      "statement": "For W = W_{f_1} direct-sum W_{f_2}, the Casnati-Ekedahl obstruction space splits as H^0(C, omega_C tensor W^vee(Gamma)) = H^0(C, omega_C tensor W_{f_1}^vee(Gamma)) direct-sum H^0(C, omega_C tensor W_{f_2}^vee(Gamma))."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Packet C66-001-v3, SRC-0004 Lemma 10.6 excerpt: 'the required vanishing will occur if 0 > deg omegaC tensor Wfi|vee C(Gamma) = 2g - 2 - (4g + 12 - 4fi) + n = 4fi + n - 2g - 14'.",
+      "evidence_class": "source",
+      "statement": "The obstruction line bundle has degree deg(omega_C tensor W_f^vee(Gamma)) = 2g-2-(4g+12-4f)+n = 4f+n-2g-14 for an effective divisor Gamma of degree n."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Packet C66-001-v3, 'Canonical geometric bottleneck': 'CE line-bundle convention: W_5 := (O_{P(E^vee)}(2) tensor gamma^*O_{P1}(-5))|_C, the f_2=5 summand of (O(2) tensor gamma^*F^vee)|_C; it is not the O_{P1}(5) summand of F'.",
+      "evidence_class": "source",
+      "statement": "In the balanced tetragonal setting F = O_{P^1}(4) direct-sum O_{P^1}(5), the bundle W_5 := (O_{P(E^vee)}(2) tensor gamma^*O_{P^1}(-5))|_C is by convention the f_2=5 summand of (O(2) tensor gamma^*F^vee)|_C, and is not the O_{P^1}(5) summand of F."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Packet C66-001-v3, 'Canonical geometric bottleneck': 'Six-point failure locus: O_C(Gamma) isomorphic to W_5 tensor omega_C^{-1}'; and 'Derive the failure condition from the f_2=5 summand in SRC-0004 Lemma 10.6, including the sign in gamma^*O(-5)'.",
+      "evidence_class": "source",
+      "statement": "The six-point failure condition for the balanced tetragonal Casnati-Ekedahl geometry is O_C(Gamma) isomorphic to W_5 tensor omega_C^{-1}."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Direct substitution into deg(W_f|_C)=4g+12-4f at g=6, f=5 and f=4; deg(L)=deg(W_5)-deg(omega_C)=16-10=6. Same numerics are recorded verbatim in the packet bullet 'deg(W_5)=16 and deg(W_5 tensor omega_C^{-1})=6 for g=6'.",
+      "evidence_class": "mechanical",
+      "statement": "At g=6 the degree formula gives deg(W_5|_C) = 4*6+12-4*5 = 16 and deg(W_4|_C) = 4*6+12-4*4 = 20; with deg(omega_C) = 2g-2 = 10 the residual bundle L := W_5 tensor omega_C^{-1} has deg(L) = 16-10 = 6."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Direct substitution into 4f+n-2g-14 with g=6, n=6: f=5 gives 20+6-12-14=0; f=4 gives 16+6-12-14=-4. Cross-checks against deg(omega_C)-deg(W_f)+n = 10-16+6=0 and 10-20+6=-4.",
+      "evidence_class": "mechanical",
+      "statement": "At g=6, n=6 and for any effective degree-six divisor Gamma: deg(omega_C tensor W_5^vee(Gamma)) = 4*5+6-12-14 = 0 and deg(omega_C tensor W_4^vee(Gamma)) = 4*4+6-12-14 = -4."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "2*(2g-2+8) - 4f at g=6 equals 2*18-4f = 36-4f = 4g+12-4f; f=5 gives 16 and f=4 gives 20, matching the substituted values.",
+      "evidence_class": "mechanical",
+      "statement": "The degree formula is internally consistent with deg(O_{P(E^vee)}(1)|_C) = 2g-2+4*2 = 18 at g=6 together with gamma of degree 4, which supplies the -4f contribution from gamma^*O(-f)."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "deg(omega_C tensor W_4^vee(Gamma)) = -4 < 0 by the substitution above; a nonzero section of a line bundle N gives an effective divisor of degree deg(N) >= 0, contradiction. Combined with the SRC-0004 direct-sum splitting of the obstruction space.",
+      "evidence_class": "mechanical",
+      "statement": "On a smooth projective geometrically connected curve, a line bundle of negative degree has no nonzero global section; hence H^0(C, omega_C tensor W_4^vee(Gamma)) = 0 for every effective degree-six Gamma on every smooth genus-6 geometric fibre, and the whole Casnati-Ekedahl obstruction at (g,n)=(6,6) is carried by the f=5 summand."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "A nonzero section of a degree-0 line bundle N has effective vanishing divisor of degree 0, hence is nowhere vanishing, hence O_C -> N is an isomorphism; the rearrangement omega_C tensor W_5^vee tensor O(Gamma) = O_C <=> O_C(Gamma) = W_5 tensor omega_C^{-1} is line-bundle algebra. Serre duality is not required for this step.",
+      "evidence_class": "mechanical",
+      "statement": "On a smooth projective geometrically connected curve a degree-zero line bundle has a nonzero global section if and only if it is trivial; since deg(omega_C tensor W_5^vee(Gamma)) = 0 at (g,n)=(6,6), one gets H^0(C, omega_C tensor W_5^vee(Gamma)) != 0 iff omega_C tensor W_5^vee(Gamma) is isomorphic to O_C, equivalently iff O_C(Gamma) is isomorphic to L = W_5 tensor omega_C^{-1}."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "H^0(omega_C tensor W^vee(Gamma)) = H^0(omega_C tensor W_4^vee(Gamma)) direct-sum H^0(omega_C tensor W_5^vee(Gamma)) = 0 direct-sum H^0(omega_C tensor W_5^vee(Gamma)); nonvanishing of the second summand is equivalent to O_C(Gamma) = L. The splitting is used only fibrewise, where F = O(4) direct-sum O(5) does split.",
+      "evidence_class": "mechanical",
+      "statement": "Combining the f=4 vanishing, the f=5 degree-zero criterion, and the direct-sum splitting, the geometric evaluation-failure locus Z^{geo} (geometric points where H^0(C, omega_C tensor W^vee(Gamma)) != 0) coincides set-theoretically with the Abel-Jacobi incidence locus of geometric points satisfying O_C(Gamma) isomorphic to L."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Riemann-Roch h^0 - h^1 = deg - g + 1 with deg(L)=6, g=6; h^1 >= 0 forces h^0 >= 1.",
+      "evidence_class": "mechanical",
+      "statement": "On every smooth genus-6 geometric fibre, Riemann-Roch gives chi(L) = deg(L) - g + 1 = 6-6+1 = 1, hence h^0(L) = 1 + h^1(L) >= 1 and the residual linear system |L| is nonempty; equivalently the unordered residual incidence is fibrewise nonempty in Sym^6."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "omega_C tensor L^{-1} = omega_C tensor omega_C tensor W_5^vee; degree 2*10 - 16 = 4. Combined with chi(L)=1 this gives h^0(L)=1+h^1(L)=1+h^0(M). Uses no identification of W_5 with omega_C^{tensor 2}(-D).",
+      "evidence_class": "mechanical",
+      "statement": "By Serre duality h^1(L) = h^0(omega_C tensor L^{-1}) = h^0(omega_C^{tensor 2} tensor W_5^vee), and deg(omega_C^{tensor 2} tensor W_5^vee) = 2(2g-2) - (4g+12-4f) at g=6, f=5 equals 20-16 = 4; hence h^0(L) = 1 + h^0(M) with M := omega_C^{tensor 2} tensor W_5^vee a degree-4 line bundle."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Substituting g=6 into 4f+n-2g-14 gives 4f+n-26; f=4 yields n-10 and f=5 yields n-6. Negativity conditions n<10 and n<6 follow directly; equality to 0 at n=6, f=5 matches the substituted value above.",
+      "evidence_class": "mechanical",
+      "statement": "At g=6 the obstruction degree as a function of the number of marked points is 4f+n-12-14, i.e. n-10 for f=4 and n-6 for f=5; the f=4 summand therefore vanishes identically for all n <= 9, the f=5 summand has negative degree exactly for n <= 5, and the f=5 obstruction degree is exactly 0 at n=6."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Complement of a closed image is open; a nonempty proper open subset of an irreducible space is not closed. Consistent with the packet instruction 'Model ordered distinct reduced divisors as a finite etale S_6-cover of the reduced-support open in the relative linear system; do not call that open locus closed.'",
+      "evidence_class": "mechanical",
+      "statement": "The locus of reduced-support (six pairwise-distinct points) degree-six effective divisors in the relative effective-divisor space is open and is not closed: it is the complement of the image of the big diagonal under a finite (hence closed) map, while the non-reduced locus is nonempty (e.g. 6p) inside a fibrewise irreducible Sym^6."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Free finite-group quotients are etale torsors (no ramification, since stabilizers are trivial); residual automorphisms permuting labelled points give nontrivial stabilizers on coarse moduli, breaking freeness there. Matches the packet's S_6-cover model, stated on the stack of pairwise-distinct sections.",
+      "evidence_class": "mechanical",
+      "statement": "S_6 acts freely on ordered pairwise-distinct configurations, and a free action of a finite group yields a finite etale torsor in any characteristic; hence Conf_6 -> (reduced-support open) is a finite etale S_6-torsor on the stack of pairwise-distinct sections, with no obstruction from primes dividing 720. Freeness can fail on coarse moduli at curves whose automorphisms permute the marked points."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Packet C66-001-v3, 'Adjudicated findings', FND-0001 [mechanically_verified; cases: all].",
+      "evidence_class": "source",
+      "statement": "For d = 3g-3+n, the open input W_{-16}H^{BM}_{16}(M_{g,n}) is identified by Poincare duality with W_{2d-16}H^{2d-16}(M_{g,n})(d)."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "3g-3+n = 18-3+6 = 21; 2*21-16 = 26. These agree with the target fields dimension=21, poincare_twist=21, ordinary_cohomology_degree=26, open_bm_degree=16.",
+      "evidence_class": "mechanical",
+      "statement": "At (g,n)=(6,6) the Poincare-duality dictionary specializes correctly to the stated target data: d = 3*6-3+6 = 21 and 2d-16 = 26, matching dimension 21, Poincare twist 21, and ordinary cohomological degree 26."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Packet C66-001-v3, 'Adjudicated findings', FND-0035 [corroborated; cases: RED-0001 residual list, coefficients: Q].",
+      "evidence_class": "source",
+      "statement": "For the residual list, the required ordinary degree 2d-16 equals vcd for (3,12),(5,8),(6,6),(7,4),(8,2) and equals vcd-1 for (8,0),(8,1); it never exceeds vcd, so vanishing above vcd settles none of the seven cases, and no arbitrary-puncture top-vcd vanishing theorem is asserted."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Packet C66-001-v3, 'Adjudicated findings', FND-0036 [mechanically_verified; degree: 26, map: M_6,6 to M_6,5].",
+      "evidence_class": "source",
+      "statement": "For the forgetful map M_{6,6} -> M_{6,5}, the q=0 term H^26(M_{6,5};Q) vanishes because 26 exceeds vcd(M_{6,5}) = 25; with fibre cohomology concentrated in q=0,1, no Leray differential enters or leaves total degree 26."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Packet C66-001-v3, FND-0035 ('required ordinary degree 2d-16 equals vcd for ... (6,6)') combined with FND-0036 ('26 exceeds vcd(M_{6,5})=25').",
+      "evidence_class": "source",
+      "statement": "The two packet findings are numerically compatible: they force vcd(M_{6,6}) = 26 and vcd(M_{6,5}) = 25, i.e. one unit of virtual cohomological dimension per added puncture at g=6, so the ordinary degree 26 sits exactly at vcd for (6,6) and strictly above vcd for (6,5)."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Packet C66-001-v3, SRC-0004 excerpt: 'set Wfi = OPE(2) tensor gamma*O(fi)' versus 'deg Wfi|C = deg(OPE(2)|C tensor gamma*O(-fi)|C) = ... = 4g + 12 - 4fi'; the packet convention bullet fixes gamma^*O_{P1}(-5) for W_5.",
+      "evidence_class": "source",
+      "statement": "The SRC-0004 excerpt as quoted is internally inconsistent in sign: it sets W_{f_i} = O_{P(E^vee)}(2) tensor gamma^*O(f_i) but computes the degree with gamma^*O(-f_i); only the gamma^*O(-f) convention reproduces the stated formula 4g+12-4f."
+    },
+    {
+      "candidate_id": null,
+      "evidence": "Packet C66-001-v3, 'Primary locator excerpts', SRC-0002: '*(Mg,n) = R*(Mg,n), for n <= c(g), by [5, Theorem 1.4] and Theorem 1.10. The following is a consequence of Lemma 4.3.'",
+      "evidence_class": "source",
+      "statement": "The available tautological-ring locator excerpt records only the fragmentary assertion that a ring equals R^*(M_{g,n}) for n <= c(g), citing an external Theorem 1.4 and Theorem 1.10; the excerpt is truncated and carries no degree, weight, or Tate-type content usable for the exact target."
+    }
+  ],
+  "id": "DIGEST-0010",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "gamma has degree 4, so gamma^*O_{P^1}(f) contributes +4f to the degree on C, giving deg = 2(2g-2+8) + 4f = 4g+12+4f, which contradicts the stated formula. Only the convention W_f = O_{P(E^vee)}(2) tensor gamma^*O_{P^1}(-f) is compatible with deg(W_f|_C) = 4g+12-4f; at g=6, f=5 the wrong sign gives 56 instead of 16 and destroys the degree-zero balance of the obstruction bundle.",
+      "statement": "Reading the definition W_{f} = O_{P(E^vee)}(2) tensor gamma^*O_{P^1}(f) literally while retaining the degree formula 4g+12-4f."
+    },
+    {
+      "mathematical_reason": "W_5 is the f_2=5 summand of (O(2) tensor gamma^*F^vee)|_C, built from the dual F^vee; identifying it with the O_{P^1}(5) summand of F reverses the twist, replacing gamma^*O(-5) by gamma^*O(5), so deg(W_5) becomes 4g+12+20 rather than 16 and deg(omega_C tensor W_5^vee(Gamma)) is no longer 0, invalidating the degree-zero triviality criterion that produces the failure condition.",
+      "statement": "Taking W_5 to be the O_{P^1}(5) summand of the relations bundle F."
+    },
+    {
+      "mathematical_reason": "Nonemptiness of a linear system in Sym^6 does not produce a reduced divisor: on a special fibre every member of |L| may be non-reduced. Passing to six pairwise-distinct ordered points requires base-point-freeness of L together with a Bertini-type genericity argument (hence a characteristic-0 hypothesis, or a separate argument in characteristic p). The established scope is |L| != empty only.",
+      "statement": "Concluding from chi(L) = 1 (hence |L| nonempty in Sym^6) that the ordered reduced failure locus Z^{geo} in Conf_6 is nonempty."
+    },
+    {
+      "mathematical_reason": "Agreement of two subschemes on geometric points determines only their reduced structures; nilpotents, multiplicities, and the obstruction-complex structure of the determinantal locus are not compared, so the two ideals may differ even when their zero sets coincide.",
+      "statement": "Upgrading the geometric-point coincidence of Z^{geo} with the Abel-Jacobi incidence locus to a scheme-theoretic equality of the determinantal/Fitting rank-drop scheme with the Abel-Jacobi incidence scheme."
+    },
+    {
+      "mathematical_reason": "It is the complement of the image of the big diagonal under a finite (hence closed) map, therefore open; and since the fibrewise Sym^6 of a curve is irreducible and the non-reduced locus is nonempty, a nonempty proper open subset cannot also be closed.",
+      "statement": "Describing the reduced-support degree-six locus in the relative effective-divisor space as closed."
+    },
+    {
+      "mathematical_reason": "Freeness of the S_6-action fails at curves possessing automorphisms that permute the marked points; nontrivial stabilizers destroy the torsor property, so the statement holds only at stack level.",
+      "statement": "Asserting the finite etale S_6-torsor structure on coarse moduli rather than on the stack of pairwise-distinct sections."
+    },
+    {
+      "mathematical_reason": "Invariants and coinvariants of a finite group agree only after inverting the group order; with |S_6| = 720 not invertible integrally, and with nontrivial stabilizers on the coarse space, the averaging idempotent does not exist and the descent argument breaks.",
+      "statement": "Transporting the ordered/unordered comparison along the S_6-cover to integral coefficients or to the coarse space by identifying invariants with coinvariants."
+    },
+    {
+      "mathematical_reason": "The required ordinary degree 2d-16 = 26 equals vcd(M_{6,6}) and never exceeds vcd across the residual list, so a vanishing theorem valid strictly above vcd is inert: it imposes no condition in the degree where the target group lives.",
+      "statement": "Using vanishing above the virtual cohomological dimension to settle the exact target at (6,6)."
+    },
+    {
+      "mathematical_reason": "F need not split globally over an arbitrary base, the Harder-Narasimhan sub/quotient structure is not a direct-sum decomposition, and the relative O_{P^1}(-f) is defined only up to a twist by Pic(B); consequently W_5, L, and the direct-sum decomposition of the obstruction space are not well defined at family level, whereas on geometric fibres a splitting exists and the Pic(B) ambiguity disappears on restriction.",
+      "statement": "Quantifying the obstruction splitting, W_5, or L over the whole family rather than over geometric fibres."
+    },
+    {
+      "mathematical_reason": "The criterion 'a degree-zero line bundle on a smooth projective geometrically connected curve has a nonzero section iff it is trivial' follows from effectivity of the vanishing divisor of a section, with no duality input; invoking Serre duality here imports an unnecessary hypothesis and misattributes the mechanism (Serre duality is needed only for the separate identity h^1(L) = h^0(omega_C tensor L^{-1})).",
+      "statement": "Attributing the degree-zero nonvanishing criterion to Serre duality."
+    }
+  ],
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "problem_key": "0b009fa7713fa40e6ab7a37138cf33804349b4a415a5402d6c0ba9ff069f0a93",
+  "reusable_computations": [
+    {
+      "sha256": "b66575beab63338ae9b30183b1bf17bf9315d5308b26cd662e8e1aa24b641495",
+      "statement": "Casnati-Ekedahl degree table at g=6 under the gamma^*O(-f) convention: deg(W_f|_C) = 4g+12-4f gives deg(W_5) = 16, deg(W_4) = 20; with deg(omega_C) = 10 this yields deg(L) = deg(W_5 tensor omega_C^{-1}) = 6."
+    },
+    {
+      "sha256": "b66575beab63338ae9b30183b1bf17bf9315d5308b26cd662e8e1aa24b641495",
+      "statement": "Obstruction-degree evaluation deg(omega_C tensor W_f^vee(Gamma)) = 4f+n-2g-14 at g=6, n=6: value 0 for f=5 and value -4 for f=4, for every effective degree-six Gamma."
+    },
+    {
+      "sha256": "b66575beab63338ae9b30183b1bf17bf9315d5308b26cd662e8e1aa24b641495",
+      "statement": "Riemann-Roch for the residual bundle on a smooth genus-6 fibre: chi(L) = deg(L) - g + 1 = 6-6+1 = 1, hence h^0(L) = 1 + h^1(L) >= 1 and |L| != empty."
+    },
+    {
+      "sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+      "statement": "Packet-level degree calculation for the balanced tetragonal bottleneck: deg(W_f|_C) = 4g+12-4f, hence deg(W_5) = 16 and deg(W_5 tensor omega_C^{-1}) = 6 for g=6, with failure condition O_C(Gamma) = W_5 tensor omega_C^{-1}."
+    },
+    {
+      "sha256": "ed50d74f9c39186cafd19d67c763077316a04decb7036e0dfef05bf70c2d7a94",
+      "statement": "Internal-consistency check of the degree formula: deg(O_{P(E^vee)}(1)|_C) = 2g-2+4*2 = 18 at g=6 and gamma of degree 4, so 2*18-4f = 36-4f = 4g+12-4f, reproducing 16 at f=5 and 20 at f=4."
+    },
+    {
+      "sha256": "ed50d74f9c39186cafd19d67c763077316a04decb7036e0dfef05bf70c2d7a94",
+      "statement": "Serre-duality reduction of the residual h^0: h^1(L) = h^0(omega_C tensor L^{-1}) = h^0(omega_C^{tensor 2} tensor W_5^vee) with deg(omega_C^{tensor 2} tensor W_5^vee) = 2(2g-2) - (4g+12-4f) = 20-16 = 4 at g=6, f=5, hence h^0(L) = 1 + h^0(M) for the degree-4 bundle M."
+    },
+    {
+      "sha256": "ed50d74f9c39186cafd19d67c763077316a04decb7036e0dfef05bf70c2d7a94",
+      "statement": "Puncture-dependence of the obstruction degree at g=6: 4f+n-26 equals n-10 for f=4 and n-6 for f=5, so the f=4 summand vanishes for all n <= 9, the f=5 summand vanishes for n <= 5, and n=6 is the unique value giving obstruction degree exactly 0."
+    }
+  ],
+  "reviewer_engine": "claude",
+  "sanitized": true,
+  "schema_version": 1,
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-GROK-STANDARD_FALLBACK",
+  "unresolved_dependencies": [
+    {
+      "statement": "Scheme-theoretic comparison of the Casnati-Ekedahl determinantal/Fitting rank-drop scheme with the Abel-Jacobi incidence scheme, including nilpotents, multiplicities, and the obstruction complex; only reduced/set-theoretic coincidence on geometric points is available."
+    },
+    {
+      "statement": "Nonemptiness (and denseness) of the ordered reduced failure locus in Conf_6, requiring base-point-freeness of L plus a Bertini argument in characteristic 0, or a substitute argument in characteristic p."
+    },
+    {
+      "statement": "Family-level well-definedness of W_5, L, and the direct-sum splitting of the Casnati-Ekedahl obstruction over a base where F does not split globally and where the relative O_{P^1}(-f) is determined only up to a twist by Pic(B)."
+    },
+    {
+      "statement": "The relative-duality identification W_5 = omega_C^{tensor 2}(-D) via O_{P(E^vee)}(1)|_C = omega_C tensor gamma^*O(2), together with the residual description Gamma in |omega_C(-D)| with D+Gamma canonical."
+    },
+    {
+      "statement": "Stratification of the relative degree-six linear system by h^0(L), equivalently by h^0 of the degree-4 bundle omega_C^{tensor 2} tensor W_5^vee, and the resulting component, dimension, and stabilizer analysis."
+    },
+    {
+      "statement": "Constancy of the relative dimension 2 (P^2-bundle structure) over all of balanced tetragonal moduli, including the behaviour where the residual pencil jumps."
+    },
+    {
+      "statement": "Treatment of unbalanced Casnati-Ekedahl splittings of F and of the hyperelliptic and trigonal special loci, which lie outside the balanced hypothesis F = O_{P^1}(4) direct-sum O_{P^1}(5)."
+    },
+    {
+      "statement": "Maps from the identified failure locus to tetragonal moduli, and a closed stratified embedding of that locus into M_{6,6} (the locus as constructed lives in the relative configuration stack over a balanced tetragonal base, not in M_{6,6})."
+    },
+    {
+      "statement": "Any purity, Gysin, or Tate-type statement for a codimension-13 contribution supported on the failure locus, and its assembly into W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21)."
+    },
+    {
+      "statement": "An integral-coefficient or coarse-space version of the ordered/unordered comparison along the S_6-cover, where invariants and coinvariants need not agree and the torsor property can fail."
+    },
+    {
+      "statement": "Transport of the (6,6) divisor-class description to the other members of the residual list, where the obstruction degree is positive and degree-zero triviality is no longer the failure criterion."
+    },
+    {
+      "statement": "A proof route for the exact target that does not rely on vanishing above vcd, since the required ordinary degree equals vcd at (6,6) and never exceeds vcd across the residual list."
+    }
+  ]
+}

@@ -144,6 +144,43 @@ class PairedAttemptPolicyTests(unittest.TestCase):
                 "only_after_substantive_forced_failure",
             )
 
+    def test_dry_run_standard_ready_is_executable_fallback(self):
+        with mock.patch(
+            "pure_tate.paired.pair_state",
+            return_value={"state": "standard_ready"},
+        ):
+            preview = dry_run_preview(
+                self.campaign,
+                self.packet,
+                ["grok"],
+                4,
+            )
+        self.assertEqual(len(preview), 1)
+        self.assertEqual(preview[0]["phase"], "standard-fallback")
+        self.assertEqual(preview[0]["engine"], "grok")
+        self.assertEqual(preview[0]["condition"], "always")
+
+    def test_dry_run_trace_mining_names_independent_miner(self):
+        with mock.patch(
+            "pure_tate.paired.pair_state",
+            return_value={"state": "standard_trace_mining"},
+        ):
+            preview = dry_run_preview(
+                self.campaign,
+                self.packet,
+                ["claude"],
+                4,
+                review_engines=["grok", "claude"],
+                escalation_order=["grok", "gemini", "codex", "claude"],
+            )
+        self.assertEqual(len(preview), 1)
+        self.assertEqual(preview[0]["phase"], "trace-mining")
+        self.assertEqual(preview[0]["condition"], "always")
+        # Miner must differ from the source paired engine.
+        self.assertEqual(preview[0]["source_engine"], "claude")
+        self.assertEqual(preview[0]["engine"], "grok")
+        self.assertNotEqual(preview[0]["engine"], preview[0]["source_engine"])
+
     def test_digest_rendering_rejects_provenance(self):
         with self.assertRaisesRegex(ValueError, "leaks provenance"):
             _safe_math_rows(

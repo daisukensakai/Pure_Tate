@@ -490,14 +490,22 @@ def drive_campaign(
             )
             next_review_number += 1
             planned_reviewers.setdefault(attempt_id, set()).add(engine)
-        paired_preview = dry_run_preview(campaign, packet, ordered, steps)
-        # State snapshots are diagnostic, not executable paid steps. In
-        # particular, "under review" must not displace the review tasks that
-        # the live driver actually prioritizes.
+        paired_preview = dry_run_preview(
+            campaign,
+            packet,
+            ordered,
+            steps,
+            review_engines=allowed_reviewers,
+            escalation_order=routing["escalation_order"],
+        )
+        # Keep only executable paired steps. Diagnostic snapshots
+        # (current_state) and blocked_no_miner rows are not paid work; live
+        # prioritizes pending reviews before paired turns.
         preview.extend(
             event
             for event in paired_preview
-            if event["condition"] != "current_state"
+            if event.get("condition")
+            in {"always", "only_after_substantive_forced_failure"}
         )
         preview = [
             {"step": index + 1, **{k: v for k, v in event.items() if k != "step"}}
@@ -532,6 +540,11 @@ def drive_campaign(
     planned_reviewers: Dict[str, Set[str]] = {}
     planned_research_engines: Dict[Tuple[str, str], Set[str]] = {}
     failed_engines: Set[str] = set()
+    # Per (phase, task_id, engine): count of schema/validation failures. The
+    # first failure requeues the task for the same engine; a second bans that
+    # engine for the rest of the batch so another reviewer can take over.
+    schema_validation_failures: Dict[Tuple[str, str, str], int] = {}
+    schema_validation_retry_limit = 1
     used_by_subproblem = _existing_engines_for_subproblem(campaign_id)
     campaign_attempt_count = len(load_campaign_attempts(campaign_id))
     planned_math_count = 0
@@ -1019,8 +1032,10 @@ def drive_campaign(
                         trace_path.read_bytes()
                     ).hexdigest()
             # Schema/shape failures on reviews and research should not kill the
-            # whole batch: exclude this engine attempt and let another engine
-            # retry the same task on the next step.
+            # whole batch. Allow one same-engine retry for pure validation
+            # inconsistency (e.g. confirmed + unresolved checks); only ban the
+            # engine after a second failure so another reviewer can take over
+            # or a restricted pool can still finish its step budget.
             if phase in {
                 "review",
                 "finding-audit",
@@ -1028,7 +1043,31 @@ def drive_campaign(
                 "trace-mining",
             }:
                 if isinstance(engine, str) and engine:
-                    failed_engines.add(engine)
+                    failure_key = (phase, str(task["id"]), engine)
+                    schema_validation_failures[failure_key] = (
+                        schema_validation_failures.get(failure_key, 0) + 1
+                    )
+                    if (
+                        schema_validation_failures[failure_key]
+                        > schema_validation_retry_limit
+                    ):
+                        failed_engines.add(engine)
+                    if phase == "review":
+                        planned_reviewers.get(
+                            str(task["target_attempt_id"]), set()
+                        ).discard(engine)
+                    elif phase in {"finding-audit", "novelty"}:
+                        planned_research_engines.get(
+                            (
+                                phase,
+                                str(
+                                    task.get(
+                                        "finding_id", task.get("attempt_id")
+                                    )
+                                ),
+                            ),
+                            set(),
+                        ).discard(engine)
                 planned_tasks.discard(task["id"])
                 continue
             stop_reason = "artifact_validation_failure"

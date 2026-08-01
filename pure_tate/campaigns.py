@@ -57,7 +57,7 @@ def load_campaign(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
         not isinstance(policy, dict)
         or policy.get("revision") != 1
         or policy.get("engine_order")
-        != ["grok", "gemini", "codex", "claude"]
+        != ["grok", "codex", "claude"]
         or not str(policy.get("exact_theorem", "")).strip()
     ):
         raise ValueError("campaign has an invalid paired-attempt policy")

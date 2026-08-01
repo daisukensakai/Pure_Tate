@@ -137,6 +137,24 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertEqual(value["id"], "RAUD-0002")
         self.assertEqual(value["verdict"], "agree")
 
+    def test_campaign_review_prompt_forbids_confirmed_with_adverse_checks(self):
+        task = {
+            "id": "TASK-V-ATT-0001-P1",
+            "phase": "review",
+            "campaign_id": "C66-001",
+            "prompt": "prompts/ADVERSARY.md",
+            "inputs": [],
+            "selected_engine": "claude",
+        }
+        prompt = assemble_prompt(task, [], "REV-0001", "claude")
+        self.assertIn("confirmed verdict forbids", prompt.lower())
+        self.assertIn("adverse structured check", prompt.lower())
+        adversary = (Path(__file__).resolve().parents[1] / "prompts" / "ADVERSARY.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("confirmed` verdict forbids", adversary)
+        self.assertIn("non-load-bearing", adversary)
+
     def test_prompt_requires_selected_engine_id(self):
         task = research_tasks()[0]
         prompt = assemble_prompt(task, ["TASK.json"], "RAUD-0001", "grok")
@@ -290,15 +308,31 @@ class AgentAdapterTests(unittest.TestCase):
         )
 
     def test_review_verdict_must_match_structured_checks(self):
-        inconsistent = {
+        incomplete_without_adverse = {
             "verdict": "incomplete",
             "checked_claims": [{"verdict": "confirmed"}],
             "proof_dependency_checks": [{"verdict": "confirmed"}],
         }
         with self.assertRaisesRegex(ValueError, "failed or unresolved"):
-            _validate_review_verdict_consistency(inconsistent)
-        inconsistent["checked_claims"][0]["verdict"] = "failed"
-        _validate_review_verdict_consistency(inconsistent)
+            _validate_review_verdict_consistency(incomplete_without_adverse)
+        incomplete_without_adverse["checked_claims"][0]["verdict"] = "failed"
+        _validate_review_verdict_consistency(incomplete_without_adverse)
+
+        confirmed_with_unresolved = {
+            "verdict": "confirmed",
+            "checked_claims": [{"verdict": "confirmed"}],
+            "proof_dependency_checks": [
+                {"dependency_id": "SRC-0002", "verdict": "unresolved"}
+            ],
+        }
+        with self.assertRaisesRegex(
+            ValueError, "confirmed review contains a failed or unresolved"
+        ):
+            _validate_review_verdict_consistency(confirmed_with_unresolved)
+        confirmed_with_unresolved["proof_dependency_checks"][0][
+            "verdict"
+        ] = "confirmed"
+        _validate_review_verdict_consistency(confirmed_with_unresolved)
 
     def test_run_task_surfaces_envelope_api_error(self):
         task = research_tasks()[0]

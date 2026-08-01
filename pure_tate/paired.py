@@ -880,7 +880,28 @@ def dry_run_preview(
     packet: Dict[str, Any],
     engines: Sequence[str],
     steps: int,
+    *,
+    review_engines: Optional[Sequence[str]] = None,
+    escalation_order: Optional[Sequence[str]] = None,
 ) -> List[Dict[str, Any]]:
+    """Preview paired paid steps without executing engines.
+
+    ``standard_ready`` is emitted as an executable ``standard-fallback`` step.
+    Trace-mining steps name the independent miner (not the source engine).
+    Non-executable diagnostic states keep ``condition: current_state``.
+    """
+    from .routing import load_routing_config, select_reviewer
+
+    escalation = list(
+        escalation_order
+        if escalation_order is not None
+        else load_routing_config()["escalation_order"]
+    )
+    # Miners come from the review pool when provided; otherwise fall back to
+    # the prover pool so standalone previews still resolve a miner.
+    allowed_miners = list(
+        review_engines if review_engines is not None else engines
+    )
     events = []
     for engine in engines:
         state = pair_state(campaign, engine)["state"]
@@ -903,20 +924,49 @@ def dry_run_preview(
                     "packet_sha256": packet["packet_sha256"],
                 }
             )
-        elif state in {
-            "forced_trace_mining",
-            "standard_trace_mining",
-            "infrastructure_trace_mining",
-        }:
+        elif state == "standard_ready":
             events.append(
                 {
-                    "phase": "trace-mining",
-                    "task_id": "TASK-%s-TRACE-MINING" % campaign["id"],
+                    "phase": "standard-fallback",
+                    "task_id": "TASK-%s-STANDARD-FALLBACK" % campaign["id"],
                     "engine": engine,
                     "condition": "always",
                     "packet_sha256": packet["packet_sha256"],
                 }
             )
+        elif state in {
+            "forced_trace_mining",
+            "standard_trace_mining",
+            "infrastructure_trace_mining",
+        }:
+            miner = select_reviewer(
+                engine,
+                set(),
+                escalation,
+                allowed=allowed_miners,
+            )
+            if miner is None:
+                events.append(
+                    {
+                        "phase": "trace-mining",
+                        "task_id": "TASK-%s-TRACE-MINING" % campaign["id"],
+                        "engine": None,
+                        "source_engine": engine,
+                        "condition": "blocked_no_miner",
+                        "packet_sha256": packet["packet_sha256"],
+                    }
+                )
+            else:
+                events.append(
+                    {
+                        "phase": "trace-mining",
+                        "task_id": "TASK-%s-TRACE-MINING" % campaign["id"],
+                        "engine": miner,
+                        "source_engine": engine,
+                        "condition": "always",
+                        "packet_sha256": packet["packet_sha256"],
+                    }
+                )
         else:
             events.append(
                 {

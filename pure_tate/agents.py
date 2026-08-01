@@ -396,7 +396,12 @@ def assemble_prompt(
             "verdict judges the attempt's theorem_statement, not whether that "
             "lemma resolves the global campaign target. A proposed lemma may "
             "be confirmed without verifying the case. An incomplete/refuted "
-            "verdict must identify a failed or unresolved structured check."
+            "verdict must identify a failed or unresolved structured check. "
+            "A confirmed verdict forbids any failed or unresolved checked "
+            "claim or proof dependency—including non-load-bearing or unused "
+            "listed sources. Mark unused sources confirmed with a note, omit "
+            "them, or choose incomplete/refuted; the harness rejects confirmed "
+            "reviews that carry any adverse structured check."
         )
     if task.get("paired_turn_kind") == "standard-fallback":
         parts.append(

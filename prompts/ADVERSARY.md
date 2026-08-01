@@ -29,6 +29,12 @@ incomplete merely because it does not settle the global campaign theorem; confir
 a proposed lemma does not verify the case. Conversely, every `incomplete` or
 `refuted` verdict must record at least one failed or unresolved checked claim or
 proof dependency.
+A `confirmed` verdict forbids any failed or unresolved checked claim or proof
+dependency. Do not mark non-load-bearing or unused listed sources as `unresolved`
+under confirmation: mark them `confirmed` with a note that they are unused or
+non-load-bearing, omit them from structured checks, or choose `incomplete` /
+`refuted` instead. The harness rejects confirmed reviews that carry any adverse
+structured check.
 When adding evidence for an existing packet-visible finding, set
 `supports_finding_id` to that finding instead of creating a semantic duplicate.
 Novel candidates require explicit adjudication even if multiple reviewers use

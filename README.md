@@ -141,10 +141,12 @@ lanes. Revision 2 fixes the CE convention
 `W_5=(O_{P(E^vee)}(2) tensor gamma^*O(-5))|_C`, preserves the revision-1
 attempt byte-for-byte as stale context, and enforces the subproblem DAG. Revision 3
 adds paired exact-theorem turns. For each theorem and packet revision, engines
-escalate Grok → Gemini → Codex → Claude. Each engine first receives one isolated,
-offline, completion-focused proof-or-disproof task. Only a substantive unsuccessful
-result opens one same-engine standard-method turn; infrastructure failures do not
-consume the first slot.
+escalate Grok → Codex → Claude on the forced exact-theorem ladder. Each of those
+engines first receives one isolated, offline, completion-focused
+proof-or-disproof task. Only a substantive unsuccessful result opens one
+same-engine standard-method turn; infrastructure failures do not consume the
+first slot. Gemini is not on the forced ladder; it still participates in ordinary
+subproblem mathematics when `prover_rotation` selects it.
 
 Observable subprocess output, tool records, computations, and review diagnostics are
 quarantined as traces. An independent engine converts each trace into a

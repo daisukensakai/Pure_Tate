@@ -1,0 +1,136 @@
+{
+  "attempt_id": "ATT-0028",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-Z-001",
+      "note": "Arithmetic re-derived independently from the SRC-0004 excerpt, not copied. deg W_f|_C = 2(2g-2+4\u00b72)-4f = 4g+12-4f; the internal consistency of that formula was checked (deg O_{P(E^\u2228)}(1)|_C = 2g-2+8 = 18 at g=6, \u03b3 of degree 4 giving the -4f). At g=6: deg W_5 = 24+12-20 = 16, deg W_4 = 24+12-16 = 20, deg \u03c9_C = 10, so deg L = 6. Obstruction degrees: deg(\u03c9_C\u2297W_f^\u2228(\u0393)) = 2g-2-(4g+12-4f)+n = 4f+n-2g-14, giving 20+6-12-14 = 0 for f=5 and 16+6-12-14 = -4 for f=4. Sign convention checked against the packet warning: W_5 uses \u03b3^*O(-5), i.e. the dual of the O_{P^1}(5) summand of F, and the larger f correctly yields the smaller W-degree and hence the larger obstruction degree. Note the SRC-0004 excerpt itself is internally inconsistent in sign (it sets W_{f_i} = O(2)\u2297\u03b3^*O(f_i) but computes with \u03b3^*O(-f_i)); the attempt follows the packet convention, which is the one compatible with the stated degree formula, and says so explicitly.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-002",
+      "note": "deg = -4 < 0 on a smooth projective geometrically connected curve forces H^0 = 0. Quantification is over geometric fibres and arbitrary effective degree-six \u0393, so no relative/family-level input is needed. Connectedness is implicit in 'smooth family of genus-6 curves' and is used only through H^0(O_C) = k; on a disconnected fibre the argument would still hold componentwise for negative total degree only if each component had negative degree, but that case is excluded by hypothesis, not assumed away silently.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-003",
+      "note": "Degree-zero line bundle on a smooth projective geometrically connected curve has a nonzero section iff it is trivial; then \u03c9_C\u2297W_5^\u2228(\u0393) \u2245 O_C \u27fa O_C(\u0393) \u2245 W_5\u2297\u03c9_C^{-1} = L is pure line-bundle algebra. The methods list labels this 'serre-duality-degree-zero-line-bundle-criterion', but Serre duality is not actually invoked and is not needed; the mislabel is cosmetic and does not enter the proof. The equivalence matches the packet's stated six-point failure condition O_C(\u0393) \u2245 W_5\u2297\u03c9_C^{-1} exactly, including the \u03b3^*O(-5) sign.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-004",
+      "note": "Given the SRC-0004 splitting H^0(\u03c9_C\u2297W^\u2228(\u0393)) = H^0(\u03c9_C\u2297W_{f_1}^\u2228(\u0393)) \u2295 H^0(\u03c9_C\u2297W_{f_2}^\u2228(\u0393)) for W = W_4\u2295W_5, claims A and B give nonvanishing \u27fa O_C(\u0393)\u2245L. The identification is asserted only set-theoretically on geometric points, which is exactly what the argument supports; no Fitting/determinantal or scheme-theoretic claim is smuggled in (that is quarantined as GAP-Z-FIT). Checked that the splitting is used only fibrewise, where a splitting of F \u2245 O(4)\u2295O(5) exists; the (non-canonical) choice of splitting does not affect the isomorphism class of the summand W_5 nor the dimension of the obstruction space, so the conclusion is choice-independent.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-005",
+      "note": "Non-reduced locus in the relative Sym^6 is the image of the big diagonal under a finite (hence closed) map, so its complement is open; it is not closed because fibrewise Sym^6 of a curve is irreducible and the non-reduced locus is nonempty (e.g. 6p). S_6 acts freely on ordered pairwise-distinct configurations, and a free finite group action gives a finite \u00e9tale torsor in any characteristic, so no p | 720 obstruction arises. The stack-versus-coarse attack is anticipated and correctly handled: the attempt states the torsor claim on the stack of pairwise-distinct sections and explicitly flags that freeness can fail on coarse moduli with residual automorphisms.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-006",
+      "note": "\u03c7(L) = deg L - g + 1 = 6 - 6 + 1 = 1 on every smooth geometric fibre (deg L = 6 holds fibrewise by the balanced hypothesis), so h^0(L) = 1 + h^1(L) \u2265 1 and |L| \u2260 \u2205. Independently checked to be sharp in the right direction: h^1(L) = h^0(\u03c9_C^2\u2297W_5^\u2228), a degree-4 bundle, so h^0(L) \u2265 1 is a genuine lower bound and is generically 3. Crucially, the attempt does not upgrade this to nonemptiness of the ordered reduced locus Z^{geo} \u2282 Conf_6 and explicitly disclaims it; that is the trap here and it is avoided.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "finding_candidates": [
+    {
+      "confidence": "high",
+      "corroboration_status": "candidate",
+      "key": "geo-z-h0-L-reduces-to-degree-4-bundle",
+      "statement": "On any smooth genus-6 geometric fibre of the balanced tetragonal CE family, h^0(L) = 1 + h^0(M) where M := \u03c9_C^2\u2297W_5^\u2228 has deg M = 2(2g-2) - (4g+12-4f)|_{g=6,f=5} = 20 - 16 = 4. This follows from \u03c7(L)=1 plus Serre duality h^1(L) = h^0(\u03c9_C\u2297L^{-1}) = h^0(\u03c9_C^2\u2297W_5^\u2228), and uses no part of the undischarged GAP-Z-W5D identification W_5 \u2245 \u03c9_C^2(-D). Consequently the C66-GEO-H0 stratification of the relative degree-six linear system by h^0(L) is exactly the stratification of a relative degree-4 line bundle by h^0, i.e. a g^1_4-type Brill-Noether question in degree 4 rather than degree 6, with h^0(L)=3 (fibrewise |L| \u2245 P^2) precisely where h^0(M)=2.",
+      "supports_finding_id": null,
+      "title": "h^0-stratification of L is equivalent to that of the degree-4 bundle \u03c9_C^2\u2297W_5^\u2228, without invoking the undischarged residual identification",
+      "why_reusable": "Reduces the downstream C66-GEO-H0 stratification and the C66-GEO-COMP relative-dimension question (the attempt's own gap G5, constancy of relative dimension 2) to a degree-4 Brill-Noether computation, and does so without depending on the unproved relative-duality identification."
+    },
+    {
+      "confidence": "high",
+      "corroboration_status": "candidate",
+      "key": "geo-z-nonempty-only-unordered-nonreduced",
+      "statement": "The Riemann-Roch computation \u03c7(L)=1 establishes only that the unordered residual incidence |L| \u2282 Sym^6 is fibrewise nonempty. It does not establish that Z^{geo} \u2282 Conf_6 is nonempty, because every member of |L| could a priori be non-reduced on a special fibre; the passage to ordered reduced points requires base-point-freeness of L together with Bertini (hence a characteristic-0 hypothesis, or a separate argument in characteristic p). Any downstream use of nonemptiness that needs a reduced ordered configuration \u2014 in particular any support or Gysin argument in C66-TATE-SUPPORT built on Z \u2282 M_{6,6} rather than on Sym^6 \u2014 must discharge this step separately.",
+      "supports_finding_id": "FND-0005",
+      "title": "Riemann-Roch nonemptiness is nonemptiness of |L| only; the ordered reduced locus needs base-point-freeness plus Bertini",
+      "why_reusable": "Records the precise scope at which nonemptiness is currently established, so that later nodes do not silently promote |L| \u2260 \u2205 to nonemptiness of the ordered reduced failure locus in the marked-points moduli."
+    },
+    {
+      "confidence": "high",
+      "corroboration_status": "candidate",
+      "key": "geo-z-n6-is-the-critical-puncture-number",
+      "statement": "Substituting g=6 into the SRC-0004 obstruction degree 4f+n-2g-14 gives n-10 for f=4 and n-6 for f=5. Hence for all n \u2264 9 the f=4 summand vanishes identically and the whole CE obstruction is carried by the f=5 summand; for n \u2264 5 the f=5 summand also has negative degree so the failure locus is empty; at n=6 the f=5 obstruction has degree exactly 0, which is the unique value making the failure condition a single Abel-Jacobi condition O_C(\u0393) \u2245 L rather than a positive-degree Brill-Noether condition (n \u2265 7). The identification proved for (6,6) is therefore structurally specific to the borderline degree and does not transport to neighbouring n by the same argument.",
+      "supports_finding_id": null,
+      "title": "For balanced g=6, n=6 is exactly the borderline puncture number at which the CE obstruction is a single divisor-class condition",
+      "why_reusable": "Explains why the (6,6) case admits the clean Abel-Jacobi description and warns that any attempt to reuse this identification at other punctures in the RED-0001 residual list must handle a positive-degree obstruction, where degree-zero triviality is no longer the criterion."
+    },
+    {
+      "confidence": "medium",
+      "corroboration_status": "candidate",
+      "key": "geo-z-stack-only-torsor-forces-invariants-discipline",
+      "statement": "The finite \u00e9tale S_6-torsor Conf_6 \u2192 (reduced-support open) holds on the stack of pairwise-distinct sections and fails on coarse moduli at curves whose automorphisms permute the marked points. Downstream nodes that descend a cohomology or weight computation from the ordered model to the unordered one must therefore work with stack (orbifold) cohomology; with Q-coefficients S_6-invariants and S_6-coinvariants agree, so the descent is harmless rationally, but the same descent is not available integrally and is not available on the coarse space. Any integral-coefficient or coarse-space version of a C66-TATE-* argument built on this model needs an independent justification.",
+      "supports_finding_id": null,
+      "title": "The S_6-torsor model is stack-level only, constraining how downstream weight computations may descend along the ordering",
+      "why_reusable": "Fixes the coefficient and stack hypotheses under which the ordered/unordered comparison in this lemma may be used by C66-TATE-SUPPORT and C66-TATE-ASSEMBLY, closing off a standard invariants-versus-coinvariants and stack-versus-coarse error."
+    }
+  ],
+  "id": "REV-0036",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Load-bearing (degree formula 4g+12-4f, obstruction degree 4f+n-2g-14, and the direct-sum splitting of the obstruction). Used within its stated scope for degree-4 covers; all numerics re-derived rather than quoted. The excerpt's internal sign slip is neutralized by the packet convention, which the attempt cites explicitly.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0002",
+      "note": "Listed in source_ids but never used anywhere in the argument; the tautological-ring excerpt is non-load-bearing for this lemma. No claim depends on it, so nothing is left unresolved.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0001",
+      "note": "Cited only as ambient Poincare-duality dictionary and expressly not used in the geometric identification. Non-load-bearing here; the lemma makes no BM/ordinary-degree or Tate-twist claim that could inherit an error from it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0005",
+      "note": "Not load-bearing: claim (E) re-derives the nonemptiness content independently by Riemann-Roch rather than importing it, and the attempt weakens the claim to |L| \u2260 \u2205 (unordered, possibly non-reduced) instead of asserting FND-0005's locus-nonemptiness in the ordered reduced model. See finding candidate FC-Z-NONEMPTY-SCOPE for the residual scope gap, which is evidence about FND-0005, not a defect of this lemma.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0035",
+      "note": "Referenced only in the failed-routes section to explain why vcd-only-vanishing is not used. Non-load-bearing; the blocked route is genuinely absent from the argument.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0036",
+      "note": "Referenced only to record that the forgetful-map route is not used and is not rewritten as a local-system purity statement. Non-load-bearing; verified that no forgetful map M_{6,6}\u2192M_{6,5}, Leray differential, or local-system argument appears anywhere in the construction of Z.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0028-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack attempted: well-definedness of W_5 and hence of L. The balanced splitting F \u2245 O_{P^1}(4)\u2295O_{P^1}(5) is NOT canonical \u2014 the Harder-Narasimhan filtration gives a canonical sub O(5) \u2282 F and quotient O(4), so in F^\u2228 the 'O(-5) summand' is canonically only a quotient \u2014 and over a base B^{bal} the relative O_{P^1}(-f) is defined only up to twist by Pic(B), while F need not split globally over B at all. If any of claims (A)-(E) were quantified over the family rather than over geometric fibres, W_5, L, and the direct-sum splitting of the CE obstruction would all be ill-defined or splitting-dependent, and (C) would collapse. This attack fails on the exact theorem statement: every claim is quantified over geometric fibres / geometric points, where a splitting exists, where the Pic(B) twist ambiguity disappears on restriction, and where the isomorphism class of the summand (\u2245 O_{P^1}(-5) whatever the splitting) \u2014 hence of W_5, L, and dim H^0 \u2014 is choice-independent. Second attack: (D)'s S_6-torsor claim is false on coarse moduli, since curves with automorphisms permuting the marked points break freeness; the attempt states the claim on the stack of pairwise-distinct sections and explicitly flags the coarse-space failure, so it survives. Third attack: the (E)/FND-0005 nonemptiness gap \u2014 \u03c7(L)=1 gives only |L| \u2260 \u2205 in Sym^6, not a reduced ordered point of Z^{geo} \u2282 Conf_6 (which needs base-point-freeness of L plus Bertini in characteristic 0); the attempt states exactly the weaker conclusion and defers the rest, so it does not overclaim. Fourth attack: the campaign-level hazards enumerated in ADVERSARY.md (BM-versus-ordinary degree, the twist by 21, Gysin/Kunneth shifts, degeneration differentials, invariants versus coinvariants, semisimplification, pure Tate upgraded to tautological generation, omitted stable pairs) \u2014 none can bite, because the lemma asserts no cohomological, weight, or Tate statement whatsoever and GAP-Z-TATE quarantines all of them; the campaign target group is never touched. Fifth attack: signs/conventions in the SRC-0004 excerpt, which is itself internally inconsistent (W_{f_i} defined with \u03b3^*O(f_i) but computed with \u03b3^*O(-f_i)); the attempt follows the packet convention, which is the one consistent with the stated degree formula and with the independently checked relation deg O_{P(E^\u2228)}(1)|_C = 2g-2+8. The two declared gap claims CLM-Z-007 and CLM-Z-008 are correctly excluded from the theorem statement's scope and are therefore not counted as adverse checks. Confirmed as a lemma; this confirms nothing about the case C66-001 or the exact target W_{-16}H^{BM}_{16}(M_{6,6};Q).",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let g=6 and let B^{bal} be any base carrying a smooth family of genus-6 curves with a balanced tetragonal Casnati\u2013Ekedahl structure (relations bundle F\u2245O_{P^1}(4)\u2295O_{P^1}(5)), universal curve \u03c0:C\u2192B^{bal}, and CE line bundles W_f:=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_{P^1}(-f))|_C for f\u2208{4,5} (packet convention: W_5 is the f_2=5 summand of (O(2)\u2297\u03b3^*F^\u2228)|_C, not the O_{P^1}(5) summand of F). Write L:=W_5\u2297\u03c9_{C/B}^{-1}. Let Conf_6(C/B^{bal}) be the relative stack of six ordered pairwise-distinct sections, with associated relative divisor \u0393, and let Z^{geo}\u2282Conf_6 be the geometric evaluation-failure locus consisting of geometric points at which the CE obstruction space H^0(C,\u03c9_C\u2297W^\u2228(\u0393)) is nonzero. Then: (A) for every geometric fibre and every effective degree-six divisor \u0393 one has deg(\u03c9_C\u2297W_4^\u2228(\u0393))=\u22124, hence H^0(C,\u03c9_C\u2297W_4^\u2228(\u0393))=0; (B) for every such \u0393 one has deg(\u03c9_C\u2297W_5^\u2228(\u0393))=0, and H^0(C,\u03c9_C\u2297W_5^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245L; (C) consequently Z^{geo} coincides set-theoretically with the Abel\u2013Jacobi incidence locus I^{geo} of geometric points satisfying O_C(\u0393)\u2245L; (D) the locus of reduced-support degree-six effective divisors in the relative effective-divisor space is open (not closed), and the forgetful map from Conf_6 to that reduced-support open is a finite \u00e9tale S_6-torsor on the stack of pairwise-distinct sections, so the ordered reduced failure locus is the preimage of the reduced-support open of the residual incidence for L; (E) on every smooth geometric fibre, \u03c7(L)=1, hence h^0(L)\u22651, so the residual linear system |L| is nonempty and the unordered residual incidence is fibrewise nonempty. This identifies the geometric evaluation-failure locus for the balanced tetragonal CE geometry of packet C66-001-v3; it does not assert scheme-theoretic equality of Fitting/determinantal ideals with the Abel\u2013Jacobi ideal, does not stratify by h^0(L), and does not claim Tate type of any contribution to W_{-16}H^{BM}_{16}(M_{6,6};Q).",
+  "verdict": "confirmed"
+}
