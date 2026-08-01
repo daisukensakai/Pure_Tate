@@ -1,0 +1,63 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-01T07:50:59.747255+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "gemini",
+      "codex",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 440284,
+      "artifact_sha256": "c266e3975f86587d4cc0986fec78f0e735ffc171796497cbf0f58386df36b8f4",
+      "completed_at": "2026-08-01T07:49:58.000914+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-08-01T07:49:57.481558+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0012.json",
+      "phase": "trace-mining",
+      "started_at": "2026-08-01T07:47:22.984332+00:00",
+      "state": "completed",
+      "step": 1,
+      "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-8b7a686e0e27663e.md",
+        "sha256": "8b7a686e0e27663e899213d3e753980646af5b74caaf958f4b7deb11bca0713a"
+      }
+    },
+    {
+      "activity_bytes": 482029,
+      "completed_at": "2026-08-01T07:50:59.746472+00:00",
+      "engine": "grok",
+      "error": "agent watchdog: interrupted after 61.4s; stderr: \u001b[2m2026-08-01T07:49:59.481000Z\u001b[0m \u001b[33m WARN\u001b[0m disallowedTools entry matched nothing \u001b[3magent\u001b[0m\u001b[2m=\u001b[0mgrok-build-plan \u001b[3mtool\u001b[0m\u001b[2m=\u001b[0mrun_terminal_command\n\u001b[2m2026-08-01T07:49:59.481014Z\u001b[0m \u001b[33m WARN\u001b[0m disallowedTools entry matched nothing \u001b[3magent\u001b[0m\u001b[2m=\u001b[0mgrok-build-plan \u001b[3mtool\u001b[0m\u001b[2m=\u001b[0mopen_page\n\u001b[2m2026-08-01T07:50:04.752323Z\u001b[0m \u001b[31mERROR\u001b[0m tool_error: tool_output_error \u001b[3msession_id\u001b[0m\u001b[2m=\u001b[0m019fbc4d-21dd-7b30-9044-e415e4dc1d6f \u001b[3mtool_name\u001b[0m\u001b[2m=\u001b[0m\"read_file\" \u001b[3meffective_tool_name\u001b[0m\u001b[2m=\u001b[0m\"read_file\" \u001b[3mmodel_id\u001b[0m\u001b[2m=\u001b[0m\"grok-4.5\" \u001b[3merror_kind\u001b[0m\u001b[2m=\u001b[0m\"tool_output_error\"\n\u001b[2m2026-08-01T07:50:08.321152Z\u001b[0m \u001b[31mERROR\u001b[0m tool_error: tool_output_error \u001b[3msession_id\u001b[0m\u001b[2m=\u001b[0m019fbc4d-21dd-7b30-9044-e415e4dc1d6f \u001b[3mtool_name\u001b",
+      "last_activity_at": "2026-08-01T07:50:52.367026+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0013.json",
+      "phase": "trace-mining",
+      "started_at": "2026-08-01T07:49:58.345446+00:00",
+      "state": "failed",
+      "step": 2,
+      "task_id": "TASK-C66-001-MINE-CLAUDE-STANDARD_FALLBACK"
+    }
+  ],
+  "executed_steps": 2,
+  "requested_steps": 2,
+  "run_id": "RUN-C66-001-20260801T074722658415Z-92638",
+  "schema_version": 1,
+  "started_at": "2026-08-01T07:47:22.658415+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

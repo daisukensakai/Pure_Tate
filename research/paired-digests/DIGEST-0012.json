@@ -1,0 +1,118 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "On every geometric split balanced fibre, residual CE evaluation of W=W_4\u2295W_5 fails at a degree-six divisor \u0393 if and only if O_C(\u0393)\u2245L:=W_5\u2297\u03c9_C^{-1}."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "With H^1(W)=0 (both summands have degree >2g-2), Serre duality identifies nonvanishing of H^0(\u03c9_C\u2297W^vee(\u0393)) with failure of surjectivity of the evaluation map H^0(W)\u2192W|\u0393."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "As closed substacks of Conf_6(C/B), the reduced CE evaluation-rank-failure locus equals the reduced Abel\u2013Jacobi incidence: (Z_ev)_red=I_red."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The quotient of I_red by S_6 is the reduced-support open of the relative Abel\u2013Jacobi fibre Sym_B^6(C)\u00d7_{Pic^6(C/B),[L]}B, and the ordering map is a finite \u00e9tale S_6-torsor onto that open."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Let B be a finite-type complex base carrying a smooth family of genus-6 tetragonal covers with an actual balanced CE splitting F=O(4)\u2295O(5). Put W_f=(O_{P(E^vee)}(2)\u2297\u03b3^*O(-f))|_C and L=W_5\u2297\u03c9_{C/B}^{-1}. On Conf_6(C/B), with Z_ev the CE evaluation-rank-failure locus and I the Abel\u2013Jacobi incidence O_C(p_1+\u22ef+p_6)\u2245L, one has (Z_ev)_red=I_red; I_red/S_6 is the reduced-support open of the relative AJ fibre with finite \u00e9tale S_6 ordering torsor; every geometric fibre of the full AJ fibre is nonempty (without asserting reduced-support nonemptiness)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The evaluation-failure locus Z is nonempty on the balanced six-point geometry."
+    }
+  ],
+  "engine": "grok",
+  "established_facts": [
+    {
+      "evidence": "C66-001-v3 primary locator SRC-0004 Lemma 10.6 (degree/Serre-duality calculation)",
+      "evidence_class": "source",
+      "statement": "For the balanced Casnati\u2013Ekedahl summands W=W_{f1}\u2295W_{f2} with W_{fi}=(O_{P(E^vee)}(2)\u2297\u03b3^*O(-fi))|_C, the fibrewise residual obstruction decomposes as H^0(C,\u03c9_C\u2297W^vee(\u0393))=\u2295_i H^0(C,\u03c9_C\u2297W_{fi}^vee(\u0393)), and deg(W_{fi}|_C)=4g+12-4fi."
+    },
+    {
+      "evidence": "C66-001-v3 Canonical geometric bottleneck: CE line-bundle convention and balanced tetragonal splitting",
+      "evidence_class": "source",
+      "statement": "Packet CE line-bundle convention: W_5:=(O_{P(E^vee)}(2)\u2297\u03b3^*O_{P1}(-5))|_C is the f_2=5 summand of (O(2)\u2297\u03b3^*F^vee)|_C, not the O_{P1}(5) summand of the balanced splitting F=O_{P1}(4)\u2295O_{P1}(5)."
+    },
+    {
+      "evidence": "Direct arithmetic from deg(W_f)=4g+12-4f, deg(\u03c9_C)=2g-2, and n=deg \u0393=6",
+      "evidence_class": "mechanical",
+      "statement": "At g=6 one has deg(W_4)=20 and deg(W_5)=16; for deg \u0393=6, deg(\u03c9_C\u2297W_4^vee(\u0393))=10-20+6=-4 and deg(\u03c9_C\u2297W_5^vee(\u0393))=10-16+6=0."
+    },
+    {
+      "evidence": "Riemann\u2013Roch arithmetic deg(L)=6 and \u03c7(L)=6-6+1=1 imply h^0(L)\u2265\u03c7(L)=1",
+      "evidence_class": "mechanical",
+      "statement": "For L=W_5\u2297\u03c9_C^{-1} one has deg(L)=16-10=6; on a smooth genus-6 curve \u03c7(L)=deg(L)-g+1=1, hence h^0(L)=1+h^1(L)\u22651 and the full Abel\u2013Jacobi fibre in Sym^6 is nonempty."
+    },
+    {
+      "evidence": "C66-001-v3 adjudicated finding FND-0001 [mechanically_verified; cases: all]",
+      "evidence_class": "mechanical",
+      "statement": "For d=3g-3+n, the open input is W_{-16}H^{BM}_{16}(M_{g,n}), identified by Poincar\u00e9 duality with W_{2d-16}H^{2d-16}(M_{g,n})(d)."
+    },
+    {
+      "evidence": "C66-001-v3 adjudicated finding FND-0036 [mechanically_verified; degree 26, map M_{6,6}\u2192M_{6,5}]",
+      "evidence_class": "mechanical",
+      "statement": "For the forgetful map M_{6,6}\u2192M_{6,5}, the q=0 term H^{26}(M_{6,5};Q) vanishes because 26 exceeds vcd(M_{6,5})=25; with fibre cohomology only in degrees q=0,1, no Leray differential enters or leaves total degree 26."
+    },
+    {
+      "evidence": "C66-001-v3 adjudicated finding FND-0035 [corroborated; RED-0001 residual list, coefficients Q]",
+      "evidence_class": "source",
+      "statement": "For the RED-0001 residual list over Q, ordinary degree 2d-16 equals vcd for (3,12),(5,8),(6,6),(7,4),(8,2) and equals vcd-1 for (8,0),(8,1); it never exceeds vcd."
+    }
+  ],
+  "id": "DIGEST-0012",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "\u03c7(L)=1 only forces h^0(L)\u22651 for the full Sym^6 Abel\u2013Jacobi fibre; the unique effective divisor of L may be non-reduced (e.g. 6p), in which case the reduced-support open and the Conf_6 incidence are empty.",
+      "statement": "Conclude that the reduced-support open of the Abel\u2013Jacobi fibre of L, or the ordered Conf_6 incidence Z_ev, is nonempty on every geometric genus-6 fibre from Riemann\u2013Roch \u03c7(L)=1 alone."
+    },
+    {
+      "mathematical_reason": "Identical geometric points over a finite-type base determine only equality of underlying reduced substacks; nilpotent structure and Fitting/determinantal ideals remain unconstrained.",
+      "statement": "Identify scheme-theoretic (nonreduced) equality of the CE determinantal/Fitting ideal of Z_ev with the Abel\u2013Jacobi incidence ideal of I from agreement of geometric points alone."
+    }
+  ],
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "problem_key": "0b009fa7713fa40e6ab7a37138cf33804349b4a415a5402d6c0ba9ff069f0a93",
+  "reusable_computations": [],
+  "reviewer_engine": "grok",
+  "sanitized": true,
+  "schema_version": 1,
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+  "unresolved_dependencies": [
+    {
+      "statement": "Comparison of the nonreduced CE determinantal/Fitting ideal defining Z_ev with the Abel\u2013Jacobi incidence ideal of I."
+    },
+    {
+      "statement": "Descent of W_5 and L from a chosen balanced CE splitting base to the unsplit balanced tetragonal moduli stack."
+    },
+    {
+      "statement": "Nonemptiness of the reduced-support open of the relative Abel\u2013Jacobi fibre of L (equivalently of the ordered Conf_6 incidence Z_ev) on every geometric fibre."
+    },
+    {
+      "statement": "Closure across unbalanced CE splittings and nonreduced markings; component, dimension, stabilizer, and map-to-M_{6,6} analysis of Z."
+    },
+    {
+      "statement": "Tate type of the exact codimension-13 contribution supported on Z, and assembly into the exact group W_{-16}H^{BM}_{16}(M_{6,6};Q)\u2245\u2295Q(8) (equivalently W_{26}H^{26}(M_{6,6};Q)(21))."
+    }
+  ]
+}
