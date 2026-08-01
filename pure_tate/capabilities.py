@@ -11,9 +11,26 @@ from typing import Any, Dict, Iterable, List, Optional
 from .store import ROOT, atomic_write_json
 
 
+# Live-web *research* phases that require durable capability attestation.
 WEB_PHASES = {"research", "micro-research", "finding-audit", "novelty"}
+# Agent adapter phases that may enable web tools when the model chooses to use them.
+# Experiment stays container-only and is excluded.
+AGENT_WEB_PHASES = WEB_PHASES | {
+    "mathematics",
+    "review",
+    "trace-mining",
+    "forced-proof",
+    "standard-fallback",
+}
 WEB_CAPABILITIES = {"web_search", "web_fetch"}
 ATTESTATION_DIR = ROOT / "research" / "capability-audits"
+
+
+def phase_allows_web(phase: Optional[str]) -> bool:
+    """Whether the headless adapter should expose web tools for this phase."""
+    if not phase:
+        return False
+    return phase in AGENT_WEB_PHASES
 
 
 def declared_capabilities(

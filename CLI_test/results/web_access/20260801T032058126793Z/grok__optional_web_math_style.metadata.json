@@ -1,0 +1,57 @@
+{
+  "argv": [
+    "grok",
+    "-p",
+    "<prompt-sha256:32e1bcfc87c0cf266abae72fb482f3c7378c9394f363f1a71800ea901723f888>",
+    "--output-format",
+    "streaming-json",
+    "--max-turns",
+    "12",
+    "--permission-mode",
+    "dontAsk",
+    "--always-approve",
+    "--tools",
+    "read_file,grep,list_dir,web_search,web_fetch",
+    "--disallowed-tools",
+    "run_terminal_command,write,open_page",
+    "-m",
+    "grok-4.5"
+  ],
+  "binaries_present": {
+    "claude": true,
+    "codex": true,
+    "gemini": true,
+    "grok": true
+  },
+  "classification": "pass",
+  "elapsed_seconds": 6.132,
+  "engine": "grok",
+  "executed_at": "2026-08-01T03:21:12.171570+00:00",
+  "name": "grok__optional_web_math_style",
+  "parsed_json": {
+    "answer": 10,
+    "ok": true,
+    "probe": "optional_web_math_style",
+    "web_used": false
+  },
+  "probe": "optional_web_math_style",
+  "prompt_sha256": "32e1bcfc87c0cf266abae72fb482f3c7378c9394f363f1a71800ea901723f888",
+  "returncode": 0,
+  "schema_version": 1,
+  "stderr_path": "CLI_test/results/web_access/20260801T032058126793Z/grok__optional_web_math_style.stderr.txt",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_path": "CLI_test/results/web_access/20260801T032058126793Z/grok__optional_web_math_style.stdout.txt",
+  "stdout_sha256": "fc855777f6fef799586bbd4830283688a1d1224f89eac382bb9aeb717025f18b",
+  "timed_out": false,
+  "tool_evidence": {
+    "any_web_signal": true,
+    "signals": {
+      "browser": false,
+      "open_page": false,
+      "search_query": false,
+      "tool_use_search": false,
+      "web_fetch": true,
+      "web_search": true
+    }
+  }
+}

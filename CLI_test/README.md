@@ -3,6 +3,12 @@
 This directory is an isolated compatibility lab for model CLIs. Nothing here is
 loaded by the Pure Tate harness.
 
+## Web access experiment
+
+`run_web_access_probes.py` checks whether Grok, Claude, Codex, and Gemini can
+use web search when tools are enabled (math-style optional use included). See
+`WEB_ACCESS_FINDINGS.md` and `results/web_access/`.
+
 ## Grok streaming experiment
 
 `run_grok_streaming_tests.py` runs two bounded, read-only probes:

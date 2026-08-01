@@ -1,0 +1,51 @@
+{
+  "argv": [
+    "gemini",
+    "-p",
+    "<prompt-sha256:5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf>",
+    "-m",
+    "gemini-3.5-flash",
+    "-o",
+    "stream-json",
+    "--approval-mode",
+    "plan",
+    "--skip-trust"
+  ],
+  "binaries_present": {
+    "claude": true,
+    "codex": true,
+    "gemini": true,
+    "grok": true
+  },
+  "classification": "pass",
+  "elapsed_seconds": 70.593,
+  "engine": "gemini",
+  "executed_at": "2026-08-01T03:23:14.059069+00:00",
+  "name": "gemini__web_search_smoke_plan",
+  "parsed_json": {
+    "answer": 2,
+    "ok": true,
+    "probe": "web_search_smoke",
+    "tool_used": true
+  },
+  "probe": "web_search_smoke_plan",
+  "prompt_sha256": "5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf",
+  "returncode": 0,
+  "schema_version": 1,
+  "stderr_path": "CLI_test/results/web_access/20260801T032058126793Z/gemini__web_search_smoke_plan.stderr.txt",
+  "stderr_sha256": "e0f990584d09245473e42d9f0812bb9155fd3b99becce991566c22b205f43260",
+  "stdout_path": "CLI_test/results/web_access/20260801T032058126793Z/gemini__web_search_smoke_plan.stdout.txt",
+  "stdout_sha256": "0a0b870e79ee9079bd60bac6ba2019868f97fe5ff5f23507f301f5c5e4d898c1",
+  "timed_out": false,
+  "tool_evidence": {
+    "any_web_signal": true,
+    "signals": {
+      "browser": false,
+      "open_page": false,
+      "search_query": true,
+      "tool_use_search": true,
+      "web_fetch": false,
+      "web_search": true
+    }
+  }
+}

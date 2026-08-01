@@ -1,0 +1,57 @@
+{
+  "argv": [
+    "grok",
+    "-p",
+    "<prompt-sha256:5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf>",
+    "--output-format",
+    "streaming-json",
+    "--max-turns",
+    "12",
+    "--permission-mode",
+    "dontAsk",
+    "--always-approve",
+    "--tools",
+    "read_file,grep,list_dir,web_search,web_fetch",
+    "--disallowed-tools",
+    "run_terminal_command,write,open_page",
+    "-m",
+    "grok-4.5"
+  ],
+  "binaries_present": {
+    "claude": true,
+    "codex": true,
+    "gemini": true,
+    "grok": true
+  },
+  "classification": "pass",
+  "elapsed_seconds": 7.906,
+  "engine": "grok",
+  "executed_at": "2026-08-01T03:21:06.035533+00:00",
+  "name": "grok__web_search_smoke",
+  "parsed_json": {
+    "answer": 2,
+    "ok": true,
+    "probe": "web_search_smoke",
+    "tool_used": true
+  },
+  "probe": "web_search_smoke",
+  "prompt_sha256": "5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf",
+  "returncode": 0,
+  "schema_version": 1,
+  "stderr_path": "CLI_test/results/web_access/20260801T032058126793Z/grok__web_search_smoke.stderr.txt",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_path": "CLI_test/results/web_access/20260801T032058126793Z/grok__web_search_smoke.stdout.txt",
+  "stdout_sha256": "2e8b60f629390fa2b0c46887025e08ccc65337bbfc81a122318ea7be264cbbec",
+  "timed_out": false,
+  "tool_evidence": {
+    "any_web_signal": true,
+    "signals": {
+      "browser": false,
+      "open_page": false,
+      "search_query": true,
+      "tool_use_search": false,
+      "web_fetch": true,
+      "web_search": true
+    }
+  }
+}

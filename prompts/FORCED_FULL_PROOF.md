@@ -3,11 +3,16 @@
 Prove or disprove the exact theorem stated in the supplied campaign packet.
 Return a complete, gap-free argument resolving the exact target.
 
-Do not return only a reduction, a partial result, an isolated lemma, a conditional
-route, a summary of effort, an explanation of difficulty, or a statement about
-whether the problem is open. Public-web solution search is not part of this task.
+Do not return a reduction, partial result, isolated missing lemma, "better
+effort" summary, or explanation of why the problem is difficult. Public search
+may be used only for ordinary mathematical background or named theorems, not to
+search a solution for this exact problem. Do not search the public web to
+determine whether it is open, and do not answer that it is open.
+
 Use the supplied primary-source background and any supplied mathematical working
-context. Candidate ideas in working context must be proved independently.
+context. Candidate ideas in working context must be proved independently. Set
+`exact_problem_web_search_used` to false to attest that you did not use the web
+to seek a solution of the exact theorem or to decide openness.
 
 The result must have `result_type` equal to `proof` or `disproof`, `status` equal
 to `claimed_complete`, no gap markers, and the exact theorem statement from the

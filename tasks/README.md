@@ -38,16 +38,18 @@ selection, or `pure-tate drive` for bounded orchestration.
   `grok → gemini → codex → claude`
 
 `drive` defaults to the full engine set. Optional `--prover-engines` /
-`--review-engines` act as allowlists while preserving ladder order. Gemini is
-available for mathematics and review (`web_access: false`); research still requires
-a web-enabled engine.
+`--review-engines` act as allowlists while preserving ladder order. Agent phases
+(mathematics, review, forced-proof, trace-mining) expose web tools when the engine
+supports them so models may look up supporting results; research still requires a
+web-enabled, capability-attested engine. Gemini remains unattested for research.
 
 ## Grok headless policy
 
-Grok uses native snake-case tool ids, not Claude-compatible names. The current
-headless adapter permits only `read_file`, `grep`, and `list_dir`; it excludes writes,
-terminal commands, and web tools. Grok must return the artifact in its final message,
-after which the harness validates and writes it.
+Grok uses native snake-case tool ids, not Claude-compatible names. The headless
+adapter permits `read_file`, `grep`, `list_dir`, and on agent phases also
+`web_search` / `web_fetch`; it excludes writes and terminal commands. Grok must
+return the artifact in its final message, after which the harness validates and
+writes it.
 
 Do not add an unrecognized tool id to `--tools`: current Grok releases may respond by
 keeping the full toolset, which reintroduces headless permission cancellation when the

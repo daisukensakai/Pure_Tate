@@ -419,7 +419,7 @@ def _engine_argv(
     last_message_path: Optional[Path] = None,
     phase: Optional[str] = None,
 ) -> List[str]:
-    from .capabilities import WEB_PHASES
+    from .capabilities import phase_allows_web
 
     engines = load_engines()
     if engine_id not in engines:
@@ -428,10 +428,14 @@ def _engine_argv(
     binary = config.get("binary", engine_id)
     family = config.get("family")
     model = config.get("model")
-    allow_web = phase in WEB_PHASES if phase else False
+    # Web tools are available on agent phases so the model can look up
+    # supporting mathematics when it chooses. Research-family phases still
+    # require live capability attestation before dispatch.
+    allow_web = phase_allows_web(phase)
     if family == "openai":
         if last_message_path is None:
             raise ValueError("OpenAI engine requires a last-message path")
+        # CLI_test: codex exec read-only still can invoke web_search items.
         command = [
             binary,
             "exec",
@@ -473,10 +477,8 @@ def _engine_argv(
         ]
     if family == "grok":
         # Grok tool ids are snake_case. Headless dontAsk/always-approve still
-        # permission_cancels run_terminal_command, write, and web_fetch
-        # (cancellation_category=permission_cancelled). Keep a strict local
-        # read-only allowlist offline; enable web tools only for attested
-        # live-web phases.
+        # permission_cancels run_terminal_command and write. Web tools are
+        # enabled for agent phases; write/shell stay denied.
         tools = ["read_file", "grep", "list_dir"]
         denied = ["run_terminal_command", "write", "open_page"]
         command = [
@@ -508,8 +510,8 @@ def _engine_argv(
         command.extend(["-m", model])
         return command
     if family == "gemini":
-        # Plan mode is read-only. stream-json gives heartbeat events for the
-        # process watchdog and a reassembled final JSON artifact.
+        # Plan mode is workspace-write-blocked. CLI_test shows google_web_search
+        # still works under plan; stream-json feeds the process watchdog.
         return [
             binary,
             "-p",

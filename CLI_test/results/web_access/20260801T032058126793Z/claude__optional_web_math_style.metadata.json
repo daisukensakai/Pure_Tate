@@ -1,0 +1,62 @@
+{
+  "argv": [
+    "claude",
+    "-p",
+    "<prompt-sha256:32e1bcfc87c0cf266abae72fb482f3c7378c9394f363f1a71800ea901723f888>",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--include-partial-messages",
+    "--permission-mode",
+    "default",
+    "--allowedTools",
+    "Read",
+    "Grep",
+    "Glob",
+    "WebSearch",
+    "WebFetch",
+    "--disallowedTools",
+    "Edit",
+    "Write",
+    "Bash",
+    "--model",
+    "claude-opus-5"
+  ],
+  "binaries_present": {
+    "claude": true,
+    "codex": true,
+    "gemini": true,
+    "grok": true
+  },
+  "classification": "pass",
+  "elapsed_seconds": 6.105,
+  "engine": "claude",
+  "executed_at": "2026-08-01T03:21:38.852698+00:00",
+  "name": "claude__optional_web_math_style",
+  "parsed_json": {
+    "answer": 10,
+    "ok": true,
+    "probe": "optional_web_math_style",
+    "web_used": false
+  },
+  "probe": "optional_web_math_style",
+  "prompt_sha256": "32e1bcfc87c0cf266abae72fb482f3c7378c9394f363f1a71800ea901723f888",
+  "returncode": 0,
+  "schema_version": 1,
+  "stderr_path": "CLI_test/results/web_access/20260801T032058126793Z/claude__optional_web_math_style.stderr.txt",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_path": "CLI_test/results/web_access/20260801T032058126793Z/claude__optional_web_math_style.stdout.txt",
+  "stdout_sha256": "ab76af7bf45cae1f99d280bcf08c0e7ab43c449c655f7b9f5bed0e26e04fdfe5",
+  "timed_out": false,
+  "tool_evidence": {
+    "any_web_signal": true,
+    "signals": {
+      "browser": false,
+      "open_page": false,
+      "search_query": false,
+      "tool_use_search": false,
+      "web_fetch": true,
+      "web_search": true
+    }
+  }
+}

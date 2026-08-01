@@ -135,31 +135,29 @@ class FocusedCampaignTests(unittest.TestCase):
         self.assertIn("FND-0036", visible)
         self.assertNotIn("FND-0037", visible)
 
-    def test_grok_web_is_phase_specific_and_command_derived(self):
+    def test_grok_web_is_available_on_agent_phases(self):
         research = _engine_argv("grok", "probe", phase="novelty")
         math = _engine_argv("grok", "proof", phase="mathematics")
+        review = _engine_argv("grok", "review", phase="review")
         self.assertNotIn("--disable-web-search", research)
-        self.assertIn("--disable-web-search", math)
+        self.assertNotIn("--disable-web-search", math)
+        self.assertNotIn("--disable-web-search", review)
         self.assertEqual(
             research[research.index("--permission-mode") + 1], "dontAsk"
         )
-        research_tools = research[research.index("--tools") + 1]
-        self.assertIn("web_search", research_tools.split(","))
-        self.assertIn("web_fetch", research_tools.split(","))
-        self.assertTrue(
-            {"web_search", "web_fetch"}.issubset(
-                effective_capabilities_from_argv(
-                    "grok", research, "novelty"
+        for argv, phase in (
+            (research, "novelty"),
+            (math, "mathematics"),
+            (review, "review"),
+        ):
+            tools = argv[argv.index("--tools") + 1]
+            self.assertIn("web_search", tools.split(","))
+            self.assertIn("web_fetch", tools.split(","))
+            self.assertTrue(
+                {"web_search", "web_fetch"}.issubset(
+                    effective_capabilities_from_argv("grok", argv, phase)
                 )
             )
-        )
-        self.assertFalse(
-            {"web_search", "web_fetch"}.issubset(
-                effective_capabilities_from_argv(
-                    "grok", math, "mathematics"
-                )
-            )
-        )
 
     def test_unattested_research_is_rejected_before_engine_run(self):
         task = finding_audit_tasks("C66-001")[0]

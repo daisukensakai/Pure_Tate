@@ -81,7 +81,12 @@ command really permits both web search and fetch and, for current live-web tasks
 requires a durable passing capability attestation. A declared capability alone is
 not sufficient.
 Mathematics receives only the dependency-closed packet; review receives only one proof
-attempt, its exact packet, and the adversarial rubric. Revision-2 tasks pin the
+attempt, its exact packet, and the adversarial rubric. Agent phases (including
+mathematics, review, and forced-proof) expose web tools so engines may look up
+supporting results; research / finding-audit / novelty still require live web
+capability attestation. Forced-proof may use public search only for ordinary
+mathematical background or named theorems, not to seek a solution of the exact
+problem or to decide openness (`exact_problem_web_search_used: false`). Revision-2 tasks pin the
 Borel–Moore target, its dimension-dependent ordinary-cohomology realization, and the
 packet SHA-256. The runner rejects missing, stale, or hash-mismatched packets before
 invoking an engine.

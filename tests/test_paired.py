@@ -102,7 +102,9 @@ class PairedAttemptPolicyTests(unittest.TestCase):
                     "mathematics", self.task, invalid, output, "grok"
                 )
 
-    def test_forced_search_is_tool_enforced_offline(self):
+    def test_forced_math_enables_web_tools_for_supporting_lookup(self):
+        # Forced-proof / mathematics expose web tools; exact-problem search is
+        # an attestation/honesty contract, not argv offline enforcement.
         for engine in ("grok", "claude", "gemini", "codex"):
             argv = _engine_argv(
                 engine,
@@ -112,11 +114,13 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             )
             joined = " ".join(argv)
             if engine == "grok":
-                self.assertIn("--disable-web-search", argv)
+                self.assertNotIn("--disable-web-search", argv)
+                tools = argv[argv.index("--tools") + 1]
+                self.assertIn("web_search", tools.split(","))
+                self.assertIn("web_fetch", tools.split(","))
             if engine == "claude":
-                self.assertNotIn("WebSearch", argv)
-                self.assertNotIn("WebFetch", argv)
-            self.assertNotIn("web_search,web_fetch", joined)
+                self.assertIn("WebSearch", joined)
+                self.assertIn("WebFetch", joined)
 
     def test_dry_run_shows_one_conditional_pair_per_engine(self):
         with mock.patch(

@@ -1,0 +1,405 @@
+{
+  "engine_verdicts": {
+    "claude": "pass",
+    "codex": "pass",
+    "gemini": "pass",
+    "grok": "pass"
+  },
+  "rescored": true,
+  "results": [
+    {
+      "argv": [
+        "claude",
+        "-p",
+        "<prompt-sha256:32e1bcfc87c0cf266abae72fb482f3c7378c9394f363f1a71800ea901723f888>",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--include-partial-messages",
+        "--permission-mode",
+        "default",
+        "--allowedTools",
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "--disallowedTools",
+        "Edit",
+        "Write",
+        "Bash",
+        "--model",
+        "claude-opus-5"
+      ],
+      "binaries_present": {
+        "claude": true,
+        "codex": true,
+        "gemini": true,
+        "grok": true
+      },
+      "classification": "pass",
+      "elapsed_seconds": 6.105,
+      "engine": "claude",
+      "executed_at": "2026-08-01T03:21:38.852698+00:00",
+      "name": "claude__optional_web_math_style",
+      "parsed_json": {
+        "answer": 10,
+        "ok": true,
+        "probe": "optional_web_math_style",
+        "web_used": false
+      },
+      "probe": "optional_web_math_style",
+      "prompt_sha256": "32e1bcfc87c0cf266abae72fb482f3c7378c9394f363f1a71800ea901723f888",
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/web_access/20260801T032058126793Z/claude__optional_web_math_style.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/web_access/20260801T032058126793Z/claude__optional_web_math_style.stdout.txt",
+      "stdout_sha256": "ab76af7bf45cae1f99d280bcf08c0e7ab43c449c655f7b9f5bed0e26e04fdfe5",
+      "timed_out": false,
+      "tool_evidence": {
+        "any_web_signal": true,
+        "signals": {
+          "browser": false,
+          "open_page": false,
+          "search_query": false,
+          "tool_use_search": false,
+          "web_fetch": true,
+          "web_search": true
+        }
+      }
+    },
+    {
+      "argv": [
+        "claude",
+        "-p",
+        "<prompt-sha256:5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf>",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--include-partial-messages",
+        "--permission-mode",
+        "default",
+        "--allowedTools",
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "--disallowedTools",
+        "Edit",
+        "Write",
+        "Bash",
+        "--model",
+        "claude-opus-5"
+      ],
+      "binaries_present": {
+        "claude": true,
+        "codex": true,
+        "gemini": true,
+        "grok": true
+      },
+      "classification": "pass",
+      "elapsed_seconds": 20.57,
+      "engine": "claude",
+      "executed_at": "2026-08-01T03:21:32.744448+00:00",
+      "name": "claude__web_search_smoke",
+      "parsed_json": {
+        "answer": 2,
+        "ok": true,
+        "probe": "web_search_smoke",
+        "tool_used": true
+      },
+      "probe": "web_search_smoke",
+      "prompt_sha256": "5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf",
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/web_access/20260801T032058126793Z/claude__web_search_smoke.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/web_access/20260801T032058126793Z/claude__web_search_smoke.stdout.txt",
+      "stdout_sha256": "53821676f5be2045e8f72f0ab6502706a0182acefedf7a6205252350136cc8f4",
+      "timed_out": false,
+      "tool_evidence": {
+        "any_web_signal": true,
+        "signals": {
+          "browser": false,
+          "open_page": false,
+          "search_query": true,
+          "tool_use_search": false,
+          "web_fetch": true,
+          "web_search": true
+        }
+      }
+    },
+    {
+      "argv": [
+        "codex",
+        "exec",
+        "--skip-git-repo-check",
+        "-m",
+        "gpt-5.6-sol",
+        "--sandbox",
+        "read-only",
+        "-c",
+        "approval_policy=\"never\"",
+        "--json",
+        "<prompt-sha256:5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf>"
+      ],
+      "binaries_present": {
+        "claude": true,
+        "codex": true,
+        "gemini": true,
+        "grok": true
+      },
+      "classification": "pass",
+      "elapsed_seconds": 24.606,
+      "engine": "codex",
+      "executed_at": "2026-08-01T03:22:03.462177+00:00",
+      "name": "codex__web_search_smoke",
+      "parsed_json": {
+        "answer": 2,
+        "ok": true,
+        "probe": "web_search_smoke",
+        "tool_used": true
+      },
+      "probe": "web_search_smoke",
+      "prompt_sha256": "5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf",
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/web_access/20260801T032058126793Z/codex__web_search_smoke.stderr.txt",
+      "stderr_sha256": "e5fb2a0eadc61e7a64430312dff7477ebd94ec8ca94fd59b2bf83d58a8cde6d2",
+      "stdout_path": "CLI_test/results/web_access/20260801T032058126793Z/codex__web_search_smoke.stdout.txt",
+      "stdout_sha256": "4b25773bea87d8ac7fc736594b4c2a1b024723c9e731c0fe493b77ea778dfcf4",
+      "timed_out": false,
+      "tool_evidence": {
+        "any_web_signal": true,
+        "signals": {
+          "browser": false,
+          "open_page": false,
+          "search_query": true,
+          "tool_use_search": true,
+          "web_fetch": false,
+          "web_search": true
+        }
+      }
+    },
+    {
+      "argv": [
+        "gemini",
+        "-p",
+        "<prompt-sha256:5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf>",
+        "-m",
+        "gemini-3.5-flash",
+        "-o",
+        "stream-json",
+        "--approval-mode",
+        "plan",
+        "--skip-trust"
+      ],
+      "binaries_present": {
+        "claude": true,
+        "codex": true,
+        "gemini": true,
+        "grok": true
+      },
+      "classification": "pass",
+      "elapsed_seconds": 70.593,
+      "engine": "gemini",
+      "executed_at": "2026-08-01T03:23:14.059069+00:00",
+      "name": "gemini__web_search_smoke_plan",
+      "parsed_json": {
+        "answer": 2,
+        "ok": true,
+        "probe": "web_search_smoke",
+        "tool_used": true
+      },
+      "probe": "web_search_smoke_plan",
+      "prompt_sha256": "5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf",
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/web_access/20260801T032058126793Z/gemini__web_search_smoke_plan.stderr.txt",
+      "stderr_sha256": "e0f990584d09245473e42d9f0812bb9155fd3b99becce991566c22b205f43260",
+      "stdout_path": "CLI_test/results/web_access/20260801T032058126793Z/gemini__web_search_smoke_plan.stdout.txt",
+      "stdout_sha256": "0a0b870e79ee9079bd60bac6ba2019868f97fe5ff5f23507f301f5c5e4d898c1",
+      "timed_out": false,
+      "tool_evidence": {
+        "any_web_signal": true,
+        "signals": {
+          "browser": false,
+          "open_page": false,
+          "search_query": true,
+          "tool_use_search": true,
+          "web_fetch": false,
+          "web_search": true
+        }
+      }
+    },
+    {
+      "argv": [
+        "gemini",
+        "-p",
+        "<prompt-sha256:5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf>",
+        "-m",
+        "gemini-3.5-flash",
+        "-o",
+        "stream-json",
+        "--approval-mode",
+        "yolo",
+        "--skip-trust"
+      ],
+      "binaries_present": {
+        "claude": true,
+        "codex": true,
+        "gemini": true,
+        "grok": true
+      },
+      "classification": "pass",
+      "elapsed_seconds": 52.953,
+      "engine": "gemini",
+      "executed_at": "2026-08-01T03:24:07.014893+00:00",
+      "name": "gemini__web_search_smoke_yolo",
+      "parsed_json": {
+        "answer": 2,
+        "ok": true,
+        "probe": "web_search_smoke",
+        "tool_used": true
+      },
+      "probe": "web_search_smoke_yolo",
+      "prompt_sha256": "5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf",
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/web_access/20260801T032058126793Z/gemini__web_search_smoke_yolo.stderr.txt",
+      "stderr_sha256": "04865e1fc5927510f8d86acb13d9a34ba2094e6e099f8a8b9503c0bec4da4175",
+      "stdout_path": "CLI_test/results/web_access/20260801T032058126793Z/gemini__web_search_smoke_yolo.stdout.txt",
+      "stdout_sha256": "4d090153fe4c7731776fa6560eebc73952f93e847e4b8aff6ea10c538561c4f4",
+      "timed_out": false,
+      "tool_evidence": {
+        "any_web_signal": true,
+        "signals": {
+          "browser": false,
+          "open_page": false,
+          "search_query": true,
+          "tool_use_search": true,
+          "web_fetch": false,
+          "web_search": true
+        }
+      }
+    },
+    {
+      "argv": [
+        "grok",
+        "-p",
+        "<prompt-sha256:32e1bcfc87c0cf266abae72fb482f3c7378c9394f363f1a71800ea901723f888>",
+        "--output-format",
+        "streaming-json",
+        "--max-turns",
+        "12",
+        "--permission-mode",
+        "dontAsk",
+        "--always-approve",
+        "--tools",
+        "read_file,grep,list_dir,web_search,web_fetch",
+        "--disallowed-tools",
+        "run_terminal_command,write,open_page",
+        "-m",
+        "grok-4.5"
+      ],
+      "binaries_present": {
+        "claude": true,
+        "codex": true,
+        "gemini": true,
+        "grok": true
+      },
+      "classification": "pass",
+      "elapsed_seconds": 6.132,
+      "engine": "grok",
+      "executed_at": "2026-08-01T03:21:12.171570+00:00",
+      "name": "grok__optional_web_math_style",
+      "parsed_json": {
+        "answer": 10,
+        "ok": true,
+        "probe": "optional_web_math_style",
+        "web_used": false
+      },
+      "probe": "optional_web_math_style",
+      "prompt_sha256": "32e1bcfc87c0cf266abae72fb482f3c7378c9394f363f1a71800ea901723f888",
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/web_access/20260801T032058126793Z/grok__optional_web_math_style.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/web_access/20260801T032058126793Z/grok__optional_web_math_style.stdout.txt",
+      "stdout_sha256": "fc855777f6fef799586bbd4830283688a1d1224f89eac382bb9aeb717025f18b",
+      "timed_out": false,
+      "tool_evidence": {
+        "any_web_signal": true,
+        "signals": {
+          "browser": false,
+          "open_page": false,
+          "search_query": false,
+          "tool_use_search": false,
+          "web_fetch": true,
+          "web_search": true
+        }
+      }
+    },
+    {
+      "argv": [
+        "grok",
+        "-p",
+        "<prompt-sha256:5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf>",
+        "--output-format",
+        "streaming-json",
+        "--max-turns",
+        "12",
+        "--permission-mode",
+        "dontAsk",
+        "--always-approve",
+        "--tools",
+        "read_file,grep,list_dir,web_search,web_fetch",
+        "--disallowed-tools",
+        "run_terminal_command,write,open_page",
+        "-m",
+        "grok-4.5"
+      ],
+      "binaries_present": {
+        "claude": true,
+        "codex": true,
+        "gemini": true,
+        "grok": true
+      },
+      "classification": "pass",
+      "elapsed_seconds": 7.906,
+      "engine": "grok",
+      "executed_at": "2026-08-01T03:21:06.035533+00:00",
+      "name": "grok__web_search_smoke",
+      "parsed_json": {
+        "answer": 2,
+        "ok": true,
+        "probe": "web_search_smoke",
+        "tool_used": true
+      },
+      "probe": "web_search_smoke",
+      "prompt_sha256": "5f67ec44ea71cf17bad0df5439bc7236571cdd34bb1afe58302b1240c113a7bf",
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/web_access/20260801T032058126793Z/grok__web_search_smoke.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/web_access/20260801T032058126793Z/grok__web_search_smoke.stdout.txt",
+      "stdout_sha256": "2e8b60f629390fa2b0c46887025e08ccc65337bbfc81a122318ea7be264cbbec",
+      "timed_out": false,
+      "tool_evidence": {
+        "any_web_signal": true,
+        "signals": {
+          "browser": false,
+          "open_page": false,
+          "search_query": true,
+          "tool_use_search": false,
+          "web_fetch": true,
+          "web_search": true
+        }
+      }
+    }
+  ],
+  "run_dir": "CLI_test/results/web_access/20260801T032058126793Z",
+  "schema_version": 1
+}
