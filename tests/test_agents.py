@@ -6,6 +6,10 @@ from unittest import mock
 
 from pure_tate.agents import (
     _engine_argv,
+    _codex_controller_settings,
+    _codex_controller_transcript,
+    _parse_codex_controller_decision,
+    _run_codex_controller,
     _extract_gemini_stream,
     _extract_json_object,
     _failure_detail,
@@ -22,6 +26,91 @@ from pure_tate.tasking import research_tasks
 
 
 class AgentAdapterTests(unittest.TestCase):
+    def _run_controller_fixture(
+        self,
+        decisions,
+        worker_results,
+        *,
+        max_requests=4,
+        retry_limit=1,
+    ):
+        """Run a controller turn with deterministic Codex and Grok stand-ins."""
+        from pure_tate.grok_workers import DispatchLog, WorkerSession
+
+        class FakeProcess:
+            returncode = 0
+            stdout = "controller turn completed"
+            stderr = ""
+
+        class FakePool:
+            def __init__(self, **_kwargs):
+                self.dispatched_count = 0
+
+            def dispatch(self, _prompt, _description, wait=True):
+                self.dispatched_count += 1
+                status, payload = worker_results.pop(0)
+                return {
+                    "worker_id": "W-fixture-%d" % self.dispatched_count,
+                    "status": status,
+                    "result_text": payload if status == "completed" else "",
+                    "error": payload if status != "completed" else "",
+                }
+
+            def shutdown(self, **_kwargs):
+                return None
+
+        calls = []
+
+        def fake_run(command, **_kwargs):
+            calls.append(command)
+            path = Path(command[command.index("-o") + 1])
+            path.write_text(decisions.pop(0), encoding="utf-8")
+            return FakeProcess()
+
+        with tempfile.TemporaryDirectory() as directory:
+            context = Path(directory)
+            log = DispatchLog(context / "logs", session_id="SESS-controller")
+            session = WorkerSession(
+                enabled=True,
+                max_workers=4,
+                allow_web=False,
+                family="openai",
+                results_dir=context / "workers",
+                dispatch_log=log,
+            )
+            with mock.patch(
+                "pure_tate.agents.run_captured_process", side_effect=fake_run
+            ), mock.patch("pure_tate.grok_workers.GrokWorkerPool", FakePool):
+                try:
+                    process = _run_codex_controller(
+                        task={"phase": "research"},
+                        context=context,
+                        context_files=["TASK.json"],
+                        expected_artifact_id="RAUD-TEST",
+                        phase="research",
+                        workers=session,
+                        settings={
+                            "max_requests": max_requests,
+                            "retry_limit": retry_limit,
+                            "max_attempts": 8,
+                            "max_result_chars": 12000,
+                        },
+                        task_timeout=60,
+                        inactivity=None,
+                        abort_patterns=None,
+                        activity_streams=None,
+                        progress_callback=None,
+                    )
+                except Exception as exc:  # noqa: BLE001 - returned for assertion
+                    process = exc
+            events = [
+                json.loads(line)
+                for line in (context / "logs" / "sessions" / "SESS-controller" / "events.jsonl").read_text(
+                    encoding="utf-8"
+                ).splitlines()
+            ]
+        return process, calls, events
+
     def test_research_context_excludes_claim_database(self):
         with tempfile.TemporaryDirectory() as directory:
             copied = build_isolated_context(
@@ -50,6 +139,251 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertIn("read-only", command)
         self.assertIn('approval_policy="never"', command)
         self.assertIn("gpt-5.6-sol", command)
+
+    def test_codex_controller_settings_are_bounded(self):
+        settings = _codex_controller_settings(
+            {
+                "codex_controller_workers": {
+                    "enabled": True,
+                    "max_requests": 99,
+                    "retry_limit": 99,
+                    "max_attempts": 99,
+                    "max_result_chars": 1,
+                }
+            }
+        )
+        self.assertTrue(settings["enabled"])
+        self.assertEqual(settings["max_requests"], 4)
+        self.assertEqual(settings["retry_limit"], 1)
+        self.assertEqual(settings["max_attempts"], 8)
+        self.assertEqual(settings["max_result_chars"], 500)
+
+    def test_codex_controller_decision_and_transcript_validation(self):
+        decision = _parse_codex_controller_decision(
+            json.dumps(
+                {
+                    "action": "dispatch",
+                    "request": {
+                        "request_id": "check-A",
+                        "description": "Check a lemma",
+                        "prompt": "Read the supplied packet and check the lemma.",
+                    },
+                }
+            ),
+            set(),
+        )
+        self.assertEqual(decision["request_id"], "check-A")
+        with self.assertRaisesRegex(ValueError, "duplicated"):
+            _parse_codex_controller_decision(
+                json.dumps(
+                    {
+                        "action": "dispatch",
+                        "request": {
+                            "request_id": "check-A",
+                            "description": "Repeat",
+                            "prompt": "Repeat",
+                        },
+                    }
+                ),
+                {"check-A"},
+            )
+        transcript = _codex_controller_transcript(
+            [
+                {
+                    "request_id": "check-A",
+                    "description": "Check a lemma",
+                    "status": "completed",
+                    "attempts": 1,
+                    "worker_ids": ["W-1"],
+                    "result": "abcdefgh",
+                },
+                {
+                    "request_id": "check-B",
+                    "description": "Check another lemma",
+                    "status": "failed",
+                    "attempts": 2,
+                    "worker_ids": ["W-2", "W-3"],
+                    "error": "timeout",
+                },
+            ],
+            4,
+        )
+        self.assertIn('"result": "abcd"', transcript)
+        self.assertIn('"error": "timeout"', transcript)
+
+    def test_codex_controller_feeds_worker_result_to_next_decision(self):
+        from pure_tate.grok_workers import DispatchLog, WorkerSession
+
+        class FakeProcess:
+            returncode = 0
+
+            def __init__(self, stdout):
+                self.stdout = stdout
+                self.stderr = ""
+
+        class FakePool:
+            def __init__(self, **_kwargs):
+                self.dispatched_count = 0
+
+            def dispatch(self, _prompt, _description, wait=True):
+                self.dispatched_count += 1
+                return {
+                    "worker_id": "W-controller-1",
+                    "status": "completed",
+                    "result_text": "worker-result-for-next-decision",
+                }
+
+            def shutdown(self, **_kwargs):
+                return None
+
+        outputs = [
+            json.dumps(
+                {
+                    "action": "dispatch",
+                    "request": {
+                        "request_id": "worker-1",
+                        "description": "Check the key step",
+                        "prompt": "Check the key step.",
+                    },
+                }
+            ),
+            json.dumps({"action": "finalize", "request": None}),
+            '{"final":true}',
+        ]
+
+        def fake_run(command, **_kwargs):
+            path = Path(command[command.index("-o") + 1])
+            path.write_text(outputs.pop(0), encoding="utf-8")
+            return FakeProcess('{"type":"turn.completed"}')
+
+        with tempfile.TemporaryDirectory() as directory:
+            context = Path(directory)
+            log = DispatchLog(context / "logs", session_id="SESS-controller")
+            session = WorkerSession(
+                enabled=True,
+                max_workers=4,
+                allow_web=False,
+                family="openai",
+                results_dir=context / "workers",
+                dispatch_log=log,
+            )
+            with mock.patch(
+                "pure_tate.agents.run_captured_process", side_effect=fake_run
+            ) as run_mock, mock.patch(
+                "pure_tate.grok_workers.GrokWorkerPool", FakePool
+            ):
+                process = _run_codex_controller(
+                    task={"phase": "research"},
+                    context=context,
+                    context_files=["TASK.json"],
+                    expected_artifact_id="RAUD-TEST",
+                    phase="research",
+                    workers=session,
+                    settings={
+                        "max_requests": 4,
+                        "retry_limit": 1,
+                        "max_attempts": 8,
+                        "max_result_chars": 12000,
+                    },
+                    task_timeout=60,
+                    inactivity=None,
+                    abort_patterns=None,
+                    activity_streams=None,
+                    progress_callback=None,
+                )
+        self.assertEqual(process.returncode, 0)
+        self.assertEqual(run_mock.call_count, 3)
+        second_prompt = run_mock.call_args_list[1].args[0][-1]
+        self.assertIn("worker-result-for-next-decision", second_prompt)
+        for call in run_mock.call_args_list:
+            argv = call.args[0]
+            self.assertIn("read-only", argv)
+            self.assertNotIn("--dangerously-bypass-approvals-and-sandbox", argv)
+            self.assertFalse(any("mcp_servers" in part for part in argv))
+
+    def test_codex_controller_retries_and_reports_exhaustion(self):
+        dispatch = json.dumps(
+            {
+                "action": "dispatch",
+                "request": {
+                    "request_id": "retry-me",
+                    "description": "Retry this focused check",
+                    "prompt": "Check the requested lemma.",
+                },
+            }
+        )
+        process, calls, events = self._run_controller_fixture(
+            [dispatch, json.dumps({"action": "finalize", "request": None}), "{}"],
+            [("failed", "first timeout"), ("failed", "second timeout")],
+        )
+        self.assertEqual(process.returncode, 0)
+        self.assertEqual(len(calls), 3)
+        self.assertIn("second timeout", calls[1][-1])
+        self.assertIn("controller_retry", [event["event"] for event in events])
+        self.assertIn("controller_worker_exhausted", [event["event"] for event in events])
+
+    def test_codex_controller_retry_can_succeed(self):
+        dispatch = json.dumps(
+            {
+                "action": "dispatch",
+                "request": {
+                    "request_id": "recover",
+                    "description": "Recover the check after one failure",
+                    "prompt": "Check the requested lemma.",
+                },
+            }
+        )
+        process, _calls, events = self._run_controller_fixture(
+            [dispatch, json.dumps({"action": "finalize", "request": None}), "{}"],
+            [("failed", "temporary error"), ("completed", "recovered result")],
+        )
+        self.assertEqual(process.returncode, 0)
+        names = [event["event"] for event in events]
+        self.assertIn("controller_retry", names)
+        self.assertIn("controller_worker_finished", names)
+        self.assertNotIn("controller_worker_exhausted", names)
+
+    def test_codex_controller_four_round_cap_and_zero_round_finalization(self):
+        decisions = []
+        for index in range(4):
+            decisions.append(
+                json.dumps(
+                    {
+                        "action": "dispatch",
+                        "request": {
+                            "request_id": "round-%d" % index,
+                            "description": "Round %d" % index,
+                            "prompt": "Do check %d." % index,
+                        },
+                    }
+                )
+            )
+        decisions.append("{}")
+        process, calls, events = self._run_controller_fixture(
+            decisions,
+            [("completed", "ok")] * 4,
+        )
+        self.assertEqual(process.returncode, 0)
+        self.assertEqual(len(calls), 5)
+        self.assertEqual(
+            [event["event"] for event in events].count("controller_request_accepted"), 4
+        )
+        self.assertIn("controller_forced_finalization", [event["event"] for event in events])
+
+        process, calls, events = self._run_controller_fixture(
+            ["{}"], [], max_requests=0
+        )
+        self.assertEqual(process.returncode, 0)
+        self.assertEqual(len(calls), 1)
+        self.assertIn("controller_forced_finalization", [event["event"] for event in events])
+
+    def test_codex_controller_invalid_decision_fails_closed_and_is_logged(self):
+        process, calls, events = self._run_controller_fixture(
+            [json.dumps({"action": "dispatch", "request": None})], []
+        )
+        self.assertIsInstance(process, ValueError)
+        self.assertEqual(len(calls), 1)
+        self.assertIn("controller_decision_invalid", [event["event"] for event in events])
 
     def test_claude_argv_pins_opus_5(self):
         command = _engine_argv("claude", "prompt")

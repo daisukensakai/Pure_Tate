@@ -1,0 +1,7 @@
+{"type":"thread.started","thread_id":"019fbc5b-67f9-7581-a1a4-dfe4335d5c94"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"I’ll dispatch the worker once, wait for its result, and report only the requested JSON object."}}
+{"type":"item.started","item":{"id":"item_1","type":"mcp_tool_call","server":"grok_workers","tool":"dispatch_grok_worker","arguments":{"prompt":"Return JSON {\"probe\":\"from_worker\",\"ok\":true,\"marker\":\"CODEX-MCP\"}","wait":true},"result":null,"error":null,"status":"in_progress"}}
+{"type":"item.completed","item":{"id":"item_1","type":"mcp_tool_call","server":"grok_workers","tool":"dispatch_grok_worker","arguments":{"prompt":"Return JSON {\"probe\":\"from_worker\",\"ok\":true,\"marker\":\"CODEX-MCP\"}","wait":true},"result":null,"error":{"message":"user cancelled MCP tool call"},"status":"failed"}}
+{"type":"item.completed","item":{"id":"item_2","type":"agent_message","text":"{\"probe\":\"mcp_codex\",\"ok\":false}"}}
+{"type":"turn.completed","usage":{"input_tokens":43613,"cached_input_tokens":34048,"cache_write_input_tokens":0,"output_tokens":213,"reasoning_output_tokens":73}}

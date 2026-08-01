@@ -772,6 +772,8 @@ class WorkerSession:
     grok_home: Optional[Path] = None
     env_updates: Dict[str, str] = field(default_factory=dict)
     server_command: List[str] = field(default_factory=list)
+    session_id: Optional[str] = None
+    dispatch_log: Optional[DispatchLog] = field(default=None, repr=False)
 
     def prompt_contract(self) -> str:
         return (
@@ -842,6 +844,7 @@ def prepare_worker_session(
     parent_meta: Optional[Dict[str, Any]] = None,
     dispatch_log_dir: Optional[Path] = None,
     session_id: Optional[str] = None,
+    attach_mcp: bool = True,
 ) -> Optional[WorkerSession]:
     """Build session-scoped MCP config for a parent engine family.
 
@@ -899,7 +902,14 @@ def prepare_worker_session(
         results_dir=results_dir,
         server_command=server_cmd,
         env_updates=dict(worker_env),
+        session_id=sid,
+        dispatch_log=session_log,
     )
+
+    # Controller-mediated Codex workers run directly from the trusted harness,
+    # so Codex never needs an approval-gated MCP attachment.
+    if not attach_mcp:
+        return session
 
     if family == "claude":
         mcp_path = context / "grok-workers.mcp.json"

@@ -1,0 +1,8 @@
+# ephemeral CLI_test probe config — do not copy to user home
+[mcp_servers.grok_workers]
+command = "/opt/homebrew/bin/uv"
+args = ["run", "--with", "mcp", "python", "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test/grok_worker_mcp_sdk.py"]
+enabled = true
+startup_timeout_sec = 90
+tool_timeout_sec = 300
+env = { GROK_WORKER_RESULTS_DIR = "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test/results/grok_workers/20260801T084720306961Z/mcp_grok/workers", GROK_WORKER_CWD = "/Users/ken/Desktop/Work/exploratory/Pure_Tate", GROK_WORKER_MAX_TOTAL = "4", GROK_WORKER_MAX_CONCURRENT = "4", GROK_WORKER_TIMEOUT = "300" }

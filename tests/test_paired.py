@@ -535,6 +535,15 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             "pure_tate.agents.shutil.which", return_value="/usr/bin/codex"
         ), mock.patch(
             "pure_tate.agents.run_captured_process", side_effect=fake_process
+        ), mock.patch(
+            "pure_tate.agents._codex_controller_settings",
+            return_value={
+                "enabled": False,
+                "max_requests": 0,
+                "retry_limit": 0,
+                "max_attempts": 1,
+                "max_result_chars": 500,
+            },
         ):
             output = Path(directory) / "ATT-9999.json"
             result = run_task(self.task, "codex", output)

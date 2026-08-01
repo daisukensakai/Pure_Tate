@@ -29,6 +29,8 @@ LAB = Path(__file__).resolve().parent
 ROOT = LAB.parent
 if str(LAB) not in sys.path:
     sys.path.insert(0, str(LAB))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from grok_worker_mcp import (  # noqa: E402
     McpServer,
@@ -47,6 +49,8 @@ from grok_worker_pool import (  # noqa: E402
     sha256_text,
     utc_now_iso,
 )
+from pure_tate.agents import _run_codex_controller  # noqa: E402
+from pure_tate.grok_workers import prepare_worker_session  # noqa: E402
 
 
 RESULTS_ROOT = LAB / "results" / "grok_workers"
@@ -826,12 +830,15 @@ def probe_mcp_grok(run_dir: Path) -> Dict[str, Any]:
 def probe_mcp_codex(
     run_dir: Path,
     *,
-    bypass_approvals_and_sandbox: bool = False,
+    bypass_approvals_and_sandbox: bool = True,
     approval_policy: str = "never",
 ) -> Dict[str, Any]:
     if shutil.which("codex") is None:
         return {"probe": "mcp_codex", "status": "skip", "reason": "codex not on PATH"}
-    probe_name = "mcp_codex_bypass" if bypass_approvals_and_sandbox else "mcp_codex"
+    # The green gate is deliberately the externally-contained, headless mode
+    # recommended by Codex for automation.  The paired restricted probe below
+    # retains the approval-cancellation diagnosis as a regression check.
+    probe_name = "mcp_codex" if bypass_approvals_and_sandbox else "mcp_codex_restricted"
     if approval_policy != "never" and not bypass_approvals_and_sandbox:
         probe_name += "_" + approval_policy.replace("-", "_")
     out_dir = run_dir / probe_name
@@ -844,7 +851,7 @@ def probe_mcp_codex(
     env["GROK_WORKER_CWD"] = str(ROOT)
     env["GROK_WORKER_MAX_TOTAL"] = "4"
     prompt = (
-        "If you have an MCP tool dispatch_grok_worker, call it once with wait=true "
+        "Use the MCP tool dispatch_grok_worker exactly once with wait=true "
         'and prompt Return JSON {"probe":"from_worker","ok":true,"marker":"CODEX-MCP"}. '
         "Final answer: one JSON object "
         '{"probe":"mcp_codex","ok":true|false}.'
@@ -864,12 +871,14 @@ def probe_mcp_codex(
         "codex",
         "exec",
         "--skip-git-repo-check",
+        "--ephemeral",
         "-m",
         "gpt-5.6-sol",
     ]
     if bypass_approvals_and_sandbox:
-        # Diagnostic only: the worker itself remains read-only.  This proves
-        # whether Codex's headless approval layer is what blocks the MCP call.
+        # Codex currently couples noninteractive MCP approval to this bypass
+        # flag. This probe is confined by its exact prompt and a session-only
+        # MCP server; the dispatched Grok worker itself is strictly read-only.
         argv.append("--dangerously-bypass-approvals-and-sandbox")
     else:
         argv.extend(
@@ -896,20 +905,121 @@ def probe_mcp_codex(
     (out_dir / "stdout.jsonl").write_text(stdout, encoding="utf-8")
     (out_dir / "stderr.txt").write_text(stderr, encoding="utf-8")
     worker_files = sorted(p.name for p in worker_results.iterdir())
-    ok = bool(worker_files)
+    dispatch_events = []
+    for line in stdout.splitlines():
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        item = event.get("item") if isinstance(event, dict) else None
+        if (
+            isinstance(item, dict)
+            and item.get("type") == "mcp_tool_call"
+            and item.get("server") == "grok_workers"
+            and item.get("tool") == "dispatch_grok_worker"
+        ):
+            dispatch_events.append(item)
+    completed_dispatches = [
+        item
+        for item in dispatch_events
+        if item.get("status") == "completed" and item.get("error") is None
+    ]
+    # Require an accepted client call *and* two persisted worker streams. This
+    # rejects false greens where Codex merely proposed or cancelled the tool.
+    ok = len(completed_dispatches) == 1 and len(worker_files) >= 2
     return {
         "probe": probe_name,
         "status": "pass" if ok else "fail",
         "returncode": code,
         "elapsed_seconds": elapsed,
         "worker_files": worker_files,
+        "dispatch_event_count": len(dispatch_events),
+        "completed_dispatch_count": len(completed_dispatches),
         "server_cmd": server_cmd,
         "bypass_approvals_and_sandbox": bypass_approvals_and_sandbox,
         "approval_policy": approval_policy,
         "stderr_prefix": stderr[:500],
         "stdout_prefix": stdout[:500],
-        "note": "hard gate requires worker artifact files",
+        "note": "hard gate requires one accepted MCP dispatch and worker artifacts",
     }
+
+
+def probe_controller_codex(run_dir: Path) -> Dict[str, Any]:
+    """Live safe-controller acceptance: two Codex decisions, two workers."""
+    if shutil.which("codex") is None or shutil.which("grok") is None:
+        return {
+            "probe": "controller_codex",
+            "status": "skip",
+            "reason": "codex or grok not on PATH",
+        }
+    out_dir = run_dir / "controller_codex"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="pure-tate-controller-probe-") as directory:
+        context = Path(directory)
+        write_json(context / "TASK.json", {"phase": "research", "id": "CONTROLLER-SMOKE"})
+        session = prepare_worker_session(
+            context,
+            family="openai",
+            max_workers=4,
+            allow_web=False,
+            worker_timeout=LIVE_TIMEOUT,
+            parent_meta={"engine": "codex", "task_id": "CONTROLLER-SMOKE", "worker_mode": "controller"},
+            dispatch_log_dir=out_dir / "dispatch-log",
+            session_id="SESS-controller-smoke",
+            attach_mcp=False,
+        )
+        if session is None:
+            return {"probe": "controller_codex", "status": "skip", "reason": "worker session unavailable"}
+        task = {"id": "CONTROLLER-SMOKE", "phase": "research", "prompt": "CLI_test/CODEX_CONTROLLER_SMOKE.md"}
+        try:
+            _run_codex_controller(
+                task=task,
+                context=context,
+                context_files=["TASK.json"],
+                expected_artifact_id="CONTROLLER-SMOKE",
+                phase="research",
+                workers=session,
+                settings={
+                    "max_requests": 3,
+                    "retry_limit": 1,
+                    "max_attempts": 4,
+                    "max_result_chars": 12000,
+                },
+                task_timeout=LIVE_TIMEOUT,
+                inactivity=None,
+                abort_patterns=None,
+                activity_streams=["stdout"],
+                progress_callback=None,
+            )
+            final = (context / "last-message.txt").read_text(encoding="utf-8")
+        except Exception as exc:  # noqa: BLE001
+            return {"probe": "controller_codex", "status": "fail", "error": str(exc)}
+        events_path = out_dir / "dispatch-log" / "sessions" / "SESS-controller-smoke" / "events.jsonl"
+        events = [json.loads(line) for line in events_path.read_text(encoding="utf-8").splitlines()]
+        completed = [
+            event for event in events
+            if event.get("event") == "controller_worker_finished" and event.get("status") == "completed"
+        ]
+        worker_files = sorted(path.name for path in session.results_dir.iterdir())
+        try:
+            final_value = json.loads(final)
+        except json.JSONDecodeError:
+            final_value = {}
+        ok = (
+            len(completed) == 2
+            and len(worker_files) >= 4
+            and final_value.get("id") == "CONTROLLER-SMOKE"
+            and final_value.get("controller_smoke") is True
+        )
+        return {
+            "probe": "controller_codex",
+            "status": "pass" if ok else "fail",
+            "completed_workers": len(completed),
+            "worker_files": worker_files,
+            "events_path": str(events_path),
+            "final": final,
+            "note": "Codex has no MCP attachment; harness dispatches workers directly.",
+        }
 
 
 def probe_mcp_gemini(run_dir: Path) -> Dict[str, Any]:
@@ -975,9 +1085,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         ("mcp_claude", lambda: probe_mcp_claude(run_dir)),
         ("mcp_grok", lambda: probe_mcp_grok(run_dir)),
         ("mcp_codex", lambda: probe_mcp_codex(run_dir)),
+        ("controller_codex", lambda: probe_controller_codex(run_dir)),
         (
-            "mcp_codex_bypass",
-            lambda: probe_mcp_codex(run_dir, bypass_approvals_and_sandbox=True),
+            "mcp_codex_restricted",
+            lambda: probe_mcp_codex(run_dir, bypass_approvals_and_sandbox=False),
         ),
         (
             "mcp_codex_on_failure",

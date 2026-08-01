@@ -136,6 +136,21 @@ class GrokWorkerPoolTests(unittest.TestCase):
             )
             self.assertIsNone(gemini)
 
+    def test_prepare_controller_session_never_attaches_mcp(self):
+        with tempfile.TemporaryDirectory() as directory:
+            session = prepare_worker_session(
+                Path(directory),
+                family="openai",
+                max_workers=4,
+                attach_mcp=False,
+            )
+            if session is None:
+                self.skipTest("grok binary unavailable")
+            self.assertTrue(session.enabled)
+            self.assertIsNone(session.mcp_config_path)
+            self.assertIsNone(session.grok_home)
+            self.assertIsNotNone(session.dispatch_log)
+
     def test_apply_workers_to_claude_argv(self):
         with tempfile.TemporaryDirectory() as directory:
             mcp = Path(directory) / "mcp.json"

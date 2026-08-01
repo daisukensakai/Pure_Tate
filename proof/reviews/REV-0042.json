@@ -1,0 +1,174 @@
+{
+  "attempt_id": "ATT-0034",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0001",
+      "note": "For the smooth dimension-21 DM stack, H^{BM}_{16} is H^{26}(21). Twisting weight 26 by (21) gives weight -16, and Q(-13)(21)=Q(8). The degrees and every Tate twist match the exact rational-coefficient target.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0002",
+      "note": "The lowest-weight piece W_26 H^26 is the image from the smooth proper compactification and is pure of weight 26. This establishes purity of weight, not Hodge-Tate type.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0003",
+      "note": "The Leray sequence has only q=0,1. Its q=0 term in total degree 26 vanishes, and the possible d2 maps adjacent to E2^{25,1} have zero targets or sources, so the asserted degree-26 mixed-Hodge-structure identification follows.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0004",
+      "note": "Strictness of the weight filtration and the weight floor for Q(-1) give the stated W_26 surjection and kernel subquotient. This route only reduces the problem to the unproved local-system group W_26 H^25(M_{6,5};H).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0005",
+      "note": "The supplied SRC-0002 excerpt records only a range n<=c(g) and a fragment referring to Lemma 4.3; it does not itself supply c(6)>=5 or the complete CKgP theorem used here. Even if accepted for M_{6,5}, it controls constant coefficients only and does not discharge the H-coefficient reduction.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0006",
+      "note": "With the packet's gamma^*O(-f) convention, deg W_5=16, deg L=6, and the Serre-dual obstruction degrees are 0 for f=5 and -4 for f=4. On the balanced locus, the degree-zero obstruction is nonzero exactly when O_C(Gamma) is isomorphic to L.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0007",
+      "note": "The count 15+2=17 does not establish that the incidence map is generically finite, that its image is a pure codimension-4 component, or that stack stabilizers do not change the asserted description. The hyperelliptic, trigonal, plane-quintic, unbalanced, and nonreduced strata are named but not individually constructed or dimension-bounded; no exhaustive stable-pair or closure analysis is supplied.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0008",
+      "note": "The numerical codimension-4 purity shift H_Z^26 <- H^18(Z)(-4) is correct when purity applies, but the Tate premise is not proved. A finite morphism to an open of M_{0,18} does not make the source mixed Tate: its finite pushforward can contain nontrivial local systems. Likewise, rational S_6 averaging identifies invariant summands only after Tate purity of the covering space has been established; it does not establish that purity. Contributions and differentials from the omitted lower strata remain uncontrolled.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0009",
+      "note": "This is the strongest load-bearing gap. No actual presentation of U, sequence of maps, or applicable preservation theorem is supplied. SRC-0002 concerns the stated M_{g,n} range and does not establish CKgP for this CE-surjective open. Consequently Lemma 4.3 cannot yet be applied to W_26 H^26(U).",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0010",
+      "note": "The final localization argument depends on CLM-0007 through CLM-0009. Conditional on pure Q(-13) support and open terms, strictness and semisimplicity would give an actual rational Hodge-structure isomorphism, not merely a semisimplification; those premises are not established.",
+      "verdict": "unresolved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "finding_candidates": [
+    {
+      "adjudication": {
+        "notes": "This is a proof gap, not evidence that the exact target contains a non-Tate summand.",
+        "recommendation": "corroborate_as_gap",
+        "severity": "load_bearing",
+        "status": "candidate",
+        "verdict_impact": "incomplete"
+      },
+      "key": "att-0034-ckgp-for-ce-open-undischarged",
+      "related_claim_ids": [
+        "CLM-0009",
+        "CLM-0010"
+      ],
+      "related_dependency_ids": [
+        "DEP-0004"
+      ],
+      "related_source_ids": [
+        "SRC-0002"
+      ],
+      "statement": "ATT-0034's localization proof requires CKgP, or an equivalent lowest-weight Tate theorem, for the CE-surjective open U. The supplied construction does not identify the spaces and maps sufficiently to apply any preservation result, and its cited CKgP dependency is scoped to M_{6,5}.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": {
+        "notes": "This candidate isolates the finite-cover and invariants issue without asserting that a particular non-Tate local system survives in the target.",
+        "recommendation": "corroborate_as_gap",
+        "severity": "load_bearing",
+        "status": "candidate",
+        "verdict_impact": "incomplete"
+      },
+      "key": "finite-cover-does-not-imply-mixed-tate-source",
+      "related_claim_ids": [
+        "CLM-0008",
+        "CLM-0010"
+      ],
+      "related_dependency_ids": [],
+      "related_source_ids": [],
+      "statement": "The finite branch morphism from the Hurwitz stack to an open of M_{0,18} does not by itself imply mixed-Tate cohomology of the Hurwitz stack or its projective-bundle open: the finite pushforward of the constant sheaf may contain non-Tate local systems. Rational averaging only preserves an already established Tate structure on the cover.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": {
+        "notes": "The candidate records omitted geometric cases and support terms, not a new target dictionary or packet source bound.",
+        "recommendation": "corroborate_as_gap",
+        "severity": "load_bearing",
+        "status": "candidate",
+        "verdict_impact": "incomplete"
+      },
+      "key": "ce-failure-strata-and-support-filtration-unchecked",
+      "related_claim_ids": [
+        "CLM-0007",
+        "CLM-0008",
+        "CLM-0010"
+      ],
+      "related_dependency_ids": [],
+      "related_source_ids": [],
+      "statement": "The dominant dimension count and named exceptional loci do not constitute an exhaustive component, stabilizer, closure, and codimension analysis of Z. Until every contributing stratum is identified, the support filtration and its Gysin inputs in degree 26 cannot be declared Tate or vanishing.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0042",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "758735377a6bcfa87098b70b19cddd26e21835d97796be9596d705679dc1d0e6",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "DEP-0001",
+      "note": "The Poincare-duality dictionary, degrees, weights, and Tate twists agree with the exact task target.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "DEP-0002",
+      "note": "The packet's degree-26 forgetful-map Leray statement supports the claimed spectral-sequence identification.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "DEP-0003",
+      "note": "SRC-0004 supports the CE degree and Serre-duality calculation with the packet's negative-twist convention, limited to the balanced-locus calculation used in CLM-0006.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "DEP-0004",
+      "note": "The supplied locator does not independently establish the numerical bound c(6)>=5 or reproduce the full CKgP consequence. In any event this dependency is scoped to M_{6,5}; it supplies neither CKgP for U nor purity for H-coefficient cohomology.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "DEP-0005",
+      "note": "The Deligne lowest-weight edge-image statement is correctly used for the smooth open DM stack and its smooth proper compactification.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0034-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "CLM-0009 is an undischarged load-bearing assertion: the attempt never constructs the claimed CKgP presentation of the CE-surjective open U or cites a theorem covering that open. Without Tate purity of W_26 H^26(U), localization cannot prove the exact theorem. Independently, CLM-0008 uses the invalid implication that a finite cover of a mixed-Tate configuration space is itself mixed Tate. These defects make the proof incomplete but do not exhibit a surviving non-Tate summand and therefore do not refute the theorem.",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "incomplete"
+}

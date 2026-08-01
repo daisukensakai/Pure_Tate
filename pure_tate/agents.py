@@ -1,8 +1,10 @@
 import json
 import hashlib
 import os
+import re
 import shutil
 import tempfile
+import time
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple
 
@@ -1312,6 +1314,329 @@ def _failure_detail(returncode: int, stderr: str, raw: str) -> str:
     return "agent failed with exit %d: %s" % (returncode, detail.strip()[:1000])
 
 
+class _ControllerProcess:
+    """Process-shaped result for the multi-turn Codex controller adapter."""
+
+    def __init__(self, stdout: str, stderr: str) -> None:
+        self.returncode = 0
+        self.stdout = stdout
+        self.stderr = stderr
+
+
+def _codex_controller_settings(config_root: Dict[str, Any]) -> Dict[str, Any]:
+    raw = config_root.get("codex_controller_workers")
+    raw = raw if isinstance(raw, dict) else {}
+
+    def bounded(name: str, default: int, lower: int, upper: int) -> int:
+        try:
+            value = int(raw.get(name, default))
+        except (TypeError, ValueError):
+            value = default
+        return max(lower, min(upper, value))
+
+    return {
+        "enabled": raw.get("enabled", True) is not False,
+        "max_requests": bounded("max_requests", 4, 0, 4),
+        "retry_limit": bounded("retry_limit", 1, 0, 1),
+        "max_attempts": bounded("max_attempts", 8, 1, 8),
+        "max_result_chars": bounded("max_result_chars", 12000, 500, 50000),
+    }
+
+
+def _codex_controller_decision_schema() -> Dict[str, Any]:
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "required": ["action", "request"],
+        "properties": {
+            "action": {"type": "string", "enum": ["dispatch", "finalize"]},
+            "request": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "required": ["request_id", "description", "prompt"],
+                        "properties": {
+                            "request_id": {"type": "string"},
+                            "description": {"type": "string"},
+                            "prompt": {"type": "string"},
+                        },
+                    },
+                    {"type": "null"},
+                ]
+            },
+        },
+    }
+
+
+def _parse_codex_controller_decision(
+    raw: str, seen_ids: set[str]
+) -> Dict[str, str]:
+    value = _extract_json_object(raw)
+    action = value.get("action")
+    if action == "finalize":
+        if value.get("request") is not None:
+            raise ValueError("controller finalize decision request must be null")
+        return {"action": "finalize"}
+    if action != "dispatch" or not isinstance(value.get("request"), dict):
+        raise ValueError("controller decision must be dispatch or finalize")
+    request = value["request"]
+    request_id = request.get("request_id")
+    description = request.get("description")
+    prompt = request.get("prompt")
+    if (
+        not isinstance(request_id, str)
+        or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}", request_id)
+        or request_id in seen_ids
+    ):
+        raise ValueError("controller request_id is invalid or duplicated")
+    if not isinstance(description, str) or not description.strip() or len(description) > 500:
+        raise ValueError("controller request description is invalid")
+    if not isinstance(prompt, str) or not prompt.strip() or len(prompt) > 12000:
+        raise ValueError("controller request prompt is invalid")
+    return {
+        "action": "dispatch",
+        "request_id": request_id,
+        "description": description.strip(),
+        "prompt": prompt.strip(),
+    }
+
+
+def _codex_controller_transcript(
+    entries: List[Dict[str, Any]], max_result_chars: int
+) -> str:
+    if not entries:
+        return "No Grok workers have been requested yet."
+    rows = []
+    for entry in entries:
+        row = {
+            "request_id": entry["request_id"],
+            "description": entry["description"],
+            "status": entry["status"],
+            "attempts": entry["attempts"],
+            "worker_ids": entry["worker_ids"],
+        }
+        if entry["status"] == "completed":
+            row["result"] = entry.get("result", "")[:max_result_chars]
+        else:
+            row["error"] = entry.get("error", "worker failed")[:1000]
+        rows.append(row)
+    return json.dumps(rows, indent=2, sort_keys=True)
+
+
+def _codex_controller_decision_prompt(
+    base_prompt: str,
+    transcript: str,
+    remaining_requests: int,
+) -> str:
+    return (
+        base_prompt
+        + "\n\n# Controller decision turn\n\n"
+        + "Do not return the task artifact on this turn. You have "
+        + str(remaining_requests)
+        + " remaining logical Grok-worker requests. Review the controller "
+        + "transcript below, then return exactly one JSON object matching the "
+        + "decision schema: either action=dispatch with one focused request, or "
+        + "action=finalize when you have enough information. Grok results are "
+        + "assistive and still require independent verification in the final artifact.\n\n"
+        + "# Controller transcript\n\n"
+        + transcript
+    )
+
+
+def _codex_controller_synthesis_prompt(base_prompt: str, transcript: str) -> str:
+    return (
+        base_prompt
+        + "\n\n# Controller Grok-worker transcript\n\n"
+        + transcript
+        + "\n\nUse this only as assistive working context. Reprove or independently "
+        + "verify every claim used in the final artifact. Now return the required "
+        + "task artifact exactly as the execution contract requires."
+    )
+
+
+def _run_codex_controller(
+    *,
+    task: Dict[str, Any],
+    context: Path,
+    context_files: List[str],
+    expected_artifact_id: str,
+    phase: str,
+    workers: "WorkerSession",
+    settings: Dict[str, Any],
+    task_timeout: int,
+    inactivity: Optional[int],
+    abort_patterns: Optional[Dict[str, Any]],
+    activity_streams: Optional[List[str]],
+    progress_callback: Optional[Callable[[str, int, float], None]],
+) -> _ControllerProcess:
+    """Run bounded tool-free Codex decisions and direct trusted worker dispatch."""
+    from .grok_workers import GrokWorkerPool, PoolError
+
+    if workers.dispatch_log is None:
+        raise RuntimeError("controller worker session lacks durable dispatch log")
+    max_requests = int(settings["max_requests"])
+    retry_limit = int(settings["retry_limit"])
+    max_attempts = int(settings["max_attempts"])
+    max_result_chars = int(settings["max_result_chars"])
+    base_prompt = assemble_prompt(
+        task, context_files, expected_artifact_id, "codex", workers_enabled=False
+    )
+    decision_schema_path = context / "codex-controller-decision-schema.json"
+    atomic_write_json(decision_schema_path, _codex_controller_decision_schema())
+    pool = GrokWorkerPool(
+        max_concurrent=1,
+        max_total=max_attempts,
+        model=workers.env_updates.get("GROK_WORKER_MODEL", "grok-4.5"),
+        timeout_seconds=int(workers.env_updates.get("GROK_WORKER_TIMEOUT", "300")),
+        allow_web=workers.allow_web,
+        work_dir=context,
+        results_dir=workers.results_dir,
+        dispatch_log=workers.dispatch_log,
+    )
+    entries: List[Dict[str, Any]] = []
+    seen_ids: set[str] = set()
+    observable: List[str] = []
+    stderr_chunks: List[str] = []
+    started = time.monotonic()
+
+    def invoke(prompt: str, output_path: Path, schema: Optional[Path] = None) -> str:
+        remaining = max(1, int(task_timeout - (time.monotonic() - started)))
+        command = _engine_argv("codex", prompt, output_path, phase=phase, workers=None)
+        if schema is not None:
+            command[-1:-1] = ["--output-schema", str(schema)]
+        process = run_captured_process(
+            command,
+            cwd=context,
+            env=_subprocess_env("openai", load_engines().get("codex")),
+            timeout=remaining,
+            inactivity_timeout=inactivity,
+            abort_stderr_pattern_counts=abort_patterns,
+            activity_streams=activity_streams,
+            on_activity=progress_callback,
+        )
+        observable.append(process.stdout or "")
+        stderr_chunks.append(process.stderr or "")
+        if process.returncode != 0:
+            detail = _failure_detail(
+                process.returncode, process.stderr or "", process.stdout or ""
+            )
+            if process.stdout:
+                detail += "; stdout: " + process.stdout.strip()[-1200:]
+            raise RuntimeError(detail)
+        if not output_path.is_file():
+            raise RuntimeError("Codex controller turn did not write output")
+        return output_path.read_text(encoding="utf-8")
+
+    try:
+        for round_index in range(max_requests):
+            workers.dispatch_log.log(
+                "controller_decision_started",
+                round=round_index + 1,
+                remaining_requests=max_requests - round_index,
+            )
+            decision_path = context / ("codex-controller-decision-%d.json" % (round_index + 1))
+            raw_decision = invoke(
+                _codex_controller_decision_prompt(
+                    base_prompt,
+                    _codex_controller_transcript(entries, max_result_chars),
+                    max_requests - round_index,
+                ),
+                decision_path,
+                decision_schema_path,
+            )
+            try:
+                decision = _parse_codex_controller_decision(raw_decision, seen_ids)
+            except ValueError as exc:
+                workers.dispatch_log.log(
+                    "controller_decision_invalid", round=round_index + 1, error=str(exc)
+                )
+                raise
+            if decision["action"] == "finalize":
+                workers.dispatch_log.log("controller_decision_finalized", round=round_index + 1)
+                break
+            seen_ids.add(decision["request_id"])
+            workers.dispatch_log.log(
+                "controller_request_accepted",
+                round=round_index + 1,
+                request_id=decision["request_id"],
+                description=decision["description"],
+                prompt_sha256=hashlib.sha256(decision["prompt"].encode("utf-8")).hexdigest(),
+            )
+            entry: Dict[str, Any] = {
+                "request_id": decision["request_id"],
+                "description": decision["description"],
+                "status": "failed",
+                "attempts": 0,
+                "worker_ids": [],
+                "error": "worker was not dispatched",
+            }
+            for attempt in range(retry_limit + 1):
+                if pool.dispatched_count >= max_attempts:
+                    entry["error"] = "controller worker-attempt budget exhausted"
+                    break
+                try:
+                    result = pool.dispatch(
+                        decision["prompt"], decision["description"], wait=True
+                    )
+                except PoolError as exc:
+                    entry["error"] = exc.message
+                    break
+                entry["attempts"] += 1
+                entry["worker_ids"].append(str(result.get("worker_id")))
+                if result.get("status") == "completed":
+                    entry["status"] = "completed"
+                    entry["result"] = str(result.get("result_text") or "")
+                    workers.dispatch_log.log(
+                        "controller_worker_finished",
+                        request_id=entry["request_id"],
+                        attempt=attempt + 1,
+                        worker_id=result.get("worker_id"),
+                        status="completed",
+                    )
+                    break
+                entry["error"] = str(result.get("error") or "worker failed")
+                workers.dispatch_log.log(
+                    "controller_worker_finished",
+                    request_id=entry["request_id"],
+                    attempt=attempt + 1,
+                    worker_id=result.get("worker_id"),
+                    status=str(result.get("status") or "failed"),
+                    error=entry["error"],
+                )
+                if attempt < retry_limit:
+                    workers.dispatch_log.log(
+                        "controller_retry",
+                        request_id=entry["request_id"],
+                        attempt=attempt + 2,
+                        previous_worker_id=result.get("worker_id"),
+                        error=entry["error"],
+                    )
+            if entry["status"] != "completed":
+                workers.dispatch_log.log(
+                    "controller_worker_exhausted",
+                    request_id=entry["request_id"],
+                    attempts=entry["attempts"],
+                    error=entry["error"],
+                )
+            entries.append(entry)
+        else:
+            workers.dispatch_log.log("controller_forced_finalization", rounds=max_requests)
+
+        workers.dispatch_log.log("controller_synthesis_started", rounds=len(entries))
+        final_path = context / "last-message.txt"
+        invoke(
+            _codex_controller_synthesis_prompt(
+                base_prompt, _codex_controller_transcript(entries, max_result_chars)
+            ),
+            final_path,
+        )
+        workers.dispatch_log.log("controller_synthesis_finished", rounds=len(entries))
+        return _ControllerProcess("\n".join(observable), "\n".join(stderr_chunks))
+    finally:
+        pool.shutdown(cancel_live=True)
+
+
 def _validate_finding_audit(
     task: Dict[str, Any],
     artifact: Dict[str, Any],
@@ -1417,6 +1742,13 @@ def run_task(
 
         engines_root = load_engines_config()
         max_workers = max_grok_workers_from_config(engines_root)
+        controller_settings = _codex_controller_settings(engines_root)
+        codex_controller = bool(
+            engine_id == "codex"
+            and family == "openai"
+            and controller_settings["enabled"]
+            and max_workers > 0
+        )
         allow_web = phase_allows_web(phase)
         worker_model = (
             load_engines().get("grok", {}).get("model") or "grok-4.5"
@@ -1436,9 +1768,13 @@ def run_task(
                 "output": str(output),
                 "paired_turn_kind": task.get("paired_turn_kind"),
                 "campaign_id": task.get("campaign_id"),
+                "worker_mode": "controller" if codex_controller else "mcp",
             },
+            attach_mcp=not codex_controller,
         )
-        workers_on = workers is not None and workers.enabled
+        workers_on = (
+            workers is not None and workers.enabled and not codex_controller
+        )
         prompt = assemble_prompt(
             task,
             files,
@@ -1453,7 +1789,7 @@ def run_task(
             prompt,
             last_message,
             phase=phase,
-            workers=workers,
+            workers=workers if workers_on else None,
         )
         engine_max = config.get("max_task_seconds")
         task_timeout = timeout
@@ -1473,16 +1809,34 @@ def run_task(
             workers,
         )
         try:
-            process = run_captured_process(
-                command,
-                cwd=context,
-                env=env,
-                timeout=task_timeout,
-                inactivity_timeout=inactivity,
-                abort_stderr_pattern_counts=abort_patterns,
-                activity_streams=activity_streams,
-                on_activity=progress_callback,
-            )
+            if codex_controller:
+                if workers is None:
+                    raise RuntimeError("Codex controller worker session is unavailable")
+                process = _run_codex_controller(
+                    task=task,
+                    context=context,
+                    context_files=files,
+                    expected_artifact_id=output.stem,
+                    phase=phase,
+                    workers=workers,
+                    settings=controller_settings,
+                    task_timeout=task_timeout,
+                    inactivity=inactivity,
+                    abort_patterns=abort_patterns,
+                    activity_streams=activity_streams,
+                    progress_callback=progress_callback,
+                )
+            else:
+                process = run_captured_process(
+                    command,
+                    cwd=context,
+                    env=env,
+                    timeout=task_timeout,
+                    inactivity_timeout=inactivity,
+                    abort_stderr_pattern_counts=abort_patterns,
+                    activity_streams=activity_streams,
+                    on_activity=progress_callback,
+                )
         except ProcessWatchdogError as exc:
             detail = (
                 "agent watchdog: %s; stderr: %s"

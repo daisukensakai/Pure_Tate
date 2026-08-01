@@ -1,0 +1,175 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "Establish the precise numerical range needed to deduce CKgP for M_{6,5}, then use the applicable cycle-class theorem to prove W_{24}H^{24}(M_{6,5};Q) is a sum of Q(-12)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Prove the residual identification W_5 isomorphic to omega_C^2(-D) on the free balanced tetragonal locus and consequently L isomorphic to omega_C(-D)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Construct the rank-drop locus globally and prove that its balanced free-pencil incidence has a dimension-17 component of pure codimension 4."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Prove that every hyperelliptic, trigonal, plane-quintic, unbalanced, nonreduced-support, and closure stratum has the asserted dimension and codimension, including stabilizer and finite-map behavior."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Compute the monodromy of the relevant Hurwitz and divisor covers and prove directly that W_{18}H^{18} of the dominant rank-drop stratum is a sum of Q(-9)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Give a concrete geometric presentation of the complementary CE-surjective open U and prove CKgP, or an equivalent lowest-weight Tate statement, for that specific open."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "After controlling every support stratum and the open complement, use localization and strictness to prove that W_{26}H^{26}(M_{6,6};Q) is a sum of Q(-13)."
+    }
+  ],
+  "engine": "codex",
+  "established_facts": [
+    {
+      "evidence": "The displayed calculations are 3*6-3+6=21, 2*21-16=26, 26-2*21=-16, and -13+21=8, applied to H^{BM}_k(X)=H^{2d-k}(X)(d).",
+      "evidence_class": "mechanical",
+      "statement": "The smooth stack M_{6,6} has complex dimension 21, and Poincare duality identifies W_{-16}H^{BM}_{16}(M_{6,6};Q) with W_{26}H^{26}(M_{6,6};Q)(21); under this twist Q(-13) becomes Q(8)."
+    },
+    {
+      "evidence": "Deligne's lowest-weight edge-image theorem for a smooth open stack and a smooth proper compactification gives W_kH^k(X)=im(H^k(overline X)->H^k(X)); proper smooth cohomology in degree 26 is pure of weight 26.",
+      "evidence_class": "source",
+      "statement": "The lowest-weight subspace W_{26}H^{26}(M_{6,6};Q) is the image of H^{26}(overline M_{6,6};Q) in H^{26}(M_{6,6};Q), and it is pure of weight 26."
+    },
+    {
+      "evidence": "The punctured-curve fibre has cohomology only in degrees 0 and 1. The constant row contributes H^{26}(M_{6,5};Q)=0 because vcd(M_{6,5})=25, while the only possible differential adjacent to E_2^{25,1} has a zero source or target.",
+      "evidence_class": "mechanical",
+      "statement": "For the forgetful morphism p:M_{6,6}->M_{6,5}, there is an isomorphism H^{26}(M_{6,6};Q)=H^{25}(M_{6,5};R^1p_*Q), compatible with mixed Hodge structures and W_{26}."
+    },
+    {
+      "evidence": "The residue sequence for a genus-6 curve with five punctures has a rank-(5-1)=4 Tate quotient of weight 2 and the rank-2g=12 closed-curve summand of weight 1.",
+      "evidence_class": "mechanical",
+      "statement": "The punctured-curve local system fits into 0->H->R^1p_*Q->Q(-1)^4->0, where H is the rank-12 weight-1 local system of the universal closed genus-6 curve."
+    },
+    {
+      "evidence": "For a pure coefficient system of weight w, H^p has weights at least p+w. Thus H^{25} with Q(-1) coefficients has weights at least 27, while H^{24} has weights at least 26; strictness of mixed Hodge structures applies to the coefficient long exact sequence.",
+      "evidence_class": "mechanical",
+      "statement": "The weight floor gives W_{26}H^{25}(M_{6,5};Q(-1)^4)=0 and reduces W_{26}H^{25}(M_{6,5};R^1p_*Q) to a quotient of W_{26}H^{25}(M_{6,5};H), with kernel a subquotient of (W_{24}H^{24}(M_{6,5};Q)(-1))^4."
+    },
+    {
+      "evidence": "SRC-0004, Lemma 10.6 explicitly supplies the negative-twist convention and the degree formula.",
+      "evidence_class": "source",
+      "statement": "With W_f=(O_{P(E^vee)}(2) tensor gamma^*O_{P1}(-f))|_C, one has deg(W_f)=4g+12-4f; at g=6 this gives deg(W_5)=16 and deg(W_4)=20."
+    },
+    {
+      "evidence": "The two obstruction line bundles have degrees -4 and 0. A negative-degree line bundle has no section, and a degree-zero line bundle on a smooth connected projective curve has a nonzero section exactly when it is trivial.",
+      "evidence_class": "mechanical",
+      "statement": "For an effective divisor Gamma of degree 6, the f=4 obstruction vanishes, while the f=5 obstruction is nonzero exactly when O_C(Gamma) is isomorphic to L=W_5 tensor omega_C^{-1}."
+    },
+    {
+      "evidence": "Since deg(W_5)=16 and deg(omega_C)=10, deg(L)=6. Riemann-Roch gives chi(L)=6+1-6=1, so h^0(L)=1+h^1(L).",
+      "evidence_class": "mechanical",
+      "statement": "The line bundle L=W_5 tensor omega_C^{-1} has degree 6 and satisfies chi(L)=1, hence h^0(L) is at least 1."
+    },
+    {
+      "evidence": "A reduced degree-six divisor has exactly 6! orderings, and the free permutation action is etale over the pairwise-distinct locus; the reduced-support condition is open.",
+      "evidence_class": "mechanical",
+      "statement": "Over the reduced-support open of a relative degree-six linear system, ordering the six distinct support points gives a finite etale S_6-torsor."
+    }
+  ],
+  "id": "DIGEST-0014",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "A pure weight-26 Hodge structure may have off-diagonal Hodge types (p,q) with p+q=26; purity alone does not force type (13,13).",
+      "statement": "Purity of weight 26 by itself implies that W_{26}H^{26}(M_{6,6};Q) is Tate."
+    },
+    {
+      "mathematical_reason": "A source-dimension count does not determine generic fibre dimension, image dimension, component purity, stabilizers, or behavior under closure.",
+      "statement": "The parameter count 15+2=17 proves that the rank-drop incidence maps generically finitely onto a pure codimension-4 component."
+    },
+    {
+      "mathematical_reason": "Finite pushforward of the constant sheaf can contain nontrivial local systems whose cohomology has non-Tate Hodge summands; mixed-Tate cohomology of the base does not control those coefficient systems.",
+      "statement": "A finite morphism from a Hurwitz stack to a mixed-Tate open in M_{0,18} makes the Hurwitz stack mixed Tate."
+    },
+    {
+      "mathematical_reason": "Averaging only projects an already understood representation onto its invariant direct summand; it supplies no Tate-purity statement for the covering space or its nontrivial isotypic local systems.",
+      "statement": "Rational averaging over S_6 establishes Tate purity of the ordered finite etale cover."
+    },
+    {
+      "mathematical_reason": "CKgP has no blanket preservation theorem under arbitrary opens or finite maps; a precise presentation and applicable localization or descent theorem are required.",
+      "statement": "Arbitrary open immersions and finite morphisms automatically preserve CKgP, so the asserted operations prove CKgP for U."
+    },
+    {
+      "mathematical_reason": "The Gysin degree shift fixes which cohomology groups can contribute but does not determine their Hodge type or the intervening differentials; each stratum and coefficient system must be identified and controlled.",
+      "statement": "Unnamed lower-dimensional strata contribute only zero or Tate classes to degree-26 cohomology with supports."
+    }
+  ],
+  "packet_sha256": "758735377a6bcfa87098b70b19cddd26e21835d97796be9596d705679dc1d0e6",
+  "problem_key": "62eb72b401a7fd05334e4e43c47b26b5818fd0f0a92528e3875488ea5bcc4747",
+  "reusable_computations": [
+    {
+      "sha256": "9ed3fa752b049d0d0bb8923766a3fca8d5b6b56260613faf1a2c6d2860068a1c",
+      "statement": "The exact UTF-8 computation payload \"d=3\u00b76\u22123+6=21\" evaluates the target dimension."
+    },
+    {
+      "sha256": "98c25eb6671de66564b22c5ee321b756613172cfaa20a828f807629e376c944b",
+      "statement": "The exact UTF-8 computation payload \"vcd(M_{6,5})=4\u00b76\u22124+5=25\" evaluates the base virtual cohomological dimension."
+    },
+    {
+      "sha256": "6a2af9f61fed51b105be108b821a9fc3d3d4cd7bab10e66eeb69147d6151c70d",
+      "statement": "The exact UTF-8 computation payload \"deg(W_5)=16 and deg(W_4)=20\" records the two CE degrees."
+    },
+    {
+      "sha256": "46279731159f628087fe624751d009698577d60489c56eb6fa9cc70e90d83fc0",
+      "statement": "The exact UTF-8 computation payload \"deg(\u03c9_C \u2297 W_5^\u2228(\u0393))=4\u00b75+6\u22122\u00b76\u221214=0, deg(\u03c9_C \u2297 W_4^\u2228(\u0393))=\u22124.\" records the obstruction degrees, including the terminal period."
+    },
+    {
+      "sha256": "80bf80bf3a2bb14f7517618d514ffd46df3a5972144948614745de5a6b7de1e3",
+      "statement": "The exact UTF-8 computation payload \"Q(\u221213)(21)=Q(8)\" records the Tate-twist conversion."
+    }
+  ],
+  "reviewer_engine": "codex",
+  "sanitized": true,
+  "schema_version": 1,
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-GROK-FORCED_PROOF",
+  "unresolved_dependencies": [
+    {
+      "statement": "A source establishing the exact CKgP range required for M_{6,5}, including the numerical inequality c(6)>=5 and the precise lowest-weight consequence."
+    },
+    {
+      "statement": "Tate purity of W_{26}H^{25}(M_{6,5};H), or another argument controlling its quotient relevant to H^{26}(M_{6,6};Q)."
+    },
+    {
+      "statement": "A global construction of the rank-drop locus with an exhaustive component, dimension, stabilizer, closure, and reduced-support analysis."
+    },
+    {
+      "statement": "Control of nontrivial local systems arising from the finite Hurwitz branch morphism and the ordered-divisor S_6-cover."
+    },
+    {
+      "statement": "Tate purity of W_{18}H^{18} of the dominant rank-drop stratum and of every lower-stratum Gysin input."
+    },
+    {
+      "statement": "A concrete CKgP presentation or independent lowest-weight Tate theorem for the complementary CE-surjective open U."
+    },
+    {
+      "statement": "Control of all localization maps and differentials contributing to W_{26}H^{26}(M_{6,6};Q), including possible non-Tate summands."
+    }
+  ]
+}

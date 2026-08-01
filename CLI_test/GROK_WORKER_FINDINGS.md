@@ -1,6 +1,6 @@
 # Grok 4.5 worker pool findings (CLI_test)
 
-**Latest green gate run:** `CLI_test/results/grok_workers/20260801T043610527526Z`  
+**Latest controller Codex gate run:** `CLI_test/results/grok_workers/20260801T084319677265Z`
 **Probe runner:** `CLI_test/run_grok_worker_probes.py`  
 **Date:** 2026-08-01  
 **Harness status:** integrated in `pure_tate/grok_workers.py` + `agents.py`
@@ -8,9 +8,9 @@
 
 ## Goal
 
-Any parent agent may optionally dispatch up to **4 Grok 4.5 workers** (hard
-cap) for proof / research / review assistance, without giving parents write or
-shell access.
+Claude and Grok may use their existing direct MCP dispatch. Codex instead uses
+a controller-mediated, sequential path: safe read-only Codex decisions request
+at most four Grok workers, and the harness dispatches one at a time.
 
 ## Verdicts
 
@@ -25,22 +25,33 @@ shell access.
 | `native_spawn_optional` | **skip** | Native spawn via `--tools` collapses allowlist |
 | `mcp_claude` | **pass** | Real worker artifacts + `CLAUDE-MCP` |
 | `mcp_grok` | **pass** | Real worker artifacts; allowlist stays shell-free |
-| `mcp_codex` | **fail** | Invokes MCP tool in stream, but no worker files this run |
+| `mcp_codex` | **pass** | Dedicated headless probe dispatches one real worker with a hard artifact gate |
+| `mcp_codex_restricted` | **expected fail** | Codex emits the call but cancels it in its headless approval layer |
+| `controller_codex` | **pass** | Safe Codex chose worker 2 after receiving worker 1; both outcomes and final marker are durable |
 | `mcp_gemini` | **skip** | No safe session-scoped MCP inject without project/user settings |
 
 **Stage B (harness) gate:** offline hard-cap + allowlist_safety + worker_smoke +
-`mcp_claude` + `mcp_grok` are green. Codex/Gemini need follow-up.
+`mcp_claude` + `mcp_grok` + `mcp_codex` are green. Gemini needs follow-up.
 
 ## Architecture that works
 
 ```
-Parent (Claude | Grok | …)
+Parent (Claude | Grok)
    │  MCP tools (dispatch / await / list)
    ▼
 uv run --with mcp python CLI_test/grok_worker_mcp_sdk.py
    │  hard max_concurrent=4, max_total=4
    ▼
 grok -p … -m grok-4.5   (read-only --tools, --no-subagents)
+```
+
+```
+Codex (read-only, approval_policy=never, no MCP attachment)
+   │  structured dispatch/finalize decision
+   ▼
+Harness controller (one live worker; 4 logical rounds, one retry each)
+   ▼
+Grok worker → durable outcome → next Codex decision or final Codex artifact
 ```
 
 ### Components (CLI_test only)
@@ -131,8 +142,10 @@ dispatches are admitted).
 
 ### Codex / Gemini
 
-- Codex stream showed `mcp_tool_call` to `dispatch_grok_worker` but no worker
-  artifacts in the gate run — debug env/sandbox inheritance next
+- Direct Codex MCP requires `--dangerously-bypass-approvals-and-sandbox` for a
+  noninteractive dispatch; that remains a diagnostic-only CLI probe. Production
+  Codex has no MCP server, remains `--sandbox read-only` with
+  `approval_policy="never"`, and requests workers through the controller.
 - Gemini needs a session-scoped MCP inject that does not rewrite user settings
 
 ## Prompt contract (for later harness)
@@ -149,13 +162,22 @@ python3 CLI_test/run_grok_worker_probes.py --offline
 
 # Live probes (API keys / CLI auth required)
 python3 CLI_test/run_grok_worker_probes.py --live
+
+# Diagnostic-only direct Codex MCP gate (uses bypass; not production)
+python3 CLI_test/run_grok_worker_probes.py --live --only mcp_codex
+
+# Expected-red diagnosis: headless read-only Codex cancels before server receipt
+python3 CLI_test/run_grok_worker_probes.py --live --only mcp_codex_restricted
+
+# Production-safe controller: Codex requests two sequential workers, then synthesizes
+python3 CLI_test/run_grok_worker_probes.py --live --only controller_codex
 ```
 
 Results: `CLI_test/results/grok_workers/<timestamp>/`  
 Pointer: `CLI_test/results/grok_workers/latest.txt`
 
-## Explicit non-actions (this phase)
+## Explicit non-actions
 
-- No edits to `pure_tate/agents.py`, `data/engines.json`, or user Grok config
+- No edits to user Grok config
 - No enabling native `spawn_subagent` in production allowlists
 - No permanent project MCP registration
