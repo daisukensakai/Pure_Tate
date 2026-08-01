@@ -1317,6 +1317,7 @@ def run_task(
 ) -> Dict[str, Any]:
     from .capabilities import WEB_PHASES, capability_is_attested
     from .paired import (
+        ArtifactValidationError,
         PairedInfrastructureError,
         SubstantiveAttemptError,
         validate_digest,
@@ -1449,6 +1450,9 @@ def run_task(
                 ) from exc
             raise RuntimeError(str(exc)) from exc
         stdout = observable_stdout
+        # Keep the unfiltered official payload for validation-failure traces.
+        # Grok's thought quarantine can drop envelope-only replies to "".
+        raw_stdout = raw
         stderr = process.stderr or ""
 
     try:
@@ -1493,6 +1497,32 @@ def run_task(
                 validation_error=str(exc),
             )
             raise SubstantiveAttemptError(
+                str(exc), trace["id"], trace["path"]
+            ) from exc
+        if phase in {
+            "review",
+            "finding-audit",
+            "novelty",
+            "trace-mining",
+            "mathematics",
+            "research",
+        }:
+            trace_task = dict(task)
+            if not trace_task.get("paired_turn_kind"):
+                trace_task["paired_turn_kind"] = phase
+            # Grok thought quarantine can empty envelope-only replies; fall
+            # back to the unfiltered official subprocess payload.
+            trace_stdout = stdout if str(stdout or "").strip() else raw_stdout
+            trace = write_observable_trace(
+                trace_task,
+                engine_id,
+                trace_stdout,
+                stderr,
+                parsed_artifact=artifact,
+                validation_error=str(exc),
+                classification="validation_failure",
+            )
+            raise ArtifactValidationError(
                 str(exc), trace["id"], trace["path"]
             ) from exc
         raise

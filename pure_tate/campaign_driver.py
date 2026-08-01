@@ -40,6 +40,7 @@ from .tasking import (
 )
 from .paired import (
     DIGEST_DIR,
+    ArtifactValidationError,
     PairedInfrastructureError,
     SubstantiveAttemptError,
     dry_run_preview,
@@ -1009,6 +1010,14 @@ def drive_campaign(
             event["error"] = str(exc)
             event["state"] = "failed"
             event["completed_at"] = _timestamp()
+            if isinstance(exc, ArtifactValidationError):
+                event["trace_id"] = exc.trace_id
+                event["trace_path"] = exc.trace_path
+                trace_path = ROOT / exc.trace_path
+                if trace_path.is_file():
+                    event["trace_sha256"] = hashlib.sha256(
+                        trace_path.read_bytes()
+                    ).hexdigest()
             # Schema/shape failures on reviews and research should not kill the
             # whole batch: exclude this engine attempt and let another engine
             # retry the same task on the next step.

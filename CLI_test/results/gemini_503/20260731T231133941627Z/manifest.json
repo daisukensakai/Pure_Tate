@@ -1,0 +1,123 @@
+{
+  "api": [
+    {
+      "elapsed_seconds": 1.293,
+      "error": {
+        "code": 503,
+        "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+        "status": "UNAVAILABLE"
+      },
+      "http": 503,
+      "model": "gemini-3.5-flash",
+      "ok": false,
+      "path": "api",
+      "text": null
+    },
+    {
+      "elapsed_seconds": 1.494,
+      "error": null,
+      "http": 200,
+      "model": "gemini-3-flash-preview",
+      "ok": true,
+      "path": "api",
+      "text": "API_WORKING"
+    }
+  ],
+  "api_key_present": true,
+  "cli": [
+    {
+      "abort_reason": "503_retry_threshold",
+      "argv": [
+        "gemini",
+        "-m",
+        "gemini-3.5-flash",
+        "-p",
+        "<PROMPT>",
+        "-o",
+        "stream-json",
+        "--approval-mode",
+        "plan",
+        "--skip-trust"
+      ],
+      "assistant_messages": [],
+      "elapsed_seconds": 20.369,
+      "events": "results/gemini_503/20260731T231133941627Z/gemini-3.5-flash/events.jsonl",
+      "finished_at": "2026-07-31T23:11:58.232449+00:00",
+      "model": "gemini-3.5-flash",
+      "result_events": [],
+      "retry_503_attempts": 3,
+      "returncode": 0,
+      "saw_503": true,
+      "saw_unavailable": true,
+      "started_at": "2026-07-31T23:11:37.863375+00:00",
+      "stderr": "results/gemini_503/20260731T231133941627Z/gemini-3.5-flash/stderr.txt",
+      "stderr_bytes": 4980,
+      "stdout": "results/gemini_503/20260731T231133941627Z/gemini-3.5-flash/stdout.txt",
+      "stdout_bytes": 250,
+      "success": false,
+      "timed_out": false
+    },
+    {
+      "abort_reason": null,
+      "argv": [
+        "gemini",
+        "-m",
+        "gemini-3-flash-preview",
+        "-p",
+        "<PROMPT>",
+        "-o",
+        "stream-json",
+        "--approval-mode",
+        "plan",
+        "--skip-trust"
+      ],
+      "assistant_messages": [
+        "CLI_WORKING"
+      ],
+      "elapsed_seconds": 2.943,
+      "events": "results/gemini_503/20260731T231133941627Z/gemini-3-flash-preview/events.jsonl",
+      "finished_at": "2026-07-31T23:12:01.175720+00:00",
+      "model": "gemini-3-flash-preview",
+      "result_events": [
+        {
+          "stats": {
+            "cached": 0,
+            "duration_ms": 1690,
+            "input": 10398,
+            "input_tokens": 10398,
+            "models": {
+              "gemini-3-flash-preview": {
+                "cached": 0,
+                "input": 10398,
+                "input_tokens": 10398,
+                "output_tokens": 3,
+                "total_tokens": 10401
+              }
+            },
+            "output_tokens": 3,
+            "tool_calls": 0,
+            "total_tokens": 10401
+          },
+          "status": "success",
+          "timestamp": "2026-07-31T23:12:01.160Z",
+          "type": "result"
+        }
+      ],
+      "retry_503_attempts": 0,
+      "returncode": 0,
+      "saw_503": false,
+      "saw_unavailable": false,
+      "started_at": "2026-07-31T23:11:58.232820+00:00",
+      "stderr": "results/gemini_503/20260731T231133941627Z/gemini-3-flash-preview/stderr.txt",
+      "stderr_bytes": 342,
+      "stdout": "results/gemini_503/20260731T231133941627Z/gemini-3-flash-preview/stdout.txt",
+      "stdout_bytes": 698,
+      "success": true,
+      "timed_out": false
+    }
+  ],
+  "executed_at": "2026-07-31T23:11:33.942035+00:00",
+  "gemini_cli_version": "0.53.0",
+  "run_id": "20260731T231133941627Z",
+  "schema_version": 1
+}

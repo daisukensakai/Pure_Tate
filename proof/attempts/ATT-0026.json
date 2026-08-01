@@ -1,0 +1,381 @@
+{
+  "argument_markdown": "## 0. Scope\n\nThis discharges subproblem `C66-GEO-Z` only. `TASK.json` lists `blocked_dependencies: []` and `dependency_artifacts: {}`; no dependency attempt or confirmation review was supplied, so no dependency artifact IDs are cited and no absent dependency is inferred, recreated, or strengthened. It does **not** claim `RED-0001`, and makes no statement about weight, Tate type, or degree-26 cohomology. Working-context files are treated as ordinary context; every fact used is reproved here, taken from an adjudicated packet finding, or labelled as an explicit classical/source input. Base field algebraically closed, characteristic 0.\n\n### 0.1 Blocked routes: none used; `new_inputs` empty\n\n- `vcd-only-vanishing`: no vanishing-above-vcd statement occurs. FND-0035 is not used as a premise.\n- `undecorated-cgp-top-weight-graph-complex`: no graph complex or dual complex appears.\n- `point-count-without-degree-parity-separation`: no finite-field point counts. The finite objects below (five `g^1_4`'s, the `S_6`-cover) are geometric statements in characteristic 0, not counting evidence.\n- `forgetful-map-renaming-local-system-unknown`: the map `M_{6,6} -> M_{6,5}` and FND-0036's Leray reduction are deliberately **not** used; nothing below renames the unknown as cohomology with unknown local-system coefficients.\n\n## 1. Setup\n\n`M := M_{6,6}`, smooth DM of dimension `3*6 - 3 + 6 = 21`. `pi : \\mathcal{C} -> M` universal curve, sections `sigma_i`, `Gamma := sum_i sigma_i(M)`, `omega := omega_{\\mathcal{C}/M}`.\n\n**Observation 1.1 (reducedness is automatic).** In `M_{6,6}` the markings are pairwise distinct by definition, so `Gamma` is reduced with six distinct support points and is etale over `M`. Hence the \"non-reduced support\" and \"the reduced-support open is not closed\" difficulties - real for the relative effective-divisor space over tetragonal moduli - **do not arise for a locus defined inside `M_{6,6}`**. This is why the construction below yields a *closed* substack rather than a locally closed one.\n\n## 2. Construction (proved)\n\n`R^1 pi_*` is top-degree for a proper flat family of curves, so by Grothendieck's cohomology-and-base-change it commutes with **arbitrary** base change with fibre `H^1(C_s, -)`. Fitting ideals commute with arbitrary base change, and `V(Fitt_j(\\mathcal{F}))` is the locus where the fibre dimension of `\\mathcal{F}` exceeds `j` (Nakayama).\n\n**Definition 2.1.** `Z := V(Fitt_1(R^1 pi_* O_{\\mathcal{C}}(Gamma))) \\subseteq M_{6,6}`.\n\n**Lemma 2.2.** (1) `Z` is closed. (2) Its formation commutes with arbitrary base change. (3) For any 2-term complex of vector bundles `phi : K^0 -> K^1` universally computing `R pi_* O(Gamma)` on an open `U` (these exist Zariski-locally by Mumford's construction), `rk K^1 = rk K^0 - 1 =: k - 1` and `Z \\cap U = V(I_{k-2}(phi))`, the locus `{rk phi <= k - 3}`. (4) `Z = V(Fitt_2(R^1 pi_*(omega(-Gamma))))`. (5) `Z` is `S_6`-stable.\n\n*Proof.* (1) `Fitt_1` is a coherent ideal sheaf. (2) Both `R^1 pi_*` in top degree and `Fitt_j` commute with arbitrary base change.\n\n(3) `chi(O_{C_s}(Gamma_s)) = 6 - 6 + 1 = 1` forces `rk K^0 - rk K^1 = 1`. With `\\mathcal{F} = coker(phi) = R^1 pi_* O(Gamma)`, the identity `Fitt_j(coker phi) = I_{rk K^1 - j}(phi)` gives `Fitt_1(\\mathcal{F}) = I_{k-2}(phi)`.\n\n(4) Relative duality gives `R pi_*(omega tensor \\mathcal{L}^{vee}) \\cong (R pi_* \\mathcal{L})^{vee}[-1]`. With `\\mathcal{L} = O(Gamma)`, the dual complex `phi^{vee} : (K^1)^{vee} -> (K^0)^{vee}` (ranks `k-1`, `k`) represents `R pi_*(omega(-Gamma))`, so `R^1 pi_*(omega(-Gamma)) = coker(phi^{vee})` and `Fitt_2(coker phi^{vee}) = I_{k-2}(phi^{vee}) = I_{k-2}(phi)` - literally the same minor ideal. Fibrewise check: `h^1(omega(-Gamma)) = h^0(O(Gamma))` (Serre), so `V(Fitt_2)` is `{h^0(O(Gamma)) >= 3}`, agreeing with `{h^1(O(Gamma)) >= 2}` via `h^0 - h^1 = 1`.\n\n(5) The ideal depends only on the `S_6`-invariant divisor `Gamma`. `\\square`\n\n**Remark 2.3 (what this avoids).** Definition 2.1 uses neither `Proj(pi_* L)` nor a relative linear system over a base where `h^0` jumps, and needs no comparison of an Abel-Jacobi incidence scheme with a determinantal scheme. Both flagged pathologies - `pi_* L` failing local freeness/base change when `h^0(L)` jumps, and geometric-point agreement failing to determine nilpotents - are circumvented because only **top-degree** pushforward is used, where base change is unconditional, and because the Fitting ideal is intrinsic. The comparison genuinely left open is isolated in GAP-2.\n\n## 3. Identification (proved, intrinsic, convention-free)\n\n**Proposition 3.1.** For a geometric point `(C, p_1, ..., p_6)` with `Gamma = sum p_i`, the following are equivalent: (a) `(C,p_\\bullet) \\in Z`; (b) `h^0(C, O_C(Gamma)) >= 3`; (c) `h^0(C, omega_C(-Gamma)) >= 2`; (d) there is a degree-4 line bundle `D` with `h^0(D) >= 2` and `Gamma + D \\in |omega_C|`. If `C` is non-hyperelliptic, then `h^0(O_C(Gamma)) = 3` and `h^0(omega_C(-Gamma)) = 2` exactly, `omega_C(-Gamma)` is a `g^1_4`, and these are further equivalent to (e) the six canonical images span at most a `P^3` in `P^5`.\n\n*Proof.* (a) `<=>` (b): Lemma 2.2(3)-(4) on fibres. (b) `<=>` (c): Riemann-Roch `h^0(O(Gamma)) - h^1(O(Gamma)) = 6 - 6 + 1 = 1` and Serre duality `h^1(O(Gamma)) = h^0(omega_C(-Gamma))` give `h^0(O(Gamma)) = h^0(omega_C(-Gamma)) + 1`. (c) `=>` (d): set `D := omega_C(-Gamma)`, degree `10 - 6 = 4`, `h^0(D) >= 2 > 0` so `D` is effective and `Gamma + D \\in |omega_C|`. (d) `=>` (c): `Gamma + D \\in |omega_C|` forces `D \\cong omega_C(-Gamma)`.\n\nUpper bound: on `Z`, `h^1(O(Gamma)) >= 2 > 0`, so `O(Gamma)` is special and Clifford gives `h^0 - 1 <= 6/2 = 3`, i.e. `h^0 <= 4`, with equality only if `O(Gamma)` is trivial or canonical or `C` is hyperelliptic; since `deg Gamma = 6 \\ne 0, 10`, equality forces `C` hyperelliptic. Hence `h^0 = 3` exactly for non-hyperelliptic `C`.\n\n(e): geometric Riemann-Roch, `dim span(Gamma) = deg Gamma - 1 - dim|Gamma| = 6 - h^0(O_C(Gamma))`; so `h^0 = 1` spans `P^5` and `h^0 >= 3` spans at most `P^3`. `\\square`\n\n**Interpretation.** `Z` is exactly the locus where the six markings **fail by two to impose independent conditions on the canonical system**; equivalently `Gamma` moves in a net `g^2_6`; equivalently `Gamma` is residual in a canonical divisor to a degree-4 pencil. No CE convention, splitting type, or choice of tetragonal structure enters.\n\n## 4. Bridge to Casnati-Ekedahl evaluation failure\n\n### 4.1 Inputs\n\n**(S1)** [SRC-0004 Lemma 10.6, packet primary locator] `deg(W_{f_i}|_C) = 2(2g - 2 + 4*2) - 4 f_i = 4g + 12 - 4 f_i`; the obstruction splits over `i = 1, 2`; `deg(omega_C tensor W_{f_i}^vee(Gamma)) = 2g - 2 - (4g + 12 - 4 f_i) + n = 4 f_i + n - 2g - 14`.\n\n**(S2)** [packet canonical geometric bottleneck] `F = O_{P^1}(4) + O_{P^1}(5)`; `W_5 := (O_{P(E^vee)}(2) tensor gamma^* O_{P^1}(-5))|_C` is the `f_2 = 5` summand of `(O(2) tensor gamma^* F^vee)|_C`, **not** the `O_{P^1}(5)` summand of `F`; failure condition `O_C(Gamma) \\cong W_5 tensor omega_C^{-1}`.\n\n**(H1)** CE normalization: `O_{P(E^vee)}(1)|_C \\cong omega_{C/P^1} = omega_C tensor gamma^* O_{P^1}(2)`. This is the standard CE normalization and is *forced numerically* by (S1), which computes `deg(O_{P(E^vee)}(2)|_C) = 2(2g - 2 + 8)`, whence `deg(O_{P(E^vee)}(1)|_C) = 2g - 2 + 8 = deg(omega_{C/P^1})`. Degree agreement is not isomorphism, so H1 is recorded as a labelled hypothesis, verified in the example of Section 5. **Sections 2, 3, 5 (nonemptiness of `Z`), 6, 7 are independent of H1.**\n\n**(H2)** Balanced splitting, as in (S2). Section 4.3 records what fails without it.\n\n### 4.2 The failure condition (proved from S1, S2, H1)\n\n**Lemma 4.1.** Under H1, for `gamma : C -> P^1` finite of degree 4 with `D_gamma := gamma^*(pt)`, `W_f|_C \\cong omega_C^{tensor 2} tensor gamma^* O_{P^1}(4 - f)`. At `g = 6` with H2: `W_4|_C \\cong omega_C^{tensor 2}` (degree 20), `W_5|_C \\cong omega_C^{tensor 2}(-D_gamma)` (degree 16), and `W_5 tensor omega_C^{-1} \\cong omega_C(-D_gamma)` of degree `10 - 4 = 6`.\n\n*Proof.* Square H1 and twist by `gamma^* O(-f)`. Degrees: `deg gamma^* O(1)|_C = 4`, so `deg W_f = 2(2g - 2) + 4(4 - f) = 4g + 12 - 4f`, matching (S1); at `g = 6, f = 5` this is 16 and `16 - 10 = 6`, matching the packet degree calculation. `\\square`\n\n**Lemma 4.2.** Let `g = n = 6`, `Gamma` effective of degree 6, `gamma` as above with H2.\n\n1. `deg(omega_C tensor W_4^vee(Gamma)) = 4*4 + 6 - 12 - 14 = -4 < 0`, so `H^0(C, omega_C tensor W_4^vee(Gamma)) = 0` **always** (negative-degree line bundles on a smooth projective connected curve have no nonzero section).\n2. `deg(omega_C tensor W_5^vee(Gamma)) = 4*5 + 6 - 12 - 14 = 0`, and a degree-zero line bundle on a smooth projective connected curve has a nonzero section iff it is trivial; hence the obstruction is nonzero iff `O_C(Gamma) \\cong W_5 tensor omega_C^{-1}`. *(This item uses only `deg W_5 = 16` from (S1), not H1.)*\n3. Under H1, `omega_C tensor W_5^vee(Gamma) \\cong omega_C^{-1}(D_gamma + Gamma)`, so failure reads `Gamma + D_gamma \\in |omega_C|`.\n\n**The sign matters.** With `gamma^* O(+5)` instead of `gamma^* O(-5)` one gets `deg W_5 = 4g + 12 + 20 = 56` and obstruction degree `10 - 56 + 6 = -40 < 0`: unconditional vanishing and an empty locus. The packet's `gamma^* O(-5)` is exactly what makes the obstruction degree 0. This is the packet-required derivation \"from the `f_2 = 5` summand in SRC-0004 Lemma 10.6, including the sign in `gamma^* O(-5)`\".\n\n### 4.3 Position of the balanced failure locus inside `Z`\n\n**Proposition 4.3.** Assume H1. (i) If CE evaluation fails at `(C, gamma, Gamma)` with `gamma` base-point-free of degree 4 and balanced, then `Gamma + D_gamma \\in |omega_C|` with `h^0(D_gamma) >= 2`, so by Proposition 3.1(d) `(C, p_\\bullet) \\in Z`. (ii) Conversely `(C, p_\\bullet) \\in Z` lies in the image of the balanced failure locus iff `omega_C(-Gamma)` carries a base-point-free pencil whose associated degree-4 cover has balanced CE splitting. (iii) Base-point-freeness and balancedness are open conditions, so the image `Z^{bal}` is an **open** substack of `Z`.\n\n*Proof.* (i) Lemma 4.2(3) plus `h^0(D_gamma) >= 2` for a degree-4 morphism. (ii) By Proposition 3.1, `D := omega_C(-Gamma)` is the unique candidate when `h^0(D) = 2`, i.e. off the hyperelliptic locus; on it, failure for `gamma` is precisely `D_gamma \\cong omega_C(-Gamma)`. (iii) Balancedness of `F` is open by semicontinuity of `h^0(F(-m))`; base-point-freeness is open. `\\square`\n\n**Corollary 4.4 (a real repair).** `Z^{bal}` is *not* closed in `M_{6,6}`, but `Z` is, and `Z^{bal} \\subseteq Z` is open with the same generic behaviour on the dominant component (Section 5). Downstream localization should therefore be set up on the closed, intrinsic `Z`, not on the balanced tetragonal image. This replaces the constraint-flagged move of \"identifying the balanced reduced-support relative linear system with a closed pure-codimension-4 subvariety and applying codimension-4 Gysin\".\n\n**Warning 4.5 (balancedness is load-bearing).** For an unbalanced splitting `F = O(f_1) + O(f_2)` with `f_1 + f_2 = 9`, e.g. `(3, 6)`: (S1) gives obstruction degrees `4*3 + 6 - 26 = -8 < 0` (vanishes) and `4*6 + 6 - 26 = +4 > 0`. The `f = 6` obstruction bundle is `omega_C^{-1}(2 D_gamma + Gamma)` of degree 4, and its `H^0` is nonzero iff that degree-4 bundle is effective - a condition of codimension 2 in `Pic^4`, hence defining a **strictly larger** failure locus than the degree-zero triviality condition. So the union over all splitting types of CE failure loci is not captured by `Z`. The packet restricts to the balanced case, and Proposition 4.3 is stated accordingly; see GAP-3.\n\n## 5. Nonemptiness: an explicit balanced example (proved; re-proves FND-0005)\n\nLet `X = P^1 x P^2` with `H_1, H_2` the pullback hyperplane classes (`H_1^2 = 0`, `H_2^3 = 0`, `H_1 H_2^2 = pt`). Let `C = V(f) \\cap V(h)` with `f \\in |O(1,2)|`, `h \\in |O(2,2)|` general.\n\n**5.1 Smooth, connected, genus 6.** `O(1,1)` is very ample (Segre), hence so are `O(1,2)` and `O(2,2)`; two applications of Bertini give `C` smooth. Koszul: `0 -> O(-3,-4) -> O(-1,-2) + O(-2,-2) -> O_X -> O_C -> 0`. By Kunneth, `H^*(O(-1,-2)) = 0` (the `P^1` factor `O(-1)` is acyclic) and `H^*(O(-2,-2)) = 0` (the `P^2` factor `O(-2)` is acyclic); `H^*(O(-3,-4))` is concentrated in degree 3 with `H^3 = C^{2} tensor C^{3} = C^6`. Splitting the Koszul complex into `0 -> O(-3,-4) -> O(-1,-2)+O(-2,-2) -> K -> 0` and `0 -> K -> O_X -> O_C -> 0` gives `H^i(K) \\cong H^{i+1}(O(-3,-4))`, i.e. `H^0(K) = H^1(K) = 0`, `H^2(K) = C^6`. Hence `h^0(O_C) = h^0(O_X) = 1` (connected) and `h^1(O_C) = h^2(K) = 6`, so `g = 6`.\n\n**5.2 The tetragonal structure.** `[C] = (H_1 + 2H_2)(2H_1 + 2H_2) = 6 H_1 H_2 + 4 H_2^2`. Then `[C] \\cdot H_1 = 4`, so `gamma := pr_1|_C` is finite of degree 4, and `D_gamma = O_C(1,0)`.\n\n**5.3 Canonical class and the residual bundle.** Adjunction: `omega_C = (omega_X tensor O(1,2) tensor O(2,2))|_C = (O(-2,-3) tensor O(3,4))|_C = O_C(1,1)`, of degree `[C] \\cdot (H_1 + H_2) = 4 + 6 = 10 = 2g - 2`. Hence `omega_C(-D_gamma) = O_C(0,1)`, of degree `[C] \\cdot H_2 = 6`.\n\n**5.4 `h^0 = 3` and base-point-freeness.** Twisting the Koszul argument by `O(0,1)`: `H^*(O(-1,-1)) = 0`, `H^*(O(-2,-1)) = 0`, and `H^*(O(-3,-3))` is concentrated in degree 3 with rank `2 * 1 = 2`; so `H^0(K(0,1)) = H^1(K(0,1)) = 0` and `h^0(O_C(0,1)) = h^0(O_X(0,1)) = 3`. `O_X(0,1)` is globally generated, hence so is its restriction: `O_C(0,1)` is base-point-free of degree 6 with `h^0 = 3`. By Bertini in characteristic 0 the general member of this base-point-free system on the smooth curve `C` is reduced, i.e. six distinct points.\n\n**5.5 Conclusion.** Any such general `Gamma = p_1 + ... + p_6` gives `(C, p_\\bullet) \\in M_{6,6}` with `h^0(O_C(Gamma)) = h^0(omega_C(-D_gamma)) = 3`, so by Proposition 3.1, `(C, p_\\bullet) \\in Z`. **`Z \\ne \\emptyset`, unconditionally on H1 and H2.** This is a constructive re-proof of the packet's corroborated FND-0005 (nonemptiness of the proposed evaluation-failure locus at `(6,6)`), replacing the \"indicated Riemann-Roch computation\" by an explicit curve.\n\n**5.6 The example is balanced, and verifies H1.** `chi(O_C) = chi(gamma_* O_C) = chi(O_{P^1}) + chi(E^vee)` with `gamma_* O_C = O_{P^1} + E^vee`, `rk E = 3`; `1 - g = 4 - deg E` gives `deg E = g + 3 = 9`. Pushing the Koszul complex forward along `pr_1` gives `gamma_* O_C = O_{P^1} + O_{P^1}(-3)^{+3}`, so `E^vee = O(-3)^{+3}`, `E = O(3)^{+3}`, `deg E = 9`, and `P(E^vee) \\cong P^1 x P^2`. Normalizing `O_{P(E^vee)}(1)` by H1 gives `O_{P(E^vee)}(1) = O(3,1)`, since `omega_C tensor gamma^* O(2) = O_C(1,1) tensor O_C(2,0) = O_C(3,1)` - so H1 holds on the nose here. Then `O_{P(E^vee)}(2) = O(6,2)`, and the two defining equations lie in `O(1,2) = O_{P(E^vee)}(2) tensor gamma^* O(-5)` and `O(2,2) = O_{P(E^vee)}(2) tensor gamma^* O(-4)`. Hence `F^vee = O(-4) + O(-5)`, i.e. `F = O_{P^1}(4) + O_{P^1}(5)`: **the balanced splitting H2 is realized**, `deg F = 9 = deg E` as required. Independent numerical confirmation of (S1): `deg W_5 = deg O(1,2)|_C = [C] \\cdot (H_1 + 2H_2) = 4 + 12 = 16` and `deg W_4 = deg O(2,2)|_C = 8 + 12 = 20`, matching `4g + 12 - 4f` at `f = 5, 4`. And `W_5 tensor omega_C^{-1} = O_C(1,2) tensor O_C(-1,-1) = O_C(0,1) = omega_C(-D_gamma)`, confirming Lemma 4.1. Therefore `Z^{bal} \\ne \\emptyset`.\n\n**5.7 Parameter count (consistency, not used downstream).** `dim |O(1,2)| = 11`; modulo the 2-dimensional space `H^0(O(1,0)) \\cdot f \\subset H^0(O(2,2))` one gets `18 - 2 - 1 = 15` for the second equation; total `26`, minus `dim Aut(P^1 x P^2) = 3 + 8 = 11`, gives `15 = dim M_6`. The balanced CI family therefore has the expected dimension of tetragonal moduli.\n\n## 6. Fibration over `M_6`, dimension, and excess\n\n**Proposition 6.1 (surjectivity onto `M_6`).** For every smooth genus-6 `C` there is a reduced `Gamma` of degree 6 with six distinct points and `h^0(O_C(Gamma)) >= 3`.\n\n*Proof.* By Brill-Noether existence, `rho(6, 1, 4) = 6 - 2(6 - 4 + 1) = 0 >= 0`, so `C` carries a `g^1_4`, i.e. `W^2_6(C) \\ne \\emptyset` under `L \\mapsto omega_C L^{-1}` (a degree-6 `L` has `h^0 = 3` iff `h^0(omega_C L^{-1}) = 2`). Fix such `L`. If `L` is base-point-free, Bertini gives a reduced general member. Otherwise `L` has a base point `r` and `L(-r)` is a `g^2_5`; if `|L(-r)|` had a base point too, subtracting it would give a `g^2_4` and force `C` hyperelliptic (Clifford equality), contradicting the existence of a `g^2_5`; so `L(-r)` is a base-point-free `g^2_5`, `C` is a smooth plane quintic and `L = H + r`. Then `|L| = r + |H|`, and a general line meets the plane quintic in five distinct points avoiding `r`, so the general member of `|L|` is again reduced with six distinct points. On hyperelliptic `C` one may instead take `L = 3 g^1_2` (`h^0 = 4`, base-point-free). `\\square`\n\n**Proposition 6.2 (dimension of the dominant component).** Over the Petri-general locus of `M_6` (classical input: Gieseker-Petri, plus the Castelnuovo count `#W^2_6(C) = 6! \\cdot (0!/2!)(1!/3!)(2!/4!) = 720/144 = 5`, matching the classical five `g^1_4`'s), `W^2_6(C)` is five reduced points and `G^2_6 -> M_6` is etale of degree 5. The fibre of `Z -> M_6` over such `C` is the disjoint union over those five `L` of the ordered-distinct-support open of `|L| \\cong P^2`, which is finite etale of degree `6! = 720` over that open. Hence this part of `Z` is smooth of dimension `15 + 2 = 17`, and `codim_{M_{6,6}} Z = 21 - 17 = 4`.\n\nNote this derives `dim = 17` and `codim = 4` **without** the branch-point count `b = 2g - 2 + 2d = 18`, `dim = b - 3 = 15`, which requires an unstated simple-branching hypothesis (flagged as a constraint in the working context). The Brill-Noether route needs no branching hypothesis at all.\n\n**Proposition 6.3 (excess).** In the determinantal presentation of Lemma 2.2(3), `Z` is the locus where `phi : K^0 -> K^1` (ranks `k`, `k - 1`) has rank `<= k - 3`; the expected codimension is `(k - (k - 3)) \\cdot ((k - 1) - (k - 3)) = 3 \\cdot 2 = 6`. The actual codimension is 4 (Proposition 6.2). Hence `Z` carries **excess dimension 2** and is nowhere cut out by a regular sequence in that presentation.\n\n*Structural reason.* The condition is `AJ(Gamma) \\in W^2_6`, of codimension `6 = dim Pic^6` in `Pic^6`; but the Abel-Jacobi map `C^{(6)} -> Pic^6` has 2-dimensional fibres exactly over `W^2_6`, which absorbs 2 of the 6 expected codimensions.\n\n**Consequence for downstream work.** Any localization or Gysin argument on `(M_{6,6}, Z)` must use a genuine stratification (or a refined excess-intersection formalism), not a regular-embedding Gysin map of codimension 6, and not the codimension-4 purity-form Gysin sequence for a singular stratified locus. Over the Petri-general open, however, `Z` *is* smooth of codimension 4, so a codimension-4 Gysin map is legitimate **there** - the failure is over the non-Petri-general locus and in the determinantal presentation.\n\n**Corollary 6.4 (cheap `h^0` bound, supporting `C66-GEO-H0` but not discharging it).** By Clifford (Proposition 3.1), for `deg Gamma = 6` on non-hyperelliptic `C` one has `h^0(O_C(Gamma)) \\in {1, 2, 3}`, and `h^0 >= 4` occurs only over the hyperelliptic locus. So the `h^0`-stratification of `Z` is `{h^0 = 3}` off the hyperelliptic locus, together with strata `h^0 = 4` supported over hyperelliptic curves. No claim is made here about components or dimensions of those strata; that is `C66-GEO-H0`/`C66-GEO-COMP`.\n\n## 7. Ordering and the `S_6`-cover, stated correctly\n\n**Proposition 7.1.** `Z` is `S_6`-stable (Lemma 2.2(5)), the quotient stack `[Z/S_6]` exists, and `Z -> [Z/S_6]` is a finite etale `S_6`-torsor of algebraic stacks. Moreover `[Z/S_6]` is canonically the reduced-support open substack of the relative degree-six effective-divisor incidence stack over `M_6` (points: `(C, Gamma)` with `Gamma` reduced of degree 6 and `h^0(O_C(Gamma)) >= 3`).\n\n*Proof.* For any algebraic stack with an action of a finite group, `Z -> [Z/S_6]` is a torsor under the constant group scheme `S_6`, hence finite etale. The identification of `[Z/S_6]` follows because `M_{6,6}/S_6` parametrizes curves with an unordered set of six distinct points, i.e. reduced degree-6 divisors, and the defining condition depends only on the divisor.\n\n**Warning 7.2.** The same statement on *coarse moduli spaces* is false: curves with automorphisms permuting the marked points give nontrivial stabilizers, the `S_6`-action is not free, and the coarse ordering map ramifies. The torsor statement must be made at the level of stacks with pairwise-distinct sections. This corrects the formulation flagged in the working context.\n\n**Warning 7.3.** Nothing here asserts that the cohomology of `Z` or of `[Z/S_6]` is Tate, and nothing here infers Tate type from finiteness of the cover, from rationality of `S_6`-representations, or from finiteness over an open in `M_{0,b}`. All such inferences are explicitly *not* made; they are the content of `C66-TATE-SUPPORT`.\n\n## 8. Explicit ledger\n\n**Proved here (no external input beyond standard algebraic geometry):** Lemma 2.2 (construction, base change, Fitting/determinantal agreement, closedness, `S_6`-stability); Proposition 3.1 (intrinsic identification, Clifford bound, canonical-span reading); Lemma 4.2(1)-(2) (given (S1)); Section 5 in full (explicit smooth genus-6 balanced CI, `h^0 = 3`, base-point-freeness, reducedness, nonemptiness of `Z` and `Z^{bal}`, `deg W_5 = 16`, `deg W_4 = 20`, `W_5 tensor omega^{-1} = omega(-D)`); Proposition 6.1 (surjectivity); Proposition 6.3 (excess, given 6.2); Proposition 7.1 and Warnings 7.2-7.3.\n\n**Source-backed inputs (packet):** (S1) SRC-0004 Lemma 10.6; (S2) packet canonical geometric bottleneck; FND-0001 for the target dictionary (used only for context, not as a premise of any step); FND-0005 re-proved constructively in Section 5.\n\n**Labelled hypotheses:** H1 (CE normalization `O_{P(E^vee)}(1)|_C = omega_{C/P^1}`) - used only in Lemma 4.1, Lemma 4.2(3), Proposition 4.3; numerically forced by (S1) and verified in the example of Section 5.6. H2 (balanced splitting) - packet-given; Warning 4.5 records what changes without it.\n\n**Classical inputs used, not reproved:** Brill-Noether existence (`rho >= 0`); the Castelnuovo count `#W^2_6 = 5`; Gieseker-Petri smoothness of `G^r_d` for Petri-general curves; Bertini in characteristic 0; Clifford's theorem; Grothendieck cohomology-and-base-change in top degree; Grothendieck-Serre relative duality; base-change compatibility of Fitting ideals. These enter only Propositions 6.1-6.2 and Section 5.4; none enters Sections 2-4.\n\n**No finite experiment is used as evidence for any universal claim.** The complete intersection of Section 5 is an explicit construction with a complete proof, not a computational sample; `experiment_ids` is empty.\n\n## 9. What is *not* claimed\n\n- No statement about `W_{26}H^{26}(M_{6,6};Q)`, `W_{-16}H^{BM}_{16}(M_{6,6};Q)`, weights, Hodge type, Tate type, or purity.\n- No claim that the complementary open `U = M_{6,6} \\setminus Z` has pure-Tate lowest-weight cohomology, and no claim that CE vanishing on `U` is a purity theorem.\n- No claim that `Z` is irreducible, no claim about non-dominant components, and no claim that the balanced locus is dense in tetragonal moduli.\n- No claim that `Z` exhausts the CE evaluation-failure locus across unbalanced splitting types (Warning 4.5).\n- No non-Tate summand is exhibited, and no counterexample lane conclusion is drawn.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "claims": [
+    {
+      "depends_on": [
+        "cohomology-and-base-change-top-degree",
+        "fitting-ideal-base-change",
+        "grothendieck-serre-relative-duality"
+      ],
+      "id": "C66-GEO-Z-C1",
+      "statement": "Z := V(Fitt_1(R^1 pi_* O_C(Gamma))) is a closed, S_6-stable substack of M_{6,6} whose formation commutes with arbitrary base change, and which coincides with V(Fitt_2(R^1 pi_*(omega(-Gamma)))) and with the maximal-minors degeneracy locus V(I_{k-2}(phi)) of any 2-term complex universally computing R pi_* O(Gamma).",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "riemann-roch",
+        "serre-duality",
+        "clifford",
+        "geometric-riemann-roch"
+      ],
+      "id": "C66-GEO-Z-C2",
+      "statement": "A geometric point of M_{6,6} lies in Z iff h^0(O_C(Gamma)) >= 3 iff h^0(omega_C(-Gamma)) >= 2 iff Gamma is residual in a canonical divisor to a degree-4 pencil; for non-hyperelliptic C, h^0(O_C(Gamma)) = 3 exactly and the six canonical images span at most a P^3.",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "SRC-0004-Lemma-10.6",
+        "H1-ce-normalization",
+        "H2-balanced-splitting"
+      ],
+      "id": "C66-GEO-Z-C3",
+      "statement": "Under H1 and H2, W_4|_C = omega_C^{tensor 2} and W_5|_C = omega_C^{tensor 2}(-D_gamma); the f=4 obstruction vanishes identically (degree -4) and the f=5 obstruction (degree 0) is nonzero iff Gamma + D_gamma is a canonical divisor.",
+      "status": "proved_under_labelled_hypothesis"
+    },
+    {
+      "depends_on": [
+        "C66-GEO-Z-C2",
+        "C66-GEO-Z-C3"
+      ],
+      "id": "C66-GEO-Z-C4",
+      "statement": "The image in M_{6,6} of the balanced Casnati-Ekedahl evaluation-failure locus is an OPEN substack Z^{bal} of Z; it is not closed in M_{6,6}, whereas Z is closed. Downstream localization should therefore use Z.",
+      "status": "proved_under_labelled_hypothesis"
+    },
+    {
+      "depends_on": [
+        "bertini-char-0",
+        "koszul-kunneth-computation"
+      ],
+      "id": "C66-GEO-Z-C5",
+      "statement": "Z is nonempty, and so is Z^{bal}: the general (1,2)-(2,2) complete intersection in P^1 x P^2 is a smooth connected genus-6 curve with omega_C = O_C(1,1), a degree-4 map pr_1 with D_gamma = O_C(1,0), CE data E^vee = O(-3)^{+3} and F = O(4) + O(5), and omega_C(-D_gamma) = O_C(0,1) base-point-free of degree 6 with h^0 = 3 whose general member is six distinct points. This re-proves FND-0005 constructively.",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "brill-noether-existence",
+        "castelnuovo-count-5",
+        "gieseker-petri"
+      ],
+      "id": "C66-GEO-Z-C6",
+      "statement": "Z -> M_6 is surjective; over the Petri-general locus the fibre is the disjoint union over the five points of W^2_6(C) of the ordered-distinct-support open of |L| = P^2, so Z has a dominant component smooth of dimension 17 and codimension 4 in M_{6,6}. The derivation uses Brill-Noether, not a branch-point count, so it needs no simple-branching hypothesis.",
+      "status": "proved_modulo_classical_inputs"
+    },
+    {
+      "depends_on": [
+        "C66-GEO-Z-C1",
+        "C66-GEO-Z-C6"
+      ],
+      "id": "C66-GEO-Z-C7",
+      "statement": "The determinantal presentation of Z has expected codimension 6 while codim Z = 4; Z carries excess dimension 2 and is nowhere cut out by a regular sequence in that presentation. A codimension-4 Gysin map is legitimate only over the Petri-general open where Z is smooth.",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "finite-group-quotient-stack-torsor"
+      ],
+      "id": "C66-GEO-Z-C8",
+      "statement": "Z -> [Z/S_6] is a finite etale S_6-torsor of algebraic stacks with [Z/S_6] the reduced-support open of the relative degree-six effective-divisor incidence stack; the analogous coarse-space statement is false because curve automorphisms give nontrivial stabilizers.",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "SRC-0004-Lemma-10.6"
+      ],
+      "id": "C66-GEO-Z-C9",
+      "statement": "For unbalanced CE splitting (e.g. F = O(3) + O(6)) the surviving obstruction summand has degree +4 rather than 0, so its nonvanishing locus is an effectivity condition on a degree-4 bundle and defines a strictly larger locus than Z; the balanced hypothesis H2 is therefore load-bearing for C4.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": false,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "claude",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "approach": "hurwitz-dimension-count-b-minus-3-without-simple-branching",
+      "how_addressed": "Not reused. The count b = 2g-2+2d = 18, dim = b-3 = 15 presupposes that every ramification point is simple, which Riemann-Hurwitz does not supply. Proposition 6.2 instead derives dim = 15 for the base and dim Z = 17 from Brill-Noether theory (rho(6,1,4) = 0, #W^2_6 = 5, Gieseker-Petri), which requires no branching hypothesis."
+    },
+    {
+      "approach": "proj-pi-star-L-when-h0-jumps",
+      "how_addressed": "Not reused. Definition 2.1 never forms Proj(pi_* L) and never assumes pi_* L is locally free. Only the top-degree pushforward R^1 pi_*, where base change is unconditional, is used; the scheme structure comes from a Fitting ideal, which is intrinsic and base-change compatible (Lemma 2.2, Remark 2.3)."
+    },
+    {
+      "approach": "geometric-point-agreement-implies-scheme-equality",
+      "how_addressed": "Not reused. No claim is made that the CE determinantal scheme equals an Abel-Jacobi incidence scheme with its nilpotents. Proposition 4.3 asserts only a geometric-point comparison, and the nilpotent-level comparison is recorded explicitly as GAP-2. The construction of Z is arranged so that no statement about Z requires that comparison."
+    },
+    {
+      "approach": "reduced-support-open-treated-as-closed",
+      "how_addressed": "Repaired rather than reused. Observation 1.1 notes that reducedness is automatic inside M_{6,6}, so Z as constructed is genuinely closed; Corollary 4.4 records that the balanced failure image Z^{bal} is the open, not closed, part of Z, and that downstream localization should use Z."
+    },
+    {
+      "approach": "s6-torsor-on-coarse-moduli",
+      "how_addressed": "Corrected. Proposition 7.1 states the finite etale S_6-torsor at the level of algebraic stacks with pairwise-distinct sections; Warning 7.2 records that the coarse-space version is false because curve automorphisms give nontrivial stabilizers."
+    },
+    {
+      "approach": "codimension-4-regular-embedding-gysin-for-singular-stratified-Z",
+      "how_addressed": "Not reused, and shown to be unsafe. Proposition 6.3 proves the determinantal expected codimension is 6 against an actual codimension of 4, so Z carries excess dimension 2; a codimension-4 purity-form Gysin map is justified only over the Petri-general open where Z is smooth. GAP-7 records the resulting requirement on the downstream formalism."
+    },
+    {
+      "approach": "f4-vanishing-implies-uniqueness-of-global-source",
+      "how_addressed": "Not reused. Lemma 4.2(1) proves only that the f=4 obstruction summand vanishes identically; no inference is drawn that the f=5 condition is the unique global source of the target cohomology. Warning 4.5 explicitly records that unbalanced splitting types give a different, larger failure condition."
+    },
+    {
+      "approach": "s6-rationality-implies-tate",
+      "how_addressed": "Not reused. Warning 7.3 states explicitly that no Tate-type inference is drawn from the finite etale S_6-cover, from rationality of S_6-representations, or from finiteness over an open in M_{0,b}."
+    },
+    {
+      "approach": "hurwitz-rationality-implies-pure-tate-lowest-weight",
+      "how_addressed": "Not reused. No rationality or Tate-type assertion about tetragonal Hurwitz space or about Z appears anywhere in this attempt (GAP-6)."
+    }
+  ],
+  "gap_markers": [
+    {
+      "blocks": [
+        "C66-GEO-Z-C3",
+        "C66-GEO-Z-C4"
+      ],
+      "id": "GAP-1",
+      "severity": "moderate",
+      "statement": "H1 (the CE normalization O_{P(E^vee)}(1)|_C = omega_{C/P^1}) is not proved from the supplied SRC-0004 excerpt; the excerpt forces only the equality of degrees. It is verified in the Section 5 example. Sections 2, 3, 5, 6, 7 are independent of H1; Lemma 4.1, Lemma 4.2(3) and Proposition 4.3 depend on it."
+    },
+    {
+      "blocks": [
+        "tetragonal-side-scheme-comparison"
+      ],
+      "id": "GAP-2",
+      "severity": "moderate",
+      "statement": "The scheme-theoretic (nilpotent-level) comparison between the CE determinantal evaluation-failure scheme over balanced tetragonal moduli and the pullback of Z is NOT established. Only the geometric-point comparison of Proposition 4.3 is proved. The construction here is designed so that no downstream statement about Z itself requires this comparison, but any argument that must work on the tetragonal side does."
+    },
+    {
+      "blocks": [
+        "C66-GEO-COMP",
+        "C66-TATE-SUPPORT"
+      ],
+      "id": "GAP-3",
+      "severity": "significant",
+      "statement": "Z captures only the BALANCED CE evaluation-failure condition. Warning 4.5 shows that for unbalanced splittings the surviving obstruction has positive degree and defines a strictly larger locus, so the union over all splitting types of CE failure loci is not identified here. Whether the unbalanced strata matter for the exact target is not addressed."
+    },
+    {
+      "blocks": [
+        "C66-GEO-H0",
+        "C66-GEO-COMP"
+      ],
+      "id": "GAP-4",
+      "severity": "significant",
+      "statement": "Irreducibility of Z, the full component decomposition, dimensions of non-dominant components (in particular over the hyperelliptic, trigonal, plane-quintic and h^0-jumping loci), and stabilizer data are NOT determined here; that is C66-GEO-H0 and C66-GEO-COMP. Corollary 6.4 supplies only the Clifford bound h^0 <= 3 off the hyperelliptic locus."
+    },
+    {
+      "blocks": [
+        "C66-GEO-COMP"
+      ],
+      "id": "GAP-5",
+      "severity": "minor",
+      "statement": "Density of the balanced locus in tetragonal moduli is not proved. Balancedness is open (semicontinuity) and nonempty (Section 5.6), but density would require irreducibility of the space of base-point-free degree-4 covers of genus 6, which is not established here."
+    },
+    {
+      "blocks": [
+        "C66-TATE-SUPPORT",
+        "C66-TATE-ASSEMBLY",
+        "RED-0001"
+      ],
+      "id": "GAP-6",
+      "severity": "blocking-for-target",
+      "statement": "No cohomological, weight, Hodge-theoretic or Tate-type statement about Z, [Z/S_6], the complementary open U, or the exact target is proved or attempted. In particular the excess-dimension finding GAP-7 below must be resolved before any Gysin assembly."
+    },
+    {
+      "blocks": [
+        "C66-TATE-SUPPORT",
+        "C66-TATE-ASSEMBLY"
+      ],
+      "id": "GAP-7",
+      "severity": "significant",
+      "statement": "Because codim Z = 4 while the determinantal expected codimension is 6, the localization/Gysin formalism for the pair (M_{6,6}, Z) must be constructed with an explicit stratification and excess-intersection bookkeeping. This is not done here."
+    }
+  ],
+  "id": "ATT-0026",
+  "lane": "geometry",
+  "methods_used": [
+    "fitting-ideal-degeneracy-locus-construction",
+    "cohomology-and-base-change-top-degree",
+    "grothendieck-serre-relative-duality",
+    "riemann-roch-serre-duality-clifford",
+    "geometric-riemann-roch-canonical-span",
+    "casnati-ekedahl-degree-and-obstruction-splitting",
+    "explicit-complete-intersection-witness-in-P1xP2",
+    "koszul-resolution-and-kunneth",
+    "brill-noether-dimension-count",
+    "quotient-stack-torsor-formalism",
+    "excess-codimension-analysis"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    {
+      "id": "NOV-1",
+      "statement": "Intrinsic, convention-free identification of the evaluation-failure locus as the Brill-Noether substack Z = {h^0(O_C(Gamma)) >= 3} = {h^0(omega_C(-Gamma)) >= 2} of M_{6,6}, i.e. the locus where the six markings fail by two to impose independent conditions on the canonical system. This removes all dependence on CE conventions, splitting types, and the choice of tetragonal structure from the definition of the locus."
+    },
+    {
+      "id": "NOV-2",
+      "statement": "Z is CLOSED in M_{6,6}, because markings in M_{6,6} are distinct by definition so reducedness is automatic; the balanced CE failure image is an open substack Z^{bal} of Z. This repairs the previously flagged error of treating the balanced reduced-support relative linear system as a closed pure-codimension-4 subvariety."
+    },
+    {
+      "id": "NOV-3",
+      "statement": "A base-change-compatible scheme structure via Fitt_1(R^1 pi_* O(Gamma)), proved to agree with both the maximal-minors degeneracy structure and Fitt_2(R^1 pi_*(omega(-Gamma))). This sidesteps Proj(pi_* L) and the h^0-jumping problem entirely, without needing any Fitting-versus-Abel-Jacobi nilpotent comparison."
+    },
+    {
+      "id": "NOV-4",
+      "statement": "Excess-dimension finding: the determinantal presentation of Z has expected codimension 6 but actual codimension 4, so Z carries excess dimension 2. Downstream Gysin/localization bookkeeping cannot treat Z as a regular embedding in that presentation."
+    },
+    {
+      "id": "NOV-5",
+      "statement": "An explicit balanced witness: the general (1,2)-(2,2) complete intersection in P^1 x P^2, which simultaneously proves Z is nonempty, realizes the balanced splitting F = O(4)+O(5), verifies H1 on the nose, and independently confirms deg W_5 = 16, deg W_4 = 20 and W_5 tensor omega^{-1} = omega(-D)."
+    },
+    {
+      "id": "NOV-6",
+      "statement": "The dimension 17 / codimension 4 count is obtained from Brill-Noether theory rather than from a branch-point count b - 3 = 15, removing the unstated simple-branching hypothesis flagged as a defect in the working context."
+    }
+  ],
+  "observable_trace_id": "TRACE-0010",
+  "observable_trace_sha256": "837d23699f1d409d6d7c647c23db81ee6059891a9660f179a53152f93e44c8c2",
+  "packet_id": "C66-001-v3",
+  "packet_path": "proof/packets/generated/C66-001-v3.md",
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "paired_attempt_policy_revision": 1,
+  "paired_problem_key": "0b009fa7713fa40e6ab7a37138cf33804349b4a415a5402d6c0ba9ff069f0a93",
+  "paired_theorem_sha256": "c5e3507db1b4cef8fddb7c6bc92044dd75181ad33ae1649739f76e893e013cd3",
+  "paired_turn_kind": "standard-fallback",
+  "proof_dependencies": [
+    {
+      "description": "Degree and Serre-duality calculation deg(W_{f_i}|_C) = 4g+12-4f_i and deg(omega_C tensor W_{f_i}^vee(Gamma)) = 4f_i+n-2g-14, including the sign in gamma^*O(-f). Packet primary locator excerpt.",
+      "id": "SRC-0004-Lemma-10.6",
+      "kind": "packet_source"
+    },
+    {
+      "description": "Balanced splitting F = O(4)+O(5); CE line-bundle convention for W_5 as the f_2=5 summand of (O(2) tensor gamma^*F^vee)|_C, not the O(5) summand of F; six-point failure condition O_C(Gamma) = W_5 tensor omega_C^{-1}; reduced-support open with finite etale S_6-cover, not closed.",
+      "id": "PACKET-BOTTLENECK",
+      "kind": "packet_source"
+    },
+    {
+      "description": "Poincare-duality target dictionary; used only for context/dimension bookkeeping, not as a premise of any proved step here.",
+      "id": "FND-0001",
+      "kind": "packet_finding"
+    },
+    {
+      "description": "Nonemptiness of the proposed evaluation-failure locus Z at (6,6); re-proved constructively in Section 5 by an explicit balanced complete intersection.",
+      "id": "FND-0005",
+      "kind": "packet_finding"
+    },
+    {
+      "description": "O_{P(E^vee)}(1)|_C = omega_{C/P^1} = omega_C tensor gamma^*O_{P^1}(2). Standard CE normalization; numerically forced by SRC-0004 (degrees agree) and verified in the Section 5 example, but not literally stated in the supplied excerpt. Used only in Section 4.2-4.3.",
+      "id": "H1-ce-normalization",
+      "kind": "labelled_hypothesis"
+    },
+    {
+      "description": "Balanced CE splitting F = O(4)+O(5), as specified by the packet. Realized in the Section 5 example. Warning 4.5 records what changes without it.",
+      "id": "H2-balanced-splitting",
+      "kind": "labelled_hypothesis"
+    },
+    {
+      "description": "For a proper flat morphism of relative dimension 1, R^1 pi_* commutes with arbitrary base change (Grothendieck).",
+      "id": "cohomology-and-base-change-top-degree",
+      "kind": "classical"
+    },
+    {
+      "description": "Fitting ideals commute with arbitrary base change; V(Fitt_j(F)) is the locus where fibre dimension exceeds j; Fitt_j(coker phi) = I_{rk K^1 - j}(phi).",
+      "id": "fitting-ideal-base-change",
+      "kind": "classical"
+    },
+    {
+      "description": "R pi_*(omega tensor L^vee) = (R pi_* L)^vee[-1] for a smooth proper family of curves.",
+      "id": "grothendieck-serre-relative-duality",
+      "kind": "classical"
+    },
+    {
+      "description": "Riemann-Roch and Serre duality on smooth projective curves.",
+      "id": "riemann-roch",
+      "kind": "classical"
+    },
+    {
+      "description": "Clifford's theorem with its equality case.",
+      "id": "clifford",
+      "kind": "classical"
+    },
+    {
+      "description": "dim span(Gamma) = deg Gamma - 1 - dim|Gamma| in canonical space.",
+      "id": "geometric-riemann-roch",
+      "kind": "classical"
+    },
+    {
+      "description": "Bertini: a general member of a base-point-free linear system on a smooth variety is smooth away from the base locus; on a curve, reduced.",
+      "id": "bertini-char-0",
+      "kind": "classical"
+    },
+    {
+      "description": "Existence of a g^r_d when rho >= 0; rho(6,1,4) = 0, so every genus-6 curve is tetragonal.",
+      "id": "brill-noether-existence",
+      "kind": "classical"
+    },
+    {
+      "description": "For rho = 0, the Castelnuovo number gives #W^1_4 = #W^2_6 = 5 on a general genus-6 curve.",
+      "id": "castelnuovo-count-5",
+      "kind": "classical"
+    },
+    {
+      "description": "Gieseker-Petri: G^r_d(C) is smooth of dimension rho for Petri-general C; used only for the smoothness/dimension statement of Proposition 6.2.",
+      "id": "gieseker-petri",
+      "kind": "classical"
+    },
+    {
+      "description": "For a finite group G acting on an algebraic stack X, X -> [X/G] is a finite etale G-torsor.",
+      "id": "finite-group-quotient-stack-torsor",
+      "kind": "classical"
+    },
+    {
+      "description": "Koszul resolution of the (1,2)-(2,2) complete intersection in P^1 x P^2 together with Kunneth, giving h^0(O_C) = 1, h^1(O_C) = 6, h^0(O_C(0,1)) = 3, and gamma_* O_C = O + O(-3)^{+3}.",
+      "id": "koszul-kunneth-computation",
+      "kind": "proved_here"
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0001",
+    "FND-0005"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-Z",
+  "summary": "Constructs the evaluation-failure locus Z as a canonical, base-change-compatible CLOSED substack of M_{6,6} cut out by a Fitting ideal of R^1 pi_* O(Gamma), and identifies it intrinsically as the Brill-Noether locus {h^0(O_C(Gamma)) >= 3} = {h^0(omega_C(-Gamma)) >= 2}: the six markings are residual to a degree-4 pencil in the canonical series, equivalently they span only a P^3 in canonical space. Under the CE normalization plus the packet balanced splitting, the CE failure condition O_C(Gamma) = W_5 tensor omega_C^{-1} is proved equivalent to Gamma + D_gamma being canonical, so the balanced failure image is an OPEN substack of Z. Nonemptiness is proved unconditionally by an explicit balanced (1,2)-(2,2) complete intersection in P^1 x P^2, re-proving FND-0005 constructively. The dominant component is smooth of dimension 17, codimension 4, while the determinantal presentation has expected codimension 6: Z carries excess dimension 2, which invalidates naive regular-embedding Gysin bookkeeping downstream. Does not resolve the exact target and makes no claim about weight 26 or Tate type.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "Let k be algebraically closed of characteristic 0, M_{6,6} the moduli stack of smooth proper genus-6 curves with six ordered distinct marked points (smooth DM, dimension 21), pi : C -> M_{6,6} the universal curve with tautological sections sigma_1,...,sigma_6 and universal marking divisor Gamma = sigma_1 + ... + sigma_6, a relative effective Cartier divisor of degree 6 etale over the base, and omega = omega_{C/M}. Define Z := V(Fitt_1(R^1 pi_* O_C(Gamma))) inside M_{6,6}. Then: (Z1) Z is closed, S_6-stable, equals V(Fitt_2(R^1 pi_*(omega(-Gamma)))) and equals V(I_{k-2}(phi)) for every 2-term complex phi : K^0 -> K^1 of vector bundles of ranks k, k-1 universally computing R pi_* O_C(Gamma), and its formation commutes with arbitrary base change. (Z2) A geometric point (C,p_1,...,p_6) lies in Z iff h^0(C,O_C(Gamma)) >= 3, iff h^0(C,omega_C(-Gamma)) >= 2, iff there is a degree-4 line bundle D with h^0(D) >= 2 and Gamma + D in |omega_C|; for C non-hyperelliptic these hold with equality h^0(O_C(Gamma)) = 3 and h^0(omega_C(-Gamma)) = 2, omega_C(-Gamma) is a g^1_4, and they are further equivalent to the six canonical images spanning at most a P^3 in P^5. (Z3) Under the Casnati-Ekedahl normalization O_{P(E^vee)}(1)|_C = omega_C tensor gamma^* O_{P^1}(2) (H1) and the packet balanced splitting F = O_{P^1}(4) + O_{P^1}(5) (H2), for every base-point-free degree-4 morphism gamma : C -> P^1 with tetragonal divisor D_gamma one has W_4|_C = omega_C^{tensor 2} and W_5|_C = omega_C^{tensor 2}(-D_gamma); H^0(C, omega_C tensor W_4^vee(Gamma)) = 0 for every effective degree-6 Gamma; and H^0(C, omega_C tensor W_5^vee(Gamma)) is nonzero iff O_C(Gamma) = W_5 tensor omega_C^{-1} = omega_C(-D_gamma), iff Gamma + D_gamma is canonical. Consequently the image in M_{6,6} of the balanced CE evaluation-failure locus is exactly the OPEN substack Z^{bal} of Z of points at which omega_C(-Gamma) carries a base-point-free pencil with balanced CE splitting; in particular that image is not closed in M_{6,6}, whereas Z is closed and contains it. (Z4) Z is nonempty unconditionally on H1 and H2: a general complete intersection C of divisors of bidegrees (1,2) and (2,2) in P^1 x P^2 is smooth, connected, of genus 6, with omega_C = O_C(1,1), pr_1|_C finite of degree 4, D_gamma = O_C(1,0), and omega_C(-D_gamma) = O_C(0,1) base-point-free of degree 6 with h^0 = 3; a general member of |O_C(0,1)| is reduced with six distinct points and the resulting marked curve lies in Z; for this C the CE data are E^vee = O_{P^1}(-3)^{+3} and F = O_{P^1}(4) + O_{P^1}(5), so Z^{bal} is nonempty as well. (Z5) Z -> M_6 is surjective, and over the Petri-general locus the fibre is the disjoint union over the five points L of W^2_6(C) of the ordered-distinct-support open of |L| = P^2; hence Z has a component dominating M_6, smooth of dimension 17, of codimension 4 in M_{6,6}. (Z6) The determinantal presentation of Z has expected codimension 6 while codim Z = 4, so Z carries excess dimension 2 and is nowhere cut out by a regular sequence in that presentation. (Z7) Z -> [Z/S_6] is a finite etale S_6-torsor of algebraic stacks and [Z/S_6] is canonically the reduced-support open substack of the relative degree-six effective-divisor incidence stack; the corresponding statement on coarse moduli spaces is false because curve automorphisms give nontrivial stabilizers."
+}

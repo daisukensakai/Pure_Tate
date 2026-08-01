@@ -1,0 +1,134 @@
+{
+  "attempt_id": "ATT-0027",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim_id": "ATT-0027-C1",
+      "note": "H^{16}(\\overline{M}_{6,6};Q)\u2245Q(-8)^{\u2295N} is the load-bearing step. The writeup asserts a general low-degree diagonal lemma and then a one-paragraph arc-resolution/chain-homotopy calculation; neither constructs the normalized complex, nor controls Gysin/K\u00fcnneth shifts, graph-automorphism (co)invariants, spectral-sequence differentials, or higher-genus primitive summands. Exhaustiveness of the listed primitive entries is not proved.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "ATT-0027-C2",
+      "note": "The proper-pair exact sequence and weight bound give a genuine injection Gr_{16}^W H_c^{16}(M_{6,6};Q)\u21aaH^{16}(\\overline{M}_{6,6};Q) for Q-MHS reasons. The upgrade from that injection to a pure Tate conclusion depends entirely on C1, which fails as a proof, so the Tate claim for Gr_{16} remains undischarged.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "ATT-0027-C3",
+      "note": "Formal MHS dual of Gr_{16}^W H_c^{16} is W_{-16}H_{16}^{BM}, and dual of Q(-8) is Q(8). The identification is correct as bookkeeping, but the pure-Tate conclusion inherits the unresolved status of C2/C1.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "ATT-0027-C4",
+      "note": "For smooth DM stack X of dimension 21 over Q, Poincar\u00e9 duality H_{16}^{BM}(X;Q)\u2245H^{26}(X;Q)(21) and the matching of weight pieces W_{-16}BM\u2245W_{26} ordinary twisted by (21) are standard; Q(-13)(21)=Q(8). This confirms only the equivalence of the two formulations, not purity.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0027-DIAGONAL-LEMMA-SCOPE",
+      "note": "The stated low-degree diagonal lemma, at equality 2r=2g+n-2, claims only that ker(restriction to the boundary) is Tate, then silently upgrades for (6,6,r=8) to the whole group H^{16}. That upgrade is exactly the incomplete boundary/arc calculation and is not discharged.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "ATT-0027-AUT-COINVARIANTS",
+      "note": "Stable-graph strata contribute Aut(\u0393)-invariants (or coinvariants, depending on normalization) of K\u00fcnneth products of vertex cohomologies. The argument never treats graph automorphisms; non-Tate summands can appear or be projected out only after this step.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "ATT-0027-HIGHER-GENUS-PRIMITIVES",
+      "note": "The claim that after arc contraction every non-diagonal degree-\u226416 entry is elliptic is a major structural assertion. Genus-\u22652 primitive/motive contributions (and their Gysin-shifted placements) are excluded by slogan rather than by a complete filtration or spectral-sequence analysis.",
+      "verdict": "failed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-07-31",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate",
+      "evidence": "Standard MHS strictness applied in ATT-0027 \u00a72; independent of the failed diagonal argument.",
+      "key": "compact-support-Gr-injects-into-bar-cohomology",
+      "statement": "For X=M_{g,n} and \\overline{X}=\\overline{M}_{g,n} with D=\\overline{X}\\setminus X proper, the pair sequence and weight bounds yield Gr_k^W H_c^k(X;Q)\u21aaH^k(\\overline{X};Q) whenever H^{k-1}(D;Q) has weights \u2264k-1 (as for proper D). Thus purity of the top graded piece of compactly supported cohomology in degree k reduces to purity of a subobject of H^k(\\overline{X}).",
+      "status": "candidate"
+    },
+    {
+      "adjudication": "novel_candidate",
+      "evidence": "Internal scope mismatch in ATT-0027 \u00a71 between the stated limiting lemma and the claimed whole-group conclusion for (6,6,r=8).",
+      "key": "diagonal-equality-only-controls-boundary-kernel",
+      "statement": "A low-degree diagonal statement that, at 2r=2g+n-2, only the kernel of restriction H^{2r}(\\overline{M}_{g,n})\u2192H^{2r}(D) is Tate does not by itself make the whole group H^{2r}(\\overline{M}_{g,n}) Tate; boundary-supported classes and the full stratified contribution must still be controlled.",
+      "status": "candidate"
+    },
+    {
+      "adjudication": "novel_candidate",
+      "evidence": "Section 1 of ATT-0027; failed dependency degree-sixteen-diagonal-calculation-bar-M-6-6.",
+      "key": "bar-M-diagonal-at-degree-16-undischarged-for-6-6",
+      "statement": "No complete unconditional proof that H^{16}(\\overline{M}_{6,6};Q) is a direct sum of Q(-8) is supplied by ATT-0027; graph-complex/arc-contraction slogans without Aut-invariants, Gysin shifts, differentials, and higher-genus primitives do not discharge this.",
+      "status": "candidate"
+    },
+    {
+      "adjudication": "supports_existing",
+      "evidence": "ATT-0027 \u00a7\u00a72\u20133 bookkeeping; confirms formulation only, not purity of the group.",
+      "key": "formal-PD-and-duality-match-target-dictionary",
+      "statement": "For (g,n)=(6,6), dim=21, the equivalences W_{-16}H_{16}^{BM}\u2245(Gr_{16}^W H_c^{16})^\u2228 and W_{-16}H_{16}^{BM}\u2245W_{26}H^{26}(21), with Q(-8)^\u2228\u2245Q(8) and Q(-13)(21)\u2245Q(8), match the campaign target dictionary over Q.",
+      "status": "candidate",
+      "supports_finding_id": "FND-0001"
+    }
+  ],
+  "id": "REV-0035",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "degree-sixteen-diagonal-calculation-bar-M-6-6",
+      "note": "Attempt lists this as proved via normalized boundary/arc calculation. The calculation does not supply a complete complex, differential control, Aut-invariants, or higher-genus exclusion; dependency remains undischarged.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "weight-bound-proper-pair-injection-Gr16",
+      "note": "D proper implies weights on H^{15}(D;Q) are \u226415; strictness of MHS morphisms yields Gr_{16}^W H_c^{16}(X;Q)\u21aaH^{16}(\\overline{X};Q). This reduction step is sound independently of purity of the target.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "poincare-duality-smooth-DM-stack",
+      "note": "Over Q, after finite-level cover and invariants as the attempt sketches, PD identifies the BM and ordinary formulations of the exact target, including Tate twist (21).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "low-degree-diagonal-lemma-as-unconditional-input",
+      "note": "The general diagonal lemma is used as if available; no citation or complete proof is given, and the equality-case whole-group claim for (6,6) is not a formal consequence of the stated kernel-only limiting case.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "C66-GEO-Z",
+      "note": "This attempt bypasses the packet geometric bottleneck Z entirely. No dependency on C66-GEO-Z is discharged or needed for the proposed route; the route fails elsewhere.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "C66-TATE-SUPPORT",
+      "note": "Not used; alternative compactification route attempted. Does not repair the failed diagonal step.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0027-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "The pure-Tate claim for H^{16}(\\overline{M}_{6,6};Q) is load-bearing and undischarged: the arc-resolution chain homotopy, exhaustiveness of primitive entries, Gysin/K\u00fcnneth degree-and-Tate bookkeeping, graph-automorphism (co)invariants, and exclusion of higher-genus non-Tate summands are all asserted without a complete complex or spectral-sequence control. The proper-pair injection Gr_{16}^W H_c^{16}\u21aaH^{16}(\\overline{M}) is fine, so any non-Tate class in H^{16}(\\overline{M}_{6,6}) (or any non-Tate class surviving that injection) would immediately leave a non-Tate summand in the exact target; the writeup never rules this out rigorously. Equality-case diagonal lemma scope only gives a boundary kernel, not the whole group, until that incomplete calculation is finished.",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "incomplete"
+}

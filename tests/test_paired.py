@@ -353,6 +353,119 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             self.assertIn("Provisional lemma", trace["observable_stdout"])
             self.assertFalse(output.exists())
 
+    def test_review_validation_failure_preserves_observable_trace(self):
+        from pure_tate.agents import run_task
+        from pure_tate.campaigns import campaign_packet_record
+        from pure_tate.paired import ArtifactValidationError
+        from pure_tate.targets import CONTEXT_REVISION
+
+        packet = campaign_packet_record("C66-001")
+        attempt = {
+            "id": "ATT-9997",
+            "engine": "codex",
+            "campaign_id": "C66-001",
+            "campaign_revision": self.campaign["campaign_revision"],
+            "subproblem_id": "C66-FULL",
+            "target": self.task["target"],
+            "theorem_statement": self.campaign["paired_attempt_policy"][
+                "exact_theorem"
+            ],
+            "packet_path": packet["packet_path"],
+        }
+        body = {
+            "schema_version": 3,
+            "id": "REV-9997",
+            "review_task_id": "TASK-V-ATT-9997-P1",
+            "review_pass": 1,
+            "attempt_id": "ATT-9997",
+            "campaign_id": "C66-001",
+            "campaign_revision": self.campaign["campaign_revision"],
+            "subproblem_id": "C66-FULL",
+            "context_revision": CONTEXT_REVISION,
+            "packet_id": packet["packet_id"],
+            "packet_sha256": packet["packet_sha256"],
+            "target": self.task["target"],
+            "theorem_statement": attempt["theorem_statement"],
+            "verdict": "confirmed",
+            "reviewer_engine": "grok",
+            "independent": True,
+            "checked_claims": [
+                {
+                    "claim_id": "CLM-X",
+                    "result": "refuted",
+                    "note": "Adverse check retained under a confirmed verdict.",
+                }
+            ],
+            "proof_dependency_checks": [],
+            "strongest_attack": "Preserved attack body " + ("X" * 1000),
+            "finding_candidates": [
+                {
+                    "key": "synthetic-adverse",
+                    "statement": "Synthetic finding for review-trace coverage.",
+                }
+            ],
+            "created_on": "2026-07-31",
+        }
+        process = SimpleNamespace(
+            returncode=0,
+            stdout=json.dumps(
+                {
+                    "text": json.dumps(body),
+                    "stopReason": "endTurn",
+                    "sessionId": "review-trace-envelope",
+                }
+            ),
+            stderr="",
+        )
+        task = {
+            "id": "TASK-V-ATT-9997-P1",
+            "phase": "review",
+            "review_pass": 1,
+            "target_attempt_id": "ATT-9997",
+            "context_revision": CONTEXT_REVISION,
+            "packet_id": packet["packet_id"],
+            "packet_sha256": packet["packet_sha256"],
+            "target": self.task["target"],
+            "prover_engine": "codex",
+            "excluded_reviewer_engines": ["codex"],
+            "prompt": "prompts/ADVERSARY.md",
+            "input_attempt": "proof/attempts/ATT-0020.json",
+            "input_packet": packet["packet_path"],
+            "campaign_id": "C66-001",
+            "campaign_revision": self.campaign["campaign_revision"],
+            "subproblem_id": "C66-FULL",
+            "theorem_statement": attempt["theorem_statement"],
+        }
+        output = ROOT / "proof" / "reviews" / "REV-9997.json"
+        with tempfile.TemporaryDirectory(
+            dir=ROOT / "research"
+        ) as directory, mock.patch(
+            "pure_tate.paired.TRACE_DIR", Path(directory)
+        ), mock.patch(
+            "pure_tate.agents.shutil.which", return_value="/usr/bin/grok"
+        ), mock.patch(
+            "pure_tate.agents.run_captured_process", return_value=process
+        ), mock.patch(
+            "pure_tate.agents._validate_task_packet", return_value=None
+        ), mock.patch(
+            "pure_tate.agents.build_isolated_context", return_value=["TASK.json"]
+        ):
+            with self.assertRaises(ArtifactValidationError) as raised:
+                run_task(task, "grok", output)
+            self.assertFalse(output.exists())
+            traces = list(Path(directory).glob("TRACE-*.json"))
+            self.assertEqual(len(traces), 1)
+            trace = json.loads(traces[0].read_text(encoding="utf-8"))
+            self.assertEqual(trace["classification"], "validation_failure")
+            self.assertEqual(trace["turn_kind"], "review")
+            self.assertEqual(raised.exception.trace_id, trace["id"])
+            self.assertGreater(len(trace.get("observable_stdout") or ""), 1000)
+            self.assertEqual(trace["parsed_artifact"]["id"], "REV-9997")
+            self.assertIn(
+                "Preserved attack body",
+                trace["parsed_artifact"]["strongest_attack"],
+            )
+
     def test_codex_final_file_is_parsed_while_jsonl_progress_is_traced(self):
         artifact = self.full_artifact()
         artifact["engine"] = "codex"

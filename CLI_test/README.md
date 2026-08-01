@@ -30,3 +30,19 @@ Run:
 python3 CLI_test/run_grok_streaming_tests.py
 ```
 
+## Gemini 503 experiment
+
+`run_gemini_503_probe.py` compares the configured `gemini-3.5-flash` route
+with a `gemini-3-flash-preview` control using both a direct API request and the
+headless CLI's `stream-json` mode. It captures stderr retries incrementally,
+stops the process group after three 503 attempts, and requires a genuine
+assistant message plus a terminal success event.
+
+Run from this directory:
+
+```bash
+python3 run_gemini_503_probe.py
+```
+
+See `GEMINI_503_FINDINGS.md` for the current diagnosis. Every execution is
+preserved below `results/gemini_503/<timestamp>/`.

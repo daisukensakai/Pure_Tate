@@ -43,6 +43,17 @@ class SubstantiveAttemptError(ValueError):
         self.trace_path = trace_path
 
 
+class ArtifactValidationError(ValueError):
+    """Validation failure that preserved the raw observable agent output."""
+
+    def __init__(
+        self, message: str, trace_id: str, trace_path: str
+    ) -> None:
+        super().__init__(message)
+        self.trace_id = trace_id
+        self.trace_path = trace_path
+
+
 class PairedInfrastructureError(RuntimeError):
     def __init__(
         self, message: str, trace_id: str, trace_path: str

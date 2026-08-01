@@ -1,0 +1,132 @@
+=== API matrix ===
+{"path": "api", "model": "gemini-3.5-flash", "ok": false, "http": 503, "elapsed_seconds": 0.613, "text": null, "error": {"code": 503, "status": "UNAVAILABLE", "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later."}}
+{"path": "api", "model": "gemini-3.6-flash", "ok": true, "http": 200, "elapsed_seconds": 2.058, "text": "API_WORKING", "error": null}
+{"path": "api", "model": "gemini-3-flash-preview", "ok": true, "http": 200, "elapsed_seconds": 1.252, "text": "API_WORKING", "error": null}
+{"path": "api", "model": "gemini-3.1-flash-lite", "ok": true, "http": 200, "elapsed_seconds": 0.559, "text": "API_WORKING", "error": null}
+{"path": "api", "model": "gemini-3.1-pro-preview", "ok": true, "http": 200, "elapsed_seconds": 3.709, "text": "API_WORKING", "error": null}
+=== CLI text matrix ===
+{"path": "cli", "model": "gemini-3.5-flash", "output_format": "text", "ok": false, "returncode": 0, "timed_out": true, "elapsed_seconds": 25.027, "stdout_path": "CLI_test/results/gemini/gemini_3_5_flash_text.stdout.txt", "stderr_path": "CLI_test/results/gemini/gemini_3_5_flash_text.stderr.txt", "stdout_prefix": "", "stderr_prefix": "Warning: Basic terminal detected (TERM=dumb). Visual rendering will be limited. For the best experience, use a terminal emulator with truecolor support.\\nWarning: 256-color support not detected. Using a terminal with at least 256-color support is recommended for a better visual experience.\\nRipgrep is not available. Falling back to GrepTool.\\nAttempt 1 failed with status 503. Retrying with backoff...", "error": {"kind": "timeout", "message": "CLI exceeded timeout"}}
+{"path": "cli", "model": "gemini-3.6-flash", "output_format": "text", "ok": false, "returncode": 0, "timed_out": true, "elapsed_seconds": 45.028, "stdout_path": "CLI_test/results/gemini/gemini_3_6_flash_text.stdout.txt", "stderr_path": "CLI_test/results/gemini/gemini_3_6_flash_text.stderr.txt", "stdout_prefix": "", "stderr_prefix": "Warning: Basic terminal detected (TERM=dumb). Visual rendering will be limited. For the best experience, use a terminal emulator with truecolor support.\\nWarning: 256-color support not detected. Using a terminal with at least 256-color support is recommended for a better visual experience.\\nRipgrep is not available. Falling back to GrepTool.\\n[STARTUP] Phase 'cleanup_ops' was started but never ended.", "error": {"kind": "timeout", "message": "CLI exceeded timeout"}}
+{"path": "cli", "model": "g{"path": "cli", "model": "gemini-3.1-pro-preview", "output_format": "text", "ok": false, "returncode": 0, "timed_out": true, "elapsed_seconds": 45.016, "stdout_path": "CLI_test/results/gemini/gemini_3_1_pro_preview_text.stdout.txt", "stderr_path": "CLI_test/results/gemini/gemini_3_1_pro_preview_text.stderr.txt", "stdout_prefix": "", "stderr_prefix": "", "error": {"kind": "timeout", "message": "CLI exceeded timeout"}}
+=== CLI stream-json (gemini-3.5-flash) ===
+{"path": "cli", "model": "gemini-3.5-flash", "output_format": "stream-json", "ok": false, "returncode": 0, "timed_out": true, "elapsed_seconds": 45.022, "stdout_path": "CLI_test/results/gemini/gemini_3_5_flash_stream_json.stdout.txt", "stderr_path": "CLI_test/results/gemini/gemini_3_5_flash_stream_json.stderr.txt", "stdout_prefix": "", "stderr_prefix": "", "error": {"kind": "timeout", "message": "CLI exceeded timeout"}}
+{
+  "api_ok_models": [
+    "gemini-3.6-flash",
+    "gemini-3-flash-preview",
+    "gemini-3.1-flash-lite",
+    "gemini-3.1-pro-preview"
+  ],
+  "api_fail_models": [
+    {
+      "model": "gemini-3.5-flash",
+      "http": 503,
+      "error": {
+        "code": 503,
+        "status": "UNAVAILABLE",
+        "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later."
+      }
+    }
+  ],
+  "cli_ok_models": [],
+  "cli_fail_models": [
+    {
+      "model": "gemini-3.5-flash",
+      "timed_out": true,
+      "error": {
+        "kind": "timeout",
+        "message": "CLI exceeded timeout"
+      }
+    },
+    {
+      "model": "gemini-3.6-flash",
+      "timed_out": true,
+      "error": {
+        "kind": "timeout",
+        "message": "CLI exceeded timeout"
+      }
+    },
+    {
+      "model": "gemini-3-flash-preview",
+      "timed_out": true,
+      "error": {
+        "kind": "timeout",
+        "message": "CLI exceeded timeout"
+      }
+    },
+    {
+      "model": "gemini-3.1-flash-lite",
+      "timed_out": true,
+      "error": {
+        "kind": "timeout",
+        "message": "CLI exceeded timeout"
+      }
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "timed_out": true,
+      "error": {
+        "kind": "timeout",
+        "message": "CLI exceeded timeout"
+      }
+    },
+    {
+      "model": "gemini-3.5-flash",
+      "timed_out": true,
+      "error": {
+        "kind": "timeout",
+        "message": "CLI exceeded timeout"
+      }
+    }
+  ]
+}
+wrote /Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test/results/gemini/manifest.json
+: 0, "timed_out": false, "elapsed_seconds": 5.546, "stdout_path": "CLI_test/results/gemini/gemini_3_flash_preview_stream_json.stdout.txt", "stderr_path": "CLI_test/results/gemini/gemini_3_flash_preview_stream_json.stderr.txt", "stdout_prefix": "{\"type\":\"init\",\"timestamp\":\"2026-07-31T23:00:24.297Z\",\"session_id\":\"0a5b8bd3-1f91-4cc7-9aff-7c57ff4edbce\",\"model\":\"gemini-3-flash-preview\"}\\n{\"type\":\"message\",\"timestamp\":\"2026-07-31T23:00:24.298Z\",\"role\":\"user\",\"content\":\"Return exactly thi", "stderr_prefix": "Warning: Basic terminal detected (TERM=dumb). Visual rendering will be limited. For the best experience, use a terminal emulator with truecolor support.\\nWarning: 256-color support not detected. Using a terminal with at least 256-color support is recommended for a better visual experience.\\nRipgrep is not available. Falling back to GrepTool.\\n[STARTUP] Phase 'cleanup_ops' was started but never ended.", "error": null}
+{
+  "api_ok_models": [
+    "gemini-3.6-flash",
+    "gemini-3-flash-preview",
+    "gemini-3.1-flash-lite",
+    "gemini-3.1-pro-preview"
+  ],
+  "api_fail_models": [
+    {
+      "model": "gemini-3.5-flash",
+      "http": 503,
+      "error": {
+        "code": 503,
+        "status": "UNAVAILABLE",
+        "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later."
+      }
+    }
+  ],
+  "cli_ok_models": [
+    "gemini-3-flash-preview",
+    "gemini-3.1-flash-lite",
+    "gemini-3.1-pro-preview"
+  ],
+  "cli_fail_models": [
+    {
+      "model": "gemini-3.5-flash",
+      "timed_out": true,
+      "error": {
+        "kind": "timeout",
+        "message": "CLI exceeded timeout"
+      }
+    },
+    {
+      "model": "gemini-3.6-flash",
+      "timed_out": true,
+      "error": {
+        "kind": "timeout",
+        "message": "CLI exceeded timeout"
+      }
+    },
+    {
+      "model": "gemini-3-flash-preview",
+      "timed_out": false,
+      "error": null
+    }
+  ]
+}
+wrote /Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test/results/gemini/manifest.json

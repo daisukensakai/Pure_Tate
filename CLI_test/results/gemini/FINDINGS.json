@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "diagnosed_at": "2026-07-31T23:03:30.960277+00:00",
+  "gemini_cli_version": "0.53.0",
+  "auth": {
+    "selectedType": "gemini-api-key"
+  },
+  "verdict": {
+    "harness_default": "gemini-3.5-flash",
+    "default_status": "DOWN",
+    "cause": "HTTP 503 UNAVAILABLE high-demand on gemini-3.5-flash (API generateContent/streamGenerateContent and CLI). CLI retries with backoff until timeout.",
+    "working_now": {
+      "api_and_cli": [
+        "gemini-3-flash-preview",
+        "gemini-3.1-flash-lite",
+        "gemini-3.1-pro-preview"
+      ],
+      "api_only_cli_503": [
+        "gemini-3.6-flash"
+      ]
+    }
+  },
+  "recommended_workaround": "Use gemini-3-flash-preview or gemini-3.1-flash-lite until gemini-3.5-flash capacity recovers.",
+  "evidence_dir": "CLI_test/results/gemini/"
+}
