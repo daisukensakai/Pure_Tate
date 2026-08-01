@@ -24,6 +24,7 @@ import shutil
 import signal
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 import uuid
@@ -193,7 +194,10 @@ class DispatchLog:
         self.global_events = self.root / "events.jsonl"
         self.session_events = self.session_dir / "events.jsonl"
         self._lock = threading.Lock()
-        self._write_session_meta()
+        # A parent process may reopen this session after it exits to append
+        # client-side MCP telemetry. Preserve the original metadata then.
+        if not (self.session_dir / "session.json").exists():
+            self._write_session_meta()
         self._touch_latest()
 
     def _write_session_meta(self) -> None:
@@ -800,7 +804,19 @@ def mcp_server_command() -> List[str]:
     script = str(Path(__file__).resolve())
     uv = shutil.which("uv")
     if uv:
-        return [uv, "run", "--with", "mcp", "python", script, "--serve-mcp"]
+        # Keep MCP startup independent of the repository project and of uv's
+        # user cache.  The latter can be inaccessible inside an engine's
+        # sandbox (notably when it contains uv's internal .git marker).
+        return [
+            uv,
+            "run",
+            "--no-project",
+            "--with",
+            "mcp",
+            "python",
+            script,
+            "--serve-mcp",
+        ]
     return [sys.executable, script, "--serve-mcp"]
 
 
@@ -869,6 +885,11 @@ def prepare_worker_session(
         "GROK_WORKER_LOG_DIR": str(log_root),
         "GROK_WORKER_SESSION_ID": sid,
         "GROK_WORKER_PARENT_JSON": json.dumps(parent, sort_keys=True),
+        # MCP startup may run inside a stricter sandbox than the parent.  Use
+        # a writable, non-user cache for uv rather than ~/.cache/uv.
+        "UV_CACHE_DIR": str(
+            Path(tempfile.gettempdir()) / "pure-tate-mcp-uv-cache"
+        ),
     }
     session = WorkerSession(
         enabled=True,
@@ -1016,9 +1037,18 @@ def apply_workers_to_argv(
         # Best-effort Codex MCP override (may no-op on some versions).
         cmd_json = json.dumps(session.server_command[0])
         args_json = json.dumps(session.server_command[1:])
+        # Codex does not reliably inherit the parent's environment when it
+        # starts an MCP stdio child.  Put the session-scoped worker values in
+        # the MCP definition itself so results and durable lifecycle logs stay
+        # attached to the parent task.
+        env_toml = "{" + ", ".join(
+            "%s=%s" % (key, json.dumps(value))
+            for key, value in sorted(session.env_updates.items())
+        ) + "}"
         # Insert before the trailing prompt positional when present.
         override = (
-            "{command=%s, args=%s, enabled=true}" % (cmd_json, args_json)
+            "{command=%s, args=%s, env=%s, enabled=true}"
+            % (cmd_json, args_json, env_toml)
         )
         insert_at = len(out)
         # Prefer inserting before final prompt if last arg does not look like a flag.
@@ -1043,6 +1073,79 @@ def merge_worker_env(
     if session is not None and session.env_updates:
         env.update(session.env_updates)
     return env
+
+
+def record_parent_mcp_events(session: Optional[WorkerSession], stdout: str) -> int:
+    """Record engine-observed MCP calls that may never reach the server.
+
+    Codex can cancel an MCP invocation in its approval layer before the server
+    starts. The server-side log alone would mistake that for an unused tool.
+    Prompts and complete model output are deliberately not retained here.
+    """
+    if session is None or not session.enabled or not stdout.strip():
+        return 0
+    log_dir = session.env_updates.get("GROK_WORKER_LOG_DIR")
+    session_id = session.env_updates.get("GROK_WORKER_SESSION_ID")
+    if not log_dir or not session_id:
+        return 0
+    try:
+        log = DispatchLog(Path(log_dir), session_id=session_id)
+    except OSError:
+        return 0
+
+    recorded = 0
+    for line in stdout.splitlines():
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(event, dict):
+            continue
+        if session.family == "openai":
+            item = event.get("item")
+            if not isinstance(item, dict):
+                continue
+            if (
+                item.get("type") != "mcp_tool_call"
+                or item.get("server") not in {"grok_workers", MCP_SERVER_NAME}
+            ):
+                continue
+            tool = str(item.get("tool") or "")
+            if not tool.endswith("grok_worker") and tool != "worker_pool_stats":
+                continue
+            error = item.get("error")
+            log.log(
+                "parent_mcp_attempt",
+                family=session.family,
+                tool=tool,
+                client_status=str(item.get("status") or event.get("type") or "unknown"),
+                client_error=(
+                    str(error.get("message") or error)
+                    if isinstance(error, dict)
+                    else (str(error) if error else None)
+                ),
+                client_result_present=item.get("result") is not None,
+            )
+            recorded += 1
+        elif session.family == "claude":
+            message = event.get("message")
+            content = message.get("content") if isinstance(message, dict) else None
+            if not isinstance(content, list):
+                continue
+            for block in content:
+                if not isinstance(block, dict) or block.get("type") != "tool_use":
+                    continue
+                name = str(block.get("name") or "")
+                if not name.startswith("mcp__grok-workers__"):
+                    continue
+                log.log(
+                    "parent_mcp_attempt",
+                    family=session.family,
+                    tool=name.rsplit("__", 1)[-1],
+                    client_status="started",
+                )
+                recorded += 1
+    return recorded
 
 
 # ---------------------------------------------------------------------------

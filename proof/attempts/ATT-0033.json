@@ -1,0 +1,150 @@
+{
+  "argument_markdown": "## Source-backed input\n\nPacket artifact C66-001-v3, source SRC-0004, gives the fibrewise obstruction decomposition\nH^0(C,omega_C\u2297W^vee(Gamma))=H^0(C,omega_C\u2297W_4^vee(Gamma))\u2295H^0(C,omega_C\u2297W_5^vee(Gamma))\nand the convention-compatible degree formula deg(W_f)=4g+12-4f. The packet fixes W_5=(O_{P(E^vee)}(2)\u2297gamma^*O(-5))|_C, rather than the O(5) summand of F. TASK.json has no dependency artifacts, so no absent dependency is inferred or strengthened.\n\n## Proved steps\n\nFor g=6, deg(W_4)=20, deg(W_5)=16, and deg(omega_C)=10. If Gamma has degree six, then\n\ndeg(omega_C\u2297W_4^vee(Gamma))=10-20+6=-4,\n\ndeg(omega_C\u2297W_5^vee(Gamma))=10-16+6=0.\n\nThe first line bundle has no nonzero section. A degree-zero line bundle on a smooth projective connected curve has a nonzero section exactly when it is trivial: the zero divisor of such a section is effective of degree zero, hence empty. Consequently the entire CE obstruction is nonzero exactly when\n\nomega_C\u2297W_5^vee\u2297O_C(Gamma)\u2245O_C,\n\nwhich is equivalent to O_C(Gamma)\u2245L:=W_5\u2297omega_C^{-1}. Thus Z_ev and the Abel\u2013Jacobi incidence I have the same geometric points. Both are finite-type locally closed substacks over C, so their underlying reduced substacks agree. This conclusion does not compare their nilpotents or multiplicities.\n\nThe incidence is constructed without using Proj(pi_*L): it is the base change of the relative Abel\u2013Jacobi map Sym_B^6(C)\u2192Pic^6(C/B) along the section [L]. Its reduced-support part is open. The standard ordering map from six pairwise-distinct sections to their effective divisor is finite \u00e9tale with free deck group S_6; base change to the Abel\u2013Jacobi fibre gives the asserted torsor.\n\nFinally deg(L)=16-10=6, so on every geometric genus-6 fibre Riemann\u2013Roch gives chi(L)=6-6+1=1 and h^0(L)=1+h^1(L)\u22651. Hence the full Abel\u2013Jacobi fibre in Sym^6 is nonempty. This does not imply the existence of a divisor with six distinct points.\n\n## Computational hypotheses\n\nNone. No finite experiment is used.\n\n## Gaps and exact-target boundary\n\nThe argument does not compare the nonreduced determinantal/Fitting ideal with the Abel\u2013Jacobi ideal, descend W_5 through families lacking a chosen splitting, prove that every fibre contains a reduced divisor, extend across unbalanced or nonreduced strata, or determine components, dimensions, stabilizers, and closure in M_{6,6}. It proves no Tate-type or survival statement for W_{-16}H_16^{BM}(M_{6,6};Q).\n\n## Failed routes\n\nThe blocked routes vcd-only-vanishing, undecorated-cgp-top-weight-graph-complex, point-count-without-degree-parity-separation, and forgetful-map-renaming-local-system-unknown are not used. They do not construct the assigned CE evaluation-failure locus, and no new admitted evidence reopens them.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "claims": [
+    {
+      "classification": "source-backed input",
+      "evidence": [
+        "C66-001-v3:SRC-0004"
+      ],
+      "id": "CLM-0033-1",
+      "statement": "For the balanced CE summands, the obstruction splits into the f=4 and f=5 spaces and deg(W_f)=4g+12-4f with the twist gamma^*O(-f).",
+      "status": "admitted"
+    },
+    {
+      "classification": "proved",
+      "depends_on": [
+        "CLM-0033-1"
+      ],
+      "id": "CLM-0033-2",
+      "statement": "At g=n=6 the f=4 obstruction line bundle has degree -4 and the f=5 obstruction line bundle has degree zero.",
+      "status": "proved"
+    },
+    {
+      "classification": "proved",
+      "depends_on": [
+        "CLM-0033-1",
+        "CLM-0033-2"
+      ],
+      "id": "CLM-0033-3",
+      "statement": "On every geometric split balanced fibre, CE evaluation fails at Gamma exactly when O_C(Gamma)\u2245W_5\u2297omega_C^{-1}.",
+      "status": "proved"
+    },
+    {
+      "classification": "proved",
+      "depends_on": [
+        "CLM-0033-3"
+      ],
+      "id": "CLM-0033-4",
+      "statement": "The reduced CE failure substack equals the reduced Abel\u2013Jacobi incidence substack, and ordering the reduced support gives a finite \u00e9tale S_6-torsor.",
+      "status": "proved"
+    },
+    {
+      "classification": "proved",
+      "depends_on": [
+        "CLM-0033-1"
+      ],
+      "id": "CLM-0033-5",
+      "statement": "The full effective-divisor incidence fibre is nonempty on every geometric fibre because deg(L)=6 and chi(L)=1.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    "vcd-only-vanishing: not used; it is inert for this geometric construction and remains blocked",
+    "undecorated-cgp-top-weight-graph-complex: not used; it does not identify the CE failure locus and remains blocked",
+    "point-count-without-degree-parity-separation: not used; no point count or experiment appears",
+    "forgetful-map-renaming-local-system-unknown: not used; no forgetful-map reduction appears"
+  ],
+  "gap_markers": [
+    {
+      "description": "No comparison of the nonreduced CE determinantal/Fitting ideal with the Abel\u2013Jacobi incidence ideal.",
+      "id": "GAP-0033-1"
+    },
+    {
+      "description": "No descent of W_5 or L from a chosen split CE base to the unsplit balanced tetragonal moduli stack.",
+      "id": "GAP-0033-2"
+    },
+    {
+      "description": "Riemann\u2013Roch proves an effective divisor exists but does not prove the reduced-support open, hence the ordered failure locus, is nonempty on every fibre.",
+      "id": "GAP-0033-3"
+    },
+    {
+      "description": "No closure across unbalanced splittings or nonreduced markings, and no component, dimension, stabilizer, or map-to-M_{6,6} analysis.",
+      "id": "GAP-0033-4"
+    },
+    {
+      "description": "No Tate-type or survival calculation in the exact group W_{-16}H_16^{BM}(M_{6,6};Q).",
+      "id": "GAP-0033-5"
+    }
+  ],
+  "id": "ATT-0033",
+  "lane": "geometry",
+  "methods_used": [
+    "balanced-casnati-ekedahl-obstruction-decomposition",
+    "degree-zero-line-bundle-triviality",
+    "relative-abel-jacobi-incidence",
+    "reduced-substack-comparison",
+    "finite-etale-ordering-torsor",
+    "riemann-roch"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "observable_trace_id": "TRACE-0014",
+  "observable_trace_sha256": "31e034c58983577b2d6c6980c8b4fb80f636929726b6cf43f50dd3c7c20a27f1",
+  "packet_id": "C66-001-v3",
+  "packet_path": "proof/packets/generated/C66-001-v3.md",
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "paired_attempt_policy_revision": 1,
+  "paired_problem_key": "0b009fa7713fa40e6ab7a37138cf33804349b4a415a5402d6c0ba9ff069f0a93",
+  "paired_theorem_sha256": "c5e3507db1b4cef8fddb7c6bc92044dd75181ad33ae1649739f76e893e013cd3",
+  "paired_turn_kind": "standard-fallback",
+  "proof_dependencies": [],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0005"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-Z",
+  "summary": "The balanced six-point CE failure locus is rigorously identified, after reduction and on a split balanced base, with the Abel\u2013Jacobi incidence for L=W_5\u2297omega^{-1}. The ordered distinct locus is the finite \u00e9tale S_6-cover of the reduced-support open. This proves a fibrewise/relative reduced construction of Z but not its nonreduced scheme structure, descent to the unsplit balanced stack, or the exact Tate target.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "base_field": "C",
+    "g": 6,
+    "geometry": "smooth tetragonal families with a chosen balanced CE splitting F=O(4)\u2295O(5)",
+    "n": 6,
+    "scheme_scope": "equality after reduction; no comparison of nonreduced Fitting ideals"
+  },
+  "theorem_statement": "Let B be a finite-type complex base carrying a smooth family of genus-6 tetragonal covers together with an actual balanced Casnati\u2013Ekedahl splitting F=O(4)\u2295O(5). Put W_f=(O_{P(E^vee)}(2)\u2297gamma^*O(-f))|_C and L=W_5\u2297omega_{C/B}^{-1}. On the relative ordered configuration stack Conf_6(C/B), let Z_ev be the Casnati\u2013Ekedahl evaluation-rank-failure locus, and let I be the Abel\u2013Jacobi incidence locus O_C(p_1+\u22ef+p_6)\u2245L. Then (Z_ev)_red=I_red. Moreover, the quotient of I_red by S_6 is the reduced-support open of the relative Abel\u2013Jacobi fibre Sym_B^6(C)\u00d7_{Pic^6(C/B),[L]}B, and the ordering map is a finite \u00e9tale S_6-torsor. Every geometric fibre of the full Abel\u2013Jacobi fibre is nonempty, although this theorem does not assert that its reduced-support open is nonempty."
+}

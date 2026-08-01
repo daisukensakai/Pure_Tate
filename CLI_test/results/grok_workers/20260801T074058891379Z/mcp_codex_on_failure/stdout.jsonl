@@ -1,0 +1,7 @@
+{"type":"thread.started","thread_id":"019fbc45-1e59-7b32-9239-ae3c0e3ff46d"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"I’ll check the available MCP tools and run the requested worker once if it’s present."}}
+{"type":"item.started","item":{"id":"item_1","type":"mcp_tool_call","server":"grok_workers","tool":"dispatch_grok_worker","arguments":{"wait":true,"prompt":"Return JSON {\"probe\":\"from_worker\",\"ok\":true,\"marker\":\"CODEX-MCP\"}"},"result":null,"error":null,"status":"in_progress"}}
+{"type":"item.completed","item":{"id":"item_1","type":"mcp_tool_call","server":"grok_workers","tool":"dispatch_grok_worker","arguments":{"wait":true,"prompt":"Return JSON {\"probe\":\"from_worker\",\"ok\":true,\"marker\":\"CODEX-MCP\"}"},"result":null,"error":{"message":"user cancelled MCP tool call"},"status":"failed"}}
+{"type":"item.completed","item":{"id":"item_2","type":"agent_message","text":"{\"probe\":\"mcp_codex\",\"ok\":false}"}}
+{"type":"turn.completed","usage":{"input_tokens":45299,"cached_input_tokens":36096,"cache_write_input_tokens":0,"output_tokens":205,"reasoning_output_tokens":67}}

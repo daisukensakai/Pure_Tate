@@ -823,10 +823,18 @@ def probe_mcp_grok(run_dir: Path) -> Dict[str, Any]:
         }
 
 
-def probe_mcp_codex(run_dir: Path) -> Dict[str, Any]:
+def probe_mcp_codex(
+    run_dir: Path,
+    *,
+    bypass_approvals_and_sandbox: bool = False,
+    approval_policy: str = "never",
+) -> Dict[str, Any]:
     if shutil.which("codex") is None:
         return {"probe": "mcp_codex", "status": "skip", "reason": "codex not on PATH"}
-    out_dir = run_dir / "mcp_codex"
+    probe_name = "mcp_codex_bypass" if bypass_approvals_and_sandbox else "mcp_codex"
+    if approval_policy != "never" and not bypass_approvals_and_sandbox:
+        probe_name += "_" + approval_policy.replace("-", "_")
+    out_dir = run_dir / probe_name
     out_dir.mkdir(parents=True, exist_ok=True)
     worker_results = out_dir / "workers"
     worker_results.mkdir(exist_ok=True)
@@ -844,9 +852,13 @@ def probe_mcp_codex(run_dir: Path) -> Dict[str, Any]:
     # Session-scoped MCP via -c; format is version-sensitive.
     cmd_json = json.dumps(server_cmd[0])
     args_json = json.dumps(server_cmd[1:])
+    env_toml = "{" + ", ".join(
+        "%s=%s" % (key, json.dumps(value)) for key, value in sorted(env.items())
+        if key.startswith("GROK_WORKER_")
+    ) + "}"
     mcp_toml = (
-        "{command=%s, args=%s, enabled=true}"
-        % (cmd_json, args_json)
+        "{command=%s, args=%s, env=%s, enabled=true}"
+        % (cmd_json, args_json, env_toml)
     )
     argv = [
         "codex",
@@ -854,22 +866,30 @@ def probe_mcp_codex(run_dir: Path) -> Dict[str, Any]:
         "--skip-git-repo-check",
         "-m",
         "gpt-5.6-sol",
-        "--sandbox",
-        "read-only",
-        "-c",
-        'approval_policy="never"',
-        "-c",
-        "mcp_servers.grok_workers=%s" % mcp_toml,
-        "--json",
-        prompt,
     ]
+    if bypass_approvals_and_sandbox:
+        # Diagnostic only: the worker itself remains read-only.  This proves
+        # whether Codex's headless approval layer is what blocks the MCP call.
+        argv.append("--dangerously-bypass-approvals-and-sandbox")
+    else:
+        argv.extend(
+            ["--sandbox", "read-only", "-c", 'approval_policy="%s"' % approval_policy]
+        )
+    argv.extend(
+        [
+            "-c",
+            "mcp_servers.grok_workers=%s" % mcp_toml,
+            "--json",
+            prompt,
+        ]
+    )
     try:
         code, stdout, stderr, elapsed = run_subprocess(
             argv, cwd=ROOT, env=env, timeout=LIVE_TIMEOUT
         )
     except subprocess.TimeoutExpired:
         return {
-            "probe": "mcp_codex",
+            "probe": probe_name,
             "status": "fail",
             "reason": "timeout",
         }
@@ -878,12 +898,14 @@ def probe_mcp_codex(run_dir: Path) -> Dict[str, Any]:
     worker_files = sorted(p.name for p in worker_results.iterdir())
     ok = bool(worker_files)
     return {
-        "probe": "mcp_codex",
+        "probe": probe_name,
         "status": "pass" if ok else "fail",
         "returncode": code,
         "elapsed_seconds": elapsed,
         "worker_files": worker_files,
         "server_cmd": server_cmd,
+        "bypass_approvals_and_sandbox": bypass_approvals_and_sandbox,
+        "approval_policy": approval_policy,
         "stderr_prefix": stderr[:500],
         "stdout_prefix": stdout[:500],
         "note": "hard gate requires worker artifact files",
@@ -953,6 +975,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         ("mcp_claude", lambda: probe_mcp_claude(run_dir)),
         ("mcp_grok", lambda: probe_mcp_grok(run_dir)),
         ("mcp_codex", lambda: probe_mcp_codex(run_dir)),
+        (
+            "mcp_codex_bypass",
+            lambda: probe_mcp_codex(run_dir, bypass_approvals_and_sandbox=True),
+        ),
+        (
+            "mcp_codex_on_failure",
+            lambda: probe_mcp_codex(run_dir, approval_policy="on-failure"),
+        ),
         ("mcp_gemini", lambda: probe_mcp_gemini(run_dir)),
     ]
 

@@ -1,0 +1,81 @@
+{
+  "attempt_id": "ATT-0033",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim": "SRC-0004 / packet convention: obstruction splits as H^0(\u03c9\u2297W^\u2228(\u0393))=\u2295_f H^0(\u03c9\u2297W_f^\u2228(\u0393)) with deg(W_f)=4g+12-4f and W_f=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O(-f))|_C (not the O(f) summand of F).",
+      "note": "Matches packet primary locator SRC-0004 Lemma 10.6 degree/Serre-duality excerpt and the fixed CE line-bundle convention; signs and summand labeling are consistent with deg(W_4)=20, deg(W_5)=16.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "At g=n=6, deg(\u03c9\u2297W_4^\u2228(\u0393))=-4 and deg(\u03c9\u2297W_5^\u2228(\u0393))=0 for deg \u0393=6.",
+      "note": "Direct arithmetic: (2g-2)-deg(W_f)+n gives 10-20+6=-4 and 10-16+6=0.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "On every geometric split balanced fibre, residual CE evaluation of W=W_4\u2295W_5 fails at \u0393 iff O_C(\u0393)\u2245L:=W_5\u2297\u03c9^{-1}.",
+      "note": "Negative-degree summand has H^0=0 on a smooth connected curve. Degree-0 summand has a section iff it is trivial, i.e. \u03c9\u2297W_5^\u2228(\u0393)\u2245O iff O(\u0393)\u2245L. With H^1(W)=0 (both summands have degree >2g-2), Serre duality identifies nonvanishing of H^0(\u03c9\u2297W^\u2228(\u0393)) with failure of surjectivity of H^0(W)\u2192W|\u0393, the natural evaluation-rank obstruction used by SRC-0004/packet for this locus.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "(Z_ev)_red=I_red as closed substacks of Conf_6(C/B).",
+      "note": "Fibrewise geometric points of the obstruction nonvanishing locus and of the AJ incidence coincide. Both loci are closed of finite type over a finite-type C-base (determinantal/evaluation degeneracy vs fibre of Conf\u2192Pic along [L]); identical geometric points imply identical underlying reduced substacks. Theorem claims only reduced equality; nilpotent/Fitting comparison is correctly excluded.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "I_red/S_6 is the reduced-support open of the relative AJ fibre, and the ordering map is a finite \u00e9tale S_6-torsor onto that open.",
+      "note": "S_6 acts freely on Conf_6 (pairwise distinct points) in characteristic 0; the standard ordering cover Conf_6\u2192(Sym^6\\\u0394) is a finite \u00e9tale S_6-torsor. Restricting to the AJ fibre along [L] yields the claimed torsor over the open of reduced-support divisors in Sym_B^6\u00d7_{Pic,[L]}B. Wording uses I_red and reduced-support (not scheme-theoretic reduction of the whole fibre), matching the packet warning not to call that open closed.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Every geometric fibre of the full AJ fibre Sym^6\u00d7_{Pic,[L]}B is nonempty; reduced-support nonemptiness is not claimed.",
+      "note": "deg L=16-10=6 and \u03c7(L)=6-6+1=1 imply h^0(L)=1+h^1(L)\u22651 on every geometric genus-6 fibre, so |L|\u2260\u2205. Reduced-support open may still be empty (e.g. unique divisor 6p); theorem and GAP-0033-3 correctly refuse that stronger claim.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Listed source SRC-0004 is used load-bearingly; packet finding FND-0005 is not used in its strong form.",
+      "note": "SRC-0004 supplies the obstruction split and degree formula. FND-0005\u2019s claim that Z itself is nonempty by RR is not a load-bearing input: the theorem only uses RR for the full AJ fibre and explicitly does not assert reduced-support/Z_ev nonemptiness.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate",
+      "evidence": "If h^0(L)=1 and the unique effective divisor is non-reduced (e.g. 6p), the full AJ fibre is a point while the Conf_6 locus is empty. ATT-0033 states this boundary (GAP-0033-3) and the theorem correctly avoids claiming reduced nonemptiness; any reading of packet FND-0005 that \u2018Z is nonempty by RR alone\u2019 overreaches unless a separate reduced-divisor argument is supplied.",
+      "key": "rr-full-aj-not-reduced-Z-nonempty",
+      "statement": "For L=W_5\u2297\u03c9_C^{-1} of degree 6 on a smooth genus-6 curve, Riemann\u2013Roch \u03c7(L)=1 proves only that the full Abel\u2013Jacobi fibre in Sym^6 is nonempty; it does not prove that the reduced-support open, or the ordered Conf_6 incidence Z_ev, is nonempty on every geometric fibre.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0041",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+  "proof_dependency_checks": [],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0033-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: treat H^0(\u03c9\u2297W^\u2228(\u0393)) as only a Serre-dual proxy and deny that CE evaluation-rank-failure equals residual surjectivity failure of H^0(W)\u2192W|\u0393 (wrong expected rank, scroll-level incomplete series, or a different Fitting complex could move support); secondarily, deny that fibrewise matching of geometric points upgrades to reduced substack equality over a general finite-type base, and press non-flatness of Sym\u2192Pic for scheme structure under S_6 quotients. Outcome: does not refute the stated theorem. Packet/SRC-0004 identify the relevant obstruction with the split H^0 groups; with H^1(W)=0 the dual is exactly coker evaluation of W; negative/zero degree analysis is standard; reduced-only equality is the usual finite-type consequence of identical geometric points; the S_6 claim is the standard free configuration cover of the reduced-support open; RR nonemptiness is only for the full fibre, as stated. Residual risk is confined to nonreduced Fitting ideals, descent off a chosen splitting, and reduced-support nonemptiness\u2014all explicitly out of scope.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B be a finite-type complex base carrying a smooth family of genus-6 tetragonal covers together with an actual balanced Casnati\u2013Ekedahl splitting F=O(4)\u2295O(5). Put W_f=(O_{P(E^vee)}(2)\u2297gamma^*O(-f))|_C and L=W_5\u2297omega_{C/B}^{-1}. On the relative ordered configuration stack Conf_6(C/B), let Z_ev be the Casnati\u2013Ekedahl evaluation-rank-failure locus, and let I be the Abel\u2013Jacobi incidence locus O_C(p_1+\u22ef+p_6)\u2245L. Then (Z_ev)_red=I_red. Moreover, the quotient of I_red by S_6 is the reduced-support open of the relative Abel\u2013Jacobi fibre Sym_B^6(C)\u00d7_{Pic^6(C/B),[L]}B, and the ordering map is a finite \u00e9tale S_6-torsor. Every geometric fibre of the full Abel\u2013Jacobi fibre is nonempty, although this theorem does not assert that its reduced-support open is nonempty.",
+  "verdict": "confirmed"
+}

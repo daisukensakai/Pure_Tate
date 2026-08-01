@@ -1412,6 +1412,7 @@ def run_task(
             max_grok_workers_from_config,
             merge_worker_env,
             prepare_worker_session,
+            record_parent_mcp_events,
         )
 
         engines_root = load_engines_config()
@@ -1501,6 +1502,10 @@ def run_task(
                 ) from exc
             raise RuntimeError(detail) from exc
         process_stdout = process.stdout or ""
+        # The worker server records calls it receives. Capture engine-side MCP
+        # events as well, so approval cancellations are not mistaken for a
+        # parent that simply elected not to dispatch a worker.
+        record_parent_mcp_events(workers, process_stdout)
         if family == "openai" and last_message.is_file():
             raw = last_message.read_text(encoding="utf-8")
         else:

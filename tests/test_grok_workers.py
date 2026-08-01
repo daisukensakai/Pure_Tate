@@ -17,6 +17,7 @@ from pure_tate.grok_workers import (
     max_grok_workers_from_config,
     mcp_server_command,
     prepare_worker_session,
+    record_parent_mcp_events,
     sha256_text,
     utc_now_iso,
 )
@@ -123,6 +124,7 @@ class GrokWorkerPoolTests(unittest.TestCase):
             self.assertIsNotNone(grok.grok_home)
             self.assertTrue((grok.grok_home / "config.toml").is_file())
             self.assertIn("GROK_HOME", grok.env_updates)
+            self.assertIn("UV_CACHE_DIR", grok.env_updates)
 
             disabled = prepare_worker_session(
                 context, family="claude", max_workers=0
@@ -167,10 +169,32 @@ class GrokWorkerPoolTests(unittest.TestCase):
             self.assertIn("--mcp-config", out)
             self.assertIn("--strict-mcp-config", out)
 
+    def test_apply_workers_to_codex_argv_includes_session_environment(self):
+        session = WorkerSession(
+            enabled=True,
+            max_workers=1,
+            allow_web=False,
+            family="openai",
+            results_dir=Path("/tmp/pure-tate-workers"),
+            server_command=["uv", "run", "python", "worker.py"],
+            env_updates={
+                "GROK_WORKER_RESULTS_DIR": "/tmp/pure-tate-workers",
+                "GROK_WORKER_SESSION_ID": "SESS-test",
+            },
+        )
+        out = apply_workers_to_argv(
+            ["codex", "exec", "--json", "prompt"], "openai", session
+        )
+        override = out[out.index("-c") + 1]
+        self.assertIn("mcp_servers.grok_workers=", override)
+        self.assertIn("GROK_WORKER_RESULTS_DIR", override)
+        self.assertIn("GROK_WORKER_SESSION_ID", override)
+
     def test_mcp_server_command_shape(self):
         cmd = mcp_server_command()
         self.assertGreaterEqual(len(cmd), 2)
         self.assertTrue(any("grok_workers.py" in part for part in cmd))
+        self.assertIn("--no-project", cmd)
         self.assertIn("--serve-mcp", cmd)
 
     def test_dispatch_log_records_lifecycle(self):
@@ -236,6 +260,46 @@ class GrokWorkerPoolTests(unittest.TestCase):
             root = ensure_dispatch_log_dir(Path(directory) / "dispatches")
             self.assertTrue(root.is_dir())
             self.assertTrue((root / "README.md").is_file())
+
+    def test_records_codex_client_side_mcp_cancellation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "worker-dispatches"
+            session = WorkerSession(
+                enabled=True,
+                max_workers=1,
+                allow_web=False,
+                family="openai",
+                results_dir=Path(directory) / "workers",
+                env_updates={
+                    "GROK_WORKER_LOG_DIR": str(root),
+                    "GROK_WORKER_SESSION_ID": "SESS-client-cancel",
+                },
+            )
+            DispatchLog(root, session_id="SESS-client-cancel").log("session_open")
+            stdout = json.dumps(
+                {
+                    "type": "item.completed",
+                    "item": {
+                        "type": "mcp_tool_call",
+                        "server": "grok_workers",
+                        "tool": "dispatch_grok_worker",
+                        "status": "failed",
+                        "result": None,
+                        "error": {"message": "user cancelled MCP tool call"},
+                    },
+                }
+            )
+            self.assertEqual(record_parent_mcp_events(session, stdout), 1)
+            rows = [
+                json.loads(line)
+                for line in (root / "sessions" / "SESS-client-cancel" / "events.jsonl")
+                .read_text(encoding="utf-8")
+                .splitlines()
+            ]
+            attempt = [row for row in rows if row["event"] == "parent_mcp_attempt"]
+            self.assertEqual(len(attempt), 1)
+            self.assertEqual(attempt[0]["client_status"], "failed")
+            self.assertEqual(attempt[0]["client_error"], "user cancelled MCP tool call")
 
 
 if __name__ == "__main__":

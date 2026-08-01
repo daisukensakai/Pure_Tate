@@ -1,0 +1,60 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-01T06:55:56.945744+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "gemini",
+      "codex",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 8392,
+      "completed_at": "2026-08-01T06:55:55.987853+00:00",
+      "engine": "grok",
+      "error": "agent failed with exit 1: \u001b[2m2026-08-01T06:50:28.369484Z\u001b[0m \u001b[33m WARN\u001b[0m Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) \u001b[3mattempt\u001b[0m\u001b[2m=\u001b[0m0\n\u001b[2m2026-08-01T06:50:28.875933Z\u001b[0m \u001b[33m WARN\u001b[0m Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) \u001b[3mattempt\u001b[0m\u001b[2m=\u001b[0m1\n\u001b[2m2026-08-01T06:50:29.878110Z\u001b[0m \u001b[33m WARN\u001b[0m Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) \u001b[3mattempt\u001b[0m\u001b[2m=\u001b[0m2\n\u001b[2m2026-08-01T06:50:29.878129Z\u001b[0m \u001b[31mERROR\u001b[0m Settings fetch failed \u001b[3mmax_attempts\u001b[0m\u001b[2m=\u001b[0m3\n\u001b[2m2026-08-01T06:50:29.879963Z\u001b[0m \u001b[33m WARN\u001b[0m Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) \u001b[3mattempt\u001b[0m\u001b[2m=\u001b[0m0\n\u001b[2m2026-08-01T06:50:30.382162Z\u001b[0m \u001b[33m WARN\u001b[0m Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) \u001b[3matt",
+      "last_activity_at": "2026-08-01T06:55:55.971108+00:00",
+      "last_activity_stream": "stderr",
+      "output": "research/paired-digests/DIGEST-0011.json",
+      "phase": "trace-mining",
+      "started_at": "2026-08-01T06:50:28.336810+00:00",
+      "state": "failed",
+      "step": 1,
+      "task_id": "TASK-C66-001-MINE-CODEX-FORCED_PROOF"
+    },
+    {
+      "activity_bytes": 3576,
+      "completed_at": "2026-08-01T06:55:56.647071+00:00",
+      "engine": "claude",
+      "error": "agent failed with exit 1: {\"type\":\"system\",\"subtype\":\"init\",\"cwd\":\"/private/var/folders/r_/40tyr0nj6zn_yqb74rw_351c0000gn/T/pure-tate-agent-yzdyy3bn\",\"session_id\":\"543635da-77fd-4d77-b441-823650138278\",\"tools\":[\"Task\",\"CronCreate\",\"CronDelete\",\"CronList\",\"DesignSync\",\"EnterWorktree\",\"ExitWorktree\",\"Glob\",\"Grep\",\"Monitor\",\"NotebookEdit\",\"PushNotification\",\"Read\",\"ReportFindings\",\"ScheduleWakeup\",\"SendMessage\",\"Skill\",\"TaskCreate\",\"TaskGet\",\"TaskList\",\"TaskOutput\",\"TaskStop\",\"TaskUpdate\",\"ToolSearch\",\"WebFetch\",\"WebSearch\",\"Workflow\"],\"mcp_servers\":[{\"name\":\"grok-workers\",\"status\":\"pending\"}],\"model\":\"claude-opus-5\",\"permissionMode\":\"bypassPermissions\",\"slash_commands\":[\"deep-research\",\"design-sync\",\"dataviz\",\"update-config\",\"verify\",\"debug\",\"code-review\",\"simplify\",\"batch\",\"fewer-permission-prompts\",\"doctor\",\"loop\",\"claude-api\",\"run\",\"run-skill-generator\",\"agents\",\"clear\",\"color\",\"compact\",\"config\",\"context\",\"effort\",\"fast\",\"heapdump\",\"init\",\"mcp\",\"model\",\"__remote-workflow\",\"workflow-launch-exec\",\"reload-skills",
+      "last_activity_at": "2026-08-01T06:55:56.629057+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "research/paired-digests/DIGEST-0011.json",
+      "phase": "trace-mining",
+      "started_at": "2026-08-01T06:55:56.308625+00:00",
+      "state": "failed",
+      "step": 2,
+      "task_id": "TASK-C66-001-MINE-CODEX-FORCED_PROOF"
+    }
+  ],
+  "executed_steps": 2,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260801T065028005610Z-84336",
+  "schema_version": 1,
+  "started_at": "2026-08-01T06:50:28.005610+00:00",
+  "status": "stopped",
+  "stop_reason": "health_failure"
+}
