@@ -1,0 +1,114 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "For ordered-to-unordered distinct-support incidence spaces, the compatible torsors should be I\u2192I^{red-supp} and, after reducing both sides, I_red\u2192(I^{red-supp})_red."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Faithfully flat descent of reducedness, tested after constant base change to Spec(k[\u03b5]/(\u03b5\u00b2)), should rule out a finite \u00e9tale torsor from I_red to a nonreduced I^{red-supp} whenever the distinct-support incidence is nonempty."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "With a compatibly reduced ordering construction, the ordered reduced residual CE evaluation-rank-drop locus should have unordered model equal to the distinct-support open of the residual linear system of L."
+    }
+  ],
+  "engine": "codex",
+  "established_facts": [
+    {
+      "evidence": "SRC-0004, Lemma 10.6 gives deg(W_f|_C)=2(2g\u22122+4\u00b72)\u22124f=4g+12\u22124f under the \u03b3^*O_P(\u2212f) convention.",
+      "evidence_class": "source",
+      "statement": "Under the convention W_f=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_P(\u2212f))|_C, one has deg(W_f|_C)=4g+12\u22124f. For g=6, deg(W_5)=16, deg(W_4)=20, and deg(W_5\u2297\u03c9_C^{\u22121})=6."
+    },
+    {
+      "evidence": "Using deg(\u03c9_C)=10, deg(W_4)=20, and deg(W_5)=16 gives 10\u221220+6=\u22124 and 10\u221216+6=0.",
+      "evidence_class": "mechanical",
+      "statement": "For every effective degree-six divisor \u0393 on a smooth genus-six curve, deg(\u03c9_C\u2297W_4^\u2228(\u0393))=\u22124 and deg(\u03c9_C\u2297W_5^\u2228(\u0393))=0."
+    },
+    {
+      "evidence": "The line bundle has degree \u22124, and a negative-degree line bundle on a smooth proper connected curve has no nonzero global section.",
+      "evidence_class": "mechanical",
+      "statement": "For every effective degree-six divisor \u0393 on a smooth genus-six curve, H^0(C,\u03c9_C\u2297W_4^\u2228(\u0393))=0."
+    },
+    {
+      "evidence": "The bundle \u03c9_C\u2297W_5^\u2228(\u0393) has degree zero. A degree-zero line bundle on a smooth projective connected curve has a nonzero section exactly when it is trivial; rearranging the resulting isomorphism gives the stated condition.",
+      "evidence_class": "mechanical",
+      "statement": "For every effective degree-six divisor \u0393 on a smooth genus-six curve, H^0(C,\u03c9_C\u2297W_5^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245W_5\u2297\u03c9_C^{\u22121}."
+    },
+    {
+      "evidence": "The obstruction space is the direct sum of the f=4 and f=5 spaces. The first vanishes and the second is nonzero exactly under the Abel\u2013Jacobi condition. Equality of geometric points for locally finite-type substacks over a field determines equality of their absolute reductions.",
+      "evidence_class": "mechanical",
+      "statement": "On geometric fibres with W\u2245W_4\u2295W_5, the residual CE obstruction is nonzero at \u0393 if and only if O_C(\u0393)\u2245L:=W_5\u2297\u03c9_C^{\u22121}; consequently (Z_ev)_red=I_red as reduced closed substacks of Conf_6(C/B)."
+    },
+    {
+      "evidence": "Riemann\u2013Roch gives \u03c7(L)=deg(L)\u2212g+1=6\u22126+1=1, hence h^0(L)=1+h^1(L)\u22651.",
+      "evidence_class": "mechanical",
+      "statement": "On every smooth genus-six geometric fibre, \u03c7(L)=1 and h^0(L)\u22651, so the full Abel\u2013Jacobi fibre of L in Sym^6 is nonempty."
+    },
+    {
+      "evidence": "It is the complement of the finite closed image of the big diagonal. Fibrewise Sym^6(C) is irreducible, the distinct-support locus is nonempty, and nonreduced divisors such as 6p lie in its complement.",
+      "evidence_class": "mechanical",
+      "statement": "The locus of degree-six effective divisors with six pairwise-distinct support points is open and not closed in each relative effective-divisor fibre."
+    },
+    {
+      "evidence": "S_6 acts freely by permuting labels, and the quotient of ordered distinct points by this finite free action is the corresponding unordered distinct-support divisor space.",
+      "evidence_class": "mechanical",
+      "statement": "Before applying reduction to only one side, ordering the six points over the distinct-support locus defines a finite \u00e9tale S_6-torsor on the stack of pairwise-distinct sections."
+    }
+  ],
+  "id": "DIGEST-0015",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "The superscript red-supp imposes distinct support but does not remove nilpotents from the target. A finite \u00e9tale torsor is faithfully flat, and reducedness descends under faithfully flat morphisms, so its reduced source would force the target to be reduced. For a nonempty constant family over Spec(k[\u03b5]/(\u03b5\u00b2)), the target retains the base nilpotent while I_red factors through the reduced base; the map is not flat.",
+      "statement": "The map I_red\u2192I^{red-supp}, with only the source reduced, is always a finite \u00e9tale S_6-torsor."
+    },
+    {
+      "mathematical_reason": "Equality after reduction does not repair the mismatch between a reduced source and a potentially nonreduced target. The ordering construction must remain unreduced on both sides or reduce both sides compatibly.",
+      "statement": "The ordered reduced model is a finite \u00e9tale S_6-cover of the unreduced distinct-support Abel\u2013Jacobi incidence via I_red\u2192I^{red-supp}."
+    }
+  ],
+  "packet_sha256": "758735377a6bcfa87098b70b19cddd26e21835d97796be9596d705679dc1d0e6",
+  "problem_key": "62eb72b401a7fd05334e4e43c47b26b5818fd0f0a92528e3875488ea5bcc4747",
+  "reusable_computations": [],
+  "reviewer_engine": "codex",
+  "sanitized": true,
+  "schema_version": 1,
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-GROK-STANDARD_FALLBACK",
+  "unresolved_dependencies": [
+    {
+      "statement": "Scheme-theoretic equality, including nilpotents and multiplicities, between the CE determinantal or Fitting ideal of Z_ev and the Abel\u2013Jacobi ideal of I."
+    },
+    {
+      "statement": "Fibrewise nonemptiness and denseness of the distinct-support incidence on every geometric fibre; Riemann\u2013Roch establishes only nonemptiness of the full Sym^6 fibre."
+    },
+    {
+      "statement": "Family-level construction and descent of W_5, L, and W\u2245W_4\u2295W_5 when the CE relations bundle does not split globally, including relative Picard twists of O_P(\u2212f)."
+    },
+    {
+      "statement": "A complete proof of the compatible ordering torsor I\u2192I^{red-supp} or I_red\u2192(I^{red-supp})_red over the intended stack."
+    },
+    {
+      "statement": "The h^0-stratification of |L|, its components and dimensions, stabilizers, and maps to tetragonal moduli and M_{6,6}."
+    },
+    {
+      "statement": "The Tate type of any contribution supported on Z to W_{\u221216}H^{BM}_{16}(M_{6,6};Q) and its assembly into the exact target."
+    }
+  ]
+}

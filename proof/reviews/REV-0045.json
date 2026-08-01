@@ -1,0 +1,125 @@
+{
+  "attempt_id": "ATT-0037",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim_id": "ATT-0037-C1",
+      "note": "For smooth complex DM stacks over Q, H_k^{BM}(X) \u2245 H^{2d-k}(X)(d) as MHS. With d=21 and k=16 this is H^{26}(X)(21); twisting by (21) shifts weights by -42, so W_{-16}H_16^{BM} \u2245 W_26 H^{26}(X)(21). Stack vs coarse is harmless over Q. Matches FND-0001 arithmetic; not restated as a new finding.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0037-C2",
+      "note": "Localization H^{15}(D)\u2192H_c^{16}(X)\u2192H^{16}(Y)\u2192H^{16}(D) is exact in MHS. Weight bounds: D proper \u21d2 weights on H^{15}(D) \u226415; Y smooth proper \u21d2 H^{16}(Y) pure of weight 16; X smooth \u21d2 weights on H_c^{16} \u226416. Then W_15 H_c \u2286 ker(\u03b2) by purity of the target, ker(\u03b2)=im(\u03b1) by exactness, and im(\u03b1)\u2286W_15 by source weights, so ker=W_15 and Gr^W_16 H_c^{16} \u2245 K:=ker(H^{16}(Y)\u2192H^{16}(D)) as pure HS of weight 16.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0037-C2b-BM-dual",
+      "note": "H_k^{BM} \u2245 (H_c^k)^vee as MHS in the same degree (no extra Tate twist). With weights on H_c^{16} \u226416, W_{-16}H_16^{BM} \u2245 (Gr^W_16 H_c^{16})^vee. Dual of Q(-8) is Q(8).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0037-C2c-K-subset-P",
+      "note": "Each one-edge clutching factors through D (finite quotients of clutching sources onto boundary components). Hence K \u2286 P. Only the inclusion is used; reverse inclusion is not claimed. Finite stabilizers/graph automorphisms over Q are fine for this inclusion.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0037-C3",
+      "note": "The even boundary-detection lemma is not established. Fatal gaps: (i) the ordered stable-arc complex is never identified with a resolution of the simultaneous restriction kernels defining P; (ii) the proposed homotopy h is only a combinatorial arc-insertion rule with no defined action on K\u00fcnneth decorations, so dh+hd=id is not an identity on the written complex; (iii) the sketch mixes degree-preserving restriction pullbacks \u03be_\u0393^* (which define P) with node/Gysin shifts (wrong complex); (iv) genus \u22652 non-Tate decorations that already lie in a vertex-level restriction kernel are terminals that h cannot kill, and no induction on (g,n) is supplied; (v) the bound m\u22642g+n-2 is not used in the body, which instead jumps from m<22 to m\u226416 without justification. Semisimplicity would upgrade a genuine non-Tate vanishing of P to Tate type, but that vanishing is not proved.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "ATT-0037-C4",
+      "note": "K \u2286 P and semisimplicity of pure polarizable HS would give that any subobject of a Tate sum is Tate, but Tate-ness of P (C3) failed, so Tate-ness of K remains unsettled by the writeup.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "ATT-0037-C5",
+      "note": "Target needs C2 (confirmed) plus Tate-ness of K (unresolved). Dualities would correctly send Q(-8)^\u2295r to Q(8)^\u2295r if K were Tate; that step is not reached.",
+      "verdict": "unresolved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "finding_candidates": [
+    {
+      "evidence": "H^m(Y) pure of weight m; weights on H^{m-1}(D) \u2264 m-1 (D proper); weights on H_c^m(X) \u2264 m (X smooth); morphisms of MHS preserve W so W_{m-1}H_c \u2286 ker(\u03b2); exactness gives ker(\u03b2)=im(\u03b1) \u2286 W_{m-1}; hence ker=W_{m-1} and Gr_m H_c \u2245 im(\u03b2)=ker(H^m(Y)\u2192H^m(D)).",
+      "key": "proper-pair-Gr-equals-boundary-restriction-kernel",
+      "scope": {
+        "cases": "smooth open in smooth proper DM stack with closed complement",
+        "coefficients": "Q",
+        "includes": "(6,6,16)"
+      },
+      "statement": "For X=M_{g,n} smooth, Y=overline{M}_{g,n} smooth proper, D=Y\\X proper, and coefficients Q, localization plus Deligne weight bounds give Gr^W_m H_c^m(X;Q) \u2245 ker(H^m(Y;Q)\u2192H^m(D;Q)) as pure polarizable HS of weight m; in particular for (g,n,m)=(6,6,16)."
+    },
+    {
+      "evidence": "ATT-0037 Section 2 defines h by flag-ordered arc insertion and claims dh+hd=id after Tate quotient, but generators carry vertex cohomology decorations; clutching pullback goes cut\u2192uncut and does not split on cohomology in general; classes already in a vertex-level P are sent to 0 by any pullback-based h, so they are unaccounted terminals of genus possibly \u22652.",
+      "key": "decorated-arc-homotopy-does-not-resolve-restriction-kernel",
+      "scope": {
+        "applies_to": "attempts proving low-degree boundary-restriction kernels of H^*(overline M_{g,n}) are Tate",
+        "coefficients": "Q",
+        "methods": [
+          "ordered stable-arc complex",
+          "boundary clutching pullbacks"
+        ]
+      },
+      "statement": "A purely combinatorial ordered-arc insertion operator does not supply a chain homotopy on the K\u00fcnneth-decorated one-edge restriction complex: without a cohomological rule for how vertex classes transform under arc insertion, and without a comparison theorem identifying the arc complex with the restriction/\u010cech complex for clutching maps, one cannot conclude that the simultaneous one-edge kernel P^m_{g,n} is Tate."
+    },
+    {
+      "evidence": "P is defined by \u03be_\u0393^* (same cohomological degree m). Gysin maps shift degree by 2 per edge and introduce Tate twists (-1). ATT-0037 simultaneously defines P via pullbacks and invokes node shifts in the terminal-degree parity argument.",
+      "key": "gysin-node-shifts-are-not-restriction-kernels",
+      "scope": {
+        "coefficients": "Q",
+        "objects": [
+          "P^m_{g,n}",
+          "boundary Gysin filtration"
+        ]
+      },
+      "statement": "Degree counts that invoke per-edge node/Gysin shifts analyze a different complex (Gysin/weight spectral sequence or boundary-pushforward span) from the simultaneous kernel of degree-preserving clutching pullbacks \u03be_\u0393^*; conclusions about one do not transfer to the other without a duality reindexing that changes the degree being studied."
+    }
+  ],
+  "id": "REV-0045",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "758735377a6bcfa87098b70b19cddd26e21835d97796be9596d705679dc1d0e6",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "Deligne-MHS-PD-BM-strictness",
+      "note": "Deligne MHS, weight bounds for proper/smooth sources, strictness, Poincare/BM dualities over Q on smooth DM stacks (via level covers + invariants) are correctly applied in Section 1; equation (1) Gr^W_16 H_c^{16} \u2245 K stands.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ordered-stable-arc-resolution",
+      "note": "Load-bearing dependency for Tate-ness of P. Discharge fails: no comparison identifying the ordered stable-arc complex with the \u010cech/restriction complex for one-edge clutchings; contracting homotopy not defined on decorated generators; Gysin/node-shift degree bookkeeping is incompatible with the restriction definition of P; stabilization/omitted-unstable cancellation and graph-automorphism signs are only asserted.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "genus-one-Eichler-Shimura-parity",
+      "note": "Eichler\u2013Shimura first non-Tate genus-one primitives in odd degree near a=11 is standard in outline, but is only reached after the arc-complex model equals P. Not independently verified in full local-system precision here; non-load-bearing once the arc resolution fails.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0037-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "The attempt reduces the target correctly to Tate-ness of K=ker(H^{16}(\u0232)\u2192H^{16}(D)) via PD/BM dualities and weight-strict localization, and K\u2286P is fine, but Tate-ness of P rests on an ordered stable-arc contraction that is not a proof: h is undefined on K\u00fcnneth decorations (so dh+hd=id fails for any class already in a vertex-level restriction kernel), the complex is never shown to compute the restriction kernels defining P, and node/Gysin shifts are conflated with degree-preserving clutching pullbacks\u2014leaving genus \u22652 non-Tate summands uncontrolled at m=16. Outcome: Section 1 confirmed; claimed completeness of the theorem fails at Section 2 (incomplete, not a clean theorem refutation).",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "incomplete"
+}

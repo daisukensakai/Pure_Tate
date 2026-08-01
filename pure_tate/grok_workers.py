@@ -37,7 +37,7 @@ DEFAULT_MODEL = "grok-4.5"
 DEFAULT_MAX_CONCURRENT = 4
 DEFAULT_MAX_TOTAL = 4
 DEFAULT_MAX_TURNS = 20
-DEFAULT_TIMEOUT_SECONDS = 300
+DEFAULT_TIMEOUT_SECONDS = 1200
 
 # Repo root (pure_tate/..) — durable logs live under research/worker-dispatches/.
 _REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -955,7 +955,7 @@ def prepare_worker_session(
             "args = [%s]\n"
             "enabled = true\n"
             "startup_timeout_sec = 90\n"
-            "tool_timeout_sec = 600\n"
+            "tool_timeout_sec = 1200\n"
             "env = { %s }\n"
             % (esc(server_cmd[0]), args_toml, env_items)
         )

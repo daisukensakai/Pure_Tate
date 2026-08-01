@@ -1759,7 +1759,7 @@ def run_task(
             max_workers=max_workers,
             allow_web=allow_web,
             worker_model=str(worker_model),
-            worker_timeout=min(timeout, 600),
+            worker_timeout=min(timeout, 1200),
             parent_meta={
                 "engine": engine_id,
                 "family": str(family or ""),

@@ -1,0 +1,288 @@
+{
+  "argument_markdown": "## Setup and conventions\n\nWork over a field of characteristic 0. Let B be locally of finite type, and let \u03c0:C\u2192B be a smooth proper family of geometrically connected genus-6 curves equipped with a balanced tetragonal Casnati\u2013Ekedahl structure: a finite flat degree-4 morphism \u03b3:C\u2192P:=P^1_B, a rank-3 vector bundle E on P, and a splitting of the CE relations bundle F\u2245O_P(4)\u2295O_P(5). Following the packet CE convention (and the degree-compatible reading of SRC-0004 Lemma 10.6), define\n\nW_f := (O_{P(E^\u2228)}(2) \u2297 \u03b3^* O_P(\u2212f))|_C, f\u2208{4,5}.\n\nThus W_5 is the f_2=5 summand of (O(2)\u2297\u03b3^*F^\u2228)|_C and is not the O_P(5) summand of F. Write W:=W_4\u2295W_5 and L:=W_5\u2297\u03c9_{C/B}^{\u22121}. The packet sign \u03b3^*O(\u2212f) is mandatory: the opposite sign would reverse the contribution of \u03b3 to deg(W_f) and destroy the degree-zero balance of the f=5 obstruction at n=6.\n\nLet Conf_6(C/B) be the open substack of C^6_B of ordered 6-tuples of pairwise distinct sections, with universal ordered divisor \u0393=p_1+\u22ef+p_6. Define\n\n- Z_ev \u2282 Conf_6(C/B): geometric points with H^0(C_b, \u03c9_{C_b}\u2297W^\u2228(\u0393_b))\u22600 (CE residual evaluation-failure);\n- I \u2282 Conf_6(C/B): geometric points with O_{C_b}(\u0393_b)\u2245L_b (Abel\u2013Jacobi incidence for L).\n\nBoth are closed in Conf_6(C/B) as zero loci of coherent obstruction sheaves (resp. as the fibre product of the Abel\u2013Jacobi map against the section classifying L).\n\n## Step 1 (source-backed): degree of W_f\n\nBy SRC-0004 Lemma 10.6 under the convention W_f=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O(\u2212f))|_C,\n\ndeg(W_f|_C) = 2(2g\u22122+4\u00b72) \u2212 4f = 4g+12\u22124f.\n\nAt g=6 this gives deg(W_5)=4\u00b76+12\u22124\u00b75=16 and deg(W_4)=4\u00b76+12\u22124\u00b74=20. Since deg(\u03c9_C)=2g\u22122=10,\n\ndeg(L)=deg(W_5)\u2212deg(\u03c9_C)=16\u221210=6.\n\n(Internal consistency: deg(O_{P(E^\u2228)}(1)|_C)=2g\u22122+8=18 and \u03b3 has degree 4, so 2\u00b718\u22124f=36\u22124f=4g+12\u22124f.)\n\n## Step 2 (proved): obstruction degrees at (g,n)=(6,6)\n\nSRC-0004 supplies deg(\u03c9_C\u2297W_f^\u2228(\u0393))=2g\u22122\u2212(4g+12\u22124f)+n=4f+n\u22122g\u221214 for any effective divisor \u0393 of degree n. Substituting g=6, n=6:\n\n- f=4: 16+6\u221212\u221214=\u22124;\n- f=5: 20+6\u221212\u221214=0.\n\nEquivalently deg(\u03c9_C)\u2212deg(W_f)+n equals 10\u221220+6=\u22124 and 10\u221216+6=0.\n\n## Step 3 (proved): vanishing of the f=4 summand\n\nOn a smooth projective geometrically connected curve, a line bundle of negative degree has no nonzero global section (a nonzero section would cut an effective divisor of nonnegative degree). Hence for every effective degree-six \u0393,\n\nH^0(C, \u03c9_C\u2297W_4^\u2228(\u0393))=0.\n\n## Step 4 (proved): degree-zero criterion for the f=5 summand\n\nOn a smooth projective geometrically connected curve, a degree-zero line bundle N admits a nonzero global section if and only if N\u2245O_C: a nonzero section has effective vanishing divisor of degree 0, hence is nowhere vanishing, so O_C\u2192N is an isomorphism. Applying this to N=\u03c9_C\u2297W_5^\u2228(\u0393) of degree 0 yields\n\nH^0(C, \u03c9_C\u2297W_5^\u2228(\u0393))\u22600 \u21d4 \u03c9_C\u2297W_5^\u2228(\u0393)\u2245O_C \u21d4 O_C(\u0393)\u2245W_5\u2297\u03c9_C^{\u22121}=L.\n\n(This uses only effectivity of vanishing divisors, not Serre duality.)\n\n## Step 5 (proved on geometric fibres): residual evaluation fails iff Abel\u2013Jacobi incidence\n\nOn geometric fibres the balanced splitting F\u2245O(4)\u2295O(5) induces W\u2245W_4\u2295W_5, and SRC-0004 splits the residual obstruction:\n\nH^0(C, \u03c9_C\u2297W^\u2228(\u0393)) = H^0(\u03c9_C\u2297W_4^\u2228(\u0393)) \u2295 H^0(\u03c9_C\u2297W_5^\u2228(\u0393)).\n\nSteps 3\u20134 therefore give H^0(\u03c9_C\u2297W^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245L. Consequently Z_ev and I have the same geometric points over every geometric fibre of B, and\n\n(Z_ev)_red = I_red\n\nas reduced closed substacks of Conf_6(C/B). This is the packet six-point failure condition derived from the f_2=5 summand with the sign \u03b3^*O(\u22125).\n\n## Step 6 (proved): Riemann\u2013Roch nonemptiness of the full residual system\n\nOn every smooth genus-6 geometric fibre, \u03c7(L)=deg(L)\u2212g+1=6\u22126+1=1, so h^0(L)=1+h^1(L)\u22651. Thus the relative Abel\u2013Jacobi fibre of L in Sym^6_{C/B} is fibrewise nonempty: every geometric fibre carries at least one (possibly non-reduced) effective degree-six divisor linearly equivalent to L. Equivalently, the unordered residual incidence in Sym^6 is nonempty. (This matches the packet finding FND-0005 at the level of the full linear system; it does not by itself produce a reduced six-point configuration on every fibre.)\n\n## Step 7 (proved on stacks): ordered reduced model as finite \u00e9tale S_6-torsor\n\nInside the relative effective-divisor space of degree six, the locus of reduced-support divisors (six pairwise-distinct geometric points) is open: it is the complement of the image of the big diagonal under a finite (hence closed) map. It is not closed, because fibrewise Sym^6 is irreducible and contains non-reduced divisors (e.g. 6p). Over that reduced-support open, the natural map from the stack of ordered pairwise-distinct 6-tuples is a finite \u00e9tale S_6-torsor: S_6 acts freely by permuting labels, and free actions of finite groups yield \u00e9tale torsors. Restricting to I_red yields a finite \u00e9tale S_6-torsor\n\nI_red \u2192 I^{red-supp}\n\nonto the reduced-support open of the relative Abel\u2013Jacobi fibre of L. This is the packet model: ordered distinct reduced divisors as a finite \u00e9tale S_6-cover of the reduced-support open; that open is not called closed. Freeness can fail on coarse moduli at curves with automorphisms permuting marked points, so the torsor statement is at stack level.\n\n## Identification of Z (C66-GEO-Z)\n\nThe evaluation-failure locus Z of the balanced tetragonal CE geometry, in the ordered reduced model over a balanced CE base, is the reduced closed substack I_red=(Z_ev)_red \u2282 Conf_6(C/B) cut out by O_C(\u0393)\u2245L=W_5\u2297\u03c9^{\u22121}. Its unordered reduced model is the reduced-support open I^{red-supp} of the residual linear system of L, with finite \u00e9tale S_6 ordering cover. This completes the construction and reduced identification required by C66-GEO-Z.\n\n## Explicit non-claims (downstream or open)\n\n1. Scheme-theoretic (non-reduced) equality of the CE determinantal/Fitting rank-drop ideal of Z_ev with the Abel\u2013Jacobi ideal of I is not claimed: geometric-point agreement determines only reduced structures (C66-COMP-RANK / Fitting comparison).\n2. Fibrewise nonemptiness of I^{red-supp} (or of ordered reduced Z_ev) on every geometric fibre is not claimed: \u03c7(L)=1 only forces the full Sym^6 fibre to be nonempty; reduced members require base-point-freeness of L and a Bertini argument (or an equivalent special-fibre analysis).\n3. The residual duality identification W_5\u2245\u03c9_C^{\u22972}(\u2212D) for a fibre class D of \u03b3 is not used and not claimed; the failure condition is stated intrinsically in terms of W_5.\n4. Global well-definedness of the direct-sum splitting W=W_4\u2295W_5 and of L over bases where F does not split, or up to Pic(B) twists of relative O_P(\u2212f), is restricted to geometric fibres / actual balanced splittings as in the setup.\n5. h^0-stratification of |L|, components, dimensions, stabilizers, maps to tetragonal moduli or to M_{6,6}, and any Gysin/Tate statement for W_{\u221216}H^{BM}_{16}(M_{6,6};Q) are outside C66-GEO-Z (C66-GEO-H0, C66-GEO-COMP, C66-TATE-*).\n\n## Blocked routes (not used)\n\n- vcd-only-vanishing: unused; no cohomological vanishing argument appears.\n- undecorated-cgp-top-weight-graph-complex: unused; no graph-complex input.\n- point-count-without-degree-parity-separation: unused; no point-counting.\n- forgetful-map-renaming-local-system-unknown: unused; no forgetful-map or local-system renaming.\n\n## Relation to the exact target\n\nThe ambient exact theorem asserts that W_{\u221216}H^{BM}_{16}(M_{6,6};Q)\u2245W_{26}H^{26}(M_{6,6};Q)(21) is a direct sum of Q(8). The present lemma only constructs and identifies the geometric locus Z on which later support and assembly arguments act. It does not resolve RED-0001.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "claims": [
+    {
+      "evidence": "SRC-0004 Lemma 10.6 degree formula with the packet \u03b3^*O(\u2212f) convention; direct substitution at g=6 and deg(\u03c9_C)=10.",
+      "id": "CLM-GEO-Z-001",
+      "kind": "source_backed_plus_arithmetic",
+      "source_ids": [
+        "SRC-0004"
+      ],
+      "statement": "Under the CE convention W_f=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_P(\u2212f))|_C one has deg(W_f|_C)=4g+12\u22124f; at g=6, deg(W_5)=16, deg(W_4)=20, and deg(W_5\u2297\u03c9_C^{\u22121})=6.",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "CLM-GEO-Z-001"
+      ],
+      "evidence": "SRC-0004 obstruction degree 4f+n\u22122g\u221214 at g=n=6.",
+      "id": "CLM-GEO-Z-002",
+      "kind": "arithmetic",
+      "statement": "For every effective degree-six divisor \u0393 on a smooth genus-6 curve, deg(\u03c9_C\u2297W_4^\u2228(\u0393))=\u22124 and deg(\u03c9_C\u2297W_5^\u2228(\u0393))=0.",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "CLM-GEO-Z-002"
+      ],
+      "evidence": "Negative-degree line bundles on smooth projective curves have no nonzero global sections.",
+      "id": "CLM-GEO-Z-003",
+      "kind": "proved",
+      "statement": "For every effective degree-six \u0393 on a smooth genus-6 curve, H^0(C,\u03c9_C\u2297W_4^\u2228(\u0393))=0.",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "CLM-GEO-Z-002"
+      ],
+      "evidence": "Degree-zero line-bundle criterion: a degree-zero line bundle on a smooth projective connected curve has a nonzero section iff it is trivial; rearrange \u03c9\u2297W_5^\u2228(\u0393)\u2245O_C.",
+      "id": "CLM-GEO-Z-004",
+      "kind": "proved",
+      "statement": "For every effective degree-six \u0393 on a smooth genus-6 curve, H^0(C,\u03c9_C\u2297W_5^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245W_5\u2297\u03c9_C^{\u22121}.",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "CLM-GEO-Z-003",
+        "CLM-GEO-Z-004"
+      ],
+      "evidence": "SRC-0004 direct-sum splitting of the residual obstruction on geometric split fibres; combine with CLM-GEO-Z-003 and CLM-GEO-Z-004. Reduced equality only: geometric points determine reduced structures.",
+      "id": "CLM-GEO-Z-005",
+      "kind": "proved",
+      "statement": "On geometric fibres of a balanced CE base with W\u2245W_4\u2295W_5, residual CE evaluation fails at \u0393 (H^0(\u03c9_C\u2297W^\u2228(\u0393))\u22600) if and only if O_C(\u0393)\u2245L:=W_5\u2297\u03c9_C^{\u22121}; hence (Z_ev)_red=I_red as reduced closed substacks of Conf_6(C/B).",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "CLM-GEO-Z-001"
+      ],
+      "evidence": "Riemann\u2013Roch: \u03c7(L)=deg(L)\u2212g+1=6\u22126+1=1, hence h^0=1+h^1\u22651. Aligns with packet FND-0005 for nonemptiness of the residual system (not the reduced-support open).",
+      "id": "CLM-GEO-Z-006",
+      "kind": "proved",
+      "statement": "On every smooth genus-6 geometric fibre, \u03c7(L)=1 and h^0(L)\u22651, so the full Abel\u2013Jacobi fibre of L in Sym^6 is nonempty.",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "CLM-GEO-Z-005"
+      ],
+      "evidence": "Reduced-support is the complement of a finite (closed) image of the big diagonal; free finite-group action on ordered pairwise-distinct points is an \u00e9tale torsor. Packet bottleneck instruction: do not call the reduced-support open closed; state the torsor on stacks, not coarse moduli.",
+      "id": "CLM-GEO-Z-007",
+      "kind": "proved",
+      "statement": "The reduced-support locus in the relative degree-six effective-divisor space is open and not closed; over it, ordering six distinct support points defines a finite \u00e9tale S_6-torsor on the stack of pairwise-distinct sections. Restricting to I_red yields a finite \u00e9tale S_6-torsor I_red\u2192I^{red-supp}.",
+      "status": "proved"
+    },
+    {
+      "depends_on": [
+        "CLM-GEO-Z-005",
+        "CLM-GEO-Z-007"
+      ],
+      "evidence": "Definition plus reduced identification and ordering model; weakest sufficient construction for C66-GEO-Z.",
+      "id": "CLM-GEO-Z-008",
+      "kind": "proved",
+      "statement": "The evaluation-failure locus Z of C66-GEO-Z, in the ordered reduced model over a balanced CE base, is identified as I_red=(Z_ev)_red cut out by O_C(\u0393)\u2245W_5\u2297\u03c9_C^{\u22121}, with unordered reduced model the reduced-support open of the residual linear system of L.",
+      "status": "proved"
+    },
+    {
+      "evidence": "Geometric-point agreement does not constrain Fitting ideals or obstruction-complex structure; deferred to C66-COMP-RANK / scheme comparison.",
+      "id": "CLM-GEO-Z-GAP-01",
+      "kind": "gap",
+      "statement": "Scheme-theoretic equality of the CE determinantal/Fitting ideal of Z_ev with the Abel\u2013Jacobi ideal of I (including nilpotents and multiplicities).",
+      "status": "gap"
+    },
+    {
+      "evidence": "\u03c7(L)=1 forces only the full Sym^6 fibre; reduced members need base-point-freeness of L and Bertini (or fibrewise special analysis).",
+      "id": "CLM-GEO-Z-GAP-02",
+      "kind": "gap",
+      "statement": "Fibrewise nonemptiness (and denseness) of the ordered reduced failure locus I_red on every geometric fibre of an arbitrary balanced CE base.",
+      "status": "gap"
+    },
+    {
+      "evidence": "The theorem is stated for bases carrying an actual balanced splitting; descent to unsplit balanced tetragonal moduli remains open.",
+      "id": "CLM-GEO-Z-GAP-03",
+      "kind": "gap",
+      "statement": "Family-level well-definedness of W_5, L, and the obstruction splitting over bases where F does not split globally, including Pic(B) ambiguity of relative O_P(\u2212f).",
+      "status": "gap"
+    },
+    {
+      "evidence": "Outside C66-GEO-Z; belongs to C66-GEO-H0 and C66-GEO-COMP. No pure-codimension-4 closed Z\u2282M_{6,6} is asserted here.",
+      "id": "CLM-GEO-Z-GAP-04",
+      "kind": "gap",
+      "statement": "Closed stratified embedding of Z into M_{6,6}, h^0-stratification of |L|, components, dimensions, stabilizers, and maps to tetragonal moduli.",
+      "status": "gap"
+    },
+    {
+      "evidence": "Outside C66-GEO-Z; belongs to C66-TATE-SUPPORT and C66-TATE-ASSEMBLY.",
+      "id": "CLM-GEO-Z-GAP-05",
+      "kind": "gap",
+      "statement": "Tate type of any contribution of Z to W_{\u221216}H^{BM}_{16}(M_{6,6};Q), and assembly into the exact target.",
+      "status": "gap"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "how_addressed": "Not used. The argument is purely geometric (degrees, residual obstruction, Abel\u2013Jacobi incidence, S_6-torsor) and makes no vanishing claim at or above vcd. Packet FND-0035 is cited only as context that vcd-vanishing cannot settle RED-0001, not as an input.",
+      "route": "vcd-only-vanishing"
+    },
+    {
+      "how_addressed": "Not used. No graph complex, dual complex, or top-weight generator appears.",
+      "route": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "how_addressed": "Not used. No point counts, zeta functions, or parity heuristics appear.",
+      "route": "point-count-without-degree-parity-separation"
+    },
+    {
+      "how_addressed": "Not used. No forgetful map M_{6,6}\u2192M_{6,5}, Leray spectral sequence, or local-system renaming is invoked for the construction of Z.",
+      "route": "forgetful-map-renaming-local-system-unknown"
+    },
+    {
+      "how_addressed": "Explicitly refused: only (Z_ev)_red=I_red is claimed; Fitting/determinantal equality is marked GAP-01.",
+      "route": "scheme-equality-from-geometric-points"
+    },
+    {
+      "how_addressed": "Explicitly refused: \u03c7(L)=1 yields only full Sym^6 nonemptiness (CLM-GEO-Z-006); ordered reduced nonemptiness is GAP-02.",
+      "route": "chi-implies-reduced-nonemptiness"
+    },
+    {
+      "how_addressed": "Refused: reduced-support is proved open and not closed; packet instruction respected in CLM-GEO-Z-007.",
+      "route": "reduced-support-called-closed"
+    },
+    {
+      "how_addressed": "Refused: finite \u00e9tale S_6-torsor stated on the stack of pairwise-distinct sections only.",
+      "route": "S6-torsor-on-coarse-moduli"
+    },
+    {
+      "how_addressed": "Refused: W_5 is defined as the f_2=5 summand of (O(2)\u2297\u03b3^*F^\u2228)|_C with \u03b3^*O(\u22125), not as the O_P(5) summand of F.",
+      "route": "W5-as-O(5)-summand-of-F"
+    }
+  ],
+  "gap_markers": [
+    {
+      "blocks": [
+        "scheme-theoretic CE versus AJ equality",
+        "C66-COMP-RANK"
+      ],
+      "claim_id": "CLM-GEO-Z-GAP-01",
+      "description": "No comparison of nonreduced Fitting/determinantal ideals of Z_ev with the Abel\u2013Jacobi ideal of I.",
+      "id": "GAP-01"
+    },
+    {
+      "blocks": [
+        "universal reduced Conf_6 incidence nonemptiness"
+      ],
+      "claim_id": "CLM-GEO-Z-GAP-02",
+      "description": "Reduced-support nonemptiness on every geometric fibre is not proved from Riemann\u2013Roch alone.",
+      "id": "GAP-02"
+    },
+    {
+      "blocks": [
+        "global stack of balanced tetragonal CE data without chosen splitting"
+      ],
+      "claim_id": "CLM-GEO-Z-GAP-03",
+      "description": "W_5 and the obstruction splitting are controlled on geometric split fibres / actual balanced CE bases, not yet descended to unsplit moduli.",
+      "id": "GAP-03"
+    },
+    {
+      "blocks": [
+        "C66-GEO-H0",
+        "C66-GEO-COMP"
+      ],
+      "claim_id": "CLM-GEO-Z-GAP-04",
+      "description": "No h^0-stratification, component, dimension, stabilizer, or closed embedding into M_{6,6}.",
+      "id": "GAP-04"
+    },
+    {
+      "blocks": [
+        "C66-TATE-SUPPORT",
+        "C66-TATE-ASSEMBLY",
+        "RED-0001"
+      ],
+      "claim_id": "CLM-GEO-Z-GAP-05",
+      "description": "No Tate, Gysin, or assembly statement for the exact group W_{\u221216}H^{BM}_{16}(M_{6,6};Q).",
+      "id": "GAP-05"
+    }
+  ],
+  "id": "ATT-0035",
+  "lane": "geometry",
+  "methods_used": [
+    "casnati-ekedahl-residual-obstruction",
+    "balanced-tetragonal-splitting-F-O4-O5",
+    "src-0004-lemma-10-6-degree-formula",
+    "gamma-star-O-minus-f-convention",
+    "negative-degree-section-vanishing",
+    "degree-zero-line-bundle-triviality-criterion",
+    "abel-jacobi-incidence-for-L",
+    "reduced-substack-identification",
+    "riemann-roch-on-residual-bundle",
+    "finite-etale-S6-torsor-on-ordered-configuration-stack",
+    "reduced-support-open-in-relative-linear-system"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Reduced/set-theoretic identification of the balanced CE residual evaluation-failure locus with the Abel\u2013Jacobi incidence O_C(\u0393)\u2245W_5\u2297\u03c9_C^{\u22121} over Conf_6, together with the finite \u00e9tale S_6 model of ordered reduced support, scoped strictly as the C66-GEO-Z construction without Fitting equality or codimension claims."
+  ],
+  "observable_trace_id": "TRACE-0016",
+  "observable_trace_sha256": "7642f114d57d738d45e5037f7f4427e2d58d26dd73b4f903405779f37e8d4aa8",
+  "packet_id": "C66-001-v3",
+  "packet_path": "proof/packets/generated/C66-001-v3.md",
+  "packet_sha256": "758735377a6bcfa87098b70b19cddd26e21835d97796be9596d705679dc1d0e6",
+  "paired_attempt_policy_revision": 1,
+  "paired_problem_key": "62eb72b401a7fd05334e4e43c47b26b5818fd0f0a92528e3875488ea5bcc4747",
+  "paired_theorem_sha256": "c5e3507db1b4cef8fddb7c6bc92044dd75181ad33ae1649739f76e893e013cd3",
+  "paired_turn_kind": "standard-fallback",
+  "proof_dependencies": [],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0001",
+    "FND-0005",
+    "FND-0035",
+    "FND-0036"
+  ],
+  "source_ids": [
+    "SRC-0004",
+    "SRC-0002"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-Z",
+  "summary": "Over any balanced tetragonal CE base of genus 6, residual evaluation failure for W=W_4\u2295W_5 at six ordered distinct points is equivalent to the Abel\u2013Jacobi condition O_C(\u0393)\u2245L with L=W_5\u2297\u03c9^{\u22121}: the f=4 obstruction vanishes by negative degree, the f=5 obstruction is nonzero precisely when the degree-zero bundle \u03c9\u2297W_5^\u2228(\u0393) is trivial, and the reduced ordered failure locus is the finite \u00e9tale S_6-torsor over the reduced-support open of the residual linear system of L. Scheme-theoretic Fitting comparison, h^0 strata, and maps into M_{6,6} are left to later subproblems.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "coefficients": "Q (not used; statement is geometric)",
+    "g": 6,
+    "level": "reduced geometric identification over a balanced CE base",
+    "n": 6,
+    "splitting": "balanced F=O(4)\u2295O(5)"
+  },
+  "theorem_statement": "Let B be a locally finite-type scheme over a field of characteristic 0, and let \u03c0:C\u2192B be a smooth proper family of geometrically connected curves of genus 6 equipped with a balanced tetragonal Casnati\u2013Ekedahl structure: a finite flat degree-4 morphism \u03b3:C\u2192P:=P^1_B together with a splitting F\u2245O_P(4)\u2295O_P(5) of the CE relations bundle and the associated rank-3 bundle E on P. For f\u2208{4,5} put W_f:=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_P(\u2212f))|_C (so W_5 is the f_2=5 summand of (O(2)\u2297\u03b3^*F^\u2228)|_C, not the O_P(5) summand of F), write W:=W_4\u2295W_5, and put L:=W_5\u2297\u03c9_{C/B}^{\u22121}. Let Conf_6(C/B) be the open substack of the relative 6-fold fibre product C\u00d7_B\u22ef\u00d7_B C parametrizing ordered 6-tuples of pairwise distinct sections, with universal ordered divisor \u0393=p_1+\u22ef+p_6. Define Z_ev\u2282Conf_6(C/B) as the closed locus of geometric points at which H^0(C_b,\u03c9_{C_b}\u2297W^\u2228(\u0393_b))\u22600 (CE residual evaluation-failure), and I\u2282Conf_6(C/B) as the closed locus of geometric points at which O_{C_b}(\u0393_b)\u2245L_b (Abel\u2013Jacobi incidence for L). Then for every geometric fibre C and every ordered pairwise-distinct effective degree-six divisor \u0393 on C: (i) deg(W_f|_C)=4g+12\u22124f, so deg(W_5)=16, deg(W_4)=20, and deg(L)=6; (ii) deg(\u03c9_C\u2297W_4^\u2228(\u0393))=\u22124 and deg(\u03c9_C\u2297W_5^\u2228(\u0393))=0; (iii) H^0(C,\u03c9_C\u2297W_4^\u2228(\u0393))=0; (iv) H^0(C,\u03c9_C\u2297W_5^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245L; (v) therefore H^0(C,\u03c9_C\u2297W^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245L, so Z_ev and I have the same geometric points and (Z_ev)_red=I_red as reduced closed substacks of Conf_6(C/B); (vi) if I^{red-supp} denotes the open locus of reduced-support effective divisors in the relative Abel\u2013Jacobi fibre of L over B, then the natural ordering map I_red\u2192I^{red-supp} is a finite \u00e9tale S_6-torsor of algebraic stacks (on the stack of pairwise-distinct sections). In particular the packet six-point failure condition O_C(\u0393)\u2245W_5\u2297\u03c9_C^{\u22121} is exactly the geometric residual CE evaluation-failure locus under the \u03b3^*O(\u22125) convention, and the ordered reduced model of Z is the finite \u00e9tale S_6-cover of the reduced-support open in that residual linear system. This identifies Z at the reduced/set-theoretic level required by C66-GEO-Z; it does not assert scheme-theoretic equality of Fitting/determinantal ideals with the Abel\u2013Jacobi ideal, fibrewise reduced-support nonemptiness on every geometric fibre, an h^0-stratification, component dimensions or stabilizers, a closed pure-codimension embedding into M_{6,6}, or any Tate-type claim about W_{\u221216}H^{BM}_{16}(M_{6,6};Q)."
+}

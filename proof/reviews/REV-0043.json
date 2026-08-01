@@ -1,0 +1,98 @@
+{
+  "attempt_id": "ATT-0035",
+  "campaign_id": "C66-001",
+  "campaign_revision": 3,
+  "checked_claims": [
+    {
+      "claim_id": "TASK-AND-PACKET-IDENTITY",
+      "note": "TASK.json and ATT-0035 agree on the campaign, subproblem, exact theorem statement, target, packet id, and packet hash. Direct SHA-256 verification of proof/packets/generated/C66-001-v3.md gives 758735377a6bcfa87098b70b19cddd26e21835d97796be9596d705679dc1d0e6.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-GEO-Z-001",
+      "note": "Under the theorem's explicit \u03b3^*O(\u2212f) convention, the packet formula gives deg W_f=4g+12\u22124f. At g=6 this gives deg W_5=16, deg W_4=20, and deg L=16\u221210=6. The sign inconsistency inside the printed SRC-0004 excerpt is neutralized by the theorem's explicit definition.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-GEO-Z-002",
+      "note": "The degrees are 10\u221220+6=\u22124 and 10\u221216+6=0.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-GEO-Z-003",
+      "note": "A negative-degree line bundle on a smooth proper connected curve has no nonzero section.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-GEO-Z-004",
+      "note": "A degree-zero line bundle has a nonzero section exactly when it is trivial, giving O_C(\u0393)\u2245W_5\u2297\u03c9_C^{\u22121}.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-GEO-Z-005",
+      "note": "The split obstruction is the direct sum of the f=4 and f=5 terms, so the geometric-point equivalence follows. Since the ambient stack is locally of finite type over a field, equality of all geometric points determines equality of the absolute reductions. No equality of nonreduced Fitting structures follows.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-GEO-Z-006",
+      "note": "Riemann\u2013Roch gives \u03c7(L)=6\u22126+1=1 and hence h^0(L)\u22651. This proves only nonemptiness of the full effective-divisor fibre, not of its reduced-support open.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-GEO-Z-007",
+      "note": "The ordinary ordering cover over the reduced-support open is a finite \u00e9tale S_6-torsor before taking reductions. The attempt instead replaces only the ordered source by I_red while leaving I^{red-supp} as the open substack of the relative Abel\u2013Jacobi fibre with its inherited, potentially nonreduced structure. A faithfully flat \u00e9tale cover from a reduced source would force the target to be reduced, which is not proved and is false over allowed nonreduced bases. For a constant family over Spec(k[\u03b5]/(\u03b5\u00b2)) with a nonempty reduced-support fibre, I^{red-supp} retains the base nilpotent while I_red factors through the reduced base, so the displayed map is not flat and cannot be an S_6-torsor. The valid alternatives are I\u2192I^{red-supp}, or I_red\u2192(I^{red-supp})_red.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-GEO-Z-008",
+      "note": "Its asserted finite \u00e9tale ordered reduced model inherits the source-versus-target reduction error in CLM-GEO-Z-007. The reduced equality (Z_ev)_red=I_red remains valid, but the stated quotient model does not.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "STACK-COARSE-AND-DOWNSTREAM-SCOPE",
+      "note": "Curve automorphisms do not obstruct the usual stack-level ordering torsor on the unreduced incidence, and no coarse-moduli torsor is claimed. Rational/integral coefficients, BM versus cohomological degrees, Poincar\u00e9 and Tate twists, Gysin/K\u00fcnneth shifts, spectral-sequence degeneration, graph invariants versus coinvariants, semisimplification, predicted motives, algebraic or tautological generation, and stable-pair contributions are absent from and non-load-bearing for this geometric lemma.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "finding_candidates": [
+    {
+      "adjudication": "novel",
+      "candidate_id": "REV-0043-CAND-001",
+      "evidence": "Finite \u00e9tale torsors are faithfully flat, and reducedness descends along faithfully flat morphisms. Hence a reduced torsor source forces a reduced target. Constant base change to dual numbers supplies the obstruction whenever the reduced-support incidence is nonempty.",
+      "key": "for-the-ordered-to-unordered-reduced-support-construction-reduction-must-be-app",
+      "scope": "Relative configuration and Abel\u2013Jacobi incidence spaces over possibly nonreduced bases.",
+      "statement": "For the ordered-to-unordered reduced-support construction, reduction must be applied compatibly: the canonical torsor is I\u2192I^{red-supp}, and its reduced form is I_red\u2192(I^{red-supp})_red. Reducing only the source generally destroys flatness over nonreduced bases.",
+      "status": "candidate"
+    }
+  ],
+  "id": "REV-0043",
+  "independent": true,
+  "packet_id": "C66-001-v3",
+  "packet_sha256": "758735377a6bcfa87098b70b19cddd26e21835d97796be9596d705679dc1d0e6",
+  "proof_dependency_checks": [],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0035-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "Claim (vi) confuses a reduced source with a reduced-support target. The superscript \u201cred-supp\u201d describes divisors having distinct support; it does not reduce the scheme or stack structure of the Abel\u2013Jacobi fibre. Restricting the standard ordering torsor and then reducing only its source does not preserve faithful flatness. This is exposed by any nonempty constant example after base change to the allowed nonreduced base Spec(k[\u03b5]/(\u03b5\u00b2)): the target retains \u03b5 while I_red does not. Thus I_red\u2192I^{red-supp} is not finite \u00e9tale. Stack rather than coarse moduli does not repair this scheme-theoretic mismatch.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B be a locally finite-type scheme over a field of characteristic 0, and let \u03c0:C\u2192B be a smooth proper family of geometrically connected curves of genus 6 equipped with a balanced tetragonal Casnati\u2013Ekedahl structure: a finite flat degree-4 morphism \u03b3:C\u2192P:=P^1_B together with a splitting F\u2245O_P(4)\u2295O_P(5) of the CE relations bundle and the associated rank-3 bundle E on P. For f\u2208{4,5} put W_f:=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_P(\u2212f))|_C (so W_5 is the f_2=5 summand of (O(2)\u2297\u03b3^*F^\u2228)|_C, not the O_P(5) summand of F), write W:=W_4\u2295W_5, and put L:=W_5\u2297\u03c9_{C/B}^{\u22121}. Let Conf_6(C/B) be the open substack of the relative 6-fold fibre product C\u00d7_B\u22ef\u00d7_B C parametrizing ordered 6-tuples of pairwise distinct sections, with universal ordered divisor \u0393=p_1+\u22ef+p_6. Define Z_ev\u2282Conf_6(C/B) as the closed locus of geometric points at which H^0(C_b,\u03c9_{C_b}\u2297W^\u2228(\u0393_b))\u22600 (CE residual evaluation-failure), and I\u2282Conf_6(C/B) as the closed locus of geometric points at which O_{C_b}(\u0393_b)\u2245L_b (Abel\u2013Jacobi incidence for L). Then for every geometric fibre C and every ordered pairwise-distinct effective degree-six divisor \u0393 on C: (i) deg(W_f|_C)=4g+12\u22124f, so deg(W_5)=16, deg(W_4)=20, and deg(L)=6; (ii) deg(\u03c9_C\u2297W_4^\u2228(\u0393))=\u22124 and deg(\u03c9_C\u2297W_5^\u2228(\u0393))=0; (iii) H^0(C,\u03c9_C\u2297W_4^\u2228(\u0393))=0; (iv) H^0(C,\u03c9_C\u2297W_5^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245L; (v) therefore H^0(C,\u03c9_C\u2297W^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245L, so Z_ev and I have the same geometric points and (Z_ev)_red=I_red as reduced closed substacks of Conf_6(C/B); (vi) if I^{red-supp} denotes the open locus of reduced-support effective divisors in the relative Abel\u2013Jacobi fibre of L over B, then the natural ordering map I_red\u2192I^{red-supp} is a finite \u00e9tale S_6-torsor of algebraic stacks (on the stack of pairwise-distinct sections). In particular the packet six-point failure condition O_C(\u0393)\u2245W_5\u2297\u03c9_C^{\u22121} is exactly the geometric residual CE evaluation-failure locus under the \u03b3^*O(\u22125) convention, and the ordered reduced model of Z is the finite \u00e9tale S_6-cover of the reduced-support open in that residual linear system. This identifies Z at the reduced/set-theoretic level required by C66-GEO-Z; it does not assert scheme-theoretic equality of Fitting/determinantal ideals with the Abel\u2013Jacobi ideal, fibrewise reduced-support nonemptiness on every geometric fibre, an h^0-stratification, component dimensions or stabilizers, a closed pure-codimension embedding into M_{6,6}, or any Tate-type claim about W_{\u221216}H^{BM}_{16}(M_{6,6};Q).",
+  "verdict": "refuted"
+}

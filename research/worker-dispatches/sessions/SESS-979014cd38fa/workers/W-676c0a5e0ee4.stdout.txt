@@ -1,0 +1,28 @@
+{
+  "text": "## Field answers\n\n**Template field name:** The digest template uses **`engine`**, not `reviewer_engine`.  \n`reviewer_engine` appears on reviews (e.g. `REV-0045.json`); digests use `engine`. For your requirement, set `\"engine\": \"grok\"`.\n\n**Metadata from `TASK.json`:**\n\n| Field | Value |\n|--------|--------|\n| `task_id` | `TASK-C66-001-MINE-CODEX-FORCED_PROOF` |\n| `campaign_id` | `C66-001` |\n| `campaign_revision` | `3` |\n| `problem_key` | `62eb72b401a7fd05334e4e43c47b26b5818fd0f0a92528e3875488ea5bcc4747` |\n| `packet_sha256` | `758735377a6bcfa87098b70b19cddd26e21835d97796be9596d705679dc1d0e6` |\n| `target` | full target object from TASK (g=6, n=6, degrees/weights as below) |\n\n**Required top-level fields** (from `DIGEST_TEMPLATE.json` + `TRACE_MINER.md` row contracts):\n\n- `schema_version`, `id`, `task_id`, `campaign_id`, `campaign_revision`, `problem_key`, `target`, `packet_sha256`\n- Content arrays: `established_facts`, `candidate_ideas`, `invalid_steps`, `reusable_computations`, `unresolved_dependencies`\n- `sanitized`, `engine`\n\n## Minimal skeleton\n\n```json\n{\n  \"schema_version\": 1,\n  \"id\": \"DIGEST-0016\",\n  \"task_id\": \"TASK-C66-001-MINE-CODEX-FORCED_PROOF\",\n  \"campaign_id\": \"C66-001\",\n  \"campaign_revision\": 3,\n  \"problem_key\": \"62eb72b401a7fd05334e4e43c47b26b5818fd0f0a92528e3875488ea5bcc4747\",\n  \"target\": {\n    \"chow_codimension\": 13,\n    \"compact_cohomology_degree\": 16,\n    \"compact_tate_type\": \"Q(-8)\",\n    \"dimension\": 21,\n    \"g\": 6,\n    \"n\": 6,\n    \"open_bm_degree\": 16,\n    \"open_bm_tate_type\": \"Q(8)\",\n    \"open_bm_weight\": -16,\n    \"ordinary_cohomology_degree\": 26,\n    \"ordinary_tate_type\": \"Q(-13)\",\n    \"ordinary_weight\": 26,\n    \"poincare_twist\": 21\n  },\n  \"packet_sha256\": \"758735377a6bcfa87098b70b19cddd26e21835d97796be9596d705679dc1d0e6\",\n  \"established_facts\": [],\n  \"candidate_ideas\": [],\n  \"invalid_steps\": [],\n  \"reusable_computations\": [],\n  \"unresolved_dependencies\": [],\n  \"sanitized\": true,\n  \"engine\": \"grok\"\n}\n```\n\n**Row contracts** (when filling content):  \n- `established_facts`: `statement`, `evidence_class` (`source`|`mechanical`), nonempty `evidence`  \n- `candidate_ideas`: `statement`, `requires_reproof: true`  \n- `invalid_steps`: `statement`, nonempty `mathematical_reason`  \n- `reusable_computations`: `statement`, 64-char `sha256`  \n- `unresolved_dependencies`: `statement`",
+  "stopReason": "end_turn",
+  "sessionId": "019fbd5f-316e-7452-8061-c5bb20677da2",
+  "requestId": "d1f2770f-9dc2-4e18-b101-67330ea2f583",
+  "thought": "The user wants me to read several files and determine the required fields for an output digest JSON. Let me read all the mentioned files.I have all the information I need. Let me summarize:\n{\n  \"schema_version\": \"1.",
+  "usage": {
+    "input_tokens": 16215,
+    "cache_read_input_tokens": 768,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 1426,
+    "reasoning_tokens": 587,
+    "total_tokens": 18409
+  },
+  "num_turns": 2,
+  "total_cost_usd": 0.0412164,
+  "total_cost_usd_ticks": 412164000,
+  "modelUsage": {
+    "grok-4.5-build": {
+      "inputTokens": 16215,
+      "outputTokens": 1426,
+      "cacheReadInputTokens": 768,
+      "cacheCreationInputTokens": 0,
+      "modelCalls": 2,
+      "costUSD": 0.0412164
+    }
+  }
+}

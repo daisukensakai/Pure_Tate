@@ -114,6 +114,9 @@ attempt that declares `claimed_complete` and passes its first review receives a 
 confirmation pass; the two confirmations must use engines distinct from each other
 and from the prover.
 
+Live tasks default to a one-hour cap. Individual Grok helper workers are
+separately capped at 20 minutes.
+
 Mathematics attempts can isolate a narrow literature obstruction without reopening
 the Stage-1 reduction. `all` writes those tasks to
 `tasks/generated/micro-research.json`; run them individually with a web-enabled
