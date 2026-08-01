@@ -1,0 +1,105 @@
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool","web_search","web_fetch"],"commands":["compact","always-approve","context","session-info","feedback","goal"]}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool","web_search","web_fetch"],"commands":["compact","always-approve","context","session-info","feedback","goal"]}
+{"type":"thought","data":"The"}
+{"type":"thought","data":" user"}
+{"type":"thought","data":" wants"}
+{"type":"thought","data":" me"}
+{"type":"thought","data":" to"}
+{"type":"thought","data":":\n"}
+{"type":"thought","data":"1"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" Use"}
+{"type":"thought","data":" search"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"tool"}
+{"type":"thought","data":" to"}
+{"type":"thought","data":" find"}
+{"type":"thought","data":" the"}
+{"type":"thought","data":" dispatch"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"gro"}
+{"type":"thought","data":"k"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"worker"}
+{"type":"thought","data":" tool"}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool","web_search","web_fetch","grok_workers__dispatch_grok_worker","grok_workers__await_grok_worker","grok_workers__list_grok_workers","grok_workers__cancel_grok_worker","grok_workers__worker_pool_stats"],"commands":["compact","always-approve","context","session-info","feedback","goal"]}
+{"type":"usage","usage":{"input_tokens":3063,"output_tokens":89,"cache_read_input_tokens":640,"cache_creation_input_tokens":0,"reasoning_tokens":86},"signature":"mhhqgcZE28Ne6Fv7Cmcks5ipyiy7MCRojY7HOACIIF5a+3ObyeNUAY1VM5OtPBBm7J0t+e3zeH3REW6sd2HmUnKB/aCctVIOdbNE1LMK/dFKLPp1bwXwnRtHBwrD1GDf4GW09DhBW+jl7EdSHz8f4hr9PfO+aEhBZGUbMrhlvExYF+khAVD3Yf6qLhBslMAOjXCB+wV63PO28bUMb36II7vawJG3WBsTXg9QRvWKTjlwQZrav+8bNC5P+vC9BHaGwPEFrsNEDCeeWRjPcY/Sxf9Ng3n+YuHSku+vKsx5EienoaQyWqaRHCiCPuatHxz1si4FjmUpJynSXOPcm6+oIY8hd4UDFtE6Km3d5v/Oa701nAcc9KELx2Ld"}
+{"type":"tool_call","toolCallId":"call-8c2967cf-72e2-411c-95b6-4bd4eb48a27e-0","title":"search_tool","kind":"search_tool","status":"pending","toolName":"search_tool","rawInput":{"query":"dispatch_grok_worker","limit":5},"content":[],"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-8c2967cf-72e2-411c-95b6-4bd4eb48a27e-0","status":null,"content":[],"rawOutput":null,"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-8c2967cf-72e2-411c-95b6-4bd4eb48a27e-0","status":"completed","content":[{"type":"content","content":{"type":"text","text":"{\n  \"results\": [\n    {\n      \"server\": \"grok_workers\",\n      \"tools\": [\n        {\n          \"tool_name\": \"grok_workers__dispatch_grok_worker\",\n          \"description\": \"Dispatch a read-only Grok 4.5 worker (hard-capped).\",\n          \"score\": 1.0,\n          \"input_schema\": {\n            \"properties\": {\n              \"prompt\": {\n                \"title\": \"Prompt\",\n                \"type\": \"string\"\n              },\n              \"description\": {\n                \"default\": \"\",\n                \"title\": \"Description\",\n                \"type\": \"string\"\n              },\n              \"wait\": {\n                \"default\": false,\n                \"title\": \"Wait\",\n                \"type\": \"boolean\"\n              },\n              \"timeout_seconds\": {\n                \"anyOf\": [\n                  {\n                    \"type\": \"number\"\n                  },\n                  {\n                    \"type\": \"null\"\n                  }\n                ],\n                \"default\": null,\n                \"title\": \"Timeout Seconds\"\n              }\n            },\n            \"required\": [\n              \"prompt\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"dispatch_grok_workerArguments\"\n          }\n        }\n      ]\n    }\n  ],\n  \"total_hidden_tools\": 5,\n  \"status\": \"ready\",\n  \"note\": null\n}"}}],"rawOutput":{"type":"SearchTool","result_count":1,"content":"{\n  \"results\": [\n    {\n      \"server\": \"grok_workers\",\n      \"tools\": [\n        {\n          \"tool_name\": \"grok_workers__dispatch_grok_worker\",\n          \"description\": \"Dispatch a read-only Grok 4.5 worker (hard-capped).\",\n          \"score\": 1.0,\n          \"input_schema\": {\n            \"properties\": {\n              \"prompt\": {\n                \"title\": \"Prompt\",\n                \"type\": \"string\"\n              },\n              \"description\": {\n                \"default\": \"\",\n                \"title\": \"Description\",\n                \"type\": \"string\"\n              },\n              \"wait\": {\n                \"default\": false,\n                \"title\": \"Wait\",\n                \"type\": \"boolean\"\n              },\n              \"timeout_seconds\": {\n                \"anyOf\": [\n                  {\n                    \"type\": \"number\"\n                  },\n                  {\n                    \"type\": \"null\"\n                  }\n                ],\n                \"default\": null,\n                \"title\": \"Timeout Seconds\"\n              }\n            },\n            \"required\": [\n              \"prompt\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"dispatch_grok_workerArguments\"\n          }\n        }\n      ]\n    }\n  ],\n  \"total_hidden_tools\": 5,\n  \"status\": \"ready\",\n  \"note\": null\n}"},"locations":[]}
+{"type":"thought","data":"I"}
+{"type":"thought","data":" found"}
+{"type":"thought","data":" the"}
+{"type":"thought","data":" tool"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" Now"}
+{"type":"thought","data":" I'll"}
+{"type":"thought","data":" call"}
+{"type":"thought","data":" dispatch"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"gro"}
+{"type":"thought","data":"k"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"worker"}
+{"type":"thought","data":" with"}
+{"type":"thought","data":" wait"}
+{"type":"thought","data":"="}
+{"type":"thought","data":"true"}
+{"type":"thought","data":" and"}
+{"type":"thought","data":" the"}
+{"type":"thought","data":" specified"}
+{"type":"thought","data":" prompt"}
+{"type":"thought","data":"."}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool","web_search","web_fetch","grok_workers__dispatch_grok_worker","grok_workers__await_grok_worker","grok_workers__list_grok_workers","grok_workers__cancel_grok_worker","grok_workers__worker_pool_stats"],"commands":["compact","always-approve","context","session-info","feedback","goal"]}
+{"type":"usage","usage":{"input_tokens":513,"output_tokens":92,"cache_read_input_tokens":3584,"cache_creation_input_tokens":0,"reasoning_tokens":89},"signature":"oW/Kuvbsiw/HKolDrNjo25csAkG0raD7GLKUqYaJv9I0U70WLccFPlBeaYXuAR0huQOAOT9MXQTiqn4kb8bDq7D1MZ2Ik+h07jRAUdm7/gUdEuWnm7XAcuP0koO9tM92TDDrDsfeLeKt6NBlmXfp7fYNpgPIG/0Gnw"}
+{"type":"tool_call","toolCallId":"call-092f6366-8efa-4f7e-b5b5-dfbaadd34273-1","title":"use_tool","kind":"use_tool","status":"pending","toolName":"use_tool","rawInput":{"tool_name":"grok_workers__dispatch_grok_worker","tool_input":{"prompt":"Return exactly JSON {\"probe\":\"harness_worker\",\"ok\":true,\"marker\":\"HARNESS-OK\"} with no markdown.","wait":true}},"content":[],"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-092f6366-8efa-4f7e-b5b5-dfbaadd34273-1","status":null,"content":[],"rawOutput":null,"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-092f6366-8efa-4f7e-b5b5-dfbaadd34273-1","status":"completed","content":[],"rawOutput":{"type":"MCP","tool_name":"dispatch_grok_worker","server_name":"grok_workers","output":{"OkayOutput":"{\n  \"argv\": [\n    \"grok\",\n    \"-p\",\n    \"<prompt-sha256:9cef092f9c0fdc192c0234ed0ea1a94561c616f285dedcb1e5f89a995767c11c>\",\n    \"--output-format\",\n    \"json\",\n    \"--max-turns\",\n    \"20\",\n    \"--permission-mode\",\n    \"dontAsk\",\n    \"--always-approve\",\n    \"--no-subagents\",\n    \"--tools\",\n    \"read_file,grep,list_dir\",\n    \"--disallowed-tools\",\n    \"run_terminal_command,write,open_page,web_search,web_fetch\",\n    \"--disable-web-search\",\n    \"-m\",\n    \"grok-4.5\",\n    \"--cwd\",\n    \"/var/folders/r_/40tyr0nj6zn_yqb74rw_351c0000gn/T/pure-tate-worker-smoke-h4sh7cin\"\n  ],\n  \"created_at\": \"2026-08-01T04:57:09.586675+00:00\",\n  \"description\": \"grok-worker\",\n  \"elapsed_seconds\": 6.104,\n  \"error\": null,\n  \"finished_at\": \"2026-08-01T04:57:15.691418+00:00\",\n  \"ok\": true,\n  \"prompt_sha256\": \"9cef092f9c0fdc192c0234ed0ea1a94561c616f285dedcb1e5f89a995767c11c\",\n  \"result_text\": \"{\\\"probe\\\":\\\"harness_worker\\\",\\\"ok\\\":true,\\\"marker\\\":\\\"HARNESS-OK\\\"}\",\n  \"returncode\": 0,\n  \"started_at\": \"2026-08-01T04:57:09.587234+00:00\",\n  \"status\": \"completed\",\n  \"stderr_path\": \"/var/folders/r_/40tyr0nj6zn_yqb74rw_351c0000gn/T/pure-tate-worker-smoke-h4sh7cin/grok-workers/W-9febaf037072.stderr.txt\",\n  \"stdout_path\": \"/var/folders/r_/40tyr0nj6zn_yqb74rw_351c0000gn/T/pure-tate-worker-smoke-h4sh7cin/grok-workers/W-9febaf037072.stdout.txt\",\n  \"worker_id\": \"W-9febaf037072\"\n}"}},"locations":[]}
+{"type":"thought","data":"The"}
+{"type":"thought","data":" worker"}
+{"type":"thought","data":" completed"}
+{"type":"thought","data":" successfully"}
+{"type":"thought","data":" and"}
+{"type":"thought","data":" returned"}
+{"type":"thought","data":" the"}
+{"type":"thought","data":" expected"}
+{"type":"thought","data":" JSON"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" Now"}
+{"type":"thought","data":" I"}
+{"type":"thought","data":" need"}
+{"type":"thought","data":" to"}
+{"type":"thought","data":" return"}
+{"type":"thought","data":" exactly"}
+{"type":"thought","data":":\n"}
+{"type":"text","data":"{\""}
+{"type":"text","data":"probe"}
+{"type":"text","data":"\":"}
+{"type":"text","data":"\""}
+{"type":"text","data":"har"}
+{"type":"text","data":"ness"}
+{"type":"text","data":"_"}
+{"type":"text","data":"parent"}
+{"type":"text","data":"\",\""}
+{"type":"text","data":"ok"}
+{"type":"text","data":"\":"}
+{"type":"text","data":"true"}
+{"type":"text","data":",\""}
+{"type":"text","data":"marker"}
+{"type":"text","data":"\":"}
+{"type":"text","data":"\""}
+{"type":"text","data":"H"}
+{"type":"text","data":"ARN"}
+{"type":"text","data":"ESS"}
+{"type":"text","data":"-"}
+{"type":"text","data":"OK"}
+{"type":"text","data":"\",\""}
+{"type":"text","data":"workers"}
+{"type":"text","data":"_"}
+{"type":"text","data":"used"}
+{"type":"text","data":"\":"}
+{"type":"text","data":"true"}
+{"type":"text","data":"}"}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool","web_search","web_fetch","grok_workers__dispatch_grok_worker","grok_workers__await_grok_worker","grok_workers__list_grok_workers","grok_workers__cancel_grok_worker","grok_workers__worker_pool_stats"],"commands":["compact","always-approve","context","session-info","feedback","goal"]}
+{"type":"usage","usage":{"input_tokens":692,"output_tokens":80,"cache_read_input_tokens":4096,"cache_creation_input_tokens":0,"reasoning_tokens":48},"signature":"SkEBMnWTEp3gI6myBnGUUMbLBQ4zuG7L0zCThQpy+M63fPX37Yrbgm9GCSp5q6l9WN8bxI4qLqZMiUSbEK0n5GE5A8TnV1Hjs+Taa87Jxs6L0pKaeZ474ZA+x74cEBE2ctrc/2J3cYQewis6GQeLDztm4uOxTYPosz1me4pUjiJZ6Aa1uHkfplV0mRmBWihpusO3grDMsld9M5D17oFyzdkWGN2Xl6zy0oBYBQJ6QpCQYrpjgepUZN0c0MXtZK4kvezQD/eRLYgGwog"}
+{"type":"end","stopReason":"end_turn","sessionId":"019fbbae-ceca-74d3-b940-a49da31fb2aa","requestId":"d0956de0-d346-4e1e-8c68-d3ac3fa788ae","usage":{"input_tokens":4268,"cache_read_input_tokens":8320,"cache_creation_input_tokens":0,"output_tokens":261,"reasoning_tokens":223,"total_tokens":12849},"num_turns":3,"total_cost_usd":0.012598,"total_cost_usd_ticks":125980000,"modelUsage":{"grok-4.5-build":{"inputTokens":4268,"outputTokens":261,"cacheReadInputTokens":8320,"cacheCreationInputTokens":0,"modelCalls":3,"costUSD":0.012598}}}

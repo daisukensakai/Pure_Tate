@@ -1,0 +1,97 @@
+{
+  "approach_id": "search-for-surviving-non-tate-motive",
+  "argument_markdown": "## Setup and exact target\n\nLet $M:=\\mathcal{M}_{8,1}$ and $\\overline{M}:=\\overline{\\mathcal{M}}_{8,1}$. Then\n$$\\dim M=d=3\\cdot 8-3+1=22.$$\nBy RED-0001 and FND-0001, the unresolved open input for the degree-$16$ pure-Tate induction at this pair is the pure-weight Borel\u2013Moore piece\n$$W_{-16}H^{\\mathrm{BM}}_{16}(M),$$\nexpected to be of Tate type $\\mathbb{Q}(8)$. Poincar\u00e9 duality realizes the same pure motive as\n$$W_{-16}H^{\\mathrm{BM}}_{16}(M)\\;\\simeq\\;W_{28}H^{28}(M)(22),$$\nso the untwisted ordinary pure piece $W_{28}H^{28}(M)$ is expected of type $\\mathbb{Q}(-14)$ (Chow codimension $14$).\n\nEquivalently, in the cohomological form of the Arbarello\u2013Cornalba / CLP boundary sequence, the open pure-weight quotient controlling $H^{16}(\\overline{M})$ is\n$$W_{16}H^{16}(M)\\;=\\;\\mathrm{im}\\bigl(H^{16}(\\overline{M};\\mathbb{Q})\\to H^{16}(M;\\mathbb{Q})\\bigr),$$\na pure Hodge structure of weight $16$ (and a quotient of the pure weight-$16$ group $H^{16}(\\overline{M})$). Hard Lefschetz on $\\overline{M}$ identifies the pure-Tate question for $H^{16}(\\overline{M})$ with that for $H^{28}(\\overline{M})$; the open pure pieces $W_{16}H^{16}(M)$ and $W_{28}H^{28}(M)$ are likewise dual (up to the Tate twist $(22)$) via Poincar\u00e9 duality on the smooth stack $M$.\n\nThus a refutation of CONJ-0001 at $(g,n)=(8,1)$ would require a **non-Tate direct summand inside this exact pure piece** $W_{16}H^{16}(M)$ (equivalently inside $W_{-16}H^{\\mathrm{BM}}_{16}(M)$), not merely non-Tate cohomology of $M$ in some other weight or degree.\n\n## Known non-Tate cohomology of $M_{8,1}$ (wrong bidegree)\n\nBy CLPW24 / CLPW25b:\n\n- $3g+2n=26\\ge 25$, so $H^*(M)$ is **not** of Tate type;\n- the weight-$11$ Euler characteristic vanishes, $\\chi_{11}(M_{8,1})=0$;\n- the weight-$13$ Euler characteristic does not: $\\chi_{13}(M_{8,1})=-2$;\n- more precisely, for $3g+2n\\in\\{26,27\\}$,\n  $$\\mathrm{gr}^W_{13}H_c^{k(g,n)}(M_{g,n})\\;\\simeq\\;Z_{g,n}\\otimes \\mathsf{LS}_{12},$$\n  with $k(8,1)=3\\cdot 8+1-2=23$ and $Z_{8,1}\\simeq\\mathbb{Q}$, hence\n  $$\\mathrm{gr}^W_{13}H_c^{23}(M_{8,1})\\;\\simeq\\;\\mathsf{LS}_{12}.$$\n\n**Weight bookkeeping.** Poincar\u00e9 duality on the smooth stack of complex dimension $22$ pairs\n$$\\mathrm{gr}^W_k H_c^i(M)\\quad\\text{with}\\quad\\mathrm{gr}^W_{44-k}H^{44-i}(M).$$\nIn particular $\\mathrm{gr}^W_{13}H_c^{23}$ pairs with $\\mathrm{gr}^W_{31}H^{21}$, **not** with $W_{16}H^{16}$ or $W_{28}H^{28}$.\n\nTherefore the established non-Tate summand $\\mathsf{LS}_{12}$ of $M_{8,1}$ lies in the wrong pure graded piece for the degree-$16$ induction. Non-polynomial point counts of $M_{8,1}$ (equivalently $\\chi_{13}\\ne 0$) do **not** produce a non-Tate summand in $W_{-16}H^{\\mathrm{BM}}_{16}(M)$.\n\n## Candidate non-Tate motives and elimination by weight\n\nWrite $\\mathsf{L}:=H^2(\\mathbb{P}^1)\\simeq\\mathbb{Q}(-1)$ (weight $2$), $\\mathsf{S}_{12}:=W_{11}H^{11}(\\overline{\\mathcal{M}}_{1,11})$ (weight $11$), $\\mathsf{S}_{16}:=W_{15}H^{15}(\\overline{\\mathcal{M}}_{1,15})$ (weight $15$), and $\\mathsf{LS}_{12}:=\\mathsf{L}\\otimes\\mathsf{S}_{12}$ (weight $13$). The pure piece $W_{16}H^{16}(M)$ is pure of weight $16$ and is a quotient of $H^{16}(\\overline{M})$, hence any irreducible summand also appears in $H^{16}(\\overline{M})$.\n\n| Candidate | Weight | Can it embed in pure weight $16$? |\n|---|---|---|\n| $\\mathsf{S}_{12}$ | $11$ (odd) | No |\n| $\\mathsf{L}^a\\mathsf{S}_{12}$ | $11+2a$ (always odd) | No: $11+2a=16$ forces half-integral $a$ |\n| $\\mathsf{LS}_{12}$ | $13$ (odd) | No (and known occurrence is in $\\mathrm{gr}_{13}H_c^{23}$) |\n| $\\mathsf{S}_{16}$ | $15$ (odd) | No |\n| $\\mathsf{L}^a\\mathsf{S}_{16}$ | $15+2a$ (always odd) | No: $15+2a=16$ impossible |\n| $\\mathrm{Sym}^2\\mathsf{S}_{12}$ | $22$ | No: $22>16$ |\n| $\\mathsf{L}^a\\mathrm{Sym}^2\\mathsf{S}_{12}$ | $22+2a\\ge 22$ | No in weight $16$ |\n| $\\mathsf{S}_{12}\\otimes\\mathsf{S}_{12}$ | $22$ | No in weight $16$ |\n| $\\mathsf{S}_{12}\\otimes\\mathsf{S}_{16}$ | $26$ | No in weight $16$ |\n| top-weight $\\mathrm{gr}^W_0 H_c^*$ | $0$ (Tate) | Wrong weight; Tate type $\\mathbb{Q}$ |\n| $\\mathsf{L}^8$ | $16$ | Tate: $\\mathbb{Q}(-8)$ |\n\nUnder the Chenevier\u2013Lannes classification of conductor-$1$ motives of weight $\\le 22$ (Payne survey, Thm.\u00a04.1 / CL19), the only effective irreducible of pure weight $16$ is a Tate twist of the unit motive. There is **no** non-Tate conductor-$1$ pure motive of weight $16$. Consequently any non-Tate summand in $W_{16}H^{16}(M)$ would already contradict those arithmetic predictions (or would require conductor $>1$ / motives outside the expected list), and no geometric construction presently supplies such a summand on $\\overline{M}_{8,1}$ or on $M_{8,1}$.\n\nFor the dual pure piece $W_{28}H^{28}(M)$ (weight $28$), non-Tate candidates such as $\\mathsf{L}^3\\mathrm{Sym}^2\\mathsf{S}_{12}$ (weight $28$) become weight-legal, but:\n\n1. $W_{28}H^{28}(M)=\\mathrm{im}\\bigl(H^{28}(\\overline{M})\\to H^{28}(M)\\bigr)$ is again a subquotient of compactified cohomology;\n2. hard Lefschetz identifies $H^{28}(\\overline{M})\\simeq H^{16}(\\overline{M})$ up to powers of an ample tautological class, so a non-Tate summand in $H^{28}(\\overline{M})$ is equivalent to one in $H^{16}(\\overline{M})$;\n3. $\\mathrm{Sym}^2\\mathsf{S}_{12}$ is first predicted only in weight $22$, outside the pure-Tate range $k\\le 20$, and no published computation places $\\mathrm{Sym}^2\\mathsf{S}_{12}$ (or a Tate twist) in $H^{16}$ or $H^{28}$ of $\\overline{M}_{8,1}$.\n\nThus no known non-Tate structure is available as a concrete summand of the **exact** open pure-weight input for degree $16$.\n\n## Compactification induction and survival\n\nFrom THM-0003, the boundary sequence is right exact\n$$H_{14}(\\widetilde{\\partial\\overline{M}})\\longrightarrow H_{16}(\\overline{M})\\longrightarrow W_{-16}H^{\\mathrm{BM}}_{16}(M)\\longrightarrow 0$$\n(cohomologically: $H^{14}(\\widetilde{\\partial})\\to H^{16}(\\overline{M})\\to W_{16}H^{16}(M)\\to 0$). A non-Tate summand of the open pure piece would inject (as a quotient summand) into $H^{16}(\\overline{M})$ and survive the induction, refuting CONJ-0001 at $(8,1)$. Conversely, every class in $H^{16}(\\overline{M})$ is built from boundary classes of lower genus/markings plus this open pure piece.\n\nFor $(8,1)$ the inequality of THM-0004 applies ($n=1$ and $k=16\\ge 2g=16$), so this open pure piece is an essential base case: it is not killed a priori by virtual cohomological dimension or forgetful pullback. CKgP is not known in genus $8$ (THM-0005 stops at genus $\\le 7$), so algebraicity of $W_{16}H^{16}(M)$ is unavailable.\n\n**Conclusion of the search.** Every published non-Tate motivic structure known to appear on $M_{8,1}$ (primarily $\\mathsf{LS}_{12}$ in weight $13$) is excluded from $W_{16}H^{16}(M)$ by weight and degree. No construction of a non-Tate summand inside the exact Borel\u2013Moore target $W_{-16}H^{\\mathrm{BM}}_{16}(M_{8,1})$ is obtained. The search therefore yields **no refutation** of the degree-$16$ pure-Tate statement at $(8,1)$. Establishing Tate type (or producing a counterexample) for this base case remains open, consistent with OBS-0001.\n\n## Gaps\n\n- No complete computation of $W_{16}H^{16}(M_{8,1})$ or $W_{-16}H^{\\mathrm{BM}}_{16}(M_{8,1})$ is given.\n- Elimination of candidates uses the known low-weight classification and published Euler characteristics; it does not rule out an as-yet-undiscovered non-Tate motive of pure weight $16$ (which would itself be arithmetic news).\n- The argument does not prove that the pure piece is Tate\u2014only that known non-Tate sources do not populate it.\n- Semisimplicity / comparison between Hodge and Galois realizations is not needed for the elimination above but would be needed for any arithmetic point-count substitute.",
+  "assumptions": [
+    "Standard mixed Hodge theory for smooth Deligne\u2013Mumford stacks and the identification of W_k H^k(M) with the image of restriction from a smooth proper compactification.",
+    "Published computations: \u03c7_11(M_{8,1})=0, \u03c7_13(M_{8,1})=-2, and gr^W_13 H_c^{23}(M_{8,1})\u2245LS_12 (CLPW24/CLPW25b).",
+    "Chenevier\u2013Lannes classification used only as a constraint on expected conductor-1 pure motives, not as an unconditional theorem for open moduli beyond what is already proved for k\u226415 on \\bar M_{g,n}."
+  ],
+  "claims": [
+    {
+      "id": "A1",
+      "statement": "For (g,n)=(8,1), d=22, the degree-16 open pure-weight input is exactly W_{-16}H^{BM}_{16}(M_{8,1}) \u2245 W_{28}H^{28}(M_{8,1})(22), equivalently the pure quotient W_{16}H^{16}(M_{8,1})=im(H^{16}(\\bar M_{8,1})\u2192H^{16}(M_{8,1})), expected Tate type Q(8) (BM) / Q(-8) (compact degree 16) / Q(-14) (ordinary untwisted).",
+      "status": "proved"
+    },
+    {
+      "id": "A2",
+      "statement": "gr^W_13 H_c^{23}(M_{8,1}) \u2245 LS_12, and by Poincar\u00e9 duality this pure graded piece pairs with weight 31 in H^{21}(M_{8,1}), not with W_16 H^{16} or W_28 H^{28}.",
+      "status": "proved"
+    },
+    {
+      "id": "A3",
+      "statement": "\u03c7_13(M_{8,1})=-2 (and non-polynomiality of #M_{8,1}(F_q)) does not imply a non-Tate summand of W_{-16}H^{BM}_{16}(M_{8,1}).",
+      "status": "proved"
+    },
+    {
+      "id": "A4",
+      "statement": "No Tate twist of S_12, LS_12, or S_16 has pure weight 16; Sym^2 S_12 and S_12\u2297S_12 first appear only in weight 22; top-weight gr^W_0 is Tate of weight 0. Hence none of these known non-Tate (or top-weight) structures embeds into W_16 H^{16}(M_{8,1}).",
+      "status": "proved"
+    },
+    {
+      "id": "A5",
+      "statement": "Under the Chenevier\u2013Lannes list of conductor-1 motives of weight \u226422, the only pure weight-16 irreducible is Tate; any non-Tate summand of W_16 H^{16}(M_{8,1}) would be arithmetically exceptional.",
+      "status": "proved"
+    },
+    {
+      "id": "A6",
+      "statement": "There is no known geometric construction of a non-Tate direct summand of W_{-16}H^{BM}_{16}(M_{8,1}), so this search does not refute CONJ-0001 at (8,1).",
+      "status": "proved"
+    },
+    {
+      "id": "A7",
+      "statement": "W_16 H^{16}(M_{8,1}) is itself of Tate type Q(-8) (equivalently the BM target is Q(8)).",
+      "status": "gap"
+    },
+    {
+      "id": "A8",
+      "statement": "H^{16}(\\bar M_{8,1};Q) is a direct sum of copies of Q(-8).",
+      "status": "gap"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "engine": "grok",
+  "gap_markers": [
+    "GAP-NO-COMPUTATION: No exact calculation of W_16 H^{16}(M_{8,1}) or W_{-16}H^{BM}_{16}(M_{8,1}) is supplied.",
+    "GAP-NO-COUNTEREXAMPLE: Elimination of known non-Tate sources is not a proof that the pure piece is Tate.",
+    "GAP-EXOTIC-MOTIVE: An unknown pure weight-16 non-Tate motive (conductor >1 or outside CL) is not excluded by geometry here.",
+    "GAP-CKGP: CKgP / algebraicity methods do not apply in genus 8, so cannot upgrade the search to a positive Tate proof.",
+    "GAP-SURVIVAL-ONLY: Even a hypothetical non-Tate class in some mixed graded piece of H^*(M_{8,1}) need not map nontrivially to the pure weight-16 quotient controlling H^{16}(\\bar M)."
+  ],
+  "id": "ATT-0030",
+  "packet_id": "CASE-8-1-v2",
+  "packet_path": "proof/packets/generated/CASE-8-1-v2.md",
+  "packet_sha256": "1473444c3071f2f5ddbf758329f0f5c5372a15200365a7aa16f50841bc8af434",
+  "schema_version": 2,
+  "source_claim_ids": [
+    "RED-0001",
+    "FND-0001",
+    "CONJ-0001",
+    "THM-0001",
+    "THM-0002",
+    "THM-0003",
+    "THM-0004",
+    "THM-0005",
+    "OBS-0001"
+  ],
+  "source_ids": [],
+  "status": "proposed",
+  "summary": "Search for a non-Tate summand in the exact open pure-weight input W_{-16}H^{BM}_{16}(M_{8,1}) \u2245 W_{28}H^{28}(M_{8,1})(22). Known non-Tate cohomology of M_{8,1} (LS_{12} in weight 13) lives in the wrong bidegree; Chenevier\u2013Lannes conductor-1 motives admit no non-Tate pure weight-16 summand. No surviving counterexample found; pure Tate for this base case remains open.",
+  "target": {
+    "chow_codimension": 14,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 22,
+    "g": 8,
+    "n": 1,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 28,
+    "ordinary_tate_type": "Q(-14)",
+    "ordinary_weight": 28,
+    "poincare_twist": 22
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-M-0030"
+}

@@ -1,0 +1,133 @@
+{
+  "attempt_id": "ATT-0030",
+  "checked_claims": [
+    {
+      "assessment": "The attempt ID, packet ID, context revision, and complete target dictionary agree with TASK.json. The supplied packet's computed SHA-256 is exactly 1473444c3071f2f5ddbf758329f0f5c5372a15200365a7aa16f50841bc8af434.",
+      "id": "METADATA",
+      "statement": "The attempt addresses ATT-0030 and reproduces the task's exact target.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "The packet supports W_-16 H_16^BM(M) \u2245 W_28 H^28(M)(22), and duality also relates Borel\u2013Moore degree 16 to compactly supported cohomology degree 16. It does not identify either group with W_16 H^16(M). Poincare duality on the open stack pairs ordinary H^16 with compactly supported H^28, not ordinary H^28. An additional theorem about interior cohomology and its pairing would be required, and none is supplied. Hard Lefschetz on the compactification does not by itself descend to an isomorphism between the two restriction images.",
+      "id": "A1",
+      "statement": "The Borel\u2013Moore target is equivalently the ordinary pure quotient W_16 H^16(M).",
+      "status": "failed"
+    },
+    {
+      "assessment": "A closed inclusion induces a same-degree homology map, so the homological sequence has H_16 of the boundary in its first term. The shift H^14 \u2192 H^16 belongs to the codimension-one cohomological Gysin map. The attempt mixes these conventions, although its parenthetical cohomological sequence has the correct Gysin shift.",
+      "id": "BOUNDARY-SEQUENCE",
+      "statement": "The homological boundary reduction is H_14(boundary normalization) \u2192 H_16(compactification) \u2192 W_-16 H_16^BM(open) \u2192 0.",
+      "status": "failed"
+    },
+    {
+      "assessment": "Conditional on the asserted occurrence, the degree, weight, and twist calculation is correct: for dimension 22, weights 13 and 31 sum to 44 and degrees 23 and 21 sum to 44. The occurrence itself is not among the packet's dependency-closed claims and no supporting source is supplied in the allowed files.",
+      "id": "A2",
+      "statement": "gr^W_13 H_c^23(M_8,1) is LS_12 and hence pairs with gr^W_31 H^21.",
+      "status": "unresolved"
+    },
+    {
+      "assessment": "This non-implication is correct because an Euler characteristic in another weight and degree does not establish occurrence or survival in the specified pure graded piece.",
+      "id": "A3",
+      "statement": "A nonzero weight-13 Euler characteristic does not imply a non-Tate summand in the exact degree-16 Borel\u2013Moore target.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "Tate twists change weight by an even integer, so the parity exclusion for S_12, LS_12, and S_16 is valid. This only excludes candidates from W_16 H^16; it does not repair the unsupported identification of that group with the exact degree-28 ordinary target.",
+      "id": "A4",
+      "statement": "The listed odd-weight motives and their Tate twists cannot have weight 16, while the untwisted tensor-square candidates have weight 22.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "The relevant classification is not included in the packet's claim records or supplied sources. More importantly, even the stated conditional classification does not show that every summand arising from M_8,1 has conductor one or lies in that list.",
+      "id": "A5",
+      "statement": "The conductor-one classification leaves only Tate irreducibles of effective weight 16.",
+      "status": "unresolved"
+    },
+    {
+      "assessment": "This is an exhaustive literature claim unsupported by the supplied dependency packet. The attempt's elimination covers only named candidates and explicitly leaves weight-28 candidates and motives outside the conductor-one list open.",
+      "id": "A6",
+      "statement": "No known geometric construction supplies a non-Tate summand in the exact target.",
+      "status": "unresolved"
+    },
+    {
+      "assessment": "The attempt expressly labels this as a gap and supplies neither a computation nor a geometric generation theorem.",
+      "id": "A7",
+      "statement": "The exact open input is Tate.",
+      "status": "unresolved"
+    },
+    {
+      "assessment": "The attempt expressly labels this as a gap. Its search for familiar counterexamples is not a proof of the positive statement.",
+      "id": "A8",
+      "statement": "H^16 of the compactification is a direct sum of Q(-8).",
+      "status": "unresolved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "search-for-surviving-non-tate-motive"
+      ],
+      "key": "open-pd-does-not-identify-two-ordinary-pure-pieces",
+      "kind": "obstruction",
+      "statement": "For a smooth open stack, Poincare duality pairs ordinary cohomology with compactly supported cohomology; identifying lowest-weight ordinary pieces in complementary degrees requires a separate interior-cohomology theorem and cannot be inferred from open Poincare duality alone.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "search-for-surviving-non-tate-motive"
+      ],
+      "key": "boundary-homology-gysin-degree-conflation",
+      "kind": "obstruction",
+      "statement": "For a boundary divisor, the homology pushforward is same-degree, whereas the cohomological Gysin map raises degree by two. A right-exact Borel\u2013Moore homology reduction must not import the cohomological Gysin shift into its homology term.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "search-for-surviving-non-tate-motive"
+      ],
+      "key": "conductor-one-list-is-not-geometric-exhaustion",
+      "kind": "obstruction",
+      "statement": "A classification of conductor-one predicted motives cannot exclude non-Tate summands of a geometric cohomology group without an independent theorem forcing every relevant summand to have conductor one and to belong to the classified category.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0038",
+  "independent": true,
+  "packet_id": "CASE-8-1-v2",
+  "packet_sha256": "1473444c3071f2f5ddbf758329f0f5c5372a15200365a7aa16f50841bc8af434",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0030-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse moduli: no coarse-space replacement is used; the argument consistently names rational cohomology of Deligne\u2013Mumford stacks",
+    "rational versus integral coefficients: all asserted decompositions are over Q, so finite-group semisimplicity and integral torsion issues are not silently invoked",
+    "cohomology versus Borel\u2013Moore degree: failed in the displayed boundary homology sequence and unresolved in the substitution of W_16 H^16 for the degree-28 ordinary realization",
+    "Poincare duality and Tate twists: the dimension-22 formula W_-16 H_16^BM = W_28 H^28(22), Q(-14)(22)=Q(8), and the 13-to-31 weight calculation are correct; the claimed duality with ordinary W_16 H^16 is not established",
+    "Gysin and Kunneth shifts: the cohomological divisor Gysin shift 14\u219216 is correct, but it is incorrectly copied into homology; no new Kunneth computation is supplied",
+    "degeneration or spectral-sequence differentials: no degeneration theorem is invoked, and the attempt does not compute a spectral sequence capable of proving survival or vanishing in the exact target",
+    "invariants versus coinvariants under graph automorphisms: no graph-level calculation is performed; rational invariants/coinvariants therefore cannot rescue the missing target computation",
+    "semisimplification versus actual Hodge isomorphism: pure polarizable Hodge structures are semisimple, but that does not create the missing identification between ordinary and compactly supported open cohomology",
+    "predicted motives versus unconditional theorems: the attempt acknowledges the conductor-one list as a constraint, but its list is non-exhaustive for the geometric target and cannot prove Tate type",
+    "pure Tate versus algebraic or tautological generation and omitted stable pairs: no such upgrade is made, and the artifact is scoped to the exact pair (8,1), but the positive Tate claim for that pair remains explicitly unresolved"
+  ],
+  "strongest_attack": "The load-bearing substitution of W_16 H^16(M_8,1) for the exact Borel\u2013Moore/ordinary-degree-28 target is unjustified. Open Poincare duality distinguishes ordinary from compactly supported cohomology, and hard Lefschetz on the compactification does not automatically descend through the restriction kernels. Consequently the weight-16 candidate elimination does not establish anything decisive about all weight-28 summands of the exact target.",
+  "target": {
+    "chow_codimension": 14,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 22,
+    "g": 8,
+    "n": 1,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 28,
+    "ordinary_tate_type": "Q(-14)",
+    "ordinary_weight": 28,
+    "poincare_twist": 22
+  },
+  "verdict": "incomplete"
+}

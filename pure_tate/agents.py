@@ -4,7 +4,10 @@ import os
 import shutil
 import tempfile
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple
+
+if TYPE_CHECKING:
+    from .grok_workers import WorkerSession
 
 from .capabilities import WEB_CAPABILITIES, declared_capabilities
 from .process_runner import ProcessWatchdogError, run_captured_process
@@ -208,8 +211,15 @@ def _grok_observable_stream(text: str) -> str:
     return "\n".join(retained) + ("\n" if retained else "")
 
 
-def load_engines() -> Dict[str, Dict[str, Any]]:
+def load_engines_config() -> Dict[str, Any]:
     value = load_json(ENGINE_CONFIG)
+    if not isinstance(value, dict):
+        raise ValueError("data/engines.json is not an object")
+    return value
+
+
+def load_engines() -> Dict[str, Dict[str, Any]]:
+    value = load_engines_config()
     engines = value.get("engines")
     if not isinstance(engines, dict):
         raise ValueError("data/engines.json has no engines object")
@@ -339,7 +349,11 @@ def assemble_prompt(
     context_files: List[str],
     expected_artifact_id: Optional[str] = None,
     engine_id: Optional[str] = None,
+    workers_enabled: bool = False,
+    max_workers: int = 0,
 ) -> str:
+    from .capabilities import phase_allows_web
+
     prompt_path = task.get("prompt")
     instructions = ""
     if isinstance(prompt_path, str) and (ROOT / prompt_path).is_file():
@@ -369,14 +383,29 @@ def assemble_prompt(
             % (engine_field, engine_id)
         )
         family = load_engines().get(engine_id, {}).get("family")
+        allow_web = phase_allows_web(str(phase) if phase else None)
         if family == "grok":
+            tool_line = (
+                "Use only read_file, grep, list_dir"
+                + (
+                    ", search_tool, and use_tool (for optional Grok workers)"
+                    if workers_enabled
+                    else ""
+                )
+                + (
+                    ", and optional web_search/web_fetch when needed"
+                    if allow_web
+                    else ""
+                )
+                + "."
+            )
             parts.append(
                 "Your final answer must be exactly one JSON object with no prose "
                 "before or after it. Prefer reading corpus/chunks over large text "
-                "files when both are available. Use only read_file, grep, and "
-                "list_dir. Never use run_terminal_command, write, web_fetch, "
-                "web_search, or any shell. Put the completed JSON artifact in your "
-                "final message only."
+                "files when both are available. "
+                + tool_line
+                + " Never use run_terminal_command, write, or any shell. "
+                "Put the completed JSON artifact in your final message only."
             )
         elif family == "gemini":
             parts.append(
@@ -385,6 +414,16 @@ def assemble_prompt(
                 "files when both are available. Stay in read-only plan mode. "
                 "Put the completed JSON artifact in your final message only."
             )
+    if workers_enabled and max_workers > 0:
+        parts.append(
+            "Optional Grok 4.5 helpers: you may dispatch up to %d read-only "
+            "Grok 4.5 workers via the grok-workers MCP tools "
+            "(dispatch_grok_worker, await_grok_worker, list_grok_workers, "
+            "worker_pool_stats). The hard cap is %d total and %d concurrent. "
+            "Workers are assistive only — you must still return exactly one "
+            "final JSON artifact yourself."
+            % (max_workers, max_workers, max_workers)
+        )
     if phase == "review" and task.get("campaign_id"):
         parts.append(
             "Campaign review: use schema_version 3 and "
@@ -418,8 +457,10 @@ def _engine_argv(
     prompt: str,
     last_message_path: Optional[Path] = None,
     phase: Optional[str] = None,
+    workers: Optional["WorkerSession"] = None,
 ) -> List[str]:
     from .capabilities import phase_allows_web
+    from .grok_workers import apply_workers_to_argv
 
     engines = load_engines()
     if engine_id not in engines:
@@ -428,6 +469,7 @@ def _engine_argv(
     binary = config.get("binary", engine_id)
     family = config.get("family")
     model = config.get("model")
+    workers_on = workers is not None and getattr(workers, "enabled", False)
     # Web tools are available on agent phases so the model can look up
     # supporting mathematics when it chooses. Research-family phases still
     # require live capability attestation before dispatch.
@@ -451,12 +493,15 @@ def _engine_argv(
             str(last_message_path),
             prompt,
         ]
-        return command
+        return apply_workers_to_argv(command, "openai", workers)
     if family == "claude":
         allowed = ["Read", "Grep", "Glob"]
         if allow_web:
             allowed.extend(["WebSearch", "WebFetch"])
-        return [
+        # When workers are enabled, CLI_test showed bypassPermissions is needed
+        # for headless MCP; write/shell remain disallowed.
+        permission_mode = "bypassPermissions" if workers_on else "default"
+        command = [
             binary,
             "-p",
             prompt,
@@ -465,7 +510,7 @@ def _engine_argv(
             "--verbose",
             "--include-partial-messages",
             "--permission-mode",
-            "default",
+            permission_mode,
             "--allowedTools",
             *allowed,
             "--disallowedTools",
@@ -475,12 +520,15 @@ def _engine_argv(
             "--model",
             model,
         ]
+        return apply_workers_to_argv(command, "claude", workers)
     if family == "grok":
-        # Grok tool ids are snake_case. Headless dontAsk/always-approve still
-        # permission_cancels run_terminal_command and write. Web tools are
-        # enabled for agent phases; write/shell stay denied.
+        # Grok tool ids are snake_case. Never add spawn_subagent to --tools
+        # (allowlist collapse). Workers attach via MCP search_tool/use_tool.
+        # dontAsk cancels MCP use_tool; workers require bypassPermissions while
+        # write/shell stay denied by the allowlist.
         tools = ["read_file", "grep", "list_dir"]
         denied = ["run_terminal_command", "write", "open_page"]
+        permission_mode = "bypassPermissions" if workers_on else "dontAsk"
         command = [
             binary,
             "-p",
@@ -488,9 +536,9 @@ def _engine_argv(
             "--output-format",
             "streaming-json",
             "--max-turns",
-            "40",
+            "50" if workers_on else "40",
             "--permission-mode",
-            "dontAsk",
+            permission_mode,
             "--always-approve",
         ]
         if allow_web:
@@ -508,10 +556,11 @@ def _engine_argv(
         if not allow_web:
             command.append("--disable-web-search")
         command.extend(["-m", model])
-        return command
+        return apply_workers_to_argv(command, "grok", workers)
     if family == "gemini":
         # Plan mode is workspace-write-blocked. CLI_test shows google_web_search
         # still works under plan; stream-json feeds the process watchdog.
+        # Gemini has no safe session-scoped MCP inject yet — no workers.
         return [
             binary,
             "-p",
@@ -1357,10 +1406,54 @@ def run_task(
     with tempfile.TemporaryDirectory(prefix="pure-tate-agent-") as directory:
         context = Path(directory)
         files = build_isolated_context(task, context)
-        prompt = assemble_prompt(task, files, output.stem, engine_id)
-        last_message = context / "last-message.txt"
-        command = _engine_argv(engine_id, prompt, last_message, phase=phase)
         family = config.get("family")
+        from .capabilities import phase_allows_web
+        from .grok_workers import (
+            max_grok_workers_from_config,
+            merge_worker_env,
+            prepare_worker_session,
+        )
+
+        engines_root = load_engines_config()
+        max_workers = max_grok_workers_from_config(engines_root)
+        allow_web = phase_allows_web(phase)
+        worker_model = (
+            load_engines().get("grok", {}).get("model") or "grok-4.5"
+        )
+        workers = prepare_worker_session(
+            context,
+            family=str(family or ""),
+            max_workers=max_workers,
+            allow_web=allow_web,
+            worker_model=str(worker_model),
+            worker_timeout=min(timeout, 600),
+            parent_meta={
+                "engine": engine_id,
+                "family": str(family or ""),
+                "phase": phase,
+                "task_id": task.get("id"),
+                "output": str(output),
+                "paired_turn_kind": task.get("paired_turn_kind"),
+                "campaign_id": task.get("campaign_id"),
+            },
+        )
+        workers_on = workers is not None and workers.enabled
+        prompt = assemble_prompt(
+            task,
+            files,
+            output.stem,
+            engine_id,
+            workers_enabled=workers_on,
+            max_workers=max_workers if workers_on else 0,
+        )
+        last_message = context / "last-message.txt"
+        command = _engine_argv(
+            engine_id,
+            prompt,
+            last_message,
+            phase=phase,
+            workers=workers,
+        )
         engine_max = config.get("max_task_seconds")
         task_timeout = timeout
         if isinstance(engine_max, int) and engine_max > 0:
@@ -1374,13 +1467,15 @@ def run_task(
         activity_streams = config.get("activity_streams")
         if not isinstance(activity_streams, list) or not activity_streams:
             activity_streams = None
+        env = merge_worker_env(
+            _subprocess_env(str(family) if family else None, config),
+            workers,
+        )
         try:
             process = run_captured_process(
                 command,
                 cwd=context,
-                env=_subprocess_env(
-                    str(family) if family else None, config
-                ),
+                env=env,
                 timeout=task_timeout,
                 inactivity_timeout=inactivity,
                 abort_stderr_pattern_counts=abort_patterns,

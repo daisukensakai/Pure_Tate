@@ -1,0 +1,101 @@
+{
+  "approach_id": "prove-pure-weight-tate-only",
+  "argument_markdown": "## Setup\n\nLet $g=3$ and $n=12$. Write $\\mathcal{M}_{3,12}$ for the moduli stack of smooth genus-$3$ curves with $12$ distinct ordered marked points, and $\\overline{\\mathcal{M}}_{3,12}$ for its Deligne\u2013Mumford compactification. Both are smooth Deligne\u2013Mumford stacks over $\\mathbb{C}$. The dimension is\n$$\nd \\;=\\; 3g-3+n \\;=\\; 18.\n$$\nAll cohomology and Borel\u2013Moore homology are with rational coefficients; weight filtrations are Deligne\u2019s (extended in the usual way to smooth DM stacks).\n\nBy purity for smooth proper DM stacks, $H^k(\\overline{\\mathcal{M}}_{3,12})$ is pure of weight $k$ (THM-0001). For even $k\\le 14$, this pure Hodge structure is a direct sum of Tate twists $\\mathbb{Q}(-k/2)$ for every stable pair (THM-0002). Degree $16$ remains open (CONJ-0001, OBS-0001).\n\n**Approach.** Prove only the weaker pure-weight Tate statement for the open Borel\u2013Moore input at $(3,12)$, without CKgP, algebraicity of cycles, or tautological generation on $\\mathcal{M}_{3,12}$ (packet execution boundary; FND-0002).\n\n## Duality and exact target\n\nPoincar\u00e9 duality for a smooth DM stack of dimension $d=18$ identifies\n$$\nH^{BM}_k(\\mathcal{M}_{3,12})\n\\;\\simeq\\;\nH^{2d-k}(\\mathcal{M}_{3,12})(d)\n\\;=\\;\nH^{36-k}(\\mathcal{M}_{3,12})(18).\n$$\nWeights are compatible, so\n$$\nW_{-16}\\,H^{BM}_{16}(\\mathcal{M}_{3,12})\n\\;\\simeq\\;\nW_{20}\\,H^{20}(\\mathcal{M}_{3,12})(18)\n$$\n(FND-0001, RED-0001).\n\n**Target.** The finite obstruction list for compact degree $16$ includes $(g,n)=(3,12)$. The required pure-weight statement is\n$$\nW_{-16}\\,H^{BM}_{16}(\\mathcal{M}_{3,12})\n\\quad\\text{pure of Tate type}\\quad\n\\mathbb{Q}(8).\n$$\nEquivalently, untwisted ordinary cohomology satisfies\n$$\nW_{20}\\,H^{20}(\\mathcal{M}_{3,12})\n\\quad\\text{pure of Tate type}\\quad\n\\mathbb{Q}(-10),\n$$\nsince $\\mathbb{Q}(-10)(18)=\\mathbb{Q}(8)$. The associated Chow codimension, if algebraic, would be $d-8=10$. We do **not** claim algebraicity.\n\n## Reduction from compact degree 16\n\nThe boundary right-exact sequence of the low-homology induction (THM-0003) yields\n$$\nH_{16}(\\partial\\overline{\\mathcal{M}}_{3,12})\n\\;\\longrightarrow\\;\nH_{16}(\\overline{\\mathcal{M}}_{3,12})\n\\;\\longrightarrow\\;\nW_{-16}\\,H^{BM}_{16}(\\mathcal{M}_{3,12})\n\\;\\longrightarrow\\; 0.\n$$\nThus $W_{-16}\\,H^{BM}_{16}(\\mathcal{M}_{3,12})$ is the pure-weight open quotient of compact homology in degree $16$.\n\nThe base-case inequalities (THM-0004) at $k=16$, $g=3$, $n=12\\ge 2$ require an open-stratum base case precisely when\n$$\nk \\;\\ge\\; 2g-2+n \\;=\\; 16.\n$$\nEquality holds, so $(3,12)$ is a genuine open base case. The compact pure-Tate statement $H^{16}(\\overline{\\mathcal{M}}_{3,12})\\simeq \\bigoplus \\mathbb{Q}(-8)$ therefore reduces, for this pair, to\n$$\nW_{-16}\\,H^{BM}_{16}(\\mathcal{M}_{3,12})\\;\\simeq\\; \\bigoplus\\, \\mathbb{Q}(8),\n$$\nonce boundary strata are controlled inductively (even degrees $\\le 14$ by THM-0002; genus $1$ and $2$ by THM-0006\u2013THM-0007).\n\n## Forgetful generation from the CKgP range $n\\le 11$\n\nPublished CKgP bounds give $c(3)=11$ (THM-0005): for every $m\\le 11$, $\\mathcal{M}_{3,m}$ has CKgP and tautological Chow ring, so pure-weight cohomology/BM of $\\mathcal{M}_{3,m}$ is algebraic Tate of the expected type.\n\nFor each $i\\in\\{1,\\dots,12\\}$, the forgetful map $\\pi_i\\colon \\mathcal{M}_{3,12}\\to\\mathcal{M}_{3,11}$ is smooth of relative dimension $1$ and weight-compatible on cohomology. Pullbacks therefore embed a pure-Tate subspace\n$$\n\\sum_{i=1}^{12}\\pi_i^*\\bigl(W_{20}H^{20}(\\mathcal{M}_{3,11})\\bigr)\n\\;\\subset\\;\nW_{20}H^{20}(\\mathcal{M}_{3,12})\n$$\nof type $\\mathbb{Q}(-10)$, and more generally all pure-weight classes pulled back from $m\\le 11$ (together with tautological $\\psi$-classes on the twelve marks) remain pure Tate.\n\nThis does **not** prove generation of the whole pure-weight piece: the forgetful system from $n\\le 11$ need not exhaust $W_{20}H^{20}(\\mathcal{M}_{3,12})$. CKgP for $\\mathcal{M}_{3,12}$ itself is unknown (THM-0005 stops at $c(3)=11$), and the ordered twelve-point cubic incidence locus is not known to be CKgP by permanence lemmas (FND-0002). The present approach does not use any CKgP extension to $n=12$.\n\n## Hyperelliptic / plane-quartic stratification\n\nEvery smooth genus-$3$ curve is hyperelliptic or non-hyperelliptic; in the latter case the canonical system embeds it as a smooth plane quartic. Stratify\n$$\n\\mathcal{M}_{3,12}\n\\;=\\;\n\\mathcal{H}_{3,12}\n\\;\\sqcup\\;\n\\mathcal{Q}_{3,12},\n$$\nwhere $\\mathcal{H}_{3,12}$ is the ordered $12$-pointed hyperelliptic locus and $\\mathcal{Q}_{3,12}$ the non-hyperelliptic (plane-quartic) open locus.\n\nThe unpointed hyperelliptic locus $\\mathcal{H}_3\\subset\\mathcal{M}_3$ is a divisor ($\\dim\\mathcal{M}_3=6$, $\\dim\\mathcal{H}_3=5$). After marking twelve points, $\\mathcal{H}_{3,12}$ is a pure-dimensional closed stratum of dimension $17$ in the smooth locus, with open complement $\\mathcal{Q}_{3,12}$ of dimension $18$.\n\n**Hyperelliptic side.** Hyperelliptic genus-$3$ curves are double covers of $\\mathbb{P}^1$ branched at eight points. The pointed stack $\\mathcal{H}_{3,12}$ is built from configuration spaces of branch points and marks on $\\mathbb{P}^1$ with residual $\\mathrm{PGL}_2$-action, hence from genus-$0$ data. Genus $0$ has unrestricted CKgP (THM-0005) and pure-weight Tate cohomology. After stacky automorphisms of the hyperelliptic involution, contributions of $\\mathcal{H}_{3,12}$ to $W_{-16}H^{BM}_{16}(\\mathcal{M}_{3,12})$ via BM localization are expected to be of type $\\mathbb{Q}(8)$ (or zero).\n\n**Plane-quartic side.** A point of $\\mathcal{Q}_{3,12}$ is a smooth plane quartic with twelve ordered points. The pure-weight group $W_{20}H^{20}(\\mathcal{Q}_{3,12})$ (equivalently $W_{-16}H^{BM}_{16}(\\mathcal{Q}_{3,12})$) is the main geometric unknown for the open dense stratum.\n\n**Localization.** The BM localization sequence in degree $16$ reads\n$$\n\\cdots\n\\to\nH^{BM}_{16}(\\mathcal{H}_{3,12})\n\\to\nH^{BM}_{16}(\\mathcal{M}_{3,12})\n\\to\nH^{BM}_{16}(\\mathcal{Q}_{3,12})\n\\to\nH^{BM}_{15}(\\mathcal{H}_{3,12})\n\\to\n\\cdots.\n$$\nPassing to $W_{-16}$, kernel and cokernel of the comparison between $W_{-16}H^{BM}_{16}(\\mathcal{M}_{3,12})$ and $W_{-16}H^{BM}_{16}(\\mathcal{Q}_{3,12})$ are controlled by pure-weight BM of $\\mathcal{H}_{3,12}$. If both the hyperelliptic pure-weight groups in the relevant degrees and $W_{-16}H^{BM}_{16}(\\mathcal{Q}_{3,12})$ are of type $\\mathbb{Q}(8)$, the same follows for $\\mathcal{M}_{3,12}$.\n\nThus the pure-weight Tate problem reduces to: (i) a genus-$0$/configuration-space computation on $\\mathcal{H}_{3,12}$; (ii) a pure-weight computation on $\\mathcal{Q}_{3,12}$ that does **not** require CKgP of the ordered cubic-incidence geometry (FND-0002).\n\n## What is established\n\n1. **Target identification.** With $d=18$, $W_{-16}H^{BM}_{16}(\\mathcal{M}_{3,12})\\simeq W_{20}H^{20}(\\mathcal{M}_{3,12})(18)$, with matching Tate types $\\mathbb{Q}(8)$ vs $\\mathbb{Q}(-10)$ (FND-0001, RED-0001).\n2. **Compact-to-open reduction.** Via THM-0003 and the equality $16=2g-2+n$ (THM-0004), compact pure Tate at $(3,12)$ reduces to pure Tate type $\\mathbb{Q}(8)$ for the open pure-weight BM group.\n3. **CKgP range.** For $m\\le 11$, pure-weight cohomology is algebraic Tate (THM-0005); forgetful pullbacks inject a pure-Tate subspace into $W_{20}H^{20}(\\mathcal{M}_{3,12})$.\n4. **Stratification framework.** Hyperelliptic/plane-quartic decomposition plus BM localization is a valid pure-weight setup that does not presuppose CKgP on $\\mathcal{M}_{3,12}$ (FND-0002).\n5. **Scope.** Pure-weight Tate is strictly weaker than CKgP/algebraicity and is allowed by the packet boundary; no algebraicity claim is made.\n\n## Explicit gaps\n\n**GAP-1 (Forgetful generation).** It is not proved that pullbacks from $\\mathcal{M}_{3,m}$ for $m\\le 11$ (plus tautological $\\psi/\\kappa$) exhaust $W_{20}H^{20}(\\mathcal{M}_{3,12})$. A complementary non-Tate summand is not ruled out.\n\n**GAP-2 (Hyperelliptic pure weight).** The identification of $W_{-*}H^{BM}_*(\\mathcal{H}_{3,12})$ with equivariant genus-$0$ configuration cohomology, including hyperelliptic stack structure and the exact contribution to $W_{-16}H^{BM}_{16}(\\mathcal{M}_{3,12})$, is not fully verified.\n\n**GAP-3 (Plane-quartic pure weight).** It is not proved that $W_{20}H^{20}(\\mathcal{Q}_{3,12})$ has type $\\mathbb{Q}(-10)$, equivalently that $W_{-16}H^{BM}_{16}(\\mathcal{Q}_{3,12})$ has type $\\mathbb{Q}(8)$. This is the main geometric gap.\n\n**GAP-4 (Incidence without CKgP).** Resolving GAP-3 via ordered twelve-point cubic incidence cannot use CKgP: permanence lemmas do not establish CKgP there, nor ascent from the unordered stack along the finite \u00e9tale ordering cover (FND-0002). No pure-weight substitute (weight spectral sequence, cell stratification, vanishing of wrong-weight graded pieces) is supplied.\n\n**GAP-5 (Localization weights).** Even granting Tate-ness on $\\mathcal{H}_{3,12}$ and $\\mathcal{Q}_{3,12}$ separately, absence of non-Tate extensions or weight-shifted terms in the BM sequence in degrees $15$\u2013$16$ is not checked with complete vanishing ranges.\n\n**GAP-6 (Boundary bookkeeping).** Line-by-line verification that every dual graph for $\\partial\\overline{\\mathcal{M}}_{3,12}$ lands in already-known pure-Tate cases at degree $16$ is not reproduced; it is treated as ambient inductive machine rather than a fresh check.\n\n## Conclusion\n\nThe open-input target, duality, degrees ($d=18$, ordinary degree $20$, types $\\mathbb{Q}(8)$ and $\\mathbb{Q}(-10)$), and a pure-weight-without-CKgP strategy via forgetful maps and hyperelliptic/plane-quartic stratification are correctly set up. GAP-1\u2013GAP-6 block any claim that $W_{-16}H^{BM}_{16}(\\mathcal{M}_{3,12})$ is of Tate type $\\mathbb{Q}(8)$. Status of the attempt: incomplete proposed reduction only.",
+  "assumptions": [
+    "Rational singular and Borel\u2013Moore (co)homology of smooth DM stacks carry mixed Hodge structures compatible with localization and forgetful morphisms as in the published low-homology induction.",
+    "Boundary dual-graph strata for Mbar_{3,12} in degree 16 fall under the ambient inductive control once open base cases are settled (standard shape of THM-0003\u2013THM-0004; not re-verified graph-by-graph here).",
+    "Genus-0 pure-weight cohomology is Tate, as implied by unrestricted CKgP in genus 0 (THM-0005)."
+  ],
+  "claims": [
+    {
+      "id": "A1",
+      "statement": "With d=18, Poincare duality gives W_{-16} H^{BM}_{16}(M_{3,12}) \u2245 W_{20} H^{20}(M_{3,12})(18), so the BM group is of Tate type Q(8) if and only if the untwisted ordinary pure-weight group is of Tate type Q(-10).",
+      "status": "proved"
+    },
+    {
+      "id": "A2",
+      "statement": "By the boundary right-exact sequence and the base-case inequality k=16=2g-2+n, the pure-Tate statement for H^{16}(Mbar_{3,12}) at this pair reduces to pure Tate type Q(8) for W_{-16} H^{BM}_{16}(M_{3,12}), once boundary strata are inductively controlled.",
+      "status": "proved"
+    },
+    {
+      "id": "A3",
+      "statement": "For all m\u2264c(3)=11, M_{3,m} has CKgP, so pure-weight cohomology of M_{3,m} is algebraic of Tate type; forgetful pullbacks embed a pure-Tate subspace of type Q(-10) into W_{20} H^{20}(M_{3,12}).",
+      "status": "proved"
+    },
+    {
+      "id": "A4",
+      "statement": "The hyperelliptic/plane-quartic stratification M_{3,12}=H_{3,12} \u2294 Q_{3,12} together with the BM localization sequence in degree 16 reduces the pure-weight Tate problem to pure-weight control of H_{3,12} (genus-0 type) and of Q_{3,12}, without presupposing CKgP on M_{3,12}.",
+      "status": "proved"
+    },
+    {
+      "id": "A5",
+      "statement": "Pullbacks from M_{3,m} for m\u226411 together with tautological psi/kappa classes generate all of W_{20} H^{20}(M_{3,12}).",
+      "status": "gap"
+    },
+    {
+      "id": "A6",
+      "statement": "W_{-16} H^{BM}_{16}(H_{3,12}) (and the associated localization contributions in degrees 15\u201316) is pure of Tate type Q(8) or zero.",
+      "status": "gap"
+    },
+    {
+      "id": "A7",
+      "statement": "W_{20} H^{20}(Q_{3,12}) is pure of Tate type Q(-10), equivalently W_{-16} H^{BM}_{16}(Q_{3,12}) is pure of Tate type Q(8).",
+      "status": "gap"
+    },
+    {
+      "id": "A8",
+      "statement": "W_{-16} H^{BM}_{16}(M_{3,12}) is pure of Tate type Q(8).",
+      "status": "gap"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "engine": "grok",
+  "gap_markers": [
+    "GAP-1: forgetful generation from n\u226411 does not exhaust W_20 H^{20}(M_{3,12})",
+    "GAP-2: hyperelliptic pure-weight BM computation not fully carried out",
+    "GAP-3: plane-quartic pure-weight Tate for Q_{3,12} unproved",
+    "GAP-4: ordered cubic incidence cannot be used via CKgP (FND-0002); no pure-weight substitute supplied",
+    "GAP-5: BM localization weight comparison in degrees 15\u201316 incomplete",
+    "GAP-6: boundary dual-graph bookkeeping at degree 16 not re-verified line-by-line"
+  ],
+  "id": "ATT-0032",
+  "packet_id": "CASE-3-12-v2",
+  "packet_path": "proof/packets/generated/CASE-3-12-v2.md",
+  "packet_sha256": "6d42c3196c34c652c2e2e34d3f8a7dbcaf1654d8f59adba388806c101e5b2415",
+  "schema_version": 2,
+  "source_claim_ids": [
+    "RED-0001",
+    "FND-0001",
+    "FND-0002",
+    "CONJ-0001",
+    "THM-0001",
+    "THM-0002",
+    "THM-0003",
+    "THM-0004",
+    "THM-0005",
+    "THM-0006",
+    "THM-0007",
+    "OBS-0001"
+  ],
+  "source_ids": [],
+  "status": "proposed",
+  "summary": "Partial pure-weight Tate reduction for (g,n)=(3,12): dualizes W_{-16}H^{BM}_{16}(M_{3,12}) to W_{20}H^{20}(M_{3,12})(18), uses forgetful CKgP range n<=11 and a hyperelliptic/plane-quartic stratification, but leaves the plane-quartic pure-weight and generation gaps open.",
+  "target": {
+    "chow_codimension": 10,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 18,
+    "g": 3,
+    "n": 12,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 20,
+    "ordinary_tate_type": "Q(-10)",
+    "ordinary_weight": 20,
+    "poincare_twist": 18
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-M-0002"
+}

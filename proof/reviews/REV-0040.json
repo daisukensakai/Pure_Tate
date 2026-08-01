@@ -1,0 +1,137 @@
+{
+  "attempt_id": "ATT-0032",
+  "checked_claims": [
+    {
+      "assessment": "The attempt ID, packet ID, context revision, target dictionary, and recomputed packet SHA-256 all match TASK.json.",
+      "claim_id": "metadata",
+      "statement": "The review targets ATT-0032 and CASE-3-12-v2 with the task-prescribed target.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "The stack has complex dimension 18, so 2d-16=20. Twisting by (18) lowers weight by 36, taking weight 20 to weight -16. The cohomological and Borel\u2013Moore degrees and all stated Tate twists are consistent.",
+      "claim_id": "A1",
+      "statement": "Poincare duality identifies W_{-16}H^{BM}_{16}(M_{3,12}) with W_{20}H^{20}(M_{3,12})(18), and Q(-10)(18)=Q(8).",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "The equality 16=2g-2+n is correct. The claim is explicitly conditional on inductive boundary control and is supported by THM-0003, THM-0004, and RED-0001; it is not itself a proof of that control.",
+      "claim_id": "A2",
+      "statement": "The packet-level boundary induction makes this open group the relevant conditional base case for compact degree 16.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "Smoothness and compatibility with weights only define a pullback preserving the relevant weight; they do not imply that the pullback is injective. No section, transfer, Leray argument, or other injectivity theorem is supplied. Thus a claim marked proved has an unresolved proof dependency.",
+      "claim_id": "A3-forgetful-injectivity",
+      "statement": "Each forgetful pullback embeds W_{20}H^{20}(M_{3,11}) into W_{20}H^{20}(M_{3,12}).",
+      "status": "unresolved"
+    },
+    {
+      "assessment": "This matches THM-0005 and FND-0002. The attempt does not silently promote rational statements to integral ones or pure Tate type to algebraic or tautological generation at n=12.",
+      "claim_id": "A3-CKgP-scope",
+      "statement": "The CKgP input is restricted to rational cohomology for m<=11 and is not asserted for M_{3,12}.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "The displayed homological degrees in the localization sequence are correct. Strictness of morphisms of mixed Hodge structures permits passage to the relevant weight filtration. This only gives a conditional framework, not the missing computations.",
+      "claim_id": "A4-localization-framework",
+      "statement": "The hyperelliptic closed locus and plane-quartic complement give a Borel\u2013Moore localization framework.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "The description by genus-zero configuration data is not a computation of the pointed hyperelliptic stack. It omits strata where marked points are ramification points or hyperelliptic conjugates, as well as the resulting monodromy and finite-group actions. Rational stack coefficients make finite-group invariants exact, but do not establish that the underlying representation is Tate.",
+      "claim_id": "A6",
+      "statement": "The required hyperelliptic Borel\u2013Moore contribution is Tate.",
+      "status": "unresolved"
+    },
+    {
+      "assessment": "No Gysin, Kunneth, incidence-stratification, or weight-spectral-sequence computation is supplied. In particular, there is no degeneration theorem or differential analysis excluding a non-Tate summand.",
+      "claim_id": "A7",
+      "statement": "W_{20}H^{20}(Q_{3,12}) has Tate type Q(-10).",
+      "status": "unresolved"
+    },
+    {
+      "assessment": "The attempt expressly records this as a gap. Localization cannot prove it until the plane-quartic term and the relevant hyperelliptic term are controlled.",
+      "claim_id": "A8",
+      "statement": "W_{-16}H^{BM}_{16}(M_{3,12}) has Tate type Q(8).",
+      "status": "unresolved"
+    },
+    {
+      "assessment": "Boundary bookkeeping is delegated to the packet's conditional induction. Over Q, invariants under finite graph automorphism groups are exact and preserve Tate type, but the attempt does not present a graph-by-graph proof. No additional stable pair is required merely because the exact artifact concerns (3,12).",
+      "claim_id": "automorphisms-and-boundary",
+      "statement": "No new graph-automorphism or stable-pair computation is claimed unconditionally.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "Predicted statements are labeled as expected or as gaps. No claimed target decomposition is obtained only after semisimplification, and no conjectural motive is used as an unconditional theorem.",
+      "claim_id": "semisimplification",
+      "statement": "The attempt does not substitute a motivic prediction or semisimplification for an actual target isomorphism.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "There is no asserted integral result or unannounced replacement by coarse moduli. The unresolved hyperelliptic computation must nevertheless retain the quotient-stack actions and stabilizers explicitly.",
+      "claim_id": "stack-and-coefficients",
+      "statement": "The setup consistently uses rational (co)homology of Deligne\u2013Mumford stacks.",
+      "status": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "prove-pure-weight-tate-only"
+      ],
+      "key": "forgetful-smooth-pullback-not-automatically-injective",
+      "kind": "obstruction",
+      "statement": "For M_{g,n}->M_{g,n-1}, smoothness and preservation of weights do not by themselves prove injectivity on the lowest-weight cohomology; a section, transfer, or analysis of the Leray differentials is required.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "prove-pure-weight-tate-only"
+      ],
+      "key": "pointed-hyperelliptic-locus-needs-conjugacy-strata",
+      "kind": "obstruction",
+      "statement": "Reducing pointed hyperelliptic moduli to genus-zero configuration spaces requires separate treatment of ramification marks, hyperelliptically conjugate marked pairs, monodromy, and quotient-stack actions; genus-zero Tate input alone does not establish Tate type after these constructions.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0040",
+  "independent": true,
+  "packet_id": "CASE-3-12-v2",
+  "packet_sha256": "6d42c3196c34c652c2e2e34d3f8a7dbcaf1654d8f59adba388806c101e5b2415",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0032-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse space",
+    "rational versus integral coefficients",
+    "cohomology versus Borel\u2013Moore homology degree",
+    "Poincare duality and Tate twists",
+    "Gysin and Kunneth shifts",
+    "spectral-sequence degeneration and differentials",
+    "invariants versus coinvariants under graph automorphisms",
+    "semisimplification versus actual Hodge-structure isomorphism",
+    "conditional predictions versus unconditional theorems",
+    "pure Tate versus algebraic or tautological generation",
+    "stable-pair coverage"
+  ],
+  "strongest_attack": "The strongest attack on the artifact's purportedly proved content is A3: it says forgetful pullbacks embed the known Tate group merely because the forgetful map is smooth and weight-compatible. Those properties do not imply injectivity, and no section, transfer, or Leray argument is given. Independently, the admitted A7 plane-quartic computation is the original load-bearing unknown, so the exact Tate target A8 remains unproved.",
+  "target": {
+    "chow_codimension": 10,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 18,
+    "g": 3,
+    "n": 12,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 20,
+    "ordinary_tate_type": "Q(-10)",
+    "ordinary_weight": 20,
+    "poincare_twist": 18
+  },
+  "verdict": "incomplete"
+}

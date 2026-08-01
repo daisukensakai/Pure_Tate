@@ -1,0 +1,141 @@
+{
+  "attempt_id": "ATT-0031",
+  "checked_claims": [
+    {
+      "claim_id": "A1",
+      "note": "For the smooth Deligne-Mumford stack M_{8,2} of dimension 23, Poincare duality gives H_16^BM = H^30(23). The twist changes weight 30 to -16 and Q(-15) to Q(8); codimension 15 is correct.",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "A2",
+      "note": "The numerical base-case equality is 16 = 2*8-2+2, and the pair (8,2) is stable.",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "A3",
+      "note": "As a conditional statement, CKgP supplies algebraic generation of the pure ordinary weight piece, and A*=R* makes those generators tautological. Cycle classes in codimension 15 give an actual direct sum of Q(-15), not merely a semisimplification; twisting by 23 gives a direct sum of Q(8).",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "A6",
+      "note": "The proposed stratification is only a program. No complete stack-level construction proves CKgP on every pointed stratum or proves that all supported Chow classes push forward tautologically.",
+      "status": "unresolved"
+    },
+    {
+      "claim_id": "A7",
+      "note": "Surjectivity of the Casnati-Ekedahl evaluation maps at two distinct marked points on every relevant smooth tetragonal cover is asserted as expected but not proved.",
+      "status": "unresolved"
+    },
+    {
+      "claim_id": "A8",
+      "note": "Tautologicality after pushforward of all unbalanced splitting loci, including bielliptic contributions, is not established.",
+      "status": "unresolved"
+    },
+    {
+      "claim_id": "A9",
+      "note": "The pointed Mukai presentation and the identification of all resulting Chern classes with tautological classes are not constructed.",
+      "status": "unresolved"
+    },
+    {
+      "claim_id": "A10",
+      "note": "The load-bearing hypotheses CKgP and A*(M_{8,2})=R*(M_{8,2}) remain unproved. The unpointed genus-8 result does not supply either assertion after adding markings.",
+      "status": "unresolved"
+    },
+    {
+      "claim_id": "A11",
+      "note": "Consequently the exact target W_{-16}H_16^BM(M_{8,2}) being a direct sum of Q(8) is not proved.",
+      "status": "unresolved"
+    },
+    {
+      "claim_id": "scope-stack-coarse",
+      "note": "The argument is explicitly formulated for Deligne-Mumford and quotient stacks and does not substitute coarse-moduli cohomology. The missing pointed stack constructions are already recorded in A6-A10.",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "scope-rational-integral",
+      "note": "Rational coefficients are explicit throughout, and no integral-coefficient conclusion is drawn.",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "scope-gysin-kunneth",
+      "note": "No independent Gysin or Kunneth computation is used to establish the target. Boundary exactness is imported from THM-0003, while the unfinished stratum-gluing argument supplies no hidden degree-shift calculation.",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "scope-spectral-sequence",
+      "note": "No degeneration or vanishing of spectral-sequence differentials is asserted.",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "scope-graph-automorphisms",
+      "note": "The attempt performs no stable-graph decomposition and makes no invariants-versus-coinvariants identification.",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "scope-predictions",
+      "note": "The predicted degree-16 motive is not used as a theorem; the conclusion is explicitly declared conditional and open.",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "scope-pure-tate-upgrade",
+      "note": "The proof does not infer algebraic or tautological generation merely from pure Tate type. It instead proposes the stronger CKgP and tautological-Chow hypotheses as sufficient inputs.",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "scope-stable-pairs",
+      "note": "The submitted artifact addresses only the exact stable pair (8,2) and expressly does not claim the global degree-16 theorem, so other stable pairs are not omitted from its stated conclusion.",
+      "status": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "extend-ckgp-or-gonality-stratification"
+      ],
+      "key": "unpointed-gonality-does-not-supply-pointed-ckgp",
+      "kind": "obstruction",
+      "statement": "Unpointed gonality-stratification, Casnati-Ekedahl, or Mukai results do not by themselves establish CKgP or tautological Chow generation after adding marked points; the pointed incidence/evaluation geometry and tautological pushforwards require separate proofs.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0039",
+  "independent": true,
+  "packet_id": "CASE-8-2-v2",
+  "packet_sha256": "3f9808a6237c6d818c4ec6885087e530dbe8aedfc77ba1507b521939e8662063",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0031-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse moduli",
+    "rational versus integral coefficients",
+    "cohomology degree versus Borel-Moore homology degree",
+    "Poincare duality and every Tate twist",
+    "Gysin and Kunneth shifts",
+    "degeneration or spectral-sequence differentials",
+    "invariants versus coinvariants under graph automorphisms",
+    "semisimplification versus an actual Hodge-structure isomorphism",
+    "predicted motives used as unconditional theorems",
+    "pure Tate silently upgraded to algebraic or tautological generation",
+    "omitted stable pairs"
+  ],
+  "strongest_attack": "The argument never proves its load-bearing pointed hypotheses: neither CKgP nor A*(M_{8,2})=R*(M_{8,2}) follows from the cited unpointed geometry. The tetragonal evaluation and pushforward steps and the pointed Mukai construction are all unresolved, so the valid conditional implication cannot be applied to the exact Borel-Moore target.",
+  "target": {
+    "chow_codimension": 15,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 23,
+    "g": 8,
+    "n": 2,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 30,
+    "ordinary_tate_type": "Q(-15)",
+    "ordinary_weight": 30,
+    "poincare_twist": 23
+  },
+  "verdict": "incomplete"
+}

@@ -1,0 +1,92 @@
+{
+  "attempt_id": "ATT-0029",
+  "checked_claims": [
+    {
+      "assessment": "The attempt and task target dictionaries agree exactly. The supplied packet's computed SHA-256 is 2e498aaa23793ebc2b23d9e0a42fdabc03763e6242f8b1d88e1d0edd224f7518, matching TASK.json and ATT-0029.",
+      "claim_id": "metadata",
+      "statement": "The attempt targets ATT-0029, TASK-M-0021, packet CASE-8-0-v2, and the exact task target.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "For the smooth dimension-21 stack, 2d-16=26, so the recorded duality gives W_{-16}H^{BM}_{16}(M_8) = W_{26}H^{26}(M_8)(21). Twisting Q(-13) by (21) gives Q(8), and codimension 13 corresponds to degree 26.",
+      "claim_id": "A1",
+      "statement": "The degree, weight, and Tate-twist conversion is correct.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "With rational coefficients and the stated CKgP cycle-class surjectivity, W_{26}H^{26} is a quotient of A^{13}. Thus the asserted Chow vanishing would force W_{26}H^{26}=0 and, by A1, the Borel\u2013Moore target to vanish. Zero is vacuously a direct sum of Q(8). This confirms only the conditional implication, not its hypotheses.",
+      "claim_id": "A3-A5",
+      "statement": "The formal conditional implication CKgP plus A^{13}(M_8)=0 implies vanishing of the target.",
+      "status": "confirmed"
+    },
+    {
+      "assessment": "Finite-stratification permanence supplies the sufficient direction used by the proof if all stack-level strata have CKgP. The attempt does not justify the stronger reverse implication in its stated biconditional. The reverse direction is not load-bearing.",
+      "claim_id": "A6",
+      "statement": "M_8 has CKgP if and only if every gonality stratum has CKgP.",
+      "status": "unresolved"
+    },
+    {
+      "assessment": "These are explicitly marked gaps. No complete stack-level quotient presentations, exhaustive splitting-type stratifications, CKgP proofs against arbitrary auxiliary Y, or proper-surjective descent arguments are supplied for the hyperelliptic, trigonal, tetragonal, and pentagonal strata. Published tautological Chow-generation or pushforward statements do not themselves prove CKgP.",
+      "claim_id": "A7-A12",
+      "statement": "Every gonality stratum has CKgP and therefore M_8 has CKgP.",
+      "status": "unresolved"
+    },
+    {
+      "assessment": "This conclusion depends on unresolved A7-A12, especially CKgP for the tetragonal and pentagonal Hurwitz loci. The attempt itself marks A13 and unconditional target vanishing as gaps.",
+      "claim_id": "A13",
+      "statement": "W_{-16}H^{BM}_{16}(M_8)=0, discharging the exact open input.",
+      "status": "unresolved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "extend-ckgp-or-gonality-stratification"
+      ],
+      "key": "m8-chow-generation-does-not-establish-ckgp",
+      "kind": "obstruction",
+      "statement": "For the genus-8 gonality approach, tautological Chow-generation or tautological pushforward results on Hurwitz loci do not establish CKgP; a proof must verify exterior-product surjectivity against arbitrary auxiliary quotient stacks on every stack-level stratum and justify the proper-surjective transfers.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0037",
+  "independent": true,
+  "packet_id": "CASE-8-0-v2",
+  "packet_sha256": "2e498aaa23793ebc2b23d9e0a42fdabc03763e6242f8b1d88e1d0edd224f7518",
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0029-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 2,
+  "scope_checks": [
+    "stack versus coarse moduli: no coarse-space substitution occurs in the duality calculation, but the required quotient-stack models and stack-level CKgP transfers are unresolved",
+    "rational versus integral coefficients: the argument consistently assumes rational Chow groups and rational cohomology; no integral conclusion is used",
+    "cohomology degree versus Borel\u2013Moore homology degree: confirmed as 26 versus 16 for dimension 21",
+    "Poincare duality and every Tate twist: confirmed; Q(-13)(21)=Q(8)",
+    "Gysin and Kunneth shifts: no Gysin or cohomological Kunneth computation is load-bearing; CKgP exterior products are instead left unproved",
+    "degeneration or spectral-sequence differentials: none are invoked in the conditional reduction",
+    "invariants versus coinvariants under graph automorphisms: no stable-graph decomposition is invoked for this exact open-stack lemma",
+    "semisimplification versus actual Hodge-structure isomorphism: no semisimplification argument is used; the conditional conclusion is actual vanishing",
+    "predicted motives used as unconditional theorems: CONJ-0001 is not used to prove the target",
+    "pure Tate silently upgraded to algebraic or tautological generation: the valid direction used is CKgP to algebraicity, but the gonality argument does not prove the converse upgrade from tautological Chow information to CKgP",
+    "omitted stable pairs: the exact artifact concerns only (8,0); the other six RED-0001 pairs are explicitly outside its scope and their omission does not repair or worsen this lemma's unresolved CKgP dependency"
+  ],
+  "strongest_attack": "The proof silently needs an upgrade from tautological Chow-generation and tautological pushforwards to stack-level CKgP, namely exterior-product surjectivity against every permitted auxiliary stack. That upgrade is neither a formal consequence of pure-Tate or tautological generation nor proved for the tetragonal and pentagonal Casnati\u2013Ekedahl strata. Consequently CKgP for M_8 and the final vanishing remain unresolved.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 8,
+    "n": 0,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "verdict": "incomplete"
+}

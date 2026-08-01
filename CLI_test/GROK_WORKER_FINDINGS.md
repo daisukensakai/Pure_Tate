@@ -3,7 +3,8 @@
 **Latest green gate run:** `CLI_test/results/grok_workers/20260801T043610527526Z`  
 **Probe runner:** `CLI_test/run_grok_worker_probes.py`  
 **Date:** 2026-08-01  
-**Harness status:** not modified (Phase 1 only)
+**Harness status:** integrated in `pure_tate/grok_workers.py` + `agents.py`
+(see `data/engines.json` `max_grok_workers` / `grok_workers_enabled`)
 
 ## Goal
 

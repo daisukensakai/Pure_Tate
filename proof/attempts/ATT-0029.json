@@ -1,0 +1,125 @@
+{
+  "approach_id": "extend-ckgp-or-gonality-stratification",
+  "argument_markdown": "## Setup and exact target\n\nFix the revision-2 packet data for the open moduli stack $\\mathcal{M}_8:=\\mathcal{M}_{8,0}$ of smooth genus-$8$ curves (no markings). Write $d:=\\dim\\mathcal{M}_8=3\\cdot 8-3=21$. The exact open-input target recorded by the packet and by `FND-0001` is\n\n$$\nW_{-16}H^{\\mathrm{BM}}_{16}(\\mathcal{M}_8)\\;\\cong\\; W_{26}H^{26}(\\mathcal{M}_8)(21),\n$$\n\nwith expected Tate type $\\mathbb{Q}(8)$ on the Borel\u2013Moore side, equivalently untwisted ordinary Tate type $\\mathbb{Q}(-13)$ and Chow codimension $13$ on the ordinary side.\n\nBy the low-homology induction of Canning\u2013Larson\u2013Payne (CLP) at compact degree $k=16$ (`THM-0003`, `THM-0004`, `RED-0001`), the only unresolved open pure-weight inputs at this degree are seven pairs $(g,n)$, one of which is $(8,0)$. The present note attempts only the $(8,0)$ base case, by extending the Chow\u2013K\u00fcnneth generation Property (CKgP) / gonality-stratification geometry beyond the published range of `THM-0005` (which stops at genus $7$).\n\n## Published inputs used\n\n- **CKgP package** (CLP \u00a74; Bae\u2013Schmitt/Totaro): a finite-type stack $X$ stratified by global quotients has the CKgP if $A_*(X)\\otimes A_*(Y)\\twoheadrightarrow A_*(X\\times Y)$ for every such $Y$. Opens, finite stratifications, proper surjective DM images, affine bundles, and Grassmann bundles preserve CKgP; $\\mathrm{BGL}_n$, $\\mathrm{BSL}_n$, $\\mathrm{BPGL}_n$ have the CKgP.\n- **Algebraicity of pure weight** (CLP Lemma 4.3 / Larson survey Lemma 2.10): if $X$ is open in a smooth proper DM stack over $\\mathbb{C}$ and $X$ has the CKgP, then the cycle class map\n  $$\n  A^*(X)\\twoheadrightarrow \\bigoplus_k W_k H^k(X)\n  $$\n  is surjective. In particular every pure-weight summand is algebraic (hence Tate in even degree).\n- **Tautological Chow ring of $\\mathcal{M}_8$** (Canning\u2013Larson, arXiv:2104.05820, Theorem 1.2): $A^*(\\mathcal{M}_8)=R^*(\\mathcal{M}_8)\\cong \\mathbb{Q}[\\kappa_1,\\kappa_2]/I_8$ for an explicit ideal $I_8$. By Faber\u2019s structure theorem for the tautological ring of $\\mathcal{M}_g$, this ring is Gorenstein with socle in codimension $g-2=6$, so\n  $$\n  A^i(\\mathcal{M}_8)=0\\qquad\\text{for all }i>6.\n  $$\n  In particular $A^{13}(\\mathcal{M}_8)=0$.\n- **Gonality stratification of $\\mathcal{M}_8$** (same paper): a general genus-$8$ curve has gonality $5$, and one has a closed filtration\n  $$\n  \\mathcal{M}_8^2\\subset\\mathcal{M}_8^3\\subset\\mathcal{M}_8^4\\subset\\mathcal{M}_8^5=\\mathcal{M}_8,\n  $$\n  where $\\mathcal{M}_8^k$ is the locus of curves of gonality at most $k$. Tautologicality of $A^*$ is proved by showing that classes supported on each successive difference push forward from tautological classes on the Hurwitz stacks $\\mathcal{H}_{4,8}$ and $\\mathcal{H}_{5,8}$, after excising lower-gonality preimages and analysing Casnati\u2013Ekedahl pair-splitting loci as quotient stacks.\n\nThe published CKgP table (`THM-0005`) records CKgP for $\\mathcal{M}_{g,n}$ only through genus $7$. The open input at $(8,0)$ is therefore precisely the missing CKgP statement for the unpointed stack $\\mathcal{M}_8$.\n\n## Conditional vanishing from CKgP\n\n**Claim (conditional).** Assume $\\mathcal{M}_8$ has the CKgP. Then\n$$\nW_{26}H^{26}(\\mathcal{M}_8)=0,\n$$\nhence $W_{-16}H^{\\mathrm{BM}}_{16}(\\mathcal{M}_8)=0$, which is of expected Tate type $\\mathbb{Q}(8)$ (the zero summand).\n\n*Proof of the conditional claim.* By CLP Lemma 4.3, CKgP implies surjectivity of the cycle class map onto pure-weight cohomology. Algebraic classes of codimension $i$ land in $W_{2i}H^{2i}$. Therefore $W_{26}H^{26}(\\mathcal{M}_8)$ is a quotient of $A^{13}(\\mathcal{M}_8)$. But $A^{13}(\\mathcal{M}_8)=0$ by the Canning\u2013Larson presentation and Faber\u2019s socle bound $g-2=6$. Poincar\u00e9 duality as in `FND-0001` then gives vanishing of the Borel\u2013Moore target. $\\square$\n\nThus it remains only to establish CKgP for $\\mathcal{M}_8$.\n\n## Gonality reduction for CKgP\n\nBy the stratification property of CKgP, $\\mathcal{M}_8$ has the CKgP if and only if each locally closed gonality stratum\n$$\n\\mathcal{M}_8^{k}\\setminus\\mathcal{M}_8^{k-1},\\qquad k=2,3,4,5,\n$$\nhas the CKgP (with $\\mathcal{M}_8^{1}:=\\emptyset$).\n\n### Hyperelliptic and trigonal strata ($k=2,3$)\n\nThe hyperelliptic locus $\\mathcal{M}_8^2$ is a finite quotient of a Hurwitz space of degree-$2$ covers of $\\mathbb{P}^1$, equivalently an open in a classifying stack of the form $[U/\\mathrm{PGL}_2]$ after removing a discriminant. Such stacks inherit CKgP from $\\mathrm{BPGL}_2$ by open and affine-bundle permanence (`[GAP-HYP]`: the precise quotient-stack model and the identification of the residual gerbe must be written with the same care as in the genus-$\\le 7$ treatments).\n\nFor the trigonal difference $\\mathcal{M}_8^3\\setminus\\mathcal{M}_8^2$, Patel\u2013Vakil type results give that $A^*$ is generated by the restriction of $\\kappa_1$ away from the hyperelliptic locus for $g\\neq 3$. The corresponding Hurwitz stack $\\mathcal{H}_{3,8}$ is again an open in a bundle over a classifying stack of type $\\mathrm{BPGL}_2$ or $\\mathrm{BSL}_2$, hence has CKgP; proper surjectivity onto the trigonal difference transfers CKgP (`[GAP-TRI]`).\n\n### Tetragonal stratum ($k=4$)\n\nLet $\\beta:\\mathcal{H}_{4,8}\\to\\mathcal{M}_8$ be the forgetful map from the (unparametrized) Hurwitz stack of degree-$4$ covers, and write\n$$\n\\mathcal{H}_{4,8}^\\Diamond:=\\mathcal{H}_{4,8}\\setminus\\beta^{-1}(\\mathcal{M}_8^3).\n$$\nProper surjectivity of $\\beta$ onto $\\mathcal{M}_8^4\\setminus\\mathcal{M}_8^3$ reduces CKgP of the tetragonal difference to CKgP of $\\mathcal{H}_{4,8}^\\Diamond$.\n\nCanning\u2013Larson stratify $\\mathcal{H}_{4,8}$ by Casnati\u2013Ekedahl pair-splitting types $(E_\\alpha,F_\\alpha)$ of the Tschirnhausen bundle and the syzygy bundle on the universal $\\mathbb{P}^1$-fibration. Each pair-splitting locus $\\Sigma_{\\vec e,\\vec f}$ is presented as a global quotient stack associated to\n$$\n\\mathrm{B}\\!\\operatorname{Aut}(\\mathcal{O}(\\vec e))\\times_{\\mathrm{BSL}_2}\\mathrm{B}\\!\\operatorname{Aut}(\\mathcal{O}(\\vec f))\n$$\nwith an open condition that the section of $\\gamma^*\\mathcal{O}(\\vec f)\\otimes\\mathcal{O}_{\\mathbb{P}E^\\vee}(2)$ define a smooth irreducible curve of gonality exactly $4$. Affine-bundle presentations of $\\mathrm{B}\\!\\operatorname{Aut}(\\mathcal{O}(\\vec e))$ over products of $\\mathrm{BGL}$ stacks, together with open permanence, imply that each such $\\Sigma_{\\vec e,\\vec f}$ has the CKgP (`[GAP-TET-1]`: check that every \u201cbad\u201d pair type either lies in $\\beta^{-1}(\\mathcal{M}_8^3)$ or occurs in expected codimension as a single splitting locus so that the closed inclusion into $\\mathcal{H}_{4,8}^\\Diamond$ does not destroy CKgP under finite stratification).\n\nCanning\u2013Larson already show that the largest (balanced) union of pair types has Chow ring generated by Casnati\u2013Ekedahl classes and that residual unbalanced types for $g=8$ are manageable (no bielliptic obstruction of van Zelm type, which first appears at $g=12$). The same geometric control is exactly what is needed for CKgP, but the published write-up tracks only generators of $A^*$, not the exterior-product surjectivity against arbitrary $Y$ (`[GAP-TET-2]`).\n\n### Pentagonal stratum ($k=5$)\n\nThe general curve is pentagonal. The forgetful map $\\mathcal{H}_{5,8}\\to\\mathcal{M}_8$ is dominant, and after removing $\\beta^{-1}(\\mathcal{M}_8^4)$ one obtains a proper surjection onto $\\mathcal{M}_8\\setminus\\mathcal{M}_8^4$. Pair-splitting loci for degree-$5$ Casnati\u2013Ekedahl data are again quotient stacks built from $\\mathrm{B}\\!\\operatorname{Aut}$ of split bundles and open conditions in the linear system of equations cutting the curve in the associated scroll. Canning\u2013Larson prove that classes supported on each such locus push forward to tautological classes on $\\mathcal{M}_8$; the same presentations should give CKgP by the classifying-stack and Grassmann-bundle permanence (`[GAP-PEN]`).\n\n### Assembly\n\nIf `[GAP-HYP]`\u2013`[GAP-PEN]` are filled, every gonality stratum of $\\mathcal{M}_8$ has the CKgP, hence so does $\\mathcal{M}_8$. The conditional vanishing claim then discharges the exact open input:\n$$\nW_{-16}H^{\\mathrm{BM}}_{16}(\\mathcal{M}_8)=0=\\bigoplus \\mathbb{Q}(8).\n$$\n\n## What this does *not* claim\n\n- Completeness is not claimed: the CKgP upgrades for tetragonal and pentagonal pair-splitting loci remain incomplete relative to the published Canning\u2013Larson analysis (which establishes $A^*=R^*$, not exterior-product generation).\n- No appeal is made to point counts, semisimplifications of Galois representations, or perfectness of tautological pairings on $\\overline{\\mathcal{M}}_{8}$. The only arithmetic input is the algebraic presentation $A^*(\\mathcal{M}_8)=R^*(\\mathcal{M}_8)$ with known socle.\n- The argument does not produce CKgP for the pointed spaces $\\mathcal{M}_{8,1}$ or $\\mathcal{M}_{8,2}$, which remain separate base cases in `RED-0001`.\n- Even after vanishing of the open pure-weight quotient, the full compactified statement $H^{16}(\\overline{\\mathcal{M}}_{8})\\cong\\bigoplus\\mathbb{Q}(-8)$ still requires the global STE/induction of CLP (already available through degree $14$ by `THM-0002`, and depending on all seven open inputs at degree $16$).\n\n## Status of the argument\n\nThe logical skeleton is complete: **CKgP for $\\mathcal{M}_8$ $\\Rightarrow$ vanishing of the exact packet target**. The geometric work needed to prove CKgP is the published gonality/Hurwitz stratification of Canning\u2013Larson, re-read with the CKgP permanence lemmas in place of tautological-generation statements. That re-reading is not fully carried out here; the argument is therefore proposed, not claimed complete.",
+  "assumptions": [
+    "All Chow groups and cohomology groups are with rational coefficients.",
+    "CKgP permanence lemmas of CLP Proposition 4.2 / Bae\u2013Schmitt apply to the Deligne\u2013Mumford stacks and global quotient presentations appearing in the Canning\u2013Larson analysis of H_{4,8} and H_{5,8}.",
+    "Faber\u2019s socle theorem for R^*(M_g) applies to the Canning\u2013Larson identification A^*(M_8)=R^*(M_8), giving A^i(M_8)=0 for i>6.",
+    "The Poincar\u00e9 duality / weight identification of FND-0001 is used exactly as recorded in the packet (no re-derivation of duality conventions)."
+  ],
+  "claims": [
+    {
+      "id": "A1",
+      "statement": "For d=dim M_8=21, Poincar\u00e9 duality identifies the packet target as W_{-16} H^{BM}_{16}(M_8) \u2245 W_{26} H^{26}(M_8)(21), with expected BM Tate type Q(8) and ordinary untwisted Tate type Q(-13) (Chow codimension 13).",
+      "status": "proved"
+    },
+    {
+      "id": "A2",
+      "statement": "By the CLP low-homology induction at compact degree 16, the pair (g,n)=(8,0) is one of the seven open pure-weight base cases required for H^{16}(Mbar_{g,n}) to be pure Tate of type \u2295 Q(-8).",
+      "status": "proved"
+    },
+    {
+      "id": "A3",
+      "statement": "Canning\u2013Larson prove A^*(M_8)=R^*(M_8)\u2245Q[\u03ba_1,\u03ba_2]/I_8. By Faber\u2019s socle theorem for the tautological ring of M_g, this ring vanishes in codimension > g-2=6, so A^{13}(M_8)=0.",
+      "status": "proved"
+    },
+    {
+      "id": "A4",
+      "statement": "If X is open in a smooth proper DM stack over C and X has the CKgP, then the cycle class map A^*(X)\u2192\u2295_k W_k H^k(X) is surjective (CLP Lemma 4.3). In particular W_{2i} H^{2i}(X) is a quotient of A^i(X).",
+      "status": "proved"
+    },
+    {
+      "id": "A5",
+      "statement": "Conditional claim: if M_8 has the CKgP, then W_{26} H^{26}(M_8)=0 (since A^{13}(M_8)=0), hence W_{-16} H^{BM}_{16}(M_8)=0, which is of Tate type \u2295 Q(8).",
+      "status": "proved"
+    },
+    {
+      "id": "A6",
+      "statement": "M_8 has the CKgP if and only if each gonality stratum M_8^k \\ M_8^{k-1} for k=2,3,4,5 has the CKgP (finite-stratification permanence).",
+      "status": "proved"
+    },
+    {
+      "id": "A7",
+      "statement": "The hyperelliptic locus M_8^2 has the CKgP, via a quotient-stack / Hurwitz presentation inheriting CKgP from BPGL_2.",
+      "status": "gap"
+    },
+    {
+      "id": "A8",
+      "statement": "The trigonal difference M_8^3 \\ M_8^2 has the CKgP, via the degree-3 Hurwitz stack H_{3,8} and proper surjectivity onto the difference.",
+      "status": "gap"
+    },
+    {
+      "id": "A9",
+      "statement": "Every Casnati\u2013Ekedahl pair-splitting locus of H_{4,8}^\u2666 := H_{4,8} \\ \u03b2^{-1}(M_8^3) has the CKgP (quotient-stack presentation by B Aut of split bundles, open and affine-bundle permanence), and residual bad types either lie in the lower-gonality preimage or do not destroy CKgP under finite stratification.",
+      "status": "gap"
+    },
+    {
+      "id": "A10",
+      "statement": "Consequently H_{4,8}^\u2666 has the CKgP, and by proper surjectivity so does the tetragonal difference M_8^4 \\ M_8^3.",
+      "status": "gap"
+    },
+    {
+      "id": "A11",
+      "statement": "Every Casnati\u2013Ekedahl pair-splitting locus of H_{5,8} \\ \u03b2^{-1}(M_8^4) has the CKgP, and the pentagonal difference M_8 \\ M_8^4 has the CKgP by proper surjectivity.",
+      "status": "gap"
+    },
+    {
+      "id": "A12",
+      "statement": "Assembling A7\u2013A11, M_8 has the CKgP.",
+      "status": "gap"
+    },
+    {
+      "id": "A13",
+      "statement": "Combining A5 and A12: W_{-16} H^{BM}_{16}(M_8)=0, discharging the exact (8,0) open input of RED-0001 at degree 16.",
+      "status": "gap"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-01",
+  "engine": "grok",
+  "gap_markers": [
+    "GAP-HYP: CKgP for the hyperelliptic locus M_8^2 via an explicit quotient-stack model",
+    "GAP-TRI: CKgP for the trigonal difference M_8^3 \\ M_8^2 via H_{3,8}",
+    "GAP-TET-1: CKgP for each Casnati\u2013Ekedahl pair-splitting locus of H_{4,8}^\u2666, including classification of residual bad types",
+    "GAP-TET-2: upgrade of Canning\u2013Larson\u2019s tautological-generation statements on H_{4,8}^\u2666 to exterior-product CKgP against arbitrary Y",
+    "GAP-PEN: CKgP for pair-splitting loci of H_{5,8} \\ \u03b2^{-1}(M_8^4) and transfer to the general pentagonal stratum",
+    "GAP-ASM: assembly of gonality strata into CKgP for M_8 (depends on previous gaps)",
+    "GAP-FINAL: unconditional vanishing of W_{-16} H^{BM}_{16}(M_8) (depends on CKgP for M_8)"
+  ],
+  "id": "ATT-0029",
+  "packet_id": "CASE-8-0-v2",
+  "packet_path": "proof/packets/generated/CASE-8-0-v2.md",
+  "packet_sha256": "2e498aaa23793ebc2b23d9e0a42fdabc03763e6242f8b1d88e1d0edd224f7518",
+  "schema_version": 2,
+  "source_claim_ids": [
+    "RED-0001",
+    "FND-0001",
+    "THM-0001",
+    "THM-0002",
+    "THM-0003",
+    "THM-0004",
+    "THM-0005",
+    "OBS-0001",
+    "CONJ-0001"
+  ],
+  "source_ids": [],
+  "status": "proposed",
+  "summary": "Proposed reduction of the (8,0) degree-16 open input to CKgP for M_8: Canning\u2013Larson give A^*(M_8)=R^*(M_8) with Faber socle in codimension 6, so A^{13}=0; CKgP would force W_{26}H^{26}(M_8)=0 and hence vanishing of W_{-16}H^{BM}_{16}(M_8). The remaining work is to upgrade the published gonality/Hurwitz stratification of M_8 from tautological Chow to CKgP; that upgrade is outlined but not completed.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 8,
+    "n": 0,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-M-0021"
+}

@@ -72,6 +72,7 @@ class AgentAdapterTests(unittest.TestCase):
             set(tools.split(",")),
             {"read_file", "grep", "list_dir"},
         )
+        self.assertNotIn("spawn_subagent", tools.split(","))
         self.assertIn("--disallowed-tools", command)
         denied = command[command.index("--disallowed-tools") + 1]
         self.assertEqual(
@@ -97,6 +98,57 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertEqual(
             set(offline_tools.split(",")), {"read_file", "grep", "list_dir"}
         )
+
+    def test_grok_argv_with_workers_uses_bypass_and_mcp_meta_tools(self):
+        from pure_tate.grok_workers import WorkerSession
+        from pathlib import Path
+
+        session = WorkerSession(
+            enabled=True,
+            max_workers=4,
+            allow_web=False,
+            family="grok",
+            results_dir=Path("/tmp/pure-tate-workers"),
+            server_command=["uv", "run", "--with", "mcp", "python", "x"],
+        )
+        command = _engine_argv("grok", "prompt", workers=session)
+        self.assertEqual(
+            command[command.index("--permission-mode") + 1], "bypassPermissions"
+        )
+        tools = set(command[command.index("--tools") + 1].split(","))
+        self.assertTrue({"read_file", "grep", "list_dir", "search_tool", "use_tool"}.issubset(tools))
+        self.assertNotIn("spawn_subagent", tools)
+        self.assertNotIn("run_terminal_command", tools)
+        self.assertNotIn("write", tools)
+
+    def test_claude_argv_with_workers_attaches_mcp(self):
+        from pure_tate.grok_workers import WorkerSession
+        from pathlib import Path
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as directory:
+            mcp_path = Path(directory) / "mcp.json"
+            mcp_path.write_text("{}", encoding="utf-8")
+            session = WorkerSession(
+                enabled=True,
+                max_workers=4,
+                allow_web=False,
+                family="claude",
+                results_dir=Path(directory) / "workers",
+                mcp_config_path=mcp_path,
+                server_command=["uv", "run", "python", "x"],
+            )
+            command = _engine_argv("claude", "prompt", workers=session)
+        self.assertEqual(
+            command[command.index("--permission-mode") + 1], "bypassPermissions"
+        )
+        self.assertIn("--mcp-config", command)
+        self.assertIn("--strict-mcp-config", command)
+        self.assertIn(
+            "mcp__grok-workers__dispatch_grok_worker",
+            command,
+        )
+        self.assertIn("Bash", command[command.index("--disallowedTools") :])
 
     def test_grok_text_envelope_is_unwrapped(self):
         raw = json.dumps(
