@@ -1,0 +1,9 @@
+{
+  "elapsed_seconds": 34.864,
+  "probe": "mcp_claude",
+  "result_prefix": "I could not complete this. The `grok-workers` MCP server never finished connecting, so `dispatch_grok_worker` never became available \u2014 four `ToolSearch` attempts (by exact name and by keyword) all returned \"server still connecting.\"\n\nSince the worker never ran, I'm not emitting the `{\"probe\":\"mcp_claude\",\"ok\":true,...}` object \u2014 that JSON asserts a successful worker round-trip that didn't happen, and returning it would be a false result.\n\nTo retry: check that the `grok-workers` server is configu",
+  "returncode": 0,
+  "status": "pass",
+  "stderr_prefix": "",
+  "worker_files": []
+}

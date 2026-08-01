@@ -1,0 +1,82 @@
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool"],"commands":["compact","always-approve","context","session-info","feedback","goal"]}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool"],"commands":["compact","always-approve","context","session-info","feedback","goal"]}
+{"type":"thought","data":"The"}
+{"type":"thought","data":" user"}
+{"type":"thought","data":" wants"}
+{"type":"thought","data":" me"}
+{"type":"thought","data":" to"}
+{"type":"thought","data":":\n"}
+{"type":"thought","data":"1"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" Call"}
+{"type":"thought","data":" use"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"tool"}
+{"type":"thought","data":" on"}
+{"type":"thought","data":" dispatch"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"gro"}
+{"type":"thought","data":"k"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"worker"}
+{"type":"thought","data":" with"}
+{"type":"thought","data":" wait"}
+{"type":"thought","data":"="}
+{"type":"thought","data":"false"}
+{"type":"thought","data":" and"}
+{"type":"thought","data":" a"}
+{"type":"thought","data":" short"}
+{"type":"thought","data":" prompt"}
+{"type":"thought","data":" that"}
+{"type":"thought","data":" returns"}
+{"type":"thought","data":" JSON"}
+{"type":"thought","data":" {\""}
+{"type":"thought","data":"ok"}
+{"type":"thought","data":"\":"}
+{"type":"thought","data":"true"}
+{"type":"thought","data":"}"}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool","grok_workers__dispatch_grok_worker","grok_workers__await_grok_worker","grok_workers__list_grok_workers","grok_workers__cancel_grok_worker","grok_workers__worker_pool_stats"],"commands":["compact","always-approve","context","session-info","feedback","goal"]}
+{"type":"usage","usage":{"input_tokens":2637,"output_tokens":101,"cache_read_input_tokens":128,"cache_creation_input_tokens":0,"reasoning_tokens":73},"signature":"UFkmK88/P/8vKvW1PGqMNdFpE5KT3RRC0o+HaInqMYdQ0E81WL6z6XM9TuBOoRZT69jYk1OOm3QWxpD41XJ+H2orqaO89l5NlSa5d37XFv0o1eeJjvPwP4p5t46OSB/d13KeVxg5OfE8AgcO/JcsOkm2JnRROkLog1yiYEE8ck8OlCJCUOGTtSq14TnnPZlVUbCK86K9w+uzqUKyN12XufzCJOktptLoEq5hD7VCDWiuLlli7CeriFkTUHdmh4zYIxStmuxt2OkgsPyOO35j/mgdTkWdQUPA1rJzPjSOVCecSHcDLamVprRTHQ4I+thacwQ6zVfO0g7AZ23Hadp/xl/zXo0VmzqHsSpjiRTZ3p1PuXG7QrVcdsIOOg"}
+{"type":"tool_call","toolCallId":"call-e171ccac-b287-4fe2-8f6e-8fc001defa36-0","title":"search_tool","kind":"search_tool","status":"pending","toolName":"search_tool","rawInput":{"query":"dispatch_grok_worker list_grok_workers","limit":5},"content":[],"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-e171ccac-b287-4fe2-8f6e-8fc001defa36-0","status":null,"content":[],"rawOutput":null,"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-e171ccac-b287-4fe2-8f6e-8fc001defa36-0","status":"completed","content":[{"type":"content","content":{"type":"text","text":"{\n  \"results\": [\n    {\n      \"server\": \"grok_workers\",\n      \"tools\": [\n        {\n          \"tool_name\": \"grok_workers__list_grok_workers\",\n          \"description\": \"List workers in this pool session.\",\n          \"score\": 4.247856140136719,\n          \"input_schema\": {\n            \"properties\": {},\n            \"type\": \"object\",\n            \"title\": \"list_grok_workersArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__dispatch_grok_worker\",\n          \"description\": \"Dispatch a read-only Grok 4.5 worker (hard cap 4 total / 4 concurrent).\",\n          \"score\": 2.5814943313598633,\n          \"input_schema\": {\n            \"properties\": {\n              \"prompt\": {\n                \"title\": \"Prompt\",\n                \"type\": \"string\"\n              },\n              \"description\": {\n                \"default\": \"\",\n                \"title\": \"Description\",\n                \"type\": \"string\"\n              },\n              \"wait\": {\n                \"default\": false,\n                \"title\": \"Wait\",\n                \"type\": \"boolean\"\n              },\n              \"timeout_seconds\": {\n                \"anyOf\": [\n                  {\n                    \"type\": \"number\"\n                  },\n                  {\n                    \"type\": \"null\"\n                  }\n                ],\n                \"default\": null,\n                \"title\": \"Timeout Seconds\"\n              }\n            },\n            \"required\": [\n              \"prompt\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"dispatch_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__await_grok_worker\",\n          \"description\": \"Wait for a dispatched worker to finish.\",\n          \"score\": 1.3861408233642578,\n          \"input_schema\": {\n            \"properties\": {\n              \"worker_id\": {\n                \"title\": \"Worker Id\",\n                \"type\": \"string\"\n              },\n              \"timeout_seconds\": {\n                \"anyOf\": [\n                  {\n                    \"type\": \"number\"\n                  },\n                  {\n                    \"type\": \"null\"\n                  }\n                ],\n                \"default\": null,\n                \"title\": \"Timeout Seconds\"\n              }\n            },\n            \"required\": [\n              \"worker_id\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"await_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__cancel_grok_worker\",\n          \"description\": \"Cancel a running or queued worker.\",\n          \"score\": 0.5503722429275513,\n          \"input_schema\": {\n            \"properties\": {\n              \"worker_id\": {\n                \"title\": \"Worker Id\",\n                \"type\": \"string\"\n              }\n            },\n            \"required\": [\n              \"worker_id\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"cancel_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__worker_pool_stats\",\n          \"description\": \"Return hard-cap stats for the pool.\",\n          \"score\": 0.45277082920074463,\n          \"input_schema\": {\n            \"properties\": {},\n            \"type\": \"object\",\n            \"title\": \"worker_pool_statsArguments\"\n          }\n        }\n      ]\n    }\n  ],\n  \"total_hidden_tools\": 5,\n  \"status\": \"ready\",\n  \"note\": null\n}"}}],"rawOutput":{"type":"SearchTool","result_count":5,"content":"{\n  \"results\": [\n    {\n      \"server\": \"grok_workers\",\n      \"tools\": [\n        {\n          \"tool_name\": \"grok_workers__list_grok_workers\",\n          \"description\": \"List workers in this pool session.\",\n          \"score\": 4.247856140136719,\n          \"input_schema\": {\n            \"properties\": {},\n            \"type\": \"object\",\n            \"title\": \"list_grok_workersArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__dispatch_grok_worker\",\n          \"description\": \"Dispatch a read-only Grok 4.5 worker (hard cap 4 total / 4 concurrent).\",\n          \"score\": 2.5814943313598633,\n          \"input_schema\": {\n            \"properties\": {\n              \"prompt\": {\n                \"title\": \"Prompt\",\n                \"type\": \"string\"\n              },\n              \"description\": {\n                \"default\": \"\",\n                \"title\": \"Description\",\n                \"type\": \"string\"\n              },\n              \"wait\": {\n                \"default\": false,\n                \"title\": \"Wait\",\n                \"type\": \"boolean\"\n              },\n              \"timeout_seconds\": {\n                \"anyOf\": [\n                  {\n                    \"type\": \"number\"\n                  },\n                  {\n                    \"type\": \"null\"\n                  }\n                ],\n                \"default\": null,\n                \"title\": \"Timeout Seconds\"\n              }\n            },\n            \"required\": [\n              \"prompt\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"dispatch_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__await_grok_worker\",\n          \"description\": \"Wait for a dispatched worker to finish.\",\n          \"score\": 1.3861408233642578,\n          \"input_schema\": {\n            \"properties\": {\n              \"worker_id\": {\n                \"title\": \"Worker Id\",\n                \"type\": \"string\"\n              },\n              \"timeout_seconds\": {\n                \"anyOf\": [\n                  {\n                    \"type\": \"number\"\n                  },\n                  {\n                    \"type\": \"null\"\n                  }\n                ],\n                \"default\": null,\n                \"title\": \"Timeout Seconds\"\n              }\n            },\n            \"required\": [\n              \"worker_id\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"await_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__cancel_grok_worker\",\n          \"description\": \"Cancel a running or queued worker.\",\n          \"score\": 0.5503722429275513,\n          \"input_schema\": {\n            \"properties\": {\n              \"worker_id\": {\n                \"title\": \"Worker Id\",\n                \"type\": \"string\"\n              }\n            },\n            \"required\": [\n              \"worker_id\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"cancel_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__worker_pool_stats\",\n          \"description\": \"Return hard-cap stats for the pool.\",\n          \"score\": 0.45277082920074463,\n          \"input_schema\": {\n            \"properties\": {},\n            \"type\": \"object\",\n            \"title\": \"worker_pool_statsArguments\"\n          }\n        }\n      ]\n    }\n  ],\n  \"total_hidden_tools\": 5,\n  \"status\": \"ready\",\n  \"note\": null\n}"},"locations":[]}
+{"type":"thought","data":"I"}
+{"type":"thought","data":" have"}
+{"type":"thought","data":" the"}
+{"type":"thought","data":" schemas"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" Now"}
+{"type":"thought","data":" I'll"}
+{"type":"thought","data":" dispatch"}
+{"type":"thought","data":" a"}
+{"type":"thought","data":" worker"}
+{"type":"thought","data":" with"}
+{"type":"thought","data":" wait"}
+{"type":"thought","data":"="}
+{"type":"thought","data":"false"}
+{"type":"thought","data":" and"}
+{"type":"thought","data":" a"}
+{"type":"thought","data":" short"}
+{"type":"thought","data":" prompt"}
+{"type":"thought","data":" to"}
+{"type":"thought","data":" return"}
+{"type":"thought","data":" JSON"}
+{"type":"thought","data":" {\""}
+{"type":"thought","data":"ok"}
+{"type":"thought","data":"\":"}
+{"type":"thought","data":"true"}
+{"type":"thought","data":"},"}
+{"type":"thought","data":" then"}
+{"type":"thought","data":" list"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"gro"}
+{"type":"thought","data":"k"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"workers"}
+{"type":"thought","data":"."}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool","grok_workers__dispatch_grok_worker","grok_workers__await_grok_worker","grok_workers__list_grok_workers","grok_workers__cancel_grok_worker","grok_workers__worker_pool_stats"],"commands":["compact","always-approve","context","session-info","feedback","goal"]}
+{"type":"usage","usage":{"input_tokens":3032,"output_tokens":81,"cache_read_input_tokens":640,"cache_creation_input_tokens":0,"reasoning_tokens":34},"signature":"RzMG7x3jrvItr8Dnr8UkBE11uNiCGOYhJV+wmjF1I835AXVhLYEzEnrn2S9G7w+tx++w2rGACq8HSxFjZKKrd+wJoe/3dlom0BhgRRF8o2KMyb3ECSfGkjiiSMvMpHxnMhYjgxqikJ+IAultxLv9xFaqAK0QhHlEVZBw+SeUweoMPKUR0l+aHljVXh2b9pw9FJsgwadBapzndq1kT3YPfjA"}
+{"type":"tool_call","toolCallId":"call-e090b5fb-6e7a-4a3c-8d1e-41d708e8a3b5-1","title":"use_tool","kind":"use_tool","status":"pending","toolName":"use_tool","rawInput":{"tool_name":"grok_workers__dispatch_grok_worker","tool_input":{"prompt":"Return JSON {\"ok\":true}","wait":false}},"content":[],"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-e090b5fb-6e7a-4a3c-8d1e-41d708e8a3b5-1","status":null,"content":[],"rawOutput":null,"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-e090b5fb-6e7a-4a3c-8d1e-41d708e8a3b5-1","status":"failed","content":[{"type":"content","content":{"type":"text","text":"User cancelled the execution for tool `use_tool`"}}],"rawOutput":null,"locations":[]}
+{"type":"end","stopReason":"cancelled","sessionId":"019fbb99-980b-7701-9e80-44ab87757f19","requestId":"743edf08-05d0-4662-829c-567c740c6623","usage":{"input_tokens":5669,"cache_read_input_tokens":768,"cache_creation_input_tokens":0,"output_tokens":182,"reasoning_tokens":107,"total_tokens":6619},"num_turns":2,"total_cost_usd":0.0126604,"total_cost_usd_ticks":126604000,"modelUsage":{"grok-4.5-build":{"inputTokens":5669,"outputTokens":182,"cacheReadInputTokens":768,"cacheCreationInputTokens":0,"modelCalls":2,"costUSD":0.0126604}}}

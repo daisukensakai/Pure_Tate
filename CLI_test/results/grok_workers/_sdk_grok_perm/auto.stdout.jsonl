@@ -1,0 +1,195 @@
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool"],"commands":["compact","always-approve","context","session-info","feedback","goal","build-with-ai","code-review","create-skill","create-workflow","design","docx","execute-plan","game-animation-frames","game-asset-core","game-character-consistency","game-tilesets","game-ui-icons","bundled:imagine","implement","pdf","pptx","pr-babysit","resume-claude","resume-codex","resume-cursor","review"]}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool"],"commands":["compact","always-approve","context","session-info","feedback","goal","build-with-ai","code-review","create-skill","create-workflow","design","docx","execute-plan","game-animation-frames","game-asset-core","game-character-consistency","game-tilesets","game-ui-icons","bundled:imagine","implement","pdf","pptx","pr-babysit","resume-claude","resume-codex","resume-cursor","review"]}
+{"type":"thought","data":"The"}
+{"type":"thought","data":" user"}
+{"type":"thought","data":" wants"}
+{"type":"thought","data":" me"}
+{"type":"thought","data":" to"}
+{"type":"thought","data":":\n"}
+{"type":"thought","data":"1"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" Call"}
+{"type":"thought","data":" use"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"tool"}
+{"type":"thought","data":" on"}
+{"type":"thought","data":" dispatch"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"gro"}
+{"type":"thought","data":"k"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"worker"}
+{"type":"thought","data":" with"}
+{"type":"thought","data":" wait"}
+{"type":"thought","data":"="}
+{"type":"thought","data":"false"}
+{"type":"thought","data":" and"}
+{"type":"thought","data":" a"}
+{"type":"thought","data":" short"}
+{"type":"thought","data":" prompt"}
+{"type":"thought","data":" to"}
+{"type":"thought","data":" return"}
+{"type":"thought","data":" JSON"}
+{"type":"thought","data":" {\""}
+{"type":"thought","data":"ok"}
+{"type":"thought","data":"\":"}
+{"type":"thought","data":"true"}
+{"type":"thought","data":"}"}
+{"type":"text","data":"I'll"}
+{"type":"text","data":" look"}
+{"type":"text","data":" up"}
+{"type":"text","data":" the"}
+{"type":"text","data":" gro"}
+{"type":"text","data":"k"}
+{"type":"text","data":" worker"}
+{"type":"text","data":" tool"}
+{"type":"text","data":" schemas"}
+{"type":"text","data":","}
+{"type":"text","data":" then"}
+{"type":"text","data":" dispatch"}
+{"type":"text","data":" a"}
+{"type":"text","data":" worker"}
+{"type":"text","data":" and"}
+{"type":"text","data":" list"}
+{"type":"text","data":" workers"}
+{"type":"text","data":" as"}
+{"type":"text","data":" requested"}
+{"type":"text","data":"."}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool","grok_workers__dispatch_grok_worker","grok_workers__await_grok_worker","grok_workers__list_grok_workers","grok_workers__cancel_grok_worker","grok_workers__worker_pool_stats"],"commands":["compact","always-approve","context","session-info","feedback","goal","build-with-ai","code-review","create-skill","create-workflow","design","docx","execute-plan","game-animation-frames","game-asset-core","game-character-consistency","game-tilesets","game-ui-icons","bundled:imagine","implement","pdf","pptx","pr-babysit","resume-claude","resume-codex","resume-cursor","review"]}
+{"type":"usage","usage":{"input_tokens":3833,"output_tokens":121,"cache_read_input_tokens":1408,"cache_creation_input_tokens":0,"reasoning_tokens":73},"signature":"U1xPb6gvSLx5pMMbfVnfK3oLE8/PP+6D8NlF6S9MABDpf6EZgYnfejD28/XSa26Bbuiq7dR+CT36gR/9mlDux1jyGHPkQQc74dCCsIyU3GgXwQjf0cRsSZ/w9r6IcqyW+DTEODHEHjayVhYW82RFjCNaHCoRyG9BP+Ov6o5N18sMxbb0eWkaHSSOk20wfKmnRUsspD89FXJDvH4QU/lAWro7Y3RiGjhFxOhzHkv4LFyeE8bNeJnyhPx+w+Q/hM2T1mthHTRBDX1rdxBoIwIV4qrmx85pmkGKVxWfmgYR5/J9nqsooh+m9JST4EZ5eannwguPUceS39bYkjUaBr8DZOKdKvQ9HYqZGRSeQ7A8VRV192unew"}
+{"type":"tool_call","toolCallId":"call-24d75a78-3631-4cda-85f4-04e0f394106a-0","title":"search_tool","kind":"search_tool","status":"pending","toolName":"search_tool","rawInput":{"query":"dispatch_grok_worker list_grok_workers","limit":5},"content":[],"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-24d75a78-3631-4cda-85f4-04e0f394106a-0","status":null,"content":[],"rawOutput":null,"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-24d75a78-3631-4cda-85f4-04e0f394106a-0","status":"completed","content":[{"type":"content","content":{"type":"text","text":"{\n  \"results\": [\n    {\n      \"server\": \"grok_workers\",\n      \"tools\": [\n        {\n          \"tool_name\": \"grok_workers__list_grok_workers\",\n          \"description\": \"List workers in this pool session.\",\n          \"score\": 4.247856140136719,\n          \"input_schema\": {\n            \"properties\": {},\n            \"type\": \"object\",\n            \"title\": \"list_grok_workersArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__dispatch_grok_worker\",\n          \"description\": \"Dispatch a read-only Grok 4.5 worker (hard cap 4 total / 4 concurrent).\",\n          \"score\": 2.5814943313598633,\n          \"input_schema\": {\n            \"properties\": {\n              \"prompt\": {\n                \"title\": \"Prompt\",\n                \"type\": \"string\"\n              },\n              \"description\": {\n                \"default\": \"\",\n                \"title\": \"Description\",\n                \"type\": \"string\"\n              },\n              \"wait\": {\n                \"default\": false,\n                \"title\": \"Wait\",\n                \"type\": \"boolean\"\n              },\n              \"timeout_seconds\": {\n                \"anyOf\": [\n                  {\n                    \"type\": \"number\"\n                  },\n                  {\n                    \"type\": \"null\"\n                  }\n                ],\n                \"default\": null,\n                \"title\": \"Timeout Seconds\"\n              }\n            },\n            \"required\": [\n              \"prompt\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"dispatch_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__await_grok_worker\",\n          \"description\": \"Wait for a dispatched worker to finish.\",\n          \"score\": 1.3861408233642578,\n          \"input_schema\": {\n            \"properties\": {\n              \"worker_id\": {\n                \"title\": \"Worker Id\",\n                \"type\": \"string\"\n              },\n              \"timeout_seconds\": {\n                \"anyOf\": [\n                  {\n                    \"type\": \"number\"\n                  },\n                  {\n                    \"type\": \"null\"\n                  }\n                ],\n                \"default\": null,\n                \"title\": \"Timeout Seconds\"\n              }\n            },\n            \"required\": [\n              \"worker_id\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"await_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__cancel_grok_worker\",\n          \"description\": \"Cancel a running or queued worker.\",\n          \"score\": 0.5503722429275513,\n          \"input_schema\": {\n            \"properties\": {\n              \"worker_id\": {\n                \"title\": \"Worker Id\",\n                \"type\": \"string\"\n              }\n            },\n            \"required\": [\n              \"worker_id\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"cancel_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__worker_pool_stats\",\n          \"description\": \"Return hard-cap stats for the pool.\",\n          \"score\": 0.45277082920074463,\n          \"input_schema\": {\n            \"properties\": {},\n            \"type\": \"object\",\n            \"title\": \"worker_pool_statsArguments\"\n          }\n        }\n      ]\n    }\n  ],\n  \"total_hidden_tools\": 5,\n  \"status\": \"ready\",\n  \"note\": null\n}"}}],"rawOutput":{"type":"SearchTool","result_count":5,"content":"{\n  \"results\": [\n    {\n      \"server\": \"grok_workers\",\n      \"tools\": [\n        {\n          \"tool_name\": \"grok_workers__list_grok_workers\",\n          \"description\": \"List workers in this pool session.\",\n          \"score\": 4.247856140136719,\n          \"input_schema\": {\n            \"properties\": {},\n            \"type\": \"object\",\n            \"title\": \"list_grok_workersArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__dispatch_grok_worker\",\n          \"description\": \"Dispatch a read-only Grok 4.5 worker (hard cap 4 total / 4 concurrent).\",\n          \"score\": 2.5814943313598633,\n          \"input_schema\": {\n            \"properties\": {\n              \"prompt\": {\n                \"title\": \"Prompt\",\n                \"type\": \"string\"\n              },\n              \"description\": {\n                \"default\": \"\",\n                \"title\": \"Description\",\n                \"type\": \"string\"\n              },\n              \"wait\": {\n                \"default\": false,\n                \"title\": \"Wait\",\n                \"type\": \"boolean\"\n              },\n              \"timeout_seconds\": {\n                \"anyOf\": [\n                  {\n                    \"type\": \"number\"\n                  },\n                  {\n                    \"type\": \"null\"\n                  }\n                ],\n                \"default\": null,\n                \"title\": \"Timeout Seconds\"\n              }\n            },\n            \"required\": [\n              \"prompt\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"dispatch_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__await_grok_worker\",\n          \"description\": \"Wait for a dispatched worker to finish.\",\n          \"score\": 1.3861408233642578,\n          \"input_schema\": {\n            \"properties\": {\n              \"worker_id\": {\n                \"title\": \"Worker Id\",\n                \"type\": \"string\"\n              },\n              \"timeout_seconds\": {\n                \"anyOf\": [\n                  {\n                    \"type\": \"number\"\n                  },\n                  {\n                    \"type\": \"null\"\n                  }\n                ],\n                \"default\": null,\n                \"title\": \"Timeout Seconds\"\n              }\n            },\n            \"required\": [\n              \"worker_id\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"await_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__cancel_grok_worker\",\n          \"description\": \"Cancel a running or queued worker.\",\n          \"score\": 0.5503722429275513,\n          \"input_schema\": {\n            \"properties\": {\n              \"worker_id\": {\n                \"title\": \"Worker Id\",\n                \"type\": \"string\"\n              }\n            },\n            \"required\": [\n              \"worker_id\"\n            ],\n            \"type\": \"object\",\n            \"title\": \"cancel_grok_workerArguments\"\n          }\n        },\n        {\n          \"tool_name\": \"grok_workers__worker_pool_stats\",\n          \"description\": \"Return hard-cap stats for the pool.\",\n          \"score\": 0.45277082920074463,\n          \"input_schema\": {\n            \"properties\": {},\n            \"type\": \"object\",\n            \"title\": \"worker_pool_statsArguments\"\n          }\n        }\n      ]\n    }\n  ],\n  \"total_hidden_tools\": 5,\n  \"status\": \"ready\",\n  \"note\": null\n}"},"locations":[]}
+{"type":"thought","data":"I"}
+{"type":"thought","data":" have"}
+{"type":"thought","data":" the"}
+{"type":"thought","data":" schemas"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" Now"}
+{"type":"thought","data":" I'll"}
+{"type":"thought","data":" dispatch"}
+{"type":"thought","data":" a"}
+{"type":"thought","data":" worker"}
+{"type":"thought","data":" with"}
+{"type":"thought","data":" wait"}
+{"type":"thought","data":"="}
+{"type":"thought","data":"false"}
+{"type":"thought","data":" and"}
+{"type":"thought","data":" a"}
+{"type":"thought","data":" short"}
+{"type":"thought","data":" prompt"}
+{"type":"thought","data":","}
+{"type":"thought","data":" then"}
+{"type":"thought","data":" list"}
+{"type":"thought","data":" workers"}
+{"type":"thought","data":"."}
+{"type":"text","data":"Dispatch"}
+{"type":"text","data":"ing"}
+{"type":"text","data":" a"}
+{"type":"text","data":" non"}
+{"type":"text","data":"-"}
+{"type":"text","data":"blocking"}
+{"type":"text","data":" worker"}
+{"type":"text","data":","}
+{"type":"text","data":" then"}
+{"type":"text","data":" listing"}
+{"type":"text","data":" the"}
+{"type":"text","data":" pool"}
+{"type":"text","data":"."}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool","grok_workers__dispatch_grok_worker","grok_workers__await_grok_worker","grok_workers__list_grok_workers","grok_workers__cancel_grok_worker","grok_workers__worker_pool_stats"],"commands":["compact","always-approve","context","session-info","feedback","goal","build-with-ai","code-review","create-skill","create-workflow","design","docx","execute-plan","game-animation-frames","game-asset-core","game-character-consistency","game-tilesets","game-ui-icons","bundled:imagine","implement","pdf","pptx","pr-babysit","resume-claude","resume-codex","resume-cursor","review"]}
+{"type":"usage","usage":{"input_tokens":3739,"output_tokens":83,"cache_read_input_tokens":2432,"cache_creation_input_tokens":0,"reasoning_tokens":23},"signature":"/bYqVKkN8Qqmlh5zndPalFN24xekDuy+8Bvb8FyuS9ZGF5psvRy6kxjeNaxC2OoybZJOw/TsFjxYwXb3zn0d+ba0G1ljcZ/CvPUih66s+3yO4VKOe5iPKHWcllKCa0H0NhGl06waC+hv5zfVzv+odBRWXaHnFfHc3TT1W+bjxsFS"}
+{"type":"tool_call","toolCallId":"call-60f96dc7-052d-4eab-b845-90b06b7917aa-1","title":"use_tool","kind":"use_tool","status":"pending","toolName":"use_tool","rawInput":{"tool_name":"grok_workers__dispatch_grok_worker","tool_input":{"prompt":"Return JSON {\"ok\":true}","wait":false}},"content":[],"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-60f96dc7-052d-4eab-b845-90b06b7917aa-1","status":null,"content":[],"rawOutput":null,"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-60f96dc7-052d-4eab-b845-90b06b7917aa-1","status":"completed","content":[],"rawOutput":{"type":"MCP","tool_name":"dispatch_grok_worker","server_name":"grok_workers","output":{"OkayOutput":"{\n  \"argv\": [\n    \"grok\",\n    \"-p\",\n    \"<prompt-sha256:4a02e172272c880954d8315c65b9b7611ef5fd6d3f5de9b9d689fba06bd79860>\",\n    \"--output-format\",\n    \"json\",\n    \"--max-turns\",\n    \"20\",\n    \"--permission-mode\",\n    \"dontAsk\",\n    \"--always-approve\",\n    \"--no-subagents\",\n    \"--tools\",\n    \"read_file,grep,list_dir\",\n    \"--disallowed-tools\",\n    \"run_terminal_command,write,open_page,web_search,web_fetch\",\n    \"--disable-web-search\",\n    \"-m\",\n    \"grok-4.5\",\n    \"--cwd\",\n    \"/Users/ken/Desktop/Work/exploratory/Pure_Tate\"\n  ],\n  \"created_at\": \"2026-08-01T04:34:17.791848+00:00\",\n  \"description\": \"grok-worker\",\n  \"elapsed_seconds\": null,\n  \"error\": null,\n  \"finished_at\": null,\n  \"ok\": false,\n  \"prompt_sha256\": \"4a02e172272c880954d8315c65b9b7611ef5fd6d3f5de9b9d689fba06bd79860\",\n  \"returncode\": null,\n  \"started_at\": \"2026-08-01T04:34:17.792730+00:00\",\n  \"status\": \"running\",\n  \"stderr_path\": null,\n  \"stdout_path\": null,\n  \"worker_id\": \"W-04460842dc2d\"\n}"}},"locations":[]}
+{"type":"thought","data":"Worker"}
+{"type":"thought","data":" dispatched"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" Now"}
+{"type":"thought","data":" list"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"gro"}
+{"type":"thought","data":"k"}
+{"type":"thought","data":"_"}
+{"type":"thought","data":"workers"}
+{"type":"thought","data":"."}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool","grok_workers__dispatch_grok_worker","grok_workers__await_grok_worker","grok_workers__list_grok_workers","grok_workers__cancel_grok_worker","grok_workers__worker_pool_stats"],"commands":["compact","always-approve","context","session-info","feedback","goal","build-with-ai","code-review","create-skill","create-workflow","design","docx","execute-plan","game-animation-frames","game-asset-core","game-character-consistency","game-tilesets","game-ui-icons","bundled:imagine","implement","pdf","pptx","pr-babysit","resume-claude","resume-codex","resume-cursor","review"]}
+{"type":"usage","usage":{"input_tokens":527,"output_tokens":42,"cache_read_input_tokens":6144,"cache_creation_input_tokens":0,"reasoning_tokens":11},"signature":"azhhRisSEA/BZ3nciIQ63jXhTLAXtdqPuw3LK1Xfq9HXi+uaxPA7XndsazdoBzZAJYh1qHB+VAXVb6Cfi3O7u3M1z0pZ"}
+{"type":"tool_call","toolCallId":"call-95ba3407-f778-4b78-a59b-2adf5c711585-2","title":"use_tool","kind":"use_tool","status":"pending","toolName":"use_tool","rawInput":{"tool_name":"grok_workers__list_grok_workers","tool_input":{}},"content":[],"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-95ba3407-f778-4b78-a59b-2adf5c711585-2","status":null,"content":[],"rawOutput":null,"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-95ba3407-f778-4b78-a59b-2adf5c711585-2","status":"completed","content":[],"rawOutput":{"type":"MCP","tool_name":"list_grok_workers","server_name":"grok_workers","output":{"OkayOutput":"{\n  \"ok\": true,\n  \"stats\": {\n    \"dispatched\": 1,\n    \"live\": 0,\n    \"max_concurrent\": 4,\n    \"max_total\": 4,\n    \"model\": \"grok-4.5\",\n    \"remaining_concurrent\": 4,\n    \"remaining_total\": 3\n  },\n  \"workers\": [\n    {\n      \"argv\": [\n        \"grok\",\n        \"-p\",\n        \"<prompt-sha256:4a02e172272c880954d8315c65b9b7611ef5fd6d3f5de9b9d689fba06bd79860>\",\n        \"--output-format\",\n        \"json\",\n        \"--max-turns\",\n        \"20\",\n        \"--permission-mode\",\n        \"dontAsk\",\n        \"--always-approve\",\n        \"--no-subagents\",\n        \"--tools\",\n        \"read_file,grep,list_dir\",\n        \"--disallowed-tools\",\n        \"run_terminal_command,write,open_page,web_search,web_fetch\",\n        \"--disable-web-search\",\n        \"-m\",\n        \"grok-4.5\",\n        \"--cwd\",\n        \"/Users/ken/Desktop/Work/exploratory/Pure_Tate\"\n      ],\n      \"created_at\": \"2026-08-01T04:34:17.791848+00:00\",\n      \"description\": \"grok-worker\",\n      \"elapsed_seconds\": 4.256,\n      \"error\": null,\n      \"finished_at\": \"2026-08-01T04:34:22.048637+00:00\",\n      \"ok\": true,\n      \"prompt_sha256\": \"4a02e172272c880954d8315c65b9b7611ef5fd6d3f5de9b9d689fba06bd79860\",\n      \"returncode\": 0,\n      \"started_at\": \"2026-08-01T04:34:17.792730+00:00\",\n      \"status\": \"completed\",\n      \"stderr_path\": \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test/results/grok_workers/_sdk_grok_perm/workers/W-04460842dc2d.stderr.txt\",\n      \"stdout_path\": \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test/results/grok_workers/_sdk_grok_perm/workers/W-04460842dc2d.stdout.txt\",\n      \"worker_id\": \"W-04460842dc2d\"\n    }\n  ]\n}"}},"locations":[]}
+{"type":"thought","data":"Done"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" User"}
+{"type":"thought","data":" asked"}
+{"type":"thought","data":" for"}
+{"type":"thought","data":" final"}
+{"type":"thought","data":" JSON"}
+{"type":"thought","data":" {\""}
+{"type":"thought","data":"probe"}
+{"type":"thought","data":"\":"}
+{"type":"thought","data":"\""}
+{"type":"thought","data":"p"}
+{"type":"thought","data":"\",\""}
+{"type":"thought","data":"ok"}
+{"type":"thought","data":"\":"}
+{"type":"thought","data":"true"}
+{"type":"thought","data":"}."}
+{"type":"text","data":"Dis"}
+{"type":"text","data":"patched"}
+{"type":"text","data":" worker"}
+{"type":"text","data":" `"}
+{"type":"text","data":"W"}
+{"type":"text","data":"-"}
+{"type":"text","data":"044"}
+{"type":"text","data":"608"}
+{"type":"text","data":"42"}
+{"type":"text","data":"dc"}
+{"type":"text","data":"2"}
+{"type":"text","data":"d"}
+{"type":"text","data":"`"}
+{"type":"text","data":" with"}
+{"type":"text","data":" `"}
+{"type":"text","data":"wait"}
+{"type":"text","data":"="}
+{"type":"text","data":"false"}
+{"type":"text","data":"`;"}
+{"type":"text","data":" `"}
+{"type":"text","data":"list"}
+{"type":"text","data":"_"}
+{"type":"text","data":"gro"}
+{"type":"text","data":"k"}
+{"type":"text","data":"_"}
+{"type":"text","data":"workers"}
+{"type":"text","data":"`"}
+{"type":"text","data":" shows"}
+{"type":"text","data":" it"}
+{"type":"text","data":" completed"}
+{"type":"text","data":" successfully"}
+{"type":"text","data":" (`"}
+{"type":"text","data":"ok"}
+{"type":"text","data":":"}
+{"type":"text","data":" true"}
+{"type":"text","data":"`,"}
+{"type":"text","data":" return"}
+{"type":"text","data":"code"}
+{"type":"text","data":" "}
+{"type":"text","data":"0"}
+{"type":"text","data":")."}
+{"type":"text","data":"\n\n"}
+{"type":"text","data":"```"}
+{"type":"text","data":"json"}
+{"type":"text","data":"\n"}
+{"type":"text","data":"{\""}
+{"type":"text","data":"probe"}
+{"type":"text","data":"\":"}
+{"type":"text","data":"\""}
+{"type":"text","data":"p"}
+{"type":"text","data":"\",\""}
+{"type":"text","data":"ok"}
+{"type":"text","data":"\":"}
+{"type":"text","data":"true"}
+{"type":"text","data":"}\n"}
+{"type":"text","data":"```"}
+{"type":"available_commands","tools":["read_file","list_dir","grep","search_tool","use_tool","grok_workers__dispatch_grok_worker","grok_workers__await_grok_worker","grok_workers__list_grok_workers","grok_workers__cancel_grok_worker","grok_workers__worker_pool_stats"],"commands":["compact","always-approve","context","session-info","feedback","goal","build-with-ai","code-review","create-skill","create-workflow","design","docx","execute-plan","game-animation-frames","game-asset-core","game-character-consistency","game-tilesets","game-ui-icons","bundled:imagine","implement","pdf","pptx","pr-babysit","resume-claude","resume-codex","resume-cursor","review"]}
+{"type":"usage","usage":{"input_tokens":680,"output_tokens":73,"cache_read_input_tokens":6656,"cache_creation_input_tokens":0,"reasoning_tokens":17},"signature":"VUT6Sf0tZzLYluD1Wp4lW5Fy6PQvh27QGb/tT5P2WSt+FqO8mn3nBnQCqM+x+H81/Z1JmKD7xpi14DRd2HNRkotvXRU9ekf4YQQrlD6gEWMiVboN"}
+{"type":"end","stopReason":"end_turn","sessionId":"019fbb99-d336-7122-951e-f582c7f153a5","requestId":"ea910a49-f620-4eb7-b2dd-a5a4f4d7d618","usage":{"input_tokens":8779,"cache_read_input_tokens":16640,"cache_creation_input_tokens":0,"output_tokens":319,"reasoning_tokens":124,"total_tokens":25738},"num_turns":4,"total_cost_usd":0.024464,"total_cost_usd_ticks":244640000,"modelUsage":{"grok-4.5-build":{"inputTokens":8779,"outputTokens":319,"cacheReadInputTokens":16640,"cacheCreationInputTokens":0,"modelCalls":4,"costUSD":0.024464}}}

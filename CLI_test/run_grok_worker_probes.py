@@ -1,0 +1,1018 @@
+#!/usr/bin/env python3
+"""CLI_test probes for hard-capped Grok 4.5 workers (MCP + native spawn).
+
+Not imported by pure_tate. Does not edit ~/.grok/config.toml or the harness.
+
+Usage:
+  python3 CLI_test/run_grok_worker_probes.py              # offline unit + live smokes
+  python3 CLI_test/run_grok_worker_probes.py --offline     # unit only
+  python3 CLI_test/run_grok_worker_probes.py --live        # include live API probes
+"""
+
+from __future__ import annotations
+
+import argparse
+import datetime
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+import threading
+import time
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Sequence, Tuple
+
+LAB = Path(__file__).resolve().parent
+ROOT = LAB.parent
+if str(LAB) not in sys.path:
+    sys.path.insert(0, str(LAB))
+
+from grok_worker_mcp import (  # noqa: E402
+    McpServer,
+    build_pool,
+    read_message,
+    write_message,
+)
+from grok_worker_pool import (  # noqa: E402
+    DEFAULT_MODEL,
+    GrokWorkerPool,
+    PoolError,
+    WorkerRecord,
+    build_worker_argv,
+    extract_result_text,
+    redact_argv,
+    sha256_text,
+    utc_now_iso,
+)
+
+
+RESULTS_ROOT = LAB / "results" / "grok_workers"
+MODEL = DEFAULT_MODEL
+LIVE_TIMEOUT = 300
+
+
+def timestamp_slug() -> str:
+    return datetime.datetime.now(datetime.timezone.utc).strftime(
+        "%Y%m%dT%H%M%S%fZ"
+    )
+
+
+def write_json(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def sha256_bytes(content: bytes) -> str:
+    return hashlib.sha256(content).hexdigest()
+
+
+# ---------------------------------------------------------------------------
+# Offline unit probes
+# ---------------------------------------------------------------------------
+
+
+def _fake_runner_factory(delay: float = 0.05, fail_ids: Optional[set] = None):
+    fail_ids = fail_ids or set()
+
+    def runner(
+        *,
+        prompt: str,
+        description: str,
+        worker_id: str,
+        pool: GrokWorkerPool,
+    ) -> WorkerRecord:
+        time.sleep(delay)
+        status = "failed" if worker_id in fail_ids else "completed"
+        return WorkerRecord(
+            worker_id=worker_id,
+            description=description,
+            prompt_sha256=sha256_text(prompt),
+            status=status,
+            created_at=utc_now_iso(),
+            started_at=utc_now_iso(),
+            finished_at=utc_now_iso(),
+            returncode=0 if status == "completed" else 1,
+            result_text='{"probe":"fake","ok":true}',
+            elapsed_seconds=delay,
+            argv_redacted=["fake-runner"],
+        )
+
+    return runner
+
+
+def probe_pool_unit_cap() -> Dict[str, Any]:
+    """Hard concurrent + total caps without calling Grok."""
+    # Concurrent: use real threads with a blocking runner mock via custom runner
+    # that holds until a release event. The pool's default runner is sync when
+    # provided, so for concurrent we temporarily use subprocess-less threads by
+    # monkeypatching _run_worker path: use runner=None and inject fake processes
+    # is hard. Instead test total cap + concurrent via locking dispatch.
+
+    # Total budget of 4: 5th dispatch raises budget_exhausted.
+    pool = GrokWorkerPool(max_concurrent=4, max_total=4, runner=_fake_runner_factory())
+    for i in range(4):
+        result = pool.dispatch("prompt-%d" % i, "t%d" % i)
+        assert result["status"] == "completed", result
+    try:
+        pool.dispatch("prompt-5", "t5")
+        fifth_total = {"raised": False}
+    except PoolError as exc:
+        fifth_total = {"raised": True, "code": exc.code, "message": exc.message}
+    assert fifth_total.get("raised") and fifth_total.get("code") == "budget_exhausted"
+
+    # Concurrent: hold workers in "running" via slow runner + wait=False needs
+    # async path. Use runner=None is live. Simulate concurrent by manual live count:
+    pool2 = GrokWorkerPool(max_concurrent=4, max_total=10, runner=None)
+    # Manually reserve live slots through internal API simulation:
+    hold = threading.Event()
+    started = threading.Barrier(5)  # 4 workers + main optional; use Counter
+
+    release = threading.Event()
+    running_count = {"n": 0}
+    lock = threading.Lock()
+
+    def blocking_runner(
+        *,
+        prompt: str,
+        description: str,
+        worker_id: str,
+        pool: GrokWorkerPool,
+    ) -> WorkerRecord:
+        with lock:
+            running_count["n"] += 1
+        # Signal that this worker started counting.
+        hold.set()
+        release.wait(timeout=10)
+        with lock:
+            running_count["n"] -= 1
+        return WorkerRecord(
+            worker_id=worker_id,
+            description=description,
+            prompt_sha256=sha256_text(prompt),
+            status="completed",
+            created_at=utc_now_iso(),
+            started_at=utc_now_iso(),
+            finished_at=utc_now_iso(),
+            returncode=0,
+            result_text="ok",
+            elapsed_seconds=0.01,
+        )
+
+    # Sync runner cannot test concurrent pool_full because dispatch holds the
+    # runner inline. Use a threaded wrapper pool method: dispatch with runner
+    # that is async via threads. We'll test concurrent by patching dispatch to
+    # increment live before runner without completing.
+
+    pool3 = GrokWorkerPool(max_concurrent=4, max_total=10)
+
+    class Gate:
+        def __init__(self) -> None:
+            self.entered = threading.Event()
+            self.release = threading.Event()
+            self.count = 0
+            self.lock = threading.Lock()
+
+    gate = Gate()
+
+    def gated_run(worker_id: str, prompt: str, timeout_seconds: Optional[int]) -> None:
+        with gate.lock:
+            gate.count += 1
+            if gate.count >= 4:
+                gate.entered.set()
+        gate.release.wait(timeout=15)
+        with pool3._lock:
+            rec = pool3._workers[worker_id]
+            rec.status = "completed"
+            rec.finished_at = utc_now_iso()
+            rec.result_text = "done"
+            rec.returncode = 0
+            pool3._live = sum(
+                1
+                for item in pool3._workers.values()
+                if item.status in {"queued", "running"}
+            )
+
+    # Monkeypatch internal runner to gated threads without spawning grok.
+    pool3._run_worker = gated_run  # type: ignore[method-assign]
+
+    ids = []
+    for i in range(4):
+        meta = pool3.dispatch("p-%d" % i, "c%d" % i, wait=False)
+        ids.append(meta["worker_id"])
+    assert gate.entered.wait(timeout=5), "workers did not become live"
+    fifth_concurrent: Dict[str, Any]
+    try:
+        pool3.dispatch("p-5", "c5", wait=False)
+        fifth_concurrent = {"raised": False}
+    except PoolError as exc:
+        fifth_concurrent = {"raised": True, "code": exc.code, "message": exc.message}
+    gate.release.set()
+    for wid in ids:
+        pool3.await_worker(wid, timeout_seconds=5)
+    assert (
+        fifth_concurrent.get("raised")
+        and fifth_concurrent.get("code") == "pool_full"
+    ), fifth_concurrent
+
+    return {
+        "probe": "pool_unit_cap",
+        "status": "pass",
+        "fifth_total": fifth_total,
+        "fifth_concurrent": fifth_concurrent,
+        "stats_after_total_test": pool.stats(),
+    }
+
+
+def probe_mcp_unit_roundtrip() -> Dict[str, Any]:
+    """In-process MCP initialize + tools/call against fake pool."""
+    pool = GrokWorkerPool(max_concurrent=4, max_total=4, runner=_fake_runner_factory())
+    server = McpServer(pool)
+    init = server.handle(
+        {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": "initialize",
+            "params": {
+                "protocolVersion": "2024-11-05",
+                "capabilities": {},
+                "clientInfo": {"name": "probe", "version": "0"},
+            },
+        }
+    )
+    assert init and "result" in init
+    server.handle({"jsonrpc": "2.0", "method": "notifications/initialized"})
+    listed = server.handle({"jsonrpc": "2.0", "id": 2, "method": "tools/list"})
+    names = [t["name"] for t in listed["result"]["tools"]]
+    assert "dispatch_grok_worker" in names
+    called = server.handle(
+        {
+            "jsonrpc": "2.0",
+            "id": 3,
+            "method": "tools/call",
+            "params": {
+                "name": "dispatch_grok_worker",
+                "arguments": {
+                    "prompt": "return ok",
+                    "description": "unit",
+                    "wait": True,
+                },
+            },
+        }
+    )
+    body = json.loads(called["result"]["content"][0]["text"])
+    assert body["status"] == "completed", body
+    # Exhaust budget
+    for i in range(3):
+        server.handle(
+            {
+                "jsonrpc": "2.0",
+                "id": 10 + i,
+                "method": "tools/call",
+                "params": {
+                    "name": "dispatch_grok_worker",
+                    "arguments": {"prompt": "x%d" % i, "wait": True},
+                },
+            }
+        )
+    fifth = server.handle(
+        {
+            "jsonrpc": "2.0",
+            "id": 99,
+            "method": "tools/call",
+            "params": {
+                "name": "dispatch_grok_worker",
+                "arguments": {"prompt": "overflow", "wait": True},
+            },
+        }
+    )
+    assert fifth["result"].get("isError") is True
+    err_body = json.loads(fifth["result"]["content"][0]["text"])
+    assert err_body.get("error_code") == "budget_exhausted", err_body
+    return {
+        "probe": "mcp_unit_roundtrip",
+        "status": "pass",
+        "tools": names,
+        "fifth_error": err_body,
+    }
+
+
+def probe_worker_argv_shape() -> Dict[str, Any]:
+    argv = build_worker_argv("hello", allow_web=False)
+    tools = argv[argv.index("--tools") + 1].split(",")
+    denied = argv[argv.index("--disallowed-tools") + 1].split(",")
+    ok = (
+        "read_file" in tools
+        and "write" in denied
+        and "run_terminal_command" in denied
+        and "--no-subagents" in argv
+        and argv[argv.index("-m") + 1] == MODEL
+    )
+    return {
+        "probe": "worker_argv_shape",
+        "status": "pass" if ok else "fail",
+        "argv_redacted": redact_argv(argv, "hello"),
+        "tools": tools,
+        "denied": denied,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Live probes
+# ---------------------------------------------------------------------------
+
+
+def run_subprocess(
+    argv: List[str],
+    *,
+    cwd: Path,
+    env: Optional[Dict[str, str]] = None,
+    timeout: int = LIVE_TIMEOUT,
+) -> Tuple[int, str, str, float]:
+    started = time.monotonic()
+    completed = subprocess.run(
+        argv,
+        cwd=str(cwd),
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        timeout=timeout,
+        check=False,
+        env=env or os.environ.copy(),
+    )
+    elapsed = round(time.monotonic() - started, 3)
+    return (
+        completed.returncode,
+        completed.stdout.decode("utf-8", "replace"),
+        completed.stderr.decode("utf-8", "replace"),
+        elapsed,
+    )
+
+
+def probe_worker_smoke(run_dir: Path) -> Dict[str, Any]:
+    """One real Grok 4.5 worker via the pool."""
+    results = run_dir / "worker_smoke"
+    results.mkdir(parents=True, exist_ok=True)
+    pool = GrokWorkerPool(
+        max_concurrent=4,
+        max_total=4,
+        results_dir=results,
+        work_dir=ROOT,
+        timeout_seconds=LIVE_TIMEOUT,
+    )
+    prompt = (
+        "Return exactly one JSON object and no Markdown: "
+        '{"probe":"worker_smoke","ok":true,"marker":"PT-WORKER-OK"}.'
+    )
+    try:
+        result = pool.dispatch(prompt, "smoke", wait=True, timeout_seconds=LIVE_TIMEOUT)
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "probe": "worker_smoke",
+            "status": "fail",
+            "error": str(exc),
+        }
+    text = result.get("result_text") or ""
+    ok = (
+        result.get("status") == "completed"
+        and "PT-WORKER-OK" in text
+        and result.get("returncode") == 0
+    )
+    return {
+        "probe": "worker_smoke",
+        "status": "pass" if ok else "fail",
+        "worker": result,
+        "marker_found": "PT-WORKER-OK" in text,
+    }
+
+
+def probe_worker_parallel_4(run_dir: Path) -> Dict[str, Any]:
+    """Dispatch 4 concurrent live workers; 5th must hard-fail."""
+    results = run_dir / "worker_parallel_4"
+    results.mkdir(parents=True, exist_ok=True)
+    pool = GrokWorkerPool(
+        max_concurrent=4,
+        max_total=4,
+        results_dir=results,
+        work_dir=ROOT,
+        timeout_seconds=LIVE_TIMEOUT,
+    )
+    ids = []
+    errors = []
+    for i in range(4):
+        prompt = (
+            "Return exactly one JSON object and no Markdown: "
+            '{"probe":"worker_parallel_4","ok":true,"slot":%d}.' % i
+        )
+        try:
+            meta = pool.dispatch(prompt, "p%d" % i, wait=False)
+            ids.append(meta["worker_id"])
+        except PoolError as exc:
+            errors.append(exc.as_dict())
+    fifth: Dict[str, Any]
+    try:
+        pool.dispatch(
+            'Return JSON {"probe":"overflow","ok":false}.',
+            "overflow",
+            wait=False,
+        )
+        fifth = {"raised": False}
+    except PoolError as exc:
+        fifth = {"raised": True, "code": exc.code, "message": exc.message}
+
+    finished = []
+    for wid in ids:
+        try:
+            finished.append(
+                pool.await_worker(wid, timeout_seconds=LIVE_TIMEOUT)
+            )
+        except PoolError as exc:
+            finished.append(exc.as_dict())
+
+    completed = sum(1 for item in finished if item.get("status") == "completed")
+    ok = (
+        len(ids) == 4
+        and fifth.get("raised") is True
+        and fifth.get("code") in {"pool_full", "budget_exhausted"}
+        and completed >= 3  # allow one flake; prefer 4
+    )
+    # With wait=False and max_total=4, 5th should be budget_exhausted if all
+    # four dispatches counted, or pool_full if they are still live. Either is hard cap.
+    return {
+        "probe": "worker_parallel_4",
+        "status": "pass" if ok else "fail",
+        "dispatched_ids": ids,
+        "fifth": fifth,
+        "finished": finished,
+        "completed_count": completed,
+        "dispatch_errors": errors,
+        "stats": pool.stats(),
+    }
+
+
+def _available_tools_from_stream(stdout: str) -> List[str]:
+    for line in stdout.splitlines():
+        line = line.strip()
+        if not line.startswith("{"):
+            continue
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if (
+            isinstance(event, dict)
+            and event.get("type") == "available_commands"
+            and isinstance(event.get("tools"), list)
+        ):
+            return [str(t) for t in event["tools"]]
+    return []
+
+
+def probe_allowlist_safety(run_dir: Path) -> Dict[str, Any]:
+    """Prove harness-safe allowlist stays strict; spawn-in-tools is unsafe.
+
+    Gate:
+      1) `--tools read_file,grep,list_dir` must NOT expose shell/write/spawn.
+      2) Adding `spawn_subagent` to `--tools` must be treated as UNSAFE
+         (observed: allowlist collapses and shell reappears). Pass when that
+         regression is detected so harness never enables native spawn via
+         --tools; MCP workers are the hard-cap path instead.
+    """
+    out_dir = run_dir / "allowlist_safety"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    prompt = (
+        'Return exactly JSON {"probe":"allowlist_safety","ok":true}. '
+        "Do not call tools."
+    )
+    baseline_argv = [
+        "grok",
+        "-p",
+        prompt,
+        "--output-format",
+        "streaming-json",
+        "--max-turns",
+        "2",
+        "--permission-mode",
+        "dontAsk",
+        "--always-approve",
+        "--tools",
+        "read_file,grep,list_dir",
+        "--disallowed-tools",
+        "run_terminal_command,write,open_page,web_search,web_fetch",
+        "--disable-web-search",
+        "-m",
+        MODEL,
+    ]
+    spawn_argv = list(baseline_argv)
+    spawn_argv[spawn_argv.index("--tools") + 1] = (
+        "read_file,grep,list_dir,spawn_subagent"
+    )
+
+    b_code, b_stdout, b_stderr, b_elapsed = run_subprocess(
+        baseline_argv, cwd=ROOT, timeout=LIVE_TIMEOUT
+    )
+    s_code, s_stdout, s_stderr, s_elapsed = run_subprocess(
+        spawn_argv, cwd=ROOT, timeout=LIVE_TIMEOUT
+    )
+    (out_dir / "baseline.stdout.jsonl").write_text(b_stdout, encoding="utf-8")
+    (out_dir / "baseline.stderr.txt").write_text(b_stderr, encoding="utf-8")
+    (out_dir / "spawn_tools.stdout.jsonl").write_text(s_stdout, encoding="utf-8")
+    (out_dir / "spawn_tools.stderr.txt").write_text(s_stderr, encoding="utf-8")
+
+    baseline_tools = _available_tools_from_stream(b_stdout)
+    spawn_tools = _available_tools_from_stream(s_stdout)
+    dangerous = {
+        "run_terminal_command",
+        "run_terminal_cmd",
+        "write",
+        "search_replace",
+    }
+    baseline_ok = b_code == 0 and not (set(baseline_tools) & dangerous)
+    # MCP meta-tools may remain; that is fine.
+    baseline_has_mcp_meta = "search_tool" in baseline_tools and "use_tool" in baseline_tools
+    spawn_broke_allowlist = bool(set(spawn_tools) & dangerous) or (
+        "run_terminal_command" in spawn_tools
+    )
+    # Pass criteria for harness design:
+    # - baseline allowlist is safe
+    # - AND we correctly detect that spawn_subagent-in-tools is unsafe
+    #   (so harness must not do that)
+    ok = baseline_ok and spawn_broke_allowlist
+    return {
+        "probe": "allowlist_safety",
+        "status": "pass" if ok else "fail",
+        "baseline": {
+            "returncode": b_code,
+            "elapsed_seconds": b_elapsed,
+            "tools": baseline_tools,
+            "safe": baseline_ok,
+            "mcp_meta_present": baseline_has_mcp_meta,
+        },
+        "spawn_in_tools": {
+            "returncode": s_code,
+            "elapsed_seconds": s_elapsed,
+            "tools": spawn_tools,
+            "broke_allowlist": spawn_broke_allowlist,
+            "spawn_present": "spawn_subagent" in spawn_tools,
+        },
+        "recommendation": (
+            "Do not put spawn_subagent in Grok --tools; it collapses the "
+            "allowlist and reintroduces shell. Use MCP worker pool instead. "
+            "Baseline allowlist already exposes search_tool/use_tool for MCP."
+        ),
+        "argv_baseline": redact_argv(baseline_argv, prompt),
+        "argv_spawn": redact_argv(spawn_argv, prompt),
+    }
+
+
+def probe_native_spawn_optional(run_dir: Path) -> Dict[str, Any]:
+    """Document that native spawn via --tools is unsafe for headless allowlists.
+
+    Earlier matrix showed adding spawn_subagent to --tools collapses the
+    allowlist and reintroduces shell without reliably exposing spawn_subagent.
+    Hard-capped workers therefore go through the MCP pool, not native spawn.
+    """
+    out_dir = run_dir / "native_spawn"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    note = {
+        "probe": "native_spawn_optional",
+        "status": "skip",
+        "reason": (
+            "Native spawn_subagent cannot be enabled via Grok --tools without "
+            "collapsing the read-only allowlist (shell reappears). Hard-cap "
+            "path is the MCP worker pool. See allowlist_safety probe."
+        ),
+        "harness_recommendation": "mcp_worker_pool",
+    }
+    write_json(out_dir / "note.json", note)
+    return note
+
+
+def mcp_server_command() -> List[str]:
+    """Launch official-SDK MCP server (protocol-compatible with Grok/Claude)."""
+    uv = shutil.which("uv")
+    script = str(LAB / "grok_worker_mcp_sdk.py")
+    if uv:
+        return [uv, "run", "--with", "mcp", "python", script]
+    # Fallback: hope mcp is importable on PATH python.
+    return [sys.executable, script]
+
+
+def _claude_mcp_config(
+    server_command: List[str], env: Dict[str, str]
+) -> Dict[str, Any]:
+    return {
+        "mcpServers": {
+            "grok-workers": {
+                "command": server_command[0],
+                "args": server_command[1:],
+                "env": env,
+            }
+        }
+    }
+
+
+def probe_mcp_claude(run_dir: Path) -> Dict[str, Any]:
+    """Claude headless with session --mcp-config dispatches one worker."""
+    if shutil.which("claude") is None:
+        return {"probe": "mcp_claude", "status": "skip", "reason": "claude not on PATH"}
+    out_dir = run_dir / "mcp_claude"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    worker_results = out_dir / "workers"
+    worker_results.mkdir(exist_ok=True)
+    worker_env = {
+        "GROK_WORKER_RESULTS_DIR": str(worker_results),
+        "GROK_WORKER_CWD": str(ROOT),
+        "GROK_WORKER_MAX_CONCURRENT": "4",
+        "GROK_WORKER_MAX_TOTAL": "4",
+        "GROK_WORKER_TIMEOUT": str(LIVE_TIMEOUT),
+    }
+    server_cmd = mcp_server_command()
+    mcp_path = out_dir / "mcp.json"
+    write_json(mcp_path, _claude_mcp_config(server_cmd, worker_env))
+    prompt = (
+        "Use the MCP tool dispatch_grok_worker exactly once with wait=true and "
+        'prompt: Return exactly JSON {"probe":"from_worker","ok":true,"marker":"CLAUDE-MCP"} '
+        "with no markdown fences. Then return exactly one JSON object: "
+        '{"probe":"mcp_claude","ok":true,"marker":"CLAUDE-MCP"} '
+        "after the worker finishes. Do not edit files."
+    )
+    argv = [
+        "claude",
+        "-p",
+        prompt,
+        "--output-format",
+        "json",
+        "--permission-mode",
+        "bypassPermissions",
+        "--allowedTools",
+        "mcp__grok-workers__dispatch_grok_worker",
+        "mcp__grok-workers__await_grok_worker",
+        "mcp__grok-workers__list_grok_workers",
+        "mcp__grok-workers__worker_pool_stats",
+        "Read",
+        "--disallowedTools",
+        "Edit",
+        "Write",
+        "Bash",
+        "--mcp-config",
+        str(mcp_path),
+        "--strict-mcp-config",
+        "--model",
+        "claude-opus-5",
+    ]
+    code, stdout, stderr, elapsed = run_subprocess(
+        argv, cwd=ROOT, timeout=LIVE_TIMEOUT + 90
+    )
+    (out_dir / "stdout.json").write_text(stdout, encoding="utf-8")
+    (out_dir / "stderr.txt").write_text(stderr, encoding="utf-8")
+    result_text = stdout
+    try:
+        envelope = json.loads(stdout)
+        if isinstance(envelope, dict) and isinstance(envelope.get("result"), str):
+            result_text = envelope["result"]
+    except json.JSONDecodeError:
+        pass
+    worker_files = sorted(p.name for p in worker_results.iterdir())
+    # Hard gate: a worker must actually have run.
+    ok = bool(worker_files) and "CLAUDE-MCP" in result_text
+    return {
+        "probe": "mcp_claude",
+        "status": "pass" if ok else "fail",
+        "returncode": code,
+        "elapsed_seconds": elapsed,
+        "result_prefix": result_text[:500],
+        "worker_files": worker_files,
+        "server_cmd": server_cmd,
+        "stderr_prefix": stderr[:500],
+    }
+
+
+def probe_mcp_grok(run_dir: Path) -> Dict[str, Any]:
+    """Grok headless with session-scoped GROK_HOME MCP (no user config write).
+
+    dontAsk rejects MCP use_tool (failed→cancelled). Use bypassPermissions with
+    a strict --tools allowlist so write/shell stay unavailable.
+    """
+    out_dir = run_dir / "mcp_grok"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    worker_results = out_dir / "workers"
+    worker_results.mkdir(exist_ok=True)
+    real_home = Path(os.environ.get("GROK_HOME", Path.home() / ".grok")).expanduser()
+    server_cmd = mcp_server_command()
+
+    def esc(value: str) -> str:
+        return value.replace("\\", "\\\\").replace('"', '\\"')
+
+    with tempfile.TemporaryDirectory(prefix="grok-home-probe-") as tmp:
+        home = Path(tmp)
+        for name in ("auth.json", "auth.json.lock", "models_cache.json"):
+            src = real_home / name
+            if src.exists():
+                try:
+                    os.symlink(src, home / name)
+                except OSError:
+                    if src.is_file():
+                        shutil.copy2(src, home / name)
+        args_toml = ", ".join('"%s"' % esc(part) for part in server_cmd[1:])
+        config = (
+            "# ephemeral CLI_test probe config — do not copy to user home\n"
+            "[mcp_servers.grok_workers]\n"
+            'command = "%s"\n'
+            "args = [%s]\n"
+            "enabled = true\n"
+            "startup_timeout_sec = 90\n"
+            "tool_timeout_sec = 300\n"
+            'env = { GROK_WORKER_RESULTS_DIR = "%s", GROK_WORKER_CWD = "%s", '
+            'GROK_WORKER_MAX_TOTAL = "4", GROK_WORKER_MAX_CONCURRENT = "4", '
+            'GROK_WORKER_TIMEOUT = "%s" }\n'
+            % (
+                esc(server_cmd[0]),
+                args_toml,
+                esc(str(worker_results)),
+                esc(str(ROOT)),
+                LIVE_TIMEOUT,
+            )
+        )
+        (home / "config.toml").write_text(config, encoding="utf-8")
+        env = os.environ.copy()
+        env["GROK_HOME"] = str(home)
+        prompt = (
+            "Use search_tool then use_tool to call dispatch_grok_worker once with "
+            "wait=true and prompt: Return exactly JSON "
+            '{"probe":"from_worker","ok":true,"marker":"GROK-MCP"} with no markdown. '
+            "Then return exactly JSON "
+            '{"probe":"mcp_grok","ok":true,"marker":"GROK-MCP"}.'
+        )
+        argv = [
+            "grok",
+            "-p",
+            prompt,
+            "--output-format",
+            "streaming-json",
+            "--max-turns",
+            "25",
+            "--permission-mode",
+            "bypassPermissions",
+            "--always-approve",
+            "--tools",
+            "read_file,grep,list_dir,search_tool,use_tool",
+            "--disallowed-tools",
+            "run_terminal_command,write,open_page,web_search,web_fetch",
+            "--disable-web-search",
+            "-m",
+            MODEL,
+        ]
+        code, stdout, stderr, elapsed = run_subprocess(
+            argv, cwd=ROOT, env=env, timeout=LIVE_TIMEOUT + 120
+        )
+        (out_dir / "stdout.jsonl").write_text(stdout, encoding="utf-8")
+        (out_dir / "stderr.txt").write_text(stderr, encoding="utf-8")
+        (out_dir / "config.toml").write_text(config, encoding="utf-8")
+        text_parts: List[str] = []
+        tool_names: List[str] = []
+        available = _available_tools_from_stream(stdout)
+        use_tool_failed = False
+        for line in stdout.splitlines():
+            line = line.strip()
+            if not line.startswith("{"):
+                continue
+            try:
+                event = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(event, dict):
+                continue
+            if event.get("type") == "text" and isinstance(event.get("data"), str):
+                text_parts.append(event["data"])
+            if event.get("type") == "tool_call" and event.get("toolName"):
+                tool_names.append(str(event["toolName"]))
+            if (
+                event.get("type") == "tool_call_update"
+                and event.get("status") == "failed"
+            ):
+                use_tool_failed = True
+        combined = "".join(text_parts)
+        worker_files = sorted(p.name for p in worker_results.iterdir())
+        allowlist_safe = "run_terminal_command" not in available
+        ok = (
+            allowlist_safe
+            and bool(worker_files)
+            and not use_tool_failed
+        )
+        return {
+            "probe": "mcp_grok",
+            "status": "pass" if ok else "fail",
+            "returncode": code,
+            "elapsed_seconds": elapsed,
+            "available_tools": available,
+            "allowlist_safe": allowlist_safe,
+            "tool_names": tool_names,
+            "use_tool_failed": use_tool_failed,
+            "text_prefix": combined[:500],
+            "worker_files": worker_files,
+            "server_cmd": server_cmd,
+            "permission_mode": "bypassPermissions",
+            "stderr_prefix": stderr[:500],
+            "note": (
+                "session GROK_HOME only; user config not modified; "
+                "dontAsk cannot call MCP use_tool"
+            ),
+        }
+
+
+def probe_mcp_codex(run_dir: Path) -> Dict[str, Any]:
+    if shutil.which("codex") is None:
+        return {"probe": "mcp_codex", "status": "skip", "reason": "codex not on PATH"}
+    out_dir = run_dir / "mcp_codex"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    worker_results = out_dir / "workers"
+    worker_results.mkdir(exist_ok=True)
+    server_cmd = mcp_server_command()
+    env = os.environ.copy()
+    env["GROK_WORKER_RESULTS_DIR"] = str(worker_results)
+    env["GROK_WORKER_CWD"] = str(ROOT)
+    env["GROK_WORKER_MAX_TOTAL"] = "4"
+    prompt = (
+        "If you have an MCP tool dispatch_grok_worker, call it once with wait=true "
+        'and prompt Return JSON {"probe":"from_worker","ok":true,"marker":"CODEX-MCP"}. '
+        "Final answer: one JSON object "
+        '{"probe":"mcp_codex","ok":true|false}.'
+    )
+    # Session-scoped MCP via -c; format is version-sensitive.
+    cmd_json = json.dumps(server_cmd[0])
+    args_json = json.dumps(server_cmd[1:])
+    mcp_toml = (
+        "{command=%s, args=%s, enabled=true}"
+        % (cmd_json, args_json)
+    )
+    argv = [
+        "codex",
+        "exec",
+        "--skip-git-repo-check",
+        "-m",
+        "gpt-5.6-sol",
+        "--sandbox",
+        "read-only",
+        "-c",
+        'approval_policy="never"',
+        "-c",
+        "mcp_servers.grok_workers=%s" % mcp_toml,
+        "--json",
+        prompt,
+    ]
+    try:
+        code, stdout, stderr, elapsed = run_subprocess(
+            argv, cwd=ROOT, env=env, timeout=LIVE_TIMEOUT
+        )
+    except subprocess.TimeoutExpired:
+        return {
+            "probe": "mcp_codex",
+            "status": "fail",
+            "reason": "timeout",
+        }
+    (out_dir / "stdout.jsonl").write_text(stdout, encoding="utf-8")
+    (out_dir / "stderr.txt").write_text(stderr, encoding="utf-8")
+    worker_files = sorted(p.name for p in worker_results.iterdir())
+    ok = bool(worker_files)
+    return {
+        "probe": "mcp_codex",
+        "status": "pass" if ok else "fail",
+        "returncode": code,
+        "elapsed_seconds": elapsed,
+        "worker_files": worker_files,
+        "server_cmd": server_cmd,
+        "stderr_prefix": stderr[:500],
+        "stdout_prefix": stdout[:500],
+        "note": "hard gate requires worker artifact files",
+    }
+
+
+def probe_mcp_gemini(run_dir: Path) -> Dict[str, Any]:
+    if shutil.which("gemini") is None:
+        return {"probe": "mcp_gemini", "status": "skip", "reason": "gemini not on PATH"}
+    out_dir = run_dir / "mcp_gemini"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    # Gemini MCP is usually project/user configured. Avoid writing global settings.
+    # Document best-effort: skip if no session flag for ephemeral MCP.
+    return {
+        "probe": "mcp_gemini",
+        "status": "skip",
+        "reason": (
+            "no safe session-scoped MCP inject without writing user/project "
+            "gemini settings; document for harness follow-up"
+        ),
+    }
+
+
+# ---------------------------------------------------------------------------
+# Driver
+# ---------------------------------------------------------------------------
+
+
+def main(argv: Optional[Sequence[str]] = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--offline",
+        action="store_true",
+        help="Run only offline unit probes (no Grok API).",
+    )
+    parser.add_argument(
+        "--live",
+        action="store_true",
+        help="Run live API probes (default unless --offline).",
+    )
+    parser.add_argument(
+        "--only",
+        action="append",
+        default=[],
+        help="Run only named probes (repeatable).",
+    )
+    args = parser.parse_args(argv)
+    run_live = args.live or not args.offline
+    if args.offline:
+        run_live = False
+
+    run_id = timestamp_slug()
+    run_dir = RESULTS_ROOT / run_id
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (RESULTS_ROOT / "latest.txt").write_text(run_id + "\n", encoding="utf-8")
+
+    offline_probes = [
+        ("pool_unit_cap", probe_pool_unit_cap),
+        ("mcp_unit_roundtrip", probe_mcp_unit_roundtrip),
+        ("worker_argv_shape", probe_worker_argv_shape),
+    ]
+    live_probes = [
+        ("worker_smoke", lambda: probe_worker_smoke(run_dir)),
+        ("worker_parallel_4", lambda: probe_worker_parallel_4(run_dir)),
+        ("allowlist_safety", lambda: probe_allowlist_safety(run_dir)),
+        ("native_spawn_optional", lambda: probe_native_spawn_optional(run_dir)),
+        ("mcp_claude", lambda: probe_mcp_claude(run_dir)),
+        ("mcp_grok", lambda: probe_mcp_grok(run_dir)),
+        ("mcp_codex", lambda: probe_mcp_codex(run_dir)),
+        ("mcp_gemini", lambda: probe_mcp_gemini(run_dir)),
+    ]
+
+    selected = set(args.only)
+    results: List[Dict[str, Any]] = []
+
+    def want(name: str) -> bool:
+        return not selected or name in selected
+
+    print("run_id=%s" % run_id)
+    for name, fn in offline_probes:
+        if not want(name):
+            continue
+        print(">> %s" % name, flush=True)
+        try:
+            result = fn()
+        except Exception as exc:  # noqa: BLE001
+            result = {"probe": name, "status": "fail", "error": str(exc)}
+        results.append(result)
+        write_json(run_dir / ("%s.json" % name), result)
+        print("   %s" % result.get("status"), flush=True)
+
+    if run_live:
+        for name, fn in live_probes:
+            if not want(name):
+                continue
+            print(">> %s" % name, flush=True)
+            try:
+                result = fn()
+            except Exception as exc:  # noqa: BLE001
+                result = {"probe": name, "status": "fail", "error": str(exc)}
+            results.append(result)
+            write_json(run_dir / ("%s.json" % name), result)
+            print("   %s" % result.get("status"), flush=True)
+
+    summary = {
+        "schema_version": 1,
+        "run_id": run_id,
+        "model": MODEL,
+        "executed_at": utc_now_iso(),
+        "live": run_live,
+        "results": [
+            {"probe": r.get("probe"), "status": r.get("status")} for r in results
+        ],
+        "pass_count": sum(1 for r in results if r.get("status") == "pass"),
+        "fail_count": sum(1 for r in results if r.get("status") == "fail"),
+        "skip_count": sum(1 for r in results if r.get("status") == "skip"),
+    }
+    write_json(run_dir / "manifest.json", summary)
+    print(json.dumps(summary, indent=2))
+    # Gate offline always must pass.
+    offline_failed = [
+        r
+        for r in results
+        if r.get("probe")
+        in {"pool_unit_cap", "mcp_unit_roundtrip", "worker_argv_shape"}
+        and r.get("status") != "pass"
+    ]
+    return 1 if offline_failed else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -3,6 +3,27 @@
 This directory is an isolated compatibility lab for model CLIs. Nothing here is
 loaded by the Pure Tate harness.
 
+## Grok 4.5 worker pool (max 4)
+
+Hard-capped Grok 4.5 helpers that parent agents can dispatch via MCP:
+
+| File | Role |
+|------|------|
+| `grok_worker_pool.py` | Pool + hard caps (`max_concurrent=4`, `max_total=4`) |
+| `grok_worker_mcp_sdk.py` | Official MCP SDK server for engine attachment |
+| `grok_worker_mcp.py` | Minimal hand-rolled MCP (unit/debug) |
+| `run_grok_worker_probes.py` | Offline + live probes |
+| `GROK_WORKER_FINDINGS.md` | Gate results and harness recommendations |
+
+```bash
+python3 CLI_test/run_grok_worker_probes.py --offline
+python3 CLI_test/run_grok_worker_probes.py --live
+```
+
+Results land under `results/grok_workers/`. **Do not** put `spawn_subagent` in
+Grok `--tools` (allowlist collapse). Prefer MCP workers; see findings for the
+Grok `bypassPermissions` requirement.
+
 ## Web access experiment
 
 `run_web_access_probes.py` checks whether Grok, Claude, Codex, and Gemini can

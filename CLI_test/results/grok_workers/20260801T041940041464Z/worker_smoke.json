@@ -1,0 +1,43 @@
+{
+  "marker_found": true,
+  "probe": "worker_smoke",
+  "status": "pass",
+  "worker": {
+    "argv": [
+      "grok",
+      "-p",
+      "<prompt-sha256:e40f2e934e59522fe146a12c12b3868807f4b484c405a90b5a07a0277909ef16>",
+      "--output-format",
+      "json",
+      "--max-turns",
+      "20",
+      "--permission-mode",
+      "dontAsk",
+      "--always-approve",
+      "--no-subagents",
+      "--tools",
+      "read_file,grep,list_dir",
+      "--disallowed-tools",
+      "run_terminal_command,write,open_page,web_search,web_fetch",
+      "--disable-web-search",
+      "-m",
+      "grok-4.5",
+      "--cwd",
+      "/Users/ken/Desktop/Work/exploratory/Pure_Tate"
+    ],
+    "created_at": "2026-08-01T04:19:40.042128+00:00",
+    "description": "smoke",
+    "elapsed_seconds": 4.493,
+    "error": null,
+    "finished_at": "2026-08-01T04:19:44.534905+00:00",
+    "ok": true,
+    "prompt_sha256": "e40f2e934e59522fe146a12c12b3868807f4b484c405a90b5a07a0277909ef16",
+    "result_text": "{\"probe\":\"worker_smoke\",\"ok\":true,\"marker\":\"PT-WORKER-OK\"}",
+    "returncode": 0,
+    "started_at": "2026-08-01T04:19:40.042207+00:00",
+    "status": "completed",
+    "stderr_path": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test/results/grok_workers/20260801T041940041464Z/worker_smoke/W-b0f0af7a824e.stderr.txt",
+    "stdout_path": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test/results/grok_workers/20260801T041940041464Z/worker_smoke/W-b0f0af7a824e.stdout.txt",
+    "worker_id": "W-b0f0af7a824e"
+  }
+}
