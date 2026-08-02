@@ -826,7 +826,7 @@ def build_parser() -> argparse.ArgumentParser:
     agent_parser.add_argument("--task-id", required=True)
     agent_parser.add_argument("--engine", required=True)
     agent_parser.add_argument("--output", required=True)
-    agent_parser.add_argument("--timeout", type=int, default=3600)
+    agent_parser.add_argument("--timeout", type=int, default=10800)
     agent_parser.set_defaults(func=command_agent_run)
 
     stage_parser = subparsers.add_parser("stage")
@@ -862,7 +862,7 @@ def build_parser() -> argparse.ArgumentParser:
     drive_parser.add_argument("--research-engines", nargs="+")
     drive_parser.add_argument("--prover-engines", nargs="+", required=True)
     drive_parser.add_argument("--review-engines", nargs="+", required=True)
-    drive_parser.add_argument("--timeout", type=int, default=3600)
+    drive_parser.add_argument("--timeout", type=int, default=10800)
     drive_parser.add_argument("--dry-run", action="store_true")
     drive_parser.add_argument("--retry", action="store_true")
     drive_parser.add_argument(

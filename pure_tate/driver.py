@@ -62,7 +62,7 @@ def drive(
     steps: int,
     prover_engines: Sequence[str],
     review_engines: Sequence[str],
-    timeout: int = 3600,
+    timeout: int = 10800,
     dry_run: bool = False,
     retry: bool = False,
 ) -> Dict[str, Any]:

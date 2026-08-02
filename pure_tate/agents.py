@@ -1663,7 +1663,7 @@ def run_task(
     task: Dict[str, Any],
     engine_id: str,
     output: Path,
-    timeout: int = 3600,
+    timeout: int = 10800,
     progress_callback: Optional[Callable[[str, int, float], None]] = None,
 ) -> Dict[str, Any]:
     from .capabilities import WEB_PHASES, capability_is_attested
@@ -1729,7 +1729,7 @@ def run_task(
             max_workers=max_workers,
             allow_web=allow_web,
             worker_model=str(worker_model),
-            worker_timeout=min(timeout, 1200),
+            worker_timeout=min(timeout, 3600),
             parent_meta={
                 "engine": engine_id,
                 "family": str(family or ""),
