@@ -175,8 +175,13 @@ python3 -m pure_tate drive \
   --research-engines claude grok \
   --prover-engines grok claude codex qwen \
   --review-engines grok qwen codex claude \
+  --notify-desktop \
   --dry-run
 ```
+
+On macOS, `--notify-desktop` sends a native notification after every completed
+campaign step and a final run notification. It is best-effort: a notification
+permission or AppleScript failure never interrupts proof work.
 
 Remove `--dry-run` only after the listed research engines have passed live audits
 for both finding-audit and novelty phases. Once any live audit exists, dry-run

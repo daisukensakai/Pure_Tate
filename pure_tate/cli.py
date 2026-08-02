@@ -525,6 +525,7 @@ def command_drive(args: argparse.Namespace) -> int:
                 timeout=args.timeout,
                 dry_run=args.dry_run,
                 retry=args.retry,
+                desktop_notifications=args.notify_desktop,
             )
         else:
             result = drive(
@@ -863,6 +864,11 @@ def build_parser() -> argparse.ArgumentParser:
     drive_parser.add_argument("--timeout", type=int, default=3600)
     drive_parser.add_argument("--dry-run", action="store_true")
     drive_parser.add_argument("--retry", action="store_true")
+    drive_parser.add_argument(
+        "--notify-desktop",
+        action="store_true",
+        help="Send a native macOS notification after every campaign step and when the run ends.",
+    )
     drive_parser.set_defaults(func=command_drive)
 
     campaign_status_parser = subparsers.add_parser("campaign-status")

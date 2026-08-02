@@ -27,6 +27,7 @@ from .experiments import experiment_tasks, run_experiment
 from .findings import adjudicate_finding, load_findings, record_review_findings
 from .health import eligible_engine_pool, engine_health_state, operational_engine_pool
 from .novelty import novelty_tasks
+from .notifications import notify_campaign_run, notify_campaign_step
 from .routing import (
     load_routing_config,
     high_tier_chain_order,
@@ -470,6 +471,7 @@ def drive_campaign(
     timeout: int = 3600,
     dry_run: bool = False,
     retry: bool = False,
+    desktop_notifications: bool = False,
 ) -> Dict[str, Any]:
     campaign = load_campaign(campaign_id)
     if steps <= 0 or steps > campaign["batch_step_limit"]:
@@ -1249,6 +1251,8 @@ def drive_campaign(
                 )
             break
         finally:
+            if desktop_notifications:
+                notify_campaign_step(campaign_id, event, steps)
             if ledger is not None and ledger_path is not None:
                 ledger["events"] = events
                 _write_run_ledger(ledger_path, ledger)
@@ -1268,6 +1272,14 @@ def drive_campaign(
         ledger["completed_at"] = _timestamp()
         ledger["executed_steps"] = len(events)
         _write_run_ledger(ledger_path, ledger)
+        if desktop_notifications:
+            notify_campaign_run(
+                campaign_id,
+                len(events),
+                steps,
+                ledger["status"],
+                stop_reason,
+            )
     return {
         "campaign_id": campaign_id,
         "dry_run": dry_run,

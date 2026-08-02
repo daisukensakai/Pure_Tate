@@ -35,6 +35,68 @@ from pure_tate.tasking import campaign_mathematics_tasks, finding_audit_tasks
 
 
 class FocusedCampaignTests(unittest.TestCase):
+    def test_campaign_notifies_after_each_step_and_at_run_end(self):
+        campaign = load_campaign("C66-001")
+        finding_task = {
+            "id": "TASK-F-FND-TEST",
+            "finding_id": "FND-0022",
+            "campaign_id": "C66-001",
+            "packet_sha256": "a" * 64,
+        }
+        artifact = {
+            "id": "FAUD-TEST",
+            "finding_id": "FND-0022",
+            "engine": "grok",
+            "verdict": "retain_candidate",
+        }
+        with mock.patch(
+            "pure_tate.campaign_driver._research_capability_state",
+            return_value="pass",
+        ), mock.patch(
+            "pure_tate.campaign_driver._campaign_reviews", return_value=[]
+        ), mock.patch(
+            "pure_tate.campaign_driver._load_bearing_experiments", return_value=[]
+        ), mock.patch(
+            "pure_tate.campaign_driver.finding_audit_tasks",
+            return_value=[finding_task],
+        ), mock.patch(
+            "pure_tate.campaign_driver.run_task", return_value=artifact
+        ), mock.patch(
+            "pure_tate.campaign_driver._write_run_ledger"
+        ), mock.patch(
+            "pure_tate.campaign_driver._new_run_ledger",
+            return_value=(
+                {
+                    "schema_version": 1,
+                    "run_id": "RUN-TEST",
+                    "campaign_id": "C66-001",
+                    "events": [],
+                    "status": "running",
+                },
+                ROOT / "reports" / "runs" / "RUN-TEST.json",
+            ),
+        ), mock.patch(
+            "pure_tate.campaign_driver.notify_campaign_step"
+        ) as step_notification, mock.patch(
+            "pure_tate.campaign_driver.notify_campaign_run"
+        ) as run_notification:
+            result = drive_campaign(
+                campaign["id"],
+                1,
+                research_engines=["grok"],
+                prover_engines=["grok", "claude", "codex", "qwen"],
+                review_engines=["grok", "claude"],
+                dry_run=False,
+                desktop_notifications=True,
+            )
+        self.assertEqual(result["executed_steps"], 1)
+        step_notification.assert_called_once()
+        self.assertEqual(step_notification.call_args.args[0], campaign["id"])
+        self.assertEqual(step_notification.call_args.args[2], 1)
+        run_notification.assert_called_once_with(
+            campaign["id"], 1, 1, "completed", "step_limit"
+        )
+
     def test_forced_slots_open_after_ordinary_starts_three_and_six(self):
         campaign = load_campaign("C66-001")
         packet = campaign_packet_record("C66-001")
