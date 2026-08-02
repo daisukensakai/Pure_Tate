@@ -1,0 +1,45 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-02T09:15:05.121814+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "qwen"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "claude",
+      "codex",
+      "qwen"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 12087,
+      "completed_at": "2026-08-02T09:15:04.812812+00:00",
+      "engine": "grok",
+      "error": "agent failed with exit 1: \u001b[2m2026-08-02T09:09:37.029858Z\u001b[0m \u001b[33m WARN\u001b[0m Failed to fetch models: Network(reqwest::Error { kind: Request, url: \"https://cli-chat-proxy.grok.com/v1/models\", source: hyper_util::client::legacy::Error(Connect, ConnectError(\"dns error\", Custom { kind: Uncategorized, error: \"failed to lookup address information: nodename nor servname provided, or not known\" })) })\n\u001b[2m2026-08-02T09:09:37.030092Z\u001b[0m \u001b[33m WARN\u001b[0m Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) \u001b[3mattempt\u001b[0m\u001b[2m=\u001b[0m0\n\u001b[2m2026-08-02T09:09:37.536862Z\u001b[0m \u001b[33m WARN\u001b[0m Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) \u001b[3mattempt\u001b[0m\u001b[2m=\u001b[0m1\n\u001b[2m2026-08-02T09:09:38.542537Z\u001b[0m \u001b[33m WARN\u001b[0m Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) \u001b[3mattempt\u001b[0m\u001b[2m=\u001b[0m2\n\u001b[2m2026-08-02T09:09:38.542581Z\u001b[0m \u001b[31mERROR\u001b[0m Settings fetch failed \u001b[3mmax",
+      "last_activity_at": "2026-08-02T09:15:04.795600+00:00",
+      "last_activity_stream": "stderr",
+      "output": "research/finding-audits/FAUD-0003.json",
+      "phase": "finding-audit",
+      "started_at": "2026-08-02T09:09:36.988997+00:00",
+      "state": "failed",
+      "step": 1,
+      "task_id": "TASK-F-FND-0022"
+    }
+  ],
+  "executed_steps": 1,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260802T090936703609Z-40604",
+  "schema_version": 1,
+  "started_at": "2026-08-02T09:09:36.703609+00:00",
+  "status": "completed",
+  "stop_reason": "no_eligible_task"
+}

@@ -3,6 +3,7 @@ import hashlib
 import os
 import re
 import shutil
+import sys
 import tempfile
 import time
 from pathlib import Path
@@ -18,16 +19,11 @@ from .targets import CONTEXT_REVISION
 
 
 ENGINE_CONFIG = DATA / "engines.json"
-GEMINI_SYSTEM_MD = DATA / "gemini_system_minimal.md"
-
-
 def _subprocess_env(
     family: Optional[str] = None,
     engine_config: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, str]:
     env = dict(os.environ)
-    if family == "gemini" and GEMINI_SYSTEM_MD.is_file():
-        env["GEMINI_SYSTEM_MD"] = str(GEMINI_SYSTEM_MD.resolve())
     if family == "claude":
         # An inherited 32k setting must not silently defeat the pinned engine
         # configuration for long forced-proof artifacts.
@@ -35,42 +31,6 @@ def _subprocess_env(
         if isinstance(maximum, int) and maximum > 0:
             env["CLAUDE_CODE_MAX_OUTPUT_TOKENS"] = str(maximum)
     return env
-
-
-def _extract_gemini_stream(text: str) -> Dict[str, Any]:
-    """Reassemble Gemini CLI `-o stream-json` assistant deltas into one JSON object."""
-    chunks: List[str] = []
-    result_status: Optional[str] = None
-    result_error: Optional[str] = None
-    for line in text.splitlines():
-        stripped = line.strip()
-        if not stripped.startswith("{"):
-            continue
-        try:
-            event = json.loads(stripped)
-        except json.JSONDecodeError:
-            continue
-        if not isinstance(event, dict):
-            continue
-        etype = event.get("type")
-        if etype == "message" and event.get("role") == "assistant":
-            content = event.get("content")
-            if isinstance(content, str) and content:
-                chunks.append(content)
-        elif etype == "result":
-            result_status = str(event.get("status") or "")
-            err = event.get("error") or event.get("message")
-            if err is not None:
-                result_error = str(err)
-    if result_status and result_status != "success":
-        raise ValueError(
-            "gemini stream failed (%s): %s"
-            % (result_status, result_error or "no detail")
-        )
-    if chunks:
-        return _extract_json_object("".join(chunks))
-    # Fallback for older `-o json` envelopes.
-    return _extract_json_object(text)
 
 
 def _extract_claude_stream(text: str) -> Dict[str, Any]:
@@ -409,11 +369,12 @@ def assemble_prompt(
                 + " Never use run_terminal_command, write, or any shell. "
                 "Put the completed JSON artifact in your final message only."
             )
-        elif family == "gemini":
+        elif family == "qwen":
             parts.append(
                 "Your final answer must be exactly one JSON object with no prose "
                 "before or after it. Prefer reading corpus/chunks over large text "
-                "files when both are available. Stay in read-only plan mode. "
+                "files when both are available. Use only the supplied read_file "
+                "tool for workspace context. "
                 "Put the completed JSON artifact in your final message only."
             )
     if workers_enabled and max_workers > 0:
@@ -460,6 +421,7 @@ def _engine_argv(
     last_message_path: Optional[Path] = None,
     phase: Optional[str] = None,
     workers: Optional["WorkerSession"] = None,
+    context_files: Optional[List[str]] = None,
 ) -> List[str]:
     from .capabilities import phase_allows_web
     from .grok_workers import apply_workers_to_argv
@@ -559,22 +521,24 @@ def _engine_argv(
             command.append("--disable-web-search")
         command.extend(["-m", model])
         return apply_workers_to_argv(command, "grok", workers)
-    if family == "gemini":
-        # Plan mode is workspace-write-blocked. CLI_test shows google_web_search
-        # still works under plan; stream-json feeds the process watchdog.
-        # Gemini has no safe session-scoped MCP inject yet — no workers.
-        return [
-            binary,
-            "-p",
+    if family == "qwen":
+        command = [
+            sys.executable,
+            str((Path(__file__).with_name("qwen_worker.py")).resolve()),
+            "--model",
+            str(model),
+            "--prompt",
             prompt,
-            "-m",
-            model,
-            "-o",
-            "stream-json",
-            "--approval-mode",
-            "plan",
-            "--skip-trust",
+            "--max-tokens",
+            str(config.get("max_output_tokens", 64000)),
+            "--thinking-budget",
+            str(config.get("thinking_budget", 16384)),
         ]
+        for relative in context_files or []:
+            command.extend(["--context-file", relative])
+        if workers_on:
+            command.append("--allow-grok-workers")
+        return command
     raise ValueError("unsupported engine family %r" % family)
 
 
@@ -1790,6 +1754,7 @@ def run_task(
             last_message,
             phase=phase,
             workers=workers if workers_on else None,
+            context_files=files,
         )
         engine_max = config.get("max_task_seconds")
         task_timeout = timeout
@@ -1888,9 +1853,7 @@ def run_task(
                 )
             raise RuntimeError(detail)
         try:
-            if family == "gemini":
-                artifact = _extract_gemini_stream(raw)
-            elif family == "claude":
+            if family == "claude":
                 artifact = _extract_claude_stream(raw)
             elif family == "grok":
                 artifact = _extract_grok_stream(raw)
@@ -2003,6 +1966,7 @@ def run_task(
             "paired_problem_key",
             "paired_theorem_sha256",
             "paired_attempt_policy_revision",
+            "routing_chain_id",
         ):
             if field in task:
                 artifact[field] = task[field]

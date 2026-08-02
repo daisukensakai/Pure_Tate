@@ -706,6 +706,7 @@ def command_all(args: argparse.Namespace) -> int:
             paired_packet,
             paired_campaign["paired_attempt_policy"]["engine_order"],
             paired_campaign["batch_step_limit"],
+            include_untried=False,
         ),
     )
 
@@ -716,7 +717,7 @@ def command_all(args: argparse.Namespace) -> int:
     if command_replay(replay_namespace) != 0:
         return 1
     print(
-        "Generated revision-2 case packets, revision-3 C66 campaign packet/status, manifests, "
+        "Generated revision-2 case packets, revision-4 C66 campaign packet/status, manifests, "
         "board, findings, and reports."
     )
     return 0

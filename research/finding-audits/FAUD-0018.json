@@ -1,0 +1,67 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction. contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005: the SRC-0004 Lemma 10.6 excerpt packaged in C66-001-v4 gives vanishing of H^0(C, omega_C tensor W_{f_i}|_C^vee(Gamma)) whenever 0 > 4 f_i + n - 2g - 14, which for g=6, f_2=5 reads n < 6; hence n <= 5 is automatic and n = 6 is exactly the degree-zero boundary, reproducing c(6) = 5. The finding therefore sits exactly at the campaign case and nowhere else. INSTANTIATION VERIFIED FROM SUPPLIED PRIMARY EXCERPT: deg(W_5|_C) = 4g + 12 - 4f = 16, deg(W_5 tensor omega_C^{-1}) = 16 - (2g-2) = 6 = n, and deg(omega_C tensor W_5|_C^vee(Gamma)) = 2g - 2 - 16 + 6 = 0, so the packet's own C66-GEO-Z instruction ('Six-point failure locus: O_C(Gamma) isomorphic to W_5 tensor omega_C^{-1}') is precisely the geometric-point form of a degree-zero triviality condition. The finding is thus about the packet's own construction, not about a misreading of SRC-0004. LIVE PRIMARY VERIFICATION OF THE MATHEMATICAL POINT. (1) Pagani-Ricolfi-van Zelm, 'Pullbacks of universal Brill-Noether classes via Abel-Jacobi morphisms' (arXiv:1809.10668), Section 3.2: the universal Brill-Noether locus is given set-theoretically as {(C,P,L) : L in Pic^d C, h^0(C,L) > r} and then 'can be endowed with the scheme structure of the (g-d+r)-th Fitting ideal of R^1 pi_* L'. The scheme structure is IMPOSED by a separate definition, not read off from the set-theoretic description; and the paper's entire subject is the comparison of such universal classes with their pullbacks along Abel-Jacobi morphisms, treated as a substantive computation (Thom-Porteous class w^r_d = Delta^{(r+1)}_{g-d+r} c(-R pi_* L)). This is direct primary support for the finding's core assertion. (2) arXiv:2405.17689 constructs Brill-Noether ideals BN^k(F) = I_{r_0-k}(delta^0), the ideal of (r_0-k)x(r_0-k) minors of delta^0 for a base-change complex (a bounded complex of locally free sheaves with R^i (f_T)_* F_T iso h^i(E_T^.) for any T -> Y), i.e. exactly the determinantal/Fitting structure the finding names. Its Lemma 3.5 records that Fitting ideals commute with FLAT base change. IMPORTANTLY, on direct retrieval of the paper text I could NOT verify any statement that these ideals or loci commute with ARBITRARY base change; a search-engine summary asserted this, and I am recording that assertion as UNVERIFIED and not relying on it. The flat-versus-arbitrary distinction is exactly where 'over an arbitrary base' in the finding bites, so this failure to verify strengthens rather than weakens the finding. (3) Expected-codimension arithmetic (reviewer-computed, elementary): chi(N) = 1 - g = -5 forces complex ranks e and e+5, so the rank-drop locus has expected codimension g = 6, matching the codimension of the identity section in the relative Picard. The two structures therefore agree in expected codimension while remaining a priori distinct as schemes - necessary but not sufficient, which is the finding's precise content. DISCHARGE ROUTE AND ITS CURRENT STATUS. The natural discharge is: (a) base-change stability of the Brill-Noether/Fitting degeneracy structure, so that the relative locus is the pullback of a universal determinantal locus in Pic^0; plus (b) reducedness of that universal degree-zero locus, which for a single smooth curve follows from the Riemann-Kempf/Petri tangent-space formula T_L W^r_d = (Im mu_0)^perp, since for L = O_C the map mu_0 : H^0(O_C) tensor H^0(K) -> H^0(K) is an isomorphism and the tangent space is zero. Step (b) is reviewer-supplied: every PDF retrieval attempted in this session (ACGH-derived lecture notes, arXiv:1809.10668 PDF) returned undecodable binary and could not be text-verified, so no primary citation for the tangent-space computation is recorded here. Step (a) is likewise not verified beyond the flat case. Consequently the finding names a genuinely OPEN obligation on C66-GEO-Z, not a formality already settled in the cited literature. NON-DUPLICATION. Distinct from FND-0005 (Z nonempty by Riemann-Roch): FND-0005 establishes that the underlying point set is nonempty, which is the complementary statement and is exactly what does NOT determine scheme structure - the two findings compose rather than merge. Distinct from FND-0022 (localization spectral sequence codimension shifts and Tate twists for gonality/Brill-Noether stratification of M_{g,n-1}), FND-0020 and FND-0037 (mixed weights and non-split extension of R^1 pi_* Q), FND-0031/FND-0032/FND-0033/FND-0034 (weight spectral sequence corner, CGP top weight, pure-row semisimplicity, non-separating divisor Mbar_{5,8}), and FND-0003 (genus-7 unbalanced residual pencil breaking a finite-etale model). None concerns scheme structure of a relative degeneracy locus. Merge target: none. AUDIT LIMITATIONS DISCLOSED. (i) The supplied proof/findings.jsonl snapshot contains only FND-0001 through FND-0034; FND-0035, FND-0036 and FND-0037 appear only as packet entries and as duplicate_of targets, and FND-0038 through FND-0046 are absent entirely. Non-duplication is therefore certified against FND-0001..FND-0034 plus the ten adjudicated findings listed in packet C66-001-v4, and NOT against any finding in the FND-0038..FND-0045 range, which I could not inspect. (ii) The section-10 text of SRC-0004 could not be retrieved (ar5iv returned only through Section 1.4; PDF and abs retrievals gave no section content), so whether Canning-Larson themselves treat the failure locus scheme-theoretically is UNRESOLVED; this does not affect the adjudication, because the finding targets the campaign's C66-GEO-Z construction, whose fibrewise phrasing is verified directly from the supplied packet. (iii) Two Grok 4.5 helper workers (W-8dd9b4cf42bf, W-09149da767e3) were dispatched and both returned only a single preamble sentence with no substantive content; they contributed nothing to this audit and no claim here rests on them. Remaining worker budget was not spent. VERDICT. Promote from candidate to corroborated on independent verification by a second engine (claude; codex was the sole prior reviewer and is excluded for this task) of the degree-zero instantiation at (6,6), of the imposed-rather-than-derived nature of the Fitting scheme structure on Brill-Noether/Abel-Jacobi loci, and of the flat-versus-arbitrary base-change gap. Evidence class upgraded from adversarial_review to primary_source. Recommended kind refinement: the finding functions as a rigor obligation on C66-GEO-Z rather than an approach-killing obstruction, and any attempt claiming to have 'constructed Z' must exhibit the scheme structure it is using and the comparison, plus an integrality hypothesis on the fibres.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0046",
+  "id": "FAUD-0018",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "additional_scope_sharpening_from_this_audit": [
+      "The fibrewise equivalence itself requires geometrically integral fibres. On a reducible nodal fibre a relative-degree-0 line bundle can have a nonzero section without being trivial (e.g. O(D) with D effective and supported on one component, balanced by negative degree on another), so over any base whose fibres degenerate - a partial compactification of the tetragonal locus, or a Hurwitz/Casnati-Ekedahl family admitting reducible covers - even the SET-theoretic identification fails, not merely the scheme structure. This strengthens the finding beyond its stated form.",
+      "n <= 5 gives deg N = 4*5 + n - 26 < 0 and hence automatic vanishing; n = 6 is exactly the degree-zero boundary. This is the arithmetic reason the published marking bound is c(6) = 5 in THM-0005, and it localises the finding precisely at the campaign case (6,6) rather than at a generic marking count.",
+      "The obstruction is a rigor obligation on C66-GEO-Z, not a refutation of the approach: a discharge route exists (base-change stability of Brill-Noether/Fitting ideals, plus reducedness of the universal degree-zero locus in the relative Picard). However see contradiction_resolution: the arbitrary-base-change step is NOT available off the shelf in what could be verified live, so the obligation is currently open."
+    ],
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "equivalence_group": "relative-ce-failure-requires-scheme-structure-comparison",
+    "exact_assertion": "The equivalence 'h^0(N_s) != 0 <=> N_s iso O_{C_s}' is a statement about geometric points and determines only the underlying set of the relative locus. Identifying the relative locus with an Abel-Jacobi incidence locus as a SCHEME over an arbitrary base S requires an additional comparison of the determinantal/Fitting-ideal structure (maximal-minors degeneracy locus of a base-change complex computing R pi_* N) with the structure pulled back from the identity section of Pic^0_{C/S}.",
+    "exact_line_bundle": "N := omega_C tensor W_5|_C^vee (Gamma). By SRC-0004 Lemma 10.6 (verbatim excerpt in packet C66-001-v4), deg N = 4 f_2 + n - 2g - 14 = 4*5 + 6 - 2*6 - 14 = 0. The evaluation-failure condition h^0(N) != 0 is therefore exactly N iso O_C, equivalently O_C(Gamma) iso W_5 tensor omega_C^{-1}, matching the packet's 'Six-point failure locus' line.",
+    "expected_codimension_check": "chi(N) = deg - g + 1 = 1 - 6 = -5, so a base-change complex has ranks e and e+5 and the rank-drop-by-one degeneracy locus has expected codimension 1*(g) = 6, equal to codim of the identity section in the g=6 relative Picard. Agreement of expected codimensions is necessary but not sufficient for agreement of scheme structures; this is precisely the gap the finding names.",
+    "impacts_approach_ids": [
+      "C66-GEO-Z"
+    ],
+    "not_claimed": "The finding does NOT assert that the two scheme structures differ, and does NOT assert that Z is empty or that the AJ description is set-theoretically wrong. It asserts only that the scheme-level identification is an additional obligation not discharged by the fibrewise equivalence.",
+    "object": "The relative Casnati-Ekedahl evaluation-failure locus Z over a base S, compared with the Abel-Jacobi incidence locus {O_C(Gamma) iso W_5 tensor omega_C^{-1}}.",
+    "valid_for": "Families pi: C -> S of smooth, geometrically integral tetragonal genus-6 curves with a relative ordered degree-6 divisor Gamma, over an arbitrary base scheme S, explicitly including non-reduced S and non-flat base change."
+  },
+  "source_records": [
+    {
+      "arxiv_id": "1809.10668",
+      "arxiv_version": null,
+      "content_sha256": "840bf4084dfc587b2385c40b16e374b841d333aa7fe54808e442c62d08627de2",
+      "doi": null,
+      "query_family": "abel-jacobi-pullback-vs-fitting-scheme-structure",
+      "retrieved_at": "2026-08-02T10:44:03Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1809.10668"
+    },
+    {
+      "arxiv_id": "2405.17689",
+      "arxiv_version": "v1",
+      "content_sha256": "fc1a7431cdff8444cce4ec736f04f536c896b635f5dc1c841b4f16d604a3a3b9",
+      "doi": null,
+      "query_family": "fitting-ideal-base-change-brill-noether-ideals",
+      "retrieved_at": "2026-08-02T10:44:25Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2405.17689"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "f621326e274d1deb259b4d80c0607d171a13310979ec897de8848f9cbcece247",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check-src0004-lemma-10-6-degree-zero-boundary",
+      "retrieved_at": "2026-08-02T10:44:47Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357v2"
+    }
+  ],
+  "task_id": "TASK-F-FND-0046",
+  "verdict": "promote"
+}

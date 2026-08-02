@@ -1,0 +1,67 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with corroborated FND-0020 (R^1 mixed of weights 1 and 2 via Deligne\u2019s SES 0\u2192H^1(C)\u2192H^1(C\\S)\u2192Q(-1)^{m-1}\u21920), mechanically verified FND-0036 (after q=0 vanishing, H^{26}(M_{6,6})\u2245H^{25}(M_{6,5};R^1\u03c0_*Q) with no Leray differentials into total degree 26), and corroborated FND-0033 (the pure polarizable weight-26 target corner is semisimple, so Tate inputs yield Tate cokernels; that does not cancel the intermediate connecting-map bookkeeping). Independent primary check for (g,n)=(6,6): d=21, ordinary dual degree 26, forgetful \u03c0:M_{6,6}\u2192M_{6,5} has affine-curve fibers so Leray is two-row (q\u22641); Harer vcd(M_{6,5})=4\u00b76-4+5=25 kills E_2^{26,0}, yielding the FND-0036 isomorphism. Write L=R^1\u03c0_*Q for the fiberwise H^1 of the 5-punctured curve; Deligne supplies the SES of VMHS 0\u2192H\u2192L\u2192T\u21920 with H pure weight 1 (rank 2g=12 symplectic VHS) and T pure weight 2 Tate (rank 4). The LES of MHS ...\u2192H^{24}(T)\u2192H^{25}(H)\u2192H^{25}(L)\u2192H^{25}(T)\u2192... is strict for weights; weight floors give Gr^W_{26}H^{25}(T)=0 (floor 27) while Gr^W_{26}H^{24}(T) and Gr^W_{26}H^{25}(H) may be nonzero, so Gr^W_{26}H^{25}(L)\u2245coker(\u03b4:Gr^W_{26}H^{24}(T)\u2192Gr^W_{26}H^{25}(H)). Thus the weight-two quotient contributes no Gr^W_{26} piece in degree 25, yet its degree-24 graded piece can alter the weight-one contribution\u2019s Gr^W_{26} quotient exactly as stated; no supplied primary computation resolves \u03b4 for this map/degree. Mild scope note: the obstruction is intermediate forgetful-Leray bookkeeping on M_{6,5}, not an exotic-extension gap inside the pure RED-0001 corner after Gr^W (FND-0033). Distinct from FND-0020 (mixed weight floor / pure-weight-1 mislabel), FND-0014 (uncontrolled symplectic H^{23} for (5,8)), and FND-0036 (q=0 vanishing only): do not merge. FND-0015 and FND-0027 are already retired as duplicate_of FND-0037. Merge target: none. Promote candidate to corroborated; evidence_class upgraded from reviewer_analysis to primary_source on independent verification of the Deligne SES, weight floors, LES cokernel identification, and residual unresolved status of \u03b4.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0037",
+  "id": "FAUD-0014",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "graded_identification": "Gr^W_{26}H^{25}(M_{6,5};L)\\cong coker(\\delta:Gr^W_{26}H^{24}(T)\\to Gr^W_{26}H^{25}(H))",
+    "local_system": "mixed R^1\\pi_*Q",
+    "map": "M_{6,6}\\to M_{6,5}",
+    "ordinary_degree": 26
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": null,
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2307.08830"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "mixed-hodge-punctured-curve",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Mixed_Hodge_structure"
+    },
+    {
+      "arxiv_id": "1205.1586",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "leray-local-systems-moduli",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1205.1586"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "vcd-harer",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://eudml.org/doc/143338"
+    }
+  ],
+  "task_id": "TASK-F-FND-0037",
+  "verdict": "promote"
+}

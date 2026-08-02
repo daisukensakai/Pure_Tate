@@ -20,7 +20,7 @@ from typing import Any, Dict, Optional, Tuple
 
 
 DEFAULT_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
-TOKEN_PLAN_BASE_URL = "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
+TOKEN_PLAN_BASE_URL = "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1"
 DEFAULT_MODEL = "qwen3.7-max"
 KEY_ENVIRONMENTS = ("DASHSCOPE_API_KEY", "QWEN_API_KEY")
 

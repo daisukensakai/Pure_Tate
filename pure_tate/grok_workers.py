@@ -748,7 +748,7 @@ class GrokWorkerPool:
 # Harness session attachment
 # ---------------------------------------------------------------------------
 
-WORKER_FAMILIES = frozenset({"claude", "grok", "openai"})
+WORKER_FAMILIES = frozenset({"claude", "grok", "openai", "qwen"})
 MCP_SERVER_NAME = "grok-workers"
 CLAUDE_MCP_TOOLS = [
     "mcp__grok-workers__dispatch_grok_worker",
@@ -909,6 +909,12 @@ def prepare_worker_session(
     # Controller-mediated Codex workers run directly from the trusted harness,
     # so Codex never needs an approval-gated MCP attachment.
     if not attach_mcp:
+        return session
+
+    # Qwen is driven through the local API adapter rather than an MCP client.
+    # The adapter consumes this session's environment and calls the same
+    # hard-capped worker pool directly when the model selects ask_grok.
+    if family == "qwen":
         return session
 
     if family == "claude":

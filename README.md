@@ -43,7 +43,7 @@ python3 -m pure_tate tasks --phase research --write
 python3 -m pure_tate tasks --phase micro-research --write
 python3 -m pure_tate engines
 python3 -m pure_tate capability-audit --engines claude grok
-python3 -m pure_tate engine-health --engine gemini --live --level artifact
+python3 -m pure_tate engine-health --engine qwen --live --level artifact
 python3 -m pure_tate campaign-status --campaign C66-001 --write
 python3 -m pure_tate next --campaign C66-001 --phase forced-proof
 ```
@@ -104,8 +104,11 @@ python3 -m pure_tate drive \
 ```
 
 Fresh mathematics follows `prover_rotation` (Grok → Opus → Grok → GPT → Grok →
-Gemini). Retries escalate `grok → gemini → codex → claude`. Reviews walk the same
-escalation order, skipping only the prover and already-used reviewers.
+Qwen). Retries move forward within one proof chain: Grok → Qwen → the
+chain-assigned Opus/GPT pair. Consecutive chains alternate Opus → GPT and
+GPT → Opus; an unavailable high-tier slot remains pending rather than repeating
+the available model. Reviews use the same base ladder while skipping the prover
+and already-used reviewers.
 
 Remove `--dry-run` only when the displayed portfolio is intended. Pending current
 reviews run before new mathematics. A `proposed` attempt receives one independent
@@ -142,19 +145,18 @@ python3 -m pure_tate finding-adjudicate \
 
 ## Focused `(6,6)` novelty campaign
 
-Campaign `C66-001` keeps target context revision 2 and uses campaign revision 3.
+Campaign `C66-001` keeps target context revision 2 and uses campaign revision 4.
 Its packet focuses on the balanced tetragonal Casnati–Ekedahl failure locus and
 coordinates geometry, weakest-sufficient-proof, counterexample, and computation
 lanes. Revision 2 fixes the CE convention
 `W_5=(O_{P(E^vee)}(2) tensor gamma^*O(-5))|_C`, preserves the revision-1
-attempt byte-for-byte as stale context, and enforces the subproblem DAG. Revision 3
-adds paired exact-theorem turns. For each theorem and packet revision, engines
-escalate Grok → Codex → Claude on the forced exact-theorem ladder. Each of those
-engines first receives one isolated, offline, completion-focused
-proof-or-disproof task. Only a substantive unsuccessful result opens one
-same-engine standard-method turn; infrastructure failures do not consume the
-first slot. Gemini is not on the forced ladder; it still participates in ordinary
-subproblem mathematics when `prover_rotation` selects it.
+attempt byte-for-byte as stale context, and enforces the subproblem DAG. Revision 4
+adds chain-scoped high-tier escalation and periodic forced exact-theorem turns.
+After fresh ordinary proof starts 3 and 6 in each six-start cycle, the harness
+queues one forced turn each for Opus and GPT in the active chain order. Grok and
+Qwen never receive forced-proof work. A substantive unsuccessful forced result
+opens one same-engine standard-method turn; infrastructure failures do not consume
+the forced slot.
 
 Observable subprocess output, tool records, computations, and review diagnostics are
 quarantined as traces. An independent engine converts each trace into a
@@ -171,8 +173,8 @@ python3 -m pure_tate drive \
   --campaign C66-001 \
   --steps 12 \
   --research-engines claude grok \
-  --prover-engines grok claude codex gemini \
-  --review-engines grok gemini codex claude \
+  --prover-engines grok claude codex qwen \
+  --review-engines grok qwen codex claude \
   --dry-run
 ```
 
@@ -184,20 +186,20 @@ the blocking task and engine states. Macaulay2 experiments use a
 digest-pinned `linux/amd64` OCI image, run without network, and require a second
 byte-hash-matching execution before a universal computation can support a proof.
 
-Gemini mathematics and review turns additionally require a current artifact-level
+Qwen mathematics and review turns additionally require a current artifact-level
 health receipt. The health command runs bounded basic, file-reading, and synthetic
 review probes without writing proof artifacts:
 
 ```bash
 python3 -m pure_tate engine-health \
-  --engine gemini \
+  --engine qwen \
   --live \
   --level artifact \
   --timeout 180 \
   --inactivity-timeout 60
 ```
 
-Paid routing excludes a Gemini engine whose receipt is missing or failed; dry-run
+Paid routing excludes a Qwen engine whose receipt is missing or failed; dry-run
 keeps it in the proposed rotation while displaying the failed state. Agent subprocesses
 run in their own process groups, emit activity to a durable campaign run ledger under
 `reports/runs/`, and are terminated on total timeout, inactivity, interruption, or a

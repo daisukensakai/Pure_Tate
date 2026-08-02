@@ -15,14 +15,13 @@
     "grok",
     "codex",
     "grok",
-    "gemini"
+    "qwen"
   ],
   "escalation_order": [
     "grok",
-    "gemini",
-    "codex",
-    "claude"
+    "qwen"
   ],
+  "high_tier_chain_engines": ["claude", "codex"],
   "engines": {
     "claude": {
       "binary": "claude",
@@ -48,6 +47,7 @@
       "binary": "codex",
       "family": "openai",
       "model": "gpt-5.6-sol",
+      "max_task_seconds": 3600,
       "declared_capabilities": {
         "research": ["filesystem_read"],
         "finding-audit": ["filesystem_read"],
@@ -56,15 +56,14 @@
         "review": ["filesystem_read", "web_search"]
       }
     },
-    "gemini": {
-      "binary": "gemini",
-      "family": "gemini",
-      "model": "gemini-3.5-flash",
+    "qwen": {
+      "binary": "python3",
+      "family": "qwen",
+      "model": "qwen3.7-max",
+      "max_output_tokens": 64000,
+      "thinking_budget": 16384,
       "max_task_seconds": 3600,
       "inactivity_timeout_seconds": 300,
-      "abort_stderr_pattern_counts": {
-        "status: 503": 3
-      },
       "requires_health_attestation": ["mathematics", "review"],
       "declared_capabilities": {
         "research": ["filesystem_read"],
@@ -78,6 +77,7 @@
       "binary": "grok",
       "family": "grok",
       "model": "grok-4.5",
+      "max_task_seconds": 3600,
       "declared_capabilities": {
         "research": ["filesystem_read", "web_search", "web_fetch"],
         "finding-audit": ["filesystem_read", "web_search", "web_fetch"],

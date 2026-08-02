@@ -8,7 +8,7 @@ from .artifacts import load_artifacts
 from .store import PACKETS_GENERATED, ROOT, atomic_write_json, atomic_write_text
 
 
-POLICY_REVISION = 1
+POLICY_REVISION = 2
 LEDGER_PATH = ROOT / "proof" / "paired-turns.json"
 TRACE_DIR = ROOT / "research" / "paired-traces"
 DIGEST_DIR = ROOT / "research" / "paired-digests"
@@ -27,6 +27,7 @@ INTERNAL_TASK_FIELDS = {
     "paired_trace_path",
     "paired_digest_paths",
     "paired_scheduler_state",
+    "routing_chain_id",
     "selected_engine",
     "status",
     "created_on",
@@ -104,10 +105,13 @@ def load_ledger() -> Dict[str, Any]:
         raise ValueError("paired-turn ledger is invalid: %s" % exc) from exc
     if (
         not isinstance(value, dict)
-        or value.get("paired_attempt_policy_revision") != POLICY_REVISION
+        or value.get("paired_attempt_policy_revision") not in {1, POLICY_REVISION}
         or not isinstance(value.get("events"), list)
     ):
         raise ValueError("paired-turn ledger has the wrong schema")
+    # Preserve the append-only historical ledger while all newly recorded
+    # events carry the current forced-proof policy revision.
+    value["paired_attempt_policy_revision"] = POLICY_REVISION
     return value
 
 
@@ -476,7 +480,6 @@ def recover_attempt_from_trace(
     explains why a proof artifact now exists.
     """
     from .agents import (
-        _extract_gemini_stream,
         _extract_grok_stream,
         _extract_json_object,
         _validate_artifact,
@@ -518,13 +521,9 @@ def recover_attempt_from_trace(
         raise ValueError("trace has no observable stdout")
     family = load_engines().get(engine, {}).get("family")
     artifact = (
-        _extract_gemini_stream(stdout)
-        if family == "gemini"
-        else (
-            _extract_grok_stream(stdout)
-            if family == "grok"
-            else _extract_json_object(stdout)
-        )
+        _extract_grok_stream(stdout)
+        if family == "grok"
+        else _extract_json_object(stdout)
     )
     if output is None:
         artifact_id = artifact.get("id")
@@ -883,6 +882,7 @@ def dry_run_preview(
     *,
     review_engines: Optional[Sequence[str]] = None,
     escalation_order: Optional[Sequence[str]] = None,
+    include_untried: bool = True,
 ) -> List[Dict[str, Any]]:
     """Preview paired paid steps without executing engines.
 
@@ -905,7 +905,7 @@ def dry_run_preview(
     events = []
     for engine in engines:
         state = pair_state(campaign, engine)["state"]
-        if state == "forced_untried":
+        if state == "forced_untried" and include_untried:
             events.append(
                 {
                     "phase": "forced-proof",

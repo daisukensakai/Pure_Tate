@@ -10,7 +10,6 @@ from pure_tate.agents import (
     _codex_controller_transcript,
     _parse_codex_controller_decision,
     _run_codex_controller,
-    _extract_gemini_stream,
     _extract_json_object,
     _failure_detail,
     _normalize_inferred_pairs,
@@ -126,11 +125,11 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertEqual(by_id["claude"]["model"], "claude-opus-5")
         self.assertEqual(by_id["codex"]["model"], "gpt-5.6-sol")
         self.assertEqual(by_id["grok"]["model"], "grok-4.5")
-        self.assertEqual(by_id["gemini"]["model"], "gemini-3.5-flash")
+        self.assertEqual(by_id["qwen"]["model"], "qwen3.7-max")
         self.assertTrue(by_id["claude"]["web_access"])
         self.assertTrue(by_id["grok"]["web_access"])
         self.assertFalse(by_id["codex"]["web_access"])
-        self.assertFalse(by_id["gemini"]["web_access"])
+        self.assertFalse(by_id["qwen"]["web_access"])
 
     def test_codex_argv_is_read_only(self):
         command = _engine_argv(
@@ -581,7 +580,7 @@ class AgentAdapterTests(unittest.TestCase):
         )
         self.assertEqual(value["ordinary_newline"], "first\nsecond")
 
-    def test_gemini_stream_prefers_complete_outer_artifact(self):
+    def test_qwen_output_prefers_complete_outer_artifact(self):
         artifact = {
             "id": "ATT-0022",
             "target": {"g": 6, "n": 6},
@@ -590,19 +589,7 @@ class AgentAdapterTests(unittest.TestCase):
         malformed = json.dumps(artifact).replace(
             "\\\\Gamma", "\\Gamma"
         ).replace("\\\\omega", "\\omega")
-        stream = "\n".join(
-            [
-                json.dumps(
-                    {
-                        "type": "message",
-                        "role": "assistant",
-                        "content": malformed,
-                    }
-                ),
-                json.dumps({"type": "result", "status": "success"}),
-            ]
-        )
-        value = _extract_gemini_stream(stream)
+        value = _extract_json_object(malformed)
         self.assertEqual(value["id"], "ATT-0022")
         self.assertEqual(value["target"], {"g": 6, "n": 6})
         self.assertEqual(value["argument_markdown"], r"\Gamma and \omega")

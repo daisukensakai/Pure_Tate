@@ -74,9 +74,11 @@ def effective_capabilities_from_argv(
             capabilities.add("web_search")
         if "web_fetch" in enabled and "web_fetch" not in blocked:
             capabilities.add("web_fetch")
-    elif family == "gemini":
-        # Gemini is deliberately not declared or attested for live-web phases.
-        pass
+    elif family == "qwen":
+        # Qwen's local adapter can ask the same bounded Grok worker pool used
+        # by other engines. The pool exposes web only for web-enabled phases.
+        if "--allow-grok-workers" in argv and phase_allows_web(phase):
+            capabilities.update(WEB_CAPABILITIES)
     elif family == "openai":
         # The headless Codex profile is local read-only in this harness.
         pass

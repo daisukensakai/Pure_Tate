@@ -25,10 +25,12 @@ from .capabilities import (
 )
 from .experiments import experiment_tasks, run_experiment
 from .findings import adjudicate_finding, load_findings, record_review_findings
-from .health import eligible_engine_pool, engine_health_state
+from .health import eligible_engine_pool, engine_health_state, operational_engine_pool
 from .novelty import novelty_tasks
 from .routing import (
     load_routing_config,
+    high_tier_chain_order,
+    record_high_tier_dispatch,
     select_prover_for_cell,
     select_reviewer,
 )
@@ -206,15 +208,16 @@ def next_campaign_task(
     elif phase == "experiment":
         tasks = _load_bearing_experiments(campaign_id)
     elif phase == "forced-proof":
-        tasks = []
-        for engine in campaign["paired_attempt_policy"]["engine_order"]:
-            if pair_state(campaign, engine)["state"] == "forced_untried":
-                task = forced_task(
-                    campaign, packet, working_context_records(campaign)
-                )
-                task["selected_engine"] = engine
-                tasks = [task]
-                break
+        allowed = set(
+            operational_engine_pool(
+                list(campaign["paired_attempt_policy"]["engine_order"]),
+                "mathematics",
+            )
+        )
+        task = _next_due_forced_task(
+            campaign, packet, allowed, dry_run=False
+        )
+        tasks = [task] if task else []
     elif phase == "trace-mining":
         tasks = []
         for engine in campaign["paired_attempt_policy"]["engine_order"]:
@@ -367,6 +370,56 @@ def _existing_engines_for_subproblem(campaign_id: str) -> Dict[str, Set[str]]:
     return result
 
 
+def _current_ordinary_proof_count(campaign_id: str) -> int:
+    """Count fresh rotation starts, excluding paired retries and forced turns."""
+    return sum(
+        1
+        for attempt in load_campaign_attempts(campaign_id)
+        if not attempt.get("paired_turn_kind")
+    )
+
+
+def _current_forced_attempts(campaign_id: str) -> List[Dict[str, Any]]:
+    return [
+        attempt
+        for attempt in load_campaign_attempts(campaign_id)
+        if attempt.get("paired_turn_kind") == "forced-proof"
+    ]
+
+
+def _next_due_forced_task(
+    campaign: Dict[str, Any],
+    packet: Dict[str, Any],
+    allowed_provers: Set[str],
+    *,
+    dry_run: bool,
+    slot_override: Optional[int] = None,
+) -> Optional[Dict[str, Any]]:
+    """Return the next periodic Opus/GPT forced-proof slot, if it is due.
+
+    Every third fresh ordinary proof opens a forced slot.  Two consecutive
+    slots share one stable high-tier chain: one after start three and the
+    partner after start six.
+    """
+    ordinary = _current_ordinary_proof_count(str(campaign["id"]))
+    due_slots = ordinary // 3
+    forced = _current_forced_attempts(str(campaign["id"]))
+    slot = len(forced) if slot_override is None else slot_override
+    if slot >= due_slots:
+        return None
+    chain_id = "forced:%s:%d" % (campaign["id"], slot // 2)
+    order = high_tier_chain_order(chain_id, persist=not dry_run)
+    engine = order[slot % 2]
+    if engine not in allowed_provers:
+        # Do not substitute the partner: this exact forced slot remains due.
+        return None
+    task = forced_task(campaign, packet, working_context_records(campaign))
+    task["selected_engine"] = engine
+    task["routing_chain_id"] = chain_id
+    task["forced_cycle_slot"] = slot
+    return task
+
+
 def _apply_finding_audit(artifact: Dict[str, Any]) -> None:
     findings = {item["id"]: item for item in load_findings()}
     finding = findings[artifact["finding_id"]]
@@ -497,6 +550,7 @@ def drive_campaign(
             steps,
             review_engines=allowed_reviewers,
             escalation_order=routing["escalation_order"],
+            include_untried=False,
         )
         # Keep only executable paired steps. Diagnostic snapshots
         # (current_state) and blocked_no_miner rows are not paid work; live
@@ -507,6 +561,42 @@ def drive_campaign(
             if event.get("condition")
             in {"always", "only_after_substantive_forced_failure"}
         )
+        ordinary = _current_ordinary_proof_count(campaign_id)
+        completed_forced = len(_current_forced_attempts(campaign_id))
+        due_slots = max(0, ordinary // 3 - completed_forced)
+        for offset in range(due_slots):
+            due_forced = _next_due_forced_task(
+                campaign,
+                packet,
+                set(
+                    operational_engine_pool(
+                        ordered, "mathematics", dry_run=True
+                    )
+                ),
+                dry_run=True,
+                slot_override=completed_forced + offset,
+            )
+            if due_forced is None:
+                continue
+            preview.extend(
+                [
+                    {
+                        "phase": "forced-proof",
+                        "task_id": due_forced["id"],
+                        "engine": due_forced["selected_engine"],
+                        "condition": "periodic_due",
+                        "packet_sha256": due_forced["packet_sha256"],
+                    },
+                    {
+                        "phase": "standard-fallback",
+                        "task_id": "TASK-%s-STANDARD-CONDITIONAL"
+                        % campaign_id,
+                        "engine": due_forced["selected_engine"],
+                        "condition": "only_after_substantive_forced_failure",
+                        "packet_sha256": due_forced["packet_sha256"],
+                    },
+                ]
+            )
         preview = [
             {"step": index + 1, **{k: v for k, v in event.items() if k != "step"}}
             for index, event in enumerate(preview[:steps])
@@ -537,6 +627,7 @@ def drive_campaign(
         }
     events: List[Dict[str, Any]] = []
     planned_tasks: Set[str] = set()
+    deferred_math_tasks: Set[str] = set()
     planned_reviewers: Dict[str, Set[str]] = {}
     planned_research_engines: Dict[Tuple[str, str], Set[str]] = {}
     failed_engines: Set[str] = set()
@@ -546,7 +637,7 @@ def drive_campaign(
     schema_validation_failures: Dict[Tuple[str, str, str], int] = {}
     schema_validation_retry_limit = 1
     used_by_subproblem = _existing_engines_for_subproblem(campaign_id)
-    campaign_attempt_count = len(load_campaign_attempts(campaign_id))
+    campaign_attempt_count = _current_ordinary_proof_count(campaign_id)
     planned_math_count = 0
     capability_blockers: List[Dict[str, Any]] = []
     stop_reason = "step_limit"
@@ -612,7 +703,7 @@ def drive_campaign(
             elif candidate_phase == "paired":
                 candidates = []
                 allowed_provers = set(
-                    eligible_engine_pool(
+                    operational_engine_pool(
                         list(prover_engines), "mathematics", dry_run=False
                     )
                 ) - failed_engines
@@ -633,17 +724,8 @@ def drive_campaign(
                     if state_name == "verified":
                         continue
                     if state_name == "forced_untried":
-                        if paired_engine not in allowed_provers:
-                            continue
-                        candidates = [
-                            forced_task(
-                                campaign,
-                                packet,
-                                working_context_records(campaign),
-                            )
-                        ]
-                        candidates[0]["selected_engine"] = paired_engine
-                        break
+                        # The periodic cadence below opens new forced slots.
+                        continue
                     if state_name in {
                         "forced_trace_mining",
                         "standard_trace_mining",
@@ -698,10 +780,19 @@ def drive_campaign(
                             ]
                         candidates[0]["selected_engine"] = paired_engine
                         break
+                if not candidates and not paired_transition_blocked:
+                    due_forced = _next_due_forced_task(
+                        campaign,
+                        packet,
+                        allowed_provers,
+                        dry_run=False,
+                    )
+                    if due_forced is not None:
+                        candidates = [due_forced]
             else:
                 candidate = _math_task(
                     campaign_id,
-                    exclude_task_ids=planned_tasks,
+                    exclude_task_ids=planned_tasks | deferred_math_tasks,
                     retry=retry,
                 )
                 candidates = [candidate] if candidate else []
@@ -760,6 +851,12 @@ def drive_campaign(
                 ],
             )
             if engine is None:
+                deferred_math_tasks.add(task["id"])
+                # A pending high-tier slot must not block independent proof
+                # chains.  The next iteration skips this chain until its
+                # preferred model is operational again.
+                if not dry_run:
+                    continue
                 stop_reason = (
                     "health_failure"
                     if not eligible_engine_pool(
@@ -833,9 +930,11 @@ def drive_campaign(
                     used,
                     routing["prover_rotation"],
                     routing["escalation_order"],
-                    allowed=eligible_engine_pool(
+                    allowed=operational_engine_pool(
                         list(prover_engines), "mathematics", dry_run=dry_run
                     ),
+                    chain_id="proof:%s:%s" % (campaign_id, task["id"]),
+                    persist_chain=not dry_run,
                 )
             if engine is None:
                 stop_reason = (
@@ -857,7 +956,11 @@ def drive_campaign(
             artifact_id = "ATT-%04d" % ordinal
             output = ROOT / "proof" / "attempts" / (artifact_id + ".json")
             used.add(engine)
-            planned_math_count += 1
+            task.setdefault(
+                "routing_chain_id", "proof:%s:%s" % (campaign_id, task["id"])
+            )
+            if not task.get("paired_turn_kind"):
+                planned_math_count += 1
 
         event = {
             "step": index + 1,
@@ -901,6 +1004,12 @@ def drive_campaign(
                 _write_run_ledger(ledger_path, ledger)
 
         try:
+            chain_id = task.get("routing_chain_id")
+            if (
+                isinstance(chain_id, str)
+                and engine in routing["high_tier_chain_engines"]
+            ):
+                record_high_tier_dispatch(chain_id, engine)
             if phase == "experiment":
                 run_experiment(task, output, timeout=timeout)
             else:

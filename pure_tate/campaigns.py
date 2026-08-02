@@ -7,13 +7,17 @@ from typing import Any, Dict, List, Optional, Set
 
 from .artifacts import load_artifacts, sha256_file
 from .findings import findings_for_case, load_findings
-from .routing import load_routing_config, next_escalation_engine
+from .routing import (
+    load_high_tier_ledger,
+    load_routing_config,
+    next_escalation_engine,
+)
 from .store import DATA, PACKETS_GENERATED, REPORTS_GENERATED, ROOT, atomic_write_json, atomic_write_text, load_json
 from .targets import CONTEXT_REVISION, open_input_target, target_formula
 
 
 DEFAULT_CAMPAIGN = "C66-001"
-CAMPAIGN_REVISION = 3
+CAMPAIGN_REVISION = 4
 CAMPAIGN_DIR = DATA / "campaigns"
 CAMPAIGN_ARTIFACT_DIR = ROOT / "proof" / "campaign-attempts"
 NOVELTY_DIR = ROOT / "research" / "novelty-audits"
@@ -55,9 +59,9 @@ def load_campaign(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
     policy = campaign.get("paired_attempt_policy")
     if (
         not isinstance(policy, dict)
-        or policy.get("revision") != 1
+        or policy.get("revision") != 2
         or policy.get("engine_order")
-        != ["grok", "codex", "claude"]
+        != ["claude", "codex"]
         or not str(policy.get("exact_theorem", "")).strip()
     ):
         raise ValueError("campaign has an invalid paired-attempt policy")
@@ -530,6 +534,7 @@ def campaign_status(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
         campaign_id, current_only=False
     )
     routing = load_routing_config()
+    high_tier_ledger = load_high_tier_ledger()
     from .paired import (
         POLICY_REVISION,
         pair_statuses,
@@ -565,7 +570,10 @@ def campaign_status(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
             ),
             "remaining_retry_engines": [
                 engine
-                for engine in routing["escalation_order"]
+                for engine in (
+                    routing["escalation_order"]
+                    + routing["high_tier_chain_engines"]
+                )
                 if engine not in set(used)
             ],
         }
@@ -626,6 +634,18 @@ def campaign_status(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
             "fresh_rotation": routing["prover_rotation"],
             "retry_escalation": routing["escalation_order"],
             "review_escalation": routing["escalation_order"],
+            "high_tier_chain_engines": routing["high_tier_chain_engines"],
+            "last_high_tier_chain_order": high_tier_ledger[
+                "last_chain_order"
+            ],
+            "pending_high_tier_chains": [
+                {
+                    "id": chain.get("id"),
+                    "pending": chain.get("pending", []),
+                }
+                for chain in high_tier_ledger["chains"]
+                if chain.get("pending")
+            ],
         },
         "paired_attempt_policy": {
             "revision": POLICY_REVISION,

@@ -1,4 +1,5 @@
 import datetime
+import shutil
 import hashlib
 import json
 import shutil
@@ -8,7 +9,6 @@ from typing import Any, Dict, Optional
 
 from .agents import (
     _engine_argv,
-    _extract_gemini_stream,
     _extract_grok_stream,
     _extract_json_object,
     _subprocess_env,
@@ -86,6 +86,28 @@ def eligible_engine_pool(
     ]
 
 
+def operational_engine_pool(
+    engine_ids: list[str], phase: str, dry_run: bool = False
+) -> list[str]:
+    """Return phase-eligible engines whose configured executable is runnable.
+
+    Dry runs model the configured pool without depending on the caller's local
+    PATH; live dispatches must satisfy both the health and executable gates.
+    """
+    eligible = eligible_engine_pool(engine_ids, phase, dry_run=dry_run)
+    if dry_run:
+        return eligible
+    from .agents import load_engines
+
+    engines = load_engines()
+    return [
+        engine_id
+        for engine_id in eligible
+        if shutil.which(str(engines[engine_id].get("binary", engine_id)))
+        is not None
+    ]
+
+
 def _probe_prompt(level: str) -> str:
     if level == "basic":
         return (
@@ -112,7 +134,7 @@ def _probe_prompt(level: str) -> str:
 def _write_probe_inputs(directory: Path, level: str) -> str:
     if level == "tools":
         (directory / "ALPHA.txt").write_text(
-            "bounded-gemini-read\n", encoding="utf-8"
+            "bounded-qwen-read\n", encoding="utf-8"
         )
         (directory / "BETA.json").write_text(
             '{"values":[17,25]}\n', encoding="utf-8"
@@ -154,7 +176,7 @@ def _validate_probe(level: str, value: Dict[str, Any], packet_hash: str) -> None
     elif level == "tools":
         if value != {
             "probe": "tools",
-            "alpha": "bounded-gemini-read",
+            "alpha": "bounded-qwen-read",
             "beta_sum": 42,
         }:
             raise ValueError("tool-read probe returned the wrong JSON")
@@ -215,10 +237,22 @@ def audit_engine_health(
             packet_hash = _write_probe_inputs(workspace, check_level)
             prompt = _probe_prompt(check_level)
             command = _engine_argv(
-                engine_id, prompt, workspace / "last-message.txt"
+                engine_id,
+                prompt,
+                workspace / "last-message.txt",
+                context_files=(
+                    ["ALPHA.txt", "BETA.json"]
+                    if check_level == "tools"
+                    else (
+                        ["TASK.json", "packet.md", "ATTEMPT.json"]
+                        if check_level == "artifact"
+                        else []
+                    )
+                ),
             )
             if model_override:
-                command[command.index("-m") + 1] = model_override
+                flag = "--model" if "--model" in command else "-m"
+                command[command.index(flag) + 1] = model_override
             check: Dict[str, Any] = {
                 "level": check_level,
                 "command_sha256": hashlib.sha256(
@@ -245,13 +279,9 @@ def audit_engine_health(
                         % (process.returncode, process.stderr.strip()[:500])
                     )
                 value = (
-                    _extract_gemini_stream(raw)
-                    if config.get("family") == "gemini"
-                    else (
-                        _extract_grok_stream(raw)
-                        if config.get("family") == "grok"
-                        else _extract_json_object(raw)
-                    )
+                    _extract_grok_stream(raw)
+                    if config.get("family") == "grok"
+                    else _extract_json_object(raw)
                 )
                 _validate_probe(check_level, value, packet_hash)
                 check["status"] = "pass"

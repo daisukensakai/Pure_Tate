@@ -57,7 +57,7 @@ def _campaign_migration() -> Dict[str, Any]:
         ROOT
         / "proof"
         / "migrations"
-        / "campaign-C66-001-v3.json"
+        / "campaign-C66-001-v4.json"
     )
     if not path.exists():
         return {}
@@ -330,7 +330,16 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
         attempts_by_id[attempt_id] = attempt
         if attempt_id in legacy_attempts:
             continue
-        if attempt_id in stale_campaign_attempts:
+        if (
+            attempt_id in stale_campaign_attempts
+            or (
+                campaign_migration.get("stale_prior_revisions") is True
+                and attempt.get("campaign_id")
+                == campaign_migration.get("campaign_id")
+                and attempt.get("campaign_revision")
+                != campaign_migration.get("campaign_revision")
+            )
+        ):
             result.warnings.append(
                 "%s is stale_campaign_context under %s"
                 % (

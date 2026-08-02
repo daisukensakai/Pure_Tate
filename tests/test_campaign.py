@@ -6,6 +6,7 @@ from unittest import mock
 
 from pure_tate.agents import _engine_argv, _validate_artifact, run_task
 from pure_tate.campaign_driver import (
+    _next_due_forced_task,
     _eligible_research_pool,
     _finding_audit_is_blocking,
     _research_capability_blocker,
@@ -34,27 +35,58 @@ from pure_tate.tasking import campaign_mathematics_tasks, finding_audit_tasks
 
 
 class FocusedCampaignTests(unittest.TestCase):
+    def test_forced_slots_open_after_ordinary_starts_three_and_six(self):
+        campaign = load_campaign("C66-001")
+        packet = campaign_packet_record("C66-001")
+        with mock.patch(
+            "pure_tate.campaign_driver._current_ordinary_proof_count",
+            return_value=3,
+        ), mock.patch(
+            "pure_tate.campaign_driver._current_forced_attempts",
+            return_value=[],
+        ):
+            first = _next_due_forced_task(
+                campaign, packet, {"claude", "codex"}, dry_run=True
+            )
+        self.assertEqual(first["selected_engine"], "claude")
+        with mock.patch(
+            "pure_tate.campaign_driver._current_ordinary_proof_count",
+            return_value=6,
+        ), mock.patch(
+            "pure_tate.campaign_driver._current_forced_attempts",
+            return_value=[{"id": "ATT-TEST"}],
+        ):
+            second = _next_due_forced_task(
+                campaign, packet, {"claude", "codex"}, dry_run=True
+            )
+        self.assertEqual(second["selected_engine"], "codex")
+        self.assertEqual(
+            {first["selected_engine"], second["selected_engine"]},
+            {"claude", "codex"},
+        )
+
     def test_campaign_target_and_four_lanes_are_exact(self):
         campaign = load_campaign("C66-001")
         self.assertEqual(campaign["context_revision"], 2)
-        self.assertEqual(campaign["campaign_revision"], 3)
-        # Forced exact-theorem ladder omits Gemini; ordinary rotation still
-        # includes it for cell mathematics.
+        self.assertEqual(campaign["campaign_revision"], 4)
+        # Forced exact-theorem work is Opus/GPT-only; ordinary rotation still
+        # includes Grok and Qwen for cell mathematics.
         self.assertEqual(
             campaign["paired_attempt_policy"]["engine_order"],
-            ["grok", "codex", "claude"],
+            ["claude", "codex"],
         )
+        self.assertNotIn("grok", campaign["paired_attempt_policy"]["engine_order"])
         self.assertNotIn(
-            "gemini", campaign["paired_attempt_policy"]["engine_order"]
+            "qwen", campaign["paired_attempt_policy"]["engine_order"]
         )
         report = campaign_status("C66-001")
-        self.assertIn("gemini", report["routing_policy"]["fresh_rotation"])
+        self.assertIn("qwen", report["routing_policy"]["fresh_rotation"])
         self.assertEqual(
             report["paired_attempt_policy"]["engine_order"],
-            ["grok", "codex", "claude"],
+            ["claude", "codex"],
         )
         self.assertNotIn(
-            "gemini", report["paired_attempt_policy"]["engine_states"]
+            "qwen", report["paired_attempt_policy"]["engine_states"]
         )
         tasks = campaign_mathematics_tasks("C66-001")
         self.assertEqual(
@@ -69,7 +101,7 @@ class FocusedCampaignTests(unittest.TestCase):
         for task in tasks:
             self.assertEqual(task["target"]["ordinary_cohomology_degree"], 26)
             self.assertEqual(task["target"]["chow_codimension"], 13)
-            self.assertEqual(task["packet_id"], "C66-001-v3")
+            self.assertEqual(task["packet_id"], "C66-001-v4")
 
     def test_campaign_packet_quarantines_candidates(self):
         packet = campaign_packet_record("C66-001")["_text"]
@@ -91,7 +123,7 @@ class FocusedCampaignTests(unittest.TestCase):
         report = campaign_status("C66-001")
         self.assertGreaterEqual(report["campaign_progress"]["attempts"], 0)
         self.assertEqual(
-            report["campaign_progress"]["stale_campaign_attempts"], 1
+            report["campaign_progress"]["stale_campaign_attempts"], 15
         )
         self.assertTrue(
             any(
@@ -99,7 +131,7 @@ class FocusedCampaignTests(unittest.TestCase):
                 or item.get("attempt_id") == "ATT-0016"
                 for item in report.get("historical_stale_attempts", [])
             )
-            or report["campaign_progress"]["stale_campaign_attempts"] == 1
+            or report["campaign_progress"]["stale_campaign_attempts"] >= 1
         )
 
     def test_campaign_dag_blocks_unverified_dependencies(self):
@@ -237,7 +269,7 @@ class FocusedCampaignTests(unittest.TestCase):
             "id": "ATT-9999",
             "task_id": task["id"],
             "campaign_id": "C66-001",
-            "campaign_revision": 3,
+            "campaign_revision": 4,
             "subproblem_id": task["subproblem_id"],
             "lane": task["lane"],
             "result_type": "lemma",
@@ -289,7 +321,7 @@ class FocusedCampaignTests(unittest.TestCase):
             "id": "ATT-9999",
             "task_id": task["id"],
             "campaign_id": "C66-001",
-            "campaign_revision": 3,
+            "campaign_revision": 4,
             "subproblem_id": task["subproblem_id"],
             "lane": task["lane"],
             "result_type": "lemma",
@@ -350,6 +382,12 @@ class FocusedCampaignTests(unittest.TestCase):
             "pure_tate.campaign_driver._research_capability_state",
             return_value="missing",
         ), mock.patch(
+            "pure_tate.campaign_driver._current_ordinary_proof_count",
+            return_value=6,
+        ), mock.patch(
+            "pure_tate.campaign_driver._current_forced_attempts",
+            return_value=[],
+        ), mock.patch(
             "pure_tate.paired.pair_state",
             return_value={"state": "forced_untried"},
         ), mock.patch(
@@ -364,9 +402,7 @@ class FocusedCampaignTests(unittest.TestCase):
                 review_engines=["claude", "grok", "codex"],
                 dry_run=True,
             )
-        # Dry-run exposes the deterministic forced/conditional pair sequence
-        # without pretending that conditional turns have executed. Gemini is
-        # not on the forced ladder, so only codex/claude pairs appear here.
+        # Dry-run exposes the deterministic Opus/GPT forced pair sequence.
         self.assertEqual(result["executed_steps"], 4)
         self.assertEqual(len(result["events"]), 4)
         self.assertEqual(result["events"][0]["phase"], "forced-proof")
@@ -384,7 +420,7 @@ class FocusedCampaignTests(unittest.TestCase):
         )
         self.assertEqual(
             [event["engine"] for event in result["events"]],
-            ["codex", "codex", "claude", "claude"],
+            ["claude", "claude", "codex", "codex"],
         )
         after = {
             path: path.read_bytes()
@@ -415,7 +451,7 @@ class FocusedCampaignTests(unittest.TestCase):
 
     def test_dry_run_surfaces_standard_ready_as_executable_fallback(self):
         def fake_state(_campaign, engine):
-            if engine == "grok":
+            if engine == "claude":
                 return {"state": "standard_ready"}
             return {"state": "standard_trace_mining", "trace_id": "TRACE-0001"}
 
@@ -433,18 +469,18 @@ class FocusedCampaignTests(unittest.TestCase):
                 "C66-001",
                 2,
                 research_engines=["claude", "grok"],
-                prover_engines=["grok", "claude"],
-                review_engines=["grok", "claude"],
+                prover_engines=["claude", "codex"],
+                review_engines=["grok", "claude", "codex"],
                 dry_run=True,
             )
         phases = [event["phase"] for event in result["events"]]
         self.assertEqual(phases[0], "standard-fallback")
-        self.assertEqual(result["events"][0]["engine"], "grok")
+        self.assertEqual(result["events"][0]["engine"], "claude")
         self.assertEqual(result["events"][0]["condition"], "always")
         self.assertEqual(phases[1], "trace-mining")
-        # Miner is independent of the source paired engine (claude).
+        # Miner is independent of the source paired engine (codex).
         self.assertEqual(result["events"][1]["engine"], "grok")
-        self.assertEqual(result["events"][1].get("source_engine"), "claude")
+        self.assertEqual(result["events"][1].get("source_engine"), "codex")
 
     def test_review_schema_failure_allows_one_same_engine_retry(self):
         from pure_tate.paired import ArtifactValidationError
@@ -516,7 +552,7 @@ class FocusedCampaignTests(unittest.TestCase):
         self.assertEqual(len(review_events), 2)
         self.assertEqual([event["engine"] for event in review_events], ["claude", "claude"])
         self.assertEqual(len(calls), 2)
-        self.assertEqual(result["stop_reason"], "no_eligible_task")
+        self.assertEqual(result["stop_reason"], "step_limit")
         self.assertTrue(all(event["state"] == "failed" for event in review_events))
 
     def test_macaulay2_is_digest_pinned_and_missing_runtime_is_explicit(self):
@@ -544,11 +580,11 @@ class FocusedCampaignTests(unittest.TestCase):
         )
         self.assertEqual(
             report["routing_policy"]["fresh_rotation"],
-            ["grok", "claude", "grok", "codex", "grok", "gemini"],
+            ["grok", "claude", "grok", "codex", "grok", "qwen"],
         )
         self.assertEqual(
             report["routing_policy"]["retry_escalation"],
-            ["grok", "gemini", "codex", "claude"],
+            ["grok", "qwen"],
         )
         coverage = report["campaign_progress"]["subproblem_engine_coverage"]
         self.assertEqual(len(coverage), 9)

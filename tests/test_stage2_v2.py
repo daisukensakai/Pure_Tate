@@ -203,7 +203,7 @@ class StageTwoRevisionTests(unittest.TestCase):
         result = drive(
             3,
             prover_engines=["codex"],
-            review_engines=["claude", "grok", "gemini"],
+            review_engines=["claude", "grok", "qwen"],
             dry_run=True,
         )
         self.assertTrue(result["dry_run"])

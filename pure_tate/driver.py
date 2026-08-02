@@ -6,10 +6,11 @@ from .artifacts import load_artifacts, next_artifact_id
 from .board import build_board, next_task
 from .proofs import audit_proofs
 from .findings import record_review_findings
-from .health import eligible_engine_pool, engine_health_state
+from .health import operational_engine_pool, eligible_engine_pool, engine_health_state
 from .packets import write_case_packets
 from .routing import (
     load_routing_config,
+    record_high_tier_dispatch,
     select_prover_for_cell,
     select_reviewer,
 )
@@ -74,6 +75,7 @@ def drive(
     config, _target, sources, claims, _edges = load_repository()
     events: List[Dict[str, Any]] = []
     planned_math_tasks = set()
+    deferred_math_tasks = set()
     planned_math_count = 0
     planned_reviewers_by_attempt: Dict[str, set] = {}
     planned_review_passes = set()
@@ -152,7 +154,7 @@ def drive(
                 claims,
                 sources,
                 retry=retry,
-                exclude_task_ids=planned_math_tasks,
+                exclude_task_ids=planned_math_tasks | deferred_math_tasks,
             )
             if task is None:
                 stop_reason = "no_eligible_task"
@@ -176,11 +178,18 @@ def drive(
                 used_on_cell if is_retry or used_on_cell else [],
                 routing["prover_rotation"],
                 routing["escalation_order"],
-                allowed=eligible_engine_pool(
+                allowed=operational_engine_pool(
                     provers, "mathematics", dry_run=dry_run
                 ),
+                chain_id="proof:%s" % task["id"],
+                persist_chain=not dry_run,
             )
             if engine is None:
+                # Preserve an unavailable high-tier slot and allow another
+                # proof chain to make progress in the next scheduler pass.
+                deferred_math_tasks.add(task["id"])
+                if not dry_run:
+                    continue
                 stop_reason = (
                     "health_failure"
                     if not eligible_engine_pool(
@@ -200,6 +209,7 @@ def drive(
                 "output": str(output.relative_to(ROOT)),
             }
             review = task
+            review["routing_chain_id"] = "proof:%s" % task["id"]
             planned_math_tasks.add(task["id"])
             planned_math_count += 1
             engines_by_task.setdefault(task["id"], []).append(engine)
@@ -207,6 +217,12 @@ def drive(
         if dry_run:
             continue
         try:
+            if (
+                not dry_run
+                and review.get("routing_chain_id")
+                and engine in routing["high_tier_chain_engines"]
+            ):
+                record_high_tier_dispatch(review["routing_chain_id"], engine)
             artifact = run_task(review, engine, output, timeout=timeout)
             if review["phase"] == "review":
                 attempts = {

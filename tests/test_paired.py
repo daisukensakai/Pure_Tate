@@ -32,7 +32,7 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             "id": "ATT-9999",
             "task_id": self.task["id"],
             "campaign_id": "C66-001",
-            "campaign_revision": 3,
+            "campaign_revision": 4,
             "subproblem_id": "C66-FULL",
             "lane": "full-resolution",
             "result_type": "proof",
@@ -105,7 +105,7 @@ class PairedAttemptPolicyTests(unittest.TestCase):
     def test_forced_math_enables_web_tools_for_supporting_lookup(self):
         # Forced-proof / mathematics expose web tools; exact-problem search is
         # an attestation/honesty contract, not argv offline enforcement.
-        for engine in ("grok", "claude", "gemini", "codex"):
+        for engine in ("claude", "codex"):
             argv = _engine_argv(
                 engine,
                 "prove the theorem",
@@ -130,12 +130,12 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             preview = dry_run_preview(
                 self.campaign,
                 self.packet,
-                ["grok", "gemini", "codex", "claude"],
+                ["claude", "codex"],
                 12,
             )
-        self.assertEqual(len(preview), 8)
+        self.assertEqual(len(preview), 4)
         for index, engine in enumerate(
-            ["grok", "gemini", "codex", "claude"]
+            ["claude", "codex"]
         ):
             forced = preview[index * 2]
             fallback = preview[index * 2 + 1]
@@ -156,12 +156,12 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             preview = dry_run_preview(
                 self.campaign,
                 self.packet,
-                ["grok"],
+                ["claude"],
                 4,
             )
         self.assertEqual(len(preview), 1)
         self.assertEqual(preview[0]["phase"], "standard-fallback")
-        self.assertEqual(preview[0]["engine"], "grok")
+        self.assertEqual(preview[0]["engine"], "claude")
         self.assertEqual(preview[0]["condition"], "always")
 
     def test_dry_run_trace_mining_names_independent_miner(self):
@@ -175,7 +175,7 @@ class PairedAttemptPolicyTests(unittest.TestCase):
                 ["claude"],
                 4,
                 review_engines=["grok", "claude"],
-                escalation_order=["grok", "gemini", "codex", "claude"],
+                escalation_order=["grok", "qwen"],
             )
         self.assertEqual(len(preview), 1)
         self.assertEqual(preview[0]["phase"], "trace-mining")

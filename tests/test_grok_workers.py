@@ -131,10 +131,11 @@ class GrokWorkerPoolTests(unittest.TestCase):
             )
             self.assertIsNone(disabled)
 
-            gemini = prepare_worker_session(
-                context, family="gemini", max_workers=4
+            qwen = prepare_worker_session(
+                context, family="qwen", max_workers=4
             )
-            self.assertIsNone(gemini)
+            self.assertIsNotNone(qwen)
+            self.assertIsNone(qwen.mcp_config_path)
 
     def test_prepare_controller_session_never_attaches_mcp(self):
         with tempfile.TemporaryDirectory() as directory:
