@@ -1,0 +1,61 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-02T11:25:25.187466+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "qwen"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "qwen",
+      "codex",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 549699,
+      "artifact_sha256": "0a547678a2b6c19d7c911d15f7a4174febd2d1082fa61e103d155fd136068c85",
+      "completed_at": "2026-08-02T11:25:21.989197+00:00",
+      "engine": "claude",
+      "last_activity_at": "2026-08-02T11:25:21.233520+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "research/finding-audits/FAUD-0030.json",
+      "phase": "finding-audit",
+      "started_at": "2026-08-02T11:19:13.748660+00:00",
+      "state": "completed",
+      "step": 1,
+      "task_id": "TASK-F-FND-0049"
+    },
+    {
+      "activity_bytes": 4011,
+      "completed_at": "2026-08-02T11:25:24.791306+00:00",
+      "engine": "claude",
+      "error": "agent failed with exit 1: {\"type\":\"system\",\"subtype\":\"init\",\"cwd\":\"/private/var/folders/r_/40tyr0nj6zn_yqb74rw_351c0000gn/T/pure-tate-agent-oxbqbx63\",\"session_id\":\"ec8aad33-997c-4e98-bf6e-7f3fc935e9e1\",\"tools\":[\"Task\",\"CronCreate\",\"CronDelete\",\"CronList\",\"DesignSync\",\"EnterWorktree\",\"ExitWorktree\",\"Glob\",\"Grep\",\"Monitor\",\"NotebookEdit\",\"PushNotification\",\"Read\",\"RemoteTrigger\",\"ReportFindings\",\"ScheduleWakeup\",\"SendMessage\",\"Skill\",\"TaskCreate\",\"TaskGet\",\"TaskList\",\"TaskOutput\",\"TaskStop\",\"TaskUpdate\",\"ToolSearch\",\"WebFetch\",\"WebSearch\"],\"mcp_servers\":[{\"name\":\"grok-workers\",\"status\":\"pending\"}],\"model\":\"claude-opus-5\",\"permissionMode\":\"bypassPermissions\",\"slash_commands\":[\"design-sync\",\"dataviz\",\"update-config\",\"verify\",\"debug\",\"code-review\",\"simplify\",\"batch\",\"fewer-permission-prompts\",\"doctor\",\"loop\",\"schedule\",\"claude-api\",\"run\",\"run-skill-generator\",\"agents\",\"clear\",\"color\",\"compact\",\"config\",\"context\",\"effort\",\"fast\",\"heapdump\",\"init\",\"mcp\",\"model\",\"__remote-workflow\",\"workflow-launch-exec\",\"reload-skills",
+      "last_activity_at": "2026-08-02T11:25:23.974514+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "research/finding-audits/FAUD-0032.json",
+      "phase": "finding-audit",
+      "started_at": "2026-08-02T11:25:22.430680+00:00",
+      "state": "failed",
+      "step": 2,
+      "task_id": "TASK-F-FND-0050"
+    }
+  ],
+  "executed_steps": 2,
+  "requested_steps": 6,
+  "run_id": "RUN-C66-001-20260802T111913441185Z-64230",
+  "schema_version": 1,
+  "started_at": "2026-08-02T11:19:13.441185+00:00",
+  "status": "completed",
+  "stop_reason": "no_eligible_task"
+}

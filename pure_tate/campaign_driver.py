@@ -472,6 +472,7 @@ def drive_campaign(
     dry_run: bool = False,
     retry: bool = False,
     desktop_notifications: bool = False,
+    ntfy_notifications: bool = False,
 ) -> Dict[str, Any]:
     campaign = load_campaign(campaign_id)
     if steps <= 0 or steps > campaign["batch_step_limit"]:
@@ -1251,8 +1252,14 @@ def drive_campaign(
                 )
             break
         finally:
-            if desktop_notifications:
-                notify_campaign_step(campaign_id, event, steps)
+            if desktop_notifications or ntfy_notifications:
+                notify_campaign_step(
+                    campaign_id,
+                    event,
+                    steps,
+                    desktop=desktop_notifications,
+                    ntfy=ntfy_notifications,
+                )
             if ledger is not None and ledger_path is not None:
                 ledger["events"] = events
                 _write_run_ledger(ledger_path, ledger)
@@ -1272,13 +1279,15 @@ def drive_campaign(
         ledger["completed_at"] = _timestamp()
         ledger["executed_steps"] = len(events)
         _write_run_ledger(ledger_path, ledger)
-        if desktop_notifications:
+        if desktop_notifications or ntfy_notifications:
             notify_campaign_run(
                 campaign_id,
                 len(events),
                 steps,
                 ledger["status"],
                 stop_reason,
+                desktop=desktop_notifications,
+                ntfy=ntfy_notifications,
             )
     return {
         "campaign_id": campaign_id,

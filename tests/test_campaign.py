@@ -93,8 +93,17 @@ class FocusedCampaignTests(unittest.TestCase):
         step_notification.assert_called_once()
         self.assertEqual(step_notification.call_args.args[0], campaign["id"])
         self.assertEqual(step_notification.call_args.args[2], 1)
+        self.assertEqual(
+            step_notification.call_args.kwargs, {"desktop": True, "ntfy": False}
+        )
         run_notification.assert_called_once_with(
-            campaign["id"], 1, 1, "completed", "step_limit"
+            campaign["id"],
+            1,
+            1,
+            "completed",
+            "step_limit",
+            desktop=True,
+            ntfy=False,
         )
 
     def test_forced_slots_open_after_ordinary_starts_three_and_six(self):

@@ -526,6 +526,7 @@ def command_drive(args: argparse.Namespace) -> int:
                 dry_run=args.dry_run,
                 retry=args.retry,
                 desktop_notifications=args.notify_desktop,
+                ntfy_notifications=args.notify_ntfy,
             )
         else:
             result = drive(
@@ -868,6 +869,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--notify-desktop",
         action="store_true",
         help="Send a native macOS notification after every campaign step and when the run ends.",
+    )
+    drive_parser.add_argument(
+        "--notify-ntfy",
+        action="store_true",
+        help="Send every campaign step and the final result to the configured ntfy topic.",
     )
     drive_parser.set_defaults(func=command_drive)
 

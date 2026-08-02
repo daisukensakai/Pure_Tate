@@ -183,6 +183,11 @@ On macOS, `--notify-desktop` sends a native notification after every completed
 campaign step and a final run notification. It is best-effort: a notification
 permission or AppleScript failure never interrupts proof work.
 
+For phone alerts, install the free ntfy app and subscribe to the private topic
+in `data/notifications.local.json` (copy the tracked example file first when
+setting up another workspace). `--notify-ntfy` posts the same per-step and final
+run notices. The topic acts as the shared secret; never commit or share it.
+
 Remove `--dry-run` only after the listed research engines have passed live audits
 for both finding-audit and novelty phases. Once any live audit exists, dry-run
 also fails closed: failed or unattested engines are excluded, and an independence
