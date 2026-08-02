@@ -536,6 +536,8 @@ def _engine_argv(
         ]
         for relative in context_files or []:
             command.extend(["--context-file", relative])
+        if allow_web:
+            command.append("--allow-web")
         if workers_on:
             command.append("--allow-grok-workers")
         return command

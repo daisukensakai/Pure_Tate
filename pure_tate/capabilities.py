@@ -75,9 +75,9 @@ def effective_capabilities_from_argv(
         if "web_fetch" in enabled and "web_fetch" not in blocked:
             capabilities.add("web_fetch")
     elif family == "qwen":
-        # Qwen's local adapter can ask the same bounded Grok worker pool used
-        # by other engines. The pool exposes web only for web-enabled phases.
-        if "--allow-grok-workers" in argv and phase_allows_web(phase):
+        # Qwen3.7-Max uses the Responses API's native web_search and
+        # web_extractor tools on web-enabled phases.
+        if "--allow-web" in argv and phase_allows_web(phase):
             capabilities.update(WEB_CAPABILITIES)
     elif family == "openai":
         # The headless Codex profile is local read-only in this harness.
@@ -153,9 +153,10 @@ def audit_engine_capability(
         ("%s:%s:%s" % (engine_id, phase, datetime.date.today())).encode("utf-8")
     ).hexdigest()[:16]
     prompt = (
-        "Read-only capability probe. First web-search for the Macaulay2 source "
-        "repository. Then web-fetch "
-        "https://api.github.com/repos/Macaulay2/M2/commits/HEAD and return exactly "
+        "Read-only capability probe. You must first web-search for the Macaulay2 "
+        "source repository and then web-fetch "
+        "https://api.github.com/repos/Macaulay2/M2/commits/HEAD. Do not return "
+        "an answer until both actions have completed. Return exactly "
         "JSON with probe_token, that exact url, the returned 40-character commit_sha, "
         "web_search=true, and web_fetch=true. probe_token=%s" % probe_token
     )

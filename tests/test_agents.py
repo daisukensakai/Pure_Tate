@@ -129,7 +129,7 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertTrue(by_id["claude"]["web_access"])
         self.assertTrue(by_id["grok"]["web_access"])
         self.assertFalse(by_id["codex"]["web_access"])
-        self.assertFalse(by_id["qwen"]["web_access"])
+        self.assertTrue(by_id["qwen"]["web_access"])
 
     def test_codex_argv_is_read_only(self):
         command = _engine_argv(

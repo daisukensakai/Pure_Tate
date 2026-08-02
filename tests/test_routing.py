@@ -53,13 +53,16 @@ class RoutingTests(unittest.TestCase):
         by_id = {item["id"]: item for item in engine_inventory()}
         self.assertEqual(by_id["qwen"]["model"], "qwen3.7-max")
         self.assertEqual(by_id["qwen"]["family"], "qwen")
-        self.assertFalse(by_id["qwen"]["web_access"])
+        self.assertTrue(by_id["qwen"]["web_access"])
 
     def test_qwen_argv_uses_local_scoped_adapter(self):
-        command = _engine_argv("qwen", "prompt", context_files=["TASK.json"])
+        command = _engine_argv(
+            "qwen", "prompt", phase="finding-audit", context_files=["TASK.json"]
+        )
         self.assertEqual(command[command.index("--model") + 1], "qwen3.7-max")
         self.assertIn(str(ROOT / "pure_tate" / "qwen_worker.py"), command)
         self.assertEqual(command[command.index("--context-file") + 1], "TASK.json")
+        self.assertIn("--allow-web", command)
 
     def test_grok_uses_fixture_verified_streaming_json(self):
         command = _engine_argv("grok", "prompt")

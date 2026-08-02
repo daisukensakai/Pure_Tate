@@ -28,6 +28,14 @@ MAX_TOOL_ROUNDS = 8
 MAX_FILE_BYTES = 1_000_000
 
 
+def _responses_timeout() -> int:
+    raw = os.environ.get("QWEN_RESPONSES_TIMEOUT", "180")
+    try:
+        return max(1, min(int(raw), 900))
+    except ValueError:
+        return 180
+
+
 def _api_key() -> Optional[str]:
     return os.environ.get("DASHSCOPE_API_KEY") or os.environ.get("QWEN_API_KEY")
 
@@ -75,6 +83,61 @@ def _request(
         raise RuntimeError("Qwen API request failed: %s" % exc) from exc
     if not isinstance(payload, dict):
         raise RuntimeError("Qwen API returned a non-object response")
+    return payload
+
+
+def _responses_request(
+    *,
+    api_key: str,
+    model: str,
+    input_items: List[Dict[str, Any]],
+    instructions: str,
+    previous_response_id: Optional[str],
+    max_tokens: int,
+    thinking_budget: int,
+) -> Dict[str, Any]:
+    """Call Qwen's Responses API, which exposes native web tools for 3.7 Max."""
+    body: Dict[str, Any] = {
+        "model": model,
+        "input": input_items,
+        "instructions": instructions,
+        "tools": [
+            {"type": "web_search"},
+            {"type": "web_extractor"},
+            {
+                "type": "function",
+                "name": "read_file",
+                "description": "Read one file from the isolated task workspace.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {"path": {"type": "string"}},
+                    "required": ["path"],
+                    "additionalProperties": False,
+                },
+            },
+        ],
+        "enable_thinking": True,
+        "max_output_tokens": max_tokens,
+        "thinking": {"budget_tokens": thinking_budget},
+    }
+    if previous_response_id:
+        body["previous_response_id"] = previous_response_id
+    request = urllib.request.Request(
+        _base_url() + "/responses",
+        data=json.dumps(body).encode("utf-8"),
+        headers={"Authorization": "Bearer " + api_key, "Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=_responses_timeout()) as response:
+            payload = json.loads(response.read())
+    except urllib.error.HTTPError as exc:
+        raw = exc.read().decode("utf-8", "replace")
+        raise RuntimeError("Qwen Responses API HTTP %d: %s" % (exc.code, raw[:1000])) from exc
+    except Exception as exc:  # noqa: BLE001 - present provider errors to the runner
+        raise RuntimeError("Qwen Responses API request failed: %s" % exc) from exc
+    if not isinstance(payload, dict):
+        raise RuntimeError("Qwen Responses API returned a non-object response")
     return payload
 
 
@@ -201,12 +264,95 @@ def _assistant_message(message: Dict[str, Any]) -> Dict[str, Any]:
     return out
 
 
+def _responses_text(payload: Dict[str, Any]) -> str:
+    text = payload.get("output_text")
+    if isinstance(text, str) and text:
+        return text
+    parts: List[str] = []
+    for item in payload.get("output", []):
+        if not isinstance(item, dict) or item.get("type") != "message":
+            continue
+        for content in item.get("content", []):
+            if isinstance(content, dict) and isinstance(content.get("text"), str):
+                parts.append(content["text"])
+    return "\n".join(parts)
+
+
+def _responses_function_calls(payload: Dict[str, Any]) -> List[Dict[str, Any]]:
+    return [
+        item
+        for item in payload.get("output", [])
+        if isinstance(item, dict) and item.get("type") == "function_call"
+    ]
+
+
+def _run_with_web(
+    prompt: str,
+    allowlist: Dict[str, Path],
+    *,
+    api_key: str,
+    model: str,
+    max_tokens: int,
+    thinking_budget: int,
+) -> str:
+    names = "\n".join("- " + path for path in sorted(allowlist)) or "- (none)"
+    instructions = (
+        "You are a read-only Pure Tate task agent. Use native web_search and "
+        "web_extractor for current sources when needed. You may read only the "
+        "listed workspace files through read_file. Return the required final "
+        "JSON artifact as plain text.\n\nAllowed workspace files:\n" + names
+    )
+    pending: List[Dict[str, Any]] = [{"role": "user", "content": prompt}]
+    previous_response_id: Optional[str] = None
+    for _round in range(MAX_TOOL_ROUNDS):
+        payload = _responses_request(
+            api_key=api_key,
+            model=model,
+            input_items=pending,
+            instructions=instructions,
+            previous_response_id=previous_response_id,
+            max_tokens=max_tokens,
+            thinking_budget=thinking_budget,
+        )
+        previous_response_id = str(payload.get("id") or "") or None
+        calls = _responses_function_calls(payload)
+        if not calls:
+            content = _responses_text(payload)
+            if content:
+                return content
+            raise RuntimeError("Qwen Responses API returned no final text")
+        pending = []
+        for call in calls:
+            arguments = call.get("arguments", "{}")
+            try:
+                parsed = json.loads(arguments) if isinstance(arguments, str) else {}
+            except json.JSONDecodeError:
+                parsed = {}
+            result = (
+                _read_file(parsed if isinstance(parsed, dict) else {}, allowlist)
+                if call.get("name") == "read_file"
+                else {"ok": False, "error": "tool is unavailable"}
+            )
+            call_id = call.get("call_id")
+            if not isinstance(call_id, str) or not call_id:
+                raise RuntimeError("Qwen Responses function call has no call_id")
+            pending.append(
+                {
+                    "type": "function_call_output",
+                    "call_id": call_id,
+                    "output": json.dumps(result, ensure_ascii=False),
+                }
+            )
+    raise RuntimeError("Qwen Responses API exceeded the %d tool-round limit" % MAX_TOOL_ROUNDS)
+
+
 def run(
     prompt: str,
     context_files: Iterable[str],
     *,
     model: str,
     allow_grok: bool,
+    allow_web: bool,
     max_tokens: int,
     thinking_budget: int,
 ) -> str:
@@ -214,6 +360,15 @@ def run(
     if not key:
         raise RuntimeError("DASHSCOPE_API_KEY or QWEN_API_KEY is not set")
     allowlist = _allowlist(context_files)
+    if allow_web:
+        return _run_with_web(
+            prompt,
+            allowlist,
+            api_key=key,
+            model=model,
+            max_tokens=max_tokens,
+            thinking_budget=thinking_budget,
+        )
     grok_pool: Optional[Any] = None
     if allow_grok:
         from pure_tate.grok_workers import build_pool_from_env
@@ -292,6 +447,7 @@ def main() -> int:
     parser.add_argument("--context-file", action="append", default=[])
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--allow-grok-workers", action="store_true")
+    parser.add_argument("--allow-web", action="store_true")
     parser.add_argument("--max-tokens", type=int, default=64000)
     parser.add_argument("--thinking-budget", type=int, default=16384)
     args = parser.parse_args()
@@ -302,6 +458,7 @@ def main() -> int:
                 args.context_file,
                 model=args.model,
                 allow_grok=args.allow_grok_workers,
+                allow_web=args.allow_web,
                 max_tokens=args.max_tokens,
                 thinking_budget=args.thinking_budget,
             )
