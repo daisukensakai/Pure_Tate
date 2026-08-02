@@ -1,5 +1,4 @@
 import json
-import re
 import datetime
 import hashlib
 import os
@@ -25,7 +24,12 @@ from .capabilities import (
 )
 from .experiments import experiment_tasks, run_experiment
 from .findings import adjudicate_finding, load_findings, record_review_findings
-from .health import eligible_engine_pool, engine_health_state, operational_engine_pool
+from .health import (
+    eligible_engine_pool,
+    engine_health_state,
+    engine_runtime_issue,
+    operational_engine_pool,
+)
 from .novelty import novelty_tasks
 from .notifications import notify_campaign_run, notify_campaign_step
 from .routing import (
@@ -34,6 +38,14 @@ from .routing import (
     record_high_tier_dispatch,
     select_prover_for_cell,
     select_reviewer,
+)
+from .run_lifecycle import (
+    CampaignAlreadyRunning,
+    CampaignRunLock,
+    live_run_ledgers,
+    recover_stale_run_ledgers,
+    release_artifact_reservation,
+    reserve_prefixed_artifact,
 )
 from .store import ROOT, atomic_write_json, load_repository
 from .tasking import (
@@ -48,7 +60,6 @@ from .paired import (
     SubstantiveAttemptError,
     dry_run_preview,
     forced_task,
-    next_digest_id,
     pair_state,
     problem_key,
     publish_working_context,
@@ -91,9 +102,11 @@ def _new_run_ledger(
     )
     path = RUN_LEDGER_DIR / (run_id + ".json")
     ledger = {
-        "schema_version": 1,
+        "schema_version": 2,
         "run_id": run_id,
         "campaign_id": campaign_id,
+        "parent_pid": os.getpid(),
+        "parent_process_group": os.getpgrp(),
         "status": "running",
         "started_at": now.isoformat(),
         "requested_steps": steps,
@@ -111,15 +124,6 @@ def _new_run_ledger(
 def _write_run_ledger(path: Path, ledger: Dict[str, Any]) -> None:
     atomic_write_json(path, ledger)
     atomic_write_json(RUN_LEDGER_DIR / "latest.json", ledger)
-
-
-def _next_prefixed_id(directory: Path, prefix: str) -> str:
-    numbers = []
-    for path in directory.glob(prefix + "-*.json"):
-        match = re.fullmatch(prefix + r"-(\d{4})", path.stem)
-        if match:
-            numbers.append(int(match.group(1)))
-    return "%s-%04d" % (prefix, (max(numbers) if numbers else 0) + 1)
 
 
 def _campaign_reviews(campaign_id: str) -> List[Dict[str, Any]]:
@@ -327,9 +331,10 @@ def _eligible_research_pool(
         # A first no-spend preview remains possible before any live probe. Once
         # a live result exists, dry-run reflects it and excludes failed engines.
         return declared
-    return [
+    attested = [
         engine_id for engine_id in declared if states[engine_id] == "pass"
     ]
+    return operational_engine_pool(attested, phase, dry_run=dry_run)
 
 
 def _research_capability_blocker(
@@ -354,9 +359,17 @@ def _research_capability_blocker(
         return None
     return {
         "phase": phase,
-        "reason": "no independent research engine has a passing live-web attestation",
+        "reason": (
+            "no independent research engine has both a passing live-web "
+            "attestation and an operational local runtime"
+        ),
         "independent_engine_states": {
-            engine_id: _research_capability_state(engine_id, phase)
+            engine_id: {
+                "capability": _research_capability_state(engine_id, phase),
+                "runtime_issue": engine_runtime_issue(
+                    engine_id, configured[engine_id]
+                ),
+            }
             for engine_id in independent_declared
         },
         "excluded_engines": sorted(excluded_engines),
@@ -462,7 +475,7 @@ def _apply_finding_audit(artifact: Dict[str, Any]) -> None:
         )
 
 
-def drive_campaign(
+def _drive_campaign_unlocked(
     campaign_id: str,
     steps: int,
     research_engines: Sequence[str],
@@ -711,7 +724,7 @@ def drive_campaign(
                     )
                 ) - failed_engines
                 allowed_miners = set(
-                    eligible_engine_pool(
+                    operational_engine_pool(
                         list(review_engines), "review", dry_run=False
                     )
                 ) - failed_engines
@@ -833,6 +846,10 @@ def drive_campaign(
             )
             break
 
+        reservation_path: Optional[Path] = None
+        if ledger is None:
+            raise RuntimeError("live campaign drive has no run ledger")
+        run_id = str(ledger["run_id"])
         if phase == "review":
             attempt_id = str(task["target_attempt_id"])
             used = {
@@ -847,7 +864,7 @@ def drive_campaign(
                 routing["escalation_order"],
                 allowed=[
                     item
-                    for item in eligible_engine_pool(
+                    for item in operational_engine_pool(
                         list(review_engines), "review", dry_run=dry_run
                     )
                     if item not in failed_engines
@@ -862,17 +879,15 @@ def drive_campaign(
                     continue
                 stop_reason = (
                     "health_failure"
-                    if not eligible_engine_pool(
+                    if not operational_engine_pool(
                         list(review_engines), "review", dry_run=dry_run
                     )
                     else "no_eligible_task"
                 )
                 break
-            artifact_id = next_artifact_id("reviews")
-            ordinal = int(artifact_id.split("-")[1]) + sum(
-                event["phase"] == "review" for event in events
+            artifact_id, reservation_path = reserve_prefixed_artifact(
+                ROOT / "proof" / "reviews", "REV", run_id
             )
-            artifact_id = "REV-%04d" % ordinal
             output = ROOT / "proof" / "reviews" / (artifact_id + ".json")
             planned_reviewers.setdefault(attempt_id, set()).add(engine)
         elif phase in {"finding-audit", "novelty"}:
@@ -908,11 +923,9 @@ def drive_campaign(
                 if phase == "finding-audit"
                 else ROOT / "research" / "novelty-audits"
             )
-            artifact_id = _next_prefixed_id(directory, prefix)
-            ordinal = int(artifact_id.split("-")[1]) + sum(
-                event["phase"] == phase for event in events
+            artifact_id, reservation_path = reserve_prefixed_artifact(
+                directory, prefix, run_id
             )
-            artifact_id = "%s-%04d" % (prefix, ordinal)
             output = directory / (artifact_id + ".json")
             planned_research_engines.setdefault(
                 (phase, str(task.get("finding_id", task.get("attempt_id")))), set()
@@ -922,7 +935,9 @@ def drive_campaign(
             output = ROOT / task["output"]
         elif phase == "trace-mining":
             engine = str(task["selected_engine"])
-            artifact_id = next_digest_id()
+            artifact_id, reservation_path = reserve_prefixed_artifact(
+                DIGEST_DIR, "DIGEST", run_id
+            )
             output = DIGEST_DIR / (artifact_id + ".json")
         else:
             used = used_by_subproblem.setdefault(task["subproblem_id"], set())
@@ -942,7 +957,7 @@ def drive_campaign(
             if engine is None:
                 stop_reason = (
                     "health_failure"
-                    if not eligible_engine_pool(
+                    if not operational_engine_pool(
                         list(prover_engines),
                         "mathematics",
                         dry_run=dry_run,
@@ -950,13 +965,9 @@ def drive_campaign(
                     else "no_eligible_task"
                 )
                 break
-            artifact_id = next_artifact_id("attempts")
-            ordinal = int(artifact_id.split("-")[1]) + sum(
-                event["phase"]
-                in {"mathematics", "forced-proof", "standard-fallback"}
-                for event in events
+            artifact_id, reservation_path = reserve_prefixed_artifact(
+                ROOT / "proof" / "attempts", "ATT", run_id
             )
-            artifact_id = "ATT-%04d" % ordinal
             output = ROOT / "proof" / "attempts" / (artifact_id + ".json")
             used.add(engine)
             task.setdefault(
@@ -1006,6 +1017,19 @@ def drive_campaign(
                 ledger["events"] = events
                 _write_run_ledger(ledger_path, ledger)
 
+        def record_process_start(process_meta: Dict[str, Any]) -> None:
+            record = dict(process_meta)
+            record["started_at"] = _timestamp()
+            event.setdefault("processes", []).append(record)
+            event["engine_pid"] = record.get("engine_pid")
+            event["engine_process_group"] = record.get(
+                "engine_process_group"
+            )
+            event["supervisor_pid"] = record.get("supervisor_pid")
+            if ledger is not None and ledger_path is not None:
+                ledger["events"] = events
+                _write_run_ledger(ledger_path, ledger)
+
         try:
             chain_id = task.get("routing_chain_id")
             if (
@@ -1022,6 +1046,7 @@ def drive_campaign(
                     output,
                     timeout=timeout,
                     progress_callback=record_activity,
+                    process_start_callback=record_process_start,
                 )
                 if phase in {"forced-proof", "standard-fallback"}:
                     record_event(
@@ -1252,8 +1277,9 @@ def drive_campaign(
                 )
             break
         finally:
+            release_artifact_reservation(reservation_path)
             if desktop_notifications or ntfy_notifications:
-                notify_campaign_step(
+                event["notification_delivery"] = notify_campaign_step(
                     campaign_id,
                     event,
                     steps,
@@ -1264,11 +1290,18 @@ def drive_campaign(
                 ledger["events"] = events
                 _write_run_ledger(ledger_path, ledger)
     if ledger is not None and ledger_path is not None:
+        has_failed_events = any(
+            event.get("state") in {"failed", "abandoned"}
+            for event in events
+        )
+        if stop_reason == "step_limit" and has_failed_events:
+            stop_reason = "step_limit_with_failures"
         ledger["status"] = (
-            "completed"
+            ("completed_with_failures" if has_failed_events else "completed")
             if stop_reason
             in {
                 "step_limit",
+                "step_limit_with_failures",
                 "no_eligible_task",
                 "case_verified_and_novelty_certified",
                 "case_verified_awaiting_novelty",
@@ -1280,7 +1313,7 @@ def drive_campaign(
         ledger["executed_steps"] = len(events)
         _write_run_ledger(ledger_path, ledger)
         if desktop_notifications or ntfy_notifications:
-            notify_campaign_run(
+            ledger["run_notification_delivery"] = notify_campaign_run(
                 campaign_id,
                 len(events),
                 steps,
@@ -1289,6 +1322,7 @@ def drive_campaign(
                 desktop=desktop_notifications,
                 ntfy=ntfy_notifications,
             )
+            _write_run_ledger(ledger_path, ledger)
     return {
         "campaign_id": campaign_id,
         "dry_run": dry_run,
@@ -1304,3 +1338,53 @@ def drive_campaign(
             str(ledger_path.relative_to(ROOT)) if ledger_path else None
         ),
     }
+
+
+def drive_campaign(
+    campaign_id: str,
+    steps: int,
+    research_engines: Sequence[str],
+    prover_engines: Sequence[str],
+    review_engines: Sequence[str],
+    timeout: int = 10800,
+    dry_run: bool = False,
+    retry: bool = False,
+    desktop_notifications: bool = False,
+    ntfy_notifications: bool = False,
+) -> Dict[str, Any]:
+    """Drive one campaign under an exclusive, crash-released campaign lease."""
+    if dry_run:
+        return _drive_campaign_unlocked(
+            campaign_id,
+            steps,
+            research_engines,
+            prover_engines,
+            review_engines,
+            timeout=timeout,
+            dry_run=True,
+            retry=retry,
+            desktop_notifications=desktop_notifications,
+            ntfy_notifications=ntfy_notifications,
+        )
+    with CampaignRunLock(campaign_id):
+        recovered = recover_stale_run_ledgers(campaign_id)
+        active = live_run_ledgers(campaign_id)
+        if active:
+            raise CampaignAlreadyRunning(
+                "campaign %s has a live legacy drive: %s"
+                % (campaign_id, ", ".join(active))
+            )
+        result = _drive_campaign_unlocked(
+            campaign_id,
+            steps,
+            research_engines,
+            prover_engines,
+            review_engines,
+            timeout=timeout,
+            dry_run=False,
+            retry=retry,
+            desktop_notifications=desktop_notifications,
+            ntfy_notifications=ntfy_notifications,
+        )
+        result["recovered_stale_runs"] = recovered
+        return result

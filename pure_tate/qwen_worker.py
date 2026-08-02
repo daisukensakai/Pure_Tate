@@ -22,8 +22,9 @@ if str(PACKAGE_ROOT) not in sys.path:
     sys.path.insert(0, str(PACKAGE_ROOT))
 
 
-DEFAULT_BASE_URL = "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1"
+BASE_URL = "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1"
 DEFAULT_MODEL = "qwen3.7-max"
+API_KEY_ENV = "DASHSCOPE_API_KEY"
 MAX_TOOL_ROUNDS = 8
 MAX_FILE_BYTES = 1_000_000
 
@@ -36,16 +37,23 @@ def _responses_timeout() -> int:
         return 180
 
 
+def _max_tool_rounds() -> int:
+    """Return a bounded per-invocation tool-turn limit.
+
+    A provider can impose a shorter response-stream deadline than the harness.
+    Keeping the default preserves the normal multi-stage workflow, while an
+    operator can request a one-turn Qwen attempt with
+    ``QWEN_MAX_TOOL_ROUNDS=1`` when diagnosing that deadline.
+    """
+    raw = os.environ.get("QWEN_MAX_TOOL_ROUNDS", str(MAX_TOOL_ROUNDS))
+    try:
+        return max(1, min(int(raw), MAX_TOOL_ROUNDS))
+    except ValueError:
+        return MAX_TOOL_ROUNDS
+
+
 def _api_key() -> Optional[str]:
-    return os.environ.get("DASHSCOPE_API_KEY") or os.environ.get("QWEN_API_KEY")
-
-
-def _base_url() -> str:
-    return (
-        os.environ.get("QWEN_BASE_URL")
-        or os.environ.get("DASHSCOPE_BASE_URL")
-        or DEFAULT_BASE_URL
-    ).rstrip("/")
+    return os.environ.get(API_KEY_ENV)
 
 
 def _request(
@@ -64,7 +72,7 @@ def _request(
         body["tools"] = tools
         body["tool_choice"] = "auto"
     request = urllib.request.Request(
-        _base_url() + "/chat/completions",
+        BASE_URL + "/chat/completions",
         data=json.dumps(body).encode("utf-8"),
         headers={"Authorization": "Bearer " + api_key, "Content-Type": "application/json"},
         method="POST",
@@ -123,7 +131,7 @@ def _responses_request(
     if previous_response_id:
         body["previous_response_id"] = previous_response_id
     request = urllib.request.Request(
-        _base_url() + "/responses",
+        BASE_URL + "/responses",
         data=json.dumps(body).encode("utf-8"),
         headers={"Authorization": "Bearer " + api_key, "Content-Type": "application/json"},
         method="POST",
@@ -304,7 +312,8 @@ def _run_with_web(
     )
     pending: List[Dict[str, Any]] = [{"role": "user", "content": prompt}]
     previous_response_id: Optional[str] = None
-    for _round in range(MAX_TOOL_ROUNDS):
+    max_tool_rounds = _max_tool_rounds()
+    for _round in range(max_tool_rounds):
         payload = _responses_request(
             api_key=api_key,
             model=model,
@@ -343,7 +352,9 @@ def _run_with_web(
                     "output": json.dumps(result, ensure_ascii=False),
                 }
             )
-    raise RuntimeError("Qwen Responses API exceeded the %d tool-round limit" % MAX_TOOL_ROUNDS)
+    raise RuntimeError(
+        "Qwen Responses API exceeded the %d tool-round limit" % max_tool_rounds
+    )
 
 
 def run(
@@ -358,7 +369,7 @@ def run(
 ) -> str:
     key = _api_key()
     if not key:
-        raise RuntimeError("DASHSCOPE_API_KEY or QWEN_API_KEY is not set")
+        raise RuntimeError("%s is not set" % API_KEY_ENV)
     allowlist = _allowlist(context_files)
     if allow_web:
         return _run_with_web(
@@ -391,7 +402,8 @@ def run(
     ]
     tools = _tools(allow_grok)
     try:
-        for _round in range(MAX_TOOL_ROUNDS):
+        max_tool_rounds = _max_tool_rounds()
+        for _round in range(max_tool_rounds):
             payload = _request(
                 api_key=key,
                 model=model,
@@ -435,7 +447,7 @@ def run(
                         "content": json.dumps(result, ensure_ascii=False),
                     }
                 )
-        raise RuntimeError("Qwen exceeded the %d tool-round limit" % MAX_TOOL_ROUNDS)
+        raise RuntimeError("Qwen exceeded the %d tool-round limit" % max_tool_rounds)
     finally:
         if grok_pool is not None:
             grok_pool.shutdown(cancel_live=True)

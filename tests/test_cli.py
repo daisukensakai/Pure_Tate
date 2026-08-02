@@ -4,6 +4,26 @@ from pure_tate.cli import build_parser
 
 
 class CliTests(unittest.TestCase):
+    def test_ntfy_defaults_to_local_configuration_and_can_be_disabled(self):
+        parser = build_parser()
+        base = [
+            "drive",
+            "--steps",
+            "1",
+            "--campaign",
+            "C66-001",
+            "--prover-engines",
+            "grok",
+            "claude",
+            "--review-engines",
+            "grok",
+            "claude",
+        ]
+        self.assertIsNone(parser.parse_args(base).notify_ntfy)
+        self.assertFalse(
+            parser.parse_args(base + ["--no-notify-ntfy"]).notify_ntfy
+        )
+
     def test_operational_commands_are_registered(self):
         parser = build_parser()
         for argv, command in (

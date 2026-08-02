@@ -5,10 +5,29 @@ from pure_tate.health import (
     audit_engine_health,
     eligible_engine_pool,
     engine_health_is_attested,
+    engine_runtime_issue,
+    operational_engine_pool,
 )
 
 
 class EngineHealthTests(unittest.TestCase):
+    def test_qwen_without_credentials_is_not_operational(self):
+        config = {"binary": "python3", "family": "qwen"}
+        with mock.patch.dict(
+            "os.environ",
+            {"DASHSCOPE_API_KEY": ""},
+            clear=False,
+        ):
+            self.assertIn("API_KEY", engine_runtime_issue("qwen", config))
+            with mock.patch(
+                "pure_tate.health.load_engines", return_value={"qwen": config}
+            ), mock.patch(
+                "pure_tate.health.engine_health_state", return_value="not_required"
+            ):
+                self.assertEqual(
+                    operational_engine_pool(["qwen"], "finding-audit"), []
+                )
+
     def test_missing_health_receipt_fails_closed(self):
         with mock.patch(
             "pure_tate.health.load_engine_health", return_value=None

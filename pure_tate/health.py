@@ -1,4 +1,5 @@
 import datetime
+import os
 import shutil
 import hashlib
 import json
@@ -103,9 +104,22 @@ def operational_engine_pool(
     return [
         engine_id
         for engine_id in eligible
-        if shutil.which(str(engines[engine_id].get("binary", engine_id)))
-        is not None
+        if engine_runtime_issue(engine_id, engines.get(engine_id)) is None
     ]
+
+
+def engine_runtime_issue(
+    engine_id: str, config: Optional[Dict[str, Any]] = None
+) -> Optional[str]:
+    """Return a dispatch-blocking local runtime issue, if any."""
+    if config is None:
+        config = load_engines().get(engine_id, {})
+    binary = str(config.get("binary", engine_id))
+    if shutil.which(binary) is None:
+        return "engine binary is unavailable: %s" % binary
+    if config.get("family") == "qwen" and not os.environ.get("DASHSCOPE_API_KEY"):
+        return "DASHSCOPE_API_KEY is not set"
+    return None
 
 
 def _probe_prompt(level: str) -> str:

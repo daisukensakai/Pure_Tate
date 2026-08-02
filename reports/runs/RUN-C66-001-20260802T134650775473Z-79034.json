@@ -1,0 +1,43 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-02T13:46:52.808451+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "qwen",
+      "codex"
+    ],
+    "research": [
+      "qwen"
+    ],
+    "review": [
+      "grok",
+      "qwen",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 224,
+      "completed_at": "2026-08-02T13:46:52.680699+00:00",
+      "engine": "qwen",
+      "error": "agent failed with exit 1: Qwen Responses API HTTP 429: {\"code\":\"Throttling.AllocationQuota\",\"message\":\"Your token-plan 5-hour quota has been exhausted. The quota will reset at 08-02 17:20:00 UTC.\",\"request_id\":\"f8e207b6-a9b7-4463-8765-5291031c4cdb\"}",
+      "last_activity_at": "2026-08-02T13:46:52.670456+00:00",
+      "last_activity_stream": "stderr",
+      "max_output_tokens": 64000,
+      "output": "research/finding-audits/FAUD-0038.json",
+      "phase": "finding-audit",
+      "started_at": "2026-08-02T13:46:51.030552+00:00",
+      "state": "failed",
+      "step": 1,
+      "task_id": "TASK-F-FND-0054"
+    }
+  ],
+  "executed_steps": 1,
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260802T134650775473Z-79034",
+  "schema_version": 1,
+  "started_at": "2026-08-02T13:46:50.775473+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

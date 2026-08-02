@@ -24,6 +24,7 @@ from .campaigns import (
 )
 from .findings import adjudicate_finding
 from .health import audit_engine_health
+from .notifications import ntfy_is_configured
 from .paired import recover_attempt_from_trace
 from .packets import write_case_packets
 from .proofs import audit_proofs, proof_status_report
@@ -514,6 +515,11 @@ def command_finding_adjudicate(args: argparse.Namespace) -> int:
 
 
 def command_drive(args: argparse.Namespace) -> int:
+    ntfy_notifications = (
+        ntfy_is_configured()
+        if args.notify_ntfy is None
+        else bool(args.notify_ntfy)
+    )
     try:
         if args.campaign:
             result = drive_campaign(
@@ -526,7 +532,7 @@ def command_drive(args: argparse.Namespace) -> int:
                 dry_run=args.dry_run,
                 retry=args.retry,
                 desktop_notifications=args.notify_desktop,
-                ntfy_notifications=args.notify_ntfy,
+                ntfy_notifications=ntfy_notifications,
             )
         else:
             result = drive(
@@ -550,6 +556,7 @@ def command_drive(args: argparse.Namespace) -> int:
         "contradictory_novelty_audits",
         "interrupted",
         "health_failure",
+        "step_limit_with_failures",
     } else 1
 
 
@@ -872,8 +879,19 @@ def build_parser() -> argparse.ArgumentParser:
     )
     drive_parser.add_argument(
         "--notify-ntfy",
+        dest="notify_ntfy",
         action="store_true",
-        help="Send every campaign step and the final result to the configured ntfy topic.",
+        default=None,
+        help=(
+            "Send every campaign step and final result to ntfy "
+            "(the default when a local topic is configured)."
+        ),
+    )
+    drive_parser.add_argument(
+        "--no-notify-ntfy",
+        dest="notify_ntfy",
+        action="store_false",
+        help="Disable ntfy alerts for this drive.",
     )
     drive_parser.set_defaults(func=command_drive)
 

@@ -625,6 +625,24 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertIn("session limit", detail)
         self.assertIn("exit 1", detail)
 
+    def test_stream_failure_reports_final_error_not_init_envelope(self):
+        raw = "\n".join(
+            [
+                json.dumps({"type": "system", "subtype": "init", "tools": ["x"] * 500}),
+                json.dumps(
+                    {
+                        "type": "result",
+                        "subtype": "error",
+                        "is_error": True,
+                        "result": "provider session limit reached",
+                    }
+                ),
+            ]
+        )
+        detail = _failure_detail(1, "", raw)
+        self.assertIn("provider session limit reached", detail)
+        self.assertNotIn('"tools"', detail)
+
     def test_artifact_id_must_match_output_filename(self):
         task = research_tasks()[0]
         artifact = {

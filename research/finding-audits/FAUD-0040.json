@@ -1,0 +1,68 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (published genus-6 coverage stops at n <= c(6) = 5, so n = 6 lies outside the CKgP range) and with the packet bottleneck C66-GEO-Z / C66-TATE-SUPPORT. It is explicitly NOT a re-litigation of retired FND-0021 / FND-0028: FND-0055 does not dispute the CKgP-implies-algebraicity implication whose scope the corpus fixes on open M_{g,n}; it denies only that the CE fibrewise vanishing is itself such an input. HYPOTHESIS ARITHMETIC re-derived independently from the packet's SRC-0004 Lemma 10.6 locator: the vanishing holds iff 0 > 4f_i + n - 2g - 14, so at g = 6 the balanced splitting F = O(4) + O(5) gives n < 10 for f_1 = 4 and n < 6 for f_2 = 5. At n = 6 the f_2 = 5 summand sits exactly at the threshold, deg(omega_C tensor W_5^vee(Gamma)) = 0, so the vanishing is equivalent to non-triviality of that degree-zero bundle, i.e. O_C(Gamma) not isomorphic to W_5 tensor omega_C^{-1}; with deg W_5 = 4g + 12 - 4*5 = 16 and deg(W_5 tensor omega_C^{-1}) = 6 this reproduces the packet's six-point failure locus. The hypothesis is therefore a fibrewise, pointwise-in-moduli condition cutting out exactly U = M_{6,6} minus Z, as the finding presupposes. PRIMARY CHECKS SUPPORTING THE NON-IMPLICATION. (1) The only route in the literature from this circle of ideas to Hodge-theoretic purity runs through the CKgP, not through the vanishing: Larson's 2026 survey (arXiv:2606.29656) Lemma 2.10, quoted verbatim from the retrieved HTML, reads 'Let X be an open substack of a smooth, proper Deligne-Mumford stack over C. If X has the CKgP, then cl: A^*(X) -> sum_k W_k H^k(X) is surjective.' Its hypothesis is CKgP; the CE vanishing is one ingredient of the Canning-Larson stratification argument that can yield CKgP, never a substitute for its conclusion. (2) No purity criterion of the asserted form exists in the current literature. Payne's survey (arXiv:2605.20453) gives only the localization right-exact sequence H^{k-2}(D~)(-1) -> H^k(Mbar_{g,n}) -> W_k H^k(M_{g,n}) -> 0, records that pure Tate is confirmed for even k <= 14 with k = 16, 18, 20 open, states results are case-by-case rather than criterion-based, and does not discuss Hurwitz or tetragonal strata at all. Larson's survey states Theorem 4.7 'For all g and n, and for any k <= 15' together with 'At present, we do not have sufficient information about base cases needed to push Theorem 4.7 beyond weight 15.' Both 2026 surveys thus place the finding's target strictly beyond the reach of any published purity input. (3) Genus-6 coverage excludes the case: SRC-0004 Theorem 1.4 (read from the retrieved introduction) gives tautological Chow and cohomology rings for 3 <= g <= 7 with 2g + n <= 14, i.e. n <= 2 at g = 6, while THM-0005 records CKgP for n <= c(6) = 5. No CKgP statement for M_{6,6} or for the open U is available, so Lemma 2.10 cannot be applied to either; and ascent of CKgP to the ordered six-point data is separately obstructed by corroborated FND-0002 (CKgP need not ascend along a finite etale S_n-ordering cover, where transfer controls only the invariant summand). (4) INDEPENDENT STRUCTURAL SHARPENING, which strengthens rather than weakens the finding: even the strongest possible U-side conclusion cannot settle the campaign target. For a common smooth proper compactification X of M_{6,6} (Mbar_{6,6} suffices, and U is dense open in X as well), W_26 H^26(M_{6,6}) = im(H^26(X) -> H^26(M_{6,6})) and W_26 H^26(U) = im(H^26(X) -> H^26(U)), so restriction W_26 H^26(M_{6,6}) -> W_26 H^26(U) is SURJECTIVE. By corroborated FND-0033 (polarizable pure Q-Hodge structures of fixed weight form a semisimple abelian category) the target splits as that quotient plus the kernel of classes restricting to zero on U. Proving Tate type on U therefore controls one direct summand only and leaves the Z-supported summand -- precisely subproblem C66-TATE-SUPPORT -- untouched. SCOPE PRECISION, no correction of substance: 'CE syzygy vanishing' is loose terminology, since the Lemma 10.6 hypothesis is the Serre dual of H^1(C, W_5|_C(-Gamma)) = 0, i.e. surjectivity of the evaluation map H^0(C, W_5|_C) -> W_5|_Gamma within the CE resolution data; the non-implication does not depend on the label. The record is scoped to (6,6) with the balanced splitting, but the underlying non-implication (a fibrewise vanishing hypothesis is not a purity theorem for open moduli cohomology) is generic to CE-type arguments. DISTINCTNESS: not a duplicate of FND-0054 (declaring the genus-6 balanced tetragonal Hurwitz space rational/Tate to deduce Tate cohomology of Z; Z-side, and about upgrading a predicted motive to a theorem), FND-0053 (S_6 rational irreducibles do not force Tate local systems; Z-side monodromy), FND-0052 (Z is not a closed pure-codimension-4 subvariety, so Gysin requires a stratified closed embedding), FND-0046 / FND-0047 (scheme structure of the failure locus and base-change hypotheses for the relative linear system), FND-0050 (ATT-0020 omits stable-pair and evaluation-failure analysis), or FND-0048 (pure image not identified with a decorated graph complex). FND-0055 is the U-side counterpart of the Z-side findings: it bounds the logical strength of the vanishing hypothesis on the complementary open. Merge target: none. VERDICT: promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent primary-source verification of (i) the CKgP-hypothesis form of the algebraicity lemma, (ii) the absence of any published purity criterion for open moduli or tetragonal strata together with the still-open status of degree 16 / weight > 15 in both 2026 surveys, (iii) the genus-6 marking bounds excluding n = 6, and (iv) the Lemma 10.6 degree arithmetic placing n = 6 exactly at the vanishing threshold. INDEPENDENCE AND PROVENANCE LIMITS, stated rather than concealed. This audit was carried out without the grok engine: grok authored FND-0055 (reviewer_engines = ['grok']) and is listed in the task's excluded_engines, so no grok worker was dispatched despite the optional helper pool being offered, and the corroboration is engine-independent. The full text of Section 10 of arXiv:2208.02357 could not be extracted (the PDF stream and the ar5iv rendering both truncated before Section 10), so the Lemma 10.6 dependence rests on the packet-supplied primary locator excerpt plus independent re-derivation of its arithmetic, while the Theorem 1.4 genus-6 range was read from the retrieved introduction. Content hashes could not be computed in this read-only workspace (no shell or hashing tool available) and the retrieved renderings did not expose arXiv version strings; content_sha256 and arxiv_version are recorded as null rather than fabricated, and retrieved_at is normalized to the session date 2026-08-03 with UTC time of day unknown. One scope-adjacent, non-decisive observation for campaign triage, not relied on for this verdict: arXiv:2509.02950 (Liu, 2025) reports extending the Casnati-Ekedahl/tetragonal method past c(5) = 7 to the Chow rings of M_{5,8} and M_{5,9} by stratifying and explicitly computing on the evaluation-failure locus, making no Hodge or Tate claim about open moduli -- which independently illustrates the extra input FND-0055 says the vanishing does not supply; that paper was not verified in detail here, but given the (6,6)-to-(5,8) depth-one coupling recorded in FND-0034 it merits a separate corpus check.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0055",
+  "id": "FAUD-0040",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "claim_type": "non-implication / method-boundary (negative claim about the logical strength of a hypothesis)",
+    "coefficients": "Q",
+    "context_revision": 2,
+    "hypothesis_scoped": "Fibrewise Casnati-Ekedahl vanishing H^0(C, omega_C tensor W_5|_C^vee(Gamma)) = 0 for the f_2=5 summand at the balanced tetragonal splitting F = O_{P1}(4) + O_{P1}(5); equivalently H^1(C, W_5|_C(-Gamma)) = 0, equivalently surjectivity of the evaluation H^0(C, W_5|_C) -> W_5|_Gamma, equivalently non-triviality of the degree-zero bundle omega_C tensor W_5^vee(Gamma), i.e. O_C(Gamma) not isomorphic to W_5 tensor omega_C^{-1} (deg W_5 = 16, deg W_5 tensor omega_C^{-1} = 6)",
+    "not_asserted": "The finding does not assert that W_26 H^26(U) is non-Tate, nor that the CE stratification route is unusable; it asserts only that the vanishing hypothesis alone is not a purity/Tate-type theorem for open moduli cohomology",
+    "object": "the complementary open U = M_{6,6} minus Z on which the vanishing holds; the lowest-weight piece W_26 H^26(U;Q) of the smooth 21-dimensional open stack U, and its Poincare dual W_{-16} H^{BM}_{16}(U;Q)",
+    "target_relation": "U-side only; the campaign target is W_26 H^26(M_{6,6};Q) = W_{-16}H^{BM}_{16}(M_{6,6};Q)(21), of which the U-restriction is a proper-in-general quotient"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "purity-criterion-search",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2605.20453"
+    },
+    {
+      "arxiv_id": "2606.29656",
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2606.29656"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "primary-locator-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357"
+    },
+    {
+      "arxiv_id": "2509.02950",
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "method-boundary-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/pdf/2509.02950"
+    }
+  ],
+  "task_id": "TASK-F-FND-0055",
+  "verdict": "promote"
+}

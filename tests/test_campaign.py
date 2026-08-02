@@ -6,6 +6,7 @@ from unittest import mock
 
 from pure_tate.agents import _engine_argv, _validate_artifact, run_task
 from pure_tate.campaign_driver import (
+    _drive_campaign_unlocked,
     _next_due_forced_task,
     _eligible_research_pool,
     _finding_audit_is_blocking,
@@ -35,6 +36,55 @@ from pure_tate.tasking import campaign_mathematics_tasks, finding_audit_tasks
 
 
 class FocusedCampaignTests(unittest.TestCase):
+    def test_step_limit_with_failed_event_is_not_reported_as_success(self):
+        finding_task = {
+            "id": "TASK-F-FND-FAIL",
+            "finding_id": "FND-0022",
+            "campaign_id": "C66-001",
+            "packet_sha256": "a" * 64,
+        }
+        ledger = {
+            "schema_version": 2,
+            "run_id": "RUN-TEST-FAIL",
+            "campaign_id": "C66-001",
+            "events": [],
+            "status": "running",
+        }
+        with mock.patch(
+            "pure_tate.campaign_driver._research_capability_state",
+            return_value="pass",
+        ), mock.patch(
+            "pure_tate.campaign_driver._eligible_research_pool",
+            return_value=["claude"],
+        ), mock.patch(
+            "pure_tate.campaign_driver._campaign_reviews", return_value=[]
+        ), mock.patch(
+            "pure_tate.campaign_driver._load_bearing_experiments", return_value=[]
+        ), mock.patch(
+            "pure_tate.campaign_driver.finding_audit_tasks",
+            return_value=[finding_task],
+        ), mock.patch(
+            "pure_tate.campaign_driver.run_task",
+            side_effect=RuntimeError("provider failed"),
+        ), mock.patch(
+            "pure_tate.campaign_driver.reserve_prefixed_artifact",
+            return_value=("FAUD-TEST", None),
+        ), mock.patch(
+            "pure_tate.campaign_driver._write_run_ledger"
+        ), mock.patch(
+            "pure_tate.campaign_driver._new_run_ledger",
+            return_value=(ledger, ROOT / "reports" / "runs" / "RUN-TEST-FAIL.json"),
+        ):
+            result = _drive_campaign_unlocked(
+                "C66-001",
+                1,
+                research_engines=["claude"],
+                prover_engines=["grok", "claude", "codex", "qwen"],
+                review_engines=["grok", "claude"],
+            )
+        self.assertEqual(result["stop_reason"], "step_limit_with_failures")
+        self.assertEqual(ledger["status"], "completed_with_failures")
+
     def test_campaign_notifies_after_each_step_and_at_run_end(self):
         campaign = load_campaign("C66-001")
         finding_task = {

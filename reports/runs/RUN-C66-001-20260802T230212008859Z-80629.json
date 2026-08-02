@@ -1,0 +1,62 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-02T23:33:04.001948+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "qwen",
+      "claude",
+      "codex"
+    ],
+    "research": [
+      "grok",
+      "qwen",
+      "claude"
+    ],
+    "review": [
+      "grok",
+      "qwen",
+      "claude",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 45,
+      "completed_at": "2026-08-02T23:02:12.243352+00:00",
+      "engine": "qwen",
+      "error": "agent failed with exit 1: DASHSCOPE_API_KEY or QWEN_API_KEY is not set",
+      "last_activity_at": "2026-08-02T23:02:12.238719+00:00",
+      "last_activity_stream": "stderr",
+      "max_output_tokens": 64000,
+      "output": "research/finding-audits/FAUD-0038.json",
+      "phase": "finding-audit",
+      "started_at": "2026-08-02T23:02:12.194221+00:00",
+      "state": "failed",
+      "step": 1,
+      "task_id": "TASK-F-FND-0054"
+    },
+    {
+      "activity_bytes": 6426,
+      "completed_at": "2026-08-02T23:33:04.001948+00:00",
+      "engine": "claude",
+      "error": "campaign parent process disappeared",
+      "last_activity_at": "2026-08-02T23:02:18.707212+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "research/finding-audits/FAUD-0039.json",
+      "phase": "finding-audit",
+      "started_at": "2026-08-02T23:02:12.431330+00:00",
+      "state": "abandoned",
+      "step": 2,
+      "task_id": "TASK-F-FND-0054"
+    }
+  ],
+  "executed_steps": 2,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260802T230212008859Z-80629",
+  "schema_version": 1,
+  "started_at": "2026-08-02T23:02:12.008859+00:00",
+  "status": "abandoned",
+  "stop_reason": "parent_process_missing"
+}

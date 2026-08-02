@@ -624,9 +624,21 @@ class GrokWorkerPool:
 
         stdout = ""
         stderr = ""
+        supervisor_status_fd: Optional[int] = None
         try:
+            supervisor = Path(__file__).with_name("process_supervisor.py").resolve()
+            supervisor_status_fd = os.open(os.devnull, os.O_WRONLY)
+            supervised_argv = [
+                sys.executable,
+                str(supervisor),
+                "--parent-pid",
+                str(os.getpid()),
+                "--status-fd",
+                str(supervisor_status_fd),
+                "--",
+            ] + argv
             process = subprocess.Popen(
-                argv,
+                supervised_argv,
                 cwd=str(self.work_dir) if self.work_dir else None,
                 stdin=subprocess.DEVNULL,
                 stdout=subprocess.PIPE,
@@ -634,7 +646,10 @@ class GrokWorkerPool:
                 text=True,
                 start_new_session=True,
                 env=os.environ.copy(),
+                pass_fds=(supervisor_status_fd,),
             )
+            os.close(supervisor_status_fd)
+            supervisor_status_fd = None
             with self._lock:
                 self._workers[worker_id].process = process
             try:
@@ -716,6 +731,8 @@ class GrokWorkerPool:
                 worker_id, stdout=stdout or "", stderr=stderr or ""
             )
         finally:
+            if supervisor_status_fd is not None:
+                os.close(supervisor_status_fd)
             with self._lock:
                 self._live = sum(
                     1

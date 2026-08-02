@@ -68,6 +68,11 @@ def _ntfy_config() -> Dict[str, str]:
     return {"server": server, "topic": topic} if topic else {}
 
 
+def ntfy_is_configured() -> bool:
+    """Return whether this checkout has explicitly opted into phone alerts."""
+    return bool(_ntfy_config())
+
+
 def send_ntfy_notification(
     title: str, message: str, priority: str = "default"
 ) -> bool:
@@ -102,7 +107,7 @@ def notify_campaign_step(
     *,
     desktop: bool = True,
     ntfy: bool = False,
-) -> bool:
+) -> Dict[str, bool]:
     """Notify after a campaign step reaches a terminal state."""
     state = str(event.get("state", "completed")).replace("_", " ")
     step = event.get("step", "?")
@@ -119,7 +124,7 @@ def notify_campaign_step(
     )
     desktop_sent = send_desktop_notification(title, message) if desktop else False
     ntfy_sent = send_ntfy_notification(title, message) if ntfy else False
-    return desktop_sent or ntfy_sent
+    return {"desktop": desktop_sent, "ntfy": ntfy_sent}
 
 
 def notify_campaign_run(
@@ -131,7 +136,7 @@ def notify_campaign_run(
     *,
     desktop: bool = True,
     ntfy: bool = False,
-) -> bool:
+) -> Dict[str, bool]:
     """Notify once when a campaign batch exits."""
     title = "Pure Tate • run %s" % status
     message = "%s: %d/%d steps • %s" % (
@@ -142,4 +147,4 @@ def notify_campaign_run(
     )
     desktop_sent = send_desktop_notification(title, message) if desktop else False
     ntfy_sent = send_ntfy_notification(title, message) if ntfy else False
-    return desktop_sent or ntfy_sent
+    return {"desktop": desktop_sent, "ntfy": ntfy_sent}

@@ -185,8 +185,9 @@ permission or AppleScript failure never interrupts proof work.
 
 For phone alerts, install the free ntfy app and subscribe to the private topic
 in `data/notifications.local.json` (copy the tracked example file first when
-setting up another workspace). `--notify-ntfy` posts the same per-step and final
-run notices. The topic acts as the shared secret; never commit or share it.
+setting up another workspace). Once configured, campaign drives post the same
+per-step and final notices automatically; use `--no-notify-ntfy` to disable them
+for one drive. The topic acts as the shared secret; never commit or share it.
 
 Remove `--dry-run` only after the listed research engines have passed live audits
 for both finding-audit and novelty phases. Once any live audit exists, dry-run
@@ -214,6 +215,15 @@ keeps it in the proposed rotation while displaying the failed state. Agent subpr
 run in their own process groups, emit activity to a durable campaign run ledger under
 `reports/runs/`, and are terminated on total timeout, inactivity, interruption, or a
 configured repeated fatal error such as backend `503`.
+
+Live campaign drives hold an OS-backed per-campaign lease, so a second process cannot
+select the same task or artifact while the first is active. Artifact IDs are reserved
+atomically before dispatch. Each engine and Grok helper runs behind a parent-death
+supervisor; if the drive or MCP owner disappears, the supervised process group is
+terminated. The next drive marks any ledger left by a missing parent as `abandoned`
+and releases its stale reservations. Run ledgers record parent, supervisor, engine PID,
+and process-group metadata for diagnosis. Qwen is excluded before dispatch when neither
+`DASHSCOPE_API_KEY` nor `QWEN_API_KEY` is present.
 
 A campaign dry run displays both members of every conditional pair and marks the
 standard turn as conditional. It spends nothing and does not claim that the

@@ -1266,6 +1266,33 @@ def _validate_task_packet(task: Dict[str, Any]) -> None:
 def _failure_detail(returncode: int, stderr: str, raw: str) -> str:
     detail = (stderr or "").strip()
     if not detail and raw.strip():
+        # Streaming CLIs commonly begin with a very large init envelope and
+        # put the actionable failure in their final JSONL event. Inspect those
+        # events from the end before falling back to raw text.
+        for line in reversed(raw.splitlines()):
+            try:
+                event = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(event, dict):
+                continue
+            event_type = str(event.get("type") or "").lower()
+            subtype = str(event.get("subtype") or "").lower()
+            if (
+                event.get("is_error") is True
+                or event_type == "error"
+                or subtype in {"error", "failed", "failure"}
+            ):
+                value = (
+                    event.get("error")
+                    or event.get("result")
+                    or event.get("message")
+                )
+                if isinstance(value, dict):
+                    value = value.get("message") or value
+                detail = str(value or line)
+                break
+    if not detail and raw.strip():
         try:
             envelope = json.loads(raw)
             if isinstance(envelope, dict):
@@ -1278,10 +1305,10 @@ def _failure_detail(returncode: int, stderr: str, raw: str) -> str:
             else:
                 detail = raw
         except json.JSONDecodeError:
-            detail = raw
+            detail = raw.strip()[-1000:]
     if not detail:
         detail = "no error detail"
-    return "agent failed with exit %d: %s" % (returncode, detail.strip()[:1000])
+    return "agent failed with exit %d: %s" % (returncode, detail.strip()[-1000:])
 
 
 class _ControllerProcess:
@@ -1439,6 +1466,7 @@ def _run_codex_controller(
     abort_patterns: Optional[Dict[str, Any]],
     activity_streams: Optional[List[str]],
     progress_callback: Optional[Callable[[str, int, float], None]],
+    process_start_callback: Optional[Callable[[Dict[str, Any]], None]] = None,
 ) -> _ControllerProcess:
     """Run bounded tool-free Codex decisions and direct trusted worker dispatch."""
     from .grok_workers import GrokWorkerPool, PoolError
@@ -1484,6 +1512,7 @@ def _run_codex_controller(
             abort_stderr_pattern_counts=abort_patterns,
             activity_streams=activity_streams,
             on_activity=progress_callback,
+            on_process_start=process_start_callback,
         )
         observable.append(process.stdout or "")
         stderr_chunks.append(process.stderr or "")
@@ -1665,6 +1694,7 @@ def run_task(
     output: Path,
     timeout: int = 10800,
     progress_callback: Optional[Callable[[str, int, float], None]] = None,
+    process_start_callback: Optional[Callable[[Dict[str, Any]], None]] = None,
 ) -> Dict[str, Any]:
     from .capabilities import WEB_PHASES, capability_is_attested
     from .paired import (
@@ -1683,6 +1713,11 @@ def run_task(
     config = load_engines().get(engine_id)
     if config is None:
         raise ValueError("unknown engine %s" % engine_id)
+    from .health import engine_runtime_issue
+
+    runtime_issue = engine_runtime_issue(engine_id, config)
+    if runtime_issue is not None:
+        raise RuntimeError(runtime_issue)
     if phase in WEB_PHASES:
         if not _engine_has_web_access(config):
             raise ValueError(
@@ -1693,10 +1728,6 @@ def run_task(
                 "%s engine %s lacks a passing live capability attestation"
                 % (phase, engine_id)
             )
-    binary = config.get("binary", engine_id)
-    if shutil.which(binary) is None:
-        raise RuntimeError("engine binary is unavailable: %s" % binary)
-
     paired_turn = task.get("paired_turn_kind")
     with tempfile.TemporaryDirectory(prefix="pure-tate-agent-") as directory:
         context = Path(directory)
@@ -1796,6 +1827,7 @@ def run_task(
                     abort_patterns=abort_patterns,
                     activity_streams=activity_streams,
                     progress_callback=progress_callback,
+                    process_start_callback=process_start_callback,
                 )
             else:
                 process = run_captured_process(
@@ -1807,6 +1839,7 @@ def run_task(
                     abort_stderr_pattern_counts=abort_patterns,
                     activity_streams=activity_streams,
                     on_activity=progress_callback,
+                    on_process_start=process_start_callback,
                 )
         except ProcessWatchdogError as exc:
             detail = (

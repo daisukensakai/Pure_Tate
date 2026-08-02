@@ -1,10 +1,12 @@
 import os
+import json
 import selectors
 import signal
 import subprocess
+import sys
 import time
 from pathlib import Path
-from typing import Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional
 
 
 class ProcessWatchdogError(RuntimeError):
@@ -32,7 +34,10 @@ def _terminate_process_group(process: subprocess.Popen) -> None:
     except ProcessLookupError:
         return
     try:
-        process.wait(timeout=3)
+        # The supervisor first gives its engine group a graceful termination
+        # window, then escalates.  Wait longer than that child-side window so
+        # we do not kill the supervisor before it can deliver SIGKILL.
+        process.wait(timeout=7)
         return
     except subprocess.TimeoutExpired:
         pass
@@ -52,21 +57,55 @@ def run_captured_process(
     on_activity: Optional[Callable[[str, int, float], None]] = None,
     abort_stderr_pattern_counts: Optional[Dict[str, int]] = None,
     activity_streams: Optional[List[str]] = None,
+    on_process_start: Optional[Callable[[Dict[str, Any]], None]] = None,
 ) -> subprocess.CompletedProcess:
     started = time.monotonic()
     last_activity = started
     stdout_parts: List[bytes] = []
     stderr_parts: List[bytes] = []
     counted_streams = set(activity_streams or ("stdout", "stderr"))
+    status_read, status_write = os.pipe()
+    supervisor = Path(__file__).with_name("process_supervisor.py").resolve()
+    wrapped_command = [
+        sys.executable,
+        str(supervisor),
+        "--parent-pid",
+        str(os.getpid()),
+        "--status-fd",
+        str(status_write),
+        "--",
+    ] + command
     process = subprocess.Popen(
-        command,
+        wrapped_command,
         cwd=str(cwd),
         stdin=subprocess.DEVNULL,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         env=env,
         start_new_session=True,
+        pass_fds=(status_write,),
     )
+    os.close(status_write)
+    process_meta: Dict[str, Any] = {
+        "supervisor_pid": process.pid,
+        "supervisor_process_group": process.pid,
+    }
+    status_selector = selectors.DefaultSelector()
+    try:
+        status_selector.register(status_read, selectors.EVENT_READ)
+        if status_selector.select(5.0):
+            raw_status = os.read(status_read, 4096).decode("utf-8", "replace")
+            try:
+                reported = json.loads(raw_status.strip().splitlines()[0])
+            except (IndexError, json.JSONDecodeError):
+                reported = {}
+            if isinstance(reported, dict):
+                process_meta.update(reported)
+    finally:
+        status_selector.close()
+        os.close(status_read)
+    if on_process_start is not None:
+        on_process_start(process_meta)
     selector = selectors.DefaultSelector()
     assert process.stdout is not None
     assert process.stderr is not None
