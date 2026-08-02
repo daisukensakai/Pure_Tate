@@ -442,8 +442,11 @@ def _engine_argv(
         if last_message_path is None:
             raise ValueError("OpenAI engine requires a last-message path")
         # CLI_test: codex exec read-only still can invoke web_search items.
-        command = [
-            binary,
+        command = [binary]
+        if allow_web:
+            command.append("--search")
+        command.extend(
+            [
             "exec",
             "--skip-git-repo-check",
             "-m",
@@ -456,7 +459,8 @@ def _engine_argv(
             "-o",
             str(last_message_path),
             prompt,
-        ]
+            ]
+        )
         return apply_workers_to_argv(command, "openai", workers)
     if family == "claude":
         allowed = ["Read", "Grep", "Glob"]

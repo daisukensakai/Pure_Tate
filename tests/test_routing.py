@@ -64,6 +64,12 @@ class RoutingTests(unittest.TestCase):
         self.assertEqual(command[command.index("--context-file") + 1], "TASK.json")
         self.assertIn("--allow-web", command)
 
+    def test_codex_web_phases_enable_live_search(self):
+        command = _engine_argv(
+            "codex", "prompt", Path("/tmp/pure-tate-last-message"), phase="finding-audit"
+        )
+        self.assertIn("--search", command)
+
     def test_grok_uses_fixture_verified_streaming_json(self):
         command = _engine_argv("grok", "prompt")
         self.assertEqual(

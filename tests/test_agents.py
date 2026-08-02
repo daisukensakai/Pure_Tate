@@ -128,7 +128,7 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertEqual(by_id["qwen"]["model"], "qwen3.7-max")
         self.assertTrue(by_id["claude"]["web_access"])
         self.assertTrue(by_id["grok"]["web_access"])
-        self.assertFalse(by_id["codex"]["web_access"])
+        self.assertTrue(by_id["codex"]["web_access"])
         self.assertTrue(by_id["qwen"]["web_access"])
 
     def test_codex_argv_is_read_only(self):
@@ -136,6 +136,7 @@ class AgentAdapterTests(unittest.TestCase):
             "codex", "prompt", Path("/tmp/pure-tate-last-message")
         )
         self.assertIn("read-only", command)
+        self.assertNotIn("--search", command)
         self.assertIn('approval_policy="never"', command)
         self.assertIn("gpt-5.6-sol", command)
 

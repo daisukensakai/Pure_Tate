@@ -80,8 +80,8 @@ def effective_capabilities_from_argv(
         if "--allow-web" in argv and phase_allows_web(phase):
             capabilities.update(WEB_CAPABILITIES)
     elif family == "openai":
-        # The headless Codex profile is local read-only in this harness.
-        pass
+        if "--search" in argv and phase_allows_web(phase):
+            capabilities.update(WEB_CAPABILITIES)
     if phase == "experiment" and ("docker" in joined or "podman" in joined):
         capabilities.add("container")
     return sorted(capabilities)
