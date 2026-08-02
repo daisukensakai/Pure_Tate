@@ -29,7 +29,7 @@ MAX_FILE_BYTES = 1_000_000
 
 
 def _responses_timeout() -> int:
-    raw = os.environ.get("QWEN_RESPONSES_TIMEOUT", "180")
+    raw = os.environ.get("QWEN_RESPONSES_TIMEOUT", "900")
     try:
         return max(1, min(int(raw), 900))
     except ValueError:
