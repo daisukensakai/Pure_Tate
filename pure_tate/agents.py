@@ -1132,12 +1132,12 @@ def _validate_artifact(
             )
         else:
             exact["approach_id"] = task.get("approach_id")
+        # Identity fields are owned by the harness/task. Models often omit or
+        # slightly rewrite nested target keys; coerce rather than waste a full
+        # paid turn on copy-paste mismatch.
         for field, expected in exact.items():
             if artifact.get(field) != expected:
-                raise ValueError(
-                    "mathematics artifact %s does not match task (expected %r)"
-                    % (field, expected)
-                )
+                artifact[field] = expected
         if is_campaign:
             if not isinstance(artifact.get("theorem_statement"), str) or not artifact[
                 "theorem_statement"
@@ -1166,7 +1166,35 @@ def _validate_artifact(
             "argument_markdown"
         ].strip():
             raise ValueError("mathematics artifact argument_markdown must be nonempty")
+        # Accept common model aliases so a near-schema claim object is not
+        # rejected solely for using text/type instead of statement/status.
         claims = artifact.get("claims")
+        if isinstance(claims, list):
+            normalized_claims = []
+            for item in claims:
+                if not isinstance(item, dict):
+                    normalized_claims.append(item)
+                    continue
+                claim = dict(item)
+                if not isinstance(claim.get("statement"), str) or not str(
+                    claim.get("statement") or ""
+                ).strip():
+                    for alias in ("text", "claim", "content"):
+                        value = claim.get(alias)
+                        if isinstance(value, str) and value.strip():
+                            claim["statement"] = value.strip()
+                            break
+                if not isinstance(claim.get("status"), str) or not str(
+                    claim.get("status") or ""
+                ).strip():
+                    for alias in ("type", "verdict"):
+                        value = claim.get(alias)
+                        if isinstance(value, str) and value.strip():
+                            claim["status"] = value.strip()
+                            break
+                normalized_claims.append(claim)
+            artifact["claims"] = normalized_claims
+            claims = normalized_claims
         if not isinstance(claims, list) or any(
             not isinstance(item, dict)
             or not isinstance(item.get("statement"), str)

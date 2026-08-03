@@ -1,0 +1,81 @@
+{
+  "campaign_id": "C66-001",
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "claude": "not_required",
+      "codex": "not_required",
+      "grok": "not_required",
+      "qwen": "pass"
+    },
+    "review": {
+      "claude": "not_required",
+      "codex": "not_required",
+      "grok": "not_required",
+      "qwen": "pass"
+    }
+  },
+  "events": [
+    {
+      "activity_bytes": 1281379,
+      "completed_at": "2026-08-03T12:47:59.218668+00:00",
+      "engine": "claude",
+      "engine_pid": 19324,
+      "engine_process_group": 19324,
+      "error": "mathematics artifact target does not match task (expected {'g': 6, 'n': 6, 'dimension': 21, 'compact_cohomology_degree': 16, 'compact_tate_type': 'Q(-8)', 'open_bm_degree': 16, 'open_bm_weight': -16, 'open_bm_tate_type': 'Q(8)', 'ordinary_cohomology_degree': 26, 'ordinary_weight': 26, 'ordinary_tate_type': 'Q(-13)', 'poincare_twist': 21, 'chow_codimension': 13})",
+      "last_activity_at": "2026-08-03T12:47:58.274416+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0040.json",
+      "phase": "mathematics",
+      "processes": [
+        {
+          "engine_pid": 19324,
+          "engine_process_group": 19324,
+          "started_at": "2026-08-03T12:20:03.625770+00:00",
+          "supervisor_pid": 19323,
+          "supervisor_process_group": 19323
+        }
+      ],
+      "started_at": "2026-08-03T12:20:03.554920+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 19323,
+      "task_id": "TASK-C66-M-001",
+      "trace_id": "TRACE-0023",
+      "trace_path": "research/paired-traces/TRACE-0023.json",
+      "trace_sha256": "02570ea42b8d041539b8d437d02c33adf9c8d993f8e4e3b1907b1de95588e7b6"
+    }
+  ],
+  "executed_steps": 1,
+  "recovered_stale_runs": [],
+  "requested_steps": 6,
+  "research_capability_states": {
+    "finding-audit": {
+      "claude": "pass",
+      "grok": "pass",
+      "qwen": "pass"
+    },
+    "novelty": {
+      "claude": "pass",
+      "grok": "pass",
+      "qwen": "pass"
+    }
+  },
+  "run_id": "RUN-C66-001-20260803T122003120256Z-19319",
+  "run_ledger": "reports/runs/RUN-C66-001-20260803T122003120256Z-19319.json",
+  "stop_reason": "artifact_validation_failure"
+}

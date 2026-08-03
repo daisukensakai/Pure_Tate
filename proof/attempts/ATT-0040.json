@@ -1,0 +1,398 @@
+{
+  "argument_markdown": "## 0. Conventions and inputs\n\nWork over a field of characteristic 0. For gamma : C -> P^1 finite flat of degree 4 with C smooth of genus g, relative duality gives gamma_* omega_{C/P^1} = O_{P^1} (+) E with E := (gamma_* O_C / O_{P^1})^vee of rank 3, and deg E is computed from chi(omega_{C/P^1}) = deg omega_{C/P^1} + 1 - g = (2g - 2 + 4*2) + 1 - g = g + 3, against chi(O (+) E) = 1 + deg E + 3; hence **deg E = g + 3 = 9** for g = 6.\n\nThe Casnati-Ekedahl structure theorem for degree-4 Gorenstein covers gives the relative canonical embedding C subset P(E) (Grothendieck convention: pi_* O_{P(E)}(1) = E, sections of P(E) -> P^1 correspond to line-bundle quotients E ->> O(e), and the section sigma so defined satisfies sigma^* O_{P(E)}(1) = O(e)) together with an exact sequence\n\n    0 -> pi^*(det F)(-4) -> pi^* F(-2) -> O_{P(E)} -> O_C -> 0,   det F = det E,\n\nwith F of rank 2. This is a Koszul complex, i.e. **C = Z(s) for a regular section s of pi^* F^vee (2)**. This is the source-backed input SBI-1 (SRC-0004 and the CE structure theorem it rests on); the packet's W := (O(2) tensor gamma^* F^vee)|_C and its constituents W_{f_i} are exactly the pieces of this section, and SRC-0004 Lemma 10.6 as quoted in the packet is the statement that the CE evaluation map at Gamma fails precisely when H^0(C, omega_C tensor W|_C^vee(Gamma)) =/= 0. I use that identification of the obstruction space verbatim from SRC-0004 Lemma 10.6, as FND-0061 requires: no degree/Serre-duality argument is used as a substitute for it.\n\nFor g = 6, deg F = deg E = 9; balanced means F = O(4) (+) O(5), which is the packet's canonical bottleneck.\n\n## 1. O_{P(E)}(1)|_C = omega_{C/P^1}: discharge of GAP-Z-W5D\n\nSince C = Z(s) with s a regular section of the rank-2 bundle pi^* F^vee(2) on the 2-dimensional (over the base) space P(E), adjunction gives\n\n    omega_C = ( omega_{P(E)} tensor det( pi^* F^vee (2) ) )|_C = ( omega_{P(E)} tensor pi^* det F^vee tensor O(4) )|_C .\n\nFor a P^2-bundle, omega_{P(E)} = O(-3) tensor pi^*( det E tensor omega_{P^1} ) = O(-3) tensor pi^* O(9 - 2) = O(-3) tensor pi^* O(7). With det F = det E of degree 9,\n\n    omega_C = O(1)|_C tensor gamma^* O(7 - 9) = O(1)|_C tensor gamma^* O(-2),\n\nhence **O_{P(E)}(1)|_C = omega_C tensor gamma^* O_{P^1}(2) = omega_{C/P^1}**, of degree 2g + 6 = 18. This reproduces the packet's normalisation deg(O(2)|_C tensor gamma^*O(-f)) = 2(2g - 2 + 4*2) - 4f = 4g + 12 - 4f exactly, which is the consistency check that pins the convention.\n\nConsequently, writing D := gamma^* O_{P^1}(1) (relative degree 4, the g^1_4),\n\n    W_f = O(2)|_C tensor gamma^* O(-f) = omega_C^2 tensor gamma^* O(4 - f),\n\nso **W_4 = omega_C^2** and **W_5 = omega_C^2(-D)**, of degrees 4g - 4 = 20 and 4g + 12 - 20 = 16, matching the packet. This is precisely the identification recorded as the undischarged GAP-Z-W5D in FND-0073; it is now proved, not assumed. Therefore\n\n    **L := W_5 tensor omega_C^{-1} = omega_C(-D)**,  deg L = 10 - 4 = 6,\n\nand, dually, M := omega_C^2 tensor W_5^vee = O_C(D) of degree 4, which is the bundle whose h^0 controls h^0(L) in FND-0073.\n\n## 2. The obstruction is canonically the f = 5 constituent\n\nBecause F = O(4) (+) O(5) with Hom(O(5), O(4)) = 0 and Hom(O(5), F) of rank 1, the degree-5 line subbundle of F is unique; the relative Hom sheaf is locally free of rank 1 with base-change-compatible formation (h^0 = 1, h^1(O(-1) (+) O) = 0), so it glues to a canonical line subbundle over H^bal. Dualising, W^vee = O(-2) tensor gamma^* F has canonical subbundle W_5^vee and quotient W_4^vee, so there is an exact sequence\n\n    0 -> omega_C tensor W_5^vee(Gamma) -> omega_C tensor W^vee(Gamma) -> omega_C tensor W_4^vee(Gamma) -> 0.\n\nBy FND-0062 (corroborated) the f = 4 term has degree 4f + n - 2g - 14 = n - 10 = -4 < 0 for n = 6, so its H^0 vanishes for every degree-six Gamma; hence H^0(omega_C tensor W^vee(Gamma)) = H^0(omega_C tensor W_5^vee(Gamma)) canonically, with no need for the splitting of F to be canonical as a direct sum. By FND-0063 (corroborated) the f = 5 term has degree 4f + n - 2g - 14 = n - 6 = 0, so its H^0 is nonzero iff omega_C tensor W_5^vee(Gamma) = O_C, i.e. iff\n\n    **O_C(Gamma) = L = omega_C(-D)**, equivalently **Gamma + D in |K_C|**.\n\nBy FND-0074 (corroborated) this borderline degree-0 situation is specific to n = 6 and the argument does not transport to n =/= 6; I make no claim outside n = 6.\n\nGeometrically (non-hyperelliptic C, canonical model C subset P^5): a g^1_4 fibre D spans a plane, and Z consists of the residual degree-6 divisors cut on C by the P^2 of hyperplanes containing that plane. For a general genus-6 curve, realised as a (-2K)-curve on a quintic del Pezzo surface S subset P^5, D is a fibre of one of the five conic pencils on S and the plane is the plane of that conic.\n\n## 3. Balancedness excludes hyperelliptic curves (Lemma A)\n\n**Lemma A.** If F = O(f_1) (+) O(f_2) with f_1 = min f_i >= 3, then every line-bundle quotient E ->> O(e) has 2e >= f_1.\n\n*Proof.* Let sigma : P^1 -> P(E) be the section attached to the quotient, so sigma^* O_{P(E)}(1) = O(e). Restricting the defining section s of pi^* F^vee(2) gives\n\n    s|_sigma in H^0(P^1, F^vee tensor O(2e)) = H^0(O(2e - f_1) (+) O(2e - f_2)).\n\nIf 2e < f_1 <= f_2 both summands have negative degree, so s|_sigma = 0 and sigma subset Z(s) = C. But sigma is a section of P(E) -> P^1, hence maps isomorphically to P^1 and would be a component of C of degree 1 over P^1, contradicting that C is irreducible of degree 4 over P^1. QED\n\nFor balanced F, f_1 = 4, so every line-bundle quotient of E has degree >= 2; since E = (+) O(e_i) has minimal quotient degree min_i e_i, we get e_i >= 2 for all i, with sum 9.\n\n**Lemma B.** No C carried by H^bal is hyperelliptic.\n\n*Proof.* Suppose C is hyperelliptic of genus 6 with hyperelliptic map h of degree 2 and gamma of degree 4. Castelnuovo-Severi for two maps of degrees 2 and 4 to P^1 that do not factor through a common map gives g <= (2-1)(4-1) + 2*0 + 4*0 = 3 < 6. Hence gamma = q o h for some degree-2 map q : P^1 -> P^1. Then h_* O_C = O (+) O(-7) (from chi(O_C) = -5), q_* O = O (+) O(-1), and, writing O_u(-7) = q^* O_t(-4) tensor O_u(1) with q_* O_u(1) globally generated of total degree 0, hence = O (+) O, we get q_* O_u(-7) = O(-4)^{(+)2}. Therefore gamma_* O_C = O (+) O(-1) (+) O(-4)^{(+)2}, i.e. E = O(1) (+) O(4) (+) O(4) (of degree 9, as required). This E has a line-bundle quotient of degree 1, contradicting Lemma A. QED\n\nThis is the point at which balancedness, and not merely tetragonality, is used; it is exactly the hypothesis the packet designates.\n\n## 4. h^0(L) = 3 identically on H^bal: discharge of FND-0058\n\ndeg O_C(D) = 4 and 0 < 4 < 2g - 2 = 10, so Clifford's theorem gives dim|D| <= 2 with equality only for hyperelliptic C. By Lemma B, h^0(O_C(D)) = 2 everywhere on H^bal (it is >= 2 since D moves in a pencil). By Riemann-Roch and Serre duality on L = omega_C(-D) of degree 6,\n\n    h^0(L) = chi(L) + h^1(L) = 1 + h^0(omega_C tensor L^{-1}) = 1 + h^0(O_C(D)) = 3,\n\nwhich is the relation h^0(L) = 1 + h^0(M) of FND-0073 with M = O_C(D) now identified. Thus **h^0(L) = 3 is constant on all of H^bal, not merely for general tetragonal curves** - precisely the constancy that FND-0058 declares necessary before |L| may be called a relative P^2-bundle.\n\n## 5. Relative construction: the P^2-bundle, and FND-0047\n\nH is smooth: for (C, gamma) the deformation theory of the map with fixed target is controlled by the normal sheaf N_gamma = coker(T_C -> gamma^* T_{P^1}), which is a torsion sheaf supported on the ramification, so H^1(N_gamma) = 0 and deformations are unobstructed, with h^0(N_gamma) = deg N_gamma = 2g - 2 + 2d = 18 = b. Quotienting by the 3-dimensional PGL_2 with finite stabilisers (>= 3 branch points, Aut(C, gamma) finite) gives a smooth DM stack of dimension 15. This answers FND-0060: dimension 15 is here obtained as a *stack* dimension via unobstructed deformation theory with finite stabilisers, not by promoting a coarse count; for DM stacks the coarse and stack dimensions agree. Balancedness is an open condition on the splitting type of F, so H^bal is a smooth open substack, nonempty by SBI-2 (the general tetragonal genus-6 cover is balanced; consistent with FND-0005 and with the dimension b - 3 = 15 asserted in FND-0060).\n\nSince h^0(L) = 3 is constant on H^bal and h^1(L) = 2 is constant, cohomology and base change gives that pi_* L is locally free of rank 3 with base-change-compatible formation. Therefore **P := P(pi_* L) -> H^bal is a P^2-bundle whose fibre over (C, gamma) is the complete linear system |L| = |omega_C(-D)| = P^2**. This is the exact situation FND-0047 warns about in general - the identification of a relative linear system with Proj of pi_* L is illegitimate where h^0 jumps - and it is legitimate here only because Section 4 proves that h^0 does not jump anywhere on H^bal. Since H^bal is smooth, so is P; in particular P is reduced, so the reduction-compatibility caveat of FND-0087 (reduce source and target together) does not arise: all spaces occurring below are smooth over a characteristic-0 base.\n\n## 6. Fibrewise nonemptiness of the reduced-support open: discharge of FND-0083\n\nFND-0083 correctly observes that chi(L) = 1 shows only that the Abel-Jacobi fibre in Sym^6 is nonempty, not that it contains a reduced divisor with distinct points. Here is the missing step, on an arbitrary geometric fibre of H^bal.\n\nLet B be the base locus (as a divisor) of |L|, and |L| = B + |L - B| with |L - B| base-point-free of dimension 2.\n\n(a) *B is reduced.* If 2p <= B for some p, then h^0(L - 2p) = h^0(L) = 3; by Riemann-Roch h^0(L - 2p) = h^0(K - L + 2p) + deg(L - 2p) + 1 - g = h^0(O(D + 2p)) - 1, so h^0(O(D + 2p)) = 4, i.e. dim|D + 2p| = 3 = deg(D + 2p)/2 with 0 < 6 < 10, forcing C hyperelliptic by Clifford - excluded by Lemma B.\n\n(b) *A general member of |L - B| is reduced and avoids B.* |L - B| is base-point-free of dimension 2 >= 1 on a smooth curve in characteristic 0, so by Bertini its general member is reduced with pairwise distinct points. For each of the finitely many points q of B, the members of |L - B| through q form a proper linear subsystem, so a general member avoids B.\n\nCombining, a general member of |L| equals B + (a reduced divisor disjoint from B) and is reduced with 6 distinct points. Hence **P^red subset P, the locus of divisors with reduced support, is a nonempty dense open subscheme of every geometric fibre**, and P^red -> H^bal is smooth and surjective of relative dimension 2. (Example check: on a plane quintic C subset P^2 of genus 6, D = O_C(1) - p and L = O_C(1) + p, so |L| = p + |O_C(1)| has the base point p and general member p + (5 distinct points on a general line) - reduced, as the argument predicts.)\n\n## 7. The ordered model and the S_6-torsor\n\nBy FND-0064 (corroborated) the forgetful morphism from the relative ordered configuration stack Conf_6(Cu/H^bal) to the relative degree-6 effective-divisor space is a finite etale S_6-torsor over the reduced-support open. Applying this over P^red subset |L| and combining with Section 2,\n\n    **Z = Conf x_{|L|} P^red -> P^red is a finite etale S_6-torsor**,\n\nand the geometric points of Z are exactly the tuples (C, gamma, x_1, ..., x_6) with x_i pairwise distinct at which the CE evaluation map fails. By FND-0075 this torsor statement is a statement about stacks, not coarse spaces; with Q-coefficients S_6-invariants and coinvariants agree, so rational descent between the ordered and unordered models is harmless, while integral or coarse-space versions are not licensed. I use only the rational, stack-level form.\n\nSince P^red -> H^bal is smooth of relative dimension 2 and Z -> P^red is finite etale, **Z -> H^bal is smooth and surjective of relative dimension 2**, and Z is smooth of **pure dimension 15 + 2 = 17**. Purity is a consequence of smoothness over H^bal with constant fibre dimension, so there is no possibility of a larger component sitting over a special curve locus: this is the exhaustiveness that FND-0069 and FND-0086 demand, and it is obtained from the constancy of h^0(L) (Section 4) rather than from a dominant-fibre dimension count. Every irreducible component of Z dominates a component of H^bal, and the components of Z over a given component of H^bal are the orbits of the monodromy representation pi_1(P^red) -> S_6. That representation need not be transitive: over the plane-quintic locus |L| has a base point, so the monodromy lies in S_5 x S_1; but that locus has dimension 12 + 1 = 13 in H^bal and contributes only 15-dimensional (hence non-dominant, non-new) pieces of Z.\n\n## 8. The failure locus inside M_{6,6}\n\nThe forgetful morphism Z -> M_{6,6}, (C, gamma, x_*) |-> (C, x_*), is a monomorphism. Indeed, for a point of Z we have Gamma := sum x_i with O_C(Gamma) = omega_C(-D), so K_C - Gamma = D as divisor classes: the g^1_4 class, and hence the tetragonal pencil gamma up to PGL_2, is *recovered* from (C, Gamma). The same computation shows Aut(C, gamma, x_*) = Aut(C, x_*), since any automorphism preserving (C, x_*) preserves the class [K_C - Gamma]. So Z -> M_{6,6} is injective on geometric points and on automorphism groups, i.e. a monomorphism, and\n\n    **the (6,6) CE evaluation-failure locus in M_{6,6} is isomorphic to Z, a constructible substack of pure dimension 17, i.e. of pure codimension 4 in the 21-dimensional M_{6,6}.**\n\nThis puts the codimension-4 picture on a proved footing, on the balanced locus and with the h^0-constancy actually established.\n\n## 9. Excess, scheme structure, and what is deliberately not claimed\n\nConf has dimension 15 + 6 = 21 and Z has dimension 17, so Z has codimension 4 in Conf. The failure condition is the rank-drop locus of a map of bundles K^0 -> K^1 representing R pi_* of the degree-0 bundle (omega tensor W_5^vee)(Du), for which chi = -5 and the generic determinantal expectation is codimension (1)(1 + 5) = 6. Hence **the failure degeneracy locus carries excess 2**, coming from the jump h^0(L) = 3 > 1 = chi(L) of the Abel-Jacobi fibre. Consequences, stated as limits of this attempt rather than as results:\n\n- Following FND-0046, a fibrewise equivalence establishes equality only on geometric points; I therefore state Z as a locus with its reduced (indeed smooth) structure and its functorial Abel-Jacobi description Conf x_{Pic^6_{Cu/H^bal}, [L]} H^bal, and I do **not** claim that the Fitting/determinantal structure of the evaluation-failure degeneracy locus coincides with it. Because of the excess 2, the determinantal structure should be expected to be non-reduced; this is GAP-Z-SCHEME.\n- Following FND-0068, no lci or non-lci conclusion is drawn: the excess makes the naive expectation inapplicable, and no local ideal-depth or conormal computation is offered.\n- Following FND-0052 and FND-0067, I do not claim that the image of Z is closed, and I do not claim it is not closed: establishing non-closedness requires exhibiting a closure point outside the balanced image, which is not done here (GAP-Z-CLOSURE). Downstream Gysin bookkeeping therefore still needs the closed stratified embedding those findings demand.\n- Following FND-0053, FND-0054 and FND-0055, no Tate-type conclusion is drawn. What Section 7 does supply for C66-TATE-SUPPORT is the clean reduction H^*(Z; Q) = (+)_lambda H^*(P^red; V_lambda), P^red an open in a P^2-bundle over H^bal; deciding Tate type requires controlling H^*(H^bal) and these S_6-local systems, and neither the rationality of the Hurwitz space nor the rationality of S_6-representations settles it.\n- Irreducibility of H^bal (hence the exact component count of Z) is not established here (GAP-Z-HBAL-IRR).\n\n## 10. Blocked routes\n\nNone of the four blocked routes is used, and new_inputs is empty. (i) *vcd-only-vanishing*: no vanishing-above-vcd argument appears; consistent with FND-0035, degree 26 equals vcd for (6,6). (ii) *undecorated-cgp-top-weight-graph-complex*: no tropical/graph-complex input; consistent with FND-0032 (CGP computes weight 42, target weight 26). (iii) *point-count-without-degree-parity-separation*: no point counts or finite experiments of any kind are used; this attempt is purely geometric and its assertions are universal over H^bal. (iv) *forgetful-map-renaming-local-system-unknown*: the map M_{6,6} -> M_{6,5} is not used, and the unresolved extension effect of FND-0037 is neither invoked nor implicitly assumed. No weight or Hodge-theoretic assertion is made anywhere, so the weight-floor error of FND-0020 is not available to be repeated.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "depends_on": [
+        "SBI-1",
+        "SRC-0004"
+      ],
+      "id": "CLM-0040-1",
+      "kind": "proved",
+      "note": "Discharges the identification recorded as undischarged GAP-Z-W5D in FND-0073.",
+      "statement": "For a degree-4 CE cover gamma : C -> P^1 with C smooth of genus 6, deg E = 9, det F = det E, C = Z(s) for a regular section s of pi^* F^vee(2), and adjunction gives O_{P(E)}(1)|_C = omega_{C/P^1}. Hence W_f = omega_C^2 tensor gamma^* O(4 - f), so W_5 = omega_C^2(-D) and L = W_5 tensor omega_C^{-1} = omega_C(-D)."
+    },
+    {
+      "depends_on": [
+        "FND-0062",
+        "FND-0063",
+        "FND-0074",
+        "SRC-0004",
+        "CLM-0040-1"
+      ],
+      "id": "CLM-0040-2",
+      "kind": "proved",
+      "statement": "The CE obstruction space is canonically its f = 5 constituent (the f = 4 constituent has degree -4 and no sections), and evaluation fails at a degree-six Gamma iff O_C(Gamma) = omega_C(-D), i.e. iff Gamma + D is a canonical divisor."
+    },
+    {
+      "depends_on": [
+        "SBI-1"
+      ],
+      "id": "CLM-0040-3",
+      "kind": "proved",
+      "statement": "Lemma A: if F = O(f_1) (+) O(f_2) with min f_i >= 3, then every line-bundle quotient E ->> O(e) satisfies 2e >= f_1; otherwise the associated section of P(E) lies in Z(s) = C, contradicting irreducibility of C over P^1."
+    },
+    {
+      "depends_on": [
+        "CLM-0040-3",
+        "SBI-3"
+      ],
+      "id": "CLM-0040-4",
+      "kind": "proved",
+      "statement": "Lemma B: no curve carried by H^bal is hyperelliptic. A hyperelliptic genus-6 curve with a degree-4 map has that map composite (Castelnuovo-Severi), forcing E = O(1) (+) O(4) (+) O(4), which has a degree-1 line-bundle quotient and so violates Lemma A for f_1 = 4."
+    },
+    {
+      "depends_on": [
+        "CLM-0040-4",
+        "FND-0073",
+        "SBI-4"
+      ],
+      "id": "CLM-0040-5",
+      "kind": "proved",
+      "note": "Supplies the constancy of h^0 that FND-0058 requires before any relative P^2-bundle claim.",
+      "statement": "On all of H^bal, h^0(O_C(D)) = 2 and h^0(L) = 1 + h^0(O_C(D)) = 3; in particular |L| = P^2 on every geometric fibre."
+    },
+    {
+      "depends_on": [
+        "CLM-0040-5",
+        "FND-0047"
+      ],
+      "id": "CLM-0040-6",
+      "kind": "proved",
+      "note": "The FND-0047 obstruction is removed precisely because h^0 does not jump.",
+      "statement": "pi_* L is locally free of rank 3 with base-change-compatible formation, and P := P(pi_* L) -> H^bal is a P^2-bundle equal to the relative complete linear system |L|."
+    },
+    {
+      "depends_on": [
+        "CLM-0040-4",
+        "CLM-0040-5",
+        "SBI-5",
+        "FND-0083"
+      ],
+      "id": "CLM-0040-7",
+      "kind": "proved",
+      "note": "Answers FND-0083 for (6,6): nonemptiness of the reduced-support open, not merely of the Abel-Jacobi fibre in Sym^6.",
+      "statement": "On every geometric fibre the base locus of |L| is reduced and the general member of |L| is a reduced divisor with 6 distinct points; hence the reduced-support open P^red is nonempty and dense in every fibre, and P^red -> H^bal is smooth surjective of relative dimension 2."
+    },
+    {
+      "depends_on": [
+        "SBI-2",
+        "FND-0060"
+      ],
+      "id": "CLM-0040-8",
+      "kind": "proved",
+      "note": "Gives the stack dimension directly, addressing FND-0060's objection to promoting a coarse count.",
+      "statement": "H is a smooth DM stack of dimension 2g + 2d - 5 = 15, by unobstructedness of deformations of gamma (H^1 of the torsion normal sheaf vanishes) and the free-up-to-finite-stabilisers PGL_2 quotient; H^bal is a nonempty smooth open substack of dimension 15."
+    },
+    {
+      "depends_on": [
+        "FND-0064",
+        "FND-0075",
+        "CLM-0040-6",
+        "CLM-0040-7",
+        "CLM-0040-8"
+      ],
+      "id": "CLM-0040-9",
+      "kind": "proved",
+      "note": "Purity from smoothness with constant fibre dimension answers FND-0069 and FND-0086 without a dominant-fibre-only count.",
+      "statement": "Z = Conf x_{|L|} P^red is the total space of a finite etale S_6-torsor over P^red; Z -> H^bal is smooth surjective of relative dimension 2; Z is smooth of pure dimension 17; every component of Z dominates a component of H^bal."
+    },
+    {
+      "depends_on": [
+        "CLM-0040-2",
+        "CLM-0040-9"
+      ],
+      "id": "CLM-0040-10",
+      "kind": "proved",
+      "statement": "Z -> M_{6,6} is a monomorphism, since [K_C - Gamma] = [D] recovers the tetragonal pencil from (C, Gamma); hence the (6,6) CE evaluation-failure locus is isomorphic to Z and is a constructible substack of M_{6,6} of pure dimension 17, i.e. pure codimension 4."
+    },
+    {
+      "depends_on": [
+        "CLM-0040-5",
+        "CLM-0040-9",
+        "FND-0068"
+      ],
+      "id": "CLM-0040-11",
+      "kind": "proved",
+      "statement": "Z has codimension 4 in Conf while the generic determinantal expectation for the failure rank-drop is 6; the excess is 2, arising from the jump h^0(L) = 3 > chi(L) = 1."
+    },
+    {
+      "depends_on": [
+        "SRC-0004"
+      ],
+      "id": "SBI-1",
+      "kind": "source_backed",
+      "statement": "Casnati-Ekedahl structure theorem for degree-4 Gorenstein covers: relative canonical embedding C subset P(E) with the length-2 Koszul resolution by pi^* F(-2) and pi^*(det F)(-4), det F = det E; and SRC-0004 Lemma 10.6 identifying the CE evaluation obstruction at Gamma with H^0(C, omega_C tensor W|_C^vee(Gamma)) and computing deg W_{f_i}|_C = 4g + 12 - 4f_i."
+    },
+    {
+      "depends_on": [
+        "FND-0005",
+        "FND-0060"
+      ],
+      "id": "SBI-2",
+      "kind": "source_backed",
+      "statement": "H^bal is nonempty: the general genus-6 tetragonal cover has balanced CE bundle F = O(4) (+) O(5)."
+    },
+    {
+      "depends_on": [],
+      "id": "SBI-3",
+      "kind": "source_backed",
+      "statement": "Castelnuovo-Severi inequality: if C admits maps of degrees d_1, d_2 to curves of genera g_1, g_2 not factoring through a common map, then g <= (d_1 - 1)(d_2 - 1) + d_1 g_1 + d_2 g_2."
+    },
+    {
+      "depends_on": [],
+      "id": "SBI-4",
+      "kind": "source_backed",
+      "statement": "Clifford's theorem: for effective special A with 0 < deg A < 2g - 2, dim|A| <= deg(A)/2, with equality only for hyperelliptic C."
+    },
+    {
+      "depends_on": [],
+      "id": "SBI-5",
+      "kind": "source_backed",
+      "statement": "Bertini in characteristic 0: the general member of a base-point-free linear system of dimension >= 1 on a smooth curve is reduced with pairwise distinct points."
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": false,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "claude",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "how_addressed": "Not used. No vanishing-above-vcd step occurs; per FND-0035 the required degree 26 equals vcd for (6,6), so such an argument could prove nothing here. This attempt makes no cohomological vanishing claim at all.",
+      "route": "vcd-only-vanishing"
+    },
+    {
+      "how_addressed": "Not used. Per FND-0032 the CGP/tropical computation controls weight 2d = 42 whereas the target is weight 26; no tropical, graph-complex, or top-weight input appears in this attempt.",
+      "route": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "how_addressed": "Not used. No point counts, no finite experiments, and no numerical evidence of any kind; experiment_ids is empty and every assertion is universal over H^bal, proved by Clifford, Castelnuovo-Severi, Bertini, base change, and adjunction.",
+      "route": "point-count-without-degree-parity-separation"
+    },
+    {
+      "how_addressed": "Not used. The forgetful map M_{6,6} -> M_{6,5} and its mixed R^1 local system play no role; the unresolved extension effect of FND-0037 is neither invoked nor implicitly relied upon.",
+      "route": "forgetful-map-renaming-local-system-unknown"
+    },
+    {
+      "how_addressed": "Retired constructively: Section 6 proves the reduced-support open is nonempty and dense on every geometric fibre of H^bal, strengthening FND-0005 from a Riemann-Roch nonemptiness of the Sym^6 fibre (which FND-0083 correctly deems insufficient) to fibrewise nonemptiness of the ordered distinct-point locus.",
+      "route": "empty-locus-repair"
+    },
+    {
+      "how_addressed": "The P^2-bundle claim is no longer assumed: FND-0058's precondition h^0(omega_C(-D)) = 3 on the whole balanced locus is proved via Lemma A + Lemma B + Clifford, and FND-0047's Proj-of-pi_*L objection is removed by constancy of h^0 and cohomology-and-base-change.",
+      "route": "unproved-relative-P2-bundle (ATT-0022 pattern)"
+    },
+    {
+      "how_addressed": "Replaced by smoothness of Z -> H^bal with constant relative dimension 2, which gives purity of dimension 17 outright, so no larger component over a special curve locus can exist; this meets FND-0069 and FND-0086 rather than reasoning from the Petri-general fibre alone. Correspondingly no lci/non-lci claim is made (FND-0068).",
+      "route": "dominant-fibre-dimension-count (ATT-0026 pattern)"
+    },
+    {
+      "how_addressed": "Explicitly not claimed: the theorem identifies the reduced locus and its geometric points and gives the functorial Abel-Jacobi description, while GAP-Z-SCHEME records that the determinantal/Fitting comparison is open, with the excess quantified as 2.",
+      "route": "geometric-points-only identification (FND-0046 pattern)"
+    }
+  ],
+  "gap_markers": [
+    {
+      "blocking_for": [
+        "C66-GEO-COMP",
+        "C66-TATE-SUPPORT"
+      ],
+      "id": "GAP-Z-SCHEME",
+      "related_findings": [
+        "FND-0046",
+        "FND-0068"
+      ],
+      "statement": "The Fitting/determinantal scheme structure of the CE evaluation-failure degeneracy locus is not compared with the Abel-Jacobi/functorial structure used here; only the reduced (smooth) structure and the geometric points are identified. The excess of 2 makes non-reducedness of the determinantal structure the expected outcome."
+    },
+    {
+      "blocking_for": [
+        "C66-TATE-SUPPORT",
+        "C66-TATE-ASSEMBLY"
+      ],
+      "id": "GAP-Z-CLOSURE",
+      "related_findings": [
+        "FND-0052",
+        "FND-0067"
+      ],
+      "statement": "Neither closedness nor non-closedness of the image of Z in M_{6,6} is established; no closure point in Z minus Z^bal is exhibited. Downstream Gysin arguments still require the closed stratified embedding demanded by FND-0052."
+    },
+    {
+      "blocking_for": [
+        "C66-GEO-COMP"
+      ],
+      "id": "GAP-Z-HBAL-IRR",
+      "related_findings": [
+        "FND-0086"
+      ],
+      "statement": "Irreducibility (and the precise component/monodromy structure) of H^bal is not established here; components of Z are only shown to biject with monodromy orbits of pi_1(P^red) -> S_6 over components of H^bal."
+    },
+    {
+      "blocking_for": [
+        "C66-TATE-SUPPORT"
+      ],
+      "id": "GAP-Z-TATE",
+      "related_findings": [
+        "FND-0053",
+        "FND-0054",
+        "FND-0055",
+        "FND-0085"
+      ],
+      "statement": "No Hodge-Tate conclusion is drawn. The reduction H^*(Z; Q) = (+)_lambda H^*(P^red; V_lambda) is supplied, but Tate type of H^*(H^bal) and of these S_6-local systems is untouched; rationality of S_6-representations and putative rationality of the Hurwitz space do not settle it."
+    },
+    {
+      "blocking_for": [
+        "C66-GEO-COMP",
+        "C66-TATE-ASSEMBLY"
+      ],
+      "id": "GAP-Z-UNBALANCED",
+      "related_findings": [
+        "FND-0052",
+        "FND-0086"
+      ],
+      "statement": "The complementary unbalanced tetragonal strata (F = O(3) (+) O(6) etc.) and the non-tetragonal loci are outside the scope of this theorem; the failure locus over them is not constructed."
+    }
+  ],
+  "id": "ATT-0040",
+  "lane": "geometry",
+  "methods_used": [
+    "casnati-ekedahl-degree-4-koszul-resolution",
+    "relative-canonical-embedding-and-adjunction",
+    "quotient-section-restriction-argument-on-P(E)",
+    "castelnuovo-severi-inequality",
+    "clifford-theorem",
+    "riemann-roch-and-serre-duality",
+    "cohomology-and-base-change",
+    "bertini-on-linear-systems",
+    "relative-abel-jacobi-incidence",
+    "finite-etale-S6-torsor-on-configuration-stack",
+    "deformation-theory-of-covers-via-normal-sheaf"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    {
+      "id": "NOV-0040-1",
+      "statement": "Proof that O_{P(E)}(1)|_C = omega_{C/P^1} for the degree-4 CE cover via the Koszul resolution plus adjunction, yielding W_5 = omega_C^2(-D) and L = omega_C(-D) unconditionally on the balanced locus; this discharges the GAP-Z-W5D identification flagged as undischarged in FND-0073."
+    },
+    {
+      "id": "NOV-0040-2",
+      "statement": "Lemma A (a quadric-restriction/section-containment argument bounding line-bundle quotients of E by min f_i) and its corollary Lemma B that balancedness excludes hyperelliptic curves, giving h^0(L) = 3 identically and thereby the constancy demanded by FND-0058 and the base-change legitimacy demanded by FND-0047."
+    },
+    {
+      "id": "NOV-0040-3",
+      "statement": "Proof that the reduced-support open of |L| is nonempty and dense in every geometric fibre (base locus reduced by Clifford plus Bertini on the moving part), answering the FND-0083 objection at the level of the ordered configuration model rather than the Sym^6 Abel-Jacobi fibre."
+    },
+    {
+      "id": "NOV-0040-4",
+      "statement": "Identification of the (6,6) failure locus as a monomorphic image in M_{6,6}: [K_C - Gamma] = [D] recovers the tetragonal pencil, so Z is isomorphic to the failure locus and has pure codimension 4, with the determinantal excess quantified as exactly 2."
+    }
+  ],
+  "observable_trace_id": "TRACE-0023",
+  "observable_trace_sha256": "02570ea42b8d041539b8d437d02c33adf9c8d993f8e4e3b1907b1de95588e7b6",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "proof_dependencies": [
+    "SRC-0004",
+    "FND-0005",
+    "FND-0046",
+    "FND-0047",
+    "FND-0052",
+    "FND-0058",
+    "FND-0060",
+    "FND-0061",
+    "FND-0062",
+    "FND-0063",
+    "FND-0064",
+    "FND-0067",
+    "FND-0068",
+    "FND-0069",
+    "FND-0073",
+    "FND-0074",
+    "FND-0075",
+    "FND-0083",
+    "FND-0086",
+    "FND-0087"
+  ],
+  "recovery": {
+    "classification": "parser_recovery",
+    "original_emitted_id": "ATT-0040",
+    "original_emitted_target": {
+      "chow_codimension": 13,
+      "dimension": 21,
+      "g": 6,
+      "n": 6,
+      "open_bm_degree": 16,
+      "open_bm_tate_type": "Q(8)",
+      "open_bm_weight": -16,
+      "ordinary_cohomology_degree": 26,
+      "ordinary_tate_type": "Q(-13)",
+      "ordinary_weight": 26,
+      "poincare_twist": 21
+    },
+    "reason": "First Claude mathematics turn failed validation solely because the emitted target object omitted compact_cohomology_degree and compact_tate_type. Harness now coerces task identity fields; recovering the paid stream as ATT-0040. A later re-run that also targeted ATT-0040 was stopped mid-flight and never produced a trace or on-disk artifact \u2014 it must not overwrite this recovery.",
+    "recovered_at": "2026-08-03T13:01:43.399520+00:00",
+    "recovered_from_trace": "TRACE-0023",
+    "source_run": "RUN-C66-001-20260803T122003120256Z-19319"
+  },
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0005",
+    "FND-0046",
+    "FND-0047",
+    "FND-0052",
+    "FND-0058",
+    "FND-0060",
+    "FND-0061",
+    "FND-0062",
+    "FND-0063",
+    "FND-0064",
+    "FND-0067",
+    "FND-0068",
+    "FND-0069",
+    "FND-0073",
+    "FND-0074",
+    "FND-0075",
+    "FND-0083",
+    "FND-0086",
+    "FND-0087"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-Z",
+  "summary": "Identifies the (6,6) Casnati-Ekedahl evaluation-failure locus Z completely on the balanced tetragonal stack. Proves O(1)|_C = omega_{C/P^1} from the degree-4 CE Koszul resolution plus adjunction, which discharges the undischarged identification W_5 = omega_C^2(-D) (GAP-Z-W5D) and yields L = omega_C(-D): evaluation fails at Gamma exactly when Gamma + (a g^1_4 fibre) is canonical. Proves that balancedness forces every line-bundle quotient of E to have degree >= 2, excluding the hyperelliptic (necessarily composite) covers, whence h^0(D) = 2 and h^0(L) = 3 identically; this supplies the constancy demanded by FND-0058, legitimises Proj pi_* L against FND-0047, and gives a genuine relative P^2-bundle. Proves fibrewise nonemptiness and density of the reduced-support open (FND-0083), so Z is a smooth S_6-torsor over a dense open of that P^2-bundle, of pure dimension 17, mapping monomorphically onto a pure-codimension-4 constructible substack of M_{6,6}. Records the excess-2 determinantal discrepancy and keeps the scheme-structure, closure, and Tate questions as explicit gaps.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "characteristic": 0,
+    "coefficients": "Q",
+    "g": 6,
+    "locus": "balanced tetragonal H^bal, F = O(4) (+) O(5)",
+    "n": 6
+  },
+  "theorem_statement": "Let k be a field of characteristic 0. Let H be the algebraic stack over k of pairs (C, gamma) with C smooth projective geometrically connected of genus 6 and gamma : C -> P^1 finite flat of degree 4, taken modulo automorphisms of the target; H is a smooth DM stack of dimension 15. Let H^bal be the open substack on which the Casnati-Ekedahl rank-2 bundle F on the relative P^1 has balanced splitting type F = O(4) (+) O(5) (degrees taken relative to the universal P^1-bundle), and let pi : Cu -> H^bal be the universal curve, D := gamma^* O_{P^1}(1) the universal g^1_4 divisor class of relative degree 4, W_5 the f_2 = 5 constituent of (O_{P(E)}(2) tensor gamma^* F^vee)|_Cu of SRC-0004 Lemma 10.6, and L := W_5 tensor omega_{Cu/H^bal}^{-1}, of relative degree 6. Let Conf := Conf_6(Cu/H^bal) be the stack of ordered 6-tuples of pairwise distinct sections with universal divisor Du, and let Z subset Conf be the locus at which the Casnati-Ekedahl evaluation map of SRC-0004 Lemma 10.6 fails, i.e. H^0(C, omega_C tensor W|_C^vee(Gamma)) =/= 0 with Gamma = x_1 + ... + x_6. Then, with all line bundles on Cu understood up to twist by a line bundle pulled back from H^bal (which affects no statement below): (1) O_{P(E)}(1)|_Cu = omega_{Cu/P^1}, hence W_5 = omega_{Cu/H^bal}^{2}(-D) and L = omega_{Cu/H^bal}(-D); the f = 4 constituent contributes nothing and the evaluation map fails at Gamma if and only if Gamma + D is a canonical divisor on C, equivalently O_C(Gamma) = L; (2) every curve C carried by H^bal is non-hyperelliptic and satisfies h^0(O_C(D)) = 2, hence h^0(L) = 3 identically on H^bal; (3) pi_* L is locally free of rank 3 and its formation commutes with base change, so P := P(pi_* L) -> H^bal is a P^2-bundle canonically identified with the relative complete linear system |L|, and its reduced-support open P^red subset P is nonempty and dense in every geometric fibre of P -> H^bal; (4) Z is canonically the total space of the finite etale S_6-torsor Conf x_{|L|} P^red -> P^red; consequently Z -> H^bal is smooth and surjective of relative dimension 2, Z is smooth of pure dimension 17, and every irreducible component of Z dominates an irreducible component of H^bal; (5) the forgetful morphism Z -> M_{6,6} is a monomorphism of stacks, so the (6,6) Casnati-Ekedahl evaluation-failure locus in M_{6,6} is isomorphic to Z and is a constructible substack of pure dimension 17, i.e. of pure codimension 4; and (6) Z has codimension 4 in Conf whereas the generic determinantal expectation for the failure condition is 6, so the failure degeneracy locus carries excess 2, and no assertion is made here about its Fitting/determinantal scheme structure, about closedness of its image in M_{6,6}, or about the Hodge-Tate type of its cohomology."
+}

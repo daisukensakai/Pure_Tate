@@ -1,0 +1,201 @@
+{
+  "argument_markdown": "## Setup and CE line-bundle convention\n\nWork throughout over the balanced tetragonal moduli stack B^{bal} of smooth genus-6 curves with a degree-four cover \u03c6:C\u2192P^1 whose scroll/Tschirnhausen bundle splits as F\u2245O(4)\u2295O(5). Following the packet and SRC-0004 Lemma 10.6, the Casnati\u2013Ekedahl summands are\n\nW_f := (O_{P(E^\u2228)}(2) \u2297 \u03b3^* O_{P^1}(-f))|_C,\n\nso that W \u2245 W_4 \u2295 W_5 on C. (Packet emphasis: W_5 is the f_2=5 summand of (O(2)\u2297\u03b3^*F^\u2228)|_C, not the O_{P^1}(5) summand of F; the sign in \u03b3^*O(-f) is the one used in the degree computation below.)\n\n## Source-backed degree formulas (SRC-0004 Lemma 10.6)\n\nSRC-0004 Lemma 10.6 supplies:\n\n- deg(W_f|_C) = 4g + 12 \u2212 4f;\n- H^0(C, \u03c9_C \u2297 W^\u2228(\u0393)) = \u2295_i H^0(C, \u03c9_C \u2297 W_{f_i}^\u2228(\u0393));\n- deg(\u03c9_C \u2297 W_f^\u2228(\u0393)) = 4f + n \u2212 2g \u2212 14.\n\nSubstituting g=6 gives deg(W_5)=4\u00b76+12\u221220=16 and deg(W_4)=8. For L:=W_5\u2297\u03c9_C^{-1} one has deg(L)=16\u2212(2\u00b76\u22122)=6. Substituting (g,n)=(6,6) into the obstruction degree yields\n\n- f=4: 4\u00b74+6\u221212\u221214=\u22124;\n- f=5: 4\u00b75+6\u221212\u221214=0.\n\nThese are the packet degree calculations and match FND-0062, FND-0063, FND-0074 (borderline n=6 case).\n\n## Proved step: vanishing of the f=4 summand\n\nOn any smooth geometric fibre, if deg(\u03c9_C\u2297W_4^\u2228(\u0393))=\u22124<0 then H^0(C,\u03c9_C\u2297W_4^\u2228(\u0393))=0 for every effective \u0393 of degree n=6. Thus the f=4 component of the CE obstruction never contributes on B^{bal} (FND-0062). Evaluation failure is entirely carried by the f=5 summand.\n\n## Proved step: f=5 failure is an Abel\u2013Jacobi condition\n\nFor the f=5 summand, deg(\u03c9_C\u2297W_5^\u2228(\u0393))=0. A degree-zero line bundle on a smooth curve has a nonzero global section if and only if it is trivial. Hence\n\nH^0(C, \u03c9_C \u2297 W_5^\u2228(\u0393)) \u2260 0  \u21d4  \u03c9_C \u2297 W_5^\u2228(\u0393) \u2245 O_C  \u21d4  O_C(\u0393) \u2245 W_5 \u2297 \u03c9_C^{-1} =: L.\n\nCombined with the direct-sum decomposition of the obstruction and the vanishing of the f=4 summand, CE evaluation fails on \u0393 if and only if O_C(\u0393)\u2245L (FND-0063). This is the six-point failure condition stated in the packet bottleneck.\n\n## Construction of Z (ordered and unordered models)\n\nDefine relative objects over B^{bal}:\n\n1. L := W_5 \u2297 \u03c9_{C/B^{bal}}^{-1}, a relative degree-six line bundle on the universal curve;\n2. Sym^6_{C/B^{bal}}, the relative space of effective degree-six divisors;\n3. U^{red} \u2282 Sym^6, the open locus of reduced support (pairwise distinct points as an unordered set);\n4. Conf_6(C/B^{bal}), the stack of ordered 6-tuples of pairwise distinct sections of the universal curve;\n5. Z^{bal,unord} := { \u0393 \u2208 U^{red} | O_C(\u0393) \u2245 L }, the reduced-support Abel\u2013Jacobi incidence for L;\n6. Z^{bal} := Conf_6 \u00d7_{U^{red}} Z^{bal,unord}, the ordered evaluation-failure locus.\n\nBy the geometric-point identification above, the geometric points of Z^{bal,unord} (resp. Z^{bal}) are exactly the reduced unordered (resp. ordered distinct) CE evaluation-failure configurations on balanced tetragonal fibres.\n\n## Source-backed covering statement\n\nFND-0064 (cf. FND-0075 for stack vs coarse caveats): the forgetful map Conf_6(C/B^{bal}) \u2192 U^{red} is a finite \u00e9tale S_6-torsor on the stack of pairwise-distinct sections. Restricting to the incidence cut out by O(\u0393)\u2245L therefore yields a finite \u00e9tale S_6-torsor Z^{bal} \u2192 Z^{bal,unord} over the reduced-support open. With Q-coefficients, S_6-invariants and coinvariants agree, so rational descent from ordered to unordered is harmless; integral or coarse-space descent is not claimed here (FND-0075).\n\n## What Riemann\u2013Roch does and does not give\n\nRiemann\u2013Roch gives \u03c7(L)=deg(L)+1\u2212g=6+1\u22126=1, so on every geometric fibre the full Abel\u2013Jacobi fibre in Sym^6 is nonempty as a scheme-theoretic fibre of the map to Pic^6 (FND-0005 nonemptiness of the full failure locus is compatible with this). By FND-0083 this does **not** prove that the reduced-support open U^{red}\u2229|L|, nor the ordered Conf_6 incidence Z^{bal}, is nonempty on every geometric fibre. Fibrewise nonemptiness of Z^{bal} is therefore a gap (GAP-Z-RED-NONEMPTY), not a theorem of this attempt.\n\n## Explicit non-claims (downstream nodes and failed routes avoided)\n\n- **Not claimed:** scheme-theoretic equality of the CE evaluation degeneracy ideal (Fitting/determinantal structure) with the relative Abel\u2013Jacobi incidence over arbitrary bases (FND-0046 \u2192 GAP-Z-FITTING). Geometric-point equivalence is what is proved.\n- **Not claimed:** that H^0(\u03c9\u2297W_f^\u2228(\u0393)) are identified with CE obstruction spaces by a full citation-independent reconstruction of the CE evaluation map beyond SRC-0004 Lemma 10.6's degree/Serre package (FND-0061 \u2192 GAP-Z-CE-ID). The attempt takes SRC-0004 Lemma 10.6 as the source-backed identification of the obstruction groups.\n- **Not claimed:** closed pure-codimension-4 embedding of Z^{bal} in M_{6,6}; FND-0052 records that the balanced reduced-support relative linear system is an open piece of the failure locus (GAP-Z-OPEN). Closedness/codimension, components, dimensions, and stabilizers are C66-GEO-COMP (and related) matter (FND-0067, FND-0069, FND-0086).\n- **Not claimed:** constancy of h^0(L) or identification of |L| with a relative P^2-bundle (FND-0058, FND-0047); that is C66-GEO-H0. The relation h^0(L)=1+h^0(M) for M=\u03c9_C^2\u2297W_5^\u2228 of degree 4 (FND-0073) is recorded as an input for H0, not used to strengthen GEO-Z.\n- **Not claimed:** any Tate, purity, Gysin, or lowest-weight statement about W_{-16}H^{BM}_{16}(M_{6,6}) (FND-0050, FND-0054, FND-0055). Completing RED-0001 requires the full GEO-Z\u2192GEO-H0\u2192GEO-COMP\u2192TATE-SUPPORT\u2192TATE-ASSEMBLY chain (FND-0057).\n\n## Blocked routes addressed (not used)\n\n- `vcd-only-vanishing`: irrelevant to constructing Z; vcd vanishing cannot identify the CE failure locus (FND-0035).\n- `undecorated-cgp-top-weight-graph-complex`: controls top weight, not the lowest-weight corner or CE geometry (FND-0032).\n- `point-count-without-degree-parity-separation`: no point-counting is used; finite experiments cannot close the identification.\n- `forgetful-map-renaming-local-system-unknown`: no Leray analysis of M_{6,6}\u2192M_{6,5} or renaming of mixed R^1 systems (FND-0036, FND-0037).\n\nNo blocked route is reopened; `new_inputs` is empty.\n\n## Status of the subproblem\n\nC66-GEO-Z is advanced by an exact geometric-point construction and identification of the balanced evaluation-failure locus Z^{bal}/Z^{bal,unord} as the ordered/unordered reduced-support Abel\u2013Jacobi incidence of L=W_5\u2297\u03c9^{-1}, with f=4 vanishing and the finite \u00e9tale S_6 model. The four named gaps remain undischarged and are the correct interface to scheme theory (COMP/COMP-RANK), nonemptiness, and later h^0/component/Tate nodes. This attempt does **not** resolve RED-0001.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0038-01",
+      "statement": "On B^{bal} with g=6, deg(W_5)=16 and deg(L)=deg(W_5\u2297\u03c9_C^{-1})=6, using deg(W_f)=4g+12\u22124f and the packet sign convention \u03b3^*O(\u2212f).",
+      "status": "proved",
+      "support": [
+        "SRC-0004 Lemma 10.6",
+        "packet degree calculation"
+      ]
+    },
+    {
+      "id": "CLM-0038-02",
+      "statement": "For (g,n)=(6,6) and any effective \u0393 of degree 6 on a balanced fibre, deg(\u03c9_C\u2297W_4^\u2228(\u0393))=\u22124, hence H^0(\u03c9_C\u2297W_4^\u2228(\u0393))=0; the f=4 CE obstruction summand vanishes identically.",
+      "status": "proved",
+      "support": [
+        "SRC-0004 Lemma 10.6",
+        "FND-0062"
+      ]
+    },
+    {
+      "id": "CLM-0038-03",
+      "statement": "For (g,n)=(6,6) and any effective \u0393 of degree 6 on a balanced fibre, deg(\u03c9_C\u2297W_5^\u2228(\u0393))=0, and H^0(\u03c9_C\u2297W_5^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245L=W_5\u2297\u03c9_C^{-1}.",
+      "status": "proved",
+      "support": [
+        "SRC-0004 Lemma 10.6",
+        "FND-0063"
+      ]
+    },
+    {
+      "conditions": [
+        "GAP-Z-CE-ID: SRC-0004 Lemma 10.6 is taken as source-backed identification of the CE obstruction spaces; no independent reconstruction of the CE evaluation map is supplied."
+      ],
+      "id": "CLM-0038-04",
+      "statement": "On geometric points of B^{bal}, CE evaluation fails on a reduced degree-six divisor \u0393 if and only if O_C(\u0393)\u2245L; equivalently, geometric points of Z^{bal,unord} (resp. Z^{bal}) are exactly the reduced unordered (resp. ordered distinct) evaluation-failure configurations.",
+      "status": "proved_conditional",
+      "support": [
+        "CLM-0038-02",
+        "CLM-0038-03",
+        "SRC-0004 Lemma 10.6 as identification of obstruction groups"
+      ]
+    },
+    {
+      "id": "CLM-0038-05",
+      "statement": "Conf_6(C/B^{bal})\u2192U^{red} is a finite \u00e9tale S_6-torsor, and Z^{bal}\u2192Z^{bal,unord} is the corresponding finite \u00e9tale S_6-torsor over the reduced-support open.",
+      "status": "source_backed",
+      "support": [
+        "FND-0064",
+        "FND-0075"
+      ]
+    },
+    {
+      "id": "CLM-0038-06",
+      "statement": "\u03c7(L)=1 on every geometric fibre, so the full Abel\u2013Jacobi fibre of L in Sym^6 is nonempty; this does not imply nonemptiness of U^{red}\u2229|L| or of Z^{bal} on every fibre.",
+      "status": "proved_with_gap",
+      "support": [
+        "Riemann\u2013Roch",
+        "FND-0083",
+        "FND-0005"
+      ]
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "how_addressed": "Not used. GEO-Z requires construction of the CE failure locus; vanishing above vcd cannot identify Z and proves none of the RED-0001 residual cases (FND-0035).",
+      "route": "vcd-only-vanishing"
+    },
+    {
+      "how_addressed": "Not used. CGP/top-weight graph complexes control a different weight corner from the lowest-weight RED-0001 input (FND-0032); they supply no CE incidence construction.",
+      "route": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "how_addressed": "Not used. No point-counting or finite experimental enumeration is invoked; finite experiments cannot close the universal identification of Z.",
+      "route": "point-count-without-degree-parity-separation"
+    },
+    {
+      "how_addressed": "Not used. No forgetful-map Leray analysis or renaming of the mixed R^1 system on M_{6,6}\u2192M_{6,5} (FND-0036, FND-0037); the argument stays inside balanced CE geometry.",
+      "route": "forgetful-map-renaming-local-system-unknown"
+    },
+    {
+      "how_addressed": "Explicitly avoided per FND-0052, FND-0067, FND-0069: Z^{bal} is constructed as an open reduced-support incidence over B^{bal}, not asserted closed of pure codimension 4 in M_{6,6}.",
+      "route": "closed-pure-codim-4-Z-in-M66"
+    },
+    {
+      "how_addressed": "Explicitly avoided per FND-0046: only geometric-point identification is claimed; scheme-theoretic Fitting comparison is GAP-Z-FITTING.",
+      "route": "geometric-points-imply-Fitting-scheme"
+    },
+    {
+      "how_addressed": "Explicitly avoided per FND-0083: \u03c7(L)=1 is not upgraded to nonemptiness of U^{red}\u2229|L| or Conf_6 incidence on every fibre.",
+      "route": "RR-implies-reduced-support-nonempty-every-fibre"
+    }
+  ],
+  "gap_markers": [
+    {
+      "claim_ids": [
+        "CLM-0038-04"
+      ],
+      "id": "GAP-Z-CE-ID",
+      "reason": "FND-0061: degree/Serre control of H^0(\u03c9\u2297W_f^\u2228(\u0393)) identifies the CE failure locus only after those groups are shown to be exactly the obstruction spaces of the CE evaluation map. This attempt uses SRC-0004 Lemma 10.6 as the source-backed identification and does not reconstruct the evaluation map independently."
+    },
+    {
+      "claim_ids": [
+        "CLM-0038-04"
+      ],
+      "id": "GAP-Z-FITTING",
+      "reason": "FND-0046: fibrewise geometric-point equivalence between nonvanishing of the CE obstruction and the Abel\u2013Jacobi condition O(\u0393)\u2245L does not by itself identify relative Fitting/determinantal scheme structures over an arbitrary base."
+    },
+    {
+      "claim_ids": [
+        "CLM-0038-06"
+      ],
+      "id": "GAP-Z-RED-NONEMPTY",
+      "reason": "FND-0083: \u03c7(L)=1 proves only that the full Abel\u2013Jacobi fibre in Sym^6 is nonempty; it does not prove that the reduced-support open or the ordered Conf_6 incidence is nonempty on every geometric fibre."
+    },
+    {
+      "claim_ids": [],
+      "id": "GAP-Z-OPEN",
+      "reason": "FND-0052, FND-0067: the balanced reduced-support relative linear system is an open piece of the failure locus, not a closed pure-codimension-4 subvariety of M_{6,6}. Closedness, codimension purity, and components are deferred to C66-GEO-COMP / C66-COMP-*."
+    }
+  ],
+  "id": "ATT-0038",
+  "lane": "geometry",
+  "methods_used": [
+    "casnati-ekedahl-obstruction-degree",
+    "balanced-tetragonal-splitting-F-O4-O5",
+    "serre-duality-degree-zero-line-bundle",
+    "abel-jacobi-incidence-construction",
+    "finite-etale-S6-configuration-cover",
+    "geometric-point-identification-with-named-scheme-gaps"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Weakest-sufficient geometric-point construction of the balanced CE evaluation-failure locus for (6,6) as the ordered/unordered reduced-support Abel\u2013Jacobi incidence of L=W_5\u2297\u03c9^{-1}, with f=4 vanishing isolated and scheme/closedness/nonemptiness claims deferred as named gaps rather than overclaimed."
+  ],
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "proof_dependencies": [],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0005",
+    "FND-0046",
+    "FND-0047",
+    "FND-0052",
+    "FND-0058",
+    "FND-0061",
+    "FND-0062",
+    "FND-0063",
+    "FND-0064",
+    "FND-0067",
+    "FND-0069",
+    "FND-0073",
+    "FND-0074",
+    "FND-0075",
+    "FND-0083",
+    "FND-0086"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-Z",
+  "summary": "On the balanced tetragonal stack for (6,6), the CE evaluation obstruction splits as f=4\u2295f=5; the f=4 summand vanishes identically (degree \u22124) and the f=5 summand has degree 0, so failure is exactly the Abel\u2013Jacobi condition O_C(\u0393)\u2245W_5\u2297\u03c9_C^{-1}. The ordered locus is the finite \u00e9tale S_6-pullback of the reduced-support open in that incidence. Scheme structure, reduced-support nonemptiness on every fibre, closedness/codimension in M_{6,6}, and all Tate claims remain gaps for later nodes.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "Let g=n=6 and let B^{bal} be the moduli stack of smooth genus-6 curves equipped with a balanced tetragonal structure C\u2192P^1 with Tschirnhausen/scroll splitting F\u2245O_{P^1}(4)\u2295O_{P^1}(5). Write W_f:=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_{P^1}(-f))|_C for the Casnati\u2013Ekedahl summands (packet convention: W_5 is the f_2=5 summand of (O(2)\u2297\u03b3^*F^\u2228)|_C, not the O(5) summand of F), and set L:=W_5\u2297\u03c9_C^{-1}. Let Sym^6_{C/B^{bal}} be the relative effective degree-six divisor space, U^{red}\u2282Sym^6 its open locus of reduced support, and Conf_6(C/B^{bal}) the stack of ordered pairwise-distinct sections. Define the unordered evaluation-failure incidence Z^{bal,unord} as the locus of reduced effective \u0393 of degree 6 with O_C(\u0393)\u2245L, and the ordered model Z^{bal} as its pullback along Conf_6\u2192U^{red}. Then, on every geometric fibre of B^{bal}: (i) deg(W_5)=16 and deg(L)=6; (ii) for any effective \u0393 of degree 6, H^0(C,\u03c9_C\u2297W_4^\u2228(\u0393))=0 (obstruction degree \u22124), while deg(\u03c9_C\u2297W_5^\u2228(\u0393))=0 and H^0(C,\u03c9_C\u2297W_5^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245L; (iii) consequently CE evaluation fails on a reduced degree-six divisor \u0393 (resp. ordered 6-tuple of distinct points) if and only if O_C(\u0393)\u2245L (resp. the underlying unordered divisor lies in Z^{bal,unord}); (iv) Conf_6\u2192U^{red} is a finite \u00e9tale S_6-torsor, so Z^{bal}\u2192Z^{bal,unord} is likewise a finite \u00e9tale S_6-torsor over the reduced-support open. This constructs and identifies the balanced evaluation-failure locus at the level of geometric points and ordered/unordered reduced-support models; it does not assert scheme-theoretic Fitting equality with a CE degeneracy ideal, fibrewise nonemptiness of U^{red}\u2229|L|, closed pure-codimension embedding in M_{6,6}, h^0-stratification, components/stabilizers, or Tate type."
+}

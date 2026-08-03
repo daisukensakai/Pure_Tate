@@ -1,0 +1,181 @@
+{
+  "argument_markdown": "## Argument\n\n### Step 1: f=4 obstruction vanishes (proved)\n\nBy SRC-0004 Lemma 10.6, deg(\u03c9_C \u2297 W_f^\u2228(\u0393)) = 4f + n \u2212 2g \u2212 14. For g=6, n=6, f=4 this gives 16+6\u221212\u221214 = \u22124 < 0. Hence H^0(C, \u03c9_C \u2297 W_4^\u2228(\u0393)) = 0 on every geometric fibre of B^{bal}. This is FND-0062.\n\n### Step 2: f=5 obstruction has degree 0 (proved)\n\nFor f=5: 20+6\u221212\u221214 = 0. A degree-0 line bundle on a smooth curve has a nonzero section if and only if it is trivial. Hence H^0(C, \u03c9_C \u2297 W_5^\u2228(\u0393)) \u2260 0 iff \u03c9_C \u2297 W_5^\u2228(\u0393) \u2245 O_C, equivalently O_C(\u0393) \u2245 W_5 \u2297 \u03c9_C^{\u22121} =: L. This is FND-0063.\n\n### Step 3: Abel\u2013Jacobi incidence description (set-theoretic, proved)\n\nThe failure locus Z^{bal} \u2282 B^{bal} is therefore set-theoretically {(C,\u03c0,\u0393) : O_C(\u0393) \u2245 L}. Since deg L = deg W_5 \u2212 (2g\u22122) = 16 \u2212 10 = 6 = deg \u0393, this is a well-defined Abel\u2013Jacobi incidence in Sym^6(C) (or its ordered lift Conf_6(C)).\n\n### Step 4: Ordered configuration as S_6-torsor (proved)\n\nBy FND-0064, the forgetful map Conf_6(C/B^{bal}) \u2192 (reduced-support open in relative effective degree-6 divisors) is a finite \u00e9tale S_6-torsor. With Q-coefficients, S_6-invariants and coinvariants agree (FND-0075), so rational cohomology descends harmlessly.\n\n### Step 5: h^0(L) computation (source-backed)\n\nBy FND-0073, Riemann\u2013Roch gives \u03c7(L) = deg L \u2212 g + 1 = 6 \u2212 6 + 1 = 1. Serre duality gives h^1(L) = h^0(\u03c9_C \u2297 L^{\u22121}) = h^0(\u03c9_C^2 \u2297 W_5^\u2228) = h^0(M), where deg M = 2(2g\u22122) \u2212 deg W_5 = 20 \u2212 16 = 4. Hence h^0(L) = 1 + h^0(M). The generic value h^0(L) = 3 (i.e. h^0(M) = 2) would give a relative P^2 of failure divisors per fibre, but constancy is not established.\n\n### Gaps\n\n- **GAP-Z-CLOSE**: Z^{bal} is an open piece of the failure locus, not a closed pure-codimension-4 subvariety of M_{6,6} (FND-0052, FND-0067). Closure and component analysis are required for Gysin (FND-0086).\n- **GAP-Z-H0**: Constancy of h^0(L) = 3 on the whole balanced locus is not proven (FND-0058). Without this, pure dimension 17 and codimension 4 in M_{6,6} are not established.\n- **GAP-Z-SCHEME**: The determinantal/Fitting scheme structure of the CE evaluation map has not been compared to the Abel\u2013Jacobi incidence scheme structure (FND-0046, FND-0047, FND-0061).\n- **GAP-Z-NONEMPTY**: \u03c7(L)=1 proves the full Abel\u2013Jacobi fibre in Sym^6 is nonempty, but not that the reduced-support open or the ordered Conf_6 incidence is nonempty on every geometric fibre (FND-0083).\n\n### Failed routes addressed\n\n- `vcd-only-vanishing`: Not used; the target degree 26 equals vcd for (6,6) (FND-0035), so vanishing-above-vcd proves nothing here.\n- `undecorated-cgp-top-weight-graph-complex`: Not used; CGP computes top weight 42, target is weight 26 (FND-0032).\n- `point-count-without-degree-parity-separation`: Not used.\n- `forgetful-map-renaming-local-system-unknown`: Not used; the mixed R^1 extension effect remains unresolved (FND-0037).",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-Z-01",
+      "statement": "On B^{bal} for (g,n)=(6,6), deg(\u03c9_C \u2297 W_4^\u2228(\u0393)) = \u22124, so H^0 vanishes identically.",
+      "status": "proved",
+      "support": [
+        "FND-0062",
+        "SRC-0004"
+      ],
+      "type": "proved"
+    },
+    {
+      "id": "CLM-Z-02",
+      "statement": "On B^{bal} for (g,n)=(6,6), deg(\u03c9_C \u2297 W_5^\u2228(\u0393)) = 0, so evaluation fails iff O_C(\u0393) \u2245 W_5 \u2297 \u03c9_C^{\u22121}.",
+      "status": "proved",
+      "support": [
+        "FND-0063",
+        "SRC-0004"
+      ],
+      "type": "proved"
+    },
+    {
+      "id": "CLM-Z-03",
+      "statement": "Z^{bal} is set-theoretically the Abel\u2013Jacobi incidence {O_C(\u0393) \u2245 L} with deg L = 6.",
+      "status": "proved",
+      "support": [
+        "CLM-Z-02"
+      ],
+      "type": "proved"
+    },
+    {
+      "id": "CLM-Z-04",
+      "statement": "Conf_6(C/B^{bal}) \u2192 reduced-support open is a finite \u00e9tale S_6-torsor.",
+      "status": "proved",
+      "support": [
+        "FND-0064"
+      ],
+      "type": "proved"
+    },
+    {
+      "id": "CLM-Z-05",
+      "statement": "h^0(L) = 1 + h^0(M) with deg M = 4; generic h^0(L) = 3 is expected but not proven constant.",
+      "status": "source_backed",
+      "support": [
+        "FND-0073"
+      ],
+      "type": "source_backed"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "qwen",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "reason": "Target degree 26 equals vcd for (6,6) per FND-0035; vanishing-above-vcd is inapplicable.",
+      "route": "vcd-only-vanishing"
+    },
+    {
+      "reason": "CGP computes weight 42 (top weight), target is weight 26 (lowest weight) per FND-0032; identification is impossible.",
+      "route": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "reason": "Not invoked; no point-count method used in this geometric construction.",
+      "route": "point-count-without-degree-parity-separation"
+    },
+    {
+      "reason": "Not invoked; the mixed R^1 extension effect (FND-0037) is acknowledged as unresolved and not bypassed.",
+      "route": "forgetful-map-renaming-local-system-unknown"
+    }
+  ],
+  "gap_markers": [
+    {
+      "blocks": [
+        "C66-GEO-H0",
+        "C66-GEO-COMP",
+        "C66-TATE-SUPPORT"
+      ],
+      "description": "Z^{bal} is not shown to be closed in M_{6,6}; closure points outside the balanced locus are not controlled (FND-0052, FND-0067, FND-0086).",
+      "id": "GAP-Z-CLOSE"
+    },
+    {
+      "blocks": [
+        "C66-GEO-H0",
+        "C66-GEO-COMP"
+      ],
+      "description": "Constancy of h^0(L)=3 on the whole balanced locus is not proven; dimension and codimension of Z^{bal} are conditional (FND-0058).",
+      "id": "GAP-Z-H0"
+    },
+    {
+      "blocks": [
+        "C66-GEO-COMP",
+        "C66-TATE-SUPPORT"
+      ],
+      "description": "Scheme-structure comparison between the CE determinantal locus and the Abel\u2013Jacobi incidence is not performed (FND-0046, FND-0047, FND-0061).",
+      "id": "GAP-Z-SCHEME"
+    },
+    {
+      "blocks": [
+        "C66-GEO-H0"
+      ],
+      "description": "Nonemptiness of the reduced-support ordered incidence Z_ev on every geometric fibre is not proven; \u03c7(L)=1 only gives Sym^6 nonemptiness (FND-0083).",
+      "id": "GAP-Z-NONEMPTY"
+    }
+  ],
+  "id": "ATT-0039",
+  "lane": "geometry",
+  "methods_used": [
+    "Casnati\u2013Ekedahl obstruction degree calculation (SRC-0004 Lemma 10.6)",
+    "Abel\u2013Jacobi incidence for degree-0 line bundles",
+    "Riemann\u2013Roch and Serre duality for h^0 stratification",
+    "Finite \u00e9tale S_6-torsor for ordered configuration"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "First explicit construction of Z^{bal} for (6,6) as a degree-0 Abel\u2013Jacobi incidence with all four structural gaps separately identified and cross-referenced to adjudicated findings."
+  ],
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "proof_dependencies": [],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0062",
+    "FND-0063",
+    "FND-0064",
+    "FND-0073",
+    "FND-0075",
+    "FND-0052",
+    "FND-0058",
+    "FND-0046",
+    "FND-0047",
+    "FND-0061",
+    "FND-0083",
+    "FND-0067",
+    "FND-0086",
+    "FND-0035",
+    "FND-0032",
+    "FND-0037"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-Z",
+  "summary": "Constructs the balanced-tetragonal CE evaluation-failure locus Z^{bal} for (g,n)=(6,6) as a set-theoretic Abel\u2013Jacobi incidence O_C(\u0393) \u2245 W_5 \u2297 \u03c9_C^{\u22121} of degree 0, with the f=4 obstruction vanishing identically and the ordered configuration modelled as a finite \u00e9tale S_6-torsor. Four structural gaps (closure in M_{6,6}, h^0 constancy, scheme-structure comparison, fibre-wise nonemptiness of the reduced-support ordered locus) are recorded and prevent downstream assembly.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "Let B^{bal} be the moduli stack of smooth genus-6 curves C equipped with a degree-4 cover \u03c0: C \u2192 P^1 having balanced splitting F \u2245 O_{P^1}(4) \u2295 O_{P^1}(5) and six distinct ordered marked points p_1,...,p_6. Let \u0393 = p_1+...+p_6 and let W_5 = (O_{P(E^\u2228)}(2) \u2297 \u03b3^*O_{P^1}(-5))|_C be the f_2=5 Casnati\u2013Ekedahl line bundle. Then: (a) the f=4 CE evaluation-obstruction summand \u03c9_C \u2297 W_4^\u2228(\u0393) has degree \u22124 and hence H^0 vanishes identically on B^{bal}; (b) the f=5 CE evaluation-obstruction summand \u03c9_C \u2297 W_5^\u2228(\u0393) has degree 0, so the evaluation-failure locus Z^{bal} \u2282 B^{bal} is set-theoretically the Abel\u2013Jacobi incidence locus {(C,\u03c0,\u0393) : O_C(\u0393) \u2245 L := W_5 \u2297 \u03c9_C^{\u22121}}; (c) the forgetful map from the ordered configuration stack Conf_6(C/B^{bal}) to the reduced-support open of the relative effective degree-6 divisor space is a finite \u00e9tale S_6-torsor; (d) on each geometric fibre, \u03c7(L) = 1 and h^0(L) = 1 + h^0(M) where M = \u03c9_C^2 \u2297 W_5^\u2228 has degree 4. The identification of Z^{bal} as a closed pure-codimension-4 subvariety of M_{6,6}, the constancy of h^0(L) = 3 on the whole balanced locus, the scheme-structure comparison between the determinantal and Abel\u2013Jacobi loci, and the nonemptiness of the reduced-support ordered incidence on every geometric fibre remain open gaps."
+}

@@ -1,0 +1,68 @@
+{
+  "attempt_id": "ATT-0038",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0038-01",
+      "note": "deg(W_f)=4g+12-4f from SRC-0004 Lemma 10.6; for g=6, f=5: 24+12-20=16. deg(L)=16-(2\u00b76-2)=6. Arithmetic verified.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0038-02",
+      "note": "deg(\u03c9_C\u2297W_4^\u2228(\u0393))=4\u00b74+6-12-14=-4<0, hence H^0=0 on any smooth geometric fibre. FND-0062 corroborates.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0038-03",
+      "note": "deg(\u03c9_C\u2297W_5^\u2228(\u0393))=4\u00b75+6-12-14=0. A degree-zero line bundle on a smooth projective curve has a nonzero global section iff it is trivial, so H^0\u22600 iff \u03c9_C\u2297W_5^\u2228(\u0393)\u2245O_C iff O_C(\u0393)\u2245W_5\u2297\u03c9_C^{-1}=L. FND-0063 corroborates.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0038-04",
+      "note": "SRC-0004's context identifies H^0(\u03c9_C\u2297W^\u2228(\u0393)) as the CE evaluation obstruction space; the packet instructs derivation from Lemma 10.6 whose 'required vanishing' explicitly refers to CE evaluation. With H^0 splitting as f=4\u2295f=5 and f=4 vanishing identically (CLM-0038-02), CE failure on \u0393 iff H^0(\u03c9_C\u2297W_5^\u2228(\u0393))\u22600 iff O_C(\u0393)\u2245L. GAP-Z-CE-ID is discharged by the cited source; attempt's proved_conditional self-assessment is overly cautious.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0038-05",
+      "note": "Conf_6(C/B^{bal})\u2192U^{red} is a finite \u00e9tale S_6-torsor (FND-0064 corroborated); fiber product Z^{bal}=Conf_6\u00d7_{U^{red}}Z^{bal,unord}\u2192Z^{bal,unord} preserves the torsor structure. Statement is at stack level, correctly avoiding the FND-0075 coarse-space caveat.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0038-06",
+      "note": "\u03c7(L)=deg(L)+1-g=6+1-6=1 by Riemann-Roch, so full Abel-Jacobi fibre in Sym^6 is nonempty. Non-load-bearing: the theorem statement explicitly disclaims fibrewise nonemptiness of U^{red}\u2229|L| or Z^{bal} (GAP-Z-RED-NONEMPTY is acknowledged as an open gap, not asserted as proved).",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-03",
+  "finding_candidates": [],
+  "id": "REV-0046",
+  "independent": true,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "proof_dependency_checks": [],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0038-P1",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "GAP-Z-CE-ID: whether SRC-0004 Lemma 10.6 alone identifies H^0(\u03c9_C\u2297W^\u2228(\u0393)) as the CE evaluation obstruction space, potentially leaving a gap between the degree/Serre-duality package and the actual CE failure condition (iii). Defense: the packet explicitly instructs 'Derive the failure condition from the f_2=5 summand in SRC-0004 Lemma 10.6,' and the lemma's phrase 'the required vanishing' contextually refers to the CE evaluation. The identification of these groups as obstruction spaces is established in Casnati-Ekedahl theory and provided by SRC-0004's broader context, which the attempt correctly invokes. Combined with the direct-sum decomposition H^0(\u03c9_C\u2297W^\u2228(\u0393))=\u2295H^0(\u03c9_C\u2297W_f^\u2228(\u0393)) from the lemma, step (iii) follows from (ii) by a valid logical chain. The attack fails.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let g=n=6 and let B^{bal} be the moduli stack of smooth genus-6 curves equipped with a balanced tetragonal structure C\u2192P^1 with Tschirnhausen/scroll splitting F\u2245O_{P^1}(4)\u2295O_{P^1}(5). Write W_f:=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_{P^1}(-f))|_C for the Casnati\u2013Ekedahl summands (packet convention: W_5 is the f_2=5 summand of (O(2)\u2297\u03b3^*F^\u2228)|_C, not the O(5) summand of F), and set L:=W_5\u2297\u03c9_C^{-1}. Let Sym^6_{C/B^{bal}} be the relative effective degree-six divisor space, U^{red}\u2282Sym^6 its open locus of reduced support, and Conf_6(C/B^{bal}) the stack of ordered pairwise-distinct sections. Define the unordered evaluation-failure incidence Z^{bal,unord} as the locus of reduced effective \u0393 of degree 6 with O_C(\u0393)\u2245L, and the ordered model Z^{bal} as its pullback along Conf_6\u2192U^{red}. Then, on every geometric fibre of B^{bal}: (i) deg(W_5)=16 and deg(L)=6; (ii) for any effective \u0393 of degree 6, H^0(C,\u03c9_C\u2297W_4^\u2228(\u0393))=0 (obstruction degree \u22124), while deg(\u03c9_C\u2297W_5^\u2228(\u0393))=0 and H^0(C,\u03c9_C\u2297W_5^\u2228(\u0393))\u22600 if and only if O_C(\u0393)\u2245L; (iii) consequently CE evaluation fails on a reduced degree-six divisor \u0393 (resp. ordered 6-tuple of distinct points) if and only if O_C(\u0393)\u2245L (resp. the underlying unordered divisor lies in Z^{bal,unord}); (iv) Conf_6\u2192U^{red} is a finite \u00e9tale S_6-torsor, so Z^{bal}\u2192Z^{bal,unord} is likewise a finite \u00e9tale S_6-torsor over the reduced-support open. This constructs and identifies the balanced evaluation-failure locus at the level of geometric points and ordered/unordered reduced-support models; it does not assert scheme-theoretic Fitting equality with a CE degeneracy ideal, fibrewise nonemptiness of U^{red}\u2229|L|, closed pure-codimension embedding in M_{6,6}, h^0-stratification, components/stabilizers, or Tate type.",
+  "verdict": "confirmed"
+}

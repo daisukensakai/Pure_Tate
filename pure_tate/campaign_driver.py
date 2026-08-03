@@ -613,6 +613,46 @@ def _drive_campaign_unlocked(
                     },
                 ]
             )
+        # Ordinary cell mathematics (after reviews / paired due work).
+        planned_math: Set[str] = set()
+        used_preview: Dict[str, Set[str]] = {}
+        math_count = ordinary
+        allowed_provers = operational_engine_pool(
+            list(prover_engines), "mathematics", dry_run=True
+        )
+        while len(preview) < steps:
+            task = _math_task(
+                campaign_id,
+                exclude_task_ids=planned_math,
+                retry=False,
+            )
+            if task is None:
+                break
+            used = used_preview.setdefault(str(task["subproblem_id"]), set())
+            engine = select_prover_for_cell(
+                math_count,
+                used,
+                routing["prover_rotation"],
+                routing["escalation_order"],
+                allowed=allowed_provers,
+                chain_id="proof:%s:%s" % (campaign_id, task["id"]),
+                persist_chain=False,
+            )
+            if engine is None:
+                break
+            preview.append(
+                {
+                    "phase": "mathematics",
+                    "task_id": task["id"],
+                    "engine": engine,
+                    "condition": "always",
+                    "subproblem_id": task.get("subproblem_id"),
+                    "packet_sha256": task.get("packet_sha256"),
+                }
+            )
+            planned_math.add(task["id"])
+            used.add(engine)
+            math_count += 1
         preview = [
             {"step": index + 1, **{k: v for k, v in event.items() if k != "step"}}
             for index, event in enumerate(preview[:steps])
@@ -690,12 +730,17 @@ def _drive_campaign_unlocked(
             # audits; proof work cannot continue after verification.
             phases = ["novelty"]
         else:
+            # Ordinary mathematics is intentional work, not a residual else
+            # branch. Without this phase the drive can report no_eligible_task
+            # while ready proof cells remain (reviews/audits empty, forced
+            # slots not yet due).
             phases = [
                 "review",
                 "paired",
                 "experiment",
                 "blocking-finding-audit",
                 "finding-audit",
+                "mathematics",
             ]
 
         task = None
@@ -943,14 +988,19 @@ def _drive_campaign_unlocked(
             used = used_by_subproblem.setdefault(task["subproblem_id"], set())
             engine = task.get("selected_engine")
             if not engine:
+                allowed_provers = [
+                    item
+                    for item in operational_engine_pool(
+                        list(prover_engines), "mathematics", dry_run=dry_run
+                    )
+                    if item not in failed_engines
+                ]
                 engine = select_prover_for_cell(
                     campaign_attempt_count + planned_math_count,
                     used,
                     routing["prover_rotation"],
                     routing["escalation_order"],
-                    allowed=operational_engine_pool(
-                        list(prover_engines), "mathematics", dry_run=dry_run
-                    ),
+                    allowed=allowed_provers,
                     chain_id="proof:%s:%s" % (campaign_id, task["id"]),
                     persist_chain=not dry_run,
                 )
@@ -1168,23 +1218,30 @@ def _drive_campaign_unlocked(
                     event["trace_sha256"] = hashlib.sha256(
                         trace_path.read_bytes()
                     ).hexdigest()
-            # Schema/shape failures on reviews and research should not kill the
-            # whole batch. Allow one same-engine retry for pure validation
-            # inconsistency (e.g. confirmed + unresolved checks); only ban the
-            # engine after a second failure so another reviewer can take over
-            # or a restricted pool can still finish its step budget.
+            # Schema/shape failures should not kill the whole batch. Reviews and
+            # research allow one same-engine retry; mathematics bans the engine
+            # after the first failure so the next prover in rotation can run.
             if phase in {
                 "review",
                 "finding-audit",
                 "novelty",
                 "trace-mining",
+                "mathematics",
+                "forced-proof",
+                "standard-fallback",
             }:
                 if isinstance(engine, str) and engine:
                     failure_key = (phase, str(task["id"]), engine)
                     schema_validation_failures[failure_key] = (
                         schema_validation_failures.get(failure_key, 0) + 1
                     )
-                    if (
+                    if phase in {
+                        "mathematics",
+                        "forced-proof",
+                        "standard-fallback",
+                    }:
+                        failed_engines.add(engine)
+                    elif (
                         schema_validation_failures[failure_key]
                         > schema_validation_retry_limit
                     ):

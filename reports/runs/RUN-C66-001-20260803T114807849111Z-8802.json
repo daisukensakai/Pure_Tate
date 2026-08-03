@@ -1,0 +1,88 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-03T11:52:44.091603+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "qwen"
+    ],
+    "research": [
+      "claude",
+      "grok",
+      "qwen"
+    ],
+    "review": [
+      "grok",
+      "qwen",
+      "claude",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 138229,
+      "completed_at": "2026-08-03T11:52:42.900686+00:00",
+      "engine": "qwen",
+      "engine_pid": 8806,
+      "engine_process_group": 8806,
+      "error": "mathematics claims must be structured claim objects",
+      "last_activity_at": "2026-08-03T11:52:42.582689+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0039.json",
+      "phase": "mathematics",
+      "processes": [
+        {
+          "engine_pid": 8806,
+          "engine_process_group": 8806,
+          "started_at": "2026-08-03T11:48:08.305449+00:00",
+          "supervisor_pid": 8805,
+          "supervisor_process_group": 8805
+        }
+      ],
+      "started_at": "2026-08-03T11:48:08.236033+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 8805,
+      "task_id": "TASK-C66-M-001",
+      "trace_id": "TRACE-0022",
+      "trace_path": "research/paired-traces/TRACE-0022.json",
+      "trace_sha256": "462c03c027d9fc3547350292d4c41dd7386862bc0861b0ee638ec0ebdeaaedd6"
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 8802,
+  "parent_process_group": 8799,
+  "requested_steps": 4,
+  "run_id": "RUN-C66-001-20260803T114807849111Z-8802",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-03T11:48:07.849111+00:00",
+  "status": "stopped",
+  "stop_reason": "artifact_validation_failure"
+}

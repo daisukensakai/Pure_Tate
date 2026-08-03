@@ -1,0 +1,80 @@
+{
+  "attempt_id": "ATT-0039",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-Z-01",
+      "note": "SRC-0004 Lemma 10.6 degree formula 4f+n\u22122g\u221214 at (g,n,f)=(6,6,4) equals \u22124<0; negative-degree line bundles on smooth curves have H^0=0 fibrewise. Matches adjudicated FND-0062. Packet W_f convention uses \u03b3^*O(\u2212f); arithmetic agrees with deg W_f=4g+12\u22124f.",
+      "statement": "On B^{bal} for (g,n)=(6,6), deg(\u03c9_C \u2297 W_4^\u2228(\u0393)) = \u22124, so H^0 vanishes identically.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-02",
+      "note": "Degree formula gives 0 at f=5; deg-0 line bundle has a section iff trivial, equivalently O(\u0393)\u2245L. Set-theoretic CE failure identification is exactly adjudicated FND-0063 (which names these H^0 as CE evaluation-obstruction summands). FND-0061 is not a counterexample here because the theorem cites that identification rather than degree control alone; scheme-level comparison is explicitly left open.",
+      "statement": "On B^{bal}, deg(\u03c9_C \u2297 W_5^\u2228(\u0393))=0, so evaluation fails iff O_C(\u0393) \u2245 W_5 \u2297 \u03c9_C^{\u22121}.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-03",
+      "note": "Follows from CLM-Z-02 plus f=4 vanishing (CLM-Z-01): total obstruction is the f=5 summand. deg L=deg W_5\u2212(2g\u22122)=16\u221210=6. Scoped only set-theoretically, consistent with FND-0046.",
+      "statement": "Z^{bal} is set-theoretically the Abel\u2013Jacobi incidence {O_C(\u0393) \u2245 L} with deg L=6.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-04",
+      "note": "Matches adjudicated FND-0064 on the stack of pairwise-distinct ordered sections over the balanced cover family. Theorem preamble also equips B^{bal} with ordered marks (notation overload), but the claimed map is the standard ordered-to-unordered reduced-support torsor on the stack; FND-0075 notes Q-coefficient invariants=coinvariants and stack vs coarse. No integral or coarse claim is made.",
+      "statement": "Conf_6(C/B^{bal}) \u2192 reduced-support open is a finite \u00e9tale S_6-torsor.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-05",
+      "note": "RR: \u03c7(L)=6\u22126+1=1. Serre: h^1(L)=h^0(\u03c9\u2297L^{\u22121})=h^0(\u03c9^2\u2297W_5^\u2228)=h^0(M), deg M=20\u221216=4. Matches FND-0073. Theorem correctly does not assert constancy of h^0(L)=3.",
+      "statement": "\u03c7(L)=1 and h^0(L)=1+h^0(M) with deg M=4; constancy h^0(L)=3 not claimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "GAP-SCOPE",
+      "note": "Honest scoping; aligns with FND-0052/0067/0086 (closure), FND-0058 (h^0), FND-0046/0047/0061 (scheme), FND-0083 (nonemptiness). Not overclaims.",
+      "statement": "Closed pure-codim-4 in M_{6,6}, h^0 constancy, det/AJ scheme structure, and fibrewise reduced ordered nonemptiness remain open.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "SRC-0004",
+      "note": "Load-bearing source for deg(\u03c9\u2297W_f^\u2228(\u0393))=4f+n\u22122g\u221214 and the direct-sum splitting into f_i summands. Packet excerpt has a Wfi definition/sign transcription tension (O(fi) vs O(\u2212fi)); attempt and packet convention use \u03b3^*O(\u2212f) and the stated degree formula, which is internally consistent with deg W_f=4g+12\u22124f.",
+      "statement": "Lemma 10.6 supplies the obstruction-summand degree formula used for (a)\u2013(b).",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-03",
+  "finding_candidates": [],
+  "id": "REV-0047",
+  "independent": true,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "proof_dependency_checks": [],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0039-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "FND-0061 CE-obstruction identification versus mere degree/Serre control of H^0(\u03c9\u2297W_f^\u2228(\u0393)): without those groups being exactly the Casnati\u2013Ekedahl evaluation obstruction spaces, claim (b)\u2019s leap from deg-0 triviality to \u201cevaluation-failure locus Z^{bal} = AJ incidence\u201d would be only a line-bundle statement. Outcome: attack fails against the theorem as stated. Adjudicated FND-0063 already packages the CE obstruction-summand language and the fibrewise evaluation-fails-iff O(\u0393)\u2245L equivalence; the theorem claims only set-theoretic equality (FND-0046) and explicitly leaves determinantal/Fitting scheme comparison open. Secondary attack\u2014Conf_6(C/B^{bal}) when the preamble equips B^{bal} with ordered marks\u2014exposes notation overload (stack base vs already-marked stack) but does not refute the intended FND-0064 stack torsor over the reduced-support open; no coarse or integral descent is claimed.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B^{bal} be the moduli stack of smooth genus-6 curves C equipped with a degree-4 cover \u03c0: C \u2192 P^1 having balanced splitting F \u2245 O_{P^1}(4) \u2295 O_{P^1}(5) and six distinct ordered marked points p_1,...,p_6. Let \u0393 = p_1+...+p_6 and let W_5 = (O_{P(E^\u2228)}(2) \u2297 \u03b3^*O_{P^1}(-5))|_C be the f_2=5 Casnati\u2013Ekedahl line bundle. Then: (a) the f=4 CE evaluation-obstruction summand \u03c9_C \u2297 W_4^\u2228(\u0393) has degree \u22124 and hence H^0 vanishes identically on B^{bal}; (b) the f=5 CE evaluation-obstruction summand \u03c9_C \u2297 W_5^\u2228(\u0393) has degree 0, so the evaluation-failure locus Z^{bal} \u2282 B^{bal} is set-theoretically the Abel\u2013Jacobi incidence locus {(C,\u03c0,\u0393) : O_C(\u0393) \u2245 L := W_5 \u2297 \u03c9_C^{\u22121}}; (c) the forgetful map from the ordered configuration stack Conf_6(C/B^{bal}) to the reduced-support open of the relative effective degree-6 divisor space is a finite \u00e9tale S_6-torsor; (d) on each geometric fibre, \u03c7(L) = 1 and h^0(L) = 1 + h^0(M) where M = \u03c9_C^2 \u2297 W_5^\u2228 has degree 4. The identification of Z^{bal} as a closed pure-codimension-4 subvariety of M_{6,6}, the constancy of h^0(L) = 3 on the whole balanced locus, the scheme-structure comparison between the determinantal and Abel\u2013Jacobi loci, and the nonemptiness of the reduced-support ordered incidence on every geometric fibre remain open gaps.",
+  "verdict": "confirmed"
+}
