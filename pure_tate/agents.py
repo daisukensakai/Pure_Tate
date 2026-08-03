@@ -514,23 +514,37 @@ def _engine_argv(
         if last_message_path is None:
             raise ValueError("OpenAI engine requires a last-message path")
         # CLI_test: codex exec read-only still can invoke web_search items.
+        # Effort: gpt-5.6-sol uses Extra High via model_reasoning_effort=xhigh
+        # (see CLI_test/EFFORT_FINDINGS.md).
         command = [binary]
         if allow_web:
             command.append("--search")
         command.extend(
             [
-            "exec",
-            "--skip-git-repo-check",
-            "-m",
-            model,
-            "--sandbox",
-            "read-only",
-            "-c",
-            'approval_policy="never"',
-            "--json",
-            "-o",
-            str(last_message_path),
-            prompt,
+                "exec",
+                "--skip-git-repo-check",
+                "-m",
+                model,
+                "--sandbox",
+                "read-only",
+                "-c",
+                'approval_policy="never"',
+            ]
+        )
+        reasoning_effort = config.get("model_reasoning_effort")
+        if isinstance(reasoning_effort, str) and reasoning_effort.strip():
+            command.extend(
+                [
+                    "-c",
+                    'model_reasoning_effort="%s"' % reasoning_effort.strip(),
+                ]
+            )
+        command.extend(
+            [
+                "--json",
+                "-o",
+                str(last_message_path),
+                prompt,
             ]
         )
         return apply_workers_to_argv(command, "openai", workers)
@@ -560,6 +574,10 @@ def _engine_argv(
             "--model",
             model,
         ]
+        # Effort max for Claude attempts (CLI_test/EFFORT_FINDINGS.md).
+        effort = config.get("effort")
+        if isinstance(effort, str) and effort.strip():
+            command.extend(["--effort", effort.strip()])
         return apply_workers_to_argv(command, "claude", workers)
     if family == "grok":
         # Grok tool ids are snake_case. Never add spawn_subagent to --tools
@@ -1807,8 +1825,21 @@ def run_task(
 
     phase = str(task.get("phase", ""))
     _validate_output_path(phase, output)
-    if phase in {"mathematics", "review"} and output.exists():
-        raise ValueError("refusing to overwrite an existing proof artifact")
+    # Existing durable work is never rewritten. Reattempts must reserve a new
+    # artifact slot; recover validation failures from the official trace first.
+    if phase in {
+        "mathematics",
+        "review",
+        "finding-audit",
+        "novelty",
+        "trace-mining",
+        "research",
+    } and output.exists():
+        raise ValueError(
+            "refusing to overwrite existing artifact %s; reattempts require a "
+            "new reserved slot and recovery must be attempted before re-running"
+            % output
+        )
     _validate_task_packet(task)
     config = load_engines().get(engine_id)
     if config is None:

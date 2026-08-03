@@ -141,6 +141,9 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertNotIn("--search", command)
         self.assertIn('approval_policy="never"', command)
         self.assertIn("gpt-5.6-sol", command)
+        # Extra High reasoning for gpt-5.6-sol (CLI_test/EFFORT_FINDINGS.md).
+        self.assertIn('model_reasoning_effort="xhigh"', command)
+
 
     def test_codex_controller_settings_are_bounded(self):
         settings = _codex_controller_settings(
@@ -387,10 +390,12 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertEqual(len(calls), 1)
         self.assertIn("controller_decision_invalid", [event["event"] for event in events])
 
-    def test_claude_argv_pins_opus_5(self):
+    def test_claude_argv_pins_opus_5_and_max_effort(self):
         command = _engine_argv("claude", "prompt")
         self.assertIn("--model", command)
         self.assertEqual(command[command.index("--model") + 1], "claude-opus-5")
+        self.assertIn("--effort", command)
+        self.assertEqual(command[command.index("--effort") + 1], "max")
 
     def test_grok_argv_pins_model_and_can_disable_web(self):
         command = _engine_argv("grok", "prompt")
@@ -782,8 +787,8 @@ class AgentAdapterTests(unittest.TestCase):
             stderr = ""
 
         with tempfile.TemporaryDirectory() as directory:
-            output = Path(directory) / "RAUD-0001.json"
-            # Point output under the real audits dir constraint by mocking path check.
+            # Fresh slot: never target an on-disk artifact path.
+            output = Path(directory) / "RAUD-9901.json"
             with mock.patch(
                 "pure_tate.agents._validate_output_path"
             ), mock.patch(
@@ -794,17 +799,13 @@ class AgentAdapterTests(unittest.TestCase):
                 "pure_tate.agents.atomic_write_json"
             ):
                 with self.assertRaises(RuntimeError) as ctx:
-                    run_task(
-                        task,
-                        "claude",
-                        Path("research/audits/RAUD-0001.json"),
-                    )
+                    run_task(task, "claude", output)
         self.assertIn("session limit", str(ctx.exception))
 
     def test_run_task_accepts_grok_endturn_message_without_workspace_write(self):
         task = research_tasks()[0]
         artifact = {
-            "id": "RAUD-0002",
+            "id": "RAUD-9902",
             "target_claim_id": "RED-0001",
             "verdict": "agree",
             "inferred_pairs": [[3, 12]],
@@ -827,26 +828,21 @@ class AgentAdapterTests(unittest.TestCase):
             stdout = envelope
             stderr = ""
 
-        with mock.patch(
-            "pure_tate.agents._validate_output_path"
-        ), mock.patch(
-            "pure_tate.agents.shutil.which", return_value="/usr/bin/grok"
-        ), mock.patch(
-            "pure_tate.agents.run_captured_process", return_value=FakeProcess()
-        ) as run_mock, mock.patch(
-            "pure_tate.agents.atomic_write_json"
-        ) as write_mock:
-            result = run_task(
-                task,
-                "grok",
-                Path("research/audits/RAUD-0002.json"),
-            )
-        self.assertEqual(result["id"], "RAUD-0002")
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "RAUD-9902.json"
+            with mock.patch(
+                "pure_tate.agents._validate_output_path"
+            ), mock.patch(
+                "pure_tate.agents.shutil.which", return_value="/usr/bin/grok"
+            ), mock.patch(
+                "pure_tate.agents.run_captured_process", return_value=FakeProcess()
+            ) as run_mock, mock.patch(
+                "pure_tate.agents.atomic_write_json"
+            ) as write_mock:
+                result = run_task(task, "grok", output)
+        self.assertEqual(result["id"], "RAUD-9902")
         self.assertEqual(write_mock.call_count, 2)
-        self.assertEqual(
-            write_mock.call_args_list[-1].args[0],
-            Path("research/audits/RAUD-0002.json"),
-        )
+        self.assertEqual(write_mock.call_args_list[-1].args[0], output)
         command = run_mock.call_args.args[0]
         self.assertNotIn("write", command[command.index("--tools") + 1].split(","))
         self.assertIn(

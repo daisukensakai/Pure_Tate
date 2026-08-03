@@ -66,7 +66,11 @@ research audits (`RAUD-0001`, `RAUD-0002`). Stage 2 mathematics is unlocked.
 ## Agent execution
 
 Task manifests can be run through a configured headless engine. Each turn gets an
-isolated, read-only workspace containing only phase-approved inputs:
+isolated, read-only workspace containing only phase-approved inputs.
+High-tier engines run at elevated reasoning depth (validated in
+`CLI_test/EFFORT_FINDINGS.md`): Claude uses `--effort max` on `claude-opus-5`,
+and Codex uses `model_reasoning_effort=xhigh` (Extra High) on `gpt-5.6-sol`.
+
 
 ```bash
 python3 -m pure_tate agent-run \
@@ -239,9 +243,41 @@ select the same task or artifact while the first is active. Artifact IDs are res
 atomically before dispatch. Each engine and Grok helper runs behind a parent-death
 supervisor; if the drive or MCP owner disappears, the supervised process group is
 terminated. The next drive marks any ledger left by a missing parent as `abandoned`
-and releases its stale reservations. Run ledgers record parent, supervisor, engine PID,
-and process-group metadata for diagnosis. Qwen is excluded before dispatch when neither
-`DASHSCOPE_API_KEY` nor `QWEN_API_KEY` is present.
+and releases its active (non-spent) reservations. Run ledgers record parent, supervisor,
+engine PID, and process-group metadata for diagnosis. Qwen is excluded before dispatch
+when neither `DASHSCOPE_API_KEY` nor `QWEN_API_KEY` is present.
+
+### Artifact slots, recovery, and no rewrites (mandatory)
+
+These rules are harness policy, not suggestions:
+
+1. **Existing work is never rewritten.** Proof attempts, reviews, and other durable
+   artifacts are append-only. The runner refuses to overwrite an on-disk artifact path.
+2. **Reattempts always get a new slot.** Every live dispatch reserves a never-before-used
+   `ATT-####` / `REV-####` / research ID. Numbers already claimed by files, active or
+   *spent* reservations, run-ledger outputs, or recovery receipts are never reissued.
+   After a paid turn produces an official trace, its reserved ID is permanently **spent**
+   even if validation fails and no artifact file was written. Re-running the same task
+   therefore cannot target the previous ID.
+3. **Recovery before re-run.** If a paid turn fails validation or parsing but left an
+   official observable trace, the harness **must attempt recovery** of that stream
+   (identity-field coercion, re-parse, write into the reserved slot if still free)
+   before spending another engine turn on the same task. Operators may also recover
+   manually or with Grok:
+
+   ```bash
+   python3 -m pure_tate recover-trace --trace TRACE-0023
+   # optional exclusive path if the original id is already occupied:
+   python3 -m pure_tate recover-trace --trace TRACE-0023 --output proof/attempts/ATT-0041.json
+   ```
+
+   Live drives call recovery for pending validation-failure traces at start, and again
+   immediately after a mid-batch validation failure, so a fixable schema mismatch does
+   not burn another full paid attempt. Successful recovery is ledgered under
+   `proof/paired-recoveries.json` with `protect_from_overwrite: true`.
+
+Do not delete, rename-over, or hand-edit a recovered artifact to "make room" for a
+re-run. If another attempt is still needed, reserve the next free ID.
 
 A campaign dry run displays both members of every conditional pair and marks the
 standard turn as conditional. It spends nothing and does not claim that the

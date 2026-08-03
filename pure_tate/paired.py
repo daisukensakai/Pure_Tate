@@ -453,10 +453,15 @@ def pair_state(campaign: Dict[str, Any], engine: str) -> Dict[str, Any]:
 
 
 def _trace_record(trace_id: str) -> Dict[str, Any]:
-    path = TRACE_DIR / (trace_id + ".json")
+    path = TRACE_DIR / ("%s.json" % trace_id)
     if not path.is_file():
-        raise ValueError("paired trace is missing: %s" % trace_id)
-    value = json.loads(path.read_text(encoding="utf-8"))
+        raise ValueError("trace %s is missing" % trace_id)
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError("trace %s is invalid: %s" % (trace_id, exc)) from exc
+    if not isinstance(value, dict):
+        raise ValueError("trace %s is not a JSON object" % trace_id)
     value["_path"] = str(path)
     return value
 
@@ -470,16 +475,105 @@ def annotate_trace(trace_id: str, validation_error: str) -> None:
     atomic_write_json(path, value)
 
 
+def _recovered_trace_ids() -> set:
+    if not RECOVERY_LEDGER_PATH.is_file():
+        return set()
+    try:
+        ledger = json.loads(RECOVERY_LEDGER_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return set()
+    recoveries = ledger.get("recoveries") if isinstance(ledger, dict) else None
+    if not isinstance(recoveries, list):
+        return set()
+    ids = set()
+    for receipt in recoveries:
+        if isinstance(receipt, dict) and isinstance(receipt.get("trace_id"), str):
+            ids.add(receipt["trace_id"])
+    return ids
+
+
+def unrecovered_validation_traces(
+    campaign_id: Optional[str] = None,
+    task_id: Optional[str] = None,
+) -> List[Dict[str, Any]]:
+    """Official traces that failed validation and still lack a recovered artifact.
+
+    Recovery must be attempted for these before paying for a re-run of the same
+    task. Existing recovered artifacts are never rewritten.
+    """
+    recovered_traces = _recovered_trace_ids()
+    pending: List[Dict[str, Any]] = []
+    if not TRACE_DIR.is_dir():
+        return pending
+    for path in sorted(TRACE_DIR.glob("TRACE-*.json")):
+        try:
+            trace = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if not isinstance(trace, dict):
+            continue
+        if campaign_id and trace.get("campaign_id") != campaign_id:
+            continue
+        if task_id and str(trace.get("task_id")) != task_id:
+            continue
+        if trace.get("classification") not in {
+            "validation_failure",
+            "parse_failure",
+        }:
+            continue
+        if trace.get("turn_kind") not in {
+            "forced-proof",
+            "standard-fallback",
+            "mathematics",
+        }:
+            continue
+        trace_id = str(trace.get("id") or path.stem)
+        if trace_id in recovered_traces:
+            continue
+        parsed = trace.get("parsed_artifact")
+        artifact_id = None
+        if isinstance(parsed, dict) and isinstance(parsed.get("id"), str):
+            artifact_id = parsed["id"]
+        if artifact_id:
+            existing = ROOT / "proof" / "attempts" / (artifact_id + ".json")
+            if existing.is_file():
+                # On-disk work already owns the slot; do not re-run recovery
+                # against it and never overwrite.
+                continue
+        if not (
+            isinstance(trace.get("observable_stdout"), str)
+            and trace.get("observable_stdout").strip()
+        ) and not isinstance(parsed, dict):
+            continue
+        pending.append(
+            {
+                "trace_id": trace_id,
+                "trace_path": str(path.relative_to(ROOT)),
+                "campaign_id": trace.get("campaign_id"),
+                "task_id": trace.get("task_id"),
+                "engine": trace.get("engine"),
+                "turn_kind": trace.get("turn_kind"),
+                "classification": trace.get("classification"),
+                "artifact_id": artifact_id,
+                "validation_error": trace.get("validation_error"),
+            }
+        )
+    return pending
+
+
 def recover_attempt_from_trace(
     trace_id: str, output: Optional[Path] = None
 ) -> Dict[str, Any]:
-    """Recover a lost paired attempt solely from its official observable trace.
+    """Recover a lost mathematics attempt solely from its official observable trace.
 
-    This is intentionally append-only with respect to scheduling history: the
-    original rejected run and ledger event remain intact, and a recovery event
-    explains why a proof artifact now exists.
+    Supports campaign mathematics turns as well as paired forced-proof /
+    standard-fallback turns. This is intentionally append-only with respect to
+    scheduling history: the original rejected run and ledger event remain
+    intact, a recovery event explains why a proof artifact now exists, and an
+    existing on-disk artifact is never rewritten.
     """
     from .agents import (
+        _extract_claude_stream,
         _extract_grok_stream,
         _extract_json_object,
         _extract_qwen_stream,
@@ -495,8 +589,9 @@ def recover_attempt_from_trace(
         "or hidden chain-of-thought."
     ):
         raise ValueError("trace does not attest the official-output boundary")
-    if trace.get("turn_kind") not in {"forced-proof", "standard-fallback"}:
-        raise ValueError("trace is not a paired mathematics turn")
+    turn_kind = trace.get("turn_kind")
+    if turn_kind not in {"forced-proof", "standard-fallback", "mathematics"}:
+        raise ValueError("trace is not a recoverable mathematics turn")
     campaign_id = trace.get("campaign_id")
     engine = trace.get("engine")
     if not isinstance(campaign_id, str) or not isinstance(engine, str):
@@ -509,24 +604,37 @@ def recover_attempt_from_trace(
         task["id"]: task for task in campaign_mathematics_tasks(campaign_id)
     }
     base = base_tasks.get(str(trace.get("task_id")))
-    if base is None:
+    if base is None and turn_kind != "forced-proof":
         raise ValueError("trace task is not a current campaign task")
-    if trace["turn_kind"] == "forced-proof":
+    if turn_kind == "forced-proof":
         task = forced_task(campaign, packet, [])
-    else:
+    elif turn_kind == "standard-fallback":
+        if base is None:
+            raise ValueError("trace task is not a current campaign task")
         task = standard_fallback_task(base, campaign, [])
-    task["id"] = trace["task_id"]
-
-    stdout = trace.get("observable_stdout")
-    if not isinstance(stdout, str) or not stdout:
-        raise ValueError("trace has no observable stdout")
-    family = load_engines().get(engine, {}).get("family")
-    if family == "grok":
-        artifact = _extract_grok_stream(stdout)
-    elif family == "qwen":
-        artifact = _extract_qwen_stream(stdout)
     else:
-        artifact = _extract_json_object(stdout)
+        if base is None:
+            raise ValueError("trace task is not a current campaign task")
+        task = dict(base)
+    if isinstance(trace.get("task_id"), str):
+        task["id"] = trace["task_id"]
+
+    parsed = trace.get("parsed_artifact")
+    if isinstance(parsed, dict) and parsed:
+        artifact = dict(parsed)
+    else:
+        stdout = trace.get("observable_stdout")
+        if not isinstance(stdout, str) or not stdout:
+            raise ValueError("trace has no observable stdout")
+        family = load_engines().get(engine, {}).get("family")
+        if family == "claude":
+            artifact = _extract_claude_stream(stdout)
+        elif family == "grok":
+            artifact = _extract_grok_stream(stdout)
+        elif family == "qwen":
+            artifact = _extract_qwen_stream(stdout)
+        else:
+            artifact = _extract_json_object(stdout)
     if output is None:
         artifact_id = artifact.get("id")
         if not isinstance(artifact_id, str) or not artifact_id.startswith("ATT-"):
@@ -534,12 +642,24 @@ def recover_attempt_from_trace(
         output = ROOT / "proof" / "attempts" / (artifact_id + ".json")
     if output.exists():
         raise ValueError("refusing to overwrite existing artifact %s" % output)
+    # Align the artifact id with the chosen exclusive output path.
+    artifact["id"] = output.stem
     _validate_artifact("mathematics", task, artifact, output, engine)
 
     trace_path = Path(str(trace["_path"]))
     trace_sha256 = hashlib.sha256(trace_path.read_bytes()).hexdigest()
     artifact["observable_trace_id"] = trace_id
     artifact["observable_trace_sha256"] = trace_sha256
+    artifact["recovery"] = {
+        "classification": "parser_recovery",
+        "recovered_from_trace": trace_id,
+        "recovered_at": _timestamp(),
+        "reason": (
+            "Recovered from official observable trace after validation/parser "
+            "failure; existing work was never rewritten."
+        ),
+        "protect_from_overwrite": True,
+    }
     for field in (
         "paired_turn_kind",
         "paired_problem_key",
@@ -566,35 +686,64 @@ def recover_attempt_from_trace(
         "recovered_at": _timestamp(),
         "campaign_id": campaign_id,
         "engine": engine,
-        "turn_kind": trace["turn_kind"],
+        "turn_kind": turn_kind,
+        "task_id": task.get("id"),
         "trace_id": trace_id,
+        "trace_path": str(trace_path.relative_to(ROOT)),
         "trace_sha256": trace_sha256,
         "artifact_id": artifact["id"],
         "artifact_path": str(output.relative_to(ROOT)),
         "artifact_sha256": artifact_sha256,
+        "classification": "parser_recovery",
+        "protect_from_overwrite": True,
         "reason": "PARSER-RECOVERY-0001",
         "source_boundary": trace["source_boundary"],
     }
     ledger["recoveries"].append(receipt)
     atomic_write_json(RECOVERY_LEDGER_PATH, ledger)
-    record_event(
-        {
-            "event": "paired_artifact_recovered",
-            "campaign_id": campaign_id,
-            "problem_key": task["paired_problem_key"],
-            "engine": engine,
-            "turn_kind": trace["turn_kind"],
-            "packet_sha256": packet["packet_sha256"],
-            "classification": "parser_recovery",
-            "trace_id": trace_id,
-            "trace_path": str(trace_path.relative_to(ROOT)),
-            "trace_sha256": trace_sha256,
-            "attempt_id": artifact["id"],
-            "artifact_sha256": artifact_sha256,
-            "recovery_id": recovery_id,
-        }
-    )
+    event = {
+        "event": "paired_artifact_recovered",
+        "campaign_id": campaign_id,
+        "engine": engine,
+        "turn_kind": turn_kind,
+        "packet_sha256": packet["packet_sha256"],
+        "classification": "parser_recovery",
+        "trace_id": trace_id,
+        "trace_path": str(trace_path.relative_to(ROOT)),
+        "trace_sha256": trace_sha256,
+        "attempt_id": artifact["id"],
+        "artifact_sha256": artifact_sha256,
+        "recovery_id": recovery_id,
+        "task_id": task.get("id"),
+    }
+    if task.get("paired_problem_key"):
+        event["problem_key"] = task["paired_problem_key"]
+    record_event(event)
     return receipt
+
+
+def attempt_pending_recoveries(
+    campaign_id: str, task_id: Optional[str] = None
+) -> List[Dict[str, Any]]:
+    """Try to recover every pending validation-failure trace before re-running.
+
+    Failures are reported per-trace and do not abort the batch: a human or
+    another engine may still recover manually, but the harness must attempt
+    recovery before spending another paid turn on the same task.
+    """
+    results: List[Dict[str, Any]] = []
+    for item in unrecovered_validation_traces(campaign_id, task_id=task_id):
+        entry = dict(item)
+        entry["attempted_at"] = _timestamp()
+        try:
+            receipt = recover_attempt_from_trace(str(item["trace_id"]))
+            entry["status"] = "recovered"
+            entry["receipt"] = receipt
+        except (OSError, RuntimeError, ValueError) as exc:
+            entry["status"] = "recovery_failed"
+            entry["error"] = str(exc)
+        results.append(entry)
+    return results
 
 
 def trace_mining_task(

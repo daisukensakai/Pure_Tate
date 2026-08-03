@@ -553,3 +553,79 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             trace = json.loads(traces[0].read_text())
             self.assertIn("boundary-map identity", trace["observable_stdout"])
             self.assertEqual(trace["parsed_artifact"]["id"], "ATT-9999")
+
+    def test_mathematics_trace_recovery_refuses_overwrite_and_uses_new_slot(self):
+        from pure_tate.paired import (
+            recover_attempt_from_trace,
+            unrecovered_validation_traces,
+        )
+        from pure_tate.tasking import campaign_mathematics_tasks
+
+        base = campaign_mathematics_tasks("C66-001")[0]
+        artifact = self.full_artifact()
+        artifact["id"] = "ATT-8801"
+        artifact["engine"] = "claude"
+        artifact["task_id"] = base["id"]
+        artifact["subproblem_id"] = base["subproblem_id"]
+        artifact["lane"] = base.get("lane", artifact["lane"])
+        # Deliberately omit compact target keys; recovery validation coerces them.
+        artifact["target"] = {
+            key: value
+            for key, value in base["target"].items()
+            if key not in {"compact_cohomology_degree", "compact_tate_type"}
+        }
+        with tempfile.TemporaryDirectory(dir=ROOT) as directory:
+            root = Path(directory)
+            traces = root / "traces"
+            attempts = root / "attempts"
+            recoveries = root / "recoveries.json"
+            traces.mkdir()
+            attempts.mkdir()
+            trace_id = "TRACE-8801"
+            (traces / (trace_id + ".json")).write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "id": trace_id,
+                        "campaign_id": "C66-001",
+                        "task_id": base["id"],
+                        "engine": "claude",
+                        "turn_kind": "mathematics",
+                        "packet_sha256": base["packet_sha256"],
+                        "classification": "validation_failure",
+                        "validation_error": "target mismatch",
+                        "parsed_artifact": artifact,
+                        "observable_stdout": json.dumps(artifact),
+                        "observable_stderr": "",
+                        "source_boundary": (
+                            "Official subprocess output only; no provider-private "
+                            "session files or hidden chain-of-thought."
+                        ),
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with mock.patch("pure_tate.paired.TRACE_DIR", traces), mock.patch(
+                "pure_tate.paired.RECOVERY_LEDGER_PATH", recoveries
+            ), mock.patch(
+                "pure_tate.paired.ROOT", root
+            ), mock.patch(
+                "pure_tate.paired.record_event", return_value={}
+            ):
+                pending = unrecovered_validation_traces("C66-001")
+                self.assertEqual([item["trace_id"] for item in pending], [trace_id])
+                output = attempts / "ATT-8801.json"
+                receipt = recover_attempt_from_trace(trace_id, output)
+                self.assertEqual(receipt["artifact_id"], "ATT-8801")
+                self.assertTrue(output.is_file())
+                recovered = json.loads(output.read_text(encoding="utf-8"))
+                self.assertEqual(
+                    recovered["target"]["compact_cohomology_degree"],
+                    base["target"]["compact_cohomology_degree"],
+                )
+                self.assertTrue(recovered["recovery"]["protect_from_overwrite"])
+                with self.assertRaises(ValueError) as raised:
+                    recover_attempt_from_trace(trace_id, output)
+                self.assertIn("refusing to overwrite", str(raised.exception))
+                # After recovery the trace is no longer pending.
+                self.assertEqual(unrecovered_validation_traces("C66-001"), [])

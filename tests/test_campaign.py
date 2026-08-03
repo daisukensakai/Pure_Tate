@@ -64,6 +64,18 @@ class FocusedCampaignTests(unittest.TestCase):
             "pure_tate.campaign_driver.finding_audit_tasks",
             return_value=[finding_task],
         ), mock.patch(
+            "pure_tate.campaign_driver.attempt_pending_recoveries",
+            return_value=[],
+        ), mock.patch(
+            "pure_tate.paired.pair_state",
+            return_value={"state": "forced_untried"},
+        ), mock.patch(
+            "pure_tate.campaign_driver._next_due_forced_task",
+            return_value=None,
+        ), mock.patch(
+            "pure_tate.campaign_driver._math_task",
+            return_value=None,
+        ), mock.patch(
             "pure_tate.campaign_driver.run_task",
             side_effect=RuntimeError("provider failed"),
         ), mock.patch(
@@ -109,6 +121,18 @@ class FocusedCampaignTests(unittest.TestCase):
         ), mock.patch(
             "pure_tate.campaign_driver.finding_audit_tasks",
             return_value=[finding_task],
+        ), mock.patch(
+            "pure_tate.campaign_driver.attempt_pending_recoveries",
+            return_value=[],
+        ), mock.patch(
+            "pure_tate.paired.pair_state",
+            return_value={"state": "forced_untried"},
+        ), mock.patch(
+            "pure_tate.campaign_driver._next_due_forced_task",
+            return_value=None,
+        ), mock.patch(
+            "pure_tate.campaign_driver._math_task",
+            return_value=None,
         ), mock.patch(
             "pure_tate.campaign_driver.run_task", return_value=artifact
         ), mock.patch(
@@ -684,6 +708,12 @@ class FocusedCampaignTests(unittest.TestCase):
         ), mock.patch(
             "pure_tate.campaign_driver.live_run_ledgers",
             return_value=[],
+        ), mock.patch(
+            "pure_tate.campaign_driver.attempt_pending_recoveries",
+            return_value=[],
+        ), mock.patch(
+            "pure_tate.paired.pair_state",
+            return_value={"state": "standard_under_review"},
         ):
             result = drive_campaign(
                 "C66-001",

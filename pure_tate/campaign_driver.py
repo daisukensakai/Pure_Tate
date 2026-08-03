@@ -46,6 +46,7 @@ from .run_lifecycle import (
     recover_stale_run_ledgers,
     release_artifact_reservation,
     reserve_prefixed_artifact,
+    spend_artifact_reservation,
 )
 from .store import ROOT, atomic_write_json, load_repository
 from .tasking import (
@@ -58,14 +59,17 @@ from .paired import (
     ArtifactValidationError,
     PairedInfrastructureError,
     SubstantiveAttemptError,
+    attempt_pending_recoveries,
     dry_run_preview,
     forced_task,
     pair_state,
     problem_key,
     publish_working_context,
     record_event,
+    recover_attempt_from_trace,
     standard_fallback_task,
     trace_mining_task,
+    unrecovered_validation_traces,
     working_context_records,
 )
 
@@ -699,7 +703,12 @@ def _drive_campaign_unlocked(
     stop_reason = "step_limit"
     ledger: Optional[Dict[str, Any]] = None
     ledger_path: Optional[Path] = None
+    pre_run_recoveries: List[Dict[str, Any]] = []
     if not dry_run:
+        # Mandatory: attempt recovery of any paid validation-failure streams
+        # before spending another turn on the same task. Reattempts, if still
+        # needed, always reserve a new artifact slot and never rewrite.
+        pre_run_recoveries = attempt_pending_recoveries(campaign_id)
         ledger, ledger_path = _new_run_ledger(
             campaign_id,
             steps,
@@ -707,6 +716,9 @@ def _drive_campaign_unlocked(
             prover_engines,
             review_engines,
         )
+        if pre_run_recoveries:
+            ledger["pre_run_recoveries"] = pre_run_recoveries
+            _write_run_ledger(ledger_path, ledger)
 
     for index in range(steps):
         # Finding audits (and other ledger writes) can change the campaign
@@ -1218,9 +1230,38 @@ def _drive_campaign_unlocked(
                     event["trace_sha256"] = hashlib.sha256(
                         trace_path.read_bytes()
                     ).hexdigest()
+                # Immediate recovery attempt: do not waste a re-run while a
+                # paid stream is still recoverable. Never rewrite existing work.
+                if phase in {
+                    "mathematics",
+                    "forced-proof",
+                    "standard-fallback",
+                } and not output.exists():
+                    try:
+                        receipt = recover_attempt_from_trace(
+                            exc.trace_id, output
+                        )
+                        event["state"] = "completed"
+                        event["recovery"] = receipt
+                        event["classification"] = "parser_recovery"
+                        event.pop("error", None)
+                        if output.is_file():
+                            event["artifact_sha256"] = hashlib.sha256(
+                                output.read_bytes()
+                            ).hexdigest()
+                        event["completed_at"] = _timestamp()
+                        continue
+                    except (OSError, RuntimeError, ValueError) as recovery_exc:
+                        event["recovery_attempt"] = {
+                            "status": "recovery_failed",
+                            "error": str(recovery_exc),
+                            "trace_id": exc.trace_id,
+                        }
             # Schema/shape failures should not kill the whole batch. Reviews and
             # research allow one same-engine retry; mathematics bans the engine
             # after the first failure so the next prover in rotation can run.
+            # Reattempts always reserve a *new* artifact slot (spent IDs are
+            # never reused).
             if phase in {
                 "review",
                 "finding-audit",
@@ -1334,7 +1375,37 @@ def _drive_campaign_unlocked(
                 )
             break
         finally:
-            release_artifact_reservation(reservation_path)
+            # Slot discipline: durable work owns the ID via the on-disk file;
+            # any paid turn that produced a recoverable trace permanently spends
+            # the reserved slot so a reattempt cannot rewrite or reuse it.
+            if reservation_path is not None:
+                if output.is_file() and event.get("state") == "completed":
+                    release_artifact_reservation(reservation_path)
+                elif event.get("trace_id") or event.get("state") in {
+                    "failed",
+                    "abandoned",
+                    "substantive_rejected",
+                }:
+                    spend_artifact_reservation(
+                        reservation_path,
+                        reason=str(
+                            event.get("state")
+                            or event.get("error")
+                            or "dispatch_consumed"
+                        ),
+                        trace_id=(
+                            str(event["trace_id"])
+                            if event.get("trace_id")
+                            else None
+                        ),
+                        task_id=str(task.get("id") or "") or None,
+                    )
+                else:
+                    spend_artifact_reservation(
+                        reservation_path,
+                        reason="dispatch_consumed",
+                        task_id=str(task.get("id") or "") or None,
+                    )
             if desktop_notifications or ntfy_notifications:
                 event["notification_delivery"] = notify_campaign_step(
                     campaign_id,
@@ -1387,6 +1458,7 @@ def _drive_campaign_unlocked(
         "executed_steps": len(events),
         "stop_reason": stop_reason,
         "events": events,
+        "pre_run_recoveries": pre_run_recoveries,
         "research_capability_states": capability_states,
         "engine_health_states": engine_health_states,
         "capability_blockers": capability_blockers,
@@ -1444,4 +1516,10 @@ def drive_campaign(
             ntfy_notifications=ntfy_notifications,
         )
         result["recovered_stale_runs"] = recovered
+        result.setdefault("pre_run_recoveries", [])
+        # Surface any still-unrecovered paid streams so operators know not to
+        # re-run blindly; recovery is mandatory before another paid attempt.
+        result["unrecovered_validation_traces"] = unrecovered_validation_traces(
+            campaign_id
+        )
         return result

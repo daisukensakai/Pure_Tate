@@ -3,8 +3,11 @@
 Stage 2 is unlocked: `RED-0001` is `cross_checked`.
 
 Create independent attempts under `proof/attempts/` using `ATTEMPT_TEMPLATE.json`.
-Do not overwrite competing attempts. Reviews belong under `proof/reviews/` and use
-`REVIEW_TEMPLATE.json`.
+**Never overwrite competing or recovered attempts.** Reattempts must use a new
+`ATT-####` slot. If a paid turn failed validation but left a trace under
+`research/paired-traces/`, recover that stream first (`python3 -m pure_tate
+recover-trace --trace TRACE-####`) before paying for another run of the same task.
+Reviews belong under `proof/reviews/` and use `REVIEW_TEMPLATE.json`.
 
 A `verified` attempt requires:
 

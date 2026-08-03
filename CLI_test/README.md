@@ -24,6 +24,20 @@ Results land under `results/grok_workers/`. **Do not** put `spawn_subagent` in
 Grok `--tools` (allowlist collapse). Prefer MCP workers; see findings for the
 Grok `bypassPermissions` requirement.
 
+## Effort levels (Claude Max / Codex Sol Extra High)
+
+`run_effort_probes.py` validates the high-tier effort flags before harness
+integration:
+
+- Claude: `--effort max` on `claude-opus-5`
+- Codex: `-c model_reasoning_effort="xhigh"` on `gpt-5.6-sol` (UI: Extra High)
+
+```bash
+python3 CLI_test/run_effort_probes.py
+```
+
+Results land under `results/effort/`. See `EFFORT_FINDINGS.md`.
+
 ## Web access experiment
 
 `run_web_access_probes.py` checks whether Grok, Claude, Codex, and Gemini can
