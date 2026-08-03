@@ -1,0 +1,111 @@
+{
+  "campaign_id": "C66-001",
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "qwen": "pass"
+    },
+    "review": {
+      "grok": "not_required",
+      "qwen": "pass"
+    }
+  },
+  "events": [
+    {
+      "activity_bytes": 100722,
+      "artifact_sha256": "fa75b83380b0ee30f09dac0a0f7a613d750f300357b1829dd864c4c450167718",
+      "completed_at": "2026-08-03T09:38:06.571157+00:00",
+      "engine": "qwen",
+      "engine_pid": 95623,
+      "engine_process_group": 95623,
+      "last_activity_at": "2026-08-03T09:38:06.300203+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0066.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 95623,
+          "engine_process_group": 95623,
+          "started_at": "2026-08-03T09:35:41.577246+00:00",
+          "supervisor_pid": 95621,
+          "supervisor_process_group": 95621
+        }
+      ],
+      "started_at": "2026-08-03T09:35:41.536717+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 95621,
+      "task_id": "TASK-F-FND-0089"
+    },
+    {
+      "activity_bytes": 156694,
+      "completed_at": "2026-08-03T09:42:07.467221+00:00",
+      "engine": "qwen",
+      "engine_pid": 97100,
+      "engine_process_group": 97100,
+      "error": "finding audit lacks fields: campaign_id, contradiction_resolution, engine, independent, schema_version, source_records, task_id, verdict",
+      "last_activity_at": "2026-08-03T09:42:07.283367+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0067.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 97100,
+          "engine_process_group": 97100,
+          "started_at": "2026-08-03T09:38:07.948541+00:00",
+          "supervisor_pid": 97099,
+          "supervisor_process_group": 97099
+        }
+      ],
+      "started_at": "2026-08-03T09:38:07.905807+00:00",
+      "state": "failed",
+      "step": 2,
+      "supervisor_pid": 97099,
+      "task_id": "TASK-F-FND-0090",
+      "trace_id": "TRACE-0021",
+      "trace_path": "research/paired-traces/TRACE-0021.json",
+      "trace_sha256": "da5e4df7c99df57a404a60aac371a680aa1da95985c17496d5f58e86699d319b"
+    }
+  ],
+  "executed_steps": 2,
+  "recovered_stale_runs": [],
+  "requested_steps": 2,
+  "research_capability_states": {
+    "finding-audit": {
+      "qwen": "pass"
+    },
+    "novelty": {
+      "qwen": "pass"
+    }
+  },
+  "run_id": "RUN-C66-001-20260803T093541398223Z-95618",
+  "run_ledger": "reports/runs/RUN-C66-001-20260803T093541398223Z-95618.json",
+  "stop_reason": "step_limit_with_failures"
+}
