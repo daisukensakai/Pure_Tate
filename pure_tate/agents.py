@@ -173,6 +173,78 @@ def _grok_observable_stream(text: str) -> str:
     return "\n".join(retained) + ("\n" if retained else "")
 
 
+def _qwen_stream_events(text: str) -> List[Dict[str, Any]]:
+    """Parse Qwen worker JSONL progress events from subprocess stdout."""
+    events: List[Dict[str, Any]] = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped.startswith("{"):
+            continue
+        try:
+            event = json.loads(stripped)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(event, dict) and isinstance(event.get("type"), str):
+            events.append(event)
+    return events
+
+
+def _extract_qwen_stream(text: str) -> Dict[str, Any]:
+    """Reassemble Qwen worker text events into one JSON artifact.
+
+    Falls back to plain-stdout JSON extraction for legacy non-stream workers.
+    """
+    events = _qwen_stream_events(text)
+    stream_types = {event.get("type") for event in events}
+    if not stream_types.intersection(
+        {"text", "thought", "stage", "end", "error", "tool_call", "tool_result", "heartbeat"}
+    ):
+        return _extract_json_object(text)
+    errors = [
+        str(event.get("message") or event.get("error") or "Qwen stream failed")
+        for event in events
+        if event.get("type") == "error"
+    ]
+    chunks = [
+        str(event.get("data"))
+        for event in events
+        if event.get("type") == "text" and isinstance(event.get("data"), str)
+    ]
+    if chunks:
+        try:
+            return _extract_json_object("".join(chunks))
+        except ValueError as exc:
+            if errors:
+                raise ValueError(errors[-1]) from exc
+            end = next(
+                (
+                    event
+                    for event in reversed(events)
+                    if event.get("type") == "end"
+                ),
+                {},
+            )
+            raise ValueError(
+                "Qwen stream ended with %s but no complete JSON artifact"
+                % (end.get("stopReason") or "unknown status")
+            ) from exc
+    if errors:
+        raise ValueError(errors[-1])
+    # Prefer a structured error over a silent empty stream.
+    raise ValueError("Qwen stream contained no text artifact")
+
+
+def _qwen_observable_stream(text: str) -> str:
+    """Quarantine Qwen thoughts and heartbeats from proof traces / miners."""
+    retained = [
+        json.dumps(event, sort_keys=True)
+        for event in _qwen_stream_events(text)
+        if event.get("type")
+        in {"text", "stage", "tool_call", "tool_result", "end", "error"}
+    ]
+    return "\n".join(retained) + ("\n" if retained else "")
+
+
 def load_engines_config() -> Dict[str, Any]:
     value = load_json(ENGINE_CONFIG)
     if not isinstance(value, dict):
@@ -1876,6 +1948,8 @@ def run_task(
         )
         if family == "grok":
             observable_stdout = _grok_observable_stream(raw)
+        elif family == "qwen":
+            observable_stdout = _qwen_observable_stream(raw)
         if process.returncode != 0:
             detail = _failure_detail(process.returncode, process.stderr, raw)
             if paired_turn in {"forced-proof", "standard-fallback"}:
@@ -1896,6 +1970,8 @@ def run_task(
                 artifact = _extract_claude_stream(raw)
             elif family == "grok":
                 artifact = _extract_grok_stream(raw)
+            elif family == "qwen":
+                artifact = _extract_qwen_stream(raw)
             else:
                 artifact = _extract_json_object(raw)
         except ValueError as exc:

@@ -1,0 +1,301 @@
+{
+  "ok": false,
+  "suite": "hang",
+  "probes": [
+    "dns_tcp",
+    "chat_no_thinking",
+    "chat_thinking",
+    "chat_thinking_high_budget",
+    "responses_simple",
+    "responses_web"
+  ],
+  "wall_seconds": 180.0,
+  "base_url": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+  "model": "qwen3.7-max",
+  "credential_environment": "DASHSCOPE_API_KEY",
+  "total_elapsed_seconds": 34.299,
+  "started_at": "20260803T084531131408Z",
+  "results": [
+    {
+      "name": "dns_tcp",
+      "ok": true,
+      "host": "token-plan.ap-southeast-1.maas.aliyuncs.com",
+      "addrs": [
+        "43.98.173.108",
+        "47.84.193.37",
+        "64:ff9b::2b62:ad6c",
+        "64:ff9b::2f54:c125"
+      ],
+      "dns_seconds": 0.139,
+      "tcp_seconds": 0.042
+    },
+    {
+      "name": "chat_no_thinking",
+      "ok": true,
+      "http_status": 200,
+      "meta": {
+        "url": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1/chat/completions",
+        "body_bytes": 161,
+        "timeout": 180.0,
+        "stream": false,
+        "started_at": "2026-08-03T08:45:31.314760+00:00",
+        "ttfb_seconds": 1.21,
+        "http_status": 200,
+        "response_headers": {
+          "content-type": "application/json; charset=utf-8",
+          "x-request-id": "dadf3502-c2f6-4c68-b651-db19e8d7515c",
+          "transfer-encoding": "chunked"
+        },
+        "raw_bytes": 357,
+        "elapsed_seconds": 1.211
+      },
+      "summary": {
+        "kind": "chat",
+        "model": "qwen3.7-max",
+        "id": "chatcmpl-dadf3502-c2f6-4c68-b651-db19e8d7515c",
+        "content_preview": "HANG_PROBE_OK",
+        "content_len": 13,
+        "reasoning_len": 0,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 20,
+          "total_tokens": 25,
+          "completion_tokens": 5,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "tool_calls": false
+      }
+    },
+    {
+      "name": "chat_thinking",
+      "ok": true,
+      "http_status": 200,
+      "meta": {
+        "url": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1/chat/completions",
+        "body_bytes": 246,
+        "timeout": 180.0,
+        "stream": false,
+        "started_at": "2026-08-03T08:45:32.527961+00:00",
+        "ttfb_seconds": 8.207,
+        "http_status": 200,
+        "response_headers": {
+          "content-type": "application/json; charset=utf-8",
+          "x-request-id": "8fa202f1-a4a6-48ff-8dac-c659d4141672",
+          "transfer-encoding": "chunked"
+        },
+        "raw_bytes": 1719,
+        "elapsed_seconds": 8.209
+      },
+      "summary": {
+        "kind": "chat",
+        "model": "qwen3.7-max",
+        "id": "chatcmpl-8fa202f1-a4a6-48ff-8dac-c659d4141672",
+        "content_preview": "{\"probe\":\"thinking_ok\"}",
+        "content_len": 23,
+        "reasoning_len": 1213,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 27,
+          "total_tokens": 355,
+          "completion_tokens": 328,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 317
+          }
+        },
+        "tool_calls": false
+      }
+    },
+    {
+      "name": "chat_thinking_high_budget",
+      "ok": true,
+      "http_status": 200,
+      "meta": {
+        "url": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1/chat/completions",
+        "body_bytes": 413,
+        "timeout": 180.0,
+        "stream": false,
+        "started_at": "2026-08-03T08:45:40.739503+00:00",
+        "ttfb_seconds": 7.133,
+        "http_status": 200,
+        "response_headers": {
+          "content-type": "application/json; charset=utf-8",
+          "x-request-id": "d380ecfa-7c33-437d-a782-7fa46ddc533c",
+          "transfer-encoding": "chunked"
+        },
+        "raw_bytes": 1548,
+        "elapsed_seconds": 7.135
+      },
+      "summary": {
+        "kind": "chat",
+        "model": "qwen3.7-max",
+        "id": "chatcmpl-d380ecfa-7c33-437d-a782-7fa46ddc533c",
+        "content_preview": "{\"schema_version\":1,\"probe\":\"high_budget_ok\",\"status\":\"pass\"}",
+        "content_len": 61,
+        "reasoning_len": 991,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 61,
+          "total_tokens": 347,
+          "completion_tokens": 286,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 265
+          }
+        },
+        "tool_calls": false
+      }
+    },
+    {
+      "name": "responses_simple",
+      "ok": false,
+      "http_status": 200,
+      "meta": {
+        "url": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1/responses",
+        "body_bytes": 131,
+        "timeout": 180.0,
+        "stream": false,
+        "started_at": "2026-08-03T08:45:47.876373+00:00",
+        "ttfb_seconds": 1.478,
+        "http_status": 200,
+        "response_headers": {
+          "content-type": "application/json; charset=utf-8",
+          "x-request-id": "f1a8a0ce-d86e-4cf1-8f76-7199c1e9778d",
+          "transfer-encoding": "chunked"
+        },
+        "raw_bytes": 1339,
+        "elapsed_seconds": 1.479
+      },
+      "summary": {
+        "kind": "responses",
+        "model": "qwen3.7-max",
+        "id": "resp_f1a8a0ce-d86e-4cf1-8f76-7199c1e9778d",
+        "status": "completed",
+        "output_types": [
+          "message"
+        ],
+        "output_text_preview": "",
+        "output_text_len": 0,
+        "usage": {
+          "input_tokens": 54,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 4,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 58,
+          "x_details": [
+            {
+              "input_tokens": 54,
+              "output_tokens": 4,
+              "total_tokens": 58,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "cache_type": "ephemeral",
+                "cache_creation_input_tokens": 0,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0
+                }
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "error": null
+      }
+    },
+    {
+      "name": "responses_web",
+      "ok": true,
+      "http_status": 200,
+      "meta": {
+        "url": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1/responses",
+        "body_bytes": 474,
+        "timeout": 180.0,
+        "stream": false,
+        "started_at": "2026-08-03T08:45:49.357166+00:00",
+        "ttfb_seconds": 16.07,
+        "http_status": 200,
+        "response_headers": {
+          "content-type": "application/json; charset=utf-8",
+          "x-request-id": "90ba3bcb-b806-4f72-9d6b-3c8472d05a53",
+          "transfer-encoding": "chunked"
+        },
+        "raw_bytes": 4480,
+        "elapsed_seconds": 16.072
+      },
+      "summary": {
+        "kind": "responses",
+        "model": "qwen3.7-max",
+        "id": "resp_90ba3bcb-b806-4f72-9d6b-3c8472d05a53",
+        "status": "completed",
+        "output_types": [
+          "message",
+          "reasoning",
+          "web_search_call"
+        ],
+        "output_text_preview": "",
+        "output_text_len": 0,
+        "usage": {
+          "input_tokens": 2043,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 496,
+          "output_tokens_details": {
+            "reasoning_tokens": 439
+          },
+          "total_tokens": 2539,
+          "x_tools": {
+            "web_search": {
+              "count": 1
+            }
+          },
+          "x_details": [
+            {
+              "input_tokens": 2043,
+              "output_tokens": 496,
+              "total_tokens": 2539,
+              "output_tokens_details": {
+                "reasoning_tokens": 439
+              },
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "cache_type": "ephemeral",
+                "cache_creation_input_tokens": 514,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 514
+                }
+              },
+              "plugins": {
+                "web_search": {
+                  "count": 1
+                }
+              },
+              "x_billing_type": "response_api"
+            }
+          ]
+        },
+        "error": null
+      }
+    }
+  ],
+  "diagnosis": {
+    "headline": "Partial failure; see bullets.",
+    "causes": [],
+    "bullets": [
+      "Basic Chat Completions works (1.2s).",
+      "High-budget thinking completed in 7.1s (silent until done).",
+      "Responses+web completed in 16.1s."
+    ]
+  },
+  "out_dir": "CLI_test/results/qwen_hang/20260803T084531131408Z"
+}

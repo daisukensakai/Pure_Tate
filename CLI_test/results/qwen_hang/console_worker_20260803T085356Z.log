@@ -1,0 +1,23 @@
+2026-08-03T08:53:56.529033+00:00 start suite=worker probes=['dns_tcp', 'worker_no_web', 'worker_web'] wall=180s base=https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1 model=qwen3.7-max key=DASHSCOPE_API_KEY
+2026-08-03T08:53:56.529144+00:00 --- probe dns_tcp ---
+2026-08-03T08:53:56.818782+00:00 [dns_tcp] resolved token-plan.ap-southeast-1.maas.aliyuncs.com -> ['43.98.173.108', '47.84.193.37', '64:ff9b::2b62:ad6c', '64:ff9b::2f54:c125'] in 0.290s
+2026-08-03T08:53:56.851318+00:00 [dns_tcp] tcp connect 43.98.173.108:443 ok in 0.032s
+2026-08-03T08:53:56.852381+00:00 [dns_tcp] RESULT ok=True http=None elapsed=None
+2026-08-03T08:53:56.852653+00:00 --- probe worker_no_web ---
+2026-08-03T08:53:56.853366+00:00 [worker_no_web] spawn argv_len=12 cwd=/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test wall=180s
+2026-08-03T08:54:03.503998+00:00 [worker_no_web] activity stdout +61B t=6.7s
+2026-08-03T08:54:03.515559+00:00 [worker_no_web] END rc=0 timed_out=False t=6.7s first_activity=6.7s
+2026-08-03T08:54:03.516216+00:00 [worker_no_web] RESULT ok=True http=None elapsed=6.662
+2026-08-03T08:54:03.516324+00:00 --- probe worker_web ---
+2026-08-03T08:54:03.516602+00:00 [worker_web] spawn argv_len=13 cwd=/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test wall=180s
+2026-08-03T08:54:13.524131+00:00 [worker_web] HEARTBEAT alive=True t=10.0s silent=10.0s out=0 err=0
+2026-08-03T08:54:15.653601+00:00 [worker_web] activity stdout +58B t=12.1s
+2026-08-03T08:54:15.665431+00:00 [worker_web] END rc=0 timed_out=False t=12.1s first_activity=12.1s
+2026-08-03T08:54:15.666165+00:00 [worker_web] RESULT ok=True http=None elapsed=12.149
+2026-08-03T08:54:15.667177+00:00 DONE overall_ok=True
+2026-08-03T08:54:15.667269+00:00 diagnosis: Live probes passed. Campaign hangs remain a structural risk: silent blocking urllib + inactivity_timeout 3600s < QWEN_RESPONSES_TIMEOUT 10800s.
+2026-08-03T08:54:15.667348+00:00   - worker_no_web finished in 6.662s; first stdout/stderr only after 6.65s of silence.
+2026-08-03T08:54:15.667421+00:00   - worker_web finished in 12.149s; first stdout/stderr only after 12.137s of silence.
+2026-08-03T08:54:15.667489+00:00   - STRUCTURAL: qwen_worker blocks on urllib.request.urlopen with QWEN_RESPONSES_TIMEOUT default 10800s (web stage 3600s) and writes nothing until the whole task ends. engines.json sets inactivity_timeout_seconds=3600. Because client wait (≤10800) > inactivity (3600), a slow/stuck provider call is killed as 'agent watchdog: inactivity timeout … no stderr' (see RUN-C66-001-20260803T062926) rather than a clean API error. Separate historical mode: provider HTTP 504 ResponseTimeout at ~300s.
+2026-08-03T08:54:15.667570+00:00 wrote /Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test/results/qwen_hang/20260803T085356528775Z/summary.json
+{"ok": true, "out_dir": "CLI_test/results/qwen_hang/20260803T085356528775Z", "diagnosis": "Live probes passed. Campaign hangs remain a structural risk: silent blocking urllib + inactivity_timeout 3600s < QWEN_RESPONSES_TIMEOUT 10800s.", "probe_ok": {"dns_tcp": true, "worker_no_web": true, "worker_web": true}}

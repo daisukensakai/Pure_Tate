@@ -1,0 +1,84 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001 (all Q-coefficient). Compatible with and complementary to corroborated FND-0064 (the forgetful map Conf_6(C/B^{bal})\u2192 relative degree-six effective-divisor space is a finite \u00e9tale S_6-torsor over the reduced-support open on the stack of pairwise-distinct sections) and with FND-0051/FND-0060 (stack vs coarse and Aut-invariants discipline, but those target stable-graph boundary strata and Hurwitz coarse dimension, not this S_6 configuration model). Independent primary checks. (1) Stack torsor: S_6 acts freely on ordered pairwise-distinct sections of a smooth curve family, so Conf_6\u2192U_red is a principal S_6-bundle (finite \u00e9tale of degree 720) as a map of algebraic stacks/configuration stacks\u2014this is the content of FND-0064 and standard relative configuration geometry. (2) Coarse failure: at geometric points where Aut(C) (or residual automorphisms of the moduli object) permutes the marked support, residual stabilizers make the induced map of coarse spaces not an S_6-torsor (not a free finite \u00e9tale principal bundle in the scheme/coarse category); descent that quotes only the torsor model therefore requires the stack. (3) Q-invariants vs coinvariants: for finite G with |G| invertible in the coefficient ring R (here G=S_6, |G|=720, R=Q), the averaging/norm maps give canonical isomorphisms M^G\u2245M_G for R[G]-modules, so H^*(ordered;Q)^{S_6}\u2245H^*(ordered;Q)_{S_6} and rational descent along the stack torsor is harmless. (4) Integral and pure-coarse: over Z, invariants and coinvariants need not agree and transfer introduces torsion; Edidin (arXiv:1006.2364) constructs integral stack/equivariant cohomology and proves only a rational isomorphism between quotient DM-stack cohomology and coarse-space cohomology\u2014so the same descent is not free integrally and the geometric S_6-torsor model itself is unavailable on coarse moduli. (5) Campaign scope: RED-0001 / C66 targets use Q, so the obstruction does not block a correctly stated stack-level Q-coefficient C66-TATE-* argument, but any integral-coefficient or coarse-space rewrite built on this ordered model needs independent justification\u2014as the finding states. Distinct from FND-0064 (positive torsor existence only), FND-0051 (Aut(\u0393) Gysin bookkeeping), and FND-0060 (coarse vs stack dimension of balanced tetragonal base): do not merge. Merge target: none. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent primary-source verification of the stack torsor, coarse residual-automorphism failure, and Q vs integral/coarse descent.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0075",
+  "id": "FAUD-0059",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": {
+      "campaign_target": "Q",
+      "coarse_space_model": "not_automatic",
+      "integral": "not_automatic"
+    },
+    "impacts": [
+      "C66-GEO-Z",
+      "C66-TATE-SUPPORT",
+      "C66-TATE-ASSEMBLY"
+    ],
+    "model": "finite_etale_S6_torsor_on_stack_not_on_coarse",
+    "object": "relative ordered Conf_6(C/B^{bal}) versus reduced-support open in the relative degree-six linear system; descent of cohomology/weights from ordered to unordered model"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "1006.2364",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1006.2364"
+    },
+    {
+      "arxiv_id": "1006.2364",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stack-vs-coarse-rational-cohomology",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "html_preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/1006.2364v2"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "campaign-primary-stack-Q-coefficients",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "5e10504685f3f0d4def91ea3400139096facd358fdada5b02629eb28fd6f8254",
+      "doi": null,
+      "query_family": "packet-corroborated-torsor",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "claims-Q-coefficient-target",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "claims_corpus",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
+  "task_id": "TASK-F-FND-0075",
+  "verdict": "promote"
+}

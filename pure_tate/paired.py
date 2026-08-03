@@ -482,6 +482,7 @@ def recover_attempt_from_trace(
     from .agents import (
         _extract_grok_stream,
         _extract_json_object,
+        _extract_qwen_stream,
         _validate_artifact,
         load_engines,
     )
@@ -520,11 +521,12 @@ def recover_attempt_from_trace(
     if not isinstance(stdout, str) or not stdout:
         raise ValueError("trace has no observable stdout")
     family = load_engines().get(engine, {}).get("family")
-    artifact = (
-        _extract_grok_stream(stdout)
-        if family == "grok"
-        else _extract_json_object(stdout)
-    )
+    if family == "grok":
+        artifact = _extract_grok_stream(stdout)
+    elif family == "qwen":
+        artifact = _extract_qwen_stream(stdout)
+    else:
+        artifact = _extract_json_object(stdout)
     if output is None:
         artifact_id = artifact.get("id")
         if not isinstance(artifact_id, str) or not artifact_id.startswith("ATT-"):

@@ -1,0 +1,31 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. Independent primary verification: (1) Riemann\u2013Hurwitz for a degree-4 cover f: C\u2192P^1 with g(C)=6 gives 2\u00b76\u22122 = 4(2\u00b70\u22122) + b, so b=18 simple branch points. (2) The coarse Hurwitz space of degree-4 covers with 18 branch points modulo Aut(P^1)=PGL_2 has dimension b\u22123=15, since the branch divisor lives in Sym^b(P^1) (dimension b) and PGL_2 acts generically freely for b\u22654. (3) The packet's SRC-0004 Lemma 10.6 excerpt confirms the balanced tetragonal splitting F=O(4)\u2295O(5) and the degree formula deg(W_f|_C)=4g+12\u22124f, consistent with the balanced case. (4) Promoting the coarse dimension 15 to a stack dimension requires accounting for automorphisms of the cover (stabilizers of the PGL_2 action and intrinsic curve automorphisms); for generic balanced tetragonal genus-6 curves the cover automorphism group is trivial, but this must be proved rather than assumed. (5) Promoting to codimension in M_{6,6} (dim=21) requires specifying how the 6 marked points interact with the tetragonal structure: if the marked points are constrained by the evaluation-failure condition O_C(\u0393)\u2245W_5\u2297\u03c9_C^{\u22121} (a degree-6 line bundle), the dimension of the resulting locus in M_{6,6} is not simply 15+6=21 but depends on the fibre dimension of the relative linear system and its h^0 stratification, as noted in FND-0058 and the packet's canonical geometric bottleneck. The finding correctly identifies that ATT-0022 omits this stabilizer/automorphism analysis. Distinct from FND-0058 (which addresses constancy of h^0 for the P^2-bundle identification) and FND-0052 (which addresses the open vs closed nature of the reduced-support locus): do not merge. Promote from candidate to corroborated on independent verification of the Riemann\u2013Hurwitz arithmetic, the coarse Hurwitz dimension, and the legitimate requirement for stack/automorphism bookkeeping before codimension claims.",
+  "engine": "qwen",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0060",
+  "id": "FAUD-0045",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    }
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": "10.4171/JEMS.1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-07-31T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    }
+  ],
+  "task_id": "TASK-F-FND-0060",
+  "verdict": "promote"
+}

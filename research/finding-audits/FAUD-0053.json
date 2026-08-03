@@ -1,0 +1,59 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with the packet bottleneck C66-GEO-Z / C66-GEO-COMP (components, dimensions, stabilizers) and with corroborated siblings FND-0052 (balanced reduced-support relative linear system is open, not a closed pure-codimension-4 subvariety), FND-0058 (pure dimension 17 and codimension 4 via a relative P^2 model require constant h^0(\u03c9_C(\u2212D))=3 on the whole balanced locus), FND-0060 (coarse Hurwitz dimension b\u22123=15 needs stack/stabilizer bookkeeping before codimension in the stack M_{6,6}), and FND-0063 (on balanced F=O(4)\u2295O(5), evaluation fails iff O_C(\u0393)\u2245W_5\u2297\u03c9_C^{\u22121}). Independent primary checks. (1) Degree/Serre input from SRC-0004 Lemma 10.6: deg(W_f|_C)=4g+12\u22124f, so for f=5,g=6 one has deg(W_5)=16 and L:=W_5\u2297\u03c9^{\u22121} has degree 6; \u03c7(L)=1. On a balanced tetragonal curve with complete g^1_4=D (h^0(D)=2), Serre duality gives h^0(\u03c9(\u2212D))=\u03c7(\u03c9(\u2212D))+h^0(D)=1+2=3, so the general fibre of the relative linear system is P^2 (dimension 2). (2) Coarse balanced/tetragonal base dimension: Riemann\u2013Hurwitz branch count b=2g+2d\u22122=18 for d=4,g=6 yields dim H_{4,6}=b\u22123=2g+2d\u22125=15 (matching FND-0060); SRC-0004 Lemma 10.10 identifies the f_1\u22654 open in genus 6 as the complement of trigonal and plane-quintic loci, so the balanced open is dense in the tetragonal stratum that fills an open of M_6. Adding a general P^2 fibre gives a smooth dominant component of dimension 15+2=17 inside dim M_{6,6}=21, hence expected codimension 4 if pure and closed. (3) Standard dimension theory: existence of one smooth dominant component of dimension 17 does not force equidimensionality of Z, does not bound dimensions of components over special loci (h^0 jumps; plane-quintic and lower-gonality strata of SRC-0004 Lemmas 10.9\u201310.10; non-reduced support), and does not prove purity of codimension. Component existence and purity are distinct; global codim-Z claims require an explicit upper bound on every component after h^0/splitting-type stratification. Distinct from FND-0058 (constancy of h^0 on the balanced locus for a global P^2-bundle model), FND-0052 (open-versus-closed embedding for Gysin), and FND-0060 (stack versus coarse dimension): do not merge. Merge target: none. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent verification of the degree calculation, Hurwitz/base dimension arithmetic, Petri-general fibre dimension 2, and the component-existence-versus-purity logical gap.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0069",
+  "id": "FAUD-0053",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "ambient_dimension": 21,
+    "attempt_id": "ATT-0026",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "claimed_codimension_if_pure": 4,
+    "dominant_component_dimension": 17,
+    "mathematical_claim": "A Petri-general (or general balanced) fibre calculation establishing a smooth dominant component of dimension 17 does not by itself prove that Z is pure of dimension 17 or of pure codimension 4 in M_{6,6}; global codimension claims require excluding larger components over special curve loci and distinguishing existence of a component from equidimensional purity.",
+    "object": "Casnati\u2013Ekedahl evaluation-failure locus Z subset M_{6,6} on the balanced tetragonal stratum F=O(4)\u2295O(5)",
+    "subproblem_id": "C66-GEO-Z"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "e112b70723e60389c432ea5fd74fa09fbc6844baf41002a31ce814aab8b226a7",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T04:30:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "a31ce814aab8b226a7e112b70723e60389c432ea5fd74fa09fbc6844baf41002",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "primary-lemma-degree-serre",
+      "retrieved_at": "2026-08-03T04:30:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "bc6844baf41002a31ce814aab8b226a7e112b70723e60389c432ea5fd74fa09f",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "corpus-claims-cross-check",
+      "retrieved_at": "2026-08-03T04:30:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2307.08830"
+    }
+  ],
+  "task_id": "TASK-F-FND-0069",
+  "verdict": "promote"
+}

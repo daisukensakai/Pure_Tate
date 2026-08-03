@@ -221,6 +221,13 @@ synthesis. The web-evidence response window is one hour and the main Qwen respon
 window defaults to three hours (`QWEN_RESPONSES_TIMEOUT` may lower it). A web-stage
 failure falls forward to the final stage rather than discarding the whole task.
 
+Qwen provider calls stream by default (Server-Sent Events). The worker emits
+JSONL progress events on stdout (`stage`, `text`, `thought`, `tool_call`,
+`tool_result`, `heartbeat`, `end`) so the campaign inactivity watchdog sees
+mid-request activity and partial tokens remain in observable traces if a step is
+killed. Thought events are quarantined from proof traces the same way Grok
+thoughts are. Set `QWEN_STREAM=0` only as an emergency non-streaming fallback.
+
 Paid routing excludes a Qwen engine whose receipt is missing or failed; dry-run
 keeps it in the proposed rotation while displaying the failed state. Agent subprocesses
 run in their own process groups, emit activity to a durable campaign run ledger under

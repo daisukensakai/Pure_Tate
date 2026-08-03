@@ -12,6 +12,7 @@ from .agents import (
     _engine_argv,
     _extract_grok_stream,
     _extract_json_object,
+    _extract_qwen_stream,
     _subprocess_env,
     load_engines,
 )
@@ -292,11 +293,13 @@ def audit_engine_health(
                         "engine exited %d: %s"
                         % (process.returncode, process.stderr.strip()[:500])
                     )
-                value = (
-                    _extract_grok_stream(raw)
-                    if config.get("family") == "grok"
-                    else _extract_json_object(raw)
-                )
+                family = config.get("family")
+                if family == "grok":
+                    value = _extract_grok_stream(raw)
+                elif family == "qwen":
+                    value = _extract_qwen_stream(raw)
+                else:
+                    value = _extract_json_object(raw)
                 _validate_probe(check_level, value, packet_hash)
                 check["status"] = "pass"
                 check["stdout_sha256"] = hashlib.sha256(

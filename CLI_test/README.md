@@ -57,6 +57,20 @@ Run:
 python3 CLI_test/run_grok_streaming_tests.py
 ```
 
+## Qwen hang diagnosis
+
+`run_qwen_hang_probe.py` reproduces campaign Qwen request shapes (Chat Completions
+with thinking, Responses + web tools, and the real `pure_tate/qwen_worker.py`
+subprocess) while printing heartbeats during silent `urlopen` waits. Hard wall
+clocks prevent multi-hour hangs. See `QWEN_HANG_FINDINGS.md` and
+`results/qwen_hang/`.
+
+```bash
+python3 CLI_test/run_qwen_diagnostics.py
+python3 CLI_test/run_qwen_hang_probe.py --suite hang --wall 180
+python3 CLI_test/run_qwen_hang_probe.py --suite worker --wall 180
+```
+
 ## Gemini 503 experiment
 
 `run_gemini_503_probe.py` compares the configured `gemini-3.5-flash` route

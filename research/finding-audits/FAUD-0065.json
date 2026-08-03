@@ -1,0 +1,46 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction (contradicts_claim_ids is empty; compatible with CONJ-0001, THM-0001 through THM-0007, OBS-0001, RED-0001). However, the finding contains a mathematical imprecision: the isomorphism Gr^W_m H^m_c(X) isomorphic to ker(H^m(Y) -> H^m(D)) uses D = boundary space, whereas standard MHS theory (Deligne weight spectral sequence for compactly supported cohomology; CLP Eq. 6.1 plus Poincare duality) yields Gr^W_m H^m_c(X) isomorphic to ker(H^m(Y) -> H^m(D-tilde)) where D-tilde is the normalization (disjoint union of smooth components). For a normal crossings divisor D with multiple components, the Mayer-Vietoris spectral sequence can make ker(H^m(Y) -> H^m(D)) strictly contained in ker(H^m(Y) -> H^m(D-tilde)), so the stated isomorphism is not a direct consequence of localization plus Deligne weight bounds alone. The pure polarizable HS assertion is correct (kernel of MHS morphism from pure HS is pure). Compatible with FND-0031 (depth-one Gysin at the pure corner), FND-0033 (semisimplicity), and FND-0048 (unresolved identification of the pure piece). The specific (6,6,16) case requires additional control of the boundary MV spectral sequence at H^16 to establish whether the D-versus-D-tilde gap vanishes. The finding should remain candidate pending either (a) correction to use D-tilde, or (b) proof that ker(H^16(Mbar_6,6) -> H^16(D)) = ker(H^16(Mbar_6,6) -> H^16(D-tilde)) for the moduli boundary.",
+  "engine": "qwen",
+  "evidence_class": "adversarial_review",
+  "finding_id": "FND-0088",
+  "id": "FAUD-0065",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "cases": "smooth open X in smooth proper DM stack Y with closed NCD complement D; specific claim at (g,n,m)=(6,6,16)",
+    "coefficients": "Q",
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "includes": "(6,6,16)",
+    "precise_scope_note": "The general statement requires D replaced by its normalization D-tilde (disjoint union of smooth boundary components) for the isomorphism to follow from standard MHS machinery. For (6,6,16), d=21, the correct statement from CLP Eq. 6.1 plus Poincare duality gives Gr^W_16 H^16_c(M_6,6) isomorphic to ker(H^16(Mbar_6,6) -> H^16(D-tilde)) where D-tilde is the normalization of the boundary, not ker(H^16(Mbar_6,6) -> H^16(D)) as stated."
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": "10.1017/fmp.2024.24",
+      "evidence_note": "SRC-0002 Eq. 6.1 gives the right-exact boundary sequence H^{k-2}(D-tilde)(-1) -> H^k(Mbar) -> W_k H^k(M) -> 0, which at k=26 yields Gr^W_26 H^26(M_6,6) as cokernel of the Gysin map from the normalized boundary. Via Poincare duality on M (dim 21), this dualizes to Gr^W_16 H^16_c(M_6,6) = ker(restriction: H^16(Mbar_6,6) -> H^16(D-tilde)), using the normalization D-tilde, not the boundary space D itself.",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2307.08830"
+    },
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "evidence_note": "SRC-0001 (Payne survey) confirms degree 16 as open and records the pure Hodge structure conventions for smooth proper DM stacks. The top-weight piece of compactly supported cohomology Gr^W_m H^m_c is computed by the weight spectral sequence whose E_1 page involves the normalization of the NCD, not the boundary space itself.",
+      "query_family": "weight-spectral-sequence",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2605.20453"
+    }
+  ],
+  "task_id": "TASK-F-FND-0088",
+  "verdict": "retain_candidate"
+}

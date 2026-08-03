@@ -1,3 +1,4 @@
+import io
 import json
 import os
 import unittest
@@ -6,8 +7,44 @@ from unittest.mock import patch
 from pure_tate import qwen_worker
 
 
-class _Response:
+def _sse_body(events):
+    """Build an OpenAI-compatible SSE body from dict events or raw strings."""
+    lines = []
+    for event in events:
+        if event == "[DONE]":
+            lines.append("data: [DONE]\n")
+        elif isinstance(event, str):
+            lines.append("data: %s\n" % event)
+        else:
+            lines.append("data: %s\n" % json.dumps(event))
+        lines.append("\n")
+    return "".join(lines).encode("utf-8")
+
+
+class _StreamResponse:
     status = 200
+
+    def __init__(self, body: bytes):
+        self._buf = io.BytesIO(body)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *_args):
+        return False
+
+    def readline(self):
+        return self._buf.readline()
+
+    def read(self):
+        return self._buf.read()
+
+
+class _JsonResponse:
+    status = 200
+
+    def __init__(self, payload):
+        self._raw = json.dumps(payload).encode("utf-8")
 
     def __enter__(self):
         return self
@@ -16,7 +53,7 @@ class _Response:
         return False
 
     def read(self):
-        return b'{"id":"resp-1","output_text":"docket"}'
+        return self._raw
 
 
 class QwenWorkerTests(unittest.TestCase):
@@ -29,11 +66,194 @@ class QwenWorkerTests(unittest.TestCase):
         with patch.dict(os.environ, {"QWEN_RESPONSES_TIMEOUT": "99999"}):
             self.assertEqual(qwen_worker._responses_timeout(), 10_800)
 
+    def test_stream_enabled_defaults_on(self):
+        with patch.dict(os.environ, {}, clear=False):
+            os.environ.pop("QWEN_STREAM", None)
+            self.assertTrue(qwen_worker._stream_enabled())
+
+    def test_stream_can_be_disabled(self):
+        with patch.dict(os.environ, {"QWEN_STREAM": "0"}):
+            self.assertFalse(qwen_worker._stream_enabled())
+
+    def test_chat_stream_reassembles_content_and_tool_calls(self):
+        body = _sse_body(
+            [
+                {
+                    "id": "chatcmpl-1",
+                    "choices": [
+                        {
+                            "delta": {
+                                "role": "assistant",
+                                "reasoning_content": "plan ",
+                            }
+                        }
+                    ],
+                },
+                {
+                    "choices": [
+                        {"delta": {"reasoning_content": "tools"}}
+                    ]
+                },
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "id": "call-1",
+                                        "type": "function",
+                                        "function": {
+                                            "name": "read_file",
+                                            "arguments": "",
+                                        },
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "function": {
+                                            "arguments": '{"path":"a.txt"}'
+                                        },
+                                    }
+                                ]
+                            },
+                            "finish_reason": "tool_calls",
+                        }
+                    ]
+                },
+                "[DONE]",
+            ]
+        )
+        events = []
+        with patch.object(qwen_worker, "_emit", side_effect=events.append):
+            payload = qwen_worker._consume_chat_sse(
+                _StreamResponse(body), stage="final_round_1"
+            )
+        message = payload["choices"][0]["message"]
+        self.assertEqual(message.get("reasoning_content"), "plan tools")
+        self.assertEqual(message.get("content"), "")
+        self.assertEqual(len(message["tool_calls"]), 1)
+        self.assertEqual(message["tool_calls"][0]["id"], "call-1")
+        self.assertEqual(message["tool_calls"][0]["function"]["name"], "read_file")
+        self.assertEqual(
+            message["tool_calls"][0]["function"]["arguments"],
+            '{"path":"a.txt"}',
+        )
+        types = [event["type"] for event in events]
+        self.assertIn("thought", types)
+        self.assertIn("tool_call", types)
+        self.assertIn("end", types)
+
+    def test_chat_stream_emits_text_deltas(self):
+        body = _sse_body(
+            [
+                {
+                    "id": "chatcmpl-2",
+                    "choices": [{"delta": {"content": '{"ok":'}}],
+                },
+                {
+                    "choices": [
+                        {"delta": {"content": "true}"}, "finish_reason": "stop"}
+                    ]
+                },
+                {"usage": {"total_tokens": 9}},
+                "[DONE]",
+            ]
+        )
+        events = []
+        with patch.object(qwen_worker, "_emit", side_effect=events.append):
+            payload = qwen_worker._consume_chat_sse(
+                _StreamResponse(body), stage="final_round_1"
+            )
+        self.assertEqual(payload["choices"][0]["message"]["content"], '{"ok":true}')
+        text = "".join(
+            event["data"] for event in events if event.get("type") == "text"
+        )
+        self.assertEqual(text, '{"ok":true}')
+
+    def test_responses_stream_reassembles_output_text(self):
+        body = _sse_body(
+            [
+                {
+                    "type": "response.created",
+                    "response": {"id": "resp-9", "status": "in_progress"},
+                },
+                {
+                    "type": "response.output_text.delta",
+                    "delta": "short ",
+                },
+                {
+                    "type": "response.output_text.delta",
+                    "delta": "docket",
+                },
+                {
+                    "type": "response.completed",
+                    "response": {
+                        "id": "resp-9",
+                        "status": "completed",
+                        "output": [
+                            {
+                                "type": "message",
+                                "role": "assistant",
+                                "content": [
+                                    {
+                                        "type": "output_text",
+                                        "text": "short docket",
+                                    }
+                                ],
+                            }
+                        ],
+                        "usage": {"total_tokens": 12},
+                    },
+                },
+            ]
+        )
+        events = []
+        with patch.object(qwen_worker, "_emit", side_effect=events.append):
+            payload = qwen_worker._consume_responses_sse(
+                _StreamResponse(body), stage="web_evidence_round_1"
+            )
+        self.assertEqual(payload["id"], "resp-9")
+        self.assertEqual(qwen_worker._responses_text(payload), "short docket")
+        text = "".join(
+            event["data"] for event in events if event.get("type") == "text"
+        )
+        self.assertEqual(text, "short docket")
+
     def test_web_evidence_is_bounded_and_uses_required_reasoning(self):
-        with patch(
+        body = _sse_body(
+            [
+                {
+                    "type": "response.completed",
+                    "response": {
+                        "id": "resp-1",
+                        "status": "completed",
+                        "output_text": "docket",
+                        "output": [
+                            {
+                                "type": "message",
+                                "content": [
+                                    {"type": "output_text", "text": "docket"}
+                                ],
+                            }
+                        ],
+                    },
+                }
+            ]
+        )
+        with patch.dict(os.environ, {"QWEN_STREAM": "1"}), patch(
             "pure_tate.qwen_worker.urllib.request.urlopen",
-            return_value=_Response(),
-        ) as open_url:
+            return_value=_StreamResponse(body),
+        ) as open_url, patch.object(qwen_worker, "_emit"):
             result = qwen_worker._run_web_evidence(
                 "find sources",
                 {},
@@ -51,6 +271,7 @@ class QwenWorkerTests(unittest.TestCase):
             qwen_worker.WEB_EVIDENCE_THINKING_BUDGET,
         )
         self.assertTrue(body["store"])
+        self.assertTrue(body["stream"])
         self.assertEqual(body["tool_choice"], "auto")
         self.assertEqual(
             open_url.call_args.args[0].headers["X-dashscope-session-cache"],
@@ -60,6 +281,23 @@ class QwenWorkerTests(unittest.TestCase):
             open_url.call_args.kwargs["timeout"],
             qwen_worker.WEB_EVIDENCE_TIMEOUT_SECONDS,
         )
+
+    def test_web_evidence_nonstream_fallback(self):
+        with patch.dict(os.environ, {"QWEN_STREAM": "0"}), patch(
+            "pure_tate.qwen_worker.urllib.request.urlopen",
+            return_value=_JsonResponse({"id": "resp-1", "output_text": "docket"}),
+        ) as open_url, patch.object(qwen_worker, "_emit"):
+            result = qwen_worker._run_web_evidence(
+                "find sources",
+                {},
+                api_key="test-key",
+                model="qwen3.7-max",
+                max_tokens=64_000,
+                thinking_budget=16_384,
+            )
+        self.assertEqual(result, "docket")
+        body = json.loads(open_url.call_args.args[0].data)
+        self.assertNotIn("stream", body)
 
     def test_web_evidence_reserves_last_round_for_tool_free_synthesis(self):
         tool_call = {
@@ -77,7 +315,7 @@ class QwenWorkerTests(unittest.TestCase):
         with patch(
             "pure_tate.qwen_worker._responses_request",
             side_effect=[tool_call, tool_call, final],
-        ) as request:
+        ) as request, patch.object(qwen_worker, "_emit"):
             result = qwen_worker._run_web_evidence(
                 "find sources",
                 {},
@@ -116,7 +354,7 @@ class QwenWorkerTests(unittest.TestCase):
         with patch(
             "pure_tate.qwen_worker._request",
             side_effect=[tool_message, tool_message, final],
-        ) as request:
+        ) as request, patch.object(qwen_worker, "_emit"):
             result = qwen_worker._run_without_web(
                 "produce final artifact",
                 {},
@@ -143,7 +381,7 @@ class QwenWorkerTests(unittest.TestCase):
             "pure_tate.qwen_worker._run_web_evidence", return_value="short sources"
         ), patch(
             "pure_tate.qwen_worker._run_without_web", return_value='{"ok": true}'
-        ) as final:
+        ) as final, patch.object(qwen_worker, "_emit"):
             result = qwen_worker.run(
                 "produce final artifact",
                 [],
@@ -166,7 +404,7 @@ class QwenWorkerTests(unittest.TestCase):
             side_effect=RuntimeError("timed out"),
         ), patch(
             "pure_tate.qwen_worker._run_without_web", return_value='{"ok": true}'
-        ) as final:
+        ) as final, patch.object(qwen_worker, "_emit"):
             result = qwen_worker.run(
                 "produce final artifact",
                 [],

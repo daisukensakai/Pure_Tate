@@ -1,0 +1,72 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. The finding is compatible with THM-0005 (c(6)=5, so n=6 lies outside published CKgP range) and with the packet's C66-GEO-Z bottleneck. Independent verification: (1) SRC-0004 Lemma 10.6 confirms deg(W_5)=16 and deg(W_5\u2297\u03c9_C^{-1})=6 for g=6. (2) Riemann-Roch with Serre duality yields h^0(\u03c9_C(-D)) = 1 + h^0(D) exactly (not merely generically) for deg(D)=4 on genus 6. (3) For the relative linear system |\u03c9_C(-D)| to be a P^2-bundle (projective fiber dimension 2), h^0 must equal 3 everywhere, requiring h^0(D)=2 constantly. (4) Brill-Noether: \u03c1(6,2,4)=-6 implies the jumping locus {h^0(D)\u22653} has codimension \u22656 in M_6, hence codimension \u22656 in the balanced tetragonal locus (which is dense in M_6). Over the jumping locus, total dimension of Z is (15-6)+(1+h^0(D)-1) \u2264 9+3 = 12 < 17, so no component of dimension >17 arises. However, pure dimension 17 requires all components to have dimension exactly 17, which fails if the jumping locus is nonempty. (5) The finding correctly identifies that proving either (a) h^0(D)=2 constantly or (b) stratifying by h^0 and controlling the contribution of jumping strata is necessary before the P^2-bundle and pure-dimension-17 claims are established. Relationship to existing findings: FND-0058 is a specific instantiation of FND-0047 (which addresses h^0 jumping and relative linear systems in general) applied to the exact bundle W_5\u2297\u03c9_C^{-1}. It is complementary to FND-0052 (which mentions h^0 stratification as a requirement for Gysin). The specific formula h^0(\u03c9_C(-D))=1+h^0(D), the required constant 3, and the dimension count (17, codimension 4) are concrete computational content not present in FND-0047 or FND-0052. Distinct from FND-0046 (scheme structure comparison) and FND-0053 (S_6 monodromy): do not merge. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent verification of the RR formula, Brill-Noether bounds, and the specific obstruction to the P^2-bundle identification.",
+  "engine": "qwen",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0058",
+  "id": "FAUD-0043",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "bundle": "W_5 \u2297 \u03c9_C^{-1} of degree 6",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "divisor_D": "degree 4, defined by W_5 = \u03c9_C^2(-D)",
+    "geometric_structure": "relative P^2-bundle |\u03c9_C(-D)| over Hurwitz space",
+    "object": "balanced tetragonal locus in M_{6,6}"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "0c1fccd5861c0c4b679f36ab4783d2a65c2f1842f0d89d2938566b0cff90f3c5",
+      "doi": "10.4171/JEMS/1543",
+      "locator": "Lemma 10.6: deg(W_{f_i}|_C) = 4g + 12 - 4f_i",
+      "query_family": "CE-tetragonal-degree-calculation",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "research_article",
+      "url": "https://arxiv.org/abs/2208.02357",
+      "verified_claims": [
+        "deg(W_5|_C) = 16 for g=6",
+        "deg(W_5 \u2297 \u03c9_C^{-1}) = 6",
+        "failure condition O_C(\u0393) \u2245 W_5 \u2297 \u03c9_C^{-1}"
+      ]
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "locator": "Riemann-Roch + Serre duality for line bundles on curves",
+      "query_family": "riemann-roch-serre-duality",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "foundational",
+      "url": "internal:standard-algebraic-geometry",
+      "verified_claims": [
+        "h^0(\u03c9_C(-D)) - h^1(\u03c9_C(-D)) = deg(\u03c9_C(-D)) - g + 1",
+        "h^1(\u03c9_C(-D)) = h^0(D) by Serre duality",
+        "h^0(\u03c9_C(-D)) = 1 + h^0(D) for g=6, deg(D)=4"
+      ]
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "locator": "Brill-Noether number \u03c1(g,r,d) = g - (r+1)(g-d+r)",
+      "query_family": "brill-noether-rho-calculation",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "foundational",
+      "url": "internal:brill-noether-theory",
+      "verified_claims": [
+        "\u03c1(6,2,4) = 6 - 3(6-4+2) = -6",
+        "locus with h^0(D) \u2265 3 has codimension \u2265 6 in M_6"
+      ]
+    }
+  ],
+  "task_id": "TASK-F-FND-0058",
+  "verdict": "promote"
+}

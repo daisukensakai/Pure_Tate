@@ -1,0 +1,15 @@
+2026-08-03T08:54:57.868603+00:00 start suite=hang probes=['responses_simple', 'responses_web'] wall=120s base=https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1 model=qwen3.7-max key=DASHSCOPE_API_KEY
+2026-08-03T08:54:57.868723+00:00 --- probe responses_simple ---
+2026-08-03T08:54:57.868791+00:00 [responses_simple] BEGIN t=0.0s
+2026-08-03T08:54:59.315326+00:00 [responses_simple] END ok t=1.4s
+2026-08-03T08:54:59.316156+00:00 [responses_simple] RESULT ok=True http=200 elapsed=1.446
+2026-08-03T08:54:59.316314+00:00 --- probe responses_web ---
+2026-08-03T08:54:59.316463+00:00 [responses_web] BEGIN t=0.0s
+2026-08-03T08:55:09.321991+00:00 [responses_web] HEARTBEAT still waiting t=10.0s
+2026-08-03T08:55:15.518680+00:00 [responses_web] END ok t=16.2s
+2026-08-03T08:55:15.519917+00:00 [responses_web] RESULT ok=True http=200 elapsed=16.202
+2026-08-03T08:55:15.521470+00:00 DONE overall_ok=True
+2026-08-03T08:55:15.521603+00:00 diagnosis: Live probes passed. Campaign hangs remain a structural risk: silent blocking urllib + inactivity_timeout 3600s < QWEN_RESPONSES_TIMEOUT 10800s.
+2026-08-03T08:55:15.521716+00:00   - Responses+web completed in 16.2s.
+2026-08-03T08:55:15.521829+00:00   - STRUCTURAL: qwen_worker blocks on urllib.request.urlopen with QWEN_RESPONSES_TIMEOUT default 10800s (web stage 3600s) and writes nothing until the whole task ends. engines.json sets inactivity_timeout_seconds=3600. Because client wait (≤10800) > inactivity (3600), a slow/stuck provider call is killed as 'agent watchdog: inactivity timeout … no stderr' (see RUN-C66-001-20260803T062926) rather than a clean API error. Separate historical mode: provider HTTP 504 ResponseTimeout at ~300s.
+2026-08-03T08:55:15.521950+00:00 wrote /Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test/results/qwen_hang/20260803T085457868353Z/summary.json

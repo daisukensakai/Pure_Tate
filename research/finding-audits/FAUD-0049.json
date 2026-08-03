@@ -1,0 +1,72 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with the C66-001-v4 bottleneck instruction to model ordered distinct reduced divisors as a finite etale S_6-cover of the reduced-support open (and not to call that open closed), and with corroborated siblings FND-0052 (reduced-support relative linear-system piece is open, not a closed pure-codimension-4 subvariety of M_{6,6}) and FND-0053 (rational irreps of S_6 do not force Tate local systems on an S_6-cover). Independent primary check. For a smooth proper family of curves \u03c0:C\u2192B and n\u22651, the relative ordered configuration stack Conf_n(C/B) of n distinct sections maps by forgetting order to the relative symmetric product Sym^n(C/B) (relative effective divisors of degree n). Over the open locus U_red of reduced-support/simple divisors, geometric fibers are the n! orderings of n distinct points; S_n acts freely and transitively, and the morphism is finite locally free of degree n! with empty discriminant, hence finite etale (Stacks Project Tag 0BJF; etale local models Tag 02GH). Thus Conf_n\u2192U_red is a finite etale S_n-torsor. Specializing to n=6 and B=B^{bal} (balanced tetragonal base for g=6) yields exactly the claimed S_6-torsor. Scope sharpening only: (i) \u2018relative effective-divisor space\u2019 means Sym^6(C/B^{bal}), not automatically the relative complete linear system |L| with L=W_5\u2297\u03c9_C^{-1}; when the failure locus is modelled inside |L| via O_C(\u0393)\u2245L (FND-0063), the ordering cover remains an S_6-torsor over the reduced-support open of that divisor space, but constructing the relative target as Proj(\u03c0_*L) requires the cohomology-and-base-change care of FND-0047 when h^0 jumps; (ii) the map is a torsor over U_red only\u2014Conf_6 does not dominate non-reduced divisors; (iii) the torsor structure alone does not control monodromy or Tate type of local systems on configuration/linear-system spaces (FND-0053). Distinct from FND-0052 (open-vs-closed failure locus in M_{6,6}) and FND-0053 (Tate failure for S_6-covers): do not merge. Merge target: none. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent classical finite-etale/torsor verification and packet-primary CE context (SRC-0004).",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0064",
+  "id": "FAUD-0049",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "base": "B^{bal}",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "family": "smooth relative curve C/B^{bal}",
+    "impacts_approach_ids": [
+      "C66-GEO-Z"
+    ],
+    "kind_note": "structural modeling lemma for ordered vs unordered six-point data on the balanced tetragonal family",
+    "locus": "reduced-support open of simple/square-free divisors",
+    "source_stack": "Conf_6(C/B^{bal})",
+    "structure": "finite etale S_6-torsor (Galois cover of degree 6! with free transitive S_6-action)",
+    "target_space": "relative effective degree-6 divisor space Sym^6(C/B^{bal}) (not automatically the relative linear system |L|)"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "bdaca82b7274599e18801e8758fe4442dead84a5101371f187a7e5f6738e460d",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T02:31:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0bjf49lemma3emptydiscriminantfiniteetale00000000000000000000000001",
+      "doi": null,
+      "query_family": "etale-finite-discriminant",
+      "retrieved_at": "2026-08-03T02:31:20Z",
+      "source_type": "stacks_project",
+      "url": "https://stacks.math.columbia.edu/tag/0BJF"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "02ghsection2937etalemorphismstacksproject00000000000000000000000002",
+      "doi": null,
+      "query_family": "etale-morphisms-local-models",
+      "retrieved_at": "2026-08-03T02:31:40Z",
+      "source_type": "stacks_project",
+      "url": "https://stacks.math.columbia.edu/tag/02GH"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "220802357v2canninglarsonchowcohomology0000000000000000000000000003",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "campaign-primary-ce-context",
+      "retrieved_at": "2026-08-03T02:32:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    }
+  ],
+  "task_id": "TASK-F-FND-0064",
+  "verdict": "promote"
+}

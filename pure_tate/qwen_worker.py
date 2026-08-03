@@ -3,6 +3,13 @@
 The model receives only a task prompt and an allowlist of paths in the current
 isolated workspace.  It may read a listed path on demand.  When enabled by the
 harness, it may also ask a hard-capped Grok worker for an assistive result.
+
+Stdout protocol (JSONL, one object per line, flushed immediately):
+  stage, heartbeat, thought, text, tool_call, tool_result, error, end
+
+Provider calls use Server-Sent Events by default so the campaign inactivity
+watchdog sees progress and partial tokens survive process kill in traces.
+Set QWEN_STREAM=0 to force non-streaming requests (emergency only).
 """
 
 from __future__ import annotations
@@ -11,10 +18,12 @@ import argparse
 import json
 import os
 import sys
+import threading
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, Iterator, List, Optional, TextIO
 
 
 PACKAGE_ROOT = Path(__file__).resolve().parent.parent
@@ -34,6 +43,9 @@ WEB_EVIDENCE_MAX_TOKENS = 6_000
 WEB_EVIDENCE_THINKING_BUDGET = 2_048
 MAX_WEB_EVIDENCE_CHARS = 32_000
 WEB_EVIDENCE_TIMEOUT_SECONDS = 3_600
+# Heartbeats while waiting for the first SSE byte keep the harness inactivity
+# watchdog from treating long prefill/thinking as a dead process.
+HEARTBEAT_INTERVAL_SECONDS = 15.0
 
 
 def _responses_timeout() -> int:
@@ -42,6 +54,11 @@ def _responses_timeout() -> int:
         return max(1, min(int(raw), 10_800))
     except ValueError:
         return 10_800
+
+
+def _stream_enabled() -> bool:
+    raw = os.environ.get("QWEN_STREAM", "1").strip().lower()
+    return raw not in {"0", "false", "no", "off"}
 
 
 def _api_key() -> Optional[str]:
@@ -56,9 +73,409 @@ def _base_url() -> str:
     ).rstrip("/")
 
 
+def _emit(event: Dict[str, Any], stream: Optional[TextIO] = None) -> None:
+    """Write one JSONL progress event and flush (resets harness inactivity)."""
+    out = stream if stream is not None else sys.stdout
+    out.write(json.dumps(event, ensure_ascii=False) + "\n")
+    out.flush()
+
+
+class _FirstByteHeartbeat:
+    """Emit heartbeat events until the first SSE payload arrives."""
+
+    def __init__(
+        self,
+        label: str,
+        interval: float = HEARTBEAT_INTERVAL_SECONDS,
+    ) -> None:
+        self.label = label
+        self.interval = interval
+        self._stop = threading.Event()
+        self._first_byte = threading.Event()
+        self._thread: Optional[threading.Thread] = None
+        self.started = 0.0
+
+    def __enter__(self) -> "_FirstByteHeartbeat":
+        self.started = time.monotonic()
+        self._thread = threading.Thread(
+            target=self._run, name="qwen-hb-" + self.label, daemon=True
+        )
+        self._thread.start()
+        return self
+
+    def __exit__(self, exc_type, exc, tb) -> None:  # type: ignore[no-untyped-def]
+        self._stop.set()
+        if self._thread is not None:
+            self._thread.join(timeout=2.0)
+
+    def mark_first_byte(self) -> None:
+        self._first_byte.set()
+
+    def _run(self) -> None:
+        while not self._stop.wait(self.interval):
+            if self._first_byte.is_set():
+                return
+            _emit(
+                {
+                    "type": "heartbeat",
+                    "stage": self.label,
+                    "elapsed_seconds": round(time.monotonic() - self.started, 1),
+                }
+            )
+
+
+def _iter_sse_json(response: Any) -> Iterator[Dict[str, Any]]:
+    """Yield JSON objects from an OpenAI-compatible SSE response body."""
+    while True:
+        raw_line = response.readline()
+        if not raw_line:
+            break
+        if isinstance(raw_line, bytes):
+            line = raw_line.decode("utf-8", "replace")
+        else:
+            line = str(raw_line)
+        line = line.strip()
+        if not line or line.startswith(":"):
+            continue
+        if line.startswith("data:"):
+            payload = line[5:].strip()
+        else:
+            # Some gateways omit the data: prefix.
+            payload = line
+        if payload == "[DONE]":
+            break
+        try:
+            parsed = json.loads(payload)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(parsed, dict):
+            yield parsed
+
+
+def _http_error_message(exc: urllib.error.HTTPError, prefix: str) -> str:
+    raw = exc.read().decode("utf-8", "replace")
+    try:
+        error = json.loads(raw).get("error", {})
+        if isinstance(error, dict):
+            return "%s HTTP %d: %s" % (prefix, exc.code, error)
+    except json.JSONDecodeError:
+        pass
+    return "%s HTTP %d: %s" % (prefix, exc.code, raw[:1000])
+
+
+def _merge_tool_call_delta(
+    buckets: Dict[int, Dict[str, Any]], delta_calls: List[Any]
+) -> None:
+    for item in delta_calls:
+        if not isinstance(item, dict):
+            continue
+        index = item.get("index", 0)
+        try:
+            index_i = int(index)
+        except (TypeError, ValueError):
+            index_i = 0
+        bucket = buckets.setdefault(
+            index_i,
+            {
+                "id": "",
+                "type": "function",
+                "function": {"name": "", "arguments": ""},
+            },
+        )
+        if isinstance(item.get("id"), str) and item["id"]:
+            bucket["id"] = item["id"]
+        if isinstance(item.get("type"), str) and item["type"]:
+            bucket["type"] = item["type"]
+        function = item.get("function")
+        if not isinstance(function, dict):
+            continue
+        fn = bucket["function"]
+        if isinstance(function.get("name"), str) and function["name"]:
+            # Name is usually sent once on the first delta; do not concatenate.
+            if not fn.get("name"):
+                fn["name"] = function["name"]
+        if isinstance(function.get("arguments"), str):
+            fn["arguments"] = (fn.get("arguments") or "") + function["arguments"]
+
+
+def _consume_chat_sse(
+    response: Any, *, stage: str
+) -> Dict[str, Any]:
+    """Reassemble a Chat Completions stream into a non-stream payload shape."""
+    content_parts: List[str] = []
+    reasoning_parts: List[str] = []
+    tool_buckets: Dict[int, Dict[str, Any]] = {}
+    finish_reason: Optional[str] = None
+    usage: Optional[Dict[str, Any]] = None
+    response_id: Optional[str] = None
+    model: Optional[str] = None
+    with _FirstByteHeartbeat(stage) as heartbeat:
+        for chunk in _iter_sse_json(response):
+            heartbeat.mark_first_byte()
+            if isinstance(chunk.get("id"), str) and chunk["id"]:
+                response_id = chunk["id"]
+            if isinstance(chunk.get("model"), str) and chunk["model"]:
+                model = chunk["model"]
+            if isinstance(chunk.get("usage"), dict):
+                usage = chunk["usage"]
+            choices = chunk.get("choices")
+            if not isinstance(choices, list) or not choices:
+                continue
+            choice = choices[0]
+            if not isinstance(choice, dict):
+                continue
+            if isinstance(choice.get("finish_reason"), str):
+                finish_reason = choice["finish_reason"]
+            delta = choice.get("delta")
+            if not isinstance(delta, dict):
+                # Some non-incremental builds put a full message on the chunk.
+                message = choice.get("message")
+                if isinstance(message, dict):
+                    if isinstance(message.get("content"), str) and message["content"]:
+                        content_parts.append(message["content"])
+                        _emit({"type": "text", "data": message["content"]})
+                    if (
+                        isinstance(message.get("reasoning_content"), str)
+                        and message["reasoning_content"]
+                    ):
+                        reasoning_parts.append(message["reasoning_content"])
+                        _emit(
+                            {
+                                "type": "thought",
+                                "data": message["reasoning_content"],
+                            }
+                        )
+                continue
+            reasoning = delta.get("reasoning_content")
+            if isinstance(reasoning, str) and reasoning:
+                reasoning_parts.append(reasoning)
+                _emit({"type": "thought", "data": reasoning})
+            content = delta.get("content")
+            if isinstance(content, str) and content:
+                content_parts.append(content)
+                _emit({"type": "text", "data": content})
+            tool_calls = delta.get("tool_calls")
+            if isinstance(tool_calls, list):
+                _merge_tool_call_delta(tool_buckets, tool_calls)
+    content = "".join(content_parts)
+    reasoning_content = "".join(reasoning_parts)
+    tool_calls_list = [
+        tool_buckets[index]
+        for index in sorted(tool_buckets)
+        if tool_buckets[index].get("function", {}).get("name")
+        or tool_buckets[index].get("id")
+    ]
+    for call in tool_calls_list:
+        _emit(
+            {
+                "type": "tool_call",
+                "id": call.get("id"),
+                "name": (call.get("function") or {}).get("name"),
+                "arguments": (call.get("function") or {}).get("arguments"),
+            }
+        )
+    message: Dict[str, Any] = {
+        "role": "assistant",
+        "content": content,
+    }
+    if reasoning_content:
+        message["reasoning_content"] = reasoning_content
+    if tool_calls_list:
+        message["tool_calls"] = tool_calls_list
+    payload: Dict[str, Any] = {
+        "id": response_id,
+        "model": model,
+        "choices": [
+            {
+                "index": 0,
+                "message": message,
+                "finish_reason": finish_reason or ("tool_calls" if tool_calls_list else "stop"),
+            }
+        ],
+    }
+    if usage is not None:
+        payload["usage"] = usage
+    _emit(
+        {
+            "type": "end",
+            "stage": stage,
+            "stopReason": finish_reason or ("tool_calls" if tool_calls_list else "stop"),
+            "id": response_id,
+            "usage": usage,
+        }
+    )
+    return payload
+
+
+def _consume_responses_sse(
+    response: Any, *, stage: str
+) -> Dict[str, Any]:
+    """Reassemble a Responses API stream into a non-stream payload shape."""
+    text_parts: List[str] = []
+    reasoning_parts: List[str] = []
+    output_items: Dict[str, Dict[str, Any]] = {}
+    output_order: List[str] = []
+    completed: Optional[Dict[str, Any]] = None
+    response_id: Optional[str] = None
+    model: Optional[str] = None
+    usage: Optional[Dict[str, Any]] = None
+    status: Optional[str] = None
+
+    def _remember_item(item: Dict[str, Any]) -> None:
+        item_id = item.get("id")
+        key = str(item_id) if isinstance(item_id, str) and item_id else "anon-%d" % len(output_order)
+        if key not in output_items:
+            output_order.append(key)
+        output_items[key] = item
+
+    with _FirstByteHeartbeat(stage) as heartbeat:
+        for event in _iter_sse_json(response):
+            heartbeat.mark_first_byte()
+            event_type = event.get("type")
+            if event_type in {"response.created", "response.in_progress"}:
+                response_obj = event.get("response")
+                if isinstance(response_obj, dict):
+                    if isinstance(response_obj.get("id"), str):
+                        response_id = response_obj["id"]
+                    if isinstance(response_obj.get("model"), str):
+                        model = response_obj["model"]
+                    if isinstance(response_obj.get("status"), str):
+                        status = response_obj["status"]
+                continue
+            if event_type == "response.output_text.delta":
+                delta = event.get("delta")
+                if isinstance(delta, str) and delta:
+                    text_parts.append(delta)
+                    _emit({"type": "text", "data": delta})
+                continue
+            if event_type in {
+                "response.reasoning_text.delta",
+                "response.reasoning_summary_text.delta",
+            }:
+                delta = event.get("delta")
+                if isinstance(delta, str) and delta:
+                    reasoning_parts.append(delta)
+                    _emit({"type": "thought", "data": delta})
+                continue
+            if event_type == "response.output_item.added":
+                item = event.get("item")
+                if isinstance(item, dict):
+                    _remember_item(item)
+                continue
+            if event_type == "response.output_item.done":
+                item = event.get("item")
+                if isinstance(item, dict):
+                    _remember_item(item)
+                    item_type = item.get("type")
+                    if item_type in {
+                        "function_call",
+                        "web_search_call",
+                        "web_extractor_call",
+                    }:
+                        _emit(
+                            {
+                                "type": "tool_call",
+                                "item_type": item_type,
+                                "id": item.get("id"),
+                                "call_id": item.get("call_id"),
+                                "name": item.get("name"),
+                                "arguments": item.get("arguments"),
+                                "status": item.get("status"),
+                            }
+                        )
+                    if item_type == "reasoning":
+                        for summary in item.get("summary") or []:
+                            if isinstance(summary, dict) and isinstance(
+                                summary.get("text"), str
+                            ):
+                                reasoning_parts.append(summary["text"])
+                                _emit(
+                                    {"type": "thought", "data": summary["text"]}
+                                )
+                continue
+            if event_type == "response.completed":
+                response_obj = event.get("response")
+                if isinstance(response_obj, dict):
+                    completed = response_obj
+                    if isinstance(response_obj.get("id"), str):
+                        response_id = response_obj["id"]
+                    if isinstance(response_obj.get("model"), str):
+                        model = response_obj["model"]
+                    if isinstance(response_obj.get("usage"), dict):
+                        usage = response_obj["usage"]
+                    if isinstance(response_obj.get("status"), str):
+                        status = response_obj["status"]
+                continue
+            if event_type == "error" or event.get("error"):
+                err = event.get("error") or event
+                message = (
+                    err.get("message")
+                    if isinstance(err, dict)
+                    else str(err)
+                )
+                _emit({"type": "error", "message": message})
+                raise RuntimeError("Qwen Responses stream error: %s" % message)
+
+    if completed is not None:
+        payload = completed
+        # Ensure stream-assembled text is available even if the provider omits
+        # top-level output_text on the completed object.
+        if not isinstance(payload.get("output_text"), str) or not payload["output_text"]:
+            joined = "".join(text_parts)
+            if joined:
+                payload = dict(payload)
+                payload["output_text"] = joined
+        if not payload.get("output") and output_items:
+            payload = dict(payload)
+            payload["output"] = [output_items[key] for key in output_order]
+    else:
+        joined = "".join(text_parts)
+        output_list = [output_items[key] for key in output_order]
+        if joined and not any(
+            isinstance(item, dict) and item.get("type") == "message"
+            for item in output_list
+        ):
+            output_list.append(
+                {
+                    "type": "message",
+                    "role": "assistant",
+                    "status": "completed",
+                    "content": [{"type": "output_text", "text": joined}],
+                }
+            )
+        payload = {
+            "id": response_id,
+            "model": model,
+            "status": status or "completed",
+            "output": output_list,
+            "output_text": joined,
+        }
+        if usage is not None:
+            payload["usage"] = usage
+
+    # If the completed payload has message text that never arrived as deltas,
+    # surface it once for artifact extraction and activity.
+    final_text = _responses_text(payload)
+    streamed = "".join(text_parts)
+    if final_text and final_text != streamed and not streamed:
+        _emit({"type": "text", "data": final_text})
+
+    _emit(
+        {
+            "type": "end",
+            "stage": stage,
+            "stopReason": status or "completed",
+            "id": payload.get("id") or response_id,
+            "usage": payload.get("usage") or usage,
+        }
+    )
+    return payload
+
+
 def _request(
     *, api_key: str, model: str, messages: List[Dict[str, Any]], tools: List[Dict[str, Any]],
     max_tokens: int, thinking_budget: int, tool_choice: str = "auto",
+    stage: str = "chat",
 ) -> Dict[str, Any]:
     body: Dict[str, Any] = {
         "model": model,
@@ -71,6 +488,10 @@ def _request(
     if tools:
         body["tools"] = tools
         body["tool_choice"] = tool_choice
+    use_stream = _stream_enabled()
+    if use_stream:
+        body["stream"] = True
+        body["stream_options"] = {"include_usage": True}
     request = urllib.request.Request(
         _base_url() + "/chat/completions",
         data=json.dumps(body).encode("utf-8"),
@@ -79,18 +500,53 @@ def _request(
     )
     try:
         with urllib.request.urlopen(request, timeout=_responses_timeout()) as response:
+            if use_stream:
+                return _consume_chat_sse(response, stage=stage)
             payload = json.loads(response.read())
     except urllib.error.HTTPError as exc:
-        raw = exc.read().decode("utf-8", "replace")
-        try:
-            error = json.loads(raw).get("error", {})
-        except json.JSONDecodeError:
-            error = {"message": raw[:500]}
-        raise RuntimeError("Qwen API HTTP %d: %s" % (exc.code, error)) from exc
+        detail = _http_error_message(exc, "Qwen API")
+        _emit({"type": "error", "message": detail})
+        raise RuntimeError(detail) from exc
     except Exception as exc:  # noqa: BLE001 - present provider errors to the runner
-        raise RuntimeError("Qwen API request failed: %s" % exc) from exc
+        detail = "Qwen API request failed: %s" % exc
+        _emit({"type": "error", "message": detail})
+        raise RuntimeError(detail) from exc
     if not isinstance(payload, dict):
         raise RuntimeError("Qwen API returned a non-object response")
+    # Non-stream path: emit the full content as a single text event so the
+    # harness still sees activity and can extract an artifact.
+    choices = payload.get("choices")
+    if isinstance(choices, list) and choices and isinstance(choices[0], dict):
+        message = choices[0].get("message")
+        if isinstance(message, dict):
+            if isinstance(message.get("reasoning_content"), str) and message[
+                "reasoning_content"
+            ]:
+                _emit({"type": "thought", "data": message["reasoning_content"]})
+            if isinstance(message.get("content"), str) and message["content"]:
+                _emit({"type": "text", "data": message["content"]})
+            if isinstance(message.get("tool_calls"), list):
+                for call in message["tool_calls"]:
+                    if not isinstance(call, dict):
+                        continue
+                    function = call.get("function") if isinstance(call.get("function"), dict) else {}
+                    _emit(
+                        {
+                            "type": "tool_call",
+                            "id": call.get("id"),
+                            "name": function.get("name"),
+                            "arguments": function.get("arguments"),
+                        }
+                    )
+    _emit(
+        {
+            "type": "end",
+            "stage": stage,
+            "stopReason": "stop",
+            "id": payload.get("id"),
+            "usage": payload.get("usage"),
+        }
+    )
     return payload
 
 
@@ -106,6 +562,7 @@ def _responses_request(
     enable_thinking: bool = True,
     timeout_seconds: Optional[int] = None,
     allow_tools: bool = True,
+    stage: str = "responses",
 ) -> Dict[str, Any]:
     """Call Qwen's Responses API, which exposes native web tools for 3.7 Max."""
     body: Dict[str, Any] = {
@@ -138,6 +595,9 @@ def _responses_request(
         body["enable_thinking"] = False
     if previous_response_id:
         body["previous_response_id"] = previous_response_id
+    use_stream = _stream_enabled()
+    if use_stream:
+        body["stream"] = True
     request = urllib.request.Request(
         _base_url() + "/responses",
         data=json.dumps(body).encode("utf-8"),
@@ -153,14 +613,50 @@ def _responses_request(
             _responses_timeout() if timeout_seconds is None else timeout_seconds
         )
         with urllib.request.urlopen(request, timeout=request_timeout) as response:
+            if use_stream:
+                return _consume_responses_sse(response, stage=stage)
             payload = json.loads(response.read())
     except urllib.error.HTTPError as exc:
-        raw = exc.read().decode("utf-8", "replace")
-        raise RuntimeError("Qwen Responses API HTTP %d: %s" % (exc.code, raw[:1000])) from exc
+        detail = _http_error_message(exc, "Qwen Responses API")
+        _emit({"type": "error", "message": detail})
+        raise RuntimeError(detail) from exc
     except Exception as exc:  # noqa: BLE001 - present provider errors to the runner
-        raise RuntimeError("Qwen Responses API request failed: %s" % exc) from exc
+        detail = "Qwen Responses API request failed: %s" % exc
+        _emit({"type": "error", "message": detail})
+        raise RuntimeError(detail) from exc
     if not isinstance(payload, dict):
         raise RuntimeError("Qwen Responses API returned a non-object response")
+    text = _responses_text(payload)
+    if text:
+        _emit({"type": "text", "data": text})
+    for item in payload.get("output") or []:
+        if not isinstance(item, dict):
+            continue
+        if item.get("type") in {
+            "function_call",
+            "web_search_call",
+            "web_extractor_call",
+        }:
+            _emit(
+                {
+                    "type": "tool_call",
+                    "item_type": item.get("type"),
+                    "id": item.get("id"),
+                    "call_id": item.get("call_id"),
+                    "name": item.get("name"),
+                    "arguments": item.get("arguments"),
+                    "status": item.get("status"),
+                }
+            )
+    _emit(
+        {
+            "type": "end",
+            "stage": stage,
+            "stopReason": payload.get("status") or "completed",
+            "id": payload.get("id"),
+            "usage": payload.get("usage"),
+        }
+    )
     return payload
 
 
@@ -309,6 +805,25 @@ def _responses_function_calls(payload: Dict[str, Any]) -> List[Dict[str, Any]]:
     ]
 
 
+def _tool_result_summary(result: Dict[str, Any]) -> Dict[str, Any]:
+    """Compact tool result for stdout (avoid dumping huge file contents)."""
+    summary: Dict[str, Any] = {"ok": result.get("ok")}
+    if "path" in result:
+        summary["path"] = result["path"]
+    if "error" in result:
+        summary["error"] = result["error"]
+    if "bytes" in result:
+        summary["bytes"] = result["bytes"]
+    content = result.get("content")
+    if isinstance(content, str):
+        summary["content_chars"] = len(content)
+    if "worker_id" in result:
+        summary["worker_id"] = result["worker_id"]
+    if "status" in result:
+        summary["status"] = result["status"]
+    return summary
+
+
 def _run_web_evidence(
     prompt: str,
     allowlist: Dict[str, Path],
@@ -331,60 +846,84 @@ def _run_web_evidence(
     )
     pending: List[Dict[str, Any]] = [{"role": "user", "content": prompt}]
     previous_response_id: Optional[str] = None
-    for _round in range(MAX_WEB_EVIDENCE_TOOL_ROUNDS):
-        final_round = _round == MAX_WEB_EVIDENCE_TOOL_ROUNDS - 1
-        payload = _responses_request(
-            api_key=api_key,
-            model=model,
-            input_items=pending,
-            instructions=instructions,
-            previous_response_id=previous_response_id,
-            max_tokens=min(max_tokens, WEB_EVIDENCE_MAX_TOKENS),
-            thinking_budget=min(thinking_budget, WEB_EVIDENCE_THINKING_BUDGET),
-            # The Singapore Qwen3.7-Max endpoint requires thinking mode when
-            # web_extractor is present, even for a compact evidence docket.
-            enable_thinking=True,
-            timeout_seconds=WEB_EVIDENCE_TIMEOUT_SECONDS,
-            allow_tools=not final_round,
-        )
-        previous_response_id = str(payload.get("id") or "") or None
-        calls = _responses_function_calls(payload)
-        if not calls:
-            content = _responses_text(payload)
-            if content:
-                return content[:MAX_WEB_EVIDENCE_CHARS]
-            raise RuntimeError("Qwen Responses API returned no final text")
-        if final_round:
-            raise RuntimeError(
-                "Qwen web-evidence stage returned a tool call during its "
-                "tool-free final round"
-            )
-        pending = []
-        for call in calls:
-            arguments = call.get("arguments", "{}")
-            try:
-                parsed = json.loads(arguments) if isinstance(arguments, str) else {}
-            except json.JSONDecodeError:
-                parsed = {}
-            result = (
-                _read_file(parsed if isinstance(parsed, dict) else {}, allowlist)
-                if call.get("name") == "read_file"
-                else {"ok": False, "error": "tool is unavailable"}
-            )
-            call_id = call.get("call_id")
-            if not isinstance(call_id, str) or not call_id:
-                raise RuntimeError("Qwen Responses function call has no call_id")
-            pending.append(
+    _emit({"type": "stage", "stage": "web_evidence_start"})
+    try:
+        for _round in range(MAX_WEB_EVIDENCE_TOOL_ROUNDS):
+            final_round = _round == MAX_WEB_EVIDENCE_TOOL_ROUNDS - 1
+            stage = "web_evidence_round_%d" % (_round + 1)
+            _emit(
                 {
-                    "type": "function_call_output",
-                    "call_id": call_id,
-                    "output": json.dumps(result, ensure_ascii=False),
+                    "type": "stage",
+                    "stage": stage,
+                    "round": _round + 1,
+                    "allow_tools": not final_round,
                 }
             )
-    raise RuntimeError(
-        "Qwen web-evidence stage exceeded the %d tool-round limit"
-        % MAX_WEB_EVIDENCE_TOOL_ROUNDS
-    )
+            payload = _responses_request(
+                api_key=api_key,
+                model=model,
+                input_items=pending,
+                instructions=instructions,
+                previous_response_id=previous_response_id,
+                max_tokens=min(max_tokens, WEB_EVIDENCE_MAX_TOKENS),
+                thinking_budget=min(thinking_budget, WEB_EVIDENCE_THINKING_BUDGET),
+                # The Singapore Qwen3.7-Max endpoint requires thinking mode when
+                # web_extractor is present, even for a compact evidence docket.
+                enable_thinking=True,
+                timeout_seconds=WEB_EVIDENCE_TIMEOUT_SECONDS,
+                allow_tools=not final_round,
+                stage=stage,
+            )
+            previous_response_id = str(payload.get("id") or "") or None
+            calls = _responses_function_calls(payload)
+            if not calls:
+                content = _responses_text(payload)
+                if content:
+                    _emit({"type": "stage", "stage": "web_evidence_end", "ok": True})
+                    return content[:MAX_WEB_EVIDENCE_CHARS]
+                raise RuntimeError("Qwen Responses API returned no final text")
+            if final_round:
+                raise RuntimeError(
+                    "Qwen web-evidence stage returned a tool call during its "
+                    "tool-free final round"
+                )
+            pending = []
+            for call in calls:
+                arguments = call.get("arguments", "{}")
+                try:
+                    parsed = json.loads(arguments) if isinstance(arguments, str) else {}
+                except json.JSONDecodeError:
+                    parsed = {}
+                result = (
+                    _read_file(parsed if isinstance(parsed, dict) else {}, allowlist)
+                    if call.get("name") == "read_file"
+                    else {"ok": False, "error": "tool is unavailable"}
+                )
+                _emit(
+                    {
+                        "type": "tool_result",
+                        "name": call.get("name"),
+                        "call_id": call.get("call_id"),
+                        "result": _tool_result_summary(result),
+                    }
+                )
+                call_id = call.get("call_id")
+                if not isinstance(call_id, str) or not call_id:
+                    raise RuntimeError("Qwen Responses function call has no call_id")
+                pending.append(
+                    {
+                        "type": "function_call_output",
+                        "call_id": call_id,
+                        "output": json.dumps(result, ensure_ascii=False),
+                    }
+                )
+        raise RuntimeError(
+            "Qwen web-evidence stage exceeded the %d tool-round limit"
+            % MAX_WEB_EVIDENCE_TOOL_ROUNDS
+        )
+    except Exception:
+        _emit({"type": "stage", "stage": "web_evidence_end", "ok": False})
+        raise
 
 
 def _run_without_web(
@@ -420,9 +959,19 @@ def _run_without_web(
         {"role": "user", "content": prompt},
     ]
     tools = _tools(allow_grok)
+    _emit({"type": "stage", "stage": "final_start"})
     try:
         for _round in range(max_tool_rounds):
             final_round = _round == max_tool_rounds - 1
+            stage = "final_round_%d" % (_round + 1)
+            _emit(
+                {
+                    "type": "stage",
+                    "stage": stage,
+                    "round": _round + 1,
+                    "allow_tools": not final_round,
+                }
+            )
             if final_round:
                 messages.append(
                     {
@@ -442,6 +991,7 @@ def _run_without_web(
                 max_tokens=max_tokens,
                 thinking_budget=thinking_budget,
                 tool_choice="none" if final_round else "auto",
+                stage=stage,
             )
             choices = payload.get("choices")
             if not isinstance(choices, list) or not choices or not isinstance(choices[0], dict):
@@ -454,6 +1004,7 @@ def _run_without_web(
                 content = message.get("content")
                 if not isinstance(content, str):
                     raise RuntimeError("Qwen API response has no final text")
+                _emit({"type": "stage", "stage": "final_end", "ok": True})
                 return content
             if final_round:
                 raise RuntimeError(
@@ -472,6 +1023,14 @@ def _run_without_web(
                     result = _ask_grok(arguments, grok_pool)
                 else:
                     result = {"ok": False, "error": "tool is unavailable"}
+                _emit(
+                    {
+                        "type": "tool_result",
+                        "name": name,
+                        "id": call.get("id"),
+                        "result": _tool_result_summary(result),
+                    }
+                )
                 call_id = call.get("id")
                 if not isinstance(call_id, str) or not call_id:
                     raise RuntimeError("Qwen tool call has no id")
@@ -483,6 +1042,9 @@ def _run_without_web(
                     }
                 )
         raise RuntimeError("Qwen exceeded the %d tool-round limit" % max_tool_rounds)
+    except Exception:
+        _emit({"type": "stage", "stage": "final_end", "ok": False})
+        raise
     finally:
         if grok_pool is not None:
             grok_pool.shutdown(cancel_live=True)
@@ -551,20 +1113,23 @@ def main() -> int:
     parser.add_argument("--thinking-budget", type=int, default=16384)
     args = parser.parse_args()
     try:
-        sys.stdout.write(
-            run(
-                args.prompt,
-                args.context_file,
-                model=args.model,
-                allow_grok=args.allow_grok_workers,
-                allow_web=args.allow_web,
-                max_tokens=args.max_tokens,
-                thinking_budget=args.thinking_budget,
-            )
+        # Progress and artifact text are emitted as JSONL on stdout during the
+        # run. The harness reconstructs the final artifact from text events.
+        run(
+            args.prompt,
+            args.context_file,
+            model=args.model,
+            allow_grok=args.allow_grok_workers,
+            allow_web=args.allow_web,
+            max_tokens=args.max_tokens,
+            thinking_budget=args.thinking_budget,
         )
-        sys.stdout.write("\n")
         return 0
     except Exception as exc:  # noqa: BLE001 - subprocess error boundary
+        try:
+            _emit({"type": "error", "message": str(exc)})
+        except Exception:  # noqa: BLE001 - never mask the real failure
+            pass
         print(str(exc), file=sys.stderr)
         return 1
 

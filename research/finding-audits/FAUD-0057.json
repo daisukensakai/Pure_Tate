@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. Compatible with THM-0005 (c(6)=5, so n=6 needs residual geometry) and with the packet C66-GEO-H0 subproblem (stratify the relative degree-six linear system by h^0). Independent primary check against SRC-0004 Lemma 10.6 (Canning\u2013Larson arXiv:2208.02357v2 / JEMS 2024): deg(W_f|_C)=4g+12-4f, so for the balanced f_2=5 summand at g=6 one has deg(W_5)=16. Packet CE convention L:=W_5\u2297\u03c9_C^{-1} then has deg L=16-(2g-2)=6, and Riemann\u2013Roch gives \u03c7(L)=deg-g+1=1, hence h^0(L)=1+h^1(L) on every smooth genus-6 fibre. Serre duality identifies h^1(L)=h^0(\u03c9_C\u2297L^{-1}); substituting L^{-1}=\u03c9_C\u2297W_5^\u2228 yields \u03c9_C\u2297L^{-1}=\u03c9_C^2\u2297W_5^\u2228=:M with deg M=2(2g-2)-16=4. Thus h^0(L)=1+h^0(M) fibrewise, with no appeal to the undischarged GAP-Z-W5D identification W_5\u2245\u03c9_C^2(-D). Consequently the C66-GEO-H0 stratification by h^0(L) is equivalent to the h^0-stratification of this relative degree-4 line bundle M, and h^0(L)=3 (fibrewise |L|\u2245P^2) holds precisely where h^0(M)=2. Mild scope sharpening only: 'g^1_4-type Brill\u2013Noether' refers to the Brill\u2013Noether stratification of this specific relative bundle M (equivalently L), not the full W^1_4 of the curve; the finding does not assert constancy of h^0(L)=3 on the whole balanced locus (that remains FND-0058). Compatible with and complementary to corroborated FND-0005 (\u03c7(L)=1 nonemptiness of Z), FND-0047 (relative linear-system care when h^0 jumps), FND-0058 (constancy needed for a global relative P^2), FND-0062/FND-0063 (f=4 obstruction vanishes; f=5 failure iff O_C(\u0393)\u2245L). Distinct from those: do not merge. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent verification of the RR+Serre arithmetic against SRC-0004 Lemma 10.6 and the packet degree conventions. Merge target: none.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0073",
+  "id": "FAUD-0057",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "L": "W_5\\otimes\\omega_C^{-1}",
+    "M": "\\omega_C^2\\otimes W_5^\\vee",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "chi_L": 1,
+    "deg_L": 6,
+    "deg_M": 4,
+    "does_not_assert": "constancy of h^0(L)=3 on the whole balanced locus",
+    "identity": "h^0(L)=1+h^0(M)",
+    "operational_claim": "fibrewise h^0-stratification of the relative degree-6 system |L| equals the h^0-stratification of the relative degree-4 bundle M, without using GAP-Z-W5D",
+    "specialization": "h^0(L)=3\\Leftrightarrow h^0(M)=2",
+    "splitting": "F=O_{P1}(4)\\oplus O_{P1}(5)",
+    "stratum": "balanced_tetragonal_Casnati-Ekedahl",
+    "subproblem": "C66-GEO-H0"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T12:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "degree-serre-duality-lemma",
+      "retrieved_at": "2026-08-03T12:00:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "eb06f7c787cfd4fb0bb7f1c7627ef6acd595ab3e70618584de9c0f7c8eb913dd",
+      "doi": null,
+      "query_family": "packet-primary-excerpt",
+      "retrieved_at": "2026-08-03T12:00:00Z",
+      "source_type": "campaign_packet",
+      "url": "local://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "cross-check-claims",
+      "retrieved_at": "2026-08-03T12:00:00Z",
+      "source_type": "ledger",
+      "url": "local://data/claims.jsonl"
+    }
+  ],
+  "task_id": "TASK-F-FND-0073",
+  "verdict": "promote"
+}

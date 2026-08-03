@@ -141,6 +141,7 @@ def audit_engine_capability(
         _engine_argv,
         _extract_grok_stream,
         _extract_json_object,
+        _extract_qwen_stream,
         load_engines,
     )
 
@@ -194,11 +195,13 @@ def audit_engine_capability(
                     live_detail = (process.stderr or raw).strip()[:1000]
                 else:
                     try:
-                        result = (
-                            _extract_grok_stream(raw)
-                            if engine.get("family") == "grok"
-                            else _extract_json_object(raw)
-                        )
+                        family = engine.get("family")
+                        if family == "grok":
+                            result = _extract_grok_stream(raw)
+                        elif family == "qwen":
+                            result = _extract_qwen_stream(raw)
+                        else:
+                            result = _extract_json_object(raw)
                     except ValueError as exc:
                         live_detail = str(exc)
                     else:

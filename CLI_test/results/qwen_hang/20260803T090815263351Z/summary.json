@@ -1,0 +1,546 @@
+{
+  "ok": true,
+  "suite": "worker",
+  "probes": [
+    "dns_tcp",
+    "worker_no_web",
+    "worker_web"
+  ],
+  "wall_seconds": 120.0,
+  "base_url": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+  "model": "qwen3.7-max",
+  "credential_environment": "DASHSCOPE_API_KEY",
+  "total_elapsed_seconds": 14.706,
+  "started_at": "20260803T090815263351Z",
+  "results": [
+    {
+      "name": "dns_tcp",
+      "ok": true,
+      "host": "token-plan.ap-southeast-1.maas.aliyuncs.com",
+      "addrs": [
+        "43.98.173.108",
+        "47.84.193.37",
+        "64:ff9b::2b62:ad6c",
+        "64:ff9b::2f54:c125"
+      ],
+      "dns_seconds": 0.003,
+      "tcp_seconds": 0.033
+    },
+    {
+      "name": "worker_no_web",
+      "ok": true,
+      "http_status": null,
+      "returncode": 0,
+      "timed_out": false,
+      "elapsed_seconds": 4.717,
+      "first_activity_seconds": 0.041,
+      "activity_events": [
+        {
+          "t": 0.041,
+          "stream": "stdout",
+          "bytes": 119
+        },
+        {
+          "t": 1.456,
+          "stream": "stdout",
+          "bytes": 35
+        },
+        {
+          "t": 1.508,
+          "stream": "stdout",
+          "bytes": 49
+        },
+        {
+          "t": 1.605,
+          "stream": "stdout",
+          "bytes": 55
+        },
+        {
+          "t": 1.606,
+          "stream": "stdout",
+          "bytes": 47
+        },
+        {
+          "t": 1.774,
+          "stream": "stdout",
+          "bytes": 59
+        },
+        {
+          "t": 1.774,
+          "stream": "stdout",
+          "bytes": 50
+        },
+        {
+          "t": 1.887,
+          "stream": "stdout",
+          "bytes": 102
+        },
+        {
+          "t": 2.012,
+          "stream": "stdout",
+          "bytes": 54
+        },
+        {
+          "t": 2.013,
+          "stream": "stdout",
+          "bytes": 45
+        },
+        {
+          "t": 2.573,
+          "stream": "stdout",
+          "bytes": 437
+        },
+        {
+          "t": 2.578,
+          "stream": "stdout",
+          "bytes": 235
+        },
+        {
+          "t": 3.794,
+          "stream": "stdout",
+          "bytes": 35
+        },
+        {
+          "t": 3.858,
+          "stream": "stdout",
+          "bytes": 51
+        },
+        {
+          "t": 4.021,
+          "stream": "stdout",
+          "bytes": 44
+        },
+        {
+          "t": 4.022,
+          "stream": "stdout",
+          "bytes": 54
+        },
+        {
+          "t": 4.122,
+          "stream": "stdout",
+          "bytes": 55
+        },
+        {
+          "t": 4.123,
+          "stream": "stdout",
+          "bytes": 53
+        },
+        {
+          "t": 4.517,
+          "stream": "stdout",
+          "bytes": 46
+        },
+        {
+          "t": 4.518,
+          "stream": "stdout",
+          "bytes": 132
+        },
+        {
+          "t": 4.532,
+          "stream": "stdout",
+          "bytes": 47
+        },
+        {
+          "t": 4.552,
+          "stream": "stdout",
+          "bytes": 48
+        },
+        {
+          "t": 4.658,
+          "stream": "stdout",
+          "bytes": 47
+        },
+        {
+          "t": 4.678,
+          "stream": "stdout",
+          "bytes": 41
+        },
+        {
+          "t": 4.696,
+          "stream": "stdout",
+          "bytes": 300
+        },
+        {
+          "t": 4.699,
+          "stream": "stdout",
+          "bytes": 52
+        }
+      ],
+      "stdout_preview": "{\"type\": \"stage\", \"stage\": \"final_start\"}\n{\"type\": \"stage\", \"stage\": \"final_round_1\", \"round\": 1, \"allow_tools\": true}\n{\"type\": \"thought\", \"data\": \"The\"}\n{\"type\": \"thought\", \"data\": \" user wants me to\"}\n{\"type\": \"thought\", \"data\": \" return a specific JSON\"}\n{\"type\": \"thought\", \"data\": \" object. Let me\"}\n{\"type\": \"thought\", \"data\": \" read the allowed workspace\"}\n{\"type\": \"thought\", \"data\": \" file first to see\"}\n{\"type\": \"thought\", \"data\": \" if there's any\"}\n{\"type\": \"thought\", \"data\": \" relevant ",
+      "stderr_preview": "",
+      "stdout_bytes": 2292,
+      "stderr_bytes": 0,
+      "meta": {
+        "elapsed_seconds": 4.717,
+        "allow_web": false,
+        "wall": 120.0,
+        "command": [
+          "/Library/Developer/CommandLineTools/usr/bin/python3",
+          "/Users/ken/Desktop/Work/exploratory/Pure_Tate/pure_tate/qwen_worker.py",
+          "--model",
+          "qwen3.7-max",
+          "--prompt",
+          "<redacted>",
+          "--max-tokens",
+          "1024",
+          "--thinking-budget",
+          "2048",
+          "--context-file",
+          "read_fixture.txt"
+        ]
+      },
+      "summary": {
+        "silent_until_first_byte": 0.041,
+        "jsonl_event_lines": 32,
+        "artifact_ok": true,
+        "note": "Harness inactivity watchdog only sees stdout/stderr. Streaming workers emit JSONL stage/text events so silence is near zero while the provider is producing tokens."
+      }
+    },
+    {
+      "name": "worker_web",
+      "ok": true,
+      "http_status": null,
+      "returncode": 0,
+      "timed_out": false,
+      "elapsed_seconds": 9.948,
+      "first_activity_seconds": 0.059,
+      "activity_events": [
+        {
+          "t": 0.059,
+          "stream": "stdout",
+          "bytes": 133
+        },
+        {
+          "t": 1.355,
+          "stream": "stdout",
+          "bytes": 35
+        },
+        {
+          "t": 1.41,
+          "stream": "stdout",
+          "bytes": 49
+        },
+        {
+          "t": 1.495,
+          "stream": "stdout",
+          "bytes": 59
+        },
+        {
+          "t": 1.497,
+          "stream": "stdout",
+          "bytes": 41
+        },
+        {
+          "t": 1.634,
+          "stream": "stdout",
+          "bytes": 55
+        },
+        {
+          "t": 1.634,
+          "stream": "stdout",
+          "bytes": 44
+        },
+        {
+          "t": 1.79,
+          "stream": "stdout",
+          "bytes": 49
+        },
+        {
+          "t": 1.791,
+          "stream": "stdout",
+          "bytes": 39
+        },
+        {
+          "t": 1.876,
+          "stream": "stdout",
+          "bytes": 53
+        },
+        {
+          "t": 1.877,
+          "stream": "stdout",
+          "bytes": 33
+        },
+        {
+          "t": 2.028,
+          "stream": "stdout",
+          "bytes": 169
+        },
+        {
+          "t": 2.405,
+          "stream": "stdout",
+          "bytes": 239
+        },
+        {
+          "t": 2.412,
+          "stream": "stdout",
+          "bytes": 623
+        },
+        {
+          "t": 2.412,
+          "stream": "stdout",
+          "bytes": 247
+        },
+        {
+          "t": 3.866,
+          "stream": "stdout",
+          "bytes": 35
+        },
+        {
+          "t": 3.977,
+          "stream": "stdout",
+          "bytes": 50
+        },
+        {
+          "t": 4.121,
+          "stream": "stdout",
+          "bytes": 52
+        },
+        {
+          "t": 4.122,
+          "stream": "stdout",
+          "bytes": 47
+        },
+        {
+          "t": 4.251,
+          "stream": "stdout",
+          "bytes": 53
+        },
+        {
+          "t": 4.252,
+          "stream": "stdout",
+          "bytes": 54
+        },
+        {
+          "t": 4.441,
+          "stream": "stdout",
+          "bytes": 50
+        },
+        {
+          "t": 4.442,
+          "stream": "stdout",
+          "bytes": 51
+        },
+        {
+          "t": 4.443,
+          "stream": "stdout",
+          "bytes": 52
+        },
+        {
+          "t": 4.444,
+          "stream": "stdout",
+          "bytes": 42
+        },
+        {
+          "t": 4.661,
+          "stream": "stdout",
+          "bytes": 57
+        },
+        {
+          "t": 4.662,
+          "stream": "stdout",
+          "bytes": 33
+        },
+        {
+          "t": 4.767,
+          "stream": "stdout",
+          "bytes": 224
+        },
+        {
+          "t": 4.768,
+          "stream": "stdout",
+          "bytes": 92
+        },
+        {
+          "t": 4.917,
+          "stream": "stdout",
+          "bytes": 50
+        },
+        {
+          "t": 4.931,
+          "stream": "stdout",
+          "bytes": 41
+        },
+        {
+          "t": 4.961,
+          "stream": "stdout",
+          "bytes": 623
+        },
+        {
+          "t": 4.962,
+          "stream": "stdout",
+          "bytes": 178
+        },
+        {
+          "t": 6.548,
+          "stream": "stdout",
+          "bytes": 35
+        },
+        {
+          "t": 6.549,
+          "stream": "stdout",
+          "bytes": 49
+        },
+        {
+          "t": 6.653,
+          "stream": "stdout",
+          "bytes": 59
+        },
+        {
+          "t": 6.654,
+          "stream": "stdout",
+          "bytes": 50
+        },
+        {
+          "t": 6.776,
+          "stream": "stdout",
+          "bytes": 54
+        },
+        {
+          "t": 6.777,
+          "stream": "stdout",
+          "bytes": 44
+        },
+        {
+          "t": 6.914,
+          "stream": "stdout",
+          "bytes": 48
+        },
+        {
+          "t": 6.914,
+          "stream": "stdout",
+          "bytes": 54
+        },
+        {
+          "t": 7.022,
+          "stream": "stdout",
+          "bytes": 50
+        },
+        {
+          "t": 7.596,
+          "stream": "stdout",
+          "bytes": 437
+        },
+        {
+          "t": 7.598,
+          "stream": "stdout",
+          "bytes": 158
+        },
+        {
+          "t": 7.598,
+          "stream": "stdout",
+          "bytes": 77
+        },
+        {
+          "t": 8.981,
+          "stream": "stdout",
+          "bytes": 33
+        },
+        {
+          "t": 9.056,
+          "stream": "stdout",
+          "bytes": 49
+        },
+        {
+          "t": 9.208,
+          "stream": "stdout",
+          "bytes": 44
+        },
+        {
+          "t": 9.209,
+          "stream": "stdout",
+          "bytes": 54
+        },
+        {
+          "t": 9.339,
+          "stream": "stdout",
+          "bytes": 55
+        },
+        {
+          "t": 9.339,
+          "stream": "stdout",
+          "bytes": 53
+        },
+        {
+          "t": 9.621,
+          "stream": "stdout",
+          "bytes": 46
+        },
+        {
+          "t": 9.622,
+          "stream": "stdout",
+          "bytes": 137
+        },
+        {
+          "t": 9.76,
+          "stream": "stdout",
+          "bytes": 44
+        },
+        {
+          "t": 9.783,
+          "stream": "stdout",
+          "bytes": 49
+        },
+        {
+          "t": 9.899,
+          "stream": "stdout",
+          "bytes": 49
+        },
+        {
+          "t": 9.9,
+          "stream": "stdout",
+          "bytes": 32
+        },
+        {
+          "t": 9.925,
+          "stream": "stdout",
+          "bytes": 300
+        },
+        {
+          "t": 9.927,
+          "stream": "stdout",
+          "bytes": 52
+        }
+      ],
+      "stdout_preview": "{\"type\": \"stage\", \"stage\": \"web_evidence_start\"}\n{\"type\": \"stage\", \"stage\": \"web_evidence_round_1\", \"round\": 1, \"allow_tools\": true}\n{\"type\": \"thought\", \"data\": \"The\"}\n{\"type\": \"thought\", \"data\": \" user wants me to\"}\n{\"type\": \"thought\", \"data\": \" read the allowed workspace\"}\n{\"type\": \"thought\", \"data\": \" file and\"}\n{\"type\": \"thought\", \"data\": \" return a specific JSON\"}\n{\"type\": \"thought\", \"data\": \" object. Let\"}\n{\"type\": \"thought\", \"data\": \" me read the file\"}\n{\"type\": \"thought\", \"data\": \" first",
+      "stderr_preview": "",
+      "stdout_bytes": 5764,
+      "stderr_bytes": 0,
+      "meta": {
+        "elapsed_seconds": 9.948,
+        "allow_web": true,
+        "wall": 120.0,
+        "command": [
+          "/Library/Developer/CommandLineTools/usr/bin/python3",
+          "/Users/ken/Desktop/Work/exploratory/Pure_Tate/pure_tate/qwen_worker.py",
+          "--model",
+          "qwen3.7-max",
+          "--prompt",
+          "<redacted>",
+          "--max-tokens",
+          "1024",
+          "--thinking-budget",
+          "2048",
+          "--context-file",
+          "read_fixture.txt",
+          "--allow-web"
+        ]
+      },
+      "summary": {
+        "silent_until_first_byte": 0.059,
+        "jsonl_event_lines": 67,
+        "artifact_ok": true,
+        "note": "Harness inactivity watchdog only sees stdout/stderr. Streaming workers emit JSONL stage/text events so silence is near zero while the provider is producing tokens."
+      }
+    }
+  ],
+  "diagnosis": {
+    "headline": "Live probes passed with progressive JSONL streaming; inactivity false-hangs should no longer apply while tokens flow.",
+    "causes": [],
+    "bullets": [
+      "worker_no_web finished in 4.717s; first stdout/stderr only after 0.041s of silence.",
+      "worker_web finished in 9.948s; first stdout/stderr only after 0.059s of silence.",
+      "STREAMING: worker emitted progressive JSONL with first activity under 5s (events: worker_no_web=32, worker_web=67)."
+    ]
+  },
+  "out_dir": "CLI_test/results/qwen_hang/20260803T090815263351Z"
+}

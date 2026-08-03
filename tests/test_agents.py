@@ -11,9 +11,11 @@ from pure_tate.agents import (
     _parse_codex_controller_decision,
     _run_codex_controller,
     _extract_json_object,
+    _extract_qwen_stream,
     _failure_detail,
     _normalize_inferred_pairs,
     _normalize_source_references,
+    _qwen_observable_stream,
     _validate_review_verdict_consistency,
     _validate_artifact,
     assemble_prompt,
@@ -594,6 +596,44 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertEqual(value["id"], "ATT-0022")
         self.assertEqual(value["target"], {"g": 6, "n": 6})
         self.assertEqual(value["argument_markdown"], r"\Gamma and \omega")
+
+    def test_qwen_stream_extracts_concatenated_text_events(self):
+        raw = "\n".join(
+            [
+                json.dumps({"type": "stage", "stage": "final_start"}),
+                json.dumps({"type": "thought", "data": "private reasoning"}),
+                json.dumps({"type": "text", "data": '{"id":"ATT-0099",'}),
+                json.dumps({"type": "heartbeat", "elapsed_seconds": 15}),
+                json.dumps({"type": "text", "data": '"status":"pass"}'}),
+                json.dumps({"type": "end", "stopReason": "stop"}),
+            ]
+        )
+        value = _extract_qwen_stream(raw)
+        self.assertEqual(value["id"], "ATT-0099")
+        self.assertEqual(value["status"], "pass")
+        observable = _qwen_observable_stream(raw)
+        self.assertIn('"type": "text"', observable)
+        self.assertIn('"type": "stage"', observable)
+        self.assertNotIn("private reasoning", observable)
+        self.assertNotIn("heartbeat", observable)
+
+    def test_qwen_stream_falls_back_to_plain_json(self):
+        raw = json.dumps({"id": "ATT-0100", "status": "legacy"})
+        value = _extract_qwen_stream(raw)
+        self.assertEqual(value["id"], "ATT-0100")
+        self.assertEqual(value["status"], "legacy")
+
+    def test_qwen_stream_surfaces_error_without_text(self):
+        raw = "\n".join(
+            [
+                json.dumps({"type": "stage", "stage": "final_start"}),
+                json.dumps({"type": "error", "message": "quota exhausted"}),
+                json.dumps({"type": "end", "stopReason": "error"}),
+            ]
+        )
+        with self.assertRaises(ValueError) as ctx:
+            _extract_qwen_stream(raw)
+        self.assertIn("quota exhausted", str(ctx.exception))
 
     def test_envelope_prose_and_object_pairs_normalize(self):
         raw = json.dumps(

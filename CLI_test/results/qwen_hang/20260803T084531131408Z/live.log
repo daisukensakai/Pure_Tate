@@ -1,0 +1,33 @@
+2026-08-03T08:45:31.131662+00:00 start suite=hang probes=['dns_tcp', 'chat_no_thinking', 'chat_thinking', 'chat_thinking_high_budget', 'responses_simple', 'responses_web'] wall=180s base=https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1 model=qwen3.7-max key=DASHSCOPE_API_KEY
+2026-08-03T08:45:31.131782+00:00 --- probe dns_tcp ---
+2026-08-03T08:45:31.270873+00:00 [dns_tcp] resolved token-plan.ap-southeast-1.maas.aliyuncs.com -> ['43.98.173.108', '47.84.193.37', '64:ff9b::2b62:ad6c', '64:ff9b::2f54:c125'] in 0.139s
+2026-08-03T08:45:31.313552+00:00 [dns_tcp] tcp connect 43.98.173.108:443 ok in 0.042s
+2026-08-03T08:45:31.313985+00:00 [dns_tcp] RESULT ok=True http=None elapsed=None
+2026-08-03T08:45:31.314089+00:00 --- probe chat_no_thinking ---
+2026-08-03T08:45:31.314202+00:00 [chat_no_thinking] BEGIN t=0.0s
+2026-08-03T08:45:32.526430+00:00 [chat_no_thinking] END ok t=1.2s
+2026-08-03T08:45:32.527273+00:00 [chat_no_thinking] RESULT ok=True http=200 elapsed=1.211
+2026-08-03T08:45:32.527420+00:00 --- probe chat_thinking ---
+2026-08-03T08:45:32.527571+00:00 [chat_thinking] BEGIN t=0.0s
+2026-08-03T08:45:37.530698+00:00 [chat_thinking] HEARTBEAT still waiting t=5.0s
+2026-08-03T08:45:40.737378+00:00 [chat_thinking] END ok t=8.2s
+2026-08-03T08:45:40.738427+00:00 [chat_thinking] RESULT ok=True http=200 elapsed=8.209
+2026-08-03T08:45:40.738721+00:00 --- probe chat_thinking_high_budget ---
+2026-08-03T08:45:40.738958+00:00 [chat_thinking_high_budget] BEGIN t=0.0s
+2026-08-03T08:45:47.874284+00:00 [chat_thinking_high_budget] END ok t=7.1s
+2026-08-03T08:45:47.875249+00:00 [chat_thinking_high_budget] RESULT ok=True http=200 elapsed=7.135
+2026-08-03T08:45:47.875514+00:00 --- probe responses_simple ---
+2026-08-03T08:45:47.875788+00:00 [responses_simple] BEGIN t=0.0s
+2026-08-03T08:45:49.355852+00:00 [responses_simple] END ok t=1.5s
+2026-08-03T08:45:49.356558+00:00 [responses_simple] RESULT ok=False http=200 elapsed=1.479
+2026-08-03T08:45:49.356703+00:00 --- probe responses_web ---
+2026-08-03T08:45:49.356850+00:00 [responses_web] BEGIN t=0.0s
+2026-08-03T08:45:59.358631+00:00 [responses_web] HEARTBEAT still waiting t=10.0s
+2026-08-03T08:46:05.429171+00:00 [responses_web] END ok t=16.1s
+2026-08-03T08:46:05.430288+00:00 [responses_web] RESULT ok=True http=200 elapsed=16.072
+2026-08-03T08:46:05.432115+00:00 DONE overall_ok=False
+2026-08-03T08:46:05.432307+00:00 diagnosis: Partial failure; see bullets.
+2026-08-03T08:46:05.432428+00:00   - Basic Chat Completions works (1.2s).
+2026-08-03T08:46:05.432536+00:00   - High-budget thinking completed in 7.1s (silent until done).
+2026-08-03T08:46:05.432632+00:00   - Responses+web completed in 16.1s.
+2026-08-03T08:46:05.432722+00:00 wrote /Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test/results/qwen_hang/20260803T084531131408Z/summary.json
