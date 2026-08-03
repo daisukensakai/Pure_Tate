@@ -1,5 +1,6 @@
 import subprocess
 import unittest
+from email.header import decode_header, make_header
 from unittest import mock
 
 from pure_tate.notifications import send_desktop_notification, send_ntfy_notification
@@ -38,3 +39,18 @@ class DesktopNotificationTests(unittest.TestCase):
         self.assertEqual(request.data, b"Body")
         self.assertEqual(request.headers["Title"], "Title")
         self.assertEqual(request.headers["Priority"], "high")
+
+    def test_ntfy_encodes_non_latin1_title_for_http_header(self):
+        response = mock.MagicMock(status=200)
+        response.__enter__.return_value = response
+        title = "Pure Tate • step 1/1"
+        with mock.patch(
+            "pure_tate.notifications._ntfy_config",
+            return_value={"server": "https://ntfy.sh", "topic": "private-topic"},
+        ), mock.patch(
+            "pure_tate.notifications.urlopen", return_value=response
+        ) as post:
+            self.assertTrue(send_ntfy_notification(title, "Body"))
+        encoded = post.call_args.args[0].headers["Title"]
+        encoded.encode("ascii")
+        self.assertEqual(str(make_header(decode_header(encoded))), title)

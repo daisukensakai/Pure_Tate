@@ -1,0 +1,100 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-03T00:22:16.181307+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "qwen"
+    ],
+    "research": [
+      "grok",
+      "claude",
+      "qwen"
+    ],
+    "review": [
+      "grok",
+      "claude",
+      "codex",
+      "qwen"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 4274,
+      "completed_at": "2026-08-02T23:36:57.618142+00:00",
+      "engine": "claude",
+      "engine_pid": 2569,
+      "engine_process_group": 2569,
+      "error": "agent failed with exit 1: You've hit your session limit \u00b7 resets 1pm (Asia/Tokyo)",
+      "last_activity_at": "2026-08-02T23:36:56.657980+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": true,
+        "ntfy": false
+      },
+      "output": "research/finding-audits/FAUD-0041.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 2569,
+          "engine_process_group": 2569,
+          "started_at": "2026-08-02T23:36:54.808699+00:00",
+          "supervisor_pid": 2568,
+          "supervisor_process_group": 2568
+        }
+      ],
+      "started_at": "2026-08-02T23:36:54.770709+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 2568,
+      "task_id": "TASK-F-FND-0056"
+    },
+    {
+      "activity_bytes": 64,
+      "completed_at": "2026-08-03T00:22:15.889920+00:00",
+      "engine": "qwen",
+      "engine_pid": 2690,
+      "engine_process_group": 2690,
+      "error": "agent failed with exit 1: Qwen Responses API request failed: The read operation timed out",
+      "last_activity_at": "2026-08-03T00:22:15.786172+00:00",
+      "last_activity_stream": "stderr",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": true,
+        "ntfy": false
+      },
+      "output": "research/finding-audits/FAUD-0041.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 2690,
+          "engine_process_group": 2690,
+          "started_at": "2026-08-02T23:36:57.934750+00:00",
+          "supervisor_pid": 2689,
+          "supervisor_process_group": 2689
+        }
+      ],
+      "started_at": "2026-08-02T23:36:57.904890+00:00",
+      "state": "failed",
+      "step": 2,
+      "supervisor_pid": 2689,
+      "task_id": "TASK-F-FND-0056"
+    }
+  ],
+  "executed_steps": 2,
+  "parent_pid": 2562,
+  "parent_process_group": 2562,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260802T233654578301Z-2562",
+  "run_notification_delivery": {
+    "desktop": true,
+    "ntfy": false
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-02T23:36:54.578301+00:00",
+  "status": "completed_with_failures",
+  "stop_reason": "no_eligible_task"
+}

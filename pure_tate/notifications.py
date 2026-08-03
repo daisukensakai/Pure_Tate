@@ -4,8 +4,9 @@ import json
 import os
 import subprocess
 import sys
+from email.header import Header
 from typing import Any, Dict
-from urllib.error import URLError
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from .store import ROOT
@@ -77,27 +78,63 @@ def send_ntfy_notification(
     title: str, message: str, priority: str = "default"
 ) -> bool:
     """Publish a best-effort phone notification to an opt-in ntfy topic."""
+    return bool(send_ntfy_notification_detailed(title, message, priority)["sent"])
+
+
+def send_ntfy_notification_detailed(
+    title: str, message: str, priority: str = "default"
+) -> Dict[str, Any]:
+    """Publish to ntfy and retain a redacted delivery diagnosis."""
     config = _ntfy_config()
     if not config:
-        return False
+        return {"enabled": False, "sent": False, "error": "ntfy is not configured"}
     server, topic = config["server"], config["topic"]
     if not server.startswith("https://"):
-        return False
+        return {
+            "enabled": True,
+            "sent": False,
+            "error": "ntfy server must use https",
+        }
+
+    def header_value(value: str) -> str:
+        try:
+            value.encode("latin-1")
+        except UnicodeEncodeError:
+            return Header(value, "utf-8").encode()
+        return value
+
     try:
         request = Request(
             "%s/%s" % (server, topic),
             data=message.encode("utf-8"),
             headers={
-                "Title": title,
-                "Priority": priority,
+                "Title": header_value(title),
+                "Priority": header_value(priority),
                 "Tags": "computer",
             },
             method="POST",
         )
         with urlopen(request, timeout=10) as response:
-            return 200 <= response.status < 300
-    except (OSError, URLError, ValueError):
-        return False
+            sent = 200 <= response.status < 300
+            return {
+                "enabled": True,
+                "sent": sent,
+                "status": int(response.status),
+                "error": None if sent else "unexpected HTTP status",
+            }
+    except HTTPError as exc:
+        return {
+            "enabled": True,
+            "sent": False,
+            "status": int(exc.code),
+            "error": "HTTP %d: %s" % (exc.code, str(exc.reason)[:200]),
+        }
+    except (OSError, URLError, ValueError) as exc:
+        return {
+            "enabled": True,
+            "sent": False,
+            "error": "%s: %s" % (type(exc).__name__, str(exc)[:300]),
+        }
 
 
 def notify_campaign_step(
@@ -107,7 +144,7 @@ def notify_campaign_step(
     *,
     desktop: bool = True,
     ntfy: bool = False,
-) -> Dict[str, bool]:
+) -> Dict[str, Any]:
     """Notify after a campaign step reaches a terminal state."""
     state = str(event.get("state", "completed")).replace("_", " ")
     step = event.get("step", "?")
@@ -123,8 +160,15 @@ def notify_campaign_step(
         state,
     )
     desktop_sent = send_desktop_notification(title, message) if desktop else False
-    ntfy_sent = send_ntfy_notification(title, message) if ntfy else False
-    return {"desktop": desktop_sent, "ntfy": ntfy_sent}
+    ntfy_delivery = (
+        send_ntfy_notification_detailed(title, message)
+        if ntfy
+        else {"enabled": False, "sent": False, "error": None}
+    )
+    return {
+        "desktop": {"enabled": desktop, "sent": desktop_sent},
+        "ntfy": ntfy_delivery,
+    }
 
 
 def notify_campaign_run(
@@ -136,7 +180,7 @@ def notify_campaign_run(
     *,
     desktop: bool = True,
     ntfy: bool = False,
-) -> Dict[str, bool]:
+) -> Dict[str, Any]:
     """Notify once when a campaign batch exits."""
     title = "Pure Tate • run %s" % status
     message = "%s: %d/%d steps • %s" % (
@@ -146,5 +190,12 @@ def notify_campaign_run(
         stop_reason,
     )
     desktop_sent = send_desktop_notification(title, message) if desktop else False
-    ntfy_sent = send_ntfy_notification(title, message) if ntfy else False
-    return {"desktop": desktop_sent, "ntfy": ntfy_sent}
+    ntfy_delivery = (
+        send_ntfy_notification_detailed(title, message)
+        if ntfy
+        else {"enabled": False, "sent": False, "error": None}
+    )
+    return {
+        "desktop": {"enabled": desktop, "sent": desktop_sent},
+        "ntfy": ntfy_delivery,
+    }

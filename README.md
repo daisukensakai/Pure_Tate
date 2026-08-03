@@ -187,7 +187,9 @@ For phone alerts, install the free ntfy app and subscribe to the private topic
 in `data/notifications.local.json` (copy the tracked example file first when
 setting up another workspace). Once configured, campaign drives post the same
 per-step and final notices automatically; use `--no-notify-ntfy` to disable them
-for one drive. The topic acts as the shared secret; never commit or share it.
+for one drive. Unicode titles are RFC 2047 encoded for HTTP transport, and each
+run ledger records the redacted per-channel delivery status and HTTP result. The
+topic acts as the shared secret; never commit or share it.
 
 Remove `--dry-run` only after the listed research engines have passed live audits
 for both finding-audit and novelty phases. Once any live audit exists, dry-run
@@ -209,6 +211,15 @@ python3 -m pure_tate engine-health \
   --timeout 180 \
   --inactivity-timeout 60
 ```
+
+Qwen live-web turns use the Model Studio Responses API with `web_search` and
+`web_extractor`. The Singapore Qwen3.7-Max endpoint requires thinking mode when
+`web_extractor` is enabled, so the evidence stage uses a small 2,048-token thinking
+budget. A task has at most six model calls total: three evidence-stage calls and
+three final-artifact calls, with the last call of each stage forced tool-free for
+synthesis. The web-evidence response window is one hour and the main Qwen response
+window defaults to three hours (`QWEN_RESPONSES_TIMEOUT` may lower it). A web-stage
+failure falls forward to the final stage rather than discarding the whole task.
 
 Paid routing excludes a Qwen engine whose receipt is missing or failed; dry-run
 keeps it in the proposed rotation while displaying the failed state. Agent subprocesses

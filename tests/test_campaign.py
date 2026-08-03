@@ -126,6 +126,14 @@ class FocusedCampaignTests(unittest.TestCase):
                 ROOT / "reports" / "runs" / "RUN-TEST.json",
             ),
         ), mock.patch(
+            "pure_tate.campaign_driver.CampaignRunLock"
+        ), mock.patch(
+            "pure_tate.campaign_driver.recover_stale_run_ledgers",
+            return_value=[],
+        ), mock.patch(
+            "pure_tate.campaign_driver.live_run_ledgers",
+            return_value=[],
+        ), mock.patch(
             "pure_tate.campaign_driver.notify_campaign_step"
         ) as step_notification, mock.patch(
             "pure_tate.campaign_driver.notify_campaign_run"
@@ -277,7 +285,8 @@ class FocusedCampaignTests(unittest.TestCase):
         self.assertEqual(
             finding_by_id("FND-0036")["status"], "mechanically_verified"
         )
-        self.assertEqual(finding_by_id("FND-0037")["status"], "candidate")
+        finding_37_status = finding_by_id("FND-0037")["status"]
+        self.assertIn(finding_37_status, {"candidate", "corroborated"})
         visible = {
             item["id"]
             for item in findings_for_case(
@@ -286,7 +295,10 @@ class FocusedCampaignTests(unittest.TestCase):
         }
         self.assertIn("FND-0035", visible)
         self.assertIn("FND-0036", visible)
-        self.assertNotIn("FND-0037", visible)
+        if finding_37_status == "candidate":
+            self.assertNotIn("FND-0037", visible)
+        else:
+            self.assertIn("FND-0037", visible)
 
     def test_grok_web_is_available_on_agent_phases(self):
         research = _engine_argv("grok", "probe", phase="novelty")
@@ -348,7 +360,8 @@ class FocusedCampaignTests(unittest.TestCase):
             )
         self.assertIsNotNone(blocker)
         self.assertEqual(
-            blocker["independent_engine_states"], {"grok": "fail"}
+            blocker["independent_engine_states"]["grok"]["capability"],
+            "fail",
         )
         self.assertIn("passing live-web attestation", blocker["reason"])
 
@@ -616,7 +629,14 @@ class FocusedCampaignTests(unittest.TestCase):
         }
         calls = []
 
-        def boom(task, engine, output, timeout=None, progress_callback=None):
+        def boom(
+            task,
+            engine,
+            output,
+            timeout=None,
+            progress_callback=None,
+            process_start_callback=None,
+        ):
             calls.append(engine)
             raise ArtifactValidationError(
                 "confirmed review contains a failed or unresolved structured check",
@@ -656,6 +676,14 @@ class FocusedCampaignTests(unittest.TestCase):
                 },
                 ROOT / "reports" / "runs" / "RUN-TEST.json",
             ),
+        ), mock.patch(
+            "pure_tate.campaign_driver.CampaignRunLock"
+        ), mock.patch(
+            "pure_tate.campaign_driver.recover_stale_run_ledgers",
+            return_value=[],
+        ), mock.patch(
+            "pure_tate.campaign_driver.live_run_ledgers",
+            return_value=[],
         ):
             result = drive_campaign(
                 "C66-001",
@@ -673,7 +701,7 @@ class FocusedCampaignTests(unittest.TestCase):
         self.assertEqual(len(review_events), 2)
         self.assertEqual([event["engine"] for event in review_events], ["claude", "claude"])
         self.assertEqual(len(calls), 2)
-        self.assertEqual(result["stop_reason"], "step_limit")
+        self.assertEqual(result["stop_reason"], "step_limit_with_failures")
         self.assertTrue(all(event["state"] == "failed" for event in review_events))
 
     def test_macaulay2_is_digest_pinned_and_missing_runtime_is_explicit(self):

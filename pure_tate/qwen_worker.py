@@ -22,43 +22,43 @@ if str(PACKAGE_ROOT) not in sys.path:
     sys.path.insert(0, str(PACKAGE_ROOT))
 
 
-BASE_URL = "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1"
+DEFAULT_BASE_URL = "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1"
 DEFAULT_MODEL = "qwen3.7-max"
-API_KEY_ENV = "DASHSCOPE_API_KEY"
-MAX_TOOL_ROUNDS = 8
+# A Qwen task may make at most six model/tool rounds in total. Web-enabled
+# tasks reserve up to half for a short evidence docket and carry the remaining
+# budget into the final proof/audit stage.
+MAX_TOOL_ROUNDS = 6
+MAX_WEB_EVIDENCE_TOOL_ROUNDS = 3
 MAX_FILE_BYTES = 1_000_000
+WEB_EVIDENCE_MAX_TOKENS = 6_000
+WEB_EVIDENCE_THINKING_BUDGET = 2_048
+MAX_WEB_EVIDENCE_CHARS = 32_000
+WEB_EVIDENCE_TIMEOUT_SECONDS = 3_600
 
 
 def _responses_timeout() -> int:
-    raw = os.environ.get("QWEN_RESPONSES_TIMEOUT", "2700")
+    raw = os.environ.get("QWEN_RESPONSES_TIMEOUT", "10800")
     try:
-        return max(1, min(int(raw), 3600))
+        return max(1, min(int(raw), 10_800))
     except ValueError:
-        return 180
-
-
-def _max_tool_rounds() -> int:
-    """Return a bounded per-invocation tool-turn limit.
-
-    A provider can impose a shorter response-stream deadline than the harness.
-    Keeping the default preserves the normal multi-stage workflow, while an
-    operator can request a one-turn Qwen attempt with
-    ``QWEN_MAX_TOOL_ROUNDS=1`` when diagnosing that deadline.
-    """
-    raw = os.environ.get("QWEN_MAX_TOOL_ROUNDS", str(MAX_TOOL_ROUNDS))
-    try:
-        return max(1, min(int(raw), MAX_TOOL_ROUNDS))
-    except ValueError:
-        return MAX_TOOL_ROUNDS
+        return 10_800
 
 
 def _api_key() -> Optional[str]:
-    return os.environ.get(API_KEY_ENV)
+    return os.environ.get("DASHSCOPE_API_KEY") or os.environ.get("QWEN_API_KEY")
+
+
+def _base_url() -> str:
+    return (
+        os.environ.get("QWEN_BASE_URL")
+        or os.environ.get("DASHSCOPE_BASE_URL")
+        or DEFAULT_BASE_URL
+    ).rstrip("/")
 
 
 def _request(
     *, api_key: str, model: str, messages: List[Dict[str, Any]], tools: List[Dict[str, Any]],
-    max_tokens: int, thinking_budget: int,
+    max_tokens: int, thinking_budget: int, tool_choice: str = "auto",
 ) -> Dict[str, Any]:
     body: Dict[str, Any] = {
         "model": model,
@@ -70,15 +70,15 @@ def _request(
     }
     if tools:
         body["tools"] = tools
-        body["tool_choice"] = "auto"
+        body["tool_choice"] = tool_choice
     request = urllib.request.Request(
-        BASE_URL + "/chat/completions",
+        _base_url() + "/chat/completions",
         data=json.dumps(body).encode("utf-8"),
         headers={"Authorization": "Bearer " + api_key, "Content-Type": "application/json"},
         method="POST",
     )
     try:
-        with urllib.request.urlopen(request, timeout=900) as response:
+        with urllib.request.urlopen(request, timeout=_responses_timeout()) as response:
             payload = json.loads(response.read())
     except urllib.error.HTTPError as exc:
         raw = exc.read().decode("utf-8", "replace")
@@ -103,41 +103,56 @@ def _responses_request(
     previous_response_id: Optional[str],
     max_tokens: int,
     thinking_budget: int,
+    enable_thinking: bool = True,
+    timeout_seconds: Optional[int] = None,
+    allow_tools: bool = True,
 ) -> Dict[str, Any]:
     """Call Qwen's Responses API, which exposes native web tools for 3.7 Max."""
     body: Dict[str, Any] = {
         "model": model,
         "input": input_items,
         "instructions": instructions,
-        "tools": [
-            {"type": "web_search"},
-            {"type": "web_extractor"},
-            {
-                "type": "function",
-                "name": "read_file",
-                "description": "Read one file from the isolated task workspace.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {"path": {"type": "string"}},
-                    "required": ["path"],
-                    "additionalProperties": False,
-                },
-            },
-        ],
-        "enable_thinking": True,
+        "store": True,
         "max_output_tokens": max_tokens,
-        "thinking": {"budget_tokens": thinking_budget},
     }
+    body["tools"] = [
+        {"type": "web_search"},
+        {"type": "web_extractor"},
+        {
+            "type": "function",
+            "name": "read_file",
+            "description": "Read one file from the isolated task workspace.",
+            "parameters": {
+                "type": "object",
+                "properties": {"path": {"type": "string"}},
+                "required": ["path"],
+                "additionalProperties": False,
+            },
+        },
+    ]
+    body["tool_choice"] = "auto" if allow_tools else "none"
+    if enable_thinking:
+        body["enable_thinking"] = True
+        body["thinking"] = {"budget_tokens": thinking_budget}
+    else:
+        body["enable_thinking"] = False
     if previous_response_id:
         body["previous_response_id"] = previous_response_id
     request = urllib.request.Request(
-        BASE_URL + "/responses",
+        _base_url() + "/responses",
         data=json.dumps(body).encode("utf-8"),
-        headers={"Authorization": "Bearer " + api_key, "Content-Type": "application/json"},
+        headers={
+            "Authorization": "Bearer " + api_key,
+            "Content-Type": "application/json",
+            "x-dashscope-session-cache": "enable",
+        },
         method="POST",
     )
     try:
-        with urllib.request.urlopen(request, timeout=_responses_timeout()) as response:
+        request_timeout = (
+            _responses_timeout() if timeout_seconds is None else timeout_seconds
+        )
+        with urllib.request.urlopen(request, timeout=request_timeout) as response:
             payload = json.loads(response.read())
     except urllib.error.HTTPError as exc:
         raw = exc.read().decode("utf-8", "replace")
@@ -294,7 +309,7 @@ def _responses_function_calls(payload: Dict[str, Any]) -> List[Dict[str, Any]]:
     ]
 
 
-def _run_with_web(
+def _run_web_evidence(
     prompt: str,
     allowlist: Dict[str, Path],
     *,
@@ -305,31 +320,45 @@ def _run_with_web(
 ) -> str:
     names = "\n".join("- " + path for path in sorted(allowlist)) or "- (none)"
     instructions = (
-        "You are a read-only Pure Tate task agent. Use native web_search and "
-        "web_extractor for current sources when needed. You may read only the "
-        "listed workspace files through read_file. Return the required final "
-        "JSON artifact as plain text.\n\nAllowed workspace files:\n" + names
+        "You are stage 1 of a read-only Pure Tate task. Build a compact evidence "
+        "docket for the later proof/audit agent, not the final task artifact. "
+        "Use native web_search and web_extractor only when current sources are "
+        "needed; prefer at most two searches and two extractions. You may read "
+        "only the listed workspace files through read_file. Return promptly with "
+        "source URLs, the precise claims they support, and any caveats. Do not "
+        "attempt the full proof, write a long exposition, or return final JSON.\n\n"
+        "Allowed workspace files:\n" + names
     )
     pending: List[Dict[str, Any]] = [{"role": "user", "content": prompt}]
     previous_response_id: Optional[str] = None
-    max_tool_rounds = _max_tool_rounds()
-    for _round in range(max_tool_rounds):
+    for _round in range(MAX_WEB_EVIDENCE_TOOL_ROUNDS):
+        final_round = _round == MAX_WEB_EVIDENCE_TOOL_ROUNDS - 1
         payload = _responses_request(
             api_key=api_key,
             model=model,
             input_items=pending,
             instructions=instructions,
             previous_response_id=previous_response_id,
-            max_tokens=max_tokens,
-            thinking_budget=thinking_budget,
+            max_tokens=min(max_tokens, WEB_EVIDENCE_MAX_TOKENS),
+            thinking_budget=min(thinking_budget, WEB_EVIDENCE_THINKING_BUDGET),
+            # The Singapore Qwen3.7-Max endpoint requires thinking mode when
+            # web_extractor is present, even for a compact evidence docket.
+            enable_thinking=True,
+            timeout_seconds=WEB_EVIDENCE_TIMEOUT_SECONDS,
+            allow_tools=not final_round,
         )
         previous_response_id = str(payload.get("id") or "") or None
         calls = _responses_function_calls(payload)
         if not calls:
             content = _responses_text(payload)
             if content:
-                return content
+                return content[:MAX_WEB_EVIDENCE_CHARS]
             raise RuntimeError("Qwen Responses API returned no final text")
+        if final_round:
+            raise RuntimeError(
+                "Qwen web-evidence stage returned a tool call during its "
+                "tool-free final round"
+            )
         pending = []
         for call in calls:
             arguments = call.get("arguments", "{}")
@@ -353,33 +382,23 @@ def _run_with_web(
                 }
             )
     raise RuntimeError(
-        "Qwen Responses API exceeded the %d tool-round limit" % max_tool_rounds
+        "Qwen web-evidence stage exceeded the %d tool-round limit"
+        % MAX_WEB_EVIDENCE_TOOL_ROUNDS
     )
 
 
-def run(
+def _run_without_web(
     prompt: str,
-    context_files: Iterable[str],
+    allowlist: Dict[str, Path],
     *,
+    api_key: str,
     model: str,
     allow_grok: bool,
-    allow_web: bool,
     max_tokens: int,
     thinking_budget: int,
+    max_tool_rounds: int = MAX_TOOL_ROUNDS,
 ) -> str:
-    key = _api_key()
-    if not key:
-        raise RuntimeError("%s is not set" % API_KEY_ENV)
-    allowlist = _allowlist(context_files)
-    if allow_web:
-        return _run_with_web(
-            prompt,
-            allowlist,
-            api_key=key,
-            model=model,
-            max_tokens=max_tokens,
-            thinking_budget=thinking_budget,
-        )
+    """Run the final task through Chat Completions and local bounded tools."""
     grok_pool: Optional[Any] = None
     if allow_grok:
         from pure_tate.grok_workers import build_pool_from_env
@@ -402,15 +421,27 @@ def run(
     ]
     tools = _tools(allow_grok)
     try:
-        max_tool_rounds = _max_tool_rounds()
         for _round in range(max_tool_rounds):
+            final_round = _round == max_tool_rounds - 1
+            if final_round:
+                messages.append(
+                    {
+                        "role": "user",
+                        "content": (
+                            "The tool budget is exhausted. Do not request any "
+                            "more tools. Synthesize the required final JSON "
+                            "artifact now from the context already gathered."
+                        ),
+                    }
+                )
             payload = _request(
-                api_key=key,
+                api_key=api_key,
                 model=model,
                 messages=messages,
                 tools=tools,
                 max_tokens=max_tokens,
                 thinking_budget=thinking_budget,
+                tool_choice="none" if final_round else "auto",
             )
             choices = payload.get("choices")
             if not isinstance(choices, list) or not choices or not isinstance(choices[0], dict):
@@ -424,6 +455,10 @@ def run(
                 if not isinstance(content, str):
                     raise RuntimeError("Qwen API response has no final text")
                 return content
+            if final_round:
+                raise RuntimeError(
+                    "Qwen returned a tool call during its tool-free final round"
+                )
             messages.append(_assistant_message(message))
             for call in calls:
                 if not isinstance(call, dict):
@@ -451,6 +486,58 @@ def run(
     finally:
         if grok_pool is not None:
             grok_pool.shutdown(cancel_live=True)
+
+
+def run(
+    prompt: str,
+    context_files: Iterable[str],
+    *,
+    model: str,
+    allow_grok: bool,
+    allow_web: bool,
+    max_tokens: int,
+    thinking_budget: int,
+) -> str:
+    key = _api_key()
+    if not key:
+        raise RuntimeError("DASHSCOPE_API_KEY or QWEN_API_KEY is not set")
+    allowlist = _allowlist(context_files)
+    final_tool_rounds = MAX_TOOL_ROUNDS
+    if allow_web:
+        try:
+            evidence = _run_web_evidence(
+                prompt,
+                allowlist,
+                api_key=key,
+                model=model,
+                max_tokens=max_tokens,
+                thinking_budget=thinking_budget,
+            )
+        except RuntimeError as exc:
+            evidence = (
+                "Native web-evidence stage was bounded and unavailable: %s. "
+                "Do not invent web findings. Use supplied local sources and, "
+                "when enabled, a bounded Grok helper for any indispensable "
+                "live-source check; state any remaining evidence limitation."
+                % str(exc)[:1000]
+            )
+        prompt = (
+            prompt
+            + "\n\n--- Stage-1 web evidence docket (untrusted working context; "
+            "verify it and now complete the requested final artifact) ---\n"
+            + evidence
+        )
+        final_tool_rounds -= MAX_WEB_EVIDENCE_TOOL_ROUNDS
+    return _run_without_web(
+        prompt,
+        allowlist,
+        api_key=key,
+        model=model,
+        allow_grok=allow_grok,
+        max_tokens=max_tokens,
+        thinking_budget=thinking_budget,
+        max_tool_rounds=final_tool_rounds,
+    )
 
 
 def main() -> int:
