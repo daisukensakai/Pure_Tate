@@ -222,6 +222,21 @@ class TaskPacketContentTests(unittest.TestCase):
 
 
 class FocusedCampaignTests(unittest.TestCase):
+    def setUp(self):
+        # Driving the campaign reserves artifact IDs, and a spent reservation is
+        # a permanent claim that is never released. Pointed at the live ledger
+        # every test run would burn real REV/FAUD slots, so each test reserves
+        # into its own directory.
+        from pure_tate import run_lifecycle
+
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        patcher = mock.patch.object(
+            run_lifecycle, "RESERVATION_DIR", Path(directory.name)
+        )
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def test_step_limit_with_failed_event_is_not_reported_as_success(self):
         finding_task = {
             "id": "TASK-F-FND-FAIL",
