@@ -1,0 +1,236 @@
+{
+  "attempt_id": "ATT-0040",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0040-1",
+      "note": "Koszul/adjunction on regular zeros of pi^*F^vee(2) in P(E) (pi_*O(1)=E) is correct; packet P(E^vee) naming is cosmetic against the degree pin deg O(1)|_C = 2g+6.",
+      "statement": "O(1)|_C = omega_{C/P^1}, hence W_5 = omega_C^2(-D) and L = omega_C(-D).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0040-2",
+      "note": "Matches corroborated FND-0062/0063/0074 and SRC-0004 degree formula for n=g=6.",
+      "statement": "CE obstruction reduces to the f=5 summand; failure iff O_C(Gamma)=omega_C(-D).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0040-3",
+      "note": "Section restriction of the defining section of C forces containment of sigma in C if 2e < f_1, contradicting degree-4 irreducibility.",
+      "statement": "Lemma A: min f_i >= 3 forces every line-bundle quotient of E to have 2e >= f_1.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0040-4",
+      "note": "Castelnuovo-Severi forces gamma = q o h; composite computation gives E = O(1)(+)O(4)(+)O(4), contradicting Lemma A.",
+      "statement": "Lemma B: no curve on H^bal is hyperelliptic.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0040-5",
+      "note": "Clifford plus non-hyperelliptic exclusion; RR/Serre duality as in FND-0073 with M = O(D) identified.",
+      "statement": "h^0(O_C(D))=2 and h^0(L)=3 identically on H^bal.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0040-6",
+      "note": "Constant h^0 removes the FND-0047 jump obstruction; cohomology and base change applies.",
+      "statement": "pi_* L is locally free rank 3; P = P(pi_* L) is the relative |L|.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0040-7",
+      "note": "Base-locus reduced by Clifford on D+2p; Bertini on the moving part in char 0 answers FND-0083 at the ordered level.",
+      "statement": "P^red nonempty and dense on every geometric fibre; P^red -> H^bal smooth surjective of rel dim 2.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0040-8",
+      "note": "Unobstructed normal sheaf of the cover plus finite PGL_2 stabilizers gives stack dimension 15, addressing FND-0060; nonemptiness is SBI-2/FND-0005.",
+      "statement": "H is a smooth DM stack of dimension 15; H^bal nonempty open of dimension 15.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0040-9",
+      "note": "For the reduced/Abel-Jacobi model the purity and torsor claims are sound (FND-0064/0075). As a claim about the actual H^0-nonvanishing/Fitting degeneracy scheme on Conf, canonicity conflicts with excess 2 and FND-0046; theorem (4) overstates scheme-level identification even while (6) disclaims Fitting comparison.",
+      "statement": "Z is the total space of a finite etale S_6-torsor over P^red; Z smooth pure dim 17 over H^bal.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0040-10",
+      "note": "Monomorphism of balanced Z into M_{6,6} is essentially correct (D recovered as K-Gamma, h^0(D)=2 recovers gamma up to PGL_2, Aut comparison on geometric points). The inference that therefore the (6,6) CE evaluation-failure locus equals im(Z) is false: CE failure is relative to a cover, and unbalanced strata are omitted.",
+      "statement": "Z -> M_{6,6} is a monomorphism, so the (6,6) CE evaluation-failure locus is isomorphic to Z (pure dim 17 / pure codim 4).",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0040-11",
+      "note": "Dimension count for the reduced/AJ model is consistent; excess is correctly recorded as a limit rather than an lci claim (FND-0068).",
+      "statement": "Codim_Z Conf = 4 vs determinantal expectation 6, excess 2.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "THM-0040-5-full-locus",
+      "note": "Load-bearing false identification. For F=O(3)(+)O(6), obstruction degrees are 4f+n-2g-14 = -8 (f=3) and +4 (f=6); the f=6 summand is a positive-degree Brill-Noether condition whose failure points map into M_{6,6} outside im(Z). Contradicts the attempt's own GAP-Z-UNBALANCED and packet FND-0052 (balanced reduced-support is an open piece of the failure locus).",
+      "statement": "Theorem clause (5): the (6,6) CE evaluation-failure locus in M_{6,6} is isomorphic to balanced Z.",
+      "verdict": "failed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-04",
+  "finding_candidates": [
+    {
+      "attack_class": "omitted-stable-pairs-or-strata",
+      "evidence": "ATT-0040 theorem clause (5) asserts isomorphism of 'the (6,6) CE evaluation-failure locus' with balanced Z while GAP-Z-UNBALANCED admits unbalanced failure is unconstructed; degree computation matches SRC-0004/FND-0062/0063 formula at g=n=6.",
+      "key": "balanced-Z-not-full-CE-failure-locus",
+      "statement": "Monomorphism of the balanced ordered failure stack Z^bal into M_{6,6} does not identify the full (6,6) Casnati-Ekedahl evaluation-failure locus with Z^bal. Unbalanced tetragonal strata contribute additional failure points: for F=O(3)(+)O(6) the CE obstruction degrees are 4f+n-2g-14 = -8 (f=3) and +4 (f=6), so failure is a positive-degree Brill-Noether condition on the f=6 summand, not the balanced residual condition O(Gamma)\u2245omega(-D), and the corresponding marked curves lie outside im(Z^bal).",
+      "supports_finding_id": "FND-0052",
+      "verdict_suggestion": "corroborated"
+    },
+    {
+      "attack_class": "scheme-structure-vs-geometric-points",
+      "evidence": "ATT-0040 theorem (4) claims Z is canonically that torsor total space while theorem (6)/GAP-Z-SCHEME simultaneously disclaim Fitting comparison and quantify excess 2.",
+      "key": "canonical-AJ-vs-Fitting-Z-tension",
+      "statement": "On the (6,6) balanced locus, fibrewise equivalence between H^0(omega tensor W^vee(Gamma))\u22600 and O(Gamma)\u2245L identifies geometric points of the reduced Abel-Jacobi incidence with failure points, but with determinantal excess 2 this does not licence a scheme-theoretic or Fitting identification of the evaluation-failure degeneracy locus with the smooth S_6-torsor Conf x_{|L|} P^red.",
+      "supports_finding_id": "FND-0046",
+      "verdict_suggestion": "corroborated"
+    },
+    {
+      "attack_class": "stack-versus-coarse-or-scope-overreach",
+      "evidence": "Direct comparison of ATT-0040 theorem clause (5) with GAP-Z-UNBALANCED and CLM-0040-10 in the same artifact.",
+      "key": "ATT-0040-clause5-internal-contradiction",
+      "statement": "Any C66-GEO-Z theorem that both (i) leaves unbalanced tetragonal failure unconstructed and (ii) asserts that the CE evaluation-failure locus in M_{6,6} is isomorphic to the balanced model Z is self-refuting; mono of Z only embeds the balanced open piece.",
+      "supports_finding_id": null,
+      "verdict_suggestion": "novel"
+    }
+  ],
+  "id": "REV-0058",
+  "independent": true,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Lemma 10.6 obstruction identification and deg W_f = 4g+12-4f used correctly; no degree-only substitute for the CE obstruction spaces (FND-0061).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0005",
+      "note": "Nonemptiness of balanced failure geometry used as SBI-2 input; strengthened fibrewise by CLM-0040-7.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0046",
+      "note": "Attempt both cites geometric-points-only limitation (GAP-Z-SCHEME) and asserts Z is canonically the AJ/torsor total space in theorem (4)/CLM-0040-9; scheme-level identification remains undischarged.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "FND-0047",
+      "note": "Jump obstruction correctly removed by proving h^0(L)=3 constant on H^bal.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0052",
+      "note": "Corroborated finding that balanced reduced-support is an open piece, not the full closed pure-codim-4 failure locus, is violated by theorem clause (5) equating the CE failure locus in M_{6,6} with Z.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "FND-0058",
+      "note": "Required constancy h^0(omega(-D))=3 on whole H^bal is proved via Lemmas A/B + Clifford.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0060",
+      "note": "Stack dimension 15 obtained from deformation theory with finite stabilizers, not a bare coarse count promotion.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0061",
+      "note": "Obstruction spaces identified with SRC-0004 Lemma 10.6, not by degree/Serre duality alone.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0062",
+      "note": "f=4 degree -4 vanishing used correctly.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0063",
+      "note": "f=5 degree-0 Abel-Jacobi failure condition used correctly.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0064",
+      "note": "Ordered Conf to reduced-support divisor space as finite etale S_6-torsor used at stack level.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0067",
+      "note": "Non-closedness not claimed; GAP-Z-CLOSURE recorded (non-load-bearing for the false part of (5)).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0068",
+      "note": "No nowhere-lci claim; excess recorded without ideal-depth overreach.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0069",
+      "note": "Purity for balanced Z argued from smooth constant-relative-dimension morphism rather than dominant-fibre-only count.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0073",
+      "note": "GAP-Z-W5D identification discharged by adjunction; h^0(L)=1+h^0(M) used with M=O(D).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0074",
+      "note": "Borderline n=6 specificity acknowledged; no illicit transport to other n.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0075",
+      "note": "Stack-level torsor and Q-coefficient invariants/coinvariants caveats respected; no integral/coarse descent claimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0083",
+      "note": "Reduced-support nonemptiness proved beyond chi(L)=1 by base-locus+Bertini.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0086",
+      "note": "Exhaustiveness of components/strata for the full failure support is not obtained: unbalanced strata are explicitly out of scope while theorem (5) still names 'the' failure locus in M_{6,6}.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "FND-0087",
+      "note": "All spaces smooth over char-0 base; reduction-compatibility caveat does not arise.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0040-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Theorem clause (5) is load-bearing false: monomorphism Z->M_{6,6} only yields Z \u2245 im(Z), not that the (6,6) CE evaluation-failure locus equals balanced Z. CE failure is relative to a cover. On the unbalanced Maroni stratum F=O(3)(+)O(6) the SRC-0004 obstruction degrees are 4f+n-2g-14 = -8 (f=3) and +4 (f=6); the f=6 summand is a positive-degree Brill-Noether condition whose failure points still forget to M_{6,6} outside im(Z). This contradicts the attempt's own GAP-Z-UNBALANCED and packet FND-0052 (balanced reduced-support is only an open piece). Secondary residual tension: theorem (4) asserts Z is canonically the smooth S_6-torsor/AJ model while (6) and FND-0046 keep Fitting/determinantal equality open under excess 2. Outcome: attempt refuted as a theorem statement; several geometric lemmas on H^bal (adjunction, Lemmas A/B, h^0 constancy, P^red) survive as partial progress toward C66-GEO-Z.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be a field of characteristic 0. Let H be the algebraic stack over k of pairs (C, gamma) with C smooth projective geometrically connected of genus 6 and gamma : C -> P^1 finite flat of degree 4, taken modulo automorphisms of the target; H is a smooth DM stack of dimension 15. Let H^bal be the open substack on which the Casnati-Ekedahl rank-2 bundle F on the relative P^1 has balanced splitting type F = O(4) (+) O(5) (degrees taken relative to the universal P^1-bundle), and let pi : Cu -> H^bal be the universal curve, D := gamma^* O_{P^1}(1) the universal g^1_4 divisor class of relative degree 4, W_5 the f_2 = 5 constituent of (O_{P(E)}(2) tensor gamma^* F^vee)|_Cu of SRC-0004 Lemma 10.6, and L := W_5 tensor omega_{Cu/H^bal}^{-1}, of relative degree 6. Let Conf := Conf_6(Cu/H^bal) be the stack of ordered 6-tuples of pairwise distinct sections with universal divisor Du, and let Z subset Conf be the locus at which the Casnati-Ekedahl evaluation map of SRC-0004 Lemma 10.6 fails, i.e. H^0(C, omega_C tensor W|_C^vee(Gamma)) =/= 0 with Gamma = x_1 + ... + x_6. Then, with all line bundles on Cu understood up to twist by a line bundle pulled back from H^bal (which affects no statement below): (1) O_{P(E)}(1)|_Cu = omega_{Cu/P^1}, hence W_5 = omega_{Cu/H^bal}^{2}(-D) and L = omega_{Cu/H^bal}(-D); the f = 4 constituent contributes nothing and the evaluation map fails at Gamma if and only if Gamma + D is a canonical divisor on C, equivalently O_C(Gamma) = L; (2) every curve C carried by H^bal is non-hyperelliptic and satisfies h^0(O_C(D)) = 2, hence h^0(L) = 3 identically on H^bal; (3) pi_* L is locally free of rank 3 and its formation commutes with base change, so P := P(pi_* L) -> H^bal is a P^2-bundle canonically identified with the relative complete linear system |L|, and its reduced-support open P^red subset P is nonempty and dense in every geometric fibre of P -> H^bal; (4) Z is canonically the total space of the finite etale S_6-torsor Conf x_{|L|} P^red -> P^red; consequently Z -> H^bal is smooth and surjective of relative dimension 2, Z is smooth of pure dimension 17, and every irreducible component of Z dominates an irreducible component of H^bal; (5) the forgetful morphism Z -> M_{6,6} is a monomorphism of stacks, so the (6,6) Casnati-Ekedahl evaluation-failure locus in M_{6,6} is isomorphic to Z and is a constructible substack of pure dimension 17, i.e. of pure codimension 4; and (6) Z has codimension 4 in Conf whereas the generic determinantal expectation for the failure condition is 6, so the failure degeneracy locus carries excess 2, and no assertion is made here about its Fitting/determinantal scheme structure, about closedness of its image in M_{6,6}, or about the Hodge-Tate type of its cohomology.",
+  "verdict": "refuted"
+}

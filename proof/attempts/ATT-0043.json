@@ -1,0 +1,131 @@
+{
+  "argument_markdown": "Put X_j=M_{6,j} for 1<=j<=6 and let H denote the rank-12 weight-one symplectic local system R^1 of the universal closed genus-6 curve. Write V_r=H^{tensor r}, with V_0=Q. The virtual cohomological dimension of X_j is d_j=4*6-4+j=20+j.\n\n1. Odd-tensor top-degree vanishing on X_1.\n\nWe first prove the following general lemma. If g>=2, G_{g,1} is the pure mapping class group of a genus-g surface with one marked point, H_Q is its standard symplectic module, and r is odd, then\n\nH^{4g-3}(G_{g,1};H_Q^{tensor r})=0.   (1)\n\nHarer's virtual-duality theorem identifies the top-degree group with\n\nH_0(G_{g,1};St_g tensor H_Q^{tensor r}),\n\nwhere St_g is the Steinberg module, the top reduced homology of the curve complex. The rational statement for the orbifold group follows by passing to a torsion-free finite-index subgroup and averaging; over Q, invariants and coinvariants for the finite quotient agree.\n\nUse the standard filling-system presentation of St_g. Let A be the ordered system of 2g unoriented arcs a_1,b_1,...,a_g,b_g based at the marked point, with complement a disk, and let s=[A]. The filling-system cyclicity theorem says that St_g is generated as a Q[G_{g,1}]-module by s. For completeness, this cyclicity follows directly from the cellular presentation: boundaries of one-filling systems give chord-slide relations; sliding an adjacent chord endpoint reduces lexicographically the list of intersections with the ordered arcs; iteration terminates at A. Reversing a slide uses the same boundary relation, so every oriented zero-filling system is congruent to a mapping-class translate of A. Degenerate systems represent zero. Thus s generates St_g.\n\nFor every i choose a handle half-turn tau_i, supported on the i-th one-holed torus and fixing the marked point and the complement. It fixes each unoriented arc in A and does not permute the ordered arcs, hence tau_i s=s. On H_Q it is -1 on H_i=span(a_i,b_i) and +1 on the other symplectic planes, where H_Q is the direct sum of the H_i.\n\nEvery class in the coinvariants of St_g tensor H_Q^{tensor r} is represented by s tensor v, because s generates St_g and [gamma s tensor v]=[s tensor gamma^{-1}v]. Since tau_i s=s, coinvariance gives\n\n[s tensor v]=[s tensor tau_i v].   (2)\n\nChoose the tensor-product basis coming from the bases of the H_i. In any basis tensor t of odd tensor degree r, some H_i occurs an odd number of times. For that i, tau_i t=-t. Equation (2) then gives [s tensor t]=-[s tensor t], hence [s tensor t]=0 over Q. These tensors form a basis, so all coinvariants vanish. This proves (1). Taking g=6 and r=5 yields\n\nH^{21}(X_1;V_5)=0.   (3)\n\nHere orbifold cohomology of X_1 agrees with group cohomology because pointed Teichmuller space is contractible and stabilizers are finite.\n\n2. The forgetful tower and its lowest-weight quotient.\n\nFor 2<=j<=6 let f_j:X_j->X_{j-1} forget the j-th marked point. Its fibre is a genus-6 curve with j-1 punctures. It has cohomology only in degrees zero and one, and its first-cohomology local system R_j=R^1(f_j)_*Q fits into\n\n0 -> H -> R_j -> Q(-1)^{j-2} -> 0.   (4)\n\nThis is the residue exact sequence: the puncture residues have their single sum relation. Tensoring (4) with V_r gives\n\n0 -> V_{r+1} -> V_r tensor R_j -> V_r(-1)^{j-2} -> 0.   (5)\n\nFix j and put r=6-j. Thus d_j+r=26 and d_{j-1}+r+1=26. The Leray spectral sequence for f_j with coefficients V_r has only rows q=0,1. In total degree d_j, the q=0 term is\n\nH^{d_j}(X_{j-1};V_r)=0,\n\nbecause d_j=d_{j-1}+1 exceeds the virtual cohomological dimension of X_{j-1}; virtual cohomological dimension gives vanishing above d_{j-1} for every rational local coefficient module. The only remaining term is E_2^{d_{j-1},1}. No differential enters it because R^2(f_j)_*Q=0, and every possible outgoing differential lands above d_{j-1}. Consequently there is an isomorphism of mixed Hodge structures\n\nH^{d_j}(X_j;V_r) = H^{d_{j-1}}(X_{j-1};V_r tensor R_j).   (6)\n\nThe coefficient V_r(-1) in the quotient of (5) is pure of weight r+2. Cohomology in degree d_{j-1} with that coefficient has weights at least\n\nd_{j-1}+r+2=27.\n\nTherefore\n\nGr^W_26 H^{d_{j-1}}(X_{j-1};V_r(-1)^{j-2})=0.   (7)\n\nMorphisms of mixed Hodge structures are strict for the weight filtration. Applying Gr^W_26 to the cohomology long exact sequence of (5), and using (7), gives a surjection\n\nGr^W_26 H^{d_{j-1}}(X_{j-1};V_{r+1}) -> Gr^W_26 H^{d_{j-1}}(X_{j-1};V_r tensor R_j).   (8)\n\nCombining (6) and (8), for j=6,5,4,3,2 successively, gives a composite surjection\n\nGr^W_26 H^{21}(X_1;V_5) -> Gr^W_26 H^{26}(X_6;Q).   (9)\n\nBy (3), the source of (9) is zero. Hence\n\nGr^W_26 H^{26}(M_{6,6};Q)=0.   (10)\n\nSince M_{6,6} is smooth and the coefficients are constant, H^{26}(M_{6,6};Q) has weights at least 26. Thus W_26 equals Gr^W_26 in this degree, and (10) is precisely\n\nW_26 H^{26}(M_{6,6};Q)=0.   (11)\n\n3. Conversion to the exact target.\n\nThe complex dimension of M_{6,6} is 3*6-3+6=21. Poincare duality for smooth Deligne-Mumford stacks gives\n\nW_{-16}H^{BM}_{16}(M_{6,6};Q) = W_26 H^{26}(M_{6,6};Q)(21).\n\nBy (11), both sides are zero. In the category of rational Hodge structures, the zero object is the direct sum indexed by the empty set of copies of Q(8). Therefore the exact group is a direct sum of Q(8), as asserted.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "claim_id": "ATT-0043-C1",
+      "proof": "Harer virtual duality identifies the group with coinvariants of St_g tensor H^{tensor r}. The Steinberg module has a cyclic standard filling-system generator fixed by the independent handle half-turns. Each odd basis tensor is negated by at least one such half-turn, so its coinvariant class is zero.",
+      "statement": "For every g>=2 and odd r, H^{4g-3}(M_{g,1};H^{tensor r})=0.",
+      "status": "proved"
+    },
+    {
+      "claim_id": "ATT-0043-C2",
+      "proof": "The q=0 Leray term vanishes above the base virtual cohomological dimension. The residue quotient V_{6-j}(-1)^{j-2} contributes only weights at least 27. Leray degeneration in the unique remaining bidegree and strictness of the coefficient long exact sequence give the asserted quotient.",
+      "statement": "For each forgetful map X_j->X_{j-1}, 2<=j<=6, Gr^W_26 H^{d_j}(X_j;V_{6-j}) is a quotient of Gr^W_26 H^{d_{j-1}}(X_{j-1};V_{7-j}).",
+      "status": "proved"
+    },
+    {
+      "claim_id": "ATT-0043-C3",
+      "proof": "Compose the five quotient maps of ATT-0043-C2 for j=6,5,4,3,2.",
+      "statement": "There is a surjection Gr^W_26 H^{21}(M_{6,1};H^{tensor 5}) onto Gr^W_26 H^{26}(M_{6,6};Q).",
+      "status": "proved"
+    },
+    {
+      "claim_id": "ATT-0043-C4",
+      "proof": "The source in ATT-0043-C3 vanishes by ATT-0043-C1 with g=6 and r=5. Smoothness gives weights at least 26, so W_26=Gr^W_26.",
+      "statement": "W_26 H^{26}(M_{6,6};Q)=0.",
+      "status": "proved"
+    },
+    {
+      "claim_id": "ATT-0043-C5",
+      "proof": "Poincare duality identifies it with W_26 H^{26}(M_{6,6};Q)(21), which is zero by ATT-0043-C4. The zero Hodge structure is the empty direct sum of Q(8).",
+      "statement": "W_{-16}H^{BM}_{16}(M_{6,6};Q) is a direct sum of Q(8).",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  },
+  "context_revision": 2,
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    "vcd-only vanishing is not used at the equality degree on M_{6,6}; virtual cohomological dimension is used only for terms strictly above the dimensions of the bases in the forgetful tower.",
+    "The weight-two residue systems are retained and eliminated from Gr^W_26 by their weight floor; R^1 is never treated as pure of weight one.",
+    "The connecting maps from the residue quotients are allowed to change kernels; only the rigorously obtained quotient maps on Gr^W_26 are used.",
+    "No compactification m=0 term, undecorated top-weight graph complex, point count, or unproved tetragonal purity assertion is used."
+  ],
+  "gap_markers": [],
+  "id": "ATT-0043",
+  "lane": "full-resolution",
+  "methods_used": [
+    "Harer virtual duality",
+    "Steinberg-module filling-system presentation",
+    "handle-half-turn coinvariant vanishing",
+    "forgetful-map Leray spectral sequences",
+    "puncture residue exact sequences",
+    "mixed-Hodge weight bounds and strictness",
+    "Poincare duality"
+  ],
+  "new_inputs": [
+    {
+      "evidence": "The route is reopened by an explicit proof that H^{21}(M_{6,1};H^{tensor 5}) vanishes. Harer duality turns this group into Steinberg-module coinvariants, and handle half-turns fixing a cyclic filling-system generator kill every odd tensor. Five strict lowest-weight Leray quotient maps then force the exact (6,6) target to vanish.",
+      "evidence_claim_ids": [
+        "FND-0020",
+        "FND-0033",
+        "FND-0036",
+        "FND-0037"
+      ],
+      "route": "forgetful-map-renaming-local-system-unknown"
+    }
+  ],
+  "novelty_claims": [
+    {
+      "statement": "The blocked local-system route is discharged by the odd-tensor top-degree vanishing lemma, not by renaming the unknown local-system group.",
+      "status": "proved"
+    }
+  ],
+  "observable_trace_id": "TRACE-0024",
+  "observable_trace_sha256": "fd5e25f1025d7a43c26e9f7c11cacf507969f5618b60897314085e3964da816a",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "paired_attempt_policy_revision": 2,
+  "paired_problem_key": "02355889ed59e9a07fb7d6e5fa3332a674f9a74c55fb869ffbf797e3fc91c1c2",
+  "paired_theorem_sha256": "c5e3507db1b4cef8fddb7c6bc92044dd75181ad33ae1649739f76e893e013cd3",
+  "paired_turn_kind": "forced-proof",
+  "proof_dependencies": [],
+  "result_type": "proof",
+  "routing_chain_id": "forced:C66-001:0",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0001",
+    "FND-0020",
+    "FND-0033",
+    "FND-0036",
+    "FND-0037"
+  ],
+  "source_ids": [],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-FULL",
+  "summary": "The exact group vanishes. A five-stage forgetful-map argument gives a surjection from Gr^W_26 H^21(M_{6,1};H^{tensor 5}) onto Gr^W_26 H^26(M_{6,6};Q). Harer duality and the cyclic filling-system presentation of the mapping-class-group Steinberg module show that the former whole cohomology group is zero: independent handle half-turns fix a cyclic Steinberg generator and kill every odd tensor of the standard symplectic representation. Hence W_26 H^26(M_{6,6};Q)=0, and Poincare duality identifies the requested Borel-Moore group with the zero, hence empty, direct sum of Q(8).",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-001-FORCED-FULL",
+  "theorem_scope": {
+    "coefficients": "Q",
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group."
+}
