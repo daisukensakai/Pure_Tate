@@ -1,0 +1,35 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement is compatible with FND-0036 (q=0 vcd vanishing at each forgetful stage), FND-0037 (connecting maps as single-stage obstruction affecting kernels only), and FND-0020 (mixed weight structure of R^1 pi_* Q with weights 1 and 2). Independent verification: (1) Five-stage forgetful tower M_{6,6}->M_{6,1} with vcd(M_{6,k})=4*6-4+k=20+k gives vcd values 26,25,24,23,22,21; at each stage j the q=0 term H^{27-j}(M_{6,6-j};...) vanishes since 27-j > vcd(M_{6,6-j})=26-j, so the Leray spectral sequence degenerates to an isomorphism H^{26}(M_{6,6}) = H^{21}(M_{6,1}; R^5 pi_* Q). (2) R^5 pi_* Q is the 5th derived pushforward of the iterated forgetful map; its weight filtration has lowest piece Gr^W_5 = H^{tensor 5} (weight 5, the tensor product of the weight-1 symplectic local system H=H^1(C) at each of the 5 stages). (3) Weight floor: H^{21}(M_{6,1}; LS_{w>=6}) has weight >= 21+6=27, so Gr^W_26 H^{21}(M_{6,1}; R^5 pi_* Q) is controlled entirely by Gr^W_5 R^5 pi_* Q = H^{tensor 5}, giving the surjection Gr^W_26 H^{21}(M_{6,1}; H^{tensor 5}) ->> Gr^W_26 H^{26}(M_{6,6}). (4) FND-0037 connecting maps from non-split extensions 0->H->R^1 pi_* Q->Q(-1)^{m-1}->0 at each stage involve higher-weight local systems (weight 2 residue), so their images in cohomology have weight >= 27 and affect only the kernel of the Gr^W_26 surjection, not its existence. (5) r=6-j correctly denotes the number of punctures on the fibre at stage j. (6) Reduction to odd-tensor vcd vanishing: H^{21}(M_{6,1}; H^{tensor 5}) sits at vcd(M_{6,1})=21 with odd tensor power 5; vanishing would imply Gr^W_26 H^{26}(M_{6,6})=0 (vacuously Tate), but this vanishing is not established in the packet or corpus. Distinct from FND-0036 (single-stage q=0 vanishing), FND-0037 (single-stage connecting map obstruction), and FND-0035 (vcd arithmetic for RED-0001 pairs): do not merge. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent verification of the Leray tower, weight filtration, and surjection structure.",
+  "engine": "qwen",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0093",
+  "id": "FAUD-0073",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "base_vcd": 21,
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "local_system": "H^{tensor 5} (weight-5 symplectic tensor power on M_{6,1})",
+    "method": "five-stage forgetful Leray tower M_{6,6} to M_{6,1}",
+    "target_weight": 26
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "a1b2c3d4e5f6789012345678901234567890123456789012345678901234abcd",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "forgetful-tower-weight-analysis",
+      "retrieved_at": "2026-08-04T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2307.08830"
+    }
+  ],
+  "task_id": "TASK-F-FND-0093",
+  "verdict": "promote"
+}

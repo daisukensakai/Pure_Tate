@@ -1,5 +1,6 @@
 {
   "campaign_id": "C66-001",
+  "completed_at": "2026-08-04T07:30:07.636418+00:00",
   "engine_pools": {
     "prover": [
       "grok",
@@ -56,13 +57,27 @@
       "task_id": "TASK-V-ATT-0045-P1"
     },
     {
-      "activity_bytes": 311017,
+      "activity_bytes": 354112,
+      "artifact_sha256": "adfa80311e9d147ab0375c9a1f20091e70747117f97985ba882418f6a09ff560",
+      "completed_at": "2026-08-04T07:27:27.442321+00:00",
       "engine": "qwen",
       "engine_pid": 7523,
       "engine_process_group": 7523,
-      "last_activity_at": "2026-08-04T07:26:15.149211+00:00",
+      "last_activity_at": "2026-08-04T07:27:27.052839+00:00",
       "last_activity_stream": "stdout",
       "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
       "output": "research/finding-audits/FAUD-0073.json",
       "phase": "finding-audit",
       "processes": [
@@ -75,17 +90,70 @@
         }
       ],
       "started_at": "2026-08-04T07:19:43.749891+00:00",
-      "state": "running",
+      "state": "completed",
       "step": 2,
       "supervisor_pid": 7522,
       "task_id": "TASK-F-FND-0093"
+    },
+    {
+      "activity_bytes": 121345,
+      "artifact_sha256": "788789aceaa8da8bcf8870c57cb5f9e446648df9b2dd7222379174d7ee8aca43",
+      "completed_at": "2026-08-04T07:30:06.668442+00:00",
+      "engine": "qwen",
+      "engine_pid": 16283,
+      "engine_process_group": 16283,
+      "last_activity_at": "2026-08-04T07:30:06.601454+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0074.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 16283,
+          "engine_process_group": 16283,
+          "started_at": "2026-08-04T07:27:29.183458+00:00",
+          "supervisor_pid": 16282,
+          "supervisor_process_group": 16282
+        }
+      ],
+      "started_at": "2026-08-04T07:27:29.096674+00:00",
+      "state": "completed",
+      "step": 3,
+      "supervisor_pid": 16282,
+      "task_id": "TASK-F-FND-0094"
     }
   ],
+  "executed_steps": 3,
   "parent_pid": 5538,
   "parent_process_group": 5532,
   "requested_steps": 3,
   "run_id": "RUN-C66-001-20260804T071239453534Z-5538",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
   "schema_version": 2,
   "started_at": "2026-08-04T07:12:39.453534+00:00",
-  "status": "running"
+  "status": "completed",
+  "stop_reason": "step_limit"
 }
