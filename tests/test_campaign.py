@@ -1,10 +1,16 @@
 import copy
 import hashlib
+import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
 
-from pure_tate.agents import _engine_argv, _validate_artifact, run_task
+from pure_tate.agents import (
+    _engine_argv,
+    _validate_artifact,
+    _validate_task_packet,
+    run_task,
+)
 from pure_tate.campaign_driver import (
     _drive_campaign_unlocked,
     _next_due_forced_task,
@@ -18,6 +24,7 @@ from pure_tate.campaigns import (
     campaign_packet_binding,
     campaign_packet_binding_sha256,
     campaign_packet_record,
+    campaign_packet_snapshot_path,
     campaign_status,
     load_campaign,
     novelty_status,
@@ -35,6 +42,7 @@ from pure_tate.novelty import (
     verify_source_records,
 )
 from pure_tate.store import ROOT
+from pure_tate.targets import CONTEXT_REVISION
 from pure_tate.tasking import campaign_mathematics_tasks, finding_audit_tasks
 
 
@@ -123,6 +131,94 @@ class PacketBindingTests(unittest.TestCase):
                 "C66-001",
             )
         )
+
+    def test_snapshot_path_is_derived_once_and_does_not_nest(self):
+        working = Path("proof/packets/generated/C66-001-v4.md")
+        digest = "a" * 64
+        snapshot = campaign_packet_snapshot_path(working, digest)
+        self.assertEqual(snapshot.name, "C66-001-v4-%s.md" % ("a" * 16))
+        # Re-deriving from a snapshot must not append a second digest.
+        self.assertEqual(
+            campaign_packet_snapshot_path(snapshot, digest), snapshot
+        )
+
+
+class TaskPacketContentTests(unittest.TestCase):
+    """Campaign tasks are gated on packet identity, but the recorded text
+    stays pinned.
+
+    The working packet is rewritten on every finding adjudication, so content
+    equality against it cannot gate campaign work -- that conflation froze the
+    campaign. The immutable snapshot is what keeps ``packet_sha256`` meaningful,
+    and a task carrying a binding hash was necessarily built after snapshots
+    existed, so it must be able to produce its own packet text.
+    """
+
+    def _task(self, root, packet_sha256, binding="current"):
+        packets = root / "proof" / "packets" / "generated"
+        packets.mkdir(parents=True, exist_ok=True)
+        working = packets / "C66-001-v4.md"
+        working.write_text("current packet text", encoding="utf-8")
+        task = {
+            "phase": "review",
+            "campaign_id": "C66-001",
+            "context_revision": CONTEXT_REVISION,
+            "input_packet": str(working.relative_to(root)),
+            "packet_sha256": packet_sha256,
+            "target": {"g": 6, "n": 6},
+        }
+        if binding is not None:
+            task["packet_binding_sha256"] = binding
+        return task, working
+
+    def _validate(self, root, task):
+        with mock.patch("pure_tate.agents.ROOT", root), mock.patch(
+            "pure_tate.campaigns.packet_binding_matches", return_value=True
+        ):
+            _validate_task_packet(task)
+
+    def test_recorded_packet_text_is_verified_against_the_snapshot(self):
+        superseded = "superseded packet text"
+        digest = hashlib.sha256(superseded.encode("utf-8")).hexdigest()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            task, working = self._task(root, digest)
+            snapshot = campaign_packet_snapshot_path(working, digest)
+            snapshot.write_text(superseded, encoding="utf-8")
+            # Working text has churned past the recorded hash; the snapshot
+            # still reproduces it, so the task stays valid.
+            self.assertNotEqual(
+                hashlib.sha256(working.read_bytes()).hexdigest(), digest
+            )
+            self._validate(root, task)
+
+    def test_missing_snapshot_is_rejected_for_bound_tasks(self):
+        digest = hashlib.sha256(b"superseded packet text").hexdigest()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            task, _working = self._task(root, digest)
+            with self.assertRaisesRegex(ValueError, "snapshot is missing"):
+                self._validate(root, task)
+
+    def test_corrupted_snapshot_is_rejected(self):
+        digest = hashlib.sha256(b"superseded packet text").hexdigest()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            task, working = self._task(root, digest)
+            snapshot = campaign_packet_snapshot_path(working, digest)
+            snapshot.write_text("tampered", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "hash mismatch"):
+                self._validate(root, task)
+
+    def test_pre_binding_tasks_keep_identity_only_validation(self):
+        # Artifacts written before the binding hash have no snapshot and their
+        # packet texts were overwritten in place; identity equivalence via the
+        # migration record is all that remains checkable.
+        digest = hashlib.sha256(b"unrecoverable packet text").hexdigest()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            task, _working = self._task(root, digest, binding=None)
+            self._validate(root, task)
 
 
 class FocusedCampaignTests(unittest.TestCase):

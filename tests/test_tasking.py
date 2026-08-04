@@ -78,6 +78,36 @@ class TaskingTests(unittest.TestCase):
         self.assertEqual(tasks[0]["review_pass"], 1)
         self.assertTrue(all(task["phase"] == "review" for task in tasks))
 
+    def test_review_task_carries_the_attempt_packet_binding(self):
+        # Review tasks are gated on packet identity like every other campaign
+        # turn. Without the binding hash the reviewer falls back to the
+        # pre-binding migration table and every review is judged stale, which
+        # leaves attempts unable to earn their two passes.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            attempts = root / "proof" / "attempts"
+            attempts.mkdir(parents=True)
+            (attempts / "ATT-0001.json").write_text(
+                json.dumps(
+                    self._complete_attempt(
+                        campaign_id="C66-001",
+                        campaign_revision=4,
+                        subproblem_id="C66-FULL",
+                        packet_binding_sha256="b" * 64,
+                    )
+                ),
+                encoding="utf-8",
+            )
+            with mock.patch("pure_tate.tasking.ROOT", root), mock.patch(
+                "pure_tate.campaigns.packet_binding_matches", return_value=True
+            ), mock.patch(
+                "pure_tate.campaigns.campaign_route_policy_errors",
+                return_value=[],
+            ):
+                tasks = review_tasks()
+        self.assertEqual(len(tasks), 1)
+        self.assertEqual(tasks[0]["packet_binding_sha256"], "b" * 64)
+
     def test_complete_attempt_earns_second_pass_despite_proposed_label(self):
         # Regression: a gap-free, fully proved attempt that labelled itself
         # "proposed" used to be capped at one review pass and could therefore

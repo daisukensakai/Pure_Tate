@@ -1420,25 +1420,53 @@ def _validate_task_packet(task: Dict[str, Any]) -> None:
     if not path.is_file():
         raise ValueError("task packet is missing: %s" % relative)
     actual = hashlib.sha256(path.read_bytes()).hexdigest()
+    target = task.get("target")
+    if not isinstance(target, dict):
+        raise ValueError("task target dictionary is missing")
+    if task.get("campaign_id"):
+        from .campaigns import (
+            campaign_packet_snapshot_path,
+            packet_binding_matches,
+        )
+
+        # Staleness is judged on packet identity, not packet content: a finding
+        # adjudication landing between task construction and dispatch rewrites
+        # the findings section (and the mutable working path) and must not
+        # invalidate in-flight work. Content-hash equality against the working
+        # path is therefore not required for campaign tasks; binding match is.
+        if not packet_binding_matches(task, str(task["campaign_id"])):
+            raise ValueError(
+                "task packet is stale relative to the current packet identity"
+            )
+        expected = task.get("packet_sha256")
+        if not isinstance(expected, str) or not expected or actual == expected:
+            return
+        # The recorded text is still pinned: every packet write leaves an
+        # immutable content-addressed snapshot, so a task that carries a binding
+        # hash must be able to produce the exact packet it was built against.
+        # Pre-binding artifacts predate the snapshots and their superseded texts
+        # were overwritten in place, so identity equivalence is all that remains
+        # checkable for them -- see proof/migrations/campaign-*-binding.json.
+        if not task.get("packet_binding_sha256"):
+            return
+        snapshot = campaign_packet_snapshot_path(path, expected)
+        if not snapshot.is_file():
+            raise ValueError(
+                "task packet snapshot is missing for %s: %s"
+                % (expected, snapshot.name)
+            )
+        snapshot_hash = hashlib.sha256(snapshot.read_bytes()).hexdigest()
+        if snapshot_hash != expected:
+            raise ValueError(
+                "task packet hash mismatch: expected %s, got %s"
+                % (expected, snapshot_hash)
+            )
+        return
     if actual != task.get("packet_sha256"):
         raise ValueError(
             "task packet hash mismatch: expected %s, got %s"
             % (task.get("packet_sha256"), actual)
         )
-    target = task.get("target")
-    if not isinstance(target, dict):
-        raise ValueError("task target dictionary is missing")
-    if task.get("campaign_id"):
-        from .campaigns import packet_binding_matches
-
-        # Staleness is judged on packet identity, not packet content: a finding
-        # adjudication landing between task construction and dispatch rewrites
-        # the findings section and must not invalidate the task.
-        if not packet_binding_matches(task, str(task["campaign_id"])):
-            raise ValueError(
-                "task packet is stale relative to the current packet identity"
-            )
-        return
     from .packets import render_case_packet
     from .store import load_repository
 

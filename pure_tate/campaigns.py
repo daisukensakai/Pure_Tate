@@ -180,6 +180,22 @@ def campaign_packet_path(campaign_id: str = DEFAULT_CAMPAIGN) -> Path:
     )
 
 
+def campaign_packet_snapshot_path(working_path: Path, packet_sha256: str) -> Path:
+    """Content-addressed snapshot path for a packet with ``packet_sha256``.
+
+    The working path is rewritten on every finding adjudication, so the snapshot
+    is the only stable copy of the text an artifact was actually produced
+    against. Both the writer and the task-packet validator derive the name here
+    so the convention cannot drift between them.
+    """
+    stem = working_path.stem
+    marker = "-%s" % packet_sha256[:16]
+    if stem.endswith(marker):
+        # Already a snapshot path; do not nest a second digest.
+        return working_path
+    return working_path.with_name("%s%s%s" % (stem, marker, working_path.suffix))
+
+
 def _primary_locator_excerpt(source_id: str) -> str:
     text_path = ROOT / "corpus" / "text" / (source_id + ".txt")
     if not text_path.is_file():
@@ -457,9 +473,7 @@ def write_campaign_packet(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]
     # The working path is overwritten on every finding adjudication. Keep an
     # immutable content-addressed copy so a superseded packet stays readable and
     # binding equivalence remains checkable after the fact.
-    snapshot = path.with_name(
-        "%s-%s%s" % (path.stem, record["packet_sha256"][:16], path.suffix)
-    )
+    snapshot = campaign_packet_snapshot_path(path, record["packet_sha256"])
     if not snapshot.exists():
         atomic_write_text(snapshot, record["_text"])
     return {key: value for key, value in record.items() if key != "_text"}

@@ -484,6 +484,9 @@ def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
                             "theorem_statement": attempt.get(
                                 "theorem_statement"
                             ),
+                            "packet_binding_sha256": attempt.get(
+                                "packet_binding_sha256"
+                            ),
                         }
                         if attempt.get("campaign_id")
                         else {}
