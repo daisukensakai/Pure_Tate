@@ -1,0 +1,147 @@
+{
+  "attempt_id": "ATT-0044",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0044-1",
+      "note": "Independently re-derived. deg W_f=4g+12-4f gives 20 and 16 at g=6 (matches the SRC-0004 excerpt and the packet convention W_f=(O(2) tensor gamma^*O(-f))|_C, including the sign). 2g-2=10, so h^0(W_4)=15, h^0(W_5)=11, rank pi_*(W_f|Gamma)=6, phi: 26 -> 12, and Fit_0(coker phi)=I_12(phi). Block-diagonal minor argument is correct: choosing k columns from block 1 and 12-k from block 2 forces rank <= min(6,k)+min(6,12-k) < 12 unless k=6, and for k=6 the determinant is the product of a 6x6 minor of each block, so I_12(phi)=I_6(phi_4)*I_6(phi_5) with no missed cross terms. coker(phi_4)=R^1 pi_*W_4(-Gamma) since R^1pi_*W_4=0 and Gamma is finite; deg W_4(-Gamma)=14>10 and the Serre dual H^0(omega tensor W_4^{-1}(Gamma)) has degree 10-20+6=-4, so coker(phi_4)=0 and I_6(phi_4)=O_S (Fit_0 unit <=> module zero, since Fit_0 is contained in the annihilator). Hence I_12(phi)=I_6(phi_5). Step 2 is also correct and is only a fibrewise restatement: deg N=10-16+6=0 and a degree-zero line bundle on a smooth proper geometrically connected curve has a section iff it is trivial. Remark, not a defect: the direct-sum hypothesis is stronger than the argument needs (see finding candidate ce-w-filtration-suffices-for-fitting).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0044-2",
+      "note": "Most of this claim is confirmed. (a) coker(Phi)=R^1p_*(omega tensor Poin^{-1}) is right, and top-degree base change plus Serre duality give fibre H^0(Q), so V(J)=e(S) topologically. (b) The ranks at e are right: L_univ has relative degree 2g-2+n=16>10, h^0=11, rank Phi at e is 5, ker=H^0(omega) (dim 6), coker=H^1(omega) (dim 1). (c) The derivative claim and the Nakayama endgame are correct; I verified them independently and my strongest attack on them failed (see strongest_attack). UNRESOLVED is the inclusion J subset I_e, which the whole endgame rests on (M=I/J is not even defined without it). The attempt infers it from support alone: 'Hence V(J) is supported set-theoretically on e(S), and J subset I_e.' Over a non-reduced base -- explicitly in scope, since S is only assumed locally Noetherian and the theorem advertises arbitrary base change and non-reduced compatibility -- that inference is invalid. Template: on P=Spec k[eps][x] over S=Spec k[eps] with I_e=(x), the ideal J=(x^2,eps) satisfies V(J)=V(x) as a set, yet J is not contained in I_e. The containment is nevertheless TRUE here, but only via a computation the attempt never performs: restricting along e gives coker(e^*Phi)=R^1pi_*omega_{C/S}=O_S, free of rank 1, whence Fit_0=0 and e^*J=0. That this is a genuine computation and not a formality is shown by the fact that a cokernel O_S/(t) along e would give Fit_0=(t) and J not contained in I_e. One line repairs it, using exactly the Fitting base-change fact the attempt already invokes in Step 4; as written it is a non sequitur at precisely the nilpotent-sensitive point FND-0046 isolates, in the one claim whose declared novelty over FND-0063 is the scheme structure. Secondary compression, recorded but not separately decisive: the passage from 'the tangent map is an isomorphism' to 'they therefore generate I_e/I_e^2' silently uses a second Nakayama over A/I_e (fibrewise spanning of (I/I^2) tensor k(p) implies generation of the module I/I^2).",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0044-3",
+      "note": "Step 4 taken on its own is fully confirmed and is the strongest part of the attempt. The six disjoint sections make Pic^0_{C/S} representable and a sigma-rigidified Poincare bundle available, so (id x a_N)^*Poin = N tensor pi^*Lambda is legitimate; omega(Gamma) tensor N^{-1} = W_5 checks out on the nose; Fit_0 is unchanged by twisting an evaluation map by a base line bundle and commutes with arbitrary scalar extension; and R^1p_*L_univ=0 (relative degree 16>2g-2=10) genuinely licenses the ordinary, underived pullback of Phi along a possibly non-flat a_N, so the 'no Tor-independence' clause is earned rather than assumed -- no underived pullback of p_*Poin is ever taken. Marked unresolved only because this claim IS the theorem statement and therefore inherits the unproved J subset I_e step of CLM-0044-2; it is conditionally correct given that one line.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0044-4",
+      "note": "The free S_6-action on ordered pairwise-distinct sections makes Conf_6(C/S) -> Div^6_{C/S,rs} a finite etale S_6-torsor at stack level (this is FND-0064), its pullback along the Abel-Jacobi incidence is again a torsor, and reduction is compatible because an etale morphism pulled back to a reduced base has reduced total space, so (Z_ord)_red -> ((Z_unord)^{rs})_red is still a torsor -- consistent with FND-0087. The attempt correctly says 'on stacks' and does not assert the coarse-space version that FND-0075 forbids, and correctly calls the reduced-support incidence an open, not a closed, locus (FND-0052). The scheme-theoretic identification a_N = (translation by W_5 tensor omega^{-1}) composed with Abel-Jacobi composed with the sum map is valid, so a_N^{-1}(e) is the pullback of the incidence.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0044-THEOREM-FINAL-CLAUSE",
+      "note": "Not one of the attempt's four numbered claims, but part of the exact theorem_statement I am required to judge: 'On the universal ordered distinct configuration stack it is the pullback of the reduced-support Abel-Jacobi incidence.' Two hypotheses are used there and neither is established. (i) Base type: Steps 1-4 are stated and proved for a locally Noetherian characteristic-zero SCHEME S, while the clause asserts the conclusion over an algebraic stack; the extension is routine (every ingredient -- pi_*, R^1p_*, Pic^0, Fitting ideals -- is smooth-local on the base and base-change compatible), but no atlas or descent remark appears in the text. (ii) Splitting: the theorem's hypothesis 'W is split over S as W_4 + W_5' is inherited when S is taken to be the universal balanced configuration stack, and a global splitting there is not automatic. On the balanced locus the relative Harder-Narasimhan filtration 0 -> L_5 -> F -> L_4 -> 0 always exists, but it splits only if Ext^1_{P^1_B}(L_4,L_5) = H^1(B, gamma'_*O(1)) vanishes, which can fail for a general base B. As written the final clause is therefore conditional on an unverified hypothesis at exactly the place it is claimed to be universal. The defect is repairable and the repair also strengthens the theorem (see finding candidate ce-w-filtration-suffices-for-fitting).",
+      "verdict": "unresolved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-04",
+  "finding_candidates": [
+    {
+      "evidence": "Derived while auditing ATT-0044 Step 3; the counterexample template and the R^1pi_*omega = O_S repair were both verified independently, including the observation that the repair is a real computation (a non-free cokernel along e would break the inclusion).",
+      "key": "fitting-vs-section-ideal-nilpotent-direction",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "generality": "any relative Fitting ideal versus section ideal over a locally Noetherian, possibly non-reduced base"
+      },
+      "statement": "In any comparison of a relative Fitting/degeneracy ideal J with the ideal I_e of a section over a possibly non-reduced base, the two inclusions have very different difficulty and only one is nilpotent-sensitive. I_e subset J is the geometric half and follows from the first-order/derivative computation plus Nakayama. J subset I_e does NOT follow from V(J) = e(S) set-theoretically: over a non-reduced base the radical carries no information about the base nilpotents (template: P = Spec k[eps][x] over S = Spec k[eps], I_e = (x), J = (x^2, eps) has V(J) = V(x) yet J is not contained in I_e). The correct and only-slightly-longer route is to restrict the evaluation map along e and use that Fitting ideals commute with arbitrary base change: J.O_{e(S)} = Fit_0(coker(e^*Phi)), and this vanishes exactly when coker(e^*Phi) is locally free of positive rank. In the CE/Pic^0 setting coker(e^*Phi) = R^1 pi_* omega_{C/S} = O_S, free of rank one, so Fit_0 = 0 and the containment holds; if the cokernel along the section were instead a torsion module O_S/(t), the containment would genuinely fail. Reviewers of any C66-GEO-Z-style scheme-structure claim should check this specific inclusion and demand the restriction-along-the-section computation, not a support statement.",
+      "supports_finding_id": "FND-0046"
+    },
+    {
+      "evidence": "Re-derived independently while checking ATT-0044 Step 3; the dimension count ker = g, coker = 1 was verified to be n-independent, and the k[eps] cup-product computation confirming Fit_0 = I_e in every tangent direction does not use n = 6.",
+      "key": "universal-pic0-evaluation-fitting-ideal-is-identity-section-for-all-n",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "generality": "all g >= 1, n >= 1"
+      },
+      "statement": "The universal determinantal computation underlying C66-GEO-Z is not specific to (g,n) = (6,6). For any g >= 1 and any n >= 1, with Gamma a relative Cartier divisor finite etale of degree n over the base and L_univ = omega_{C_P/P}(Gamma_P) tensor Poin^{-1} on C x_S Pic^0(C/S), one has Fit_0(coker(p_*L_univ -> p_*(L_univ|_{Gamma_P}))) = I_e. Reason: deg L_univ = 2g-2+n > 2g-2 gives R^1p_* = 0 and h^0 = g+n-1; at e the kernel is H^0(omega) of dimension g and the cokernel is H^1(omega) of dimension 1 for EVERY n >= 1, so Hom(ker,coker) has dimension g = dim T_e Pic^0, and the intrinsic derivative is the Serre pairing H^1(O) x H^0(omega) -> H^1(omega), which is perfect. Consequently the (6,6)-specificity of the CE identification enters only through the separate requirement deg N = 2g-2-deg W_5+n = 0, i.e. through the Step-4 identification omega(Gamma) tensor N^{-1} = W_5, and not through the universal Pic^0 lemma at all. This localizes what FND-0074 blocks: the non-transport to neighbouring n is entirely a statement about the failure condition becoming a positive-degree Brill-Noether condition, while the determinantal scheme-structure machinery transports unchanged and can be reused verbatim for other (g,n) whenever the degree-zero condition is arranged.",
+      "supports_finding_id": null
+    },
+    {
+      "evidence": "Snake-lemma reduction and the Ext^1 computation were carried out during this review; the point was found by asking what ATT-0044 Step 5 actually needs when the base is the universal balanced configuration stack rather than a scheme with a chosen splitting.",
+      "key": "ce-w-filtration-suffices-for-fitting",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "objects": [
+          "balanced tetragonal CE bundle W",
+          "universal balanced tetragonal stack"
+        ]
+      },
+      "statement": "The hypothesis that the balanced CE bundle W SPLITS as W_4 + W_5 over the base is removable and should be replaced by the canonical filtration, which matters because the splitting can fail exactly where the campaign wants to use it. On the balanced locus F is fibrewise O(4)+O(5), so the relative Harder-Narasimhan filtration gives a canonical 0 -> L_5 -> F -> L_4 -> 0 over any base; dualizing and twisting yields a canonical 0 -> W_4 -> W -> W_5 -> 0 with W_4 the degree-20 sub and W_5 the degree-16 quotient. Since Gamma is finite over the base, both pi_* and restriction to Gamma stay exact on this sequence, and because coker(phi_4) = 0 the snake lemma gives coker(phi) isomorphic to coker(phi_5) as modules, hence Fit_0(coker phi) = Fit_0(coker phi_5) with no splitting used. By contrast a global splitting is a genuine extra hypothesis: the extension class lives in Ext^1_{P^1_B}(L_4, L_5), which sits in H^1(B, gamma'_*O(1)) (the fibrewise Ext vanishes, so no local obstruction is visible), and this need not vanish over a general base B, in particular over the universal balanced tetragonal stack that C66-GEO-Z hands to C66-GEO-H0 and C66-GEO-COMP. Downstream nodes should therefore state the CE reduction in filtered form; doing so both widens the theorem and removes an unverified hypothesis from any statement made over the universal balanced family.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0089",
+  "independent": true,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Binding and content both check. The attempt's packet_sha256 e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47, its target dictionary, and its theorem_statement are identical to TASK.json (packet_binding_sha256 is null in the task, so no separate binding hash to verify). Lemma 10.6's deg W_{f_i}|_C = 4g+12-4f_i and the obstruction degree 4f_i+n-2g-14 reproduce -4 (f=4) and 0 (f=5) at (g,n)=(6,6), matching the attempt and the packet's canonical W_5 convention including the gamma^*O(-5) sign.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0046",
+      "note": "This is the load-bearing compliance requirement -- geometric-point equivalence is not enough, the determinantal/Fitting scheme structures must be compared -- and it is exactly where the attempt falls short. The attempt correctly identifies the requirement, correctly chooses the right vehicle (universal Fitting ideal on Pic^0 versus the ideal of the identity section), and correctly executes the nilpotent comparison in the direction I_e subset J. But the reverse inclusion J subset I_e, the one that is actually sensitive to nilpotents in the base, is asserted from set-theoretic support and is therefore not discharged. See CLM-0044-2.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "FND-0047",
+      "note": "Complied with, and not load-bearing as an input. The attempt never forms Proj(pi_*L) and never needs a relative linear system where h^0 jumps: it works with Pic^0, a Poincare bundle, and Div^6/Conf_6, and every pushforward it uses has vanishing R^1 on fibres, so cohomology-and-base-change holds outright.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0062",
+      "note": "Re-derived rather than cited: deg(omega tensor W_4^{-1}(Gamma)) = 10-20+6 = -4, so the f=4 obstruction vanishes identically. The attempt upgrades this from a fibrewise vanishing to the scheme-level statement I_6(phi_4)=O_S, which is the form actually needed and is correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0063",
+      "note": "Re-derived: deg N = 10-16+6 = 0 and evaluation fails on a geometric fibre iff N = O_C, i.e. iff O_C(Gamma) = W_5 tensor omega^{-1}. The attempt is explicit that this is only the fibrewise content and does not settle scheme structure, which is the correct reading of the finding.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0064",
+      "note": "Used exactly as recorded, at stack level and over the reduced-support open only; the attempt does not extend it to coarse moduli (FND-0075) and does not call the open locus closed (FND-0052).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0083",
+      "note": "Non-load-bearing: used only as a scope disclaimer. The attempt correctly declines to assert that the reduced-support open or the ordered Conf_6 incidence is fibrewise nonempty, and confines chi(L)=1 to nonemptiness of the full Abel-Jacobi fibre in Sym^6.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0087",
+      "note": "Complied with: the attempt keeps the unreduced torsor on both sides over a non-reduced base and reduces source and target together, giving Z_ord,red -> (Z_unord,rs)_red. The unstated but true supporting fact is that an etale morphism base-changed to a reduced base has reduced source, so the reduced map is still an S_6-torsor.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0044-P2",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Binding verified first: the attempt's packet hash, target dictionary and theorem_statement match TASK.json exactly, so I am judging the intended object. The strongest attack I could mount was aimed at killing the theorem outright at its only genuinely new step -- the claim that the universal maximal-minor ideal J = I_6(Phi) on Pic^0(C/S) is EXACTLY the ideal of the identity section rather than a proper thickening of it. This is the natural place for such an argument to die: determinantal loci built from R^1 of a Poincare-twisted sheaf are the same machinery that produces theta divisors with their canonical non-reduced structures, and a rank-drop of 1 at e with a 6-dimensional kernel gives ample room for the derivative to be degenerate along some tangent direction, in which case J would be strictly contained in I_e and Z_CE would be a proper closed subscheme of a_N^{-1}(e(S)), refuting the theorem. The attack FAILS, decisively. Base-changing coker(Phi) = R^1p_*(omega tensor Poin^{-1}) along a first-order arc Spec k[eps] -> P in a direction xi in H^1(O_C) is legitimate because top-degree base change is unconditional, and the extension 0 -> omega -> omega tensor Q_xi^{-1} -> omega -> 0 has connecting map cup-with-xi: H^0(omega) -> H^1(omega). Serre duality for O_C says the pairing H^1(O) x H^0(omega) -> H^1(omega) = k is perfect, so for every xi non-zero this map is non-zero, hence surjective onto the 1-dimensional H^1(omega); therefore H^1(C_eps, omega tensor Q_xi^{-1}) is 1-dimensional over k and Fit_0 of it is (eps), i.e. J pulls back to I_e in EVERY tangent direction. The dimension coincidence dim T_e Pic^0 = g = dim Hom(H^0(omega),H^1(omega)) that makes this work is not luck, and it is not the (6,6)-borderline of FND-0074: ker and coker at e are H^0(omega) and H^1(omega) for every n >= 1, so this half of the argument is robust. The theorem, as stated, is true. What does land is one step earlier and one line long: the containment J subset I_e, on which the entire Nakayama endgame depends (M = I/J is otherwise undefined), is inferred from set-theoretic support alone -- 'Hence V(J) is supported set-theoretically on e(S), and J subset I_e' -- which is a non sequitur precisely over the non-reduced bases the theorem claims to cover (P = Spec k[eps][x], I_e = (x), J = (x^2,eps) has V(J) = V(x) but J not inside I_e). The inclusion is true here only because coker(e^*Phi) = R^1pi_*omega_{C/S} = O_S is FREE of rank one, so its Fit_0 vanishes; a cokernel O_S/(t) along e would break it. The attempt never restricts Phi along e and never computes that cokernel, even though it invokes the required Fitting base-change fact one section later. Given that the sole declared advance of this attempt over FND-0063 is scheme structure over an arbitrary base, and that FND-0046 exists specifically to forbid point-level reasoning at scheme-level claims, I cannot record this as discharged. Verdict incomplete, not refuted: the theorem is believed true, three of four claims are clean, and the gap is a genuinely one-line repair rather than a structural failure. A secondary landing hit is the theorem's final clause, which silently applies a scheme-base theorem over an algebraic stack and silently assumes a global splitting of W there that the balanced condition does not supply.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let \u03c0:C\u2192S be a smooth proper family of geometrically connected genus-6 curves over a locally Noetherian characteristic-zero scheme, with six pairwise disjoint ordered sections and associated relative Cartier divisor \u0393. Suppose the balanced tetragonal Casnati\u2013Ekedahl bundle is split over S as W=W_4\u2295W_5, where W_f=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_{P^1}(-f))|_C and the relative degrees of W_4 and W_5 are 20 and 16. Define the CE evaluation-failure scheme Z_CE by Fit_0(coker(\u03c0_*W\u2192\u03c0_*(W|_\u0393))). Put N=\u03c9_{C/S}\u2297W_5^{-1}(\u0393), a relative degree-zero line bundle, and let a_N:S\u2192Pic^0(C/S) classify N. Then Z_CE=a_N^{-1}(e(S)) as closed subschemes, where e is the identity section. This equality commutes with arbitrary base change and requires no transversality or Tor-independence hypothesis. On the universal ordered distinct configuration stack it is the pullback of the reduced-support Abel\u2013Jacobi incidence, and the ordered-to-unordered map is a finite \u00e9tale S_6-torsor; after reduction, both source and target must be reduced compatibly.",
+  "verdict": "incomplete"
+}

@@ -24,12 +24,38 @@ from pure_tate.paired import (
 )
 from pure_tate.store import ROOT
 
+LEDGER_DIRS = (ROOT / "proof" / "attempts", ROOT / "proof" / "reviews")
+
+
+def _ledger_entries():
+    """Artifacts currently present in the live proof ledger."""
+    return {
+        path
+        for directory in LEDGER_DIRS
+        if directory.is_dir()
+        for path in directory.glob("*.json")
+    }
+
 
 class PairedAttemptPolicyTests(unittest.TestCase):
     def setUp(self):
         self.campaign = load_campaign("C66-001")
         self.packet = write_campaign_packet("C66-001")
         self.task = forced_task(self.campaign, self.packet, [])
+        self._ledger_before = _ledger_entries()
+
+    def tearDown(self):
+        # Tests must never target the live ledger: artifacts under proof/ gate
+        # campaign_mathematics_tasks, case_verified and audit_proofs, so a stray
+        # fixture changes real campaign gating. Remove any leak and fail loudly.
+        leaked = sorted(_ledger_entries() - self._ledger_before)
+        for path in leaked:
+            path.unlink()
+        if leaked:
+            self.fail(
+                "test wrote into the live proof ledger: %s"
+                % ", ".join(str(path.relative_to(ROOT)) for path in leaked)
+            )
 
     def full_artifact(self):
         return {
@@ -443,7 +469,6 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             )
 
     def test_substantive_invalid_output_is_traced_but_not_written(self):
-        output = ROOT / "proof" / "attempts" / "ATT-9999.json"
         incomplete = self.full_artifact()
         # Incompleteness has to be structural: a status string alone no longer
         # decides it, because the harness derives status from the content.
@@ -464,12 +489,16 @@ class PairedAttemptPolicyTests(unittest.TestCase):
         ) as directory, mock.patch(
             "pure_tate.paired.TRACE_DIR", Path(directory)
         ), mock.patch(
+            "pure_tate.agents._validate_output_path"
+        ), mock.patch(
             "pure_tate.agents.shutil.which", return_value="/usr/bin/grok"
         ), mock.patch(
             "pure_tate.agents.run_captured_process", return_value=process
         ):
             from pure_tate.paired import SubstantiveAttemptError
 
+            # Fresh slot: never target an on-disk ledger path.
+            output = Path(directory) / "ATT-9999.json"
             with self.assertRaises(SubstantiveAttemptError):
                 run_task(self.task, "grok", output)
             traces = list(Path(directory).glob("TRACE-*.json"))
@@ -479,7 +508,6 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             self.assertFalse(output.exists())
 
     def test_backend_error_creates_infrastructure_trace_without_artifact(self):
-        output = ROOT / "proof" / "attempts" / "ATT-9999.json"
         process = SimpleNamespace(
             returncode=0,
             stdout=json.dumps(
@@ -496,12 +524,16 @@ class PairedAttemptPolicyTests(unittest.TestCase):
         ) as directory, mock.patch(
             "pure_tate.paired.TRACE_DIR", Path(directory)
         ), mock.patch(
+            "pure_tate.agents._validate_output_path"
+        ), mock.patch(
             "pure_tate.agents.shutil.which", return_value="/usr/bin/grok"
         ), mock.patch(
             "pure_tate.agents.run_captured_process", return_value=process
         ):
             from pure_tate.paired import PairedInfrastructureError
 
+            # Fresh slot: never target an on-disk ledger path.
+            output = Path(directory) / "ATT-9999.json"
             with self.assertRaisesRegex(
                 PairedInfrastructureError, "backend unavailable"
             ):
@@ -514,7 +546,6 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             self.assertFalse(output.exists())
 
     def test_nonzero_stream_preserves_partial_claude_progress(self):
-        output = ROOT / "proof" / "attempts" / "ATT-9999.json"
         partial = json.dumps(
             {
                 "type": "stream_event",
@@ -537,12 +568,16 @@ class PairedAttemptPolicyTests(unittest.TestCase):
         ) as directory, mock.patch(
             "pure_tate.paired.TRACE_DIR", Path(directory)
         ), mock.patch(
+            "pure_tate.agents._validate_output_path"
+        ), mock.patch(
             "pure_tate.agents.shutil.which", return_value="/usr/bin/claude"
         ), mock.patch(
             "pure_tate.agents.run_captured_process", return_value=process
         ):
             from pure_tate.paired import PairedInfrastructureError
 
+            # Fresh slot: never target an on-disk ledger path.
+            output = Path(directory) / "ATT-9999.json"
             with self.assertRaises(PairedInfrastructureError):
                 run_task(self.task, "claude", output)
             traces = list(Path(directory).glob("TRACE-*.json"))
@@ -635,11 +670,12 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             "subproblem_id": "C66-FULL",
             "theorem_statement": attempt["theorem_statement"],
         }
-        output = ROOT / "proof" / "reviews" / "REV-9997.json"
         with tempfile.TemporaryDirectory(
             dir=ROOT / "research"
         ) as directory, mock.patch(
             "pure_tate.paired.TRACE_DIR", Path(directory)
+        ), mock.patch(
+            "pure_tate.agents._validate_output_path"
         ), mock.patch(
             "pure_tate.agents.shutil.which", return_value="/usr/bin/grok"
         ), mock.patch(
@@ -649,6 +685,8 @@ class PairedAttemptPolicyTests(unittest.TestCase):
         ), mock.patch(
             "pure_tate.agents.build_isolated_context", return_value=["TASK.json"]
         ):
+            # Fresh slot: never target an on-disk ledger path.
+            output = Path(directory) / "REV-9997.json"
             with self.assertRaises(ArtifactValidationError) as raised:
                 run_task(task, "grok", output)
             self.assertFalse(output.exists())

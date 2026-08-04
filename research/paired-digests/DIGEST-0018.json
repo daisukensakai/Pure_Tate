@@ -1,0 +1,177 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "For a smooth proper genus-6 family over a locally Noetherian characteristic-zero scheme S with six pairwise disjoint ordered sections Gamma and balanced split CE bundle W=W_4 oplus W_5 of relative degrees 20 and 16, the CE evaluation-failure scheme Z_CE:=V(Fit_0(coker(pi_*W to pi_*(W|_Gamma)))) equals a_N^{-1}(e(S)) as closed subschemes, where N=omega tensor W_5^{-1}(Gamma) and a_N:S to Pic^0(C/S) classifies N; the equality is stable under arbitrary base change and needs no transversality or Tor-independence hypothesis."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The universal degree-16 evaluation maximal-minor ideal J=I_6(Phi) on Pic^0(C/S) equals the ideal sheaf I_e of the identity section as ideal sheaves (including over possibly nonreduced locally Noetherian bases)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "On the universal ordered distinct configuration stack of a balanced CE family, Z_CE is the scheme-theoretic pullback of the reduced-support Abel\u2013Jacobi incidence via the finite etale S_6-torsor Conf_6 to Div^6_rs, with compatible reduction of source and target over nonreduced bases."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "For any g>=1 and n>=1, with Gamma a relative Cartier divisor finite etale of degree n and L_univ=omega(Gamma_P) tensor Poin^{-1}, one has Fit_0(coker(p_* L_univ to p_*(L_univ|_{Gamma_P})))=I_e on Pic^0; the (6,6)-specificity of the CE identification enters only through deg N=2g-2-deg W_5+n=0, not through this universal Pic^0 lemma."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The split hypothesis W=W_4 oplus W_5 may be replaced by the canonical Harder\u2013Narasimhan filtration 0 to W_4 to W to W_5 to 0 (W_4 the degree-20 subbundle, W_5 the degree-16 quotient): since Gamma is finite, pi_* and restriction to Gamma stay exact, and coker(phi_4)=0 with the snake lemma yields coker(phi) isomorphic to coker(phi_5), hence Fit_0(coker phi)=Fit_0(coker phi_5) with no splitting used."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The geometric inclusion I_e subset J follows from the corank-1 normal form (5-by-5 identity block), first-order 6-by-6 minors recovering Hom(ker,coker) via Schur complement, J+I_e^2=I_e, and Nakayama for M=I/J."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The reverse inclusion J subset I_e holds because restriction along e gives coker(e^* Phi)=R^1 pi_* omega_{C/S}=O_S free of rank one, so Fit_0(coker(e^* Phi))=0 and hence e^* J=0."
+    }
+  ],
+  "engine": "grok",
+  "established_facts": [
+    {
+      "evidence": "Packet primary locator SRC-0004 Lemma 10.6 together with the packet CE line-bundle convention W_f:=(O(2) tensor gamma^*O(-f))|_C.",
+      "evidence_class": "source",
+      "statement": "The Casnati\u2013Ekedahl summands are W_f=(O_{P(E^vee)}(2) tensor gamma^*O_{P^1}(-f))|_C with deg(W_f|_C)=4g+12-4f; for g=6 one has deg(W_4)=20 and deg(W_5)=16."
+    },
+    {
+      "evidence": "SRC-0004 Lemma 10.6: deg(omega tensor W_f^vee(Gamma))=2g-2-(4g+12-4f)+n=4f+n-2g-14.",
+      "evidence_class": "source",
+      "statement": "The CE obstruction decomposes as H^0(C, omega_C tensor W|_C^vee(Gamma))=oplus_i H^0(C, omega_C tensor W_{f_i}|_C^vee(Gamma)), and the obstruction line bundle for summand f has degree 4f+n-2g-14."
+    },
+    {
+      "evidence": "Substitute g=6,n=6,f in {4,5} into deg=2g-2-deg(W_f)+n.",
+      "evidence_class": "mechanical",
+      "statement": "For (g,n)=(6,6) the f=4 obstruction has degree -4 and the f=5 obstruction has degree 0: deg(omega tensor W_4^{-1}(Gamma))=10-20+6=-4 and deg(N)=deg(omega tensor W_5^{-1}(Gamma))=10-16+6=0."
+    },
+    {
+      "evidence": "Packet finding FND-0062; equivalently negative degree -4 of the Serre dual obstruction bundle.",
+      "evidence_class": "source",
+      "statement": "On any smooth genus-6 degree-four cover with balanced splitting F=O(4)oplus O(5), H^0(omega_C tensor W_4^vee(Gamma))=0 for every degree-six Gamma, so the f=4 CE evaluation obstruction vanishes identically."
+    },
+    {
+      "evidence": "Packet finding FND-0063; fibrewise: a degree-zero line bundle on a smooth proper geometrically connected curve has a nonzero section iff it is trivial.",
+      "evidence_class": "source",
+      "statement": "On the same balanced covers, evaluation fails on Gamma if and only if O_C(Gamma) is isomorphic to L=W_5 tensor omega_C^{-1}, equivalently N=omega tensor W_5^{-1}(Gamma) is trivial as a degree-zero line bundle."
+    },
+    {
+      "evidence": "Riemann\u2013Roch with R^1 pi_*W_f=0: h^0(W_4)=20-(g-1)=15, h^0(W_5)=16-(g-1)=11, and rank pi_*(W_f|_Gamma)=n=6.",
+      "evidence_class": "mechanical",
+      "statement": "If deg(W_4),deg(W_5)>2g-2=10 then H^1(W_4)=H^1(W_5)=0 fibrewise, so pi_*W_4 and pi_*W_5 are vector bundles of ranks 15 and 11 commuting with base change, while pi_*(W_f|_Gamma) has rank 6; the combined evaluation is a map of rank 26 to 12 whose Fit_0(coker) is the ideal of 12-by-12 minors."
+    },
+    {
+      "evidence": "Column-selection rank bound: rank <= min(6,k)+min(6,12-k)<12 unless k=6; at k=6 the minor factors as a product of one 6x6 minor from each block. coker(phi_4)=0 because its Serre dual has degree -4, so Fit_0(coker phi_4) is the unit ideal.",
+      "evidence_class": "mechanical",
+      "statement": "For block-diagonal evaluation phi=phi_4 oplus phi_5, every nonzero 12-by-12 minor selects six columns from each block, so I_12(phi)=I_6(phi_4)I_6(phi_5) with no cross terms; combined with I_6(phi_4)=O_S one obtains I_12(phi)=I_6(phi_5)."
+    },
+    {
+      "evidence": "Packet finding FND-0064.",
+      "evidence_class": "source",
+      "statement": "The forgetful map from the relative ordered distinct configuration stack Conf_6(C/B) to the relative effective-divisor space of degree six is a finite etale S_6-torsor over the reduced-support open locus, at stack level."
+    },
+    {
+      "evidence": "Packet finding FND-0087.",
+      "evidence_class": "source",
+      "statement": "For ordered-to-unordered reduced-support constructions over possibly nonreduced bases, reduction must be applied compatibly: the canonical torsor is I to I^{red-supp}, and its reduced form is I_red to (I^{red-supp})_red; reducing only the source generally destroys flatness."
+    },
+    {
+      "evidence": "Packet finding FND-0046.",
+      "evidence_class": "source",
+      "statement": "A fibrewise equivalence between nonvanishing of a CE obstruction space and triviality of a degree-zero line bundle establishes equality only on geometric points; identifying relative evaluation-failure with an Abel\u2013Jacobi incidence over an arbitrary base requires comparison of determinantal/Fitting scheme structures."
+    },
+    {
+      "evidence": "Relative degree 16>2g-2=10 forces vanishing of R^1; cohomology-and-base-change then applies to p_* and to evaluation.",
+      "evidence_class": "mechanical",
+      "statement": "For L_univ=omega_{C_P/P}(Gamma_P) tensor Poin^{-1} of relative degree 2g-2+n=16 on C x_S Pic^0(C/S), one has R^1 p_* L_univ=0, so p_* L_univ is a rank-(g+n-1)=11 vector bundle whose formation and evaluation map Phi commute with arbitrary base change."
+    },
+    {
+      "evidence": "Top-degree base change plus Serre pairing H^1(O) x H^0(omega) to H^1(omega)=k is perfect; dim T_e Pic^0=g equals dim Hom(ker,coker).",
+      "evidence_class": "mechanical",
+      "statement": "At the identity section e of Pic^0, the evaluation Phi has ker=H^0(omega) of dimension g=6 and coker=H^1(omega) of dimension 1; the intrinsic derivative along xi in H^1(O) is cup-product H^0(omega) to H^1(omega), and Serre duality makes H^1(O) to Hom(H^0(omega),H^1(omega)) an isomorphism."
+    },
+    {
+      "evidence": "Fitting ideals commute with arbitrary scalar extension; vanishing of R^1 licenses underived base change of p_* and of Phi.",
+      "evidence_class": "mechanical",
+      "statement": "Twisting an evaluation map by a line bundle pulled back from the base does not change its Fitting/maximal-minor ideal; with R^1 p_* L_univ=0 the W_5 evaluation matrix is the ordinary (underived) pullback of the universal Phi along a_N even when a_N is not flat."
+    },
+    {
+      "evidence": "Packet finding FND-0083.",
+      "evidence_class": "source",
+      "statement": "Riemann\u2013Roch chi(L)=1 for L=W_5 tensor omega_C^{-1} of degree 6 on a smooth genus-6 curve proves only that the full Abel\u2013Jacobi fibre in Sym^6 is nonempty; it does not prove that the reduced-support open or the ordered Conf_6 incidence is nonempty on every geometric fibre."
+    },
+    {
+      "evidence": "Packet finding FND-0001 and the packet exact target W_{-16}H^{BM}_{16}(M_{6,6})=W_{26}H^{26}(M_{6,6})(21).",
+      "evidence_class": "source",
+      "statement": "The exact open input is W_{-16} H^{BM}_{16}(M_{g,n}), identified by Poincare duality with W_{2d-16} H^{2d-16}(M_{g,n})(d) for d=3g-3+n; for (g,n)=(6,6) one has d=21 and ordinary degree 26."
+    }
+  ],
+  "id": "DIGEST-0018",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "Over a possibly nonreduced base, equality of reduced supports does not control nilpotents in the base. Template: on P=Spec k[eps][x] over S=Spec k[eps] with I_e=(x) and J=(x^2,eps), one has V(J)=V(x) set-theoretically yet J is not contained in I_e. The inclusion requires the Fitting base-change computation Fit_0(coker(e^* Phi))=0, not a radical/support argument.",
+      "statement": "From the set-theoretic support statement V(J)=e(S) alone, conclude the ideal inclusion J subset I_e."
+    },
+    {
+      "mathematical_reason": "Fibrewise spanning of (I/I^2) tensor k(p) implies generation of I/I^2 only after a Nakayama argument over A/I_e; the passage is not automatic from an isomorphism of tangent spaces.",
+      "statement": "From 'the tangent map is an isomorphism' alone, conclude that the first-order maximal minors generate the conormal module I_e/I_e^2 without a generation check over A/I_e."
+    },
+    {
+      "mathematical_reason": "Representability of Pic^0, formation of pi_* and Fitting ideals, and Poincare-bundle pullbacks are smooth-local on the base, but a statement over an algebraic stack requires smooth-local descent or an atlas argument; scheme-level hypotheses do not automatically license a stack-level universal clause.",
+      "statement": "Transfer a scheme-base identification Z_CE=a_N^{-1}(e(S)), proved for locally Noetherian characteristic-zero schemes S, to the universal ordered configuration stack without an atlas or descent remark."
+    },
+    {
+      "mathematical_reason": "Balancedness supplies only the relative Harder\u2013Narasimhan filtration 0 to L_5 to F to L_4 to 0. A global splitting is a vanishing of Ext^1_{P^1_B}(L_4,L_5) inside H^1(B, gamma'_* O(1)), which need not hold for a general base B.",
+      "statement": "Infer a global splitting W=W_4 oplus W_5 over the universal balanced tetragonal base from the fibrewise balanced condition F isomorphic to O(4)oplus O(5)."
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_sha256": "407f257bfff332e85146cff56bc4bbc2a51bee92fb6b98873cc75b1c6400a033",
+  "problem_key": "e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9",
+  "reusable_computations": [],
+  "reviewer_engine": "grok",
+  "sanitized": true,
+  "schema_version": 1,
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+  "unresolved_dependencies": [
+    {
+      "statement": "An explicit scheme-theoretic proof that J subset I_e on Pic^0 over arbitrary (possibly nonreduced) locally Noetherian bases, via restriction of Phi along e and vanishing of Fit_0(coker(e^* Phi))=Fit_0(R^1 pi_* omega_{C/S})."
+    },
+    {
+      "statement": "Independent scheme-structure comparison establishing Z_CE=a_N^{-1}(e(S)) as closed subschemes (both inclusions of Fitting ideal versus section ideal), not merely fibrewise geometric-point equality."
+    },
+    {
+      "statement": "Justification that the balanced CE bundle on the universal ordered distinct configuration stack either splits as W_4 oplus W_5 or that the Fitting reduction is rewritten in filtered form so that the split hypothesis is not required."
+    },
+    {
+      "statement": "Smooth-local/atlas descent extending the scheme-base CE/Abel\u2013Jacobi identification to the corresponding algebraic stack."
+    },
+    {
+      "statement": "Nonemptiness of the reduced-support open (and of the ordered Conf_6 incidence) on geometric fibres, beyond chi(L)=1 nonemptiness of the full Sym^6 Abel\u2013Jacobi fibre."
+    },
+    {
+      "statement": "Stratification of the relative degree-six linear system by h^0(L)=1+h^0(M) with M=omega_C^2 tensor W_5^vee of degree 4, and the resulting component, dimension, stabilizer, and finite-cover analysis of Z."
+    },
+    {
+      "statement": "Tate type for the exact codimension-13 contribution supported on Z, and assembly of the tetragonal contribution into W_{-16}H^{BM}_{16}(M_{6,6};Q)."
+    }
+  ]
+}
