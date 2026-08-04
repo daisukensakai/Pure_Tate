@@ -1,0 +1,116 @@
+{
+  "argument_markdown": "## Source-backed inputs\n\nPacket C66-001-v4, SRC-0004 supplies the CE obstruction space, the convention W_f=(O(2)\u2297\u03b3^*O(-f))|_C, and deg(W_f)=4g+12-4f. Thus deg(W_4)=20 and deg(W_5)=16. The packet findings FND-0062 and FND-0063 record the corresponding fibrewise W_4 vanishing and W_5 degree-zero condition. These facts are rederived below before use. FND-0046 requires a scheme-structure comparison rather than geometric-point equality; FND-0047 requires avoiding an unjustified Proj(\u03c0_*L) construction when h^0 jumps. FND-0064 and FND-0087 delimit the ordered/unordered torsor statement. TASK-C66-M-001 has no dependency artifacts, so no prior attempt or review is used as a proof dependency.\n\n## Proved steps\n\n### 1. Evaluation bundles and the W_4 block\n\nSince deg(W_4),deg(W_5)>2g-2=10, fibrewise Serre duality gives H^1(W_4)=H^1(W_5)=0. Hence \u03c0_*W_4 and \u03c0_*W_5 are vector bundles of ranks 15 and 11, commute with base change, and \u03c0_*(W_f|_\u0393) has rank 6. Write \u03c6_f for evaluation and \u03c6=\u03c6_4\u2295\u03c6_5.\n\nThe sequence 0\u2192W_4(-\u0393)\u2192W_4\u2192W_4|_\u0393\u21920 shows that coker(\u03c6_4)=R^1\u03c0_*W_4(-\u0393). Its fibrewise Serre dual is H^0(\u03c9\u2297W_4^{-1}(\u0393)); this line bundle has degree 10-20+6=-4, hence no section. Therefore \u03c6_4 is surjective and I_6(\u03c6_4)=O_S.\n\nFor the block-diagonal matrix \u03c6, every nonzero 12-by-12 minor selects six columns from each block, so I_12(\u03c6)=I_6(\u03c6_4)I_6(\u03c6_5)=I_6(\u03c6_5). Thus Z_CE is exactly the maximal-minor scheme of \u03c6_5. This proves the scheme-level form of the FND-0062 reduction.\n\n### 2. Fibrewise Abel\u2013Jacobi condition\n\nFor N=\u03c9\u2297W_5^{-1}(\u0393), deg(N)=10-16+6=0. The same evaluation sequence gives coker(\u03c6_5)=R^1\u03c0_*W_5(-\u0393), whose geometric-fibre dual is H^0(N). A degree-zero line bundle on a smooth proper connected curve has a nonzero section only when its effective zero divisor has degree zero, hence precisely when it is trivial. Therefore evaluation fails geometrically exactly when N\u2245O_C, equivalently O_C(\u0393)\u2245W_5\u2297\u03c9^{-1}. This independently verifies the fibrewise content of FND-0063, but does not yet identify the scheme structure.\n\n### 3. Universal maximal-minor ideal on Pic^0\n\nLet P=Pic^0(C/S), with identity section e, and choose a rigidified Poincar\u00e9 bundle Poin on C\u00d7_S P. Let p:C\u00d7_S P\u2192P and define L_univ=\u03c9_{C_P/P}(\u0393_P)\u2297Poin^{-1}. It has relative degree 16, so R^1p_*L_univ=0; consequently p_*L_univ is a rank-11 vector bundle and its formation, and that of its evaluation map \u03a6:p_*L_univ\u2192p_*(L_univ|_{\u0393_P}), commutes with arbitrary base change. Put J=I_6(\u03a6).\n\nFrom 0\u2192\u03c9\u2297Poin^{-1}\u2192L_univ\u2192L_univ|_{\u0393_P}\u21920 one gets coker(\u03a6)=R^1p_*(\u03c9\u2297Poin^{-1}). At a geometric point [Q] of P, its fibre is H^1(\u03c9\u2297Q^{-1}), dual to H^0(Q). Hence V(J) is supported set-theoretically on e(S), and J\u2282I_e.\n\nIt remains to compare nilpotents. At a geometric point of e, ker(\u03a6)=H^0(\u03c9), of dimension 6, and coker(\u03a6)=H^1(\u03c9), of dimension 1. A tangent vector \u03be\u2208T_{P/S,e}=H^1(O) is a first-order deformation of the trivial degree-zero bundle. A \u010cech lifting calculation shows that the induced first-order map ker(\u03a6)\u2192coker(\u03a6) sends s\u2208H^0(\u03c9) to \u03be\u222as\u2208H^1(\u03c9). This is the Serre-duality pairing, so\n\nH^1(O)\u2192Hom(H^0(\u03c9),H^1(\u03c9))\n\nis an isomorphism. In local bases where \u03a6 has a 5-by-5 identity block modulo I_e, the linear terms of the maximal minors are precisely the components of this tangent map. They therefore generate I_e/I_e^2.\n\nLet A be a local ring of P at a point of e and I=I_eA. The preceding calculation gives J+I^2=I. For the finite A-module M=I/J, multiplication by I satisfies IM=M. Since I lies in the maximal ideal of A, Nakayama's lemma gives M=0. Thus J=I locally along e. Away from e, \u03a6 is surjective and both ideals are the unit ideal. Consequently I_6(\u03a6)=I_e globally as ideal sheaves. This closes the scheme-structure issue identified by FND-0046 without a transversality assumption.\n\n### 4. Pullback to the CE family\n\nThe section a_N classifying N satisfies (id_C\u00d7a_N)^*Poin\u2245N\u2297\u03c0^*\u039b for some line bundle \u039b on S. Therefore\n\n(id_C\u00d7a_N)^*L_univ\u2245\u03c9(\u0393)\u2297N^{-1}\u2297\u03c0^*\u039b^{-1}\u2245W_5\u2297\u03c0^*\u039b^{-1}.\n\nTensoring an evaluation map by a base line bundle does not change its maximal-minor ideal. Since R^1p_*L_univ=0, the W_5 evaluation matrix is the ordinary pullback of \u03a6 even when a_N is not flat. Fitting ideals of a matrix commute with arbitrary scalar extension, so\n\nI_6(\u03c6_5)=a_N^*I_6(\u03a6)=a_N^*I_e.\n\nThe last ideal defines the scheme-theoretic inverse image a_N^{-1}(e(S)). Combining this with Step 1 proves Z_CE=a_N^{-1}(e(S)). The same calculation after any base change proves base-change stability. No assertion about underived pullback of p_*Poin is used, so Tor-independence is irrelevant.\n\n### 5. Ordered and unordered incidence\n\nFor a balanced CE family before choosing markings, let Div^6_{C/S,rs} be the open locus of degree-six effective divisors with reduced support. The sum map Conf_6(C/S)\u2192Div^6_{C/S,rs} is a finite \u00e9tale S_6-torsor on stacks. Pulling it back along the Abel\u2013Jacobi incidence O_C(D)\u2245W_5\u2297\u03c9^{-1} gives the corresponding torsor from the ordered CE failure locus to the unordered reduced-support incidence. This is an open part of the full incidence, not a closed locus. Over a nonreduced base the unreduced torsor is retained on both sides; after reduction the valid map is Z_ord,red\u2192(Z_unord,rs)_red, in accordance with FND-0087.\n\n## Computational hypotheses\n\nNone. No finite experiment is used.\n\n## Gaps and scope\n\nThere is no gap in the stated scheme-theoretic theorem. It does not assert that the reduced-support incidence is nonempty on every fibre: Riemann\u2013Roch proves only nonemptiness of the full degree-six Abel\u2013Jacobi fibre, as emphasized by FND-0083. It also does not settle the h^0 stratification, components, dimensions, stabilizers, unbalanced closure, Tate support, or assembly into W_{-16}H^{BM}_{16}(M_{6,6};Q); those are downstream subproblems.\n\n## Failed routes\n\nThe blocked routes vcd-only-vanishing, undecorated-cgp-top-weight-graph-complex, point-count-without-degree-parity-separation, and forgetful-map-renaming-local-system-unknown are not used. They are cohomological routes unrelated to this relative determinantal/Picard comparison, and no new input is claimed for them.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "claim_id": "CLM-0044-1",
+      "evidence": "Block-minor factorization and the degree -4 vanishing for the W_4 obstruction.",
+      "statement": "The full balanced CE failure ideal I_12(\u03c6) equals the W_5 maximal-minor ideal I_6(\u03c6_5).",
+      "status": "proved"
+    },
+    {
+      "claim_id": "CLM-0044-2",
+      "evidence": "Set-theoretic support, the Serre-duality first derivative, and the local Nakayama argument in Step 3.",
+      "statement": "The universal degree-16 evaluation maximal-minor ideal on Pic^0(C/S) is exactly the ideal of the identity section.",
+      "status": "proved"
+    },
+    {
+      "claim_id": "CLM-0044-3",
+      "evidence": "Ordinary pullback of the universal evaluation matrix and compatibility of maximal minors with scalar extension.",
+      "statement": "Z_CE equals a_N^{-1}(e(S)) as closed subschemes and the equality commutes with arbitrary base change without Tor-independence.",
+      "status": "proved"
+    },
+    {
+      "claim_id": "CLM-0044-4",
+      "evidence": "Free finite permutation action on ordered pairwise-distinct sections and compatible base change of the incidence.",
+      "statement": "Over the reduced-support open, ordering gives a finite \u00e9tale S_6-torsor at stack level, with compatible reduction required over nonreduced bases.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    "vcd-only-vanishing",
+    "undecorated-cgp-top-weight-graph-complex",
+    "point-count-without-degree-parity-separation",
+    "forgetful-map-renaming-local-system-unknown"
+  ],
+  "gap_markers": [],
+  "id": "ATT-0044",
+  "lane": "geometry",
+  "methods_used": [
+    "relative-evaluation-determinantal-locus",
+    "block-maximal-minor-factorization",
+    "relative-picard-abel-jacobi-incidence",
+    "first-order-line-bundle-deformation",
+    "serre-duality-pairing",
+    "local-nakayama-ideal-comparison",
+    "ordinary-base-change-for-evaluation-matrices"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "observable_trace_id": "TRACE-0025",
+  "observable_trace_sha256": "103075435abadc89ac0d0092960488010181bdf7527d5abb29cd6fa0e23b3f73",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "paired_attempt_policy_revision": 2,
+  "paired_problem_key": "02355889ed59e9a07fb7d6e5fa3332a674f9a74c55fb869ffbf797e3fc91c1c2",
+  "paired_theorem_sha256": "c5e3507db1b4cef8fddb7c6bc92044dd75181ad33ae1649739f76e893e013cd3",
+  "paired_turn_kind": "standard-fallback",
+  "proof_dependencies": [],
+  "result_type": "lemma",
+  "routing_chain_id": "proof:C66-001:TASK-C66-M-001",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0046",
+    "FND-0047",
+    "FND-0062",
+    "FND-0063",
+    "FND-0064",
+    "FND-0083",
+    "FND-0087"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-Z",
+  "summary": "The balanced CE rank-failure scheme is proved scheme-theoretically, not merely set-theoretically, to be the degree-zero Abel\u2013Jacobi identity pullback. The proof reduces the full evaluation determinant to the W_5 block, identifies the universal W_5 maximal-minor ideal on Pic^0 with the identity-section ideal using its Serre-duality first derivative and a local Nakayama argument, and then applies ordinary base change. No computational hypothesis or blocked cohomological route is used.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "balanced_split_CE_base": true,
+    "characteristic": 0,
+    "g": 6,
+    "n": 6,
+    "relative": true,
+    "scheme_theoretic": true
+  },
+  "theorem_statement": "Let \u03c0:C\u2192S be a smooth proper family of geometrically connected genus-6 curves over a locally Noetherian characteristic-zero scheme, with six pairwise disjoint ordered sections and associated relative Cartier divisor \u0393. Suppose the balanced tetragonal Casnati\u2013Ekedahl bundle is split over S as W=W_4\u2295W_5, where W_f=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_{P^1}(-f))|_C and the relative degrees of W_4 and W_5 are 20 and 16. Define the CE evaluation-failure scheme Z_CE by Fit_0(coker(\u03c0_*W\u2192\u03c0_*(W|_\u0393))). Put N=\u03c9_{C/S}\u2297W_5^{-1}(\u0393), a relative degree-zero line bundle, and let a_N:S\u2192Pic^0(C/S) classify N. Then Z_CE=a_N^{-1}(e(S)) as closed subschemes, where e is the identity section. This equality commutes with arbitrary base change and requires no transversality or Tor-independence hypothesis. On the universal ordered distinct configuration stack it is the pullback of the reduced-support Abel\u2013Jacobi incidence, and the ordered-to-unordered map is a finite \u00e9tale S_6-torsor; after reduction, both source and target must be reduced compatibly."
+}

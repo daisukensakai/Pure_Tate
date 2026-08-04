@@ -450,15 +450,9 @@ def assemble_prompt(
                 "Put the completed JSON artifact in your final message only."
             )
     if workers_enabled and max_workers > 0:
-        parts.append(
-            "Optional Grok 4.5 helpers: you may dispatch up to %d read-only "
-            "Grok 4.5 workers via the grok-workers MCP tools "
-            "(dispatch_grok_worker, await_grok_worker, list_grok_workers, "
-            "worker_pool_stats). The hard cap is %d total and %d concurrent. "
-            "Workers are assistive only — you must still return exactly one "
-            "final JSON artifact yourself."
-            % (max_workers, max_workers, max_workers)
-        )
+        from .grok_workers import worker_dispatch_parent_policy
+
+        parts.append(worker_dispatch_parent_policy(max_workers))
     if phase == "review" and task.get("campaign_id"):
         parts.append(
             "Campaign review: use schema_version 3 and "
@@ -1547,13 +1541,25 @@ def _codex_controller_decision_prompt(
     return (
         base_prompt
         + "\n\n# Controller decision turn\n\n"
-        + "Do not return the task artifact on this turn. You have "
+        + "You are the mastermind controller. Do not return the task artifact "
+        + "on this turn. You have "
         + str(remaining_requests)
         + " remaining logical Grok-worker requests. Review the controller "
         + "transcript below, then return exactly one JSON object matching the "
         + "decision schema: either action=dispatch with one focused request, or "
-        + "action=finalize when you have enough information. Grok results are "
-        + "assistive and still require independent verification in the final artifact.\n\n"
+        + "action=finalize when you have enough information.\n\n"
+        + "Division of labor (mandatory for every dispatch):\n"
+        + "- Codex owns thinking, analysis, critical decisions, routing, and "
+        + "the eventual synthesis structure.\n"
+        + "- Dispatch Grok liberally for bulk reading of packet/corpus sources, "
+        + "locator extraction, literature/web lookup, enumerations, and draft "
+        + "fragments. Prefer spending remaining requests over early finalize "
+        + "when useful subproblems remain.\n"
+        + "- Do not re-read sources a worker already covered; analyze their "
+        + "reports instead. Spot-check only if a load-bearing claim is "
+        + "contested or the report is incomplete/incoherent.\n"
+        + "- Grok results are assistive; you still own correctness of every "
+        + "load-bearing step in the final artifact.\n\n"
         + "# Controller transcript\n\n"
         + transcript
     )
@@ -1564,9 +1570,14 @@ def _codex_controller_synthesis_prompt(base_prompt: str, transcript: str) -> str
         base_prompt
         + "\n\n# Controller Grok-worker transcript\n\n"
         + transcript
-        + "\n\nUse this only as assistive working context. Reprove or independently "
-        + "verify every claim used in the final artifact. Now return the required "
-        + "task artifact exactly as the execution contract requires."
+        + "\n\nYou are the mastermind synthesizing the final artifact. Use the "
+        + "worker transcript as your reading layer for bulk source content — "
+        + "do not re-open sources workers already extracted unless a "
+        + "load-bearing claim is contested or a report is incomplete. Spend "
+        + "Codex tokens on analysis, critical decisions, and assembling a "
+        + "correct proof/disproof structure; verify load-bearing logic "
+        + "yourself. Now return the required task artifact exactly as the "
+        + "execution contract requires."
     )
 
 

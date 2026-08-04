@@ -1,0 +1,101 @@
+{
+  "attempt_id": "ATT-0044",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0044-1",
+      "note": "coker(\u03c6_4\u2295\u03c6_5)\u2245coker(\u03c6_5) once deg(\u03c9\u2297W_4^{-1}(\u0393))=-4 forces \u03c6_4 surjective; equivalently block-diagonal 12\u00d712 minors factor as I_6(\u03c6_4)I_6(\u03c6_5) with I_6(\u03c6_4)=O_S. Ranks 15/11 from RR+R^1=0 are correct.",
+      "statement": "I_12(\u03c6)=I_6(\u03c6_5) as ideal sheaves, so Z_CE is the W_5 maximal-minor/Fitting scheme.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0044-2",
+      "note": "Set-theoretic support is e because coker fibres dualize to H^0(Q). At e the map is corank 1; intrinsic derivative ker\u2192coker is cup product, Serre-dual to an isomorphism H^1(O)\u2245Hom(H^0(\u03c9),H^1(\u03c9)). In the 6\u00d711 normal form with 5\u00d75 identity block, first-order 6\u00d76 minors recover exactly those Hom(ker,coker) components (Schur complement), so J+I_e^2=I_e; Nakayama yields J=I_e along e, and both ideals are unit off e.",
+      "statement": "Universal evaluation maximal-minor ideal I_6(\u03a6) on Pic^0(C/S) equals the ideal of the identity section e.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0044-3",
+      "note": "Classifying pullback gives (id\u00d7a_N)^*L_univ\u2245W_5\u2297\u03c0^*\u039b^{-1}; twisting evaluation by a base line bundle preserves Fitting ideals. R^1p_*L_univ=0 (rel deg 16) implies formation of p_* and of \u03a6 commute with arbitrary base change along a_N, so I_6(\u03c6_5)=a_N^*I_6(\u03a6)=a_N^*I_e.",
+      "statement": "Z_CE=a_N^{-1}(e(S)) as closed subschemes, stable under arbitrary base change without Tor-independence.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0044-4",
+      "note": "Standard free S_6-action on ordered pairwise-distinct sections gives a stack-level finite \u00e9tale torsor (not coarse). Pullback of the closed AJ incidence along the torsor matches a_N^{-1}(e) once Steps 1\u20134 identify evaluation failure with N\u2245O. Compatible reduction I_red\u2192(I^{rs})_red is the correct nonreduced-base statement and is not upgraded to a closed pure-codimension claim.",
+      "statement": "Over reduced-support open, Conf_6\u2192Div^6_rs is a finite \u00e9tale S_6-torsor on stacks; CE/AJ incidence pulls back accordingly, with compatible reduction over nonreduced bases.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "SRC-0004-deg-convention",
+      "note": "Used only for degrees, sign convention, and that the obstruction is controlled by H^0(\u03c9\u2297W^\u2228(\u0393)); attempt rederives the evaluation/Serre-dual identification rather than treating fibrewise findings as scheme-theoretic theorems.",
+      "statement": "Packet/SRC-0004 supplies W_f=(O(2)\u2297\u03b3^*O(-f))|_C and deg(W_f)=4g+12-4f, hence deg W_4=20, deg W_5=16 for g=6.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "scope-nonclaim",
+      "note": "Scope matches a C66-GEO-Z lemma; FND-0083 nonemptiness caveat is respected. Non-resolution of the global campaign target is not a defect of this theorem_statement.",
+      "statement": "Attempt does not claim reduced-support nonemptiness on every fibre, nor h^0 stratification, components, Tate support, or assembly into W_{-16}H^{BM}_{16}.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-04",
+  "finding_candidates": [
+    {
+      "addresses_findings": [
+        "FND-0046",
+        "FND-0061",
+        "FND-0062",
+        "FND-0063"
+      ],
+      "adjudication_note": "Novel scheme-theoretic upgrade beyond the fibrewise content of FND-0062/FND-0063; supplies the determinantal comparison demanded by FND-0046 rather than restating it. Remains a candidate until independently corroborated.",
+      "candidate_key": "GEO-Z-scheme-theoretic-AJ-identity",
+      "evidence": "ATT-0044 Steps 1\u20134: W_4 block always surjective by degree -4; universal degree-16 evaluation minors on Pic^0 identified with I_e by corank-1 derivative=Serre cup product plus Nakayama; ordinary pullback along a_N using R^1p_*L_univ=0.",
+      "key": "for-a-smooth-proper-genus-6-family-over-locally-noetherian-char-0-s-with-six-pai",
+      "statement": "For a smooth proper genus-6 family over locally Noetherian char-0 S with six pairwise disjoint ordered sections \u0393 and balanced split CE bundle W=W_4\u2295W_5 of relative degrees 20 and 16, the CE evaluation-failure scheme Z_CE:=V(Fit_0(coker(\u03c0_*W\u2192\u03c0_*(W|\u0393)))) equals a_N^{-1}(e(S)) as closed subschemes, where N=\u03c9\u2297W_5^{-1}(\u0393) and a_N:S\u2192Pic^0(C/S) classifies N. The equality is stable under arbitrary base change and needs no transversality or Tor-independence hypothesis.",
+      "supports_finding_id": null
+    },
+    {
+      "addresses_findings": [
+        "FND-0064",
+        "FND-0087"
+      ],
+      "adjudication_note": "Packages the incidence model consistently with FND-0064/FND-0087 without claiming the reduced-support open is closed or that every fibre meets it (FND-0083). Candidate only for the scheme-theoretic CE/AJ identification on Conf, not a restatement of the bare torsor finding.",
+      "candidate_key": "GEO-Z-ordered-unordered-incidence-torsor",
+      "evidence": "ATT-0044 Step 5 together with the scheme equality of Steps 1\u20134; stack-level free S_6-action on pairwise-distinct sections.",
+      "key": "on-the-universal-ordered-distinct-configuration-stack-of-a-balanced-ce-family-z",
+      "statement": "On the universal ordered distinct configuration stack of a balanced CE family, Z_CE is the scheme-theoretic pullback of the reduced-support Abel\u2013Jacobi incidence, via the finite \u00e9tale S_6-torsor Conf_6\u2192Div^6_rs; over nonreduced bases the unreduced torsor is retained and reduction must be applied compatibly to source and target.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0060",
+  "independent": true,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "proof_dependency_checks": [],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0044-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Scheme-structure attack on Step 3 (FND-0046): I_6(\u03a6) might cut a non-reduced fat point or fail to equal the reduced identity ideal I_e if maximal-minor linear terms do not generate I_e/I_e^2 (Porteous multiplicity / incomplete bridge from cup product to minors). Outcome: attack fails. For the corank-1 normal form of a 6\u00d711 matrix with a 5\u00d75 identity block, first-order 6\u00d76 minors are the Schur-complement components of Hom(ker,coker); Serre duality makes that map an isomorphism of rank-g=6 bundles along e, so J+I_e^2=I_e and Nakayama gives J=I_e scheme-theoretically (including relatively over possibly nonreduced locally Noetherian S). Secondary attacks\u2014block Fitting reduction, non-flat base change of p_* when R^1=0, stack vs coarse S_6 torsor, Tor-independence\u2014are likewise discharged by the writeup.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let \u03c0:C\u2192S be a smooth proper family of geometrically connected genus-6 curves over a locally Noetherian characteristic-zero scheme, with six pairwise disjoint ordered sections and associated relative Cartier divisor \u0393. Suppose the balanced tetragonal Casnati\u2013Ekedahl bundle is split over S as W=W_4\u2295W_5, where W_f=(O_{P(E^\u2228)}(2)\u2297\u03b3^*O_{P^1}(-f))|_C and the relative degrees of W_4 and W_5 are 20 and 16. Define the CE evaluation-failure scheme Z_CE by Fit_0(coker(\u03c0_*W\u2192\u03c0_*(W|_\u0393))). Put N=\u03c9_{C/S}\u2297W_5^{-1}(\u0393), a relative degree-zero line bundle, and let a_N:S\u2192Pic^0(C/S) classify N. Then Z_CE=a_N^{-1}(e(S)) as closed subschemes, where e is the identity section. This equality commutes with arbitrary base change and requires no transversality or Tor-independence hypothesis. On the universal ordered distinct configuration stack it is the pullback of the reduced-support Abel\u2013Jacobi incidence, and the ordered-to-unordered map is a finite \u00e9tale S_6-torsor; after reduction, both source and target must be reduced compatibly.",
+  "verdict": "confirmed"
+}

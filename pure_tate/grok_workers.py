@@ -793,17 +793,40 @@ class WorkerSession:
     dispatch_log: Optional[DispatchLog] = field(default=None, repr=False)
 
     def prompt_contract(self) -> str:
-        return (
-            "Optional Grok 4.5 helpers: you may dispatch up to %d read-only "
-            "Grok 4.5 workers via the grok-workers MCP tools "
-            "(dispatch_grok_worker, await_grok_worker, list_grok_workers, "
-            "worker_pool_stats). Workers share this isolated workspace and "
-            "cannot write files or run shell commands. The hard cap is %d "
-            "total and %d concurrent; further dispatches fail. Workers are "
-            "assistive only — you must still return exactly one final JSON "
-            "artifact yourself. Do not nest further workers inside workers."
-            % (self.max_workers, self.max_workers, self.max_workers)
-        )
+        return worker_dispatch_parent_policy(self.max_workers)
+
+
+def worker_dispatch_parent_policy(max_workers: int) -> str:
+    """Shared parent/controller policy for all Grok worker dispatches.
+
+    The parent is the mastermind (thinking, analysis, critical decisions).
+    Workers do bulk reading and extraction. Re-reading sources a worker
+    already covered is forbidden token waste.
+    """
+    return (
+        "Optional Grok 4.5 helpers: you may dispatch up to %d read-only "
+        "Grok 4.5 workers via the grok-workers MCP tools "
+        "(dispatch_grok_worker, await_grok_worker, list_grok_workers, "
+        "worker_pool_stats). Workers share this isolated workspace and "
+        "cannot write files or run shell commands. The hard cap is %d "
+        "total and %d concurrent; further dispatches fail. Do not nest "
+        "further workers inside workers.\n\n"
+        "Worker-dispatch policy (you are the mastermind):\n"
+        "- Keep strategic thinking, analysis, critical choices, and the "
+        "final artifact on the parent.\n"
+        "- Dispatch workers liberally for bulk work: reading packet/corpus "
+        "sources, extracting locators/quotes, web or literature lookup, "
+        "enumerations, routine local checks, and draft fragments.\n"
+        "- Do not re-read or re-fetch sources a worker already covered just "
+        "to re-skim the raw text — that wastes tokens. Treat worker reports "
+        "as your reading layer; analyze, critique, select, and decide from "
+        "them. Spot-check only when a load-bearing claim is contested or "
+        "the worker report is incomplete or incoherent.\n"
+        "- Workers are assistive only — you must still return exactly one "
+        "final JSON artifact yourself and remain responsible for every "
+        "load-bearing step."
+        % (max_workers, max_workers, max_workers)
+    )
 
 
 def max_grok_workers_from_config(config_root: Dict[str, Any]) -> int:
@@ -1259,7 +1282,9 @@ def serve_mcp() -> int:
         name=MCP_SERVER_NAME,
         instructions=(
             "Hard-capped Grok 4.5 worker pool. Max %d concurrent and %d total "
-            "dispatches per session."
+            "dispatches per session. Parents are masterminds (thinking/"
+            "decisions); workers do bulk reading and extraction so parents "
+            "need not re-skim the same raw sources."
             % (pool.max_concurrent, pool.max_total)
         ),
     )
@@ -1271,7 +1296,12 @@ def serve_mcp() -> int:
         wait: bool = False,
         timeout_seconds: Optional[float] = None,
     ) -> str:
-        """Dispatch a read-only Grok 4.5 worker (hard-capped)."""
+        """Dispatch a read-only Grok 4.5 worker for bulk reading/extraction (hard-capped).
+
+        Parent remains the mastermind for thinking and decisions; workers
+        should carry source-reading load so the parent need not re-skim
+        the same raw text.
+        """
         try:
             payload = pool.dispatch(
                 prompt,

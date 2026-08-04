@@ -1,0 +1,215 @@
+{
+  "argument_markdown": "## Source-backed inputs\n\nThe packet fixes F = O(4) \u2295 O(5) and W_5 = (O_{P(E^\u2228)}(2) \u2297 \u03b3^*O(-5))|_C; the negative sign is essential because W_5 is the f_2=5 summand of O(2)\u2297\u03b3^*F^\u2228, not the O(5) summand of F. The degree formula from SRC-0004 Lemma 10.6 is deg(W_f|_C) = 4g+12-4f. It also gives the CE obstruction decomposition into H^0(C,\u03c9_C\u2297W_f^\u2228(\u0393)). FND-0062, FND-0063, and FND-0074 admit these as the actual fibrewise CE obstruction summands in the balanced (6,6) case.\n\nFND-0064 and FND-0075 state that Conf_6 \u2192 Div^6_red is a finite \u00e9tale S_6-torsor on stacks, not on coarse moduli in the presence of automorphisms. FND-0087 requires compatible base change/reduction rather than reduction of only the ordered source.\n\n## Proved steps\n\nFor g=6, deg W_4 = 20 and deg W_5 = 16. Since deg \u03c9_C = 10 and deg \u0393 = 6,\n\ndeg(\u03c9_C\u2297W_4^\u2228(\u0393)) = 10-20+6 = -4,\n\ndeg(\u03c9_C\u2297W_5^\u2228(\u0393)) = 10-16+6 = 0.\n\nThe negative-degree f=4 line bundle has no section. A degree-zero line bundle on a smooth projective curve has a nonzero section exactly when it is trivial. Moreover,\n\n\u03c9_C\u2297W_5^\u2228(\u0393) \u2245 O_C\n\nis equivalent to\n\nO_C(\u0393) \u2245 W_5\u2297\u03c9_C^{-1} = L.\n\nThus the f=5 obstruction is nonzero exactly on the stated Abel\u2013Jacobi incidence. Because the f=4 summand is zero and SRC-0004 identifies the direct sum as the CE obstruction, evaluation fails exactly on that incidence. This polarity is essential: the obstruction is nonzero, not zero, when O_C(\u0393) \u2245 L.\n\nThe relative Abel\u2013Jacobi fibre product I_L^red constructs the incidence without identifying it with Proj \u03c0_*L. Base-changing the stack torsor Conf_6 \u2192 Div^6_red along I_L^red gives the finite \u00e9tale S_6-torsor Z_AJ^ord \u2192 I_L^red. On every geometric fibre, the preceding calculation identifies the points of I_L^red with the reduced-support CE failure divisors.\n\n## Computational hypotheses\n\nNone. No finite experiment or rank computation is used.\n\n## Gaps and scope boundaries\n\nFND-0046 leaves open comparison between the determinantal/Fitting scheme structure of the relative CE failure locus and the Abel\u2013Jacobi fibre product; only geometric-point equality is proved here. FND-0047 prevents replacing the incidence by Proj \u03c0_*L when h^0(L) jumps without additional base-change work. FND-0083 shows that Riemann\u2013Roch does not prove fibrewise nonemptiness of the reduced-support or ordered incidence. FND-0052, FND-0067, and FND-0091 prevent claims that the balanced model is a closed pure-codimension substack or the full failure locus in M_{6,6}. Dimensions, components, stabilizers, local complete-intersection properties, and unbalanced splitting types remain for later DAG nodes, as emphasized by FND-0058, FND-0060, FND-0068, FND-0069, and FND-0086. No Tate-support or assembly conclusion is claimed.\n\n## Dependencies and failed routes\n\nTASK.json supplies no blocked dependencies, dependency artifacts, input attempts, or confirmation reviews, so none are inferred or cited. The blocked routes vcd-only-vanishing, undecorated-cgp-top-weight-graph-complex, point-count-without-degree-parity-separation, and forgetful-map-renaming-local-system-unknown are not used. Respectively, they do not construct this CE incidence: FND-0035 shows the vcd argument gives no required vanishing; FND-0032 concerns the wrong weight corner; the packet admits no parity-separated point-count input; and FND-0036\u2013FND-0037 leave the mixed-local-system extension unresolved. No blocked route is reopened and new_inputs is empty.\n\nThis proves only C66-GEO-Z in its weakest fibrewise and stacky reduced-support form. It does not resolve RED-0001 or any downstream GEO-H0, GEO-COMP, TATE-SUPPORT, or TATE-ASSEMBLY node.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0045-01",
+      "role": "source_backed_input",
+      "statement": "For balanced genus-6 tetragonal covers, W_5 is the f_2=5 summand (O_{P(E^\u2228)}(2)\u2297\u03b3^*O(-5))|_C, deg W_5=16, and L=W_5\u2297\u03c9_C^{-1} has degree 6.",
+      "status": "source_backed",
+      "support_ids": [
+        "SRC-0004",
+        "FND-0074"
+      ]
+    },
+    {
+      "id": "CLM-0045-02",
+      "role": "f4_obstruction",
+      "statement": "For every effective degree-6 divisor \u0393 on a smooth balanced geometric fibre, H^0(C,\u03c9_C\u2297W_4^\u2228(\u0393))=0 because the line bundle has degree -4.",
+      "status": "proved",
+      "support_ids": [
+        "SRC-0004",
+        "FND-0062",
+        "FND-0074"
+      ]
+    },
+    {
+      "id": "CLM-0045-03",
+      "role": "f5_obstruction",
+      "statement": "For every effective degree-6 divisor \u0393 on a smooth balanced geometric fibre, H^0(C,\u03c9_C\u2297W_5^\u2228(\u0393)) is nonzero exactly when O_C(\u0393)\u2245W_5\u2297\u03c9_C^{-1}.",
+      "status": "proved",
+      "support_ids": [
+        "SRC-0004",
+        "FND-0063",
+        "FND-0074"
+      ]
+    },
+    {
+      "id": "CLM-0045-04",
+      "role": "geometric_point_identification",
+      "statement": "The geometric points of the reduced-support Abel\u2013Jacobi incidence I_L^red are exactly the balanced reduced-support CE evaluation-failure divisors for the chosen tetragonal cover.",
+      "status": "proved",
+      "support_ids": [
+        "FND-0046",
+        "FND-0061",
+        "FND-0062",
+        "FND-0063"
+      ]
+    },
+    {
+      "id": "CLM-0045-05",
+      "role": "ordered_model",
+      "statement": "The ordered incidence Z_AJ^ord\u2192I_L^red is a finite \u00e9tale S_6-torsor on stacks, obtained by base change from Conf_6\u2192Div^6_red.",
+      "status": "proved",
+      "support_ids": [
+        "FND-0064",
+        "FND-0075",
+        "FND-0087"
+      ]
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "not_used",
+      "reason": "FND-0035 shows that the target degree is not above vcd.",
+      "route": "vcd-only-vanishing"
+    },
+    {
+      "disposition": "not_used",
+      "reason": "FND-0032 places that complex in the wrong weight corner.",
+      "route": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "disposition": "not_used",
+      "reason": "No admitted parity-separated point-count input is supplied.",
+      "route": "point-count-without-degree-parity-separation"
+    },
+    {
+      "disposition": "not_used",
+      "reason": "FND-0036 and FND-0037 leave the mixed R^1 local-system extension effect unresolved.",
+      "route": "forgetful-map-renaming-local-system-unknown"
+    }
+  ],
+  "gap_markers": [
+    {
+      "id": "GAP-0045-01",
+      "statement": "Relative determinantal/Fitting equality between the CE failure scheme and the Abel\u2013Jacobi incidence is not proved.",
+      "support_ids": [
+        "FND-0046"
+      ]
+    },
+    {
+      "id": "GAP-0045-02",
+      "statement": "No global Proj \u03c0_*L model is justified across h^0 jumps.",
+      "support_ids": [
+        "FND-0047"
+      ]
+    },
+    {
+      "id": "GAP-0045-03",
+      "statement": "Nonemptiness of the reduced-support and ordered incidence on every geometric fibre is not proved.",
+      "support_ids": [
+        "FND-0083"
+      ]
+    },
+    {
+      "id": "GAP-0045-04",
+      "statement": "Unbalanced failure strata, closure, purity, dimensions, components, stabilizers, and local ideal structure remain unidentified.",
+      "support_ids": [
+        "FND-0052",
+        "FND-0058",
+        "FND-0060",
+        "FND-0067",
+        "FND-0068",
+        "FND-0069",
+        "FND-0086",
+        "FND-0091"
+      ]
+    },
+    {
+      "id": "GAP-0045-05",
+      "statement": "No Tate-support or exact-target assembly statement follows from the GEO-Z theorem alone.",
+      "support_ids": [
+        "FND-0050",
+        "FND-0053",
+        "FND-0054",
+        "FND-0055"
+      ]
+    }
+  ],
+  "id": "ATT-0045",
+  "lane": "geometry",
+  "methods_used": [
+    "balanced-tetragonal-casnati-ekedahl-obstruction-splitting",
+    "degree-and-serre-duality-calculation",
+    "degree-zero-line-bundle-triviality",
+    "relative-abel-jacobi-incidence",
+    "finite-etale-configuration-stack-base-change"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "2bcd3be371fab1ba0bc8ad79ad3ce5be03f9c41da1b0bdecfa64d7fab0c4699c",
+  "proof_dependencies": [],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0032",
+    "FND-0035",
+    "FND-0036",
+    "FND-0037",
+    "FND-0046",
+    "FND-0047",
+    "FND-0050",
+    "FND-0052",
+    "FND-0053",
+    "FND-0054",
+    "FND-0055",
+    "FND-0058",
+    "FND-0060",
+    "FND-0061",
+    "FND-0062",
+    "FND-0063",
+    "FND-0064",
+    "FND-0067",
+    "FND-0068",
+    "FND-0069",
+    "FND-0074",
+    "FND-0075",
+    "FND-0083",
+    "FND-0086",
+    "FND-0087",
+    "FND-0091"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-Z",
+  "summary": "The balanced degree-six failure condition is identified exactly on smooth geometric fibres with the Abel\u2013Jacobi incidence O_C(\u0393) \u2245 W_5\u2297\u03c9_C^{-1}. Its ordered distinct-point model is the finite \u00e9tale S_6-pullback over the reduced-support open. The result does not identify a global determinantal failure scheme, the unbalanced locus, components, codimension, or Tate contributions.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "Theorem (balanced geometric-point evaluation-failure incidence at (6,6)). Let B^bal be the stack of smooth genus-6 degree-4 covers with balanced Casnati\u2013Ekedahl splitting F = O_{P^1}(4) \u2295 O_{P^1}(5), with universal curve C/B^bal. Use the CE convention W_5 = (O_{P(E^\u2228)}(2) \u2297 \u03b3^*O_{P^1}(-5))|_C, the f_2=5 summand of (O(2) \u2297 \u03b3^*F^\u2228)|_C, and put L = W_5 \u2297 \u03c9_C^{-1}. Let Div^6_red(C/B^bal) be the reduced-support open in the relative degree-6 effective-divisor space, let AJ: Div^6_red(C/B^bal) \u2192 Pic^6(C/B^bal) be Abel\u2013Jacobi, and define I_L^red as the fibre product of AJ with the section [L]. Define Z_AJ^ord = Conf_6(C/B^bal) \u00d7_{Div^6_red(C/B^bal)} I_L^red. Then for every smooth geometric fibre C and every effective degree-6 divisor \u0393: (1) H^0(C, \u03c9_C \u2297 W_4^\u2228(\u0393)) = 0; (2) H^0(C, \u03c9_C \u2297 W_5^\u2228(\u0393)) is nonzero if and only if O_C(\u0393) \u2245 L, and hence CE evaluation fails on \u0393 if and only if O_C(\u0393) \u2245 L; and (3) Z_AJ^ord \u2192 I_L^red is a finite \u00e9tale S_6-torsor on stacks. Thus the geometric points of I_L^red are exactly the balanced reduced-support CE evaluation-failure divisors for the chosen cover. No equality of relative determinantal/Fitting scheme structures is asserted."
+}

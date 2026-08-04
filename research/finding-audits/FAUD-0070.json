@@ -1,0 +1,72 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "VERDICT: promote (candidate -> corroborated), with one recorded scope sharpening; merge target none. NO CLAIM-LEVEL CONTRADICTION: contradicts_claim_ids is empty and the statement opposes none of CONJ-0001, THM-0001-THM-0007, OBS-0001, RED-0001. It is a geometry statement about the C66-GEO-Z node and is compatible with THM-0005 (c(6)=5, so n=6 lies outside published CKgP coverage and new tetragonal geometry is required). INDEPENDENCE: TASK.json sets excluded_engines=[grok] and FND-0091 was raised by grok (REV-0058 on ATT-0040); the optional Grok 4.5 worker pool was therefore NOT used (0 of 4 permitted dispatches). Every check below is either an in-packet primary excerpt, a live retrieval listed in source_records, or a derivation performed in this audit. (1) CONVENTIONS VERIFIED. SRC-0004 Lemma 10.6, quoted verbatim in the packet, gives deg(W_f|_C) = 4g+12-4f and deg(omega_C tensor W_f|_C^vee(Gamma)) = 2g-2-(4g+12-4f)+n = 4f+n-2g-14. The Casnati-Ekedahl structure theorem for a degree-d Gorenstein cover (retrieved live from Deopurkar-Patel 1402.1439: resolution 0 -> pi^*N_{d-2}(-d) -> ... -> pi^*N_1(-2) -> O_{P(E)} -> O_X -> 0, E of rank d-1 and degree g+d-1) gives for d=4 a rank-3 E of degree g+3 = 9 and a rank-2 bundle of quadrics F. F's rank and degree were re-derived here independently as ker(Sym^2 E -> phi_*L^2) with L = omega_C tensor phi^*O(2): rank 6-4 = 2 and degree 36-27 = 9. Hence f_1+f_2 = 9, 'balanced' is exactly (4,5) as the packet states, the first unbalanced type is (3,6), and its expected codimension is h^1(P^1, End F) = h^1(O(-3)) = 2. (2) THE UNBALANCED LOCUS IS NONEMPTY IN GENUS 6, AND ITS PRIMARY WITNESS LIES INSIDE THE GONALITY-4 STRATUM. (a) Smooth plane quintics with the g^1_4 = |O(1)-p| given by projection from a point p on C. Using phi_*O_C = O + sum_i O(-e_i) with sum e_i = g+d-1 = 9 and h^0(kD) = (k+1) + sum_i max(0, k-e_i+1): h^0(D) = 2 forces all e_i >= 2, and h^0(2D) = h^0(O_C(2H)) - 2 = 6-2 = 4 forces exactly one e_i = 2, hence E = (2,3,4). The relative quadric containing C is then Bl_p P^2 = F_1 inside P(E^vee): for E = (2,3,4) and f = 6 the symmetric matrix has entry degrees 2e_i-f giving determinant a nonzero constant (fibrewise smooth conic bundle), and P(G) with Sym^2 G ~ E forces G = O(a)+O(a+1), i.e. F_1; blowing down recovers the plane quintic and the projection pencil. So F = (3,6), unbalanced. This locus has dimension 12+1 = 13 in the 15-dimensional degree-4 Hurwitz space (dim = b-3 = 18-3, the packet's own count), i.e. codimension 2, matching h^1(End F) = 2; Riemann-Hurwitz gives deg R = 18, so these covers are generically simply branched and genuinely lie in that Hurwitz space. Plane quintics have gonality exactly 4 -- consistent with corroborated FND-0022, which already records that the genus-6 gonality-4 open contains the Brill-Noether-special plane quintic locus -- so this witness is in scope under every reading of the campaign's tetragonal setting. (b) Secondary witness: genus-6 trigonal curves as (4,3) curves on P^1 x P^1, where h^0(2D) = 3 forces E = (3,3,3) and the constant conic is a relative quadric with f = 6, again F = (3,6), on a 13-dimensional locus (the trigonal locus), codimension 2. This witness is in scope only if Z ranges over all degree-4 covers rather than over gonality-exactly-4 curves. The genus-6 special-loci picture used here (trigonal, plane quintic, hyperelliptic as the non-general strata) matches the Penev-Vakil genus-6 stratification returned by live search and the in-packet corroborated FND-0022. (3) THE UNBALANCED FAILURE LOCUS IS NONEMPTY AND NOT LOWER-DIMENSIONAL. On F = (3,6) with (g,n) = (6,6): the f_1 = 3 summand has obstruction degree 4(3)+6-12-14 = -8 < 0 and vanishes identically (same mechanism as corroborated FND-0062), while the f_2 = 6 summand has degree 4(6)+6-12-14 = +4 > 0. This is exactly the positive-degree Brill-Noether regime that corroborated FND-0074 isolates as structurally different from the borderline degree-0 case: failure is no longer the single Abel-Jacobi condition O_C(Gamma) = L of corroborated FND-0063, but the condition that a degree-4 class lie in W_4, of codimension <= 2 in Pic^4. Since Sym^6 C -> Pic^6 is surjective and generically finite for g = 6, the failure locus in the divisor model is nonempty on every geometric fibre of the unbalanced stratum and has fibre dimension >= 4 there (versus 2 for the balanced fibre |omega_C(-D)| = P^2). Total dimension >= 13+4 = 17, equal to the dimension the campaign attributes to Z^bal (FND-0058: relative P^2 over the 15-dimensional balanced locus, dim 17, codim 4 in the 21-dimensional M_{6,6}). The omitted unbalanced part therefore enters the localization/Gysin bookkeeping at the SAME codimension 4 as Z^bal, which is precisely the exhaustiveness that corroborated FND-0086 requires before degree-26 Gysin inputs can be declared Tate or vanishing. (4) CONSEQUENCE FOR THE FINDING. Balancedness is an open condition on the Hurwitz space, so Z^bal is open in Z; but it is not dense: the closure of a 17-dimensional Z^bal whose image dominates M_6 cannot contain a 17-dimensional locus lying over the codimension-3 plane-quintic locus (a 17-dimensional irreducible set cannot properly contain another). Hence a monomorphism from Z^bal necessarily misses components of Z of equal dimension, and clause (ii) of FND-0091 -- that the CE evaluation-failure locus in M_{6,6} is isomorphic to the balanced model -- is FALSE, not merely unsupported. The finding's operative conclusion (reject any C66-GEO-Z theorem carrying clause (ii) while leaving unbalanced failure unconstructed) is verified, and its final clause 'mono of Z only embeds the balanced open piece' is correct. SCOPE SHARPENING (recorded; not a demotion): 'self-refuting' overstates the logical form. Clauses (i) and (ii) are not formally contradictory by themselves -- an attempt could leave the unbalanced case unconstructed while (ii) held vacuously if unbalanced failure were empty. The missing premise is exactly the nonemptiness established in (2)-(3); with it supplied the conclusion is stronger than the finding claims (clause (ii) is refuted outright), and without it the correct charge would be unsupported overreach rather than self-refutation. Injectivity of the balanced model into M_{6,6} remains credible (distinct g^1_4's give distinct L = omega_C(-D) and hence disjoint fibres) but is subject to the stack/automorphism caveats of FND-0060 and FND-0075. RESIDUAL CHECKS NOT DISCHARGED HERE: the reduced-support / ordered-Conf_6 refinement of the unbalanced fibre inherits exactly the caveat corroborated FND-0083 imposes on the balanced case (nonemptiness in Sym^6 does not by itself give nonemptiness of the reduced-support open); a Bertini/translation argument makes it generic, but it was not proved fibrewise. The exhaustive list of occurring unbalanced types (whether (2,7) or more degenerate types occur in genus 6, e.g. over the hyperelliptic or bielliptic loci via decomposable degree-4 maps) was not settled; that is the analysis FND-0086 demands and it remains open. DISTINCTNESS / MERGE ANALYSIS: merge_target_id null. FND-0052 (corroborated) states that the balanced reduced-support relative linear system is an open piece of the failure locus and that Gysin for (M_{6,6},Z) needs a closed stratified embedding after h^0 and splitting-type stratification -- a methodological requirement on a correct construction; FND-0091 rejects a specific claimed theorem shape and, as sharpened here, supplies the quantitative fact FND-0052 does not assert, namely that the omitted unbalanced part is equidimensional with Z^bal. FND-0067 (corroborated) concerns closure (a closure point in Z minus Z^bal is needed before declaring Z^bal non-closed); the components exhibited above show strict containment without settling the closure question, so the two are complementary and non-contradictory. FND-0086 (corroborated) is the general exhaustiveness demand; FND-0091 is the specific instance forbidding an attempt from short-circuiting it by asserting an isomorphism. FND-0057 (corroborated) is the campaign precedent for retaining claim-structure inconsistency findings as first-class findings; the attempt-local duplicates that were retired in this campaign (FND-0009, FND-0013 into FND-0002) restated an existing finding with no new content, which is not the case here. PROVENANCE LIMITS (stated rather than papered over): the read-only workspace exposes no shell or hashing tool, so content_sha256 is null in every source_record rather than a fabricated 64-hex string, and retrieved_at carries date precision only (no clock available). SRC-0004 Section 10 could not be re-read in full -- ar5iv and the arXiv PDF both truncated and the PDF renderer is unavailable -- so the Lemma 10.6 text relied on is the verbatim packet excerpt; the live retrieval confirms only the paper's identity and the section locator ('Section 10. Tetragonal curves'). Live search additionally returned the Canning-Larson description of 'special tetragonal and pentagonal covers whose associated vector bundles on P^1 are so unbalanced' that they fall outside the good open substack of Hurwitz space, confirming that unbalanced CE strata are a real and separately-analyzed phenomenon rather than a vacuous case; only URLs actually fetched are listed in source_records.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0091",
+  "id": "FAUD-0070",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "not applicable: the statement is about loci/schemes; the downstream support-filtration consequence is stated for Q-coefficients",
+    "cover_degree": 4,
+    "excluded": "n != 6 and g != 6 (the obstruction degree 4f+n-2g-14 changes regime; see FND-0074), and any reading in which Z is defined by fiat as the balanced object only",
+    "object": "The CE evaluation-failure locus Z for degree-4 covers C -> P^1 of genus 6 with Gamma of degree n=6, and its balanced model Z^bal over the F = O(4)+O(5) locus of the degree-4 Hurwitz space",
+    "quantifier": "universal over C66-GEO-Z theorems that assert Z (in M_{6,6}) is isomorphic to Z^bal while leaving unbalanced-F failure unconstructed",
+    "splitting_types": {
+      "balanced": [
+        4,
+        5
+      ],
+      "sum_constraint": "f_1+f_2 = g+d-1 = 9",
+      "witnessed_unbalanced": [
+        3,
+        6
+      ]
+    },
+    "subproblem_ids": [
+      "C66-GEO-Z"
+    ],
+    "verified_addendum": "the omitted unbalanced part has dimension >= 17 in the divisor (Sym^6) model, i.e. the same codimension 4 in M_{6,6} as Z^bal, so it is not a lower-dimensional remainder"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "1402.1439",
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "casnati-ekedahl-structure-theorem",
+      "retrieved_at": "2026-08-04T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/1402.1439"
+    },
+    {
+      "arxiv_id": "2104.05820",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.1090/jag/818",
+      "query_family": "unbalanced-ce-strata-nonvacuous",
+      "retrieved_at": "2026-08-04T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2104.05820"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-04T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357"
+    }
+  ],
+  "task_id": "TASK-F-FND-0091",
+  "verdict": "promote"
+}

@@ -1,0 +1,88 @@
+{
+  "attempt_id": "ATT-0045",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0045-01",
+      "note": "Packet CE polarity W_5=(O(2)\u2297\u03b3^*O(-5))|_C as f_2=5 summand of O(2)\u2297\u03b3^*F^\u2228, deg W_f=4g+12-4f, hence deg W_5=16 and deg L=deg(W_5\u2297\u03c9^{-1})=6 at g=6, matches SRC-0004/FND-0074 and the packet bottleneck.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0045-02",
+      "note": "deg(\u03c9_C\u2297W_4^\u2228(\u0393))=10-20+6=-4 (equivalently 4f+n-2g-14 at f=4,n=6) on every effective deg-6 \u0393; a negative-degree line bundle on a smooth projective curve has H^0=0. Matches FND-0062.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0045-03",
+      "note": "deg(\u03c9_C\u2297W_5^\u2228(\u0393))=0 for every effective deg-6 \u0393; on a smooth geometric fibre, a deg-0 line bundle has a nonzero section iff it is trivial, iff O_C(\u0393)\u2245W_5\u2297\u03c9_C^{-1}. Pure line-bundle arithmetic is self-contained; the CE-obstruction naming of this H^0 is supplied by corroborated FND-0063 and SRC-0004's direct-sum decomposition of the space whose vanishing is the required CE vanishing.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0045-04",
+      "note": "With (1)\u2013(2) and f=4 summand identically zero, CE evaluation fails on an effective deg-6 \u0393 iff O_C(\u0393)\u2245L. I_L^red is defined as the AJ fibre product with [L] over Div^6_red, so its geometric points are exactly the reduced-support such divisors. Fitting/determinantal scheme equality is explicitly disclaimed (FND-0046). Scope is balanced geometric fibres only, not the full closed locus in M_{6,6} (FND-0091).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0045-05",
+      "note": "Conf_6\u2192Div^6_red is a finite \u00e9tale S_6-torsor on stacks (FND-0064/FND-0075); base change along I_L^red\u2192Div^6_red yields Z_AJ^ord\u2192I_L^red of the same type. Theorem correctly states stack-level torsor and does not claim coarse moduli or integral-coefficient descent.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "THM-0045-CE-iff",
+      "note": "Theorem clause (2) second half (CE fails iff O(\u0393)\u2245L for every effective deg-6 \u0393) follows from f=4 vanishing + f=5 deg-0 triviality + packet/SRC-0004 identification of \u2295_f H^0(\u03c9\u2297W_f^\u2228(\u0393)) as the CE evaluation obstruction, as already encoded in corroborated FND-0062/FND-0063.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "THM-0045-scope-disclaimers",
+      "note": "Non-claims match packet gaps: no Fitting equality (FND-0046), no Proj \u03c0_*L across h^0 jumps (FND-0047), no fibrewise nonemptiness of reduced/ordered incidence (FND-0083), no unbalanced/full M_{6,6} identification (FND-0091), no codim/components/stabilizers/Tate assembly.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-04",
+  "finding_candidates": [
+    {
+      "adjudication": "supports_existing",
+      "evidence": "ATT-0045 degree calc deg(\u03c9\u2297W_4^\u2228(\u0393))=-4, deg(\u03c9\u2297W_5^\u2228(\u0393))=0 matches SRC-0004/FND-0074; deg-0 section\u21d4trivial on smooth geometric fibres; I_L^red:=AJ\u00d7_{[L]} construction; Fitting disclaimed per FND-0046.",
+      "key": "geo-z-aj-incidence-geometric-points-balanced-66",
+      "statement": "On the balanced genus-6 degree-4 CE stack with W_5=(O(2)\u2297\u03b3^*O(-5))|_C and L=W_5\u2297\u03c9_C^{-1}, the reduced-support Abel\u2013Jacobi fibre product I_L^red has geometric points exactly the reduced-support effective degree-6 divisors \u0393 with O_C(\u0393)\u2245L; with the f=4 CE obstruction summand of degree -4 vanishing identically and the f=5 summand of degree 0, these are exactly the balanced reduced-support CE evaluation-failure divisors. Relative determinantal/Fitting equality with a global failure scheme is not included.",
+      "supports_finding_id": "FND-0063"
+    },
+    {
+      "adjudication": "supports_existing",
+      "evidence": "Standard finite-\u00e9tale base change of the stack configuration torsor (FND-0064/FND-0075); ATT-0045 states stack-level only and cites FND-0087-compatible reduced-support construction rather than reducing only the ordered source.",
+      "key": "geo-z-ordered-s6-torsor-stack-base-change",
+      "statement": "The ordered incidence Z_AJ^ord:=Conf_6\u00d7_{Div^6_red} I_L^red \u2192 I_L^red is a finite \u00e9tale S_6-torsor on stacks by base change of Conf_6\u2192Div^6_red; this fails on coarse moduli when automorphisms permute marks and is not asserted integrally.",
+      "supports_finding_id": "FND-0064"
+    }
+  ],
+  "id": "REV-0061",
+  "independent": true,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "2bcd3be371fab1ba0bc8ad79ad3ce5be03f9c41da1b0bdecfa64d7fab0c4699c",
+  "proof_dependency_checks": [],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0045-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "SRC-0004 Lemma 10.6 as packet-excerpted supplies deg(W_f)=4g+12-4f, the direct-sum decomposition H^0(\u03c9\u2297W^\u2228(\u0393))=\u2295_f H^0(\u03c9\u2297W_f^\u2228(\u0393)), and only a sufficient criterion that negative obstruction degree forces vanishing\u2014not a free-standing primary-source iff that CE evaluation fails exactly when those H^0 are nonzero. Combined with FND-0061 (degree/Serre control alone is incomplete without showing those groups are the CE evaluation obstruction spaces), this threatens theorem (2)'s 'hence CE fails iff O(\u0393)\u2245L' and the final geometric-point identification. Outcome: defeated for this scoped lemma. The packet already corroborates FND-0062/FND-0063 naming the same summands as the fibrewise CE obstruction components and stating the CE-iff at balanced (6,6); ATT-0045 re-runs the matching degree arithmetic, uses the packet polarity \u03b3^*O(-5), quantifies over geometric fibres, and explicitly refuses Fitting/scheme equality (FND-0046). Stack-vs-coarse (FND-0075), nonemptiness (FND-0083), unbalanced locus (FND-0091), and Tate upgrades are out of the stated theorem.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Theorem (balanced geometric-point evaluation-failure incidence at (6,6)). Let B^bal be the stack of smooth genus-6 degree-4 covers with balanced Casnati\u2013Ekedahl splitting F = O_{P^1}(4) \u2295 O_{P^1}(5), with universal curve C/B^bal. Use the CE convention W_5 = (O_{P(E^\u2228)}(2) \u2297 \u03b3^*O_{P^1}(-5))|_C, the f_2=5 summand of (O(2) \u2297 \u03b3^*F^\u2228)|_C, and put L = W_5 \u2297 \u03c9_C^{-1}. Let Div^6_red(C/B^bal) be the reduced-support open in the relative degree-6 effective-divisor space, let AJ: Div^6_red(C/B^bal) \u2192 Pic^6(C/B^bal) be Abel\u2013Jacobi, and define I_L^red as the fibre product of AJ with the section [L]. Define Z_AJ^ord = Conf_6(C/B^bal) \u00d7_{Div^6_red(C/B^bal)} I_L^red. Then for every smooth geometric fibre C and every effective degree-6 divisor \u0393: (1) H^0(C, \u03c9_C \u2297 W_4^\u2228(\u0393)) = 0; (2) H^0(C, \u03c9_C \u2297 W_5^\u2228(\u0393)) is nonzero if and only if O_C(\u0393) \u2245 L, and hence CE evaluation fails on \u0393 if and only if O_C(\u0393) \u2245 L; and (3) Z_AJ^ord \u2192 I_L^red is a finite \u00e9tale S_6-torsor on stacks. Thus the geometric points of I_L^red are exactly the balanced reduced-support CE evaluation-failure divisors for the chosen cover. No equality of relative determinantal/Fitting scheme structures is asserted.",
+  "verdict": "confirmed"
+}

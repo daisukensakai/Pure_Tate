@@ -1,0 +1,154 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "For every g\u22652 and odd r, H^{4g-3}(M_{g,1};H^{\u2297r})=0 (equivalently the Steinberg coinvariants (St_g\u2297H_Q^{\u2297r})_{G_{g,1}} vanish)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "In particular H^{21}(M_{6,1};H^{\u22975})=0."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "A nontrivial cyclic generator \u03c6_0 of St_g as a Q[G_{g,1}]-module is fixed by each handle half-turn \u03c4_i (or has controlled sign under \u03c4_i), and each \u03c4_i acts as \u22121 on the i-th symplectic plane of H_Q and as +1 on the complementary planes, so that every odd-degree pure tensor is killed in the coinvariants."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "W_{26}H^{26}(M_{6,6};Q)=0, hence W_{-16}H^{BM}_{16}(M_{6,6};Q) is the empty direct sum of Q(8)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Chord-slide relations on one-filling systems reduce every oriented zero-filling system to a mapping-class translate of a single nontrivial 0-filling system, yielding cyclicity of St_g as a Q[G_{g,1}]-module on that generator."
+    }
+  ],
+  "engine": "grok",
+  "established_facts": [
+    {
+      "evidence": "Packet adjudicated finding FND-0001 together with the packet exact-target dictionary (poincar\u00e9_twist 21, ordinary degree 26, open BM degree 16).",
+      "evidence_class": "source",
+      "statement": "For d=3g-3+n, the open Borel\u2013Moore input W_{-16}H^{BM}_{16}(M_{g,n};Q) is identified by Poincar\u00e9 duality with W_{2d-16}H^{2d-16}(M_{g,n};Q)(d). For (g,n)=(6,6) one has d=21, so W_{-16}H^{BM}_{16}(M_{6,6};Q)=W_{26}H^{26}(M_{6,6};Q)(21)."
+    },
+    {
+      "evidence": "Packet FND-0036 records vcd(M_{6,5})=25; the uniform formula d_j=4g-4+j for g=6 is the standard Harer vcd used throughout the observable argument.",
+      "evidence_class": "source",
+      "statement": "The virtual cohomological dimension of M_{6,j} is vcd(M_{6,j})=4\u00b76-4+j=20+j. In particular vcd(M_{6,1})=21, vcd(M_{6,5})=25, and vcd(M_{6,6})=26."
+    },
+    {
+      "evidence": "Packet FND-0036 [mechanically_verified; degree 26, map M_{6,6}\u2192M_{6,5}].",
+      "evidence_class": "mechanical",
+      "statement": "For the forgetful map M_{6,6}\u2192M_{6,5}, the q=0 Leray term H^{26}(M_{6,5};Q) vanishes because 26 exceeds vcd(M_{6,5})=25; fibre cohomology occurs only in degrees q=0,1, and no Leray differential enters or leaves total degree 26."
+    },
+    {
+      "evidence": "Observable argument equations (4)\u2013(5); diagnostics confirm the residue SES as a short exact sequence of VMHS.",
+      "evidence_class": "source",
+      "statement": "Let H be the rank-12 weight-one symplectic local system R^1 of the universal closed genus-6 curve, write V_r=H^{\u2297r} with V_0=Q, and let f_j:M_{6,j}\u2192M_{6,j-1} forget the j-th mark. The fibre is a genus-6 curve with j-1 punctures and has cohomology only in degrees 0 and 1. The residue exact sequence of mixed Hodge modules 0\u2192H\u2192R_j\u2192Q(-1)^{j-2}\u21920 holds for R_j=R^1(f_j)_*Q, and tensoring with V_r yields 0\u2192V_{r+1}\u2192V_r\u2297R_j\u2192V_r(-1)^{j-2}\u21920."
+    },
+    {
+      "evidence": "Observable argument equations (6) and the vcd vanishing mechanism of packet FND-0036 applied fibrewise in the forgetful tower.",
+      "evidence_class": "source",
+      "statement": "Fix r=6-j for 2\u2264j\u22646. Then d_j+r=26 and d_{j-1}+r+1=26. For coefficients V_r the Leray spectral sequence of f_j has only rows q=0,1; the q=0 term H^{d_j}(M_{6,j-1};V_r) vanishes by the vcd of the base; R^2(f_j)_*Q=0 so no differential enters E_2^{d_{j-1},1}, and outgoing differentials land above d_{j-1}. Hence there is an isomorphism of mixed Hodge structures H^{d_j}(M_{6,j};V_r)\u2245H^{d_{j-1}}(M_{6,j-1};V_r\u2297R_j)."
+    },
+    {
+      "evidence": "Observable weight arithmetic: with r=6-j one has d_{j-1}=19+j and d_{j-1}+r+2=(19+j)+(6-j)+2=27 uniformly for each stage j=2,\u2026,6.",
+      "evidence_class": "mechanical",
+      "statement": "The residue quotient coefficient V_r(-1) is pure of weight r+2. Cohomology in degree d_{j-1} with that coefficient has weight floor d_{j-1}+r+2=27. Consequently Gr^W_{26} H^{d_{j-1}}(M_{6,j-1};V_r(-1)^{j-2})=0."
+    },
+    {
+      "evidence": "Observable argument equations (7)\u2013(8); diagnostics confirm that connecting maps from Gr^W_{26} of the weight-two quotient in degree d_{j-1}-1 alter kernels rather than cokernels once the same-degree graded piece of the residue quotient vanishes.",
+      "evidence_class": "source",
+      "statement": "Morphisms of mixed Hodge structures are strict for the weight filtration. Applying Gr^W_{26} to the long exact sequence of 0\u2192V_{r+1}\u2192V_r\u2297R_j\u2192V_r(-1)^{j-2}\u21920 and using vanishing of the residue quotient on Gr^W_{26} yields a surjection Gr^W_{26} H^{d_{j-1}}(M_{6,j-1};V_{r+1})\u21a0Gr^W_{26} H^{d_{j-1}}(M_{6,j-1};V_r\u2297R_j). Combined with the Leray isomorphism this gives, for each j=2,\u2026,6, that Gr^W_{26} H^{d_j}(M_{6,j};V_{6-j}) is a quotient of Gr^W_{26} H^{d_{j-1}}(M_{6,j-1};V_{7-j})."
+    },
+    {
+      "evidence": "Observable argument equation (9) as the formal composite of the five stagewise quotient maps.",
+      "evidence_class": "source",
+      "statement": "Composing the five Gr^W_{26} surjections for j=6,5,4,3,2 yields a surjection Gr^W_{26} H^{21}(M_{6,1};H^{\u22975})\u21a0Gr^W_{26} H^{26}(M_{6,6};Q)."
+    },
+    {
+      "evidence": "Observable argument equations (10)\u2013(11) and the final duality conversion; the implication is conditional on source vanishing.",
+      "evidence_class": "source",
+      "statement": "On a smooth Deligne\u2013Mumford stack with constant Q coefficients, H^{26} has weights at least 26, so W_{26}H^{26}=Gr^W_{26}H^{26} in that degree. Therefore vanishing of the source of the composite surjection would imply W_{26}H^{26}(M_{6,6};Q)=0, and by Poincar\u00e9 duality the exact Borel\u2013Moore group would be zero (the empty direct sum of Q(8))."
+    },
+    {
+      "evidence": "Observable argument section 1 (Harer virtual-duality identification of the top-degree group with Steinberg coinvariants).",
+      "evidence_class": "source",
+      "statement": "Harer virtual duality identifies the top-degree rational cohomology of the pure mapping class group G_{g,1} with Steinberg coinvariants: H^{4g-3}(G_{g,1};H_Q^{\u2297r})\u2245H_0(G_{g,1};St_g\u2297H_Q^{\u2297r}), where St_g is the top reduced homology of the curve complex. Over Q the orbifold cohomology of M_{g,1} agrees with group cohomology after passage to a torsion-free finite-index subgroup and averaging."
+    },
+    {
+      "evidence": "Packet adjudicated finding FND-0020.",
+      "evidence_class": "source",
+      "statement": "R^1\u03c0_*Q for the universal n-punctured curve is mixed of weights 1 and 2 (an extension of a rank n-1 Tate system of weight 2 by the rank 2g weight-1 system), never pure of weight 1; the correct weight floor for H^p(base;L) is therefore \u2265p+1."
+    },
+    {
+      "evidence": "Packet adjudicated finding FND-0033.",
+      "evidence_class": "source",
+      "statement": "The RED-0001 corner W_{-16}H^{BM}_{16}(M_{g,n}) is a pure polarizable Q-Hodge structure of weight \u221216; polarizable pure Q-Hodge structures of fixed weight form a semisimple abelian category, so any subquotient of a direct sum of Tate objects in that row is again a direct sum of the same Tate object."
+    },
+    {
+      "evidence": "Packet adjudicated finding FND-0035 (ordinary degree equals vcd for (6,6)).",
+      "evidence_class": "source",
+      "statement": "For (g,n)=(6,6) the required ordinary degree 2d\u221216 equals the virtual cohomological dimension, so vanishing theorems for degrees strictly above vcd do not by themselves resolve the exact target on M_{6,6}."
+    },
+    {
+      "evidence": "Packet primary locator SRC-0004, Lemma 10.6 degree/Serre-duality calculation.",
+      "evidence_class": "source",
+      "statement": "By SRC-0004 Lemma 10.6, for W_{f_i}=O_{P(E^\u2228)}(2)\u2297\u03b3^*O(\u2212f_i) one has deg(W_{f_i}|_C)=4g+12\u22124f_i, and the CE obstruction degree is deg(\u03c9_C\u2297W_{f_i}^\u2228(\u0393))=4f_i+n\u22122g\u221214."
+    }
+  ],
+  "id": "DIGEST-0017",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "The standard ordered 0-filling system represents the zero class in the Steinberg module St_g. Cyclicity of St_g uses a different nontrivial generator \u03c6_0. With s=0 the identity \u03c4_i s=s is vacuous and supplies no information about the coinvariants (St_g\u2297H_Q^{\u2297r})_{G_{g,1}}.",
+      "statement": "Take s to be the class in St_g of the standard ordered 0-filling system A={a_1,b_1,\u2026,a_g,b_g} (standard 4g-gon side identification), assert that s generates St_g as a Q[G_{g,1}]-module, and deduce \u03c4_i s=s for handle half-turns because those half-turns fix the unoriented arcs of A."
+    },
+    {
+      "mathematical_reason": "Because [A]=0 in St_g, a reduction of every filling system to a G-translate of A cannot prove that St_g is cyclic on [A]; at best it reconfirms that degenerate or standard systems contribute the zero class, not a cyclic generator.",
+      "statement": "From the cellular presentation of filling systems, chord-slide relations and lexicographic reduction of intersections show that every oriented zero-filling system is congruent to a mapping-class translate of the standard system A, hence s=[A] generates St_g."
+    },
+    {
+      "mathematical_reason": "The half-turn coinvariance identity is applied to the zero class s=[A] in St_g, so the sign flip on odd tensors never sees a nontrivial Steinberg factor. The resulting vanishing of (St_g\u2297H^{\u22975})_G and of H^{21}(M_{6,1};H^{\u22975}) is not established by this argument.",
+      "statement": "For every basis pure tensor t of odd degree r some symplectic plane H_i occurs oddly often, so \u03c4_i t=\u2212t; combined with [s\u2297v]=[s\u2297\u03c4_i v] and s=[A] this forces all coinvariants of St_g\u2297H_Q^{\u2297r} to vanish, and therefore H^{4g-3}(G_{g,1};H_Q^{\u2297r})=0 and H^{21}(M_{6,1};H^{\u22975})=0."
+    },
+    {
+      "mathematical_reason": "The composite surjection is only a conditional reduction: its source vanishing is not proved by the standard-filling-system argument, so the implication does not establish vanishing of the exact lowest-weight group.",
+      "statement": "Because H^{21}(M_{6,1};H^{\u22975})=0, the composite surjection Gr^W_{26} H^{21}(M_{6,1};H^{\u22975})\u21a0Gr^W_{26} H^{26}(M_{6,6};Q) forces Gr^W_{26} H^{26}(M_{6,6};Q)=0 and hence W_{26}H^{26}(M_{6,6};Q)=0."
+    }
+  ],
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "problem_key": "02355889ed59e9a07fb7d6e5fa3332a674f9a74c55fb869ffbf797e3fc91c1c2",
+  "reusable_computations": [],
+  "reviewer_engine": "grok",
+  "sanitized": true,
+  "schema_version": 1,
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-CODEX-FORCED_PROOF",
+  "unresolved_dependencies": [
+    {
+      "statement": "A proof that H^{21}(M_{6,1};H^{\u22975})=0, equivalently that the coinvariants (St_6\u2297H_Q^{\u22975})_{G_{6,1}} vanish, using a nontrivial cyclic generator of the Steinberg module rather than the zero class of the standard filling system."
+    },
+    {
+      "statement": "Control of the action of each handle half-turn \u03c4_i on a genuine Broaddus cyclic generator \u03c6_0 of St_g (fixedness or sign on St_g, and the standard \u22121/+1 action on the symplectic summands of H_Q) sufficient to kill all odd-degree pure tensors in the coinvariants."
+    },
+    {
+      "statement": "An independent justification that the odd-tensor top-degree vanishing, once correctly established, upgrades the conditional Gr^W_{26} surjection tower to an unconditional proof that W_{26}H^{26}(M_{6,6};Q)=0 (equivalently that the exact Borel\u2013Moore group is a direct sum of Q(8))."
+    },
+    {
+      "statement": "If a geometry-supported route is used instead of the forgetful tower, the residual tetragonal package remains open: construction and scheme-theoretic identification of the CE evaluation-failure locus Z for the balanced splitting F=O(4)\u2295O(5), h^0-stratification of the relative degree-six linear system, and component/dimension/stabilizer analysis needed for Tate support in codimension 13."
+    }
+  ]
+}
