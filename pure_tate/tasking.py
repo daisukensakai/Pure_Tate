@@ -93,7 +93,9 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
         campaign_route_policy_errors,
         load_campaign,
         load_campaign_attempts,
+        packet_binding_matches,
     )
+    from .proofs import attempt_is_complete
 
     campaign = load_campaign(campaign_id)
     packet = campaign_packet_record(campaign_id)
@@ -106,9 +108,8 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
         if (
             not isinstance(subproblem_id, str)
             or subproblem_id in verified_dependencies
-            or attempt.get("status") not in {"claimed_complete", "verified"}
-            or attempt.get("gap_markers")
-            or attempt.get("packet_sha256") != packet["packet_sha256"]
+            or not attempt_is_complete(attempt)
+            or not packet_binding_matches(attempt, campaign_id)
             or campaign_route_policy_errors(campaign, attempt)
         ):
             continue
@@ -118,7 +119,7 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
             if review.get("attempt_id") == attempt.get("id")
             and review.get("campaign_revision")
             == campaign["campaign_revision"]
-            and review.get("packet_sha256") == packet["packet_sha256"]
+            and packet_binding_matches(review, campaign_id)
             and review.get("verdict") == "confirmed"
             and review.get("independent") is True
             and review.get("reviewer_engine") != attempt.get("engine")
@@ -190,6 +191,7 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
                 "context_revision": campaign["context_revision"],
                 "packet_id": packet["packet_id"],
                 "packet_sha256": packet["packet_sha256"],
+                "packet_binding_sha256": packet.get("packet_binding_sha256"),
                 "input_packet": packet["packet_path"],
                 "blocked_routes": campaign["blocked_routes"],
                 "new_input_declared": [],
@@ -261,6 +263,7 @@ def finding_audit_tasks(campaign_id: str) -> List[Dict[str, Any]]:
             "target": packet["target"],
             "packet_id": packet["packet_id"],
             "packet_sha256": packet["packet_sha256"],
+            "packet_binding_sha256": packet.get("packet_binding_sha256"),
             "input_packet": packet["packet_path"],
             "requires_live_web": True,
             "prompt": "prompts/FINDING_AUDIT.md",
@@ -341,6 +344,8 @@ def _migration_at_root() -> Dict[str, Any]:
 
 
 def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
+    from .proofs import derived_attempt_status
+
     attempts = _load_json_objects(ROOT / "proof" / "attempts", "ATT")
     reviews = _load_json_objects(ROOT / "proof" / "reviews", "REV")
     migration = _migration_at_root()
@@ -366,9 +371,9 @@ def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
             continue
         if attempt.get("campaign_id"):
             from .campaigns import (
-                campaign_packet_record,
                 campaign_route_policy_errors,
                 load_campaign,
+                packet_binding_matches,
             )
 
             campaign = load_campaign(str(attempt["campaign_id"]))
@@ -376,9 +381,9 @@ def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
                 "campaign_revision"
             ):
                 continue
-            if attempt.get("packet_sha256") != campaign_packet_record(
-                str(attempt["campaign_id"])
-            )["packet_sha256"]:
+            if not packet_binding_matches(
+                attempt, str(attempt["campaign_id"])
+            ):
                 continue
             if campaign_route_policy_errors(campaign, attempt):
                 continue
@@ -390,6 +395,10 @@ def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
             "verified",
         }:
             continue
+        # Completeness is derived from the attempt's structured content, not
+        # from the status string the model chose to write. A complete lemma
+        # that labelled itself "proposed" must still earn a second pass.
+        status = derived_attempt_status(attempt)
         attached = reviews_by_attempt.get(str(attempt.get("id")), [])
         by_pass = {
             review.get("review_pass"): review
@@ -400,13 +409,13 @@ def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
             review.get("verdict") in {"incomplete", "refuted"}
             for review in attached
         )
-        if adverse or attempt.get("status") == "verified":
+        if adverse or status == "verified":
             required_passes: List[int] = []
-        elif attempt.get("status") == "proposed":
-            # Proposed work receives one triage review. A second expensive pass
-            # is reserved for a proof that claims completeness.
+        elif status == "proposed":
+            # Incomplete work receives one triage review. A second expensive
+            # pass is reserved for an attempt that is actually complete.
             required_passes = [] if 1 in by_pass else [1]
-        elif attempt.get("status") == "claimed_complete":
+        elif status == "claimed_complete":
             if 1 not in by_pass:
                 required_passes = [1]
             elif by_pass[1].get("verdict") == "confirmed" and 2 not in by_pass:

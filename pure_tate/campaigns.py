@@ -247,6 +247,99 @@ def _failed_attempt_ledger(campaign: Dict[str, Any]) -> List[str]:
     return rows
 
 
+def campaign_packet_binding(
+    campaign_id: str = DEFAULT_CAMPAIGN,
+) -> Dict[str, Any]:
+    """Return the identity-bearing packet inputs, excluding adjudicated findings.
+
+    An attempt's validity depends on the target, the exact theorem, the
+    bottleneck conventions, the subproblem graph, the blocked routes, and the
+    pinned primary-source excerpts. It does not depend on the packet's running
+    list of adjudicated findings: that section grows every time a finding audit
+    lands, and hashing it into artifact identity invalidates in-flight work
+    faster than it can earn two review passes. Finding dependence is enforced
+    per citation instead -- an attempt citing a finding below ``corroborated``
+    is rejected by ``audit_proofs`` -- so it does not belong in this hash.
+    """
+    campaign = load_campaign(campaign_id)
+    case = campaign["case"]
+    target = open_input_target(case["g"], case["n"])
+    return {
+        "campaign_id": campaign_id,
+        "campaign_revision": campaign["campaign_revision"],
+        "context_revision": campaign["context_revision"],
+        "target": target.as_dict(),
+        "exact_theorem": campaign["paired_attempt_policy"]["exact_theorem"],
+        "bottleneck": campaign["bottleneck"],
+        "subproblems": [
+            {
+                "id": item["id"],
+                "lane": item["lane"],
+                "title": item["title"],
+                "dependencies": list(item.get("dependencies", [])),
+            }
+            for item in campaign["subproblems"]
+        ],
+        "blocked_routes": list(campaign["blocked_routes"]),
+        "primary_sources": {
+            source_id: hashlib.sha256(
+                _primary_locator_excerpt(source_id).encode("utf-8")
+            ).hexdigest()
+            for source_id in campaign["primary_source_ids"]
+        },
+    }
+
+
+def campaign_packet_binding_sha256(
+    campaign_id: str = DEFAULT_CAMPAIGN,
+) -> str:
+    return hashlib.sha256(
+        json.dumps(
+            campaign_packet_binding(campaign_id), sort_keys=True
+        ).encode("utf-8")
+    ).hexdigest()
+
+
+def _binding_migration(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
+    path = (
+        ROOT
+        / "proof"
+        / "migrations"
+        / ("campaign-%s-binding.json" % campaign_id)
+    )
+    if not path.is_file():
+        return {}
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
+def packet_binding_matches(
+    artifact: Dict[str, Any], campaign_id: str = DEFAULT_CAMPAIGN
+) -> bool:
+    """Report whether an artifact was produced against the current packet identity.
+
+    Artifacts written before the binding hash existed carry only the full-content
+    ``packet_sha256``. Their packet texts were overwritten in place and are not
+    recoverable, so binding equivalence for them is an attested migration record
+    rather than a derivation -- see ``proof/migrations/campaign-*-binding.json``.
+    """
+    binding = artifact.get("packet_binding_sha256")
+    if isinstance(binding, str) and binding:
+        return binding == campaign_packet_binding_sha256(campaign_id)
+    migration = _binding_migration(campaign_id)
+    if migration.get("binding_sha256") != campaign_packet_binding_sha256(
+        campaign_id
+    ):
+        return False
+    equivalent = migration.get("equivalent_packet_sha256")
+    if not isinstance(equivalent, dict):
+        return False
+    return artifact.get("packet_sha256") in equivalent
+
+
 def render_campaign_packet(campaign_id: str = DEFAULT_CAMPAIGN) -> str:
     campaign = load_campaign(campaign_id)
     case = campaign["case"]
@@ -349,6 +442,7 @@ def campaign_packet_record(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any
         "packet_id": "%s-v%d" % (campaign_id, campaign["campaign_revision"]),
         "packet_path": str(path.relative_to(ROOT)),
         "packet_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+        "packet_binding_sha256": campaign_packet_binding_sha256(campaign_id),
         "target": open_input_target(
             campaign["case"]["g"], campaign["case"]["n"]
         ).as_dict(),
@@ -358,7 +452,16 @@ def campaign_packet_record(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any
 
 def write_campaign_packet(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
     record = campaign_packet_record(campaign_id)
-    atomic_write_text(campaign_packet_path(campaign_id), record["_text"])
+    path = campaign_packet_path(campaign_id)
+    atomic_write_text(path, record["_text"])
+    # The working path is overwritten on every finding adjudication. Keep an
+    # immutable content-addressed copy so a superseded packet stays readable and
+    # binding equivalence remains checkable after the fact.
+    snapshot = path.with_name(
+        "%s-%s%s" % (path.stem, record["packet_sha256"][:16], path.suffix)
+    )
+    if not snapshot.exists():
+        atomic_write_text(snapshot, record["_text"])
     return {key: value for key, value in record.items() if key != "_text"}
 
 
@@ -405,19 +508,18 @@ def case_verified(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
     reviews = load_artifacts("reviews")
     campaign = load_campaign(campaign_id)
     packet = campaign_packet_record(campaign_id)
-    from .paired import problem_key
+    from .paired import problem_key_aliases
+
+    from .proofs import attempt_is_complete
 
     for attempt in reversed(load_campaign_attempts(campaign_id)):
-        if attempt.get("status") not in {"claimed_complete", "verified"}:
+        if not attempt_is_complete(attempt):
             continue
-        if attempt.get("gap_markers"):
+        if not packet_binding_matches(attempt, campaign_id):
             continue
-        if attempt.get("packet_sha256") != packet["packet_sha256"]:
-            continue
-        if (
-            attempt.get("paired_turn_kind")
-            and attempt.get("paired_problem_key") != problem_key(campaign)
-        ):
+        if attempt.get("paired_turn_kind") and attempt.get(
+            "paired_problem_key"
+        ) not in problem_key_aliases(campaign):
             continue
         if campaign_route_policy_errors(campaign, attempt):
             continue
@@ -426,7 +528,7 @@ def case_verified(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
             for item in reviews
             if item.get("attempt_id") == attempt.get("id")
             and item.get("verdict") == "confirmed"
-            and item.get("packet_sha256") == attempt.get("packet_sha256")
+            and packet_binding_matches(item, campaign_id)
             and item.get("independent") is True
             and item.get("reviewer_engine") != attempt.get("engine")
         ]
@@ -610,6 +712,51 @@ def campaign_status(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
         }
         for phase in ("mathematics", "review")
     }
+    from .paired import merge_working_context
+    from .tasking import review_tasks
+
+    # Counting attempts made looks like progress even when the subproblem graph
+    # has not advanced a single node, which is how a frozen pipeline stayed
+    # invisible. Report advancement and packet identity directly.
+    verified_subproblems = sorted(
+        {
+            dependency
+            for task in math_tasks
+            for dependency in task.get("dependency_artifacts", {})
+        }
+    )
+    dag_progress = {
+        "verified": len(verified_subproblems),
+        "verified_subproblems": verified_subproblems,
+        "executable": sum(
+            1 for task in math_tasks if task["status"] == "ready"
+        ),
+        "blocked": sum(
+            1 for task in math_tasks if task["status"] == "blocked"
+        ),
+        "blocked_by": {
+            task["subproblem_id"]: task["blocked_dependencies"]
+            for task in math_tasks
+            if task.get("blocked_dependencies")
+        },
+        "queued_review_tasks": len(review_tasks()),
+    }
+    stale_by_identity = sum(
+        1
+        for attempt in attempts
+        if not packet_binding_matches(attempt, campaign_id)
+    )
+    packet_identity = {
+        "binding_sha256": packet["packet_binding_sha256"],
+        "content_sha256": packet["packet_sha256"],
+        "attempts_stale_by_identity": stale_by_identity,
+        "attempts_stale_by_content": sum(
+            1
+            for attempt in attempts
+            if attempt.get("packet_sha256") != packet["packet_sha256"]
+        ),
+    }
+    working_context = merge_working_context(campaign)["stats"]
     return {
         "schema_version": 1,
         "campaign_id": campaign_id,
@@ -630,6 +777,9 @@ def campaign_status(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
             "subproblem_statuses": subproblem_statuses,
             "lane_count": len({item["lane"] for item in campaign["subproblems"]}),
         },
+        "dag_progress": dag_progress,
+        "packet_identity": packet_identity,
+        "working_context_health": working_context,
         "routing_policy": {
             "fresh_rotation": routing["prover_rotation"],
             "retry_escalation": routing["escalation_order"],
@@ -685,6 +835,9 @@ def campaign_status(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
 
 def campaign_status_markdown(status: Dict[str, Any]) -> str:
     progress = status["campaign_progress"]
+    dag = status["dag_progress"]
+    identity = status["packet_identity"]
+    context = status["working_context_health"]
     verification = status["case_verification"]
     novelty = status["novelty_certification"]
     paired = status["paired_attempt_policy"]
@@ -704,6 +857,43 @@ def campaign_status_markdown(status: Dict[str, Any]) -> str:
         % progress.get("stale_campaign_attempts", 0),
         "- Subproblems tried: %d" % progress["subproblems_tried"],
         "- Four-lane program present: %s" % ("yes" if progress["lane_count"] == 4 else "no"),
+        "",
+        "## Subproblem graph advancement",
+        "",
+        "- Verified subproblems: %d (%s)"
+        % (
+            dag["verified"],
+            ", ".join(dag["verified_subproblems"]) or "none",
+        ),
+        "- Executable now: %d; blocked: %d" % (dag["executable"], dag["blocked"]),
+        "- Queued review tasks: %d" % dag["queued_review_tasks"],
+        "",
+        "Attempts made are not advancement. A campaign with attempts, no",
+        "verified subproblem and no queued review task is frozen.",
+        "",
+        "## Packet identity",
+        "",
+        "- Binding: `%s`" % identity["binding_sha256"][:16],
+        "- Content: `%s`" % identity["content_sha256"][:16],
+        "- Attempts stale by identity: %d (blocking); by content only: %d (benign)"
+        % (
+            identity["attempts_stale_by_identity"],
+            identity["attempts_stale_by_content"],
+        ),
+        "",
+        "## Working context",
+        "",
+        "- Rows: %d total; %d primary, %d extended, %d archived."
+        % (
+            context["rows_total"],
+            context["rows_primary"],
+            context["rows_extended"],
+            context["rows_archived"],
+        ),
+        "- %d rows are current-packet; %d were demoted from a superseded packet."
+        % (context["rows_fresh"], context["rows_demoted"]),
+        "- Injected bytes: %d primary + %d extended."
+        % (context["bytes_primary"], context["bytes_extended"]),
         "",
         "## Paired full-proof policy",
         "",

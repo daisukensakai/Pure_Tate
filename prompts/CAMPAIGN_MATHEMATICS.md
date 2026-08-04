@@ -5,9 +5,23 @@ Casnati–Ekedahl geometry in the packet and aim for the weakest sufficient theo
 
 Respect the subproblem DAG. `TASK.json` lists `blocked_dependencies` and
 `dependency_artifacts`. A task is executable only when `blocked_dependencies` is
-empty. Read every supplied dependency attempt and both confirmation reviews; cite
-their artifact IDs when using them. Do not infer, recreate, or strengthen a
-dependency whose verified artifacts are absent.
+empty. When `dependency_artifacts` is non-empty, read every supplied dependency
+attempt and both of its confirmation reviews, and cite their artifact IDs when
+using them. Do not infer, recreate, or strengthen a dependency whose verified
+artifacts are absent.
+
+You may also be supplied with mathematical working context, as a primary file and
+an extended file. Use the primary file; scan the extended file. Neither is a
+substitute for proof:
+
+- Established facts may be used directly.
+- Candidate ideas must be proved independently before they carry any weight. A
+  row marked as carried from a superseded packet is a candidate, whatever it
+  says about itself.
+- Mathematical constraints record routes already shown not to work. Do not walk
+  them again, and do not present one as new.
+- Reusable computations are pinned by SHA-256; a finite computation can motivate
+  a claim but never establishes a universal one.
 
 State one exact theorem. Separate proved steps, source-backed inputs, computational
 hypotheses, and gaps. Finite experiments cannot close a proof. Address the applicable

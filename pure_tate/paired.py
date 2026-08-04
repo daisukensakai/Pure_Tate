@@ -2,7 +2,7 @@ import datetime
 import hashlib
 import json
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Sequence
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Set
 
 from .artifacts import load_artifacts
 from .store import PACKETS_GENERATED, ROOT, atomic_write_json, atomic_write_text
@@ -76,20 +76,49 @@ def theorem_sha256(campaign: Dict[str, Any]) -> str:
     return _digest_text(str(campaign["paired_attempt_policy"]["exact_theorem"]))
 
 
-def problem_key(campaign: Dict[str, Any]) -> str:
-    from .campaigns import campaign_packet_record
-
-    packet = campaign_packet_record(str(campaign["id"]))
+def _problem_key_for(campaign: Dict[str, Any], packet_sha256: str) -> str:
     payload = {
         "campaign_id": campaign["id"],
         "packet_revision": campaign["campaign_revision"],
-        "packet_sha256": packet["packet_sha256"],
+        "packet_sha256": packet_sha256,
         "context_revision": campaign["context_revision"],
         "theorem_sha256": theorem_sha256(campaign),
     }
     return hashlib.sha256(
         json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()
+
+
+def problem_key(campaign: Dict[str, Any]) -> str:
+    """Identify the problem a paired turn is working on.
+
+    Keyed on packet identity rather than packet content. Keying it on content
+    meant every finding adjudication minted a new problem key, orphaning the
+    ledger and resetting each engine's pair state to "untried" -- which spent a
+    fresh forced full proof on a problem that was already in progress.
+    """
+    from .campaigns import campaign_packet_binding_sha256
+
+    return _problem_key_for(
+        campaign, campaign_packet_binding_sha256(str(campaign["id"]))
+    )
+
+
+def problem_key_aliases(campaign: Dict[str, Any]) -> Set[str]:
+    """Return the current problem key plus its superseded content-keyed forms.
+
+    Historical events and artifacts were keyed on packet content. The content
+    hashes attested as binding-equivalent are recorded in the binding migration,
+    so their keys are recomputed exactly rather than guessed.
+    """
+    from .campaigns import _binding_migration
+
+    keys = {problem_key(campaign)}
+    migration = _binding_migration(str(campaign["id"]))
+    if migration.get("campaign_revision") == campaign["campaign_revision"]:
+        for packet_sha256 in migration.get("equivalent_packet_sha256", {}):
+            keys.add(_problem_key_for(campaign, packet_sha256))
+    return keys
 
 
 def load_ledger() -> Dict[str, Any]:
@@ -141,11 +170,11 @@ def record_event(event: Dict[str, Any]) -> Dict[str, Any]:
 def events_for(
     campaign: Dict[str, Any], engine: Optional[str] = None
 ) -> List[Dict[str, Any]]:
-    key = problem_key(campaign)
+    keys = problem_key_aliases(campaign)
     return [
         event
         for event in load_ledger()["events"]
-        if event.get("problem_key") == key
+        if event.get("problem_key") in keys
         and (engine is None or event.get("engine") == engine)
     ]
 
@@ -189,6 +218,7 @@ def write_observable_trace(
         "task_id": task.get("id"),
         "engine": engine,
         "packet_sha256": task.get("packet_sha256"),
+        "packet_binding_sha256": task.get("packet_binding_sha256"),
         "observable_stdout": stdout,
         "observable_stderr": stderr,
         "parsed_artifact": parsed_artifact,
@@ -227,6 +257,7 @@ def forced_task(
         "context_revision": campaign["context_revision"],
         "packet_id": packet["packet_id"],
         "packet_sha256": packet["packet_sha256"],
+        "packet_binding_sha256": packet.get("packet_binding_sha256"),
         "input_packet": packet["packet_path"],
         "input_artifacts": list(working_context),
         "prompt": FORCED_PROMPT,
@@ -278,11 +309,11 @@ def _attached_reviews(attempt_id: str) -> List[Dict[str, Any]]:
 def _attempts_for(
     campaign: Dict[str, Any], engine: str, turn_kind: str
 ) -> List[Dict[str, Any]]:
-    key = problem_key(campaign)
+    keys = problem_key_aliases(campaign)
     return [
         attempt
         for attempt in load_artifacts("attempts")
-        if attempt.get("paired_problem_key") == key
+        if attempt.get("paired_problem_key") in keys
         and attempt.get("engine") == engine
         and attempt.get("paired_turn_kind") == turn_kind
     ]
@@ -350,10 +381,14 @@ def pair_state(campaign: Dict[str, Any], engine: str) -> Dict[str, Any]:
     )
     if standard_attempts:
         attempt = standard_attempts[-1]
+        from .proofs import attempt_is_complete
+
         state = _review_state(attempt)
-        if (
-            attempt.get("status") == "proposed"
-            and _attached_reviews(str(attempt.get("id")))
+        # An incomplete attempt that has already drawn a review is spent. A
+        # complete one is not: it still has a second pass to earn, so the pair
+        # must stay open rather than being retired into trace mining.
+        if not attempt_is_complete(attempt) and _attached_reviews(
+            str(attempt.get("id"))
         ):
             state = "rejected"
         if state == "verified":
@@ -598,7 +633,9 @@ def recover_attempt_from_trace(
         raise ValueError("trace lacks campaign or engine identity")
     campaign = load_campaign(campaign_id)
     packet = campaign_packet_record(campaign_id)
-    if trace.get("packet_sha256") != packet["packet_sha256"]:
+    from .campaigns import packet_binding_matches
+
+    if not packet_binding_matches(trace, campaign_id):
         raise ValueError("trace packet is stale; recovery is not safe")
     base_tasks = {
         task["id"]: task for task in campaign_mathematics_tasks(campaign_id)
@@ -787,6 +824,7 @@ def trace_mining_task(
         "target": packet["target"],
         "packet_id": packet["packet_id"],
         "packet_sha256": packet["packet_sha256"],
+        "packet_binding_sha256": packet.get("packet_binding_sha256"),
         "input_packet": packet["packet_path"],
         "input_trace": str(path.relative_to(ROOT)),
         "input_artifacts": review_inputs,
@@ -840,6 +878,10 @@ def validate_digest(task: Dict[str, Any], artifact: Dict[str, Any]) -> None:
     for field, expected in exact.items():
         if artifact.get(field) != expected:
             raise ValueError("trace digest %s does not match task" % field)
+    # Stamped by the harness, not echoed by the miner: the digest records both
+    # the packet content it was mined against and that packet's identity, so
+    # working-context assembly can tell genuine staleness from findings churn.
+    artifact["packet_binding_sha256"] = task.get("packet_binding_sha256")
     for field in (
         "established_facts",
         "candidate_ideas",
@@ -922,48 +964,299 @@ def _safe_math_rows(
     return rendered
 
 
+SECTIONS = [
+    ("established", "Established facts"),
+    ("candidate", "Candidate ideas requiring proof"),
+    ("invalid", "Mathematical constraints"),
+    ("computation", "Reusable computations"),
+    ("dependency", "Dependencies to resolve"),
+]
+SECTION_HEADINGS = dict(SECTIONS)
+# Rank order for eviction. Constraints and mechanically-checkable facts are the
+# rows a later prover cannot cheaply rederive; unresolved dependencies are the
+# most restateable and go first.
+CATEGORY_RANK = {
+    "computation": 0,
+    "established_mechanical": 0,
+    "invalid": 1,
+    "established_source": 2,
+    "candidate": 3,
+    "dependency": 4,
+}
+PRIMARY_BUDGET_BYTES = 60 * 1000
+EXTENDED_BUDGET_BYTES = 30 * 1000
+# Share of the primary budget reserved per section so a single large section
+# cannot starve the others; the remainder is spent globally by rank.
+SECTION_RESERVE = 0.14
+
+
+def _render_row(row: Dict[str, Any], category: str) -> str:
+    """Render one digest row, or return "" when it leaks provenance.
+
+    ``_safe_math_rows`` raises at digest-publication time, which is the right
+    behaviour for a single new digest. Assembly reads many already-validated
+    digests, and one bad row must not deny every prover turn its context, so
+    here the row is dropped instead.
+    """
+    try:
+        rendered = _safe_math_rows([row], category)
+    except ValueError:
+        return ""
+    return rendered[0] if rendered else ""
+
+
+def _dedup_key(row: Dict[str, Any], category: str, statement: str) -> str:
+    if category == "computation" and isinstance(row.get("sha256"), str):
+        return "computation:" + row["sha256"]
+    return "%s:%s" % (
+        category,
+        " ".join(statement.lower().split()),
+    )
+
+
+def _digest_rows(
+    digest: Dict[str, Any], ordinal: int, fresh: bool
+) -> List[Dict[str, Any]]:
+    """Flatten one digest into ranked rows, demoting stale source claims.
+
+    A packet change can retract or restate the findings and locators a digest
+    leaned on, so a stale ``source``-evidenced fact is no longer established --
+    it becomes a candidate requiring proof. Stale ``mechanical`` facts and
+    sha-pinned computations are arithmetic and survive unchanged, and a refuted
+    step stays refuted because its reason is self-contained.
+    """
+    rows: List[Dict[str, Any]] = []
+    plan = [
+        ("established", digest.get("established_facts") or []),
+        ("candidate", digest.get("candidate_ideas") or []),
+        ("invalid", digest.get("invalid_steps") or []),
+        ("computation", digest.get("reusable_computations") or []),
+        ("dependency", digest.get("unresolved_dependencies") or []),
+    ]
+    for category, values in plan:
+        for row in values:
+            if not isinstance(row, dict):
+                continue
+            section = category
+            demoted = False
+            if (
+                category == "established"
+                and not fresh
+                and row.get("evidence_class") != "mechanical"
+            ):
+                section = "candidate"
+                demoted = True
+            statement = _render_row(
+                row, "candidate" if demoted else category
+            )
+            if not statement:
+                continue
+            if demoted:
+                statement += " [carried from a superseded packet; reprove]"
+            if category == "established":
+                rank_key = (
+                    "established_mechanical"
+                    if row.get("evidence_class") == "mechanical"
+                    else "established_source"
+                )
+            else:
+                rank_key = category
+            rows.append(
+                {
+                    "section": section,
+                    "statement": statement,
+                    "fresh": fresh,
+                    "rank": (
+                        CATEGORY_RANK[rank_key],
+                        0 if fresh else 1,
+                        -ordinal,
+                    ),
+                    "dedup_key": _dedup_key(row, category, statement),
+                    "demoted": demoted,
+                }
+            )
+    return rows
+
+
+def collect_working_rows(campaign: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Gather every campaign digest into deduplicated, ranked rows."""
+    from .campaigns import packet_binding_matches
+
+    campaign_id = str(campaign["id"])
+    digests = []
+    for path in sorted(DIGEST_DIR.glob("DIGEST-*.json")):
+        try:
+            value = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if value.get("campaign_id") == campaign_id:
+            digests.append(value)
+    rows: List[Dict[str, Any]] = []
+    seen: Dict[str, Dict[str, Any]] = {}
+    for ordinal, digest in enumerate(digests, 1):
+        fresh = packet_binding_matches(digest, campaign_id)
+        for row in _digest_rows(digest, ordinal, fresh):
+            existing = seen.get(row["dedup_key"])
+            if existing is None:
+                seen[row["dedup_key"]] = row
+                rows.append(row)
+            elif row["rank"] < existing["rank"]:
+                # Keep the strongest surviving copy: a fact restated against a
+                # current packet outranks the same fact carried from a stale one.
+                existing.update(row)
+    rows.sort(key=lambda item: item["rank"])
+    return rows
+
+
+def _render_tier(title: str, preamble: List[str], rows: List[Dict[str, Any]]) -> str:
+    lines = ["# " + title, ""]
+    lines.extend(preamble)
+    for category, heading in SECTIONS:
+        section_rows = [row for row in rows if row["section"] == category]
+        lines.extend(["", "## " + heading, ""])
+        if section_rows:
+            lines.extend("- " + row["statement"] for row in section_rows)
+        else:
+            lines.append("- None recorded.")
+    return "\n".join(lines) + "\n"
+
+
+def _row_cost(row: Dict[str, Any]) -> int:
+    return len(("- " + row["statement"] + "\n").encode("utf-8"))
+
+
+def _allocate_tiers(
+    rows: List[Dict[str, Any]],
+    primary_budget: int = PRIMARY_BUDGET_BYTES,
+    extended_budget: int = EXTENDED_BUDGET_BYTES,
+) -> Dict[str, List[Dict[str, Any]]]:
+    """Split ranked rows into primary, extended and archive tiers.
+
+    Each section first draws on a reserved share of the primary budget so that
+    no section is starved by a large neighbour; whatever is left over is then
+    spent globally in rank order. Budgets are the caps on the rendered files,
+    so callers pass them net of heading scaffolding.
+    """
+    reserve = int(primary_budget * SECTION_RESERVE)
+    chosen: Set[int] = set()
+    spent = 0
+    for category, _heading in SECTIONS:
+        section_spent = 0
+        for row in rows:
+            if row["section"] != category or id(row) in chosen:
+                continue
+            cost = _row_cost(row)
+            if section_spent + cost > reserve:
+                continue
+            chosen.add(id(row))
+            section_spent += cost
+            spent += cost
+    for row in rows:
+        if id(row) in chosen:
+            continue
+        cost = _row_cost(row)
+        if spent + cost > primary_budget:
+            continue
+        chosen.add(id(row))
+        spent += cost
+    primary = [row for row in rows if id(row) in chosen]
+    remaining = [row for row in rows if id(row) not in chosen]
+    extended: List[Dict[str, Any]] = []
+    taken: Set[int] = set()
+    spent = 0
+    for row in remaining:
+        cost = _row_cost(row)
+        if spent + cost > extended_budget:
+            continue
+        extended.append(row)
+        taken.add(id(row))
+        spent += cost
+    archive = [row for row in remaining if id(row) not in taken]
+    return {"primary": primary, "extended": extended, "archive": archive}
+
+
+def _write_tier(text: str, prefix: str) -> Dict[str, str]:
+    content_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    path = WORKING_CONTEXT_DIR / ("%s-%s.md" % (prefix, content_hash[:16]))
+    if not path.exists():
+        atomic_write_text(path, text)
+    return {
+        "path": str(path.relative_to(ROOT)),
+        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+    }
+
+
+PRIMARY_TITLE = "Mathematical working context"
+PRIMARY_PREAMBLE = [
+    "Treat candidates as unproved. Reprove every fact used in the "
+    "final argument.",
+]
+EXTENDED_TITLE = "Extended mathematical working context"
+EXTENDED_PREAMBLE = [
+    "Secondary context to scan, not to rely on. Everything here "
+    "must be reproved before use.",
+]
+
+
+def _scaffolding_bytes(title: str, preamble: List[str]) -> int:
+    """Bytes a tier costs before any row is added."""
+    return len(_render_tier(title, preamble, []).encode("utf-8"))
+
+
+def merge_working_context(campaign: Dict[str, Any]) -> Dict[str, Any]:
+    """Assemble every mined digest into the three working-context tiers."""
+    rows = collect_working_rows(campaign)
+    # The caps are on the rendered files, so headings come out of the budget.
+    tiers = _allocate_tiers(
+        rows,
+        PRIMARY_BUDGET_BYTES
+        - _scaffolding_bytes(PRIMARY_TITLE, PRIMARY_PREAMBLE),
+        EXTENDED_BUDGET_BYTES
+        - _scaffolding_bytes(EXTENDED_TITLE, EXTENDED_PREAMBLE),
+    )
+    primary = _write_tier(
+        _render_tier(PRIMARY_TITLE, PRIMARY_PREAMBLE, tiers["primary"]),
+        "WORKING",
+    )
+    extended = _write_tier(
+        _render_tier(EXTENDED_TITLE, EXTENDED_PREAMBLE, tiers["extended"]),
+        "WORKING-EXT",
+    )
+    archive = _write_tier(
+        _render_tier(
+            "Archived mathematical working context",
+            [
+                "Retired context, retained for diagnosis and for review when a "
+                "similar pattern recurs. Not supplied to prover turns.",
+            ],
+            tiers["archive"],
+        ),
+        "WORKING-ARCHIVE",
+    )
+    return {
+        "primary": primary,
+        "extended": extended,
+        "archive": archive,
+        "stats": {
+            "rows_total": len(rows),
+            "rows_primary": len(tiers["primary"]),
+            "rows_extended": len(tiers["extended"]),
+            "rows_archived": len(tiers["archive"]),
+            "rows_fresh": sum(1 for row in rows if row["fresh"]),
+            "rows_demoted": sum(1 for row in rows if row["demoted"]),
+            "bytes_primary": sum(_row_cost(row) for row in tiers["primary"]),
+            "bytes_extended": sum(_row_cost(row) for row in tiers["extended"]),
+            "bytes_archive": sum(_row_cost(row) for row in tiers["archive"]),
+        },
+    }
+
+
 def publish_working_context(
     campaign: Dict[str, Any],
     task: Dict[str, Any],
     digest: Dict[str, Any],
 ) -> Dict[str, Any]:
-    sections = [
-        ("Established facts", digest["established_facts"], "established"),
-        (
-            "Candidate ideas requiring proof",
-            digest["candidate_ideas"],
-            "candidate",
-        ),
-        ("Mathematical constraints", digest["invalid_steps"], "invalid"),
-        (
-            "Reusable computations",
-            digest["reusable_computations"],
-            "computation",
-        ),
-        (
-            "Dependencies to resolve",
-            digest["unresolved_dependencies"],
-            "dependency",
-        ),
-    ]
-    lines = [
-        "# Mathematical working context",
-        "",
-        "Treat candidates as unproved. Reprove every fact used in the final argument.",
-    ]
-    for heading, rows, category in sections:
-        lines.extend(["", "## " + heading, ""])
-        values = _safe_math_rows(rows, category)
-        lines.extend("- " + value for value in values or ["None recorded."])
-    text = "\n".join(lines) + "\n"
-    content_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
-    path = WORKING_CONTEXT_DIR / ("WORKING-%s.md" % content_hash[:16])
-    if not path.exists():
-        atomic_write_text(path, text)
-    record = {
-        "path": str(path.relative_to(ROOT)),
-        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-    }
+    record = merge_working_context(campaign)
     source_turn = task["source_turn"]
     record_event(
         {
@@ -992,28 +1285,31 @@ def publish_working_context(
 
 
 def working_context_records(campaign: Dict[str, Any]) -> List[Dict[str, str]]:
-    records = []
-    seen = set()
-    for event in load_ledger()["events"]:
-        if event.get("campaign_id") != campaign.get("id"):
-            continue
-        record = event.get("working_context")
-        if not isinstance(record, dict):
-            continue
-        key = (record.get("path"), record.get("sha256"))
-        if key in seen:
-            continue
-        path = ROOT / str(record.get("path", ""))
-        if (
-            path.is_file()
-            and hashlib.sha256(path.read_bytes()).hexdigest()
-            == record.get("sha256")
-        ):
-            records.append(
-                {"path": str(record["path"]), "sha256": str(record["sha256"])}
-            )
-            seen.add(key)
-    return records
+    """Return the working-context files supplied to a prover turn.
+
+    Only the primary and extended tiers are injected. The archive tier exists
+    for diagnosis and is never handed to a prover.
+    """
+    merged = merge_working_context(campaign)
+    return [merged["primary"], merged["extended"]]
+
+
+def working_context_paths(record: Dict[str, Any]) -> List[Dict[str, str]]:
+    """Normalize a ledger ``working_context`` value into path/hash records.
+
+    Events recorded before the context was tiered carry a single flat
+    ``{path, sha256}``; newer ones carry a record per tier.
+    """
+    if not isinstance(record, dict):
+        return []
+    if isinstance(record.get("path"), str):
+        return [record]
+    return [
+        value
+        for key in ("primary", "extended", "archive")
+        for value in [record.get(key)]
+        if isinstance(value, dict) and isinstance(value.get("path"), str)
+    ]
 
 
 def pair_statuses(
@@ -1168,8 +1464,7 @@ def integrity_errors() -> List[str]:
                 errors.append("%s digest is missing" % label)
             elif hashlib.sha256(path.read_bytes()).hexdigest() != digest_hash:
                 errors.append("%s digest hash does not match" % label)
-        context = event.get("working_context")
-        if isinstance(context, dict):
+        for context in working_context_paths(event.get("working_context")):
             path = ROOT / str(context.get("path", ""))
             if not path.is_file():
                 errors.append("%s working context is missing" % label)

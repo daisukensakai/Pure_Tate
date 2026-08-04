@@ -817,6 +817,64 @@ def _normalize_string_ids(raw: Any, field: str) -> List[str]:
     return normalized
 
 
+def _normalize_failed_approaches(
+    artifact: Dict[str, Any], blocked_routes: Any = ()
+) -> None:
+    """Canonicalize `failed_approaches_addressed` into one schema.
+
+    Engines emit at least four shapes for this field -- a bare string, and dicts
+    keyed {route, how_addressed}, {approach, resolution} or {disposition,
+    reason}. That variance made the field unreadable, so there was no way to
+    tell whether a prover engaged with the working context's constraints or
+    merely restated the packet's blocked routes. Each entry is normalized to
+    {subject, kind, disposition} where `kind` separates the two.
+    """
+    entries = artifact.get("failed_approaches_addressed")
+    if not isinstance(entries, list):
+        return
+    routes = {str(item) for item in (blocked_routes or ())}
+    normalized = []
+    for entry in entries:
+        if isinstance(entry, str):
+            subject, disposition = entry, ""
+        elif isinstance(entry, dict):
+            subject = str(
+                entry.get("route")
+                or entry.get("approach")
+                or entry.get("id")
+                or entry.get("description")
+                or entry.get("statement")
+                or ""
+            ).strip()
+            disposition = str(
+                entry.get("how_addressed")
+                or entry.get("resolution")
+                or entry.get("reason")
+                or entry.get("disposition")
+                or entry.get("description")
+                or ""
+            ).strip()
+        else:
+            continue
+        subject = " ".join(str(subject).split())
+        if not subject:
+            continue
+        if disposition == subject:
+            disposition = ""
+        normalized.append(
+            {
+                "subject": subject,
+                "kind": (
+                    "blocked_route"
+                    if subject in routes
+                    else "working_context_constraint"
+                ),
+                "disposition": " ".join(disposition.split()),
+            }
+        )
+    artifact["failed_approaches_addressed"] = normalized
+
+
 def _normalize_source_references(artifact: Dict[str, Any]) -> None:
     """Separate claim dependencies from bibliographic source dependencies.
 
@@ -1151,6 +1209,9 @@ def _validate_artifact(
             if artifact.get(field) != expected:
                 artifact[field] = expected
         if is_campaign:
+            artifact["packet_binding_sha256"] = task.get(
+                "packet_binding_sha256"
+            )
             if not isinstance(artifact.get("theorem_statement"), str) or not artifact[
                 "theorem_statement"
             ].strip():
@@ -1217,10 +1278,23 @@ def _validate_artifact(
         if not isinstance(artifact.get("gap_markers"), list):
             raise ValueError("mathematics gap_markers must be a list")
         _normalize_source_references(artifact)
+        # The harness, not the model, decides whether this attempt is complete.
+        # Leaving `status` to the prover let a gap-free, fully proved lemma
+        # label itself "proposed" and so lock itself out of its second review
+        # pass, which stalls the subproblem graph behind it.
+        from .proofs import attempt_completeness
+
+        completeness = attempt_completeness(artifact)
+        artifact["status"] = (
+            "claimed_complete" if completeness["complete"] else "proposed"
+        )
         if is_campaign:
             from .campaigns import campaign_route_policy_errors, load_campaign
 
             campaign = load_campaign(str(task["campaign_id"]))
+            _normalize_failed_approaches(
+                artifact, campaign.get("blocked_routes")
+            )
             route_errors = campaign_route_policy_errors(campaign, artifact)
             if route_errors:
                 raise ValueError(route_errors[0])
@@ -1229,12 +1303,11 @@ def _validate_artifact(
                 raise ValueError(
                     "forced-proof result_type must be proof or disproof"
                 )
-            if artifact.get("status") != "claimed_complete":
+            if not completeness["complete"]:
                 raise ValueError(
-                    "forced-proof requires complete resolution (claimed_complete)"
+                    "forced-proof requires complete resolution: %s"
+                    % "; ".join(completeness["reasons"])
                 )
-            if artifact.get("gap_markers"):
-                raise ValueError("forced-proof forbids gap markers")
             exact_theorem = task.get("exact_theorem")
             if (
                 isinstance(exact_theorem, str)
@@ -1356,19 +1429,23 @@ def _validate_task_packet(task: Dict[str, Any]) -> None:
     if not isinstance(target, dict):
         raise ValueError("task target dictionary is missing")
     if task.get("campaign_id"):
-        from .campaigns import campaign_packet_record
+        from .campaigns import packet_binding_matches
 
-        canonical = campaign_packet_record(str(task["campaign_id"]))[
-            "packet_sha256"
-        ]
-    else:
-        from .packets import render_case_packet
-        from .store import load_repository
+        # Staleness is judged on packet identity, not packet content: a finding
+        # adjudication landing between task construction and dispatch rewrites
+        # the findings section and must not invalidate the task.
+        if not packet_binding_matches(task, str(task["campaign_id"])):
+            raise ValueError(
+                "task packet is stale relative to the current packet identity"
+            )
+        return
+    from .packets import render_case_packet
+    from .store import load_repository
 
-        _config, _repository_target, _sources, claims, _edges = load_repository()
-        canonical = hashlib.sha256(
-            render_case_packet(target["g"], target["n"], claims).encode("utf-8")
-        ).hexdigest()
+    _config, _repository_target, _sources, claims, _edges = load_repository()
+    canonical = hashlib.sha256(
+        render_case_packet(target["g"], target["n"], claims).encode("utf-8")
+    ).hexdigest()
     if canonical != task.get("packet_sha256"):
         raise ValueError(
             "task packet is stale relative to the current findings ledger"

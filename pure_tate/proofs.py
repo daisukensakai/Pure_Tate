@@ -25,6 +25,110 @@ ATTEMPT_STATUSES = {
 }
 REVIEW_VERDICTS = {"confirmed", "incomplete", "refuted"}
 
+# A claim counts toward completeness only when it is outright proved. The
+# remaining vocabulary -- source_backed, admitted, proved_conditional,
+# proved_with_gap -- all names an undischarged obligation. This matches the
+# forced-proof rule already enforced in agents._validate_mathematics_artifact.
+COMPLETE_CLAIM_STATUSES = {"proved", None}
+UNRESOLVED_DEPENDENCY_STATUSES = {"unresolved", "open", "missing", "blocked"}
+
+
+def attempt_completeness(attempt: Dict[str, Any]) -> Dict[str, Any]:
+    """Derive whether an attempt is complete from its structured content.
+
+    ``status`` is written by the model, which the harness does not treat as
+    authoritative for any other gate: "The harness, not you, will decide whether
+    the artifact passes its gate." Completeness is therefore computed from the
+    evidence the validator already enforces, so that an attempt cannot lock
+    itself out of a second review pass -- or sneak into one -- by its own
+    choice of string.
+
+    ``resolves_exact_target`` is deliberately not required. That is a
+    forced-proof condition, enforced separately; a lemma that fully discharges
+    its subproblem correctly reports it false.
+    """
+    reasons: List[str] = []
+    if attempt.get("gap_markers"):
+        count = len(attempt["gap_markers"])
+        reasons.append(
+            "retains %d gap marker%s" % (count, "" if count == 1 else "s")
+        )
+    claims = attempt.get("claims")
+    if not isinstance(claims, list) or not claims:
+        reasons.append("has no structured claims")
+    else:
+        unproved = sorted(
+            {
+                str(item.get("status"))
+                for item in claims
+                if isinstance(item, dict)
+                and item.get("status") not in COMPLETE_CLAIM_STATUSES
+            }
+        )
+        if unproved:
+            reasons.append("has claims with status %s" % ", ".join(unproved))
+    attestation = attempt.get("completion_attestation")
+    if not isinstance(attestation, dict):
+        reasons.append("has no completion attestation")
+    else:
+        for field in ("no_undischarged_dependencies", "not_reduction_only"):
+            if attestation.get(field) is not True:
+                reasons.append("attestation %s is not true" % field)
+    unresolved = [
+        item
+        for item in (attempt.get("proof_dependencies") or [])
+        if isinstance(item, dict)
+        and str(item.get("status", "")).lower()
+        in UNRESOLVED_DEPENDENCY_STATUSES
+    ]
+    if unresolved:
+        reasons.append(
+            "has %d unresolved proof %s"
+            % (
+                len(unresolved),
+                "dependency" if len(unresolved) == 1 else "dependencies",
+            )
+        )
+    return {"complete": not reasons, "reasons": reasons}
+
+
+def attempt_is_complete(attempt: Dict[str, Any]) -> bool:
+    return bool(attempt_completeness(attempt)["complete"])
+
+
+def same_packet_identity(
+    left: Dict[str, Any], right: Dict[str, Any]
+) -> bool:
+    """Report whether two artifacts were produced against the same packet.
+
+    Campaign artifacts are compared on packet identity rather than packet
+    content, so a review written after a finding adjudication still matches the
+    attempt it reviews. Identical content hashes remain sufficient, which also
+    covers artifacts predating the binding hash and every non-campaign artifact.
+    """
+    if left.get("packet_sha256") == right.get("packet_sha256"):
+        return True
+    campaign_id = left.get("campaign_id")
+    if not campaign_id or campaign_id != right.get("campaign_id"):
+        return False
+    from .campaigns import packet_binding_matches
+
+    return packet_binding_matches(
+        left, str(campaign_id)
+    ) and packet_binding_matches(right, str(campaign_id))
+
+
+def derived_attempt_status(attempt: Dict[str, Any]) -> str:
+    """Return the status the harness assigns to an attempt.
+
+    Terminal states a reviewer assigned (``refuted``, ``verified``) are left
+    alone; only the prover's own claim of completeness is re-derived.
+    """
+    status = attempt.get("status")
+    if status in {"refuted", "verified"}:
+        return str(status)
+    return "claimed_complete" if attempt_is_complete(attempt) else "proposed"
+
 
 def _load_named_json(directory: Path, prefix: str) -> List[Dict[str, Any]]:
     values = []
@@ -435,10 +539,21 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
             if not packet_path.is_file():
                 result.errors.append("%s packet is missing" % attempt_id)
             elif _sha256(packet_path) != attempt.get("packet_sha256"):
-                result.warnings.append(
-                    "%s is stale_context because its packet hash was superseded"
-                    % attempt_id
-                )
+                # Content churn from finding adjudication is routine and does
+                # not make an attempt stale; only a changed packet identity does.
+                if is_campaign:
+                    from .campaigns import packet_binding_matches
+
+                    superseded = not packet_binding_matches(
+                        attempt, str(attempt["campaign_id"])
+                    )
+                else:
+                    superseded = True
+                if superseded:
+                    result.warnings.append(
+                        "%s is stale_context because its packet identity was superseded"
+                        % attempt_id
+                    )
         if migration:
             structured = attempt.get("claims")
             if not isinstance(structured, list) or any(
@@ -484,7 +599,10 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
             result.errors.append(
                 "%s is %s but retains gap markers" % (attempt_id, status)
             )
-        if is_campaign and status in {"claimed_complete", "verified"}:
+        if is_campaign and derived_attempt_status(attempt) in {
+            "claimed_complete",
+            "verified",
+        }:
             experiment_results = []
             result_dir = ROOT / "experiments" / "results"
             for path in result_dir.glob("EXP-*.json"):
@@ -519,7 +637,11 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
             "forced-proof",
             "standard-fallback",
         }:
-            from .paired import POLICY_REVISION, TRACE_DIR, problem_key
+            from .paired import (
+                POLICY_REVISION,
+                TRACE_DIR,
+                problem_key_aliases,
+            )
             from .campaigns import load_campaign
 
             campaign = load_campaign(str(attempt.get("campaign_id")))
@@ -530,7 +652,9 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
                 result.errors.append(
                     "%s has invalid paired-turn linkage" % attempt_id
                 )
-            if attempt.get("paired_problem_key") != problem_key(campaign):
+            if attempt.get(
+                "paired_problem_key"
+            ) not in problem_key_aliases(campaign):
                 result.warnings.append(
                     "%s is stale paired context after new packet evidence"
                     % attempt_id
@@ -552,8 +676,7 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
                     attempt.get("theorem_statement")
                     != campaign["paired_attempt_policy"]["exact_theorem"]
                     or attempt.get("result_type") not in {"proof", "disproof"}
-                    or attempt.get("status") != "claimed_complete"
-                    or attempt.get("gap_markers")
+                    or not attempt_is_complete(attempt)
                 ):
                     result.errors.append(
                         "%s violates the forced-proof completion contract"
@@ -610,8 +733,8 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
             result.errors.append("%s lacks strongest_attack" % review_id)
         if review.get("reviewer_engine") == attempt.get("engine"):
             result.errors.append("%s uses the prover engine" % review_id)
-        if migration and review.get("packet_sha256") != attempt.get("packet_sha256"):
-            result.errors.append("%s reviews a different packet hash" % review_id)
+        if migration and not same_packet_identity(review, attempt):
+            result.errors.append("%s reviews a different packet" % review_id)
         if migration and review.get("target") != attempt.get("target"):
             result.errors.append("%s reviews a different target" % review_id)
         if migration and review.get("review_task_id") != (
@@ -705,7 +828,49 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
         result.warnings.append(
             "structural integrity has no verified mathematics result"
         )
+    _check_pipeline_liveness(result, attempts_by_id)
     return result
+
+
+def _check_pipeline_liveness(
+    result: CheckResult, attempts_by_id: Dict[str, Dict[str, Any]]
+) -> None:
+    """Warn when a campaign has work but no way for that work to advance.
+
+    A campaign can look busy -- attempts accumulating, reviews returning -- while
+    the subproblem graph has advanced no node at all. Both conditions below are
+    silent by construction, so they are reported explicitly.
+    """
+    from .campaigns import DEFAULT_CAMPAIGN
+    from .tasking import campaign_mathematics_tasks, review_tasks
+
+    campaign_attempts = [
+        attempt
+        for attempt in attempts_by_id.values()
+        if attempt.get("campaign_id") == DEFAULT_CAMPAIGN
+    ]
+    if not campaign_attempts:
+        return
+    try:
+        pending_reviews = review_tasks()
+        math_tasks = campaign_mathematics_tasks(DEFAULT_CAMPAIGN)
+    except (OSError, ValueError):
+        return
+    if not pending_reviews and not any(
+        task["status"] == "ready" for task in math_tasks
+    ):
+        result.warnings.append(
+            "%s has %d attempts but no queued review task and no executable "
+            "subproblem: the pipeline cannot advance"
+            % (DEFAULT_CAMPAIGN, len(campaign_attempts))
+        )
+    if len(campaign_attempts) >= 10 and not any(
+        task.get("dependency_artifacts") for task in math_tasks
+    ):
+        result.warnings.append(
+            "%s has %d attempts and no verified subproblem dependency"
+            % (DEFAULT_CAMPAIGN, len(campaign_attempts))
+        )
 
 
 def proof_status_report(

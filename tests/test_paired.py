@@ -9,13 +9,18 @@ from unittest import mock
 from pure_tate.agents import _engine_argv, _validate_artifact, run_task
 from pure_tate.campaigns import load_campaign, write_campaign_packet
 from pure_tate.paired import (
+    EXTENDED_BUDGET_BYTES,
     POLICY_REVISION,
+    PRIMARY_BUDGET_BYTES,
+    _allocate_tiers,
+    _digest_rows,
     _safe_math_rows,
     dry_run_preview,
     forced_task,
     model_visible_task,
     pair_state,
     problem_key,
+    working_context_paths,
 )
 from pure_tate.store import ROOT
 
@@ -92,8 +97,23 @@ class PairedAttemptPolicyTests(unittest.TestCase):
         )
         for field, value, message in (
             ("result_type", "lemma", "proof or disproof"),
-            ("status", "proposed", "complete resolution"),
-            ("gap_markers", ["gap"], "gap markers"),
+            ("gap_markers", ["gap"], "gap marker"),
+            (
+                "claims",
+                [{"statement": "A claim.", "status": "proved_with_gap"}],
+                "proved_with_gap",
+            ),
+            (
+                "completion_attestation",
+                {
+                    "resolves_exact_target": True,
+                    "no_undischarged_dependencies": False,
+                    "not_reduction_only": True,
+                    "no_problem_status_claim": True,
+                    "exact_problem_web_search_used": False,
+                },
+                "no_undischarged_dependencies",
+            ),
         ):
             invalid = copy.deepcopy(artifact)
             invalid[field] = value
@@ -101,6 +121,29 @@ class PairedAttemptPolicyTests(unittest.TestCase):
                 _validate_artifact(
                     "mathematics", self.task, invalid, output, "grok"
                 )
+
+    def test_status_is_derived_by_the_harness_not_the_model(self):
+        # A prover's own `status` string is advisory. The harness recomputes it
+        # from the artifact's structured content, so a complete attempt cannot
+        # lock itself out of its second review pass by mislabelling itself.
+        output = ROOT / "proof" / "attempts" / "ATT-9999.json"
+        complete = self.full_artifact()
+        complete["status"] = "proposed"
+        _validate_artifact("mathematics", self.task, complete, output, "grok")
+        self.assertEqual(complete["status"], "claimed_complete")
+
+        incomplete = self.full_artifact()
+        incomplete["claims"] = [
+            {"statement": "An admitted input.", "status": "source_backed"}
+        ]
+        incomplete["status"] = "claimed_complete"
+        task = {
+            key: value
+            for key, value in self.task.items()
+            if key != "paired_turn_kind"
+        }
+        _validate_artifact("mathematics", task, incomplete, output, "grok")
+        self.assertEqual(incomplete["status"], "proposed")
 
     def test_forced_math_enables_web_tools_for_supporting_lookup(self):
         # Forced-proof / mathematics expose web tools; exact-problem search is
@@ -195,16 +238,129 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             ["The determinant has rank five."],
         )
 
-    def test_problem_key_includes_current_packet_revision(self):
+    @staticmethod
+    def _digest():
+        return {
+            "established_facts": [
+                {
+                    "statement": "deg(W_5)=16.",
+                    "evidence_class": "mechanical",
+                    "evidence": "Arithmetic.",
+                },
+                {
+                    "statement": "The splitting is balanced.",
+                    "evidence_class": "source",
+                    "evidence": "Packet locator.",
+                },
+            ],
+            "candidate_ideas": [{"statement": "Z is nonempty."}],
+            "invalid_steps": [
+                {
+                    "statement": "Conclude nonemptiness from chi(L)=1.",
+                    "mathematical_reason": "The divisor may be non-reduced.",
+                }
+            ],
+            "reusable_computations": [
+                {"statement": "2d-16=26.", "sha256": "a" * 64}
+            ],
+            "unresolved_dependencies": [{"statement": "Compare Fitting ideals."}],
+        }
+
+    def test_stale_source_facts_demote_but_mechanical_ones_survive(self):
+        fresh = {
+            row["statement"]: row
+            for row in _digest_rows(self._digest(), 1, fresh=True)
+        }
+        self.assertEqual(
+            {row["section"] for row in fresh.values() if "deg(W_5)" in row["statement"]},
+            {"established"},
+        )
+        stale = _digest_rows(self._digest(), 1, fresh=False)
+        by_section = {}
+        for row in stale:
+            by_section.setdefault(row["section"], []).append(row["statement"])
+        # Arithmetic does not depend on the packet text and stays established.
+        self.assertTrue(
+            any("deg(W_5)" in item for item in by_section["established"])
+        )
+        # A source-evidenced fact leans on packet findings and becomes a
+        # candidate that must be reproved.
+        self.assertFalse(
+            any("balanced" in item for item in by_section["established"])
+        )
+        demoted = [
+            item for item in by_section["candidate"] if "balanced" in item
+        ]
+        self.assertEqual(len(demoted), 1)
+        self.assertIn("superseded packet", demoted[0])
+        # A refuted step stays refuted; its reason is self-contained.
+        self.assertEqual(len(by_section["invalid"]), 1)
+        # Sha-pinned computations survive unchanged.
+        self.assertEqual(len(by_section["computation"]), 1)
+
+    def test_tier_budgets_are_respected_and_eviction_cascades(self):
+        rows = [
+            {
+                "section": "candidate",
+                "statement": "Candidate %d. %s" % (index, "x" * 400),
+                "fresh": False,
+                "rank": (3, 1, -index),
+                "dedup_key": "candidate:%d" % index,
+                "demoted": False,
+            }
+            for index in range(600)
+        ]
+        tiers = _allocate_tiers(rows)
+        self.assertLessEqual(
+            sum(len(("- " + row["statement"] + "\n").encode()) for row in tiers["primary"]),
+            PRIMARY_BUDGET_BYTES,
+        )
+        self.assertLessEqual(
+            sum(len(("- " + row["statement"] + "\n").encode()) for row in tiers["extended"]),
+            EXTENDED_BUDGET_BYTES,
+        )
+        # Nothing is silently dropped: every row lands in exactly one tier.
+        self.assertEqual(
+            len(tiers["primary"]) + len(tiers["extended"]) + len(tiers["archive"]),
+            len(rows),
+        )
+        self.assertTrue(tiers["archive"])
+
+    def test_ledger_audit_reads_both_working_context_shapes(self):
+        legacy = {"path": "a.md", "sha256": "a" * 64}
+        self.assertEqual(working_context_paths(legacy), [legacy])
+        tiered = {
+            "primary": {"path": "p.md", "sha256": "b" * 64},
+            "extended": {"path": "e.md", "sha256": "c" * 64},
+            "archive": {"path": "r.md", "sha256": "d" * 64},
+            "stats": {"rows_total": 3},
+        }
+        self.assertEqual(
+            [item["path"] for item in working_context_paths(tiered)],
+            ["p.md", "e.md", "r.md"],
+        )
+
+    def test_problem_key_tracks_packet_identity_not_content(self):
         key = problem_key(self.campaign)
         self.assertEqual(len(key), 64)
         self.assertEqual(self.campaign["paired_attempt_policy"]["revision"], POLICY_REVISION)
+        # Adjudicating a finding rewrites the packet's findings section. That
+        # must not mint a new problem key: doing so orphaned the ledger and
+        # reset every engine's pair state to untried, respending a forced proof.
         with mock.patch(
             "pure_tate.campaigns.campaign_packet_record",
             side_effect=[
                 {"packet_sha256": "a" * 64},
                 {"packet_sha256": "b" * 64},
             ],
+        ):
+            self.assertEqual(
+                problem_key(self.campaign), problem_key(self.campaign)
+            )
+        # A changed packet identity is a genuinely different problem.
+        with mock.patch(
+            "pure_tate.campaigns.campaign_packet_binding_sha256",
+            side_effect=["a" * 64, "b" * 64],
         ):
             self.assertNotEqual(
                 problem_key(self.campaign), problem_key(self.campaign)
@@ -289,7 +445,9 @@ class PairedAttemptPolicyTests(unittest.TestCase):
     def test_substantive_invalid_output_is_traced_but_not_written(self):
         output = ROOT / "proof" / "attempts" / "ATT-9999.json"
         incomplete = self.full_artifact()
-        incomplete["status"] = "proposed"
+        # Incompleteness has to be structural: a status string alone no longer
+        # decides it, because the harness derives status from the content.
+        incomplete["gap_markers"] = ["residual comparison unproved"]
         process = SimpleNamespace(
             returncode=0,
             stdout=json.dumps(

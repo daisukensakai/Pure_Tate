@@ -15,10 +15,13 @@ from pure_tate.campaign_driver import (
     next_campaign_task,
 )
 from pure_tate.campaigns import (
+    campaign_packet_binding,
+    campaign_packet_binding_sha256,
     campaign_packet_record,
     campaign_status,
     load_campaign,
     novelty_status,
+    packet_binding_matches,
 )
 from pure_tate.capabilities import effective_capabilities_from_argv
 from pure_tate.experiments import (
@@ -33,6 +36,93 @@ from pure_tate.novelty import (
 )
 from pure_tate.store import ROOT
 from pure_tate.tasking import campaign_mathematics_tasks, finding_audit_tasks
+
+
+class PacketBindingTests(unittest.TestCase):
+    """Packet identity must survive findings churn but track real changes.
+
+    Hashing the whole rendered packet meant every finding adjudication
+    invalidated all in-flight attempts, reviews and digests, so work was
+    retired faster than it could earn two review passes.
+    """
+
+    def test_binding_ignores_the_adjudicated_findings_section(self):
+        baseline = campaign_packet_binding_sha256("C66-001")
+        content = campaign_packet_record("C66-001")["packet_sha256"]
+        extra = {
+            "id": "FND-9999",
+            "case": {"g": 6, "n": 6},
+            "status": "corroborated",
+            "statement": "An additional adjudicated finding.",
+        }
+        with mock.patch(
+            "pure_tate.campaigns.findings_for_case",
+            side_effect=lambda *a, **k: [extra],
+        ):
+            self.assertEqual(campaign_packet_binding_sha256("C66-001"), baseline)
+            self.assertNotEqual(
+                campaign_packet_record("C66-001")["packet_sha256"], content
+            )
+
+    def test_binding_tracks_theorem_routes_and_subproblem_graph(self):
+        baseline = campaign_packet_binding_sha256("C66-001")
+        campaign = load_campaign("C66-001")
+        for mutate in (
+            lambda value: value["paired_attempt_policy"].update(
+                {"exact_theorem": "A different theorem."}
+            ),
+            lambda value: value["blocked_routes"].append("a-new-blocked-route"),
+            lambda value: value["subproblems"][0].update({"dependencies": ["X"]}),
+            lambda value: value["bottleneck"].update({"splitting": "unbalanced"}),
+        ):
+            mutated = copy.deepcopy(campaign)
+            mutate(mutated)
+            with mock.patch(
+                "pure_tate.campaigns.load_campaign", return_value=mutated
+            ):
+                self.assertNotEqual(
+                    campaign_packet_binding_sha256("C66-001"), baseline
+                )
+
+    def test_binding_covers_every_identity_bearing_input(self):
+        binding = campaign_packet_binding("C66-001")
+        self.assertEqual(
+            set(binding),
+            {
+                "campaign_id",
+                "campaign_revision",
+                "context_revision",
+                "target",
+                "exact_theorem",
+                "bottleneck",
+                "subproblems",
+                "blocked_routes",
+                "primary_sources",
+            },
+        )
+
+    def test_migration_carries_artifacts_written_before_the_binding_hash(self):
+        # Superseded packet texts are unrecoverable, so equivalence for these is
+        # an attested migration record rather than a derivation.
+        current = campaign_packet_binding_sha256("C66-001")
+        self.assertTrue(
+            packet_binding_matches(
+                {"campaign_id": "C66-001", "packet_binding_sha256": current},
+                "C66-001",
+            )
+        )
+        self.assertFalse(
+            packet_binding_matches(
+                {"campaign_id": "C66-001", "packet_binding_sha256": "f" * 64},
+                "C66-001",
+            )
+        )
+        self.assertFalse(
+            packet_binding_matches(
+                {"campaign_id": "C66-001", "packet_sha256": "f" * 64},
+                "C66-001",
+            )
+        )
 
 
 class FocusedCampaignTests(unittest.TestCase):

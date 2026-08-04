@@ -1,6 +1,7 @@
 import argparse
 import datetime
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -560,6 +561,41 @@ def command_drive(args: argparse.Namespace) -> int:
     } else 1
 
 
+def command_campaign_context(args: argparse.Namespace) -> int:
+    from .campaigns import load_campaign
+    from .paired import merge_working_context
+
+    try:
+        merged = merge_working_context(load_campaign(args.campaign))
+    except (OSError, ValueError, DataError) as exc:
+        print("ERROR:", exc)
+        return 1
+    record = merged[args.tier]
+    path = ROOT / record["path"]
+    text = path.read_text(encoding="utf-8")
+    if args.grep:
+        pattern = re.compile(args.grep, re.IGNORECASE)
+        matches = [line for line in text.splitlines() if pattern.search(line)]
+        if not matches:
+            print("no %s rows match %r" % (args.tier, args.grep))
+            return 1
+        print("\n".join(matches))
+    else:
+        print(text, end="")
+    print(
+        "\n# %s: %s (%d bytes); rows primary/extended/archived %d/%d/%d"
+        % (
+            args.tier,
+            record["path"],
+            path.stat().st_size,
+            merged["stats"]["rows_primary"],
+            merged["stats"]["rows_extended"],
+            merged["stats"]["rows_archived"],
+        )
+    )
+    return 0
+
+
 def command_campaign_status(args: argparse.Namespace) -> int:
     try:
         status = (
@@ -901,6 +937,20 @@ def build_parser() -> argparse.ArgumentParser:
     )
     campaign_status_parser.add_argument("--write", action="store_true")
     campaign_status_parser.set_defaults(func=command_campaign_status)
+
+    campaign_context_parser = subparsers.add_parser("campaign-context")
+    campaign_context_parser.add_argument(
+        "--campaign", default=DEFAULT_CAMPAIGN
+    )
+    campaign_context_parser.add_argument(
+        "--tier",
+        choices=["primary", "extended", "archive"],
+        default="primary",
+    )
+    campaign_context_parser.add_argument(
+        "--grep", help="print only rows matching this pattern"
+    )
+    campaign_context_parser.set_defaults(func=command_campaign_context)
 
     recover_trace_parser = subparsers.add_parser("recover-trace")
     recover_trace_parser.add_argument("--trace", required=True)

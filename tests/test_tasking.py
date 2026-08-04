@@ -40,13 +40,36 @@ class TaskingTests(unittest.TestCase):
         )
         self.assertEqual(len({task["approach"] for task in tasks}), 5)
 
-    def test_proposed_attempt_gets_one_triage_pass(self):
+    @staticmethod
+    def _complete_attempt(attempt_id: str = "ATT-0001", **overrides):
+        """An attempt the harness derives as complete."""
+        attempt = {
+            "id": attempt_id,
+            "status": "proposed",
+            "engine": "prover",
+            "gap_markers": [],
+            "claims": [{"statement": "A lemma.", "status": "proved"}],
+            "completion_attestation": {
+                "no_undischarged_dependencies": True,
+                "not_reduction_only": True,
+            },
+        }
+        attempt.update(overrides)
+        return attempt
+
+    def test_incomplete_attempt_gets_one_triage_pass(self):
+        # Completeness is derived, so an attempt carrying a gap earns a single
+        # triage pass no matter what status string it wrote.
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             attempts = root / "proof" / "attempts"
             attempts.mkdir(parents=True)
             (attempts / "ATT-0001.json").write_text(
-                json.dumps({"id": "ATT-0001", "status": "proposed"}),
+                json.dumps(
+                    self._complete_attempt(
+                        status="claimed_complete", gap_markers=["a gap"]
+                    )
+                ),
                 encoding="utf-8",
             )
             with mock.patch("pure_tate.tasking.ROOT", root):
@@ -54,6 +77,36 @@ class TaskingTests(unittest.TestCase):
         self.assertEqual(len(tasks), 1)
         self.assertEqual(tasks[0]["review_pass"], 1)
         self.assertTrue(all(task["phase"] == "review" for task in tasks))
+
+    def test_complete_attempt_earns_second_pass_despite_proposed_label(self):
+        # Regression: a gap-free, fully proved attempt that labelled itself
+        # "proposed" used to be capped at one review pass and could therefore
+        # never be verified, stalling every subproblem depending on it.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            attempts = root / "proof" / "attempts"
+            reviews = root / "proof" / "reviews"
+            attempts.mkdir(parents=True)
+            reviews.mkdir(parents=True)
+            (attempts / "ATT-0001.json").write_text(
+                json.dumps(self._complete_attempt()), encoding="utf-8"
+            )
+            (reviews / "REV-0001.json").write_text(
+                json.dumps(
+                    {
+                        "id": "REV-0001",
+                        "attempt_id": "ATT-0001",
+                        "review_pass": 1,
+                        "verdict": "confirmed",
+                        "reviewer_engine": "reviewer-a",
+                        "context_revision": 2,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with mock.patch("pure_tate.tasking.ROOT", root):
+                tasks = review_tasks()
+        self.assertEqual([task["review_pass"] for task in tasks], [2])
 
     def test_claimed_complete_gets_second_pass_only_after_confirmation(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -64,11 +117,7 @@ class TaskingTests(unittest.TestCase):
             reviews.mkdir(parents=True)
             (attempts / "ATT-0001.json").write_text(
                 json.dumps(
-                    {
-                        "id": "ATT-0001",
-                        "status": "claimed_complete",
-                        "engine": "prover",
-                    }
+                    self._complete_attempt(status="claimed_complete")
                 ),
                 encoding="utf-8",
             )
