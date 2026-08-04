@@ -1202,9 +1202,28 @@ def _validate_artifact(
             )
         else:
             exact["approach_id"] = task.get("approach_id")
-        # Identity fields are owned by the harness/task. Models often omit or
-        # slightly rewrite nested target keys; coerce rather than waste a full
-        # paid turn on copy-paste mismatch.
+        # The target dictionary is the statement under proof, not bookkeeping.
+        # An artifact that names a different cohomology degree or codimension
+        # proved something else, and silently relabelling it would launder that
+        # claim into the ledger under the task's target. Absent keys are still
+        # filled in -- models routinely omit the compact aliases -- but a key
+        # that is present and contradictory fails the turn.
+        expected_target = task.get("target")
+        artifact_target = artifact.get("target")
+        if isinstance(expected_target, dict) and isinstance(artifact_target, dict):
+            contradicted = sorted(
+                "%s=%r (task %r)" % (key, artifact_target[key], value)
+                for key, value in expected_target.items()
+                if key in artifact_target and artifact_target[key] != value
+            )
+            if contradicted:
+                raise ValueError(
+                    "artifact target contradicts the task target: %s"
+                    % ", ".join(contradicted)
+                )
+        # Remaining identity fields are owned by the harness/task. Models often
+        # omit or slightly rewrite them; coerce rather than waste a full paid
+        # turn on copy-paste mismatch.
         for field, expected in exact.items():
             if artifact.get(field) != expected:
                 artifact[field] = expected

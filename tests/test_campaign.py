@@ -227,7 +227,7 @@ class FocusedCampaignTests(unittest.TestCase):
         # a permanent claim that is never released. Pointed at the live ledger
         # every test run would burn real REV/FAUD slots, so each test reserves
         # into its own directory.
-        from pure_tate import run_lifecycle
+        from pure_tate import routing, run_lifecycle
 
         directory = tempfile.TemporaryDirectory()
         self.addCleanup(directory.cleanup)
@@ -236,6 +236,14 @@ class FocusedCampaignTests(unittest.TestCase):
         )
         patcher.start()
         self.addCleanup(patcher.stop)
+        # High-tier chain order is persisted per chain, so reading the live
+        # routing ledger makes these assertions depend on whichever chains the
+        # campaign happens to have opened. Start from the default ledger.
+        ledger = mock.patch.object(
+            routing, "HIGH_TIER_LEDGER", Path(directory.name) / "high-tier.json"
+        )
+        ledger.start()
+        self.addCleanup(ledger.stop)
 
     def test_step_limit_with_failed_event_is_not_reported_as_success(self):
         finding_task = {
