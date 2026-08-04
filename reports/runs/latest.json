@@ -1,5 +1,6 @@
 {
   "campaign_id": "C66-001",
+  "completed_at": "2026-08-04T01:07:06.086144+00:00",
   "engine_pools": {
     "prover": [
       "grok",
@@ -125,12 +126,26 @@
       "task_id": "TASK-C66-001-FORCED-FULL"
     },
     {
-      "activity_bytes": 3736711,
+      "activity_bytes": 3926468,
+      "artifact_sha256": "372572ed7079bfe6474d333d581342bf3de8f11d3008df77d630cf7946d17c1d",
+      "completed_at": "2026-08-04T01:07:04.270001+00:00",
       "engine": "grok",
       "engine_pid": 67169,
       "engine_process_group": 67169,
-      "last_activity_at": "2026-08-04T01:00:35.114123+00:00",
+      "last_activity_at": "2026-08-04T01:07:03.031260+00:00",
       "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
       "output": "proof/reviews/REV-0059.json",
       "phase": "review",
       "processes": [
@@ -143,17 +158,31 @@
         }
       ],
       "started_at": "2026-08-04T00:55:30.071159+00:00",
-      "state": "running",
+      "state": "completed",
       "step": 3,
       "supervisor_pid": 67168,
       "task_id": "TASK-V-ATT-0043-P1"
     }
   ],
+  "executed_steps": 3,
   "parent_pid": 61516,
   "parent_process_group": 61512,
   "requested_steps": 3,
   "run_id": "RUN-C66-001-20260803T235232038416Z-61516",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
   "schema_version": 2,
   "started_at": "2026-08-03T23:52:32.038416+00:00",
-  "status": "running"
+  "status": "completed",
+  "stop_reason": "step_limit"
 }

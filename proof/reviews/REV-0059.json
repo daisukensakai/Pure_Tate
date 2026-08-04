@@ -1,0 +1,88 @@
+{
+  "attempt_id": "ATT-0043",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "ATT-0043-C1",
+      "note": "Harer duality identifying top-degree cohomology with Steinberg coinvariants (St tensor H^{tensor r})_G is standard, and Broaddus cyclicity of St as a Mod-module is true for a specific generator. The attempt however takes s to be the class of the standard ordered filling system a1,b1,...,ag,bg. Broaddus Remark 4.4 (and the companion chord-diagram calculation) shows that this standard 4g-gon/filling-system class is trivial in St; the actual cyclic generator is a different 0-filling system phi0. With s=0 the half-turn identity tau_i s=s is vacuous and the coinvariant argument never sees the odd-tensor representation. The sketch that chord-slides make every filling system a G-translate of the standard A therefore cannot be a proof of cyclicity. Handle half-turns fixing the genuine Broaddus generator (and the sign of that action on St) are not established. Consequently H^{21}(M_{6,1};H^{tensor 5})=0 is not proved.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "ATT-0043-C2",
+      "note": "For each forgetful f_j with r=6-j: fibre cohomology only in degrees 0,1; q=0 Leray term vanishes above base vcd; no differential enters or leaves the (d_{j-1},1) slot; residue SES 0->H->R_j->Q(-1)^{j-2}->0 is correct as VMHS; V_r(-1) has weight r+2 so H^{d_{j-1}} has weight floor 27 and Gr^W_26 vanishes; strictness of the coefficient LES yields a surjection on Gr^W_26 from the V_{r+1} term onto the middle. FND-0037 (connecting maps from Gr^W_26 of the weight-two quotient in degree d_{j-1}-1) alters kernels, not cokernels, once the same-degree Gr of the quotient vanishes; it does not kill this surjection claim.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0043-C3",
+      "note": "Formal composite of the five confirmed Gr^W_26 surjections for j=6,5,4,3,2 yields a surjection Gr^W_26 H^{21}(M_{6,1};H^{tensor 5}) onto Gr^W_26 H^{26}(M_{6,6};Q). This is only a conditional reduction pending source vanishing.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0043-C4",
+      "note": "The implication 'source vanishes => W_26 H^{26}(M_{6,6};Q)=0' is valid (smooth DM stack with constant Q coefficients has weights >=26 in degree 26, so W_26=Gr^W_26). Source vanishing is not established (C1 failed), so the claim remains unresolved rather than confirmed or refuted as a statement.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "ATT-0043-C5",
+      "note": "Poincare duality W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_26 H^{26}(M_{6,6};Q)(21) matches FND-0001 / target dictionary (d=21). Zero is formally the empty direct sum of Q(8). Depends on unresolved C4.",
+      "verdict": "unresolved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-04",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate",
+      "evidence": "Broaddus, Homology of the curve complex and the Steinberg module of the mapping class group, Remark 4.4 and Theorem 4.2 / Corollary 4.3: standard gluing is trivial in St; a nonstandard phi0 generates St as a cyclic Mod-module. ATT-0043 argument markdown explicitly takes s=[A] for the standard system A and claims G-cyclicity and tau_i s=s.",
+      "key": "standard-filling-system-null-in-Steinberg",
+      "severity": "high",
+      "statement": "The standard ordered 0-filling system of 2g arcs a1,b1,...,ag,bg (standard 4g-gon side identification) represents the zero class in the Steinberg module St of Mod_{g,1}/Mod_g. Broaddus cyclicity uses a different nontrivial generator phi0. Any top-degree vanishing argument that takes the standard filling-system class as a cyclic generator fixed by handle half-turns is vacuous and does not compute (St tensor V)_G.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate",
+      "evidence": "ATT-0043 steps (4)-(9) with arithmetic d_{j-1}+r+2=27; comparison to FND-0036/FND-0037; MHS strictness on the residue LES.",
+      "key": "forgetful-tower-only-conditional-reduction",
+      "severity": "medium",
+      "statement": "For (g,n)=(6,6), the five-stage forgetful Leray-plus-residue argument with r=6-j correctly produces a surjection Gr^W_26 H^{21}(M_{6,1};H^{tensor 5}) onto Gr^W_26 H^{26}(M_{6,6};Q) (weight floor 27 kills residue quotients on Gr^W_26; FND-0037 connecting maps affect kernels only). This reduces exact-target vanishing to odd-tensor vcd vanishing on M_{6,1} and does not by itself prove the RED-0001 corner.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "supports_existing",
+      "evidence": "ATT-0043 completion_attestation and proof_dependencies:[]; methods_used list has no GEO-Z/H0/COMP or TATE-SUPPORT; new_inputs reopens forgetful-map-renaming-local-system-unknown via the failed C1 lemma.",
+      "key": "claimed-complete-empty-deps-bypass",
+      "severity": "medium",
+      "statement": "ATT-0043 again asserts claimed_complete with proof_dependencies=[] and no_undischarged_dependencies=true for C66-FULL while omitting the packet residual geometry (Z, h0 stratification, components) and while its only new discharge of the blocked forgetful-map local-system route is an unproved odd-tensor vanishing lemma.",
+      "supports_finding_id": "FND-0057"
+    }
+  ],
+  "id": "REV-0059",
+  "independent": true,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "e5586b081fde1661dc57f4a2849c8da39942714c287998a42cf9e0d51780db47",
+  "proof_dependency_checks": [],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0043-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Load-bearing odd-tensor top-degree vanishing fails: the attempt's cyclic Steinberg generator is the standard a_i,b_i filling system, which Broaddus proves is the zero class in St, so handle half-turns fixing that class give no information about (St tensor H^{tensor 5})_G; the actual Broaddus generator is a different 0-filling system not shown to be fixed by half-turns with controlled sign. The forgetful-tower weight/Leray argument is only a correct conditional reduction Gr^W_26 H^{21}(M_{6,1};H^{tensor 5}) twoheadrightarrow Gr^W_26 H^{26}(M_{6,6};Q), not an unconditional proof that the exact target vanishes or is a sum of Q(8).",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "incomplete"
+}
