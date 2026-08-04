@@ -1,21 +1,18 @@
 {
   "campaign_id": "C66-001",
-  "completed_at": "2026-08-04T11:06:16.520217+00:00",
-  "engine_pools": {
-    "prover": [
-      "grok",
-      "codex",
-      "qwen"
-    ],
-    "research": [
-      "grok",
-      "codex"
-    ],
-    "review": [
-      "grok",
-      "codex",
-      "qwen"
-    ]
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "codex": "not_required",
+      "grok": "not_required",
+      "qwen": "pass"
+    },
+    "review": {
+      "codex": "not_required",
+      "grok": "not_required",
+      "qwen": "pass"
+    }
   },
   "events": [
     {
@@ -162,24 +159,21 @@
     }
   ],
   "executed_steps": 3,
-  "parent_pid": 52898,
-  "parent_process_group": 52894,
+  "pre_run_recoveries": [],
+  "recovered_stale_runs": [],
   "requested_steps": 3,
-  "run_id": "RUN-C66-001-20260804T104252290184Z-52898",
-  "run_notification_delivery": {
-    "desktop": {
-      "enabled": true,
-      "sent": true
+  "research_capability_states": {
+    "finding-audit": {
+      "codex": "pass",
+      "grok": "pass"
     },
-    "ntfy": {
-      "enabled": true,
-      "error": null,
-      "sent": true,
-      "status": 200
+    "novelty": {
+      "codex": "pass",
+      "grok": "pass"
     }
   },
-  "schema_version": 2,
-  "started_at": "2026-08-04T10:42:52.290184+00:00",
-  "status": "completed",
-  "stop_reason": "step_limit"
+  "run_id": "RUN-C66-001-20260804T104252290184Z-52898",
+  "run_ledger": "reports/runs/RUN-C66-001-20260804T104252290184Z-52898.json",
+  "stop_reason": "step_limit",
+  "unrecovered_validation_traces": []
 }

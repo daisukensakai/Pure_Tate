@@ -1,0 +1,89 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with and complementary to corroborated FND-0074 (SRC-0004 Lemma 10.6 obstruction degree 4f+n-2g-14 makes the CE failure an Abel\u2013Jacobi isomorphism only at the borderline deg=0 value n=6 for g=6,f=5) and FND-0046 (fibrewise CE obstruction equivalence is only set-theoretic; scheme identification needs Fitting comparison). Independent primary check of the universal Pic^0 lemma: for L_xi=omega(Gamma) tensor xi^{-1} on geometric fibres, the exact sequence 0->omega tensor xi^{-1}->omega(Gamma) tensor xi^{-1}->(omega(Gamma) tensor xi^{-1})|_Gamma->0 and deg(omega(Gamma) tensor xi^{-1})=2g-2+n>2g-2 (n>=1) give R^1p_*=0, rank p_*L_univ=g+n-1, and coker(ev_xi) isomorphic to H^1(omega tensor xi^{-1}) dual to H^0(xi). For deg-0 line bundles on a smooth curve of genus g>=1 one has h^0(xi)>0 iff xi isomorphic to O, so set-theoretic support of the coker is exactly the identity e in Pic^0. At e, ker(ev)=H^0(omega) (dim g) and coker(ev)=H^1(omega) (dim 1) for every n>=1. The evaluation is a map of vector bundles of ranks g+n-1 and n whose non-surjectivity locus has Porteous expected codimension g; the intrinsic derivative is the Serre pairing H^1(O) x H^0(omega)->H^1(omega), which is perfect, so the conormal map is an isomorphism and the scheme is a regular embedding of codimension g equal to the reduced identity section. By the Stacks definition of Fit_0 (tag 07Z6), Fit_0(coker) is the ideal of maximal minors of this presentation, and Fit_0(R/I)=I, so Fit_0(coker)=I_e as claimed. Consequently the (6,6)-specificity of the CE identification is isolated to arranging deg N=2g-2-deg W_5+n=0 (Step-4 omega(Gamma) tensor N^{-1}=W_5), not to the universal Pic^0 Fitting computation; FND-0074\u2019s non-transport to neighbouring n is only about the failure becoming a positive-degree Brill\u2013Noether condition, while the determinantal scheme-structure machinery on Pic^0 transports unchanged whenever the degree-zero condition is arranged. Distinct from FND-0046 (requirement of scheme comparison) and FND-0074 (degree-borderline specificity of CE identification): do not merge. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent classical RR/Serre/Porteous/Fitting verification plus SRC-0004 Lemma 10.6 localization of FND-0074. Merge target: none.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0096",
+  "id": "FAUD-0089",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "generality": "all g >= 1, n >= 1",
+    "hypotheses": "S-scheme smooth proper curve C/S of genus g>=1 with geometrically connected fibres; Gamma relative effective Cartier divisor finite etale of degree n>=1 over S; P=Pic^0(C/S); L_univ=omega_{C_P/P}(Gamma_P) tensor Poin^{-1} on C x_S P; p projection to P; Fit_0(coker(p_*L_univ -> p_*(L_univ|Gamma_P))) equals the ideal sheaf I_e of the identity section e of P/S",
+    "impacts": [
+      "C66-GEO-Z"
+    ],
+    "localizes": "FND-0074",
+    "mathematical_content": "universal Pic^0 evaluation Fitting ideal equals reduced identity section, independent of (6,6); CE (6,6)-specificity isolated to deg N=2g-2-deg W_5+n=0 / Step-4 identification"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "407f257bfff332e85146cff56bc4bbc2a51bee92fb6b98873cc75b1c6400a033",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-04T11:00:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "2208023570000000000000000000000000000000000000000000000000000000",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "ce-obstruction-degree-serre",
+      "retrieved_at": "2026-08-04T11:05:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "a5iv220802357000000000000000000000000000000000000000000000000000",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "ce-lemma-10.6-primary-locator",
+      "retrieved_at": "2026-08-04T11:06:00Z",
+      "source_type": "preprint_html",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "07z6fitting000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "fitting-ideal-definition-support",
+      "retrieved_at": "2026-08-04T11:08:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/07Z6"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "porteouswiki00000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "porteous-degeneracy-expected-codimension",
+      "retrieved_at": "2026-08-04T11:09:00Z",
+      "source_type": "reference",
+      "url": "https://en.wikipedia.org/wiki/Porteous_formula"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "claimsjsonl000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "cross-checked-claims-inventory",
+      "retrieved_at": "2026-08-04T10:55:00Z",
+      "source_type": "campaign_claims",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
+  "task_id": "TASK-F-FND-0096",
+  "verdict": "promote"
+}

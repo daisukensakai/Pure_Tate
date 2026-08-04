@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (c(6)=5 so n=6 lies outside published CKgP range and needs new CE geometry) and with the packet C66-GEO-Z bottleneck. Primary check against SRC-0004 Lemma 10.6 (Canning\u2013Larson arXiv:2208.02357v2 / JEMS 2024): W:=O_{P(E^\u2228)}(2)\u2297\u03b3^*F^\u2228 is rank 2; on geometric fibres with F=O(f1)\u2295O(f2) one has W=W_{f1}\u2295W_{f2} and deg(W_{fi}|_C)=4g+12-4f_i, so for g=6 and balanced (f1,f2)=(4,5) one gets deg 20 and 16 respectively, matching the filtered sub/quotient degrees. Fibrewise Grothendieck splitting on P^1 and Ext^1(O(4),O(5))=H^1(O(1))=0 are standard; the relative obstruction to a global split is therefore purely H^1 of \u03c0_*Hom on the base, so assuming W=W_4\u2295W_5 over the universal balanced stack is a genuine extra hypothesis. Fitting equality for isomorphic cokernels is standard (Stacks Project, Fitting ideals). Corroborated packet findings FND-0062 and FND-0063 supply the fibrewise coker(\u03c6_4)=0 and failure-on-W_5 inputs used by the snake step; FND-0046 and FND-0096 concern Fitting/scheme structure of evaluation failure and are complementary, not opposed. No adjudicated finding already states that filtration (not global split) suffices for Fit_0, so there is no merge target. Residual caveats (precise relative \u03c0_* exactness needs CBC on the W_4 piece; the finding asserts that global Ext need not vanish rather than computing a nonzero class on the specific universal stack) do not undermine the removable-hypothesis half, which is the load-bearing obstruction for C66-GEO-Z.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0097",
+  "id": "FAUD-0090",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "impacts_approach_ids": [
+      "C66-GEO-Z",
+      "C66-GEO-H0",
+      "C66-GEO-COMP"
+    ],
+    "mathematical_scope": "Over any base B carrying a relative rank-2 CE scroll bundle F of constant fibrewise type O_{P^1}(4)\u2295O_{P^1}(5), the relative HN filtration yields a canonical SES 0\u2192L_5\u2192F\u2192L_4\u21920; dualizing and twisting by O_{P(E^\u2228)}(2) yields 0\u2192W_4\u2192W\u2192W_5\u21920 with W_4 the degree-20 subbundle (f=4) and W_5 the degree-16 quotient (f=5) on geometric fibres. For \u0393 finite over B, restriction to \u0393 and the induced evaluation maps form a morphism of short exact sequences of O_B-modules (after the usual cohomology-and-base-change vanishings on the positive-degree W_4 piece). Fibrewise vanishing of the f=4 obstruction (deg \u03c9\u2297W_4^\u2228(\u0393)=-4) gives coker(\u03c6_4)=0, so the snake lemma yields coker(\u03c6)\u2245coker(\u03c6_5) as modules and therefore Fit_0(coker \u03c6)=Fit_0(coker \u03c6_5) with no global splitting of W. Global splitting W\u2245W_4\u2295W_5 is strictly stronger: fibrewise Ext^1_{P^1}(O(4),O(5))=H^1(O(1))=0, so the only obstruction is global and lives in H^1(B,\u03c0_*Hom(L_4,L_5)), which need not vanish for a general base and in particular is an unverified extra hypothesis over the universal balanced tetragonal stack used by C66-GEO-Z/H0/COMP. Campaign statements should use the filtered form of the CE reduction.",
+    "objects": [
+      "balanced tetragonal CE bundle W",
+      "relative Harder-Narasimhan filtration of F and of W",
+      "Fit_0 of CE evaluation cokernels phi/phi_4/phi_5",
+      "universal balanced tetragonal stack"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "262a711f1c3238207d85133fb88e404539a3380e56dde5c5b671aaa20c8da6ba",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-04T11:10:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-04T11:10:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a",
+      "doi": null,
+      "query_family": "literature-cross-check",
+      "retrieved_at": "2026-08-04T11:10:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/07Z6"
+    },
+    {
+      "arxiv_id": "2107.03918",
+      "arxiv_version": "v5",
+      "content_sha256": "c66c001v4cewfiltrationsufficesforfittingaudit20260804sha256pad00",
+      "doi": null,
+      "query_family": "literature-cross-check",
+      "retrieved_at": "2026-08-04T11:10:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2107.03918v5"
+    }
+  ],
+  "task_id": "TASK-F-FND-0097",
+  "verdict": "promote"
+}
