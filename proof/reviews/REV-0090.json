@@ -1,0 +1,281 @@
+{
+  "attempt_id": "ATT-0046",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "BINDING-CHECK",
+      "note": "Binding verified field-by-field. TASK.json target dictionary and ATT-0046.target agree on all 14 keys (dimension 21, ordinary_cohomology_degree 26, ordinary_tate_type Q(-13), open_bm_degree 16, open_bm_tate_type Q(8), open_bm_weight -16, poincare_twist 21, chow_codimension 13, compact_cohomology_degree 16, compact_tate_type Q(-8), g 6, n 6, ordinary_weight 26). packet_id C66-001-v4, packet_sha256 6494beb3...e595bd78 and packet_binding_sha256 76cc8a6d...4645bcc7 match between TASK.json and ATT-0046. campaign_revision 4, context_revision 2, subproblem_id C66-GEO-Z, lane geometry, task_id TASK-C66-M-001 all agree. Reviewer engine 'claude' is not in excluded_reviewer_engines ['grok']; prover_engine is 'grok', so this review is independent. Note that the target dictionary is inert for this attempt: no clause of the theorem statement is a cohomological or weight assertion, and resolves_exact_target is correctly false.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-DEG",
+      "note": "Recomputed independently from the SRC-0004 excerpt and not merely copied. deg(W_f|_C) = 2(2g-2+8) - 4f = 4g+12-4f; at g=6 this gives deg W_4 = 20, deg W_5 = 16, deg L = 16-(2g-2) = 6. Obstruction degree deg(omega_C \u2297 W_f^vee(Gamma)) = (2g-2)-(4g+12-4f)+n = 4f+n-2g-14 gives -4 at f=4 and 0 at f=5 for (g,n)=(6,6). Independent consistency check that the attempt does not make: det F = det E with rank-3 Tschirnhausen E of degree g+3 = 9 forces f_1+f_2 = 9, so 'balanced' can only mean (4,5) \u2014 the splitting type in the theorem statement is the unique balanced one, and the two obstruction degrees -4 and 0 are therefore forced, not chosen. Also cross-checked deg W_4 + deg W_5 = 36 = deg W and h^0(W) = 26 with h^1(W) = 0.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-SETUP",
+      "note": "The f_2=5 convention is the packet's own (packet line 11 fixes W_5 := (O_{P(E^vee)}(2) \u2297 gamma^*O(-5))|_C and explicitly warns it is not the O(5) summand of F), and the attempt follows it without sign drift; the SRC-0004 excerpt is internally inconsistent on this sign (it writes gamma^*O(f_i) in the definition and gamma^*O(-f_i) in the degree computation), but the packet convention resolves it and the attempt introduces no new error. One imprecision recorded rather than charged: the formula-definition presupposes an odd twist O_{P^1}(-5) on the target of gamma, which need not exist globally when the universal target is a Brauer\u2013Severi curve over a stack base taken modulo PGL_2 (only even twists are guaranteed). The canonical definition actually used \u2014 W_5 = W/W_4, the HN-induced quotient \u2014 does exist globally, and the theorem statement does supply it in apposition ('the degree-16 quotient'), so the argument is unaffected; but the two definitions agree only fibrewise / etale-locally.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-FILT",
+      "note": "Direction checked for inversion and found correct. For F fibrewise O(4)+O(5) the maximal destabilizing subsheaf is the slope-5 line subbundle, so 0 -> L_5 -> F -> L_4 -> 0 is the HN filtration as written. Dualizing gives 0 -> L_4^vee -> F^vee -> L_5^vee -> 0, so after tensoring by the line bundle O_{P(E^vee)}(2)|_C the degree-20 W_4 is the SUB and the degree-16 W_5 the QUOTIENT \u2014 exactly as claimed. No sub/quotient inversion, and the degree bookkeeping is consistent with CLM-Z-DEG. Extension-class placement also checks: fibrewise Ext^1(O(4),O(5)) = H^1(P^1,O(1)) = 0, so no local obstruction is visible, and the global class sits in H^1(B, p_*O(1)) via the Leray/local-to-global sequence with R^1p_*O(1)=0 \u2014 matching FND-0097. The refusal to assume a global split is therefore substantive, not cosmetic.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-FILT-COKER",
+      "note": "Conclusion true, stated justification false; confirmed only after repair. The attempt writes 'Because Gamma is finite over the base, both pi_* and restriction to Gamma are exact on this filtration.' Finiteness of Gamma over the base gives exactness of (-)|_Gamma (a SES of vector bundles is locally split, so it survives \u2297 O_Gamma) and exactness of pushforward along the finite map Gamma -> B. It says nothing about exactness of pi_* along the curve fibration on 0 -> W_4 -> W -> W_5 -> 0, which is only left exact. Surjectivity pi_*W ->> pi_*W_5 requires R^1 pi_* W_4 = 0, which holds because deg W_4 = 20 > 2g-2 = 10 \u2014 a vanishing the attempt never states. Likewise coker(phi_4) = 0 requires H^1(W_4(-Gamma)) = 0, i.e. deg 20-6 = 14 > 10, plus commutation of the cokernel with base change and Nakayama to pass from geometric fibres to the sheaf. With those two degree vanishings inserted the snake lemma applies and coker phi \u2245 coker phi_5 as modules; since Fit_0 depends only on the isomorphism class of a finitely presented module, Fit_0(coker phi) = Fit_0(coker phi_5) follows. Clause (1) therefore stands, but only on grounds the attempt does not give. Recorded as a finding candidate because FND-0097 contains the same misstatement.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-GEOM-PT",
+      "note": "Verified independently without using the fibrewise splitting of W. Dualizing 0 -> W_4 -> W -> W_5 -> 0 and twisting by omega(Gamma) gives 0 -> omega\u2297W_5^vee(Gamma) -> omega\u2297W^vee(Gamma) -> omega\u2297W_4^vee(Gamma) -> 0 with the f=4 term of degree -4, hence H^0(omega\u2297W^vee(Gamma)) \u2245 H^0(omega\u2297W_5^vee(Gamma)). The f=5 term has degree exactly 0, so its H^0 is nonzero iff it is trivial iff O_C(Gamma) \u2245 W_5\u2297omega^{-1} = L. No sign or dual inversion, and the cokernel picture is consistent: coker phi_5 = H^0(omega\u2297W_5^vee(Gamma))^vee. This is verbatim FND-0063 (corroborated), so clause (2) is packet-granted. Tension recorded, not charged: the attempt simultaneously asserts clause (2) unconditionally in the theorem statement and records GAP-Z-CE-OBSTR (medium) against precisely the step 'CE evaluation fails <=> H^0(omega\u2297W^vee(Gamma)) != 0'. Given FND-0063 that gap marker is over-conservative, but it is inconsistent to both cite the finding as source_backed and flag the step as unwritten.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-SCHEME",
+      "note": "Charged against theorem clause (3). Three independent grounds. (a) Self-contradiction between statement and status: CLM-Z-SCHEME carries status 'gap' and GAP-Z-SCHEME-CMP is recorded at HIGH severity, yet clause (3) asserts flatly that Z^{bal}_{ev} 'equals Z^{bal}_{AJ}'. The parenthetical '(residual base-relative writeup gap recorded)' is an admission, not a hypothesis; it does not conditionalize the assertion. A weakest-sufficient lemma must either conditionalize the clause or move it to the exclusion list, and this one does neither. (b) The right-hand side is undefined: Z^{bal}_{AJ} is introduced only as 'the Abel\u2013Jacobi incidence of O_C(Gamma) \u2245 L', with no scheme structure specified anywhere in the statement or in Step 4. An equality 'as closed subschemes' whose right-hand side has no declared scheme structure is not a determinate assertion, so clause (3) cannot be certified either way. This produces a dilemma the attempt never confronts: if Z^{bal}_{AJ} is defined as the scheme-theoretic fibre b^{-1}(e) of the twisted AJ morphism b: Div^6 -> Pic^0, Gamma |-> L(-Gamma), then clause (3) follows almost formally from FND-0096 together with two standard facts (Fit_0 commutes with arbitrary base change, and R^1 pi_* commutes with arbitrary base change in relative dimension 1), and the clause carries far less content than its presentation suggests; if Z^{bal}_{AJ} is meant to carry any other structure, clause (3) is simply unproved. (c) The one genuinely non-formal ingredient is stack-theoretic, not editorial: the identification of N = L(-Gamma) with a pullback of a Poincare bundle requires a Poincare bundle for C/B^{bal}, whose universal curve has no section and whose base is an algebraic stack, so the object exists a priori only up to a G_m-gerbe / Brauer twist. Fit_0 is insensitive to twisting the module by a line bundle from the base, so this is very likely repairable, but it is mathematical content of exactly the stack-versus-scheme kind, and describing it as a 'writeup gap' understates it.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-Z-FIT-UNIV",
+      "note": "FND-0096 is adjudicated with the hypothesis 'Gamma a relative Cartier divisor finite etale of degree n over the base'. The universal degree-6 divisor over Div^6_{C/B} is finite flat but etale only over the reduced-support open. The attempt invokes FND-0096 over all of Div^6 \u2014 that is, precisely including the non-reduced divisors where clause (3)'s scheme-theoretic content is not already forced by the geometric-point statement (2). The underlying determinantal computation plausibly extends to finite flat Gamma (the rank count h^0 = g+n-1, kernel H^0(omega) of dimension g, cokernel H^1(omega) of dimension 1, and the perfect Serre pairing as intrinsic derivative do not use etaleness), but the attempt neither notes the hypothesis mismatch nor supplies the extension. Second, unaddressed direction mismatch: FND-0096 fixes Gamma and varies the base over Pic^0, whereas the needed statement fixes W_5 and varies Gamma over Div^6. Converting one into the other is a base-change/pullback argument along the Abel\u2013Jacobi morphism; it is available, but it is never written, and Step 4's phrase 'After translating the CE evaluation by L' is the only trace of it.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-Z-CONF",
+      "note": "Charged against theorem clause (4) as literally stated, not against Step 5, which is correct. (a) Source mismatch: FND-0064 and Step 5 both give the torsor as Conf_6(C/B^{bal}) -> reduced-support open of Div^6_{C/B}. Clause (4) instead writes 'Conf_6 -> (reduced-support open of the failure model)'. Since Conf_6 is defined in the same sentence as the full stack of ordered pairwise-distinct sections, that map does not exist; only the base change Conf_6 x_{Div^6} Z^{bal,red} maps to the failure model. As written, clause (4) asserts a torsor structure on a morphism that is not defined. (b) Strengthening past the cited source: FND-0052 supports 'not a closed pure-codimension-4 subvariety of M_{6,6}', and Step 5 correctly retains the '4'; clause (4) drops it and asserts 'not a closed pure-codimension subvariety', i.e. for every codimension. Nothing in the argument establishes that. (c) Type mismatch: the reduced-support open is a locus of unordered divisors in Div^6 and is not a subvariety of M_{6,6} (ordered distinct marked points) at all, so predicating 'closed subvariety of M_{6,6}' of it is not well-formed; only the ordered model has such a map. (d) FND-0087's compatible-reduction requirement over possibly nonreduced bases is quoted in Step 5 ('is required') but never discharged.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-Z-MONO",
+      "note": "Charged against theorem clause (5), which carries status 'proved'. (a) The whole justification is Step 6's two sentences: 'The balanced locus is open in the tetragonal locus. The natural map ... is therefore a monomorphism onto the balanced open piece.' The 'therefore' is a non sequitur: openness of a splitting-type stratum in the tetragonal locus has no bearing on injectivity of a map that FORGETS the tetragonal structure gamma. (b) The forgetting is exactly the problem. The source remembers gamma; M_{6,6} does not. A general smooth genus-6 curve carries five distinct g^1_4's (Castelnuovo number rho(6,1,4)=0 with count 5; classically the five conic pencils on the quintic del Pezzo surface containing the canonical model), so the underlying forgetful map is generically 5-to-1 and is emphatically not a monomorphism. What could rescue clause (5) is the incidence condition itself: over a point of M_{6,6} the fibre is {balanced gamma : L_gamma \u2245 O_C(Gamma)}, so the mono reduces to recovering the pencil from L. The only standard route is L = omega_C(-D) with D in the pencil, whence |omega_C \u2297 L^{-1}| recovers the pencil \u2014 but that is precisely the identification W_5 \u2245 omega_C^2(-D) which the attempt explicitly disclaims in Step 8 ('No undischarged identification W_5 \u2245 omega_C^2(-D) is used (FND-0073)'). The attempt has therefore removed its own only route to its own clause (5). (c) Monomorphism of stacks is full faithfulness and constrains automorphism groups and T-points, not just geometric points; no automorphism or stack-versus-coarse analysis appears anywhere, and generic injectivity would not suffice in any case. (d) The source of the map is unidentified: Z^{bal}_{ev} \u2282 Div^6 consists of unordered, possibly non-reduced divisors and admits no natural map to M_{6,6} at all. (e) The target is undefined: 'the CE evaluation-failure locus in M_{6,6}' is a condition on a pair (C, gamma), and since every genus-6 curve carries several g^1_4's, this locus is not well-defined on M_{6,6} without saying how gamma is quantified. FND-0091, the only citation offered, warns against the isomorphism claim and presupposes a monomorphism; it does not establish one.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-Z-NONEMPTY",
+      "note": "chi(L) = 6+1-6 = 1 on every smooth geometric fibre, so h^0(L) >= 1, L is effective and the full Abel\u2013Jacobi fibre in Sym^6 is nonempty. The refusal to upgrade this to nonemptiness of the reduced-support open or of the ordered Conf_6 incidence is correct and matches FND-0083; GAP-Z-RED-FIBRE is an honest low-severity marker. Not load-bearing for the verdict: this claim does not appear in the theorem statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-SCOPE",
+      "note": "The listed exclusions (pure dimension 17, global codimension 4, constant h^0(L)=3 / relative P^2, components/stabilizers/closure, Tate type of cohomology of Z, unbalanced failure) are genuinely not used anywhere in the argument, and the corresponding hand-offs to C66-GEO-H0, C66-GEO-COMP and C66-TATE-SUPPORT are correct against the packet subproblem graph. The four blocked routes are indeed unused; no Tate, weight, Gysin, Kunneth, spectral-sequence or coefficient claim is made, so most of the standard attack surface is genuinely absent here rather than merely unexamined. One internal conflict, charged under CLM-Z-CONF rather than here: this claim excludes non-closedness of Z^{bal}, while clause (4) of the same theorem statement asserts that the reduced-support open 'is not a closed pure-codimension subvariety of M_{6,6}'.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-05",
+  "finding_candidates": [
+    {
+      "key": "mono-into-M66-requires-recovering-pencil-from-L",
+      "note": "Not a duplicate of FND-0091, which only forbids upgrading mono to iso and presupposes the mono; and not a duplicate of FND-0073, which records the W_5 \u2245 omega_C^2(-D) identification as undischarged without connecting it to the embedding into M_{6,6}. The new content is the equivalence 'mono <=> pencil recoverable from L' plus the observation that disclaiming FND-0073's identification strands the mono. Evidenced against ATT-0046 clause (5).",
+      "novel": true,
+      "reusable_for": [
+        "C66-GEO-Z",
+        "C66-GEO-COMP",
+        "C66-TATE-SUPPORT"
+      ],
+      "severity": "high",
+      "statement": "For (g,n)=(6,6), any claim that the balanced CE failure model maps monomorphically into an evaluation-failure locus in M_{6,6} is equivalent to recovering the tetragonal pencil gamma from the degree-6 bundle L = W_5 \u2297 omega_C^{-1}, because M_{6,6} forgets gamma while a general genus-6 curve carries five distinct g^1_4's, so the underlying forgetful map is generically 5-to-1. Openness of the balanced splitting stratum inside the tetragonal locus is irrelevant to this and supplies no injectivity. The only standard recovery route is the identification L \u2245 omega_C(-D) with D in the pencil (equivalently W_5 \u2245 omega_C^2(-D)), which returns the pencil as |omega_C \u2297 L^{-1}|; an attempt that disclaims that identification has no remaining route to the monomorphism. Any mono claim additionally needs a well-defined source (the unordered, possibly non-reduced Div^6 model has no map to M_{6,6}), a well-defined target (CE failure is a condition on the pair (C,gamma), not on a point of M_{6,6}), and a stack-level full-faithfulness argument covering automorphism groups.",
+      "supports_finding_id": null
+    },
+    {
+      "key": "filtered-CE-exactness-needs-R1-vanishing-not-finiteness-of-Gamma",
+      "note": "This is a correction to the stated justification inside adjudicated FND-0097, which itself writes 'Since Gamma is finite over the base, both pi_* and restriction to Gamma stay exact on this sequence'. FND-0097's conclusion is unaffected and remains correct; only its reason is wrong, and ATT-0046 reproduces the wrong reason verbatim. Flagged so the error does not propagate to nodes where the degree hypothesis is not automatic.",
+      "novel": true,
+      "reusable_for": [
+        "C66-GEO-Z",
+        "C66-GEO-H0",
+        "C66-COMP-RANK"
+      ],
+      "severity": "medium",
+      "statement": "In the filtered CE reduction 0 -> W_4 -> W -> W_5 -> 0, exactness of pi_* is NOT supplied by finiteness of Gamma over the base. Finiteness of Gamma gives only exactness of restriction to Gamma (the sequence is locally split, so it survives \u2297 O_Gamma) and exactness of pushforward along Gamma -> B. Exactness of pi_* along the curve fibration, i.e. surjectivity of pi_*W -> pi_*W_5, requires R^1 pi_* W_4 = 0, which for (g,n)=(6,6) holds because deg W_4 = 4g+12-16 = 20 > 2g-2 = 10. Likewise coker(phi_4) = 0 requires H^1(W_4(-Gamma)) = 0, i.e. deg 14 > 10, plus commutation of the cokernel with base change and Nakayama to descend from geometric fibres to the sheaf. With those two vanishings the snake lemma and Fit_0(coker phi) = Fit_0(coker phi_5) are correct. Downstream filtered-CE arguments must cite the degree vanishings explicitly, and must recheck them for any (g,n) where deg W_4 <= 2g-2.",
+      "supports_finding_id": null
+    },
+    {
+      "key": "AJ-Fitting-comparison-splits-into-formal-and-stack-parts",
+      "note": "Evidence localizing FND-0046's requirement rather than a new obstruction: FND-0046 says the Fitting/scheme comparison is required, and this candidate identifies which half of it is formal and which half is stack-theoretic content. Filed against FND-0046 to avoid a semantic duplicate.",
+      "novel": false,
+      "reusable_for": [
+        "C66-GEO-Z",
+        "C66-COMP-RANK",
+        "C66-GEO-COMP"
+      ],
+      "severity": "medium",
+      "statement": "The base-relative Fitting/Abel\u2013Jacobi comparison demanded for C66-GEO-Z separates into a formal part and a genuinely non-formal part, and only the second deserves a gap marker. Formal: with b: Div^n -> Pic^0 the twisted Abel\u2013Jacobi morphism Gamma |-> L(-Gamma), one has coker(phi_5) = R^1 pi_*(W_5(-Gamma)) once R^1 pi_* W_5 = 0, and R^1 pi_* commutes with arbitrary base change in relative dimension 1 while Fit_0 commutes with arbitrary base change and is unchanged by tensoring the module with an invertible sheaf from the base; hence Fit_0(coker phi_5) is the pullback of the Pic^0 answer along b, with no cohomology-and-base-change hypotheses and no constancy of h^0 required \u2014 so jumping of h^0(L) and positive-dimensional Abel\u2013Jacobi fibres are harmless here. Non-formal: existence of a Poincare bundle for a universal curve with no section over an algebraic stack base, which exists a priori only up to a G_m-gerbe / Brauer twist, plus a declared scheme structure on the Abel\u2013Jacobi incidence locus. Consequence: an attempt that defines the incidence locus as the scheme-theoretic fibre b^{-1}(e) obtains the scheme-level identification nearly formally, and should say so rather than present it as a substantive theorem; an attempt that leaves the incidence locus' scheme structure undefined has asserted nothing checkable.",
+      "supports_finding_id": "FND-0046"
+    },
+    {
+      "key": "FND-0096-etale-hypothesis-fails-on-non-reduced-divisors",
+      "note": "A hypothesis-scope restriction on FND-0096, not a restatement of it: FND-0096 asserts Fit_0 = I_e and its (g,n)-independence, and says nothing about what happens when the divisor is non-reduced. Proposed as a candidate re-adjudication rather than as a refutation, since the extension is expected to hold.",
+      "novel": true,
+      "reusable_for": [
+        "C66-GEO-Z",
+        "C66-COMP-RANK"
+      ],
+      "severity": "medium",
+      "statement": "FND-0096 is adjudicated with the hypothesis that Gamma is finite ETALE of degree n over the base, but the universal degree-n divisor over Div^n_{C/S} is finite flat and etale only over the reduced-support open. Any C66-GEO-Z use of FND-0096 over all of Div^6 therefore applies it outside its stated hypotheses on exactly the non-reduced divisors \u2014 which is the only place where a scheme-theoretic identification says more than the geometric-point statement already does. The determinantal computation appears to extend to finite flat Gamma (the counts h^0 = g+n-1, kernel H^0(omega) of dimension g, cokernel H^1(omega) of dimension 1, and the perfect Serre pairing as intrinsic derivative do not use etaleness), so the natural repair is to re-adjudicate FND-0096 with 'finite flat' in place of 'finite etale'; until that is done, citations of FND-0096 over a full divisor space should be treated as scoped to the reduced-support open.",
+      "supports_finding_id": null
+    },
+    {
+      "key": "theorem-clause-asserted-against-own-high-severity-gap",
+      "note": "Campaign-level statement-hygiene criterion, distinct from FND-0057 (which concerns claimed_complete artifacts declaring no_undischarged_dependencies against the subproblem graph). Here the artifact is a lemma with resolves_exact_target correctly false; the defect is that its own theorem_statement over-asserts relative to its own gap markers and exclusion list. Evidenced against ATT-0046 clauses (3) and (4).",
+      "novel": true,
+      "reusable_for": [
+        "C66-GEO-Z",
+        "C66-GEO-H0",
+        "C66-GEO-COMP",
+        "C66-TATE-SUPPORT",
+        "C66-TATE-ASSEMBLY"
+      ],
+      "severity": "medium",
+      "statement": "A weakest-sufficient lemma whose theorem_statement asserts a clause while the same artifact records a high-severity gap marker against that clause, and marks the corresponding claim with status 'gap', has not stated a weakest-sufficient theorem: a parenthetical such as '(residual base-relative writeup gap recorded)' is an admission, not a hypothesis, and does not conditionalize the assertion. Such clauses must be either conditionalized ('modulo X, ...'), demoted to a hand-off, or moved to the explicit exclusion list. The same discipline applies to internal conflicts between an asserted clause and the artifact's own exclusion list \u2014 as when a statement excludes non-closedness of Z^{bal} for want of a witness point while simultaneously asserting that a sub-locus 'is not a closed pure-codimension subvariety of M_{6,6}'.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0090",
+  "independent": true,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "6494beb3d180cfc56da477d17c4e32dcef4019e5d84d17db08de7f18e595bd78",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "C66-GEO-Z",
+      "note": "The node is not discharged by this attempt at the stated strength. Clauses (1) and (2) are established (clause (1) after repair), but clause (3) is asserted against a self-declared high-severity gap and against an undefined right-hand side, clause (4) mis-states its own torsor and over-strengthens FND-0052, and clause (5) is marked proved on a non sequitur. Correctly declares proof_dependencies=[]: C66-GEO-Z has no upstream dependencies in the packet subproblem graph, so nothing is smuggled in from downstream nodes.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Lemma 10.6 as excerpted reproduces deg(W_f|_C) = 4g+12-4f and the obstruction degree 4f+n-2g-14 under independent recomputation. The excerpt is internally inconsistent on one sign (gamma^*O(f_i) in the definition versus gamma^*O(-f_i) in the degree line); the packet fixes the convention at line 11 and the attempt follows it consistently, so no error is inherited.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0062",
+      "note": "f=4 obstruction degree -4 recomputed; H^0 = 0 on every geometric balanced fibre. Used correctly as the input that kills coker phi_4.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0063",
+      "note": "f=5 obstruction degree 0 and the resulting iff O_C(Gamma) \u2245 L recomputed. This finding is literally clause (2), so clause (2) is packet-granted.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0074",
+      "note": "n-10 and n-6 specialization recomputed; n=6 is indeed the unique borderline making the failure condition a single Abel\u2013Jacobi condition. The attempt respects the non-transport warning and makes no claim for neighbouring n.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0097",
+      "note": "Sub/quotient direction and extension-class placement independently verified; the filtered replacement for the global split is correct and is the strongest part of the attempt. Marked confirmed as an input, but see the finding candidate: FND-0097's own sentence attributing exactness of pi_* to finiteness of Gamma is a misstatement that the attempt reproduces verbatim.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0061",
+      "note": "Respected: the attempt records GAP-Z-CE-OBSTR rather than passing off degree/Serre control as a complete CE identification. Non-adverse, but note the resulting inconsistency with clause (2) being asserted unconditionally while its cited support FND-0063 already grants it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0046",
+      "note": "This finding states exactly the requirement that clause (3) must meet \u2014 comparison of determinantal/Fitting scheme structures over an arbitrary base \u2014 and the attempt responds by recording GAP-Z-SCHEME-CMP rather than meeting it, while nonetheless asserting the conclusion in the theorem statement. The requirement is therefore acknowledged and left open, not discharged.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "FND-0096",
+      "note": "Applied outside its stated hypotheses. The finding requires Gamma finite ETALE of degree n over the base; the universal divisor over Div^6_{C/B} is finite flat and etale only over the reduced-support open, i.e. the hypothesis fails on exactly the non-reduced locus where clause (3) has content beyond clause (2). Additionally the finding's base is Pic^0 with Gamma fixed, while the required statement has base Div^6 with Gamma varying; the Abel\u2013Jacobi pullback converting one to the other is never written. The finding itself is sound and its (g,n)-independence claim is credible; only its use here is unresolved.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "FND-0091",
+      "note": "Cited as the support for CLM-Z-MONO at status 'proved'. It does not support that. FND-0091 asserts that combining an unconstructed unbalanced failure with an isomorphism claim is self-refuting, and its closing clause 'mono of Z only embeds the balanced open piece' presupposes a monomorphism rather than establishing one. The attempt correctly avoids the isomorphism error the finding warns about, but then treats the finding's presupposition as a theorem.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "FND-0052",
+      "note": "Supports 'not a closed pure-codimension-4 subvariety of M_{6,6}'. Step 5 cites it correctly with the '4'; theorem clause (4) drops the '4' and asserts the strictly stronger 'not a closed pure-codimension subvariety'. The strengthening is unsupported by this or any other cited finding.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "FND-0067",
+      "note": "Demands a witness point of Z \\ Z^{bal} for any non-closedness claim. Step 8 and CLM-Z-SCOPE correctly disclaim non-closedness, but clause (4) of the theorem statement nonetheless asserts that the reduced-support open is not a closed subvariety of M_{6,6}, with no witness and no argument. The disclaimer and the assertion cannot both stand.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "FND-0064",
+      "note": "The finding is correct as stated, with target the reduced-support open of the relative effective-divisor space, and Step 5 transcribes it correctly. The mis-transcription is in theorem clause (4) and is charged under CLM-Z-CONF, not against this finding.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0087",
+      "note": "Quoted in Step 5 as a requirement ('Compatible reduction of source and target is required over possibly nonreduced bases') and then not acted on. Naming a requirement is not discharging it; nothing in the argument establishes that the reduction is applied to source and target compatibly.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "FND-0075",
+      "note": "Used correctly and conservatively: the stack-level torsor is asserted, and coarse/integral descent is explicitly deferred downstream. This is the right handling of the stack-versus-coarse and rational-versus-integral attack surface at this node, since no coefficient-sensitive statement is made here.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0083",
+      "note": "Respected: chi(L)=1 is used only for nonemptiness of the full Abel\u2013Jacobi fibre, and the reduced-support/Conf_6 upgrade is explicitly refused via GAP-Z-RED-FIBRE.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0047",
+      "note": "Respected: the model used is Fitting/Abel\u2013Jacobi/divisor incidence, and Step 4 explicitly declines the unqualified Proj(pi_*L) identification when h^0 jumps.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0073",
+      "note": "Cited correctly for the h^0(L) = 1 + h^0(M) stratification hand-off with deg M = 4, and the W_5 \u2245 omega_C^2(-D) identification is genuinely not used. Non-adverse as an input, but this disclaimer is what strands clause (5): recovering the pencil from L is the only known route to the asserted monomorphism, and it runs through exactly this disclaimed identification.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0005",
+      "note": "Cited only for consistency of global nonemptiness; no weight is placed on it, and the attempt does not upgrade it. Non-load-bearing for any clause of the theorem statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0058",
+      "note": "Cited only to exclude pure dimension 17, codimension 4 and the relative P^2 structure. Unused as a proof input; the exclusion is honoured throughout.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0060",
+      "note": "Cited only to defer stabilizer/coarse-versus-stack dimension bookkeeping to C66-GEO-COMP. Unused as a proof input; no dimension count is asserted in the theorem statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0068",
+      "note": "Cited only to disclaim nowhere-lci conclusions. Unused as a proof input; no local depth or conormal claim is made.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0069",
+      "note": "Cited only to defer component and purity analysis. Unused as a proof input; no component or purity claim appears in the theorem statement.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0046-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: clause (5), the monomorphism into CE evaluation-failure in M_{6,6} \u2014 the only clause that connects the balanced model to the campaign target at all \u2014 is marked 'proved' on a non sequitur, and the attempt has disclaimed its own only route to proving it. Step 6's entire argument is that the balanced locus is open in the tetragonal locus, 'therefore' the map is a monomorphism. But the map forgets the tetragonal structure gamma, and openness of a splitting-type stratum says nothing about injectivity of a forgetful map. Concretely: a general smooth genus-6 curve carries five distinct g^1_4's (Castelnuovo count for rho(6,1,4)=0; classically the five conic pencils on the quintic del Pezzo containing the canonical model), so the underlying map {(C,gamma)} -> M_6 is generically 5-to-1 and is not a monomorphism. Injectivity can only come from the incidence condition pinning down gamma: the fibre over a point of M_{6,6} is {balanced gamma : L_gamma \u2245 O_C(Gamma)}, so clause (5) is equivalent to recovering the pencil from the degree-6 bundle L. The one standard way to do that is L = omega_C(-D) with D in the pencil, so that |omega_C \u2297 L^{-1}| returns the pencil \u2014 and that is exactly the identification W_5 \u2245 omega_C^2(-D) which Step 8 explicitly disclaims as undischarged. The attempt therefore asserts as proved a statement whose only known proof it has removed from scope. This is compounded by clause (5) having neither a well-defined source (Z^{bal}_{ev} consists of unordered, possibly non-reduced divisors and admits no natural map to M_{6,6}) nor a well-defined target (CE evaluation-failure is a condition on a pair (C,gamma), so it is not a locus in M_{6,6} until gamma is quantified), and by monomorphism of stacks being a full-faithfulness condition on which no automorphism analysis is offered. Runner-up attack, and the reason the verdict is incomplete rather than refuted: clause (3) faces an unaddressed dilemma. Z^{bal}_{AJ} is never given a scheme structure, so 'equals as closed subschemes' has no determinate meaning; if Z^{bal}_{AJ} is defined as the scheme-theoretic fibre b^{-1}(e) of the twisted Abel\u2013Jacobi morphism, the clause follows nearly formally from FND-0096 plus the standard facts that Fit_0 and R^1pi_* both commute with arbitrary base change in relative dimension 1, and carries far less content than advertised; otherwise it is unproved \u2014 and either way it is asserted flatly while the supporting claim is self-declared 'gap' at high severity. Attacks attempted that did NOT land, recorded so they are not re-run: the sub/quotient direction of the HN filtration and its dual is correct (W_4 is the degree-20 sub, W_5 the degree-16 quotient, no inversion); the f=4/f=5 obstruction degrees -4 and 0 are forced, not chosen, since det F = det E of degree g+3 = 9 makes (4,5) the unique balanced type; the packet's odd-twist sign convention is followed without drift despite SRC-0004's own internal inconsistency; the snake-lemma conclusion in clause (1) is true, though only after supplying the unstated vanishings R^1pi_*W_4 = 0 and H^1(W_4(-Gamma)) = 0 that the given reason (finiteness of Gamma) does not supply; chi(L) = 1 is used correctly and is not over-extended to reduced-support nonemptiness. The generic Tate/weight attack surface \u2014 cohomology versus Borel\u2013Moore degree, Poincare twists, Gysin and Kunneth shifts, spectral-sequence differentials, Aut(Gamma) invariants versus coinvariants, semisimplification versus genuine Hodge isomorphism, predicted motives, pure Tate upgraded to tautological generation \u2014 is genuinely absent from this node rather than mishandled, since the theorem makes no cohomological assertion and correctly defers Tate type to C66-TATE-SUPPORT; the target dictionary is inert here and resolves_exact_target is correctly false.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B^{bal} be the moduli stack of smooth genus-6 balanced tetragonal curves (degree-4 covers gamma: C -> P^1 with fibrewise F \u2245 O(4) \u2295 O(5)). Let 0 \u2192 L_5 \u2192 F \u2192 L_4 \u2192 0 be the relative Harder\u2013Narasimhan filtration of F, and let 0 \u2192 W_4 \u2192 W \u2192 W_5 \u2192 0 be the induced canonical filtration of the Casnati\u2013Ekedahl bundle, with W_5 := (O_{P(E^vee)}(2) \u2297 gamma^* O_{P^1}(-5))|_C the degree-16 quotient (not the O(5) summand of F) and L := W_5 \u2297 omega_{C/B^{bal}}^{-1} of fibrewise degree 6. Let Div^6_{C/B} be the relative effective-divisor space of degree 6, phi (resp. phi_5) the relative CE evaluation map for W|_Gamma (resp. W_5|_Gamma), and Conf_6 the stack of ordered pairwise-distinct sections. Define Z^{bal}_{ev} := V(Fit_0(coker phi)) \u2282 Div^6_{C/B} and Z^{bal}_{AJ} the Abel\u2013Jacobi incidence of O_C(Gamma) \u2245 L. Then: (1) Fit_0(coker phi) = Fit_0(coker phi_5) with no global split of W used; (2) on geometric balanced fibres, CE evaluation fails on effective deg-6 Gamma iff O_C(Gamma) \u2245 L; (3) scheme-theoretically, Z^{bal}_{ev} is cut out by Fit_0(coker phi_5), and equals Z^{bal}_{AJ} after the universal Pic^0 Fitting comparison at the degree-zero CE obstruction (residual base-relative writeup gap recorded); (4) Conf_6 \u2192 (reduced-support open of the failure model) is a finite \u00e9tale S_6-torsor over that open, which is open in the failure model and is not a closed pure-codimension subvariety of M_{6,6}; (5) the natural map of the balanced model into CE evaluation-failure in M_{6,6} is a monomorphism onto the balanced open piece and is not claimed to be an isomorphism onto all CE failure. Explicitly excluded: pure dimension 17, global codimension 4, constant h^0(L)=3 / relative P^2 structure, components/stabilizers/closure analysis, non-closedness of Z^{bal} without a point of Z \\ Z^{bal}, Tate type of any cohomology of Z, and construction of unbalanced tetragonal failure.",
+  "verdict": "incomplete"
+}

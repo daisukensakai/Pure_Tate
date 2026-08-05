@@ -1,0 +1,234 @@
+{
+  "argument_markdown": "## Argument (C66-GEO-Z)\n\n### Setup and scope\nWork exclusively over the balanced tetragonal stack B^{bal} of smooth genus-6 curves with a degree-4 map gamma: C \u2192 P^1 of fibrewise splitting type F \u2245 O_{P^1}(4) \u2295 O_{P^1}(5). Let C \u2192 B^{bal} be the universal curve. This node constructs and identifies the CE evaluation-failure locus on that balanced open piece only. Downstream nodes C66-GEO-H0, C66-GEO-COMP, C66-TATE-*, and C66-CEX-* are not discharged here. Blocked routes (vcd-only-vanishing; undecorated-cgp-top-weight-graph-complex; point-count-without-degree-parity-separation; forgetful-map-renaming-local-system-unknown) are not used and are not reopened.\n\n### Step 1 \u2014 CE convention and degrees (source-backed + elementary RR)\nPacket convention: W_5 is the f_2=5 summand of (O(2) \u2297 gamma^* F^vee)|_C, written\nW_5 := (O_{P(E^vee)}(2) \u2297 gamma^* O_{P^1}(-5))|_C,\nand is not the O(5) summand of F. SRC-0004 Lemma 10.6 gives deg(W_f|_C) = 4g + 12 \u2212 4f. At g=6, f=5: deg W_5 = 16 and deg L = deg(W_5 \u2297 omega_C^{-1}) = 16 \u2212 (2g\u22122) = 6. The CE obstruction degrees for a relative divisor Gamma of degree n=6 are\ndeg(omega_C \u2297 W_f^vee(Gamma)) = 4f + n \u2212 2g \u2212 14,\nhence f=4 \u21a6 \u22124 and f=5 \u21a6 0 (FND-0062, FND-0063, FND-0074; SRC-0004). Claims: CLM-Z-SETUP, CLM-Z-DEG.\n\n### Step 2 \u2014 Filtered CE reduction, no global split (proved)\nOn the balanced locus F is fibrewise O(4)\u2295O(5), so the relative Harder\u2013Narasimhan filtration supplies a canonical short exact sequence 0 \u2192 L_5 \u2192 F \u2192 L_4 \u2192 0 over any base. Dualizing and applying the CE twist yields a canonical filtration\n0 \u2192 W_4 \u2192 W \u2192 W_5 \u2192 0\nwith W_4 of degree 20 and W_5 the degree-16 quotient (FND-0097). No global splitting W \u2245 W_4 \u2295 W_5 over B^{bal} is assumed: the extension class lives in H^1(B, gamma'_* O(1)) and need not vanish on the universal balanced stack.\n\nBecause Gamma is finite over the base, both pi_* and restriction to Gamma are exact on this filtration. On geometric balanced fibres the f=4 obstruction has negative degree, so coker(phi_4)=0. Snake lemma therefore gives coker(phi) \u2245 coker(phi_5) as modules, and\nFit_0(coker phi) = Fit_0(coker phi_5).\nDefine Z^{bal}_{ev} := V(Fit_0(coker phi)) = V(Fit_0(coker phi_5)) as a closed subscheme of Div^6_{C/B}. Claims: CLM-Z-FILT, CLM-Z-FILT-COKER.\n\n### Step 3 \u2014 Geometric-point failure law (source-backed + Serre)\nOn any smooth geometric balanced fibre, for any effective Gamma of degree 6:\n- H^0(C, omega_C \u2297 W_4^vee(Gamma)) = 0 because the bundle has degree \u22124 (FND-0062);\n- omega_C \u2297 W_5^vee(Gamma) has degree 0, so H^0 \u2260 0 iff the bundle is trivial, iff O_C(Gamma) \u2245 L = W_5 \u2297 omega_C^{-1} (FND-0063).\nThus geometric points of Z^{bal}_{ev} are exactly the Abel\u2013Jacobi points O(Gamma) \u2245 L. Residual writeup: that these H^0 groups are precisely the CE evaluation obstruction spaces of SRC-0004 Lemma 10.6 (not merely degree-matched Serre-dual proxies) is recorded as GAP-Z-CE-OBSTR (FND-0061). Claim: CLM-Z-GEOM-PT.\n\n### Step 4 \u2014 Scheme structure / Fitting vs AJ (source-backed outline + residual gap)\nFibrewise geometric-point equivalence does not by itself identify schemes over an arbitrary base (FND-0046). The scheme structure of Z^{bal}_{ev} is defined by Fit_0(coker phi_5). For the Abel\u2013Jacobi incidence Z^{bal}_{AJ} \u2282 Div^6_{C/B}, the universal Pic^0 determinantal computation (FND-0096) states: with Gamma finite \u00e9tale of degree n over the base and L_univ = omega(Gamma_P) \u2297 Poin^{-1} on C \u00d7_S Pic^0(C/S), one has Fit_0(coker(p_* L_univ \u2192 p_*(L_univ|Gamma_P))) = I_e at the identity section. The (6,6) specificity enters only through deg N = 2g\u22122 \u2212 deg W_5 + n = 0, which is arranged precisely by the f=5 borderline degree (FND-0074, FND-0096). After translating the CE evaluation by L so that the obstruction is the degree-zero Poincar\u00e9-twisted model, this yields Fit_0 = I_e and therefore the intended equality Z^{bal}_{ev} = Z^{bal}_{AJ} as closed subschemes.\n\nResidual high-severity gap GAP-Z-SCHEME-CMP: the full base-relative gluing of the CE W_5-evaluation Fitting ideal to the universal Pic^0 model over arbitrary bases of B^{bal} must still be written carefully (FND-0046). Do not replace this by an unqualified identification of the relative linear system with Proj(pi_* L) when h^0 jumps (FND-0047); the model used here is Fitting/AJ/divisor incidence, not unqualified Proj. Claims: CLM-Z-FIT-UNIV, CLM-Z-SCHEME (status gap).\n\n### Step 5 \u2014 Ordered reduced-support model (proved)\nLet Z^{bal,red} be the open locus of the failure model on which Gamma has reduced support. The forgetful map from the relative ordered configuration stack Conf_6(C/B^{bal}) of pairwise-distinct sections to the reduced-support open of the relative effective-divisor space is a finite \u00e9tale S_6-torsor (FND-0064). Compatible reduction of source and target is required over possibly nonreduced bases (FND-0087). This open is an open piece of the failure locus, not a closed pure-codimension-4 subvariety of M_{6,6} (FND-0052). Stack-level: the torsor is on the stack of pairwise-distinct sections; coarse/integral descent needs separate justification downstream (FND-0075). Claim: CLM-Z-CONF.\n\n### Step 6 \u2014 Mono into CE failure in M_{6,6}, not iso (proved as scope)\nThe balanced locus is open in the tetragonal locus. The natural map of the balanced failure model into the CE evaluation-failure locus in M_{6,6} is therefore a monomorphism onto the balanced open piece. Because unbalanced tetragonal failure is not constructed here, any claim that Z^{bal} is isomorphic to the full CE evaluation-failure locus in M_{6,6} would be self-refuting (FND-0091). Claim: CLM-Z-MONO.\n\n### Step 7 \u2014 Nonemptiness, carefully (source-backed)\nRiemann\u2013Roch gives chi(L)=1 on every smooth geometric fibre, so the full Abel\u2013Jacobi fibre inside Sym^6 is nonempty. Global nonemptiness of the proposed evaluation-failure locus is consistent with corroborated packet input FND-0005. Not claimed: that the reduced-support open, or the ordered Conf_6 incidence, is nonempty on every geometric fibre (FND-0083). Claim: CLM-Z-NONEMPTY. Residual low-severity marker: GAP-Z-RED-FIBRE.\n\n### Step 8 \u2014 Explicit non-claims (handoff discipline)\nThe following are excluded from this theorem and deferred:\n- constancy of h^0(L)=3 (equivalently h^0(M)=2 for M := omega_C^2 \u2297 W_5^vee of deg 4) and relative P^2-bundle structure / pure dim 17 / codim 4 (FND-0058, FND-0073) \u2192 C66-GEO-H0;\n- components, stabilizers, global codimension, and exhaustive closure analysis (FND-0060, FND-0069, FND-0086) \u2192 C66-GEO-COMP;\n- non-closedness of Z^{bal} in M_{6,6} without exhibiting a point of Z \\ Z^{bal} (FND-0067) \u2014 not claimed;\n- nowhere-lci conclusions without local depth/conormal (FND-0068) \u2014 not claimed;\n- Tate type of cohomology of Z (FND-0053, FND-0054) \u2192 C66-TATE-SUPPORT;\n- unbalanced tetragonal failure construction (FND-0091).\nNo undischarged identification W_5 \u2245 omega_C^2(\u2212D) is used (FND-0073). Claim: CLM-Z-SCOPE.\n\n### Separation of inputs\n- **Proved steps:** filtered reduction and Fit_0 equality of cokers (snake + Fitting); Conf_6 finite \u00e9tale S_6-torsor over reduced-support open; mono-not-iso scope; explicit exclusions.\n- **Source-backed inputs:** CE degrees and geometric-point failure law (SRC-0004 Lem. 10.6; FND-0062, FND-0063, FND-0074); universal Pic^0 Fit_0 = I_e (FND-0096); filtered form preferred over global split (FND-0097); stack/open discipline (FND-0052, FND-0064, FND-0075, FND-0087); nonemptiness of full AJ fibre / global Z (RR; FND-0005).\n- **Computational hypotheses:** none.\n- **Gaps:** GAP-Z-CE-OBSTR, GAP-Z-SCHEME-CMP, GAP-Z-RED-FIBRE.\n\n### Failed approaches addressed\n1. Global split of W over B^{bal} \u2192 replaced by HN filtration (FND-0097).\n2. Balanced model isomorphic to all CE failure in M_{6,6} \u2192 mono of balanced open only (FND-0091).\n3. Pure dim 17 / codim 4 without h^0 constancy and component analysis \u2192 not claimed (FND-0058, FND-0069).\n4. Non-closedness of Z^{bal} without Z \\ Z^{bal} \u2192 not claimed (FND-0067).\n5. Conf_6 / reduced-support treated as closed pure-codim-4 in M_{6,6} \u2192 open of failure model (FND-0052).\n6. Geometric points as scheme identity \u2192 Fitting/AJ comparison with residual gap (FND-0046).\n7. chi(L)=1 \u21d2 reduced-support nonempty every fibre \u2192 refused (FND-0083).\n8. Degree/Serre alone as full CE identification \u2192 obstruction spaces tied to SRC-0004 Lem. 10.6 with GAP-Z-CE-OBSTR (FND-0061).\n9. Unqualified Proj(pi_* L) when h^0 jumps \u2192 Fitting/AJ model (FND-0047).\nBlocked cohomological routes are inapplicable to pure construction of Z and are not used.\n\n### Handoff objects for downstream nodes\n- Relative degree-6 incidence / failure model Z^{bal}_{ev} (Fitting) and L = W_5 \u2297 omega^{-1} for C66-GEO-H0 (stratify by h^0(L)=1+h^0(M), deg M=4).\n- Ordered Conf_6 model and reduced-support open for C66-GEO-COMP and C66-COMP-RANK.\n- Explicit mono-only embedding into M_{6,6} so Gysin support analysis can stratify balanced vs residual pieces later.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-Z-SETUP",
+      "statement": "Over B^{bal} (smooth g=6 balanced tetragonal, F\u2245O(4)\u2295O(5)), W_5 is the CE f_2=5 quotient (O_{P(E^vee)}(2)\u2297gamma^*O(-5))|_C, not the O(5) summand of F; L:=W_5\u2297omega^{-1} has fibrewise degree 6.",
+      "status": "source_backed"
+    },
+    {
+      "id": "CLM-Z-FILT",
+      "statement": "Relative HN of F yields a canonical filtration 0\u2192W_4\u2192W\u2192W_5\u21920 over B^{bal}; no global split W\u2245W_4\u2295W_5 is assumed.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-Z-DEG",
+      "statement": "deg(W_f|_C)=4g+12-4f; at (g,n)=(6,6), deg W_5=16, deg L=6; f=4 obstruction degree -4, f=5 obstruction degree 0.",
+      "status": "source_backed"
+    },
+    {
+      "id": "CLM-Z-GEOM-PT",
+      "statement": "On geometric balanced fibres, CE evaluation fails on effective deg-6 Gamma iff O_C(Gamma)\u2245L=W_5\u2297omega_C^{-1} (f=4 obstruction vanishes).",
+      "status": "source_backed"
+    },
+    {
+      "id": "CLM-Z-FILT-COKER",
+      "statement": "Gamma/B finite implies pi_* and restriction to Gamma exact on 0\u2192W_4\u2192W\u2192W_5\u21920; coker phi_4=0 implies coker phi\u2245coker phi_5 and Fit_0(coker phi)=Fit_0(coker phi_5).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-Z-FIT-UNIV",
+      "statement": "Universal Pic^0 determinantal lemma: Fit_0(coker of evaluation of L_univ on Gamma)=I_e at the identity when the translated obstruction has degree 0 (FND-0096).",
+      "status": "source_backed"
+    },
+    {
+      "id": "CLM-Z-SCHEME",
+      "statement": "Z^{bal}_{ev}:=V(Fit_0(coker phi_5)) equals the Abel\u2013Jacobi incidence Z^{bal}_{AJ} as closed subschemes of Div^6_{C/B}, not merely on geometric points.",
+      "status": "gap"
+    },
+    {
+      "id": "CLM-Z-CONF",
+      "statement": "Forgetful Conf_6\u2192(reduced-support open of the failure model) is a finite \u00e9tale S_6-torsor; that open is open in the failure model, not a closed pure-codim piece of M_{6,6}.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-Z-MONO",
+      "statement": "The natural map of the balanced model into CE evaluation-failure in M_{6,6} is a monomorphism onto the balanced open piece; it is not an isomorphism onto all CE failure.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-Z-NONEMPTY",
+      "statement": "chi(L)=1 implies full AJ fibre in Sym^6 nonempty on every geometric fibre; global nonemptiness of Z is packet-corroborated (FND-0005); reduced-support/Conf incidence nonempty on every fibre is not claimed.",
+      "status": "source_backed"
+    },
+    {
+      "id": "CLM-Z-SCOPE",
+      "statement": "Excluded from this theorem: pure dim 17; global codim 4 in M_{6,6}; constant h^0(L)=3/relative P^2; components/stabilizers/closure; non-closedness of Z^{bal} without a point of Z\\Z^{bal}; Tate of Z; full CE failure construction.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "global-split-W-hypothesis"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "balanced-iso-all-CE-failure"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "pure-dim17-codim4-without-h0"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "nonclosed-without-complement"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "conf6-as-closed-pure-codim4"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "geometric-points-as-scheme-id"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "chi-implies-reduced-support-every-fibre"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "degree-serre-as-full-CE-id"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "unqualified-proj-pi-star-L"
+    },
+    {
+      "disposition": "",
+      "kind": "blocked_route",
+      "subject": "vcd-only-vanishing"
+    },
+    {
+      "disposition": "",
+      "kind": "blocked_route",
+      "subject": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "disposition": "",
+      "kind": "blocked_route",
+      "subject": "point-count-without-degree-parity-separation"
+    },
+    {
+      "disposition": "",
+      "kind": "blocked_route",
+      "subject": "forgetful-map-renaming-local-system-unknown"
+    }
+  ],
+  "gap_markers": [
+    {
+      "id": "GAP-Z-CE-OBSTR",
+      "severity": "medium",
+      "statement": "Write that H^0(omega\u2297W_f^vee(Gamma)) are exactly the CE evaluation obstruction spaces of SRC-0004 Lemma 10.6, not only degree-matched Serre-dual groups (FND-0061)."
+    },
+    {
+      "id": "GAP-Z-SCHEME-CMP",
+      "severity": "high",
+      "statement": "Complete base-relative comparison: Fit_0(coker phi_5) equals the AJ incidence ideal of O(Gamma)\u2245L over arbitrary bases of B^{bal} (FND-0046; glue CE deg-0 translation to FND-0096 Pic^0 model)."
+    },
+    {
+      "id": "GAP-Z-RED-FIBRE",
+      "severity": "low",
+      "statement": "Nonemptiness of reduced-support open (and ordered Conf_6 incidence) on every geometric fibre is not proved by chi(L)=1 (FND-0083)."
+    }
+  ],
+  "id": "ATT-0046",
+  "lane": "geometry",
+  "methods_used": [
+    "filtered-CE-HN-filtration",
+    "riemann-roch",
+    "serre-duality",
+    "fitting-ideals-determinantal-loci",
+    "abel-jacobi-incidence",
+    "relative-configuration-stacks",
+    "finite-etale-Sn-torsors",
+    "balanced-tetragonal-hurwitz-stack",
+    "snake-lemma-filtered-evaluation",
+    "universal-pic0-fitting"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Package CE failure on B^{bal} via filtered 0\u2192W_4\u2192W\u2192W_5\u21920 (no global W-split) with Fit_0 equality of cokers by snake lemma.",
+    "Define Z^{bal}_{ev} by Fit_0(coker phi_5) and state scheme AJ identification via universal Pic^0 Fitting at deg-0 obstruction, scoped as mono of balanced open only."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "6494beb3d180cfc56da477d17c4e32dcef4019e5d84d17db08de7f18e595bd78",
+  "proof_dependencies": [],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0005",
+    "FND-0046",
+    "FND-0047",
+    "FND-0052",
+    "FND-0058",
+    "FND-0060",
+    "FND-0061",
+    "FND-0062",
+    "FND-0063",
+    "FND-0064",
+    "FND-0067",
+    "FND-0068",
+    "FND-0069",
+    "FND-0073",
+    "FND-0074",
+    "FND-0075",
+    "FND-0083",
+    "FND-0087",
+    "FND-0091",
+    "FND-0096",
+    "FND-0097"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-Z",
+  "summary": "Weakest-sufficient C66-GEO-Z lemma: construct the balanced CE evaluation-failure locus Z^{bal} via the filtered CE bundle 0\u2192W_4\u2192W\u2192W_5\u21920 and Fitting of coker(phi_5); identify geometric points by O(Gamma)\u2245L=W_5\u2297\u03c9^{-1}; model ordered reduced divisors by a finite \u00e9tale S_6-torsor over the reduced-support open; mono-embed only the balanced open piece into CE failure in M_{6,6}. Residual gaps: full CE-obstruction match to SRC-0004 Lem. 10.6 and complete base-relative Fitting/AJ scheme comparison. No blocked routes used; no RED-0001 resolution claimed.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "Let B^{bal} be the moduli stack of smooth genus-6 balanced tetragonal curves (degree-4 covers gamma: C -> P^1 with fibrewise F \u2245 O(4) \u2295 O(5)). Let 0 \u2192 L_5 \u2192 F \u2192 L_4 \u2192 0 be the relative Harder\u2013Narasimhan filtration of F, and let 0 \u2192 W_4 \u2192 W \u2192 W_5 \u2192 0 be the induced canonical filtration of the Casnati\u2013Ekedahl bundle, with W_5 := (O_{P(E^vee)}(2) \u2297 gamma^* O_{P^1}(-5))|_C the degree-16 quotient (not the O(5) summand of F) and L := W_5 \u2297 omega_{C/B^{bal}}^{-1} of fibrewise degree 6. Let Div^6_{C/B} be the relative effective-divisor space of degree 6, phi (resp. phi_5) the relative CE evaluation map for W|_Gamma (resp. W_5|_Gamma), and Conf_6 the stack of ordered pairwise-distinct sections. Define Z^{bal}_{ev} := V(Fit_0(coker phi)) \u2282 Div^6_{C/B} and Z^{bal}_{AJ} the Abel\u2013Jacobi incidence of O_C(Gamma) \u2245 L. Then: (1) Fit_0(coker phi) = Fit_0(coker phi_5) with no global split of W used; (2) on geometric balanced fibres, CE evaluation fails on effective deg-6 Gamma iff O_C(Gamma) \u2245 L; (3) scheme-theoretically, Z^{bal}_{ev} is cut out by Fit_0(coker phi_5), and equals Z^{bal}_{AJ} after the universal Pic^0 Fitting comparison at the degree-zero CE obstruction (residual base-relative writeup gap recorded); (4) Conf_6 \u2192 (reduced-support open of the failure model) is a finite \u00e9tale S_6-torsor over that open, which is open in the failure model and is not a closed pure-codimension subvariety of M_{6,6}; (5) the natural map of the balanced model into CE evaluation-failure in M_{6,6} is a monomorphism onto the balanced open piece and is not claimed to be an isomorphism onto all CE failure. Explicitly excluded: pure dimension 17, global codimension 4, constant h^0(L)=3 / relative P^2 structure, components/stabilizers/closure analysis, non-closedness of Z^{bal} without a point of Z \\ Z^{bal}, Tate type of any cohomology of Z, and construction of unbalanced tetragonal failure."
+}

@@ -1,0 +1,80 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and FND-0098 does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001; it is compatible with THM-0005 (c(6)=5 so n=6 needs residual geometry) and with RED-0001 retaining (6,6). Primary checks: (1) Brill\u2013Noether \u03c1(6,1,4)=0 and classical count that a general genus-6 curve carries exactly five g^1_4\u2019s (Hoff\u2013Knutsen arXiv:2001.07952 citing ACGH85 p.209ff), so the forgetful map from tetragonal/Hurwitz data remembering \u03b3 to unmarked moduli is generically 5-to-1; openness of the balanced splitting stratum does not restore injectivity. (2) SRC-0004/Canning\u2013Larson Lemma 10.6 supplies deg(W_f|_C)=4g+12-4f and the CE obstruction vanishing setup used to define L=W_5\u2297\u03c9^{-1}, but does not identify W_5\u2245\u03c9_C^2(-D); that residual identification remains the undischarged GAP-Z-W5D named in corroborated FND-0073, and is the standard route recovering the pencil as |\u03c9\u2297L^{-1}|. (3) Source/target/stack hygiene aligns with and does not duplicate FND-0052 (balanced model is open piece), FND-0060/FND-0064 (stack Aut and ordered Conf_6 vs unordered Div^6), and FND-0091 (mono of balanced Z only embeds the balanced open piece, not an isomorphism of full CE failure). Distinct from FND-0058 (constant h^0 for P^2 fibre dimension) and FND-0073 (h^0(L) stratification without GAP-Z-W5D): complementary constraints on the same residual gap. Mild wording caveat: \u2018equivalent\u2019 is slightly strong\u2014recovery is necessary for mono, while full mono also needs the stated source/target/full-faithfulness package\u2014but the obstruction content for C66-GEO-Z is load-bearing and verified. Promote candidate to corroborated; do not merge.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0098",
+  "id": "FAUD-0091",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "claim_type": "obstruction: monomorphism of balanced CE failure model into M_{6,6} requires recovery of \\gamma from L plus well-defined source/target and stack full-faithfulness",
+    "generality": "five distinct g^1_4 on a general genus-6 curve (special loci: hyperelliptic, trigonal, plane quintic)",
+    "impacts_approach_ids": [
+      "C66-GEO-Z"
+    ],
+    "not_claimed": [
+      "emptiness of Z",
+      "Tate type of RED-0001 corner",
+      "falsity of GAP-Z-W5D",
+      "full component decomposition of Z"
+    ],
+    "objects": [
+      "balanced CE evaluation-failure model",
+      "map to evaluation-failure locus in M_{6,6}",
+      "L=W_5\\otimes\\omega_C^{-1}",
+      "tetragonal pencil \\gamma",
+      "GAP-Z-W5D residual identification W_5\\cong\\omega_C^2(-D)"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2001.07952",
+      "arxiv_version": null,
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": null,
+      "query_family": "genus6-five-g14-ACGH",
+      "retrieved_at": "2026-08-05T01:05:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2001.07952"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "canning-larson-lemma-10.6-W-f",
+      "retrieved_at": "2026-08-05T01:06:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "6494beb3d180cfc56da477d17c4e32dcef4019e5d84d17db08de7f18e595bd78",
+      "doi": null,
+      "query_family": "packet-adjudicated-siblings-and-GAP-Z-W5D",
+      "retrieved_at": "2026-08-05T01:03:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": null,
+      "query_family": "cross-checked-claims",
+      "retrieved_at": "2026-08-05T01:03:00Z",
+      "source_type": "corpus",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
+  "task_id": "TASK-F-FND-0098",
+  "verdict": "promote"
+}
