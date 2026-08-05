@@ -1628,6 +1628,86 @@ def working_context_records(campaign: Dict[str, Any]) -> List[Dict[str, str]]:
     return [merged["primary"], merged["extended"]]
 
 
+def is_primary_working_context_path(path: str) -> bool:
+    """True for the primary WC tier path (not extended/archive)."""
+    if not isinstance(path, str) or not path:
+        return False
+    name = Path(path).name
+    if not name.startswith("WORKING-"):
+        return False
+    if name.startswith("WORKING-EXT-") or name.startswith("WORKING-ARCHIVE-"):
+        return False
+    return "paired-working-context" in path.replace("\\", "/")
+
+
+def attach_working_context(
+    task: Dict[str, Any],
+    campaign: Dict[str, Any],
+    *,
+    include_extended: bool = True,
+) -> Dict[str, Any]:
+    """Return a copy of ``task`` with working-context files in input_artifacts.
+
+    Always attaches the freshly merged primary tier. Extended is included by
+    default as overflow. Paths already present (forced/standard-fallback) are
+    not duplicated. Archive is never attached.
+    """
+    updated = dict(task)
+    records = working_context_records(campaign)
+    if not include_extended:
+        records = records[:1]
+    existing = list(updated.get("input_artifacts") or [])
+    seen = {
+        str(item.get("path"))
+        for item in existing
+        if isinstance(item, dict) and isinstance(item.get("path"), str)
+    }
+    for record in records:
+        if not isinstance(record, dict):
+            continue
+        path = record.get("path")
+        if not isinstance(path, str) or not path or path in seen:
+            continue
+        entry = {"path": path, "sha256": record.get("sha256")}
+        existing.append(entry)
+        seen.add(path)
+    updated["input_artifacts"] = existing
+    # Structured ledger shape (primary / extended) for ordinary math events.
+    primary = next(
+        (
+            item
+            for item in existing
+            if isinstance(item, dict)
+            and is_primary_working_context_path(str(item.get("path", "")))
+        ),
+        None,
+    )
+    extended = next(
+        (
+            item
+            for item in existing
+            if isinstance(item, dict)
+            and isinstance(item.get("path"), str)
+            and Path(str(item["path"])).name.startswith("WORKING-EXT-")
+        ),
+        None,
+    )
+    ledger: Dict[str, Any] = {}
+    if primary:
+        ledger["primary"] = {
+            "path": primary["path"],
+            "sha256": primary.get("sha256"),
+        }
+    if extended:
+        ledger["extended"] = {
+            "path": extended["path"],
+            "sha256": extended.get("sha256"),
+        }
+    if ledger:
+        updated["working_context"] = ledger
+    return updated
+
+
 def working_context_paths(record: Dict[str, Any]) -> List[Dict[str, str]]:
     """Normalize a ledger ``working_context`` value into path/hash records.
 

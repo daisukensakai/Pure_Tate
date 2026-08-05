@@ -555,6 +555,32 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertIn("Never use run_terminal_command, write", prompt)
         self.assertIn("final message only", prompt)
 
+    def test_campaign_math_prompt_requires_primary_working_context_read(self):
+        primary = (
+            "proof/packets/generated/paired-working-context/"
+            "WORKING-deadbeefdeadbeef.md"
+        )
+        task = {
+            "id": "TASK-C66-M-001",
+            "phase": "mathematics",
+            "campaign_id": "C66-001",
+            "prompt": "prompts/CAMPAIGN_MATHEMATICS.md",
+        }
+        prompt = assemble_prompt(
+            task,
+            ["TASK.json", primary, primary.replace("WORKING-", "WORKING-EXT-")],
+            "ATT-0046",
+            "grok",
+        )
+        self.assertIn("Required first action", prompt)
+        self.assertIn(primary, prompt)
+        self.assertIn("before drafting", prompt.lower())
+        # Without a primary WC path, the mandatory block is absent.
+        bare = assemble_prompt(
+            task, ["TASK.json"], "ATT-0046", "grok"
+        )
+        self.assertNotIn("Required first action", bare)
+
     def test_json_envelope_is_unwrapped(self):
         value = _extract_json_object(
             '{"result":"{\\"id\\":\\"RAUD-0001\\"}"}'

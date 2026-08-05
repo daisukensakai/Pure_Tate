@@ -10,8 +10,10 @@ attempt and both of its confirmation reviews, and cite their artifact IDs when
 using them. Do not infer, recreate, or strengthen a dependency whose verified
 artifacts are absent.
 
-You may also be supplied with mathematical working context, as a primary file and
-an extended file. Prefer the primary file; use the extended file for overflow.
+Campaign proof turns always receive mathematical working context: a primary file
+and usually an extended file. Before drafting, you **must** read the primary
+file end-to-end (use your read tool on the path listed in the execution
+contract). Prefer the primary file; use the extended file only for overflow.
 Neither is a substitute for proof:
 
 - Established facts may be used directly.
@@ -22,7 +24,8 @@ Neither is a substitute for proof:
   appear in the primary file or the extended file; constraints in either file
   still bind. Do not walk them again, and do not present one as new.
 - Frontier obligations / dependencies to resolve are open mathematical gaps, not
-  proved inputs.
+  proved inputs. Aim your theorem at advancing those, not re-deriving settled
+  constraints.
 - Reusable computations are pinned by SHA-256; a finite computation can motivate
   a claim but never establishes a universal one.
 

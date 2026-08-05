@@ -61,6 +61,7 @@ from .paired import (
     PairedInfrastructureError,
     SubstantiveAttemptError,
     attempt_pending_recoveries,
+    attach_working_context,
     dry_run_preview,
     forced_task,
     pair_state,
@@ -303,12 +304,17 @@ def next_campaign_task(
                 task = standard_fallback_task(
                     base, campaign, working_context_records(campaign)
                 )
+                task = attach_working_context(task, campaign)
                 task["selected_engine"] = engine
                 tasks = [task]
             break
     else:
         task = _math_task(campaign_id, retry=retry)
+        if task is not None and phase == "mathematics":
+            task = attach_working_context(task, campaign)
         tasks = [task] if task else []
+    if phase == "forced-proof" and tasks and tasks[0] is not None:
+        tasks[0] = attach_working_context(tasks[0], campaign)
     return tasks[0] if tasks else None
 
 
@@ -1080,6 +1086,10 @@ def _drive_campaign_unlocked(
             )
             if not task.get("paired_turn_kind"):
                 planned_math_count += 1
+            # Every campaign mathematics turn (ordinary, forced, standard)
+            # receives a freshly merged primary (+ extended) working context
+            # so engines cannot re-walk dead routes without that frontier.
+            task = attach_working_context(task, campaign)
 
         event = {
             "step": index + 1,
@@ -1088,6 +1098,8 @@ def _drive_campaign_unlocked(
             "engine": engine,
             "output": str(output.relative_to(ROOT)),
         }
+        if isinstance(task.get("working_context"), dict):
+            event["working_context"] = task["working_context"]
         output_limit = load_engines().get(engine, {}).get(
             "max_output_tokens"
         )

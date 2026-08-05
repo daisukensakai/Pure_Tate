@@ -84,11 +84,13 @@ Engine capabilities are phase-specific. Research dispatch checks that the genera
 command really permits both web search and fetch and, for current live-web tasks,
 requires a durable passing capability attestation. A declared capability alone is
 not sufficient.
-Mathematics receives only the dependency-closed packet; review receives only one proof
-attempt, its exact packet, and the adversarial rubric. Agent phases (including
-mathematics, review, and forced-proof) expose web tools so engines may look up
-supporting results; research / finding-audit / novelty still require live web
-capability attestation. Forced-proof may use public search only for ordinary
+Mathematics receives the dependency-closed packet; campaign mathematics also
+always injects the primary mathematical working-context file (plus extended
+overflow when present) and the execution contract requires engines to read the
+primary file before drafting. Review receives only one proof attempt, its exact
+packet, and the adversarial rubric. Agent phases (including mathematics, review,
+and forced-proof) expose web tools so engines may look up supporting results;
+research / finding-audit / novelty still require live web capability attestation. Forced-proof may use public search only for ordinary
 mathematical background or named theorems, not to seek a solution of the exact
 problem or to decide openness (`exact_problem_web_search_used: false`). Revision-2 tasks pin the
 Borel–Moore target, its dimension-dependent ordinary-cohomology realization, and the

@@ -471,7 +471,31 @@ def assemble_prompt(
             "them, or choose incomplete/refuted; the harness rejects confirmed "
             "reviews that carry any adverse structured check."
         )
-    if task.get("paired_turn_kind") == "standard-fallback":
+    primary_wc = next(
+        (
+            path
+            for path in context_files
+            if isinstance(path, str)
+            and path
+            and "paired-working-context" in path.replace("\\", "/")
+            and Path(path).name.startswith("WORKING-")
+            and not Path(path).name.startswith("WORKING-EXT-")
+            and not Path(path).name.startswith("WORKING-ARCHIVE-")
+        ),
+        None,
+    )
+    if phase == "mathematics" and primary_wc:
+        parts.append(
+            "Required first action: before drafting any theorem or argument, "
+            "read the primary mathematical working-context file end-to-end via "
+            "your read tool: %s. Use its frontier obligations and mathematical "
+            "constraints to avoid repeating dead routes; treat candidates as "
+            "unproved. Prefer primary; the extended working-context file (if "
+            "supplied) is overflow only, but constraints there still bind. Do "
+            "not claim progress that merely restates a primary constraint."
+            % primary_wc
+        )
+    elif task.get("paired_turn_kind") == "standard-fallback":
         parts.append(
             "The supplied mathematical working-context files are ordinary "
             "context. Prefer the primary file; the extended file is overflow. "

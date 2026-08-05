@@ -24,12 +24,15 @@ from pure_tate.paired import (
     _render_tier,
     _safe_math_rows,
     _statement_core,
+    attach_working_context,
     dry_run_preview,
     forced_task,
+    is_primary_working_context_path,
     model_visible_task,
     pair_state,
     problem_key,
     working_context_paths,
+    working_context_records,
 )
 from pure_tate.store import ROOT
 
@@ -558,6 +561,53 @@ class PairedAttemptPolicyTests(unittest.TestCase):
         self.assertEqual(
             [item["path"] for item in working_context_paths(tiered)],
             ["p.md", "e.md", "r.md"],
+        )
+
+    def test_attach_working_context_injects_primary_and_is_idempotent(self):
+        records = working_context_records(self.campaign)
+        self.assertGreaterEqual(len(records), 1)
+        primary_path = records[0]["path"]
+        self.assertTrue(is_primary_working_context_path(primary_path))
+        self.assertFalse(
+            is_primary_working_context_path(
+                "proof/packets/generated/paired-working-context/WORKING-EXT-abc.md"
+            )
+        )
+        base = {
+            "id": "TASK-C66-M-001",
+            "phase": "mathematics",
+            "campaign_id": self.campaign["id"],
+            "input_artifacts": [],
+        }
+        once = attach_working_context(base, self.campaign)
+        paths = [
+            item["path"]
+            for item in once["input_artifacts"]
+            if isinstance(item, dict)
+        ]
+        self.assertIn(primary_path, paths)
+        self.assertTrue(
+            any(
+                Path(path).name.startswith("WORKING-EXT-") for path in paths
+            )
+        )
+        self.assertIn("working_context", once)
+        self.assertEqual(once["working_context"]["primary"]["path"], primary_path)
+        twice = attach_working_context(once, self.campaign)
+        self.assertEqual(
+            [item["path"] for item in twice["input_artifacts"]],
+            paths,
+        )
+        primary_only = attach_working_context(
+            {"id": "TASK-X", "input_artifacts": []},
+            self.campaign,
+            include_extended=False,
+        )
+        self.assertEqual(len(primary_only["input_artifacts"]), 1)
+        self.assertTrue(
+            is_primary_working_context_path(
+                primary_only["input_artifacts"][0]["path"]
+            )
         )
 
     def test_problem_key_tracks_packet_identity_not_content(self):
