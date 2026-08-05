@@ -12,9 +12,18 @@ from pure_tate.paired import (
     EXTENDED_BUDGET_BYTES,
     POLICY_REVISION,
     PRIMARY_BUDGET_BYTES,
+    PRIMARY_CAP_DEPENDENCY_ROWS,
+    PRIMARY_SECTION_HEADINGS,
+    PRIMARY_TITLE,
+    PRIMARY_PREAMBLE,
     _allocate_tiers,
     _digest_rows,
+    _is_packet_redundant,
+    _packet_tokens,
+    _rank_tuple,
+    _render_tier,
     _safe_math_rows,
+    _statement_core,
     dry_run_preview,
     forced_task,
     model_visible_task,
@@ -330,9 +339,18 @@ class PairedAttemptPolicyTests(unittest.TestCase):
                 "section": "candidate",
                 "statement": "Candidate %d. %s" % (index, "x" * 400),
                 "fresh": False,
-                "rank": (3, 1, -index),
+                "rank_key": "candidate",
+                "rank": _rank_tuple(
+                    "candidate",
+                    packet_redundant=False,
+                    fresh=False,
+                    reinforced=False,
+                    ordinal=index,
+                ),
                 "dedup_key": "candidate:%d" % index,
                 "demoted": False,
+                "force_archive": False,
+                "packet_redundant": False,
             }
             for index in range(600)
         ]
@@ -351,6 +369,182 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             len(rows),
         )
         self.assertTrue(tiers["archive"])
+        # Low-value candidates cannot monopolize primary.
+        self.assertLessEqual(
+            sum(1 for row in tiers["primary"] if row["section"] == "candidate"),
+            12,
+        )
+
+    @staticmethod
+    def _row(
+        section,
+        statement,
+        *,
+        rank_key=None,
+        fresh=True,
+        ordinal=1,
+        force_archive=False,
+        packet_redundant=False,
+        demoted=False,
+        reinforced=False,
+    ):
+        if rank_key is None:
+            rank_key = (
+                "established_source" if section == "established" else section
+            )
+        return {
+            "section": section,
+            "statement": statement,
+            "fresh": fresh,
+            "ordinal": ordinal,
+            "rank_key": rank_key,
+            "rank": _rank_tuple(
+                rank_key,
+                packet_redundant=packet_redundant,
+                fresh=fresh,
+                reinforced=reinforced,
+                ordinal=ordinal,
+            ),
+            "dedup_key": "%s:%s" % (section, statement.lower()),
+            "demoted": demoted,
+            "force_archive": force_archive,
+            "packet_redundant": packet_redundant,
+            "reinforced": reinforced,
+        }
+
+    def test_primary_prefers_constraints_over_dependencies(self):
+        rows = []
+        for index in range(40):
+            rows.append(
+                self._row(
+                    "invalid",
+                    "Bad inference %d with a substantial mathematical reason block."
+                    % index
+                    + (" y" * 20),
+                    ordinal=index,
+                )
+            )
+        for index in range(30):
+            rows.append(
+                self._row(
+                    "dependency",
+                    "Open obligation %d that restates the subproblem graph." % index
+                    + (" z" * 20),
+                    ordinal=index,
+                )
+            )
+        rows.sort(key=lambda item: item["rank"])
+        tiers = _allocate_tiers(rows, primary_budget=20_000, extended_budget=10_000)
+        primary_deps = [
+            row for row in tiers["primary"] if row["section"] == "dependency"
+        ]
+        primary_invalid = [
+            row for row in tiers["primary"] if row["section"] == "invalid"
+        ]
+        self.assertLessEqual(len(primary_deps), PRIMARY_CAP_DEPENDENCY_ROWS)
+        self.assertGreater(len(primary_invalid), len(primary_deps))
+        # Remaining constraints should overflow to extended before archive.
+        ext_invalid = [
+            row for row in tiers["extended"] if row["section"] == "invalid"
+        ]
+        arch_invalid = [
+            row for row in tiers["archive"] if row["section"] == "invalid"
+        ]
+        if any(row["section"] == "invalid" for row in rows if row not in tiers["primary"]):
+            self.assertGreaterEqual(len(ext_invalid), len(arch_invalid))
+
+    def test_force_archive_dependencies_skip_injected_tiers(self):
+        rows = [
+            self._row(
+                "dependency",
+                "Stale open gap from an old digest.",
+                ordinal=1,
+                force_archive=True,
+                fresh=False,
+            ),
+            self._row(
+                "dependency",
+                "Fresh frontier obligation from the latest digest.",
+                ordinal=3,
+                force_archive=False,
+                fresh=True,
+            ),
+            self._row(
+                "invalid",
+                "Do not equate geometric points with Fitting ideals.",
+                ordinal=3,
+            ),
+        ]
+        tiers = _allocate_tiers(rows, primary_budget=5000, extended_budget=5000)
+        self.assertEqual(
+            [row["statement"] for row in tiers["archive"]],
+            ["Stale open gap from an old digest."],
+        )
+        injected = tiers["primary"] + tiers["extended"]
+        self.assertTrue(
+            any("Fresh frontier" in row["statement"] for row in injected)
+        )
+        self.assertFalse(
+            any("Stale open gap" in row["statement"] for row in injected)
+        )
+
+    def test_packet_redundant_sorts_worse_than_unique(self):
+        unique = self._row(
+            "established",
+            "A unique mechanical identity of the evaluation matrix.",
+            rank_key="established_source",
+            packet_redundant=False,
+            ordinal=1,
+        )
+        redundant = self._row(
+            "established",
+            "A packet-redundant restatement of an adjudicated finding.",
+            rank_key="established_source",
+            packet_redundant=True,
+            ordinal=2,
+        )
+        self.assertLess(unique["rank"], redundant["rank"])
+        packet = (
+            "FND-0063 evaluation fails iff O_C(Gamma) isomorphic to "
+            "W_5 tensor omega_C^{-1} on balanced covers."
+        )
+        self.assertTrue(
+            _is_packet_redundant(
+                "FND-0063 evaluation fails iff O_C(Gamma) isomorphic to "
+                "W_5 tensor omega_C^{-1} on balanced covers of genus six curves.",
+                packet.lower(),
+                _packet_tokens(packet),
+            )
+        )
+        self.assertFalse(
+            _is_packet_redundant(
+                "Fitting ideal of the universal evaluation equals the identity section ideal.",
+                packet.lower(),
+                _packet_tokens(packet),
+            )
+        )
+
+    def test_dedup_strips_evidence_suffixes(self):
+        left = "deg(W_5)=16 [evidence: mechanical; Arithmetic from RR.]"
+        right = "deg(W_5)=16 [evidence: source; Packet FND-0062.]"
+        self.assertEqual(_statement_core(left), _statement_core(right))
+
+    def test_primary_render_orders_constraints_before_established(self):
+        text = _render_tier(
+            PRIMARY_TITLE,
+            PRIMARY_PREAMBLE,
+            [
+                self._row("established", "A fact."),
+                self._row("invalid", "A bad step.", rank_key="invalid"),
+                self._row("dependency", "An open gap."),
+            ],
+            headings=PRIMARY_SECTION_HEADINGS,
+        )
+        frontier_at = text.index("## Frontier obligations")
+        constraints_at = text.index("## Mathematical constraints")
+        established_at = text.index("## Established facts")
+        self.assertLess(frontier_at, constraints_at)
+        self.assertLess(constraints_at, established_at)
 
     def test_ledger_audit_reads_both_working_context_shapes(self):
         legacy = {"path": "a.md", "sha256": "a" * 64}
@@ -788,6 +982,9 @@ class PairedAttemptPolicyTests(unittest.TestCase):
                         "engine": "claude",
                         "turn_kind": "mathematics",
                         "packet_sha256": base["packet_sha256"],
+                        "packet_binding_sha256": base.get(
+                            "packet_binding_sha256"
+                        ),
                         "classification": "validation_failure",
                         "validation_error": "target mismatch",
                         "parsed_artifact": artifact,

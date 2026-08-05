@@ -11,15 +11,18 @@ using them. Do not infer, recreate, or strengthen a dependency whose verified
 artifacts are absent.
 
 You may also be supplied with mathematical working context, as a primary file and
-an extended file. Use the primary file; scan the extended file. Neither is a
-substitute for proof:
+an extended file. Prefer the primary file; use the extended file for overflow.
+Neither is a substitute for proof:
 
 - Established facts may be used directly.
 - Candidate ideas must be proved independently before they carry any weight. A
   row marked as carried from a superseded packet is a candidate, whatever it
   says about itself.
-- Mathematical constraints record routes already shown not to work. Do not walk
-  them again, and do not present one as new.
+- Mathematical constraints record routes already shown not to work. They may
+  appear in the primary file or the extended file; constraints in either file
+  still bind. Do not walk them again, and do not present one as new.
+- Frontier obligations / dependencies to resolve are open mathematical gaps, not
+  proved inputs.
 - Reusable computations are pinned by SHA-256; a finite computation can motivate
   a claim but never establishes a universal one.
 

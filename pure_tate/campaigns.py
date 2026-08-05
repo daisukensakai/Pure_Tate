@@ -908,6 +908,22 @@ def campaign_status_markdown(status: Dict[str, Any]) -> str:
         % (context["rows_fresh"], context["rows_demoted"]),
         "- Injected bytes: %d primary + %d extended."
         % (context["bytes_primary"], context["bytes_extended"]),
+        "- Primary constraint share: %.0f%%; fresh share: %.0f%%; packet-redundant rows: %d."
+        % (
+            100.0 * float(context.get("primary_constraint_share") or 0.0),
+            100.0 * float(context.get("primary_fresh_share") or 0.0),
+            int(context.get("primary_redundant_rows") or 0),
+        ),
+        "- Primary by section: constraints %d, computations %d, established %d, candidates %d, frontier deps %d."
+        % (
+            (context.get("rows_primary_by_section") or {}).get("invalid", 0),
+            (context.get("rows_primary_by_section") or {}).get("computation", 0),
+            (context.get("rows_primary_by_section") or {}).get("established", 0),
+            (context.get("rows_primary_by_section") or {}).get("candidate", 0),
+            (context.get("rows_primary_by_section") or {}).get("dependency", 0),
+        ),
+        "- Constraints also in extended (overflow): %d."
+        % int(context.get("constraints_in_extended") or 0),
         "",
         "## Paired full-proof policy",
         "",

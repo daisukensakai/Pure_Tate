@@ -474,8 +474,10 @@ def assemble_prompt(
     if task.get("paired_turn_kind") == "standard-fallback":
         parts.append(
             "The supplied mathematical working-context files are ordinary "
-            "context. Candidate ideas in them are unproved and must be "
-            "established independently before use."
+            "context. Prefer the primary file; the extended file is overflow. "
+            "Mathematical constraints in either file still apply and must not "
+            "be repeated. Candidate ideas are unproved and must be established "
+            "independently before use."
         )
     parts.extend(["", "Phase: " + str(phase)])
     return "\n".join(parts)

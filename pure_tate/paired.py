@@ -1,6 +1,7 @@
 import datetime
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Set
 
@@ -964,14 +965,22 @@ def _safe_math_rows(
     return rendered
 
 
+# Canonical section ids → default headings (value-ordered for injection).
 SECTIONS = [
-    ("established", "Established facts"),
-    ("candidate", "Candidate ideas requiring proof"),
+    ("dependency", "Dependencies to resolve"),
     ("invalid", "Mathematical constraints"),
     ("computation", "Reusable computations"),
-    ("dependency", "Dependencies to resolve"),
+    ("established", "Established facts"),
+    ("candidate", "Candidate ideas requiring proof"),
 ]
 SECTION_HEADINGS = dict(SECTIONS)
+PRIMARY_SECTION_HEADINGS = {
+    "dependency": "Frontier obligations",
+    "invalid": "Mathematical constraints",
+    "computation": "Reusable computations",
+    "established": "Established facts",
+    "candidate": "Candidate ideas requiring proof",
+}
 # Rank order for eviction. Constraints and mechanically-checkable facts are the
 # rows a later prover cannot cheaply rederive; unresolved dependencies are the
 # most restateable and go first.
@@ -985,9 +994,21 @@ CATEGORY_RANK = {
 }
 PRIMARY_BUDGET_BYTES = 60 * 1000
 EXTENDED_BUDGET_BYTES = 30 * 1000
-# Share of the primary budget reserved per section so a single large section
-# cannot starve the others; the remainder is spent globally by rank.
-SECTION_RESERVE = 0.14
+# Primary floors guarantee high-value diversity before global rank fill.
+PRIMARY_FLOOR_INVALID = 0.22
+PRIMARY_FLOOR_MECH_COMP = 0.18
+PRIMARY_FLOOR_SOURCE = 0.05
+# Tiny frontier floor so open obligations are not starved by established bulk.
+PRIMARY_FLOOR_DEPENDENCY = 0.06
+# Hard caps keep low-value sections from crowding primary.
+PRIMARY_CAP_DEPENDENCY_ROWS = 8
+PRIMARY_CAP_DEPENDENCY_SHARE = 0.06
+PRIMARY_CAP_CANDIDATE_ROWS = 12
+PRIMARY_CAP_CANDIDATE_SHARE = 0.12
+# Extended may keep a thin frontier of fresh dependencies; older ones archive.
+EXTENDED_CAP_DEPENDENCY_ROWS = 6
+# Only the last N digests contribute dependencies to injected tiers.
+DEPENDENCY_DIGEST_WINDOW = 2
 
 
 def _render_row(row: Dict[str, Any], category: str) -> str:
@@ -1005,17 +1026,81 @@ def _render_row(row: Dict[str, Any], category: str) -> str:
     return rendered[0] if rendered else ""
 
 
-def _dedup_key(row: Dict[str, Any], category: str, statement: str) -> str:
-    if category == "computation" and isinstance(row.get("sha256"), str):
-        return "computation:" + row["sha256"]
-    return "%s:%s" % (
-        category,
-        " ".join(statement.lower().split()),
+def _statement_core(statement: str) -> str:
+    """Normalize a rendered statement for dedup (strip evidence suffixes)."""
+    text = str(statement)
+    text = re.sub(r"\s*\[evidence:.*?\]\s*", " ", text, flags=re.I | re.S)
+    text = re.sub(r"\s*\[reason:.*?\]\s*", " ", text, flags=re.I | re.S)
+    text = re.sub(r"\s*\[sha256:.*?\]\s*", " ", text, flags=re.I | re.S)
+    text = re.sub(
+        r"\s*\[carried from a superseded packet; reprove\]\s*",
+        " ",
+        text,
+        flags=re.I,
+    )
+    return " ".join(text.lower().split())
+
+
+def _dedup_key_for_row(
+    raw: Dict[str, Any], category: str, section: str, statement: str
+) -> str:
+    if category == "computation" and isinstance(raw.get("sha256"), str):
+        return "computation:" + raw["sha256"]
+    return "%s:%s" % (section, _statement_core(statement))
+
+
+def _rank_tuple(
+    rank_key: str,
+    *,
+    packet_redundant: bool,
+    fresh: bool,
+    reinforced: bool,
+    ordinal: int,
+) -> tuple:
+    return (
+        CATEGORY_RANK[rank_key],
+        1 if packet_redundant else 0,
+        0 if fresh else 1,
+        0 if reinforced else 1,
+        -ordinal,
     )
 
 
+def _packet_tokens(text: str) -> Set[str]:
+    return set(re.findall(r"[a-z0-9]{3,}", text.lower()))
+
+
+def _is_packet_redundant(statement: str, packet_lower: str, packet_tokens: Set[str]) -> bool:
+    """Conservative: high overlap plus a distinctive anchor into the packet.
+
+    Applied only to source-established and candidate rows. Never used to drop
+    invalid constraints or mechanical/computation rows.
+    """
+    if not packet_tokens:
+        return False
+    core = _statement_core(statement)
+    tokens = set(re.findall(r"[a-z0-9]{3,}", core))
+    if len(tokens) < 8:
+        return False
+    overlap = len(tokens & packet_tokens) / float(len(tokens))
+    if overlap < 0.72:
+        return False
+    fnd_ids = re.findall(r"fnd-\d+", core)
+    if fnd_ids and any(fid in packet_lower for fid in fnd_ids):
+        return True
+    distinctive = {token for token in tokens if len(token) >= 8}
+    if not distinctive:
+        return False
+    dist_overlap = len(distinctive & packet_tokens) / float(len(distinctive))
+    return dist_overlap >= 0.65 and overlap >= 0.75
+
+
 def _digest_rows(
-    digest: Dict[str, Any], ordinal: int, fresh: bool
+    digest: Dict[str, Any],
+    ordinal: int,
+    fresh: bool,
+    *,
+    force_archive_dependencies: bool = False,
 ) -> List[Dict[str, Any]]:
     """Flatten one digest into ranked rows, demoting stale source claims.
 
@@ -1053,26 +1138,40 @@ def _digest_rows(
                 continue
             if demoted:
                 statement += " [carried from a superseded packet; reprove]"
-            if category == "established":
+            if category == "established" and not demoted:
                 rank_key = (
                     "established_mechanical"
                     if row.get("evidence_class") == "mechanical"
                     else "established_source"
                 )
+            elif demoted:
+                rank_key = "candidate"
             else:
                 rank_key = category
+            force_archive = bool(
+                category == "dependency" and force_archive_dependencies
+            )
             rows.append(
                 {
                     "section": section,
                     "statement": statement,
                     "fresh": fresh,
-                    "rank": (
-                        CATEGORY_RANK[rank_key],
-                        0 if fresh else 1,
-                        -ordinal,
+                    "ordinal": ordinal,
+                    "rank_key": rank_key,
+                    "rank": _rank_tuple(
+                        rank_key,
+                        packet_redundant=False,
+                        fresh=fresh,
+                        reinforced=False,
+                        ordinal=ordinal,
                     ),
-                    "dedup_key": _dedup_key(row, category, statement),
+                    "dedup_key": _dedup_key_for_row(
+                        row, category, section, statement
+                    ),
                     "demoted": demoted,
+                    "packet_redundant": False,
+                    "reinforced": False,
+                    "force_archive": force_archive,
                 }
             )
     return rows
@@ -1080,7 +1179,7 @@ def _digest_rows(
 
 def collect_working_rows(campaign: Dict[str, Any]) -> List[Dict[str, Any]]:
     """Gather every campaign digest into deduplicated, ranked rows."""
-    from .campaigns import packet_binding_matches
+    from .campaigns import campaign_packet_record, packet_binding_matches
 
     campaign_id = str(campaign["id"])
     digests = []
@@ -1091,27 +1190,97 @@ def collect_working_rows(campaign: Dict[str, Any]) -> List[Dict[str, Any]]:
             continue
         if value.get("campaign_id") == campaign_id:
             digests.append(value)
-    rows: List[Dict[str, Any]] = []
-    seen: Dict[str, Dict[str, Any]] = {}
+    packet_text = ""
+    try:
+        packet_text = str(campaign_packet_record(campaign_id).get("_text") or "")
+    except Exception:
+        packet_text = ""
+    packet_lower = packet_text.lower()
+    packet_tokens = _packet_tokens(packet_text)
+    max_ordinal = len(digests)
+    eligible_dep_ordinals = {
+        ordinal
+        for ordinal in range(
+            max(1, max_ordinal - DEPENDENCY_DIGEST_WINDOW + 1),
+            max_ordinal + 1,
+        )
+    }
+
+    key_counts: Dict[str, int] = {}
+    raw_rows: List[Dict[str, Any]] = []
     for ordinal, digest in enumerate(digests, 1):
         fresh = packet_binding_matches(digest, campaign_id)
-        for row in _digest_rows(digest, ordinal, fresh):
-            existing = seen.get(row["dedup_key"])
-            if existing is None:
-                seen[row["dedup_key"]] = row
-                rows.append(row)
-            elif row["rank"] < existing["rank"]:
-                # Keep the strongest surviving copy: a fact restated against a
-                # current packet outranks the same fact carried from a stale one.
-                existing.update(row)
+        force_archive_deps = ordinal not in eligible_dep_ordinals
+        for row in _digest_rows(
+            digest,
+            ordinal,
+            fresh,
+            force_archive_dependencies=force_archive_deps,
+        ):
+            key_counts[row["dedup_key"]] = key_counts.get(row["dedup_key"], 0) + 1
+            raw_rows.append(row)
+
+    rows: List[Dict[str, Any]] = []
+    seen: Dict[str, Dict[str, Any]] = {}
+    for row in raw_rows:
+        reinforced = key_counts.get(row["dedup_key"], 0) >= 2
+        # Source-established and candidate rows may restate packet material;
+        # demote them in rank so primary prefers net-new content. Never mark
+        # invalid/mechanical/computation rows redundant this way.
+        packet_redundant = False
+        if row["rank_key"] in ("established_source", "candidate"):
+            packet_redundant = _is_packet_redundant(
+                row["statement"], packet_lower, packet_tokens
+            )
+        row = dict(row)
+        row["reinforced"] = reinforced
+        row["packet_redundant"] = packet_redundant
+        row["rank"] = _rank_tuple(
+            row["rank_key"],
+            packet_redundant=packet_redundant,
+            fresh=row["fresh"],
+            reinforced=reinforced,
+            ordinal=int(row["ordinal"]),
+        )
+        existing = seen.get(row["dedup_key"])
+        if existing is None:
+            seen[row["dedup_key"]] = row
+            rows.append(row)
+        elif row["rank"] < existing["rank"]:
+            # Keep the strongest surviving copy: a fact restated against a
+            # current packet outranks the same fact carried from a stale one.
+            # Preserve force_archive=False if any copy is injectable.
+            force_archive = existing["force_archive"] and row["force_archive"]
+            existing.update(row)
+            existing["force_archive"] = force_archive
+        else:
+            if not row["force_archive"]:
+                existing["force_archive"] = False
+            if reinforced:
+                existing["reinforced"] = True
+                existing["rank"] = _rank_tuple(
+                    existing["rank_key"],
+                    packet_redundant=bool(existing.get("packet_redundant")),
+                    fresh=existing["fresh"],
+                    reinforced=True,
+                    ordinal=int(existing["ordinal"]),
+                )
     rows.sort(key=lambda item: item["rank"])
     return rows
 
 
-def _render_tier(title: str, preamble: List[str], rows: List[Dict[str, Any]]) -> str:
+def _render_tier(
+    title: str,
+    preamble: List[str],
+    rows: List[Dict[str, Any]],
+    *,
+    headings: Optional[Dict[str, str]] = None,
+) -> str:
+    heading_map = headings or SECTION_HEADINGS
     lines = ["# " + title, ""]
     lines.extend(preamble)
-    for category, heading in SECTIONS:
+    for category, _default in SECTIONS:
+        heading = heading_map.get(category, SECTION_HEADINGS[category])
         section_rows = [row for row in rows if row["section"] == category]
         lines.extend(["", "## " + heading, ""])
         if section_rows:
@@ -1125,6 +1294,24 @@ def _row_cost(row: Dict[str, Any]) -> int:
     return len(("- " + row["statement"] + "\n").encode("utf-8"))
 
 
+def _section_counts(rows: Sequence[Dict[str, Any]]) -> Dict[str, int]:
+    counts = {category: 0 for category, _ in SECTIONS}
+    for row in rows:
+        section = str(row.get("section") or "")
+        if section in counts:
+            counts[section] += 1
+    return counts
+
+
+def _section_bytes(rows: Sequence[Dict[str, Any]]) -> Dict[str, int]:
+    totals = {category: 0 for category, _ in SECTIONS}
+    for row in rows:
+        section = str(row.get("section") or "")
+        if section in totals:
+            totals[section] += _row_cost(row)
+    return totals
+
+
 def _allocate_tiers(
     rows: List[Dict[str, Any]],
     primary_budget: int = PRIMARY_BUDGET_BYTES,
@@ -1132,46 +1319,148 @@ def _allocate_tiers(
 ) -> Dict[str, List[Dict[str, Any]]]:
     """Split ranked rows into primary, extended and archive tiers.
 
-    Each section first draws on a reserved share of the primary budget so that
-    no section is starved by a large neighbour; whatever is left over is then
-    spent globally in rank order. Budgets are the caps on the rendered files,
-    so callers pass them net of heading scaffolding.
+    Primary uses value-weighted floors then global rank fill under hard caps on
+    candidates and dependencies. Extended prefers remaining constraints first so
+    anti-repeat signal stays injected even when primary is full. Rows marked
+    ``force_archive`` (stale-window dependencies) skip both injected tiers.
     """
-    reserve = int(primary_budget * SECTION_RESERVE)
+    active = [row for row in rows if not row.get("force_archive")]
+    forced_archive = [row for row in rows if row.get("force_archive")]
     chosen: Set[int] = set()
     spent = 0
-    for category, _heading in SECTIONS:
-        section_spent = 0
-        for row in rows:
-            if row["section"] != category or id(row) in chosen:
-                continue
-            cost = _row_cost(row)
-            if section_spent + cost > reserve:
-                continue
-            chosen.add(id(row))
-            section_spent += cost
-            spent += cost
-    for row in rows:
+    section_row_counts = {category: 0 for category, _ in SECTIONS}
+    section_byte_counts = {category: 0 for category, _ in SECTIONS}
+
+    def _within_primary_caps(row: Dict[str, Any], cost: int) -> bool:
+        section = row["section"]
+        if section == "dependency":
+            if section_row_counts["dependency"] >= PRIMARY_CAP_DEPENDENCY_ROWS:
+                return False
+            dep_cap = int(primary_budget * PRIMARY_CAP_DEPENDENCY_SHARE)
+            if section_byte_counts["dependency"] + cost > dep_cap:
+                return False
+        if section == "candidate":
+            if section_row_counts["candidate"] >= PRIMARY_CAP_CANDIDATE_ROWS:
+                return False
+            cand_cap = int(primary_budget * PRIMARY_CAP_CANDIDATE_SHARE)
+            if section_byte_counts["candidate"] + cost > cand_cap:
+                return False
+        return True
+
+    def _take_primary(row: Dict[str, Any], cost: int) -> bool:
+        nonlocal spent
         if id(row) in chosen:
-            continue
-        cost = _row_cost(row)
+            return False
         if spent + cost > primary_budget:
-            continue
+            return False
+        if not _within_primary_caps(row, cost):
+            return False
         chosen.add(id(row))
         spent += cost
-    primary = [row for row in rows if id(row) in chosen]
-    remaining = [row for row in rows if id(row) not in chosen]
+        section_row_counts[row["section"]] += 1
+        section_byte_counts[row["section"]] += cost
+        return True
+
+    # Phase 1: floors for high-value sections (skip rows that do not fit the
+    # remaining floor rather than stopping early on one oversized statement).
+    floor_invalid = int(primary_budget * PRIMARY_FLOOR_INVALID)
+    floor_mech = int(primary_budget * PRIMARY_FLOOR_MECH_COMP)
+    floor_source = int(primary_budget * PRIMARY_FLOOR_SOURCE)
+    inv_spent = 0
+    for row in active:
+        if row["section"] != "invalid":
+            continue
+        cost = _row_cost(row)
+        if inv_spent + cost > floor_invalid:
+            continue
+        if _take_primary(row, cost):
+            inv_spent += cost
+    mech_spent = 0
+    for row in active:
+        if row.get("rank_key") not in (
+            "computation",
+            "established_mechanical",
+        ):
+            continue
+        cost = _row_cost(row)
+        if mech_spent + cost > floor_mech:
+            continue
+        if _take_primary(row, cost):
+            mech_spent += cost
+    source_spent = 0
+    for row in active:
+        if (
+            row.get("rank_key") != "established_source"
+            or not row.get("fresh")
+            or row.get("demoted")
+            or row.get("packet_redundant")
+        ):
+            continue
+        cost = _row_cost(row)
+        if source_spent + cost > floor_source:
+            continue
+        if _take_primary(row, cost):
+            source_spent += cost
+    # Frontier floor: keep a short list of open obligations visible in primary
+    # even when established bulk would otherwise exhaust the budget.
+    floor_dependency = int(primary_budget * PRIMARY_FLOOR_DEPENDENCY)
+    dep_spent = 0
+    for row in active:
+        if row["section"] != "dependency":
+            continue
+        cost = _row_cost(row)
+        if dep_spent + cost > floor_dependency:
+            continue
+        if _take_primary(row, cost):
+            dep_spent += cost
+
+    # Phase 2: global rank fill under caps.
+    for row in active:
+        if id(row) in chosen:
+            continue
+        _take_primary(row, _row_cost(row))
+
+    primary = [row for row in active if id(row) in chosen]
+    remaining = [row for row in active if id(row) not in chosen]
+
+    def _extended_priority(row: Dict[str, Any]) -> tuple:
+        rank_key = str(row.get("rank_key") or row.get("section") or "")
+        if row["section"] == "invalid":
+            section_pri = 0
+        elif rank_key in ("computation", "established_mechanical"):
+            section_pri = 1
+        elif row["section"] == "established":
+            section_pri = 2
+        elif row["section"] == "candidate":
+            section_pri = 3
+        else:
+            section_pri = 4
+        return (section_pri, row["rank"])
+
+    remaining_sorted = sorted(remaining, key=_extended_priority)
     extended: List[Dict[str, Any]] = []
     taken: Set[int] = set()
-    spent = 0
-    for row in remaining:
+    ext_spent = 0
+    ext_deps = 0
+    for row in remaining_sorted:
         cost = _row_cost(row)
-        if spent + cost > extended_budget:
+        if ext_spent + cost > extended_budget:
             continue
+        if row["section"] == "dependency":
+            # Prefer archiving open TODOs; keep only a thin fresh frontier.
+            if not row.get("fresh") or ext_deps >= EXTENDED_CAP_DEPENDENCY_ROWS:
+                continue
+            ext_deps += 1
         extended.append(row)
         taken.add(id(row))
-        spent += cost
-    archive = [row for row in remaining if id(row) not in taken]
+        ext_spent += cost
+    archive = [
+        row for row in remaining if id(row) not in taken
+    ] + forced_archive
+    # Preserve global rank order inside each tier for stable rendering.
+    primary.sort(key=lambda item: item["rank"])
+    extended.sort(key=lambda item: item["rank"])
+    archive.sort(key=lambda item: item["rank"])
     return {"primary": primary, "extended": extended, "archive": archive}
 
 
@@ -1189,18 +1478,31 @@ def _write_tier(text: str, prefix: str) -> Dict[str, str]:
 PRIMARY_TITLE = "Mathematical working context"
 PRIMARY_PREAMBLE = [
     "Treat candidates as unproved. Reprove every fact used in the "
-    "final argument.",
+    "final argument. Constraints below are hard stops: do not walk "
+    "them again.",
 ]
 EXTENDED_TITLE = "Extended mathematical working context"
 EXTENDED_PREAMBLE = [
-    "Secondary context to scan, not to rely on. Everything here "
-    "must be reproved before use.",
+    "Overflow working context. Prefer primary when both apply. "
+    "Constraints here still apply — do not repeat them. Candidates "
+    "remain unproved and must be established independently before use.",
+]
+ARCHIVE_PREAMBLE = [
+    "Retired context, retained for diagnosis and for review when a "
+    "similar pattern recurs. Not supplied to prover turns.",
 ]
 
 
-def _scaffolding_bytes(title: str, preamble: List[str]) -> int:
+def _scaffolding_bytes(
+    title: str,
+    preamble: List[str],
+    *,
+    headings: Optional[Dict[str, str]] = None,
+) -> int:
     """Bytes a tier costs before any row is added."""
-    return len(_render_tier(title, preamble, []).encode("utf-8"))
+    return len(
+        _render_tier(title, preamble, [], headings=headings).encode("utf-8")
+    )
 
 
 def merge_working_context(campaign: Dict[str, Any]) -> Dict[str, Any]:
@@ -1210,12 +1512,19 @@ def merge_working_context(campaign: Dict[str, Any]) -> Dict[str, Any]:
     tiers = _allocate_tiers(
         rows,
         PRIMARY_BUDGET_BYTES
-        - _scaffolding_bytes(PRIMARY_TITLE, PRIMARY_PREAMBLE),
+        - _scaffolding_bytes(
+            PRIMARY_TITLE, PRIMARY_PREAMBLE, headings=PRIMARY_SECTION_HEADINGS
+        ),
         EXTENDED_BUDGET_BYTES
         - _scaffolding_bytes(EXTENDED_TITLE, EXTENDED_PREAMBLE),
     )
     primary = _write_tier(
-        _render_tier(PRIMARY_TITLE, PRIMARY_PREAMBLE, tiers["primary"]),
+        _render_tier(
+            PRIMARY_TITLE,
+            PRIMARY_PREAMBLE,
+            tiers["primary"],
+            headings=PRIMARY_SECTION_HEADINGS,
+        ),
         "WORKING",
     )
     extended = _write_tier(
@@ -1225,14 +1534,14 @@ def merge_working_context(campaign: Dict[str, Any]) -> Dict[str, Any]:
     archive = _write_tier(
         _render_tier(
             "Archived mathematical working context",
-            [
-                "Retired context, retained for diagnosis and for review when a "
-                "similar pattern recurs. Not supplied to prover turns.",
-            ],
+            ARCHIVE_PREAMBLE,
             tiers["archive"],
         ),
         "WORKING-ARCHIVE",
     )
+    primary_bytes = sum(_row_cost(row) for row in tiers["primary"])
+    primary_by_section = _section_bytes(tiers["primary"])
+    extended_by_section = _section_bytes(tiers["extended"])
     return {
         "primary": primary,
         "extended": extended,
@@ -1244,9 +1553,34 @@ def merge_working_context(campaign: Dict[str, Any]) -> Dict[str, Any]:
             "rows_archived": len(tiers["archive"]),
             "rows_fresh": sum(1 for row in rows if row["fresh"]),
             "rows_demoted": sum(1 for row in rows if row["demoted"]),
-            "bytes_primary": sum(_row_cost(row) for row in tiers["primary"]),
-            "bytes_extended": sum(_row_cost(row) for row in tiers["extended"]),
+            "rows_primary_by_section": _section_counts(tiers["primary"]),
+            "rows_extended_by_section": _section_counts(tiers["extended"]),
+            "bytes_primary": primary_bytes,
+            "bytes_extended": sum(
+                _row_cost(row) for row in tiers["extended"]
+            ),
             "bytes_archive": sum(_row_cost(row) for row in tiers["archive"]),
+            "bytes_primary_by_section": primary_by_section,
+            "bytes_extended_by_section": extended_by_section,
+            "primary_constraint_share": (
+                primary_by_section.get("invalid", 0) / float(primary_bytes)
+                if primary_bytes
+                else 0.0
+            ),
+            "primary_fresh_share": (
+                sum(1 for row in tiers["primary"] if row["fresh"])
+                / float(len(tiers["primary"]))
+                if tiers["primary"]
+                else 0.0
+            ),
+            "primary_redundant_rows": sum(
+                1 for row in tiers["primary"] if row.get("packet_redundant")
+            ),
+            "constraints_in_extended": sum(
+                1
+                for row in tiers["extended"]
+                if row["section"] == "invalid"
+            ),
         },
     }
 

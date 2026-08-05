@@ -10,9 +10,11 @@ search a solution for this exact problem. Do not search the public web to
 determine whether it is open, and do not answer that it is open.
 
 Use the supplied primary-source background and any supplied mathematical working
-context. Candidate ideas in working context must be proved independently. Set
-`exact_problem_web_search_used` to false to attest that you did not use the web
-to seek a solution of the exact theorem or to decide openness.
+context (primary and extended files). Prefer primary; constraints in either file
+are hard stops—do not walk them again. Candidate ideas in working context must
+be proved independently before use. Set `exact_problem_web_search_used` to false
+to attest that you did not use the web to seek a solution of the exact theorem or
+to decide openness.
 
 The result must have `result_type` equal to `proof` or `disproof`, `status` equal
 to `claimed_complete`, no gap markers, and the exact theorem statement from the
