@@ -111,8 +111,10 @@ Fresh mathematics follows `prover_rotation` (Grok → Opus → Grok → GPT → 
 Qwen). Retries move forward within one proof chain: Grok → Qwen → the
 chain-assigned Opus/GPT pair. Consecutive chains alternate Opus → GPT and
 GPT → Opus; an unavailable high-tier slot remains pending rather than repeating
-the available model. Reviews use the same base ladder while skipping the prover
-and already-used reviewers.
+the available model. When that ladder is exhausted, the cell re-enters via a
+**fresh rotation** start so further ordinary attempts can reuse engines with
+accumulated working context. Reviews use the same base ladder while skipping the
+prover and already-used reviewers.
 
 Remove `--dry-run` only when the displayed portfolio is intended. Pending current
 reviews run before new mathematics. A `proposed` attempt receives one independent

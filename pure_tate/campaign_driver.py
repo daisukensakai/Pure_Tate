@@ -4,7 +4,7 @@ import hashlib
 import os
 from collections import Counter
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Set, Tuple
 
 from .agents import load_engines, run_task
 from .artifacts import load_artifacts, next_artifact_id
@@ -35,6 +35,7 @@ from .notifications import notify_campaign_run, notify_campaign_step
 from .routing import (
     load_routing_config,
     high_tier_chain_order,
+    next_escalation_engine,
     record_high_tier_dispatch,
     select_prover_for_cell,
     select_reviewer,
@@ -161,6 +162,34 @@ def _finding_audit_is_blocking(task: Dict[str, Any]) -> bool:
     )
 
 
+def _subproblem_engines_used(
+    attempts: Sequence[Dict[str, Any]], subproblem_id: str
+) -> Set[str]:
+    return {
+        str(item["engine"])
+        for item in attempts
+        if item.get("subproblem_id") == subproblem_id
+        and isinstance(item.get("engine"), str)
+        and item["engine"]
+    }
+
+
+def _escalation_ladder_exhausted(used_engines: Iterable[str]) -> bool:
+    """True when every engine on the retry ladder has already been tried."""
+    used = {engine for engine in used_engines if engine}
+    if not used:
+        return False
+    routing = load_routing_config()
+    return (
+        next_escalation_engine(
+            used,
+            routing["escalation_order"],
+            high_tier_order=routing["high_tier_chain_engines"],
+        )
+        is None
+    )
+
+
 def _math_task(
     campaign_id: str,
     exclude_task_ids: Optional[Set[str]] = None,
@@ -186,7 +215,14 @@ def _math_task(
         if task["id"] in excluded:
             continue
         if prior and not retry:
-            continue
+            # First-pass scheduling skips tried cells unless the forward-only
+            # retry ladder is exhausted.  Then a fresh rotation start is
+            # allowed so the bottleneck can reuse engines with new context.
+            used = _subproblem_engines_used(
+                attempts, str(task.get("subproblem_id") or "")
+            )
+            if not _escalation_ladder_exhausted(used):
+                continue
         eligible.append(task)
     eligible.sort(
         key=lambda task: (
@@ -619,7 +655,14 @@ def _drive_campaign_unlocked(
             )
         # Ordinary cell mathematics (after reviews / paired due work).
         planned_math: Set[str] = set()
-        used_preview: Dict[str, Set[str]] = {}
+        # Seed with historical engines so exhausted ladders preview as fresh
+        # rotation rather than as an untried cell.
+        used_preview: Dict[str, Set[str]] = {
+            subproblem_id: set(engines)
+            for subproblem_id, engines in _existing_engines_for_subproblem(
+                campaign_id
+            ).items()
+        }
         math_count = ordinary
         allowed_provers = operational_engine_pool(
             list(prover_engines), "mathematics", dry_run=True

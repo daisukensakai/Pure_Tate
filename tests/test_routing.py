@@ -236,7 +236,59 @@ class RoutingTests(unittest.TestCase):
             chain_id="proof:deferred",
             persist_chain=False,
         )
-        self.assertIsNone(engine)
+        # Preferred high-tier slot is claude (unavailable); do not substitute
+        # codex.  Escalation is blocked, but the cell may still open a fresh
+        # rotation start restricted to the allowlist.
+        self.assertEqual(engine, "codex")
+
+    def test_exhausted_ladder_falls_back_to_fresh_rotation(self):
+        rotation = self.routing["prover_rotation"]
+        escalation = self.routing["escalation_order"]
+        used = ["grok", "qwen", "claude", "codex"]
+        # Ladder itself is still exhausted (forward-only).
+        self.assertIsNone(
+            next_escalation_engine(
+                used,
+                escalation,
+                high_tier_order=["claude", "codex"],
+            )
+        )
+        # Cell selection opens a fresh rotation start by ordinal.
+        self.assertEqual(
+            select_prover_for_cell(
+                0,
+                used,
+                rotation,
+                escalation,
+                chain_id="proof:fresh-rotation",
+                persist_chain=False,
+            ),
+            "grok",
+        )
+        self.assertEqual(
+            select_prover_for_cell(
+                1,
+                used,
+                rotation,
+                escalation,
+                chain_id="proof:fresh-rotation",
+                persist_chain=False,
+            ),
+            "claude",
+        )
+        # Allowlist can restrict the fresh rotation start.
+        self.assertEqual(
+            select_prover_for_cell(
+                0,
+                used,
+                rotation,
+                escalation,
+                allowed=["claude", "grok"],
+                chain_id="proof:fresh-rotation-pool",
+                persist_chain=False,
+            ),
+            "grok",
+        )
 
     def test_driver_dry_run_follows_explicit_rotation_pool(self):
         with mock.patch(

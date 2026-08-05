@@ -201,6 +201,13 @@ def select_prover_for_cell(
     chain_id: Optional[str] = None,
     persist_chain: bool = True,
 ) -> Optional[str]:
+    """Choose a prover for one proof cell.
+
+    Untried cells follow ``prover_rotation``.  Retries climb the forward-only
+    escalation ladder (Grok → Qwen → the chain's high-tier pair).  When that
+    ladder is exhausted, open a **fresh rotation** start so later attempts can
+    reuse engines with accumulated working context rather than stalling.
+    """
     used = {engine for engine in used_engines if engine}
     if not used:
         return next_rotation_engine(math_attempt_ordinal, rotation, allowed=allowed)
@@ -210,12 +217,23 @@ def select_prover_for_cell(
     order = None
     if needs_pair and chain_id:
         order = high_tier_chain_order(chain_id, persist=persist_chain)
-    return next_escalation_engine(
+    engine = next_escalation_engine(
         used,
         escalation,
         allowed=allowed,
         high_tier_order=order,
     )
+    if engine is not None:
+        return engine
+    # Escalation complete (or only unavailable high-tier slots remain).  Fall
+    # back to the global rotation so the cell can keep receiving ordinary
+    # attempts under updated packet / working-context material.
+    try:
+        return next_rotation_engine(
+            math_attempt_ordinal, rotation, allowed=allowed
+        )
+    except ValueError:
+        return None
 
 
 def select_reviewer(
