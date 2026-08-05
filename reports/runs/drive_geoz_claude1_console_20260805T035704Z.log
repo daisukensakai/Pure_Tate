@@ -1,19 +1,16 @@
 {
   "campaign_id": "C66-001",
-  "completed_at": "2026-08-05T04:01:16.603229+00:00",
-  "engine_pools": {
-    "prover": [
-      "claude",
-      "grok"
-    ],
-    "research": [
-      "claude",
-      "grok"
-    ],
-    "review": [
-      "claude",
-      "grok"
-    ]
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "claude": "not_required",
+      "grok": "not_required"
+    },
+    "review": {
+      "claude": "not_required",
+      "grok": "not_required"
+    }
   },
   "events": [
     {
@@ -56,24 +53,21 @@
     }
   ],
   "executed_steps": 1,
-  "parent_pid": 81164,
-  "parent_process_group": 81156,
+  "pre_run_recoveries": [],
+  "recovered_stale_runs": [],
   "requested_steps": 1,
-  "run_id": "RUN-C66-001-20260805T035704870214Z-81164",
-  "run_notification_delivery": {
-    "desktop": {
-      "enabled": true,
-      "sent": true
+  "research_capability_states": {
+    "finding-audit": {
+      "claude": "pass",
+      "grok": "pass"
     },
-    "ntfy": {
-      "enabled": true,
-      "error": null,
-      "sent": true,
-      "status": 200
+    "novelty": {
+      "claude": "pass",
+      "grok": "pass"
     }
   },
-  "schema_version": 2,
-  "started_at": "2026-08-05T03:57:04.870214+00:00",
-  "status": "completed",
-  "stop_reason": "step_limit"
+  "run_id": "RUN-C66-001-20260805T035704870214Z-81164",
+  "run_ledger": "reports/runs/RUN-C66-001-20260805T035704870214Z-81164.json",
+  "stop_reason": "step_limit",
+  "unrecovered_validation_traces": []
 }
