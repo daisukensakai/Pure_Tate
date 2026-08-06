@@ -1,5 +1,6 @@
 {
   "campaign_id": "C66-001",
+  "completed_at": "2026-08-06T12:21:54.111444+00:00",
   "engine_pools": {
     "prover": [
       "claude"
@@ -9,12 +10,14 @@
   },
   "events": [
     {
+      "completed_at": "2026-08-06T12:21:54.111444+00:00",
       "engine": "claude",
+      "error": "killed after Claude rate limit; no artifact written",
       "output": "proof/attempts/ATT-0047.json",
       "phase": "mathematics",
       "run_id": "GEOZ-CLAUDE-20260805T040934Z",
       "started_at": "2026-08-05T04:09:34.690740+00:00",
-      "state": "running",
+      "state": "abandoned",
       "step": 1,
       "subproblem_id": "C66-GEO-Z",
       "task_id": "TASK-C66-M-001",
@@ -30,9 +33,11 @@
       }
     }
   ],
+  "executed_steps": 1,
   "mode": "agent-run-math",
   "requested_steps": 1,
   "run_id": "GEOZ-CLAUDE-20260805T040934Z",
   "started_at": "2026-08-05T04:09:34.690740+00:00",
-  "status": "running"
+  "status": "abandoned",
+  "stop_reason": "killed_rate_limited"
 }

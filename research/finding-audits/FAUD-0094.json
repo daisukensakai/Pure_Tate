@@ -1,0 +1,89 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and FND-0101 does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001 (all ten ledger claims are pure-Tate/CKgP/reduction mathematics; none encode a competing standard for theorem_statement versus gap/exclusion hygiene). Exact mathematical scope of the finding is method-boundary obstruction for weakest-sufficient writeups at (g,n)=(6,6) impacting C66-GEO-Z, not a new geometric theorem about Z. The load-bearing meta-rule is independently sound: a weakest-sufficient lemma whose theorem_statement asserts a clause while the same artifact records a high-severity gap against that clause (status gap) has not stated a weakest-sufficient theorem; a parenthetical such as '(residual base-relative writeup gap recorded)' is an admission, not a hypothesis, and does not conditionalize; repair requires conditionalization ('modulo X, ...'), demotion to hand-off, or explicit exclusion. The same discipline covers assert-versus-exclusion conflicts. Mathematical illustration is consistent with already corroborated packet findings and primary CE literature, not a duplicate of them: FND-0052 (balanced reduced-support relative linear system is an open piece of the failure locus, not a closed pure-codimension-4 subvariety of M_{6,6}); FND-0067 (non-closedness of Z^{bal} requires a witness in Z\\Z^{bal}); FND-0091 (asserting CE-failure isomorphic to balanced Z while leaving unbalanced failure unconstructed is self-refuting). Packet C66-001-v4 further orders 'do not call that open locus closed' and requires complete results to identify every proof dependency. Primary SRC-0004 / arXiv:2208.02357v2 Lemma 10.6 confirms deg W_{f_i}|_C = 4g+12-4f_i and treats the evaluation-surjective locus U as open (emptiness only when n is too large), supporting that open Hurwitz/reduced-support models are not automatically closed pure-codimension subvarieties of M_{g,n}. ATT-0046 and REV-0090 are absent from the read-only workspace, so instance-level provenance of the parenthetical phrase is not re-audited; promotion rests on independent logical verification of the general obstruction plus cross-check of the illustration against packet siblings and primary CE sources. Distinct from FND-0052/0067/0091 (geometry and specific overclaims) and from process-not-math retirements such as FND-0012 (soft execution-scope policy without operational weakest-sufficient discharge force): FND-0101 is an operational writeup obstruction analogous to packet-corroborated FND-0057-style completeness inconsistencies. Merge target: none. Promote candidate to corroborated; evidence_class retained as adversarial_review (process hygiene, not upgraded to primary_source).",
+  "engine": "grok",
+  "evidence_class": "adversarial_review",
+  "finding_id": "FND-0101",
+  "id": "FAUD-0094",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "applies_to": "weakest-sufficient lemma theorem_statements that assert a clause while the same artifact records a high-severity gap marker or exclusion-list conflict against that clause",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "impacts_approach_ids": [
+      "C66-GEO-Z"
+    ],
+    "kind": "method_boundary_obstruction",
+    "mathematical_illustration": {
+      "claims": [
+        "non-closedness of Z^{bal} in M_{6,6} requires a witness in Z minus Z^{bal}",
+        "balanced reduced-support model is an open piece, not a closed pure-codimension subvariety of M_{6,6}"
+      ],
+      "objects": [
+        "Z^{bal}",
+        "CE evaluation-failure locus",
+        "reduced-support open of relative linear system"
+      ]
+    },
+    "not_mathematical_payload": "statement-hygiene rule for weakest-sufficient writeups; parenthetical admissions do not conditionalize assertions"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "cb1d4c17cf56d0e31609da0311cbf1f855318e8aac8168a58a17605f19db5226",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-06T12:30:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "primary-ce-lemma-10.6",
+      "retrieved_at": "2026-08-06T12:32:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "cb1d4c17cf56d0e31609da0311cbf1f855318e8aac8168a58a17605f19db5226",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "primary-ce-lemma-10.6-html",
+      "retrieved_at": "2026-08-06T12:33:00Z",
+      "source_type": "preprint_html",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "doi": null,
+      "query_family": "cross-check-claims",
+      "retrieved_at": "2026-08-06T12:28:00Z",
+      "source_type": "claims_ledger",
+      "url": "file://data/claims.jsonl"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "cb1d4c17cf56d0e31609da0311cbf1f855318e8aac8168a58a17605f19db5226",
+      "doi": null,
+      "query_family": "cross-check-packet-adjudicated-siblings",
+      "retrieved_at": "2026-08-06T12:29:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    }
+  ],
+  "task_id": "TASK-F-FND-0101",
+  "verdict": "promote"
+}
