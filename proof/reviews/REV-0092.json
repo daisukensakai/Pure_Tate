@@ -1,0 +1,79 @@
+{
+  "attempt_id": "ATT-0048",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0048-1",
+      "note": "Step 3: e^*J = Fit_0(coker(e^*Phi)) = Fit_0(R^1 pi_* omega_{C/B} tensor M_0^{-1}) = Fit_0(invertible) = 0, hence J subset I_e. The computation coker(e^*Phi) = R^1 pi_*(omega) tensor M_0^{-1} follows from the long exact sequence of 0 -> omega -> omega(Gamma) -> omega(Gamma)|_Gamma -> 0 twisted by pi^*M_0^{-1}, using R^1 pi_*(omega(Gamma) tensor pi^*M_0^{-1}) = 0 (fibrewise degree 2g-2+n > 2g-2). The trace isomorphism R^1 pi_* omega = O_B gives coker(e^*Phi) = M_0^{-1}, invertible. Fit_0 of an invertible sheaf is 0. This proves J subset I_e without any support argument, defeating the k[eps][x] counterexample template. Correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-2",
+      "note": "Step 4: The reverse inclusion I_e subset J is proved by a first-order length computation at every tangent direction followed by Nakayama. For nonzero xi in T_z P_b = H^1(C_k, O), the line bundle N_xi^{-1} on C_{k[eps]} fits in 0 -> O_{C_k} -> N_xi^{-1} -> O_{C_k} -> 0 (as O_{C_{k[eps]}}-modules, with O_{C_k} killed by eps). Tensoring with omega_{C_{k[eps]}/k[eps]} and taking cohomology gives 0 -> H^0(omega) -> H^0(omega tensor N_xi^{-1}) -> H^0(omega) --delta--> H^1(omega) -> H^1(omega tensor N_xi^{-1}) -> H^1(omega) -> 0, where delta is cup product with -xi. By Serre duality over k, delta is surjective (xi nonzero, pairing perfect), so coker(delta) = 0 and H^1(omega tensor N_xi^{-1}) maps isomorphically to H^1(omega) = k. Since H^1(omega) is killed by eps, so is H^1(omega tensor N_xi^{-1}), giving length 1 over k[eps]. Hence iota_xi^* J = Fit_0(k) = (eps). This shows the image of J spans (I_e/I_e^2) tensor k, and Nakayama over A = O_{B,b} gives I_e = J + I_e^2, then Nakayama over O_{P,z} gives I_e = J. Points off e(B) are handled by the fibrewise cokernel computation (4a). Correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-3",
+      "note": "Step 5: The filtered CE reduction uses only the filtration 0 -> W_4 -> W -> W_5 -> 0, never a splitting. Restriction to Gamma is exact (locally split sequence), pi_* on Gamma is exact (Gamma affine over B). The top row 0 -> pi_*W_4 -> pi_*W -> pi_*W_5 -> 0 is exact because R^1 pi_* W_4 = 0 (d_4 > 2g-2). coker(phi_4) = R^1 pi_*(W_4(-Gamma)) = 0 (d_4 - n > 2g-2, descended by base change plus Nakayama). Snake lemma gives coker(phi) = coker(phi_5), hence Fit_0(coker phi) = Fit_0(coker phi_5). The degree vanishings are cited explicitly per FND-0099. Correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-4",
+      "note": "Step 6: W_5(-Gamma) = omega tensor N^{-1} by line-bundle algebra (N = omega tensor W_5^vee(Gamma), fibrewise degree 0 by (D2)). Base change of coker Phi along a_N gives a_N^*(coker Phi) = R^1 pi_*(omega tensor N^{-1}) tensor M^{-1} = coker(phi_5) tensor M^{-1}. By (S6) (base change of Fitting ideals, invariance under twist by invertible), Fit_0(coker phi) = Fit_0(coker phi_5) = a_N^{-1}(J).O_B = a_N^{-1}(I_e).O_B (using CLM-0048-2). This is the ideal of a_N^{-1}(e(B)), so Z_ev = a_N^{-1}(e(B)) as closed subschemes. Equality of ideals, not point sets. Correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-5",
+      "note": "Step 6: T-point criterion. If N|_{C_T} = pi_T^*M' (relatively trivial), then coker(phi_T) = R^1 pi_{T*}(omega) tensor M'^{-1} = M'^{-1}, invertible, so Fit_0 = 0 and T -> B factors through Z_ev. Conversely, if T -> B factors through Z_ev, then Fit_0(coker phi_T) = 0, so a_{N_T}^{-1}(e(T)) = T, i.e. N|_{C_T} is relatively trivial. All constructions commute with arbitrary base change. The stack statement follows from smooth descent for quasi-coherent ideals: let X be a locally Noetherian algebraic stack with the data, u: U -> X a smooth surjection from a scheme. The ideal Fit_0(coker phi) pulls back to U and U x_X U, where the scheme-level theorem applies; quasi-coherent sheaves satisfy smooth descent, so the closed substack Z_ev is well-defined and represents relative triviality of N. Correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-6",
+      "note": "Step 7: For balanced tetragonal F fibrewise O(4) + O(5), q_*(F(-5)) is invertible (h^0 = 1, h^1 = 0 fibrewise) and commutes with base change. The counit q^*q_*(F(-5)) -> F(-5) is fibrewise the inclusion of O(0) into O(-1) + O(0), so L_5 := O(5) tensor q^*q_*(F(-5)) -> F has locally free cokernel L_4 (fibrewise O(4)). This gives 0 -> L_5 -> F -> L_4 -> 0, the relative Harder-Narasimhan filtration. Dualizing and twisting by O_{P(E^vee)}(2)|_C (using exactness of gamma^*, gamma finite flat) gives 0 -> W_4 -> W -> W_5 -> 0 with W_4 the sub (built from L_4^vee) and W_5 the quotient (built from L_5^vee). Correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-7",
+      "note": "Step 7: At (g,n) = (6,6), SRC-0004 Lemma 10.6 gives deg(W_f|_C) = 4g+12-4f, so d_4 = 20 (f=4) and d_5 = 16 (f=5). (D1): 20-6 = 14 > 10 = 2g-2. (D2): 16-6 = 10 = 2g-2. By (T1), pi_*W has rank 20+16+2-12 = 26, pi_*(W|_Gamma) has rank 12, so Fit_0(coker phi) = I_12(phi). N = omega tensor W_5^vee(Gamma) has fibrewise degree 10-16+6 = 0. Z_ev = a_N^{-1}(e(B)), i.e. scheme-theoretically the locus where O_C(Gamma) = W_5 tensor omega^{-1} relatively to B. Correct.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-07",
+  "finding_candidates": [],
+  "id": "REV-0092",
+  "independent": true,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "1e3a1a22512423c7acad51511c72eff81399395835c958486796871a4bc12a28",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Used only in Step 7 for the CE degree formula deg(W_f|_C) = 4g+12-4f and the convention W_f = (O_{P(E^vee)}(2) tensor gamma^*O(-f))|_C. This is a standard reference (Casnati-Ekedahl) and is correctly cited. The formula gives d_4 = 20, d_5 = 16 at g=6, which is used to verify (D1) and (D2) for the (6,6) balanced tetragonal instance. The attempt reproduces the computation inline and pins it with sha256 hashes. Steps 2-6 are unconditional (using only standard inputs S1-S8).",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0048-P2",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack targets Step 4b (the reverse inclusion I_e subset J), specifically the claim that H^1(C_{k[eps]}, omega tensor N_xi^{-1}) has length 1 over k[eps] for nonzero xi. The attack posits treating N_xi^{-1} as a rank-2 sheaf extension 0 -> O -> M -> O -> 0 and computing the long exact sequence in cohomology to yield H^1(omega tensor M) of length 3 rather than 1, which would give Fit_0 = 0 instead of (eps), breaking the conormal generation argument. However, this attack fails: N_xi^{-1} is a line bundle on C_{k[eps]} (rank 1, locally free over O_{C_{k[eps]}}), not a rank-2 extension. The correct exact sequence 0 -> O_{C_k} -> N_xi^{-1} -> O_{C_k} -> 0 is as O_{C_{k[eps]}}-modules with O_{C_k} killed by eps. Tensoring with omega_{C_{k[eps]}/k[eps]} (locally free over O_{C_{k[eps]}}) preserves exactness, yielding 0 -> omega_{C_k} -> omega tensor N_xi^{-1} -> omega_{C_k} -> 0. The connecting map delta: H^0(omega) -> H^1(omega) is surjective by Serre duality (xi nonzero, pairing perfect), so H^1(omega tensor N_xi^{-1}) maps isomorphically onto H^1(omega) = k. Since H^1(omega) is killed by eps, so is H^1(omega tensor N_xi^{-1}), confirming length 1 over k[eps] and Fit_0 = (eps). The attack is defeated and the proof stands.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B be a locally Noetherian scheme (no reducedness, irreducibility or characteristic hypothesis), pi : C -> B smooth proper with geometrically connected fibres of genus g >= 1, and x_1,...,x_n : B -> C pairwise disjoint sections with n >= 1, Gamma := sum_i x_i(B). Let W be locally free of rank 2 on C equipped with a short exact sequence of O_C-modules 0 -> W_4 -> W -> W_5 -> 0 with W_4, W_5 invertible of fibrewise degrees d_4, d_5 satisfying (D1) d_4 - n > 2g - 2 and (D2) d_5 - n = 2g - 2. Let phi : pi_*W -> pi_*(W|_Gamma) be evaluation, Z_ev := V(Fit_0(coker phi)) the Casnati-Ekedahl evaluation-failure locus with its determinantal/Fitting scheme structure, N := omega_{C/B} tensor W_5^vee(Gamma) (invertible of fibrewise degree 0 by (D2)), a_N : B -> Pic^0_{C/B} its classifying morphism and e the identity section. Then: (T1) pi_*W and pi_*(W|_Gamma) are locally free of ranks d_4 + d_5 + 2 - 2g and 2n, so Fit_0(coker phi) = I_{2n}(phi); (T2) on P := Pic^0_{C/B}, with L_univ := omega_{C_P/P}(Gamma_P) tensor Poin^{-1} and Phi : p_*L_univ -> p_*(L_univ|_{Gamma_P}) the universal evaluation, one has the exact equality of ideal sheaves J := Fit_0(coker Phi) = I_e, both inclusions, over every such B; (T3) Fit_0(coker phi) = Fit_0(coker phi_5) with phi_5 : pi_*W_5 -> pi_*(W_5|_Gamma), using only the filtration and never a splitting W = W_4 direct-sum W_5; (T4) Fit_0(coker phi) = a_N^{-1}(I_e).O_B, i.e. Z_ev = a_N^{-1}(e(B)) as closed subschemes of B; (T5) formation of both sides commutes with arbitrary base change, and for every locally Noetherian B-scheme T the map T -> B factors through Z_ev if and only if N|_{C_T} is relatively trivial (isomorphic to pi_T^*M for some invertible M on T), whence the identification descends verbatim to any locally Noetherian algebraic stack carrying this data, via any smooth atlas; and (T6) for (g,n) = (6,6) the balanced tetragonal Casnati-Ekedahl datum satisfies the hypotheses: with gamma : C -> P^1_B finite flat of degree 4, relations bundle F fibrewise O(4) direct-sum O(5), the canonical sub-line-bundle L_5 := O_{P^1}(5) tensor q^*q_*(F(-5)) subset F and its quotient L_4 induce a canonical filtration 0 -> W_4 -> W -> W_5 -> 0 of W := (O_{P(E^vee)}(2) tensor gamma^*F^vee)|_C with d_4 = 20 and d_5 = 16 (SRC-0004 Lemma 10.6 convention W_f = (O(2) tensor gamma^*O(-f))|_C), so that (D1) reads 14 > 10 and (D2) reads 10 = 2g-2, phi has ranks 26 -> 12, and Z_ev = a_N^{-1}(e(B)) with N = omega_{C/B} tensor W_5^vee(Gamma), equivalently Z_ev is the scheme-theoretic locus where O_C(Gamma) is isomorphic to W_5 tensor omega_{C/B}^{-1} relatively to B.",
+  "verdict": "confirmed"
+}
