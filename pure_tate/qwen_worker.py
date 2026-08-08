@@ -32,7 +32,10 @@ if str(PACKAGE_ROOT) not in sys.path:
 
 
 DEFAULT_BASE_URL = "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1"
-DEFAULT_MODEL = "qwen3.7-max"
+DEFAULT_MODEL = "qwen3.8-max"
+DEFAULT_REASONING_EFFORT = "xhigh"
+# reasoning_effort levels for Qwen3.8-Max: xhigh (default), medium, low.
+VALID_REASONING_EFFORTS = frozenset({"xhigh", "medium", "low"})
 # A Qwen task may make at most six model/tool rounds in total. Web-enabled
 # tasks reserve up to half for a short evidence docket and carry the remaining
 # budget into the final proof/audit stage.
@@ -472,10 +475,25 @@ def _consume_responses_sse(
     return payload
 
 
+def _normalize_reasoning_effort(value: Optional[str]) -> Optional[str]:
+    if value is None:
+        return None
+    text = str(value).strip().lower()
+    if not text:
+        return None
+    if text not in VALID_REASONING_EFFORTS:
+        raise ValueError(
+            "reasoning_effort must be one of %s (got %r)"
+            % (sorted(VALID_REASONING_EFFORTS), value)
+        )
+    return text
+
+
 def _request(
     *, api_key: str, model: str, messages: List[Dict[str, Any]], tools: List[Dict[str, Any]],
     max_tokens: int, thinking_budget: int, tool_choice: str = "auto",
     stage: str = "chat",
+    reasoning_effort: Optional[str] = None,
 ) -> Dict[str, Any]:
     body: Dict[str, Any] = {
         "model": model,
@@ -483,8 +501,14 @@ def _request(
         "temperature": 0,
         "max_tokens": max_tokens,
         "enable_thinking": True,
-        "thinking_budget": thinking_budget,
     }
+    # Qwen3.8-Max: reasoning_effort and thinking_budget are mutually exclusive.
+    # Prefer effort levels (xhigh/medium/low) when configured.
+    effort = _normalize_reasoning_effort(reasoning_effort)
+    if effort:
+        body["reasoning_effort"] = effort
+    else:
+        body["thinking_budget"] = thinking_budget
     if tools:
         body["tools"] = tools
         body["tool_choice"] = tool_choice
@@ -563,8 +587,9 @@ def _responses_request(
     timeout_seconds: Optional[int] = None,
     allow_tools: bool = True,
     stage: str = "responses",
+    reasoning_effort: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Call Qwen's Responses API, which exposes native web tools for 3.7 Max."""
+    """Call Qwen's Responses API, which exposes native web tools for Max models."""
     body: Dict[str, Any] = {
         "model": model,
         "input": input_items,
@@ -590,7 +615,12 @@ def _responses_request(
     body["tool_choice"] = "auto" if allow_tools else "none"
     if enable_thinking:
         body["enable_thinking"] = True
-        body["thinking"] = {"budget_tokens": thinking_budget}
+        # Same mutual exclusion as chat completions: effort OR budget, not both.
+        effort = _normalize_reasoning_effort(reasoning_effort)
+        if effort:
+            body["reasoning_effort"] = effort
+        else:
+            body["thinking"] = {"budget_tokens": thinking_budget}
     else:
         body["enable_thinking"] = False
     if previous_response_id:
@@ -832,6 +862,7 @@ def _run_web_evidence(
     model: str,
     max_tokens: int,
     thinking_budget: int,
+    reasoning_effort: Optional[str] = None,
 ) -> str:
     names = "\n".join("- " + path for path in sorted(allowlist)) or "- (none)"
     instructions = (
@@ -867,12 +898,14 @@ def _run_web_evidence(
                 previous_response_id=previous_response_id,
                 max_tokens=min(max_tokens, WEB_EVIDENCE_MAX_TOKENS),
                 thinking_budget=min(thinking_budget, WEB_EVIDENCE_THINKING_BUDGET),
-                # The Singapore Qwen3.7-Max endpoint requires thinking mode when
-                # web_extractor is present, even for a compact evidence docket.
+                # Max models require thinking mode when web_extractor is present,
+                # even for a compact evidence docket.
                 enable_thinking=True,
                 timeout_seconds=WEB_EVIDENCE_TIMEOUT_SECONDS,
                 allow_tools=not final_round,
                 stage=stage,
+                # Keep evidence stage cheap; final proof turn uses full effort.
+                reasoning_effort="low" if reasoning_effort else None,
             )
             previous_response_id = str(payload.get("id") or "") or None
             calls = _responses_function_calls(payload)
@@ -936,6 +969,7 @@ def _run_without_web(
     max_tokens: int,
     thinking_budget: int,
     max_tool_rounds: int = MAX_TOOL_ROUNDS,
+    reasoning_effort: Optional[str] = None,
 ) -> str:
     """Run the final task through Chat Completions and local bounded tools."""
     grok_pool: Optional[Any] = None
@@ -992,6 +1026,7 @@ def _run_without_web(
                 thinking_budget=thinking_budget,
                 tool_choice="none" if final_round else "auto",
                 stage=stage,
+                reasoning_effort=reasoning_effort,
             )
             choices = payload.get("choices")
             if not isinstance(choices, list) or not choices or not isinstance(choices[0], dict):
@@ -1059,11 +1094,13 @@ def run(
     allow_web: bool,
     max_tokens: int,
     thinking_budget: int,
+    reasoning_effort: Optional[str] = None,
 ) -> str:
     key = _api_key()
     if not key:
         raise RuntimeError("DASHSCOPE_API_KEY or QWEN_API_KEY is not set")
     allowlist = _allowlist(context_files)
+    effort = _normalize_reasoning_effort(reasoning_effort) or DEFAULT_REASONING_EFFORT
     final_tool_rounds = MAX_TOOL_ROUNDS
     if allow_web:
         try:
@@ -1074,6 +1111,7 @@ def run(
                 model=model,
                 max_tokens=max_tokens,
                 thinking_budget=thinking_budget,
+                reasoning_effort=effort,
             )
         except RuntimeError as exc:
             evidence = (
@@ -1099,6 +1137,7 @@ def run(
         max_tokens=max_tokens,
         thinking_budget=thinking_budget,
         max_tool_rounds=final_tool_rounds,
+        reasoning_effort=effort,
     )
 
 
@@ -1109,8 +1148,14 @@ def main() -> int:
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--allow-grok-workers", action="store_true")
     parser.add_argument("--allow-web", action="store_true")
-    parser.add_argument("--max-tokens", type=int, default=64000)
-    parser.add_argument("--thinking-budget", type=int, default=16384)
+    parser.add_argument("--max-tokens", type=int, default=65536)
+    parser.add_argument("--thinking-budget", type=int, default=65536)
+    parser.add_argument(
+        "--reasoning-effort",
+        default=DEFAULT_REASONING_EFFORT,
+        choices=sorted(VALID_REASONING_EFFORTS),
+        help="Qwen3.8 reasoning depth: xhigh (default), medium, or low",
+    )
     args = parser.parse_args()
     try:
         # Progress and artifact text are emitted as JSONL on stdout during the
@@ -1123,6 +1168,7 @@ def main() -> int:
             allow_web=args.allow_web,
             max_tokens=args.max_tokens,
             thinking_budget=args.thinking_budget,
+            reasoning_effort=args.reasoning_effort,
         )
         return 0
     except Exception as exc:  # noqa: BLE001 - subprocess error boundary

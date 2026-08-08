@@ -1,0 +1,135 @@
+{
+  "attempt_id": "ATT-0056",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0056-1",
+      "note": "Rank arithmetic \u03c7(W)=deg(det W)+2(1\u2212g)=36\u221210=26 and rank \u03c0_*(W|\u0393)=2n=12 is consistent with packet degrees deg W_4=20, deg W_5=16 and RR, but the asserted equality Fit_0(coker \u03c6)=I_12(\u03c6) as the scheme-theoretic rank-drop ideal is not re-proved in-workspace: the body cites stripped ATT-0048 CLM-0048-7 rather than deriving Fitting presentation from supplied SRC-0004/packet material.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0056-2",
+      "note": "Conditional pure arithmetic: for an e\u00d7f map the maximal-minor (rank \u2264 f\u22121) expected codimension is e\u2212f+1; with e=26,f=12 this is 15. No geometric load beyond the stated ranks.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0056-3",
+      "note": "Effective reduction to an 11\u00d76 problem with expected codim 6 needs coker(\u03c6_4)=0 and Fit_0(coker \u03c6)=Fit_0(coker \u03c6_5). Packet FND-0062/0097/0099 supply the geometric skeleton (f=4 obstruction degree \u22124; filtered form; degree vanishings for exactness of \u03c0_* and coker \u03c6_4), but the attempt does not re-check those vanishings or base-change/Nakayama descent; it outsources them to stripped ATT-0048 CLM-0048-3 and a global-splitting language that FND-0097 warns is strictly stronger than the filtration.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0056-4",
+      "note": "Theorem and CLM-0056-4 assert actual dim Z_ev=17 and codim_M=4. The only in-argument support is dominant-component arithmetic 15+2=17 via external sha256 hashes, while GAP-0056-H0STRAT and GAP-0056-COMPONENTS explicitly defer h^0-constancy, purity, components, and closure. Packet FND-0058 (constant h^0=3 required for pure dim 17/codim 4), FND-0069 (dominant component \u2260 global codim), and FND-0052 (balanced reduced-support model is an open piece, not a closed pure codim-4 subvariety) make the global actual-codimension claim undischarged; marking it 'proved' while recording those gaps is a failed proof of the checked claim.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0056-5",
+      "note": "Scheme-theoretic identity Fit_0(coker \u03c6)=a_N^{-1}(I_e) is not established in the supplied files: body cites ATT-0048 CLM-0048-4. Packet FND-0096 supports a universal Pic^0 determinantal lemma Fit_0=I_e for the Poincar\u00e9 bundle, but the CE identification that reduces \u03c6 to that universal map (deg N=0 / Step-4) is a C66-GEO-Z load, and FND-0046 forbids upgrading fibrewise Abel\u2013Jacobi equivalence to Fitting equality without scheme comparison. The non-transversality excess 6\u22124=2 further depends on the failed global codim-4 input.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0056-6",
+      "note": "RR side is sound: deg L=6, \u03c7(L)=1, h^0(L)=1+h^0(M), deg M=4 match packet bottleneck and FND-0073. What fails is the geometric promotion: fibre of Z_ev identified with |L|, Hurwitz base treated as dimension 15, and dominant-component h^0(L)=3 / P^2 fibre / total dim 17 taken from unreproduced sha256 computations. FND-0060 flags 15 as coarse Hurwitz dimension needing stabilizer analysis for stack-level codim in M_{6,6}; FND-0047/0058 block unqualified Proj/\u03c0_*L and constant fibre dimension without h^0 stratification.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "THM-DIM-AUT-BOOKKEEPING",
+      "note": "theorem_statement alone inserts '+ dim(Aut)' into the dimension count: 15+(h^0(L)\u22121)+dim(Aut) accounts for dim-17 when h^0(L)=3, forcing dim(Aut)=0, while CLM-0056-4/6 and body arithmetic write 15+2=17 with no Aut term and no stabilizer computation. This is stack-versus-coarse bookkeeping failure on a load-bearing dimension clause of the exact theorem_statement.",
+      "verdict": "failed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-08",
+  "finding_candidates": [
+    {
+      "adjudication": "candidate_supports_existing",
+      "evidence": "theorem_statement actual-dim clause; CLM-0056-4 status proved; GAP-0056-H0STRAT; GAP-0056-COMPONENTS; packet FND-0058/FND-0069/FND-0052.",
+      "key": "att0056-global-codim4-undischarged",
+      "severity": "high",
+      "statement": "ATT-0056's theorem_statement and CLM-0056-4 assert actual dim Z_ev=17 and codim 4 in M_{6,6} while the same artifact's GAP-0056-H0STRAT and GAP-0056-COMPONENTS defer h^0-constancy, purity, components, and closure; dominant-component arithmetic 15+2 is not a global codimension theorem.",
+      "supports_finding_id": "FND-0058"
+    },
+    {
+      "adjudication": "candidate_supports_existing",
+      "evidence": "theorem_statement Aut clause versus CLM-0056-6 and argument \u00a7\u00a73,5,7; packet FND-0060.",
+      "key": "att0056-stack-coarse-aut-term",
+      "severity": "high",
+      "statement": "The ATT-0056 theorem_statement dimension formula 15+(h^0(L)\u22121)+dim(Aut) is inconsistent with the body/claim arithmetic 15+2=17 and supplies no stabilizer computation; promoting coarse Hurwitz dimension 15 to a stack-level count inside M_{6,6} remains open.",
+      "supports_finding_id": "FND-0060"
+    },
+    {
+      "adjudication": "novel_candidate",
+      "evidence": "ingest_normalizations before/after; argument \u00a70; claims CLM-0056-1/3/5 justifications; proof_dependencies post-normalization [SRC-0004]; subproblem graph C66-COMP-RANK depends on C66-GEO-Z.",
+      "key": "att0056-stripped-geo-z-dependency",
+      "severity": "high",
+      "statement": "A C66-COMP-RANK computation that formally lists only SRC-0004 after ingest hygiene while every scheme-structure and rank-drop identification is justified by ATT-0048/REV-0091/REV-0092 has an undischarged C66-GEO-Z dependency; completion_attestation.no_undischarged_dependencies=true is false in substance."
+    },
+    {
+      "adjudication": "candidate_supports_existing",
+      "evidence": "CLM-0056-5; argument \u00a74; packet FND-0046 and FND-0096.",
+      "key": "att0056-fitting-vs-fibrewise",
+      "severity": "medium",
+      "statement": "Even granting geometric-point failure O_C(\u0393)\u2245L, ATT-0056's scheme-theoretic claim Fit_0(coker \u03c6)=a_N^{-1}(I_e) is not proved by fibrewise Abel\u2013Jacobi reasoning alone and requires the universal Fitting comparison plus the CE reduction to the Poincar\u00e9 bundle.",
+      "supports_finding_id": "FND-0046"
+    },
+    {
+      "adjudication": "candidate_supports_existing",
+      "evidence": "argument \u00a79 failed-routes paragraph; CLM-0056-4 excess clause; packet FND-0068.",
+      "key": "att0056-effective-excess-not-lci-claim",
+      "severity": "low",
+      "statement": "Recording effective determinantal excess 6\u22124=2 (or full excess 11) does not by itself yield a nowhere-lci or ideal-depth theorem; ATT-0056 correctly refrains from that upgrade, so excess arithmetic must not be read as local complete-intersection structure.",
+      "supports_finding_id": "FND-0068"
+    }
+  ],
+  "id": "REV-0097",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "6b4b42b636f0e796e965ad62cc58d8ef5037a28de50743ddf01e2ac9c2bfe034",
+  "principal_recovery": {
+    "at": "2026-08-08T03:03:12.890661+00:00",
+    "detail": "Grok wrote U+2286 SUBSET OF OR EQUAL TO (\u2286) where the task/attempt uses U+2282 SUBSET OF (\u2282) at the I_e ideal inclusion; rest identical.",
+    "from_trace": "TRACE-0030",
+    "normalized_verdict": "incomplete",
+    "note": "Official P1 for ATT-0056. TRACE-0029 sibling recovered then archived to avoid duplicate review_pass integrity error.",
+    "original_theorem_sha256_prefix": "c0af96b094c492ef",
+    "reason": "theorem_statement_string_mismatch_only",
+    "sibling_archived": "reports/runs/manual-recovery/ATT-0056-review-recover-20260808/REV-0096.schema-retry-sibling.json"
+  },
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "C66-GEO-Z",
+      "note": "Subproblem graph requires C66-GEO-Z. Attempt body and claims load ATT-0048 CLM-0048-1/3/4/6/7 (ranks, block decomposition, scheme structure a_N^{-1}(I_e), filtration degrees) and cite REV-0091/REV-0092, but those artifacts are absent from the review workspace and were stripped from formal proof_dependencies by ingest normalization, leaving the GEO-Z hand-off undischarged for independent verification.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Packet excerpt of Lemma 10.6 supplies deg W_{f_i}|_C=4g+12\u22124f_i and the obstruction-degree form 4f+n\u22122g\u221214; ATT-0056 uses this correctly for deg W_5=16 and deg M=4 bookkeeping. Non-load-bearing for the failed global dim/codim and Aut clauses.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0056-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Global actual-dimension attack (stack/coarse + purity): the exact theorem_statement asserts that the closed substack Z_ev has dimension 17 and codimension 4 in M_{6,6} (hence full excess 15\u22124=11 and non-transversality excess 6\u22124=2), but the argument only ever produces a dominant-component parameter count 15+2 from coarse Hurwitz dimension plus a P^2 fibre, while simultaneously recording GAP-0056-H0STRAT/COMPONENTS that h^0-constancy, purity, components, stabilizers, and closure are deferred. Packet FND-0058, FND-0069, FND-0052, and FND-0060 already mark pure codim-4 and stack-level promotion as undischarged; the theorem's extra '+ dim(Aut)' term, absent from body arithmetic and forcing an unproved dim(Aut)=0, makes the stack-versus-coarse fracture explicit. Scheme-theoretic a_N^{-1}(I_e) and Fit identities remain further unresolved because the load-bearing C66-GEO-Z/ATT-0048 dependency was stripped and is not in the supplied files.",
+  "subproblem_id": "C66-COMP-RANK",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "For the balanced tetragonal Casnati\u2013Ekedahl datum at (g,n)=(6,6), the evaluation map phi: pi_*W \u2192 pi_*(W|_Gamma) is a morphism of vector bundles of ranks 26 and 12 respectively. Its rank-drop ideal Fit_0(coker phi) = I_12(phi) (the ideal of 12\u00d712 maximal minors of a 26\u00d712 matrix) has expected determinantal codimension (26\u221211)(12\u221211) = 15 in the 21-dimensional ambient space M_{6,6}. The actual closed substack Z_ev it defines has dimension 17 and codimension 4 in M_{6,6}, yielding an excess dimension of 15\u22124 = 11 over the generic determinantal formula. The ideal is scheme-theoretically a_N^{-1}(I_e), the pullback of the codimension-6 identity-section ideal I_e \u2282 O_{Pic^0} along the classifying morphism a_N: B \u2192 Pic^0_{C/B} of the degree-zero line bundle N = \u03c9_{C/B} \u2297 W_5^\u2228(\u0393). The fibre of Z_ev over a geometric point of the balanced tetragonal Hurwitz base is the complete linear system |L| = |W_5 \u2297 \u03c9_C^{\u22121}| of degree-6 divisors, which has dimension h^0(L)\u22121 = h^0(\u03c9_C^{\u22972} \u2297 W_5^\u2228) \u2265 0, where deg(\u03c9_C^{\u22972} \u2297 W_5^\u2228) = 4. The relative fibre dimension over the 15-dimensional Hurwitz base is therefore h^0(L)\u22121, and the total dimension 15 + (h^0(L)\u22121) + dim(Aut) accounts for the 17-dimensional dominant component when h^0(L) = 3 (i.e. h^0(M) = 2 for M = \u03c9_C^{\u22972} \u2297 W_5^\u2228 of degree 4), consistent with the P^2-fibre structure of the residual Abel\u2013Jacobi incidence.",
+  "verdict": "incomplete"
+}

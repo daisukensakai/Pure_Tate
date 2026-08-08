@@ -1,0 +1,84 @@
+{
+  "campaign_id": "C66-001",
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "grok": "not_required",
+      "qwen": "pass"
+    },
+    "review": {
+      "grok": "not_required",
+      "qwen": "pass"
+    }
+  },
+  "events": [
+    {
+      "activity_bytes": 518360,
+      "artifact_sha256": "7fd8ceced6ff4aa2c03e84dbf496064c77c238c1c6b6b05beffdf54ff1b4d66d",
+      "completed_at": "2026-08-08T02:31:20.119540+00:00",
+      "engine": "qwen",
+      "engine_pid": 80905,
+      "engine_process_group": 80905,
+      "last_activity_at": "2026-08-08T02:31:20.030728+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0056.json",
+      "phase": "mathematics",
+      "processes": [
+        {
+          "engine_pid": 80905,
+          "engine_process_group": 80905,
+          "started_at": "2026-08-08T02:16:55.074261+00:00",
+          "supervisor_pid": 80904,
+          "supervisor_process_group": 80904
+        }
+      ],
+      "started_at": "2026-08-08T02:16:55.044390+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 80904,
+      "task_id": "TASK-C66-M-008",
+      "working_context": {
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-def9eb3ef6c036f1.md",
+          "sha256": "def9eb3ef6c036f1e22e1f708d5b27b47c47d372cc35c9f91130cb357b9c5bbc"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-7a483703948f9ea9.md",
+          "sha256": "7a483703948f9ea9e14a358b223001cc0472934d907b839e1b2f731b9d1302cf"
+        }
+      }
+    }
+  ],
+  "executed_steps": 1,
+  "pre_run_recoveries": [],
+  "recovered_stale_runs": [],
+  "requested_steps": 3,
+  "research_capability_states": {
+    "finding-audit": {
+      "grok": "pass",
+      "qwen": "pass"
+    },
+    "novelty": {
+      "grok": "pass",
+      "qwen": "pass"
+    }
+  },
+  "run_id": "RUN-C66-001-20260808T021654323809Z-80900",
+  "run_ledger": "reports/runs/RUN-C66-001-20260808T021654323809Z-80900.json",
+  "stop_reason": "validation_failure",
+  "unrecovered_validation_traces": []
+}

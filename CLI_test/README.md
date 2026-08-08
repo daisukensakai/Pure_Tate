@@ -24,6 +24,17 @@ Results land under `results/grok_workers/`. **Do not** put `spawn_subagent` in
 Grok `--tools` (allowlist collapse). Prefer MCP workers; see findings for the
 Grok `bypassPermissions` requirement.
 
+## Validation repair (exact-string mismatch)
+
+Offline probes for harness-owned field coerce + one feedback retry inside
+`run_task` when validation fails for mechanical reasons:
+
+```bash
+python3 CLI_test/run_validation_retry_probes.py
+```
+
+Results land under `results/validation_retry/`. See `VALIDATION_RETRY_FINDINGS.md`.
+
 ## Effort levels (Claude Max / Codex Sol Extra High)
 
 `run_effort_probes.py` validates the high-tier effort flags before harness

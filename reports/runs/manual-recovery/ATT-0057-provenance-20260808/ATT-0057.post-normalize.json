@@ -1,0 +1,338 @@
+{
+  "argument_markdown": "## Argument\n\n### 0. Dependency gate and evidence layer\nTASK.json has empty blocked_dependencies and dependency_artifacts C66-GEO-Z -> ATT-0048 with confirmation reviews REV-0091 and REV-0092. This attempt uses the GEO-Z dependency only through packet-adjudicated findings FND-0062, FND-0063, FND-0073, FND-0097, FND-0099 (all corroborated in C66-001-v4) and the mechanical established facts of the primary working context WORKING-7a483703948f9ea9; the artifact IDs ATT-0048, REV-0091, REV-0092 are cited as the dependency chain wherever the failure-locus input is used. Evidence limitation: the native web-evidence stage was bounded/unavailable and no web findings are used or invented; all inputs are local packet/working-context facts. The primary working context was read end-to-end before drafting; its constraints bind throughout.\n\n### 1. Setup and conventions\nWork fibrewise over algebraically closed characteristic-zero fields on smooth balanced tetragonal genus-six curves gamma: C -> P^1, with balanced splitting F = O(4) + O(5) on geometric fibres. Per the working-context constraint, no unframed family-level quantification of W_5 or L is performed; the only family statement (Section 6) is conditionalized on a framing gamma: C -> P^1_B. Use the canonical filtered CE reduction 0 -> W_4 -> W -> W_5 -> 0 (FND-0097), not a global splitting; on geometric fibres deg(W_f) = 4g+12-4f (SRC-0004 Lemma 10.6) gives deg(W_4)=20, deg(W_5)=16. Set L := W_5 tensor omega_C^{-1}. From the GEO-Z dependency (FND-0063; ATT-0048 confirmed by REV-0091 and REV-0092): for a degree-six divisor Gamma, the f=4 obstruction vanishes identically (degree -4) and CE evaluation fails at Gamma if and only if O_C(Gamma) ~= L. Hence |L| is the fibrewise model of the failure locus, and stratifying the relative degree-six system by h^0 is exactly C66-GEO-H0.\n\n### 2. Degree and Euler characteristic (proved)\ndeg(L) = deg(W_5) - deg(omega_C) = 16 - 10 = 6 (sha-pinned: 6f4294cbc7166beabebcf00a625753ea71d2e5e71e458ad128f6458235bc972b, ce77273eab522bac4faf80347983e07dcf456b8f0428b4476b838771c238d2b8). Riemann-Roch: chi(L) = deg(L) - g + 1 = 6 - 6 + 1 = 1 (sha-pinned: 04163abaf0c0cb0f9a01c1af0b5f8b4774b23b7d6d011917753e97c6ec10db6e, dc9dcf854e8555eb33fe36e3a270cb5986fe4bd6b200aaf79d572778afd6ad34). Thus h^0(L) = chi(L) + h^1(L) = 1 + h^1(L) >= 1 on every fibre. This is universal symbolic arithmetic, not a finite experiment.\n\n### 3. Serre-duality reparametrization (proved; reproduces FND-0073)\nSerre duality gives h^1(L) = h^0(omega_C tensor L^{-1}) = h^0(omega_C^{tensor 2} tensor W_5^{-1}) =: h^0(M), where M := omega_C^{tensor 2} tensor W_5^vee has degree 2(2g-2) - deg(W_5) = 20 - 16 = 4. Therefore h^0(L) = 1 + h^0(M). This re-proves the corroborated finding FND-0073 and, exactly as FND-0073 requires, uses no part of the identification W_5 ~= omega_C^2(-D).\n\n### 4. The stratification (proved from Section 3)\nFor every r >= 1, {s : h^0(L_s) >= r} = {s : h^0(M_s) >= r-1}. Bound: if h^0(M) > 0, write M ~= O_C(E) with E effective of degree 4; Riemann-Roch gives h^0(M) = h^0(omega_C(-E)) - 1. Since omega_C is base-point-free on a smooth curve, evaluation at any p in supp(E) is surjective on H^0(omega_C), so h^0(omega_C(-p)) = h^0(omega_C) - 1 = 5; as omega_C(-E) is a subsheaf of omega_C(-p), h^0(omega_C(-E)) <= 5, hence h^0(M) <= 4. Thus h^0(L) is in {1,2,3,4,5} and dim |L| = h^0(L)-1 is in {0,1,2,3,4}. The stratum where |L| is at least a net is {h^0(L) >= 3} = {h^0(M) >= 2}, a g^1_4-type Brill-Noether condition on the degree-4 bundle M; the jump strata to P^3 and P^4 are {h^0(M) >= 3} and {h^0(M) >= 4}. This is exactly the packet directive 'Stratify by h^0(W_5 tensor omega_C^{-1})' reduced to degree-4 Brill-Noether data, per FND-0073.\n\n### 5. Balanced specialization (source-backed, with explicit caveat)\nThe primary working context records as an established mechanical fact (relative duality: O_{P(E^vee)}(1)|_C = omega_C tensor gamma^*O(2), squared and tensored by gamma^*O(-5) with gamma^*O(1) = O_C(D)) that on a balanced tetragonal fibre with fibre divisor D, W_5 ~= omega_C^{tensor 2}(-D); hence L ~= omega_C(-D) and M ~= O_C(D) = gamma^*O_{P^1}(1). Pullback of sections along the surjective morphism gamma injects H^0(P^1, O(1)) (dimension 2) into H^0(C, O_C(D)), so h^0(M) >= 2 and therefore h^0(L) >= 3 everywhere on the balanced locus. The balanced strata are thus: h^0(L)=3 <=> h^0(O_C(D))=2 (the tetragonal pencil is exactly a g^1_4; |L| is a net with fibre P^2); h^0(L)=4 <=> h^0(O_C(D))=3; h^0(L)=5 <=> h^0(O_C(D))=4. Caveat: FND-0073 refers to W_5 ~= omega^2(-D) as the separate GAP-Z-W5D input; clause (iv) is therefore labelled source-backed (working-context established fact) rather than independently proved here, and clauses (i)-(iii) and (v) do not depend on it.\n\n### 6. Relative statement on constant strata (proved under framing; discharges FND-0047)\nFix a framed family gamma: C -> P^1_B over a reduced noetherian base B (a chosen O(1) on the target P^1-bundle), so that W_5 and L are globally defined line bundles; this conditionalization respects the constraint forbidding unframed family-level quantification of W_5/L. Let S_r subset B be a locally closed stratum, with reduced structure, on which h^0(L_s) = r is constant. Since chi(L_s) = 1 for all s, h^1(L_s) = r - 1 is also constant on S_r. By Grauert's cohomology-and-base-change theorem, pi_*L|_{S_r} is locally free of rank r and its formation commutes with base change; the relative complete linear system over S_r is the projective bundle of lines in pi_*L|_{S_r}, of relative dimension r-1, whose fibre over s is |L_s| = P(H^0(C_s, L_s)). Across jump walls no Proj(pi_*L) identification is asserted; the correct global object there is the compatible divisor/Hilbert or Abel-Jacobi incidence construction, as required by FND-0047. The numerical stratification function s -> h^0(L_s) itself is defined fibrewise and is independent of framing.\n\n### 7. Explicit non-claims and gaps\n- GAP-H0-1 (constancy/genericity): it is NOT proved that h^0(M)=2 constantly or generically on the balanced locus; the density/nonemptiness of the P^2 stratum and the codimensions of the jump strata h^0(L)>=4 are open (FND-0058 obligation; handed to C66-GEO-COMP). No dimension, purity, or generic-finiteness claim is made, avoiding the constrained '15+2=17 parameter count' route.\n- GAP-H0-2 (reduced support): nonemptiness of the reduced-support open, or of the ordered Conf_6 incidence, inside any stratum is NOT established from chi(L)=1 (FND-0083); on special fibres every member of |L| may be non-reduced.\n- GAP-H0-3 (scheme structure): no scheme-theoretic comparison of Fitting/determinantal and Abel-Jacobi incidence ideals along jump strata is made (FND-0046); the stratification is fibrewise/set-theoretic.\n- GAP-H0-4 (components/stabilizers): components, stabilizers, closure relations, and finite-etale S_6-cover behavior of the strata are deferred to C66-GEO-COMP per the subproblem DAG.\n\n### 8. Failed routes addressed\n- FND-0058 route (assert h^0 = 3 constantly to get a relative P^2-bundle of codimension 4): not walked; the P^2 stratum is characterized as the exact-pencil locus and constancy is recorded as a gap.\n- FND-0047 route (identify the relative linear system with Proj(pi_*L) while h^0 jumps): not walked; the projective-bundle description is restricted to constant-h^0 strata where cohomology-and-base-change hypotheses are verified.\n- FND-0083 route (deduce reduced-support/Conf_6 nonemptiness from chi(L)=1): not walked; explicitly disclaimed in GAP-H0-2.\n- Constraint 'parameter count 15+2=17 proves generic finiteness onto a pure codimension-4 component': avoided; no such claim appears.\n- Constraint 'quantifying the obstruction splitting, W_5, or L over the whole family rather than over geometric fibres': avoided by fibrewise statements plus the framing conditionalization in Section 6.\n- Blocked routes vcd-only-vanishing, undecorated-cgp-top-weight-graph-complex, point-count-without-degree-parity-separation, forgetful-map-renaming-local-system-unknown: none is used, and no new_inputs are declared for them.\n\n### 9. Separation of inputs\nProved steps: Sections 2, 3, 4, and 6 (Section 6 conditionalized on framing). Source-backed inputs: Section 5 (working-context mechanical established fact), FND-0063/FND-0073/FND-0097/FND-0099 (corroborated packet findings), SRC-0004 Lemma 10.6, and the GEO-Z dependency chain ATT-0048 with REV-0091/REV-0092. Computational hypotheses: none; the sha-pinned arithmetic entries are universal symbolic substitutions used only as pinned checks. Gaps: Section 7. No finite experiment is used to close any universal claim.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "cites": [
+        "SRC-0004"
+      ],
+      "claim_id": "CLM-H0-01",
+      "justification": "Substitution into deg(W_f)=4g+12-4f (SRC-0004 Lemma 10.6) and Riemann-Roch chi=deg-g+1; universal symbolic arithmetic, pinned by sha computations.",
+      "statement": "On every smooth balanced tetragonal genus-6 geometric fibre, deg(W_5)=16, deg(omega_C)=10, deg(L)=6 for L=W_5 tensor omega_C^{-1}, and chi(L)=1; hence h^0(L)>=1.",
+      "status": "proved"
+    },
+    {
+      "cites": [
+        "FND-0073"
+      ],
+      "claim_id": "CLM-H0-02",
+      "justification": "Serre duality h^1(L)=h^0(omega_C tensor L^{-1})=h^0(M), chi(L)=1, and degree arithmetic 2(2g-2)-deg(W_5)=20-16=4. Independently re-proves corroborated FND-0073 without using W_5 ~= omega^2(-D).",
+      "statement": "With M := omega_C^{tensor 2} tensor W_5^vee, deg(M)=4 and h^0(C,L) = 1 + h^0(C,M) on every such fibre.",
+      "status": "proved"
+    },
+    {
+      "cites": [],
+      "claim_id": "CLM-H0-03",
+      "justification": "Immediate from CLM-H0-02; the bound h^0(M)<=4 follows by writing M ~= O_C(E), E effective of degree 4, applying Riemann-Roch h^0(M)=h^0(omega_C(-E))-1, and using base-point-freeness of omega_C to get h^0(omega_C(-p))=5 for p in supp(E) with omega_C(-E) subset omega_C(-p).",
+      "statement": "For every r>=1, {s : h^0(L_s)>=r} = {s : h^0(M_s)>=r-1}; h^0(M)<=4, so h^0(L) is in {1,2,3,4,5}, dim |L_s| = h^0(L_s)-1, and the P^2 stratum {h^0(L)>=3} is exactly the relative g^1_4 locus {h^0(M)>=2} of M.",
+      "status": "proved"
+    },
+    {
+      "cites": [
+        "FND-0073"
+      ],
+      "claim_id": "CLM-H0-04",
+      "justification": "Working-context established mechanical fact (relative duality) for the identification; injectivity of gamma^*: H^0(P^1,O(1)) -> H^0(C,O_C(D)) proved here from surjectivity of gamma. Caveat: FND-0073 labels W_5 ~= omega^2(-D) as GAP-Z-W5D, so this clause is source-backed and clauses (i)-(iii),(v) do not depend on it.",
+      "statement": "On the balanced locus with fibre divisor D, W_5 ~= omega_C^{tensor 2}(-D), hence M ~= O_C(D)=gamma^*O_{P^1}(1) and L ~= omega_C(-D); h^0(M)>=2, so h^0(L)>=3 everywhere on the balanced locus, and the strata are h^0(L)=3 <=> h^0(O_C(D))=2, h^0(L)=4 <=> h^0(O_C(D))=3, h^0(L)=5 <=> h^0(O_C(D))=4.",
+      "status": "source-backed"
+    },
+    {
+      "cites": [
+        "FND-0047"
+      ],
+      "claim_id": "CLM-H0-05",
+      "justification": "chi(L)=1 makes h^1 constant exactly where h^0 is constant; Grauert cohomology-and-base-change then gives local freeness and base change. Framing conditionalization respects the no-family-level-W_5 constraint; jump walls handled per FND-0047.",
+      "statement": "Over a framed family gamma: C -> P^1_B with reduced noetherian base, on each reduced locally closed stratum S_r where h^0(L_s)=r is constant, pi_*L|_{S_r} is locally free of rank r commuting with base change and the relative complete linear system over S_r is the projective bundle of lines in pi_*L|_{S_r}, of relative dimension r-1; no Proj(pi_*L) identification is asserted across jump walls.",
+      "status": "proved"
+    },
+    {
+      "cites": [
+        "FND-0058"
+      ],
+      "claim_id": "CLM-H0-06",
+      "justification": "FND-0058 obligation; handed to C66-GEO-COMP. No dimension/purity/generic-finiteness claim is made, avoiding the constrained 15+2=17 parameter-count route.",
+      "statement": "Constancy or genericity of h^0(M)=2 on the balanced locus (density/nonemptiness of the P^2 stratum and expected codimensions of jump strata) is not established.",
+      "status": "gap"
+    },
+    {
+      "cites": [
+        "FND-0083"
+      ],
+      "claim_id": "CLM-H0-07",
+      "justification": "FND-0083: chi(L)=1 only forces a nonempty full Abel-Jacobi fibre in Sym^6; all members may be non-reduced on special fibres.",
+      "statement": "Nonemptiness of the reduced-support open, or of the ordered Conf_6 incidence, inside any h^0-stratum is not established from chi(L)=1.",
+      "status": "gap"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": false,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "qwen",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "FND-0058 route (assert h^0(omega(-D))=3 constantly to obtain a relative P^2-bundle and codimension 4): not walked; the P^2 stratum is characterized as {h^0(O_C(D))=2} and constancy is recorded as GAP-H0-1."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "FND-0047 route (identify the relative linear system with Proj(pi_*L) while h^0 jumps): not walked; projective-bundle description restricted to constant-h^0 strata with verified cohomology-and-base-change hypotheses."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "FND-0083 route (conclude reduced-support/Conf_6 nonemptiness from chi(L)=1): not walked; explicitly disclaimed in GAP-H0-2."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Constraint 'parameter count 15+2=17 proves generic finiteness onto a pure codimension-4 component': avoided; no dimension, purity, or generic-finiteness claim is made."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Constraint 'quantifying the obstruction splitting, W_5, or L over the whole family rather than over geometric fibres': avoided by fibrewise statements and framing conditionalization in the relative clause."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Blocked routes vcd-only-vanishing, undecorated-cgp-top-weight-graph-complex, point-count-without-degree-parity-separation, forgetful-map-renaming-local-system-unknown: none used; no new_inputs declared."
+    }
+  ],
+  "gap_markers": [
+    {
+      "description": "Constancy/genericity of h^0(M)=2 on the balanced locus (nonemptiness/density of the P^2 stratum, expected codimensions of jump strata) is not proved; required downstream for the relative P^2-bundle/codimension-4 picture (FND-0058). Owner: C66-GEO-COMP.",
+      "id": "GAP-H0-1",
+      "severity": "high"
+    },
+    {
+      "description": "Nonemptiness of the reduced-support open / ordered Conf_6 incidence inside any stratum is not established from chi(L)=1 (FND-0083); special fibres may carry only non-reduced members.",
+      "id": "GAP-H0-2",
+      "severity": "medium"
+    },
+    {
+      "description": "Scheme-theoretic (Fitting/determinantal vs Abel-Jacobi) structure along jump strata is not compared (FND-0046); the stratification is fibrewise/set-theoretic.",
+      "id": "GAP-H0-3",
+      "severity": "medium"
+    },
+    {
+      "description": "Components, stabilizers, closure relations, and S_6-cover behavior of the strata are deferred to C66-GEO-COMP per the subproblem DAG.",
+      "id": "GAP-H0-4",
+      "severity": "medium"
+    },
+    {
+      "description": "Clause (iv) relies on the working-context established identification W_5 ~= omega^2(-D), which FND-0073 labels GAP-Z-W5D; clauses (i)-(iii) and (v) are independent of it.",
+      "id": "GAP-H0-5",
+      "severity": "low"
+    }
+  ],
+  "id": "ATT-0057",
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "identifiers": [
+        "SRC-0004-Lemma-10.6"
+      ],
+      "moved_from": "source_claim_ids",
+      "moved_to": "source_ids",
+      "rule": "SOURCE-REFERENCE-SPLIT-0001"
+    },
+    {
+      "at": "2026-08-08T04:37:00.500206+00:00",
+      "claim_cite_drops": [
+        {
+          "claim_id": "CLM-H0-01",
+          "dropped": "sha:6f4294cbc7166beabebcf00a625753ea71d2e5e71e458ad128f6458235bc972b"
+        },
+        {
+          "claim_id": "CLM-H0-01",
+          "dropped": "sha:ce77273eab522bac4faf80347983e07dcf456b8f0428b4476b838771c238d2b8"
+        },
+        {
+          "claim_id": "CLM-H0-01",
+          "dropped": "sha:04163abaf0c0cb0f9a01c1af0b5f8b4774b23b7d6d011917753e97c6ec10db6e"
+        },
+        {
+          "claim_id": "CLM-H0-01",
+          "dropped": "sha:dc9dcf854e8555eb33fe36e3a270cb5986fe4bd6b200aaf79d572778afd6ad34"
+        },
+        {
+          "claim_id": "CLM-H0-04",
+          "dropped": "WORKING-7a483703948f9ea9"
+        }
+      ],
+      "dropped_source_claim_ids": [
+        "sha:6f4294cbc7166beabebcf00a625753ea71d2e5e71e458ad128f6458235bc972b",
+        "sha:ce77273eab522bac4faf80347983e07dcf456b8f0428b4476b838771c238d2b8",
+        "sha:04163abaf0c0cb0f9a01c1af0b5f8b4774b23b7d6d011917753e97c6ec10db6e",
+        "sha:dc9dcf854e8555eb33fe36e3a270cb5986fe4bd6b200aaf79d572778afd6ad34",
+        "sha:0a749db765a4f0dbac4708d2dd3de1e406f25c54511d5cc9a8d72a152d0a049e"
+      ],
+      "dropped_source_ids": [
+        "C66-001-v4",
+        "ATT-0048",
+        "REV-0091",
+        "REV-0092",
+        "WORKING-7a483703948f9ea9",
+        "SRC-0004-Lemma-10.6"
+      ],
+      "kept_source_claim_ids": [
+        "FND-0063",
+        "FND-0073",
+        "FND-0097",
+        "FND-0099",
+        "FND-0047",
+        "FND-0058",
+        "FND-0083",
+        "FND-0046"
+      ],
+      "kept_source_ids": [
+        "SRC-0004"
+      ],
+      "reason": "Qwen3.8-max@xhigh math turn produced a sound proposed C66-GEO-H0 lemma but polluted source_claim_ids with sha: computation pins and source_ids with packet/attempt/review/working-context path labels. Principal normalization keeps only corroborated FND-* / canonical claim ids and known SRC-* bibliographic sources so structural integrity can clear.",
+      "rule": "PRINCIPAL-PROVENANCE-NORMALIZE-0001"
+    }
+  ],
+  "lane": "geometry",
+  "methods_used": [
+    "filtered-ce-reduction",
+    "riemann-roch",
+    "serre-duality",
+    "degree-four-brill-noether-stratification",
+    "base-point-freeness-of-canonical-bundle",
+    "cohomology-and-base-change-grauert"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "First gap-audited h^0-stratification of the residual degree-six system for the (6,6) balanced tetragonal CE bottleneck: reparametrizes the stratification as degree-4 Brill-Noether stratification of M = omega^2 tensor W_5^vee (independent re-proof of FND-0073), identifies the P^2 stratum with the exact-pencil locus {h^0(O_C(D))=2}, and provides a projective-bundle description on constant-h^0 strata under framing.",
+    "Explicitly discharges the FND-0047, FND-0058, and FND-0083 warnings by conditionalization and recorded gaps instead of silently reusing the corresponding dead routes, and respects the no-family-level-W_5/L constraint via fibrewise statements plus framing."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "6b4b42b636f0e796e965ad62cc58d8ef5037a28de50743ddf01e2ac9c2bfe034",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0048",
+      "kind": "attempt",
+      "role": "C66-GEO-Z dependency attempt: construction/identification of the evaluation-failure locus Z; used here only through packet-adjudicated findings (FND-0062, FND-0063, FND-0073, FND-0097, FND-0099) and working-context established facts."
+    },
+    {
+      "id": "REV-0091",
+      "kind": "confirmation_review",
+      "role": "Confirmation review of ATT-0048; cited as part of the required dependency verification chain."
+    },
+    {
+      "id": "REV-0092",
+      "kind": "confirmation_review",
+      "role": "Confirmation review of ATT-0048; cited as part of the required dependency verification chain."
+    },
+    {
+      "id": "FND-0063",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated: f=5 obstruction degree 0; evaluation fails iff O_C(Gamma) ~= L = W_5 tensor omega^{-1}. Motivates |L| as the fibrewise failure model to stratify."
+    },
+    {
+      "id": "FND-0073",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated: h^0(L)=1+h^0(M) with deg M=4, independent of GAP-Z-W5D; re-proved here and used as the stratification engine."
+    },
+    {
+      "id": "FND-0097",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated: canonical filtered CE reduction 0 -> W_4 -> W -> W_5 -> 0 replaces any global splitting hypothesis."
+    },
+    {
+      "id": "FND-0099",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated: degree vanishings (deg W_4=20 > 2g-2=10) underwriting the filtered CE reduction at (6,6)."
+    },
+    {
+      "id": "FND-0047",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated warning: relative linear system not identifiable with Proj(pi_*L) at h^0 jumps; discharged by restricting to constant-h^0 strata with base-change hypotheses."
+    },
+    {
+      "id": "FND-0058",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated warning: constancy h^0(omega(-D))=3 on the balanced locus is unproved; recorded as GAP-H0-1, not asserted."
+    },
+    {
+      "id": "FND-0083",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated warning: chi(L)=1 does not prove reduced-support/Conf_6 nonemptiness; recorded as GAP-H0-2, not asserted."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "role": "Lemma 10.6: deg(W_f|_C)=4g+12-4f and direct-sum decomposition of the CE obstruction space."
+    }
+  ],
+  "recovery": {
+    "classification": "principal_provenance_normalization",
+    "engine": "qwen",
+    "model": "qwen3.8-max",
+    "normalized_at": "2026-08-08T04:37:00.500206+00:00",
+    "parent_run_id": "RUN-C66-001-20260808T034842884254Z-84678",
+    "pre_normalize_archive": "reports/runs/manual-recovery/ATT-0057-provenance-20260808/ATT-0057.pre-normalize.json",
+    "pre_normalize_sha256": "88dc0d9298e3e254c7589f62d44e07d22fb7855802a368f3c587b00345937327",
+    "principal_override": true,
+    "protect_from_overwrite": true,
+    "reason": "Qwen3.8-max@xhigh math turn produced a sound proposed C66-GEO-H0 lemma but polluted source_claim_ids with sha: computation pins and source_ids with packet/attempt/review/working-context path labels. Principal normalization keeps only corroborated FND-* / canonical claim ids and known SRC-* bibliographic sources so structural integrity can clear.",
+    "reasoning_effort": "xhigh"
+  },
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0063",
+    "FND-0073",
+    "FND-0097",
+    "FND-0099",
+    "FND-0047",
+    "FND-0058",
+    "FND-0083",
+    "FND-0046"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-H0",
+  "summary": "Stratifies the residual degree-six linear system |L|, L = W_5 tensor omega^{-1}, of the balanced tetragonal (6,6) CE bottleneck by h^0: proves h^0(L) = 1 + h^0(M) with M = omega^2 tensor W_5^vee of degree 4 (re-proving FND-0073), so the h^0-stratification is exactly degree-4 Brill-Noether stratification of M shifted by one; on the balanced locus M ~= O_C(D) gives h^0(L)>=3 and identifies the P^2 stratum with the exact-pencil locus h^0(O_C(D))=2; gives a projective-bundle description on constant-h^0 strata under framing while discharging FND-0047/FND-0058/FND-0083 warnings. Leaves constancy, codimensions, components/stabilizers, and reduced-support nonemptiness to C66-GEO-COMP. Evidence limitation: web-evidence stage was bounded/unavailable; no web findings used; dependency ATT-0048 and reviews REV-0091/REV-0092 are used only through packet-adjudicated findings and primary working-context established facts.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-002",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "Theorem (h0-stratification of the residual degree-six system, C66-GEO-H0). Let k be algebraically closed of characteristic zero and let gamma: C -> P^1_k be a smooth balanced tetragonal genus-six curve. Let 0 -> W_4 -> W -> W_5 -> 0 be the canonical filtered Casnati-Ekedahl reduction (FND-0097), with deg(W_5)=16 on the geometric fibre, and set L := W_5 tensor omega_C^{-1}. Then: (i) deg(L)=6 and chi(L)=1, hence h^0(C,L)>=1. (ii) With M := omega_C^{tensor 2} tensor W_5^vee, one has deg(M)=4 and h^0(C,L) = 1 + h^0(C,M). (iii) Consequently, in any family of such geometric fibres, the h^0(L)-stratification is the Brill-Noether stratification of the degree-4 bundle M shifted by one: {s : h^0(L_s)>=r} = {s : h^0(M_s)>=r-1} for all r>=1; moreover h^0(M)<=4, so h^0(L) is in {1,2,3,4,5} and dim |L_s| = h^0(L_s)-1; the P^2 stratum {h^0(L)>=3} is exactly the relative g^1_4 locus {h^0(M)>=2} of M. (iv) On the balanced locus with fibre divisor D, using the working-context established fibrewise identity W_5 ~= omega_C^{tensor 2}(-D), one has M ~= O_C(D) = gamma^*O_{P^1}(1) and L ~= omega_C(-D); since gamma^* injects H^0(P^1,O(1)) into H^0(C,O_C(D)), h^0(M)>=2 and h^0(L)>=3 everywhere on the balanced locus, and the strata are exactly h^0(L)=3 <=> h^0(O_C(D))=2 (exact-pencil locus, |L| a net), h^0(L)=4 <=> h^0(O_C(D))=3, h^0(L)=5 <=> h^0(O_C(D))=4. (v) Over any framed family gamma: C -> P^1_B (so that O(1), hence W_5 and L, are globally defined) and any reduced locally closed stratum S_r on which h^0(L_s)=r is constant, pi_*L|_{S_r} is locally free of rank r with formation commuting with base change (Grauert), and the relative complete linear system over S_r is the projective bundle of lines in pi_*L|_{S_r} of relative dimension r-1; no Proj(pi_*L) identification is asserted across jump walls (FND-0047). Not claimed: constancy of h^0(M)=2 on the balanced locus, dimensions/codimensions/components/stabilizers of jump strata, and nonemptiness of reduced-support opens."
+}

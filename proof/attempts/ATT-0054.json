@@ -215,7 +215,6 @@
   "packet_id": "C66-001-v4",
   "packet_path": "proof/packets/generated/C66-001-v4.md",
   "packet_sha256": "1e3a1a22512423c7acad51511c72eff81399395835c958486796871a4bc12a28",
-  "paired_turn_kind": "standard-fallback",
   "proof_dependencies": [
     "SRC-0004",
     "FND-0046",
@@ -242,6 +241,15 @@
   ],
   "recovery": {
     "classification": "manual_session_wrapup_prompt_inject",
+    "integrity_repair": {
+      "action": "demote_incomplete_manual_standard_fallback_to_ordinary_attempt",
+      "at": "2026-08-08T01:04:34.804736+00:00",
+      "principal_override": true,
+      "reason": "Manual wrap-up ingest of abandoned standard-fallback (parent ATT-0053 never written; run abandoned). Artifact lacked paired_attempt_policy_revision and observable_trace_id, blocking structural integrity. Demoted from paired-turn contract; resume vault remains at recovery.resume_stdout.",
+      "removed_fields": [
+        "paired_turn_kind"
+      ]
+    },
     "parent_attempt_id": "ATT-0053",
     "parent_run_id": "RUN-C66-001-20260807T233937839509Z-47462",
     "parent_session_id": "0ed298f0-69cd-4513-92da-00f4c5bffa01",

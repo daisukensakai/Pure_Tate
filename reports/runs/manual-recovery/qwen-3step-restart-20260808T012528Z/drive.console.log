@@ -1,0 +1,152 @@
+{
+  "campaign_id": "C66-001",
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "qwen": "pass"
+    },
+    "review": {
+      "claude": "not_required",
+      "qwen": "pass"
+    }
+  },
+  "events": [
+    {
+      "activity_bytes": 715604,
+      "artifact_sha256": "0396cff352c6503a68c7b98610b48555dd449826a6574f227eef938bc6f600a1",
+      "completed_at": "2026-08-08T01:38:50.838469+00:00",
+      "engine": "qwen",
+      "engine_pid": 54706,
+      "engine_process_group": 54706,
+      "last_activity_at": "2026-08-08T01:38:50.626164+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/reviews/REV-0095.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 54706,
+          "engine_process_group": 54706,
+          "started_at": "2026-08-08T01:25:29.261544+00:00",
+          "supervisor_pid": 54705,
+          "supervisor_process_group": 54705
+        }
+      ],
+      "started_at": "2026-08-08T01:25:29.234333+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 54705,
+      "task_id": "TASK-V-ATT-0054-P1"
+    },
+    {
+      "activity_bytes": 98155,
+      "completed_at": "2026-08-08T01:41:20.028014+00:00",
+      "engine": "qwen",
+      "engine_pid": 71317,
+      "engine_process_group": 71317,
+      "error": "finding audit has invalid verdict",
+      "last_activity_at": "2026-08-08T01:41:19.881296+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0096.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 71317,
+          "engine_process_group": 71317,
+          "started_at": "2026-08-08T01:38:52.154354+00:00",
+          "supervisor_pid": 71316,
+          "supervisor_process_group": 71316
+        }
+      ],
+      "started_at": "2026-08-08T01:38:52.123818+00:00",
+      "state": "failed",
+      "step": 2,
+      "supervisor_pid": 71316,
+      "task_id": "TASK-F-FND-0102",
+      "trace_id": "TRACE-0028",
+      "trace_path": "research/paired-traces/TRACE-0028.json",
+      "trace_sha256": "1f1ad10dcf4f8761d38305199ebef047beff1aa45031854c2ddd7188e880e02b"
+    },
+    {
+      "activity_bytes": 127353,
+      "artifact_sha256": "b146a5641a92d1768de0fd8e1c8addd932097ed17e14e72c5928e52e14c4f07a",
+      "completed_at": "2026-08-08T01:44:44.273358+00:00",
+      "engine": "qwen",
+      "engine_pid": 74303,
+      "engine_process_group": 74303,
+      "last_activity_at": "2026-08-08T01:44:44.004942+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0097.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 74303,
+          "engine_process_group": 74303,
+          "started_at": "2026-08-08T01:41:21.308500+00:00",
+          "supervisor_pid": 74301,
+          "supervisor_process_group": 74301
+        }
+      ],
+      "started_at": "2026-08-08T01:41:21.283932+00:00",
+      "state": "completed",
+      "step": 3,
+      "supervisor_pid": 74301,
+      "task_id": "TASK-F-FND-0102"
+    }
+  ],
+  "executed_steps": 3,
+  "pre_run_recoveries": [],
+  "recovered_stale_runs": [],
+  "requested_steps": 3,
+  "research_capability_states": {
+    "finding-audit": {
+      "qwen": "pass"
+    },
+    "novelty": {
+      "qwen": "pass"
+    }
+  },
+  "run_id": "RUN-C66-001-20260808T012528687093Z-54682",
+  "run_ledger": "reports/runs/RUN-C66-001-20260808T012528687093Z-54682.json",
+  "stop_reason": "step_limit_with_failures",
+  "unrecovered_validation_traces": []
+}

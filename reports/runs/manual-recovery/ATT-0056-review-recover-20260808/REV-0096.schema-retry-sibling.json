@@ -1,0 +1,138 @@
+{
+  "archived_from_live_reviews": {
+    "at": "2026-08-08T03:04:05.114562+00:00",
+    "live_official_review": "REV-0097",
+    "reason": "Duplicate review_pass=1 with REV-0097 after dual recovery of same schema-failure retry pair; live ledger allows one pass number per attempt."
+  },
+  "attempt_id": "ATT-0056",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim": "phi is a morphism of vector bundles of ranks 26\u219212 with Fit_0(coker phi)=I_12(phi).",
+      "claim_id": "CLM-0056-1",
+      "note": "Load-bearing ranks and Fitting identification are justified only by stripped ATT-0048 CLM-0048-1/7. After ingest hygiene the sole surviving dependency is SRC-0004 Lemma 10.6, which supplies deg(W_f)=4g+12-4f and Serre-duality degree inequalities, not freeness of pi_*W, rank 26, or Fit_0=I_12. Arithmetic 20+16+2\u221212=26 is contingent on those undischarged bundle-structure inputs.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim": "Expected determinantal codimension of the maximal-minor locus of a 26\u00d712 map is (26\u221211)(12\u221211)=15.",
+      "claim_id": "CLM-0056-2",
+      "note": "Conditional arithmetic: the formula (e\u2212k)(f\u2212k) with e=26,f=12,k=11 is standard and correctly evaluated to 15. This does not establish that the actual CE locus realises that generic expectation or that the ambient is M_{6,6}.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Block decomposition reduces to an effective 11\u00d76 problem with expected codimension 6 and I_12(phi)=I_6(phi_5).",
+      "claim_id": "CLM-0056-3",
+      "note": "Cites ATT-0048 CLM-0048-3 for coker(phi)=coker(phi_5) and uses local splitting language. Filtered reduction needs explicit R^1 pi_*W_4=0 and coker(phi_4)=0 with base-change (packet FND-0099); global splitting is not free over a general base (FND-0097). Not proved from SRC-0004 alone.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim": "Actual closed substack Z_ev has dimension 17 and codimension 4 in M_{6,6} (excess 6\u22124=2 / 15\u22124=11).",
+      "claim_id": "CLM-0056-4",
+      "note": "Theorem asserts pure closed dim-17/codim-4 in M_{6,6}, while GAP-0056-COMPONENTS and argument \u00a78\u20139 defer purity, components, closure, and stabilizers. Dimension count is only Hurwitz base + P^2 fibre for a dominant component (FND-0069). Balanced reduced-support model is an open piece, not a closed pure-codim-4 subvariety of M_{6,6} (FND-0052). Mono of the balanced CE model into M_{6,6} is not established (FND-0098). Pure dim 17 requires constant h^0=3 on the whole balanced locus (FND-0058), which GAP-0056-H0STRAT leaves open.",
+      "verdict": "failed"
+    },
+    {
+      "claim": "Scheme-theoretic ideal is a_N^{-1}(I_e) with I_e of codimension g=6; non-transversality excess 6\u22124=2.",
+      "claim_id": "CLM-0056-5",
+      "note": "Only cited from stripped ATT-0048 CLM-0048-4. Fibrewise CE obstruction \u2194 O(\u0393)\u2245L does not give scheme-theoretic Fitting equality without a Fitting/determinantal comparison over the base (FND-0046). Universal Fit_0=I_e for the Pic^0 evaluation map (FND-0096) still needs the CE identification arranging deg N=0 and the Step-4 identification with W_5, not proved here. Excess 6\u22124 uses the failed pure-codim-4 input.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim": "Fibre over Hurwitz is |L| with deg L=6, \u03c7(L)=1, h^0(L)=1+h^0(M), deg M=4; on dominant component h^0(L)=3 so 15+2=17.",
+      "claim_id": "CLM-0056-6",
+      "note": "RR/Serre arithmetic \u03c7(L)=1, deg M=4, h^0(L)=1+h^0(M) is standard and aligned with FND-0073, and SRC-0004 supports the degree inputs. The geometric fibre identification as complete |L|, the claim that the Hurwitz base is 15-dimensional at stack level, and the dominant-component P^2 fibre are not proved in this artifact (external sha256 / established-fact citations only). Constancy of h^0(L)=3 is explicitly deferred (GAP-0056-H0STRAT; FND-0058, FND-0047).",
+      "verdict": "unresolved"
+    },
+    {
+      "claim": "Total dimension 15+(h^0(L)\u22121)+dim(Aut) accounts for the 17-dimensional dominant component when h^0(L)=3.",
+      "claim_id": "THM-AUT-TERM",
+      "note": "With h^0(L)=3 the literal sum is 15+2+dim(Aut)=17 only if dim(Aut)=0. The body arithmetic uses bare 15+2=17 with no Aut term. The 15 is the coarse branched-cover dimension mod Aut(P^1) (FND-0060); inserting +dim(Aut) either double-counts or silently forces trivial stabilizers without analysis. Stack versus coarse moduli bookkeeping is not discharged.",
+      "verdict": "failed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-08",
+  "finding_candidates": [
+    {
+      "candidate_key": "ATT-0056-theorem-gap-codim4-conflict",
+      "evidence": "ATT-0056 theorem_statement (closed substack dim 17/codim 4) vs GAP-0056-COMPONENTS, GAP-0056-H0STRAT, and argument \u00a78\u20139; aligns with FND-0052/0058/0069.",
+      "key": "a-c66-comp-rank-theorem-statement-that-asserts-z-ev-is-a-closed-substack-of-pure",
+      "severity": "high",
+      "statement": "A C66-COMP-RANK theorem_statement that asserts Z_ev is a closed substack of pure dimension 17 and codimension 4 in M_{6,6}, while the same artifact\u2019s gap markers and separation-of-status section defer component structure, purity, smoothness, stabilizers, and closure, has not proved those dimension/codimension clauses; the clauses must be conditionalized to a dominant component or moved out of the theorem until C66-GEO-H0/C66-GEO-COMP discharge them.",
+      "supports_finding_id": "FND-0058"
+    },
+    {
+      "candidate_key": "ATT-0056-aut-term-stack-coarse",
+      "evidence": "ATT-0056 theorem_statement formula 15+(h^0(L)-1)+dim(Aut) versus body arithmetic 15+2=17; FND-0060 coarse-vs-stack warning.",
+      "key": "inserting-an-unanalyzed-dim-aut-into-a-dimension-count-that-already-uses-the-c",
+      "severity": "high",
+      "statement": "Inserting an unanalyzed +dim(Aut) into a dimension count that already uses the coarse Hurwitz dimension 15 (=dim M_{0,18}) to reach total 17 is inconsistent: with fibre dimension 2 the sum forces dim(Aut)=0 or double-counts automorphisms. Stack-level codimension statements inside M_{6,6} require stabilizer analysis, not an ad-hoc Aut summand.",
+      "supports_finding_id": "FND-0060"
+    },
+    {
+      "candidate_key": "ATT-0056-stripped-geoz-fitting",
+      "evidence": "ATT-0056 ingest_normalizations stripping ATT-0048; remaining proof_dependencies=[SRC-0004]; CLM-0056-1/5 still status proved via ATT-0048 citations; FND-0046 geometric-points vs Fitting.",
+      "key": "after-citation-hygiene-removes-attempt-review-ids-from-proof-dependencies-a-com",
+      "severity": "high",
+      "statement": "After citation hygiene removes attempt/review IDs from proof_dependencies, a computation artifact that still marks ranks 26\u219212, Fit_0=I_12, and scheme-theoretic Z_ev=a_N^{-1}(e(B)) as proved, while retaining only SRC-0004, has undischarged C66-GEO-Z content: SRC-0004 Lemma 10.6 does not identify Fitting ideals or Abel\u2013Jacobi scheme structure.",
+      "supports_finding_id": "FND-0046"
+    },
+    {
+      "candidate_key": "ATT-0056-mono-ambient-M66",
+      "evidence": "ATT-0056 theorem places expected codim 15 and actual codim 4 in M_{6,6}; no mono/faithfulness argument; FND-0098.",
+      "key": "reporting-expected-and-actual-determinantal-codimension-of-the-ce-evaluation-fit",
+      "severity": "medium",
+      "statement": "Reporting expected and actual determinantal codimension of the CE evaluation Fitting locus as codimensions inside ambient M_{6,6} requires a well-defined closed image of Z_ev in M_{6,6}. The evaluation map and Fitting ideal live on a CE/Hurwitz base that remembers the tetragonal pencil; without recovering \u03b3 from L (or another mono), codim-in-M_{6,6} language is not justified.",
+      "supports_finding_id": "FND-0098"
+    }
+  ],
+  "id": "REV-0096",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "6b4b42b636f0e796e965ad62cc58d8ef5037a28de50743ddf01e2ac9c2bfe034",
+  "principal_recovery": {
+    "at": "2026-08-08T03:03:12.887084+00:00",
+    "detail": "Grok wrote U+2286 SUBSET OF OR EQUAL TO (\u2286) where the task/attempt uses U+2282 SUBSET OF (\u2282) at the I_e ideal inclusion; rest identical.",
+    "from_trace": "TRACE-0029",
+    "normalized_verdict": "incomplete",
+    "original_theorem_sha256_prefix": "c0af96b094c492ef",
+    "reason": "theorem_statement_string_mismatch_only"
+  },
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Lemma 10.6 degree formula deg(W_f|_C)=4g+12-4f and the obstruction-degree inequalities are correctly usable for deg W_5=16, deg W_4=20, and deg(\u03c9\u2297W_f^\u2228(\u0393)) bookkeeping. Non-load-bearing for ranks 26\u219212, Fit_0=I_12, scheme-theoretic a_N^{-1}(I_e), or dim/codim of Z_ev in M_{6,6}.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C66-GEO-Z",
+      "note": "Packet subproblem graph makes C66-COMP-RANK depend on C66-GEO-Z. The attempt\u2019s load-bearing ranks, Fitting ideal, block reduction, and a_N^{-1}(I_e) all cite ATT-0048 claims, but ingest hygiene stripped ATT-0048/REV-0091/REV-0092 from proof_dependencies/source_ids, leaving GEO-Z undischarged while completion_attestation asserts no_undischarged_dependencies=true.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0056-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Closed-substack pure codim-4 of Z_ev in M_{6,6} fails: the theorem asserts dim 17 / codim 4 as a closed substack of M_{6,6}, but (i) the argument only counts a dominant Hurwitz\u00d7P^2 component and explicitly defers purity/closure/components (GAP-0056-COMPONENTS), (ii) the balanced reduced-support model is an open piece not a closed pure-codim-4 subvariety (FND-0052) and lacks mono into M_{6,6} (FND-0098), (iii) pure dim 17 needs constant h^0=3 (FND-0058) which is deferred, and (iv) stack vs coarse: the 15-dimensional Hurwitz count is coarse mod Aut(P^1) (FND-0060) while the theorem\u2019s 15+(h^0\u22121)+dim(Aut)=17 term is inconsistent. Separately, scheme-theoretic a_N^{-1}(I_e) and ranks 26\u219212/Fit_0=I_12 rest on stripped ATT-0048; SRC-0004 alone cannot prove them (FND-0046). Outcome: incomplete \u2014 several theorem clauses remain failed or unresolved.",
+  "subproblem_id": "C66-COMP-RANK",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "For the balanced tetragonal Casnati\u2013Ekedahl datum at (g,n)=(6,6), the evaluation map phi: pi_*W \u2192 pi_*(W|_Gamma) is a morphism of vector bundles of ranks 26 and 12 respectively. Its rank-drop ideal Fit_0(coker phi) = I_12(phi) (the ideal of 12\u00d712 maximal minors of a 26\u00d712 matrix) has expected determinantal codimension (26\u221211)(12\u221211) = 15 in the 21-dimensional ambient space M_{6,6}. The actual closed substack Z_ev it defines has dimension 17 and codimension 4 in M_{6,6}, yielding an excess dimension of 15\u22124 = 11 over the generic determinantal formula. The ideal is scheme-theoretically a_N^{-1}(I_e), the pullback of the codimension-6 identity-section ideal I_e \u2282 O_{Pic^0} along the classifying morphism a_N: B \u2192 Pic^0_{C/B} of the degree-zero line bundle N = \u03c9_{C/B} \u2297 W_5^\u2228(\u0393). The fibre of Z_ev over a geometric point of the balanced tetragonal Hurwitz base is the complete linear system |L| = |W_5 \u2297 \u03c9_C^{\u22121}| of degree-6 divisors, which has dimension h^0(L)\u22121 = h^0(\u03c9_C^{\u22972} \u2297 W_5^\u2228) \u2265 0, where deg(\u03c9_C^{\u22972} \u2297 W_5^\u2228) = 4. The relative fibre dimension over the 15-dimensional Hurwitz base is therefore h^0(L)\u22121, and the total dimension 15 + (h^0(L)\u22121) + dim(Aut) accounts for the 17-dimensional dominant component when h^0(L) = 3 (i.e. h^0(M) = 2 for M = \u03c9_C^{\u22972} \u2297 W_5^\u2228 of degree 4), consistent with the P^2-fibre structure of the residual Abel\u2013Jacobi incidence.",
+  "verdict": "incomplete"
+}

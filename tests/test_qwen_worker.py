@@ -57,6 +57,52 @@ class _JsonResponse:
 
 
 class QwenWorkerTests(unittest.TestCase):
+    def test_request_body_includes_reasoning_effort(self):
+        captured = {}
+
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return False
+
+            def read(self):
+                return json.dumps(
+                    {
+                        "id": "chatcmpl-test",
+                        "choices": [
+                            {
+                                "message": {
+                                    "role": "assistant",
+                                    "content": '{"ok":true}',
+                                }
+                            }
+                        ],
+                    }
+                ).encode("utf-8")
+
+        def fake_urlopen(request, timeout=None):
+            captured["body"] = json.loads(request.data.decode("utf-8"))
+            return FakeResponse()
+
+        with patch.object(qwen_worker, "_stream_enabled", return_value=False), patch(
+            "pure_tate.qwen_worker.urllib.request.urlopen", side_effect=fake_urlopen
+        ), patch.object(qwen_worker, "_emit"):
+            qwen_worker._request(
+                api_key="test-key",
+                model="qwen3.8-max",
+                messages=[{"role": "user", "content": "hi"}],
+                tools=[],
+                max_tokens=100,
+                thinking_budget=1024,
+                reasoning_effort="xhigh",
+            )
+        self.assertEqual(captured["body"]["model"], "qwen3.8-max")
+        self.assertEqual(captured["body"]["reasoning_effort"], "xhigh")
+        self.assertTrue(captured["body"]["enable_thinking"])
+        self.assertNotIn("thinking_budget", captured["body"])
+
     def test_response_timeout_defaults_to_three_hours(self):
         with patch.dict(os.environ, {}, clear=False):
             os.environ.pop("QWEN_RESPONSES_TIMEOUT", None)

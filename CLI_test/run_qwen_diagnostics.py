@@ -21,7 +21,7 @@ from typing import Any, Dict, Optional, Tuple
 
 DEFAULT_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 TOKEN_PLAN_BASE_URL = "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1"
-DEFAULT_MODEL = "qwen3.7-max"
+DEFAULT_MODEL = "qwen3.8-max"
 KEY_ENVIRONMENTS = ("DASHSCOPE_API_KEY", "QWEN_API_KEY")
 
 
@@ -90,7 +90,7 @@ def main() -> int:
         "messages": [{"role": "user", "content": "Reply exactly: QWEN_WORKING"}],
         "temperature": 0,
         "max_tokens": 16,
-        # qwen3.7-max is a hybrid-thinking model. This keeps the smoke test
+        # qwen3.8-max is a hybrid-thinking model. This keeps the smoke test
         # minimal and avoids paying for an unnecessary reasoning trace.
         "enable_thinking": False,
     }

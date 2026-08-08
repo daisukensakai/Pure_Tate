@@ -51,7 +51,7 @@ class RoutingTests(unittest.TestCase):
 
     def test_engine_inventory_includes_qwen(self):
         by_id = {item["id"]: item for item in engine_inventory()}
-        self.assertEqual(by_id["qwen"]["model"], "qwen3.7-max")
+        self.assertEqual(by_id["qwen"]["model"], "qwen3.8-max")
         self.assertEqual(by_id["qwen"]["family"], "qwen")
         self.assertTrue(by_id["qwen"]["web_access"])
 
@@ -59,7 +59,10 @@ class RoutingTests(unittest.TestCase):
         command = _engine_argv(
             "qwen", "prompt", phase="finding-audit", context_files=["TASK.json"]
         )
-        self.assertEqual(command[command.index("--model") + 1], "qwen3.7-max")
+        self.assertEqual(command[command.index("--model") + 1], "qwen3.8-max")
+        self.assertEqual(
+            command[command.index("--reasoning-effort") + 1], "xhigh"
+        )
         self.assertIn(str(ROOT / "pure_tate" / "qwen_worker.py"), command)
         self.assertEqual(command[command.index("--context-file") + 1], "TASK.json")
         self.assertIn("--allow-web", command)

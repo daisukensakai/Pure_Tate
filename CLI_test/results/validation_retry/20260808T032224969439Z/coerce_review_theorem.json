@@ -1,0 +1,33 @@
+{
+  "engine": "grok",
+  "id": "REV-PROBE1",
+  "name": "coerce_review_theorem",
+  "normalizations": [
+    {
+      "expected": "REV-PROBE1",
+      "field": "id",
+      "previous": "REV-WRONG",
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "expected": "Exact attempt theorem for coerce probe.",
+      "field": "theorem_statement",
+      "previous": "Paraphrased theorem (would previously hard-fail).",
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "expected": "grok",
+      "field": "reviewer_engine",
+      "previous": "wrong",
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "pass": true,
+  "theorem": "Exact attempt theorem for coerce probe."
+}

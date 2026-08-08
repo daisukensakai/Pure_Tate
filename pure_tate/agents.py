@@ -636,6 +636,7 @@ def _engine_argv(
         command.extend(["-m", model])
         return apply_workers_to_argv(command, "grok", workers)
     if family == "qwen":
+        reasoning_effort = config.get("reasoning_effort", "xhigh")
         command = [
             sys.executable,
             str((Path(__file__).with_name("qwen_worker.py")).resolve()),
@@ -644,9 +645,11 @@ def _engine_argv(
             "--prompt",
             prompt,
             "--max-tokens",
-            str(config.get("max_output_tokens", 64000)),
+            str(config.get("max_output_tokens", 65536)),
             "--thinking-budget",
-            str(config.get("thinking_budget", 16384)),
+            str(config.get("thinking_budget", 65536)),
+            "--reasoning-effort",
+            str(reasoning_effort),
         ]
         for relative in context_files or []:
             command.extend(["--context-file", relative])
@@ -1189,24 +1192,23 @@ def _validate_artifact(
             "theorem_statement",
             "proof_dependency_checks",
         }
+    from .validation_repair import coerce_identity_field
+
     missing = sorted(required - set(artifact))
     if missing:
         raise ValueError("agent artifact lacks fields: %s" % ", ".join(missing))
-    if artifact.get("id") != output.stem:
-        raise ValueError(
-            "artifact id %r does not match output filename %s"
-            % (artifact.get("id"), output.name)
-        )
+    # Slot id is reserved by the harness; stamp rather than waste the turn.
+    coerce_identity_field(artifact, "id", output.stem)
     if phase == "research":
         artifact["inferred_pairs"] = _normalize_inferred_pairs(
             artifact.get("inferred_pairs")
         )
         if artifact.get("target_claim_id") != task.get("target"):
             raise ValueError("research artifact targets the wrong reduction")
-    if phase == "review" and artifact.get("attempt_id") != task.get(
-        "target_attempt_id"
-    ):
-        raise ValueError("review artifact targets the wrong attempt")
+    if phase == "review":
+        coerce_identity_field(
+            artifact, "attempt_id", task.get("target_attempt_id")
+        )
     if phase == "mathematics":
         exact = {
             "schema_version": 3 if is_campaign else 2,
@@ -1251,12 +1253,14 @@ def _validate_artifact(
         # omit or slightly rewrite them; coerce rather than waste a full paid
         # turn on copy-paste mismatch.
         for field, expected in exact.items():
-            if artifact.get(field) != expected:
-                artifact[field] = expected
+            coerce_identity_field(artifact, field, expected)
         if is_campaign:
-            artifact["packet_binding_sha256"] = task.get(
-                "packet_binding_sha256"
-            )
+            if task.get("packet_binding_sha256"):
+                coerce_identity_field(
+                    artifact,
+                    "packet_binding_sha256",
+                    task.get("packet_binding_sha256"),
+                )
             if not isinstance(artifact.get("theorem_statement"), str) or not artifact[
                 "theorem_statement"
             ].strip():
@@ -1409,26 +1413,32 @@ def _validate_artifact(
                     "subproblem_id": task.get("subproblem_id"),
                 }
             )
+        # Review identity fields are harness-owned (same posture as mathematics).
         for field, expected in exact.items():
-            if artifact.get(field) != expected:
-                raise ValueError(
-                    "review artifact %s does not match task (expected %r)"
-                    % (field, expected)
-                )
+            coerce_identity_field(artifact, field, expected)
         if is_campaign:
             # Harness-owned packet identity: models often omit binding; stamp
             # from the task so verified-dependency gates do not false-negative.
             if task.get("packet_binding_sha256"):
-                artifact["packet_binding_sha256"] = task.get(
-                    "packet_binding_sha256"
+                coerce_identity_field(
+                    artifact,
+                    "packet_binding_sha256",
+                    task.get("packet_binding_sha256"),
                 )
             if not isinstance(artifact.get("theorem_statement"), str) or not artifact[
                 "theorem_statement"
             ].strip():
                 raise ValueError("campaign review theorem_statement must be nonempty")
-            if artifact.get("theorem_statement") != task.get("theorem_statement"):
-                raise ValueError(
-                    "campaign review theorem_statement does not match task"
+            # Theorem text is harness-owned identity of the attempt under review.
+            # Models routinely paraphrase or swap lookalike glyphs; coerce rather
+            # than burn a paid turn on an exact-string mismatch.
+            expected_theorem = task.get("theorem_statement")
+            if (
+                isinstance(expected_theorem, str)
+                and expected_theorem.strip()
+            ):
+                coerce_identity_field(
+                    artifact, "theorem_statement", expected_theorem
                 )
             artifact["proof_dependency_checks"] = _normalize_proof_dependency_checks(
                 artifact.get("proof_dependency_checks")
@@ -1439,18 +1449,22 @@ def _validate_artifact(
             artifact.get("finding_candidates")
         )
         _validate_review_verdict_consistency(artifact)
+    # Stamp selected engine before independence / exclusion checks.
+    if phase == "mathematics":
+        engine_field = "engine"
+    elif phase in {"review", "research"}:
+        engine_field = "reviewer_engine"
+    else:
+        engine_field = "engine"
+    if engine_id and phase in {"mathematics", "review", "research"}:
+        coerce_identity_field(artifact, engine_field, engine_id)
+    if phase == "review":
         if artifact.get("reviewer_engine") == task.get("prover_engine"):
             raise ValueError("reviewer engine must differ from prover engine")
         if artifact.get("reviewer_engine") in task.get(
             "excluded_reviewer_engines", []
         ):
             raise ValueError("reviewer engine duplicates an excluded review engine")
-    engine_field = "engine" if phase == "mathematics" else "reviewer_engine"
-    if engine_id and artifact.get(engine_field) != engine_id:
-        raise ValueError(
-            "artifact %s %r does not match selected engine %s"
-            % (engine_field, artifact.get(engine_field), engine_id)
-        )
     if phase in {"research", "review"} and artifact.get("independent") is not True:
         raise ValueError("%s artifact is not marked independent" % phase)
 
@@ -1941,14 +1955,12 @@ def _validate_finding_audit(
         "engine",
         "independent",
     }
+    from .validation_repair import coerce_identity_field
+
     missing = sorted(required - set(artifact))
     if missing:
         raise ValueError("finding audit lacks fields: %s" % ", ".join(missing))
-    if artifact.get("id") != output.stem:
-        raise ValueError(
-            "artifact id %r does not match output filename %s"
-            % (artifact.get("id"), output.name)
-        )
+    coerce_identity_field(artifact, "id", output.stem)
     exact = {
         "schema_version": 1,
         "task_id": task.get("id"),
@@ -1956,8 +1968,22 @@ def _validate_finding_audit(
         "finding_id": task.get("finding_id"),
     }
     for field, expected in exact.items():
-        if artifact.get(field) != expected:
-            raise ValueError("finding audit %s does not match task" % field)
+        coerce_identity_field(artifact, field, expected)
+    # Coerce common model aliases to the harness enum (string mismatch only).
+    verdict_aliases = {
+        "promote_to_corroborated": "promote",
+        "promote_to_corroboration": "promote",
+        "corroborate": "promote",
+        "corroborated": "promote",
+        "retain": "retain_candidate",
+        "keep_candidate": "retain_candidate",
+        "retain_as_candidate": "retain_candidate",
+        "retire_finding": "retire",
+        "merge_finding": "merge",
+    }
+    raw_verdict = artifact.get("verdict")
+    if isinstance(raw_verdict, str) and raw_verdict in verdict_aliases:
+        artifact["verdict"] = verdict_aliases[raw_verdict]
     if artifact.get("verdict") not in {
         "retain_candidate",
         "promote",
@@ -1967,8 +1993,8 @@ def _validate_finding_audit(
         raise ValueError("finding audit has invalid verdict")
     if artifact.get("independent") is not True:
         raise ValueError("finding audit is not independent")
-    if artifact.get("engine") != engine_id:
-        raise ValueError("finding audit engine does not match selected engine")
+    if engine_id:
+        coerce_identity_field(artifact, "engine", engine_id)
     if not isinstance(artifact.get("source_records"), list):
         raise ValueError("finding audit source_records must be a list")
 
@@ -2074,7 +2100,14 @@ def run_task(
         workers_on = (
             workers is not None and workers.enabled and not codex_controller
         )
-        prompt = assemble_prompt(
+        from .validation_repair import (
+            assemble_validation_repair_prompt,
+            is_mechanical_validation_error,
+            summarize_repair,
+            validation_repair_settings,
+        )
+
+        base_prompt = assemble_prompt(
             task,
             files,
             output.stem,
@@ -2083,14 +2116,6 @@ def run_task(
             max_workers=max_workers if workers_on else 0,
         )
         last_message = context / "last-message.txt"
-        command = _engine_argv(
-            engine_id,
-            prompt,
-            last_message,
-            phase=phase,
-            workers=workers if workers_on else None,
-            context_files=files,
-        )
         engine_max = config.get("max_task_seconds")
         task_timeout = timeout
         if isinstance(engine_max, int) and engine_max > 0:
@@ -2108,150 +2133,255 @@ def run_task(
             _subprocess_env(str(family) if family else None, config),
             workers,
         )
-        try:
-            if codex_controller:
-                if workers is None:
-                    raise RuntimeError("Codex controller worker session is unavailable")
-                process = _run_codex_controller(
-                    task=task,
-                    context=context,
-                    context_files=files,
-                    expected_artifact_id=output.stem,
-                    phase=phase,
-                    workers=workers,
-                    settings=controller_settings,
-                    task_timeout=task_timeout,
-                    inactivity=inactivity,
-                    abort_patterns=abort_patterns,
-                    activity_streams=activity_streams,
-                    progress_callback=progress_callback,
-                    process_start_callback=process_start_callback,
-                )
-            else:
-                process = run_captured_process(
-                    command,
-                    cwd=context,
-                    env=env,
-                    timeout=task_timeout,
-                    inactivity_timeout=inactivity,
-                    abort_stderr_pattern_counts=abort_patterns,
-                    activity_streams=activity_streams,
-                    on_activity=progress_callback,
-                    on_process_start=process_start_callback,
-                )
-        except ProcessWatchdogError as exc:
-            detail = (
-                "agent watchdog: %s; stderr: %s"
-                % (exc, (exc.stderr or "").strip()[:800] or "no stderr")
-            )
-            if paired_turn in {"forced-proof", "standard-fallback"}:
-                trace = write_observable_trace(
-                    task,
-                    engine_id,
-                    exc.stdout or "",
-                    exc.stderr or "",
-                    validation_error=detail,
-                    classification="infrastructure",
-                )
-                raise PairedInfrastructureError(
-                    detail, trace["id"], trace["path"]
-                ) from exc
-            raise RuntimeError(detail) from exc
-        process_stdout = process.stdout or ""
-        # The worker server records calls it receives. Capture engine-side MCP
-        # events as well, so approval cancellations are not mistaken for a
-        # parent that simply elected not to dispatch a worker.
-        record_parent_mcp_events(workers, process_stdout)
-        if family == "openai" and last_message.is_file():
-            raw = last_message.read_text(encoding="utf-8")
-        else:
-            raw = process_stdout
-        # Codex already emits official JSONL progress events on stdout while
-        # writing the final artifact to --output-last-message. Parse only the
-        # final file, but preserve the event stream in paired traces.
-        observable_stdout = (
-            process_stdout if family == "openai" and process_stdout else raw
+        repair_settings = validation_repair_settings(engines_root)
+        repair_limit = (
+            int(repair_settings["retry_limit"])
+            if repair_settings["enabled"]
+            else 0
         )
-        if family == "grok":
-            observable_stdout = _grok_observable_stream(raw)
-        elif family == "qwen":
-            observable_stdout = _qwen_observable_stream(raw)
-        if process.returncode != 0:
-            detail = _failure_detail(process.returncode, process.stderr, raw)
-            if paired_turn in {"forced-proof", "standard-fallback"}:
-                trace = write_observable_trace(
-                    task,
-                    engine_id,
-                    observable_stdout,
-                    process.stderr or "",
-                    validation_error=detail,
-                    classification="infrastructure",
-                )
-                raise PairedInfrastructureError(
-                    detail, trace["id"], trace["path"]
-                )
-            raise RuntimeError(detail)
-        try:
-            if family == "claude":
-                artifact = _extract_claude_stream(raw)
-            elif family == "grok":
-                artifact = _extract_grok_stream(raw)
-            elif family == "qwen":
-                artifact = _extract_qwen_stream(raw)
+        # Codex controller is multi-turn already; skip nested repair for it.
+        if codex_controller:
+            repair_limit = 0
+
+        repair_errors: List[str] = []
+        previous_artifact: Optional[Dict[str, Any]] = None
+        artifact: Dict[str, Any] = {}
+        stdout = ""
+        raw_stdout = ""
+        stderr = ""
+        repaired = False
+
+        def _validate_phase_artifact(candidate: Dict[str, Any]) -> None:
+            if phase == "trace-mining":
+                from .validation_repair import coerce_identity_field
+
+                coerce_identity_field(candidate, "id", output.stem)
+                validate_digest(task, candidate)
+                if engine_id:
+                    coerce_identity_field(candidate, "engine", engine_id)
+            elif phase == "finding-audit":
+                _validate_finding_audit(task, candidate, output, engine_id)
+            elif phase == "novelty":
+                from .novelty import validate_novelty_artifact
+                from .validation_repair import coerce_identity_field
+
+                validate_novelty_artifact(task, candidate)
+                coerce_identity_field(candidate, "id", output.stem)
+                if engine_id:
+                    coerce_identity_field(candidate, "engine", engine_id)
             else:
-                artifact = _extract_json_object(raw)
-        except ValueError as exc:
+                _validate_artifact(phase, task, candidate, output, engine_id)
+
+        def _raise_validation_failure(
+            exc: ValueError, candidate: Dict[str, Any]
+        ) -> None:
             if paired_turn in {"forced-proof", "standard-fallback"}:
                 trace = write_observable_trace(
                     task,
                     engine_id,
-                    observable_stdout,
-                    process.stderr or "",
+                    stdout,
+                    stderr,
+                    parsed_artifact=candidate,
                     validation_error=str(exc),
-                    classification="parse_failure",
                 )
-                raise PairedInfrastructureError(
+                raise SubstantiveAttemptError(
                     str(exc), trace["id"], trace["path"]
                 ) from exc
-            raise RuntimeError(str(exc)) from exc
-        stdout = observable_stdout
-        # Keep the unfiltered official payload for validation-failure traces.
-        # Grok's thought quarantine can drop envelope-only replies to "".
-        raw_stdout = raw
-        stderr = process.stderr or ""
+            if phase in {
+                "review",
+                "finding-audit",
+                "novelty",
+                "trace-mining",
+                "mathematics",
+                "research",
+            }:
+                trace_task = dict(task)
+                if not trace_task.get("paired_turn_kind"):
+                    trace_task["paired_turn_kind"] = phase
+                # Grok thought quarantine can empty envelope-only replies; fall
+                # back to the unfiltered official subprocess payload.
+                trace_stdout = stdout if str(stdout or "").strip() else raw_stdout
+                trace = write_observable_trace(
+                    trace_task,
+                    engine_id,
+                    trace_stdout,
+                    stderr,
+                    parsed_artifact=candidate,
+                    validation_error=str(exc),
+                    classification="validation_failure",
+                )
+                raise ArtifactValidationError(
+                    str(exc), trace["id"], trace["path"]
+                ) from exc
+            raise
 
-    try:
-        if phase == "trace-mining":
-            if artifact.get("id") != output.stem:
-                raise ValueError(
-                    "artifact id %r does not match output filename %s"
-                    % (artifact.get("id"), output.name)
+        for attempt in range(repair_limit + 1):
+            if attempt == 0 or previous_artifact is None:
+                prompt = base_prompt
+            else:
+                prompt = assemble_validation_repair_prompt(
+                    base_prompt=base_prompt,
+                    phase=phase,
+                    task=task,
+                    output_stem=output.stem,
+                    engine_id=engine_id,
+                    previous_artifact=previous_artifact,
+                    validation_errors=repair_errors,
                 )
-            validate_digest(task, artifact)
-            if engine_id and artifact.get("engine") != engine_id:
-                raise ValueError(
-                    "artifact engine %r does not match selected engine %s"
-                    % (artifact.get("engine"), engine_id)
+            # Fresh last-message path each attempt so prior content cannot leak.
+            if last_message.is_file():
+                last_message.unlink()
+            command = _engine_argv(
+                engine_id,
+                prompt,
+                last_message,
+                phase=phase,
+                workers=workers if workers_on else None,
+                context_files=files,
+            )
+            # After the first attempt only allow progress callbacks; process
+            # start is reported once so the drive ledger does not thrash.
+            start_cb = process_start_callback if attempt == 0 else None
+            try:
+                if codex_controller:
+                    if workers is None:
+                        raise RuntimeError(
+                            "Codex controller worker session is unavailable"
+                        )
+                    process = _run_codex_controller(
+                        task=task,
+                        context=context,
+                        context_files=files,
+                        expected_artifact_id=output.stem,
+                        phase=phase,
+                        workers=workers,
+                        settings=controller_settings,
+                        task_timeout=task_timeout,
+                        inactivity=inactivity,
+                        abort_patterns=abort_patterns,
+                        activity_streams=activity_streams,
+                        progress_callback=progress_callback,
+                        process_start_callback=start_cb,
+                    )
+                else:
+                    process = run_captured_process(
+                        command,
+                        cwd=context,
+                        env=env,
+                        timeout=task_timeout,
+                        inactivity_timeout=inactivity,
+                        abort_stderr_pattern_counts=abort_patterns,
+                        activity_streams=activity_streams,
+                        on_activity=progress_callback,
+                        on_process_start=start_cb,
+                    )
+            except ProcessWatchdogError as exc:
+                detail = (
+                    "agent watchdog: %s; stderr: %s"
+                    % (exc, (exc.stderr or "").strip()[:800] or "no stderr")
                 )
-        elif phase == "finding-audit":
-            _validate_finding_audit(task, artifact, output, engine_id)
-        elif phase == "novelty":
-            from .novelty import validate_novelty_artifact
+                if paired_turn in {"forced-proof", "standard-fallback"}:
+                    trace = write_observable_trace(
+                        task,
+                        engine_id,
+                        exc.stdout or "",
+                        exc.stderr or "",
+                        validation_error=detail,
+                        classification="infrastructure",
+                    )
+                    raise PairedInfrastructureError(
+                        detail, trace["id"], trace["path"]
+                    ) from exc
+                raise RuntimeError(detail) from exc
+            process_stdout = process.stdout or ""
+            # The worker server records calls it receives. Capture engine-side MCP
+            # events as well, so approval cancellations are not mistaken for a
+            # parent that simply elected not to dispatch a worker.
+            record_parent_mcp_events(workers, process_stdout)
+            if family == "openai" and last_message.is_file():
+                raw = last_message.read_text(encoding="utf-8")
+            else:
+                raw = process_stdout
+            # Codex already emits official JSONL progress events on stdout while
+            # writing the final artifact to --output-last-message. Parse only the
+            # final file, but preserve the event stream in paired traces.
+            observable_stdout = (
+                process_stdout if family == "openai" and process_stdout else raw
+            )
+            if family == "grok":
+                observable_stdout = _grok_observable_stream(raw)
+            elif family == "qwen":
+                observable_stdout = _qwen_observable_stream(raw)
+            if process.returncode != 0:
+                detail = _failure_detail(process.returncode, process.stderr, raw)
+                if paired_turn in {"forced-proof", "standard-fallback"}:
+                    trace = write_observable_trace(
+                        task,
+                        engine_id,
+                        observable_stdout,
+                        process.stderr or "",
+                        validation_error=detail,
+                        classification="infrastructure",
+                    )
+                    raise PairedInfrastructureError(
+                        detail, trace["id"], trace["path"]
+                    )
+                raise RuntimeError(detail)
+            try:
+                if family == "claude":
+                    artifact = _extract_claude_stream(raw)
+                elif family == "grok":
+                    artifact = _extract_grok_stream(raw)
+                elif family == "qwen":
+                    artifact = _extract_qwen_stream(raw)
+                else:
+                    artifact = _extract_json_object(raw)
+            except ValueError as exc:
+                if paired_turn in {"forced-proof", "standard-fallback"}:
+                    trace = write_observable_trace(
+                        task,
+                        engine_id,
+                        observable_stdout,
+                        process.stderr or "",
+                        validation_error=str(exc),
+                        classification="parse_failure",
+                    )
+                    raise PairedInfrastructureError(
+                        str(exc), trace["id"], trace["path"]
+                    ) from exc
+                raise RuntimeError(str(exc)) from exc
+            stdout = observable_stdout
+            # Keep the unfiltered official payload for validation-failure traces.
+            # Grok's thought quarantine can drop envelope-only replies to "".
+            raw_stdout = raw
+            stderr = process.stderr or ""
 
-            validate_novelty_artifact(task, artifact)
-            if artifact.get("id") != output.stem:
-                raise ValueError(
-                    "artifact id %r does not match output filename %s"
-                    % (artifact.get("id"), output.name)
-                )
-            if engine_id and artifact.get("engine") != engine_id:
-                raise ValueError(
-                    "artifact engine %r does not match selected engine %s"
-                    % (artifact.get("engine"), engine_id)
-                )
+            try:
+                _validate_phase_artifact(artifact)
+            except ValueError as exc:
+                if (
+                    attempt < repair_limit
+                    and is_mechanical_validation_error(str(exc))
+                    and isinstance(artifact, dict)
+                ):
+                    repair_errors.append(str(exc))
+                    previous_artifact = dict(artifact)
+                    continue
+                _raise_validation_failure(exc, artifact)
+            else:
+                if repair_errors:
+                    repaired = True
+                    artifact["validation_repair"] = summarize_repair(
+                        attempts=attempt + 1,
+                        errors=repair_errors,
+                        repaired=True,
+                    )
+                break
         else:
-            _validate_artifact(phase, task, artifact, output, engine_id)
-    except ValueError as exc:
+            # Loop exhausted without success (should not reach: final attempt
+            # raises inside). Defensive fallback.
+            raise RuntimeError("validation repair loop exhausted without result")
+
         if paired_turn in {"forced-proof", "standard-fallback"}:
             trace = write_observable_trace(
                 task,
@@ -2259,58 +2389,18 @@ def run_task(
                 stdout,
                 stderr,
                 parsed_artifact=artifact,
-                validation_error=str(exc),
             )
-            raise SubstantiveAttemptError(
-                str(exc), trace["id"], trace["path"]
-            ) from exc
-        if phase in {
-            "review",
-            "finding-audit",
-            "novelty",
-            "trace-mining",
-            "mathematics",
-            "research",
-        }:
-            trace_task = dict(task)
-            if not trace_task.get("paired_turn_kind"):
-                trace_task["paired_turn_kind"] = phase
-            # Grok thought quarantine can empty envelope-only replies; fall
-            # back to the unfiltered official subprocess payload.
-            trace_stdout = stdout if str(stdout or "").strip() else raw_stdout
-            trace = write_observable_trace(
-                trace_task,
-                engine_id,
-                trace_stdout,
-                stderr,
-                parsed_artifact=artifact,
-                validation_error=str(exc),
-                classification="validation_failure",
-            )
-            raise ArtifactValidationError(
-                str(exc), trace["id"], trace["path"]
-            ) from exc
-        raise
+            artifact["observable_trace_id"] = trace["id"]
+            artifact["observable_trace_sha256"] = trace["sha256"]
+            for field in (
+                "paired_turn_kind",
+                "paired_problem_key",
+                "paired_theorem_sha256",
+                "paired_attempt_policy_revision",
+                "routing_chain_id",
+            ):
+                if field in task:
+                    artifact[field] = task[field]
 
-    if paired_turn in {"forced-proof", "standard-fallback"}:
-        trace = write_observable_trace(
-            task,
-            engine_id,
-            stdout,
-            stderr,
-            parsed_artifact=artifact,
-        )
-        artifact["observable_trace_id"] = trace["id"]
-        artifact["observable_trace_sha256"] = trace["sha256"]
-        for field in (
-            "paired_turn_kind",
-            "paired_problem_key",
-            "paired_theorem_sha256",
-            "paired_attempt_policy_revision",
-            "routing_chain_id",
-        ):
-            if field in task:
-                artifact[field] = task[field]
-
-    atomic_write_json(output, artifact)
-    return artifact
+        atomic_write_json(output, artifact)
+        return artifact

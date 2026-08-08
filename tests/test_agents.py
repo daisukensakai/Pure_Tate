@@ -127,7 +127,7 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertEqual(by_id["claude"]["model"], "claude-opus-5")
         self.assertEqual(by_id["codex"]["model"], "gpt-5.6-sol")
         self.assertEqual(by_id["grok"]["model"], "grok-4.5")
-        self.assertEqual(by_id["qwen"]["model"], "qwen3.7-max")
+        self.assertEqual(by_id["qwen"]["model"], "qwen3.8-max")
         self.assertTrue(by_id["claude"]["web_access"])
         self.assertTrue(by_id["grok"]["web_access"])
         self.assertTrue(by_id["codex"]["web_access"])
@@ -714,7 +714,7 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertIn("provider session limit reached", detail)
         self.assertNotIn('"tools"', detail)
 
-    def test_artifact_id_must_match_output_filename(self):
+    def test_artifact_id_is_coerced_to_output_filename(self):
         task = research_tasks()[0]
         artifact = {
             "id": "RAUD-9999",
@@ -727,13 +727,16 @@ class AgentAdapterTests(unittest.TestCase):
             "reviewer_engine": "test",
             "independent": True,
         }
-        with self.assertRaises(ValueError):
-            _validate_artifact(
-                "research",
-                task,
-                artifact,
-                Path("research/audits/RAUD-0001.json"),
-            )
+        _validate_artifact(
+            "research",
+            task,
+            artifact,
+            Path("research/audits/RAUD-0001.json"),
+            "test",
+        )
+        self.assertEqual(artifact["id"], "RAUD-0001")
+        self.assertEqual(artifact["reviewer_engine"], "test")
+
 
     def test_validate_coerces_object_pairs(self):
         task = research_tasks()[0]
@@ -848,6 +851,60 @@ class AgentAdapterTests(unittest.TestCase):
             "grok",
         )
         self.assertEqual(artifact["packet_binding_sha256"], binding)
+
+    def test_campaign_review_coerces_theorem_statement_from_task(self):
+        # Models swap lookalike glyphs (⊆ vs ⊂); theorem text is task-owned.
+        binding = "b" * 64
+        target = {"g": 6, "n": 6}
+        expected = "I_e \\subset O_{Pic^0} along the classifying map."
+        task = {
+            "id": "TASK-V-ATT-9998-P1",
+            "campaign_id": "C66-001",
+            "campaign_revision": 4,
+            "subproblem_id": "C66-COMP-RANK",
+            "review_pass": 1,
+            "target_attempt_id": "ATT-9998",
+            "prover_engine": "qwen",
+            "excluded_reviewer_engines": ["qwen"],
+            "packet_id": "C66-001-v4",
+            "packet_sha256": "c" * 64,
+            "packet_binding_sha256": binding,
+            "target": target,
+            "theorem_statement": expected,
+        }
+        artifact = {
+            "schema_version": 3,
+            "id": "REV-9998",
+            "review_task_id": task["id"],
+            "review_pass": 1,
+            "attempt_id": "ATT-9998",
+            "context_revision": 2,
+            "packet_id": "C66-001-v4",
+            "packet_sha256": "c" * 64,
+            "target": target,
+            "verdict": "incomplete",
+            "reviewer_engine": "grok",
+            "independent": True,
+            "checked_claims": [{"verdict": "failed"}],
+            "strongest_attack": "codimension purity",
+            "finding_candidates": [],
+            "campaign_id": "C66-001",
+            "campaign_revision": 4,
+            "subproblem_id": "C66-COMP-RANK",
+            "theorem_statement": expected.replace("\\subset", "\\subseteq"),
+            "proof_dependency_checks": [
+                {"dependency_id": "SRC-0004", "verdict": "failed"}
+            ],
+        }
+        self.assertNotEqual(artifact["theorem_statement"], expected)
+        _validate_artifact(
+            "review",
+            task,
+            artifact,
+            Path("proof/reviews/REV-9998.json"),
+            "grok",
+        )
+        self.assertEqual(artifact["theorem_statement"], expected)
 
     def test_run_task_surfaces_envelope_api_error(self):
         task = research_tasks()[0]

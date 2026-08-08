@@ -37,7 +37,7 @@ RESULTS = ROOT / "results" / "qwen_hang"
 QWEN_WORKER = REPO / "pure_tate" / "qwen_worker.py"
 
 DEFAULT_BASE_URL = "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1"
-DEFAULT_MODEL = "qwen3.7-max"
+DEFAULT_MODEL = "qwen3.8-max"
 KEY_ENVIRONMENTS = ("DASHSCOPE_API_KEY", "QWEN_API_KEY")
 
 
