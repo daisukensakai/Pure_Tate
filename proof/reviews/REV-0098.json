@@ -1,0 +1,222 @@
+{
+  "attempt_id": "ATT-0057",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-H0-01",
+      "note": "Independently reconstructed. Packet 'Canonical geometric bottleneck' fixes W_5 := (O_{P(E^vee)}(2) tensor gamma^*O(-5))|_C and deg(W_f|_C)=4g+12-4f, so deg(W_5)=36-20=16 and deg(L)=16-10=6; Riemann-Roch chi(L)=6-6+1=1; h^0=chi+h^1>=1. Arithmetic verified without the dropped sha pins. Caveat (presentational, not adverse): chi = deg - g + 1 requires rank 1, and the theorem statement never says W_5 is a line bundle - rank 1 is supplied only by the packet's 'CE line-bundle convention', which the statement does not quote. The sign in gamma^*O(-5) is also independently confirmed: the '+f_i' printed in the SRC-0004 excerpt would give deg 56, contradicting the recorded 16.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-H0-02",
+      "note": "Serre duality checked term by term: omega tensor L^vee = omega tensor omega tensor W_5^vee = omega^2 tensor W_5^vee = M, so h^1(L)=h^0(M); deg M = 2(2g-2)-16 = 20-16 = 4; hence h^0(L)=1+h^0(M). This is an honest re-derivation of FND-0073 and, as FND-0073 requires, uses no part of GAP-Z-W5D. No twist, dual or degree slip found.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-H0-03",
+      "note": "Set equality {h^0(L_s)>=r}={h^0(M_s)>=r-1} is immediate fibrewise from CLM-H0-02 (r=1 case holds since chi(L)=1 forces h^0(L)>=1). The h^0(M)<=4 argument is valid as written: M=O_C(E) with E effective of degree 4, RR gives h^0(M)=h^0(omega(-E))-1, omega base-point-free gives h^0(omega(-p))=5, and omega(-E) subset omega(-p). TRUE BUT NOT SHARP: Clifford gives h^0(M)<=3 (see finding candidate FC-CLIFFORD-H0-BOUND), so the listed value h^0(L)=5 is never attained. Minor wording: {h^0(L)>=3} is the locus where |L| is at least a net, so calling it 'the P^2 stratum' is loose where h^0(L)>3.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-H0-04",
+      "note": "LOAD-BEARING ADVERSE CHECK. Clause (iv) rests entirely on W_5 ~= omega_C^2(-D), which corroborated FND-0073 calls verbatim 'the undischarged GAP-Z-W5D identification', and which FND-0098 treats as an unproved recovery route. The packet contains no working-context block, no id WORKING-7a483703948f9ea9, and not even the relative-duality formula O_{P(E^vee)}(1)|_C = omega_C tensor gamma^*O(2); the packet execution boundary requires a complete result to identify every proof dependency. Worse, the artifact's own recorded ingest normalization PRINCIPAL-PROVENANCE-NORMALIZE-0001 dropped WORKING-7a483703948f9ea9 from source_ids and from this claim's cites, so CLM-H0-04's only surviving citation is FND-0073 - the very finding that disclaims the identification. The theorem's phrase 'using the working-context established fibrewise identity' is an attribution, not a hypothesis: per corroborated FND-0101 the clause must be conditionalized ('modulo GAP-Z-W5D, ...'), demoted to a hand-off, or moved to the exclusion list. It is none of these, and it mislabels a packet-undischarged gap as 'established'. Everything downstream inside (iv) (M ~= O_C(D), L ~= omega_C(-D), h^0(M)>=2, h^0(L)>=3 everywhere on the balanced locus) inherits that status. Secondary defects inside the same clause: the listed stratum 'h^0(L)=5 <=> h^0(O_C(D))=4' is empty (Clifford), and 'h^0(L)=4 <=> h^0(O_C(D))=3' forces C hyperelliptic with D ~ 2 g^1_2. Not refuted: the identity is very likely true and cheaply provable - see FC-W5D-LOCALIZATION.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-H0-05",
+      "note": "The intended statement (Grauert on the restricted family over a reduced S_r, chi(L)=1 making h^1 constant wherever h^0 is) is correct, and restricting to constant-h^0 strata is the right way to respect FND-0047. But the object is written 'pi_*L|_{S_r}', which under the standard parse is (pi_*L)|_{S_r}, and that object is NOT locally free of rank r at any non-open stratum: with B=A^1 reduced, h^0(L_b)=1 for b!=0 and h^0(L_0)=2, pi_*L is locally free of rank 1, so its restriction to S_2={0} has rank 1, not 2. Grauert licenses only (pi_{S_r})_*(L|_{C x_B S_r}). Since the whole point of clause (v) is behaviour at jump walls, the artifact must state the restricted-family pushforward explicitly; as written the rank claim is false precisely where it matters. Also unresolved as stated: whether the strata S_r are being taken inside B with reduced induced structure in every case (the statement says so, the argument's 'reduced noetherian base' is a separate hypothesis).",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-H0-06",
+      "note": "Accurate non-claim. Constancy/genericity of h^0(M)=2 is genuinely not established here, matching the obligation recorded in FND-0058, and the artifact does not walk the constrained 15/17 parameter-count route. See FC-BALANCED-PRIMITIVITY, which reduces this gap to a single geometric exclusion.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-H0-07",
+      "note": "Accurate non-claim, faithful to FND-0083: chi(L)=1 gives a nonempty Abel-Jacobi fibre in Sym^6 only, not nonemptiness of the reduced-support open or of the ordered Conf_6 incidence.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-08",
+  "finding_candidates": [
+    {
+      "evidence": "Derived only from FND-0073 (h^0(L)=1+h^0(M), deg M = 4) plus Riemann-Roch and Clifford's theorem with its equality case (ACGH III.1); unconditional, in particular independent of GAP-Z-W5D. Checked against the packet: the string 'Clifford' does not occur anywhere in C66-001-v4, and no adjudicated finding records any upper bound on h^0(M) or h^0(L). ATT-0057 clause (iii) states the weaker h^0(M) <= 4 (valid but not sharp) and clause (iv) accordingly lists an empty stratum.",
+      "key": "FC-CLIFFORD-H0-BOUND",
+      "kind": "sharpening",
+      "reusable_for": [
+        "C66-GEO-H0",
+        "C66-GEO-COMP",
+        "C66-COMP-COMP"
+      ],
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        }
+      },
+      "severity": "medium",
+      "statement": "The h^0 range recorded for the C66-GEO-H0 stratification is not sharp, and one of its strata is empty. On every smooth genus-6 fibre of the balanced tetragonal CE family, M := omega_C^2 tensor W_5^vee is ALWAYS special, because h^1(M) = h^0(omega tensor M^vee) = h^0(L) = 1 + h^0(M) >= 1. Hence whenever h^0(M) > 0, Clifford's theorem applies and gives h^0(M) <= deg(M)/2 + 1 = 3, with equality only if C is hyperelliptic and M ~= (g^1_2)^{tensor 2} (the cases M ~= O_C and M ~= omega_C are excluded by deg M = 4 not in {0,10}). Therefore h^0(L) = 1 + h^0(M) is in {1,2,3,4} and NEVER 5, so the {h^0(L)=5} = {h^0(M)=4} stratum is empty, and h^0(L)=4 occurs only on hyperelliptic fibres. The C66-GEO-H0 stratification has at most four strata, and its top jump stratum is confined to the hyperelliptic locus."
+    },
+    {
+      "evidence": "Combines FC-CLIFFORD-H0-BOUND with the pencil inclusion gamma^*H^0(O(1)) subset H^0(O_C(D)) and Clifford's equality case. Directly addresses the obligation in FND-0058 ('requires proof that h^0(omega_C(-D)) = 1 + h^0(D) is constantly 3 on the whole balanced locus, not merely for general tetragonal curves') without duplicating it: FND-0058 records the obligation, this candidate reduces it to one exclusion. Conditional on GAP-Z-W5D, which packet C66-001-v4 records as undischarged.",
+      "key": "FC-BALANCED-PRIMITIVITY",
+      "kind": "reduction",
+      "reusable_for": [
+        "C66-GEO-COMP",
+        "C66-GEO-H0"
+      ],
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        }
+      },
+      "severity": "high",
+      "statement": "Modulo GAP-Z-W5D (i.e. granting M ~= O_C(D) = gamma^*O_{P^1}(1)), the constancy question left open as GAP-H0-1 collapses to a single geometric exclusion. Indeed h^0(D) >= 2 always (gamma^* is injective on H^0(P^1,O(1))), and by FC-CLIFFORD-H0-BOUND h^0(D) <= 3 with equality only if C is hyperelliptic and D ~ 2 g^1_2. In that equality case |D| = |2H| = h^*|O_{P^1}(2)| for the hyperelliptic map h, so every pencil inside |D| is h^* of a pencil in |O_{P^1}(2)|, i.e. gamma = q o h with q: P^1 -> P^1 of degree 2 - gamma is non-primitive. Hence h^0(omega_C(-D)) = 1 + h^0(D) is in {3,4}, and 'h^0(omega_C(-D)) = 3 constantly on the whole balanced locus' is EQUIVALENT to 'no balanced fibre carries a tetragonal pencil factoring through a degree-2 map'. The remaining checkable question is exactly whether a non-primitive degree-4 pencil can have balanced CE splitting F = O(4)+O(5); this review does not settle that and does not assert the answer."
+    },
+    {
+      "evidence": "Every ingredient is inside packet C66-001-v4: the 'CE line-bundle convention' line, the SRC-0004 Lemma 10.6 degree computation, and FND-0073's and FND-0098's statements of the identity. The minus sign in gamma^*O(-5) is independently confirmed by internal consistency: the '+f_i' as printed in the SRC-0004 excerpt yields deg 56, contradicting the recorded deg(W_5) = 16. Unlike FND-0098 (which records the identity as the only route to the monomorphism) and FND-0073 (which records it as undischarged), this candidate identifies WHICH single statement discharges it and shows the twist ambiguity is already pinned by recorded arithmetic.",
+      "key": "FC-W5D-LOCALIZATION",
+      "kind": "localization",
+      "reusable_for": [
+        "C66-GEO-Z",
+        "C66-GEO-H0",
+        "C66-GEO-COMP"
+      ],
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        }
+      },
+      "severity": "high",
+      "statement": "GAP-Z-W5D is not a deep gap; it localizes to exactly one normalization statement, and the packet already contains the arithmetic that pins the remaining freedom. The packet's own CE line-bundle convention is W_5 := (O_{P(E^vee)}(2) tensor gamma^*O_{P^1}(-5))|_C. Granting only the CE relative-canonical normalization in the weak form O_{P(E^vee)}(1)|_C ~= omega_{C/P^1} tensor gamma^*A = omega_C tensor gamma^*O(2) tensor gamma^*A for SOME line bundle A on P^1, one gets W_5 ~= omega_C^2 tensor gamma^*O(-1) tensor gamma^*A^2 = omega_C^2(-D) tensor gamma^*A^2. The residual twist is then forced away by degree: SRC-0004 Lemma 10.6 records deg(O_{P(E^vee)}(2)|_C) = 2(2g-2+4*2), i.e. deg(O_{P(E^vee)}(1)|_C) = 2g+6 = deg(omega_C tensor gamma^*O(2)), and a twist by gamma^*A shifts this by 4 deg A, so deg A = 0 and A ~= O_{P^1}. Hence W_5 ~= omega_C^2(-D), equivalently L ~= omega_C(-D) and M ~= O_C(D). Note the derivation needs balancedness only to make the labels f = (4,5) meaningful, not for the isomorphism itself. Consequence: the campaign should either add the CE relative-canonical normalization as a cited source line - one citation - or keep every downstream clause explicitly conditionalized on GAP-Z-W5D; what it should NOT do is what ATT-0057 does, namely relabel the gap as an established working-context fact."
+    },
+    {
+      "evidence": "Counterexample above is elementary and self-contained. Instance observed in ATT-0057 clause (v) and argument section 6, which invoke Grauert while writing 'pi_*L|_{S_r}'; scored as unresolved under CLM-H0-05.",
+      "key": "FC-PUSHFORWARD-RESTRICTION",
+      "kind": "warning",
+      "reusable_for": [
+        "C66-GEO-H0",
+        "C66-GEO-COMP",
+        "C66-COMP-RANK"
+      ],
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "generality": "any proper flat family with a line bundle and jumping h^0"
+      },
+      "severity": "medium",
+      "statement": "Evidence for FND-0047 in a form the H0 and COMP nodes will keep hitting: restricting the pushforward is not the same as pushing forward the restricted family, and the two differ exactly at jump walls. For a locally closed stratum S subset B that is not open, (pi_*L)|_S and (pi_S)_*(L|_{C x_B S}) are different sheaves, and Grauert's theorem gives local freeness and base change only for the latter. Concretely, over a reduced irreducible B = A^1 with h^0(L_b) = 1 for b != 0 and h^0(L_0) = 2, pi_*L is locally free of rank 1, so (pi_*L)|_{S_2} with S_2 = {0} has rank 1, while h^0(C_0, L_0) = 2. Any statement of the shape 'pi_*L|_{S_r} is locally free of rank r on the constant-h^0 stratum S_r' is therefore false under the standard parse and must be written as (pi_{S_r})_*(L restricted to the family over S_r). Restricting to constant-h^0 strata is the right move for FND-0047, but it does not by itself fix the notation, and the error reappears precisely at the jump strata the campaign cares about.",
+      "supports_finding_id": "FND-0047"
+    }
+  ],
+  "id": "REV-0098",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "6b4b42b636f0e796e965ad62cc58d8ef5037a28de50743ddf01e2ac9c2bfe034",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "WORKING-7a483703948f9ea9",
+      "note": "Load-bearing for clause (iv) and for nothing else. Not supplied in this workspace, absent from packet C66-001-v4 (no working-context block, no 'established facts' list, and the relative-duality formula it is said to record does not occur anywhere in the packet), and stripped from this artifact's own provenance by PRINCIPAL-PROVENANCE-NORMALIZE-0001. The only packet statements about its asserted content (FND-0073, FND-0098) contradict the label 'established'. Cannot be verified from the supplied materials.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "FND-0073",
+      "note": "Correctly re-proved and correctly used for clauses (ii)-(iii): the artifact's derivation matches the finding's own route (chi(L)=1 plus Serre duality) and reaches deg M = 4. Recorded misuse, scored under CLM-H0-04 rather than here: the artifact also cites FND-0073 on CLM-H0-04, i.e. on the identification FND-0073 explicitly declares undischarged.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0097",
+      "note": "Used exactly as adjudicated: the canonical relative Harder-Narasimhan filtration replaces any global splitting hypothesis, with W_4 the degree-20 sub and W_5 the degree-16 quotient. Labels and degrees in the theorem statement match the finding verbatim; no splitting is silently reintroduced.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Lemma 10.6 correctly instantiated: deg(W_f|_C)=4g+12-4f at g=6, f=5 gives 16, matching the packet's own bottleneck line. The excerpt's internal sign inconsistency (W_{f_i} written with gamma^*O(f_i) but computed with gamma^*O(-f_i)) is resolved the way the packet directs, and the resolution is forced by the recorded degree.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0047",
+      "note": "Correctly invoked as a warning and honestly discharged in intent (no Proj(pi_*L) identification across jump walls). The residual notational defect in executing it is scored under CLM-H0-05 and recorded as supporting evidence in FC-PUSHFORWARD-RESTRICTION.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0058",
+      "note": "Correctly respected: constancy of h^0 on the balanced locus is recorded as GAP-H0-1 and handed to C66-GEO-COMP rather than asserted, and no pure-dimension-17 or codimension-4 claim is made.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0083",
+      "note": "Correctly respected: reduced-support/Conf_6 nonemptiness is disclaimed in GAP-H0-2 and never deduced from chi(L)=1.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0063",
+      "note": "Cited accurately, but non-load-bearing for the stated theorem: the theorem never mentions Gamma or the failure locus Z, so FND-0063 enters only as motivation for stratifying |L|.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0099",
+      "note": "Cited accurately, but non-load-bearing here: no exactness of pi_* along the filtration and no R^1 pi_* W_4 = 0 vanishing is used anywhere in clauses (i)-(v), which need only the quotient W_5 and its degree.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0046",
+      "note": "Listed in source_claim_ids and used only to justify the non-claim GAP-H0-3 (no Fitting/determinantal versus Abel-Jacobi scheme comparison); non-load-bearing for the asserted clauses.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0048",
+      "note": "Not supplied in this workspace, so its content cannot be checked. On my own reconstruction it is not load-bearing for this theorem: clauses (i)-(iii) and (v) need only the packet's CE line-bundle convention, SRC-0004 Lemma 10.6, Riemann-Roch, Serre duality and Grauert, while clause (iv) needs the undischarged GAP-Z-W5D identity rather than anything from GEO-Z.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "REV-0091",
+      "note": "Not supplied in this workspace; cited only as part of the ATT-0048 confirmation chain and non-load-bearing for the stated theorem.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "REV-0092",
+      "note": "Not supplied in this workspace; cited only as part of the ATT-0048 confirmation chain and non-load-bearing for the stated theorem.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0057-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Binding checks first: the artifact's target block is field-for-field identical to TASK.json (dimension 21, open BM degree 16 / weight -16 / Q(8), ordinary degree 26 / weight 26 / Q(-13), Chow codimension 13, Poincare twist 21, g=n=6), packet_id C66-001-v4, packet_sha256 6b4b42b6...c2bfe034 and packet_binding_sha256 76cc8a6d...4645bcc7 match the task, and the submitted theorem_statement is byte-identical to the task's. The lemma makes no cohomological claim, so the twist/BM-degree/Kunneth/Gysin/spectral-sequence/invariants-versus-coinvariants and semisimplification attack surfaces are vacuous here; correspondingly the target dictionary is carried but unused.\n\nSTRONGEST ATTACK (succeeded): clause (iv) is a predicted input used as a theorem. It asserts, as a conclusion, that h^0(L)>=3 everywhere on the balanced locus, on the strength of W_5 ~= omega_C^2(-D) labelled a 'working-context established fibrewise identity'. Corroborated FND-0073 calls that exact identity 'the undischarged GAP-Z-W5D identification', FND-0098 treats it as an unproved recovery route, and the packet has no working-context block at all. The artifact's own ingest normalization then removes the last escape: PRINCIPAL-PROVENANCE-NORMALIZE-0001 deleted WORKING-7a483703948f9ea9 from source_ids and from CLM-H0-04's cites, leaving clause (iv) cited solely to the finding that disclaims it. Under FND-0101, 'using the ... established identity' is an attribution, not a conditionalization, and GAP-H0-5 is an admission rather than a hypothesis. That is the failure: not falsity, but an undischarged campaign gap asserted inside the theorem. Verdict incomplete, not refuted.\n\nSECOND SUCCESSFUL ATTACK: clause (v) writes 'pi_*L|_{S_r} is locally free of rank r'. Parsed as (pi_*L)|_{S_r} this is false at every non-open stratum (A^1 family with h^0=1 generically and 2 at the origin: pi_*L has rank 1, its restriction to the jump point has rank 1, not 2). Grauert licenses only the pushforward for the restricted family - the exact conflation FND-0047 exists to prevent, occurring in the clause that claims to discharge FND-0047.\n\nATTACKS THAT FAILED, and I pushed each hard: (1) rank - if W_5 were not a line bundle, chi(L)=deg-g+1 and hence chi(L)=1 would collapse; the packet's 'CE line-bundle convention' supplies rank 1, though the theorem statement itself never does. (2) Serre-duality bookkeeping - omega tensor L^vee = omega^2 tensor W_5^vee is exact, deg M = 20-16 = 4 is exact, no twist is dropped. (3) The h^0(M)<=4 bound - the base-point-free-canonical argument is valid line by line. (4) The r=1 edge case of the set equality, and dim|L_s| = h^0(L_s)-1, both hold. (5) The stack-versus-coarse and unframed-family attack - clause (iii) quantifies only fibrewise numerical invariants and clause (v) is explicitly conditionalized on a framing, so no illegitimate family-level object is quantified, and no codimension, purity or stabilizer claim is smuggled in. (6) Omitted stable pairs / non-primitive covers - the one place this bites is that the artifact's h^0 range is not sharp, which I record as a finding rather than a refutation.\n\nWHAT WOULD FIX IT: replace clause (iv) by 'modulo GAP-Z-W5D, ...' or discharge GAP-Z-W5D outright, which FC-W5D-LOCALIZATION shows costs one citation of the CE relative-canonical normalization; restate clause (v) with the restricted-family pushforward; and sharpen h^0(L) in {1,2,3,4} per FC-CLIFFORD-H0-BOUND. Clauses (i)-(iii) would then stand as a clean, correct, independently verified reduction of C66-GEO-H0 to degree-4 Brill-Noether.",
+  "subproblem_id": "C66-GEO-H0",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Theorem (h0-stratification of the residual degree-six system, C66-GEO-H0). Let k be algebraically closed of characteristic zero and let gamma: C -> P^1_k be a smooth balanced tetragonal genus-six curve. Let 0 -> W_4 -> W -> W_5 -> 0 be the canonical filtered Casnati-Ekedahl reduction (FND-0097), with deg(W_5)=16 on the geometric fibre, and set L := W_5 tensor omega_C^{-1}. Then: (i) deg(L)=6 and chi(L)=1, hence h^0(C,L)>=1. (ii) With M := omega_C^{tensor 2} tensor W_5^vee, one has deg(M)=4 and h^0(C,L) = 1 + h^0(C,M). (iii) Consequently, in any family of such geometric fibres, the h^0(L)-stratification is the Brill-Noether stratification of the degree-4 bundle M shifted by one: {s : h^0(L_s)>=r} = {s : h^0(M_s)>=r-1} for all r>=1; moreover h^0(M)<=4, so h^0(L) is in {1,2,3,4,5} and dim |L_s| = h^0(L_s)-1; the P^2 stratum {h^0(L)>=3} is exactly the relative g^1_4 locus {h^0(M)>=2} of M. (iv) On the balanced locus with fibre divisor D, using the working-context established fibrewise identity W_5 ~= omega_C^{tensor 2}(-D), one has M ~= O_C(D) = gamma^*O_{P^1}(1) and L ~= omega_C(-D); since gamma^* injects H^0(P^1,O(1)) into H^0(C,O_C(D)), h^0(M)>=2 and h^0(L)>=3 everywhere on the balanced locus, and the strata are exactly h^0(L)=3 <=> h^0(O_C(D))=2 (exact-pencil locus, |L| a net), h^0(L)=4 <=> h^0(O_C(D))=3, h^0(L)=5 <=> h^0(O_C(D))=4. (v) Over any framed family gamma: C -> P^1_B (so that O(1), hence W_5 and L, are globally defined) and any reduced locally closed stratum S_r on which h^0(L_s)=r is constant, pi_*L|_{S_r} is locally free of rank r with formation commuting with base change (Grauert), and the relative complete linear system over S_r is the projective bundle of lines in pi_*L|_{S_r} of relative dimension r-1; no Proj(pi_*L) identification is asserted across jump walls (FND-0047). Not claimed: constancy of h^0(M)=2 on the balanced locus, dimensions/codimensions/components/stabilizers of jump strata, and nonemptiness of reduced-support opens.",
+  "verdict": "incomplete"
+}

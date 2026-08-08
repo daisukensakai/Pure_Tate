@@ -1,18 +1,15 @@
 {
   "campaign_id": "C66-001",
-  "completed_at": "2026-08-08T05:00:09.459699+00:00",
-  "engine_pools": {
-    "prover": [
-      "qwen"
-    ],
-    "research": [
-      "qwen",
-      "claude"
-    ],
-    "review": [
-      "qwen",
-      "claude"
-    ]
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "qwen": "pass"
+    },
+    "review": {
+      "claude": "not_required",
+      "qwen": "pass"
+    }
   },
   "events": [
     {
@@ -71,12 +68,21 @@
     }
   ],
   "executed_steps": 2,
-  "parent_pid": 86741,
-  "parent_process_group": 86734,
+  "pre_run_recoveries": [],
+  "recovered_stale_runs": [],
   "requested_steps": 2,
+  "research_capability_states": {
+    "finding-audit": {
+      "claude": "pass",
+      "qwen": "pass"
+    },
+    "novelty": {
+      "claude": "pass",
+      "qwen": "pass"
+    }
+  },
   "run_id": "RUN-C66-001-20260808T044056705565Z-86741",
-  "schema_version": 2,
-  "started_at": "2026-08-08T04:40:56.705565+00:00",
-  "status": "completed",
-  "stop_reason": "step_limit"
+  "run_ledger": "reports/runs/RUN-C66-001-20260808T044056705565Z-86741.json",
+  "stop_reason": "step_limit",
+  "unrecovered_validation_traces": []
 }
