@@ -80,10 +80,15 @@ def phase_archive(vault: Path) -> Dict[str, Any]:
         if not src.is_file():
             raise FileNotFoundError("missing source for archive: %s" % src)
         dest = vault / label
+        src_hash = _sha256(src)
         if dest.exists():
-            # never overwrite an existing archive copy with different content
-            if _sha256(dest) != _sha256(src):
-                raise RuntimeError("archive conflict: %s already exists with different content" % dest)
+            # Never overwrite an existing archive copy. If the live source grew
+            # (e.g. session resume), keep the old copy and add a new timestamped one.
+            if _sha256(dest) != src_hash:
+                stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+                alt = vault / ("%s.%s" % (label, stamp))
+                shutil.copy2(src, alt)
+                dest = alt
         else:
             shutil.copy2(src, dest)
         copies[label] = {

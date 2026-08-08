@@ -1,0 +1,38 @@
+{
+  "at": "2026-08-07T07:06:10.639876+00:00",
+  "outcome": "wrapup_relaunch_blocked_by_five_hour_session_limit",
+  "session_id": "e60cc354-480d-44c6-939f-ed7be7abdeec",
+  "session_limit_message": "You've hit your session limit \u00b7 resets 8:20pm (Asia/Tokyo)",
+  "session_limit_resets_at_utc": "2026-08-07T11:20:00+00:00",
+  "session_limit_resets_local_jst": "2026-08-07 20:20 Asia/Tokyo",
+  "option_A_executed": {
+    "killed_thinking_claude_pid": 30382,
+    "killed_auto_ingest_waiter_pid": 30465,
+    "archived_partial_thinking_stream": "ATT-0051.resume.stdout.pre-wrapup-20260807T070319Z.jsonl",
+    "wrapup_relaunch_pid": 32445,
+    "wrapup_effort": "high",
+    "wrapup_prompt": "RESUME_PROMPT.txt",
+    "wrapup_result": "api_error rate limit; 0 tokens used; no artifact"
+  },
+  "reservation_state": {
+    "ATT-0051": "spent with reason manual_session_resume_id_mismatch at 2026-08-07T07:01:19Z",
+    "attempt_file": "proof/attempts/ATT-0051.json absent",
+    "note": "Partial thinking stream was ingested (no JSON id); slot closed without artifact. Next successful finish needs a NEW slot (e.g. ATT-0052)."
+  },
+  "next_retry_after_reset": {
+    "when": "after 2026-08-07T11:20:00Z / 20:20 JST",
+    "steps": [
+      "Reserve new attempt id (ATT-0052+) \u2014 do not reopen spent ATT-0051 for write",
+      "Keep same cwd and --resume e60cc354-480d-44c6-939f-ed7be7abdeec",
+      "Use wrap-up RESUME_PROMPT.txt (already in vault) with effort high or medium, not max",
+      "Conditional ingest only on successful non-error result event"
+    ],
+    "cwd": "/private/var/folders/r_/40tyr0nj6zn_yqb74rw_351c0000gn/T/pure-tate-agent-ubwi95od",
+    "workspace_still_present": true
+  },
+  "preserved": [
+    "ATT-0051.resume.stdout.pre-wrapup-20260807T070319Z.jsonl",
+    "session e60cc354 still resumable after limit reset",
+    "WRAPUP RESUME_PROMPT.txt ready"
+  ]
+}

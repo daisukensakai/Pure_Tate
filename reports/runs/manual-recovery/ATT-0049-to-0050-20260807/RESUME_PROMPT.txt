@@ -1,34 +1,39 @@
-CONTINUATION AFTER INFRASTRUCTURE FAILURE (principal override).
+PRINCIPAL OVERRIDE — CONTINUE AND FINISH YOUR INTERRUPTED FINAL ANSWER.
 
-Your previous turn was interrupted by API Error: Unable to connect to API
-(ConnectionRefused) after laptop sleep. The official stream is TRACE-0026.
-The prior attempt slot ATT-0049 is closed. You must finish into a NEW slot.
+Context:
+- Session limit previously cut you off mid-final-message after a long turn.
+- You had already begun emitting a campaign-attempt JSON for a full proof
+  (vanishing of the exact group via forgetful Leray tower / Steinberg
+  coinvariants / Sp-coinvariants line of argument). That partial emit is in
+  your prior assistant message; do not restart the mathematics from zero.
+- Prior attempt slots ATT-0049 / ATT-0050 / ATT-0051 are closed. Finish into
+  the NEW slot below.
 
-You are resumed in the same isolated read-only task workspace as before.
-Continue your mathematical work. Do not restart from zero if you already
-have context; re-read files only as needed.
+This turn:
+1. Prefer ZERO tools. At most one Read only if a single concrete field is missing.
+2. Do NOT open a long exploratory monologue. Complete the proof artifact you
+   were already writing.
+3. Emit exactly one complete JSON object matching
+   proof/CAMPAIGN_ATTEMPT_TEMPLATE.json as your entire final message.
+4. No Markdown fences, no prose before or after the JSON.
 
-Required first action if not already complete: read end-to-end via Read:
-proof/packets/generated/paired-working-context/WORKING-864c30eef5a1fdd9.md
-
-Hard contract for the final artifact:
-- Exactly one JSON object matching proof/CAMPAIGN_ATTEMPT_TEMPLATE.json
-- id must be exactly: ATT-0050
+Hard contract:
+- id must be exactly: ATT-0052
 - engine must be exactly: claude
-- result_type is proof or disproof
+- result_type is proof or disproof (use the path you already committed to)
 - status is claimed_complete
 - no gap markers
 - completion_attestation with resolves_exact_target true,
   no_undischarged_dependencies true, not_reduction_only true,
   no_problem_status_claim true, exact_problem_web_search_used false
 - Use the exact theorem statement from the campaign packet
+- theorem_statement / target / packet fields must match the task packet
 
-Public web may be used only for ordinary mathematical background or named
-theorems, not to search a solution of this exact problem or to decide
-openness. Do not claim the problem is open.
+Public web only for ordinary mathematical background or named theorems, not
+to search a solution of this exact problem or to decide openness. Do not
+claim the problem is open.
 
-Final message: exactly one JSON object, no Markdown fences, no prose
-before or after it.
+Final message: exactly one JSON object.
 
 Supplied files in this workspace:
 - prompts/FORCED_FULL_PROOF.md

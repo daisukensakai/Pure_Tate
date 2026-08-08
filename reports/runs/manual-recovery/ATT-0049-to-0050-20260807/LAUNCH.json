@@ -1,9 +1,9 @@
 {
-  "artifact_id": "ATT-0050",
+  "artifact_id": "ATT-0052",
   "cmd": [
     "claude",
     "-p",
-    "CONTINUATION AFTER INFRASTRUCTURE FAILURE (principal override).\n\nYour previous turn was interrupted by API Error: Unable to connect to API\n(ConnectionRefused) after laptop sleep. The official stream is TRACE-0026.\nThe prior attempt slot ATT-0049 is closed. You must finish into a NEW slot.\n\nYou are resumed in the same isolated read-only task workspace as before.\nContinue your mathematical work. Do not restart from zero if you already\nhave context; re-read files only as needed.\n\nRequired first action if not already complete: read end-to-end via Read:\nproof/packets/generated/paired-working-context/WORKING-864c30eef5a1fdd9.md\n\nHard contract for the final artifact:\n- Exactly one JSON object matching proof/CAMPAIGN_ATTEMPT_TEMPLATE.json\n- id must be exactly: ATT-0050\n- engine must be exactly: claude\n- result_type is proof or disproof\n- status is claimed_complete\n- no gap markers\n- completion_attestation with resolves_exact_target true,\n  no_undischarged_dependencies true, not_reduction_only true,\n  no_problem_status_claim true, exact_problem_web_search_used false\n- Use the exact theorem statement from the campaign packet\n\nPublic web may be used only for ordinary mathematical background or named\ntheorems, not to search a solution of this exact problem or to decide\nopenness. Do not claim the problem is open.\n\nFinal message: exactly one JSON object, no Markdown fences, no prose\nbefore or after it.\n\nSupplied files in this workspace:\n- prompts/FORCED_FULL_PROOF.md\n- proof/packets/generated/C66-001-v4.md\n- proof/CAMPAIGN_ATTEMPT_TEMPLATE.json\n- proof/packets/generated/paired-working-context/WORKING-864c30eef5a1fdd9.md\n- proof/packets/generated/paired-working-context/WORKING-EXT-34b35a0583c655ab.md\n- TASK.json\n",
+    "PRINCIPAL OVERRIDE \u2014 CONTINUE AND FINISH YOUR INTERRUPTED FINAL ANSWER.\n\nContext:\n- Session limit previously cut you off mid-final-message after a long turn.\n- You had already begun emitting a campaign-attempt JSON for a full proof\n  (vanishing of the exact group via forgetful Leray tower / Steinberg\n  coinvariants / Sp-coinvariants line of argument). That partial emit is in\n  your prior assistant message; do not restart the mathematics from zero.\n- Prior attempt slots ATT-0049 / ATT-0050 / ATT-0051 are closed. Finish into\n  the NEW slot below.\n\nThis turn:\n1. Prefer ZERO tools. At most one Read only if a single concrete field is missing.\n2. Do NOT open a long exploratory monologue. Complete the proof artifact you\n   were already writing.\n3. Emit exactly one complete JSON object matching\n   proof/CAMPAIGN_ATTEMPT_TEMPLATE.json as your entire final message.\n4. No Markdown fences, no prose before or after the JSON.\n\nHard contract:\n- id must be exactly: ATT-0052\n- engine must be exactly: claude\n- result_type is proof or disproof (use the path you already committed to)\n- status is claimed_complete\n- no gap markers\n- completion_attestation with resolves_exact_target true,\n  no_undischarged_dependencies true, not_reduction_only true,\n  no_problem_status_claim true, exact_problem_web_search_used false\n- Use the exact theorem statement from the campaign packet\n- theorem_statement / target / packet fields must match the task packet\n\nPublic web only for ordinary mathematical background or named theorems, not\nto search a solution of this exact problem or to decide openness. Do not\nclaim the problem is open.\n\nFinal message: exactly one JSON object.\n\nSupplied files in this workspace:\n- prompts/FORCED_FULL_PROOF.md\n- proof/packets/generated/C66-001-v4.md\n- proof/CAMPAIGN_ATTEMPT_TEMPLATE.json\n- proof/packets/generated/paired-working-context/WORKING-864c30eef5a1fdd9.md\n- proof/packets/generated/paired-working-context/WORKING-EXT-34b35a0583c655ab.md\n- TASK.json\n",
     "<RESUME_PROMPT>",
     "e60cc354-480d-44c6-939f-ed7be7abdeec",
     "--output-format",
@@ -25,14 +25,16 @@
     "--model",
     "claude-opus-5",
     "--effort",
-    "max"
+    "high"
   ],
   "cwd": "/private/var/folders/r_/40tyr0nj6zn_yqb74rw_351c0000gn/T/pure-tate-agent-ubwi95od",
-  "dry_run": false,
-  "pid": 25772,
+  "stdout": "reports/runs/manual-recovery/ATT-0049-to-0050-20260807/ATT-0052.resume.stdout.jsonl",
+  "stderr": "reports/runs/manual-recovery/ATT-0049-to-0050-20260807/ATT-0052.resume.stderr.txt",
   "session_id": "e60cc354-480d-44c6-939f-ed7be7abdeec",
-  "started_at": "2026-08-07T02:19:57.006529+00:00",
+  "dry_run": false,
+  "started_at": "2026-08-07T11:37:04.201342+00:00",
   "status": "running",
-  "stderr": "reports/runs/manual-recovery/ATT-0049-to-0050-20260807/ATT-0050.resume.stderr.txt",
-  "stdout": "reports/runs/manual-recovery/ATT-0049-to-0050-20260807/ATT-0050.resume.stdout.jsonl"
+  "effort": "high",
+  "note": "continue_finish_interrupted_final_answer_after_rate_limit_reset",
+  "pid": 38619
 }

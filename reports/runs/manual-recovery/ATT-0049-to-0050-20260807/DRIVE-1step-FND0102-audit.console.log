@@ -1,0 +1,68 @@
+{
+  "campaign_id": "C66-001",
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "grok": "not_required",
+      "qwen": "pass"
+    },
+    "review": {
+      "claude": "not_required",
+      "grok": "not_required",
+      "qwen": "pass"
+    }
+  },
+  "events": [
+    {
+      "activity_bytes": 78501,
+      "completed_at": "2026-08-07T13:01:58.535206+00:00",
+      "engine": "qwen",
+      "engine_pid": 46017,
+      "engine_process_group": 46017,
+      "error": "finding audit has invalid verdict",
+      "last_activity_at": "2026-08-07T13:01:58.447634+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "research/finding-audits/FAUD-0095.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 46017,
+          "engine_process_group": 46017,
+          "started_at": "2026-08-07T12:59:45.159820+00:00",
+          "supervisor_pid": 46016,
+          "supervisor_process_group": 46016
+        }
+      ],
+      "started_at": "2026-08-07T12:59:45.125326+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 46016,
+      "task_id": "TASK-F-FND-0102",
+      "trace_id": "TRACE-0027",
+      "trace_path": "research/paired-traces/TRACE-0027.json",
+      "trace_sha256": "cdf11781739039cf83a0f74f371bf9984450cd323b62244a35fa7e4a38343593"
+    }
+  ],
+  "executed_steps": 1,
+  "pre_run_recoveries": [],
+  "recovered_stale_runs": [],
+  "requested_steps": 1,
+  "research_capability_states": {
+    "finding-audit": {
+      "claude": "pass",
+      "grok": "pass",
+      "qwen": "pass"
+    },
+    "novelty": {
+      "claude": "pass",
+      "grok": "pass",
+      "qwen": "pass"
+    }
+  },
+  "run_id": "RUN-C66-001-20260807T125944873081Z-46013",
+  "run_ledger": "reports/runs/RUN-C66-001-20260807T125944873081Z-46013.json",
+  "stop_reason": "step_limit_with_failures",
+  "unrecovered_validation_traces": []
+}

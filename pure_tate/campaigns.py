@@ -337,23 +337,35 @@ def packet_binding_matches(
 ) -> bool:
     """Report whether an artifact was produced against the current packet identity.
 
-    Artifacts written before the binding hash existed carry only the full-content
-    ``packet_sha256``. Their packet texts were overwritten in place and are not
-    recoverable, so binding equivalence for them is an attested migration record
-    rather than a derivation -- see ``proof/migrations/campaign-*-binding.json``.
+    Acceptance paths (first match wins):
+
+    1. Explicit ``packet_binding_sha256`` equals the live campaign binding hash.
+    2. Missing binding, but ``packet_sha256`` equals the **current** full-content
+       packet hash (artifact was issued against the exact live packet bytes).
+    3. Missing binding, live migration binding still current, and content hash is
+       listed in ``equivalent_packet_sha256`` — for pre-binding artifacts whose
+       packet texts were overwritten in place and are not recoverable
+       (``proof/migrations/campaign-*-binding.json``).
     """
+    current_binding = campaign_packet_binding_sha256(campaign_id)
     binding = artifact.get("packet_binding_sha256")
     if isinstance(binding, str) and binding:
-        return binding == campaign_packet_binding_sha256(campaign_id)
+        return binding == current_binding
+    content = artifact.get("packet_sha256")
+    if isinstance(content, str) and content:
+        try:
+            live_content = campaign_packet_record(campaign_id).get("packet_sha256")
+        except (OSError, ValueError, KeyError, TypeError):
+            live_content = None
+        if content == live_content:
+            return True
     migration = _binding_migration(campaign_id)
-    if migration.get("binding_sha256") != campaign_packet_binding_sha256(
-        campaign_id
-    ):
+    if migration.get("binding_sha256") != current_binding:
         return False
     equivalent = migration.get("equivalent_packet_sha256")
     if not isinstance(equivalent, dict):
         return False
-    return artifact.get("packet_sha256") in equivalent
+    return content in equivalent
 
 
 def render_campaign_packet(campaign_id: str = DEFAULT_CAMPAIGN) -> str:
@@ -530,6 +542,20 @@ def case_verified(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
         if not attempt_is_complete(attempt):
             continue
         if not packet_binding_matches(attempt, campaign_id):
+            continue
+        # Subproblem lemmas may be double-confirmed for the DAG without
+        # discharging the full RED-0001 case. Only proof/disproof attempts that
+        # state the campaign's exact theorem count as case verification.
+        if attempt.get("result_type") not in {"proof", "disproof"}:
+            continue
+        exact_theorem = (campaign.get("paired_attempt_policy") or {}).get(
+            "exact_theorem"
+        )
+        if (
+            isinstance(exact_theorem, str)
+            and exact_theorem.strip()
+            and attempt.get("theorem_statement") != exact_theorem
+        ):
             continue
         if attempt.get("paired_turn_kind") and attempt.get(
             "paired_problem_key"

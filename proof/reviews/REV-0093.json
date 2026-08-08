@@ -1,0 +1,212 @@
+{
+  "attempt_id": "ATT-0052",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0001",
+      "note": "Poincare duality dictionary and Tate arithmetic match FND-0001: d=21, 2d-16=26, W_{-16}H^{BM}_{16} \u2245 W_26 H^{26}(21), Q(-13)(21)=Q(8); lowest-weight purity consistent with FND-0032/0033.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0002",
+      "note": "Forgetful fibre is a positively punctured genus-6 curve (affine, cd 1); R^{q\u22652}=0 and residue SES 0\u2192H\u2192R^1\u2192Q(-1)^{j-2}\u21920 with weight-two residues match FND-0020.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0003",
+      "note": "Two-row Leray with q=0 killed by vcd and no room for differentials into/out of E_2^{d_{j-1},1} is the standard FND-0036 pattern with coefficients; single E_\u221e term, no filtration obstruction.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0004",
+      "note": "Uniform weight floor d_{j-1}+r+2=27 kills Gr^W_26 of residue quotients; W-strictness gives the stated surjections. FND-0037 connecting maps affect kernels only (FND-0093).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0005",
+      "note": "Composite surjection Gr^W_26 H^{21}(M_{6,1};H^{\u22975}) \u21a0 Gr^W_26 H^{26}(M_{6,6};Q) is exactly the reduction recorded in FND-0093; it does not prove the corner.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0006",
+      "note": "Universal closed curve: R^2=Q(-1), vcd kills E_2^{21,0} and E_2^{20,1}, differentials into/out of E^{19,2} vanish; H^{21}(M_{6,1};H^{\u22975}) \u2245 H^{19}(M_6;H^{\u22975})(-1) as MHS is correct. Whole-group vanishing is a valid overstrengthening of Gr^W_24 vanishing.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0007",
+      "note": "Harer virtual duality: H^{vcd}(Mod_6;V) \u2245 (St_6 \u2297_Q V)_{Mod_6} with Q-coefficients is standard for virtual duality groups.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0008",
+      "note": "H^{\u22975} is inflated from Sp_{12}(Z), so I_6 acts trivially and coinvariants stage as (S \u2297 H^{\u22975})_{Sp} with S=(St_6)_{I_6}\u2297Q.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0009",
+      "note": "Central z=-1 acts as (-1)^5=-1 on H^{\u22975}; over Q the S^+ summand contributes 0 to coinvariants under \u27e8z\u27e9, hence (S\u2297V)_{Sp}=(S^-\u2297V)_{Sp}. Arithmetic is correct; usefulness requires S^-=0.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0010",
+      "note": "Load-bearing generation claim fails as written. (5.3) asserts hyperelliptic/Birman\u2013Hilden classes generate St_6\u2297Q as a Q[Mod_6]-module, but the justification is incoherent: it equates Steinberg degree-10 classes with \u2018fundamental classes of maximal simplices\u2019 (maximal simplices have dim 3g-4=14, not 2g-2); it conflates pairwise-disjoint curve-complex simplices with intersecting Humphries chains of 2g+1 curves (which are not simplices of C); and the leap \u2018every filling carrier is Mod_6-equivalent to a hyperelliptic chain because Mod acts transitively on Humphries chains\u2019 does not follow. Nonvanishing of b: St(\u03a3_{0,14})\u2192St_6 and generation by its Mod-orbit are not established (Broaddus cyclicity uses a different chord-diagram generator \u03c6_0; FND-0092 already warns that naive filling generators can be zero). Without a correct proof that S=S^+, the z-argument does not yield S^-=0.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0011",
+      "note": "H^{19}(M_6;H^{\u22975})=0 and the descended vanishings depend on CLM-0010/S^-=0, which failed. Church\u2013Farb\u2013Putman kill only trivial-coefficient top cohomology, not odd symplectic coefficients.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0012",
+      "note": "Exact-corner vanishing and \u2018empty direct sum of Q(8)\u2019 are contingent on CLM-0011; the reduction tower alone (FND-0093) does not settle RED-0001.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0013",
+      "note": "Dual boundary-restriction injectivity is presented as a corollary of CLM-0012; not established independently.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0014",
+      "note": "Non-load-bearing consistency remark: if the corner were zero, residual CE Gysin classes would vanish there. Does not prove vanishing and does not replace C66-GEO-*/TATE-*.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-07",
+  "finding_candidates": [
+    {
+      "evidence": "ATT-0052 Step 5.3\u20135.4 and CLM-0010: claimed N=St_6\u2297Q from \u2018maximal simplices\u2019, \u2018filling systems\u2019, and transitivity on 2g+1 Humphries chains; dimension mismatch 3g-4 vs 2g-2; Humphries chains are not simplices of C.",
+      "key": "hyperelliptic-steinberg-generation-incoherent",
+      "severity": "high",
+      "statement": "For top-degree vanishing arguments that identify H^{4g-5}(Mod_g;V)\u2245(St\u2297V)_{Mod} and kill odd Sp-inflated V by forcing S^-=0 on S=(St)_I via hyperelliptic/Birman\u2013Hilden classes, it is not enough that a fixed hyperelliptic involution act as +id on C^{sym}: one must prove that the Mod-orbit of im(b: St(\u03a3_{0,2g+2})\u2192St_g) generates St_g (equivalently, that a Broaddus cyclic generator lies in that orbit up to units). Arguments that treat maximal simplices or intersecting Humphries chains as Steinberg generators, or that invoke Mod-transitivity on chains to move arbitrary filling carriers into symmetric position, are invalid and do not establish S^-=0.",
+      "supports_finding_id": null
+    },
+    {
+      "evidence": "ATT-0052 Steps 1\u20132 and CLM-0005/0006 match the packet\u2019s FND-0093 reduction; vanishing is deferred to unproved Steps 3\u20135.",
+      "key": "fnd-0093-reduction-only-odd-tensor-open",
+      "severity": "medium",
+      "statement": "The five-stage forgetful Leray-plus-residue surjection Gr^W_26 H^{21}(M_{6,1};H^{\u22975})\u21a0Gr^W_26 H^{26}(M_{6,6};Q), optionally composed with universal-curve identification to H^{19}(M_6;H^{\u22975})(-1), is a correct reduction of the (6,6) RED-0001 corner to odd-tensor top-degree vanishing and does not by itself prove the corner.",
+      "supports_finding_id": "FND-0093"
+    },
+    {
+      "evidence": "ATT-0052 Remark 1 claims FND-0050 discharged because the corner is zero, while CLM-0010\u20130012 fail/remain unresolved.",
+      "key": "cohomological-zero-does-not-discharge-fnd-0050-without-proof",
+      "severity": "medium",
+      "statement": "A claimed_complete cohomological vanishing of the exact (6,6) corner does not discharge FND-0050\u2019s residual CE geometry obligation unless the vanishing proof is actually complete; an incomplete Steinberg/Sp-coinvariant argument leaves both residual geometry and the corner open.",
+      "supports_finding_id": "FND-0050"
+    }
+  ],
+  "id": "REV-0093",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "1e3a1a22512423c7acad51511c72eff81399395835c958486796871a4bc12a28",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "FND-0001",
+      "note": "PD dictionary used correctly in Step 0.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0020",
+      "note": "Weight-two residues and floor 27 used correctly.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Purity/semisimplicity of the corner invoked only as a non-obstruction remark; no semisimplification gap claimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0035",
+      "note": "Above-vcd used only on auxiliary Leray rows, never to kill degree 26=vcd(M_{6,6}); blocked route vcd-only-vanishing avoided at the target.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0036",
+      "note": "Forgetful q=0 vanishing pattern correctly generalized through the tower.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0037",
+      "note": "Connecting maps treated as kernel-only for the Gr^W_26 surjections, consistent with FND-0093.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0050",
+      "note": "Packet requires residual CE geometry for a complete (6,6) attack unless an independent vanishing of the exact corner is proved. Attempt claims discharge via cohomological zero, but that zero is unproved (CLM-0010\u20130012), so residual geometry remains unconfronted and undischarged.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "FND-0092",
+      "note": "Attempt correctly avoids using the standard 0-filling zero class as a cyclic generator; its alternative hyperelliptic generator is a separate failed claim, not a violation of FND-0092.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0093",
+      "note": "Five-stage Leray+residue surjection is correctly used as a reduction to odd-tensor top cohomology; packet already records that this does not prove the corner.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Listed/unused in the cohomological vanishing route; CE degree formulae appear only in a non-load-bearing consistency remark.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0002",
+      "note": "Listed in source_ids but unused/non-load-bearing for the argument as written.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C66-GEO-Z",
+      "note": "Listed proof dependency; neither constructed nor rendered unnecessary by a completed independent vanishing.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "C66-GEO-H0",
+      "note": "Listed; undischarged.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "C66-GEO-COMP",
+      "note": "Listed; undischarged.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "C66-TATE-SUPPORT",
+      "note": "Listed; undischarged.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "C66-TATE-ASSEMBLY",
+      "note": "Listed; undischarged.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0052-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Step 5.3 / CLM-0010 (hyperelliptic Birman\u2013Hilden classes generate St_6\u2297Q, hence S^-=0): the generation argument is load-bearing for the odd-tensor vcd vanishing and is mathematically incoherent\u2014confuses Steinberg degree 2g-2 with maximal-simplex dimension 3g-4, conflates intersecting Humphries chains with curve-complex simplices, and illegitimately promotes Mod-transitivity on chains into generation of all top homology by symmetric classes\u2014without proving nonvanishing of b or citing a correct cyclic generator (Broaddus \u03c6_0). With S^- unproved zero, (S\u2297H^{\u22975})_{Sp} need not vanish, so H^{19}(M_6;H^{\u22975})=0 and W_{-16}H^{BM}_{16}(M_{6,6};Q)=0 remain open. Steps 0\u20132 survive as the FND-0093 reduction only.",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "incomplete"
+}

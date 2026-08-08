@@ -1,0 +1,30 @@
+{
+  "action": "option_A_wrapup_relaunch",
+  "at": "2026-08-07T07:04:47.275257+00:00",
+  "killed": {
+    "claude_pid": 30382,
+    "waiter_pid": 30465,
+    "archived_stdout": "ATT-0051.resume.stdout.pre-wrapup-20260807T070319Z.jsonl"
+  },
+  "relaunched": {
+    "claude_pid": 32445,
+    "session_id": "e60cc354-480d-44c6-939f-ed7be7abdeec",
+    "artifact_id": "ATT-0051",
+    "effort": "high",
+    "model": "claude-opus-5",
+    "prompt": "RESUME_PROMPT.txt (wrap-up override)"
+  },
+  "waiter": {
+    "pid_file": "ATT-0051.wrapup.waiter.pid",
+    "log": "ATT-0051.wrapup.waiter.log",
+    "policy": "ingest only if successful result event; else leave reservation unspent"
+  },
+  "reservation": "ATT-0051 still reserved (unspent)",
+  "final_outcome": {
+    "status": "blocked_by_session_rate_limit",
+    "claude_dead": true,
+    "ingest_skipped": true,
+    "ATT-0051_reservation": "spent_id_mismatch_no_artifact",
+    "resets_at_jst": "20:20"
+  }
+}

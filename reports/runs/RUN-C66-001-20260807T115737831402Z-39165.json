@@ -1,0 +1,141 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-07T12:10:03.263013+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "qwen",
+      "claude"
+    ],
+    "research": [
+      "grok",
+      "qwen",
+      "claude"
+    ],
+    "review": [
+      "grok",
+      "qwen",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 840391,
+      "artifact_sha256": "375146eb3bb1df64590333c6734ef5bc101e8b7e31c3dec3a651603220e04eb3",
+      "completed_at": "2026-08-07T12:04:05.206562+00:00",
+      "engine": "grok",
+      "engine_pid": 39169,
+      "engine_process_group": 39169,
+      "last_activity_at": "2026-08-07T12:04:04.183605+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/reviews/REV-0093.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 39169,
+          "engine_process_group": 39169,
+          "started_at": "2026-08-07T11:57:38.106531+00:00",
+          "supervisor_pid": 39168,
+          "supervisor_process_group": 39168
+        }
+      ],
+      "started_at": "2026-08-07T11:57:38.067487+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 39168,
+      "task_id": "TASK-V-ATT-0052-P1"
+    },
+    {
+      "activity_bytes": 473089,
+      "artifact_sha256": "2a6d3e9db32e98a9235b94e618cf67764c92cef6ef5922dcf580cdbbfaa9e03e",
+      "completed_at": "2026-08-07T12:10:03.262529+00:00",
+      "engine": "grok",
+      "engine_pid": 42781,
+      "engine_process_group": 42781,
+      "last_activity_at": "2026-08-07T12:10:00.951203+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0019.json",
+      "phase": "trace-mining",
+      "processes": [
+        {
+          "engine_pid": 42781,
+          "engine_process_group": 42781,
+          "started_at": "2026-08-07T12:04:05.487343+00:00",
+          "supervisor_pid": 42780,
+          "supervisor_process_group": 42780
+        }
+      ],
+      "started_at": "2026-08-07T12:04:05.460280+00:00",
+      "state": "completed",
+      "step": 2,
+      "supervisor_pid": 42780,
+      "task_id": "TASK-C66-001-MINE-CLAUDE-FORCED_PROOF",
+      "working_context": {
+        "archive": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-ARCHIVE-cbadf4ba658809ec.md",
+          "sha256": "cbadf4ba658809ec9e2eb8b1dda7f7ce34b7437d54b152b7ff068d1f4466212f"
+        },
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-2e140454f71c8609.md",
+          "sha256": "2e140454f71c8609c221cb6c23e4b0d1671dbb7b9167f8553e9d0b30f29cac2b"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-7a483703948f9ea9.md",
+          "sha256": "7a483703948f9ea9e14a358b223001cc0472934d907b839e1b2f731b9d1302cf"
+        },
+        "stats": {
+          "bytes_archive": 59842,
+          "bytes_extended": 29511,
+          "bytes_extended_by_section": {
+            "candidate": 7559,
+            "computation": 0,
+            "dependency": 0,
+            "established": 9738,
+            "invalid": 12214
+          },
+          "bytes_primary": 59598,
+          "bytes_primary_by_section": {
+            "candidate": 0,
+            "computation": 5096,
+            "dependency": 1097,
+            "established": 30612,
+            "invalid": 22793
+          },
+          "constraints_in_extended": 36,
+          "primary_constraint_share": 0.382445719655022,
+          "primary_fresh_share": 0.18324607329842932,
+          "primary_redundant_rows": 0,
+          "rows_archived": 316,
+          "rows_demoted": 93,
+          "rows_extended": 100,
+          "rows_extended_by_section": {
+            "candidate": 37,
+            "computation": 0,
+            "dependency": 0,
+            "established": 27,
+            "invalid": 36
+          },
+          "rows_fresh": 94,
+          "rows_primary": 191,
+          "rows_primary_by_section": {
+            "candidate": 0,
+            "computation": 30,
+            "dependency": 8,
+            "established": 95,
+            "invalid": 58
+          },
+          "rows_total": 607
+        }
+      }
+    }
+  ],
+  "executed_steps": 2,
+  "parent_pid": 39165,
+  "parent_process_group": 39162,
+  "requested_steps": 2,
+  "run_id": "RUN-C66-001-20260807T115737831402Z-39165",
+  "schema_version": 2,
+  "started_at": "2026-08-07T11:57:37.831402+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

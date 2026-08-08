@@ -1,0 +1,27 @@
+{
+  "action": "stop_and_wrapup_relaunch",
+  "at": "2026-08-08T00:31:51.516805+00:00",
+  "killed": {
+    "claude_pid": 47469,
+    "drive_pid": 47462,
+    "parent_attempt": "ATT-0053",
+    "reason": "3x64k pure-thinking max_tokens burn, no JSON",
+    "supervisor_pid": 47468
+  },
+  "relaunched": {
+    "artifact_id": "ATT-0054",
+    "claude_pid": 47934,
+    "cwd": "/private/var/folders/r_/40tyr0nj6zn_yqb74rw_351c0000gn/T/pure-tate-agent-gb8gqlbo",
+    "effort": "high",
+    "max_output_tokens": 32000,
+    "model": "claude-opus-5",
+    "prompt": "RESUME_PROMPT.txt",
+    "session_id": "0ed298f0-69cd-4513-92da-00f4c5bffa01"
+  },
+  "vault": "reports/runs/manual-recovery/ATT-0053-wrapup-20260808",
+  "waiter": {
+    "log": "reports/runs/manual-recovery/ATT-0053-wrapup-20260808/ATT-0054.finish.waiter.log",
+    "pid": 47935,
+    "policy": "ingest only if successful result event"
+  }
+}

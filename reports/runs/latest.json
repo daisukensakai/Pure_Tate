@@ -1,171 +1,61 @@
 {
   "campaign_id": "C66-001",
-  "completed_at": "2026-08-07T01:01:38.772835+00:00",
   "engine_pools": {
     "prover": [
-      "grok",
       "qwen",
       "claude"
     ],
     "research": [
-      "grok",
       "qwen",
       "claude"
     ],
     "review": [
-      "grok",
       "qwen",
       "claude"
     ]
   },
   "events": [
     {
-      "activity_bytes": 709984,
-      "artifact_sha256": "1a16a17ace541ce2ed1653d295a5b414c71f6b6fe7677917793efc72b1c0c14e",
-      "completed_at": "2026-08-07T00:05:20.383008+00:00",
-      "engine": "grok",
-      "engine_pid": 16369,
-      "engine_process_group": 16369,
-      "last_activity_at": "2026-08-07T00:05:19.523477+00:00",
-      "last_activity_stream": "stdout",
-      "notification_delivery": {
-        "desktop": {
-          "enabled": true,
-          "sent": true
-        },
-        "ntfy": {
-          "enabled": true,
-          "error": null,
-          "sent": true,
-          "status": 200
-        }
-      },
-      "output": "proof/reviews/REV-0091.json",
-      "phase": "review",
-      "processes": [
-        {
-          "engine_pid": 16369,
-          "engine_process_group": 16369,
-          "started_at": "2026-08-06T23:44:13.990577+00:00",
-          "supervisor_pid": 16368,
-          "supervisor_process_group": 16368
-        }
-      ],
-      "started_at": "2026-08-06T23:44:13.959130+00:00",
-      "state": "completed",
-      "step": 1,
-      "supervisor_pid": 16368,
-      "task_id": "TASK-V-ATT-0048-P1"
-    },
-    {
-      "activity_bytes": 416892,
-      "artifact_sha256": "a78aa66612eaa904a6e76c6acad4c4672b7c6ced2d2e68800cadf164c3c41809",
-      "completed_at": "2026-08-07T00:14:22.768123+00:00",
-      "engine": "qwen",
-      "engine_pid": 18476,
-      "engine_process_group": 18476,
-      "last_activity_at": "2026-08-07T00:14:22.656245+00:00",
-      "last_activity_stream": "stdout",
-      "max_output_tokens": 64000,
-      "notification_delivery": {
-        "desktop": {
-          "enabled": true,
-          "sent": true
-        },
-        "ntfy": {
-          "enabled": true,
-          "error": null,
-          "sent": true,
-          "status": 200
-        }
-      },
-      "output": "proof/reviews/REV-0092.json",
-      "phase": "review",
-      "processes": [
-        {
-          "engine_pid": 18476,
-          "engine_process_group": 18476,
-          "started_at": "2026-08-07T00:05:21.588095+00:00",
-          "supervisor_pid": 18475,
-          "supervisor_process_group": 18475
-        }
-      ],
-      "started_at": "2026-08-07T00:05:21.512674+00:00",
-      "state": "completed",
-      "step": 2,
-      "supervisor_pid": 18475,
-      "task_id": "TASK-V-ATT-0048-P2"
-    },
-    {
-      "activity_bytes": 1537241,
-      "completed_at": "2026-08-07T01:01:38.673633+00:00",
+      "activity_bytes": 2012803,
       "engine": "claude",
-      "engine_pid": 21762,
-      "engine_process_group": 21762,
-      "error": "agent failed with exit 1: API Error: Unable to connect to API (ConnectionRefused)",
-      "last_activity_at": "2026-08-07T01:01:37.818867+00:00",
+      "engine_pid": 47469,
+      "engine_process_group": 47469,
+      "last_activity_at": "2026-08-08T00:27:43.822496+00:00",
       "last_activity_stream": "stdout",
       "max_output_tokens": 64000,
-      "notification_delivery": {
-        "desktop": {
-          "enabled": true,
-          "sent": true
-        },
-        "ntfy": {
-          "enabled": true,
-          "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
-          "sent": false
-        }
-      },
-      "output": "proof/attempts/ATT-0049.json",
-      "phase": "forced-proof",
+      "output": "proof/attempts/ATT-0053.json",
+      "phase": "standard-fallback",
       "processes": [
         {
-          "engine_pid": 21762,
-          "engine_process_group": 21762,
-          "started_at": "2026-08-07T00:14:23.850224+00:00",
-          "supervisor_pid": 21761,
-          "supervisor_process_group": 21761
+          "engine_pid": 47469,
+          "engine_process_group": 47469,
+          "started_at": "2026-08-07T23:39:38.172511+00:00",
+          "supervisor_pid": 47468,
+          "supervisor_process_group": 47468
         }
       ],
-      "started_at": "2026-08-07T00:14:23.789723+00:00",
-      "state": "failed",
-      "step": 3,
-      "supervisor_pid": 21761,
-      "task_id": "TASK-C66-001-FORCED-FULL",
-      "trace_id": "TRACE-0026",
-      "trace_path": "research/paired-traces/TRACE-0026.json",
-      "trace_sha256": "52bfb5617448fed39e3ec528a59777ee61515a2d1c7f37f06c504e6438e23ecc",
+      "started_at": "2026-08-07T23:39:38.136646+00:00",
+      "state": "running",
+      "step": 1,
+      "supervisor_pid": 47468,
+      "task_id": "TASK-C66-M-001",
       "working_context": {
         "extended": {
-          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-34b35a0583c655ab.md",
-          "sha256": "34b35a0583c655ab5955ccd06a3690faadb35076b5f74335bf3aeb9dc9f0158d"
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-2e140454f71c8609.md",
+          "sha256": "2e140454f71c8609c221cb6c23e4b0d1671dbb7b9167f8553e9d0b30f29cac2b"
         },
         "primary": {
-          "path": "proof/packets/generated/paired-working-context/WORKING-864c30eef5a1fdd9.md",
-          "sha256": "864c30eef5a1fdd960b006e3ea2ad6899875a84a0f8f85ab63f13c2f26685f4b"
+          "path": "proof/packets/generated/paired-working-context/WORKING-7a483703948f9ea9.md",
+          "sha256": "7a483703948f9ea9e14a358b223001cc0472934d907b839e1b2f731b9d1302cf"
         }
       }
     }
   ],
-  "executed_steps": 3,
-  "parent_pid": 16366,
-  "parent_process_group": 16362,
+  "parent_pid": 47462,
+  "parent_process_group": 47458,
   "requested_steps": 3,
-  "run_id": "RUN-C66-001-20260806T234413727508Z-16366",
-  "run_notification_delivery": {
-    "desktop": {
-      "enabled": true,
-      "sent": true
-    },
-    "ntfy": {
-      "enabled": true,
-      "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
-      "sent": false
-    }
-  },
+  "run_id": "RUN-C66-001-20260807T233937839509Z-47462",
   "schema_version": 2,
-  "started_at": "2026-08-06T23:44:13.727508+00:00",
-  "status": "stopped",
-  "stop_reason": "engine_failure"
+  "started_at": "2026-08-07T23:39:37.839509+00:00",
+  "status": "running"
 }

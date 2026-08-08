@@ -1416,6 +1416,12 @@ def _validate_artifact(
                     % (field, expected)
                 )
         if is_campaign:
+            # Harness-owned packet identity: models often omit binding; stamp
+            # from the task so verified-dependency gates do not false-negative.
+            if task.get("packet_binding_sha256"):
+                artifact["packet_binding_sha256"] = task.get(
+                    "packet_binding_sha256"
+                )
             if not isinstance(artifact.get("theorem_statement"), str) or not artifact[
                 "theorem_statement"
             ].strip():

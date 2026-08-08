@@ -132,6 +132,30 @@ class PacketBindingTests(unittest.TestCase):
             )
         )
 
+    def test_missing_binding_matches_when_content_equals_live_packet(self):
+        # Reviews that omit packet_binding_sha256 but carry the live full-content
+        # hash must still pass the gate (otherwise double-confirms false-negative).
+        from pure_tate.campaigns import campaign_packet_record
+
+        live = campaign_packet_record("C66-001")["packet_sha256"]
+        self.assertTrue(
+            packet_binding_matches(
+                {"campaign_id": "C66-001", "packet_sha256": live},
+                "C66-001",
+            )
+        )
+        # Explicit wrong binding still loses even if content looks live.
+        self.assertFalse(
+            packet_binding_matches(
+                {
+                    "campaign_id": "C66-001",
+                    "packet_binding_sha256": "f" * 64,
+                    "packet_sha256": live,
+                },
+                "C66-001",
+            )
+        )
+
     def test_snapshot_path_is_derived_once_and_does_not_nest(self):
         working = Path("proof/packets/generated/C66-001-v4.md")
         digest = "a" * 64
@@ -500,16 +524,29 @@ class FocusedCampaignTests(unittest.TestCase):
         tasks = campaign_mathematics_tasks("C66-001")
         by_subproblem = {task["subproblem_id"]: task for task in tasks}
         self.assertEqual(by_subproblem["C66-GEO-Z"]["status"], "ready")
-        self.assertEqual(by_subproblem["C66-GEO-H0"]["status"], "blocked")
+        # ATT-0048 + REV-0091/0092 (binding-stamped) discharge GEO-Z, so H0 is
+        # executable. COMP still waits on a verified H0 attempt.
+        self.assertEqual(by_subproblem["C66-GEO-H0"]["status"], "ready")
         self.assertEqual(
-            by_subproblem["C66-GEO-H0"]["blocked_dependencies"],
-            ["C66-GEO-Z"],
+            by_subproblem["C66-GEO-H0"].get("blocked_dependencies") or [],
+            [],
+        )
+        self.assertEqual(by_subproblem["C66-GEO-COMP"]["status"], "blocked")
+        self.assertEqual(
+            by_subproblem["C66-GEO-COMP"]["blocked_dependencies"],
+            ["C66-GEO-H0"],
         )
         report = campaign_status("C66-001")
         self.assertIn(
+            "C66-GEO-COMP requires C66-GEO-H0",
+            report["unresolved_proof_dependencies"],
+        )
+        self.assertNotIn(
             "C66-GEO-H0 requires C66-GEO-Z",
             report["unresolved_proof_dependencies"],
         )
+        # Lemma double-confirms must not mark the full RED-0001 case verified.
+        self.assertFalse(report["case_verification"]["case_verified"])
 
     def test_finding_migration_retires_bad_claims_and_splits_leray(self):
         self.assertEqual(finding_by_id("FND-0018")["status"], "retired")

@@ -797,6 +797,58 @@ class AgentAdapterTests(unittest.TestCase):
         ] = "confirmed"
         _validate_review_verdict_consistency(confirmed_with_unresolved)
 
+    def test_campaign_review_stamps_packet_binding_from_task(self):
+        # Models often omit packet_binding_sha256; harness must stamp it so the
+        # verified-dependency gate does not false-negative double-confirms.
+        binding = "b" * 64
+        target = {"g": 6, "n": 6}
+        task = {
+            "id": "TASK-V-ATT-9999-P1",
+            "campaign_id": "C66-001",
+            "campaign_revision": 4,
+            "subproblem_id": "C66-GEO-Z",
+            "review_pass": 1,
+            "target_attempt_id": "ATT-9999",
+            "prover_engine": "claude",
+            "excluded_reviewer_engines": ["claude"],
+            "packet_id": "C66-001-v4",
+            "packet_sha256": "c" * 64,
+            "packet_binding_sha256": binding,
+            "target": target,
+            "theorem_statement": "Exact theorem under review.",
+        }
+        artifact = {
+            "schema_version": 3,
+            "id": "REV-9999",
+            "review_task_id": task["id"],
+            "review_pass": 1,
+            "attempt_id": "ATT-9999",
+            "context_revision": 2,
+            "packet_id": "C66-001-v4",
+            "packet_sha256": "c" * 64,
+            "target": target,
+            "verdict": "confirmed",
+            "reviewer_engine": "grok",
+            "independent": True,
+            "checked_claims": [{"verdict": "confirmed"}],
+            "strongest_attack": "none",
+            "finding_candidates": [],
+            "campaign_id": "C66-001",
+            "campaign_revision": 4,
+            "subproblem_id": "C66-GEO-Z",
+            "theorem_statement": "Exact theorem under review.",
+            "proof_dependency_checks": [{"dependency_id": "SRC-0002", "verdict": "confirmed"}],
+        }
+        self.assertNotIn("packet_binding_sha256", artifact)
+        _validate_artifact(
+            "review",
+            task,
+            artifact,
+            Path("proof/reviews/REV-9999.json"),
+            "grok",
+        )
+        self.assertEqual(artifact["packet_binding_sha256"], binding)
+
     def test_run_task_surfaces_envelope_api_error(self):
         task = research_tasks()[0]
         envelope = json.dumps(
