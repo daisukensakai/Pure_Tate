@@ -1,0 +1,189 @@
+{
+  "argument_markdown": "## Argument\n\n### 0. Position and dependencies\n\nSubproblem C66-GEO-H0 asks to stratify the relative degree-six linear system by h^0 after C66-GEO-Z has identified the evaluation-failure locus. The dependency artifact ATT-0048 (confirmed by REV-0091 and REV-0092) supplies the scheme-theoretic identification Z_ev = a_N^{-1}(e(B)) together with the canonical filtration 0 -> W_4 -> W -> W_5 -> 0 of the balanced CE bundle, with no global splitting required (CLM-0048-3, CLM-0048-4, CLM-0048-6, CLM-0048-7). Those statements are used only as cited inputs; every h^0 claim below is proved here.\n\nPrimary working-context frontier obligations still open for residual CE geometry include the h^0 stratification itself (C66-GEO-H0). Packet findings FND-0073, FND-0103, FND-0104, FND-0058 frame the landscape but are not load-bearing: the identities and bounds are reproved from standard inputs.\n\n### 1. Standard inputs\n\n- (S1) Riemann-Roch on a smooth proper geometrically connected curve of genus g: chi(N)=deg(N)-g+1.\n- (S2) Serre duality: h^1(N)=h^0(omega \u2297 N^{-1}).\n- (S3) Clifford's theorem (char 0): if N is a special line bundle on a smooth projective curve (0 \u2264 deg N \u2264 2g-2 and h^1(N)\u22651), then h^0(N) \u2264 deg(N)/2 + 1, with equality if and only if either N \u2245 O, or N \u2245 omega, or the curve is hyperelliptic and N is a multiple of the unique g^1_2.\n- (S4) Grauert's theorem: if f: X -> S is proper flat and F is flat over S with h^0(X_s, F_s) constant on S, then f_* F is locally free and commutes with arbitrary base change.\n- (S5) Semi-continuity of fibrewise cohomology dimensions for a coherent sheaf flat over a Noetherian base: the loci {s : h^i(F_s) \u2265 t} are closed.\n- (S6) For a finite flat surjective morphism gamma: C -> P^1 of degree d, the pullback gamma^*: H^0(P^1, L) -> H^0(C, gamma^* L) is injective for every line bundle L on P^1 (because gamma_* O_C = O \u2295 E^vee splits off the structure sheaf, so H^0(gamma^* L) contains H^0(L) as a direct summand).\n- (S7) Relative dualizing sheaf for gamma: omega_{C/P^1} \u2245 omega_C \u2297 gamma^* O_{P^1}(2), and deg(omega_{C/P^1})=2g+6 for deg gamma=4.\n- (S8) Weak CE relative-canonical normalization (standard Casnati-Ekedahl; the single source line isolated by FND-0105): O_{P(E^vee)}(1)|_C \u2245 omega_{C/P^1} \u2297 gamma^* A for some A \u2208 Pic(P^1).\n\n**Campaign inputs used as black boxes (cited by ID):**\n- ATT-0048 / CLM-0048-6, CLM-0048-7: canonical filtration and the (6,6) balanced instance with deg W_5=16, deg W_4=20, Z_ev = a_N^{-1}(e(B)).\n- SRC-0004 Lemma 10.6: deg(W_f|_C)=4g+12-4f and the convention W_f = (O(2) \u2297 gamma^* O(-f))|_C; in particular deg(O_{P(E^vee)}(1)|_C)=2g+6.\n\n### 2. Step 1: degrees and the identity h^0(L)=1+h^0(M)\n\nOn every geometric fibre, SRC-0004 gives deg(W_5)=4\u00b76+12-4\u00b75=16 and deg(omega_C)=10, so deg(L)=6. By (S1),\n  chi(L)=6-6+1=1.\nBy (S2),\n  h^1(L)=h^0(omega_C \u2297 L^{-1})=h^0(omega_C^{\u22972} \u2297 W_5^vee)=h^0(M),\nwhere M := omega_C^{\u22972} \u2297 W_5^vee has degree 2\u00b710-16=4. Hence\n  h^0(L)=chi(L)+h^1(L)=1+h^0(M).\nThis is (H1). No identification W_5 \u2245 omega^{\u22972}(-D) is used (matching FND-0073's independence claim, here proved).\n\n### 3. Step 2: speciality of M and Clifford bounds\n\nOn every geometric fibre, h^1(M)=h^0(omega \u2297 M^{-1})=h^0(L)=1+h^0(M)\u22651, so M is special. Since 0 < deg M=4 < 2g-2=10, Clifford (S3) applies whenever we bound h^0(M):\n  h^0(M) \u2264 deg(M)/2 + 1 = 3.\n(The bound is vacuous when h^0(M)=0 but still formally valid.) Therefore h^0(M) \u2208 {0,1,2,3} and h^0(L) \u2208 {1,2,3,4}. In particular h^0(L)=5 is impossible, so the putative {h^0(L)=5} stratum is empty.\n\nEquality h^0(M)=3 forces, by (S3), that the fibre is hyperelliptic and M \u2245 (g^1_2)^{\u22972} (the alternatives M \u2245 O or M \u2245 omega are excluded by deg M=4 \u2209 {0,10}). Thus h^0(L)=4 occurs only on hyperelliptic fibres. This is (H2).\n\n(The constraint forbidding an r=0 stratum for chi(L)=1 is respected: h^0(L)=1+h^1(L)\u22651 always, so no empty linear system occurs.)\n\n### 4. Step 3: W_5 \u2245 omega^{\u22972}(-D) under weak CE normalization\n\nAdopt (S8): O_{P(E^vee)}(1)|_C \u2245 omega_{C/P^1} \u2297 gamma^* A. By (S7),\n  O(1)|_C \u2245 omega_C \u2297 gamma^* O(2) \u2297 gamma^* A.\nTaking degrees and using SRC-0004's deg(O(1)|_C)=2g+6,\n  2g+6 = (2g-2) + 4\u00b72 + 4 deg A = 2g+6 + 4 deg A,\nhence deg A=0, so A \u2245 O_{P^1}. Therefore\n  O(1)|_C \u2245 omega_C \u2297 gamma^* O(2).\nThe packet/ATT-0048 convention gives, on geometric fibres where L_5 \u2245 O(5),\n  W_5 \u2245 (O(1)|_C)^{\u22972} \u2297 gamma^* O(-5) \u2245 (omega_C \u2297 gamma^* O(2))^2 \u2297 gamma^* O(-5)\n       \u2245 omega_C^{\u22972} \u2297 gamma^* O(-1) \u2245 omega_C^{\u22972}(-D),\nwith D a fibre of gamma. Line-bundle algebra yields\n  L \u2245 omega_C(-D),    M \u2245 O_C(D) \u2245 gamma^* O(1).\nDegree checks: deg(omega^{\u22972}(-D))=20-4=16=deg W_5; deg(omega(-D))=6; deg O(D)=4. This is the first half of (H3).\n\nBy (S6), gamma^*: H^0(P^1,O(1)) -> H^0(C,O(D)) is injective, so h^0(M)\u22652. Combined with the Clifford upper bound h^0(M)\u22643 one gets h^0(M) \u2208 {2,3} and h^0(L) \u2208 {3,4} on every balanced geometric fibre. This completes (H3).\n\n(The sign/convention constraints of the primary file are respected: W_5 is built from gamma^* O(-5) via F^vee, not from the O(5) summand of F; the degree formula uses gamma^* O(-f).)\n\n### 5. Step 4: the stratification and the jump locus\n\nBy semi-continuity (S5) applied to pi_* L and R^1 pi_* L (or directly to the coherent sheaf L, flat over B after an \u00e9tale localization if needed to trivialize Pic-twists), the functions b |-> h^0(L_b) and b |-> h^0(M_b) are upper semi-continuous. The level sets\n  B_k := {b \u2208 B : h^0(L_b)=k},    k \u2208 {3,4},\nare therefore locally closed, and B = B_3 \u222a B_4 set-theoretically on geometric points of the balanced locus. This is the first half of (H4).\n\nIf b \u2208 B_4 then h^0(M_b)=3. By (H2) and (H3), the fibre C_b is hyperelliptic with M_b \u2245 (g^1_2)^{\u22972} \u2245 O(D_b), so D_b ~ 2H for the hyperelliptic class H. Then |D_b| = |2H| = h^* |O_{P^1}(2)| for the hyperelliptic map h: C_b -> P^1. Every pencil inside |D_b| is the pullback of a pencil in |O(2)|, i.e. is of the form q \u2218 h for some degree-2 map q: P^1 -> P^1. Since gamma is given by a pencil in |D| (because O(D)=gamma^* O(1) and h^0(D)\u22652), one has gamma_b = q \u2218 h: non-primitive. This is the second half of (H4).\n\n### 6. Step 5: relative P^2-bundle on the constant-rank open\n\nOn U_3 := B_3 one has h^0(L_b)=3 constantly. By Grauert (S4), pi_* L is locally free of rank 3 on U_3 and commutes with arbitrary base change. The relative projective bundle P((pi_* L)^vee) -> U_3 is therefore a P^2-bundle whose fibre over b is P(H^0(L_b)^vee) \u2245 |L_b|. This is (H5).\n\nNote that R^1 pi_* L has rank h^1(L)=2 on U_3 and need not vanish; Grauert does not require R^1=0, only constancy of h^0.\n\n### 7. Step 6: global model of the relative linear system; link to Z_ev\n\nWhere h^0(L) may jump, pi_* L need not be locally free and Proj(pi_* L) need not have the correct fibres or commute with base change (FND-0047; extended-file constraints). The correct global model of the residual linear system is the closed incidence\n  I := {(b, Gamma) : O_{C_b}(Gamma) \u2245 L_b}\ninside the relative effective-divisor space of degree 6 (or inside Hilb^6_{C/B}), equivalently the scheme-theoretic fibre of the Abel-Jacobi map over the section of Pic^6_{C/B} classifying L. Over U_3 this coincides with the P^2-bundle of (H5) on the reduced-support open; the reduced-support locus itself remains open (not closed) in each fibre, as recorded by the primary constraints and FND-0083.\n\nBy ATT-0048 (CLM-0048-4, CLM-0048-5, CLM-0048-7), on any base carrying the CE filtered data and n=6 sections, the Fitting evaluation-failure locus Z_ev equals a_N^{-1}(e(B)), i.e. is scheme-theoretically the locus where O(Gamma) \u2245 W_5 \u2297 omega^{-1} relatively to the base. Under (H3) this is exactly the incidence I above. This is (H6). No geometric-point-only identification is used: the scheme structure is inherited from ATT-0048's Fitting comparison.\n\n### 8. Separation of status\n\n**Proved here:** (H1)-(H6).\n\n**Source-backed inputs:** SRC-0004 Lemma 10.6 (degrees and W_f convention); weak CE relative-canonical normalization (S8); ATT-0048 filtration and Z_ev scheme structure (REV-0091, REV-0092 confirmed).\n\n**Computational hypotheses:** none. Pinned degree arithmetic (deg W_5=16, deg L=6, deg M=4, chi(L)=1) is reproved inline from SRC-0004.\n\n**Explicitly excluded (H7), not gap markers against asserted clauses:**\n1. Emptiness of B_4 / constancy h^0(L)\u22613 on the whole balanced locus (GAP-H0-1). Equivalently: whether a non-primitive degree-4 pencil can carry balanced F=O(4)\u2295O(5). This attempt does not settle that exclusion and does not claim a global relative P^2-bundle over all of B.\n2. Pure dimension 17 or codimension 4 in M_{6,6} (FND-0058: requires constancy).\n3. Smoothness of Z_ev or of its ordered reduced open from dimension counts alone.\n4. Nonemptiness of the reduced-support open or of Conf_6 incidence on every geometric fibre (FND-0083).\n5. Any monomorphism of the balanced model into M_{6,6}, component/stabilizer analysis (C66-GEO-COMP), or any Tate/Hodge statement (C66-TATE-*).\n\n### 9. Failed routes explicitly addressed\n\n- Global Proj(pi_* L) when h^0 jumps (FND-0047; WORKING-EXT): not used; global model is Abel-Jacobi/Hilbert incidence (H6).\n- Relative |omega(-D)| is a P^2-bundle over the entire balanced Hurwitz space (FND-0058; WORKING-EXT): not claimed; P^2 only on U_3 (H5).\n- r=0 stratum for chi(L)=1 (WORKING-EXT): impossible by (H1).\n- Reduced-support locus called closed: not used; it remains open.\n- Nonemptiness of reduced-support/Conf_6 from chi(L)=1 (FND-0083): excluded.\n- Scheme identification of Z from geometric points alone (FND-0046): not used; scheme structure from ATT-0048 Fitting comparison.\n- Global splitting W=W_4\u2295W_5 from fibrewise balancedness: not used; filtration from ATT-0048.\n- W_5 as the O(5) summand of F / wrong degree sign: not used; packet gamma^*O(-f) convention.\n- Quantifying W_5, L over the whole family without fibrewise restriction: L and M are defined fibrewise via the invertible quotient W_5 of the filtration; relative statements on U_3 use Grauert after constancy.\n- Blocked campaign routes (vcd-only-vanishing, undecorated-cgp-top-weight-graph-complex, point-count-without-degree-parity-separation, forgetful-map-renaming-local-system-unknown): none used; no cohomological vanishing or weight argument appears. new_inputs is empty.\n\n### 10. What this advances\n\nC66-GEO-H0 receives a complete h^0 stratification of the residual linear system on balanced tetragonal CE families: at most two strata {3,4} after the CE normalization, with the main stratum carrying a relative P^2-bundle and the jump stratum confined to non-primitive hyperelliptic fibres. The link to Z_ev is scheme-theoretic via ATT-0048. Downstream C66-GEO-COMP may treat U_3 as the main balanced open and B_4 as a residual hyperelliptic non-primitive locus (or empty if GAP-H0-1 is later settled). Pure dimension 17 / codimension 4 remains conditional on GAP-H0-1 and on stabilizer analysis, which are not claimed here.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0061-1",
+      "justification": "SRC-0004 deg(W_5)=16; deg(omega)=10; RR chi=deg-g+1=1; Serre h^1(L)=h^0(omega\u2297L^{-1})=h^0(M). Pure sheaf algebra.",
+      "statement": "On every geometric fibre of a balanced tetragonal genus-6 CE family, for L=W_5\u2297omega_C^{-1} and M=omega_C^{\u22972}\u2297W_5^vee one has deg L=6, deg M=4, chi(L)=1, and h^0(L)=1+h^0(M) by Riemann-Roch and Serre duality, without using W_5\u2245omega_C^{\u22972}(-D).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0061-2",
+      "justification": "h^1(M)=h^0(L)=1+h^0(M)\u22651 so M is special with 0<deg M=4<2g-2; Clifford gives h^0(M)\u22643 with the stated equality case; O and omega are excluded by degree.",
+      "statement": "On every such geometric fibre, M is special and Clifford's theorem yields h^0(M)\u2208{0,1,2,3}, hence h^0(L)\u2208{1,2,3,4}; h^0(L)=5 never occurs; h^0(M)=3 iff the fibre is hyperelliptic and M\u2245(g^1_2)^{\u22972}.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0061-3",
+      "justification": "Relative duality omega_{C/P^1}=omega\u2297gamma^*O(2); degree comparison deg(O(1)|_C)=2g+6 kills deg A; square and tensor gamma^*O(-5) using the packet/ATT-0048 convention; injectivity of gamma^* on H^0(O(1)); combine with CLM-0061-2.",
+      "statement": "Under the weak CE relative-canonical normalization O_{P(E^vee)}(1)|_C \u2245 omega_{C/P^1}\u2297gamma^*A, the SRC-0004 degree forces A\u2245O and W_5\u2245omega_C^{\u22972}(-D), L\u2245omega_C(-D), M\u2245O_C(D); consequently h^0(M)\u22652 and h^0(L)\u2208{3,4} on every balanced geometric fibre.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0061-4",
+      "justification": "Semi-continuity of h^0; on B_4 one has h^0(M)=3 so M\u2245(g^1_2)^{\u22972}\u2245O(D) and |D|=h^*|O(2)|, forcing every pencil in |D| (including gamma) to factor through the hyperelliptic map.",
+      "statement": "The base of a balanced tetragonal family is stratified by locally closed loci B_k={h^0(L)=k} for k\u2208{3,4}, and B_4 is contained in the locus of hyperelliptic fibres on which gamma is non-primitive.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0061-5",
+      "justification": "Grauert's theorem applied to the flat family of line bundles L with constant h^0=3; no vanishing of R^1 is required.",
+      "statement": "On the open U_3=B_3 where h^0(L) is constantly 3, pi_*L is locally free of rank 3 and commutes with arbitrary base change, and P((pi_*L)^vee)->U_3 is a relative P^2-bundle with fibre |L_b|.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0061-6",
+      "justification": "When h^0 jumps, Proj(pi_*L) need not have correct fibres (FND-0047 avoided by using incidence); ATT-0048 CLM-0048-4/5/7 gives Z_ev=a_N^{-1}(e(B)) as Fitting ideals, matching O(Gamma)\u2245L relatively.",
+      "statement": "Over the whole base, the relative degree-six linear system of L is the Abel-Jacobi/Hilbert incidence of O(Gamma)\u2245L inside the relative effective-divisor space, not Proj(pi_*L); over U_3 the two agree on the reduced-support open; by ATT-0048 this incidence coincides scheme-theoretically with Z_ev.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [],
+  "id": "ATT-0061",
+  "lane": "geometry",
+  "methods_used": [
+    "riemann-roch-serre-duality-identity",
+    "clifford-theorem-special-line-bundles",
+    "ce-relative-canonical-normalization-degree-kill",
+    "harder-narasimhan-filtered-W5-from-ATT-0048",
+    "semicontinuity-h0-stratification",
+    "grauert-constant-rank-relative-P2",
+    "abel-jacobi-hilbert-incidence-not-proj",
+    "non-primitive-factorization-of-jump-stratum",
+    "dependency-ATT-0048-fitting-Zev"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "First complete, gap-audited proof of the C66-GEO-H0 h^0 stratification on balanced tetragonal CE families: reduction to a degree-4 Brill-Noether problem via h^0(L)=1+h^0(M), Clifford bound excluding h^0=5 and confining h^0=4 to hyperelliptic fibres, and collapse to {3,4} after discharging GAP-Z-W5D under the single weak CE normalization.",
+    "Scheme-correct global model of the residual linear system as Abel-Jacobi/Hilbert incidence rather than Proj(pi_*L), linked to ATT-0048's Fitting identification of Z_ev, with the relative P^2-bundle structure isolated exactly on the constant-rank open U_3.",
+    "Geometric identification of the residual jump stratum B_4 with non-primitive hyperelliptic factorizations of gamma, converting GAP-H0-1 into a single checkable exclusion without claiming that exclusion here."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "39e87ba7e3784b681616f7a38db13eb7216cbd1fd11acb3a1fff2c20211f9a0a",
+  "principal_normalization": {
+    "normalized_at": "2026-08-08T09:04:48.176990+00:00",
+    "pre_sha256": "04123c6a4ae9e5d8ae4352bddff30c25074f7ba47ec9fc5b162b83f66d36d87f",
+    "reason": "Grok GEO-H0 turn polluted source_claim_ids with CLM-0048-* and source_ids with ATT/REV labels. Principal normalization keeps only corroborated FND-* and SRC-* so structural integrity can clear for review."
+  },
+  "proof_dependencies": [
+    {
+      "id": "ATT-0048",
+      "kind": "attempt",
+      "role": "C66-GEO-Z dependency attempt (confirmed by REV-0091/REV-0092); used for Z_ev identification and filtered CE setup."
+    },
+    {
+      "id": "REV-0091",
+      "kind": "confirmation_review",
+      "role": "Confirmation review of ATT-0048."
+    },
+    {
+      "id": "REV-0092",
+      "kind": "confirmation_review",
+      "role": "Confirmation review of ATT-0048."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "role": "Lemma 10.6 degree/CE conventions."
+    },
+    {
+      "id": "FND-0046",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated finding referenced in the GEO-H0 argument."
+    },
+    {
+      "id": "FND-0047",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated finding referenced in the GEO-H0 argument."
+    },
+    {
+      "id": "FND-0058",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated finding referenced in the GEO-H0 argument."
+    },
+    {
+      "id": "FND-0073",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated finding referenced in the GEO-H0 argument."
+    },
+    {
+      "id": "FND-0083",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated finding referenced in the GEO-H0 argument."
+    },
+    {
+      "id": "FND-0103",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated finding referenced in the GEO-H0 argument."
+    },
+    {
+      "id": "FND-0104",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated finding referenced in the GEO-H0 argument."
+    },
+    {
+      "id": "FND-0105",
+      "kind": "adjudicated_finding",
+      "role": "Corroborated finding referenced in the GEO-H0 argument."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0046",
+    "FND-0047",
+    "FND-0058",
+    "FND-0073",
+    "FND-0083",
+    "FND-0103",
+    "FND-0104",
+    "FND-0105"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-GEO-H0",
+  "summary": "For C66-GEO-H0, proves the h^0 stratification of the residual degree-six linear system L=W_5\u2297omega^{-1} on balanced tetragonal genus-6 CE families: h^0(L)=1+h^0(M) with deg M=4; Clifford forces h^0(L)\u2208{1,2,3,4} and never 5; under the standard CE relative-canonical normalization one has L\u2245omega(-D) and M\u2245O(D), collapsing values to {3,4} with the jump stratum B_4 confined to non-primitive hyperelliptic fibres; on the open U_3 where h^0\u22613 the relative linear system is a P^2-bundle via Grauert; globally the linear system is the Abel-Jacobi/Hilbert incidence (not Proj of pi_*L), matching Z_ev from ATT-0048. Emptiness of B_4 (GAP-H0-1) and all dimension/Tate claims are excluded.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-002",
+  "theorem_scope": {
+    "base": "locally Noetherian over a field of characteristic zero",
+    "exclusions": "GAP-H0-1 (emptiness of the h^0=4 stratum), dimension/codimension in M_{6,6}, smoothness, reduced-support nonemptiness, Tate type",
+    "g": 6,
+    "generality": "balanced tetragonal CE families of genus 6 with the ATT-0048 filtered W_5; (H1)-(H2) need no W_5\u2245omega^2(-D); (H3)-(H5) use the weak CE relative-canonical normalization as a single source-backed input",
+    "n": 6
+  },
+  "theorem_statement": "Let B be a locally Noetherian scheme over a field of characteristic zero, pi: C -> B a smooth proper morphism with geometrically connected fibres of genus g=6, and gamma: C -> P^1_B a finite flat morphism of degree 4 whose Casnati-Ekedahl relations bundle F is fibrewise balanced F \u2245 O(4) \u2295 O(5). Let 0 -> W_4 -> W -> W_5 -> 0 be the canonical Harder-Narasimhan filtration of W = (O_{P(E^vee)}(2) \u2297 gamma^* F^vee)|_C constructed in ATT-0048 (CLM-0048-6), so that W_5 is the invertible quotient of fibrewise degree 16 under the SRC-0004 convention W_f = (O_{P(E^vee)}(2) \u2297 gamma^* O_{P^1}(-f))|_C. Set L := W_5 \u2297 omega_{C/B}^{-1} (fibrewise degree 6) and M := omega_{C/B}^{\u22972} \u2297 W_5^vee (fibrewise degree 4). Then: (H1) On every geometric fibre, chi(L)=1 and h^0(L)=1+h^0(M) by Riemann-Roch and Serre duality, with no use of W_5 \u2245 omega_C^{\u22972}(-D). (H2) On every geometric fibre, M is special (h^1(M)=h^0(L)\u22651), and Clifford's theorem yields h^0(M) \u2208 {0,1,2,3}, hence h^0(L) \u2208 {1,2,3,4}; the value h^0(L)=5 never occurs; equality h^0(M)=3 holds if and only if the fibre is hyperelliptic and M \u2245 (g^1_2)^{\u22972}. (H3) Under the standard CE relative-canonical normalization in the weak form O_{P(E^vee)}(1)|_C \u2245 omega_{C/P^1} \u2297 gamma^* A for some A \u2208 Pic(P^1), the SRC-0004 degree deg(O(1)|_C)=2g+6 forces deg A=0, hence A \u2245 O, and therefore W_5 \u2245 omega_C^{\u22972}(-D), L \u2245 omega_C(-D), and M \u2245 O_C(D) where D is any fibre of gamma (i.e. O_C(D) \u2245 gamma^* O_{P^1}(1)). Consequently gamma^*: H^0(P^1,O(1)) -> H^0(C,O(D)) is injective, so h^0(M)\u22652 and h^0(L) \u2208 {3,4} on every balanced geometric fibre. (H4) Semi-continuity stratifies B into locally closed subschemes B_k = {b \u2208 B : h^0(L_b)=k} for k \u2208 {3,4} (the only values allowed by (H3)), with B_4 contained in the locus of hyperelliptic fibres on which gamma is non-primitive (factors as q \u2218 h through the hyperelliptic double cover). (H5) On the open U_3 := B_3 (where h^0(L) is constantly 3), Grauert's theorem supplies that pi_* L is locally free of rank 3 and commutes with arbitrary base change; P((pi_* L)^vee) -> U_3 is a relative P^2-bundle whose geometric fibre over b is |L_b| \u2245 P^2. (H6) Over all of B the relative degree-six linear system of L is the closed incidence locus inside the relative effective-divisor space (equivalently the Hilbert scheme Hilb^6_{C/B}, or the Abel-Jacobi fibre of the section classifying L), not Proj(pi_* L); the two models agree over U_3 after restricting to the reduced-support open. By ATT-0048 (CLM-0048-4, CLM-0048-5, CLM-0048-7), this incidence coincides scheme-theoretically with the CE evaluation-failure locus Z_ev = a_N^{-1}(e(B)) on any base carrying the ordered or configuration data of ATT-0048. (H7) Explicitly excluded from this theorem: emptiness of B_4 (constancy h^0(L)\u22613 on the whole balanced locus; equivalently, non-existence of balanced non-primitive tetragonal pencils \u2014 GAP-H0-1); pure dimension 17 or codimension 4 of any image in M_{6,6}; smoothness of Z_ev or of its ordered reduced open; nonemptiness of the reduced-support open on every fibre; and any Hodge/Tate conclusion."
+}

@@ -1,0 +1,258 @@
+{
+  "argument_markdown": "## Setting and inputs\n\nThroughout k is algebraically closed of characteristic 0. Fix a smooth projective connected genus-6 curve C/k with a finite flat degree-4 morphism gamma : C -> P^1. In characteristic 0 the trace splits gamma_*O_C = O_{P^1} direct-sum E^vee with E^vee locally free of rank 3 and deg E^vee = -(g+3) = -9; write E^vee = direct-sum_{i=1}^3 O(-a_i), a_i >= 1, sum a_i = 9. Set D := gamma^*(pt), so O_C(D) = gamma^*O_{P^1}(1) and deg D = 4.\n\n**Fully balanced hypothesis (B).** E^vee is isomorphic to O_{P^1}(-3)^{oplus 3} and the CE relations bundle F is isomorphic to O_{P^1}(4) direct-sum O_{P^1}(5). I do not claim that either condition implies the other; both are hypotheses. Condition (B2) (F balanced) is exactly the hypothesis of ATT-0048 (T6); condition (B1) (E balanced) is what drives Steps 2-4 below.\n\nFrom the dependency (ATT-0048, confirmed by REV-0091 and REV-0092) I use verbatim, and do not reprove:\n\n- **(T1)** pi_*W and pi_*(W|_Gamma) are locally free of ranks d_4 + d_5 + 2 - 2g = 26 and 2n = 12, so Fit_0(coker phi) = I_12(phi).\n- **(T3)** Fit_0(coker phi) = Fit_0(coker phi_5), proved in filtered form, never using a splitting W = W_4 direct-sum W_5.\n- **(T4)** Fit_0(coker phi) = a_N^{-1}(I_e).O_B, i.e. Z_ev = a_N^{-1}(e(B)) as closed subschemes, with N := omega_{C/B} tensor W_5^vee(Gamma) of fibrewise degree 0.\n- **(T5)** formation commutes with arbitrary base change, and for every locally Noetherian T the map T -> B factors through Z_ev if and only if N|_{C_T} is relatively trivial.\n- **(T6)** the (6,6) balanced tetragonal CE datum satisfies the hypotheses with d_4 = 20, d_5 = 16 and the canonical filtration 0 -> W_4 -> W -> W_5 -> 0 of CLM-0048-6.\n\nSource-backed CE inputs: SRC-0004 Lemma 10.6 for the convention W_f = (O_{P(E^vee)}(2) tensor gamma^*O_{P^1}(-f))|_C and deg(W_f|_C) = 4g+12-4f, and the Casnati-Ekedahl relative-canonical embedding recorded in the packet; packet findings FND-0062, FND-0063 (fibrewise obstruction criterion), FND-0064 (S_6-torsor at stack level), FND-0083 (chi(L) = 1 is insufficient for nonemptiness), FND-0046 (geometric points do not determine scheme structure).\n\n---\n\n## Step 1 (R1): identification of W_5, L and M\n\nCasnati-Ekedahl realise C inside P(E^vee) by the relative canonical map: the inclusion E subset gamma_*omega_{C/P^1} adjoint to relative duality gamma_*omega_{C/P^1} = Hom(gamma_*O_C, O_{P^1}) = O direct-sum E gives a surjection gamma^*E ->> omega_{C/P^1}, and the induced embedding satisfies\n\n  O_{P(E^vee)}(1)|_C = omega_{C/P^1} = omega_C tensor gamma^*O_{P^1}(2).\n\nDegree check (mechanical, and matching the pinned packet computation sha256 ed50d74f9c39186cafd19d67c763077316a04decb7036e0dfef05bf70c2d7a94 and established fact \"deg(O_{P(E^vee)}(1)|_C) = 2g-2+4*2 = 18\"): deg(omega_C tensor gamma^*O(2)) = (2g-2) + 4*2 = 10 + 8 = 18.\n\nHence, in the SRC-0004 convention W_f = (O_{P(E^vee)}(2) tensor gamma^*O(-f))|_C,\n\n  W_5 = (omega_C tensor gamma^*O(2))^{tensor 2} tensor gamma^*O(-5) = omega_C^{tensor 2} tensor gamma^*O(-1) = omega_C^{tensor 2}(-D),\n\n  L := W_5 tensor omega_C^{-1} = omega_C(-D),  deg L = 10 - 4 = 6,\n\n  M := omega_C^{tensor 2} tensor W_5^vee = O_C(D),  deg M = 4.\n\nThe degrees agree with deg(W_5) = 4g+12-4*5 = 16 and deg(W_5 tensor omega_C^{-1}) = 16 - 10 = 6 (pinned computations sha256 6f4294cbc7166beabebcf00a625753ea71d2e5e71e458ad128f6458235bc972b and ce77273eab522bac4faf80347983e07dcf456b8f0428b4476b838771c238d2b8). Note this identification is exactly GAP-Z-W5D, which ATT-0048 deliberately did not use; it is proved here and used only in Steps 2-5, never inside the dependency.\n\nSanity model (motivating, not load-bearing): for a smooth complete intersection of bidegrees (1,2) and (2,2) in P^1 x P^2 one has omega_C = O_C(1,1), W_5 = O_C(1,2), W_4 = O_C(2,2), D = O_C(1,0) and L = O_C(0,1) with h^0 = 3 (pinned computation sha256 823546d61b9bfb1863be8693a9d2c5fe53bdee4736e3e4090ebccdb633621eec). A finite model cannot establish a universal claim and is not used as evidence below.\n\n---\n\n## Step 2 (R2): the exact h^0 stratification\n\nRiemann-Roch for L = omega_C(-D) of degree 6 on a genus-6 curve: h^0(L) - h^1(L) = 6 - 6 + 1 = 1. Serre duality gives h^1(L) = h^0(omega_C tensor L^{-1}) = h^0(O_C(D)). Therefore\n\n  h^0(C, L) = 1 + h^0(C, O_C(D)) = 1 + h^0(C, M),  deg M = 4.\n\nThis is precisely the stratification formula \"h^0(L) = 1 + h^0(M) with deg M = 4\" that ATT-0048 handed off, now with M identified as O_C(D) by Step 1.\n\nCompute h^0(O_C(D)) from the splitting type. By the projection formula and gamma_*O_C = O direct-sum direct-sum_i O(-a_i),\n\n  h^0(C, gamma^*O_{P^1}(1)) = h^0(P^1, O(1) tensor gamma_*O_C) = h^0(O(1)) + sum_i h^0(O(1-a_i)) = 2 + #{i : a_i = 1}.\n\nUnder (B1), a_1 = a_2 = a_3 = 3, so h^0(O_C(D)) = 2 exactly and hence h^0(L) = 3, h^1(L) = 2 exactly, on every fully balanced fibre. (The formula also records why the strata where h^0 jumps are exactly the loci with some a_i = 1; those loci are outside the hypothesis and nothing is claimed there. This respects the extended-file constraint forbidding the assertion that |omega_C(-D)| is a P^2-bundle over the *entire* balanced tetragonal Hurwitz space: the P^2 conclusion is asserted only where the splitting type is (3,3,3).)\n\n---\n\n## Step 3 (R3): base-point-freeness and nonemptiness of the ordered incidence\n\nFix p in C and set y := gamma(p). Put E := gamma_*O_C = O direct-sum O(-3)^{oplus 3} and E' := gamma_*O_C(p). Since gamma is finite, pushing forward 0 -> O_C -> O_C(p) -> k(p) -> 0 gives an exact sequence of O_{P^1}-modules\n\n  0 -> E -> E' -> k(y) -> 0,\n\nso E' is locally free of rank 4 with deg E' = -9 + 1 = -8. Write E' = direct-sum_{i=1}^4 O(b_i).\n\n(a) h^0(E') = h^0(C, O_C(p)) = 1, because C has genus 6 > 0. Since h^0(E') = sum_i max(0, b_i + 1) = 1, exactly one b_i equals 0 and all others are <= -1; normalise b_1 = 0.\n\n(b) The quotient E'/E is killed by the ideal sheaf of y, so O(-1) tensor E' = E'(-1) is contained in E. Suppose some b_j = -1 with j >= 2. Then E'(-1) contains the rank-2 subsheaf O(-1) direct-sum O(-2). Since Hom(O(-1), O(-3)) = H^0(O(-2)) = 0 and Hom(O(-2), O(-3)) = H^0(O(-1)) = 0, the composite of this rank-2 subsheaf with the projection E -> O(-3)^{oplus 3} vanishes, so O(-1) direct-sum O(-2) injects into the rank-1 summand O of E, which is impossible. Hence b_j <= -2 for all j >= 2.\n\n(c) Therefore h^0(E'(1)) = max(0, 0+2) + sum_{j>=2} max(0, b_j + 2) = 2 + 0 = 2, i.e.\n\n  h^0(C, O_C(D + p)) = h^0(P^1, O(1) tensor gamma_*O_C(p)) = 2  for every p in C.\n\n(d) By Riemann-Roch, h^0(L - p) - h^1(L - p) = 5 - 6 + 1 = 0 and h^1(L - p) = h^0(omega_C tensor L^{-1}(p)) = h^0(O_C(D + p)) = 2. Hence h^0(L - p) = 2 < 3 = h^0(L) for every p, i.e. **L is base-point-free**.\n\n(e) Nonemptiness. |L| = P(H^0(L)) is a P^2. In characteristic 0, Bertini for a base-point-free linear system on a smooth curve gives that the general member is a smooth (equivalently reduced) divisor, i.e. 6 pairwise-distinct points. Concretely: L base-point-free defines phi_L : C -> P^2 whose image Y is nondegenerate (the system is complete of projective dimension 2), hence deg Y >= 2 and Y is not a line; in characteristic 0 phi_L is separable, so it is etale over a dense open of Y; a general line avoids Sing(Y), the finitely many images of ramification points, and the dual curve Y^vee, hence meets Y transversally in deg Y distinct smooth points each with deg(phi_L : C -> Y) distinct preimages, giving 6 distinct points in total.\n\nThus the reduced-support locus of |L| is a nonempty open subset of P^2; it is *not* closed, since it is the complement of the image of the big diagonal under a finite (hence closed) map inside the irreducible P^2 and its complement is nonempty (e.g. any non-reduced member). Consequently Z_ev, which lies over it (Step 5), is nonempty.\n\nThis discharges the nonemptiness obligation that ATT-0048 excluded, and does so **without** the blocked inference from chi(L) = 1 (FND-0083 and the recorded constraints on that route): the input here is h^0(L) = 3 together with base-point-freeness, not the Euler characteristic.\n\n---\n\n## Step 4 (R4): the determinantal rank-drop ideal and the exact corank\n\nBy (T1) and (T3) of ATT-0048, on U = Conf_6(C),\n\n  Fit_0(coker phi) = I_12(phi) = Fit_0(coker phi_5) = I_6(phi_5),\n\nwhere phi_5 : H^0(C,W_5) tensor O_U -> pi_*(W_5|_Gamma) has source rank h^0(W_5) = 16 - 6 + 1 = 11 (deg W_5 = 16 > 10 = 2g-2 so h^1(W_5) = 0) and target rank 6. This is the requested rank-drop ideal: the ideal of maximal (6-by-6) minors of an 11-by-6 matrix, equal to the ideal of 12-by-12 minors of the 26-by-12 matrix of phi.\n\n**Exact corank.** For Gamma in U write N := O_C(Gamma) tensor L^{-1}, of degree 0. Since W_5(-Gamma) = omega_C tensor N^{-1} (line-bundle algebra, as in CLM-0048-4) and h^1(W_5) = 0, one has coker(phi_5)|_Gamma = H^1(C, W_5(-Gamma)) = H^1(C, omega_C tensor N^{-1}). If Gamma lies in Z_ev then N is trivial and this is H^1(C, omega_C) = k, of dimension exactly 1. Hence along Z_ev\n\n  rank phi_5 = 6 - 1 = 5 identically, rank phi = 12 - 1 = 11 identically,\n\nand the deeper degeneracy loci D_4(phi_5) and D_10(phi) are **empty**. So the determinantal stratification of phi_5 has exactly two strata: the open surjectivity locus and the corank-1 locus Z_ev.\n\n**Expected codimensions.** For the reduced presentation, the expected codimension of D_5(phi_5) inside U is (11-5)(6-5) = 6; for the unreduced presentation it is (26-11)(12-11) = 15. (The value 6 agrees with the pinned computation sha256 9dca9077654d111c46bd65ca99c4143f618489f24f3de17b7de0c486c7a2c945 under a different bookkeeping of the same degeneracy condition.) Both are compared with the *actual* codimension in Step 5.\n\n---\n\n## Step 5 (R5): fibre dimension, smoothness, and the exact excess\n\n**Identification of Z_ev.** Sym^6 C = Div^6_{C/k} represents degree-6 relative effective Cartier divisors. For a line bundle A on C with h^0(A) = r+1, the subfunctor of divisors Gamma with O(Gamma) isomorphic to A up to a twist pulled back from the base is represented by P(H^0(A)) = P^r: a T-point is a line subbundle M^{-1} subset H^0(A) tensor O_T, equivalently a section of A_T tensor pr_T^*M nonzero on every fibre, equivalently its vanishing divisor, a relative effective Cartier divisor of degree 6. Both directions are functorial and mutually inverse. Hence the scheme-theoretic fibre of the Abel-Jacobi map Sym^6 C -> Pic^6 C over [L] is P(H^0(L)), which by Step 2 is a **reduced smooth P^2**.\n\nBy ATT-0048 (T5), a T-point of U factors through Z_ev if and only if N = O(Gamma_T) tensor L_T^{-1} is relatively trivial, i.e. if and only if O(Gamma_T) is isomorphic to L_T twisted by a line bundle from T. Comparing subfunctors of U and applying Yoneda,\n\n  Z_ev = Conf_6(C) x_{Sym^6 C} P(H^0(L)).\n\nSince Conf_6(C) -> Sym^6 C is a finite etale S_6-torsor onto the reduced-support open (FND-0064; here at the level of the fixed curve, so no coarse-space or integral-coefficient issue arises and the recorded constraints on those two points are not invoked), Z_ev is finite etale of degree 720 over the reduced-support open of P(H^0(L)) = P^2. Etale morphisms preserve smoothness and reducedness, so:\n\n  **Z_ev is reduced and smooth of pure dimension exactly 2.**\n\nIn particular the Fitting/determinantal scheme structure on Z_ev is reduced here; ATT-0048 identified that structure with a_N^{-1}(e) but asserted nothing about reducedness.\n\n**Actual codimension and excess.** dim U = 6, so codim(Z_ev, U) = 4 exactly, versus expected 6 (reduced presentation). The excess is exactly 2 at every point of Z_ev.\n\n**Conormal computation.** Z_ev and U are both smooth over k, so the closed immersion Z_ev -> U is regular and I_{Z_ev}/I_{Z_ev}^2 is locally free of rank 4. By (T4) the ideal I_{Z_ev} = Fit_0(coker phi) = a_N^{-1}(I_e).O_U is locally generated by the 6 pullbacks of local generators of the ideal of the identity section e of the 6-dimensional Pic^0(C). Hence those 6 generators satisfy exactly 2 independent relations modulo I^2, and Z_ev is **nowhere** cut out by a regular sequence of length 6, while being **everywhere** a local complete intersection of codimension 4.\n\nThis is the correct resolution of the recorded constraint that excess dimension alone cannot force a nowhere-lci conclusion: the constraint is respected (no lci conclusion is drawn from the numerical comparison), and the actual local structure is computed and comes out lci of codimension 4.\n\n**Identification of the excess with the Abel-Jacobi corank.** From 0 -> O_C -> O_C(Gamma) -> O_Gamma(Gamma) -> 0 the differential of the ordered Abel-Jacobi map at Gamma is the connecting map H^0(O_Gamma(Gamma)) = T_Gamma Conf_6(C) -> H^1(O_C) = T_e Pic^0(C), with cokernel H^1(O_C(Gamma)) of dimension h^0(omega_C - Gamma). For Gamma in |L| = |omega_C - D| one has omega_C - Gamma linearly equivalent to D, so h^0(omega_C - Gamma) = h^0(O_C(D)) = 2 by Step 2. Hence\n\n  rank(da_N) = 6 - 2 = 4 identically along Z_ev, corank = 2,\n\nmatching the excess and the fibre dimension 2 = 6 - 4. Every number in Steps 4-5 is thus cross-checked twice.\n\n---\n\n## Step 6 (R6): relative form over a balanced base\n\nLet B be a reduced locally Noetherian k-scheme and (C -> B, gamma) a family all of whose geometric fibres are fully balanced. By Step 2, h^0(L_b) = 3 and h^1(L_b) = 2 are constant in b; since B is reduced, Grauert's theorem gives that pi_*L is locally free of rank 3 with formation commuting with arbitrary base change. Replacing L by L tensor pi^*M replaces pi_*L by pi_*L tensor M and leaves P(pi_*L) unchanged, so although L (like W_5 and the relative O_{P^1}(-f)) is only defined up to a twist by Pic(B) \u2014 a point explicitly recorded as a constraint, and respected here \u2014 **P(pi_*L) is canonical**. The functorial description in Step 5 relativises verbatim, so P(pi_*L) subset Sym^6_{C/B} is a P^2-bundle representing the relevant subfunctor, and by (T5)\n\n  Z_ev = Conf_6(C/B) x_{Sym^6_{C/B}} P(pi_*L).\n\nThe reduced-support locus is open in P(pi_*L) (complement of the closed image of the big diagonal) and, by Step 3(e), surjects onto B. The torsor Conf_6 -> reduced-support open of Sym^6 is finite etale (FND-0064, stated at stack level on pairwise-distinct sections, which is how it is used). Hence Z_ev -> B is smooth surjective of pure relative dimension exactly 2 and Z_ev has relative codimension exactly 4 in Conf_6(C/B). Smoothness here comes from the projective-bundle identification, never from a dimension count \u2014 the recorded route \"dimension count implies smoothness or purity\" is not walked.\n\n---\n\n## Step 7: what is deliberately not claimed\n\n- No claim that E-balancedness and F-balancedness are equivalent; both are hypotheses.\n- No claim about the dimension of the balanced tetragonal base itself. In particular the count b - 3 = 15 (with b = 2g-2+2d = 18) is **not** used anywhere: it requires a simple-branching hypothesis that is a recorded constraint, and no conclusion here depends on it. Accordingly no assertion \"dim Z = 17\" is made.\n- No morphism to M_{6,6}, no codimension in M_{6,6}, no purity of components, no closure statement, no stabilizer statement, no Gysin sequence. The recorded constraints against inferring generic finiteness onto a pure codimension-4 component from a parameter count, and against treating the balanced reduced-support piece as a closed pure-codimension-4 Z inside M_{6,6}, are respected by simply not asserting anything in that direction.\n- No behaviour over unbalanced splitting types, over non-reduced divisors, or over h^0-jumping strata; the recorded constraint that the closed evaluation-failure locus may not be replaced by its balanced reduced-support top stratum in localization is respected, and no localization is performed.\n- No irreducibility or component count for Z_ev: the monodromy of the 720-sheeted cover depends on whether phi_L is birational onto a plane sextic or (for instance) 2:1 onto a plane cubic, and that analysis belongs to C66-GEO-COMP.\n- No Hodge-theoretic, weight, purity or Tate-type conclusion. In particular nothing here bears directly on W_{-16}H^{BM}_{16}(M_{6,6};Q) or W_{26}H^{26}(M_{6,6};Q); those remain open and belong to C66-TATE-SUPPORT and C66-TATE-ASSEMBLY.\n- Characteristic p is out of scope: Step 3(e) uses Bertini in characteristic 0, and the trace splitting of gamma_*O_C uses characteristic not dividing 4.\n\n## Status\n\nProved here without undischarged dependency, given ATT-0048 (T1),(T3),(T4),(T5),(T6) as verified inputs: (R1)-(R6). Computational hypotheses: none; the finite complete-intersection model in P^1 x P^2 is used only as a consistency check and carries no weight in any proof. This is a lemma advancing C66-COMP-RANK and the handed-off part of C66-GEO-Z; it does not resolve RED-0001.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0062-1",
+      "justification": "Step 1: relative duality gamma_*omega_{C/P^1} = Hom(gamma_*O_C, O_{P^1}) = O direct-sum E gives the surjection gamma^*E ->> omega_{C/P^1} defining the CE embedding; squaring and twisting by gamma^*O(-5) gives W_5. Degree check 2(2g-2+8) - 4f = 4g+12-4f reproduces 16 at f=5. This closes GAP-Z-W5D, which ATT-0048 deliberately did not use.",
+      "statement": "Under the CE convention W_f = (O_{P(E^vee)}(2) tensor gamma^*O_{P^1}(-f))|_C and the relative-canonical CE embedding O_{P(E^vee)}(1)|_C = omega_{C/P^1} = omega_C tensor gamma^*O_{P^1}(2), one has W_5 = omega_C^{tensor 2}(-D), L := W_5 tensor omega_C^{-1} = omega_C(-D) of degree 6, and M := omega_C^{tensor 2} tensor W_5^vee = O_C(D) of degree 4.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0062-2",
+      "justification": "Step 2: Riemann-Roch chi(L) = 6-6+1 = 1 plus Serre duality h^1(L) = h^0(omega_C tensor L^{-1}) = h^0(O_C(D)); projection formula h^0(gamma^*O(1)) = h^0(O(1) tensor gamma_*O_C) = 2 + #{a_i = 1}. This is the h^0 stratification handed off by ATT-0048, with M identified as O_C(D) by CLM-0062-1.",
+      "statement": "On every genus-6 degree-4 cover in characteristic 0, h^0(C,L) = 1 + h^0(C,O_C(D)) and h^0(C,O_C(D)) = 2 + #{i : a_i = 1} where gamma_*O_C = O direct-sum direct-sum_i O(-a_i). Under E^vee = O(-3)^{oplus 3} this gives h^0(L) = 3 and h^1(L) = 2 exactly.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0062-3",
+      "justification": "Step 3(a)-(d): h^0(gamma_*O_C(p)) = h^0(O_C(p)) = 1 forces exactly one b_i = 0; E'(-1) subset E together with Hom(O(-1),O(-3)) = Hom(O(-2),O(-3)) = 0 forbids b_j = -1 by a rank-2-into-rank-1 contradiction; then h^0(E'(1)) = 2. Riemann-Roch converts h^0(O_C(D+p)) = 2 into h^0(L-p) = 2 < h^0(L), i.e. no base points.",
+      "statement": "If E^vee = O_{P^1}(-3)^{oplus 3} then for every p in C the bundle gamma_*O_C(p) is isomorphic to O direct-sum O(b_2) direct-sum O(b_3) direct-sum O(b_4) with b_j <= -2 for j >= 2; consequently h^0(O_C(D+p)) = 2 for all p and L = omega_C(-D) is base-point-free.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0062-4",
+      "justification": "Step 3(e): Bertini for a base-point-free system on a smooth curve in characteristic 0, with the explicit separability/dual-curve argument supplied. Nonclosedness: complement of the closed image of the big diagonal inside the irreducible P^2, with nonempty complement. This uses h^0(L) = 3 and base-point-freeness, NOT chi(L) = 1, so the route blocked by FND-0083 and the corresponding recorded constraints is not walked.",
+      "statement": "In characteristic 0 the general member of |L| = P^2 consists of six pairwise-distinct points; the reduced-support locus is a nonempty open, and not closed, subset of that P^2, and Z_ev is nonempty on every fully balanced geometric fibre.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0062-5",
+      "justification": "Step 4: ranks from Riemann-Roch with h^1(W_5) = 0 (deg 16 > 10) and (T1),(T3) of ATT-0048; corank from coker(phi_5)|_Gamma = H^1(omega_C tensor N^{-1}) = H^1(omega_C) = k when N is trivial; expected codimension by the standard degeneracy-locus formula.",
+      "statement": "Fit_0(coker phi) = I_12(phi) = Fit_0(coker phi_5) = I_6(phi_5) with phi_5 of ranks 11 -> 6; at every point of Z_ev the cokernel has length exactly 1, so rank phi_5 = 5 and rank phi = 11 identically on Z_ev and D_4(phi_5) = D_10(phi) = empty. The expected determinantal codimensions are 6 (reduced presentation, (11-5)(6-5)) and 15 (unreduced presentation, (26-11)(12-11)).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0062-6",
+      "justification": "Step 5: the scheme-theoretic Abel-Jacobi fibre over [L] is P(H^0(L)) by the Div^6 functor of points; ATT-0048 (T5) identifies the same subfunctor with Z_ev, so Yoneda gives the fibre product; Conf_6 -> Sym^6 is a finite etale S_6-torsor onto the reduced-support open (FND-0064); etale morphisms preserve smoothness and reducedness. Dimension is obtained from this identification, never from a parameter count.",
+      "statement": "Z_ev = Conf_6(C) x_{Sym^6 C} P(H^0(L)); hence Z_ev is reduced and smooth of pure dimension exactly 2, finite etale of degree 720 onto the reduced-support open of |L| = P^2, so codim(Z_ev, Conf_6(C)) = 4 exactly and the excess over the expected determinantal codimension 6 is exactly 2.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0062-7",
+      "justification": "Step 5: regularity of a closed immersion of smooth k-schemes gives the conormal rank; the generator count is (T4) of ATT-0048; the Abel-Jacobi differential is the connecting map of 0 -> O_C -> O_C(Gamma) -> O_Gamma(Gamma) -> 0 with cokernel H^1(O_C(Gamma)) of dimension h^0(omega_C - Gamma) = h^0(O_C(D)) = 2 for Gamma in |omega_C - D|. The lci conclusion is drawn from this local computation, not from the numerical excess comparison (which the recorded constraint correctly says is insufficient).",
+      "statement": "The conormal module I_{Z_ev}/I_{Z_ev}^2 is locally free of rank 4 although Fit_0(coker phi) is locally generated by the 6 pullbacks of local generators of I_e; the excess 2 equals the corank of da_N : T_Gamma Conf_6(C) -> T_e Pic^0(C), whose rank is identically 6 - h^0(O_C(D)) = 4 along Z_ev. Hence Z_ev is everywhere a local complete intersection of codimension 4 and nowhere cut out by a regular sequence of length 6.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0062-8",
+      "justification": "Step 6: Grauert (B reduced, h^0 and h^1 constant by CLM-0062-2); P(E tensor M) = P(E) kills the twist ambiguity, respecting the recorded constraint that W_5 and L are only fibrewise well-defined; the functorial description of Step 5 relativises; surjectivity onto B from CLM-0062-4. The P^2-bundle conclusion is asserted only over the (3,3,3) splitting-type locus, as the extended-file constraint on the whole balanced Hurwitz space requires.",
+      "statement": "Over a reduced locally Noetherian k-scheme B all of whose geometric fibres are fully balanced, pi_*L is locally free of rank 3 with base-change-compatible formation, P(pi_*L) subset Sym^6_{C/B} is a canonical P^2-bundle (independent of the Pic(B)-twist ambiguity in L), Z_ev = Conf_6(C/B) x_{Sym^6_{C/B}} P(pi_*L), and Z_ev -> B is smooth surjective of pure relative dimension exactly 2 with relative codimension exactly 4 in Conf_6(C/B).",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "claude",
+  "experiment_ids": [
+    "EXP-C66-RANK"
+  ],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "Not walked. Nonemptiness of the reduced-support open and of the ordered Conf_6 incidence is proved from h^0(L) = 3 (CLM-0062-2) together with base-point-freeness of L (CLM-0062-3) and Bertini in characteristic 0, never from chi(L) = 1, which is correctly recorded as giving only nonemptiness of the full Sym^6 Abel-Jacobi fibre.",
+      "source": "working_context_constraint / FND-0083",
+      "subject": "nonemptiness-from-chi-equals-one"
+    },
+    {
+      "disposition": "Not walked. Smoothness and the dimension 2 of Z_ev are obtained from the scheme-theoretic identification Z_ev = Conf_6 x_{Sym^6} P(H^0(L)) with P(H^0(L)) a reduced smooth P^2 and Conf_6 -> Sym^6 finite etale, not from any parameter count. In particular the count b - 3 = 15 is never used and no claim dim Z = 17 is made.",
+      "source": "extended working_context_constraint",
+      "subject": "dimension-count-implies-smoothness-or-purity"
+    },
+    {
+      "disposition": "Not walked. The Hurwitz-space dimension count is not used anywhere; no statement depends on the number of branch points or on simple branching.",
+      "source": "extended working_context_constraint",
+      "subject": "b-minus-3-equals-15-without-simple-branching"
+    },
+    {
+      "disposition": "Respected. The P^2-bundle statement (CLM-0062-8) is asserted only over the locus of splitting type (3,3,3), where h^0(O_C(D)) = 2 and hence h^0(omega_C(-D)) = 3 is proved constant; the stratification formula of CLM-0062-2 exhibits precisely the loci (some a_i = 1) where h^0 jumps, and nothing is claimed there.",
+      "source": "extended working_context_constraint",
+      "subject": "relative-P2-bundle-over-whole-balanced-hurwitz-space"
+    },
+    {
+      "disposition": "Not walked, and settled in the other direction. No lci or non-lci conclusion is drawn from comparing expected codimension 6 with actual codimension 4. Instead the local structure is computed: Z_ev is smooth of codimension 4 in the smooth 6-fold Conf_6(C), hence everywhere lci of codimension 4, with conormal module locally free of rank 4 and therefore nowhere cut out by a regular sequence of length 6.",
+      "source": "working_context_constraint",
+      "subject": "excess-codimension-implies-nowhere-lci"
+    },
+    {
+      "disposition": "Not walked. No statement is made about any map to M_{6,6}, about generic fibre dimension of such a map, about image dimension, about component purity, about stabilizers, or about closures. Codimension 4 is asserted only inside Conf_6(C/B), where it is computed exactly.",
+      "source": "working_context_constraint",
+      "subject": "parameter-count-implies-generic-finiteness-onto-pure-codim-4-component"
+    },
+    {
+      "disposition": "Not walked. No Gysin sequence for a pair (M_{6,6}, Z) is used or asserted, and no closed pure-codimension-4 embedding into M_{6,6} is claimed.",
+      "source": "extended working_context_constraint / FND-0052",
+      "subject": "closed-pure-codim-4-Z-in-M66-and-gysin"
+    },
+    {
+      "disposition": "Respected. The reduced-support locus is proved open and explicitly proved not closed, as the complement of the closed image of the big diagonal inside an irreducible P^2 with nonempty complement.",
+      "source": "working_context_constraint",
+      "subject": "reduced-support-locus-called-closed"
+    },
+    {
+      "disposition": "Not walked. No closedness or nonclosedness statement about Z^{bal} inside M_{6,6} is made at all; the nonclosedness proved here is of the reduced-support locus inside the irreducible P^2 = |L|, where a nonempty proper open subset of an irreducible space is genuinely not closed.",
+      "source": "working_context_constraint",
+      "subject": "openness-plus-nonemptiness-implies-Zbal-not-closed"
+    },
+    {
+      "disposition": "Respected. The S_6-torsor is used only on pairwise-distinct sections (over a fixed curve in Step 5, at stack level in Step 6). No coarse-space statement and no integral-coefficient or invariants-equals-coinvariants comparison is made.",
+      "source": "working_context_constraint / FND-0064, FND-0075",
+      "subject": "S6-torsor-on-coarse-moduli-or-integrally"
+    },
+    {
+      "disposition": "Respected. W_5, L and the obstruction splitting are quantified over geometric fibres. At family level only the twist-invariant object P(pi_*L) is used, together with the filtered (non-split) reduction Fit_0(coker phi) = Fit_0(coker phi_5) supplied by ATT-0048 (T3); no global direct-sum decomposition of W is asserted.",
+      "source": "working_context_constraint",
+      "subject": "family-level-quantification-of-W5-L-or-the-splitting"
+    },
+    {
+      "disposition": "Not walked. The scheme-theoretic identification Z_ev = a_N^{-1}(e) is taken from the verified dependency ATT-0048 (T4), proved there by Fitting base change and a double Nakayama; it is not re-derived from agreement of geometric points, and no new geometric-point-to-scheme inference is made here.",
+      "source": "working_context_constraint / FND-0046",
+      "subject": "geometric-point-agreement-implies-scheme-equality"
+    },
+    {
+      "disposition": "Not used. No virtual-cohomological-dimension vanishing argument occurs anywhere in this attempt.",
+      "source": "TASK.json blocked_routes",
+      "subject": "vcd-only-vanishing"
+    },
+    {
+      "disposition": "Not used. No graph complex, tropical model, or top-weight computation occurs anywhere in this attempt.",
+      "source": "TASK.json blocked_routes",
+      "subject": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "disposition": "Not used. No point count over finite fields occurs; the only finite computation mentioned (the (1,2)-(2,2) complete intersection in P^1 x P^2) is flagged as a consistency check and carries no weight in any proof.",
+      "source": "TASK.json blocked_routes",
+      "subject": "point-count-without-degree-parity-separation"
+    },
+    {
+      "disposition": "Not used. No forgetful map, Leray tower, or local-system manipulation occurs anywhere in this attempt.",
+      "source": "TASK.json blocked_routes",
+      "subject": "forgetful-map-renaming-local-system-unknown"
+    }
+  ],
+  "gap_markers": [
+    {
+      "id": "GAP-0062-1",
+      "location": "Fully balanced hypothesis (B)",
+      "statement": "It is not proved that E^vee = O(-3)^{oplus 3} and F = O(4) direct-sum O(5) imply one another; both are assumed. Consequently the theorem is stated on the intersection of the two balancedness loci, and nothing is claimed on a locus where only one holds."
+    },
+    {
+      "id": "GAP-0062-2",
+      "location": "Step 3(e), Step 6",
+      "statement": "Nonemptiness and hence surjectivity of Z_ev -> B use Bertini in characteristic 0. No statement is made in positive characteristic, where the general member of a base-point-free system on a curve need not be reduced."
+    },
+    {
+      "id": "GAP-0062-3",
+      "location": "Step 7",
+      "statement": "No dimension is claimed for the balanced tetragonal base itself, and no statement is made about any image of Z_ev in M_{6,6}: not its dimension, codimension, component structure, purity, stabilizers, closure, or any Gysin sequence. These belong to C66-GEO-COMP and downstream nodes."
+    },
+    {
+      "id": "GAP-0062-4",
+      "location": "Step 7",
+      "statement": "Irreducibility and the component count of Z_ev are not determined: the monodromy of the degree-720 cover depends on whether the map defined by L is birational onto a plane sextic or has degree > 1 onto a curve of lower degree (e.g. 2:1 onto a plane cubic in the bielliptic case), and that analysis is C66-GEO-COMP."
+    },
+    {
+      "id": "GAP-0062-5",
+      "location": "Step 7",
+      "statement": "Nothing is proved about unbalanced CE splitting types, non-reduced divisors, or h^0-jumping strata; in particular the closed evaluation-failure locus is not replaced by its balanced reduced-support top stratum, and no localization is performed."
+    },
+    {
+      "id": "GAP-0062-6",
+      "location": "Step 7",
+      "statement": "No Hodge-theoretic, weight, purity or Tate-type conclusion is drawn. The exact target W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21) remains open and is untouched by this lemma."
+    }
+  ],
+  "id": "ATT-0062",
+  "lane": "computation",
+  "methods_used": [
+    "casnati-ekedahl-relative-canonical-embedding",
+    "relative-duality-for-finite-flat-covers",
+    "riemann-roch-and-serre-duality-on-curves",
+    "splitting-type-of-pushforward-along-degree-four-cover",
+    "elementary-modification-of-vector-bundles-on-P1",
+    "bertini-in-characteristic-zero",
+    "functor-of-points-of-the-relative-effective-divisor-space",
+    "abel-jacobi-fibre-as-projective-space-of-sections",
+    "determinantal-degeneracy-locus-expected-codimension",
+    "fitting-ideal-reduction-from-verified-dependency",
+    "grauert-local-freeness-over-reduced-base",
+    "conormal-and-regular-immersion-of-smooth-schemes",
+    "finite-etale-S6-torsor-on-pairwise-distinct-sections"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Closes GAP-Z-W5D by proving W_5 = omega_C^{tensor 2}(-D) from the CE relative-canonical embedding, thereby identifying the degree-4 bundle M of the handed-off stratification formula as O_C(D).",
+    "Proves the exact h^0 stratification h^0(L) = 1 + h^0(O_C(D)) = 3 on the (3,3,3) splitting-type locus, an obligation explicitly excluded by ATT-0048 and by REV-0091.",
+    "Proves base-point-freeness of L = omega_C(-D) by an elementary-modification computation of gamma_*O_C(p), and deduces nonemptiness of the ordered Conf_6 incidence in characteristic 0 without using chi(L) = 1 (the route blocked by FND-0083).",
+    "Computes the exact corank of the CE rank-drop: corank is identically 1 on Z_ev and all deeper degeneracy loci are empty, so the determinantal stratification of phi_5 has exactly two strata.",
+    "Establishes that the Fitting/determinantal scheme structure on Z_ev is reduced and smooth of pure dimension 2, and that the actual codimension 4 falls short of the expected determinantal codimension 6 by exactly 2, with the excess identified as the corank of the Abel-Jacobi differential.",
+    "Shows Z_ev is everywhere a codimension-4 local complete intersection while nowhere being cut out by a regular sequence of length 6, correcting the direction in which the excess-dimension comparison had been left undecided."
+  ],
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "8d4f9fe8fe87adb441451cf26abf012aa4641b6ccb45ebcbef19ea5c1dec4569",
+  "proof_dependencies": [
+    "ATT-0048",
+    "REV-0091",
+    "REV-0092",
+    "SRC-0004"
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0046",
+    "FND-0062",
+    "FND-0063",
+    "FND-0064",
+    "FND-0083"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-COMP-RANK",
+  "summary": "Discharges the two obligations that ATT-0048 explicitly handed off for C66-GEO-Z (nonemptiness on geometric fibres, and the h^0 stratification h^0(L) = 1 + h^0(M) with deg M = 4) and computes the determinantal rank-drop data requested by C66-COMP-RANK. Identifies M = O_C(D) via W_5 = omega_C^{tensor 2}(-D) (closing GAP-Z-W5D), proves h^0(L) = 3 exactly and L base-point-free on the fully balanced locus by an elementary-modification computation of gamma_*O_C(p) on P^1, deduces nonemptiness of the ordered Conf_6 incidence in characteristic 0 by Bertini (not from chi(L) = 1, which is a recorded dead route), and computes the rank-drop stratification exactly: corank is identically 1 on Z_ev, deeper degeneracy loci are empty, expected codimension is 6 (reduced presentation) or 15 (unreduced), while the actual codimension is exactly 4. The excess 2 is identified with the corank of the Abel-Jacobi differential, and Z_ev is shown to be reduced, smooth of pure relative dimension 2 over the balanced base, hence a codimension-4 local complete intersection. Smoothness and dimension are obtained from an exact scheme-theoretic identification of Z_ev with an S_6-torsor over the reduced-support open of the P^2-bundle P(pi_*L), never from a parameter count.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-008",
+  "theorem_scope": {
+    "base": "geometric fibres over an algebraically closed field of characteristic 0; relative form (R6) over a reduced locally Noetherian k-scheme all of whose geometric fibres are fully balanced",
+    "g": 6,
+    "generality": "(R1),(R2),(R4) are characteristic-free given the trace splitting; (R3),(R5),(R6) use characteristic 0",
+    "hypotheses": "fully balanced CE datum: E^vee = O(-3)^{oplus 3} AND F = O(4) direct-sum O(5); characteristic 0 is used only for the trace splitting of gamma_*O_C and for Bertini in (R3)",
+    "n": 6,
+    "not_claimed": "equivalence of the two balancedness conditions; behaviour on unbalanced splitting types, non-reduced divisors, or h^0-jumping strata; irreducibility/components/stabilizers of Z_ev; any morphism to or codimension in M_{6,6}; any weight or Tate-type statement"
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic 0 and let C be a smooth projective connected curve of genus 6 over k equipped with a finite flat morphism gamma : C -> P^1 of degree 4 whose Casnati-Ekedahl data are fully balanced, meaning gamma_*O_C = O_{P^1} direct-sum E^vee with E^vee isomorphic to O_{P^1}(-3)^{oplus 3} AND the CE relations bundle F isomorphic to O_{P^1}(4) direct-sum O_{P^1}(5). Put D := gamma^*(pt) (degree 4), W := (O_{P(E^vee)}(2) tensor gamma^*F^vee)|_C with its canonical CE filtration 0 -> W_4 -> W -> W_5 -> 0 of fibrewise degrees d_4 = 20, d_5 = 16 (ATT-0048 CLM-0048-6, confirmed by REV-0091/REV-0092), L := W_5 tensor omega_C^{-1}, U := Conf_6(C) the 6-dimensional space of ordered pairwise-distinct 6-tuples, Gamma the universal degree-6 divisor on C x U, phi : H^0(C,W) tensor O_U -> pi_*(W|_Gamma) and phi_5 : H^0(C,W_5) tensor O_U -> pi_*(W_5|_Gamma) the CE evaluations, and Z_ev := V(Fit_0(coker phi)) subset U the CE evaluation-failure locus with its determinantal/Fitting scheme structure (ATT-0048 (T1),(T3),(T4),(T6)). Then: (R1) O_{P(E^vee)}(1)|_C = omega_{C/P^1} = omega_C tensor gamma^*O_{P^1}(2), hence W_5 = omega_C^{tensor 2}(-D), L = omega_C(-D) of degree 6, and M := omega_C^{tensor 2} tensor W_5^vee = O_C(D) of degree 4. (R2) h^0(C,L) = 1 + h^0(C,O_C(D)); writing E^vee = direct-sum_{i=1}^3 O(-a_i) with a_i >= 1 and sum a_i = 9 one has h^0(C,O_C(D)) = 2 + #{i : a_i = 1}; under E^vee = O(-3)^{oplus 3} this gives h^0(O_C(D)) = 2, h^0(L) = 3 and h^1(L) = 2 exactly. (R3) L is base-point-free: for every p in C the sheaf gamma_*O_C(p) is isomorphic to O direct-sum O(b_2) direct-sum O(b_3) direct-sum O(b_4) with all b_j <= -2, whence h^0(O_C(D+p)) = 2 and no p is a base point of |L|; consequently in characteristic 0 the general member of |L| = P(H^0(L)) = P^2 consists of 6 pairwise-distinct points, the reduced-support locus is a nonempty open (and not closed) subset of that P^2, and Z_ev is nonempty. (R4) Rank-drop ideal: Fit_0(coker phi) = Fit_0(coker phi_5) = I_6(phi_5) = I_12(phi), where phi_5 is an 11-by-6 and phi a 26-by-12 evaluation matrix; at every point of Z_ev the cokernel is H^1(C, omega_C tensor N^{-1}) with N := O_C(Gamma) tensor L^{-1} trivial, hence has length exactly 1, so rank phi_5 = 5 and rank phi = 11 identically on Z_ev and the deeper degeneracy loci D_4(phi_5) = D_10(phi) are empty; the expected determinantal codimensions are (11-5)(6-5) = 6 in the reduced presentation and (26-11)(12-11) = 15 in the unreduced presentation. (R5) Fibre dimension and local structure: Z_ev is canonically the pullback of the reduced-support open of |L| = P^2 along the finite etale S_6-torsor Conf_6(C) -> (reduced-support open of Sym^6 C); it is therefore reduced and smooth of pure dimension exactly 2, finite etale of degree 720 onto that open, so codim(Z_ev, U) = 6 - 2 = 4 exactly and the excess over the expected determinantal codimension 6 is exactly 2; the conormal module I_{Z_ev}/I_{Z_ev}^2 is locally free of rank 4 although Fit_0(coker phi) is locally generated by the 6 pullbacks of local generators of I_e, and this excess 2 equals the corank of the Abel-Jacobi differential da_N : T_Gamma Conf_6(C) -> T_e Pic^0(C), whose rank is identically 6 - h^0(O_C(D)) = 4 along Z_ev; in particular Z_ev is everywhere a local complete intersection of codimension 4 in the smooth 6-fold U and is nowhere cut out by a regular sequence of length 6. (R6) Relative form: if B is a reduced locally Noetherian k-scheme and (C -> B, gamma) a family all of whose geometric fibres satisfy the above hypotheses, then pi_*L is locally free of rank 3 with formation commuting with arbitrary base change, P(pi_*L) subset Sym^6_{C/B} is a P^2-bundle canonically independent of the Pic(B)-twist ambiguity in L, and Z_ev subset Conf_6(C/B) is the pullback of the reduced-support open of P(pi_*L) along the finite etale S_6-torsor; hence Z_ev -> B is smooth and surjective of pure relative dimension exactly 2 and Z_ev has relative codimension exactly 4 in Conf_6(C/B). No dimension, codimension, component, purity, stabilizer, closure or Gysin statement about any image in M_{6,6} is asserted, and no Hodge-theoretic or Tate-type conclusion about W_{-16}H^{BM}_{16}(M_{6,6};Q) is asserted."
+}

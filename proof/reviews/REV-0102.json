@@ -1,0 +1,174 @@
+{
+  "attempt_id": "ATT-0062",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0062-1",
+      "note": "R1: relative duality supplies gamma^*E -> omega_{C/P^1}; for finite flat Gorenstein covers the relative dualizing sheaf is invertible and the CE relative-canonical map is the associated quotient, so O_{P(E^vee)}(1)|_C = omega_{C/P^1} = omega_C tensor gamma^*O(2). Packet/SRC-0004 degree 2g+6 forces any residual P^1-twist to be trivial. Algebra then gives W_5 = omega_C^{tensor 2}(-D), L = omega_C(-D) deg 6, M = O_C(D) deg 4, matching deg W_5 = 4g+12-4*5 = 16. Closes GAP-Z-W5D under the packet convention with gamma^*O(-5).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0062-2",
+      "note": "R2: RR chi(L)=1 and Serre duality h^1(L)=h^0(O_C(D)) give h^0(L)=1+h^0(D). Projection formula h^0(gamma^*O(1))=h^0(O(1) tensor gamma_*O_C)=2+#{a_i=1}. Under E^vee=O(-3)^{oplus 3} one gets h^0(D)=2, h^0(L)=3, h^1(L)=2 constantly on the stated locus. Uses E-balancedness; F-balancedness is not required for this count.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0062-3",
+      "note": "R3 bpf: 0->E->E'=gamma_*O_C(p)->k(y)->0, h^0(E')=1 forces exactly one b_i=0 and others <=-1. Image of E'(-1)->E' lands in E. Any b_j=-1 yields O(-1)oplus O(-2) inside E'(-1) whose composite into O(-3)^{oplus 3} vanishes by Hom vanishing, impossible rank-2-into-rank-1. Thus b_j<=-2, h^0(O_C(D+p))=2, and RR gives h^0(L-p)=2<h^0(L). Argument is sharp against competing types such as O oplus O(-1) oplus O(-3) oplus O(-4).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0062-4",
+      "note": "R3 nonemptiness: char-0 Bertini for a base-point-free complete g^2_6 on a smooth curve yields a general reduced 6-point member; reduced-support locus is a nonempty open in P^2 and not closed. With Z_ev the Conf_6 pullback of that open (R5/(T5)), Z_ev is nonempty on every fully balanced geometric fibre. Avoids the chi(L)=1 dead route (FND-0083).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0062-5",
+      "note": "R4: h^0(W_5)=11 (deg 16>10 => h^1=0); (T1)(T3) give Fit_0(coker phi)=I_12(phi)=Fit_0(coker phi_5)=I_6(phi_5). On Z_ev, N trivial => coker fibre = H^1(omega_C)=k, so rank phi_5=5 and rank phi=11 identically and D_4(phi_5)=D_10(phi)=empty. Expected codimensions (11-5)(6-5)=6 and (26-11)(12-11)=15 are the standard degeneracy counts.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0062-6",
+      "note": "R5 identification/dimension: scheme-theoretic AJ fibre over [L] is P(H^0(L)) (Div^6 / FND-0107); (T5) identifies Z_ev with N-relatively-trivial locus, hence Z_ev = Conf_6 x_{Sym^6} P(H^0(L)). Conf_6 -> red-support open of Sym^6 is finite etale S_6-torsor (FND-0064), so Z_ev is reduced smooth pure dim 2, degree 720 over the red-support open of |L|~P^2, codim 4 in U=Conf_6, excess 2 over expected determinantal codim 6. Dimension comes from the fibre product, not a parameter count.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0062-7",
+      "note": "R5 local structure: closed immersion of smooth k-schemes is regular, so I/I^2 is locally free of rank 4 (lci of actual codim 4). (T4) supplies 6 local generators of Fit_0 as pullbacks of parameters of e in Pic^0; grade/height 4 forbids a regular sequence of length 6. Connecting map of 0->O->O(Gamma)->O_Gamma(Gamma)->0 has rank da_N = 6-(h^0(L)-1)=6-h^0(D)=4 along Z_ev, corank 2 matching excess. Respects FND-0068 (excess alone does not force non-lci).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0062-8",
+      "note": "R6: on reduced B with all geometric fibres fully balanced, h^0(L_b)=3 and h^1(L_b)=2 constant => Grauert gives pi_*L locally free rank 3 with base change. P(pi_*L) independent of Pic(B) twists of L. Relative AJ/Div description plus (T5) and FND-0064 yield Z_ev = Conf_6(C/B) x_{Sym^6} P(pi_*L) smooth surjective of pure relative dim 2 and relative codim 4 in Conf_6(C/B). No M_{6,6} image, purity, stabilizer, Gysin, or Tate claim is asserted.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "THM-SCOPE-EXCLUSIONS",
+      "note": "Theorem and Step 7 correctly exclude: equivalence of E- vs F-balancedness; dim of balanced Hurwitz base; any map/codim/component/stabilizer/closure/Gysin statement in M_{6,6}; irreducibility of Z_ev; unbalanced/h^0-jumping strata; Hodge/Tate conclusions on W_{-16}H^{BM}_{16}. Scope matches a C66-COMP-RANK lemma, not RED-0001.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-08",
+  "finding_candidates": [
+    {
+      "adjudication": "corroborates_existing_finding",
+      "evidence": "ATT-0062 Step 1 / CLM-0062-1; degree match 2g+6 from SRC-0004.",
+      "key": "FC-ATT0062-W5D-CLOSED",
+      "statement": "On a smooth genus-6 degree-4 cover, the CE relative-canonical normalization O_{P(E^vee)}(1)|_C = omega_{C/P^1} = omega_C tensor gamma^*O(2), together with the packet convention W_5 = (O(2) tensor gamma^*O(-5))|_C, yields W_5 = omega_C^{tensor 2}(-D), L = omega_C(-D), M = O_C(D), closing GAP-Z-W5D.",
+      "supports_finding_id": "FND-0105"
+    },
+    {
+      "adjudication": "corroborates_existing_finding",
+      "evidence": "ATT-0062 Steps 2-3 / CLM-0062-2,3,4.",
+      "key": "FC-ATT0062-NONEMPTY-VIA-BPF",
+      "statement": "Nonemptiness of the ordered Conf_6 incidence Z_ev on fully balanced geometric fibres in char 0 follows from h^0(L)=3 plus base-point-freeness of L and Bertini, not from chi(L)=1 alone.",
+      "supports_finding_id": "FND-0083"
+    },
+    {
+      "adjudication": "corroborates_existing_finding",
+      "evidence": "ATT-0062 Step 5 / CLM-0062-6,7; conormal rank 4 from smooth immersion, not from numerical excess alone.",
+      "key": "FC-ATT0062-LCI-ACTUAL-CODIM",
+      "statement": "Despite excess 2 over the expected determinantal codimension 6, the ordered CE evaluation-failure locus Z_ev subset Conf_6(C) is everywhere a local complete intersection of its actual codimension 4 (smooth of pure dim 2), and is nowhere cut out by a regular sequence of length 6.",
+      "supports_finding_id": "FND-0068"
+    },
+    {
+      "adjudication": "novel_candidate",
+      "evidence": "ATT-0062 Steps 4-5 / CLM-0062-5,6,7. Reusable for C66-COMP-RANK and downstream geometry; does not by itself give codim in M_{6,6}.",
+      "key": "FC-ATT0062-RANK-DROP-EXACT",
+      "statement": "Under fully balanced CE data (E^vee=O(-3)^{oplus 3} and F=O(4)oplus O(5)) on a fixed smooth genus-6 curve in char 0, the CE evaluation matrix phi_5 is 11-by-6 with Fit_0(coker phi)=I_6(phi_5)=I_12(phi); on Z_ev the corank is identically 1 (deeper degeneracy empty), expected determinantal codimension is 6 (reduced) or 15 (unreduced), while actual codimension in Conf_6 is exactly 4, with excess 2 equal to corank of the Abel-Jacobi differential da_N.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "corroborates_existing_finding",
+      "evidence": "ATT-0062 Step 2 and Step 6 / CLM-0062-2,8. Scope is fully balanced intersection E-bal and F-bal, as the theorem states.",
+      "key": "FC-ATT0062-H0-CONSTANT-E-BALANCED",
+      "statement": "On the E-balanced locus E^vee=O(-3)^{oplus 3}, h^0(omega_C(-D))=3 constantly (via h^0(D)=2 from the projection formula), so the relative |L| is a P^2-bundle on any reduced base of fully balanced fibres; this discharges the constancy obligation in FND-0058 under the stronger E-balanced hypothesis used here (not merely F-balanced).",
+      "supports_finding_id": "FND-0058"
+    }
+  ],
+  "id": "REV-0102",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0048",
+      "note": "Load-bearing inputs (T1),(T3),(T4),(T5),(T6)/CLM-0048-6 used exactly as scheme-structure and filtered Fitting equalities; no circular appeal to h^0 stratification or nonemptiness that ATT-0048 handed off. Accepted as prior confirmed dependency (REV-0091/REV-0092).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0091",
+      "note": "Prior confirmation of ATT-0048; used only as attestation of that dependency, not as an independent geometric input.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0092",
+      "note": "Prior confirmation of ATT-0048; used only as attestation of that dependency, not as an independent geometric input.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Lemma 10.6 degree formula deg(W_f)=4g+12-4f and O_P(1)|_C degree 2g+6 used consistently with the packet's gamma^*O(-f) convention; sign ambiguity in the excerpted definition line is resolved by the degree computation and packet bottleneck.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0064",
+      "note": "Finite etale S_6-torsor Conf_6 -> red-support open used at fixed-curve / stack-of-sections level as stated; no integral-coefficient or coarse-space descent is claimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0046",
+      "note": "Non-load-bearing beyond motivating scheme-structure care; attempt relies on ATT-0048 (T4)/(T5) rather than fibrewise obstruction alone.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0062",
+      "note": "Unused in the load-bearing chain of this lemma (f=4 vanishing is background); marked confirmed as non-load-bearing listed source.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0063",
+      "note": "Failure criterion O(Gamma)~L is aligned with (T5)/AJ identification; consistent background.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0083",
+      "note": "Attempt explicitly avoids chi(L)=1 nonemptiness and instead uses h^0(L)=3 + bpf + Bertini.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0062-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Strongest pressure: reducedness of the Fitting scheme Z_ev = V(Fit_0) cannot be read from the differential da_N alone, because rank(da_N) jumps (4 along Z_ev, 6 on a dense open), so the constant-rank normal form does not apply and a non-submersive Abel-Jacobi map could a priori cut a non-reduced scheme fibre. Outcome: attack fails for the stated theorem. ATT-0048 (T4) identifies Fit_0 with a_N^{-1}(I_e) as ideals; the classical scheme-theoretic Abel-Jacobi fibre over [L] is the reduced complete linear system P(H^0(L)); pullback along the etale S_6-torsor Conf_6 -> red-support open of Sym^6 preserves reducedness and smoothness. Thus Fitting structure equals the reduced smooth pure-dimension-2 structure, codim 4, lci, excess 2 = corank(da_N). Secondary pressure on R1 (surjectivity of gamma^*E ->> omega_{C/P^1}) is standard CE relative-canonical content and is pinned by SRC-0004/FND-0105 degree forcing; not fatal. No stack/coarse, integral-coefficient, BM/cohomology degree, Poincare/Tate-twist, Gysin/Kunneth, spectral-sequence, invariants/coinvariants, semisimplification, predicted-motive, or pure-Tate-upgrade error is load-bearing in this scoped lemma.",
+  "subproblem_id": "C66-COMP-RANK",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic 0 and let C be a smooth projective connected curve of genus 6 over k equipped with a finite flat morphism gamma : C -> P^1 of degree 4 whose Casnati-Ekedahl data are fully balanced, meaning gamma_*O_C = O_{P^1} direct-sum E^vee with E^vee isomorphic to O_{P^1}(-3)^{oplus 3} AND the CE relations bundle F isomorphic to O_{P^1}(4) direct-sum O_{P^1}(5). Put D := gamma^*(pt) (degree 4), W := (O_{P(E^vee)}(2) tensor gamma^*F^vee)|_C with its canonical CE filtration 0 -> W_4 -> W -> W_5 -> 0 of fibrewise degrees d_4 = 20, d_5 = 16 (ATT-0048 CLM-0048-6, confirmed by REV-0091/REV-0092), L := W_5 tensor omega_C^{-1}, U := Conf_6(C) the 6-dimensional space of ordered pairwise-distinct 6-tuples, Gamma the universal degree-6 divisor on C x U, phi : H^0(C,W) tensor O_U -> pi_*(W|_Gamma) and phi_5 : H^0(C,W_5) tensor O_U -> pi_*(W_5|_Gamma) the CE evaluations, and Z_ev := V(Fit_0(coker phi)) subset U the CE evaluation-failure locus with its determinantal/Fitting scheme structure (ATT-0048 (T1),(T3),(T4),(T6)). Then: (R1) O_{P(E^vee)}(1)|_C = omega_{C/P^1} = omega_C tensor gamma^*O_{P^1}(2), hence W_5 = omega_C^{tensor 2}(-D), L = omega_C(-D) of degree 6, and M := omega_C^{tensor 2} tensor W_5^vee = O_C(D) of degree 4. (R2) h^0(C,L) = 1 + h^0(C,O_C(D)); writing E^vee = direct-sum_{i=1}^3 O(-a_i) with a_i >= 1 and sum a_i = 9 one has h^0(C,O_C(D)) = 2 + #{i : a_i = 1}; under E^vee = O(-3)^{oplus 3} this gives h^0(O_C(D)) = 2, h^0(L) = 3 and h^1(L) = 2 exactly. (R3) L is base-point-free: for every p in C the sheaf gamma_*O_C(p) is isomorphic to O direct-sum O(b_2) direct-sum O(b_3) direct-sum O(b_4) with all b_j <= -2, whence h^0(O_C(D+p)) = 2 and no p is a base point of |L|; consequently in characteristic 0 the general member of |L| = P(H^0(L)) = P^2 consists of 6 pairwise-distinct points, the reduced-support locus is a nonempty open (and not closed) subset of that P^2, and Z_ev is nonempty. (R4) Rank-drop ideal: Fit_0(coker phi) = Fit_0(coker phi_5) = I_6(phi_5) = I_12(phi), where phi_5 is an 11-by-6 and phi a 26-by-12 evaluation matrix; at every point of Z_ev the cokernel is H^1(C, omega_C tensor N^{-1}) with N := O_C(Gamma) tensor L^{-1} trivial, hence has length exactly 1, so rank phi_5 = 5 and rank phi = 11 identically on Z_ev and the deeper degeneracy loci D_4(phi_5) = D_10(phi) are empty; the expected determinantal codimensions are (11-5)(6-5) = 6 in the reduced presentation and (26-11)(12-11) = 15 in the unreduced presentation. (R5) Fibre dimension and local structure: Z_ev is canonically the pullback of the reduced-support open of |L| = P^2 along the finite etale S_6-torsor Conf_6(C) -> (reduced-support open of Sym^6 C); it is therefore reduced and smooth of pure dimension exactly 2, finite etale of degree 720 onto that open, so codim(Z_ev, U) = 6 - 2 = 4 exactly and the excess over the expected determinantal codimension 6 is exactly 2; the conormal module I_{Z_ev}/I_{Z_ev}^2 is locally free of rank 4 although Fit_0(coker phi) is locally generated by the 6 pullbacks of local generators of I_e, and this excess 2 equals the corank of the Abel-Jacobi differential da_N : T_Gamma Conf_6(C) -> T_e Pic^0(C), whose rank is identically 6 - h^0(O_C(D)) = 4 along Z_ev; in particular Z_ev is everywhere a local complete intersection of codimension 4 in the smooth 6-fold U and is nowhere cut out by a regular sequence of length 6. (R6) Relative form: if B is a reduced locally Noetherian k-scheme and (C -> B, gamma) a family all of whose geometric fibres satisfy the above hypotheses, then pi_*L is locally free of rank 3 with formation commuting with arbitrary base change, P(pi_*L) subset Sym^6_{C/B} is a P^2-bundle canonically independent of the Pic(B)-twist ambiguity in L, and Z_ev subset Conf_6(C/B) is the pullback of the reduced-support open of P(pi_*L) along the finite etale S_6-torsor; hence Z_ev -> B is smooth and surjective of pure relative dimension exactly 2 and Z_ev has relative codimension exactly 4 in Conf_6(C/B). No dimension, codimension, component, purity, stabilizer, closure or Gysin statement about any image in M_{6,6} is asserted, and no Hodge-theoretic or Tate-type conclusion about W_{-16}H^{BM}_{16}(M_{6,6};Q) is asserted.",
+  "verdict": "confirmed"
+}

@@ -1,0 +1,48 @@
+PRINCIPAL OVERRIDE — CONTINUE AND FINISH YOUR INTERRUPTED TURN.
+
+Context:
+- Session limit previously cut you off during TASK-C66-M-008 / C66-COMP-RANK
+  (standard-fallback after Qwen's incomplete ATT-0056). Slot ATT-0059 is closed.
+- Finish into the NEW slot: ATT-0062.
+- Same Claude session is resumed; do not restart the mathematics from zero.
+- Subproblem: C66-COMP-RANK (Compute determinantal rank-drop ideals and fibre dimensions).
+- Dependency C66-GEO-Z is verified via ATT-0048 + REV-0091/REV-0092 (in workspace).
+
+Token discipline (mandatory):
+1. Prefer ZERO tools. At most one Read if a single concrete field is missing.
+2. Do NOT open a long exploratory monologue. Do NOT re-read the full working-context.
+3. Do NOT dispatch grok workers. Do NOT search the web for this problem.
+4. Use only what you already loaded in this session plus TASK.json / packet if needed.
+5. Emit the final JSON in this turn. Keep reasoning brief.
+
+Mathematical target:
+- State the weakest sufficient exact theorem/computation result for C66-COMP-RANK
+  you can currently support, or an honest partial/gap status if you cannot close it.
+- Separate proved steps, source-backed inputs, computational hypotheses, gaps.
+- Respect blocked routes in TASK.json. Do not silently reuse them.
+- Cite dependency artifacts by ID when used. Prefer corroborated FND-* / SRC-* in
+  source_claim_ids / source_ids (do not put ATT/REV/CLM ids in those fields).
+
+Hard contract:
+- Final message: exactly one JSON object matching
+  proof/CAMPAIGN_ATTEMPT_TEMPLATE.json
+- No Markdown fences, no prose before or after the JSON
+- id must be exactly: ATT-0062
+- engine must be exactly: claude
+- task_id must be exactly: TASK-C66-M-008
+- subproblem_id must be exactly: C66-COMP-RANK
+- result_type / status / gaps must be honest for a standard-fallback computation turn
+- theorem_statement / target / packet fields must match the task packet
+
+Final message: exactly one JSON object.
+
+Supplied files in this workspace:
+- prompts/CAMPAIGN_MATHEMATICS.md
+- proof/packets/generated/C66-001-v4.md
+- proof/CAMPAIGN_ATTEMPT_TEMPLATE.json
+- proof/attempts/ATT-0048.json
+- proof/reviews/REV-0091.json
+- proof/reviews/REV-0092.json
+- proof/packets/generated/paired-working-context/WORKING-7a483703948f9ea9.md
+- proof/packets/generated/paired-working-context/WORKING-EXT-def9eb3ef6c036f1.md
+- TASK.json

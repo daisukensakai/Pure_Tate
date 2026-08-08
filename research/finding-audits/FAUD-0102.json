@@ -1,0 +1,72 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction with CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001; contradicts_claim_ids is empty. Compatible with corroborated FND-0103 (unconditional h^0(L)\u2208{1,2,3,4} via RR+Serre+Clifford only), FND-0104 (modulo GAP-Z-W5D, h^0\u2208{3,4} after \u03b3^*-injectivity on H^0(O(1)) and Clifford on D), and FND-0105 (GAP-Z-W5D localizes to weak CE relative-canonical normalization plus packet degree pin). Primary check of SRC-0004 (Canning\u2013Larson, arXiv:2208.02357v2): (i) \u00a79 and Lemma 10.6 proof assert the strong form O_{P(E^\u2228)}(1)|_C \u2245 \u03c9_C \u2297 \u03b3^*\u03c9_{P^1}^\u2228 = \u03c9_{C/P^1} (citing Casnati\u2013Ekedahl Thm 2.1(2)), so residual A is already killed by the standard CE line rather than left free; (ii) Lemma 10.6 records deg(O(2)|_C)=2(2g\u22122+8) hence deg(O(1)|_C)=2g+6 and deg W_{f_i}|_C=4g+12\u22124f_i, matching the packet and FND-0106 degree arithmetic; (iii) Pic^0(P^1)=0 then forces any degree-zero base twist to be trivial. Thus the pin A\u2245O is correct arithmetic once the (weak or strong) normalization is granted. Soft overstatements block promotion: (1) collapse {1,2,3,4}\u2192{3,4} is not a consequence of the CE normalization alone\u2014after M\u2245O_C(D) one still needs \u03b3^* injectivity and Clifford (FND-0104), while full constancy h^0=3 on the balanced locus further requires the open non-primitive balanced exclusion left open in FND-0104; (2) \u201cexactly one literature input\u201d is defensible only as \u201cone undischarged external CE theorem,\u201d not as the unique mathematical input, and FND-0105\u2019s split \u201cone normalization + packet Lemma 10.6 arithmetic\u201d is the accurate formulation; (3) \u201cdownstream re-audit only FND-0105 re-validates the stratum collapse\u201d understates FND-0104\u2019s load-bearing steps; (4) residual A-freedom is eliminated, not residual\u2014fibrewise invariance under moduli-base pullbacks is tautological and orthogonal. FND-0106 is therefore process packaging of already-corroborated FND-0105 (primary) plus FND-0104\u2019s numerical collapse, not an independent geometric obstruction. Merge into FND-0105; do not promote or retain as standalone.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0106",
+  "id": "FAUD-0102",
+  "independent": true,
+  "merge_target_id": "FND-0105",
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "claim_type": "dependency-localization meta-claim for stratum collapse {1,2,3,4}\u2192{3,4}",
+    "objects": [
+      "balanced tetragonal CE family",
+      "L=W_5\u2297\u03c9_C^{-1}",
+      "M=\u03c9_C^2\u2297W_5^\u2228",
+      "h^0(L) stratification",
+      "GAP-Z-W5D",
+      "relative-canonical normalization O_{P(E^\u2228)}(1)|_C"
+    ],
+    "subproblem": "C66-GEO-H0"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-08T10:50:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "lemma-10.6-degree-and-normalization",
+      "retrieved_at": "2026-08-08T10:50:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2#S10"
+    },
+    {
+      "arxiv_id": "1504.03756",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "ce-relative-canonical-embedding",
+      "retrieved_at": "2026-08-08T10:51:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/1504.03756"
+    },
+    {
+      "arxiv_id": "1504.03756",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "casnati-ekedahl-thm-2.1",
+      "retrieved_at": "2026-08-08T10:51:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1504.03756"
+    }
+  ],
+  "task_id": "TASK-F-FND-0106",
+  "verdict": "merge"
+}

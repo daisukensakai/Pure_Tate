@@ -1,0 +1,156 @@
+{
+  "attempt_id": "ATT-0061",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0061-1",
+      "note": "Reconstructed intrinsically: deg W_5 = 4g+12-4f = 36-20 = 16 (SRC-0004 Lemma 10.6), deg omega = 2g-2 = 10, so deg L = 6 and chi(L) = 6-6+1 = 1; Serre duality gives h^1(L) = h^0(omega \u2297 L^{-1}) = h^0(omega^{\u22972} \u2297 W_5^vee) = h^0(M) with deg M = 20-16 = 4; hence h^0(L) = 1 + h^0(M). The derivation uses only Riemann-Roch and Serre duality and never invokes W_5 \u2245 omega^{\u22972}(-D). Valid on every geometric fibre.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0061-2",
+      "note": "h^1(M) = h^0(omega \u2297 M^{-1}) = h^0(L) = 1 + h^0(M) \u2265 1, so M is special with 0 < deg M = 4 < 2g-2 = 10; Clifford gives h^0(M) \u2264 3, hence h^0(M) \u2208 {0,1,2,3} and h^0(L) \u2208 {1,2,3,4}; h^0(L) = 5 is impossible. Clifford equality cases O (deg 0) and omega (deg 10) are excluded by degree, so h^0(M) = 3 forces hyperelliptic fibre with M \u2245 (g^1_2)^{\u22972}; the converse holds since h^0(2g^1_2) = 3 on a hyperelliptic curve. The iff is correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0061-3",
+      "note": "Under O(1)|_C \u2245 omega_{C/P^1} \u2297 gamma^*A: deg omega_{C/P^1} = 2g-2+2\u00b74 = 18 = 2g+6, and SRC-0004 gives deg O(1)|_C = 2g+6, so 4\u00b7deg A = 0, hence A \u2245 O because Pic^0(P^1) = 0. Then W_5 \u2245 (O(1)|_C)^{\u22972} \u2297 gamma^*O(-5) \u2245 omega^{\u22972} \u2297 gamma^*O(-1) = omega^{\u22972}(-D), L \u2245 omega(-D), M \u2245 gamma^*O(1) = O(D); degrees 16/6/4 check. Injectivity of gamma^*: H^0(P^1,O(1)) -> H^0(C,O(D)) follows from the trace splitting gamma_*O_C = O \u2295 E^vee (char 0, degree 4 invertible), so h^0(M) \u2265 2 and h^0(L) \u2208 {3,4}. Considered attack: a Pic(P^1_B) base-twist ambiguity would still leave every fibrewise conclusion unchanged and is excluded by the theorem's stated A \u2208 Pic(P^1) (Tschirnhausen-normalized reading); relative conclusions are base-twist invariant anyway (see strongest_attack).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0061-4",
+      "note": "L is B-flat (line bundle), pi proper, B locally Noetherian, so upper semicontinuity makes B_4 = {h^0 \u2265 4} closed and B_3 = {h^0 = 3} open; by (H3) these are the only values, giving a locally closed stratification. On B_4: M \u2245 (g^1_2)^{\u22972} \u2245 gamma^*O(1); via h^*: H^0(P^1,O(2)) \u2245 H^0(M) (3-dimensional, injective by trace splitting, hence an isomorphism), the pencil defining gamma corresponds to a 2-dimensional subspace of H^0(O(2)) which must be base-point-free (otherwise gamma's own pencil would have base points), hence defines a degree-2 map q: P^1 -> P^1 with gamma = q \u2218 h; degree count 2\u00b72 = 4 checks, so gamma is non-primitive on B_4.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0061-5",
+      "note": "On U_3 the function h^0(L_b) is constantly 3; Grauert's theorem (proper + flat coherent sheaf over locally Noetherian base, constancy of h^0 only) gives pi_*L locally free of rank 3 commuting with arbitrary base change; R^1 pi_*L need not vanish and is irrelevant. With the quotient convention for projective bundles, the fibre of P((pi_*L)^vee) at b is P(H^0(L_b)^vee) = |L_b| \u2245 P^2.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0061-6",
+      "note": "Intrinsic part verified directly: on a smooth curve every length-6 subscheme is Cartier, so Hilb^6_{C/B} = Sym^6(C/B); the Abel-Jacobi fibre over the section [L] of Pic^6_{C/B} is closed (relative Picard separated) and represents divisors Gamma with O(Gamma) \u2245 L; over U_3 it is P((pi_*L)^vee) because divisors in |L| are sections modulo scaling, so it agrees with the Proj model there; restricting agreement to the reduced-support open only avoids non-reduced scheme-structure questions and is safe. The scheme-theoretic coincidence with Z_ev = a_N^{-1}(e(B)) is inherited from ATT-0048 (CLM-0048-4/5/7), campaign-confirmed by REV-0091/REV-0092, and the theorem scopes that coincidence exactly to bases carrying ATT-0048's ordered/configuration data, so there is no overclaim.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "binding-and-hash-check",
+      "note": "Attempt packet_sha256 39e87ba7e3784b681616f7a38db13eb7216cbd1fd11acb3a1fff2c20211f9a0a and packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7 match TASK.json exactly; target dictionary identical to TASK.json; theorem_statement identical to TASK.json; campaign_id C66-001, campaign_revision 4, context_revision 2, subproblem C66-GEO-H0, review_pass 1 all consistent. The attempt's attestation honestly records resolves_exact_target=false (a lemma; all Hodge/Tate conclusions excluded by H7), which is not a defect when judging this theorem_statement.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-08",
+  "finding_candidates": [
+    {
+      "key": "ce-normalization-degree-kill-single-input",
+      "note": "Possible semantic overlap with FND-0105 (source line) and FND-0073 (independence); recorded as a reusable audit-localization conclusion; remains a candidate until independently corroborated.",
+      "statement": "In the balanced tetragonal genus-6 CE setup, the collapse of possible h^0(L) values from {1,2,3,4} (unconditional, Riemann-Roch + Serre + Clifford only) to {3,4} rests on exactly one literature input: the weak relative-canonical normalization O_{P(E^vee)}(1)|_C \u2245 omega_{C/P^1} \u2297 gamma^*A. The twist is pinned to A \u2245 O by deg omega_{C/P^1} = 2g+6 = deg O(1)|_C (SRC-0004 Lemma 10.6) and Pic^0(P^1) = 0, so downstream reviews need only re-audit that single source line (FND-0105) to re-validate the stratum collapse; all fibrewise conclusions are moreover invariant under any residual base twist.",
+      "status": "candidate"
+    },
+    {
+      "key": "linear-system-model-abel-jacobi-not-proj",
+      "note": "Positive complement to the recorded Proj-failure warning; possible overlap with FND-0047, which covers only the failure side; remains a candidate until independently corroborated.",
+      "statement": "For a line bundle L of relative degree d on a smooth proper curve family C/B, the functor of relative effective divisors Gamma with O(Gamma) \u2245 L is represented by the Abel-Jacobi fibre Sym^d(C/B) \u00d7_{Pic^d_{C/B}} B, which is closed because the relative Picard is separated; on a smooth curve Hilb^d = Sym^d since every length-d subscheme is Cartier. This model is correct over all of B, whereas Proj(pi_*L) has correct fibres only over the open where h^0(L) is constant; over that open the two agree because divisors in |L| are sections modulo scaling.",
+      "status": "candidate"
+    }
+  ],
+  "id": "REV-0100",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "39e87ba7e3784b681616f7a38db13eb7216cbd1fd11acb3a1fff2c20211f9a0a",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0048",
+      "note": "Load-bearing for the HN filtration input (CLM-0048-6) and the scheme-theoretic Z_ev identification used in H6. Status taken from the campaign record cited by the attempt (confirmed by REV-0091 and REV-0092). Fibrewise uniqueness/existence of the HN filtration of W = W_4 \u2295 W_5 with degrees 20 > 16 was re-verified intrinsically (any line subbundle of degree 20 must equal the degree-20 summand), and the Z_ev coincidence is scoped to ATT-0048's own regime. The ATT-0048 file itself is not present in this review workspace; no adverse evidence found.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0091",
+      "note": "Confirmation review attesting ATT-0048's status; non-load-bearing for the intrinsic mathematics of ATT-0061 (used only to license the ATT-0048 citation). Not present in this workspace; accepted as campaign record.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0092",
+      "note": "Second confirmation review attesting ATT-0048's status; non-load-bearing for the intrinsic mathematics of ATT-0061. Not present in this workspace; accepted as campaign record.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Load-bearing for the degree package (Lemma 10.6: deg W_f = 4g+12-4f; convention W_f = (O(2) \u2297 gamma^*O(-f))|_C; deg O(1)|_C = 2g+6). Cross-verified for internal consistency: these formulas are mutually consistent (deg W_f = 2\u00b7deg O(1)|_C - 4f) and consistent with the CE picture of C as the fibrewise complete intersection of two quadrics in a P^2-bundle, where deg omega_{C/P^1} = 2g+6 for a degree-4 cover.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0046",
+      "note": "Non-load-bearing: cited only as an avoided failure route (no scheme identification from geometric points alone); H6 explicitly inherits scheme structure from ATT-0048's Fitting comparison instead.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0047",
+      "note": "Non-load-bearing: motivates replacing Proj(pi_*L) by the incidence model where h^0 jumps; the positive global model in H6 is established independently of this finding.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0058",
+      "note": "Non-load-bearing: pure dimension 17 / codimension 4 statements are explicitly excluded by H7 and no proof step depends on them.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0073",
+      "note": "Non-load-bearing: the independence of h^0(L) = 1 + h^0(M) from the identification W_5 \u2245 omega^{\u22972}(-D) is re-proved intrinsically in CLM-0061-1.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0083",
+      "note": "Non-load-bearing: nonemptiness of the reduced-support open is explicitly excluded by H7; only the standard openness of the reduced-support locus inside the Abel-Jacobi fibre is used in H6.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0103",
+      "note": "Non-load-bearing landscape framing; the relevant h^0 bounds are re-derived from Clifford's theorem in CLM-0061-2.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0104",
+      "note": "Non-load-bearing landscape framing; no proof step depends on it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0105",
+      "note": "Load-bearing for H3: isolates the single source line for the weak CE relative-canonical normalization O_{P(E^vee)}(1)|_C \u2245 omega_{C/P^1} \u2297 gamma^*A. The consequence actually used (deg A = 0, hence A \u2245 O) was re-verified intrinsically from deg omega_{C/P^1} = 2g+6 and Pic^0(P^1) = 0.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0061-P1",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack (considered, repelled): Pic(B)-ambiguity in the CE normalization. The collapse {1,2,3,4} -> {3,4} and the identifications W_5 \u2245 omega^{\u22972}(-D), L \u2245 omega(-D), M \u2245 O(D) all rest on the single input O_{P(E^vee)}(1)|_C \u2245 omega_{C/P^1} \u2297 gamma^*A. Read over the family C -> P^1_B, the ambiguity could a priori be A \u2208 Pic(P^1_B) with a nontrivial base part pi^*A_B, which would make the relative isomorphisms of (H3) hold only up to a base twist and could corrupt (H5)/(H6). Outcome: repelled three ways: (i) the theorem states A \u2208 Pic(P^1), the Tschirnhausen-normalized reading \u2014 in characteristic zero the trace splitting gamma_*O_C = O \u2295 E^vee canonically fixes E, hence P(E^vee) and O(1), killing base twists; (ii) any base twist restricts trivially to geometric fibres, so every fibrewise conclusion (h^0 \u2208 {3,4}, hyperelliptic/non-primitive characterization of B_4) is unaffected; (iii) the relative conclusions are invariant under base twists (Grauert local freeness survives tensoring pi_*L by a line bundle from the base, P((pi_*L)^vee) is unchanged, and the Abel-Jacobi incidence is canonically isomorphic after reclassifying L). Runner-up attack: the scheme-theoretic coincidence incidence = Z_ev in H6 is citation-only (ATT-0048 CLM-0048-4/5/7, whose content is not re-verifiable inside this review workspace); repelled because the theorem scopes the coincidence exactly to bases carrying ATT-0048's ordered/configuration data and ATT-0048 is campaign-confirmed (REV-0091/REV-0092), while the intrinsic incidence model (closed Abel-Jacobi fibre; Hilb^6 = Sym^6 on smooth curves) was verified directly. The remaining adversary list (Tate twists, Poincare duality, Borel-Moore versus cohomology degree, Gysin/Kunneth shifts, spectral-sequence differentials, invariants versus coinvariants, semisimplification, predicted motives, stable pairs) has no surface: H7 explicitly excludes all Hodge/Tate conclusions and the proof is entirely sheaf-level. Evidence limitation: ATT-0048, REV-0091/REV-0092, SRC-0004 and the packet body were not directly readable in this workspace; dependency verdicts for them rest on the campaign record cited by the attempt plus intrinsic consistency cross-checks.",
+  "subproblem_id": "C66-GEO-H0",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B be a locally Noetherian scheme over a field of characteristic zero, pi: C -> B a smooth proper morphism with geometrically connected fibres of genus g=6, and gamma: C -> P^1_B a finite flat morphism of degree 4 whose Casnati-Ekedahl relations bundle F is fibrewise balanced F \u2245 O(4) \u2295 O(5). Let 0 -> W_4 -> W -> W_5 -> 0 be the canonical Harder-Narasimhan filtration of W = (O_{P(E^vee)}(2) \u2297 gamma^* F^vee)|_C constructed in ATT-0048 (CLM-0048-6), so that W_5 is the invertible quotient of fibrewise degree 16 under the SRC-0004 convention W_f = (O_{P(E^vee)}(2) \u2297 gamma^* O_{P^1}(-f))|_C. Set L := W_5 \u2297 omega_{C/B}^{-1} (fibrewise degree 6) and M := omega_{C/B}^{\u22972} \u2297 W_5^vee (fibrewise degree 4). Then: (H1) On every geometric fibre, chi(L)=1 and h^0(L)=1+h^0(M) by Riemann-Roch and Serre duality, with no use of W_5 \u2245 omega_C^{\u22972}(-D). (H2) On every geometric fibre, M is special (h^1(M)=h^0(L)\u22651), and Clifford's theorem yields h^0(M) \u2208 {0,1,2,3}, hence h^0(L) \u2208 {1,2,3,4}; the value h^0(L)=5 never occurs; equality h^0(M)=3 holds if and only if the fibre is hyperelliptic and M \u2245 (g^1_2)^{\u22972}. (H3) Under the standard CE relative-canonical normalization in the weak form O_{P(E^vee)}(1)|_C \u2245 omega_{C/P^1} \u2297 gamma^* A for some A \u2208 Pic(P^1), the SRC-0004 degree deg(O(1)|_C)=2g+6 forces deg A=0, hence A \u2245 O, and therefore W_5 \u2245 omega_C^{\u22972}(-D), L \u2245 omega_C(-D), and M \u2245 O_C(D) where D is any fibre of gamma (i.e. O_C(D) \u2245 gamma^* O_{P^1}(1)). Consequently gamma^*: H^0(P^1,O(1)) -> H^0(C,O(D)) is injective, so h^0(M)\u22652 and h^0(L) \u2208 {3,4} on every balanced geometric fibre. (H4) Semi-continuity stratifies B into locally closed subschemes B_k = {b \u2208 B : h^0(L_b)=k} for k \u2208 {3,4} (the only values allowed by (H3)), with B_4 contained in the locus of hyperelliptic fibres on which gamma is non-primitive (factors as q \u2218 h through the hyperelliptic double cover). (H5) On the open U_3 := B_3 (where h^0(L) is constantly 3), Grauert's theorem supplies that pi_* L is locally free of rank 3 and commutes with arbitrary base change; P((pi_* L)^vee) -> U_3 is a relative P^2-bundle whose geometric fibre over b is |L_b| \u2245 P^2. (H6) Over all of B the relative degree-six linear system of L is the closed incidence locus inside the relative effective-divisor space (equivalently the Hilbert scheme Hilb^6_{C/B}, or the Abel-Jacobi fibre of the section classifying L), not Proj(pi_* L); the two models agree over U_3 after restricting to the reduced-support open. By ATT-0048 (CLM-0048-4, CLM-0048-5, CLM-0048-7), this incidence coincides scheme-theoretically with the CE evaluation-failure locus Z_ev = a_N^{-1}(e(B)) on any base carrying the ordered or configuration data of ATT-0048. (H7) Explicitly excluded from this theorem: emptiness of B_4 (constancy h^0(L)\u22613 on the whole balanced locus; equivalently, non-existence of balanced non-primitive tetragonal pencils \u2014 GAP-H0-1); pure dimension 17 or codimension 4 of any image in M_{6,6}; smoothness of Z_ev or of its ordered reduced open; nonemptiness of the reduced-support open on every fibre; and any Hodge/Tate conclusion.",
+  "verdict": "confirmed"
+}
