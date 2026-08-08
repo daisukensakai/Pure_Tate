@@ -1,0 +1,158 @@
+{
+  "attempt_id": "ATT-0060",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-Z-01",
+      "note": "The filtered reduction follows from the two required vanishings and the snake lemma: R^1 pi_*W_4=0 from deg W_4=20>10, while the W_4 evaluation is surjective because deg W_4(-Gamma)=14>10, with cohomology-and-base-change and Nakayama. No global splitting is used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-02",
+      "note": "The SRC-0004 obstruction groups are identified with Serre duals of the evaluation cokernels. The f=4 contribution vanishes by negative degree, and the degree-zero f=5 contribution is nonzero exactly when O_C(Gamma) is isomorphic to L.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-03",
+      "note": "The inclusion J subset I_e is scheme-theoretic: after pullback to e, the cokernel is a line bundle and all maximal minors vanish as sections, not merely on geometric points.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-04",
+      "note": "The set-theoretic support V(J)=e(B) follows from the degree-zero section criterion on Pic^0.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-05",
+      "note": "The reverse inclusion I_e subset J is supported by the intrinsic derivative/Serre-pairing calculation and Nakayama, and its conclusion is recorded in packet finding FND-0096.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-Z-06",
+      "note": "The scheme-level identity Fit_0(coker phi_5)=a^*I_e is supported, but the asserted equality as closed substacks is not fully verified. Step 5 merely invokes smooth-locality and descent without supplying a checkable presentation of the universal ordered configuration stack or verifying descent of all constructions defining Z_ev and a^{-1}(e(B)).",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-Z-07",
+      "note": "The asserted source-backed isomorphism W_5 ~= omega_C^{tensor 2}(-D) depends on a CE relative-canonical normalization absent from the supplied SRC-0004 excerpt. FND-0105 expressly requires a source line for that normalization or conditionalization on GAP-Z-W5D; treating it as an established working-context fact does not discharge the dependency.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-Z-08",
+      "note": "Riemann-Roch gives nonemptiness of the full Sym^6 Abel-Jacobi fibre. The attempt correctly avoids asserting ordered reduced nonemptiness or a coarse-moduli torsor and restricts the S_6-torsor statement to the stack.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-08",
+  "finding_candidates": [],
+  "id": "REV-0099",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "39e87ba7e3784b681616f7a38db13eb7216cbd1fd11acb3a1fff2c20211f9a0a",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "SRC-0004 Lemma 10.6",
+      "note": "It supplies the degree formula and obstruction decomposition under the packet's gamma^*O(-f) convention. It does not supply the separate CE relative-canonical normalization.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "Packet CE convention W_5 and degree formula",
+      "note": "The convention is used consistently; deg W_5=16 and deg L=6.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0097",
+      "note": "Supports filtered CE reduction without a global splitting.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0099",
+      "note": "Supplies the two degree vanishings, cohomology-and-base-change/Nakayama argument, and snake-lemma reduction.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0064",
+      "note": "Used only for the stack-level finite etale S_6-torsor corollary.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0005",
+      "note": "Supports nonemptiness of the full Sym^6 Abel-Jacobi fibre via Riemann-Roch.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0096",
+      "note": "Supports the universal identity Fit_0(coker Phi)=I_e.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "WC: R^1p_*L_univ=0, ranks, and base change for Phi",
+      "note": "These follow in the stated degree range and are also incorporated in FND-0096.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "WC: kernel/cokernel at e and intrinsic derivative as Serre pairing",
+      "note": "This is the load-bearing first-order calculation behind I_e subset J and is incorporated in FND-0096.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "WC: Fitting ideals commute with scalar extension and base-line twists are inert",
+      "note": "These standard properties support the scheme-level pullback calculation.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "WC: degree-zero and negative-degree section criteria",
+      "note": "These support the Pic^0 degeneracy support and vanishing of the f=4 obstruction.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "WC: reduced-support open is not closed and stack S_6-torsor",
+      "note": "These are used only in the carefully limited corollary and exclusion clauses.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CE relative-canonical normalization for CLM-Z-07",
+      "note": "The supplied source does not establish O_{P(E^vee)}(1)|_C = omega_C tensor gamma^*O(2). FND-0105 requires a cited source line or explicit conditionalization; degree arguments remove a residual twist only after this normalization is granted.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "Stack-descent foundations for Step 5",
+      "note": "The proof does not verify against a checkable stack presentation that Pic^0, the Poincare construction, evaluation maps, Fitting ideals, and their ideal equality descend to the claimed closed substacks.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0060-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is against theorem clause (4a), CLM-Z-07. The attempt asserts W_5 ~= omega_C^{tensor 2}(-D) as an established working-context consequence of a CE relative-canonical normalization, but the supplied SRC-0004 excerpt gives only degrees and the obstruction decomposition. Packet finding FND-0105 specifically requires a cited source line for that normalization or explicit conditionalization on GAP-Z-W5D and forbids relabeling the missing input as an established working-context fact. Because clause (4a) remains part of the exact theorem_statement, this unresolved dependency prevents confirmation, although it does not refute the scheme-level Fitting arguments in clauses (1)-(3). A secondary unresolved issue is the unverified descent from the scheme calculation to equality of closed substacks.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Theorem (scheme-theoretic identification of the balanced CE evaluation-failure locus at (g,n)=(6,6)). Work over locally Noetherian characteristic-zero bases, with the packet CE convention W_5 := (O_{P(E^vee)}(2) tensor gamma^*O_{P^1}(-5))|_C (the f_2=5 summand of (O(2) tensor gamma^*F^vee)|_C, not the O_{P^1}(5) summand of F). Let (pi:C->B, gamma) be a balanced tetragonal family of smooth genus-6 curves, let Gamma be a relative ordered Cartier divisor of degree 6 (a point of the ordered pairwise-distinct configuration stack), let 0 -> W_4 -> W -> W_5 -> 0 be the canonical filtered CE bundle (deg W_4=20, deg W_5=16), let phi: pi_*W -> pi_*(W|_Gamma) be the CE evaluation, and let Z_ev := V(Fit_0(coker phi)). Put L := W_5 tensor omega_{C/B}^{-1} (deg L=6) and let a: B -> Pic^0(C/B) classify O_C(Gamma) tensor L^{-1}. Then: (1) Fit_0(coker phi) = Fit_0(coker phi_5), where phi_5 is the W_5-evaluation (filtered reduction; no global splitting of W is used). (2) For the universal evaluation Phi of L_univ := omega_{C_P/P}(Gamma_P) tensor Poin^{-1} over P := Pic^0(C/B), one has Fit_0(coker Phi) = I_e, the ideal sheaf of the identity section e:B->P. (3) Z_ev = a^{-1}(e(B)) as closed substacks of the ordered configuration stack; equivalently Fit_0(coker phi_5) = a^*I_e. In particular, on every geometric fibre the points of Z_ev are exactly the ordered reduced degree-6 divisors Gamma with O_C(Gamma) isomorphic to W_5 tensor omega_C^{-1}, and (Z_ev)_red equals the reduced Abel-Jacobi incidence. (4) Source-backed corollary clauses: on the balanced locus W_5 ~= omega_C^{tensor 2}(-D) for D a fibre of gamma, so the failure condition is Gamma in |omega_C(-D)|, equivalently D+Gamma canonical; and chi(L)=1 forces h^0(L)>=1, so the full Abel-Jacobi fibre in Sym^6 is nonempty on every smooth genus-6 geometric fibre (reduced-support ordered nonemptiness is NOT asserted). Exclusions: no monomorphism into M_{6,6}; no image/closure/component/dimension/stabilizer claim in M_{6,6}; no h^0 stratification; no unbalanced-tetragonal failure construction; no global splitting W=W_4+W_5 over the base; no identification of the relative linear system with Proj(pi_*L); no closedness claim for the reduced-support open; no coarse-moduli torsor claim; no statement about the exact target group.",
+  "verdict": "incomplete"
+}

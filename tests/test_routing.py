@@ -229,6 +229,22 @@ class RoutingTests(unittest.TestCase):
                 high_tier_chain_state("proof:A")["pending"], ["codex"]
             )
 
+    def test_record_high_tier_dispatch_requires_open_chain(self):
+        with tempfile.TemporaryDirectory() as directory, mock.patch(
+            "pure_tate.routing.HIGH_TIER_LEDGER",
+            Path(directory) / "high-tier-turns.json",
+        ):
+            with self.assertRaisesRegex(ValueError, "not open"):
+                record_high_tier_dispatch("proof:never-opened", "claude")
+            # Opening then recording is the path used for standard-fallback
+            # when setdefault invents a proof chain id.
+            high_tier_chain_order("proof:never-opened")
+            record_high_tier_dispatch("proof:never-opened", "claude")
+            self.assertEqual(
+                high_tier_chain_state("proof:never-opened")["pending"],
+                ["codex"],
+            )
+
     def test_unavailable_first_high_tier_slot_is_deferred_not_substituted(self):
         engine = select_prover_for_cell(
             0,

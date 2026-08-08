@@ -1153,6 +1153,10 @@ def _drive_campaign_unlocked(
                 isinstance(chain_id, str)
                 and engine in routing["high_tier_chain_engines"]
             ):
+                # Standard-fallback / retry math may setdefault a proof chain id
+                # without going through select_prover_for_cell. Open it first so
+                # record_high_tier_dispatch cannot fail closed before the engine.
+                high_tier_chain_order(chain_id, persist=True)
                 record_high_tier_dispatch(chain_id, engine)
             if phase == "experiment":
                 run_experiment(task, output, timeout=timeout)
