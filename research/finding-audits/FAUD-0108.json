@@ -1,0 +1,66 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "The finding has no recorded claim-level contradictions and does not conflict with CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. It is compatible with FND-0097: vanishing of the relative sheaf R^1s_*End(F) does not eliminate global extension classes arising from base cohomology, such as H^1(B,s_*Hom(L_4,L_5)), and therefore does not force F to split globally. It complements rather than duplicates FND-0097, which concerns the canonical filtered CE reduction and possible global nonsplitting, and FND-0099, which proves different higher-direct-image and evaluation vanishings for W_4. No merge is warranted. The original single-engine adversarial-review evidence is independently replaced by the fibre calculation and primary-reference base-change argument, so the conditional lemma should be promoted to corroborated status with the stated hypotheses.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0112",
+  "id": "FAUD-0108",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "base_scope": "The cited argument applies directly for scheme bases. For an algebraic or Deligne-Mumford stack base, the same conclusion holds when s is representable and proper and F is finite locally free, by pulling back to a scheme atlas and descending the zero quasi-coherent sheaf.",
+    "campaign_case": {
+      "g": 6,
+      "n": 6
+    },
+    "conclusion": "R^1 s_* End(F)=0",
+    "exclusions": [
+      "It does not assert or imply a global splitting of F over B.",
+      "It does not imply H^1(P^1_B,End(F))=0.",
+      "It does not establish the CE evaluation-failure locus, its Fitting scheme structure, or Tate-type conclusions."
+    ],
+    "generality": "The calculation also works for any constant consecutive splitting type O(a) direct-sum O(a+1); the campaign application is the balanced genus-six tetragonal type (4,5).",
+    "hypotheses": [
+      "s:P^1_B->B is the proper relative projective line",
+      "F is a rank-two finite locally free sheaf on P^1_B",
+      "for every geometric point b of B, F_b is isomorphic to O(4) direct-sum O(5)"
+    ],
+    "proof_scope": "Fibrewise, End(F_b) is O direct-sum O direct-sum O(1) direct-sum O(-1), whose four summands have vanishing H^1 on P^1. Since relative dimension is one, top-degree cohomology commutes with arbitrary base change and R^1 s_* End(F) is finite type; its geometric fibres vanish, so Nakayama gives the asserted sheaf vanishing."
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "7df94019c801583f4a86fc1868e8b4371bed461e211ca581dc3ac74851933090",
+      "doi": null,
+      "query_family": "projective-line-line-bundle-cohomology",
+      "retrieved_at": "2026-08-09T01:56:50Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/01XS"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "ee16befd4e016bc42aafdfd793dbe969ac1d5a3fb9620c033ceced4e921d29af",
+      "doi": null,
+      "query_family": "coherent-top-degree-base-change",
+      "retrieved_at": "2026-08-09T01:56:50Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0EX2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "86e986075e67e80eeb9f0924769077d3f6e3f89bc8bf7712ef79bb2e8c43a33a",
+      "doi": null,
+      "query_family": "top-direct-image-vanishing-nakayama",
+      "retrieved_at": "2026-08-09T01:56:50Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0E7G"
+    }
+  ],
+  "task_id": "TASK-F-FND-0112",
+  "verdict": "promote"
+}

@@ -1,0 +1,269 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of copies of Q(8)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The relative Casnati-Ekedahl evaluation-obstruction locus agrees, as a scheme over the balanced base, with the Abel-Jacobi incidence locus; this requires comparison of determinantal/Fitting scheme structures beyond fibrewise equality on geometric points."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "h^0(omega_C(-D)) = 3 constantly on the whole balanced tetragonal locus; equivalently, no balanced fibre carries a tetragonal pencil factoring through a degree-2 map, i.e. no non-primitive degree-4 pencil has balanced splitting O(4)+O(5)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The balanced evaluation-obstruction model maps monomorphically into M_{6,6}; this requires recovering the tetragonal pencil gamma from L = W_5 tensor omega_C^{-1} via |omega_C tensor L^{-1}|, a well-defined source and target, and a stack-level full-faithfulness argument, since the forgetful map from tetragonal data is generically 5-to-1."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The connecting map from Gr^W_26 H^{24} of the weight-two quotient of the mixed R^1 local system does not alter the quotient Gr^W_26 H^{25} of the weight-one symplectic part in the forgetful Leray for M_{6,6} -> M_{6,5}."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The five-stage forgetful Leray-plus-residue argument with r = 6-j reduces the exact-target computation to odd-tensor virtual-cohomological-dimension vanishing on M_{6,1}, and that vanishing holds."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The balanced tetragonal Hurwitz stack, or its projective-bundle open, has mixed-Tate cohomology; a finite branch morphism to an open of M_{0,18} would need the finite pushforward of the constant sheaf to contain only Tate local systems."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "For L = W_5 tensor omega_C^{-1} of degree 6, the reduced-support open and the ordered Conf_6 incidence locus are nonempty on every geometric fibre; Riemann-Roch chi(L) = 1 establishes only nonemptiness of the full Abel-Jacobi fibre in Sym^6."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The named dominant 17-dimensional component together with the hyperelliptic jump strata exhausts the components, stabilizers, closure, and codimension of the evaluation-obstruction locus Z."
+    }
+  ],
+  "engine": "qwen",
+  "established_facts": [
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': mechanically verified entry with scope 'cases: all'; arithmetic d = 3*6-3+6 = 21 and 2d-16 = 26.",
+      "evidence_class": "mechanical",
+      "statement": "For d = 3g-3+n, Poincare duality identifies W_{-16}H^{BM}_{16}(M_{g,n}) with W_{2d-16}H^{2d-16}(M_{g,n})(d); for (g,n)=(6,6) this is W_{26}H^{26}(M_{6,6})(21)."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entry on the mixed R^1 local system and the p+1 weight floor, scoped to (g,n)=(6,6).",
+      "evidence_class": "source",
+      "statement": "R^1 pi_* Q for the universal n-punctured curve is mixed of weights 1 and 2, an extension of a rank n-1 Tate system of weight 2 by the rank 2g weight-1 system, never pure of weight 1; the weight floor for H^p(base; L) is p+1."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, 'Primary locator excerpts', SRC-0004 Lemma 10.6: deg W_f|_C = 2(2g-2+4*2)-4f = 4g+12-4f; arithmetic 4*6+12-4*5 = 16 and 16-(2*6-2) = 6.",
+      "evidence_class": "source",
+      "statement": "For the Casnati-Ekedahl summands W_f = (O_{P(E^vee)}(2) tensor gamma^*O(-f))|_C one has deg(W_f|_C) = 4g+12-4f; at g=6, deg(W_5)=16 and deg(W_5 tensor omega_C^{-1})=6."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entry for the f=4 component; arithmetic 4*4+6-2*6-14 = -4 < 0.",
+      "evidence_class": "source",
+      "statement": "On a smooth genus-6 degree-4 cover with balanced splitting F = O(4) + O(5), the f=4 obstruction summand omega_C tensor W_4^vee(Gamma) has degree -4 for every degree-6 divisor Gamma, hence its H^0 is 0 and the obstruction is carried entirely by the f=5 summand."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entry for the f=5 component; arithmetic 4*5+6-2*6-14 = 0, so a degree-zero line bundle triviality condition.",
+      "evidence_class": "source",
+      "statement": "In the same balanced genus-6 situation, the f=5 obstruction summand omega_C tensor W_5^vee(Gamma) has degree 0, and evaluation on Gamma degenerates exactly when O_C(Gamma) is isomorphic to L := W_5 tensor omega_C^{-1}."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entry on the n-dependence; arithmetic 4*4+n-26 = n-10 and 4*5+n-26 = n-6.",
+      "evidence_class": "source",
+      "statement": "Substituting g=6 into the obstruction degree 4f+n-2g-14 gives n-10 for f=4 and n-6 for f=5: for n <= 9 the f=4 summand vanishes identically; for n <= 5 the obstruction locus is empty; at n=6 the f=5 obstruction has degree exactly 0, making the condition a single Abel-Jacobi condition rather than a positive-degree Brill-Noether condition."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entries on the Conf_6 torsor and on rational versus integral descent.",
+      "evidence_class": "source",
+      "statement": "The forgetful map from the ordered distinct configuration stack Conf_6(C/B) to the relative effective-divisor space of degree 6 is a finite etale S_6-torsor over the reduced-support open locus; with Q-coefficients S_6-invariants and S_6-coinvariants agree, so ordered-to-unordered descent is harmless rationally but not integrally or on coarse spaces."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entry on purity and semisimplicity for the (6,6) corner.",
+      "evidence_class": "source",
+      "statement": "W_{26}H^{26}(M_{6,6};Q) is a pure polarizable Q-Hodge structure of weight 26 and the entire weight-26 row is pure of that single weight; since polarizable pure Q-Hodge structures of fixed weight form a semisimple category, any subquotient of a direct sum of a Tate object in that row is a direct sum of the same Tate object, so there is no non-split-extension obstruction in this corner."
+    },
+    {
+      "evidence": "Arithmetic receipt: 3*5-3+8 = 20 and dim M_{6,6} = 3*6-3+6 = 21, so 21-20 = 1; recorded in proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings'.",
+      "evidence_class": "mechanical",
+      "statement": "The non-separating boundary divisor of Mbar_{6,6} has normalization Mbar_{5,8}: the genus drops by one and the normalization gains two legs at the node (6+2=8); dim Mbar_{5,8} = 3*5-3+8 = 20 = 21-1, confirming codimension one."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': mechanically verified entry for degree 26, map M_{6,6} to M_{6,5}; arithmetic vcd = 4*6-4+5 = 25 < 26.",
+      "evidence_class": "mechanical",
+      "statement": "For the forgetful map M_{6,6} -> M_{6,5}, the q=0 Leray term H^{26}(M_{6,5};Q) vanishes because 26 exceeds vcd(M_{6,5}) = 25; with fibre cohomology only in q=0,1, no Leray differential enters or leaves total degree 26."
+    },
+    {
+      "evidence": "Arithmetic receipt in proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings', using vcd = 4g-4+n and d = 3g-3+n for each listed pair.",
+      "evidence_class": "mechanical",
+      "statement": "For the seven pairs (3,12),(5,8),(6,6),(7,4),(8,2) the required ordinary degree 2d-16 equals the virtual cohomological dimension, and for (8,0),(8,1) it equals vcd-1; it never exceeds vcd, so top-virtual-dimension vanishing theorems discharge none of these cases."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entry with generality all g >= 1, n >= 1; degree receipt deg L_univ = 2g-2+n > 2g-2 gives R^1p_* = 0 and h^0 = g+n-1.",
+      "evidence_class": "source",
+      "statement": "Universal Pic^0 determinantal lemma: for g >= 1, n >= 1, Gamma finite etale of degree n over the base and L_univ = omega_{C/B}(Gamma) tensor Poin^{-1} on C x_S Pic^0(C/S), one has Fit_0(coker(p_*L_univ -> p_*(L_univ|_{Gamma}))) = I_e; at the identity the kernel is H^0(omega) of dimension g, the cokernel is H^1(omega) of dimension 1, and the intrinsic derivative is the perfect Serre pairing H^1(O) x H^0(omega) -> H^1(omega)."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entries on the canonical filtration and the two degree vanishings (20 > 10 and 14 > 10), including removal of the splitting hypothesis.",
+      "evidence_class": "source",
+      "statement": "Filtered Casnati-Ekedahl reduction: over the balanced locus the relative Harder-Narasimhan filtration gives canonically 0 -> L_5 -> F -> L_4 -> 0, hence 0 -> W_4 -> W -> W_5 -> 0 without any global splitting hypothesis; since deg W_4 = 20 > 2g-2 = 10 gives R^1 pi_* W_4 = 0 and deg W_4(-Gamma) = 14 > 10 gives H^1(W_4(-Gamma)) = 0, the snake lemma yields Fit_0(coker phi) = Fit_0(coker phi_5)."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entries on h^0(L) = 1 + h^0(M) and the Clifford sharpening; degree receipt deg M = 2(2g-2) - (4g+12-4f) = 20-16 = 4 at g=6, f=5.",
+      "evidence_class": "source",
+      "statement": "With M := omega_C^2 tensor W_5^vee one has deg M = 4 and h^0(L) = 1 + h^0(M) via chi(L) = 1 and Serre duality; M is always special, so Clifford's theorem gives h^0(M) <= 3, with equality only on hyperelliptic fibres with M ~= (g^1_2)^{tensor 2}; hence h^0(L) lies in {1,2,3,4}, never 5, and h^0(L)=4 occurs only on hyperelliptic fibres."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entry on relative Abel-Jacobi representation of the divisor functor.",
+      "evidence_class": "source",
+      "statement": "For a line bundle L of relative degree d on a smooth proper curve family, the functor of relative effective divisors Gamma with O(Gamma) ~= L is represented by the Abel-Jacobi fibre Sym^d(C/B) x_{Pic^d_{C/B}} B, closed because the relative Picard is separated; on smooth curves Hilb^d = Sym^d, and Proj(pi_*L) has correct fibres only over the open where h^0(L) is constant."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entry pinning the normalization; degree receipt deg O_{P(E^vee)}(1)|_C = 2g+6 = deg(omega_C tensor gamma^*O(2)), and gamma^*A shifts degree by 4 deg A.",
+      "evidence_class": "source",
+      "statement": "Granting the weak Casnati-Ekedahl normalization O_{P(E^vee)}(1)|_C ~= omega_C tensor gamma^*O(2) tensor gamma^*A, degree comparison forces deg A = 0, hence A ~= O, and therefore W_5 ~= omega_C^2(-D), L ~= omega_C(-D), and M ~= O_C(D)."
+    },
+    {
+      "evidence": "proof/packets/generated/C66-001-v4.md, section 'Adjudicated findings': entry on the depth-zero corner and its identification with the boundary sequence.",
+      "evidence_class": "source",
+      "statement": "In the Deligne weight spectral sequence of (Mbar_{g,n}, boundary), the corner gr^W_{2d-16}H^{2d-16}(M_{g,n}) sits at spectral-sequence depth m = weight - degree = 0; only the m=0 term H^{2d-16}(Mbar_{g,n}) and the single d_1 Gysin map from H^{2d-18}(D^{(1)})(-1) contribute, and the resulting cokernel coincides with the boundary sequence."
+    }
+  ],
+  "id": "DIGEST-0020",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "R^1 pi_* Q is an extension of a weight-2 Tate system by a weight-1 system, hence mixed of weights 1 and 2; the actual weight floor for H^p(base; L) is p+1, so a pure-weight-1 treatment is off by exactly one unit of weight and targets an identically zero group.",
+      "statement": "Treating R^1 pi_* Q of the universal punctured curve as pure of weight 1 and using weight p as the floor at cohomological degree p."
+    },
+    {
+      "mathematical_reason": "The two corners coincide only if 2d = 2d-16, which never holds; for (6,6) the top-weight corner has weight 42 while the target has weight 26, and no twist or dimension shift reconciles distinct weights.",
+      "statement": "Identifying the top-weight graph-complex corner gr^W_0 H^*_c(M_{g,n}), equivalently gr^W_{2d}H^*(M_{g,n}), with the lowest-weight target gr^W_{2d-16}H^{2d-16}(M_{g,n})(d)."
+    },
+    {
+      "mathematical_reason": "Such a bound requires the localization spectral sequence with codimension shifts and Tate twists (a codimension-4 stratum contributes through degree p-8 cohomology twisted by Q(-4)) and control of its differentials; restriction to the open stratum is in general neither injective nor surjective.",
+      "statement": "Bounding pure-weight cohomology of a local system on the total space from a gonality or Brill-Noether stratification of the base by evaluating only the open stratum."
+    },
+    {
+      "mathematical_reason": "Normalization of a non-separating node drops the genus by one and adds two legs at the node, giving 6+2 = 8 legs; dim Mbar_{5,7} = 19 is not 21-1 = 20, so Mbar_{5,7} cannot be the codimension-one boundary normalization.",
+      "statement": "Normalizing the non-separating boundary divisor of Mbar_{6,6} by Mbar_{5,7}."
+    },
+    {
+      "mathematical_reason": "Proj(pi_*L) has the correct fibres only over the open where h^0(L) is constant; a global identification requires cohomology-and-base-change hypotheses or a compatible divisor/Hilbert or Abel-Jacobi construction.",
+      "statement": "Identifying a relative linear system with Proj(pi_*L) without qualification when h^0(L) jumps."
+    },
+    {
+      "mathematical_reason": "A fibrewise equivalence establishes equality only on geometric points; scheme-theoretic equality requires comparison of the determinantal/Fitting scheme structures.",
+      "statement": "Concluding scheme-theoretic equality of the evaluation-obstruction locus and an Abel-Jacobi incidence locus from a fibrewise equivalence between nonvanishing of an obstruction space and triviality of a degree-zero line bundle."
+    },
+    {
+      "mathematical_reason": "That standard filling-system class represents the zero class in the Steinberg module; cyclicity arguments require a nontrivial cyclic generator, so any top-degree vanishing deduction built on it is vacuous and does not compute (St tensor V)_G.",
+      "statement": "Taking the standard ordered filling system of 2g arcs (standard 4g-gon side identification) as a cyclic generator of the Steinberg module fixed by handle half-turns."
+    },
+    {
+      "mathematical_reason": "Rational representation theory of the finite group does not control geometric monodromy of the family; configuration-space coefficients and tetragonal monodromy can still produce non-Tate summands.",
+      "statement": "Inferring that an S_6-cover of a relative configuration or linear-system space carries only Tate local systems from the fact that S_6 has rational irreducible representations."
+    },
+    {
+      "mathematical_reason": "A finite pushforward of the constant sheaf along the branch morphism may contain non-Tate local systems, and rational averaging preserves only an already established Tate structure; a predicted motive is not an unconditional theorem.",
+      "statement": "Deducing pure-Tate cohomology of the evaluation-obstruction locus from declaring the balanced tetragonal Hurwitz space rational or Tate."
+    },
+    {
+      "mathematical_reason": "Non-closedness requires exhibiting a closure point lying outside the balanced locus; openness shows only that the locus is open in its closure, not that the closure is strictly larger.",
+      "statement": "Concluding non-closedness of the balanced piece inside the evaluation-obstruction locus from openness of balancedness together with one balanced example."
+    },
+    {
+      "mathematical_reason": "Vanishing of a Casnati-Ekedahl syzygy space is not a purity theorem for open moduli cohomology; it gives no control of weights on the open complement.",
+      "statement": "Using vanishing of H^0(C, omega_C tensor W_5^vee(Gamma)) on the complementary open to force the lowest-weight cohomology of that open to be pure Tate."
+    },
+    {
+      "mathematical_reason": "The corner sits at depth m = weight - degree = 0, so only the m=0 term and the single d_1 Gysin map from codimension-one strata contribute; the cokernel coincides with the boundary sequence and expresses the open input in terms of the still-unknown H^{2d-16}(Mbar_{g,n}).",
+      "statement": "Extracting, at the corner gr^W_{2d-16}H^{2d-16}(M_{g,n}), information beyond the boundary sequence from the weight spectral sequence or the graph complex."
+    },
+    {
+      "mathematical_reason": "The two computations live in different complexes (a Gysin/weight spectral sequence or boundary-pushforward span versus the kernel of clutching pullbacks); transferring conclusions requires a duality reindexing that changes the degree being studied.",
+      "statement": "Transferring degree counts with per-edge node/Gysin shifts to the simultaneous kernel of degree-preserving clutching pullbacks."
+    },
+    {
+      "mathematical_reason": "Without a cohomological rule for how vertex classes transform under arc insertion and a comparison theorem identifying the arc complex with the restriction/Cech complex for clutching maps, the insertion operator does not supply a chain homotopy on the Kunneth-decorated one-edge restriction complex.",
+      "statement": "Concluding that the simultaneous one-edge restriction kernel is Tate from a purely combinatorial ordered-arc insertion operator."
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "problem_key": "e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9",
+  "reusable_computations": [
+    {
+      "sha256": "a3f1c9d24b7e805619c0d2f4a6b8e13579d0c2b4a6885f1e3d5c7a90b24e6f81",
+      "statement": "Casnati-Ekedahl obstruction degrees: deg(W_f|_C) = 4g+12-4f gives 16 at (g,f)=(6,5), and deg(omega_C tensor W_f^vee(Gamma)) = 4f+n-2g-14 gives 0 for (f,g,n)=(5,6,6) and -4 for (4,6,6)."
+    },
+    {
+      "sha256": "5e0d9a17c3b2f64891a7d0e52c4f8b13d6e0a9573f1b8c24a05d7e9648c2b1f0",
+      "statement": "Boundary-normalization dimension check: dim Mbar_{5,8} = 3*5-3+8 = 20 and dim M_{6,6} = 3*6-3+6 = 21, giving codimension 1, while dim Mbar_{5,7} = 19 is rejected."
+    },
+    {
+      "sha256": "7c2b94e1f08a3d651d5e8f20b49c07a3e62f51d80a83c97495d1e60bc740f2a9",
+      "statement": "Leray q=0 index check for M_{6,6} -> M_{6,5}: vcd(M_{6,5}) = 4*6-4+5 = 25 < 26, so H^{26}(M_{6,5};Q) = 0, and with fibre degrees q in {0,1} no differential touches total degree 26."
+    },
+    {
+      "sha256": "b81f0e4d2a6c93d7e45b18f067d3a0c90f92e5b4d13c76a884ab50e2f60d19c3",
+      "statement": "Clifford bound for M = omega_C^2 tensor W_5^vee: deg M = 2(2g-2) - (4g+12-4f) = 20-16 = 4 at g=6, f=5, hence h^0(M) <= deg(M)/2 + 1 = 3 and h^0(L) = 1 + h^0(M) <= 4."
+    },
+    {
+      "sha256": "39e5a7c0d28b46f154c1e908ab73d0256f0b82e41c95a7d3e824f60b0d61c359",
+      "statement": "Universal Pic^0 derivative identification: dim Hom(ker, coker) = g = dim T_e Pic^0(C/S), with intrinsic derivative the perfect Serre pairing H^1(O) x H^0(omega) -> H^1(omega)."
+    },
+    {
+      "sha256": "c04d8b1fe72a593096f3d1845b0e7c62a18f40d72e65b9c3d30c61f874a9e205",
+      "statement": "Poincare duality reindexing at (g,n)=(6,6): d = 3*6-3+6 = 21, so W_{-16}H^{BM}_{16} corresponds to W_{2d-16}H^{2d-16}(d) = W_{26}H^{26}(21), with 2d-16 = 26."
+    }
+  ],
+  "reviewer_engine": "qwen",
+  "sanitized": true,
+  "schema_version": 1,
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-CLAUDE-INFRASTRUCTURE_STANDARD_FALLBACK",
+  "unresolved_dependencies": [
+    {
+      "statement": "Effect of the connecting map from Gr^W_26 H^{24} of the weight-two quotient of the mixed R^1 local system on Gr^W_26 H^{25} of the weight-one symplectic part for M_{6,6} -> M_{6,5}."
+    },
+    {
+      "statement": "The (5,8) case: the only Gysin source into H^{26}(Mbar_{6,6}) from the non-separating boundary is Mbar_{5,8}, whose corresponding lowest-weight group is itself undischarged."
+    },
+    {
+      "statement": "Exhaustive component, dimension, stabilizer, closure, and codimension analysis of the evaluation-obstruction locus Z, including exclusion of larger components over special curve loci and distinction of component existence from purity."
+    },
+    {
+      "statement": "Constancy of h^0(omega_C(-D)) = 3 on the balanced locus, equivalently exclusion of balanced non-primitive degree-4 pencils."
+    },
+    {
+      "statement": "Monomorphic embedding of the balanced model into M_{6,6}: recovery of the tetragonal pencil from L, a well-defined source and target, and stack-level full faithfulness covering automorphism groups."
+    },
+    {
+      "statement": "Odd-tensor virtual-cohomological-dimension vanishing on M_{6,1} required by the five-stage forgetful Leray reduction of the exact target."
+    },
+    {
+      "statement": "A lowest-weight Tate theorem, or equivalent, for the Casnati-Ekedahl-surjective open U needed by localization arguments."
+    },
+    {
+      "statement": "Identification of H^{16}(Mbar_{6,6};Q) as a direct sum of Q(-8), including automorphism-invariant bookkeeping, Gysin shifts, differentials, and higher-genus primitives."
+    },
+    {
+      "statement": "A witness point in the closure of the balanced evaluation-obstruction model outside the balanced locus, needed to settle closedness of the balanced piece."
+    },
+    {
+      "statement": "Independent justification for any integral-coefficient or coarse-space descent of the ordered S_6 configuration model, since rational invariants/coinvariants agreement is unavailable integrally and on coarse spaces."
+    }
+  ]
+}

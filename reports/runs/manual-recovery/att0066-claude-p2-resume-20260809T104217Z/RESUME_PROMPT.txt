@@ -1,0 +1,41 @@
+PRINCIPAL OVERRIDE — CONTINUE AND FINISH YOUR INTERRUPTED PASS-2 REVIEW.
+
+Context:
+- Your previous Claude Opus turn for TASK-V-ATT-0066-P2 / ATT-0066 was killed because
+  a single response exceeded the 64000 output-token cap. No review artifact was written.
+- The spent slot REV-0114 is closed. Do NOT reopen or overwrite it.
+- Finish into the NEW append-only slot: REV-0116.
+- Same Claude session is resumed; do not restart the adversarial review from zero.
+- Attempt ATT-0066 is claimed_complete (Codex). Pass 1 is already confirmed (REV-0110, Grok).
+- You are Pass 2: independent confirmation. Excluded engines: codex, grok.
+
+Token discipline (mandatory):
+1. Prefer ZERO tools. At most one Read if a single concrete field is missing.
+2. Do NOT open a long exploratory monologue. Do NOT re-read the full attempt/packet.
+3. Do NOT dispatch grok workers. Do NOT search the web.
+4. Use only what you already loaded in this session plus TASK.json if needed.
+5. Emit the final JSON in this turn. Keep reasoning brief — the prior turn already
+   burned a large analysis; convert it into the schema object now.
+6. Output budget is raised; still keep the artifact compact and schema-faithful.
+
+Hard contract:
+- Final message: exactly one JSON object matching proof/CAMPAIGN_REVIEW_TEMPLATE.json
+- Campaign review: schema_version 3
+- No Markdown fences, no prose before or after the JSON
+- id must be exactly: REV-0116
+- reviewer_engine must be exactly: claude
+- attempt_id must be exactly: ATT-0066
+- review_pass must be exactly: 2
+- campaign_id / campaign_revision / subproblem_id / theorem_statement from TASK.json
+- A confirmed verdict forbids any failed or unresolved checked claim or proof dependency
+- An incomplete/refuted verdict must identify at least one failed/unresolved structured check
+- Name the strongest attack even when confirming
+
+Final message: exactly one JSON object.
+
+Supplied files in this workspace:
+- prompts/ADVERSARY.md
+- proof/attempts/ATT-0066.json
+- proof/packets/generated/C66-001-v4.md (or pinned snapshot path in TASK.json)
+- proof/CAMPAIGN_REVIEW_TEMPLATE.json
+- TASK.json

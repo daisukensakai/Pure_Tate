@@ -809,7 +809,8 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
         ]
         engines = {review.get("reviewer_engine") for review in confirmations}
         passes = {review.get("review_pass") for review in confirmations}
-        passes_invalid = bool(migration) and passes != {1, 2}
+        # Extra confirmation passes beyond {1, 2} do not invalidate verification.
+        passes_invalid = bool(migration) and not {1, 2}.issubset(passes)
         if len(confirmations) < 2 or len(engines) < 2 or passes_invalid:
             result.errors.append(
                 "%s verified without two independent cross-engine confirmations"

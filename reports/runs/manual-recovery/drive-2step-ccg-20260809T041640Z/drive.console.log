@@ -1,0 +1,78 @@
+{
+  "campaign_id": "C66-001",
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "claude": "not_required",
+      "codex": "not_required",
+      "grok": "not_required"
+    },
+    "review": {
+      "claude": "not_required",
+      "codex": "not_required",
+      "grok": "not_required"
+    }
+  },
+  "events": [
+    {
+      "activity_bytes": 2645044,
+      "completed_at": "2026-08-09T05:16:40.054681+00:00",
+      "engine": "claude",
+      "engine_pid": 40185,
+      "engine_process_group": 40185,
+      "error": "agent failed with exit 1: API Error: Claude's response exceeded the 64000 output token maximum. To configure this behavior, set the CLAUDE_CODE_MAX_OUTPUT_TOKENS environment variable.",
+      "last_activity_at": "2026-08-09T05:16:39.008307+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/reviews/REV-0114.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 40185,
+          "engine_process_group": 40185,
+          "started_at": "2026-08-09T04:16:55.895820+00:00",
+          "supervisor_pid": 40182,
+          "supervisor_process_group": 40182
+        }
+      ],
+      "started_at": "2026-08-09T04:16:55.857545+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 40182,
+      "task_id": "TASK-V-ATT-0066-P2"
+    }
+  ],
+  "executed_steps": 1,
+  "pre_run_recoveries": [],
+  "recovered_stale_runs": [],
+  "requested_steps": 2,
+  "research_capability_states": {
+    "finding-audit": {
+      "claude": "pass",
+      "codex": "pass",
+      "grok": "pass"
+    },
+    "novelty": {
+      "claude": "pass",
+      "codex": "pass",
+      "grok": "pass"
+    }
+  },
+  "run_id": "RUN-C66-001-20260809T041654638738Z-40166",
+  "run_ledger": "reports/runs/RUN-C66-001-20260809T041654638738Z-40166.json",
+  "stop_reason": "step_limit_with_failures",
+  "unrecovered_validation_traces": []
+}

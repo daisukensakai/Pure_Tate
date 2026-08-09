@@ -124,7 +124,11 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
             and review.get("independent") is True
             and review.get("reviewer_engine") != attempt.get("engine")
         ]
-        if {item.get("review_pass") for item in confirmations} != {1, 2}:
+        # Extra confirmation passes (e.g. principal override audits) are allowed;
+        # the gate only requires that both ordinary passes are present.
+        if not {1, 2}.issubset(
+            {item.get("review_pass") for item in confirmations}
+        ):
             continue
         if len({item.get("reviewer_engine") for item in confirmations}) < 2:
             continue

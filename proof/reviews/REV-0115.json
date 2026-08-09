@@ -1,0 +1,140 @@
+{
+  "attempt_id": "ATT-0068",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0068-1",
+      "note": "Degrees 20 and 16 exceed 2g\u22122=10, so R^1\u03c0_*W_4=R^1\u03c0_*W_5=0; RR gives ranks 15 and 11; filtered exactness of \u03c0_* (FND-0099) gives rank 26; six disjoint sections give targets ranks 6,6,12. Local freeness and base change follow from the vanishings plus dual-confirmed ATT-0065 CLM-0065-1/5.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0068-2",
+      "note": "deg W_4(\u2212\u0393)=14>10 forces \u03c6_4 surjective; filtered snake lemma yields coker(\u03c6)\u2245coker(\u03c6_5) without splitting W (FND-0097/0099). Fit_0 depends only on the cokernel, so I_12(\u03c6)=Fit_0=I_6(\u03c6_5) as ideal sheaves for free targets of ranks 12 and 6.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0068-3",
+      "note": "On geometric fibres coker(\u03c6_5)\u2245H^1(W_5(\u2212\u0393)) dual to H^0(N) with deg N=0, hence dim coker\u2208{0,1} and rank(\u03c6)\u2208{11,12}. Empty geometric vanishing locus of I_11 forces I_11(\u03c6)=O_B as ideal sheaves on any locally Noetherian B (not merely radical equality).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0068-4",
+      "note": "Scheme-theoretic equality of the common maximal-minor ideal with a_N^*I_e, LN base change, and smooth-atlas descent are inherited from dual-confirmed ATT-0065 CLM-0065-2/4. Fibrewise deg-0 triviality alone would be FND-0046-insufficient; the present attempt correctly routes through the Fitting comparison rather than re-deriving it.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0068-5",
+      "note": "Rank drop on an effective deg-6 divisor \u0394 holds iff O(\u0394)\u2245L_b, so the geometric rank-drop set is |L_b|. On a single geometric fibre this is P^{h^0(L_b)\u22121}; \u03c7(L)=1 forces h^0\u22651 so the complete system is nonempty. Relative Proj pitfalls (FND-0047/0107) do not apply fibrewise.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0068-6",
+      "note": "deg M=4, Serre gives h^0(L)=1+h^0(M). For h^0(M)\u22652 the bundle is special and Clifford yields h^0(M)\u22643, hence 1\u2264h^0(L)\u22644 and dim|L|\u2208{0,1,2,3}. Equality h^0(M)=3 is a base-point-free nondegenerate g^2_4; plane-map factorizations of 4 leave only a double cover of a conic, so C hyperelliptic and M\u22452g^1_2 (char 0). Converse on hyperelliptic curves is classical. Aligns with FND-0073/0103 without using GAP-Z-W5D.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0068-7",
+      "note": "Reduced-support is open in |L_b|; ordering is a finite \u00e9tale S_6-torsor at stack level (FND-0064). Empty or same dimension h^0\u22121. Nonemptiness not claimed, matching FND-0083 and GAP-REDUCED-SUPPORT. No coarse-space overclaim (FND-0075).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0068-8",
+      "note": "Ambient coker/failure agreement is explicitly conditional on ATT-0065 ambient CE resolution and q_* script-W local-freeness/base-change hypotheses (CLM-0065-7..9), matching GAP-AMBIENT-BUNDLE. No unconditional discharge claimed.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-09",
+  "finding_candidates": [
+    {
+      "basis": "ATT-0068 Step 2 / CLM-0068-3: coker dual to H^0(N) for deg-0 N, hence corank \u22641; empty geometric vanishing of I_11 forces the unit ideal.",
+      "key": "FC-I11-UNIT-FILTERED-CE-66",
+      "statement": "For the filtered balanced CE evaluation \u03c6:\u03c0_*W\u2192\u03c0_*(W|_\u0393) at (g,n)=(6,6) with deg W_5=16 and six pairwise-disjoint sections, every geometric fibre has rank(\u03c6)\u2208{11,12}, and therefore the ideal of 11\u00d711 minors satisfies I_11(\u03c6)=O_B as ideal sheaves on any locally Noetherian base.",
+      "status": "candidate",
+      "supports_finding_id": null
+    },
+    {
+      "basis": "ATT-0068 Step 3 / CLM-0068-6; aligns with and strengthens the usable range already recorded in FND-0103 without GAP-Z-W5D.",
+      "key": "FC-H0-L-RANGE-CLIFFORD-66",
+      "statement": "On every smooth genus-6 geometric fibre of the balanced filtered CE family, with L=W_5\u2297\u03c9^{-1} and M=\u03c9^2\u2297W_5^\u2228 of degree 4, one has h^0(L)=1+h^0(M)\u2208{1,2,3,4} and dim|L|\u2208{0,1,2,3}; equality h^0(L)=4 holds exactly when the fibre is hyperelliptic and M\u22452g^1_2.",
+      "status": "candidate",
+      "supports_finding_id": "FND-0103"
+    },
+    {
+      "basis": "ATT-0068 Step 1 / CLM-0068-2 together with FND-0097/0099 vanishings; repairs the splitting-open block-minor approach of ATT-0067.",
+      "key": "FC-FIT0-NOSPLIT-MAXOR-66",
+      "statement": "Without a global splitting of the balanced CE bundle W, the filtered snake lemma under deg W_4=20 and deg W_4(\u2212\u0393)=14 gives coker(\u03c6)\u2245coker(\u03c6_5) and therefore Fit_0(coker \u03c6)=I_12(\u03c6)=I_6(\u03c6_5) as global ideal sheaves.",
+      "status": "candidate",
+      "supports_finding_id": "FND-0097"
+    }
+  ],
+  "id": "REV-0115",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Dual-confirmed by REV-0108 and REV-0109 for CLM-0065-1,2,3,4,5,7,8,9. Supplies filtered CE setup, ranks/CBC, filtered coker iso, nonreduced Picard/Fitting identity a_N^*I_e, stack descent, and conditional ambient comparison. Packet FND-0096/0097/0099 corroborate the filtered Fitting geometry. Absent from this isolated workspace but accepted as listed dual-confirmed campaign dependency.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0064",
+      "note": "Packet-corroborated finite \u00e9tale S_6-torsor model for ordered distinct reduced support; used for CLM-0068-7 dimension comparison only.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0083",
+      "note": "Packet-corroborated nonemptiness limitation: \u03c7(L)=1 fills |L| but not the reduced-support/Conf_6 open. Explicitly respected by the theorem and GAP-REDUCED-SUPPORT.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0099",
+      "note": "Packet-corroborated degree vanishings for filtered \u03c0_* exactness and \u03c6_4 surjectivity; explicitly cited in Step 1 (deg W_4=20, deg W_4(\u2212\u0393)=14).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0107",
+      "note": "Packet-corroborated Abel\u2013Jacobi model of |L|; used fibrewise. No illicit global Proj(\u03c0_*L) identification when h^0 jumps.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Used only for CE sign convention and deg(W_f)=4g+12\u22124f already checked through ATT-0065/packet; non-load-bearing as an independent new citation in ATT-0068.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0068-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Scheme-theoretic heart Fit_0(coker \u03c6)=I_12(\u03c6)=I_6(\u03c6_5)=a_N^*I_e with LN base change and smooth-atlas descent is not re-proved in ATT-0068: it is a pure pass-through of dual-confirmed ATT-0065 (CLM-0065-2/3/4). A successful FND-0046-style attack on that nonreduced Fitting/Picard comparison would collapse the failure-scheme identification without touching the novel I_11=O_B corank bound or the fibrewise h^0/Clifford package. Secondary residual risk: downstream over-reading of the fibrewise rank-drop set |L_b| as a relative Proj(\u03c0_*L) model over the whole balanced base where h^0 jumps (blocked by GAP-H0-CONSTANCY / FND-0047; not claimed here).",
+  "subproblem_id": "C66-COMP-RANK",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Theorem (filtered balanced CE rank computation at (g,n)=(6,6)). Let k be a characteristic-zero field, let B be a locally Noetherian k-scheme, let \u03c0:C\u2192B be smooth proper with geometrically connected genus-six fibres, and let \u0393 be the union of six pairwise-disjoint sections. Assume the balanced tetragonal Casnati\u2013Ekedahl data give the canonical filtration 0\u2192W_4\u2192W\u2192W_5\u21920 with W_4 and W_5 invertible of fibre degrees 20 and 16. For the evaluation maps \u03c6:\u03c0_*W\u2192\u03c0_*(W|_\u0393) and \u03c6_f:\u03c0_*W_f\u2192\u03c0_*(W_f|_\u0393), put L=W_5\u2297\u03c9_{C/B}^{-1}, N=\u03c9_{C/B}\u2297W_5^\u2228(\u0393), let a_N:B\u2192Pic^0_{C/B} classify N, and let e be the identity section. Then \u03c0_*W_4, \u03c0_*W_5, \u03c0_*W, \u03c0_*(W_4|_\u0393), \u03c0_*(W_5|_\u0393), and \u03c0_*(W|_\u0393) are locally free of ranks 15, 11, 26, 6, 6, and 12 respectively and have the stated arbitrary-base-change compatibility. Without any global splitting of W, coker(\u03c6)\u2245coker(\u03c6_5) canonically, and therefore Fit_0(coker \u03c6)=I_12(\u03c6)=I_6(\u03c6_5)=a_N^*I_e. Moreover I_11(\u03c6)=O_B: on every geometric fibre \u03c6 has rank 12 or 11 and never smaller. Thus the intrinsic ordered evaluation-failure scheme is scheme-theoretically the relative-triviality incidence for N, after arbitrary locally Noetherian base change and smooth-atlas descent. Under the additional ambient CE resolution and equation-bundle local-freeness/base-change hypotheses of ATT-0065, the ambient CE evaluation map has the same cokernel and failure scheme. For every geometric fibre C_b, the geometric rank-drop set among all effective degree-six divisors is the complete linear system |L_b|. If M_b=\u03c9_{C_b}^{\u22972}\u2297W_{5,b}^\u2228, then deg M_b=4 and h^0(L_b)=1+h^0(M_b), whence 1\u2264h^0(L_b)\u22644 and dim|L_b|=h^0(L_b)\u22121\u2208{0,1,2,3}. Equality h^0(L_b)=4 holds exactly when C_b is hyperelliptic and M_b\u22452g^1_2. The reduced-support ordered fibre is an open finite \u00e9tale S_6-cover of the reduced-support open in |L_b|; it is either empty or has dimension h^0(L_b)\u22121.",
+  "verdict": "confirmed"
+}

@@ -1,0 +1,106 @@
+{
+  "id": "TASK-C66-M-008",
+  "phase": "mathematics",
+  "role": "focused-prover-or-counterexample-searcher",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "target_claim_id": "RED-0001",
+  "target": {
+    "g": 6,
+    "n": 6,
+    "dimension": 21,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "open_bm_degree": 16,
+    "open_bm_weight": -16,
+    "open_bm_tate_type": "Q(8)",
+    "ordinary_cohomology_degree": 26,
+    "ordinary_weight": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "poincare_twist": 21,
+    "chow_codimension": 13
+  },
+  "subproblem_id": "C66-COMP-RANK",
+  "lane": "computation",
+  "subproblem": {
+    "id": "C66-COMP-RANK",
+    "lane": "computation",
+    "title": "Compute determinantal rank-drop ideals and fibre dimensions",
+    "dependencies": [
+      "C66-GEO-Z"
+    ],
+    "experiment_id": "EXP-C66-RANK"
+  },
+  "context_revision": 2,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "input_packet": "proof/packets/generated/C66-001-v4.md",
+  "blocked_routes": [
+    "vcd-only-vanishing",
+    "undecorated-cgp-top-weight-graph-complex",
+    "point-count-without-degree-parity-separation",
+    "forgetful-map-renaming-local-system-unknown"
+  ],
+  "new_input_declared": [],
+  "input_artifacts": [
+    {
+      "kind": "attempt",
+      "id": "ATT-0048",
+      "path": "proof/attempts/ATT-0048.json",
+      "sha256": "3b91f56332e124fc163e846de258f4b21b1341149ff5be8f70bf4dc960c2765c"
+    },
+    {
+      "kind": "confirmation_review",
+      "id": "REV-0091",
+      "path": "proof/reviews/REV-0091.json",
+      "sha256": "a9c8316ac6d3f977c1b41ad44e21ed15e68c01a0f69c39bd95606cffe1065084"
+    },
+    {
+      "kind": "confirmation_review",
+      "id": "REV-0092",
+      "path": "proof/reviews/REV-0092.json",
+      "sha256": "70667b6b78f0afcb9c9892355369078dd9b4c7e327e59449d70fcbe2dc87fe67"
+    },
+    {
+      "path": "proof/packets/generated/paired-working-context/WORKING-5ea5e1ab7e82cc26.md",
+      "sha256": "5ea5e1ab7e82cc2650713e36bbe926c988a3a66867c1252f6931e3711c61897f"
+    },
+    {
+      "path": "proof/packets/generated/paired-working-context/WORKING-EXT-bd9b9d0b18058985.md",
+      "sha256": "bd9b9d0b18058985db3ec558f8a6f7fefd15d4e59fb1c5e0febe61fb873a0a6c"
+    },
+    {
+      "kind": "attempt",
+      "id": "ATT-0063",
+      "path": "proof/attempts/ATT-0063.json",
+      "sha256": "bda197de3e2fd425dfbb24a7df12c2ec553aacc69c1fa78d267b7e13c27c6691"
+    },
+    {
+      "kind": "review",
+      "id": "REV-0104",
+      "path": "proof/reviews/REV-0104.json",
+      "sha256": "f48fd987a22391ee1efe306f68ea3e96cad54ffc03a1f967cbf48eed7ddae58d"
+    }
+  ],
+  "dependency_artifacts": {
+    "C66-GEO-Z": "ATT-0048"
+  },
+  "blocked_dependencies": [],
+  "route_policy": "A blocked route may appear in methods_used only when new_inputs contains a matching route and evidence description.",
+  "prompt": "prompts/CAMPAIGN_MATHEMATICS.md",
+  "output": "proof/attempts/ATT-0067.json",
+  "status": "ready",
+  "created_on": "2026-08-09",
+  "working_context": {
+    "primary": {
+      "path": "proof/packets/generated/paired-working-context/WORKING-5ea5e1ab7e82cc26.md",
+      "sha256": "5ea5e1ab7e82cc2650713e36bbe926c988a3a66867c1252f6931e3711c61897f"
+    },
+    "extended": {
+      "path": "proof/packets/generated/paired-working-context/WORKING-EXT-bd9b9d0b18058985.md",
+      "sha256": "bd9b9d0b18058985db3ec558f8a6f7fefd15d4e59fb1c5e0febe61fb873a0a6c"
+    }
+  },
+  "notes": "Grok COMP-RANK after Claude ATT-0063 incomplete on Part (G) dim/codim. Avoid unconditional image-dimension claims; keep fibre/rank computations exact."
+}

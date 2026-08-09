@@ -1,0 +1,76 @@
+{
+  "id": "TASK-F-FND-0109",
+  "phase": "finding-audit",
+  "role": "independent-finding-adjudicator",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "context_revision": 2,
+  "finding_id": "FND-0109",
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "reduced-support-open-dimension-requires-nonemptiness",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2025-07-11",
+    "equivalence_group": "reduced-support-open-dimension-requires-nonemptiness",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0109",
+    "impacts_approach_ids": [
+      "C66-COMP-RANK"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "qwen"
+    ],
+    "scope": {
+      "attempts": [
+        "ATT-0063"
+      ],
+      "case": {
+        "g": 6,
+        "n": 6
+      }
+    },
+    "source_attempt_ids": [
+      "ATT-0063"
+    ],
+    "source_review_ids": [
+      "REV-0104"
+    ],
+    "statement": "For the balanced (6,6) CE incidence, the statement 'the image of the reduced-support open of AJ_B in M_{6,6} has dimension dim B+2 (codimension 19-dim B)' is not a consequence of the P^2-bundle identification AJ_B=P(p_*L_B) plus geometric-point injectivity alone: the reduced-support locus is an open subset of the projective bundle and may be empty over a component (e.g. if |L| has a non-reduced fixed part). It must be conditionalized on existence of a reduced member of |L| over the components considered, or the nonemptiness must be proved. ATT-0063 asserts the clause unconditionally in theorem part (G) while recording nonemptiness as open (GAP-RANK-BPF), an internal conflict of the FND-0101 type.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "excluded_engines": [
+    "qwen"
+  ],
+  "target": {
+    "g": 6,
+    "n": 6,
+    "dimension": 21,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "open_bm_degree": 16,
+    "open_bm_weight": -16,
+    "open_bm_tate_type": "Q(8)",
+    "ordinary_cohomology_degree": 26,
+    "ordinary_weight": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "poincare_twist": 21,
+    "chow_codimension": 13
+  },
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "input_packet": "proof/packets/generated/C66-001-v4.md",
+  "requires_live_web": true,
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "output": "research/finding-audits/FAUD-0105.json",
+  "status": "ready",
+  "created_on": "2026-08-09"
+}

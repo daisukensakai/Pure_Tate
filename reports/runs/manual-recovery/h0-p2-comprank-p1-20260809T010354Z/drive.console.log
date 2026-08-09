@@ -1,0 +1,76 @@
+{
+  "campaign_id": "C66-001",
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "codex": "not_required",
+      "grok": "not_required",
+      "qwen": "pass"
+    },
+    "review": {
+      "codex": "not_required",
+      "grok": "not_required",
+      "qwen": "pass"
+    }
+  },
+  "events": [
+    {
+      "activity_bytes": 1192,
+      "completed_at": "2026-08-09T01:04:22.836609+00:00",
+      "engine": "qwen",
+      "engine_pid": 31586,
+      "engine_process_group": 31586,
+      "error": "agent failed with exit 1: Qwen API HTTP 429: {'message': 'Your token-plan 1-week quota has been exhausted. The quota will reset at 08-14 00:05:00 UTC.', 'id': '67d1aa9a-fd02-4b0a-a2a5-1ecde3097be5', 'type': 'insufficient_quota', 'code': 'insufficient_quota'}",
+      "last_activity_at": "2026-08-09T01:04:22.818297+00:00",
+      "last_activity_stream": "stderr",
+      "max_output_tokens": 65536,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/reviews/REV-0111.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 31586,
+          "engine_process_group": 31586,
+          "started_at": "2026-08-09T01:04:21.566387+00:00",
+          "supervisor_pid": 31584,
+          "supervisor_process_group": 31584
+        }
+      ],
+      "started_at": "2026-08-09T01:04:21.531871+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 31584,
+      "task_id": "TASK-V-ATT-0066-P2"
+    }
+  ],
+  "executed_steps": 1,
+  "pre_run_recoveries": [],
+  "recovered_stale_runs": [],
+  "requested_steps": 2,
+  "research_capability_states": {
+    "finding-audit": {
+      "grok": "pass",
+      "qwen": "pass"
+    },
+    "novelty": {
+      "grok": "pass",
+      "qwen": "pass"
+    }
+  },
+  "run_id": "RUN-C66-001-20260809T010420285136Z-31531",
+  "run_ledger": "reports/runs/RUN-C66-001-20260809T010420285136Z-31531.json",
+  "stop_reason": "step_limit_with_failures",
+  "unrecovered_validation_traces": []
+}

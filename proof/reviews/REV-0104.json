@@ -1,0 +1,139 @@
+{
+  "attempt_id": "ATT-0063",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0063-1",
+      "note": "Weak CE normalization plus the SRC-0004 degree receipt deg(O_P(1)|_C)=18 forces the twist A to have degree 0, hence A=O since Pic(P^1)=Z (matches FND-0105). W_f = omega_C^2 tensor gamma^*O(4-f), deg W_4=20, deg W_5=16, L=omega_C(-D) deg 6, chi(L)=1, Serre duality h^1(L)=h^0(O_C(D)), dim|L|=h^1(L). All arithmetic rechecked.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0063-2",
+      "note": "Lower bound 2 from gamma^*H^0(O(1)); D special since h^1(D)=h^0(L)>=1; Clifford gives h^0(D)<=3 with equality forcing hyperelliptic and D~2H (deg 4 excludes D=0,K). Converse (2d) rechecked: psi=(h,gamma) into P^1xP^1 has delta=deg(C->Sigma) dividing 2; delta=2 forces gamma=beta o h and h^0(D)=3 contradiction; delta=1 gives birational image of bidegree (4,2) with p_a=(4-1)(2-1)=3<6. Dichotomy holds.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0063-3",
+      "note": "Tschirnhausen computation rechecked: h_*O_C=O+O(-7), beta_*O=O+O(-1), beta_*O(-7)=O(-4)^2 via chi=-6, deg=-8 and h^0(O(2m-7)) at m=3,4; E=O(1)+O(4)+O(4), deg E=9=g+3. Conic-bundle left-exact sequence 0->F->Sym^2E->gamma_*(omega^2 gamma^*O(4)) uses only R^i pi_*O(-2)=0 and F=pi_*I_C(2) (independent of which line bundle is the left CE term). Sym^2E(-6) has h^0=9; target twists to omega^2(-2D)=6H with h^0=7; so h^0(F(-6))>=2 while O(4)+O(5) twisted by -6 has h^0=0. Balanced excludes hyperelliptic.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0063-4",
+      "note": "Immediate combination: balanced -> non-hyperelliptic -> h^0(D)=2 -> h^0(L)=3, h^1(L)=2, fibrewise |L|=P^2, no jumping on the balanced locus.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0063-5-fibrewise",
+      "note": "Fibrewise corank computation rechecked with W_4,W_5 line bundles: phi_4 is 15->6 with coker H^1(W_4(-Gamma))=0 (deg 14>10); phi_5 is 11->6 with coker H^1(W_5(-Gamma)) Serre-dual to H^0 of a degree-0 line bundle, 1-dimensional iff O(Gamma)~L; snake lemma on the filtration (restriction to Gamma exact since locally split; H^1(W_4)=0) gives coker(phi)=coker(phi_5), corank<=1.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0063-5-relative",
+      "note": "The relative clauses Fit_0(coker phi)=I_12(phi)=I_6(phi_5) and I_11(phi)=O_B over 'any base B carrying a balanced family with a relative degree-6 divisor Gamma' are imported from ATT-0048 (CLM-0048-3/7), whose text is not in this workspace and cannot be re-verified here. Part (D) of the theorem statement asserts these relative identities without the reduced-base and disjoint-sections hypotheses that the argument itself (Step 4e, Step 6d) silently imposes; as written in the theorem statement the quantification is unsupported.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0063-6",
+      "note": "Constancy h^0=3, h^1=2 on geometric fibres plus reduced base gives Grauert local freeness and base change for p_*L and R^1p_*L; a_L canonical in relative Picard; P(p_*L) invariant under Pic(B)-twist; functorial identification AJ_B = P(p_*L_B) agrees with FND-0107 (Abel-Jacobi fibre model correct over all of B; agrees with projectivisation where h^0 constant, here everywhere). Smooth, proper, pure relative dimension 2. The final clause identifying with Z_ev is scoped to the ordered pairwise-distinct locus and leans on ATT-0048 (not re-verifiable here) but is correctly conditionalized in the theorem statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0063-7-recovery",
+      "note": "omega(-Gamma)=O(D) with h^0=2; the gamma-pencil exhausts the complete system, is base-point-free; recovery up to PGL_2, injectivity on geometric isomorphism classes, and Aut(C,gamma,Gamma)->Aut(C,Gamma) isomorphism all follow as written (injectivity of forgetful map uses surjectivity of gamma; surjectivity uses completeness of the pencil).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0063-7-dimension",
+      "note": "Part (G) asserts the image of the reduced-support open of AJ_B in M_{6,6} has dimension dim B+2 (and codimension 19-dim B) on B. The reduced-support open is an open subset of the P^2-bundle AJ_B; the dimension statement requires it to be nonempty (dense) on the components in question. The artifact explicitly records (Step 9, GAP-RANK-BPF, 'Explicitly not claimed' item (ii)) that existence of a reduced member of |L| / nonemptiness of the reduced-support open is NOT proved and remains open; Step 9 even shows L can have base points. An open subset of an irreducible fibre can be empty, in which case the image dimension claim fails. The unconditional clause in the theorem statement contradicts the artifact's own exclusion list (cf. FND-0101 discipline) and is not established.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0063-8-excess",
+      "note": "Corank-1 locus of an 11->6 map has expected codimension (11-5)(6-5)=6 inside relative Sym^6 of relative dimension 6, expected relative fibre dimension 0; actual is dim|L|=2=h^1(L). Excess identity is arithmetic and correctly scoped; no lci/closedness/Gysin/Tate conclusion drawn.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2025-07-11",
+  "finding_candidates": [
+    {
+      "key": "reduced-support-open-dimension-requires-nonemptiness",
+      "scope": {
+        "attempts": [
+          "ATT-0063"
+        ],
+        "case": {
+          "g": 6,
+          "n": 6
+        }
+      },
+      "statement": "For the balanced (6,6) CE incidence, the statement 'the image of the reduced-support open of AJ_B in M_{6,6} has dimension dim B+2 (codimension 19-dim B)' is not a consequence of the P^2-bundle identification AJ_B=P(p_*L_B) plus geometric-point injectivity alone: the reduced-support locus is an open subset of the projective bundle and may be empty over a component (e.g. if |L| has a non-reduced fixed part). It must be conditionalized on existence of a reduced member of |L| over the components considered, or the nonemptiness must be proved. ATT-0063 asserts the clause unconditionally in theorem part (G) while recording nonemptiness as open (GAP-RANK-BPF), an internal conflict of the FND-0101 type.",
+      "summary": "For the balanced (6,6) CE incidence, the statement 'the image of the reduced-support open of AJ_B in M_{6,6} has dimension dim B+2 (codimension 19-dim B)' is not a consequence of the P^2-bundle identification AJ_B=P(p_*L_B) plus geometric-point injectivity alone: the reduced-support locus is an open subset of the projective bundle and may be empty over a component (e.g. if |L| has a non-reduced fixed part). It must be conditionalized on existence of a reduced member of |L| over the components considered, or the nonemptiness must be proved. ATT-0063 asserts the clause unconditionally in theorem part (G) while recording nonemptiness as open (GAP-RANK-BPF), an internal conflict of the FND-0101 type.",
+      "supports_finding_id": null
+    },
+    {
+      "key": "relative-fitting-clause-needs-disjoint-sections-hypothesis",
+      "scope": {
+        "attempts": [
+          "ATT-0063"
+        ],
+        "case": {
+          "g": 6,
+          "n": 6
+        }
+      },
+      "statement": "The relative determinantal clause Fit_0(coker phi)=I_12(phi)=I_6(phi_5), I_11(phi)=O_B for the CE evaluation over a base is valid in the argument only under the hypotheses actually used (relative degree-6 divisor Gamma as 6 disjoint sections, cohomology-and-base-change vanishings deg W_4=20>10 and deg W_4(-Gamma)=14>10, per FND-0099). A theorem statement quantifying over 'any base carrying a balanced family with a relative degree-6 divisor Gamma' without the disjoint-sections/reduced-support scoping overstates what the filtered snake argument and the ATT-0048 import deliver.",
+      "summary": "The relative determinantal clause Fit_0(coker phi)=I_12(phi)=I_6(phi_5), I_11(phi)=O_B for the CE evaluation over a base is valid in the argument only under the hypotheses actually used (relative degree-6 divisor Gamma as 6 disjoint sections, cohomology-and-base-change vanishings deg W_4=20>10 and deg W_4(-Gamma)=14>10, per FND-0099). A theorem statement quantifying over 'any base carrying a balanced family with a relative degree-6 divisor Gamma' without the disjoint-sections/reduced-support scoping overstates what the filtered snake argument and the ATT-0048 import deliver.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0104",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Packet excerpt of SRC-0004 Lemma 10.6 supplies deg(W_f|_C)=4g+12-4f and the W_f convention with the gamma^*O(-f) sign; the degree receipt deg(O_P(1)|_C)=2g+6=18 pins the normalization exactly as in FND-0105. Usage in Steps 0, 3a, 4a is consistent with the excerpt.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0048",
+      "note": "CLM-0048-3/4/5/6/7 (filtered snake Fitting identity, ranks 26->12, scheme-theoretic Z_ev, relative HN filtration) are cited for the relative clauses of Part (D) and the final clause of Part (E). The attempt text is not present in this workspace; the attempt itself states these were confirmed by REV-0091/REV-0092, but those reviews are also absent, so the dependency cannot be independently re-checked here. The fibrewise content used in Parts (A)-(D) is reproved inline and does not depend on this.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0063-P1",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: Part (G)'s unconditional dimension/codimension statement for the image of the reduced-support open of AJ_B in M_{6,6} is not supported by the proof and is contradicted by the artifact's own scope discipline. The reduced-support open is merely an open subset of the P^2-bundle AJ_B; proving it maps with image dimension dim B+2 requires proving it is nonempty/dominant over the components of B, i.e. that |L| carries a reduced member on the balanced locus. The artifact explicitly declines to prove this (Step 9 plane-quintic base-point analysis; GAP-RANK-BPF; 'Explicitly not claimed' item (ii): nonemptiness of the reduced-support open and of the ordered Conf_6 incidence remains open). If a balanced fibre had no reduced member of |L| (e.g. a non-reduced fixed part of |L|, not ruled out), the reduced-support open would be empty over that component and the asserted dimension dim B+2 / codimension 19-dim B would be false there. Outcome: sustained. The fibre-level computations (A)-(F) and the excess identity (H) survive all other attacks (stack/coarse, Tate twists, BM-vs-cohomology degrees are all out of scope by explicit disclaimer; the Clifford/P1xP1/Tschirnhausen/conic-bundle/snake-lemma/Grauert steps recheck correctly, and the W_4/W_5 rank bookkeeping is consistent once W_4,W_5 are read as line bundles with phi_5 of shape 11->6), but the theorem statement as written contains one unconditional clause it does not prove, and the relative Fitting clause of (D) additionally omits the disjoint-sections hypothesis the proof itself requires.",
+  "subproblem_id": "C66-COMP-RANK",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be algebraically closed of characteristic zero. Let C be a smooth projective connected curve of genus 6 over k, gamma : C -> P^1 finite flat of degree 4, D := gamma^*(pt) of degree 4, and let (E,F) be the Casnati-Ekedahl data of gamma: gamma_*O_C = O_{P^1} + E^vee with E locally free of rank 3, pi : P := Proj Sym(E) -> P^1 the associated P^2-bundle with pi_*O_P(1) = E, C included in P the CE embedding, and F the rank-2 CE relations bundle, characterised equivalently by F = pi_*(I_C tensor O_P(2)). Write W_f := (O_P(2) tensor gamma^*O_{P^1}(-f))|_C (the SRC-0004 sign convention), W := (O_P(2) tensor pi^*F^vee)|_C, and call (C,gamma) balanced if F is isomorphic to O_{P^1}(4) + O_{P^1}(5). Then: (A) O_P(1)|_C = omega_C tensor gamma^*O(2), hence W_4 = omega_C^2 of degree 20, W_5 = omega_C^2(-D) of degree 16, and L := W_5 tensor omega_C^{-1} = omega_C(-D) of degree 6 with chi(L)=1 and h^1(L) = h^0(O_C(D)), so dim|L| = h^1(L). (B) h^0(O_C(D)) is 2 or 3, and h^0(O_C(D)) = 3 if and only if C is hyperelliptic, in which case D is linearly equivalent to 2H (H the hyperelliptic class), gamma factors as beta o h with h the hyperelliptic map and beta of degree 2, and E is isomorphic to O(1) + O(4) + O(4). (C) If C is hyperelliptic then h^0(F(-6)) >= 2, so F is not isomorphic to O(4)+O(5); consequently, if (C,gamma) is balanced then C is not hyperelliptic, h^0(O_C(D)) = 2, and h^0(L) = 3, h^1(L) = 2 exactly, so the residual linear system |L| is a P^2 for every balanced (C,gamma) with no jumping anywhere on the balanced locus. (D) For balanced (C,gamma) and every effective divisor Gamma of degree 6 on C, the evaluation phi_Gamma : H^0(W) -> H^0(W|_Gamma) (ranks 26 -> 12) has coker(phi_4) = 0 and coker(phi_Gamma) isomorphic to coker(phi_5) = H^1(W_5(-Gamma)), which is 1-dimensional if O_C(Gamma) is isomorphic to L and 0 otherwise; hence corank(phi_Gamma) <= 1 always, rk(phi_Gamma) is 11 or 12, and over any base B carrying a balanced family with a relative degree-6 divisor Gamma one has Fit_0(coker phi) = I_12(phi) = I_6(phi_5) while I_11(phi) = O_B, i.e. the corank->=2 determinantal stratum of the CE evaluation is empty at (g,n)=(6,6). (E) Let B be a reduced locally Noetherian k-scheme carrying a family (p : C_B -> B, gamma_B) of balanced pairs. Then p_*L_B is locally free of rank 3 and R^1p_*L_B is locally free of rank 2, both commuting with arbitrary base change; the class a_L : B -> Pic^6_{C_B/B} is canonical (independent of the Pic(B)-twist ambiguity of L_B); and the relative Abel-Jacobi incidence AJ_B := Sym^6(C_B/B) x_{Pic^6_{C_B/B}, a_L} B is canonically isomorphic to the Zariski-locally trivial P^2-bundle P(p_*L_B) over B. In particular AJ_B -> B is smooth and proper of pure relative dimension 2 and dim AJ_B = dim B + 2 on every component of B, and over the ordered pairwise-distinct locus AJ_B pulls back to the scheme-theoretic CE evaluation-failure locus Z_ev of ATT-0048. (F) For balanced (C,gamma) and Gamma in |L|, one has omega_C(-Gamma) isomorphic to O_C(D) with h^0(omega_C(-Gamma)) = 2, its complete linear system is base-point-free and coincides with the gamma-pencil; hence gamma is recovered from the pair (C,Gamma) uniquely up to PGL_2 acting on the target, the classifying map on geometric points is injective on isomorphism classes, and the forgetful homomorphism Aut(C,gamma,Gamma) -> Aut(C,Gamma) is a group isomorphism. (G) Consequently, for B as in (E) the image of the reduced-support open of AJ_B in M_{6,6} has dimension dim B + 2 and codimension 19 - dim B; in particular the codimension equals 4 if and only if dim B = 15, an equality which is not asserted here. (H) The excess of dim AJ_B over the generic determinantal expectation for the corank-1 locus of a 6-by-11 matrix equals h^1(L) = 2 exactly; no local complete intersection, smoothness, closedness, Gysin, purity-of-Hodge-structure, or Tate-type conclusion is drawn.",
+  "verdict": "incomplete"
+}

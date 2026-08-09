@@ -1,0 +1,80 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and FND-0109 does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (c(6)=5 so (6,6) needs new geometry) and with the packet C66-GEO-Z / C66-COMP-RANK bottleneck. Arithmetic of the stated codimension is correct for ambient dim M_{6,6}=21: image dimension dim B+2 has codimension 19-dim B. Setup degrees match SRC-0004 Lemma 10.6: deg(W_f|_C)=4g+12-4f so for g=6,f=5 deg W_5=16 and deg L=deg(W_5\u2297\u03c9_C^{-1})=6 with \u03c7(L)=1. Independent mathematical check: if AJ_B\u2245P(p_*L_B) is a P^2-bundle over B (constant h^0=3), then dim AJ_B=dim B+2, but the reduced-support locus U_red is only an open of that bundle; on any irreducible component an open has the ambient dimension if and only if it is nonempty. Fixed non-reduced parts of a linear system can empty the reduced-support open over a component even when the full Abel\u2013Jacobi fibre/Sym^6 fibre is nonempty. Classical Bertini only guarantees that a general member is smooth away from the base locus, so it does not free a dim(im U_red)=dim B+2 claim from a nonemptiness/denseness hypothesis when base locus or fixed non-reduced part may intervene. SRC-0004 itself records that evaluation-surjective opens in related CE/Hurwitz constructions are open and a priori may be empty. Corroborated packet support: FND-0083 (RR proves only full AJ fibre nonempty, not reduced-support open / Conf_6 on every geometric fibre); FND-0101 (asserting a clause while recording a high-severity gap against it is not weakest-sufficient); FND-0058/FND-0047/FND-0107 (P^2 / Proj identification needs constant h^0); FND-0052 (reduced-support relative linear system is only an open piece of failure). FND-0005 is compatible: it gives total-space nonemptiness of Z/full |L| and at most total-space nonemptiness of U_red as the base varies; that does not discharge componentwise denseness of U_red needed to upgrade dim AJ_B=dim B+2 into dim(im U_red)=dim B+2. Relation: FND-0109 specializes FND-0083 to image-dimension and instantiates FND-0101 for ATT-0063 theorem part (G) versus GAP-RANK-BPF, but is not a pure duplicate\u2014its load-bearing COMP-RANK content is that P^2-bundle plus geometric-point injectivity alone do not yield the dim B+2 image clause. ATT-0063 text is absent from the read-only workspace so the textual (G)/GAP-RANK-BPF conflict is accepted as review-sourced process provenance in the same way prior FAUDs treated missing attempt artifacts; the geometric obstruction stands independently. Promote candidate to corroborated; merge_target none; do not merge into FND-0083 (would lose the dim-image formulation) or FND-0101 (would lose geometry).",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0109",
+  "id": "FAUD-0105",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "attempts": [
+      "ATT-0063"
+    ],
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "impacts_approach_ids": [
+      "C66-COMP-RANK"
+    ],
+    "mathematical_claim": "dim(im(U_red->M_{6,6}))=dim B+2 (codim 19-dim B) is not a formal consequence of the P^2-bundle identification plus geometric-point injectivity; it requires nonemptiness (or denseness) of reduced members of |L| over the base components considered",
+    "not_asserted": [
+      "that U_red is empty on any balanced fibre",
+      "that Z or full |L| is empty",
+      "that h^0 is constantly 3 on the whole balanced locus",
+      "that GAP-RANK-BPF fails rather than merely remains open"
+    ],
+    "objects": [
+      "AJ_B=P(p_*L_B)",
+      "reduced-support open U_red subset AJ_B",
+      "image of U_red in M_{6,6}"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-09T01:35:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "primary-ce-lemma",
+      "retrieved_at": "2026-08-09T01:35:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "8f88507e3babc367e86eec98c63cee6c1d4115d38f9ada98ca68fc0c7b6cf722",
+      "doi": null,
+      "query_family": "classical-bertini-base-locus",
+      "retrieved_at": "2026-08-09T01:35:00Z",
+      "source_type": "reference_survey",
+      "url": "https://en.wikipedia.org/wiki/Theorem_of_Bertini"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "5e0a1b2debcd516c7c42907cb175710b267ecc5745caeb76e49cd8715532ff4f",
+      "doi": null,
+      "query_family": "corpus-claims-cross-check",
+      "retrieved_at": "2026-08-09T01:35:00Z",
+      "source_type": "campaign_claims",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
+  "task_id": "TASK-F-FND-0109",
+  "verdict": "promote"
+}

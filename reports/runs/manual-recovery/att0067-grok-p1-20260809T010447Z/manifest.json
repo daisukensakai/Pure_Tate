@@ -1,0 +1,43 @@
+{
+  "id": "TASK-V-ATT-0067-P1",
+  "phase": "review",
+  "role": "independent-adversarial-reviewer",
+  "target_attempt_id": "ATT-0067",
+  "target_task_id": "TASK-C66-M-008",
+  "review_pass": 1,
+  "context_revision": 2,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "prover_engine": "qwen",
+  "excluded_reviewer_engines": [
+    "qwen"
+  ],
+  "prompt": "prompts/ADVERSARY.md",
+  "input_attempt": "proof/attempts/ATT-0067.json",
+  "input_packet": "proof/packets/generated/C66-001-v4-d61f334875795956.md",
+  "output": "proof/reviews/REV-0112.json",
+  "status": "ready",
+  "created_on": "2026-08-09",
+  "input_artifacts": [],
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "subproblem_id": "C66-COMP-RANK",
+  "lane": "computation",
+  "theorem_statement": "Theorem (determinantal rank-drop ideals and fibre dimensions at (g,n)=(6,6)). Let pi:C->S be a smooth proper family of genus-6 curves over a locally noetherian characteristic-zero base S, with a relative effective Cartier divisor Gamma finite locally free of degree 6, carrying a balanced tetragonal Casnati-Ekedahl structure with summands W_4, W_5 (fibre degrees deg(W_4)=20, deg(W_5)=16). Then: (i) R^1 pi_* W_f = 0 for f=4,5; pi_*W_4 and pi_*W_5 are vector bundles of ranks 15 and 11 whose formation commutes with arbitrary base change; pi_*(W_f|_Gamma) is locally free of rank 6; the combined evaluation phi = phi_4 + phi_5 is a map of locally free sheaves of ranks 26 -> 12 and Fit_0(coker phi) = I_12(phi), the ideal of 12x12 minors. (ii) At every geometric point of S, and over every open on which W splits as W_4 + W_5, I_12(phi) = I_6(phi_4)*I_6(phi_5); phi_4 is fibrewise surjective (the Serre dual of its cokernel has degree -4), hence I_6(phi_4) = O_S and I_12(phi) = I_6(phi_5). No global splitting over the universal balanced base is asserted. (iii) Formation of I_6(phi_5) commutes with arbitrary base change; phi_5 is, up to twisting by a line bundle pulled back from the base (which does not change Fitting/maximal-minor ideals), the underived pullback along a_N:S->Pic^0(C/S) of the universal evaluation Phi of L_univ (relative degree 16, R^1 p_* L_univ = 0, rank p_* L_univ = 11). (iv) On a geometric fibre C_s, the zero set of I_6(phi_5) in Sym^6(C_s) is exactly {Gamma : O(Gamma) ~= L_s := W_5 tensor omega^{-1}}, i.e. the Abel-Jacobi fibre |L_s| ~= P^{h^0(L_s)-1}; on the balanced locus with fibre divisor D_s one has L_s ~= omega(-D_s), so the failure condition is D_s + Gamma canonical. Equality with the Abel-Jacobi incidence is asserted only on geometric points/reductions ((Z_ev)_red = I_red, dependency C66-GEO-Z / ATT-0048); no scheme-theoretic equality is claimed. (v) 1 <= h^0(L_s) <= 4; precisely h^0(L_s) = 1 + h^0(M_s) with M_s := omega^2 tensor W_5^dual of degree 4, and h^0(M_s) <= 3 by Clifford whenever h^0(M_s) >= 1; hence dim Z_ev(C_s) = h^0(L_s)-1 lies in {0,1,2,3}. Moreover h^0(L_s) = 4 only if C_s is hyperelliptic and M_s = 2g^1_2. The reduced-support/ordered sublocus is open in |L_s| and may be empty; chi(L_s)=1 does not imply its nonemptiness. (vi) Expected-codimension bookkeeping only: the expected codimension of {rk phi_5 <= 5} for ranks 11 -> 6 is (11-5)(6-5) = 6 inside the relative Sym^6 (fibre dimension 6), agreeing with the pinned 3*2 = 6 computation; the source count 15 + (h^0(L_s)-1) <= 18 (equal to 17 if h^0(L_s)=3, giving naive codimension 4 in the 21-dimensional M_{6,6}) is recorded strictly as a source dimension, and no conclusion about image dimension, generic fibre dimension, or component purity in M_{6,6} is drawn.",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7"
+}

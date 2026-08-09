@@ -1,0 +1,142 @@
+{
+  "attempt_id": "ATT-0064",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "TARGET-PACKET-BINDING",
+      "note": "Binding check. ATT-0064 records packet_sha256 39e87ba7e3784b681616f7a38db13eb7216cbd1fd11acb3a1fff2c20211f9a0a and packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7, both identical to TASK-V-ATT-0064-P1; the supplied packet filename C66-001-v4-39e87ba7e3784b68.md carries the matching 16-hex prefix. No shell is available in this read-only workspace, so the digest was not recomputed from bytes; only the recorded identifiers and the filename prefix were compared. The attempt's target dictionary is field-for-field identical to the task target and internally consistent: d=3*6-3+6=21, ordinary degree 2d-16=26, Poincare twist 21, chow codimension 13, compact degree 16 with Q(-8), open BM degree 16 of weight -16 with Q(8) (consistent with FND-0001). The reviewed lemma asserts no Hodge/weight/Tate/Borel-Moore content, so the twist, Gysin/Kunneth-shift, degeneration-differential, semisimplification-versus-isomorphism, invariants-versus-coinvariants, integral-versus-rational, and predicted-motive attack vectors are inapplicable to this artifact and were not scored against it.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0064-1",
+      "note": "Reconstructed independently. d_4 > 2g-2 and d_5 = 2g-2+n > 2g-2 give fibrewise H^1(W_4)=H^1(W_5)=0 by Serre duality, hence R^1pi_*W=0, pi_*W locally free of rank d_4+d_5+2-2g with arbitrary base change; Gamma is a disjoint union of n copies of B so pi_*(W|Gamma) is locally free of rank 2n; Fit_0 of a cokernel of a map into a rank-2n free module is I_{2n}, correct. The Section 1 statement of the proper/flat/finite-presentation base-change hypotheses is precise and repairs the overbroad shorthand flagged in the attempt's own novelty note.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0064-2",
+      "note": "This is the strongest part of the artifact and it survives adversarial attack. coker Phi = R^1p_*(omega tensor Q^{-1}) is correct (deg L_univ = 2g-2+n > 2g-2 kills R^1p_*L_univ). Inclusion J subset I_e: e^*Q = pi^*M_0 by seesaw, R^1pi_*omega = O_B gives coker(e^*Phi) = M_0^{-1}, invertible, whose Fit_0 is 0, so J.O_B = 0. Off e(B): (coker Phi) tensor K = H^0(Q_z)^vee = 0 for a nontrivial degree-zero bundle on a geometrically integral curve, then coherence plus Nakayama. On e(B): the dual-number arc gives 0->O->Q_xi^{-1}->O->0 with class -xi nonzero, the connecting map H^0(omega)->H^1(omega) is cup with -xi, nonzero by perfectness of the Serre pairing hence surjective, so H^1(omega tensor Q_xi^{-1}) has length one and is killed by eps, so i_xi^*J=(eps). Since Fit_0 commutes with base change this says exactly that the image of J in (I/I^2) tensor kappa has zero annihilator in the g-dimensional relative tangent space, hence is the whole conormal fibre; Nakayama over O_{B,b} gives I=J+I^2, and Nakayama over O_{P,e(b)} applied to the finite module I/J=I(I/J) gives I=J. I found no gap: the argument is genuinely ideal-theoretic and does not infer equality from supports (it correctly discharges the FND-0046 objection). Consistent with, and no more general than, FND-0096.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0064-3",
+      "note": "Restriction to Gamma stays exact because W_5 is locally free (Tor_1(W_5,O_Gamma)=0); pushforward along the affine Gamma->B is exact; the upper row is exact because R^1pi_*W_4=0 (d_4>2g-2); coker(phi_4)=R^1pi_*(W_4(-Gamma))=0 because d_4-n>2g-2. Snake lemma then gives coker(phi)=coker(phi_5)=R^1pi_*(W_5(-Gamma)). This correctly implements the two distinct vanishings demanded by FND-0099 and uses no splitting, as demanded by FND-0097.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0064-4",
+      "note": "deg N = 2g-2-d_5+n = 0 by the second degree hypothesis, and W_5(-Gamma)=omega tensor N^{-1}. a_N^*Q = N tensor pi^*M, top-degree base change of R^1, Fitting base change and invariance of Fit_0 under an invertible twist give Fit_0(coker phi) = a_N^*J = a_N^*I_e. The T-point criterion (a_{N_T} factors through e_T iff N_T = pi_T^*M_T) is correct given the x_1-rigidification, and quasi-coherent-ideal descent along a smooth atlas is legitimate; the artifact correctly keeps this a stack statement rather than a coarse-space claim.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0064-5",
+      "note": "F(-5) fibrewise O(-1)+O gives q_{0*}F(-5) invertible with R^1=0 and arbitrary base change; the counit is fibrewise the nowhere-vanishing constant section of the O summand, hence injective on fibres at every point of P^1_B, hence a subbundle with locally free quotient. Twisting yields 0->L_5->F->L_4->0 of fibre degrees 5 and 4; dualising, pulling back and twisting by O_X(2)|_C makes W_4 (the f=4 summand, degree 20) the sub and W_5 (the f=5 summand, degree 16) the quotient, matching the packet's CE line-bundle convention and its minus sign.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0064-6",
+      "note": "Intrinsic (6,6) specialization only. deg W_f = 4g+12-4f (packet-recorded from SRC-0004) gives d_4=20, d_5=16; d_4-n=14>10 and d_5-n=10=2g-2 check; rank pi_*W = 20+16+2-12 = 26 and rank pi_*(W|Gamma) = 12, so 26->12 is right; N trivial iff O_C(Gamma) = W_5 tensor omega^{-1} relatively. Confirmed as an intrinsic statement; it carries no ambient CE content and is unaffected by the CLM-0064-7 failure.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0064-7",
+      "note": "FALSE as stated, by explicit counterexample; see strongest_attack. The artifact's own operative hypothesis is 'q_*script-W is finite locally free and its formation commutes with arbitrary base change', and theorem_scope repeats that this is the whole of the 'standard CE equation-bundle open'. Under exactly that hypothesis the restriction r: q_*script-W -> pi_*W need not be surjective: from the degree-four CE Koszul resolution 0 -> O_X(-4) tensor q^*det F -> O_X(-2) tensor q^*F -> I_C -> 0, tensoring by script-W = O_X(2) tensor q^*F^vee and pushing down gives Rq_*(I_C tensor script-W) = End(F) concentrated in degree zero (all of q_*, R^1q_*, R^2q_* of O_X(-2) vanish on a P^2-bundle, the R^2 by relative duality with omega_{X/P^1}=O_X(-3) tensor q^*det E). Hence coker(r) injects into H^1(P^1,End F) with next term H^1(P^1, Sym^2 E tensor F^vee) = H^1 of q_*script-W, so on the equation-bundle open coker(r) IS EXACTLY H^1(P^1, End F), which vanishes iff F is fibrewise balanced. The attempt's stated reason, 'using H^1(X_b,O_{X_b})=0', is the wrong vanishing group: H^1 of the structure sheaf of a P^2-bundle over P^1 vanishes unconditionally and carries no information about surjectivity onto H^0(C,W).",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0064-8",
+      "note": "True at balanced (6,6) but not established by the supplied argument. For F fibrewise O(4)+O(5) one has End F = O+O+O(1)+O(-1) with H^1=0, so r IS surjective there and the ambient/intrinsic cokernels do agree; I verified the bookkeeping with E=O(3)^3: h^0(X,script-W)=h^0(O(2)^6)+h^0(O(1)^6)=30, h^0(End F)=4, h^1(End F)=0, and 30-4+0=26=h^0(C,W). But this correct reason appears nowhere in the artifact: CLM-0064-8 is derived from CLM-0064-7, whose general form is false and whose fibrewise input is attributed to an SRC-0004 surjectivity statement that is not visible in the packet excerpt and is supported by the wrong vanishing. The conclusion is therefore not discharged by this artifact, only by a computation the artifact does not contain.",
+      "verdict": "unresolved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-09",
+  "finding_candidates": [
+    {
+      "corroboration_status": "candidate",
+      "evidence": "Verified by two independent numerical instances with E = O(3)^3, g = 6, deg E = deg F = 9. Balanced F = O(4)+O(5): h^0(X,script-W) = h^0(O(2)^6)+h^0(O(1)^6) = 18+12 = 30, h^0(End F) = 4, h^1(End F) = 0, h^0(C,W) = 26, and 30-4+0 = 26 (surjective). Unbalanced F = O(3)+O(6): h^0(X,script-W) = h^0(O(3)^6)+h^0(O^6) = 24+6 = 30, h^0(End F) = 6, h^1(End F) = h^1(O(-3)) = 2, h^0(C,W) = 26, and 30-6+2 = 26, so the image has dimension 24 and coker(r) is 2-dimensional. Both cases have H^1(P^1, Sym^2 E tensor F^vee) = 0, i.e. both lie on the equation-bundle open.",
+      "key": "FC-CE-AMBIENT-RESTRICTION-COKER-IS-H1-ENDF",
+      "scope": {
+        "case": {
+          "g": 6
+        },
+        "generality": "all degree-four Casnati-Ekedahl covers of P^1, any g",
+        "objects": [
+          "CE equation bundle script-W = O_X(2) tensor q^*F^vee",
+          "ambient-to-curve restriction"
+        ]
+      },
+      "severity": "high",
+      "statement": "For a degree-four Casnati-Ekedahl cover C in X = P(E^vee) over P^1 with relations bundle F and equation bundle script-W = O_X(2) tensor q^*F^vee, the ambient-to-curve restriction H^0(X,script-W) -> H^0(C,W) has cokernel canonically contained in H^1(P^1, End F), with cokernel of the inclusion mapping into H^1(P^1, Sym^2 E tensor F^vee); consequently on the CE equation-bundle open, where R^1q_*script-W = 0, the cokernel EQUALS H^1(P^1, End F). Proof: tensor the CE Koszul resolution 0 -> O_X(-4) tensor q^*det F -> O_X(-2) tensor q^*F -> I_C -> 0 by script-W and push forward; the O_X(-2)-twisted term has vanishing q_*, R^1q_* and R^2q_* on a P^2-bundle (R^2 by relative duality with omega_{X/P^1} = O_X(-3) tensor q^*det E), leaving Rq_*(I_C tensor script-W) = End(F) in degree zero. Since H^1(P^1, O(a)+O(b) tensor (O(-a)+O(-b))) vanishes iff |a-b| <= 1, the restriction is surjective exactly on the fibrewise BALANCED locus. Balancedness of F is therefore a strictly stronger hypothesis than membership in the CE equation-bundle open, and any ambient-versus-intrinsic CE comparison must assume it explicitly.",
+      "supports_finding_id": null
+    },
+    {
+      "corroboration_status": "candidate",
+      "evidence": "Solve 4g+12-4f_2 - n = 2g-2 for n; check f_1 < f_2 is exactly d_4 - n > 2g-2. Witness verified: bidegree (4,3) on P^1 x P^1 gives g = (4-1)(3-1) = 6, deg omega_C = 2*3+1*4 = 10, deg gamma_*O_C = -9 = -(g+3), deg omega_{C/P^1} = 10+2*4 = 18, and |omega_{C/P^1} tensor gamma^*O(-3)| = |O(2,0)|_C| of degree 6 and projective dimension 2, factoring through the Veronese conic.",
+      "key": "FC-CE-DEGREE-CONDITIONS-ADMIT-UNBALANCED-F",
+      "scope": {
+        "case": {
+          "g": 6
+        },
+        "generality": "degree-four CE data with the GEO-Z degree conditions"
+      },
+      "severity": "medium",
+      "statement": "The GEO-Z standing degree conditions d_4 - n > 2g-2 and d_5 - n = 2g-2, when specialized to degree-four CE data with F = O(f_1)+O(f_2), f_1 < f_2, f_1+f_2 = g+3 and deg W_f = 4g+12-4f, are equivalent to n = 2g+14-4f_2 together with f_1 < f_2. They do NOT single out the balanced splitting type. For g = 6 they admit at least the two solutions (f_1,f_2,n) = (4,5,6) (balanced, the campaign case) and (f_1,f_2,n) = (3,6,2) (unbalanced), the latter realized by a smooth bidegree-(4,3) curve on P^1 x P^1 with its degree-four projection, which has gamma_*O_C = O + O(-3)^3, hence E = O(3)^3, and lies on a constant conic in P^2 x P^1, hence F = O(3)+O(6). For E = O(3)^3 the section condition H^0(Sym^2E(-f)) not zero forces f <= 6, so (4,5) and (3,6) are the only splitting types available there. Consequence for the campaign: a GEO-Z theorem whose intrinsic hypotheses are stated purely by degree inequalities silently quantifies over unbalanced tetragonal CE data, so any ambient CE clause appended to those hypotheses inherits the unbalanced cases and must either exclude them by an explicit balancedness hypothesis or prove them. This is the mechanism by which an artifact can list 'unbalanced splitting types' under not_covered while its stated theorem in fact asserts something about them (the discipline of FND-0101), and it is a concrete instance of the unbalanced-locus exposure recorded abstractly in FND-0091.",
+      "supports_finding_id": null
+    },
+    {
+      "corroboration_status": "candidate",
+      "evidence": "Direct: the restriction sequence is 0 -> I_C tensor script-W -> script-W -> i_* W -> 0, whose connecting map lands in H^1(X, I_C tensor script-W). The unbalanced witness in FC-CE-AMBIENT-RESTRICTION-COKER-IS-H1-ENDF has H^1(X,O_X) = 0 and yet a 2-dimensional restriction cokernel.",
+      "key": "FC-CE-WRONG-OBSTRUCTION-GROUP-H1-OX",
+      "scope": {
+        "generality": "any ambient-to-curve CE comparison argument"
+      },
+      "severity": "medium",
+      "statement": "Surjectivity of a fibrewise ambient-to-curve restriction H^0(X_b, script-W_b) -> H^0(C_b, W_b) is governed by H^1(X_b, I_{C_b} tensor script-W_b), not by H^1(X_b, O_{X_b}). For a P^2-bundle over P^1 the latter vanishes unconditionally and is therefore vacuous as a justification; the former equals H^1(P^1, End F_b) in the degree-four CE setting. Reviewers and provers should treat 'H^1(ambient, O) = 0' as a null citation in this context: it neither implies nor is implied by the required vanishing, and its appearance is a reliable signal that an ideal-sheaf twist has been dropped from a restriction-surjectivity argument.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0106",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "39e87ba7e3784b681616f7a38db13eb7216cbd1fd11acb3a1fff2c20211f9a0a",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Two distinct uses, with different status. (i) The degree formula deg(W_f|_C)=4g+12-4f and the sign in gamma^*O(-f) are visible in the packet's SRC-0004 locator excerpt and are used correctly; the attempt's treatment of the excerpt's first, minus-free occurrence as transcription noise agrees with the packet's own CE line-bundle convention line. (ii) The load-bearing Section 8 input, that 'the proof of SRC-0004 Lemma 10.6 factors the published ambient evaluation through H^0(C,script-W|C) and proves that restriction surjective', is NOT visible anywhere in the supplied excerpt, which is purely the degree/Serre-duality calculation, and cannot be checked from the supplied files. It is also false in the generality in which the attempt invokes it (see CLM-0064-7), so either SRC-0004 states it only under a balancedness hypothesis that the attempt dropped, or the attribution is inaccurate. Unresolved rather than failed because the packet does not exhibit enough of SRC-0004 to assign the error to the source rather than to the citation.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0064-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack (succeeded, and it is what drives the verdict): the theorem asserts, as an unqualified conclusion under hypotheses that do not mention balancedness, that 'the restriction q_*script-W->pi_*W is surjective'. I attacked that clause by asking what actually obstructs it, and the obstruction is computable in closed form. On the CE equation-bundle open (R^1q_*script-W=0) one has coker(r) = H^1(P^1_b, End F_b) exactly, via the degree-four CE Koszul resolution of I_C tensored by script-W = O_X(2) tensor q^*F^vee, whose pushforward is End(F) in degree zero. So r is surjective precisely on the fibrewise balanced locus, and the artifact's hypothesis set does not impose that. Explicit witness, all hypotheses satisfied: k=C, B=Spec k, C a smooth curve of bidegree (4,3) on P^1 x P^1, g=(4-1)(3-1)=6, gamma the degree-four projection, n=2 with Gamma two distinct points. Then gamma_*O_C = O + O(-3)^3 (push 0->O(-4,-3)->O->O_C->0; only R^1 of the first term survives, = O(-3)^3), so E=O(3)^3 with deg E = 9 = g+3. The relative canonical map to P^2 is |omega_{C/P^1} tensor gamma^*O(-3)| = |O(2,0)|_C|, which factors C -> P^1 -> P^2 through the Veronese conic Q, so C lies in Q x P^1: one CE relative conic is constant, forcing F = O(3)+O(6), det F = O(9) = det E. Degrees: the HN filtration O(6) subset F dualises to d_4 = 4g+12-12 = 24 (sub) and d_5 = 4g+12-24 = 12 (quotient), so d_4-n = 22 > 2g-2 = 10 and d_5-n = 10 = 2g-2 \u2014 both standing degree hypotheses hold, with n=2 >= 1. Equation-bundle hypothesis holds: q_*script-W = Sym^2E tensor F^vee = O(3)^6 + O^6, so it is free of rank 12 with H^1 = 0 and trivially base-change-compatible over a field. Yet h^0(X,script-W) = 24+6 = 30, h^0(End F) = 6, h^0(C,W) = deg W + 2(1-g) = 36-10 = 26 (both graded degrees 24 and 12 exceed 2g-2 = 10, so H^1(C,W)=0), and h^1(End F) = h^1(O(-3)) = 2, with 30-6+2 = 26 and alternating sum 6-30+26-2 = 0 confirming the sequence. Hence coker(r) is 2-dimensional and r is NOT surjective. The clause is therefore false under its own hypotheses, which refutes the theorem_statement as written; and since tilde-phi = phi o r factors through a proper subsheaf, 'coker(tilde-phi) canonically isomorphic to coker(phi)' loses its only proof, with Fit_0(coker tilde-phi) contained in but not equal to Fit_0(coker phi) in general. Second attack (attempted, FAILED \u2014 the artifact holds): I tried hard to break Sections 3-4, the nonreduced-base identity Fit_0(coker Phi) = I_e, on four fronts \u2014 that i_xi^*J = (eps) only detects kappa-rational tangents; that the first Nakayama is run over O_{B,b} while the second is over O_{P,e(b)}; that the Poincare bundle is only unique up to a twist from P; and that the off-section vanishing might merely be a support statement. All four fail: kappa-rational tangents span the conormal fibre, both Nakayama applications are on finite modules over Noetherian local rings with the ideal inside the maximal ideal, the ambiguous twist becomes trivial after pullback to a local ring, and both inclusions are genuine ideal containments. Third attack (attempted, FAILED): the ranks and the balanced degree arithmetic (20/16, 26->12, deg N = 0) are all correct, and the canonical-filtration construction correctly avoids the global splitting hypothesis that FND-0097 warns about. Net: the intrinsic half of this artifact (Sections 2-7, CLM-0064-1 through CLM-0064-6) is sound and is the campaign-usable content; the ambient CE half is refuted in its stated generality and unproved even in the balanced case it needs. Minimal repair: add 'F fibrewise balanced' (equivalently H^1(P^1_b, End F_b) = 0) as a hypothesis of the ambient clause, and replace the H^1(X_b,O_{X_b})=0 citation with the End(F) computation. Note also that the artifact's own theorem_scope lists 'unbalanced splitting types' as not covered while the refuted clause quantifies over them \u2014 the FND-0101 discipline applied to this artifact.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be a field of characteristic zero, B a locally Noetherian k-scheme, pi:C->B a smooth proper morphism with geometrically connected genus-g fibres, and x_1,...,x_n:B->C pairwise disjoint sections with n>=1 and Gamma=sum x_i(B). Let 0->W_4->W->W_5->0 be an exact sequence on C with W_4,W_5 invertible, W locally free of rank two, and constant fibre degrees d_4,d_5 satisfying d_4-n>2g-2 and d_5-n=2g-2. Put phi:pi_*W->pi_*(W|Gamma), N=omega_{C/B} tensor W_5^vee(Gamma), P=Pic^0_{C/B}, a_N:B->P, and let e:B->P be the identity. Then Fit_0(coker phi)=a_N^*I_e, so the intrinsic evaluation-failure scheme is exactly a_N^{-1}(e(B)); this equality commutes with arbitrary locally Noetherian base change and represents relative triviality of N, and it descends along smooth atlases to locally Noetherian algebraic stacks. Now additionally suppose the data come from a degree-four Casnati-Ekedahl embedding i:C->X=P(E^vee) over P^1_B, with q:X->B, relations bundle F, script-W=O_X(2) tensor pullback(F^vee), W=i^*script-W, and B contained in the standard CE equation-bundle open on which q_*script-W is locally free and commutes with arbitrary base change. Let tilde-phi:q_*script-W->pi_*(W|Gamma) be the ambient CE equation-evaluation map. Then the restriction q_*script-W->pi_*W is surjective, coker(tilde-phi) is canonically isomorphic to coker(phi), and the ambient CE evaluation-failure scheme has the same ideal a_N^*I_e. For (g,n)=(6,6) and F fibrewise O(4) direct-sum O(5), the canonical filtration induced by O(5) tensor q_0^*q_{0*}(F(-5)) subset F has d_4=20,d_5=16, the intrinsic map has ranks 26->12, and both intrinsic and ambient CE failure are scheme-theoretically the locus where O_C(Gamma) is relatively isomorphic to W_5 tensor omega_{C/B}^{-1}. This theorem constructs and identifies GEO-Z on the balanced CE/configuration stack; it makes no assertion about the image, closure, components, dimensions, stabilizers, or unbalanced splitting types in M_{6,6}, which are assigned to C66-GEO-H0 and C66-GEO-COMP.",
+  "verdict": "refuted"
+}

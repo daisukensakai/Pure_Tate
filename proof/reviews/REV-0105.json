@@ -1,0 +1,110 @@
+{
+  "schema_version": 3,
+  "id": "REV-0105",
+  "review_task_id": "TASK-V-ATT-0048-P4",
+  "review_pass": 4,
+  "attempt_id": "ATT-0048",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "subproblem_id": "C66-GEO-Z",
+  "context_revision": 2,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "1e3a1a22512423c7acad51511c72eff81399395835c958486796871a4bc12a28",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B be a locally Noetherian scheme (no reducedness, irreducibility or characteristic hypothesis), pi : C -> B smooth proper with geometrically connected fibres of genus g >= 1, and x_1,...,x_n : B -> C pairwise disjoint sections with n >= 1, Gamma := sum_i x_i(B). Let W be locally free of rank 2 on C equipped with a short exact sequence of O_C-modules 0 -> W_4 -> W -> W_5 -> 0 with W_4, W_5 invertible of fibrewise degrees d_4, d_5 satisfying (D1) d_4 - n > 2g - 2 and (D2) d_5 - n = 2g - 2. Let phi : pi_*W -> pi_*(W|_Gamma) be evaluation, Z_ev := V(Fit_0(coker phi)) the Casnati-Ekedahl evaluation-failure locus with its determinantal/Fitting scheme structure, N := omega_{C/B} tensor W_5^vee(Gamma) (invertible of fibrewise degree 0 by (D2)), a_N : B -> Pic^0_{C/B} its classifying morphism and e the identity section. Then: (T1) pi_*W and pi_*(W|_Gamma) are locally free of ranks d_4 + d_5 + 2 - 2g and 2n, so Fit_0(coker phi) = I_{2n}(phi); (T2) on P := Pic^0_{C/B}, with L_univ := omega_{C_P/P}(Gamma_P) tensor Poin^{-1} and Phi : p_*L_univ -> p_*(L_univ|_{Gamma_P}) the universal evaluation, one has the exact equality of ideal sheaves J := Fit_0(coker Phi) = I_e, both inclusions, over every such B; (T3) Fit_0(coker phi) = Fit_0(coker phi_5) with phi_5 : pi_*W_5 -> pi_*(W_5|_Gamma), using only the filtration and never a splitting W = W_4 direct-sum W_5; (T4) Fit_0(coker phi) = a_N^{-1}(I_e).O_B, i.e. Z_ev = a_N^{-1}(e(B)) as closed subschemes of B; (T5) formation of both sides commutes with arbitrary base change, and for every locally Noetherian B-scheme T the map T -> B factors through Z_ev if and only if N|_{C_T} is relatively trivial (isomorphic to pi_T^*M for some invertible M on T), whence the identification descends verbatim to any locally Noetherian algebraic stack carrying this data, via any smooth atlas; and (T6) for (g,n) = (6,6) the balanced tetragonal Casnati-Ekedahl datum satisfies the hypotheses: with gamma : C -> P^1_B finite flat of degree 4, relations bundle F fibrewise O(4) direct-sum O(5), the canonical sub-line-bundle L_5 := O_{P^1}(5) tensor q^*q_*(F(-5)) subset F and its quotient L_4 induce a canonical filtration 0 -> W_4 -> W -> W_5 -> 0 of W := (O_{P(E^vee)}(2) tensor gamma^*F^vee)|_C with d_4 = 20 and d_5 = 16 (SRC-0004 Lemma 10.6 convention W_f = (O(2) tensor gamma^*O(-f))|_C), so that (D1) reads 14 > 10 and (D2) reads 10 = 2g-2, phi has ranks 26 -> 12, and Z_ev = a_N^{-1}(e(B)) with N = omega_{C/B} tensor W_5^vee(Gamma), equivalently Z_ev is the scheme-theoretic locus where O_C(Gamma) is isomorphic to W_5 tensor omega_{C/B}^{-1} relatively to B.",
+  "verdict": "incomplete",
+  "reviewer_engine": "codex",
+  "independent": true,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0048-1",
+      "verdict": "confirmed",
+      "note": "Restriction of the universal Fitting ideal to the identity section gives Fit_0(R^1 pi_* omega tensor M_0^{-1}) = Fit_0(invertible) = 0, hence J subset I_e. This is an equality of ideals over possibly nonreduced bases and does not use set-theoretic support."
+    },
+    {
+      "claim_id": "CLM-0048-2",
+      "verdict": "confirmed",
+      "note": "For every nonzero relative tangent xi, the dual-number pullback of coker Phi has k-dimension and k[eps]-length one because cup product H^0(omega) -> H^1(omega) with xi is surjective. Therefore the pulled Fitting ideal is (eps). Conormal spanning followed by Nakayama over O_{B,b} and then O_{P,e(b)} proves I_e subset J, including horizontal nilpotents."
+    },
+    {
+      "claim_id": "CLM-0048-3",
+      "verdict": "confirmed",
+      "note": "The filtered snake-lemma reduction is correct: R^1 pi_*W_4 = 0 makes the upper row exact and R^1 pi_*(W_4(-Gamma)) = 0 makes phi_4 surjective; hence coker(phi) is isomorphic to coker(phi_5) without a global splitting."
+    },
+    {
+      "claim_id": "CLM-0048-4",
+      "verdict": "confirmed",
+      "note": "The identity W_5(-Gamma) = omega tensor N^{-1}, arbitrary base change for top cohomology of a line bundle on a proper flat curve, invariance of Fit_0 under a base-line twist, and J = I_e prove Fit_0(coker phi) = a_N^*I_e as ideal sheaves."
+    },
+    {
+      "claim_id": "CLM-0048-5",
+      "verdict": "confirmed",
+      "note": "The T-point criterion and smooth-atlas descent are sound. The marked section rigidifies the relative Picard quotient, so the identity class is equivalent to N being pulled back from the test base. No coarse-moduli assertion is made."
+    },
+    {
+      "claim_id": "CLM-0048-6",
+      "verdict": "confirmed",
+      "note": "For F(-5) fibrewise O(-1) plus O, cohomology and base change makes q_*F(-5) invertible. The counit has constant fibre rank one and hence defines a subbundle with locally free quotient; dualising, pulling back, and twisting gives the stated canonical filtration."
+    },
+    {
+      "claim_id": "CLM-0048-7-INTRINSIC",
+      "verdict": "confirmed",
+      "note": "The immutable packet snapshot and the published SRC-0004 Lemma 10.6 verify the F^vee sign convention and deg(W_f)=4g+12-4f. Thus d_4=20, d_5=16, the degree inequalities and ranks 26 -> 12 are correct, and the intrinsic evaluation map on C has the asserted Fitting/Abel-Jacobi locus."
+    },
+    {
+      "claim_id": "CE-AMBIENT-TO-INTRINSIC-BRIDGE",
+      "verdict": "unresolved",
+      "note": "The published CE construction defines the equation-evaluation map on the ambient scroll, H^0(P(E^vee), script-W) -> H^0(Gamma, script-W|Gamma), then factors it through H^0(C,W) -> H^0(Gamma,W|Gamma). ATT-0048 begins with the latter map and calls it the CE evaluation map, but never proves relatively that the ambient restriction q_*script-W -> pi_*W is surjective and base-change compatible, nor concludes equality of the two cokernel sheaves and Fitting ideals. The source proves fibrewise surjectivity; the family-level scheme-structure bridge needs an explicit cohomology-and-base-change plus Nakayama paragraph."
+    },
+    {
+      "claim_id": "SCOPE-OF-GEO-Z",
+      "verdict": "confirmed",
+      "note": "The exact theorem is a balanced-CE/configuration-stack lemma and explicitly excludes an image or closed locus in M_{6,6}, unbalanced splitting types, components, dimensions, stabilizers, closure, and Tate claims. Under the packet DAG those are downstream GEO-H0/GEO-COMP/TATE obligations and are not hidden steps of this theorem. The artifact must not, by itself, be cited as constructing a global closed Z inside M_{6,6}."
+    },
+    {
+      "claim_id": "COHOMOLOGY-BASE-CHANGE-SCOPING",
+      "verdict": "confirmed",
+      "note": "Standard input S3 is worded too broadly, but every actual application is to a finite-presentation line bundle, flat over the base, with proper support on a smooth proper curve (or P^1-family). Under these hypotheses the top-degree and vanishing-based base-change statements used in the proof are valid."
+    }
+  ],
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "SRC-0004",
+      "verdict": "confirmed",
+      "note": "The declared hash-pinned packet exists as proof/packets/generated/C66-001-v4-1e3a1a22512423c7.md. Independent inspection of the published JEMS article, Lemma 10.6 and the preceding equation-evaluation construction, confirms W = O(2) tensor pullback(F^vee), the induced gamma^*O(-f) summands, deg(W_f|C)=4g+12-4f, the ambient-to-curve factorisation, and fibrewise surjectivity of the first restriction map."
+    }
+  ],
+  "strongest_attack": "The strongest surviving attack is not against the Picard/Fitting computation but against identification of the map being studied. SRC-0004 defines the CE equation-evaluation map on the ambient scroll. ATT-0048 silently replaces it by evaluation of W restricted to C. The source proves the ambient-to-curve restriction is surjective on each geometric fibre, but ATT-0048 does not promote this to a surjection of relative pushforwards or identify cokernel sheaves. Because the claimed advance is scheme-theoretic, a fibrewise comparison alone is insufficient. Repair: on the source's cohomology-and-base-change open B0, prove q_*script-W and pi_*W are vector bundles commuting with base change, use the source's fibrewise surjectivity plus Nakayama to obtain q_*script-W ->> pi_*W, and then coker(tilde-phi_CE) = coker(phi), hence equality of Fitting ideals. All attacks on J=I_e itself fail; that core proof is correct.",
+  "finding_candidates": [
+    {
+      "key": "relative-ambient-ce-to-intrinsic-evaluation-cokernel-bridge",
+      "statement": "For a scheme-theoretic GEO-Z identification, it is not enough to identify the obstruction of the intrinsic map pi_*W|_C -> pi_*(W|Gamma). The published CE map has ambient equation space q_*script-W as its domain. One must prove the relative restriction q_*script-W -> pi_*W|_C is surjective and base-change compatible, so that the two cokernel sheaves, not only their geometric fibres, agree and therefore have the same Fitting ideal.",
+      "supports_finding_id": "FND-0061",
+      "scope": {
+        "attempts": [
+          "ATT-0048"
+        ],
+        "case": {
+          "g": 6,
+          "n": 6
+        }
+      }
+    }
+  ],
+  "created_on": "2026-08-08"
+}

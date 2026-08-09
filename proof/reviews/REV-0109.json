@@ -1,0 +1,133 @@
+{
+  "attempt_id": "ATT-0065",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "binding-check",
+      "note": "ATT-0065 packet_id C66-001-v4, packet_sha256 39e87ba7e3784b681616f7a38db13eb7216cbd1fd11acb3a1fff2c20211f9a0a, packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7, target dictionary, and theorem_statement all match TASK.json exactly. Web-evidence stage was unavailable; verdict rests on supplied local sources only.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0065-1",
+      "note": "d_4>2g-2 and d_5=2g-2+n>2g-2 kill fibrewise H^1 of both graded pieces by Serre duality, hence R^1pi_*W=0; pi_*W is locally free of rank d_4+d_5+2-2g with arbitrary base change; Gamma is a disjoint union of n sections so pi_*(W|Gamma) is locally free of rank 2n; Fit_0(coker phi)=I_{2n}(phi). Verified.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0065-2",
+      "note": "Independently reconstructed Sections 3-4. J subset I_e: e^*J=Fit_0(R^1pi_*omega tensor M_0^{-1})=Fit_0(M_0^{-1})=0, read as the extended ideal along the non-flat section. Reverse inclusion: for nonzero xi in H^1(O), the arc pullback Q_xi^{-1} is, on the underlying curve, an O_C-extension of O by O with class -xi (NOT an O_{C x D}-extension with class -xi*eps); after tensoring by omega the connecting map is cup with -xi over kappa, surjective by the perfect Serre pairing, so H^1(omega tensor Q_xi^{-1}) is 1-dimensional over kappa with eps acting by 0, giving i_xi^*J=(eps). Conormal spanning plus two Nakayama steps yield I_e subset J. The nonreduced scheme structure is genuine, not support-only, and matches the corroborated universal statement FND-0096.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0065-3",
+      "note": "Tensoring with O_Gamma stays exact because W_5 is locally free; Gamma->B affine gives exact lower row; pi_*W->pi_*W_5 is surjective because R^1pi_*W_4=0 (deg W_4>2g-2); coker(phi_4)=R^1pi_*W_4(-Gamma)=0 because d_4-n>2g-2; snake lemma gives coker(phi)=coker(phi_5) with no global splitting, consistent with FND-0097/FND-0099 discipline.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0065-4",
+      "note": "a_N^*(coker Phi)=R^1pi_*(omega tensor N^{-1}) tensor M^{-1} follows from Tor-independent derived base change (C_P->P flat); since R^1 is the top of an amplitude-[0,1] perfect complex, no Tor term lands in degree 1, so no fibre-h^1 constancy is needed. Fitting ideals commute with arbitrary base change and are invariant under invertible twist; x_1-rigidification gives the T-point criterion N_T=pi_T^*M_T; smooth-atlas descent of quasi-coherent ideals is standard. No coarse-space assertion is made.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0065-5",
+      "note": "Fibres O(4)+O(5) give F(-5) fibres O(-1)+O, so s_*F(-5) is invertible with R^1=0 and base-change-compatible formation; the counit s^*s_*F(-5)->F(-5) is fibrewise the inclusion into the O summand, constant rank one, hence a subbundle with locally free quotient. Dualizing, pulling back, and twisting gives the filtered W; the residual pi^*-base twist does not change fibre degrees, so SRC-0004's deg(W_f)=4g+12-4f yields d_4=20, d_5=16 at g=6.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0065-6",
+      "note": "Tensoring the hypothesized CE resolution by script-W and using det(F) tensor F^vee canonically = F (rank two) gives 0->O_X(-2) tensor p^*F->p^*End(F)->I_C tensor script-W->0. H^i(P^2,O(-2))=0 for i=0,1,2, so Rp_*O_X(-2)=0 in every degree and Rp_*(I_C tensor script-W)=End(F)[0]. Applying Rp_* to 0->I_C tensor script-W->script-W->i_*W->0 (with Rp_*script-W concentrated in degree 0 since H^{>0}(P^2,O(2))=0) gives 0->End(F)->p_*script-W->gamma_*W->0, and s_* then displays R^1s_*End(F) as the exact obstruction. Rank check: on a balanced fibre h^0(End(F))=4, so q_*script-W has rank 26+4=30, consistent.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0065-7",
+      "note": "With R^1s_*End(F)=0, (8.4) gives surjectivity of r; im(phi composed with r)=im(phi), hence canonical cokernel equality. Base-change compatibility: q_*script-W commutes by explicit hypothesis, pi_*W by Section 2, CE constructions fibrewise constant, and a pullback of the surjection r remains surjective by right-exactness, so the Fitting equality persists after arbitrary locally Noetherian base change.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0065-8",
+      "note": "End(O(4)+O(5))=O^2+O(1)+O(-1) has H^1=0 on every geometric fibre. Top-degree base change identifies geometric fibres of R^1s_*End(F) with fibrewise H^1 (R^1 is the top of a perfect amplitude-[0,1] complex), and Nakayama kills the sheaf; the same holds after arbitrary base change. No global splitting of F is used, discharging the FND-0097 concern.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0065-9",
+      "note": "Combination of the confirmed claims: at (6,6), 20-6=14>10 and 16-6=10=2g-2, ranks 26->12, obstruction vanishes automatically, and Fit_0(coker phi)=a_N^*I_e identifies the balanced ambient failure scheme scheme-theoretically with the relative incidence O_C(Gamma)=W_5 tensor omega^{-1} (relative isomorphism = triviality of N in Pic^0, i.e. up to pullback from the base).",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-02-04",
+  "finding_candidates": [
+    {
+      "basis": "REV-0109 independent reconstruction of ATT-0065 Sections 3-4. Related to, but distinct from, FND-0096 (which records the Fit_0=I_e statement) and FND-0046 (which requires Fitting/scheme structure, not just fibrewise equality); this candidate isolates the module-structure subtlety that makes the nonreduced argument work.",
+      "key": "arc-pullback-module-structure-fit0",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "generality": "all g>=1, n>=1"
+      },
+      "statement": "In the universal Picard Fitting computation, the pullback of the Poincare bundle along a dual-number arc with tangent xi is, on the underlying curve, an extension of O_C by O_C with class xi (not an O_{C x D}-module extension with class xi tensor eps). Consequently the omega-twisted R^1 over the arc is 1-dimensional with eps acting by 0 and the Fitting ideal pulls back to (eps). Misreading the module structure yields a 3-dimensional cohomology and breaks the nonreduced inclusion I_e subset J. Future determinantal scheme-structure proofs reusing dual-number arcs must state this reading explicitly.",
+      "status": "candidate",
+      "summary": "In the universal Picard Fitting computation, the pullback of the Poincare bundle along a dual-number arc with tangent xi is, on the underlying curve, an extension of O_C by O_C with class xi (not an O_{C x D}-module extension with class xi tensor eps). Consequently the omega-twisted R^1 over the arc is 1-dimensional with eps acting by 0 and the Fitting ideal pulls back to (eps). Misreading the module structure yields a 3-dimensional cohomology and breaks the nonreduced inclusion I_e subset J. Future determinantal scheme-structure proofs reusing dual-number arcs must state this reading explicitly.",
+      "supports_finding_id": null
+    },
+    {
+      "basis": "REV-0109 verification of ATT-0065 Sections 8-9; this is the repaired form of the ambient overstatement refuted by REV-0106. Remains a candidate until independently corroborated.",
+      "key": "ce-restriction-obstruction-r1-end",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        }
+      },
+      "statement": "For a degree-four CE embedding whose ideal has the standard resolution 0->O_X(-4) tensor p^*det(F)->O_X(-2) tensor p^*F->I_C->0, tensoring by script-W=O_X(2) tensor p^*F^vee and pushing along the P2-bundle gives canonically 0->End(F)->p_*script-W->gamma_*W->0, because Rp_*O_X(-2)=0 in every degree and det(F) tensor F^vee=F for rank two. Hence the exact obstruction to surjectivity of q_*script-W->pi_*W is R^1s_*End(F); the equation-bundle base-change hypothesis alone does not imply surjectivity, and fibrewise balanced F=O(4)+O(5) forces the obstruction to vanish without any global splitting. Downstream ambient comparisons should cite the obstruction in this form.",
+      "status": "candidate",
+      "summary": "For a degree-four CE embedding whose ideal has the standard resolution 0->O_X(-4) tensor p^*det(F)->O_X(-2) tensor p^*F->I_C->0, tensoring by script-W=O_X(2) tensor p^*F^vee and pushing along the P2-bundle gives canonically 0->End(F)->p_*script-W->gamma_*W->0, because Rp_*O_X(-2)=0 in every degree and det(F) tensor F^vee=F for rank two. Hence the exact obstruction to surjectivity of q_*script-W->pi_*W is R^1s_*End(F); the equation-bundle base-change hypothesis alone does not imply surjectivity, and fibrewise balanced F=O(4)+O(5) forces the obstruction to vanish without any global splitting. Downstream ambient comparisons should cite the obstruction in this form.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0109",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "39e87ba7e3784b681616f7a38db13eb7216cbd1fd11acb3a1fff2c20211f9a0a",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Used only for the CE convention W_f=(O_X(2) tensor gamma^*O(-f))|_C and the degree formula deg(W_f)=4g+12-4f, both present in the packet's SRC-0004 Lemma 10.6 excerpt. The ambient restriction-surjectivity assertion is explicitly NOT imported from SRC-0004; it is proved from the CE resolution stated among the theorem hypotheses. The excerpt prints gamma^*O(f_i) while computing -4f_i, a sign typo in the excerpt; the attempt uses the packet's canonical minus-sign convention, consistent with the computed formula.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0065-P2",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: the Section 4 dual-number step, on which the entire nonreduced inclusion I_e subset J rests, is one misreading away from collapse. If the arc pullback Q_xi^{-1} is treated as an extension of O_{C x Spec kappa[eps]}-modules, its extension class is -xi tensor eps, the connecting map H^0(omega)->H^1(omega) is eps times cup-with-xi, and the long exact sequence makes H^1(omega tensor Q_xi^{-1}) a kappa[eps]-module of kappa-dimension 3 rather than 'kappa killed by eps'; then i_xi^*J=(eps), the conormal spanning, and I_e subset J all fail. The proof survives only via its terse 'as an O_{C_kappa}-module' clause: on the underlying topological space the pullback is an extension of O_C by O_C with class -xi (no eps), the connecting map is cup with -xi over kappa, surjective by perfection of the Serre pairing, so H^1 is 1-dimensional and eps acts by 0 (any square-zero endomorphism of a 1-dimensional kappa-vector space is zero). I verified this reading is forced and is consistent with the independent expectation that coker Phi pulls back along the arc to kappa[eps]/(eps). Outcome: attack fails, but it names the most fragile-looking line of the proof. Runner-up: in Section 3, e^*J=0 must be read as the extended ideal (image of J in O_B) for the non-flat pullback along e; the module tensor J tensor O_B is I_e/I_e^2, nonzero, and confusing the two would falsify 'e^*J=0 iff J subset I_e'; under the standard minors-extend-along-any-ring-map convention for Fitting ideals the step is correct. The remaining advertised attack vectors (stack versus coarse moduli, rational versus integral coefficients, cohomology versus Borel-Moore degree, Poincare duality and Tate twists, Gysin/Kunneth shifts, spectral-sequence differentials, graph invariants versus coinvariants, semisimplification versus actual Hodge isomorphism, predicted motives, pure-Tate upgrades, omitted stable pairs) all miss: the lemma makes no Hodge, Tate, weight, compactification, or stable-pair claims and explicitly disclaims them in theorem_scope.not_covered. It does not resolve the global campaign target W_{-16}H^{BM}_{16}(M_{6,6}), which per the execution contract is not a defect of a confirmed lemma.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be a field of characteristic zero, B a locally Noetherian k-scheme, pi:C->B a smooth proper morphism with geometrically connected genus-g fibres, and x_1,...,x_n:B->C pairwise disjoint sections with n>=1 and Gamma=sum x_i(B). Let 0->W_4->W->W_5->0 be exact on C, with W_4,W_5 invertible, W locally free of rank two, and constant fibre degrees d_4,d_5 satisfying d_4-n>2g-2 and d_5-n=2g-2. Put phi:pi_*W->pi_*(W|Gamma), N=omega_{C/B} tensor W_5^vee(Gamma), P=Pic^0_{C/B}, a_N:B->P, and let e:B->P be the identity. Then Fit_0(coker phi)=a_N^*I_e; hence the intrinsic evaluation-failure scheme is exactly a_N^{-1}(e(B)), formation commutes with arbitrary locally Noetherian base change, the scheme represents relative triviality of N, and the identity descends along smooth atlases to locally Noetherian algebraic stacks. For the ambient comparison, additionally let s:P1_B->B, let p:X=P_{P1_B}(E^vee)->P1_B be a P2-bundle, let gamma:C->P1_B be a finite flat degree-four cover with CE embedding i:C->X, and assume its ideal has the standard degree-four CE resolution 0->O_X(-4) tensor p^*det(F)->O_X(-2) tensor p^*F->I_C->0 for a rank-two relations bundle F. Put q=s composed with p, script-W=O_X(2) tensor p^*F^vee, W=i^*script-W, and assume q_*script-W is finite locally free and commutes with arbitrary base change. If R^1s_*End(F)=0, then the restriction r:q_*script-W->pi_*W is surjective; consequently coker(phi composed with r)=coker(phi) canonically and compatibly with arbitrary base change, and the ambient and intrinsic zeroth Fitting ideals both equal a_N^*I_e. In particular, when (g,n)=(6,6) and every geometric fibre of F is O(4) direct-sum O(5), the canonical filtration induced by the O(5)-subbundle gives d_4=20,d_5=16, the intrinsic map has ranks 26->12, R^1s_*End(F)=0 automatically, and the actual ambient balanced CE evaluation-failure scheme is scheme-theoretically the locus where O_C(Gamma) is relatively isomorphic to W_5 tensor omega_{C/B}^{-1}.",
+  "verdict": "confirmed"
+}

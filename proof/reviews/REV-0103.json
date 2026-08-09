@@ -1,0 +1,120 @@
+{
+  "attempt_id": "ATT-0048",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "META-TARGET",
+      "note": "The attempt_id, campaign metadata, subproblem_id, target dictionary, and theorem_statement agree exactly with TASK.json. The verdict concerns this lemma rather than the global Tate campaign theorem.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "META-PACKET-SHA256",
+      "note": "The supplied packet file has raw SHA-256 d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c, whereas TASK.json and ATT-0048 declare 1e3a1a22512423c7acad51511c72eff81399395835c958486796871a4bc12a28. Thus the reviewed bytes are not authenticated by the declared packet hash.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0048-1",
+      "note": "Fitting ideals commute with base change, and restriction along e gives an invertible cokernel R^1 pi_*omega tensor M_0^{-1}; its zeroth Fitting ideal is zero. This proves J subset I_e without passing from set-theoretic support to scheme structure.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-2",
+      "note": "The strongest substantive mathematical attack was that vertical dual-number calculations might miss nilpotent directions in B. It does not land: J subset I_e removes horizontal terms; every nonzero relative tangent vector pulls J back to (epsilon); this spans the conormal after residue-field reduction; Nakayama first over O_{B,b} and then over O_{P,e(b)} yields I_e=J even for nonreduced B.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-3",
+      "note": "The filtered reduction uses no global splitting. Exactness of the upper pushforward row follows from R^1 pi_*W_4=0, while surjectivity of the W_4 evaluation follows from R^1 pi_*(W_4(-Gamma))=0. The snake lemma then gives coker(phi) isomorphic to coker(phi_5), with all shifts purely sheaf-theoretic.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-4",
+      "note": "The identity W_5(-Gamma)=omega tensor N^{-1}, arbitrary base change for top curve cohomology, invariance of Fit_0 under line-bundle twists, and J=I_e establish equality of the two ideal sheaves rather than merely equality on geometric points.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-5",
+      "note": "The argument is stack-level, not a coarse-moduli assertion. Factoring a_N through the identity section is equivalent, using the marked section and the Poincare description, to N being pulled back from the base. Quasi-coherent Fitting ideals and the scheme-level equality descend along a smooth atlas.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-6",
+      "note": "For fibrewise F(-5)=O(-1) direct-sum O, cohomology and base change make q_*F(-5) invertible. Fibrewise constant-rank evaluation gives a line subbundle L_5 with locally free quotient; dualizing and pulling back produces the asserted canonical filtration.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0048-7",
+      "note": "The arithmetic deductions from deg(W_f)=4g+12-4f are correct, but that degree formula and CE convention are the sole externally sourced input and are load-bearing for T6. Because the supplied packet does not match its declared SHA-256, SRC-0004 cannot be authenticated under the task binding.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "SCOPE-ATTACKS",
+      "note": "The exact theorem makes no rational/integral comparison, Borel-Moore or ordinary-cohomology identification, Poincare-duality or Tate-twist computation, Gysin/Kunneth argument, spectral-sequence degeneration claim, graph-automorphism invariants/coinvariants claim, semisimplification claim, motivic prediction, pure-Tate-to-algebraic upgrade, or stable-pair assertion. Those issues are not silently used and are not omissions from this lemma.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-08",
+  "finding_candidates": [
+    {
+      "adjudication": {
+        "reason": "No packet-visible adjudicated finding records this packet-integrity mismatch; independent corroboration or regeneration is required.",
+        "status": "novel_candidate"
+      },
+      "candidate_key": "packet-raw-sha-mismatch-C66-001-v4",
+      "evidence": "A direct SHA-256 computation on the supplied packet bytes produced d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c; both TASK.json and ATT-0048 record 1e3a1a22512423c7acad51511c72eff81399395835c958486796871a4bc12a28.",
+      "key": "the-supplied-c66-001-v4-md-has-raw-sha-256-d61f334875795956d6abfac671fc0773a052c",
+      "scope": {
+        "attempt_id": "ATT-0048",
+        "campaign_id": "C66-001",
+        "campaign_revision": 4,
+        "packet_id": "C66-001-v4"
+      },
+      "statement": "The supplied C66-001-v4.md has raw SHA-256 d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c rather than the task-declared 1e3a1a22512423c7acad51511c72eff81399395835c958486796871a4bc12a28; attempts relying on packet-only source excerpts therefore require rebinding or independent source verification."
+    }
+  ],
+  "id": "REV-0103",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "1e3a1a22512423c7acad51511c72eff81399395835c958486796871a4bc12a28",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "SRC-0004",
+      "note": "This is used only for T6's CE convention and degree formula. Its mathematical use is internally consistent, but the source excerpt belongs to a supplied packet whose raw hash differs from the hash recorded in TASK.json and ATT-0048.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 3,
+  "review_task_id": "TASK-V-ATT-0048-P3",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "Packet-integrity/provenance attack: the supplied C66-001-v4.md hashes to d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c, not the declared 1e3a1a22512423c7acad51511c72eff81399395835c958486796871a4bc12a28. Since T6 explicitly depends on SRC-0004 for the CE sign convention and degrees d_4=20, d_5=16, that theorem clause has an unauthenticated proof dependency. This makes the exact theorem incomplete rather than refuted. The strongest mathematical attack\u2014failure of fibrewise first-order data to control nilpotents\u2014was checked and defeated by the two-stage Nakayama argument.",
+  "subproblem_id": "C66-GEO-Z",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B be a locally Noetherian scheme (no reducedness, irreducibility or characteristic hypothesis), pi : C -> B smooth proper with geometrically connected fibres of genus g >= 1, and x_1,...,x_n : B -> C pairwise disjoint sections with n >= 1, Gamma := sum_i x_i(B). Let W be locally free of rank 2 on C equipped with a short exact sequence of O_C-modules 0 -> W_4 -> W -> W_5 -> 0 with W_4, W_5 invertible of fibrewise degrees d_4, d_5 satisfying (D1) d_4 - n > 2g - 2 and (D2) d_5 - n = 2g - 2. Let phi : pi_*W -> pi_*(W|_Gamma) be evaluation, Z_ev := V(Fit_0(coker phi)) the Casnati-Ekedahl evaluation-failure locus with its determinantal/Fitting scheme structure, N := omega_{C/B} tensor W_5^vee(Gamma) (invertible of fibrewise degree 0 by (D2)), a_N : B -> Pic^0_{C/B} its classifying morphism and e the identity section. Then: (T1) pi_*W and pi_*(W|_Gamma) are locally free of ranks d_4 + d_5 + 2 - 2g and 2n, so Fit_0(coker phi) = I_{2n}(phi); (T2) on P := Pic^0_{C/B}, with L_univ := omega_{C_P/P}(Gamma_P) tensor Poin^{-1} and Phi : p_*L_univ -> p_*(L_univ|_{Gamma_P}) the universal evaluation, one has the exact equality of ideal sheaves J := Fit_0(coker Phi) = I_e, both inclusions, over every such B; (T3) Fit_0(coker phi) = Fit_0(coker phi_5) with phi_5 : pi_*W_5 -> pi_*(W_5|_Gamma), using only the filtration and never a splitting W = W_4 direct-sum W_5; (T4) Fit_0(coker phi) = a_N^{-1}(I_e).O_B, i.e. Z_ev = a_N^{-1}(e(B)) as closed subschemes of B; (T5) formation of both sides commutes with arbitrary base change, and for every locally Noetherian B-scheme T the map T -> B factors through Z_ev if and only if N|_{C_T} is relatively trivial (isomorphic to pi_T^*M for some invertible M on T), whence the identification descends verbatim to any locally Noetherian algebraic stack carrying this data, via any smooth atlas; and (T6) for (g,n) = (6,6) the balanced tetragonal Casnati-Ekedahl datum satisfies the hypotheses: with gamma : C -> P^1_B finite flat of degree 4, relations bundle F fibrewise O(4) direct-sum O(5), the canonical sub-line-bundle L_5 := O_{P^1}(5) tensor q^*q_*(F(-5)) subset F and its quotient L_4 induce a canonical filtration 0 -> W_4 -> W -> W_5 -> 0 of W := (O_{P(E^vee)}(2) tensor gamma^*F^vee)|_C with d_4 = 20 and d_5 = 16 (SRC-0004 Lemma 10.6 convention W_f = (O(2) tensor gamma^*O(-f))|_C), so that (D1) reads 14 > 10 and (D2) reads 10 = 2g-2, phi has ranks 26 -> 12, and Z_ev = a_N^{-1}(e(B)) with N = omega_{C/B} tensor W_5^vee(Gamma), equivalently Z_ev is the scheme-theoretic locus where O_C(Gamma) is isomorphic to W_5 tensor omega_{C/B}^{-1} relatively to B.",
+  "verdict": "incomplete"
+}
