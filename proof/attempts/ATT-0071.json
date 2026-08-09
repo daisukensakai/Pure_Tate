@@ -1,0 +1,197 @@
+{
+  "argument_markdown": "## Source-backed inputs (dependency C66-GEO-Z)\n\nATT-0065, independently confirmed by REV-0108 and REV-0109, is the sole load-bearing geometric dependency. The following claims are used by explicit artifact ID and are not re-derived here beyond the arithmetic specializations needed for ranks and minors:\n\n- CLM-0065-5: fibrewise O(4)+O(5) supplies a canonical filtration 0->W_4->W->W_5->0 with deg W_4=20 and deg W_5=16 at g=6, without a global splitting of F or of W.\n- CLM-0065-1: under the degree inequalities, pi_*W and pi_*(W|Gamma) are locally free with arbitrary base change, and Fit_0(coker phi)=I_{2n}(phi).\n- CLM-0065-3: with d_4-n>2g-2, the filtered snake lemma gives coker(phi) isomorphic to coker(phi_5) with no global splitting.\n- CLM-0065-2 and CLM-0065-4: Fit_0(coker Phi)=I_e on Pic^0, hence Fit_0(coker phi)=a_N^*I_e scheme-theoretically over possibly nonreduced locally Noetherian bases, with smooth-atlas descent.\n- CLM-0065-7 through CLM-0065-9: ambient comparison only under the explicit CE resolution and q_*script-W freeness/base-change hypotheses; fibrewise balancedness kills R^1 s_* End(F).\n\nPacket findings FND-0097 and FND-0099 corroborate that the filtration (not a global split) and the two degree vanishings deg W_4=20>10, deg W_4(-Gamma)=14>10 are the correct hypotheses for the filtered Fitting reduction. SRC-0004 is used only through ATT-0065 for the CE sign convention and deg(W_f)=4g+12-4f.\n\nPrimary working-context constraints respected throughout: no global split from fibrewise balancedness; no scheme-theoretic ideal equality from geometric points alone (Fitting comparison is routed through ATT-0065); no image dimension from source count 15+2=17; no reduced-support nonemptiness from chi(L)=1; no Proj(pi_*L) identification when h^0 jumps; no lci conclusion from expected-versus-actual codimension; no W_5 isomorphic to omega^2(-D) elevation.\n\n## Proved step 1: ranks and base change\n\n[proved from degree arithmetic + dependency CLM-0065-1/5]\n\nAt g=6 one has deg W_4=20 and deg W_5=16, both strictly larger than 2g-2=10. Fibrewise Serre duality kills H^1(W_f), so R^1 pi_* W_f=0. Riemann-Roch gives ranks h^0(W_4)=20-6+1=15 and h^0(W_5)=16-6+1=11. Because Gamma is the disjoint union of six sections, each pi_*(W_f|_Gamma) is locally free of rank 6. The filtration and exactness of pi_* along 0->W_4->W->W_5->0 (which uses R^1 pi_* W_4=0) give rank(pi_*W)=26 and rank(pi_*(W|_Gamma))=12. Thus phi has ranks 26->12. Local freeness and arbitrary locally Noetherian base change are supplied by CLM-0065-1 together with the degree vanishings. Fit_0(coker phi)=I_12(phi) as the ideal of maximal minors of a map into a free rank-12 sheaf.\n\n## Proved step 2: global maximal-minor identity without splitting\n\n[proved; repairs ATT-0067]\n\nAlso deg W_4(-Gamma)=20-6=14>10, so R^1 pi_* W_4(-Gamma)=0 and phi_4 is surjective (equivalently coker(phi_4)=0). Applying the snake lemma to the two exact evaluation rows for the filtered sequence yields the canonical dependency-backed isomorphism coker(phi) isomorphic to coker(phi_5) (CLM-0065-3; FND-0097/0099). Zeroth Fitting ideals depend only on the cokernel. Since phi and phi_5 are locally free presentations with free targets of ranks 12 and 6,\n\nFit_0(coker phi)=I_12(phi)=Fit_0(coker phi_5)=I_6(phi_5)\n\nas ideal sheaves on all of B. This is a global identity; it does not use a block-diagonal minor factorization and does not require W to split. (ATT-0067 reached I_12=I_6(phi_5) only on splitting opens by a column-selection product, which REV-0112 correctly rejected as a global claim.)\n\nBy CLM-0065-2 and CLM-0065-4 the common ideal equals a_N^*I_e, represents relative triviality of N, commutes with arbitrary locally Noetherian base change, and descends along smooth atlases. This is a pure pass-through of the dual-confirmed nonreduced Fitting/Picard comparison; fibrewise deg-0 triviality alone would be FND-0046-insufficient and is not used as a substitute.\n\n## Proved step 3: submaximal minors I_11(phi)=O_B\n\n[proved; completes the Fitting frontier package]\n\nFix a geometric point b of B. From the evaluation sequence for W_{5,b} and H^1(W_{5,b})=0 one has coker(phi_{5,b}) isomorphic to H^1(C_b,W_{5,b}(-Gamma_b)). Serre duality identifies its dual with H^0(C_b,N_b), where N_b=omega_{C_b} tensor W_{5,b}^vee(Gamma_b) has degree 10-16+6=0. A degree-zero line bundle on a smooth projective connected curve has either no nonzero section or is trivial with a one-dimensional space of sections. Hence dim coker(phi_b)=dim coker(phi_{5,b}) is either 0 or 1, so rank(phi_b) is always at least 11. Every geometric point of B therefore lies in an open on which some 11-by-11 minor is a unit. On a locally Noetherian scheme, an ideal sheaf whose vanishing locus is empty on all geometric points is the unit ideal. Thus I_11(phi)=O_B as ideal sheaves. Equivalently, phi has rank exactly 12 off the failure locus and exactly 11 on it; the degeneracy is pure corank one.\n\n(The same corank bound shows that the expected Porteous codimension of {rk phi_5 <=5} for ranks 11->6 is (11-5)(6-5)=6, matching dim Pic^0=g=6 for the section a_N^{-1}(e). This is recorded as bookkeeping only; no lci, depth, or image claim is drawn from expected-versus-actual comparisons.)\n\n## Proved step 4: geometric rank-drop fibre and dimension formula\n\n[proved]\n\nFor an effective degree-six divisor Delta on a geometric fibre C_b, the same degree-zero calculation gives rank drop of the W_5 evaluation exactly when H^0(omega tensor W_5^vee(Delta)) is nonzero, equivalently when that degree-zero line bundle is trivial, equivalently O(Delta) isomorphic to L_b=W_{5,b} tensor omega^{-1}. Thus the geometric rank-drop set among all effective degree-six divisors is the complete linear system |L_b|. The full Abel-Jacobi fibre is the projective space of nonzero sections of L_b modulo scalars, so its dimension is h^0(L_b)-1. (Relative Abel-Jacobi model: FND-0107; no global Proj(pi_*L) is asserted where h^0 may jump.)\n\n## Proved step 5: unconditional h^0 range and hyperelliptic equality case\n\n[proved; aligns with FND-0073 and FND-0103]\n\nSince deg L_b=16-10=6, Riemann-Roch gives chi(L_b)=1. With M_b=omega^2 tensor W_{5,b}^vee=omega tensor L_b^{-1}, Serre duality gives h^1(L_b)=h^0(M_b), hence h^0(L_b)=1+h^0(M_b)>=1 and deg M_b=4. No identification W_5 isomorphic to omega^2(-D) is used (GAP-Z-W5D avoided).\n\nIf h^0(M_b)=0 then h^0(L_b)=1. If h^0(M_b)>=1 then h^1(M_b)=h^0(L_b)=1+h^0(M_b)>=2, so M_b is special and Clifford's theorem supplies h^0(M_b)-1 <= deg(M_b)/2=2, i.e. h^0(M_b)<=3. Therefore 1<=h^0(L_b)<=4 and dim|L_b| lies in {0,1,2,3}. In particular the stratum h^0(L)=5 is empty.\n\nFor equality h^0(M_b)=3: |M_b| is a g^2_4. It is base-point-free, because a base point would leave a degree-at-most-3 line bundle with three sections, contradicting Clifford. The induced nondegenerate map C_b->P^2 has degree times image degree equal to four. It cannot be birational onto a plane quartic, because the geometric genus of a plane quartic is at most three. The image cannot be a line (which would give h^0<=2). Hence the map is a double cover of a smooth conic, so C_b is hyperelliptic and M_b isomorphic to twice its g^1_2. Conversely, on a hyperelliptic curve one has h^0(2 g^1_2)=3, giving h^0(L_b)=4. Thus h^0(L_b)=4 if and only if C_b is hyperelliptic and M_b isomorphic to 2 g^1_2. Whether such fibres meet the balanced locus, and whether h^0(L)=3 constantly on the balanced locus, remain open.\n\n## Proved step 6: reduced-support scope\n\n[proved caveat; FND-0064, FND-0083]\n\nThe locus of six pairwise-distinct support points is open in |L_b| (complement of the image of the big diagonal). Ordering it is a finite etale S_6-torsor at stack level of pairwise-distinct sections (FND-0064); freeness can fail on coarse moduli and is not claimed there. Therefore the ordered reduced-support fibre is either empty or has dimension h^0(L_b)-1. Riemann-Roch proves nonemptiness only of the full |L_b|; chi(L)=1 does not force a reduced member (e.g. 6p may be the unique effective divisor). This respects the primary and extended constraints against concluding reduced-support/Conf_6 nonemptiness from chi(L)=1 alone.\n\n## Ambient comparison (source-backed, conditional)\n\nUnder the explicit ambient hypotheses of ATT-0065 (standard degree-four CE resolution of I_C and finite local freeness/base-change of q_* script-W), CLM-0065-7 through CLM-0065-9 give that the ambient evaluation has the same cokernel and Fitting ideal as the intrinsic map once R^1 s_* End(F)=0, which fibrewise balancedness supplies. Fibrewise balancedness alone does not discharge the equation-bundle freeness hypothesis (REV-0108 FC-AMBIENT-EQN-BUNDLE-REMAINS-HYP); that hypothesis is retained.\n\n## Computational hypotheses and blocked routes\n\nNo finite experiment or computational hypothesis is used to close any universal claim. SHA-pinned arithmetic (deg W_f, obstruction degrees -4/0, chi(L)=1, deg M=4, expected codimension 6, source count 15+(h^0-1)) motivates bookkeeping only.\n\nNone of the four blocked routes is used: the argument is a fibre-level determinantal/linear-series computation and uses no vcd vanishing, undecorated graph complex, point counts, or forgetful local-system renaming.\n\n## Gaps (explicitly undischarged)\n\nGAP-REDUCED-SUPPORT: nonemptiness of the reduced-support open and ordered Conf_6 incidence on every balanced geometric fibre.\nGAP-H0-CONSTANCY: constancy of h^0(L) (equivalently exclusion of values 1,2 and of hyperelliptic balanced members) on the balanced locus.\nGAP-Z-W5D: no identification W_5 isomorphic to omega^2(-D) or L isomorphic to omega(-D) is asserted.\nGAP-IMAGE: balanced-base dimension, image dimension, numerical codimension, generic finiteness, components, stabilizers, closure, and local lci/Gysin structure in M_{6,6}.\nGAP-AMBIENT-BUNDLE: ambient comparison retains ATT-0065's equation-bundle freeness/base-change hypothesis.\nGAP-RED-0001: no purity, Tate type, vanishing, or resolution of the global target.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "evidence": "ATT-0065 CLM-0065-1 and CLM-0065-5, dual-confirmed by REV-0108 and REV-0109; RR ranks 20-6+1=15 and 16-6+1=11 from deg W_4=20, deg W_5=16.",
+      "id": "CLM-0071-1",
+      "kind": "source_backed",
+      "statement": "The balanced filtered evaluation has locally free ranks 26->12, with graded evaluation ranks 15->6 and 11->6, and the stated arbitrary locally Noetherian base-change compatibility."
+    },
+    {
+      "evidence": "ATT-0065 CLM-0065-3 supplies the filtered snake isomorphism under deg W_4(-Gamma)=14>10; Fitting ideals depend only on the cokernel; free targets of ranks 12 and 6 give the maximal-minor presentations. Repairs ATT-0067's splitting-scoped block-minor product (REV-0112 CLM-RANK-3b failed).",
+      "id": "CLM-0071-2",
+      "kind": "proved",
+      "statement": "Without any global splitting of W, coker(phi) is canonically isomorphic to coker(phi_5), and therefore Fit_0(coker phi)=I_12(phi)=I_6(phi_5) as ideal sheaves on B."
+    },
+    {
+      "evidence": "coker(phi_5) dual to H^0(N_b) for deg-0 N_b, hence dim coker in {0,1}; empty geometric vanishing of I_11 forces the unit ideal on any locally Noetherian B.",
+      "id": "CLM-0071-3",
+      "kind": "proved",
+      "statement": "I_11(phi)=O_B as ideal sheaves: every geometric fibre of phi has rank 12 or 11 and never smaller."
+    },
+    {
+      "evidence": "ATT-0065 CLM-0065-2 and CLM-0065-4, dual-confirmed by REV-0108 and REV-0109. Not re-derived from fibrewise deg-0 triviality (FND-0046 discipline).",
+      "id": "CLM-0071-4",
+      "kind": "source_backed",
+      "statement": "The common maximal-minor ideal equals a_N^*I_e scheme-theoretically, represents relative triviality of N, and has arbitrary locally Noetherian base change and smooth-atlas descent."
+    },
+    {
+      "evidence": "Degree-zero obstruction criterion: H^0(omega tensor W_5^vee(Delta)) nonzero iff O(Delta) isomorphic to L_b; Abel-Jacobi fibre is P^{h^0-1}.",
+      "id": "CLM-0071-5",
+      "kind": "proved",
+      "statement": "On a geometric fibre the rank-drop set among effective degree-six divisors is |L_b| and has dimension h^0(L_b)-1."
+    },
+    {
+      "evidence": "RR+Serre duality for the identity; M always special when h^0(M)>=1 because h^1(M)=h^0(L)>=2; Clifford bound h^0(M)<=3; g^2_4 morphism analysis for equality (base-point-free, non-birational degree-4 map to P^2 is a double cover of a conic). Aligns with FND-0073/FND-0103; uses no GAP-Z-W5D.",
+      "id": "CLM-0071-6",
+      "kind": "proved",
+      "statement": "For M_b=omega^2 tensor W_{5,b}^vee of degree 4, h^0(L_b)=1+h^0(M_b), so 1<=h^0(L_b)<=4 and dim|L_b| in {0,1,2,3}; equality h^0(L_b)=4 holds if and only if C_b is hyperelliptic and M_b isomorphic to 2 g^1_2."
+    },
+    {
+      "evidence": "Finite etale S_6-cover of an open in |L_b| at stack level (FND-0064); FND-0083 nonemptiness limitation; primary/extended constraints against chi(L)=1 implying reduced support.",
+      "id": "CLM-0071-7",
+      "kind": "proved",
+      "statement": "The ordered reduced-support fibre is either empty or has dimension h^0(L_b)-1; its nonemptiness is not implied by chi(L_b)=1."
+    },
+    {
+      "evidence": "ATT-0065 CLM-0065-7 through CLM-0065-9, dual-confirmed by REV-0108 and REV-0109; equation-bundle hypothesis retained.",
+      "id": "CLM-0071-8",
+      "kind": "source_backed",
+      "statement": "Under the explicit ambient CE resolution and equation-bundle freeness/base-change hypotheses of ATT-0065, the ambient and intrinsic evaluation maps have canonically isomorphic cokernels and the same failure scheme."
+    },
+    {
+      "evidence": "Porteous formula and SHA-pinned expected-codim/source-count arithmetic; no image-dimension, purity, stabilizer, lci, or closure conclusion (primary constraints; FND-0068).",
+      "id": "CLM-0071-9",
+      "kind": "computational",
+      "statement": "Expected Porteous codimension of {rk phi_5 <=5} for ranks 11->6 is (11-5)(6-5)=6, matching dim Pic^0=g=6 for the section a_N^{-1}(e); the naive source count 15+(h^0(L)-1)<=18 is recorded as a source dimension only."
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [
+    {
+      "id": "GAP-REDUCED-SUPPORT",
+      "text": "Nonemptiness of the reduced-support open and ordered Conf_6 incidence on every balanced geometric fibre remains open; chi(L)=1 only fills the full |L| in Sym^6."
+    },
+    {
+      "id": "GAP-H0-CONSTANCY",
+      "text": "The theorem bounds h^0(L) in {1,2,3,4} with value 4 only on hyperelliptic fibres, but does not prove constancy of h^0(L) on the balanced locus nor exclude values 1 and 2 there."
+    },
+    {
+      "id": "GAP-Z-W5D",
+      "text": "No identification W_5 isomorphic to omega^2(-D), and hence no rewrite L isomorphic to omega(-D), is asserted."
+    },
+    {
+      "id": "GAP-IMAGE",
+      "text": "Balanced-base dimension, image dimension, numerical codimension, generic finiteness, components, stabilizers, closure, and local lci/Gysin structure in M_{6,6} remain unresolved; source count 15+(h^0-1) is bookkeeping only."
+    },
+    {
+      "id": "GAP-AMBIENT-BUNDLE",
+      "text": "Ambient comparison retains ATT-0065's separate hypothesis that q_*script-W is finite locally free and commutes with base change; fibrewise balancedness alone does not discharge that hypothesis."
+    },
+    {
+      "id": "GAP-RED-0001",
+      "text": "The determinantal lemma does not establish purity, Tate type, vanishing, or the global target RED-0001."
+    }
+  ],
+  "id": "ATT-0071",
+  "lane": "computation",
+  "methods_used": [
+    "filtered-snake-lemma-evaluation-reduction",
+    "cohomology-and-base-change",
+    "Fitting-ideal presentations and base change",
+    "degree-zero line-bundle section criterion",
+    "Riemann-Roch and Serre duality",
+    "Clifford inequality and g^2_4 equality analysis",
+    "Abel-Jacobi fibre geometry",
+    "finite-etale ordered/unordered comparison on the distinct-support stack",
+    "Porteous expected-codimension bookkeeping without image claim"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Independent engine proof of the global identity Fit_0(coker phi)=I_12(phi)=I_6(phi_5) from the dual-confirmed filtered snake lemma, without any global splitting and without ATT-0067's splitting-open block-minor product.",
+    "Scheme-theoretic submaximal-minor identity I_11(phi)=O_B from the exact fibrewise corank bound dim coker in {0,1}, completing the Fitting package Fit_0=I_12=I_6(phi_5) and I_11=O_B under the explicit disjoint-sections and degree-vanishing hypotheses required by the frontier obligation.",
+    "Fibrewise rank-drop dimension formula dim|L|=h^0(L)-1 with unconditional range {0,1,2,3} and a self-contained hyperelliptic characterization of h^0(L)=4, aligned with FND-0103 and free of GAP-Z-W5D."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "proof_dependencies": [
+    {
+      "artifact": "ATT-0065",
+      "claims": [
+        "CLM-0065-1",
+        "CLM-0065-2",
+        "CLM-0065-3",
+        "CLM-0065-4",
+        "CLM-0065-5",
+        "CLM-0065-7",
+        "CLM-0065-8",
+        "CLM-0065-9"
+      ],
+      "reviews": [
+        "REV-0108",
+        "REV-0109"
+      ],
+      "role": "Dual-confirmed C66-GEO-Z dependency: canonical filtered CE bundle and degrees, ranks/base change, filtered coker isomorphism, nonreduced Picard/Fitting identity a_N^*I_e with stack descent, and conditional ambient comparison."
+    },
+    {
+      "artifact": "C66-001-v4",
+      "claims": [
+        "FND-0064",
+        "FND-0083",
+        "FND-0097",
+        "FND-0099",
+        "FND-0103",
+        "FND-0107"
+      ],
+      "reviews": [],
+      "role": "Packet-corroborated finite etale S_6 model, reduced-support nonemptiness limitation, filtration-not-split discipline, degree vanishings for filtered exactness, Clifford h^0 range, and Abel-Jacobi fibre model. SRC-0004 used only via ATT-0065 for CE convention and deg(W_f)."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0064",
+    "FND-0083",
+    "FND-0097",
+    "FND-0099",
+    "FND-0103",
+    "FND-0107"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-COMP-RANK",
+  "summary": "Independent filtered computation of the balanced (6,6) CE rank-drop ideals and fibre dimensions. Dual-confirmed ATT-0065 supplies the canonical filtration, ranks/base change, filtered cokernel isomorphism, and nonreduced Fitting/Picard identity a_N^*I_e. From coker(phi) isomorphic to coker(phi_5) one obtains Fit_0=I_12(phi)=I_6(phi_5) without any global splitting, repairing the splitting-open overclaim of ATT-0067. Fibrewise dual of the residual cokernel to sections of a degree-zero line bundle forces corank at most one, hence I_11(phi)=O_B scheme-theoretically. Geometric rank-drop fibres are complete linear systems |L| of dimension h^0(L)-1 with unconditional range 0 through 3 and hyperelliptic characterization of the top value. No W_5 isomorphic to omega^2(-D), reduced-support nonemptiness, image-codimension, or Tate claim is used.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-008",
+  "theorem_scope": {
+    "base": "locally Noetherian over a characteristic-zero field; no reducedness or irreducibility assumption on B",
+    "divisor_hypothesis": "six pairwise-disjoint sections (so Gamma is finite etale of degree 6); relative Fitting identities are not asserted for an arbitrary unscoped relative degree-six divisor",
+    "g": 6,
+    "generality": "intrinsic statements use the canonical filtered CE bundle, the degree vanishings deg W_4=20>10 and deg W_4(-Gamma)=14>10, and the dual-confirmed ATT-0065 Fitting/Picard theorem; ambient agreement retains the standard degree-four CE resolution and q_*script-W finite-local-free/base-change hypotheses of ATT-0065",
+    "n": 6,
+    "not_covered": "global splitting W isomorphic to W_4 direct-sum W_5; identification W_5 isomorphic to omega^2(-D) or L isomorphic to omega(-D); nonemptiness of the reduced-support or ordered Conf_6 fibre on every balanced fibre; constancy of h^0(L) on the balanced locus; dimension of the balanced Hurwitz base; image dimension, numerical codimension, generic finiteness, components, stabilizers, closure, smoothness, lci/Gysin structure in M_{6,6}; purity, Tate type, or resolution of RED-0001"
+  },
+  "theorem_statement": "Theorem (filtered balanced CE rank-drop ideals and fibre dimensions at (g,n)=(6,6)). Let k be a characteristic-zero field and B a locally Noetherian k-scheme. Let pi:C->B be smooth proper with geometrically connected genus-six fibres, and let Gamma be the union of six pairwise-disjoint sections of pi. Assume balanced tetragonal Casnati-Ekedahl data supply the canonical filtration 0->W_4->W->W_5->0 on C with W_4,W_5 invertible of constant fibre degrees 20 and 16 (no global splitting of W required). Write phi:pi_*W->pi_*(W|_Gamma) and phi_f:pi_*W_f->pi_*(W_f|_Gamma) for the evaluation maps, L:=W_5 tensor omega_{C/B}^{-1}, N:=omega_{C/B} tensor W_5^vee(Gamma), a_N:B->Pic^0_{C/B} the classifying map of N, and e the identity section of Pic^0. Then: (i) pi_*W_4, pi_*W_5, pi_*W, pi_*(W_4|_Gamma), pi_*(W_5|_Gamma), and pi_*(W|_Gamma) are locally free of ranks 15, 11, 26, 6, 6, and 12 respectively, and formation of these sheaves and of phi, phi_f commutes with arbitrary locally Noetherian base change. (ii) Without any global splitting of W one has a canonical isomorphism coker(phi) isomorphic to coker(phi_5), hence Fit_0(coker phi)=I_12(phi)=I_6(phi_5) as ideal sheaves on B. (iii) Moreover I_11(phi)=O_B: every geometric fibre of phi has rank 12 or 11 and never smaller. Combined with the dual-confirmed Fitting/Picard identity of ATT-0065, the common maximal-minor ideal equals a_N^*I_e scheme-theoretically, represents relative triviality of N, and descends along smooth atlases. (iv) Under the additional ambient CE resolution and equation-bundle finite-local-freeness/base-change hypotheses of ATT-0065, the ambient CE evaluation map has the same cokernel and the same failure scheme. (v) On every geometric fibre C_b the geometric rank-drop set among effective degree-six divisors is the complete linear system |L_b|, of dimension h^0(L_b)-1. Writing M_b:=omega_{C_b}^{tensor 2} tensor W_{5,b}^vee one has deg M_b=4 and h^0(L_b)=1+h^0(M_b), so 1<=h^0(L_b)<=4 and dim|L_b| lies in {0,1,2,3}. Equality h^0(L_b)=4 holds if and only if C_b is hyperelliptic and M_b isomorphic to 2 g^1_2. (vi) The ordered reduced-support fibre is an open finite etale S_6-cover (at stack level) of the reduced-support open in |L_b|; it is either empty or of dimension h^0(L_b)-1. Nonemptiness of that open is not implied by chi(L_b)=1."
+}

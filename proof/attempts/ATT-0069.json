@@ -1,0 +1,210 @@
+{
+  "argument_markdown": "## Argument\n\n### 0. Verified dependency inputs\n\nATT-0066, dual-confirmed independently by REV-0110 and REV-0116, supplies the load-bearing geometry used below. CLM-0066-1 and CLM-0066-2 give deg L = 6, \u03c7(L) = 1, h^0(L) \u2208 {3,4} under the weak CE normalization. CLM-0066-3 gives the closed/open dichotomy B_4 / B_3 on the underlying space of B and the containment of B_4 in the hyperelliptic non-primitive locus. CLM-0066-4 and CLM-0066-5 identify I \u00d7_B B_k with the projective bundle P((\u03c0_* L|_{B_k})^\u2228) of relative dimension k\u22121 over the reduced stratum B_k, while the global model across the jump is the closed Abel\u2013Jacobi incidence I rather than Proj(\u03c0_* L). CLM-0066-6 gives the stack-level finite \u00e9tale S_6-torsor tilde I \u2192 I^dist and the scheme-theoretic equality tilde I = Z_ev on Conf_6. Packet findings FND-0052, FND-0058, FND-0060, FND-0069, FND-0083, FND-0086, and FND-0091 record the exact scope limitations of any pure-codimension or exhaustive-component claim; FND-0107 corroborates the Abel\u2013Jacobi model. The reusable computation dim Z_dom = 15+2 = 17, codim = 4 (sha256 9316384d\u2026) is treated only as a candidate numerical fingerprint, not as a theorem.\n\n### 1. Proved step (C1): pure relative source dimensions\n\nBy ATT-0066 (H3), the morphism I_3 \u2192 B_3 is isomorphic to the projectivization of a rank-3 vector bundle, hence is a P^2-bundle: every geometric fibre is irreducible of dimension 2, and the morphism is smooth of pure relative dimension 2. Therefore if Y \u2282 B_3 is an irreducible component of dimension d_Y, every irreducible component of I_3 lying over Y has dimension d_Y + 2. The same argument with rank 4 gives that I_4 \u2192 B_4 is a P^3-bundle of pure relative dimension 3, so components over a base component of dimension d_Z have dimension d_Z + 3. No global identification of I with a single projective bundle over all of B is used (FND-0047 / ATT-0066 exclusion of unqualified Proj).\n\n### 2. Proved step (C2): jump-stratum dimension comparison\n\nFix an irreducible component X of the reduced base of dimension d. Upper semicontinuity from ATT-0066 (H2) makes X_4 = X \u2229 B_4 closed in X. If X_4 is empty then I|_X = I_3|_X has pure dimension d+2 by (C1). If X_4 is nonempty of pure codimension c \u2265 1 in X, then dim X_4 = d \u2212 c, so components of I over X_4 have dimension (d \u2212 c) + 3 = d + 2 + (1 \u2212 c) by (C1). Since c \u2265 1 one has 1 \u2212 c \u2264 0, hence dim(I over X_4) \u2264 dim(I over X_3) = d+2, with equality if and only if c = 1 and strict inequality if c \u2265 2. Therefore the h^0 = 4 jump cannot create a source component of dimension strictly larger than the B_3 incidence over any equidimensional base component that meets B_3. This is a pure dimension comparison of source schemes; it does not address image dimensions in M_{6,6}.\n\n### 3. Proved step (C3): hyperelliptic non-primitive support of jump components\n\nATT-0066 (H2) / CLM-0066-3 places every geometric point of B_4 in the locus of hyperelliptic fibres on which \u03b3 factors through the hyperelliptic double cover. Consequently every irreducible component of I_4 is supported over that locus. Any proposed component of the residual incidence that realises fibre dimension 3 must therefore be hyperelliptic and non-primitive.\n\n### 4. Proved step (C4): numerical test of 15+2=17 / pure codim 4\n\nThe candidate arithmetic (reusable computation, sha256 9316384d\u2026; packet FND-0060 coarse count b\u22123 = 15; FND-0069 dominant 17-dimensional component) asserts source dimension 15+2 = 17 and ambient codimension 21\u221217 = 4. By (C1)\u2013(C2) this arithmetic matches the stratified source geometry precisely when the base component lies in B_3 and has dimension 15. It fails to match whenever the base component meets B_4 in codimension 0 (then fibre dimension is 3) or has dimension other than 15.\n\nMoreover, even when the source dimension is 17, the following steps are not supplied by ATT-0066 or by the present comparison, and are recorded as open by the packet:\n- dim of any component of the balanced base equals 15 (FND-0060: the count b\u22123 is coarse Hurwitz dimension; stack dimension and stabilizers remain open);\n- the classifying map of incidence data to M_{6,6} has finite generic fibre (FND-0098: recovering the pencil from L, stack full faithfulness);\n- the image is pure of codimension 4 (FND-0058, FND-0069: constant fibre dimension 2 and existence of a dominant 17-dimensional component do not give purity or global codimension);\n- no larger component arises from special-curve or unbalanced strata (FND-0086, FND-0091);\n- the reduced-support open is dense on every relevant fibre (FND-0083).\n\nThe working-context constraint that \u2018the parameter count 15+2=17 proves that the rank-drop incidence maps generically finitely onto a pure codimension-4 component\u2019 is therefore engaged and discharged negatively: the count does not determine generic fibre dimension, image dimension, component purity, stabilizers, or closure. The proposed pure-codimension-4 dominant-component decomposition is accordingly a conditional source-dimension formula on B_3-components of dimension 15, not an unconditional theorem from H0.\n\n### 5. Proved step (C5): ordered reduced fibres\n\nBy ATT-0066 (H4) the map tilde I \u2192 I^dist is a finite \u00e9tale S_6-torsor at stack level. Restricting to B_k, the fibre of tilde I_k over a geometric point b \u2208 B_k is a finite \u00e9tale cover of the reduced-support open of |L_b| \u2245 P^{k\u22121}. That open is either empty or dense of dimension k\u22121 in the irreducible projective space |L_b|, so the ordered fibre is either empty or equidimensional of dimension k\u22121. Riemann\u2013Roch \u03c7(L)=1 fills only the full Abel\u2013Jacobi fibre (FND-0083); nonemptiness of the reduced-support open is not claimed.\n\n### 6. Proved step (C6): open versus closed pure-codimension-4 model\n\nThe reduced-support locus in each fibre of I is the complement of the image of the big diagonal under a finite (hence closed) map, therefore open in I. Balancedness is open in the tetragonal locus. The balanced reduced-support piece is consequently an open piece of the failure model, matching FND-0052. A closed pure-codimension-4 subvariety of M_{6,6} cannot be identified with an open piece without a separate closure analysis that produces the missing boundary and special strata (FND-0067, FND-0086, FND-0091). The present test therefore rejects any component decomposition that silently replaces the open balanced reduced-support incidence by a closed pure-codimension-4 cycle in M_{6,6}.\n\n### 7. Separation of status\n\nProved here: stratified pure relative dimensions of I_3 and I_4; the jump-stratum comparison showing that B_4 cannot produce strictly larger source components over base components meeting B_3; hyperelliptic non-primitive support of all jump components; the conditional/refuted status of the 15+2=17 pure-codim-4 proposal as an unconditional theorem from H0; ordered reduced fibre dimensions; openness obstruction to a closed pure-codim-4 model.\n\nSource-backed inputs: ATT-0066 with confirmations REV-0110 and REV-0116 (H1)\u2013(H4); packet FND-0052, FND-0058, FND-0060, FND-0069, FND-0083, FND-0086, FND-0091, FND-0107 for scope and model constraints; reusable computation sha256 9316384d\u2026 as a candidate fingerprint only.\n\nComputational hypotheses: none. No finite experiment is used; the dimension comparisons are scheme-theoretic.\n\nOpen gaps handed forward: dim B and stabilizers (candidate 15); emptiness of B_4; reduced-support nonemptiness; mono/full faithfulness into M_{6,6}; exhaustive special-curve and unbalanced components; local lci/Gysin; all Hodge/Tate and RED-0001.\n\nBlocked routes: none of vcd-only-vanishing, undecorated-cgp-top-weight-graph-complex, point-count-without-degree-parity-separation, or forgetful-map-renaming-local-system-unknown is used.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0069-1",
+      "justification": "ATT-0066 identifies I_k with a P^{k-1}-bundle over the reduced constant-h^0 stratum B_k; pure relative dimension k-1 adds to the dimension of each base component.",
+      "statement": "Under ATT-0066 (H1)\u2013(H3), every irreducible component of the reduced incidence I_3 has dimension equal to dim(its image base component in B_3)+2, and every irreducible component of I_4 has dimension equal to dim(its image base component in B_4)+3.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0069-2",
+      "justification": "Combine CLM-0069-1 with upper semicontinuity of B_4 from ATT-0066 (H2) and the arithmetic (d\u2212c)+3 = (d+2)+(1\u2212c).",
+      "statement": "Over any equidimensional reduced base component X of dimension d that meets B_3, if X_4 = X \u2229 B_4 has pure codimension c \u2265 1 in X then source components over X_4 have dimension d\u2212c+3 \u2264 d+2, with equality iff c=1; the h^0=4 jump never produces a strictly larger source component than the h^0=3 incidence.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0069-3",
+      "justification": "ATT-0066 (H2)/CLM-0066-3 places B_4 inside that locus; components of I_4 map into B_4.",
+      "statement": "Every irreducible component of I_4 is supported over the hyperelliptic non-primitive locus of B.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0069-4",
+      "justification": "Match 15+2 against CLM-0069-1 on B_3; refuse the blocked promotion from source-dimension count to pure codim-4 image (working-context constraint; FND-0058, FND-0060, FND-0069, FND-0086, FND-0098).",
+      "statement": "The candidate arithmetic 15+2=17 and pure ambient codimension 4 is compatible with the stratified source geometry if and only if the relevant base component lies in B_3 and has dimension 15; it is not a proof, from the H0 stratification alone, of base dimension 15, generic finiteness into M_{6,6}, image purity, absence of larger special components, or reduced-support density.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0069-5",
+      "justification": "Finite \u00e9tale S_6-torsor over the reduced-support open of |L_b| \u2245 P^{k\u22121} (ATT-0066 H4); FND-0083 blocks nonemptiness from Riemann\u2013Roch alone.",
+      "statement": "Each geometric fibre of the ordered reduced incidence tilde I_k \u2192 B_k is either empty or equidimensional of dimension k\u22121; nonemptiness is not implied by \u03c7(L)=1.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0069-6",
+      "justification": "Reduced-support is the complement of a closed big-diagonal image; FND-0052 records that the balanced reduced-support piece is an open piece of the failure locus.",
+      "statement": "The balanced reduced-support open of I is open and not closed in I; it cannot be identified with a closed pure-codimension-4 subvariety of M_{6,6} without a separate closure and special-locus analysis.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "Engaged the working-context blocked inference that 15+2=17 proves a pure codimension-4 component: proved compatibility only as a conditional source-dimension formula on B_3-components of dimension 15, and explicitly refused promotion to generic finiteness, image purity, stabilizers, or closure (CLM-0069-4).",
+      "kind": "working_context_constraint",
+      "subject": "parameter-count-15-plus-2-implies-pure-codim-4"
+    },
+    {
+      "disposition": "Used FND-0052 and the open nature of reduced-support to reject identifying the balanced reduced-support incidence with a closed pure-codimension-4 subvariety of M_{6,6} (CLM-0069-6).",
+      "kind": "working_context_constraint",
+      "subject": "open-balanced-piece-as-closed-pure-codim-4-in-M66"
+    }
+  ],
+  "gap_markers": [
+    {
+      "id": "GAP-DIM-B",
+      "text": "Dimension of the balanced tetragonal base B (candidate coarse value 15) and the corresponding stabilizer/automorphism analysis remain open (FND-0060)."
+    },
+    {
+      "id": "GAP-H0-1",
+      "text": "Emptiness of B_4 for balanced covers remains open (ATT-0066 exclusion; FND-0104)."
+    },
+    {
+      "id": "GAP-REDUCED-SUPPORT",
+      "text": "Nonemptiness of the reduced-support open and ordered Conf_6 incidence on every balanced geometric fibre remains open (FND-0083)."
+    },
+    {
+      "id": "GAP-IMAGE",
+      "text": "Generic finiteness, stack full faithfulness, image purity, codimension in M_{6,6}, special-curve and unbalanced components, and local lci/Gysin structure remain open (FND-0069, FND-0086, FND-0091, FND-0098)."
+    },
+    {
+      "id": "GAP-RED-0001",
+      "text": "The component test does not establish purity, Tate type, vanishing, or the global target RED-0001."
+    }
+  ],
+  "id": "ATT-0069",
+  "lane": "computation",
+  "methods_used": [
+    "dual-confirmed-H0-stratification-import",
+    "projective-bundle-relative-dimension-additivity",
+    "upper-semicontinuity-closed-jump-stratum",
+    "source-dimension-comparison-across-h0-strata",
+    "conditional-numerical-fingerprint-test-of-15-plus-2",
+    "stack-level-finite-etale-S6-fibre-dimension",
+    "open-versus-closed-locus-distinction"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Gives an explicit jump-stratum source-dimension comparison: over any equidimensional base component meeting B_3, the h^0=4 incidence has dimension at most that of the h^0=3 incidence, with equality only when B_4 is a divisor in that component.",
+    "Tests the proposed 15+2=17 / pure-codim-4 component decomposition against dual-confirmed H0 geometry and separates the conditional source-dimension formula from the blocked unconditional purity claim.",
+    "Confines every fibre-dimension-3 source component to the hyperelliptic non-primitive locus and records the openness obstruction to treating the balanced reduced-support piece as a closed pure-codim-4 cycle in M_{6,6}."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Dual-confirmed C66-GEO-H0 dependency: supplies (H1)\u2013(H4), CLM-0066-1 through CLM-0066-6 used as the stratified incidence input for the component test."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0066 / CLM-0066-1..6."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0066 / CLM-0066-1..6."
+    },
+    {
+      "id": "FND-0052",
+      "kind": "adjudicated_finding",
+      "role": "Balanced reduced-support relative linear system is an open piece of the failure locus, not a closed pure-codim-4 subvariety of M_{6,6}."
+    },
+    {
+      "id": "FND-0058",
+      "kind": "adjudicated_finding",
+      "role": "Pure dimension 17 and codimension 4 require constant h^0=3 on the whole balanced locus; not established by H0 alone."
+    },
+    {
+      "id": "FND-0060",
+      "kind": "adjudicated_finding",
+      "role": "Count b\u22123=15 is coarse Hurwitz dimension; stack dimension and stabilizers remain open."
+    },
+    {
+      "id": "FND-0069",
+      "kind": "adjudicated_finding",
+      "role": "Existence of a smooth 17-dimensional dominant component does not give purity or global codimension of Z."
+    },
+    {
+      "id": "FND-0083",
+      "kind": "adjudicated_finding",
+      "role": "\u03c7(L)=1 fills only the full Abel\u2013Jacobi fibre, not reduced-support/Conf_6 nonemptiness."
+    },
+    {
+      "id": "FND-0086",
+      "kind": "adjudicated_finding",
+      "role": "Dominant dimension count plus named exceptional loci is not an exhaustive component/stabilizer/closure analysis."
+    },
+    {
+      "id": "FND-0091",
+      "kind": "adjudicated_finding",
+      "role": "Unbalanced tetragonal failure remains outside the balanced model; mono of the balanced piece only embeds an open piece."
+    },
+    {
+      "id": "FND-0107",
+      "kind": "adjudicated_finding",
+      "role": "Abel\u2013Jacobi incidence model of relative effective divisors with O(\u0393) \u2245 L, correct across h^0 jumps."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0052",
+    "FND-0058",
+    "FND-0060",
+    "FND-0069",
+    "FND-0083",
+    "FND-0086",
+    "FND-0091",
+    "FND-0107"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-COMP-COMP",
+  "summary": "Tests the proposed balanced residual component decomposition against the dual-confirmed H0 stratification. Source incidence splits into a P^2-bundle over B_3 and a P^3-bundle over B_4; over any base component that meets B_3 the jump stratum cannot produce a strictly larger source component. The candidate arithmetic 15+2=17 / pure codim 4 survives only as a conditional source-dimension formula on B_3-components of dimension 15 and is refuted as an unconditional pure-component theorem from H0 alone. Jump components are confined to hyperelliptic non-primitive fibres; reduced-support remains an open (not closed) piece.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-009",
+  "theorem_scope": {
+    "base": "locally Noetherian over a characteristic-zero field",
+    "dependency_scope": "ATT-0066 (H1)\u2013(H4) used exactly as dual-confirmed by REV-0110 and REV-0116; no strengthening of emptiness of B_4, reduced-support nonemptiness, or mono into M_{6,6}",
+    "exclusions": "dimension of the balanced base B; stabilizer/automorphism analysis; simple-branching hypothesis for the count b\u22123=15; generic finiteness or full faithfulness of the classifying map into M_{6,6}; purity or codimension of the image in M_{6,6}; emptiness of B_4; reduced-support nonemptiness on every fibre; unbalanced CE components; bielliptic/plane-quintic/trigonal special-curve components of the full evaluation-failure locus; local lci/conormal/Gysin structure; all Hodge/Tate conclusions and RED-0001",
+    "g": 6,
+    "generality": "fibrewise balanced tetragonal CE families as in ATT-0066, with source incidence I stratified by the reduced h^0 strata B_3 and B_4",
+    "n": 6
+  },
+  "theorem_statement": "Theorem (stratified source-component dimension test of the balanced residual incidence). Assume the hypotheses and conclusions (H1)\u2013(H4) of ATT-0066, dual-confirmed by REV-0110 and REV-0116: B is a locally Noetherian scheme over a characteristic-zero field carrying a fibrewise balanced tetragonal Casnati\u2013Ekedahl family of genus-6 curves; L = W_5 \u2297 \u03c9_{C/B}^{-1}; the reduced strata B_3 = {h^0(L)=3} (open) and B_4 = {h^0(L)=4} (closed) exhaust the underlying space of B; B_4 is contained in the hyperelliptic non-primitive locus; I = Hilb^6(C/B) \u00d7_{Pic^6(C/B)} B is the closed Abel\u2013Jacobi incidence; I_k := I \u00d7_B B_k \u2245 P((\u03c0_* L|_{B_k})^\u2228) is a P^{k\u22121}-bundle over the reduced stratum B_k; and on Conf_6 the ordered pullback tilde I equals Z_ev scheme-theoretically. Write I^dist for the distinct-support open of I and tilde I_k for the Conf_6 pullback of I_k. Then: (C1) Pure relative source dimensions. Every irreducible component of the reduced scheme I_3 has dimension equal to dim(of its image base component in B_3) + 2. Every irreducible component of the reduced scheme I_4 has dimension equal to dim(of its image base component in B_4) + 3. (C2) Jump-stratum comparison. Let X be an irreducible component of the reduced base B of dimension d, write X_4 := X \u2229 B_4 with pure codimension c in X if nonempty (and c = +\u221e if X_4 is empty), and write X_3 := X \u2229 B_3. Then every irreducible component of I over X_3 has dimension d+2, while every irreducible component of I over X_4 has dimension d \u2212 c + 3 = (d+2) + (1 \u2212 c) \u2264 d+2 whenever c \u2265 1. Equality of the two source dimensions holds if and only if c = 1; if c \u2265 2 the jump incidence is strictly lower-dimensional than the B_3 incidence; if X_4 = \u2205 only the P^2 case occurs. In particular, over any equidimensional base component that meets B_3, the h^0 = 4 jump stratum never produces a source component of strictly larger dimension than the h^0 = 3 incidence. (C3) Jump components are hyperelliptic non-primitive. Every irreducible component of I_4 is supported over the hyperelliptic non-primitive locus of B. (C4) Numerical test of the proposed 15+2=17 / pure-codimension-4 decomposition. The candidate arithmetic dim B = 15 with fibre dimension 2 giving source dimension 17 and ambient codimension 21\u221217 = 4 in M_{6,6} is compatible with the stratified source geometry of (C1)\u2013(C2) if and only if the relevant base component lies in B_3 (so relative fibre dimension is 2, not 3) and has dimension 15. The same arithmetic is not, by itself, a proof that any component of B has dimension 15, that the classifying map of incidence data to M_{6,6} is generically finite, that the image is pure of codimension 4, that no larger component exists over special-curve or unbalanced loci, or that the reduced-support open is dense on every fibre. Consequently the proposed pure codimension-4 dominant-component decomposition survives only as a conditional source-dimension formula on B_3-components of dimension 15, and is refuted as an unconditional theorem deduced from the H0 stratification alone. The alternative jump arithmetic dim B + 3 is possible only for base components contained in B_4, and emptiness of B_4 remains open. (C5) Ordered reduced fibres. Each geometric fibre of tilde I_k \u2192 B_k is either empty or equidimensional of dimension k\u22121; nonemptiness is not implied by \u03c7(L)=1. (C6) Openness obstruction to a closed pure-codimension-4 model. The balanced reduced-support open of I (equivalently of tilde I after the finite \u00e9tale S_6-torsor of (H4)) is open in I and is not closed. Identifying that open piece with a closed pure-codimension-4 subvariety of M_{6,6} is incompatible with its open nature without a separate closure and special-locus analysis. No claim is made about dim B, stabilizers, stack-level full faithfulness into M_{6,6}, image purity, unbalanced components, lci/Gysin structure, or any Hodge/Tate conclusion."
+}

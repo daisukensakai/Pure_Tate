@@ -1,0 +1,120 @@
+{
+  "id": "TASK-C66-M-008",
+  "phase": "mathematics",
+  "role": "focused-prover-or-counterexample-searcher",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "target_claim_id": "RED-0001",
+  "target": {
+    "g": 6,
+    "n": 6,
+    "dimension": 21,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "open_bm_degree": 16,
+    "open_bm_weight": -16,
+    "open_bm_tate_type": "Q(8)",
+    "ordinary_cohomology_degree": 26,
+    "ordinary_weight": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "poincare_twist": 21,
+    "chow_codimension": 13
+  },
+  "subproblem_id": "C66-COMP-RANK",
+  "lane": "computation",
+  "subproblem": {
+    "id": "C66-COMP-RANK",
+    "lane": "computation",
+    "title": "Compute determinantal rank-drop ideals and fibre dimensions",
+    "dependencies": [
+      "C66-GEO-Z"
+    ],
+    "experiment_id": "EXP-C66-RANK"
+  },
+  "context_revision": 2,
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "input_packet": "proof/packets/generated/C66-001-v4.md",
+  "blocked_routes": [
+    "vcd-only-vanishing",
+    "undecorated-cgp-top-weight-graph-complex",
+    "point-count-without-degree-parity-separation",
+    "forgetful-map-renaming-local-system-unknown"
+  ],
+  "new_input_declared": [],
+  "input_artifacts": [
+    {
+      "kind": "attempt",
+      "id": "ATT-0065",
+      "path": "proof/attempts/ATT-0065.json",
+      "sha256": "c103647a5f6226f42c9f1ed54114a75f5635516ec1b198c9fd97ef2c0794556e"
+    },
+    {
+      "kind": "confirmation_review",
+      "id": "REV-0108",
+      "path": "proof/reviews/REV-0108.json",
+      "sha256": "3fbacb89c59111858f74795d81465b49f74b0c39eb57875170cd2bc98e74c7d0"
+    },
+    {
+      "kind": "confirmation_review",
+      "id": "REV-0109",
+      "path": "proof/reviews/REV-0109.json",
+      "sha256": "1c199bd966378148d9ef07b5c7f1950a23ccd83fc89fc20a61617ca963a7bcbb"
+    },
+    {
+      "path": "proof/packets/generated/paired-working-context/WORKING-a2c1eaf1c8ba0fae.md",
+      "sha256": "a2c1eaf1c8ba0fae8d740efea2c4560f310e38456a6e44fb9540cfbf388839e0"
+    },
+    {
+      "path": "proof/packets/generated/paired-working-context/WORKING-EXT-a9df24c80048ad1e.md",
+      "sha256": "a9df24c80048ad1e5d88ee4efa40fb281168d2be067db2401900e36ffed95696"
+    },
+    {
+      "kind": "attempt",
+      "id": "ATT-0068",
+      "path": "proof/attempts/ATT-0068.json",
+      "sha256": "a8539cbf8a4c70202b3084b2655787ca564e63423549894c910b3cc875db7527"
+    },
+    {
+      "kind": "review",
+      "id": "REV-0115",
+      "path": "proof/reviews/REV-0115.json",
+      "sha256": "8409eaf49b12f0d155e22816cedc580aee58d71867db770324ad0dfe3269a280"
+    },
+    {
+      "kind": "attempt",
+      "id": "ATT-0067",
+      "path": "proof/attempts/ATT-0067.json",
+      "sha256": "f1f4cca92eab76f1b8292bdda7e532cb4be59bf25211622fb96e1da710e1c37d"
+    },
+    {
+      "kind": "review",
+      "id": "REV-0112",
+      "path": "proof/reviews/REV-0112.json",
+      "sha256": "4b9ab160a0d0e909193dfe58515d18df04fb403345cd6d04741601f648086ef7"
+    }
+  ],
+  "dependency_artifacts": {
+    "C66-GEO-Z": "ATT-0065"
+  },
+  "blocked_dependencies": [],
+  "route_policy": "A blocked route may appear in methods_used only when new_inputs contains a matching route and evidence description.",
+  "prompt": "prompts/CAMPAIGN_MATHEMATICS.md",
+  "output": "proof/attempts/ATT-0071.json",
+  "status": "ready",
+  "created_on": "2026-08-09",
+  "working_context": {
+    "primary": {
+      "path": "proof/packets/generated/paired-working-context/WORKING-a2c1eaf1c8ba0fae.md",
+      "sha256": "a2c1eaf1c8ba0fae8d740efea2c4560f310e38456a6e44fb9540cfbf388839e0"
+    },
+    "extended": {
+      "path": "proof/packets/generated/paired-working-context/WORKING-EXT-a9df24c80048ad1e.md",
+      "sha256": "a9df24c80048ad1e5d88ee4efa40fb281168d2be067db2401900e36ffed95696"
+    }
+  },
+  "selected_engine": "grok",
+  "routing_chain_id": "proof:C66-001:TASK-C66-M-008",
+  "notes": "Ordinary-lane targeted step (no forced-proof/standard-fallback). Engines: grok/claude/codex only. Cell C66-COMP-RANK."
+}
