@@ -1,0 +1,103 @@
+{
+  "attempt_id": "ATT-0071",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0071-1",
+      "note": "The degree inequalities give fibrewise H^1-vanishing; Riemann-Roch yields ranks 15 and 11, exact pushforward of the filtration yields rank 26, and restriction to six disjoint sections yields ranks 6, 6, and 12. The cited base-change result applies over locally Noetherian, including nonreduced, bases.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0071-2",
+      "note": "Since deg W_4(-Gamma)=14>2g-2, phi_4 is surjective. The filtered evaluation diagram and snake lemma canonically identify coker(phi) with coker(phi_5), without splitting W. Equality of maximal-minor ideals follows from invariance of Fit_0 under cokernel isomorphism.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0071-3",
+      "note": "On each geometric fibre, the cokernel is dual to H^0(N_b) for a degree-zero line bundle, hence has dimension zero or one. Thus phi has rank 12 or 11. The rank-at-most-10 locus is empty, so the coherent ideal I_11(phi) is the unit ideal even on a nonreduced locally Noetherian base.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0071-4",
+      "note": "The definitions and Tate-free line-bundle twists match ATT-0065 exactly: deg N=0 and W_5(-Gamma)=omega tensor N^{-1}. The scheme-theoretic identity with a_N^*I_e, its relative-triviality interpretation, and smooth-atlas descent are legitimate pass-throughs of the dual-confirmed dependency, not deductions from geometric points alone.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0071-5",
+      "note": "For an effective degree-six divisor Delta, rank drop is equivalent by Serre duality to a section of the degree-zero bundle omega tensor W_5^vee(Delta), hence to O(Delta) isomorphic to L_b. The asserted geometric set is therefore |L_b| and has dimension h^0(L_b)-1.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0071-6",
+      "note": "Riemann-Roch and Serre duality give h^0(L_b)=1+h^0(M_b) with deg M_b=4. Clifford bounds h^0(M_b) by 3. Equality produces a base-point-free g^2_4; the degree factorization of its plane map forces a double cover of a conic, hence hyperellipticity and M_b isomorphic to 2g^1_2. The converse is immediate.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0071-7",
+      "note": "Over the reduced-support open, ordering six distinct points is a finite etale S_6-torsor at stack level. Restriction to the open in |L_b| is empty or has the same dimension as |L_b|. The theorem correctly makes no coarse-moduli freeness claim and does not infer reduced-support nonemptiness from chi(L_b)=1.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0071-8",
+      "note": "The ambient comparison is explicitly conditional on the CE resolution and equation-bundle finite-local-freeness/base-change hypotheses. Balancedness supplies the required End-bundle vanishing but is not used to remove the retained equation-bundle hypothesis.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0071-9",
+      "note": "The expected-codimension calculation is (11-5)(6-5)=6 and is used only as bookkeeping; no lci, image, or degeneration assertion is inferred from it.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-09",
+  "finding_candidates": [],
+  "id": "REV-0122",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "REV-0108 and REV-0109 dual-confirm CLM-0065-1,2,3,4,5,7,8,9. Their hypotheses specialize correctly at (g,n)=(6,6) and support ranks/base change, the filtered cokernel isomorphism, the nonreduced Fitting/Picard identity, descent, and the conditional ambient comparison.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C66-001-v4",
+      "note": "The cited packet findings concerning the nonsplit filtration, degree vanishings, Abel-Jacobi fibre, Clifford range, stack-level S_6-cover, and reduced-support caveat were independently checked in the proof argument or are standard geometric facts. They are not substituted for ATT-0065's scheme-theoretic Fitting result.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0071-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is against the inherited nonreduced identity Fit_0(coker phi)=a_N^*I_e: it depends on ATT-0065's delicate dual-number analysis of the Poincare pullback rather than a new proof in ATT-0071. The attack does not defeat this theorem because that dependency is dual-confirmed, its degree and twist hypotheses match exactly, and ATT-0071 makes no invalid upgrade from fibrewise points to a scheme-theoretic equality.",
+  "subproblem_id": "C66-COMP-RANK",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Theorem (filtered balanced CE rank-drop ideals and fibre dimensions at (g,n)=(6,6)). Let k be a characteristic-zero field and B a locally Noetherian k-scheme. Let pi:C->B be smooth proper with geometrically connected genus-six fibres, and let Gamma be the union of six pairwise-disjoint sections of pi. Assume balanced tetragonal Casnati-Ekedahl data supply the canonical filtration 0->W_4->W->W_5->0 on C with W_4,W_5 invertible of constant fibre degrees 20 and 16 (no global splitting of W required). Write phi:pi_*W->pi_*(W|_Gamma) and phi_f:pi_*W_f->pi_*(W_f|_Gamma) for the evaluation maps, L:=W_5 tensor omega_{C/B}^{-1}, N:=omega_{C/B} tensor W_5^vee(Gamma), a_N:B->Pic^0_{C/B} the classifying map of N, and e the identity section of Pic^0. Then: (i) pi_*W_4, pi_*W_5, pi_*W, pi_*(W_4|_Gamma), pi_*(W_5|_Gamma), and pi_*(W|_Gamma) are locally free of ranks 15, 11, 26, 6, 6, and 12 respectively, and formation of these sheaves and of phi, phi_f commutes with arbitrary locally Noetherian base change. (ii) Without any global splitting of W one has a canonical isomorphism coker(phi) isomorphic to coker(phi_5), hence Fit_0(coker phi)=I_12(phi)=I_6(phi_5) as ideal sheaves on B. (iii) Moreover I_11(phi)=O_B: every geometric fibre of phi has rank 12 or 11 and never smaller. Combined with the dual-confirmed Fitting/Picard identity of ATT-0065, the common maximal-minor ideal equals a_N^*I_e scheme-theoretically, represents relative triviality of N, and descends along smooth atlases. (iv) Under the additional ambient CE resolution and equation-bundle finite-local-freeness/base-change hypotheses of ATT-0065, the ambient CE evaluation map has the same cokernel and the same failure scheme. (v) On every geometric fibre C_b the geometric rank-drop set among effective degree-six divisors is the complete linear system |L_b|, of dimension h^0(L_b)-1. Writing M_b:=omega_{C_b}^{tensor 2} tensor W_{5,b}^vee one has deg M_b=4 and h^0(L_b)=1+h^0(M_b), so 1<=h^0(L_b)<=4 and dim|L_b| lies in {0,1,2,3}. Equality h^0(L_b)=4 holds if and only if C_b is hyperelliptic and M_b isomorphic to 2 g^1_2. (vi) The ordered reduced-support fibre is an open finite etale S_6-cover (at stack level) of the reduced-support open in |L_b|; it is either empty or of dimension h^0(L_b)-1. Nonemptiness of that open is not implied by chi(L_b)=1.",
+  "verdict": "confirmed"
+}

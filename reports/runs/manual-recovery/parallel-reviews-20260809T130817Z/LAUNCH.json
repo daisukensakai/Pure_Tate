@@ -1,0 +1,57 @@
+{
+  "launches": [
+    {
+      "task_id": "TASK-V-ATT-0069-P1",
+      "attempt_id": "ATT-0069",
+      "subproblem_id": "C66-COMP-COMP",
+      "review_pass": 1,
+      "engine": "codex",
+      "rev_id": "REV-0118",
+      "reservation": "reports/runs/reservations/REV-0118.json",
+      "manifest": "reports/runs/manual-recovery/parallel-reviews-20260809T130817Z/manifest-REV-0118.json",
+      "output": "proof/reviews/REV-0118.json"
+    },
+    {
+      "task_id": "TASK-V-ATT-0070-P1",
+      "attempt_id": "ATT-0070",
+      "subproblem_id": "C66-GEO-COMP",
+      "review_pass": 1,
+      "engine": "grok",
+      "rev_id": "REV-0119",
+      "reservation": "reports/runs/reservations/REV-0119.json",
+      "manifest": "reports/runs/manual-recovery/parallel-reviews-20260809T130817Z/manifest-REV-0119.json",
+      "output": "proof/reviews/REV-0119.json"
+    },
+    {
+      "task_id": "TASK-V-ATT-0071-P1",
+      "attempt_id": "ATT-0071",
+      "subproblem_id": "C66-COMP-RANK",
+      "review_pass": 1,
+      "engine": "qwen",
+      "rev_id": "REV-0120",
+      "reservation": "reports/runs/reservations/REV-0120.json",
+      "manifest": "reports/runs/manual-recovery/parallel-reviews-20260809T130817Z/manifest-REV-0120.json",
+      "output": "proof/reviews/REV-0120.json"
+    }
+  ],
+  "retries": [
+    {
+      "task_id": "TASK-V-ATT-0071-P1",
+      "attempt_id": "ATT-0071",
+      "subproblem_id": "C66-COMP-RANK",
+      "engine": "codex",
+      "rev_id": "REV-0122",
+      "reservation": "reports/runs/reservations/REV-0122.json",
+      "manifest": "reports/runs/manual-recovery/parallel-reviews-20260809T130817Z/manifest-REV-0122.json",
+      "output": "proof/reviews/REV-0122.json",
+      "note": "retry after qwen 429; claude excluded"
+    }
+  ],
+  "failures": [
+    {
+      "rev_id": "REV-0120",
+      "engine": "qwen",
+      "error": "HTTP 429 weekly quota"
+    }
+  ]
+}

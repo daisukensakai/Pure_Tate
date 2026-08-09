@@ -566,7 +566,10 @@ def command_campaign_context(args: argparse.Namespace) -> int:
     from .paired import merge_working_context
 
     try:
-        merged = merge_working_context(load_campaign(args.campaign))
+        merged = merge_working_context(
+            load_campaign(args.campaign),
+            getattr(args, "subproblem", None),
+        )
     except (OSError, ValueError, DataError) as exc:
         print("ERROR:", exc)
         return 1
@@ -941,6 +944,10 @@ def build_parser() -> argparse.ArgumentParser:
     campaign_context_parser = subparsers.add_parser("campaign-context")
     campaign_context_parser.add_argument(
         "--campaign", default=DEFAULT_CAMPAIGN
+    )
+    campaign_context_parser.add_argument(
+        "--subproblem",
+        help="scope working context to this subproblem id",
     )
     campaign_context_parser.add_argument(
         "--tier",

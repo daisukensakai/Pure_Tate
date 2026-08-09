@@ -335,6 +335,11 @@ def build_isolated_context(task: Dict[str, Any], destination: Path) -> List[str]
         for artifact_input in task.get("input_artifacts", []) or []:
             if isinstance(artifact_input, dict):
                 take(str(artifact_input.get("path", "")))
+        _link_repo_root(destination)
+        copied.append("repo")
+        index_path = _write_context_index(task, destination)
+        if index_path:
+            copied.append(index_path)
     elif phase == "review":
         take(str(task.get("input_attempt", "")))
         take(str(task.get("input_packet", "")))
@@ -346,6 +351,8 @@ def build_isolated_context(task: Dict[str, Any], destination: Path) -> List[str]
         for artifact_input in task.get("input_artifacts", []) or []:
             if isinstance(artifact_input, dict):
                 take(str(artifact_input.get("path", "")))
+        _link_repo_root(destination)
+        copied.append("repo")
     elif phase == "trace-mining":
         take(str(task.get("input_packet", "")))
         take(str(task.get("input_trace", "")))
@@ -370,6 +377,67 @@ def build_isolated_context(task: Dict[str, Any], destination: Path) -> List[str]
     )
     copied.append("TASK.json")
     return copied
+
+
+def _link_repo_root(destination: Path) -> None:
+    """Expose the full repository read-only via ``repo/`` for on-demand search."""
+    link = destination / "repo"
+    if link.exists() or link.is_symlink():
+        return
+    try:
+        os.symlink(ROOT, link, target_is_directory=True)
+    except OSError:
+        # Some sandboxes disallow symlinks; leave curated copies only.
+        return
+
+
+def _write_context_index(task: Dict[str, Any], destination: Path) -> Optional[str]:
+    """Write a short discovery aid for optional overflow / repo search."""
+    lines = [
+        "# Context index",
+        "",
+        "Required: read the primary working-context file end-to-end before drafting.",
+        "Optional: extended and archive working-context files, then search under `repo/`.",
+        "",
+        "## Injected working context",
+    ]
+    for artifact in task.get("input_artifacts") or []:
+        if not isinstance(artifact, dict):
+            continue
+        path = artifact.get("path")
+        if not isinstance(path, str) or "paired-working-context" not in path.replace(
+            "\\", "/"
+        ):
+            continue
+        name = Path(path).name
+        if name.startswith("WORKING-ARCHIVE-"):
+            label = "archive (optional)"
+        elif name.startswith("WORKING-EXT-"):
+            label = "extended (optional)"
+        elif name.startswith("WORKING-"):
+            label = "primary (required)"
+        else:
+            label = "working-context"
+        lines.append("- %s: %s" % (label, path))
+    lines.extend(
+        [
+            "",
+            "## Suggested repo search roots",
+            "- `repo/proof/attempts`",
+            "- `repo/proof/reviews`",
+            "- `repo/research/paired-digests`",
+            "- `repo/experiments/results`",
+            "- `repo/corpus`",
+            "",
+            "Material found under `repo/` is not proved unless it is a verified "
+            "dependency artifact listed in TASK.json or an established working-context "
+            "fact.",
+            "",
+        ]
+    )
+    relative = "CONTEXT-INDEX.md"
+    (destination / relative).write_text("\n".join(lines), encoding="utf-8")
+    return relative
 
 
 def _model_visible_task(task: Dict[str, Any]) -> Dict[str, Any]:
@@ -399,9 +467,11 @@ def assemble_prompt(
         "",
         "# Execution contract",
         "",
-        "You are in an isolated, read-only task workspace. Read TASK.json and only "
-        "the supplied files listed below. Do not infer the contents of files that "
-        "are absent.",
+        "You are in an isolated, read-only task workspace. Read TASK.json and the "
+        "curated files listed below. A `repo/` symlink (when present) exposes the "
+        "full project for optional on-demand search; do not treat searched material "
+        "as proved unless it is a verified dependency artifact or an established "
+        "working-context fact.",
         "",
         "\n".join("- " + item for item in context_files),
         "",
@@ -490,18 +560,21 @@ def assemble_prompt(
             "read the primary mathematical working-context file end-to-end via "
             "your read tool: %s. Use its frontier obligations and mathematical "
             "constraints to avoid repeating dead routes; treat candidates as "
-            "unproved. Prefer primary; the extended working-context file (if "
-            "supplied) is overflow only, but constraints there still bind. Do "
+            "unproved. Prefer primary; extended and archive working-context files "
+            "(if supplied) are optional overflow, but constraints in any of them "
+            "still bind if you rely on them. You may also search under `repo/` "
+            "and CONTEXT-INDEX.md for additional project material on demand. Do "
             "not claim progress that merely restates a primary constraint."
             % primary_wc
         )
     elif task.get("paired_turn_kind") == "standard-fallback":
         parts.append(
             "The supplied mathematical working-context files are ordinary "
-            "context. Prefer the primary file; the extended file is overflow. "
-            "Mathematical constraints in either file still apply and must not "
-            "be repeated. Candidate ideas are unproved and must be established "
-            "independently before use."
+            "context. Prefer the primary file; extended and archive files are "
+            "overflow. Mathematical constraints in any supplied working-context "
+            "file still apply and must not be repeated. Candidate ideas are "
+            "unproved and must be established independently before use. Optional "
+            "deeper search under `repo/` is allowed."
         )
     parts.extend(["", "Phase: " + str(phase)])
     return "\n".join(parts)

@@ -3,7 +3,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Set
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Set, Tuple
 
 from .artifacts import load_artifacts
 from .store import PACKETS_GENERATED, ROOT, atomic_write_json, atomic_write_text
@@ -13,10 +13,16 @@ POLICY_REVISION = 2
 LEDGER_PATH = ROOT / "proof" / "paired-turns.json"
 TRACE_DIR = ROOT / "research" / "paired-traces"
 DIGEST_DIR = ROOT / "research" / "paired-digests"
+DIGEST_ATTRIBUTION_PATH = DIGEST_DIR / "source-attribution.json"
 WORKING_CONTEXT_DIR = PACKETS_GENERATED / "paired-working-context"
 RECOVERY_LEDGER_PATH = ROOT / "proof" / "paired-recoveries.json"
 FORCED_PROMPT = "prompts/FORCED_FULL_PROOF.md"
 MINER_PROMPT = "prompts/TRACE_MINER.md"
+FULL_SUBPROBLEM_ID = "C66-FULL"
+FULL_LANE = "full-resolution"
+# Lexical overlap for promoting campaign/sibling rows into a cell primary pack.
+CELL_LEXICAL_MIN_SHARED = 3
+CELL_LEXICAL_MIN_SHARE = 0.22
 
 INTERNAL_TASK_FIELDS = {
     "paired_attempt_policy_revision",
@@ -924,6 +930,307 @@ def validate_digest(task: Dict[str, Any], artifact: Dict[str, Any]) -> None:
         for row in artifact["reusable_computations"]
     ):
         raise ValueError("reusable digest computations require SHA-256")
+    # Stamp recoverable source-cell attribution before the digest is hashed
+    # into the paired ledger.
+    stamp_digest_attribution_from_task(artifact, task)
+
+
+def load_digest_attribution_sidecar() -> Dict[str, Any]:
+    if not DIGEST_ATTRIBUTION_PATH.is_file():
+        return {"schema_version": 1, "digests": {}}
+    try:
+        value = json.loads(DIGEST_ATTRIBUTION_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"schema_version": 1, "digests": {}}
+    if not isinstance(value, dict):
+        return {"schema_version": 1, "digests": {}}
+    digests = value.get("digests")
+    if not isinstance(digests, dict):
+        digests = {}
+    return {"schema_version": 1, "digests": digests}
+
+
+def save_digest_attribution_sidecar(payload: Dict[str, Any]) -> None:
+    digests = payload.get("digests") if isinstance(payload, dict) else {}
+    if not isinstance(digests, dict):
+        digests = {}
+    atomic_write_json(
+        DIGEST_ATTRIBUTION_PATH,
+        {"schema_version": 1, "digests": digests},
+    )
+
+
+def math_task_subproblem_map(campaign: Dict[str, Any]) -> Dict[str, Dict[str, str]]:
+    """Map stable ``TASK-C66-M-NNN`` ids onto campaign subproblem identity."""
+    mapping: Dict[str, Dict[str, str]] = {}
+    for ordinal, subproblem in enumerate(campaign.get("subproblems") or [], 1):
+        if not isinstance(subproblem, dict):
+            continue
+        subproblem_id = subproblem.get("id")
+        lane = subproblem.get("lane")
+        if not isinstance(subproblem_id, str) or not subproblem_id:
+            continue
+        mapping["TASK-C66-M-%03d" % ordinal] = {
+            "subproblem_id": subproblem_id,
+            "lane": str(lane or ""),
+        }
+    return mapping
+
+
+def ancestor_subproblem_ids(
+    campaign: Dict[str, Any], subproblem_id: str
+) -> Set[str]:
+    """Return ``subproblem_id`` plus every transitive dependency."""
+    by_id = {
+        item["id"]: item
+        for item in campaign.get("subproblems") or []
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+    if subproblem_id not in by_id and subproblem_id != FULL_SUBPROBLEM_ID:
+        return {subproblem_id}
+    found: Set[str] = set()
+    stack = [subproblem_id]
+    while stack:
+        current = stack.pop()
+        if current in found:
+            continue
+        found.add(current)
+        node = by_id.get(current) or {}
+        for dependency in node.get("dependencies") or []:
+            if isinstance(dependency, str) and dependency:
+                stack.append(dependency)
+    return found
+
+
+def _attribution_from_trace(
+    trace: Dict[str, Any],
+    campaign: Dict[str, Any],
+    *,
+    source_turn: Optional[str] = None,
+) -> Dict[str, Any]:
+    task_map = math_task_subproblem_map(campaign)
+    task_id = trace.get("task_id")
+    turn_kind = source_turn or trace.get("turn_kind")
+    parsed = trace.get("parsed_artifact")
+    subproblem_id = None
+    lane = None
+    confidence = "unrecovered"
+    if isinstance(parsed, dict):
+        if isinstance(parsed.get("subproblem_id"), str) and parsed["subproblem_id"]:
+            subproblem_id = parsed["subproblem_id"]
+            lane = parsed.get("lane") if isinstance(parsed.get("lane"), str) else None
+            confidence = "artifact"
+    if subproblem_id is None and isinstance(task_id, str):
+        if "FORCED-FULL" in task_id or task_id.endswith("-FORCED-FULL"):
+            subproblem_id = FULL_SUBPROBLEM_ID
+            lane = FULL_LANE
+            confidence = "forced_task"
+        else:
+            mapped = task_map.get(task_id)
+            if mapped:
+                subproblem_id = mapped["subproblem_id"]
+                lane = mapped["lane"]
+                confidence = "task_id"
+    if subproblem_id is None and turn_kind in {
+        "forced-proof",
+        "infrastructure-forced-proof",
+    }:
+        subproblem_id = FULL_SUBPROBLEM_ID
+        lane = FULL_LANE
+        confidence = "forced_turn"
+    if subproblem_id == FULL_SUBPROBLEM_ID and not lane:
+        lane = FULL_LANE
+    if subproblem_id and not lane:
+        for item in campaign.get("subproblems") or []:
+            if isinstance(item, dict) and item.get("id") == subproblem_id:
+                lane = str(item.get("lane") or "")
+                break
+    return {
+        "source_subproblem_id": subproblem_id,
+        "source_lane": lane,
+        "source_turn": turn_kind,
+        "source_trace_id": trace.get("id"),
+        "source_task_id": task_id,
+        "confidence": confidence if subproblem_id else "unrecovered",
+    }
+
+
+def _apply_attribution_fields(
+    digest: Dict[str, Any], attr: Dict[str, Any]
+) -> None:
+    if not attr.get("source_subproblem_id"):
+        return
+    digest["source_subproblem_id"] = attr["source_subproblem_id"]
+    if attr.get("source_lane"):
+        digest["source_lane"] = attr["source_lane"]
+    if attr.get("source_turn"):
+        digest["source_turn"] = attr["source_turn"]
+    if attr.get("source_trace_id"):
+        digest["source_trace_id"] = attr["source_trace_id"]
+    if attr.get("source_task_id"):
+        digest["source_task_id"] = attr["source_task_id"]
+    digest["source_attribution_confidence"] = attr.get("confidence")
+
+
+def _persist_attribution_sidecar(
+    digest_id: str, attr: Dict[str, Any]
+) -> None:
+    if not attr.get("source_subproblem_id"):
+        return
+    payload = load_digest_attribution_sidecar()
+    record = {
+        "source_subproblem_id": attr["source_subproblem_id"],
+        "source_lane": attr.get("source_lane"),
+        "source_turn": attr.get("source_turn"),
+        "source_trace_id": attr.get("source_trace_id"),
+        "source_task_id": attr.get("source_task_id"),
+        "confidence": attr.get("confidence"),
+    }
+    if payload["digests"].get(digest_id) != record:
+        payload["digests"][digest_id] = record
+        save_digest_attribution_sidecar(payload)
+
+
+def digest_source_attribution(
+    digest: Dict[str, Any],
+    campaign: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """Recover the source cell for a digest when the provenance chain exists.
+
+    Prefer fields already stamped on the digest, then the attribution sidecar,
+    then ledger ``digest_id → trace_id`` recovery. Unrecoverable digests keep
+    null source fields and are treated as campaign-scoped at merge time.
+    """
+    digest_id = digest.get("id")
+    if isinstance(digest.get("source_subproblem_id"), str) and digest[
+        "source_subproblem_id"
+    ]:
+        return {
+            "source_subproblem_id": digest.get("source_subproblem_id"),
+            "source_lane": digest.get("source_lane"),
+            "source_turn": digest.get("source_turn"),
+            "source_trace_id": digest.get("source_trace_id"),
+            "source_task_id": digest.get("source_task_id"),
+            "confidence": digest.get("source_attribution_confidence")
+            or "stamped",
+        }
+
+    if isinstance(digest_id, str) and digest_id:
+        sidecar = load_digest_attribution_sidecar()["digests"].get(digest_id)
+        if isinstance(sidecar, dict) and isinstance(
+            sidecar.get("source_subproblem_id"), str
+        ) and sidecar["source_subproblem_id"]:
+            return {
+                "source_subproblem_id": sidecar.get("source_subproblem_id"),
+                "source_lane": sidecar.get("source_lane"),
+                "source_turn": sidecar.get("source_turn"),
+                "source_trace_id": sidecar.get("source_trace_id"),
+                "source_task_id": sidecar.get("source_task_id"),
+                "confidence": sidecar.get("confidence") or "sidecar",
+            }
+
+    campaign_id = digest.get("campaign_id")
+    if campaign is None and isinstance(campaign_id, str) and campaign_id:
+        from .campaigns import load_campaign
+
+        try:
+            campaign = load_campaign(campaign_id)
+        except (OSError, ValueError):
+            campaign = None
+    empty = {
+        "source_subproblem_id": None,
+        "source_lane": None,
+        "source_turn": None,
+        "source_trace_id": None,
+        "source_task_id": None,
+        "confidence": "unrecovered",
+    }
+    if not isinstance(campaign, dict):
+        return empty
+
+    trace_id = None
+    source_turn = None
+    if isinstance(digest_id, str) and digest_id:
+        for event in load_ledger().get("events") or []:
+            if event.get("digest_id") == digest_id and isinstance(
+                event.get("trace_id"), str
+            ):
+                trace_id = event["trace_id"]
+                source_turn = event.get("source_turn")
+                break
+    if not isinstance(trace_id, str) or not trace_id:
+        return empty
+    try:
+        trace = _trace_record(trace_id)
+    except ValueError:
+        return {
+            **empty,
+            "source_trace_id": trace_id,
+            "source_turn": source_turn,
+        }
+    return _attribution_from_trace(
+        trace, campaign, source_turn=source_turn
+    )
+
+
+def stamp_digest_attribution_from_task(
+    digest: Dict[str, Any], task: Dict[str, Any]
+) -> Dict[str, Any]:
+    """Attribute a newly mined digest from its mining task's source trace."""
+    from .campaigns import load_campaign
+
+    campaign = load_campaign(str(task["campaign_id"]))
+    trace_id = task.get("paired_trace_id")
+    if not isinstance(trace_id, str) or not trace_id:
+        return digest_source_attribution(digest, campaign)
+    try:
+        trace = _trace_record(trace_id)
+    except ValueError:
+        return digest_source_attribution(digest, campaign)
+    attr = _attribution_from_trace(
+        trace, campaign, source_turn=task.get("source_turn")
+    )
+    _apply_attribution_fields(digest, attr)
+    if isinstance(digest.get("id"), str):
+        _persist_attribution_sidecar(digest["id"], attr)
+    return attr
+
+
+def ensure_digest_attribution(
+    digest: Dict[str, Any],
+    campaign: Optional[Dict[str, Any]] = None,
+    *,
+    persist_sidecar: bool = True,
+) -> Dict[str, Any]:
+    """Resolve attribution for ``digest`` without rewriting ledger-hashed files."""
+    attr = digest_source_attribution(digest, campaign)
+    _apply_attribution_fields(digest, attr)
+    if persist_sidecar and isinstance(digest.get("id"), str):
+        _persist_attribution_sidecar(digest["id"], attr)
+    return attr
+
+
+def backfill_digest_attributions(
+    campaign: Dict[str, Any],
+) -> Dict[str, Any]:
+    """Recover and sidecar-stamp every campaign digest that can be attributed."""
+    recovered = 0
+    unresolved = 0
+    for path in sorted(DIGEST_DIR.glob("DIGEST-*.json")):
+        try:
+            digest = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if digest.get("campaign_id") != campaign.get("id"):
+            continue
+        attr = ensure_digest_attribution(
+            digest, campaign, persist_sidecar=True
+        )
+        if attr.get("source_subproblem_id"):
+            recovered += 1
+        else:
+            unresolved += 1
+    return {"recovered": recovered, "unresolved": unresolved}
 
 
 def _safe_math_rows(
@@ -1056,9 +1363,11 @@ def _rank_tuple(
     fresh: bool,
     reinforced: bool,
     ordinal: int,
+    cell_relevance: int = 0,
 ) -> tuple:
     return (
         CATEGORY_RANK[rank_key],
+        int(cell_relevance),
         1 if packet_redundant else 0,
         0 if fresh else 1,
         0 if reinforced else 1,
@@ -1068,6 +1377,76 @@ def _rank_tuple(
 
 def _packet_tokens(text: str) -> Set[str]:
     return set(re.findall(r"[a-z0-9]{3,}", text.lower()))
+
+
+def _cell_focus_tokens(
+    campaign: Dict[str, Any], subproblem_id: str
+) -> Set[str]:
+    """Tokens used to score campaign/sibling rows against a focus cell."""
+    parts: List[str] = [subproblem_id, subproblem_id.replace("-", " ")]
+    by_id = {
+        item["id"]: item
+        for item in campaign.get("subproblems") or []
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+    for ancestor_id in ancestor_subproblem_ids(campaign, subproblem_id):
+        node = by_id.get(ancestor_id) or {}
+        for key in ("id", "title", "lane"):
+            value = node.get(key)
+            if isinstance(value, str) and value:
+                parts.append(value)
+    bottleneck = campaign.get("bottleneck")
+    if isinstance(bottleneck, dict):
+        for key in ("splitting", "ce_line_bundle", "failure_locus", "program"):
+            value = bottleneck.get(key)
+            if isinstance(value, str) and value:
+                parts.append(value)
+            elif isinstance(value, list):
+                parts.extend(str(item) for item in value if item)
+    return _packet_tokens(" ".join(parts))
+
+
+def _lexical_cell_hit(statement: str, focus_tokens: Set[str]) -> bool:
+    if not focus_tokens:
+        return False
+    tokens = set(re.findall(r"[a-z0-9]{3,}", statement.lower()))
+    if len(tokens) < 4:
+        return False
+    shared = tokens & focus_tokens
+    if len(shared) >= CELL_LEXICAL_MIN_SHARED:
+        return True
+    return (len(shared) / float(len(tokens))) >= CELL_LEXICAL_MIN_SHARE
+
+
+def _cell_relevance_for_row(
+    row: Dict[str, Any],
+    *,
+    focus_id: Optional[str],
+    ancestor_ids: Set[str],
+    focus_tokens: Set[str],
+) -> Tuple[int, bool]:
+    """Return ``(cell_relevance, primary_eligible)`` for a focus cell.
+
+    Lower ``cell_relevance`` ranks earlier. Sibling rows without a lexical hit
+    stay out of the primary pack (``primary_eligible=False``) but remain in
+    overflow tiers.
+    """
+    if not focus_id:
+        return 0, True
+    if row.get("section") == "invalid":
+        return 0, True
+    if row.get("rank_key") in ("computation", "established_mechanical"):
+        return 0, True
+    source = row.get("source_subproblem_id")
+    if isinstance(source, str) and source in ancestor_ids:
+        return 0, True
+    lexical = _lexical_cell_hit(str(row.get("statement") or ""), focus_tokens)
+    if not isinstance(source, str) or not source or source == FULL_SUBPROBLEM_ID:
+        return (1 if lexical else 2), True
+    # Sibling / other branch.
+    if lexical:
+        return 1, True
+    return 3, False
 
 
 def _is_packet_redundant(statement: str, packet_lower: str, packet_tokens: Set[str]) -> bool:
@@ -1110,6 +1489,8 @@ def _digest_rows(
     sha-pinned computations are arithmetic and survive unchanged, and a refuted
     step stays refuted because its reason is self-contained.
     """
+    source_subproblem_id = digest.get("source_subproblem_id")
+    source_lane = digest.get("source_lane")
     rows: List[Dict[str, Any]] = []
     plan = [
         ("established", digest.get("established_facts") or []),
@@ -1172,16 +1553,42 @@ def _digest_rows(
                     "packet_redundant": False,
                     "reinforced": False,
                     "force_archive": force_archive,
+                    "source_subproblem_id": source_subproblem_id,
+                    "source_lane": source_lane,
+                    "cell_relevance": 0,
+                    "primary_eligible": True,
                 }
             )
     return rows
 
 
-def collect_working_rows(campaign: Dict[str, Any]) -> List[Dict[str, Any]]:
-    """Gather every campaign digest into deduplicated, ranked rows."""
+def collect_working_rows(
+    campaign: Dict[str, Any],
+    subproblem_id: Optional[str] = None,
+) -> List[Dict[str, Any]]:
+    """Gather every campaign digest into deduplicated, ranked rows.
+
+    When ``subproblem_id`` names an ordinary cell, rows are ranked for that
+    cell (DAG + lane + lexical relevance). ``None`` / ``C66-FULL`` keep the
+    campaign-global ordering used by forced turns.
+    """
     from .campaigns import campaign_packet_record, packet_binding_matches
 
     campaign_id = str(campaign["id"])
+    focus_id = None
+    if (
+        isinstance(subproblem_id, str)
+        and subproblem_id
+        and subproblem_id != FULL_SUBPROBLEM_ID
+    ):
+        focus_id = subproblem_id
+    ancestor_ids = (
+        ancestor_subproblem_ids(campaign, focus_id) if focus_id else set()
+    )
+    focus_tokens = (
+        _cell_focus_tokens(campaign, focus_id) if focus_id else set()
+    )
+
     digests = []
     for path in sorted(DIGEST_DIR.glob("DIGEST-*.json")):
         try:
@@ -1189,6 +1596,7 @@ def collect_working_rows(campaign: Dict[str, Any]) -> List[Dict[str, Any]]:
         except (OSError, json.JSONDecodeError):
             continue
         if value.get("campaign_id") == campaign_id:
+            ensure_digest_attribution(value, campaign, persist_sidecar=True)
             digests.append(value)
     packet_text = ""
     try:
@@ -1232,15 +1640,24 @@ def collect_working_rows(campaign: Dict[str, Any]) -> List[Dict[str, Any]]:
             packet_redundant = _is_packet_redundant(
                 row["statement"], packet_lower, packet_tokens
             )
+        cell_relevance, primary_eligible = _cell_relevance_for_row(
+            row,
+            focus_id=focus_id,
+            ancestor_ids=ancestor_ids,
+            focus_tokens=focus_tokens,
+        )
         row = dict(row)
         row["reinforced"] = reinforced
         row["packet_redundant"] = packet_redundant
+        row["cell_relevance"] = cell_relevance
+        row["primary_eligible"] = primary_eligible
         row["rank"] = _rank_tuple(
             row["rank_key"],
             packet_redundant=packet_redundant,
             fresh=row["fresh"],
             reinforced=reinforced,
             ordinal=int(row["ordinal"]),
+            cell_relevance=cell_relevance,
         )
         existing = seen.get(row["dedup_key"])
         if existing is None:
@@ -1251,11 +1668,17 @@ def collect_working_rows(campaign: Dict[str, Any]) -> List[Dict[str, Any]]:
             # current packet outranks the same fact carried from a stale one.
             # Preserve force_archive=False if any copy is injectable.
             force_archive = existing["force_archive"] and row["force_archive"]
+            primary_ok = existing.get("primary_eligible", True) or row.get(
+                "primary_eligible", True
+            )
             existing.update(row)
             existing["force_archive"] = force_archive
+            existing["primary_eligible"] = primary_ok
         else:
             if not row["force_archive"]:
                 existing["force_archive"] = False
+            if row.get("primary_eligible"):
+                existing["primary_eligible"] = True
             if reinforced:
                 existing["reinforced"] = True
                 existing["rank"] = _rank_tuple(
@@ -1264,6 +1687,7 @@ def collect_working_rows(campaign: Dict[str, Any]) -> List[Dict[str, Any]]:
                     fresh=existing["fresh"],
                     reinforced=True,
                     ordinal=int(existing["ordinal"]),
+                    cell_relevance=int(existing.get("cell_relevance") or 0),
                 )
     rows.sort(key=lambda item: item["rank"])
     return rows
@@ -1323,6 +1747,8 @@ def _allocate_tiers(
     candidates and dependencies. Extended prefers remaining constraints first so
     anti-repeat signal stays injected even when primary is full. Rows marked
     ``force_archive`` (stale-window dependencies) skip both injected tiers.
+    Rows with ``primary_eligible=False`` (sibling noise for a cell pack) skip
+    primary but may still enter extended/archive.
     """
     active = [row for row in rows if not row.get("force_archive")]
     forced_archive = [row for row in rows if row.get("force_archive")]
@@ -1350,6 +1776,8 @@ def _allocate_tiers(
     def _take_primary(row: Dict[str, Any], cost: int) -> bool:
         nonlocal spent
         if id(row) in chosen:
+            return False
+        if row.get("primary_eligible") is False:
             return False
         if spent + cost > primary_budget:
             return False
@@ -1464,9 +1892,16 @@ def _allocate_tiers(
     return {"primary": primary, "extended": extended, "archive": archive}
 
 
-def _write_tier(text: str, prefix: str) -> Dict[str, str]:
+def _write_tier(
+    text: str, prefix: str, *, cell_id: Optional[str] = None
+) -> Dict[str, str]:
     content_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
-    path = WORKING_CONTEXT_DIR / ("%s-%s.md" % (prefix, content_hash[:16]))
+    if cell_id:
+        safe_cell = re.sub(r"[^A-Za-z0-9._-]+", "-", cell_id).strip("-")
+        filename = "%s-%s-%s.md" % (prefix, safe_cell, content_hash[:16])
+    else:
+        filename = "%s-%s.md" % (prefix, content_hash[:16])
+    path = WORKING_CONTEXT_DIR / filename
     if not path.exists():
         atomic_write_text(path, text)
     return {
@@ -1488,8 +1923,9 @@ EXTENDED_PREAMBLE = [
     "remain unproved and must be established independently before use.",
 ]
 ARCHIVE_PREAMBLE = [
-    "Retired context, retained for diagnosis and for review when a "
-    "similar pattern recurs. Not supplied to prover turns.",
+    "Optional archived working context for on-demand search. Prefer "
+    "primary, then extended. Constraints here still bind if you rely "
+    "on them. Candidates remain unproved.",
 ]
 
 
@@ -1505,9 +1941,28 @@ def _scaffolding_bytes(
     )
 
 
-def merge_working_context(campaign: Dict[str, Any]) -> Dict[str, Any]:
-    """Assemble every mined digest into the three working-context tiers."""
-    rows = collect_working_rows(campaign)
+def _normalize_focus_subproblem_id(
+    subproblem_id: Optional[str],
+) -> Optional[str]:
+    if not isinstance(subproblem_id, str) or not subproblem_id:
+        return None
+    if subproblem_id == FULL_SUBPROBLEM_ID:
+        return None
+    return subproblem_id
+
+
+def merge_working_context(
+    campaign: Dict[str, Any],
+    subproblem_id: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Assemble mined digests into working-context tiers.
+
+    Ordinary cells receive a cell-scoped primary pack (60kb budget). Forced /
+    full-resolution turns pass ``None`` / ``C66-FULL`` for campaign-global
+    context.
+    """
+    focus_id = _normalize_focus_subproblem_id(subproblem_id)
+    rows = collect_working_rows(campaign, focus_id)
     # The caps are on the rendered files, so headings come out of the budget.
     tiers = _allocate_tiers(
         rows,
@@ -1518,18 +1973,23 @@ def merge_working_context(campaign: Dict[str, Any]) -> Dict[str, Any]:
         EXTENDED_BUDGET_BYTES
         - _scaffolding_bytes(EXTENDED_TITLE, EXTENDED_PREAMBLE),
     )
+    primary_title = PRIMARY_TITLE
+    if focus_id:
+        primary_title = "%s (%s)" % (PRIMARY_TITLE, focus_id)
     primary = _write_tier(
         _render_tier(
-            PRIMARY_TITLE,
+            primary_title,
             PRIMARY_PREAMBLE,
             tiers["primary"],
             headings=PRIMARY_SECTION_HEADINGS,
         ),
         "WORKING",
+        cell_id=focus_id,
     )
     extended = _write_tier(
         _render_tier(EXTENDED_TITLE, EXTENDED_PREAMBLE, tiers["extended"]),
         "WORKING-EXT",
+        cell_id=focus_id,
     )
     archive = _write_tier(
         _render_tier(
@@ -1538,6 +1998,7 @@ def merge_working_context(campaign: Dict[str, Any]) -> Dict[str, Any]:
             tiers["archive"],
         ),
         "WORKING-ARCHIVE",
+        cell_id=focus_id,
     )
     primary_bytes = sum(_row_cost(row) for row in tiers["primary"])
     primary_by_section = _section_bytes(tiers["primary"])
@@ -1546,6 +2007,7 @@ def merge_working_context(campaign: Dict[str, Any]) -> Dict[str, Any]:
         "primary": primary,
         "extended": extended,
         "archive": archive,
+        "subproblem_id": focus_id,
         "stats": {
             "rows_total": len(rows),
             "rows_primary": len(tiers["primary"]),
@@ -1581,6 +2043,7 @@ def merge_working_context(campaign: Dict[str, Any]) -> Dict[str, Any]:
                 for row in tiers["extended"]
                 if row["section"] == "invalid"
             ),
+            "focus_subproblem_id": focus_id,
         },
     }
 
@@ -1590,7 +2053,8 @@ def publish_working_context(
     task: Dict[str, Any],
     digest: Dict[str, Any],
 ) -> Dict[str, Any]:
-    record = merge_working_context(campaign)
+    focus = digest.get("source_subproblem_id") or task.get("subproblem_id")
+    record = merge_working_context(campaign, focus)
     source_turn = task["source_turn"]
     record_event(
         {
@@ -1618,14 +2082,22 @@ def publish_working_context(
     return record
 
 
-def working_context_records(campaign: Dict[str, Any]) -> List[Dict[str, str]]:
+def working_context_records(
+    campaign: Dict[str, Any],
+    subproblem_id: Optional[str] = None,
+    *,
+    include_archive: bool = True,
+) -> List[Dict[str, str]]:
     """Return the working-context files supplied to a prover turn.
 
-    Only the primary and extended tiers are injected. The archive tier exists
-    for diagnosis and is never handed to a prover.
+    Primary is the mandatory cell (or campaign) pack. Extended and archive are
+    optional overflow available in the workspace for on-demand search.
     """
-    merged = merge_working_context(campaign)
-    return [merged["primary"], merged["extended"]]
+    merged = merge_working_context(campaign, subproblem_id)
+    records = [merged["primary"], merged["extended"]]
+    if include_archive:
+        records.append(merged["archive"])
+    return records
 
 
 def is_primary_working_context_path(path: str) -> bool:
@@ -1640,20 +2112,38 @@ def is_primary_working_context_path(path: str) -> bool:
     return "paired-working-context" in path.replace("\\", "/")
 
 
+def is_archive_working_context_path(path: str) -> bool:
+    if not isinstance(path, str) or not path:
+        return False
+    name = Path(path).name
+    return name.startswith("WORKING-ARCHIVE-") and (
+        "paired-working-context" in path.replace("\\", "/")
+    )
+
+
 def attach_working_context(
     task: Dict[str, Any],
     campaign: Dict[str, Any],
     *,
     include_extended: bool = True,
+    include_archive: bool = True,
 ) -> Dict[str, Any]:
     """Return a copy of ``task`` with working-context files in input_artifacts.
 
-    Always attaches the freshly merged primary tier. Extended is included by
-    default as overflow. Paths already present (forced/standard-fallback) are
-    not duplicated. Archive is never attached.
+    Always attaches the freshly merged primary tier scoped to the task cell
+    when ``subproblem_id`` is an ordinary campaign cell. Extended and archive
+    are included by default as optional overflow. Paths already present are
+    not duplicated.
     """
     updated = dict(task)
-    records = working_context_records(campaign)
+    focus = _normalize_focus_subproblem_id(
+        task.get("subproblem_id") if isinstance(task.get("subproblem_id"), str) else None
+    )
+    records = working_context_records(
+        campaign,
+        focus,
+        include_archive=bool(include_archive and include_extended),
+    )
     if not include_extended:
         records = records[:1]
     existing = list(updated.get("input_artifacts") or [])
@@ -1672,7 +2162,7 @@ def attach_working_context(
         existing.append(entry)
         seen.add(path)
     updated["input_artifacts"] = existing
-    # Structured ledger shape (primary / extended) for ordinary math events.
+    # Structured ledger shape (primary / extended / archive).
     primary = next(
         (
             item
@@ -1692,6 +2182,15 @@ def attach_working_context(
         ),
         None,
     )
+    archive = next(
+        (
+            item
+            for item in existing
+            if isinstance(item, dict)
+            and is_archive_working_context_path(str(item.get("path", "")))
+        ),
+        None,
+    )
     ledger: Dict[str, Any] = {}
     if primary:
         ledger["primary"] = {
@@ -1703,6 +2202,13 @@ def attach_working_context(
             "path": extended["path"],
             "sha256": extended.get("sha256"),
         }
+    if archive:
+        ledger["archive"] = {
+            "path": archive["path"],
+            "sha256": archive.get("sha256"),
+        }
+    if focus:
+        ledger["subproblem_id"] = focus
     if ledger:
         updated["working_context"] = ledger
     return updated

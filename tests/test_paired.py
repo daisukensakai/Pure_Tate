@@ -591,8 +591,14 @@ class PairedAttemptPolicyTests(unittest.TestCase):
                 Path(path).name.startswith("WORKING-EXT-") for path in paths
             )
         )
+        self.assertTrue(
+            any(
+                Path(path).name.startswith("WORKING-ARCHIVE-") for path in paths
+            )
+        )
         self.assertIn("working_context", once)
         self.assertEqual(once["working_context"]["primary"]["path"], primary_path)
+        self.assertIn("archive", once["working_context"])
         twice = attach_working_context(once, self.campaign)
         self.assertEqual(
             [item["path"] for item in twice["input_artifacts"]],
@@ -1072,3 +1078,252 @@ class PairedAttemptPolicyTests(unittest.TestCase):
                 self.assertIn("refusing to overwrite", str(raised.exception))
                 # After recovery the trace is no longer pending.
                 self.assertEqual(unrecovered_validation_traces("C66-001"), [])
+
+
+class DigestAttributionTests(unittest.TestCase):
+    def setUp(self):
+        self.campaign = load_campaign("C66-001")
+
+    def test_math_task_map_and_ancestors(self):
+        from pure_tate.paired import (
+            ancestor_subproblem_ids,
+            math_task_subproblem_map,
+        )
+
+        mapping = math_task_subproblem_map(self.campaign)
+        self.assertEqual(mapping["TASK-C66-M-001"]["subproblem_id"], "C66-GEO-Z")
+        self.assertEqual(mapping["TASK-C66-M-008"]["subproblem_id"], "C66-COMP-RANK")
+        self.assertEqual(mapping["TASK-C66-M-009"]["subproblem_id"], "C66-COMP-COMP")
+        ancestors = ancestor_subproblem_ids(self.campaign, "C66-GEO-COMP")
+        self.assertEqual(
+            ancestors, {"C66-GEO-COMP", "C66-GEO-H0", "C66-GEO-Z"}
+        )
+
+    def test_forced_and_standard_trace_attribution(self):
+        from pure_tate.paired import (
+            FULL_LANE,
+            FULL_SUBPROBLEM_ID,
+            _attribution_from_trace,
+        )
+
+        forced = _attribution_from_trace(
+            {
+                "id": "TRACE-X",
+                "task_id": "TASK-C66-001-FORCED-FULL",
+                "turn_kind": "forced-proof",
+                "parsed_artifact": None,
+            },
+            self.campaign,
+        )
+        self.assertEqual(forced["source_subproblem_id"], FULL_SUBPROBLEM_ID)
+        self.assertEqual(forced["source_lane"], FULL_LANE)
+
+        standard = _attribution_from_trace(
+            {
+                "id": "TRACE-Y",
+                "task_id": "TASK-C66-M-008",
+                "turn_kind": "standard-fallback",
+                "parsed_artifact": {
+                    "id": "ATT-0063",
+                    "subproblem_id": "C66-COMP-RANK",
+                    "lane": "computation",
+                },
+            },
+            self.campaign,
+        )
+        self.assertEqual(standard["source_subproblem_id"], "C66-COMP-RANK")
+        self.assertEqual(standard["confidence"], "artifact")
+
+        by_task = _attribution_from_trace(
+            {
+                "id": "TRACE-Z",
+                "task_id": "TASK-C66-M-001",
+                "turn_kind": "standard-fallback",
+                "parsed_artifact": None,
+            },
+            self.campaign,
+        )
+        self.assertEqual(by_task["source_subproblem_id"], "C66-GEO-Z")
+        self.assertEqual(by_task["confidence"], "task_id")
+
+    def test_backfill_sidecar_recovers_past_digests(self):
+        from pure_tate.paired import (
+            DIGEST_ATTRIBUTION_PATH,
+            backfill_digest_attributions,
+            digest_source_attribution,
+            load_digest_attribution_sidecar,
+        )
+
+        before = (
+            DIGEST_ATTRIBUTION_PATH.read_text(encoding="utf-8")
+            if DIGEST_ATTRIBUTION_PATH.is_file()
+            else None
+        )
+        try:
+            result = backfill_digest_attributions(self.campaign)
+            self.assertGreaterEqual(result["recovered"], 1)
+            sidecar = load_digest_attribution_sidecar()
+            self.assertIn("DIGEST-0001", sidecar["digests"])
+            self.assertEqual(
+                sidecar["digests"]["DIGEST-0001"]["source_subproblem_id"],
+                "C66-FULL",
+            )
+            attr = digest_source_attribution(
+                {"id": "DIGEST-0002", "campaign_id": "C66-001"},
+                self.campaign,
+            )
+            self.assertEqual(attr["source_subproblem_id"], "C66-GEO-Z")
+        finally:
+            if before is None and DIGEST_ATTRIBUTION_PATH.is_file():
+                DIGEST_ATTRIBUTION_PATH.unlink()
+            elif before is not None:
+                DIGEST_ATTRIBUTION_PATH.write_text(before, encoding="utf-8")
+
+
+class CellWorkingContextTests(unittest.TestCase):
+    def setUp(self):
+        self.campaign = load_campaign("C66-001")
+
+    def test_sibling_candidates_skip_primary(self):
+        from pure_tate.paired import _allocate_tiers, _rank_tuple
+
+        rows = [
+            {
+                "section": "invalid",
+                "statement": "Campaign-wide blocked inference with reason.",
+                "fresh": True,
+                "ordinal": 1,
+                "rank_key": "invalid",
+                "rank": _rank_tuple(
+                    "invalid",
+                    packet_redundant=False,
+                    fresh=True,
+                    reinforced=False,
+                    ordinal=1,
+                    cell_relevance=0,
+                ),
+                "dedup_key": "invalid:campaign",
+                "demoted": False,
+                "force_archive": False,
+                "packet_redundant": False,
+                "source_subproblem_id": "C66-FULL",
+                "cell_relevance": 0,
+                "primary_eligible": True,
+            },
+            {
+                "section": "candidate",
+                "statement": (
+                    "Sibling-only rank-drop ideal conjecture with no lexical "
+                    "overlap to geometry components."
+                ),
+                "fresh": True,
+                "ordinal": 2,
+                "rank_key": "candidate",
+                "rank": _rank_tuple(
+                    "candidate",
+                    packet_redundant=False,
+                    fresh=True,
+                    reinforced=False,
+                    ordinal=2,
+                    cell_relevance=3,
+                ),
+                "dedup_key": "candidate:sibling",
+                "demoted": False,
+                "force_archive": False,
+                "packet_redundant": False,
+                "source_subproblem_id": "C66-COMP-RANK",
+                "cell_relevance": 3,
+                "primary_eligible": False,
+            },
+            {
+                "section": "candidate",
+                "statement": (
+                    "Geometry component and stabilizer cover behavior for GEO-COMP."
+                ),
+                "fresh": True,
+                "ordinal": 3,
+                "rank_key": "candidate",
+                "rank": _rank_tuple(
+                    "candidate",
+                    packet_redundant=False,
+                    fresh=True,
+                    reinforced=False,
+                    ordinal=3,
+                    cell_relevance=0,
+                ),
+                "dedup_key": "candidate:geo",
+                "demoted": False,
+                "force_archive": False,
+                "packet_redundant": False,
+                "source_subproblem_id": "C66-GEO-COMP",
+                "cell_relevance": 0,
+                "primary_eligible": True,
+            },
+        ]
+        tiers = _allocate_tiers(rows, primary_budget=20_000, extended_budget=10_000)
+        primary_keys = {row["dedup_key"] for row in tiers["primary"]}
+        self.assertIn("invalid:campaign", primary_keys)
+        self.assertIn("candidate:geo", primary_keys)
+        self.assertNotIn("candidate:sibling", primary_keys)
+        overflow = {row["dedup_key"] for row in tiers["extended"] + tiers["archive"]}
+        self.assertIn("candidate:sibling", overflow)
+
+    def test_cell_merge_budget_and_path(self):
+        from pure_tate.paired import merge_working_context
+
+        merged = merge_working_context(self.campaign, "C66-GEO-COMP")
+        self.assertLessEqual(
+            merged["stats"]["bytes_primary"], PRIMARY_BUDGET_BYTES
+        )
+        self.assertIn("C66-GEO-COMP", merged["primary"]["path"])
+        self.assertEqual(merged["subproblem_id"], "C66-GEO-COMP")
+        primary = (ROOT / merged["primary"]["path"]).read_text(encoding="utf-8")
+        self.assertIn("C66-GEO-COMP", primary.splitlines()[0])
+
+    def test_attach_scopes_ordinary_cell(self):
+        task = {
+            "id": "TASK-C66-M-003",
+            "phase": "mathematics",
+            "campaign_id": self.campaign["id"],
+            "subproblem_id": "C66-GEO-COMP",
+            "lane": "geometry",
+            "input_artifacts": [],
+        }
+        attached = attach_working_context(task, self.campaign)
+        primary = attached["working_context"]["primary"]["path"]
+        self.assertIn("C66-GEO-COMP", primary)
+        self.assertEqual(
+            attached["working_context"].get("subproblem_id"), "C66-GEO-COMP"
+        )
+
+
+class IsolatedContextRepoTests(unittest.TestCase):
+    def test_mathematics_workspace_links_repo(self):
+        from pure_tate.agents import build_isolated_context
+        from pure_tate.paired import attach_working_context
+
+        campaign = load_campaign("C66-001")
+        packet = write_campaign_packet("C66-001")
+        task = {
+            "id": "TASK-C66-M-003",
+            "phase": "mathematics",
+            "campaign_id": campaign["id"],
+            "campaign_revision": campaign["campaign_revision"],
+            "subproblem_id": "C66-GEO-COMP",
+            "lane": "geometry",
+            "input_packet": packet["packet_path"],
+            "input_artifacts": [],
+            "prompt": "prompts/CAMPAIGN_MATHEMATICS.md",
+        }
+        task = attach_working_context(task, campaign)
+        with tempfile.TemporaryDirectory(prefix="pure-tate-ctx-") as directory:
+            destination = Path(directory)
+            files = build_isolated_context(task, destination)
+            self.assertIn("repo", files)
+            self.assertIn("CONTEXT-INDEX.md", files)
+            repo = destination / "repo"
+            self.assertTrue(repo.is_symlink() or repo.exists())
+            if repo.is_symlink():
+                self.assertEqual(repo.resolve(), ROOT.resolve())
+            self.assertTrue((destination / "CONTEXT-INDEX.md").is_file())
+            self.assertTrue((destination / "TASK.json").is_file())

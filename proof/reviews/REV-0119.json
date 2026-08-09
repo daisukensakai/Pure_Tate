@@ -1,0 +1,171 @@
+{
+  "attempt_id": "ATT-0070",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0070-1",
+      "note": "RH gives 18 simple branches; C_18 has stack dimension 18-3=15 with PGL_2 already quotiented. Branch map of the simply branched Hurwitz stack to the configuration stack is classically finite etale onto its image (local tame model y^2=t); the writeup is a sketch but the conclusion is standard and correct. Connected transposition monodromy forces S_4 hence primitivity; deck group is the center of S_4, hence trivial; residual autos inject into Aut(P^1, branch set), finite and generically trivial. Balanced and W^2_5-free are open, so each nonempty component B is smooth of pure dimension 15 with finite/generically trivial stabilizers. Addresses FND-0060.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0070-2",
+      "note": "Dual-confirmed CLM-0066-2/3 give h^0(L)\u2208{3,4} under weak CE with B_4 contained in the hyperelliptic non-primitive locus (one-way). Simple branching forces primitivity, so B\u2229B_4 is empty and h^0=3 constantly on B. Smooth B is reduced, so CLM-0066-4 applies: I is a relative P^2-bundle. Does not claim emptiness of B_4 on the full balanced (non-simply-branched) locus.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0070-3",
+      "note": "Basepoint p of |L| yields h^0(L(-p))=3, deg 5, \u03c7=0, h^1=3; weak CE + Serre gives h^0(O(D+p))=3, a forbidden g^2_5 on U. Char-0 Bertini on a basepoint-free system on a smooth geometric curve makes the discriminant proper closed in each P^2-fibre, so I^{dist} is dense nonempty in every fibre. Relative P^2 over irreducible B implies I and its dense open I^{dist} are irreducible of dimension 17. Honest repair of FND-0083 on this open; does not use bare \u03c7(L)=1.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0070-4",
+      "note": "Stack-level finite etale S_6-torsor and Conf_6 scheme identification inherited from dual-confirmed CLM-0066-6 within ordered distinct-section scope (FND-0064/0075/0087). Finite etale preserves pure dimension 17. Over a geometrically connected base, right S_6-translation acts transitively on monodromy orbits of a geometric fibre, hence on connected components. Number of components correctly left open (GAP-COMP-3).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0070-5",
+      "note": "Under weak CE, O(D)=\u03c9(-\u0393) has h^0=h^0(L)-\u03c7(L)=2, so |D| is the unique complete residual g^1_4 and recovers \u03b3 up to Aut(P^1); geometric fibres of psi have at most one isomorphism class. Ordered pointed autos fix \u0393 hence preserve O(D) and act on H^0(O(D)), lifting uniquely to cover autos; converse is forgetful. Geometric Aut isomorphism implies inertia mono for DM stacks, hence representability by algebraic spaces; finite geometric fibres then give quasi-finiteness. For finite-type pure-dimensional DM sources, quasi-finite maps send component dimensions to dimensions of image closures: 17, and codim 21-17=4 in M_{6,6}. Full faithfulness on arbitrary T-points, closedness, and lci are correctly not claimed (GAP-COMP-4). Closures are not claimed to be components of the full CE-failure locus (GAP-COMP-5; FND-0052).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0070-6",
+      "note": "Pure specialization of dual-confirmed CLM-0066-6/ATT-0048 Fitting=Abel\u2013Jacobi ideal equality on Conf_6 with six ordered disjoint sections. Scope matches the ordered distinct-support open of this theorem; no extension to nonreduced Hilbert incidence outside Conf_6.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CHK-SCOPE",
+      "note": "Theorem is conditional on weak CE (FND-0105), simply branched balanced W^2_5-free open components, and dual-confirmed Z/H0 packages. Explicitly excludes: density of U on every balanced component, unbalanced/special strata, torsor component count, T-point full faithfulness, closedness/lci/Gysin, componenthood in full CE-failure locus, and all Hodge/Tate/RED-0001 conclusions. resolves_exact_target=false. No lemma-to-campaign overreach.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CHK-PACKET-HASH",
+      "note": "packet_id C66-001-v4, packet_sha256 d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c, and packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7 match TASK.json; target dictionary matches (g,n)=(6,6), d=21, ordinary degree 26 / BM 16.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-09",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "evidence": "ATT-0070 Step 1 monodromy graph argument; Step 2 application of dual-confirmed CLM-0066-2/3; FND-0104 equivalence of constant h^0=3 with absence of non-primitive balanced pencils.",
+      "key": "FC-SB-PRIMITIVE-H0-CONSTANCY",
+      "severity": "high",
+      "statement": "Every connected simply branched degree-four cover of P^1 has monodromy S_4 (transposition graph of a connected degree-4 cover is connected, hence generates S_4) and is therefore primitive. Combined with the one-way containment B_4\u2282{hyperelliptic non-primitive covers} under weak CE (ATT-0066/CLM-0066-3), one has h^0(L)=3 constantly on every nonempty open of the simply branched balanced Hurwitz stack; in particular the h^0=4 jump stratum is empty on H^{sb,bal}. This discharges GAP-H0-1 on the simply branched locus without settling emptiness of B_4 for non-simply-branched balanced covers.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "evidence": "ATT-0070 Step 3; directly repairs the FND-0083 obstruction on U\u2282H^{sb,bal}.",
+      "key": "FC-W25-FREE-BASEPOINT-FREE-REDUCED",
+      "severity": "high",
+      "statement": "On any geometric fibre of the balanced CE residual system with weak CE normalization L\u2245\u03c9_C(-D) and W^2_5(C)=\u2205, the complete system |L| is basepoint-free: a basepoint p would force h^0(O_C(D+p))=3 by RR+Serre, i.e. a g^2_5. In characteristic zero the discriminant in |L|\u2245P^{h^0-1} is then a proper closed subset, so the reduced-support open is dense and nonempty in every such fibre. Thus \u03c7(L)=1 is not needed for reduced-support nonemptiness on the W^2_5-free open.",
+      "supports_finding_id": "FND-0083"
+    },
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "evidence": "ATT-0070 Step 1; supplies the stabilizer analysis that FND-0060 records as missing from ATT-0022\u2019s coarse b-3 count.",
+      "key": "FC-SB-HURWITZ-STACK-DIM15-STAB",
+      "severity": "medium",
+      "statement": "The Hurwitz stack of connected simply branched degree-four genus-6 covers is a smooth DM stack of pure dimension 15=18-3 (branch configuration stack dimension after PGL_2), with finite stabilizers and trivial generic stabilizer: deck transformations vanish because the monodromy is S_4 with trivial centralizer, and residual automorphisms inject into the finite (generically trivial) group Aut(P^1, eighteen distinct branch points). The balanced open inherits the same dimension and stabilizer conclusions.",
+      "supports_finding_id": "FND-0060"
+    },
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "evidence": "ATT-0070 Step 5 / CLM-0070-5; engages FND-0098\u2019s recovery requirement while respecting FND-0052 openness.",
+      "key": "FC-RESIDUAL-PENCIL-PSI-QFIN-CODIM4",
+      "severity": "medium",
+      "statement": "Under weak CE normalization on the ordered distinct-support incidence tilde I over a simply branched balanced W^2_5-free base component of dimension 15, the residual formula O_C(D)=\u03c9_C(-\u0393) recovers a unique complete g^1_4 from the marked divisor, the geometric stabilizer map Aut(C,\u03b3,p_i)\u2192Aut(C,p_i) is an isomorphism, and the classifying morphism psi: tilde I\u2192M_{6,6} is representable and quasi-finite. Consequently each irreducible component of tilde I has image closure of dimension 17 and codimension 4 in M_{6,6}. This is a mono/quasi-finiteness statement for the ordered model only and does not identify those closures as irreducible components of the full CE-failure locus.",
+      "supports_finding_id": "FND-0098"
+    }
+  ],
+  "id": "REV-0119",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Dual-confirmed by REV-0108 and REV-0109. Load-bearing only for CLM-0065-5 canonical balanced filtration 0\u2192W_4\u2192W\u2192W_5\u21920 with degrees 20 and 16 and no global splitting, as routed through ATT-0066. Not re-derived here.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "First independent confirmation of ATT-0065 claims used here; accepted as dual-confirmation discharge.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Second independent confirmation of ATT-0065 claims used here; accepted as dual-confirmation discharge.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Dual-confirmed by REV-0110 and REV-0116 for CLM-0066-1..6 in the scopes used: h^0\u2208{3,4} under weak CE, one-way B_4\u2282hyperelliptic non-primitive, reduced-stratum P^{k-1}-bundles, global Abel\u2013Jacobi model, stack-level S_6-torsor, and scheme-theoretic tilde I=Z_ev on Conf_6. ATT-0070 correctly uses only those scopes and adds primitivity, basepoint-freeness, dim/stabilizers, and psi analysis.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "First independent confirmation of CLM-0066-1..6; accepted as dual-confirmation discharge for ATT-0066.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Second independent confirmation of CLM-0066-1..6, including one-way B_4 containment and stack-only torsor qualification; accepted as dual-confirmation discharge.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0105",
+      "note": "Weak CE relative-canonical normalization is an explicit hypothesis of the theorem statement (L\u2245\u03c9(-D)), not relabelled as an unconditional CE theorem. Matches FND-0105 discipline; residual freedom killed by packet degree arithmetic already in ATT-0066.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Listed source; used only indirectly via dual-confirmed ATT-0065/0066 for CE sign convention and deg(W_f)=4g+12-4f. Non-load-bearing as an independent new citation in ATT-0070.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C66-GEO-Z",
+      "note": "Subproblem dependency discharged via dual-confirmed ATT-0065 package as specialized through ATT-0066 on Conf_6.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C66-GEO-H0",
+      "note": "Subproblem dependency discharged via dual-confirmed ATT-0066; ATT-0070 is the C66-GEO-COMP specialization on the simply branched W^2_5-free open.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0070-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: that step 1\u2019s branch-morphism \u00e9taleness is only a local slogan (y^2=t; \u2018glue uniquely away from the etale locus\u2019 is nearly circular) and that geometric-point Aut(C,\u03b3,p_i)\u2245Aut(C,p_i) does not supply stack representability or a stack-level quasi-finite dimension theorem for dim(closure psi(component))=17, so CLM-0070-1 and CLM-0070-5 are under-proved and the codimension-4 image claim collapses. Outcome: does not refute the stated theorem. (i) Finite \u00e9taleness of the simply branched Hurwitz branch map onto its image in the configuration stack is classical in char 0; dim=b-3=15 already builds in PGL_2, and the transposition-graph monodromy / centralizer / Aut(P^1,B) stabilizer analysis correctly upgrades the coarse count to a DM stack of pure dimension 15 with finite and generically trivial stabilizers (the FND-0060 repair). (ii) For Deligne\u2013Mumford stacks, geometric-point inertia injectivity is the standard representability criterion; finite geometric fibres then give quasi-finiteness; for finite-type pure-dimensional DM sources the fibre-dimension theorem yields dim(image closure)=17 and codim 4 in M_{6,6} without properness or closed image. Full faithfulness on arbitrary T-points is correctly left open (GAP-COMP-4) and is not required. Secondary attacks: weak CE is the sole engine of pencil recovery and Aut lifting\u2014correctly an explicit hypothesis (FND-0105/0098); Bertini and residual g^2_5 basepoint-freeness check out in char 0 on U; scheme-theoretic tilde I=Z_ev is pure dual-confirmed inheritance on Conf_6 (FND-0046 scope). Checklist items on BM vs ordinary degree, Poincar\u00e9/Tate twists, Gysin/K\u00fcnneth, spectral-sequence differentials, graph Aut invariants/coinvariants, semisimplification, predicted motives, pure-Tate upgrades, and omitted stable pairs do not engage this pure-geometry lemma.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be a characteristic-zero field and let H^{sb,bal} be the Hurwitz stack of connected simply branched degree-four covers gamma:C\u2192P^1 with C smooth of genus 6 and balanced Casnati\u2013Ekedahl relations bundle F\u2245O(4)\u2295O(5). Assume the weak CE relative-canonical normalization, so on geometric fibres L:=W_5\u2297omega_C^{-1}\u2245omega_C(-D), where D is a fibre of gamma. Let U\u2282H^{sb,bal} be the open where W^2_5(C)=empty, and let B be any nonempty irreducible component of U. Let I\u2192B be the Abel\u2013Jacobi incidence of effective degree-six divisors Gamma with O_C(Gamma)\u2245L, let I^{dist} be its distinct-support open, and let tilde I\u2192I^{dist} order the six support points. Then: (1) B is smooth of pure dimension 15, has finite stabilizers, and has trivial generic stabilizer. (2) h^0(L)=3 on B, I is a relative P^2-bundle, |L| is fibrewise basepoint-free, and I^{dist} is dense and nonempty in every geometric fibre. Thus I^{dist} is irreducible of dimension 17. (3) tilde I\u2192I^{dist} is a finite etale S_6-torsor on stacks; every irreducible component of tilde I has dimension 17, and over a geometrically connected base the S_6-action is transitive on its connected components. (4) For the classifying morphism psi:tilde I\u2192M_{6,6}, the pencil is recovered from the marked divisor by O_C(D)=omega_C(-Gamma) and gamma=|D|. Consequently psi is representable and quasi-finite, and Aut(C,gamma,p_1,...,p_6)\u2192Aut(C,p_1,...,p_6) is an isomorphism at every geometric point. The closure of the image of each irreducible component of tilde I therefore has dimension 17 and codimension 4 in M_{6,6}. In the ordered distinct-section scope, tilde I is scheme-theoretically the balanced CE evaluation-failure locus supplied by ATT-0066. No assertion is made that these closures are components of the full CE-failure locus.",
+  "verdict": "confirmed"
+}
