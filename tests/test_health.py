@@ -28,6 +28,19 @@ class EngineHealthTests(unittest.TestCase):
                     operational_engine_pool(["qwen"], "finding-audit"), []
                 )
 
+    def test_cursor_grok_without_credentials_is_not_operational(self):
+        config = {"binary": "cursor-agent", "family": "cursor"}
+        with mock.patch(
+            "pure_tate.health.shutil.which", return_value="/usr/bin/cursor-agent"
+        ), mock.patch.dict(
+            "os.environ",
+            {"CURSOR_API_KEY": ""},
+            clear=False,
+        ):
+            self.assertIn(
+                "CURSOR_API_KEY", engine_runtime_issue("cursor-grok", config)
+            )
+
     def test_missing_health_receipt_fails_closed(self):
         with mock.patch(
             "pure_tate.health.load_engine_health", return_value=None

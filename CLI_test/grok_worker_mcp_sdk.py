@@ -68,7 +68,8 @@ def main() -> int:
     mcp = MCPServer(
         name="grok-workers",
         instructions=(
-            "Hard-capped Grok 4.5 worker pool. Max 4 concurrent and 4 total "
+            "Hard-capped Grok 4.5 worker pool. Max 1 concurrent identity and 4 "
+            "conversational turns "
             "dispatches per session."
         ),
     )

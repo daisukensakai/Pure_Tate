@@ -1,0 +1,315 @@
+{
+  "executed_at": "2026-08-10T02:52:01.513125+00:00",
+  "model_requested": "cursor-grok-4.5-high",
+  "prompt_sha256": "806ac317a5846663b4f0d34c529f0bbd61793056355ab64ead1999d9c3ce6ed2",
+  "run_dir": "CLI_test/results/cursor_web/20260810T024922Z",
+  "schema_version": 1,
+  "success_marker": "Example Domain",
+  "url": "https://example.com",
+  "variants": [
+    {
+      "argv": [
+        "/Users/ken/.local/bin/cursor-agent",
+        "-p",
+        "--trust",
+        "--mode",
+        "ask",
+        "--output-format",
+        "json",
+        "--model",
+        "cursor-grok-4.5-high",
+        "--workspace",
+        "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test",
+        "<prompt-sha256:806ac317a5846663b4f0d34c529f0bbd61793056355ab64ead1999d9c3ce6ed2>"
+      ],
+      "elapsed_seconds": 23.357,
+      "flags": [
+        "--trust",
+        "--mode",
+        "ask"
+      ],
+      "is_error": false,
+      "model_requested": "cursor-grok-4.5-high",
+      "note": "current harness worker argv",
+      "parse_error": null,
+      "passed": false,
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/cursor_web/20260810T024922Z/A_ask_noforce.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/cursor_web/20260810T024922Z/A_ask_noforce.stdout.json",
+      "stdout_sha256": "51122604a9ea01f56fb12549b5246381802af47953ace2f73c7d3251a2d14bd8",
+      "variant": "A_ask_noforce",
+      "verdict": {
+        "blocked": false,
+        "fetch_failed_token": true,
+        "has_success_marker": false,
+        "mentions_example_com": false,
+        "result_prefix": "FETCH_FAILED",
+        "user_rejected": false
+      }
+    },
+    {
+      "argv": [
+        "/Users/ken/.local/bin/cursor-agent",
+        "-p",
+        "--trust",
+        "--mode",
+        "ask",
+        "--force",
+        "--output-format",
+        "json",
+        "--model",
+        "cursor-grok-4.5-high",
+        "--workspace",
+        "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test",
+        "<prompt-sha256:806ac317a5846663b4f0d34c529f0bbd61793056355ab64ead1999d9c3ce6ed2>"
+      ],
+      "elapsed_seconds": 24.452,
+      "flags": [
+        "--trust",
+        "--mode",
+        "ask",
+        "--force"
+      ],
+      "is_error": false,
+      "model_requested": "cursor-grok-4.5-high",
+      "note": "ask + force auto-approve",
+      "parse_error": null,
+      "passed": true,
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/cursor_web/20260810T024922Z/B_ask_force.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/cursor_web/20260810T024922Z/B_ask_force.stdout.json",
+      "stdout_sha256": "26c926bcd12093f10db42597423cb6a74512003eee9059fa0a59082dae7f5933",
+      "variant": "B_ask_force",
+      "verdict": {
+        "blocked": false,
+        "fetch_failed_token": false,
+        "has_success_marker": true,
+        "mentions_example_com": false,
+        "result_prefix": "I'll fetch the live page now and quote the exact heading from the response.Example Domain",
+        "user_rejected": false
+      }
+    },
+    {
+      "argv": [
+        "/Users/ken/.local/bin/cursor-agent",
+        "-p",
+        "--trust",
+        "--mode",
+        "ask",
+        "--sandbox",
+        "disabled",
+        "--output-format",
+        "json",
+        "--model",
+        "cursor-grok-4.5-high",
+        "--workspace",
+        "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test",
+        "<prompt-sha256:806ac317a5846663b4f0d34c529f0bbd61793056355ab64ead1999d9c3ce6ed2>"
+      ],
+      "elapsed_seconds": 23.769,
+      "flags": [
+        "--trust",
+        "--mode",
+        "ask",
+        "--sandbox",
+        "disabled"
+      ],
+      "is_error": false,
+      "model_requested": "cursor-grok-4.5-high",
+      "note": "ask + sandbox disabled",
+      "parse_error": null,
+      "passed": false,
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/cursor_web/20260810T024922Z/C_ask_sandbox_disabled.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/cursor_web/20260810T024922Z/C_ask_sandbox_disabled.stdout.json",
+      "stdout_sha256": "07edddadcc55e58afabf32443835cbb195f9d3cd6c0f6010f4ce96399f4846bb",
+      "variant": "C_ask_sandbox_disabled",
+      "verdict": {
+        "blocked": false,
+        "fetch_failed_token": true,
+        "has_success_marker": false,
+        "mentions_example_com": false,
+        "result_prefix": "FETCH_FAILED",
+        "user_rejected": false
+      }
+    },
+    {
+      "argv": [
+        "/Users/ken/.local/bin/cursor-agent",
+        "-p",
+        "--trust",
+        "--force",
+        "--output-format",
+        "json",
+        "--model",
+        "cursor-grok-4.5-high",
+        "--workspace",
+        "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test",
+        "<prompt-sha256:806ac317a5846663b4f0d34c529f0bbd61793056355ab64ead1999d9c3ce6ed2>"
+      ],
+      "elapsed_seconds": 20.351,
+      "flags": [
+        "--trust",
+        "--force"
+      ],
+      "is_error": false,
+      "model_requested": "cursor-grok-4.5-high",
+      "note": "print mode (no --mode ask) + force",
+      "parse_error": null,
+      "passed": true,
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/cursor_web/20260810T024922Z/D_print_force.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/cursor_web/20260810T024922Z/D_print_force.stdout.json",
+      "stdout_sha256": "f560798b48ebaef40368d6ca38e57d302d96fa585c8e13993f0e66d68d2f0723",
+      "variant": "D_print_force",
+      "verdict": {
+        "blocked": false,
+        "fetch_failed_token": false,
+        "has_success_marker": true,
+        "mentions_example_com": false,
+        "result_prefix": "**Example Domain**",
+        "user_rejected": false
+      }
+    },
+    {
+      "argv": [
+        "/Users/ken/.local/bin/cursor-agent",
+        "-p",
+        "--trust",
+        "--force",
+        "--sandbox",
+        "disabled",
+        "--output-format",
+        "json",
+        "--model",
+        "cursor-grok-4.5-high",
+        "--workspace",
+        "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test",
+        "<prompt-sha256:806ac317a5846663b4f0d34c529f0bbd61793056355ab64ead1999d9c3ce6ed2>"
+      ],
+      "elapsed_seconds": 19.909,
+      "flags": [
+        "--trust",
+        "--force",
+        "--sandbox",
+        "disabled"
+      ],
+      "is_error": false,
+      "model_requested": "cursor-grok-4.5-high",
+      "note": "print + force + sandbox disabled",
+      "parse_error": null,
+      "passed": true,
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/cursor_web/20260810T024922Z/E_print_force_sandbox_disabled.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/cursor_web/20260810T024922Z/E_print_force_sandbox_disabled.stdout.json",
+      "stdout_sha256": "b36a7ce284226de7d7c89138cb4fe1c70ae63dba6495aa2be610c878484c0adf",
+      "variant": "E_print_force_sandbox_disabled",
+      "verdict": {
+        "blocked": false,
+        "fetch_failed_token": false,
+        "has_success_marker": true,
+        "mentions_example_com": false,
+        "result_prefix": "Example Domain",
+        "user_rejected": false
+      }
+    },
+    {
+      "argv": [
+        "/Users/ken/.local/bin/cursor-agent",
+        "-p",
+        "--trust",
+        "--output-format",
+        "json",
+        "--model",
+        "cursor-grok-4.5-high",
+        "--workspace",
+        "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test",
+        "<prompt-sha256:806ac317a5846663b4f0d34c529f0bbd61793056355ab64ead1999d9c3ce6ed2>"
+      ],
+      "elapsed_seconds": 23.872,
+      "flags": [
+        "--trust"
+      ],
+      "is_error": false,
+      "model_requested": "cursor-grok-4.5-high",
+      "note": "print + trust only (baseline agent mode)",
+      "parse_error": null,
+      "passed": false,
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/cursor_web/20260810T024922Z/F_print_only.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/cursor_web/20260810T024922Z/F_print_only.stdout.json",
+      "stdout_sha256": "4ba10974e3b159448e0c342e6c8d827a97d21e8949c7d12432c0b1bfac2564f0",
+      "variant": "F_print_only",
+      "verdict": {
+        "blocked": false,
+        "fetch_failed_token": true,
+        "has_success_marker": false,
+        "mentions_example_com": false,
+        "result_prefix": "FETCH_FAILED",
+        "user_rejected": false
+      }
+    },
+    {
+      "argv": [
+        "/Users/ken/.local/bin/cursor-agent",
+        "-p",
+        "--trust",
+        "--mode",
+        "plan",
+        "--force",
+        "--output-format",
+        "json",
+        "--model",
+        "cursor-grok-4.5-high",
+        "--workspace",
+        "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test",
+        "<prompt-sha256:806ac317a5846663b4f0d34c529f0bbd61793056355ab64ead1999d9c3ce6ed2>"
+      ],
+      "elapsed_seconds": 23.536,
+      "flags": [
+        "--trust",
+        "--mode",
+        "plan",
+        "--force"
+      ],
+      "is_error": false,
+      "model_requested": "cursor-grok-4.5-high",
+      "note": "plan mode + force",
+      "parse_error": null,
+      "passed": true,
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/cursor_web/20260810T024922Z/G_plan_force.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/cursor_web/20260810T024922Z/G_plan_force.stdout.json",
+      "stdout_sha256": "700e9de0457b345319f7dab568347bc7f3864bebca0cb9e42a0511369fadbb31",
+      "variant": "G_plan_force",
+      "verdict": {
+        "blocked": false,
+        "fetch_failed_token": false,
+        "has_success_marker": true,
+        "mentions_example_com": false,
+        "result_prefix": "I'll fetch the live page now and quote the exact heading from the response.**Example Domain**",
+        "user_rejected": false
+      }
+    }
+  ],
+  "winners": [
+    "B_ask_force",
+    "D_print_force",
+    "E_print_force_sandbox_disabled",
+    "G_plan_force"
+  ]
+}

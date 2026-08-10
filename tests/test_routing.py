@@ -38,16 +38,28 @@ class RoutingTests(unittest.TestCase):
     def test_routing_config_pins_ladders(self):
         self.assertEqual(
             self.routing["prover_rotation"],
-            ["grok", "claude", "grok", "codex", "grok", "qwen"],
+            [
+                "cursor-grok",
+                "claude",
+                "cursor-grok",
+                "codex",
+                "cursor-grok",
+                "qwen",
+            ],
         )
         self.assertEqual(
             self.routing["escalation_order"],
-            ["grok", "qwen"],
+            ["cursor-grok", "qwen"],
         )
         self.assertEqual(
             self.routing["high_tier_chain_engines"], ["claude", "codex"]
         )
         self.assertIn("qwen", self.routing["engines"])
+        self.assertIn("cursor-grok", self.routing["engines"])
+        self.assertEqual(
+            self.routing["engines"]["cursor-grok"]["model"],
+            "cursor-grok-4.5-high",
+        )
 
     def test_engine_inventory_includes_qwen(self):
         by_id = {item["id"]: item for item in engine_inventory()}
@@ -101,6 +113,80 @@ class RoutingTests(unittest.TestCase):
         self.assertNotIn('"type": "thought"', observable)
         self.assertIn('"type": "text"', observable)
         self.assertIn('"type": "end"', observable)
+
+    def test_cursor_grok_argv_and_stream_fixtures(self):
+        from pure_tate.agents import (
+            _cursor_observable_stream,
+            _extract_claude_stream,
+        )
+
+        command = _engine_argv(
+            "cursor-grok",
+            "prompt",
+            workspace=ROOT / "CLI_test",
+        )
+        self.assertEqual(command[0], "cursor-agent")
+        self.assertIn("-p", command)
+        self.assertIn("--trust", command)
+        self.assertEqual(command[command.index("--mode") + 1], "ask")
+        self.assertEqual(
+            command[command.index("--output-format") + 1], "stream-json"
+        )
+        self.assertEqual(
+            command[command.index("--model") + 1], "cursor-grok-4.5-high"
+        )
+        self.assertEqual(
+            command[command.index("--workspace") + 1],
+            str(ROOT / "CLI_test"),
+        )
+        self.assertEqual(command[-1], "prompt")
+        self.assertNotIn("--force", command)
+        self.assertNotIn("--yolo", command)
+
+        web_command = _engine_argv(
+            "cursor-grok",
+            "prompt",
+            workspace=ROOT / "CLI_test",
+            phase="finding-audit",
+        )
+        self.assertEqual(web_command[web_command.index("--mode") + 1], "ask")
+        self.assertIn("--force", web_command)
+        self.assertLess(
+            web_command.index("--mode"), web_command.index("--force")
+        )
+
+        fixture_dir = (
+            ROOT
+            / "CLI_test"
+            / "results"
+            / "cursor_grok"
+            / "20260810T015914Z"
+        )
+        basic = (fixture_dir / "basic.stdout.jsonl").read_text(encoding="utf-8")
+        self.assertEqual(
+            _extract_claude_stream(basic),
+            {
+                "probe": "basic",
+                "ok": True,
+                "latex": r"\Gamma and \omega_C",
+            },
+        )
+        observable = _cursor_observable_stream(basic)
+        self.assertNotIn('"type": "thinking"', observable)
+        self.assertIn('"type": "assistant"', observable)
+        self.assertIn('"type": "result"', observable)
+
+        json_format = (fixture_dir / "json_format.stdout.json").read_text(
+            encoding="utf-8"
+        )
+        self.assertEqual(
+            _extract_claude_stream(json_format),
+            {
+                "probe": "json_format",
+                "ok": True,
+                "latex": r"\Gamma and \omega_C",
+            },
+        )
 
     def test_grok_stream_error_is_clear(self):
         with self.assertRaisesRegex(ValueError, "Not signed in"):
@@ -158,34 +244,45 @@ class RoutingTests(unittest.TestCase):
 
     def test_rotation_sequence(self):
         rotation = self.routing["prover_rotation"]
-        expected = ["grok", "claude", "grok", "codex", "grok", "qwen"]
+        expected = [
+            "cursor-grok",
+            "claude",
+            "cursor-grok",
+            "codex",
+            "cursor-grok",
+            "qwen",
+        ]
         actual = [next_rotation_engine(i, rotation) for i in range(6)]
         self.assertEqual(actual, expected)
-        self.assertEqual(next_rotation_engine(6, rotation), "grok")
+        self.assertEqual(next_rotation_engine(6, rotation), "cursor-grok")
 
     def test_retry_escalation_ladder(self):
         escalation = self.routing["escalation_order"]
-        self.assertEqual(next_escalation_engine([], escalation), "grok")
+        self.assertEqual(next_escalation_engine([], escalation), "cursor-grok")
+        self.assertEqual(
+            next_escalation_engine(["cursor-grok"], escalation), "qwen"
+        )
+        # Legacy xAI grok id still advances to qwen (same ladder role).
         self.assertEqual(
             next_escalation_engine(["grok"], escalation), "qwen"
         )
         self.assertEqual(
             next_escalation_engine(
-                ["grok", "qwen"], escalation,
+                ["cursor-grok", "qwen"], escalation,
                 high_tier_order=["claude", "codex"],
             ),
             "claude",
         )
         self.assertEqual(
             next_escalation_engine(
-                ["grok", "qwen", "claude"], escalation,
+                ["cursor-grok", "qwen", "claude"], escalation,
                 high_tier_order=["claude", "codex"],
             ),
             "codex",
         )
         self.assertIsNone(
             next_escalation_engine(
-                ["grok", "qwen", "claude", "codex"], escalation,
+                ["cursor-grok", "qwen", "claude", "codex"], escalation,
                 high_tier_order=["claude", "codex"],
             )
         )
@@ -200,16 +297,16 @@ class RoutingTests(unittest.TestCase):
     def test_reviewer_skips_only_prover_and_used(self):
         escalation = self.routing["escalation_order"]
         self.assertEqual(
-            select_reviewer("grok", [], escalation), "qwen"
+            select_reviewer("cursor-grok", [], escalation), "qwen"
         )
         self.assertEqual(
-            select_reviewer("claude", [], escalation), "grok"
+            select_reviewer("claude", [], escalation), "cursor-grok"
         )
-        first = select_reviewer("grok", [], escalation)
-        second = select_reviewer("grok", [first], escalation)
+        first = select_reviewer("cursor-grok", [], escalation)
+        second = select_reviewer("cursor-grok", [first], escalation)
         self.assertNotEqual(first, second)
-        self.assertNotEqual(first, "grok")
-        self.assertNotEqual(second, "grok")
+        self.assertNotEqual(first, "cursor-grok")
+        self.assertNotEqual(second, "cursor-grok")
         self.assertEqual(
             {first, second},
             {"qwen", "claude"},
@@ -263,7 +360,7 @@ class RoutingTests(unittest.TestCase):
     def test_exhausted_ladder_falls_back_to_fresh_rotation(self):
         rotation = self.routing["prover_rotation"]
         escalation = self.routing["escalation_order"]
-        used = ["grok", "qwen", "claude", "codex"]
+        used = ["cursor-grok", "qwen", "claude", "codex"]
         # Ladder itself is still exhausted (forward-only).
         self.assertIsNone(
             next_escalation_engine(
@@ -282,7 +379,7 @@ class RoutingTests(unittest.TestCase):
                 chain_id="proof:fresh-rotation",
                 persist_chain=False,
             ),
-            "grok",
+            "cursor-grok",
         )
         self.assertEqual(
             select_prover_for_cell(
@@ -302,11 +399,11 @@ class RoutingTests(unittest.TestCase):
                 used,
                 rotation,
                 escalation,
-                allowed=["claude", "grok"],
+                allowed=["claude", "cursor-grok"],
                 chain_id="proof:fresh-rotation-pool",
                 persist_chain=False,
             ),
-            "grok",
+            "cursor-grok",
         )
 
     def test_driver_dry_run_follows_explicit_rotation_pool(self):
@@ -319,15 +416,23 @@ class RoutingTests(unittest.TestCase):
         ):
             result = drive(
                 6,
-                prover_engines=["grok", "claude", "codex", "qwen"],
-                review_engines=["grok", "claude", "codex", "qwen"],
+                prover_engines=["cursor-grok", "claude", "codex", "qwen"],
+                review_engines=["cursor-grok", "claude", "codex", "qwen"],
                 dry_run=True,
             )
         self.assertTrue(result["dry_run"])
         self.assertEqual(result["executed_steps"], 6)
         engines = [event["engine"] for event in result["events"]]
         self.assertEqual(
-            engines, ["grok", "claude", "grok", "codex", "grok", "qwen"]
+            engines,
+            [
+                "cursor-grok",
+                "claude",
+                "cursor-grok",
+                "codex",
+                "cursor-grok",
+                "qwen",
+            ],
         )
         self.assertEqual(
             len({event["task_id"] for event in result["events"]}), 6

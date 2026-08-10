@@ -34,9 +34,14 @@
 
 ## Integration recommendation
 
-1. Set `engines.claude.effort = "max"` in `data/engines.json`.
-2. Set `engines.codex.model_reasoning_effort = "xhigh"` in `data/engines.json`.
-3. In `pure_tate/agents.py` `_engine_argv`, emit the corresponding flags for every Claude/Codex dispatch.
+1. Set `engines.claude.effort = "max"` and `effort_audit = "high"` in
+   `data/engines.json`.
+2. Set `engines.codex.model_reasoning_effort = "xhigh"` and
+   `model_reasoning_effort_audit = "high"`.
+3. In `pure_tate/agents.py` `_engine_argv`, emit proof effort for
+   mathematics / forced-proof / standard-fallback, and audit effort for
+   review / finding-audit / novelty / research / micro-research /
+   trace-mining. Claude CLI has no `auto` effort level (`low|medium|high|xhigh|max`).
 
 Do **not** use Codex `ultra` unless multi-agent is intentionally requested.
 

@@ -3,13 +3,13 @@
 This directory is an isolated compatibility lab for model CLIs. Nothing here is
 loaded by the Pure Tate harness.
 
-## Grok 4.5 worker pool (max 4)
+## Grok 4.5 worker pool (1 identity, ≤4 turns)
 
 Hard-capped Grok 4.5 helpers that parent agents can dispatch via MCP:
 
 | File | Role |
 |------|------|
-| `grok_worker_pool.py` | Pool + hard caps (`max_concurrent=4`, `max_total=4`) |
+| `grok_worker_pool.py` | Pool + hard caps (`max_concurrent=1`, `max_total=1`, `max_worker_turns=4`) |
 | `grok_worker_mcp_sdk.py` | Official MCP SDK server for engine attachment |
 | `grok_worker_mcp.py` | Minimal hand-rolled MCP (unit/debug) |
 | `run_grok_worker_probes.py` | Offline + live probes |
@@ -54,6 +54,22 @@ Results land under `results/effort/`. See `EFFORT_FINDINGS.md`.
 `run_web_access_probes.py` checks whether Grok, Claude, Codex, and Gemini can
 use web search when tools are enabled (math-style optional use included). See
 `WEB_ACCESS_FINDINGS.md` and `results/web_access/`.
+
+## Cursor Grok 4.5 (Agent CLI fallback lab)
+
+`run_cursor_grok_probes.py` bills **Cursor** Grok 4.5 through the headless
+Agent CLI (`cursor-agent`) when the xAI `grok` CLI is out of credits. Requires
+`CURSOR_API_KEY`. See `CURSOR_GROK_FINDINGS.md`.
+
+```bash
+zsh -lic 'python3 CLI_test/run_cursor_grok_probes.py'
+```
+
+Results land under `results/cursor_grok/`.
+
+Web-fetch argv matrix: `run_cursor_web_probes.py` / `CURSOR_WEB_FINDINGS.md`
+(`results/cursor_web/`). Harness workers need `--mode ask --force` when
+`allow_web` is on; ask alone yields **User Rejected**.
 
 ## Grok streaming experiment
 

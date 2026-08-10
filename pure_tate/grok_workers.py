@@ -2,12 +2,17 @@
 """Hard-capped Grok 4.5 worker pool and session-scoped MCP attachment.
 
 Caps (hard):
-  - max_concurrent: simultaneous live workers (default 4)
-  - max_total: lifetime dispatches per pool session (default 4)
+  - max_concurrent: simultaneous live workers (default 1)
+  - max_total: worker identities per pool session (default 1)
+  - max_worker_turns: conversational turns on that identity (default 4)
 
-Workers are headless ``grok -p`` processes with a read-only tool allowlist and
-``--no-subagents``. Parents attach via MCP (never native spawn_subagent in
-Grok ``--tools`` — that collapses the allowlist).
+Turn 1 is ``dispatch``; turns 2–4 are ``continue_worker`` resumes that keep
+prior worker context so follow-ups stay short (redo / more info / gap-fill /
+narrow sub-task) without re-ingesting principal parent context.
+
+Workers are headless ``cursor-agent -p`` / ``grok -p`` processes with a
+read-only tool allowlist. Parents attach via MCP (never native
+spawn_subagent in Grok ``--tools`` — that collapses the allowlist).
 
 This module is also an MCP server entrypoint::
 
@@ -34,8 +39,12 @@ from typing import Any, Callable, Dict, List, Optional, Sequence
 
 
 DEFAULT_MODEL = "grok-4.5"
-DEFAULT_MAX_CONCURRENT = 4
-DEFAULT_MAX_TOTAL = 4
+DEFAULT_CURSOR_MODEL = "cursor-grok-4.5-high"
+DEFAULT_WORKER_BACKEND = "cursor"
+DEFAULT_MAX_CONCURRENT = 1
+DEFAULT_MAX_TOTAL = 1
+DEFAULT_MAX_WORKER_TURNS = 4
+# Intra-process tool-loop cap for the xAI ``grok -p`` backend (not resume turns).
 DEFAULT_MAX_TURNS = 20
 DEFAULT_TIMEOUT_SECONDS = 1200
 
@@ -72,6 +81,10 @@ class WorkerRecord:
     argv_redacted: List[str] = field(default_factory=list)
     stdout_path: Optional[str] = None
     stderr_path: Optional[str] = None
+    turn_index: int = 1
+    max_turns: int = DEFAULT_MAX_WORKER_TURNS
+    cli_session_id: Optional[str] = None
+    turns: List[Dict[str, Any]] = field(default_factory=list)
     process: Optional[subprocess.Popen] = field(default=None, repr=False)
 
     def public_dict(self, include_result: bool = True) -> Dict[str, Any]:
@@ -90,6 +103,11 @@ class WorkerRecord:
             "argv": self.argv_redacted,
             "stdout_path": self.stdout_path,
             "stderr_path": self.stderr_path,
+            "turn_index": self.turn_index,
+            "max_turns": self.max_turns,
+            "remaining_turns": max(0, self.max_turns - self.turn_index),
+            "cli_session_id": self.cli_session_id,
+            "turns": list(self.turns),
         }
         if include_result:
             payload["result_text"] = self.result_text
@@ -104,6 +122,91 @@ def utc_now_iso() -> str:
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 
+def resolve_worker_backend(config_root: Optional[Dict[str, Any]] = None) -> str:
+    """Return worker backend: ``cursor`` (default) or ``xai``."""
+    env = (os.environ.get("GROK_WORKER_BACKEND") or "").strip().lower()
+    if env in {"cursor", "xai", "grok"}:
+        return "xai" if env == "grok" else env
+    if isinstance(config_root, dict):
+        raw = str(config_root.get("grok_worker_backend") or "").strip().lower()
+        if raw in {"cursor", "xai", "grok"}:
+            return "xai" if raw == "grok" else raw
+    return DEFAULT_WORKER_BACKEND
+
+
+def resolve_worker_model(
+    config_root: Optional[Dict[str, Any]] = None,
+    *,
+    backend: Optional[str] = None,
+) -> str:
+    """Return the worker model slug for the active backend."""
+    env_model = (os.environ.get("GROK_WORKER_MODEL") or "").strip()
+    if env_model:
+        return env_model
+    selected = backend or resolve_worker_backend(config_root)
+    if isinstance(config_root, dict):
+        configured = str(config_root.get("grok_worker_model") or "").strip()
+        if configured:
+            return configured
+        engines = config_root.get("engines")
+        if isinstance(engines, dict):
+            if selected == "cursor":
+                cursor = engines.get("cursor-grok")
+                if isinstance(cursor, dict) and cursor.get("model"):
+                    return str(cursor["model"])
+            grok = engines.get("grok")
+            if isinstance(grok, dict) and grok.get("model"):
+                return str(grok["model"])
+    return DEFAULT_CURSOR_MODEL if selected == "cursor" else DEFAULT_MODEL
+
+
+def worker_backend_available(backend: str) -> bool:
+    """Whether the local machine can run the selected worker backend."""
+    if backend == "cursor":
+        return (
+            shutil.which("cursor-agent") is not None
+            and bool(os.environ.get("CURSOR_API_KEY", "").strip())
+        )
+    return shutil.which("grok") is not None
+
+
+def build_cursor_worker_argv(
+    prompt: str,
+    *,
+    model: str = DEFAULT_CURSOR_MODEL,
+    cwd: Optional[Path] = None,
+    allow_web: bool = False,
+    resume_session_id: Optional[str] = None,
+) -> List[str]:
+    # CLI_test/CURSOR_WEB_FINDINGS.md: --mode ask alone rejects WebFetch
+    # ("User Rejected"). --force auto-approves permitted tools; keep ask so
+    # workers stay write-blocked. Without allow_web, omit --force so network
+    # tools remain denied by approval.
+    argv = [
+        "cursor-agent",
+        "-p",
+        "--trust",
+        "--mode",
+        "ask",
+    ]
+    if allow_web:
+        argv.append("--force")
+    argv.extend(
+        [
+            "--output-format",
+            "json",
+            "--model",
+            model,
+        ]
+    )
+    if resume_session_id:
+        argv.extend(["--resume", str(resume_session_id)])
+    if cwd is not None:
+        argv.extend(["--workspace", str(cwd)])
+    argv.append(prompt)
+    return argv
+
+
 def build_worker_argv(
     prompt: str,
     *,
@@ -111,7 +214,22 @@ def build_worker_argv(
     max_turns: int = DEFAULT_MAX_TURNS,
     allow_web: bool = False,
     cwd: Optional[Path] = None,
+    backend: str = "xai",
+    resume_session_id: Optional[str] = None,
 ) -> List[str]:
+    if backend == "cursor":
+        return build_cursor_worker_argv(
+            prompt,
+            model=model,
+            cwd=cwd,
+            allow_web=allow_web,
+            resume_session_id=resume_session_id,
+        )
+    if resume_session_id:
+        raise PoolError(
+            "resume_unavailable",
+            "xAI grok worker backend does not support resume turns",
+        )
     tools = ["read_file", "grep", "list_dir"]
     denied = ["run_terminal_command", "write", "open_page"]
     if allow_web:
@@ -146,15 +264,14 @@ def build_worker_argv(
 def redact_argv(argv: Sequence[str], prompt: str) -> List[str]:
     out = list(argv)
     marker = "<prompt-sha256:%s>" % sha256_text(prompt)
-    if "-p" in out:
-        idx = out.index("-p")
-        if idx + 1 < len(out):
-            out[idx + 1] = marker
+    for index, value in enumerate(out):
+        if value == prompt:
+            out[index] = marker
     return out
 
 
 def extract_result_text(stdout: str) -> str:
-    """Prefer headless json envelope `.text`; else raw stdout."""
+    """Prefer headless json envelope `.text` / `.result`; else raw stdout."""
     stripped = stdout.strip()
     if not stripped:
         return ""
@@ -170,6 +287,23 @@ def extract_result_text(stdout: str) -> str:
         if isinstance(result, str):
             return result
     return stripped
+
+
+def extract_cli_session_id(stdout: str) -> Optional[str]:
+    """Return the Cursor/agent ``session_id`` from a JSON envelope, if any."""
+    stripped = (stdout or "").strip()
+    if not stripped:
+        return None
+    try:
+        value = json.loads(stripped)
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(value, dict):
+        return None
+    session_id = value.get("session_id")
+    if isinstance(session_id, str) and session_id.strip():
+        return session_id.strip()
+    return None
 
 
 class DispatchLog:
@@ -288,17 +422,19 @@ def ensure_dispatch_log_dir(path: Optional[Path] = None) -> Path:
 
 
 class GrokWorkerPool:
-    """Thread-safe pool with hard concurrent and total dispatch caps."""
+    """Thread-safe pool with hard concurrent, identity, and turn caps."""
 
     def __init__(
         self,
         *,
         max_concurrent: int = DEFAULT_MAX_CONCURRENT,
         max_total: int = DEFAULT_MAX_TOTAL,
+        max_worker_turns: int = DEFAULT_MAX_WORKER_TURNS,
         model: str = DEFAULT_MODEL,
         max_turns: int = DEFAULT_MAX_TURNS,
         timeout_seconds: int = DEFAULT_TIMEOUT_SECONDS,
         allow_web: bool = False,
+        backend: str = DEFAULT_WORKER_BACKEND,
         work_dir: Optional[Path] = None,
         results_dir: Optional[Path] = None,
         dispatch_log: Optional[DispatchLog] = None,
@@ -308,12 +444,16 @@ class GrokWorkerPool:
             raise ValueError("max_concurrent must be >= 1")
         if max_total < 1:
             raise ValueError("max_total must be >= 1")
+        if max_worker_turns < 1:
+            raise ValueError("max_worker_turns must be >= 1")
         self.max_concurrent = max_concurrent
         self.max_total = max_total
+        self.max_worker_turns = max_worker_turns
         self.model = model
         self.max_turns = max_turns
         self.timeout_seconds = timeout_seconds
         self.allow_web = allow_web
+        self.backend = "cursor" if backend == "cursor" else "xai"
         self.work_dir = work_dir
         self.results_dir = results_dir
         if self.results_dir is not None:
@@ -347,14 +487,26 @@ class GrokWorkerPool:
 
     def stats(self) -> Dict[str, Any]:
         with self._lock:
+            active = None
+            turns_used = 0
+            for record in self._workers.values():
+                active = record.worker_id
+                turns_used = record.turn_index
             return {
                 "max_concurrent": self.max_concurrent,
                 "max_total": self.max_total,
+                "max_worker_turns": self.max_worker_turns,
                 "dispatched": self._dispatched,
                 "live": self._live,
                 "remaining_total": max(0, self.max_total - self._dispatched),
                 "remaining_concurrent": max(0, self.max_concurrent - self._live),
+                "active_worker_id": active,
+                "turns_used": turns_used,
+                "remaining_turns": (
+                    max(0, self.max_worker_turns - turns_used) if active else self.max_worker_turns
+                ),
                 "model": self.model,
+                "backend": self.backend,
             }
 
     def list_workers(self) -> List[Dict[str, Any]]:
@@ -370,6 +522,19 @@ class GrokWorkerPool:
                 raise PoolError("unknown_worker", "unknown worker_id %s" % worker_id)
             return self._workers[worker_id]
 
+    def _reclaim_failed_non_resumable(self) -> None:
+        """Drop a sole failed turn-1 worker with no session so dispatch can retry."""
+        if self._live > 0 or len(self._workers) != 1:
+            return
+        worker_id, record = next(iter(self._workers.items()))
+        if (
+            record.status in {"failed", "cancelled"}
+            and not record.cli_session_id
+            and record.turn_index <= 1
+        ):
+            del self._workers[worker_id]
+            self._dispatched = 0
+
     def dispatch(
         self,
         prompt: str,
@@ -383,6 +548,7 @@ class GrokWorkerPool:
         description = (description or "").strip() or "grok-worker"
         prompt_digest = sha256_text(prompt)
         with self._lock:
+            self._reclaim_failed_non_resumable()
             if self._dispatched >= self.max_total:
                 self._log(
                     "dispatch_rejected",
@@ -422,6 +588,16 @@ class GrokWorkerPool:
                 prompt_sha256=prompt_digest,
                 status="queued",
                 created_at=utc_now_iso(),
+                turn_index=1,
+                max_turns=self.max_worker_turns,
+                turns=[
+                    {
+                        "turn": 1,
+                        "prompt_sha256": prompt_digest,
+                        "description": description,
+                        "status": "queued",
+                    }
+                ],
             )
             self._workers[worker_id] = record
             self._dispatched += 1
@@ -434,24 +610,154 @@ class GrokWorkerPool:
             prompt_sha256=prompt_digest,
             status="queued",
             wait=bool(wait),
+            turn=1,
             model=self.model,
+            backend=self.backend,
             allow_web=self.allow_web,
             dispatched=self._dispatched,
             live=self._live,
             max_total=self.max_total,
             max_concurrent=self.max_concurrent,
+            max_worker_turns=self.max_worker_turns,
         )
 
+        return self._launch_turn(
+            worker_id,
+            prompt,
+            wait=wait,
+            timeout_seconds=timeout_seconds,
+            resume_session_id=None,
+        )
+
+    def continue_worker(
+        self,
+        worker_id: str,
+        prompt: str,
+        description: str = "",
+        *,
+        wait: bool = False,
+        timeout_seconds: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """Resume an existing worker with a short follow-up (turns 2..N)."""
+        if not isinstance(prompt, str) or not prompt.strip():
+            raise PoolError("invalid_prompt", "prompt must be a non-empty string")
+        description = (description or "").strip() or "grok-worker-continue"
+        prompt_digest = sha256_text(prompt)
+        with self._lock:
+            record = self.get_worker(worker_id)
+            if record.status in {"queued", "running"}:
+                raise PoolError(
+                    "pool_full",
+                    "worker %s is still live (status=%s)" % (worker_id, record.status),
+                )
+            if record.turn_index >= record.max_turns:
+                self._log(
+                    "continue_rejected",
+                    error_code="turns_exhausted",
+                    worker_id=worker_id,
+                    turn_index=record.turn_index,
+                    max_turns=record.max_turns,
+                )
+                raise PoolError(
+                    "turns_exhausted",
+                    "worker turn budget exhausted: turn_index=%d max_turns=%d"
+                    % (record.turn_index, record.max_turns),
+                )
+            if self.backend != "cursor":
+                raise PoolError(
+                    "resume_unavailable",
+                    "worker backend %s does not support resume turns" % self.backend,
+                )
+            if not record.cli_session_id:
+                raise PoolError(
+                    "resume_unavailable",
+                    "worker %s has no resumable cli_session_id" % worker_id,
+                )
+            if self._live >= self.max_concurrent:
+                raise PoolError(
+                    "pool_full",
+                    "worker pool full: max_concurrent=%d live=%d"
+                    % (self.max_concurrent, self._live),
+                )
+            resume_session_id = record.cli_session_id
+            next_turn = record.turn_index + 1
+            record.turn_index = next_turn
+            record.description = description
+            record.prompt_sha256 = prompt_digest
+            record.status = "queued"
+            record.started_at = None
+            record.finished_at = None
+            record.returncode = None
+            record.result_text = ""
+            record.error = ""
+            record.elapsed_seconds = None
+            record.process = None
+            record.turns.append(
+                {
+                    "turn": next_turn,
+                    "prompt_sha256": prompt_digest,
+                    "description": description,
+                    "status": "queued",
+                }
+            )
+            self._live += 1
+            turn_for_log = next_turn
+            session_for_log = resume_session_id
+
+        self._log(
+            "continue",
+            worker_id=worker_id,
+            description=description,
+            prompt_sha256=prompt_digest,
+            status="queued",
+            wait=bool(wait),
+            turn=turn_for_log,
+            cli_session_id=session_for_log,
+            model=self.model,
+            backend=self.backend,
+        )
+        return self._launch_turn(
+            worker_id,
+            prompt,
+            wait=wait,
+            timeout_seconds=timeout_seconds,
+            resume_session_id=session_for_log,
+        )
+
+    def _launch_turn(
+        self,
+        worker_id: str,
+        prompt: str,
+        *,
+        wait: bool,
+        timeout_seconds: Optional[int],
+        resume_session_id: Optional[str],
+    ) -> Dict[str, Any]:
+        record = self.get_worker(worker_id)
         if self._runner is not None:
-            # Deterministic offline / unit-test path (synchronous).
             try:
                 finished = self._runner(
                     prompt=prompt,
-                    description=description,
+                    description=record.description,
                     worker_id=worker_id,
                     pool=self,
+                    turn=record.turn_index,
+                    resume_session_id=resume_session_id,
                 )
                 with self._lock:
+                    # Preserve identity/turn metadata the runner may omit.
+                    finished.worker_id = worker_id
+                    finished.turn_index = record.turn_index
+                    finished.max_turns = record.max_turns
+                    finished.turns = list(record.turns)
+                    if finished.cli_session_id is None:
+                        finished.cli_session_id = record.cli_session_id
+                    if finished.turns:
+                        finished.turns[-1] = {
+                            **finished.turns[-1],
+                            "status": finished.status,
+                            "result_preview": (finished.result_text or "")[:200],
+                        }
                     self._workers[worker_id] = finished
                     self._live = max(0, self._live - 1)
                 self._log(
@@ -461,6 +767,37 @@ class GrokWorkerPool:
                     returncode=finished.returncode,
                     error=finished.error or None,
                     elapsed_seconds=finished.elapsed_seconds,
+                    turn=finished.turn_index,
+                    cli_session_id=finished.cli_session_id,
+                    result_text_preview=(finished.result_text or "")[:500],
+                )
+                return finished.public_dict()
+            except TypeError:
+                # Legacy runners used in older tests accept only the original kwargs.
+                finished = self._runner(
+                    prompt=prompt,
+                    description=record.description,
+                    worker_id=worker_id,
+                    pool=self,
+                )
+                with self._lock:
+                    finished.worker_id = worker_id
+                    finished.turn_index = record.turn_index
+                    finished.max_turns = record.max_turns
+                    finished.turns = list(record.turns)
+                    if finished.cli_session_id is None:
+                        finished.cli_session_id = record.cli_session_id
+                    self._workers[worker_id] = finished
+                    self._live = max(0, self._live - 1)
+                self._log(
+                    "worker_finished",
+                    worker_id=worker_id,
+                    status=finished.status,
+                    returncode=finished.returncode,
+                    error=finished.error or None,
+                    elapsed_seconds=finished.elapsed_seconds,
+                    turn=finished.turn_index,
+                    cli_session_id=finished.cli_session_id,
                     result_text_preview=(finished.result_text or "")[:500],
                 )
                 return finished.public_dict()
@@ -469,18 +806,21 @@ class GrokWorkerPool:
                     record.status = "failed"
                     record.error = str(exc)
                     record.finished_at = utc_now_iso()
+                    if record.turns:
+                        record.turns[-1]["status"] = "failed"
                     self._live = max(0, self._live - 1)
                 self._log(
                     "worker_finished",
                     worker_id=worker_id,
                     status="failed",
                     error=str(exc),
+                    turn=record.turn_index,
                 )
                 raise
 
         thread = threading.Thread(
             target=self._run_worker,
-            args=(worker_id, prompt, timeout_seconds),
+            args=(worker_id, prompt, timeout_seconds, resume_session_id),
             name="grok-worker-%s" % worker_id,
             daemon=True,
         )
@@ -491,7 +831,7 @@ class GrokWorkerPool:
             return self.await_worker(
                 worker_id, timeout_seconds=timeout_seconds
             )
-        return record.public_dict(include_result=False)
+        return self.get_worker(worker_id).public_dict(include_result=False)
 
     def await_worker(
         self,
@@ -578,6 +918,8 @@ class GrokWorkerPool:
             error=record.error or None,
             elapsed_seconds=record.elapsed_seconds,
             argv=record.argv_redacted,
+            turn=record.turn_index,
+            cli_session_id=record.cli_session_id,
             result_text_preview=(record.result_text or "")[:500],
             **durable_paths,
         )
@@ -587,6 +929,7 @@ class GrokWorkerPool:
         worker_id: str,
         prompt: str,
         timeout_seconds: Optional[int],
+        resume_session_id: Optional[str] = None,
     ) -> None:
         timeout = (
             self.timeout_seconds
@@ -599,6 +942,8 @@ class GrokWorkerPool:
             max_turns=self.max_turns,
             allow_web=self.allow_web,
             cwd=self.work_dir,
+            backend=self.backend,
+            resume_session_id=resume_session_id,
         )
         started = time.monotonic()
         with self._lock:
@@ -606,6 +951,8 @@ class GrokWorkerPool:
             record.status = "running"
             record.started_at = utc_now_iso()
             record.argv_redacted = redact_argv(argv, prompt)
+            if record.turns:
+                record.turns[-1]["status"] = "running"
         self._log(
             "worker_started",
             worker_id=worker_id,
@@ -613,14 +960,23 @@ class GrokWorkerPool:
             prompt_sha256=record.prompt_sha256,
             status="running",
             argv=record.argv_redacted,
+            turn=record.turn_index,
+            cli_session_id=resume_session_id or record.cli_session_id,
             model=self.model,
+            backend=self.backend,
         )
 
         stdout_path = None
         stderr_path = None
         if self.results_dir is not None:
-            stdout_path = self.results_dir / ("%s.stdout.txt" % worker_id)
-            stderr_path = self.results_dir / ("%s.stderr.txt" % worker_id)
+            # Unique per turn so continues do not overwrite prior stdout.
+            turn_tag = "t%d" % record.turn_index
+            stdout_path = self.results_dir / (
+                "%s.%s.stdout.txt" % (worker_id, turn_tag)
+            )
+            stderr_path = self.results_dir / (
+                "%s.%s.stderr.txt" % (worker_id, turn_tag)
+            )
 
         stdout = ""
         stderr = ""
@@ -666,8 +1022,13 @@ class GrokWorkerPool:
                     record.returncode = process.returncode
                     record.error = "worker timed out after %ss" % timeout
                     record.result_text = extract_result_text(stdout or "")
+                    session_id = extract_cli_session_id(stdout or "")
+                    if session_id:
+                        record.cli_session_id = session_id
                     record.elapsed_seconds = round(time.monotonic() - started, 3)
                     record.finished_at = utc_now_iso()
+                    if record.turns:
+                        record.turns[-1]["status"] = "failed"
                     if stdout_path is not None:
                         stdout_path.write_text(stdout or "", encoding="utf-8")
                         record.stdout_path = str(stdout_path)
@@ -689,6 +1050,9 @@ class GrokWorkerPool:
                 if record.status == "cancelled":
                     record.returncode = process.returncode
                     record.result_text = extract_result_text(stdout or "")
+                    session_id = extract_cli_session_id(stdout or "")
+                    if session_id:
+                        record.cli_session_id = session_id
                     record.elapsed_seconds = round(time.monotonic() - started, 3)
                     if stdout_path is not None:
                         record.stdout_path = str(stdout_path)
@@ -705,6 +1069,9 @@ class GrokWorkerPool:
                     return
                 record.returncode = process.returncode
                 record.result_text = extract_result_text(stdout or "")
+                session_id = extract_cli_session_id(stdout or "")
+                if session_id:
+                    record.cli_session_id = session_id
                 record.elapsed_seconds = round(time.monotonic() - started, 3)
                 record.finished_at = utc_now_iso()
                 if stdout_path is not None:
@@ -717,6 +1084,13 @@ class GrokWorkerPool:
                 else:
                     record.status = "failed"
                     record.error = (stderr or stdout or "worker failed")[:1000]
+                if record.turns:
+                    record.turns[-1] = {
+                        **record.turns[-1],
+                        "status": record.status,
+                        "result_preview": (record.result_text or "")[:200],
+                        "cli_session_id": record.cli_session_id,
+                    }
             self._finalize_worker_log(
                 worker_id, stdout=stdout or "", stderr=stderr or ""
             )
@@ -727,6 +1101,8 @@ class GrokWorkerPool:
                 record.error = str(exc)
                 record.finished_at = utc_now_iso()
                 record.elapsed_seconds = round(time.monotonic() - started, 3)
+                if record.turns:
+                    record.turns[-1]["status"] = "failed"
             self._finalize_worker_log(
                 worker_id, stdout=stdout or "", stderr=stderr or ""
             )
@@ -765,10 +1141,11 @@ class GrokWorkerPool:
 # Harness session attachment
 # ---------------------------------------------------------------------------
 
-WORKER_FAMILIES = frozenset({"claude", "grok", "openai", "qwen"})
+WORKER_FAMILIES = frozenset({"claude", "grok", "cursor", "openai", "qwen"})
 MCP_SERVER_NAME = "grok-workers"
 CLAUDE_MCP_TOOLS = [
     "mcp__grok-workers__dispatch_grok_worker",
+    "mcp__grok-workers__continue_grok_worker",
     "mcp__grok-workers__await_grok_worker",
     "mcp__grok-workers__list_grok_workers",
     "mcp__grok-workers__cancel_grok_worker",
@@ -790,33 +1167,43 @@ class WorkerSession:
     env_updates: Dict[str, str] = field(default_factory=dict)
     server_command: List[str] = field(default_factory=list)
     session_id: Optional[str] = None
+    max_worker_turns: int = DEFAULT_MAX_WORKER_TURNS
     dispatch_log: Optional[DispatchLog] = field(default=None, repr=False)
 
     def prompt_contract(self) -> str:
-        return worker_dispatch_parent_policy(self.max_workers)
+        return worker_dispatch_parent_policy(
+            self.max_workers, max_worker_turns=self.max_worker_turns
+        )
 
 
-def worker_dispatch_parent_policy(max_workers: int) -> str:
+def worker_dispatch_parent_policy(
+    max_workers: int,
+    max_worker_turns: int = DEFAULT_MAX_WORKER_TURNS,
+) -> str:
     """Shared parent/controller policy for all Grok worker dispatches.
 
     The parent is the mastermind (thinking, analysis, critical decisions).
-    Workers do bulk reading and extraction. Re-reading sources a worker
-    already covered is forbidden token waste.
+    One worker identity may be continued for short follow-ups; re-reading
+    sources a worker already covered is forbidden token waste.
     """
     return (
-        "Optional Grok 4.5 helpers: you may dispatch up to %d read-only "
-        "Grok 4.5 workers via the grok-workers MCP tools "
-        "(dispatch_grok_worker, await_grok_worker, list_grok_workers, "
-        "worker_pool_stats). Workers share this isolated workspace and "
-        "cannot write files or run shell commands. The hard cap is %d "
-        "total and %d concurrent; further dispatches fail. Do not nest "
-        "further workers inside workers.\n\n"
+        "Optional Grok helpers: you may dispatch at most %d read-only Grok "
+        "worker via the grok-workers MCP tools "
+        "(dispatch_grok_worker, continue_grok_worker, await_grok_worker, "
+        "list_grok_workers, worker_pool_stats). That single worker may run up "
+        "to %d conversational turns (turn 1 = dispatch; turns 2–%d = "
+        "continue_grok_worker). A second worker identity is rejected. Workers "
+        "share this isolated workspace and cannot write files or run shell "
+        "commands. Do not nest further workers inside workers.\n\n"
         "Worker-dispatch policy (you are the mastermind):\n"
         "- Keep strategic thinking, analysis, critical choices, and the "
         "final artifact on the parent.\n"
-        "- Dispatch workers liberally for bulk work: reading packet/corpus "
-        "sources, extracting locators/quotes, web or literature lookup, "
-        "enumerations, routine local checks, and draft fragments.\n"
+        "- First dispatch: one narrow task plus path/ID pointers — not a dump "
+        "of the packet or working context you already hold.\n"
+        "- Continues: keep them short and easy — a redo with clearer "
+        "constraints, ask-for-more / missing locator, gap-fill critique, or "
+        "one new narrow sub-task. One ask per continue. Do not use continues "
+        "for complex or open-ended proof work; do that yourself.\n"
         "- Do not re-read or re-fetch sources a worker already covered just "
         "to re-skim the raw text — that wastes tokens. Treat worker reports "
         "as your reading layer; analyze, critique, select, and decide from "
@@ -825,12 +1212,12 @@ def worker_dispatch_parent_policy(max_workers: int) -> str:
         "- Workers are assistive only — you must still return exactly one "
         "final JSON artifact yourself and remain responsible for every "
         "load-bearing step."
-        % (max_workers, max_workers, max_workers)
+        % (max_workers, max_worker_turns, max_worker_turns)
     )
 
 
 def max_grok_workers_from_config(config_root: Dict[str, Any]) -> int:
-    """Return hard worker budget from engines.json root (default 4)."""
+    """Return hard worker-identity budget from engines.json (default 1)."""
     if config_root.get("grok_workers_enabled") is False:
         return 0
     raw = config_root.get("max_grok_workers", DEFAULT_MAX_TOTAL)
@@ -839,6 +1226,16 @@ def max_grok_workers_from_config(config_root: Dict[str, Any]) -> int:
     except (TypeError, ValueError):
         return DEFAULT_MAX_TOTAL
     return max(0, min(value, DEFAULT_MAX_TOTAL))
+
+
+def max_worker_turns_from_config(config_root: Dict[str, Any]) -> int:
+    """Return conversational turn budget per worker identity (default 4)."""
+    raw = config_root.get("max_worker_turns", DEFAULT_MAX_WORKER_TURNS)
+    try:
+        value = int(raw)
+    except (TypeError, ValueError):
+        return DEFAULT_MAX_WORKER_TURNS
+    return max(1, min(value, 8))
 
 
 def mcp_server_command() -> List[str]:
@@ -881,10 +1278,12 @@ def prepare_worker_session(
     allow_web: bool = False,
     worker_model: str = DEFAULT_MODEL,
     worker_timeout: int = DEFAULT_TIMEOUT_SECONDS,
+    worker_backend: Optional[str] = None,
     parent_meta: Optional[Dict[str, Any]] = None,
     dispatch_log_dir: Optional[Path] = None,
     session_id: Optional[str] = None,
     attach_mcp: bool = True,
+    max_worker_turns: int = DEFAULT_MAX_WORKER_TURNS,
 ) -> Optional[WorkerSession]:
     """Build session-scoped MCP config for a parent engine family.
 
@@ -897,7 +1296,10 @@ def prepare_worker_session(
     family = str(family or "")
     if max_workers <= 0 or family not in WORKER_FAMILIES:
         return None
-    if shutil.which("grok") is None:
+    backend = worker_backend or resolve_worker_backend()
+    if backend not in {"cursor", "xai"}:
+        backend = DEFAULT_WORKER_BACKEND
+    if not worker_backend_available(backend):
         return None
 
     results_dir = context / "grok-workers"
@@ -908,12 +1310,15 @@ def prepare_worker_session(
     # Write session shell immediately so the folder exists even if no worker is
     # ever dispatched (useful when auditing "available but unused").
     session_log = DispatchLog(log_root, session_id=sid, parent=parent)
+    turns = max(1, int(max_worker_turns))
     session_log.log(
         "session_open",
         family=family,
         max_workers=max_workers,
+        max_worker_turns=turns,
         allow_web=allow_web,
         worker_model=worker_model,
+        worker_backend=backend,
     )
 
     server_cmd = mcp_server_command()
@@ -922,8 +1327,10 @@ def prepare_worker_session(
         "GROK_WORKER_CWD": str(context),
         "GROK_WORKER_MAX_CONCURRENT": str(max_workers),
         "GROK_WORKER_MAX_TOTAL": str(max_workers),
+        "GROK_WORKER_MAX_TURNS": str(turns),
         "GROK_WORKER_TIMEOUT": str(worker_timeout),
         "GROK_WORKER_MODEL": worker_model,
+        "GROK_WORKER_BACKEND": backend,
         "GROK_WORKER_ALLOW_WEB": "1" if allow_web else "0",
         "GROK_WORKER_LOG_DIR": str(log_root),
         "GROK_WORKER_SESSION_ID": sid,
@@ -934,6 +1341,9 @@ def prepare_worker_session(
             Path(tempfile.gettempdir()) / "pure-tate-mcp-uv-cache"
         ),
     }
+    cursor_key = os.environ.get("CURSOR_API_KEY", "").strip()
+    if backend == "cursor" and cursor_key:
+        worker_env["CURSOR_API_KEY"] = cursor_key
     session = WorkerSession(
         enabled=True,
         max_workers=max_workers,
@@ -943,6 +1353,7 @@ def prepare_worker_session(
         server_command=server_cmd,
         env_updates=dict(worker_env),
         session_id=sid,
+        max_worker_turns=turns,
         dispatch_log=session_log,
     )
 
@@ -959,6 +1370,30 @@ def prepare_worker_session(
 
     if family == "claude":
         mcp_path = context / "grok-workers.mcp.json"
+        mcp_path.write_text(
+            json.dumps(
+                {
+                    "mcpServers": {
+                        MCP_SERVER_NAME: {
+                            "command": server_cmd[0],
+                            "args": server_cmd[1:],
+                            "env": worker_env,
+                        }
+                    }
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        session.mcp_config_path = mcp_path
+        return session
+
+    if family == "cursor":
+        # Cursor Agent loads MCP from <workspace>/.cursor/mcp.json.
+        cursor_dir = context / ".cursor"
+        cursor_dir.mkdir(parents=True, exist_ok=True)
+        mcp_path = cursor_dir / "mcp.json"
         mcp_path.write_text(
             json.dumps(
                 {
@@ -1087,6 +1522,16 @@ def apply_workers_to_argv(
                 if extra not in tools:
                     tools.append(extra)
             out[idx + 1] = ",".join(tools)
+        return out
+
+    if family == "cursor":
+        # Approve the ephemeral workspace MCP servers without prompting.
+        if "--approve-mcps" not in out:
+            # Insert before the trailing prompt positional when present.
+            insert_at = len(out)
+            if out and not out[-1].startswith("-"):
+                insert_at = len(out) - 1
+            out = out[:insert_at] + ["--approve-mcps"] + out[insert_at:]
         return out
 
     if family == "openai" and session.server_command:
@@ -1261,11 +1706,15 @@ def build_pool_from_env() -> GrokWorkerPool:
             "GROK_WORKER_MAX_CONCURRENT", DEFAULT_MAX_CONCURRENT
         ),
         max_total=_env_int("GROK_WORKER_MAX_TOTAL", DEFAULT_MAX_TOTAL),
-        model=os.environ.get("GROK_WORKER_MODEL", DEFAULT_MODEL),
+        max_worker_turns=_env_int(
+            "GROK_WORKER_MAX_TURNS", DEFAULT_MAX_WORKER_TURNS
+        ),
+        model=resolve_worker_model(backend=resolve_worker_backend()),
         timeout_seconds=_env_int(
             "GROK_WORKER_TIMEOUT", DEFAULT_TIMEOUT_SECONDS
         ),
         allow_web=_env_bool("GROK_WORKER_ALLOW_WEB", False),
+        backend=resolve_worker_backend(),
         work_dir=_env_path("GROK_WORKER_CWD"),
         results_dir=_env_path("GROK_WORKER_RESULTS_DIR"),
         dispatch_log=dispatch_log,
@@ -1281,11 +1730,12 @@ def serve_mcp() -> int:
     mcp = MCPServer(
         name=MCP_SERVER_NAME,
         instructions=(
-            "Hard-capped Grok 4.5 worker pool. Max %d concurrent and %d total "
-            "dispatches per session. Parents are masterminds (thinking/"
-            "decisions); workers do bulk reading and extraction so parents "
-            "need not re-skim the same raw sources."
-            % (pool.max_concurrent, pool.max_total)
+            "Hard-capped Grok worker pool. At most %d worker identity and %d "
+            "conversational turns on that identity (dispatch + continue). "
+            "Parents are masterminds; workers do targeted reading/extraction. "
+            "Follow-ups must stay short (redo / more info / gap-fill / narrow "
+            "sub-task) without re-dumping principal context."
+            % (pool.max_total, pool.max_worker_turns)
         ),
     )
 
@@ -1296,14 +1746,39 @@ def serve_mcp() -> int:
         wait: bool = False,
         timeout_seconds: Optional[float] = None,
     ) -> str:
-        """Dispatch a read-only Grok 4.5 worker for bulk reading/extraction (hard-capped).
+        """Dispatch the single read-only Grok worker (turn 1; hard-capped).
 
-        Parent remains the mastermind for thinking and decisions; workers
-        should carry source-reading load so the parent need not re-skim
-        the same raw text.
+        Parent remains the mastermind. Give a narrow task with path/ID
+        pointers — not a dump of packet/working context you already hold.
+        Use continue_grok_worker for short follow-ups on the same worker.
         """
         try:
             payload = pool.dispatch(
+                prompt,
+                description,
+                wait=wait,
+                timeout_seconds=timeout_seconds,
+            )
+            return json.dumps(payload, indent=2, sort_keys=True)
+        except PoolError as exc:
+            return json.dumps(exc.as_dict(), indent=2)
+
+    @mcp.tool()
+    def continue_grok_worker(
+        worker_id: str,
+        prompt: str,
+        description: str = "",
+        wait: bool = False,
+        timeout_seconds: Optional[float] = None,
+    ) -> str:
+        """Continue the existing worker with a short follow-up (turns 2–N).
+
+        Allowed: redo, ask-for-more, gap-fill critique, or one narrow new
+        sub-task. Do not re-send principal packet/working context.
+        """
+        try:
+            payload = pool.continue_worker(
+                worker_id,
                 prompt,
                 description,
                 wait=wait,

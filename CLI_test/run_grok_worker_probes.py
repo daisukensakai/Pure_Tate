@@ -87,6 +87,8 @@ def _fake_runner_factory(delay: float = 0.05, fail_ids: Optional[set] = None):
         description: str,
         worker_id: str,
         pool: GrokWorkerPool,
+        turn: int = 1,
+        resume_session_id: Optional[str] = None,
     ) -> WorkerRecord:
         time.sleep(delay)
         status = "failed" if worker_id in fail_ids else "completed"
@@ -99,140 +101,85 @@ def _fake_runner_factory(delay: float = 0.05, fail_ids: Optional[set] = None):
             started_at=utc_now_iso(),
             finished_at=utc_now_iso(),
             returncode=0 if status == "completed" else 1,
-            result_text='{"probe":"fake","ok":true}',
+            result_text='{"probe":"fake","ok":true,"turn":%d}' % turn,
             elapsed_seconds=delay,
             argv_redacted=["fake-runner"],
+            turn_index=turn,
+            cli_session_id=resume_session_id or "sess-fake",
         )
 
     return runner
 
 
 def probe_pool_unit_cap() -> Dict[str, Any]:
-    """Hard concurrent + total caps without calling Grok."""
-    # Concurrent: use real threads with a blocking runner mock via custom runner
-    # that holds until a release event. The pool's default runner is sync when
-    # provided, so for concurrent we temporarily use subprocess-less threads by
-    # monkeypatching _run_worker path: use runner=None and inject fake processes
-    # is hard. Instead test total cap + concurrent via locking dispatch.
-
-    # Total budget of 4: 5th dispatch raises budget_exhausted.
-    pool = GrokWorkerPool(max_concurrent=4, max_total=4, runner=_fake_runner_factory())
-    for i in range(4):
-        result = pool.dispatch("prompt-%d" % i, "t%d" % i)
-        assert result["status"] == "completed", result
+    """Hard identity + concurrent caps without calling Grok."""
+    pool = GrokWorkerPool(
+        max_concurrent=1, max_total=1, max_worker_turns=4, runner=_fake_runner_factory()
+    )
+    result = pool.dispatch("prompt-0", "t0")
+    assert result["status"] == "completed", result
     try:
-        pool.dispatch("prompt-5", "t5")
-        fifth_total = {"raised": False}
+        pool.dispatch("prompt-1", "t1")
+        second_total = {"raised": False}
     except PoolError as exc:
-        fifth_total = {"raised": True, "code": exc.code, "message": exc.message}
-    assert fifth_total.get("raised") and fifth_total.get("code") == "budget_exhausted"
+        second_total = {"raised": True, "code": exc.code, "message": exc.message}
+    assert second_total.get("raised") and second_total.get("code") == "budget_exhausted"
 
-    # Concurrent: hold workers in "running" via slow runner + wait=False needs
-    # async path. Use runner=None is live. Simulate concurrent by manual live count:
-    pool2 = GrokWorkerPool(max_concurrent=4, max_total=10, runner=None)
-    # Manually reserve live slots through internal API simulation:
-    hold = threading.Event()
-    started = threading.Barrier(5)  # 4 workers + main optional; use Counter
+    pool3 = GrokWorkerPool(max_concurrent=1, max_total=1, max_worker_turns=4)
+    gate_entered = threading.Event()
+    gate_release = threading.Event()
 
-    release = threading.Event()
-    running_count = {"n": 0}
-    lock = threading.Lock()
-
-    def blocking_runner(
-        *,
-        prompt: str,
-        description: str,
+    def gated_run(
         worker_id: str,
-        pool: GrokWorkerPool,
-    ) -> WorkerRecord:
-        with lock:
-            running_count["n"] += 1
-        # Signal that this worker started counting.
-        hold.set()
-        release.wait(timeout=10)
-        with lock:
-            running_count["n"] -= 1
-        return WorkerRecord(
-            worker_id=worker_id,
-            description=description,
-            prompt_sha256=sha256_text(prompt),
-            status="completed",
-            created_at=utc_now_iso(),
-            started_at=utc_now_iso(),
-            finished_at=utc_now_iso(),
-            returncode=0,
-            result_text="ok",
-            elapsed_seconds=0.01,
-        )
-
-    # Sync runner cannot test concurrent pool_full because dispatch holds the
-    # runner inline. Use a threaded wrapper pool method: dispatch with runner
-    # that is async via threads. We'll test concurrent by patching dispatch to
-    # increment live before runner without completing.
-
-    pool3 = GrokWorkerPool(max_concurrent=4, max_total=10)
-
-    class Gate:
-        def __init__(self) -> None:
-            self.entered = threading.Event()
-            self.release = threading.Event()
-            self.count = 0
-            self.lock = threading.Lock()
-
-    gate = Gate()
-
-    def gated_run(worker_id: str, prompt: str, timeout_seconds: Optional[int]) -> None:
-        with gate.lock:
-            gate.count += 1
-            if gate.count >= 4:
-                gate.entered.set()
-        gate.release.wait(timeout=15)
+        prompt: str,
+        timeout_seconds: Optional[int],
+        resume_session_id: Optional[str] = None,
+    ) -> None:
+        gate_entered.set()
+        gate_release.wait(timeout=15)
         with pool3._lock:
             rec = pool3._workers[worker_id]
             rec.status = "completed"
             rec.finished_at = utc_now_iso()
             rec.result_text = "done"
             rec.returncode = 0
+            rec.cli_session_id = "sess-live"
             pool3._live = sum(
                 1
                 for item in pool3._workers.values()
                 if item.status in {"queued", "running"}
             )
 
-    # Monkeypatch internal runner to gated threads without spawning grok.
     pool3._run_worker = gated_run  # type: ignore[method-assign]
-
-    ids = []
-    for i in range(4):
-        meta = pool3.dispatch("p-%d" % i, "c%d" % i, wait=False)
-        ids.append(meta["worker_id"])
-    assert gate.entered.wait(timeout=5), "workers did not become live"
+    meta = pool3.dispatch("p-0", "c0", wait=False)
+    assert gate_entered.wait(timeout=5), "worker did not become live"
     fifth_concurrent: Dict[str, Any]
     try:
-        pool3.dispatch("p-5", "c5", wait=False)
+        pool3.dispatch("p-1", "c1", wait=False)
         fifth_concurrent = {"raised": False}
     except PoolError as exc:
         fifth_concurrent = {"raised": True, "code": exc.code, "message": exc.message}
-    gate.release.set()
-    for wid in ids:
-        pool3.await_worker(wid, timeout_seconds=5)
-    assert (
-        fifth_concurrent.get("raised")
-        and fifth_concurrent.get("code") == "pool_full"
-    ), fifth_concurrent
+    gate_release.set()
+    pool3.await_worker(meta["worker_id"], timeout_seconds=5)
+    assert fifth_concurrent.get("raised") and fifth_concurrent.get("code") in {
+        "pool_full",
+        "budget_exhausted",
+    }, fifth_concurrent
 
     return {
         "probe": "pool_unit_cap",
         "status": "pass",
-        "fifth_total": fifth_total,
-        "fifth_concurrent": fifth_concurrent,
+        "second_total": second_total,
+        "second_while_live": fifth_concurrent,
         "stats_after_total_test": pool.stats(),
     }
 
 
 def probe_mcp_unit_roundtrip() -> Dict[str, Any]:
     """In-process MCP initialize + tools/call against fake pool."""
-    pool = GrokWorkerPool(max_concurrent=4, max_total=4, runner=_fake_runner_factory())
+    pool = GrokWorkerPool(
+        max_concurrent=1, max_total=1, max_worker_turns=4, runner=_fake_runner_factory()
+    )
     server = McpServer(pool)
     init = server.handle(
         {
@@ -392,68 +339,90 @@ def probe_worker_smoke(run_dir: Path) -> Dict[str, Any]:
     }
 
 
-def probe_worker_parallel_4(run_dir: Path) -> Dict[str, Any]:
-    """Dispatch 4 concurrent live workers; 5th must hard-fail."""
-    results = run_dir / "worker_parallel_4"
+def probe_worker_single_cap(run_dir: Path) -> Dict[str, Any]:
+    """Live: one worker identity; second dispatch must hard-fail."""
+    results = run_dir / "worker_single_cap"
     results.mkdir(parents=True, exist_ok=True)
     pool = GrokWorkerPool(
-        max_concurrent=4,
-        max_total=4,
+        max_concurrent=1,
+        max_total=1,
+        max_worker_turns=4,
         results_dir=results,
         work_dir=ROOT,
         timeout_seconds=LIVE_TIMEOUT,
+        backend="cursor",
     )
-    ids = []
-    errors = []
-    for i in range(4):
-        prompt = (
-            "Return exactly one JSON object and no Markdown: "
-            '{"probe":"worker_parallel_4","ok":true,"slot":%d}.' % i
-        )
-        try:
-            meta = pool.dispatch(prompt, "p%d" % i, wait=False)
-            ids.append(meta["worker_id"])
-        except PoolError as exc:
-            errors.append(exc.as_dict())
-    fifth: Dict[str, Any]
+    prompt = (
+        "Return exactly one JSON object and no Markdown: "
+        '{"probe":"worker_single_cap","ok":true}.'
+    )
+    first = pool.dispatch(prompt, "p0", wait=True)
+    second: Dict[str, Any]
     try:
         pool.dispatch(
             'Return JSON {"probe":"overflow","ok":false}.',
             "overflow",
             wait=False,
         )
-        fifth = {"raised": False}
+        second = {"raised": False}
     except PoolError as exc:
-        fifth = {"raised": True, "code": exc.code, "message": exc.message}
-
-    finished = []
-    for wid in ids:
-        try:
-            finished.append(
-                pool.await_worker(wid, timeout_seconds=LIVE_TIMEOUT)
-            )
-        except PoolError as exc:
-            finished.append(exc.as_dict())
-
-    completed = sum(1 for item in finished if item.get("status") == "completed")
+        second = {"raised": True, "code": exc.code, "message": exc.message}
     ok = (
-        len(ids) == 4
-        and fifth.get("raised") is True
-        and fifth.get("code") in {"pool_full", "budget_exhausted"}
-        and completed >= 3  # allow one flake; prefer 4
+        first.get("status") == "completed"
+        and second.get("raised") is True
+        and second.get("code") == "budget_exhausted"
     )
-    # With wait=False and max_total=4, 5th should be budget_exhausted if all
-    # four dispatches counted, or pool_full if they are still live. Either is hard cap.
     return {
-        "probe": "worker_parallel_4",
+        "probe": "worker_single_cap",
         "status": "pass" if ok else "fail",
-        "dispatched_ids": ids,
-        "fifth": fifth,
-        "finished": finished,
-        "completed_count": completed,
-        "dispatch_errors": errors,
+        "first": first,
+        "second": second,
         "stats": pool.stats(),
     }
+
+
+def probe_worker_continue_turns(run_dir: Path) -> Dict[str, Any]:
+    """Unit/mocked: one identity can continue up to 4 turns then exhausts."""
+    results = run_dir / "worker_continue_turns"
+    results.mkdir(parents=True, exist_ok=True)
+    pool = GrokWorkerPool(
+        max_concurrent=1,
+        max_total=1,
+        max_worker_turns=4,
+        backend="cursor",
+        runner=_fake_runner_factory(delay=0.0),
+        results_dir=results,
+    )
+    first = pool.dispatch("start", "t1")
+    worker_id = first["worker_id"]
+    turns = [first]
+    for index in range(2, 5):
+        turns.append(
+            pool.continue_worker(worker_id, "follow-%d" % index, "c%d" % index)
+        )
+    exhausted: Dict[str, Any]
+    try:
+        pool.continue_worker(worker_id, "too-many", "x")
+        exhausted = {"raised": False}
+    except PoolError as exc:
+        exhausted = {"raised": True, "code": exc.code, "message": exc.message}
+    ok = (
+        all(item.get("status") == "completed" for item in turns)
+        and [item.get("turn_index") for item in turns] == [1, 2, 3, 4]
+        and exhausted.get("code") == "turns_exhausted"
+    )
+    return {
+        "probe": "worker_continue_turns",
+        "status": "pass" if ok else "fail",
+        "turns": [{"turn": t.get("turn_index"), "status": t.get("status")} for t in turns],
+        "exhausted": exhausted,
+        "stats": pool.stats(),
+    }
+
+
+def probe_worker_parallel_4(run_dir: Path) -> Dict[str, Any]:
+    """Deprecated alias — parallel workers are no longer supported."""
+    return probe_worker_single_cap(run_dir)
 
 
 def _available_tools_from_stream(stdout: str) -> List[str]:
@@ -1076,10 +1045,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         ("pool_unit_cap", probe_pool_unit_cap),
         ("mcp_unit_roundtrip", probe_mcp_unit_roundtrip),
         ("worker_argv_shape", probe_worker_argv_shape),
+        ("worker_continue_turns", lambda: probe_worker_continue_turns(run_dir)),
     ]
     live_probes = [
         ("worker_smoke", lambda: probe_worker_smoke(run_dir)),
-        ("worker_parallel_4", lambda: probe_worker_parallel_4(run_dir)),
+        ("worker_single_cap", lambda: probe_worker_single_cap(run_dir)),
         ("allowlist_safety", lambda: probe_allowlist_safety(run_dir)),
         ("native_spawn_optional", lambda: probe_native_spawn_optional(run_dir)),
         ("mcp_claude", lambda: probe_mcp_claude(run_dir)),

@@ -1,0 +1,108 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Exact scope: FND-0118 challenges absolute component-dimension comparisons across the B_3/B_4 h^0 jump when the base is assumed only locally Noetherian over a characteristic-zero field. Its abstract core is correct: for a DVR R containing Q, Spec(R) is irreducible Noetherian of dimension 1 while its generic-point open Spec(Frac(R)) has dimension 0 (Stacks 00PD); consequently the proposed generic incidence P^2_{Frac(R)} has dimension 2 and the closed jump fibre P^3_k has dimension 3 (Stacks 0B2N). This shows that the inference dim(X)=d implies dimension d+2 over X intersect B_3 is invalid at that generality. However, the DVR does not itself witness failure of dim(Z)+codim(Z,X)=dim(X), and catenarity alone is not a sufficient repair: the DVR is catenary, whereas preservation of dimension on nonempty opens follows under finite type over a field (Stacks 0A21; EGA IV_2, 4.1) or under the stronger Jacobson, catenary, locally Noetherian, finite-dimensional hypotheses of Stacks 0DRT. The finding's unrestricted assertion about components of the strata B_k also requires qualification whenever a proper open is substituted or no finite-type/strong biequidimensional hypothesis is present. No cross-checked claim is contradicted: contradicts_claim_ids is empty, and the finding is compatible with CONJ-0001, THM-0001 through THM-0007, OBS-0001, and RED-0001. There is no merge target. Campaign applicability fails because the actual moduli and Hurwitz bases are algebraic stacks locally of finite type over Spec(Z) or the characteristic-zero field (Stacks 0E9C; Deopurkar, Theorem A and Theorem 3.8), and the balanced and incidence loci inherit local finite type; thus Stacks 0A21 excludes the DVR dimension drop on the relevant atlases. Moreover, the alleged load-bearing cross-jump step cannot be verified because ATT-0074 and REV-0126 are unavailable, while the curated packet does not contain that argument. Nonemptiness of B_4 remains unresolved by GAP-H0-1/FND-0104, so the example is only a contingent logical gap, not an instantiated geometric refutation. Retire FND-0118 as an active C66-COMP-COMP obstruction; preserve its valid finite-type warning as a hypothesis constraint on any future abstract cross-jump dimension statement.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0118",
+  "id": "FAUD-0117",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "objects": [
+      "stratified incidence I over B_3/B_4",
+      "irreducible components of the reduced base",
+      "h^0 jump stratum B_4"
+    ],
+    "subproblem_id": "C66-COMP-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "unverifiable",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T03:36:41Z",
+      "source_type": "stacks",
+      "url": "https://stacks.math.columbia.edu/tag/00PD"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "unverifiable",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T03:36:41Z",
+      "source_type": "stacks",
+      "url": "https://stacks.math.columbia.edu/tag/0A21"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "unverifiable",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T03:36:41Z",
+      "source_type": "stacks",
+      "url": "https://stacks.math.columbia.edu/tag/0DRT"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "unverifiable",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T03:36:41Z",
+      "source_type": "stacks",
+      "url": "https://stacks.math.columbia.edu/tag/0B2N"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "unverifiable",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T03:36:41Z",
+      "source_type": "stacks",
+      "url": "https://stacks.math.columbia.edu/tag/0E9C"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "unverifiable",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T03:36:41Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/article/PMIHES_1965__24__5_0.pdf"
+    },
+    {
+      "arxiv_id": "1206.4535",
+      "arxiv_version": "v1",
+      "content_sha256": "unverifiable",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T03:36:41Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1206.4535"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T03:36:41Z",
+      "source_type": "packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    }
+  ],
+  "task_id": "TASK-F-FND-0118",
+  "verdict": "retire"
+}

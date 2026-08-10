@@ -74,6 +74,11 @@ def effective_capabilities_from_argv(
             capabilities.add("web_search")
         if "web_fetch" in enabled and "web_fetch" not in blocked:
             capabilities.add("web_fetch")
+    elif family == "cursor":
+        # Cursor Agent has no --tools ACL; mode ask is read-only. Web is
+        # available on AGENT_WEB_PHASES via declared capabilities / default tools.
+        if phase_allows_web(phase):
+            capabilities.update(WEB_CAPABILITIES)
     elif family == "qwen":
         # Qwen3.7-Max uses the Responses API's native web_search and
         # web_extractor tools on web-enabled phases.
@@ -139,6 +144,7 @@ def audit_engine_capability(
     # Local import prevents a cycle: agents uses this module at dispatch time.
     from .agents import (
         _engine_argv,
+        _extract_claude_stream,
         _extract_grok_stream,
         _extract_json_object,
         _extract_qwen_stream,
@@ -198,6 +204,8 @@ def audit_engine_capability(
                         family = engine.get("family")
                         if family == "grok":
                             result = _extract_grok_stream(raw)
+                        elif family in {"claude", "cursor"}:
+                            result = _extract_claude_stream(raw)
                         elif family == "qwen":
                             result = _extract_qwen_stream(raw)
                         else:

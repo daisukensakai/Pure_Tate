@@ -1,0 +1,204 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "Under a proved nonemptiness or dominance hypothesis for the reduced-support open on each component, pencil recovery should imply image dimension dim(B)+2 and codimension 19-dim(B) in M_{6,6}."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "A discriminant analysis inside each P^2 fibre may establish the existence of a reduced member of |L| even though L is not uniformly base-point-free."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The relative determinantal scheme may coincide with the Abel-Jacobi incidence under explicit disjoint-section and cohomology-and-base-change hypotheses, via a direct comparison of Fitting ideals."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Functorial reconstruction of gamma as a morphism to the P^1-bundle associated with p_*(omega(-Gamma)) may extend geometric-point injectivity and stabilizer equality to full faithfulness on all base schemes."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "A Hurwitz-stratified analysis may show that every relevant balanced component has dimension 15 after accounting for nonsimple ramification and special curve loci."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Degree-four covers factoring through positive-genus intermediate curves should be analyzed separately from hyperelliptic-composed covers when classifying balanced components."
+    }
+  ],
+  "engine": "codex",
+  "established_facts": [
+    {
+      "evidence": "SRC-0004, Lemma 10.6, gives deg(W_f|_C)=2(2g-2+8)-4f=4g+12-4f using gamma^*O(-f).",
+      "evidence_class": "source",
+      "statement": "With W_f := (O_{P(E^vee)}(2) tensor gamma^*O_{P^1}(-f))|_C, one has deg(W_f)=4g+12-4f; the negative sign is essential."
+    },
+    {
+      "evidence": "The weak normalization with a residual pullback A has degree equation 10+8+4 deg(A)=18, hence deg(A)=0; Pic(P^1)=Z makes A trivial. Substitution into W_f gives the three displayed identities.",
+      "evidence_class": "mechanical",
+      "statement": "The normalization is O_P(1)|_C isomorphic to omega_C tensor gamma^*O(2); consequently W_4=omega_C^2, W_5=omega_C^2(-D), and L:=W_5 tensor omega_C^{-1}=omega_C(-D)."
+    },
+    {
+      "evidence": "Direct substitution gives 4*6+12-4*4=20 and 4*6+12-4*5=16; subtracting deg(omega_C)=10 gives deg(L)=6.",
+      "evidence_class": "mechanical",
+      "statement": "For g=6, deg(W_4)=20, deg(W_5)=16, and deg(L)=6."
+    },
+    {
+      "evidence": "Riemann-Roch gives chi(L)=6-6+1=1, so h^0(L)-1=h^1(L); Serre duality gives h^1(L)=h^0(omega_C tensor L^{-1})=h^0(O_C(D)).",
+      "evidence_class": "mechanical",
+      "statement": "For L=omega_C(-D), chi(L)=1 and dim|L|=h^1(L)=h^0(O_C(D))."
+    },
+    {
+      "evidence": "The pulled-back pencil supplies two sections and Clifford gives h^0(D)<=3. Equality forces the hyperelliptic equality case. Conversely, if a hyperelliptic curve had h^0(D)=2, the map (h,gamma) to P^1 times P^1 would either force factorization through h or be birational onto a bidegree-(4,2) curve of arithmetic genus 3, contradicting genus 6.",
+      "evidence_class": "mechanical",
+      "statement": "For every degree-four cover of a genus-six curve, h^0(O_C(D)) belongs to {2,3}; it equals 3 exactly in the hyperelliptic-composed case, where D is linearly equivalent to twice the hyperelliptic class."
+    },
+    {
+      "evidence": "The factorization pushforward gives gamma_*O_C=O direct-sum O(-1) direct-sum O(-4)^2. After twisting the conic-bundle sequence by O(-6), h^0(Sym^2E(-6))=9 and the target has 7 sections, so h^0(F(-6))>=2; balanced F would give h^0(F(-6))=0.",
+      "evidence_class": "mechanical",
+      "statement": "A hyperelliptic genus-six degree-four cover has Tschirnhausen bundle E=O(1) direct-sum O(4) direct-sum O(4) and cannot have balanced relations bundle F=O(4) direct-sum O(5)."
+    },
+    {
+      "evidence": "Balancedness excludes the hyperelliptic case, so the dichotomy gives h^0(D)=2; the Riemann-Roch and Serre-duality identities then give h^1(L)=2 and h^0(L)=3.",
+      "evidence_class": "mechanical",
+      "statement": "On the balanced locus, h^0(O_C(D))=2, h^0(L)=3, and h^1(L)=2 without fibrewise jumping."
+    },
+    {
+      "evidence": "The W_4 term has deg(W_4(-Gamma))=14>10, so its evaluation cokernel vanishes. The W_5 term has degree 10 after subtracting Gamma; Serre duality identifies its cokernel with sections of a degree-zero line bundle, which is one-dimensional exactly when that bundle is trivial. The filtered snake lemma transfers this cokernel to the full evaluation.",
+      "evidence_class": "mechanical",
+      "statement": "For a balanced pair and an effective degree-six divisor Gamma, the fibrewise CE evaluation has corank at most one; its cokernel is one-dimensional exactly when O_C(Gamma) is isomorphic to L and is zero otherwise."
+    },
+    {
+      "evidence": "The fibre dimensions h^0(L)=3 and h^1(L)=2 are constant; Grauert gives local freeness and base change. The divisor functor defining the Abel-Jacobi fibre agrees with P(p_*L), and projectivization is unchanged by a line-bundle twist from the base.",
+      "evidence_class": "mechanical",
+      "statement": "Over a reduced locally Noetherian base carrying a balanced family, p_*L is locally free of rank 3, R^1p_*L is locally free of rank 2, and the full relative Abel-Jacobi incidence is a Zariski-locally trivial P^2-bundle, smooth and proper of pure relative dimension 2."
+    },
+    {
+      "evidence": "The identity O_C(Gamma)=omega_C(-D) gives omega_C(-Gamma)=O_C(D), whose space of sections has dimension 2 and contains the pulled-back gamma-pencil. Completeness gives recovery; surjectivity of gamma gives uniqueness of the target automorphism.",
+      "evidence_class": "mechanical",
+      "statement": "If O_C(Gamma) is isomorphic to L on a balanced pair, then |omega_C(-Gamma)| is the complete base-point-free pencil defining gamma; gamma is recovered up to PGL_2, and Aut(C,gamma,Gamma) is isomorphic to Aut(C,Gamma)."
+    },
+    {
+      "evidence": "The expected codimension is (11-5)(6-5)=6 inside relative Sym^6 of dimension 6. The actual fibre is P^2, and h^1(L)=2.",
+      "evidence_class": "mechanical",
+      "statement": "The generic determinantal expectation for the corank-one locus of the 11-to-6 evaluation is relative dimension 0, whereas the actual Abel-Jacobi fibre has dimension 2; the excess equals h^1(L)=2."
+    },
+    {
+      "evidence": "The base-point condition is h^0(L(-p))=h^0(L)=3. Serre duality and Riemann-Roch for the degree-five bundle O_C(D+p), whose Euler characteristic is zero, convert this to h^0(O_C(D+p))=3. For the plane-quintic example, h^0(H-p)=2 and h^0(H+p)=3=h^0(H).",
+      "evidence_class": "mechanical",
+      "statement": "When h^0(L)=3, a point p is a base point of |L| exactly when h^0(O_C(D+p))=3; for a smooth plane quintic with canonical class 2H and D=H-p, one has L=H+p and p is a base point."
+    }
+  ],
+  "id": "DIGEST-0023",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "The reduced-support locus is only an open subset of the projective bundle and may be empty or fail to dominate a component of B. Injectivity controls fibres where the open exists but does not prove nonemptiness or dominance.",
+      "statement": "The reduced-support open has image dimension dim(B)+2 merely because the full Abel-Jacobi incidence is a P^2-bundle and the classifying map is injective on geometric points."
+    },
+    {
+      "mathematical_reason": "The filtered relative argument uses six disjoint sections and cohomology-and-base-change hypotheses. Fibrewise rank behavior does not determine nilpotent or Fitting scheme structure for a general relative divisor.",
+      "statement": "The relative identities Fit_0(coker(phi))=I_12(phi)=I_6(phi_5) hold over any base carrying an arbitrary relative degree-six divisor."
+    },
+    {
+      "mathematical_reason": "The h^0(D)=3 case detects composition through the genus-zero hyperelliptic map. Factorizations through degree-two maps to intermediate curves of positive genus are not excluded by this dichotomy and can retain h^0(D)=2.",
+      "statement": "Constancy of h^0(omega_C(-D)) on the balanced locus is equivalent to excluding every non-primitive degree-four pencil."
+    },
+    {
+      "mathematical_reason": "Total ramification degree equals the number of distinct branch points only for simple ramification. Collisions and higher ramification change the branch-point count and can alter component dimensions.",
+      "statement": "The Riemann-Hurwitz total ramification degree 18 implies that the balanced degree-four cover space has dimension 18-3=15 without further hypotheses."
+    },
+    {
+      "mathematical_reason": "Riemann-Roch guarantees only a nonzero section. Its divisor may have repeated support, and every member of the linear system may contain a non-reduced fixed part.",
+      "statement": "The equality chi(L)=1 guarantees a reduced effective divisor in |L| and hence a nonempty ordered six-point incidence."
+    },
+    {
+      "mathematical_reason": "Balancedness supplies a relative Harder-Narasimhan filtration, not a global splitting. The relevant extension class need not vanish over the base.",
+      "statement": "Fibrewise balancedness gives a global splitting W=W_4 direct-sum W_5 over an arbitrary family, permitting block-diagonal minor factorization."
+    },
+    {
+      "mathematical_reason": "Failure to attain the generic determinantal codimension does not preclude a regular sequence of the actual codimension. A local-complete-intersection conclusion requires depth or conormal calculations.",
+      "statement": "Expected determinantal codimension 6 versus actual codimension 4 implies that the rank-drop locus is nowhere a local complete intersection."
+    },
+    {
+      "mathematical_reason": "The field of definition of deck-group representations does not control the Hodge type of cohomology with the associated geometric monodromy local systems.",
+      "statement": "A finite etale S_6-cover contributes only Tate cohomology because every rational irreducible representation of S_6 is defined over Q."
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "problem_key": "e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9",
+  "reusable_computations": [
+    {
+      "sha256": "867736be32f96a3057aa0f070b3b89ed69f0b5f373e4779cea97dc561f5f536a",
+      "statement": "deg(W_{f_i}|_C)=4g+12-4f_i; deg(omega_C tensor W_{f_i}^vee(Gamma))=4f_i+n-2g-14"
+    },
+    {
+      "sha256": "618eab0c9358e0bb5a9387e77a46a2f081a24d745e13869f79713de32e2a5df6",
+      "statement": "For g=6 and n=6, d=3g-3+n=21 and 2d-16=26."
+    },
+    {
+      "sha256": "206494921a62c47555473286612852fce99ecb51c2b877f535a232e6b9cf0483",
+      "statement": "Using deg(W_f)=4g+12-4f at g=6 gives deg(W_5)=16 and deg(W_4)=20."
+    },
+    {
+      "sha256": "e0ccb83d8c3bc905da06df1be85bd2e0f683c00cdcc2c1dfd00cb6b96cff2d44",
+      "statement": "For a degree-six divisor Gamma, 4f+n-2g-14 equals -4 for f=4 and 0 for f=5."
+    },
+    {
+      "sha256": "dc9dcf854e8555eb33fe36e3a270cb5986fe4bd6b200aaf79d572778afd6ad34",
+      "statement": "For L=W_5 tensor omega_C^{-1}, deg(L)=6 and chi(L)=deg(L)-g+1=1."
+    }
+  ],
+  "reviewer_engine": "codex",
+  "sanitized": true,
+  "schema_version": 1,
+  "source_attribution_confidence": "artifact",
+  "source_lane": "computation",
+  "source_subproblem_id": "C66-COMP-RANK",
+  "source_task_id": "TASK-C66-M-008",
+  "source_trace_id": "TRACE-0032",
+  "source_turn": "standard-fallback",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-CLAUDE-STANDARD_FALLBACK",
+  "unresolved_dependencies": [
+    {
+      "statement": "A scheme-theoretic comparison of the relative CE Fitting ideal with the Abel-Jacobi incidence ideal under precisely stated disjoint-section and base-change hypotheses."
+    },
+    {
+      "statement": "Existence of a reduced member of |omega_C(-D)|, or dominance of the reduced-support open, on every balanced component under consideration."
+    },
+    {
+      "statement": "The dimension of every balanced tetragonal base component, including nonsimple ramification and exclusion or control of larger components over special curve loci."
+    },
+    {
+      "statement": "Exhaustive analysis of unbalanced splitting types, bielliptic, plane-quintic, trigonal-adjacent, and other special loci, together with closure and component behavior."
+    },
+    {
+      "statement": "A complete source moduli functor and full-faithfulness proof on all base schemes for reconstruction of the tetragonal pencil."
+    },
+    {
+      "statement": "Cohomology-and-base-change and projective-bundle statements over non-reduced locally Noetherian bases."
+    },
+    {
+      "statement": "Local structure of the image in M_{6,6}, including closedness, immersion behavior, depth, conormal modules, regular embeddings, and any valid Gysin formalism."
+    },
+    {
+      "statement": "Tate support for the relevant geometric strata and an assembly argument identifying the exact weight-26 ordinary cohomology, equivalently the weight-minus-16 Borel-Moore target."
+    }
+  ]
+}

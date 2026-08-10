@@ -20,7 +20,9 @@ at most four Grok workers, and the harness dispatches one at a time.
 | `mcp_unit_roundtrip` | **pass** | Hand-rolled JSON-RPC unit path |
 | `worker_argv_shape` | **pass** | Workers: read-only tools, `--no-subagents`, `grok-4.5` |
 | `worker_smoke` | **pass** (prior run) | Live single worker returns marker |
-| `worker_parallel_4` | **pass** (prior run) | 4 live workers complete; 5th `budget_exhausted` |
+| `worker_parallel_4` | **superseded** | Replaced by `worker_single_cap` + `worker_continue_turns` (1 identity, ≤4 resume turns) |
+| `worker_single_cap` | **pass** (unit/live) | 1 live worker; 2nd dispatch `budget_exhausted` |
+| `worker_continue_turns` | **pass** (unit) | 4 turns then `turns_exhausted` |
 | `allowlist_safety` | **pass** | Baseline allowlist safe; `spawn_subagent` in `--tools` **unsafe** |
 | `native_spawn_optional` | **skip** | Native spawn via `--tools` collapses allowlist |
 | `mcp_claude` | **pass** | Real worker artifacts + `CLAUDE-MCP` |
@@ -40,7 +42,7 @@ Parent (Claude | Grok)
    │  MCP tools (dispatch / await / list)
    ▼
 uv run --with mcp python CLI_test/grok_worker_mcp_sdk.py
-   │  hard max_concurrent=4, max_total=4
+   │  hard max_concurrent=1, max_total=1, max_worker_turns=4
    ▼
 grok -p … -m grok-4.5   (read-only --tools, --no-subagents)
 ```

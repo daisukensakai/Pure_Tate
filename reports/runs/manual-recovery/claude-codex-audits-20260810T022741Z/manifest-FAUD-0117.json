@@ -1,0 +1,80 @@
+{
+  "id": "TASK-F-FND-0118",
+  "phase": "finding-audit",
+  "role": "independent-finding-adjudicator",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "context_revision": 2,
+  "finding_id": "FND-0118",
+  "finding": {
+    "adjudication_status": "pending",
+    "candidate_key": "FC-COMP-JUMP-DIM-NEEDS-FINITE-TYPE",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-10",
+    "equivalence_group": "FC-COMP-JUMP-DIM-NEEDS-FINITE-TYPE",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0118",
+    "impacts_approach_ids": [
+      "C66-COMP-COMP"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "claude"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      },
+      "objects": [
+        "stratified incidence I over B_3/B_4",
+        "irreducible components of the reduced base",
+        "h^0 jump stratum B_4"
+      ],
+      "subproblem_id": "C66-COMP-COMP"
+    },
+    "source_attempt_ids": [
+      "ATT-0074"
+    ],
+    "source_review_ids": [
+      "REV-0126"
+    ],
+    "statement": "Component-dimension comparisons across the h^0 jump are not valid over the base generality inherited from C66-GEO-H0. Over a base that is only locally Noetherian over a characteristic-zero field, a nonempty open subset of an irreducible component can have strictly smaller dimension than the component (Spec of a DVR containing Q: the generic point is open of dimension 0 in a 1-dimensional space), and dim Z + codim(Z,X) = dim X can fail. Consequently the step 'X is an irreducible component of the reduced base of dimension d meeting B_3, therefore the incidence over X\u2229B_3 has dimension d+2' is unjustified, and in the DVR configuration with the closed point in B_4 and the generic point in B_3 it is false: the incidence over X\u2229B_3 is P^2 over the fraction field of dimension 2 while the incidence over X_4 is P^3 over the residue field of dimension 3, so the jump stratum carries the strictly larger source component and the intended inequality inverts. The pathology needs X to meet both strata, i.e. exactly the case where the comparison has content, and realizability additionally needs B_4 \u2260 \u2205 (open as GAP-H0-1 / FND-0104), so this is a gap rather than an instantiated refutation. Any node comparing source-component dimensions across the jump must add 'of finite type over the field' (or an explicit biequidimensionality/catenary hypothesis), or state the comparison relative to dim(X\u2229B_3) rather than dim X. Statements indexed by components of the strata B_k themselves, rather than of B, are unaffected and remain valid over any locally Noetherian base.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review",
+    "campaign_id": "C66-001"
+  },
+  "excluded_engines": [
+    "claude"
+  ],
+  "target": {
+    "g": 6,
+    "n": 6,
+    "dimension": 21,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "open_bm_degree": 16,
+    "open_bm_weight": -16,
+    "open_bm_tate_type": "Q(8)",
+    "ordinary_cohomology_degree": 26,
+    "ordinary_weight": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "poincare_twist": 21,
+    "chow_codimension": 13
+  },
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "input_packet": "proof/packets/generated/C66-001-v4.md",
+  "requires_live_web": true,
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "output": "research/finding-audits/FAUD-0117.json",
+  "status": "ready",
+  "created_on": "2026-08-10",
+  "selected_engine": "codex"
+}

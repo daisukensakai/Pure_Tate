@@ -59,18 +59,19 @@ model later requests `write` or `run_terminal_command`.
 reintroduces shell. Optional Grok 4.5 helpers use the MCP worker pool instead
 (see below).
 
-## Optional Grok 4.5 worker pool (max 4)
+## Optional Grok 4.5 worker pool (1 identity, ≤4 turns)
 
 When `data/engines.json` has `grok_workers_enabled: true` (default) and
-`max_grok_workers` ≤ 4, agent runs for Claude, Grok, and (best-effort) Codex
+`max_grok_workers` ≤ 1 with `max_worker_turns` ≤ 4, agent runs for Claude, Grok, and (best-effort) Codex
 attach a session-scoped MCP server exposing:
 
-- `dispatch_grok_worker` / `await_grok_worker` / `list_grok_workers` /
-  `worker_pool_stats` / `cancel_grok_worker`
+- `dispatch_grok_worker` / `continue_grok_worker` / `await_grok_worker` /
+  `list_grok_workers` / `worker_pool_stats` / `cancel_grok_worker`
 
-Hard caps: **4 concurrent** and **4 total** dispatches per parent task. Workers
-are read-only `grok-4.5` processes with `--no-subagents`. The parent still owns
-the durable JSON artifact.
+Hard caps: **1 concurrent** / **1 total** worker identity per parent task, with
+up to **4 conversational turns** (turn 1 = `dispatch`, turns 2–4 =
+`continue_grok_worker` resumes). Workers are read-only `grok-4.5` / cursor-grok
+processes with `--no-subagents`. The parent still owns the durable JSON artifact.
 
 Grok parents use `--permission-mode bypassPermissions` only when workers are
 enabled (MCP `use_tool` fails under `dontAsk`); the read-only `--tools`
@@ -88,8 +89,8 @@ use). Temp task workspaces are deleted after each run; this folder is durable:
 - `events.jsonl` — global append-only stream
 - `sessions/<SESS-id>/session.json` — parent engine/task metadata
 - `sessions/<SESS-id>/events.jsonl` — per-parent-session events
-  (`session_open`, `dispatch`, `worker_started`, `worker_finished`,
-  `dispatch_rejected`)
+  (`session_open`, `dispatch`, `continue`, `worker_started`, `worker_finished`,
+  `dispatch_rejected`, `continue_rejected`)
 - `sessions/<SESS-id>/workers/` — durable worker stdout/stderr copies
 - `latest.txt` — most recent session id
 

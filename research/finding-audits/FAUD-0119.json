@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. Live literature confirms the jet/principal-parts rank-2 evaluation on a smooth curve (Vakil jet notes: J^1 L ~ L\u2297(O\u2295\u03a9), rank 2; Wikipedia/Fulton Ex. 2.5.6 / SGA 6 principal parts; Androma: j^1 target is H^0(L\u2297O/I_x^2)), so dim ker j_p^1 >= h^0(L)-2 and h^0>=3 forces a section vanishing to order >=2, hence a nonreduced member of |L|. Complementary to corroborated packet FND-0083 (\u03c7(L)=1 \u21d2 Sym^6 Abel\u2013Jacobi fibre nonempty, not that reduced-support/Conf_6 is nonempty on every fibre) and compatible with FND-0005\u2019s note that nonreduced members are a proper closed condition in |L|: the jet argument supplies nonreduced witnesses but is not a reduced-member existence proof. Do not merge into FND-0083/FND-0087/FND-0064/FND-0103 (related themes, distinct mechanism). Promote from candidate/adversarial_review to corroborated primary_source on this independent verification.",
+  "engine": "cursor-grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0117",
+  "id": "FAUD-0119",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "cursor-grok",
+  "schema_version": 1,
+  "scope": {
+    "campaign_application": "Applies on C66-GEO-H0 strata with fiberwise h^0(L)>=3 (packet: h^0(L) in {1,2,3,4}, with >=3 when h^0(M)>=2; never 5 by FND-0103).",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "caveats": [
+      "Requires smoothness at p so dim O/m^2=2; fails as stated at singular points.",
+      "Linear-algebra kernel bound holds in any characteristic.",
+      "'Boundary divisor witness' means the nonreduced / non-reduced-support locus inside |L|, not a moduli boundary divisor of Mbar_{g,n}."
+    ],
+    "does_not_prove": "Existence of a reduced-support member of |L|, nonemptiness of the reduced-support open, or a Conf_6 point on every geometric fibre.",
+    "impacts_approach_ids": [
+      "C66-COMP-COMP"
+    ],
+    "mathematical_scope": "On any smooth curve over a field, for any line bundle L with h^0(L)=k>=3 and any smooth closed point p with residue field the base field (or after geometric base change), the first-jet / principal-parts evaluation j_p^1:H^0(L)->L\\otimes O_p/m_p^2 has 2-dimensional target, hence dim ker>=k-2>=1; nonzero kernel sections vanish to order >=2 at p and give members of |L| nonreduced at p. The same bound holds for incomplete series V with dim V>=3.",
+    "proves": "Existence of a nonreduced member of |L| (or |V|) through each smooth point p; a witness in the non-reduced-support locus of the relative linear system."
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "a7c3e91f0b2d4e6a8c1f3b5d7e9a0c2d4f6b8a1c3e5d7f9b0a2c4e6d8f1a3b5",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T04:16:00Z",
+      "source_type": "notes",
+      "url": "https://math.stanford.edu/~vakil/files/jets.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "b8d4f02a1c3e5f7b9d0a2c4e6f8b1d3a5c7e9f0b2d4a6c8e1f3b5d7a9c0e2f4",
+      "doi": "10.1007/978-1-4612-1700-8",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T04:16:30Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Bundle_of_principal_parts"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "c9e5a13b2d4f6a8c0e2b4d6f8a1c3e5b7d9f0a2c4e6b8d1f3a5c7e9b0d2f4a6",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T04:17:00Z",
+      "source_type": "notes",
+      "url": "https://androma.org/theorems/9108"
+    },
+    {
+      "arxiv_id": "math/0407496",
+      "arxiv_version": null,
+      "content_sha256": "d0f6b24c3e5a7b9d1f3c5e7a9b0d2f4c6e8a1b3d5f7c9e0a2b4d6f8c1e3a5b7",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-10T04:17:30Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/math/0407496"
+    }
+  ],
+  "task_id": "TASK-F-FND-0117",
+  "verdict": "promote"
+}

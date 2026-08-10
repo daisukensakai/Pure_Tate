@@ -19,6 +19,56 @@ from .targets import CONTEXT_REVISION
 
 
 ENGINE_CONFIG = DATA / "engines.json"
+
+# Proof turns keep max / xhigh. Review + audit family use the cheaper
+# *_audit effort knobs (Claude has no "auto"; high is the step below max).
+PROOF_EFFORT_PHASES = frozenset(
+    {"mathematics", "forced-proof", "standard-fallback"}
+)
+AUDIT_EFFORT_PHASES = frozenset(
+    {
+        "review",
+        "finding-audit",
+        "novelty",
+        "research",
+        "micro-research",
+        "trace-mining",
+    }
+)
+
+
+def _phase_uses_audit_effort(phase: Optional[str]) -> bool:
+    return bool(phase) and phase in AUDIT_EFFORT_PHASES
+
+
+def _resolve_claude_effort(
+    config: Dict[str, Any], phase: Optional[str]
+) -> Optional[str]:
+    key = "effort_audit" if _phase_uses_audit_effort(phase) else "effort"
+    value = config.get(key)
+    if not (isinstance(value, str) and value.strip()):
+        value = config.get("effort")
+    if isinstance(value, str) and value.strip():
+        return value.strip()
+    return None
+
+
+def _resolve_codex_reasoning_effort(
+    config: Dict[str, Any], phase: Optional[str]
+) -> Optional[str]:
+    key = (
+        "model_reasoning_effort_audit"
+        if _phase_uses_audit_effort(phase)
+        else "model_reasoning_effort"
+    )
+    value = config.get(key)
+    if not (isinstance(value, str) and value.strip()):
+        value = config.get("model_reasoning_effort")
+    if isinstance(value, str) and value.strip():
+        return value.strip()
+    return None
+
+
 def _subprocess_env(
     family: Optional[str] = None,
     engine_config: Optional[Dict[str, Any]] = None,
@@ -169,6 +219,32 @@ def _grok_observable_stream(text: str) -> str:
         json.dumps(event, sort_keys=True)
         for event in _grok_stream_events(text)
         if event.get("type") in {"text", "end", "error"}
+    ]
+    return "\n".join(retained) + ("\n" if retained else "")
+
+
+def _cursor_stream_events(text: str) -> List[Dict[str, Any]]:
+    """Parse Cursor Agent CLI stream-json NDJSON events."""
+    events: List[Dict[str, Any]] = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped.startswith("{"):
+            continue
+        try:
+            event = json.loads(stripped)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(event, dict):
+            events.append(event)
+    return events
+
+
+def _cursor_observable_stream(text: str) -> str:
+    """Quarantine Cursor thinking deltas from proof traces and trace miners."""
+    retained = [
+        json.dumps(event, sort_keys=True)
+        for event in _cursor_stream_events(text)
+        if event.get("type") in {"system", "user", "assistant", "tool_call", "result"}
     ]
     return "\n".join(retained) + ("\n" if retained else "")
 
@@ -453,6 +529,7 @@ def assemble_prompt(
     engine_id: Optional[str] = None,
     workers_enabled: bool = False,
     max_workers: int = 0,
+    max_worker_turns: int = 0,
 ) -> str:
     from .capabilities import phase_allows_web
 
@@ -511,6 +588,29 @@ def assemble_prompt(
                 + " Never use run_terminal_command, write, or any shell. "
                 "Put the completed JSON artifact in your final message only."
             )
+        elif family == "cursor":
+            tool_line = (
+                "Use only read-only tools (read, grep, glob"
+                + (
+                    ", and the grok-workers MCP tools for optional Grok helpers"
+                    if workers_enabled
+                    else ""
+                )
+                + (
+                    ", and optional web search/fetch when needed"
+                    if allow_web
+                    else ""
+                )
+                + ")."
+            )
+            parts.append(
+                "Your final answer must be exactly one JSON object with no prose "
+                "before or after it. Prefer reading corpus/chunks over large text "
+                "files when both are available. "
+                + tool_line
+                + " Never write files or run shell commands. "
+                "Put the completed JSON artifact in your final message only."
+            )
         elif family == "qwen":
             parts.append(
                 "Your final answer must be exactly one JSON object with no prose "
@@ -520,9 +620,21 @@ def assemble_prompt(
                 "Put the completed JSON artifact in your final message only."
             )
     if workers_enabled and max_workers > 0:
-        from .grok_workers import worker_dispatch_parent_policy
+        from .grok_workers import (
+            DEFAULT_MAX_WORKER_TURNS,
+            worker_dispatch_parent_policy,
+        )
 
-        parts.append(worker_dispatch_parent_policy(max_workers))
+        parts.append(
+            worker_dispatch_parent_policy(
+                max_workers,
+                max_worker_turns=(
+                    max_worker_turns
+                    if max_worker_turns > 0
+                    else DEFAULT_MAX_WORKER_TURNS
+                ),
+            )
+        )
     if phase == "review" and task.get("campaign_id"):
         parts.append(
             "Campaign review: use schema_version 3 and "
@@ -587,6 +699,7 @@ def _engine_argv(
     phase: Optional[str] = None,
     workers: Optional["WorkerSession"] = None,
     context_files: Optional[List[str]] = None,
+    workspace: Optional[Path] = None,
 ) -> List[str]:
     from .capabilities import phase_allows_web
     from .grok_workers import apply_workers_to_argv
@@ -607,8 +720,7 @@ def _engine_argv(
         if last_message_path is None:
             raise ValueError("OpenAI engine requires a last-message path")
         # CLI_test: codex exec read-only still can invoke web_search items.
-        # Effort: gpt-5.6-sol uses Extra High via model_reasoning_effort=xhigh
-        # (see CLI_test/EFFORT_FINDINGS.md).
+        # Proofs: Extra High (xhigh). Review/audit: high (engines.json).
         command = [binary]
         if allow_web:
             command.append("--search")
@@ -624,7 +736,7 @@ def _engine_argv(
                 'approval_policy="never"',
             ]
         )
-        reasoning_effort = config.get("model_reasoning_effort")
+        reasoning_effort = _resolve_codex_reasoning_effort(config, phase)
         if isinstance(reasoning_effort, str) and reasoning_effort.strip():
             command.extend(
                 [
@@ -667,8 +779,9 @@ def _engine_argv(
             "--model",
             model,
         ]
-        # Effort max for Claude attempts (CLI_test/EFFORT_FINDINGS.md).
-        effort = config.get("effort")
+        # Proofs: --effort max. Review/audit: --effort high (Claude has no
+        # "auto"; CLI_test/EFFORT_FINDINGS.md validated max for proofs).
+        effort = _resolve_claude_effort(config, phase)
         if isinstance(effort, str) and effort.strip():
             command.extend(["--effort", effort.strip()])
         return apply_workers_to_argv(command, "claude", workers)
@@ -708,6 +821,36 @@ def _engine_argv(
             command.append("--disable-web-search")
         command.extend(["-m", model])
         return apply_workers_to_argv(command, "grok", workers)
+    if family == "cursor":
+        # Cursor Agent CLI (billed via CURSOR_API_KEY). Keep --mode ask so the
+        # parent stays write-blocked. Web tools require --force or Cursor
+        # rejects them as "User Rejected" (CLI_test/CURSOR_WEB_FINDINGS.md).
+        # Stream schema matches Claude stream-json, not xAI grok streaming-json.
+        # Workers attach via workspace .cursor/mcp.json.
+        command = [
+            binary,
+            "-p",
+            "--trust",
+            "--mode",
+            "ask",
+        ]
+        if allow_web:
+            command.append("--force")
+        command.extend(
+            [
+                "--output-format",
+                "stream-json",
+                "--model",
+                str(model),
+            ]
+        )
+        workspace_path = workspace
+        if workspace_path is None and last_message_path is not None:
+            workspace_path = last_message_path.parent
+        if workspace_path is not None:
+            command.extend(["--workspace", str(workspace_path)])
+        command.append(prompt)
+        return apply_workers_to_argv(command, "cursor", workers)
     if family == "qwen":
         reasoning_effort = config.get("reasoning_effort", "xhigh")
         command = [
@@ -1780,27 +1923,45 @@ def _codex_controller_decision_prompt(
     base_prompt: str,
     transcript: str,
     remaining_requests: int,
+    *,
+    has_active_worker: bool,
 ) -> str:
+    if has_active_worker:
+        request_guidance = (
+            "either action=dispatch with one short follow-up for the existing "
+            "Grok worker (redo / more info / gap-fill / narrow sub-task — the "
+            "harness will continue that worker), or action=finalize when you "
+            "have enough information."
+        )
+    else:
+        request_guidance = (
+            "either action=dispatch with one focused first request for the "
+            "single Grok worker (narrow task + path/ID pointers, not a packet "
+            "dump), or action=finalize when you have enough information."
+        )
     return (
         base_prompt
         + "\n\n# Controller decision turn\n\n"
         + "You are the mastermind controller. Do not return the task artifact "
         + "on this turn. You have "
         + str(remaining_requests)
-        + " remaining logical Grok-worker requests. Review the controller "
-        + "transcript below, then return exactly one JSON object matching the "
-        + "decision schema: either action=dispatch with one focused request, or "
-        + "action=finalize when you have enough information.\n\n"
-        + "Division of labor (mandatory for every dispatch):\n"
+        + " remaining logical Grok-worker turns on one worker identity. Review "
+        + "the controller transcript below, then return exactly one JSON object "
+        + "matching the decision schema: "
+        + request_guidance
+        + "\n\n"
+        + "Division of labor (mandatory):\n"
         + "- Codex owns thinking, analysis, critical decisions, routing, and "
         + "the eventual synthesis structure.\n"
-        + "- Dispatch Grok liberally for bulk reading of packet/corpus sources, "
-        + "locator extraction, literature/web lookup, enumerations, and draft "
-        + "fragments. Prefer spending remaining requests over early finalize "
-        + "when useful subproblems remain.\n"
+        + "- Use at most one Grok worker; later rounds continue that same "
+        + "worker with short follow-ups. Prefer spending remaining turns over "
+        + "early finalize when a simple extract/check remains.\n"
         + "- Do not re-read sources a worker already covered; analyze their "
         + "reports instead. Spot-check only if a load-bearing claim is "
         + "contested or the report is incomplete/incoherent.\n"
+        + "- Do not ask the worker to re-ingest principal packet/working "
+        + "context you already hold, and do not assign complex open-ended "
+        + "proof work to the worker.\n"
         + "- Grok results are assistive; you still own correctness of every "
         + "load-bearing step in the final artifact.\n\n"
         + "# Controller transcript\n\n"
@@ -1856,10 +2017,12 @@ def _run_codex_controller(
     atomic_write_json(decision_schema_path, _codex_controller_decision_schema())
     pool = GrokWorkerPool(
         max_concurrent=1,
-        max_total=max_attempts,
+        max_total=1,
+        max_worker_turns=max_requests,
         model=workers.env_updates.get("GROK_WORKER_MODEL", "grok-4.5"),
         timeout_seconds=int(workers.env_updates.get("GROK_WORKER_TIMEOUT", "300")),
         allow_web=workers.allow_web,
+        backend=str(workers.env_updates.get("GROK_WORKER_BACKEND") or "cursor"),
         work_dir=context,
         results_dir=workers.results_dir,
         dispatch_log=workers.dispatch_log,
@@ -1869,6 +2032,7 @@ def _run_codex_controller(
     observable: List[str] = []
     stderr_chunks: List[str] = []
     started = time.monotonic()
+    active_worker_id: Optional[str] = None
 
     def invoke(prompt: str, output_path: Path, schema: Optional[Path] = None) -> str:
         remaining = max(1, int(task_timeout - (time.monotonic() - started)))
@@ -1905,6 +2069,7 @@ def _run_codex_controller(
                 "controller_decision_started",
                 round=round_index + 1,
                 remaining_requests=max_requests - round_index,
+                active_worker_id=active_worker_id,
             )
             decision_path = context / ("codex-controller-decision-%d.json" % (round_index + 1))
             raw_decision = invoke(
@@ -1912,6 +2077,7 @@ def _run_codex_controller(
                     base_prompt,
                     _codex_controller_transcript(entries, max_result_chars),
                     max_requests - round_index,
+                    has_active_worker=active_worker_id is not None,
                 ),
                 decision_path,
                 decision_schema_path,
@@ -1933,6 +2099,7 @@ def _run_codex_controller(
                 request_id=decision["request_id"],
                 description=decision["description"],
                 prompt_sha256=hashlib.sha256(decision["prompt"].encode("utf-8")).hexdigest(),
+                mode="continue" if active_worker_id else "dispatch",
             )
             entry: Dict[str, Any] = {
                 "request_id": decision["request_id"],
@@ -1943,18 +2110,24 @@ def _run_codex_controller(
                 "error": "worker was not dispatched",
             }
             for attempt in range(retry_limit + 1):
-                if pool.dispatched_count >= max_attempts:
-                    entry["error"] = "controller worker-attempt budget exhausted"
-                    break
                 try:
-                    result = pool.dispatch(
-                        decision["prompt"], decision["description"], wait=True
-                    )
+                    if active_worker_id is None:
+                        result = pool.dispatch(
+                            decision["prompt"], decision["description"], wait=True
+                        )
+                    else:
+                        result = pool.continue_worker(
+                            active_worker_id,
+                            decision["prompt"],
+                            decision["description"],
+                            wait=True,
+                        )
                 except PoolError as exc:
                     entry["error"] = exc.message
                     break
                 entry["attempts"] += 1
                 entry["worker_ids"].append(str(result.get("worker_id")))
+                active_worker_id = str(result.get("worker_id") or active_worker_id)
                 if result.get("status") == "completed":
                     entry["status"] = "completed"
                     entry["result"] = str(result.get("result_text") or "")
@@ -1964,6 +2137,7 @@ def _run_codex_controller(
                         attempt=attempt + 1,
                         worker_id=result.get("worker_id"),
                         status="completed",
+                        turn=result.get("turn_index"),
                     )
                     break
                 entry["error"] = str(result.get("error") or "worker failed")
@@ -1972,23 +2146,21 @@ def _run_codex_controller(
                     request_id=entry["request_id"],
                     attempt=attempt + 1,
                     worker_id=result.get("worker_id"),
-                    status=str(result.get("status") or "failed"),
+                    status=result.get("status"),
                     error=entry["error"],
+                    turn=result.get("turn_index"),
                 )
                 if attempt < retry_limit:
                     workers.dispatch_log.log(
                         "controller_retry",
                         request_id=entry["request_id"],
-                        attempt=attempt + 2,
-                        previous_worker_id=result.get("worker_id"),
-                        error=entry["error"],
+                        attempt=attempt + 1,
                     )
             if entry["status"] != "completed":
                 workers.dispatch_log.log(
                     "controller_worker_exhausted",
                     request_id=entry["request_id"],
-                    attempts=entry["attempts"],
-                    error=entry["error"],
+                    error=entry.get("error"),
                 )
             entries.append(entry)
         else:
@@ -2133,13 +2305,17 @@ def run_task(
         from .capabilities import phase_allows_web
         from .grok_workers import (
             max_grok_workers_from_config,
+            max_worker_turns_from_config,
             merge_worker_env,
             prepare_worker_session,
             record_parent_mcp_events,
+            resolve_worker_backend,
+            resolve_worker_model,
         )
 
         engines_root = load_engines_config()
         max_workers = max_grok_workers_from_config(engines_root)
+        max_worker_turns = max_worker_turns_from_config(engines_root)
         controller_settings = _codex_controller_settings(engines_root)
         codex_controller = bool(
             engine_id == "codex"
@@ -2148,9 +2324,8 @@ def run_task(
             and max_workers > 0
         )
         allow_web = phase_allows_web(phase)
-        worker_model = (
-            load_engines().get("grok", {}).get("model") or "grok-4.5"
-        )
+        worker_backend = resolve_worker_backend(engines_root)
+        worker_model = resolve_worker_model(engines_root, backend=worker_backend)
         workers = prepare_worker_session(
             context,
             family=str(family or ""),
@@ -2158,6 +2333,8 @@ def run_task(
             allow_web=allow_web,
             worker_model=str(worker_model),
             worker_timeout=min(timeout, 3600),
+            worker_backend=worker_backend,
+            max_worker_turns=max_worker_turns,
             parent_meta={
                 "engine": engine_id,
                 "family": str(family or ""),
@@ -2167,6 +2344,7 @@ def run_task(
                 "paired_turn_kind": task.get("paired_turn_kind"),
                 "campaign_id": task.get("campaign_id"),
                 "worker_mode": "controller" if codex_controller else "mcp",
+                "worker_backend": worker_backend,
             },
             attach_mcp=not codex_controller,
         )
@@ -2187,6 +2365,7 @@ def run_task(
             engine_id,
             workers_enabled=workers_on,
             max_workers=max_workers if workers_on else 0,
+            max_worker_turns=max_worker_turns if workers_on else 0,
         )
         last_message = context / "last-message.txt"
         engine_max = config.get("max_task_seconds")
@@ -2311,6 +2490,7 @@ def run_task(
                 phase=phase,
                 workers=workers if workers_on else None,
                 context_files=files,
+                workspace=context,
             )
             # After the first attempt only allow progress callbacks; process
             # start is reported once so the drive ledger does not thrash.
@@ -2383,6 +2563,8 @@ def run_task(
             )
             if family == "grok":
                 observable_stdout = _grok_observable_stream(raw)
+            elif family == "cursor":
+                observable_stdout = _cursor_observable_stream(raw)
             elif family == "qwen":
                 observable_stdout = _qwen_observable_stream(raw)
             if process.returncode != 0:
@@ -2402,6 +2584,8 @@ def run_task(
                 raise RuntimeError(detail)
             try:
                 if family == "claude":
+                    artifact = _extract_claude_stream(raw)
+                elif family == "cursor":
                     artifact = _extract_claude_stream(raw)
                 elif family == "grok":
                     artifact = _extract_grok_stream(raw)

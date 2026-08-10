@@ -524,20 +524,29 @@ class FocusedCampaignTests(unittest.TestCase):
         tasks = campaign_mathematics_tasks("C66-001")
         by_subproblem = {task["subproblem_id"]: task for task in tasks}
         self.assertEqual(by_subproblem["C66-GEO-Z"]["status"], "ready")
-        # ATT-0048 + REV-0091/0092 (binding-stamped) discharge GEO-Z, so H0 is
-        # executable. COMP still waits on a verified H0 attempt.
+        # Dual-confirmed GEO-Z and GEO-H0 discharge the early geometry chain, so
+        # GEO-COMP is executable. Downstream Tate/CEX cells still wait on COMP.
         self.assertEqual(by_subproblem["C66-GEO-H0"]["status"], "ready")
         self.assertEqual(
             by_subproblem["C66-GEO-H0"].get("blocked_dependencies") or [],
             [],
         )
-        self.assertEqual(by_subproblem["C66-GEO-COMP"]["status"], "blocked")
+        self.assertEqual(by_subproblem["C66-GEO-COMP"]["status"], "ready")
         self.assertEqual(
-            by_subproblem["C66-GEO-COMP"]["blocked_dependencies"],
-            ["C66-GEO-H0"],
+            by_subproblem["C66-GEO-COMP"].get("blocked_dependencies") or [],
+            [],
+        )
+        self.assertEqual(by_subproblem["C66-TATE-SUPPORT"]["status"], "blocked")
+        self.assertEqual(
+            by_subproblem["C66-TATE-SUPPORT"]["blocked_dependencies"],
+            ["C66-GEO-COMP"],
         )
         report = campaign_status("C66-001")
         self.assertIn(
+            "C66-TATE-SUPPORT requires C66-GEO-COMP",
+            report["unresolved_proof_dependencies"],
+        )
+        self.assertNotIn(
             "C66-GEO-COMP requires C66-GEO-H0",
             report["unresolved_proof_dependencies"],
         )
@@ -899,9 +908,9 @@ class FocusedCampaignTests(unittest.TestCase):
             result = drive_campaign(
                 "C66-001",
                 2,
-                research_engines=["claude", "grok"],
+                research_engines=["claude", "cursor-grok"],
                 prover_engines=["claude", "codex"],
-                review_engines=["grok", "claude", "codex"],
+                review_engines=["cursor-grok", "claude", "codex"],
                 dry_run=True,
             )
         phases = [event["phase"] for event in result["events"]]
@@ -910,7 +919,7 @@ class FocusedCampaignTests(unittest.TestCase):
         self.assertEqual(result["events"][0]["condition"], "always")
         self.assertEqual(phases[1], "trace-mining")
         # Miner is independent of the source paired engine (codex).
-        self.assertEqual(result["events"][1]["engine"], "grok")
+        self.assertEqual(result["events"][1]["engine"], "cursor-grok")
         self.assertEqual(result["events"][1].get("source_engine"), "codex")
 
     def test_review_schema_failure_allows_one_same_engine_retry(self):
@@ -1032,11 +1041,18 @@ class FocusedCampaignTests(unittest.TestCase):
         )
         self.assertEqual(
             report["routing_policy"]["fresh_rotation"],
-            ["grok", "claude", "grok", "codex", "grok", "qwen"],
+            [
+                "cursor-grok",
+                "claude",
+                "cursor-grok",
+                "codex",
+                "cursor-grok",
+                "qwen",
+            ],
         )
         self.assertEqual(
             report["routing_policy"]["retry_escalation"],
-            ["grok", "qwen"],
+            ["cursor-grok", "qwen"],
         )
         coverage = report["campaign_progress"]["subproblem_engine_coverage"]
         self.assertEqual(len(coverage), 9)

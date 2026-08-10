@@ -46,15 +46,33 @@ class AgentAdapterTests(unittest.TestCase):
         class FakePool:
             def __init__(self, **_kwargs):
                 self.dispatched_count = 0
+                self.turn_index = 0
+                self.active_worker_id = None
 
             def dispatch(self, _prompt, _description, wait=True):
                 self.dispatched_count += 1
+                self.turn_index = 1
+                self.active_worker_id = "W-fixture-1"
                 status, payload = worker_results.pop(0)
                 return {
-                    "worker_id": "W-fixture-%d" % self.dispatched_count,
+                    "worker_id": self.active_worker_id,
                     "status": status,
                     "result_text": payload if status == "completed" else "",
                     "error": payload if status != "completed" else "",
+                    "turn_index": self.turn_index,
+                }
+
+            def continue_worker(
+                self, worker_id, _prompt, _description="", wait=True
+            ):
+                self.turn_index += 1
+                status, payload = worker_results.pop(0)
+                return {
+                    "worker_id": worker_id,
+                    "status": status,
+                    "result_text": payload if status == "completed" else "",
+                    "error": payload if status != "completed" else "",
+                    "turn_index": self.turn_index,
                 }
 
             def shutdown(self, **_kwargs):
@@ -127,9 +145,11 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertEqual(by_id["claude"]["model"], "claude-opus-5")
         self.assertEqual(by_id["codex"]["model"], "gpt-5.6-sol")
         self.assertEqual(by_id["grok"]["model"], "grok-4.5")
+        self.assertEqual(by_id["cursor-grok"]["model"], "cursor-grok-4.5-high")
         self.assertEqual(by_id["qwen"]["model"], "qwen3.8-max")
         self.assertTrue(by_id["claude"]["web_access"])
         self.assertTrue(by_id["grok"]["web_access"])
+        self.assertTrue(by_id["cursor-grok"]["web_access"])
         self.assertTrue(by_id["codex"]["web_access"])
         self.assertTrue(by_id["qwen"]["web_access"])
 
@@ -141,8 +161,30 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertNotIn("--search", command)
         self.assertIn('approval_policy="never"', command)
         self.assertIn("gpt-5.6-sol", command)
-        # Extra High reasoning for gpt-5.6-sol (CLI_test/EFFORT_FINDINGS.md).
+        # Extra High on proofs; high on review/audit (CLI_test/EFFORT_FINDINGS.md).
         self.assertIn('model_reasoning_effort="xhigh"', command)
+        proof = _engine_argv(
+            "codex",
+            "prompt",
+            Path("/tmp/pure-tate-last-message"),
+            phase="mathematics",
+        )
+        self.assertIn('model_reasoning_effort="xhigh"', proof)
+        review = _engine_argv(
+            "codex",
+            "prompt",
+            Path("/tmp/pure-tate-last-message"),
+            phase="review",
+        )
+        self.assertIn('model_reasoning_effort="high"', review)
+        self.assertNotIn('model_reasoning_effort="xhigh"', review)
+        audit = _engine_argv(
+            "codex",
+            "prompt",
+            Path("/tmp/pure-tate-last-message"),
+            phase="finding-audit",
+        )
+        self.assertIn('model_reasoning_effort="high"', audit)
 
 
     def test_codex_controller_settings_are_bounded(self):
@@ -229,13 +271,26 @@ class AgentAdapterTests(unittest.TestCase):
         class FakePool:
             def __init__(self, **_kwargs):
                 self.dispatched_count = 0
+                self.active_worker_id = None
 
             def dispatch(self, _prompt, _description, wait=True):
                 self.dispatched_count += 1
+                self.active_worker_id = "W-controller-1"
                 return {
-                    "worker_id": "W-controller-1",
+                    "worker_id": self.active_worker_id,
                     "status": "completed",
                     "result_text": "worker-result-for-next-decision",
+                    "turn_index": 1,
+                }
+
+            def continue_worker(
+                self, worker_id, _prompt, _description="", wait=True
+            ):
+                return {
+                    "worker_id": worker_id,
+                    "status": "completed",
+                    "result_text": "continued-result",
+                    "turn_index": 2,
                 }
 
             def shutdown(self, **_kwargs):
@@ -396,6 +451,14 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertEqual(command[command.index("--model") + 1], "claude-opus-5")
         self.assertIn("--effort", command)
         self.assertEqual(command[command.index("--effort") + 1], "max")
+        proof = _engine_argv("claude", "prompt", phase="mathematics")
+        self.assertEqual(proof[proof.index("--effort") + 1], "max")
+        forced = _engine_argv("claude", "prompt", phase="forced-proof")
+        self.assertEqual(forced[forced.index("--effort") + 1], "max")
+        review = _engine_argv("claude", "prompt", phase="review")
+        self.assertEqual(review[review.index("--effort") + 1], "high")
+        audit = _engine_argv("claude", "prompt", phase="finding-audit")
+        self.assertEqual(audit[audit.index("--effort") + 1], "high")
 
     def test_grok_argv_pins_model_and_can_disable_web(self):
         command = _engine_argv("grok", "prompt")
@@ -462,6 +525,42 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertNotIn("run_terminal_command", tools)
         self.assertNotIn("write", tools)
 
+    def test_cursor_grok_argv_with_workers_approves_mcp(self):
+        from pure_tate.grok_workers import WorkerSession
+        from pathlib import Path
+
+        session = WorkerSession(
+            enabled=True,
+            max_workers=4,
+            allow_web=False,
+            family="cursor",
+            results_dir=Path("/tmp/pure-tate-workers"),
+            mcp_config_path=Path("/tmp/pure-tate-workers/.cursor/mcp.json"),
+            server_command=["uv", "run", "--with", "mcp", "python", "x"],
+        )
+        command = _engine_argv(
+            "cursor-grok",
+            "prompt body",
+            workspace=Path("/tmp/pure-tate-ws"),
+            workers=session,
+        )
+        self.assertIn("--approve-mcps", command)
+        self.assertEqual(command[command.index("--mode") + 1], "ask")
+        self.assertNotIn("--force", command)
+        self.assertEqual(command[-1], "prompt body")
+        self.assertLess(command.index("--approve-mcps"), len(command) - 1)
+
+        web_command = _engine_argv(
+            "cursor-grok",
+            "prompt body",
+            workspace=Path("/tmp/pure-tate-ws"),
+            workers=session,
+            phase="finding-audit",
+        )
+        self.assertIn("--force", web_command)
+        self.assertIn("--approve-mcps", web_command)
+        self.assertEqual(web_command[web_command.index("--mode") + 1], "ask")
+
     def test_claude_argv_with_workers_attaches_mcp(self):
         from pure_tate.grok_workers import WorkerSession
         from pathlib import Path
@@ -487,6 +586,10 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertIn("--strict-mcp-config", command)
         self.assertIn(
             "mcp__grok-workers__dispatch_grok_worker",
+            command,
+        )
+        self.assertIn(
+            "mcp__grok-workers__continue_grok_worker",
             command,
         )
         self.assertIn("Bash", command[command.index("--disallowedTools") :])

@@ -673,6 +673,8 @@ def recover_attempt_from_trace(
         family = load_engines().get(engine, {}).get("family")
         if family == "claude":
             artifact = _extract_claude_stream(stdout)
+        elif family == "cursor":
+            artifact = _extract_claude_stream(stdout)
         elif family == "grok":
             artifact = _extract_grok_stream(stdout)
         elif family == "qwen":

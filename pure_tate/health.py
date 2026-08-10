@@ -10,6 +10,7 @@ from typing import Any, Dict, Optional
 
 from .agents import (
     _engine_argv,
+    _extract_claude_stream,
     _extract_grok_stream,
     _extract_json_object,
     _extract_qwen_stream,
@@ -120,6 +121,8 @@ def engine_runtime_issue(
         return "engine binary is unavailable: %s" % binary
     if config.get("family") == "qwen" and not os.environ.get("DASHSCOPE_API_KEY"):
         return "DASHSCOPE_API_KEY is not set"
+    if config.get("family") == "cursor" and not os.environ.get("CURSOR_API_KEY"):
+        return "CURSOR_API_KEY is not set"
     return None
 
 
@@ -296,6 +299,8 @@ def audit_engine_health(
                 family = config.get("family")
                 if family == "grok":
                     value = _extract_grok_stream(raw)
+                elif family in {"claude", "cursor"}:
+                    value = _extract_claude_stream(raw)
                 elif family == "qwen":
                     value = _extract_qwen_stream(raw)
                 else:

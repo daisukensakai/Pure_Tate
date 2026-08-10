@@ -67,9 +67,12 @@ research audits (`RAUD-0001`, `RAUD-0002`). Stage 2 mathematics is unlocked.
 
 Task manifests can be run through a configured headless engine. Each turn gets an
 isolated, read-only workspace containing only phase-approved inputs.
-High-tier engines run at elevated reasoning depth (validated in
+High-tier engines run at elevated reasoning depth on proof turns (validated in
 `CLI_test/EFFORT_FINDINGS.md`): Claude uses `--effort max` on `claude-opus-5`,
 and Codex uses `model_reasoning_effort=xhigh` (Extra High) on `gpt-5.6-sol`.
+Review and audit phases use the cheaper `effort_audit` /
+`model_reasoning_effort_audit` knobs (`high` / `high`); Claude has no `auto`
+effort level.
 
 
 ```bash
@@ -126,7 +129,8 @@ confirmation pass; the two confirmations must use engines distinct from each oth
 and from the prover.
 
 Live tasks default to a one-hour cap. Individual Grok helper workers are
-separately capped at 20 minutes.
+separately capped at 20 minutes; each parent session may dispatch one worker
+identity with up to four conversational turns (dispatch + continues).
 
 Mathematics attempts can isolate a narrow literature obstruction without reopening
 the Stage-1 reduction. `all` writes those tasks to

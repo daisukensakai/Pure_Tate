@@ -172,7 +172,10 @@ def next_escalation_engine(
     blocked = used | {engine for engine in exclude if engine}
     high = list(high_tier_order or load_routing_config()["high_tier_chain_engines"])
     base = list(escalation)
-    if "grok" in used and "qwen" not in used:
+    if (
+        ("grok" in used or "cursor-grok" in used)
+        and "qwen" not in used
+    ):
         return "qwen" if "qwen" in _filter_allowed(["qwen"], allowed) else None
     if "qwen" in used:
         return _next_high_tier(blocked, high, allowed)

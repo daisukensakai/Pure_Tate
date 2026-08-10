@@ -90,9 +90,9 @@ def tool_schemas() -> list[dict[str, Any]]:
         {
             "name": "dispatch_grok_worker",
             "description": (
-                "Dispatch a read-only Grok 4.5 worker. Hard caps: at most 4 "
-                "concurrent and 4 total workers for this session. Returns "
-                "worker_id immediately, or an error if the pool/budget is full."
+                "Dispatch the single read-only Grok worker (turn 1). Hard caps: "
+                "1 identity and 4 conversational turns. Prefer continue_grok_worker "
+                "for short follow-ups."
             ),
             "inputSchema": {
                 "type": "object",
@@ -116,6 +116,33 @@ def tool_schemas() -> list[dict[str, Any]]:
                     },
                 },
                 "required": ["prompt"],
+            },
+        },
+        {
+            "name": "continue_grok_worker",
+            "description": (
+                "Continue the existing worker with a short follow-up "
+                "(redo / more info / gap-fill / narrow sub-task)."
+            ),
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "worker_id": {"type": "string"},
+                    "prompt": {
+                        "type": "string",
+                        "description": "Short delta prompt; do not re-dump principal context.",
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Short 3-5 word label.",
+                    },
+                    "wait": {
+                        "type": "boolean",
+                        "default": False,
+                    },
+                    "timeout_seconds": {"type": "number"},
+                },
+                "required": ["worker_id", "prompt"],
             },
         },
         {
@@ -234,8 +261,8 @@ class McpServer:
             },
             # Some clients expect instructions on the initialize result.
             "instructions": (
-                "Hard-capped Grok 4.5 worker pool. Max 4 concurrent and 4 total "
-                "dispatches per session. Tools: dispatch_grok_worker, "
+                "Hard-capped Grok worker pool. Max 1 worker identity and 4 "
+                "conversational turns per session. Tools: dispatch_grok_worker, "
                 "await_grok_worker, list_grok_workers, cancel_grok_worker, "
                 "worker_pool_stats."
             ),
@@ -248,6 +275,18 @@ class McpServer:
             arguments = {}
         if name == "dispatch_grok_worker":
             payload = self.pool.dispatch(
+                str(arguments.get("prompt") or ""),
+                str(arguments.get("description") or ""),
+                wait=bool(arguments.get("wait") or False),
+                timeout_seconds=(
+                    float(arguments["timeout_seconds"])
+                    if arguments.get("timeout_seconds") is not None
+                    else None
+                ),
+            )
+        elif name == "continue_grok_worker":
+            payload = self.pool.continue_worker(
+                str(arguments.get("worker_id") or ""),
                 str(arguments.get("prompt") or ""),
                 str(arguments.get("description") or ""),
                 wait=bool(arguments.get("wait") or False),

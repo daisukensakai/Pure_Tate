@@ -4,33 +4,44 @@ import threading
 import time
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from pure_tate.grok_workers import (
     DEFAULT_MAX_TOTAL,
+    DEFAULT_MAX_WORKER_TURNS,
     DispatchLog,
     GrokWorkerPool,
     PoolError,
     WorkerRecord,
     WorkerSession,
     apply_workers_to_argv,
+    build_worker_argv,
     ensure_dispatch_log_dir,
+    extract_cli_session_id,
+    extract_result_text,
     max_grok_workers_from_config,
+    max_worker_turns_from_config,
     mcp_server_command,
     prepare_worker_session,
     record_parent_mcp_events,
+    redact_argv,
+    resolve_worker_backend,
+    resolve_worker_model,
     sha256_text,
     utc_now_iso,
+    worker_dispatch_parent_policy,
 )
 
 
 class GrokWorkerPoolTests(unittest.TestCase):
     def test_max_config_defaults_and_disable(self):
         self.assertEqual(max_grok_workers_from_config({}), DEFAULT_MAX_TOTAL)
+        self.assertEqual(DEFAULT_MAX_TOTAL, 1)
         self.assertEqual(
-            max_grok_workers_from_config({"max_grok_workers": 4}), 4
+            max_grok_workers_from_config({"max_grok_workers": 1}), 1
         )
         self.assertEqual(
-            max_grok_workers_from_config({"max_grok_workers": 99}), 4
+            max_grok_workers_from_config({"max_grok_workers": 99}), 1
         )
         self.assertEqual(
             max_grok_workers_from_config({"grok_workers_enabled": False}), 0
@@ -38,9 +49,15 @@ class GrokWorkerPoolTests(unittest.TestCase):
         self.assertEqual(
             max_grok_workers_from_config({"max_grok_workers": 0}), 0
         )
+        self.assertEqual(
+            max_worker_turns_from_config({}), DEFAULT_MAX_WORKER_TURNS
+        )
+        self.assertEqual(
+            max_worker_turns_from_config({"max_worker_turns": 4}), 4
+        )
 
     def test_total_budget_hard_cap(self):
-        def runner(*, prompt, description, worker_id, pool):
+        def runner(*, prompt, description, worker_id, pool, **_kwargs):
             return WorkerRecord(
                 worker_id=worker_id,
                 description=description,
@@ -50,36 +67,34 @@ class GrokWorkerPoolTests(unittest.TestCase):
                 finished_at=utc_now_iso(),
                 returncode=0,
                 result_text="ok",
+                cli_session_id="sess-complete",
             )
 
         pool = GrokWorkerPool(
-            max_concurrent=4, max_total=4, runner=runner
+            max_concurrent=1, max_total=1, max_worker_turns=4, runner=runner
         )
-        for i in range(4):
-            result = pool.dispatch("p-%d" % i, "t%d" % i)
-            self.assertEqual(result["status"], "completed")
+        result = pool.dispatch("p-0", "t0")
+        self.assertEqual(result["status"], "completed")
         with self.assertRaises(PoolError) as ctx:
             pool.dispatch("overflow", "x")
         self.assertEqual(ctx.exception.code, "budget_exhausted")
 
     def test_concurrent_pool_full(self):
-        pool = GrokWorkerPool(max_concurrent=4, max_total=10)
+        pool = GrokWorkerPool(max_concurrent=1, max_total=1, max_worker_turns=4)
         gate = threading.Event()
         entered = threading.Event()
-        count = {"n": 0}
-        lock = threading.Lock()
 
-        def gated_run(worker_id, prompt, timeout_seconds):
-            with lock:
-                count["n"] += 1
-                if count["n"] >= 4:
-                    entered.set()
+        def gated_run(
+            worker_id, prompt, timeout_seconds, resume_session_id=None
+        ):
+            entered.set()
             gate.wait(timeout=5)
             with pool._lock:
                 rec = pool._workers[worker_id]
                 rec.status = "completed"
                 rec.finished_at = utc_now_iso()
                 rec.returncode = 0
+                rec.cli_session_id = "sess-live"
                 pool._live = sum(
                     1
                     for item in pool._workers.values()
@@ -87,17 +102,115 @@ class GrokWorkerPoolTests(unittest.TestCase):
                 )
 
         pool._run_worker = gated_run  # type: ignore[method-assign]
-        ids = []
-        for i in range(4):
-            meta = pool.dispatch("p-%d" % i, "c%d" % i, wait=False)
-            ids.append(meta["worker_id"])
+        meta = pool.dispatch("p-0", "c0", wait=False)
         self.assertTrue(entered.wait(timeout=2))
         with self.assertRaises(PoolError) as ctx:
-            pool.dispatch("fifth", "x", wait=False)
-        self.assertEqual(ctx.exception.code, "pool_full")
+            pool.dispatch("second", "x", wait=False)
+        self.assertEqual(ctx.exception.code, "budget_exhausted")
         gate.set()
-        for wid in ids:
-            pool.await_worker(wid, timeout_seconds=2)
+        pool.await_worker(meta["worker_id"], timeout_seconds=2)
+
+    def test_continue_turns_and_resume_argv(self):
+        def runner(
+            *,
+            prompt,
+            description,
+            worker_id,
+            pool,
+            turn=1,
+            resume_session_id=None,
+        ):
+            return WorkerRecord(
+                worker_id=worker_id,
+                description=description,
+                prompt_sha256=sha256_text(prompt),
+                status="completed",
+                created_at=utc_now_iso(),
+                finished_at=utc_now_iso(),
+                returncode=0,
+                result_text="turn-%d" % turn,
+                cli_session_id=resume_session_id or "sess-abc",
+                turn_index=turn,
+            )
+
+        pool = GrokWorkerPool(
+            max_concurrent=1,
+            max_total=1,
+            max_worker_turns=4,
+            backend="cursor",
+            runner=runner,
+        )
+        first = pool.dispatch("start", "t1")
+        worker_id = first["worker_id"]
+        self.assertEqual(first["turn_index"], 1)
+        self.assertEqual(first["cli_session_id"], "sess-abc")
+        for turn in (2, 3, 4):
+            cont = pool.continue_worker(worker_id, "follow-%d" % turn, "c%d" % turn)
+            self.assertEqual(cont["status"], "completed")
+            self.assertEqual(cont["turn_index"], turn)
+            self.assertEqual(cont["cli_session_id"], "sess-abc")
+        with self.assertRaises(PoolError) as ctx:
+            pool.continue_worker(worker_id, "too-many", "x")
+        self.assertEqual(ctx.exception.code, "turns_exhausted")
+        with self.assertRaises(PoolError) as ctx:
+            pool.dispatch("another", "x")
+        self.assertEqual(ctx.exception.code, "budget_exhausted")
+
+        resume_argv = build_worker_argv(
+            "delta",
+            model="cursor-grok-4.5-high",
+            backend="cursor",
+            resume_session_id="sess-abc",
+        )
+        self.assertEqual(
+            resume_argv[resume_argv.index("--resume") + 1], "sess-abc"
+        )
+
+    def test_continue_requires_session_id(self):
+        def runner(*, prompt, description, worker_id, pool, **_kwargs):
+            return WorkerRecord(
+                worker_id=worker_id,
+                description=description,
+                prompt_sha256=sha256_text(prompt),
+                status="completed",
+                created_at=utc_now_iso(),
+                finished_at=utc_now_iso(),
+                returncode=0,
+                result_text="ok",
+                cli_session_id=None,
+            )
+
+        pool = GrokWorkerPool(
+            max_concurrent=1,
+            max_total=1,
+            max_worker_turns=4,
+            backend="cursor",
+            runner=runner,
+        )
+        first = pool.dispatch("start", "t1")
+        with self.assertRaises(PoolError) as ctx:
+            pool.continue_worker(first["worker_id"], "more", "c2")
+        self.assertEqual(ctx.exception.code, "resume_unavailable")
+
+    def test_parent_policy_mentions_continue(self):
+        text = worker_dispatch_parent_policy(1, max_worker_turns=4)
+        self.assertIn("continue_grok_worker", text)
+        self.assertIn("4 conversational turns", text)
+        self.assertIn("gap-fill", text)
+
+    def test_extract_cli_session_id(self):
+        fixture = (
+            Path(__file__).resolve().parent.parent
+            / "CLI_test"
+            / "results"
+            / "cursor_grok"
+            / "20260810T015914Z"
+            / "json_format.stdout.json"
+        ).read_text(encoding="utf-8")
+        self.assertEqual(
+            extract_cli_session_id(fixture),
+            "4e906b1d-7a72-4dca-a18b-5b2aec8ede8e",
+        )
 
     def test_prepare_worker_session_claude_and_grok(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -107,18 +220,23 @@ class GrokWorkerPoolTests(unittest.TestCase):
                 family="claude",
                 max_workers=4,
                 allow_web=False,
+                worker_backend="xai",
             )
             # May be None if grok binary missing in CI; skip soft.
             if claude is None:
-                self.skipTest("grok binary unavailable")
+                self.skipTest("xAI grok binary unavailable")
             self.assertTrue(claude.enabled)
             self.assertIsNotNone(claude.mcp_config_path)
             self.assertTrue(claude.mcp_config_path.is_file())
+            self.assertEqual(
+                claude.env_updates.get("GROK_WORKER_BACKEND"), "xai"
+            )
 
             grok = prepare_worker_session(
                 context / "g",
                 family="grok",
                 max_workers=4,
+                worker_backend="xai",
             )
             self.assertIsNotNone(grok)
             self.assertIsNotNone(grok.grok_home)
@@ -127,15 +245,124 @@ class GrokWorkerPoolTests(unittest.TestCase):
             self.assertIn("UV_CACHE_DIR", grok.env_updates)
 
             disabled = prepare_worker_session(
-                context, family="claude", max_workers=0
+                context, family="claude", max_workers=0, worker_backend="xai"
             )
             self.assertIsNone(disabled)
 
             qwen = prepare_worker_session(
-                context, family="qwen", max_workers=4
+                context, family="qwen", max_workers=4, worker_backend="xai"
             )
             self.assertIsNotNone(qwen)
             self.assertIsNone(qwen.mcp_config_path)
+
+    def test_prepare_worker_session_cursor_backend(self):
+        with tempfile.TemporaryDirectory() as directory:
+            context = Path(directory)
+            with mock.patch(
+                "pure_tate.grok_workers.worker_backend_available",
+                return_value=True,
+            ), mock.patch.dict(
+                "os.environ", {"CURSOR_API_KEY": "crsr_test_key"}, clear=False
+            ):
+                session = prepare_worker_session(
+                    context,
+                    family="cursor",
+                    max_workers=4,
+                    worker_backend="cursor",
+                    worker_model="cursor-grok-4.5-high",
+                )
+            self.assertIsNotNone(session)
+            mcp = context / ".cursor" / "mcp.json"
+            self.assertTrue(mcp.is_file())
+            self.assertEqual(session.mcp_config_path, mcp)
+            self.assertEqual(
+                session.env_updates.get("GROK_WORKER_BACKEND"), "cursor"
+            )
+            self.assertEqual(
+                session.env_updates.get("GROK_WORKER_MODEL"),
+                "cursor-grok-4.5-high",
+            )
+            self.assertEqual(
+                session.env_updates.get("CURSOR_API_KEY"), "crsr_test_key"
+            )
+
+            argv = apply_workers_to_argv(
+                [
+                    "cursor-agent",
+                    "-p",
+                    "--mode",
+                    "ask",
+                    "--model",
+                    "cursor-grok-4.5-high",
+                    "hello",
+                ],
+                "cursor",
+                session,
+            )
+            self.assertIn("--approve-mcps", argv)
+            self.assertEqual(argv[-1], "hello")
+
+    def test_cursor_worker_argv_and_result_extract(self):
+        argv = build_worker_argv(
+            "worker prompt",
+            model="cursor-grok-4.5-high",
+            cwd=Path("/tmp/ws"),
+            backend="cursor",
+        )
+        self.assertEqual(argv[0], "cursor-agent")
+        self.assertEqual(argv[argv.index("--mode") + 1], "ask")
+        self.assertNotIn("--force", argv)
+        self.assertNotIn("--yolo", argv)
+        self.assertEqual(argv[argv.index("--output-format") + 1], "json")
+        self.assertEqual(
+            argv[argv.index("--model") + 1], "cursor-grok-4.5-high"
+        )
+        self.assertEqual(argv[argv.index("--workspace") + 1], "/tmp/ws")
+        self.assertEqual(argv[-1], "worker prompt")
+        redacted = redact_argv(argv, "worker prompt")
+        self.assertTrue(redacted[-1].startswith("<prompt-sha256:"))
+        self.assertEqual(redacted[argv.index("--mode") + 1], "ask")
+
+        web_argv = build_worker_argv(
+            "worker prompt",
+            model="cursor-grok-4.5-high",
+            cwd=Path("/tmp/ws"),
+            backend="cursor",
+            allow_web=True,
+        )
+        self.assertEqual(web_argv[web_argv.index("--mode") + 1], "ask")
+        self.assertIn("--force", web_argv)
+        self.assertLess(
+            web_argv.index("--mode"), web_argv.index("--force")
+        )
+        self.assertLess(
+            web_argv.index("--force"), web_argv.index("--output-format")
+        )
+
+        fixture = (
+            Path(__file__).resolve().parent.parent
+            / "CLI_test"
+            / "results"
+            / "cursor_grok"
+            / "20260810T015914Z"
+            / "json_format.stdout.json"
+        ).read_text(encoding="utf-8")
+        text = extract_result_text(fixture)
+        self.assertIn('"probe":"json_format"', text)
+
+        self.assertEqual(
+            resolve_worker_backend({"grok_worker_backend": "cursor"}), "cursor"
+        )
+        self.assertEqual(
+            resolve_worker_model(
+                {
+                    "grok_worker_backend": "cursor",
+                    "grok_worker_model": "cursor-grok-4.5-high",
+                },
+                backend="cursor",
+            ),
+            "cursor-grok-4.5-high",
+        )
 
     def test_prepare_controller_session_never_attaches_mcp(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -144,9 +371,10 @@ class GrokWorkerPoolTests(unittest.TestCase):
                 family="openai",
                 max_workers=4,
                 attach_mcp=False,
+                worker_backend="xai",
             )
             if session is None:
-                self.skipTest("grok binary unavailable")
+                self.skipTest("xAI grok binary unavailable")
             self.assertTrue(session.enabled)
             self.assertIsNone(session.mcp_config_path)
             self.assertIsNone(session.grok_home)
@@ -182,6 +410,7 @@ class GrokWorkerPoolTests(unittest.TestCase):
                 out[out.index("--permission-mode") + 1], "bypassPermissions"
             )
             self.assertIn("mcp__grok-workers__dispatch_grok_worker", out)
+            self.assertIn("mcp__grok-workers__continue_grok_worker", out)
             self.assertIn("--mcp-config", out)
             self.assertIn("--strict-mcp-config", out)
 
@@ -222,7 +451,7 @@ class GrokWorkerPoolTests(unittest.TestCase):
                 parent={"engine": "grok", "task_id": "TASK-X"},
             )
 
-            def runner(*, prompt, description, worker_id, pool):
+            def runner(*, prompt, description, worker_id, pool, **_kwargs):
                 return WorkerRecord(
                     worker_id=worker_id,
                     description=description,
@@ -232,22 +461,22 @@ class GrokWorkerPoolTests(unittest.TestCase):
                     finished_at=utc_now_iso(),
                     returncode=0,
                     result_text='{"ok":true}',
+                    cli_session_id="sess-log",
                 )
 
             pool = GrokWorkerPool(
-                max_concurrent=4,
-                max_total=4,
+                max_concurrent=1,
+                max_total=1,
+                max_worker_turns=4,
                 dispatch_log=dlog,
                 runner=runner,
             )
             result = pool.dispatch("do work", "unit", wait=True)
             self.assertEqual(result["status"], "completed")
 
-            with self.assertRaises(PoolError):
-                # exhaust remaining budget with more dispatches then reject
-                for i in range(3):
-                    pool.dispatch("more-%d" % i, "u")
+            with self.assertRaises(PoolError) as ctx:
                 pool.dispatch("overflow", "x")
+            self.assertEqual(ctx.exception.code, "budget_exhausted")
 
             events_path = log_root / "events.jsonl"
             self.assertTrue(events_path.is_file())
