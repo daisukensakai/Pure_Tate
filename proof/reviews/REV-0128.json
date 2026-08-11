@@ -1,0 +1,183 @@
+{
+  "attempt_id": "ATT-0078",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0078-1",
+      "note": "The deformation calculation gives a length-18 normal sheaf with vanishing H^1, quotienting target reparametrizations removes three dimensions, and the point automorphism group injects into the finite automorphism group of the genus-6 source. This is a stack-level claim; no coarse-moduli identification is used beyond equality of dimensions for finite stabilizers.",
+      "statement": "The balanced Hurwitz stack is a smooth finite-stabilizer Deligne-Mumford stack of dimension 15.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0078-2",
+      "note": "A P^{k-1}-bundle has dimension dim(H_k)+k-1, not 15+k-1 unless H_k itself has dimension 15. The attempt later correctly gives dim(I|_{H_4})=dim(H_4)+3 and dim(H_4)<=14, contradicting the preceding general formula.",
+      "statement": "For every reduced stratum H_k, I|_{H_k} is equidimensional of dimension 15+k-1.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0078-4",
+      "note": "Zariski-local triviality with irreducible fibre P^2 gives precisely the stated component correspondence; the theorem does not assert that either space is irreducible.",
+      "statement": "The P^2-bundle over H_3 induces a bijection on irreducible components and transfers irreducibility in both directions.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0078-6",
+      "note": "The formulation remains at stack level and does not silently replace the stack by its coarse moduli space. Rational invariants equal coinvariants for the finite S_6-action, but no integral descent or graph-automorphism claim is made.",
+      "statement": "On distinct support, the ordered incidence is a finite etale S_6-torsor at stack level, with component behavior controlled by monodromy.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0078-8",
+      "note": "The proof establishes only a weaker dense-open statement and a result for automorphisms inducing tau=id on P^1 under an additional ramification condition. Six fixed points do not exceed the genus-6 bound 2g+2=14. The theorem's later admission that the general tau case is not proved does not retract its opening universal assertion.",
+      "statement": "Every reduced ordered point has trivial automorphism group.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0078-9",
+      "note": "The normalization needed to recover the tetragonal pencil remains an undischarged dependency. Independently, the proof gives injectivity over H_3 but only an upper bound of two on fibre dimension over H_4; that does not prove global finiteness or quasi-finiteness. A separate argument might still establish image dimension 17, but the stated finite-fibre implication is not supplied.",
+      "statement": "Granting the weak CE normalization, the forgetful morphism has finite fibres and therefore has 17-dimensional constructible image.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0078-11",
+      "note": "The target's cohomological degrees and Tate twists are not used in this lemma. Thus there is no Poincare-duality twist, Gysin or Kunneth shift, degeneration claim, predicted-motive upgrade, pure-Tate-to-algebraic upgrade, or omitted-stable-pair inference to validate here.",
+      "statement": "The theorem makes no closedness, purity, lci, Gysin, cohomological, Borel-Moore, Kunneth, spectral-sequence, Hodge-isomorphism, motivic, algebraic-generation, tautological-generation, or stable-pair conclusion.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-11",
+  "finding_candidates": [
+    {
+      "adjudication": "supports_existing",
+      "impacts_approach_ids": [],
+      "key": "universal-stabilizer-claim-exceeds-proved-restriction",
+      "kind": "obstruction",
+      "statement": "Clause (E) asserts triviality of every reduced ordered stabilizer although the argument proves only a restricted tau=id or dense-open version; the theorem's later disclaimer does not conditionalize the opening assertion.",
+      "supports_finding_id": "FND-0101"
+    },
+    {
+      "adjudication": "supports_existing",
+      "impacts_approach_ids": [],
+      "key": "weak-ce-normalization-remains-undischarged",
+      "kind": "obstruction",
+      "statement": "Recovery of the tetragonal pencil, and hence the stated constructible-image dimension argument, still depends on the unproved weak Casnati-Ekedahl normalization.",
+      "supports_finding_id": "FND-0105"
+    },
+    {
+      "adjudication": "novel_candidate",
+      "impacts_approach_ids": [],
+      "key": "global-finite-fibres-not-proved-from-h4-bound",
+      "kind": "obstruction",
+      "statement": "Injectivity over H_3 together with a bound of at most two on fibre dimension over H_4 does not prove that the global forgetful morphism has finite fibres or is quasi-finite.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate",
+      "impacts_approach_ids": [],
+      "key": "projective-bundle-stratum-dimension-overstatement",
+      "kind": "obstruction",
+      "statement": "The dimension of I|_{H_k} is dim(H_k)+k-1; replacing dim(H_k) by 15 for every stratum conflicts with the theorem's own bound dim(H_4)<=14.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0128",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "Work over a field k of characteristic zero. Let H denote the algebraic stack of pairs (C,gamma) with C a smooth proper geometrically connected genus-6 curve and gamma:C->P^1 finite flat of degree 4 whose Casnati-Ekedahl relations bundle is \u2026",
+      "field": "theorem_statement",
+      "previous": "Work over a field k of characteristic zero. Let H be the balanced tetragonal Hurwitz stack of smooth genus-6 degree-4 covers gamma:C->P^1 with Casnati-Ekedahl bundle F_gamma isomorphic fibrewise to O(4) direct-sum O(5), let 0->W_4->W->W_5->\u2026",
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Used for the canonical filtration and its fibrewise degree data.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Confirms the ATT-0065 filtration package imported here.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Second-pass confirmation of ATT-0065; no stronger conclusion is imported.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Its stratification, reduced-stratum projective-bundle model, Abel-Jacobi incidence, and stack-level ordered torsor are used within their stated scope; the separate normalization issue is checked under FND-0105.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Confirms the ATT-0066 structural claims used by this attempt.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Confirms ATT-0066 with the reducedness caveat respected on the strata.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "The listed source is not independently load-bearing here; its CE convention is consumed through the verified ATT-0065 and ATT-0066 artifacts.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0105",
+      "note": "The weak CE normalization is load-bearing for pencil recovery in clause (F) and is assumed rather than proved.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "FND-0064",
+      "note": "Supports the finite etale S_6-torsor over the reduced-support open.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0075",
+      "note": "Used only for stack-level torsor descent and rational equality of invariants and coinvariants; no integral or coarse descent is asserted.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0098",
+      "note": "The attempt correctly declines to infer a monomorphism from fibrewise pencil recovery.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0107",
+      "note": "The global incidence is formulated via Abel-Jacobi/Hilbert data, with the projective-bundle description restricted to reduced constant-h^0 strata.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0078-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "Clause (E) universally asserts trivial stabilizers and then expressly concedes that its proof handles only the tau=id or generic restricted case. This assert-then-walk-back defect is internal to the exact theorem statement and leaves a load-bearing stack-theoretic claim unproved.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Work over a field k of characteristic zero. Let H denote the algebraic stack of pairs (C,gamma) with C a smooth proper geometrically connected genus-6 curve and gamma:C->P^1 finite flat of degree 4 whose Casnati-Ekedahl relations bundle is fibrewise balanced, F ~= O(4)+O(5), taken modulo the PGL_2 action on the target; let H^prim be the open substack of primitive gamma (gamma not factoring through a degree-2 map P^1->P^1). Let W_5 be the canonical degree-16 invertible quotient of the CE filtration 0->W_4->W->W_5->0 of ATT-0065/CLM-0065-5 (dual-confirmed REV-0108, REV-0109), put L=W_5 tensor omega^{-1} of fibrewise degree 6, and let I=Hilb^6(C/H) x_{Pic^6(C/H)} H be the closed Abel-Jacobi incidence of ATT-0066/CLM-0066-5 (dual-confirmed REV-0110, REV-0116), with I^dist its distinct-support open and tilde-I=Conf_6(C/H) x_{Hilb^6} I the ordered model, which by ATT-0066/CLM-0066-6 equals the CE evaluation-failure locus Z_ev scheme-theoretically. Then, ASSUMING ONLY the dependency package just cited and the fibrewise weak CE normalization hypothesis carried by ATT-0066 (FND-0105 form), the following hold, all statements being about algebraic stacks and none about coarse spaces. (A) DIMENSION AND SMOOTHNESS OF THE AMBIENT HURWITZ STACK. H is a smooth Deligne-Mumford stack, equidimensional of dimension 15, and its generic point has trivial automorphism group; more precisely the automorphism group of a point (C,gamma) of H is the finite group Aut(C,gamma)={sigma in Aut(C): there exists tau in PGL_2 with gamma o sigma = tau o gamma}, so H is a finite-stabilizer DM stack and dim H = 2g+2d-5 = 15 for (g,d)=(6,4). (B) STRATIFIED STRUCTURE OF THE FAILURE LOCUS OVER H. Write H=H_3 disjoint-union H_4 for the locally closed h^0(L)-strata of ATT-0066/CLM-0066-3, with H_4 closed and contained in the non-primitive hyperelliptic locus, so that H^prim is contained in H_3 and H_3 is open and dense in H if H^prim is dense. Over the reduced stratum H_k the incidence I|_{H_k} is a Zariski-locally trivial P^{k-1}-bundle, hence smooth over H_k of relative dimension k-1 and equidimensional of dimension 15+k-1; in particular I|_{H_3} is smooth of pure dimension 17 and I|_{H_4} has pure dimension 15+3-dim H_4 corrections given by dim H_4+3. Consequently I is equidimensional of dimension 17 over H_3 and every component of I dominating H is 17-dimensional, while any component of I lying over H_4 has dimension dim H_4+3 <= 14+3 = 17 whenever dim H_4 <= 14. (C) COMPONENTS AND IRREDUCIBILITY TRANSFER. The number of irreducible components of I|_{H_3} of dimension 17 equals the number of irreducible components of H_3, because a Zariski-locally trivial projective bundle over an irreducible base is irreducible and the P^2-bundle structure of (B) is a bijection between components of H_3 and components of I|_{H_3}. Hence irreducibility of I|_{H_3} is EQUIVALENT to irreducibility of H_3 and is not an independent geometric input; no irreducibility of H, H_3 or I is asserted here. (D) THE ORDERED COVER AND ITS STABILIZERS. On the distinct-support open, tilde-I -> I^dist is a finite etale S_6-torsor at stack level (ATT-0066/CLM-0066-6, FND-0064, FND-0075), so dim tilde-I = dim I^dist, the components of tilde-I are the S_6-orbits of components of I^dist together with their monodromy, and the automorphism group of a point of tilde-I lying over (C,gamma,Gamma) with Gamma=x_1+...+x_6 reduced is the pointwise stabilizer Aut(C,gamma,x_1,...,x_6)={sigma in Aut(C,gamma): sigma(x_i)=x_i for all i}. (E) STABILIZER TRIVIALITY AND THE FORGETFUL MAP TO M_{6,6}. For every point of tilde-I with Gamma reduced, Aut(C,gamma,x_1,...,x_6) is trivial. Indeed such a sigma fixes six distinct points of C and lies in the finite group Aut(C), and it induces tau in PGL_2 with gamma o sigma = tau o gamma; the six fixed points, being six distinct points of a genus-6 curve, force sigma=id as soon as sigma has more than 2g+2=14 fixed points OR, without any bound on fixed points, force sigma=id by the following argument used in the proof: sigma fixes Gamma pointwise and preserves L=O(Gamma), hence preserves omega_C(-D) and D up to linear equivalence, and the quotient C->C/<sigma> would have to be compatible with gamma; the full argument is given in the body and yields Aut(C,gamma,x_1,...,x_6)=1 only under the additional hypothesis that sigma acts trivially on the tetragonal pencil, which is proved when tau=id, and is NOT proved in general. Accordingly (E) is stated in the weaker proved form: the subgroup of Aut(C,gamma,x_1,...,x_6) acting trivially on P^1 (i.e. with tau=id) is trivial whenever the six points are not all contained in fibres permuted by sigma, and in particular tilde-I is a DM stack with finite stabilizers whose generic stabilizer is trivial on the primitive stratum. (F) THE MAP TO M_{6,6} IS NOT SHOWN TO BE A MONOMORPHISM. The forgetful 1-morphism u:tilde-I -> M_{6,6}, (C,gamma,x_1,...,x_6) |-> (C,x_1,...,x_6), is representable and quasi-finite ONLY MODULO the recovery of gamma from the marked data; by FND-0098 the fibre of u over (C,x_*) is the set of balanced tetragonal pencils gamma on C with O(sum x_i) ~= W_5(gamma) tensor omega^{-1}, and the identification L ~= omega_C(-D) supplied by the ATT-0066 normalization hypothesis recovers the pencil as |omega_C tensor L^{-1}|=|O_C(D)|, which is a g^1_4 containing D. Hence, GRANTING the ATT-0066 normalization hypothesis, u has finite fibres and its fibre over (C,x_*) injects into the set of degree-4 pencils contained in |omega_C(-Gamma)|^vee-recovery, so dim u(tilde-I) = dim tilde-I = 17 and the image of u has dimension 17, i.e. codimension 4 in the 21-dimensional M_{6,6}; but u is NOT proved to be a monomorphism, and no purity, closedness, or lci property of the image is claimed. (G) NON-PURITY AND NON-CLOSEDNESS ARE NOT ESTABLISHED. Consistently with FND-0067 and FND-0101, this theorem asserts neither that the balanced image Z^{bal} is closed in M_{6,6} nor that it fails to be closed; no witness closure point is exhibited, and the codimension-4 statement of (F) is a statement about the constructible image of u and its dimension only.",
+  "verdict": "incomplete"
+}

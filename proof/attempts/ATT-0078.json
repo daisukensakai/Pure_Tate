@@ -1,0 +1,322 @@
+{
+  "argument_markdown": "## 0. What this node owes, and what is actually delivered\n\nC66-GEO-COMP asks for four things: components, dimensions, stabilizers, and finite-cover behavior. The dependency package fixes the objects precisely, so the honest task is to compute what those inputs determine and to say plainly where the determination stops. Two adjudicated findings set the bar. FND-0060 records that the count dim H^{tet,bal}_6 = b-3 = 15 is a **coarse** count for branched covers modulo Aut(P^1), and that promoting it to a stack dimension and to a codimension inside M_{6,6} requires a stabilizer/automorphism analysis that ATT-0022 omitted. FND-0086 records that a dominant dimension count plus named exceptional loci is **not** an exhaustive component/stabilizer/closure/codimension analysis of Z. This attempt does the stack-level upgrade FND-0060 asks for, does the component **reduction** FND-0086 makes necessary, and does not pretend to the exhaustive closure analysis FND-0086 says is still missing.\n\nDependency artifacts used, with the confirmations required by the execution contract:\n\n- **ATT-0065** (C66-GEO-Z), confirmed by **REV-0108** and **REV-0109**. Used for: the canonical filtration 0->W_4->W->W_5->0 with fibrewise degrees 20 and 16 at (g,n)=(6,6) (CLM-0065-5, confirmed in both reviews); the scheme-theoretic identity Fit_0(coker phi) = a_N^* I_e and hence the identification of the evaluation-failure scheme with relative triviality of N = omega tensor W_5^vee(Gamma) (CLM-0065-4, CLM-0065-9); and the balanced vanishing R^1 s_* End(F) = 0 (CLM-0065-8) which makes the ambient and intrinsic failure schemes agree.\n- **ATT-0066** (C66-GEO-H0), confirmed by **REV-0110** and **REV-0116**. Used for: h^0(L_b) in {3,4} with the stratification H = H_3 sqcup H_4, H_4 closed and inside the non-primitive hyperelliptic locus (CLM-0066-2, CLM-0066-3); the P^{k-1}-bundle model of the linear system on each **reduced** stratum (CLM-0066-4); the global Abel-Jacobi incidence I = Hilb^6 x_{Pic^6} B as the correct model across the jump (CLM-0066-5, matching FND-0107); and the stack-level S_6-torsor tilde-I -> I^dist together with the scheme-theoretic equality tilde-I = Z_ev on Conf_6 (CLM-0066-6).\n\nI carry ATT-0066's normalization hypothesis in exactly the weak FND-0105 form in which ATT-0066 carries it, as a **hypothesis of my theorem**, not as an established fact. FND-0105 explicitly records that relabelling this gap as an established working-context fact (as ATT-0057 did) is the thing not to do.\n\n## 1. The Hurwitz stack: smoothness, dimension 15, finite stabilizers\n\nLet H^{4,6} be the stack whose objects over a k-scheme T are pairs (C -> T, gamma: C -> P, P -> T a Brauer-Severi/P^1-bundle) with C -> T smooth proper genus 6 and gamma finite flat of degree 4, and let H be the open substack where the CE relations bundle is fibrewise O(4)+O(5). I first record why H is a DM stack of dimension 15 with finite automorphism groups, which is the stack-level statement FND-0060 asks for.\n\n**1.1 Deformation theory.** For gamma: C -> P^1 finite flat of degree 4 with C smooth of genus g, simply-branched or not, the deformation theory of the pair relative to the target modulo PGL_2 is governed by the normal complex. Since gamma is finite and flat with C and P^1 smooth of dimension one, gamma is a local complete intersection morphism and the cotangent complex L_gamma is concentrated in degree 0, equal to the coherent sheaf Omega_gamma = coker(gamma^* Omega_{P^1} -> Omega_C), which for a separable degree-4 cover is the ramification module, a torsion sheaf of length equal to the degree b of the branch divisor. By Riemann-Hurwitz, 2g-2 = 4(-2) + b, so b = 2g+6 = 18 at g=6.\n\nThe standard Hurwitz deformation argument: deformations of the pair (C,gamma) with the target **fixed** are governed by H^0(C, N_gamma) with obstructions in H^1(C, N_gamma), where N_gamma = Omega_gamma is the torsion ramification sheaf (for a finite morphism to a curve, the normal sheaf of the map is this torsion sheaf). Since N_gamma is torsion on a curve, H^1(C,N_gamma) = 0, so deformations are unobstructed and the space of first-order deformations with fixed target has dimension h^0(N_gamma) = length(N_gamma) = b = 18. Allowing the target P^1 to move contributes nothing new (P^1 is rigid), and quotienting by the 3-dimensional PGL_2 = Aut(P^1) gives\n\n  dim H = b - 3 = 18 - 3 = 15.  (1.1)\n\nUnobstructedness (H^1 = 0) gives **smoothness** of the stack, not merely the dimension count. Equivalently, in the classical simply-branched picture the Hurwitz space is finite etale over the configuration space of b unordered branch points in P^1, of dimension b, and the PGL_2-quotient has dimension b-3; but the deformation-theoretic form above is what proves smoothness and applies verbatim to the non-simply-branched locus, which is why I use it. Note 2g+2d-5 = 12+8-5 = 15 agrees with (1.1).\n\n**1.2 Balancedness is open.** The condition F_b ~= O(4)+O(5) on the rank-2 relations bundle is the condition h^1(P^1, F_b(-5)) = 0 together with the fixed determinant deg F = g+3 = 9 (recorded independently in the REV-0116 cross-check FC-W5-CONVENTION-ARITHMETIC-INVARIANT: deg F = g+3 = 9 = 4+5, so 'balanced' can only mean O(4)+O(5) at g=6). Semicontinuity makes the vanishing an open condition on the base, so H is an **open** substack of H^{4,6} and inherits smoothness and dimension 15. This is the only use I make of openness of balancedness; FND-0098 correctly warns that openness of the balanced stratum supplies no injectivity into M_{6,6}, and I do not use it for that.\n\n**1.3 Finite stabilizers.** An automorphism of the object (C,gamma) over an algebraically closed field is a pair (sigma,tau) with sigma in Aut(C), tau in PGL_2, gamma o sigma = tau o gamma. Since g = 6 >= 2, Aut(C) is finite; and tau is determined by sigma because gamma is surjective. Hence Aut(C,gamma) injects into Aut(C) and is finite, so H is a Deligne-Mumford stack with finite (indeed generically trivial, since a general tetragonal genus-6 curve has no automorphisms) stabilizers. This is precisely the stack-level upgrade of the coarse count that FND-0060 demanded; note that it establishes dim H = 15 **as a stack**, since a finite-stabilizer DM stack has the same dimension as its coarse space.\n\n## 2. The failure locus over each stratum: dimensions and smoothness\n\nBy ATT-0066/CLM-0066-3 (confirmed REV-0110, REV-0116), the function b |-> h^0(L_b) takes only the values 3 and 4 on H; H_4 = {h^0(L) >= 4} is closed in the underlying topological space and H_3 is its open complement; and H_4 is contained in the locus of hyperelliptic fibres on which gamma_b is **non-primitive**, factoring as gamma = q o h through the hyperelliptic double cover. Two immediate consequences, both proved:\n\n**2.1** H^prim (primitive gamma) is contained in H_3. Contrapositive of the containment just quoted: a point of H_4 has non-primitive gamma.\n\n**2.2** Over the reduced stratum H_k, ATT-0066/CLM-0066-4 and (H3) give I|_{H_k} ~= P((pi_* L|_{H_k})^vee), a Zariski-locally trivial P^{k-1}-bundle. Hence I|_{H_k} -> H_k is smooth proper of relative dimension k-1, and\n\n  dim I|_{H_3} = dim H_3 + 2 = 15 + 2 = 17,  dim I|_{H_4} = dim H_4 + 3.  (2.1)\n\nThe first equality uses dim H_3 = 15, which holds because H_3 is a nonempty open substack of the equidimensional 15-dimensional H \u2014 nonempty provided H^prim is nonempty, which holds because a general balanced tetragonal genus-6 curve is not hyperelliptic (a hyperelliptic curve's g^1_4's are all of the form h^*(pencil), i.e. non-primitive, and a general genus-6 curve is non-hyperelliptic and carries five g^1_4's). The second equality is a **conditional** statement: it says nothing until dim H_4 is bounded, and I do not bound it here.\n\n**2.3 Equidimensionality over H_3.** Since I|_{H_3} -> H_3 is a Zariski-locally trivial P^2-bundle over an equidimensional 15-dimensional base, I|_{H_3} is equidimensional of dimension 17, and it is **smooth** wherever H_3 is smooth \u2014 which is everywhere, by 1.1. So I|_{H_3} is a smooth equidimensional 17-dimensional DM stack.\n\nI emphasize what 2.2 does **not** give. The reducedness restriction in ATT-0066/CLM-0066-4 is load-bearing (REV-0116 records exactly this in FC-H0-NONREDUCED-GRAUERT: fibrewise constancy of h^0 does not give local freeness of pi_* L over a non-reduced base). Since H is smooth, hence reduced, the restriction is harmless **here**, and I record that as the reason it is harmless rather than ignoring it: H_3 with its reduced (= its natural open) structure is the same stack, so Grauert applies on the nose. Over a general non-reduced base it would not, and no downstream node may drop the hypothesis.\n\n## 3. Components: the correct reduction, and why it is a reduction and not a theorem\n\n**3.1 Bijection of components.** Let X -> Y be a Zariski-locally trivial P^m-bundle of Noetherian stacks. Then the map V |-> preimage of V is a bijection from irreducible components of Y to irreducible components of X, with dim (preimage) = dim V + m. Proof: the preimage of an irreducible V is irreducible because it is covered by opens V_i x P^m with V_i irreducible open dense in V and pairwise intersecting, and a union of irreducible opens with pairwise nonempty intersections is irreducible; surjectivity and injectivity of the correspondence follow since the bundle map is open, surjective, and has irreducible fibres.\n\nApplying this to I|_{H_3} -> H_3 with m = 2:\n\n  #{components of I|_{H_3}} = #{components of H_3}, each of dimension 17.  (3.1)\n\n**3.2 The honest statement.** (3.1) says the component structure of the failure model over the open stratum is **exactly** the component structure of the balanced tetragonal Hurwitz stack; nothing more, nothing less. In particular:\n\n- Irreducibility of I|_{H_3} is **equivalent** to irreducibility of H_3, not an additional geometric fact one could hope to prove by studying divisors.\n- I do **not** assert that H, H_3, or I is irreducible. Irreducibility of Hurwitz spaces of primitive degree-d covers with simple branching is classical (Clebsch/Hurwitz for the simply-branched primitive case), but H is the **balanced** locus, an open substack cut out by a bundle-splitting condition, and its irreducibility does not follow formally from irreducibility of an ambient Hurwitz space unless one knows the balanced locus is dense in each component \u2014 which is a statement about the CE splitting stratification I have not proved and do not assume. This is exactly the sort of gap FND-0086 says must be identified rather than papered over, so I record it as GAP-COMP-IRRED below rather than asserting a component count.\n\n**3.3 Components over H_4.** Any irreducible component of I lying entirely over H_4 has dimension dim H_4 + 3 by 2.2. Since GAP-H0-1 (emptiness of H_4) is open \u2014 ATT-0066 explicitly declines to claim it, and both REV-0110 and REV-0116 confirm the decline \u2014 I cannot rule such components out, nor bound their dimension, without bounding dim H_4. What I can say unconditionally: H_4 is contained in the hyperelliptic non-primitive locus, and its closure is a **proper closed** substack of H unless H_4 = H, which is excluded by 2.2's nonemptiness remark (H^prim is nonempty and contained in H_3). Hence dim H_4 <= 14 **if** H_4 is contained in a proper closed substack of the equidimensional smooth 15-dimensional H, which it is, since H_3 is a nonempty open. Therefore\n\n  dim I|_{H_4} = dim H_4 + 3 <= 14 + 3 = 17,  (3.2)\n\nso **no component of I over H_4 exceeds dimension 17**, and I is of dimension exactly 17 overall, equidimensional over H_3 and of dimension <= 17 over H_4. This is a genuine unconditional consequence and is the strongest component statement the dependency package supports. It does **not** say I is equidimensional (a 17-dimensional component over H_4 would require dim H_4 = 14 exactly, which is not excluded), and it does not say I is irreducible.\n\n## 4. Finite-cover behavior: the ordered model and its stabilizers\n\n**4.1 The torsor.** By ATT-0066/CLM-0066-6 (confirmed REV-0110, REV-0116), and consistently with FND-0064 and FND-0075, tilde-I = Conf_6(C/H) x_{Hilb^6} I -> I^dist is a finite etale S_6-torsor **at stack level**, with neither side artificially reduced (FND-0087). Consequences, all formal:\n\n- dim tilde-I = dim I^dist. Combining with Section 2-3: tilde-I has dimension 17, is smooth and equidimensional of dimension 17 over H_3, and has no component of dimension > 17.\n- Components of tilde-I lie over components of I^dist; S_6 acts on the set of components of tilde-I over a fixed component of I^dist, transitively, and the number of components of tilde-I over a given irreducible component V of I^dist is the index [S_6 : Im(pi_1^{et}(V) -> S_6)] of the geometric monodromy image. **I do not compute this monodromy**; determining it is exactly the input a downstream C66-TATE-SUPPORT or C66-CEX-LOCAL node would need, and FND-0053 already records that rationality of S_6-representations does **not** by itself force Tate local systems on such a cover. I therefore flag the monodromy as an open input rather than assuming it is full or trivial.\n- Rationally, S_6-invariants and coinvariants agree, so descent of Q-cohomology from tilde-I to I^dist is harmless (FND-0075); integrally or on coarse spaces it is not, and no such descent is claimed.\n\n**4.2 Stabilizers on the ordered model.** A point of tilde-I over an algebraically closed field is (C, gamma, x_1,...,x_6) with the x_i pairwise distinct, sum x_i = Gamma, and O_C(Gamma) ~= L. Its automorphism group in the stack tilde-I is\n\n  Aut(C,gamma,x_1,...,x_6) = {sigma in Aut(C) : exists tau in PGL_2 with gamma o sigma = tau o gamma, and sigma(x_i) = x_i for all i}.  (4.1)\n\nThis is a subgroup of the finite group Aut(C,gamma) of 1.3, hence finite; tilde-I is a DM stack.\n\n**4.3 What I can prove about (4.1), and what I cannot.** Let sigma be in the group (4.1) and suppose first that the induced tau is the identity, i.e. gamma o sigma = gamma. Then sigma lies in the deck group of the degree-4 cover gamma. If sigma is nontrivial, the quotient map C -> C/<sigma> factors gamma, so gamma is non-primitive of degree 4 and <sigma> has order 2 or 4. In either case sigma has finitely many fixed points, and sigma fixes each x_i; a nontrivial automorphism sigma of order m of a genus-6 curve has, by Riemann-Hurwitz applied to C -> C/<sigma>, at most 2g/(m-1) + 2 <= 14 fixed points for m = 2, so six fixed points is **not** by itself a contradiction. However, on the deck group of a **fibrewise** degree-4 map, the six points x_1,...,x_6 are fixed by sigma and lie in fibres of gamma; a nontrivial deck transformation acts freely outside the ramification of gamma, so all six x_i would be ramification points of gamma fixed by sigma. That is possible in principle, so I do **not** conclude triviality unconditionally; what I do conclude is: **if the six marked points are not all ramification points of gamma, then the tau = id part of (4.1) is trivial.** Since the distinct-support open is what the campaign uses and the generic point of each 17-dimensional component over H_3 has all six x_i unramified (the ramification divisor of gamma has degree 18 and imposes a proper closed condition on the P^2 of divisors in |L| over each point of H_3, as the locus of divisors meeting a fixed finite set is a proper closed subset of P^2 unless the whole P^2 consists of such divisors, which cannot happen since |L| is 2-dimensional and base-point-free-ness is not needed: a fixed point p of C lies on a codimension-1 subspace of |L| = P^2, so the divisors containing at least one of the 18 ramification points form a proper closed subset), the **generic** stabilizer of each component of tilde-I over H_3 with tau = id is trivial.\n\nFor sigma with tau nontrivial, sigma permutes the fibres of gamma nontrivially while fixing all six x_i pointwise; then tau fixes the 6 (or fewer, with multiplicity) points gamma(x_i) of P^1, and a nontrivial element of PGL_2 fixes at most 2 points of P^1. Hence **if the gamma(x_i) take at least 3 distinct values in P^1, then tau = id.** Combining: on the open locus of tilde-I where the six marked points have at least three distinct gamma-images and are not all ramification points of gamma \u2014 an open substack that is dense in every component over H_3, by the same codimension count \u2014 the stabilizer (4.1) is **trivial**. This is the proved form of clause (E) and I state it that way in the theorem rather than asserting blanket triviality and then disclaiming it, per the FND-0101 discipline (which, note, REV-0116's FC-H0-NEGATIVE-CLAUSES-ARE-DISCLAIMERS shows is applied to negative clauses too).\n\n## 5. The map to M_{6,6}: dimension of the image, and the monomorphism that is NOT proved\n\n**5.1 The morphism.** Forgetting gamma gives a 1-morphism u : tilde-I -> M_{6,6}, (C,gamma,x_1,...,x_6) |-> (C,x_1,...,x_6), well defined because the x_i are distinct and (C,x_*) is a smooth 6-pointed genus-6 curve, hence a point of M_{6,6}; dim M_{6,6} = 3g-3+n = 15+6 = 21.\n\n**5.2 Fibres, granting the normalization hypothesis.** FND-0098 states the situation exactly: M_{6,6} forgets gamma, a general genus-6 curve carries five distinct g^1_4's, so the underlying forgetful map is generically 5-to-1, and **the only standard recovery route** is the identification L ~= omega_C(-D) with D in the pencil, which returns the pencil as |omega_C tensor L^{-1}|. Under the normalization hypothesis carried from ATT-0066 (CLM-0066-2, confirmed by REV-0110 and REV-0116), that identification **holds**: L_b ~= omega_{C_b}(-D_b) and M_b ~= O_{C_b}(D_b) = gamma_b^* O(1). Therefore, given a point (C,x_*) in the image of u, any gamma with u(C,gamma,x_*) = (C,x_*) satisfies O_C(Gamma) ~= L = omega_C(-D), so O_C(D) ~= omega_C(-Gamma) is **determined** by (C,x_*), and the pencil defining gamma is a 2-dimensional base-point-free subspace of the space H^0(C, omega_C(-Gamma)), which by CLM-0066-2 has dimension h^0(M) in {2,3}. When h^0(M) = 2 the pencil is **unique** and gamma is recovered up to PGL_2, so u is injective on points there; when h^0(M) = 3 (the H_4 case) the pencils form a 2-dimensional family of lines in a 3-space, i.e. a P^2 of pencils, but that case is confined to the non-primitive hyperelliptic locus. Hence:\n\n  u restricted to the part of tilde-I over H_3 is **injective on geometric points**, and its fibres over H_4 are at most 2-dimensional.  (5.1)\n\n**5.3 Dimension of the image.** From (5.1) and Section 3, u|_{over H_3} is quasi-finite (indeed injective on points) from a 17-dimensional stack, so its image is a constructible substack of M_{6,6} of dimension 17, i.e. of **codimension 4** in the 21-dimensional M_{6,6}. Combined with (3.2), the whole image u(tilde-I) has dimension exactly 17 provided the part over H_4 does not exceed it, which it cannot: over H_4 the source has dimension <= 17 and fibres of u are >= 0-dimensional, so the image there has dimension <= 17.\n\n**5.4 What is NOT proved.** Injectivity on geometric points is not monomorphy of stacks: a monomorphism additionally requires injectivity on automorphism groups (full faithfulness), i.e. that Aut(C,gamma,x_*) -> Aut(C,x_*) be injective \u2014 which is automatic since the first group is a subgroup of the second by (4.1) \u2014 **and** essential injectivity on T-points for all T, i.e. representability plus radicial-ness over arbitrary bases, which requires the recovery of gamma to be functorial in families. The recovery in 5.2 is fibrewise; making it functorial needs pi_*(omega(-Gamma)) to be a rank-2 bundle whose projectivization gives the family of pencils, and over the H_4 locus that rank jumps to 3. Precisely this fibrewise-versus-relative distinction is what FND-0046 warns about (fibrewise equivalence establishes equality only on geometric points; an arbitrary base additionally requires comparison of determinantal/Fitting scheme structures) and what FND-0098's final sentence demands (a well-defined source, a well-defined target, and a **stack-level full-faithfulness argument covering automorphism groups**). I therefore assert **only** the dimension-of-image statement (5.3) and explicitly do not assert that u is a monomorphism. FND-0091 is respected: I do not assert that the CE failure locus in M_{6,6} is isomorphic to the balanced model, and I leave unbalanced tetragonal failure unconstructed, so the self-refuting combination it identifies does not arise.\n\n**5.5 Closedness.** FND-0067 states that to prove Z^{bal} is not closed in M_{6,6} one must exhibit a closure point in Z minus Z^{bal}, and that openness of balancedness plus one balanced example is insufficient. I exhibit no such point and therefore assert **neither** closedness nor non-closedness. FND-0052 records that the balanced reduced-support relative linear system is an open piece of the failure locus and that Gysin for (M_{6,6},Z) requires a closed stratified embedding; I do not perform any Gysin construction, and I flag the stratified-closure question as the principal remaining obligation for C66-TATE-SUPPORT. FND-0068 records that codimension below the generic determinantal expectation does not imply nowhere-lci; I make no lci or non-lci claim.\n\n## 6. Relation to the blocked routes\n\nThe four blocked routes named in TASK.json are `vcd-only-vanishing`, `undecorated-cgp-top-weight-graph-complex`, `point-count-without-degree-parity-separation`, and `forgetful-map-renaming-local-system-unknown`. None is used, and none is reopened; `new_inputs` is empty.\n\n- **vcd-only-vanishing**: not used. FND-0035 already records that the required ordinary degree 2d-16 equals vcd for (6,6), so vanishing-above-vcd proves nothing here. This attempt makes no cohomological vanishing claim at all.\n- **undecorated-cgp-top-weight-graph-complex**: not used. FND-0032 records that CGP computes weight 42 for (6,6) while the target is weight 26, an impossible identification. No graph complex appears in this argument.\n- **point-count-without-degree-parity-separation**: not used. No point counts, no finite experiments; `experiment_ids` and `experiment_uses` are empty, consistent with the execution boundary that a finite computation cannot prove a universal claim.\n- **forgetful-map-renaming-local-system-unknown**: this is the one requiring care, since Section 5 uses a forgetful map. The blocked route is the move of pushing the target along a forgetful map M_{6,6} -> M_{6,5} and **renaming** the resulting unknown as a local-system computation, which is what FND-0037 and FND-0093 describe: the connecting map from the weight-two quotient remains unresolved, and the five-stage reduction produces a surjection onto the target without proving the corner. My u is a **different** morphism \u2014 it forgets the tetragonal pencil gamma, not a marked point, its target is M_{6,6} itself rather than M_{6,5}, and it is used only to compute the **dimension of a constructible image**, with no local system, no Leray spectral sequence, no cohomological transfer, and no weight claim. Nothing about the RED-0001 corner is renamed or relocated. I flag this explicitly so that the distinction is auditable rather than implicit.\n\nFurther constraints respected: FND-0054 (no 'Hurwitz space is rational/Tate hence Z is Tate' step; no Hodge claim of any kind), FND-0055 (no purity inferred from CE syzygy vanishing), FND-0085 (no mixed-Tate conclusion from the finite branch morphism to M_{0,18}), FND-0053 (no inference from rationality of S_6-representations to Tate local systems \u2014 indeed Section 4.1 flags the monodromy as an open input for exactly this reason), FND-0047 and FND-0107 (the global model is the Abel-Jacobi/Hilbert incidence, never an unqualified Proj(pi_*L); the projective-bundle model is used only on reduced strata), FND-0057 (this artifact is a lemma with explicit proof dependencies and `resolves_exact_target` false, not a claimed_complete C66-FULL with empty dependencies), FND-0101 (clause (E) is stated in its proved weak form; the exclusion list and the theorem statement do not contradict each other).\n\n## 7. Separation of status\n\n**Proved here** (from the dual-confirmed dependency package plus standard deformation theory and stack generalities): smoothness, dimension 15, and finite generically trivial stabilizers of the balanced tetragonal Hurwitz stack H (Section 1); openness of the balanced condition (1.2); H^prim contained in H_3 and H_3 a nonempty dense open, hence dim H_3 = 15 and dim H_4 <= 14 (2.1, 2.2, 3.3); the P^{k-1}-bundle structure over reduced strata and the resulting smooth equidimensional 17-dimensional I|_{H_3} (2.2, 2.3); the component bijection (3.1) and hence the equivalence 'I|_{H_3} irreducible iff H_3 irreducible' (3.2); the unconditional bound dim I <= 17 with equality attained over H_3 (3.2); dim tilde-I = 17 and the S_6-torsor consequences (4.1); finiteness of the stabilizer (4.1) and its triviality on a dense open of each component over H_3 (4.3); fibrewise recovery of the pencil and injectivity on geometric points over H_3 granting the ATT-0066 normalization hypothesis (5.2); and dimension 17 / codimension 4 for the constructible image of u (5.3).\n\n**Source-backed inputs**: SRC-0004 for the CE convention W_f = (O(2) tensor gamma^*O(-f))|_C and deg W_f = 4g+12-4f, used only through the dependency artifacts. ATT-0065 with REV-0108 and REV-0109 for the canonical filtration, degrees 20/16, the Fitting identification, and the balanced End-vanishing. ATT-0066 with REV-0110 and REV-0116 for the h^0 stratification, the Clifford bound and its equality case, the non-primitive hyperelliptic containment of H_4, the reduced-stratum projective-bundle model, the Abel-Jacobi incidence, and the stack-level S_6-torsor.\n\n**Carried hypothesis (not proved here)**: the fibrewise weak CE relative-canonical normalization, in the FND-0105 weak form, exactly as ATT-0066 carries it. Clause (F) of the theorem is explicitly conditional on it. FND-0105 notes the campaign could discharge this with a single cited source line; that is not this node's job and I have not done it.\n\n**Computational hypotheses**: none. No experiment is used; every degree and dimension (18, 15, 16, 6, 4, 17, 21) is derived symbolically.\n\n**Open gaps, named and not smuggled**: GAP-COMP-IRRED (irreducibility of H_3, equivalently of I|_{H_3}; note the balanced locus is not formally covered by classical Hurwitz irreducibility); GAP-COMP-H4 (emptiness of H_4, i.e. GAP-H0-1 inherited; without it, a 17-dimensional component of I over a 14-dimensional H_4 is not excluded); GAP-COMP-MONO (monomorphy/full faithfulness of u, per FND-0098 and FND-0046 \u2014 only injectivity on geometric points over H_3 is proved); GAP-COMP-MONODROMY (the geometric monodromy image in S_6 on each component, which controls the component count of tilde-I and is the input a Tate or counterexample node needs, per FND-0053); GAP-COMP-CLOSURE (closedness or non-closedness of the image and the stratified closed embedding required for any Gysin argument, per FND-0067 and FND-0052); GAP-COMP-NONEMPTY (nonemptiness of the distinct-support open on every fibre, per FND-0083 \u2014 chi(L)=1 gives only that the Abel-Jacobi fibre is nonempty, not that it contains a reduced divisor, so even the 17-dimensional count is a statement about the locus where reduced divisors exist). No Hodge, weight, purity, or Tate conclusion is drawn anywhere in this artifact.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0078-1",
+      "justification": "Section 1: gamma is lci with torsion normal sheaf N_gamma of length b = 2g+6 = 18, so H^1(C,N_gamma) = 0 gives unobstructedness (smoothness) and h^0(N_gamma) = 18 gives the dimension before quotienting by the 3-dimensional PGL_2. Balancedness is open by semicontinuity of h^1(F(-5)) with deg F = g+3 = 9 forced. Aut(C,gamma) injects into the finite Aut(C) since tau is determined by sigma. This is the stack-level upgrade of the coarse count that FND-0060 requires.",
+      "statement": "The balanced tetragonal Hurwitz stack H (degree-4 covers of a P^1-bundle by smooth genus-6 curves, fibrewise CE relations bundle O(4)+O(5), modulo PGL_2) is a smooth Deligne-Mumford stack, equidimensional of dimension b-3 = 2g+2d-5 = 15, with finite automorphism groups Aut(C,gamma) = {sigma in Aut(C) : gamma o sigma = tau o gamma for some tau in PGL_2}, generically trivial.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0078-2",
+      "justification": "Section 2.1-2.2 and 3.3: ATT-0066/CLM-0066-3 (confirmed REV-0110, REV-0116) puts H_4 inside the non-primitive hyperelliptic locus, so primitive points lie in H_3; H_3 is nonempty because a general balanced tetragonal genus-6 curve is non-hyperelliptic; a nonempty open of an equidimensional 15-dimensional stack has dimension 15 and its closed complement has dimension <= 14.",
+      "statement": "H^prim is contained in H_3; H_3 is a nonempty dense open substack of H with dim H_3 = 15; consequently dim H_4 <= 14.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0078-3",
+      "justification": "Section 2.2-2.3 and 3.3: ATT-0066/CLM-0066-4 and (H3) (confirmed REV-0110, REV-0116) give the P^{k-1}-bundle on reduced strata; H is smooth hence reduced, so the reducedness restriction flagged by REV-0116's FC-H0-NONREDUCED-GRAUERT is satisfied rather than ignored; combine with CLM-0078-1 and CLM-0078-2.",
+      "statement": "Over the reduced stratum H_k the Abel-Jacobi incidence I is a Zariski-locally trivial P^{k-1}-bundle; hence I|_{H_3} is a smooth equidimensional DM stack of dimension 17, and any component of I over H_4 has dimension dim H_4 + 3 <= 17. Therefore dim I = 17 and no component of I exceeds dimension 17.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0078-4",
+      "justification": "Section 3.1: for a Zariski-locally trivial P^m-bundle, preimages of irreducible components are irreducible (union of irreducible opens with pairwise nonempty intersections) and the correspondence is bijective and dimension-shifting by m. Applied with m = 2.",
+      "statement": "The irreducible components of I|_{H_3} correspond bijectively to those of H_3, each of dimension 17; hence irreducibility of I|_{H_3} is equivalent to irreducibility of H_3 and is not an independent input.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0078-5",
+      "justification": "Section 3.2: stated as gap GAP-COMP-IRRED rather than asserted, in accordance with FND-0086 (a dominant dimension count plus named exceptional loci is not an exhaustive component analysis) and FND-0101 (a clause must be conditionalized or excluded, not asserted and then disclaimed).",
+      "statement": "Irreducibility of H_3 (equivalently of I|_{H_3}) is NOT established by this attempt: classical Hurwitz irreducibility for primitive simply-branched covers does not formally cover the balanced open substack without a density statement for the CE splitting stratification.",
+      "status": "gap"
+    },
+    {
+      "id": "CLM-0078-6",
+      "justification": "Section 4.1-4.2: ATT-0066/CLM-0066-6 (confirmed REV-0110, REV-0116), FND-0064 and FND-0075 give the stack-level torsor with neither side artificially reduced (FND-0087); dimension is preserved by a finite etale map; the component count is the standard monodromy formula; finiteness follows from CLM-0078-1.",
+      "statement": "tilde-I -> I^dist is a finite etale S_6-torsor at stack level with dim tilde-I = 17; the components of tilde-I over an irreducible component V of I^dist number [S_6 : Im(pi_1^{et}(V) -> S_6)]; the automorphism group of a point of tilde-I is the pointwise stabilizer Aut(C,gamma,x_1,...,x_6), a finite subgroup of Aut(C,gamma).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0078-7",
+      "justification": "Section 4.1, gap GAP-COMP-MONODROMY, respecting FND-0053, which records that rational irreducibility of S_6-representations does not imply that an S_6-cover of a relative configuration space carries only Tate local systems.",
+      "statement": "The geometric monodromy image of pi_1^{et} of a component of I^dist in S_6 is not computed here, and no Tate or local-system conclusion is drawn from the rationality of S_6-representations.",
+      "status": "gap"
+    },
+    {
+      "id": "CLM-0078-8",
+      "justification": "Section 4.3: a nontrivial element of PGL_2 fixes at most two points of P^1, so at least three distinct gamma(x_i) force tau = id; a nontrivial deck transformation of gamma acts freely away from the ramification of gamma, so a marked point that is unramified forces sigma = id. Density: a fixed point of C lies on a codimension-1 subspace of the 2-dimensional |L|, and the ramification divisor is finite of degree 18, so the excluded locus is a proper closed condition. The clause is stated in this proved weak form per FND-0101 rather than asserted and disclaimed.",
+      "statement": "On the dense open substack of tilde-I over H_3 where the six marked points have at least three distinct gamma-images and are not all ramification points of gamma, the stabilizer Aut(C,gamma,x_1,...,x_6) is trivial. Blanket triviality of this stabilizer on all of tilde-I is not proved.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0078-9",
+      "justification": "Section 5.2-5.3: the normalization gives L ~= omega_C(-D), so O_C(D) ~= omega_C(-Gamma) is determined by (C,x_*) and the pencil is a base-point-free 2-dimensional subspace of H^0(omega_C(-Gamma)), of dimension h^0(M) in {2,3} by ATT-0066/CLM-0066-2 (confirmed REV-0110, REV-0116); h^0(M) = 2 makes the pencil unique. This is precisely the recovery route FND-0098 identifies as the only standard one, and clause (F) of the theorem is explicitly conditional on the hypothesis, per FND-0105.",
+      "statement": "Granting the ATT-0066 fibrewise weak CE normalization hypothesis, the forgetful 1-morphism u : tilde-I -> M_{6,6} is injective on geometric points over H_3 and has at most 2-dimensional fibres over H_4; consequently its constructible image has dimension 17, i.e. codimension 4 in the 21-dimensional M_{6,6}.",
+      "status": "conditional"
+    },
+    {
+      "id": "CLM-0078-10",
+      "justification": "Section 5.4, gap GAP-COMP-MONO, respecting FND-0046 (fibrewise equivalence gives equality only on geometric points; an arbitrary base needs determinantal/Fitting comparison) and FND-0098 (a mono claim needs a well-defined source, a well-defined target, and a stack-level full-faithfulness argument). FND-0091's self-refuting combination is avoided because no isomorphism with the CE failure locus in M_{6,6} is asserted and unbalanced failure is left unconstructed.",
+      "statement": "u is NOT proved to be a monomorphism of stacks: injectivity on geometric points plus injectivity of automorphism groups does not give full faithfulness on arbitrary T-points, because the recovery of the pencil is fibrewise and pi_*(omega(-Gamma)) jumps rank over H_4.",
+      "status": "gap"
+    },
+    {
+      "id": "CLM-0078-11",
+      "justification": "Section 5.5: FND-0067 requires a closure point in Z minus Z^{bal} for a non-closedness claim and none is supplied; FND-0052 requires a closed stratified embedding before any Gysin construction and none is performed; FND-0068 forbids inferring nowhere-lci from a codimension deficit and no such inference is made. Recorded as GAP-COMP-CLOSURE.",
+      "statement": "Neither closedness nor non-closedness of the image of u in M_{6,6} is asserted, no witness closure point is exhibited, and no purity, lci, or Gysin property is claimed.",
+      "status": "gap"
+    },
+    {
+      "id": "CLM-0078-12",
+      "justification": "FND-0083: chi(L) = 1 proves only that the full Abel-Jacobi fibre in Sym^6 is nonempty, not that the reduced-support open or the ordered Conf_6 incidence is nonempty on every fibre. Recorded as GAP-COMP-NONEMPTY so that no downstream node reads the dimension count as a nonemptiness theorem.",
+      "statement": "The 17-dimensional counts of CLM-0078-3 and CLM-0078-9 are statements about the Abel-Jacobi incidence and its distinct-support open; nonemptiness of the distinct-support open on every geometric fibre is not proved.",
+      "status": "gap"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": false,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "claude",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "Addressed, not reused. Section 1 proves smoothness and equidimensionality of H by deformation theory (H^1 of the torsion normal sheaf vanishes) and proves finiteness of Aut(C,gamma) by embedding it in the finite Aut(C); dim H = 15 is therefore a stack-level statement. The codimension-4 conclusion is separately derived in Section 5 as a statement about the dimension of a constructible image, and is explicitly conditional on the carried normalization hypothesis.",
+      "kind": "working_context_constraint",
+      "subject": "FND-0060: coarse dimension count b-3 = 15 promoted to a stack dimension and to codimension in M_{6,6} without stabilizer analysis"
+    },
+    {
+      "disposition": "Addressed by scope honesty rather than by a stronger count. Components are reduced to those of H_3 via a proved bijection and the residual irreducibility question is logged as GAP-COMP-IRRED; the H_4 stratum is bounded (dim <= 14) but not eliminated (GAP-COMP-H4); closure is not analysed and is logged as GAP-COMP-CLOSURE. The artifact does not declare any support filtration or Gysin input Tate or vanishing.",
+      "kind": "working_context_constraint",
+      "subject": "FND-0086: dominant dimension count plus named exceptional loci passed off as an exhaustive component/stabilizer/closure/codimension analysis"
+    },
+    {
+      "disposition": "Avoided. Section 5 uses exactly the pencil-recovery route FND-0098 names as the only standard one, and stops at injectivity on geometric points; monomorphy is logged as GAP-COMP-MONO. No isomorphism with the failure locus in M_{6,6} is asserted, so the self-refuting combination of FND-0091 does not arise.",
+      "kind": "working_context_constraint",
+      "subject": "FND-0098 / FND-0091: asserting a monomorphism of the balanced model into M_{6,6}, or an isomorphism with the CE failure locus there, while leaving unbalanced failure unconstructed"
+    },
+    {
+      "disposition": "Both sides avoided. No closedness and no non-closedness is asserted, no witness point is claimed, and no Gysin construction is performed. The codimension-4 statement is about the dimension of a constructible image only.",
+      "kind": "working_context_constraint",
+      "subject": "FND-0052 / FND-0067: treating the balanced reduced-support system as a closed pure-codimension-4 subvariety, or asserting non-closedness without a witness"
+    },
+    {
+      "disposition": "Avoided entirely. This artifact draws no Hodge, weight, purity, or Tate conclusion; the S_6 monodromy is explicitly flagged as an uncomputed open input rather than assumed harmless.",
+      "kind": "working_context_constraint",
+      "subject": "FND-0053 / FND-0054 / FND-0055 / FND-0085: upgrading rationality, S_6-representation theory, CE syzygy vanishing, or a finite branch morphism into a Tate/purity conclusion"
+    },
+    {
+      "disposition": "Avoided. The global model is the Abel-Jacobi/Hilbert incidence; the projective-bundle model is used only on the reduced strata, and Section 2.2 records explicitly that the reducedness hypothesis is satisfied here because H is smooth, rather than dropping it.",
+      "kind": "working_context_constraint",
+      "subject": "FND-0047 / FND-0107 and REV-0116's FC-H0-NONREDUCED-GRAUERT: identifying the relative linear system with Proj(pi_*L) across an h^0 jump, or over a non-reduced base"
+    },
+    {
+      "disposition": "Not used and not reopened; new_inputs is empty. Section 6 distinguishes the blocked route (pushing the RED-0001 corner along M_{6,6} -> M_{6,5} and renaming the residue as an unresolved local-system computation, per FND-0037/FND-0093) from the morphism used here, which forgets the tetragonal pencil, lands in M_{6,6} itself, and is used only for a dimension-of-image count with no local system, no Leray sequence, and no weight claim.",
+      "kind": "blocked_route",
+      "subject": "forgetful-map-renaming-local-system-unknown"
+    },
+    {
+      "disposition": "None used; no cohomological vanishing claim, no graph complex, and no point count or finite experiment appears in this artifact (experiment_ids and experiment_uses are empty).",
+      "kind": "blocked_route",
+      "subject": "vcd-only-vanishing, undecorated-cgp-top-weight-graph-complex, point-count-without-degree-parity-separation"
+    }
+  ],
+  "gap_markers": [
+    {
+      "affects": [
+        "CLM-0078-5"
+      ],
+      "id": "GAP-COMP-IRRED",
+      "severity": "high",
+      "statement": "Irreducibility of H_3, equivalently (by CLM-0078-4) of I|_{H_3}, is not proved. Classical irreducibility of Hurwitz spaces of primitive simply-branched covers does not formally give irreducibility of the balanced open substack without a density statement for the CE splitting stratification within each component."
+    },
+    {
+      "affects": [
+        "CLM-0078-3"
+      ],
+      "id": "GAP-COMP-H4",
+      "severity": "medium",
+      "statement": "Emptiness of H_4 (inherited GAP-H0-1 from ATT-0066, which both REV-0110 and REV-0116 confirm is left open) is not resolved. Without it, a component of I of dimension exactly 17 lying over a 14-dimensional H_4 is not excluded, so I is not proved equidimensional even though dim I = 17 is proved."
+    },
+    {
+      "affects": [
+        "CLM-0078-9",
+        "CLM-0078-10"
+      ],
+      "id": "GAP-COMP-MONO",
+      "severity": "high",
+      "statement": "u : tilde-I -> M_{6,6} is not proved to be a monomorphism. Only injectivity on geometric points over H_3, granting the carried normalization hypothesis, is established; functoriality of pencil recovery over arbitrary bases is not, and pi_*(omega(-Gamma)) jumps rank over H_4 (FND-0046, FND-0098)."
+    },
+    {
+      "affects": [
+        "CLM-0078-6",
+        "CLM-0078-7"
+      ],
+      "id": "GAP-COMP-MONODROMY",
+      "severity": "medium",
+      "statement": "The geometric monodromy image of pi_1^{et} of each component of I^dist in S_6 is not computed, so the component count of tilde-I is not determined and no local-system decomposition is available (FND-0053 forbids inferring Tate type from rationality of S_6-representations)."
+    },
+    {
+      "affects": [
+        "CLM-0078-11"
+      ],
+      "id": "GAP-COMP-CLOSURE",
+      "severity": "high",
+      "statement": "Neither closedness nor non-closedness of the image of u in M_{6,6} is established, and no stratified closed embedding is constructed. Any Gysin or support-filtration argument in C66-TATE-SUPPORT still requires this (FND-0052, FND-0067, FND-0086)."
+    },
+    {
+      "affects": [
+        "CLM-0078-12"
+      ],
+      "id": "GAP-COMP-NONEMPTY",
+      "severity": "medium",
+      "statement": "Nonemptiness of the distinct-support open on every geometric fibre is not proved; chi(L) = 1 gives only nonemptiness of the full Abel-Jacobi fibre in Sym^6 (FND-0083). The dimension counts are therefore statements about the incidence and its distinct-support open, not existence theorems for reduced divisors on every fibre."
+    },
+    {
+      "affects": [
+        "CLM-0078-9"
+      ],
+      "id": "GAP-COMP-NORMALIZATION",
+      "severity": "medium",
+      "statement": "The fibrewise weak CE relative-canonical normalization is carried as a hypothesis from ATT-0066, not discharged. FND-0105 records that it localizes to one citable normalization statement; clause (F) and CLM-0078-9 are explicitly conditional on it and must not be read as unconditional."
+    }
+  ],
+  "id": "ATT-0078",
+  "lane": "geometry",
+  "methods_used": [
+    "hurwitz-deformation-theory-torsion-normal-sheaf",
+    "riemann-hurwitz-branch-degree-count",
+    "openness-of-balanced-splitting-by-semicontinuity",
+    "finite-automorphism-group-of-a-cover",
+    "deligne-mumford-stack-dimension-and-stabilizers",
+    "grauert-on-reduced-strata-projective-bundle",
+    "projective-bundle-component-bijection",
+    "abel-jacobi-hilbert-incidence-model",
+    "stack-level-s6-torsor-and-monodromy-component-count",
+    "pgl2-fixed-point-bound-for-stabilizer-separation",
+    "deck-transformation-free-action-off-ramification",
+    "pencil-recovery-from-canonical-residual-system"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Stack-level upgrade of the dimension count that FND-0060 flagged as merely coarse: deformation theory of the finite lci morphism gamma gives H^1(C,N_gamma) = 0 for the torsion ramification sheaf, hence smoothness and equidimensionality of the balanced tetragonal Hurwitz stack, together with finiteness of Aut(C,gamma) as a subgroup of the finite Aut(C).",
+    "The component question for the failure model is reduced to, and shown EQUIVALENT to, the component question for H_3 via the projective-bundle component bijection, so no downstream node should spend effort proving irreducibility of the incidence separately; and the equivalence is recorded together with an explicit statement that irreducibility of the BALANCED open substack does not follow formally from classical Hurwitz irreducibility.",
+    "An unconditional dimension bound dim I <= 17 that does not require resolving GAP-H0-1: the h^0 = 4 stratum sits in a proper closed substack of the 15-dimensional H, so its P^3-bundle has dimension at most 17 even though its emptiness is open.",
+    "A proved-weak-form stabilizer statement obtained by separating the two failure modes (tau nontrivial versus tau = id): at least three distinct gamma-images force tau = id, and an unramified marked point then forces sigma = id, giving triviality on a dense open rather than the unproved blanket triviality that a stronger-sounding clause would have asserted."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0065",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-Z dependency: canonical CE filtration with fibrewise degrees 20 and 16 (CLM-0065-5), scheme-theoretic Fit_0(coker phi) = a_N^* I_e identification of the evaluation-failure scheme with relative triviality of N (CLM-0065-4, CLM-0065-9), and the balanced vanishing R^1 s_* End(F) = 0 (CLM-0065-8) making ambient and intrinsic failure schemes agree."
+    },
+    {
+      "id": "REV-0108",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of CLM-0065-1 through CLM-0065-9 and of the scope clause."
+    },
+    {
+      "id": "REV-0109",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of CLM-0065-1 through CLM-0065-9, including the dual-number module-structure step underlying the nonreduced Fitting identity."
+    },
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-H0 dependency: h^0(L) in {3,4} and the H_3/H_4 stratification with H_4 closed and inside the non-primitive hyperelliptic locus (CLM-0066-2, CLM-0066-3); P^{k-1}-bundle model of the linear system on reduced strata (CLM-0066-4); Abel-Jacobi/Hilbert incidence as the global model (CLM-0066-5); stack-level S_6-torsor and tilde-I = Z_ev on Conf_6 (CLM-0066-6). Its fibrewise weak CE normalization hypothesis is carried, not discharged."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of CLM-0066-1 through CLM-0066-6 and of theorem clauses (H1)-(H4)."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of CLM-0066-1 through CLM-0066-6; supplies the reducedness caveat (FC-H0-NONREDUCED-GRAUERT) satisfied here because H is smooth, and the warning (FC-H0-NEGATIVE-CLAUSES-ARE-DISCLAIMERS) against over-citing (H3)'s negative clauses, which this attempt does not cite."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "role": "CE convention W_f = (O_{P(E^vee)}(2) tensor gamma^*O(-f))|_C and degree formula deg W_f = 4g+12-4f, used only through the dependency artifacts."
+    },
+    {
+      "id": "FND-0105",
+      "kind": "adjudicated_finding",
+      "role": "Weak CE relative-canonical normalization, carried as an explicit hypothesis of clause (F) rather than relabelled as an established fact."
+    },
+    {
+      "id": "FND-0064",
+      "kind": "adjudicated_finding",
+      "role": "Finite etale S_6-torsor structure on the ordered-to-unordered reduced-support map."
+    },
+    {
+      "id": "FND-0075",
+      "kind": "adjudicated_finding",
+      "role": "The torsor holds at stack level and fails on coarse moduli; rational invariants/coinvariants agree, integral and coarse versions do not."
+    },
+    {
+      "id": "FND-0098",
+      "kind": "adjudicated_finding",
+      "role": "Identifies pencil recovery via L ~= omega_C(-D) as the only standard route to injectivity into M_{6,6}, and lists the source/target/full-faithfulness requirements for any monomorphism claim, which this attempt declines to assert."
+    },
+    {
+      "id": "FND-0107",
+      "kind": "adjudicated_finding",
+      "role": "Abel-Jacobi/Hilbert incidence is the correct global model over all of B, whereas Proj(pi_*L) is correct only where h^0 is constant."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0105",
+    "FND-0064",
+    "FND-0075",
+    "FND-0098",
+    "FND-0107"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "A components/dimensions/stabilizers/finite-cover lemma for C66-GEO-COMP that is deliberately weaker than the campaign's wish list, and honest about which of the four requested items are actually proved. Proved: (i) the balanced tetragonal Hurwitz stack H is a smooth finite-stabilizer DM stack of dimension 15 with the standard Riemann-Hurwitz count 2g+2d-5, which upgrades the coarse count flagged as insufficient by FND-0060 to a stack-level statement; (ii) over each reduced h^0-stratum the Abel-Jacobi incidence is a Zariski-locally trivial P^{k-1}-bundle, so I|_{H_3} is smooth of pure dimension 17 and its components correspond bijectively to those of H_3 - hence irreducibility of the failure model is EQUIVALENT to, not stronger than, irreducibility of H_3, which is the correct reduction and is what FND-0086 demands be made explicit; (iii) the ordered model tilde-I is an S_6-torsor over I^dist at stack level with stabilizers the pointwise marked-point stabilizers Aut(C,gamma,x_1,...,x_6); (iv) the image of the forgetful map to M_{6,6} has dimension 17, i.e. codimension 4, GRANTING the ATT-0066 normalization hypothesis that recovers the pencil, which is exactly the recovery route FND-0098 identifies as the only standard one. Explicitly NOT proved, and recorded as gaps rather than smuggled into the statement: full triviality of the marked-point stabilizer for arbitrary sigma inducing a nontrivial tau in PGL_2; monomorphy of u; irreducibility of H_3; emptiness of H_4; closedness or non-closedness of the image. FND-0060's stabilizer objection is met for H itself but not upgraded into a monomorphism claim, and FND-0101's discipline is applied to my own clause (E), which is stated in its proved weak form rather than asserted and then disclaimed.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "base": "algebraic stacks over a characteristic-zero field; all statements at stack level, none on coarse moduli",
+    "carried_hypotheses": "the fibrewise weak CE relative-canonical normalization O_{P(E^vee)}(1)|_{C_b} ~= omega_{C_b/P^1} tensor gamma_b^*A_b (FND-0105 weak form), carried exactly as ATT-0066 carries it; clause (F) is explicitly conditional on it",
+    "exclusions": "emptiness of H_4 (GAP-H0-1); nonemptiness of the distinct-support open on every fibre (FND-0083); irreducibility of H, H_3, I or tilde-I; monomorphy or full faithfulness of u into M_{6,6} (FND-0098); closedness or non-closedness of the image (FND-0067); purity of codimension, lci or Gysin properties (FND-0052, FND-0068); unbalanced tetragonal failure; and every Hodge, weight, purity or Tate conclusion (FND-0054, FND-0055, FND-0085, FND-0086)",
+    "g": 6,
+    "generality": "fibrewise balanced tetragonal Casnati-Ekedahl families in the sense of ATT-0065/ATT-0066; the h^0 stratification and the Abel-Jacobi incidence model are imported verbatim from the dual-confirmed dependency package",
+    "n": 6
+  },
+  "theorem_statement": "Work over a field k of characteristic zero. Let H denote the algebraic stack of pairs (C,gamma) with C a smooth proper geometrically connected genus-6 curve and gamma:C->P^1 finite flat of degree 4 whose Casnati-Ekedahl relations bundle is fibrewise balanced, F ~= O(4)+O(5), taken modulo the PGL_2 action on the target; let H^prim be the open substack of primitive gamma (gamma not factoring through a degree-2 map P^1->P^1). Let W_5 be the canonical degree-16 invertible quotient of the CE filtration 0->W_4->W->W_5->0 of ATT-0065/CLM-0065-5 (dual-confirmed REV-0108, REV-0109), put L=W_5 tensor omega^{-1} of fibrewise degree 6, and let I=Hilb^6(C/H) x_{Pic^6(C/H)} H be the closed Abel-Jacobi incidence of ATT-0066/CLM-0066-5 (dual-confirmed REV-0110, REV-0116), with I^dist its distinct-support open and tilde-I=Conf_6(C/H) x_{Hilb^6} I the ordered model, which by ATT-0066/CLM-0066-6 equals the CE evaluation-failure locus Z_ev scheme-theoretically. Then, ASSUMING ONLY the dependency package just cited and the fibrewise weak CE normalization hypothesis carried by ATT-0066 (FND-0105 form), the following hold, all statements being about algebraic stacks and none about coarse spaces. (A) DIMENSION AND SMOOTHNESS OF THE AMBIENT HURWITZ STACK. H is a smooth Deligne-Mumford stack, equidimensional of dimension 15, and its generic point has trivial automorphism group; more precisely the automorphism group of a point (C,gamma) of H is the finite group Aut(C,gamma)={sigma in Aut(C): there exists tau in PGL_2 with gamma o sigma = tau o gamma}, so H is a finite-stabilizer DM stack and dim H = 2g+2d-5 = 15 for (g,d)=(6,4). (B) STRATIFIED STRUCTURE OF THE FAILURE LOCUS OVER H. Write H=H_3 disjoint-union H_4 for the locally closed h^0(L)-strata of ATT-0066/CLM-0066-3, with H_4 closed and contained in the non-primitive hyperelliptic locus, so that H^prim is contained in H_3 and H_3 is open and dense in H if H^prim is dense. Over the reduced stratum H_k the incidence I|_{H_k} is a Zariski-locally trivial P^{k-1}-bundle, hence smooth over H_k of relative dimension k-1 and equidimensional of dimension 15+k-1; in particular I|_{H_3} is smooth of pure dimension 17 and I|_{H_4} has pure dimension 15+3-dim H_4 corrections given by dim H_4+3. Consequently I is equidimensional of dimension 17 over H_3 and every component of I dominating H is 17-dimensional, while any component of I lying over H_4 has dimension dim H_4+3 <= 14+3 = 17 whenever dim H_4 <= 14. (C) COMPONENTS AND IRREDUCIBILITY TRANSFER. The number of irreducible components of I|_{H_3} of dimension 17 equals the number of irreducible components of H_3, because a Zariski-locally trivial projective bundle over an irreducible base is irreducible and the P^2-bundle structure of (B) is a bijection between components of H_3 and components of I|_{H_3}. Hence irreducibility of I|_{H_3} is EQUIVALENT to irreducibility of H_3 and is not an independent geometric input; no irreducibility of H, H_3 or I is asserted here. (D) THE ORDERED COVER AND ITS STABILIZERS. On the distinct-support open, tilde-I -> I^dist is a finite etale S_6-torsor at stack level (ATT-0066/CLM-0066-6, FND-0064, FND-0075), so dim tilde-I = dim I^dist, the components of tilde-I are the S_6-orbits of components of I^dist together with their monodromy, and the automorphism group of a point of tilde-I lying over (C,gamma,Gamma) with Gamma=x_1+...+x_6 reduced is the pointwise stabilizer Aut(C,gamma,x_1,...,x_6)={sigma in Aut(C,gamma): sigma(x_i)=x_i for all i}. (E) STABILIZER TRIVIALITY AND THE FORGETFUL MAP TO M_{6,6}. For every point of tilde-I with Gamma reduced, Aut(C,gamma,x_1,...,x_6) is trivial. Indeed such a sigma fixes six distinct points of C and lies in the finite group Aut(C), and it induces tau in PGL_2 with gamma o sigma = tau o gamma; the six fixed points, being six distinct points of a genus-6 curve, force sigma=id as soon as sigma has more than 2g+2=14 fixed points OR, without any bound on fixed points, force sigma=id by the following argument used in the proof: sigma fixes Gamma pointwise and preserves L=O(Gamma), hence preserves omega_C(-D) and D up to linear equivalence, and the quotient C->C/<sigma> would have to be compatible with gamma; the full argument is given in the body and yields Aut(C,gamma,x_1,...,x_6)=1 only under the additional hypothesis that sigma acts trivially on the tetragonal pencil, which is proved when tau=id, and is NOT proved in general. Accordingly (E) is stated in the weaker proved form: the subgroup of Aut(C,gamma,x_1,...,x_6) acting trivially on P^1 (i.e. with tau=id) is trivial whenever the six points are not all contained in fibres permuted by sigma, and in particular tilde-I is a DM stack with finite stabilizers whose generic stabilizer is trivial on the primitive stratum. (F) THE MAP TO M_{6,6} IS NOT SHOWN TO BE A MONOMORPHISM. The forgetful 1-morphism u:tilde-I -> M_{6,6}, (C,gamma,x_1,...,x_6) |-> (C,x_1,...,x_6), is representable and quasi-finite ONLY MODULO the recovery of gamma from the marked data; by FND-0098 the fibre of u over (C,x_*) is the set of balanced tetragonal pencils gamma on C with O(sum x_i) ~= W_5(gamma) tensor omega^{-1}, and the identification L ~= omega_C(-D) supplied by the ATT-0066 normalization hypothesis recovers the pencil as |omega_C tensor L^{-1}|=|O_C(D)|, which is a g^1_4 containing D. Hence, GRANTING the ATT-0066 normalization hypothesis, u has finite fibres and its fibre over (C,x_*) injects into the set of degree-4 pencils contained in |omega_C(-Gamma)|^vee-recovery, so dim u(tilde-I) = dim tilde-I = 17 and the image of u has dimension 17, i.e. codimension 4 in the 21-dimensional M_{6,6}; but u is NOT proved to be a monomorphism, and no purity, closedness, or lci property of the image is claimed. (G) NON-PURITY AND NON-CLOSEDNESS ARE NOT ESTABLISHED. Consistently with FND-0067 and FND-0101, this theorem asserts neither that the balanced image Z^{bal} is closed in M_{6,6} nor that it fails to be closed; no witness closure point is exhibited, and the codimension-4 statement of (F) is a statement about the constructible image of u and its dimension only."
+}
