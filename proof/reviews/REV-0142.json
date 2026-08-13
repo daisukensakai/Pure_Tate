@@ -1,0 +1,222 @@
+{
+  "attempt_id": "ATT-0088",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0088-1",
+      "note": "SRC-0004 Lemma 10.6 gives deg(O_X(1)|_C)=2(2g-2+8)/2=2g+6=18. Hypothesis (N) writes the same bundle as omega_C tensor gamma^*O(2) tensor gamma^*A, of degree 18+4deg(A). Hence deg(A)=0 and Pic(P1)=Z forces A trivial. Substituting the packet convention W_f=(O_X(2) tensor gamma^*O(-f))|_C into the canonical HN filtration yields W_4=omega_C^2, W_5=omega_C^2(-D), L=omega_C(-D), with degrees 20, 16, 6 and chi(L)=1. The residual Pic(S) ambiguity of O_P(1) disappears on geometric fibres.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0088-2",
+      "note": "If C is hyperelliptic, (h,gamma):C->P1xP1 is either birational onto a (4,2)-curve of arithmetic genus 3, contradicting g=6, or of degree exactly 2 onto a (2,1)-curve, hence gamma=q o h with deg(q)=2. Then h_*O=O\\oplus O(-7) and q_*O(-7)=O(-4)\\oplus O(-4), so E=O(1)\\oplus O(4)^2. The CE resolution tensored by O_X(2) pushes to 0->F->Sym^2 E->gamma_*(O_X(2)|_C)->0 because Rp_*O_X(-2)=0 on P2-fibres. Twisting by O(-6) gives h^0(Sym^2 E(-6))=9 against h^0(W_6)=7 (deg W_6=12>10), so h^0(F(-6))>=2, contradicting F(-6)=O(-2)\\oplus O(-1). Characteristic zero is used only to keep the cover separable. The argument never claims anything about non-primitive pencils through positive-genus intermediate curves.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0088-3",
+      "note": "gamma^* injects H^0(O_{P1}(1)), so h^0(D)>=2. Riemann-Roch on D reads h^0(L)=h^0(D)+1, and chi(L)=1 makes D special. Clifford then gives h^0(D)<=3, with equality only for D=0, D=K, or hyperelliptic equality; the first two are excluded by deg(D)=4 and the third by CLM-0088-2. Thus h^0(D)=2, h^0(L)=3, h^1(L)=2 on every balanced+(N) fibre, with no jumping. The projection formula then forces h^0(E^vee(1))=0, so every summand of E has degree at least two. Constancy is obtained by excluding only the hyperelliptic equality case, which is the correct direction of the recorded non-equivalence with exclusion of all non-primitive g^1_4's.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0088-4",
+      "note": "If the fixed part had degree >=2 the moving part A would be a base-point-free special g^2_{<=4}. Clifford forces deg(A)=4 with equality, hence C hyperelliptic, contradicting CLM-0088-2. So the fixed part has degree at most one (hence is reduced) and A is base-point-free of degree 5 or 6 with three sections. No claim is made that L itself is base-point-free.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0088-5",
+      "note": "The two-jet incidence J over the bpf moving part has dimension at most one after splitting off the finite ramification locus of psi:C->P2 (in characteristic zero a non-constant morphism of smooth curves is generically immersive). Its proper image therefore cannot fill the plane |A|, so a general member of |A| is reduced; removing in addition the hyperplane through the at most one fixed point yields a reduced six-point member of |L|. Separately h^0(L(-2q))>=1 for every q, so the corresponding incidence J_L surjects onto C, has dimension exactly one, and has finite fibres over |L| (a degree-six divisor has at most three points of multiplicity >=2). Thus Delta is a nonempty proper closed curve, |L|^red is a nonempty dense non-closed surface open, and ordering its universal divisor is a finite etale S_6-torsor of degree 720, smooth of pure dimension two. The construction lives in Conf_6(C), not on coarse M_{6,6}.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0088-6",
+      "note": "On B=Conf_6 the ATT-0065 disjoint-section hypotheses hold, with d_4-n=14>10 and d_5-n=10. CLM-0065-1 gives ranks 26 and 12 and Fit_0=I_12. CLM-0065-3 identifies coker(phi) with R^1 pi_*(W_5(-Gamma)), whose geometric fibres are Serre-dual to H^0 of a degree-zero line bundle and hence of dimension 0 or 1; the degree-zero section criterion is effectivity, not duality. Empty support of V(I_11) forces I_11=O_B as an ideal sheaf on any scheme, and the minor ideals decrease, so I_j=O_B for j<=11. The Fitting identity I_12=a_N^*I_e with arbitrary locally Noetherian base change is CLM-0065-4 (CLM-0065-9 supplies the same identity on the balanced (6,6) specialisation).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0088-7",
+      "note": "The displayed determinantal numbers (26-11)(12-11)=15 and (11-5)(6-5)=6, the fibre dimension 2 inside relative Conf_6 of dimension 6, and the equality 6-4=2=h^1(L) are correct bookkeeping. The artifact draws no regularity, depth, lci, Gysin, or Tate conclusion from the excess identity.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0088-8",
+      "note": "Constant h^0(L)=3 and h^1(L)=2 on a reduced locally Noetherian base give, by Grauert, that pi_*L and R^1 pi_*L are locally free of ranks 3 and 2 and commute with base change. P_S(pi_*L) represents relative degree-six divisors with O(Gamma) isomorphic to L tensor a pullback: a fibrewise-nonzero map of a line bundle into a vector bundle over an arbitrary (possibly nonreduced) T is a line subbundle because the three local coordinates generate the unit ideal. U is the etale-support open of the universal divisor; fibrewise it equals |L|^red, hence is nonempty of pure dimension two by CLM-0088-5, so U->S is smooth of pure relative dimension two and surjective. Ordering is applied to the same unreduced scheme on both sides. Functors of points over arbitrary locally Noetherian T identify Ord(U) with Z, because every Conf_6-point already has etale support. Flatness of Z->S plus going-down and the dimension formula over a finite-type k-scheme give the component clause.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0088-9",
+      "note": "Z is closed in B by the Fitting presentation. Both Z and Conf_6 are smooth over the reduced base, of relative dimensions 2 and 6. A closed immersion of S-smooth schemes is a regular immersion, the conormal sheaf is locally free of rank equal to the relative-dimension difference, and the conormal sequence is exact and locally split. No inference is drawn from expected-versus-actual determinantal codimension.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0088-10",
+      "note": "Gamma is a disjoint union of sections, so T_{B/S}=pi_*O_Gamma(Gamma) and coker(delta)=R^1 pi_*O(Gamma) on B. Top cohomology of a relative curve commutes with arbitrary base change, so restriction to Z identifies this cokernel with R^1 pi_*(L tensor pi^*M_univ)=(R^1 pi_*L) tensor M_univ, locally free of rank two. The resulting map of bundles T_B|_Z->(R^1 O)|_Z therefore has locally free kernel and image of ranks 2 and 4. Fibrewise the kernel is the tangent space to the Abel-Jacobi fibre, hence equals T_{Z/S} after the etale ordering; the composite T_{Z/S}->(R^1 O)|_Z is a map of vector bundles vanishing at every geometric point of the reduced scheme Z, hence is zero. Two locally free rank-two subsheaves of T_B|_Z, one a subbundle, with torsion quotient inside the locally free conormal, must coincide. Relative duality dualizes 0->N_{Z/B}->(R^1 O)|_Z->Exc->0 to the displayed conormal sequence and retains the M_univ twist.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "two-jet-dimension-split",
+      "note": "The naive bound dim J <= dim C + 1 = 2 is incorrect, but the proof does not use it. It splits J into a zero-dimensional-fibre piece over the complement of the finite ramification locus and a P^{<=1}-fibre piece over that finite set, each of dimension at most one. Characteristic zero is essential for finiteness of ramification.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "grauert-reduced-base",
+      "note": "Part III assumes S reduced exactly so that constant fibre dimensions h^0(L)=3 and h^1(L)=2 yield local freeness and base change. No local-freeness, projective-bundle, smoothness, regular-immersion, or excess claim is made over a nonreduced base.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "src-0004-sign-convention",
+      "note": "The attempt uses W_f=(O_X(2) tensor gamma^*O(-f))|_C throughout, matching the degree formula deg=4g+12-4f in SRC-0004 Lemma 10.6 (whose displayed definition W_fi=O(2) tensor gamma^*O(+fi) is the inconsistent sign the packet already flags). The unused surjectivity clause of Lemma 10.6 is not invoked.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-13",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "C66-COMP-RANK",
+        "C66-GEO-Z",
+        "C66-GEO-H0"
+      ],
+      "key": "balanced-reduced-support-nonempty-via-fixed-part-and-two-jet",
+      "kind": "lemma",
+      "statement": "On every geometric fibre of a genus-6 Casnati-Ekedahl family with balanced relations bundle F=O(4)+O(5) and weak relative-canonical normalization O_X(1)|_C isomorphic to omega_{C/P1} tensor gamma^*A, the linear system |L| with L=W_5 tensor omega_C^{-1} has fixed part of degree at most one, the moving part is a base-point-free g^2_5 or g^2_6, a general member is a reduced six-point divisor, the non-reduced locus is a nonempty proper closed curve in the plane |L|, and the ordered Conf_6 incidence is a nonempty smooth finite etale S_6-torsor of degree 720 over that dense non-closed surface open. The argument does not assume that L itself is base-point-free.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "C66-COMP-RANK"
+      ],
+      "key": "z-regular-immersion-codim-4-from-S-smoothness",
+      "kind": "lemma",
+      "statement": "Over a reduced locally Noetherian base carrying a balanced+(N) genus-6 family, the evaluation-failure scheme Z inside Conf_6(C/S) is S-smooth of pure relative dimension two (via the identification of Z with the S_6-torsor of orderings of the reduced-support open of P_S(pi_*L)), and the closed immersion Z->Conf_6 is therefore a regular immersion of pure codimension four with locally free conormal of rank four and a locally split conormal sequence. The lci conclusion is obtained from S-smoothness of both schemes, not from the excess of actual codimension 4 over the filtered determinantal expectation 6.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "C66-COMP-RANK",
+        "C66-GEO-H0"
+      ],
+      "key": "balanced-h0-L-constant-3-by-clifford-and-hyperelliptic-exclusion",
+      "kind": "lemma",
+      "statement": "Under (CE)+(BAL)+(N), every geometric fibre has h^0(O_C(D))=2, h^0(L)=3 and h^1(L)=2. The only Clifford-equality case that could produce h^0(D)=3 is a hyperelliptic fibre, and a hyperelliptic genus-6 degree-four cover cannot have F=O(4)+O(5). Constancy on the balanced locus therefore uses only exclusion of the hyperelliptic-composed pencil; it is not equivalent to exclusion of every non-primitive degree-four pencil through a positive-genus intermediate curve.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "C66-COMP-RANK"
+      ],
+      "key": "excess-coker-retains-Muniv-twist",
+      "kind": "lemma",
+      "statement": "On the ordered etale incidence Z, coker of the relative Abel-Jacobi differential is canonically (R^1 pi_*L) tensor M_univ, locally free of rank two, and the dual sequence realises the conormal of Z as the rank-four quotient of the Hodge bundle by pi_*(omega tensor L^vee) tensor M_univ^{-1}. Geometric fibres become abstractly isomorphic to H^1(L) only after trivialising the one-dimensional M_univ fibre.",
+      "supports_finding_id": "FND-0133"
+    },
+    {
+      "impacts_approach_ids": [
+        "C66-COMP-RANK"
+      ],
+      "key": "phi-corank-at-most-one-I11-unit",
+      "kind": "lemma",
+      "statement": "For the filtered balanced CE evaluation at (g,n)=(6,6) on Conf_6, every geometric fibre has rank(phi) in {11,12}, so I_11(phi)=O_B as an ideal sheaf on any locally Noetherian base and I_j(phi)=O_B for all j<=11.",
+      "supports_finding_id": "FND-0122"
+    },
+    {
+      "impacts_approach_ids": [
+        "C66-COMP-RANK",
+        "C66-GEO-Z"
+      ],
+      "key": "hyperelliptic-tetragonal-not-balanced",
+      "kind": "lemma",
+      "statement": "A hyperelliptic genus-6 degree-four cover necessarily factors as q o h, has Tschirnhausen bundle E=O(1)+O(4)+O(4), and cannot have balanced relations bundle F=O(4)+O(5): after twisting the CE quadric sequence by O(-6) one has h^0(F(-6))>=2, while balanced F gives h^0(F(-6))=0.",
+      "supports_finding_id": "FND-0125"
+    },
+    {
+      "impacts_approach_ids": [
+        "C66-COMP-RANK",
+        "C66-GEO-Z"
+      ],
+      "key": "N-plus-degree-kills-residual-A",
+      "kind": "lemma",
+      "statement": "Granting only the weak CE relative-canonical normalization O_X(1)|_C isomorphic to omega_{C/P1} tensor gamma^*A, the degree computation deg(O_X(1)|_C)=18=18+4deg(A) forces A trivial on P1, hence W_5 isomorphic to omega_C^2(-D) and L isomorphic to omega_C(-D) on every balanced geometric fibre.",
+      "supports_finding_id": "FND-0105"
+    }
+  ],
+  "id": "REV-0142",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "a6509227aaf37308108d64c3743394cbb21d892f72d71fb7983f0cd9f537172c",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Load-bearing imported claims are exactly CLM-0065-1 (ranks 26 and 12, Fit_0=I_12 under the two degree inequalities), CLM-0065-3 (filtered snake coker(phi)=coker(phi_5) with no global splitting), CLM-0065-4 (Fit_0=a_N^*I_e, arbitrary locally Noetherian base change, rigidified T-point criterion, smooth-atlas descent), CLM-0065-5 (canonical O(5)-subbundle and degrees 20 and 16), and CLM-0065-9 (balanced (6,6) specialisation of the same identity). All apply on B=Conf_6, where Gamma is a sum of six pairwise disjoint sections. Ambient equation-bundle hypotheses of ATT-0065 are not used beyond the balanced vanishing already proved there. Unused ATT-0065 claims CLM-0065-2,6,7,8 are non-load-bearing for this artifact.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Load-bearing excerpt is Lemma 10.6: deg(O_{P(E^vee)}(1)|_C)=2g-2+8=18, deg(W_f|_C)=4g+12-4f via the minus-sign convention gamma^*O(-f), and the parenthetical CE restriction O(1)|_C=omega_C tensor gamma^*omega_{P1}^vee which is the strong form of hypothesis (N). The evaluation-surjectivity statement of Lemma 10.6 is unused and non-load-bearing.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0065-1",
+      "note": "Used in Section 8 for local freeness of pi_*W and pi_*(W|Gamma) and for Fit_0=I_12. Degree inequalities are checked explicitly: 20-6=14>10 and 16-6=10.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0065-3",
+      "note": "Used to identify coker(phi) with R^1 pi_*(W_5(-Gamma)) without a global splitting of W. The two vanishings R^1 pi_*W_4=0 and R^1 pi_*(W_4(-Gamma))=0 are the degree inequalities just cited.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0065-4",
+      "note": "Used for I_12=a_N^*I_e, formation commuting with arbitrary locally Noetherian base change, and the T-point criterion that identifies Z with relative triviality of N, hence with the ordered |L|-incidence.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0065-5",
+      "note": "Used for the canonical filtration 0->W_4->W->W_5->0 induced by the O(5)-subbundle, with fibre degrees 20 and 16, and to justify that no global splitting of F or W is assumed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0065-9",
+      "note": "Used only for the balanced (6,6) specialisation of the Fitting/incidence identity already in CLM-0065-4; the ambient comparison clause is not needed below.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0088-P2",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "scope_checks": [
+    "stack versus coarse space: the S_6-torsor and the regular immersion are stated on Conf_6 and on the stack of pairwise-disjoint sections, not on coarse M_{6,6}",
+    "rational versus integral coefficients: unused; no cohomology of local systems is claimed",
+    "cohomology degree versus Borel-Moore homology degree: unused; the lemma makes no Hodge or weight claim",
+    "Poincare duality and Tate twists: expressly excluded",
+    "Gysin and Kunneth shifts: expressly excluded for the pair (M_{6,6},Z)",
+    "degeneration or spectral-sequence differentials: unused",
+    "invariants versus coinvariants under graph automorphisms: unused",
+    "semisimplification versus actual Hodge-structure isomorphism: unused",
+    "predicted motives used as unconditional theorems: unused",
+    "pure Tate silently upgraded to algebraic or tautological generation: unused",
+    "omitted stable pairs: unbalanced CE types, h^0-jumping strata, and nonreduced bases in Part III are listed as not covered"
+  ],
+  "strongest_attack": "Strongest attack: the two-jet incidence J subset C x |A| used to produce a reduced member of |L| on every balanced+(N) fibre has, a priori, fibre dimension at most 1 over a one-dimensional base, hence dimension at most 2, which would allow its image to fill the plane |A| and would leave the reduced-support open (and the ordered Conf_6 incidence) possibly empty on special fibres. That is exactly the obstruction recorded against inferring nonemptiness from chi(L)=1 alone. The attack fails because the proof splits J along the ramification locus R of the morphism psi:C->P2 defined by the base-point-free moving part: in characteristic zero a non-constant map of smooth curves is generically immersive, so R is finite; over C minus R the fibres of J are zero-dimensional, and over R they are at most P1, whence dim J<=1 and pr_2(J) cannot fill |A|. The residual hyperplane through an at-most-degree-one fixed part is likewise proper because the moving part is base-point-free. The same split, plus h^0(L(-2q))>=1, pins dim Delta=1. Runner-up attack: restriction of coker(delta)=R^1 pi_*O(Gamma) from Conf_6 to Z need not equal R^1 of O(Gamma)|_{C_Z} because h^0(O(Gamma)) jumps on Conf_6. That attack fails because R^1 of a flat sheaf on a relative curve is top cohomology and commutes with arbitrary base change, so Exc=(R^1 pi_*L) tensor M_univ is honest as a bundle and the tautological twist is retained. No stack-versus-coarse, rational-versus-integral, Poincare-twist, Gysin, spectral-sequence, invariants-versus-coinvariants, semisimplification, predicted-motive, or omitted-stable-pair error is load-bearing: the theorem is a scheme-level lemma over Conf_6 and expressly excludes M_{6,6} images, Hodge/Tate type, unbalanced strata, and nonreduced bases in Part III.",
+  "subproblem_id": "C66-COMP-RANK",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero, S a locally Noetherian k-scheme, pi:C->S smooth and proper with geometrically connected genus-six fibres, s:P->S a P1-bundle, gamma:C->P finite flat of degree four with Tschirnhausen bundle E (gamma_*O_C = O_P direct-sum E^vee, E of rank three), p:X=P_P(E^vee)->P the associated P2-bundle in the packet convention p_*O_X(1)=E, i:C->X the Casnati-Ekedahl embedding, and F a rank-two bundle on P. Assume: (CE) the ideal of i has the standard degree-four CE resolution 0->O_X(-4) tensor p^*det(F)->O_X(-2) tensor p^*F->I_C->0; (BAL) F restricted to every geometric fibre of s is O(4) direct-sum O(5); (N) on every geometric fibre, O_X(1)|_C is isomorphic to omega_{C/P1} tensor gamma^*A for some A in Pic(P1). Put W=i^*(O_X(2) tensor p^*F^vee) with the canonical filtration 0->W_4->W->W_5->0 induced by the O(5)-subbundle of F, L=W_5 tensor omega_{C/S}^{-1}, D=gamma^*O_P(1); O_P(1), hence W_4,W_5,L,D, is well defined only up to twist by a line bundle pulled back from S, and every assertion below is invariant under such a twist. THEN: (I) On every geometric fibre: (I.1) A is trivial, W_5=omega_C^{tensor 2}(-D), L=omega_C(-D), deg(L)=6, chi(L)=1, deg(W_4)=20, deg(W_5)=16; (I.2) C is not hyperelliptic; (I.3) h^0(O_C(D))=2, h^0(L)=3, h^1(L)=2, so |L| is a projective plane, and every summand of E has degree at least two; (I.4) the fixed part of |L| has degree at most one, hence is reduced, and the moving part is base-point-free with three sections; (I.5) the non-reduced locus Delta in |L| is closed of dimension exactly one, so the reduced-support locus |L|^red = |L| minus Delta is a nonempty dense open subset of dimension two and is not closed in |L|; (I.6) the ordered incidence {(p_1,...,p_6) in C^6 pairwise distinct with p_1+...+p_6 in |L|} is nonempty, smooth of pure dimension two, and a finite etale S_6-torsor of degree 720 over |L|^red. (II) Let B=Conf_6(C/S) be the complement of the big diagonal in the six-fold fibre product, with its six tautological pairwise-disjoint sections, universal divisor Gamma, evaluation phi:pi_*W->pi_*(W|Gamma), N=omega_{C/S} tensor W_5^vee(Gamma), a_N:B->Pic^0_{C_B/B} and identity section e. Then pi_*W and pi_*(W|Gamma) are locally free of ranks 26 and 12, every geometric fibre of phi has rank 11 or 12, and: (II.1) I_j(phi)=O_B for every j<=11, while I_12(phi)=Fit_0(coker phi)=a_N^*I_e cuts out the closed subscheme Z=a_N^{-1}(e(B)), whose formation commutes with arbitrary locally Noetherian base change; (II.2) the naive maximal-minor expectation for a 26-to-12 map is codimension 15 and the filtered 11-to-6 expectation is codimension 6, whereas the geometric fibres of Z->S have pure dimension two, i.e. codimension four in the fibres of B->S, the excess being 6-4=2=h^1(L). (III) Assume in addition S reduced. Then pi_*L is locally free of rank three, AJ=P_S(pi_*L) is a Zariski-locally trivial P2-bundle carrying a universal relative degree-six divisor, its etale locus U (the reduced-support open) is S-smooth of pure relative dimension two and surjective onto S, and the S_6-torsor of orderings of the universal divisor over U is canonically isomorphic to Z. Consequently: (III.1) Z->S is smooth and surjective of pure relative dimension two; if moreover S is of finite type over k, every irreducible component of Z and of U dominates an irreducible component of S and has dimension equal to the dimension of that component plus two; (III.2) the closed immersion Z->B is a regular immersion of pure codimension four, its conormal sheaf I_Z/I_Z^2 is locally free of rank four, and the conormal sequence 0->I_Z/I_Z^2->Omega_{B/S}|_Z->Omega_{Z/S}->0 is exact and locally split; (III.3) with delta:T_{B/S}=pi_*O_Gamma(Gamma)->R^1pi_*O_C the connecting map of 0->O_C->O_C(Gamma)->O_Gamma(Gamma)->0, the sequence 0->T_{Z/S}->T_{B/S}|_Z->(R^1pi_*O_C)|_Z->Exc->0 is exact on Z with Exc=coker(delta)|_Z canonically isomorphic to (R^1pi_*L) tensor M_univ, locally free of rank two, where M_univ is the tautological line bundle on Z determined by O(Gamma)=L tensor pi^*M_univ; dually 0->Exc^vee->(pi_*omega_{C/S})|_Z->I_Z/I_Z^2->0 is exact with Exc^vee = pi_*(omega_{C/S} tensor L^vee) tensor M_univ^{-1}, whose fibres are the two-dimensional spaces H^0(C,O_C(D)) of the tetragonal pencils. No assertion is made about images, closure, components, stabilizers, purity, codimension or Gysin maps in M_{6,6}, about unbalanced splitting types or h^0-jumping strata, about nonreduced bases in Part III, or about Hodge, weight or Tate type.",
+  "verdict": "confirmed"
+}

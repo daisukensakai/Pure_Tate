@@ -1,0 +1,100 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (c(6)=5, so n=6 needs residual geometry) and with the C66-COMP-COMP fibrewise reduced/nonreduced cut. INDEPENDENT DERIVATION. Let C be a smooth proper geometrically connected curve of genus 6 over a field k (Stacks 0BY7: g=dim H^1(O_C) and H^0(O_C)=k, hence \u03c7(O_C)=1-g=-5), D an effective Cartier divisor of degree 4 with h^0(O_C(D))\u22652, and L=\u03c9_C(-D). Smooth proper curves are Gorenstein, so Stacks 0C19 gives deg(\u03c9_C)=2g-2=10 and deg L=6. For a geometric point p (so deg(2p)=2), L(-2p) has degree 4. Stacks Lemma 53.5.2 (0BS6) supplies Riemann\u2013Roch \u03c7(E)=deg(E)-(1/2)rk(E)deg(\u03c9) for locally free E on a proper Gorenstein equidimensional curve, hence \u03c7(L(-2p))=4-g+1=-1, together with the dimension symmetry dim H^i(E)=dim H^{1-i}(E^\u2228\u2297\u03c9). Stacks Remark 53.4.3 (0BS4) is the invertible-sheaf form of Serre duality: h^1(L(-2p))=h^0(\u03c9\u2297L(2p)^{-1})=h^0(O_C(D+2p)). Therefore h^0(L(-2p))=h^0(O_C(D+2p))-1 identically. The inequality \u22651 is the sheaf inclusion O(D)\u2192O(D+2p) given by a nonzero section of O(2p): on an integral curve this is injective on global sections, so h^0(O(D+2p))\u2265h^0(O(D))\u22652. A nonzero section of L(-2p) produces an effective divisor in the complete system |L| containing 2p, hence nonreduced at p. The same RR also gives h^0(L)=1+h^0(D)\u22653, so |L| is nonempty. SCOPE SHARPENING. The displayed equality uses deg(2p)=2 and therefore holds for geometric (or k-rational, k algebraically closed) points, not for a closed point of residue degree d>1, where \u03c7(L(-2p))=1-2d and the identity becomes h^0(L(-2p))=h^0(O(D+2p))+1-2d. Read \u2018every point p\u2019 geometrically, which is the campaign\u2019s fibrewise usage. Characteristic is unrestricted: 0BS6/0BS4 have no char-0 hypothesis, and 2p remains a nonreduced length-2 subscheme in every characteristic. The argument does not use balanced CE splitting, base-point-freeness, or constancy of h^0(L)=3. RELATION TO THE CORPUS. Complementary to corroborated FND-0134 (on balanced weakly-normalized fibres with h^0(L)=3, bpf plus char-0 Bertini make a general member reduced, so the reduced-support open is nonempty dense): a nonempty dense open in |L|\u2245P^2 may be all of P^2, so FND-0134 does not force a nonempty nonreduced complement and does not subsume this lemma. Complementary to FND-0083 (\u03c7(L)=1 does not prove reduced-support nonemptiness). Distinct from FND-0073 (the identity h^0(L)=1+h^0(M)). REV-0140 correctly records that this RR identity repairs ATT-0090\u2019s undocumented 2-jet-kernel input for the nonempty-complement half of (R2); the present finding is that repaired positive lemma, not a defect in the identity. ATT-0090 remains incomplete on other grounds (unbound h^0(L)=3 / WORKING-C66-COMP-COMP), which is FND-0058 territory and is not this lemma. Kind \u2018obstruction\u2019 is a mild misclassification: this is a positive residual-series lemma; it obstructs only proposed decompositions that assign an empty nonreduced locus to some |L|. Absence of FND-0136 from the workspace proof/findings.jsonl is the same corpus-registration discrepancy noted for FND-0134; TASK.json is controlling. Merge target: none. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source. The finding\u2019s sole reviewer_engine (codex) is in this revision\u2019s excluded_engines; this audit is the first non-excluded verification.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0136",
+  "id": "FAUD-0140",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "any field",
+    "exact_mathematical_scope": "On a smooth proper geometrically connected genus-6 curve C over a field k, for an effective Cartier divisor D of degree 4 with h^0(O_C(D))\u22652 and L=\u03c9_C(-D), every geometric point p satisfies h^0(L(-2p))=h^0(O_C(D+2p))-1\u22651, so the complete linear system |L| contains a divisor of multiplicity at least 2 at p.",
+    "excluded_claims": [
+      "Does not prove that a general member of |L| is reduced or that the reduced-support open is nonempty or dense (FND-0134).",
+      "Does not prove h^0(L)=3 on every balanced fibre, nor that the hyperelliptic/h^0=4 branch is empty on the balanced locus (FND-0058/FND-0104).",
+      "The displayed equality is false as written for a closed point of residue degree d>1.",
+      "Does not compute the dimension or class of the nonreduced locus in |L|.",
+      "Does not by itself complete ATT-0090."
+    ],
+    "excluded_engine_note": "the finding's sole reviewer_engine (codex) is in this revision's excluded_engines; this audit supplies the first non-excluded verification",
+    "generality": "smooth proper geometrically connected genus-six curves with an effective degree-four pencil; characteristic-free; no balanced-CE or base-point-free hypothesis",
+    "hypotheses": [
+      "C smooth proper geometrically connected of genus 6",
+      "D effective Cartier of degree 4 with h^0(O(D))\u22652",
+      "L=\u03c9_C(-D)",
+      "p a geometric point (deg(2p)=2)"
+    ],
+    "impacts_approach_ids": [
+      "C66-COMP-COMP"
+    ],
+    "kind_note": "recorded kind 'obstruction' is a mild misclassification of a positive residual-series lemma",
+    "objects": [
+      "L=\u03c9_C(-D)",
+      "nonreduced locus in |L|",
+      "L(-2p)",
+      "O(D+2p)"
+    ],
+    "points": "geometric points (or closed points after extending to an algebraic closure)"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "b0ed8ca4514c05713b9642ba8a8afad58bf99f4ec0de9a3a85a27ec9c4da0e3c",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-13T12:16:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-riemann-roch-gorenstein-curve",
+      "retrieved_at": "2026-08-13T12:15:10Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0BS6"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-serre-duality-invertible-sheaves",
+      "retrieved_at": "2026-08-13T12:15:40Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0BS4"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-genus-and-canonical-degree",
+      "retrieved_at": "2026-08-13T12:16:20Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0BY6"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "8f88507e3babc367e86eec98c63cee6c1d4115d38f9ada98ca68fc0c7b6cf722",
+      "doi": null,
+      "query_family": "corpus-claims-cross-check",
+      "retrieved_at": "2026-08-13T12:11:30Z",
+      "source_type": "campaign_claims",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
+  "task_id": "TASK-F-FND-0136",
+  "verdict": "promote"
+}

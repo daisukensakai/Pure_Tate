@@ -58,7 +58,7 @@ class RoutingTests(unittest.TestCase):
         self.assertIn("cursor-grok", self.routing["engines"])
         self.assertEqual(
             self.routing["engines"]["cursor-grok"]["model"],
-            "cursor-grok-4.5-high",
+            "cursor-grok-4.6-high",
         )
 
     def test_engine_inventory_includes_qwen(self):
@@ -133,7 +133,7 @@ class RoutingTests(unittest.TestCase):
             command[command.index("--output-format") + 1], "stream-json"
         )
         self.assertEqual(
-            command[command.index("--model") + 1], "cursor-grok-4.5-high"
+            command[command.index("--model") + 1], "cursor-grok-4.6-high"
         )
         self.assertEqual(
             command[command.index("--workspace") + 1],

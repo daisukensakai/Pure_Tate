@@ -22,7 +22,7 @@ from typing import Any, Dict, List, Optional, Sequence
 ROOT = Path(__file__).resolve().parent.parent
 LAB = ROOT / "CLI_test"
 RESULTS_ROOT = LAB / "results" / "cursor_web"
-MODEL = "cursor-grok-4.5-high"
+MODEL = "cursor-grok-4.6-high"
 TIMEOUT_SECONDS = 180
 EXAMPLE_URL = "https://example.com"
 SUCCESS_MARKER = "Example Domain"

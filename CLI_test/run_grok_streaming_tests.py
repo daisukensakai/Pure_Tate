@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import collections
 import datetime
 import hashlib
@@ -15,8 +16,8 @@ from typing import Any, Dict, List
 
 ROOT = Path(__file__).resolve().parent.parent
 LAB = ROOT / "CLI_test"
-RESULTS = LAB / "results"
-MODEL = "grok-4.5"
+RESULTS_ROOT = LAB / "results" / "grok_streaming"
+MODEL = "grok-4.6"
 TIMEOUT_SECONDS = 300
 
 
@@ -90,7 +91,9 @@ def event_summary(stdout: str) -> Dict[str, Any]:
     }
 
 
-def run_probe(probe: Dict[str, Any]) -> Dict[str, Any]:
+def run_probe(
+    probe: Dict[str, Any], *, model: str, run_dir: Path
+) -> Dict[str, Any]:
     prompt = str(probe["prompt"])
     argv = [
         "grok",
@@ -109,7 +112,7 @@ def run_probe(probe: Dict[str, Any]) -> Dict[str, Any]:
         "run_terminal_command,write,web_fetch,web_search,open_page",
         "--disable-web-search",
         "--model",
-        MODEL,
+        model,
     ]
     started = time.monotonic()
     completed = subprocess.run(
@@ -125,8 +128,8 @@ def run_probe(probe: Dict[str, Any]) -> Dict[str, Any]:
     stdout = completed.stdout.decode("utf-8", "replace")
     stderr = completed.stderr.decode("utf-8", "replace")
     name = str(probe["name"])
-    stdout_path = RESULTS / (name + ".stdout.jsonl")
-    stderr_path = RESULTS / (name + ".stderr.txt")
+    stdout_path = run_dir / (name + ".stdout.jsonl")
+    stderr_path = run_dir / (name + ".stderr.txt")
     stdout_path.write_text(stdout, encoding="utf-8")
     stderr_path.write_text(stderr, encoding="utf-8")
     redacted_argv = list(argv)
@@ -136,7 +139,7 @@ def run_probe(probe: Dict[str, Any]) -> Dict[str, Any]:
     metadata = {
         "schema_version": 1,
         "probe": name,
-        "model": MODEL,
+        "model": model,
         "executed_at": datetime.datetime.now(
             datetime.timezone.utc
         ).isoformat(),
@@ -150,7 +153,7 @@ def run_probe(probe: Dict[str, Any]) -> Dict[str, Any]:
         "stderr_sha256": sha256_bytes(completed.stderr),
         "summary": event_summary(stdout),
     }
-    metadata_path = RESULTS / (name + ".metadata.json")
+    metadata_path = run_dir / (name + ".metadata.json")
     metadata_path.write_text(
         json.dumps(metadata, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
@@ -159,16 +162,29 @@ def run_probe(probe: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def main() -> int:
-    RESULTS.mkdir(parents=True, exist_ok=True)
-    results = [run_probe(probe) for probe in PROBES]
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--model", default=MODEL, help="xAI Grok model slug (default: %s)" % MODEL
+    )
+    args = parser.parse_args()
+    stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    run_dir = RESULTS_ROOT / stamp
+    run_dir.mkdir(parents=True, exist_ok=True)
+    results = [
+        run_probe(probe, model=args.model, run_dir=run_dir) for probe in PROBES
+    ]
     manifest = {
         "schema_version": 1,
-        "model": MODEL,
+        "model": args.model,
+        "run_dir": str(run_dir.relative_to(ROOT)),
         "probes": results,
     }
-    (RESULTS / "manifest.json").write_text(
+    (run_dir / "manifest.json").write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
+    )
+    (RESULTS_ROOT / "latest.txt").write_text(
+        str(run_dir.relative_to(ROOT)) + "\n", encoding="utf-8"
     )
     print(json.dumps(manifest, indent=2, sort_keys=True))
     return 0 if all(item["returncode"] == 0 for item in results) else 1

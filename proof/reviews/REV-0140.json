@@ -1,0 +1,149 @@
+{
+  "attempt_id": "ATT-0090",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CHK-PACKET-BINDING",
+      "note": "TASK and ATT-0090 agree on attempt, campaign, revision, subproblem, context revision, packet id, packet SHA-256, packet-binding SHA-256, exact target, and exact theorem statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0090-1",
+      "note": "The base-point-to-plane-quintic contradiction is sound conditional on h^0(D_b)=2 and h^0(L_b)=3. ATT-0066 supplies only h^0(L_b) in {3,4}. ATT-0090 imports both equalities from an unidentified WORKING-C66-COMP-COMP object instead of proving or binding the needed packet chain excluding the hyperelliptic/nonprimitive branch on balanced fibres.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0090-2",
+      "note": "Conditional on CLM-0090-1 and h^0(L_b)=3, characteristic-zero Bertini gives a nonempty dense reduced-support open. The nonempty-complement assertion instead invokes an undocumented 2-jet-kernel fact. It can be repaired directly by Riemann\u2013Roch and Serre duality: h^0(L_b(-2p))=h^0(O(D_b+2p))-1\u22651, but that discharge is absent from the submitted proof and from its declared dependencies.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0090-3",
+      "note": "ATT-0066 correctly supplies the stack-level finite \u00e9tale S_6-torsor over the reduced-support open, and finite \u00e9tale pullback preserves nonemptiness and pure dimension. The claimed nonempty pure dimension-two fibre nevertheless inherits the unresolved h^0(L_b)=3 and reduced-member inputs from CLM-0090-2.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0090-4",
+      "note": "The negative component-decomposition test follows formally from CLM-0090-2 and CLM-0090-3, so it remains unresolved with those premises.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CHK-ADVERSARIAL-SCOPE",
+      "note": "The proof stays at stack level and makes no coarse-moduli descent or invariants/coinvariants claim. It uses no integral/rational coefficient comparison, ordinary/Borel\u2013Moore degree conversion, Poincar\u00e9 or Tate twist, Gysin/K\u00fcnneth shift, spectral-sequence degeneration, Hodge semisimplification, predicted motive, or pure-Tate-to-algebraic/tautological upgrade. Stable pairs and nodal compactifications are omitted, but they are outside this exact smooth-fibre lemma and cannot be inferred from it.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-13",
+  "finding_candidates": [
+    {
+      "adjudication": "existing_finding_support",
+      "evidence": "The theorem asserts h^0(L_b)=3 and |L_b|\u2245P^2. Section 0 of ATT-0090 attributes this to WORKING-C66-COMP-COMP, while its own summary of ATT-0066 records only the two-valued range {3,4}.",
+      "key": "att-0090-balanced-h0-constancy-unbound",
+      "scope": {
+        "attempt_id": "ATT-0090",
+        "objects": [
+          "L",
+          "closed Abel\u2013Jacobi incidence",
+          "balanced geometric fibres"
+        ],
+        "subproblem_id": "C66-COMP-COMP"
+      },
+      "severity": "high",
+      "statement": "ATT-0090's identification of every balanced Abel\u2013Jacobi fibre with P^2 depends on h^0(L_b)=3, but its declared ATT-0066 dependency proves only h^0(L_b)\u2208{3,4}; the exclusion of the jumping branch is imported through an unidentified working-context label rather than a verified dependency chain.",
+      "supports_finding_id": "FND-0058"
+    },
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "evidence": "The degree-four bundle L(-2p) has Euler characteristic -1. Serre duality identifies h^1(L(-2p)) with h^0(O(D+2p)); Riemann\u2013Roch then gives the displayed equality, and inclusion O(D)\u2192O(D+2p) gives the lower bound.",
+      "key": "residual-g26-double-zero-rr-lemma",
+      "scope": {
+        "generality": "smooth genus-six curves with an effective degree-four pencil divisor",
+        "objects": [
+          "L=\u03c9_C(-D)",
+          "nonreduced locus in |L|"
+        ]
+      },
+      "severity": "medium",
+      "statement": "If C has genus 6, D is an effective degree-four divisor with h^0(O(D))\u22652, and L=\u03c9_C(-D), then for every point p one has h^0(L(-2p))=h^0(O(D+2p))-1\u22651. Hence every complete |L| contains a divisor nonreduced at p.",
+      "supports_finding_id": null,
+      "why_reusable": "This supplies the missing nonreduced-member argument without invoking an anonymous jet-kernel dependency and applies fibrewise independently of the CE splitting calculation."
+    }
+  ],
+  "id": "REV-0140",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "a6509227aaf37308108d64c3743394cbb21d892f72d71fb7983f0cd9f537172c",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Confirmed only for the degree, H^0 range, closed Abel\u2013Jacobi incidence, and stack-level ordered distinct-support torsor actually established there. It does not supply h^0(L_b)=3 on every balanced fibre or reduced-support nonemptiness.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Corroborates ATT-0066 within its stated scope; it does not confirm ATT-0090's additional anonymous working-context inputs.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Second corroboration of ATT-0066, including its reduced-base caveat; it does not discharge the new constancy or jet-kernel inputs.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0130",
+      "note": "Supports the conditional implication that a base point with h^0(D)=2 forces a plane-quintic tetragonal cover with unbalanced CE relations.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0105",
+      "note": "Used correctly as an explicit weak relative-canonical normalization hypothesis rather than as an unconditional theorem.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Provides the CE degree convention inherited through ATT-0066; it is peripheral and supplies none of the disputed fibrewise constancy or jet assertions.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0107",
+      "note": "Declared source claim concerning the closed Abel\u2013Jacobi model. It is non-adverse and not sufficient to prove the disputed reduced-support assertions.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0083",
+      "note": "Declared but not load-bearing; it records that the earlier H^0 package did not establish reduced-support nonemptiness.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "WORKING-C66-COMP-COMP",
+      "note": "ATT-0090 treats this label as the source of h^0(D_b)=2, h^0(L_b)=3, the P^2-bundle assertion, and h^0(L_b(-2p))\u22651, but no verified dependency artifact with that identifier appears in the packet or proof-dependency list.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0090-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is the proof's reliance on an unbound WORKING-C66-COMP-COMP package for its decisive inputs. ATT-0066 gives only h^0(L_b)\u2208{3,4}; ATT-0090 neither cites the packet chain needed to exclude the h^0=4/hyperelliptic branch on balanced fibres nor derives its asserted 2-jet inequality. Thus the plane-quintic argument, Bertini step, P^2 dimension, and Conf_6 conclusion are individually plausible but not assembled from the declared verified dependencies. The stack/coarse attack fails because the torsor is used only at stack level. All coefficient, cohomological-degree, duality/twist, Gysin/K\u00fcnneth, spectral-sequence, graph-automorphism, Hodge-semisimplification, motive, and Tate-generation attacks are non-load-bearing because the exact lemma asserts none of them. Stable pairs are also outside the exact theorem, although this lemma cannot be promoted to the campaign's compactified residual analysis without them.",
+  "subproblem_id": "C66-COMP-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be a field of characteristic zero and let B be a reduced locally Noetherian k-scheme carrying a smooth proper curve family pi:C->B with geometrically connected genus-6 fibres together with a finite flat degree-four map gamma:C->P^1_B whose Casnati\u2013Ekedahl relations bundle is fibrewise balanced, F_b \u2245 O(4)\u2295O(5). Use the canonical filtered quotient W_5 of ATT-0066 (dual-confirmed by REV-0110 and REV-0116) and put L=W_5\u2297\u03c9_{C/B}^{-1}. Assume the weak CE relative-canonical normalization of ATT-0066/FND-0105 fibrewise, so L_b \u2245 \u03c9_{C_b}(-D_b) with D_b a fibre of gamma_b. Then on every geometric fibre: (R1) |L_b| is a base-point-free complete g^2_6 (in particular h^0(L_b)=3); (R2) writing |L_b|\u2245P^2 for the fibre of the closed Abel\u2013Jacobi incidence I=Hilb^6(C/B)\u00d7_{Pic^6(C/B)}B, the reduced-support open U_b\u2282|L_b| of divisors with six pairwise-distinct points is a nonempty Zariski-dense open, and its complement (the nonreduced locus) is a nonempty proper closed subset; (R3) the ordered Conf_6 incidence over b is therefore nonempty of pure dimension 2. Consequently every proposed balanced residual component decomposition that assigns an empty reduced-support (or empty ordered Conf_6) piece to some balanced geometric fibre is false. No claim is made about image dimension, purity, or codimension in M_{6,6}, about S_6 monodromy, or about RED-0001.",
+  "verdict": "incomplete"
+}

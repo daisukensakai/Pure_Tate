@@ -1,0 +1,118 @@
+{
+  "attempt_id": "ATT-0086",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0086-1",
+      "note": "Pass-2 reconstruction. h^0(L)=4 \u21d2 h^0(M)=3 by CLM-0066-1; Clifford equality with deg M=4\u2209{0,10} forces C hyperelliptic and M\u2245(g^1_2)^\u22972. Castelnuovo\u2013Severi gives g\u22643 unless the deg-2 and deg-4 maps to P^1 share a common factor; that factor has degree dividing 2 and \u22652, hence equals h, so \u03b3=q\u2218h. Pushforward: h_*O=O\u2295O(-7); for every deg-2 q one has deg q_*O(-7)=-8 and h^0(q_*O(-7)\u2297O(3))=h^0(O(-1))=0, forcing q_*O(-7)=O(-4)^2 and E=O(1)\u2295O(4)^2. Then Sym^2E(-6)=O(-4)\u2295O(-1)^2\u2295O(2)^3 has h^0=9. Whatever line-bundle target the CE multiplication map uses after the \u22126 twist, it has degree 12>2g\u22122, so h^1=0 and h^0=7; with F=ker one gets h^0(F(-6))\u22652, while balanced F(-6)=O(-2)\u2295O(-1) has h^0=0. Contradiction. Normalization unused for this exclusion; SRC-0004/Lemma 10.6 pin F as the degree-(g+3)=9 bundle with balanced type (4,5), so the F-versus-F^vee orientation is consistent.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0086-2",
+      "note": "Under the stated weak normalization, CLM-0066-2 gives h^0(L)\u2208{3,4}; CLM-0086-1 removes 4, so h^0(L_b)=3 on every geometric fibre and B_4=\u2205. B reduced with constant h^0=3 is exactly Grauert\u2019s setting, so p_*L is locally free of rank 3 with base change; CLM-0066-5/FND-0107 identify the closed Abel\u2013Jacobi incidence with P((p_*L)^vee), a Zariski-locally trivial P^2-bundle. No stack widening, no cohomological/Tate/Gysin claim, and RED-0001 is explicitly disclaimed.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-13",
+  "finding_candidates": [
+    {
+      "caveat": "Does not by itself identify the splitting type as (2,7); only the inequality excluding (4,5) and (3,6). Remains a candidate until independently corroborated.",
+      "key": "deg12-targets-on-g6-have-h0-exactly-7",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "generality": "any smooth genus-6 curve; applies to every degree-12 target of the twisted CE multiplication map"
+      },
+      "statement": "On any smooth genus-6 curve, every line bundle of degree 12 has h^1=0 and h^0=7, because \u03c9\u2297L^{-1} has degree \u22122<0. Consequently the CE section-count obstruction on a composed hyperelliptic tetragonal cover\u2014h^0(Sym^2E(\u22126))=9 and h^0(F(\u22126))\u22652 for E=O(1)\u2295O(4)^2\u2014is insensitive to replacing the twisted scroll target O_{P(E^vee)}(2)|_C\u2297\u03b3^*O(\u22126) by \u03c9_{C/P^1}^\u22972\u2297\u03b3^*O(\u22126) or by A^6, and needs no weak CE relative-canonical normalization.",
+      "supports_finding_id": "FND-0125",
+      "why_reusable": "Removes a recurring Pic^0/normalization objection to the model-free half of the hyperelliptic CE incompatibility, so later artifacts may invoke h^0(F(\u22126))\u22652 on composed covers without carrying the scroll=canonical identification into the exclusion step."
+    },
+    {
+      "caveat": "Standard, but easy to omit in compressed writeups; recorded because ATT-0086 compresses it to one sentence. Remains a candidate until independently corroborated.",
+      "key": "castelnuovo-severi-common-factor-degree-divides-two",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "generality": "smooth curves of genus 6 with a g^1_2 and a degree-4 map to P^1"
+      },
+      "statement": "For a smooth genus-6 curve admitting maps h:C\u2192P^1 of degree 2 and \u03b3:C\u2192P^1 of degree 4, Castelnuovo\u2013Severi non-independence alone does not name the factorization; one must add that any common intermediate factor \u03c6:C\u2192C' has deg(\u03c6) dividing 2 and at least 2, hence \u03c6=h (up to automorphism of the target) and \u03b3=q\u2218h with deg q=2.",
+      "why_reusable": "Makes the compressed Castelnuovo\u2013Severi step in hyperelliptic-tetragonal arguments audit-safe without reopening the numerical bound g\u22643."
+    }
+  ],
+  "id": "REV-0138",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Load-bearing within stated scope. Independently re-derived the used fragments CLM-0066-1/2/4/5 (RR+Serre+Clifford; normalization \u21d2 M\u2245\u03b3^*O(1) and h^0\u2208{3,4}; Grauert on reduced constant-h^0 strata; closed Abel\u2013Jacobi model). Matches dual confirmations REV-0110/REV-0116 and packet FND-0103/0105/0107/0131.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Corroborative confirmation review of ATT-0066; not independently re-read as a proof source. Content actually used was re-derived from ATT-0066/packet arithmetic.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Second corroborative confirmation of ATT-0066, including the reducedness caveat for Grauert; honored by the theorem\u2019s reduced-base hypothesis and FND-0131. Not load-bearing beyond that.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0125",
+      "note": "Cited for the hyperelliptic CE incompatibility. Artifact correctly uses only the weak inequality h^0(F(-6))\u22652 from E=O(1)\u2295O(4)^2, re-derived here, rather than importing the sharper F=O(2)\u2295O(7) as a black box.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0105",
+      "note": "Weak CE relative-canonical normalization retained as an explicit hypothesis; used only to pin h^0(L)\u2208{3,4}. Emptiness of B_4 does not rely on it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Load-bearing for deg(O_{P(E^vee)}(2)|_C)=36, deg W_f=4g+12\u22124f, and F=O(f1)\u2295O(f2) with f1+f2=g+3=9; balanced reading f1\u22654 is F\u2245O(4)\u2295O(5). W:=O(2)\u2297\u03b3^*F^vee fixes the positive-degree orientation of F.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0103",
+      "note": "Declared source claim: M always special, Clifford bound h^0(M)\u22643 with equality only hyperelliptic 2\u00b7g^1_2, so h^0(L)=4 confined to hyperelliptic fibres. Rebuilt step agrees.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0107",
+      "note": "Declared source claim: closed Abel\u2013Jacobi/Hilbert incidence is the correct global model and agrees with Proj(p_*L) precisely on constant-h^0 loci; after B_4=\u2205 this is all of reduced B.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0086-P2",
+  "reviewer_engine": "cursor-grok",
+  "schema_version": 3,
+  "strongest_attack": "Binding checked: TASK packet_sha256 0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70, packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7, packet_id C66-001-v4, campaign_revision 4, context_revision 2, subproblem C66-COMP-COMP, and all twelve target keys match the attempt; the judged statement is the attempt theorem_statement (lemma), not RED-0001.\n\nSTRONGEST ATTACK (Pass 2) \u2014 Pic^0 / target-sheaf ambiguity in the CE multiplication map. Without the weak normalization, O_{P(E^vee)}(2)|_C and \u03c9_{C/P^1}^\u22972 may differ by a degree-0 line bundle on C not pulled back from P^1, so the writeup\u2019s identification of the twisted target with H^0(C,A^6) (A=h^*O(1)) is not a priori justified, and a wrong target could in principle change h^0 and collapse the 9\u22127\u22652 lower bound. Attack fails: after the \u22126 twist every candidate target has degree 12>2g\u22122=10, hence h^1=0 and h^0=7 for every degree-12 line bundle on a genus-6 curve; with F defined as the sheaf kernel one still gets h^0(F(-6))\u22652, while balanced F(-6)=O(-2)\u2295O(-1) has h^0=0.\n\nRUNNER-UP \u2014 F versus F^vee sign flip. Literature sometimes writes the middle term of the degree-4 resolution with F^vee, which would replace balanced O(4)\u2295O(5) by O(\u22124)\u2295O(\u22125) and erase the section-count contrast. Attack fails: SRC-0004 takes F of rank 2 and degree g+3=9 with W=O(2)\u2297\u03b3^*F^vee, and \u03c7(Sym^2E)\u2212\u03c7(\u03b3_*R) forces deg(ker)=+9, matching O(4)\u2295O(5) and the hyperelliptic comparison type (2,7).\n\nOTHER ATTACKS DEFEATED. (a) Castelnuovo\u2013Severi supplies only non-independence; the missing line (common factor degree divides 2 and \u22652 \u21d2 equals h) holds. (b) q_*O(\u22127)=O(\u22124)^2 is forced for every deg-2 q by degree \u22128 plus vanishing after \u2297O(3), so the model z=x^2 is cosmetic. (c) Grauert nonreduced failure is blocked by the reduced-base hypothesis (FND-0131). (d) No Brauer obstruction to Zariski-local triviality of P of a locally free rank-3 sheaf. (e) Stack/coarse, integral/rational coefficients, BM-versus-ordinary degree, Poincar\u00e9/Tate twists, Gysin/K\u00fcnneth, SS differentials, Aut invariants/coinvariants, semisimplification, predicted motives, pure-Tate\u2192tautological upgrades, and omitted stable pairs do not arise: the lemma makes no cohomological claim. Residual scope only: discharges the balanced B_4/P^3 piece for C66-COMP-COMP; does not settle image components in M_{6,6} or RED-0001.",
+  "subproblem_id": "C66-COMP-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B be a reduced locally Noetherian scheme over a characteristic-zero field carrying a smooth genus-six degree-four Casnati\u2013Ekedahl family whose relations bundle is fibrewise balanced, F_b \u2245 O(4) \u2295 O(5), and which satisfies the weak CE relative-canonical normalization used in ATT-0066. For the canonical quotient W_5 put L=W_5\u2297\u03c9^{-1}. Then h^0(C_b,L_b)=3 for every geometric b in B; equivalently, the jump stratum B_4={b:h^0(L_b)=4} is empty. Consequently the closed degree-six Abel\u2013Jacobi incidence Hilb^6(C/B)\u00d7_{Pic^6(C/B)}B is a Zariski-locally trivial P^2-bundle over B. Thus a proposed balanced component decomposition containing a nonempty B_4/P^3 piece is false.",
+  "verdict": "confirmed"
+}

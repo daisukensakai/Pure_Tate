@@ -1,0 +1,117 @@
+{
+  "argv": [
+    "grok",
+    "-p",
+    "<prompt-sha256:58517aa46f29ed6b2ff66a08840bbe25a46a002e0df5d5fd4dd7c6185d24ed37>",
+    "--output-format",
+    "streaming-json",
+    "--max-turns",
+    "4",
+    "--permission-mode",
+    "dontAsk",
+    "--always-approve",
+    "--tools",
+    "read_file",
+    "--disallowed-tools",
+    "run_terminal_command,write,web_fetch,web_search,open_page",
+    "--disable-web-search",
+    "--model",
+    "grok-4.6"
+  ],
+  "elapsed_seconds": 8.52,
+  "executed_at": "2026-08-13T11:43:10.711075+00:00",
+  "model": "grok-4.6",
+  "probe": "read_tool",
+  "prompt_sha256": "58517aa46f29ed6b2ff66a08840bbe25a46a002e0df5d5fd4dd7c6185d24ed37",
+  "returncode": 0,
+  "schema_version": 1,
+  "stderr_path": "CLI_test/results/grok_streaming/20260813T114252Z/read_tool.stderr.txt",
+  "stderr_sha256": "387be0f3ddb2458758b037c7e1dab250e2c17ecdfcd469dc999a86183c1ebf20",
+  "stdout_path": "CLI_test/results/grok_streaming/20260813T114252Z/read_tool.stdout.jsonl",
+  "stdout_sha256": "755a4891bdee41ab224daabf4703a0d56739d584efb369bc49fc47a4dcf89842",
+  "summary": {
+    "event_key_shapes": {
+      "commands,tools,type": 4,
+      "content,kind,locations,rawInput,status,title,toolCallId,toolName,type": 1,
+      "content,locations,rawOutput,status,toolCallId,type": 2,
+      "data,type": 110,
+      "modelUsage,num_turns,requestId,sessionId,stopReason,total_cost_usd,total_cost_usd_ticks,type,usage": 1,
+      "signature,type,usage": 2
+    },
+    "event_type_counts": {
+      "available_commands": 4,
+      "end": 1,
+      "text": 59,
+      "thought": 51,
+      "tool_call": 1,
+      "tool_call_update": 2,
+      "usage": 2
+    },
+    "first_event": {
+      "commands": [
+        "compact",
+        "always-approve",
+        "context",
+        "session-info",
+        "feedback",
+        "goal",
+        "best-of-n",
+        "check-work",
+        "create-skill",
+        "docx",
+        "user:help",
+        "user:imagine",
+        "pptx",
+        "xlsx",
+        "build-with-ai",
+        "code-review",
+        "create-workflow",
+        "design",
+        "execute-plan",
+        "implement",
+        "pr-babysit",
+        "resume-claude",
+        "resume-codex",
+        "resume-cursor",
+        "review",
+        "skill-design-principles"
+      ],
+      "tools": [
+        "read_file",
+        "search_tool",
+        "use_tool"
+      ],
+      "type": "available_commands"
+    },
+    "invalid_lines": [],
+    "last_event": {
+      "modelUsage": {
+        "grok-4.6-build": {
+          "cacheCreationInputTokens": 0,
+          "cacheReadInputTokens": 768,
+          "costUSD": 0.018872,
+          "inputTokens": 8113,
+          "modelCalls": 2,
+          "outputTokens": 377
+        }
+      },
+      "num_turns": 2,
+      "requestId": "4743b468-5af1-4b43-9670-b597126ed254",
+      "sessionId": "019ffaee-d114-7c21-9aab-fbe5e1cab866",
+      "stopReason": "end_turn",
+      "total_cost_usd": 0.018872,
+      "total_cost_usd_ticks": 188720000,
+      "type": "end",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 768,
+        "input_tokens": 8113,
+        "output_tokens": 377,
+        "reasoning_tokens": 297,
+        "total_tokens": 9258
+      }
+    },
+    "line_count": 120,
+    "parsed_event_count": 120
+  }
+}

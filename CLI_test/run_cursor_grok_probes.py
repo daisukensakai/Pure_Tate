@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run bounded, read-only Cursor Agent CLI probes pinned to Cursor Grok 4.5."""
+"""Run bounded, read-only Cursor Agent CLI probes pinned to Cursor Grok 4.6."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ from typing import Any, Dict, List, Optional, Sequence
 ROOT = Path(__file__).resolve().parent.parent
 LAB = ROOT / "CLI_test"
 RESULTS_ROOT = LAB / "results" / "cursor_grok"
-MODEL = "cursor-grok-4.5-high"
+MODEL = "cursor-grok-4.6-high"
 TIMEOUT_SECONDS = 300
 
 
@@ -272,6 +272,28 @@ def run_probe(
     stderr_path.write_text(stderr, encoding="utf-8")
 
     summary = event_summary(stdout, output_format=output_format)
+    expected_marker = {
+        "basic": '"probe":"basic"',
+        "read_tool": "PURE_TATE_GROK_STREAM_MARKER_20260731",
+        "json_format": '"probe":"json_format"',
+    }[name]
+    result_prefix = str(summary.get("result_prefix") or "")
+    gate_errors: List[str] = []
+    if completed.returncode != 0:
+        gate_errors.append("nonzero exit")
+    if summary.get("invalid_lines"):
+        gate_errors.append("invalid stream-json lines")
+    if output_format == "json" and not summary.get("parsed"):
+        gate_errors.append("unparseable JSON envelope")
+    if output_format == "stream-json":
+        init_model = str(summary.get("init_model") or "")
+        if "Grok 4.6" not in init_model:
+            gate_errors.append("init model is not Cursor Grok 4.6")
+        if summary.get("result_is_error") is not False:
+            gate_errors.append("result event is missing or errored")
+    if expected_marker not in result_prefix:
+        gate_errors.append("expected result marker missing")
+
     metadata = {
         "schema_version": 1,
         "probe": name,
@@ -289,6 +311,8 @@ def run_probe(
         "stderr_path": str(stderr_path.relative_to(ROOT)),
         "stderr_sha256": sha256_bytes(completed.stderr),
         "summary": summary,
+        "passed": not gate_errors,
+        "gate_errors": gate_errors,
     }
     metadata_path = run_dir / (name + ".metadata.json")
     metadata_path.write_text(
@@ -311,7 +335,7 @@ def select_probes(only: Optional[Sequence[str]]) -> List[Dict[str, Any]]:
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Probe Cursor Agent CLI with Cursor Grok 4.5 (read-only)."
+        description="Probe Cursor Agent CLI with Cursor Grok 4.6 (read-only)."
     )
     parser.add_argument(
         "--model",
@@ -364,7 +388,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         encoding="utf-8",
     )
     print(json.dumps(manifest, indent=2, sort_keys=True))
-    return 0 if all(item["returncode"] == 0 for item in results) else 1
+    return 0 if all(item["passed"] for item in results) else 1
 
 
 if __name__ == "__main__":

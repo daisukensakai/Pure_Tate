@@ -1,0 +1,103 @@
+{
+  "agent_argv0": [
+    "/Users/ken/.local/bin/cursor-agent"
+  ],
+  "argv": [
+    "/Users/ken/.local/bin/cursor-agent",
+    "-p",
+    "--trust",
+    "--mode",
+    "ask",
+    "--output-format",
+    "stream-json",
+    "--model",
+    "cursor-grok-4.6-high",
+    "--workspace",
+    "/Users/ken/Desktop/Work/exploratory/Pure_Tate",
+    "<prompt-sha256:c16f6a17b9500dabdec96f252f4d4ac7d9e0e322efb984ef209e068f4649c58c>"
+  ],
+  "elapsed_seconds": 20.09,
+  "executed_at": "2026-08-13T10:56:20.249444+00:00",
+  "gate_errors": [],
+  "mode": "ask",
+  "model_requested": "cursor-grok-4.6-high",
+  "output_format": "stream-json",
+  "passed": true,
+  "probe": "read_tool",
+  "prompt_sha256": "c16f6a17b9500dabdec96f252f4d4ac7d9e0e322efb984ef209e068f4649c58c",
+  "returncode": 0,
+  "schema_version": 1,
+  "stderr_path": "CLI_test/results/cursor_grok/20260813T105600Z/read_tool.stderr.txt",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_path": "CLI_test/results/cursor_grok/20260813T105600Z/read_tool.stdout.jsonl",
+  "stdout_sha256": "ccf79cc37e4fb3232599502700e25119c9c45a90f92436fbb8d9131a4ddac1f6",
+  "summary": {
+    "event_key_shapes": {
+      "apiKeySource,cwd,model,permissionMode,session_id,subtype,type": 1,
+      "call_id,model_call_id,session_id,subtype,timestamp_ms,tool_call,type": 2,
+      "duration_api_ms,duration_ms,is_error,request_id,result,session_id,subtype,type,usage": 1,
+      "message,model_call_id,session_id,timestamp_ms,type": 1,
+      "message,session_id,type": 2,
+      "session_id,subtype,text,timestamp_ms,type": 15,
+      "session_id,subtype,timestamp_ms,type": 2
+    },
+    "event_subtype_counts": {
+      "assistant/<none>": 2,
+      "result/success": 1,
+      "system/init": 1,
+      "thinking/completed": 2,
+      "thinking/delta": 15,
+      "tool_call/completed": 1,
+      "tool_call/started": 1,
+      "user/<none>": 1
+    },
+    "event_type_counts": {
+      "assistant": 2,
+      "result": 1,
+      "system": 1,
+      "thinking": 17,
+      "tool_call": 2,
+      "user": 1
+    },
+    "first_event": {
+      "apiKeySource": "env",
+      "cwd": "/Users/ken/Desktop/Work/exploratory/Pure_Tate",
+      "model": "Cursor Grok 4.6 High",
+      "permissionMode": "default",
+      "session_id": "06a93a27-55ca-406b-bbf8-c65c5005f633",
+      "subtype": "init",
+      "type": "system"
+    },
+    "format": "stream-json",
+    "init_model": "Cursor Grok 4.6 High",
+    "invalid_lines": [],
+    "last_event": {
+      "duration_api_ms": 14318,
+      "duration_ms": 14318,
+      "is_error": false,
+      "request_id": "2aa120c7-1253-4a0d-8ec6-8f368c7d3ea9",
+      "result": "I'll read `CLI_test/read_fixture.txt` and then return the JSON object you specified.{\"probe\":\"read_tool\",\"ok\":true,\"marker\":\"PURE_TATE_GROK_STREAM_MARKER_20260731\",\"latex\":\"The mathematical payload is: \\\\Gamma, \\\\omega_C, and W_{-16}H^{BM}_{16}.\"}",
+      "session_id": "06a93a27-55ca-406b-bbf8-c65c5005f633",
+      "subtype": "success",
+      "type": "result",
+      "usage": {
+        "cacheReadTokens": 11904,
+        "cacheWriteTokens": 0,
+        "inputTokens": 15864,
+        "outputTokens": 271
+      }
+    },
+    "line_count": 24,
+    "parsed_event_count": 24,
+    "result_is_error": false,
+    "result_prefix": "I'll read `CLI_test/read_fixture.txt` and then return the JSON object you specified.{\"probe\":\"read_tool\",\"ok\":true,\"marker\":\"PURE_TATE_GROK_STREAM_MARKER_20260731\",\"latex\":\"The mathematical payload is: \\\\Gamma, \\\\omega_C, and W_{-16}H^{BM}_",
+    "result_subtype": "success",
+    "tool_call_keys": [
+      "completedAtMs",
+      "hookAdditionalContexts",
+      "readToolCall",
+      "startedAtMs",
+      "toolCallId"
+    ]
+  }
+}

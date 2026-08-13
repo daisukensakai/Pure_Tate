@@ -1,0 +1,85 @@
+{
+  "argv": [
+    "grok",
+    "-p",
+    "<prompt-sha256:58517aa46f29ed6b2ff66a08840bbe25a46a002e0df5d5fd4dd7c6185d24ed37>",
+    "--output-format",
+    "streaming-json",
+    "--max-turns",
+    "4",
+    "--permission-mode",
+    "dontAsk",
+    "--always-approve",
+    "--tools",
+    "read_file",
+    "--disallowed-tools",
+    "run_terminal_command,write,web_fetch,web_search,open_page",
+    "--disable-web-search",
+    "--model",
+    "grok-4.6"
+  ],
+  "elapsed_seconds": 2.908,
+  "executed_at": "2026-08-13T11:08:52.605531+00:00",
+  "model": "grok-4.6",
+  "probe": "read_tool",
+  "prompt_sha256": "58517aa46f29ed6b2ff66a08840bbe25a46a002e0df5d5fd4dd7c6185d24ed37",
+  "returncode": 1,
+  "schema_version": 1,
+  "stderr_path": "CLI_test/results/grok_streaming/20260813T110845Z/read_tool.stderr.txt",
+  "stderr_sha256": "562b5b0b69ca68fdbe918cf561dbf1a2df1f3a0a112b1d1f2d0f39ec4715e529",
+  "stdout_path": "CLI_test/results/grok_streaming/20260813T110845Z/read_tool.stdout.jsonl",
+  "stdout_sha256": "4d80858053e613ecc6492338fed992c2f726ac6df87c567f8312d595bb0b14f2",
+  "summary": {
+    "event_key_shapes": {
+      "commands,tools,type": 2,
+      "message,type": 1
+    },
+    "event_type_counts": {
+      "available_commands": 2,
+      "error": 1
+    },
+    "first_event": {
+      "commands": [
+        "compact",
+        "always-approve",
+        "context",
+        "session-info",
+        "feedback",
+        "goal",
+        "best-of-n",
+        "check-work",
+        "create-skill",
+        "docx",
+        "user:help",
+        "user:imagine",
+        "pptx",
+        "xlsx",
+        "build-with-ai",
+        "code-review",
+        "create-workflow",
+        "design",
+        "execute-plan",
+        "implement",
+        "pr-babysit",
+        "resume-claude",
+        "resume-codex",
+        "resume-cursor",
+        "review",
+        "skill-design-principles"
+      ],
+      "tools": [
+        "read_file",
+        "search_tool",
+        "use_tool"
+      ],
+      "type": "available_commands"
+    },
+    "invalid_lines": [],
+    "last_event": {
+      "message": "Internal error: {\n  \"message\": \"API error (status 402 Payment Required): Grok Build usage balance exhausted\",\n  \"http_status\": 402\n}",
+      "type": "error"
+    },
+    "line_count": 3,
+    "parsed_event_count": 3
+  }
+}

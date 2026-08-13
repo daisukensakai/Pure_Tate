@@ -365,7 +365,7 @@ def build_grok(prompt: str) -> List[str]:
         "--disallowed-tools",
         "run_terminal_command,write,open_page",
         "-m",
-        "grok-4.5",
+        "grok-4.6",
     ]
 
 

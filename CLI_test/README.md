@@ -3,9 +3,9 @@
 This directory is an isolated compatibility lab for model CLIs. Nothing here is
 loaded by the Pure Tate harness.
 
-## Grok 4.5 worker pool (1 identity, ≤4 turns)
+## Grok 4.6 worker pool (1 identity, ≤4 turns)
 
-Hard-capped Grok 4.5 helpers that parent agents can dispatch via MCP:
+Hard-capped Grok 4.6 helpers that parent agents can dispatch via MCP:
 
 | File | Role |
 |------|------|
@@ -55,11 +55,12 @@ Results land under `results/effort/`. See `EFFORT_FINDINGS.md`.
 use web search when tools are enabled (math-style optional use included). See
 `WEB_ACCESS_FINDINGS.md` and `results/web_access/`.
 
-## Cursor Grok 4.5 (Agent CLI fallback lab)
+## Cursor Grok 4.6 (Agent CLI fallback lab)
 
-`run_cursor_grok_probes.py` bills **Cursor** Grok 4.5 through the headless
+`run_cursor_grok_probes.py` bills **Cursor** Grok 4.6 through the headless
 Agent CLI (`cursor-agent`) when the xAI `grok` CLI is out of credits. Requires
-`CURSOR_API_KEY`. See `CURSOR_GROK_FINDINGS.md`.
+`CURSOR_API_KEY`. See `GROK_46_UPGRADE_FINDINGS.md`; the original 4.5 lab is
+retained in `CURSOR_GROK_FINDINGS.md` as historical evidence.
 
 ```bash
 zsh -lic 'python3 CLI_test/run_cursor_grok_probes.py'
@@ -96,7 +97,11 @@ Run:
 
 ```bash
 python3 CLI_test/run_grok_streaming_tests.py
+python3 CLI_test/run_grok_streaming_tests.py --model grok-4.5
 ```
+
+Runs are preserved under `results/grok_streaming/<timestamp>/`; the model
+override allows comparison with the retained xAI 4.5 model.
 
 ## Qwen hang diagnosis
 

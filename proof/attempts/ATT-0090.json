@@ -1,0 +1,136 @@
+{
+  "argument_markdown": "## Argument\n\n### 0. Verified inputs and established facts\n\nATT-0066, dual-confirmed by REV-0110 and REV-0116, supplies: deg L=6, \u03c7(L)=1, h^0(L)=1+h^0(M) with M=\u03c9^{\u22972}\u2297W_5^\u2228 of degree 4 (CLM-0066-1); under the weak CE normalization, L\u2245\u03c9(-D) and h^0(L)\u2208{3,4} (CLM-0066-2); the closed Abel\u2013Jacobi incidence I=Hilb^6\u00d7_{Pic^6}B with I\u00d7_B B_k \u2245 P((\u03c0_*L|_{B_k})^\u2228) on each reduced constant-h^0 stratum (CLM-0066-4, CLM-0066-5); and the stack-level finite \u00e9tale S_6-torsor of ordered distinct support over the reduced-support open, with tilde I=Z_ev on Conf_6 (CLM-0066-6).\n\nEstablished working-context facts (primary WORKING-C66-COMP-COMP) used directly: on the balanced locus h^0(O(D))=2 and h^0(L)=3 with no fibrewise jumping (hyperelliptic degree-four covers cannot have F\u2245O(4)\u2295O(5)); over a reduced balanced base the Abel\u2013Jacobi incidence is a Zariski-locally trivial P^2-bundle; for each p one has h^0(L(-2p))\u22651, so every fibre |L_b| contains a nonreduced divisor; if a reduced member exists then the reduced-support locus is a nonempty proper open in irreducible |L_b|\u2245P^2; base point of |L| at p (when h^0(L)=3) iff h^0(O(D+p))=3.\n\nPacket FND-0130 (corroborated): a base point of L=\u03c9(-D) with h^0(D)=2 forces a smooth plane quintic whose tetragonal pencil is projection from the base point and has unbalanced CE relations, hence lies outside the balanced locus.\n\n### 1. Base-point-freeness (proved)\n\nFix a geometric balanced fibre with the weak normalization, so L\u2245\u03c9(-D) and h^0(D)=2, h^0(L)=3. Suppose p is a base point of |L|. The established criterion gives h^0(O(D+p))=3. Then |D+p| is a g^2_5. A g^2_5 with a base point would yield a g^2_4 and Clifford equality, forcing hyperellipticity; but a hyperelliptic genus-6 curve admits no base-point-free pencil of degree 4 with h^0=2, so |D+p| is base-point-free. Degree 5 is prime, so the map C\u2192P^2 is birational onto a plane quintic of arithmetic genus 6, hence C is a smooth plane quintic, D\u2245H-p, and gamma is projection from p. By FND-0130 this cover has unbalanced CE relations and is excluded from the balanced locus, a contradiction. (The h^0(D)=3 branch cannot occur on a balanced fibre by the established hyperelliptic exclusion; separately, a base point there would demand a g^3_5, contradicting Clifford.) Therefore |L| is base-point-free on every balanced geometric fibre.\n\n### 2. Reduced member via characteristic-zero Bertini (proved)\n\nBase-point-freeness of the complete g^2_6 |L| defines a morphism \u03c6_L:C\u2192P^2 whose image spans P^2: if the image lay in a line then H^0(O_{P^2}(1))\u2192H^0(L) would factor through a 2-dimensional space, contradicting h^0(L)=3. In characteristic zero, Bertini\u2019s theorem for a nondegenerate curve in P^2 asserts that a general hyperplane meets the image transversely in reduced points; pulling back, a general member of |L| is a reduced effective divisor of degree 6. Equivalently, the locus of hyperplanes tangent to \u03c6_L(C) is a proper closed subset of the dual P^2 (the dual curve), so its complement is nonempty and Zariski open.\n\n### 3. Fibrewise reduced/nonreduced decomposition (proved)\n\nThus |L_b| contains a reduced member. Combined with the established jet-kernel fact that every fibre also contains a nonreduced member, the reduced-support open U_b is a nonempty proper open subset of irreducible |L_b|\u2245P^2, hence Zariski dense, and its complement is a nonempty proper closed subset. This does not use \u03c7(L)=1 beyond the already-established nonemptiness of the full Abel\u2013Jacobi fibre; the reduced-support cut is discharged by base-point-freeness plus Bertini.\n\n### 4. Ordered Conf_6 incidence (proved)\n\nBy ATT-0066 (H4)/CLM-0066-6, ordering six distinct support points realizes a finite \u00e9tale S_6-torsor over the reduced-support open. Since U_b is nonempty of dimension 2, the ordered Conf_6 incidence over b is nonempty of pure dimension 2.\n\n### 5. Component-decomposition test\n\nProposed balanced residual decompositions that posit an empty reduced-support piece, or an empty ordered Conf_6 piece, on some balanced geometric fibre are therefore false. The correct fibrewise cut of the residual P^2 is into a dense open reduced-support stratum and a nonempty proper closed nonreduced stratum; both are present on every balanced fibre. No promotion of 15+2=17 to a pure-codimension-4 image in M_{6,6} is made (blocked by the working-context constraints on open subsets of P^2-bundles and on constructible-image purity).\n\n### Separation of status\n\nProved: base-point-freeness on balanced normalized fibres; nonempty dense reduced-support open in every |L_b|; nonempty pure-dimension-2 ordered Conf_6 incidence on every balanced geometric fibre; falsity of empty-reduced-support proposed decompositions.\n\nSource-backed: ATT-0066 with REV-0110 and REV-0116; FND-0130; FND-0105 (normalization as hypothesis); SRC-0004 degrees as used by ATT-0066.\n\nComputational hypotheses: none.\n\nGaps retained: relative density over a general base; monodromy image in S_6; components of B; all image/codimension/closure/stabilizer/Gysin data in M_{6,6}; Tate support and RED-0001.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0090-1",
+      "justification": "A base point forces h^0(D+p)=3. With the established balanced value h^0(D)=2 this yields a base-point-free birational g^2_5, hence a smooth plane quintic with gamma the projection from p. FND-0130 excludes all such covers from the balanced locus. The argument does not infer base-point-freeness from h^0(L)=3 alone.",
+      "statement": "On every geometric fibre of a balanced genus-6 degree-4 CE family satisfying the weak CE normalization of ATT-0066, the residual system |L| with L=W_5\u2297\u03c9^{-1}\u2245\u03c9(-D) is base-point-free.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0090-2",
+      "justification": "CLM-0090-1 plus characteristic-zero Bertini for the spanning morphism \u03c6_L:C\u2192P^2 produce a reduced member. The established 2-jet kernel fact supplies a nonreduced member. A nonempty proper open in irreducible P^2 is dense and not closed. This route deliberately avoids the blocked inference from \u03c7(L)=1 alone.",
+      "statement": "On every such fibre, the reduced-support open U_b\u2282|L_b|\u2245P^2 is a nonempty Zariski-dense open, and the nonreduced locus is a nonempty proper closed subset.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0090-3",
+      "justification": "ATT-0066/CLM-0066-6 realizes Conf_6\u2192U as a finite \u00e9tale S_6-torsor at stack level; CLM-0090-2 makes U_b nonempty of dimension 2, and finite \u00e9tale maps preserve dimension.",
+      "statement": "On every such fibre the ordered Conf_6 incidence is nonempty of pure dimension 2.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0090-4",
+      "justification": "Immediate from CLM-0090-2 and CLM-0090-3. No image-dimension or purity claim in M_{6,6} is asserted.",
+      "statement": "Every proposed balanced residual component decomposition that assigns an empty reduced-support or empty ordered Conf_6 piece to some balanced geometric fibre is false.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "cursor-grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [],
+  "id": "ATT-0090",
+  "lane": "computation",
+  "methods_used": [
+    "verified-dependency-h0-abel-jacobi-package",
+    "weak-ce-relative-canonical-normalization-hypothesis",
+    "base-point-criterion-and-plane-quintic-exclusion",
+    "characteristic-zero-bertini-on-spanning-g26",
+    "jet-kernel-nonreduced-witness",
+    "stack-level-ordered-distinct-support-torsor",
+    "component-decomposition-negative-test"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Closes the fibrewise reduced-support/Conf_6 nonemptiness obligation left open after the dual-confirmed H0 stratification and the established balanced constancy of h^0(L)=3, by a base-point-freeness-plus-Bertini argument that does not use the blocked \u03c7(L)=1 route.",
+    "Gives an explicit negative test of proposed residual component decompositions that posit empty reduced-support pieces on balanced fibres, while refusing any pure-codimension-4 image claim in M_{6,6}."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "a6509227aaf37308108d64c3743394cbb21d892f72d71fb7983f0cd9f537172c",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-H0 dependency; CLM-0066-1 through CLM-0066-6 used within reduced-base, normalization, and Conf_6 scope."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0066."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0066, including the reducedness caveat for Grauert."
+    },
+    {
+      "id": "FND-0130",
+      "kind": "adjudicated_finding",
+      "role": "Plane-quintic tetragonal pencils are CE-unbalanced and cannot witness base points on the balanced locus."
+    },
+    {
+      "id": "FND-0105",
+      "kind": "adjudicated_finding",
+      "role": "Weak CE relative-canonical normalization retained as an explicit hypothesis."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "role": "CE degree convention underlying ATT-0066."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0130",
+    "FND-0105",
+    "FND-0107",
+    "FND-0083"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-COMP-COMP",
+  "summary": "Tests proposed balanced residual component decompositions at the reduced-support cut. Under the dual-confirmed H0 package plus weak normalization, every balanced geometric fibre has base-point-free |L|\u2245P^2; characteristic-zero Bertini supplies a reduced six-point member, so the reduced-support open is nonempty and dense and the ordered Conf_6 incidence is nonempty of dimension 2. Proposed decompositions with an empty reduced-support piece on some balanced fibre are therefore false. No M_{6,6} image or Tate claim is made.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-009",
+  "theorem_scope": {
+    "base": "reduced locally Noetherian schemes over a characteristic-zero field",
+    "dependency_scope": "ATT-0066 used exactly as dual-confirmed by REV-0110 and REV-0116; constancy h^0(L)=3 on the balanced locus is taken from the established working-context facts that already exclude hyperelliptic fibres from balancedness",
+    "exclusions": "nonreduced bases; relative (total-space) density of reduced support over a general base; S_6 monodromy image; irreducibility of B; image dimension/codimension/closure/stabilizers/lci/Gysin in M_{6,6}; unbalanced CE strata; all Hodge/Tate conclusions and RED-0001",
+    "g": 6,
+    "generality": "fibrewise balanced tetragonal Casnati\u2013Ekedahl families with the ATT-0066 canonical filtered quotient W_5 and the weak CE relative-canonical normalization",
+    "n": 6
+  },
+  "theorem_statement": "Let k be a field of characteristic zero and let B be a reduced locally Noetherian k-scheme carrying a smooth proper curve family pi:C->B with geometrically connected genus-6 fibres together with a finite flat degree-four map gamma:C->P^1_B whose Casnati\u2013Ekedahl relations bundle is fibrewise balanced, F_b \u2245 O(4)\u2295O(5). Use the canonical filtered quotient W_5 of ATT-0066 (dual-confirmed by REV-0110 and REV-0116) and put L=W_5\u2297\u03c9_{C/B}^{-1}. Assume the weak CE relative-canonical normalization of ATT-0066/FND-0105 fibrewise, so L_b \u2245 \u03c9_{C_b}(-D_b) with D_b a fibre of gamma_b. Then on every geometric fibre: (R1) |L_b| is a base-point-free complete g^2_6 (in particular h^0(L_b)=3); (R2) writing |L_b|\u2245P^2 for the fibre of the closed Abel\u2013Jacobi incidence I=Hilb^6(C/B)\u00d7_{Pic^6(C/B)}B, the reduced-support open U_b\u2282|L_b| of divisors with six pairwise-distinct points is a nonempty Zariski-dense open, and its complement (the nonreduced locus) is a nonempty proper closed subset; (R3) the ordered Conf_6 incidence over b is therefore nonempty of pure dimension 2. Consequently every proposed balanced residual component decomposition that assigns an empty reduced-support (or empty ordered Conf_6) piece to some balanced geometric fibre is false. No claim is made about image dimension, purity, or codimension in M_{6,6}, about S_6 monodromy, or about RED-0001."
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "TASK-V-ATT-0088-P2",
+    "phase": "review",
+    "role": "independent-adversarial-reviewer",
+    "target_attempt_id": "ATT-0088",
+    "target_task_id": "TASK-C66-M-008",
+    "review_pass": 2,
+    "context_revision": 2,
+    "packet_id": "C66-001-v4",
+    "packet_sha256": "a6509227aaf37308108d64c3743394cbb21d892f72d71fb7983f0cd9f537172c",
+    "target": {
+      "chow_codimension": 13,
+      "compact_cohomology_degree": 16,
+      "compact_tate_type": "Q(-8)",
+      "dimension": 21,
+      "g": 6,
+      "n": 6,
+      "open_bm_degree": 16,
+      "open_bm_tate_type": "Q(8)",
+      "open_bm_weight": -16,
+      "ordinary_cohomology_degree": 26,
+      "ordinary_tate_type": "Q(-13)",
+      "ordinary_weight": 26,
+      "poincare_twist": 21
+    },
+    "prover_engine": "claude",
+    "excluded_reviewer_engines": [
+      "claude",
+      "codex"
+    ],
+    "prompt": "prompts/ADVERSARY.md",
+    "input_attempt": "proof/attempts/ATT-0088.json",
+    "input_packet": "proof/packets/generated/C66-001-v4.md",
+    "output": "proof/reviews/REV-0142.json",
+    "status": "ready",
+    "created_on": "2026-08-13",
+    "input_artifacts": [],
+    "campaign_id": "C66-001",
+    "campaign_revision": 4,
+    "subproblem_id": "C66-COMP-RANK",
+    "lane": "computation",
+    "theorem_statement": "Let k be an algebraically closed field of characteristic zero, S a locally Noetherian k-scheme, pi:C->S smooth and proper with geometrically connected genus-six fibres, s:P->S a P1-bundle, gamma:C->P finite flat of degree four with Tschirnhausen bundle E (gamma_*O_C = O_P direct-sum E^vee, E of rank three), p:X=P_P(E^vee)->P the associated P2-bundle in the packet convention p_*O_X(1)=E, i:C->X the Casnati-Ekedahl embedding, and F a rank-two bundle on P. Assume: (CE) the ideal of i has the standard degree-four CE resolution 0->O_X(-4) tensor p^*det(F)->O_X(-2) tensor p^*F->I_C->0; (BAL) F restricted to every geometric fibre of s is O(4) direct-sum O(5); (N) on every geometric fibre, O_X(1)|_C is isomorphic to omega_{C/P1} tensor gamma^*A for some A in Pic(P1). Put W=i^*(O_X(2) tensor p^*F^vee) with the canonical filtration 0->W_4->W->W_5->0 induced by the O(5)-subbundle of F, L=W_5 tensor omega_{C/S}^{-1}, D=gamma^*O_P(1); O_P(1), hence W_4,W_5,L,D, is well defined only up to twist by a line bundle pulled back from S, and every assertion below is invariant under such a twist. THEN: (I) On every geometric fibre: (I.1) A is trivial, W_5=omega_C^{tensor 2}(-D), L=omega_C(-D), deg(L)=6, chi(L)=1, deg(W_4)=20, deg(W_5)=16; (I.2) C is not hyperelliptic; (I.3) h^0(O_C(D))=2, h^0(L)=3, h^1(L)=2, so |L| is a projective plane, and every summand of E has degree at least two; (I.4) the fixed part of |L| has degree at most one, hence is reduced, and the moving part is base-point-free with three sections; (I.5) the non-reduced locus Delta in |L| is closed of dimension exactly one, so the reduced-support locus |L|^red = |L| minus Delta is a nonempty dense open subset of dimension two and is not closed in |L|; (I.6) the ordered incidence {(p_1,...,p_6) in C^6 pairwise distinct with p_1+...+p_6 in |L|} is nonempty, smooth of pure dimension two, and a finite etale S_6-torsor of degree 720 over |L|^red. (II) Let B=Conf_6(C/S) be the complement of the big diagonal in the six-fold fibre product, with its six tautological pairwise-disjoint sections, universal divisor Gamma, evaluation phi:pi_*W->pi_*(W|Gamma), N=omega_{C/S} tensor W_5^vee(Gamma), a_N:B->Pic^0_{C_B/B} and identity section e. Then pi_*W and pi_*(W|Gamma) are locally free of ranks 26 and 12, every geometric fibre of phi has rank 11 or 12, and: (II.1) I_j(phi)=O_B for every j<=11, while I_12(phi)=Fit_0(coker phi)=a_N^*I_e cuts out the closed subscheme Z=a_N^{-1}(e(B)), whose formation commutes with arbitrary locally Noetherian base change; (II.2) the naive maximal-minor expectation for a 26-to-12 map is codimension 15 and the filtered 11-to-6 expectation is codimension 6, whereas the geometric fibres of Z->S have pure dimension two, i.e. codimension four in the fibres of B->S, the excess being 6-4=2=h^1(L). (III) Assume in addition S reduced. Then pi_*L is locally free of rank three, AJ=P_S(pi_*L) is a Zariski-locally trivial P2-bundle carrying a universal relative degree-six divisor, its etale locus U (the reduced-support open) is S-smooth of pure relative dimension two and surjective onto S, and the S_6-torsor of orderings of the universal divisor over U is canonically isomorphic to Z. Consequently: (III.1) Z->S is smooth and surjective of pure relative dimension two; if moreover S is of finite type over k, every irreducible component of Z and of U dominates an irreducible component of S and has dimension equal to the dimension of that component plus two; (III.2) the closed immersion Z->B is a regular immersion of pure codimension four, its conormal sheaf I_Z/I_Z^2 is locally free of rank four, and the conormal sequence 0->I_Z/I_Z^2->Omega_{B/S}|_Z->Omega_{Z/S}->0 is exact and locally split; (III.3) with delta:T_{B/S}=pi_*O_Gamma(Gamma)->R^1pi_*O_C the connecting map of 0->O_C->O_C(Gamma)->O_Gamma(Gamma)->0, the sequence 0->T_{Z/S}->T_{B/S}|_Z->(R^1pi_*O_C)|_Z->Exc->0 is exact on Z with Exc=coker(delta)|_Z canonically isomorphic to (R^1pi_*L) tensor M_univ, locally free of rank two, where M_univ is the tautological line bundle on Z determined by O(Gamma)=L tensor pi^*M_univ; dually 0->Exc^vee->(pi_*omega_{C/S})|_Z->I_Z/I_Z^2->0 is exact with Exc^vee = pi_*(omega_{C/S} tensor L^vee) tensor M_univ^{-1}, whose fibres are the two-dimensional spaces H^0(C,O_C(D)) of the tetragonal pencils. No assertion is made about images, closure, components, stabilizers, purity, codimension or Gysin maps in M_{6,6}, about unbalanced splitting types or h^0-jumping strata, about nonreduced bases in Part III, or about Hodge, weight or Tate type.",
+    "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+    "selected_engine": "grok"
+  }
+]

@@ -1,0 +1,58 @@
+{
+  "executed_at": "2026-08-13T11:07:06.100047+00:00",
+  "model_requested": "cursor-grok-4.6-high",
+  "prompt_sha256": "806ac317a5846663b4f0d34c529f0bbd61793056355ab64ead1999d9c3ce6ed2",
+  "run_dir": "CLI_test/results/cursor_web/20260813T110649Z",
+  "schema_version": 1,
+  "success_marker": "Example Domain",
+  "url": "https://example.com",
+  "variants": [
+    {
+      "argv": [
+        "/Users/ken/.local/bin/cursor-agent",
+        "-p",
+        "--trust",
+        "--mode",
+        "ask",
+        "--force",
+        "--output-format",
+        "json",
+        "--model",
+        "cursor-grok-4.6-high",
+        "--workspace",
+        "/Users/ken/Desktop/Work/exploratory/Pure_Tate/CLI_test",
+        "<prompt-sha256:806ac317a5846663b4f0d34c529f0bbd61793056355ab64ead1999d9c3ce6ed2>"
+      ],
+      "elapsed_seconds": 16.994,
+      "flags": [
+        "--trust",
+        "--mode",
+        "ask",
+        "--force"
+      ],
+      "is_error": false,
+      "model_requested": "cursor-grok-4.6-high",
+      "note": "ask + force auto-approve",
+      "parse_error": null,
+      "passed": true,
+      "returncode": 0,
+      "schema_version": 1,
+      "stderr_path": "CLI_test/results/cursor_web/20260813T110649Z/B_ask_force.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "CLI_test/results/cursor_web/20260813T110649Z/B_ask_force.stdout.json",
+      "stdout_sha256": "4338f478eae9d23d451151e002825195586517e07129c2ec5ac89415973d9f68",
+      "variant": "B_ask_force",
+      "verdict": {
+        "blocked": false,
+        "fetch_failed_token": false,
+        "has_success_marker": true,
+        "mentions_example_com": false,
+        "result_prefix": "I'll fetch the live page now and quote the exact title or main heading from the response.**Example Domain**",
+        "user_rejected": false
+      }
+    }
+  ],
+  "winners": [
+    "B_ask_force"
+  ]
+}

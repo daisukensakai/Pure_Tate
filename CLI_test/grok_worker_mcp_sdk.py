@@ -68,7 +68,7 @@ def main() -> int:
     mcp = MCPServer(
         name="grok-workers",
         instructions=(
-            "Hard-capped Grok 4.5 worker pool. Max 1 concurrent identity and 4 "
+            "Hard-capped Grok 4.6 worker pool. Max 1 concurrent identity and 4 "
             "conversational turns "
             "dispatches per session."
         ),
@@ -81,7 +81,7 @@ def main() -> int:
         wait: bool = False,
         timeout_seconds: Optional[float] = None,
     ) -> str:
-        """Dispatch a read-only Grok 4.5 worker (hard cap 4 total / 4 concurrent)."""
+        """Dispatch a read-only Grok 4.6 worker (hard cap 4 total / 4 concurrent)."""
         try:
             payload = pool.dispatch(
                 prompt,

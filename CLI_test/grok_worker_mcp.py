@@ -14,7 +14,7 @@ Tools:
 Environment:
   GROK_WORKER_MAX_CONCURRENT  default 4
   GROK_WORKER_MAX_TOTAL       default 4
-  GROK_WORKER_MODEL           default grok-4.5
+  GROK_WORKER_MODEL           default grok-4.6
   GROK_WORKER_ALLOW_WEB       1/true to enable web tools for workers
   GROK_WORKER_RESULTS_DIR     directory for worker stdout/stderr
   GROK_WORKER_CWD             working directory for workers

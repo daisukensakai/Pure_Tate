@@ -1,0 +1,168 @@
+{
+  "campaign_id": "C66-001",
+  "classification": "validation_failure",
+  "created_at": "2026-08-13T01:17:04.014491+00:00",
+  "engine": "codex",
+  "id": "TRACE-0038",
+  "observable_stderr": "Reading additional input from stdin...\n2026-08-13T01:12:08.794945Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 94 column 5\n\nReading additional input from stdin...\n\nReading additional input from stdin...\n\nReading additional input from stdin...\n2026-08-13T01:15:03.007302Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 94 column 5\n\nReading additional input from stdin...\n",
+  "observable_stdout": "{\"type\":\"thread.started\",\"thread_id\":\"019ff8ad-39f6-7172-936a-75ea35e8ab5e\"}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"agent_message\",\"text\":\"{\\\"action\\\":\\\"dispatch\\\",\\\"request\\\":{\\\"description\\\":\\\"Extract observable trace mathematics\\\",\\\"prompt\\\":\\\"Read research/paired-traces/TRACE-0037.json and proof/reviews/REV-0135.json. Report only official observable subprocess material relevant to the digest, organized as: established facts with exact visible/mechanical evidence, candidate ideas needing independent proof, invalid steps with mathematical reasons, reusable observable computations (include the exact computation text/data to be hashed), and unresolved dependencies. Do not inspect other files yet, and do not infer hidden reasoning.\\\",\\\"request_id\\\":\\\"digest0028-trace-review\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":15526,\"cached_input_tokens\":0,\"cache_write_input_tokens\":0,\"output_tokens\":193,\"reasoning_output_tokens\":65}}\n\n{\"type\":\"thread.started\",\"thread_id\":\"019ff8ae-202f-7ed1-be43-af6f0ddd1467\"}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"agent_message\",\"text\":\"{\\\"action\\\":\\\"dispatch\\\",\\\"request\\\":{\\\"description\\\":\\\"Fill schema and hash gaps\\\",\\\"prompt\\\":\\\"Read DIGEST_TEMPLATE.json and TASK.json, then report the exact required JSON shape plus SHA-256 values for each reusable computation block you extracted, hashing the observable computation text exactly as it appears in the official trace/review (identify the precise hashed substring). Do not re-read the principal packet.\\\",\\\"request_id\\\":\\\"digest0028-schema-hashes\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":18757,\"cached_input_tokens\":15104,\"cache_write_input_tokens\":0,\"output_tokens\":203,\"reasoning_output_tokens\":105}}\n\n{\"type\":\"thread.started\",\"thread_id\":\"019ff8af-7810-7563-b77b-a20456f226f4\"}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"agent_message\",\"text\":\"{\\\"action\\\":\\\"dispatch\\\",\\\"request\\\":{\\\"description\\\":\\\"Resolve exact schema field names\\\",\\\"prompt\\\":\\\"Recheck the exact digest template only: report the required top-level keys and fixed values, especially whether the field is reviewer_engine or engine, without re-reading the packet or trace mathematics.\\\",\\\"request_id\\\":\\\"digest0028-schema-key-check\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":21790,\"cached_input_tokens\":13056,\"cache_write_input_tokens\":0,\"output_tokens\":234,\"reasoning_output_tokens\":158}}\n\n{\"type\":\"thread.started\",\"thread_id\":\"019ff8af-e2a2-79e3-862c-a6af441c7a1d\"}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"agent_message\",\"text\":\"{\\\"action\\\":\\\"dispatch\\\",\\\"request\\\":{\\\"description\\\":\\\"Resolve engine-field conflict\\\",\\\"prompt\\\":\\\"Using your prior reads only, resolve the instruction conflict between `reviewer_engine: codex` and the template\u2019s `engine` field. State the exact compliant top-level field(s) and value(s), with no other analysis.\\\",\\\"request_id\\\":\\\"digest0028-engine-conflict\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":22078,\"cached_input_tokens\":0,\"cache_write_input_tokens\":0,\"output_tokens\":386,\"reasoning_output_tokens\":302}}\n\n{\"type\":\"thread.started\",\"thread_id\":\"019ff8b0-5baa-7ce3-9ac0-c61042b8379e\"}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"agent_message\",\"text\":\"{\\n  \\\"schema_version\\\": 1,\\n  \\\"id\\\": \\\"DIGEST-0028\\\",\\n  \\\"task_id\\\": \\\"TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK\\\",\\n  \\\"campaign_id\\\": \\\"C66-001\\\",\\n  \\\"campaign_revision\\\": 4,\\n  \\\"problem_key\\\": \\\"e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9\\\",\\n  \\\"target\\\": {\\n    \\\"chow_codimension\\\": 13,\\n    \\\"compact_cohomology_degree\\\": 16,\\n    \\\"compact_tate_type\\\": \\\"Q(-8)\\\",\\n    \\\"dimension\\\": 21,\\n    \\\"g\\\": 6,\\n    \\\"n\\\": 6,\\n    \\\"open_bm_degree\\\": 16,\\n    \\\"open_bm_tate_type\\\": \\\"Q(8)\\\",\\n    \\\"open_bm_weight\\\": -16,\\n    \\\"ordinary_cohomology_degree\\\": 26,\\n    \\\"ordinary_tate_type\\\": \\\"Q(-13)\\\",\\n    \\\"ordinary_weight\\\": 26,\\n    \\\"poincare_twist\\\": 21\\n  },\\n  \\\"packet_sha256\\\": \\\"0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70\\\",\\n  \\\"source_subproblem_id\\\": \\\"C66-COMP-COMP\\\",\\n  \\\"source_lane\\\": \\\"computation\\\",\\n  \\\"source_trace_id\\\": \\\"TRACE-0037\\\",\\n  \\\"source_turn\\\": \\\"standard-fallback\\\",\\n  \\\"established_facts\\\": [\\n    {\\n      \\\"statement\\\": \\\"For a balanced genus-six degree-four Casnati\u2013Ekedahl fibre, the locus h^0(L)=4 is empty.\\\",\\n      \\\"evidence_class\\\": \\\"source\\\",\\n      \\\"evidence\\\": \\\"If h^0(L)=4, then Serre duality and \u03c7(L)=1 give h^0(M)=3 for a degree-four line bundle M. Clifford equality makes the curve hyperelliptic. Castelnuovo\u2013Severi forces the degree-four map to factor through the hyperelliptic double cover, yielding E=O(1)\u2295O(4)^2. The resulting inequality h^0(F(-6))\u22652 contradicts balanced F=O(4)\u2295O(5), for which h^0(F(-6))=0.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Under the weak relative-canonical normalization, every balanced fibre satisfies h^0(L)=3.\\\",\\n      \\\"evidence_class\\\": \\\"source\\\",\\n      \\\"evidence\\\": \\\"The normalization restricts h^0(L) to {3,4}, and the h^0(L)=4 alternative is excluded by the balanced-fibre argument.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Over a reduced locally Noetherian base, the closed Abel\u2013Jacobi incidence for these normalized balanced fibres is a Zariski-locally trivial P^2-bundle.\\\",\\n      \\\"evidence_class\\\": \\\"source\\\",\\n      \\\"evidence\\\": \\\"Constancy of h^0(L)=3 and Grauert's theorem produce a locally free rank-three sheaf with base change; its projectivization is locally P^2 wherever the sheaf is trivial.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"In the stated Casnati\u2013Ekedahl convention, the quadratic-relation bundle has rank two and degree +9.\\\",\\n      \\\"evidence_class\\\": \\\"mechanical\\\",\\n      \\\"evidence\\\": \\\"The Euler characteristics are \u03c7(Sym^2E)=42 and \u03c7(\u03b3_*R)=31. Their kernel therefore has rank two and degree 9, agreeing with O(4)\u2295O(5).\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"For every degree-two map q:P^1\u2192P^1 arising in the hyperelliptic factorization, q_*O(-7)=O(-4)^2.\\\",\\n      \\\"evidence_class\\\": \\\"mechanical\\\",\\n      \\\"evidence\\\": \\\"The pushforward has rank two and degree -8. Moreover h^0(q_*O(-7)\u2297O(3))=h^0(O(-1))=0, forcing both summands to have degree at most -4 and hence both to equal -4.\\\"\\n    }\\n  ],\\n  \\\"candidate_ideas\\\": [\\n    {\\n      \\\"statement\\\": \\\"The exclusion of h^0(L)=4 may admit a normalization-free proof: the hyperelliptic factorization forces E=O(1)\u2295O(4)^2, while degree and Riemann\u2013Roch alone give h^0(R\u2297\u03b3^*O(-6))=7 and hence h^0(F(-6))\u22652.\\\",\\n      \\\"requires_reproof\\\": true\\n    },\\n    {\\n      \\\"statement\\\": \\\"If L is base-point-free on every balanced normalized fibre, characteristic-zero Bertini should imply that a general member of |L| consists of six distinct points, making the reduced-support locus nonempty and dense in each P^2 fibre.\\\",\\n      \\\"requires_reproof\\\": true\\n    }\\n  ],\\n  \\\"invalid_steps\\\": [\\n    {\\n      \\\"statement\\\": \\\"Using H^0(C,A^6) to justify that the h^0(L)=4 exclusion is independent of the weak relative-canonical normalization.\\\",\\n      \\\"mathematical_reason\\\": \\\"The identification with A^6 uses \u03c9_C=A^5 and O_{P(E^\u2228)}(1)|_C\u2243\u03c9_{C/P^1}, which are normalization-dependent. A normalization-free argument must instead compute the degree of R\u2297\u03b3^*O(-6) and apply Riemann\u2013Roch.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Reading the quadratic-relation bundle as the degree -9 dual of the kernel.\\\",\\n      \\\"mathematical_reason\\\": \\\"Euler characteristics give the kernel degree +9. Reversing the sign replaces the relevant positive bundle by its negative dual and destroys the section-count contradiction.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Allowing the Clifford-equality exceptional cases M\u2243O_C or M\u2243\u03c9_C.\\\",\\n      \\\"mathematical_reason\\\": \\\"Here deg M=4, whereas those exceptional bundles have degrees 0 and 2g-2=10.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Deducing directly from Castelnuovo\u2013Severi non-independence that the degree-four map factors through the hyperelliptic map.\\\",\\n      \\\"mathematical_reason\\\": \\\"Non-independence only supplies a common intermediate factor. One must additionally show that its degree divides 2 and is at least 2, forcing it to be the hyperelliptic double cover.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Restricting q_*O(-7)=O(-4)^2 to a chosen normal-form double cover.\\\",\\n      \\\"mathematical_reason\\\": \\\"The splitting follows for every degree-two q from its rank, degree, and vanishing after twisting by O(3); no normal-form equation is required.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Treating the projectivized rank-three sheaf as a potentially nontrivial Brauer\u2013Severi form that need not be Zariski-locally trivial.\\\",\\n      \\\"mathematical_reason\\\": \\\"The incidence is the projectivization of an actual locally free sheaf, which becomes ordinary P^2 after any Zariski-local trivialization of that sheaf.\\\"\\n    }\\n  ],\\n  \\\"reusable_computations\\\": [\\n    {\\n      \\\"statement\\\": \\\"deg M = 2(2g-2) - (4g+12-4f)|_{g=6,f=5} = 20-16 = 4\\\",\\n      \\\"sha256\\\": \\\"4ab3bfa11f5bb17947051fe0e9d56f1b0a392ffe660dade08a63cb8683ca4bf3\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"h^0(L)=1+h^0(M) by \u03c7(L)=1 plus Serre duality\\\",\\n      \\\"sha256\\\": \\\"153cc4da38ff822629933086a4f53136ffcb2a9c9bc8aaad188c778022a9f206\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"h^0(L)=4 gives h^0(M)=3 = deg M/2 + 1, i.e. Clifford equality with deg M \u2209 {0,2g-2}\\\",\\n      \\\"sha256\\\": \\\"c540eaedcb0b325f88f2d995afa005e494266e30913d17879b51cd2797217c54\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"h_*O_C = O\u2295O(-7) (branch degree 2g+2=14); q_*O(-7) = O(-4)^2 is forced for EVERY degree-2 q, since deg = -8 by \u03c7 and h^0(q_*O(-7)\u2297O(3)) = h^0(O(-1)) = 0 pushes the larger summand to \u2264 -4; hence E = O(1)\u2295O(4)^2, Sym^2E(-6) = O(-4)\u2295O(-1)^2\u2295O(2)^3 with h^0 = 9, and h^0(C,R\u2297\u03b3^*O(-6)) = 7 for R = O_{P(E^\u2228)}(2)|_C. Left-exactness gives h^0(F(-6)) \u2265 9-7 = 2, while balanced F = O(4)\u2295O(5) gives F(-6) = O(-2)\u2295O(-1) with h^0 = 0.\\\",\\n      \\\"sha256\\\": \\\"e6bd9bb44ae84b7e0455f51f6b9fc081b706c195ce636950c70129b700cc0656\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"deg(R\u2297\u03b3^*O(-6)) = 36 - 24 = 12 > 2g-2 = 10, so h^1 = 0 and h^0 = 12 - 6 + 1 = 7 by Riemann\u2013Roch alone\\\",\\n      \\\"sha256\\\": \\\"98b9645ea1e988a6339bbf3d563fdbb01a22a679436ea390f7331c86f97b448d\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"deg(O_{P(E^\u2228)}(2)|_C) = 2(2g-2+4\u00d72) = 36 and deg W_f = 4g+12-4f, giving deg W_5 = 16, deg M = 4, deg(R\u2297\u03b3^*O(-6)) = 12\\\",\\n      \\\"sha256\\\": \\\"07eda99e7ff8de73b5d0f52192856de520985fa3a3e2eaeeece8a3c92dddf888\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"\u03c7(Sym^2E) = 4\u00d7deg E + 6 = 42 and \u03c7(\u03b3_*R) = \u03c7(R) = 36 + 1 - 6 = 31, so the kernel has rank 2 and degree exactly +9 = deg(O(4)\u2295O(5))\\\",\\n      \\\"sha256\\\": \\\"b1d004b1410e2d802dc956820d24e01e676b9f8b3cffc3802001e267e0b0ff25\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"g \u2264 (2-1)(4-1)=3 < 6\\\",\\n      \\\"sha256\\\": \\\"dd232ac8af25b6ec94af4a9d675ee140b8b46cd8d477e0b2b354f2cb511848db\\\"\\n    }\\n  ],\\n  \\\"unresolved_dependencies\\\": [\\n    {\\n      \\\"statement\\\": \\\"A proof of the weak relative-canonical normalization and its implication h^0(L)\u2208{3,4} remains required.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Base-point-freeness of L and nonemptiness and fibrewise density of the reduced-support locus remain to be proved.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The ordered six-point incidence, full S_6 monodromy, and the dimension and closure of its image remain undetermined.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The required local-complete-intersection and Gysin constructions remain to be established.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Hodge purity and Tate support and assembly for the relevant Borel\u2013Moore homology group remain unresolved.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"No proof is supplied that W_{-16}H^{BM}_{16}(M_{6,6}) is a direct sum of copies of Q(8).\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Extension of the P^2-bundle conclusion beyond reduced locally Noetherian bases remains unresolved.\\\"\\n    }\\n  ],\\n  \\\"sanitized\\\": true,\\n  \\\"engine\\\": \\\"codex\\\"\\n}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":21919,\"cached_input_tokens\":11008,\"cache_write_input_tokens\":0,\"output_tokens\":4550,\"reasoning_output_tokens\":1755}}\n",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_sha256": "0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70",
+  "parsed_artifact": {
+    "campaign_id": "C66-001",
+    "campaign_revision": 4,
+    "candidate_ideas": [
+      {
+        "requires_reproof": true,
+        "statement": "The exclusion of h^0(L)=4 may admit a normalization-free proof: the hyperelliptic factorization forces E=O(1)\u2295O(4)^2, while degree and Riemann\u2013Roch alone give h^0(R\u2297\u03b3^*O(-6))=7 and hence h^0(F(-6))\u22652."
+      },
+      {
+        "requires_reproof": true,
+        "statement": "If L is base-point-free on every balanced normalized fibre, characteristic-zero Bertini should imply that a general member of |L| consists of six distinct points, making the reduced-support locus nonempty and dense in each P^2 fibre."
+      }
+    ],
+    "engine": "codex",
+    "established_facts": [
+      {
+        "evidence": "If h^0(L)=4, then Serre duality and \u03c7(L)=1 give h^0(M)=3 for a degree-four line bundle M. Clifford equality makes the curve hyperelliptic. Castelnuovo\u2013Severi forces the degree-four map to factor through the hyperelliptic double cover, yielding E=O(1)\u2295O(4)^2. The resulting inequality h^0(F(-6))\u22652 contradicts balanced F=O(4)\u2295O(5), for which h^0(F(-6))=0.",
+        "evidence_class": "source",
+        "statement": "For a balanced genus-six degree-four Casnati\u2013Ekedahl fibre, the locus h^0(L)=4 is empty."
+      },
+      {
+        "evidence": "The normalization restricts h^0(L) to {3,4}, and the h^0(L)=4 alternative is excluded by the balanced-fibre argument.",
+        "evidence_class": "source",
+        "statement": "Under the weak relative-canonical normalization, every balanced fibre satisfies h^0(L)=3."
+      },
+      {
+        "evidence": "Constancy of h^0(L)=3 and Grauert's theorem produce a locally free rank-three sheaf with base change; its projectivization is locally P^2 wherever the sheaf is trivial.",
+        "evidence_class": "source",
+        "statement": "Over a reduced locally Noetherian base, the closed Abel\u2013Jacobi incidence for these normalized balanced fibres is a Zariski-locally trivial P^2-bundle."
+      },
+      {
+        "evidence": "The Euler characteristics are \u03c7(Sym^2E)=42 and \u03c7(\u03b3_*R)=31. Their kernel therefore has rank two and degree 9, agreeing with O(4)\u2295O(5).",
+        "evidence_class": "mechanical",
+        "statement": "In the stated Casnati\u2013Ekedahl convention, the quadratic-relation bundle has rank two and degree +9."
+      },
+      {
+        "evidence": "The pushforward has rank two and degree -8. Moreover h^0(q_*O(-7)\u2297O(3))=h^0(O(-1))=0, forcing both summands to have degree at most -4 and hence both to equal -4.",
+        "evidence_class": "mechanical",
+        "statement": "For every degree-two map q:P^1\u2192P^1 arising in the hyperelliptic factorization, q_*O(-7)=O(-4)^2."
+      }
+    ],
+    "id": "DIGEST-0028",
+    "invalid_steps": [
+      {
+        "mathematical_reason": "The identification with A^6 uses \u03c9_C=A^5 and O_{P(E^\u2228)}(1)|_C\u2243\u03c9_{C/P^1}, which are normalization-dependent. A normalization-free argument must instead compute the degree of R\u2297\u03b3^*O(-6) and apply Riemann\u2013Roch.",
+        "statement": "Using H^0(C,A^6) to justify that the h^0(L)=4 exclusion is independent of the weak relative-canonical normalization."
+      },
+      {
+        "mathematical_reason": "Euler characteristics give the kernel degree +9. Reversing the sign replaces the relevant positive bundle by its negative dual and destroys the section-count contradiction.",
+        "statement": "Reading the quadratic-relation bundle as the degree -9 dual of the kernel."
+      },
+      {
+        "mathematical_reason": "Here deg M=4, whereas those exceptional bundles have degrees 0 and 2g-2=10.",
+        "statement": "Allowing the Clifford-equality exceptional cases M\u2243O_C or M\u2243\u03c9_C."
+      },
+      {
+        "mathematical_reason": "Non-independence only supplies a common intermediate factor. One must additionally show that its degree divides 2 and is at least 2, forcing it to be the hyperelliptic double cover.",
+        "statement": "Deducing directly from Castelnuovo\u2013Severi non-independence that the degree-four map factors through the hyperelliptic map."
+      },
+      {
+        "mathematical_reason": "The splitting follows for every degree-two q from its rank, degree, and vanishing after twisting by O(3); no normal-form equation is required.",
+        "statement": "Restricting q_*O(-7)=O(-4)^2 to a chosen normal-form double cover."
+      },
+      {
+        "mathematical_reason": "The incidence is the projectivization of an actual locally free sheaf, which becomes ordinary P^2 after any Zariski-local trivialization of that sheaf.",
+        "statement": "Treating the projectivized rank-three sheaf as a potentially nontrivial Brauer\u2013Severi form that need not be Zariski-locally trivial."
+      }
+    ],
+    "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+    "packet_sha256": "0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70",
+    "problem_key": "e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9",
+    "reusable_computations": [
+      {
+        "sha256": "4ab3bfa11f5bb17947051fe0e9d56f1b0a392ffe660dade08a63cb8683ca4bf3",
+        "statement": "deg M = 2(2g-2) - (4g+12-4f)|_{g=6,f=5} = 20-16 = 4"
+      },
+      {
+        "sha256": "153cc4da38ff822629933086a4f53136ffcb2a9c9bc8aaad188c778022a9f206",
+        "statement": "h^0(L)=1+h^0(M) by \u03c7(L)=1 plus Serre duality"
+      },
+      {
+        "sha256": "c540eaedcb0b325f88f2d995afa005e494266e30913d17879b51cd2797217c54",
+        "statement": "h^0(L)=4 gives h^0(M)=3 = deg M/2 + 1, i.e. Clifford equality with deg M \u2209 {0,2g-2}"
+      },
+      {
+        "sha256": "e6bd9bb44ae84b7e0455f51f6b9fc081b706c195ce636950c70129b700cc0656",
+        "statement": "h_*O_C = O\u2295O(-7) (branch degree 2g+2=14); q_*O(-7) = O(-4)^2 is forced for EVERY degree-2 q, since deg = -8 by \u03c7 and h^0(q_*O(-7)\u2297O(3)) = h^0(O(-1)) = 0 pushes the larger summand to \u2264 -4; hence E = O(1)\u2295O(4)^2, Sym^2E(-6) = O(-4)\u2295O(-1)^2\u2295O(2)^3 with h^0 = 9, and h^0(C,R\u2297\u03b3^*O(-6)) = 7 for R = O_{P(E^\u2228)}(2)|_C. Left-exactness gives h^0(F(-6)) \u2265 9-7 = 2, while balanced F = O(4)\u2295O(5) gives F(-6) = O(-2)\u2295O(-1) with h^0 = 0."
+      },
+      {
+        "sha256": "98b9645ea1e988a6339bbf3d563fdbb01a22a679436ea390f7331c86f97b448d",
+        "statement": "deg(R\u2297\u03b3^*O(-6)) = 36 - 24 = 12 > 2g-2 = 10, so h^1 = 0 and h^0 = 12 - 6 + 1 = 7 by Riemann\u2013Roch alone"
+      },
+      {
+        "sha256": "07eda99e7ff8de73b5d0f52192856de520985fa3a3e2eaeeece8a3c92dddf888",
+        "statement": "deg(O_{P(E^\u2228)}(2)|_C) = 2(2g-2+4\u00d72) = 36 and deg W_f = 4g+12-4f, giving deg W_5 = 16, deg M = 4, deg(R\u2297\u03b3^*O(-6)) = 12"
+      },
+      {
+        "sha256": "b1d004b1410e2d802dc956820d24e01e676b9f8b3cffc3802001e267e0b0ff25",
+        "statement": "\u03c7(Sym^2E) = 4\u00d7deg E + 6 = 42 and \u03c7(\u03b3_*R) = \u03c7(R) = 36 + 1 - 6 = 31, so the kernel has rank 2 and degree exactly +9 = deg(O(4)\u2295O(5))"
+      },
+      {
+        "sha256": "dd232ac8af25b6ec94af4a9d675ee140b8b46cd8d477e0b2b354f2cb511848db",
+        "statement": "g \u2264 (2-1)(4-1)=3 < 6"
+      }
+    ],
+    "sanitized": true,
+    "schema_version": 1,
+    "source_lane": "computation",
+    "source_subproblem_id": "C66-COMP-COMP",
+    "source_trace_id": "TRACE-0037",
+    "source_turn": "standard-fallback",
+    "target": {
+      "chow_codimension": 13,
+      "compact_cohomology_degree": 16,
+      "compact_tate_type": "Q(-8)",
+      "dimension": 21,
+      "g": 6,
+      "n": 6,
+      "open_bm_degree": 16,
+      "open_bm_tate_type": "Q(8)",
+      "open_bm_weight": -16,
+      "ordinary_cohomology_degree": 26,
+      "ordinary_tate_type": "Q(-13)",
+      "ordinary_weight": 26,
+      "poincare_twist": 21
+    },
+    "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+    "unresolved_dependencies": [
+      {
+        "statement": "A proof of the weak relative-canonical normalization and its implication h^0(L)\u2208{3,4} remains required."
+      },
+      {
+        "statement": "Base-point-freeness of L and nonemptiness and fibrewise density of the reduced-support locus remain to be proved."
+      },
+      {
+        "statement": "The ordered six-point incidence, full S_6 monodromy, and the dimension and closure of its image remain undetermined."
+      },
+      {
+        "statement": "The required local-complete-intersection and Gysin constructions remain to be established."
+      },
+      {
+        "statement": "Hodge purity and Tate support and assembly for the relevant Borel\u2013Moore homology group remain unresolved."
+      },
+      {
+        "statement": "No proof is supplied that W_{-16}H^{BM}_{16}(M_{6,6}) is a direct sum of copies of Q(8)."
+      },
+      {
+        "statement": "Extension of the P^2-bundle conclusion beyond reduced locally Noetherian bases remains unresolved."
+      }
+    ]
+  },
+  "problem_key": "e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9",
+  "schema_version": 1,
+  "source_boundary": "Official subprocess output only; no provider-private session files or hidden chain-of-thought.",
+  "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+  "turn_kind": "trace-mining",
+  "validation_error": "trace miner must be cross-engine"
+}

@@ -1,0 +1,85 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "NO CLAIM-LEVEL CONTRADICTION. contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. It is a structural/bookkeeping statement internal to the C66-COMP-RANK determinantal-and-excess computation, compatible with the packet's canonical geometric bottleneck and with the corroborated (6,6) findings cited below. INDEPENDENT DERIVATION (the load-bearing step, done by me, not delegated). Let pi: C -> B be smooth proper of genus six, L of relative degree six with pi_*L locally free of rank three and compatible with base change, AJ = P_B(pi_*L) in the lines/sub convention, p: C x_B AJ -> AJ, and D_univ the universal relative effective divisor. Then O(D_univ) = L_AJ tensor p^*M_univ with M_univ the tautological line on AJ. Applying Rp_* to 0 -> O -> O(D_univ) -> O_{D_univ}(D_univ) -> 0 gives 0 -> O_AJ -> p_*O(D_univ) -> p_*O_{D_univ}(D_univ) -> R^1 p_* O -> R^1 p_* O(D_univ) -> 0, the last term being right-exact because D_univ is affine over AJ. Here R^1 p_* O = pullback of R^1 pi_* O_C, which is the pullback of the tangent bundle of Pic^0 and hence the normal bundle of the section [L]; the middle connecting map is exactly the differential of the relative Abel map. Therefore coker(d a) = R^1 p_* O(D_univ) = R^1 p_*(L_AJ tensor p^*M_univ) = p^*(R^1 pi_* L) tensor M_univ by the projection formula, since M_univ is invertible on AJ. Fibrewise over a point of AJ above b in B this is H^1(C_b, L_b) tensor (a one-dimensional space), so geometric fibres are abstractly isomorphic to H^1(L_b) only after trivializing the M_univ fibre. Rank check: expected codimension of AJ in Div^6 is g = 6, actual relative codimension is 6 - 2 = 4, so the excess rank is 2 = h^1(L), consistent with the rank-two remark in FND-0129. Every clause of FND-0133 is thereby confirmed. PRIMARY-SOURCE ANCHORS. Kleiman, 'The Picard scheme' (arXiv:math/0504020; published as chapter 9 of Fundamental Algebraic Geometry, AMS Math. Surveys and Monographs 123, 2005): subsection 3.10 defines Q by the functorial isomorphism Hom(Q, N) = f_*(F tensor f^*N); Definition 3.12 introduces LinSys_{L/X/S}; Theorem 3.13 states that L := P(Q) represents LinSys_{L/X/S}, with P(Q) = Proj Sym(Q) in the Grothendieck convention, so its points are rank-one QUOTIENTS of Q and its tautological surjection is Q_L -> O(1); Exercise 3.14 states that there is a natural relative effective divisor W on X_L/L with O_{X_L}(W) = L_L tensor f_L^*O_L(1), i.e. the twist is by +O(1), not O(-1). When pi_*L is locally free and base-change compatible, Q = (pi_*L)^dual, so Kleiman's P(Q) is precisely the space of lines in pi_*L. The convention frame is EGA II (Grothendieck, Publ. Math. IHES 8, 1961), section 4.1 and 4.2.3, and Hartshorne II.7.11 to II.7.12. The identification of the Abel tangent map with the coboundary of 0 -> O_X -> O_X(D) -> N_D -> 0 is Kleiman Remark 5.18, citing Mumford, Lectures on Curves on an Algebraic Surface (1966), p. 165; ACGH volume I chapter IV sections 2 and 4 give the classical universal-divisor and Zariski-tangent-space treatment. The excess-bundle formalism E = g^*N / N with contribution c_{d-d'}(E) cap [W] is Fulton, Intersection Theory, section 6.3 (Thom-Porteous is section 14.4, not 17.4). SHARPENINGS THAT SHOULD BE RECORDED WITH THE PROMOTION. (1) The phrase 'untwisted Hodge-bundle isomorphism' is imprecise: the bundle in question is R^1 pi_* L, which is rank two and, by relative Serre duality with M := omega tensor L^dual of degree four, is (pi_*M)^dual; it is not the Hodge bundle pi_*omega_{C/B} of rank six. The correct reading of the clause is 'no untwisted identification with a bundle pulled back from B', and that reading is what the derivation supports. (2) The disjunct 'or prove it trivial' is provably unavailable on AJ itself and the finding can be strengthened accordingly: M_univ restricts to O(1) on each P^2 fibre, so c_1(M_univ) = xi is non-torsion; writing V = R^1 pi_* L, the rank-two excess bundle E = p^*V tensor M_univ has c_2(E) = c_2(V) + c_1(V) xi + xi^2, and p_*(c_1(V) xi + xi^2) = [B] since p_* xi = 0 and p_* xi^2 = [B]. Dropping the twist therefore perturbs the pushed-forward excess class by exactly [B], a definitively nonzero error. The hedge survives only for the OPEN ordered incidence: on the complement of the discriminant inside each P^2 fibre, the restriction of xi can become torsion in CH^1 with Q coefficients, so triviality there is a distinct statement that must be argued and may not be assumed. (3) The convention hazard is real and sharper than the finding states. It is not merely a sign on M_univ: read in the Grothendieck convention, 'P_B(pi_*L)' means Proj Sym(pi_*L), which parametrizes rank-one quotients of pi_*L and is NOT the relative linear system; the correct object is Proj Sym((pi_*L)^dual), which is how FND-0127 already writes it as P((pi_*L)^dual). Downstream artifacts should disambiguate the label, not just the twist sign. (4) Generality: as with FND-0096, the twist identification transports verbatim to any (g,n) and any L with locally free base-change-compatible pushforward; only excess rank two is (6,6)-specific. (5) Existence hypotheses: writing AJ as a projective bundle at all presupposes constant h^0(L), which is the FND-0047 / FND-0107 / FND-0131 hypothesis; over nonreduced or h^0-jumping bases the FND-0107 Abel-Jacobi fibre model must be used and the twist formula then holds on the locus where the projective-bundle model is valid. On a stack base the FND-0127 smooth-atlas descent line is required. (6) 'Globally' is correct in the sense 'as an isomorphism of sheaves on all of AJ (and on its etale cover)', not 'descends to B'. DISTINCTNESS AND MERGE. Nearest sibling is FND-0129, which concerns the same excess square but fixes the typing of the zero section e: B -> Pic^0 and the coker-versus-dual choice, noting that c_2 agrees in rank two. FND-0133 supplies the global identification of that cokernel including the tautological twist that FND-0129 leaves unnamed; the two are complementary and neither subsumes the other, so they should not be merged. Distinct from FND-0122, whose cokernel is the CE evaluation cokernel of phi_5, Serre-dual to H^0 of a degree-zero line bundle and of generic rank at most one - conflating that with this rank-two excess cokernel is exactly the kind of error this finding guards against. Distinct from FND-0096 (Fitting ideal of the evaluation cokernel over Pic^0), from FND-0107 / FND-0047 / FND-0131 (representability and base change), and from FND-0127 (base scope). Merge target: none. VERDICT. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source. The finding is mathematically correct as stated, load-bearing for C66-COMP-RANK (any excess or Chern-class computation that drops M_univ is off by a nonzero class), and should be recorded together with sharpenings (1) through (3). HONEST LIMITATIONS OF THIS AUDIT. (a) content_sha256 is null in every source record: this workspace is read-only with no shell tool, so I could not compute digests, and I declined to fabricate hex strings. (b) The Kleiman item numbers (subsection 3.10, Definition 3.12, Theorem 3.13, Exercise 3.14, Remark 5.18) and the verbatim formula O_{X_L}(W) = L_L tensor f_L^*O_L(1) were extracted from the ar5iv HTML by the single assistive read-only worker acting as my reading layer; my own fetch of the same page was truncated mid-section-3 after Theorem 3.7 and Exercise 3.8, which corroborates the section-3 sequence and the presence of the LinSys operator but does not independently pin the two item numbers. The published FGA Explained pagination was not checked. This does not affect the verdict, because the mathematical content is my own derivation and the citation is corroboration rather than the load-bearing step; a consumer needing the exact locator should re-verify against AMS Math. Surveys and Monographs 123, chapter 9. (c) The Hartshorne, Fulton, ACGH, and Mumford locators cited above are worker-reported and were not opened by me; of the non-arXiv sources I opened only the numdam landing page, which I confirmed is EGA II, Publ. Math. IHES volume 8 (1961), pages 5-222, without seeing its section-level numbering. (d) ATT-0085 and REV-0134 were not re-audited (absent from this workspace) and are not required for the mathematical promotion.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0133",
+  "id": "FAUD-0135",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "equivalence_group": "FC-EXCESS-TAUTOLOGICAL-LINE-TWIST",
+    "generality": "The twist identification itself is NOT (6,6)-specific: it holds for any smooth proper family of curves and any L whose pushforward is locally free with base change, exactly as FND-0096 records for the universal Fitting computation. Only the numerology rank(R^1 pi_* L) = h^1(L) = 2, and hence excess rank two and the relevance of c_2, is specific to (6,6) on the balanced tetragonal locus.",
+    "hypotheses_required": [
+      "pi_*L locally free with base change (equivalently h^0(L) constant); this is the FND-0047 / FND-0107 / FND-0131 hypothesis and is what licenses writing AJ as a projective bundle at all",
+      "h^0(L) = 3 constant on the balanced locus, hence h^1(L) = 2 and rank E = 2; conditional on GAP-Z-W5D (L = omega_C(-D)) and supported by FND-0104 together with FND-0125",
+      "for a stack base, the FND-0127 smooth-atlas descent line"
+    ],
+    "kind": "obstruction",
+    "not_covered": [
+      "existence/purity/codimension of Z itself (FND-0086, FND-0069)",
+      "the CE evaluation cokernel of FND-0122, which is a different sheaf of generic rank at most one and must not be conflated with this rank-two excess cokernel",
+      "validity of the projective-bundle model over nonreduced or h^0-jumping bases, where FND-0107's Abel-Jacobi fibre model must be used instead"
+    ],
+    "objects": [
+      "AJ = P_B(pi_*L), the relative degree-six linear system of L = W_5 tensor omega_C^{-1}, taken in the lines/sub convention Proj Sym((pi_*L)^dual)",
+      "D_univ, the universal relative effective divisor of degree six on C x_B AJ",
+      "M_univ, the tautological line on AJ defined by O(D_univ) = L_AJ tensor p^*M_univ; equals O_AJ(1) in the sub convention",
+      "E = coker(d a), the Fulton excess bundle of the relative Abel map a: Div^6(C/B) -> Pic^6(C/B) against the section [L]",
+      "R^1 pi_* L",
+      "Z_ev, the ordered finite etale S_6 incidence over the reduced-support open of AJ"
+    ],
+    "subproblem_id": "C66-COMP-RANK",
+    "verified_statement": "With pi: C -> B smooth proper of genus six, L of relative degree six, pi_*L locally free of rank three and compatible with base change, and p: C x_B AJ -> AJ, the coboundary of 0 -> O -> O(D_univ) -> O_{D_univ}(D_univ) -> 0 is the differential of the relative Abel map, and its cokernel is R^1 p_* O(D_univ) = p^*(R^1 pi_* L) tensor M_univ, an isomorphism of locally free rank-two sheaves on all of AJ; it pulls back unchanged along the finite etale S_6 cover Z_ev -> (reduced-support open of AJ)."
+  },
+  "source_records": [
+    {
+      "arxiv_id": "math/0504020",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-13T04:05:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/math/0504020"
+    },
+    {
+      "arxiv_id": "math/0504020",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "verbatim-locator-check",
+      "retrieved_at": "2026-08-13T04:07:00Z",
+      "source_type": "preprint_html_rendering",
+      "url": "https://ar5iv.labs.arxiv.org/html/math/0504020"
+    },
+    {
+      "arxiv_id": "math/0504020",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-13T04:05:30Z",
+      "source_type": "preprint_pdf",
+      "url": "https://arxiv.org/pdf/math/0504020"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "projective-bundle-convention-check",
+      "retrieved_at": "2026-08-13T04:08:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1961__8__5_0/"
+    }
+  ],
+  "task_id": "TASK-F-FND-0133",
+  "verdict": "promote"
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "id": "TASK-V-ATT-0087-P1",
+    "phase": "review",
+    "role": "independent-adversarial-reviewer",
+    "target_attempt_id": "ATT-0087",
+    "target_task_id": "TASK-C66-M-003",
+    "review_pass": 1,
+    "context_revision": 2,
+    "packet_id": "C66-001-v4",
+    "packet_sha256": "0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70",
+    "target": {
+      "chow_codimension": 13,
+      "compact_cohomology_degree": 16,
+      "compact_tate_type": "Q(-8)",
+      "dimension": 21,
+      "g": 6,
+      "n": 6,
+      "open_bm_degree": 16,
+      "open_bm_tate_type": "Q(8)",
+      "open_bm_weight": -16,
+      "ordinary_cohomology_degree": 26,
+      "ordinary_tate_type": "Q(-13)",
+      "ordinary_weight": 26,
+      "poincare_twist": 21
+    },
+    "prover_engine": "cursor-grok",
+    "excluded_reviewer_engines": [
+      "cursor-grok"
+    ],
+    "prompt": "prompts/ADVERSARY.md",
+    "input_attempt": "proof/attempts/ATT-0087.json",
+    "input_packet": "proof/packets/generated/C66-001-v4.md",
+    "output": "proof/reviews/REV-0136.json",
+    "status": "ready",
+    "created_on": "2026-08-13",
+    "input_artifacts": [],
+    "campaign_id": "C66-001",
+    "campaign_revision": 4,
+    "subproblem_id": "C66-GEO-COMP",
+    "lane": "geometry",
+    "theorem_statement": "Let k be a field of characteristic zero. Let B be either a locally Noetherian k-scheme or a locally Noetherian algebraic k-stack admitting a smooth atlas by locally Noetherian k-schemes. Let pi:C->B be smooth proper with geometrically connected genus-6 fibres, and let gamma:C->P^1_B be finite flat of degree 4 whose Casnati\u2013Ekedahl relations bundle F is fibrewise isomorphic to O(4)\u2295O(5) on every geometric fibre. Let 0->W_4->W->W_5->0 be the canonical filtered CE sequence of ATT-0065 (CLM-0065-5), dual-confirmed by REV-0108 and REV-0109, so that deg(W_5)=16 under the SRC-0004 convention W_f=(O_{P(E^vee)}(2)\u2297gamma^*O(-f))|_C. Put L=W_5\u2297omega_{C/B}^{-1}. Assume the weak CE relative-canonical normalization (N) fibrewise exactly as in ATT-0066: O_{P(E^vee)}(1)|_{C_b} \u2245 omega_{C_b/P^1}\u2297gamma_b^*A_b for some A_b in Pic(P^1_{k(b)}). Let I=Hilb^6(C/B)\u00d7_{Pic^6(C/B)}B be the Abel\u2013Jacobi incidence of ATT-0066 (H3), dual-confirmed by REV-0110 and REV-0116, and write B_4={b:h^0(L_b)=4}, B_3={b:h^0(L_b)=3} on the underlying topological space of B. Then: (C1) No geometric point of B lies in B_4, so B_4 is empty and h^0(L_b)=3 at every geometric point. Indeed ATT-0066/CLM-0066-3 places every point of B_4 in the non-primitive hyperelliptic locus, while every such cover has relations bundle F\u2245O(2)\u2295O(7) (FND-0125; equivalently the mechanical exclusion that a hyperelliptic genus-6 degree-four cover cannot be fibrewise O(4)\u2295O(5)), contradicting the balanced hypothesis. (C2) Stack descent of the projective-bundle model: for every smooth atlas U->B by a reduced locally Noetherian k-scheme, pi_*L|_U is locally free of rank 3 and base-change compatible, and I_U \u2245 P((pi_*L|_U)^vee) is a Zariski-locally trivial P^2-bundle, smooth and proper of pure relative dimension 2 over U. Both the Abel\u2013Jacobi incidence and the projectivization commute with arbitrary base change and are identified by the universal divisor, so the isomorphism descends along the smooth atlas to B; reducedness is preserved by smooth pullback in characteristic zero, and Grauert is applied only on reduced atlases (FND-0127; FND-0131). Consequently, for every irreducible component Y of a reduced atlas (or of the reduced coarse underlying space of a DM chart), dim(I|_Y)=dim(Y)+2. (C3) Finite-cover package: the distinct-support locus I^dist \u2282 I is open and not closed in I; ordering six distinct support points yields a finite \u00e9tale S_6-torsor tilde I -> I^dist at stack level of pairwise-distinct sections, with neither side reduced artificially (ATT-0066/CLM-0066-6; FND-0064/FND-0075/FND-0087). On Conf_6(C/B), ATT-0065 (CLM-0065-4, CLM-0065-9), confirmed by REV-0108 and REV-0109, identifies tilde I scheme-theoretically with the ambient balanced CE Fitting evaluation-failure locus Z_ev. (C4) Conditional geometric recovery and dense-open stabilizer control under (N): L_b \u2245 omega_{C_b}(-D_b) with D_b a fibre divisor of gamma_b, so if O(Gamma)\u2245L then |omega(-Gamma)| recovers gamma up to PGL_2 and Aut(C,gamma,Gamma)\u2245Aut(C,Gamma). On the dense open of the ordered distinct-support incidence where the six marks have at least three distinct images under gamma and at least one mark is unramified, the ordered automorphism group is trivial. No assertion is made that B is irreducible, that dim B=15, that the forgetful map to M_{6,6} is a monomorphism or quasi-finite, that the image is closed of pure codimension 4, that I^dist is nonempty on every fibre, that Z is lci, or any Hodge/Tate/monodromy conclusion.",
+    "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+    "selected_engine": "codex"
+  }
+]

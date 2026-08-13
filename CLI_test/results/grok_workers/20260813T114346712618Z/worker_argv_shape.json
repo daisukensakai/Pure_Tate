@@ -1,0 +1,36 @@
+{
+  "argv_redacted": [
+    "grok",
+    "-p",
+    "<prompt-sha256:2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824>",
+    "--output-format",
+    "json",
+    "--max-turns",
+    "20",
+    "--permission-mode",
+    "dontAsk",
+    "--always-approve",
+    "--no-subagents",
+    "--tools",
+    "read_file,grep,list_dir",
+    "--disallowed-tools",
+    "run_terminal_command,write,open_page,web_search,web_fetch",
+    "--disable-web-search",
+    "-m",
+    "grok-4.6"
+  ],
+  "denied": [
+    "run_terminal_command",
+    "write",
+    "open_page",
+    "web_search",
+    "web_fetch"
+  ],
+  "probe": "worker_argv_shape",
+  "status": "pass",
+  "tools": [
+    "read_file",
+    "grep",
+    "list_dir"
+  ]
+}

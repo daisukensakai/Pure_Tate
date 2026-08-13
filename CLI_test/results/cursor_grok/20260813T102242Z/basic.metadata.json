@@ -1,0 +1,92 @@
+{
+  "agent_argv0": [
+    "/Users/ken/.local/bin/cursor-agent"
+  ],
+  "argv": [
+    "/Users/ken/.local/bin/cursor-agent",
+    "-p",
+    "--trust",
+    "--mode",
+    "ask",
+    "--output-format",
+    "stream-json",
+    "--model",
+    "cursor-grok-4.6-high",
+    "--workspace",
+    "/Users/ken/Desktop/Work/exploratory/Pure_Tate",
+    "<prompt-sha256:602c9a26dad7caba08cc0cdca274341db8bd97c4d86fd8bd284316868968a37a>"
+  ],
+  "elapsed_seconds": 11.81,
+  "executed_at": "2026-08-13T10:22:53.878141+00:00",
+  "gate_errors": [],
+  "mode": "ask",
+  "model_requested": "cursor-grok-4.6-high",
+  "output_format": "stream-json",
+  "passed": true,
+  "probe": "basic",
+  "prompt_sha256": "602c9a26dad7caba08cc0cdca274341db8bd97c4d86fd8bd284316868968a37a",
+  "returncode": 0,
+  "schema_version": 1,
+  "stderr_path": "CLI_test/results/cursor_grok/20260813T102242Z/basic.stderr.txt",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_path": "CLI_test/results/cursor_grok/20260813T102242Z/basic.stdout.jsonl",
+  "stdout_sha256": "245d37e030bf054cca7f1b1c998f7fa66ba7357e4917b608004c3b01e744d337",
+  "summary": {
+    "event_key_shapes": {
+      "apiKeySource,cwd,model,permissionMode,session_id,subtype,type": 1,
+      "duration_api_ms,duration_ms,is_error,request_id,result,session_id,subtype,type,usage": 1,
+      "message,session_id,type": 2,
+      "session_id,subtype,text,timestamp_ms,type": 4,
+      "session_id,subtype,timestamp_ms,type": 1
+    },
+    "event_subtype_counts": {
+      "assistant/<none>": 1,
+      "result/success": 1,
+      "system/init": 1,
+      "thinking/completed": 1,
+      "thinking/delta": 4,
+      "user/<none>": 1
+    },
+    "event_type_counts": {
+      "assistant": 1,
+      "result": 1,
+      "system": 1,
+      "thinking": 5,
+      "user": 1
+    },
+    "first_event": {
+      "apiKeySource": "env",
+      "cwd": "/Users/ken/Desktop/Work/exploratory/Pure_Tate",
+      "model": "Cursor Grok 4.6 High",
+      "permissionMode": "default",
+      "session_id": "76049102-d3eb-4c57-98b6-06a46c4c1615",
+      "subtype": "init",
+      "type": "system"
+    },
+    "format": "stream-json",
+    "init_model": "Cursor Grok 4.6 High",
+    "invalid_lines": [],
+    "last_event": {
+      "duration_api_ms": 5986,
+      "duration_ms": 5986,
+      "is_error": false,
+      "request_id": "ee2ca1e5-a3c0-41cc-b8ef-856618afd3d0",
+      "result": "{\"probe\":\"basic\",\"ok\":true,\"latex\":\"\\\\Gamma and \\\\omega_C\"}",
+      "session_id": "76049102-d3eb-4c57-98b6-06a46c4c1615",
+      "subtype": "success",
+      "type": "result",
+      "usage": {
+        "cacheReadTokens": 6016,
+        "cacheWriteTokens": 0,
+        "inputTokens": 7728,
+        "outputTokens": 82
+      }
+    },
+    "line_count": 9,
+    "parsed_event_count": 9,
+    "result_is_error": false,
+    "result_prefix": "{\"probe\":\"basic\",\"ok\":true,\"latex\":\"\\\\Gamma and \\\\omega_C\"}",
+    "result_subtype": "success",
+    "tool_call_keys": []
+  }
+}

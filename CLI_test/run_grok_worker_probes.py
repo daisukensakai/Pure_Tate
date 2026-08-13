@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLI_test probes for hard-capped Grok 4.5 workers (MCP + native spawn).
+"""CLI_test probes for hard-capped Grok 4.6 workers (MCP + native spawn).
 
 Not imported by pure_tate. Does not edit ~/.grok/config.toml or the harness.
 
@@ -251,7 +251,7 @@ def probe_mcp_unit_roundtrip() -> Dict[str, Any]:
 
 
 def probe_worker_argv_shape() -> Dict[str, Any]:
-    argv = build_worker_argv("hello", allow_web=False)
+    argv = build_worker_argv("hello", model=MODEL, allow_web=False)
     tools = argv[argv.index("--tools") + 1].split(",")
     denied = argv[argv.index("--disallowed-tools") + 1].split(",")
     ok = (
@@ -303,12 +303,13 @@ def run_subprocess(
 
 
 def probe_worker_smoke(run_dir: Path) -> Dict[str, Any]:
-    """One real Grok 4.5 worker via the pool."""
+    """One real Grok worker via the pool using the selected model."""
     results = run_dir / "worker_smoke"
     results.mkdir(parents=True, exist_ok=True)
     pool = GrokWorkerPool(
         max_concurrent=4,
         max_total=4,
+        model=MODEL,
         results_dir=results,
         work_dir=ROOT,
         timeout_seconds=LIVE_TIMEOUT,
@@ -1014,7 +1015,13 @@ def probe_mcp_gemini(run_dir: Path) -> Dict[str, Any]:
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
+    global MODEL
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--model",
+        default=MODEL,
+        help="Grok model slug for argv and live probes (default: %s)" % MODEL,
+    )
     parser.add_argument(
         "--offline",
         action="store_true",
@@ -1032,6 +1039,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         help="Run only named probes (repeatable).",
     )
     args = parser.parse_args(argv)
+    MODEL = args.model
     run_live = args.live or not args.offline
     if args.offline:
         run_live = False

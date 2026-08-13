@@ -144,8 +144,8 @@ class AgentAdapterTests(unittest.TestCase):
         by_id = {item["id"]: item for item in engine_inventory()}
         self.assertEqual(by_id["claude"]["model"], "claude-opus-5")
         self.assertEqual(by_id["codex"]["model"], "gpt-5.6-sol")
-        self.assertEqual(by_id["grok"]["model"], "grok-4.5")
-        self.assertEqual(by_id["cursor-grok"]["model"], "cursor-grok-4.5-high")
+        self.assertEqual(by_id["grok"]["model"], "grok-4.6")
+        self.assertEqual(by_id["cursor-grok"]["model"], "cursor-grok-4.6-high")
         self.assertEqual(by_id["qwen"]["model"], "qwen3.8-max")
         self.assertTrue(by_id["claude"]["web_access"])
         self.assertTrue(by_id["grok"]["web_access"])
@@ -463,7 +463,7 @@ class AgentAdapterTests(unittest.TestCase):
     def test_grok_argv_pins_model_and_can_disable_web(self):
         command = _engine_argv("grok", "prompt")
         self.assertIn("-m", command)
-        self.assertEqual(command[command.index("-m") + 1], "grok-4.5")
+        self.assertEqual(command[command.index("-m") + 1], "grok-4.6")
         self.assertIn("--permission-mode", command)
         self.assertEqual(
             command[command.index("--permission-mode") + 1], "dontAsk"
@@ -491,7 +491,7 @@ class AgentAdapterTests(unittest.TestCase):
                 "grok": {
                     "binary": "grok",
                     "family": "grok",
-                    "model": "grok-4.5",
+                    "model": "grok-4.6",
                     "web_access": False,
                 }
             },

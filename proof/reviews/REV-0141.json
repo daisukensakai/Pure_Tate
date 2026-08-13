@@ -1,0 +1,122 @@
+{
+  "attempt_id": "ATT-0089",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0089-5",
+      "note": "Clause (4) is not well-posed under the theorem's own hypotheses, and its proof uses a structure that the stated data does not carry. (i) The theorem fixes B as a reduced locally Noetherian k-SCHEME. Then I=Hilb\u2076(C/B)\u00d7_{Pic\u2076(C/B)}B and its open I^{dist} are schemes (algebraic spaces), so for a geometric point x the group Aut(x) is trivial and the whole clause degenerates to 1\u21921\u21921\u2192S_6 with Aut(x_tilde)=1 automatic: true but empty. The artifact does not intend that reading \u2014 theorem_scope states 'the finite \u00e9tale torsor and inertia assertions are stack-level' \u2014 yet the theorem_statement never introduces a stack base, never says which moduli problem the objects belong to, and therefore never defines Aut(x). (ii) The proof step 'An ordered automorphism induces a PGL_2 transformation fixing the three images' is unavailable from the data defining x: I is built from Hilb\u2076 and Pic\u2076 only, and \u03b3 appears nowhere in its definition. The step is valid exactly when Aut(x) means automorphisms of the tetragonal cover, i.e. pairs (\u03c3,\u03c4) with \u03b3\u03c3=\u03c4\u03b3 preserving \u0393; it is not valid for Aut(C,\u0393), the group that the downstream forgetful-map/stabilizer analysis in M_{6,6} needs (an automorphism of C preserving \u0393 need not preserve the pencil, and for genus 6 a nontrivial automorphism may fix up to 14 points, so the kernel statement is not formal). The remainder of the argument is correct under the cover reading: \u03c4 fixes three distinct images hence \u03c4=id; \u03c3 is then a deck transformation fixing an \u00e9tale marked point p; pr_1:C\u00d7_{P\u00b9}C\u2192C is \u00e9tale at (p,p) because \u03b3 is \u00e9tale at p; two sections of an \u00e9tale morphism agreeing at a point agree on a neighbourhood; C integral and separated upgrades that to \u03c3=id. The defect is one of statement/hypothesis, not of the computation: name the stack (e.g. the balanced tetragonal cover stack or an atlas thereof), say that Aut(x) is the automorphism group of the pair (C\u2192P\u00b9,\u0393), and the clause becomes provable as written. See finding candidate FC-COMP-AUT-MODULI-UNDEFINED, and FC-COMP-PENCIL-RECOVERY-AUT for a repair that also reaches the M_{6,6}-relevant group on B_3.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0089-1",
+      "note": "Clause (1) component bijection and dimension formula check out over the declared reduced base. Input is ATT-0066 (H3)/CLM-0066-4, CLM-0066-5, dual-confirmed by REV-0110 and REV-0116 (both note that reducedness of B_k is load-bearing for Grauert and that P((\u03c0_*L|_{B_k})^\u2228) has the dual placed correctly). Verification: P(E_k^\u2228) is Zariski-locally U\u00d7P^{k-1} with U\u2282Y open; P^{k-1} is geometrically irreducible over k, so each chart is irreducible, and any two nonempty opens of an irreducible Y meet, so P(E_k^\u2228|_Y) is irreducible; it is closed in I_k since Y is closed in B_k. Maximality: an irreducible closed T\u2287P(E_k^\u2228|_Y) has irreducible image whose closure contains Y, hence equals Y, so T\u2286P(E_k^\u2228|_Y). Conversely any component T of I_k has image contained in some component Y, so T\u2286P(E_k^\u2228|_Y) and equality by maximality; the assignment is inverted by taking images, so the correspondence is bijective. dim P(E_k^\u2228|_Y)=dim Y+k\u22121 for a Zariski-locally trivial P^{k-1}-bundle. No normality is needed here (FND-0132 concerns \u00e9tale covers and does not bite).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0089-2",
+      "note": "15+3\u22121=17 and 21\u221217=4 are correct arithmetic, dim M_{6,6}=3\u00b76\u22123+6=21. The clause is properly conditionalized ('a 15-dimensional component'), applies the per-stratum formula rather than a uniform dim=15 (so it avoids the FND-0121 trap), and explicitly refuses to promote 4 to a codimension, closed-image, purity, or Gysin statement. No cohomological, weight, or Tate content is attached, so the target dictionary is untouched.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0089-3",
+      "note": "Faithful, in-scope restatement of ATT-0066 (H4)/CLM-0066-6 plus ATT-0065 CLM-0065-4 and CLM-0065-9, all four dual-confirmed. Conf_6(C/B)\u2192Hilb\u2076 factors through the distinct-support open and is a free finite S_6-quotient, so it is finite \u00e9tale of degree |S_6|=720; base change along I^{dist}\u2192Hilb^{6,dist} preserves this without any reducedness hypothesis, so 'without reducing either side' is both correct and the FND-0087-compliant formulation, and 'at stack level' is the FND-0075-compliant qualifier. The ambient clause correctly carries ATT-0065's extra hypotheses (q_*\ud835\udcb2 finite locally free and compatible with arbitrary base change) rather than absorbing them; the degree conditions of ATT-0065 hold at (6,6) since 20\u22126=14>2g\u22122=10 and 16\u22126=10=2g\u22122.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0089-4",
+      "note": "Standard and correct Galois-category bookkeeping. The fibre of a principal S_6-torsor over a geometric point of a connected X is the regular right S_6-set; \u03c0_1^\u00e9t(X,x\u0304) acts by S_6-equivariant automorphisms, i.e. by left multiplication through \u03c1 with image H_X (well defined up to conjugacy, so |H_X| and the condition H_X=S_6 are unambiguous). Orbits are the right cosets H_X g, all of cardinality |H_X| since the action is free, giving exactly [S_6:H_X]=720/|H_X| connected components each finite \u00e9tale of degree |H_X|, and connectedness iff H_X=S_6. The claim is stated for CONNECTED components only and does not upgrade to irreducible components, so it correctly stays clear of the normality requirement of FND-0132. Vacuous if I^{dist}=\u2205, which the artifact lists as an open gap rather than assuming away.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-13",
+  "finding_candidates": [
+    {
+      "evidence": "ATT-0089 clause (4) and CLM-0089-5: theorem_statement fixes B as a reduced locally Noetherian k-scheme while theorem_scope says the inertia assertions are stack-level; the argument's step 4 uses the induced PGL_2 element without any hypothesis supplying it.",
+      "key": "FC-COMP-AUT-MODULI-UNDEFINED",
+      "relation_note": "Sharpens the last sentence of FND-0098 ('any mono claim additionally needs a stack-level full-faithfulness argument covering automorphism groups') into a concrete well-posedness requirement on the source of the statement, and instantiates the FND-0101/FND-0127 base-scope discipline for automorphism clauses rather than for gap markers or projective-bundle descent.",
+      "statement": "In C66-GEO-COMP, any inertia/stabilizer clause of the form 1\u2192Aut(x_tilde)\u2192Aut(x)\u2192S_6 for a geometric point x of the Abel\u2013Jacobi incidence I=Hilb\u2076(C/B)\u00d7_{Pic\u2076(C/B)}B must first name the stack and the moduli problem, because I is defined without any reference to \u03b3. Over a scheme base every such Aut is trivial and the clause is vacuous; over a stack base the group depends on what the base classifies. Rigidity proofs that pass through 'the automorphism induces a PGL_2 transformation of P\u00b9 fixing the marked images' prove the statement only for Aut(C,\u03b3,\u0393), automorphisms of the tetragonal cover preserving the divisor. They do not by themselves prove it for Aut(C,\u0393), the group relevant to the forgetful map to M_{6,6}: an automorphism of C preserving \u0393 need not preserve the pencil, and triviality of the kernel is not formal, since a nontrivial automorphism of a genus-6 curve can fix as many as 2g+2=14 points and so can fix six marked points. Downstream artifacts must state which group they mean before citing such a clause."
+    },
+    {
+      "evidence": "Derived in this review from ATT-0066/CLM-0066-1, CLM-0066-2 (dual-confirmed by REV-0110 and REV-0116) plus FND-0105; not stated in ATT-0089, whose clause (4) leaves the \u03b3-compatibility unstated.",
+      "key": "FC-COMP-PENCIL-RECOVERY-AUT",
+      "relation_note": "Supplies the automorphism half of the recovery route that FND-0098 identifies as the only standard one, using the identification L\u2245\u03c9_C(-D) that FND-0105 and ATT-0066/CLM-0066-2 already establish; it is the h\u2070(M)=2 pencil-versus-net dichotomy, not merely the isomorphism, that makes the recovery canonical. Complements FND-0120 (injectivity over H_3 is not quasi-finiteness) by adding the stabilizer statement rather than the point-injectivity one. Requires independent corroboration.",
+      "statement": "On the stratum B_3 the tetragonal pencil is canonically recovered from the marked curve, so the two candidate automorphism groups coincide and the C66-GEO-COMP rigidity statement can be made for the M_{6,6}-relevant group. Concretely, for \u0393 in the incidence one has O(\u0393)\u2245L relatively, hence M:=\u03c9_C(-\u0393)\u2245\u03c9_C\u2297L^{-1}=\u03c9_C\u00b2\u2297W_5^\u2228; under the weak CE relative-canonical normalization (FND-0105, ATT-0066/CLM-0066-2) M\u2245\u03b3*O_{P\u00b9}(1), which is base-point-free of degree 4, and on B_3 one has h\u2070(L)=3 hence h\u2070(M)=2, so |M| is a base-point-free PENCIL and equals the pencil defining \u03b3; therefore \u03b3 is determined by (C,\u0393) up to PGL_2. Consequently any \u03c3\u2208Aut(C) with \u03c3(\u0393)=\u0393 satisfies \u03c3*M\u2245M, preserves |M|, and induces \u03c4\u2208PGL_2 with \u03b3\u03c3=\u03c4\u03b3, i.e. Aut(C,\u0393)=Aut(C,\u03b3,\u0393) on B_3, and the deck-transformation rigidity argument (three distinct marked images plus one \u03b3-\u00e9tale marked point) applies verbatim to Aut(C,\u0393). The recovery fails on B_4, where h\u2070(M)=3 and |M| is a net containing many pencils."
+    },
+    {
+      "evidence": "ATT-0089 lists GAP-H0-1 ('B_4 is not proved empty') as open and states clause (1) for k\u2208{3,4}; the theorem remains true either way, so this is a strengthening of the campaign's inputs rather than a defect of the artifact.",
+      "key": "FC-COMP-B4-EMPTY-UNDER-BALANCEDNESS",
+      "relation_note": "This is the composition FND-0104 was explicitly unable to make ('the remaining checkable question is exactly whether a non-primitive degree-4 pencil can have balanced CE splitting; this review does not settle that') with the answer supplied by FND-0125; neither source states B_4=\u2205 and neither alone implies it. Requires independent corroboration, in particular of FND-0125's splitting-type computation and of the standard fact that on a hyperelliptic curve of genus 6 every degree-4 pencil is composed with the hyperelliptic map.",
+      "statement": "Under the campaign's standing fibrewise-balanced hypothesis F_b\u2245O(4)\u2295O(5), the jump stratum is empty: B_4=\u2205, so h\u2070(L)\u22613 and B=B_3. Proof: ATT-0066/CLM-0066-3 (dual-confirmed by REV-0110 and REV-0116) shows B_4 is contained in the locus of hyperelliptic fibres on which \u03b3_b factors as q\u2218h through the hyperelliptic double cover; FND-0125 shows that for a hyperelliptic genus-6 curve with a degree-four pencil the relations bundle is exactly F=O(2)\u2295O(7). These are incompatible with balancedness on every geometric fibre, so no fibre lies in B_4. Consequences: GAP-H0-1 as carried by ATT-0066 and ATT-0089 is closed under the balanced hypothesis; the k=4 branch of any P^{k-1}-bundle or dim(Y)+k\u22121 statement is vacuous; and the pencil recovery of FC-COMP-PENCIL-RECOVERY-AUT holds on all of B rather than only on a stratum."
+    }
+  ],
+  "id": "REV-0141",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "a6509227aaf37308108d64c3743394cbb21d892f72d71fb7983f0cd9f537172c",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Used only for CLM-0065-4 (intrinsic Fitting scheme = a_N^{-1}(e), arbitrary base change, smooth-atlas descent) and CLM-0065-9 (balanced ambient failure scheme, under the explicit equation-bundle freeness/base-change hypothesis). ATT-0089 reproduces the conditional form of the ambient clause rather than asserting it unconditionally, and applies both only on Conf_6 where \u0393 is a sum of six pairwise disjoint sections, which is exactly ATT-0065's scope; the degree hypotheses d_4\u2212n=14>2g\u22122 and d_5\u2212n=10=2g\u22122 hold at (6,6).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Verified in repo/proof/reviews/REV-0108.json: verdict 'confirmed' on ATT-0065, with CLM-0065-4 and CLM-0065-9 individually confirmed and the ambient equation-bundle hypotheses recorded as remaining explicit. The scope ATT-0089 quotes is the scope this review confirmed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Verified: verdict 'confirmed' on ATT-0065, CLM-0065-4 and CLM-0065-9 confirmed, with the 'relative isomorphism = triviality of N in Pic^0, i.e. up to pullback from the base' qualification that ATT-0089 preserves by writing the incidence as the Abel\u2013Jacobi fibre product rather than a strict isomorphism O(\u0393)\u2245L.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Supplies (H2)/(H3)/(H4) i.e. CLM-0066-3 through CLM-0066-6. ATT-0089 uses them within scope: reduced strata only (Grauert), the Abel\u2013Jacobi model across the jump rather than Proj(\u03c0_*L) (FND-0047/FND-0107), and the torsor at stack level with no one-sided reduction. ATT-0089 declares B reduced and lists stack descent of the projective-bundle model as excluded, so it does not silently widen the base scope in the way FND-0127 warns against. Note ATT-0066 records packet_sha256 d61f3348... against the same packet_id/packet_binding_sha256 76cc8a6d...; the binding hash agrees with TASK.json, and no claim used here depends on the differing snapshot text.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Verified: verdict 'confirmed' on ATT-0066, with CLM-0066-3, -4, -5, -6 each confirmed and with (H3) and (H4) explicitly endorsed within the Conf_6/reduced-strata scope that ATT-0089 quotes.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Verified: verdict 'confirmed' on ATT-0066, all four cited claims confirmed. Its finding candidate FC-H0-NONREDUCED-GRAUERT (constant fibrewise h\u2070 over a non-reduced base does not give local freeness) is respected by ATT-0089, which assumes B reduced and takes B_k with reduced structure; its FC-H0-NEGATIVE-CLAUSES-ARE-DISCLAIMERS warning is also respected, since ATT-0089 asserts no non-bundle or non-Proj existential statement.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0089-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack, and the one that lands: clause (4) is the only novel non-formal content of the artifact, and it is not well-posed under the artifact's own hypotheses. B is declared a reduced locally Noetherian k-SCHEME, so I^{dist} is a scheme and Aut(x)=1 for every geometric point x; read literally, the inertia sequence and the rigidity statement are vacuously true and carry no information. Read as intended (theorem_scope: 'the finite \u00e9tale torsor and inertia assertions are stack-level') the objects are never named, and the proof's load-bearing step \u2014 that an ordered automorphism induces \u03c4\u2208PGL_2 fixing the three marked images \u2014 is not available from the data defining I, which is built from Hilb\u2076 and Pic\u2076 alone and never mentions \u03b3. The step holds only if Aut(x) is the automorphism group of the tetragonal cover (\u03c3,\u03c4) preserving \u0393; it fails for Aut(C,\u0393), which is the group the downstream M_{6,6} stabilizer analysis needs (FND-0098's 'stack-level full-faithfulness argument covering automorphism groups'). Either way, one clause of the theorem_statement is asserted without hypotheses that make it meaningful \u2014 the FND-0101 discipline applied to base scope rather than to a gap marker. Second-strongest attack, which fails: that clause (1) illicitly upgrades a Zariski-local product description to a global component bijection. It does not \u2014 maximality of P(E_k^\u2228|_Y) among irreducible closed subsets, and the fact that every component of I_k has image in some component of B_k, give the bijection cleanly, and P^{k-1} is geometrically irreducible so no field-extension irreducibility trap arises. Also pressed and failed: (a) Grauert over a non-reduced base (blocked by the declared reducedness and by the reduced structure on B_k); (b) one-sided reduction of the ordered/unordered pair (FND-0087; explicitly avoided by 'without reducing either side'); (c) connected versus irreducible components in the monodromy count (FND-0132; the artifact states only connected components, and the orbit count 720/|H_X| with degree |H_X| is exactly right for the regular S_6-set); (d) the FND-0121 trap of using dim=15 uniformly (avoided: the formula is dim(Y)+k\u22121 and 15 appears only inside an explicit hypothesis); (e) whether the ambient CE identification is imported unconditionally (it is not \u2014 ATT-0065's freeness and arbitrary-base-change hypotheses are carried in the statement). The entire cohomological attack list of the adversary prompt is inert against this artifact: it makes no Borel\u2013Moore versus ordinary degree identification, no Poincar\u00e9 duality or Tate twist, no Gysin or K\u00fcnneth shift, no spectral-sequence or degeneration claim, no invariants-versus-coinvariants passage, no semisimplification-versus-isomorphism step, no predicted motive, and no pure-Tate-to-algebraic upgrade; it uses no coefficient ring, and it excludes all Hodge/weight/Tate conclusions and all forgetful/lci/Gysin properties. Task binding checked: the attempt's target dictionary is field-for-field identical to TASK.json's, and both packet_sha256 (a6509227...) and packet_binding_sha256 (76cc8a6d...) match TASK.json (no shell is available in this workspace, so this is field equality, not a recomputed digest).",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be a field of characteristic zero and B a reduced locally Noetherian k-scheme. Let \u03c0:C\u2192B be smooth proper with geometrically connected genus-6 fibres, and let \u03b3:C\u2192P\u00b9_B be a finite flat degree-four cover with fibrewise balanced Casnati\u2013Ekedahl relations bundle O(4)\u2295O(5), the canonical filtration with degree-16 quotient W_5, and the weak relative-canonical normalization assumed in ATT-0066. Put L=W_5\u2297\u03c9_{C/B}^{-1}, let B_k={b\u2208B:h\u2070(L_b)=k} for k\u2208{3,4}, equipped with their reduced locally closed structures, and let I=Hilb\u2076(C/B)\u00d7_{Pic\u2076(C/B)}B be the Abel\u2013Jacobi incidence of L. Then: (1) I_k:=I\u00d7_B B_k is a P^{k-1}-bundle over B_k. Its irreducible components correspond bijectively to those of B_k; the component over an irreducible component Y\u2282B_k has dimension dim(Y)+k-1. In particular, a 15-dimensional component of B_3 gives a 17-dimensional incidence component, and 21\u221217=4 is only the numerical ambient dimension difference, not a closed-image or Gysin assertion. (2) Let I^{dist} be the open locus of divisors with six distinct support points and let I_tilde=Conf_6(C/B)\u00d7_{Hilb\u2076(C/B)}I. Without reducing either side, I_tilde\u2192I^{dist} is a finite \u00e9tale S_6-torsor of degree 720 at stack level. On Conf_6 it is scheme-theoretically the intrinsic evaluation-failure locus; it is also the ambient balanced CE evaluation-failure locus when the additional ambient freeness and arbitrary-base-change hypotheses of ATT-0065 hold. (3) For every connected component X of I^{dist}, let H_X\u2282S_6 be the image of the monodromy representation of this torsor. Then I_tilde\u00d7_{I^{dist}}X has exactly 720/|H_X| connected components, each finite \u00e9tale of degree |H_X| over X. Thus it is connected exactly when H_X=S_6. (4) For a geometric point x of I^{dist} and a chosen ordering x_tilde above it, the action on the ordering fibre gives an exact sequence of geometric automorphism groups 1\u2192Aut(x_tilde)\u2192Aut(x)\u2192S_6, where the last map records the induced permutation and need not be surjective. On the locus where the ordered marked points have at least three distinct images in P\u00b9 and at least one marked point is \u00e9tale for \u03b3, Aut(x_tilde)=1; hence Aut(x) injects into S_6 there.",
+  "verdict": "incomplete"
+}

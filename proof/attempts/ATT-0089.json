@@ -1,0 +1,216 @@
+{
+  "argument_markdown": "## Source-backed inputs\n\nATT-0065, confirmed by REV-0108 and REV-0109, identifies the intrinsic balanced evaluation-failure Fitting scheme with relative triviality of \u03c9\u2297W_5^\u2228(\u0393), and identifies the ambient scheme under its explicit equation-bundle base-change hypothesis (CLM-0065-4 and CLM-0065-9). ATT-0066, confirmed by REV-0110 and REV-0116, supplies the reduced h\u2070-strata, the projective-bundle model for the Abel\u2013Jacobi incidence, and the unreduced stack-level S_6-torsor with scheme-theoretic evaluation-locus identification on Conf_6 (CLM-0066-3 through CLM-0066-6). Its qualifications are retained: B_4 may be nonempty, reduced support need not occur on every fibre, and the projective-bundle statement is not promoted across nonreduced or jumping bases.\n\n## Proved steps\n\n1. Write E_k=\u03c0_*L|_{B_k}. By the verified H3 statement, E_k is locally free of rank k and I_k\u2245P(E_k^\u2228). If Y is an irreducible component of B_k, then P(E_k^\u2228|_Y) is irreducible because it is Zariski-locally Y\u00d7P^{k-1}. It is a maximal irreducible closed subset of I_k. Conversely, the image of any irreducible component of I_k is contained in an irreducible component Y of B_k, so the component lies in P(E_k^\u2228|_Y). This proves the component bijection. The projective-bundle dimension formula gives dim(Y)+k\u22121. The specialization dim(Y)=15 and k=3 gives 17; subtracting from dim M_{6,6}=21 gives only the numerical difference four.\n\n2. By CLM-0066-6, I_tilde\u2192I^{dist} is an S_6-torsor before any unilateral reduction, and I_tilde equals Z_ev scheme-theoretically on the ordered disjoint-section locus. CLM-0065-4 and CLM-0065-9 provide the intrinsic and, under the stated ambient hypotheses, ambient Fitting-scheme interpretation. No assertion is made outside the distinct-support scope.\n\n3. Fix a connected component X and a geometric base point. A principal S_6-torsor has fibre the regular S_6-set. Its \u00e9tale monodromy acts by left multiplication through a subgroup H_X\u2282S_6. Connected components of the cover correspond to H_X-orbits in this regular set. Every orbit has |H_X| elements, so there are 720/|H_X| components, each of degree |H_X|. Transitivity is equivalent to H_X=S_6. This classifies the finite-cover behavior without asserting the missing full-monodromy theorem.\n\n4. An automorphism of an unordered divisor acts on its set of orderings. After choosing x_tilde this gives Aut(x)\u2192S_6. Its kernel consists exactly of automorphisms preserving every label, namely Aut(x_tilde), proving exactness. Suppose now that three marked images in P\u00b9 are distinct and one marked point p is \u00e9tale for \u03b3. An ordered automorphism induces a PGL_2 transformation fixing the three images, hence the identity. It is therefore a deck transformation fixing p. Near (p,p), the first projection C\u00d7_{P\u00b9}C\u2192C is \u00e9tale; its identity and deck-transformation sections that agree at p agree on a neighbourhood. Since C is geometrically connected and smooth, equality on this nonempty open forces equality globally. Thus the ordered automorphism is the identity. This local argument does not assume that p lies over the globally unbranched base locus.\n\n## Computational hypotheses\n\nNone. The arithmetic 15+2=17 and 21\u221217=4 is bookkeeping only and is not used to establish a universal base dimension, closed image, or codimension theorem.\n\n## Remaining gaps\n\nThe theorem leaves open irreducibility and dimensions of the balanced-base components, occurrence of distinct-support divisors on every component, full S_6 monodromy, global stabilizer triviality, stack descent of H3, and all forgetful-map, lci, Gysin, Hodge, and Tate assertions.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0089-1",
+      "justification": "ATT-0066/CLM-0066-4 and CLM-0066-5, confirmed by REV-0110 and REV-0116, give the projectivization of a rank-k vector bundle; irreducibility and dimension follow Zariski-locally from Y\u00d7P^{k-1}.",
+      "statement": "On each reduced constant-h\u2070 stratum B_k, irreducible components of the Abel\u2013Jacobi incidence correspond bijectively to irreducible components Y of B_k and have dimension dim(Y)+k\u22121.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0089-2",
+      "justification": "CLM-0089-1 gives 15+2=17. The claim explicitly does not promote the arithmetic to a closed-image, purity, or Gysin statement.",
+      "statement": "A 15-dimensional B_3 component has a 17-dimensional incidence component; its dimension differs numerically by four from dim M_{6,6}=21.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0089-3",
+      "justification": "ATT-0066/CLM-0066-6 with REV-0110 and REV-0116 supplies the torsor and ordered scheme equality; ATT-0065/CLM-0065-4 and CLM-0065-9 with REV-0108 and REV-0109 supplies the intrinsic and ambient Fitting interpretation.",
+      "statement": "The ordered distinct-support incidence is an unreduced stack-level finite \u00e9tale S_6-torsor of degree 720 and equals the evaluation-failure scheme on Conf_6 in the verified intrinsic and conditional ambient scopes.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0089-4",
+      "justification": "Finite \u00e9tale covers are classified by the monodromy action on a geometric fibre; for a principal S_6-torsor this is the regular S_6-set, whose H_X-orbits all have cardinality |H_X|.",
+      "statement": "Over a connected component X of I^{dist}, if H_X is the torsor monodromy image in S_6, the ordered cover has 720/|H_X| connected components, each of degree |H_X|; it is connected exactly for full S_6 monodromy.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0089-5",
+      "justification": "The kernel of the action on orderings fixes every label. Three target images kill the induced PGL_2 transformation, and an over-P\u00b9 automorphism fixing an \u00e9tale point agrees locally, hence globally, with the identity.",
+      "statement": "For an ordered lift x_tilde of an unordered distinct divisor x, 1\u2192Aut(x_tilde)\u2192Aut(x)\u2192S_6 is exact; on the locus with three distinct target images and an \u00e9tale marked point, Aut(x_tilde) is trivial.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "vcd-only-vanishing: not used; the result is purely geometric and makes no cohomological vanishing claim."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "undecorated-cgp-top-weight-graph-complex: not used; no top-weight identification is invoked."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "point-count-without-degree-parity-separation: not used; no point count or finite computation is evidentiary."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "forgetful-map-renaming-local-system-unknown: not used; forgetful-map geometry is explicitly left open."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "No dimension-15 conclusion is inferred from Riemann\u2013Hurwitz alone."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "No reduced-support nonemptiness is inferred from \u03c7(L)=1."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "No global projectivization is asserted across h\u2070-jumps or nonreduced bases."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "No stack monomorphism is inferred from geometric-point or automorphism-group injectivity."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "No Tate conclusion is inferred from rational S_6-representation theory."
+    }
+  ],
+  "gap_markers": [
+    "GAP-COMP-BASE: irreducibility, equidimensionality, and absolute component dimensions of the balanced base remain open.",
+    "GAP-H0-1: B_4 is not proved empty.",
+    "GAP-COMP-DISTINCT: I^{dist} is not proved nonempty over every fibre or every base component.",
+    "GAP-COMP-MONODROMY: full S_6 monodromy is not proved.",
+    "GAP-COMP-STACK-H3: descent of the projective-bundle statement from scheme charts remains unstated.",
+    "GAP-COMP-FORGETFUL: monomorphism, quasi-finiteness, closedness, pure codimension, lci, and Gysin properties of the forgetful map remain open.",
+    "GAP-COMP-TATE: no Hodge, weight, or Tate conclusion is obtained."
+  ],
+  "id": "ATT-0089",
+  "lane": "geometry",
+  "methods_used": [
+    "verified-casnati-ekedahl-abel-jacobi-incidence",
+    "projective-bundle-component-analysis",
+    "finite-etale-torsor-monodromy-orbits",
+    "stack-inertia-permutation-kernel",
+    "local-rigidity-of-deck-transformations-at-an-etale-point"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Derives the exact irreducible-component correspondence and dimension formula on both verified h\u2070-strata without assuming irreducibility or a universal 15-dimensional base.",
+    "Classifies connected components and degrees of the ordered S_6-cover exactly in terms of its monodromy image.",
+    "Identifies the ordered stabilizer as the kernel of the permutation action and proves its triviality on the explicit three-image-plus-\u00e9tale-mark locus."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "a6509227aaf37308108d64c3743394cbb21d892f72d71fb7983f0cd9f537172c",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0065",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-Z dependency; supplies CLM-0065-4 and CLM-0065-9 for intrinsic and balanced ambient Fitting-scheme identification."
+    },
+    {
+      "id": "REV-0108",
+      "kind": "confirmation_review",
+      "role": "First confirmation of ATT-0065, including its ambient hypotheses and scope restrictions."
+    },
+    {
+      "id": "REV-0109",
+      "kind": "confirmation_review",
+      "role": "Second confirmation of ATT-0065, including the nonreduced and sign-convention qualifications."
+    },
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-H0 dependency; supplies CLM-0066-3 through CLM-0066-6 and theorem clauses H2 through H4."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First confirmation of ATT-0066, including the reduced-stratum and stack-level torsor scope."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second confirmation of ATT-0066, including the nonreduced Grauert and negative-clause caveats."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "CLM-0065-4",
+    "CLM-0065-9",
+    "CLM-0066-3",
+    "CLM-0066-4",
+    "CLM-0066-5",
+    "CLM-0066-6"
+  ],
+  "source_ids": [
+    "ATT-0065",
+    "REV-0108",
+    "REV-0109",
+    "ATT-0066",
+    "REV-0110",
+    "REV-0116"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "The verified Abel\u2013Jacobi geometry determines the incidence components and their relative dimensions on each reduced h\u2070-stratum. The ordered distinct-support locus is a degree-720 stack-level torsor whose connected components are exactly controlled by the still-unknown monodromy image. Stabilizers fit into the permutation representation, with trivial ordered stabilizer on the stated rigid locus. The lemma does not claim irreducibility, full monodromy, closed-image geometry, or Tate consequences.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "base": "Reduced locally Noetherian schemes for the projective-bundle and component assertions; the finite \u00e9tale torsor and inertia assertions are stack-level.",
+    "characteristic": 0,
+    "excluded": [
+      "Irreducibility or equidimensionality of the balanced base or B_3.",
+      "Emptiness of B_4 or fibrewise nonemptiness of I^{dist}.",
+      "Full S_6 monodromy.",
+      "Global triviality of ordered stabilizers.",
+      "Descent of the projective-bundle model from scheme charts to an arbitrary stack base.",
+      "Monomorphism, quasi-finiteness, closedness, pure codimension, lci, or Gysin properties of the forgetful morphism to M_{6,6}.",
+      "Any Hodge, weight, purity, Tate, or positive-characteristic conclusion."
+    ],
+    "g": 6,
+    "hypotheses": [
+      "Fibrewise balanced tetragonal Casnati\u2013Ekedahl relations bundle O(4)\u2295O(5).",
+      "Canonical filtration and degree-16 quotient W_5 in the verified scope of ATT-0065 and ATT-0066.",
+      "Weak relative-canonical normalization (N), retained as an external hypothesis.",
+      "For identification with the ambient CE evaluation locus, q_*\ud835\udcb2 is finite locally free and commutes with arbitrary base change as required by ATT-0065."
+    ],
+    "n": 6,
+    "residual_hypothesis_R": "Not used by this lemma and remains external for later campaign steps."
+  },
+  "theorem_statement": "Let k be a field of characteristic zero and B a reduced locally Noetherian k-scheme. Let \u03c0:C\u2192B be smooth proper with geometrically connected genus-6 fibres, and let \u03b3:C\u2192P\u00b9_B be a finite flat degree-four cover with fibrewise balanced Casnati\u2013Ekedahl relations bundle O(4)\u2295O(5), the canonical filtration with degree-16 quotient W_5, and the weak relative-canonical normalization assumed in ATT-0066. Put L=W_5\u2297\u03c9_{C/B}^{-1}, let B_k={b\u2208B:h\u2070(L_b)=k} for k\u2208{3,4}, equipped with their reduced locally closed structures, and let I=Hilb\u2076(C/B)\u00d7_{Pic\u2076(C/B)}B be the Abel\u2013Jacobi incidence of L. Then: (1) I_k:=I\u00d7_B B_k is a P^{k-1}-bundle over B_k. Its irreducible components correspond bijectively to those of B_k; the component over an irreducible component Y\u2282B_k has dimension dim(Y)+k-1. In particular, a 15-dimensional component of B_3 gives a 17-dimensional incidence component, and 21\u221217=4 is only the numerical ambient dimension difference, not a closed-image or Gysin assertion. (2) Let I^{dist} be the open locus of divisors with six distinct support points and let I_tilde=Conf_6(C/B)\u00d7_{Hilb\u2076(C/B)}I. Without reducing either side, I_tilde\u2192I^{dist} is a finite \u00e9tale S_6-torsor of degree 720 at stack level. On Conf_6 it is scheme-theoretically the intrinsic evaluation-failure locus; it is also the ambient balanced CE evaluation-failure locus when the additional ambient freeness and arbitrary-base-change hypotheses of ATT-0065 hold. (3) For every connected component X of I^{dist}, let H_X\u2282S_6 be the image of the monodromy representation of this torsor. Then I_tilde\u00d7_{I^{dist}}X has exactly 720/|H_X| connected components, each finite \u00e9tale of degree |H_X| over X. Thus it is connected exactly when H_X=S_6. (4) For a geometric point x of I^{dist} and a chosen ordering x_tilde above it, the action on the ordering fibre gives an exact sequence of geometric automorphism groups 1\u2192Aut(x_tilde)\u2192Aut(x)\u2192S_6, where the last map records the induced permutation and need not be surjective. On the locus where the ordered marked points have at least three distinct images in P\u00b9 and at least one marked point is \u00e9tale for \u03b3, Aut(x_tilde)=1; hence Aut(x) injects into S_6 there."
+}

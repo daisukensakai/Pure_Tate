@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hard-capped Grok 4.5 worker pool for CLI_test (not imported by pure_tate).
+"""Hard-capped Grok 4.6 worker pool for CLI_test (not imported by pure_tate).
 
 Caps (hard):
   - max_concurrent: simultaneous live workers (default 4)
@@ -25,7 +25,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Sequence
 
 
-DEFAULT_MODEL = "grok-4.5"
+DEFAULT_MODEL = "grok-4.6"
 DEFAULT_MAX_CONCURRENT = 4
 DEFAULT_MAX_TOTAL = 4
 DEFAULT_MAX_TURNS = 20
