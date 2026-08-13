@@ -1,0 +1,104 @@
+{
+  "jobs": [
+    {
+      "applied": true,
+      "artifact_id": "FAUD-0126",
+      "engine": "claude",
+      "finding_id": "FND-0123",
+      "kind": "finding-audit",
+      "manifest": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/manual-recovery/three-engine-context-20260811T230619Z/manifest-FAUD-0126.json",
+      "output": "research/finding-audits/FAUD-0126.json",
+      "reservation": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/reservations/FAUD-0126.json",
+      "result_verdict": "merge",
+      "status": "done",
+      "task_id": "TASK-F-FND-0123"
+    },
+    {
+      "applied": true,
+      "artifact_id": "FAUD-0127",
+      "engine": "codex",
+      "finding_id": "FND-0124",
+      "kind": "finding-audit",
+      "manifest": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/manual-recovery/three-engine-context-20260811T230619Z/manifest-FAUD-0127.json",
+      "output": "research/finding-audits/FAUD-0127.json",
+      "reservation": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/reservations/FAUD-0127.json",
+      "result_verdict": "retain_candidate",
+      "status": "done",
+      "task_id": "TASK-F-FND-0124"
+    },
+    {
+      "artifact_id": "DIGEST-0026",
+      "attempt_id": "ATT-0076",
+      "engine": "cursor-grok",
+      "kind": "trace-mining",
+      "manifest": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/manual-recovery/three-engine-context-20260811T230619Z/manifest-DIGEST-0026.json",
+      "output": "research/paired-digests/DIGEST-0026.json",
+      "publish": {
+        "archive": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-ARCHIVE-C66-COMP-RANK-966743bb32834a68.md",
+          "sha256": "966743bb32834a6851785a166152920542c70e094af940d8fbb1f8ea810d9dce"
+        },
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-C66-COMP-RANK-02a4a30ea36105a3.md",
+          "sha256": "02a4a30ea36105a3d889354117ac7804a7739754db9831cd2cb8c442a7e9dd27"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-C66-COMP-RANK-0cc6485ee4adc943.md",
+          "sha256": "0cc6485ee4adc9439d83667b33313cb1a0fc530f93872feed51c4020622306c8"
+        },
+        "stats": {
+          "bytes_archive": 117690,
+          "bytes_extended": 29510,
+          "bytes_extended_by_section": {
+            "candidate": 72,
+            "computation": 0,
+            "dependency": 0,
+            "established": 0,
+            "invalid": 29438
+          },
+          "bytes_primary": 59592,
+          "bytes_primary_by_section": {
+            "candidate": 111,
+            "computation": 6587,
+            "dependency": 862,
+            "established": 39082,
+            "invalid": 12950
+          },
+          "constraints_in_extended": 77,
+          "focus_subproblem_id": "C66-COMP-RANK",
+          "primary_constraint_share": 0.21731104846288093,
+          "primary_fresh_share": 0.4494949494949495,
+          "primary_redundant_rows": 0,
+          "rows_archived": 545,
+          "rows_demoted": 97,
+          "rows_extended": 78,
+          "rows_extended_by_section": {
+            "candidate": 1,
+            "computation": 0,
+            "dependency": 0,
+            "established": 0,
+            "invalid": 77
+          },
+          "rows_fresh": 276,
+          "rows_primary": 198,
+          "rows_primary_by_section": {
+            "candidate": 1,
+            "computation": 36,
+            "dependency": 7,
+            "established": 117,
+            "invalid": 37
+          },
+          "rows_total": 821
+        },
+        "subproblem_id": "C66-COMP-RANK"
+      },
+      "reservation": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/reservations/DIGEST-0026.json",
+      "status": "done",
+      "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+      "trace_id": "TRACE-0035"
+    }
+  ],
+  "note": "no forced; Claude+Codex FAUD + cursor-grok COMP-RANK mine",
+  "stamp": "20260811T230619Z",
+  "vault": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/manual-recovery/three-engine-context-20260811T230619Z"
+}

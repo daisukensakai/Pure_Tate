@@ -1,0 +1,137 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "VERDICT: promote (candidate -> corroborated); evidence_class upgraded adversarial_review -> primary_source; merge_target none. No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. Compatible with THM-0001 (stack cohomology conventions) and with the packet's C66-GEO-COMP / ATT-0083 stack-base usage. TEXTUAL CHECK (verified against ATT-0066, ATT-0083, REV-0132). ATT-0066 theorem_statement opens 'Let B be a locally Noetherian scheme over a field of characteristic zero' and states (H1)/(H3) in that scheme-only scope; theorem_scope.base records 'locally Noetherian over a characteristic-zero field' without stacks. ATT-0083 theorem_statement widens to 'B a locally Noetherian k-scheme (or locally Noetherian algebraic k-stack with a smooth atlas)', imports 'ATT-0066/(H3) with FND-0107', and in \u00a76/CLM-0083-6 applies 'Grauert on reduced B \u2026 and ATT-0066/(H3) with B_3=B' to conclude I\u2245P((\u03c0_*L)^\u2228) over that B, with no explicit smooth-atlas descent sentence in theorem, proof, dependency_scope, or GAP list. REV-0132 records exactly this as FC-SCHEME-SCOPED-H3-OVER-STACK-BASE / FND-0127. PRIMARY MATH CHECK. (i) Stacks Project tag 0GB3: if f:X\u2192Y is smooth of algebraic spaces and Y is reduced then X is reduced (characteristic-independent; finding's char-0 restriction is ambient inheritance, not load-bearing). (ii) Stacks tags 02KE/07VJ supply flat/proper CBC and perfectness of R\u0393 for coherent flat sheaves on proper morphisms of Noetherian schemes, so Grauert freeness+CBC after restriction to a reduced constant-h^0 stratum is smooth-local on the base. (iii) Hall arXiv:1206.4179 (Math. Z. 2014) proves cohomology and base change for locally Noetherian algebraic stacks, giving an alternative to atlas descent. (iv) Relative Hilb/Sym and Pic of a smooth proper curve family, and the section [L], commute with base change; the universal-divisor identification I\u00d7_B B_k\u2245P((\u03c0_*L)^\u2228) is canonical on constant-h^0 strata (compatible with corroborated FND-0107 and the Proj caveat FND-0047). Hence the scheme\u2192stack extension is legitimate, and the load-bearing gap is documentary: quoting (H3) verbatim over a stack base without recording smooth-atlas descent (or citing stack CBC) silently widens scope. DISTINCTNESS / NO MERGE. FND-0075 enforces stack-vs-coarse discipline for the ordered S_6-torsor and rational descent of cohomology; it is the cited methodological analogue, not a duplicate of scheme-scoped (H3) vs stack-base widening. Do not merge with FND-0047/FND-0107 (AJ vs Proj validity), which concern jump loci rather than base category. Retain equivalence group FC-SCHEME-SCOPED-H3-OVER-STACK-BASE. INDEPENDENCE. Parent re-read ATT-0066/ATT-0083 theorem openings and H3 citation path; live-fetched Stacks 0GB3/02KE/07VJ and Hall 1206.4179; one read-only Grok worker (2 turns) served only as a reading layer for artifact locators. LIMITATION: no shell/hashing in this workspace, so every content_sha256 is the all-zero null sentinel of FAUD-0125 rather than a computed digest.",
+  "engine": "cursor-grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0127",
+  "id": "FAUD-0133",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "cursor-grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "char0_note": "ATT-0083 ambient char-0 is inherited; Stacks 0GB3 makes reducedness under smooth morphisms characteristic-independent, so the finding's 'char 0' clause is unnecessarily narrow but not false",
+    "equivalence_group": "FC-SCHEME-SCOPED-H3-OVER-STACK-BASE",
+    "explicitly_not_claimed": "does not assert that (H3) fails on stacks; does not alter the constant-h^0 / reduced-stratum hypotheses of (H3); does not discharge any C66-GEO-COMP geometric clause beyond base-scope bookkeeping",
+    "impacts_approach_ids": [
+      "C66-GEO-COMP"
+    ],
+    "kind": "obstruction",
+    "mathematical_status": "extension of scheme-scoped (H1)/(H3) to smooth-atlas stack bases is legitimate; the obstruction is the missing explicit descent (or stack-CBC) sentence when quoting (H3) over a stack base",
+    "objects": {
+      "H1_H3": "ATT-0066 hypotheses (H1) fibrewise RR/Clifford/normalization values of L=W_5\u2297\u03c9^{-1} and (H3) closed Abel\u2013Jacobi incidence I=Hilb^6(C/B)\u00d7_{Pic^6}B with I\u00d7_B B_k\u2245P((\u03c0_*L|_{B_k})^\u2228) on reduced constant-h^0 strata",
+      "descent_content": "Grauert local freeness+CBC is smooth-local on the base; reducedness is preserved by smooth morphisms; AJ incidence and P((\u03c0_*L)^\u2228) commute with base change and the identification is canonical via the universal divisor, hence descends along a smooth atlas",
+      "source_base": "ATT-0066: locally Noetherian scheme over a field of characteristic zero",
+      "target_base": "ATT-0083 C66-GEO-COMP: locally Noetherian k-scheme or locally Noetherian algebraic k-stack with a smooth atlas"
+    },
+    "target_status": "candidate -> corroborated"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-12T12:46:00Z",
+      "source_type": "corpus",
+      "url": "workspace://proof/attempts/ATT-0066.json#theorem_statement"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-12T12:46:30Z",
+      "source_type": "corpus",
+      "url": "workspace://proof/attempts/ATT-0083.json#theorem_statement"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "sibling-finding-check",
+      "retrieved_at": "2026-08-12T12:47:00Z",
+      "source_type": "corpus",
+      "url": "workspace://proof/reviews/REV-0132.json#FC-SCHEME-SCOPED-H3-OVER-STACK-BASE"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "cross-claim-check",
+      "retrieved_at": "2026-08-12T12:43:00Z",
+      "source_type": "corpus",
+      "url": "workspace://data/claims.jsonl#CONJ-0001,THM-0001,THM-0002,THM-0003,THM-0005,OBS-0001,RED-0001"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "sibling-finding-check",
+      "retrieved_at": "2026-08-12T12:43:30Z",
+      "source_type": "corpus",
+      "url": "workspace://proof/packets/generated/C66-001-v4.md#FND-0075,FND-0047,FND-0107"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "reducedness-smooth-morphisms",
+      "retrieved_at": "2026-08-12T12:44:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0GB3"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "cohomology-and-base-change-schemes",
+      "retrieved_at": "2026-08-12T12:44:20Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/02KE"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "cohomology-and-base-change-schemes",
+      "retrieved_at": "2026-08-12T12:44:40Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/07VJ"
+    },
+    {
+      "arxiv_id": "1206.4179",
+      "arxiv_version": "v2",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": "10.1007/s00209-014-1312-8",
+      "query_family": "cohomology-and-base-change-stacks",
+      "retrieved_at": "2026-08-12T12:45:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1206.4179"
+    },
+    {
+      "arxiv_id": "1206.4179",
+      "arxiv_version": "v2",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "cohomology-and-base-change-stacks",
+      "retrieved_at": "2026-08-12T12:45:20Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/1206.4179"
+    }
+  ],
+  "task_id": "TASK-F-FND-0127",
+  "verdict": "promote"
+}

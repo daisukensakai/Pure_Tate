@@ -1,0 +1,79 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "SOURCED AND GRANTED FACTS: FND-0105 supplies L\u2245K_C-D. Schreyer's theorem supplies the tetragonal-scroll complete-intersection description when its scroll hypotheses apply. Bujokas-Patel proves balancedness of the Casnati-Ekedahl bundle for a general cover, but the cited result does not identify CE-balancedness alone with the smooth scroll X_{1,1,1}. The curated packet contains no corroborated implication from F=O(4)+O(5) to that scroll type, and FND-0104 leaves non-primitivity open. DEDUCTION: If Gamma\u2264D_a+D_b, then R=D_a+D_b-Gamma is effective, deg R=8-6=2, and [R]=2D-L=3D-K_C. On a non-hyperelliptic curve a degree-2 line bundle has at most one section, because two independent sections would produce a g^1_2 after removal of any fixed part. Thus R is unique. Its support forces {a,b} to contain gamma(supp R), yielding the stated empty/finite/at-most-one-dimensional trichotomy. This corroborates the load-bearing residual classification. CONDITIONAL CHECK: On Q=X_{1,1,1}=P(O(1)^3), with C a complete intersection of 2H and 2H-R, twisting the Koszul resolution by 3R-H and applying Leray gives H^0(C,3D-K_C)=0. However, importing this calculation for every CE-balanced fibre requires the unsupported smooth-scroll implication. The finding's claim that non-effectivity is 'the generic situation' therefore remains insufficiently sourced at its stated scope. No curated claim directly contradicts the residual classification, and no equivalent corroborated finding provides a merge target. Because the finding combines a correct exact trichotomy with an unresolved genericity assertion and a stabilizer conclusion conditional on ATT-0083(F), it should remain a candidate rather than be promoted or retired.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0126",
+  "id": "FAUD-0131",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "conditional_scope": "If the canonical tetragonal scroll is the smooth cubic scroll X_{1,1,1} and C is its Schreyer complete intersection of classes 2H and 2H-R, then H^0(C,3D-K_C)=0, so the incidence is empty.",
+    "granted": [
+      "FND-0105: L isomorphic to K_C-D",
+      "the degree-four cover supplies a base-point-free pencil D",
+      "non-hyperellipticity for the h^0<=1 argument"
+    ],
+    "not_audited": [
+      "ATT-0083 clause (F)'s identification of this incidence with the complete non-trivial-stabilizer locus",
+      "the broader cohomology campaign",
+      "orbifold-cohomology consequences"
+    ],
+    "objects": [
+      "smooth non-hyperelliptic genus-6 degree-four cover gamma:C->P1",
+      "fibre divisor D=gamma^*O_P1(1)",
+      "line bundle L isomorphic to K_C-D",
+      "reduced divisor Gamma in |L| contained in D_a+D_b",
+      "residual divisor R=D_a+D_b-Gamma"
+    ],
+    "proved_scope": "Set-theoretically, R is effective of degree 2 with class 3D-K_C=2D-L; h^0(3D-K_C)<=1, so an effective R is unique. The incidence is empty if this class is non-effective, finite if R has two distinct gamma-images, and can have dimension 1 only when R is contained in one gamma-fibre. Intersecting with the reduced-divisor locus can only decrease these dimensions.",
+    "unresolved": [
+      "The curated dependencies do not prove that CE-balancedness F=O(4)+O(5) forces the smooth scroll X_{1,1,1}.",
+      "FND-0104 explicitly leaves general non-primitivity unresolved.",
+      "The parenthetical assertion that 3D-K_C is non-effective generically is not established by the residual calculation or by the cited balancedness result alone."
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "6ea6b5e13185e372b50f68ec130b3a724e32039f990b9018e9cec57c184ac84b",
+      "doi": "10.1007/BF01458587",
+      "locator": "Math. Ann. 275 (1986), Section 6, especially (6.2): tetragonal canonical curves and their two defining divisor classes on the associated rational normal threefold scroll",
+      "query_family": "schreyer-tetragonal-scroll-complete-intersection",
+      "retrieved_at": "2026-08-12T12:42:00Z",
+      "source_type": "journal",
+      "url": "https://doi.org/10.1007/BF01458587"
+    },
+    {
+      "arxiv_id": "1504.03756",
+      "arxiv_version": "v1",
+      "content_sha256": "b7b4a5d9d166b7a998f792ec74a5654a18c135d66466d28b82400439e3c5abab",
+      "doi": "10.1093/imrn/rnaa156",
+      "locator": "Bujokas-Patel, proof that the Casnati-Ekedahl bundle of quadrics is balanced for a general cover; this does not by itself establish the required scroll splitting for every CE-balanced cover",
+      "query_family": "general-cover-casnati-ekedahl-bundle-balancedness",
+      "retrieved_at": "2026-08-12T12:42:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1504.03756"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "ca8f26dc3c3ce38518e220465621913c403a9a32db3105e656d6b7faa0fb45e5",
+      "doi": null,
+      "locator": "FND-0104, FND-0105, FND-0125, and FND-0130",
+      "query_family": "curated-dependency-cross-check",
+      "retrieved_at": "2026-08-12T12:42:00Z",
+      "source_type": "packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    }
+  ],
+  "task_id": "TASK-F-FND-0126",
+  "verdict": "retain_candidate"
+}

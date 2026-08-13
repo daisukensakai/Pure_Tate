@@ -1,0 +1,92 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "VERDICT: promote candidate -> corroborated. No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001 or RED-0001; it is an inference-level obstruction internal to the (6,6) balanced tetragonal geometry and is orthogonal to the claim graph. (1) SCOPE RECONSTRUCTION. ATT-0078 and REV-0128 are not in the read-only workspace, so H_3/H_4 were reconstructed from packet-internal arithmetic. Corroborated FND-0104 gives h^0(omega_C(-D)) = 1 + h^0(D) in {3,4} on the balanced locus, the value 4 occurring only if C is hyperelliptic with D ~ 2 g^1_2 (Clifford equality, FND-0103). This is the unique reading producing a fibre-dimension bound of exactly two, and it is confirmed twice: (a) modulo GAP-Z-W5D the fibre of the pencil-forgetting morphism over a point of M_{6,6} is the set of pencils inside the fixed system |D| = |omega_C(-Gamma)|, i.e. Gr(2, h^0(D)) - a single point when h^0(D)=2 (injectivity over H_3) and Gr(2,3) = P^2 of dimension exactly 2 when h^0(D)=3 (the bound over H_4); (b) Martens' theorem (ACGH I, Ch. IV Thm 5.1) gives dim W^1_4(C) <= d-2r = 2 for every smooth genus-6 curve with equality precisely for hyperelliptic C - the same numeral 2 and the same equality locus. The verdict is insensitive to the labelling: under any reading in which H_4 carries only a fibre-dimension bound of 2, the inference fails. (2) PRIMARY VERIFICATION OF THE LOGICAL CORE. Quasi-finiteness is a zero-fibre-dimension condition, not a bounded-fibre-dimension condition. Stacks Project Tag 0397 (Lemma 29.30.5), retrieved and quoted verbatim by this reviewer: 'Let f : X -> S be a morphism of schemes. Assume f is locally of finite type. Let x in X with s = f(x). Then f is quasi-finite at x if and only if dim_x(X_s) = 0. In particular, f is locally quasi-finite if and only if f has relative dimension 0.' Tag 01TD (Definition 29.21.1) defines quasi-finite as 'of finite type and every point x is an isolated point of its fibre'; Tag 01TC records Lemma 29.21.10 (tag 02NH), quasi-finite iff locally of finite type, quasi-compact, with finite fibres. A bound dim <= 2 is therefore weaker than the asserted conclusion by two full dimensions and supplies no part of it. FND-0120 is CONFIRMED on this ground alone; the ATT-0078 implication is a non sequitur exactly as stated. (3) SHARPENING (audit contribution beyond the finding as written). Over H_4 the bound is attained rather than slack: the fibre is Gr(2,3) = P^2 of dimension exactly 2. The situation is therefore a dichotomy, not a gap. Either H_4 meets the balanced locus, in which case the morphism has two-dimensional fibres and is NOT quasi-finite (the ATT-0078 conclusion is then false, not merely unproved); or H_4 misses the balanced locus, in which case quasi-finiteness follows from the H_3 analysis alone and the H_4 clause is vacuous. Which alternative holds is precisely the question corroborated FND-0104 records as open ('whether a non-primitive degree-4 pencil can have balanced CE splitting F = O(4)+O(5); this review does not settle that'). The missing input is thus not further fibre-dimension bookkeeping but emptiness or nonemptiness of the non-primitive/hyperelliptic stratum inside the balanced locus, and the finding should be recorded with this sharpening. That special genus-6 loci genuinely carry positive-dimensional families of degree-four pencils is standard Martens-Mumford theory (ACGH I Thms 5.1-5.2), exposited in the genus-6 stratification of Penev-Vakil, Algebraic Geometry 2 (2015) 123-136, arXiv:1307.6614 Thm 4.1, separating a Brill-Noether-general locus with finitely many g^1_4's from trigonal, plane-quintic, bielliptic and hyperelliptic loci with dim W^1_4 > 0; so finiteness of pencil fibres over M_6 is a non-generic assertion that must be earned on the special loci and is not inherited from the generic count of five recorded in corroborated FND-0098. (4) TWO FURTHER INDEPENDENT GROUNDS, endorsed but not required. (i) The word 'global' fails for a second reason: the source of the morphism as constructed is only the balanced model, and corroborated FND-0091 records that unbalanced tetragonal failure is unconstructed, so nothing follows about a morphism defined on the whole CE evaluation-failure locus in M_{6,6}. (ii) Injectivity over H_3 is itself conditional: it rests on recovering gamma from L, i.e. on L = omega_C(-D) (GAP-Z-W5D), which corroborated FND-0098 identifies as the only standard recovery route and corroborated FND-0105 shows is one citation (the CE relative-canonical normalization) from being discharged but which the packet has not discharged. (5) METHOD NOTE FOR REPAIR. A correct quasi-finiteness proof over a stratification must (a) show the strata set-theoretically exhaust the source, (b) prove dim = 0, not dim <= 2, on each, and (c) pass from geometric-fibre statements to the morphism by upper semicontinuity of fibre dimension - Stacks Tag 02FZ (Lemma 29.29.4), retrieved and quoted verbatim, citing EGA IV_3 Thm 13.1.3: 'Let f : X -> S be a morphism of schemes. Let n >= 0. Assume f is locally of finite type. The set U_n = {x in X | dim_x X_{f(x)} <= n} is open in X.' Since the objects are stacks it must additionally use the stack-level notion (Stacks Tag 06PU, retrieved via 06PT: locally quasi-finite requires quasi-DM, locally of finite type, and |X_k| discrete for every field-valued point), because coarse-space finiteness does not imply stack quasi-finiteness when automorphisms are present (corroborated FND-0060, FND-0075). (6) MERGE ANALYSIS. Distinct from FND-0098 (existence of a route recovering the pencil from L, not the finite-fibre inference over a jumping stratum), from FND-0103/FND-0104 (positive structural lemmas supplying the stratification and its Clifford bounds), from FND-0069 and FND-0086 (component, closure and codimension analysis of Z rather than fibres of the pencil-forgetting morphism), and from FND-0091 (balanced-versus-global mismatch, cited here only as an auxiliary ground). No merge; merge_target_id null. The equivalence group global-finite-fibres-not-proved-from-h4-bound is new and should be retained. (7) EVIDENCE CLASS. Upgraded from adversarial_review to primary_source: the load-bearing steps are the Stacks Project characterizations of quasi-finiteness (0397, 01TD, 01TC/02NH) and of fibre-dimension semicontinuity (02FZ), all fetched and quoted verbatim in this audit, plus an elementary Grassmannian dimension count and already-corroborated packet findings. Martens/Mumford (ACGH) and Penev-Vakil are supporting only; ACGH is paywalled and its statement was relayed rather than read directly here, and no part of the verdict depends on it. (8) INTEGRITY NOTE. The workspace is read-only with no shell, so content digests could not be computed; content_sha256 is recorded as null in every source record rather than fabricated. The Stacks Project statements were retrieved and quoted directly by this reviewer. arXiv:1307.6614 was confirmed by search metadata (Penev-Vakil, The Chow ring of the moduli space of curves of genus 6, Algebraic Geometry 2 (2015) 123-136, DOI 10.14231/AG-2015-006), but its Theorem 4.1 text was relayed by an assistive worker and not read verbatim by this reviewer; the Larson trigonal reference arXiv:2002.00142 was verified to exist but its genus-6 W^1_4 example is worker-relayed and is therefore omitted from the source records.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0120",
+  "id": "FAUD-0122",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "assertion_type": "negative / non-sequitur: injectivity over H_3 plus a fibre-dimension bound of at most 2 over H_4 does not entail finite fibres or quasi-finiteness of the global morphism",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "excludes": [
+      "the unbalanced tetragonal locus, over which the source of the morphism is not constructed (corroborated FND-0091)",
+      "any positive assertion that the morphism actually fails to be quasi-finite; that requires H_4 to be nonempty inside the balanced locus, which corroborated FND-0104 explicitly leaves unsettled",
+      "integral-coefficient and coarse-space versions, where stacky automorphisms change the finiteness question (corroborated FND-0060, FND-0075)"
+    ],
+    "generality": "The logical core (a fibre-dimension bound b > 0 is not a finiteness statement; quasi-finite means relative dimension exactly 0) is independent of (g,n) and of the model. The specific value 2, the stratum labels H_3/H_4, and the hyperelliptic/non-primitive equality locus are specific to the (6,6) balanced tetragonal Casnati-Ekedahl model.",
+    "object": "the pencil-forgetting morphism from the balanced tetragonal Casnati-Ekedahl evaluation-failure model (triples (C, gamma, Gamma) with F = O_{P1}(4) + O_{P1}(5) and O_C(Gamma) = W_5 tensor omega_C^{-1}) to M_{6,6}",
+    "strata": "H_3 = {h^0(omega_C(-D)) = 3} = {h^0(D) = 2, |D| a pencil}; H_4 = {h^0(omega_C(-D)) = 4} = {h^0(D) = 3, |D| a net}. These labels are reconstructed from packet arithmetic (corroborated FND-0103, FND-0104), because ATT-0078 and REV-0128 are absent from the read-only workspace."
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "quasi-finiteness-fibre-dimension-characterization",
+      "retrieved_at": "2026-08-11T00:50:40Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0397"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "quasi-finiteness-definition",
+      "retrieved_at": "2026-08-11T00:47:30Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/01TD"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "quasi-finite-finite-fibres-lemma-list",
+      "retrieved_at": "2026-08-11T00:48:10Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/01TC"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "fibre-dimension-upper-semicontinuity",
+      "retrieved_at": "2026-08-11T00:52:10Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/02FZ"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stack-level-quasi-finiteness",
+      "retrieved_at": "2026-08-11T00:48:15Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/06PT"
+    },
+    {
+      "arxiv_id": "1307.6614",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": "10.14231/AG-2015-006",
+      "query_family": "genus6-degree4-pencil-family-dimension",
+      "retrieved_at": "2026-08-11T00:53:20Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1307.6614"
+    }
+  ],
+  "task_id": "TASK-F-FND-0120",
+  "verdict": "promote"
+}

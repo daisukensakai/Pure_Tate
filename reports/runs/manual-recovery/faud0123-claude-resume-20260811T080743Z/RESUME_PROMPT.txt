@@ -1,0 +1,35 @@
+PRINCIPAL OVERRIDE — CONTINUE AND FINISH YOUR INTERRUPTED FINDING AUDIT.
+
+Context:
+- Your previous Claude turn for TASK-F-FND-0121 / FND-0121 was interrupted by a network/API failure (ENOTFOUND). No audit artifact was written to the original slot.
+- The spent/failed slot FAUD-0123 is closed. Do NOT reopen or overwrite it.
+- An independent sibling audit already landed as FAUD-0122 (FND-0120, verdict=promote). Do NOT modify, rename, or overwrite FAUD-0122.
+- Finish into the NEW append-only slot: FAUD-0124.
+- Same Claude session is resumed; do not restart the finding audit from zero.
+- Live web should work again in this environment if you need a locator check; keep tool use minimal.
+
+Token discipline (mandatory):
+1. Prefer finishing from what you already loaded in this session.
+2. At most a small number of Read/WebFetch calls if a load-bearing locator is still missing.
+3. Do NOT re-read the entire packet. Do NOT burn a long exploratory monologue.
+4. Grok workers are optional; prefer not to dispatch unless a single concrete lookup remains.
+5. Emit the final JSON in this turn.
+
+Hard contract:
+- Final message: exactly one JSON object matching research/finding-audits/FINDING_AUDIT_TEMPLATE.json
+- No Markdown fences, no prose before or after the JSON
+- id must be exactly: FAUD-0124
+- adjudicator/auditor engine field must be exactly: claude (match the template field name)
+- finding_id must be exactly: FND-0121
+- Keep the artifact schema-faithful and compact
+
+Final message: exactly one JSON object.
+
+Supplied files in this workspace:
+- TASK.json (output retargeted to FAUD-0124)
+- prompts/FINDING_AUDIT.md
+- proof/packets/generated/C66-001-v4.md (or pinned snapshot)
+- proof/findings.jsonl
+- data/claims.jsonl
+- data/sources.jsonl
+- research/finding-audits/FINDING_AUDIT_TEMPLATE.json

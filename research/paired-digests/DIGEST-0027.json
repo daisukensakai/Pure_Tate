@@ -1,0 +1,166 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "Give a coordinate-free proof of the exact hyperelliptic splitting F\u2245O(2)\u2295O(7)."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Determine the residual class and geometry of the locus where two distinct source objects have the same image."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Formulate and prove singleton-fibre recovery at the level of geometric objects or isomorphism classes."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Extend the scheme-scoped hypothesis (H3) to a stack base by proving the required descent statement."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Replace connected-\u00e9tale-locus language with a proof using the two sections of C\u00d7_{P\u00b9}C\u2192C and their behaviour at an \u00e9tale point."
+    }
+  ],
+  "engine": "codex",
+  "established_facts": [
+    {
+      "evidence": "The quoted lemma gives the degree formula deg(W_{f_i}|_C)=4g+12-4f_i.",
+      "evidence_class": "source",
+      "statement": "For the Casnati\u2013Ekedahl bundle W_f on a genus-g degree-four cover, deg(W_f|_C)=4g+12-4f."
+    },
+    {
+      "evidence": "Substitution gives 4\u00b76+12-4\u00b75=16, followed by 16-deg(\u03c9_C)=16-10=6.",
+      "evidence_class": "mechanical",
+      "statement": "With g=6 and f=5, deg(W_5)=16 and deg(W_5\u2297\u03c9_C^{-1})=6."
+    },
+    {
+      "evidence": "The quoted source lemma states this isomorphism and fixes the negative-five twist convention.",
+      "evidence_class": "source",
+      "statement": "The relevant failure condition is O_C(\u0393)\u2245W_5\u2297\u03c9_C^{-1}, with W_5 defined using the twist \u03b3*O_{P\u00b9}(-5)."
+    },
+    {
+      "evidence": "The image consists of polynomials in x of degree at most six, while the kernel is H\u2070(O(1))\u00b7(w\u00b2-zv\u00b2).",
+      "evidence_class": "mechanical",
+      "statement": "In the hyperelliptic model y\u00b2=f_14(x), z=x\u00b2, the restriction H\u2070(Sym\u00b2E(-6))\u2192H\u2070(6A) has seven-dimensional image and two-dimensional kernel."
+    },
+    {
+      "evidence": "The explicitly computed restriction map has image dimension 7 and kernel dimension exactly 2, determining the two summands.",
+      "evidence_class": "mechanical",
+      "statement": "The hyperelliptic model computation yields the exact splitting F\u2245O(2)\u2295O(7)."
+    },
+    {
+      "evidence": "Summing h\u2070 of the displayed summands gives 0+0+2+2+3=7.",
+      "evidence_class": "mechanical",
+      "statement": "For the plane-quintic calculation, Sym\u00b2E(-6)\u2245O(-2)\u2295O(-1)\u2295O(0)\u00b2\u2295O(1)\u2295O(2) and has seven global sections."
+    },
+    {
+      "evidence": "The two vector-space dimensions are explicitly computed as 7 and 6.",
+      "evidence_class": "mechanical",
+      "statement": "In the plane-quintic calculation, h\u2070(2H+2p)=7, while the subspace of sections vanishing to order at least two at p is H\u2070(2H) and has dimension 6."
+    },
+    {
+      "evidence": "The two sections agree locally at the \u00e9tale point and therefore agree on connected reduced C.",
+      "evidence_class": "mechanical",
+      "statement": "For a double cover, the identity and deck involution agree globally if they agree at one point where both corresponding sections of pr\u2081:C\u00d7_{P\u00b9}C\u2192C are \u00e9tale."
+    },
+    {
+      "evidence": "This follows from the fibre-dimension formula for the stated two-dimensional fibres.",
+      "evidence_class": "mechanical",
+      "statement": "If an incidence space has two-dimensional fibres over a component of B, its corresponding component has dimension dim(B_component)+2."
+    }
+  ],
+  "id": "DIGEST-0027",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "Distinct parameter points can represent isomorphic objects or repeated members and therefore can have the same image; object-level uniqueness does not imply space-level injectivity.",
+      "statement": "Interpreting singleton geometric fibres as singleton fibres of parameter spaces is invalid."
+    },
+    {
+      "mathematical_reason": "A point can be unramified for the covering map without lying over the globally unbranched base locus, so rigidity of deck transformations on that connected \u00e9tale locus does not apply.",
+      "statement": "Inferring that every unramified point belongs to a connected \u00e9tale locus over the unbranched base is invalid."
+    },
+    {
+      "mathematical_reason": "The fibre-dimension formula increases each corresponding component dimension by two.",
+      "statement": "Saying that an incidence space with two-dimensional fibres has the same component dimensions as its base is invalid."
+    },
+    {
+      "mathematical_reason": "Euler characteristic is an alternating sum of cohomology dimensions and does not control reducedness or guarantee the asserted fibrewise support.",
+      "statement": "Inferring fibrewise nonemptiness or reduced support solely from \u03c7(L)=1 is invalid."
+    },
+    {
+      "mathematical_reason": "The relevant weights are 2d and 2d-16, which are unequal.",
+      "statement": "Identifying a top-weight cohomological corner with a lowest-weight corner shifted by sixteen is invalid."
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_sha256": "b1d55a83a974a3116d23efc6b10fcb431703c58b75e05b733d4f216bce860a25",
+  "problem_key": "e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9",
+  "reusable_computations": [
+    {
+      "sha256": "96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+      "statement": "The symbolic degree computation gives deg(W_5)=16 and deg(W_5\u2297\u03c9_C^{-1})=6."
+    },
+    {
+      "sha256": "b81f0e4d2a6c93d7e45b18f067d3a0c90f92e5b4d13c76a884ab50e2f60d19c3",
+      "statement": "The symbolic degree computation gives deg(M)=4."
+    }
+  ],
+  "sanitized": true,
+  "schema_version": 1,
+  "source_attribution_confidence": "artifact",
+  "source_lane": "geometry",
+  "source_subproblem_id": "C66-GEO-COMP",
+  "source_task_id": "TASK-C66-M-003",
+  "source_trace_id": "TRACE-0036",
+  "source_turn": "standard-fallback",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-CURSOR-GROK-STANDARD_FALLBACK",
+  "unresolved_dependencies": [
+    {
+      "statement": "Irreducibility of the balanced base B remains to be proved."
+    },
+    {
+      "statement": "Full S\u2086 monodromy, including the occurrence of the required loci and a transposition, remains to be proved."
+    },
+    {
+      "statement": "The forgetful morphism still requires proofs of the needed monomorphism, quasi-finiteness, closedness, codimension, local-complete-intersection, and Gysin properties."
+    },
+    {
+      "statement": "The argument is restricted to characteristic zero; positive characteristic remains untreated."
+    },
+    {
+      "statement": "The relative-canonical normalization hypothesis (N) remains an external assumption."
+    },
+    {
+      "statement": "The residual hypothesis (R) remains an external assumption."
+    },
+    {
+      "statement": "Descent of the scheme-scoped hypothesis (H3) to a stack base remains unstated."
+    },
+    {
+      "statement": "The extension effect of the weight-two quotient connecting map on Gr^W_26 H^25 of the weight-one part remains unresolved."
+    },
+    {
+      "statement": "The residual depth-one calculation coupled to the pair (5,8) remains unresolved."
+    },
+    {
+      "statement": "Tate support and Tate assembly are still required to deduce that W_{-16}H^{BM}_{16}(M_{6,6}) is a direct sum of Q(8)."
+    }
+  ]
+}

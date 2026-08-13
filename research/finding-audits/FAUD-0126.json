@@ -1,0 +1,78 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001; it is a fibrewise geometry statement below the level at which those claims speak, and the SRC-0001 status sweep shows nothing published that supersedes it. Content check (independent, claude): on a fixed smooth genus-6 fibre with F = O(4)+O(5), SRC-0004 Lemma 10.6 gives deg W_f|_C = 4g+12-4f, hence deg W_4 = 20, deg W_5 = 16, deg L_b = 16-(2g-2) = 6. For any effective Cartier D of degree 6, deg(omega_C tensor W_f^vee(D)) = 4f+n-2g-14 equals -4 for f=4 and 0 for f=5, so the f=4 obstruction vanishes identically (FND-0062) and the f=5 obstruction is h^0 of a degree-zero bundle, nonzero iff omega_C tensor W_5^vee(D) = O_C, i.e. iff O(D) = L_b (FND-0063). Since deg W_4 = 20 and deg W_5 = 16 both exceed 2g-2 = 10, H^1(C,W|_C) = 0 (FND-0099), so coker(H^0(C,W|_C) -> H^0(D,W|_D)) = H^1(C,W|_C(-D)) = H^0(C,omega_C tensor W|_C^vee(D))^vee exactly; with SRC-0004's own surjectivity of H^0(PE^vee,W) -> H^0(C,W|_C) (their stated reason: H^1(PE^vee,O) = 0) this makes the criterion a genuine equivalence for the map actually used in (10.8)/(10.9), consistent with corroborated FND-0122 (rank(phi) in {11,12}, rank(phi_5) in {5,6}). The second clause is the standard Abel-Jacobi identification {D in Sym^6 : O(D) = L_b} = |L_b| = P(H^0(L_b)) of dimension h^0(L_b)-1, the pointwise case of corroborated FND-0107, nonempty because chi(L_b) = 1 forces h^0(L_b) >= 1 (FND-0073). The statement is therefore TRUE as written, on geometric points of one fibre. Primary-source limits found by live retrieval of arXiv 2208.02357v2, Section 10.3: (a) Lemma 10.6 asserts only the sufficient direction ('the map H^0(C,W) -> H^0(Gamma,W|_Gamma) is surjective IF H^1(C,W|_C(-Gamma)) = 0') and nowhere states coker = H^0(omega_C tensor W^vee(Gamma))^vee, so the 'only if' in FND-0123 is a campaign derivation, not a quotation; (b) the lemma's standing hypothesis is n <= 4f_1-2g+1, which for g=6, f_1=4 is n <= 5, and Gamma is 'a collection of n distinct points', so at n=6 and for non-reduced D in Sym^6 the finding extends the source beyond its stated range - sound, because the Serre-duality computation above needs only that D be an effective Cartier divisor, but it must be recorded as derivation rather than citation. Scope limits that must travel with the statement: geometric points of one fibre only, hence no scheme/Fitting structure and no base-relative identification (FND-0046, FND-0047, FND-0107); 'dimension h^0(L_b)-1' is fibre-dependent, with h^0(L_b) = 1+h^0(M) in {1,2,3,4} and equal to 4 only on hyperelliptic fibres (FND-0073, FND-0103), so it neither establishes constancy at 3 nor the relative P^2-bundle of FND-0058, and leaves GAP-H0-1/FND-0104 untouched; and |L_b| may miss the reduced-support and ordered Conf_6 loci entirely when h^0(L_b) = 1 with non-reduced unique member, so no nonemptiness of Z_ev follows (FND-0083). No adjudicated finding is contradicted. Duplication is the decisive issue: the first clause is the conclusion of corroborated FND-0063 (with FND-0062 supplying the f=4 vanishing) and the second is the pointwise specialization of corroborated FND-0107; the equivalence-group key FC-GEOMETRIC-RANKDROP-EQUALS-LINEAR-SYSTEM names exactly that union, and FND-0123 asserts no proposition not already adjudicated. Its only reviewer engine, cursor-grok, is in this task's excluded_engines, so it carries no admissible independent support as a standalone record. Verdict: merge into FND-0063, attaching the |L_b| corollary and the four scope limits above as a scope annotation on FND-0063 rather than promoting a duplicate; do not retire, since the content is correct. Worker disclosure: one assistive cursor-grok worker (the excluded engine) was used solely as a reading layer to extract verbatim Section 10.3 / Lemma 10.6 wording from arXiv 2208.02357v2; its quotes agree with the packet's own SRC-0004 excerpt, the fact it supplied cuts against the finding's source-strength rather than for it, and every derivation and the verdict here are claude's.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0123",
+  "id": "FAUD-0126",
+  "independent": true,
+  "merge_target_id": "FND-0063",
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "dependencies_used": [
+      "SRC-0004 Lemma 10.6 degree formula deg W_f|_C = 4g+12-4f",
+      "Serre duality on C_b",
+      "FND-0062",
+      "FND-0063",
+      "FND-0073",
+      "FND-0099",
+      "FND-0107",
+      "FND-0122"
+    ],
+    "established_content": "rank(evaluation) is non-maximal at D iff O_{C_b}(D) = L_b, and the rank-drop set equals |L_b|, of dimension h^0(L_b)-1 (>= 0 since chi(L_b)=1)",
+    "excludes": [
+      "any scheme-theoretic, Fitting-ideal, or flatness statement (geometric-points-only, per FND-0046)",
+      "any base-relative or universal-family statement over the balanced tetragonal stack (per FND-0047, FND-0107)",
+      "constancy of h^0(L_b) across fibres; h^0(L_b) = 1 + h^0(M) is in {1,2,3,4} and equals 4 only on hyperelliptic fibres (FND-0073, FND-0103), so no relative P^2-bundle (FND-0058) and no resolution of GAP-H0-1 (FND-0104)",
+      "nonemptiness of the reduced-support open or of the ordered Conf_6 incidence Z_ev (FND-0083): when h^0(L_b)=1 the unique member of |L_b| may be non-reduced",
+      "the identification W_5 = omega_C^2(-D) / GAP-Z-W5D, which is not used and not established here (FND-0105)",
+      "transport to n != 6, where the f=5 obstruction has nonzero degree and the condition ceases to be a single Abel-Jacobi condition (FND-0074)"
+    ],
+    "objects": [
+      "CE evaluation map of SRC-0004 (10.8)/(10.9), fibrewise H^0(PE^vee,W) -> H^0(D,W|_D) with W = O_{PE^vee}(2) tensor gamma^*F^vee",
+      "Sym^6(C_b), all effective Cartier divisors of degree 6 including non-reduced ones",
+      "L_b = W_5 tensor omega_{C_b}^{-1}, deg L_b = 6",
+      "|L_b| = P(H^0(C_b,L_b))"
+    ],
+    "quantifier": "single fixed smooth genus-6 geometric fibre C_b of the balanced tetragonal Casnati-Ekedahl family (F = O_{P^1}(4) + O_{P^1}(5)); geometric points only"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "d5d5f5e508a407036f3d30bbb74dfda2c46149a4394966e2e5cba8c87c31cbfd",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check: SRC-0004 Section 10.3 / Lemma 10.6 evaluation-map setup, splitting hypotheses, and degree formula (landing page retrieved and hashed; v2 body text read via ar5iv and cross-checked against the packet's own SRC-0004 excerpt)",
+      "retrieved_at": "2026-08-11T23:09:23Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "36c3f09c7462dbbd4ae1f8b81a02bd9ff84f03c5a346351d7d5d78fc3f173486",
+      "doi": null,
+      "query_family": "abel-jacobi-fibre-standard-fact: fibre of Sym^d(C) -> Pic^d(C) over [L] equals |L| = P(H^0(L)); document retrieved and hashed but its PDF text was not machine-extractable in this workspace, so it is recorded as a retrieval trace only and no load-bearing step rests on it (the fact is carried by corroborated FND-0107)",
+      "retrieved_at": "2026-08-11T23:09:25Z",
+      "source_type": "lecture_notes",
+      "url": "https://www.jmilne.org/math/xnotes/JVs.pdf"
+    },
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "content_sha256": "dc5e110dabb036a0656186e41193d47ba2592588f8881def62a3df8a1b34a802",
+      "doi": null,
+      "query_family": "contradiction-sweep: current status of the degree-16 pure-Tate target (SRC-0001 survey) to confirm no published result supersedes or contradicts a fibrewise CE rank-drop statement for (6,6)",
+      "retrieved_at": "2026-08-11T23:09:26Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2605.20453"
+    }
+  ],
+  "task_id": "TASK-F-FND-0123",
+  "verdict": "merge"
+}

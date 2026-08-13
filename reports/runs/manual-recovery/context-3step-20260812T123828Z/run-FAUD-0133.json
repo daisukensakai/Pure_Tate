@@ -1,0 +1,76 @@
+[
+  {
+    "id": "TASK-F-FND-0127",
+    "phase": "finding-audit",
+    "role": "independent-finding-adjudicator",
+    "campaign_id": "C66-001",
+    "campaign_revision": 4,
+    "context_revision": 2,
+    "finding_id": "FND-0127",
+    "finding": {
+      "adjudication_status": "pending",
+      "campaign_id": "C66-001",
+      "candidate_key": "FC-SCHEME-SCOPED-H3-OVER-STACK-BASE",
+      "case": {
+        "g": 6,
+        "n": 6
+      },
+      "contradicts_claim_ids": [],
+      "created_on": "2026-08-12",
+      "equivalence_group": "FC-SCHEME-SCOPED-H3-OVER-STACK-BASE",
+      "evidence_class": "adversarial_review",
+      "id": "FND-0127",
+      "impacts_approach_ids": [
+        "C66-GEO-COMP"
+      ],
+      "kind": "obstruction",
+      "reviewer_engines": [
+        "claude"
+      ],
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        }
+      },
+      "source_attempt_ids": [
+        "ATT-0083"
+      ],
+      "source_review_ids": [
+        "REV-0132"
+      ],
+      "statement": "ATT-0066 states (H1)/(H3) over a locally Noetherian SCHEME base, whereas C66-GEO-COMP statements are being made over 'a locally Noetherian k-scheme or algebraic k-stack with a smooth atlas'. The extension is legitimate but is currently unstated: it rests on the observations that (i) Grauert local freeness with base change is smooth-local on the base and reducedness is preserved by smooth pullback in characteristic zero, and (ii) both the Abel-Jacobi incidence and P((pi_*L)^vee) commute with base change and the identification between them is canonical (given by the universal divisor), hence descends along a smooth atlas. Downstream artifacts that quote (H3) verbatim over a stack base should record this one-line descent rather than leaving the base scope silently widened; the same discipline is what FND-0075 enforces for the ordered/unordered comparison.",
+      "status": "candidate",
+      "supporting_artifact_hashes": [],
+      "verification_method": "revision-2 adversarial review"
+    },
+    "excluded_engines": [
+      "claude"
+    ],
+    "target": {
+      "g": 6,
+      "n": 6,
+      "dimension": 21,
+      "compact_cohomology_degree": 16,
+      "compact_tate_type": "Q(-8)",
+      "open_bm_degree": 16,
+      "open_bm_weight": -16,
+      "open_bm_tate_type": "Q(8)",
+      "ordinary_cohomology_degree": 26,
+      "ordinary_weight": 26,
+      "ordinary_tate_type": "Q(-13)",
+      "poincare_twist": 21,
+      "chow_codimension": 13
+    },
+    "packet_id": "C66-001-v4",
+    "packet_sha256": "ca8f26dc3c3ce38518e220465621913c403a9a32db3105e656d6b7faa0fb45e5",
+    "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+    "input_packet": "proof/packets/generated/C66-001-v4.md",
+    "requires_live_web": true,
+    "prompt": "prompts/FINDING_AUDIT.md",
+    "output": "research/finding-audits/FAUD-0133.json",
+    "status": "ready",
+    "created_on": "2026-08-12",
+    "selected_engine": "cursor-grok"
+  }
+]

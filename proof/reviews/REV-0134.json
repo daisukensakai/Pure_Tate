@@ -1,0 +1,150 @@
+{
+  "attempt_id": "ATT-0085",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CHK-PACKET-HASH",
+      "note": "TASK and ATT-0085 agree on campaign C66-001 revision 4, context revision 2, subproblem C66-COMP-RANK, packet C66-001-v4, packet SHA-256 0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70, binding SHA-256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7, the exact target dictionary, and the theorem statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0085-1",
+      "note": "Koszul adjunction and the projective-bundle Euler sequence give the relative canonical formula; the fibre-degree-zero line on P1_B descends from B. The stated base twist is retained.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0085-2",
+      "note": "Finite-flat duality and projection formula give gamma_*L=(O(-3)+E(-3)) tensor s^*T. The displayed h0/h1 formulas and their equivalences follow termwise from the splitting of E on geometric P1 fibres.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0085-3",
+      "note": "Clifford reduces the exceptional h0(O(D))=3 case to a hyperelliptic-composed tetragonal map, excluded on the balanced CE locus by the packet-established hyperelliptic splitting result. Thus h0(L)=3 and h1(L)=2 fibrewise.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0085-4",
+      "note": "Top-degree base change gives R1s_*(E(-3))=0 from the fibrewise vanishing; a two-term perfect presentation with zero cokernel then splits locally, proving local freeness and arbitrary base change rather than inferring it from constant fibre dimensions.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0085-5",
+      "note": "P(pi_*L) represents fibrewise nonzero sections modulo base line bundles. Using the scheme-theoretic arbitrary-T criterion imported from CLM-0065-4, an ordered disjoint sextuple maps to its divisor and an isomorphism from six copies to the universal etale divisor supplies the inverse ordered sections. Yoneda therefore gives the claimed finite etale S6-torsor without reduction.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0085-6",
+      "note": "After separating the possible fixed reduced point, the moving P2 is base-point-free. The characteristic-zero double-zero incidence has dimension at most one, and the first-jet count supplies a nonreduced member; hence the reduced-support locus is nonempty dense and proper.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0085-7",
+      "note": "This follows from the open P2-bundle and the finite etale S6-torsor once CLM-0085-5 and CLM-0085-6 are established.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0085-8",
+      "note": "The regular-immersion and coker(da_N) portions are justified, but the final global realization by R1pi_*L is not. On AJ=P(pi_*L), the universal divisor satisfies O(D_univ)=L tensor pi^*M_univ for the tautological base line M_univ. The relative Abel-Jacobi sequence therefore gives Exc^vee congruent to pullback(R1pi_*L) tensor M_univ on Z (with the convention-dependent tautological line), not the untwisted pullback asserted in the theorem. The proof itself retreats to up to the tautological twist and supplies only noncanonical geometric-fibre identifications. It neither trivializes M_univ on the S6-torsor nor reformulates the theorem with the twist.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0085-9",
+      "note": "Pushing the CE exact sequence and using R1s_*End(F)=0 yields the short exact sequence; End(O(4)+O(5)) has h0=4 and h1=0, so q_*scriptW has rank 30 and the stated base-change property.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0085-10",
+      "note": "The constructions and ideal identities are canonical and base-change compatible, while smoothness, regular immersion, and local freeness are smooth-local; effective descent therefore handles an algebraic-stack base. No coarse-moduli identification is asserted.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CHK-ADVERSARIAL-SCOPE",
+      "note": "The exact theorem is a conditional geometric lemma and expressly makes no claim about M_{6,6} cohomology, Borel-Moore degree, Poincare or Tate twists, Gysin/Kunneth maps, spectral-sequence degeneration, graph automorphism (co)invariants, Hodge semisimplification, motives, algebraic/tautological generation, or stable pairs. Those campaign-level attacks are non-load-bearing here and omission of stable pairs does not make this lemma incomplete.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-13",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "evidence": "ATT-0085 Lemma 4.1 defines AJ points by M^{-1}->pi_*L, hence O(D_univ)=L tensor pi^*M_univ. Section 6 identifies Exc^vee=coker(da_N) and the Abel-Jacobi sequence gives R1pi_*O(D_univ); projection formula yields R1pi_*L tensor M_univ. The section concludes only up to the tautological twist, while theorem part (F) names the untwisted bundle.",
+      "key": "FC-EXCESS-TAUTOLOGICAL-LINE-TWIST",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "objects": [
+          "AJ=P_B(pi_*L)",
+          "Z",
+          "Exc",
+          "R1pi_*L"
+        ],
+        "subproblem_id": "C66-COMP-RANK"
+      },
+      "severity": "high",
+      "statement": "For the universal degree-six divisor over the projective bundle AJ=P_B(pi_*L), the excess cokernel along the ordered etale incidence is globally the pullback of R1pi_*L tensored by the convention-dependent tautological line M_univ determined by O(D_univ)=L tensor pi^*M_univ. Geometric fibres become abstractly isomorphic to H1(L_b) after choosing a trivialization of the one-dimensional M_univ fibre, but this does not yield an untwisted Hodge-bundle isomorphism. Any downstream excess or Chern-class calculation must retain this line twist or prove it trivial on the relevant cover.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0134",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Load-bearing CLM-0065-4 supplies the arbitrary-base scheme-theoretic equality Fit_0(coker phi)=a_N^*I_e and the relative-triviality T-point criterion; CLM-0065-1 and 5-9 supply the filtered and ambient CE statements used here.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Verified dependency artifact confirming ATT-0065, including the nonreduced Fitting/Abel-Jacobi comparison. It is used only to validate the declared inherited result, not as evidence for ATT-0085's new torsor or excess assertions.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Second verified confirmation of ATT-0065, including the edge d5-n=2g-2 and arbitrary-base scheme structure. It does not discharge the new tautological-twist issue in part (F).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Used for the standard degree-four Casnati-Ekedahl normalization and degree formula under the explicit H-CE hypothesis; no predicted motive or global cohomological conclusion is imported.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0085-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: part (F) silently drops the tautological base-line twist in the global excess-bundle identification. For a universal divisor Gamma on AJ=P(pi_*L), O(Gamma)=L tensor pi^*M_univ, so the Abel-Jacobi long exact sequence identifies coker(da_N), hence Exc^vee, with pullback(R1pi_*L) tensor M_univ on Z, not with the untwisted rank-two bundle R1pi_*L. The argument explicitly says up to the tautological twist and only identifies geometric fibres after choosing a scalar trivialization; it does not prove the exact theorem clause's claim that the excess is realized by R1pi_*L. This leaves CLM-0085-8 unresolved and makes the pass-1 verdict incomplete. The strongest competing attack, that Z=Isom is only a fibrewise equality, fails because CLM-0065-4 gives an arbitrary-T scheme criterion and the inverse functor sends an ordering of the universal etale divisor to its six disjoint sections. Stack/coarse, degree/Borel-Moore, Poincare/Tate, Gysin/Kunneth, spectral-sequence, automorphism (co)invariant, semisimplification, motive, pure-Tate-generation, and stable-pair issues are expressly outside this lemma's statement.",
+  "subproblem_id": "C66-COMP-RANK",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be a field with char(k)=0 and let B be a locally Noetherian k-scheme. Let pi:C->B be smooth and proper with geometrically connected genus-6 fibres, let s:P:=P^1_B->B be the structure map and gamma:C->P finite flat of degree four with pi=s o gamma. In char 0 the trace splits gamma_*O_C=O_P (+) E^vee with E locally free of rank three; put X:=P_P(E^vee)->^p P in the convention p_*O_X(1)=E (so p_*O_X(2)=Sym^2 E), and q:=s o p. Assume: (H-CE) there is a closed P-immersion i:C->X whose ideal has the degree-four Casnati-Ekedahl resolution 0->O_X(-4) (x) p^*det F->O_X(-2) (x) p^*F->I_C->0 with F locally free of rank two on P; and (H-BAL) F_b is isomorphic to O(4)(+)O(5) on every geometric fibre of s. Put scriptW:=O_X(2) (x) p^*F^vee, W:=i^*scriptW, let 0->W_4->W->W_5->0 be the canonical filtration induced by the sub-line-bundle O_P(5) (x) s^*s_*F(-5) of F (ATT-0065, CLM-0065-5), and set O_C(D):=gamma^*O_P(1) and L:=W_5 (x) omega_{C/B}^{-1}, of relative degree 6. Let Conf:=Conf_6(C/B) be the open subscheme of the six-fold fibre product of C over B on which the six tautological sections are pairwise disjoint (smooth over B of relative dimension 6), Gamma their sum, phi:pi_*W->pi_*(W|_Gamma) the CE evaluation over Conf (locally free of ranks 26 and 12), N:=omega (x) W_5^vee(Gamma), a_N:Conf->Pic^0_{C/B} the classifying map, e the identity section, and Z:=V(Fit_0(coker phi)) the rank-drop scheme in Conf. Then: (A) det F is isomorphic to det E (x) s^*A for a unique invertible A on B, omega_{C/P} is isomorphic to O_X(1)|_C (x) pi^*A^{-1}, and consequently W_5 is isomorphic to omega_{C/B}^{(x)2}(-D) (x) pi^*T and L is isomorphic to omega_{C/B}(-D) (x) pi^*T for an invertible T on B; the relative-canonical normalisation is therefore a consequence of (H-CE), not an added hypothesis, and is canonical up to a twist pulled back from B. (B) gamma_*omega_{C/B} is isomorphic to (O_P (+) E)(-2) and gamma_*L to (O_P(-3) (+) E(-3)) (x) s^*T; hence on a geometric fibre with E_b isomorphic to the sum of O(a_i), a_1+a_2+a_3=9, one has h^0(L_b)=sum_i max(0,a_i-2), h^1(L_b)=2+sum_i max(0,2-a_i) and h^0(O_{C_b}(D_b))=2+sum_i max(0,2-a_i); in particular h^0(L_b)=3 if and only if min_i a_i>=2 if and only if h^0(O(D_b))=2. (C) (H-BAL) forces min_i a_i>=2 on every geometric fibre; hence R^1 s_*(E(-3))=0, pi_*L is locally free of rank 3, R^1 pi_*L is locally free of rank 2, and both commute with arbitrary locally Noetherian base change, with no reducedness hypothesis on B. (D) AJ:=P_B(pi_*L) is a Zariski-locally trivial P^2-bundle representing the functor of relative effective Cartier divisors of degree six in the class of L modulo pi^*Pic; if AJ^o is the open locus where the universal divisor is etale, then Z is canonically the Isom-scheme Isom_{AJ^o}(six copies of AJ^o, D_univ), a finite etale S_6-torsor over AJ^o, compatibly with arbitrary base change and with no reduction applied to either side. (E) On every geometric fibre b the fixed divisor of |L_b| (a P^2) is either zero or a single reduced point, AJ^o_b is a nonempty dense open of |L_b| whose closed complement is nonempty of dimension at most 1; consequently AJ^o->B and Z->B are smooth and surjective of pure relative dimension 2 with nonempty geometric fibres. (F) Fit_0(coker phi)=a_N^*I_e is locally generated by six elements (the pullback of a regular sequence of length g=6), while Z->Conf is a regular closed immersion of relative codimension 4 with locally free conormal of rank 4; the excess bundle Exc:=ker(a_N^*(I_e/I_e^2)|_Z ->> I_Z/I_Z^2) is locally free of rank 2 with Exc^vee isomorphic to coker(d a_N)|_Z, and at each geometric point Exc^vee is H^1(C_b,O(Gamma))=H^1(C_b,L_b); thus the excess 6-4=2 of the generic determinantal expectation over the actual codimension is realised by the rank-two bundle R^1 pi_*L and not merely numerically. (G) q_*scriptW is locally free of rank 30 and commutes with arbitrary locally Noetherian base change, sitting in 0->s_*End(F)->q_*scriptW->pi_*W->0 with s_*End(F) locally free of rank 4; hence both ambient hypotheses of ATT-0065 hold automatically on a balanced family and the ambient CE rank-drop scheme equals Z. All statements descend along a smooth atlas to a locally Noetherian algebraic k-stack carrying the data. No assertion is made about images, closures, components, stabilizers, dimensions, monodromy, Gysin maps, weights, purity or Tate type in M_{6,6}.",
+  "verdict": "incomplete"
+}

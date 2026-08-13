@@ -1,0 +1,105 @@
+{
+  "blocked_on": "REV-0129 Codex P1 (ATT-0080)",
+  "codex_audit_candidates": [
+    {
+      "excluded": [
+        "cursor-grok"
+      ],
+      "finding_id": "FND-0122",
+      "task_id": "TASK-F-FND-0122"
+    },
+    {
+      "excluded": [
+        "cursor-grok"
+      ],
+      "finding_id": "FND-0123",
+      "task_id": "TASK-F-FND-0123"
+    },
+    {
+      "excluded": [
+        "cursor-grok"
+      ],
+      "finding_id": "FND-0124",
+      "task_id": "TASK-F-FND-0124"
+    }
+  ],
+  "codex_queue_plan": [
+    "DIGEST-0025 (COMP-COMP / ATT-0074 / TRACE-0034)",
+    "FAUD on FND-0122 (first novel COMP-RANK finding) after DIGEST-0025"
+  ],
+  "digest_jobs": [
+    {
+      "attempt_id": "ATT-0074",
+      "digest_id": "DIGEST-0025",
+      "note": "ATT-0074 was grok-proved; Codex mine OK",
+      "output": "research/paired-digests/DIGEST-0025.json",
+      "preferred_miner": "codex",
+      "reservation": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/reservations/DIGEST-0025.json",
+      "source_engine": "grok",
+      "status": "reserved",
+      "task_id": "TASK-C66-001-MINE-GROK-STANDARD_FALLBACK",
+      "trace_id": "TRACE-0034"
+    },
+    {
+      "attempt_id": "ATT-0076",
+      "digest_id": "DIGEST-0026",
+      "note": "ATT-0076 was Codex-proved; mine with non-Codex",
+      "output": "research/paired-digests/DIGEST-0026.json",
+      "preferred_miner": "claude",
+      "reservation": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/reservations/DIGEST-0026.json",
+      "source_engine": "codex",
+      "status": "reserved",
+      "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+      "trace_id": "TRACE-0035"
+    }
+  ],
+  "ingested_from_REV-0127": [
+    "FND-0122",
+    "FND-0123",
+    "FND-0124",
+    "FND-0103",
+    "FND-0083",
+    "FND-0046"
+  ],
+  "note": "COMP context: ingest REV-0127; TRACE ATT-0074/0076; Codex DIGEST queue after GEO-COMP REV-0129",
+  "rev0127_novel_findings": [
+    {
+      "id": "FND-0122",
+      "reviewer_engines": [
+        "cursor-grok"
+      ],
+      "statement": "For the filtered balanced CE evaluation at (g,n)=(6,6) with six pairwise-disjoint sections, every geometric fibre has rank(\u03c6)\u2208{11,12} and rank(\u03c6_5)\u2208{5,6}, becau",
+      "status": "candidate"
+    },
+    {
+      "id": "FND-0123",
+      "reviewer_engines": [
+        "cursor-grok"
+      ],
+      "statement": "On a fixed smooth genus-6 balanced fibre, as D runs through Sym^6(C_b), the evaluation map drops rank if and only if O(D)\u2245L_b=W_5\u2297\u03c9^{-1}; the geometric rank-dro",
+      "status": "candidate"
+    },
+    {
+      "id": "FND-0124",
+      "reviewer_engines": [
+        "cursor-grok"
+      ],
+      "statement": "The C66-COMP-RANK determinantal rank and fibre-dimension package can be discharged by filtered Fitting, Serre duality, and Clifford geometry without any EXP-C66",
+      "status": "candidate"
+    }
+  ],
+  "stamp": "20260811T123500Z",
+  "traces": {
+    "ATT-0074": {
+      "id": "TRACE-0034",
+      "path": "research/paired-traces/TRACE-0034.json",
+      "sha256": "0797191fe141f99fc258c93a2b36e6563528a59eeb9a9253964a06fb732bb353"
+    },
+    "ATT-0076": {
+      "id": "TRACE-0035",
+      "path": "research/paired-traces/TRACE-0035.json",
+      "sha256": "2ae0048cdb2a0ad61ba011808484d71109917efb925d0a3e5985a13fe59a6190"
+    }
+  },
+  "vault": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/manual-recovery/comp-trace-context-20260811T123500Z"
+}

@@ -1,0 +1,138 @@
+{
+  "attempt_id": "ATT-0084",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0084-1",
+      "note": "The Fitting-index conversion, degree-zero Serre-dual fibre bound, Nakayama argument, and base-change stability establish I_12=Fit_0=a_N^*I_e and I_11=Fit_1=O_B under the ordered-disjoint-section hypotheses. This is already packet-visible as FND-0122 and is not proposed as a new finding.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0084-2",
+      "note": "On a hyperelliptic genus-six curve, a base-point-free degree-four special series has moving part 2g^1_2; hence D is linearly equivalent to 2h, h^0(D)=3, and the degree-four morphism factors through the hyperelliptic map.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0084-3",
+      "note": "For a hyperelliptic-composed cover, the Tschirnhausen splitting and CE conic sequence give h^0(F(-6)) at least 2, excluding F=O(4) direct-sum O(5).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0084-4",
+      "note": "The fibrewise equalities h^0(D)=2, h^0(L)=3, and h^1(L)=2 are established. The claimed upgrade over every nonreduced locally Noetherian base is not justified by the stated perfect-complex argument: constant ranks after passage to residue fields do not imply that a differential has locally free kernel and cokernel over a nonreduced ring. For example, multiplication by epsilon in a two-term complex over k[epsilon]/(epsilon^2) has constant zero fibre rank but non-locally-free kernel and cokernel. No additional CE-specific argument excluding nilpotent differentials is supplied.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0084-5",
+      "note": "The Clifford and characteristic-zero transversality argument does establish existence and density of reduced members and existence of nonreduced members. The additional exact-theorem assertion that base points genuinely occur on the balanced locus is false: a base point produces a g^2_5 and hence the smooth-plane-quintic case, but the projection pencil D=H-p has unbalanced CE relations splitting. Thus the offered plane-quintic example lies outside the balanced locus; on the balanced locus |L| is base-point-free.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0084-6",
+      "note": "The two functorial implications using the ATT-0065 incidence criterion have the correct scheme-theoretic form and avoid coarse-moduli and reduction errors. Over the theorem's full nonreduced-base scope, however, the construction through Q=P_sub(p_*L) remains conditional on the unresolved local-freeness and base-change assertion in CLM-0084-4.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0084-7",
+      "note": "Smoothness, relative dimension two, surjectivity, and regularity follow over bases where the relative P^2-bundle and the functorial identification in CLM-0084-6 are valid. They are not established over every nonreduced locally Noetherian base claimed by the theorem.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0084-8",
+      "note": "The exact Gysin statement does not typecheck. P was defined as Pic^0_{C/B}, whose zero section is e:B->P, not e:H->P; consequently the displayed e^![B] is undefined with the theorem's stated e. After repairing the base, Fulton's excess quotient is coker(da_N), whereas the theorem defines Ex as its dual and the attempt itself uses the quotient convention. Rank two makes c_2 invariant under dualization, so the numerical class may survive that repair, but it does not prove the exact bundle statement. Moreover Fulton Chapter 6 alone does not establish the claimed Chow/Gysin formalism for an arbitrary locally Noetherian algebraic stack H.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "ADVERSARIAL-SCOPE-CHECK",
+      "note": "The exact submitted lemma makes no cohomology/Borel-Moore degree, Poincare-duality twist, Kunneth, spectral-sequence, graph-automorphism invariant/coinvariant, Hodge semisimplification, predicted-motive, pure-Tate-to-tautological, or stable-pair claim. Those attack axes are not load-bearing here. The relevant stack-versus-scheme issue occurs instead in the unproved stack-level Gysin assertion; no coarse-moduli quotient is used in the ordered-incidence argument.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-12",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate_pending_independent_corroboration",
+      "candidate_id": "REV-0131-FC-1",
+      "evidence": "The theorem defines P over B but later changes the zero section's domain to H. The normal-bundle quotient for the pullback of a regular zero section is T_{P/B}|_Z divided by the image of N_{Z/B}, which is coker(da_N).",
+      "key": "when-p-pic-0-c-b-and-a-n-b-p-the-relevant-zero-section-is-e-b-p-writing-e",
+      "statement": "When P=Pic^0_{C/B} and a_N:B->P, the relevant zero section is e:B->P. Writing e:H->P makes the refined pullback e^![B] ill-typed. In the repaired excess square, the Fulton excess bundle is coker(da_N), not its dual, although their second Chern classes agree in rank two.",
+      "title": "The Gysin square must use the zero section over B"
+    },
+    {
+      "adjudication": "novel_candidate_pending_independent_corroboration",
+      "candidate_id": "REV-0131-FC-2",
+      "evidence": "For a plane quintic, omega=2H, D=H-p, and L=H+p has the stated base point, but the CE quadric calculation gives a section of F(-6), incompatible with F=O(4) direct-sum O(5).",
+      "key": "a-base-point-of-l-omega-d-would-give-a-g-2-5-forcing-the-smooth-plane-quintic-c",
+      "statement": "A base point of L=omega-D would give a g^2_5, forcing the smooth-plane-quintic case. The associated tetragonal pencil is projection from the base point and has unbalanced CE relations splitting, so it is excluded from the balanced locus. Plane quintics therefore cannot witness base points in Part (III).",
+      "title": "Balanced genus-six tetragonal fibres have base-point-free |omega-D|"
+    },
+    {
+      "adjudication": "novel_candidate_pending_independent_corroboration",
+      "candidate_id": "REV-0131-FC-3",
+      "evidence": "Over k[epsilon]/(epsilon^2), the complex [R --epsilon--> R] has constant zero differential on the unique geometric fibre, while its kernel and cokernel are not locally free. ATT-0084's replacement for Grauert excludes no analogous nilpotent differential in Rp_*L.",
+      "key": "for-a-perfect-two-term-complex-over-a-nonreduced-base-constant-dimensions-on-ge",
+      "statement": "For a perfect two-term complex over a nonreduced base, constant dimensions on geometric fibres do not by themselves imply locally free cohomology or arbitrary base change. A separate scheme-theoretic constant-rank or lifting argument is required before p_*L and R^1p_*L can be declared vector bundles over every locally Noetherian base.",
+      "title": "Fibrewise cohomology constancy does not remove nonreduced-base obstructions"
+    }
+  ],
+  "id": "REV-0131",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "b1d55a83a974a3116d23efc6b10fcb431703c58b75e05b733d4f216bce860a25",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "The imported filtration, evaluation reduction, Fitting/Abel-Jacobi identity, and T-point incidence criterion support Parts (I) and (IV). They do not supply the mistyped e:H->P Gysin square.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Used only as a confirmation record for ATT-0065; it does not certify ATT-0084's new base-point, nonreduced-base, or excess claims.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Used only as a second confirmation record for ATT-0065; it does not resolve the defects in Parts (II), (III), or (V).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Its CE degree and relative-canonical normalization are used consistently for W_5, L=omega(-D), and the fibrewise cohomology computations. The adverse findings arise after those normalizations.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0084-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "Part (V) is not a well-formed intersection statement: with P=Pic^0_{C/B}, the zero section is B->P, not the asserted e:H->P, so the claimed refined pullback e^![B] is undefined as written. Even after correcting that square, the honest Fulton excess quotient is coker(da_N), while the exact theorem calls its dual the excess bundle. Dualization does not change c_2 in rank two, but that only suggests a repair of the final cycle formula; it does not prove the exact theorem. Independently, Part (III)'s claimed balanced base-point example is outside the balanced locus.",
+  "subproblem_id": "C66-COMP-RANK",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be a field of characteristic zero and let H be a locally Noetherian k-scheme (or locally Noetherian algebraic k-stack) carrying a balanced tetragonal genus-six family: a smooth proper p:C->H with geometrically connected genus-6 fibres, a finite flat degree-four gamma:C->P^1_H with Casnati-Ekedahl (CE) embedding i:C->X=P_{P^1_H}(E^vee) whose ideal has the standard degree-four CE resolution 0->O_X(-4) tensor p_X^*det(F)->O_X(-2) tensor p_X^*F->I_C->0, and whose rank-two relations bundle F is balanced on every geometric fibre of s:P^1_H->H (F_b isomorphic to O(4) direct-sum O(5)). Let 0->W_4->W->W_5->0 be the canonical CE filtration of ATT-0065 (fibre degrees 20 and 16), L:=W_5 tensor omega_{C/H}^{-1} of fibre degree 6, B:=Conf_6(C/H) the ordered configuration space of six pairwise-disjoint sections with tautological Gamma, phi:pi_*W->pi_*(W|_Gamma) the CE evaluation of ranks 26->12 over B, N:=omega tensor W_5^vee(Gamma), a_N:B->P:=Pic^0_{C/B}, and Z:=V(Fit_0(coker phi)) the closed evaluation-failure subscheme of B. Then, all statements being invariant under replacing L by L tensor p^*M for an invertible M on the base: (I) RANK IDEALS. I_12(phi)=Fit_0(coker phi)=a_N^*I_e and I_11(phi)=Fit_1(coker phi)=O_B, hence I_j(phi)=O_B for all j<=11; the determinantal stratification of phi has exactly two strata, rank 12 on B\\Z and rank exactly 11 on Z, over any locally Noetherian base and after arbitrary base change. (II) NO JUMPING. Every geometric fibre of the balanced family is non-hyperelliptic and its tetragonal pencil is not composed with a hyperelliptic map; consequently h^0(D)=2, h^0(L)=3 and h^1(L)=2 identically on the balanced locus, p_*L and R^1p_*L are locally free of ranks 3 and 2 commuting with arbitrary base change over ANY locally Noetherian base (no reducedness hypothesis), and the relative Abel-Jacobi incidence Q:=P_{sub}(p_*L) is a Zariski-locally trivial P^2-bundle, smooth and proper over H of pure relative dimension 2. (III) REDUCED MEMBERS EXIST. On every balanced geometric fibre, |L_b| contains a divisor of six pairwise-distinct points; the reduced-support open U_b of |L_b| is nonempty and dense, and its complement is nonempty, so U_b is a nonempty proper open subset of P^2 and is not closed. This holds although |L_b| need NOT be base-point-free on the balanced locus: the fixed divisor of |L_b| is either 0 or a single reduced point, the latter genuinely possible (smooth plane quintics with D=H-p have L=H+p with base point p), so a base-point-freeness-plus-Bertini argument is insufficient and a Clifford bound on the fixed part is required. (IV) FIBRE DIMENSIONS AND SCHEME STRUCTURE. Let U be the open subscheme of Q over which the universal divisor is etale, and Utilde the associated finite etale S_6-torsor of orderings (no reduction of source or target is taken anywhere). Then Z and Utilde represent the same subfunctor of B, hence Z=Utilde as H-schemes; Z is smooth over H of pure relative dimension 2, surjective onto H, closed in B=Conf_6(C/H) (while U is NOT closed in Q), and the Fitting scheme structure on Z is therefore reduced whenever H is reduced. (V) REGULAR EMBEDDING, EXCESS AND GYSIN. Z is regularly embedded in B with pure codimension 4 and locally free conormal sheaf of rank 4; da_N has constant rank 4 along Z; the ideal a_N^*I_e is locally generated by exactly 6 elements, which are therefore never a regular sequence, so the honest excess against the expected determinantal codimension 6 of the corank-one locus of phi_5 (ranks 11->6) equals 2, realized as the excess bundle Ex:=coker(da_N|_Z)^vee, canonically isomorphic to (R^1p_*L)|_Z up to a twist by an invertible sheaf on Z, of rank 2=h^1(L)=h^0(D); consequently the refined Gysin homomorphism e^! of the codimension-six regular embedding e:H->P exists and the excess intersection formula gives e^![B]=c_2(Ex) cap [Z] in A_*(Z). No claim whatsoever is made about the image, closure, dimension, codimension, purity, Gysin structure, weights or Tate type of Z or of its image in M_{6,6}.",
+  "verdict": "refuted"
+}

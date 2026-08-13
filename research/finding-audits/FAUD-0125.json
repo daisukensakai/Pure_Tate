@@ -1,0 +1,86 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "VERDICT: promote (candidate -> corroborated), evidence_class upgraded adversarial_review -> primary_source, merge_target none. No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001, none of which concerns determinantal ranks; it is compatible with THM-0005 (c(6)=5, so (6,6) is outside published CKgP range and the CE/determinantal route is a legitimate residual method) and with the packet's C66-GEO-Z / C66-COMP-RANK bottleneck. INDEPENDENT DERIVATION (parent, claude). Setup: C/B smooth proper of genus 6 with fibrewise balanced tetragonal CE splitting F = O(4)(+)O(5) (consistent: deg F = g+3 = 9), W = (O_{P(E^vee)}(2)(x)gamma^*F^vee)|_C of rank 2 with canonical filtration 0 -> W_4 -> W -> W_5 -> 0 (FND-0097), and Gamma a relative effective Cartier divisor of degree 6. SRC-0004 Lemma 10.6 gives deg W_{f}|_C = 4g+12-4f, hence deg W_4 = 20 and deg W_5 = 16 at g=6; this line, the Serre-duality step H^1(C,W|_C(-Gamma)) = H^0(C, omega_C (x) W|_C^vee(Gamma))^vee, the threshold 4f+n-2g-14, and the normalization O_{P(E^vee)}(1)|_C = omega_C (x) gamma^*omega_{P^1}^vee were re-verified live against the ar5iv rendering of arXiv:2208.02357v2 Section 10 and agree with the packet's verbatim locator excerpt. (1) Since 20 > 2g-2 = 10 and 16 > 10, h^1(W_4) = h^1(W_5) = 0 on every geometric fibre, so h^0(W) = 15+11 = 26 is constant, pi_*W is locally free of rank 26 and commutes with base change, and pi_*(W|_Gamma) is locally free of rank 2*6 = 12; thus phi (x) k(b) is the fibre evaluation map for every b. (2) f=4 component: deg(omega_C (x) W_4^vee(Gamma)) = 10-20+6 = -4 < 0, so coker(phi_4) = 0 (independently reproving FND-0062); equivalently H^1(W_4(-Gamma)) = 0 since deg W_4(-Gamma) = 14 > 10. (3) f=5 component: N := omega_C (x) W_5^vee(Gamma) has degree 10-16+6 = 0, exactly the borderline recorded by FND-0074 (n-6 at g=6, f=5), so h^0(N) in {0,1} with h^0(N) = 1 iff N = O_C iff O_C(Gamma) = L := W_5 (x) omega_C^{-1} (FND-0063). Because h^1(W_5) = 0, coker(phi_5) = H^1(W_5(-Gamma)) = H^0(N)^vee, of dimension h^0(N) <= 1; hence rank(phi_5) = 6 - h^0(N) in {5,6}. (4) The snake lemma applied to the filtration, using R^1 pi_* W_4 = 0 and coker(phi_4) = 0 (the two degree vanishings that FND-0099 demands be cited), gives coker(phi) = coker(phi_5), so rank(phi) = 12 - h^0(N) in {11,12}. The finding's stated reason -- the cokernel is Serre-dual to H^0 of a degree-zero line bundle -- is exactly correct and is the load-bearing step. (5) Ideal-theoretic conclusion, verified against primary reference rather than asserted: with target locally free of rank 12, I_{12-k}(phi) = Fit_k(coker phi) (Stacks Project Section 15.8, tag 07Z6, Lemma 15.8.2 defining Fit_k by (n-k)x(n-k) minors of a presentation); formation commutes with arbitrary base change (Lemma 15.8.4(3), tag 07ZA); and Lemma 15.8.7 (tag 07ZC) states Fit_k(M) not contained in p iff dim_{kappa(p)} M (x) kappa(p) <= k. Since dim coker(phi) (x) kappa(b) = h^0(N_b) <= 1 at every point b of B, Fit_1(coker phi) = I_11(phi) is contained in no prime, i.e. I_11(phi) = O_B; identically I_5(phi_5) = Fit_1(coker phi_5) = O_B. All three assertions of FND-0122 are therefore correct. SCOPE SHARPENINGS (none of which weakens the finding). (a) 'Locally Noetherian' is unnecessary: tag 07ZC is a prime-by-prime statement over an arbitrary ring and minors commute with arbitrary base change, so the conclusion holds over any base, including non-reduced ones -- and non-reducedness is precisely harmless here because the criterion is applied at residue fields, not at reduced points. (b) 'Six pairwise-disjoint sections' is stronger than used: only flatness and relative degree 6 of Gamma enter, so the statement holds for any relative effective Cartier divisor of degree 6; disjointness is load-bearing for the S_6-torsor of FND-0064/FND-0075, not for the rank bounds. (c) Two hypotheses are implicit and must be carried: all geometric fibres smooth of genus 6, and fibrewise balancedness of F -- both are needed for deg W_4 = 20 > 2g-2 and deg W_5 = 16 > 10; on an unbalanced fibre (f_1 <= 3) deg W_4 >= 24 still exceeds 10 but the labels and the degree-zero coincidence for W_5 fail, so the finding must not be quoted outside the balanced locus. (d) phi must be the curve-level evaluation pi_*(W|_C) -> pi_*(W|_Gamma) of FND-0097/FND-0099. SRC-0004 Lemma 10.6 states its evaluation map on the ambient P(E^vee), factored as H^0(P(E^vee),W) -> H^0(C,W|_C) -> H^0(Gamma,W|_Gamma); the rank bounds proved here concern only the second arrow, and transporting them to the ambient composite additionally requires H^1(P(E^vee), W (x) I_C) = 0, which this audit does not verify. (e) The value set {11,12} is sharp and both values occur: the rank-11 locus is exactly V(Fit_0) = V(I_12(phi)), the Abel-Jacobi incidence locus which FND-0096 identifies universally with I_e and which FND-0005 shows is nonempty (subject to FND-0083's caveat that fibrewise nonemptiness of the reduced-support/ordered model is a separate question). WHAT THE FINDING DOES AND DOES NOT DO. It collapses the C66-COMP-RANK deliverable 'compute determinantal rank-drop ideals' to a single nontrivial Fitting ideal Fit_0 = I_12(phi) = I_6(phi_5): the rank stratification has exactly two strata, there is no deeper degeneracy stratum, and no component of Z can be supported on a rank <= 10 locus. It is a genuine exception to the FND-0046 caution that fibrewise equivalences give equality only on geometric points -- the unit-ideal conclusion is the one case where fibrewise rank data does pin the ideal sheaf globally, because V(I) = empty forces I = O_B -- and it must not be over-read as licensing any scheme-theoretic identification of Z: Fit_0 remains the substantive object and FND-0046/FND-0047/FND-0107 continue to apply there. Cross-check with FND-0068: the generic determinantal expectation for a one-step rank drop of a 26x12 map is (26-11)(12-11) = 15, whereas the actual locus has codimension 6 in the Pic^0 direction (FND-0096); FND-0122 is consistent with FND-0068 and strengthens the picture by showing the deeper expected loci are empty rather than merely of excess dimension. DISTINCTNESS / NO MERGE. Distinct from FND-0062 (f=4 obstruction vanishes), FND-0063 (f=5 degree-zero Abel-Jacobi criterion), FND-0074 (borderline n=6 and non-transport), FND-0096 (Fit_0 = I_e universally), and FND-0097/FND-0099 (filtered reduction and Fit_0(coker phi) = Fit_0(coker phi_5)): each of those concerns the single Fitting ideal Fit_0 or its inputs, while FND-0122 is the only record asserting triviality of the deeper minor ideals and the two-stratum rank stratification. Retain equivalence group FC-NO-DEEPER-CE-RANK-DROP; merge_target_id null. Recorded kind 'obstruction' is imprecise -- 'lemma'/'scope-limit' matches its function (cf. FND-0033) -- but this is a labelling note, not a verdict issue. INDEPENDENCE AND PROVENANCE. The finding's sole reviewer engine is cursor-grok, which is in this task's excluded_engines, so promotion rests entirely on this independent claude verification: the Fitting-ideal facts were fetched live from the Stacks Project, SRC-0004 Section 10 was re-fetched live via ar5iv and cross-checked against the packet's verbatim Lemma 10.6 excerpt, arXiv metadata for 2208.02357v2 was re-verified, and the Casnati-Ekedahl degree-4 structure (E of rank 3, F of rank 2, both of degree g+3, C the zero locus of a section of O_{P(E^vee)}(2) (x) gamma^*F^vee, whence rank W = 2 and target rank 12) was confirmed from the low-degree Hurwitz-space literature and is consistent with the packet's own W = W_{f_1} (+) W_{f_2} convention. One read-only Grok worker (one turn, three unused) was dispatched as a non-load-bearing corroborating reading layer for SRC-0004 Section 10; because its engine family is excluded from adjudication here, no step above depends on it -- every load-bearing item was re-derived or re-fetched by the parent, and the worker's report merely agreed. LIMITATION DISCLOSURE. This read-only workspace exposes no shell or hashing capability, so content_sha256 in every source record is an explicit all-zero null sentinel rather than a computed digest; the retrieval URLs, timestamps, and quoted locators are recorded in its place, and no hash value here should be treated as verified content provenance. ATT-0076 / REV-0127 artifact-level provenance was not re-audited (those artifacts are absent from this workspace) and is not required for the mathematical promotion.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0122",
+  "id": "FAUD-0125",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "equivalence_group": "FC-NO-DEEPER-CE-RANK-DROP",
+    "explicitly_not_established": "nothing about Fit_0 = I_12(phi) = I_6(phi_5), which remains the substantive determinantal object (FND-0096); this finding licenses no scheme-theoretic identification of Z",
+    "impacts_approach_ids": [
+      "C66-COMP-RANK"
+    ],
+    "kind_note": "recorded kind 'obstruction' is better classified as 'lemma'/'scope-limit' (cf. FND-0033): it removes work from C66-COMP-RANK rather than blocking a route; re-labelling does not affect the verdict",
+    "objects": {
+      "W": "W = (O_{P(E^vee)}(2) (x) gamma^* F^vee)|_C, rank 2 on C, with canonical filtration 0 -> W_4 -> W -> W_5 -> 0, deg W_4 = 4g+12-16 = 20, deg W_5 = 4g+12-20 = 16",
+      "divisor": "Gamma a relative effective Cartier divisor of degree 6 (the six pairwise-disjoint sections), finite flat of degree 6 over B",
+      "family": "smooth proper family C/B of genus-6 curves with a degree-4 map gamma: C -> P^1_B whose CE bundle F is fibrewise balanced, F = O(4) (+) O(5) (deg F = g+3 = 9)",
+      "phi": "the CURVE-LEVEL evaluation pi_*(W|_C) -> pi_*(W|_Gamma), locally free of ranks 26 and 12; phi_5 its W_5-quotient, ranks 11 and 6"
+    },
+    "scope_corrections": [
+      "the 'locally Noetherian' hypothesis is unnecessary: the Fitting criterion is prime-by-prime over an arbitrary base, and minors commute with arbitrary base change; the conclusion holds over any base scheme (or algebraic stack, smooth-locally) on which the family hypotheses hold, including non-reduced bases",
+      "'six pairwise-disjoint sections' is stronger than needed: only flatness and relative degree 6 of Gamma are used (disjointness is load-bearing for the S_6-torsor of FND-0064/FND-0075, not here)",
+      "hypotheses that must be carried explicitly and are only implicit in the statement: all geometric fibres smooth of genus 6, and fibrewise balancedness of F (both are needed for deg W_4 = 20 > 2g-2 = 10 and deg W_5 = 16 > 10)",
+      "phi must be the curve-level evaluation of FND-0097/FND-0099, not the ambient map H^0(P(E^vee),W) -> H^0(Gamma,W|_Gamma) of SRC-0004 Lemma 10.6; for the ambient map the same rank bounds require the additional surjectivity H^0(P(E^vee),W) -> H^0(C,W|_C), i.e. H^1(P(E^vee), W (x) I_C) = 0, which this audit does not verify"
+    ],
+    "target_status": "candidate -> corroborated",
+    "verified_assertions": [
+      "every geometric fibre has rank(phi_5) = 6 - h^0(N) in {5,6} and rank(phi) = 12 - h^0(N) in {11,12}, where N := omega_C (x) W_5^vee(Gamma) has degree 2g-2-16+6 = 0",
+      "coker(phi) = coker(phi_5) = H^1(C, W_5(-Gamma)) = H^0(C,N)^vee (Serre duality; uses h^1(W_5) = 0)",
+      "I_11(phi) = Fit_1(coker phi) = O_B and I_5(phi_5) = Fit_1(coker phi_5) = O_B as ideal sheaves"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "fitting-ideal-minors-and-base-change",
+      "retrieved_at": "2026-08-11T23:02:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/07Z6"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-11T23:06:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "source-metadata-verification",
+      "retrieved_at": "2026-08-11T23:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": "2103.09902",
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": null,
+      "query_family": "ce-degree-four-structure-theorem",
+      "retrieved_at": "2026-08-11T22:58:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/pdf/2103.09902"
+    }
+  ],
+  "task_id": "TASK-F-FND-0122",
+  "verdict": "promote"
+}

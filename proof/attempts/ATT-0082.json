@@ -1,0 +1,160 @@
+{
+  "argument_markdown": "Source-backed inputs.\n\nATT-0066, dual-confirmed by REV-0110 and REV-0116, supplies: the h0(L)\u2208{3,4} stratification (CLM-0066-2 and CLM-0066-3); the projective-bundle identification I_k\u2245P((\u03c0_*L|_{B_k})^\u2228) on each reduced constant-h0 stratum (CLM-0066-4); the global Abel\u2013Jacobi/Hilbert model across the jump (CLM-0066-5); and the stack-level finite \u00e9tale S_6-torsor tilde-I\u2192I^dist (CLM-0066-6). The reducedness caveat emphasized by REV-0116 is retained, and no negative disclaimer in ATT-0066 is promoted to an existence theorem.\n\nProved step 1: projective-bundle components.\n\nFix k and an irreducible component Y of B_k. Over a nonempty trivializing open U\u2282Y, the inverse image is U\u00d7P^{k\u22121}, hence irreducible. Because the projective-bundle projection is open and surjective, the inverse image of the dense open U is dense in the full inverse image over Y. Thus P((\u03c0_*L|_Y)^\u2228) is irreducible. The inverse images of the irreducible components of B_k are closed, cover I_k, and none contains another because their images in B_k do not; they are therefore precisely the irreducible components of I_k. On a trivializing open, the standard Krull-dimension formula gives dim P((\u03c0_*L|_Y)^\u2228)=dim(Y)+k\u22121.\n\nProved step 2: monodromy controls the ordered components.\n\nPut G=S_6 and restrict the ATT-0066 torsor to V. Choose a geometric point v\u0304 of V and one point of the fibre. The right G-torsor structure identifies that fibre with G. \u00c9tale monodromy commutes with the right G-action, so after this choice it acts on G by left multiplication through a homomorphism \u03c1_V:\u03c0_1^\u00e9t(V,v\u0304)\u2192G, well-defined up to conjugacy. Connected components of a finite \u00e9tale cover correspond to monodromy orbits. If H_V=im(\u03c1_V), its orbits on G have size |H_V| and number [G:H_V]. Since V is normal and connected, it is irreducible; finite \u00e9tale covers preserve normality, so every connected component of the restricted torsor is normal and connected and hence irreducible. Each such component is finite \u00e9tale of degree |H_V| over V and has dimension dim(V). The two extreme cases follow immediately: [G:H_V]=720 iff H_V={1}, and [G:H_V]=1 iff H_V=G.\n\nComputational hypotheses.\n\nNone. No finite experiment or point count is used to prove the theorem.\n\nGaps and exact-target status.\n\nThe theorem supplies an exact test, not the missing input: the irreducible components of B_3 and B_4 and the images H_V are not computed. Existence or density of the distinct-support locus on each relevant component is also not proved. Therefore no component decomposition of the full image in M_{6,6}, no associated local-system decomposition, and no statement about W_{-16}H^{BM}_{16}(M_{6,6};Q) is obtained.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0082-1",
+      "justification": "ATT-0066/CLM-0066-4, confirmed by REV-0110 and REV-0116, gives the projective-bundle model on reduced strata. Irreducibility and the component bijection follow from local triviality over dense opens; the dimension formula is the standard projective-bundle formula.",
+      "statement": "For k\u2208{3,4}, irreducible components of the reduced stratum B_k correspond bijectively to irreducible components of I_k, and a component over Y has dimension dim(Y)+k\u22121.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0082-2",
+      "justification": "ATT-0066/CLM-0066-6, confirmed by REV-0110 and REV-0116, supplies the finite \u00e9tale S_6-torsor. The Galois-category classification identifies connected components with \u03c0_1^\u00e9t-orbits; normality turns connected components into irreducible components.",
+      "statement": "For connected normal V\u2282I^dist, the irreducible components of the ordered incidence above V are the monodromy orbits on S_6 and number [S_6:H_V].",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0082-3",
+      "justification": "This is the specialization of CLM-0082-2 to H_V={1} and H_V=S_6. It shows that neither proposed extreme follows from the deck group alone.",
+      "statement": "The ordered incidence over V has 720 irreducible components iff its S_6-monodromy is trivial, and is irreducible iff its monodromy image is all of S_6.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0082-4",
+      "justification": "ATT-0066 explicitly leaves component analysis open, while REV-0110 and REV-0116 do not add a component or monodromy computation.",
+      "statement": "The actual irreducible-component sets of B_3 and B_4 and the actual subgroups H_V are not determined by the verified dependency package.",
+      "status": "gap"
+    },
+    {
+      "id": "CLM-0082-5",
+      "justification": "The working-context constraints forbid inferring Tate type from rational S_6-representation theory, and this attempt supplies no such cohomological calculation.",
+      "statement": "No Tate or non-Tate conclusion for the exact RED-0001 group follows from the component test without geometric monodromy and cohomology-with-local-coefficients calculations.",
+      "status": "gap"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [
+    {
+      "affects": [
+        "CLM-0082-4"
+      ],
+      "id": "GAP-0082-BASE-COMPONENTS",
+      "severity": "high",
+      "statement": "The irreducible components of the balanced h0 strata B_3 and B_4 are not computed. Classical Hurwitz irreducibility cannot be substituted for this calculation."
+    },
+    {
+      "affects": [
+        "CLM-0082-4",
+        "CLM-0082-5"
+      ],
+      "id": "GAP-0082-MONODROMY",
+      "severity": "high",
+      "statement": "For each relevant connected normal V\u2282I^dist, the subgroup H_V\u2282S_6 is not computed; hence the formula [S_6:H_V] is not specialized to a numerical component count."
+    },
+    {
+      "affects": [
+        "CLM-0082-2",
+        "CLM-0082-3"
+      ],
+      "id": "GAP-0082-DISTINCT-SUPPORT",
+      "severity": "medium",
+      "statement": "Nonemptiness and density of the distinct-support incidence on every relevant geometric fibre or base component remain unproved."
+    },
+    {
+      "affects": [
+        "CLM-0082-5"
+      ],
+      "id": "GAP-0082-EXACT-TARGET",
+      "severity": "high",
+      "statement": "No cohomology with the monodromy local systems is computed, so the exact group W_{-16}H^{BM}_{16}(M_{6,6};Q) is not shown to be Tate and no surviving non-Tate summand is exhibited."
+    }
+  ],
+  "id": "ATT-0082",
+  "ingest_normalizations": [],
+  "lane": "computation",
+  "methods_used": [
+    "abel-jacobi-stratification",
+    "projective-bundle-irreducible-component-bijection",
+    "projective-bundle-dimension-formula",
+    "finite-etale-torsor-galois-category",
+    "stack-etale-fundamental-group-monodromy",
+    "monodromy-orbit-component-count"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Provides an independently proved necessary-and-sufficient monodromy test for the proposed ordered component decompositions: the component number is [S_6:H], rather than automatically 720 or automatically one.",
+    "Separates the two component problems exactly: projective-bundle geometry transfers irreducible components from each reduced h0 stratum, while ordering introduces only the additional finite \u00e9tale monodromy-orbit calculation."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "b1d55a83a974a3116d23efc6b10fcb431703c58b75e05b733d4f216bce860a25",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-H0 dependency supplying CLM-0066-2 through CLM-0066-6: the h0 strata, reduced-stratum projective bundles, global Abel\u2013Jacobi incidence, and stack-level ordered finite \u00e9tale S_6-torsor."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0066 and all CLM-0066-1 through CLM-0066-6, with the weak normalization retained as a hypothesis."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0066; its reduced-base Grauert caveat and disclaimer warning are enforced in the theorem scope."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "CLM-0066-2",
+    "CLM-0066-3",
+    "CLM-0066-4",
+    "CLM-0066-5",
+    "CLM-0066-6"
+  ],
+  "source_ids": [],
+  "status": "proposed",
+  "subproblem_id": "C66-COMP-COMP",
+  "summary": "The balanced Abel\u2013Jacobi incidence has exactly the same irreducible-component decomposition as its reduced constant-h0 base strata, with the expected projective-bundle dimension shifts. Over a connected normal piece of the distinct-support incidence, the ordered incidence has [S6:H] irreducible components, where H is the actual geometric monodromy image in S6. Thus the proposed extremes of 720 components and one component are respectively equivalent to trivial and full S6 monodromy; neither follows merely from the existence of the S6-torsor. The actual monodromy and base-stratum component sets remain open, and no conclusion about RED-0001 is asserted.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-009",
+  "theorem_scope": {
+    "base": "locally Noetherian over a characteristic-zero field; B_3 and B_4 are required to be reduced and finite-dimensional; the monodromy clause is applied only over a connected normal locally Noetherian substack V",
+    "exclusions": "No irreducibility of B_3 or B_4 is asserted; no monodromy image is computed; no nonemptiness or density of I^dist on every fibre is asserted; no component, stabilizer, closure, monomorphism, dimension, or codimension statement is made for the image in M_{6,6}; and no Hodge, weight, purity, local-system, or Tate conclusion is drawn.",
+    "g": 6,
+    "generality": "fibrewise balanced tetragonal Casnati\u2013Ekedahl families within the precise ATT-0066 scope, including its weak relative-canonical normalization hypothesis",
+    "n": 6
+  },
+  "theorem_statement": "Component-and-monodromy test for the balanced tetragonal incidence. Assume the fibrewise balanced genus-6 degree-4 Casnati\u2013Ekedahl hypotheses and the weak relative-canonical normalization carried by ATT-0066. Let B_3 and B_4 be the h0(L)=3 and h0(L)=4 strata, let I be the global degree-six Abel\u2013Jacobi incidence, and assume each B_k is reduced, locally Noetherian, and finite-dimensional. For k in {3,4}, the projection I_k:=I\u00d7_B B_k\u2192B_k induces a bijection between irreducible components: an irreducible component Y\u2282B_k corresponds to P((\u03c0_*L|_Y)^\u2228), which has dimension dim(Y)+k\u22121. Now let V be any connected normal locally Noetherian substack of I^dist, and let H_V\u2282S_6 be the image, defined up to conjugacy, of the \u00e9tale monodromy representation on a geometric fibre of the finite \u00e9tale S_6-torsor tilde-I_V\u2192V. Then tilde-I_V has exactly [S_6:H_V] irreducible components; every component maps finite \u00e9tale of degree |H_V| to V and has dimension dim(V). Consequently tilde-I_V has 720 irreducible components exactly when H_V is trivial, and it is irreducible exactly when H_V=S_6."
+}

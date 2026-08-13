@@ -1,0 +1,32 @@
+PRINCIPAL OVERRIDE — CONTINUE AND FINISH YOUR INTERRUPTED COMP-RANK PROOF.
+
+Context:
+- Your previous Claude turn for TASK-C66-M-008 / C66-COMP-RANK was interrupted by the Claude session limit (resets were at 12:50pm Asia/Tokyo). No attempt artifact was written to the original slot.
+- The spent/failed slot ATT-0081 is closed. Do NOT reopen or overwrite it.
+- Do NOT modify or overwrite other attempts (especially ATT-0076 / ATT-0080 / ATT-0082 / ATT-0083).
+- Finish into the NEW append-only slot: ATT-0084.
+- Same Claude session is resumed; do not restart the proof from zero.
+- Prefer finishing from what you already loaded in this session.
+- Updated COMP-RANK working context / DIGEST-0026 are available if needed; prefer session memory first.
+
+Token discipline (mandatory):
+1. Prefer finishing from session memory and already-read context.
+2. At most a small number of Read/Grep/Glob/WebFetch calls if a load-bearing lemma is still missing.
+3. Do NOT re-read the entire packet end-to-end. Do NOT burn a long exploratory monologue.
+4. Grok workers are optional; prefer not to dispatch unless a single concrete lookup remains.
+5. Emit the final JSON in this turn.
+
+Hard contract:
+- Final message: exactly one JSON object matching proof/CAMPAIGN_ATTEMPT_TEMPLATE.json
+- No Markdown fences, no prose before or after the JSON
+- id must be exactly: ATT-0084
+- engine must be exactly: claude
+- task_id must be exactly: TASK-C66-M-008
+- subproblem_id must be exactly: C66-COMP-RANK
+- Keep the artifact schema-faithful
+
+Final message: exactly one JSON object.
+
+Supplied files in this workspace:
+- TASK.json (output retargeted to ATT-0084)
+- prompts / packet / templates / working-context via curated copies and repo/

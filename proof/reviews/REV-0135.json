@@ -1,0 +1,126 @@
+{
+  "attempt_id": "ATT-0086",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0086-1",
+      "note": "Reconstructed and re-derived end to end. (i) M=\u03c9^2\u2297W_5^\u2228 has deg M = 2(2g-2) - (4g+12-4f)|_{g=6,f=5} = 20-16 = 4 and h^0(L)=1+h^0(M) by \u03c7(L)=1 plus Serre duality; M is always special since h^1(M)=h^0(L)\u22651. (ii) h^0(L)=4 gives h^0(M)=3 = deg M/2 + 1, i.e. Clifford equality with deg M \u2209 {0,2g-2}, forcing C hyperelliptic and M\u2245(g^1_2)^{\u22972}. (iii) Castelnuovo\u2013Severi: a degree-2 and a degree-4 map to P^1 not factoring through a common map give g \u2264 (2-1)(4-1)=3 < 6; the common factor \u03c6 has deg \u03c6 | 2 and deg \u03c6 \u2265 2, so \u03c6 = h and \u03b3 = q\u2218h with deg q = 2. (iv) Splitting obstruction: h_*O_C = O\u2295O(-7) (branch degree 2g+2=14); q_*O(-7) = O(-4)^2 is forced for EVERY degree-2 q, since deg = -8 by \u03c7 and h^0(q_*O(-7)\u2297O(3)) = h^0(O(-1)) = 0 pushes the larger summand to \u2264 -4; hence E = O(1)\u2295O(4)^2, Sym^2E(-6) = O(-4)\u2295O(-1)^2\u2295O(2)^3 with h^0 = 9, and h^0(C,R\u2297\u03b3^*O(-6)) = 7 for R = O_{P(E^\u2228)}(2)|_C. Left-exactness gives h^0(F(-6)) \u2265 9-7 = 2, while balanced F = O(4)\u2295O(5) gives F(-6) = O(-2)\u2295O(-1) with h^0 = 0. The contradiction stands; every number was independently recomputed and agreed. The parenthetical 'does not require the weak relative-canonical normalization' is also true, but not for the reason written \u2014 see FC-0135-A.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0086-2",
+      "note": "Under the stated normalization M \u2245 \u03b3^*O(1) = O(D), so h^0(M) \u2265 2 (\u03b3^* is injective on H^0(P^1,O(1))) and h^0(M) \u2264 3 by Clifford, i.e. h^0(L) \u2208 {3,4}; CLM-0086-1 removes 4, leaving h^0(L)=3 on every geometric fibre \u2014 consistent with the internal cross-check that |L| is then a g^2_6 whose residual \u03c9\u2297L^{-1} is exactly the degree-4 pencil. The second half is correctly hypothesis-guarded: B reduced with h^0 constant = 3 are precisely Grauert's hypotheses, so p_*L is locally free of rank 3 with base change, and the Abel\u2013Jacobi model Hilb^6 \u00d7_{Pic^6} B \u2245 P((p_*L)^\u2228) is Zariski-locally trivial because the projectivization of a locally free rank-3 sheaf is. The reducedness restriction honors the nonreduced-base obstruction, and the statement stays over schemes rather than silently widening to a stack base, so neither a constant-rank lifting argument nor a smooth-atlas descent line is owed. No coarse-versus-stack, integral-coefficient, cohomological-versus-BM-degree, Tate-twist, Gysin/K\u00fcnneth, differential, invariants-versus-coinvariants, or semisimplification step occurs anywhere in this lemma; purity, Tate support, Tate assembly and RED-0001 are explicitly excluded and resolves_exact_target=false is recorded.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-13",
+  "finding_candidates": [
+    {
+      "caveat": "ATT-0086's written derivation instead identifies the target with H^0(C, h^*O(6)), which does use the normalization plus hyperellipticity; the normalization-free reading requires substituting the Riemann\u2013Roch count above. Remains a candidate until independently corroborated.",
+      "key": "hyperelliptic-ce-splitting-obstruction-is-degree-forced",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "generality": "every smooth hyperelliptic genus-six curve and every degree-two q, over any characteristic-zero field"
+      },
+      "statement": "The exclusion of balanced CE relations on a genus-six hyperelliptic degree-four cover needs neither an explicit curve model nor the CE relative-canonical normalization. For \u03b3 = q\u2218h, E = O(1)\u2295O(4)^2 is forced for EVERY degree-2 map q, because deg q_*O(-7) = -8 by Euler characteristic and h^0(q_*O(-7)\u2297O(3)) = h^0(O(-1)) = 0 pushes the larger summand to degree \u2264 -4. Given only that, h^0(Sym^2E(-6)) = 9, while h^0(C, O_{P(E^\u2228)}(2)|_C \u2297 \u03b3^*O(-6)) = 7 follows from degree alone (deg = 36 - 24 = 12 > 2g-2 = 10, so h^1 = 0 and Riemann\u2013Roch gives 7), with no identification of the line bundle and hence no use of O_{P(E^\u2228)}(1)|_C \u2245 \u03c9_{C/P^1}. Left-exactness then gives h^0(F(-6)) \u2265 2, excluding splitting types (4,5) and (3,6) among a+b=9.",
+      "supports_finding_id": "FND-0125",
+      "why_reusable": "It upgrades a splitting-type fact whose recorded verification is a single explicit model (y^2 = f_14(x), z = x^2) to a model-free, normalization-free inequality, so downstream artifacts may invoke it on an arbitrary hyperelliptic fibre of an arbitrary family without re-choosing coordinates and without carrying the weak-normalization hypothesis into the exclusion step. It also shows the exclusion covers the adjacent (3,6) stratum, not only the balanced one."
+    },
+    {
+      "caveat": "Not proved or asserted by the reviewed artifact; this is the reviewer's derivation from the confirmed h^0(L)=3 plus the packet's recorded base-point analysis and characteristic-zero Bertini. It says nothing about relative (as opposed to fibrewise) density over a general base, nothing about S_6 monodromy, and nothing about Tate type. Remains a candidate until independently corroborated.",
+      "key": "balanced-normalized-fibres-have-reduced-general-divisor",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "generality": "geometric fibres of a balanced genus-six degree-four CE family satisfying the weak relative-canonical normalization"
+      },
+      "statement": "On a balanced fibre satisfying the weak CE normalization, h^0(L) = 3 (this lemma) combines with base-point-freeness of L on the balanced locus to make the general member of |L| \u2245 P^2 consist of six DISTINCT points, hence the reduced-support open of the closed Abel\u2013Jacobi incidence is nonempty and dense in every fibre of the P^2-bundle. Argument: if L had a base point p, then L(-p) would be a g^2_5 on a genus-six curve, forcing a smooth plane quintic, whose tetragonal pencil is projection from that point and is CE-unbalanced, hence excluded from the balanced locus; L base-point-free with h^0 = 3 gives a finite morphism \u03c6_L : C \u2192 P^2 whose image spans, and in characteristic zero \u03c6_L is separable onto its image, so a general line pulls back to a reduced divisor (Bertini), i.e. six distinct points.",
+      "why_reusable": "Fibrewise nonemptiness of the reduced-support open is a standing obstacle for the ordered Conf_6 model, and ATT-0086 explicitly disclaims it while in fact supplying the missing constancy input. If corroborated, the ordered/unordered S_6-torsor model acquires a nonempty base on every balanced normalized fibre with no further geometric input."
+    }
+  ],
+  "id": "REV-0135",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Load-bearing and used strictly within its stated scope. The four ingredients quoted (deg L = 6, deg M = 4, h^0(L)=1+h^0(M) with M special; M \u2245 \u03b3^*O(1) under the weak normalization; Grauert local freeness plus base change on a reduced constant-h^0 stratum; identification of the global linear system with the closed Abel\u2013Jacobi incidence) were re-derived independently here from Riemann\u2013Roch, Serre duality, the SRC-0004 degree formula and standard base-change theory, and each is separately corroborated by packet findings FND-0103, FND-0105, FND-0107 and the reducedness caveat FND-0131. ATT-0066 itself was not readable in this workspace (the repo symlink resolves to nothing), so the confirmation rests on independent re-derivation rather than on quoting the source artifact.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Corroborative only, not load-bearing here, and deliberately not read: the adversarial protocol requires reconstruction without leaning on other reviews. The ATT-0066 content actually used was re-derived independently above.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Same disposition as REV-0110: corroborative, not read, not load-bearing. The reducedness caveat it is credited with is visible in the packet as FND-0131 and is honored by the theorem's reduced-base hypothesis.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0125",
+      "note": "Cited correctly and, importantly, not over-used: the artifact needs only h^0(F(-6)) \u2265 2 and derives it from E = O(1)\u2295O(4)^2 by a dimension count, rather than importing the sharper F = O(2)\u2295O(7). The sharper value is consistent (O(2)\u2295O(7) twisted by -6 has h^0 exactly 2), and the weaker route is genuinely model-free \u2014 see FC-0135-A.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0105",
+      "note": "Used exactly as prescribed: the weak CE relative-canonical normalization is carried as an explicit hypothesis in theorem_statement and theorem_scope.normalization_role, not relabelled an established working-context fact. It enters only to pin h^0(L) \u2208 {3,4}; emptiness of the h^0=4 stratum is independent of it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Load-bearing through Lemma 10.6 only: deg(O_{P(E^\u2228)}(2)|_C) = 2(2g-2+4\u00b72) = 36 and deg W_f = 4g+12-4f, giving deg W_5 = 16, deg M = 4, deg(R\u2297\u03b3^*O(-6)) = 12. The f=(4,5) labelling in the packet's W-convention (W_f = O(2)\u2297\u03b3^*O(-f)) is what fixes the sign of the relations bundle; that consistency was checked by Euler characteristic and is the subject of the strongest attack below.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0103",
+      "note": "Declared source claim, load-bearing: it independently records that M is always special, that Clifford gives h^0(M) \u2264 3 with equality only in the hyperelliptic 2\u00b7g^1_2 case, and that h^0(L)=4 is confined to hyperelliptic fibres. This is precisely the step the artifact rebuilds, and the rebuild agrees.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0107",
+      "note": "Declared source claim, load-bearing for the second half: it supplies the correct closed model Sym^6(C/B) \u00d7_{Pic^6} B = Hilb^6(C/B) \u00d7_{Pic^6} B and the fact that it agrees with Proj(p_*L) exactly over the constant-h^0 locus \u2014 which, after B_4 = \u2205, is all of B. The artifact does not confuse the closed incidence with the reduced-support open, nor call that open closed.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0086-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Binding checked first: TASK packet_sha256 0afc96f3\u202670, packet_binding_sha256 76cc8a6d\u2026f7, packet_id C66-001-v4, campaign_revision 4, context_revision 2, lane 'computation' and subproblem C66-COMP-COMP all match the attempt verbatim, as do all twelve target keys (ordinary degree 26 / weight 26 / Q(-13); open BM degree 16 / weight -16 / Q(8); compact degree 16 / Q(-8); chow codim 13; dim 21; Poincar\u00e9 twist 21; g=6, n=6). The statement judged is the attempt's own theorem_statement, not RED-0001, which the artifact explicitly disclaims.\n\nSTRONGEST ATTACK \u2014 duality/sign flip in the CE quadratic-relation sequence. The whole contradiction is asymmetric in the convention: it requires the packet's F (the bundle whose balanced value is O(4)\u2295O(5)) to be the KERNEL of Sym^2E \u2192 \u03b3_*R, of degree +9. Much of the CE literature writes the degree-4 resolution with middle term \u03c0^*F^\u2228\u2297O(-2), under which the pushed-forward relations bundle is the degree -9 dual. Had the packet meant that one, the hyperelliptic value would be O(-2)\u2295O(-7), whose twist by -6 has h^0 = 0 exactly like the balanced O(-4)\u2295O(-5): the contradiction would evaporate and the proof would be vacuous. This attack fails. Euler characteristics pin the orientation: \u03c7(Sym^2E) = 4\u00b7deg E + 6 = 42 and \u03c7(\u03b3_*R) = \u03c7(R) = 36 + 1 - 6 = 31, so the kernel has rank 2 and degree exactly +9 = deg(O(4)\u2295O(5)), and the packet's own W-convention (deg W_f = 36 - 4f with f \u2208 {4,5}, i.e. F^\u2228 = O(-4)\u2295O(-5)) selects the same positive-degree bundle. Both splitting types under comparison, balanced (4,5) and hyperelliptic (2,7), have degree 9, so the comparison is internally consistent and the sign is right.\n\nRUNNER-UP \u2014 a normalization leak inside the claim that no normalization is needed. CLM-0086-1 asserts the h^0=4 exclusion is independent of the weak relative-canonical normalization, yet the written derivation routes the target of the restriction map through H^0(C, A^6) with A = h^*O(1), an identification that uses \u03c9_C = A^5 together with O_{P(E^\u2228)}(1)|_C \u2245 \u03c9_{C/P^1} \u2014 the very normalization being disclaimed. The claim nonetheless survives, for a reason the artifact does not state: deg(R\u2297\u03b3^*O(-6)) = 36 - 24 = 12 > 2g-2 = 10, so h^1 = 0 and h^0 = 12 - 6 + 1 = 7 by Riemann\u2013Roch alone, whatever the line bundle is. Since the theorem_statement carries the normalization as a hypothesis anyway, this touches only an auxiliary parenthetical, not the theorem. Recorded as FC-0135-A.\n\nOTHER ATTACKS RUN AND DEFEATED. (a) Castelnuovo\u2013Severi yields only non-independence, not factorization through the hyperelliptic map; the missing line is that the common factor has degree dividing 2 and \u2265 2, hence equals h with residual map of degree 1 \u2014 correct, though compressed to one sentence. (b) q_*O(-7) = O(-4)^2 could have been asserted only for generic or normal-form q; it is forced for every degree-2 q by degree -8 plus h^0(O(-7)\u2297q^*O(3)) = 0, so the 'model z = x^2' sentence is decorative and the count is genuinely universal rather than a finite experiment, consistent with the artifact's 'no computational hypotheses' declaration and with the blocked route point-count-without-degree-parity-separation. (c) Clifford equality was probed for the excluded alternatives M \u2245 O_C and M \u2245 \u03c9_C; both die on deg M = 4 \u2209 {0,10}. (d) Grauert was probed for the nonreduced-base failure mode; the theorem restricts to reduced B and does not widen to a stack base. (e) 'Zariski-locally trivial P^2-bundle' was probed for a hidden Brauer/twisted-form obstruction; there is none, since P of a locally free rank-3 sheaf trivializes wherever that sheaf does. (f) The lemma was probed for the standard campaign failure modes \u2014 stack versus coarse moduli, integral versus rational coefficients, cohomological versus Borel\u2013Moore degree, Poincar\u00e9 twists, Gysin and K\u00fcnneth shifts, spectral-sequence differentials, Aut(\u0393) invariants versus coinvariants, semisimplification versus honest Hodge isomorphism, predicted motives, pure-Tate-to-tautological upgrades, omitted stable pairs \u2014 and none arises, because the artifact makes no cohomological assertion at all. The correct residual reading is scope, not error: this lemma advances the geometry/computation node only, discharges no Tate obligation, and its novelty is modest, since FND-0104 and FND-0125 already compose to B_4 = \u2205; what is new is the normalization-free route to hyperellipticity and the model-free splitting count.",
+  "subproblem_id": "C66-COMP-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let B be a reduced locally Noetherian scheme over a characteristic-zero field carrying a smooth genus-six degree-four Casnati\u2013Ekedahl family whose relations bundle is fibrewise balanced, F_b \u2245 O(4) \u2295 O(5), and which satisfies the weak CE relative-canonical normalization used in ATT-0066. For the canonical quotient W_5 put L=W_5\u2297\u03c9^{-1}. Then h^0(C_b,L_b)=3 for every geometric b in B; equivalently, the jump stratum B_4={b:h^0(L_b)=4} is empty. Consequently the closed degree-six Abel\u2013Jacobi incidence Hilb^6(C/B)\u00d7_{Pic^6(C/B)}B is a Zariski-locally trivial P^2-bundle over B. Thus a proposed balanced component decomposition containing a nonempty B_4/P^3 piece is false.",
+  "verdict": "confirmed"
+}

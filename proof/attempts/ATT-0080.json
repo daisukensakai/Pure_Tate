@@ -1,0 +1,340 @@
+{
+  "argument_markdown": "## 0. Conventions, hypotheses, imported inputs\n\nk has characteristic zero and geometric points have algebraically closed residue field of characteristic zero. For a geometric point b write C=C_b (smooth projective connected of genus 6), gamma=gamma_b:C->P^1 finite flat of degree 4, D=D_b:=gamma^*(point) of degree 4, omega=omega_C of degree 10. Since char k=0 the trace splits gamma_*O_C=O direct-sum E^vee with E locally free of rank 3; from chi(O_C)=1-g=chi(O)+chi(E^vee)=1+(3-deg E) one gets deg E=g+d-1=9. Put X:=Proj_{P^1}(Sym E), so p_*O_X(m)=Sym^m E; this is the space written P(E^vee) in the packet and its fibres are P^2. Relative duality for the finite flat gamma gives gamma_*omega_{C/P^1}=(gamma_*O_C)^vee=O direct-sum E, and the CE relative-canonical embedding i:C->X is adjoint to the canonical inclusion E->gamma_*omega_{C/P^1}, which is therefore a split injection of sheaves.\n\nHypotheses carried, exactly as in the dual-confirmed dependency package and NOT proved here (FND-0105 discipline):\n\n* (N) fibrewise weak CE relative-canonical normalization O_X(1)|_{C_b} iso omega_{C_b/P^1} tensor gamma_b^*A_b. By SRC-0004 Lemma 10.6, deg(O_X(2)|_C)=2(2g-2+4*2)=36, i.e. deg(O_X(1)|_C)=2g+6=18=deg(omega_C tensor gamma^*O(2)); a twist by gamma^*A shifts this by 4 deg A, so deg A=0 and A iso O since Pic^0(P^1)=0. Hence O_X(1)|_C=omega_{C/P^1}=omega_C tensor gamma^*O(2). This is ATT-0066/CLM-0066-2, confirmed by REV-0110 and REV-0116.\n* (R) the standard degree-four CE ideal resolution 0->O_X(-4) tensor p^*det F->O_X(-2) tensor p^*F->I_C->0 with F locally free of rank 2, exactly as hypothesised in ATT-0065 (confirmed REV-0108, REV-0109). Balanced means F iso O(4) direct-sum O(5).\n\nImported dual-confirmed dependency facts, used only inside their stated scope:\n\n* ATT-0065/CLM-0065-5 [REV-0108, REV-0109]: fibrewise balanced F carries a canonical O(5)-subbundle and O(4)-quotient inducing the canonical filtration 0->W_4->W->W_5->0 with fibre degrees 20 and 16, with no global splitting of F. Hence W_5 and L:=W_5 tensor omega_{C/B}^{-1} are globally defined on C.\n* ATT-0066/(H1) [REV-0110, REV-0116]: on every geometric fibre deg L=6, deg M=4, chi(L)=1, h^0(L)=1+h^0(M); under (N), W_{5,b} iso omega_{C_b}^{tensor 2}(-D_b), L_b iso omega_{C_b}(-D_b), M_b iso O_{C_b}(D_b)=gamma_b^*O(1); h^0(M_b) is in {2,3} and h^0(L_b) is in {3,4}.\n* ATT-0066/(H3) [REV-0110, REV-0116] with FND-0107: I=Hilb^6(C/B) x_{Pic^6(C/B)} B is the correct closed Abel-Jacobi model over all of B, and over a REDUCED locally closed stratum on which h^0(L_b)=k is constant, I x_B B_k iso P((pi_*L|_{B_k})^vee), a P^{k-1}-bundle.\n* ATT-0066/(H4) [REV-0110, REV-0116], FND-0064, FND-0075: Z_ev=Conf_6(C/B) x_{Hilb^6} I -> I^dist is a finite etale S_6-torsor at stack level, with neither side reduced unilaterally.\n\nDegree receipts used: deg(W_5)=16 and deg(W_5 tensor omega_C^{-1})=6 [sha256 96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e]; deg M=2(2g-2)-(4g+12-4f)=4 at g=6,f=5 [sha256 b81f0e4d2a6c93d7e45b18f067d3a0c90f92e5b4d13c76a884ab50e2f60d19c3]. Everything below is reproved from scratch; no working-context row is used as a substitute for proof.\n\n## 1. The Casnati-Ekedahl quadric-count inequality\n\n**Lemma 1.** Under (N) and (R), on each geometric fibre F iso p_*(I_C tensor O_X(2)), the sequence\n\n  0 -> F -> Sym^2 E -> gamma_*(omega_{C/P^1}^{tensor 2}) -> 0   (1.1)\n\nis exact on P^1, and for every integer m\n\n  h^0(P^1,F(-m)) >= h^0(P^1,Sym^2E(-m)) - h^0(C, omega_{C/P^1}^{tensor 2} tensor gamma^*O(-m)).   (1.2)\n\nIn particular, if the restriction map H^0(Sym^2E(-6))->H^0(C,omega_{C/P^1}^2 tensor gamma^*O(-6)) has a nonzero kernel, then F is NOT balanced, since O(4) direct-sum O(5) twisted by O(-6) is O(-2) direct-sum O(-1), which has no nonzero section.\n\n*Proof.* Tensor (R) by O_X(2): 0->O_X(-2) tensor p^*det F->p^*F->I_C tensor O_X(2)->0. On a P^2-bundle H^i(P^2,O(-2))=0 for i=0,1,2, so Rp_*(O_X(-2) tensor p^*det F)=0 in every degree; hence p_*(I_C(2)) iso p_*p^*F=F and R^1p_*(I_C(2))=0. Push 0->I_C tensor O_X(2)->O_X(2)->i_*(O_X(2)|_C)->0 forward along p, using p_*O_X(2)=Sym^2E, R^1p_*(I_C(2))=0, p_* i_*=gamma_*, and O_X(2)|_C=omega_{C/P^1}^{tensor 2} from (N). This gives (1.1). Twisting (1.1) by O(-m) and taking H^0 (left exact) gives (1.2). The final sentence is h^0(O(-2) direct-sum O(-1))=0. QED\n\nConsistency receipts for (1.1): ranks 2+4=6; and since chi(omega_{C/P^1}^{tensor 2})=36-5=31 forces deg gamma_*(omega_{C/P^1}^2)=31-4=27, while deg Sym^2E=4 deg E=36, one gets deg F=36-27=9, as required for O(4)+O(5).\n\n## 2. Hyperelliptic exclusion\n\n**Lemma 2.** Let C be hyperelliptic of genus 6 and gamma:C->P^1 any finite morphism of degree 4. Then F is not balanced. (This reproves the recorded working-context established fact rather than citing it.)\n\n*Proof.* Let h:C->P^1 be the hyperelliptic map and A:=h^*O(1), deg A=2.\n\n(2a) *gamma factors through h.* Let psi=(gamma,h):C->S:=P^1 x P^1, Z:=psi(C) (irreducible), e:=deg(C->Z). Then e*deg(pr_1|_Z)=4 and e*deg(pr_2|_Z)=2, so e divides 2. If e=1 then, with H_1,H_2 the ruling classes (H_1^2=H_2^2=0, H_1.H_2=1), [Z].H_1=deg(pr_1|_Z)=4 and [Z].H_2=deg(pr_2|_Z)=2 give [Z]=2H_1+4H_2. With K_S=-2H_1-2H_2 one has Z+K_S=2H_2 and Z.(Z+K_S)=(2H_1+4H_2).(2H_2)=4, so p_a(Z)=1+2=3; but C->Z would be the normalization of Z by a smooth curve of genus 6, forcing 6<=3, a contradiction. Hence e=2, deg(pr_2|_Z)=1 and [Z]=H_1+2H_2; then Z+K_S=-H_1, Z.(Z+K_S)=-2 and p_a(Z)=0, so Z is smooth rational and pr_2|_Z is an isomorphism. Therefore C->Z is a degree-2 morphism to P^1 which composed with pr_2|_Z equals h, i.e. it is h, and gamma=q o h with q:=pr_1|_Z o (pr_2|_Z)^{-1} of degree 2.\n\n(2b) *E=O(1)+O(4)+O(4).* For a double cover h with C smooth, h_*O_C=O direct-sum N^{-1} and chi(O_C)=1-g gives deg N=g+1=7, so h_*O_C=O+O(-7). Here q^*O(1)=O_{P^1}(2) on the intermediate line. Then q_*O_{P^1}=O+O(-1) (rank 2, chi=1). For q_*O(-7): O(-7)=q^*O(-4) tensor O(1), so by the projection formula q_*O(-7)=O(-4) tensor q_*O(1); and q_*O(1) has rank 2 and degree chi(O(1))-2=0, while h^0(q_*O(1) tensor O(-1))=h^0(O(1) tensor q^*O(-1))=h^0(O(-1))=0 rules out O(1)+O(-1) (which would give h^0=1 after that twist), so q_*O(1)=O+O and q_*O(-7)=O(-4)^2. Hence gamma_*O_C=q_*h_*O_C=O+O(-1)+O(-4)^2, i.e. E=O(1)+O(4)+O(4) of degree 9. Cross-check by section counts: with D=gamma^*(pt)=2A one has h^0(mD)=h^0(2mA)=2m+1 for m<=3, since h^0(jA)=j+1 for j<=g=6; matching h^0(mD)=(m+1)+sum_i max(m-a_i+1,0) with sum a_i=9 forces (a_1,a_2,a_3)=(1,4,4).\n\n(2c) *The count.* Sym^2E=O(2)+O(5)^2+O(8)^3, so Sym^2E(-6)=O(-4)+O(-1)^2+O(2)^3 and h^0=9. On the other side omega_C=5A: indeed h^0(5A)>=6 by injectivity of h^* on H^0(O(5)), and Riemann-Roch then gives h^0(omega-5A)>=1 with deg(omega-5A)=0, so omega iso 5A. Also gamma^*O(1)=h^*q^*O(1)=h^*O(2)=2A, so omega_{C/P^1}=omega_C tensor gamma^*O(2)=5A+4A=9A and omega_{C/P^1}^2 tensor gamma^*O(-6)=18A-12A=6A of degree 12>2g-2=10, hence nonspecial with h^0=12-6+1=7. By (1.2), h^0(F(-6))>=9-7=2>0, so F is not balanced by Lemma 1. QED\n\n## 3. No jumping: B_4 is empty\n\n**Proposition 3.** Under the hypotheses of the Theorem, h^0(O_{C_b}(D_b))=2 and h^0(L_b)=3 for every geometric point b. Hence B_4={b : h^0(L_b)=4} is empty and B=B_3.\n\n*Proof.* Balancedness with Lemma 2 gives that C_b is not hyperelliptic. Now D=D_b has degree 4 and h^0(D)>=2 (gamma^* is injective on H^0(P^1,O(1)), gamma being finite surjective between integral schemes), and h^1(D)=h^0(D)-4+5=h^0(D)+1>0, so D is special and Clifford gives h^0(D)-1<=deg(D)/2=2, i.e. h^0(D)<=3. If h^0(D)=3 then Clifford equality holds; since deg D=4 is neither 0 nor 2g-2=10, the equality case forces C hyperelliptic, which is excluded. So h^0(D)=2, and by ATT-0066/(H1) with M_b iso O(D_b), h^0(L_b)=1+h^0(M_b)=3. QED\n\n*Remark (relation to FND-0104).* FND-0104 localises GAP-H0-1 to the single exclusion \"no balanced fibre carries a tetragonal pencil factoring through the hyperelliptic map\". Proposition 3 supplies exactly that exclusion via Lemma 2. Note that the h^0-dichotomy detects only the intermediate-genus-zero factorisation: the bielliptic case gamma=e o p with p:C->E a bielliptic double cover has h^0(D)=h^0(p^*P)=h^0(P)=2 and h^0(L)=3, so it is invisible to h^0 and is NOT excluded here. This is precisely the distinction recorded as a working-context constraint (constancy of h^0(omega(-D)) is not equivalent to excluding every non-primitive pencil), and Proposition 3 does not overstep it.\n\n## 4. Plane-quintic exclusion (new)\n\n**Lemma 4.** Let C be a smooth plane quintic (genus 6) and gamma:C->P^1 any finite morphism of degree 4. Then F is not balanced.\n\n*Proof.* Write H=O_C(1), so deg H=5, h^0(H)=3, and omega_C=O_C(2)=2H by adjunction. C is not hyperelliptic (the canonical map is the plane embedding followed by the Veronese, hence injective).\n\n(4a) *Every degree-four pencil on C is |H-p|.* Let D=gamma^*(pt). As in Proposition 3, h^0(D)=2 (h^0(D)=3 would force C hyperelliptic). Riemann-Roch gives h^0(H+D)=9-6+1+h^0(omega-H-D)=4+h^0(H-D). Apply the base-point-free pencil trick to the base-point-free 2-dimensional V=H^0(D) and N=H: the Koszul sequence 0->N tensor O(-D)->V tensor N->N tensor O(D)->0 yields exactness of 0->H^0(H-D)->V tensor H^0(H)->H^0(H+D). Hence 6=dim(V tensor H^0(H))<=h^0(H-D)+h^0(H+D)=2h^0(H-D)+4, so h^0(H-D)>=1. Since deg(H-D)=1, H-D iso O_C(p) for a unique point p and D iso H-p.\n\n(4b) *E=O(2)+O(3)+O(4).* Compute h^0(mD)=h^0(m(H-p)): m=0 gives 1; m=1 gives h^0(H-p)=2 (p is not a base point of the very ample |H|); m=2 gives h^0(2H-2p)=h^0(omega-2p)=6-2=4 (on a non-hyperelliptic curve every length-2 subscheme imposes independent conditions on the canonical system); m=3 gives deg 12>10, hence h^0=7. Writing gamma_*O_C=O direct-sum (direct sum of O(-a_i)) with sum a_i=9 and h^0(mD)=(m+1)+sum_i max(m-a_i+1,0), the values 1,2,4,7 force all a_i>=2, then exactly one a_i=2 with the others >=3, then one further equal to 3 with the last >=4; with sum a_i=9 this gives (2,3,4). So E=O(2)+O(3)+O(4). Cross-checks against gamma_*omega_{C/P^1}=O+E: h^0(E(-m)) equals h^0(C,omega_{C/P^1} tensor gamma^*O(-m)) minus h^0(O(-m)) for m=0,...,4, i.e. 12=13-1, 9=9-0, 6=6-0, 3=3-0, 1=1-0, all of which hold, using omega_{C/P^1}=4H-2p of degree 18.\n\n(4c) *Seven quadrics into a six-dimensional space.* Let x_2,x_3,x_4 be the generators of the summands O(2),O(3),O(4) of E, so x_a is a section of O_X(1) tensor p^*O(-a); each restricts to a nonzero section on C because E->gamma_*omega_{C/P^1} is a split injection. Using omega_{C/P^1}=omega_C tensor gamma^*O(2)=4H-2p and gamma^*O(1)=O(D)=O(H-p):\n\n  x_2|_C in H^0(C,4H-2p-2(H-p))=H^0(2H),  x_3|_C in H^0(C,H+p),  x_4|_C in H^0(C,2p).\n\nSince C is not hyperelliptic, h^0(2p)=1, so div(x_4|_C)=2p exactly. Since h^0(H+p)=6-6+1+h^0(omega-H-p)=1+h^0(H-p)=3=h^0(H), the injection H^0(H)->H^0(H+p) given by multiplication by the section cutting p is an isomorphism; hence EVERY section of O_C(H+p) vanishes at p, in particular ord_p(x_3|_C)>=1.\n\nNow Sym^2E=O(4)+O(5)+O(6)+O(6)+O(7)+O(8) (pairs (2,2),(2,3),(2,4),(3,3),(3,4),(4,4)), so Sym^2E(-6)=O(-2)+O(-1)+O+O+O(1)+O(2) and h^0(Sym^2E(-6))=0+0+1+1+2+3=7, with basis the seven monomials x_2x_4, x_3^2, x_3x_4 t_0, x_3x_4 t_1, x_4^2 t_0^2, x_4^2 t_0t_1, x_4^2 t_1^2, where t_0,t_1 is a basis of H^0(P^1,O(1)). All seven restrict into H^0(C, omega_{C/P^1}^2 tensor gamma^*O(-6))=H^0(C,8H-4p-6(H-p))=H^0(2H+2p), of degree 12>10 hence of dimension 7. Their orders of vanishing at p are: ord_p(x_2x_4)>=0+2=2; ord_p(x_3^2)>=1+1=2; ord_p(x_3x_4 t_i)>=1+2=3; ord_p(x_4^2 t_i t_j)>=4. So all seven images lie in the subspace of H^0(2H+2p) of sections vanishing to order at least 2 at p, which is exactly (the canonical section of O(2p)) times H^0(2H) because div(x_4|_C)=2p, hence of dimension h^0(2H)=6.\n\nSeven vectors in a 6-dimensional space are dependent, so the restriction map has nonzero kernel and h^0(F(-6))>=1. By Lemma 1, F is not balanced. QED\n\n## 5. Base-point-freeness of |L|\n\n**Proposition 5.** Under the hypotheses of the Theorem, |L_b| is base-point-free (and complete of projective dimension 2) on every geometric fibre.\n\n*Proof.* By Proposition 3, h^0(L)=3 and h^0(D)=2, and C is not hyperelliptic. For a point p, Riemann-Roch for N=D+p (degree 5) gives h^0(D+p)-h^0(omega-D-p)=5-6+1=0, so h^0(L-p)=h^0(omega-D-p)=h^0(D+p). Hence p is a base point of |L| if and only if h^0(D+p)=3, i.e. |D+p| is a g^2_5.\n\nAssume p is a base point. Then D+p is special (h^1=3-5+5=3>0). If |D+p| had a base point q then h^0(D+p-q)=3 with degree 4, and Clifford equality (2=4/2) with 4 not in {0,10} would force C hyperelliptic, a contradiction; so |D+p| is base-point-free. It is complete of projective dimension 2, so the associated morphism phi:C->P^2 has nondegenerate image Z; from deg(phi)*deg(Z)=5 with deg Z>=2 and 5 prime we get deg phi=1 and deg Z=5. Then p_a(Z)=(5-1)(5-2)/2=6=g(C), and C->Z is the normalization, so the total delta-invariant vanishes and Z is smooth with C iso Z. Thus C is a smooth plane quintic, contradicting Lemma 4 (which applies to the given degree-four gamma). Hence |L| has no base point. QED\n\n*Remark.* Proposition 5 refutes the carried working-context CANDIDATE \"a point p is a base point of |L| iff h^0(O_C(D+p))=3, which occurs on smooth plane quintics, so L is not base-point-free on the whole balanced locus\". The base-point criterion in that candidate is correct and is reproved above; what fails is its tacit premise that a plane quintic with one of its pencils |H-p| lies on the BALANCED locus. Lemma 4 shows it does not. Proposition 5 also replaces the unsupported route \"a base point would produce a forbidden g^2_5\" recorded elsewhere in the project: a g^2_5 is not forbidden a priori; it is excluded here by an explicit CE computation.\n\n## 6. The incidence I, its components and dimensions, and fibrewise reduced support\n\n**Proposition 6.** (a) Over B reduced, pi_*L is locally free of rank 3 compatibly with base change and I iso P((pi_*L)^vee) is a Zariski-locally trivial P^2-bundle over ALL of B. (b) Its irreducible components are exactly the preimages of the irreducible components of B, of dimension dim(component)+2. (c) On every geometric fibre the reduced-support locus is a dense open subset of |L_b| iso P^2. (d) I^dist is a dense open subscheme of I, surjective onto B, with components in bijection with those of B and the same dimensions; and Z_ev->I^dist is a finite etale S_6-torsor at stack level, nonempty over every geometric point of B, equidimensional of the same dimension.\n\n*Proof.* (a) By Proposition 3, h^0(L_b)=3 is constant on B; Grauert applies because B is reduced (reducedness is load-bearing here, per REV-0116/FC-H0-NONREDUCED-GRAUERT). Then ATT-0066/(H3) with B_3=B gives I iso P((pi_*L)^vee), whose fibres are the lines in H^0(L_b), i.e. |L_b|=P^2. Twisting L by a line bundle pulled back from B changes pi_*L by that line bundle and leaves both P((pi_*L)^vee) and I unchanged, so no ambiguity arises. (b) A projectivized vector bundle is Zariski-locally U x P^2, and irreducible components of U x P^2 are (components of U) x P^2; globally, the component of I through the fibre over the generic point of a component B_i of B is the closure of the irreducible P^2 over that generic point, while every point of I lies over some point of B. This gives the bijection and the dimension formula. (c) By Proposition 5, |L_b| is base-point-free of projective dimension 2. Consider J={(x,Lambda): x in Lambda} inside C x |L_b|; it is the projectivization of ker(H^0(L_b) tensor O_C->L_b), a rank-2 bundle, hence J is smooth irreducible of dimension 2, and J->|L_b| is surjective (every line meets the positive-dimensional projective variety phi_{L_b}(C)). Since char=0, generic smoothness for the dominant morphism J->|L_b| of smooth varieties of the same dimension 2 gives a dense open U in |L_b| over which the scheme-theoretic fibres, which are exactly the divisors of |L_b|, are smooth of dimension 0, i.e. reduced. A reduced effective divisor of degree 6 is six pairwise distinct points, so U lies in the reduced-support locus; that locus is open (complement of the closed image of the big diagonal) and now nonempty in the irreducible P^2, hence dense. (d) I^dist is open in I and by (c) meets every geometric fibre in a dense open, so it surjects onto B and, meeting every irreducible component of I (each of which dominates a component of B), it is dense with the same components and dimensions. The torsor statement is ATT-0066/(H4) with FND-0064 and FND-0075, and finite etale maps preserve dimension. QED\n\nThis proves the recorded frontier obligation \"nonemptiness of the distinct-support incidence on every geometric fibre\" WITHOUT the blocked chi(L)=1 route: chi(L)=1 enters only through ATT-0066/(H1) to know h^0(L)=1+h^0(M), while the reduced member is produced from base-point-freeness plus Bertini in characteristic zero, which is exactly the route the working-context constraint names as admissible.\n\n*Remark (absolute dimensions).* No absolute dimension of B is used or asserted; in particular the blocked inference \"dim(I|_{H_k})=15+k-1 for every k\" is not made. If one additionally grants the source-backed archive statement that the balanced tetragonal Hurwitz stack is equidimensional of dimension 15 and equals B, then Proposition 6 upgrades to dim I=dim I^dist=dim Z_ev=17; this is recorded only as a conditional remark and is not part of the Theorem.\n\n## 7. The universal divisor, finite-cover behaviour and transitivity\n\n**Proposition 7.** Let B be reduced. Then K:=ker(pi^*pi_*L->L) is locally free of rank 2 on C, the universal degree-six divisor script-D inside C x_B I is canonically P(K^vee) as a scheme over C, hence a Zariski-locally trivial P^1-bundle, and script-D->I is finite locally free of degree 6, etale exactly over I^dist. Consequently the irreducible components of script-D correspond bijectively to those of B; and if B is irreducible then script-D, I and I^dist are irreducible, the etale monodromy rho:pi_1^et(I^dist)->S_6 has TRANSITIVE image G, and Z_ev has exactly [S_6:G] irreducible components, each finite etale of degree |G| over I^dist.\n\n*Proof.* By Proposition 5, L is base-point-free on every geometric fibre, so the evaluation pi^*pi_*L->L is surjective by Nakayama and K is locally free of rank 2. For x in C the divisors of |L_b| containing x form the line P(K_x^vee) inside P((pi_*L)^vee_b)=P^2, so script-D=P(K^vee) over C. script-D is the zero scheme of the tautological section of L box-times O(1) on C x_B I, hence a relative effective Cartier divisor of degree 6 over I, i.e. finite locally free of degree 6; it is etale over I exactly where the divisor is reduced, i.e. over I^dist. Since pi is smooth proper with geometrically connected fibres, components of C correspond to those of B, and a Zariski-locally trivial P^1-bundle has components in bijection with those of its base. If B is irreducible then C is irreducible, hence script-D is irreducible; script-D x_I I^dist is a nonempty open of script-D, hence irreducible, and is a finite etale degree-6 cover of the irreducible (hence connected) I^dist, so the monodromy action on the 6 sheets is transitive. Finally Z_ev->I^dist is the S_6-torsor of orderings of that degree-6 cover, so its connected components are the G-orbits in S_6 under left translation: there are [S_6:G] of them, each a connected finite etale G-cover of I^dist. QED\n\n## 8. Trichotomy for the residual map and 2-transitivity\n\n**Proposition 8.** Let b be a geometric point, phi=phi_{L_b}:C->P^2 the morphism of the base-point-free complete g^2_6 |L_b|, Z=phi(C), e=deg(C->Z). Then e*deg(Z)=6 with deg Z>=2, so e is 1, 2 or 3, and: (i) e=1: Z is a plane sextic with p_a(Z)=10 and total delta-invariant 4; (ii) e=2: Z is a plane cubic whose normalization has genus 1 (genus 0 would make C hyperelliptic, excluded by Lemma 2), so Z is a smooth plane cubic, C is bielliptic and L=p^*N with deg N=3; (iii) e=3: Z is an irreducible nondegenerate conic, hence a smooth conic iso P^1, C is trigonal and L=2T. In case (i) the monodromy of the six points over |L_b|^dist is 2-transitive.\n\n*Proof.* The numerology and case identifications follow from deg(phi)*deg(Z)=6, nondegeneracy of a complete linear system, p_a of a plane curve, and irreducibility of Z. For 2-transitivity in case (i): since phi is birational and finite onto Z, the locus of pairs (x,y) with x not equal to y and phi(x)=phi(y) is finite. Let J_2={(x,y,Lambda) : x not equal to y, x and y in Lambda} inside (C x C minus diagonal) x |L_b|. Over the dense open of C x C minus diagonal where phi(x) is not equal to phi(y), the fibre is the single point given by the line through phi(x) and phi(y), so J_2 restricted there is isomorphic to that open, irreducible of dimension 2; over each of the finitely many remaining pairs the fibre is the pencil of lines through the common image point, contributing components of dimension 1. Hence J_2 has a unique 2-dimensional component J_0, and the union of the other components maps into a finite union of lines in |L_b|=P^2. Let V be the dense open of |L_b|^dist obtained by removing those lines; over V the map J_0->V is finite etale of degree 6*5=30 with irreducible source, hence connected, so pi_1(V) acts transitively on ordered pairs among the six points. Since V is a dense open of the irreducible |L_b|^dist, pi_1(V)->pi_1(|L_b|^dist) is surjective, so the monodromy over |L_b|^dist is 2-transitive. A 2-transitive permutation group is primitive, and the rank-6 rational permutation representation of a 2-transitive group splits as the trivial summand plus an irreducible of rank 5. QED\n\nCases (ii) and (iii) are the precise obstruction to upgrading transitivity to the full symmetric group; they are NOT excluded here. Upgrading case (i) to G=S_6 needs, in addition, a transposition in G, i.e. a line simply tangent to Z at one smooth point; that step is not carried out here and is recorded as a gap.\n\n## 9. Stabilizers\n\n**Proposition 9.** Let (C,gamma,Gamma) be a geometric point of Z_ev, so Gamma=(p_1,...,p_6) is an ordered tuple of pairwise distinct points with O_C(Gamma) iso L. (a) If the images gamma(p_i) take at least three distinct values and at least one p_i is unramified for gamma, then Aut(C,gamma,Gamma)=1. (b) Aut(C,gamma,Gamma)->Aut(C,Gamma) is an isomorphism. (c) On every geometric fibre the set of reduced Gamma in |L_b| for which the hypothesis of (a) fails is contained in a proper closed subset of |L_b| iso P^2; hence the trivial-stabilizer locus is a dense open subset of every geometric fibre of Z_ev->B.\n\n*Proof.* (a) An element sigma of Aut(C,gamma,Gamma) is an automorphism of C with gamma o sigma = sigma-bar o gamma for a unique sigma-bar in Aut(P^1) (unique since gamma is surjective), and sigma(p_i)=p_i for all i. Then sigma-bar fixes each gamma(p_i); an element of PGL_2 fixing three distinct points is the identity, so sigma-bar=id and sigma lies in Aut(C/P^1). Let U be the nonempty open locus over which gamma is etale; gamma^{-1}(U) is a dense open of the irreducible C, hence connected, and gamma^{-1}(U)->U is finite etale of degree 4. The fixed locus of the U-automorphism sigma on this cover is open and closed and by hypothesis contains a point p_i; connectedness gives sigma=id on gamma^{-1}(U), hence sigma=id on C by density and separatedness.\n\n(b) One inclusion is clear. Conversely let sigma be in Aut(C,Gamma), i.e. sigma(p_i)=p_i for all i. Then sigma^*O_C(Gamma) iso O_C(Gamma) and sigma^*omega_C iso omega_C, so sigma^*L iso L and hence sigma^*O_C(D) iso O_C(D) since D=K-L in Pic(C). By Proposition 3, h^0(D)=2, so |D| is the complete pencil defining gamma and sigma preserves it, inducing sigma-bar in PGL_2 with gamma o sigma = sigma-bar o gamma. Thus sigma lies in Aut(C,gamma,Gamma).\n\n(c) *Unramified condition.* The ramification locus of gamma is a finite subset R of C. A reduced Gamma all of whose points lie in R is determined by a 6-element subset of R, so there are only finitely many such Gamma: a proper closed subset of the irreducible P^2.\n\n*Three-distinct-images condition.* A reduced Gamma of degree 6 cannot have a single image, since a fibre of gamma has at most 4 points. Suppose Gamma has exactly two images y_1,y_2. Then Gamma is at most gamma^*(y_1)+gamma^*(y_2), so R_0:=gamma^*(y_1+y_2)-Gamma is effective of degree 2 with O(R_0) iso O(2D) tensor L^{-1}=O(3D) tensor omega^{-1}. Since C is not hyperelliptic (Lemma 2 with balancedness) and deg(O(3D) tensor omega^{-1})=2, we have h^0(O(3D) tensor omega^{-1})<=1, an h^0 of 2 being a g^1_2. If that h^0 is 0, no such Gamma exists. If it is 1, R_0 is unique, and any admissible pair {y_1,y_2} must contain gamma(supp R_0); the set of such pairs inside |O_{P^1}(2)|=P^2 is a point (if supp R_0 has two distinct gamma-images) or a line (if it has one), so the resulting set of Gamma has dimension at most 1. In all cases the locus of reduced Gamma with at most two distinct images lies in a closed subset of dimension at most 1, hence proper in P^2.\n\nThe union of the two exceptional loci is therefore a proper closed subset of |L_b|, and its preimage in the fibre of Z_ev is a proper closed subset whose complement is dense open. QED\n\nProposition 9 does NOT assert that every reduced ordered point has trivial stabilizer; the criterion together with the explicitly identified exceptional loci is what is proved.\n\n## 10. Recovery of gamma and geometric-point injectivity\n\n**Proposition 10.** For every geometric point (C,gamma,Gamma) of Z_ev, omega_C(-Gamma) iso O_C(D), whose complete linear system is the base-point-free pencil defining gamma. Hence gamma is determined by (C,Gamma) up to Aut(P^1), and the classifying map on geometric points to M_{6,6} has every geometric fibre a single isomorphism class.\n\n*Proof.* O_C(Gamma) iso L=omega_C(-D) gives omega_C(-Gamma) iso O_C(D); by Proposition 3, h^0(D)=2, and |D| contains the base-point-free gamma-pencil gamma^*|O(1)| of the same dimension, so |D| IS that pencil and is base-point-free, recovering gamma up to a target automorphism. If (C,Gamma) and (C',Gamma') are isomorphic as 6-pointed curves, the isomorphism carries omega_C(-Gamma) to omega_{C'}(-Gamma') and hence gamma to gamma' up to Aut(P^1). QED\n\nBy Proposition 3 there is no exceptional h^0-jump stratum, so unlike previous formulations this holds on all of Z_ev rather than only over an h^0=3 open. This removes the PREMISE of the recorded blocked inference (which combined injectivity over H_3 with a fibre-dimension bound over H_4); it is not a re-walk of that inference, and no quasi-finiteness, monomorphism, closedness, image-dimension, purity or Gysin conclusion is drawn from it here.\n\n## 11. Separation of status\n\n**Proved here (characteristic zero):** Lemma 1 (CE quadric-count inequality from the resolution hypothesis); Lemma 2 (hyperelliptic exclusion, including the P^1 x P^1 factorization and E=O(1)+O(4)^2); Proposition 3 (h^0(D)=2, h^0(L)=3, B_4 empty); Lemma 4 (plane-quintic exclusion, including all pencils are |H-p|, E=O(2)+O(3)+O(4), and the order-of-vanishing collapse); Proposition 5 (base-point-freeness of |L|); Proposition 6 (projective-bundle model over reduced B, component bijection, fibrewise density of reduced support, nonemptiness of I^dist and Z_ev over every geometric point); Proposition 7 (universal divisor as a P^1-bundle, transitivity, component count of Z_ev); Proposition 8 (trichotomy and 2-transitivity in the birational case); Proposition 9 (stabilizer criterion and fibrewise density of the trivial-stabilizer locus); Proposition 10 (recovery and geometric-point injectivity).\n\n**Source-backed inputs used:** SRC-0004 Lemma 10.6 for the CE sign convention W_f=(O_X(2) tensor gamma^*O(-f))|_C, deg(W_f|_C)=4g+12-4f, and deg(O_X(1)|_C)=2g+6=18. Dual-confirmed dependency artifacts ATT-0065 [REV-0108, REV-0109] and ATT-0066 [REV-0110, REV-0116] within the scopes quoted in Section 0. Adjudicated findings FND-0105 (normalization discipline), FND-0103 and FND-0073 (h^0(L)=1+h^0(M), Clifford bound), FND-0107 (Abel-Jacobi/Hilbert model), FND-0064 and FND-0075 (stack-level S_6-torsor), FND-0097 and FND-0099 (filtered CE reduction and its degree vanishings), FND-0104 (localization of GAP-H0-1 to the hyperelliptic-composed exclusion).\n\n**Hypotheses carried, not proved:** (N) the fibrewise weak CE relative-canonical normalization; (R) the standard degree-four CE ideal resolution. Both are conditionalized inside the theorem statement rather than admitted as gaps, per FND-0101.\n\n**Computational hypotheses:** none. Every numeric receipt above (9 versus 7 sections in Lemma 2, 7 versus 6 in Lemma 4, the splitting types, and the degrees 16, 6, 4, 18, 36, 9) is derived symbolically in the text. The pinned computation of a balanced example, a (1,2)-(2,2) complete intersection in P^1 x P^2 with E^vee=O(-3)^3 and F=O(4)+O(5) [sha256 823546d61b9bfb1863be8693a9d2c5fe53bdee4736e3e4090ebccdb633621eec], is quoted only to indicate that the hypotheses are not vacuous; no universal claim rests on it, and its L=O_C(0,1) is base-point-free with h^0=3, consistent with Propositions 3 and 5.\n\n**Gaps, i.e. items deliberately NOT asserted:** irreducibility of B; the absolute dimension of B and any absolute dimension or codimension in M_{6,6}; whether G equals S_6 (equivalently, whether cases (E)(ii) and (E)(iii) occur on the balanced locus, together with the existence of a simple tangent line in case (i)); monomorphism, full faithfulness on arbitrary families, quasi-finiteness as a stack morphism, closedness, non-closedness or purity of the forgetful image; unbalanced CE splitting types; positive characteristic; all Hodge, weight and Tate statements.\n\n**Blocked routes:** none of vcd-only-vanishing, undecorated-cgp-top-weight-graph-complex, point-count-without-degree-parity-separation, or forgetful-map-renaming-local-system-unknown is used; this artifact makes no cohomological, weight, graph-complex or point-counting claim, so new_inputs is empty.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0080-1",
+      "justification": "Section 1: tensoring the CE resolution by O_X(2) and using Rp_*O_X(-2)=0 on P^2-fibres identifies p_*(I_C(2)) with F and kills R^1; pushing the ideal sequence forward gives (1.1); left exactness of H^0 gives (1.2); h^0(O(-2)+O(-1))=0. Rank and degree receipts 2+4=6 and 36-27=9 check the sequence.",
+      "statement": "Under (N) and (R), F iso p_*(I_C tensor O_X(2)) and 0->F->Sym^2E->gamma_*(omega_{C/P^1}^{tensor 2})->0 is exact; hence h^0(F(-m)) >= h^0(Sym^2E(-m)) - h^0(C, omega_{C/P^1}^2 tensor gamma^*O(-m)), and any nonzero kernel at m=6 refutes F iso O(4)+O(5).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0080-2",
+      "justification": "Section 2: the bidegree analysis of (gamma,h):C->P^1 x P^1 with adjunction p_a(Z)=3 excludes birationality onto the image and forces the factorization; q_*O(-7)=O(-4)^2 via the projection formula plus a twist test; then Sym^2E(-6) has 9 sections while omega_{C/P^1}^2 tensor gamma^*O(-6)=6A has 7, so CLM-0080-1 applies.",
+      "statement": "A hyperelliptic genus-6 curve with any degree-four map to P^1 satisfies gamma=q o h, has Tschirnhausen bundle E=O(1)+O(4)+O(4), and has h^0(F(-6))>=2, hence unbalanced F.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0080-3",
+      "justification": "Section 3: CLM-0080-2 makes C non-hyperelliptic; D is special of degree 4 with h^0>=2, and Clifford with its equality case (deg 4 not in {0,10}) rules out h^0(D)=3; ATT-0066/(H1) then gives h^0(L)=1+h^0(M)=3.",
+      "statement": "On a fibrewise balanced family every geometric fibre satisfies h^0(O(D))=2 and h^0(L)=3; the jump stratum B_4 is empty, discharging GAP-H0-1 in the form to which FND-0104 localized it.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0080-4",
+      "justification": "Section 4: the base-point-free pencil trick gives 6<=2h^0(H-D)+4, hence D iso H-p; the section counts 1,2,4,7 for h^0(mD) pin E; and all seven basis monomials of the 7-dimensional H^0(Sym^2E(-6)) restrict with ord_p at least 2 (using h^0(H+p)=h^0(H)=3 and div(x_4|_C)=2p), hence into the 6-dimensional H^0(2H) inside the 7-dimensional H^0(2H+2p).",
+      "statement": "A smooth plane quintic with any degree-four map to P^1 has D iso H-p, E=O(2)+O(3)+O(4), and h^0(F(-6))>=1, hence unbalanced F.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0080-5",
+      "justification": "Section 5: Riemann-Roch converts the base-point condition to h^0(D+p)=3; Clifford excludes a base point of |D+p| since C is non-hyperelliptic; a complete base-point-free g^2_5 is birational onto a plane quintic with p_a=6=g, so the curve is a smooth plane quintic, contradicting CLM-0080-4.",
+      "statement": "On a fibrewise balanced family |L_b| is a base-point-free complete g^2_6 on every geometric fibre; in particular the carried candidate that L fails to be base-point-free on the balanced locus is false, and the route 'a base point yields a forbidden g^2_5' is replaced by an actual exclusion.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0080-6",
+      "justification": "Section 6(a),(b): constancy h^0(L_b)=3 from CLM-0080-3, Grauert on a reduced base, and ATT-0066/(H3) with B_3=B; projectivized bundles are locally U x P^2, giving the component bijection and the dimension formula. No absolute dimension of B is used.",
+      "statement": "Over reduced B, I iso P((pi_*L)^vee) is a Zariski-locally trivial P^2-bundle over all of B, smooth and proper of pure relative dimension 2, with irreducible components in bijection with those of B and dimension dim(component)+2.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0080-7",
+      "justification": "Section 6(c),(d): base-point-freeness (CLM-0080-5) plus generic smoothness in characteristic zero applied to the smooth irreducible 2-dimensional incidence J->|L_b| gives reduced general fibres; openness of the reduced-support locus and irreducibility of P^2 give density; ATT-0066/(H4), FND-0064 and FND-0075 give the stack-level torsor. chi(L)=1 is not used to produce the reduced divisor, so the blocked chi(L)=1 route is avoided.",
+      "statement": "On every geometric fibre the reduced-support locus is a dense open of |L_b|; hence I^dist is dense open in I, surjective onto B with the same components and dimensions, and Z_ev is a nonempty finite etale S_6-torsor over it, resolving the frontier obligation on nonemptiness of the distinct-support incidence on every geometric fibre.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0080-8",
+      "justification": "Section 7: base-point-freeness makes the evaluation surjective so K is a rank-2 bundle whose projectivization is the incidence; the universal divisor is the zero scheme of the tautological section, hence a relative Cartier divisor of degree 6; irreducibility of C gives irreducibility of the cover and hence transitivity, and the component count is the standard orbit description of a finite etale torsor.",
+      "statement": "Over reduced B the universal degree-six divisor is canonically the P^1-bundle P(K^vee) over C with K=ker(pi^*pi_*L->L) of rank 2, finite locally free of degree 6 over I and etale over I^dist; its components match those of B, and for B irreducible the six-point etale monodromy image G is transitive and Z_ev has exactly [S_6:G] irreducible components.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0080-9",
+      "justification": "Section 8: deg(phi)*deg(Z)=6 with deg Z>=2, plus exclusion of a rational normalization in the e=2 case by CLM-0080-2; 2-transitivity from irreducibility of the unique 2-dimensional component of the ordered double-point incidence, which is a graph over a dense open of C x C minus the diagonal, together with surjectivity of pi_1 of a dense open.",
+      "statement": "On each geometric fibre exactly one of three cases holds for phi_L: birational onto a plane sextic with total delta 4, 2:1 onto a smooth plane cubic (bielliptic, L=p^*N of degree 3), or 3:1 onto a smooth conic (trigonal, L=2T); in the birational case the fibrewise monodromy is 2-transitive, hence primitive, and the rank-6 permutation local system splits as Q plus an irreducible rank-5 system.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0080-10",
+      "justification": "Section 9: three fixed images force sigma-bar=id, and a deck transformation of the connected etale part of gamma fixing a point is the identity; the converse inclusion uses D=K-L and h^0(D)=2 from CLM-0080-3; the exceptional loci are bounded by finiteness of the ramification locus and by h^0(O(3D) tensor omega^{-1})<=1 on a non-hyperelliptic fibre together with the constraint that the two image points must contain gamma(supp R_0).",
+      "statement": "Aut(C,gamma,Gamma)=1 whenever Gamma has at least three distinct gamma-images and one unramified point; Aut(C,gamma,Gamma)->Aut(C,Gamma) is an isomorphism; and the locus of reduced Gamma in |L_b| failing these conditions lies in a proper closed subset (finite for the ramification condition, of dimension at most 1 for the images condition), so the trivial-stabilizer locus is dense open in every geometric fibre of Z_ev->B.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0080-11",
+      "justification": "Section 10: line-bundle algebra plus h^0(D)=2 from CLM-0080-3. Only the geometric-point statement is asserted; no quasi-finiteness, monomorphism, closedness, image-dimension, purity or Gysin conclusion is drawn.",
+      "statement": "For every geometric point of Z_ev, omega_C(-Gamma) iso O_C(D) with h^0=2 is the complete base-point-free pencil defining gamma, so gamma is recovered from (C,Gamma) up to Aut(P^1) and the classifying map on geometric points to M_{6,6} has singleton geometric fibres, now with no exceptional h^0-jump stratum since B_4 is empty.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "claude",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "Not reused. A g^2_5 is not forbidden a priori on a genus-6 curve; Proposition 5 shows a base point forces C to be a smooth plane quintic, and Lemma 4 then supplies an actual Casnati-Ekedahl obstruction to balancedness. The exclusion is proved, not postulated.",
+      "kind": "prior_attempt_route",
+      "subject": "The route recorded in the project as 'a basepoint p would imply h^0(O_C(D+p))=3, producing a forbidden g^2_5'"
+    },
+    {
+      "disposition": "The criterion is reproved and retained; the conclusion is refuted. Lemma 4 shows the plane-quintic pairs are not balanced, so the witness the candidate relied on does not lie on the balanced locus, and Proposition 5 gives base-point-freeness there.",
+      "kind": "carried_candidate_refuted",
+      "subject": "Carried candidate: 'a point p is a base point of |L| iff h^0(O_C(D+p))=3; this occurs on smooth plane quintics, so L is not base-point-free on the whole balanced locus'"
+    },
+    {
+      "disposition": "Avoided. chi(L)=1 is used only through the dependency's identity h^0(L)=1+h^0(M). The reduced member is produced by base-point-freeness (Proposition 5) plus generic smoothness in characteristic zero (Proposition 6c), which is precisely the admissible route the constraint names.",
+      "kind": "working_context_constraint",
+      "subject": "Concluding from chi(L)=1 that the reduced-support open or the ordered Conf_6 incidence is nonempty on every geometric fibre"
+    },
+    {
+      "disposition": "Avoided. No absolute dimension of B is used or asserted; all dimensions are stated as dim(component of B)+2. The value 17 appears only in an explicitly conditional remark attributed to a source-backed archive statement and is not part of the Theorem.",
+      "kind": "working_context_constraint",
+      "subject": "Inferring dim(I|_{H_k})=15+k-1 for every reduced stratum, or otherwise assuming dim(B)=15"
+    },
+    {
+      "disposition": "Avoided. Irreducibility of B is not claimed; the results are component bijections between B, I, I^dist and the universal divisor, and are conditional on irreducibility of B only where explicitly stated.",
+      "kind": "working_context_constraint",
+      "subject": "Inferring irreducibility of the balanced open H_3 from irreducibility of the classical Hurwitz space"
+    },
+    {
+      "disposition": "Avoided. Proposition 9 proves a criterion (three distinct images plus one unramified point) and separately bounds the two exceptional loci, concluding only that the trivial-stabilizer locus is dense open in every geometric fibre.",
+      "kind": "working_context_constraint",
+      "subject": "Inferring that every reduced ordered point has trivial stabilizer"
+    },
+    {
+      "disposition": "Not re-walked. Proposition 3 removes the premise by proving H_4 (that is, B_4) is empty; Proposition 10 asserts only that geometric fibres are single isomorphism classes, and draws no quasi-finiteness, image-dimension or Gysin conclusion.",
+      "kind": "working_context_constraint",
+      "subject": "Inferring global finiteness or quasi-finiteness of the forgetful morphism from injectivity over H_3 plus a fibre-dimension bound over H_4"
+    },
+    {
+      "disposition": "Avoided. No monomorphism or full-faithfulness claim is made; both are listed among the exclusions.",
+      "kind": "working_context_constraint",
+      "subject": "Inferring that a morphism of stacks is a monomorphism from injectivity on geometric points and on automorphism groups"
+    },
+    {
+      "disposition": "Avoided. The canonical filtration of ATT-0065/CLM-0065-5 is used throughout; no global splitting of F or W is assumed. Lemma 1 and Lemmas 2 and 4 work with F itself and with fibrewise data only.",
+      "kind": "working_context_constraint",
+      "subject": "Inferring a global splitting W=W_4 direct-sum W_5 from fibrewise balancedness"
+    },
+    {
+      "disposition": "Avoided. The Abel-Jacobi/Hilbert model of FND-0107 is used over all of B, and the projective-bundle statement is imposed only over reduced B, where by Proposition 3 there is no jumping at all. REV-0116's nonreduced-Grauert warning is respected.",
+      "kind": "working_context_constraint",
+      "subject": "Identifying the relative linear system with Proj(pi_*L) across h^0-jumping strata or over a nonreduced base"
+    },
+    {
+      "disposition": "Explicitly separated. Proposition 3 excludes only the intermediate-genus-zero (hyperelliptic-composed) factorization, which is the exclusion FND-0104 shows to be equivalent to constancy. The bielliptic factorization has h^0(D)=2 and h^0(L)=3 and is therefore invisible to h^0; it is left open and appears explicitly as case (E)(ii).",
+      "kind": "working_context_constraint",
+      "subject": "Identifying constancy of h^0(omega_C(-D))=3 with the exclusion of every non-primitive degree-four pencil"
+    },
+    {
+      "disposition": "Avoided. No closedness or non-closedness statement about any locus in M_{6,6} is made.",
+      "kind": "working_context_constraint",
+      "subject": "Concluding non-closedness of the balanced piece from openness plus one balanced example"
+    },
+    {
+      "disposition": "Avoided. This artifact makes no Hodge, weight or Tate statement. The monodromy results of Propositions 7 and 8 are purely etale/topological and are handed to C66-TATE-SUPPORT and C66-CEX-LOCAL as input, not as a Tate conclusion.",
+      "kind": "working_context_constraint",
+      "subject": "Inferring Tate or only-Tate local systems from rationality of S_6-representations, or from a finite cover of a mixed-Tate base"
+    },
+    {
+      "disposition": "None is used. This is a geometry lemma with no cohomological degree, weight, graph-complex or point-count content, so new_inputs is empty and no blocked route is reopened.",
+      "kind": "blocked_route",
+      "subject": "vcd-only-vanishing, undecorated-cgp-top-weight-graph-complex, point-count-without-degree-parity-separation, forgetful-map-renaming-local-system-unknown"
+    }
+  ],
+  "gap_markers": [
+    {
+      "affects": "none of the asserted clauses; needed only to convert the component bijections of (B), (C), (D) into absolute irreducibility statements",
+      "id": "GAP-COMP-IRRED",
+      "severity": "medium",
+      "statement": "Irreducibility of the balanced tetragonal base B is not proved. Every component and dimension statement in the Theorem is relative to the components of B, so no asserted clause depends on this; it is a hand-off, not a defect."
+    },
+    {
+      "affects": "none of the asserted clauses; the component count [S_6:G] in (D) is stated in terms of G and does not presuppose its value",
+      "id": "GAP-COMP-MONODROMY",
+      "severity": "medium",
+      "statement": "The monodromy image G is proved transitive, and 2-transitive on any fibre in case (E)(i), but G=S_6 is NOT asserted. Two inputs remain: whether the bielliptic case (E)(ii) and the trigonal case (E)(iii) actually occur on the balanced locus, and, in case (E)(i), the existence of a line simply tangent to the plane sextic, which with Jordan's theorem would upgrade primitivity plus a transposition to S_6."
+    },
+    {
+      "affects": "none of the asserted clauses; explicitly listed in theorem_scope.exclusions",
+      "id": "GAP-COMP-FORGET",
+      "severity": "medium",
+      "statement": "Only the geometric-point statement of (G) is asserted. Monomorphism or full faithfulness of the forgetful morphism on arbitrary families, quasi-finiteness as a morphism of stacks, closedness or non-closedness of its image, the codimension of that image in M_{6,6}, and any lci/Gysin or purity property are NOT asserted and are not consequences of anything proved here."
+    },
+    {
+      "affects": "none; characteristic zero is a hypothesis of the Theorem",
+      "id": "GAP-COMP-CHAR",
+      "severity": "low",
+      "statement": "Characteristic zero is used in three places: the trace splitting gamma_*O_C=O+E^vee (needs 4 invertible), Bertini/generic smoothness for the reduced general member, and the etale-monodromy arguments. A positive-characteristic analogue is not attempted."
+    }
+  ],
+  "id": "ATT-0080",
+  "lane": "geometry",
+  "methods_used": [
+    "casnati-ekedahl-relative-canonical-quadric-count",
+    "degree-four-ce-koszul-resolution",
+    "projective-bundle-derived-pushforward",
+    "tschirnhausen-splitting-type-from-section-counts",
+    "clifford-theorem-equality-case",
+    "base-point-free-pencil-trick",
+    "adjunction-on-quadric-surface",
+    "bertini-generic-smoothness-char-zero",
+    "abel-jacobi-hilbert-incidence",
+    "grauert-cohomology-and-base-change-on-reduced-strata",
+    "projective-bundle-component-correspondence",
+    "universal-divisor-p1-bundle-monodromy",
+    "etale-torsor-component-orbit-count",
+    "deck-transformation-rigidity-on-etale-locus"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "New special-curve exclusion: a smooth plane quintic of genus 6, with any of its degree-four pencils (all of which are |H-p| by the base-point-free pencil trick), has Tschirnhausen bundle E=O(2)+O(3)+O(4) and satisfies h^0(F(-6))>=1, hence never has balanced CE relations bundle. The project records no such statement; on the contrary it carries the candidate 'this occurs on smooth plane quintics, so L is not base-point-free on the whole balanced locus', which this refutes by removing its tacit premise.",
+    "Consequently |L| is base-point-free on the entire balanced locus, supplying exactly the input the working-context constraint names as required (base-point-freeness plus a characteristic-zero Bertini argument), and thereby proving nonemptiness and fibrewise density of the reduced-support incidence on EVERY geometric fibre without any use of the blocked chi(L)=1 route.",
+    "The Casnati-Ekedahl quadric-count inequality h^0(F(-m)) >= h^0(Sym^2E(-m)) - h^0(C, omega_{C/P^1}^2 tensor gamma^*O(-m)), derived from the degree-four CE resolution as the exact sequence 0->F->Sym^2E->gamma_*(omega^2_{C/P^1})->0, is isolated here as a single reusable test for balancedness: the hyperelliptic case is the recorded instance, and the plane-quintic case is proved by an order-of-vanishing collapse (all seven basis quadrics vanish to order at least two at the base point) rather than by a naive dimension count.",
+    "B_4 is empty, so the C66-GEO-H0 stratification has a single stratum and the Abel-Jacobi incidence is a P^2-bundle over all of reduced B; this discharges GAP-H0-1 in exactly the form to which FND-0104 localized it, and removes the exceptional stratum that the recorded blocked inference about the forgetful morphism had to accommodate.",
+    "Finite-cover behaviour: the universal degree-six divisor is canonically the P^1-bundle P(ker(pi^*pi_*L->L)^vee) over C, giving transitivity of the six-point etale monodromy and the exact component count [S_6:G] for Z_ev; and the residual map phi_L obeys a complete birational / bielliptic / trigonal trichotomy with 2-transitivity proved in the birational case, which identifies precisely what remains before the monodromy image can be pinned to S_6.",
+    "Stabilizers: the trivial-stabilizer criterion is upgraded from a statement about a dense open of the total space to a statement about a dense open of EVERY geometric fibre, by bounding the two exceptional loci (the all-points-ramified locus is finite; the at-most-two-images locus is controlled by h^0(O(3D) tensor omega^{-1})<=1 on a non-hyperelliptic fibre)."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "e6fb533b2ca76f34ff2c32b778357d1309b33bccbaff914e1f19dfd577221e4c",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0065",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-Z dependency. Used for CLM-0065-5 (canonical splitting-free CE filtration with fibre degrees 20 and 16) and for the ambient degree-four CE resolution framework carried here as hypothesis (R)."
+    },
+    {
+      "id": "REV-0108",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of CLM-0065-1 through CLM-0065-9."
+    },
+    {
+      "id": "REV-0109",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of CLM-0065-1 through CLM-0065-9."
+    },
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-H0 dependency. Used for (H1) fibrewise L iso omega(-D), M iso gamma^*O(1), h^0(L) in {3,4}; (H3) the Abel-Jacobi/Hilbert incidence model and the P^{k-1}-bundle over reduced constant-h^0 strata; (H4) the stack-level S_6-torsor and tilde-I=Z_ev on Conf_6."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of CLM-0066-1 through CLM-0066-6 and of clauses H1-H4."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of CLM-0066-1 through CLM-0066-6; its FC-H0-NONREDUCED-GRAUERT is respected by imposing reducedness of B wherever Grauert or the projective-bundle model is used."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "role": "CE convention W_f=(O_{P(E^vee)}(2) tensor gamma^*O(-f))|_C, degree formula deg(W_f|_C)=4g+12-4f, and the degree receipt deg(O_{P(E^vee)}(1)|_C)=2g+6=18 used to force A iso O in hypothesis (N)."
+    },
+    {
+      "id": "FND-0105",
+      "kind": "adjudicated_finding",
+      "role": "Weak CE relative-canonical normalization discipline: carried as an explicit hypothesis, not relabelled as an established fact."
+    },
+    {
+      "id": "FND-0104",
+      "kind": "adjudicated_finding",
+      "role": "Localizes GAP-H0-1 to the single exclusion of a tetragonal pencil factoring through the hyperelliptic map; Proposition 3 supplies exactly that exclusion."
+    },
+    {
+      "id": "FND-0103",
+      "kind": "adjudicated_finding",
+      "role": "h^0(L) in {1,2,3,4} with the top value only on hyperelliptic fibres; Clifford bound on M of degree 4."
+    },
+    {
+      "id": "FND-0073",
+      "kind": "adjudicated_finding",
+      "role": "h^0(L)=1+h^0(M) with deg M=4, independent of the W_5 iso omega^2(-D) identification."
+    },
+    {
+      "id": "FND-0107",
+      "kind": "adjudicated_finding",
+      "role": "Abel-Jacobi/Hilbert incidence is the correct model over all of B, whereas Proj(pi_*L) is correct only where h^0 is constant."
+    },
+    {
+      "id": "FND-0064",
+      "kind": "adjudicated_finding",
+      "role": "Finite etale S_6-torsor over the reduced-support open."
+    },
+    {
+      "id": "FND-0075",
+      "kind": "adjudicated_finding",
+      "role": "The S_6-torsor holds at stack level and not on coarse moduli; all torsor and monodromy statements here are stack-level."
+    },
+    {
+      "id": "FND-0097",
+      "kind": "adjudicated_finding",
+      "role": "Canonical filtered CE reduction without a global splitting of F."
+    },
+    {
+      "id": "FND-0099",
+      "kind": "adjudicated_finding",
+      "role": "The degree vanishings deg W_4=20>10 and deg W_4(-Gamma)=14>10 licensing the filtered snake reduction at (6,6)."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0105",
+    "FND-0104",
+    "FND-0103",
+    "FND-0073",
+    "FND-0107",
+    "FND-0064",
+    "FND-0075",
+    "FND-0097",
+    "FND-0099"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "Determines the component, dimension, stabilizer and finite-cover structure of the balanced tetragonal (6,6) evaluation-failure incidence by proving two special-curve exclusions with one reusable mechanism. The mechanism is a Casnati-Ekedahl quadric count: hypothesis (R) gives F iso p_*(I_C tensor O_X(2)) and an exact sequence 0->F->Sym^2E->gamma_*(omega_{C/P^1}^{tensor 2})->0, so any kernel of the restriction map H^0(Sym^2E(-6))->H^0(C,omega_{C/P^1}^2 tensor gamma^*O(-6)) forces h^0(F(-6))>0 and refutes F=O(4)+O(5). Applied to a hyperelliptic genus-6 cover (gamma=q o h, E=O(1)+O(4)^2, 9 sections into 7) this reproves the recorded hyperelliptic exclusion from scratch; applied to a smooth plane quintic with gamma the projection from p (all degree-4 pencils are |H-p| by the base-point-free pencil trick, E=O(2)+O(3)+O(4)) all seven basis quadrics vanish to order at least 2 at p and hence land in a 6-dimensional subspace of a 7-dimensional target. The second exclusion is new and refutes the carried candidate that L fails to be base-point-free on the balanced locus. Together they give B_4=empty (discharging GAP-H0-1 in the form to which FND-0104 localized it) and base-point-freeness of |L|, whence Bertini in characteristic zero makes the reduced-support locus dense in every fibre, resolving the frontier obligation on nonemptiness of the distinct-support incidence without using chi(L)=1. Consequences: I is a P^2-bundle over reduced B with components matching those of B; the universal divisor is a P^1-bundle over C, so the six-point monodromy is transitive and Z_ev has exactly [S_6:G] components; phi_L obeys a birational/bielliptic/trigonal trichotomy with 2-transitive monodromy in the birational case; the trivial-stabilizer locus is dense in every fibre; and geometric-point injectivity of the forgetful map now holds with no exceptional stratum.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "base": "locally Noetherian over a field of characteristic zero; reducedness of B is imposed exactly where Grauert and the projective-bundle model are used, per REV-0116/FC-H0-NONREDUCED-GRAUERT; fibrewise statements are over algebraically closed fields of characteristic zero",
+    "dependency_scope": "ATT-0065 is used only for CLM-0065-5 (canonical splitting-free filtration with fibre degrees 20 and 16) and for the CE resolution framework carried here as hypothesis (R); ATT-0066 is used only for (H1) fibrewise L_b iso omega(-D_b), M_b iso gamma_b^*O(1), h^0(L_b) in {3,4}, for (H3) the Abel-Jacobi/Hilbert incidence model and the P^{k-1}-bundle over reduced constant-h^0 strata, and for (H4) the stack-level S_6-torsor and the scheme-theoretic identification tilde-I=Z_ev on Conf_6",
+    "exclusions": "irreducibility of B; the absolute dimension of B and hence any absolute dimension or codimension in M_{6,6}; whether the monodromy image G equals S_6; whether the bielliptic case (E)(ii) and the trigonal case (E)(iii) occur on the balanced locus; monomorphism, full faithfulness on arbitrary families, quasi-finiteness as a stack morphism, closedness, non-closedness, purity, lci or Gysin properties of the forgetful morphism or its image; unbalanced CE splitting types; positive characteristic; all Hodge, weight and Tate conclusions",
+    "g": 6,
+    "generality": "fibrewise balanced tetragonal Casnati-Ekedahl families of genus 6 with the canonical filtered quotient W_5 of ATT-0065, carrying hypotheses (N) the fibrewise weak CE relative-canonical normalization and (R) the standard degree-four CE ideal resolution; characteristic zero is used for the trace splitting gamma_*O_C=O+E^vee, for Bertini/generic smoothness, and for the etale-monodromy statements",
+    "n": 6
+  },
+  "theorem_statement": "Let k be a field of characteristic zero, B a locally Noetherian k-scheme (or locally Noetherian algebraic k-stack with a smooth atlas), pi:C->B smooth proper with geometrically connected genus-6 fibres, and gamma:C->P^1_B finite flat of degree 4 whose Casnati-Ekedahl relations bundle is fibrewise balanced, F_b iso O(4) direct-sum O(5). Let 0->W_4->W->W_5->0 be the canonical filtration of ATT-0065/CLM-0065-5 (dual-confirmed REV-0108, REV-0109), L:=W_5 tensor omega_{C/B}^{-1}, M:=omega_{C/B}^{tensor 2} tensor W_5^vee, and let I:=Hilb^6(C/B) x_{Pic^6(C/B)} B be the Abel-Jacobi incidence over the section [L], I^dist its distinct-support open, and Z_ev:=Conf_6(C/B) x_{Hilb^6(C/B)} I the ordered incidence of ATT-0066/(H4) (dual-confirmed REV-0110, REV-0116). Assume, exactly as in the dependency package and NOT proved here, (N) the fibrewise weak CE relative-canonical normalization O_{P(E_b^vee)}(1)|_{C_b} iso omega_{C_b/P^1} tensor gamma_b^*A_b, and (R) that the ideal of the fibrewise CE embedding has the standard degree-four resolution 0->O_X(-4) tensor p^*det F->O_X(-2) tensor p^*F->I_C->0 on the P^2-bundle X=Proj_{P^1}(Sym E) with p_*O_X(1)=E. Then, with every dimension statement taken componentwise and RELATIVE to B (no absolute dimension of B is asserted): (A) for every geometric point b of B the curve C_b is neither hyperelliptic nor isomorphic to a smooth plane quintic; (B) consequently h^0(O_{C_b}(D_b))=2 and h^0(L_b)=3 for every geometric point b, so the jump stratum B_4={h^0(L)=4} is EMPTY, and over B reduced pi_*L is locally free of rank 3 compatibly with base change and I iso P((pi_*L)^vee) is a Zariski-locally trivial P^2-bundle over ALL of B, smooth and proper of pure relative dimension 2, whose irreducible components are exactly the preimages of the irreducible components of B, of dimension dim(component of B)+2; (C) the complete linear system |L_b| is base-point-free on every geometric fibre, hence in characteristic zero its reduced-support locus is a dense open subset of |L_b| iso P^2, hence I^dist is a dense open subscheme of I meeting every geometric fibre, I^dist->B is surjective, the components of I^dist correspond bijectively to those of B with the same dimensions, and Z_ev->I^dist is a finite etale S_6-torsor at stack level which is nonempty over every geometric point of B and equidimensional of the same dimension; (D) over B reduced the universal degree-six divisor script-D inside C x_B I is finite locally free of degree 6 over I, etale exactly over I^dist, and is canonically the Zariski-locally trivial P^1-bundle P(K^vee) over C with K:=ker(pi^*pi_*L->L) locally free of rank 2, so the irreducible components of script-D correspond bijectively to those of B; and if B is irreducible then script-D, I and I^dist are irreducible, the etale monodromy rho:pi_1^et(I^dist)->S_6 of the six points has TRANSITIVE image G, and Z_ev has exactly [S_6:G] irreducible components, each finite etale of degree |G| over I^dist; (E) for every geometric point b exactly one of the following holds for the morphism phi_{L_b}:C_b->P^2 defined by the base-point-free complete g^2_6 |L_b|: (i) phi_{L_b} is birational onto a plane sextic of arithmetic genus 10 with total delta-invariant 4, (ii) phi_{L_b} is 2:1 onto a smooth plane cubic, so C_b is bielliptic and L_b=p_b^*N_b with deg N_b=3 on the elliptic quotient, or (iii) phi_{L_b} is 3:1 onto a smooth conic, so C_b is trigonal and L_b=2T_b; and in case (i) the monodromy of the six points over |L_b|^dist is 2-transitive, hence primitive, so the rank-6 permutation local system splits as Q direct-sum (an irreducible rank-5 system); (F) if (C,gamma,Gamma) is a geometric point of Z_ev whose ordered reduced divisor Gamma has at least three distinct gamma-images and at least one point at which gamma is unramified, then Aut(C,gamma,Gamma)=1, and the natural homomorphism Aut(C,gamma,Gamma)->Aut(C,Gamma) is an isomorphism, so the associated geometric point of M_{6,6} also has trivial automorphism group; moreover on every geometric fibre the set of reduced Gamma in |L_b| violating either condition is contained in a proper closed subset (the all-points-ramified locus is finite, and the at-most-two-distinct-images locus is empty when h^0(O(3D_b) tensor omega_b^{-1})=0 and otherwise has dimension at most 1, since h^0(O(3D_b) tensor omega_b^{-1}) is at most 1 by (A)), so the trivial-stabilizer locus is a dense open subset of every geometric fibre of Z_ev->B; and (G) for every geometric point of Z_ev one has omega_C(-Gamma) iso O_C(D) with h^0=2, so |omega_C(-Gamma)| is the complete base-point-free pencil defining gamma and gamma is determined by (C,Gamma) up to Aut(P^1); consequently the classifying map on geometric points to M_{6,6} is injective with every geometric fibre a single isomorphism class, now unconditionally rather than only over an h^0=3 stratum, because B_4 is empty by (B). No assertion is made about irreducibility of B, the absolute dimension of B, the value of G beyond transitivity, whether cases (E)(ii) and (E)(iii) occur on the balanced locus, monomorphism or full faithfulness of the forgetful morphism on arbitrary families, quasi-finiteness as a morphism of stacks, closedness or non-closedness or codimension of its image in M_{6,6}, lci/Gysin or purity properties, or any Hodge, weight or Tate conclusion."
+}

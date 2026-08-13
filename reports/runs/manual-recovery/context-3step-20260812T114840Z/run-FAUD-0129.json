@@ -1,0 +1,76 @@
+[
+  {
+    "id": "TASK-F-FND-0125",
+    "phase": "finding-audit",
+    "role": "independent-finding-adjudicator",
+    "campaign_id": "C66-001",
+    "campaign_revision": 4,
+    "context_revision": 2,
+    "finding_id": "FND-0125",
+    "finding": {
+      "adjudication_status": "pending",
+      "campaign_id": "C66-001",
+      "candidate_key": "FC-HYPERELLIPTIC-CE-SPLITTING-EXACT",
+      "case": {
+        "g": 6,
+        "n": 6
+      },
+      "contradicts_claim_ids": [],
+      "created_on": "2026-08-12",
+      "equivalence_group": "FC-HYPERELLIPTIC-CE-SPLITTING-EXACT",
+      "evidence_class": "adversarial_review",
+      "id": "FND-0125",
+      "impacts_approach_ids": [
+        "C66-GEO-COMP"
+      ],
+      "kind": "obstruction",
+      "reviewer_engines": [
+        "claude"
+      ],
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        }
+      },
+      "source_attempt_ids": [
+        "ATT-0083"
+      ],
+      "source_review_ids": [
+        "REV-0132"
+      ],
+      "statement": "At (g,d)=(6,4) the non-primitive tetragonal pencil is CE-rigid and maximally unbalanced: if C is hyperelliptic of genus 6 and gamma has degree 4, then gamma=q o h necessarily, E=O(1)+O(4)+O(4), and the relations bundle is exactly F=O(2)+O(7), not merely 'not O(4)+O(5)'. Verified in the model y^2=f_14(x), z=x^2: the restriction H^0(Sym^2E(-6))->H^0(6A) is surjective onto the 7-dimensional space of degree-<=6 polynomials in x and its kernel is H^0(O(1))*(w^2-z v^2), of dimension exactly 2, forcing splitting type (2,7). Reusable because it supplies a first explicit point of the unbalanced CE stratification that FND-0091 flags as unconstructed, and because the splitting-type distance 5 shows the hyperelliptic-composed locus sits at the opposite extreme from the balanced locus rather than adjacent to it.",
+      "status": "candidate",
+      "supporting_artifact_hashes": [],
+      "verification_method": "revision-2 adversarial review"
+    },
+    "excluded_engines": [
+      "claude"
+    ],
+    "target": {
+      "g": 6,
+      "n": 6,
+      "dimension": 21,
+      "compact_cohomology_degree": 16,
+      "compact_tate_type": "Q(-8)",
+      "open_bm_degree": 16,
+      "open_bm_weight": -16,
+      "open_bm_tate_type": "Q(8)",
+      "ordinary_cohomology_degree": 26,
+      "ordinary_weight": 26,
+      "ordinary_tate_type": "Q(-13)",
+      "poincare_twist": 21,
+      "chow_codimension": 13
+    },
+    "packet_id": "C66-001-v4",
+    "packet_sha256": "d48c11e9cddd5c8421de2a33e037cac7309776b61866bf96245d446bfeee87c6",
+    "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+    "input_packet": "proof/packets/generated/C66-001-v4.md",
+    "requires_live_web": true,
+    "prompt": "prompts/FINDING_AUDIT.md",
+    "output": "research/finding-audits/FAUD-0129.json",
+    "status": "ready",
+    "created_on": "2026-08-12",
+    "selected_engine": "codex"
+  }
+]

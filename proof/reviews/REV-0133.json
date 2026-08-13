@@ -1,0 +1,132 @@
+{
+  "attempt_id": "ATT-0082",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0082-1",
+      "note": "Under ATT-0066/(H3) on reduced B_k, I_k\u2245P((\u03c0_*L|_{B_k})^\u2228) is Zariski-locally trivial. For irreducible Y\u2282B_k, a dense trivializing open U gives U\u00d7P^{k\u22121} irreducible and dense in the preimage, so P((\u03c0_*L|_Y)^\u2228) is irreducible; preimages of distinct base components are closed, cover I_k, and are incomparable by image, hence exactly the irreducible components. Dimension dim(Y)+k\u22121 is the standard projective-bundle formula and matches FND-0121\u2019s relative form; the statement is indexed by components of B_k, so the non-finite-type jump pathology does not apply.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0082-2",
+      "note": "ATT-0066/(H4) supplies a stack-level finite \u00e9tale S_6-torsor tilde-I\u2192I^dist. Restricting to connected normal locally Noetherian V\u2282I^dist, the Galois category identifies connected components with \u03c0_1^\u00e9t(V)-orbits on the fibre. Right torsor trivialization makes monodromy act by left multiplication through H_V=im(\u03c1_V) (up to conjugacy); left H_V-orbits on S_6 are left cosets, hence number [S_6:H_V] and size |H_V|. Connected+normal \u21d2 irreducible on the base; finite \u00e9tale preserves normality, so connected components of the cover are irreducible. Each maps finite \u00e9tale of degree |H_V| onto V and has dimension dim(V).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0082-3",
+      "note": "Immediate specialization of CLM-0082-2: [S_6:H_V]=720\u21d4|H_V|=1\u21d4H_V trivial; [S_6:H_V]=1\u21d4H_V=S_6\u21d4a single irreducible component. Neither extreme follows from the mere existence of the S_6-torsor.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0082-4",
+      "note": "Correctly scoped gap/disclaimer, not a proved clause of the theorem_statement: actual irreducible-component sets of B_3/B_4 and actual H_V are not determined. Non-load-bearing for confirmation of the conditional test.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0082-5",
+      "note": "Correctly scoped exclusion: no Tate/non-Tate conclusion for RED-0001 is asserted. Aligns with FND-0053; non-load-bearing for the geometric test lemma.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CHK-SCOPE",
+      "note": "Theorem is a conditional component/monodromy test under ATT-0066 hypotheses plus reduced finite-dimensional B_k and connected normal V. Explicit non-claims (no computation of components/H_V, no I^dist density, no M_{6,6} image statements, no Hodge/Tate) match theorem_scope and resolves_exact_target=false. Confirming the lemma does not verify the campaign case.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CHK-PACKET-HASH",
+      "note": "packet_id C66-001-v4, packet_sha256 b1d55a83a974a3116d23efc6b10fcb431703c58b75e05b733d4f216bce860a25, packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7, campaign_revision 4, context_revision 2, subproblem_id C66-COMP-COMP, and target dictionary match TASK.json; theorem_statement matches the attempt and task.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-12",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "key": "FC-COMP-MONODROMY-NORMALITY-LOAD-BEARING",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "objects": [
+          "tilde-I_V",
+          "I^dist",
+          "\u00e9tale monodromy image H_V"
+        ],
+        "subproblem_id": "C66-COMP-COMP"
+      },
+      "severity": "low",
+      "statement": "For the C66-COMP-COMP ordered-incidence monodromy test, the upgrade from \u03c0_1^\u00e9t-orbits (connected components of the finite \u00e9tale S_6-torsor) to irreducible components requires a normality hypothesis on V: without it, a connected finite \u00e9tale cover of a connected locally Noetherian base need not be irreducible. ATT-0082\u2019s connected-normal V clause is therefore load-bearing for CLM-0082-2/3 rather than cosmetic; any downstream citation of the [S_6:H] irreducible-component formula must retain normality (or argue geometric irreducibility another way).",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "evidence_for_existing_finding",
+      "key": "FC-COMP-TEST-STACK-TORSOR-DISCIPLINE",
+      "severity": "low",
+      "statement": "ATT-0082\u2019s monodromy component count is evidence that the necessary-and-sufficient [S_6:H_V] test is valid only while the ordered model remains the stack-level finite \u00e9tale S_6-torsor over I^dist: the attempt neither descends the count to coarse moduli nor replaces geometric monodromy by rational representation theory of S_6.",
+      "supports_finding_id": "FND-0075"
+    },
+    {
+      "adjudication": "evidence_for_existing_finding",
+      "key": "FC-COMP-TEST-NO-TATE-FROM-S6",
+      "severity": "low",
+      "statement": "ATT-0082 explicitly records that the component/monodromy test yields no Tate or non-Tate conclusion for W_{-16}H^{BM}_{16}(M_{6,6};Q) without geometric monodromy plus cohomology with local coefficients, reinforcing that rational irreducibility of S_6-representations does not by itself force Tate local systems on the ordered cover.",
+      "supports_finding_id": "FND-0053"
+    }
+  ],
+  "id": "REV-0133",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "b1d55a83a974a3116d23efc6b10fcb431703c58b75e05b733d4f216bce860a25",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Load-bearing import of CLM-0066-2..6 / (H2)\u2013(H4): reduced constant-h0 strata with projective-bundle models, global Abel\u2013Jacobi incidence, and stack-level finite \u00e9tale S_6-torsor tilde-I\u2192I^dist. Weak CE normalization retained as hypothesis. Reducedness caveat respected; no ATT-0066 disclaimer promoted to an existence theorem. Dual-confirmed status accepted via REV-0110/REV-0116.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Independent confirmation of ATT-0066 (reviewer_engine grok, verdict confirmed) for CLM-0066-1..6 and H1\u2013H4; caveats on normalization-as-hypothesis and one-way non-primitive containment are respected by ATT-0082.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Second independent confirmation of ATT-0066 (reviewer_engine claude, Pass 2 confirmed). FC-H0-NONREDUCED-GRAUERT reduced-stratum discipline is enforced in ATT-0082\u2019s B_k hypotheses; disclaimer-warning is not over-cited as an existence result.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0082-P1",
+  "reviewer_engine": "cursor-grok",
+  "schema_version": 3,
+  "strongest_attack": "Stack-versus-coarse (FND-0075): if V were taken as a coarse moduli open where curve automorphisms permute marked points, the unordered S_6-torsor can fail and the monodromy-orbit count [S_6:H_V] would not control irreducible components of the ordered cover. Outcome: does not refute the stated theorem, which inherits ATT-0066\u2019s stack-level torsor and applies the test only to a connected normal substack V\u2282I^dist. Secondary attack\u2014dropping normality so connected components of a finite \u00e9tale cover need not be irreducible\u2014also fails under the explicit normal-V hypothesis. Distinct-support emptiness and uncomputed H_V/base components are scoped gaps, not failures of the conditional test. No Poincar\u00e9/Tate, Gysin/K\u00fcnneth, spectral-sequence, invariants-vs-coinvariants, semisimplification, predicted-motive, or stable-pair step is load-bearing here.",
+  "subproblem_id": "C66-COMP-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Component-and-monodromy test for the balanced tetragonal incidence. Assume the fibrewise balanced genus-6 degree-4 Casnati\u2013Ekedahl hypotheses and the weak relative-canonical normalization carried by ATT-0066. Let B_3 and B_4 be the h0(L)=3 and h0(L)=4 strata, let I be the global degree-six Abel\u2013Jacobi incidence, and assume each B_k is reduced, locally Noetherian, and finite-dimensional. For k in {3,4}, the projection I_k:=I\u00d7_B B_k\u2192B_k induces a bijection between irreducible components: an irreducible component Y\u2282B_k corresponds to P((\u03c0_*L|_Y)^\u2228), which has dimension dim(Y)+k\u22121. Now let V be any connected normal locally Noetherian substack of I^dist, and let H_V\u2282S_6 be the image, defined up to conjugacy, of the \u00e9tale monodromy representation on a geometric fibre of the finite \u00e9tale S_6-torsor tilde-I_V\u2192V. Then tilde-I_V has exactly [S_6:H_V] irreducible components; every component maps finite \u00e9tale of degree |H_V| to V and has dimension dim(V). Consequently tilde-I_V has 720 irreducible components exactly when H_V is trivial, and it is irreducible exactly when H_V=S_6.",
+  "verdict": "confirmed"
+}

@@ -1,0 +1,153 @@
+{
+  "argument_markdown": "## Source-backed inputs\n\nThe dependency package ATT-0066, confirmed independently by REV-0110 and REV-0116, supplies the following exact inputs. CLM-0066-1 gives deg L=6, deg M=4 for M=\u03c9^2\u2297W_5^\u2228, the identity h^0(L)=1+h^0(M), speciality of M, and h^0(M)\u22643. Under the weak relative-canonical normalization, CLM-0066-2 gives M\u2245\u03b3^*O(1), hence h^0(L)\u2208{3,4}. CLM-0066-4 and CLM-0066-5 give, on a reduced constant-h^0 stratum, local freeness and base change for p_*L and identify the global linear system with the closed Abel\u2013Jacobi incidence. The CE convention is sourced by SRC-0004; FND-0125 records the hyperelliptic CE calculation used below.\n\n## Proved steps\n\nFix a geometric fibre and suppose h^0(L)=4. The Riemann\u2013Roch identity from CLM-0066-1 gives h^0(M)=3. Since M is special of degree four, equality holds in Clifford's inequality. The nontrivial and noncanonical equality case forces C to be hyperelliptic and M to be twice its hyperelliptic pencil.\n\nLet h:C\u2192P^1 be the hyperelliptic double cover and let \u03b3:C\u2192P^1 have degree four. If h and \u03b3 were independent, Castelnuovo\u2013Severi would give g(C)\u2264(2\u22121)(4\u22121)=3, contrary to g(C)=6. Thus \u03b3=q\u2218h for a degree-two map q:P^1\u2192P^1.\n\nThis factorization cannot have balanced CE relations. Indeed h_*O_C=O\u2295O(\u22127), q_*O=O\u2295O(\u22121), and q_*O(\u22127)=O(\u22124)^2: the last bundle has rank two and degree \u22128, while twisting by O(3) gives no sections, forcing both summands to have degree \u22124. Hence \u03b3_*O_C=O\u2295O(\u22121)\u2295O(\u22124)^2 and the Tschirnhausen bundle is E=O(1)\u2295O(4)^2.\n\nFor completeness, the part of the FND-0125 relation calculation needed here is universal rather than a single-fibre experiment. Write A=h^*O(1). After choosing coordinates, every degree-two q is the model z=x^2. The CE quadratic-relation sequence twisted by O(\u22126) identifies H^0(F(\u22126)) with the kernel of H^0(Sym^2E(\u22126))\u2192H^0(C,A^6). From E=O(1)\u2295O(4)^2 one obtains h^0(Sym^2E(\u22126))=9, whereas h^0(C,A^6)=7. Therefore h^0(F(\u22126))\u22652. Balanced F=O(4)\u2295O(5) would instead give h^0(F(\u22126))=0, a contradiction. FND-0125 sharpens this calculation to F=O(2)\u2295O(7), but that stronger splitting is unnecessary here.\n\nThus no balanced fibre can satisfy h^0(L)=4, so B_4 is empty. The normalized ATT-0066 range h^0(L)\u2208{3,4} now gives h^0(L)=3 on every geometric fibre. Because B is reduced, CLM-0066-4 applies on the single stratum B=B_3: p_*L is locally free of rank three and commutes with base change. CLM-0066-5 then identifies the closed Abel\u2013Jacobi incidence with its relative projectivization, hence with a Zariski-locally trivial P^2-bundle. This eliminates only the proposed B_4/P^3 piece; it does not assert irreducibility or describe components inherited from B.\n\n## Computational hypotheses\n\nNone. No point count or finite experiment is used to establish the universal statement.\n\n## Remaining gaps and exact-target boundary\n\nThe weak relative-canonical normalization remains an explicit hypothesis. The proof does not establish nonemptiness of the reduced-support open, ordered Conf_6 incidence or full S_6 monodromy. It also gives no image dimension, closure, lci/Gysin class, Hodge purity, Tate support, or Tate assembly in M_{6,6}. In particular it does not prove that W_{\u221216}H^{BM}_{16}(M_{6,6}) is a direct sum of Q(8), so RED-0001 remains unresolved.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0086-1",
+      "justification": "ATT-0066/CLM-0066-1 and Clifford equality force such a fibre to be hyperelliptic. Castelnuovo\u2013Severi forces its degree-four map to factor through the hyperelliptic map, and the universal CE relation calculation gives h^0(F(\u22126))\u22652, contradicting F=O(4)\u2295O(5). ATT-0066 is dual-confirmed by REV-0110 and REV-0116.",
+      "statement": "For a balanced genus-six degree-four CE fibre, the locus h^0(L)=4 is empty; this exclusion does not require the weak relative-canonical normalization.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0086-2",
+      "justification": "ATT-0066/CLM-0066-2 restricts h^0(L) to {3,4}; CLM-0086-1 excludes 4. The dual-confirmed CLM-0066-4 and CLM-0066-5 then give local freeness, base change, and the Abel\u2013Jacobi projective-bundle description.",
+      "statement": "Under the weak CE normalization, h^0(L)=3 fibrewise; over a reduced locally Noetherian base the full Abel\u2013Jacobi incidence is a Zariski-locally trivial P^2-bundle, with no B_4/P^3 piece.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "vcd-only-vanishing: not used; at (6,6) the target ordinary degree equals vcd, so this route gives no vanishing."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "undecorated-cgp-top-weight-graph-complex: not used; the top-weight graph-complex corner is not the weight-26 target."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "point-count-without-degree-parity-separation: no point count or finite computation is used, and no universal conclusion is inferred from experimental data."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "forgetful-map-renaming-local-system-unknown: the forgetful Leray local system is not renamed or used; its mixed-extension problem remains outside this theorem."
+    }
+  ],
+  "gap_markers": [],
+  "id": "ATT-0086",
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "lane": "computation",
+  "methods_used": [
+    "verified-dependency-h0-stratification",
+    "riemann-roch-and-serre-duality",
+    "clifford-equality-case",
+    "castelnuovo-severi-factorization",
+    "casnati-ekedahl-relation-bundle-section-count",
+    "grauert-cohomology-and-base-change-on-reduced-base",
+    "abel-jacobi-hilbert-incidence"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Closes the balanced B_4-emptiness obligation left open by ATT-0066 by combining Clifford equality with a universal hyperelliptic CE incompatibility argument.",
+    "Collapses the dual-confirmed P^2/P^3 stratified Abel\u2013Jacobi model to a single P^2-bundle over reduced normalized balanced bases, without asserting components of its image in M_{6,6}."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-H0 dependency supplying CLM-0066-1 through CLM-0066-5 within their stated reduced-base and normalization scopes."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of the ATT-0066 claims used here."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of the ATT-0066 claims used here, including the reducedness caveat for Grauert."
+    },
+    {
+      "id": "FND-0125",
+      "kind": "adjudicated_finding",
+      "role": "Hyperelliptic genus-six degree-four maps are composed and have unbalanced CE relations; the argument rederives the weaker incompatibility needed here."
+    },
+    {
+      "id": "FND-0105",
+      "kind": "adjudicated_finding",
+      "role": "Records the weak CE relative-canonical normalization, retained as an explicit theorem hypothesis."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "role": "CE bundle convention and degree formulas."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0103",
+    "FND-0105",
+    "FND-0107",
+    "FND-0125"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-COMP-COMP",
+  "summary": "The dual-confirmed ATT-0066 stratification has no P^3 jump piece on the balanced locus. A point of B_4 would force a hyperelliptic genus-six curve, but every degree-four map from such a curve factors through its hyperelliptic map and has unbalanced CE relations. Under the stated normalization only h^0=3 remains, so the full Abel\u2013Jacobi incidence is a P^2-bundle on a reduced base. This is an analytic proof; no finite experiment is used.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-009",
+  "theorem_scope": {
+    "base": "reduced locally Noetherian schemes over a characteristic-zero field",
+    "exclusions": "No assertion is made for nonreduced bases, about nonemptiness of the reduced-support or ordered Conf_6 incidence, about components or dimensions of the image in M_{6,6}, stabilizers, closure, lci/Gysin structure, Hodge purity, Tate support, Tate assembly, or RED-0001.",
+    "g": 6,
+    "generality": "smooth finite-flat degree-four tetragonal CE families with fibrewise relations splitting F_b=O(4)\u2295O(5), the canonical filtered quotient W_5, and the weak relative-canonical normalization of FND-0105",
+    "n": 6,
+    "normalization_role": "The normalization is needed to obtain h^0(L_b)\u2208{3,4}; emptiness of the h^0=4 stratum itself follows from Clifford equality and incompatibility of hyperelliptic degree-four covers with balanced CE relations."
+  },
+  "theorem_statement": "Let B be a reduced locally Noetherian scheme over a characteristic-zero field carrying a smooth genus-six degree-four Casnati\u2013Ekedahl family whose relations bundle is fibrewise balanced, F_b \u2245 O(4) \u2295 O(5), and which satisfies the weak CE relative-canonical normalization used in ATT-0066. For the canonical quotient W_5 put L=W_5\u2297\u03c9^{-1}. Then h^0(C_b,L_b)=3 for every geometric b in B; equivalently, the jump stratum B_4={b:h^0(L_b)=4} is empty. Consequently the closed degree-six Abel\u2013Jacobi incidence Hilb^6(C/B)\u00d7_{Pic^6(C/B)}B is a Zariski-locally trivial P^2-bundle over B. Thus a proposed balanced component decomposition containing a nonempty B_4/P^3 piece is false."
+}

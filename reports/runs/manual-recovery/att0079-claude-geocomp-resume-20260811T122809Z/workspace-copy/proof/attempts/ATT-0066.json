@@ -1,0 +1,149 @@
+{
+  "argument_markdown": "## Argument\n\n### 1. Verified inputs\n\nATT-0048, CLM-0048-6 constructs the canonical filtration 0->W_4->W->W_5->0 without a global splitting, and CLM-0048-7 gives deg(W_5)=16 at (g,n)=(6,6). ATT-0048, CLM-0048-4, CLM-0048-5 and CLM-0048-7 identify, for a base carrying six disjoint ordered sections, the Fitting locus Z_ev with the relative-triviality locus of N=omega\u2297W_5^vee(Gamma), as an equality of ideals and with smooth-atlas descent. Every one of CLM-0048-1 through CLM-0048-7 is confirmed independently by REV-0091 and REV-0092. SRC-0004 supplies the convention W_f=(O(2)\u2297gamma^*O(-f))|_C and deg(W_f)=4g+12-4f. C66-001-v4/FND-0105 supplies the weak CE relative-canonical normalization used fibrewise below.\n\n### 2. Riemann\u2013Roch and Clifford\n\nOn a geometric fibre C_b, deg(W_{5,b})=16 and deg(omega_b)=10, hence deg(L_b)=6 and chi(L_b)=6-6+1=1. Serre duality gives\n\nh^1(L_b)=h^0(omega_b\u2297L_b^{-1})=h^0(omega_b^{\u22972}\u2297W_{5,b}^vee)=h^0(M_b),\n\nso h^0(L_b)=1+h^0(M_b). Also deg(M_b)=20-16=4 and\n\nh^1(M_b)=h^0(omega_b\u2297M_b^{-1})=h^0(L_b)\u22651,\n\nso M_b is special. Clifford's theorem gives h^0(M_b)\u22644/2+1=3. Equality holds precisely when C_b is hyperelliptic and M_b\u2245(g^1_2)^{\u22972}; the O and omega equality cases are excluded by deg(M_b)=4.\n\n### 3. Balanced CE normalization and the two values\n\nOn C_b the weak normalization is\n\nO(1)|_{C_b}\u2245omega_{C_b/P^1}\u2297gamma_b^*A_b\u2245omega_b\u2297gamma_b^*O(2)\u2297gamma_b^*A_b.\n\nSRC-0004 gives deg(O(1)|_{C_b})=2g+6=18. The right side has degree 10+8+4deg(A_b), so deg(A_b)=0. Since Pic^0(P^1)=0, A_b\u2245O. Therefore\n\nW_{5,b}\u2245O(1)|_{C_b}^{\u22972}\u2297gamma_b^*O(-5)\u2245omega_b^{\u22972}\u2297gamma_b^*O(-1),\n\nand, for a fibre divisor D_b of gamma_b,\n\nL_b\u2245omega_b(-D_b),  M_b\u2245O(D_b)=gamma_b^*O(1).\n\nPullback of sections along the finite surjective gamma_b is injective, hence h^0(M_b)\u2265h^0(P^1,O(1))=2. Together with Clifford, h^0(M_b)\u2208{2,3} and h^0(L_b)\u2208{3,4}.\n\n### 4. The jump locus\n\nUpper semicontinuity makes {h^0(L_b)\u22654} closed. Since 3 and 4 are the only values, this is B_4 and its complement is B_3. If b\u2208B_4, then h^0(M_b)=3, so C_b is hyperelliptic and M_b\u22452H for the hyperelliptic pencil H. Writing h:C_b->P^1 for the hyperelliptic map, one has M_b\u2245h^*O(2). Moreover\n\nH^0(C_b,h^*O(2))=H^0(P^1,O(2)),\n\nbecause h_*O_{C_b}=O\u2295O(-7), whose second summand contributes no sections after tensoring by O(2). The morphism gamma_b is defined by a base-point-free two-dimensional subspace of this three-dimensional space, hence by a base-point-free pencil in H^0(P^1,O(2)). It therefore factors as gamma_b=q\u2218h for a degree-two map q:P^1->P^1. Thus gamma_b is non-primitive. The converse, and hence emptiness of B_4 under balancedness, is not proved.\n\n### 5. Linear systems on the strata and globally\n\nGive B_3 and B_4 their reduced locally closed structures. On B_k the value h^0(L_b)=k is constant. Grauert's theorem makes pi_*L locally free of rank k and compatible with base change there. Effective divisors whose associated line bundle is relatively L are therefore represented over B_k by P((pi_*L)^vee), with fibres |L_b|\u2245P^{k-1}.\n\nOver all of B, let H=Hilb^6(C/B), which agrees with Sym^6_B(C) for a smooth relative curve. The Abel\u2013Jacobi map H->Pic^6(C/B) and the section [L]:B->Pic^6(C/B) define\n\nI=H\u00d7_{Pic^6(C/B)}B.\n\nThe relative Picard is separated, so I is closed. This construction remains valid when h^0 jumps and is the global degree-six linear system. No global identification with Proj(pi_*L) is made.\n\n### 6. Scheme-theoretic link to Z_ev in the verified scope\n\nLet H^dist\u2282H be the distinct-support open and pull it back to the ordered configuration stack Conf_6(C/B). Ordering the six distinct points gives a finite \u00e9tale S_6-torsor at stack level. Set tilde I=Conf_6(C/B)\u00d7_H I. Both ordered and unordered spaces retain their scheme structures; no reduction is applied to only one side.\n\nOver Conf_6(C/B), the universal divisor is a sum of six disjoint sections, so ATT-0048 applies exactly as stated. Its CLM-0048-4, CLM-0048-5 and CLM-0048-7, confirmed by both REV-0091 and REV-0092, identify the Fitting locus Z_ev with relative triviality of omega\u2297W_5^vee(Gamma). Line-bundle algebra identifies that condition with O(Gamma) relatively isomorphic to W_5\u2297omega^{-1}=L. Hence Z_ev=tilde I as closed substacks, by equality of Fitting and Abel\u2013Jacobi ideals rather than agreement of geometric points.\n\n### 7. Separation of status\n\nProved here: the Riemann\u2013Roch identity, Clifford bound and equality case, reduction to h^0\u2208{3,4}, semicontinuity stratification, non-primitive hyperelliptic containment of B_4, projective-bundle models on both strata, and the global Abel\u2013Jacobi incidence construction.\n\nSource-backed inputs: SRC-0004 for the CE sign convention and degrees; C66-001-v4/FND-0105 for the weak CE normalization; ATT-0048 with confirmations REV-0091 and REV-0092 for the canonical filtration and the scheme-theoretic Fitting comparison on ordered disjoint configurations.\n\nComputational hypotheses: none. The degree calculations 16, 6 and 4 are reproduced symbolically; no finite experiment establishes a universal claim.\n\nOpen gaps: GAP-H0-1, namely whether B_4 is empty for balanced covers; nonemptiness of the distinct-support open on every fibre; all component, dimension, stabilizer, closure and codimension questions; and all Hodge/Tate consequences. In particular chi(L)=1 proves only that the full Abel\u2013Jacobi fibre is nonempty, not that it contains a reduced divisor.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0066-1",
+      "justification": "ATT-0048/CLM-0048-7 and SRC-0004 give deg W_5=16. Riemann\u2013Roch and Serre duality give the identity and speciality; Clifford gives the bound.",
+      "statement": "For L=W_5\u2297omega^{-1} and M=omega^{\u22972}\u2297W_5^vee on every balanced genus-6 geometric fibre, deg L=6, deg M=4, chi(L)=1, and h^0(L)=1+h^0(M); M is special and h^0(M)\u22643.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0066-2",
+      "justification": "Degree comparison kills A_b\u2208Pic^0(P^1), the SRC-0004 negative-twist convention gives W_{5,b}\u2245omega_b^{\u22972}\u2297gamma_b^*O(-1), pullback supplies two sections, and CLM-0066-1 supplies the upper bound.",
+      "statement": "Under the weak CE normalization, M_b\u2245gamma_b^*O(1), so h^0(M_b)\u2208{2,3} and h^0(L_b)\u2208{3,4}.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0066-3",
+      "justification": "Upper semicontinuity and CLM-0066-2 give the two strata. Clifford equality gives M=2g^1_2; the equality H^0(C,h^*O(2))=H^0(P^1,O(2)) makes the tetragonal pencil factor through the hyperelliptic map.",
+      "statement": "B_4={h^0(L)=4} is closed, B_3={h^0(L)=3} is open, and B_4 lies in the hyperelliptic non-primitive locus.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0066-4",
+      "justification": "Grauert applies after restricting to the constant-h^0 stratum; the usual divisor-of-a-section construction identifies the relative effective-divisor incidence with P((pi_*L)^vee).",
+      "statement": "On each reduced stratum B_k, pi_*L is locally free of rank k and base-change compatible, and the relative linear system is a P^{k-1}-bundle.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0066-5",
+      "justification": "Hilb^6 equals Sym^6 for a smooth relative curve, and the incidence is the fibre of the Abel\u2013Jacobi map over [L]; it is closed because Pic^6(C/B) is separated.",
+      "statement": "Across the jump, the correct global degree-six linear system is the closed Abel\u2013Jacobi incidence I=Hilb^6(C/B)\u00d7_{Pic^6(C/B)}B, not an unqualified Proj(pi_*L).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0066-6",
+      "justification": "The universal divisor there is a sum of six disjoint sections. ATT-0048/CLM-0048-4, CLM-0048-5 and CLM-0048-7, confirmed by REV-0091 and REV-0092, identify the Fitting ideal with the relative-triviality incidence ideal. Ordering distinct sections is a free finite S_6-action at stack level.",
+      "statement": "On the ordered distinct-support configuration stack, the pullback of I equals Z_ev scheme-theoretically and maps to the unordered distinct-support incidence as a finite \u00e9tale S_6-torsor.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [],
+  "id": "ATT-0066",
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "lane": "geometry",
+  "methods_used": [
+    "riemann-roch-and-serre-duality",
+    "clifford-theorem-for-special-degree-four-line-bundles",
+    "ce-relative-canonical-normalization",
+    "upper-semicontinuity-h0-stratification",
+    "grauert-cohomology-and-base-change",
+    "abel-jacobi-hilbert-incidence",
+    "verified-fitting-ideal-dependency",
+    "stack-level-ordered-distinct-support-torsor"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Repairs the prior H6 import by citing the now-supplied dual-confirmed dependency package and restricting the scheme-theoretic identification to the ordered disjoint-section scope actually proved by ATT-0048.",
+    "Describes both h^0 strata uniformly: the Abel\u2013Jacobi incidence is a P^2-bundle over B_3 and a P^3-bundle over B_4, while retaining the global Hilbert/Abel\u2013Jacobi model across the jump."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0048",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-Z dependency; supplies CLM-0048-4, CLM-0048-5, CLM-0048-6 and CLM-0048-7."
+    },
+    {
+      "id": "REV-0091",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of CLM-0048-1 through CLM-0048-7."
+    },
+    {
+      "id": "REV-0092",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of CLM-0048-1 through CLM-0048-7."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "role": "CE convention W_f=(O(2)\u2297gamma^*O(-f))|_C and degree formula deg W_f=4g+12-4f."
+    },
+    {
+      "id": "FND-0105",
+      "kind": "adjudicated_finding",
+      "role": "Weak CE relative-canonical normalization used fibrewise."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0105"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-GEO-H0",
+  "summary": "Proves the weakest scheme-correct h^0 stratification of the balanced tetragonal residual degree-six system. The only fibrewise values are 3 and 4; the corresponding Abel\u2013Jacobi linear systems are respectively P^2- and P^3-bundles, and the h^0=4 locus is confined to non-primitive hyperelliptic covers. Globally the system is the closed Abel\u2013Jacobi/Hilbert incidence rather than Proj(pi_*L). On the ordered distinct-support locus, and only there as required by the verified dependency's scope, it agrees scheme-theoretically with Z_ev by ATT-0048, REV-0091 and REV-0092. Emptiness of the jump stratum remains open.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-002",
+  "theorem_scope": {
+    "base": "locally Noetherian over a characteristic-zero field",
+    "dependency_scope": "ATT-0048 is used only on the ordered pairwise-distinct configuration stack, exactly within its six-disjoint-sections and smooth-atlas descent scope",
+    "exclusions": "emptiness of B_4 (GAP-H0-1), reduced-support nonemptiness on every fibre, dimension or codimension in M_{6,6}, components, stabilizers, closure, smoothness, monomorphic embedding into M_{6,6}, and all Hodge/Tate conclusions",
+    "g": 6,
+    "generality": "fibrewise balanced tetragonal Casnati\u2013Ekedahl families with the canonical filtered quotient W_5 of ATT-0048 and the standard weak CE relative-canonical normalization",
+    "n": 6
+  },
+  "theorem_statement": "Let B be a locally Noetherian scheme over a field of characteristic zero, let pi:C->B be smooth proper with geometrically connected genus-6 fibres, and let gamma:C->P^1_B be finite flat of degree 4 with fibrewise balanced Casnati\u2013Ekedahl relations bundle F_b\u2245O(4)\u2295O(5). Use the canonical filtration 0->W_4->W->W_5->0 supplied by ATT-0048, CLM-0048-6 and dual-confirmed by REV-0091 and REV-0092, where W_5 is the invertible quotient of fibrewise degree 16 under the SRC-0004 convention W_f=(O_{P(E^vee)}(2)\u2297gamma^*O(-f))|_C. Put L=W_5\u2297omega_{C/B}^{-1} and M=omega_{C/B}^{\u22972}\u2297W_5^vee. Assume the standard weak CE normalization fibrewise: O_{P(E^vee)}(1)|_{C_b}\u2245omega_{C_b/P^1}\u2297gamma_b^*A_b for A_b\u2208Pic(P^1_{k(b)}). Then: (H1) on every geometric fibre, deg L=6, deg M=4, chi(L)=1, and h^0(L)=1+h^0(M); M is special and Clifford's theorem gives h^0(M)\u22643. The normalization forces A_b\u2245O, hence W_{5,b}\u2245omega_{C_b}^{\u22972}(-D_b), L_b\u2245omega_{C_b}(-D_b), and M_b\u2245O_{C_b}(D_b)=gamma_b^*O(1), so h^0(L_b)\u2208{3,4}. (H2) On the underlying space of B, B_4={b:h^0(L_b)=4} is closed and B_3={b:h^0(L_b)=3} is its open complement. If B_k is given its reduced locally closed scheme structure, then pi_*L over B_k is locally free of rank k and commutes with base change. Moreover B_4 is contained in the locus of hyperelliptic fibres on which gamma_b is non-primitive, factoring through the hyperelliptic double cover. (H3) Let I=Hilb^6(C/B)\u00d7_{Pic^6(C/B)}B be the Abel\u2013Jacobi incidence over the section [L]. It is closed, represents relative effective divisors Gamma with O(Gamma) relatively isomorphic to L, and satisfies I\u00d7_B B_k\u2245P((pi_*L|_{B_k})^vee), a P^{k-1}-bundle. Thus the degree-six linear system is a P^2-bundle over B_3 and a P^3-bundle over B_4, but need not be a projective bundle over all of B and is not globally identified with Proj(pi_*L). (H4) Let I^dist be the distinct-support open and let tilde I=Conf_6(C/B)\u00d7_{Hilb^6(C/B)}I. Then tilde I->I^dist is a finite \u00e9tale S_6-torsor at stack level, with neither side reduced artificially. On Conf_6(C/B), the scheme-theoretic equality of ATT-0048, CLM-0048-4, CLM-0048-5 and CLM-0048-7, confirmed by REV-0091 and REV-0092, identifies tilde I exactly with the CE Fitting evaluation-failure locus Z_ev. No assertion is made that B_4 is empty, that I^dist is nonempty on every fibre, or that the full nonreduced Hilbert incidence outside the ordered distinct-support locus is covered by ATT-0048."
+}

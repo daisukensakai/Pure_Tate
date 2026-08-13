@@ -1,0 +1,96 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001, all of which are Q-Hodge-theoretic statements about M_{g,n} / Mbar_{g,n}, whereas FND-0131 is a coherent-sheaf base-change statement about the CE evaluation complex. VERDICT: promote candidate -> corroborated; evidence_class upgraded adversarial_review -> primary_source; merge_target none. (1) PRIMARY-SOURCE VERIFICATION OF WHAT HOLDS UNCONDITIONALLY. Stacks Project Lemma 36.30.4 (tag 0B91, retrieved from section page tag 0A1G): for f proper of finite presentation and G finitely presented and flat over S, Rf_*G is a perfect object of D(O_S) and its formation commutes with arbitrary base change; Remark 36.30.2 (tag 0A1I) gives the classical Mumford form, a finite complex M^. of finite projective R-modules with RGamma(X_{R'},G_{R'}) = M^. ox_R R' functorially. Lemma 36.32.1 (tag 0BDN) gives semicontinuity of beta_i(s) = dim_{k(s)} H^i(X_s,F_s) and its compatibility with base change; Lemma 36.32.2 (tag 0B9T) gives local constancy of chi. So the two-term-complex model presupposed by the finding is correct and the fibre dimensions are computed by K ox^L k(s) over any base. (2) PRIMARY-SOURCE VERIFICATION THAT THE INFERENCE THE FINDING DENIES IS EXACTLY THE ONE THAT NEEDS REDUCEDNESS. Algebra Lemma 10.78.3 (tag 0FWG) states the equivalence 'M finite with rho_M(p) = dim_{k(p)} M ox k(p) locally constant <=> M finite projective' UNDER THE HYPOTHESIS 'Let R be a reduced ring'; the page records that reducedness is what licenses the appeal to Lemma 10.25.2 (checking injectivity at minimal primes). Schemes/Modules Lemma 28.21.3 (section tag 05P1) is the scheme-level restatement, again with the reduced hypothesis. The Stacks Project deliberately has no unrestricted 'constant fibre dimension => locally free' statement; instead Lemma 36.32.3 (tag 0B9S) formulates the correct universal version as an OPEN SUBSCHEME U \u2282 S such that T -> S factors through U iff Rf_{T,*}F_T is finite locally free of rank r in degree i. That is precisely the 'separate scheme-theoretic constant-rank argument' FND-0131 demands, and its existence as a scheme-theoretic (not set-theoretic) condition is the content of the finding. (3) INDEPENDENT MECHANISM, MADE EXACT. Write K = [E^0 --phi--> E^1] with E^1 of rank m. Constancy of h^0 is equivalent to constancy of rank(phi_s) = rk E^0 - h^0(s) =: r at every point. The two halves of 'rank = r' behave asymmetrically. Lower bound: rank(phi_s) >= r at every point <=> V(I_r(phi)) = empty <=> I_r(phi) = O_B, a genuine scheme-theoretic conclusion insensitive to nilpotents. Upper bound: rank(phi_s) <= r at every point only gives that every (r+1)-minor lies in every prime, i.e. I_{r+1}(phi) \u2286 nil(O_B), NOT I_{r+1}(phi) = 0. Since coker(phi) has presentation matrix phi, Fit_j(coker phi) = I_{m-j}(phi), and by More on Algebra Lemma 15.8.8 (tag 07ZD, retrieved via section tag 07Z6) coker(phi) is finite locally free of rank c = m - r iff Fit_{c-1} = 0 and Fit_c = O_B, i.e. iff I_{r+1}(phi) = 0 and I_r(phi) = O_B. On a reduced base nil = 0 and the pointwise upper bound upgrades to the ideal-theoretic one - which is exactly why Grauert carries reducedness, and exactly what fails otherwise. Once coker(phi) = H^1(K) is locally free the sequence splits locally and ker(phi) = H^0(K) is locally free too, so the two clauses stand or fall together. (4) EXPLICIT COUNTEREXAMPLE (verified by me, not taken from a source). B = Spec k[e]/(e^2), K = [O_B --e--> O_B]. B has a single point, so all fibre dimensions are trivially constant: h^0 = h^1 = 1. But H^0(K) = ker = (e) \u2245 k and H^1(K) = coker = k are not free over k[e]/(e^2), and Fit_0(coker) = (e) is a nonzero nilpotent ideal, confirming the mechanism of (3). Base change also genuinely fails: the map H^0(K) ox k(s) -> H^0(K ox k(s)) sends e ox 1 to the class of e in R/eR = 0, hence is the ZERO map between two one-dimensional k-vector spaces. So a single example witnesses both clauses of the finding ('locally free cohomology' and 'arbitrary base change'). (5) THE PATHOLOGY IS GEOMETRICALLY REALIZED BY p_*L ON A CURVE FAMILY, NOT MERELY FORMAL. Let C/k be smooth projective of genus g, L_0 in Pic^{g-1}(C) with h^0(L_0) = h^1(L_0) = 1, and let L on C x_k Spec k[e]/(e^2) be the deformation of L_0 with Kodaira-Spencer class xi in H^1(C,O_C). The sequence 0 -> L_0 -> L -> L_0 -> 0 gives connecting map cup-xi: H^0(L_0) -> H^1(L_0), which is Serre-dual to multiplication by a nonzero section H^0(omega ox L_0^{-1}) -> H^0(omega) (injective on integral C), hence surjective, hence nonzero for suitable xi. For such xi one gets p_*L \u2245 k and R^1p_*L \u2245 k, neither locally free over k[e]/(e^2), with h^0 \u2261 h^1 \u2261 1 on fibres and the base-change map zero. This is exactly the shape of object C66-COMP-RANK manipulates (pushforward of a relative line bundle on a family of curves), and the degeneration sits over an Abel-Jacobi/theta locus - i.e. over precisely the loci whose infinitesimal (nonreduced) neighbourhoods the campaign's determinantal scheme structures live on (cf. FND-0046, FND-0087, FND-0107). (6) SCOPE SHARPENINGS, none defeating: (P1)-(P4) in the scope block. The only substantive precision is (P1): 'arbitrary base change' in the finding's first sentence must be read as base change for the individual sheaves H^0(K), H^1(K), since the derived statement is unconditionally true by tag 0B91; without that reading the finding would over-reach. (P3) is a free strengthening (one degree suffices, by local constancy of chi). (P4) confirms the remedy clause is precise and satisfiable rather than open-ended. These are refinements of phrasing, not corrections of substance, so promotion is not blocked. (7) DUPLICATE / MERGE ANALYSIS against every adjudicated finding in packet C66-001-v4. FND-0122 is the COMPLEMENT, not a duplicate: it concludes I_11(phi) = I_5(phi_5) = O_B on any locally Noetherian base from geometric-fibre rank ranges {11,12} and {5,6}; by (3) that is exactly the pointwise LOWER-bound direction, which is legitimate and unaffected. FND-0131 blocks the converse direction (I_{r+1}(phi) = 0) that would be needed to call the cohomology sheaves bundles. The two should be read together as a matched pair; neither subsumes the other. FND-0047 concerns the case where h^0(L) JUMPS (relative linear system vs Proj pi_*L); FND-0131 concerns the case where h^0 is CONSTANT and still fails - complementary, distinct. FND-0107 says Proj(pi_*L) 'has correct fibres only over the open where h^0(L) is constant'; FND-0131 sharpens this: over a nonreduced base the set-theoretic constancy locus can be all of B while the conclusion still fails, and the correct universal formulation is the open subscheme of tag 0B9S. Record as a cross-reference/sharpening, not a contradiction (FND-0107's phrasing is standard and implicitly reduced/flat). FND-0099 invokes 'commutation of the cokernel with base change and Nakayama to descend from geometric fibres to the sheaf' and discharges it by degree vanishings (deg W_4 = 20 > 2g-2 = 10); that is an instance of remedy (ii) (tag 0D4E), so FND-0099 is an application of the correct discipline rather than a duplicate of the general caution. FND-0087 also concerns nonreduced bases but is about compatible reduction of the ordered-to-unordered torsor and flatness - different object, different failure mode. FND-0046 is the closest sibling in motif (fibrewise equivalence establishes equality only on geometric points; determinantal/Fitting scheme structures must be compared) but concerns identification of two LOCI, whereas FND-0131 concerns local freeness and base change of PUSHFORWARD SHEAVES, with a different remedy; keep separate and cross-reference. No other adjudicated finding (FND-0001, 0005, 0020, 0022, 0031-0037, 0048-0075, 0083-0086, 0089-0105, 0120, 0121, 0125, 0129, 0130) touches coherent base change. Merge target: none. (8) PROVENANCE LIMIT DECLARED: ATT-0084 and REV-0131 are not present in this read-only workspace, so attempt-level section provenance was not re-audited; the promotion rests on the mathematical content of the finding's statement, which is verified above against primary sources plus a self-contained counterexample. Note also that the single permitted Grok worker (W-bf7587a42460, narrow Stacks/Hartshorne locator extraction) timed out at turn 1 with empty output and could not be resumed; every locator and every hash recorded here was retrieved and checked by me directly.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0131",
+  "id": "FAUD-0132",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "exact_assertion_upheld": "Local constancy of s |-> dim_{k(s)} H^i(K ox^L k(s)) over a possibly nonreduced B does NOT imply that the individual cohomology sheaves H^0(K), H^1(K) are finite locally free, nor that their formation commutes with base change. The classical inference (Grauert) is licensed only after a reducedness hypothesis or an equivalent scheme-theoretic input.",
+    "excluded": [
+      "reduced bases",
+      "the derived/perfect-complex base change statement, which holds over arbitrary bases",
+      "any claim about Q-coefficient weight or Tate structure; FND-0131 is a coherent-sheaf statement and carries no Hodge-theoretic content"
+    ],
+    "generality": "Holds for any two-term complex K = [E^0 --phi--> E^1] of finite locally free modules (equivalently any perfect complex of tor-amplitude in [0,1]) on any locally Noetherian base scheme or algebraic stack B; in particular for K representing Rp_*L with p: C -> B a proper flat family of curves and L a B-flat line bundle. Nothing in the statement is specific to (g,n)=(6,6); the (6,6) instance is the CE evaluation map phi and its filtered quotient phi_5 of FND-0122.",
+    "impacts_approach_ids": [
+      "C66-COMP-RANK"
+    ],
+    "level": "coherent-sheaf / scheme-theoretic (not Q-Hodge-theoretic)",
+    "objects": [
+      "p_*L = H^0(K)",
+      "R^1p_*L = H^1(K)",
+      "coker(phi)",
+      "minor ideals I_r(phi)",
+      "Fitting ideals Fit_j(coker phi) = I_{rk E^1 - j}(phi)"
+    ],
+    "required_precisions": [
+      "(P1) The denial is about the individual cohomology sheaves only. The DERIVED statement is unconditional: Rp_*L is a perfect object whose formation commutes with arbitrary base change (Stacks 36.30.4 / tag 0B91; Mumford's finite complex of finite projectives, Remark 36.30.2 / tag 0A1I). An attempt must not cite FND-0131 to cast doubt on K ox^L k(s) computing fibre cohomology, on semicontinuity (36.32.1 / 0BDN), or on local constancy of chi (36.32.2 / 0B9T).",
+      "(P2) 'geometric fibres' versus 'all scheme points' is not the operative distinction: dim_{k(s)} H^i(K ox k(s)) is invariant under residue-field extension, so constancy on geometric fibres is equivalent to constancy at all points of B. Reducedness, not the choice of test points, is what is missing.",
+      "(P3) Because chi = h^0 - h^1 is locally constant, constancy of h^0 and constancy of h^1 are equivalent hypotheses; the finding's 'constant dimensions' need only be assumed in one degree.",
+      "(P4) The obstruction is vacuous on reduced bases, and is dischargeable without reducedness by any of the named 'separate arguments': (i) the Fitting/minor-ideal condition I_{r+1}(phi) = 0 together with I_r(phi) = O_B (More on Algebra 15.8.8 / tag 07ZD, via Fit_j(coker phi) = I_{rk E^1 - j}(phi)); (ii) one-sided vanishing R^i = 0 for i > 0 (36.32.4 / tag 0D4E), which is the route already used by FND-0099; (iii) factoring B through the open subscheme U \u2282 B of 36.32.3 / tag 0B9S that universally represents 'Rp_* is finite locally free of rank r in degree i'. So the finding's remedy clause is accurate and satisfiable, not an unbounded demand."
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "7d225ac2a555d70cb013111b223c6943ec34b2979ee36017162a31c075b596a7",
+      "doi": null,
+      "query_family": "grauert-reducedness-hypothesis",
+      "retrieved_at": "2026-08-12T12:46:30Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/0FWG"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "8c33f09b20b923069943833ef2be1f090841c250b63bb81c0c21cecb371b1c27",
+      "doi": null,
+      "query_family": "reduced-scheme-locally-free-criterion",
+      "retrieved_at": "2026-08-12T12:46:35Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/05P1"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "ab8b0c48bef43dd7fc1c8d26c6420e9bee9b79244df43ccc8a4d3519dab1f416",
+      "doi": null,
+      "query_family": "fitting-ideal-local-freeness-criterion",
+      "retrieved_at": "2026-08-12T12:47:10Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/07Z6"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "6eee0ab30c75b54d5cfd052a1b940166101377adda6559509f697a489848d498",
+      "doi": null,
+      "query_family": "perfect-complex-arbitrary-base-change",
+      "retrieved_at": "2026-08-12T12:45:20Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/0A1G"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "2d5ef96387ec1902933c65ac961d90014f2e06c0afe49b14d7a41b599a48db2b",
+      "doi": null,
+      "query_family": "semicontinuity-and-open-local-freeness-locus",
+      "retrieved_at": "2026-08-12T12:45:55Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/0BDM"
+    }
+  ],
+  "task_id": "TASK-F-FND-0131",
+  "verdict": "promote"
+}

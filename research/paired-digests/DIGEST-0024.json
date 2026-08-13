@@ -1,0 +1,161 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "Study density and adjacency of Casnati\u2013Ekedahl splitting strata to prove irreducibility of the balanced h^0=3 locus."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Recover the tetragonal pencil functorially in families from the relative canonical model to establish full faithfulness or quasi-finiteness of the forgetful morphism."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Compute the \u00e9tale monodromy image in S_6 to determine connected components of the ordered incidence and the associated local systems."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Construct a stratified closed-embedding description of the incidence image before applying codimension, Gysin, or purity arguments."
+    }
+  ],
+  "engine": "codex",
+  "established_facts": [
+    {
+      "evidence": "Section 1 computes the normal sheaf as torsion of length b=2g+6=18 with H^1=0 and h^0=18; quotienting by the 3-dimensional PGL_2 action gives dimension 15. Stabilizers inject into the finite automorphism group of the genus-6 source curve, and balancedness is open by semicontinuity of h^1(F(-5)).",
+      "evidence_class": "source",
+      "statement": "The balanced tetragonal Hurwitz stack H is a smooth finite-stabilizer Deligne-Mumford stack, equidimensional of dimension 15; its generic stabilizer is trivial."
+    },
+    {
+      "evidence": "Sections 2.1\u20132.2 and 3.3 identify the h^0=4 stratum with a proper closed substack contained in the non-primitive hyperelliptic locus.",
+      "evidence_class": "source",
+      "statement": "The primitive locus is contained in H_3; H_3 is a nonempty dense open substack of H of dimension 15, while dim(H_4) is at most 14."
+    },
+    {
+      "evidence": "Sections 2.2\u20132.3 construct the relative linear system on each reduced constant-h^0 stratum and identify its fibres with P(H^0(L)), of dimension k-1.",
+      "evidence_class": "source",
+      "statement": "For every reduced stratum H_k, the Abel\u2013Jacobi incidence restricts to a Zariski-locally trivial projective-space bundle I|_{H_k}\u2192H_k with fibre P^{k-1}, hence dim(I|_{H_k})=dim(H_k)+k-1."
+    },
+    {
+      "evidence": "The projective-bundle formula gives 15+3-1=17 over H_3 and dim(H_4)+4-1\u226414+3=17 over H_4; the nonempty H_3 stratum supplies a 17-dimensional component.",
+      "evidence_class": "mechanical",
+      "statement": "The restriction I|_{H_3} is smooth and equidimensional of dimension 17; every component over H_4 has dimension at most 17, and I has dimension 17."
+    },
+    {
+      "evidence": "Section 3.1 applies Zariski-local triviality with irreducible fibre P^2, which preserves and reflects irreducible components.",
+      "evidence_class": "source",
+      "statement": "Irreducible components of I|_{H_3} correspond bijectively to irreducible components of H_3, so I|_{H_3} is irreducible if and only if H_3 is irreducible."
+    },
+    {
+      "evidence": "Sections 4.1\u20134.2 identify the ordered configuration cover with the free permutation torsor on six distinct sections; finite \u00e9tale pullback preserves dimension.",
+      "evidence_class": "source",
+      "statement": "Over the distinct-support incidence, ordering the six points defines a finite \u00e9tale S_6-torsor of dimension 17 at stack level."
+    },
+    {
+      "evidence": "Section 4.2 gives the standard component-orbit description of a finite \u00e9tale torsor through its \u00e9tale monodromy action.",
+      "evidence_class": "source",
+      "statement": "For a connected component V of the distinct-support incidence, the number of connected components of its ordered cover equals [S_6:Im(\u03c0_1^\u00e9t(V)\u2192S_6)]."
+    },
+    {
+      "evidence": "Section 4.3 shows that three distinct marked images force the induced PGL_2 transformation to be the identity; an automorphism over P^1 fixing an unramified marked point is then the identity.",
+      "evidence_class": "source",
+      "statement": "On the dense open where the six marked points have at least three distinct images in P^1 and at least one marked point is unramified, the ordered stabilizer is trivial."
+    }
+  ],
+  "id": "DIGEST-0024",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "A P^{k-1}-bundle has dimension dim(H_k)+k-1. The base need not have dimension 15; in particular dim(H_4)\u226414.",
+      "statement": "For every reduced H_k, infer dim(I|_{H_k})=15+k-1."
+    },
+    {
+      "mathematical_reason": "An open splitting stratum need not be dense or irreducible merely because the ambient Hurwitz space is irreducible; density and connectivity of the relevant splitting stratum require proof.",
+      "statement": "Infer irreducibility of the balanced open H_3 directly from irreducibility of the classical Hurwitz space."
+    },
+    {
+      "mathematical_reason": "Six fixed points do not exceed the genus-6 bound 2g+2=14, and the available argument controls only a dense open with at least three distinct target images and an unramified mark.",
+      "statement": "Infer that every reduced ordered point has trivial stabilizer from the six marked points."
+    },
+    {
+      "mathematical_reason": "A positive upper bound on exceptional fibre dimension does not imply zero-dimensional fibres, so it does not establish quasi-finiteness or the asserted finite-fibre image-dimension argument.",
+      "statement": "Infer global finiteness or quasi-finiteness of the forgetful morphism from injectivity over H_3 and fibre dimension at most two over H_4."
+    },
+    {
+      "mathematical_reason": "A stack monomorphism requires full faithfulness on objects over every base scheme; fibrewise recovery does not control families, especially where \u03c0_*(\u03c9(-\u0393)) changes rank.",
+      "statement": "Infer that a morphism of stacks is a monomorphism from injectivity on geometric points and injectivity on automorphism groups."
+    },
+    {
+      "mathematical_reason": "The Euler-characteristic argument yields a nonempty complete Abel\u2013Jacobi fibre in Sym^6, but does not ensure a divisor with six distinct support points.",
+      "statement": "Infer nonempty distinct-support ordered incidence on every fibre from \u03c7(L)=1."
+    },
+    {
+      "mathematical_reason": "Rational representation theory alone does not determine the geometric monodromy image, Hodge type, weights, or Tate purity of the resulting local systems.",
+      "statement": "Infer Tate or only-Tate local systems from rationality of S_6-representations."
+    },
+    {
+      "mathematical_reason": "When h^0 jumps, \u03c0_*L need not be locally free or commute with base change; reduced constant-rank strata are needed for the projective-bundle identification.",
+      "statement": "Identify the relative linear system globally with Proj(\u03c0_*L) across h^0-jumping strata or a nonreduced base."
+    },
+    {
+      "mathematical_reason": "Constructible image dimension does not imply closedness, purity of codimension, regularity, or the existence of a suitable closed embedding.",
+      "statement": "Infer a closed pure-codimension-four locus and a Gysin map solely from a 17-dimensional constructible image in a 21-dimensional moduli stack."
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+  "problem_key": "e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9",
+  "reusable_computations": [],
+  "sanitized": true,
+  "schema_version": 1,
+  "source_attribution_confidence": "artifact",
+  "source_lane": "geometry",
+  "source_subproblem_id": "C66-GEO-COMP",
+  "source_task_id": "TASK-C66-M-003",
+  "source_trace_id": "TRACE-0033",
+  "source_turn": "cell-mathematics",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-CLAUDE-CELL_MATHEMATICS",
+  "unresolved_dependencies": [
+    {
+      "statement": "Irreducibility of H_3, and hence of I|_{H_3}, remains to be proved."
+    },
+    {
+      "statement": "Emptiness of H_4 is unknown, so global equidimensionality of I is not established."
+    },
+    {
+      "statement": "The \u00e9tale monodromy image in S_6 has not been computed."
+    },
+    {
+      "statement": "The fibrewise weak Casnati\u2013Ekedahl relative-canonical normalization needed to recover the tetragonal pencil remains unproved."
+    },
+    {
+      "statement": "Full faithfulness on arbitrary families, and therefore the monomorphism property of the forgetful morphism, remains unresolved."
+    },
+    {
+      "statement": "Global finiteness or quasi-finiteness of the forgetful morphism and the resulting 17-dimensional constructible-image assertion require an additional argument."
+    },
+    {
+      "statement": "Neither closedness nor non-closedness of the forgetful image, nor a stratified closed-embedding model for it, is known."
+    },
+    {
+      "statement": "Nonemptiness of the distinct-support incidence on every geometric fibre remains unproved."
+    },
+    {
+      "statement": "Triviality of ordered stabilizers outside the stated dense open remains unresolved."
+    }
+  ]
+}

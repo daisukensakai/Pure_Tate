@@ -1,0 +1,185 @@
+{
+  "argument_markdown": "## 1. Verified inputs and scope discipline\n\nC66-GEO-Z is taken from ATT-0065, dual-confirmed by REV-0108 and REV-0109: the canonical filtration 0->W_4->W->W_5->0 exists without a global splitting; at balanced (6,6) one has deg(W_4)=20, deg(W_5)=16; and on Conf_6 the ambient Fitting failure scheme equals the relative Abel\u2013Jacobi incidence O(Gamma)\u2245W_5\u2297omega^{-1} scheme-theoretically (CLM-0065-4, CLM-0065-5, CLM-0065-8, CLM-0065-9).\n\nC66-GEO-H0 is taken from ATT-0066, dual-confirmed by REV-0110 and REV-0116: under (N), h^0(L)\u2208{3,4}; B_4 is closed and contained in the non-primitive hyperelliptic locus; on each reduced constant-h^0 stratum the incidence is a P^{k-1}-bundle; globally the incidence is the closed Abel\u2013Jacobi/Hilbert fibre product, not an unqualified Proj(pi_*L); and on Conf_6 the ordered distinct-support pullback is a finite \u00e9tale S_6-torsor identified with Z_ev inside the verified Fitting scope (CLM-0066-1 through CLM-0066-6).\n\nBlocked routes vcd-only-vanishing, undecorated-cgp-top-weight-graph-complex, point-count-without-degree-parity-separation, and forgetful-map-renaming-local-system-unknown are not used. No image-dimension, monomorphism, or Tate claim is drawn from a source-dimension count.\n\n## 2. Emptiness of B_4 on the balanced locus (C1)\n\nBy ATT-0066/CLM-0066-2\u20133, every geometric fibre has h^0(L_b)\u2208{3,4}, and every b with h^0(L_b)=4 is hyperelliptic with gamma_b factoring as q\u2218h through the hyperelliptic double cover.\n\nFND-0125 records the CE-rigidity of that locus: if C is hyperelliptic of genus 6 and gamma has degree 4, then necessarily gamma=q\u2218h, E\u2245O(1)\u2295O(4)\u2295O(4), and F\u2245O(2)\u2295O(7). Independently, the mechanical exclusion used in the working context shows that such a cover cannot be fibrewise balanced: after twisting the conic-bundle sequence by O(-6) one obtains h^0(F(-6))\u22652, whereas F\u2245O(4)\u2295O(5) forces h^0(F(-6))=0.\n\nTherefore no geometric point of a fibrewise-balanced family can lie in B_4. Hence B_4=\u2205 on |B| and h^0(L_b)=3 at every geometric point. This discharges GAP-H0-1 in the balanced scope of ATT-0066 and supplies the missing constancy hypothesis of FND-0058 for the incidence source (not yet for an image in M_{6,6}).\n\nThe constraint that constancy of h^0(omega(-D)) is not equivalent to excluding every factorization through a positive-genus intermediate is respected: emptiness of B_4 uses only exclusion of the Clifford-equality/hyperelliptic case that produces h^0(L)=4. Positive-genus intermediates, if present, retain h^0(M)=2 and therefore stay in B_3.\n\n## 3. Stack descent of the P^2-bundle model and component dimensions (C2)\n\nATT-0066 states the projective-bundle identification over reduced scheme strata. FND-0127 requires an explicit descent when C66-GEO-COMP works with stacks. Let U->B be a smooth atlas by a reduced locally Noetherian k-scheme. Smooth pullback in characteristic zero preserves reducedness. On U, h^0(L) is constantly 3 by (C1), so Grauert applies: pi_*L|_U is locally free of rank 3 and commutes with base change. The Abel\u2013Jacobi incidence I_U agrees with P((pi_*L|_U)^vee) by the universal-divisor identification of ATT-0066/CLM-0066-4\u20135 (and FND-0107). Both sides commute with arbitrary base change, and the identification is canonical, so it descends along the double overlaps of the atlas to a Zariski-locally trivial P^2-bundle structure on I over B in the smooth topology. FND-0131 is respected: no claim of local freeness of pi_*L is made over a nonreduced base from fibrewise constancy alone.\n\nProjectivization has pure relative dimension 2, so for every irreducible component Y of a reduced atlas the fibre-dimension formula gives dim(I|_Y)=dim(Y)+2. No inference that dim Y=15, and no promotion of 15+2=17 to a pure-codimension-4 constructible image in M_{6,6}, is made (FND-0060, FND-0120, and the working-context constraints forbidding that promotion).\n\n## 4. Finite-cover behavior (C3)\n\nThe locus of degree-six effective divisors with six pairwise-distinct support points is the complement of the finite (hence closed) image of the big diagonal in the relative Sym^6, hence open; it is not closed because nonreduced divisors (e.g. 6p) meet every fibre of the full Abel\u2013Jacobi system, which is nonempty by chi(L)=1. Nonemptiness of the reduced-support open on every fibre is not claimed (FND-0083).\n\nOver that open, ordering the six points is a free action of the finite group S_6 on the stack of pairwise-distinct sections, hence a finite \u00e9tale S_6-torsor (ATT-0066/CLM-0066-6; FND-0064). The statement is made only at stack level (FND-0075). Compatible reduction is used: neither side is reduced unilaterally (FND-0087).\n\nRestricting to Conf_6, the universal divisor is a sum of six disjoint sections, so ATT-0065 applies exactly and yields tilde I=Z_ev as closed substacks by equality of Fitting and Abel\u2013Jacobi ideals.\n\n## 5. Conditional recovery and dense-open triviality of ordered automorphisms (C4)\n\nUnder (N), ATT-0066 forces A_b\u2245O, hence L_b\u2245omega_{C_b}(-D_b). If O(Gamma)\u2245L then omega(-Gamma)\u2245O(D), whose complete base-point-free pencil recovers gamma up to automorphism of the target P^1, and Aut(C,gamma,Gamma)\u2245Aut(C,Gamma). On the dense open where the six ordered marks present at least three distinct images in P^1 and at least one mark is unramified, any automorphism over P^1 fixing an unramified marked point is the identity, so the ordered stabilizer is trivial. Global triviality of stabilizers at every ordered point is not claimed (constraint: six marks do not exceed 2g+2=14).\n\n## 6. Separation of status\n\nProved: emptiness of B_4 on fibrewise-balanced families; constant h^0(L)=3; stack descent of the reduced-atlas P^2-bundle model; componentwise dimension formula dim(I|_Y)=dim(Y)+2; stack-level finite \u00e9tale S_6-torsor over the open (not closed) distinct-support locus; scheme-theoretic identification with Z_ev on Conf_6 via ATT-0065; conditional pencil recovery and dense-open ordered-automorphism triviality under (N).\n\nSource-backed inputs: SRC-0004 degrees; FND-0105/(N); FND-0125 hyperelliptic CE rigidity; FND-0127 descent checklist; FND-0064/0075/0087 torsor discipline; FND-0083 reduced-support gap retained.\n\nComputational hypotheses: none. Finite experiments are not used.\n\nOpen gaps left explicit: irreducibility of B; stack dimension 15 and stabilizer analysis of the Hurwitz stack; forgetful monomorphism/quasi-finiteness/closed pure-codimension image in M_{6,6}; reduced-support nonemptiness on every fibre; lci/Gysin; full S_6 monodromy; all Hodge/Tate conclusions.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0087-1",
+      "justification": "ATT-0066/CLM-0066-3 places B_4 inside the non-primitive hyperelliptic locus; FND-0125 (and the mechanical h^0(F(-6)) comparison) forces those covers to have F\u2245O(2)\u2295O(7), contradicting fibrewise O(4)\u2295O(5).",
+      "statement": "On any fibrewise-balanced genus-6 degree-four family as in the theorem, B_4 is empty and h^0(L_b)=3 at every geometric point.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0087-2",
+      "justification": "Constant h^0=3 from CLM-0087-1 plus Grauert on the reduced atlas give a rank-3 bundle; Abel\u2013Jacobi agrees with P((pi_*L)^vee) by ATT-0066; both sides and the universal-divisor identification are base-change compatible, so FND-0127 descent applies. Relative dimension 2 yields the component formula. No dim-Y=15 or image-codimension claim is made.",
+      "statement": "For every smooth atlas U->B by a reduced locally Noetherian k-scheme, I_U is a Zariski-locally trivial P^2-bundle over U, and the identification descends along the atlas to B; for every irreducible component Y of such a reduced atlas, dim(I|_Y)=dim(Y)+2.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0087-3",
+      "justification": "Distinct support is the complement of a finite closed diagonal image; nonreduced members prevent closedness. Free finite S_6-action on the stack of pairwise-distinct sections gives the torsor (ATT-0066/CLM-0066-6). ATT-0065 supplies Fitting=Abel\u2013Jacobi ideal equality on Conf_6.",
+      "statement": "I^dist is open and not closed in I; tilde I->I^dist is a finite \u00e9tale S_6-torsor at stack level with compatible reduction; on Conf_6 one has tilde I=Z_ev scheme-theoretically.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0087-4",
+      "justification": "Normalization gives L\u2245omega(-D); completeness of |O(D)| recovers the pencil; three distinct images kill nontrivial target automorphisms and an unramified fixed mark kills deck transformations. Global stabilizer triviality is not claimed.",
+      "statement": "Under (N), O(Gamma)\u2245L implies recovery of gamma up to PGL_2 and Aut(C,gamma,Gamma)\u2245Aut(C,Gamma); on the dense open with at least three distinct gamma-images and one unramified mark, the ordered automorphism group is trivial.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0087-5",
+      "justification": "Explicit exclusion list; constraints FND-0060/0120/0098/0083 and the working-context image-dimension and mono constraints are respected rather than walked.",
+      "statement": "The theorem does not assert irreducibility of B, dim B=15, forgetful monomorphism or quasi-finiteness, pure-codimension-4 closed image in M_{6,6}, reduced-support nonemptiness on every fibre, lci/Gysin structure, or any Hodge/Tate conclusion.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "cursor-grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [],
+  "id": "ATT-0087",
+  "lane": "geometry",
+  "methods_used": [
+    "balanced-hyperelliptic-ce-rigidity-exclusion",
+    "att-0066-h0-dichotomy",
+    "fnd-0125-splitting-type",
+    "grauert-on-reduced-atlases",
+    "smooth-atlas-descent-of-abel-jacobi-projective-bundle",
+    "fibre-dimension-formula",
+    "stack-level-finite-etale-S6-torsor",
+    "verified-fitting-abel-jacobi-identification-on-Conf6",
+    "conditional-pencil-recovery-under-weak-CE-normalization"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Closes GAP-H0-1 on the balanced locus by combining ATT-0066's B_4\u2286non-primitive-hyperelliptic containment with FND-0125's rigid unbalanced splitting F\u2245O(2)\u2295O(7).",
+    "Records the previously unstated FND-0127 stack descent of the constant-h^0 Abel\u2013Jacobi P^2-bundle model, with Grauert restricted to reduced atlases.",
+    "Gives the weakest component-dimension formula dim(I|_Y)=dim(Y)+2 without promoting a Hurwitz count to dim B=15 or to a pure-codimension-4 image in M_{6,6}."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0065",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-Z dependency: canonical filtration and scheme-theoretic Fitting/Abel\u2013Jacobi comparison on Conf_6 (CLM-0065-4,5,8,9)."
+    },
+    {
+      "id": "REV-0108",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0065."
+    },
+    {
+      "id": "REV-0109",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0065."
+    },
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-H0 dependency: h^0 dichotomy, B_4 containment, Abel\u2013Jacobi vs Proj, S_6-torsor (CLM-0066-1..6)."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0066."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0066."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "role": "CE sign convention and deg(W_f)=4g+12-4f."
+    },
+    {
+      "id": "FND-0105",
+      "kind": "adjudicated_finding",
+      "role": "Weak CE normalization (N) carried as an explicit hypothesis."
+    },
+    {
+      "id": "FND-0125",
+      "kind": "adjudicated_finding",
+      "role": "Hyperelliptic non-primitive covers are CE-rigid of type F\u2245O(2)\u2295O(7)."
+    },
+    {
+      "id": "FND-0127",
+      "kind": "adjudicated_finding",
+      "role": "Checklist for descending ATT-0066 (H3) from schemes to stacks with smooth atlases."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0125",
+    "FND-0127",
+    "FND-0105",
+    "FND-0058",
+    "FND-0064",
+    "FND-0075",
+    "FND-0083",
+    "FND-0087",
+    "FND-0107",
+    "FND-0131"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "Closes GAP-H0-1 on the balanced locus: B_4 is empty because the only candidate jump points are non-primitive hyperelliptic covers, which are CE-rigid of type F\u2245O(2)\u2295O(7) and cannot be balanced. With constant h^0(L)=3, the Abel\u2013Jacobi incidence is a P^2-bundle of relative dimension 2 after the FND-0127 stack descent to reduced atlases, so every component of I has dimension dim(Y)+2 over a reduced base component Y. The ordered distinct-support model remains a finite \u00e9tale S_6-torsor at stack level and equals Z_ev on Conf_6 by ATT-0065. Forgetful mono/quasi-finiteness, dim B=15, image codimension in M_{6,6}, and Tate conclusions are explicitly not claimed.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "base": "locally Noetherian characteristic-zero schemes, and algebraic stacks with smooth locally Noetherian atlases, with Grauert/projective-bundle statements restricted to reduced atlases",
+    "dependency_scope": "ATT-0065 used for canonical filtration and scheme-theoretic Fitting/Abel\u2013Jacobi comparison on Conf_6; ATT-0066 used for h^0 dichotomy, B_4 containment in non-primitive hyperelliptic locus, Abel\u2013Jacobi vs Proj, and stack-level S_6-torsor; both dual-confirmed",
+    "exclusions": [
+      "irreducibility of the balanced base B",
+      "promotion of b-3=15 to stack dimension without a separate stabilizer analysis of the Hurwitz stack",
+      "forgetful monomorphism, quasi-finiteness, closedness, or pure-codimension-4 image in M_{6,6}",
+      "nonemptiness of the reduced-support open on every geometric fibre",
+      "local complete intersection, Gysin, purity, or excess-intersection conclusions",
+      "full S_6 geometric monodromy image",
+      "Hodge, weight, or Tate conclusions for the exact target",
+      "unbalanced CE components"
+    ],
+    "g": 6,
+    "hypotheses": [
+      "fibrewise balanced F\u2245O(4)\u2295O(5)",
+      "weak CE normalization (N) as in ATT-0066/FND-0105",
+      "canonical filtered CE sequence from ATT-0065"
+    ],
+    "n": 6,
+    "not_covered": "global RED-0001; C66-TATE-SUPPORT inputs beyond the source dimension and finite-cover package recorded here"
+  },
+  "theorem_statement": "Let k be a field of characteristic zero. Let B be either a locally Noetherian k-scheme or a locally Noetherian algebraic k-stack admitting a smooth atlas by locally Noetherian k-schemes. Let pi:C->B be smooth proper with geometrically connected genus-6 fibres, and let gamma:C->P^1_B be finite flat of degree 4 whose Casnati\u2013Ekedahl relations bundle F is fibrewise isomorphic to O(4)\u2295O(5) on every geometric fibre. Let 0->W_4->W->W_5->0 be the canonical filtered CE sequence of ATT-0065 (CLM-0065-5), dual-confirmed by REV-0108 and REV-0109, so that deg(W_5)=16 under the SRC-0004 convention W_f=(O_{P(E^vee)}(2)\u2297gamma^*O(-f))|_C. Put L=W_5\u2297omega_{C/B}^{-1}. Assume the weak CE relative-canonical normalization (N) fibrewise exactly as in ATT-0066: O_{P(E^vee)}(1)|_{C_b} \u2245 omega_{C_b/P^1}\u2297gamma_b^*A_b for some A_b in Pic(P^1_{k(b)}). Let I=Hilb^6(C/B)\u00d7_{Pic^6(C/B)}B be the Abel\u2013Jacobi incidence of ATT-0066 (H3), dual-confirmed by REV-0110 and REV-0116, and write B_4={b:h^0(L_b)=4}, B_3={b:h^0(L_b)=3} on the underlying topological space of B. Then: (C1) No geometric point of B lies in B_4, so B_4 is empty and h^0(L_b)=3 at every geometric point. Indeed ATT-0066/CLM-0066-3 places every point of B_4 in the non-primitive hyperelliptic locus, while every such cover has relations bundle F\u2245O(2)\u2295O(7) (FND-0125; equivalently the mechanical exclusion that a hyperelliptic genus-6 degree-four cover cannot be fibrewise O(4)\u2295O(5)), contradicting the balanced hypothesis. (C2) Stack descent of the projective-bundle model: for every smooth atlas U->B by a reduced locally Noetherian k-scheme, pi_*L|_U is locally free of rank 3 and base-change compatible, and I_U \u2245 P((pi_*L|_U)^vee) is a Zariski-locally trivial P^2-bundle, smooth and proper of pure relative dimension 2 over U. Both the Abel\u2013Jacobi incidence and the projectivization commute with arbitrary base change and are identified by the universal divisor, so the isomorphism descends along the smooth atlas to B; reducedness is preserved by smooth pullback in characteristic zero, and Grauert is applied only on reduced atlases (FND-0127; FND-0131). Consequently, for every irreducible component Y of a reduced atlas (or of the reduced coarse underlying space of a DM chart), dim(I|_Y)=dim(Y)+2. (C3) Finite-cover package: the distinct-support locus I^dist \u2282 I is open and not closed in I; ordering six distinct support points yields a finite \u00e9tale S_6-torsor tilde I -> I^dist at stack level of pairwise-distinct sections, with neither side reduced artificially (ATT-0066/CLM-0066-6; FND-0064/FND-0075/FND-0087). On Conf_6(C/B), ATT-0065 (CLM-0065-4, CLM-0065-9), confirmed by REV-0108 and REV-0109, identifies tilde I scheme-theoretically with the ambient balanced CE Fitting evaluation-failure locus Z_ev. (C4) Conditional geometric recovery and dense-open stabilizer control under (N): L_b \u2245 omega_{C_b}(-D_b) with D_b a fibre divisor of gamma_b, so if O(Gamma)\u2245L then |omega(-Gamma)| recovers gamma up to PGL_2 and Aut(C,gamma,Gamma)\u2245Aut(C,Gamma). On the dense open of the ordered distinct-support incidence where the six marks have at least three distinct images under gamma and at least one mark is unramified, the ordered automorphism group is trivial. No assertion is made that B is irreducible, that dim B=15, that the forgetful map to M_{6,6} is a monomorphism or quasi-finite, that the image is closed of pure codimension 4, that I^dist is nonempty on every fibre, that Z is lci, or any Hodge/Tate/monodromy conclusion."
+}
