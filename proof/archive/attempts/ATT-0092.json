@@ -1,0 +1,224 @@
+{
+  "argument_markdown": "## Argument\n\n### 0. What is being tested\n\nThe C66-COMP-COMP node asks whether the proposed component decompositions of the ordered evaluation-failure locus survive. The proposals in circulation are of two shapes: (i) an indexing of the irreducible components of the ordered incidence by the coset space of the etale monodromy image H <= S_6, with the number [S_6:H]; and (ii) a fibrewise trichotomy for the residual plane map phi_L (birational onto a plane sextic / 2:1 onto a plane cubic / 3:1 onto a conic). Shape (i) is only a formula: H is left uncomputed, so the proposal predicts nothing. Shape (ii) leaves open whether the second and third cases occur at all on the balanced locus. This artifact proves the formula under exactly the hypothesis adjudicated in FND-0132, computes H, and settles the occurrence question in both directions. Nothing from the repository is used as a proved input; every step below is either proved here, a verified dependency artifact, an adjudicated working-context fact, or a cited source.\n\n### 1. Verified inputs used\n\n- ATT-0066 (C66-GEO-H0), dual-confirmed by REV-0110 and REV-0116. Used exactly within its scope: (H1) deg L = 6, deg M = 4, chi(L) = 1, and under (N) the identifications W_{5,b} = omega_{C_b}^2(-D_b), L_b = omega_{C_b}(-D_b), M_b = O(D_b) = gamma_b^*O(1); (H2) local freeness and base change for pi_*L on reduced constant-h^0 strata; (H3) I = Hilb^6(C/B) x_{Pic^6} B is the correct global Abel-Jacobi incidence and is a P^{k-1}-bundle over the reduced stratum B_k; (H4) on the ordered pairwise-distinct configuration stack, tilde I = Z_ev scheme-theoretically and tilde I -> I^dist is a finite etale S_6-torsor.\n- Adjudicated facts from packet C66-001-v4: FND-0139 (under (BAL) the jump stratum is empty, so h^0(L) = 3 identically and B = B_3, hence I is a single P^2-bundle); FND-0142 (h^0(O(D)) = 2, h^0(L) = 3, h^1(L) = 2 under (CE)+(BAL)+(N), and the explicit statement that exclusion of non-primitive pencils through a positive-genus intermediate curve is NOT established); FND-0134 (L base-point-free on the balanced locus and the reduced-support open nonempty and dense in every fibre of the P^2-bundle); FND-0141 (over a reduced base Z is S-smooth of pure relative dimension two, identified with the S_6-torsor of orderings of the reduced-support open of P_S(pi_*L)); FND-0125 (a hyperelliptic genus-6 curve with a degree-four pencil has gamma = q o h and F = O(2)+O(7), never balanced); FND-0132 (the passage from pi_1^et-orbits to irreducible components requires normality of V); FND-0127 (the smooth-atlas descent needed if the base is a stack).\n- Source-backed input SRC-0004: the Casnati-Ekedahl structure theorem for degree-four Gorenstein covers, in the form used by the packet's own convention. Namely gamma_*O_C = O + E^vee with E of rank 3; the relative canonical embedding C subset P := P(E), the P^2-bundle with pi_*O_P(1) = E; and C is the zero scheme of a regular section of the rank-two bundle O_P(2) tensor pi^*F^vee, so that W = (O_P(2) tensor gamma^*F^vee)|_C is the normal bundle, which is exactly the packet's CE line-bundle convention W_f = (O_P(2) tensor gamma^*O(-f))|_C with deg W_f = 4g+12-4f. Under (N) with A = O (forced in ATT-0066/CLM-0066-2) we have O_P(1)|_C = omega_{C/P^1}. Convention check: deg(O_P(2)|_C) = 2 deg omega_{C/P^1} = 2(2g-2+8) = 36 and deg W_f = 36-4f, reproducing SRC-0004 Lemma 10.6 exactly.\n\nThroughout, D denotes a fibre of gamma, so O_C(D) = gamma^*O(1); by (N), L = omega_C(-D) on every geometric fibre.\n\n### 2. The CE exact sequence on P^1 (proved)\n\nOn a geometric fibre write P = P(E) -> P^1, pi_*O_P(1) = E, pi_*O_P(2) = Sym^2 E. The Koszul resolution of the regular section cutting out C reads\n\n0 -> O_P(-4) tensor pi^*det F -> O_P(-2) tensor pi^*F -> O_P -> O_C -> 0.\n\nTwist by O_P(2):\n\n0 -> O_P(-2) tensor pi^*det F -> pi^*F -> O_P(2) -> (O_P(2))|_C -> 0.\n\nSince R^q pi_* O_P(-2) = 0 for every q on a P^2-bundle, the first term has vanishing total derived pushforward. Splitting into two short exact sequences and applying Rpi_* therefore gives an exact sequence of vector bundles on P^1:\n\n(2.1)  0 -> F -> Sym^2 E -> gamma_*(omega_{C/P^1}^{tensor 2}) -> 0.\n\nDegrees: chi(O_C) = 1-6 = -5 = chi(O) + chi(E^vee) forces deg E = 9; hence deg Sym^2 E = 4 deg E = 36. Also chi(gamma_*omega_{C/P^1}^2) = chi(C, omega_{C/P^1}^2) = 36-6+1 = 31 with rank 4, so its degree is 27. Therefore deg F = 36-27 = 9, independently of the CE identity det F = det E. By Grothendieck, F = O(f_1) + O(f_2) with f_1 <= f_2 and f_1+f_2 = 9, so f_2 >= 5 always, and\n\n(2.2)  F is balanced  <=>  f_2 = 5  <=>  h^0(F(-6)) = 0.\n\nTwisting (2.1) by O(-6) and using gamma_*(omega_{C/P^1}^2)(-6) = gamma_*(omega_C^2 tensor gamma^*O(-2)) = gamma_*(L^{tensor 2}) gives\n\n(2.3)  h^0(F(-6)) = dim ker( mu_6 : H^0(P^1, Sym^2E(-6)) -> H^0(C, L^{tensor 2}) ),\n\nthe space of relative conics of degree six through C. Note h^0(L^2) = 12-6+1 = 7, since h^1(L^2) = h^0(omega tensor L^{-2}) = h^0(2D-omega) = 0 (degree -2).\n\n### 3. Scrollar classification (proved)\n\nRelative duality for the finite flat gamma gives gamma_*omega_{C/P^1} = (gamma_*O_C)^vee = O + E, so for every m >= 1\n\n(3.1)  h^0(E(-m)) = h^0(C, omega_C tensor gamma^*O(2-m)).\n\nWrite E = O(e_1)+O(e_2)+O(e_3), e_1 <= e_2 <= e_3, sum 9. Taking m = 5 gives sum (e_i-4)_+ = h^0(omega_C-3D) = 0 (degree -2), so e_i <= 4; then e_1 >= 1 since e_2+e_3 <= 8. Taking m = 3 gives sum (e_i-2)_+ = h^0(omega_C-D) = h^0(L) = h^0(O(D))+1 by Riemann-Roch. Under (BAL), C is not hyperelliptic (FND-0125), so h^0(O(D)) = 2 (a g^2_4 would force genus <= 3), whence sum (e_i-2)_+ = 3. The only triples with entries in [1,4] summing to 9 are (1,4,4), (2,3,4), (3,3,3), and (1,4,4) gives 4 not 3. Hence\n\n(3.2)  E = O(2)+O(3)+O(4)  or  E = O(3)^3,\n\nand by m = 4, E = O(2)+O(3)+O(4) exactly when h^0(omega_C-2D) = 1. (Consistency check, not used below: for a hyperelliptic curve h^0(O(D)) = 3 and the same computation returns E = O(1)+O(4)+O(4), which is the scrollar type recorded for the hyperelliptic composite in the adjudication of FND-0104.)\n\nIn both cases of (3.2) the natural map alpha: Sym^2 H^0(E(-3)) -> H^0(Sym^2E(-6)) is injective, as one checks on the two split models: for E = O(3)^3, alpha is the identity of a 6-dimensional space; for E = O(2)+O(3)+O(4) one has H^0(E(-3)) = <X_3, X_4, tX_4> and the six products X_3^2, X_3X_4, tX_3X_4, X_4^2, tX_4^2, t^2X_4^2 lie in distinct summands O(0), O(1), O(2) of Sym^2E(-6) = O(-2)+O(-1)+O(0)+O(0)+O(1)+O(2) and are independent there, so alpha is injective with image a complement of the one-dimensional summand <X_2X_4>. Under (3.1) with m = 3 we have H^0(E(-3)) = H^0(L), and mu_6 o alpha is the multiplication map mu_L : Sym^2H^0(L) -> H^0(L^2).\n\n### 4. Balancedness forbids a conic (proved)\n\nBy FND-0134, L is base-point-free with h^0(L) = 3, so phi_L : C -> P^2 = |L|^vee is a finite morphism onto a nondegenerate irreducible curve, and deg(phi_L) x deg(image) = 6. The kernel of mu_L is the space of conics containing phi_L(C). By Section 3, alpha(ker mu_L) is contained in ker(mu_6) = H^0(F(-6)), and alpha is injective, so\n\n(4.1)  phi_L(C) lies on a conic  =>  h^0(F(-6)) > 0  =>  F is unbalanced.\n\nSince the image is irreducible and nondegenerate, degree 6 for phi_L would force a line, which is degenerate; degree 3 forces the image to be a conic, excluded by (4.1). Degree 2 forces the image to be a plane cubic C'. If C' is singular its normalization is P^1 and, C being smooth, phi_L factors through it, giving a degree-two map C -> P^1, i.e. C hyperelliptic, excluded under (BAL) by FND-0125. Hence C' is a smooth plane cubic, i.e. a genus-1 curve X, and phi: C -> X is a bielliptic double cover with L = phi^*N, deg N = 3. Then omega_C = phi^*delta with deg delta = 5 (Riemann-Hurwitz: the branch divisor has degree 10), so O_C(D) = omega_C tensor L^{-1} = phi^*(delta-N) =: phi^*A with deg A = 2, and h^0(phi^*A) = h^0(A)+h^0(A-delta) = 2+0 = 2, so |D| = phi^*|A| and gamma is the composite of phi with the degree-two map q = q_A : X -> P^1. This proves the dichotomy and the characterisation in (C2). Conversely a bielliptic-composed pencil evidently has phi_L of degree 2 by the same identities read backwards.\n\n(Independent corroboration of the criterion, not used as input: for the trigonal witness C of bidegree (4,3) on P^1 x P^1 with gamma the degree-four projection, one computes omega_C = O(2,1)|_C, D = O(0,1)|_C, L = O(2,0)|_C, so phi_L is 3:1 onto a conic; (3.1) gives h^0(omega_C-2D) = h^0(O(2,-1)|_C) = 0, so E = O(3)^3, and then F is a rank-two subbundle of Sym^2E = O(6)^6, forcing f_2 <= 6, with f_2 = 6 by (4.1). This reproduces exactly the splitting F = O(3)+O(6) recorded for that witness in the adjudication of FND-0091, and the hyperelliptic computation above reproduces the pair recorded in the adjudication of FND-0104.)\n\n### 5. Bielliptic-composed covers are balanced (proved; new)\n\nLet phi: C -> X be a double cover of a genus-1 curve with C smooth of genus 6, sigma the associated involution, q: X -> P^1 of degree two given by A in Pic^2(X), and gamma = q o phi. Then phi_*O_C = O_X + delta^{-1} with deg delta = 5, omega_C = phi^*delta, D = phi^*A, and L = omega_C(-D) = phi^*N with N := delta - A of degree 3. All eigenspace decompositions below are for sigma.\n\n(a) H^0(L) = H^0(N) + H^0(N-delta) = 3+0, so H^0(L) = phi^*H^0(N) is entirely sigma-invariant, and h^0(L) = 3.\n(b) H^0(omega_C-2D) = H^0(phi^*(N-A)) has dimension h^0(N-A)+h^0(N-A-delta) = 1+0 = 1, so by Section 3, E = O(2)+O(3)+O(4).\n(c) H^0(L^2) = H^0(2N) + H^0(2N-delta), of dimensions 6 and 1 (2N-delta = N-A has degree 1); so the invariant part is 6-dimensional and the anti-invariant part is 1-dimensional, total 7 as required.\n(d) mu_L : Sym^2H^0(L) -> H^0(L^2) is injective: its kernel is the space of conics through the image of the degree-three complete embedding X -> P^2, and an irreducible plane cubic lies on no conic (equivalently, Sym^2H^0(N) -> H^0(2N) is a map of 6-dimensional spaces which is surjective because line bundles of degree >= 3 = 2g(X)+1 on a genus-1 curve are projectively normal). Its image is therefore the whole 6-dimensional invariant part of H^0(L^2).\n(e) H^0(omega_C) = H^0(delta) + H^0(O_X) has invariant part phi^*H^0(delta) of dimension 5 and anti-invariant part of dimension 1. Fix a splitting E = O(2)+O(3)+O(4) with generators restricting to s_2 in H^0(omega_C), s_3 in H^0(L), s_4 in H^0(omega_C-2D). By (3.1) with m = 2 the map H^0(E(-2)) -> H^0(omega_C) is an isomorphism of 6-dimensional spaces, and it decomposes H^0(omega_C) as <s_2> + gamma^*H^0(O(1)) s_3 + gamma^*H^0(O(2)) s_4 with summands of dimensions 1, 2, 3. The last two summands consist of sigma-invariant sections (s_3, s_4 are pullbacks from X by (a), and gamma^* factors through phi^*), so their 5-dimensional sum is exactly the invariant part of H^0(omega_C). Hence s_2 has nonzero anti-invariant component s_2^-.\n\nNow let x lie in ker(mu_6). By Section 3, H^0(Sym^2E(-6)) = <X_2X_4> + alpha(Sym^2H^0(L)), so write x = a X_2X_4 + alpha(y). Its image is a s_2 s_4 + mu_L(y). The second term is invariant by (d); the anti-invariant component of the first is a s_2^- s_4, which is nonzero for a nonzero unless a = 0, since s_2^- and s_4 are nonzero sections of line bundles on an integral curve. Hence a = 0, so mu_L(y) = 0, so y = 0 by (d), so x = 0. Therefore h^0(F(-6)) = 0 and by (2.2)\n\n(5.1)  F = O(4)+O(5): every bielliptic-composed genus-6 tetragonal cover is BALANCED.\n\nThis is the new content. It answers affirmatively the occurrence question that FND-0142 records as unsettled (non-primitive pencils through a positive-genus intermediate curve) and shows that the exclusion mechanism of FND-0125 for the hyperelliptic composite does not extend: the two non-primitive cases behave oppositely, one maximally unbalanced (2,7) and one balanced (4,5).\n\n### 6. A balanced witness with birational phi_L (proved)\n\nLet C be a general complete intersection of divisors Q_1 of bidegree (2,2) and Q_2 of bidegree (2,1) in P = P^2 x P^1, and gamma = pr_2. Both linear systems are base-point-free and ample, so C is smooth by Bertini and connected as an ample complete intersection in a smooth threefold. With h, f the pullbacks of the hyperplane and point classes, adjunction gives omega_C = O(1,1)|_C of degree (h+f)(2h+2f)(2h+f) = 10, so g(C) = 6; and D = O(0,1)|_C has degree 4, so gamma is finite flat of degree 4. Then omega_{C/P^1} = omega_C tensor gamma^*O(2) = O(1,3)|_C, so setting O_P(1) := O(1,3) the normalization (N) holds with A = O, and E = pi_*O_P(1) = O(3)^3 (this is confirmed intrinsically: the Koszul complex for C, pushed forward, gives gamma_*omega_{C/P^1} as an extension of O by O(3)^3, which splits since H^1(O(3)) = 0, matching gamma_*omega_{C/P^1} = O + E). By the same Koszul pushforward, F = pi_*(I_C(2)) = O(4)+O(5), since I_C tensor O_P(2) is resolved by 0 -> O(-2,3) -> O(0,4)+O(0,5) -> I_C(2,6) -> 0 and O(-2, *) has no cohomology along the P^2 factor. So C is balanced, with the campaign's arithmetic reproduced exactly: W_5 = (O_P(2) tensor gamma^*O(-5))|_C = O(2,1)|_C of degree 16 and W_4 = O(2,2)|_C of degree 20. Finally L = W_5 tensor omega_C^{-1} = O(1,0)|_C = omega_C(-D), so phi_L is the first projection; writing Q_2 = a(x)u + b(x)v in the P^1-coordinates, the fibre of pr_1 over x outside the four points {a = b = 0} is the single point (b(x):-a(x)) intersected with Q_1, so phi_L is injective there and hence birational onto its image, a plane sextic with four nodes and geometric genus 6.\n\n### 7. Components and monodromy (proved)\n\n(C1). By FND-0139 the jump stratum is empty, so h^0(L_b) = 3 identically; S is normal, hence reduced, so ATT-0066 (H2) and (H3) apply over all of S and I is a P^2-bundle. S connected and normal is irreducible, hence I is irreducible and normal, hence so is its nonempty open V (nonempty and fibrewise dense by FND-0134). By ATT-0066 (H4), Z -> V is a finite etale S_6-torsor; etale morphisms preserve normality, so Z is normal, and a connected normal locally Noetherian scheme is irreducible, so the connected components of Z are exactly its irreducible components. This is the point adjudicated in FND-0132, and normality is used here and nowhere weaker. A right S_6-torsor over the connected V corresponds to rho: pi_1^et(V,vbar) -> S_6, with pi_1 acting on the fibre S_6 by left translation through rho; the orbits are the right cosets Hx, so components are in bijection with H\\S_6 and number [S_6:H], each of degree |H| over V. This proves the proposed formula, and only under normality.\n\n(C3). For a geometric point s, V_s is a nonempty open of the irreducible |L_s| = P^2, hence connected, and the pullback of the torsor to V_s is the fibre torsor, so H_s := im(rho_s) is contained in H up to conjugacy. Suppose k_s = 1, so phi_{L_s} is birational onto a plane sextic C'. Let V_s^0 be the open of lines meeting C' transversally at six smooth points; V_s^0 is a nonempty open of V_s, so the images of pi_1^et(V_s^0) and pi_1^et(V_s) in S_6 agree. The ordered-pair cover over V_s^0 is isomorphic to the open subset of (C x C) minus the diagonal consisting of pairs (p,q) whose joining line lies in V_s^0, because a pair of distinct points of C' determines its joining line uniquely; that open subset of the irreducible surface C x C is irreducible, hence connected, so H_s is 2-transitive and in particular primitive. In characteristic zero the general point of the dual curve of the irreducible non-linear plane curve C' is a line simply tangent at one smooth point and transverse elsewhere; a small loop in V_s^0 around such a point of the discriminant has local monodromy a transposition. A primitive subgroup of S_6 containing a transposition is S_6 (Jordan). Hence H_s = S_6, so H = S_6, so Z is connected, hence irreducible, and #Comp(Z) = 1.\n\n(C4). Under the S-global factorization gamma = q o phi, the universal degree-six divisor Gamma_univ inside C x_S V is finite etale of degree 6 over V, and the S-morphism phi induces an S-global surjection Gamma_univ -> Delta_univ onto a degree-three finite etale cover of V (the universal divisor of the corresponding degree-three system on X), whose fibres are the three blocks of size two. Being defined over V, this block structure is preserved by rho, so H lies in the stabilizer of a partition into three blocks of size two, a conjugate of S_2 wr S_3 of order 48, and #Comp(Z) = [S_6:H] >= 720/48 = 15. When S is a geometric point with k_s = 2 the factorization exists by Section 4, so this applies.\n\n(C5) is Sections 5 and 6, with the fibrewise verification of (N) in each witness.\n\n### 8. Verdict on the proposed decompositions\n\nThe coset-indexed formula is correct and is proved here, but only with normality (FND-0132), and it is empty until H is computed; H is computed here. The fibrewise trichotomy is not a trichotomy on the balanced locus: the conic case is impossible by (4.1). Of the two surviving cases, both occur, so no proposed decomposition asserting a family-independent component count can be a theorem of the balanced tetragonal geometry: the ordered locus Z is irreducible over any family meeting the primitive regime, and has at least fifteen components over any family carrying a global bielliptic factorization. Any downstream support, Gysin or local-system argument must therefore either restrict to the primitive regime or carry the bielliptic stratum explicitly. Consistently with FND-0053, no Tate conclusion is drawn here in either regime; in particular the appearance of a genus-one quotient in the bielliptic stratum is recorded as a hand-off to C66-CEX-LOCAL and is not claimed to survive in the exact target, which would require the separate analysis this artifact does not perform.\n\n### 9. Separation of status\n\nProved here: the exact sequence (2.1) and the degree computation deg F = 9; the balancedness criterion (2.2)-(2.3); the scrollar classification (3.2) and the injectivity of alpha; the implication (4.1) and the resulting dichotomy with the bielliptic characterisation; the balancedness of every bielliptic-composed cover (5.1); the witness of Section 6 with its E, F, L and birationality; the component bijection and count (C1); the monodromy computations (C3) and (C4).\n\nVerified dependency inputs: ATT-0066 with REV-0110 and REV-0116, used only within the scope quoted in Section 1.\n\nAdjudicated working-context facts used: FND-0125, FND-0127, FND-0132, FND-0134, FND-0139, FND-0141, FND-0142.\n\nSource-backed input: SRC-0004, for the CE structure theorem for degree-four Gorenstein covers, the convention W_f = (O_P(2) tensor gamma^*O(-f))|_C, and deg W_f = 4g+12-4f.\n\nComputational hypotheses: none. No finite experiment is used; the two witnesses of Section 5 and Section 6 are exhibited constructions with complete proofs of every asserted property, and the universal statements (2.2), (3.2), (4.1), (5.1) are proved for all fibres in their stated generality, not sampled.\n\nOpen items, all excluded from the statement rather than asserted: the exact monodromy group in the bielliptic regime; the block containment for bielliptic families without a global factorization; every question about dimensions, closures, stabilizers and the image in M_{6,6}; every Hodge, weight and Tate question.\n\n### 10. Failed and blocked routes\n\nNone of the four blocked routes is used, and none is reopened; new_inputs is empty. (i) vcd-only-vanishing: no vanishing-above-vcd argument occurs; the artifact makes no cohomological vanishing claim about M_{6,6} at all. (ii) undecorated-cgp-top-weight-graph-complex: no tropical, graph-complex or top-weight object appears; per FND-0032 that corner is weight 42 while the target is weight 26, and nothing here touches either. (iii) point-count-without-degree-parity-separation: no point counts over finite fields and no zeta-function input are used; the two witnesses are geometric constructions over an algebraically closed field of characteristic zero, and every conclusion drawn from them is a proved property of the construction rather than an enumeration. (iv) forgetful-map-renaming-local-system-unknown: no forgetful map M_{6,6} -> M_{6,5} and no Leray or local-system renaming occurs; the monodromy computed here is that of an explicitly constructed finite etale S_6-torsor over the residual linear system, not an unknown local system relabelled. Additionally, the constraints of FND-0052 (the balanced reduced-support system is an open piece, not a closed pure-codimension-four subvariety of M_{6,6}), FND-0091 and FND-0098 (no monomorphism into M_{6,6} is claimed), FND-0086 (no exhaustive component claim for the full failure locus is made), FND-0047 and FND-0107 (the global model is the Abel-Jacobi incidence, used through ATT-0066 (H3)), FND-0087 and FND-0075 (no one-sided reduction; the torsor is used at stack level), FND-0131 (the base is required normal, hence reduced), and FND-0101 (no clause of the statement is simultaneously asserted and gapped; the two residual items are conditionalized in (C4) or listed in exclusions) are respected.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0092-1",
+      "justification": "Koszul resolution of the regular section of O_P(2) tensor pi^*F^vee (SRC-0004 structure theorem), twisted by O_P(2), with Rpi_*O_P(-2) = 0 on a P^2-bundle; degrees from chi(O_C) and Riemann-Roch; Grothendieck splitting of F with f_1+f_2 = 9 and f_2 >= 5.",
+      "statement": "For a degree-four Gorenstein cover gamma:C->P^1 with Casnati-Ekedahl data (E,F), there is an exact sequence of bundles on P^1: 0 -> F -> Sym^2 E -> gamma_*(omega_{C/P^1}^{tensor 2}) -> 0; for g = 6 one has deg E = 9, deg Sym^2 E = 36, deg gamma_*(omega_{C/P^1}^2) = 27, hence deg F = 9, and F is balanced if and only if h^0(F(-6)) = 0, i.e. if and only if the restriction H^0(Sym^2E(-6)) -> H^0(C,L^{tensor 2}) is injective.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0092-2",
+      "justification": "Relative duality gamma_*omega_{C/P^1} = O + E gives h^0(E(-m)) = h^0(omega_C tensor gamma^*O(2-m)); m = 5, 3, 4 give e_i <= 4, sum (e_i-2)_+ = h^0(O(D))+1 = 3, and the case separation. Injectivity is checked on the two split models by placing the six products in distinct summands.",
+      "statement": "For a smooth non-hyperelliptic genus-6 curve with a base-point-free g^1_4, the Casnati-Ekedahl bundle E is O(2)+O(3)+O(4) or O(3)+O(3)+O(3), the first case occurring exactly when h^0(omega_C-2D) = 1; and in both cases Sym^2 H^0(L) -> H^0(Sym^2E(-6)) is injective with image a direct complement of the degree-six summand generated by the two extreme factors.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0092-3",
+      "justification": "A conic through phi_L(C) gives a nonzero element of ker(H^0(Sym^2E(-6)) -> H^0(L^2)) by CLM-0092-2, hence h^0(F(-6)) > 0 and F unbalanced by CLM-0092-1. Degree 6 is excluded by nondegeneracy of a complete system, degree 3 by the conic exclusion, and a singular cubic image forces C hyperelliptic, excluded under (BAL) by FND-0125. The bielliptic identities follow from omega_C = phi^*delta and h^0(phi^*A) = 2.",
+      "statement": "Under (CE)+(BAL)+(N), the image phi_L(C) lies on no conic; consequently phi_L is finite onto its image of degree 1 or 2, and degree 2 holds if and only if C is bielliptic and gamma factors as q o phi through the bielliptic double cover onto a genus-1 curve, with L = phi^*N of degree 3 and O_C(D) = phi^*A of degree 2.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0092-4",
+      "justification": "Under the bielliptic involution, H^0(L) is entirely invariant and Sym^2H^0(L) -> H^0(L^2) is injective with image the full 6-dimensional invariant part of the 7-dimensional H^0(L^2) (a plane cubic lies on no conic); the fifth generator s_2 of H^0(omega_C) has nonzero anti-invariant part because the two lower summands of E span exactly the 5-dimensional invariant part. Hence any element of ker(mu_6) has vanishing X_2X_4-coefficient and then vanishes, so h^0(F(-6)) = 0 and CLM-0092-1 gives balancedness.",
+      "statement": "Every bielliptic-composed genus-6 tetragonal cover, i.e. gamma = q o phi with phi:C->X a double cover of a genus-1 curve and q:X->P^1 of degree two, has E = O(2)+O(3)+O(4) and BALANCED relations bundle F = O(4)+O(5).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0092-5",
+      "justification": "Bertini and ampleness give smoothness and connectedness; adjunction gives omega_C = O(1,1)|_C of degree 10; omega_{C/P^1} = O(1,3)|_C identifies O_P(1) and gives E = O(3)^3 via the Koszul pushforward, and F = pi_*(I_C(2,6)) = O(4)+O(5) by the same resolution; birationality holds because for fixed x outside the four base points the (2,1)-equation has a unique root on P^1.",
+      "statement": "The general complete intersection of bidegrees (2,2) and (2,1) in P^2 x P^1 is a smooth connected genus-6 curve whose second projection is a degree-four cover with E = O(3)^3, F = O(4)+O(5), satisfying (N) with A = O, with W_5 = O(2,1)|_C of degree 16, L = O(1,0)|_C = omega_C(-D), and phi_L birational onto a four-nodal plane sextic.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0092-6",
+      "justification": "FND-0139 removes the jump stratum so ATT-0066 (H2)-(H3) give a P^2-bundle over the reduced base; irreducibility and normality pass to the fibrewise dense open V (FND-0134); ATT-0066 (H4) gives the S_6-torsor; etale over normal is normal and connected normal locally Noetherian is irreducible; Galois theory of the etale fundamental group identifies components with orbits of left translation, i.e. right cosets.",
+      "statement": "Over a connected normal locally Noetherian base carrying a balanced+(N) family, V is irreducible and normal, Z is normal, the connected and irreducible components of Z coincide, and they are in canonical bijection with H\\S_6 where H is the etale monodromy image of the torsor; in particular there are exactly [S_6:H] of them, each of degree |H| over V. Normality is load-bearing and is the hypothesis adjudicated in FND-0132.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0092-7",
+      "justification": "The monodromy of a fibre injects into the monodromy of the family. On a birational fibre the ordered-pair cover over the transversal-line open is an open subset of C x C minus the diagonal, hence irreducible, giving 2-transitivity and primitivity; a general tangent line of the image sextic is simply tangent in characteristic zero, giving a transposition; a primitive group containing a transposition is symmetric (Jordan).",
+      "statement": "If some geometric fibre has phi_L birational onto its image, then the monodromy image is the whole of S_6 and Z is irreducible; the component count is then exactly 1.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0092-8",
+      "justification": "The factorization defines the block map Gamma_univ -> Delta_univ over V, so the partition is monodromy-stable and H is contained in the stabilizer of a 3x2 partition, of index 15 in S_6; CLM-0092-4 and CLM-0092-5 show both regimes are realized under (BAL).",
+      "statement": "If gamma factors over the base as q o phi through a smooth proper genus-1 curve (in particular for a single bielliptic-composed geometric fibre), the monodromy preserves the three blocks of size two, so it lies in a conjugate of S_2 wr S_3 and Z has at least 15 irreducible components; consequently the number of components of Z is not an invariant of the balanced tetragonal geometry but depends on the family, being 1 in the primitive regime and at least 15 in the bielliptic regime.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "claude",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "blocked_route",
+      "subject": "vcd-only-vanishing"
+    },
+    {
+      "disposition": "",
+      "kind": "blocked_route",
+      "subject": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "disposition": "",
+      "kind": "blocked_route",
+      "subject": "point-count-without-degree-parity-separation"
+    },
+    {
+      "disposition": "",
+      "kind": "blocked_route",
+      "subject": "forgetful-map-renaming-local-system-unknown"
+    }
+  ],
+  "gap_markers": [
+    {
+      "id": "GAP-0092-EXACT-H-BIELLIPTIC",
+      "severity": "low",
+      "statement": "The exact monodromy group in the bielliptic regime is not computed; only the containment in a conjugate of S_2 wr S_3 and the resulting lower bound of 15 components are proved. Whether H equals the full wreath product, i.e. whether the count is exactly 15, is not asserted anywhere in the theorem statement and is recorded here purely as a downstream obligation."
+    },
+    {
+      "id": "GAP-0092-BIELLIPTIC-GLOBAL-BLOCKS",
+      "severity": "low",
+      "statement": "Clause (C4) is conditionalized on an S-global factorization gamma = q o phi. For a family all of whose geometric fibres are bielliptic-composed but which carries no such global factorization, the containment H in S_2 wr S_3 is not proved, since the fibrewise block structures need not be compatible along S. This is a scope restriction of the asserted clause, not a gap inside it; the fibrewise statement is unconditional."
+    }
+  ],
+  "id": "ATT-0092",
+  "lane": "computation",
+  "methods_used": [
+    "casnati-ekedahl-koszul-pushforward-to-P1",
+    "relative-conic-degree-criterion-for-balanced-splitting",
+    "scrollar-invariant-classification-by-relative-duality",
+    "clifford-and-riemann-roch-on-genus-six-fibres",
+    "bielliptic-involution-eigenspace-decomposition",
+    "explicit-complete-intersection-witness-in-P2xP1",
+    "etale-fundamental-group-galois-correspondence-for-S6-torsors",
+    "two-transitivity-plus-simple-tangency-and-jordan-primitivity",
+    "block-imprimitivity-for-non-primitive-tetragonal-pencils"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Proves that every bielliptic-composed genus-6 tetragonal cover has balanced Casnati-Ekedahl relations bundle F = O(4)+O(5). This answers affirmatively the occurrence question that FND-0142 records as unsettled for non-primitive pencils through a positive-genus intermediate curve, and shows the two non-primitive cases behave oppositely: hyperelliptic-composed is maximally unbalanced (2,7) by FND-0125, bielliptic-composed is balanced.",
+    "Supplies a workable balancedness criterion for the campaign: the Koszul pushforward 0 -> F -> Sym^2E -> gamma_*(omega_{C/P^1}^2) -> 0 turns balancedness into the injectivity of a single explicit restriction map, whence balancedness forbids phi_L(C) from lying on a conic. This excludes the trigonal 3:1-onto-a-conic residual case from the balanced locus, converting the previously proposed trichotomy into a proved dichotomy.",
+    "Computes the etale monodromy that the proposed [S_6:H] component formula left undetermined, obtaining H = S_6 and an irreducible Z in the primitive regime and an imprimitive H with at least fifteen components in the bielliptic regime, and thereby shows that no family-independent component count for the ordered evaluation-failure locus can be a theorem of the balanced tetragonal geometry.",
+    "Exhibits an explicit balanced witness, the general (2,2) cap (2,1) complete intersection in P^2 x P^1, for which E, F, W_5, W_4, L and the birationality of phi_L are all computed in closed form and reproduce the campaign's pinned arithmetic (deg W_5 = 16, deg W_4 = 20, deg L = 6, h^0(L) = 3)."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "0afc96f344542e5401e13179da3087c1c8ad078537111240028544967a642d70",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-H0 dependency supplied by TASK.json. Supplies (H1) the degree and h^0 identities with L = omega(-D) under (N), (H2) local freeness and base change of pi_*L on reduced constant-h^0 strata, (H3) the Abel-Jacobi incidence and its P^{k-1}-bundle structure, and (H4) the scheme-theoretic identification of Z_ev with the ordered incidence and the finite etale S_6-torsor over the reduced-support open. Used only inside that scope."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of CLM-0066-1 through CLM-0066-6 and of clauses (H1)-(H4) of ATT-0066, including the scope discipline for the Conf_6 Fitting identification."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of the same claims, with the independent recomputation of deg W_5 = 16, the projectivization convention check, and the reducedness condition on the strata that this artifact carries as the normality hypothesis on S."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "role": "Casnati-Ekedahl structure theorem for degree-four Gorenstein covers: gamma_*O_C = O + E^vee, the relative canonical embedding into the P^2-bundle P(E), C as the zero scheme of a regular section of O_P(2) tensor pi^*F^vee, the convention W_f = (O_P(2) tensor gamma^*O(-f))|_C and deg W_f = 4g+12-4f."
+    },
+    {
+      "id": "FND-0125",
+      "kind": "adjudicated_finding",
+      "role": "Hyperelliptic genus-6 degree-four covers are non-primitive with F = O(2)+O(7), hence excluded from the balanced locus; used to remove the singular-cubic-image branch in the dichotomy and to license h^0(O(D)) = 2 in the scrollar classification."
+    },
+    {
+      "id": "FND-0134",
+      "kind": "adjudicated_finding",
+      "role": "L is base-point-free with h^0 = 3 on balanced fibres and the reduced-support open is nonempty and dense in every fibre of the P^2-bundle; used for the existence of phi_L and the nonemptiness and density of V."
+    },
+    {
+      "id": "FND-0139",
+      "kind": "adjudicated_finding",
+      "role": "Under the balanced hypothesis the jump stratum is empty, so h^0(L) = 3 identically and the incidence is a single P^2-bundle over the whole reduced base."
+    },
+    {
+      "id": "FND-0141",
+      "kind": "adjudicated_finding",
+      "role": "Over a reduced base Z is S-smooth of pure relative dimension two and is identified with the S_6-torsor of orderings of the reduced-support open of P_S(pi_*L); used for the identification of the object whose components are being counted."
+    },
+    {
+      "id": "FND-0142",
+      "kind": "adjudicated_finding",
+      "role": "h^0(O(D)) = 2, h^0(L) = 3, h^1(L) = 2 under (CE)+(BAL)+(N), and the explicit record that exclusion of non-primitive pencils through a positive-genus intermediate curve is NOT established; this artifact settles that residual question affirmatively."
+    },
+    {
+      "id": "FND-0132",
+      "kind": "adjudicated_finding",
+      "role": "The passage from pi_1^et-orbits to irreducible components requires normality of V; this artifact carries that hypothesis explicitly and uses it exactly where the finding requires."
+    },
+    {
+      "id": "FND-0127",
+      "kind": "adjudicated_finding",
+      "role": "Records the smooth-atlas descent discipline needed if the base is a stack rather than a scheme; cited to keep the stack extension outside the asserted statement."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0125",
+    "FND-0127",
+    "FND-0132",
+    "FND-0134",
+    "FND-0139",
+    "FND-0141",
+    "FND-0142"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-COMP-COMP",
+  "summary": "Tests the proposed component decompositions of the ordered balanced-tetragonal evaluation-failure locus Z and computes the monodromy that they leave undetermined. Proves the [S_6:H] component formula under exactly the normality hypothesis adjudicated in FND-0132, then computes H by reducing it to the degree of the residual plane map phi_L. A Koszul pushforward of the CE structure gives the exact sequence 0 -> F -> Sym^2 E -> gamma_*(omega_{C/P^1}^2) -> 0 on P^1, whence balancedness of F is equivalent to the nonexistence of a relative conic of degree six through C, hence implies that phi_L(C) lies on no conic. This excludes the trigonal (3:1 onto a conic) case from the balanced locus, and with FND-0125 excludes the hyperelliptic case, leaving the exact dichotomy deg phi_L in {1,2} with deg 2 characterised as the bielliptic-composed pencils. Two explicit witnesses settle both regimes: the general (2,2) cap (2,1) complete intersection in P^2 x P^1 is balanced with phi_L birational, giving H = S_6 and an IRREDUCIBLE Z; and every bielliptic-composed genus-6 tetragonal cover is proved BALANCED, giving an imprimitive monodromy and at least 15 components. The second is new and answers affirmatively the occurrence question left open by FND-0142 and by the residual-case exclusions of the prior C66-GEO-COMP proposals. Conclusion: no fixed component count is a theorem of the balanced geometry; the count is 1 on the primitive regime and >= 15 on the bielliptic regime.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-009",
+  "theorem_scope": {
+    "base": "connected normal locally Noetherian scheme over an algebraically closed field of characteristic zero; the extension to a connected normal Deligne-Mumford stack with a smooth atlas by such schemes is available by the one-line descent recorded in FND-0127 but is not part of the asserted statement",
+    "dependency_scope": "ATT-0066 is used only within its stated scope: (H1)-(H3) over reduced bases and (H4) on the ordered pairwise-distinct configuration stack; FND-0125, FND-0127, FND-0132, FND-0134, FND-0139, FND-0141, FND-0142 are used as adjudicated working-context facts; SRC-0004 supplies the CE structure theorem for degree-four Gorenstein covers and the convention W_f = (O(2) tensor gamma^*O(-f))|_C with deg W_f = 4g+12-4f",
+    "exclusions": "the exact value of H in the bielliptic regime (only the containment in S_2 wr S_3 and the bound 15 are proved); the containment H subset of S_2 wr S_3 for a family whose geometric fibres are all bielliptic-composed but which carries no S-global factorization gamma = q o phi; irreducibility, equidimensionality or absolute dimension of the base S or of the balanced tetragonal stack; whether other unbalanced or balanced strata with E = O(2)+O(3)+O(4) exist beyond the bielliptic-composed ones; positive characteristic; nonreduced bases; all questions about the image, stabilizers, closure, codimension, purity, lci or Gysin behaviour of Z in M_{6,6}; all Hodge, weight, purity, local-system and Tate conclusions, in particular any statement about W_{-16}H^{BM}_{16}(M_{6,6}) or the survival of a non-Tate summand in the exact target",
+    "g": 6,
+    "generality": "fibrewise balanced tetragonal Casnati-Ekedahl families with the canonical filtered quotient W_5 and the weak CE relative-canonical normalization (N), exactly the hypotheses of ATT-0066",
+    "n": 6
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero. Let S be a connected normal locally Noetherian k-scheme, pi:C->S smooth proper with geometrically connected genus-6 fibres, and gamma:C->P^1_S finite flat of degree 4, satisfying (BAL) every geometric fibre has balanced Casnati-Ekedahl relations bundle F_b = O(4)+O(5), and (N) the weak CE relative-canonical normalization of ATT-0066 (O_{P(E^vee)}(1)|_{C_b} = omega_{C_b/P^1} tensor gamma_b^*A_b). Put L = W_5 tensor omega_{C/S}^{-1}. By ATT-0066 (H1)-(H4) (dual-confirmed by REV-0110, REV-0116) together with FND-0139, FND-0142, FND-0134, FND-0141: pi_*L is locally free of rank 3, I := P_S((pi_*L)^vee) is a P^2-bundle equal to the Abel-Jacobi incidence, its reduced-support open V := I^dist is fibrewise dense, and the ordered evaluation-failure locus Z := Z_ev inside Conf_6(C/S) is a finite etale S_6-torsor over V. Then: (C1) V is irreducible and normal and Z is normal, so the connected and irreducible components of Z coincide, and they are in canonical bijection with the coset space H\\S_6, where H := image(rho: pi_1^et(V,vbar) -> S_6) is the etale monodromy of the torsor; in particular #Comp(Z) = [S_6 : H] and each component is a connected etale cover of V of degree |H|. (C2) On every geometric fibre s the residual morphism phi_{L_s}: C_s -> P^2 = |L_s|^vee is finite onto its image of degree k_s in {1,2}: the degree-3 (image a conic) and degree-6 (image a line) cases are excluded by (BAL) and by nondegeneracy respectively, and k_s = 2 holds if and only if C_s is bielliptic with gamma_s = q o phi factoring through the bielliptic double cover phi: C_s -> X_s onto a genus-1 curve. (C3) If k_s = 1 for at least one geometric point s of S, then H = S_6, Z is irreducible, and #Comp(Z) = 1; hence every proposed decomposition of Z into two or more components fails for such a family. (C4) If gamma factors over S as gamma = q o phi with phi:C->X a degree-2 S-morphism onto a smooth proper genus-1 curve X/S and q:X->P^1_S of degree 2 (in particular if S is a geometric point with k_s = 2), then rho preserves the S-global partition of the universal degree-6 divisor into three blocks of size two, so H lies in a conjugate of S_2 wr S_3 and #Comp(Z) >= [S_6 : S_2 wr S_3] = 15. (C5) Both regimes are nonempty under (BAL): (a) the general complete intersection C of divisors of bidegrees (2,2) and (2,1) in P^2 x P^1 is a smooth connected genus-6 curve whose second projection gamma is finite flat of degree 4 with E = O(3)^3 and F = O(4)+O(5), which satisfies (N) with A = O and has L = O(1,0)|_C and phi_L birational onto a 4-nodal plane sextic, so k = 1; and (b) EVERY bielliptic-composed genus-6 tetragonal cover (X a genus-1 curve, phi:C->X a double cover with C smooth of genus 6, q:X->P^1 of degree 2, gamma = q o phi) has E = O(2)+O(3)+O(4) and F = O(4)+O(5), i.e. is BALANCED, and has k = 2. Consequently the balanced locus is not contained in the locus of primitive tetragonal pencils, the question left explicitly open by FND-0142 (non-primitive degree-four pencils through a positive-genus intermediate curve) is answered affirmatively, and the number of irreducible components of Z is not a constant of the balanced tetragonal geometry but a function of the family: it equals 1 over every family meeting the primitive regime and is at least 15 over every family carrying an S-global bielliptic factorization. No Hodge-theoretic, weight, purity or Tate conclusion is asserted, and no statement is made about images, stabilizers, closures, codimension or monomorphy in M_{6,6}."
+}

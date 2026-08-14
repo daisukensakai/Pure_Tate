@@ -1,0 +1,124 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0001 (stack versus space conventions) and THM-0005 (c(6)=5, so n=6 needs residual geometry). INDEPENDENT CHECKS. (1) Inertia of a scheme or algebraic space is trivial: Stacks Proposition 94.13.3 (04SZ) says an algebraic stack is an algebraic space if and only if I_X -> X is an equivalence; Stacks 04XA records that a roman-capital algebraic stack is required to have trivial inertia. If B is a reduced locally Noetherian k-scheme, as ATT-0089 theorem_statement declares, then C->B is a scheme morphism, Hilb^6(C/B) and Pic^6(C/B) are algebraic spaces, and I is an algebraic space, so Aut of a geometric point of I is 1 and 1->Aut(x_tilde)->Aut(x)->S_6 degenerates to 1->1->1->S_6. (2) I is defined from Hilb^6 and Pic^6 only; gamma enters only in the construction of L, not as part of an object of I. ATT-0089 step 4 ('an ordered automorphism induces a PGL_2 transformation fixing the three images') therefore requires Aut to mean Aut(C,gamma,Gamma). Vakil Class 35 records that Aut(P^1) is three-transitive, so a PGL_2 element fixing three distinct points is the identity; that step is correct for the cover group and unavailable for Aut(C,Gamma). (3) A geometric point of M_{6,6} has automorphism group Aut(C; p_1,...,p_6)=Aut(C,Gamma) (ordered or unordered), so that is the group relevant to the forgetful map. (4) Kernel triviality is not formal. Stacks Lemma 53.12.2 (0C1D) gives 2g-2 = deg(f)(2g_Y-2)+deg(R). For the hyperelliptic involution, deg(f)=2 and g_Y=0, hence deg(R)=2g+2. Vakil Class 35 states that a hyperelliptic cover has precisely 2g+2 distinct branch points; in characteristic not 2 each branch point has a unique ramification point, so the involution fixes 2g+2=14 points on a genus-6 curve and can therefore fix six marked points. Fujimori (Ann. Scuola Norm. Sup. Pisa 1997) records the same 2g+2 upper bound for any non-identity automorphism of a curve of genus g>=2. SCOPE. The 2g+2 witness is hyperelliptic, and FND-0125 excludes hyperelliptic composed degree-4 pencils from the balanced CE locus, so this is a formal obstruction rather than a point of the campaign family. Complementary to corroborated FND-0098 (mono into M_{6,6} requires recovering gamma from L, plus a stack-level Aut argument), FND-0127 (scheme-versus-stack base scope for Grauert/H3), FND-0075 (S_6-torsor at stack level, not on coarse moduli), and FND-0060 (Hurwitz coarse dimension needs stabilizer bookkeeping). Distinct from pending FND-0138, which is the positive B_3 repair Aut(C,Gamma)=Aut(C,gamma,Gamma), not this well-posedness obstruction. Not a merge into FND-0098, FND-0101, or FND-0127: those concern monomorphism of Z, gap-marker discipline, and projective-bundle descent respectively. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source. The finding's sole reviewer_engine (claude) is in this revision's excluded_engines; this audit is the first non-excluded verification.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0137",
+  "id": "FAUD-0142",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "exact_mathematical_scope": "Any inertia/stabilizer clause 1->Aut(x_tilde)->Aut(x)->S_6 for a geometric point x of the Abel-Jacobi incidence I=Hilb^6(C/B) x_{Pic^6(C/B)} B is well-posed only after the stack and the moduli problem defining Aut are named. If B is a scheme, then I is an algebraic space, so its inertia is trivial and the sequence is 1->1->1->S_6: exact but vacuous. Over a stack base Aut(x) is the automorphism group of the object classified by that base. A rigidity argument that produces an induced PGL_2 element of P^1 fixing three marked images applies only to Aut(C,gamma,Gamma). It does not by itself prove the corresponding statement for Aut(C,Gamma), which is the inertia group of a geometric point of M_{6,6}. Kernel triviality for Aut(C;p_1,...,p_6) is not formal: a non-identity automorphism of a smooth genus-6 curve can fix as many as 2g+2=14 points and therefore can fix six marked points.",
+    "excluded_claims": [
+      "Does not prove Aut(C,Gamma)=Aut(C,gamma,Gamma) on B_3 (FND-0138).",
+      "Does not prove B_4 empty (FND-0139).",
+      "Does not invalidate the PGL_2-plus-deck-transformation computation for Aut(C,gamma,Gamma).",
+      "Does not compute Aut groups on the balanced tetragonal stack.",
+      "The 2g+2 witness is hyperelliptic and is excluded from the balanced CE locus by FND-0125."
+    ],
+    "excluded_engine_note": "the finding's sole reviewer_engine (claude) is in this revision's excluded_engines; this audit supplies the first non-excluded verification",
+    "generality": "well-posedness of Aut/inertia clauses for the (6,6) Abel-Jacobi incidence; the 2g+2 fixed-point bound holds for all g>=2",
+    "hypotheses": [
+      "char 0 as in ATT-0089, or at least char !=2 for the hyperelliptic involution to be separable",
+      "C smooth proper geometrically connected of genus 6",
+      "I the Abel-Jacobi incidence of L, defined from Hilb^6 and Pic^6 only"
+    ],
+    "impacted_claim_ids": [
+      "CLM-0089-5"
+    ],
+    "impacts_approach_ids": [
+      "C66-GEO-COMP"
+    ],
+    "objects": [
+      "I=Hilb^6(C/B) x_{Pic^6(C/B)} B",
+      "I^{dist}",
+      "Aut(x)",
+      "Aut(x_tilde)",
+      "Aut(C,gamma,Gamma)",
+      "Aut(C,Gamma)",
+      "inertia of M_{6,6}"
+    ],
+    "precision": "Triviality of Aut(x) over a scheme base is a statement about the inertia of I as an algebraic space, not about the fibrewise group scheme Aut(C_b,Gamma). The 2g+2 bound is the classical maximum, achieved by the hyperelliptic involution; it is a formal obstruction to treating kernel triviality as automatic, not a balanced-locus counterexample.",
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "94ca9191a441b1d993ddcd555ebab80b542d39897f901c30ec86f54331d5f63f",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-13T13:08:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-inertia-trivial-iff-algebraic-space",
+      "retrieved_at": "2026-08-13T13:08:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/04SZ"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-scheme-algebraic-space-trivial-inertia-convention",
+      "retrieved_at": "2026-08-13T13:08:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/04XA"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-riemann-hurwitz",
+      "retrieved_at": "2026-08-13T13:08:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0C1D"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "hyperelliptic-involution-2g-plus-2-branch-points",
+      "retrieved_at": "2026-08-13T13:12:00Z",
+      "source_type": "reference",
+      "url": "https://math.stanford.edu/~vakil/0506-216/216class35.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "nonidentity-automorphism-fixed-point-bound",
+      "retrieved_at": "2026-08-13T12:58:00Z",
+      "source_type": "journal",
+      "url": "http://www.numdam.org/item/ASNSP_1997_4_24_3_551_0.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "corpus-claims-cross-check",
+      "retrieved_at": "2026-08-13T12:54:00Z",
+      "source_type": "campaign_claims",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
+  "task_id": "TASK-F-FND-0137",
+  "verdict": "promote"
+}

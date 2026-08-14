@@ -1,0 +1,68 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001 or RED-0001; it is an interior lemma of C66-GEO-H0 / C66-COMP-RANK. Independent verification of each clause. (1) Degrees: SRC-0004 Lemma 10.6 (packet locator excerpt) gives deg(W_f|_C)=4g+12-4f, so deg W_5=16, deg L=deg(W_5 tensor omega^{-1})=6, chi(L)=1 (FND-0063, FND-0073). Under (N), M=omega_C^2 tensor W_5^vee = O_C(D) (FND-0105), so h^0(L)=1+h^0(D) and h^1(L)=h^0(L)-1. (2) h^0(D)>=2 since gamma^* is injective on H^0(P^1,O(1)); D is special because h^1(D)=h^0(omega-D)=h^0(L)>=1 from chi(L)=1. Clifford therefore applies: h^0(D)<=deg(D)/2+1=3, and the equality classification (Encyclopedia of Mathematics, Clifford theorem: equality only for D=0, D=K, or C hyperelliptic with D a multiple of the unique g^1_2) leaves only the hyperelliptic case, since deg D=4 is neither 0 nor 2g-2=10. Clause (B) first half CONFIRMED. (3) Hyperelliptic exclusion. Castelnuovo-Severi (verified live: g(X)<=m g(Y)+n g(Z)+(m-1)(n-1); here 6>2*0+4*0+3) forces the hyperelliptic h and gamma to factor through a common phi of degree>1, and deg phi | 2 gives phi=h, gamma=q o h with deg q=2 - matching corroborated FND-0135. I reproduced FND-0125's splitting independently rather than quoting it: pushing forward, gamma_*O_C = q_*(O_{C'} + delta^{-1}) with deg delta = 7-2g', so for g'=0, delta=O(7), q_*O(-7)=O(-4)+O(-4) and E=O(1)+O(4)+O(4); then from 0->F->Sym^2E->gamma_*(omega_C^2)(4)->0 (rank 2/6/4, degrees 9/36/27, twist fixed by (N)), h^0(F(-6)) >= h^0(Sym^2E(-6)) - h^0(omega_C^2 tensor gamma^*O(-2)) = 9-7 = 2, which is incompatible with F=O(4)+O(5) (that would give h^0(F(-6))=0) and forces exactly F=O(2)+O(7). Clause (B) second half CONFIRMED, independently of FND-0125, which it corroborates. (4) Clauses (A) and the h^1 value follow: on a balanced fibre the hyperelliptic case is excluded, so h^0(D)=2, h^0(L)=3, h^1(L)=2. CONFIRMED. Note clause (A) is not new: corroborated FND-0134 already asserts h^0(L)=3 on exactly these hypotheses; FND-0142's added value is the proof route and clauses (B)-(C). (5) Clause (C), the scope correction, is the load-bearing novelty and is CONFIRMED as a statement about what the argument consumes: Clifford equality detects only h^0(D)=3, i.e. only the hyperelliptic-composed pencil, whereas FND-0104 asserts that constancy of h^0(omega_C(-D))=3 on the balanced locus is EQUIVALENT to 'no balanced fibre carries a tetragonal pencil factoring through a degree-2 map'. The reverse implication of that equivalence holds, but the forward implication fails as a pointwise criterion: for gamma=q o phi with phi:C->C' of degree 2 and g'=g(C')>=1 one has (Riemann-Hurwitz) g'<=3 and h^0(C,D)=h^0(C',q^*pt)+h^0(C',q^*pt tensor delta^{-1})=2+h^0(deg 2g'-5)=2 for g'=1,2 (and 2 generically for g'=3), so positive-genus-intermediate non-primitive pencils carry h^0(D)=2 and do NOT break constancy. Constancy is therefore strictly weaker than primitivity, and FND-0142 correctly narrows FND-0104. Precision caveat recorded for the finding text: 'not equivalent' is exact at the level of criteria/derivation; material non-equivalence of the two conditions would additionally require exhibiting a balanced fibre with a positive-genus-intermediate pencil. My auditor-side computation shows no cheap obstruction to that: the same pushforward method gives E=O(2)+O(3)+O(4) for g'=1 and g'=3 and E=O(3)+O(3)+O(3) for g'=2, and in all three cases h^0(Sym^2E(-6)) <= h^0(omega_C^2 tensor gamma^*O(-2))=7 forces no quadric relation of degree 6, so F=O(4)+O(5) is numerically unobstructed - unlike the hyperelliptic case, which is rigidly excluded. This supporting computation is not load-bearing for the verdict. (6) Consequences for the campaign: combined with corroborated FND-0125 and FND-0135, FND-0142 discharges GAP-H0-1 (the constancy hypothesis flagged by FND-0058 and left open by FND-0104) on geometric fibres, modulo (N) only, which FND-0105 shows is one citation away; it also supplies the constancy premise used by FND-0103 (top stratum confined to hyperelliptic, hence empty on the balanced locus) and by FND-0134. Scope limits to carry downstream: geometric-fibre statement only, so no local freeness of pi_*L over non-reduced or stack bases (FND-0131, FND-0127); (N) is a hypothesis, not an established working-context fact (FND-0105, FND-0101 discipline); and the residual primitivity question is now confirmed irrelevant to constancy, not resolved. Duplication check: distinct from FND-0103 (stratum emptiness/sharpness of the h^0 range), FND-0104 (which it corrects), FND-0125 (hyperelliptic CE rigidity, which it independently reproduces), FND-0134 (density of the reduced-support open), FND-0135 (Castelnuovo-Severi factorization naming). Overlap with FND-0134 is confined to clause (A) and does not justify a merge, since merging would discard the FND-0104 scope correction. Merge target: none. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source. Provenance note: reviewer_engines on the finding record is ['grok'], an engine excluded for this campaign revision, so this claude audit is the first independent verification; the promotion rests on the mathematics re-derived above, not on the originating review. Hash note: no shell was available in this read-only workspace, so content_sha256 is null for the two live-web records rather than fabricated; the one asserted hash is the packet hash from TASK.json for the packet-carried SRC-0004 Lemma 10.6 locator excerpt.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0142",
+  "id": "FAUD-0148",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "asserts": [
+      "h^0(O_C(D))=2",
+      "h^0(L)=3",
+      "h^1(L)=2",
+      "Clifford equality h^0(D)=3 occurs only on a hyperelliptic fibre",
+      "a hyperelliptic genus-6 degree-four cover cannot have F=O(4)+O(5)",
+      "the constancy argument consumes only the hyperelliptic-composed exclusion, not exclusion of every non-primitive degree-four pencil"
+    ],
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "characteristic": 0,
+    "coefficients": "Q",
+    "generality": "geometric fibres of a genus-6 degree-four Casnati-Ekedahl family with balanced relations splitting F=O_{P^1}(4)+O_{P^1}(5), satisfying the weak relative-canonical normalization (N): O_{P(E^vee)}(1)|_C = omega_C tensor gamma^*O(2), equivalently W_5 = omega_C^2(-D), L = omega_C(-D), M = O_C(D)",
+    "hypotheses": [
+      "(CE) Casnati-Ekedahl structure for the degree-four cover gamma:C->P^1",
+      "(BAL) F = O(4)+O(5)",
+      "(N) weak CE relative-canonical normalization, i.e. GAP-Z-W5D discharged as in FND-0105"
+    ],
+    "level": "geometric fibres only; NOT a base-relative local-freeness statement for pi_*L (FND-0131 / FND-0127 (H3) still required over non-reduced or stack bases)"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-14T00:00:00Z",
+      "source_type": "reference_work",
+      "url": "https://encyclopediaofmath.org/wiki/Clifford_theorem"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": "10.2996/kmj/1151936443",
+      "query_family": "castelnuovo-severi-factorization",
+      "retrieved_at": "2026-08-14T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://projecteuclid.org/journals/kodai-mathematical-journal/volume-29/issue-2/On-the-Castelnuovo-Severi-inequality-for-Riemann-surfaces/10.2996/kmj/1151936443.pdf"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "7414d7a8f9d5789602ccba9480822a441664af0ca3f8c352f92498a2896523c5",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "ce-degree-locator",
+      "retrieved_at": "2026-08-14T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    }
+  ],
+  "task_id": "TASK-F-FND-0142",
+  "verdict": "promote"
+}
