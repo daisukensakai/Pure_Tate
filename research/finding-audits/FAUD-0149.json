@@ -1,0 +1,54 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "MATHEMATICAL VERDICT: the finding is TRUE for the campaign case but is NOT a new finding; it is a primary-source-backed proof of an assertion already carried by corroborated findings, plus a restatement of a corroborated conclusion. (A) No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. It is orthogonal to THM-0005 (c(6)=5, so n=6 is outside the published CKgP range) and touches no weight/Tate bookkeeping. (B) PRIMARY VERIFICATION of clause 1. Euisung Park, 'Complete Linear Series on a Hyperelliptic Curve' (arXiv:0808.0113), sets A := f^*O_{P^1}(1) for the degree-two map f, and for a line bundle L defines the factorization type (m,b) with m = max{t : H^0(L (x) A^{-t}) != 0}, B_L = L (x) A^{-m}, b = deg B_L. Thm 3.1(1): h^i(C,L) = h^i(P^1,O(m)) + h^i(P^1,O(m+b-g-1)). For g = 6, deg L = 4 = 2m + b the three admissible types give h^0 = 1 for (m,b) = (0,4); h^0 = 2 for (1,2), i.e. L = A + p + q with p,q the two base points and moving part the g^1_2; h^0 = 3 for (2,0), i.e. L = A^2 = 2 g^1_2. This is exactly the dichotomy asserted by the finding, and it also confirms 'the induced map has degree two' in the first case (the moving part is |A|). Thm 3.1(2): L is base-point-free iff b = 0, or 1 <= b <= g+1 with m + b >= g+1. Since m + b = d - m <= d, any base-point-free L of degree d <= g has d - m <= g < g+1, so b = 0 and L = A^{d/2}. For (g,d) = (6,4) this forces L = A^2. Thm 3.4(alpha): for L = A^m with 1 <= m <= g, h^0 = m+1 and phi_L is the double cover f followed by the m-uple embedding, image a rational normal curve; hence H^0(A^2) = f^*H^0(O_{P^1}(2)) is 3-dimensional and every pencil inside |A^2| is f^* of a pencil in |O_{P^1}(2)|, i.e. gamma = q o f with deg q = 2. A base-point-free pencil V has base locus containing that of |L|, so V base-point-free implies L base-point-free; the case-1 bundle A + p + q therefore supports no base-point-free subpencil. Clause 1 is thus fully established, and is an instance of the general d <= g statement. Independent cross-check by Riemann-Roch: deg 4 on g = 6 gives chi = -1, so h^0 >= 2 forces h^1 >= 3, i.e. L special, and Clifford gives h^0 <= 3 with equality only in the hyperelliptic 2 g^1_2 case - consistent with Park and with corroborated FND-0103/FND-0104. (C) SCOPE CORRECTION (mild, does not affect the campaign case): the finding states clause 1 without a genus hypothesis. It fails for d >= g+1; Park Thm 3.1(2) with (m,b) = (0,g+1) is base-point-free and non-composed, realized at (g,d) = (3,4). The correct scope is degree d <= g on a hyperelliptic curve of genus g, hence g >= 4 for degree four. Any merged record must carry this restriction. (D) VERIFICATION of clause 2. In the CE setup gamma_s is a finite degree-four morphism, so its pencil is base-point-free and clause 1 applies fibrewise: a hyperelliptic geometric fibre forces gamma_s = q o h. Corroborated FND-0125 then gives E = O(1)+O(4)+O(4) and F_s = O(2)+O(7), incompatible with the standing fibrewise-balanced hypothesis F_s = O(4)+O(5) (splitting-type distance 5). Hence no hyperelliptic geometric fibres. The deduction is valid and non-circular: FND-0125 asserts 'gamma = q o h necessarily' and computes F in the model y^2 = f_14(x), z = x^2, presupposing the composed form; clause 1 supplies the missing justification of that presupposition, and does so without the Castelnuovo-Severi route whose incompleteness is recorded in corroborated FND-0135. (E) DUPLICATION ANALYSIS - the decisive point. Clause 2 is semantically identical to the second clause of corroborated FND-0142 ('a hyperelliptic genus-6 degree-four cover cannot have F = O(4)+O(5)', under (CE)+(BAL)+(N)) and to the conclusion of corroborated FND-0139 ('these are incompatible with balancedness on every geometric fibre, so no fibre lies in B_4'). Clause 1 asserts nothing beyond what corroborated FND-0125 already asserts ('gamma = q o h necessarily') and what corroborated FND-0104 derives in the Clifford-equality case (|D| = |2H| = h^*|O_{P^1}(2)|, so every pencil inside |D| is h^* of a pencil, gamma non-primitive). What FND-0143 genuinely adds is JUSTIFICATION and RANGE, not a new assertion: an unconditional, primary-source-citable derivation (Park Thm 3.1/3.4) covering every degree-four pencil rather than only the Clifford-equality stratum, and the sharp d <= g scope with its failure at d = g+1. Campaign precedent (FND-0009, FND-0013 vs FND-0002; FND-0017/0023/0024/0025 vs FND-0035/0036) retires or merges semantic duplicates rather than promoting them. (F) VERDICT: merge into FND-0142, chosen over FND-0139 because the candidate_key 'balanced-normalized-locus-has-no-hyperelliptic-fibers' matches FND-0142's (CE)+(BAL)+(N) balanced-plus-normalized scope and FND-0142 states the no-hyperelliptic-cover clause outright, whereas FND-0139 states only the weaker containment-based emptiness of B_4. Merge rather than plain retire, so that the Park-based derivation, the removal of the Castelnuovo-Severi dependency flagged by FND-0135, and the d <= g scope restriction are preserved on the merged record and attached as justification to FND-0125's 'necessarily' clause. No new obstruction, no contradiction, and no impact on approach C66-GEO-COMP beyond what FND-0139/FND-0142 already discharge. (G) PROVENANCE CAVEAT: the finding's sole reviewer_engines entry is 'qwen', which this task lists in excluded_engines, so it carried no admissible support before this audit; the present artifact supplies independent claude verification of the mathematics, upgrading the clause-1 evidence from 'adversarial_review' to primary_source while clause 2 remains a working-context deduction. ATT-0094 and REV-0145 themselves were not re-audited: those artifacts are absent from this read-only workspace (proof/findings.jsonl here terminates at FND-0034 and contains neither FND-0125 nor FND-0143; both were read from the C66-001-v4 packet, whose adjudicated-findings block records FND-0125 as corroborated). This does not affect the mathematical adjudication. (H) TOOLING CAVEAT: this workspace exposes no shell, so content_sha256 could not be computed for either retrieval and is recorded as null rather than fabricated; retrieved_at values are accurate to the minute (bracketed by worker timestamps of 2026-08-15T00:49:35Z and 00:54:35Z). The single permitted Grok worker (W-08bce495587e) was dispatched for classical-textbook locators (ACGH vol. I, Hartshorne IV.5) and timed out after 300s with empty output; no worker content is relied on anywhere in this artifact, and no unverified textbook numbering is cited.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0143",
+  "id": "FAUD-0149",
+  "independent": true,
+  "merge_target_id": "FND-0142",
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "clause_1_classification": "Smooth hyperelliptic curve C of genus g over an algebraically closed field (char 0 suffices), line bundle L of degree d with d <= g; instance used here is (g,d)=(6,4). Statement: h^0(L) >= 2 forces L = A + p + q (h^0 = 2, base points p,q, moving part the g^1_2 = |A|) or L = A^2 = 2 g^1_2 (h^0 = 3); and any base-point-free pencil of degree d <= g is h^*(pencil of degree d/2 on P^1), so d is even and the induced degree-d morphism factors through the hyperelliptic double cover.",
+    "clause_2_consequence": "Families C/S of smooth genus-6 degree-four covers gamma_s: C_s -> P^1 whose CE relations bundle is fibrewise balanced, F_s = O(4) (+) O(5) (the ATT-0094 hypotheses, together with corroborated FND-0125). Conclusion: no geometric fibre of such a family is hyperelliptic. The n = 6 markings play no role in either clause; the content is a statement about the tetragonal family, not about M_{6,6} as such.",
+    "evidence_class_by_clause": {
+      "clause_1_classification": "primary_source (Park arXiv:0808.0113, Thm 3.1 and Thm 3.4(alpha), retrieved live)",
+      "clause_2_consequence": "derived from corroborated campaign findings FND-0125 / FND-0139 / FND-0142; no independent primary source"
+    },
+    "hypotheses_relied_on": [
+      "gamma_s is a finite degree-four morphism in the CE setup, hence its defining pencil is base-point-free; this makes the base-point-freeness hypothesis of clause 1 automatic rather than an extra assumption",
+      "corroborated FND-0125: a hyperelliptic genus-6 curve with a degree-four pencil has E = O(1)+O(4)+O(4) and F = O(2)+O(7)",
+      "clause 2 is a working-context deduction (packet fact + finding), not a primary-source statement"
+    ],
+    "sharpness_and_failure_range": "Clause 1 is sharp at d = g and FALSE for d >= g+1. Park arXiv:0808.0113 Thm 3.1(2) permits base-point-free L with factorization type (m,b) = (0,g+1); at (g,d) = (3,4) this gives base-point-free degree-4 pencils on a hyperelliptic genus-3 curve that do not factor through h (they have h^0 = 2 and are non-special, whereas h^*O_{P^1}(2) has h^0 = 3). The finding as literally worded ('on a hyperelliptic curve every base-point-free pencil of degree four ...') therefore needs the standing genus restriction g >= 4; it holds for the campaign case g = 6."
+  },
+  "source_records": [
+    {
+      "arxiv_id": "0808.0113",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-15T00:48:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/0808.0113"
+    },
+    {
+      "arxiv_id": "0808.0113",
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "scope-and-sharpness-check",
+      "retrieved_at": "2026-08-15T00:56:00Z",
+      "source_type": "preprint_html_render",
+      "url": "https://ar5iv.labs.arxiv.org/html/0808.0113"
+    }
+  ],
+  "task_id": "TASK-F-FND-0143",
+  "verdict": "merge"
+}

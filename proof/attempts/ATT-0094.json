@@ -1,0 +1,192 @@
+{
+  "argument_markdown": "## Source-backed inputs\n\nATT-0065, confirmed by REV-0108 and REV-0109, supplies the canonical balanced filtration without a global splitting and the intrinsic scheme-theoretic Fitting/Picard identity. ATT-0066, confirmed by REV-0110 and REV-0116, supplies the closed Abel\u2013Jacobi incidence, its reduced constant-h\u2070 projective-bundle model, and the scheme-theoretic ordered/unordered comparison on Conf\u2086. SRC-0004 fixes the essential convention W_f=(O(2)\u2297\u03b3*O(-f))|_C. FND-0105 is retained as the explicit normalization hypothesis. FND-0125 supplies the normalization-free exclusion of hyperelliptic-composed covers from the balanced splitting, and FND-0130 supplies the plane-quintic CE exclusion used below.\n\n## Proved steps\n\n1. Write O_C(D)=\u03b3*O(1). Hypothesis (N) gives O(1)|_C\u2245\u03c9_{C/S}\u2297\u03b3*O(2); therefore W_5\u2245\u03c9_{C/S}^{\u22972}(-D) and L\u2245\u03c9_{C/S}(-D). On a geometric fibre, O(D) has degree four and at least two sections. Clifford gives h\u2070(O(D))\u22643. Equality would be Clifford equality, so C would be hyperelliptic and every pencil in |D| would factor as \u03b3=q\u2218h. FND-0125 then gives relations splitting O(2)\u2295O(7), contradicting O(4)\u2295O(5). Thus h\u2070(O(D))=2. Riemann\u2013Roch and Serre duality now give h\u00b9(L)=2 and h\u2070(L)=1+h\u00b9(L)=3. In particular the h\u2070=4 branch is empty.\n\n2. Since S is reduced and both fibre dimensions are constant, Grauert gives \u03c0_*L locally free of rank three, R\u00b9\u03c0_*L locally free of rank two, and base change. ATT-0066 identifies the closed Abel\u2013Jacobi incidence canonically with I\u2245P_S((\u03c0_*L)^\u2228). Hence I\u2192S is a Zariski-locally trivial P\u00b2-bundle, smooth and proper of pure relative dimension two.\n\n3. The bundle L is base-point-free. Indeed, a base point p would make L(-p) a g\u00b2_5. The genus-six classification used in FND-0130 forces the smooth plane-quintic case; because L=\u03c9(-D), the given tetragonal pencil is projection from p. The CE restriction calculation in FND-0130 makes that projection splitting unbalanced, contradicting (BAL). Thus |L_s| is base-point-free on every geometric fibre. In characteristic zero its associated morphism to P\u00b2 is separable, so Bertini gives a reduced general hyperplane pullback. Consequently V_s is a nonempty dense open of |L_s|\u2245P\u00b2 for every s. This uses base-point-freeness and Bertini, not \u03c7(L)=1.\n\n4. ATT-0066 identifies the pullback of I to Conf\u2086 with Z_ev as an equality of ideals, not merely of geometric points. Because Conf\u2086 already imposes distinct support, this pullback is the ordered incidence over V. Ordering six distinct points gives a finite \u00e9tale S\u2086-torsor Z_ev\u2192V. The deck action is free: a permutation fixing an ordered tuple of six pairwise-distinct points is the identity. This statement concerns the deck group only and says nothing about automorphisms of the marked curve.\n\n5. The open V is S-smooth of pure relative dimension two, and finite \u00e9tale pullback shows that Z_ev is S-smooth of pure relative dimension two. Conf\u2086(C/S) is S-smooth of relative dimension six. Since the Abel\u2013Jacobi/Fitting identity makes Z_ev closed in Conf\u2086, a closed immersion between S-smooth schemes is regular. The relative dimension difference is four, so the conormal is locally free of rank four; the conormal sequence splits locally because \u03a9_{Z_ev/S} is locally free. This lci conclusion comes from relative smoothness, not from determinantal expected codimension.\n\n6. For each irreducible component S_\u03b1, the projective bundle I_\u03b1 is irreducible, and V_\u03b1=V\u2229I_\u03b1 is nonempty open and hence irreducible and dense. Thus components of I and V correspond to those of S and have dimension dim(S_\u03b1)+2 when finite-dimensional. For a component T of Z_ev, flatness of the finite \u00e9tale map makes the contraction of its generic point a generic point of V; finiteness then makes T\u2192V_\u03b1 surjective. Hence dim(T)=dim(V_\u03b1)=dim(S_\u03b1)+2. The number of such T over V_\u03b1 is not determined without additional normality and monodromy input.\n\n## Computational hypotheses\n\nNone. No finite experiment is used to establish a universal claim.\n\n## Remaining scope\n\nThe proof is relative over a reduced scheme base. It does not descend the projective-bundle argument to a stack base, determine moduli inertia, or establish any closed embedding, absolute codimension, Gysin morphism, or Tate statement in M_{6,6}.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0094-1",
+      "justification": "Normalization gives L=\u03c9(-D). Clifford leaves h\u2070(O(D))\u2208{2,3}; the equality case is hyperelliptic-composed, which FND-0125 proves has relations splitting O(2)\u2295O(7), contradicting balance. Riemann\u2013Roch and Serre duality give the remaining dimensions.",
+      "statement": "Under (BAL)+(N), every geometric fibre has L\u2245\u03c9(-D), h\u2070(O(D))=2, h\u2070(L)=3, and h\u00b9(L)=2; hence the h\u2070=4 stratum is empty.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0094-2",
+      "justification": "CLM-0094-1 gives constant h\u2070=3 and h\u00b9=2. Grauert gives local freeness and base change, and ATT-0066/CLM-0066-4,5 gives the canonical incidence/projective-bundle identification. A projective bundle with irreducible fibre has exactly the inverse images of the base components as its irreducible components.",
+      "statement": "Over reduced S, the closed Abel\u2013Jacobi incidence is a P\u00b2-bundle I\u2245P_S((\u03c0_*L)^\u2228), and its irreducible components correspond to those of S.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0094-3",
+      "justification": "A base point would produce a g\u00b2_5 and hence the plane-quintic projection case, excluded from the balanced CE locus by FND-0130. Characteristic-zero Bertini applied to the resulting base-point-free system produces reduced general members.",
+      "statement": "L is fibrewise base-point-free, and the distinct-support open V is nonempty and dense in every P\u00b2 fibre.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0094-4",
+      "justification": "ATT-0065 gives the Fitting/Picard ideal identity and ATT-0066/CLM-0066-6 gives the ordered distinct-support comparison and stack-level torsor. Pairwise distinctness makes the permutation action free.",
+      "statement": "On Conf\u2086, Z_ev is scheme-theoretically the ordered incidence over V, and Z_ev\u2192V is a finite \u00e9tale S\u2086-torsor with free deck action.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0094-5",
+      "justification": "V is an open of a P\u00b2-bundle and Z_ev\u2192V is finite \u00e9tale, while Conf\u2086\u2192S is smooth of relative dimension six. The closed immersion between S-smooth schemes is regular, with codimension equal to the relative-dimension difference.",
+      "statement": "Z_ev\u2192S is smooth of pure relative dimension two, and Z_ev\u21aaConf\u2086(C/S) is a regular immersion of pure codimension four with locally free rank-four conormal.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0094-6",
+      "justification": "For a finite flat map, a minimal prime contracts to a minimal prime; the finite image containing the generic point is the entire target component. Finite morphisms preserve dimension, and V_\u03b1 is dense open in the P\u00b2-bundle over S_\u03b1.",
+      "statement": "Every irreducible component of Z_ev maps finitely and surjectively onto an irreducible component V_\u03b1 and has dimension dim(S_\u03b1)+2 whenever S_\u03b1 is finite-dimensional.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [
+    "Irreducibility of the balanced base S and the number of irreducible components of Z_ev are not determined.",
+    "Full S\u2086 monodromy, including a transposition and the required occurrence loci, remains unproved.",
+    "The projective-bundle and regular-immersion theorem is not extended here to nonreduced or stack bases.",
+    "Stabilizers Aut(C,\u0393) and Aut(C,\u03b3,\u0393), and the faithfulness, quasi-finiteness, closedness, and codimension of the forgetful map to M_{6,6}, remain undetermined.",
+    "No absolute dimension, closed pure-codimension-four embedding, lci/Gysin statement, or closure analysis is proved inside M_{6,6}; unbalanced CE strata remain outside the theorem.",
+    "The weak relative-canonical normalization (N), residual hypothesis (R), and ambient equation-bundle freeness remain external where applicable.",
+    "Positive characteristic and all Hodge, weight, purity, and Tate consequences for RED-0001 remain untreated."
+  ],
+  "id": "ATT-0094",
+  "lane": "geometry",
+  "methods_used": [
+    "balanced-casnati-ekedahl-filtration",
+    "weak-relative-canonical-normalization",
+    "clifford-theorem",
+    "hyperelliptic-composed-cover-exclusion",
+    "riemann-roch-and-serre-duality",
+    "plane-quintic-base-point-exclusion",
+    "grauert-cohomology-and-base-change-over-reduced-base",
+    "abel-jacobi-hilbert-incidence",
+    "characteristic-zero-bertini",
+    "scheme-theoretic-fitting-ideal-comparison",
+    "finite-etale-ordered-divisor-torsor",
+    "relative-smoothness-and-regular-immersion",
+    "finite-flat-minimal-prime-contraction"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "A single scope-consistent composition determines the relative component dimensions, finite-cover structure, smoothness, and regular codimension-four embedding of the balanced ordered failure locus without promoting it to a global locus in M_{6,6}."
+  ],
+  "observable_trace_id": "TRACE-0041",
+  "observable_trace_sha256": "0deccb2fe5d10286d701e2ab366f8bbe7155d739ea52334deb173e58556c890b",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0065",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-Z input: intrinsic Fitting/Picard identity, canonical balanced filtration, and scheme-theoretic comparison within its stated scope."
+    },
+    {
+      "id": "REV-0108",
+      "kind": "confirmation_review",
+      "role": "First confirmation of ATT-0065, including its ambient-hypothesis and scope limitations."
+    },
+    {
+      "id": "REV-0109",
+      "kind": "confirmation_review",
+      "role": "Second confirmation of ATT-0065, including nonreduced Fitting and smooth-atlas caveats."
+    },
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-H0 input: h\u2070 stratification, global Abel\u2013Jacobi incidence, reduced-stratum projective bundles, and ordered distinct-support torsor."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First confirmation of ATT-0066 and its restriction to ordered pairwise-distinct configurations."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second confirmation of ATT-0066, including reduced-base, filtration-orientation, and stack/coarse limitations."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "role": "CE convention W_f=(O(2)\u2297\u03b3*O(-f))|_C and degree formula deg(W_f)=4g+12-4f."
+    },
+    {
+      "id": "FND-0105",
+      "kind": "adjudicated_finding",
+      "role": "Weak relative-canonical normalization, retained as an explicit theorem hypothesis."
+    },
+    {
+      "id": "FND-0125",
+      "kind": "adjudicated_finding",
+      "role": "Hyperelliptic-composed degree-four covers have unbalanced relations splitting O(2)\u2295O(7)."
+    },
+    {
+      "id": "FND-0130",
+      "kind": "adjudicated_finding",
+      "role": "Plane-quintic projection pencils have unbalanced CE relations and exclude base points of L on the balanced locus."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "CLM-0065-3",
+    "CLM-0065-4",
+    "CLM-0065-5",
+    "CLM-0066-1",
+    "CLM-0066-2",
+    "CLM-0066-3",
+    "CLM-0066-4",
+    "CLM-0066-5",
+    "CLM-0066-6",
+    "FND-0105",
+    "FND-0125",
+    "FND-0130"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "The balanced normalized relative failure locus is a smooth relative twofold and regular codimension-four closed subscheme of the ordered configuration space. Its unordered model is a fibrewise-dense open in a P\u00b2-bundle, and ordering is a finite \u00e9tale S\u2086-torsor. Relative component dimensions are determined, but component counts, moduli stabilizers, and the map to M_{6,6} remain unresolved.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "base": "Reduced locally Noetherian scheme over a characteristic-zero field.",
+    "configuration_scope": "The Fitting/Abel\u2013Jacobi equality is asserted only on Conf\u2086, where the six sections are ordered and pairwise disjoint.",
+    "exclusions": "Nonreduced or stack bases; irreducibility of the balanced Hurwitz base; full S\u2086 monodromy; the number of components of Z_ev; stabilizers Aut(C,\u0393) or Aut(C,\u03b3,\u0393); the forgetful morphism to M_{6,6}; absolute dimension, closure, codimension, lci, or Gysin properties in M_{6,6}; unbalanced strata; ambient equation-bundle freeness; and all Hodge/Tate conclusions.",
+    "finite_cover_scope": "The S\u2086 assertion is a torsor assertion for ordered distinct divisors, hence also at stack level; it is not a coarse-moduli quotient assertion.",
+    "g": 6,
+    "generality": "Relative balanced degree-four Casnati\u2013Ekedahl families with the canonical nonsplit filtration and explicit weak normalization (N).",
+    "n": 6
+  },
+  "theorem_statement": "Let k be a characteristic-zero field and S a reduced locally Noetherian k-scheme. Let \u03c0:C\u2192S be a smooth proper family of geometrically connected genus-six curves equipped with a finite flat degree-four map \u03b3:C\u2192P\u00b9_S, the standard degree-four Casnati\u2013Ekedahl resolution, fibrewise balanced relations bundle F_s\u2245O(4)\u2295O(5), its canonical filtration with quotient W_5 of degree 16, and the weak relative-canonical normalization (N). Put L=W_5\u2297\u03c9_{C/S}^{-1}, let I=Hilb\u2076(C/S)\u00d7_{Pic\u2076(C/S)}S be the Abel\u2013Jacobi incidence over [L], let V=I^{dist} be its distinct-support open, and let Z_ev\u2282Conf\u2086(C/S) be the intrinsic evaluation-failure scheme. Then every geometric fibre has h\u2070(L_s)=3 and h\u00b9(L_s)=2; I\u2245P_S((\u03c0_*L)^\u2228) is a P\u00b2-bundle; V is nonempty and dense in every fibre; and Z_ev is scheme-theoretically the ordered incidence over V. The morphism Z_ev\u2192V is a finite \u00e9tale S\u2086-torsor with free deck action, Z_ev\u2192S is smooth of pure relative dimension two, and Z_ev\u21aaConf\u2086(C/S) is a regular immersion of pure codimension four with locally free conormal of rank four. Irreducible components of I and V correspond to irreducible components of S; every irreducible component of Z_ev maps finitely and surjectively onto one component of V and, over a finite-dimensional component S_\u03b1, has dimension dim(S_\u03b1)+2. No count of the components of Z_ev is asserted."
+}

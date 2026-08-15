@@ -1,0 +1,173 @@
+{
+  "campaign_id": "C66-001",
+  "classification": "validation_failure",
+  "created_at": "2026-08-15T00:59:09.057435+00:00",
+  "engine": "codex",
+  "id": "TRACE-0042",
+  "observable_stderr": "Reading additional input from stdin...\n2026-08-15T00:45:47.591218Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 94 column 5\n\nReading additional input from stdin...\n2026-08-15T00:52:52.986961Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 94 column 5\n\nReading additional input from stdin...\n2026-08-15T00:53:36.496454Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 94 column 5\n\nReading additional input from stdin...\n\nReading additional input from stdin...\n2026-08-15T00:57:06.566431Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 94 column 5\n",
+  "observable_stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a002e1-cde4-7dc3-9e58-a6b6d3fea984\"}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"agent_message\",\"text\":\"{\\\"action\\\":\\\"dispatch\\\",\\\"request\\\":{\\\"description\\\":\\\"Extract observable mathematical claims and diagnostics from the trace and review.\\\",\\\"prompt\\\":\\\"Read research/paired-traces/TRACE-0041.json and proof/reviews/REV-0145.json only. Report: (1) every official observable subprocess statement that may qualify as an established fact, with its exact visible source or mechanical evidence; (2) candidate ideas needing independent proof; (3) explicitly invalid mathematical steps and the precise mathematical reason; (4) observable computations, reproducing the exact computation text/data needed for SHA-256 hashing; and (5) unresolved dependencies. Do not infer hidden reasoning, assess provenance/status, or read the principal packet yet. Keep file/field pointers so Codex can verify classification.\\\",\\\"request_id\\\":\\\"grok-worker-digest-0031-r1\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":15617,\"cached_input_tokens\":0,\"cache_write_input_tokens\":0,\"output_tokens\":376,\"reasoning_output_tokens\":198}}\n\n{\"type\":\"thread.started\",\"thread_id\":\"01a002e8-4bae-76e3-84eb-a6df1d404be3\"}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"agent_message\",\"text\":\"{\\\"action\\\":\\\"dispatch\\\",\\\"request\\\":{\\\"description\\\":\\\"Fill missing digest classifications\\\",\\\"prompt\\\":\\\"Gap-fill only: from the trace/review you already read, list all explicit invalid mathematical steps, candidate ideas, unresolved dependencies, and reusable observable computations. For each computation, give the exact observable text/value to hash; distinguish reviewer-identified gaps from genuinely invalid deductions. Keep concise with JSON field pointers.\\\",\\\"request_id\\\":\\\"grok-worker-digest-0031-r2\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":19863,\"cached_input_tokens\":0,\"cache_write_input_tokens\":0,\"output_tokens\":228,\"reasoning_output_tokens\":125}}\n\n{\"type\":\"thread.started\",\"thread_id\":\"01a002e8-f5a6-70a3-9464-0fd84ad3e893\"}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"agent_message\",\"text\":\"{\\\"action\\\":\\\"dispatch\\\",\\\"request\\\":{\\\"description\\\":\\\"Extract template and packet-only gaps\\\",\\\"prompt\\\":\\\"Read DIGEST_TEMPLATE.json, TASK.json, and C66-001-v4.md only. Report the exact required JSON schema/default fields plus any packet mathematical facts, dependencies, or computations not already covered; include exact observable computation text suitable for SHA-256 hashing.\\\",\\\"request_id\\\":\\\"grok-worker-digest-0031-r3\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":21417,\"cached_input_tokens\":0,\"cache_write_input_tokens\":0,\"output_tokens\":211,\"reasoning_output_tokens\":114}}\n\n{\"type\":\"thread.started\",\"thread_id\":\"01a002ea-aea0-7081-9e27-324566bfa318\"}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"agent_message\",\"text\":\"{\\\"action\\\":\\\"dispatch\\\",\\\"request\\\":{\\\"description\\\":\\\"Hash observable computations\\\",\\\"prompt\\\":\\\"From TRACE-0041/REV-0145 only, give exact observable computation strings and their SHA-256 values for the degree-16 check, Riemann\u2013Roch dimensions, and codimension 6\u22122=4; flag any ambiguity in string boundaries.\\\",\\\"request_id\\\":\\\"grok-worker-digest-0031-r4\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":24605,\"cached_input_tokens\":0,\"cache_write_input_tokens\":0,\"output_tokens\":427,\"reasoning_output_tokens\":331}}\n\n{\"type\":\"thread.started\",\"thread_id\":\"01a002ec-2a07-76b3-8d25-4a8066e52c95\"}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"agent_message\",\"text\":\"I\u2019m checking the template and task bindings only, because the transcript omits the exact target object and leaves a field-name conflict to resolve.\"}}\n{\"type\":\"item.started\",\"item\":{\"id\":\"item_1\",\"type\":\"command_execution\",\"command\":\"/bin/zsh -lc \\\"sed -n '1,240p' research/paired-digests/DIGEST_TEMPLATE.json && sed -n '1,280p' TASK.json && sed -n '1,240p' prompts/TRACE_MINER.md\\\"\",\"aggregated_output\":\"\",\"exit_code\":null,\"status\":\"in_progress\"}}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"command_execution\",\"command\":\"/bin/zsh -lc \\\"sed -n '1,240p' research/paired-digests/DIGEST_TEMPLATE.json && sed -n '1,280p' TASK.json && sed -n '1,240p' prompts/TRACE_MINER.md\\\"\",\"aggregated_output\":\"{\\n  \\\"schema_version\\\": 1,\\n  \\\"id\\\": \\\"DIGEST-0000\\\",\\n  \\\"task_id\\\": \\\"TASK-C66-001-MINE-...\\\",\\n  \\\"campaign_id\\\": \\\"C66-001\\\",\\n  \\\"campaign_revision\\\": 3,\\n  \\\"problem_key\\\": \\\"sha256-from-task\\\",\\n  \\\"target\\\": {},\\n  \\\"packet_sha256\\\": \\\"sha256-from-task\\\",\\n  \\\"source_subproblem_id\\\": \\\"C66-GEO-Z\\\",\\n  \\\"source_lane\\\": \\\"geometry\\\",\\n  \\\"source_trace_id\\\": \\\"TRACE-0000\\\",\\n  \\\"source_turn\\\": \\\"standard-fallback\\\",\\n  \\\"established_facts\\\": [\\n    {\\n      \\\"statement\\\": \\\"A fact supported in the observable record.\\\",\\n      \\\"evidence_class\\\": \\\"source\\\",\\n      \\\"evidence\\\": \\\"Exact public locator or mechanical receipt.\\\"\\n    }\\n  ],\\n  \\\"candidate_ideas\\\": [\\n    {\\n      \\\"statement\\\": \\\"An idea that remains to be established.\\\",\\n      \\\"requires_reproof\\\": true\\n    }\\n  ],\\n  \\\"invalid_steps\\\": [\\n    {\\n      \\\"statement\\\": \\\"A mathematically invalid inference.\\\",\\n      \\\"mathematical_reason\\\": \\\"The precise mathematical obstruction.\\\"\\n    }\\n  ],\\n  \\\"reusable_computations\\\": [\\n    {\\n      \\\"statement\\\": \\\"A reproducible observable computation.\\\",\\n      \\\"sha256\\\": \\\"0000000000000000000000000000000000000000000000000000000000000000\\\"\\n    }\\n  ],\\n  \\\"unresolved_dependencies\\\": [\\n    {\\n      \\\"statement\\\": \\\"A precise unresolved mathematical dependency.\\\"\\n    }\\n  ],\\n  \\\"sanitized\\\": true,\\n  \\\"engine\\\": \\\"engine-id\\\"\\n}\\n{\\n  \\\"campaign_id\\\": \\\"C66-001\\\",\\n  \\\"campaign_revision\\\": 4,\\n  \\\"context_revision\\\": 2,\\n  \\\"id\\\": \\\"TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK\\\",\\n  \\\"input_artifacts\\\": [\\n    {\\n      \\\"path\\\": \\\"proof/reviews/REV-0145.json\\\",\\n      \\\"sha256\\\": \\\"8c68a360eb5824468808cf6a8aa254157333029f0877d3595be303de8d4098ae\\\"\\n    }\\n  ],\\n  \\\"input_packet\\\": \\\"proof/packets/generated/C66-001-v4.md\\\",\\n  \\\"input_trace\\\": \\\"research/paired-traces/TRACE-0041.json\\\",\\n  \\\"packet_binding_sha256\\\": \\\"76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7\\\",\\n  \\\"packet_id\\\": \\\"C66-001-v4\\\",\\n  \\\"packet_sha256\\\": \\\"57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145\\\",\\n  \\\"phase\\\": \\\"trace-mining\\\",\\n  \\\"problem_key\\\": \\\"e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9\\\",\\n  \\\"prompt\\\": \\\"prompts/TRACE_MINER.md\\\",\\n  \\\"role\\\": \\\"observable-mathematical-trace-miner\\\",\\n  \\\"source_turn\\\": \\\"standard-fallback\\\",\\n  \\\"subproblem_id\\\": \\\"C66-GEO-COMP\\\",\\n  \\\"target\\\": {\\n    \\\"chow_codimension\\\": 13,\\n    \\\"compact_cohomology_degree\\\": 16,\\n    \\\"compact_tate_type\\\": \\\"Q(-8)\\\",\\n    \\\"dimension\\\": 21,\\n    \\\"g\\\": 6,\\n    \\\"n\\\": 6,\\n    \\\"open_bm_degree\\\": 16,\\n    \\\"open_bm_tate_type\\\": \\\"Q(8)\\\",\\n    \\\"open_bm_weight\\\": -16,\\n    \\\"ordinary_cohomology_degree\\\": 26,\\n    \\\"ordinary_tate_type\\\": \\\"Q(-13)\\\",\\n    \\\"ordinary_weight\\\": 26,\\n    \\\"poincare_twist\\\": 21\\n  },\\n  \\\"trace_sha256\\\": \\\"0deccb2fe5d10286d701e2ab366f8bbe7155d739ea52334deb173e58556c890b\\\"\\n}\\n# Observable mathematical trace mining\\n\\nRead the supplied observable trace, any supplied adversarial-review diagnostics,\\nand the exact packet. Extract reusable mathematics\\nwithout describing provenance, chronology, evaluation, or the status of any prior\\nwork. Do not mention attempt IDs, review IDs, trace IDs, engines, verdicts, failure,\\nor previous/earlier work.\\n\\nSeparate:\\n\\n- established facts with their visible source or mechanical evidence;\\n- candidate ideas that a future prover must independently prove;\\n- invalid mathematical steps and the mathematical reason they are invalid;\\n- reusable computations;\\n- unresolved mathematical dependencies.\\n\\nUse these row contracts:\\n\\n- `established_facts`: `statement`, `evidence_class` (`source` or\\n  `mechanical`), and a nonempty `evidence`;\\n- `candidate_ideas`: `statement` and `requires_reproof: true`;\\n- `invalid_steps`: `statement` and a nonempty `mathematical_reason`;\\n- `reusable_computations`: `statement` and the 64-character `sha256` of\\n  the observable computation;\\n- `unresolved_dependencies`: `statement`.\\n\\nUse only official observable subprocess material in the trace. Do not infer or\\nreconstruct hidden chain-of-thought. Return exactly one JSON object matching the\\ntrace-digest template.\\n\",\"exit_code\":0,\"status\":\"completed\"}}\n{\"type\":\"item.started\",\"item\":{\"id\":\"item_2\",\"type\":\"command_execution\",\"command\":\"/bin/zsh -lc \\\"rg -n 'reviewer_engine|\\\\\\\"engine\\\\\\\"' research/paired-digests | head -40\\\"\",\"aggregated_output\":\"\",\"exit_code\":null,\"status\":\"in_progress\"}}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_2\",\"type\":\"command_execution\",\"command\":\"/bin/zsh -lc \\\"rg -n 'reviewer_engine|\\\\\\\"engine\\\\\\\"' research/paired-digests | head -40\\\"\",\"aggregated_output\":\"research/paired-digests/DIGEST_TEMPLATE.json:45:  \\\"engine\\\": \\\"engine-id\\\"\\n\",\"exit_code\":0,\"status\":\"completed\"}}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_3\",\"type\":\"agent_message\",\"text\":\"{\\n  \\\"schema_version\\\": 1,\\n  \\\"id\\\": \\\"DIGEST-0031\\\",\\n  \\\"task_id\\\": \\\"TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK\\\",\\n  \\\"campaign_id\\\": \\\"C66-001\\\",\\n  \\\"campaign_revision\\\": 4,\\n  \\\"problem_key\\\": \\\"e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9\\\",\\n  \\\"target\\\": {\\n    \\\"chow_codimension\\\": 13,\\n    \\\"compact_cohomology_degree\\\": 16,\\n    \\\"compact_tate_type\\\": \\\"Q(-8)\\\",\\n    \\\"dimension\\\": 21,\\n    \\\"g\\\": 6,\\n    \\\"n\\\": 6,\\n    \\\"open_bm_degree\\\": 16,\\n    \\\"open_bm_tate_type\\\": \\\"Q(8)\\\",\\n    \\\"open_bm_weight\\\": -16,\\n    \\\"ordinary_cohomology_degree\\\": 26,\\n    \\\"ordinary_tate_type\\\": \\\"Q(-13)\\\",\\n    \\\"ordinary_weight\\\": 26,\\n    \\\"poincare_twist\\\": 21\\n  },\\n  \\\"packet_sha256\\\": \\\"57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145\\\",\\n  \\\"source_subproblem_id\\\": \\\"C66-GEO-COMP\\\",\\n  \\\"source_lane\\\": \\\"geometry\\\",\\n  \\\"source_trace_id\\\": \\\"TRACE-0041\\\",\\n  \\\"source_turn\\\": \\\"standard-fallback\\\",\\n  \\\"established_facts\\\": [\\n    {\\n      \\\"statement\\\": \\\"For the Casnati\u2013Ekedahl convention W_f=(O(2)\u2297\u03b3*O(-f))|_C, one has deg(W_f)=4g+12-4f.\\\",\\n      \\\"evidence_class\\\": \\\"source\\\",\\n      \\\"evidence\\\": \\\"SRC-0004, Lemma 10.6.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Under the normalization O(1)|_C\u2245\u03c9_C\u2297\u03b3*O(2), one has W_5\u2245\u03c9_C^2(-D) and L:=W_5\u2297\u03c9_C^{-1}\u2245\u03c9_C(-D), where O_C(D)=\u03b3*O(1).\\\",\\n      \\\"evidence_class\\\": \\\"mechanical\\\",\\n      \\\"evidence\\\": \\\"Substitution into W_5=(O(2)\u2297\u03b3*O(-5))|_C gives W_5\u2245\u03c9_C^2\u2297\u03b3*O(-1)=\u03c9_C^2(-D), followed by tensoring with \u03c9_C^{-1}.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"On a balanced genus-six fibre satisfying the normalization, h\u2070(O_C(D))=2, h\u2070(L)=3, and h\u00b9(L)=2.\\\",\\n      \\\"evidence_class\\\": \\\"source\\\",\\n      \\\"evidence\\\": \\\"FND-0142; the hyperelliptic-composed alternative is excluded by FND-0125.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The numerical identities deg(W_5)=16 and deg(L)=6 hold when g=6 and f=5.\\\",\\n      \\\"evidence_class\\\": \\\"mechanical\\\",\\n      \\\"evidence\\\": \\\"The degree formula gives 4\u00b76+12\u22124\u00b75=16, and deg(L)=16\u2212deg(\u03c9_C)=16\u221210=6.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The line bundle L is base-point-free on the balanced locus after excluding both the hyperelliptic and plane-quintic alternatives for a genus-six g\u00b2_5.\\\",\\n      \\\"evidence_class\\\": \\\"source\\\",\\n      \\\"evidence\\\": \\\"FND-0125 excludes the hyperelliptic-composed branch, and FND-0130 excludes plane-quintic projection pencils by their unbalanced Casnati\u2013Ekedahl relations.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"A constant-rank Abel\u2013Jacobi incidence with h\u2070(L)=3 is a P\u00b2-bundle, and its reduced-support locus is nonempty and dense in every geometric fibre in characteristic zero.\\\",\\n      \\\"evidence_class\\\": \\\"source\\\",\\n      \\\"evidence\\\": \\\"CLM-0066-1 through CLM-0066-5 give the incidence and projective-bundle model; FND-0134 gives fibrewise nonemptiness and density of the reduced-support open.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The canonical balanced filtration yields an intrinsic scheme-theoretic Fitting/Picard condition without requiring a global splitting.\\\",\\n      \\\"evidence_class\\\": \\\"source\\\",\\n      \\\"evidence\\\": \\\"CLM-0065-3, CLM-0065-4, and CLM-0065-5.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Over a reduced locally Noetherian balanced normalized base, the ordered incidence locus inside Conf_6 is smooth of pure relative dimension two and is a regular immersion of codimension four.\\\",\\n      \\\"evidence_class\\\": \\\"source\\\",\\n      \\\"evidence\\\": \\\"FND-0141.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The ordered-distinct-support cover of the reduced-support locus is a finite \u00e9tale S_6-torsor.\\\",\\n      \\\"evidence_class\\\": \\\"source\\\",\\n      \\\"evidence\\\": \\\"FND-0064 and CLM-0066-6.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The S_6-action on an ordered tuple of six pairwise-distinct points is free.\\\",\\n      \\\"evidence_class\\\": \\\"mechanical\\\",\\n      \\\"evidence\\\": \\\"A permutation fixing every coordinate of an ordered tuple with distinct entries must be the identity.\\\"\\n    }\\n  ],\\n  \\\"candidate_ideas\\\": [\\n    {\\n      \\\"statement\\\": \\\"On a hyperelliptic curve, every degree-four divisor D with h\u2070(O(D))\u22652 is linearly equivalent either to g\u00b9_2+p+q or to 2g\u00b9_2; consequently, fibrewise balance O(4)\u2295O(5) excludes all hyperelliptic geometric fibres.\\\",\\n      \\\"requires_reproof\\\": true\\n    }\\n  ],\\n  \\\"invalid_steps\\\": [\\n    {\\n      \\\"statement\\\": \\\"A genus-six g\u00b2_5 may be declared to arise from a plane quintic without separately excluding the hyperelliptic branch.\\\",\\n      \\\"mathematical_reason\\\": \\\"The classification also permits the hyperelliptic form p+2g\u00b9_2, so the plane-quintic conclusion requires an additional hyperelliptic exclusion.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The equality \u03c7(L)=1 implies that the reduced-support part of |L| is nonempty on every fibre.\\\",\\n      \\\"mathematical_reason\\\": \\\"The Euler characteristic only forces h\u2070(L)\u22651 and hence nonemptiness of the full linear system; it does not ensure that any divisor in that system is reduced.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The reduced-support locus of a relative linear system is closed.\\\",\\n      \\\"mathematical_reason\\\": \\\"Reduced, pairwise-distinct support is an open condition; collisions and nonreduced divisors occur in its closed complement.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"A geometric-point correspondence between the Casnati\u2013Ekedahl condition and an Abel\u2013Jacobi condition proves equality of their scheme structures.\\\",\\n      \\\"mathematical_reason\\\": \\\"Equality on geometric points does not determine nilpotents, infinitesimal structure, or Fitting ideals; a scheme-theoretic identity is required.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The relative incidence is always P(\u03c0_*L) even when h\u2070(L) jumps.\\\",\\n      \\\"mathematical_reason\\\": \\\"Jumping h\u2070 can prevent \u03c0_*L from being locally free and can break base change, so the naive projectivization need not model the relative linear system.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"W_5 is the O_{P\u00b9}(5) summand of the Casnati\u2013Ekedahl relation bundle F.\\\",\\n      \\\"mathematical_reason\\\": \\\"W_5 is the f=5 summand of (O(2)\u2297\u03b3*F\u2228)|_C; dualization, the O(2) twist, restriction, and the sign in \u03b3*O(-5) are essential.\\\"\\n    }\\n  ],\\n  \\\"reusable_computations\\\": [\\n    {\\n      \\\"statement\\\": \\\"Arithmetic cross-check passes: deg W_5 = 2\u00b710\u22124 = 16 equals 4g+12\u22124f at g=6, f=5.\\\",\\n      \\\"sha256\\\": \\\"07c9e28c62347585d8ae88c2007b2fa3745df309a93cd25ff58fc95c30002346\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Riemann\u2013Roch and Serre duality now give h\u00b9(L)=2 and h\u2070(L)=1+h\u00b9(L)=3.\\\",\\n      \\\"sha256\\\": \\\"26063f528127871410f65d316b84a16086a2fc58f8a15900bc06eee133a9d789\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"constant codimension 6\u22122=4\\\",\\n      \\\"sha256\\\": \\\"2cfed4e3789dd03f1d9d786347bf486b661f28c1a47e27eb311734b5d63bd20c\\\"\\n    }\\n  ],\\n  \\\"unresolved_dependencies\\\": [\\n    {\\n      \\\"statement\\\": \\\"An unconditional result requires establishing the relative-canonical normalization O(1)|_C\u2245\u03c9_C\u2297\u03b3*O(2), which is otherwise an explicit hypothesis.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The hyperelliptic classification of degree-four special divisors and its implication that the balanced locus has no hyperelliptic fibres require an independent proof.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The canonical balanced filtration, its Fitting/Picard identity, and the scheme-theoretic ordered/unordered Abel\u2013Jacobi comparison remain load-bearing inputs.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Irreducibility of the base and the number of irreducible components of the ordered incidence locus are not determined.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Full S_6 monodromy of the ordered-distinct-support torsor is not determined.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Passage from the stack-level torsor to coarse moduli, including inertia and the distinction between Aut(C,\u0393) and Aut(C,\u03b3,\u0393), requires separate analysis.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"The absolute local-complete-intersection, Gysin, support, and Tate conclusions in M_{6,6} require additional arguments beyond relative smoothness and codimension.\\\"\\n    },\\n    {\\n      \\\"statement\\\": \\\"Nonreduced or stack bases, unbalanced Casnati\u2013Ekedahl strata, equation-bundle freeness, and positive characteristic are not covered by the stated geometric argument.\\\"\\n    }\\n  ],\\n  \\\"sanitized\\\": true,\\n  \\\"engine\\\": \\\"codex\\\",\\n  \\\"reviewer_engine\\\": \\\"codex\\\"\\n}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":81853,\"cached_input_tokens\":63744,\"cache_write_input_tokens\":0,\"output_tokens\":5349,\"reasoning_output_tokens\":2730}}\n",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+  "parsed_artifact": {
+    "campaign_id": "C66-001",
+    "campaign_revision": 4,
+    "candidate_ideas": [
+      {
+        "requires_reproof": true,
+        "statement": "On a hyperelliptic curve, every degree-four divisor D with h\u2070(O(D))\u22652 is linearly equivalent either to g\u00b9_2+p+q or to 2g\u00b9_2; consequently, fibrewise balance O(4)\u2295O(5) excludes all hyperelliptic geometric fibres."
+      }
+    ],
+    "engine": "codex",
+    "established_facts": [
+      {
+        "evidence": "SRC-0004, Lemma 10.6.",
+        "evidence_class": "source",
+        "statement": "For the Casnati\u2013Ekedahl convention W_f=(O(2)\u2297\u03b3*O(-f))|_C, one has deg(W_f)=4g+12-4f."
+      },
+      {
+        "evidence": "Substitution into W_5=(O(2)\u2297\u03b3*O(-5))|_C gives W_5\u2245\u03c9_C^2\u2297\u03b3*O(-1)=\u03c9_C^2(-D), followed by tensoring with \u03c9_C^{-1}.",
+        "evidence_class": "mechanical",
+        "statement": "Under the normalization O(1)|_C\u2245\u03c9_C\u2297\u03b3*O(2), one has W_5\u2245\u03c9_C^2(-D) and L:=W_5\u2297\u03c9_C^{-1}\u2245\u03c9_C(-D), where O_C(D)=\u03b3*O(1)."
+      },
+      {
+        "evidence": "FND-0142; the hyperelliptic-composed alternative is excluded by FND-0125.",
+        "evidence_class": "source",
+        "statement": "On a balanced genus-six fibre satisfying the normalization, h\u2070(O_C(D))=2, h\u2070(L)=3, and h\u00b9(L)=2."
+      },
+      {
+        "evidence": "The degree formula gives 4\u00b76+12\u22124\u00b75=16, and deg(L)=16\u2212deg(\u03c9_C)=16\u221210=6.",
+        "evidence_class": "mechanical",
+        "statement": "The numerical identities deg(W_5)=16 and deg(L)=6 hold when g=6 and f=5."
+      },
+      {
+        "evidence": "FND-0125 excludes the hyperelliptic-composed branch, and FND-0130 excludes plane-quintic projection pencils by their unbalanced Casnati\u2013Ekedahl relations.",
+        "evidence_class": "source",
+        "statement": "The line bundle L is base-point-free on the balanced locus after excluding both the hyperelliptic and plane-quintic alternatives for a genus-six g\u00b2_5."
+      },
+      {
+        "evidence": "CLM-0066-1 through CLM-0066-5 give the incidence and projective-bundle model; FND-0134 gives fibrewise nonemptiness and density of the reduced-support open.",
+        "evidence_class": "source",
+        "statement": "A constant-rank Abel\u2013Jacobi incidence with h\u2070(L)=3 is a P\u00b2-bundle, and its reduced-support locus is nonempty and dense in every geometric fibre in characteristic zero."
+      },
+      {
+        "evidence": "CLM-0065-3, CLM-0065-4, and CLM-0065-5.",
+        "evidence_class": "source",
+        "statement": "The canonical balanced filtration yields an intrinsic scheme-theoretic Fitting/Picard condition without requiring a global splitting."
+      },
+      {
+        "evidence": "FND-0141.",
+        "evidence_class": "source",
+        "statement": "Over a reduced locally Noetherian balanced normalized base, the ordered incidence locus inside Conf_6 is smooth of pure relative dimension two and is a regular immersion of codimension four."
+      },
+      {
+        "evidence": "FND-0064 and CLM-0066-6.",
+        "evidence_class": "source",
+        "statement": "The ordered-distinct-support cover of the reduced-support locus is a finite \u00e9tale S_6-torsor."
+      },
+      {
+        "evidence": "A permutation fixing every coordinate of an ordered tuple with distinct entries must be the identity.",
+        "evidence_class": "mechanical",
+        "statement": "The S_6-action on an ordered tuple of six pairwise-distinct points is free."
+      }
+    ],
+    "id": "DIGEST-0031",
+    "invalid_steps": [
+      {
+        "mathematical_reason": "The classification also permits the hyperelliptic form p+2g\u00b9_2, so the plane-quintic conclusion requires an additional hyperelliptic exclusion.",
+        "statement": "A genus-six g\u00b2_5 may be declared to arise from a plane quintic without separately excluding the hyperelliptic branch."
+      },
+      {
+        "mathematical_reason": "The Euler characteristic only forces h\u2070(L)\u22651 and hence nonemptiness of the full linear system; it does not ensure that any divisor in that system is reduced.",
+        "statement": "The equality \u03c7(L)=1 implies that the reduced-support part of |L| is nonempty on every fibre."
+      },
+      {
+        "mathematical_reason": "Reduced, pairwise-distinct support is an open condition; collisions and nonreduced divisors occur in its closed complement.",
+        "statement": "The reduced-support locus of a relative linear system is closed."
+      },
+      {
+        "mathematical_reason": "Equality on geometric points does not determine nilpotents, infinitesimal structure, or Fitting ideals; a scheme-theoretic identity is required.",
+        "statement": "A geometric-point correspondence between the Casnati\u2013Ekedahl condition and an Abel\u2013Jacobi condition proves equality of their scheme structures."
+      },
+      {
+        "mathematical_reason": "Jumping h\u2070 can prevent \u03c0_*L from being locally free and can break base change, so the naive projectivization need not model the relative linear system.",
+        "statement": "The relative incidence is always P(\u03c0_*L) even when h\u2070(L) jumps."
+      },
+      {
+        "mathematical_reason": "W_5 is the f=5 summand of (O(2)\u2297\u03b3*F\u2228)|_C; dualization, the O(2) twist, restriction, and the sign in \u03b3*O(-5) are essential.",
+        "statement": "W_5 is the O_{P\u00b9}(5) summand of the Casnati\u2013Ekedahl relation bundle F."
+      }
+    ],
+    "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+    "packet_sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+    "problem_key": "e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9",
+    "reusable_computations": [
+      {
+        "sha256": "07c9e28c62347585d8ae88c2007b2fa3745df309a93cd25ff58fc95c30002346",
+        "statement": "Arithmetic cross-check passes: deg W_5 = 2\u00b710\u22124 = 16 equals 4g+12\u22124f at g=6, f=5."
+      },
+      {
+        "sha256": "26063f528127871410f65d316b84a16086a2fc58f8a15900bc06eee133a9d789",
+        "statement": "Riemann\u2013Roch and Serre duality now give h\u00b9(L)=2 and h\u2070(L)=1+h\u00b9(L)=3."
+      },
+      {
+        "sha256": "2cfed4e3789dd03f1d9d786347bf486b661f28c1a47e27eb311734b5d63bd20c",
+        "statement": "constant codimension 6\u22122=4"
+      }
+    ],
+    "reviewer_engine": "codex",
+    "sanitized": true,
+    "schema_version": 1,
+    "source_lane": "geometry",
+    "source_subproblem_id": "C66-GEO-COMP",
+    "source_trace_id": "TRACE-0041",
+    "source_turn": "standard-fallback",
+    "target": {
+      "chow_codimension": 13,
+      "compact_cohomology_degree": 16,
+      "compact_tate_type": "Q(-8)",
+      "dimension": 21,
+      "g": 6,
+      "n": 6,
+      "open_bm_degree": 16,
+      "open_bm_tate_type": "Q(8)",
+      "open_bm_weight": -16,
+      "ordinary_cohomology_degree": 26,
+      "ordinary_tate_type": "Q(-13)",
+      "ordinary_weight": 26,
+      "poincare_twist": 21
+    },
+    "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+    "unresolved_dependencies": [
+      {
+        "statement": "An unconditional result requires establishing the relative-canonical normalization O(1)|_C\u2245\u03c9_C\u2297\u03b3*O(2), which is otherwise an explicit hypothesis."
+      },
+      {
+        "statement": "The hyperelliptic classification of degree-four special divisors and its implication that the balanced locus has no hyperelliptic fibres require an independent proof."
+      },
+      {
+        "statement": "The canonical balanced filtration, its Fitting/Picard identity, and the scheme-theoretic ordered/unordered Abel\u2013Jacobi comparison remain load-bearing inputs."
+      },
+      {
+        "statement": "Irreducibility of the base and the number of irreducible components of the ordered incidence locus are not determined."
+      },
+      {
+        "statement": "Full S_6 monodromy of the ordered-distinct-support torsor is not determined."
+      },
+      {
+        "statement": "Passage from the stack-level torsor to coarse moduli, including inertia and the distinction between Aut(C,\u0393) and Aut(C,\u03b3,\u0393), requires separate analysis."
+      },
+      {
+        "statement": "The absolute local-complete-intersection, Gysin, support, and Tate conclusions in M_{6,6} require additional arguments beyond relative smoothness and codimension."
+      },
+      {
+        "statement": "Nonreduced or stack bases, unbalanced Casnati\u2013Ekedahl strata, equation-bundle freeness, and positive characteristic are not covered by the stated geometric argument."
+      }
+    ]
+  },
+  "problem_key": "e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9",
+  "schema_version": 1,
+  "source_boundary": "Official subprocess output only; no provider-private session files or hidden chain-of-thought.",
+  "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+  "turn_kind": "trace-mining",
+  "validation_error": "trace miner must be cross-engine"
+}

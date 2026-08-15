@@ -1,0 +1,295 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "candidate_ideas": [
+    {
+      "requires_reproof": true,
+      "statement": "On a hyperelliptic curve every degree-four divisor with h^0 >= 2 is linearly equivalent either to g^1_2 + p + q, in which case the complete pencil has base points p, q and the induced map drops to degree two, or to 2 g^1_2, which is composed with the hyperelliptic map; hence every finite flat degree-four pencil on a hyperelliptic curve is hyperelliptic-composed, and a fibrewise balanced family has no hyperelliptic geometric fibres."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The hyperelliptic branch of the genus-six g^2_5 classification can be closed independently of the plane-quintic exclusion, so that base-point-freeness of L on the balanced locus does not require entering the plane-quintic case at all."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "Density of the distinct-support open in each P^2 fibre survives the non-birational case: when phi_L : C -> P^2 has degree greater than one onto its image, a general line still avoids the finitely many branch values and the singularities of the image, so the pullback consists of six pairwise-distinct points rather than merely a reduced divisor."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The projective-bundle model, the S_6-torsor structure, the relative smoothness, and the codimension-four regular immersion extend from a reduced locally Noetherian scheme base to an algebraic stack base with a smooth atlas, via smooth-locality of Grauert local freeness with base change, preservation of reducedness under smooth pullback in characteristic zero, and descent of the canonical Abel-Jacobi/projective-bundle identification along the atlas."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The number of irreducible components of the ordered failure locus over each component of the unordered model is [S_6 : H] for H the geometric monodromy image of the finite etale torsor, given a normality hypothesis on the base of the cover."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The geometric monodromy of the ordered incidence realizes the full symmetric group S_6, in particular contains a transposition arising at an identified occurrence locus."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The constancy statement h^0(omega_C(-D)) = 3 on the whole balanced locus is equivalent to the exclusion of balanced fibres carrying a tetragonal pencil that factors through a degree-two map, and more generally the exclusion of non-primitive degree-four pencils through a positive-genus intermediate curve remains a separate geometric question from the hyperelliptic-composed exclusion."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The balanced base of the family is irreducible, so that the component correspondence for the incidence, its distinct-support open, and the ordered cover reduces to a single component."
+    },
+    {
+      "requires_reproof": true,
+      "statement": "The balanced ordered failure model admits a well-defined morphism to M_{6,6} that is quasi-finite, and its image has an identifiable closure and absolute codimension; equivalently the tetragonal pencil gamma is recoverable from the degree-six bundle L = W_5 tensor omega_C^{-1} via L ~= omega_C(-D), so that the generically five-to-one ambiguity of g^1_4's on a general genus-6 curve is resolved."
+    }
+  ],
+  "engine": "claude",
+  "established_facts": [
+    {
+      "evidence": "Packet C66-001-v4, 'CE line-bundle convention' and 'Degree calculation' bullets, together with the primary locator excerpt SRC-0004 Lemma 10.6 (degree/Serre-duality calculation).",
+      "evidence_class": "source",
+      "statement": "With the Casnati-Ekedahl convention W_f := (O_{P(E^vee)}(2) tensor gamma^*O(-f))|_C for a degree-four cover gamma: C -> P^1, one has deg(W_f|_C) = 2(2g-2+4*2) - 4f = 4g+12-4f; at g=6 this gives deg W_4 = 20 and deg W_5 = 16."
+    },
+    {
+      "evidence": "Packet C66-001-v4, primary locator excerpt SRC-0004 Lemma 10.6, and adjudicated findings FND-0062, FND-0063, FND-0074.",
+      "evidence_class": "source",
+      "statement": "For a degree-n divisor Gamma on a genus-g fibre, deg(omega_C tensor W_f|_C^vee(Gamma)) = 2g-2-(4g+12-4f)+n = 4f+n-2g-14; substituting g=6 gives n-10 for f=4 and n-6 for f=5, so at n=6 the f=4 component has degree -4 and the f=5 component has degree 0."
+    },
+    {
+      "evidence": "Packet C66-001-v4, 'Six-point failure locus' bullet and adjudicated findings FND-0062 and FND-0063.",
+      "evidence_class": "source",
+      "statement": "On any smooth genus-6 degree-four cover with balanced relations bundle F = O(4) + O(5), the f=4 component of the evaluation obstruction bundle has negative degree, so H^0(omega_C tensor W_4^vee(Gamma)) = 0 identically and the entire obstruction is carried by the f=5 component; evaluation fails on a degree-six Gamma if and only if O_C(Gamma) is isomorphic to L := W_5 tensor omega_C^{-1}, a degree-six line bundle."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated finding FND-0105 (records deg(O_{P(E^vee)}(2)|_C) = 2(2g-2+4*2) from SRC-0004 Lemma 10.6 and the twist shift 4 deg A).",
+      "evidence_class": "source",
+      "statement": "Under the weak relative-canonical normalization O_{P(E^vee)}(1)|_C ~= omega_C tensor gamma^*O(2) tensor gamma^*A, the degree bookkeeping deg(O_{P(E^vee)}(1)|_C) = 2g+6 = deg(omega_C tensor gamma^*O(2)) forces deg A = 0, hence A ~= O_{P^1} and W_5 ~= omega_C^2(-D), L ~= omega_C(-D), M := omega_C^2 tensor W_5^vee ~= O_C(D), where O_C(D) = gamma^*O_{P^1}(1) has degree four."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated findings FND-0073 and FND-0103.",
+      "evidence_class": "source",
+      "statement": "On every smooth genus-6 fibre of a balanced degree-four family, M := omega_C^2 tensor W_5^vee has degree 4 and satisfies h^1(M) = h^0(omega_C tensor M^vee) = h^0(L) = 1 + h^0(M) >= 1, so M is always special; Clifford's theorem then gives h^0(M) <= deg(M)/2 + 1 = 3 with equality only for hyperelliptic C with M ~ 2 g^1_2. Consequently h^0(L) lies in {1,2,3,4} and never equals 5."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated finding FND-0125, verified in the model y^2 = f_14(x), z = x^2 (restriction H^0(Sym^2 E(-6)) -> H^0(6A) surjective onto the 7-dimensional space of degree-<=6 polynomials in x, kernel H^0(O(1))*(w^2 - z v^2) of dimension exactly 2).",
+      "evidence_class": "source",
+      "statement": "If C is hyperelliptic of genus 6 and gamma has degree 4, then gamma = q o h factors through the hyperelliptic double cover, E = O(1) + O(4) + O(4), and the relations bundle is exactly F = O(2) + O(7); this is incompatible with the balanced splitting F = O(4) + O(5)."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated findings FND-0139 and FND-0142.",
+      "evidence_class": "source",
+      "statement": "Under the balanced hypothesis together with the weak relative-canonical normalization, every geometric fibre satisfies h^0(O_C(D)) = 2, h^0(L) = 3 and h^1(L) = 2; the jump stratum with h^0(L) = 4 is empty, so the h^0 stratification of the relative degree-six linear system is constant on the balanced locus."
+    },
+    {
+      "evidence": "Arithmetic receipt: deg L = deg W_5 - (2g-2) = 16 - 10 = 6; chi(L) = 6 - 6 + 1 = 1; Clifford bound deg(D)/2 + 1 = 4/2 + 1 = 3; cross-check deg(omega_C^2(-D)) = 2*10 - 4 = 16 = deg W_5 at g=6, f=5.",
+      "evidence_class": "mechanical",
+      "statement": "The two-step derivation of the fibre dimensions is mechanical: h^1(L) = h^0(omega_C tensor L^{-1}) = h^0(O_C(D)) by Serre duality with L ~= omega_C(-D), and chi(L) = deg L - g + 1 = 6 - 6 + 1 = 1 gives h^0(L) = 1 + h^1(L); Clifford leaves h^0(O_C(D)) in {2,3} and the equality branch is the hyperelliptic-composed case excluded by the balanced splitting."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated finding FND-0130.",
+      "evidence_class": "source",
+      "statement": "A base point p of L = omega_C(-D) on a genus-6 curve would make L(-p) a g^2_5, forcing the smooth plane quintic case, whose tetragonal pencil is projection from that base point and has unbalanced CE relations splitting; hence L is base-point-free on every fibre of the balanced locus."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated finding FND-0134.",
+      "evidence_class": "source",
+      "statement": "On a balanced fibre satisfying the weak CE normalization, h^0(L) = 3 together with base-point-freeness yields a finite morphism phi_L : C -> P^2 with spanning image which, in characteristic zero, is separable onto its image; by Bertini a general line pulls back to six distinct points, so the reduced-support open of the closed Abel-Jacobi incidence is nonempty and dense in every fibre of the P^2-bundle."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated findings FND-0107 and FND-0047.",
+      "evidence_class": "source",
+      "statement": "For a line bundle L of relative degree d on a smooth proper curve family C/B, the functor of relative effective divisors Gamma with O(Gamma) ~= L is represented by the Abel-Jacobi fibre Sym^d(C/B) x_{Pic^d_{C/B}} B, which is closed because the relative Picard scheme is separated; on smooth curves Hilb^d = Sym^d since every length-d subscheme is Cartier. This model is correct over all of B, whereas Proj(pi_*L) has correct fibres only over the open where h^0(L) is constant."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated findings FND-0064 and FND-0075.",
+      "evidence_class": "source",
+      "statement": "The forgetful map from the relative ordered distinct configuration stack Conf_6(C/B) to the relative space of degree-six effective divisors is a finite etale S_6-torsor over the reduced-support open locus, and the deck action is free because a permutation fixing an ordered tuple of six pairwise-distinct points is the identity; with Q-coefficients S_6-invariants and S_6-coinvariants agree, so descent from the ordered to the unordered model is harmless rationally but is not available integrally or on the coarse space."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated finding FND-0141; relative-dimension receipt Conf_6(C/S) smooth of relative dimension 6 minus relative dimension 2 gives codimension 6 - 2 = 4.",
+      "evidence_class": "source",
+      "statement": "Over a reduced locally Noetherian base carrying a balanced family with the normalization hypothesis, the evaluation-failure scheme inside Conf_6(C/S) is S-smooth of pure relative dimension two (via its identification with the S_6-torsor of orderings of the reduced-support open of P_S(pi_*L)), and the closed immersion into Conf_6(C/S) is a regular immersion of pure codimension four with locally free rank-four conormal and locally split conormal sequence; the lci conclusion follows from S-smoothness of both schemes, not from any excess of actual over determinantal expected codimension."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated findings FND-0097 and FND-0099.",
+      "evidence_class": "source",
+      "statement": "In the filtered CE reduction 0 -> W_4 -> W -> W_5 -> 0, the identity Fit_0(coker phi) = Fit_0(coker phi_5) holds without any global splitting hypothesis, provided one cites the degree vanishings: exactness of pi_* requires R^1 pi_* W_4 = 0, which at (g,n) = (6,6) holds because deg W_4 = 20 > 2g-2 = 10, and coker(phi_4) = 0 requires H^1(W_4(-Gamma)) = 0, i.e. degree 14 > 10, plus commutation of the cokernel with base change."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated finding FND-0122.",
+      "evidence_class": "source",
+      "statement": "For the filtered balanced evaluation map at (g,n) = (6,6) with six pairwise-disjoint sections, every geometric fibre has rank(phi) in {11,12} and rank(phi_5) in {5,6}, because the cokernel is Serre-dual to H^0 of a degree-zero line bundle; consequently the deeper minor ideals satisfy I_11(phi) = I_5(phi_5) = O_B as ideal sheaves on any locally Noetherian base."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated finding FND-0096.",
+      "evidence_class": "source",
+      "statement": "The universal determinantal identity Fit_0(coker(p_*L_univ -> p_*(L_univ|_{Gamma_P}))) = I_e on C x_S Pic^0(C/S) holds for all g >= 1 and n >= 1, since deg L_univ = 2g-2+n > 2g-2 forces R^1 p_* = 0 with h^0 = g+n-1, and the intrinsic derivative at e is the perfect Serre pairing H^1(O) x H^0(omega) -> H^1(omega); the (6,6)-specificity of the CE identification enters only through the degree-zero condition 2g-2-deg W_5+n = 0."
+    },
+    {
+      "evidence": "Standard going-down for flat morphisms plus closedness and dimension preservation under finite morphisms; dimension receipt dim(V_alpha) = dim(S_alpha) + 2 from the P^2-bundle fibre dimension 2.",
+      "evidence_class": "mechanical",
+      "statement": "For a finite flat surjection, every irreducible component of the source dominates an irreducible component of the target and has the same dimension: going-down places the generic point of a source component over a generic point of the target, the finite image is closed and hence equals that component, and finite morphisms preserve dimension. Applied to the ordered S_6-cover of a dense open of a P^2-bundle over a base component S_alpha, this yields relative component dimension dim(S_alpha) + 2."
+    },
+    {
+      "evidence": "Packet C66-001-v4, adjudicated finding FND-0135.",
+      "evidence_class": "source",
+      "statement": "For a genus-6 curve admitting both a degree-2 map h and a degree-4 map gamma to P^1, Castelnuovo-Severi non-independence alone does not name the factorization; one must add that any common intermediate factor phi has degree dividing 2 and at least 2, hence phi = h up to automorphism of the target and gamma = q o h with deg q = 2."
+    }
+  ],
+  "id": "DIGEST-0032",
+  "invalid_steps": [
+    {
+      "mathematical_reason": "Where h^0(L) jumps, pi_*L does not commute with base change and Proj(pi_*L) has the wrong fibres; the construction is valid only over the open locus of constant h^0. The base-independent model is the Abel-Jacobi incidence Sym^6(C/B) x_{Pic^6(C/B)} B, closed by separatedness of the relative Picard scheme, and it agrees with Proj(pi_*L) only over that open.",
+      "statement": "Identifying the relative degree-six linear system with Proj(pi_*L) over an arbitrary base."
+    },
+    {
+      "mathematical_reason": "Fibrewise balancedness only supplies the relative Harder-Narasimhan filtration 0 -> W_4 -> W -> W_5 -> 0. A global splitting is an extra hypothesis: its obstruction is the extension class in Ext^1_{P^1_B}(L_4, L_5), which lies in H^1(B, gamma'_*O(1)) and need not vanish over a general base, while the fibrewise Ext vanishes so no local obstruction is visible.",
+      "statement": "Deducing a global direct-sum splitting W ~= W_4 + W_5 from fibrewise balancedness F_s ~= O(4) + O(5)."
+    },
+    {
+      "mathematical_reason": "Finiteness of Gamma gives only exactness of restriction to Gamma (the sequence is locally split, so it survives tensoring with O_Gamma) and exactness of pushforward along Gamma -> B. Surjectivity of pi_*W -> pi_*W_5 along the curve fibration is a separate vanishing statement R^1 pi_* W_4 = 0, which must be certified by a degree inequality deg W_4 > 2g-2 and rechecked whenever deg W_4 <= 2g-2.",
+      "statement": "Inferring exactness of pi_* on the filtration 0 -> W_4 -> W -> W_5 -> 0 from finiteness of Gamma over the base."
+    },
+    {
+      "mathematical_reason": "Grauert's criterion requires the base to be reduced. Over a nonreduced base, constant dimensions of the cohomology of a perfect two-term complex on geometric fibres do not imply locally free cohomology; a separate scheme-theoretic constant-rank or lifting argument is required.",
+      "statement": "Concluding local freeness of pi_*L and R^1 pi_*L, and arbitrary base change, from constancy of the fibre dimensions on geometric points over an arbitrary base."
+    },
+    {
+      "mathematical_reason": "Expected-codimension bookkeeping is neither necessary nor sufficient for regularity: a component of codimension below the determinantal expectation may still be locally cut out by a regular sequence of its actual codimension, and a nowhere-lci conclusion requires local ideal-depth or conormal calculations. The valid route is a closed immersion between schemes smooth over the base, whose codimension is the relative-dimension difference.",
+      "statement": "Deriving a local complete intersection or regular-immersion conclusion from a comparison between the actual codimension of a degeneracy locus and the generic determinantal expected codimension."
+    },
+    {
+      "mathematical_reason": "The balanced reduced-support model is only an open piece of the evaluation-failure locus; Gysin for (M_{6,6}, Z) requires a closed (stratified) embedding obtained after h^0 and splitting-type stratification. Openness of balancedness inside the tetragonal locus supplies neither closedness nor purity.",
+      "statement": "Treating the balanced reduced-support relative linear system as a closed pure-codimension-four subvariety of M_{6,6} and applying a Gysin morphism to the pair."
+    },
+    {
+      "mathematical_reason": "M_{6,6} forgets the pencil gamma, and a general genus-6 curve carries five distinct g^1_4's, so the underlying forgetful map is generically five-to-one; injectivity requires recovering gamma from L, whose only standard route is L ~= omega_C(-D), returning the pencil as |omega_C tensor L^{-1}|. Additionally, CE failure is a condition on the pair (C, gamma), not on a point of M_{6,6}, so the target of the claimed monomorphism is not well-defined without a stack-level full-faithfulness argument.",
+      "statement": "Asserting that the balanced CE failure model maps monomorphically into an evaluation-failure locus in M_{6,6} while disclaiming the identification L ~= omega_C(-D)."
+    },
+    {
+      "mathematical_reason": "The canonical torsor is I -> I^{red-supp} and its reduced form is I_red -> (I^{red-supp})_red; reducing only the source generally destroys flatness over nonreduced bases, so the finite etale torsor property is lost.",
+      "statement": "Passing from the ordered configuration model to the unordered divisor model by reducing only the source, i.e. forming I_red -> I^{red-supp}."
+    },
+    {
+      "mathematical_reason": "A connected finite etale cover of a connected locally Noetherian base need not be irreducible; connectedness and irreducibility diverge on non-normal bases, so the [S_6 : H] component formula requires normality or an independent geometric-irreducibility argument.",
+      "statement": "Upgrading the count of pi_1^etale-orbits (connected components of the finite etale S_6-cover) to a count of irreducible components without a normality hypothesis on the base."
+    },
+    {
+      "mathematical_reason": "That argument computes Aut(C, gamma, Gamma), automorphisms of the tetragonal cover preserving the divisor, whereas the group relevant to M_{6,6} is Aut(C, Gamma). An automorphism of C preserving Gamma need not preserve the pencil, and triviality of the kernel is not formal, since a nontrivial automorphism of a genus-6 curve can fix as many as 2g+2 = 14 points and hence can fix six marked points.",
+      "statement": "Proving a stabilizer or inertia clause by observing that an automorphism induces a PGL_2 transformation of P^1 fixing the marked images, and then quoting the clause for the forgetful map to M_{6,6}."
+    },
+    {
+      "mathematical_reason": "The cokernel is globally the pullback of R^1 pi_* L tensored by the convention-dependent tautological line M_univ determined by O(D_univ) = L tensor pi^*M_univ; the fibrewise isomorphism with H^1(L_b) requires a choice of trivialization of the one-dimensional M_univ fibre and does not yield an untwisted Hodge-bundle isomorphism, so excess and Chern-class computations must retain the line twist or prove it trivial.",
+      "statement": "Identifying the excess cokernel along the ordered etale incidence over the projective bundle with the pullback of R^1 pi_* L without a twist."
+    },
+    {
+      "mathematical_reason": "The formula is stratum-dependent; substituting one fixed value of dim(H_k) across all strata contradicts the separately established bound on the deeper stratum's dimension, so the resulting dimension estimates are internally inconsistent.",
+      "statement": "Using a single stratum dimension for every stratum in the formula dim(I|_{H_k}) = dim(H_k) + k - 1."
+    },
+    {
+      "mathematical_reason": "A positive bound on fibre dimension over a stratum is compatible with positive-dimensional fibres there; quasi-finiteness requires zero-dimensional fibres over every point, and stratum-by-stratum statements of mixed strength do not assemble into a global finiteness statement.",
+      "statement": "Concluding that a forgetful morphism has finite fibres or is quasi-finite from injectivity over one stratum together with a bound on fibre dimension over another."
+    },
+    {
+      "mathematical_reason": "Rational irreducibility of the representations of the deck group does not constrain the geometric monodromy of the tetragonal family or the configuration-space coefficients, and a finite pushforward of the constant sheaf may contain non-Tate local systems; rational averaging preserves an already established Tate structure but cannot create one.",
+      "statement": "Concluding pure-Tate cohomology of the failure locus from rationality of the irreducible representations of S_6 or from a finite branch morphism of the Hurwitz stack to an open of a moduli of pointed rational curves."
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+  "problem_key": "e736001e0f54f25f61cd2ff68456485abeb7147c295cdd97cc01548bd37577e9",
+  "reusable_computations": [
+    {
+      "sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+      "statement": "deg(W_f|_C) = 2(2g-2+4*2) - 4f = 4g+12-4f; at g=6, deg W_4 = 4*6+12-16 = 20 and deg W_5 = 4*6+12-20 = 16."
+    },
+    {
+      "sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+      "statement": "deg L = deg(W_5 tensor omega_C^{-1}) = 16 - (2g-2) = 16 - 10 = 6 at g=6, hence chi(L) = deg L - g + 1 = 6 - 6 + 1 = 1 and h^0(L) = 1 + h^1(L)."
+    },
+    {
+      "sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+      "statement": "deg(omega_C tensor W_f|_C^vee(Gamma)) = 4f+n-2g-14; at g=6 this is n-10 for f=4 and n-6 for f=5, so at n=6 the values are -4 and 0 respectively, and for n <= 5 both are negative."
+    },
+    {
+      "sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+      "statement": "deg M = deg(omega_C^2 tensor W_5^vee) = 2(2g-2) - (4g+12-4f)|_{g=6,f=5} = 20 - 16 = 4, with h^0(L) = 1 + h^0(M) and Clifford bound h^0(M) <= deg(M)/2 + 1 = 3."
+    },
+    {
+      "sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+      "statement": "deg(omega_C^2(-D)) = 2(2g-2) - 4 = 20 - 4 = 16 = deg W_5 at g=6, and a twist by gamma^*A shifts this by 4 deg A, forcing deg A = 0 and A ~= O_{P^1}."
+    },
+    {
+      "sha256": "0deccb2fe5d10286d701e2ab366f8bbe7155d739ea52334deb173e58556c890b",
+      "statement": "Under the balanced hypothesis with the weak relative-canonical normalization: h^0(O_C(D)) = 2, h^1(L) = h^0(omega_C tensor L^{-1}) = h^0(O_C(D)) = 2, and h^0(L) = 1 + h^1(L) = 3 on every geometric fibre."
+    },
+    {
+      "sha256": "0deccb2fe5d10286d701e2ab366f8bbe7155d739ea52334deb173e58556c890b",
+      "statement": "Relative dimension bookkeeping over the base: the ordered configuration space of six points has relative dimension 6, the P^2-bundle model and its distinct-support open have relative dimension 2, hence the closed immersion has constant codimension 6 - 2 = 4 with locally free conormal of rank 4, and each component of the ordered cover has dimension dim(S_alpha) + 2."
+    },
+    {
+      "sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+      "statement": "Fibrewise rank bounds for the filtered balanced evaluation at (g,n) = (6,6) with six pairwise-disjoint sections: rank(phi) in {11,12} and rank(phi_5) in {5,6}, so I_11(phi) = I_5(phi_5) = O_B."
+    },
+    {
+      "sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+      "statement": "Hyperelliptic degree-four model y^2 = f_14(x), z = x^2: the restriction H^0(Sym^2 E(-6)) -> H^0(6A) is surjective onto the 7-dimensional space of degree-<=6 polynomials in x with kernel H^0(O(1))*(w^2 - z v^2) of dimension exactly 2, forcing relations splitting type (2,7) rather than (4,5)."
+    }
+  ],
+  "reviewer_engine": "claude",
+  "sanitized": true,
+  "schema_version": 1,
+  "source_attribution_confidence": "artifact",
+  "source_lane": "geometry",
+  "source_subproblem_id": "C66-GEO-COMP",
+  "source_task_id": "TASK-C66-M-003",
+  "source_trace_id": "TRACE-0041",
+  "source_turn": "standard-fallback",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+  "unresolved_dependencies": [
+    {
+      "statement": "Irreducibility of the balanced base of the family, and consequently the number of irreducible components of the ordered evaluation-failure locus, are undetermined; the component correspondence only transports components of the base to components of the incidence and its distinct-support open."
+    },
+    {
+      "statement": "The geometric monodromy image of the finite etale S_6-cover is unknown: neither fullness of S_6, nor the existence of a transposition, nor the occurrence loci are established, and converting connected components of the cover into irreducible components additionally requires normality of the base."
+    },
+    {
+      "statement": "The projective-bundle model, regular immersion, and torsor statements are proved only over a reduced locally Noetherian base; the extension to nonreduced bases (where Grauert fails) and to algebraic stack bases with a smooth atlas is not carried out."
+    },
+    {
+      "statement": "The stabilizer groups Aut(C, Gamma) and Aut(C, gamma, Gamma) are not determined, nor is the relation between them, so moduli inertia and any stack-level full-faithfulness statement remain open."
+    },
+    {
+      "statement": "No morphism from the balanced ordered model to M_{6,6} is constructed, and its faithfulness, quasi-finiteness, closedness, image closure, and absolute codimension are all undetermined; in particular no closed pure-codimension-four embedding, lci, or Gysin statement inside M_{6,6} is available."
+    },
+    {
+      "statement": "The unbalanced CE strata are unconstructed: the evaluation-failure locus off the balanced splitting locus, and any closure point of the balanced locus lying outside it, are not exhibited, so non-closedness of the balanced model and the exhaustiveness of the component/stabilizer/codimension analysis of the full failure locus are not established."
+    },
+    {
+      "statement": "The weak relative-canonical normalization remains an explicit hypothesis rather than a discharged fact; either a cited CE relative-canonical normalization must be added as a source line or every downstream clause must stay conditionalized on it."
+    },
+    {
+      "statement": "Whether a non-primitive degree-four pencil factoring through a positive-genus intermediate curve can have balanced CE splitting is unresolved; only the hyperelliptic-composed case is excluded by the relations-splitting computation."
+    },
+    {
+      "statement": "All Hodge, weight, purity, and Tate consequences remain untreated: no cohomological, motivic, or compactification statement about the exact lowest-weight target follows from the relative geometry, and the pure-Tate statement for the codimension-13 contribution supported on the failure locus is not addressed."
+    },
+    {
+      "statement": "Positive characteristic is untreated: the distinct-support density argument uses characteristic-zero separability and Bertini, and would fail in small positive characteristic."
+    },
+    {
+      "statement": "Descent of any cohomological or weight computation from the ordered model to the unordered one is available only rationally (S_6-invariants equal coinvariants with Q-coefficients); integral-coefficient and coarse-space versions require independent justification."
+    }
+  ]
+}

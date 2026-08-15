@@ -1,0 +1,147 @@
+{
+  "attempt_id": "ATT-0094",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0094-1",
+      "note": "Reconstructed: (N) gives O(1)|_C \u2245 \u03c9\u2297\u03b3*O(2), so with the SRC-0004 convention W_f=(O(2)\u2297\u03b3*O(-f))|_C one gets W_5 \u2245 \u03c9\u00b2(-D) and L \u2245 \u03c9(-D), deg D=4. Clifford gives h\u2070(O(D))\u22643; equality would force C hyperelliptic with D\u223c2g\u00b9\u2082 and the given pencil hyperelliptic-composed, contradicting fibrewise balance O(4)\u2295O(5) via FND-0125 (relations O(2)\u2295O(7)). Riemann\u2013Roch plus Serre duality then give h\u2070(L)=1+h\u2070(O(D))=3 and h\u00b9(L)=h\u2070(O(D))=2. Arithmetic cross-check passes: deg W_5 = 2\u00b710\u22124 = 16 equals 4g+12\u22124f at g=6, f=5.",
+      "statement": "Under (BAL)+(N), every geometric fibre has L\u2245\u03c9(-D), h\u2070(O(D))=2, h\u2070(L)=3, and h\u00b9(L)=2; hence the h\u2070=4 stratum is empty.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0094-2",
+      "note": "Constant fibre dimensions h\u2070=3, h\u00b9=2 over a reduced base give local freeness and base change by Grauert; the incidence identification is the twice-confirmed ATT-0066 input (CLM-0066-4,5), used within its recorded scope. A Zariski-locally trivial bundle with irreducible fibre P\u00b2 over an irreducible base component is irreducible, so components of I are exactly the inverse images of components of S.",
+      "statement": "Over reduced S, the closed Abel\u2013Jacobi incidence is a P\u00b2-bundle I\u2245P_S((\u03c0_*L)^\u2228), and its irreducible components correspond to those of S.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0094-3",
+      "note": "A base point p would make L(-p) a g\u00b2\u2085. The hyperelliptic branch of the genus-six g\u00b2\u2085 classification is already excluded because every degree-four pencil on a hyperelliptic curve is hyperelliptic-composed (hence barred by (BAL)+FND-0125), so the plane-quintic exclusion FND-0130 applies and contradicts balance. Given base-point-freeness, |L_s| defines a morphism to P\u00b2; in characteristic zero a general hyperplane avoids the finitely many branch values and singularities of the (possibly non-birational) image, so the pullback is six distinct points even when the morphism has degree >1 onto its image. Hence V_s is a nonempty dense open of |L_s|\u2245P\u00b2. The argument correctly does not rely on \u03c7(L)=1.",
+      "statement": "L is fibrewise base-point-free, and the distinct-support open V is nonempty and dense in every P\u00b2 fibre.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0094-4",
+      "note": "Scheme-theoretic equality of ideals on Conf\u2086 is the twice-confirmed ATT-0065/ATT-0066 input (Fitting/Picard identity plus ordered distinct-support comparison), used within recorded scope. The universal divisor over V is finite \u00e9tale of degree six by construction of the distinct-support open, so its frame scheme is an S\u2086-torsor under the constant group. Freeness of the deck action is immediate: a permutation fixing an ordered tuple of six pairwise-distinct points is the identity. The claim is a torsor claim (valid at stack level) and makes no coarse-moduli quotient assertion.",
+      "statement": "On Conf\u2086, Z_ev is scheme-theoretically the ordered incidence over V, and Z_ev\u2192V is a finite \u00e9tale S\u2086-torsor with free deck action.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0094-5",
+      "note": "V is S-smooth of relative dimension two as an open of a P\u00b2-bundle; finite \u00e9tale base change preserves smoothness, so Z_ev is S-smooth of relative dimension two. Conf\u2086(C/S) is S-smooth of relative dimension six (open of C\u2076_S with diagonals removed). A closed immersion between S-smooth schemes is a regular immersion, and pure relative dimensions give constant codimension 6\u22122=4 with locally free conormal of rank four. No determinantal expected-codimension argument is invoked.",
+      "statement": "Z_ev\u2192S is smooth of pure relative dimension two, and Z_ev\u21aaConf\u2086(C/S) is a regular immersion of pure codimension four with locally free rank-four conormal.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0094-6",
+      "note": "Finite flat maps satisfy going-down, so the generic point of a component of Z_ev maps to a generic point of V; the finite image is closed and contains that generic point, hence equals the component V_\u03b1. Finite maps preserve dimension, giving dim(S_\u03b1)+2. The explicit refusal to count components of Z_ev is honest scoping, not a gap in the stated theorem.",
+      "statement": "Every irreducible component of Z_ev maps finitely and surjectively onto an irreducible component V_\u03b1 and has dimension dim(S_\u03b1)+2 whenever S_\u03b1 is finite-dimensional.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2025-06-01",
+  "finding_candidates": [
+    {
+      "key": "balanced-normalized-locus-has-no-hyperelliptic-fibers",
+      "rationale": "Reusable scope fact closing the hyperelliptic branch of the genus-six g^2_5 classification before the plane-quintic exclusion FND-0130 is applied in ATT-0094 step 3; it also yields non-hyperellipticity of the balanced normalized locus for any later monodromy, stabilizer, or dimension argument. Candidate only; may overlap the recorded scope of FND-0125 and requires independent adjudication before promotion.",
+      "statement": "On a hyperelliptic curve every base-point-free pencil of degree four factors through the hyperelliptic double cover: a degree-four divisor with h^0 >= 2 is linearly equivalent to g^1_2 + p + q, in which case the complete pencil has base points p, q and the induced map has degree two, or to 2 g^1_2, which is composed. Consequently a family satisfying the ATT-0094 hypotheses (fibrewise balanced F_s \u2245 O(4)\u2295O(5) together with FND-0125) has no hyperelliptic geometric fibres.",
+      "status": "candidate"
+    }
+  ],
+  "id": "REV-0145",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "expected": "Let k be a characteristic-zero field and S a reduced locally Noetherian k-scheme. Let \u03c0:C\u2192S be a smooth proper family of geometrically connected genus-six curves equipped with a finite flat degree-four map \u03b3:C\u2192P\u00b9_S, the standard degree-four\u2026",
+      "field": "theorem_statement",
+      "previous": "Let k be a characteristic-zero field and S a reduced locally Noetherian k-scheme. Let \u03c0:C\u2192S be a smooth proper family of geometrically connected genus-six curves equipped with a finite flat degree-four map \u03b3:C\u2192P\u00b9_S, the standard degree-four\u2026",
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "57e0078ec829da03339c5a9389b7618e34aa87b41722c3394cd73fb6ff120145",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Used only for the scheme-theoretic Fitting/Picard ideal identity on Conf\u2086 and the canonical balanced filtration, within its recorded scope. Recorded as confirmed by REV-0108 and REV-0109; treated as an established campaign input (confirmation reviews not re-read in this isolated workspace).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Recorded first confirmation of ATT-0065. Non-load-bearing beyond attesting the ATT-0065 input; not independently re-read.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Recorded second confirmation of ATT-0065 (nonreduced Fitting and smooth-atlas caveats). Non-load-bearing beyond attesting the ATT-0065 input; not independently re-read.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Used for the closed Abel\u2013Jacobi incidence, the reduced constant-h\u2070 projective-bundle model, and the scheme-theoretic ordered distinct-support comparison (CLM-0066-1..6), within recorded scope. Recorded as confirmed by REV-0110 and REV-0116; treated as an established campaign input.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Recorded first confirmation of ATT-0066. Non-load-bearing beyond attesting the ATT-0066 input; not independently re-read.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Recorded second confirmation of ATT-0066 (reduced-base, filtration-orientation, and stack/coarse limitations). Non-load-bearing beyond attesting the ATT-0066 input; not independently re-read.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "CE convention W_f=(O(2)\u2297\u03b3*O(-f))|_C and degree formula deg(W_f)=4g+12-4f. Used only to compute W_5\u2245\u03c9\u00b2(-D) and deg W_5=16 at g=6, f=5; arithmetic cross-checked against the theorem's degree-16 hypothesis and against deg(\u03c9\u00b2(-D))=2\u00b710\u22124=16.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0105",
+      "note": "Weak relative-canonical normalization (N) is retained as an explicit hypothesis of the reviewed theorem rather than invoked as a theorem; the dependency is discharged by hypothesis.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0125",
+      "note": "Adjudicated finding, used within its stated scope in step 1: hyperelliptic-composed degree-four covers have relations splitting O(2)\u2295O(7), contradicting the fibrewise balance hypothesis O(4)\u2295O(5), which eliminates the Clifford-equality branch h\u2070(O(D))=3.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0130",
+      "note": "Adjudicated finding, used within its stated scope in step 3 to exclude base points of L via the unbalanced plane-quintic projection case. The hyperelliptic branch of the g\u00b2\u2085 classification, which the proof leaves implicit before invoking FND-0130, is independently closed because every degree-four pencil on a hyperelliptic curve is hyperelliptic-composed (see strongest_attack and the finding candidate).",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0094-P1",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Binding pre-check first: TASK.json and ATT-0094 agree on packet_id C66-001-v4, packet_sha256 57e0078e\u2026, packet_binding_sha256 76cc8a6d\u2026, the full target dictionary, and a verbatim theorem_statement. Strongest attack: try to break CLM-0094-3 (fibrewise base-point-freeness and the dense distinct-support open), because the P\u00b2-bundle model, the S\u2086-torsor structure, relative smoothness, and the codimension-four regular immersion all depend on it. Prong 1: the g\u00b2\u2085 classification invoked through FND-0130 has a hyperelliptic branch; if a balanced fibre were hyperelliptic, a base point of L could produce a g\u00b2\u2085 of the form p+2g\u00b9\u2082 without ever reaching the plane-quintic case, bypassing FND-0130. This attack fails, but only via a reduction the proof leaves implicit: on a hyperelliptic curve any degree-four divisor with h\u2070\u22652 is linearly equivalent to g\u00b9\u2082+p+q (whose complete pencil has base points p,q and whose induced map drops to degree two) or to 2g\u00b9\u2082 (composed), so every finite flat degree-four pencil is hyperelliptic-composed and is already excluded by FND-0125 together with the balance hypothesis O(4)\u2295O(5). Prong 2: even given base-point-freeness, Bertini must yield fully distinct support, not merely reducedness, when the morphism C_s\u2192P\u00b2 given by |L_s| is not birational (e.g. a double cover of a cubic); in characteristic zero a general line avoids the finitely many branch values and singularities of the image, so the pullback is six distinct points, but this would fail in small positive characteristic \u2014 the theorem correctly assumes characteristic zero. Outcome: both prongs fail to refute; CLM-0094-1..6 hold within the stated reduced characteristic-zero scheme-base scope. The motive-side attacks listed in the prompt (stack versus coarse moduli, rational versus integral coefficients, cohomology versus Borel\u2013Moore degree, Poincar\u00e9/Tate twists, Gysin/K\u00fcnneth shifts, spectral-sequence differentials, invariants versus coinvariants, semisimplification, predicted motives, pure-Tate upgrades, omitted stable pairs) have no grip because the theorem asserts no cohomological, motivic, compactification, or M_{6,6} statement, and the attempt records resolves_exact_target=false; confirming this lemma does not verify RED-0001 or any entry of the target dictionary. Evidence limitation: the packet body, the confirmation reviews REV-0108/0109/0110/0116, and the adjudicated findings FND-0105/0125/0130 were not re-read in this isolated workspace and no live web evidence was available; dependency verdicts rest on the attempt's recorded dependency metadata plus my independent reconstruction of every load-bearing step.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be a characteristic-zero field and S a reduced locally Noetherian k-scheme. Let \u03c0:C\u2192S be a smooth proper family of geometrically connected genus-six curves equipped with a finite flat degree-four map \u03b3:C\u2192P\u00b9_S, the standard degree-four Casnati\u2013Ekedahl resolution, fibrewise balanced relations bundle F_s\u2245O(4)\u2295O(5), its canonical filtration with quotient W_5 of degree 16, and the weak relative-canonical normalization (N). Put L=W_5\u2297\u03c9_{C/S}^{-1}, let I=Hilb\u2076(C/S)\u00d7_{Pic\u2076(C/S)}S be the Abel\u2013Jacobi incidence over [L], let V=I^{dist} be its distinct-support open, and let Z_ev\u2282Conf\u2086(C/S) be the intrinsic evaluation-failure scheme. Then every geometric fibre has h\u2070(L_s)=3 and h\u00b9(L_s)=2; I\u2245P_S((\u03c0_*L)^\u2228) is a P\u00b2-bundle; V is nonempty and dense in every fibre; and Z_ev is scheme-theoretically the ordered incidence over V. The morphism Z_ev\u2192V is a finite \u00e9tale S\u2086-torsor with free deck action, Z_ev\u2192S is smooth of pure relative dimension two, and Z_ev\u21aaConf\u2086(C/S) is a regular immersion of pure codimension four with locally free conormal of rank four. Irreducible components of I and V correspond to irreducible components of S; every irreducible component of Z_ev maps finitely and surjectively onto one component of V and, over a finite-dimensional component S_\u03b1, has dimension dim(S_\u03b1)+2. No count of the components of Z_ev is asserted.",
+  "verdict": "confirmed"
+}
