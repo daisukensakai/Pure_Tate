@@ -1,0 +1,111 @@
+{
+  "argument_markdown": "## Source-backed inputs\n\nATT-0065, confirmed by REV-0108 and REV-0109, supplies the canonical filtered balanced CE quotient W5 and the scheme-theoretic identification of the intrinsic evaluation-failure locus on Conf6 with the relative-triviality/Abel\u2013Jacobi incidence (CLM-0065-4, CLM-0065-5 and CLM-0065-9). ATT-0066, confirmed by REV-0110 and REV-0116, supplies the global Abel\u2013Jacobi model and the stack-level finite \u00e9tale S6 ordering torsor on distinct support (CLM-0066-5 and CLM-0066-6). ATT-0086, confirmed by REV-0135 and REV-0138, excludes the balanced h0(L)=4 stratum. ATT-0088, confirmed by REV-0139 and REV-0142, gives under (CE)+(BAL)+(N) the identities L\u2245omega_C(-D), h0(O_C(D))=2 and h0(L)=3, fibrewise nonemptiness of the reduced-support open, and, over a reduced base, the P2-bundle, smoothness, surjectivity, relative dimension two, and component-dimension statements (CLM-0088-1, CLM-0088-3, CLM-0088-5 and CLM-0088-8). The sign convention for W5 is the SRC-0004 convention already checked in those artifacts.\n\n## Proved steps\n\nFirst, the cited inputs identify I with the projectivization of the rank-three bundle pi_*L on the reduced base H. Thus I\u2192H is a P2-bundle. Its distinct-support locus U meets every geometric fibre and is open and dense there. The ordering morphism Z\u2192U is a finite \u00e9tale S6-torsor, while ATT-0088 identifies Z with the intrinsic Fitting failure scheme and proves Z\u2192H smooth and surjective of pure relative dimension two. The component domination and formula dim T=dim H_alpha+2 are therefore exactly CLM-0088-8.\n\nFor the component count, let V be connected and normal and choose a geometric base point. Identifying one fibre of the S6-torsor with S6, \u00e9tale monodromy acts by translations through a subgroup H_V\u2282S6. Its orbits are the cosets of H_V, so there are [S6:H_V] connected components, each of degree |H_V|. A finite \u00e9tale cover of a normal scheme is normal; the irreducible components of a locally Noetherian normal scheme are open and closed. Hence each connected component is irreducible, proving the stated irreducible-component count and dimension formula. No value of H_V is inferred.\n\nNow fix a geometric point z=(C,gamma,x1,\u2026,x6) and put Gamma=sum xi. Let D be a fibre divisor of gamma. The normalization and CLM-0088-1 give L\u2245omega_C(-D), while membership in Z gives O_C(Gamma)\u2245L. Therefore\n\nomega_C(-Gamma)\u2245O_C(D)=gamma^*O_{P1}(1).\n\nBy CLM-0088-3, h0(O_C(D))=2. Pullback gives an injective map H0(P1,O(1))\u2192H0(C,O_C(D)); both sides have dimension two, so it is an isomorphism. Thus gamma is precisely the morphism defined by the complete pencil |omega_C(-Gamma)|. Any second balanced normalized cover producing the same ordered pointed curve and satisfying the incidence condition is defined by the same complete pencil and therefore differs from gamma by a unique target automorphism. Uniqueness follows from surjectivity of gamma.\n\nIf alpha\u2208Aut(C,x1,\u2026,x6), functoriality of omega_C and alpha(Gamma)=Gamma give an action on H0(C,omega_C(-Gamma)). Projectivizing supplies a target automorphism beta with beta\u2218gamma=gamma\u2218alpha. It is unique because gamma is surjective. Conversely every automorphism of the cover forgets to an automorphism of the ordered pointed curve. Hence Aut(C,gamma,x1,\u2026,x6)\u2192Aut(C,x1,\u2026,x6) is an isomorphism. This proves both uniqueness of the geometric source object over a pointed curve and triviality of relative inertia; it does not assert either absolute stabilizer is trivial.\n\nThe inertia criterion for morphisms of algebraic stacks now makes u representable by algebraic spaces. Recovery over every algebraically closed extension makes the representable morphism universally injective. Since u is of finite type and every geometric fibre has at most one point, it is quasi-finite. For an irreducible component T, the dimension theorem for quasi-finite finite-type morphisms gives dim closure(u(T))=dim T. Combining this with dim T=dim H_alpha+2 yields the final conditional dimension statement; when dim H_alpha=15, the image closure has dimension 17 and hence codimension 21-17=4 in M_{6,6}.\n\n## Computational hypotheses\n\nNone. No finite experiment, point count, or computational sample is used.\n\n## Remaining gaps and exact-target boundary\n\nThe weak normalization (N) remains an explicit hypothesis. Irreducibility, normality, and dimension 15 of the global balanced Hurwitz base are not proved, and the subgroup H_V is not computed. Universal injectivity plus inertia control is not promoted to full faithfulness on arbitrary base schemes or to a monomorphism. The image is not proved closed, pure, regular, or exhaustive of unbalanced evaluation failure. Therefore no Gysin, Hodge, weight, purity, Tate-support, or Tate-assembly conclusion follows, and RED-0001 remains unresolved.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0096-1",
+      "justification": "This is the combination of the scheme-theoretic incidence identification from ATT-0065/REV-0108/REV-0109 with CLM-0088-5 and CLM-0088-8 from ATT-0088/REV-0139/REV-0142.",
+      "statement": "Over the reduced balanced normalized Hurwitz stack, the ordered failure incidence is smooth and surjective of pure relative dimension two; each component dominates a Hurwitz component and has dimension two larger.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0096-2",
+      "justification": "Monodromy orbits on the fibre S6 are cosets of H_V. They classify connected components of the finite \u00e9tale cover; normality makes connected components irreducible.",
+      "statement": "For a connected normal base V, the irreducible components of the ordered S6-torsor are the monodromy cosets: their number is [S6:H_V], and each has degree |H_V| over V.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0096-3",
+      "justification": "The identities O(Gamma)=L=omega(-D) give omega(-Gamma)=O(D). Since h0(O(D))=2, the pullback of H0(P1,O(1)) is the complete two-dimensional section space. Recovery and the automorphism comparison follow by projectivizing this canonical section space.",
+      "statement": "For every geometric balanced normalized failure point, |omega_C(-Gamma)| is the complete pencil defining gamma, and Aut(C,gamma,x1,\u2026,x6)\u2192Aut(C,x1,\u2026,x6) is an isomorphism.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0096-4",
+      "justification": "CLM-0096-3 gives injective geometric isomorphism classes and trivial relative inertia. The stack inertia criterion gives representability, the geometric-point criterion gives universal injectivity, finite type plus zero-dimensional geometric fibres gives quasi-finiteness, and the quasi-finite dimension theorem gives equality of dimensions.",
+      "statement": "The forgetful morphism u:Z\u2192M_{6,6} is representable by algebraic spaces, universally injective, and quasi-finite; every component image closure has the same dimension as its source component.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [],
+  "id": "ATT-0096",
+  "lane": "geometry",
+  "methods_used": [
+    "balanced-casnati-ekedahl-filtered-incidence",
+    "complete-linear-series-pencil-recovery",
+    "stack-inertia-representability-criterion",
+    "finite-etale-torsor-monodromy-orbits",
+    "quasi-finite-dimension-formula"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "The fibrewise pencil-recovery identity is upgraded to an exact geometric inertia calculation and to representable, universally injective, quasi-finite behavior of the forgetful morphism, without claiming unproved full faithfulness on arbitrary families.",
+    "The finite \u00e9tale ordering cover receives an exact irreducible-component formula over every connected normal base in terms of the actual, still-unknown monodromy subgroup."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "b25177da9b31ffb5e8fcf8aedc1c1c8267e318997330b6a6257ec53be520e39a",
+  "proof_dependencies": [
+    "ATT-0065",
+    "REV-0108",
+    "REV-0109",
+    "ATT-0066",
+    "REV-0110",
+    "REV-0116",
+    "ATT-0086",
+    "REV-0135",
+    "REV-0138",
+    "ATT-0088",
+    "REV-0139",
+    "REV-0142"
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "The balanced normalized marked curve determines its tetragonal pencil. This gives an exact geometric stabilizer comparison and makes the forgetful map representable, universally injective, and quasi-finite, while the ordered-cover components over a normal base are counted by monodromy cosets. The unknown Hurwitz components and monodromy image prevent a numerical global component count.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "base": "An algebraically closed characteristic-zero field; H is assumed reduced and of finite type. The component count in clause (2) retains connectedness and normality.",
+    "g": 6,
+    "generality": "The relative P2 geometry and smoothness are asserted only over the reduced balanced normalized Hurwitz stack. Pencil recovery, geometric-fibre uniqueness, and inertia comparison hold after every algebraically closed field extension. The quasi-finite conclusion uses that u is a finite-type morphism between finite-type algebraic stacks.",
+    "hypotheses": "(CE), (BAL), and the weak normalization (N) are explicit hypotheses. H is the moduli stack of covers modulo target isomorphism and carries no auxiliary choices whose scalars would create extra inertia. Z is the ordered distinct-support intrinsic evaluation-failure incidence.",
+    "n": 6,
+    "not_covered": "Nonreduced bases; unbalanced splitting strata; irreducibility or dimension 15 of H; computation of H_V or full S6 monodromy; full faithfulness on arbitrary families or a stack monomorphism; triviality of Aut(C,x1,\u2026,x6); closedness or component purity of the image; identification with the full evaluation-failure locus in M_{6,6}; closure through unbalanced strata; regular embedding or Gysin theory in M_{6,6}; Hodge, weight, purity, Tate, coarse-space, integral-coefficient, or positive-characteristic conclusions."
+  },
+  "theorem_statement": "Let k be algebraically closed of characteristic zero. Let H be the reduced finite-type algebraic Hurwitz stack whose objects are smooth genus-six finite-flat degree-four covers gamma:C\u2192P of a P1-bundle, modulo isomorphism of the target, satisfying (CE) the standard degree-four Casnati\u2013Ekedahl resolution, (BAL) fibrewise F\u2245O(4)\u2295O(5), and (N) the weak relative-canonical normalization used in ATT-0066 and ATT-0088. No target coordinates, splitting of F, normalization isomorphism, or trivialization of an Abel\u2013Jacobi equality is included as object data. Let W5 be the canonical degree-16 quotient, L=W5\u2297omega^{-1}, I the degree-six Abel\u2013Jacobi incidence for L, U\u2282I its distinct-support open, and Z=Ord(U) the ordered incidence, equivalently the intrinsic balanced CE evaluation-failure scheme on Conf6. Then: (1) I\u2192H is a P2-bundle, U\u2192H and Z\u2192H are smooth and surjective of pure relative dimension two, and Z\u2192U is a finite \u00e9tale S6-torsor. Every irreducible component T of Z dominates an irreducible component H_alpha of H and dim T=dim H_alpha+2. (2) If V is a connected normal component of U and H_V\u2282S6 is the image of the monodromy representation of Z_V\u2192V, then Z_V has exactly [S6:H_V] irreducible components; each is finite \u00e9tale of degree |H_V| over V and has dimension dim V. (3) The forgetful morphism u:Z\u2192M_{6,6} recovers the tetragonal pencil on every geometric point: for z=(C,gamma,x1,\u2026,x6), with Gamma=sum xi, the complete pencil |omega_C(-Gamma)| is gamma up to a unique target isomorphism. Consequently Aut(C,gamma,x1,\u2026,x6)\u2192Aut(C,x1,\u2026,x6) is an isomorphism, and every geometric fibre of u has either no object or one isomorphism class with trivial relative automorphism group. (4) Hence u is representable by algebraic spaces, universally injective, and quasi-finite. For each irreducible component T\u2282Z, dim closure(u(T))=dim T; in particular, if its dominated Hurwitz component has dimension 15, then closure(u(T)) has dimension 17 and codimension 4 in M_{6,6}. No monomorphism on arbitrary families, closed-immersion, purity, lci, Gysin, or numerical monodromy assertion is made."
+}

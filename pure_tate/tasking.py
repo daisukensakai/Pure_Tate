@@ -90,6 +90,7 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
     from .artifacts import load_artifacts
     from .campaigns import (
         campaign_packet_record,
+        campaign_quarantined_attempt_ids,
         campaign_route_policy_errors,
         load_campaign,
         load_campaign_attempts,
@@ -102,11 +103,13 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
     packet.pop("_text")
     attempts = load_campaign_attempts(campaign_id)
     reviews = load_artifacts("reviews")
+    quarantined_attempt_ids = campaign_quarantined_attempt_ids(campaign_id)
     verified_dependencies: Dict[str, Dict[str, Any]] = {}
     for attempt in reversed(attempts):
         subproblem_id = attempt.get("subproblem_id")
         if (
             not isinstance(subproblem_id, str)
+            or attempt.get("id") in quarantined_attempt_ids
             or subproblem_id in verified_dependencies
             or not attempt_is_complete(attempt)
             or not packet_binding_matches(attempt, campaign_id)
@@ -180,6 +183,17 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
                 dependency_id, {}
             ).get("artifacts", [])
         ]
+        context_dependency_ids = list(
+            subproblem.get("context_dependencies", [])
+        )
+        context_inputs = [
+            artifact
+            for dependency_id in context_dependency_ids
+            for artifact in verified_dependencies.get(
+                dependency_id, {}
+            ).get("artifacts", [])
+        ]
+        own_verification = verified_dependencies.get(subproblem["id"])
         tasks.append(
             {
                 "id": "TASK-C66-M-%03d" % ordinal,
@@ -199,7 +213,9 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
                 "input_packet": packet["packet_path"],
                 "blocked_routes": campaign["blocked_routes"],
                 "new_input_declared": [],
-                "input_artifacts": dependency_inputs + experiment_inputs,
+                "input_artifacts": (
+                    dependency_inputs + context_inputs + experiment_inputs
+                ),
                 "dependency_artifacts": {
                     dependency_id: verified_dependencies[
                         dependency_id
@@ -207,6 +223,23 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
                     for dependency_id in dependency_ids
                     if dependency_id in verified_dependencies
                 },
+                "context_artifacts": {
+                    dependency_id: verified_dependencies[
+                        dependency_id
+                    ]["attempt_id"]
+                    for dependency_id in context_dependency_ids
+                    if dependency_id in verified_dependencies
+                },
+                "verified_attempt_id": (
+                    own_verification["attempt_id"]
+                    if own_verification is not None
+                    else None
+                ),
+                "verification_artifacts": (
+                    own_verification["artifacts"]
+                    if own_verification is not None
+                    else []
+                ),
                 "blocked_dependencies": missing_dependencies,
                 "route_policy": (
                     "A blocked route may appear in methods_used only when new_inputs "
@@ -215,7 +248,11 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
                 "prompt": "prompts/CAMPAIGN_MATHEMATICS.md",
                 "output": "proof/attempts/ATT-####.json",
                 "status": (
-                    "ready" if not missing_dependencies else "blocked"
+                    "verified"
+                    if own_verification is not None
+                    else (
+                        "ready" if not missing_dependencies else "blocked"
+                    )
                 ),
                 "created_on": datetime.date.today().isoformat(),
             }

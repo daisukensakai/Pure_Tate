@@ -1,0 +1,69 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-15T06:22:14.387160+00:00",
+  "engine_pools": {
+    "prover": [
+      "codex"
+    ],
+    "research": [
+      "grok",
+      "claude"
+    ],
+    "review": [
+      "cursor-grok",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 909,
+      "completed_at": "2026-08-15T06:22:14.385563+00:00",
+      "engine": "codex",
+      "engine_pid": 85270,
+      "engine_process_group": 85270,
+      "error": "agent failed with exit 1: WARNING: proceeding, even though we could not create PATH aliases: Operation not permitted (os error 1)\n2026-08-15T06:22:14.098814Z  WARN codex_state::runtime: failed to open state db at /Users/ken/.codex/state_5.sqlite: failed to open state DB at /Users/ken/.codex/state_5.sqlite: error returned from database: (code: 8) attempt to write a readonly database\n2026-08-15T06:22:14.099772Z  WARN codex_rollout::state_db: failed to initialize state runtime: failed to initialize state runtime at /Users/ken/.codex: failed to open state DB at /Users/ken/.codex/state_5.sqlite: error returned from database: (code: 8) attempt to write a readonly database: error returned from database: (code: 8) attempt to write a readonly database: (code: 8) attempt to write a readonly database\nReading additional input from stdin...\nError: failed to initialize in-process app-server client: Operation not permitted (os error 1)",
+      "last_activity_at": "2026-08-15T06:22:14.115944+00:00",
+      "last_activity_stream": "stderr",
+      "output": "proof/attempts/ATT-0095.json",
+      "phase": "mathematics",
+      "processes": [
+        {
+          "engine_pid": 85270,
+          "engine_process_group": 85270,
+          "started_at": "2026-08-15T06:22:13.853562+00:00",
+          "supervisor_pid": 85269,
+          "supervisor_process_group": 85269
+        }
+      ],
+      "started_at": "2026-08-15T06:22:13.820179+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 85269,
+      "task_id": "TASK-C66-M-003",
+      "working_context": {
+        "archive": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-ARCHIVE-C66-GEO-COMP-f123fd74b0768c04.md",
+          "sha256": "f123fd74b0768c04eb5320f1f2ab81077f5e39709a17e5a2ed8002f6c85ab9c8"
+        },
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-C66-GEO-COMP-eb3f329e199827d1.md",
+          "sha256": "eb3f329e199827d1710a633496094bc7ee8209289a14dba34ce8eb597f512ee9"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-C66-GEO-COMP-1388414fee671eb7.md",
+          "sha256": "1388414fee671eb7591c59b88cfa364e9b19f66480157b84c8e895c0e35ad091"
+        },
+        "subproblem_id": "C66-GEO-COMP"
+      }
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 85197,
+  "parent_process_group": 85197,
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260815T062211218736Z-85197",
+  "schema_version": 2,
+  "started_at": "2026-08-15T06:22:11.218736+00:00",
+  "status": "stopped",
+  "stop_reason": "engine_failure"
+}

@@ -142,6 +142,11 @@ def _campaign_reviews(campaign_id: str) -> List[Dict[str, Any]]:
 
 def _load_bearing_experiments(campaign_id: str) -> List[Dict[str, Any]]:
     attempts = load_campaign_attempts(campaign_id)
+    verified_subproblems = {
+        task["subproblem_id"]
+        for task in campaign_mathematics_tasks(campaign_id)
+        if task.get("status") == "verified"
+    }
     declared = {
         experiment_id
         for attempt in attempts
@@ -152,6 +157,7 @@ def _load_bearing_experiments(campaign_id: str) -> List[Dict[str, Any]]:
         task
         for task in experiment_tasks(campaign_id)
         if task["experiment_id"] in declared
+        and task.get("subproblem_id") not in verified_subproblems
     ]
 
 
@@ -461,6 +467,10 @@ def _next_due_forced_task(
     slots share one stable high-tier chain: one after start three and the
     partner after start six.
     """
+    if not campaign.get("paired_attempt_policy", {}).get(
+        "forced_proof_enabled", True
+    ):
+        return None
     ordinary = _current_ordinary_proof_count(str(campaign["id"]))
     due_slots = ordinary // 3
     forced = _current_forced_attempts(str(campaign["id"]))
@@ -659,6 +669,59 @@ def _drive_campaign_unlocked(
                     },
                 ]
             )
+        # Live runs place blocking and ordinary finding audits ahead of new
+        # mathematics. The preview must expose the same paid work rather than
+        # misleadingly reporting an empty plan.
+        planned_findings: Set[str] = set()
+        next_faud_number = 1
+        existing_faud = [
+            path.stem
+            for path in (ROOT / "research" / "finding-audits").glob(
+                "FAUD-*.json"
+            )
+        ]
+        if existing_faud:
+            next_faud_number = max(
+                int(item.split("-")[-1])
+                for item in existing_faud
+                if item.split("-")[-1].isdigit()
+            ) + 1
+        audit_tasks = finding_audit_tasks(campaign_id)
+        audit_tasks.sort(
+            key=lambda item: (
+                not _finding_audit_is_blocking(item),
+                item["id"],
+            )
+        )
+        eligible_research = _eligible_research_pool(
+            research_engines, "finding-audit", dry_run=True
+        )
+        for task in audit_tasks:
+            if len(preview) >= steps:
+                break
+            finding_id = str(task.get("finding_id"))
+            if finding_id in planned_findings:
+                continue
+            excluded = set(task.get("excluded_engines", []))
+            engine = next(
+                (item for item in eligible_research if item not in excluded),
+                None,
+            )
+            if engine is None:
+                continue
+            preview.append(
+                {
+                    "phase": "finding-audit",
+                    "task_id": task["id"],
+                    "engine": engine,
+                    "condition": "always",
+                    "output": "research/finding-audits/FAUD-%04d.json"
+                    % next_faud_number,
+                    "packet_sha256": task["packet_sha256"],
+                }
+            )
+            next_faud_number += 1
+            planned_findings.add(finding_id)
         # Ordinary cell mathematics (after reviews / paired due work).
         planned_math: Set[str] = set()
         # Seed with historical engines so exhausted ladders preview as fresh
@@ -677,7 +740,7 @@ def _drive_campaign_unlocked(
             task = _math_task(
                 campaign_id,
                 exclude_task_ids=planned_math,
-                retry=False,
+                retry=retry,
             )
             if task is None:
                 break

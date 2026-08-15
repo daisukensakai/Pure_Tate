@@ -8,6 +8,7 @@
   "goal": "Resolve the exact (6,6) open input as Tate or exhibit a surviving non-Tate summand.",
   "paired_attempt_policy": {
     "revision": 2,
+    "forced_proof_enabled": false,
     "engine_order": ["claude", "codex"],
     "exact_theorem": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group."
   },
@@ -37,7 +38,7 @@
   "subproblems": [
     {"id": "C66-GEO-Z", "lane": "geometry", "title": "Construct and identify the evaluation-failure locus Z", "dependencies": []},
     {"id": "C66-GEO-H0", "lane": "geometry", "title": "Stratify the relative degree-six linear system by h0", "dependencies": ["C66-GEO-Z"]},
-    {"id": "C66-GEO-COMP", "lane": "geometry", "title": "Determine components, dimensions, stabilizers, and finite-cover behavior", "dependencies": ["C66-GEO-Z", "C66-GEO-H0"]},
+    {"id": "C66-GEO-COMP", "lane": "geometry", "title": "Determine components, dimensions, stabilizers, and finite-cover behavior", "dependencies": ["C66-GEO-Z", "C66-GEO-H0"], "context_dependencies": ["C66-COMP-RANK", "C66-COMP-COMP"]},
     {"id": "C66-TATE-SUPPORT", "lane": "weakest-sufficient-proof", "title": "Prove Tate type for the exact codimension-13 contribution supported on Z", "dependencies": ["C66-GEO-COMP"]},
     {"id": "C66-TATE-ASSEMBLY", "lane": "weakest-sufficient-proof", "title": "Assemble the tetragonal contribution into the exact lowest-weight target", "dependencies": ["C66-TATE-SUPPORT"]},
     {"id": "C66-CEX-LOCAL", "lane": "counterexample", "title": "Search Z for a non-Tate local system or motivic summand", "dependencies": ["C66-GEO-COMP"]},

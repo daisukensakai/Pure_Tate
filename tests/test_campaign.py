@@ -423,6 +423,7 @@ class FocusedCampaignTests(unittest.TestCase):
 
     def test_forced_slots_open_after_ordinary_starts_three_and_six(self):
         campaign = load_campaign("C66-001")
+        campaign["paired_attempt_policy"]["forced_proof_enabled"] = True
         packet = campaign_packet_record("C66-001")
         with mock.patch(
             "pure_tate.campaign_driver._current_ordinary_proof_count",
@@ -523,10 +524,10 @@ class FocusedCampaignTests(unittest.TestCase):
     def test_campaign_dag_blocks_unverified_dependencies(self):
         tasks = campaign_mathematics_tasks("C66-001")
         by_subproblem = {task["subproblem_id"]: task for task in tasks}
-        self.assertEqual(by_subproblem["C66-GEO-Z"]["status"], "ready")
+        self.assertEqual(by_subproblem["C66-GEO-Z"]["status"], "verified")
         # Dual-confirmed GEO-Z and GEO-H0 discharge the early geometry chain, so
         # GEO-COMP is executable. Downstream Tate/CEX cells still wait on COMP.
-        self.assertEqual(by_subproblem["C66-GEO-H0"]["status"], "ready")
+        self.assertEqual(by_subproblem["C66-GEO-H0"]["status"], "verified")
         self.assertEqual(
             by_subproblem["C66-GEO-H0"].get("blocked_dependencies") or [],
             [],
@@ -536,11 +537,50 @@ class FocusedCampaignTests(unittest.TestCase):
             by_subproblem["C66-GEO-COMP"].get("blocked_dependencies") or [],
             [],
         )
+        self.assertEqual(
+            by_subproblem["C66-GEO-COMP"]["context_artifacts"],
+            {
+                "C66-COMP-COMP": "ATT-0086",
+                "C66-COMP-RANK": "ATT-0088",
+            },
+        )
+        geo_comp_inputs = {
+            item.get("id")
+            for item in by_subproblem["C66-GEO-COMP"]["input_artifacts"]
+        }
+        self.assertTrue(
+            {"ATT-0086", "REV-0135", "REV-0138"}.issubset(
+                geo_comp_inputs
+            )
+        )
+        self.assertTrue(
+            {"ATT-0088", "REV-0139", "REV-0142"}.issubset(
+                geo_comp_inputs
+            )
+        )
         self.assertEqual(by_subproblem["C66-TATE-SUPPORT"]["status"], "blocked")
         self.assertEqual(
             by_subproblem["C66-TATE-SUPPORT"]["blocked_dependencies"],
             ["C66-GEO-COMP"],
         )
+        self.assertEqual(by_subproblem["C66-COMP-RANK"]["status"], "verified")
+        self.assertEqual(
+            by_subproblem["C66-COMP-RANK"]["verified_attempt_id"],
+            "ATT-0088",
+        )
+        self.assertEqual(by_subproblem["C66-COMP-COMP"]["status"], "verified")
+        self.assertEqual(
+            by_subproblem["C66-COMP-COMP"]["verified_attempt_id"],
+            "ATT-0086",
+        )
+        from pure_tate.campaigns import campaign_quarantined_attempt_ids
+
+        quarantined = campaign_quarantined_attempt_ids("C66-001")
+        self.assertNotIn("ATT-0088", quarantined)
+        self.assertIn("ATT-0089", quarantined)
+        from pure_tate.campaign_driver import _load_bearing_experiments
+
+        self.assertEqual(_load_bearing_experiments("C66-001"), [])
         report = campaign_status("C66-001")
         self.assertIn(
             "C66-TATE-SUPPORT requires C66-GEO-COMP",
@@ -553,6 +593,15 @@ class FocusedCampaignTests(unittest.TestCase):
         self.assertNotIn(
             "C66-GEO-H0 requires C66-GEO-Z",
             report["unresolved_proof_dependencies"],
+        )
+        self.assertEqual(
+            report["dag_progress"]["verified_subproblems"],
+            [
+                "C66-COMP-COMP",
+                "C66-COMP-RANK",
+                "C66-GEO-H0",
+                "C66-GEO-Z",
+            ],
         )
         # Lemma double-confirms must not mark the full RED-0001 case verified.
         self.assertFalse(report["case_verification"]["case_verified"])
@@ -840,27 +889,13 @@ class FocusedCampaignTests(unittest.TestCase):
                 review_engines=["claude", "grok", "codex"],
                 dry_run=True,
             )
-        # Dry-run exposes the deterministic Opus/GPT forced pair sequence,
-        # then any remaining slots may fill with ordinary mathematics (including
-        # fresh-rotation re-entry once a cell's retry ladder is exhausted).
-        self.assertGreaterEqual(result["executed_steps"], 4)
-        self.assertGreaterEqual(len(result["events"]), 4)
-        self.assertEqual(result["events"][0]["phase"], "forced-proof")
-        self.assertEqual(
-            result["events"][0]["task_id"], "TASK-C66-001-FORCED-FULL"
-        )
-        self.assertEqual(
-            [event["phase"] for event in result["events"][:4]],
-            [
-                "forced-proof",
-                "standard-fallback",
-                "forced-proof",
-                "standard-fallback",
-            ],
-        )
-        self.assertEqual(
-            [event["engine"] for event in result["events"][:4]],
-            ["claude", "claude", "codex", "codex"],
+        # This campaign explicitly disables full-theorem forced turns. The
+        # dry-run must expose only ordinary DAG work even when periodic slots
+        # would otherwise be due.
+        self.assertEqual(result["executed_steps"], len(result["events"]))
+        self.assertLessEqual(result["executed_steps"], 12)
+        self.assertTrue(
+            all(event["phase"] != "forced-proof" for event in result["events"])
         )
         after = {
             path: path.read_bytes()

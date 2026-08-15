@@ -332,6 +332,39 @@ def _binding_migration(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
     return value if isinstance(value, dict) else {}
 
 
+def campaign_revision_migration(
+    campaign_id: str = DEFAULT_CAMPAIGN,
+) -> Dict[str, Any]:
+    """Load the migration ledger governing the campaign's current revision."""
+    campaign = load_campaign(campaign_id)
+    path = (
+        ROOT
+        / "proof"
+        / "migrations"
+        / (
+            "campaign-%s-v%s.json"
+            % (campaign_id, campaign["campaign_revision"])
+        )
+    )
+    if not path.is_file():
+        return {}
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
+def campaign_quarantined_attempt_ids(
+    campaign_id: str = DEFAULT_CAMPAIGN,
+) -> Set[str]:
+    migration = campaign_revision_migration(campaign_id)
+    attempts = migration.get("attempts", {})
+    if not isinstance(attempts, dict):
+        return set()
+    return {str(attempt_id) for attempt_id in attempts}
+
+
 def packet_binding_matches(
     artifact: Dict[str, Any], campaign_id: str = DEFAULT_CAMPAIGN
 ) -> bool:
@@ -403,10 +436,18 @@ def render_campaign_packet(campaign_id: str = DEFAULT_CAMPAIGN) -> str:
     lines.extend(["", "## Subproblem graph", ""])
     for item in campaign["subproblems"]:
         dependencies = ", ".join(item.get("dependencies", [])) or "none"
+        context_dependencies = ", ".join(
+            item.get("context_dependencies", [])
+        )
         lines.append(
             "- `%s` (%s): %s. Dependencies: %s."
             % (item["id"], item["lane"], item["title"], dependencies)
         )
+        if context_dependencies:
+            lines.append(
+                "  Verified supporting context (non-blocking): %s."
+                % context_dependencies
+            )
     lines.extend(["", "## Adjudicated findings", ""])
     if visible:
         for finding in visible:
@@ -759,11 +800,9 @@ def campaign_status(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
     # has not advanced a single node, which is how a frozen pipeline stayed
     # invisible. Report advancement and packet identity directly.
     verified_subproblems = sorted(
-        {
-            dependency
-            for task in math_tasks
-            for dependency in task.get("dependency_artifacts", {})
-        }
+        task["subproblem_id"]
+        for task in math_tasks
+        if task.get("status") == "verified"
     )
     dag_progress = {
         "verified": len(verified_subproblems),

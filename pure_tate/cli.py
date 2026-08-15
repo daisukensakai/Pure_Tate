@@ -481,13 +481,16 @@ def command_board(args: argparse.Namespace) -> int:
 
 def command_next(args: argparse.Namespace) -> int:
     config, _target, sources, claims, _edges = _load()
-    if args.campaign:
+    if args.phase == "micro-research":
+        # Micro-research tasks belong to the global claim ledger rather than
+        # to a focused campaign DAG. Accepting --campaign must not route this
+        # advertised phase into next_campaign_task(), which does not own it.
+        tasks = micro_research_tasks(claims)
+        task = tasks[0] if tasks else None
+    elif args.campaign:
         task = next_campaign_task(
             args.campaign, args.phase, retry=args.retry
         )
-    elif args.phase == "micro-research":
-        tasks = micro_research_tasks(claims)
-        task = tasks[0] if tasks else None
     else:
         task = next_task(
             args.phase, config, claims, sources, retry=args.retry

@@ -1,0 +1,159 @@
+{
+  "attempt_id": "ATT-0096",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "META-PACKET-HASH",
+      "note": "TASK and attempt agree on packet_id C66-001-v4, packet_sha256 b25177da9b31ffb5e8fcf8aedc1c1c8267e318997330b6a6257ec53be520e39a, packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7, campaign/subproblem identifiers, and the target dictionary.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0096-1",
+      "note": "The P2-bundle model, smoothness/surjectivity/pure relative dimension two, the ordering torsor as a stacky S6-torsor, and domination/dimension formula are supported by the cited ATT-0065/ATT-0066/ATT-0088 chain together with packet findings FND-0134, FND-0139, FND-0142 and the smooth-local stack descent observation in FND-0127. The separate irreducible-component/degree formula over a normal stack is treated under CLM-0096-2.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0096-2",
+      "note": "The proof argues as if V were a normal scheme: it uses that a finite \u00e9tale cover of a normal scheme is normal and that connected components of a normal locally Noetherian scheme are open and closed. But V is a connected normal component of U, and U is an algebraic stack over the Hurwitz stack H. The attempt gives no smooth-atlas/coarse-space descent, no proof that Z_V\u2192V is representable, and no exclusion of inertia acting on orderings. For a stacky finite \u00e9tale S6-torsor, the subgroup H_V alone does not automatically yield the stated irreducible-component count and degree |H_V| without controlling stacky inertia or passing to a normal scheme atlas. This leaves clause (2) unresolved.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0096-3",
+      "note": "Pencil recovery is sound on geometric points: O_C(Gamma)\u2245L, weak normalization gives L\u2245omega_C(-D), hence omega_C(-Gamma)\u2245O_C(D)=gamma^*O(1); h^0(O_C(D))=2 by FND-0142, so the pullback H^0(P1,O(1))\u2192H^0(C,O_C(D)) is an isomorphism. This addresses the FND-0137/FND-0098 attack because the recovered pencil is the intrinsic complete linear series |omega_C(-Gamma)|, not an auxiliary chosen subspace.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0096-4",
+      "note": "Given CLM-0096-3, geometric fibres of u have at most one isomorphism class and trivial relative inertia. The standard DM inertia criterion gives representability by algebraic spaces; geometric uniqueness in characteristic zero gives universal injectivity; finite type plus zero-dimensional geometric fibres gives quasi-finiteness; the quasi-finite dimension theorem gives dim closure(u(T))=dim T. This clause does not depend on the unresolved stacky component formula in clause (2).",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-06-16",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate; remains candidate until independently corroborated",
+      "key": "stacky-s6-torsor-component-formula",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "objects": [
+          "Z",
+          "U",
+          "V",
+          "H_V"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "severity": "high",
+      "statement": "For a finite \u00e9tale S6-ordering torsor Z_V\u2192V over a connected normal algebraic stack V, the scheme-theoretic component formula '[S6:H_V] irreducible components, each of degree |H_V|' is not valid without an additional representability/inertia-free hypothesis or a descent argument through a normal scheme atlas/coarse space controlling stack inertia. Stack inertia can act on the ordered fibre, so monodromy orbits alone do not establish irreducible components or stacky degrees.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0146",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "b25177da9b31ffb5e8fcf8aedc1c1c8267e318997330b6a6257ec53be520e39a",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Supplies the filtered/canonical W5 quotient and the scheme-theoretic incidence identification needed for clauses (1) and (3); consistent with packet findings FND-0046, FND-0097, FND-0099.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Cited prior confirmation of ATT-0065. No packet-visible adverse finding contradicts it. Used only to accept ATT-0065.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Cited prior confirmation of ATT-0065. No packet-visible adverse finding contradicts it. Used only to accept ATT-0065.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "ATT-0066 supplies the Abel\u2013Jacobi model and S6 ordering torsor. However, as used for CLM-0096-2 over a connected normal component V of the stack U, it does not discharge the stacky irreducible-component/degree formula. FND-0127 flags that scheme-to-stack descent must be recorded; FND-0132 shows normality is load-bearing for irreducibility, but neither supplies the needed stack-inertia/coarse descent argument for the component count.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Cited prior confirmation of ATT-0066 in its stated scope. It does not by itself cure the unresolved stacky component-formula use in CLM-0096-2.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Cited prior confirmation of ATT-0066 in its stated scope. It does not by itself cure the unresolved stacky component-formula use in CLM-0096-2.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0086",
+      "note": "Excludes the balanced h^0(L)=4 jump stratum; compatible with FND-0103, FND-0139, FND-0142.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0135",
+      "note": "Cited prior confirmation of ATT-0086. No packet-visible adverse finding contradicts it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0138",
+      "note": "Cited prior confirmation of ATT-0086. No packet-visible adverse finding contradicts it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0088",
+      "note": "Supplies L\u2245omega_C(-D), h^0(O_C(D))=2, h^0(L)=3, fibrewise nonemptiness of the reduced-support open, and the reduced-base P2/smooth/relative-dimension-two statements. Stack-base extension for these clauses is smooth-local per FND-0127.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0139",
+      "note": "Cited prior confirmation of ATT-0088. No packet-visible adverse finding contradicts it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0142",
+      "note": "Cited prior confirmation of ATT-0088. No packet-visible adverse finding contradicts it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Packet excerpt supplies the CE degree/Serre-duality convention used upstream. No cohomological or Tate conclusion in ATT-0096 depends on extending this source beyond that convention.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0096-P1",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: stack versus coarse/representability in clause (2). H and U are algebraic stacks, not schemes, and the ordered incidence Z\u2192U can inherit stacky stabilizers from automorphisms of the pointed cover. The proof of CLM-0096-2 explicitly uses facts about finite \u00e9tale covers of normal schemes and then concludes irreducible components and degrees over V from the monodromy subgroup H_V. For a stacky S6-torsor this is not automatic: inertia may act on orderings, the cover need not be representable over V, and the number/degree of irreducible components requires a normal scheme atlas, coarse-space descent, or an explicit inertia-free hypothesis. ATT-0096 supplies none of these. Outcome: the attack succeeds at Pass 1 and makes CLM-0096-2 unresolved. Secondary attacks on pencil recovery, Aut comparison, universal injectivity, and dimension formula fail: the recovery uses the intrinsic complete pencil |omega_C(-Gamma)|, h^0 constancy and weak normalization are packet-corroborated, and the lemma explicitly disclaims Gysin, purity, Tate, closed-immersion, and stable-pair assertions.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be algebraically closed of characteristic zero. Let H be the reduced finite-type algebraic Hurwitz stack whose objects are smooth genus-six finite-flat degree-four covers gamma:C\u2192P of a P1-bundle, modulo isomorphism of the target, satisfying (CE) the standard degree-four Casnati\u2013Ekedahl resolution, (BAL) fibrewise F\u2245O(4)\u2295O(5), and (N) the weak relative-canonical normalization used in ATT-0066 and ATT-0088. No target coordinates, splitting of F, normalization isomorphism, or trivialization of an Abel\u2013Jacobi equality is included as object data. Let W5 be the canonical degree-16 quotient, L=W5\u2297omega^{-1}, I the degree-six Abel\u2013Jacobi incidence for L, U\u2282I its distinct-support open, and Z=Ord(U) the ordered incidence, equivalently the intrinsic balanced CE evaluation-failure scheme on Conf6. Then: (1) I\u2192H is a P2-bundle, U\u2192H and Z\u2192H are smooth and surjective of pure relative dimension two, and Z\u2192U is a finite \u00e9tale S6-torsor. Every irreducible component T of Z dominates an irreducible component H_alpha of H and dim T=dim H_alpha+2. (2) If V is a connected normal component of U and H_V\u2282S6 is the image of the monodromy representation of Z_V\u2192V, then Z_V has exactly [S6:H_V] irreducible components; each is finite \u00e9tale of degree |H_V| over V and has dimension dim V. (3) The forgetful morphism u:Z\u2192M_{6,6} recovers the tetragonal pencil on every geometric point: for z=(C,gamma,x1,\u2026,x6), with Gamma=sum xi, the complete pencil |omega_C(-Gamma)| is gamma up to a unique target isomorphism. Consequently Aut(C,gamma,x1,\u2026,x6)\u2192Aut(C,x1,\u2026,x6) is an isomorphism, and every geometric fibre of u has either no object or one isomorphism class with trivial relative automorphism group. (4) Hence u is representable by algebraic spaces, universally injective, and quasi-finite. For each irreducible component T\u2282Z, dim closure(u(T))=dim T; in particular, if its dominated Hurwitz component has dimension 15, then closure(u(T)) has dimension 17 and codimension 4 in M_{6,6}. No monomorphism on arbitrary families, closed-immersion, purity, lci, Gysin, or numerical monodromy assertion is made.",
+  "verdict": "incomplete"
+}
