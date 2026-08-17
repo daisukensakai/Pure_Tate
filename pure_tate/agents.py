@@ -442,6 +442,18 @@ def build_isolated_context(task: Dict[str, Any], destination: Path) -> List[str]
         take("data/claims.jsonl")
         take("data/sources.jsonl")
         take("research/finding-audits/FINDING_AUDIT_TEMPLATE.json")
+        # The adjudicator must inspect the evidence that originated the
+        # candidate, not merely its ledger summary.  Without these artifacts a
+        # second engine can only repeat the first reviewer's wording and cannot
+        # provide independent corroboration.
+        finding = task.get("finding")
+        if isinstance(finding, dict):
+            for attempt_id in finding.get("source_attempt_ids", []) or []:
+                if isinstance(attempt_id, str) and attempt_id:
+                    take("proof/attempts/%s.json" % attempt_id)
+            for review_id in finding.get("source_review_ids", []) or []:
+                if isinstance(review_id, str) and review_id:
+                    take("proof/reviews/%s.json" % review_id)
     elif phase == "novelty":
         take(str(task.get("input_attempt", "")))
         take("research/novelty-audits/NOVELTY_TEMPLATE.json")
@@ -855,7 +867,23 @@ def _engine_argv(
         command.append(prompt)
         return apply_workers_to_argv(command, "cursor", workers)
     if family == "qwen":
-        reasoning_effort = config.get("reasoning_effort", "xhigh")
+        phase_overrides = config.get("phase_overrides", {})
+        phase_config = (
+            phase_overrides.get(phase, {})
+            if isinstance(phase_overrides, dict) and isinstance(phase, str)
+            else {}
+        )
+        if not isinstance(phase_config, dict):
+            phase_config = {}
+        reasoning_effort = phase_config.get(
+            "reasoning_effort", config.get("reasoning_effort", "xhigh")
+        )
+        max_output_tokens = phase_config.get(
+            "max_output_tokens", config.get("max_output_tokens", 65536)
+        )
+        thinking_budget = phase_config.get(
+            "thinking_budget", config.get("thinking_budget", 65536)
+        )
         command = [
             sys.executable,
             str((Path(__file__).with_name("qwen_worker.py")).resolve()),
@@ -864,9 +892,9 @@ def _engine_argv(
             "--prompt",
             prompt,
             "--max-tokens",
-            str(config.get("max_output_tokens", 65536)),
+            str(max_output_tokens),
             "--thinking-budget",
-            str(config.get("thinking_budget", 65536)),
+            str(thinking_budget),
             "--reasoning-effort",
             str(reasoning_effort),
         ]

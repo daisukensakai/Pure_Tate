@@ -73,11 +73,22 @@ class RoutingTests(unittest.TestCase):
         )
         self.assertEqual(command[command.index("--model") + 1], "qwen3.8-max")
         self.assertEqual(
-            command[command.index("--reasoning-effort") + 1], "xhigh"
+            command[command.index("--reasoning-effort") + 1], "medium"
         )
+        self.assertEqual(command[command.index("--max-tokens") + 1], "16384")
         self.assertIn(str(ROOT / "pure_tate" / "qwen_worker.py"), command)
         self.assertEqual(command[command.index("--context-file") + 1], "TASK.json")
         self.assertIn("--allow-web", command)
+
+        mathematics = _engine_argv(
+            "qwen", "prompt", phase="mathematics", context_files=["TASK.json"]
+        )
+        self.assertEqual(
+            mathematics[mathematics.index("--reasoning-effort") + 1], "xhigh"
+        )
+        self.assertEqual(
+            mathematics[mathematics.index("--max-tokens") + 1], "65536"
+        )
 
     def test_codex_web_phases_enable_live_search(self):
         command = _engine_argv(

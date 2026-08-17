@@ -784,9 +784,13 @@ def _drive_campaign_unlocked(
         ]
         engine_configs = load_engines()
         for event in preview:
-            output_limit = engine_configs.get(
-                str(event.get("engine")), {}
-            ).get("max_output_tokens")
+            engine_config = engine_configs.get(str(event.get("engine")), {})
+            phase_config = (engine_config.get("phase_overrides") or {}).get(
+                str(event.get("phase")), {}
+            )
+            output_limit = phase_config.get(
+                "max_output_tokens", engine_config.get("max_output_tokens")
+            )
             if isinstance(output_limit, int) and output_limit > 0:
                 event["max_output_tokens"] = output_limit
         return {
@@ -1172,8 +1176,10 @@ def _drive_campaign_unlocked(
         }
         if isinstance(task.get("working_context"), dict):
             event["working_context"] = task["working_context"]
-        output_limit = load_engines().get(engine, {}).get(
-            "max_output_tokens"
+        engine_config = load_engines().get(engine, {})
+        phase_config = (engine_config.get("phase_overrides") or {}).get(phase, {})
+        output_limit = phase_config.get(
+            "max_output_tokens", engine_config.get("max_output_tokens")
         )
         if isinstance(output_limit, int) and output_limit > 0:
             event["max_output_tokens"] = output_limit

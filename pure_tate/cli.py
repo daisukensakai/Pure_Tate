@@ -339,7 +339,11 @@ def command_capability_audit(args: argparse.Namespace) -> int:
     try:
         records = audit_capabilities(
             args.engines,
-            phases=("research", "finding-audit", "novelty"),
+            phases=(
+                tuple(args.phases)
+                if getattr(args, "phases", None)
+                else ("research", "finding-audit", "novelty")
+            ),
             live=args.live,
             timeout=args.timeout,
         )
@@ -894,6 +898,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     capability_parser = subparsers.add_parser("capability-audit")
     capability_parser.add_argument("--engines", nargs="+", required=True)
+    capability_parser.add_argument(
+        "--phases",
+        nargs="+",
+        choices=("research", "finding-audit", "novelty"),
+        help="audit only the selected research phases (default: all three)",
+    )
     capability_parser.add_argument("--live", action="store_true")
     capability_parser.add_argument("--timeout", type=int, default=60)
     capability_parser.set_defaults(func=command_capability_audit)

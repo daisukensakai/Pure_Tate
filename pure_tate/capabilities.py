@@ -170,6 +170,13 @@ def audit_engine_capability(
     with tempfile.TemporaryDirectory(prefix="pure-tate-capability-") as directory:
         last = Path(directory) / "last-message.txt"
         argv = _engine_argv(engine_id, prompt, last, phase=phase)
+        # A capability receipt is deliberately tiny.  The normal Qwen web path
+        # performs a two-stage evidence-docket + final-artifact turn, which is
+        # appropriate for research but can consume the entire probe timeout and
+        # return a docket-shaped object.  Keep paid task semantics untouched and
+        # use the worker's single-response native-web probe path here only.
+        if engine.get("family") == "qwen":
+            argv = list(argv) + ["--capability-probe"]
         effective = effective_capabilities_from_argv(
             str(engine.get("family", "")), argv, phase
         )

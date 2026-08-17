@@ -376,6 +376,32 @@ class QwenWorkerTests(unittest.TestCase):
             [True, True, False],
         )
 
+    def test_web_evidence_continues_after_native_tool_only_response(self):
+        native_only = {
+            "id": "resp-web",
+            "output": [
+                {"type": "web_search_call", "id": "search-1", "status": "completed"}
+            ],
+        }
+        final = {"id": "resp-final", "output_text": "public-source docket"}
+        with patch(
+            "pure_tate.qwen_worker._responses_request",
+            side_effect=[native_only, final],
+        ) as request, patch.object(qwen_worker, "_emit"):
+            result = qwen_worker._run_web_evidence(
+                "find sources",
+                {},
+                api_key="test-key",
+                model="qwen3.8-max",
+                max_tokens=64_000,
+                thinking_budget=16_384,
+            )
+        self.assertEqual(result, "public-source docket")
+        self.assertEqual(request.call_count, 2)
+        self.assertEqual(
+            request.call_args_list[1].kwargs["previous_response_id"], "resp-web"
+        )
+
     def test_final_stage_reserves_last_round_for_tool_free_synthesis(self):
         tool_message = {
             "choices": [
@@ -441,6 +467,66 @@ class QwenWorkerTests(unittest.TestCase):
         self.assertIn("short sources", final.call_args.args[0])
         self.assertTrue(final.call_args.kwargs["allow_grok"])
         self.assertEqual(final.call_args.kwargs["max_tool_rounds"], 3)
+
+    def test_capability_probe_uses_one_low_effort_native_web_response(self):
+        receipt = (
+            '{"probe_token":"token","url":"https://example.test",'
+            '"commit_sha":"' + ("a" * 40) + '","web_search":true,'
+            '"web_fetch":true}'
+        )
+        with patch("pure_tate.qwen_worker._api_key", return_value="test-key"), patch(
+            "pure_tate.qwen_worker._allowlist", return_value={}
+        ), patch(
+            "pure_tate.qwen_worker._responses_request",
+            return_value={"output_text": receipt},
+        ) as request, patch(
+            "pure_tate.qwen_worker._run_web_evidence"
+        ) as docket, patch(
+            "pure_tate.qwen_worker._run_without_web"
+        ) as final, patch.object(qwen_worker, "_emit"):
+            result = qwen_worker.run(
+                "perform probe",
+                [],
+                model="qwen3.8-max",
+                allow_grok=False,
+                allow_web=True,
+                max_tokens=65_536,
+                thinking_budget=65_536,
+                reasoning_effort="xhigh",
+                capability_probe=True,
+            )
+        self.assertEqual(result, receipt)
+        self.assertEqual(request.call_count, 1)
+        self.assertEqual(request.call_args.kwargs["reasoning_effort"], "low")
+        self.assertEqual(request.call_args.kwargs["max_tokens"], 2_048)
+        self.assertTrue(request.call_args.kwargs["allow_tools"])
+        docket.assert_not_called()
+        final.assert_not_called()
+
+    def test_capability_probe_continues_after_tool_only_response(self):
+        receipt = '{"probe_token":"token","web_search":true,"web_fetch":true}'
+        with patch("pure_tate.qwen_worker._api_key", return_value="test-key"), patch(
+            "pure_tate.qwen_worker._allowlist", return_value={}
+        ), patch(
+            "pure_tate.qwen_worker._responses_request",
+            side_effect=[{"id": "resp-web", "output": []}, {"output_text": receipt}],
+        ) as request, patch.object(qwen_worker, "_emit"):
+            result = qwen_worker.run(
+                "perform probe",
+                [],
+                model="qwen3.8-max",
+                allow_grok=False,
+                allow_web=True,
+                max_tokens=65_536,
+                thinking_budget=65_536,
+                capability_probe=True,
+            )
+        self.assertEqual(result, receipt)
+        self.assertEqual(request.call_count, 2)
+        followup = request.call_args_list[1].kwargs
+        self.assertEqual(followup["previous_response_id"], "resp-web")
+        self.assertFalse(followup["allow_tools"])
+        self.assertFalse(followup["enable_thinking"])
 
     def test_web_timeout_falls_forward_to_final_stage(self):
         with patch("pure_tate.qwen_worker._api_key", return_value="test-key"), patch(

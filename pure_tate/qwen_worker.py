@@ -914,6 +914,22 @@ def _run_web_evidence(
                 if content:
                     _emit({"type": "stage", "stage": "web_evidence_end", "ok": True})
                     return content[:MAX_WEB_EVIDENCE_CHARS]
+                # Native web_search/web_extractor items can finish without a
+                # message item.  Continue the stored response so the provider
+                # can synthesize those server-side results; the final loop pass
+                # remains tool-free and therefore must emit text.
+                if not final_round and previous_response_id:
+                    pending = [
+                        {
+                            "role": "user",
+                            "content": (
+                                "Continue from the web results already retrieved. "
+                                "Return the compact evidence docket requested by "
+                                "the instructions."
+                            ),
+                        }
+                    ]
+                    continue
                 raise RuntimeError("Qwen Responses API returned no final text")
             if final_round:
                 raise RuntimeError(
@@ -1095,12 +1111,73 @@ def run(
     max_tokens: int,
     thinking_budget: int,
     reasoning_effort: Optional[str] = None,
+    capability_probe: bool = False,
 ) -> str:
     key = _api_key()
     if not key:
         raise RuntimeError("DASHSCOPE_API_KEY or QWEN_API_KEY is not set")
     allowlist = _allowlist(context_files)
     effort = _normalize_reasoning_effort(reasoning_effort) or DEFAULT_REASONING_EFFORT
+    if capability_probe:
+        _emit({"type": "stage", "stage": "capability_probe_start"})
+        payload = _responses_request(
+            api_key=key,
+            model=model,
+            input_items=[{"role": "user", "content": prompt}],
+            instructions=(
+                "Complete this read-only capability probe directly. Use the native "
+                "web tools requested by the user, then return only the requested "
+                "short JSON receipt. Do not draft a research docket or a proof."
+            ),
+            previous_response_id=None,
+            max_tokens=min(max_tokens, 2_048),
+            thinking_budget=min(thinking_budget, 2_048),
+            enable_thinking=True,
+            timeout_seconds=min(_responses_timeout(), 300),
+            allow_tools=True,
+            stage="capability_probe",
+            reasoning_effort="low",
+        )
+        result = _responses_text(payload)
+        # Model Studio may complete a response after the native web calls but
+        # before emitting a message item.  Continue that stored response once,
+        # tool-free, so the already-retrieved evidence becomes the short receipt.
+        if not result:
+            response_id = payload.get("id")
+            if not isinstance(response_id, str) or not response_id:
+                raise RuntimeError(
+                    "Qwen capability probe returned neither receipt text nor a "
+                    "continuable response id"
+                )
+            payload = _responses_request(
+                api_key=key,
+                model=model,
+                input_items=[
+                    {
+                        "role": "user",
+                        "content": (
+                            "Using the web results already retrieved, return only "
+                            "the exact JSON receipt requested in the original task."
+                        ),
+                    }
+                ],
+                instructions=(
+                    "Return only the requested short JSON capability receipt."
+                ),
+                previous_response_id=response_id,
+                max_tokens=min(max_tokens, 2_048),
+                thinking_budget=min(thinking_budget, 2_048),
+                enable_thinking=False,
+                timeout_seconds=min(_responses_timeout(), 300),
+                allow_tools=False,
+                stage="capability_probe_receipt",
+                reasoning_effort=None,
+            )
+            result = _responses_text(payload)
+        if not result:
+            raise RuntimeError("Qwen capability probe returned no receipt text")
+        _emit({"type": "stage", "stage": "capability_probe_end", "ok": True})
+        return result
     final_tool_rounds = MAX_TOOL_ROUNDS
     if allow_web:
         try:
@@ -1148,6 +1225,7 @@ def main() -> int:
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--allow-grok-workers", action="store_true")
     parser.add_argument("--allow-web", action="store_true")
+    parser.add_argument("--capability-probe", action="store_true")
     parser.add_argument("--max-tokens", type=int, default=65536)
     parser.add_argument("--thinking-budget", type=int, default=65536)
     parser.add_argument(
@@ -1169,6 +1247,7 @@ def main() -> int:
             max_tokens=args.max_tokens,
             thinking_budget=args.thinking_budget,
             reasoning_effort=args.reasoning_effort,
+            capability_probe=args.capability_probe,
         )
         return 0
     except Exception as exc:  # noqa: BLE001 - subprocess error boundary

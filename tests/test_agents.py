@@ -140,6 +140,28 @@ class AgentAdapterTests(unittest.TestCase):
             self.assertIn("research/RED-0001.statement.json", copied)
             self.assertFalse((Path(directory) / "data" / "claims.jsonl").exists())
 
+    def test_finding_audit_context_includes_originating_attempt_and_review(self):
+        task = {
+            "id": "TASK-F-FND-0150",
+            "phase": "finding-audit",
+            "input_packet": "proof/packets/generated/C66-001-v4.md",
+            "finding": {
+                "source_attempt_ids": ["ATT-0100"],
+                "source_review_ids": ["REV-0149"],
+            },
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory)
+            copied = build_isolated_context(task, destination)
+            self.assertIn("proof/attempts/ATT-0100.json", copied)
+            self.assertIn("proof/reviews/REV-0149.json", copied)
+            self.assertTrue(
+                (destination / "proof" / "attempts" / "ATT-0100.json").is_file()
+            )
+            self.assertTrue(
+                (destination / "proof" / "reviews" / "REV-0149.json").is_file()
+            )
+
     def test_engine_inventory_pins_latest_models(self):
         by_id = {item["id"]: item for item in engine_inventory()}
         self.assertEqual(by_id["claude"]["model"], "claude-opus-5")
