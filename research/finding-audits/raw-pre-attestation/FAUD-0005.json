@@ -1,0 +1,60 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty; FND-0031 is compatible with and essentially restates the pure-weight corner of THM-0003/RED-0001. Primary check against SRC-0002 (CLP, arXiv:2307.08830v3): the right-exact sequence H^{k-2}(~partial M_{g,n}) -> H^k(Mbar_{g,n}) -> W_k H^k(M_{g,n}) -> 0 (Preliminaries) and dual BM form (6.1) H_k(~partial) -> H_k(Mbar) -> W_{-k} H_k(M) -> 0 are exactly the depth-m=0 / codimension-one Gysin cokernel. SRC-0001 (Payne 2605.20453) records the same localization-plus-weights sequence H^{k-2}(~D)(-1) -> H^k(Mbar) -> W_k H^k(M) -> 0. For the RED-0001 ordinary dual, k=2d-16 so weight=degree and m=weight-degree=0; only the m=0 term H^{2d-16}(Mbar) and d_1 Gysin from codim-1 strata H^{2d-18}(D^{(1)})(-1) contribute, so multi-edge/codim>=2 strata and higher differentials are irrelevant at this graded piece. Dualizing recovers THM-0003, hence undecorated weight-SS / Getzler-Kapranov bookkeeping at this pure corner cannot supply independent input beyond the still-unknown compactified H_{16}/H^{16} (circular for CONJ-0001). For (6,6): d=21, corner gr^W_26 H^{26}. Distinct from FND-0032 (top-weight CGP corner), FND-0033 (semisimplicity of the pure row), FND-0034 (nonsep divisor Mbar_{5,8}). Merge target: none. Promote candidate to corroborated on independent primary-source verification.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0031",
+  "id": "FAUD-0005",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "applies_to": "all RED-0001 residual pairs and more generally any pure lowest-weight corner W_k H^k(M_{g,n})",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "d": 21,
+    "object": "Deligne weight spectral sequence of (Mbar_{g,n}, boundary) at pure depth m=0",
+    "ordinary_degree": 26,
+    "ordinary_weight": 26,
+    "red0001_open_input": "gr^W_{2d-16}H^{2d-16}(M_{g,n}) dual to W_{-16}H^{BM}_{16}",
+    "spectral_depth_m": 0
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-02T12:15:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2307.08830v3"
+    },
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-02T12:16:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2605.20453v1"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "claim-cross-check",
+      "retrieved_at": "2026-08-02T12:10:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2307.08830"
+    }
+  ],
+  "task_id": "TASK-F-FND-0031",
+  "verdict": "promote"
+}

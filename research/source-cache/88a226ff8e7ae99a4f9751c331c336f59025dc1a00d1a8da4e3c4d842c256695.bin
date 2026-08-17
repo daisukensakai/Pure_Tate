@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#d9d8d1">
+
+<title>Section 100.11 (06ML): Residual gerbes&mdash;The Stacks project</title>
+
+<meta name="description" content="an open source textbook and reference work on algebraic geometry">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ['tex2jax.js'],
+    jax: ['input/TeX','output/HTML-CSS'],
+    TeX: {
+      extensions: ['AMSmath.js', 'AMSsymbols.js', '/static/XyJax/extensions/TeX/xypic.js'],
+      Macros: {
+        linebreak: ["", 1, ""],
+        },
+      TagSide: 'left'
+    },
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    },
+    'HTML-CSS': {
+    	scale: 100,
+	availableFonts: [],
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+
+
+  <script type="text/javascript" src="/static/js/toggle.js"></script>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/easymde@2.0.1/dist/easymde.min.css" integrity="sha384-IRbzB9px0sfIx90vkN+geaX3F4LVcg/M+k5vmVkfjs5TnRX3MIhGS8Ma06ALKVYp" crossorigin="anonymous">
+  <script src="https://unpkg.com/easymde@2.0.1/dist/easymde.min.js" integrity="sha384-v06sb0t0ToY1YRtVlfD/GCGpIZ/QHYyeH2Gzjvr0ZJI62/50DIzT8XRgQ6JvptVu" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.css" integrity="sha384-8xTxM5sJRAUB0ckdBghB5am+aw+0kC5FfSUzMI+KI+UD8uBCNeSkdi8I1J4+Wjwu" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.js" integrity="sha384-gE5xOW4MVOjJL1A2SbxwvQw/qet6h8Vdv06j3JQGhBW4d1H5hXYB12WsrUBgU439" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid bounded">
+  <div id="first-bar" class="row topbar inner-top top">
+    <header class="col">
+      <h1><a href="/">The Stacks project</a></h1>
+    </header>
+
+    <nav id="header">
+      <ul id="quicklinks">
+        <li><a href="/bibliography">bibliography</a>
+        <li><a href="https://www.math.columbia.edu/~dejong/wordpress/">blog</a>
+      </ul>
+
+      <form id="quicksearch" action="/search">
+        <span id="search-icon"><img src="/static/images/search.svg"></span>
+        <input type="search" name="query" size="16" placeholder="keywords or a tag" value="">
+      </form>
+    </nav>
+  </div>
+
+  <nav id="second-bar" class="row topbar sticky-top">
+    
+      <ul class="col-11 col-sm-11 col-md-11 col-lg-12 col-xl-12" id="crumbs">
+        <li><a href="/browse">Table of contents</a></li>
+        
+  
+  
+    <li>Part <a href="/tag/0ELS" data-tag="0ELS">7</a>: Algebraic Stacks
+    
+  
+    <li>Chapter <a href="/tag/04X8" data-tag="04X8">100</a>: Properties of Algebraic Stacks
+    
+  
+    <li class="active">Section <a href="/tag/06ML" data-tag="06ML">100.11</a>: Residual gerbes
+    <span id="citation">(<a href="/tag/06ML/cite">cite</a>)</span>
+  
+
+
+      </ul>
+    
+
+    
+      <div class="col-1 col-sm-1 col-md-1" id="burger">
+        <input type="checkbox" id="burger-input"></input>
+
+        <label id="burger-icon" for="burger-input">
+          <span id="top-bun"></span>
+          <span id="meat"></span>
+          <span id="bottom-bun"></span>
+        </label>
+
+        <div id="burger-content">
+          
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0508">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/0AFL">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  
+
+
+        </div>
+      </div>
+    
+
+    
+  </nav>
+
+  <div class="row" id="content">
+    <section id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      
+<div class="html" id="tag">
+  
+
+  
+
+  
+
+  <h2 id="stacks-properties-section-residual-gerbe" class="tex-section"><span data-tag="06ML">100.11</span> Residual gerbes</h2>
+
+<p>
+In the Stacks project we would like to define the <em>residual gerbe</em> of an algebraic stack $\mathcal{X}$ at a point $x \in |\mathcal{X}|$ to be a monomorphism of algebraic stacks $m_ x : \mathcal{Z}_ x \to \mathcal{X}$ where $\mathcal{Z}_ x$ is a reduced algebraic stack having a unique point which is mapped by $m_ x$ to $x$. It turns out that there are many issues with this notion; existence is not clear in general and neither is uniqueness. We resolve the uniqueness issue by imposing a slightly stronger condition on the algebraic stacks $\mathcal{Z}_ x$. We discuss this in more detail by working through a few simple lemmas regarding reduced algebraic stacks having a unique point. 
+</p>
+<p>
+<article class="env-lemma" id="06MM">
+  <p><a class="environment-identifier" href="/tag/06MM">Lemma <span data-tag="06MM">100.11.1</span>.</a> Let $\mathcal{Z}$ be an algebraic stack. Let $k$ be a field and let $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$ be surjective and flat. Then any morphism $\mathop{\mathrm{Spec}}(k') \to \mathcal{Z}$ where $k'$ is a field is surjective and flat. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Consider the fibre square 
+    <p>
+      <div class="equation">
+  \[  \xymatrix{ T \ar[d] \ar[r] &  \mathop{\mathrm{Spec}}(k) \ar[d] \\  \mathop{\mathrm{Spec}}(k') \ar[r] &  \mathcal{Z} }  \]
+</div>
+    <p>
+       Note that $T \to \mathop{\mathrm{Spec}}(k')$ is flat and surjective hence $T$ is not empty. On the other hand $T \to \mathop{\mathrm{Spec}}(k)$ is flat as $k$ is a field. Hence $T \to \mathcal{Z}$ is flat and surjective. It follows from Morphisms of Spaces, Lemma <a href="/tag/05VY" data-tag="05VY">67.31.5</a> (via the discussion in Section <a href="/tag/04XB" data-tag="04XB">100.3</a>) that $\mathop{\mathrm{Spec}}(k') \to \mathcal{Z}$ is flat. It is clear that it is surjective as by assumption $|\mathcal{Z}|$ is a singleton. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="06MN">
+  <p><a class="environment-identifier" href="/tag/06MN">Lemma <span data-tag="06MN">100.11.2</span>.</a> Let $\mathcal{Z}$ be an algebraic stack. The following are equivalent </p>
+  <p><ol>
+  <li><p>
+$\mathcal{Z}$ is reduced and $|\mathcal{Z}|$ is a singleton, 
+</p>
+</li><li><p>
+there exists a surjective flat morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$ where $k$ is a field, and 
+</p>
+</li><li><p>
+there exists a locally of finite type, surjective, flat morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$ where $k$ is a field. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Assume (1). Let $W$ be a scheme and let $W \to \mathcal{Z}$ be a surjective smooth morphism. Then $W$ is a reduced scheme. Let $\eta \in W$ be a generic point of an irreducible component of $W$. Since $W$ is reduced we have $\mathcal{O}_{W, \eta } = \kappa (\eta )$. It follows that the canonical morphism $\eta = \mathop{\mathrm{Spec}}(\kappa (\eta )) \to W$ is flat. We see that the composition $\eta \to \mathcal{Z}$ is flat (see Morphisms of Spaces, Lemma <a href="/tag/03MN" data-tag="03MN">67.30.3</a>). It is also surjective as $|\mathcal{Z}|$ is a singleton. In other words (2) holds. 
+    <p>
+      Assume (2). Let $W$ be a scheme and let $W \to \mathcal{Z}$ be a surjective smooth morphism. Choose a field $k$ and a surjective flat morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$. Then $W \times _\mathcal {Z} \mathop{\mathrm{Spec}}(k)$ is an algebraic space smooth over $k$, hence regular (see Spaces over Fields, Lemma <a href="/tag/06M1" data-tag="06M1">72.16.1</a>) and in particular reduced. Since $W \times _\mathcal {Z} \mathop{\mathrm{Spec}}(k) \to W$ is surjective and flat we conclude that $W$ is reduced (Descent on Spaces, Lemma <a href="/tag/06MI" data-tag="06MI">74.9.2</a>). In other words (1) holds. 
+    <p>
+      It is clear that (3) implies (2). Finally, assume (2). Pick a nonempty affine scheme $W$ and a smooth morphism $W \to \mathcal{Z}$. Pick a closed point $w \in W$ and set $k = \kappa (w)$. The composition 
+    <p>
+      <div class="equation">
+  \[  \mathop{\mathrm{Spec}}(k) \xrightarrow {w} W \longrightarrow \mathcal{Z}  \]
+</div>
+    <p>
+       is locally of finite type by Morphisms of Spaces, Lemmas <a href="/tag/03XG" data-tag="03XG">67.23.2</a> and <a href="/tag/06MH" data-tag="06MH">67.37.6</a>. It is also flat and surjective by Lemma <a href="/tag/06MM" data-tag="06MM">100.11.1</a>. Hence (3) holds. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+The following lemma singles out a slightly better class of singleton algebraic stacks than the preceding lemma. 
+</p>
+<p>
+<article class="env-lemma" id="06MP">
+  <p><a class="environment-identifier" href="/tag/06MP">Lemma <span data-tag="06MP">100.11.3</span>.</a> Let $\mathcal{Z}$ be an algebraic stack. The following are equivalent </p>
+  <p><ol>
+  <li><p>
+$\mathcal{Z}$ is reduced, locally Noetherian, and $|\mathcal{Z}|$ is a singleton, and 
+</p>
+</li><li><p>
+there exists a locally finitely presented, surjective, flat morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$ where $k$ is a field. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Assume (2) holds. By Lemma <a href="/tag/06MN" data-tag="06MN">100.11.2</a> we see that $\mathcal{Z}$ is reduced and $|\mathcal{Z}|$ is a singleton. Let $W$ be a scheme and let $W \to \mathcal{Z}$ be a surjective smooth morphism. Choose a field $k$ and a locally finitely presented, surjective, flat morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$. Then $W \times _\mathcal {Z} \mathop{\mathrm{Spec}}(k)$ is an algebraic space smooth over $k$, hence locally Noetherian (see Morphisms of Spaces, Lemma <a href="/tag/04ZK" data-tag="04ZK">67.23.5</a>). Since $W \times _\mathcal {Z} \mathop{\mathrm{Spec}}(k) \to W$ is flat, surjective, and locally of finite presentation, we see that $\{ W \times _\mathcal {Z} \mathop{\mathrm{Spec}}(k) \to W\} $ is an fppf covering and we conclude that $W$ is locally Noetherian (Descent on Spaces, Lemma <a href="/tag/06MJ" data-tag="06MJ">74.9.3</a>). In other words (1) holds. 
+    <p>
+      Assume (1). Pick a nonempty affine scheme $W$ and a smooth morphism $W \to \mathcal{Z}$. Pick a closed point $w \in W$ and set $k = \kappa (w)$. Because $W$ is locally Noetherian the morphism $w : \mathop{\mathrm{Spec}}(k) \to W$ is of finite presentation, see Morphisms, Lemma <a href="/tag/01TV" data-tag="01TV">29.22.7</a>. Hence the composition 
+    <p>
+      <div class="equation">
+  \[  \mathop{\mathrm{Spec}}(k) \xrightarrow {w} W \longrightarrow \mathcal{Z}  \]
+</div>
+    <p>
+       is locally of finite presentation by Morphisms of Spaces, Lemmas <a href="/tag/03XQ" data-tag="03XQ">67.28.2</a> and <a href="/tag/04AJ" data-tag="04AJ">67.37.5</a>. It is also flat and surjective by Lemma <a href="/tag/06MM" data-tag="06MM">100.11.1</a>. Hence (2) holds. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="06MQ">
+  <p><a class="environment-identifier" href="/tag/06MQ">Lemma <span data-tag="06MQ">100.11.4</span>.</a> Let $\mathcal{Z}' \to \mathcal{Z}$ be a monomorphism of algebraic stacks. Assume there exists a field $k$ and a locally finitely presented, surjective, flat morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$. Then either $\mathcal{Z}'$ is empty or $\mathcal{Z}' \to \mathcal{Z}$ is an equivalence. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      We may assume that $\mathcal{Z}'$ is nonempty. In this case the fibre product $T = \mathcal{Z}' \times _\mathcal {Z} \mathop{\mathrm{Spec}}(k)$ is nonempty, see Lemma <a href="/tag/04XH" data-tag="04XH">100.4.3</a>. Now $T$ is an algebraic space and the projection $T \to \mathop{\mathrm{Spec}}(k)$ is a monomorphism. Hence $T = \mathop{\mathrm{Spec}}(k)$, see Morphisms of Spaces, Lemma <a href="/tag/06MG" data-tag="06MG">67.10.8</a>. We conclude that $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$ factors through $\mathcal{Z}'$. Suppose the morphism $z : \mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$ is given by the object $\xi $ over $\mathop{\mathrm{Spec}}(k)$. We have just seen that $\xi $ is isomorphic to an object $\xi '$ of $\mathcal{Z}'$ over $\mathop{\mathrm{Spec}}(k)$. Since $z$ is surjective, flat, and locally of finite presentation we see that every object of $\mathcal{Z}$ over any scheme is fppf locally isomorphic to a pullback of $\xi $, hence also to a pullback of $\xi '$. By descent of objects for stacks in groupoids this implies that $\mathcal{Z}' \to \mathcal{Z}$ is essentially surjective (as well as fully faithful, see Lemma <a href="/tag/04ZZ" data-tag="04ZZ">100.8.4</a>). Hence we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="06MR">
+  <p><a class="environment-identifier" href="/tag/06MR">Lemma <span data-tag="06MR">100.11.5</span>.</a> Let $\mathcal{Z}$ be an algebraic stack. Assume $\mathcal{Z}$ satisfies the equivalent conditions of Lemma <a href="/tag/06MN" data-tag="06MN">100.11.2</a>. Then there exists a unique strictly full subcategory $\mathcal{Z}' \subset \mathcal{Z}$ such that $\mathcal{Z}'$ is an algebraic stack which satisfies the equivalent conditions of Lemma <a href="/tag/06MP" data-tag="06MP">100.11.3</a>. The inclusion morphism $\mathcal{Z}' \to \mathcal{Z}$ is a monomorphism of algebraic stacks. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      The last part is immediate from the first part and Lemma <a href="/tag/04ZZ" data-tag="04ZZ">100.8.4</a>. Pick a field $k$ and a morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$ which is surjective, flat, and locally of finite type. Set $U = \mathop{\mathrm{Spec}}(k)$ and $R = U \times _\mathcal {Z} U$. The projections $s, t : R \to U$ are locally of finite type. Since $U$ is the spectrum of a field, it follows that $s, t$ are flat and locally of finite presentation (by Morphisms of Spaces, Lemma <a href="/tag/06G4" data-tag="06G4">67.28.7</a>). We see that $\mathcal{Z}' = [U/R]$ is an algebraic stack by Criteria for Representability, Theorem <a href="/tag/06FI" data-tag="06FI">97.17.2</a>. By Algebraic Stacks, Lemma <a href="/tag/04T4" data-tag="04T4">94.16.1</a> we obtain a canonical morphism 
+    <p>
+      <div class="equation">
+  \[  f : \mathcal{Z}' \longrightarrow \mathcal{Z}  \]
+</div>
+    <p>
+       which is fully faithful. Hence this morphism is representable by algebraic spaces, see Algebraic Stacks, Lemma <a href="/tag/04Y5" data-tag="04Y5">94.15.2</a> and a monomorphism, see Lemma <a href="/tag/04ZZ" data-tag="04ZZ">100.8.4</a>. By Criteria for Representability, Lemma <a href="/tag/06FH" data-tag="06FH">97.17.1</a> the morphism $U \to \mathcal{Z}'$ is surjective, flat, and locally of finite presentation. Hence $\mathcal{Z}'$ is an algebraic stack which satisfies the equivalent conditions of Lemma <a href="/tag/06MP" data-tag="06MP">100.11.3</a>. By Algebraic Stacks, Lemma <a href="/tag/03YQ" data-tag="03YQ">94.12.4</a> we may replace $\mathcal{Z}'$ by its essential image in $\mathcal{Z}$. Hence we have proved all the assertions of the lemma except for the uniqueness of $\mathcal{Z}' \subset \mathcal{Z}$. Suppose that $\mathcal{Z}'' \subset \mathcal{Z}$ is a second such algebraic stack. Then the projections 
+    <p>
+      <div class="equation">
+  \[  \mathcal{Z}' \longleftarrow \mathcal{Z}' \times _\mathcal {Z} \mathcal{Z}'' \longrightarrow \mathcal{Z}''  \]
+</div>
+    <p>
+       are monomorphisms. The algebraic stack in the middle is nonempty by Lemma <a href="/tag/04XH" data-tag="04XH">100.4.3</a>. Hence the two projections are isomorphisms by Lemma <a href="/tag/06MQ" data-tag="06MQ">100.11.4</a> and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-example" id="06MS">
+  <p><a class="environment-identifier" href="/tag/06MS">Example <span data-tag="06MS">100.11.6</span>.</a> Here is an example where the morphism constructed in Lemma <a href="/tag/06MR" data-tag="06MR">100.11.5</a> isn't an isomorphism. This example shows that imposing that residual gerbes are locally Noetherian is necessary in Definition <a href="/tag/06MU" data-tag="06MU">100.11.8</a>. In fact, the example is even an algebraic space! Let $\text{Gal}(\overline{\mathbf{Q}}/\mathbf{Q})$ be the absolute Galois group of $\mathbf{Q}$ with the pro-finite topology. Let </p>
+  <div class="equation">
+  \[  U = \mathop{\mathrm{Spec}}(\overline{\mathbf{Q}}) \times _{\mathop{\mathrm{Spec}}(\mathbf{Q})} \mathop{\mathrm{Spec}}(\overline{\mathbf{Q}}) = \text{Gal}(\overline{\mathbf{Q}}/\mathbf{Q}) \times \mathop{\mathrm{Spec}}(\overline{\mathbf{Q}})  \]
+</div>
+  <p> (we omit a precise explanation of the meaning of the last equal sign). Let $G$ denote the absolute Galois group $\text{Gal}(\overline{\mathbf{Q}}/\mathbf{Q})$ with the discrete topology viewed as a constant group scheme over $\mathop{\mathrm{Spec}}(\overline{\mathbf{Q}})$, see Groupoids, Example <a href="/tag/03YW" data-tag="03YW">39.5.6</a>. Then $G$ acts freely and transitively on $U$. Let $X = U/G$, see Spaces, Definition <a href="/tag/02Z3" data-tag="02Z3">65.14.4</a>. Then $X$ is a non-noetherian reduced algebraic space with exactly one point. Furthermore, $X$ has a (locally) finite type point: </p>
+  <div class="equation">
+  \[  x : \mathop{\mathrm{Spec}}(\overline{\mathbf{Q}}) \longrightarrow U \longrightarrow X  \]
+</div>
+  <p> Indeed, every point of $U$ is actually closed! As $X$ is an algebraic space over $\overline{\mathbf{Q}}$ it follows that $x$ is a monomorphism. So $x$ is the morphism constructed in Lemma <a href="/tag/06MR" data-tag="06MR">100.11.5</a> but $x$ is not an isomorphism. In fact $\mathop{\mathrm{Spec}}(\overline{\mathbf{Q}}) \to X$ is the residual gerbe of $X$ at $x$. </p>
+</article> 
+</p>
+<p>
+It will turn out later that under mild assumptions on the algebraic stack $\mathcal{X}$ the equivalent conditions of the following lemma are satisfied for every point $x \in |\mathcal{X}|$ (see Morphisms of Stacks, Section <a href="/tag/06UH" data-tag="06UH">101.31</a>). 
+</p>
+<p>
+<article class="env-lemma" id="06MT">
+  <p><a class="environment-identifier" href="/tag/06MT">Lemma <span data-tag="06MT">100.11.7</span>.</a> Let $\mathcal{X}$ be an algebraic stack. Let $x \in |\mathcal{X}|$ be a point. The following are equivalent </p>
+  <p><ol>
+  <li><p>
+there exists an algebraic stack $\mathcal{Z}$ and a monomorphism $\mathcal{Z} \to \mathcal{X}$ such that $|\mathcal{Z}|$ is a singleton and such that the image of $|\mathcal{Z}|$ in $|\mathcal{X}|$ is $x$, 
+</p>
+</li><li><p>
+there exists a reduced algebraic stack $\mathcal{Z}$ and a monomorphism $\mathcal{Z} \to \mathcal{X}$ such that $|\mathcal{Z}|$ is a singleton and such that the image of $|\mathcal{Z}|$ in $|\mathcal{X}|$ is $x$, 
+</p>
+</li><li><p>
+there exists an algebraic stack $\mathcal{Z}$, a monomorphism $f : \mathcal{Z} \to \mathcal{X}$, and a surjective flat morphism $z : \mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$ where $k$ is a field such that $x = f(z)$. 
+</p>
+</li>
+</ol></p>
+  <p> Moreover, if these conditions hold, then there exists a unique strictly full subcategory $\mathcal{Z}_ x \subset \mathcal{X}$ such that $\mathcal{Z}_ x$ is a reduced, locally Noetherian algebraic stack and $|\mathcal{Z}_ x|$ is a singleton which maps to $x$ via the map $|\mathcal{Z}_ x| \to |\mathcal{X}|$. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      If $\mathcal{Z} \to \mathcal{X}$ is as in (1), then $\mathcal{Z}_{red} \to \mathcal{X}$ is as in (2). (See Section <a href="/tag/0508" data-tag="0508">100.10</a> for the notion of the reduction of an algebraic stack.) Hence (1) implies (2). It is immediate that (2) implies (1). The equivalence of (2) and (3) is immediate from Lemma <a href="/tag/06MN" data-tag="06MN">100.11.2</a>. 
+    <p>
+      At this point we've seen the equivalence of (1) – (3). Pick a monomorphism $f : \mathcal{Z} \to \mathcal{X}$ as in (2). Note that this implies that $f$ is fully faithful, see Lemma <a href="/tag/04ZZ" data-tag="04ZZ">100.8.4</a>. Denote $\mathcal{Z}' \subset \mathcal{X}$ the essential image of the functor $f$. Then $f : \mathcal{Z} \to \mathcal{Z}'$ is an equivalence and hence $\mathcal{Z}'$ is an algebraic stack, see Algebraic Stacks, Lemma <a href="/tag/03YQ" data-tag="03YQ">94.12.4</a>. Apply Lemma <a href="/tag/06MR" data-tag="06MR">100.11.5</a> to get a strictly full subcategory $\mathcal{Z}_ x \subset \mathcal{Z}'$ as in the statement of the lemma. This proves all the statements of the lemma except for uniqueness. 
+    <p>
+      In order to prove the uniqueness suppose that $\mathcal{Z}_ x \subset \mathcal{X}$ and $\mathcal{Z}'_ x \subset \mathcal{X}$ are two strictly full subcategories as in the statement of the lemma. Then the projections 
+    <p>
+      <div class="equation">
+  \[  \mathcal{Z}'_ x \longleftarrow \mathcal{Z}'_ x \times _\mathcal {X} \mathcal{Z}_ x \longrightarrow \mathcal{Z}_ x  \]
+</div>
+    <p>
+       are monomorphisms. The algebraic stack in the middle is nonempty by Lemma <a href="/tag/04XH" data-tag="04XH">100.4.3</a>. Hence the two projections are isomorphisms by Lemma <a href="/tag/06MQ" data-tag="06MQ">100.11.4</a> and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+Having explained the above we can now make the following definition. 
+</p>
+<p>
+<article class="env-definition" id="06MU">
+  <p><a class="environment-identifier" href="/tag/06MU">Definition <span data-tag="06MU">100.11.8</span>.</a> Let $\mathcal{X}$ be an algebraic stack. Let $x \in |\mathcal{X}|$. </p>
+  <p><ol>
+  <li><p>
+We say the <em>residual gerbe of $\mathcal{X}$ at $x$ exists</em> if the equivalent conditions (1), (2), and (3) of Lemma <a href="/tag/06MT" data-tag="06MT">100.11.7</a> hold. 
+</p>
+</li><li><p>
+If the residual gerbe of $\mathcal{X}$ at $x$ exists, then the <em>residual gerbe of $\mathcal{X}$ at $x$</em><a class="footnotemark footnote-offset" href="#footnote-1" id="footnote-1-mark"></a><a href="#footnote-1"><sup>1</sup></a> is the strictly full subcategory $\mathcal{Z}_ x \subset \mathcal{X}$ constructed in Lemma <a href="/tag/06MT" data-tag="06MT">100.11.7</a>. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<p>
+In particular we know that $\mathcal{Z}_ x$ (if it exists) is a locally Noetherian, reduced algebraic stack and that there exists a field and a surjective, flat, locally finitely presented morphism 
+</p>
+<div class="equation">
+  \[  \mathop{\mathrm{Spec}}(k) \longrightarrow \mathcal{Z}_ x.  \]
+</div>
+<p>
+ We will see in Morphisms of Stacks, Lemma <a href="/tag/06QK" data-tag="06QK">101.28.12</a> that $\mathcal{Z}_ x$ is a gerbe. Existence of residual gerbes is discussed in Morphisms of Stacks, Section <a href="/tag/06UH" data-tag="06UH">101.31</a>. 
+</p>
+<p>
+<article class="env-example" id="0H21">
+  <p><a class="environment-identifier" href="/tag/0H21">Example <span data-tag="0H21">100.11.9</span>.</a> Let $X$ be a scheme and let $x \in X$ be a point. Then the monomorphism $x \to X$ is the residual gerbe of $X$ at $x$ where we, as usual, identify $x$ with the scheme $x = \mathop{\mathrm{Spec}}(\kappa (x))$. If $X$ is an algebraic space and $x \in |X|$, then the residual gerbe at $x$ (which is called the residual space) always exists, see Decent Spaces, Section <a href="/tag/06QU" data-tag="06QU">68.13</a>. </p>
+</article> 
+</p>
+<p>
+The residual gerbe, if it exists, is a regular algebraic stack by the following lemma. 
+</p>
+<p>
+<article class="env-lemma" id="06MV">
+  <p><a class="environment-identifier" href="/tag/06MV">Lemma <span data-tag="06MV">100.11.10</span>.</a> A reduced, locally Noetherian algebraic stack $\mathcal{Z}$ such that $|\mathcal{Z}|$ is a singleton is regular. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $W \to \mathcal{Z}$ be a surjective smooth morphism where $W$ is a scheme. Let $k$ be a field and let $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$ be surjective, flat, and locally of finite presentation (see Lemma <a href="/tag/06MP" data-tag="06MP">100.11.3</a>). The algebraic space $T = W \times _\mathcal {Z} \mathop{\mathrm{Spec}}(k)$ is smooth over $k$ in particular regular, see Spaces over Fields, Lemma <a href="/tag/06M1" data-tag="06M1">72.16.1</a>. Since $T \to W$ is locally of finite presentation, flat, and surjective it follows that $W$ is regular, see Descent on Spaces, Lemma <a href="/tag/06MK" data-tag="06MK">74.9.4</a>. By definition this means that $\mathcal{Z}$ is regular. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="06MW">
+  <p><a class="environment-identifier" href="/tag/06MW">Lemma <span data-tag="06MW">100.11.11</span>.</a> Let $\mathcal{X}$ be an algebraic stack. Let $x \in |\mathcal{X}|$. Assume that the residual gerbe $\mathcal{Z}_ x$ of $\mathcal{X}$ exists. Let $f : \mathop{\mathrm{Spec}}(K) \to \mathcal{X}$ be a morphism where $K$ is a field in the equivalence class of $x$. Then $f$ factors through the inclusion morphism $\mathcal{Z}_ x \to \mathcal{X}$. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Choose a field $k$ and a surjective flat locally finite presentation morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}_ x$. Set $T = \mathop{\mathrm{Spec}}(K) \times _\mathcal {X} \mathcal{Z}_ x$. By Lemma <a href="/tag/04XH" data-tag="04XH">100.4.3</a> we see that $T$ is nonempty. As $\mathcal{Z}_ x \to \mathcal{X}$ is a monomorphism we see that $T \to \mathop{\mathrm{Spec}}(K)$ is a monomorphism. Hence by Morphisms of Spaces, Lemma <a href="/tag/06MG" data-tag="06MG">67.10.8</a> we see that $T = \mathop{\mathrm{Spec}}(K)$ which proves the lemma. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="06MX">
+  <p><a class="environment-identifier" href="/tag/06MX">Lemma <span data-tag="06MX">100.11.12</span>.</a> Let $\mathcal{X}$ be an algebraic stack. Let $x \in |\mathcal{X}|$. Let $\mathcal{Z}$ be an algebraic stack satisfying the equivalent conditions of Lemma <a href="/tag/06MP" data-tag="06MP">100.11.3</a> and let $\mathcal{Z} \to \mathcal{X}$ be a monomorphism such that the image of $|\mathcal{Z}| \to |\mathcal{X}|$ is $x$. Then the residual gerbe $\mathcal{Z}_ x$ of $\mathcal{X}$ at $x$ exists and $\mathcal{Z} \to \mathcal{X}$ factors as $\mathcal{Z} \to \mathcal{Z}_ x \to \mathcal{X}$ where the first arrow is an equivalence. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $\mathcal{Z}_ x \subset \mathcal{X}$ be the full subcategory corresponding to the essential image of the functor $\mathcal{Z} \to \mathcal{X}$. Then $\mathcal{Z} \to \mathcal{Z}_ x$ is an equivalence, hence $\mathcal{Z}_ x$ is an algebraic stack, see Algebraic Stacks, Lemma <a href="/tag/03YQ" data-tag="03YQ">94.12.4</a>. Since $\mathcal{Z}_ x$ inherits all the properties of $\mathcal{Z}$ from this equivalence it is clear from the uniqueness in Lemma <a href="/tag/06MT" data-tag="06MT">100.11.7</a> that $\mathcal{Z}_ x$ is the residual gerbe of $\mathcal{X}$ at $x$. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0DTH">
+  <p><a class="environment-identifier" href="/tag/0DTH">Lemma <span data-tag="0DTH">100.11.13</span>.</a> Let $f : \mathcal{X} \to \mathcal{Y}$ be a morphism of algebraic stacks. Let $x \in |\mathcal{X}|$ with image $y \in |\mathcal{Y}|$. If the residual gerbes $\mathcal{Z}_ x \subset \mathcal{X}$ and $\mathcal{Z}_ y \subset \mathcal{Y}$ of $x$ and $y$ exist, then $f$ induces a commutative diagram </p>
+  <div class="equation">
+  \[  \xymatrix{ \mathcal{X} \ar[d]_ f &  \mathcal{Z}_ x \ar[l] \ar[d] \\  \mathcal{Y} &  \mathcal{Z}_ y \ar[l] }  \]
+</div>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Choose a field $k$ and a surjective, flat, locally finitely presented morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}_ x$. The morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Y}$ factors through $\mathcal{Z}_ y$ by Lemma <a href="/tag/06MW" data-tag="06MW">100.11.11</a>. Thus $\mathcal{Z}_ x \times _\mathcal {Y} \mathcal{Z}_ y$ is a nonempty substack of $\mathcal{Z}_ x$ hence equal to $\mathcal{Z}_ x$ by Lemma <a href="/tag/06MQ" data-tag="06MQ">100.11.4</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0DTI">
+  <p><a class="environment-identifier" href="/tag/0DTI">Lemma <span data-tag="0DTI">100.11.14</span>.</a> Let $f : \mathcal{X} \to \mathcal{Y}$ be a morphism of algebraic stacks. Let $x \in |\mathcal{X}|$ with image $y \in |\mathcal{Y}|$. Assume the residual gerbes $\mathcal{Z}_ x \subset \mathcal{X}$ and $\mathcal{Z}_ y \subset \mathcal{Y}$ of $x$ and $y$ exist and that there exists a morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{X}$ in the equivalence class of $x$ such that </p>
+  <div class="equation">
+  \[  \mathop{\mathrm{Spec}}(k) \times _\mathcal {X} \mathop{\mathrm{Spec}}(k) \longrightarrow \mathop{\mathrm{Spec}}(k) \times _\mathcal {Y} \mathop{\mathrm{Spec}}(k)  \]
+</div>
+  <p> is an isomorphism. Then $\mathcal{Z}_ x \to \mathcal{Z}_ y$ is an isomorphism. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $k'/k$ be an extension of fields. Then 
+    <p>
+      <div class="equation">
+  \[  \mathop{\mathrm{Spec}}(k') \times _\mathcal {X} \mathop{\mathrm{Spec}}(k') \longrightarrow \mathop{\mathrm{Spec}}(k') \times _\mathcal {Y} \mathop{\mathrm{Spec}}(k')  \]
+</div>
+    <p>
+       is the base change of the morphism in the lemma by the faithfully flat morphism $\mathop{\mathrm{Spec}}(k' \otimes k') \to \mathop{\mathrm{Spec}}(k \otimes k)$. Thus the property described in the lemma is independent of the choice of the morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{X}$ in the equivalence class of $x$. Thus we may assume that $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}_ x$ is surjective, flat, and locally of finite presentation. In this situation we have 
+    <p>
+      <div class="equation">
+  \[  \mathcal{Z}_ x = [\mathop{\mathrm{Spec}}(k)/R]  \]
+</div>
+    <p>
+       with $R = \mathop{\mathrm{Spec}}(k) \times _\mathcal {X} \mathop{\mathrm{Spec}}(k)$. See proof of Lemma <a href="/tag/06MR" data-tag="06MR">100.11.5</a>. Since also $R = \mathop{\mathrm{Spec}}(k) \times _\mathcal {Y} \mathop{\mathrm{Spec}}(k)$ we conclude that the morphism $\mathcal{Z}_ x \to \mathcal{Z}_ y$ of Lemma <a href="/tag/0DTH" data-tag="0DTH">100.11.13</a> is fully faithful by Algebraic Stacks, Lemma <a href="/tag/04T4" data-tag="04T4">94.16.1</a>. We conclude for example by Lemma <a href="/tag/06MX" data-tag="06MX">100.11.12</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  // move extras from parent element to after environment name and number
+  $("article a[data-toggle]").each(function(index, element) {
+    $(element).insertAfter(($(element).parent().find("a.environment-identifier")));
+  });
+
+  $('article a[data-toggle="popover"]').popover()
+
+  // render mathematics in popovers
+  $("[data-toggle=popover]").on('shown.bs.popover', function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, $("div.popover-body").html()]);
+  });
+});
+  </script>
+
+  
+
+  
+    <section id="footnotes">
+    
+      <div><a id="footnote-1" class="footnote-offset"></a><a href="#footnote-1-mark">[1]</a> This clashes with <span class="cite">[<a href="/bibliography/LM-B">LM-B</a>]</span> in spirit, but not in fact. Namely, in Chapter 11 they associate to any point on any quasi-separated algebraic stack a gerbe (not necessarily algebraic) which they call the residual gerbe. We will see in Morphisms of Stacks, Lemma <a href="/tag/06RD" data-tag="06RD">101.31.1</a> that on a quasi-separated algebraic stack every point has a residual gerbe in our sense which is then equivalent to theirs. For more information on this topic see <span class="cite">[<span class="postnote">Appendix B</span>, <a href="/bibliography/rydh_etale_devissage">rydh_etale_devissage</a>]</span>.</div>
+    
+    </section>
+  
+</div>
+
+
+<hr>
+
+<section id="comments">
+  <h2>Comments (2)</h2>
+
+  
+    <a id="comment-1852" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/06ML#comment-1852">Comment #1852</a>
+        by
+        <cite>Matthew Emerton</cite>
+        on <time datetime="2016-03-01 23:21:52">March 01, 2016 at 23:21 </time>
+      </header>
+
+      <blockquote><p>Just before 82.11.7, you say that you will prove the existence of residual gerbes later, but rather than giving the reference, you have "(insert future reference here)".  In the footnote, you actually give the reference to where this is done, in section 83.21, but it would be good to put it in the main body of the text too.</p></blockquote>
+    </article>
+  
+    <a id="comment-1891" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/06ML#comment-1891">Comment #1891</a>
+        by
+        <cite><a href="http://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2016-04-01 23:27:52">April 01, 2016 at 23:27 </time>
+      </header>
+
+      <blockquote><p>Thanks, fixed <a href="https://github.com/stacks/stacks-project/commit/9156c2ea1b59971ccc2eb5588f413319eea60c04">here</a>.</p></blockquote>
+    </article>
+  
+
+  
+</section>
+
+<hr>
+
+<section id="post-comment">
+  <h2>Post a comment</h2>
+  <p>Your email address will not be published. Required fields are marked.
+  <p>In your comment you can use <a href="/markdown">Markdown</a> and LaTeX style mathematics (enclose it like <code>$\pi$</code>). A preview option is available if you wish to see how it works out (just click on the eye in the toolbar).
+  <noscript><p>Unfortunately JavaScript is disabled in your browser, so the comment preview function will not work.</p></noscript>
+
+  <p>All contributions are licensed under the <a href="https://github.com/stacks/stacks-project/blob/master/COPYING">GNU Free Documentation License</a>.
+
+  <form name="comment" id="comment-form" action="/post-comment" method="post">
+    <label for="name">Name<sup>*</sup>:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="mail">E-mail<sup>*</sup>:</label>
+    <input type="email" name="mail" id="mail" required><br>
+
+    <label for="site">Site:</label>
+    <input type="url" name="site" id="site"><br>
+
+    <label>Comment:</label>
+    <textarea name="comment" id="comment-textarea" cols="80" rows="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <script type="text/javascript">
+var easymde = new EasyMDE({
+  autosave: {
+    enabled: true,
+    delay: 1000,
+    uniqueId: "comment-06ML",
+  },
+  element: $("#comment")[0],
+  forceSync: true,
+  insertTexts: { link: ["\\ref{", "}"], table: ["$", "$"], image: ["\\begin{equation}\n", "\n\\end{equation}\n"] }, // we hack into these insertion methods, I couldn't figure out how to write your own...
+  placeholder: "You can type your comment here, use the preview option to see what it will look like. If your comment is on a lemma, please leave your comment on the page of the lemma. Same with remarks, propositions, theorems, etc.",
+  previewRender: function(plaintext, preview) {
+    // deal with references
+    plaintext = plaintext.replace(/\\ref\{([0-9A-Z]{4})\}/g, "<span class=\"tag\">[$1](/tag/$1)</span>");
+    // deal with \[\] getting replaced to []
+    plaintext = plaintext.replace(/\\\[/g, "\\begin{equation}");
+    plaintext = plaintext.replace(/\\\]/g, "\\end{equation}");
+
+    output = this.parent.markdown(plaintext);
+
+    setTimeout(function() {
+      preview.innerHTML = output;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }, 0);
+
+    return "";
+  },
+  spellChecker: false,
+  status: false,
+  toolbar: [
+    "link", {name: "inline", action: EasyMDE.drawTable, className: "fa fa-usd"}, {name: "block", action: EasyMDE.drawImage, className: "fa fa-square"}, "|",
+    "bold", "italic", "|",
+    "ordered-list", "unordered-list", "|",
+    "preview"
+  ],
+});
+
+// make sure to show tags, not numbers
+var tagToggleHappened = false; // only do this once to not annoy the user too much
+easymde.codemirror.on("change", function() {
+  // if data-tag elements do not have tag attribute we need to make tags visible
+  if (!$("*[data-tag]").hasClass("tag") && !tagToggleHappened)
+    $("section#meta input.toggle").bootstrapToggle("toggle");
+  tagToggleHappened = true;
+});
+
+// prevent form submit when the captcha isn't correct
+// it's a bit silly to use HTML5 validation for this, as bots can figure that out
+// also save the author information to localStorage
+easymde.element.form.addEventListener("submit", function(event) {
+  if ($("#check").val() != $("#hidden-tag").val()) {
+    // explain captcha
+    $("#captcha-message").toggle();
+
+    // stop submit
+    event.preventDefault();
+    return false;
+  }
+
+  // save author information
+  localStorage.setItem("name", $("input#name").val());
+  localStorage.setItem("mail", $("input#mail").val());
+  localStorage.setItem("site", $("input#site").val());
+});
+    </script>
+
+    <p>In order to prevent bots from posting comments, we would like you to prove that you are human. You can do this by <em>filling in the name of the current tag</em> in the following input field. As a reminder, this is tag <span class="tag">06ML</span>. Beware of the difference between the letter&nbsp;'<span class="tag">O</span>' and the digit&nbsp;'<span class="tag">0</span>'.</p>
+    <!--<p>This <abbr title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</abbr> seems more appropriate than the usual illegible gibberish, right?<br>-->
+    <label for="check">Tag:</label>
+    <input type="text" name="check" id="check" required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Post comment</button>
+    <input type="hidden" name="tag" id="hidden-tag" value="06ML"><br>
+
+    <p id="captcha-message" style="display: none" class="alert alert-warning" role="alert">The tag you filled in for the captcha is wrong. You need to write <span class="tag">06ML</span>, in case you are confused.</p>
+
+    <script type="text/javascript">
+// enter in captcha fields causes \ref to appear (?!)
+$("input#check").on("keypress", function(e) {
+  if (e.which == 13) {
+    // always stop the event
+    e.preventDefault();
+
+    // perform clientside check as for actual submit
+    if ($("#check").val() != $("#hidden-tag").val()) {
+      // explain captcha
+      $("#captcha-message").toggle();
+    }
+    else {
+      $("form#comment-form").submit();
+    }
+  }
+});
+    </script>
+  </form>
+</section>
+
+
+
+
+    </section>
+	  <div class="col-lg-4 col-xl-4">
+	    <section id="meta" class="row topbar sticky-top">
+        
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0508">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/0AFL">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  <hr>
+  
+    <a href="https://stacks.math.columbia.edu/download/stacks-properties.pdf#nameddest=06ML">View Section <span data-tag="06ML">100.11</span> as pdf</a>
+  
+
+  
+
+
+      </section>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

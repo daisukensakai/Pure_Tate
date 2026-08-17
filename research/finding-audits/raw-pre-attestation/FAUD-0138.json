@@ -1,0 +1,88 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Promote only after narrowing the recorded generality to balanced weakly-normalized fibres with h^0(L)=3, or equivalently fibres of the resulting P^2-bundle. There is no contradiction with FND-0083: that finding says Riemann\u2013Roch alone does not establish reduced support on every geometric fibre, whereas this result uses the additional base-point-free and characteristic-zero Bertini inputs. There is no contradiction with FND-0058 or FND-0104: constancy of h^0(L)=3 over the entire balanced locus remains unresolved and is not a conclusion here. FND-0130 supplies the already-corroborated base-point-free component; the independently substantive addition is the reduced-general-divisor conclusion, so FND-0134 should remain a separate promoted positive lemma rather than be merged into FND-0130. Its recorded kind 'obstruction' is consequently a misclassification. The absence of FND-0134 from proof/findings.jsonl is a corpus-registration discrepancy, not a mathematical contradiction; TASK.json contains the controlling assigned record.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0134",
+  "id": "FAUD-0138",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "base_field": "algebraically closed of characteristic zero",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "conclusion": "L is base-point-free, and a general member of |L|\u2245P^2 is a reduced degree-six divisor, hence consists of six distinct geometric points. The reduced-support locus in the closed Abel\u2013Jacobi fibre is therefore nonempty and dense.",
+    "dependency_ids": [
+      "FND-0130",
+      "FND-0105",
+      "FND-0107",
+      "FND-0047",
+      "SRC-0004"
+    ],
+    "exact_mathematical_scope": "Smooth geometric fibres of a balanced tetragonal Casnati\u2013Ekedahl family satisfying the weak relative-canonical normalization, restricted to the locus where h^0(L)=3. Equivalently, fibres of the relative P^2-bundle where cohomology and base change identify the Abel\u2013Jacobi fibre with |L|.",
+    "excluded_claims": [
+      "This does not prove that h^0(L)=3 on every balanced fibre.",
+      "This does not construct a P^2-bundle over the entire balanced locus.",
+      "This does not discharge GAP-H0-1 or the every-geometric-fibre issue in FND-0083.",
+      "No positive-characteristic version is asserted without a separability or unramifiedness hypothesis."
+    ],
+    "hypotheses": [
+      "L has degree 6",
+      "h^0(L)=3 on the fibre",
+      "the CE relations bundle is balanced, F=O(4)\u2295O(5)",
+      "the weak normalization identifies L with omega_C(-D)",
+      "for the relative formulation, p_*L is locally free of rank 3 and commutes with base change"
+    ],
+    "proof_summary": "By corroborated dependency FND-0130, a base point would produce a complete g^2_5 and hence a smooth plane-quintic model whose tetragonal pencil is projection from that point; its CE relations splitting is O(3)\u2295O(6), not the balanced O(4)\u2295O(5), so L is base-point-free. The associated morphism from the smooth curve is nonconstant and separable in characteristic zero. Bertini/generic smoothness then gives a reduced general hyperplane pullback. Since deg(L)=6, that pullback consists of six distinct points.",
+    "relative_form": "Over any locus on which the Abel\u2013Jacobi incidence is the P^2-bundle P(p_*L), the reduced-support open is fibrewise nonempty and dense.",
+    "source_hash_basis": "The recorded SHA-256 values hash the normalized locator-summary text audited for each source; raw source bytes were not exposed through the read-only literature bridge."
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "83cba8af45814cf27c5b0fa77d94c15e23dfd6d7028d7af085b7560a4c1ff324",
+      "doi": "10.1007/978-1-4757-3849-0",
+      "query_family": "bertini-base-point-free-characteristic-zero",
+      "retrieved_at": "2026-08-13T11:37:56Z",
+      "source_type": "monograph",
+      "url": "https://link.springer.com/book/10.1007/978-1-4757-3849-0"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "8ff2b6d41abb7018eab31446938b21c9dbc0a77ec378b831f442cd5f719b3556",
+      "doi": "10.1007/BF01458587",
+      "query_family": "plane-quintic-tetragonal-schreyer-invariants",
+      "retrieved_at": "2026-08-13T11:37:56Z",
+      "source_type": "journal",
+      "url": "https://link.springer.com/article/10.1007/BF01458587"
+    },
+    {
+      "arxiv_id": "1410.1692",
+      "arxiv_version": "v2",
+      "content_sha256": "5a9ccaad8922e1dd7d4b5ae210db36c84684fd574e868803f4aa789cdc8b4446",
+      "doi": null,
+      "query_family": "plane-quintic-schreyer-invariant-cross-check",
+      "retrieved_at": "2026-08-13T11:37:56Z",
+      "source_type": "journal-preprint",
+      "url": "https://arxiv.org/abs/1410.1692"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "d58a4b348693c035380df2b16c1b22ed4f7ccc22a2026c11e635808279b2223e",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "ce-line-bundle-degree-six",
+      "retrieved_at": "2026-08-13T11:37:56Z",
+      "source_type": "journal-preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
+    }
+  ],
+  "task_id": "TASK-F-FND-0134",
+  "verdict": "promote"
+}

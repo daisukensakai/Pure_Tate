@@ -1,0 +1,43 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. The finding is compatible with and complementary to corroborated FND-0031 (depth-one Gysin corner of the weight spectral sequence involves degree-shifted contributions H^{2d-18}(D^{(1)})(-1)), FND-0089 (arc insertion operators do not supply chain homotopies on the restriction complex), FND-0071 (kernel of restriction being Tate does not imply the whole group is Tate), and FND-0048 (treating the pure piece as a decorated stable-graph complex is circular). Primary mathematical verification: (1) Gysin pushforward from codimension-c boundary strata shifts cohomological degree by 2c and Tate twist by c, so the boundary-pushforward span contributing to H^m(Mbar_{g,n}) draws on strata cohomology in degrees m-2, m-4, ..., m-2c_max. (2) The simultaneous pullback kernel P^m_{g,n} = intersection of ker(xi_Gamma^*) lives entirely in degree m and involves restriction maps that preserve degree. (3) By Poincare duality on the smooth proper Deligne-Mumford stack Mbar_{g,n} of dimension d, ker(xi_Gamma^* in degree m) is dual to coker((xi_Gamma)_* in degree 2d-m), so the two complexes are related only through a duality that reindexes degree m to 2d-m. (4) SRC-0002 equation (6.1) and THM-0003 confirm the Gysin exact sequence H^{k-2}(partial-tilde)(-1) -> H^k(Mbar) -> W_k H^k(M) -> 0, establishing the degree-2 shift at codimension one. (5) SRC-0003 confirms the clutching map structure and Aut(Gamma)-equivariant E_1 terms with det E_Gamma twist. The finding correctly identifies that degree-count arguments working in the Gysin pushforward complex (with per-edge codimension shifts) analyze a structurally different object from P^m_{g,n} and that conclusions require explicit duality reindexing. Distinct from FND-0089 (combinatorial arc insertion vs. restriction complex identification) and FND-0071 (kernel Tate not implying whole group Tate): FND-0090 addresses the degree-structure mismatch between two boundary-analysis complexes. Merge target: none. Promote from candidate to corroborated.",
+  "engine": "qwen",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0090",
+  "id": "FAUD-0067",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "applies_to": "all stable (g,n); campaign case (6,6)",
+    "coefficients": "Q",
+    "objects": [
+      "P^m_{g,n}",
+      "boundary Gysin filtration"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2307.08830"
+    },
+    {
+      "arxiv_id": "2209.03113",
+      "arxiv_version": "v2",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": "10.1017/fms.2023.59",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2209.03113"
+    }
+  ],
+  "task_id": "TASK-F-FND-0090",
+  "verdict": "promote"
+}

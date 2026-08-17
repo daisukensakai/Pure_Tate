@@ -1,0 +1,46 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No curated claim-level contradiction exists: contradicts_claim_ids is empty and data/claims.jsonl contains no opposing curve-theoretic claim. Canning-Larson Lemma 10.3 supplies the relative-canonical identification, Lemma 10.6 supplies the relevant degree calculation, and Lemma 10.10 excludes trigonal curves and smooth plane quintics from the balanced f_1=4 stratum. Riemann-Roch and Clifford theory then give h^0(L)=3. If L had a base point, L(-p) would be a base-point-free g^2_5 and hence would realize C as a smooth plane quintic, contradicting Lemma 10.10; therefore the nominal g^2_5 branch is empty and L is a base-point-free g^2_6. Bertini and the discriminant theory of Lanteri-Munoz verify that the non-reduced locus is a proper closed curve in |L|, while elementary configuration-space quotient theory gives the degree-720 etale S_6-torsor. Thus the finding is mathematically sound after narrowing to characteristic zero, but its principal reduced-support result duplicates FND-0134, and its torsor clause duplicates FND-0064. The only additional content is the standard statement that the complement is a discriminant curve, so FND-0140 should be merged into FND-0134 rather than independently promoted.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0140",
+  "id": "FAUD-0141",
+  "independent": true,
+  "merge_target_id": "FND-0134",
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "base": "geometric fibres over an algebraically closed field of characteristic zero",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "family": "smooth degree-four Casnati-Ekedahl covers with relations bundle O(4) direct-sum O(5) and the stated weak relative-canonical normalization",
+    "limitations": "The audit does not extend the discriminant assertion to unspecified positive characteristic. Scheme-theoretic irreducibility or multiplicity of the discriminant is not asserted; it may be the dual curve together with components caused by ramification of the plane morphism.",
+    "verified_conclusion": "The normalization and degree formula give L isomorphic to omega_C(-D), of degree 6 and dimension 2. On the balanced stratum the plane-quintic alternative is excluded, so L is actually a base-point-free g^2_6 and its fixed part has degree zero. Its non-reduced members form a nonempty proper closed plane curve; the complementary reduced-support open is nonempty, dense, smooth, and non-closed. The ordered incidence over this open is a smooth finite etale S_6-torsor of degree 720."
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "0d84f9ea916534a7beee8874456f244a846a754d292354d39835c8354e179175",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-13T12:26:21Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": "math/0701870",
+      "arxiv_version": "v1",
+      "content_sha256": "26da8737a665cdc991d3eb3214e4444d2975ab880e954ecbc498cb08ebe417ae",
+      "doi": "10.1016/j.jpaa.2007.07.007",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-13T12:26:21Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/math/0701870"
+    }
+  ],
+  "task_id": "TASK-F-FND-0140",
+  "verdict": "merge"
+}

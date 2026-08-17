@@ -1,0 +1,118 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. It is compatible with the packet C66-GEO-COMP demand for components, stabilizers, and finite-cover behaviour of Z, and with corroborated FND-0132 and FND-0144, which it explicitly distinguishes. INDEPENDENT CHECK. (1) Naming of H. For a connected qcqs k-scheme U and a geometric point u, pi_1^{et}(U,u) is the arithmetic fundamental group of the k-scheme U. Stacks Lemma 58.14.3 (0BTX), independently fetched, states: if U_{k-bar} is connected then there is a short exact sequence of profinite groups 1 -> pi_1(U_{k-bar}) -> pi_1(U) -> pi_1(Spec k) -> 1. The proof records that the image of pi_1(U_{k-bar}) -> pi_1(U) is normal, via the Gal(k-bar/k)-orbit argument of Lemma 58.4.5. ATT-0099's theorem_statement names H as the image of pi_1^{et}(U,u) acting by left translations on the geometric fibre of the finite etale S_6-torsor Z->U, so H=H_arith. CLM-0099-3, the summary, GAP-0099-1 and the first novelty claim label the same subgroup 'geometric monodromy'. That label is correct only when k=k-bar. Independently confirmed by reading ATT-0099. (2) Component formula over k. Stacks 03SF: finite etale U-schemes are finite continuous pi_1(U,u)-sets, and connected components correspond to orbits on the geometric fibre. For a right S_6-torsor the left pi_1-action is through rho: pi_1(U,u)->S_6, the orbits are the left cosets Hg, and there are [S_6:H] of them, each of size |H|. Stacks 0BQL: a connected finite etale cover of a normal integral scheme is itself integral normal. Stacks 033N: a locally Noetherian normal scheme is a disjoint union of integral normal schemes, so connected components are irreducible. Thus Irr(Z)=H_arith\\S_6 as a statement about the k-scheme Z, exactly as the theorem_statement writes it. (3) Comparison with H_geom. Restricting rho to pi_1(U_{k-bar},u) gives H_geom=rho(pi_1^geom). Under the 0BTX hypothesis that U_{k-bar} is connected, pi_1^geom is normal in pi_1^arith, so H_geom is normal in H_arith and H_geomsubseteq H_arith, hence [S_6:H_arith]<=[S_6:H_geom]. After base change the same Galois correspondence over U_{k-bar} yields [S_6:H_geom] geometric connected (hence irreducible) components, each of degree |H_geom|. The k-component count, the common degree |H|, and the conjugacy class of the component stabilizer g^{-1}Hg therefore all change. In particular Z irreducible over k (H_arith=S_6) does not imply Z geometrically irreducible (H_geom=S_6): the standard example is H_arith=S_6 and H_geom=A_6, giving one k-component that splits into two geometric components. The quotient H_arith/H_geom is a subquotient of Gal(k^s/k), not necessarily the full Galois group. (4) Scope sharpening, not a refutation. The SES and the equality 'number of geometric components = [S_6:H_geom]' require U_{k-bar} connected. ATT-0099 assumes only that S (hence U) is normal integral finite type over a char-0 field, not geometrically integral; if the constant field of U properly extends k then U_{k-bar} is disconnected and the geometric count is the orbit count on each geometric component of U separately. The identification of the H in Irr(Z)=H\\S_6 with the arithmetic image does not need geometric connectedness. (5) Campaign consequences. A monodromy computation for the balanced tetragonal family over an algebraically closed field, or a topological monodromy computation over C, computes H_geom and therefore bounds the geometric component count. It equals the k-count only if k=k-bar or if H_arith=H_geom is proved separately. Downstream citations of ATT-0099 must name which pi_1 is meant. RELATION TO THE CORPUS. Distinct from corroborated FND-0132 (the connected-to-irreducible upgrade needs normality of the base and holds even for k=k-bar; FAUD-0137's parenthetical that normality does not give geometric irreducibility is a one-line caveat, not this finding). Distinct from corroborated FND-0144 (stack inertia obstructs the scheme-theoretic [S_6:H] formula over a stack base; also visible when k=k-bar). Distinct from pending FND-0149 (unrecorded descent of ATT-0088 from algebraically closed k to general k for the P^2-bundle, smoothness and regular-immersion clauses; FND-0149 itself points at this finding for the monodromy residue). Complementary to FND-0127 (scheme-to-stack scope widening; this is the field-of-definition analogue for the monodromy group). Do not merge. Kind 'obstruction' is correct for the mislabeling of H and for any downstream use of a geometric-monodromy computation as a k-component count. Merge target: none. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source. The finding's sole reviewer_engine (claude) is in this revision's excluded_engines; this audit is the first non-excluded verification.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0148",
+  "id": "FAUD-0154",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "characteristic": 0,
+    "coefficients": "any",
+    "exact_mathematical_scope": "Let U be a connected quasi-compact quasi-separated scheme over a field k, u a geometric point, and Z->U a finite etale right S_6-torsor. The group H appearing in Irr(Z)=H\\S_6 as a statement about the k-scheme Z is the image H_arith of the arithmetic fundamental group pi_1^{et}(U,u)->S_6. If U is normal integral and locally Noetherian, Stacks 03SF+0BQL+033N identify connected components of Z with left H_arith-cosets, so Z has [S_6:H_arith] irreducible components, each finite etale of degree |H_arith| over U, and the S_6-stabilizer of the component Hg is g^{-1}H_arith g. If moreover U_{k-bar} is connected, Stacks 0BTX gives 1->pi_1(U_{k-bar})->pi_1(U)->pi_1(Spec k)->1, so H_geom:=image(pi_1^{et}(U_{k-bar},u)->S_6) is normal in H_arith and [S_6:H_arith]<=[S_6:H_geom]; after base change the same correspondence over U_{k-bar} yields [S_6:H_geom] geometric irreducible components of degree |H_geom|. Thus irreducibility of Z over k is strictly weaker than geometric irreducibility. Campaign instance: the ATT-0099 ordering torsor Z->U over a normal integral finite-type char-0 base.",
+    "excluded_claims": [
+      "Does not compute H_arith or H_geom for the balanced tetragonal family.",
+      "Does not assert that ATT-0099's theorem_statement is false: that statement names pi_1^{et}(U,u) and counts k-irreducible components.",
+      "Does not retract FND-0132 (normality for connected-to-irreducible) or FND-0144 (stack inertia).",
+      "Does not discharge the unrecorded ATT-0088 ground-field widening, which is FND-0149.",
+      "Does not produce a non-Tate summand or discharge C66-GEO-COMP."
+    ],
+    "excluded_engine_note": "the finding's sole reviewer_engine (claude) is in this revision's excluded_engines; this audit supplies the first non-excluded verification",
+    "generality": "any finite etale S_n-torsor over a connected qcqs k-scheme; campaign instance is the ordered distinct-support CE failure model at (g,n)=(6,6)",
+    "hypotheses": [
+      "U connected qcqs over a field k",
+      "Z->U a finite etale right S_6-torsor",
+      "for Irr(Z)=pi_0(Z): U normal integral locally Noetherian",
+      "for H_geom normal in H_arith and the geometric count [S_6:H_geom]: U_{k-bar} connected"
+    ],
+    "impacted_claim_ids": [
+      "CLM-0099-3"
+    ],
+    "impacts_approach_ids": [
+      "C66-GEO-COMP"
+    ],
+    "kind_note": "obstruction to reading H in Irr(Z)=H\\S_6 as geometric monodromy, or to using a geometric-monodromy computation as a k-component count, once k is not algebraically closed",
+    "objects": [
+      "Z",
+      "U",
+      "S_6-ordering torsor",
+      "H",
+      "H_arith",
+      "H_geom"
+    ],
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "6c59bd06256dfee05fdcd9ee7c1bfcedc18b80a78e6d7d228d703f273a92480b",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "arithmetic-geometric-pi1-exact-sequence",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-16T05:40:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0BTX"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "93635733d2e998fe28282d40a4fe70b19dcd3b4e4449fee951eea7433e5310f6",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "etale-fundamental-group-orbits",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-16T05:36:40Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/03SF"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "8e88d980cec4a77d971b6e610da5b84d3c903c2934412b643cb221ec8771a0d9",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "finite-etale-connected-normal-integral",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-16T05:36:50Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0BQL"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "f24e0ae138a5fac2095c0ae437849927369b35900089c3daa0ed9b232614f93c",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "normal-locally-noetherian-components",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-16T05:37:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/033N"
+    },
+    {
+      "arxiv_id": "math/0206203",
+      "arxiv_version": "v2",
+      "content_sha256": "3d6d11bbc07420402a74561ca8a1028b701215237fa3ea01feda764486cfe129",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "sga1-homotopy-exact-sequence",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-16T05:40:10Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/math/0206203"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0148",
+  "verdict": "promote",
+  "verified_source_count": 5
+}

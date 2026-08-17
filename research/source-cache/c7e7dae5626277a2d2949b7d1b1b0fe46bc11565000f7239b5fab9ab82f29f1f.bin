@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#d9d8d1">
+
+<title>Section 101.23 (06PT): Locally quasi-finite morphisms&mdash;The Stacks project</title>
+
+<meta name="description" content="an open source textbook and reference work on algebraic geometry">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ['tex2jax.js'],
+    jax: ['input/TeX','output/HTML-CSS'],
+    TeX: {
+      extensions: ['AMSmath.js', 'AMSsymbols.js', '/static/XyJax/extensions/TeX/xypic.js'],
+      Macros: {
+        linebreak: ["", 1, ""],
+        },
+      TagSide: 'left'
+    },
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    },
+    'HTML-CSS': {
+    	scale: 100,
+	availableFonts: [],
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+
+
+  <script type="text/javascript" src="/static/js/toggle.js"></script>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/easymde@2.0.1/dist/easymde.min.css" integrity="sha384-IRbzB9px0sfIx90vkN+geaX3F4LVcg/M+k5vmVkfjs5TnRX3MIhGS8Ma06ALKVYp" crossorigin="anonymous">
+  <script src="https://unpkg.com/easymde@2.0.1/dist/easymde.min.js" integrity="sha384-v06sb0t0ToY1YRtVlfD/GCGpIZ/QHYyeH2Gzjvr0ZJI62/50DIzT8XRgQ6JvptVu" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.css" integrity="sha384-8xTxM5sJRAUB0ckdBghB5am+aw+0kC5FfSUzMI+KI+UD8uBCNeSkdi8I1J4+Wjwu" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.js" integrity="sha384-gE5xOW4MVOjJL1A2SbxwvQw/qet6h8Vdv06j3JQGhBW4d1H5hXYB12WsrUBgU439" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid bounded">
+  <div id="first-bar" class="row topbar inner-top top">
+    <header class="col">
+      <h1><a href="/">The Stacks project</a></h1>
+    </header>
+
+    <nav id="header">
+      <ul id="quicklinks">
+        <li><a href="/bibliography">bibliography</a>
+        <li><a href="https://www.math.columbia.edu/~dejong/wordpress/">blog</a>
+      </ul>
+
+      <form id="quicksearch" action="/search">
+        <span id="search-icon"><img src="/static/images/search.svg"></span>
+        <input type="search" name="query" size="16" placeholder="keywords or a tag" value="">
+      </form>
+    </nav>
+  </div>
+
+  <nav id="second-bar" class="row topbar sticky-top">
+    
+      <ul class="col-11 col-sm-11 col-md-11 col-lg-12 col-xl-12" id="crumbs">
+        <li><a href="/browse">Table of contents</a></li>
+        
+  
+  
+    <li>Part <a href="/tag/0ELS" data-tag="0ELS">7</a>: Algebraic Stacks
+    
+  
+    <li>Chapter <a href="/tag/04XM" data-tag="04XM">101</a>: Morphisms of Algebraic Stacks
+    
+  
+    <li class="active">Section <a href="/tag/06PT" data-tag="06PT">101.23</a>: Locally quasi-finite morphisms
+    <span id="citation">(<a href="/tag/06PT/cite">cite</a>)</span>
+  
+
+
+      </ul>
+    
+
+    
+      <div class="col-1 col-sm-1 col-md-1" id="burger">
+        <input type="checkbox" id="burger-input"></input>
+
+        <label id="burger-icon" for="burger-input">
+          <span id="top-bun"></span>
+          <span id="meat"></span>
+          <span id="bottom-bun"></span>
+        </label>
+
+        <div id="burger-content">
+          
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0DSL">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/0G2L">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  
+
+
+        </div>
+      </div>
+    
+
+    
+  </nav>
+
+  <div class="row" id="content">
+    <section id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      
+<div class="html" id="tag">
+  
+
+  
+
+  
+
+  <h2 id="stacks-morphisms-section-locally-quasi-finite" class="tex-section"><span data-tag="06PT">101.23</span> Locally quasi-finite morphisms</h2>
+
+<p>
+The property “locally quasi-finite” of morphisms of algebraic spaces is not smooth local on the source-and-target so we cannot use the material in Section <a href="/tag/06FL" data-tag="06FL">101.16</a> to define locally quasi-finite morphisms of algebraic stacks. We do already know what it means for a morphism of algebraic stacks representable by algebraic spaces to be locally quasi-finite, see Properties of Stacks, Section <a href="/tag/04XB" data-tag="04XB">100.3</a>. To find a condition suitable for general morphisms we make the following observation. 
+</p>
+<p>
+<article class="env-lemma" id="06UA">
+  <p><a class="environment-identifier" href="/tag/06UA">Lemma <span data-tag="06UA">101.23.1</span>.</a> Let $f : \mathcal{X} \to \mathcal{Y}$ be a morphism of algebraic stacks. Assume $f$ is representable by algebraic spaces. The following are equivalent </p>
+  <p><ol>
+  <li><p>
+$f$ is locally quasi-finite (as in Properties of Stacks, Section <a href="/tag/04XB" data-tag="04XB">100.3</a>), and 
+</p>
+</li><li><p>
+$f$ is locally of finite type and for every morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Y}$ where $k$ is a field the space $|\mathop{\mathrm{Spec}}(k) \times _\mathcal {Y} \mathcal{X}|$ is discrete. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Assume (1). In this case the morphism of algebraic spaces $\mathcal{X}_ k \to \mathop{\mathrm{Spec}}(k)$ is locally quasi-finite as a base change of $f$. Hence $|\mathcal{X}_ k|$ is discrete by Morphisms of Spaces, Lemma <a href="/tag/06RW" data-tag="06RW">67.27.5</a>. Conversely, assume (2). Pick a surjective smooth morphism $V \to \mathcal{Y}$ where $V$ is a scheme. It suffices to show that the morphism of algebraic spaces $V \times _\mathcal {Y} \mathcal{X} \to V$ is locally quasi-finite, see Properties of Stacks, Lemma <a href="/tag/04XD" data-tag="04XD">100.3.3</a>. The morphism $V \times _\mathcal {Y} \mathcal{X} \to V$ is locally of finite type by assumption. For any morphism $\mathop{\mathrm{Spec}}(k) \to V$ where $k$ is a field 
+    <p>
+      <div class="equation">
+  \[  \mathop{\mathrm{Spec}}(k) \times _ V (V \times _\mathcal {Y} \mathcal{X}) = \mathop{\mathrm{Spec}}(k) \times _\mathcal {Y} \mathcal{X}  \]
+</div>
+    <p>
+       has a discrete space of points by assumption. Hence we conclude that $V \times _\mathcal {Y} \mathcal{X} \to V$ is locally quasi-finite by Morphisms of Spaces, Lemma <a href="/tag/06RW" data-tag="06RW">67.27.5</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+A morphism of algebraic stacks which is representable by algebraic spaces is quasi-DM, see Lemma <a href="/tag/050E" data-tag="050E">101.4.3</a>. Combined with the lemma above we see that the following definition does not conflict with the already existing notion in the case of morphisms representable by algebraic spaces. 
+</p>
+<p>
+<article class="env-definition" id="06PU">
+  <p><a class="environment-identifier" href="/tag/06PU">Definition <span data-tag="06PU">101.23.2</span>.</a> Let $f : \mathcal{X} \to \mathcal{Y}$ be a morphism of algebraic stacks. We say $f$ is <em>locally quasi-finite</em> if $f$ is quasi-DM, locally of finite type, and for every morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{Y}$ where $k$ is a field the space $|\mathcal{X}_ k|$ is discrete. </p>
+</article> 
+</p>
+<p>
+The condition that $f$ be quasi-DM is natural. For example, let $k$ be a field and consider the morphism $\pi : [\mathop{\mathrm{Spec}}(k)/\mathbf{G}_ m] \to \mathop{\mathrm{Spec}}(k)$ which has singleton fibres and is locally of finite type. As we will see later this morphism is smooth of relative dimension $-1$, and we'd like our locally quasi-finite morphisms to have relative dimension $0$. Also, note that the section $\mathop{\mathrm{Spec}}(k) \to [\mathop{\mathrm{Spec}}(k)/\mathbf{G}_ m]$ does not have discrete fibres, hence is not locally quasi-finite, and we'd like to have the following permanence property for locally quasi-finite morphisms: If $f : \mathcal{X} \to \mathcal{X}'$ is a morphism of algebraic stacks locally quasi-finite over the algebraic stack $\mathcal{Y}$, then $f$ is locally quasi-finite (in fact something a bit stronger holds, see Lemma <a href="/tag/06UG" data-tag="06UG">101.23.8</a>). 
+</p>
+<p>
+Another justification for the definition above is Lemma <a href="/tag/06UF" data-tag="06UF">101.23.7</a> below which characterizes being locally quasi-finite in terms of the existence of suitable “presentations” or “coverings” of $\mathcal{X}$ and $\mathcal{Y}$. 
+</p>
+<p>
+<article class="env-lemma" id="06UB">
+  <p><a class="environment-identifier" href="/tag/06UB">Lemma <span data-tag="06UB">101.23.3</span>.</a> A base change of a locally quasi-finite morphism is locally quasi-finite. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      We have seen this for quasi-DM morphisms in Lemma <a href="/tag/050F" data-tag="050F">101.4.4</a> and for locally finite type morphisms in Lemma <a href="/tag/06FU" data-tag="06FU">101.17.3</a>. It is immediate that the condition on fibres is inherited by a base change. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="06UC">
+  <p><a class="environment-identifier" href="/tag/06UC">Lemma <span data-tag="06UC">101.23.4</span>.</a> Let $\mathcal{X} \to \mathop{\mathrm{Spec}}(k)$ be a locally quasi-finite morphism where $\mathcal{X}$ is an algebraic stack and $k$ is a field. Let $f : V \to \mathcal{X}$ be a locally quasi-finite morphism where $V$ is a scheme. Then $V \to \mathop{\mathrm{Spec}}(k)$ is locally quasi-finite. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      By Lemma <a href="/tag/06FT" data-tag="06FT">101.17.2</a> we see that $V \to \mathop{\mathrm{Spec}}(k)$ is locally of finite type. Assume, to get a contradiction, that $V \to \mathop{\mathrm{Spec}}(k)$ is not locally quasi-finite. Then there exists a nontrivial specialization $v \leadsto v'$ of points of $V$, see Morphisms, Lemma <a href="/tag/01TH" data-tag="01TH">29.21.6</a>. In particular $\text{trdeg}_ k(\kappa (v)) > \text{trdeg}_ k(\kappa (v'))$, see Morphisms, Lemma <a href="/tag/06RU" data-tag="06RU">29.29.7</a>. Because $|\mathcal{X}|$ is discrete we see that $|f|(v) = |f|(v')$. Consider $R = V \times _\mathcal {X} V$. Then $R$ is an algebraic space and the projections $s, t : R \to V$ are locally quasi-finite as base changes of $V \to \mathcal{X}$ (which is representable by algebraic spaces so this follows from the discussion in Properties of Stacks, Section <a href="/tag/04XB" data-tag="04XB">100.3</a>). By Properties of Stacks, Lemma <a href="/tag/04XH" data-tag="04XH">100.4.3</a> we see that there exists an $r \in |R|$ such that $s(r) = v$ and $t(r) = v'$. By Morphisms of Spaces, Lemma <a href="/tag/06RX" data-tag="06RX">67.33.3</a> we see that the transcendence degree of $v/k$ is equal to the transcendence degree of $r/k$ is equal to the transcendence degree of $v'/k$. This contradiction proves the lemma. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="06UD">
+  <p><a class="environment-identifier" href="/tag/06UD">Lemma <span data-tag="06UD">101.23.5</span>.</a> A composition of a locally quasi-finite morphisms is locally quasi-finite. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      We have seen this for quasi-DM morphisms in Lemma <a href="/tag/050K" data-tag="050K">101.4.10</a> and for locally finite type morphisms in Lemma <a href="/tag/06FT" data-tag="06FT">101.17.2</a>. Let $\mathcal{X} \to \mathcal{Y}$ and $\mathcal{Y} \to \mathcal{Z}$ be locally quasi-finite. Let $k$ be a field and let $\mathop{\mathrm{Spec}}(k) \to \mathcal{Z}$ be a morphism. It suffices to show that $|\mathcal{X}_ k|$ is discrete. By Lemma <a href="/tag/06UB" data-tag="06UB">101.23.3</a> the morphisms $\mathcal{X}_ k \to \mathcal{Y}_ k$ and $\mathcal{Y}_ k \to \mathop{\mathrm{Spec}}(k)$ are locally quasi-finite. In particular we see that $\mathcal{Y}_ k$ is a quasi-DM algebraic stack, see Lemma <a href="/tag/050N" data-tag="050N">101.4.13</a>. By Theorem <a href="/tag/06MF" data-tag="06MF">101.21.3</a> we can find a scheme $V$ and a surjective, flat, locally finitely presented, locally quasi-finite morphism $V \to \mathcal{Y}_ k$. By Lemma <a href="/tag/06UC" data-tag="06UC">101.23.4</a> we see that $V$ is locally quasi-finite over $k$, in particular $|V|$ is discrete. The morphism $V \times _{\mathcal{Y}_ k} \mathcal{X}_ k \to \mathcal{X}_ k$ is surjective, flat, and locally of finite presentation hence $|V \times _{\mathcal{Y}_ k} \mathcal{X}_ k| \to |\mathcal{X}_ k|$ is surjective and open. Thus it suffices to show that $|V \times _{\mathcal{Y}_ k} \mathcal{X}_ k|$ is discrete. Note that $V$ is a disjoint union of spectra of Artinian local $k$-algebras $A_ i$ with residue fields $k_ i$, see Varieties, Lemma <a href="/tag/06LH" data-tag="06LH">33.20.2</a>. Thus it suffices to show that each 
+    <p>
+      <div class="equation">
+  \[  |\mathop{\mathrm{Spec}}(A_ i) \times _{\mathcal{Y}_ k} \mathcal{X}_ k| = |\mathop{\mathrm{Spec}}(k_ i) \times _{\mathcal{Y}_ k} \mathcal{X}_ k| = |\mathop{\mathrm{Spec}}(k_ i) \times _\mathcal {Y} \mathcal{X}|  \]
+</div>
+    <p>
+       is discrete, which follows from the assumption that $\mathcal{X} \to \mathcal{Y}$ is locally quasi-finite. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+Before we characterize locally quasi-finite morphisms in terms of coverings we do it for quasi-DM morphisms. 
+</p>
+<p>
+<article class="env-lemma" id="06UE">
+  <p><a class="environment-identifier" href="/tag/06UE">Lemma <span data-tag="06UE">101.23.6</span>.</a> Let $f : \mathcal{X} \to \mathcal{Y}$ be a morphism of algebraic stacks. The following are equivalent </p>
+  <p><ol>
+  <li><p>
+$f$ is quasi-DM, 
+</p>
+</li><li><p>
+for any morphism $V \to \mathcal{Y}$ with $V$ an algebraic space there exists a surjective, flat, locally finitely presented, locally quasi-finite morphism $U \to \mathcal{X} \times _\mathcal {Y} V$ where $U$ is an algebraic space, and 
+</p>
+</li><li><p>
+there exist algebraic spaces $U$, $V$ and a morphism $V \to \mathcal{Y}$ which is surjective, flat, and locally of finite presentation, and a morphism $U \to \mathcal{X} \times _\mathcal {Y} V$ which is surjective, flat, locally of finite presentation, and locally quasi-finite. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      The implication (2) $\Rightarrow $ (3) is immediate. 
+    <p>
+      Assume (1) and let $V \to \mathcal{Y}$ be as in (2). Then $\mathcal{X} \times _\mathcal {Y} V \to V$ is quasi-DM, see Lemma <a href="/tag/050F" data-tag="050F">101.4.4</a>. By Lemma <a href="/tag/050E" data-tag="050E">101.4.3</a> the algebraic space $V$ is DM, hence quasi-DM. Thus $\mathcal{X} \times _\mathcal {Y} V$ is quasi-DM by Lemma <a href="/tag/050L" data-tag="050L">101.4.11</a>. Hence we may apply Theorem <a href="/tag/06MF" data-tag="06MF">101.21.3</a> to get the morphism $U \to \mathcal{X} \times _\mathcal {Y} V$ as in (2). 
+    <p>
+      Assume (3). Let $V \to \mathcal{Y}$ and $U \to \mathcal{X} \times _\mathcal {Y} V$ be as in (3). To prove that $f$ is quasi-DM it suffices to show that $\mathcal{X} \times _\mathcal {Y} V \to V$ is quasi-DM, see Lemma <a href="/tag/06TZ" data-tag="06TZ">101.4.5</a>. By Lemma <a href="/tag/06MB" data-tag="06MB">101.4.14</a> we see that $\mathcal{X} \times _\mathcal {Y} V$ is quasi-DM. Hence $\mathcal{X} \times _\mathcal {Y} V \to V$ is quasi-DM by Lemma <a href="/tag/050N" data-tag="050N">101.4.13</a> and (1) holds. This finishes the proof of the lemma. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="06UF">
+  <p><a class="environment-identifier" href="/tag/06UF">Lemma <span data-tag="06UF">101.23.7</span>.</a> Let $f : \mathcal{X} \to \mathcal{Y}$ be a morphism of algebraic stacks. The following are equivalent </p>
+  <p><ol>
+  <li><p>
+$f$ is locally quasi-finite, 
+</p>
+</li><li><p>
+$f$ is quasi-DM and for any morphism $V \to \mathcal{Y}$ with $V$ an algebraic space and any locally quasi-finite morphism $U \to \mathcal{X} \times _\mathcal {Y} V$ where $U$ is an algebraic space the morphism $U \to V$ is locally quasi-finite, 
+</p>
+</li><li><p>
+for any morphism $V \to \mathcal{Y}$ from an algebraic space $V$ there exists a surjective, flat, locally finitely presented, and locally quasi-finite morphism $U \to \mathcal{X} \times _\mathcal {Y} V$ where $U$ is an algebraic space such that $U \to V$ is locally quasi-finite, 
+</p>
+</li><li><p>
+there exists algebraic spaces $U$, $V$, a surjective, flat, and locally of finite presentation morphism $V \to \mathcal{Y}$, and a morphism $U \to \mathcal{X} \times _\mathcal {Y} V$ which is surjective, flat, locally of finite presentation, and locally quasi-finite such that $U \to V$ is locally quasi-finite. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Assume (1). Then $f$ is quasi-DM by assumption. Let $V \to \mathcal{Y}$ and $U \to \mathcal{X} \times _\mathcal {Y} V$ be as in (2). By Lemma <a href="/tag/06UD" data-tag="06UD">101.23.5</a> the composition $U \to \mathcal{X} \times _\mathcal {Y} V \to V$ is locally quasi-finite. Thus (1) implies (2). 
+    <p>
+      Assume (2). Let $V \to \mathcal{Y}$ be as in (3). By Lemma <a href="/tag/06UE" data-tag="06UE">101.23.6</a> we can find an algebraic space $U$ and a surjective, flat, locally finitely presented, locally quasi-finite morphism $U \to \mathcal{X} \times _\mathcal {Y} V$. By (2) the composition $U \to V$ is locally quasi-finite. Thus (2) implies (3). 
+    <p>
+      It is immediate that (3) implies (4). 
+    <p>
+      Assume (4). We will prove (1) holds, which finishes the proof. By Lemma <a href="/tag/06UE" data-tag="06UE">101.23.6</a> we see that $f$ is quasi-DM. To prove that $f$ is locally of finite type it suffices to prove that $g : \mathcal{X} \times _\mathcal {Y} V \to V$ is locally of finite type, see Lemma <a href="/tag/06U7" data-tag="06U7">101.17.6</a>. Then it suffices to check that $g$ precomposed with $h : U \to \mathcal{X} \times _\mathcal {Y} V$ is locally of finite type, see Lemma <a href="/tag/06U8" data-tag="06U8">101.17.7</a>. Since $g \circ h : U \to V$ was assumed to be locally quasi-finite this holds, hence $f$ is locally of finite type. Finally, let $k$ be a field and let $\mathop{\mathrm{Spec}}(k) \to \mathcal{Y}$ be a morphism. Then $V \times _\mathcal {Y} \mathop{\mathrm{Spec}}(k)$ is a nonempty algebraic space which is locally of finite presentation over $k$. Hence we can find a finite extension $k'/k$ and a morphism $\mathop{\mathrm{Spec}}(k') \to V$ such that 
+    <p>
+      <div class="equation">
+  \[  \xymatrix{ \mathop{\mathrm{Spec}}(k') \ar[r] \ar[d] &  V \ar[d] \\  \mathop{\mathrm{Spec}}(k) \ar[r] &  \mathcal{Y} }  \]
+</div>
+    <p>
+       commutes (details omitted). Then $\mathcal{X}_{k'} \to \mathcal{X}_ k$ is representable (by schemes), surjective, and finite locally free. In particular $|\mathcal{X}_{k'}| \to |\mathcal{X}_ k|$ is surjective and open. Thus it suffices to prove that $|\mathcal{X}_{k'}|$ is discrete. Since 
+    <p>
+      <div class="equation">
+  \[  U \times _ V \mathop{\mathrm{Spec}}(k') = U \times _{\mathcal{X} \times _\mathcal {Y} V} \mathcal{X}_{k'}  \]
+</div>
+    <p>
+       we see that $U \times _ V \mathop{\mathrm{Spec}}(k') \to \mathcal{X}_{k'}$ is surjective, flat, and locally of finite presentation (as a base change of $U \to \mathcal{X} \times _\mathcal {Y} V$). Hence $|U \times _ V \mathop{\mathrm{Spec}}(k')| \to |\mathcal{X}_{k'}|$ is surjective and open. Thus it suffices to show that $|U \times _ V \mathop{\mathrm{Spec}}(k')|$ is discrete. This follows from the fact that $U \to V$ is locally quasi-finite (either by our definition above or from the original definition for morphisms of algebraic spaces, via Morphisms of Spaces, Lemma <a href="/tag/06RW" data-tag="06RW">67.27.5</a>). 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="06UG">
+  <p><a class="environment-identifier" href="/tag/06UG">Lemma <span data-tag="06UG">101.23.8</span>.</a> Let $\mathcal{X} \to \mathcal{Y} \to \mathcal{Z}$ be morphisms of algebraic stacks. Assume that $\mathcal{X} \to \mathcal{Z}$ is locally quasi-finite and $\mathcal{Y} \to \mathcal{Z}$ is quasi-DM. Then $\mathcal{X} \to \mathcal{Y}$ is locally quasi-finite. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Write $\mathcal{X} \to \mathcal{Y}$ as the composition 
+    <p>
+      <div class="equation">
+  \[  \mathcal{X} \longrightarrow \mathcal{X} \times _\mathcal {Z} \mathcal{Y} \longrightarrow \mathcal{Y}  \]
+</div>
+    <p>
+       The second arrow is locally quasi-finite as a base change of $\mathcal{X} \to \mathcal{Z}$, see Lemma <a href="/tag/06UB" data-tag="06UB">101.23.3</a>. The first arrow is locally quasi-finite by Lemma <a href="/tag/050I" data-tag="050I">101.4.8</a> as $\mathcal{Y} \to \mathcal{Z}$ is quasi-DM. Hence $\mathcal{X} \to \mathcal{Y}$ is locally quasi-finite by Lemma <a href="/tag/06UD" data-tag="06UD">101.23.5</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  // move extras from parent element to after environment name and number
+  $("article a[data-toggle]").each(function(index, element) {
+    $(element).insertAfter(($(element).parent().find("a.environment-identifier")));
+  });
+
+  $('article a[data-toggle="popover"]').popover()
+
+  // render mathematics in popovers
+  $("[data-toggle=popover]").on('shown.bs.popover', function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, $("div.popover-body").html()]);
+  });
+});
+  </script>
+
+  
+
+  
+</div>
+
+
+<hr>
+
+<section id="comments">
+  <h2>Comments (5)</h2>
+
+  
+    <a id="comment-1786" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/06PT#comment-1786">Comment #1786</a>
+        by
+        <cite>Matthew Emerton</cite>
+        on <time datetime="2016-01-08 12:37:39">January 08, 2016 at 12:37 </time>
+      </header>
+
+      <blockquote><p>Unless I missed it, this section discusses locally q.f. morphisms, but doesn't actually define quasi-finite morphisms, despite its title.  I guess these should be loc. q.f. plus fin. type?</p></blockquote>
+    </article>
+  
+    <a id="comment-1822" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/06PT#comment-1822">Comment #1822</a>
+        by
+        <cite><a href="http://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2016-02-04 18:54:52">February 04, 2016 at 18:54 </time>
+      </header>
+
+      <blockquote><p>OK, I put this on the todo list. Right now I do not have the time to think through completely the following: should we also put some condition on the diagonal?</p></blockquote>
+    </article>
+  
+    <a id="comment-3177" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/06PT#comment-3177">Comment #3177</a>
+        by
+        <cite>Ariyan Javanpeykar</cite>
+        on <time datetime="2018-02-06 13:13:22">February 06, 2018 at 13:13 </time>
+      </header>
+
+      <blockquote><p>Typo: "with all of the already existing notion" --&gt; "with the already existing notion" </p></blockquote>
+    </article>
+  
+    <a id="comment-3290" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/06PT#comment-3290">Comment #3290</a>
+        by
+        <cite><a href="http://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2018-05-16 18:37:56">May 16, 2018 at 18:37 </time>
+      </header>
+
+      <blockquote><p>Thanks, fixed <a href="https://github.com/stacks/stacks-project/commit/91bf7118d77b76ee8b7ec55a3d4cd74522938091">here</a>.</p></blockquote>
+    </article>
+  
+    <a id="comment-5479" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/06PT#comment-5479">Comment #5479</a>
+        by
+        <cite><a href="https://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2020-08-28 18:57:45.291891">August 28, 2020 at 18:57 </time>
+      </header>
+
+      <blockquote><p>OK, I have now (finally) added a section on quasi-finite morphisms of algebraic stacks which are defined as quasi-compact, locally quasi-finite morphisms. See <a href="https://github.com/stacks/stacks-project/commit/18abbbd3558da830e068865a26c4aaef2da4e09e">this commit</a>.</p></blockquote>
+    </article>
+  
+
+  
+</section>
+
+<hr>
+
+<section id="post-comment">
+  <h2>Post a comment</h2>
+  <p>Your email address will not be published. Required fields are marked.
+  <p>In your comment you can use <a href="/markdown">Markdown</a> and LaTeX style mathematics (enclose it like <code>$\pi$</code>). A preview option is available if you wish to see how it works out (just click on the eye in the toolbar).
+  <noscript><p>Unfortunately JavaScript is disabled in your browser, so the comment preview function will not work.</p></noscript>
+
+  <p>All contributions are licensed under the <a href="https://github.com/stacks/stacks-project/blob/master/COPYING">GNU Free Documentation License</a>.
+
+  <form name="comment" id="comment-form" action="/post-comment" method="post">
+    <label for="name">Name<sup>*</sup>:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="mail">E-mail<sup>*</sup>:</label>
+    <input type="email" name="mail" id="mail" required><br>
+
+    <label for="site">Site:</label>
+    <input type="url" name="site" id="site"><br>
+
+    <label>Comment:</label>
+    <textarea name="comment" id="comment-textarea" cols="80" rows="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <script type="text/javascript">
+var easymde = new EasyMDE({
+  autosave: {
+    enabled: true,
+    delay: 1000,
+    uniqueId: "comment-06PT",
+  },
+  element: $("#comment")[0],
+  forceSync: true,
+  insertTexts: { link: ["\\ref{", "}"], table: ["$", "$"], image: ["\\begin{equation}\n", "\n\\end{equation}\n"] }, // we hack into these insertion methods, I couldn't figure out how to write your own...
+  placeholder: "You can type your comment here, use the preview option to see what it will look like. If your comment is on a lemma, please leave your comment on the page of the lemma. Same with remarks, propositions, theorems, etc.",
+  previewRender: function(plaintext, preview) {
+    // deal with references
+    plaintext = plaintext.replace(/\\ref\{([0-9A-Z]{4})\}/g, "<span class=\"tag\">[$1](/tag/$1)</span>");
+    // deal with \[\] getting replaced to []
+    plaintext = plaintext.replace(/\\\[/g, "\\begin{equation}");
+    plaintext = plaintext.replace(/\\\]/g, "\\end{equation}");
+
+    output = this.parent.markdown(plaintext);
+
+    setTimeout(function() {
+      preview.innerHTML = output;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }, 0);
+
+    return "";
+  },
+  spellChecker: false,
+  status: false,
+  toolbar: [
+    "link", {name: "inline", action: EasyMDE.drawTable, className: "fa fa-usd"}, {name: "block", action: EasyMDE.drawImage, className: "fa fa-square"}, "|",
+    "bold", "italic", "|",
+    "ordered-list", "unordered-list", "|",
+    "preview"
+  ],
+});
+
+// make sure to show tags, not numbers
+var tagToggleHappened = false; // only do this once to not annoy the user too much
+easymde.codemirror.on("change", function() {
+  // if data-tag elements do not have tag attribute we need to make tags visible
+  if (!$("*[data-tag]").hasClass("tag") && !tagToggleHappened)
+    $("section#meta input.toggle").bootstrapToggle("toggle");
+  tagToggleHappened = true;
+});
+
+// prevent form submit when the captcha isn't correct
+// it's a bit silly to use HTML5 validation for this, as bots can figure that out
+// also save the author information to localStorage
+easymde.element.form.addEventListener("submit", function(event) {
+  if ($("#check").val() != $("#hidden-tag").val()) {
+    // explain captcha
+    $("#captcha-message").toggle();
+
+    // stop submit
+    event.preventDefault();
+    return false;
+  }
+
+  // save author information
+  localStorage.setItem("name", $("input#name").val());
+  localStorage.setItem("mail", $("input#mail").val());
+  localStorage.setItem("site", $("input#site").val());
+});
+    </script>
+
+    <p>In order to prevent bots from posting comments, we would like you to prove that you are human. You can do this by <em>filling in the name of the current tag</em> in the following input field. As a reminder, this is tag <span class="tag">06PT</span>. Beware of the difference between the letter&nbsp;'<span class="tag">O</span>' and the digit&nbsp;'<span class="tag">0</span>'.</p>
+    <!--<p>This <abbr title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</abbr> seems more appropriate than the usual illegible gibberish, right?<br>-->
+    <label for="check">Tag:</label>
+    <input type="text" name="check" id="check" required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Post comment</button>
+    <input type="hidden" name="tag" id="hidden-tag" value="06PT"><br>
+
+    <p id="captcha-message" style="display: none" class="alert alert-warning" role="alert">The tag you filled in for the captcha is wrong. You need to write <span class="tag">06PT</span>, in case you are confused.</p>
+
+    <script type="text/javascript">
+// enter in captcha fields causes \ref to appear (?!)
+$("input#check").on("keypress", function(e) {
+  if (e.which == 13) {
+    // always stop the event
+    e.preventDefault();
+
+    // perform clientside check as for actual submit
+    if ($("#check").val() != $("#hidden-tag").val()) {
+      // explain captcha
+      $("#captcha-message").toggle();
+    }
+    else {
+      $("form#comment-form").submit();
+    }
+  }
+});
+    </script>
+  </form>
+</section>
+
+
+
+
+    </section>
+	  <div class="col-lg-4 col-xl-4">
+	    <section id="meta" class="row topbar sticky-top">
+        
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0DSL">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/0G2L">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  <hr>
+  
+    <a href="https://stacks.math.columbia.edu/download/stacks-morphisms.pdf#nameddest=06PT">View Section <span data-tag="06PT">101.23</span> as pdf</a>
+  
+
+  
+
+
+      </section>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

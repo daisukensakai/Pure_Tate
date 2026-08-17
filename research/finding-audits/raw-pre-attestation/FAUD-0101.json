@@ -1,0 +1,78 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty; FND-0105 does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001, and is compatible with THM-0005 (c(6)=5 leaves (6,6) outside published CKgP). Independent primary checks: (1) Casnati\u2013Ekedahl structure (Canning\u2013Larson arXiv:2104.05820v2 Thm 2.6, citing CE) gives the absolute normalization i^*O_{P(E^vee)}(1)\u2245\u03c9_\u03b1, equivalently O_{P(E^vee)}(1)|_C\u2245\u03c9_C\u2297\u03b3^*\u03c9_{P1}^vee\u2245\u03c9_C\u2297\u03b3^*O(2) with no residual \u03b3^*A; SRC-0004 (arXiv:2208.02357v2) repeats this in \u00a79 and in the proof of Lemma 10.6. (2) SRC-0004 Lemma 10.6 records deg(O(2)|_C)=2(2g\u22122+8)=2(2g+6) and deg W_{f_i}|_C=4g+12\u22124f_i for the summands of W=O(2)\u2297\u03b3^*F^vee (packet sign \u03b3^*O(\u2212f) is the correct F^vee convention; the lemma\u2019s intermediate O(f_i) label is inconsistent with its own degree line, but the degree formula and packet W_5:=(O(2)\u2297\u03b3^*O(\u22125))|_C agree). (3) Algebra from absolute CE: O(2)|_C\u2245\u03c9_C^2\u2297\u03b3^*O(4), so W_5\u2245\u03c9_C^2\u2297\u03b3^*O(\u22121)=\u03c9_C^2(\u2212D), hence L\u2245\u03c9_C(\u2212D) and M\u2245O_C(D). The finding\u2019s weak form with residual A is also forced: a \u03b3^*A twist shifts deg(O(1)|_C) by 4 deg A, matching 2g+6 only for deg A=0, so A\u2245O_{P1}. Packet FND-0073 correctly avoids the identification for the h^0(L)=1+h^0(M) relation; FND-0098 and FND-0104 correctly treat W_5\u2245\u03c9_C^2(\u2212D) as the named GAP-Z-W5D hypothesis this finding localizes. Consequence clause is right: cite CE relative-canonical (one primary citation already used inside SRC-0004) or keep downstream clauses conditional; do not silently relabel the gap as established. Promote: math localization is primary-source corroborated and not a deep residual geometric gap. Merge target: none (unique FC-W5D-LOCALIZATION).",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0105",
+  "id": "FAUD-0101",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "does_not_discharge": [
+      "h^0 constancy GAP-H0-1 / FND-0058",
+      "stack mono of Z into M_{6,6} beyond pencil recovery (FND-0098 bookkeeping)",
+      "CE obstruction-space identification beyond FND-0061"
+    ],
+    "gap": "GAP-Z-W5D",
+    "generality": "CE embedding of a degree-4 cover C->P1; balanced splitting F=O(4)+O(5) needed only to label the f=5 summand, not for the O(1)|_C isomorphism itself",
+    "kind": "localization",
+    "objects": [
+      "W_5",
+      "O_{P(E^vee)}(1)|_C",
+      "omega_{C/P^1}",
+      "L=W_5 tensor omega_C^{-1}",
+      "M=omega_C^2 tensor W_5^vee"
+    ],
+    "statement_class": "W_5 isomorphic to omega_C^2(-D) after CE relative-canonical normalization plus degree forcing of residual P1-twists"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2104.05820",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.1090/jag/818",
+      "query_family": "ce-relative-canonical-normalization",
+      "retrieved_at": "2026-08-08T06:40:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2104.05820"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "src-0004-lemma-10.6-and-O1-restriction",
+      "retrieved_at": "2026-08-08T06:40:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "734f8875b59b94177ba054702c43a8f5e25019a3323eac215fed6f1310ec7ea3",
+      "doi": null,
+      "query_family": "packet-W5-convention-and-gap-usage",
+      "retrieved_at": "2026-08-08T06:40:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "claim-cross-check-RED-THM",
+      "retrieved_at": "2026-08-08T06:40:00Z",
+      "source_type": "corpus",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
+  "task_id": "TASK-F-FND-0105",
+  "verdict": "promote"
+}

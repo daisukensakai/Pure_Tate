@@ -1,0 +1,59 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0002\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (c(6)=5, so n=6 lies outside published CKgP range and needs new geometry) and with the packet\u2019s C66-GEO-Z bottleneck. Independent check against the SRC-0004 Lemma 10.6 excerpt packaged in C66-001-v3: deg(W_f|_C)=4g+12-4f gives deg(W_5)=16 for f=5,g=6, hence deg(L)=deg(W_5\\otimes\\omega_C^{-1})=16-(2g-2)=6. Riemann\u2013Roch yields \\chi(L)=deg-g+1=1, so h^0(L)=1+h^1(L)\\ge1 on every such curve; the relative linear system |L| is therefore fiberwise nonempty and the evaluation-failure condition O_C(\\Gamma)\\cong L is realized by effective degree-6 divisors. Consequently any repair that asserts Z is empty is false at the linear-system level. Mild residual caveat (ordered distinct reduced support of the unique/general member of |L|) does not restore emptiness of Z as a locus: non-reduced members are a proper closed condition in |L|, and as the tetragonal base varies the reduced-support open is nonempty. Distinct from FND-0003 (genus-7 unbalanced residual pencil / finite-etale model failure). Merge target: none. Promote from candidate to corroborated on this independent grok verification of the RR nonemptiness argument.",
+  "engine": "grok",
+  "evidence_class": "legacy_artifact",
+  "finding_id": "FND-0005",
+  "id": "FAUD-0001",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "W_5_degree": 16,
+    "bundle": "L=W_5\\otimes\\omega_C^{-1}",
+    "bundle_degree": 6,
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "locus": "evaluation-failure Z defined by O_C(\\Gamma)\\cong L for the six marked points",
+    "operational_claim": "empty-locus repair of the CKgP-extension route is blocked",
+    "splitting": "F=O_{P1}(4)\\oplus O_{P1}(5)",
+    "stratum": "balanced_tetragonal_Casnati-Ekedahl"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-07-31T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+      "doi": null,
+      "query_family": "packet-primary-excerpt",
+      "retrieved_at": "2026-07-31T00:00:00Z",
+      "source_type": "campaign_packet",
+      "url": "proof/packets/generated/C66-001-v3.md"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "degree-serre-duality-lemma",
+      "retrieved_at": "2026-07-31T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    }
+  ],
+  "task_id": "TASK-F-FND-0005",
+  "verdict": "promote"
+}

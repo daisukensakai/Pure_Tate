@@ -788,11 +788,14 @@ def _engine_argv(
     if family == "grok":
         # Grok tool ids are snake_case. Never add spawn_subagent to --tools
         # (allowlist collapse). Workers attach via MCP search_tool/use_tool.
-        # dontAsk cancels MCP use_tool; workers require bypassPermissions while
-        # write/shell stay denied by the allowlist.
+        # Post-login CLI builds cancel native web tools under dontAsk. Web
+        # phases and MCP workers therefore require bypassPermissions while
+        # write/shell stay denied by the explicit allowlist.
         tools = ["read_file", "grep", "list_dir"]
         denied = ["run_terminal_command", "write", "open_page"]
-        permission_mode = "bypassPermissions" if workers_on else "dontAsk"
+        permission_mode = (
+            "bypassPermissions" if workers_on or allow_web else "dontAsk"
+        )
         command = [
             binary,
             "-p",
@@ -1121,39 +1124,67 @@ def _normalize_failed_approaches(
 
 
 def _normalize_source_references(artifact: Dict[str, Any]) -> None:
-    """Separate claim dependencies from bibliographic source dependencies.
+    """Separate global claims, bibliography, and dependency-local claims.
 
     Models commonly put SRC-* identifiers in source_claim_ids. Silently
     dropping them makes the proof audit pass by erasing provenance. Move them
-    into source_ids instead, retaining a deterministic normalization record.
+    into source_ids instead. Likewise, CLM-* names belong to claims inside
+    proof-dependency attempts, not the global claim database; retain them in
+    dependency_claim_ids. Record both normalizations deterministically.
     """
     raw_claims = _normalize_string_ids(
         artifact.get("source_claim_ids"), "source_claim_ids"
     )
     source_ids = _normalize_string_ids(artifact.get("source_ids"), "source_ids")
+    dependency_claim_ids = _normalize_string_ids(
+        artifact.get("dependency_claim_ids"), "dependency_claim_ids"
+    )
     moved = [identifier for identifier in raw_claims if identifier.startswith("SRC-")]
+    moved_dependencies = [
+        identifier for identifier in raw_claims if identifier.startswith("CLM-")
+    ]
     claim_ids = [
-        identifier for identifier in raw_claims if not identifier.startswith("SRC-")
+        identifier
+        for identifier in raw_claims
+        if not identifier.startswith(("SRC-", "CLM-"))
     ]
     for identifier in moved:
         if identifier not in source_ids:
             source_ids.append(identifier)
     artifact["source_claim_ids"] = claim_ids
     artifact["source_ids"] = source_ids
-    if moved:
+    for identifier in moved_dependencies:
+        if identifier not in dependency_claim_ids:
+            dependency_claim_ids.append(identifier)
+    artifact["dependency_claim_ids"] = dependency_claim_ids
+    if moved or moved_dependencies:
         normalizations = artifact.get("ingest_normalizations")
         if normalizations is None:
             normalizations = []
         if not isinstance(normalizations, list):
             raise ValueError("ingest_normalizations must be a list")
-        entry = {
-            "rule": "SOURCE-REFERENCE-SPLIT-0001",
-            "moved_from": "source_claim_ids",
-            "moved_to": "source_ids",
-            "identifiers": moved,
-        }
-        if entry not in normalizations:
-            normalizations.append(entry)
+        entries = []
+        if moved:
+            entries.append(
+                {
+                    "rule": "SOURCE-REFERENCE-SPLIT-0001",
+                    "moved_from": "source_claim_ids",
+                    "moved_to": "source_ids",
+                    "identifiers": moved,
+                }
+            )
+        if moved_dependencies:
+            entries.append(
+                {
+                    "rule": "DEPENDENCY-CLAIM-SPLIT-0001",
+                    "moved_from": "source_claim_ids",
+                    "moved_to": "dependency_claim_ids",
+                    "identifiers": moved_dependencies,
+                }
+            )
+        for entry in entries:
+            if entry not in normalizations:
+                normalizations.append(entry)
         artifact["ingest_normalizations"] = normalizations
 
 
@@ -2197,6 +2228,7 @@ def _validate_finding_audit(
         "evidence_class",
         "source_records",
         "contradiction_resolution",
+        "adjudicated_statement",
         "engine",
         "independent",
     }
@@ -2242,6 +2274,21 @@ def _validate_finding_audit(
         coerce_identity_field(artifact, "engine", engine_id)
     if not isinstance(artifact.get("source_records"), list):
         raise ValueError("finding audit source_records must be a list")
+    if not str(artifact.get("adjudicated_statement", "")).strip():
+        raise ValueError("finding audit lacks an exact adjudicated statement")
+    if not artifact["source_records"]:
+        raise ValueError("finding audit must cite at least one public source")
+    from .novelty import attest_source_records
+
+    verification = attest_source_records(artifact["source_records"])
+    if not verification["ok"]:
+        raise ValueError(
+            "finding audit source verification failed: %s"
+            % "; ".join(verification["errors"])
+        )
+    artifact["source_records"] = verification["records"]
+    artifact["sources_verified"] = True
+    artifact["verified_source_count"] = verification["verified_count"]
 
 
 def run_task(
@@ -2255,6 +2302,7 @@ def run_task(
     from .capabilities import WEB_PHASES, capability_is_attested
     from .paired import (
         ArtifactValidationError,
+        ObservableInfrastructureError,
         PairedInfrastructureError,
         SubstantiveAttemptError,
         validate_digest,
@@ -2467,6 +2515,30 @@ def run_task(
                 ) from exc
             raise
 
+        def _raise_infrastructure_failure(
+            detail: str,
+            observable_output: str,
+            observable_error: str,
+            classification: str = "infrastructure",
+        ) -> None:
+            trace_task = dict(task)
+            if not trace_task.get("paired_turn_kind"):
+                trace_task["paired_turn_kind"] = phase
+            trace = write_observable_trace(
+                trace_task,
+                engine_id,
+                observable_output,
+                observable_error,
+                validation_error=detail,
+                classification=classification,
+            )
+            error_type = (
+                PairedInfrastructureError
+                if paired_turn in {"forced-proof", "standard-fallback"}
+                else ObservableInfrastructureError
+            )
+            raise error_type(detail, trace["id"], trace["path"])
+
         for attempt in range(repair_limit + 1):
             if attempt == 0 or previous_artifact is None:
                 prompt = base_prompt
@@ -2533,19 +2605,14 @@ def run_task(
                     "agent watchdog: %s; stderr: %s"
                     % (exc, (exc.stderr or "").strip()[:800] or "no stderr")
                 )
-                if paired_turn in {"forced-proof", "standard-fallback"}:
-                    trace = write_observable_trace(
-                        task,
-                        engine_id,
+                try:
+                    _raise_infrastructure_failure(
+                        detail,
                         exc.stdout or "",
                         exc.stderr or "",
-                        validation_error=detail,
-                        classification="infrastructure",
                     )
-                    raise PairedInfrastructureError(
-                        detail, trace["id"], trace["path"]
-                    ) from exc
-                raise RuntimeError(detail) from exc
+                except ObservableInfrastructureError as traced:
+                    raise traced from exc
             process_stdout = process.stdout or ""
             # The worker server records calls it receives. Capture engine-side MCP
             # events as well, so approval cancellations are not mistaken for a
@@ -2569,19 +2636,11 @@ def run_task(
                 observable_stdout = _qwen_observable_stream(raw)
             if process.returncode != 0:
                 detail = _failure_detail(process.returncode, process.stderr, raw)
-                if paired_turn in {"forced-proof", "standard-fallback"}:
-                    trace = write_observable_trace(
-                        task,
-                        engine_id,
-                        observable_stdout,
-                        process.stderr or "",
-                        validation_error=detail,
-                        classification="infrastructure",
-                    )
-                    raise PairedInfrastructureError(
-                        detail, trace["id"], trace["path"]
-                    )
-                raise RuntimeError(detail)
+                _raise_infrastructure_failure(
+                    detail,
+                    observable_stdout,
+                    process.stderr or "",
+                )
             try:
                 if family == "claude":
                     artifact = _extract_claude_stream(raw)
@@ -2594,19 +2653,15 @@ def run_task(
                 else:
                     artifact = _extract_json_object(raw)
             except ValueError as exc:
-                if paired_turn in {"forced-proof", "standard-fallback"}:
-                    trace = write_observable_trace(
-                        task,
-                        engine_id,
+                try:
+                    _raise_infrastructure_failure(
+                        str(exc),
                         observable_stdout,
                         process.stderr or "",
-                        validation_error=str(exc),
                         classification="parse_failure",
                     )
-                    raise PairedInfrastructureError(
-                        str(exc), trace["id"], trace["path"]
-                    ) from exc
-                raise RuntimeError(str(exc)) from exc
+                except ObservableInfrastructureError as traced:
+                    raise traced from exc
             stdout = observable_stdout
             # Keep the unfiltered official payload for validation-failure traces.
             # Grok's thought quarantine can drop envelope-only replies to "".

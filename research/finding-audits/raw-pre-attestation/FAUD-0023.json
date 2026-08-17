@@ -1,0 +1,77 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. It constrains the C66-GEO-Z construction, not any recorded claim, and is compatible with corroborated FND-0005 (for L = W_5 tensor omega_C^{-1} on a genus-6 tetragonal curve, deg L = 6 and chi(L) = 6-6+1 = 1, so h^0(L) = 1 + h^1(L) >= 1 fibrewise) and with the packet's own directives at C66-GEO-H0 ('Stratify by h^0(W_5 tensor omega_C^{-1})') and the S_6-cover directive ('Model ordered distinct reduced divisors as a finite etale S_6-cover of the reduced-support open in the relative linear system'), both of which presuppose a well-defined relative linear system over strata on which h^0 varies. PRIMARY VERIFICATION. (1) Semicontinuity: Stacks Project Lemma 36.32.1 (tag 0BDN) states that for f: X -> S proper of finite presentation and F of finite presentation and flat over S, the function s -> dim_{kappa(s)} H^i(X_s, F_s) commutes with arbitrary base change, is upper semi-continuous, and has locally constructible level sets; jumping loci are therefore genuine closed conditions, not artifacts removable by shrinking. (2) The only unconditional positive criterion in that section is Lemma 36.32.4 (tag 0D4E): if R^i f_* F = 0 for i > 0, then f_* F is locally free and its formation commutes with arbitrary base change - for a relative curve and a line bundle this is exactly the h^1 = 0 hypothesis. The two classical licenses are Grauert (h^i constant on a reduced base implies R^i locally free with base change; Hartshorne, Algebraic Geometry, GTM 52, III.12.9) and Grothendieck's cohomology-and-base-change theorem (Hartshorne III.12.11; Mumford, Abelian Varieties, II.5; EGA III 7.7.5). (3) Mechanism: formation of Proj(Sym F) commutes with base change for any quasi-coherent F, so the fibre of P(pi_* L) = Proj(Sym pi_* L) at s is P((pi_* L) tensor kappa(s)), which is the intended |L_s| = P(H^0(X_s, L_s)) if and only if the comparison map (pi_* L) tensor kappa(s) -> H^0(X_s, L_s) is an isomorphism. At a jumping point neither Grauert nor the R^1 = 0 criterion applies, so that isomorphism is unlicensed; the finding is correct as stated and is standard relative algebraic geometry, not a novel obstruction. (4) Repair: the relative divisor/Hilbert scheme Div^d_{C/S} (the relative symmetric product for a smooth relative curve) with the Abel-Jacobi map to Pic^d_{C/S} has fibre over [L_s] the complete linear system |L_s| by construction and needs no base-change hypothesis (Kleiman, 'The Picard scheme', arXiv:math/0504020; ACGH, Geometry of Algebraic Curves I, Ch. IV, where W^r_d and G^r_d are constructed determinantally precisely because h^0 jumps, and C_d -> Pic^d is a projective bundle only in the non-jumping range d >= 2g-1). BITE IN THE CAMPAIGN CASE. deg L = 6 < 2g-1 = 11, so the projective-bundle range does not apply; with chi(L) = 1 from FND-0005 one has h^1(L_s) = h^0(L_s) - 1, so jumping is equivalent to effectivity of the degree-4 bundle omega_C tensor L^{-1} = omega_C^2 tensor W_5^{-1}, a live condition on genus-6 tetragonal curves (effective degree-4 classes form W_4 of dimension 4 inside the 6-dimensional Pic^4, and 4 is the gonality). Where h^0 jumps to 2 the true fibre |L_s| is a P^1 while pi_* L has generic rank 1, so a naive P(pi_* L) records at most a point over that stratum; the ordered-divisor S_6 etale cover would then be formed over the wrong space exactly along the stratum the packet asks to isolate, and component/dimension/stabilizer counts for Z (C66-GEO-Z, C66-GEO-COMP) inherited from it would be wrong there. This audit does not decide whether that stratum is nonempty - that is subproblem C66-GEO-H0 - and the finding is correctly phrased conditionally ('when h^0(L) jumps'). SCOPE SHARPENINGS (no weakening of the finding): the obstruction binds over arbitrary, including non-reduced, bases and on any non-constant-h^0 stratum; it does not bind on the h^0 = 1, h^1 = 0 open, where tag 0D4E licenses the naive construction; and it is a construction-validity obstruction only, not a refutation of the existence or nonemptiness of Z (FND-0005 stands). RELATION TO SIBLINGS. Distinct from corroborated FND-0046, which concerns whether a fibrewise equivalence upgrades to a scheme-theoretic identification of the relative evaluation-failure locus with an Abel-Jacobi incidence locus and demands comparison of determinantal/Fitting scheme structures; FND-0047 concerns the prior step, namely whether the ambient relative linear system is the correct object at all when h^0 jumps. The two compose rather than duplicate: adopting the Div/Abel-Jacobi repair urged by FND-0047 still leaves the Fitting-structure comparison demanded by FND-0046. Also distinct from FND-0022 (localization/Gysin bookkeeping for stratifications) and FND-0033 (pure-corner semisimplicity). Merge target: none. VERDICT: promote from candidate to corroborated on independent verification; evidence_class upgraded from adversarial_review to primary_source; reviewer engines become codex plus claude, independently. PROVENANCE CAVEATS: the read-only workspace provides no shell, so SHA-256 digests of the retrieved pages could not be computed; content_sha256 is reported as null rather than filled with an unverified value. Retrieval of the two arXiv records covers the abstract pages (title, authors, version, DOI) and not internal section content; the Div/Abel-Jacobi and textbook citations (Kleiman, ACGH, Hartshorne, Mumford, EGA III) are bibliographic pointers to standard results, while the two Stacks Project lemma statements were verified verbatim. ATT-0019 and REV-0024 are absent from the workspace and were not re-audited; the promotion rests on the mathematical statement, not on attempt-local provenance.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0047",
+  "id": "FAUD-0023",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "applies_when": "h^0(X_s, L_s) is non-constant on the base; equivalently, since chi(L)=1 by Riemann-Roch, wherever h^1(L_s)>0, i.e. wherever omega_C tensor L^{-1} = omega_C^2 tensor W_5^{-1} (degree 4) is effective. Binds over arbitrary bases, including non-reduced ones, and over any stratum of the C66-GEO-H0 h^0-stratification with non-constant h^0",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "does_not_apply_when": "restricted to the open locus where h^0(L_s)=1 and h^1(L_s)=0: there R^1 pi_* L = 0, pi_* L is locally free with base change (Stacks 36.32.4, tag 0D4E), and P(pi_*L) is the base itself; likewise on a reduced base with h^0 constant (Grauert, Hartshorne III.12.9)",
+    "generality": "standard relative algebraic geometry, not special to (6,6); the (6,6) instance is where it binds because deg L = 6 < 2g-1 = 11 puts L outside the range in which C_d -> Pic^d is a projective bundle",
+    "impacts_approach_ids": [
+      "C66-GEO-Z",
+      "C66-GEO-H0",
+      "C66-GEO-COMP"
+    ],
+    "licensed_repairs": [
+      "relative divisor / Hilbert-scheme construction Div^6_{C/S} (relative symmetric product for a smooth relative curve) together with the Abel-Jacobi map to Pic^6_{C/S}, whose fibre over [L_s] is the full complete linear system |L_s| with no base-change hypothesis",
+      "explicit verification of cohomology-and-base-change hypotheses (Grothendieck) or of Grauert's constant-h^0-on-reduced-base hypothesis"
+    ],
+    "not_decided_here": "whether the h^0-jumping locus is nonempty for the balanced tetragonal genus-6 family; that is exactly subproblem C66-GEO-H0 and the finding is correctly conditional",
+    "object": "the relative degree-six linear system of L = W_5 tensor omega_C^{-1} (deg L = 4g+12-20-(2g-2) = 6 for g=6) over the balanced tetragonal base used by C66-GEO-Z",
+    "statement_type": "construction-validity obstruction in relative algebraic geometry; conditional on jumping"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-02T10:56:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0BDN"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "base-change-criterion",
+      "retrieved_at": "2026-08-02T10:56:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0D4E"
+    },
+    {
+      "arxiv_id": "math/0504020",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "correct-construction-reference",
+      "retrieved_at": "2026-08-02T10:52:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/math/0504020"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "campaign-source-recheck",
+      "retrieved_at": "2026-08-02T10:56:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    }
+  ],
+  "task_id": "TASK-F-FND-0047",
+  "verdict": "promote"
+}

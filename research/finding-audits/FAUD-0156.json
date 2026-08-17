@@ -1,0 +1,130 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is the field-of-definition analogue of corroborated FND-0127 (scheme-to-stack widening) and is complementary to, not a restatement of, corroborated FND-0148 (H in Irr(Z)=H\\S_6 is the image of arithmetic pi_1^{et}(U,u)). Independent primary checks of the four supporting observations. (i) Fibrewise hypotheses such as (BAL) and (N) are statements about geometric fibres, hence invariant under enlarging k. (ii) Stacks 02KH (flat base change) gives H^i(X_s,F_s) tensor_{k(s)} K \u2245 H^i(X_{s_K},F_{s_K}) for any field extension K/k(s), so constancy of h^0(L) on geometric fibres implies constancy on every scheme-theoretic fibre; Grauert (EGA III 7.7 / Hartshorne III.12.9) then yields local freeness of pi_*L and base change over a reduced locally Noetherian base, with no use of k=k-bar. This is compatible with corroborated FND-0131, which blocks the same conclusion over a nonreduced base, and with ATT-0088 Part III's reduced hypothesis. (iii) Smoothness (Stacks 02VL), surjectivity (02KV), locally finite type of relative dimension d (02VJ), closed immersions (02L6), and Koszul/H_1/quasi-regular immersions (0694) are fpqc local on the target, hence descend along the faithfully flat map Spec k-bar \u2192 Spec k. Mild wording correction only: that map is fpqc, not fppf, unless [k-bar:k] is finite; the cited properties are already fpqc local, so the descent stands. Closedness of the Abel\u2013Jacobi incidence is the separatedness of Pic, already recorded over a general base by corroborated FND-0107. Applying ATT-0088 itself after base change to k-bar additionally needs S_{k-bar} locally Noetherian, which is guaranteed when S is locally of finite type over k (already in Part III.1). (iv) Independently of any passage to k-bar, a closed immersion of S-smooth schemes is a regular immersion (Stacks 067U / 0H1G); relative dimensions 2 and 6 give pure codimension 4 and a locally free conormal, matching corroborated FND-0141. What does not descend unchanged is the monodromy group in the component formula: Stacks 0BTX supplies 1 \u2192 pi_1(U_{k-bar}) \u2192 pi_1(U) \u2192 pi_1(Spec k) \u2192 1 whenever U_{k-bar} is connected, so H_geom is normal in H_arith and [S_6:H_arith] \u2264 [S_6:H_geom]. That exception is exactly corroborated FND-0148 and must stay cited rather than absorbed. Distinct from FND-0127 (stack atlas, not ground field), FND-0132 (normality to pass from connected to irreducible), and FND-0144 (stack inertia). ATT-0088 itself was absent from the read-only workspace; the quoted base scope is treated as a working-context fact from ATT-0099/REV-0148, as in prior promotions that did not re-audit a missing attempt. Merge target: none. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0149",
+  "id": "FAUD-0156",
+  "independent": true,
+  "local_evidence_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "5f6bf8a8c56ac90a61a008b6b90545664cb4fff9767e759a6f3d8256a0ff4eeb",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-16T05:42:17Z",
+      "source_type": "campaign_packet",
+      "url": "proof/packets/generated/C66-001-v4.md"
+    }
+  ],
+  "merge_target_id": null,
+  "recovery": {
+    "classification": "citation_metadata_recovery",
+    "recovered_at": "2026-08-16T05:52:27.529212+00:00",
+    "recovered_from_trace": "TRACE-0047",
+    "trace_sha256": "ff778f792202b3fb0e9041620cd673c5317ede9bfda51a11f6af35e84e9233bb",
+    "transformations": [
+      "moved non-public packet path to local_evidence_records",
+      "normalized reference_work source_type to reference"
+    ]
+  },
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "base": "S a locally Noetherian k-scheme; Part III additionally reduced; (III.1) additionally locally of finite type",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "does_not_widen_unchanged": [
+      "monodromy image H in the S_6 component formula, which is arithmetic pi_1^{et}(U,u) rather than geometric pi_1^{et}(U_{k-bar},u)"
+    ],
+    "excludes": [
+      "Grauert local freeness of pi_*L over a nonreduced base",
+      "Noetherianness of S_{k-bar} unless S is locally of finite type over k"
+    ],
+    "ground_field": "characteristic-zero field k, not necessarily algebraically closed",
+    "objects": [
+      "ATT-0088 Parts I-III",
+      "AJ = P_S(pi_*L)",
+      "U",
+      "Z"
+    ],
+    "subproblem_id": "C66-GEO-COMP",
+    "widens_with_recorded_descent": [
+      "P^2-bundle identification AJ=P_S(pi_*L) over a reduced base with constant h^0(L)",
+      "fibrewise nonemptiness of the reduced-support open",
+      "finite etale S_6-ordering torsor",
+      "S-smoothness of Z of pure relative dimension two",
+      "closed immersion Z->Conf_6(C/S) a regular immersion of pure codimension four with locally free conormal"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "9da5d88e9ba6915ffdea0b6191750eb65dcc108799c35dc54f4f9bad1fc29777",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "flat-base-change-cohomology",
+      "reported_content_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "retrieved_at": "2026-08-16T05:46:20Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/02KH"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "3c52869ce72926f5fa0067158109669f054fdf913075c4333a03935476fb841c",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "fpqc-descent-smooth-regular-immersion",
+      "reported_content_sha256": "8a51df7489ff8c4ce00d96379ccf7c8463dfcaefbd93c0e0b1bfcda1c738f631",
+      "retrieved_at": "2026-08-16T05:48:10Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/02YJ"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "ea094c6f921d32b347afe1b3fd2d011e09d2b4f70f70761a728c80c7c77d5591",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "closed-immersion-of-smooth-schemes-is-regular",
+      "reported_content_sha256": "0c1fccd5861c0c4b679f36ab4783d2a65c2f1842f0d89d2938566b0cff90f3c5",
+      "retrieved_at": "2026-08-16T05:49:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/067U"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "6c59bd06256dfee05fdcd9ee7c1bfcedc18b80a78e6d7d228d703f273a92480b",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "arithmetic-versus-geometric-pi1",
+      "reported_content_sha256": "b48d8e91facddbfec194b1f3015f119b9cf522402bc241cf12f2bbce2ed4efb6",
+      "retrieved_at": "2026-08-16T05:49:20Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0BTX"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "57603136056206c7801f33ffb218aa236d693183ace43c3f4949aeab054f1ddb",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "grauert-constant-cohomology-locally-free",
+      "reported_content_sha256": "ff89841ffa4bbca1c248eff833b556525aa7eea2d7e9588bcb17df540d7cac56",
+      "retrieved_at": "2026-08-16T05:50:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Base_change_theorems"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0149",
+  "verdict": "promote",
+  "verified_source_count": 5
+}

@@ -1,0 +1,76 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement opposes none of CONJ-0001, THM-0001..THM-0007, OBS-0001, RED-0001; it is a statement-hygiene/component-decomposition obstruction internal to C66-COMP-COMP. CLAUSE 1 (an iff keyed on bare total dimension 17 is invalid unless relative fibre dimension 2 is retained) is CONFIRMED and in fact understated. Using SRC-0004 Lemma 10.6 as pinned in the packet, at (g,n)=(6,6) the CE obstruction summand omega_C tensor W_f^vee(Gamma) has degree 4f+n-2g-14 = 4f-20, so the failure condition depends on the CE splitting type F = O(a)+O(b), a+b = deg F = deg E = g+3 = 9, over the 15-dimensional tetragonal Hurwitz base (b_branch = 2g+2d-2 = 18, dim = b_branch-3 = 15; FND-0060): balanced b=5 gives degree 0, i.e. the Abel-Jacobi condition O_C(Gamma) = L with fibre |L| = P^2 (15+2 = 17, FND-0063/FND-0058); b=6 gives degree 4, i.e. [omega tensor W_6^vee(Gamma)] in W_4, codimension 2 in Pic^4, hence fibre dimension 6-2 = 4 over a stratum of expected dimension 13 (13+4 = 17); b=7 gives degree 8 >= g, a vacuous condition, hence fibre = Conf_6 of dimension 6 over a stratum of expected dimension 11 (11+6 = 17). Total dimension 17 therefore does not determine the (base, fibre) package, and a classification keyed on it is not merely under-specified but extensionally at risk. CLAUSE 2 (the exhibited witness 'codimension-one jump with dimensions 14+3') is REFUTED in the declared scope, for three independent reasons. (i) There is no codimension-one CE stratum for g=6: deg F = 9 is odd, so any unbalanced type has b-a odd, hence b-a >= 3 and expected codimension h^1(P^1,End F) = b-a-1 is even and >= 2. (ii) Fibre dimension 3 means h^0(L) = 4, which by adjudicated FND-0103 forces C hyperelliptic with M = (g^1_2)^{tensor 2}; classically every base-point-free g^1_4 on a hyperelliptic genus-6 curve is a pencil in |2H| = h^*|O_{P^1}(2)| (a complete g^1_4 is special and equals |H+B| with a base point, so bpf forces the incomplete case L = 2H by the Clifford equality case, Hartshorne IV.5.4), i.e. gamma is composed; that locus has dimension (2g-1) + dim Gr(2,3) = 11+2 = 13, codimension 2 in the 15-dimensional Hurwitz base, never 14. (iii) Composed covers are not CE-balanced at all, so the jump stratum is empty on the balanced locus. Explicit check performed in this audit: for C: y^2 = f(x) with deg f = 14 and q: x -> t = x^2, one has gamma_*O_C = O + O(-1) + O(-4) + O(-4); writing f = f_e(t) + x f_o(t) and using the frame {x,y,xy}, the module of relative conics through C is free on Q_1 = Z^2 - tY^2 (minimal twist 9) and Q_2 = (f_e^2 - t f_o^2)X^2 - t f_e Y^2 + t f_o YZ (minimal twist 16, forced by deg(f_e^2 - t f_o^2) = 14 and unchangeable by adding p(t)Q_1), so the two CE quadric generators differ by 7 and with f_1+f_2 = 9 give F = O(1)+O(8). Independent cross-check: the resolvent cubic of a composed cover is reducible, R = P^1 disjoint R'' with R'': w^2 = f_e^2 - t f_o^2 of genus 6, so p_a(R) = 5, deg E_R = p_a+2 = 7 and E_R = O + O(7); the relation F = E_R tensor O(1) then reproduces both F = O(1)+O(8) here and F = O(4)+O(5) from the balanced generic E_R = O(3)+O(4), and is corroborated by the search-surfaced statement in Deopurkar's syzygy-divisors note that the first syzygy bundle of a degree-4 cover splits according to the scrollar invariants of its cubic resolvent (verbatim locator not extractable; corroborative only, not load-bearing). Consequently no hyperelliptic genus-6 curve lies on the balanced locus, h^0(L) = 3 is constant there, the relative system is honestly a P^2-bundle, and there is no h^0 jump of any codimension inside the balanced model. By-products, recorded but not part of the verdict and needing independent re-derivation before use: this answers FND-0104's residual question in the negative, discharges GAP-H0-1 modulo GAP-Z-W5D, and supplies the constancy hypothesis flagged by FND-0058. DISTINCTNESS AND MERGE: not a duplicate of FND-0058 (forward direction: fibre dimension 2 needs proof), of FND-0086 (component/stabilizer/closure analysis not exhaustive), or of FND-0091 (unbalanced failure unconstructed); the corrected form is an instance in the FND-0086/FND-0091 family but carries distinct operative content, so merge target is none. VERDICT: retain_candidate. Promotion is blocked because the second sentence is false in the finding's own declared scope and, once the classical hyperelliptic classification is added, is inconsistent with adjudicated FND-0103; promoting it verbatim would inject a false witness into the packet. Retirement is wrong because clause 1 is confirmed and campaign-relevant. Restate as recorded in scope.restatement_required_before_promotion, then re-audit for promotion. LIMITS OF THIS AUDIT: the parent had live web but the four dispatched Grok workers had no network, so no external verbatim locator is load-bearing; the two PDFs fetched directly (msp.org ANT and ananddeopurkar.org) returned binary streams from which no quotable text could be extracted. The 13+4 and 11+6 alternatives use expected codimensions h^1(End F) and are hypotheses under the packet execution boundary, not verified actual dimensions - indeed expected and actual diverge for F = O(1)+O(8), whose expected codimension is 6 while the composed locus computed above has codimension 2; the refutation of clause 2 does not depend on those counts. content_sha256 could not be computed in this read-only, shell-less workspace and is recorded as null rather than fabricated.",
+  "engine": "claude",
+  "evidence_class": "adversarial_review",
+  "finding_id": "FND-0116",
+  "id": "FAUD-0120",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "clause_1_operative": "CONFIRMED (and strengthened): an 'if and only if' classification of 17-dimensional pieces of Z keyed on bare total dimension is invalid; the relative fibre dimension must be retained as part of the package, because distinct CE splitting strata plausibly realize total dimension 17 with fibre dimensions 2, 4, 6 rather than 2 alone.",
+    "clause_2_witness": "REFUTED in the declared case (6,6): the exhibited alternative 'codimension-one jump with dimensions 14+3' is not realized; no codimension-one CE stratum exists (deg F = 9 odd forces b-a odd >= 3, expected codim b-a-1 even), fibre dimension 3 forces h^0(L)=4 hence C hyperelliptic (FND-0103), the hyperelliptic tetragonal locus has dimension 11+2 = 13 (codim 2, never 14), and composed covers are CE-unbalanced (F = O(1)+O(8)) so no hyperelliptic fibre lies on the balanced locus at all.",
+    "coefficients": "Q",
+    "correct_witness_shape": "If a witness is wanted, it is a different split over a CE-unbalanced stratum: at (6,6) the CE obstruction degree is 4f+n-2g-14 = 4f-20, so on F = O(3)+O(6) the failure condition is [omega tensor W_6^vee(Gamma)] in W_4 (codim 2 in Pic^4), fibre dimension 4 over an expected-dimension-13 stratum (13+4 = 17); on F = O(2)+O(7) the obstruction degree is 8 >= g so failure is vacuous, fibre = Conf_6 of dimension 6 over an expected-dimension-11 stratum (11+6 = 17). These are expected-dimension counts, not verified actual dimensions.",
+    "impacts_subproblem_ids": [
+      "C66-COMP-COMP",
+      "C66-GEO-H0",
+      "C66-GEO-COMP"
+    ],
+    "objects": [
+      "CE evaluation-failure locus Z",
+      "relative degree-six linear system over the balanced tetragonal base",
+      "CE splitting strata F = O(a)+O(b), a+b = g+3 = 9"
+    ],
+    "restatement_required_before_promotion": "Replace the second sentence by: 'Bare total dimension 17 may also arise over CE-unbalanced splitting strata with base/fibre splits other than 15+2; no codimension-one jump occurs for (g,n)=(6,6).'"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check-CE-obstruction-degree (packet-pinned primary locator, SRC-0004 Lemma 10.6)",
+      "retrieved_at": "2026-08-10T02:39:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "ce-and-maroni-loci-codimension (fetched; PDF returned binary streams, no verbatim locator extractable)",
+      "retrieved_at": "2026-08-10T02:45:28Z",
+      "source_type": "journal",
+      "url": "https://msp.org/ant/2015/9-2/ant-v9-n2-p05-s.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "syzygy-bundle-splits-by-cubic-resolvent-scrollar-invariants (fetched; PDF returned binary streams, statement corroborated only via search-result summary)",
+      "retrieved_at": "2026-08-10T02:45:01Z",
+      "source_type": "preprint",
+      "url": "https://ananddeopurkar.org/papers/HigherMaroni.pdf"
+    },
+    {
+      "arxiv_id": "1907.08597",
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": "10.1007/s00222-020-01023-z",
+      "query_family": "splitting-loci-expected-codimension u(e)=h^1(P^1,End O(e)) (search-surfaced metadata only; page not fetched)",
+      "retrieved_at": "2026-08-10T02:44:10Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/1907.08597"
+    }
+  ],
+  "task_id": "TASK-F-FND-0116",
+  "verdict": "retain_candidate"
+}

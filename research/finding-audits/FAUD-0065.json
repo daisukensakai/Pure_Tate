@@ -17,14 +17,24 @@
     "includes": "(6,6,16)",
     "precise_scope_note": "The general statement requires D replaced by its normalization D-tilde (disjoint union of smooth boundary components) for the isomorphism to follow from standard MHS machinery. For (6,6,16), d=21, the correct statement from CLP Eq. 6.1 plus Poincare duality gives Gr^W_16 H^16_c(M_6,6) isomorphic to ker(H^16(Mbar_6,6) -> H^16(D-tilde)) where D-tilde is the normalization of the boundary, not ker(H^16(Mbar_6,6) -> H^16(D)) as stated."
   },
+  "source_attestation_migration": {
+    "attested_at": "2026-08-17T00:49:50.244089Z",
+    "errors": [],
+    "raw_artifact_path": "research/finding-audits/raw-pre-attestation/FAUD-0065.json",
+    "raw_artifact_sha256": "77b6d0e6631fbb8f3450eac5d45402c54d7083f12a54cedb3e9204b686523f56",
+    "reason": "C66-FINDING-SOURCE-ATTESTATION-0001",
+    "transformations": []
+  },
   "source_records": [
     {
       "arxiv_id": "2307.08830",
       "arxiv_version": "v3",
-      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "content_sha256": "9743110a14c737fa54e6e0a822a5b91ae05cae3b3922a071fd55d5b868581a61",
       "doi": "10.1017/fmp.2024.24",
       "evidence_note": "SRC-0002 Eq. 6.1 gives the right-exact boundary sequence H^{k-2}(D-tilde)(-1) -> H^k(Mbar) -> W_k H^k(M) -> 0, which at k=26 yields Gr^W_26 H^26(M_6,6) as cokernel of the Gysin map from the normalized boundary. Via Poincare duality on M (dim 21), this dualizes to Gr^W_16 H^16_c(M_6,6) = ker(restriction: H^16(Mbar_6,6) -> H^16(D-tilde)), using the normalization D-tilde, not the boundary space D itself.",
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "exact-finding-check",
+      "reported_content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
       "retrieved_at": "2026-08-03T00:00:00Z",
       "source_type": "journal",
       "url": "https://arxiv.org/abs/2307.08830"
@@ -32,15 +42,19 @@
     {
       "arxiv_id": "2605.20453",
       "arxiv_version": "v1",
-      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "content_sha256": "fad75e6b0f4cf8c4cb326c3a80a2299273886e641a8a073a8f2d04b6f9ab6597",
       "doi": null,
       "evidence_note": "SRC-0001 (Payne survey) confirms degree 16 as open and records the pure Hodge structure conventions for smooth proper DM stacks. The top-weight piece of compactly supported cohomology Gr^W_m H^m_c is computed by the weight spectral sequence whose E_1 page involves the normalization of the NCD, not the boundary space itself.",
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "weight-spectral-sequence",
+      "reported_content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
       "retrieved_at": "2026-08-03T00:00:00Z",
       "source_type": "preprint",
       "url": "https://arxiv.org/abs/2605.20453"
     }
   ],
+  "sources_verified": true,
   "task_id": "TASK-F-FND-0088",
-  "verdict": "retain_candidate"
+  "verdict": "retain_candidate",
+  "verified_source_count": 2
 }

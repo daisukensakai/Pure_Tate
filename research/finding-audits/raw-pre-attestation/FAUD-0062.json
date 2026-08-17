@@ -1,0 +1,82 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (c(6)=5 so (6,6) lies outside published CKgP range) and with packet nodes C66-GEO-COMP / C66-TATE-SUPPORT. Independent primary checks. (1) Branch arithmetic: Riemann\u2013Hurwitz for smooth degree-4 covers of P^1 of genus 6 gives 2g-2=4(-2)+R so R=18; the classical finite branch morphism from the (simple/ordered) tetragonal Hurwitz stack lands in an open of M_0,18 (or an S_18-cover thereof). (2) Genus-zero base: SRC-0004 / Canning\u2013Larson record Keel\u2019s theorem that Chow and cohomology of Mbar_0,n are tautological for all n, hence pure Tate after rational coefficients; the open M_0,n likewise has mixed-Tate / polynomial-count cohomology with constant coefficients. (3) Finite pushforward: for a finite (\u00e9tale) morphism f:X\u2192Y one has H^*(X;Q)\u2245H^*(Y;f_*Q), and f_* of a locally constant sheaf remains locally constant (Stacks Project tag 095B); for the Hurwitz branch map, f_*Q is a local system of rank equal to the cover degree whose monodromy is the Hurwitz braid / mapping-class action on covers, not a priori a sum of Tate systems. (4) Non-implication: mixed-Tate cohomology of Y with constant coefficients does not imply mixed-Tate cohomology of Y with coefficients in a non-constant local system L=f_*Q, nor of the total space X. (5) Averaging direction: for a finite Galois cover, H^*(Y;Q)\u2245H^*(X;Q)^G, so Q-linear averaging/transfer only descends an already established Tate structure from cover to base; it cannot ascend Tate from M_0,18 to the Hurwitz stack. Relative projective-bundle / linear-system opens over the Hurwitz stack inherit the same obstruction: the projective-bundle theorem preserves Tate only after the base is already Tate. (6) CKgP contrast (do not conflate): SRC-0004 Lemma 3.10 shows CKgP does descend along proper surjections, so permanence of CKgP along Hurwitz\u2192gonality-stratum is valid in Chow; the finding correctly blocks the parallel claim for mixed-Tate / pure-weight cohomology. Distinct from corroborated FND-0053 (S_6-ordering covers of configuration/linear-system spaces\u2014different cover), FND-0054 (declaring the Hurwitz space rational/Tate upgrades a prediction without C66-TATE-SUPPORT\u2014meta, not the branch-map local-system calculus), and FND-0002 (CKgP non-ascent along finite \u00e9tale ordering). Merge target: none. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent primary-source verification of RH branch count, genus-zero Tate base, finite-pushforward local systems, and the one-way character of rational averaging.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0085",
+  "id": "FAUD-0062",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "branch_count": 18,
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "does_not_claim": "that the Hurwitz stack or Z is non-Tate; only that finiteness of the branch map alone does not prove mixed-Tate",
+    "objects": [
+      "balanced tetragonal Hurwitz stack H_4,6",
+      "finite branch morphism to open of M_0,18",
+      "relative projective-bundle / linear-system open over Hurwitz"
+    ],
+    "rh_check": "2g-2=k(-2)+R with g=6,k=4 gives R=18 for simple branching",
+    "statement_type": "methodological obstruction"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "genus-zero-tate-base",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "finite-etale-pushforward-local-system",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "stacks_project",
+      "url": "https://stacks.math.columbia.edu/tag/095B"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": null,
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "ckgp-vs-mixed-tate-permanence",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2307.08830"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "campaign-claims-cross-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "corpus",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
+  "task_id": "TASK-F-FND-0085",
+  "verdict": "promote"
+}

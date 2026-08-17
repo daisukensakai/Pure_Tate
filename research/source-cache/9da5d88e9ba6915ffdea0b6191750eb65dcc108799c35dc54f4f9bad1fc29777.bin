@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#d9d8d1">
+
+<title>Lemma 30.5.2 (02KH): Flat base change&mdash;The Stacks project</title>
+
+<meta name="description" content="an open source textbook and reference work on algebraic geometry">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ['tex2jax.js'],
+    jax: ['input/TeX','output/HTML-CSS'],
+    TeX: {
+      extensions: ['AMSmath.js', 'AMSsymbols.js', '/static/XyJax/extensions/TeX/xypic.js'],
+      Macros: {
+        linebreak: ["", 1, ""],
+        },
+      TagSide: 'left'
+    },
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    },
+    'HTML-CSS': {
+    	scale: 100,
+	availableFonts: [],
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+
+
+  <script type="text/javascript" src="/static/js/toggle.js"></script>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/easymde@2.0.1/dist/easymde.min.css" integrity="sha384-IRbzB9px0sfIx90vkN+geaX3F4LVcg/M+k5vmVkfjs5TnRX3MIhGS8Ma06ALKVYp" crossorigin="anonymous">
+  <script src="https://unpkg.com/easymde@2.0.1/dist/easymde.min.js" integrity="sha384-v06sb0t0ToY1YRtVlfD/GCGpIZ/QHYyeH2Gzjvr0ZJI62/50DIzT8XRgQ6JvptVu" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.css" integrity="sha384-8xTxM5sJRAUB0ckdBghB5am+aw+0kC5FfSUzMI+KI+UD8uBCNeSkdi8I1J4+Wjwu" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.js" integrity="sha384-gE5xOW4MVOjJL1A2SbxwvQw/qet6h8Vdv06j3JQGhBW4d1H5hXYB12WsrUBgU439" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid bounded">
+  <div id="first-bar" class="row topbar inner-top top">
+    <header class="col">
+      <h1><a href="/">The Stacks project</a></h1>
+    </header>
+
+    <nav id="header">
+      <ul id="quicklinks">
+        <li><a href="/bibliography">bibliography</a>
+        <li><a href="https://www.math.columbia.edu/~dejong/wordpress/">blog</a>
+      </ul>
+
+      <form id="quicksearch" action="/search">
+        <span id="search-icon"><img src="/static/images/search.svg"></span>
+        <input type="search" name="query" size="16" placeholder="keywords or a tag" value="">
+      </form>
+    </nav>
+  </div>
+
+  <nav id="second-bar" class="row topbar sticky-top">
+    
+      <ul class="col-11 col-sm-11 col-md-11 col-lg-12 col-xl-12" id="crumbs">
+        <li><a href="/browse">Table of contents</a></li>
+        
+  
+  
+    <li>Part <a href="/tag/0ELP" data-tag="0ELP">2</a>: Schemes
+    
+  
+    <li>Chapter <a href="/tag/01X6" data-tag="01X6">30</a>: Cohomology of Schemes
+    
+  
+    <li>Section <a href="/tag/02KE" data-tag="02KE">30.5</a>: Cohomology and base change, I
+    
+  
+    <li class="active">Lemma <a href="/tag/02KH" data-tag="02KH">30.5.2</a>: Flat base change
+    <span id="citation">(<a href="/tag/02KH/cite">cite</a>)</span>
+  
+
+
+      </ul>
+    
+
+    
+      <div class="col-1 col-sm-1 col-md-1" id="burger">
+        <input type="checkbox" id="burger-input"></input>
+
+        <label id="burger-icon" for="burger-input">
+          <span id="top-bun"></span>
+          <span id="meat"></span>
+          <span id="bottom-bun"></span>
+        </label>
+
+        <div id="burger-content">
+          
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/02KG">previous lemma</a>
+  
+  
+    <li class="right"><a href="/tag/0CKW">next lemma</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  
+    <hr>
+
+    <div class="information">
+      
+  <ul class="tag-info">
+    <li class="tag-history"><a href="/tag/02KH/history">history</a>
+    <li class="tag-statistics"><a href="/tag/02KH/statistics">statistics</a>
+    
+      <li class="tag-dependencies"><a href="/tag/02KH/statistics#dependencies">65 tags refer to this tag</a>
+    
+  </ul>
+
+    </div>
+  
+
+
+        </div>
+      </div>
+    
+
+    
+  </nav>
+
+  <div class="row" id="content">
+    <section id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      
+<div class="html" id="tag">
+  
+
+  
+
+  
+
+  <article class="env-lemma" id="02KH">
+  <p><a class="environment-identifier" href="/tag/02KH">Lemma <span data-tag="02KH">30.5.2</span> <span class="named">(Flat base change)</span>.</a>  Consider a cartesian diagram of schemes </p>
+  <div class="equation">
+  \[  \xymatrix{ X' \ar[d]_{f'} \ar[r]_{g'} &  X \ar[d]^ f \\  S' \ar[r]^ g &  S }  \]
+</div>
+  <p> Let $\mathcal{F}$ be a quasi-coherent $\mathcal{O}_ X$-module with pullback $\mathcal{F}' = (g')^*\mathcal{F}$. Assume that $g$ is flat and that $f$ is quasi-compact and quasi-separated. For any $i \geq 0$ </p>
+  <p><ol>
+  <li><p>
+the base change map of Cohomology, Lemma <a href="/tag/02N7" data-tag="02N7">20.17.1</a> is an isomorphism 
+</p>
+<div class="equation">
+  \[  g^*R^ if_*\mathcal{F} \longrightarrow R^ if'_*\mathcal{F}',  \]
+</div>
+</li><li><p>
+if $S = \mathop{\mathrm{Spec}}(A)$ and $S' = \mathop{\mathrm{Spec}}(B)$, then $H^ i(X, \mathcal{F}) \otimes _ A B = H^ i(X', \mathcal{F}')$. 
+</p>
+</li>
+</ol></p>
+</article><article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Using Cohomology, Lemma <a href="/tag/02N7" data-tag="02N7">20.17.1</a> in (1) is allowed since $g'$ is flat by Morphisms, Lemma <a href="/tag/01U9" data-tag="01U9">29.26.8</a>. Having said this, part (1) follows from part (2). Namely, part (1) is local on $S'$ and hence we may assume $S$ and $S'$ are affine. In other words, we have $S = \mathop{\mathrm{Spec}}(A)$ and $S' = \mathop{\mathrm{Spec}}(B)$ as in (2). Then since $R^ if_*\mathcal{F}$ is quasi-coherent (Lemma <a href="/tag/01XJ" data-tag="01XJ">30.4.5</a>), it is the quasi-coherent $\mathcal{O}_ S$-module associated to the $A$-module $H^0(S, R^ if_*\mathcal{F}) = H^ i(X, \mathcal{F})$ (equality by Lemma <a href="/tag/01XK" data-tag="01XK">30.4.6</a>). Similarly, $R^ if'_*\mathcal{F}'$ is the quasi-coherent $\mathcal{O}_{S'}$-module associated to the $B$-module $H^ i(X', \mathcal{F}')$. Since pullback by $g$ corresponds to $- \otimes _ A B$ on modules (Schemes, Lemma <a href="/tag/01I9" data-tag="01I9">26.7.3</a>) we see that it suffices to prove (2). 
+    <p>
+      Let $A \to B$ be a flat ring homomorphism. Let $X$ be a quasi-compact and quasi-separated scheme over $A$. Let $\mathcal{F}$ be a quasi-coherent $\mathcal{O}_ X$-module. Set $X_ B = X \times _{\mathop{\mathrm{Spec}}(A)} \mathop{\mathrm{Spec}}(B)$ and denote $\mathcal{F}_ B$ the pullback of $\mathcal{F}$. We are trying to show that the map 
+    <p>
+      <div class="equation">
+  \[  H^ i(X, \mathcal{F}) \otimes _ A B \longrightarrow H^ i(X_ B, \mathcal{F}_ B)  \]
+</div>
+    <p>
+       (given by the reference in the statement of the lemma) is an isomorphism. 
+    <p>
+      In case $X$ is separated, choose an affine open covering $\mathcal{U} : X = U_1 \cup \ldots \cup U_ t$ and recall that 
+    <p>
+      <div class="equation">
+  \[  \check{H}^ p(\mathcal{U}, \mathcal{F}) = H^ p(X, \mathcal{F}),  \]
+</div>
+    <p>
+       see Lemma <a href="/tag/01XD" data-tag="01XD">30.2.6</a>. If $\mathcal{U}_ B : X_ B = (U_1)_ B \cup \ldots \cup (U_ t)_ B$ we obtain by base change, then it is still the case that each $(U_ i)_ B$ is affine and that $X_ B$ is separated. Thus we obtain 
+    <p>
+      <div class="equation">
+  \[  \check{H}^ p(\mathcal{U}_ B, \mathcal{F}_ B) = H^ p(X_ B, \mathcal{F}_ B).  \]
+</div>
+    <p>
+       We have the following relation between the Čech complexes 
+    <p>
+      <div class="equation">
+  \[  \check{\mathcal{C}}^\bullet (\mathcal{U}_ B, \mathcal{F}_ B) = \check{\mathcal{C}}^\bullet (\mathcal{U}, \mathcal{F}) \otimes _ A B  \]
+</div>
+    <p>
+       as follows from Lemma <a href="/tag/02KG" data-tag="02KG">30.5.1</a>. Since $A \to B$ is flat, the same thing remains true on taking cohomology. 
+    <p>
+      In case $X$ is quasi-separated, choose an affine open covering $\mathcal{U} : X = U_1 \cup \ldots \cup U_ t$. We will use the Čech-to-cohomology spectral sequence Cohomology, Lemma <a href="/tag/01ES" data-tag="01ES">20.11.5</a>. The reader who wishes to avoid this spectral sequence can use Mayer-Vietoris and induction on $t$ as in the proof of Lemma <a href="/tag/01XJ" data-tag="01XJ">30.4.5</a>. The spectral sequence has $E_2$-page $E_2^{p, q} = \check{H}^ p(\mathcal{U}, \underline{H}^ q(\mathcal{F}))$ and converges to $H^{p + q}(X, \mathcal{F})$. Similarly, we have a spectral sequence with $E_2$-page $E_2^{p, q} = \check{H}^ p(\mathcal{U}_ B, \underline{H}^ q(\mathcal{F}_ B))$ which converges to $H^{p + q}(X_ B, \mathcal{F}_ B)$. Since the intersections $U_{i_0 \ldots i_ p}$ are quasi-compact and separated, the result of the second paragraph of the proof gives $\check{H}^ p(\mathcal{U}_ B, \underline{H}^ q(\mathcal{F}_ B)) = \check{H}^ p(\mathcal{U}, \underline{H}^ q(\mathcal{F})) \otimes _ A B$. Using that $A \to B$ is flat we conclude that $H^ i(X, \mathcal{F}) \otimes _ A B \to H^ i(X_ B, \mathcal{F}_ B)$ is an isomorphism for all $i$ and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  // move extras from parent element to after environment name and number
+  $("article a[data-toggle]").each(function(index, element) {
+    $(element).insertAfter(($(element).parent().find("a.environment-identifier")));
+  });
+
+  $('article a[data-toggle="popover"]').popover()
+
+  // render mathematics in popovers
+  $("[data-toggle=popover]").on('shown.bs.popover', function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, $("div.popover-body").html()]);
+  });
+});
+  </script>
+
+  
+
+  
+</div>
+
+
+<hr>
+
+<section id="comments">
+  <h2>Comments (8)</h2>
+
+  
+    <a id="comment-936" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/02KH#comment-936">Comment #936</a>
+        by
+        <cite>correction_bot</cite>
+        on <time datetime="2014-08-22 20:03:39">August 22, 2014 at 20:03 </time>
+      </header>
+
+      <blockquote><p>"Similarly, we have a spectral sequence with <script type="math/tex">E_2</script>-page
+<script type="math/tex">E_2^{p, q} = \check{H}^p(\mathcal{U}_B, \underline{H}^q(\mathcal{F}_B))</script>
+and converges to <script type="math/tex">H^{p + q}(X_B, \mathcal{F}_B)</script>." Write instead "which converges to".</p></blockquote>
+    </article>
+  
+    <a id="comment-957" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/02KH#comment-957">Comment #957</a>
+        by
+        <cite><a href="http://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2014-08-28 12:54:20">August 28, 2014 at 12:54 </time>
+      </header>
+
+      <blockquote><p>Fixed the typos pointed out in comments 931--936. Thanks! See <a href="https://github.com/stacks/stacks-project/commit/170d481e234858d24b8fa6255f5aa842e6fbdd43">here</a> for changes.</p></blockquote>
+    </article>
+  
+    <a id="comment-2343" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/02KH#comment-2343">Comment #2343</a>
+        by
+        <cite>Daniel</cite>
+        on <time datetime="2017-01-04 14:30:20">January 04, 2017 at 14:30 </time>
+      </header>
+
+      <blockquote><p>Typo in the very end of the first paragraph of the proof: "It suffices to prove (2)"</p></blockquote>
+    </article>
+  
+    <a id="comment-2412" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/02KH#comment-2412">Comment #2412</a>
+        by
+        <cite><a href="http://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2017-02-17 13:24:55">February 17, 2017 at 13:24 </time>
+      </header>
+
+      <blockquote><p>Thanks Daniel. Fixed <a href="https://github.com/stacks/stacks-project/commit/91c518ccec7892f5100467f32c9eb9a9f097cb97">here</a>.</p></blockquote>
+    </article>
+  
+    <a id="comment-4682" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/02KH#comment-4682">Comment #4682</a>
+        by
+        <cite>Nicolas Müller</cite>
+        on <time datetime="2019-11-18 09:48:10.278150">November 18, 2019 at 09:48 </time>
+      </header>
+
+      <blockquote><p>The last part in the last sentence of the second paragraph of the proof ("where <script type="math/tex">X_B = \mathop{\mathrm{Spec}}(B) \times_{\mathop{\mathrm{Spec}}(A)} X</script> and <script type="math/tex">\mathcal{F}_ B</script> is the pullback of <script type="math/tex">\mathcal{F}</script> to <script type="math/tex">X_B</script>.") is redundant, as <script type="math/tex">X_B</script> and <script type="math/tex">\mathcal{F}</script> are already defined in the sentence before.</p></blockquote>
+    </article>
+  
+    <a id="comment-4807" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/02KH#comment-4807">Comment #4807</a>
+        by
+        <cite><a href="https://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2019-12-10 11:21:35.433011">December 10, 2019 at 11:21 </time>
+      </header>
+
+      <blockquote><p>Thanks and fixed <a href="https://github.com/stacks/stacks-project/commit/d19e959dc2935a7cd73b40e6eb5697bb0bc6fcab">here</a>.</p></blockquote>
+    </article>
+  
+    <a id="comment-5458" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/02KH#comment-5458">Comment #5458</a>
+        by
+        <cite>Du</cite>
+        on <time datetime="2020-08-10 16:26:53.348901">August 10, 2020 at 16:26 </time>
+      </header>
+
+      <blockquote><p>Lemma 02N7 requirs <script type="math/tex">g^\prime</script> to be flat. So this assumption should be added.</p></blockquote>
+    </article>
+  
+    <a id="comment-5676" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/02KH#comment-5676">Comment #5676</a>
+        by
+        <cite><a href="https://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2020-11-14 22:11:02.390576">November 14, 2020 at 22:11 </time>
+      </header>
+
+      <blockquote><p>@#5458: Yes, we need <script type="math/tex">g'</script> to be flat in order to use Lemma <a href="/tag/02N7" data-tag="02N7">20.17.1</a>. But we're saved by the fact that the base change of a flat morphism is flat (Lemma <a href="/tag/01U9" data-tag="01U9">29.26.8</a>) and that <script type="math/tex">g'</script> is the base change of <script type="math/tex">g</script> by <script type="math/tex">f</script>. I have added a remark to the proof <a href="https://github.com/stacks/stacks-project/commit/dacf5041c1991704e5c4635a810d00c2c5c2405b">here</a>.</p></blockquote>
+    </article>
+  
+
+  
+</section>
+
+<hr>
+
+<section id="post-comment">
+  <h2>Post a comment</h2>
+  <p>Your email address will not be published. Required fields are marked.
+  <p>In your comment you can use <a href="/markdown">Markdown</a> and LaTeX style mathematics (enclose it like <code>$\pi$</code>). A preview option is available if you wish to see how it works out (just click on the eye in the toolbar).
+  <noscript><p>Unfortunately JavaScript is disabled in your browser, so the comment preview function will not work.</p></noscript>
+
+  <p>All contributions are licensed under the <a href="https://github.com/stacks/stacks-project/blob/master/COPYING">GNU Free Documentation License</a>.
+
+  <form name="comment" id="comment-form" action="/post-comment" method="post">
+    <label for="name">Name<sup>*</sup>:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="mail">E-mail<sup>*</sup>:</label>
+    <input type="email" name="mail" id="mail" required><br>
+
+    <label for="site">Site:</label>
+    <input type="url" name="site" id="site"><br>
+
+    <label>Comment:</label>
+    <textarea name="comment" id="comment-textarea" cols="80" rows="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <script type="text/javascript">
+var easymde = new EasyMDE({
+  autosave: {
+    enabled: true,
+    delay: 1000,
+    uniqueId: "comment-02KH",
+  },
+  element: $("#comment")[0],
+  forceSync: true,
+  insertTexts: { link: ["\\ref{", "}"], table: ["$", "$"], image: ["\\begin{equation}\n", "\n\\end{equation}\n"] }, // we hack into these insertion methods, I couldn't figure out how to write your own...
+  placeholder: "You can type your comment here, use the preview option to see what it will look like. If your comment is on a lemma, please leave your comment on the page of the lemma. Same with remarks, propositions, theorems, etc.",
+  previewRender: function(plaintext, preview) {
+    // deal with references
+    plaintext = plaintext.replace(/\\ref\{([0-9A-Z]{4})\}/g, "<span class=\"tag\">[$1](/tag/$1)</span>");
+    // deal with \[\] getting replaced to []
+    plaintext = plaintext.replace(/\\\[/g, "\\begin{equation}");
+    plaintext = plaintext.replace(/\\\]/g, "\\end{equation}");
+
+    output = this.parent.markdown(plaintext);
+
+    setTimeout(function() {
+      preview.innerHTML = output;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }, 0);
+
+    return "";
+  },
+  spellChecker: false,
+  status: false,
+  toolbar: [
+    "link", {name: "inline", action: EasyMDE.drawTable, className: "fa fa-usd"}, {name: "block", action: EasyMDE.drawImage, className: "fa fa-square"}, "|",
+    "bold", "italic", "|",
+    "ordered-list", "unordered-list", "|",
+    "preview"
+  ],
+});
+
+// make sure to show tags, not numbers
+var tagToggleHappened = false; // only do this once to not annoy the user too much
+easymde.codemirror.on("change", function() {
+  // if data-tag elements do not have tag attribute we need to make tags visible
+  if (!$("*[data-tag]").hasClass("tag") && !tagToggleHappened)
+    $("section#meta input.toggle").bootstrapToggle("toggle");
+  tagToggleHappened = true;
+});
+
+// prevent form submit when the captcha isn't correct
+// it's a bit silly to use HTML5 validation for this, as bots can figure that out
+// also save the author information to localStorage
+easymde.element.form.addEventListener("submit", function(event) {
+  if ($("#check").val() != $("#hidden-tag").val()) {
+    // explain captcha
+    $("#captcha-message").toggle();
+
+    // stop submit
+    event.preventDefault();
+    return false;
+  }
+
+  // save author information
+  localStorage.setItem("name", $("input#name").val());
+  localStorage.setItem("mail", $("input#mail").val());
+  localStorage.setItem("site", $("input#site").val());
+});
+    </script>
+
+    <p>In order to prevent bots from posting comments, we would like you to prove that you are human. You can do this by <em>filling in the name of the current tag</em> in the following input field. As a reminder, this is tag <span class="tag">02KH</span>. Beware of the difference between the letter&nbsp;'<span class="tag">O</span>' and the digit&nbsp;'<span class="tag">0</span>'.</p>
+    <!--<p>This <abbr title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</abbr> seems more appropriate than the usual illegible gibberish, right?<br>-->
+    <label for="check">Tag:</label>
+    <input type="text" name="check" id="check" required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Post comment</button>
+    <input type="hidden" name="tag" id="hidden-tag" value="02KH"><br>
+
+    <p id="captcha-message" style="display: none" class="alert alert-warning" role="alert">The tag you filled in for the captcha is wrong. You need to write <span class="tag">02KH</span>, in case you are confused.</p>
+
+    <script type="text/javascript">
+// enter in captcha fields causes \ref to appear (?!)
+$("input#check").on("keypress", function(e) {
+  if (e.which == 13) {
+    // always stop the event
+    e.preventDefault();
+
+    // perform clientside check as for actual submit
+    if ($("#check").val() != $("#hidden-tag").val()) {
+      // explain captcha
+      $("#captcha-message").toggle();
+    }
+    else {
+      $("form#comment-form").submit();
+    }
+  }
+});
+    </script>
+  </form>
+</section>
+
+
+
+
+    </section>
+	  <div class="col-lg-4 col-xl-4">
+	    <section id="meta" class="row topbar sticky-top">
+        
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/02KG">previous lemma</a>
+  
+  
+    <li class="right"><a href="/tag/0CKW">next lemma</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  <hr>
+  
+    <a href="https://stacks.math.columbia.edu/download/coherent.pdf#nameddest=02KH">View Lemma <span data-tag="02KH">30.5.2</span> as pdf</a>
+  
+
+  
+
+    <hr>
+
+    <div class="information">
+      
+  <ul class="tag-info">
+    <li class="tag-history"><a href="/tag/02KH/history">history</a>
+    <li class="tag-statistics"><a href="/tag/02KH/statistics">statistics</a>
+    
+      <li class="tag-dependencies"><a href="/tag/02KH/statistics#dependencies">65 tags refer to this tag</a>
+    
+  </ul>
+
+    </div>
+  
+
+
+      </section>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

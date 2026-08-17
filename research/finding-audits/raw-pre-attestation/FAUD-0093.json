@@ -1,0 +1,85 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and FND-0100 does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. Independent primary check: Stacks Project tag 056P defines a relative effective Cartier divisor as an effective Cartier divisor D with D\u2192S flat; for a smooth proper relative curve of relative dimension 1, Stacks 0B9D/0B9C identify Hilb^d points with relative effective Cartiers that are finite locally free of degree d over the base (and 0B9E preserves finite local freeness under sum). Thus the universal degree-n divisor Gamma over Div^n_{C/S} is finite flat/locally free of degree n, not finite etale in general. Finite locally free of degree n is etale precisely where geometric fibres are etale of degree n (reduced support of n distinct separable points); that is exactly the reduced-support open already used by FND-0064 for the Conf_n\u2192Div^n S_n-torsor. FND-0096 is adjudicated with the stronger hypothesis that Gamma is finite etale, so any use of as-stated FND-0096 over the whole of Div^6 is out of hypothesis precisely on non-reduced divisors\u2014the locus where scheme-theoretic Fitting/determinantal structure exceeds the geometric-point content already flagged by FND-0046. The listed dimension counts (h^0=g+n-1, ker H^0(omega) of rank g, coker H^1(omega) of rank 1, perfect Serre pairing as intrinsic derivative) do not invoke etaleness of Gamma and are consistent with a finite-flat restatement, but that strengthening is not yet a discharged corpus theorem. Recommended action is therefore merge into FND-0096 as a scope/hypothesis repair: annotate safe domain as the reduced-support open, and only after re-proof replace \u2018finite etale\u2019 by \u2018finite flat\u2019 (or \u2018finite locally free of degree n\u2019). Not a free-standing geometric obstruction to Z, mono, or Tate type; not redundant with FND-0046/0064/0087/0098 (related neighbors, different claims); do not retire the content\u2014fold it into FND-0096.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0100",
+  "id": "FAUD-0093",
+  "independent": true,
+  "merge_target_id": "FND-0096",
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "generality": "all g>=1, n>=1 for the FND-0096 domain gap",
+    "impacts_approach_ids": [
+      "C66-GEO-Z"
+    ],
+    "objects": [
+      "FND-0096",
+      "Div^n_{C/S}",
+      "universal relative Cartier divisor Gamma",
+      "reduced-support open"
+    ],
+    "out_of_hypothesis": "non-reduced locus of Div^n, where Gamma is only finite locally free/flat of degree n and not etale",
+    "repair": "restate FND-0096 with finite flat (or finite locally free of degree n) replacing finite etale after verification; until then restrict full-Div citations of FND-0096 to the reduced-support open",
+    "safe_domain": "reduced-support open of Div^n where the universal Gamma is finite etale of degree n"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000001",
+      "doi": null,
+      "query_family": "relative-effective-Cartier-finite-flat",
+      "retrieved_at": "2026-08-06T12:24:00Z",
+      "source_type": "stacks_project",
+      "url": "https://stacks.math.columbia.edu/tag/056P"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000002",
+      "doi": null,
+      "query_family": "moduli-of-divisors-finite-locally-free",
+      "retrieved_at": "2026-08-06T12:24:30Z",
+      "source_type": "stacks_project",
+      "url": "https://stacks.math.columbia.edu/tag/0B9C"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000003",
+      "doi": null,
+      "query_family": "moduli-of-divisors-sum-degree",
+      "retrieved_at": "2026-08-06T12:24:45Z",
+      "source_type": "stacks_project",
+      "url": "https://stacks.math.columbia.edu/tag/0B9E"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "cb1d4c17cf56d0e31609da0311cbf1f855318e8aac8168a58a17605f19db5226",
+      "doi": null,
+      "query_family": "packet-FND-0096-etale-hypothesis",
+      "retrieved_at": "2026-08-06T12:22:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000004",
+      "doi": null,
+      "query_family": "claims-cross-check",
+      "retrieved_at": "2026-08-06T12:22:30Z",
+      "source_type": "corpus_claims",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
+  "task_id": "TASK-F-FND-0100",
+  "verdict": "merge"
+}

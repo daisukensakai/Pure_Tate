@@ -1,0 +1,187 @@
+{
+  "attempt_id": "ATT-0100",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0100-1",
+      "note": "The CE pushforward, degree calculations, splitting of F, and formula b=5+h^0(F(-6)) are consistent with the stated projective-bundle convention and SRC-0004.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0100-2",
+      "note": "The pushed CE sequence and section counts give precisely the two asserted splitting types; the hyperelliptic case is excluded using Castelnuovo-Severi with the required divisibility step.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0100-3",
+      "note": "The two monomial computations give h^0(F(-6))=c and c+eps, and the change-of-splitting calculation makes eps independent of xi.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0100-4",
+      "note": "The hyperelliptic, Veronese-trigonal, and base-point plane-quintic cases each force a nonzero quadric obstruction or eps term, so balancedness implies base-point-freeness.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0100-5",
+      "note": "A base-point-free g^2_6 with no containing conic has mapping degree one or two; the degree-two image is necessarily a smooth cubic and yields the asserted bielliptic factorization.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0100-6",
+      "note": "For every bielliptic double cover and every degree-two A', elliptic-curve cohomology gives c=eps=0 without a genericity assumption; balancedness remains correctly conditional on (CE)+(N).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0100-7",
+      "note": "Intersection theory, adjunction, the Koszul calculation, and the birationality of the second projection verify the stated complete-intersection example, with balancedness correctly conditional on (CE)+(N).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0100-8",
+      "note": "The strongest monodromy attack fails: the ordered-pair incidence is irreducible, giving 2-transitivity, and a general ordinary tangent to the singular sextic normalization supplies a single transposition; Jordan then gives S_6.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0100-9",
+      "note": "The bielliptic intermediate cover gives a monodromy-invariant partition into three pairs, so G_C is contained in S_2 wr S_3 and the ordering torsor has at least 720/48=15 connected components.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0100-10",
+      "note": "Given the imported smooth torsor model, fibre monodromy maps into total monodromy, and flatness with geometrically irreducible fibres yields the stated component correspondence and dimension shifts.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0100-11",
+      "note": "The residual pencil omega(-Gamma) reconstructs gamma; over reduced bases Grauert, fibrewise generation, and uniqueness after surjectivity establish the expressly limited full-faithfulness statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0100-12",
+      "note": "The bielliptic-involution clause is verified, but the genus-two double-cover construction never proves that its degree-four composite carries the asserted (CE) resolution and normalization (N). Section 10 invokes the criterion (3.3), whose derivation already assumes (CE)+(N), to conclude balancedness. Thus the exact A5 existence assertion for a balanced pair satisfying (CE),(N),(H3) is circular unless those hypotheses are independently constructed or cited for this example.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CHK-ADVERSARIAL-SCOPE",
+      "note": "The theorem is fibrewise and scheme-relative and explicitly excludes stack bases, nonreduced bases, Hodge weights, Tate purity, and the campaign cohomology target. It contains no Poincare-duality, Borel-Moore/cohomology-degree, Tate-twist, Gysin, Kunneth, spectral-sequence, invariants/coinvariants, semisimplification, motivic, algebraic-generation, tautological-generation, or stable-pairs inference. Those attacks are therefore non-load-bearing for this exact theorem rather than silently justified.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-16",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "evidence": "ATT-0100 Section 10 constructs the genus-two double cover and then invokes equation (3.3); Sections 0-3 explicitly derive (3.3) only under standing hypotheses (CE)+(N), while Section 10 contains no construction or citation establishing those hypotheses for the example.",
+      "key": "FC-GENUS2-EXAMPLE-CE-N-CIRCULAR",
+      "severity": "high",
+      "statement": "An existence clause asserting that a concrete degree-four cover satisfies (CE) and the normalization (N) cannot establish balancedness by invoking a criterion whose derivation already assumes (CE)+(N) unless the CE embedding, resolution, and normalization are independently constructed or supplied by a verified dependency. ATT-0100 does not discharge this requirement for its genus-two double-cover example.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0149",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "29628e10a4d29452693fcf64af7a14a6b52ad614e217ac268c61ff1d3158e1d2",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Used within its packet-verified scope for the CE evaluation-failure/Abel-Jacobi identification.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Listed corroborating review of ATT-0065; no additional theorem is imported from it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Listed corroborating review of ATT-0065; no additional theorem is imported from it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Used within its verified reduced-stratum scope for the projective-bundle and ordered-torsor models.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Listed corroborating review of ATT-0066.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Listed corroborating review of ATT-0066, including the reduced-base caveat.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0088",
+      "note": "CLM-0088-8 is load-bearing for Part B and is used only over reduced locally Noetherian bases, matching its verified scope.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0139",
+      "note": "Listed corroborating review of ATT-0088.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0142",
+      "note": "Listed corroborating review of ATT-0088 and its base-point-freeness scope limitation.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0086",
+      "note": "Used as verified supporting context for emptiness of the balanced jump stratum.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0135",
+      "note": "Listed corroborating review of ATT-0086.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0138",
+      "note": "Listed corroborating review of ATT-0086.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Used only for the recorded CE sign convention and degree formulas, within the packet's source bounds.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0100-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is against the exact A5 existence clause, not the campaign's excluded Tate target. The proposed genus-two double-cover example is asserted to satisfy (CE),(N),(H3), but the construction verifies only the curve, pencil, section counts, and involution. It neither constructs nor cites the required CE resolution or normalization (N), and it proves balancedness by applying (3.3), which was derived assuming those same hypotheses. This leaves CLM-0100-12 unresolved and makes the theorem incomplete. The initially strongest alternative attack on type-(a) monodromy was checked and fails: singularities of the plane sextic do not prevent choosing a general ordinary tangent with single-transposition inertia, and the ordered-pair incidence establishes 2-transitivity.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero. PART A (fibrewise). Let C be a smooth projective connected genus-6 curve over k, gamma:C->P1 finite flat of degree four, E the Tschirnhausen bundle (gamma_*O_C = O + E^vee), p:X=P(E^vee)->P1 with p_*O_X(1)=E, i:C->X the Casnati-Ekedahl embedding and F the rank-two relations bundle. Assume (CE) the standard degree-four CE resolution 0->O_X(-4) tensor p^*det F->O_X(-2) tensor p^*F->I_C->0, and (N) O_X(1)|_C = omega_{C/P1} tensor gamma^*A for some A in Pic(P1). Put D=gamma^*(pt), L=omega_C(-D), and assume (H3) h^0(L)=3. Then: (A0) A=O, so O_X(1)|_C=omega_{C/P1}=:A_C; deg E=deg F=9; F=p_*(I_C tensor O_X(2))=ker(Sym^2 E->gamma_*(A_C^2)); F=O(a)+O(b) with a+b=9, a<=b, and b=5+h^0(F(-6)), so F is balanced if and only if h^0(F(-6))=0. (A1) C is not hyperelliptic, h^0(omega_C(-2D)) is 0 or 1, and E=O(3)^3 in the first case, E=O(2)+O(3)+O(4) in the second. Writing c:=dim ker(Sym^2 H^0(L)->H^0(L^2)), one has h^0(F(-6))=c when h^0(omega_C(-2D))=0, and h^0(F(-6))=c+eps when h^0(omega_C(-2D))=1, where eps in {0,1} is 1 exactly when xi*zeta lies in the image of Sym^2 H^0(L)->H^0(L^2), zeta spanning H^0(omega_C(-2D)) and xi being any element of H^0(omega_C) outside the five-dimensional subspace H^0(O_C(D))*H^0(L); eps does not depend on the choice of xi. (A2) If in addition (BAL) F=O(4)+O(5), then Sym^2 H^0(L)->H^0(L^2) is injective, L is base-point-free, |L| is the pullback of the system of lines under psi_L:C->P2=P(H^0(L)^vee), and exactly one of: (a) deg psi_L=1 and psi_L is birational onto a plane sextic of geometric genus six; (b) deg psi_L=2, the image is a smooth plane cubic E', C is bielliptic by phi:C->E' with L=phi^*O_{E'}(1), and gamma=q o phi with q:E'->P1 of degree two. In particular C is not hyperelliptic, C is not trigonal with L=T^2 for a g^1_3 T, and C is not a smooth plane quintic with gamma the projection from a point of C; moreover h^0(omega_C(-2D))=0 forces case (a). (A3) Both cases occur: (i) for every smooth bielliptic genus-six phi:C->E' and every degree-two A' in Pic(E'), the pair (C, gamma=q o phi) with q=phi_{|A'|} satisfies h^0(L)=3, h^0(omega_C(-2D))=1 and, under (CE)+(N), F=O(4)+O(5); (ii) for C a smooth complete intersection of divisors of types (1,2) and (2,2) in P1 x P2 with gamma the first projection, h^0(L)=3, h^0(omega_C(-2D))=0, psi_L is birational and, under (CE)+(N), F=O(4)+O(5). (A4) Assume (BAL) and let Delta be the non-reduced locus of |L|, U_C=|L|-Delta (nonempty, dense, open), and Z_C->U_C the finite etale S_6-torsor of orderings of the universal divisor. In case (a) the geometric monodromy group G_C = image(pi_1(U_C)->S_6) equals S_6 and Z_C is irreducible, smooth of dimension two; in case (b) G_C preserves the partition of each fibre into the three fibres of phi, hence lies in a conjugate of S_2 wr S_3 of order 48, and Z_C has at least 15 connected components, so Z_C is reducible. (A5) Assume (BAL). For every effective Gamma with O_C(Gamma)=L one has omega_C(-Gamma)=O_C(D), |omega_C(-Gamma)| is the complete base-point-free pencil defining gamma, and Aut(C,Gamma)=Aut(C,gamma,Gamma):={sigma in Aut(C): sigma(Gamma)=Gamma and gamma o sigma = tau o gamma for some tau in Aut(P1)}. In case (b) the bielliptic involution lies in Aut(C,Gamma) for every Gamma in |L| and acts on a reduced Gamma as a product of three disjoint transpositions. Furthermore there exist balanced pairs satisfying (CE),(N),(H3) - namely C->C'' a double cover of a general genus-two curve with general branch divisor, gamma the composite with the hyperelliptic map of C'' - and a reduced Gamma in |L| (the ramification divisor) admitting a nontrivial involution in Aut(C,Gamma) fixing all six points of Gamma; hence stabilizers of ordered points of the failure locus are not always trivial. PART B (families; S reduced). Let S be a reduced locally Noetherian k-scheme carrying a family satisfying (CE),(BAL),(N) as in ATT-0088, AJ=P_S(pi_*L), U the reduced-support open of AJ, and Z the CE evaluation-failure scheme, so that (ATT-0088, CLM-0088-8) U->S and Z->S are smooth surjective of pure relative dimension two and Z->U is a finite etale S_6-torsor. Then: (B1) if S is connected and at least one geometric fibre is of type (a), then pi_1(U)->S_6 is surjective and Z is connected; if moreover S is normal and irreducible then U and Z are irreducible, and if S is of finite type over k then dim Z = dim S + 2. (B2) if every geometric fibre is of type (a), then Z->S has geometrically irreducible fibres and, with no normality hypothesis, the irreducible components of Z and of U are in bijection with those of S, each of dimension dim S_alpha + 2 for S of finite type over k. (B3) if some geometric fibre is of type (b), the corresponding fibre of Z->S has at least 15 connected components; so no fibrewise full-S_6 statement and no fibrewise component count is available over a base meeting the bielliptic-composed locus. (B4) for every reduced S-scheme T and every relative effective divisor Gamma in C_T with O(Gamma)=L_T tensor pi^*M, the sheaf V:=p_{T*}(omega_{C_T/T}(-Gamma)) is locally free of rank two and compatible with base change, its evaluation p_T^*V->omega_{C_T/T}(-Gamma) is surjective, and the induced T-morphism C_T->P_T(V^vee) recovers gamma_T up to a unique isomorphism of P1-bundles over T; consequently the forgetful assignment (C,gamma,Gamma) -> (C,Gamma) is fully faithful on reduced T-points. No assertion is made for nonreduced T, for stack bases, for unbalanced CE strata, for closedness, image, or codimension in M_{6,6}, or about any Hodge, weight, purity or Tate property.",
+  "verdict": "incomplete"
+}

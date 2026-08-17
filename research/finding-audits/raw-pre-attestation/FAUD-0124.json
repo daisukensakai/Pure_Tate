@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001 or RED-0001; it is compatible with THM-0005 (c(6)=5, so n=6 needs new geometry). VERIFIED CLAUSE (a), the formula. On the reduced locally closed stratum H_k = {h^0(L)=k} of the base B, cohomology-and-base-change/Grauert (Hartshorne III.12.9) makes pi_*L locally free of rank k, so P(pi_*L) -> H_k is a Zariski-locally-trivial P^{k-1}-bundle and dim I|_{H_k} = dim H_k + (k-1) per irreducible component. FND-0107 independently licenses exactly this: Proj(pi_*L) has correct fibres precisely over the constant-h^0 locus, where it agrees with the Abel-Jacobi divisor model. VERIFIED CLAUSE (b), the overstatement. dim B = 15 is confirmed from primary source: Deopurkar-Patel arXiv:1402.1439v2 Sec. 0.1 defines the simple Hurwitz space by a branch divisor supported at 2g+2d-2 = 18 distinct points and records dim H_{d,g} = 2g+2d-5, i.e. 15 for (g,d)=(6,4); the same source (Sec. 4) gives the Casnati-Ekedahl degree-4 data rk E = 3, deg E = deg F = g+3 = 9 with C cut in PE^vee by a section of O(2) tensor gamma^*F^vee, so balanced F = O(4)+O(5) is the generic splitting and the balanced locus is a dense open (splitting-type semicontinuity; DP Thm 2.10(4) makes non-generic splitting loci proper of positive codimension). This is consistent with the packet's SRC-0004 Lemma 10.6 excerpt deg(W_f|_C) = 4g+12-4f, giving deg W_5 = 16 and deg L = 6. Since B is irreducible of dimension 15 (Clebsch-Hurwitz irreducibility of H_{4,6} plus dense balanced open) and {h^0 >= k} is closed by semicontinuity, every stratum above the generic value of h^0 is a PROPER closed subset, hence has dimension <= 14; the generic value is below 4 because h^0(L)=4 forces C hyperelliptic (FND-0103, Clifford equality with deg M = 4) while the general genus-6 curve is non-hyperelliptic and balanced tetragonal. So dim(H_4) <= 14 is forced independently of ATT-0078, and the uniform substitution dim(H_k)=15 is wrong exactly as stated. SHARPENING (audit adds, finding understates the error). H_4 lies over the hyperelliptic locus, of dimension 2g-1 = 11 in M_6, and a hyperelliptic curve carries a unique base-point-free g^1_4, namely |2 g^1_2| (any g^1_2(p+q) has h^0 = 2 and base locus p+q), so the fibre of B -> M_6 there is a single point and dim H_4 <= 11. Hence dim I|_{H_3} = 15+2 = 17 (codimension 4 in the 21-dimensional M_{6,6}, matching FND-0058) while dim I|_{H_4} <= 11+3 = 14, not 18. The uniform-15 count would manufacture a spurious dimension-18, codimension-3 component of Z, directly contradicting the codimension-4 purity the same theorem asserts: the internal inconsistency alleged by the finding is real, and the true gap is at least four dimensions rather than one. Correcting it is favourable to the campaign, since the jump stratum turns out to be harmless rather than dominant. OPTIONAL, NON-LOAD-BEARING. A worker-retrieved citation (Landesman-Vakil-Wood arXiv:2410.22531, Sec. 3.14-3.19) reports F = O(2)+O(g+1) = O(2)+O(7) for a degree-4 cover factoring through a degree-2 map of P^1, which would make H_4 empty on the balanced locus and thereby settle the question FND-0104 leaves open. I did not fetch that locator (the follow-up worker turn failed on a network error) and the promotion does not rest on it; I did independently compute, via gamma_*O_C = q_*(O + O(-7)) = (O + O(-1)) + (O(-4) + O(-4)), that the bihyperelliptic case has Tschirnhausen bundle E = O(1)+O(4)+O(4), i.e. Maroni-unbalanced with e_1 = 1, which is consistent with f_1 = 2e_1 = 2 and F = O(2)+O(7) and with the case being excluded from the balanced locus. This should be pursued as a separate finding against GAP-H0-1/FND-0104, not folded into FND-0121. SCOPE CAVEATS RECORDED WITH THE PROMOTION. (i) The equality is for the FULL relative linear system; for the reduced-support open or the ordered Conf_6 incidence the S_6-cover is finite etale and dimension-preserving (FND-0064) but the reduced-support locus can be empty on a stratum (FND-0083), so there dim H_k + k - 1 is only an upper bound. (ii) Read per irreducible component, since H_k need not be equidimensional. (iii) The number 15 is a coarse-moduli/branched-cover count whose promotion to a stack dimension still carries the FND-0060 stabilizer caveat; dimensions are unchanged between stack and coarse space, so the finding inherits but does not create that caveat. (iv) Which k occur: unconditionally k in {1,2,3,4} (FND-0103); modulo GAP-Z-W5D, k in {3,4} (FND-0104). The verification is robust to either reading, since the argument only uses that H_k for k above the generic value is proper closed in an irreducible 15-dimensional base. DISTINCTNESS. Not a duplicate. FND-0058 is the missing-hypothesis gap (constancy of h^0 = 3 needed for the P^2-bundle and codimension-4 claim); FND-0121 is the dimension arithmetic on the jump strata and is precisely what bites when that constancy is not assumed. FND-0103/FND-0104 supply the h^0 range and the hyperelliptic confinement that make dim H_4 small but say nothing about the bundle dimension count. FND-0060 concerns whether 15 is a stack dimension at all, not its application to the wrong sets. FND-0086 is the broader demand for an exhaustive component/stabilizer/closure analysis of Z; FND-0121 is one specific arithmetic error inside such an analysis. Merge target: none; keep its own equivalence group projective-bundle-stratum-dimension-overstatement. PROVENANCE LIMIT. The clause 'the theorem's own bound dim(H_4)<=14' attributes an assertion to ATT-0078, which is absent from this read-only workspace and was not re-audited; following the precedent of FAUD-0002 and FAUD-0003, the mathematical content is verified independently and the promotion does not depend on the attribution. Hash limitation: this workspace exposes no shell or hashing tool, so content_sha256 is null for the two live-retrieved web records rather than fabricated; the packet record carries the binding hash supplied in TASK.json. Verdict: promote from candidate to corroborated with the scope sharpened as above; evidence_class upgraded from adversarial_review to primary_source.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0121",
+  "id": "FAUD-0124",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "asserted_content": "dim I|_{H_k} = dim(H_k) + (k-1), per irreducible component of H_k; substituting dim(H_k)=15 uniformly overstates every stratum above the generic h^0 value and contradicts the same theorem's bound dim(H_4) <= 14.",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "excluded_engine_note": "the finding's sole reviewer_engine (codex) is in this revision's excluded_engines; this audit supplies the first non-excluded verification",
+    "not_verified_here": [
+      "the attribution of the uniform-15 substitution and of the bound dim(H_4)<=14 to ATT-0078 (artifact absent from this read-only workspace)"
+    ],
+    "objects": [
+      "balanced tetragonal base B = H_6^{tet,bal} (balanced-splitting open in the simple Hurwitz space H_{4,6})",
+      "L = W_5 tensor omega_C^{-1}, deg 6, chi(L)=1",
+      "h^0-strata H_k = {b in B : h^0(L_b) = k}, reduced locally closed",
+      "relative linear-system / Abel-Jacobi divisor space I over B"
+    ],
+    "subproblem_ids": [
+      "C66-GEO-H0",
+      "C66-GEO-COMP"
+    ],
+    "verified_unconditionally": [
+      "projective-bundle fibre dimension k-1 over a constant-h^0 stratum",
+      "dim B = 2g+2d-5 = 15 and B irreducible",
+      "H_k closed for k above the generic value, hence dim H_k <= 14",
+      "sharper: dim H_4 <= 11, since h^0(L)=4 forces C hyperelliptic and the only base-point-free g^1_4 on a hyperelliptic curve is |2 g^1_2|"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": "1402.1439",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.2140/ant.2015.9.459",
+      "query_family": "hurwitz-dimension-and-CE-degree-conventions",
+      "retrieved_at": "2026-08-11T00:59:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/1402.1439"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+      "doi": null,
+      "query_family": "packet-binding-and-CE-degree-excerpt",
+      "retrieved_at": "2026-08-11T00:55:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": "2410.22531",
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": "10.1515/crelle-2026-0029",
+      "query_family": "bihyperelliptic-degree-four-splitting-type-optional-sharpening",
+      "retrieved_at": "2026-08-11T00:58:30Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2410.22531"
+    }
+  ],
+  "task_id": "TASK-F-FND-0121",
+  "verdict": "promote"
+}

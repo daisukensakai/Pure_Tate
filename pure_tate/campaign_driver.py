@@ -58,7 +58,7 @@ from .tasking import (
 from .paired import (
     DIGEST_DIR,
     ArtifactValidationError,
-    PairedInfrastructureError,
+    ObservableInfrastructureError,
     SubstantiveAttemptError,
     attempt_pending_recoveries,
     attach_working_context,
@@ -491,6 +491,12 @@ def _next_due_forced_task(
 
 
 def _apply_finding_audit(artifact: Dict[str, Any]) -> None:
+    if artifact.get("verdict") != "retain_candidate" and not artifact.get(
+        "sources_verified"
+    ):
+        raise ValueError(
+            "finding-audit adjudication requires harness-verified sources"
+        )
     findings = {item["id"]: item for item in load_findings()}
     finding = findings[artifact["finding_id"]]
     if artifact["verdict"] == "retain_candidate":
@@ -510,6 +516,9 @@ def _apply_finding_audit(artifact: Dict[str, Any]) -> None:
             adjudicator=artifact["id"],
             supporting_engine=artifact["engine"],
             supporting_audit_id=artifact["id"],
+            supporting_evidence_class=artifact.get("evidence_class"),
+            supporting_scope=artifact.get("scope"),
+            adjudicated_statement=artifact.get("adjudicated_statement"),
         )
     elif artifact["verdict"] == "retire":
         adjudicate_finding(
@@ -1429,9 +1438,10 @@ def _drive_campaign_unlocked(
                 continue
             stop_reason = "artifact_validation_failure"
             break
-        except PairedInfrastructureError as exc:
+        except ObservableInfrastructureError as exc:
             event["error"] = str(exc)
             event["state"] = "failed"
+            event["classification"] = "infrastructure"
             event["completed_at"] = _timestamp()
             event["trace_id"] = exc.trace_id
             event["trace_path"] = exc.trace_path
@@ -1442,22 +1452,33 @@ def _drive_campaign_unlocked(
             stop_reason = (
                 "interrupted" if "interrupted" in detail else "engine_failure"
             )
-            record_event(
-                {
-                    "event": phase + "_infrastructure_failure",
-                    "campaign_id": campaign_id,
-                    "problem_key": problem_key(campaign),
-                    "engine": engine,
-                    "turn_kind": phase,
-                    "packet_sha256": task["packet_sha256"],
-                    "classification": "infrastructure",
-                    "trace_id": exc.trace_id,
-                    "trace_path": exc.trace_path,
-                    "trace_sha256": trace_sha256,
-                    "review_state": "not_applicable",
-                    "fallback_eligible": False,
-                }
-            )
+            if phase in {"forced-proof", "standard-fallback"}:
+                record_event(
+                    {
+                        "event": phase + "_infrastructure_failure",
+                        "campaign_id": campaign_id,
+                        "problem_key": problem_key(campaign),
+                        "engine": engine,
+                        "turn_kind": phase,
+                        "packet_sha256": task["packet_sha256"],
+                        "classification": "infrastructure",
+                        "trace_id": exc.trace_id,
+                        "trace_path": exc.trace_path,
+                        "trace_sha256": trace_sha256,
+                        "review_state": "not_applicable",
+                        "fallback_eligible": False,
+                    }
+                )
+            if isinstance(engine, str) and engine:
+                failed_engines.add(engine)
+            if phase in {
+                "review",
+                "finding-audit",
+                "novelty",
+                "trace-mining",
+            }:
+                planned_tasks.discard(task["id"])
+                continue
             break
         except (OSError, RuntimeError) as exc:
             event["error"] = str(exc)

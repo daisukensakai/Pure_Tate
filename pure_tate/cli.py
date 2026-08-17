@@ -518,6 +518,45 @@ def command_finding_adjudicate(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_attest_finding_sources(args: argparse.Namespace) -> int:
+    from .findings import repair_finding_audit_corpus
+
+    try:
+        result = repair_finding_audit_corpus(
+            dry_run=args.dry_run,
+            audit_ids=args.id,
+            timeout=args.timeout,
+        )
+    except (OSError, ValueError) as exc:
+        print("ERROR:", exc)
+        return 1
+    prefix = "DRY-RUN " if result["dry_run"] else ""
+    for item in result["results"]:
+        extras = []
+        if item.get("verified_source_count"):
+            extras.append("public=%s" % item["verified_source_count"])
+        if item.get("local_evidence_count"):
+            extras.append("local=%s" % item["local_evidence_count"])
+        if item.get("errors"):
+            extras.append("errors=%d" % len(item["errors"]))
+        suffix = ("  " + " ".join(extras)) if extras else ""
+        print("%s%s  %s%s" % (prefix, item["id"], item["status"], suffix))
+        for error in item.get("errors") or []:
+            print("  error: %s" % error)
+    summary = result.get("summary") or {}
+    print(
+        "%ssummary: %s"
+        % (
+            prefix,
+            ", ".join(
+                "%s=%s" % (key, summary[key]) for key in sorted(summary)
+            )
+            or "none",
+        )
+    )
+    return 0
+
+
 def command_drive(args: argparse.Namespace) -> int:
     ntfy_notifications = (
         ntfy_is_configured()
@@ -976,6 +1015,12 @@ def build_parser() -> argparse.ArgumentParser:
     adjudicate_parser.add_argument("--reason", required=True)
     adjudicate_parser.add_argument("--adjudicator", default="human")
     adjudicate_parser.set_defaults(func=command_finding_adjudicate)
+
+    attest_sources_parser = subparsers.add_parser("attest-finding-sources")
+    attest_sources_parser.add_argument("--dry-run", action="store_true")
+    attest_sources_parser.add_argument("--id", action="append")
+    attest_sources_parser.add_argument("--timeout", type=int, default=30)
+    attest_sources_parser.set_defaults(func=command_attest_finding_sources)
 
     all_parser = subparsers.add_parser("all")
     all_parser.set_defaults(func=command_all)

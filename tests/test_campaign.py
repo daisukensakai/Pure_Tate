@@ -12,6 +12,7 @@ from pure_tate.agents import (
     run_task,
 )
 from pure_tate.campaign_driver import (
+    _apply_finding_audit,
     _drive_campaign_unlocked,
     _next_due_forced_task,
     _eligible_research_pool,
@@ -39,6 +40,7 @@ from pure_tate.experiments import (
 from pure_tate.findings import finding_by_id, findings_for_case
 from pure_tate.novelty import (
     NOVELTY_QUERY_FAMILIES,
+    attest_source_records,
     verify_source_records,
 )
 from pure_tate.store import ROOT
@@ -329,6 +331,82 @@ class FocusedCampaignTests(unittest.TestCase):
             )
         self.assertEqual(result["stop_reason"], "step_limit_with_failures")
         self.assertEqual(ledger["status"], "completed_with_failures")
+
+    def test_ordinary_infrastructure_trace_is_linked_from_run_ledger(self):
+        from pure_tate.paired import ObservableInfrastructureError
+
+        task = next(
+            item
+            for item in campaign_mathematics_tasks("C66-001")
+            if item["status"] == "ready"
+        )
+        ledger = {
+            "schema_version": 2,
+            "run_id": "RUN-TEST-TRACE",
+            "campaign_id": "C66-001",
+            "events": [],
+            "status": "running",
+        }
+        with tempfile.TemporaryDirectory(dir=ROOT / "research") as directory:
+            trace = Path(directory) / "TRACE-ORDINARY-INFRA.json"
+            trace.write_text('{"classification":"infrastructure"}')
+            relative = str(trace.relative_to(ROOT))
+            with mock.patch(
+                "pure_tate.campaign_driver._research_capability_state",
+                return_value="pass",
+            ), mock.patch(
+                "pure_tate.campaign_driver._campaign_reviews", return_value=[]
+            ), mock.patch(
+                "pure_tate.campaign_driver._load_bearing_experiments",
+                return_value=[],
+            ), mock.patch(
+                "pure_tate.campaign_driver.finding_audit_tasks",
+                return_value=[],
+            ), mock.patch(
+                "pure_tate.campaign_driver._next_due_forced_task",
+                return_value=None,
+            ), mock.patch(
+                "pure_tate.campaign_driver._math_task", return_value=task
+            ), mock.patch(
+                "pure_tate.campaign_driver.attach_working_context",
+                side_effect=lambda value, _campaign: value,
+            ), mock.patch(
+                "pure_tate.campaign_driver.run_task",
+                side_effect=ObservableInfrastructureError(
+                    "session limit", "TRACE-ORDINARY-INFRA", relative
+                ),
+            ), mock.patch(
+                "pure_tate.campaign_driver.reserve_prefixed_artifact",
+                return_value=("ATT-TEST", None),
+            ), mock.patch(
+                "pure_tate.campaign_driver._write_run_ledger"
+            ), mock.patch(
+                "pure_tate.campaign_driver._new_run_ledger",
+                return_value=(
+                    ledger,
+                    ROOT / "reports" / "runs" / "RUN-TEST-TRACE.json",
+                ),
+            ), mock.patch(
+                "pure_tate.campaign_driver.attempt_pending_recoveries",
+                return_value=[],
+            ):
+                result = _drive_campaign_unlocked(
+                    "C66-001",
+                    1,
+                    research_engines=["grok"],
+                    prover_engines=["claude"],
+                    review_engines=["grok", "codex"],
+                    retry=True,
+                )
+        event = result["events"][0]
+        self.assertEqual(result["stop_reason"], "engine_failure")
+        self.assertEqual(event["classification"], "infrastructure")
+        self.assertEqual(event["trace_id"], "TRACE-ORDINARY-INFRA")
+        self.assertEqual(event["trace_path"], relative)
+        self.assertEqual(
+            event["trace_sha256"],
+            hashlib.sha256(b'{"classification":"infrastructure"}').hexdigest(),
+        )
 
     def test_campaign_notifies_after_each_step_and_at_run_end(self):
         campaign = load_campaign("C66-001")
@@ -636,7 +714,8 @@ class FocusedCampaignTests(unittest.TestCase):
         self.assertNotIn("--disable-web-search", math)
         self.assertNotIn("--disable-web-search", review)
         self.assertEqual(
-            research[research.index("--permission-mode") + 1], "dontAsk"
+            research[research.index("--permission-mode") + 1],
+            "bypassPermissions",
         )
         for argv, phase in (
             (research, "novelty"),
@@ -748,6 +827,62 @@ class FocusedCampaignTests(unittest.TestCase):
             bad = copy.deepcopy(records)
             bad[0]["content_sha256"] = "0" * 64
             self.assertFalse(verify_source_records(bad)["ok"])
+
+    def test_finding_source_hashes_are_attested_by_harness(self):
+        content = b"harness-fetched finding source"
+        actual = hashlib.sha256(content).hexdigest()
+        records = [
+            {
+                "query_family": "exact-finding-check",
+                "retrieved_at": "2026-08-16T00:00:00Z",
+                "url": "https://stacks.math.columbia.edu/tag/00NX",
+                "source_type": "reference",
+                "doi": None,
+                "arxiv_id": None,
+                "arxiv_version": None,
+                "content_sha256": "f" * 64,
+            }
+        ]
+        with mock.patch(
+            "pure_tate.novelty.fetch_public_source", return_value=content
+        ), mock.patch("pure_tate.novelty.atomic_write_bytes"):
+            result = attest_source_records(records)
+        self.assertTrue(result["ok"])
+        self.assertEqual(result["records"][0]["content_sha256"], actual)
+        self.assertEqual(
+            result["records"][0]["reported_content_sha256"], "f" * 64
+        )
+        self.assertEqual(
+            result["records"][0]["hash_attested_by"], "pure_tate_harness"
+        )
+
+    def test_finding_source_attestation_rejects_local_urls(self):
+        records = [
+            {
+                "query_family": "exact-finding-check",
+                "retrieved_at": "2026-08-16T00:00:00Z",
+                "url": "file://proof/packet.md",
+                "source_type": "reference",
+                "doi": None,
+                "arxiv_id": None,
+                "arxiv_version": None,
+                "content_sha256": None,
+            }
+        ]
+        result = attest_source_records(records)
+        self.assertFalse(result["ok"])
+        self.assertIn("public HTTP(S)", "; ".join(result["errors"]))
+
+    def test_finding_adjudication_rejects_unverified_sources(self):
+        artifact = {
+            "id": "FAUD-UNVERIFIED",
+            "finding_id": "FND-0146",
+            "engine": "grok",
+            "verdict": "promote",
+            "evidence_class": "primary_source",
+        }
+        with self.assertRaisesRegex(ValueError, "harness-verified sources"):
+            _apply_finding_audit(artifact)
 
     def test_blocked_route_requires_source_verified_new_evidence(self):
         task = campaign_mathematics_tasks("C66-001")[0]

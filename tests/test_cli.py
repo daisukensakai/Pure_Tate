@@ -32,6 +32,7 @@ class CliTests(unittest.TestCase):
             (["corpus-search", "boundary"], "corpus-search"),
             (["corpus-audit"], "corpus-audit"),
             (["research-audit"], "research-audit"),
+            (["attest-finding-sources", "--dry-run"], "attest-finding-sources"),
             (["tasks", "--phase", "research"], "tasks"),
             (["tasks", "--phase", "review"], "tasks"),
             (["engines"], "engines"),

@@ -14,6 +14,38 @@
     "FND-0026": {"status": "retired", "duplicate_of": "FND-0036", "adjudication_status": "decided"},
     "FND-0015": {"status": "retired", "duplicate_of": "FND-0037", "adjudication_status": "decided"},
     "FND-0027": {"status": "retired", "duplicate_of": "FND-0037", "adjudication_status": "decided"},
-    "FND-0028": {"status": "retired", "adjudication_status": "decided", "adjudication_reason": "Contradicts cross-checked THM-0005, whose scope is open M_g,n."}
+    "FND-0028": {"status": "retired", "adjudication_status": "decided", "adjudication_reason": "Contradicts cross-checked THM-0005, whose scope is open M_g,n."},
+    "FND-0148": {
+      "statement": "Let U be a connected quasi-compact quasi-separated scheme over a field k, u a geometric point, and Z -> U a finite etale right S_6-torsor. The group H in Irr(Z) = H\\S_6 for the k-scheme Z is the image H_arith of pi_1^{et}(U,u) -> S_6. If U is normal, integral, and locally Noetherian, connected components of Z are its irreducible components, indexed by left H_arith-cosets; each has degree |H_arith| over U and stabilizer conjugate to H_arith. If, in addition, U_{k-bar} is connected, then H_geom := image(pi_1^{et}(U_{k-bar},u) -> S_6) is normal in H_arith, [S_6:H_arith] <= [S_6:H_geom], and after base change Z has [S_6:H_geom] geometric irreducible components of degree |H_geom|. Thus irreducibility over k is weaker than geometric irreducibility. This identifies the group but does not compute either monodromy image for the balanced tetragonal family.",
+      "scope": {
+        "case": {"g": 6, "n": 6},
+        "characteristic": 0,
+        "objects": ["Z", "U", "S_6-ordering torsor", "H_arith", "H_geom"],
+        "subproblem_id": "C66-GEO-COMP",
+        "hypotheses": [
+          "U connected qcqs over a field k",
+          "Z -> U a finite etale right S_6-torsor",
+          "U normal integral locally Noetherian for Irr(Z) = pi_0(Z)",
+          "U_{k-bar} connected for H_geom normal in H_arith and the geometric component count"
+        ]
+      },
+      "statement_revision_audit_id": "FAUD-0154",
+      "statement_revision_reason": "The audit supplied the missing geometric-connectedness hypothesis for the arithmetic/geometric monodromy comparison.",
+      "pre_adjudication_statement_sha256": "f2de7398159071562c7d47b9b3fbb90e304ea8c532ceae2032cbc5c4b60a8d6d"
+    },
+    "FND-0149": {
+      "statement": "Let k be a characteristic-zero field and S a locally Noetherian k-scheme, reduced where Grauert is used and locally of finite type where base change to k-bar must remain locally Noetherian. The ATT-0088 conclusions concerning AJ = P_S(pi_*L), nonemptiness of the distinct-support open, the finite etale S_6-ordering torsor, S-smoothness of relative dimension two, and the codimension-four regular immersion descend from k-bar to k: the fibrewise hypotheses are geometric, cohomology dimensions are invariant under field extension, and the relevant morphism properties are fpqc-local on the target. This widening does not preserve the monodromy label: over non-algebraically-closed k, the component formula uses arithmetic monodromy as specified in FND-0148.",
+      "scope": {
+        "case": {"g": 6, "n": 6},
+        "ground_field": "characteristic-zero field k, not necessarily algebraically closed",
+        "base": "S locally Noetherian over k; reduced where Grauert is used; locally of finite type where S_{k-bar} must remain locally Noetherian",
+        "objects": ["ATT-0088 Parts I-III", "AJ = P_S(pi_*L)", "U", "Z"],
+        "subproblem_id": "C66-GEO-COMP",
+        "does_not_widen_unchanged": ["the monodromy image in the S_6 component formula"]
+      },
+      "statement_revision_audit_id": "FAUD-0156",
+      "statement_revision_reason": "The audit corrected fppf to fpqc and recorded the finite-type condition needed to preserve local Noetherianness after base change.",
+      "pre_adjudication_statement_sha256": "702d9c175a95f8e90e51553abbbb5334c2c505d08b564bacf657bae83d74c94d"
+    }
   }
 }

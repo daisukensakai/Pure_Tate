@@ -1,0 +1,69 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "VERDICT: promote (candidate -> adjudicated), with the scope above substituted for the finding's compressed wording. No contradiction with any adjudicated claim or finding was found; contradicts_claim_ids remains empty. RECONCILIATION WITH THE EXISTING CORPUS: (1) FND-0105 supplies the identification L = omega_C(-D) that the statement presupposes; the promoted statement must stay conditioned on GAP-Z-W5D or cite the CE relative-canonical normalization. (2) FND-0103/FND-0104 concern the h^0(L) stratification; this finding is logically independent and refines them - plane quintics sit in the h^0(L) = 3 stratum and still carry a base point, so h^0-constancy does not imply base-point-freeness. (3) FND-0104's open question (can a non-primitive degree-4 pencil be balanced?) is NOT a prerequisite here: in that branch L = 3g^1_2 is base-point-free anyway, so the conclusion 'L is base-point-free on the balanced locus' holds whichever way FND-0104 resolves. This is a strengthening of the finding as written. (4) No merge target: no adjudicated finding covers base points of L or the plane-quintic CE stratum, so merge_target_id is null. DEFECTS IN THE FINDING AS WRITTEN, repaired above rather than treated as grounds to retire: (a) 'a base point would give a g^2_5' silently assumes h^0(D) = 2; the h^0(D) = 3 (hyperelliptic, non-primitive) branch must be excluded separately, which it is, by Clifford applied to the resulting g^3_5. (b) 'a g^2_5 forces the smooth-plane-quintic case' is false as an unqualified statement about g^2_5's (a hyperelliptic genus-6 curve carries a g^2_5 with a base point, namely 2g^1_2+p); it becomes true only after checking that the g^2_5 arising here is base-point-free and birational. Both gaps close, so the conclusion is sound. (c) 'projection from the base point' is correct and is in fact forced in both directions: by Noether's classical theorem every base-point-free g^1_4 on a smooth plane quintic is cut by the lines through a point of the curve, so ALL tetragonal pencils on a plane quintic are of this shape and hence all are unbalanced - the exclusion has no exceptional pencils. EVIDENCE BASIS AND ITS LIMITS: the load-bearing new claim - that the CE relations bundle for a plane-quintic tetragonal cover is F = O(3)+O(6), not the balanced O(4)+O(5) - was NOT taken from the finding or from any source; it was re-derived from scratch in this audit (explicit twist-6 relation v^2 = uw in Sym^2 E, plus the independent h^0 count at twist 3 and the codimension-2 dimension check), and it is consistent with, and pinned down by, the degree-4 splitting-type constraints verified verbatim in Canning-Larson arXiv:2104.05820 Section 4 (whose Section 4.3 covers genus 5 and 6 tetragonal strata); given the rigorously derived E = (2,3,4), those constraints leave only F = (3,6) or (4,5), and the exhibited relation selects (3,6). Two of the constraints (2e2 >= f2 and the f2 > e1+e3 hypothesis) are exactly tight at (2,3,4),(3,6), as expected for a special stratum. The classical input in step (ii)/(c) is Noether's theorem (gonality d-1 for smooth plane curves of degree d >= 4, minimal pencils = projections from a point), confirmed live in Bastianelli-Cortini-De Poi arXiv:1102.4550 ('It is well known since Noether that the gonality of a smooth plane curve of degree d>3 is d-1'); the 'projection from a point' half is standard (Namba; Hartshorne, Clifford index of ACM curves in P^3) but I could retrieve only abstract-level text live for those, and Coppens-Martens arXiv:2010.01363 returned only its abstract, so it corroborated nothing and is recorded here as a negative check. NEGATIVE RESULT ON A HELPER CITATION: the single dispatched Grok worker reported, and on challenge re-asserted with a verbatim-looking quote, that arXiv:2104.05820 Remark 4.7 states 'the stratum Sigma_3 consists of plane quintic curves' with entry E=(2,3,4), F=(3,6), codimension 2. Two independent direct retrievals of that document contradict this: Section 4 contains only Remark 4.1, there is no Remark 4.7, no Sigma_1/Sigma_2/Sigma_3 list, and the word 'quintic' does not occur. That citation is therefore treated as fabricated and is deliberately excluded from source_records; nothing in this audit depends on it. Only the constraint displays in Section 4, which I retrieved directly, are used. ARTIFACT CAVEAT: content_sha256 is null on every source record because this isolated read-only workspace exposes no shell or hashing tool, so no honest digest of the retrieved bytes could be computed; the URLs, timestamps and retrieval outcomes are reported as they occurred and the hashes are omitted rather than fabricated.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0130",
+  "id": "FAUD-0130",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "adjudicated_statement": "Let C be a smooth genus-6 curve, gamma: C -> P^1 a finite degree-4 cover with fibre class D = gamma^*O(1) (deg D = 4), and L := omega_C(-D) (deg L = 6). (i) |L| has a base point at p if and only if h^0(D+p) = h^0(D)+1. (ii) If h^0(D) = 2 this is a g^2_5, which is necessarily base-point-free and birational, so C is a smooth plane quintic, |D+p| = |H| is its unique g^2_5, D = H - p, gamma is projection from p, and L = O_C(H+p) has p as its unique base point. (iii) If h^0(D) = 3 (forced hyperelliptic, gamma non-primitive) the condition would demand a g^3_5, which violates Clifford, so no base point occurs; concretely L = 3g^1_2 is base-point-free there. (iv) For every smooth plane quintic and every one of its tetragonal pencils, the Casnati-Ekedahl data is E = O(2)+O(3)+O(4) and F = O(3)+O(6), both unbalanced; in particular F is not O(4)+O(5), so no plane-quintic cover lies in the packet's balanced locus. (v) Hence L is base-point-free on the whole balanced tetragonal locus.",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "downstream_corollary": "Plane quintics lie in the h^0(L) = 3 stratum (h^0(D) = 2, h^0(L) = 1+h^0(D) = 3), yet |L| there has a base point. So constancy of h^0(L) = 3 on the balanced locus (GAP-H0-1 / FND-0104) does NOT by itself give base-point-freeness; the two properties must be argued separately. This finding supplies the missing separate argument.",
+    "generality": "The content is a statement about the pair (C, gamma) for g = 6 and is independent of n; n = 6 enters only because deg omega_C(-D) = 2g-2-4 = 6 = n is exactly the degree at which the packet's failure condition is the single Abel-Jacobi condition O_C(Gamma) = L (cf. FND-0074). It does not transport to other g or to n != 6 by this argument.",
+    "hypotheses_required": [
+      "GAP-Z-W5D, i.e. W_5 = omega_C^2(-D), equivalently L = W_5 tensor omega_C^{-1} = omega_C(-D). FND-0105 derives this from the CE relative-canonical normalization plus the SRC-0004 Lemma 10.6 degree; without it the finding is a statement about omega_C(-D) and not about the packet's L.",
+      "'Balanced' is read as the packet's convention F = O_{P^1}(4) + O_{P^1}(5) with deg F = g+3 = 9. The exclusion is robust to convention: the plane-quintic covers are unbalanced in BOTH CE bundles (E = (2,3,4) vs balanced (3,3,3); F = (3,6) vs balanced (4,5))."
+    ],
+    "not_covered_by_this_finding": [
+      "Whether a non-primitive (hyperelliptic) degree-4 pencil can have balanced CE splitting - the open question of FND-0104. This audit notes the question is not needed for base-point-freeness: even if such a fibre were balanced, L = 3g^1_2 there is base-point-free.",
+      "Nonemptiness/reduced-support of the Abel-Jacobi fibre (FND-0083) and the component/stabilizer analysis of Z (FND-0086); base-point-freeness of L is necessary, not sufficient, for those.",
+      "Any claim about the h^0(L) stratification other than the corollary below."
+    ],
+    "verification_route": {
+      "external_consistency": "The pair E = (2,3,4), F = (3,6) satisfies every constraint recorded in Canning-Larson arXiv:2104.05820 Section 4 for degree-4 covers: e1+e2+e3 = f1+f2 = g+3 (9 = 9); e1 >= 1 (2); e3 <= (g+3)/2 (4 <= 4.5); 2e1 >= f1 (4 >= 3); 2e2 >= f2 (6 >= 6, tight); and the hypothesis f2 > e1+e3 of their last constraint fails (6 = 6), so no further condition applies. Given E = (2,3,4) those constraints alone leave only (3,6) or (4,5) for F, and the explicit twist-6 relation selects (3,6).",
+      "step_ii": "Serre duality / geometric Riemann-Roch: h^0(omega(-D-p)) = g - deg(D+p) + dim|D+p|. A base point forces dim|D+p| = 2. A g^2_5 with a base point would give a g^2_4, hence Clifford-equality, hence hyperelliptic; but a hyperelliptic genus-6 curve carries no base-point-free g^1_4 with h^0 = 2, so the g^2_5 is bpf; 5 is prime so the induced map is birational, and a plane quintic has arithmetic genus 6 = g, hence is smooth.",
+      "step_iv": "Direct computation, done independently in this audit. With C: A_1Z^4+A_2Z^3+A_3Z^2+A_4Z+A_5 = 0 (deg A_i = i), p = (0:0:1), gamma = (X:Y): omega_{C/P^1} = O_C(4H-2p) and h^0(omega_{C/P^1} tensor gamma^*O(-k)) = h^0(O_C((4-k)H+(k-2)p)) = 13, 9, 6, 3, 1, 0 for k = 0..5, which forces gamma_*omega_{C/P^1} = O + O(2) + O(3) + O(4), i.e. E = (2,3,4). Writing u in H^0(E(-2)), v in H^0(E(-3)), w in H^0(E(-4)) for the sections Z^2, Z, 1, the relations bundle K := ker(Sym^2 E -> gamma_*omega^2_{C/P^1}) (rank 2, deg 36-27 = 9 = deg F) contains the nonzero twist-6 element v^2 - uw (nonzero in Sym^2 E because (z_i^2), (z_i), (1) are Vandermonde-independent on a general fibre; killed in gamma_*omega^2 because Z.Z = Z^2.1). The curve equation itself is the twist-3 relation. Hence K = O(3) + O(6). Two independent consistency checks: (a) h^0(Sym^2E(-3)) - h^0(O_C(5H-p)) = 24-19 = 5 = h^0(O(0)) + h^0(O(3)); (b) the plane-quintic covers form a 12+1 = 13-dimensional family inside the 15-dimensional space of genus-6 tetragonal pairs, codimension 2 = h^1(End F) for F = O(3)+O(6), the expected codimension of that splitting stratum. Geometrically the twist-6 relation is the conic bundle Bl_p P^2 = F_1 containing C: each fibre of gamma is 4 collinear points of the plane model, which the canonical system |2H| places on a smooth conic."
+    }
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2104.05820",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.1090/jag/818",
+      "query_family": "ce-splitting-type-constraints-degree-4-covers",
+      "retrieved_at": "2026-08-12T12:04:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2104.05820"
+    },
+    {
+      "arxiv_id": "1102.4550",
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "noether-gonality-of-smooth-plane-curves",
+      "retrieved_at": "2026-08-12T12:06:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1102.4550"
+    },
+    {
+      "arxiv_id": "2010.01363",
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "pencils-on-quadrigonal-curves-negative-check",
+      "retrieved_at": "2026-08-12T12:06:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2010.01363"
+    }
+  ],
+  "task_id": "TASK-F-FND-0130",
+  "verdict": "promote"
+}

@@ -1,0 +1,80 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement opposes none of CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. MATHEMATICAL VERIFICATION (the statement is TRUE, and elementary). The pair sequence of (Xbar, D) with X = Xbar \\ D is a long exact sequence of mixed Hodge structures ... -> H^{k-1}(Xbar) -> H^{k-1}(D) -> H^k_c(X) -> H^k(Xbar) -> H^k(D) -> ... (Peters-Steenbrink Prop. 5.54, cited and applied in Payne arXiv:1109.4286, which states 'the exact sequence of the pair ... induces long exact sequences of graded pieces'); morphisms of MHS are strict, so Gr^W is exact. D is closed in the proper Xbar hence proper, so Deligne's bound gives weights of H^{k-1}(D;Q) in {0,...,k-1} (Payne arXiv:1109.4286 Sec. 3: 'if X is compact then H^k(X) has weights in {0,...,k}', 'if X is smooth then H^k(X) has weights in {k,...,2k}'), so Gr^W_k H^{k-1}(D) = 0; Xbar smooth proper makes H^k(Xbar;Q) pure of weight k (THM-0001), so Gr^W_k H^k(Xbar) = H^k(Xbar). Hence Gr^W_k H^k_c(X;Q) injects into H^k(Xbar;Q), with image exactly ker(H^k(Xbar;Q) -> H^k(D;Q)). Payne arXiv:1109.4286 Prop. 4.2 supplies the companion bound (Gr^W_j H^k_c(X) = 0 for j > k), confirming that Gr^W_k is genuinely the top graded piece. The stated hypothesis is automatic for proper D and is not a real side condition; smoothness of X is never used. DUPLICATION (decisive). The statement is verbatim the Poincare-Verdier dual of source-verified THM-0003. This audit verified in SRC-0002 (Canning-Larson-Payne, arXiv:2307.08830v3, Forum Math. Pi 12 (2024) e23) the Sec. 2.1 right-exact sequence 'H^{k-2}(d~M_{g,n}) -> H^k(Mbar_{g,n}) -> W_k H^k(M_{g,n}) -> 0'; its Borel-Moore form is corpus equation (6.1) = THM-0003, i.e. W_{-k}H^{BM}_k(M_{g,n}) is the cokernel of H_k(d~) -> H_k(Mbar_{g,n}). Dualizing that cokernel (H^{BM}_k = (H^k_c)^dual, the dictionary already recorded by FND-0030 and FND-0001) yields precisely the injection asserted by FND-0070. Corroborated FND-0031 already records the same identity in words ('Dualizing, the resulting cokernel is identical to the boundary sequence of THM-0003') together with the circularity consequence. FND-0070 therefore adds no content beyond a source-verified corpus claim - the same ground on which FND-0011 (restating THM-0005) and FND-0010 (restating FND-0001) were retired. DEFECT IN THE CONCLUDING REDUCTION. 'Purity of the top graded piece of compactly supported cohomology in degree k reduces to purity of a subobject of H^k(Xbar)' is vacuous under its literal reading: Gr^W_k H^k_c(X) is pure of weight k by construction, and corroborated FND-0033 already records purity and semisimplicity at this corner, so nothing is reduced. Under the intended reading (Tate type), the implication is valid - a subobject of a Tate structure of fixed weight is Tate, by the semisimplicity in FND-0033 - but it runs opposite to the direction the campaign requires: the SRC-0002 induction derives H^k(Mbar_{g,n}) FROM the open input W_{-k}H^{BM}_k(M_{g,n}), so inferring Tate type of the open input at (6,6), k = 16 from H^{16}(Mbar_{6,6};Q) presupposes CONJ-0001 at exactly the unresolved spot. Live currency check confirms the receiving object is still unknown: SRC-0001 (Payne, arXiv:2605.20453v1, submitted 19 May 2026) surveys this exact problem, consistent with OBS-0001. Consequently FND-0070 is not an obstruction at all and its kind='obstruction' label is a misclassification: it asserts a standard true lemma, not a barrier, and it discharges no node of the C66 subproblem graph (GEO-Z -> GEO-H0 -> GEO-COMP -> TATE-SUPPORT -> TATE-ASSEMBLY). CORNER CHECK (no conflation). The finding's 'top graded piece of compactly supported cohomology in degree k' is the campaign target Gr^W_16 H^16_c(M_{6,6}), dual to W_{-16}H^{BM}_{16}; it is NOT the CGP top-weight corner Gr^W_0 H^*_c = Gr^W_{2d} H^*, verified against Chan-Galatius-Payne arXiv:1805.10186 ('Gr^W_{6g-6} H^{6g-6-k}(M_g;Q) iso H~_{k-1}(Delta_g;Q)'). This is consistent with corroborated FND-0032, and FND-0070 does not commit that conflation. MERGE ASSESSMENT. The nearest existing item is the claim THM-0003, not a finding, so no finding-level merge target applies; overlap with corroborated FND-0031 is strict containment (FND-0070 is a proper sub-part of FND-0031), so REV-0035 is best recorded as additional support for FND-0031 rather than as a standalone finding. merge_target_id: null. VERDICT: retire - mathematically correct but non-novel, being the dual restatement of source-verified THM-0003/SRC-0002 Sec. 2.1, with a concluding 'reduction' that is either vacuous or circular for CONJ-0001; do not promote and do not retain as candidate. PROVENANCE. All content_sha256 values are sha256 of the raw bytes retrieved by curl in this audit session at 2026-08-03T04:39:35Z. No Grok worker was dispatched: grok is the finding's originating reviewer engine (REV-0035) and appears in excluded_engines, so the audit was conducted entirely with independent claude reasoning and direct primary-source retrieval.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0070",
+  "id": "FAUD-0054",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "campaign_instantiation": "k = 16, (g,n) = (6,6): Gr^W_16 H^16_c(M_{6,6};Q), the Q-dual of the RED-0001 open input W_{-16}H^{BM}_{16}(M_{6,6};Q), injects into H^{16}(\\overline M_{6,6};Q). This is the Poincare-Verdier dual of THM-0003 / SRC-0002 Section 2.1.",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "degree": 16,
+    "generality": "The argument uses only (i) the pair long exact sequence of (Xbar,D) as morphisms of mixed Hodge structures, (ii) strictness/exactness of Gr^W, (iii) Deligne's weight bound for proper D. Smoothness of X is not used; smoothness of Xbar is used only so that the target is H^k(Xbar) itself rather than Gr^W_k H^k(Xbar). Holds verbatim for any separated finite-type X with proper compactification, and for DM stacks with Q coefficients.",
+    "hypothesis_status": "The stated side condition 'H^{k-1}(D;Q) has weights <= k-1' is automatic for proper D and is not an additional assumption; the parenthetical '(as for proper D)' already concedes this.",
+    "not_established": "No independent input on Tate type: the receiving object H^{16}(\\overline M_{6,6};Q) is precisely the unresolved CONJ-0001 target, so the asserted 'reduction' does not discharge C66-FULL or any subproblem in the campaign graph.",
+    "objects": "X = M_{g,n} (smooth Deligne-Mumford stack, d = 3g-3+n = 21), Xbar = \\overline M_{g,n} (smooth proper DM stack), D = Xbar \\ X (closed in Xbar, hence proper)",
+    "verified_statement": "For every k and every stable (g,n): Gr^W_k H^k_c(X;Q) injects into H^k(Xbar;Q), with image exactly ker(H^k(Xbar;Q) -> H^k(D;Q))."
+  },
+  "source_records": [
+    {
+      "arxiv_id": "1109.4286",
+      "arxiv_version": null,
+      "content_sha256": "41731ac1217b03e82b2e9e82b2b78b2b37dfebc43b72589e0669944e84e47e30",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T04:39:35Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/pdf/1109.4286"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "750f7bcb72f1b77cd353ef51bc62c3333be0b4775a8a47ac6f55f968d6b5d663",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "corpus-claim-verification",
+      "retrieved_at": "2026-08-03T04:39:35Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2307.08830"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "0ccb2460bc98535c2bcd503385647ecded18f5cffeede8341e2912626846d54b",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "prior-art-duplication",
+      "retrieved_at": "2026-08-03T04:39:35Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2307.08830"
+    },
+    {
+      "arxiv_id": "1805.10186",
+      "arxiv_version": null,
+      "content_sha256": "425f9668ff26b59309bd342a9edfb65f27ed79a650da50cca5a9ea5b08a25053",
+      "doi": null,
+      "query_family": "corner-disambiguation",
+      "retrieved_at": "2026-08-03T04:39:35Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/1805.10186"
+    },
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "content_sha256": "dc5e110dabb036a0656186e41193d47ba2592588f8881def62a3df8a1b34a802",
+      "doi": null,
+      "query_family": "currency-check",
+      "retrieved_at": "2026-08-03T04:39:35Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2605.20453"
+    }
+  ],
+  "task_id": "TASK-F-FND-0070",
+  "verdict": "retire"
+}

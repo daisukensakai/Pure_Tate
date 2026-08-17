@@ -6,6 +6,28 @@
   "finding_id": "FND-0020",
   "id": "FAUD-0002",
   "independent": true,
+  "local_evidence_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": null,
+      "query_family": "cross-claim-check",
+      "retrieved_at": "2026-08-01T09:03:00Z",
+      "source_type": "corpus",
+      "url": "workspace://data/claims.jsonl#THM-0001,THM-0003,THM-0005,RED-0001"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": null,
+      "query_family": "sibling-finding-check",
+      "retrieved_at": "2026-08-01T09:03:30Z",
+      "source_type": "corpus",
+      "url": "workspace://proof/findings.jsonl#FND-0015,FND-0027,FND-0014,FND-0016,FND-0036"
+    }
+  ],
   "merge_target_id": null,
   "reviewer_engine": "grok",
   "schema_version": 1,
@@ -49,13 +71,25 @@
       "pure_weight_1_only_if": "n<=1"
     }
   },
+  "source_attestation_migration": {
+    "attested_at": "2026-08-17T00:49:26.506221Z",
+    "errors": [],
+    "raw_artifact_path": "research/finding-audits/raw-pre-attestation/FAUD-0002.json",
+    "raw_artifact_sha256": "b48d8e91facddbfec194b1f3015f119b9cf522402bc241cf12f2bbce2ed4efb6",
+    "reason": "C66-FINDING-SOURCE-ATTESTATION-0001",
+    "transformations": [
+      "moved non-public records to local_evidence_records"
+    ]
+  },
   "source_records": [
     {
       "arxiv_id": null,
       "arxiv_version": null,
-      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "content_sha256": "33c3ab240a5ef5ec1e065620d8f252cfdcd7d57ee012e8350a614726ab3148c9",
       "doi": null,
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "exact-finding-check",
+      "reported_content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "retrieved_at": "2026-08-01T09:04:00Z",
       "source_type": "reference",
       "url": "https://en.wikipedia.org/wiki/Mixed_Hodge_structure"
@@ -63,9 +97,11 @@
     {
       "arxiv_id": "1412.8499",
       "arxiv_version": "v2",
-      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "content_sha256": "e5786b003d937ae39e7fec9029fd4cd6d6594eed6dd391f701cc38721e5468f4",
       "doi": "10.1007/978-1-4939-2830-9_4",
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "exact-finding-check",
+      "reported_content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "retrieved_at": "2026-08-01T09:04:30Z",
       "source_type": "preprint",
       "url": "https://arxiv.org/abs/1412.8499"
@@ -73,34 +109,18 @@
     {
       "arxiv_id": "2605.20453",
       "arxiv_version": "v1",
-      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "content_sha256": "70474702a3fe9e9a708f6c85dea0e8fa84593941c422e46092d94f0b45bf1639",
       "doi": null,
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "exact-finding-check",
+      "reported_content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "retrieved_at": "2026-08-01T09:05:00Z",
       "source_type": "survey",
       "url": "https://arxiv.org/html/2605.20453v1"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "doi": null,
-      "query_family": "cross-claim-check",
-      "retrieved_at": "2026-08-01T09:03:00Z",
-      "source_type": "corpus",
-      "url": "workspace://data/claims.jsonl#THM-0001,THM-0003,THM-0005,RED-0001"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "doi": null,
-      "query_family": "sibling-finding-check",
-      "retrieved_at": "2026-08-01T09:03:30Z",
-      "source_type": "corpus",
-      "url": "workspace://proof/findings.jsonl#FND-0015,FND-0027,FND-0014,FND-0016,FND-0036"
     }
   ],
+  "sources_verified": true,
   "task_id": "TASK-F-FND-0020",
-  "verdict": "promote"
+  "verdict": "promote",
+  "verified_source_count": 3
 }

@@ -1,0 +1,51 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. It is compatible with and complementary to corroborated FND-0034 (Aut(Gamma) / det E(Gamma) bookkeeping for ATT-0014), FND-0031 (depth-one pure corner reduces to THM-0003 Gysin cokernel), FND-0033 (semisimplicity of the pure row), and corroborated FND-0050 (ATT-0020 omits stable-pair and evaluation-failure analysis). Primary source verification: CLP (arXiv:2307.08830v3, equation (8.1)) explicitly formulates the weight spectral sequence E1-page terms as direct sums over stable graphs Gamma of (H^*(Mbar_Gamma) tensor det E(Gamma))^{Aut(Gamma)}, with the determinant twist on the edge set and the Aut(Gamma)-invariants (not raw normalization cohomology). CLPW (arXiv:2410.19913v1) uses symmetries of stable graphs in an essential way to control the E1-page, confirming that the correct Gysin complex must track the Aut(Gamma)-action. CLP23a (arXiv:2209.03113v2) describes the boundary components as finite quotients of products Mbar_{g',n'} by Aut(Gamma). For Q-coefficients, invariants and coinvariants coincide by Maschke's theorem (since Aut(Gamma) is finite and |Aut(Gamma)| is invertible in Q), but any formulation that omits the Aut(Gamma)-action entirely -- including the determinant twist -- yields incorrect multiplicities and cannot correctly assemble the weight spectral sequence. ATT-0020's alternating Gysin complex without automorphism bookkeeping is therefore incomplete regardless of other corrections. Mild precision note: the finding's 'invariants versus coinvariants' distinction is moot for Q-coefficients (they agree), so the load-bearing content is the requirement to track the Aut(Gamma)-action and the det E(Gamma) twist. Distinct from FND-0034 (which applies the same principle to ATT-0014 and the non-separating divisor Mbar_{5,8}) and FND-0050 (which addresses ATT-0020's omission of the residual geometry Z): do not merge. Merge target: none. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent verification of the Aut(Gamma)/det E(Gamma) structure in the weight spectral sequence from published primary sources.",
+  "engine": "qwen",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0051",
+  "id": "FAUD-0032",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    }
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2307.08830"
+    },
+    {
+      "arxiv_id": "2410.19913",
+      "arxiv_version": "v1",
+      "content_sha256": "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2410.19913"
+    },
+    {
+      "arxiv_id": "2209.03113",
+      "arxiv_version": "v2",
+      "content_sha256": "c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+      "doi": "10.1017/fms.2023.59",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2209.03113"
+    }
+  ],
+  "task_id": "TASK-F-FND-0051",
+  "verdict": "promote"
+}

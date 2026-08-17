@@ -1,0 +1,106 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0001 (pure HS only for smooth proper stacks) and with the forgetful-Leray bookkeeping already used by sibling findings FND-0015/FND-0027 (extension 0\u2192H\u2192R^1f_*Q\u2192Q(-1)^{m-1}\u21920) and FND-0036 (H^D(M_{g,n})\u2245H^{D-1}(M_{g,n-1};R^1\u03c0_*Q) at the open-input degree). Primary MHS check: for C smooth projective of genus g and S a set of m\u22651 points, Deligne\u2019s theory yields the SES of MHS 0\u2192H^1(C;Q)\u2192H^1(C\\S;Q)\u2192Q(-1)^{m-1}\u21920, so Gr^W_1 has rank 2g (weight 1) and Gr^W_2 has rank m-1 (weight 2, Tate). For the universal n-punctured curve one has m=n, hence Tate rank n-1 as stated; pure weight 1 holds only for n\u22641. For the campaign case (g,n)=(6,6), L=R^1\u03c0_*Q along M_{6,6}\u2192M_{6,5} (or the universal 6-punctured system) therefore has weights \u22651, so H^p(base;L) has weights \u2265p+1; at p=2d\u2212k\u22121=25 one has lowest weight 26 and W_25=0, so any pure-corner label W_p at that spot is the zero group. Mild scope sharpening only: absolute \u2018never pure of weight 1\u2019 is for m\u22652 (n\u22652 universal, n\u22653 forgetful); the (6,6) instance and the ATT-0011 error-pattern warning remain intact. Distinct from FND-0037/FND-0027 (non-split extension obstructing graded splitting of Leray terms) and from FND-0014 (uncontrolled symplectic local-system cohomology): do not merge. Promote from candidate to corroborated on independent primary-source verification of the mixed-weight structure and weight-floor consequence; evidence_class upgraded from legacy_artifact to primary_source. ATT-0011 section-level provenance was not re-audited (artifact absent from the read-only workspace) and is not required for the mathematical promotion.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0020",
+  "id": "FAUD-0002",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "campaign_case": {
+      "Leray_p": 25,
+      "W_p_vanishes": true,
+      "d": 21,
+      "g": 6,
+      "lowest_weight_of_H^p_base_L": 26,
+      "n": 6,
+      "ordinary_degree": 26
+    },
+    "coefficients": "Q",
+    "forgetful_Mgn_to_Mgnm1": {
+      "Tate_rank": "n-2",
+      "m": "n-1",
+      "pure_weight_1_only_if": "n<=2"
+    },
+    "g": "all stable",
+    "graded_pieces": {
+      "Gr^W_1": {
+        "rank": "2g",
+        "type": "symplectic pure HS",
+        "weight": 1
+      },
+      "Gr^W_2": {
+        "rank": "m-1",
+        "type": "Tate Q(-1)^{m-1}",
+        "weight": 2
+      }
+    },
+    "kind": "error-pattern",
+    "n": ">=2 for universal n-punctured mixedness; case (6,6) is interior to the range",
+    "object": "R^1 pi_* Q as variation of mixed Hodge structure for the universal n-punctured curve (equivalently, for forgetful fibrations with sufficiently many marked points)",
+    "ses": "0 -> H^1(C;Q) -> H^1(C minus m points;Q) -> Q(-1)^{m-1} -> 0",
+    "statement_core": "mixed of weights 1 and 2, never pure of weight 1 when the fiber has at least two punctures; weight floor of H^p(base;L) is >= p+1 so W_p H^p(base;L)=0",
+    "universal_n_punctured": {
+      "Tate_rank": "n-1",
+      "m": "n",
+      "pure_weight_1_only_if": "n<=1"
+    }
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-01T09:04:00Z",
+      "source_type": "reference",
+      "url": "https://en.wikipedia.org/wiki/Mixed_Hodge_structure"
+    },
+    {
+      "arxiv_id": "1412.8499",
+      "arxiv_version": "v2",
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": "10.1007/978-1-4939-2830-9_4",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-01T09:04:30Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1412.8499"
+    },
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-01T09:05:00Z",
+      "source_type": "survey",
+      "url": "https://arxiv.org/html/2605.20453v1"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": null,
+      "query_family": "cross-claim-check",
+      "retrieved_at": "2026-08-01T09:03:00Z",
+      "source_type": "corpus",
+      "url": "workspace://data/claims.jsonl#THM-0001,THM-0003,THM-0005,RED-0001"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": null,
+      "query_family": "sibling-finding-check",
+      "retrieved_at": "2026-08-01T09:03:30Z",
+      "source_type": "corpus",
+      "url": "workspace://proof/findings.jsonl#FND-0015,FND-0027,FND-0014,FND-0016,FND-0036"
+    }
+  ],
+  "task_id": "TASK-F-FND-0020",
+  "verdict": "promote"
+}

@@ -1,0 +1,50 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. Compatible with THM-0005 (c(6)=5, so n=6 lies outside published CKgP range, confirming the need for residual geometric analysis). Compatible with and complementary to corroborated FND-0005 (Riemann-Roch nonemptiness of Z: deg(W_5\u2297\u03c9_C^{-1})=6 for g=6 gives \u03c7=1 hence h^0\u22651), FND-0046 (fibrewise evaluation-failure equivalence requires scheme-structure comparison), FND-0047 (h^0-jump hazard for relative linear systems), and FND-0048 (circularity of identifying pure piece with stable-graph complex). Independent primary-source verification: SRC-0004 Lemma 10.6 gives deg(W_f|_C)=4g+12-4f, yielding deg(W_5)=16 for f=5, g=6; the balanced tetragonal splitting F=O(4)\u2295O(5) (sum 9=g+3) is the stratum analyzed in Canning-Larson JEMS 2024. The packet subproblem graph (C66-GEO-Z through C66-TATE-ASSEMBLY) independently confirms these are necessary subproblems. Distinct from FND-0048: FND-0048 identifies the logical circularity of treating the pure piece as a subquotient of a decorated stable-graph complex without independent argument; FND-0050 identifies the specific residual tetragonal geometry (balanced splitting, W_5 failure locus Z, h^0 stratification, components/stabilizers) that must be confronted. These are complementary gap markers: do not merge. ATT-0020 provenance was not re-audited (artifact absent from read-only workspace) and is not required for mathematical promotion of the residual-geometry requirement. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent verification of the degree calculation, tetragonal splitting, and nonemptiness of Z against SRC-0004.",
+  "engine": "qwen",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0050",
+  "id": "FAUD-0031",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "geometry": "balanced-tetragonal-residual-locus",
+    "subproblems": [
+      "C66-GEO-Z",
+      "C66-GEO-H0",
+      "C66-GEO-COMP",
+      "C66-TATE-SUPPORT",
+      "C66-TATE-ASSEMBLY"
+    ],
+    "target": "W_{-16}H^{BM}_{16}(M_{6,6}) = W_{26}H^{26}(M_{6,6})(21)"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "f48fe2bfa1d4ea1d28ad456875551a2c9bb762d916e258953b13c7c05bdfb5f7",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "tetragonal-residual-degree-check",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "ckgp-range-check",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2307.08830"
+    }
+  ],
+  "task_id": "TASK-F-FND-0050",
+  "verdict": "promote"
+}

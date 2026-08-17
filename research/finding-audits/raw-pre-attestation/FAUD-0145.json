@@ -1,0 +1,62 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with corroborated FND-0103 (a priori h^0(L)\\in{1,2,3,4} with the value 4 confined to hyperelliptic fibres by Clifford on the special degree-4 bundle M=\u03c9_C^2\\otimes W_5^vee), FND-0104 (which reduced GAP-H0-1 to whether a non-primitive g^1_4 can be F-balanced and explicitly did not settle that question), FND-0105 (GAP-Z-W5D localizes to the CE relative-canonical normalization), FND-0125 (hyperelliptic composed covers have F=O(2)\\oplus O(7)), FND-0134 (uses h^0(L)=3 as input for reduced-support density), and FND-0135 (Castelnuovo\u2013Severi plus primality of 2 names the factorization \u03b3=q\u2218h). Independent primary checks. (1) Allowed CE types at (g,d)=(6,4): Canning\u2013Larson, The Chow rings of the moduli spaces of curves of genus 7, 8, and 9, J. Algebraic Geom. 33 (2024), arXiv:2104.05820v2 \u00a74.3, list exactly five smooth pairs; the unique hyperelliptic pair is Z: E=(1,4,4), F=(2,7), and the two F-balanced pairs are \u03a80: E=(3,3,3), F=(4,5) and \u03a81: E=(2,3,4), F=(4,5). Equation (4.5) of the same paper records e1=1 if and only if C is hyperelliptic, in which case the degree-4 map factors as q\u2218h; Lemma 4.5 identifies Z=\u03b2^{-1}(M_6^2). Thus no geometric fibre with F\u2245O(4)\\oplus O(5) is hyperelliptic, so the Clifford-equality locus of FND-0103 is empty on the campaign's balanced locus and B_4=\u2205. This upgrades FND-0125's single-model computation to a complete published classification, so the incompatibility is rigid rather than example-dependent. (2) SRC-0004 Lemma 10.10 independently cuts the same locus: H_{4,6,n}^4 := {f1\u22654}=H_{4,6,n}\\\u03b2^{-1}(M_{6,n}^3\u222aPQ_n); for deg F=g+3=9 one has f1\u22644, so f1\u22654 means F=(4,5) and excludes every hyperelliptic fibre. (3) Constancy at 3 rather than the weaker bound h^0(L)\u22643 uses L\u2245\u03c9_C(-D). Casnati\u2013Ekedahl, J. Algebraic Geom. 5 (1996), Thm. 2.1(1), restated as SRC-0005 Thm. 2.6(1) and used in the proof of SRC-0004 Lemma 10.6, gives O_{P(E^vee)}(1)|_C\u2245\u03c9_\u03b1\u2245\u03c9_C\\otimes\u03b3^*O(2). Combined with the packet convention W_5:=(O_{P(E^vee)}(2)\\otimes\u03b3^*O(-5))|_C and the degree identity deg O(1)|_C=2g+6 of SRC-0004 Lemma 10.6, this forces W_5\u2245\u03c9_C^2(-D) and L\u2245\u03c9_C(-D), so h^0(L)=1+h^0(D). Always h^0(D)\u22652 because \u03b3^* is injective on H^0(P^1,O(1)); Clifford then gives h^0(D)\u22643 with equality only in the now-empty hyperelliptic case. Hence h^0(L)=3 on every balanced geometric fibre, i.e. B=B_3. (4) Campaign consequences follow on this exact scope: GAP-H0-1 as carried by ATT-0066 and ATT-0089 is closed under fibrewise balancedness; every P^{k-1}-bundle or dim(Y)+k-1 clause with k=4 is vacuous; and pencil recovery |\u03c9_C\\otimes L^{-1}|=|D| is a g^1_4 on all of B. Mild scope note only: emptiness of B_4 uses only F-balancedness plus Clifford/CS/the CL type list, while the identification B=B_3 needs the CE relative-canonical line, which is now a cited source line rather than an unlabeled working-context fact. Distinct from FND-0125 (the unbalanced type itself) and from FND-0134 (Bertini reduced-support density, taking h^0(L)=3 as given): do not merge. Completes rather than contradicts FND-0104. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source. Merge target: none.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0139",
+  "id": "FAUD-0145",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "characteristic": "0",
+    "coefficients": "Q",
+    "generality": "smooth geometric fibres of a balanced genus-6 degree-4 Casnati\u2013Ekedahl family",
+    "hypothesis": "fibrewise F\\cong O(4)\\oplus O(5) and Casnati\u2013Ekedahl relative-canonical normalization O_{P(E^vee)}(1)|_C\\cong\\omega_C\\otimes\\gamma^*O(2)",
+    "objects": [
+      "B_k={geometric fibres with h^0(L)=k}",
+      "L=W_5\\otimes\\omega_C^{-1}",
+      "F",
+      "GAP-H0-1"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2104.05820",
+      "arxiv_version": "v2",
+      "content_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "doi": "10.1090/jag/818",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-13T13:20:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/2104.05820v2"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "8f88507e3babc367e86eec98c63cee6c1d4115d38f9ada98ca68fc0c7b6cf722",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-13T13:15:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "7414d7a8f9d5789602ccba9480822a441664af0ca3f8c352f92498a2896523c5",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-13T13:08:00Z",
+      "source_type": "journal",
+      "url": "proof/packets/generated/C66-001-v4.md"
+    }
+  ],
+  "task_id": "TASK-F-FND-0139",
+  "verdict": "promote"
+}

@@ -1,0 +1,82 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and FND-0114 does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. Compatible with and complementary to packet-corroborated FND-0096 (universal Fit_0(coker(p_* L_univ -> p_*(L_univ|Gamma_P))) = I_e for L_univ = omega(Gamma_P) tensor Poin^{-1}, all g>=1,n>=1, via perfect Serre pairing on the intrinsic derivative) and FND-0046 (fiberwise CE/AJ equality is not scheme-theoretic without Fitting comparison). Not a merge into FND-0096: that finding asserts the Fit_0 = I_e identity and its (g,n)-transport; FND-0114 is a dual-number bookkeeping obstruction about the correct Ext reading of Poincare pullback when testing nonreduced structure I_e subset J. Not a merge into FND-0046 or FND-0107 (those demand Fitting/AJ scheme models without specifying the dual-number module reading). Independent primary check: Kleiman, The Picard scheme (arXiv math/0504020), Theorem 5.11 gives T_0 Pic_{X/k} = H^1(O_X) and identifies tangent vectors with maps Spec(k[eps]/(eps^2)) -> Pic supported at the identity via dual-number homomorphisms u(a)=a_bar+delta(a)eps. Standard deformation theory of invertible sheaves then identifies (id x phi_xi)^*P, for phi_xi the arc with tangent xi in H^1(O_C), with the first-order deformation of O_C classified by xi in Ext^1_C(O_C,O_C)=H^1(O_C); as an underlying O_C-module this is the nonsplit extension 0->O_C->E->O_C->0 of class xi. The competing reading as an O_{C x D}-module extension of class xi tensor eps double-counts the nilpotent and is incorrect. Twisting by omega and using the LES of 0->omega->omega tensor E->omega->0, cup-product with nonzero xi is the Serre pairing H^0(omega)x H^1(O)->H^1(omega), which is surjective, so H^1(omega tensor E) is 1-dimensional; as a D-module for a nonzero arc through e the Fitting-relevant omega-twisted R^1 is length-1 with eps acting by 0, and Fit_0 pulls back to (eps), matching the pullback of I_e. A misreading that effectively kills the connecting map or treats the family as free over D yields the wrong D-module (wrong k-dimension, including attempt-local 3-dimensional bookkeeping failures reported in the adversarial review) and can break the scheme-theoretic test of I_e subset J. Scope: the dual-number module reading is universal for smooth projective curves and the universal Pic Fitting setup of FND-0096 (all g>=1,n>=1); the campaign case (6,6) is the instance used in C66-GEO-Z determinantal scheme-structure proofs. Original evidence_class was adversarial_review from excluded engine qwen only; independent grok verification against Kleiman dual-number tangent space plus the packet FND-0096 Serre-pairing reason upgrades the finding. Residual caveat: ATT-0065 text is not in the workspace, so the exact 3-dimensional arithmetic is attempt-local, but the correct Ext reading, 1-dimensional eps-killed R^1, and Fit pullback to (eps) stand independently. Promote from candidate to corroborated; merge_target none; future dual-number proofs of Fit_0 = I_e or I_e subset J must state this reading explicitly.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0114",
+  "id": "FAUD-0110",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "any base field with dual numbers k[eps]/(eps^2)",
+    "generality": "all g>=1, n>=1",
+    "method": "dual-number arc test of determinantal/Fitting scheme structure",
+    "objects": [
+      "universal Picard Fitting Fit_0(coker)=I_e",
+      "Poincare bundle pullback along dual-number arcs",
+      "first-order deformation class in H^1(O_C)",
+      "omega-twisted R^1 as D-module",
+      "nonreduced inclusion I_e subset J"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": "math/0504020",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-09T01:42:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/math/0504020"
+    },
+    {
+      "arxiv_id": "math/0504020",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-09T01:42:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/math/0504020"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "dual-number-deformation-line-bundle",
+      "retrieved_at": "2026-08-09T01:42:00Z",
+      "source_type": "web",
+      "url": "https://mathoverflow.net/questions/80400/deformation-of-line-bundles-over-dual-numbers"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+      "doi": null,
+      "query_family": "packet-cross-check-FND-0096",
+      "retrieved_at": "2026-08-09T01:42:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "picard-dual-numbers-notes",
+      "retrieved_at": "2026-08-09T01:42:00Z",
+      "source_type": "notes",
+      "url": "https://math.berkeley.edu/~fengt/249C.pdf"
+    }
+  ],
+  "task_id": "TASK-F-FND-0114",
+  "verdict": "promote"
+}

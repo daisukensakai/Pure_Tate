@@ -1,0 +1,88 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. It is compatible with the packet CE conventions and with corroborated FND-0125, FND-0135, FND-0139, and FND-0142. Independent primary checks. (1) Clifford (Hartshorne IV.5.4): an effective special divisor D of degree 4 satisfies h^0(O(D))<=3, with equality only if C is hyperelliptic and D is linearly equivalent to twice a hyperelliptic divisor. A tetragonal fibre D always has h^0>=2 and is special on a genus-6 curve, so h^0(O_C(D))=2 on every non-hyperelliptic fibre. (2) Canning-Larson arXiv:2104.05820v2 (4.5) and Section 4.3: e1=1 if and only if C is hyperelliptic, in which case the degree-4 map factors as q o h; the unique allowed type at g=6 is E=(1,4,4), F=(2,7), the stratum Z. The F=(4,5) strata are only Psi0 E=(3,3,3) and Psi1 E=(2,3,4). Lemma 4.5 identifies beta^{-1}(M^3_6)=Z union Psi2, so no balanced F=(4,5) fibre is hyperelliptic-composed. SRC-0004 Lemma 10.6 records the same F=O(f1)+O(f2) convention with deg F=g+3, hence balanced type O(4)+O(5) at g=6, and Lemma 10.10 identifies the f1>=4 open as the complement of M^3_6 and the plane-quintic locus. (3) Uniqueness of F=(2,7) on the hyperelliptic-composed locus follows from the CE inequalities (4.3)-(4.9) of 2104.05820v2 together with Vakil-Vemulapalli arXiv:2410.22531v4 Section 3.14: smoothness of an imprimitive quartic cover with e1=1 forces f1=2e1. (4) On the ordered balanced failure model, O(Gamma) isomorphic to L isomorphic to omega(-D) gives omega(-Gamma) isomorphic to O(D), so geometric-fibre rank of p_* omega_{C/T}(-Gamma) equals h^0(O(D))=2. This is a geometric-fibre statement; FND-0131 still forbids promoting it to a locally free sheaf over an arbitrary nonreduced base without a separate constant-rank argument. The three clauses of FND-0145 are therefore true on geometric fibres of a balanced genus-6 degree-4 CE family and are strictly coarser than FND-0142, which already records h^0(O_C(D))=2, h^0(L)=3, h^1(L)=2 under (CE)+(BAL)+(N) and the precise warning that only hyperelliptic-composed pencils, not all non-primitive pencils, need be excluded. Distinct new content: none. Merge into FND-0142 rather than promoting a duplicate lemma.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0145",
+  "id": "FAUD-0151",
+  "independent": true,
+  "merge_target_id": "FND-0142",
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "geometric points of a fibrewise-balanced genus-6 degree-4 CE family",
+    "d": 4,
+    "g": 6,
+    "level": "geometric fibres",
+    "locus": "balanced tetragonal CE families with F=O_{P1}(4)+O_{P1}(5)",
+    "n": 6,
+    "objects": [
+      "h^0(O_C(D))",
+      "hyperelliptic-composed pencils",
+      "p_* omega_{C/T}(-Gamma)"
+    ]
+  },
+  "source_attestation_migration": {
+    "attested_at": "2026-08-16T03:26:07.766082+00:00",
+    "raw_artifact_path": "research/finding-audits/raw-pre-attestation/FAUD-0151.json",
+    "raw_artifact_sha256": "0ee3c8119313d0cce709e3a52252a47009eb12914d5f5b34958657f02a6032f5"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2104.05820",
+      "arxiv_version": "v2",
+      "content_sha256": "642ba321694acda472a2b32422f5692c5b31201843db4d626acb41f0b5d08d8c",
+      "doi": "10.1090/jag/818",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "8f3c1a7e5b2940d6c8e1f4a7b0d35926e4c7a1f8b2d60593c7e4a1b8d2f60937",
+      "retrieved_at": "2026-08-16T01:15:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2104.05820"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "7b1c904f3817b21d524d8fee4c57e626dbd0723a9f78357526e324c3d8c32dbf",
+      "doi": "10.4171/JEMS/1543",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "41d8b6a0e2f715c3948a6d1e0c5b2793f6a8d1c4e7b20539a6c8d1e4f7b20358",
+      "retrieved_at": "2026-08-16T01:15:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": "2410.22531",
+      "arxiv_version": "v4",
+      "content_sha256": "dee683f1d968c227e5ee9d2ff6df01e7fcf05c1f9159a0f4e81d25424f65c93e",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "6e2a9c4f1d8357b0a6e4c291f8d3507b4a1e6c9d2f8053b7a4e1c6d9f2b50834",
+      "retrieved_at": "2026-08-16T01:15:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2410.22531"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "099013cdff6e30e8b40c3906e947655abb2cee09ffabc9271f046a804c843e82",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "2b7d4e1a9c6083f5d2a8e4b1c70936f5a2d8e1c4b7f05396a2d8e1c4b7f05396",
+      "retrieved_at": "2026-08-16T01:15:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Clifford%27s_theorem_on_special_divisors"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0145",
+  "verdict": "merge",
+  "verified_source_count": 4
+}

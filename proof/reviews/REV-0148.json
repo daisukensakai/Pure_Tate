@@ -1,0 +1,176 @@
+{
+  "attempt_id": "ATT-0099",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "META-PACKET-HASH",
+      "note": "TASK.json and ATT-0099 agree on packet_id C66-001-v4, packet_sha256 9f5bf258299c9ef2373ab09defd1689c8ab93fc64f1bb92f99c4febef0b83a08, packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7, campaign_id/campaign_revision 4, context_revision 2, subproblem_id C66-GEO-COMP, task_id TASK-C66-M-003, and the full target dictionary (dimension 21, open_bm_degree 16, open_bm_weight -16, ordinary_cohomology_degree 26, ordinary_weight 26, poincare_twist 21, Q(8)/Q(-8)/Q(-13)). The submitted theorem_statement is judged verbatim.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0099-1",
+      "note": "Import clause. Each conjunct lies inside a verified dependency scope after one recorded scope reconciliation. AJ a Zariski-locally trivial P2-bundle over a reduced locally Noetherian base: CLM-0086-2 / CLM-0088-8, with the h^0(L)=4 stratum excluded by CLM-0086-1 and, independently, by packet FND-0139 (balanced fibres cannot be hyperelliptic-composed, since FND-0125 forces F=O(2)+O(7) there) and FND-0142. U nonempty, dense, S-smooth of relative dimension two and surjective onto S: CLM-0088-5 / CLM-0088-8, with fibrewise nonemptiness independently supported by FND-0134. Z canonically the S_6-torsor of orderings of the universal divisor over U, of degree 720: CLM-0088-8, with the scheme-theoretic (not merely pointwise) identification of the CE evaluation-failure ideal with the Abel-Jacobi incidence supplied by CLM-0065-9 and CLM-0066-6, which is exactly what FND-0046 demands and what FND-0107 licenses in the Hilb x_{Pic} model rather than an unqualified Proj(pi_*L). Regular immersion of pure codimension four: CLM-0088-9, and consistent with FND-0141, which stresses that the lci conclusion comes from S-smoothness of Z and Conf_6, not from excess over the determinantal expectation six. S normal integral finite type over a field satisfies every base hypothesis these carry (reduced, locally Noetherian, finite type). The one hypothesis not literally inherited is ATT-0088's algebraically closed ground field; see the ATT-0088 dependency note and finding candidate att-0088-algebraically-closed-ground-field-widening for why the widening is sound.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0099-2",
+      "note": "Verified independently. AJ = P_S(pi_*L) is the projectivization of a locally free rank-three sheaf, hence Zariski-locally S x P^2, so the attempt's 'locally on S it is P^2 x S' is licensed and does not silently assume a Brauer-trivial or merely etale-locally trivial bundle. Integrality: P(E) over an integral base is integral. Normality: AJ -> S is smooth and S is normal, so AJ is normal; equivalently the local description plus normality of polynomial extensions and localizations of a normal domain. U is a nonempty open of an integral normal scheme, hence integral and normal; nonemptiness is not assumed but imported (CLM-0088-5 / FND-0134). dim(U) = dim(S)+2 uses S irreducible and finite type over a field with U -> S smooth surjective of relative dimension two. This clause is precisely the hypothesis whose absence FND-0132 identified as load-bearing, and it is here an explicit hypothesis on S rather than a smuggled assumption.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0099-3",
+      "note": "Verified independently, under the reading fixed by the theorem_statement: u is a geometric point of U, H = image of pi_1^{et}(U,u) acting on Z_u by left translations after the choice of a base point of Z_u. Chain: (i) U is connected and locally Noetherian, so finite etale U-schemes are equivalent to finite continuous pi_1^{et}(U,u)-sets and connected components correspond to orbits in the geometric fibre; (ii) the pi_1-action commutes with the right S_6-action, hence factors through left translations by rho: pi_1 -> S_6, so the orbits are exactly the cosets Hg and all have the common size |H| \u2014 the equality of all component degrees is special to the torsor case and is correctly derived, not assumed; (iii) the number of orbits is [S_6:H], and each is clopen, hence each component is finite etale over U of degree |H| and surjective (finite flat of positive degree over connected U); (iv) Z is etale over the normal U, hence normal; a Noetherian normal scheme has pairwise disjoint irreducible components, so its connected components are irreducible and Irr(Z) = pi_0(Z) = H\\S_6; (v) finite surjective morphisms preserve dimension, so each component has dim(U) = dim(S)+2. Irreducibility iff [S_6:H]=1 iff H=S_6 follows, with nonemptiness from surjectivity of U -> S. Caveat recorded, not adverse: the claim's phrase 'geometric monodromy image' is imprecise once the ground field is not assumed algebraically closed, where pi_1^{et}(U,u) is the arithmetic fundamental group; the theorem_statement itself names pi_1^{et}(U,u) and is therefore correct as stated. Filed as finding candidate arithmetic-versus-geometric-pi1-in-s6-component-formula.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0099-4",
+      "note": "Verified independently and elementary. Right translation is well defined on H\\S_6 (Hg . a = Hga), is transitive (take a = g^{-1}g'), and Stab(Hg) = {a : Hga = Hg} = {a : ga in Hg} = g^{-1}Hg. Point stabilizers are trivial because Z -> U is a torsor, so the action on each geometric fibre is simply transitive. The attempt correctly declines to identify these with Aut(C,Gamma), Aut(C,gamma,Gamma) or moduli inertia, which is exactly the confusion FND-0137 warns against; over the scheme base S every such Aut is in any case not the object under discussion.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "THM-CLAUSE-CODIM-AND-NUMEROLOGY",
+      "note": "Separate check of the two theorem clauses not carried by a numbered claim. (a) 'Regular of pure codimension four': Conf_6(C/S) is open in C^{x_S 6} hence S-smooth of relative dimension six; Z is S-smooth of relative dimension two and closed in Conf_6 (the incidence O(Gamma) = L is closed because the relative Picard is separated, FND-0107); a closed immersion between schemes smooth over a common base is regular, of codimension 6-2 = 4 at every point, so purity is genuine and not an expected-codimension assertion. Note that the naive pullback description Z = a_N^{-1}(e) inside Conf_6 -> Pic^0 has expected codimension six, so the excess of two is real; the attempt does not use that route, consistent with FND-0141 and FND-0129. (b) The final clause is purely arithmetic (dim(S)=15 gives 15+2=17) and explicitly refuses to promote 21-17=4 to a codimension, Gysin or lci statement inside M_{6,6}. This respects FND-0052, FND-0091, FND-0098 and FND-0101: the theorem carries no clause that its own gap markers contradict, since GAP-0099-2 concerns the actual balanced base while normality/integrality of S is here an explicit hypothesis, and GAP-0099-4 matches the disclaimer rather than conflicting with an asserted clause.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-16",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate; remains candidate until independently corroborated",
+      "key": "arithmetic-versus-geometric-pi1-in-s6-component-formula",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "objects": [
+          "Z",
+          "U",
+          "S_6-ordering torsor",
+          "H"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "severity": "medium",
+      "statement": "In the component formula Irr(Z) = H\\S_6 for the finite etale S_6-ordering torsor Z -> U, the group H must be named as the image of the ARITHMETIC fundamental group pi_1^{et}(U,u) as soon as the ground field is not assumed algebraically closed; it is not the geometric monodromy image. Writing H_geom for the image of pi_1^{et}(U_{k-bar}, u), one has H_geom normal in H_arith, hence [S_6:H_arith] <= [S_6:H_geom]: the count of irreducible components of the k-scheme Z, the common degree |H| of each component over U, and the conjugacy class of the stabilizer g^{-1}Hg all change under base change to k-bar, and 'Z is irreducible' is strictly weaker than 'Z is geometrically irreducible' (Z can be irreducible over k while Z_{k-bar} splits into [S_6:H_geom] pieces). Two consequences for the campaign. First, any downstream node that computes monodromy of the balanced tetragonal family will naturally compute H_geom, and that computation bounds the geometric component count, not the count over k; the two agree only when the family is defined over an algebraically closed field or when H_arith = H_geom is separately proved. Second, downstream citations must state which pi_1 is meant, on pain of the same ambiguity ATT-0099 exhibits, where the theorem_statement correctly names pi_1^{et}(U,u) while CLM-0099-3, the summary and the novelty claims label the same subgroup 'geometric monodromy'. This axis is distinct from FND-0132 (normality is needed to pass from connected to irreducible components) and from FND-0144 (stack inertia obstructs the formula over a stack base): both of those hold even over an algebraically closed field, whereas this one is purely a field-of-definition effect and is invisible when k = k-bar.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate; remains candidate until independently corroborated",
+      "key": "att-0088-algebraically-closed-ground-field-widening",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "objects": [
+          "ATT-0088 Parts I-III",
+          "AJ = P_S(pi_*L)",
+          "U",
+          "Z"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "severity": "low",
+      "statement": "ATT-0088, the dependency supplying the P^2-bundle model, the fibrewise nonemptiness of the reduced-support open, the S_6-ordering torsor, the S-smoothness of relative dimension two, and the codimension-four regular immersion, states its theorem over an ALGEBRAICALLY CLOSED characteristic-zero field k (its recorded base scope reads 'Let k be an algebraically closed field of characteristic zero, S a locally Noetherian k-scheme', with Part III additionally reduced and (III.1) additionally finite type). Downstream C66-GEO-COMP artifacts are quoting its conclusions over an arbitrary characteristic-zero field. The widening is legitimate but must be recorded rather than left silent, and the four supporting observations are: (i) (BAL) and (N) are hypotheses on geometric fibres, hence invariant under enlarging the ground field; (ii) constancy of h^0(L) on every scheme-theoretic fibre follows from constancy on geometric fibres by flat base change, so Grauert local freeness of pi_*L over a reduced base and the identification AJ = P_S(pi_*L) never use k = k-bar; (iii) S-smoothness, surjectivity onto S, relative fibre dimension, closedness of the Abel-Jacobi incidence (separatedness of the relative Picard) and the regular-immersion/conormal statements are fppf-local on the base and descend along the faithfully flat Spec k-bar -> Spec k; (iv) the codimension-four conclusion is independently re-derivable from S-smoothness of Z and of Conf_6(C/S) alone. What this widening does NOT carry across unchanged is the monodromy group in the component formula, which becomes arithmetic rather than geometric \u2014 see arithmetic-versus-geometric-pi1-in-s6-component-formula. The general discipline is the field-of-definition analogue of what FND-0127 enforces on the scheme-to-stack axis: a downstream artifact that widens a dependency's base scope must record the one-line descent, and must not paper over the widening with a blanket assertion that its inputs are used only within their verified scopes.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0148",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "9f5bf258299c9ef2373ab09defd1689c8ab93fc64f1bb92f99c4febef0b83a08",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Load-bearing for the scheme-theoretic (not merely pointwise) failure-locus identification via CLM-0065-9. Its recorded base scope is a locally Noetherian characteristic-zero k-scheme with no reducedness or irreducibility assumption and arbitrary locally Noetherian base change, which strictly contains the normal integral finite-type S used here; the ground field is not assumed algebraically closed. Consistent with FND-0046, FND-0096, FND-0097, FND-0099, FND-0122.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Cited prior confirmation of ATT-0065; corroboration only, not itself load-bearing for any step of ATT-0099. No packet-visible finding contradicts it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Cited prior confirmation of ATT-0065; corroboration only, not itself load-bearing for any step of ATT-0099. No packet-visible finding contradicts it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Load-bearing via CLM-0066-5 (the correct global model is the closed Abel-Jacobi incidence Hilb^6 x_{Pic^6} B, not an unqualified Proj(pi_*L)) and CLM-0066-6 (the pullback to the ordered distinct-support configuration equals Z_ev scheme-theoretically and is a finite etale S_6-torsor over the unordered distinct-support incidence). Recorded base scope: locally Noetherian scheme over a characteristic-zero field, with the fibrewise balanced splitting and the weak CE relative-canonical normalization both assumed \u2014 all three hold here. The stack-descent caveat of FND-0127 and the stack-inertia obstruction of FND-0144 are not triggered, because ATT-0099 works over a scheme base and cites ATT-0066 in its native scheme scope.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Cited prior confirmation of ATT-0066 in its stated scheme scope; corroboration only. ATT-0099 uses ATT-0066 within that scope, so no extension beyond what was confirmed is required.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Cited prior confirmation of ATT-0066 in its stated scheme scope; corroboration only.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0086",
+      "note": "Load-bearing via CLM-0086-1 (the balanced h^0(L)=4 locus is empty, independently of the normalization) and CLM-0086-2 (under the weak CE normalization h^0(L)=3 fibrewise and, over a reduced locally Noetherian base, the full Abel-Jacobi incidence is a Zariski-locally trivial P^2-bundle with no B_4/P^3 piece). Recorded base scope is reduced locally Noetherian over a characteristic-zero field, satisfied by S. Zariski-local triviality (not merely etale-local) is what licenses CLM-0099-2's normality argument. Compatible with FND-0103, FND-0104, FND-0139, FND-0142.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0135",
+      "note": "Cited prior confirmation of ATT-0086; corroboration only. No packet-visible finding contradicts it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0138",
+      "note": "Cited prior confirmation of ATT-0086; corroboration only. No packet-visible finding contradicts it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0088",
+      "note": "Most heavily load-bearing dependency: CLM-0088-3 (h^0(O_C(D))=2, h^0(L)=3, h^1(L)=2 on balanced fibres under (N)), CLM-0088-5 (|L| contains a divisor of six pairwise distinct points; the ordered incidence is nonempty, smooth of pure dimension two, a finite etale S_6-torsor of degree 720 over the reduced-support open), CLM-0088-8 (pi_*L locally free of rank three, AJ = P_S(pi_*L), U S-smooth of relative dimension two and surjective onto S, Z canonically the torsor of orderings; over a finite-type base, dimension = dominated component + 2), CLM-0088-9 (Z -> Conf_6(C/S) a regular immersion of pure codimension four with locally free rank-four conormal and locally split conormal sequence). All four are recorded proved, and the reduced-base and finite-type-base side conditions attached to Parts III / (III.1) are satisfied by a normal integral finite-type S. Scope reconciliation, verified rather than assumed: ATT-0088's theorem fixes k algebraically closed of characteristic zero, whereas ATT-0099 only assumes characteristic zero. The widening is sound and does not leave a gap, because (i) (BAL) and (N) are hypotheses on geometric fibres and are unchanged by ground-field extension; (ii) constancy of h^0(L) on all scheme-theoretic fibres follows from constancy on geometric fibres by flat base change, so Grauert local freeness of pi_*L over the reduced base S and AJ = P_S(pi_*L) require no algebraically closed ground field; (iii) S-smoothness, surjectivity onto S, dimension of fibres, closedness of the incidence, and the regular-immersion/conormal statements are all fppf-local on the base and may be checked after the faithfully flat base change Spec k-bar -> Spec k, then descended; (iv) the codimension-four conclusion is re-derivable directly from S-smoothness of Z and Conf_6 without reference to k. What ATT-0099 omits is the one-line record of this reconciliation, and its blanket sentence 'These inputs are used only within their verified scopes' is inaccurate on this axis; that is a bookkeeping defect, filed as a finding candidate, not a failed dependency. Compatible with FND-0134, FND-0141, FND-0142.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0139",
+      "note": "Cited prior confirmation of ATT-0088; corroboration only. It does not itself address the ground-field widening, which this review discharges directly.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0142",
+      "note": "Cited prior confirmation of ATT-0088; corroboration only. It does not itself address the ground-field widening, which this review discharges directly.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Listed source. Non-load-bearing for ATT-0099 as submitted: the Lemma 10.6 degree/Serre-duality calculation (deg W_f|_C = 4g+12-4f, obstruction degree 4f+n-2g-14) enters only through the already-confirmed upstream attempts ATT-0065/ATT-0066/ATT-0086/ATT-0088 and through packet findings FND-0062, FND-0063, FND-0074, FND-0105. ATT-0099 performs no fresh computation from it. Consistent with the packet's primary locator excerpt.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0099-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Three refutation attempts were mounted; all failed, and the sharpest is recorded below because it does bite on the artifact's internal wording even though it leaves the judged theorem_statement standing. (1) Stack inertia. The natural home of this construction is the universal balanced tetragonal stack, and FND-0144 establishes that '[S_6:H] irreducible components each of degree |H|' is invalid over a normal algebraic stack without a representability/inertia-free hypothesis, since inertia can act on the ordered fibre. This is the attack that sank the stacky sibling of this lemma. It fails here: ATT-0099 hypothesizes an honest normal integral finite-type SCHEME S carrying a chosen family, so pi_0 of a finite etale cover really is the set of pi_1^{et}-orbits and no inertia acts. The cost is a genuine but disclosed loss of reach (GAP-0099-2), not an error. (2) Ground-field widening \u2014 the strongest surviving objection. The dependency carrying the P^2-bundle, the torsor, the smoothness and the codimension-four regular immersion (ATT-0088) is stated over an ALGEBRAICALLY CLOSED characteristic-zero field, while ATT-0099 asserts its conclusions over an arbitrary characteristic-zero field and simultaneously declares 'These inputs are used only within their verified scopes'. That declaration is false on this axis. I attempted to turn this into a refutation and could not: (BAL) and (N) are geometric-fibre hypotheses, constancy of h^0 on all fibres follows from the geometric case by flat base change so Grauert applies over any ground field, and smoothness, surjectivity, closedness and regularity of the immersion are fppf-local and descend along Spec k-bar -> Spec k. The theorem is therefore true as stated; the defect is an unrecorded descent line, exactly the discipline FND-0127 imposes for the stack-base axis. (3) Arithmetic versus geometric monodromy \u2014 the residue of attack (2), and the one place where dropping k = k-bar has real mathematical content. Over a non-algebraically-closed k, pi_1^{et}(U,u) is the ARITHMETIC fundamental group, so H contains the geometric monodromy image as a normal subgroup, [S_6:H_arith] <= [S_6:H_geom], component degrees are |H_arith| not |H_geom|, and 'Z is irreducible' is strictly weaker than 'Z is geometrically irreducible'. I tried to refute the component formula on this basis and failed on the exact statement: the theorem_statement names pi_1^{et}(U,u) for a geometric point u, which is the arithmetic group, and Irr(Z) means irreducible components of the k-scheme Z \u2014 so the formula, the degree |H|, the stabilizer g^{-1}Hg and the irreducibility criterion are all correct as written. The attack succeeds only against the artifact's own label: CLM-0099-3, the summary and the first novelty claim call the same H 'the geometric monodromy image', which is correct only when k = k-bar and is otherwise the wrong group. Because I am instructed to judge the exact theorem_statement, this is recorded as a finding candidate and a caveat on CLM-0099-3 rather than as a failed check. Secondary probes that found nothing: the adversary checklist items on Tate twists, Poincare duality, Borel-Moore versus ordinary degree, Kunneth/Gysin shifts, spectral-sequence differentials, semisimplification, predicted motives and pure-Tate-to-tautological upgrades are all inapplicable, since the artifact makes no cohomological, weight or motivic assertion whatever and explicitly refuses to read 21-17=4 as a codimension or Gysin statement (respecting FND-0052, FND-0091, FND-0098); rational-versus-integral coefficients and invariants-versus-coinvariants (FND-0075) do not arise because no descent of a cohomology computation from the ordered to the unordered model is performed; omitted stable pairs and unbalanced CE strata (FND-0125) are excluded by an explicit fibrewise-balanced hypothesis rather than silently; and the FND-0101 test for a theorem clause contradicted by the artifact's own gap markers or exclusion list finds no conflict.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let S be a normal integral finite-type scheme over a characteristic-zero field, carrying a smooth proper genus-six family \u03c0:C\u2192S and a finite flat degree-four Casnati\u2013Ekedahl cover \u03b3:C\u2192P\u00b9_S whose relations bundle is fibrewise O(4)\u2295O(5). Assume the weak relative-canonical normalization on every geometric fibre and the finite-local-freeness and base-change hypothesis required for the ambient CE evaluation comparison. Let L=W_5\u2297\u03c9_{C/S}^{-1}; let AJ be the relative Abel\u2013Jacobi incidence of effective degree-six divisors linearly equivalent to L; let U\u2282AJ be the open locus of divisors with six distinct support points; and let Z\u2282Conf_6(C/S) be the scheme-theoretic CE evaluation-failure locus. Then AJ is a P\u00b2-bundle over S, U is normal integral and smooth surjective over S of relative dimension two, and Z\u2192U is the finite \u00e9tale S_6-torsor of orderings, of degree 720. The immersion Z\u2192Conf_6(C/S) is regular of pure codimension four. For a geometric point u of U, identify the right S_6-torsor Z_u with S_6 and let H\u2264S_6 be the image, defined up to conjugacy, of \u03c0_1^{\u00e9t}(U,u) acting by left translations. Then Irr(Z) is the transitive right S_6-set H\\S_6: Z has exactly [S_6:H] irreducible components, every component is finite \u00e9tale of degree |H| over U and has dimension dim(S)+2, and the stabilizer in S_6 of the component represented by Hg is g^{-1}Hg. The stabilizer of every geometric point for the torsor action is trivial. Thus Z is irreducible if and only if H=S_6. If dim(S)=15, every component has dimension 17; the equality 21\u221217=4 is only a numerical comparison and is not a codimension statement inside M_{6,6}.",
+  "verdict": "confirmed"
+}

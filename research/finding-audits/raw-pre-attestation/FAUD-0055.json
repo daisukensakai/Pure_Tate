@@ -1,0 +1,64 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001 or RED-0001. Exact content, verified independently. Excision plus the long exact sequence of the pair (Mbar_{g,n}, \u2202Mbar_{g,n}) gives ker(H^{2r}(Mbar_{g,n};Q) -> H^{2r}(\u2202Mbar_{g,n};Q)) = im(H^{2r}_c(M_{g,n}) -> H^{2r}(Mbar_{g,n})); since H^{2r}(Mbar_{g,n}) is pure of weight 2r (THM-0001) and the map is a strict morphism of MHS, that image is gr^W_{2r}H^{2r}_c(M_{g,n}), which under H^{BM}_k = (H^k_c)^dual is exactly the Q-dual of the RED-0001 open input W_{-16}H^{BM}_{16}(M_{g,n}) appearing as the cokernel in THM-0003 / SRC-0002 (6.1) \u2014 the live-retrieved Payne 2026 survey states the same localization sequence 'H^{k-2}(D~_{g,n})(-1) -> H^k(Mbar_{g,n}) -> W_k H^k(M_{g,n}) -> 0'. The diagonal 2r = 2g+n-2 is not incidental: Harer's vcd (4g-4+n for g>=2, n>0; 4g-5 for n=0) with Poincare duality on the d = 3g-3+n dimensional M_{g,n} gives H^k_c(M_{g,n}) = 0 for k < 2g-2+n when n >= 1, so 2r = 2g+n-2 is precisely the first degree in which this kernel can be nonzero; the survey records the same threshold ('the compactly supported cohomology of M_{g,n} vanishes in degrees less than roughly 2g+n-1', from 'roughly 4g-4+n, for g>=2') and states that 'the prediction that H^k(Mbar_{g,n}) is pure Tate for even k <= 20 is confirmed for k <= 14, but the cases 16, 18, and 20 remain open'. With 2g+n = 18 the diagonal is 2r = 16, so the audited premise 'at the diagonal only the kernel is Tate' is exactly the C66-001 theorem for (6,6) and nothing more. The conclusion is correct and sharp: by corroborated FND-0033 (semisimplicity of polarizable pure weight-2r Q-Hodge structures) the sequence 0 -> ker -> H^{2r}(Mbar_{g,n}) -> im(res) -> 0 splits, hence H^{2r}(Mbar_{g,n}) is Tate iff BOTH the kernel and im(res) subset H^{2r}(\u2202) are Tate; kernel-Tate leaves the image wholly unconstrained, and no extension subtlety disguises the gap (elementary witness: X = S x P^1 with S a K3 and D = S x {0} has ker(H^2(X) -> H^2(D)) = Q(-1), Tate, while H^2(X) contains the non-Tate H^2(S)). Non-vacuity at (6,6): by corroborated FND-0034 the codimension-one boundary pieces are Mbar_{5,8}/S_2 and separating products Mbar_{i,a+1} x Mbar_{6-i,b+1}, and (5,8) is itself an unresolved RED-0001 pair, so the residual quotient is discharged by no established input; the deeper stratified/descent contributions to H^{16}(\u2202) are likewise untouched by the campaign theorem. Mild scope sharpenings, not affecting the verdict: (i) the kernel identification requires D to be the full boundary \u2014 for a proper sub-divisor the kernel is larger and insufficiency holds a fortiori; (ii) '2g+n-2' is the n >= 1 form of the threshold (n = 0 gives 2g-1; consistent with FND-0035, where degree 16 sits one above threshold for (8,0),(8,1)); (iii) the finding must not be read as alleging a defect in the THM-0003/THM-0004 induction, which does control the boundary but only by simultaneously discharging the open inputs of all smaller pairs \u2014 for (6,6) that means (5,8) \u2014 so the correct reading is a scope limit on what a single-pair open-input theorem buys, exactly matching the survey's 'for fixed k only finitely many small pairs (g,n) can contribute'. Distinctness (do not merge, merge_target_id null): FND-0031 concerns what the weight spectral sequence yields FOR the open input (the opposite direction of the same sequence), FND-0034 concerns identification of the non-separating divisor, FND-0048 concerns identification of the open pure piece with a decorated stable-graph complex, FND-0057 concerns campaign-graph dependency consistency, and retired FND-0012 was execution-scope policy with no exact-sequence content. Live recency check found no 2026 result closing the gap: arXiv:2603.26962 (Bergstrom-Wennink, 27 March 2026) computes weight-graded pieces only where the boundary stratification cohomology is already tautological, and the known unconditional Tate range 3g+2n < 25 excludes (6,6) (30). Verdict: promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source. Independence: no Grok worker was dispatched \u2014 grok is the excluded engine here (finding reviewer_engines ['grok'], REV-0035) and using it would compromise independence; all verification is claude-side against live primary sources. Retrieval caveats reported in good faith: content_sha256 is null on every record because this read-only workspace exposes no hashing facility (no shell), and fabricating digests was refused; retrieved_at is date-precision UTC for the same reason; the arXiv:2307.08830 PDF and ar5iv renderings did not expose Section 6 to the fetcher, so equation (6.1) was corroborated through the identical localization sequence quoted from arXiv:2605.20453 together with the SRC-0002 locators already cross-checked in the campaign corpus, and the Harer 1986 Springer page (DOI 10.1007/BF01388737) redirected to an authentication gate, so the vcd values were taken from the survey rather than from the original article.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0071",
+  "id": "FAUD-0055",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "assertion_audited": "Tate type of that kernel does not imply Tate type of H^{2r}(Mbar_{g,n}); the complementary summand im(H^{2r}(Mbar_{g,n}) -> H^{2r}(\u2202)) and the deeper stratified contributions remain uncontrolled",
+    "boundary_divisor_caveat": "identification of the kernel with gr^W_{2r}H^{2r}_c requires D = whole boundary; for any proper sub-divisor the kernel is strictly larger and the insufficiency conclusion holds a fortiori",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "compact_degree": 16,
+    "diagonal": "2r = 2g+n-2, i.e. 2g+n = 18; for (6,6) this is 2r = 16",
+    "impacts_approach_ids": [
+      "C66-FULL"
+    ],
+    "kind": "obstruction / scope-limit",
+    "object": "ker(H^{2r}(Mbar_{g,n};Q) -> H^{2r}(D;Q)) with D the full boundary divisor \u2202Mbar_{g,n}; equals im(H^{2r}_c(M_{g,n}) -> H^{2r}(Mbar_{g,n})) = gr^W_{2r} H^{2r}_c(M_{g,n}), the Q-dual of the RED-0001 open input W_{-16}H^{BM}_{16}(M_{g,n})",
+    "relation_to_campaign_target": "the audited kernel is exactly the dual of the C66-001 exact target, so the finding delimits what a successful campaign result proves about CONJ-0001 at (6,6)",
+    "validity_range": "exact as stated for n >= 1 at the vcd-dual threshold; the same statement holds verbatim for the RED-0001 residual pairs with n >= 2 (3,12),(5,8),(6,6),(7,4),(8,2) where 2g+n = 18; for n = 0 the threshold degree is 2g-1 rather than 2g+n-2"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2605.20453"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": null,
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "boundary-localization-sequence-and-induction",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2307.08830"
+    },
+    {
+      "arxiv_id": "2603.26962",
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "live-recency-check-degree-16-diagonal",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2603.26962"
+    }
+  ],
+  "task_id": "TASK-F-FND-0071",
+  "verdict": "promote"
+}

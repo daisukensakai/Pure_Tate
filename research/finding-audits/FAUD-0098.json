@@ -6,6 +6,20 @@
   "finding_id": "FND-0103",
   "id": "FAUD-0098",
   "independent": true,
+  "local_evidence_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "29628e10a4d29452693fcf64af7a14a6b52ad614e217ac268c61ff1d3158e1d2",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "6b4b42b636f0e796e965ad62cc58d8ef5037a28de50743ddf01e2ac9c2bfe034",
+      "retrieved_at": "2026-08-08T00:00:00Z",
+      "source_type": "packet",
+      "url": "proof/packets/generated/C66-001-v4.md"
+    }
+  ],
   "merge_target_id": null,
   "reviewer_engine": "qwen",
   "schema_version": 1,
@@ -15,18 +29,47 @@
       "n": 6
     }
   },
+  "source_attestation_migration": {
+    "attested_at": "2026-08-17T01:40:23.646211Z",
+    "errors": [],
+    "raw_artifact_path": "research/finding-audits/raw-pre-attestation/FAUD-0098.json",
+    "raw_artifact_sha256": "33ce9af84179eb748a304dd0c177366c346f047549fda246ca3c0e4f45e1f82c",
+    "reason": "C66-FINDING-SOURCE-ATTESTATION-0001",
+    "transformations": [
+      "hashed local evidence proof/packets/generated/C66-001-v4.md",
+      "moved non-public records to local_evidence_records",
+      "added public source https://en.wikipedia.org/wiki/Clifford%27s_theorem_on_special_divisors",
+      "added public source https://arxiv.org/abs/2208.02357"
+    ]
+  },
   "source_records": [
     {
       "arxiv_id": null,
       "arxiv_version": null,
-      "content_sha256": "6b4b42b636f0e796e965ad62cc58d8ef5037a28de50743ddf01e2ac9c2bfe034",
+      "content_sha256": "099013cdff6e30e8b40c3906e947655abb2cee09ffabc9271f046a804c843e82",
       "doi": null,
-      "query_family": "exact-finding-check",
-      "retrieved_at": "2026-08-08T00:00:00Z",
-      "source_type": "packet",
-      "url": "proof/packets/generated/C66-001-v4.md"
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "clifford-special-divisors",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-17T00:00:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Clifford%27s_theorem_on_special_divisors"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "7b1c904f3817b21d524d8fee4c57e626dbd0723a9f78357526e324c3d8c32dbf",
+      "doi": "10.4171/JEMS/1543",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "src-0004-lemma-10.6-degree",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-17T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
     }
   ],
+  "sources_verified": true,
   "task_id": "TASK-F-FND-0103",
-  "verdict": "promote"
+  "verdict": "promote",
+  "verified_source_count": 2
 }

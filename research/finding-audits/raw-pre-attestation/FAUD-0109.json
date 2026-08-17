@@ -1,0 +1,58 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction is recorded: TASK.json gives an empty contradicts_claim_ids list, and the supplied claims corpus contains no assertion that balancedness alone establishes equation-bundle freeness. Canning\u2013Larson explicitly treat the equation sheaf separately: after writing \ud835\udcb2=O_{P(E^\u2228)}(2)\u2297\u03b3^*F^\u2228 and U=\u03b3_*\ud835\udcb2=Sym^2(E)\u2297F^\u2228, they restrict to the complement of Supp(R^1\u03c0_*U) and only there invoke cohomology and base change to obtain \u03c0_*U as the vector bundle of tetragonal equations. Stacks Project Tag 0D4E confirms that higher-direct-image vanishing supplies finite local freeness and arbitrary-base-change compatibility. This corroborates the finding's core distinction between deformation unobstructedness of balanced F and freeness of the equation bundle. It is compatible with FND-0046 and FND-0047, which require relative scheme-structure and cohomology-and-base-change control, and with FND-0099, which separately requires base-change-compatible cokernels. FND-0096 creates no contradiction: Tag 07Z6 confirms that Fitting ideals themselves commute with base change for finite modules, so the necessity asserted here concerns the underived ambient vector-bundle realization and fibrewise identification, not the abstract existence or base-change behavior of Fitting ideals. No supplied finding states the same obstruction at this scope, so there is no valid merge target.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0113",
+  "id": "FAUD-0109",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "exact_mathematical_scope": "The finding applies to the underived ambient construction in which the space of Casnati\u2013Ekedahl equations and its evaluation map must be represented by vector bundles with fibres equal to the corresponding H^0 spaces after every base change. Fibrewise balancedness gives H^1(P^1,End(F))=0 because End(O(4)\u2295O(5))=O^2\u2295O(1)\u2295O(-1), but it does not by itself prove the separate cohomology-and-base-change conditions for q_*\ud835\udcb2, whose equation sheaf also depends on the ambient Tschirnhausen data.",
+    "impact": [
+      "C66-GEO-Z"
+    ],
+    "qualification": "Finite local freeness of q_*\ud835\udcb2 is not necessary merely to define Fitting ideals: Fitting ideals of finite modules commute with arbitrary scalar extension. The promoted obstruction is therefore limited to the proposed ambient morphism-of-vector-bundles comparison and its identification with fibrewise evaluation maps. It may be discharged by proving higher-direct-image vanishing, which implies finite local freeness and arbitrary-base-change compatibility, rather than by assuming those conclusions independently.",
+    "setting": "Balanced tetragonal Casnati\u2013Ekedahl families with F fibrewise isomorphic to O(4)\u2295O(5)."
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "bfa4ecec104221a02edf4b9fcac88dc88c892dcef83d232599ab8b107cea5c63",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check-ce-equation-bundle",
+      "retrieved_at": "2026-08-09T02:06:30Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/pdf/2208.02357"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "b5af0b1198485ccc656d45d95dc34ffd42b98dea978ed1dd53d47dd9756cf130",
+      "doi": null,
+      "query_family": "cohomology-and-base-change",
+      "retrieved_at": "2026-08-09T02:06:30Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0D4E"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "acd4a9f2fc68960a86c40fa5b1c6b85b0fdc9cc50e8f13a0b503316780c805b4",
+      "doi": null,
+      "query_family": "fitting-base-change-qualification",
+      "retrieved_at": "2026-08-09T02:06:30Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/07Z6"
+    }
+  ],
+  "task_id": "TASK-F-FND-0113",
+  "verdict": "promote"
+}

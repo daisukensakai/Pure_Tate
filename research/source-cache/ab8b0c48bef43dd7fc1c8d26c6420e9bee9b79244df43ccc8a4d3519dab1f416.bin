@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#d9d8d1">
+
+<title>Section 15.8 (07Z6): Fitting ideals&mdash;The Stacks project</title>
+
+<meta name="description" content="an open source textbook and reference work on algebraic geometry">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ['tex2jax.js'],
+    jax: ['input/TeX','output/HTML-CSS'],
+    TeX: {
+      extensions: ['AMSmath.js', 'AMSsymbols.js', '/static/XyJax/extensions/TeX/xypic.js'],
+      Macros: {
+        linebreak: ["", 1, ""],
+        },
+      TagSide: 'left'
+    },
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    },
+    'HTML-CSS': {
+    	scale: 100,
+	availableFonts: [],
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+
+
+  <script type="text/javascript" src="/static/js/toggle.js"></script>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/easymde@2.0.1/dist/easymde.min.css" integrity="sha384-IRbzB9px0sfIx90vkN+geaX3F4LVcg/M+k5vmVkfjs5TnRX3MIhGS8Ma06ALKVYp" crossorigin="anonymous">
+  <script src="https://unpkg.com/easymde@2.0.1/dist/easymde.min.js" integrity="sha384-v06sb0t0ToY1YRtVlfD/GCGpIZ/QHYyeH2Gzjvr0ZJI62/50DIzT8XRgQ6JvptVu" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.css" integrity="sha384-8xTxM5sJRAUB0ckdBghB5am+aw+0kC5FfSUzMI+KI+UD8uBCNeSkdi8I1J4+Wjwu" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.js" integrity="sha384-gE5xOW4MVOjJL1A2SbxwvQw/qet6h8Vdv06j3JQGhBW4d1H5hXYB12WsrUBgU439" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid bounded">
+  <div id="first-bar" class="row topbar inner-top top">
+    <header class="col">
+      <h1><a href="/">The Stacks project</a></h1>
+    </header>
+
+    <nav id="header">
+      <ul id="quicklinks">
+        <li><a href="/bibliography">bibliography</a>
+        <li><a href="https://www.math.columbia.edu/~dejong/wordpress/">blog</a>
+      </ul>
+
+      <form id="quicksearch" action="/search">
+        <span id="search-icon"><img src="/static/images/search.svg"></span>
+        <input type="search" name="query" size="16" placeholder="keywords or a tag" value="">
+      </form>
+    </nav>
+  </div>
+
+  <nav id="second-bar" class="row topbar sticky-top">
+    
+      <ul class="col-11 col-sm-11 col-md-11 col-lg-12 col-xl-12" id="crumbs">
+        <li><a href="/browse">Table of contents</a></li>
+        
+  
+  
+    <li>Part <a href="/tag/0ELQ" data-tag="0ELQ">1</a>: Preliminaries
+    
+  
+    <li>Chapter <a href="/tag/05E3" data-tag="05E3">15</a>: More on Algebra
+    
+  
+    <li class="active">Section <a href="/tag/07Z6" data-tag="07Z6">15.8</a>: Fitting ideals
+    <span id="citation">(<a href="/tag/07Z6/cite">cite</a>)</span>
+  
+
+
+      </ul>
+    
+
+    
+      <div class="col-1 col-sm-1 col-md-1" id="burger">
+        <input type="checkbox" id="burger-input"></input>
+
+        <label id="burger-icon" for="burger-input">
+          <span id="top-bun"></span>
+          <span id="meat"></span>
+          <span id="bottom-bun"></span>
+        </label>
+
+        <div id="burger-content">
+          
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0D2K">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/07LW">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  
+
+
+        </div>
+      </div>
+    
+
+    
+  </nav>
+
+  <div class="row" id="content">
+    <section id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      
+<div class="html" id="tag">
+  
+
+  
+
+  
+
+  <h2 id="more-algebra-section-fitting-ideals" class="tex-section"><span data-tag="07Z6">15.8</span> Fitting ideals</h2>
+
+<p>
+The Fitting ideals of a finite module are the ideals determined by the construction of Lemma <a href="/tag/07Z8" data-tag="07Z8">15.8.2</a>. 
+</p>
+<p>
+<article class="env-lemma" id="07Z7">
+  <p><a class="environment-identifier" href="/tag/07Z7">Lemma <span data-tag="07Z7">15.8.1</span>.</a> Let $R$ be a ring. Let $A$ be an $n \times m$ matrix with coefficients in $R$. Let $I_ r(A)$ be the ideal generated by the $r \times r$-minors of $A$ with the convention that $I_0(A) = R$ and $I_ r(A) = 0$ if $r > \min (n, m)$. Then </p>
+  <p><ol>
+  <li><p>
+$I_0(A) \supset I_1(A) \supset I_2(A) \supset \ldots $, 
+</p>
+</li><li><p>
+if $B$ is an $(n + n') \times m$ matrix, and $A$ is the first $n$ rows of $B$, then $I_{r + n'}(B) \subset I_ r(A)$, 
+</p>
+</li><li><p>
+if $C$ is an $n \times n$ matrix then $I_ r(CA) \subset I_ r(A)$. 
+</p>
+</li><li><p>
+If $A$ is a block matrix 
+</p>
+<div class="equation">
+  \[  \left( \begin{matrix}  A_1 
+
+&  0 
+
+\\  0 
+
+&  A_2 
+
+\end{matrix} \right)  \]
+</div>
+<p>
+ then $I_ r(A) = \sum _{r_1 + r_2 = r} I_{r_1}(A_1) I_{r_2}(A_2)$. 
+</p>
+</li><li><p>
+Add more here. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Omitted. (Hint: Use that a determinant can be computed by expanding along a column or a row.) 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="07Z8">
+  <p><a class="environment-identifier" href="/tag/07Z8">Lemma <span data-tag="07Z8">15.8.2</span>.</a> Let $R$ be a ring. Let $M$ be a finite $R$-module. Choose a presentation </p>
+  <div class="equation">
+  \[  \bigoplus \nolimits _{j \in J} R \longrightarrow R^{\oplus n} \longrightarrow M \longrightarrow 0.  \]
+</div>
+  <p> of $M$. Let $A = (a_{ij})_{i = 1, \ldots , n, j \in J}$ be the matrix of the map $\bigoplus _{j \in J} R \to R^{\oplus n}$. The ideal $\text{Fit}_ k(M)$ generated by the $(n - k) \times (n - k)$ minors of $A$ is independent of the choice of the presentation. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $K \subset R^{\oplus n}$ be the kernel of the surjection $R^{\oplus n} \to M$. Pick $z_1, \ldots , z_{n - k} \in K$ and write $z_ j = (z_{1j}, \ldots , z_{nj})$. Another description of the ideal $\text{Fit}_ k(M)$ is that it is the ideal generated by the $(n - k) \times (n - k)$ minors of all the matrices $(z_{ij})$ we obtain in this way. 
+    <p>
+      Suppose we change the surjection into the surjection $R^{\oplus n + n'} \to M$ with kernel $K'$ where we use the original map on the first $n$ standard basis elements of $R^{\oplus n + n'}$ and $0$ on the last $n'$ basis vectors. Then the corresponding ideals are the same. Namely, if $z_1, \ldots , z_{n - k} \in K$ as above, let $z'_ j = (z_{1j}, \ldots , z_{nj}, 0, \ldots , 0) \in K'$ for $j = 1, \ldots , n - k$ and $z'_{n + j'} = (0, \ldots , 0, 1, 0, \ldots , 0) \in K'$. Then we see that the ideal of $(n - k) \times (n - k)$ minors of $(z_{ij})$ agrees with the ideal of $(n + n' - k) \times (n + n' - k)$ minors of $(z'_{ij})$. This gives one of the inclusions. Conversely, given $z'_1, \ldots , z'_{n + n' - k}$ in $K'$ we can project these to $R^{\oplus n}$ to get $z_1, \ldots , z_{n + n' - k}$ in $K$. By Lemma <a href="/tag/07Z7" data-tag="07Z7">15.8.1</a> we see that the ideal generated by the $(n + n' - k) \times (n + n' - k)$ minors of $(z'_{ij})$ is contained in the ideal generated by the $(n - k) \times (n - k)$ minors of $(z_{ij})$. This gives the other inclusion. 
+    <p>
+      Let $R^{\oplus m} \to M$ be another surjection with kernel $L$. By Schanuel's lemma (Algebra, Lemma <a href="/tag/00O3" data-tag="00O3">10.109.1</a>) and the results of the previous paragraph, we may assume $m = n$ and that there is an isomorphism $R^{\oplus n} \to R^{\oplus m}$ commuting with the surjections to $M$. Let $C = (c_{li})$ be the (invertible) matrix of this map (it is a square matrix as $n = m$). Then given $z'_1, \ldots , z'_{n - k} \in L$ as above we can find $z_1, \ldots , z_{n - k} \in K$ with $z_1' = Cz_1, \ldots , z'_{n - k} = Cz_{n - k}$. By Lemma <a href="/tag/07Z7" data-tag="07Z7">15.8.1</a> we get one of the inclusions. By symmetry we get the other. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-definition" id="07Z9">
+  <p><a class="environment-identifier" href="/tag/07Z9">Definition <span data-tag="07Z9">15.8.3</span>.</a> Let $R$ be a ring. Let $M$ be a finite $R$-module. Let $k \geq 0$. The <em>$k$th Fitting ideal</em> of $M$ is the ideal $\text{Fit}_ k(M)$ constructed in Lemma <a href="/tag/07Z8" data-tag="07Z8">15.8.2</a>. Set $\text{Fit}_{-1}(M) = 0$. </p>
+</article> 
+</p>
+<p>
+Since the Fitting ideals are the ideals of minors of a big matrix (numbered in reverse ordering from the ordering in Lemma <a href="/tag/07Z7" data-tag="07Z7">15.8.1</a>) we see that 
+</p>
+<div class="equation">
+  \[  0 = \text{Fit}_{-1}(M) \subset \text{Fit}_0(M) \subset \text{Fit}_1(M) \subset \ldots \subset \text{Fit}_ t(M) = R  \]
+</div>
+<p>
+ for some $t \gg 0$. Here are some basic properties of Fitting ideals. 
+</p>
+<p>
+<article class="env-lemma" id="07ZA">
+  <p><a class="environment-identifier" href="/tag/07ZA">Lemma <span data-tag="07ZA">15.8.4</span>.</a> Let $R$ be a ring. Let $M$ be a finite $R$-module. </p>
+  <p><ol>
+  <li><p>
+If $M$ can be generated by $n$ elements, then $\text{Fit}_ n(M) = R$. 
+</p>
+</li><li><p>
+Given a second finite $R$-module $M'$ we have $\text{Fit}_0(M \oplus M') = \text{Fit}_0(M)\text{Fit}_0(M')$ and more generally 
+</p>
+<div class="equation">
+  \[  \text{Fit}_ l(M \oplus M') = \sum \nolimits _{k + k' = l} \text{Fit}_ k(M)\text{Fit}_{k'}(M')  \]
+</div>
+</li><li><p>
+If $R \to R'$ is a ring map, then $\text{Fit}_ k(M \otimes _ R R')$ is the ideal of $R'$ generated by the image of $\text{Fit}_ k(M)$. 
+</p>
+</li><li><p>
+If $M$ is of finite presentation, then $\text{Fit}_ k(M)$ is a finitely generated ideal. 
+</p>
+</li><li><p>
+If $M \to M'$ is a surjection, then $\text{Fit}_ k(M) \subset \text{Fit}_ k(M')$. 
+</p>
+</li><li><p>
+We have $\text{Fit}_0(M) \subset \text{Ann}_ R(M)$. 
+</p>
+</li><li><p>
+We have $V(\text{Fit}_0(M)) = \text{Supp}(M)$. 
+</p>
+</li><li><p>
+If $I$ is an ideal of $R$, then $\text{Fit}_0(R/I) = I$. 
+</p>
+</li><li><p>
+Add more here. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Part (1) follows from the fact that $I_0(A) = R$ in Lemma <a href="/tag/07Z7" data-tag="07Z7">15.8.1</a>. 
+    <p>
+      Part (2) follows form the corresponding statement in Lemma <a href="/tag/07Z7" data-tag="07Z7">15.8.1</a>. 
+    <p>
+      Part (3) follows from the fact that $\otimes _ R R'$ is right exact, so the base change of a presentation of $M$ is a presentation of $M \otimes _ R R'$. 
+    <p>
+      Proof of (4). Let $R^{\oplus m} \xrightarrow {A} R^{\oplus n} \to M \to 0$ be a presentation. Then $\text{Fit}_ k(M)$ is the ideal generated by the $(n - k) \times (n - k)$ minors of the matrix $A$. 
+    <p>
+      Part (5) is immediate from the definition. 
+    <p>
+      Proof of (6). Choose a presentation of $M$ with matrix $A$ as in Lemma <a href="/tag/07Z8" data-tag="07Z8">15.8.2</a>. Let $J' \subset J$ be a subset of cardinality $n$. It suffices to show that $f = \det (a_{ij})_{i = 1, \ldots , n, j \in J'}$ annihilates $M$. This is clear because the cokernel of 
+    <p>
+      <div class="equation">
+  \[  R^{\oplus n} \xrightarrow {A' = (a_{ij})_{i = 1, \ldots , n, j \in J'}} R^{\oplus n} \to M \to 0  \]
+</div>
+    <p>
+       is killed by $f$ as there is a matrix $B$ with $A' B = f1_{n \times n}$. 
+    <p>
+      Proof of (7). Choose a presentation of $M$ with matrix $A$ as in Lemma <a href="/tag/07Z8" data-tag="07Z8">15.8.2</a>. By Nakayama's lemma (Algebra, Lemma <a href="/tag/00DV" data-tag="00DV">10.20.1</a>) we have 
+    <p>
+      <div class="equation">
+  \[  M_\mathfrak p \not= 0 \Leftrightarrow M \otimes _ R \kappa (\mathfrak p) \not= 0 \Leftrightarrow \text{rank}(\text{image }A\text{ in }\kappa (\mathfrak p)) < n  \]
+</div>
+    <p>
+       Clearly $\text{Fit}_0(M)$ exactly cuts out the set of primes with this property. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-example" id="07ZB">
+  <p><a class="environment-identifier" href="/tag/07ZB">Example <span data-tag="07ZB">15.8.5</span>.</a> Let $R$ be a ring. The Fitting ideals of the finite free module $M = R^{\oplus n}$ are $\text{Fit}_ k(M) = 0$ for $k < n$ and $\text{Fit}_ k(M) = R$ for $k \geq n$. </p>
+</article> 
+</p>
+<p>
+<article class="env-example" id="0H73">
+  <p><a class="environment-identifier" href="/tag/0H73">Example <span data-tag="0H73">15.8.6</span>.</a> Let $R$ be a ring and let $I, J\subset R$ be ideals. Then $\text{Fit}_0(R/I) = I$, $\text{Fit}_0(R/I \oplus R/J) = IJ$, $\text{Fit}_1(R/I\oplus R/J) = I+J$. </p>
+</article> 
+</p>
+<p>
+<article class="env-lemma" id="07ZC">
+  <p><a class="environment-identifier" href="/tag/07ZC">Lemma <span data-tag="07ZC">15.8.7</span>.</a> Let $R$ be a ring. Let $M$ be a finite $R$-module. Let $k \geq 0$. Let $\mathfrak p \subset R$ be a prime ideal. The following are equivalent </p>
+  <p><ol>
+  <li><p>
+$\text{Fit}_ k(M) \not\subset \mathfrak p$, 
+</p>
+</li><li><p>
+$\dim _{\kappa (\mathfrak p)} M \otimes _ R \kappa (\mathfrak p) \leq k$, 
+</p>
+</li><li><p>
+$M_\mathfrak p$ can be generated by $k$ elements over $R_\mathfrak p$, and 
+</p>
+</li><li><p>
+$M_ f$ can be generated by $k$ elements over $R_ f$ for some $f \in R$, $f \not\in \mathfrak p$. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      By Nakayama's lemma (Algebra, Lemma <a href="/tag/00DV" data-tag="00DV">10.20.1</a>) we see that $M_ f$ can be generated by $k$ elements over $R_ f$ for some $f \in R$, $f \not\in \mathfrak p$ if $M \otimes _ R \kappa (\mathfrak p)$ can be generated by $k$ elements. Hence (2), (3), and (4) are equivalent. Using Lemma <a href="/tag/07ZA" data-tag="07ZA">15.8.4</a> part (3) this reduces the problem to the case where $R$ is a field and $\mathfrak p = (0)$. In this case the result follows from Example <a href="/tag/07ZB" data-tag="07ZB">15.8.5</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="07ZD">
+  <p><a class="environment-identifier" href="/tag/07ZD">Lemma <span data-tag="07ZD">15.8.8</span>.</a> Let $R$ be a ring. Let $M$ be a finite $R$-module. Let $r \geq 0$. The following are equivalent </p>
+  <p><ol>
+  <li><p>
+$M$ is finite locally free of rank $r$ (Algebra, Definition <a href="/tag/00NW" data-tag="00NW">10.78.1</a>), 
+</p>
+</li><li><p>
+$\text{Fit}_{r - 1}(M) = 0$ and $\text{Fit}_ r(M) = R$, and 
+</p>
+</li><li><p>
+$\text{Fit}_ k(M) = 0$ for $k < r$ and $\text{Fit}_ k(M) = R$ for $k \geq r$. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      It is immediate that (2) is equivalent to (3) because the Fitting ideals form an increasing sequence of ideals. Since the formation of $\text{Fit}_ k(M)$ commutes with base change (Lemma <a href="/tag/07ZA" data-tag="07ZA">15.8.4</a>) we see that (1) implies (2) by Example <a href="/tag/07ZB" data-tag="07ZB">15.8.5</a> and glueing results (Algebra, Section <a href="/tag/00EN" data-tag="00EN">10.23</a>). Conversely, assume (2). By Lemma <a href="/tag/07ZC" data-tag="07ZC">15.8.7</a> we may assume that $M$ is generated by $r$ elements. Thus a presentation $\bigoplus _{j \in J} R \to R^{\oplus r} \to M \to 0$. But now the assumption that $\text{Fit}_{r - 1}(M) = 0$ implies that all entries of the matrix of the map $\bigoplus _{j \in J} R \to R^{\oplus r}$ are zero. Thus $M$ is free. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="080Z">
+  <p><a class="environment-identifier" href="/tag/080Z">Lemma <span data-tag="080Z">15.8.9</span>.</a> Let $R$ be a local ring. Let $M$ be a finite $R$-module. Let $k \geq 0$. Assume that $\text{Fit}_ k(M) = (f)$ for some $f \in R$. Let $M'$ be the quotient of $M$ by $\{ x \in M \mid fx = 0\} $. Then $M'$ can be generated by $k$ elements. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Choose generators $x_1, \ldots , x_ n \in M$ corresponding to the surjection $R^{\oplus n} \to M$. Since $R$ is local if a set of elements $E \subset (f)$ generates $(f)$, then some $e \in E$ generates $(f)$, see Algebra, Lemma <a href="/tag/00DV" data-tag="00DV">10.20.1</a>. Hence we may pick $z_1, \ldots , z_{n - k}$ in the kernel of $R^{\oplus n} \to M$ such that some $(n - k) \times (n - k)$ minor of the $n \times (n - k)$ matrix $A = (z_{ij})$ generates $(f)$. After renumbering the $x_ i$ we may assume the first minor $\det (z_{ij})_{1 \leq i, j \leq n - k}$ generates $(f)$, i.e., $\det (z_{ij})_{1 \leq i, j \leq n - k} = uf$ for some unit $u \in R$. Every other minor is a multiple of $f$. By Algebra, Lemma <a href="/tag/080R" data-tag="080R">10.15.6</a> there exists a $n - k \times n - k$ matrix $B$ such that 
+    <p>
+      <div class="equation">
+  \[  AB = f \left( \begin{matrix}  u 1_{n - k \times n - k} 
+
+\\  C 
+
+\end{matrix} \right)  \]
+</div>
+    <p>
+       for some matrix $C$ with coefficients in $R$. This implies that for every $i \leq n - k$ the element $y_ i = ux_ i + \sum _ j c_{ji}x_ j$ is annihilated by $f$. Since $M/\sum Ry_ i$ is generated by the images of $x_{n - k + 1}, \ldots , x_ n$ we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0F7M">
+  <p><a class="environment-identifier" href="/tag/0F7M">Lemma <span data-tag="0F7M">15.8.10</span>.</a> Let $R$ be a ring. Let $M$ be a finitely presented $R$-module. Let $k \geq 0$. Assume that $\text{Fit}_ k(M) = (f)$ for some nonzerodivisor $f \in R$ and $\text{Fit}_{k - 1}(M) = 0$. Then </p>
+  <p><ol>
+  <li><p>
+$M$ has projective dimension $\leq 1$, 
+</p>
+</li><li><p>
+$M' = \mathop{\mathrm{Ker}}(f : M \to M)$ is the $f$-power torsion submodule of $M$, 
+</p>
+</li><li><p>
+$M'$ has projective dimension $\leq 1$, 
+</p>
+</li><li><p>
+$M/M'$ is finite locally free of rank $k$, and 
+</p>
+</li><li><p>
+$M \cong M/M' \oplus M'$. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Choose a presentation 
+    <p>
+      <div class="equation">
+  \[  R^{\oplus m} \xrightarrow {A} R^{\oplus n} \to M \to 0  \]
+</div>
+    <p>
+       for some matrix $A$ with coefficients in $R$. 
+    <p>
+      We first prove the lemma when $R$ is local. Set $M' = \{ x \in M \mid fx = 0\} $ as in the statement. By Lemma <a href="/tag/080Z" data-tag="080Z">15.8.9</a> we can choose $x_1, \ldots , x_ k \in M$ which generate $M/M'$. Then $x_1, \ldots , x_ k$ generate $M_ f = (M/M')_ f$. Hence, if there is a relation $\sum a_ ix_ i = 0$ in $M$, then we see that $a_1, \ldots , a_ k$ map to zero in $R_ f$ since otherwise $\text{Fit}_{k - 1}(M) R_ f = \text{Fit}_{k - 1}(M_ f)$ would be nonzero. Since $f$ is a nonzerodivisor, we conclude $a_1 = \ldots = a_ k = 0$. Thus $M \cong R^{\oplus k} \oplus M'$. After a change of basis in our presentation above, we may assume the first $n - k$ basis vectors of $R^{\oplus n}$ map into the summand $M'$ of $M$ and the last $k$-basis vectors of $R^{\oplus n}$ map to basis elements of the summand $R^{\oplus k}$ of $M$. Having done so, the last $k$ rows of the matrix $A$ vanish. In this way we see that, replacing $M$ by $M'$, $k$ by $0$, $n$ by $n - k$, and $A$ by the submatrix where we delete the last $k$ rows, we reduce to the case discussed in the next paragraph. 
+    <p>
+      Assume $R$ is local, $k = 0$, and $M$ annihilated by $f$. Now the $0$th Fitting ideal of $M$ is $(f)$ and is generated by the $n \times n$ minors of the matrix $A$ of size $n \times m$. (This in particular implies $m \geq n$.) Since $R$ is local, some $n \times n$ minor of $A$ is $uf$ for a unit $u \in R$. After renumbering we may assume this minor is the first one. Moreover, we know all other $n \times n$ minors of $A$ are divisible by $f$. Write $A = (A_1 A_2)$ in block form where $A_1$ is an $n \times n$ matrix and $A_2$ is an $n \times (m - n)$ matrix. By Algebra, Lemma <a href="/tag/080R" data-tag="080R">10.15.6</a> applied to the transpose of $A$ (!) we find there exists an $n \times n$ matrix $B$ such that 
+    <p>
+      <div class="equation">
+  \[  BA = B(A_1 A_2) = f \left( \begin{matrix}  u 1_{n \times n} 
+
+&  C 
+
+\end{matrix} \right)  \]
+</div>
+    <p>
+       for some $n \times (m - n)$ matrix $C$ with coefficients in $R$. Then we first conclude $BA_1 = fu 1_{n \times n}$. Thus 
+    <p>
+      <div class="equation">
+  \[  BA_2 = fC = u^{-1}fuC = u^{-1}BA_1C  \]
+</div>
+    <p>
+       Since the determinant of $B$ is a nonzerodivisor we conclude that $A_2 = u^{-1}A_1C$. Therefore the image of $A$ is equal to the image of $A_1$ which is isomorphic to $R^{\oplus n}$ because the determinant of $A_1$ is a nonzerodivisor. Hence $M$ has projective dimension $\leq 1$. 
+    <p>
+      We return to the case of a general ring $R$. By the local case we see that $M/M'$ is a finite locally free module of rank $k$, see Algebra, Lemma <a href="/tag/00NX" data-tag="00NX">10.78.2</a>. Hence the extension $0 \to M' \to M \to M/M' \to 0$ splits. It follows that $M'$ is a finitely presented module. Choose a short exact sequence $0 \to K \to R^{\oplus a} \to M' \to 0$. Then $K$ is a finite $R$-module, see Algebra, Lemma <a href="/tag/0519" data-tag="0519">10.5.3</a>. By the local case we see that $K_\mathfrak p \cong R_\mathfrak p^{\oplus a}$ for all primes. Hence by Algebra, Lemma <a href="/tag/00NX" data-tag="00NX">10.78.2</a> again we see that $K$ is finite locally free of rank $a$. It follows that $M'$ has projective dimension $\leq 1$ and the lemma is proved. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  // move extras from parent element to after environment name and number
+  $("article a[data-toggle]").each(function(index, element) {
+    $(element).insertAfter(($(element).parent().find("a.environment-identifier")));
+  });
+
+  $('article a[data-toggle="popover"]').popover()
+
+  // render mathematics in popovers
+  $("[data-toggle=popover]").on('shown.bs.popover', function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, $("div.popover-body").html()]);
+  });
+});
+  </script>
+
+  
+
+  
+</div>
+
+
+<hr>
+
+<section id="comments">
+  <h2>Comments (10)</h2>
+
+  
+    <a id="comment-3040" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/07Z6#comment-3040">Comment #3040</a>
+        by
+        <cite>SE user</cite>
+        on <time datetime="2017-12-16 07:30:00">December 16, 2017 at 07:30 </time>
+      </header>
+
+      <blockquote><p>Lemma 15.8.4, Proof of (6): "killed by <script type="math/tex">n</script>" or "killed by <script type="math/tex">f</script>"?</p></blockquote>
+    </article>
+  
+    <a id="comment-3148" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/07Z6#comment-3148">Comment #3148</a>
+        by
+        <cite><a href="http://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2018-02-01 22:24:46">February 01, 2018 at 22:24 </time>
+      </header>
+
+      <blockquote><p>Thanks, fixed <a href="https://github.com/stacks/stacks-project/commit/70427e140ee8aaae2c2d84256f40c062437e7b11">here</a>.</p></blockquote>
+    </article>
+  
+    <a id="comment-3385" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/07Z6#comment-3385">Comment #3385</a>
+        by
+        <cite>shanbei</cite>
+        on <time datetime="2018-05-27 13:01:13.611595">May 27, 2018 at 13:01 </time>
+      </header>
+
+      <blockquote><p>In the third line of proof of (7) in Lemma 07ZA, perhaps you meant the rank of image is less than n instead of \leq?</p></blockquote>
+    </article>
+  
+    <a id="comment-3454" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/07Z6#comment-3454">Comment #3454</a>
+        by
+        <cite><a href="http://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2018-08-03 09:51:32.924380">August 03, 2018 at 09:51 </time>
+      </header>
+
+      <blockquote><p>@#3385: Thanks and fixed <a href="https://github.com/stacks/stacks-project/commit/408f8a94deb495e0092bfc26bdb138ff05c91085">here</a>.</p></blockquote>
+    </article>
+  
+    <a id="comment-7652" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/07Z6#comment-7652">Comment #7652</a>
+        by
+        <cite>algori</cite>
+        on <time datetime="2022-08-14 13:25:03.268092">August 14, 2022 at 13:25 </time>
+      </header>
+
+      <blockquote><p>In lemma 0F7M, part (4), isn't it supposed to be "locally free of rank <script type="math/tex">k</script>" rather than of rank <script type="math/tex">r</script>?</p></blockquote>
+    </article>
+  
+    <a id="comment-7682" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/07Z6#comment-7682">Comment #7682</a>
+        by
+        <cite><a href="https://stacks.math.columbia.edu/" rel="author">Stacks Project</a></cite>
+        
+        on <time datetime="2022-08-15 12:25:24.885008">August 15, 2022 at 12:25 </time>
+      </header>
+
+      <blockquote><p>Fixed <a href="https://github.com/stacks/stacks-project/commit/4c187d58f97d9bf9ac208900bb8140b354046fd4">here</a>.</p></blockquote>
+    </article>
+  
+    <a id="comment-8719" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/07Z6#comment-8719">Comment #8719</a>
+        by
+        <cite>Bjorn Poonen</cite>
+        on <time datetime="2023-11-04 18:30:44.382223">November 04, 2023 at 18:30 </time>
+      </header>
+
+      <blockquote><p>Maybe add some easy but useful special cases to Lemma 07ZA:</p>
+<p>One could add a new item 
+"If <script type="math/tex">I</script> is an ideal of <script type="math/tex">R</script>, then <script type="math/tex">\operatorname{Fit}_0(R/I)=I</script>."</p>
+<p>In (2), after "we have" and before the formula one could insert
+"<script type="math/tex">\operatorname{Fit}_0(M \oplus M') = \operatorname{Fit}_0(M) \operatorname{Fit}_0(M')</script> and more generally"
+(I think that that is the most commonly used case of (2)).</p>
+<p>In the proof of (4), it would be good to put <script type="math/tex">n-k</script> in parentheses, twice.</p></blockquote>
+    </article>
+  
+    <a id="comment-9356" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/07Z6#comment-9356">Comment #9356</a>
+        by
+        <cite><a href="https://stacks.math.columbia.edu/" rel="author">Stacks project</a></cite>
+        
+        on <time datetime="2024-06-04 10:45:28.309500">June 04, 2024 at 10:45 </time>
+      </header>
+
+      <blockquote><p>Thanks and fixed <a href="https://github.com/stacks/stacks-project/commit/e48572abb293308df0d5aa9b22e798f068f8eecf">here</a>.</p></blockquote>
+    </article>
+  
+    <a id="comment-11062" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/07Z6#comment-11062">Comment #11062</a>
+        by
+        <cite>TooShy</cite>
+        on <time datetime="2026-01-02 05:29:55.450781">January 02, 2026 at 05:29 </time>
+      </header>
+
+      <blockquote><p>Would it be worth to reference <a href="https://stacks.math.columbia.edu/tag/00KZ">Lemma 10.5.4</a>? My understanding is that the filtration mentionned in 10.5.4 corresponds to the Fitting ideals and that the ideals <script type="math/tex">I_i</script> correspond to the invariant factors of the module (under the right assumptions). Maybe this could be done as an item of <a href="https://stacks.math.columbia.edu/tag/07ZA">Lemma 07ZA</a>.</p></blockquote>
+    </article>
+  
+    <a id="comment-11225" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/07Z6#comment-11225">Comment #11225</a>
+        by
+        <cite><a href="https://stacks.math.columbia.edu/" rel="author">Stacks project</a></cite>
+        
+        on <time datetime="2026-01-30 11:29:08.166073">January 30, 2026 at 11:29 </time>
+      </header>
+
+      <blockquote><p>I think the filtration in Lemma <a href="/tag/00KZ" data-tag="00KZ">10.5.4</a> isn't enough pinned down to give a lot of control over the fitting ideals. Yes, there is a relation but it would be a pain to make explicit. Maybe you could write an example we could add?</p></blockquote>
+    </article>
+  
+
+  
+</section>
+
+<hr>
+
+<section id="post-comment">
+  <h2>Post a comment</h2>
+  <p>Your email address will not be published. Required fields are marked.
+  <p>In your comment you can use <a href="/markdown">Markdown</a> and LaTeX style mathematics (enclose it like <code>$\pi$</code>). A preview option is available if you wish to see how it works out (just click on the eye in the toolbar).
+  <noscript><p>Unfortunately JavaScript is disabled in your browser, so the comment preview function will not work.</p></noscript>
+
+  <p>All contributions are licensed under the <a href="https://github.com/stacks/stacks-project/blob/master/COPYING">GNU Free Documentation License</a>.
+
+  <form name="comment" id="comment-form" action="/post-comment" method="post">
+    <label for="name">Name<sup>*</sup>:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="mail">E-mail<sup>*</sup>:</label>
+    <input type="email" name="mail" id="mail" required><br>
+
+    <label for="site">Site:</label>
+    <input type="url" name="site" id="site"><br>
+
+    <label>Comment:</label>
+    <textarea name="comment" id="comment-textarea" cols="80" rows="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <script type="text/javascript">
+var easymde = new EasyMDE({
+  autosave: {
+    enabled: true,
+    delay: 1000,
+    uniqueId: "comment-07Z6",
+  },
+  element: $("#comment")[0],
+  forceSync: true,
+  insertTexts: { link: ["\\ref{", "}"], table: ["$", "$"], image: ["\\begin{equation}\n", "\n\\end{equation}\n"] }, // we hack into these insertion methods, I couldn't figure out how to write your own...
+  placeholder: "You can type your comment here, use the preview option to see what it will look like. If your comment is on a lemma, please leave your comment on the page of the lemma. Same with remarks, propositions, theorems, etc.",
+  previewRender: function(plaintext, preview) {
+    // deal with references
+    plaintext = plaintext.replace(/\\ref\{([0-9A-Z]{4})\}/g, "<span class=\"tag\">[$1](/tag/$1)</span>");
+    // deal with \[\] getting replaced to []
+    plaintext = plaintext.replace(/\\\[/g, "\\begin{equation}");
+    plaintext = plaintext.replace(/\\\]/g, "\\end{equation}");
+
+    output = this.parent.markdown(plaintext);
+
+    setTimeout(function() {
+      preview.innerHTML = output;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }, 0);
+
+    return "";
+  },
+  spellChecker: false,
+  status: false,
+  toolbar: [
+    "link", {name: "inline", action: EasyMDE.drawTable, className: "fa fa-usd"}, {name: "block", action: EasyMDE.drawImage, className: "fa fa-square"}, "|",
+    "bold", "italic", "|",
+    "ordered-list", "unordered-list", "|",
+    "preview"
+  ],
+});
+
+// make sure to show tags, not numbers
+var tagToggleHappened = false; // only do this once to not annoy the user too much
+easymde.codemirror.on("change", function() {
+  // if data-tag elements do not have tag attribute we need to make tags visible
+  if (!$("*[data-tag]").hasClass("tag") && !tagToggleHappened)
+    $("section#meta input.toggle").bootstrapToggle("toggle");
+  tagToggleHappened = true;
+});
+
+// prevent form submit when the captcha isn't correct
+// it's a bit silly to use HTML5 validation for this, as bots can figure that out
+// also save the author information to localStorage
+easymde.element.form.addEventListener("submit", function(event) {
+  if ($("#check").val() != $("#hidden-tag").val()) {
+    // explain captcha
+    $("#captcha-message").toggle();
+
+    // stop submit
+    event.preventDefault();
+    return false;
+  }
+
+  // save author information
+  localStorage.setItem("name", $("input#name").val());
+  localStorage.setItem("mail", $("input#mail").val());
+  localStorage.setItem("site", $("input#site").val());
+});
+    </script>
+
+    <p>In order to prevent bots from posting comments, we would like you to prove that you are human. You can do this by <em>filling in the name of the current tag</em> in the following input field. As a reminder, this is tag <span class="tag">07Z6</span>. Beware of the difference between the letter&nbsp;'<span class="tag">O</span>' and the digit&nbsp;'<span class="tag">0</span>'.</p>
+    <!--<p>This <abbr title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</abbr> seems more appropriate than the usual illegible gibberish, right?<br>-->
+    <label for="check">Tag:</label>
+    <input type="text" name="check" id="check" required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Post comment</button>
+    <input type="hidden" name="tag" id="hidden-tag" value="07Z6"><br>
+
+    <p id="captcha-message" style="display: none" class="alert alert-warning" role="alert">The tag you filled in for the captcha is wrong. You need to write <span class="tag">07Z6</span>, in case you are confused.</p>
+
+    <script type="text/javascript">
+// enter in captcha fields causes \ref to appear (?!)
+$("input#check").on("keypress", function(e) {
+  if (e.which == 13) {
+    // always stop the event
+    e.preventDefault();
+
+    // perform clientside check as for actual submit
+    if ($("#check").val() != $("#hidden-tag").val()) {
+      // explain captcha
+      $("#captcha-message").toggle();
+    }
+    else {
+      $("form#comment-form").submit();
+    }
+  }
+});
+    </script>
+  </form>
+</section>
+
+
+
+
+    </section>
+	  <div class="col-lg-4 col-xl-4">
+	    <section id="meta" class="row topbar sticky-top">
+        
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0D2K">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/07LW">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  <hr>
+  
+    <a href="https://stacks.math.columbia.edu/download/more-algebra.pdf#nameddest=07Z6">View Section <span data-tag="07Z6">15.8</span> as pdf</a>
+  
+
+  
+
+
+      </section>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

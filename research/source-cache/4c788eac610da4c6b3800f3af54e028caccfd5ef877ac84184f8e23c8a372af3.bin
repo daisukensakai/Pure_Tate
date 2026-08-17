@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#d9d8d1">
+
+<title>Section 30.8 (01XS): Cohomology of projective space&mdash;The Stacks project</title>
+
+<meta name="description" content="an open source textbook and reference work on algebraic geometry">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ['tex2jax.js'],
+    jax: ['input/TeX','output/HTML-CSS'],
+    TeX: {
+      extensions: ['AMSmath.js', 'AMSsymbols.js', '/static/XyJax/extensions/TeX/xypic.js'],
+      Macros: {
+        linebreak: ["", 1, ""],
+        },
+      TagSide: 'left'
+    },
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    },
+    'HTML-CSS': {
+    	scale: 100,
+	availableFonts: [],
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+
+
+  <script type="text/javascript" src="/static/js/toggle.js"></script>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/easymde@2.0.1/dist/easymde.min.css" integrity="sha384-IRbzB9px0sfIx90vkN+geaX3F4LVcg/M+k5vmVkfjs5TnRX3MIhGS8Ma06ALKVYp" crossorigin="anonymous">
+  <script src="https://unpkg.com/easymde@2.0.1/dist/easymde.min.js" integrity="sha384-v06sb0t0ToY1YRtVlfD/GCGpIZ/QHYyeH2Gzjvr0ZJI62/50DIzT8XRgQ6JvptVu" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.css" integrity="sha384-8xTxM5sJRAUB0ckdBghB5am+aw+0kC5FfSUzMI+KI+UD8uBCNeSkdi8I1J4+Wjwu" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.js" integrity="sha384-gE5xOW4MVOjJL1A2SbxwvQw/qet6h8Vdv06j3JQGhBW4d1H5hXYB12WsrUBgU439" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid bounded">
+  <div id="first-bar" class="row topbar inner-top top">
+    <header class="col">
+      <h1><a href="/">The Stacks project</a></h1>
+    </header>
+
+    <nav id="header">
+      <ul id="quicklinks">
+        <li><a href="/bibliography">bibliography</a>
+        <li><a href="https://www.math.columbia.edu/~dejong/wordpress/">blog</a>
+      </ul>
+
+      <form id="quicksearch" action="/search">
+        <span id="search-icon"><img src="/static/images/search.svg"></span>
+        <input type="search" name="query" size="16" placeholder="keywords or a tag" value="">
+      </form>
+    </nav>
+  </div>
+
+  <nav id="second-bar" class="row topbar sticky-top">
+    
+      <ul class="col-11 col-sm-11 col-md-11 col-lg-12 col-xl-12" id="crumbs">
+        <li><a href="/browse">Table of contents</a></li>
+        
+  
+  
+    <li>Part <a href="/tag/0ELP" data-tag="0ELP">2</a>: Schemes
+    
+  
+    <li>Chapter <a href="/tag/01X6" data-tag="01X6">30</a>: Cohomology of Schemes
+    
+  
+    <li class="active">Section <a href="/tag/01XS" data-tag="01XS">30.8</a>: Cohomology of projective space
+    <span id="citation">(<a href="/tag/01XS/cite">cite</a>)</span>
+  
+
+
+      </ul>
+    
+
+    
+      <div class="col-1 col-sm-1 col-md-1" id="burger">
+        <input type="checkbox" id="burger-input"></input>
+
+        <label id="burger-icon" for="burger-input">
+          <span id="top-bun"></span>
+          <span id="meat"></span>
+          <span id="bottom-bun"></span>
+        </label>
+
+        <div id="burger-content">
+          
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/071M">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/01XY">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  
+
+
+        </div>
+      </div>
+    
+
+    
+  </nav>
+
+  <div class="row" id="content">
+    <section id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      
+<div class="html" id="tag">
+  
+
+  
+
+  
+
+  <h2 id="coherent-section-cohomology-projective-space" class="tex-section"><span data-tag="01XS">30.8</span> Cohomology of projective space</h2>
+
+<p>
+In this section we compute the cohomology of the twists of the structure sheaf on $\mathbf{P}^ n_ S$ over a scheme $S$. Recall that $\mathbf{P}^ n_ S$ was defined as the fibre product $ \mathbf{P}^ n_ S = S \times _{\mathop{\mathrm{Spec}}(\mathbf{Z})} \mathbf{P}^ n_{\mathbf{Z}} $ in Constructions, Definition <a href="/tag/01NF" data-tag="01NF">27.13.2</a>. It was shown to be equal to 
+</p>
+<div class="equation">
+  \[  \mathbf{P}^ n_ S = \underline{\text{Proj}}_ S(\mathcal{O}_ S[T_0, \ldots , T_ n])  \]
+</div>
+<p>
+ in Constructions, Lemma <a href="/tag/01OE" data-tag="01OE">27.21.5</a>. In particular, projective space is a particular case of a projective bundle. If $S = \mathop{\mathrm{Spec}}(R)$ is affine then we have 
+</p>
+<div class="equation">
+  \[  \mathbf{P}^ n_ S = \mathbf{P}^ n_ R = \text{Proj}(R[T_0, \ldots , T_ n]).  \]
+</div>
+<p>
+ All these identifications are compatible and compatible with the constructions of the twisted structure sheaves $\mathcal{O}_{\mathbf{P}^ n_ S}(d)$. 
+</p>
+<p>
+Before we state the result we need some notation. Let $R$ be a ring. Recall that $R[T_0, \ldots , T_ n]$ is a graded $R$-algebra where each $T_ i$ is homogeneous of degree $1$. Denote $(R[T_0, \ldots , T_ n])_ d$ the degree $d$ summand. It is a finite free $R$-module of rank $\binom {n + d}{d}$ when $d \geq 0$ and zero else. It has a basis consisting of monomials $T_0^{e_0} \ldots T_ n^{e_ n}$ with $\sum e_ i = d$. We will also use the following notation: $R[\frac{1}{T_0}, \ldots , \frac{1}{T_ n}]$ denotes the $\mathbf{Z}$-graded ring with $\frac{1}{T_ i}$ in degree $-1$. In particular the $\mathbf{Z}$-graded $R[\frac{1}{T_0}, \ldots , \frac{1}{T_ n}]$ module 
+</p>
+<div class="equation">
+  \[  \frac{1}{T_0 \ldots T_ n} R[\frac{1}{T_0}, \ldots , \frac{1}{T_ n}]  \]
+</div>
+<p>
+ which shows up in the statement below is zero in degrees $\geq -n$, is free on the generator $\frac{1}{T_0 \ldots T_ n}$ in degree $-n - 1$ and is free of rank $(-1)^ n\binom {n + d}{d}$ for $d \leq -n - 1$. 
+</p>
+<p>
+<article class="env-lemma" id="01XT"><a tabindex="0" role="button" data-trigger="focus" data-placement="bottom" class="btn badge badge-info" data-toggle="popover" title="Reference" data-html="true" data-content=' <span class="cite">[<span class="postnote">III Proposition 2.1.12</span>, <a href="/bibliography/EGA">EGA</a>]</span> '>reference</a>
+       
+      
+  <p><a class="environment-identifier" href="/tag/01XT">Lemma <span data-tag="01XT">30.8.1</span>.</a> Let $R$ be a ring. Let $n \geq 0$ be an integer. We have </p>
+  <div class="equation">
+  \[  H^ q(\mathbf{P}^ n, \mathcal{O}_{\mathbf{P}^ n_ R}(d)) = \left\{  \begin{matrix}  (R[T_0, \ldots , T_ n])_ d 
+
+&  \text{if} 
+
+&  q = 0,\  d \geq 0 
+
+\\  \left(\frac{1}{T_0 \ldots T_ n} R[\frac{1}{T_0}, \ldots , \frac{1}{T_ n}]\right)_ d 
+
+&  \text{if} 
+
+&  q = n,\  d < 0 
+
+\\  0 
+
+&  \text{if} 
+
+&  q, n, d\text{ not as above} 
+
+\end{matrix} \right.  \]
+</div>
+  <p> as $R$-modules. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      We will use the standard affine open covering 
+    <p>
+      <div class="equation">
+  \[  \mathcal{U} : \mathbf{P}^ n_ R = \bigcup \nolimits _{i = 0}^ n D_{+}(T_ i)  \]
+</div>
+    <p>
+       to compute the cohomology using the Čech complex. This is permissible by Lemma <a href="/tag/01XD" data-tag="01XD">30.2.6</a> since any intersection of finitely many affine $D_{+}(T_ i)$ is also a standard affine open (see Constructions, Section <a href="/tag/01M3" data-tag="01M3">27.8</a>). In fact, we can use the alternating or ordered Čech complex according to Cohomology, Lemmas <a href="/tag/01FJ" data-tag="01FJ">20.23.3</a> and <a href="/tag/01FM" data-tag="01FM">20.23.6</a>. 
+    <p>
+      The ordering we will use on $\{ 0, \ldots , n\} $ is the usual one. Hence the complex we are looking at has terms 
+    <p>
+      <div class="equation">
+  \[  \check{\mathcal{C}}_{ord}^ p(\mathcal{U}, \mathcal{O}_{\mathbf{P}_ R}(d)) = \bigoplus \nolimits _{i_0 < \ldots < i_ p} (R[T_0, \ldots , T_ n, \frac{1}{T_{i_0} \ldots T_{i_ p}}])_ d  \]
+</div>
+    <p>
+       Moreover, the maps are given by the usual formula 
+    <p>
+      <div class="equation">
+  \[  d(s)_{i_0 \ldots i_{p + 1}} = \sum \nolimits _{j = 0}^{p + 1} (-1)^ j s_{i_0 \ldots \hat i_ j \ldots i_{p + 1}}  \]
+</div>
+    <p>
+       see Cohomology, Section <a href="/tag/01FG" data-tag="01FG">20.23</a>. Note that each term of this complex has a natural $\mathbf{Z}^{n + 1}$-grading. Namely, we get this by declaring a monomial $T_0^{e_0} \ldots T_ n^{e_ n}$ to be homogeneous with weight $(e_0, \ldots , e_ n) \in \mathbf{Z}^{n + 1}$. It is clear that the differential given above respects the grading. In a formula we have 
+    <p>
+      <div class="equation">
+  \[  \check{\mathcal{C}}_{ord}^\bullet (\mathcal{U}, \mathcal{O}_{\mathbf{P}_ R}(d)) = \bigoplus \nolimits _{\vec{e} \in \mathbf{Z}^{n + 1}} \check{\mathcal{C}}^\bullet (\vec{e})  \]
+</div>
+    <p>
+       where not all summands on the right hand side occur (see below). Hence in order to compute the cohomology modules of the complex it suffices to compute the cohomology of the graded pieces and take the direct sum at the end. 
+    <p>
+      Fix $\vec{e} = (e_0, \ldots , e_ n) \in \mathbf{Z}^{n + 1}$. In order for this weight to occur in the complex above we need to assume $e_0 + \ldots + e_ n = d$ (if not then it occurs for a different twist of the structure sheaf of course). Assuming this, set 
+    <p>
+      <div class="equation">
+  \[  NEG(\vec{e}) = \{ i \in \{ 0, \ldots , n\}  \mid e_ i < 0\} .  \]
+</div>
+    <p>
+       With this notation the weight $\vec{e}$ summand $\check{\mathcal{C}}^\bullet (\vec{e})$ of the Čech complex above has the following terms 
+    <p>
+      <div class="equation">
+  \[  \check{\mathcal{C}}^ p(\vec{e}) = \bigoplus \nolimits _{i_0 < \ldots < i_ p, \  NEG(\vec{e}) \subset \{ i_0, \ldots , i_ p\} } R \cdot T_0^{e_0} \ldots T_ n^{e_ n}  \]
+</div>
+    <p>
+       In other words, the terms corresponding to $i_0 < \ldots < i_ p$ such that $NEG(\vec{e})$ is not contained in $\{ i_0 \ldots i_ p\} $ are zero. The differential of the complex $\check{\mathcal{C}}^\bullet (\vec{e})$ is still given by the exact same formula as above. 
+    <p>
+      Suppose that $NEG(\vec{e}) = \{ 0, \ldots , n\} $, i.e., that all exponents $e_ i$ are negative. In this case the complex $\check{\mathcal{C}}^\bullet (\vec{e})$ has only one term, namely $\check{\mathcal{C}}^ n(\vec{e}) = R \cdot \frac{1}{T_0^{-e_0} \ldots T_ n^{-e_ n}}$. Hence in this case 
+    <p>
+      <div class="equation">
+  \[  H^ q(\check{\mathcal{C}}^\bullet (\vec{e})) = \left\{  \begin{matrix}  R \cdot \frac{1}{T_0^{-e_0} \ldots T_ n^{-e_ n}} 
+
+&  \text{if} 
+
+&  q = n 
+
+\\  0 
+
+&  \text{if} 
+
+&  \text{else} 
+
+\end{matrix} \right.  \]
+</div>
+    <p>
+       The direct sum of all of these terms clearly gives the value 
+    <p>
+      <div class="equation">
+  \[  \left(\frac{1}{T_0 \ldots T_ n} R[\frac{1}{T_0}, \ldots , \frac{1}{T_ n}]\right)_ d  \]
+</div>
+    <p>
+       in degree $n$ as stated in the lemma. Moreover these terms do not contribute to cohomology in other degrees (also in accordance with the statement of the lemma). 
+    <p>
+      Assume $NEG(\vec{e}) = \emptyset $. In this case the complex $\check{\mathcal{C}}^\bullet (\vec{e})$ has a summand $R$ corresponding to all $i_0 < \ldots < i_ p$. Let us compare the complex $\check{\mathcal{C}}^\bullet (\vec{e})$ to another complex. Namely, consider the affine open covering 
+    <p>
+      <div class="equation">
+  \[  \mathcal{V} : \mathop{\mathrm{Spec}}(R) = \bigcup \nolimits _{i \in \{ 0, \ldots , n\} } V_ i  \]
+</div>
+    <p>
+       where $V_ i = \mathop{\mathrm{Spec}}(R)$ for all $i$. Consider the alternating Čech complex 
+    <p>
+      <div class="equation">
+  \[  \check{\mathcal{C}}_{ord}^\bullet (\mathcal{V}, \mathcal{O}_{\mathop{\mathrm{Spec}}(R)})  \]
+</div>
+    <p>
+       By the same reasoning as above this computes the cohomology of the structure sheaf on $\mathop{\mathrm{Spec}}(R)$. Hence we see that $H^ p( \check{\mathcal{C}}_{ord}^\bullet (\mathcal{V}, \mathcal{O}_{\mathop{\mathrm{Spec}}(R)}) ) = R$ if $p = 0$ and is $0$ whenever $p > 0$. For these facts, see Lemma <a href="/tag/01X9" data-tag="01X9">30.2.1</a> and its proof. Note that also $\check{\mathcal{C}}_{ord}^\bullet (\mathcal{V}, \mathcal{O}_{\mathop{\mathrm{Spec}}(R)})$ has a summand $R$ for every $i_0 < \ldots < i_ p$ and has exactly the same differential as $\check{\mathcal{C}}^\bullet (\vec{e})$. In other words these complexes are isomorphic complexes and hence have the same cohomology. We conclude that 
+    <p>
+      <div class="equation">
+  \[  H^ q(\check{\mathcal{C}}^\bullet (\vec{e})) = \left\{  \begin{matrix}  R \cdot T_0^{e_0} \ldots T_ n^{e_ n} 
+
+&  \text{if} 
+
+&  q = 0 
+
+\\  0 
+
+&  \text{if} 
+
+&  \text{else} 
+
+\end{matrix} \right.  \]
+</div>
+    <p>
+       in the case that $NEG(\vec{e}) = \emptyset $. The direct sum of all of these terms clearly gives the value 
+    <p>
+      <div class="equation">
+  \[  (R[T_0, \ldots , T_ n])_ d  \]
+</div>
+    <p>
+       in degree $0$ as stated in the lemma. Moreover these terms do not contribute to cohomology in other degrees (also in accordance with the statement of the lemma). 
+    <p>
+      To finish the proof of the lemma we have to show that the complexes $\check{\mathcal{C}}^\bullet (\vec{e})$ are acyclic when $NEG(\vec{e})$ is neither empty nor equal to $\{ 0, \ldots , n\} $. Pick an index $i_{\text{fix}} \not\in NEG(\vec{e})$ (such an index exists). Consider the map 
+    <p>
+      <div class="equation">
+  \[  h : \check{\mathcal{C}}^{p + 1}(\vec{e}) \to \check{\mathcal{C}}^ p(\vec{e})  \]
+</div>
+    <p>
+       given by the rule that for $i_0 < \ldots < i_ p$ we have 
+    <p>
+      <div class="equation">
+  \[  h(s)_{i_0 \ldots i_ p} = \left\{  \begin{matrix}  0 
+
+&  \text{if} 
+
+&  p \not\in \{ 0, \ldots , n - 1\}  
+
+\\  0 
+
+&  \text{if} 
+
+&  i_{\text{fix}} \in \{ i_0, \ldots , i_ p\}  
+
+\\  s_{i_{\text{fix}} i_0 \ldots i_ p} 
+
+&  \text{if} 
+
+&  i_{\text{fix}} < i_0 
+
+\\  (-1)^ a s_{i_0 \ldots i_{a - 1} i_{\text{fix}} i_ a \ldots i_ p} 
+
+&  \text{if} 
+
+&  i_{a - 1} < i_{\text{fix}} < i_ a 
+
+\\  (-1)^{p + 1} s_{i_0 \ldots i_ p i_{\text{fix}}} 
+
+&  \text{if} 
+
+&  i_ p < i_{\text{fix}} 
+
+\end{matrix} \right.  \]
+</div>
+    <p>
+       Please compare with the proof of Lemma <a href="/tag/01X9" data-tag="01X9">30.2.1</a>. This makes sense because we have 
+    <p>
+      <div class="equation">
+  \[  NEG(\vec{e}) \subset \{ i_0, \ldots , i_ p\}  \Leftrightarrow NEG(\vec{e}) \subset \{ i_{\text{fix}}, i_0, \ldots , i_ p\}   \]
+</div>
+    <p>
+       The exact same (combinatorial) computation<a class="footnotemark footnote-offset" href="#footnote-1" id="footnote-1-mark"></a><a href="#footnote-1"><sup>1</sup></a> as in the proof of Lemma <a href="/tag/01X9" data-tag="01X9">30.2.1</a> shows that 
+    <p>
+      <div class="equation">
+  \[  (hd + dh)(s)_{i_0 \ldots i_ p} = s_{i_0 \ldots i_ p}  \]
+</div>
+    <p>
+       Hence we see that the identity map of the complex $\check{\mathcal{C}}^\bullet (\vec{e})$ is homotopic to zero which implies that it is acyclic. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+In the following lemma we are going to use the pairing of free $R$-modules 
+</p>
+<div class="equation">
+  \[  R[T_0, \ldots , T_ n] \times \frac{1}{T_0 \ldots T_ n} R[\frac{1}{T_0}, \ldots , \frac{1}{T_ n}] \longrightarrow R  \]
+</div>
+<p>
+ which is defined by the rule 
+</p>
+<div class="equation">
+  \[  (f, g) \longmapsto \text{coefficient of } \frac{1}{T_0 \ldots T_ n} \text{ in }fg.  \]
+</div>
+<p>
+ In other words, the basis element $T_0^{e_0} \ldots T_ n^{e_ n}$ pairs with the basis element $T_0^{d_0} \ldots T_ n^{d_ n}$ to give $1$ if and only if $e_ i + d_ i = -1$ for all $i$, and pairs to zero in all other cases. Using this pairing we get an identification 
+</p>
+<div class="equation">
+  \[  \left(\frac{1}{T_0 \ldots T_ n} R[\frac{1}{T_0}, \ldots , \frac{1}{T_ n}]\right)_ d = \mathop{\mathrm{Hom}}\nolimits _ R((R[T_0, \ldots , T_ n])_{-n - 1 - d}, R)  \]
+</div>
+<p>
+ Thus we can reformulate the result of Lemma <a href="/tag/01XT" data-tag="01XT">30.8.1</a> as saying that 
+</p>
+<div class="equation" id="01XU">
+    <span class="equation-label"><a href="/tag/01XU" data-tag="01XU">30.8.1.1</a></span>
+  <div>\begin{equation}  \label{coherent-equation-identify} H^ q(\mathbf{P}^ n, \mathcal{O}_{\mathbf{P}^ n_ R}(d)) = \left\{  \begin{matrix}  (R[T_0, \ldots , T_ n])_ d 
+
+&  \text{if} 
+
+&  q = 0 
+
+\\  0 
+
+&  \text{if} 
+
+&  q \not= 0, n 
+
+\\  \mathop{\mathrm{Hom}}\nolimits _ R((R[T_0, \ldots , T_ n])_{-n - 1 - d}, R) 
+
+&  \text{if} 
+
+&  q = n 
+
+\end{matrix} \right. \end{equation}</div>
+</div>
+<p>
+<article class="env-lemma" id="01XV">
+  <p><a class="environment-identifier" href="/tag/01XV">Lemma <span data-tag="01XV">30.8.2</span>.</a> The identifications of Equation (<a href="/tag/01XU" data-tag="01XU">30.8.1.1</a>) are compatible with base change w.r.t. ring maps $R \to R'$. Moreover, for any $f \in R[T_0, \ldots , T_ n]$ homogeneous of degree $m$ the map multiplication by $f$ </p>
+  <div class="equation">
+  \[  \mathcal{O}_{\mathbf{P}^ n_ R}(d) \longrightarrow \mathcal{O}_{\mathbf{P}^ n_ R}(d + m)  \]
+</div>
+  <p> induces the map on the cohomology group via the identifications of Equation (<a href="/tag/01XU" data-tag="01XU">30.8.1.1</a>) which is multiplication by $f$ for $H^0$ and the contragredient of multiplication by $f$ </p>
+  <div class="equation">
+  \[  (R[T_0, \ldots , T_ n])_{-n - 1 - (d + m)} \longrightarrow (R[T_0, \ldots , T_ n])_{-n - 1 - d}  \]
+</div>
+  <p> on $H^ n$. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Suppose that $R \to R'$ is a ring map. Let $\mathcal{U}$ be the standard affine open covering of $\mathbf{P}^ n_ R$, and let $\mathcal{U}'$ be the standard affine open covering of $\mathbf{P}^ n_{R'}$. Note that $\mathcal{U}'$ is the pullback of the covering $\mathcal{U}$ under the canonical morphism $\mathbf{P}^ n_{R'} \to \mathbf{P}^ n_ R$. Hence there is a map of Čech complexes 
+    <p>
+      <div class="equation">
+  \[  \gamma : \check{\mathcal{C}}_{ord}^\bullet (\mathcal{U}, \mathcal{O}_{\mathbf{P}_ R}(d)) \longrightarrow \check{\mathcal{C}}_{ord}^\bullet (\mathcal{U}', \mathcal{O}_{\mathbf{P}_{R'}}(d))  \]
+</div>
+    <p>
+       which is compatible with the map on cohomology by Cohomology, Lemma <a href="/tag/01FD" data-tag="01FD">20.15.1</a>. It is clear from the computations in the proof of Lemma <a href="/tag/01XT" data-tag="01XT">30.8.1</a> that this map of Čech complexes is compatible with the identifications of the cohomology groups in question. (Namely the basis elements for the Čech complex over $R$ simply map to the corresponding basis elements for the Čech complex over $R'$.) Whence the first statement of the lemma. 
+    <p>
+      Now fix the ring $R$ and consider two homogeneous polynomials $f, g \in R[T_0, \ldots , T_ n]$ both of the same degree $m$. Since cohomology is an additive functor, it is clear that the map induced by multiplication by $f + g$ is the same as the sum of the maps induced by multiplication by $f$ and the map induced by multiplication by $g$. Moreover, since cohomology is a functor, a similar result holds for multiplication by a product $fg$ where $f, g$ are both homogeneous (but not necessarily of the same degree). Hence to verify the second statement of the lemma it suffices to prove this when $f = x \in R$ or when $f = T_ i$. In the case of multiplication by an element $x \in R$ the result follows since every cohomology groups or complex in sight has the structure of an $R$-module or complex of $R$-modules. Finally, we consider the case of multiplication by $T_ i$ as a $\mathcal{O}_{\mathbf{P}^ n_ R}$-linear map 
+    <p>
+      <div class="equation">
+  \[  \mathcal{O}_{\mathbf{P}^ n_ R}(d) \longrightarrow \mathcal{O}_{\mathbf{P}^ n_ R}(d + 1)  \]
+</div>
+    <p>
+       The statement on $H^0$ is clear. For the statement on $H^ n$ consider multiplication by $T_ i$ as a map on Čech complexes 
+    <p>
+      <div class="equation">
+  \[  \check{\mathcal{C}}_{ord}^\bullet (\mathcal{U}, \mathcal{O}_{\mathbf{P}_ R}(d)) \longrightarrow \check{\mathcal{C}}_{ord}^\bullet (\mathcal{U}, \mathcal{O}_{\mathbf{P}_ R}(d + 1))  \]
+</div>
+    <p>
+       We are going to use the notation introduced in the proof of Lemma <a href="/tag/01XT" data-tag="01XT">30.8.1</a>. We consider the effect of multiplication by $T_ i$ in terms of the decompositions 
+    <p>
+      <div class="equation">
+  \[  \check{\mathcal{C}}_{ord}^\bullet (\mathcal{U}, \mathcal{O}_{\mathbf{P}_ R}(d)) = \bigoplus \nolimits _{\vec{e} \in \mathbf{Z}^{n + 1}, \  \sum e_ i = d} \check{\mathcal{C}}^\bullet (\vec{e})  \]
+</div>
+    <p>
+       and 
+    <p>
+      <div class="equation">
+  \[  \check{\mathcal{C}}_{ord}^\bullet (\mathcal{U}, \mathcal{O}_{\mathbf{P}_ R}(d + 1)) = \bigoplus \nolimits _{\vec{e} \in \mathbf{Z}^{n + 1}, \  \sum e_ i = d + 1} \check{\mathcal{C}}^\bullet (\vec{e})  \]
+</div>
+    <p>
+       It is clear that it maps the subcomplex $\check{\mathcal{C}}^\bullet (\vec{e})$ to the subcomplex $\check{\mathcal{C}}^\bullet (\vec{e} + \vec{b}_ i)$ where $\vec{b}_ i = (0, \ldots , 0, 1, 0, \ldots , 0))$ the $i$th basis vector. In other words, it maps the summand of $H^ n$ corresponding to $\vec{e}$ with $e_ i < 0$ and $\sum e_ i = d$ to the summand of $H^ n$ corresponding to $\vec{e} + \vec{b}_ i$ (which is zero if $e_ i + b_ i \geq 0$). It is easy to see that this corresponds exactly to the action of the contragredient of multiplication by $T_ i$ as a map 
+    <p>
+      <div class="equation">
+  \[  (R[T_0, \ldots , T_ n])_{-n - 1 - (d + 1)} \longrightarrow (R[T_0, \ldots , T_ n])_{-n - 1 - d}  \]
+</div>
+    <p>
+       This proves the lemma. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+Before we state the relative version we need some notation. Namely, recall that $\mathcal{O}_ S[T_0, \ldots , T_ n]$ is a graded $\mathcal{O}_ S$-module where each $T_ i$ is homogeneous of degree $1$. Denote $(\mathcal{O}_ S[T_0, \ldots , T_ n])_ d$ the degree $d$ summand. It is a finite locally free sheaf of rank $\binom {n + d}{d}$ on $S$. 
+</p>
+<p>
+<article class="env-lemma" id="01XW">
+  <p><a class="environment-identifier" href="/tag/01XW">Lemma <span data-tag="01XW">30.8.3</span>.</a> Let $S$ be a scheme. Let $n \geq 0$ be an integer. Consider the structure morphism </p>
+  <div class="equation">
+  \[  f : \mathbf{P}^ n_ S \longrightarrow S.  \]
+</div>
+  <p> We have </p>
+  <div class="equation">
+  \[  R^ qf_*(\mathcal{O}_{\mathbf{P}^ n_ S}(d)) = \left\{  \begin{matrix}  (\mathcal{O}_ S[T_0, \ldots , T_ n])_ d 
+
+&  \text{if} 
+
+&  q = 0 
+
+\\  0 
+
+&  \text{if} 
+
+&  q \not= 0, n 
+
+\\  \mathop{\mathcal{H}\! \mathit{om}}\nolimits _{\mathcal{O}_ S}( (\mathcal{O}_ S[T_0, \ldots , T_ n])_{- n - 1 - d}, \mathcal{O}_ S) 
+
+&  \text{if} 
+
+&  q = n 
+
+\end{matrix} \right.  \]
+</div>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Omitted. Hint: This follows since the identifications in (<a href="/tag/01XU" data-tag="01XU">30.8.1.1</a>) are compatible with affine base change by Lemma <a href="/tag/01XV" data-tag="01XV">30.8.2</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+Next we state the version for projective bundles associated to finite locally free sheaves. Let $S$ be a scheme. Let $\mathcal{E}$ be a finite locally free $\mathcal{O}_ S$-module of constant rank $n + 1$, see Modules, Section <a href="/tag/01C5" data-tag="01C5">17.14</a>. In this case we think of $\text{Sym}(\mathcal{E})$ as a graded $\mathcal{O}_ S$-module where $\mathcal{E}$ is the graded part of degree $1$. And $\text{Sym}^ d(\mathcal{E})$ is the degree $d$ summand. It is a finite locally free sheaf of rank $\binom {n + d}{d}$ on $S$. Recall that our normalization is that 
+</p>
+<div class="equation">
+  \[  \pi : \mathbf{P}(\mathcal{E}) = \underline{\text{Proj}}_ S(\text{Sym}(\mathcal{E})) \longrightarrow S  \]
+</div>
+<p>
+ and that there are natural maps $\text{Sym}^ d(\mathcal{E}) \to \pi _*\mathcal{O}_{\mathbf{P}(\mathcal{E})}(d)$. 
+</p>
+<p>
+<article class="env-lemma" id="01XX">
+  <p><a class="environment-identifier" href="/tag/01XX">Lemma <span data-tag="01XX">30.8.4</span>.</a> Let $S$ be a scheme. Let $n \geq 1$. Let $\mathcal{E}$ be a finite locally free $\mathcal{O}_ S$-module of constant rank $n + 1$. Consider the structure morphism </p>
+  <div class="equation">
+  \[  \pi : \mathbf{P}(\mathcal{E}) \longrightarrow S.  \]
+</div>
+  <p> We have </p>
+  <div class="equation">
+  \[  R^ q\pi _*(\mathcal{O}_{\mathbf{P}(\mathcal{E})}(d)) = \left\{  \begin{matrix}  \text{Sym}^ d(\mathcal{E}) 
+
+&  \text{if} 
+
+&  q = 0 
+
+\\  0 
+
+&  \text{if} 
+
+&  q \not= 0, n 
+
+\\  \mathop{\mathcal{H}\! \mathit{om}}\nolimits _{\mathcal{O}_ S}( \text{Sym}^{- n - 1 - d}(\mathcal{E}) \otimes _{\mathcal{O}_ S} \wedge ^{n + 1}\mathcal{E}, \mathcal{O}_ S) 
+
+&  \text{if} 
+
+&  q = n 
+
+\end{matrix} \right.  \]
+</div>
+  <p> These identifications are compatible with base change and isomorphism between locally free sheaves. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Consider the canonical map 
+    <p>
+      <div class="equation">
+  \[  \pi ^*\mathcal{E} \longrightarrow \mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)  \]
+</div>
+    <p>
+       and twist down by $1$ to get 
+    <p>
+      <div class="equation">
+  \[  \pi ^*(\mathcal{E})(-1) \longrightarrow \mathcal{O}_{\mathbf{P}(\mathcal{E})}  \]
+</div>
+    <p>
+       This is a surjective map from a locally free rank $n + 1$ sheaf onto the structure sheaf. Hence the corresponding Koszul complex is exact (More on Algebra, Lemma <a href="/tag/0626" data-tag="0626">15.29.5</a>). In other words there is an exact complex 
+    <p>
+      <div class="equation">
+  \[  0 \to \pi ^*(\wedge ^{n + 1}\mathcal{E})(-n - 1) \to \ldots \to \pi ^*(\wedge ^ i\mathcal{E})(-i) \to \ldots \to \pi ^*\mathcal{E}(-1) \to \mathcal{O}_{\mathbf{P}(\mathcal{E})} \to 0  \]
+</div>
+    <p>
+       We will think of the term $\pi ^*(\wedge ^ i\mathcal{E})(-i)$ as being in degree $-i$. We are going to compute the higher direct images of this acyclic complex using the first spectral sequence of Derived Categories, Lemma <a href="/tag/015J" data-tag="015J">13.21.3</a>. Namely, we see that there is a spectral sequence with terms 
+    <p>
+      <div class="equation">
+  \[  E_1^{p, q} = R^ q\pi _*\left(\pi ^*(\wedge ^{-p}\mathcal{E})(p)\right)  \]
+</div>
+    <p>
+       converging to zero! By the projection formula (Cohomology, Lemma <a href="/tag/01E8" data-tag="01E8">20.54.2</a>) we have 
+    <p>
+      <div class="equation">
+  \[  E_1^{p, q} = \wedge ^{-p} \mathcal{E} \otimes _{\mathcal{O}_ S} R^ q\pi _*\left(\mathcal{O}_{\mathbf{P}(\mathcal{E})}(p)\right).  \]
+</div>
+    <p>
+       Note that locally on $S$ the sheaf $\mathcal{E}$ is trivial, i.e., isomorphic to $\mathcal{O}_ S^{\oplus n + 1}$, hence locally on $S$ the morphism $\mathbf{P}(\mathcal{E}) \to S$ can be identified with $\mathbf{P}^ n_ S \to S$. Hence locally on $S$ we can use the result of Lemmas <a href="/tag/01XT" data-tag="01XT">30.8.1</a>, <a href="/tag/01XV" data-tag="01XV">30.8.2</a>, or <a href="/tag/01XW" data-tag="01XW">30.8.3</a>. It follows that $E_1^{p, q} = 0$ unless $(p, q)$ is $(0, 0)$ or $(-n - 1, n)$. The nonzero terms are 
+    <p>
+      <div class="equation">
+  \begin{align*}  E_1^{0, 0} &  = \pi _*\mathcal{O}_{\mathbf{P}(\mathcal{E})} = \mathcal{O}_ S \\  E_1^{-n - 1, n} &  = R^ n\pi _*\left(\pi ^*(\wedge ^{n + 1}\mathcal{E})(-n - 1)\right) = \wedge ^{n + 1}\mathcal{E} \otimes _{\mathcal{O}_ S} R^ n\pi _*\left(\mathcal{O}_{\mathbf{P}(\mathcal{E})}(-n - 1)\right) \end{align*}
+</div>
+    <p>
+       Hence there can only be one nonzero differential in the spectral sequence namely the map $d_{n + 1}^{-n - 1, n} : E_{n + 1}^{-n - 1, n} \to E_{n + 1}^{0, 0}$ which has to be an isomorphism (because the spectral sequence converges to the $0$ sheaf). Thus $E_1^{p, q} = E_{n + 1}^{p, q}$ and we obtain a canonical isomorphism 
+    <p>
+      <div class="equation">
+  \[  \wedge ^{n + 1}\mathcal{E} \otimes _{\mathcal{O}_ S} R^ n\pi _*\left(\mathcal{O}_{\mathbf{P}(\mathcal{E})}(-n - 1)\right) = R^ n\pi _*\left(\pi ^*(\wedge ^{n + 1}\mathcal{E})(-n - 1)\right) \xrightarrow {d_{n + 1}^{-n - 1, n}} \mathcal{O}_ S  \]
+</div>
+    <p>
+       Since $\wedge ^{n + 1}\mathcal{E}$ is an invertible sheaf, this implies that $R^ n\pi _*\mathcal{O}_{\mathbf{P}(\mathcal{E})}(-n - 1)$ is invertible as well and canonically isomorphic to the inverse of $\wedge ^{n + 1}\mathcal{E}$. In other words we have proved the case $d = - n - 1$ of the lemma. 
+    <p>
+      Working locally on $S$ we see immediately from the computation of cohomology in Lemmas <a href="/tag/01XT" data-tag="01XT">30.8.1</a>, <a href="/tag/01XV" data-tag="01XV">30.8.2</a>, or <a href="/tag/01XW" data-tag="01XW">30.8.3</a> the statements on vanishing of the lemma. Moreover the result on $R^0\pi _*$ is clear as well, since there are canonical maps $\text{Sym}^ d(\mathcal{E}) \to \pi _* \mathcal{O}_{\mathbf{P}(\mathcal{E})}(d)$ for all $d$. It remains to show that the description of $R^ n\pi _*\mathcal{O}_{\mathbf{P}(\mathcal{E})}(d)$ is correct for $d < -n - 1$. In order to do this we consider the map 
+    <p>
+      <div class="equation">
+  \[  \pi ^*(\text{Sym}^{-d - n - 1}(\mathcal{E})) \otimes _{\mathcal{O}_{\mathbf{P}(\mathcal{E})}} \mathcal{O}_{\mathbf{P}(\mathcal{E})}(d) \longrightarrow \mathcal{O}_{\mathbf{P}(\mathcal{E})}(-n - 1)  \]
+</div>
+    <p>
+       Applying $R^ n\pi _*$ and the projection formula (see above) we get a map 
+    <p>
+      <div class="equation">
+  \[  \text{Sym}^{-d - n - 1}(\mathcal{E}) \otimes _{\mathcal{O}_ S} R^ n\pi _*(\mathcal{O}_{\mathbf{P}(\mathcal{E})}(d)) \longrightarrow R^ n\pi _*\mathcal{O}_{\mathbf{P}(\mathcal{E})}(-n - 1) = (\wedge ^{n + 1}\mathcal{E})^{\otimes -1}  \]
+</div>
+    <p>
+       (the last equality we have shown above). Again by the local calculations of Lemmas <a href="/tag/01XT" data-tag="01XT">30.8.1</a>, <a href="/tag/01XV" data-tag="01XV">30.8.2</a>, or <a href="/tag/01XW" data-tag="01XW">30.8.3</a> it follows that this map induces a perfect pairing between $R^ n\pi _*(\mathcal{O}_{\mathbf{P}(\mathcal{E})}(d))$ and $\text{Sym}^{-d - n - 1}(\mathcal{E}) \otimes \wedge ^{n + 1}(\mathcal{E})$ as desired. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  // move extras from parent element to after environment name and number
+  $("article a[data-toggle]").each(function(index, element) {
+    $(element).insertAfter(($(element).parent().find("a.environment-identifier")));
+  });
+
+  $('article a[data-toggle="popover"]').popover()
+
+  // render mathematics in popovers
+  $("[data-toggle=popover]").on('shown.bs.popover', function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, $("div.popover-body").html()]);
+  });
+});
+  </script>
+
+  
+
+  
+    <section id="footnotes">
+    
+      <div><a id="footnote-1" class="footnote-offset"></a><a href="#footnote-1-mark">[1]</a>  For example, suppose that $i_0 < \ldots < i_ p$ is such that $i_{\text{fix}} \not\in \{ i_0, \ldots , i_ p\} $ and that $i_{a - 1} < i_{\text{fix}} < i_ a$ for some $1 \leq a \leq p$. Then we have <div class="equation">
+  \begin{align*} &  (dh + hd)(s)_{i_0 \ldots i_ p} \\ &  = \sum \nolimits _{j = 0}^ p (-1)^ j h(s)_{i_0 \ldots \hat i_ j \ldots i_ p} + (-1)^ a d(s)_{i_0 \ldots i_{a - 1} i_{\text{fix}} i_ a \ldots i_ p}\\ &  = \sum \nolimits _{j = 0}^{a - 1} (-1)^{j + a - 1} s_{i_0 \ldots \hat i_ j \ldots i_{a - 1} i_{\text{fix}} i_ a \ldots i_ p} + \sum \nolimits _{j = a}^ p (-1)^{j + a} s_{i_0 \ldots i_{a - 1} i_{\text{fix}} i_ a \ldots \hat i_ j \ldots i_ p} + \\ &  \sum \nolimits _{j = 0}^{a - 1} (-1)^{a + j} s_{i_0 \ldots \hat i_ j \ldots i_{a - 1} i_{\text{fix}} i_ a \ldots i_ p} + (-1)^{2a} s_{i_0 \ldots i_ p} + \sum \nolimits _{j = a}^ p (-1)^{a + j + 1} s_{i_0 \ldots i_{a - 1} i_{\text{fix}} i_ a \ldots \hat i_ j \ldots i_ p} \\ &  = s_{i_0 \ldots i_ p} \end{align*}
+</div> as desired. The other cases are similar.</div>
+    
+    </section>
+  
+</div>
+
+
+<hr>
+
+<section id="comments">
+  <h2>Comments (0)</h2>
+
+  
+
+  
+</section>
+
+<hr>
+
+<section id="post-comment">
+  <h2>Post a comment</h2>
+  <p>Your email address will not be published. Required fields are marked.
+  <p>In your comment you can use <a href="/markdown">Markdown</a> and LaTeX style mathematics (enclose it like <code>$\pi$</code>). A preview option is available if you wish to see how it works out (just click on the eye in the toolbar).
+  <noscript><p>Unfortunately JavaScript is disabled in your browser, so the comment preview function will not work.</p></noscript>
+
+  <p>All contributions are licensed under the <a href="https://github.com/stacks/stacks-project/blob/master/COPYING">GNU Free Documentation License</a>.
+
+  <form name="comment" id="comment-form" action="/post-comment" method="post">
+    <label for="name">Name<sup>*</sup>:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="mail">E-mail<sup>*</sup>:</label>
+    <input type="email" name="mail" id="mail" required><br>
+
+    <label for="site">Site:</label>
+    <input type="url" name="site" id="site"><br>
+
+    <label>Comment:</label>
+    <textarea name="comment" id="comment-textarea" cols="80" rows="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <script type="text/javascript">
+var easymde = new EasyMDE({
+  autosave: {
+    enabled: true,
+    delay: 1000,
+    uniqueId: "comment-01XS",
+  },
+  element: $("#comment")[0],
+  forceSync: true,
+  insertTexts: { link: ["\\ref{", "}"], table: ["$", "$"], image: ["\\begin{equation}\n", "\n\\end{equation}\n"] }, // we hack into these insertion methods, I couldn't figure out how to write your own...
+  placeholder: "You can type your comment here, use the preview option to see what it will look like. If your comment is on a lemma, please leave your comment on the page of the lemma. Same with remarks, propositions, theorems, etc.",
+  previewRender: function(plaintext, preview) {
+    // deal with references
+    plaintext = plaintext.replace(/\\ref\{([0-9A-Z]{4})\}/g, "<span class=\"tag\">[$1](/tag/$1)</span>");
+    // deal with \[\] getting replaced to []
+    plaintext = plaintext.replace(/\\\[/g, "\\begin{equation}");
+    plaintext = plaintext.replace(/\\\]/g, "\\end{equation}");
+
+    output = this.parent.markdown(plaintext);
+
+    setTimeout(function() {
+      preview.innerHTML = output;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }, 0);
+
+    return "";
+  },
+  spellChecker: false,
+  status: false,
+  toolbar: [
+    "link", {name: "inline", action: EasyMDE.drawTable, className: "fa fa-usd"}, {name: "block", action: EasyMDE.drawImage, className: "fa fa-square"}, "|",
+    "bold", "italic", "|",
+    "ordered-list", "unordered-list", "|",
+    "preview"
+  ],
+});
+
+// make sure to show tags, not numbers
+var tagToggleHappened = false; // only do this once to not annoy the user too much
+easymde.codemirror.on("change", function() {
+  // if data-tag elements do not have tag attribute we need to make tags visible
+  if (!$("*[data-tag]").hasClass("tag") && !tagToggleHappened)
+    $("section#meta input.toggle").bootstrapToggle("toggle");
+  tagToggleHappened = true;
+});
+
+// prevent form submit when the captcha isn't correct
+// it's a bit silly to use HTML5 validation for this, as bots can figure that out
+// also save the author information to localStorage
+easymde.element.form.addEventListener("submit", function(event) {
+  if ($("#check").val() != $("#hidden-tag").val()) {
+    // explain captcha
+    $("#captcha-message").toggle();
+
+    // stop submit
+    event.preventDefault();
+    return false;
+  }
+
+  // save author information
+  localStorage.setItem("name", $("input#name").val());
+  localStorage.setItem("mail", $("input#mail").val());
+  localStorage.setItem("site", $("input#site").val());
+});
+    </script>
+
+    <p>In order to prevent bots from posting comments, we would like you to prove that you are human. You can do this by <em>filling in the name of the current tag</em> in the following input field. As a reminder, this is tag <span class="tag">01XS</span>. Beware of the difference between the letter&nbsp;'<span class="tag">O</span>' and the digit&nbsp;'<span class="tag">0</span>'.</p>
+    <!--<p>This <abbr title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</abbr> seems more appropriate than the usual illegible gibberish, right?<br>-->
+    <label for="check">Tag:</label>
+    <input type="text" name="check" id="check" required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Post comment</button>
+    <input type="hidden" name="tag" id="hidden-tag" value="01XS"><br>
+
+    <p id="captcha-message" style="display: none" class="alert alert-warning" role="alert">The tag you filled in for the captcha is wrong. You need to write <span class="tag">01XS</span>, in case you are confused.</p>
+
+    <script type="text/javascript">
+// enter in captcha fields causes \ref to appear (?!)
+$("input#check").on("keypress", function(e) {
+  if (e.which == 13) {
+    // always stop the event
+    e.preventDefault();
+
+    // perform clientside check as for actual submit
+    if ($("#check").val() != $("#hidden-tag").val()) {
+      // explain captcha
+      $("#captcha-message").toggle();
+    }
+    else {
+      $("form#comment-form").submit();
+    }
+  }
+});
+    </script>
+  </form>
+</section>
+
+
+
+
+    </section>
+	  <div class="col-lg-4 col-xl-4">
+	    <section id="meta" class="row topbar sticky-top">
+        
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/071M">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/01XY">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  <hr>
+  
+    <a href="https://stacks.math.columbia.edu/download/coherent.pdf#nameddest=01XS">View Section <span data-tag="01XS">30.8</span> as pdf</a>
+  
+
+  
+
+
+      </section>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

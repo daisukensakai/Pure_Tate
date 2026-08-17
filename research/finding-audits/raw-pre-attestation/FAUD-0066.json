@@ -1,0 +1,47 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. Compatible with corroborated FND-0072 (ATT-0027 arc-contraction incompleteness) and FND-0071 (restriction kernel vs. whole group), but distinct: FND-0089 targets ATT-0037's specific chain-homotopy gap in ordered-arc insertion operators on Kunneth-decorated restriction complexes. Mathematical verification: (1) Boundary strata of Mbar_{g,n} are products of lower Mbar spaces connected by clutching maps xi_Gamma: Mbar_Gamma -> Mbar_{g,n}; restriction to one-edge strata involves Kunneth decompositions H^*(Mbar_{v1}) tensor H^*(Mbar_{v2}) at vertices. (2) An ordered-arc insertion operator on a combinatorial arc complex acts on formal generators; to induce a chain homotopy on the geometric restriction complex, one needs explicit transformation rules for how vertex cohomology classes behave under insertion (cohomological rule) and a comparison isomorphism between the arc complex and the Cech/de Rham restriction complex for the clutching stratification. (3) Without (a) and (b), the operator remains a formal combinatorial construction with no established relation to the geometric restriction kernel P^m_{g,n} = ker(H^*(Mbar_{g,n}) -> oplus_{|E(Gamma)|=1} H^*(Mbar_Gamma)), so Tate-type conclusions about P^m_{g,n} cannot be drawn from arc-insertion chain homotopies alone. (4) This is consistent with FND-0031 (at the pure corner, only depth-one Gysin from codim-1 strata contributes; multi-edge/arc-complex bookkeeping is irrelevant unless it controls that specific map) and with the packet's execution boundary requiring complete proof dependencies. Distinct from FND-0072 (broader ATT-0027 incompleteness) and FND-0071 (kernel vs. whole group): do not merge. Promote candidate to corroborated on independent verification of the chain-homotopy gap; evidence_class upgraded from adversarial_review to primary_source.",
+  "engine": "qwen",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0089",
+  "id": "FAUD-0066",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "applies_to": "attempts proving low-degree boundary-restriction kernels of H^*(overline M_{g,n}) are Tate",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "methods": [
+      "ordered stable-arc complex",
+      "boundary clutching pullbacks"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2307.08830"
+    },
+    {
+      "arxiv_id": "2209.03113",
+      "arxiv_version": "v2",
+      "content_sha256": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3",
+      "doi": "10.1017/fms.2023.59",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2209.03113"
+    }
+  ],
+  "task_id": "TASK-F-FND-0089",
+  "verdict": "promote"
+}

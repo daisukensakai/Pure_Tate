@@ -1,0 +1,89 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction. contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001 or RED-0001: it is a statement of intersection-theoretic bookkeeping inside the C66-COMP-RANK determinantal computation and is orthogonal to the weight/Hodge-theoretic claim ladder. Verification of the mathematical content. (1) Excess bundle orientation. Fulton, Intersection Theory 2nd ed., Chapter 6, section 6.3 'Excess Intersection Formula' states for the fibre square with X regularly embedded in Y of codimension d, f : V -> Y, W = f^{-1}(X): 'If the imbedding of W in V is regular of codimension d', then E = g^*N_X Y / N_W V is the quotient bundle, there is an excess intersection formula X.V = c_{d-d'}(E) cap [W]', with the alternative Segre form 'X.V is the (k-d)-dimensional component of the class c(g^*N_X Y) cap s(W,V)'. Transposed to the finding's letters (Y = P, X = image of e, V = B, W = Z), E is a QUOTIENT of the pullback of the normal bundle of the zero section, never a dual or a subsheaf. Cross-checked independently against Getzler, J. Amer. Math. Soc. 10 (1997), Prop. 1.4, citing Fulton section 6.3: 'where E = (N_X Y)|_W/(N_W V) is the excess bundle of the intersection ... [X].[V] = c_e(E) cap [W]', and against Vakil, Stanford Math 245 Intersection Theory Class 17: 'Let E = g^*N/N' be the quotient vector bundle', 'Excess intersection formula ... i^!(alpha) = c_e(q^*E) cap (i')^!(alpha)'. (2) Identification of that quotient with coker(da_N). N_e = e^*T_{P/B} = Lie(P/B), and Kleiman, 'The Picard scheme' (arXiv:math/0504020), Remark 5.12 gives the relative form: 'R^1 f_* O_X is equal to the normal sheaf of Pic_{X/S} along the identity section, its Lie algebra; the latter is simply the dual of the restriction to this section of the sheaf of relative differentials' (absolute form, Theorem 5.11: 'T_0 Pic_{X/k} = H^1(O_X)'). The canonical map N_{Z/B} -> g^*N_e is induced by the derivative of a_N, whose kernel along Z is T_Z when Z is smooth, so the quotient is exactly coker(da_N : T_B -> a_N^*T_{P/B})|_Z, a quotient of a_N^*R^1 pi_* O_C|_Z. Its dual is a subsheaf of pi_* omega_C|_Z; the two are genuinely different bundles, so the finding's correction is substantive and correct. (3) Chern-class rider. Verified directly at Stacks Project Lemma 42.43.3 (tag 0FA5): 'Let E be a finite locally free O_X-module with dual E^vee. Then c_i(E^vee) = (-1)^i c_i(E) in A^i(X)'. Hence c_2(E^vee) = c_2(E), confirming the finding's rider, and the audit records the three sharpenings entered in scope.clause_c_rank_two_rider and scope.clause_d_regular_embedding_hypothesis: c_2 agreement is rank-independent (the rank-two hypothesis is what makes c_2 the top class), top-Chern agreement fails in odd excess rank, 'rank two' is equivalent to the undischarged codim_B(Z) = 4, and the bundle form itself presupposes that Z is regularly embedded in B, which FND-0068 leaves open; in the Segre-class fallback c(g^*N_e) cap s(Z,B) the dualization error is NOT harmless because c_1 flips sign. Relation to the adjudicated corpus: complementary to and downstream of FND-0096 (which supplies the universal Pic^0 lemma Fit_0(coker) = I_e and identifies the intrinsic derivative at e with the perfect Serre pairing, and is what licenses treating the failure locus as the scheme-theoretic fibre a_N^{-1}(e) so that the excess square may be formed at all), and complementary to FND-0122 (ranks of phi and phi_5 and the trivial deeper minor ideals). Distinct from both in content: neither states the typing of the zero section nor the orientation of the excess bundle. Also distinct from FND-0046/FND-0047/FND-0107 (fibrewise-versus-scheme-theoretic identifications and the correct Abel-Jacobi representability model) and from FND-0058/FND-0069/FND-0086 (dimension and component analysis of Z), which it depends on rather than duplicates. Merge target: none. Verdict promote (candidate -> corroborated), evidence_class upgraded from adversarial_review to primary_source, with the scope object above replacing the finding's bare {g:6,n:6} case scope: clauses (a) and (b) are general facts about a section of a smooth group scheme over an arbitrary base and transport verbatim to any (g,n), while the operative rank-two mitigation is (6,6)-specific AND conditional on codim_B(Z) = 4 and on Z being regularly embedded in B. Two disclosures. Provenance: ATT-0084 and REV-0131 are absent from this read-only workspace, so the claim that ATT-0084 literally writes 'e : H -> P' and that its H differs from its B was not re-audited; this follows the FAUD-0002/FAUD-0003 precedent and is not required for the mathematical promotion, which rests only on the finding's own stated hypothesis P = Pic^0_{C/B}. Retrieval: content_sha256 is recorded as null on every source record because this workspace has no shell and no write access, so no digest could be computed; the fields are left null rather than populated with unverified values. Access notes: the Stacks Project lemma was opened and quoted directly by this reviewer; the Springer chapter page for Fulton Chapter 6 redirected to an authentication endpoint, so the section 6.3 quotation above is the publisher chapter abstract as surfaced in search results and independently corroborated by the two open sources (Getzler and Vakil) that state the same quotient formula; the Kleiman statements were retrieved via ar5iv by the single dispatched read-only worker after this reviewer's own PDF fetches failed to render (no poppler in the environment), and are consistent with the standard deformation theory of Pic used elsewhere in the campaign corpus.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0129",
+  "id": "FAUD-0128",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "campaign_revision": 4,
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "clause_a_typing": "Under the finding's own hypothesis P = Pic^0_{C/B}, the zero section is by definition the identity section e : B -> P, and e^![B] lands in A_{dim B - g}(Z) with g = 6 the relative dimension of P/B. A symbol 'e : H -> P' is then not a morphism at all unless H = B, so the refined pullback as written has no source; this is a typing/notation defect, correctly diagnosed. Precision rider added by this audit: the defect is hypothesis-relative, not absolute. If instead P is taken relative to H (P = Pic^0_{C/H} with a structure map B -> H), then e : H -> P is the legitimate zero section, the square with a_N : B -> P is well typed, and e^![B] in A_{dim B - g}(H x_P B) is defined; what then changes is the base over which N_e is computed, so the excess computation must be re-based rather than merely re-lettered. The finding is correct as stated because it fixes P = Pic^0_{C/B} first.",
+    "clause_b_excess_bundle": "Correct, and general. e is a regular embedding of codimension g (a section of a smooth morphism is a regular embedding), with N_e = e^*T_{P/B} = Lie(P/B) = R^1 pi_* O_C. Fulton's excess bundle for the square is the QUOTIENT E = g^*N_e / N_{Z/B}, and the canonical inclusion N_{Z/B} -> g^*N_e is the one induced by the intrinsic derivative of a_N; hence E = coker(da_N : T_B -> a_N^*T_{P/B})|_Z. It is a quotient of a_N^*R^1 pi_* O_C|_Z. Its dual is a different sheaf, a subsheaf of pi_* omega_C|_Z under Serre duality, so the distinction is substantive and not a matter of convention.",
+    "clause_c_rank_two_rider": "Correct but weaker than it reads, on three counts sharpened here. (i) c_2(E^vee) = c_2(E) holds in EVERY rank, since c_i(E^vee) = (-1)^i c_i(E); the rank-two hypothesis is what makes c_2 the TOP Chern class and hence the whole excess contribution. (ii) c_top(E^vee) = (-1)^r c_top(E) for rank r, so the dualization error is harmless only for EVEN excess rank; at excess rank 1, 3, 5 it flips the sign of the answer. (iii) Excess rank = g - codim_B(Z) = 6 - codim_B(Z), so 'rank two' is exactly the assertion codim_B(Z) = 4, which the campaign has NOT discharged (FND-0058 leaves the constancy of h^0(omega_C(-D)) = 3 on the whole balanced locus unproved, FND-0069 proves only one smooth 17-dimensional dominant component and excludes neither larger components over special curve loci nor failure of purity, FND-0086 records that no exhaustive component/codimension analysis of Z exists). The mitigation is therefore conditional on an undischarged codimension claim and cannot be relied on globally.",
+    "clause_d_regular_embedding_hypothesis": "Added scope condition, not stated by the finding. Fulton's bundle-form excess formula e^![B] = c_top(E) cap [Z] presupposes that Z is regularly embedded in B; only then is N_{Z/B} a subbundle of g^*N_e and E a bundle. Regular embeddedness of the CE failure locus is precisely what FND-0068 flags as unestablished (a nowhere-lci or lci conclusion needs local ideal-depth/conormal calculations absent from the campaign). Absent that hypothesis, only the Segre-class form {c(g^*N_e) cap s(Z,B)}_{dim B - g} is available, and there the class involves c_1(g^*N_e) and all lower Chern classes, where dualization DOES change the answer by sign. So the 'harmless in rank two' rider applies to the bundle form with even excess rank and to nothing else.",
+    "coefficients": "Chow groups A_*, integral; conclusions unchanged with Q coefficients",
+    "generality": "Clauses (a), (b) and the Chern-class identity are general facts about a section of a smooth group scheme over an arbitrary locally Noetherian base and are not specific to (g,n) = (6,6); the (6,6)-specificity enters only through g = 6 (codimension of e, hence excess rank 6 - codim Z) and through the degree-zero condition deg N = 0 that makes a_N land in Pic^0 at all (FND-0074, FND-0096).",
+    "impacts_approach_ids": [
+      "C66-COMP-RANK"
+    ],
+    "kind_correction": "Recorded kind is 'obstruction'; the content is a typing correction plus a bundle-orientation correction with a conditional harmlessness rider, i.e. 'correction'/'bookkeeping'. It does not obstruct the excess-square strategy for C66-COMP-RANK; it repairs it.",
+    "objects": [
+      "zero section e of P = Pic^0_{C/B} over the base B carrying the family C/B with its six sections",
+      "classifying map a_N : B -> P of the relative degree-zero bundle N",
+      "fibre square Z = B x_{a_N, P, e} B and the refined Gysin class e^![B]",
+      "Fulton excess bundle E for that square"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "chern-class-of-dual",
+      "retrieved_at": "2026-08-12T06:52:20Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/0FA5"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": "10.1007/978-1-4612-1700-8_7",
+      "query_family": "excess-intersection-bundle-orientation",
+      "retrieved_at": "2026-08-12T06:46:40Z",
+      "source_type": "book_chapter",
+      "url": "https://link.springer.com/chapter/10.1007/978-1-4612-1700-8_7"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": "10.1090/S0894-0347-97-00246-4",
+      "query_family": "excess-intersection-bundle-orientation-crosscheck",
+      "retrieved_at": "2026-08-12T06:50:41Z",
+      "source_type": "journal",
+      "url": "https://doi.org/10.1090/s0894-0347-97-00246-4"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "excess-intersection-bundle-orientation-crosscheck",
+      "retrieved_at": "2026-08-12T06:50:41Z",
+      "source_type": "lecture_notes",
+      "url": "https://math.stanford.edu/~vakil/245/245class17.pdf"
+    },
+    {
+      "arxiv_id": "math/0504020",
+      "arxiv_version": "v1",
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "picard-zero-section-normal-bundle",
+      "retrieved_at": "2026-08-12T06:50:41Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/math/0504020"
+    }
+  ],
+  "task_id": "TASK-F-FND-0129",
+  "verdict": "promote"
+}

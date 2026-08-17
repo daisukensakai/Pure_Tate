@@ -837,6 +837,97 @@ class PairedAttemptPolicyTests(unittest.TestCase):
             self.assertIn("Provisional lemma", trace["observable_stdout"])
             self.assertFalse(output.exists())
 
+    def test_ordinary_nonzero_stream_preserves_partial_claude_progress(self):
+        from pure_tate.paired import ObservableInfrastructureError
+
+        task = copy.deepcopy(self.task)
+        task["phase"] = "mathematics"
+        task["subproblem_id"] = "C66-GEO-COMP"
+        task["lane"] = "geometry"
+        for key in list(task):
+            if key.startswith("paired_"):
+                task.pop(key)
+        partial = json.dumps(
+            {
+                "type": "stream_event",
+                "event": {
+                    "type": "content_block_delta",
+                    "delta": {
+                        "type": "text_delta",
+                        "text": "Stacky monodromy repair in progress.",
+                    },
+                },
+            }
+        )
+        process = SimpleNamespace(
+            returncode=1,
+            stdout=partial,
+            stderr="session limit reached",
+        )
+        with tempfile.TemporaryDirectory(
+            dir=ROOT / "research"
+        ) as directory, mock.patch(
+            "pure_tate.paired.TRACE_DIR", Path(directory)
+        ), mock.patch(
+            "pure_tate.agents._validate_output_path"
+        ), mock.patch(
+            "pure_tate.agents.shutil.which", return_value="/usr/bin/claude"
+        ), mock.patch(
+            "pure_tate.agents.run_captured_process", return_value=process
+        ):
+            output = Path(directory) / "ATT-9998.json"
+            with self.assertRaises(ObservableInfrastructureError) as raised:
+                run_task(task, "claude", output)
+            traces = list(Path(directory).glob("TRACE-*.json"))
+            self.assertEqual(len(traces), 1)
+            trace = json.loads(traces[0].read_text())
+            self.assertEqual(trace["classification"], "infrastructure")
+            self.assertEqual(trace["turn_kind"], "mathematics")
+            self.assertIn("Stacky monodromy", trace["observable_stdout"])
+            self.assertIn("session limit", trace["observable_stderr"])
+            self.assertEqual(raised.exception.trace_id, trace["id"])
+            self.assertFalse(output.exists())
+
+    def test_ordinary_watchdog_preserves_partial_output(self):
+        from pure_tate.paired import ObservableInfrastructureError
+        from pure_tate.process_runner import ProcessWatchdogError
+
+        task = copy.deepcopy(self.task)
+        task["phase"] = "mathematics"
+        task["subproblem_id"] = "C66-GEO-COMP"
+        task["lane"] = "geometry"
+        for key in list(task):
+            if key.startswith("paired_"):
+                task.pop(key)
+        failure = ProcessWatchdogError(
+            "inactivity timeout",
+            600.0,
+            "Partial scheme-atlas descent argument.",
+            "",
+        )
+        with tempfile.TemporaryDirectory(
+            dir=ROOT / "research"
+        ) as directory, mock.patch(
+            "pure_tate.paired.TRACE_DIR", Path(directory)
+        ), mock.patch(
+            "pure_tate.agents._validate_output_path"
+        ), mock.patch(
+            "pure_tate.agents.shutil.which", return_value="/usr/bin/claude"
+        ), mock.patch(
+            "pure_tate.agents.run_captured_process", side_effect=failure
+        ):
+            output = Path(directory) / "ATT-9998.json"
+            with self.assertRaises(ObservableInfrastructureError):
+                run_task(task, "claude", output)
+            traces = list(Path(directory).glob("TRACE-*.json"))
+            self.assertEqual(len(traces), 1)
+            trace = json.loads(traces[0].read_text())
+            self.assertEqual(trace["classification"], "infrastructure")
+            self.assertEqual(trace["turn_kind"], "mathematics")
+            self.assertIn("scheme-atlas descent", trace["observable_stdout"])
+            self.assertIn("inactivity timeout", trace["validation_error"])
+            self.assertFalse(output.exists())
+
     def test_review_validation_failure_preserves_observable_trace(self):
         from pure_tate.agents import run_task
         from pure_tate.campaigns import campaign_packet_record

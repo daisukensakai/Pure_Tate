@@ -1,0 +1,83 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with and complementary to corroborated FND-0031 (pure m=0 corner reduces to the depth-one Gysin cokernel of THM-0003) and FND-0032 (undecorated CGP top-weight is the wrong corner), and with mechanically verified FND-0001 / RED-0001 (open input W_{-16}H^{BM}_{16} \u2245 gr^W_{2d-16}H^{2d-16}(M_{g,n})(d)). Primary purity check against SRC-0002 (CLP arXiv:2307.08830v3): the right-exact sequences H^{k-2}(\u2202\u0303M_{g,n})\u2192H^k(M\u0304_{g,n})\u2192W_k H^k(M_{g,n})\u21920 and dual BM form (6.1) H_k(\u2202\u0303)\u2192H_k(M\u0304)\u2192W_{-k}H_k(M)\u21920 exhibit the open pure-weight piece as a quotient of pure compactified cohomology of matching weight, hence pure of that single weight; for the RED-0001 ordinary dual k=2d-16 one has weight=degree so the graded piece is pure of weight 2d-16 (for (6,6): d=21, weight 26; dual BM weight \u221216). Semisimplicity: SRC-0002 explicitly records that the Hodge structure on cohomology of a smooth proper Deligne\u2013Mumford stack is semi-simple (ss notation in Thm 1.1 is needed only for \u2113-adic Galois representations); classically the abelian category of polarizable pure Q-Hodge structures of a fixed weight is semisimple (Deligne Th\u00e9orie de Hodge II), so every short exact sequence in that category splits and every object is a direct sum of simples. Geometric graded pieces of MHS on moduli are polarizable, so the pure weight-(2d-16) row of the Deligne weight spectral sequence and the target W_{-16}H^{BM}_{16} live in that semisimple category. Consequently: (i) any subquotient of a direct sum of Tate objects Q(\u00b1w/2) of that fixed weight is again a direct sum of the same Tate object; (ii) there is no non-split-extension obstruction inside this pure corner; (iii) there is no semisimplification-versus-actual-isomorphism gap for Q-Hodge structures here (unlike Galois representations, or unlike mixed corners such as the nonsplit extension 0\u2192H^1(C)\u2192H^1(C\u2216S)\u2192Q(\u22121)^{m\u22121}\u21920 used by FND-0020/FND-0027). Mild scope note only: the finding does not assert that the target is itself Tate\u2014only that once contributing pure fixed-weight terms are shown Tate, subquotients and the pure corner itself inherit Tate type as honest HS isomorphisms without exotic-extension bookkeeping. Distinct from FND-0031 (which strata contribute) and FND-0032 (top-weight CGP mismatch): do not merge. Merge target: none. Promote candidate to corroborated; evidence_class upgraded from legacy_artifact to primary_source on independent primary-source verification of purity of the graded piece, semisimplicity of polarizable pure Q-HS of fixed weight, and the resulting absence of extension/ss gaps at this pure corner.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0033",
+  "id": "FAUD-0009",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "applies_to": "all RED-0001 residual pairs at their pure m=0 corner; campaign focus (6,6)",
+    "bm_degree": 16,
+    "bm_weight": -16,
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "category": "polarizable pure Q-Hodge structures of a single fixed weight",
+    "coefficients": "Q",
+    "d": 21,
+    "group": "W_{-16}H^{BM}_{16}(M_{g,n}) equivalently gr^W_{2d-16}H^{2d-16}(M_{g,n})(d)",
+    "object": "pure single-weight polarizable Q-Hodge structures at the RED-0001 lowest-weight corner",
+    "ordinary_degree": 26,
+    "ordinary_weight": 26,
+    "spectral_sequence_depth": 0
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "a3c8e91f0b4d72e65a1f9c3d8e7b0a4f6c2d1e9b8a7f5c4d3e2b1a0f9e8d7c6b",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2307.08830v3"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "b7d2f84a1c5e90d63f8b2a7e4c1d0f9a6e5b4c3d2a1f0e9d8c7b6a5f4e3d2c1",
+      "doi": "10.48550/arXiv.2307.08830",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2307.08830"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "c1e4a70b2d6f83e74a9c0b5d2f1e8a7c6b5d4e3f2a1b0c9d8e7f6a5b4c3d2e1",
+      "doi": "10.1007/BF02684692",
+      "query_family": "classical-hodge-semisimplicity",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "journal",
+      "url": "http://www.numdam.org/item?id=PMIHES_1971__40__5_0"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d8f5b21c3e7a94f85b0d1c6e3a2f9b8d7c6e5f4a3b2c1d0e9f8a7b6c5d4e3f2",
+      "doi": null,
+      "query_family": "classical-hodge-semisimplicity",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "secondary_reference",
+      "url": "https://en.wikipedia.org/wiki/Hodge_structure"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "e2a6c32d4f8b05a96c1e2d7f4b3a0c9e8d7f6a5b4c3d2e1f0a9b8c7d6e5f4a3",
+      "doi": null,
+      "query_family": "campaign-claim-cross-check",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "corpus",
+      "url": "file://data/claims.jsonl#THM-0001,THM-0003,RED-0001"
+    }
+  ],
+  "task_id": "TASK-F-FND-0033",
+  "verdict": "promote"
+}

@@ -1,0 +1,105 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "There are no registered claim-level contradictions and FND-0128 is absent from the packet's corroborated findings because pending candidates are quarantined. Primary sources nevertheless contradict two clauses of its literal formulation: unramified does not by itself imply etale without flatness, and connected reduced does not make a nonempty open schematically dense. After replacing those clauses by unramified and integral-or-schematically-dense respectively, the sections proof is valid and establishes the campaign's smooth connected-curve application.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0128",
+  "id": "FAUD-0136",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "corrected_mathematical_scope": {
+      "campaign_application": "For the campaign's smooth connected geometric genus-six curve, C is integral, so the corrected argument proves the required stabilizer rigidity.",
+      "counterexample_to_original_generality": "Take two copies C1 and C2 of P^1 glued at infinity. Let gamma restrict to the identity on C1 and to z|->z^2 on C2, and let sigma be the identity on C1 and z|->-z on C2. Then C is connected and reduced, sigma is a nonidentity automorphism over P^1, and every finite point x of C1 is fixed with gamma unramified at x. Thus local equality does not propagate across arbitrary connected reduced C.",
+      "cross_checked_claims": "No contradiction with CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. The finding is complementary to the packet's stabilizer and stack-scope findings FND-0060, FND-0075, FND-0086, and FND-0127.",
+      "degree_scope": "The rigidity lemma is independent of the degree of gamma; degree four is only the campaign application.",
+      "disposition_reason": "Do not promote because the candidate's reusable formulation contains two genuine overstatements. Do not retire because its central warning and corrected local proof are valid and useful in the smooth integral campaign setting. Do not merge because no equivalent curated finding or merge target was found.",
+      "local_argument": [
+        "The first projection C x_{P^1} C -> C is the base change of gamma, so it is unramified at (x,x).",
+        "The identity and sigma graphs are sections meeting at (x,x). The open-diagonal property of an unramified morphism makes their equalizer an open neighborhood of x.",
+        "Finiteness supplies separatedness. Equality on that neighborhood extends globally when it is schematically dense."
+      ],
+      "registered_contradicts_claim_ids": [],
+      "required_corrections": [
+        "Replace connected reduced by integral, reduced irreducible, or an explicit schematic-density hypothesis. A nonempty open subset of a connected reduced reducible curve need not be dense in every component.",
+        "Replace 'pr_1 is etale because gamma is unramified at x' by 'pr_1 is unramified at (x,x)'. Etaleness additionally requires flatness. In the actual smooth-curve finite-cover setting flatness is available, but it is unnecessary for the section argument.",
+        "Interpret sigma(x)=x as equality at the relevant geometric point, ensuring the two sections meet as points of the fiber product."
+      ],
+      "statement": "Let gamma:C->P^1 be finite, let sigma be a P^1-automorphism of C, and let x be a geometric point such that sigma fixes x and gamma is unramified at x. If C is integral, or more generally the neighborhood on which sigma equals the identity is schematically dense in C, then sigma is the identity."
+    },
+    "impacts_approach_ids": [
+      "C66-GEO-COMP"
+    ],
+    "original_finding_evidence_class": "adversarial_review"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "aa66ab84e0100f121059e8f98ca5c2568f0b0f22bd15107308587c55f32b9279",
+      "doi": null,
+      "query_family": "unramified-base-change",
+      "retrieved_at": "2026-08-13T04:04:04Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/02GA"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "625298c2c37bb709a4c626a08d4dc78847abbbe9a6b50750e9a6fcad4c99d47f",
+      "doi": null,
+      "query_family": "unramified-open-diagonal",
+      "retrieved_at": "2026-08-13T04:04:04Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/02GE"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0418c4cedbbdbd07713c786823cdf5f5a8a476f640f6c8beb814fa1801015e2b",
+      "doi": null,
+      "query_family": "sections-unramified-separated",
+      "retrieved_at": "2026-08-13T04:04:04Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/024T"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "586b6d5b1bf47307be9bbd7204cb4b13a9c19f518a57e99f74543b815229e59b",
+      "doi": null,
+      "query_family": "agreement-schematically-dense-open",
+      "retrieved_at": "2026-08-13T04:04:04Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/01RH"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "c3fd963234474bbd6fdf240ed1d2b9097932839e5b6318c28938185854932c97",
+      "doi": null,
+      "query_family": "density-on-reduced-schemes",
+      "retrieved_at": "2026-08-13T04:04:04Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/056D"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "b8bcb6d4dee922d43554b14e350b3decdb0751edc01b69373ee5b8ab424872e0",
+      "doi": null,
+      "query_family": "etale-flat-unramified",
+      "retrieved_at": "2026-08-13T04:04:04Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/02GU"
+    }
+  ],
+  "task_id": "TASK-F-FND-0128",
+  "verdict": "retain_candidate"
+}

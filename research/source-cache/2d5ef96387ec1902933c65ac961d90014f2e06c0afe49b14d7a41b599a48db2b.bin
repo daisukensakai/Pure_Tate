@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#d9d8d1">
+
+<title>Section 36.32 (0BDM): Applications&mdash;The Stacks project</title>
+
+<meta name="description" content="an open source textbook and reference work on algebraic geometry">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ['tex2jax.js'],
+    jax: ['input/TeX','output/HTML-CSS'],
+    TeX: {
+      extensions: ['AMSmath.js', 'AMSsymbols.js', '/static/XyJax/extensions/TeX/xypic.js'],
+      Macros: {
+        linebreak: ["", 1, ""],
+        },
+      TagSide: 'left'
+    },
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    },
+    'HTML-CSS': {
+    	scale: 100,
+	availableFonts: [],
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+
+
+  <script type="text/javascript" src="/static/js/toggle.js"></script>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/easymde@2.0.1/dist/easymde.min.css" integrity="sha384-IRbzB9px0sfIx90vkN+geaX3F4LVcg/M+k5vmVkfjs5TnRX3MIhGS8Ma06ALKVYp" crossorigin="anonymous">
+  <script src="https://unpkg.com/easymde@2.0.1/dist/easymde.min.js" integrity="sha384-v06sb0t0ToY1YRtVlfD/GCGpIZ/QHYyeH2Gzjvr0ZJI62/50DIzT8XRgQ6JvptVu" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.css" integrity="sha384-8xTxM5sJRAUB0ckdBghB5am+aw+0kC5FfSUzMI+KI+UD8uBCNeSkdi8I1J4+Wjwu" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.js" integrity="sha384-gE5xOW4MVOjJL1A2SbxwvQw/qet6h8Vdv06j3JQGhBW4d1H5hXYB12WsrUBgU439" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid bounded">
+  <div id="first-bar" class="row topbar inner-top top">
+    <header class="col">
+      <h1><a href="/">The Stacks project</a></h1>
+    </header>
+
+    <nav id="header">
+      <ul id="quicklinks">
+        <li><a href="/bibliography">bibliography</a>
+        <li><a href="https://www.math.columbia.edu/~dejong/wordpress/">blog</a>
+      </ul>
+
+      <form id="quicksearch" action="/search">
+        <span id="search-icon"><img src="/static/images/search.svg"></span>
+        <input type="search" name="query" size="16" placeholder="keywords or a tag" value="">
+      </form>
+    </nav>
+  </div>
+
+  <nav id="second-bar" class="row topbar sticky-top">
+    
+      <ul class="col-11 col-sm-11 col-md-11 col-lg-12 col-xl-12" id="crumbs">
+        <li><a href="/browse">Table of contents</a></li>
+        
+  
+  
+    <li>Part <a href="/tag/0ELP" data-tag="0ELP">2</a>: Schemes
+    
+  
+    <li>Chapter <a href="/tag/08CU" data-tag="08CU">36</a>: Derived Categories of Schemes
+    
+  
+    <li class="active">Section <a href="/tag/0BDM" data-tag="0BDM">36.32</a>: Applications
+    <span id="citation">(<a href="/tag/0BDM/cite">cite</a>)</span>
+  
+
+
+      </ul>
+    
+
+    
+      <div class="col-1 col-sm-1 col-md-1" id="burger">
+        <input type="checkbox" id="burger-input"></input>
+
+        <label id="burger-icon" for="burger-input">
+          <span id="top-bun"></span>
+          <span id="meat"></span>
+          <span id="bottom-bun"></span>
+        </label>
+
+        <div id="burger-content">
+          
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0BDH">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/0CRN">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  
+
+
+        </div>
+      </div>
+    
+
+    
+  </nav>
+
+  <div class="row" id="content">
+    <section id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      
+<div class="html" id="tag">
+  
+
+  
+
+  
+
+  <h2 id="perfect-section-applications" class="tex-section"><span data-tag="0BDM">36.32</span> Applications</h2>
+
+<p>
+Mostly applications of cohomology and base change. In the future we may generalize these results to the situation discussed in Lemma <a href="/tag/0A1H" data-tag="0A1H">36.30.1</a>. 
+</p>
+<p>
+<article class="env-lemma" id="0BDN">
+  <p><a class="environment-identifier" href="/tag/0BDN">Lemma <span data-tag="0BDN">36.32.1</span>.</a> Let $f : X \to S$ be a proper morphism of finite presentation. Let $\mathcal{F}$ be an $\mathcal{O}_ X$-module of finite presentation, flat over $S$. For fixed $i \in \mathbf{Z}$ consider the function </p>
+  <div class="equation">
+  \[  \beta _ i : S \to \{ 0, 1, 2, \ldots \} ,\quad s \longmapsto \dim _{\kappa (s)} H^ i(X_ s, \mathcal{F}_ s)  \]
+</div>
+  <p> Then we have </p>
+  <p><ol>
+  <li><p>
+formation of $\beta _ i$ commutes with arbitrary base change, 
+</p>
+</li><li><p>
+the functions $\beta _ i$ are upper semi-continuous, and 
+</p>
+</li><li><p>
+the level sets of $\beta _ i$ are locally constructible in $S$. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      By cohomology and base change (more precisely by Lemma <a href="/tag/0B91" data-tag="0B91">36.30.4</a>) the object $K = Rf_*\mathcal{F}$ is a perfect object of the derived category of $S$ whose formation commutes with arbitrary base change. In particular we have 
+    <p>
+      <div class="equation">
+  \[  H^ i(X_ s, \mathcal{F}_ s) = H^ i(K \otimes _{\mathcal{O}_ S}^\mathbf {L} \kappa (s))  \]
+</div>
+    <p>
+       Thus the lemma follows from Lemma <a href="/tag/0BDI" data-tag="0BDI">36.31.1</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0B9T">
+  <p><a class="environment-identifier" href="/tag/0B9T">Lemma <span data-tag="0B9T">36.32.2</span>.</a> Let $f : X \to S$ be a proper morphism of finite presentation. Let $\mathcal{F}$ be an $\mathcal{O}_ X$-module of finite presentation, flat over $S$. The function </p>
+  <div class="equation">
+  \[  s \longmapsto \chi (X_ s, \mathcal{F}_ s)  \]
+</div>
+  <p> is locally constant on $S$. Formation of this function commutes with base change. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      By cohomology and base change (more precisely by Lemma <a href="/tag/0B91" data-tag="0B91">36.30.4</a>) the object $K = Rf_*\mathcal{F}$ is a perfect object of the derived category of $S$ whose formation commutes with arbitrary base change. Thus we have to show the map 
+    <p>
+      <div class="equation">
+  \[  s \longmapsto \sum (-1)^ i \dim _{\kappa (s)} H^ i(K \otimes ^\mathbf {L}_{\mathcal{O}_ S} \kappa (s))  \]
+</div>
+    <p>
+       is locally constant on $S$. This is Lemma <a href="/tag/0BDJ" data-tag="0BDJ">36.31.2</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0B9S">
+  <p><a class="environment-identifier" href="/tag/0B9S">Lemma <span data-tag="0B9S">36.32.3</span>.</a> Let $f : X \to S$ be a proper morphism of finite presentation. Let $\mathcal{F}$ be an $\mathcal{O}_ X$-module of finite presentation, flat over $S$. Fix $i, r \in \mathbf{Z}$. Then there exists an open subscheme $U \subset S$ with the following property: A morphism $T \to S$ factors through $U$ if and only if $Rf_{T, *}\mathcal{F}_ T$ is isomorphic to a finite locally free module of rank $r$ placed in degree $i$. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      By cohomology and base change (more precisely by Lemma <a href="/tag/0B91" data-tag="0B91">36.30.4</a>) the object $K = Rf_*\mathcal{F}$ is a perfect object of the derived category of $S$ whose formation commutes with arbitrary base change. Thus this lemma follows immediately from Lemma <a href="/tag/0BDK" data-tag="0BDK">36.31.3</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0D4E">
+  <p><a class="environment-identifier" href="/tag/0D4E">Lemma <span data-tag="0D4E">36.32.4</span>.</a> Let $f : X \to S$ be a morphism of finite presentation. Let $\mathcal{F}$ be an $\mathcal{O}_ X$-module of finite presentation, flat over $S$ with support proper over $S$. If $R^ if_*\mathcal{F} = 0$ for $i > 0$, then $f_*\mathcal{F}$ is locally free and its formation commutes with arbitrary base change (see proof for explanation). </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      By Lemma <a href="/tag/0A1H" data-tag="0A1H">36.30.1</a> the object $E = Rf_*\mathcal{F}$ of $D(\mathcal{O}_ S)$ is perfect and its formation commutes with arbitrary base change, in the sense that $Rf'_*(g')^*\mathcal{F} = Lg^*E$ for any cartesian diagram 
+    <p>
+      <div class="equation">
+  \[  \xymatrix{ X' \ar[r]_{g'} \ar[d]_{f'} &  X \ar[d]^ f \\  S' \ar[r]^ g &  S }  \]
+</div>
+    <p>
+       of schemes. Since there is never any cohomology in degrees $< 0$, we see that $E$ (locally) has tor-amplitude in $[0, b]$ for some $b$. If $H^ i(E) = R^ if_*\mathcal{F} = 0$ for $i > 0$, then $E$ has tor amplitude in $[0, 0]$. Whence $E = H^0(E)[0]$. We conclude $H^0(E) = f_*\mathcal{F}$ is finite locally free by More on Algebra, Lemma <a href="/tag/0658" data-tag="0658">15.76.2</a> (and the characterization of finite projective modules in Algebra, Lemma <a href="/tag/00NX" data-tag="00NX">10.78.2</a>). Commutation with base change means that $g^*f_*\mathcal{F} = f'_*(g')^*\mathcal{F}$ for a diagram as above and it follows from the already established commutation of base change for $E$. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0E62">
+  <p><a class="environment-identifier" href="/tag/0E62">Lemma <span data-tag="0E62">36.32.5</span>.</a> Let $f : X \to S$ be a morphism of schemes. Assume </p>
+  <p><ol>
+  <li><p>
+$f$ is proper, flat, and of finite presentation, and 
+</p>
+</li><li><p>
+for all $s \in S$ we have $\kappa (s) = H^0(X_ s, \mathcal{O}_{X_ s})$. 
+</p>
+</li>
+</ol></p>
+  <p> Then we have </p>
+  <p><ol>
+  <li class="custom-item" data-marker="(a)"><p>
+$f_*\mathcal{O}_ X = \mathcal{O}_ S$ and this holds after any base change, 
+</p>
+</li><li class="custom-item" data-marker="(b)"><p>
+locally on $S$ we have 
+</p>
+<div class="equation">
+  \[  Rf_*\mathcal{O}_ X = \mathcal{O}_ S \oplus P  \]
+</div>
+<p>
+ in $D(\mathcal{O}_ S)$ where $P$ is perfect of tor amplitude in $[1, \infty )$. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      By cohomology and base change (Lemma <a href="/tag/0B91" data-tag="0B91">36.30.4</a>) the complex $E = Rf_*\mathcal{O}_ X$ is perfect and its formation commutes with arbitrary base change. This first implies that $E$ has tor amplitude in $[0, \infty )$. Second, it implies that for $s \in S$ we have $H^0(E \otimes ^\mathbf {L} \kappa (s)) = H^0(X_ s, \mathcal{O}_{X_ s}) = \kappa (s)$. It follows that the map $\mathcal{O}_ S \to Rf_*\mathcal{O}_ X = E$ induces an isomorphism $\mathcal{O}_ S \otimes \kappa (s) \to H^0(E \otimes ^\mathbf {L} \kappa (s))$. Hence $H^0(E) \otimes \kappa (s) \to H^0(E \otimes ^\mathbf {L} \kappa (s))$ is surjective and we may apply More on Algebra, Lemma <a href="/tag/0A1U" data-tag="0A1U">15.78.2</a> to see that, after replacing $S$ by an affine open neighbourhood of $s$, we have a decomposition $E = H^0(E) \oplus \tau _{\geq 1}E$ with $\tau _{\geq 1}E$ perfect of tor amplitude in $[1, \infty )$. Since $E$ has tor amplitude in $[0, \infty )$ we find that $H^0(E)$ is a flat $\mathcal{O}_ S$-module. It follows that $H^0(E)$ is a flat, perfect $\mathcal{O}_ S$-module, hence finite locally free, see More on Algebra, Lemma <a href="/tag/0658" data-tag="0658">15.76.2</a> (and the fact that finite projective modules are finite locally free by Algebra, Lemma <a href="/tag/00NX" data-tag="00NX">10.78.2</a>). It follows that the map $\mathcal{O}_ S \to H^0(E)$ is an isomorphism as we can check this after tensoring with residue fields (Algebra, Lemma <a href="/tag/00O0" data-tag="00O0">10.79.4</a>). 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0E0L">
+  <p><a class="environment-identifier" href="/tag/0E0L">Lemma <span data-tag="0E0L">36.32.6</span>.</a> Let $f : X \to S$ be a morphism of schemes. Assume </p>
+  <p><ol>
+  <li><p>
+$f$ is proper, flat, and of finite presentation, and 
+</p>
+</li><li><p>
+the geometric fibres of $f$ are reduced and connected. 
+</p>
+</li>
+</ol></p>
+  <p> Then $f_*\mathcal{O}_ X = \mathcal{O}_ S$ and this holds after any base change. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      By Lemma <a href="/tag/0E62" data-tag="0E62">36.32.5</a> it suffices to show that $\kappa (s) = H^0(X_ s, \mathcal{O}_{X_ s})$ for all $s \in S$. This follows from Varieties, Lemma <a href="/tag/0BUG" data-tag="0BUG">33.9.3</a> and the fact that $X_ s$ is geometrically connected and geometrically reduced. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0G7X">
+  <p><a class="environment-identifier" href="/tag/0G7X">Lemma <span data-tag="0G7X">36.32.7</span>.</a> Let $f : X \to S$ be a proper morphism of schemes. Let $s \in S$ and let $e \in H^0(X_ s, \mathcal{O}_{X_ s})$ be an idempotent. Then $e$ is in the image of the map $(f_*\mathcal{O}_ X)_ s \to H^0(X_ s, \mathcal{O}_{X_ s})$. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $X_ s = T_1 \amalg T_2$ be the disjoint union decomposition with $T_1$ and $T_2$ nonempty and open and closed in $X_ s$ corresponding to $e$, i.e., such that $e$ is identitically $1$ on $T_1$ and identically $0$ on $T_2$. 
+    <p>
+      Assume $S$ is Noetherian. We will use the theorem on formal functions in the form of Cohomology of Schemes, Lemma <a href="/tag/02OD" data-tag="02OD">30.20.7</a>. It tells us that 
+    <p>
+      <div class="equation">
+  \[  (f_*\mathcal{O}_ X)_ s^\wedge = \mathop{\mathrm{lim}}\nolimits _ n H^0(X_ n, \mathcal{O}_{X_ n})  \]
+</div>
+    <p>
+       where $X_ n$ is the $n$th infinitesimal neighbourhood of $X_ s$. Since the underlying topological space of $X_ n$ is equal to that of $X_ s$ we obtain for all $n $ a disjoint union decomposition of schemes $X_ n = T_{1, n} \amalg T_{2, n}$ where the underlying topological space of $T_{i, n}$ is $T_ i$ for $i = 1, 2$. This means $H^0(X_ n, \mathcal{O}_{X_ n})$ contains a nontrivial idempotent $e_ n$, namely the function which is identically $1$ on $T_{1, n}$ and identically $0$ on $T_{2, n}$. It is clear that $e_{n + 1}$ restricts to $e_ n$ on $X_ n$. Hence $e_\infty = \mathop{\mathrm{lim}}\nolimits e_ n$ is a nontrivial idempotent of the limit. Thus $e_\infty $ is an element of the completion of $(f_*\mathcal{O}_ X)_ s$ mapping to $e$ in $H^0(X_ s, \mathcal{O}_{X_ s})$. Since the map $(f_*\mathcal{O}_ X)_ s^\wedge \to H^0(X_ s, \mathcal{O}_{X_ s})$ factors through $(f_*\mathcal{O}_ X)^\wedge _ s / \mathfrak m_ s (f_*\mathcal{O}_ X)_ s^\wedge = (f_*\mathcal{O}_ X)_ s / \mathfrak m_ s (f_*\mathcal{O}_ X)_ s$ (Algebra, Lemma <a href="/tag/05GG" data-tag="05GG">10.96.3</a>) we conclude that $e$ is in the image of the map $(f_*\mathcal{O}_ X)_ s \to H^0(X_ s, \mathcal{O}_{X_ s})$ as desired. 
+    <p>
+      General case: we reduce the general case to the Noetherian case by limit arguments. We urge the reader to skip the proof. We may replace $S$ by an affine open neighbourhood of $s$. Thus we may and do assume that $S$ is affine. By Limits, Lemma <a href="/tag/0A0P" data-tag="0A0P">32.13.3</a> we can write $(f : X \to S) = \mathop{\mathrm{lim}}\nolimits (f_ i : X_ i \to S_ i)$ with $f_ i$ proper and $S_ i$ Noetherian. Denote $s_ i \in S_ i$ the image of $s$. Then $s = \mathop{\mathrm{lim}}\nolimits s_ i$, see Limits, Lemma <a href="/tag/0CUG" data-tag="0CUG">32.4.4</a>. Then $X_ s = X \times _ S s = \mathop{\mathrm{lim}}\nolimits X_ i \times _{S_ i} s_ i = \mathop{\mathrm{lim}}\nolimits X_{i, s_ i}$ because limits commute with limits (Categories, Lemma <a href="/tag/002M" data-tag="002M">4.14.10</a>). Hence $e$ is the image of some idempotent $e_ i \in H^0(X_{i, s_ i}, \mathcal{O}_{X_{i, s_ i}})$ by Limits, Lemma <a href="/tag/01Z0" data-tag="01Z0">32.4.7</a>. By the Noetherian case there is an element $\tilde e_ i$ in the stalk $(f_{i, *}\mathcal{O}_{X_ i})_{s_ i}$ mapping to $e_ i$. Taking the pullback of $\tilde e_ i$ we get an element $\tilde e$ of $(f_*\mathcal{O}_ X)_ s$ mapping to $e$ and the proof is complete. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0G7Y">
+  <p><a class="environment-identifier" href="/tag/0G7Y">Lemma <span data-tag="0G7Y">36.32.8</span>.</a> Let $f : X \to S$ be a morphism of schemes. Let $s \in S$. Assume </p>
+  <p><ol>
+  <li><p>
+$f$ is proper, flat, and of finite presentation, and 
+</p>
+</li><li><p>
+the fibre $X_ s$ is geometrically reduced. 
+</p>
+</li>
+</ol></p>
+  <p> Then, after replacing $S$ by an open neighbourhood of $s$, there exists a direct sum decomposition $Rf_*\mathcal{O}_ X = f_*\mathcal{O}_ X \oplus P$ in $D(\mathcal{O}_ S)$ where $f_*\mathcal{O}_ X$ is a finite étale $\mathcal{O}_ S$-algebra and $P$ is a perfect of tor amplitude in $[1, \infty )$. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      The proof of this lemma is similar to the proof of Lemma <a href="/tag/0E62" data-tag="0E62">36.32.5</a> which we suggest the reader read first. By cohomology and base change (Lemma <a href="/tag/0B91" data-tag="0B91">36.30.4</a>) the complex $E = Rf_*\mathcal{O}_ X$ is perfect and its formation commutes with arbitrary base change. This first implies that $E$ has tor amplitude in $[0, \infty )$. 
+    <p>
+      We claim that after replacing $S$ by an open neighbourhood of $s$ we can find a direct sum decomposition $E = H^0(E) \oplus \tau _{\geq 1}E$ in $D(\mathcal{O}_ S)$ with $\tau _{\geq 1}E$ of tor amplitude in $[1, \infty )$. Assume the claim is true for now and assume we've made the replacement so we have the direct sum decomposition. Since $E$ has tor amplitude in $[0, \infty )$ we find that $H^0(E)$ is a flat $\mathcal{O}_ S$-module. Hence $H^0(E)$ is a flat, perfect $\mathcal{O}_ S$-module, hence finite locally free, see More on Algebra, Lemma <a href="/tag/0658" data-tag="0658">15.76.2</a> (and the fact that finite projective modules are finite locally free by Algebra, Lemma <a href="/tag/00NX" data-tag="00NX">10.78.2</a>). Of course $H^0(E) = f_*\mathcal{O}_ X$ is an $\mathcal{O}_ S$-algebra. By cohomology and base change we obtain $H^0(E) \otimes \kappa (s) = H^0(X_ s, \mathcal{O}_{X_ s})$. By Varieties, Lemma <a href="/tag/0BUG" data-tag="0BUG">33.9.3</a> and the assumption that $X_ s$ is geometrically reduced, we see that $\kappa (s) \to H^0(E) \otimes \kappa (s)$ is finite étale. By Morphisms, Lemma <a href="/tag/0476" data-tag="0476">29.37.17</a> applied to the finite locally free morphism $\underline{\mathop{\mathrm{Spec}}}_ S(H^0(E)) \to S$, we conclude that after shrinking $S$ the $\mathcal{O}_ S$-algebra $H^0(E)$ is finite étale. 
+    <p>
+      It remains to prove the claim. For this it suffices to prove that the map 
+    <p>
+      <div class="equation">
+  \[  (f_*\mathcal{O}_ X)_ s \longrightarrow H^0(X_ s, \mathcal{O}_{X_ s}) = H^0(E \otimes ^\mathbf {L} \kappa (s))  \]
+</div>
+    <p>
+       is surjective, see More on Algebra, Lemma <a href="/tag/0A1U" data-tag="0A1U">15.78.2</a>. Choose a flat local ring homomorphism $\mathcal{O}_{S, s} \to A$ such that the residue field $k$ of $A$ is algebraically closed, see Algebra, Lemma <a href="/tag/03C3" data-tag="03C3">10.159.1</a>. By flat base change (Cohomology of Schemes, Lemma <a href="/tag/02KH" data-tag="02KH">30.5.2</a>) we get $H^0(X_ A, \mathcal{O}_{X_ A}) = (f_*\mathcal{O}_ X)_ s \otimes _{\mathcal{O}_{S, s}} A$ and $H^0(X_ k, \mathcal{O}_{X_ k}) = H^0(X_ s, \mathcal{O}_{X_ s}) \otimes _{\kappa (s)} k$. Hence it suffices to prove that $H^0(X_ A, \mathcal{O}_{X_ A}) \to H^0(X_ k, \mathcal{O}_{X_ k})$ is surjective. Since $X_ k$ is a reduced proper scheme over $k$ and since $k$ is algebraically closed, we see that $H^0(X_ k, \mathcal{O}_{X_ k})$ is a finite product of copies of $k$ by the already used Varieties, Lemma <a href="/tag/0BUG" data-tag="0BUG">33.9.3</a>. Since by Lemma <a href="/tag/0G7X" data-tag="0G7X">36.32.7</a> the idempotents of this $k$-algebra are in the image of $H^0(X_ A, \mathcal{O}_{X_ A}) \to H^0(X_ k, \mathcal{O}_{X_ k})$ we conclude. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  // move extras from parent element to after environment name and number
+  $("article a[data-toggle]").each(function(index, element) {
+    $(element).insertAfter(($(element).parent().find("a.environment-identifier")));
+  });
+
+  $('article a[data-toggle="popover"]').popover()
+
+  // render mathematics in popovers
+  $("[data-toggle=popover]").on('shown.bs.popover', function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, $("div.popover-body").html()]);
+  });
+});
+  </script>
+
+  
+
+  
+</div>
+
+
+<hr>
+
+<section id="comments">
+  <h2>Comments (0)</h2>
+
+  
+
+  
+</section>
+
+<hr>
+
+<section id="post-comment">
+  <h2>Post a comment</h2>
+  <p>Your email address will not be published. Required fields are marked.
+  <p>In your comment you can use <a href="/markdown">Markdown</a> and LaTeX style mathematics (enclose it like <code>$\pi$</code>). A preview option is available if you wish to see how it works out (just click on the eye in the toolbar).
+  <noscript><p>Unfortunately JavaScript is disabled in your browser, so the comment preview function will not work.</p></noscript>
+
+  <p>All contributions are licensed under the <a href="https://github.com/stacks/stacks-project/blob/master/COPYING">GNU Free Documentation License</a>.
+
+  <form name="comment" id="comment-form" action="/post-comment" method="post">
+    <label for="name">Name<sup>*</sup>:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="mail">E-mail<sup>*</sup>:</label>
+    <input type="email" name="mail" id="mail" required><br>
+
+    <label for="site">Site:</label>
+    <input type="url" name="site" id="site"><br>
+
+    <label>Comment:</label>
+    <textarea name="comment" id="comment-textarea" cols="80" rows="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <script type="text/javascript">
+var easymde = new EasyMDE({
+  autosave: {
+    enabled: true,
+    delay: 1000,
+    uniqueId: "comment-0BDM",
+  },
+  element: $("#comment")[0],
+  forceSync: true,
+  insertTexts: { link: ["\\ref{", "}"], table: ["$", "$"], image: ["\\begin{equation}\n", "\n\\end{equation}\n"] }, // we hack into these insertion methods, I couldn't figure out how to write your own...
+  placeholder: "You can type your comment here, use the preview option to see what it will look like. If your comment is on a lemma, please leave your comment on the page of the lemma. Same with remarks, propositions, theorems, etc.",
+  previewRender: function(plaintext, preview) {
+    // deal with references
+    plaintext = plaintext.replace(/\\ref\{([0-9A-Z]{4})\}/g, "<span class=\"tag\">[$1](/tag/$1)</span>");
+    // deal with \[\] getting replaced to []
+    plaintext = plaintext.replace(/\\\[/g, "\\begin{equation}");
+    plaintext = plaintext.replace(/\\\]/g, "\\end{equation}");
+
+    output = this.parent.markdown(plaintext);
+
+    setTimeout(function() {
+      preview.innerHTML = output;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }, 0);
+
+    return "";
+  },
+  spellChecker: false,
+  status: false,
+  toolbar: [
+    "link", {name: "inline", action: EasyMDE.drawTable, className: "fa fa-usd"}, {name: "block", action: EasyMDE.drawImage, className: "fa fa-square"}, "|",
+    "bold", "italic", "|",
+    "ordered-list", "unordered-list", "|",
+    "preview"
+  ],
+});
+
+// make sure to show tags, not numbers
+var tagToggleHappened = false; // only do this once to not annoy the user too much
+easymde.codemirror.on("change", function() {
+  // if data-tag elements do not have tag attribute we need to make tags visible
+  if (!$("*[data-tag]").hasClass("tag") && !tagToggleHappened)
+    $("section#meta input.toggle").bootstrapToggle("toggle");
+  tagToggleHappened = true;
+});
+
+// prevent form submit when the captcha isn't correct
+// it's a bit silly to use HTML5 validation for this, as bots can figure that out
+// also save the author information to localStorage
+easymde.element.form.addEventListener("submit", function(event) {
+  if ($("#check").val() != $("#hidden-tag").val()) {
+    // explain captcha
+    $("#captcha-message").toggle();
+
+    // stop submit
+    event.preventDefault();
+    return false;
+  }
+
+  // save author information
+  localStorage.setItem("name", $("input#name").val());
+  localStorage.setItem("mail", $("input#mail").val());
+  localStorage.setItem("site", $("input#site").val());
+});
+    </script>
+
+    <p>In order to prevent bots from posting comments, we would like you to prove that you are human. You can do this by <em>filling in the name of the current tag</em> in the following input field. As a reminder, this is tag <span class="tag">0BDM</span>. Beware of the difference between the letter&nbsp;'<span class="tag">O</span>' and the digit&nbsp;'<span class="tag">0</span>'.</p>
+    <!--<p>This <abbr title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</abbr> seems more appropriate than the usual illegible gibberish, right?<br>-->
+    <label for="check">Tag:</label>
+    <input type="text" name="check" id="check" required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Post comment</button>
+    <input type="hidden" name="tag" id="hidden-tag" value="0BDM"><br>
+
+    <p id="captcha-message" style="display: none" class="alert alert-warning" role="alert">The tag you filled in for the captcha is wrong. You need to write <span class="tag">0BDM</span>, in case you are confused.</p>
+
+    <script type="text/javascript">
+// enter in captcha fields causes \ref to appear (?!)
+$("input#check").on("keypress", function(e) {
+  if (e.which == 13) {
+    // always stop the event
+    e.preventDefault();
+
+    // perform clientside check as for actual submit
+    if ($("#check").val() != $("#hidden-tag").val()) {
+      // explain captcha
+      $("#captcha-message").toggle();
+    }
+    else {
+      $("form#comment-form").submit();
+    }
+  }
+});
+    </script>
+  </form>
+</section>
+
+
+
+
+    </section>
+	  <div class="col-lg-4 col-xl-4">
+	    <section id="meta" class="row topbar sticky-top">
+        
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0BDH">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/0CRN">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  <hr>
+  
+    <a href="https://stacks.math.columbia.edu/download/perfect.pdf#nameddest=0BDM">View Section <span data-tag="0BDM">36.32</span> as pdf</a>
+  
+
+  
+
+
+      </section>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

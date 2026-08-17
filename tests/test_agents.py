@@ -865,15 +865,25 @@ class AgentAdapterTests(unittest.TestCase):
 
     def test_source_identifiers_are_moved_without_erasing_provenance(self):
         artifact = {
-            "source_claim_ids": ["THM-0005", "SRC-0004", "SRC-0004"],
+            "source_claim_ids": [
+                "THM-0005",
+                "SRC-0004",
+                "SRC-0004",
+                "CLM-0065-9",
+            ],
             "source_ids": ["SRC-0002"],
         }
         _normalize_source_references(artifact)
         self.assertEqual(artifact["source_claim_ids"], ["THM-0005"])
         self.assertEqual(artifact["source_ids"], ["SRC-0002", "SRC-0004"])
+        self.assertEqual(artifact["dependency_claim_ids"], ["CLM-0065-9"])
         self.assertEqual(
             artifact["ingest_normalizations"][0]["rule"],
             "SOURCE-REFERENCE-SPLIT-0001",
+        )
+        self.assertEqual(
+            artifact["ingest_normalizations"][1]["rule"],
+            "DEPENDENCY-CLAIM-SPLIT-0001",
         )
 
     def test_review_verdict_must_match_structured_checks(self):

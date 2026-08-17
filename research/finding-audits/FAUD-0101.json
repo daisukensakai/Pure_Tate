@@ -6,6 +6,32 @@
   "finding_id": "FND-0105",
   "id": "FAUD-0101",
   "independent": true,
+  "local_evidence_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "29628e10a4d29452693fcf64af7a14a6b52ad614e217ac268c61ff1d3158e1d2",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "packet-W5-convention-and-gap-usage",
+      "reported_content_sha256": "734f8875b59b94177ba054702c43a8f5e25019a3323eac215fed6f1310ec7ea3",
+      "retrieved_at": "2026-08-08T06:40:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0d627a0bfe3fef60ffbcf2eb9497193f312b47633ba016db02a3c98a1e391f8c",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "claim-cross-check-RED-THM",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-08T06:40:00Z",
+      "source_type": "corpus",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
   "merge_target_id": null,
   "reviewer_engine": "grok",
   "schema_version": 1,
@@ -31,13 +57,27 @@
     ],
     "statement_class": "W_5 isomorphic to omega_C^2(-D) after CE relative-canonical normalization plus degree forcing of residual P1-twists"
   },
+  "source_attestation_migration": {
+    "attested_at": "2026-08-17T00:49:59.008948Z",
+    "errors": [],
+    "raw_artifact_path": "research/finding-audits/raw-pre-attestation/FAUD-0101.json",
+    "raw_artifact_sha256": "8681a4ced94d19e8c9bc63f57b03d93cd937fd80133e56cdcde3d4478f4577de",
+    "reason": "C66-FINDING-SOURCE-ATTESTATION-0001",
+    "transformations": [
+      "hashed local evidence file://proof/packets/generated/C66-001-v4.md",
+      "hashed local evidence file://data/claims.jsonl",
+      "moved non-public records to local_evidence_records"
+    ]
+  },
   "source_records": [
     {
       "arxiv_id": "2104.05820",
       "arxiv_version": "v2",
-      "content_sha256": null,
+      "content_sha256": "8ba72b558c99960a5777996e58db0b23d533bc2885ee3e8e50f5cde92de7e300",
       "doi": "10.1090/jag/818",
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "ce-relative-canonical-normalization",
+      "reported_content_sha256": null,
       "retrieved_at": "2026-08-08T06:40:00Z",
       "source_type": "preprint",
       "url": "https://ar5iv.labs.arxiv.org/html/2104.05820"
@@ -45,34 +85,18 @@
     {
       "arxiv_id": "2208.02357",
       "arxiv_version": "v2",
-      "content_sha256": null,
+      "content_sha256": "c21fd73890c9f00892d30b1fc02277da0ba33a3965e72072616fe807f1af4e0d",
       "doi": "10.4171/JEMS/1543",
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "src-0004-lemma-10.6-and-O1-restriction",
+      "reported_content_sha256": null,
       "retrieved_at": "2026-08-08T06:40:00Z",
       "source_type": "journal",
       "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": "734f8875b59b94177ba054702c43a8f5e25019a3323eac215fed6f1310ec7ea3",
-      "doi": null,
-      "query_family": "packet-W5-convention-and-gap-usage",
-      "retrieved_at": "2026-08-08T06:40:00Z",
-      "source_type": "campaign_packet",
-      "url": "file://proof/packets/generated/C66-001-v4.md"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": null,
-      "doi": null,
-      "query_family": "claim-cross-check-RED-THM",
-      "retrieved_at": "2026-08-08T06:40:00Z",
-      "source_type": "corpus",
-      "url": "file://data/claims.jsonl"
     }
   ],
+  "sources_verified": true,
   "task_id": "TASK-F-FND-0105",
-  "verdict": "promote"
+  "verdict": "promote",
+  "verified_source_count": 2
 }

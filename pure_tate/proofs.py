@@ -689,6 +689,25 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
         if not isinstance(approach, str) or not approach.strip():
             result.errors.append("%s has no approach description" % attempt_id)
 
+    for attempt_id, attempt in attempts_by_id.items():
+        dependency_attempt_ids = {
+            dependency_id
+            for dependency_id in attempt.get("proof_dependencies", [])
+            if isinstance(dependency_id, str) and dependency_id.startswith("ATT-")
+        }
+        dependency_claims = {
+            claim.get("id")
+            for dependency_id in dependency_attempt_ids
+            for claim in attempts_by_id.get(dependency_id, {}).get("claims", [])
+            if isinstance(claim, dict)
+        }
+        for claim_id in attempt.get("dependency_claim_ids", []):
+            if claim_id not in dependency_claims:
+                result.errors.append(
+                    "%s cites dependency claim %s outside its proof dependencies"
+                    % (attempt_id, claim_id)
+                )
+
     for review in reviews:
         if "_error" in review:
             result.errors.append("%s: %s" % (review["_path"], review["_error"]))

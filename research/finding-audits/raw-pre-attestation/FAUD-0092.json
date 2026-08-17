@@ -1,0 +1,92 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and FND-0099 does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. The real tension is with the single sentence inside corroborated packet finding FND-0097 that attributes exactness of both pi_* and restriction-to-Gamma on 0->W_4->W->W_5->0 to finiteness of Gamma over the base. Independent check: (1) For a short exact sequence of coherent sheaves on a relative curve pi:C->B, the LES of higher direct images is 0->pi_*W_4->pi_*W->pi_*W_5->R^1 pi_* W_4->...; surjectivity of pi_*W->pi_*W_5 requires the connecting map into R^1 pi_* W_4 to vanish, and is guaranteed by R^1 pi_* W_4=0. Finiteness of Gamma->B is irrelevant to that LES. (2) What finiteness of Gamma does give: restriction of a locally free (hence locally split) SES to Gamma remains exact, and pushforward along finite Gamma->B is exact (finite morphisms are affine). (3) Primary degree from SRC-0004 Lemma 10.6 (Canning\u2013Larson, arXiv:2208.02357v2): deg W_f|_C=4g+12-4f. For the filtered f=4 summand at g=6 one has deg W_4=20>2g-2=10, so on geometric fibres H^1(W_4)=0 by Serre duality (deg(omega W_4^{-1})<0); with flat proper pi and fibrewise vanishing, cohomology-and-base-change yields R^1 pi_* W_4=0. (4) coker(phi_4)=0: from 0->W_4(-Gamma)->W_4->W_4|Gamma->0 the restriction map on pi_* is surjective once R^1 pi_* W_4(-Gamma)=0; deg W_4(-Gamma)=20-6=14>10 supplies fibrewise H^1=0, and base-change plus Nakayama descend coker=0 to the sheaf. (5) With those two vanishings the snake lemma and Fit_0(coker phi)=Fit_0(coker phi_5) are correct for (6,6), so FND-0097\u2019s filtered-CE conclusion survives; only its justification that \u2018Gamma finite => pi_* exact\u2019 is false. Downstream C66-GEO-Z filtered-CE arguments must cite the degree vanishings explicitly and recheck them for any (g,n) with deg W_4<=2g-2. Distinct from FND-0096 (universal Pic^0 Fitting) and from FND-0097\u2019s main load-bearing point (replace global splitting by relative HN filtration). Merge target: none. Promote candidate obstruction to corroborated on this independent primary/standard-cohomology verification.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0099",
+  "id": "FAUD-0092",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "degree_conditions": {
+      "2g-2": 10,
+      "deg_W_4": "4g+12-4*4=20 for g=6",
+      "deg_W_4_minus_Gamma": "20-n=14 for n=6",
+      "vanishings": [
+        "R^1 pi_* W_4=0 via deg W_4>2g-2",
+        "H^1(W_4(-Gamma))=0 via deg 14>10"
+      ]
+    },
+    "impacts_approach_ids": [
+      "C66-GEO-Z"
+    ],
+    "objects": [
+      "filtered CE sequence 0->W_4->W->W_5->0 on balanced tetragonal family",
+      "exactness of pi_* along relative curve",
+      "exactness of restriction to Gamma and of pushforward Gamma->B",
+      "coker(phi_4)=0",
+      "snake lemma Fit_0(coker phi)=Fit_0(coker phi_5)"
+    ],
+    "relation_to_siblings": {
+      "compatible_with": [
+        "FND-0096",
+        "FND-0062",
+        "FND-0063",
+        "FND-0046",
+        "FND-0047"
+      ],
+      "corrects_justification_in": "FND-0097"
+    },
+    "transport": "recheck whenever deg W_4<=2g-2; finiteness of Gamma alone never supplies pi_* exactness"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "c69d4f6bfe1a83896f512af272e9c8dc884911d6eafe2e91f360156e598e47f9",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-05T04:00:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "c69d4f6bfe1a83896f512af272e9c8dc884911d6eafe2e91f360156e598e47f9",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "degree-formula-SRC-0004-Lemma-10.6",
+      "retrieved_at": "2026-08-05T04:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "c69d4f6bfe1a83896f512af272e9c8dc884911d6eafe2e91f360156e598e47f9",
+      "doi": null,
+      "query_family": "packet-filtered-CE-sibling-FND-0097",
+      "retrieved_at": "2026-08-05T04:00:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doi": null,
+      "query_family": "standard-higher-direct-image-exactness",
+      "retrieved_at": "2026-08-05T04:00:00Z",
+      "source_type": "reference_discussion",
+      "url": "https://mathoverflow.net/questions/344051/degree-of-the-direct-image-of-a-line-bundle"
+    }
+  ],
+  "task_id": "TASK-F-FND-0099",
+  "verdict": "promote"
+}

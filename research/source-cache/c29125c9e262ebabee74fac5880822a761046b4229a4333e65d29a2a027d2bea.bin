@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#d9d8d1">
+
+<title>Section 44.3 (0B9C): Moduli of divisors on smooth curves&mdash;The Stacks project</title>
+
+<meta name="description" content="an open source textbook and reference work on algebraic geometry">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ['tex2jax.js'],
+    jax: ['input/TeX','output/HTML-CSS'],
+    TeX: {
+      extensions: ['AMSmath.js', 'AMSsymbols.js', '/static/XyJax/extensions/TeX/xypic.js'],
+      Macros: {
+        linebreak: ["", 1, ""],
+        },
+      TagSide: 'left'
+    },
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    },
+    'HTML-CSS': {
+    	scale: 100,
+	availableFonts: [],
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+
+
+  <script type="text/javascript" src="/static/js/toggle.js"></script>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/easymde@2.0.1/dist/easymde.min.css" integrity="sha384-IRbzB9px0sfIx90vkN+geaX3F4LVcg/M+k5vmVkfjs5TnRX3MIhGS8Ma06ALKVYp" crossorigin="anonymous">
+  <script src="https://unpkg.com/easymde@2.0.1/dist/easymde.min.js" integrity="sha384-v06sb0t0ToY1YRtVlfD/GCGpIZ/QHYyeH2Gzjvr0ZJI62/50DIzT8XRgQ6JvptVu" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.css" integrity="sha384-8xTxM5sJRAUB0ckdBghB5am+aw+0kC5FfSUzMI+KI+UD8uBCNeSkdi8I1J4+Wjwu" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.js" integrity="sha384-gE5xOW4MVOjJL1A2SbxwvQw/qet6h8Vdv06j3JQGhBW4d1H5hXYB12WsrUBgU439" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid bounded">
+  <div id="first-bar" class="row topbar inner-top top">
+    <header class="col">
+      <h1><a href="/">The Stacks project</a></h1>
+    </header>
+
+    <nav id="header">
+      <ul id="quicklinks">
+        <li><a href="/bibliography">bibliography</a>
+        <li><a href="https://www.math.columbia.edu/~dejong/wordpress/">blog</a>
+      </ul>
+
+      <form id="quicksearch" action="/search">
+        <span id="search-icon"><img src="/static/images/search.svg"></span>
+        <input type="search" name="query" size="16" placeholder="keywords or a tag" value="">
+      </form>
+    </nav>
+  </div>
+
+  <nav id="second-bar" class="row topbar sticky-top">
+    
+      <ul class="col-11 col-sm-11 col-md-11 col-lg-12 col-xl-12" id="crumbs">
+        <li><a href="/browse">Table of contents</a></li>
+        
+  
+  
+    <li>Part <a href="/tag/0ELV" data-tag="0ELV">3</a>: Topics in Scheme Theory
+    
+  
+    <li>Chapter <a href="/tag/0B92" data-tag="0B92">44</a>: Picard Schemes of Curves
+    
+  
+    <li class="active">Section <a href="/tag/0B9C" data-tag="0B9C">44.3</a>: Moduli of divisors on smooth curves
+    <span id="citation">(<a href="/tag/0B9C/cite">cite</a>)</span>
+  
+
+
+      </ul>
+    
+
+    
+      <div class="col-1 col-sm-1 col-md-1" id="burger">
+        <input type="checkbox" id="burger-input"></input>
+
+        <label id="burger-icon" for="burger-input">
+          <span id="top-bun"></span>
+          <span id="meat"></span>
+          <span id="bottom-bun"></span>
+        </label>
+
+        <div id="burger-content">
+          
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0B94">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/0B9K">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  
+
+
+        </div>
+      </div>
+    
+
+    
+  </nav>
+
+  <div class="row" id="content">
+    <section id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      
+<div class="html" id="tag">
+  
+
+  
+
+  
+
+  <h2 id="pic-section-divisors" class="tex-section"><span data-tag="0B9C">44.3</span> Moduli of divisors on smooth curves</h2>
+
+<p>
+For a smooth morphism $X \to S$ of relative dimension $1$ the functor $\mathrm{Hilb}^ d_{X/S}$ parametrizes relative effective Cartier divisors as defined in Divisors, Section <a href="/tag/056P" data-tag="056P">31.19</a>. 
+</p>
+<p>
+<article class="env-lemma" id="0B9D">
+  <p><a class="environment-identifier" href="/tag/0B9D">Lemma <span data-tag="0B9D">44.3.1</span>.</a> Let $X \to S$ be a smooth morphism of schemes of relative dimension $1$. Let $D \subset X$ be a closed subscheme. Consider the following conditions </p>
+  <p><ol>
+  <li><p>
+$D \to S$ is finite locally free, 
+</p>
+</li><li><p>
+$D$ is a relative effective Cartier divisor on $X/S$, 
+</p>
+</li><li><p>
+$D \to S$ is locally quasi-finite, flat, and locally of finite presentation, and 
+</p>
+</li><li><p>
+$D \to S$ is locally quasi-finite and flat. 
+</p>
+</li>
+</ol></p>
+  <p> We always have the implications </p>
+  <div class="equation">
+  \[  (1) \Rightarrow (2) \Leftrightarrow (3) \Rightarrow (4)  \]
+</div>
+  <p> If $S$ is locally Noetherian, then the last arrow is an if and only if. If $X \to S$ is proper (and $S$ arbitrary), then the first arrow is an if and only if. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Equivalence of (2) and (3). This follows from Divisors, Lemma <a href="/tag/062Y" data-tag="062Y">31.19.9</a> if we can show the equivalence of (2) and (3) when $S$ is the spectrum of a field $k$. Let $x \in X$ be a closed point. As $X$ is smooth of relative dimension $1$ over $k$ and we see that $\mathcal{O}_{X, x}$ is a regular local ring of dimension $1$ (see Varieties, Lemma <a href="/tag/056S" data-tag="056S">33.25.3</a>). Thus $\mathcal{O}_{X, x}$ is a discrete valuation ring (Algebra, Lemma <a href="/tag/00PD" data-tag="00PD">10.119.7</a>) and hence a PID. It follows that every sheaf of ideals $\mathcal{I} \subset \mathcal{O}_ X$ which is nonvanishing at all the generic points of $X$ is invertible (Divisors, Lemma <a href="/tag/0AG8" data-tag="0AG8">31.16.2</a>). In other words, every closed subscheme of $X$ which does not contain a generic point is an effective Cartier divisor. It follows that (2) and (3) are equivalent. 
+    <p>
+      If $S$ is Noetherian, then any locally quasi-finite morphism $D \to S$ is locally of finite presentation (Morphisms, Lemma <a href="/tag/01TX" data-tag="01TX">29.22.9</a>), whence (3) is equivalent to (4). 
+    <p>
+      If $X \to S$ is proper (and $S$ is arbitrary), then $D \to S$ is proper as well. Since a proper locally quasi-finite morphism is finite (More on Morphisms, Lemma <a href="/tag/02LS" data-tag="02LS">37.44.1</a>) and a finite, flat, and finitely presented morphism is finite locally free (Morphisms, Lemma <a href="/tag/02KB" data-tag="02KB">29.49.2</a>), we see that (1) is equivalent to (2). 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0B9E">
+  <p><a class="environment-identifier" href="/tag/0B9E">Lemma <span data-tag="0B9E">44.3.2</span>.</a> Let $X \to S$ be a smooth morphism of schemes of relative dimension $1$. Let $D_1, D_2 \subset X$ be closed subschemes finite locally free of degrees $d_1$, $d_2$ over $S$. Then $D_1 + D_2$ is finite locally free of degree $d_1 + d_2$ over $S$. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      By Lemma <a href="/tag/0B9D" data-tag="0B9D">44.3.1</a> we see that $D_1$ and $D_2$ are relative effective Cartier divisors on $X/S$. Thus $D = D_1 + D_2$ is a relative effective Cartier divisor on $X/S$ by Divisors, Lemma <a href="/tag/0B8U" data-tag="0B8U">31.19.3</a>. Hence $D \to S$ is locally quasi-finite, flat, and locally of finite presentation by Lemma <a href="/tag/0B9D" data-tag="0B9D">44.3.1</a>. Applying Morphisms, Lemma <a href="/tag/09MQ" data-tag="09MQ">29.42.11</a> the surjective integral morphism $D_1 \amalg D_2 \to D$ we find that $D \to S$ is separated. Then Morphisms, Lemma <a href="/tag/03GN" data-tag="03GN">29.42.9</a> implies that $D \to S$ is proper. This implies that $D \to S$ is finite (More on Morphisms, Lemma <a href="/tag/02LS" data-tag="02LS">37.44.1</a>) and in turn we see that $D \to S$ is finite locally free (Morphisms, Lemma <a href="/tag/02KB" data-tag="02KB">29.49.2</a>). Thus it suffice to show that the degree of $D \to S$ is $d_1 + d_2$. To do this we may base change to a fibre of $X \to S$, hence we may assume that $S = \mathop{\mathrm{Spec}}(k)$ for some field $k$. In this case, there exists a finite set of closed points $x_1, \ldots , x_ n \in X$ such that $D_1$ and $D_2$ are supported on $\{ x_1, \ldots , x_ n\} $. In fact, there are nonzerodivisors $f_{i, j} \in \mathcal{O}_{X, x_ i}$ such that 
+    <p>
+      <div class="equation">
+  \[  D_1 = \coprod \mathop{\mathrm{Spec}}(\mathcal{O}_{X, x_ i}/(f_{i, 1})) \quad \text{and}\quad D_2 = \coprod \mathop{\mathrm{Spec}}(\mathcal{O}_{X, x_ i}/(f_{i, 2}))  \]
+</div>
+    <p>
+       Then we see that 
+    <p>
+      <div class="equation">
+  \[  D = \coprod \mathop{\mathrm{Spec}}(\mathcal{O}_{X, x_ i}/(f_{i, 1}f_{i, 2}))  \]
+</div>
+    <p>
+       From this one sees easily that $D$ has degree $d_1 + d_2$ over $k$ (if need be, use Algebra, Lemma <a href="/tag/02MC" data-tag="02MC">10.121.1</a>). 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0B9F">
+  <p><a class="environment-identifier" href="/tag/0B9F">Lemma <span data-tag="0B9F">44.3.3</span>.</a> Let $X \to S$ be a smooth morphism of schemes of relative dimension $1$. Let $D_1, D_2 \subset X$ be closed subschemes finite locally free of degrees $d_1$, $d_2$ over $S$. If $D_1 \subset D_2$ (as closed subschemes) then there is a closed subscheme $D \subset X$ finite locally free of degree $d_2 - d_1$ over $S$ such that $D_2 = D_1 + D$. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      This proof is almost exactly the same as the proof of Lemma <a href="/tag/0B9E" data-tag="0B9E">44.3.2</a>. By Lemma <a href="/tag/0B9D" data-tag="0B9D">44.3.1</a> we see that $D_1$ and $D_2$ are relative effective Cartier divisors on $X/S$. By Divisors, Lemma <a href="/tag/0B8V" data-tag="0B8V">31.19.4</a> there is a relative effective Cartier divisor $D \subset X$ such that $D_2 = D_1 + D$. Hence $D \to S$ is locally quasi-finite, flat, and locally of finite presentation by Lemma <a href="/tag/0B9D" data-tag="0B9D">44.3.1</a>. Since $D$ is a closed subscheme of $D_2$, we see that $D \to S$ is finite. It follows that $D \to S$ is finite locally free (Morphisms, Lemma <a href="/tag/02KB" data-tag="02KB">29.49.2</a>). Thus it suffice to show that the degree of $D \to S$ is $d_2 - d_1$. This follows from Lemma <a href="/tag/0B9E" data-tag="0B9E">44.3.2</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+Let $X \to S$ be a smooth morphism of schemes of relative dimension $1$. By Lemma <a href="/tag/0B9D" data-tag="0B9D">44.3.1</a> for a scheme $T$ over $S$ and $D \in \mathrm{Hilb}^ d_{X/S}(T)$, we can view $D$ as a relative effective Cartier divisor on $X_ T/T$ such that $D \to T$ is finite locally free of degree $d$. Hence, by Lemma <a href="/tag/0B9E" data-tag="0B9E">44.3.2</a> we obtain a transformation of functors 
+</p>
+<div class="equation">
+  \[  \mathrm{Hilb}^{d_1}_{X/S} \times \mathrm{Hilb}^{d_2}_{X/S} \longrightarrow \mathrm{Hilb}^{d_1 + d_2}_{X/S},\quad (D_1, D_2) \longmapsto D_1 + D_2  \]
+</div>
+<p>
+ If $\mathrm{Hilb}^ d_{X/S}$ is representable for all degrees $d$, then this transformation of functors corresponds to a morphism of schemes 
+</p>
+<div class="equation">
+  \[  \underline{\mathrm{Hilb}}^{d_1}_{X/S} \times _ S \underline{\mathrm{Hilb}}^{d_2}_{X/S} \longrightarrow \underline{\mathrm{Hilb}}^{d_1 + d_2}_{X/S}  \]
+</div>
+<p>
+ over $S$. Observe that $\underline{\mathrm{Hilb}}^0_{X/S} = S$ and $\underline{\mathrm{Hilb}}^1_{X/S} = X$. A special case of the morphism above is the morphism 
+</p>
+<div class="equation">
+  \[  \underline{\mathrm{Hilb}}^ d_{X/S} \times _ S X \longrightarrow \underline{\mathrm{Hilb}}^{d + 1}_{X/S},\quad (D, x) \longmapsto D + x  \]
+</div>
+<p>
+<article class="env-lemma" id="0B9G">
+  <p><a class="environment-identifier" href="/tag/0B9G">Lemma <span data-tag="0B9G">44.3.4</span>.</a> Let $X \to S$ be a smooth morphism of schemes of relative dimension $1$ such that the functors $\mathrm{Hilb}^ d_{X/S}$ are representable. The morphism $\underline{\mathrm{Hilb}}^ d_{X/S} \times _ S X \to \underline{\mathrm{Hilb}}^{d + 1}_{X/S}$ is finite locally free of degree $d + 1$. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $D_{univ} \subset X \times _ S \underline{\mathrm{Hilb}}^{d + 1}_{X/S}$ be the universal object. There is a commutative diagram 
+    <p>
+      <div class="equation">
+  \[  \xymatrix{ \underline{\mathrm{Hilb}}^ d_{X/S} \times _ S X \ar[rr] \ar[rd] &  &  D_{univ} \ar[ld] \ar@{^{(}->}[r] &  \underline{\mathrm{Hilb}}^{d + 1}_{X/S} \times _ S X \\  &  \underline{\mathrm{Hilb}}^{d + 1}_{X/S} }  \]
+</div>
+    <p>
+       where the top horizontal arrow maps $(D', x)$ to $(D' + x, x)$. We claim this morphism is an isomorphism which certainly proves the lemma. Namely, given a scheme $T$ over $S$, a $T$-valued point $\xi $ of $D_{univ}$ is given by a pair $\xi = (D, x)$ where $D \subset X_ T$ is a closed subscheme finite locally free of degree $d + 1$ over $T$ and $x : T \to X$ is a morphism whose graph $x : T \to X_ T$ factors through $D$. Then by Lemma <a href="/tag/0B9F" data-tag="0B9F">44.3.3</a> we can write $D = D' + x$ for some $D' \subset X_ T$ finite locally free of degree $d$ over $T$. Sending $\xi = (D, x)$ to the pair $(D', x)$ is the desired inverse. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0B9H">
+  <p><a class="environment-identifier" href="/tag/0B9H">Lemma <span data-tag="0B9H">44.3.5</span>.</a> Let $X \to S$ be a smooth morphism of schemes of relative dimension $1$ such that the functors $\mathrm{Hilb}^ d_{X/S}$ are representable. The schemes $\underline{\mathrm{Hilb}}^ d_{X/S}$ are smooth over $S$ of relative dimension $d$. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      We have $\underline{\mathrm{Hilb}}^0_{X/S} = S$ and $\underline{\mathrm{Hilb}}^1_{X/S} = X$ thus the result is true for $d = 0, 1$. Assuming the result for $d$, we see that $\underline{\mathrm{Hilb}}^ d_{X/S} \times _ S X$ is smooth over $S$ (Morphisms, Lemma <a href="/tag/01VB" data-tag="01VB">29.35.5</a> and <a href="/tag/01VA" data-tag="01VA">29.35.4</a>). Since $\underline{\mathrm{Hilb}}^ d_{X/S} \times _ S X \to \underline{\mathrm{Hilb}}^{d + 1}_{X/S}$ is finite locally free of degree $d + 1$ by Lemma <a href="/tag/0B9G" data-tag="0B9G">44.3.4</a> the result follows from Descent, Lemma <a href="/tag/05B5" data-tag="05B5">35.14.5</a>. We omit the verification that the relative dimension is as claimed (you can do this by looking at fibres, or by keeping track of the dimensions in the argument above). 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+We collect all the information obtained sofar in the case of a proper smooth curve over a field. 
+</p>
+<p>
+<article class="env-proposition" id="0B9I">
+  <p><a class="environment-identifier" href="/tag/0B9I">Proposition <span data-tag="0B9I">44.3.6</span>.</a> Let $X$ be a geometrically irreducible smooth proper curve over a field $k$. </p>
+  <p><ol>
+  <li><p>
+The functors $\mathrm{Hilb}^ d_{X/k}$ are representable by smooth proper varieties $\underline{\mathrm{Hilb}}^ d_{X/k}$ of dimension $d$ over $k$. 
+</p>
+</li><li><p>
+For a field extension $k'/k$ the $k'$-rational points of $\underline{\mathrm{Hilb}}^ d_{X/k}$ are in $1$-to-$1$ bijection with effective Cartier divisors of degree $d$ on $X_{k'}$. 
+</p>
+</li><li><p>
+For $d_1, d_2 \geq 0$ there is a morphism 
+</p>
+<div class="equation">
+  \[  \underline{\mathrm{Hilb}}^{d_1}_{X/k} \times _ k \underline{\mathrm{Hilb}}^{d_2}_{X/k} \longrightarrow \underline{\mathrm{Hilb}}^{d_1 + d_2}_{X/k}  \]
+</div>
+<p>
+ which is finite locally free of degree ${d_1 + d_2 \choose d_1}$. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      The functors $\mathrm{Hilb}^ d_{X/k}$ are representable by Proposition <a href="/tag/0B9A" data-tag="0B9A">44.2.6</a> (see also Remark <a href="/tag/0B9B" data-tag="0B9B">44.2.7</a>) and the fact that $X$ is projective (Varieties, Lemma <a href="/tag/0A26" data-tag="0A26">33.43.4</a>). The schemes $\underline{\mathrm{Hilb}}^ d_{X/k}$ are separated over $k$ by Lemma <a href="/tag/0B98" data-tag="0B98">44.2.4</a>. The schemes $\underline{\mathrm{Hilb}}^ d_{X/k}$ are smooth over $k$ by Lemma <a href="/tag/0B9H" data-tag="0B9H">44.3.5</a>. Starting with $X = \underline{\mathrm{Hilb}}^1_{X/k}$, the morphisms of Lemma <a href="/tag/0B9G" data-tag="0B9G">44.3.4</a>, and induction we find a morphism 
+    <p>
+      <div class="equation">
+  \[  X^ d = X \times _ k X \times _ k \ldots \times _ k X \longrightarrow \underline{\mathrm{Hilb}}^ d_{X/k},\quad (x_1, \ldots , x_ d) \longrightarrow x_1 + \ldots + x_ d  \]
+</div>
+    <p>
+       which is finite locally free of degree $d!$. Since $X$ is proper over $k$, so is $X^ d$, hence $\underline{\mathrm{Hilb}}^ d_{X/k}$ is proper over $k$ by Morphisms, Lemma <a href="/tag/03GN" data-tag="03GN">29.42.9</a>. Since $X$ is geometrically irreducible over $k$, the product $X^ d$ is irreducible (Varieties, Lemma <a href="/tag/038F" data-tag="038F">33.8.4</a>) hence the image is irreducible (in fact geometrically irreducible). This proves (1). Part (2) follows from the definitions. Part (3) follows from the commutative diagram 
+    <p>
+      <div class="equation">
+  \[  \xymatrix{ X^{d_1} \times _ k X^{d_2} \ar[d] \ar@{=}[r] &  X^{d_1 + d_2} \ar[d] \\  \underline{\mathrm{Hilb}}^{d_1}_{X/k} \times _ k \underline{\mathrm{Hilb}}^{d_2}_{X/k} \ar[r] &  \underline{\mathrm{Hilb}}^{d_1 + d_2}_{X/k} }  \]
+</div>
+    <p>
+       and multiplicativity of degrees of finite locally free morphisms. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-remark" id="0B9J">
+  <p><a class="environment-identifier" href="/tag/0B9J">Remark <span data-tag="0B9J">44.3.7</span>.</a> Let $X$ be a geometrically irreducible smooth proper curve over a field $k$ as in Proposition <a href="/tag/0B9I" data-tag="0B9I">44.3.6</a>. Let $d \geq 0$. The universal closed object is a relatively effective divisor </p>
+  <div class="equation">
+  \[  D_{univ} \subset \underline{\mathrm{Hilb}}^{d + 1}_{X/k} \times _ k X  \]
+</div>
+  <p> over $\underline{\mathrm{Hilb}}^{d + 1}_{X/k}$ by Lemma <a href="/tag/0B9D" data-tag="0B9D">44.3.1</a>. In fact, $D_{univ}$ is isomorphic as a scheme to $\underline{\mathrm{Hilb}}^ d_{X/k} \times _ k X$, see proof of Lemma <a href="/tag/0B9G" data-tag="0B9G">44.3.4</a>. In particular, $D_{univ}$ is an effective Cartier divisor and we obtain an invertible module $\mathcal{O}(D_{univ})$. If $[D] \in \underline{\mathrm{Hilb}}^{d + 1}_{X/k}$ denotes the $k$-rational point corresponding to the effective Cartier divisor $D \subset X$ of degree $d + 1$, then the restriction of $\mathcal{O}(D_{univ})$ to the fibre $[D] \times X$ is $\mathcal{O}_ X(D)$. </p>
+</article> 
+</p>
+
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  // move extras from parent element to after environment name and number
+  $("article a[data-toggle]").each(function(index, element) {
+    $(element).insertAfter(($(element).parent().find("a.environment-identifier")));
+  });
+
+  $('article a[data-toggle="popover"]').popover()
+
+  // render mathematics in popovers
+  $("[data-toggle=popover]").on('shown.bs.popover', function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, $("div.popover-body").html()]);
+  });
+});
+  </script>
+
+  
+
+  
+</div>
+
+
+<hr>
+
+<section id="comments">
+  <h2>Comments (0)</h2>
+
+  
+
+  
+</section>
+
+<hr>
+
+<section id="post-comment">
+  <h2>Post a comment</h2>
+  <p>Your email address will not be published. Required fields are marked.
+  <p>In your comment you can use <a href="/markdown">Markdown</a> and LaTeX style mathematics (enclose it like <code>$\pi$</code>). A preview option is available if you wish to see how it works out (just click on the eye in the toolbar).
+  <noscript><p>Unfortunately JavaScript is disabled in your browser, so the comment preview function will not work.</p></noscript>
+
+  <p>All contributions are licensed under the <a href="https://github.com/stacks/stacks-project/blob/master/COPYING">GNU Free Documentation License</a>.
+
+  <form name="comment" id="comment-form" action="/post-comment" method="post">
+    <label for="name">Name<sup>*</sup>:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="mail">E-mail<sup>*</sup>:</label>
+    <input type="email" name="mail" id="mail" required><br>
+
+    <label for="site">Site:</label>
+    <input type="url" name="site" id="site"><br>
+
+    <label>Comment:</label>
+    <textarea name="comment" id="comment-textarea" cols="80" rows="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <script type="text/javascript">
+var easymde = new EasyMDE({
+  autosave: {
+    enabled: true,
+    delay: 1000,
+    uniqueId: "comment-0B9C",
+  },
+  element: $("#comment")[0],
+  forceSync: true,
+  insertTexts: { link: ["\\ref{", "}"], table: ["$", "$"], image: ["\\begin{equation}\n", "\n\\end{equation}\n"] }, // we hack into these insertion methods, I couldn't figure out how to write your own...
+  placeholder: "You can type your comment here, use the preview option to see what it will look like. If your comment is on a lemma, please leave your comment on the page of the lemma. Same with remarks, propositions, theorems, etc.",
+  previewRender: function(plaintext, preview) {
+    // deal with references
+    plaintext = plaintext.replace(/\\ref\{([0-9A-Z]{4})\}/g, "<span class=\"tag\">[$1](/tag/$1)</span>");
+    // deal with \[\] getting replaced to []
+    plaintext = plaintext.replace(/\\\[/g, "\\begin{equation}");
+    plaintext = plaintext.replace(/\\\]/g, "\\end{equation}");
+
+    output = this.parent.markdown(plaintext);
+
+    setTimeout(function() {
+      preview.innerHTML = output;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }, 0);
+
+    return "";
+  },
+  spellChecker: false,
+  status: false,
+  toolbar: [
+    "link", {name: "inline", action: EasyMDE.drawTable, className: "fa fa-usd"}, {name: "block", action: EasyMDE.drawImage, className: "fa fa-square"}, "|",
+    "bold", "italic", "|",
+    "ordered-list", "unordered-list", "|",
+    "preview"
+  ],
+});
+
+// make sure to show tags, not numbers
+var tagToggleHappened = false; // only do this once to not annoy the user too much
+easymde.codemirror.on("change", function() {
+  // if data-tag elements do not have tag attribute we need to make tags visible
+  if (!$("*[data-tag]").hasClass("tag") && !tagToggleHappened)
+    $("section#meta input.toggle").bootstrapToggle("toggle");
+  tagToggleHappened = true;
+});
+
+// prevent form submit when the captcha isn't correct
+// it's a bit silly to use HTML5 validation for this, as bots can figure that out
+// also save the author information to localStorage
+easymde.element.form.addEventListener("submit", function(event) {
+  if ($("#check").val() != $("#hidden-tag").val()) {
+    // explain captcha
+    $("#captcha-message").toggle();
+
+    // stop submit
+    event.preventDefault();
+    return false;
+  }
+
+  // save author information
+  localStorage.setItem("name", $("input#name").val());
+  localStorage.setItem("mail", $("input#mail").val());
+  localStorage.setItem("site", $("input#site").val());
+});
+    </script>
+
+    <p>In order to prevent bots from posting comments, we would like you to prove that you are human. You can do this by <em>filling in the name of the current tag</em> in the following input field. As a reminder, this is tag <span class="tag">0B9C</span>. Beware of the difference between the letter&nbsp;'<span class="tag">O</span>' and the digit&nbsp;'<span class="tag">0</span>'.</p>
+    <!--<p>This <abbr title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</abbr> seems more appropriate than the usual illegible gibberish, right?<br>-->
+    <label for="check">Tag:</label>
+    <input type="text" name="check" id="check" required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Post comment</button>
+    <input type="hidden" name="tag" id="hidden-tag" value="0B9C"><br>
+
+    <p id="captcha-message" style="display: none" class="alert alert-warning" role="alert">The tag you filled in for the captcha is wrong. You need to write <span class="tag">0B9C</span>, in case you are confused.</p>
+
+    <script type="text/javascript">
+// enter in captcha fields causes \ref to appear (?!)
+$("input#check").on("keypress", function(e) {
+  if (e.which == 13) {
+    // always stop the event
+    e.preventDefault();
+
+    // perform clientside check as for actual submit
+    if ($("#check").val() != $("#hidden-tag").val()) {
+      // explain captcha
+      $("#captcha-message").toggle();
+    }
+    else {
+      $("form#comment-form").submit();
+    }
+  }
+});
+    </script>
+  </form>
+</section>
+
+
+
+
+    </section>
+	  <div class="col-lg-4 col-xl-4">
+	    <section id="meta" class="row topbar sticky-top">
+        
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0B94">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/0B9K">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  <hr>
+  
+    <a href="https://stacks.math.columbia.edu/download/pic.pdf#nameddest=0B9C">View Section <span data-tag="0B9C">44.3</span> as pdf</a>
+  
+
+  
+
+
+      </section>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

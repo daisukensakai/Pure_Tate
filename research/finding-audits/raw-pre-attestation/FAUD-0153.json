@@ -1,0 +1,148 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (c(6)=5, so n=6 needs residual geometry) and with the packet C66-GEO-COMP demand for components, stabilizers, and finite-cover behaviour of Z. INDEPENDENT DERIVATION. On Z one has O(Gamma) iso Lbar tensor pi^*M with Lbar=omega_{C/T} tensor gamma^*O_P(-1), hence omega(-Gamma) iso gamma^*O_P(1) tensor pi^*M^{-1}. Projection along gamma_*O_C=O_P oplus E^vee splits V=sigma_*O_P(1) tensor M^{-1} oplus sigma_*(E^vee(1)) tensor M^{-1}. O_P(1):=det(E) tensor omega_{P/T}^{tensor 4} has fibre degree 9+4*(-2)=1 on every genus-0 fibre, so P=P((sigma_*O_P(1))^vee) with no Brauer obstruction. H^1(P^1,O(1))=0 and h^0=2 fibrewise; Stacks 0B91 gives that R sigma_*O_P(1) is perfect of amplitude [0,1] and commutes with arbitrary base change, and fibrewise vanishing of R^1 upgrades sigma_*O_P(1) to a rank-2 vector bundle with arbitrary base change, no reducedness used. The complementary summand vanishes because h^0(E^vee(1))=#{i:e_i=1}=h^0(D)-2, and h^0(D)=2 on every balanced geometric fibre (corroborated FND-0139/FND-0142: Clifford equality at deg 4 forces a hyperelliptic composed pencil, which has F=O(2)oplus O(7) by FND-0125, incompatible with F=O(4)oplus O(5)). Represent R sigma_*(E^vee(1)) locally by a two-term complex of finite locally free sheaves (again 0B91); fibrewise vanishing of H^0 means the differential is injective on every residue field, so the ideal of maximal minors meets no maximal ideal and is the unit ideal, hence the differential is Zariski-locally a split injection over any locally Noetherian base. This is the extra Fitting input that FND-0131 correctly says constant fibre dimensions alone do not supply. Thus V is locally free of rank 2 with arbitrary base change, and C->P(V^vee) is the original gamma up to unique T-isomorphism of the target (gamma is a finite flat epimorphism and P is separated). Full faithfulness of Theta on T-points follows: an M_{6,6}-isomorphism carries (omega,Gamma) to (omega',Gamma') and therefore carries the reconstructed pencil to the reconstructed pencil, uniquely. Stacks Lemma 100.8.4/04ZZ equates fully faithful, monomorphism, and diagonal-an-equivalence for morphisms of algebraic stacks; Lemma 94.15.2/04Y5 supplies representability by algebraic spaces from faithfulness. A monomorphism has etale (in fact equivalence) diagonal, so if locally of finite type it is unramified by Stacks 0CJ0; unramified morphisms of algebraic stacks are locally quasi-finite by 0H2Z (scheme form 02V5). Finite type of Z and M_{6,6} over k upgrades locally quasi-finite to quasi-finite. Inertia isomorphisms are the geometrically-pointed case of full faithfulness, and run in the FND-0137-required direction: an automorphism preserving the marks preserves omega(-Gamma) and therefore the reconstructed pencil. RELATION TO THE CORPUS. Completes rather than duplicates corroborated FND-0098 (mono into M_{6,6} requires recovering gamma; this finding supplies the functorial recovery from (C,Gamma) via |omega(-Gamma)|, equivalently |D| on the Lbar-incidence, without using (N)). Complementary to FND-0137 (names Aut(C,gamma,Gamma) versus Aut(C,Gamma) and proves they coincide, without claiming either is trivial). Distinct from FND-0131 (constant fibre dimension is insufficient; the present argument uses fibrewise injectivity of a bundle map). Distinct from FND-0120 (a mixed injectivity-plus-dimension-bound route to quasi-finiteness; here quasi-finiteness is inherited from the monomorphism). Distinct from pending FND-0145 (fibrewise h^0(D)=2 / constant rank, already corroborated as FND-0139/FND-0142) and pending FND-0146 (the abstract split-injection lemma used as a step): do not merge, or the monomorphism/inertia content is lost. Mild scope note: clauses (A)-(E) of ATT-0098 are for the Lbar-incidence over Bal; transport to the CE W_5-failure locus still requires (N) as in FND-0105/CLM-0098-10. Kind 'obstruction' on the finding record is a mislabel of a lemma; it does not affect the mathematics. Merge target: none. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source. The finding's sole reviewer_engine (qwen) is in this revision's excluded_engines; this audit is the first non-excluded verification.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0147",
+  "id": "FAUD-0153",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "characteristic": 0,
+    "coefficients": "any",
+    "exact_mathematical_scope": "On the ordered distinct-support Lbar-incidence Z over the balanced tetragonal stack Bal at (g,d)=(6,4), for every k-scheme T and every T-point of Z one has a canonical isomorphism omega_{C/T}(-Gamma) iso gamma^*O_P(1) tensor pi^*M^{-1}. Then V=p_*(omega_{C/T}(-Gamma)) is finite locally free of rank 2 on T and its formation commutes with arbitrary base change T'->T; the complete linear system C->P(V^vee) is uniquely isomorphic over T to the original pencil (P,gamma). Consequently Theta:Z->M_{6,6}, (C,P,gamma,x_bullet)|->(C,x_bullet), is fully faithful on T-groupoids for every T, hence a monomorphism of algebraic stacks in the sense of Stacks 04ZZ (equivalently representable by algebraic spaces), and being locally of finite type it is unramified and locally quasi-finite; on geometric points it induces Aut(C,gamma,x_bullet) iso Aut(C,x_bullet) and Aut(C,gamma,Gamma) iso Aut(C,Gamma).",
+    "excluded_claims": [
+      "Does not identify Z with the Casnati-Ekedahl W_5 evaluation-failure incidence; that identification is clause (F) of ATT-0098 and remains conditional on the weak relative-canonical normalization (N) of FND-0105.",
+      "Does not assert closedness, properness, or a Gysin map for (M_{6,6}, im Theta).",
+      "Does not compute the number of components of Bal or the monodromy images H_alpha.",
+      "Does not claim Aut(C,Gamma) is trivial.",
+      "Does not assert local freeness of p_*omega(-Gamma) off Z, nor on the unbalanced locus.",
+      "Does not discharge C66-TATE-SUPPORT or produce a non-Tate summand."
+    ],
+    "excluded_engine_note": "the finding's sole reviewer_engine (qwen) is in this revision's excluded_engines; this audit supplies the first non-excluded verification",
+    "generality": "balanced genus-6 degree-4 CE families over arbitrary locally Noetherian k-schemes (reduced or not) and, by smooth-atlas descent, locally Noetherian algebraic k-stacks; campaign instance (g,n)=(6,6)",
+    "hypotheses": [
+      "char 0",
+      "(CE) relative Casnati-Ekedahl structure on Tet as in ATT-0098/SRC-0004",
+      "fibrewise balancedness F_b iso O(4) oplus O(5)",
+      "Z the ordered distinct-support model of the Abel-Jacobi incidence for Lbar over Bal"
+    ],
+    "impacted_claim_ids": [
+      "CLM-0098-7",
+      "CLM-0098-8"
+    ],
+    "impacts_approach_ids": [
+      "C66-GEO-COMP"
+    ],
+    "kind_note": "Recorded as kind obstruction, but the statement is a positive C66-GEO-COMP lemma (functorial reconstruction of the pencil and the resulting morphism properties of Theta), not an obstruction to a proposed argument.",
+    "objects": [
+      "Z",
+      "Bal",
+      "Theta",
+      "V=p_*(omega_{C/T}(-Gamma))",
+      "Lbar=omega_{C/T} tensor gamma^*O_P(-1)",
+      "(P,gamma)"
+    ],
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "aca44322f17b082805414e5ad2b1d8206a6d774630446ea296e31f23d30863e9",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-16T01:20:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "8f88507e3babc367e86eec98c63cee6c1d4115d38f9ada98ca68fc0c7b6cf722",
+      "doi": null,
+      "query_family": "corpus-claims-cross-check",
+      "retrieved_at": "2026-08-16T01:20:10Z",
+      "source_type": "campaign_claims",
+      "url": "file://data/claims.jsonl"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-monomorphism-fully-faithful",
+      "retrieved_at": "2026-08-16T01:10:03Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/04ZZ"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-faithful-representable-by-algebraic-spaces",
+      "retrieved_at": "2026-08-16T01:16:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/04Y5"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-unramified-stacks-etale-diagonal",
+      "retrieved_at": "2026-08-16T01:18:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0CJ0"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-unramified-locally-quasi-finite-stacks",
+      "retrieved_at": "2026-08-16T01:18:10Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0H2Z"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-unramified-implies-locally-quasi-finite-schemes",
+      "retrieved_at": "2026-08-16T01:14:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/02V5"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "stacks-perfect-pushforward-arbitrary-base-change",
+      "retrieved_at": "2026-08-16T01:16:20Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0B91"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": null,
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "ce-degree-locator",
+      "retrieved_at": "2026-08-16T01:20:20Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    }
+  ],
+  "task_id": "TASK-F-FND-0147",
+  "verdict": "promote"
+}

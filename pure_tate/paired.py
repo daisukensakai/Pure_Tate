@@ -62,13 +62,19 @@ class ArtifactValidationError(ValueError):
         self.trace_path = trace_path
 
 
-class PairedInfrastructureError(RuntimeError):
+class ObservableInfrastructureError(RuntimeError):
+    """Infrastructure failure with a durable official-output trace."""
+
     def __init__(
         self, message: str, trace_id: str, trace_path: str
     ) -> None:
         super().__init__(message)
         self.trace_id = trace_id
         self.trace_path = trace_path
+
+
+class PairedInfrastructureError(ObservableInfrastructureError):
+    """Backward-compatible paired-turn specialization."""
 
 
 def _timestamp() -> str:

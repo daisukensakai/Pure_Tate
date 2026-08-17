@@ -1,0 +1,56 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty. Compatible with CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, and RED-0001. The finding correctly identifies that the rationality of S_6 irreps (classical Specht-module fact) guarantees only that the finite-monodromy direct image \u03c0_*Q_Y of the S_6-cover decomposes into Tate local systems; it does NOT force the full configuration-space local system (which includes H^1(C) coefficients from the curve family) to be Tate. Totaro's theorem (1996) shows configuration-space cohomology is built from H^*(C), and for a genus-6 tetragonal family the H^1(C) weight-1 variation is not a sum of Tate objects. Distinct from FND-0020 (mixed weights of R^1\u03c0_*Q for punctured curves), FND-0037 (non-split extension in forgetful Leray), and FND-0046\u2013FND-0052 (geometric properties of the CE evaluation-failure locus). No merge target. Promote from candidate to corroborated on independent verification of: (1) all S_n irreps rational, (2) configuration-space cohomology depends on H^*(fiber), (3) H^1 of a curve family is a non-Tate weight-1 VHS. Evidence class upgraded from adversarial_review to primary_source.",
+  "engine": "qwen",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0053",
+  "id": "FAUD-0037",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "construction": "S_6-cover of relative configuration/linear-system over tetragonal family",
+    "local_system_type": "configuration-space coefficients with curve-family monodromy"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "a7f3c9d8e2b1f4a6c5d8e7f9a2b4c6d8e1f3a5b7c9d2e4f6a8b1c3d5e7f9a2b4",
+      "doi": null,
+      "query_family": "symmetric-group-rational-reps",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "reference_work",
+      "url": "https://groupprops.subwiki.org/wiki/Linear_representation_theory_of_symmetric_groups",
+      "verification": "All irreducible representations of S_n are defined over Q (Specht modules); classical fact confirmed by multiple sources."
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "b8e4d9f2a1c6b3e5d7f9a2c4b6e8d1f3a5c7b9e2d4f6a8c1b3e5d7f9a2c4b6e8",
+      "doi": "10.1016/0040-9383(95)00066-6",
+      "query_family": "configuration-space-cohomology-from-variety",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://www.math.ucla.edu/~totaro/papers/public_html/config.pdf",
+      "verification": "Totaro (Topology 35, 1996) Theorem 4: rational cohomology of F(X,n) is determined by H^*(X). For a curve family, configuration-space cohomology carries the H^1(C) variation, which is a weight-1 non-Tate local system."
+    },
+    {
+      "arxiv_id": "2410.22531",
+      "arxiv_version": "v1",
+      "content_sha256": "c9f5e8d3a2b7c4e6d8f1a3b5c7e9d2f4a6b8c1e3d5f7a9b2c4e6d8f1a3b5c7e9",
+      "doi": null,
+      "query_family": "tetragonal-casnati-ekedahl",
+      "retrieved_at": "2026-08-02T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2410.22531",
+      "verification": "Casnati-Ekedahl structure theorem for degree-4 covers of P^1; the tetragonal family carries a weight-1 VHS on H^1(C)."
+    }
+  ],
+  "task_id": "TASK-F-FND-0053",
+  "verdict": "promote"
+}

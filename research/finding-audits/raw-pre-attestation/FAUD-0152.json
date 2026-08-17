@@ -1,0 +1,85 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. Complementary to corroborated FND-0131 rather than a duplicate: Stacks 0FWG shows that for a finite module that is not already locally free, a locally constant residue-field rank function implies local freeness only after reducedness, which is exactly FND-0131; FND-0146 is the different reducedness-free statement for a morphism of sheaves that are already finite locally free. Compatible with FND-0122 (I_11(phi)=I_5(phi_5)=O_B on any locally Noetherian base), which applies the maximal-minor conclusion to a rank-at-least-r evaluation map and is not a merge target. Primary check: Stacks 07ZC equates Fit_k not contained in p with fiber dimension at most k; if d tensor kappa(t) is injective at every point then the rank(K^0) minor ideal lies in no prime, hence equals (1). On the resulting Zariski cover a maximal minor is a unit, so d admits a local left inverse and is a split injection; in particular ker(d)=0. No reducedness or Noetherian hypothesis is used. This is the scheme-theoretic constant-rank step FND-0131 requires before kernels or pushforwards can be declared locally free over a nonreduced base. Distinct from FND-0131 and FND-0122: do not merge. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0146",
+  "id": "FAUD-0152",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "base": "any scheme; locally Noetherian is superfluous; reducedness is not used",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "conclusion": "the rank(K^0) minors generate the unit ideal; d is Zariski-locally a split injection; ker(d)=0",
+    "does_not_apply_to": "declaring cohomology of a two-term complex locally free from constant geometric-fiber dimensions alone",
+    "generality": "any commutative base ring; campaign use is nonreduced locally Noetherian bases of CE evaluation and pushforward-vanishing maps in C66-GEO-COMP",
+    "hypothesis": "d tensor kappa(t) is injective for every scheme-theoretic point t",
+    "impacts_approach_ids": [
+      "C66-GEO-COMP"
+    ],
+    "objects": [
+      "morphism of finite locally free sheaves",
+      "maximal-minor ideal",
+      "Fitting ideal of the cokernel"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-16T01:12:10Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/07ZC"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-16T01:10:45Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/07ZD"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-16T01:10:50Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/07Z6"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-16T01:11:40Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/00NX"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": null,
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-16T01:11:55Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0FWG"
+    }
+  ],
+  "task_id": "TASK-F-FND-0146",
+  "verdict": "promote"
+}

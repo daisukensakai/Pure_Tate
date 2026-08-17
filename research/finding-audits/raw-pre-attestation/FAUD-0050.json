@@ -1,0 +1,68 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement opposes none of CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. EXACT SCOPE: FND-0066 is a purely definitional/logical statement about one degenerate case of the packet theorem for the single group G := W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21) (d=21, BM weight -16 type Q(8), ordinary degree/weight 26, untwisted type Q(-13), Chow codimension 13). TRUTH: correct. Under the standard convention that an empty direct sum is the zero object, G=0 satisfies 'G is a direct sum of Q(8)' with multiplicity zero, and G=0 has no nonzero summands at all, a fortiori no non-Tate summand. PRIMARY-SOURCE CHECK (why this is not a new finding): the convention is already explicit in the campaign's own primary corpus. SRC-0001 (Payne, arXiv:2605.20453, Section 2.4) states verbatim: 'For odd k<11, we have H^k(Mbar_{g,n})=0 for all g and n. Given this vanishing, the generalized Hodge and Tate conjectures hold vacuously in these cases.' The same survey (Section 5) records 'The prediction that H^k(Mbar_{g,n}) is pure Tate for even k<=20 is confirmed for k<=14, but the cases 16, 18, and 20 remain open,' consistent with OBS-0001 and CONJ-0001; SRC-0002 Theorem 1.5(3) ('R H^*(Mbar_{g,n}) contains H^k(Mbar_{g,n}), for even k<=14, for all g and n') matches THM-0002 with no separate vanishing caveat, i.e. vacuity is treated as automatic, not as a defect. FND-0066 therefore restates a source-verified convention, the same ground on which FND-0011 was retired, and is execution-scope/semantics commentary rather than mathematics, the ground on which FND-0012 was retired. THE IMPLIED DEFECT IS VOID: any reading on which the operational disproof clause is unfalsifiable or non-equivalent to the theorem fails against corroborated FND-0033. G is a polarizable pure Q-Hodge structure of weight -16, and polarizable pure Q-HS of fixed weight form a semisimple abelian category; the only Tate object of weight -16 is Q(8), so G is a direct sum of Q(8) if and only if G has no simple summand other than Q(8). Hence 'exhibit a surviving non-Tate summand in this exact group' is exactly the negation of the packet theorem, including at G=0, where the theorem holds and no summand exists. The zero case is a consistency check on the clause, not a loophole. MISLABELLED KIND/IMPACT: recorded as kind='obstruction' against C66-FULL, but it obstructs nothing; it strictly weakens the burden on a proof route (a vanishing proof would discharge the pair). Its only actionable residue, that a counterexample must prove its non-Tate class nonzero in the exact target, is already the definition of subproblem C66-CEX-SURVIVE ('Test survival of a non-Tate candidate in the exact target') and is covered by the packet execution boundary. NOT NEW TO THE CAMPAIGN, NO MERGE TARGET: the vacuity observation is already on record inside equivalence groups top-degree-vanishing-may-settle-open-input (FND-0018: 'vacuously a direct sum of copies of Q(8)') and open-input-sits-in-vcd-degree (FND-0025: 'trivially a (empty) direct sum of Q(8)'), both retired for reasons unrelated to the convention (no applicable top-vcd vanishing theorem). No live equivalence group has this convention as its content, so there is no admissible merge target and merge_target_id is null. ANTECEDENT STATUS: whether G=0 is realized is open and is governed by corroborated FND-0035; for (6,6) the required ordinary degree 26 equals Harer's vcd(M_{6,6})=4g-4+n=26, so vanishing-above-vcd proves nothing. Live literature check found no computation of this group: arXiv:2603.26962 (Deligne weight spectral sequence and tautological cohomology) states it can in principle reach only 2g+n<=12 and reports results for genus five unmarked and (3,3), while (6,6) has 2g+n=18, far outside range; it makes no claim about degree 16 or M_{6,6}. FND-0066 supplies no evidence either way. PROVENANCE: sole reviewer engine grok with evidence_class adversarial_review, and grok is listed in excluded_engines for campaign revision 4; there is no independent corroboration, and nothing beyond the already-source-verified convention survives audit. INDEPENDENCE: this audit used no grok-worker assistance (zero of the four permitted dispatches) precisely because the finding's only originating engine is the campaign-excluded engine; all checks are the auditor's own against live primary sources. VERDICT: retire - true but definitional, already explicit in SRC-0001 Section 2.4, obstructing no approach, with its actionable residue already encoded in C66-CEX-SURVIVE and its antecedent governed by FND-0035. Retirement carries no implication that the target is nonzero, and no attempt may cite this retirement as evidence that G != 0.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0066",
+  "id": "FAUD-0050",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "bm_degree": 16,
+    "bm_tate_type": "Q(8)",
+    "bm_weight": -16,
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "chow_codimension": 13,
+    "coefficients": "Q",
+    "declared_vs_actual_kind": "declared kind 'obstruction' impacting C66-FULL; actual content obstructs no approach and if anything weakens the burden on a proof route",
+    "dimension_d": 21,
+    "independent_of": "whether W_{-16}H^{BM}_{16}(M_{6,6};Q) actually vanishes, which remains open (see FND-0035)",
+    "logical_status": "true but vacuous; standard convention already explicit in the primary corpus (SRC-0001 Section 2.4)",
+    "operative_residue": "a counterexample attempt must show its non-Tate class is nonzero in the exact group; already the definition of subproblem C66-CEX-SURVIVE and covered by the packet execution boundary",
+    "ordinary_degree": 26,
+    "ordinary_weight": 26,
+    "quantification": "Degenerate case only: the single hypothesis G = 0 for G = W_{-16}H^{BM}_{16}(M_{6,6};Q). The finding asserts nothing when G != 0 and supplies no evidence that G = 0.",
+    "statement_type": "definitional/logical convention (the empty direct sum is the zero object of the category of Q-Hodge structures); not a geometric, Hodge-theoretic, or arithmetic claim about M_{6,6}",
+    "target_group": "W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21)",
+    "untwisted_ordinary_tate_type": "Q(-13)"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "content_sha256": "2334046d553ab972cdadea967856868f3c4b572829ce3fc179175dd540a2cf74",
+      "doi": null,
+      "query_family": "empty-direct-sum-vacuity-convention-primary",
+      "retrieved_at": "2026-08-03T04:18:07Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2605.20453"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "750f7bcb72f1b77cd353ef51bc62c3333be0b4775a8a47ac6f55f968d6b5d663",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "pure-tate-statement-phrasing-primary",
+      "retrieved_at": "2026-08-03T04:18:07Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/abs/2307.08830"
+    },
+    {
+      "arxiv_id": "2603.26962",
+      "arxiv_version": null,
+      "content_sha256": "552708b04df06995b078e40e7646b625f6a908b8cb9c38999ee41feb720d6319",
+      "doi": null,
+      "query_family": "target-vanishing-live-literature-check",
+      "retrieved_at": "2026-08-03T04:18:07Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2603.26962"
+    }
+  ],
+  "task_id": "TASK-F-FND-0066",
+  "verdict": "retire"
+}

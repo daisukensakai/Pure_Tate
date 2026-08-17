@@ -1,0 +1,226 @@
+{
+  "attempt_id": "ATT-0098",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim": "Binding: attempt packet_id/packet_sha256/packet_binding_sha256 and theorem_statement match TASK.json exactly.",
+      "id": "CC-01",
+      "note": "packet_id C66-001-v4, packet_sha256 aca44322...63e9 and binding 76cc8a6d...bcc7 equal TASK.json values; theorem_statement textually identical to TASK.json theorem_statement. Packet body not re-read after tool budget exhaustion; hash equality is the binding check. Web-evidence stage was unavailable; review rests on supplied workspace files only.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Clause (A): Tet algebraic DM, finite type, smooth of pure dimension 15.",
+      "id": "CC-02",
+      "note": "Reconstructed: char 0 gives injective gamma^*Omega_P -> Omega_C, so L_{C/P} = Omega_{C/P}, torsion of length (2g-2)+2d = 18; Ext^2 = H^1(torsion) = 0, dim Ext^1 = 18, unobstructed; descent along Spec k -> B PGL_2 (relative dimension 3) gives 18-3 = 15, matching the Hurwitz count deg R - dim PGL_2. Finite type from finitely many Tschirnhausen splitting types (e_i >= 1, sum 9); DM because t is determined by s and Aut(C) finite for g=6.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Balancedness is the open condition h^0(F_b(-6))=0 equivalent to F_b = O(4)+O(5); Bal smooth pure 15 with connected = irreducible components.",
+      "id": "CC-03",
+      "note": "For F_b = O(a)+O(9-a), a <= 4, h^0(F_b(-6)) = 4-a, vanishing iff a=4; upper semicontinuity gives openness; smooth implies normal, and a connected normal locally Noetherian stack is irreducible.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Clause (B): the (1,2)-(2,2) complete intersection in P^1 x P^2 is a balanced k-witness with the stated invariants.",
+      "id": "CC-04",
+      "note": "Independently recomputed: omega_C = O_C(1,1); [C] = 6h1h2 + 4h2^2 gives deg omega_C = 10 (g=6) and deg pr_1 = 4; Koszul pushforward gives gamma_*O_C = O + O(-3)^3, E = O(3)^3; with convention p_*O_X(1)=E, O_X(1)=O(3,1) and deg on C is 18; CE middle term forces F = O(4)+O(5), independently confirmed by p_*(I_C(2)); i^*O_X(1)=O_C(3,1)=omega_{C/P^1}; Lbar=O_C(0,1), h^0=3, base-point-free, Bertini gives 6 distinct points. k-point exists over any char-0 field since k is infinite and the smooth locus is a nonempty open of the parameter space.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Clause (C) fibrewise numerics: h^0(D)=2, h^0(Lbar)=3, h^1(Lbar)=2 on Bal.",
+      "id": "CC-05",
+      "note": "RR gives h^1(D)=h^0(D)+1; Clifford bounds h^0(D) <= 3 with equality only for O, omega, or hyperelliptic double-g_2^1; deg 4 excludes O and omega. The hyperelliptic-not-balanced exclusion is the load-bearing established working-context fact (i) (E = O(1)+O(4)^2, h^0(F(-6)) >= 2), corroborated by dual-confirmed ATT-0086 context. Serre duality then gives h^0(Lbar)=3, h^1=2, constant.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Clause (D) input: |Lbar_b| contains a divisor of six distinct points on every balanced fibre.",
+      "id": "CC-06",
+      "note": "A double base point of the fixed part would give h^0(Lbar(-2q))=3 at degree 4, special, hence Clifford equality, hence hyperelliptic, hence unbalanced: contradiction. Fixed part is reduced; moving part base-point-free of projective dimension 2; char-0 Bertini plus finitely many avoidance hyperplanes yields a reduced degree-6 member.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Clause (C): p_*Lbar locally free rank 3 with arbitrary base change; I = P((p_*Lbar)^vee) a Zariski-locally trivial P^2-bundle, pure dimension 17; transport to arbitrary possibly nonreduced scheme bases and stack bases with smooth atlas.",
+      "id": "CC-07",
+      "note": "Bal smooth hence reduced, h^0 constant = 3, so Grauert on the universal base plus cohomology-and-base-change gives universal base change; transport is by pullback along the classifying map, never by Grauert over T, so FND-0131 is bypassed; FND-0127 smooth-descent remark recorded. Incidence model imported from FND-0107/ATT-0066 within dual-confirmed scope.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Clause (D): I^dist -> Bal surjective smooth with irreducible 2-dim fibres; Z -> I^dist finite etale S_6-torsor; component bijections; [S_6:H_alpha] irreducible-component count.",
+      "id": "CC-08",
+      "note": "Fibres are nonempty opens of P^2; torsor is the stack-level fact (iv)/ATT-0066-CLM-0066-6 with no one-sided reduction; smoothness of Z gives the normality hypothesis FND-0132 requires to upgrade connected to irreducible components; orbit-coset count is standard.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Clause (E) reconstruction: V = p_*(omega_{C/T}(-Gamma)) locally free rank 2 with arbitrary base change; (P,gamma) = canonical morphism to P(V^vee).",
+      "id": "CC-09",
+      "note": "omega(-Gamma) = gamma^*O_P(1) tensor pi^*M^{-1}; sigma_*O_P(1) rank 2 (fppf-local on the Brauer-Severi fibration); sigma_*(E^vee(1)) = 0 via a two-term bundle complex with fibrewise injective differential: maximal minors generate the unit ideal, giving a locally split injection over any locally Noetherian base, reduced or not. This step uses h^0(D)=2 (CC-05) and is valid.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Clause (E): Theta fully faithful on T-points, hence representable monomorphism, unramified, quasi-finite, with inertia isomorphisms.",
+      "id": "CC-10",
+      "note": "Functorial reconstruction lifts any M_{6,6}-isomorphism uniquely (gamma fpqc-epimorphism, target separated); monomorphisms of algebraic stacks are representable and, when locally of finite type, unramified; finite type follows from the graph factorization using separatedness of M_{6,6} over k; inertia statements are the field-valued case.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Clause (E): image constructible of pure dimension 17, codimension 4 in M_{6,6}; etale-locally a regular closed immersion of codimension 4 followed by etale; no closedness/properness/Gysin asserted.",
+      "id": "CC-11",
+      "note": "Chevalley plus quasi-finiteness preserves the pure dimension 17; dim M_{6,6} = 3g-3+n = 21; local structure theorem for unramified morphisms on smooth atlases; closed immersion between smooth stacks of dimensions 17 and 21 is regular of codimension 4. No Gysin, Tate, or cohomological claim is made, so the corresponding prompt attack lines have no hold.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Clause (F): under (N), deg A = 0, L = W_5 tensor omega^{-1} differs from Lbar by a pullback from the base, so the incidence equals the balanced CE evaluation-failure incidence.",
+      "id": "CC-12",
+      "note": "deg i^*O_X(1) = 18 = deg omega_{C/P} forces 4 deg A = 0; degree-0 line bundles on a genus-0 fibration are pullbacks; the residual bundle has fibre degree -1, hence equals O_P(-1) up to base pullback; incidence depends only on the class modulo base pullbacks. (N) is kept as an explicit hypothesis per FND-0105; CLM-0098-11 (surjectivity of gamma^*E -> omega_{C/P}) verified via Gorenstein duality, ker(ev_1) generation, and Nakayama, and correctly not claimed to discharge (N).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim": "Scope discipline: no silent upgrade of exclusions or of the target's cohomological/Tate dictionary.",
+      "id": "CC-13",
+      "note": "All gap markers (number of components of Bal, monodromy images H_alpha, closedness/properness/closure of Theta, unbalanced strata, discharge of (N), Hodge/weight/Tate conclusions) are explicitly excluded from the theorem statement, which is a lemma; per review policy this is not a ground for incompleteness.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-05-09",
+  "finding_candidates": [
+    {
+      "key": "balanced-implies-h0D2-genus6",
+      "note": "Novel candidate, not a restatement of the target dictionary or recorded bounds; load-bearing for the rank-2 reconstruction in clause (E); recommend explicit adjudication with an artifact pointer for the hyperelliptic-unbalanced input if one is not already recorded.",
+      "scope": "C66 balanced CE families, genus 6, degree 4; depends on the established working-context fact that hyperelliptic degree-4 genus-6 covers have E = O(1)+O(4)^2 and are unbalanced, plus the Clifford equality classification.",
+      "statement": "On the balanced tetragonal locus at (g,d)=(6,4), h^0(O_C(D))=2 for every geometric point; equivalently no balanced fibre is hyperelliptic-composed, and p_*(omega_{C/T}(-Gamma)) has constant rank 2 on the ordered balanced model.",
+      "status": "candidate",
+      "supports_finding_id": null
+    },
+    {
+      "key": "constant-maximal-rank-splitting-nonreduced",
+      "note": "Novel positive complement to FND-0131, not a semantic duplicate: FND-0131 warns that constant fibre dimension alone is insufficient, whereas this gives a sufficient condition (fibrewise injectivity of a bundle-complex differential) under which local splitting holds over arbitrary bases.",
+      "scope": "Reusable technical principle for pushforward-vanishing arguments over nonreduced bases.",
+      "statement": "Let d:K^0->K^1 be a morphism of finite locally free sheaves on a locally Noetherian base. If d tensor k(t) is injective for every point t, then the maximal minors generate the unit ideal and d is Zariski-locally a split injection; in particular ker(d)=0, with no reducedness hypothesis on the base.",
+      "status": "candidate",
+      "supports_finding_id": null
+    },
+    {
+      "key": "functorial-pencil-reconstruction-balanced",
+      "note": "Novel candidate; the functoriality-in-families point was previously flagged as unresolved and is discharged here by the constant-rank argument rather than by fibrewise recovery.",
+      "scope": "C66-GEO-COMP; reusable for any downstream closure, purity, or intersection-theoretic step that needs the image of Theta as a locally regularly immersed constructible substack.",
+      "statement": "On the balanced ordered model Z, the pencil (P,gamma) is functorially reconstructed from (C,Gamma) as the canonical morphism C -> P((p_*(omega_{C/T}(-Gamma)))^vee), with V = p_*(omega_{C/T}(-Gamma)) locally free of rank 2 commuting with arbitrary base change; consequently the forgetful morphism to M_{6,6} is a representable unramified quasi-finite monomorphism with inertia isomorphisms.",
+      "status": "candidate",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0147",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "aca44322f17b082805414e5ad2b1d8206a6d774630446ea296e31f23d30863e9",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Used only in clause (F): canonical maximal-degree subbundle L_5 (CLM-0065-5) and evaluation-failure identification (CLM-0065-9), within dual-confirmed scope; not load-bearing for clauses (A)-(E).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Attested first confirmation of CLM-0065-1..9; load-bearing only for clause (F).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Attested second confirmation of CLM-0065-1..9 including the relative-isomorphism-up-to-base-pullback reading used in Section 7.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "CLM-0066-4/5/6 supply the projective-bundle model, Abel-Jacobi/Hilbert incidence model, and stack-level S_6-torsor used in Sections 4, 5, 7; within dual-confirmed scope.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Attested first confirmation of CLM-0066-1..6.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Attested second confirmation of CLM-0066-1..6; its recorded reducedness restriction is exactly what Section 4 removes by base change from the smooth universal base (CC-07).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0086",
+      "note": "Supporting context only (emptiness of the h^0(L)=4 stratum); the normalization-free analogue is re-proved in Section 3.2; non-load-bearing for the main chain.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0135",
+      "note": "Attested first confirmation of CLM-0086-1/2; supporting, non-load-bearing.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0138",
+      "note": "Attested second confirmation of CLM-0086-1/2; supporting, non-load-bearing.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0088",
+      "note": "Supporting context for the reduced-member statement; Section 3.3 gives an independent normalization-free proof and claims no novelty; non-load-bearing.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0139",
+      "note": "Attested first confirmation of CLM-0088-1..10; supporting, non-load-bearing.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0142",
+      "note": "Attested second confirmation of CLM-0088-1..10; supporting, non-load-bearing.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "CE convention and relative degree-four resolution enter as an explicit theorem hypothesis; degree identities deg E = 9 and deg i^*O_X(1) = 18 are consistent with the independently recomputed Section 2.2 witness.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0105",
+      "note": "Status of (N) respected: carried as explicit hypothesis in clause (F) only, never relabelled as established; partial progress CLM-0098-11 does not discharge it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0107",
+      "note": "Abel-Jacobi/Hilbert incidence used as the global model over the constant-h^0 smooth base Bal; consistent with h^0(Lbar)=3 everywhere on Bal.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0098-P1",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: the entire reconstruction edifice of clause (E) rests on h^0(D)=2, which rests on excluding the Clifford equality case h^0(D)=3; at degree 4 that equality forces C hyperelliptic with D = 2g^1_2, and the only barrier is the working-context fact that a hyperelliptic-composed genus-6 degree-4 cover (E = O(1)+O(4)^2) cannot be balanced. If a hyperelliptic cover were balanced, then h^0(E^vee(1)) = 1, V = p_*(omega(-Gamma)) would have fibre rank 3 instead of 2, the reconstruction would return a P^2 rather than the pencil P, Theta would fail to be a monomorphism, and clauses (C), (D), (E) would collapse together. Outcome: repelled \u2014 the Clifford equality classification leaves hyperellipticity as the sole dangerous case, and hyperelliptic-not-balanced is an established working-context fact corroborated by the dual-confirmed ATT-0086 context (emptiness of the h^0=4 stratum). Runner-up attack: the constant-maximal-rank argument for sigma_*(E^vee(1))=0 over nonreduced bases could be a constant-rank fallacy of the FND-0131 kind; outcome: repelled \u2014 fibrewise injectivity of a two-term bundle-complex differential makes the maximal minors generate the unit ideal, yielding a locally split injection via Fitting ideals without any reducedness hypothesis. Prompt attack lines on Gysin, Tate twists, Poincare duality, cohomology-vs-Borel-Moore degrees, semisimplification, predicted motives, and stable pairs have no hold: the theorem asserts no cohomological, motivic, or closure statement and explicitly disclaims Gysin. Residual evidence limitation: native web stage unavailable and packet body unread after budget exhaustion; binding verified by sha256 equality with TASK.json.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be a field of characteristic zero. Let Tet be the k-stack whose objects over a k-scheme T are triples (pi:C->T, sigma:P->T, gamma:C->P) with pi smooth proper with geometrically connected genus-6 fibres, sigma smooth proper with geometrically connected genus-0 fibres, and gamma finite flat of degree 4, morphisms being pairs of T-isomorphisms compatible with gamma. For such a triple set E:=(coker(O_P->gamma_*O_C))^vee (locally free of rank 3, fibre degree 9), O_P(1):=det(E) tensor omega_{P/T}^{tensor 4} (fibre degree 1), D:=gamma^*O_P(1) (fibre degree 4) and Lbar:=omega_{C/T} tensor gamma^*O_P(-1) (fibre degree 6). Assume the relative Casnati-Ekedahl structure (CE) of SRC-0004: a closed P-embedding i:C->X:=P(E^vee) with p o i=gamma whose ideal has the relative resolution 0->O_X(-4) tensor p^*det(F)->O_X(-2) tensor p^*F->I_C->0, where F:=p_*(I_C tensor O_X(2)) is locally free of rank 2 and fibre degree 9 and commutes with arbitrary base change. Let Bal be the locus of geometric points with H^0(P_b, F_b tensor omega_{P_b}^{tensor 3})=0, equivalently F_b iso O(4) direct-sum O(5) (balanced). Let I->Bal be the Abel-Jacobi incidence Sym^6(C/Bal) x_{Pic^6(C/Bal)} Bal taken over the class of Lbar, let I^dist be its distinct-support open, and let Z:=Conf_6(C/Bal) x_{Sym^6(C/Bal)} I be the ordered model. Then: (A) Tet is an algebraic Deligne-Mumford stack of finite type over k, smooth of pure dimension 15, and Bal is open in Tet and nonempty, hence smooth of pure dimension 15, hence reduced and normal, so its irreducible components are exactly its connected components (their number is finite and is not determined here). (B) Explicit witness: a smooth complete intersection C of divisors of bidegrees (1,2) and (2,2) in P^1 x P^2 with gamma=pr_1 is a k-point of Bal; for it E=O(3)^{direct-sum 3}, X=P^1 x P^2 with O_X(1)=O(3,1), F=O(4) direct-sum O(5), i^*O_X(1)=omega_{C/P^1}, Lbar=O_C(0,1) is base-point-free and its general member consists of 6 distinct points. (C) On Bal, h^0(O_{C_b}(D_b))=2, h^0(Lbar_b)=3 and h^1(Lbar_b)=2 for every geometric point b; p_*Lbar is locally free of rank 3 and its formation commutes with arbitrary base change; I is canonically P((p_*Lbar)^vee), a Zariski-locally trivial P^2-bundle, smooth and proper over Bal of pure relative dimension 2 and pure dimension 17. Consequently, for every family of triples satisfying (CE) and fibrewise balancedness over an arbitrary locally Noetherian k-scheme T, reduced or not, and over every locally Noetherian algebraic k-stack with a smooth atlas, the corresponding incidence is canonically I x_{Bal} T, again a Zariski-locally trivial P^2-bundle with p_{T*}Lbar_T locally free of rank 3; no reducedness hypothesis is needed and Grauert is not applied over the possibly nonreduced base. (D) For every geometric point b of Bal the linear system |Lbar_b| contains a divisor with six distinct points, so I^dist->Bal is surjective and smooth with irreducible two-dimensional fibres; Z->I^dist is a finite etale S_6-torsor; Z is smooth of pure dimension 17; on Bal, I, I^dist and Z irreducible components coincide with connected components; the induced maps {components of I^dist}->{components of I}->{components of Bal} are bijections; and for each component Bal_alpha with etale monodromy image H_alpha in S_6 of the torsor over I^dist_alpha, the number of irreducible components of Z over Bal_alpha is exactly [S_6:H_alpha] (the subgroups H_alpha are not determined here). (E) The forgetful assignment Theta:Z->M_{6,6}, (C,P,gamma,x_1,...,x_6) |-> (C,x_1,...,x_6), is a 1-morphism of algebraic stacks which is fully faithful on T-points for every k-scheme T, hence a representable monomorphism; it is unramified and quasi-finite; for every object of Z it induces isomorphisms of inertia Aut(C,gamma,x_bullet) -> Aut(C,x_bullet) and Aut(C,gamma,Gamma) -> Aut(C,Gamma), because (P,gamma) is reconstructed functorially from (C,Gamma) as the canonical morphism to P((p_*(omega_{C/T}(-Gamma)))^vee); the image of Theta is a constructible substack of pure dimension 17, that is of codimension 4 in the 21-dimensional M_{6,6}; and etale-locally on Z the morphism Theta factors as a regular closed immersion of codimension 4 followed by an etale morphism to M_{6,6}. No global closed immersion, no properness, no closedness of the image and no Gysin morphism for the pair (M_{6,6}, image) is asserted. (F) Bridge to the Casnati-Ekedahl evaluation-failure locus: under the weak CE relative-canonical normalization (N) that i^*O_X(1) iso omega_{C/P} tensor gamma^*A for some line bundle A on P, one has A of fibre degree 0, and with L:=W_5 tensor omega_{C/T}^{-1} for the canonical maximal-degree line subbundle L_5 of F and W_5:=i^*O_X(2) tensor gamma^*L_5^vee, one has L iso Lbar tensor pi^*M_0 for a line bundle M_0 on the base; hence I is exactly the balanced CE evaluation-failure incidence O_C(Gamma) iso L of ATT-0065/CLM-0065-9 and ATT-0066/CLM-0066-5, and clauses (A)-(E) apply verbatim to it. Clauses (A)-(E) themselves do not use (N).",
+  "verdict": "confirmed"
+}

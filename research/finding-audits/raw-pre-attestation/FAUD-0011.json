@@ -1,0 +1,69 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with and complementary to corroborated FND-0031 (pure m=0 / depth-one Gysin corner reduces to THM-0003), FND-0032 (undecorated CGP top-weight is the wrong corner), and FND-0033 (pure-row semisimplicity), and with mechanically verified FND-0001 / RED-0001. Independent primary checks. (1) Non-separating clutching: SRC-0003 (CLP, arXiv:2209.03113v2) states that each component of the normalization of the boundary is a finite quotient of Mbar_{g-1,n+2} or a product Mbar_{g1,n1+1}\u00d7Mbar_{g2,n2+1}; the one-edge loop case is explicitly identified as Mbar_{g-1,n+2} with Aut=S_2 (swap of the two half-edges at the node). Standard moduli geometry (Knudsen clutching / dual-graph stratification; e.g. Schmitt ModCurves notes) confirms the gluing map \u03be_irr: Mbar_{g-1,n+2}\u2192Mbar_{g,n} has image the irreducible non-separating boundary divisor. For (g,n)=(6,6) this is Mbar_{5,8}, not Mbar_{5,7}: genus drops by one and the normalization gains two legs at the node, n+2=8. (2) Dimension: d=3g-3+n gives dim Mbar_{6,6}=21 and dim Mbar_{5,8}=3\u00b75-3+8=20=21-1 (codimension one), while dim Mbar_{5,7}=19 is not codimension one\u2014so the ATT-0014 labelling Mbar_{5,7} is arithmetically and geometrically false. (3) Depth-one Gysin sources into H^{26}(Mbar_{6,6}): by FND-0031 / THM-0003 / SRC-0002 right-exact sequence H^{k-2}(~\u2202)\u2192H^k(Mbar)\u2192W_k H^k(M)\u21920 at k=26, only codim-1 strata contribute; those strata are the non-separating component (normalization Mbar_{5,8}/S_2) and separating products Mbar_{i,a+1}\u00d7Mbar_{6-i,b+1} (a+b=6). Thus the only non-product / non-separating Gysin source is Mbar_{5,8}. (4) RED-0001 residual list explicitly includes both (6,6) and (5,8), so any depth-one attack on (6,6) couples directly to the unresolved (5,8) input rather than to strictly simpler discharged base cases. (5) Edge decoration: SRC-0003 records the weight-complex / Getzler\u2013Kapranov E_1 terms as \u2295_{|E(\u0393)|=j}(H^k(Mbar_\u0393)\u2297det E(\u0393))^{Aut(\u0393)}, with det E(\u0393) the determinant of the Aut-permutation representation on edges; for the non-separating loop the S_2-action swapping the two branches (equivalently the two half-edges) acts by the sign on det E_\u0393, so Aut-invariants with the det twist kill odd-edge-permutation contributions omitted by ATT-0014. Mild precision note only: the geometric normalization of the divisor is the quotient Mbar_{5,8}/S_2 rather than the raw stack Mbar_{5,8}, which the finding already accounts for via the Aut/det decoration. Distinct from FND-0031 (which strata depths contribute), FND-0032 (CGP corner mismatch), and FND-0033 (semisimplicity): do not merge. Merge target: none. Promote candidate to corroborated; evidence_class upgraded from legacy_artifact to primary_source on independent primary-source verification of the non-separating clutching identification Mbar_{5,8}, the codimension arithmetic, the RED-0001 coupling, and the det-E Aut E_1 decoration.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0034",
+  "id": "FAUD-0011",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coupling": "unresolved RED-0001 pair (5,8)",
+    "dimension_check": "dim Mbar_{5,8}=20=dim Mbar_{6,6}-1",
+    "edge_decoration": "(H^*(Mbar_Gamma) tensor det E_Gamma)^{Aut(Gamma)}",
+    "gysin_corner": "depth-one codim-1 Gysin into H^{26}(Mbar_{6,6}) / pure m=0 weight corner",
+    "normalization": "Mbar_{5,8}",
+    "not": "Mbar_{5,7}",
+    "object": "non-separating irreducible boundary divisor of Mbar_{6,6}"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2209.03113",
+      "arxiv_version": "v2",
+      "content_sha256": "a3f1c7e92b4d6e80f15a9c2d7e4b8a1063d5f2e9c1b7a4d8e6f0c3b5a2971846",
+      "doi": "10.1017/fms.2023.59",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-02T10:35:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2209.03113v2"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "c8d2a4f17e3b9c50a6d8e1f4b2c7a9035e6d1f8b4a2c7e9d0f3b6a8c15e24791",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "boundary-sequence-and-depth-one",
+      "retrieved_at": "2026-08-02T10:34:30Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2307.08830v3"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "5b7e1d94a2c8f036e9d4b7a1c5f8e2d6a0b3c7f1e4d8a2b6c0f3e7a9d15b2843",
+      "doi": null,
+      "query_family": "clutching-map-nonseparating-divisor",
+      "retrieved_at": "2026-08-02T10:33:50Z",
+      "source_type": "notes",
+      "url": "https://www.math.uni-bonn.de/~schmitt/ModCurves/Script.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "3328dd06de022112916840e0cfb21056b3efb6876ac1aff8309e03e24a01a572",
+      "doi": null,
+      "query_family": "residual-list-cross-check",
+      "retrieved_at": "2026-08-02T10:32:00Z",
+      "source_type": "corpus_claim",
+      "url": "file://data/claims.jsonl#RED-0001"
+    }
+  ],
+  "task_id": "TASK-F-FND-0034",
+  "verdict": "promote"
+}

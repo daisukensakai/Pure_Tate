@@ -6,6 +6,32 @@
   "finding_id": "FND-0100",
   "id": "FAUD-0093",
   "independent": true,
+  "local_evidence_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "29628e10a4d29452693fcf64af7a14a6b52ad614e217ac268c61ff1d3158e1d2",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "packet-FND-0096-etale-hypothesis",
+      "reported_content_sha256": "cb1d4c17cf56d0e31609da0311cbf1f855318e8aac8168a58a17605f19db5226",
+      "retrieved_at": "2026-08-06T12:22:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0d627a0bfe3fef60ffbcf2eb9497193f312b47633ba016db02a3c98a1e391f8c",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "claims-cross-check",
+      "reported_content_sha256": "0000000000000000000000000000000000000000000000000000000000000004",
+      "retrieved_at": "2026-08-06T12:22:30Z",
+      "source_type": "corpus_claims",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
   "merge_target_id": "FND-0096",
   "reviewer_engine": "grok",
   "schema_version": 1,
@@ -28,58 +54,61 @@
     "repair": "restate FND-0096 with finite flat (or finite locally free of degree n) replacing finite etale after verification; until then restrict full-Div citations of FND-0096 to the reduced-support open",
     "safe_domain": "reduced-support open of Div^n where the universal Gamma is finite etale of degree n"
   },
+  "source_attestation_migration": {
+    "attested_at": "2026-08-17T00:49:57.847759Z",
+    "errors": [],
+    "raw_artifact_path": "research/finding-audits/raw-pre-attestation/FAUD-0093.json",
+    "raw_artifact_sha256": "7b952aa58f47518aead754971fb680767723fa1f4bc22a31dd87ea4de36ea6e3",
+    "reason": "C66-FINDING-SOURCE-ATTESTATION-0001",
+    "transformations": [
+      "normalized stacks_project source_type to reference",
+      "normalized stacks_project source_type to reference",
+      "normalized stacks_project source_type to reference",
+      "hashed local evidence file://proof/packets/generated/C66-001-v4.md",
+      "hashed local evidence file://data/claims.jsonl",
+      "moved non-public records to local_evidence_records"
+    ]
+  },
   "source_records": [
     {
       "arxiv_id": null,
       "arxiv_version": null,
-      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000001",
+      "content_sha256": "2d0e60d5e9ea0163b554c8fd000e2a6085758471f5fa9f691ae57f9d9f955557",
       "doi": null,
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "relative-effective-Cartier-finite-flat",
+      "reported_content_sha256": "0000000000000000000000000000000000000000000000000000000000000001",
       "retrieved_at": "2026-08-06T12:24:00Z",
-      "source_type": "stacks_project",
+      "source_type": "reference",
       "url": "https://stacks.math.columbia.edu/tag/056P"
     },
     {
       "arxiv_id": null,
       "arxiv_version": null,
-      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000002",
+      "content_sha256": "c29125c9e262ebabee74fac5880822a761046b4229a4333e65d29a2a027d2bea",
       "doi": null,
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "moduli-of-divisors-finite-locally-free",
+      "reported_content_sha256": "0000000000000000000000000000000000000000000000000000000000000002",
       "retrieved_at": "2026-08-06T12:24:30Z",
-      "source_type": "stacks_project",
+      "source_type": "reference",
       "url": "https://stacks.math.columbia.edu/tag/0B9C"
     },
     {
       "arxiv_id": null,
       "arxiv_version": null,
-      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000003",
+      "content_sha256": "33041f0a2aea26895d471dad55ca3dbaa57d95375c7d36d56913c15060d08370",
       "doi": null,
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "moduli-of-divisors-sum-degree",
+      "reported_content_sha256": "0000000000000000000000000000000000000000000000000000000000000003",
       "retrieved_at": "2026-08-06T12:24:45Z",
-      "source_type": "stacks_project",
+      "source_type": "reference",
       "url": "https://stacks.math.columbia.edu/tag/0B9E"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": "cb1d4c17cf56d0e31609da0311cbf1f855318e8aac8168a58a17605f19db5226",
-      "doi": null,
-      "query_family": "packet-FND-0096-etale-hypothesis",
-      "retrieved_at": "2026-08-06T12:22:00Z",
-      "source_type": "campaign_packet",
-      "url": "file://proof/packets/generated/C66-001-v4.md"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000004",
-      "doi": null,
-      "query_family": "claims-cross-check",
-      "retrieved_at": "2026-08-06T12:22:30Z",
-      "source_type": "corpus_claims",
-      "url": "file://data/claims.jsonl"
     }
   ],
+  "sources_verified": true,
   "task_id": "TASK-F-FND-0100",
-  "verdict": "merge"
+  "verdict": "merge",
+  "verified_source_count": 3
 }

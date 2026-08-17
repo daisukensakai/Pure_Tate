@@ -1,0 +1,34 @@
+{
+  "adjudication_notes": "Evidence limitation: live web/literature search was unavailable in this isolated audit round, and the specific attempt artifact ATT-0052 and review REV-0093 are not present in the workspace. The finding is retained as candidate rather than promoted because the load-bearing claim (that Mod-orbit generation of St_g by im(b) is necessary and not established) requires verification against primary Steinberg-module literature for mapping class groups. The obstruction is methodologically sound and should not be retired; it correctly flags a gap between fixed-point/involution arguments and module-generation arguments in the Steinberg coinvariant approach to top-degree vanishing.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No contradiction with any cross-checked claim: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. The finding is a methodological obstruction on a proposed proof route (top-degree vanishing via Steinberg coinvariants and hyperelliptic generation) rather than a contradiction of an established result. It is compatible with FND-0017/FND-0023/FND-0024 (vcd-degree bookkeeping) and FND-0018 (top-degree vanishing as a candidate resolution line), since it constrains how such a vanishing argument may validly proceed rather than asserting or denying the vanishing itself. The mathematical reasoning is internally sound: (1) Bieri-Eckmann duality does identify H^{vcd}(Mod_g;V) with (St_g \u2297 V)_{Mod_g}; (2) the Birman-Hilden map b: St(\u03a3_{0,2g+2}) \u2192 St_g lands in the hyperelliptic-symmetric subspace; (3) a single involution fixing C^{sym} does not imply Mod-orbit generation of the full Steinberg module; (4) Mod-transitivity on maximal chains or Humphries generators is a statement about the curve complex or generating sets of Mod_g, not about generation of St_g as a Z[Mod_g]-module. However, primary-source verification of the specific generation claim (that the Mod-orbit of im(b) does or does not generate St_g at g=6) was not available: the web-evidence stage was bounded and unavailable, and the packet/attempt artifacts (ATT-0052, REV-0093) are not in the read-only workspace. The obstruction remains mathematically plausible and methodologically valid but cannot be promoted to corroborated without independent verification against the Steinberg-module literature (e.g., Broaddus, Putman, or related work on Steinberg generation for mapping class groups).",
+  "engine": "qwen",
+  "evidence_class": "adversarial_review",
+  "finding_id": "FND-0102",
+  "id": "FAUD-0097",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "qwen",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "mathematical_scope": "Top-degree rational cohomology H^{4g-5}(Mod_g;V) identified via Bieri-Eckmann duality with Steinberg-module coinvariants (St_g \u2297 V)_{Mod_g}; obstruction targets the sufficiency of hyperelliptic/Birman-Hilden symmetric carriers for generating St_g as a Mod_g-module at g=6."
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "doi": "10.1017/fmp.2024.24",
+      "query_family": "steinberg-module-hyperelliptic-generation",
+      "retrieved_at": "2026-08-07T00:00:00Z",
+      "source_type": "research_article",
+      "url": "https://arxiv.org/abs/2307.08830"
+    }
+  ],
+  "task_id": "TASK-F-FND-0102",
+  "verdict": "retain_candidate"
+}

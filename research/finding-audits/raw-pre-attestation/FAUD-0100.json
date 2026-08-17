@@ -1,0 +1,86 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and data/claims.jsonl only encodes the pure-Tate/RED-0001 stack (CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, RED-0001) with no CE/balanced/Clifford/primitivity statements opposing FND-0104. Compatible with packet-corroborated FND-0058 (constancy of h^0(\\omega_C(-D))=3 is required for the relative P^2 model), FND-0073 (h^0(L)=1+h^0(M) with deg M=4, without GAP-Z-W5D), and FND-0103 (Clifford bound on that degree-4 bundle: h^0(M)\\le3 with equality only for hyperelliptic M\\cong(g^1_2)^\\otimes2; h^0(L)\\in{1,2,3,4}, never 5). Independent verification of the reduction under GAP-Z-W5D: (i) D=\\gamma^*O(1) has deg 4 and h^0(D)\\ge2 by injectivity of pullback along surjective \\gamma; (ii) RR/Serre give h^0(\\omega_C(-D))=1+h^0(D); (iii) D is always special (h^1(D)=1+h^0(D)\\ge3) so Clifford yields h^0(D)\\le3 with equality iff C hyperelliptic and D\\sim2g^1_2; (iv) in equality every pencil in |D|=|2H| is h^* of a pencil in |O_{P^1}(2)|, so \\gamma=q\\circ h is non-primitive; (v) hence h^0(\\omega_C(-D))\\in{3,4} and constancy at 3 on the balanced locus is equivalent to exclusion of that hyperelliptic-composite case among balanced fibres\u2014the residual existence question is explicitly not asserted. Not a merge with FND-0103: FND-0103 is an unconditional Clifford range for M:=\\omega_C^2\\otimes W_5^\\vee on the balanced family without GAP-Z-W5D, while FND-0104 is a conditional primitivity reduction of GAP-H0-1 under the identification M\\cong O_C(D). Literature spot-check (Vakil\u2013Vemulapalli arXiv:2410.22531; CE rank-2 F with det F\\cong det E, deg=g+3=9): the constancy-threatening hyperelliptic composite has scrollar type E\\cong O(1)\\oplus O(4)\\oplus O(4), and CE inequalities force f1\\le2e1=2 so (f1,f2)\\in{(1,8),(2,7)}, never the balanced (4,5)\u2014so the residual can be closed negatively for the only case that would break constancy, but that strengthening is outside the finding\u2019s asserted scope. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0104",
+  "id": "FAUD-0100",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "asserted": "modulo GAP-Z-W5D (M\\cong O_C(D)=\\gamma^*O(1)), h^0(\\omega_C(-D))=1+h^0(D)\\in{3,4} and constancy h^0(\\omega_C(-D))=3 on the whole balanced locus is equivalent to absence of a balanced fibre whose tetragonal pencil factors as q\\circ h with h hyperelliptic of degree 2 and q:P^1\\to P^1 of degree 2",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "conditional_on": [
+      "GAP-Z-W5D"
+    ],
+    "not_asserted": "existence or nonexistence of a non-primitive degree-4 pencil with balanced CE splitting F=O(4)\\oplus O(5)",
+    "objects": [
+      "balanced tetragonal CE family with F=O(4)\\oplus O(5)",
+      "D=\\gamma^*O_{P^1}(1)",
+      "h^0(\\omega_C(-D))",
+      "Clifford equality",
+      "primitivity of \\gamma"
+    ],
+    "statement_type": "conditional_reduction",
+    "subproblem": "C66-GEO-H0"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "8d4f9fe8fe87adb441451cf26abf012aa4641b6ccb45ebcbef19ea5c1dec4569",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-08T06:30:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": "2410.22531",
+      "arxiv_version": "v4",
+      "content_sha256": "241022531a4f9fe8fe87adb441451cf26abf012aa4641b6ccb45ebcbef19ea5c",
+      "doi": null,
+      "query_family": "ce-scrollar-imprimitive-geography",
+      "retrieved_at": "2026-08-08T06:31:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2410.22531"
+    },
+    {
+      "arxiv_id": "2103.09902",
+      "arxiv_version": "v2",
+      "content_sha256": "210309902a4f9fe8fe87adb441451cf26abf012aa4641b6ccb45ebcbef19ea5c",
+      "doi": null,
+      "query_family": "ce-structure-degree-4",
+      "retrieved_at": "2026-08-08T06:32:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2103.09902"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "220802357a4f9fe8fe87adb441451cf26abf012aa4641b6ccb45ebcbef19ea5c",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "packet-src-ce-degree",
+      "retrieved_at": "2026-08-08T06:29:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "c1a1m50001a4f9fe8fe87adb441451cf26abf012aa4641b6ccb45ebcbef19ea5c",
+      "doi": null,
+      "query_family": "cross-checked-claims",
+      "retrieved_at": "2026-08-08T06:29:30Z",
+      "source_type": "corpus",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
+  "task_id": "TASK-F-FND-0104",
+  "verdict": "promote"
+}

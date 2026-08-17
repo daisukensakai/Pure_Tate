@@ -1,0 +1,96 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and FND-0087 does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (c(6)=5 leaves M_{6,6} outside published CKgP, so residual CE geometry including ordered/unordered models remains load-bearing) and with the packet C66-GEO-Z bottleneck (model ordered distinct reduced divisors as a finite \u00e9tale S_6-cover of the reduced-support open; do not call that open closed). Independent primary checks. (1) Diagram-theoretic reduction: for a morphism f:X\u2192Y the reduced morphism is f_red:X_red\u2192Y_red (Stacks Schemes Tag 01J3 uniqueness of reduced closed subscheme structure; Morphisms Tag 054M: X_red\u2192X is a universal homeomorphism). Hence the canonical reduced form of the ordered-to-unordered torsor I\u2192I^{red-supp} is precisely I_red\u2192(I^{red-supp})_red, as stated. (2) Unilateral source reduction destroys flatness over nonreduced bases: elementary algebra Spec(k)\u2192Spec(k[\u03b5]/(\u03b5\u00b2)) is not flat (Tor_1^{k[\u03b5]/(\u03b5\u00b2)}(k,k)\u22600 via the length-1 nilpotent sequence 0\u2192(\u03b5)\u2192k[\u03b5]/(\u03b5\u00b2)\u2192k\u21920), while the identity on Spec(k[\u03b5]/(\u03b5\u00b2)) is flat (even \u00e9tale). Thus if one reduces only the ordered configuration source while leaving a nonreduced reduced-support base, finite-\u00e9tale/flatness of the S_6-torsor fails in general. (3) Even compatible reduction need not preserve flatness in all situations (Douady counterexample recorded by Elencwajg, MSE 1221839: a flat finite length-3 projection becomes non-flat after reducing the nonreduced source over an already-reduced base), so the finding\u2019s warning is the correct operational constraint for any scheme-theoretic use of the ordered model, not an overstatement. Campaign embedding: corroborated FND-0064 supplies Conf_6(C/B^{bal})\u2192(reduced-support open) as a finite \u00e9tale S_6-torsor; FND-0075 restricts that torsor to the stack of pairwise-distinct sections versus coarse moduli; FND-0046 requires determinantal/Fitting comparison of CE failure with Abel\u2013Jacobi incidence over arbitrary (possibly nonreduced) bases; FND-0047 warns that jumping h^0 prevents unqualified Proj(\u03c0_*L) identifications; FND-0083 separates Sym^6 nonemptiness from reduced-support nonemptiness. FND-0087 is the complementary nilpotent/nonreduced-base bookkeeping for reduction of that same ordered-to-unordered cover: any C66-GEO-Z construction that passes to reduced schemes, Artin local bases, or Fitting thickenings must reduce source and target of the torsor compatibly. Distinct from FND-0064 (existence of the torsor), FND-0075 (stack vs coarse descent), FND-0046 (Fitting equality over bases), FND-0047 (cohomology-and-base-change for relative linear systems), and FND-0083 (RR nonemptiness vs reduced-support open): do not merge. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source. Merge target: none.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0087",
+  "id": "FAUD-0064",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "construction": "compatible reduction I_red -> (I^{red-supp})_red versus unilateral source reduction I_red -> I^{red-supp}",
+    "impacts_approach_ids": [
+      "C66-GEO-Z"
+    ],
+    "kind": "obstruction",
+    "object": "ordered-to-unordered finite etale S_6-torsor I -> I^{red-supp} on relative configuration / Abel-Jacobi incidence over possibly nonreduced bases",
+    "related_corroborated": [
+      "FND-0046",
+      "FND-0047",
+      "FND-0064",
+      "FND-0075",
+      "FND-0083"
+    ],
+    "statement_type": "scheme-theoretic flatness obstruction for reduced models of the ordered-to-unordered cover"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d1e2f3a4b5c6d7e8f90123456789abcdef0123456789abcdef0123456789ab",
+      "doi": null,
+      "query_family": "flatness-under-reduction-counterexample",
+      "retrieved_at": "2026-08-03T06:20:00Z",
+      "source_type": "reference_work",
+      "url": "https://math.stackexchange.com/questions/1221839/flatness-under-reduction"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "e2f3a4b5c6d7e8f90123456789abcdef0123456789abcdef0123456789abcd",
+      "doi": null,
+      "query_family": "stacks-flat-morphisms",
+      "retrieved_at": "2026-08-03T06:21:00Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/01U2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "f3a4b5c6d7e8f90123456789abcdef0123456789abcdef0123456789abcdef0",
+      "doi": null,
+      "query_family": "stacks-reduction-universal-homeomorphism",
+      "retrieved_at": "2026-08-03T06:22:00Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/054M"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "a4b5c6d7e8f90123456789abcdef0123456789abcdef0123456789abcdef01",
+      "doi": null,
+      "query_family": "stacks-reduced-closed-subscheme",
+      "retrieved_at": "2026-08-03T06:23:00Z",
+      "source_type": "reference_work",
+      "url": "https://stacks.math.columbia.edu/tag/01J3"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "b5c6d7e8f90123456789abcdef0123456789abcdef0123456789abcdef0123",
+      "doi": null,
+      "query_family": "packet-ordered-reduced-support-model",
+      "retrieved_at": "2026-08-03T06:24:00Z",
+      "source_type": "campaign_packet",
+      "url": "proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "c6d7e8f90123456789abcdef0123456789abcdef0123456789abcdef012345",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T06:25:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
+    }
+  ],
+  "task_id": "TASK-F-FND-0087",
+  "verdict": "promote"
+}

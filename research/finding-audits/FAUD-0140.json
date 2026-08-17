@@ -6,6 +6,32 @@
   "finding_id": "FND-0136",
   "id": "FAUD-0140",
   "independent": true,
+  "local_evidence_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "29628e10a4d29452693fcf64af7a14a6b52ad614e217ac268c61ff1d3158e1d2",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "b0ed8ca4514c05713b9642ba8a8afad58bf99f4ec0de9a3a85a27ec9c4da0e3c",
+      "retrieved_at": "2026-08-13T12:16:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0d627a0bfe3fef60ffbcf2eb9497193f312b47633ba016db02a3c98a1e391f8c",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "corpus-claims-cross-check",
+      "reported_content_sha256": "8f88507e3babc367e86eec98c63cee6c1d4115d38f9ada98ca68fc0c7b6cf722",
+      "retrieved_at": "2026-08-13T12:11:30Z",
+      "source_type": "campaign_claims",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
   "merge_target_id": null,
   "reviewer_engine": "grok",
   "schema_version": 1,
@@ -43,23 +69,27 @@
     ],
     "points": "geometric points (or closed points after extending to an algebraic closure)"
   },
+  "source_attestation_migration": {
+    "attested_at": "2026-08-17T00:51:14.588955Z",
+    "errors": [],
+    "raw_artifact_path": "research/finding-audits/raw-pre-attestation/FAUD-0140.json",
+    "raw_artifact_sha256": "f192db1ecdda0ee49fbb99adc76cf9521aaf132043d28c4a21fd8d4a05747cfc",
+    "reason": "C66-FINDING-SOURCE-ATTESTATION-0001",
+    "transformations": [
+      "hashed local evidence file://proof/packets/generated/C66-001-v4.md",
+      "hashed local evidence file://data/claims.jsonl",
+      "moved non-public records to local_evidence_records"
+    ]
+  },
   "source_records": [
     {
       "arxiv_id": null,
       "arxiv_version": null,
-      "content_sha256": "b0ed8ca4514c05713b9642ba8a8afad58bf99f4ec0de9a3a85a27ec9c4da0e3c",
+      "content_sha256": "d0448d68e8ea3fc82a219cafabe26de3c9596fe71ad75da3b4ae048e8586c05d",
       "doi": null,
-      "query_family": "exact-finding-check",
-      "retrieved_at": "2026-08-13T12:16:00Z",
-      "source_type": "campaign_packet",
-      "url": "file://proof/packets/generated/C66-001-v4.md"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": null,
-      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "stacks-riemann-roch-gorenstein-curve",
+      "reported_content_sha256": null,
       "retrieved_at": "2026-08-13T12:15:10Z",
       "source_type": "reference",
       "url": "https://stacks.math.columbia.edu/tag/0BS6"
@@ -67,9 +97,11 @@
     {
       "arxiv_id": null,
       "arxiv_version": null,
-      "content_sha256": null,
+      "content_sha256": "68f2de2bff390b2b0a627f6602f4f0bf81bcd0cc9059c5fd33cb09938b450207",
       "doi": null,
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "stacks-serre-duality-invertible-sheaves",
+      "reported_content_sha256": null,
       "retrieved_at": "2026-08-13T12:15:40Z",
       "source_type": "reference",
       "url": "https://stacks.math.columbia.edu/tag/0BS4"
@@ -77,24 +109,18 @@
     {
       "arxiv_id": null,
       "arxiv_version": null,
-      "content_sha256": null,
+      "content_sha256": "929108c93be05cfdcf1df685f4264330126d8cf6ef2397c9984174339edbd9de",
       "doi": null,
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "stacks-genus-and-canonical-degree",
+      "reported_content_sha256": null,
       "retrieved_at": "2026-08-13T12:16:20Z",
       "source_type": "reference",
       "url": "https://stacks.math.columbia.edu/tag/0BY6"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": "8f88507e3babc367e86eec98c63cee6c1d4115d38f9ada98ca68fc0c7b6cf722",
-      "doi": null,
-      "query_family": "corpus-claims-cross-check",
-      "retrieved_at": "2026-08-13T12:11:30Z",
-      "source_type": "campaign_claims",
-      "url": "file://data/claims.jsonl"
     }
   ],
+  "sources_verified": true,
   "task_id": "TASK-F-FND-0136",
-  "verdict": "promote"
+  "verdict": "promote",
+  "verified_source_count": 3
 }

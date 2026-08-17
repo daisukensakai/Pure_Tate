@@ -1,0 +1,31 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the finding does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. The finding is a structural/meta-level observation about internal campaign consistency. The packet C66-001-v4.md explicitly enumerates the subproblem graph with the dependency chain C66-GEO-Z (no deps) -> C66-GEO-H0 (deps: GEO-Z) -> C66-GEO-COMP (deps: GEO-Z, GEO-H0) -> C66-TATE-SUPPORT (deps: GEO-COMP) -> C66-TATE-ASSEMBLY (deps: TATE-SUPPORT). Multiple independently corroborated findings confirm the necessity of this chain: FND-0050 (ATT-0020 omits all stable-pair and evaluation-failure analysis and cannot certify absence of a surviving non-Tate summand), FND-0052 (balanced reduced-support relative linear system is an open piece requiring closed stratified embedding), FND-0053 (S_6 rational irreps do not imply Tate local systems on the cover), FND-0054 (declaring the Hurwitz space rational/Tate is not a substitute for C66-TATE-SUPPORT), and FND-0055 (CE syzygy vanishing is not a purity theorem). A claimed_complete C66-FULL argument with proof_dependencies=[] and no_undischarged_dependencies=true is therefore demonstrably inconsistent with the packet's own dependency graph and the corroborated obstruction findings. The finding is mathematically sound as an internal-consistency check. Distinct from FND-0050 (which targets a specific attempt's omission) and from FND-0048 (which targets circular identification with a stable-graph complex): do not merge. Promote from candidate to corroborated on independent verification of the packet subproblem graph and the corroborated findings that collectively enforce the dependency chain. Evidence limitation: web evidence stage was unavailable; verification relies entirely on the supplied local packet and findings corpus, which is sufficient since the finding concerns internal campaign structure rather than external mathematical literature.",
+  "engine": "qwen",
+  "evidence_class": "adversarial_review",
+  "finding_id": "FND-0057",
+  "id": "FAUD-0042",
+  "independent": true,
+  "merge_target_id": null,
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    }
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "a022fa7c4182bcf52e34090498086d8fea23be7e1a7a6e25bd4806cf2ada81f3",
+      "doi": null,
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-07-31T00:00:00Z",
+      "source_type": "campaign_packet",
+      "url": "proof/packets/generated/C66-001-v4.md"
+    }
+  ],
+  "task_id": "TASK-F-FND-0057",
+  "verdict": "promote"
+}

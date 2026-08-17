@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#d9d8d1">
+
+<title>Section 101.35 (0CIK): Étale morphisms&mdash;The Stacks project</title>
+
+<meta name="description" content="an open source textbook and reference work on algebraic geometry">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ['tex2jax.js'],
+    jax: ['input/TeX','output/HTML-CSS'],
+    TeX: {
+      extensions: ['AMSmath.js', 'AMSsymbols.js', '/static/XyJax/extensions/TeX/xypic.js'],
+      Macros: {
+        linebreak: ["", 1, ""],
+        },
+      TagSide: 'left'
+    },
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    },
+    'HTML-CSS': {
+    	scale: 100,
+	availableFonts: [],
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+
+
+  <script type="text/javascript" src="/static/js/toggle.js"></script>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/easymde@2.0.1/dist/easymde.min.css" integrity="sha384-IRbzB9px0sfIx90vkN+geaX3F4LVcg/M+k5vmVkfjs5TnRX3MIhGS8Ma06ALKVYp" crossorigin="anonymous">
+  <script src="https://unpkg.com/easymde@2.0.1/dist/easymde.min.js" integrity="sha384-v06sb0t0ToY1YRtVlfD/GCGpIZ/QHYyeH2Gzjvr0ZJI62/50DIzT8XRgQ6JvptVu" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.css" integrity="sha384-8xTxM5sJRAUB0ckdBghB5am+aw+0kC5FfSUzMI+KI+UD8uBCNeSkdi8I1J4+Wjwu" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.js" integrity="sha384-gE5xOW4MVOjJL1A2SbxwvQw/qet6h8Vdv06j3JQGhBW4d1H5hXYB12WsrUBgU439" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid bounded">
+  <div id="first-bar" class="row topbar inner-top top">
+    <header class="col">
+      <h1><a href="/">The Stacks project</a></h1>
+    </header>
+
+    <nav id="header">
+      <ul id="quicklinks">
+        <li><a href="/bibliography">bibliography</a>
+        <li><a href="https://www.math.columbia.edu/~dejong/wordpress/">blog</a>
+      </ul>
+
+      <form id="quicksearch" action="/search">
+        <span id="search-icon"><img src="/static/images/search.svg"></span>
+        <input type="search" name="query" size="16" placeholder="keywords or a tag" value="">
+      </form>
+    </nav>
+  </div>
+
+  <nav id="second-bar" class="row topbar sticky-top">
+    
+      <ul class="col-11 col-sm-11 col-md-11 col-lg-12 col-xl-12" id="crumbs">
+        <li><a href="/browse">Table of contents</a></li>
+        
+  
+  
+    <li>Part <a href="/tag/0ELS" data-tag="0ELS">7</a>: Algebraic Stacks
+    
+  
+    <li>Chapter <a href="/tag/04XM" data-tag="04XM">101</a>: Morphisms of Algebraic Stacks
+    
+  
+    <li class="active">Section <a href="/tag/0CIK" data-tag="0CIK">101.35</a>: Étale morphisms
+    <span id="citation">(<a href="/tag/0CIK/cite">cite</a>)</span>
+  
+
+
+      </ul>
+    
+
+    
+      <div class="col-1 col-sm-1 col-md-1" id="burger">
+        <input type="checkbox" id="burger-input"></input>
+
+        <label id="burger-icon" for="burger-input">
+          <span id="top-bun"></span>
+          <span id="meat"></span>
+          <span id="bottom-bun"></span>
+        </label>
+
+        <div id="burger-content">
+          
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0CIE">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/0CIS">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  
+
+
+        </div>
+      </div>
+    
+
+    
+  </nav>
+
+  <div class="row" id="content">
+    <section id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      
+<div class="html" id="tag">
+  
+
+  
+
+  
+
+  <h2 id="stacks-morphisms-section-etale" class="tex-section"><span data-tag="0CIK">101.35</span> Étale morphisms</h2>
+
+<p>
+An étale morphism of algebraic stacks should not be defined as a smooth morphism of relative dimension $0$. Namely, the morphism 
+</p>
+<div class="equation">
+  \[  [\mathbf{A}^1_ k/\mathbf{G}_{m, k}] \longrightarrow \mathop{\mathrm{Spec}}(k)  \]
+</div>
+<p>
+ is smooth of relative dimension $0$ for any choice of action of the group scheme $\mathbf{G}_{m, k}$ on $\mathbf{A}^1_ k$. This does not correspond to our usual idea that étale morphisms should identify tangent spaces. The example above isn't quasi-finite, but the morphism 
+</p>
+<div class="equation">
+  \[  \mathcal{X} = [\mathop{\mathrm{Spec}}(k)/\mu _{p, k}] \longrightarrow \mathop{\mathrm{Spec}}(k)  \]
+</div>
+<p>
+ is smooth and quasi-finite (Section <a href="/tag/06PT" data-tag="06PT">101.23</a>). However, if the characteristic of $k$ is $p > 0$, then we see that the representable morphism $\mathop{\mathrm{Spec}}(k) \to \mathcal{X}$ isn't étale as the base change $\mu _{p, k} = \mathop{\mathrm{Spec}}(k) \times _\mathcal {X} \mathop{\mathrm{Spec}}(k) \to \mathop{\mathrm{Spec}}(k)$ is a morphism from a nonreduced scheme to the spectrum of a field. Thus if we define an étale morphism as smooth and locally quasi-finite, then the analogue of Morphisms of Spaces, Lemma <a href="/tag/05W3" data-tag="05W3">67.39.11</a> would fail. 
+</p>
+<p>
+Instead, our approach will be to start with the requirements that “étaleness” should be a property preserved under base change and that if $\mathcal{X} \to X$ is an étale morphism from an algebraic stack to a scheme, then $\mathcal{X}$ should be Deligne-Mumford. In other words, we will require étale morphisms to be DM and we will use the material in Section <a href="/tag/0CIE" data-tag="0CIE">101.34</a> to define étale morphisms of algebraic stacks. 
+</p>
+<p>
+In Lemma <a href="/tag/0CJ1" data-tag="0CJ1">101.36.10</a> we will characterize étale morphisms of algebraic stacks as morphisms which are (a) locally of finite presentation, (b) flat, and (c) have étale diagonal. 
+</p>
+<p>
+The property “étale” of morphisms of algebraic spaces is étale-smooth local on the source-and-target, see Descent on Spaces, Remark <a href="/tag/0CG3" data-tag="0CG3">74.21.5</a>. It is also stable under base change and fpqc local on the target, see Morphisms of Spaces, Lemma <a href="/tag/0466" data-tag="0466">67.39.4</a> and Descent on Spaces, Lemma <a href="/tag/042B" data-tag="042B">74.11.28</a>. Hence, by Lemma <a href="/tag/0CIF" data-tag="0CIF">101.34.1</a> above, we may define what it means for a morphism of algebraic spaces to be étale as follows and it agrees with the already existing notion defined in Properties of Stacks, Section <a href="/tag/04XB" data-tag="04XB">100.3</a> when the morphism is representable by algebraic spaces because such a morphism is automatically DM by Lemma <a href="/tag/050E" data-tag="050E">101.4.3</a>. 
+</p>
+<p>
+<article class="env-definition" id="0CIL">
+  <p><a class="environment-identifier" href="/tag/0CIL">Definition <span data-tag="0CIL">101.35.1</span>.</a> Let $f : \mathcal{X} \to \mathcal{Y}$ be a morphism of algebraic stacks. We say $f$ is <em>étale</em> if $f$ is DM and the equivalent conditions of Lemma <a href="/tag/0CIF" data-tag="0CIF">101.34.1</a> hold with $\mathcal{P} = {\acute{e}tale}$. </p>
+</article> 
+</p>
+<p>
+We will use without further mention that this agrees with the already existing notion of étale morphisms in case $f$ is representable by algebraic spaces or if $\mathcal{X}$ and $\mathcal{Y}$ are representable by algebraic spaces. 
+</p>
+<p>
+<article class="env-lemma" id="0CIM">
+  <p><a class="environment-identifier" href="/tag/0CIM">Lemma <span data-tag="0CIM">101.35.2</span>.</a> The composition of étale morphisms is étale. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Combine Remark <a href="/tag/0CIH" data-tag="0CIH">101.34.3</a> with Morphisms of Spaces, Lemma <a href="/tag/0465" data-tag="0465">67.39.3</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0CIN">
+  <p><a class="environment-identifier" href="/tag/0CIN">Lemma <span data-tag="0CIN">101.35.3</span>.</a> A base change of an étale morphism is étale. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Combine Remark <a href="/tag/0CII" data-tag="0CII">101.34.4</a> with Morphisms of Spaces, Lemma <a href="/tag/0466" data-tag="0466">67.39.4</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0CIP">
+  <p><a class="environment-identifier" href="/tag/0CIP">Lemma <span data-tag="0CIP">101.35.4</span>.</a> An open immersion is étale. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $j : \mathcal{U} \to \mathcal{X}$ be an open immersion of algebraic stacks. Since $j$ is representable, it is DM by Lemma <a href="/tag/050E" data-tag="050E">101.4.3</a>. On the other hand, if $X \to \mathcal{X}$ is a smooth and surjective morphism where $X$ is a scheme, then $U = \mathcal{U} \times _\mathcal {X} X$ is an open subscheme of $X$. Hence $U \to X$ is étale (Morphisms, Lemma <a href="/tag/02GP" data-tag="02GP">29.37.9</a>) and we conclude that $j$ is étale from the definition. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0CIQ">
+  <p><a class="environment-identifier" href="/tag/0CIQ">Lemma <span data-tag="0CIQ">101.35.5</span>.</a> Let $f : \mathcal{X} \to \mathcal{Y}$ be a morphism of algebraic stacks. The following are equivalent </p>
+  <p><ol>
+  <li><p>
+$f$ is étale, 
+</p>
+</li><li><p>
+$f$ is DM and for any morphism $V \to \mathcal{Y}$ where $V$ is an algebraic space and any étale morphism $U \to V \times _\mathcal {Y} \mathcal{X}$ where $U$ is an algebraic space, the morphism $U \to V$ is étale, 
+</p>
+</li><li><p>
+there exists some surjective, locally of finite presentation, and flat morphism $W \to \mathcal{Y}$ where $W$ is an algebraic space and some surjective étale morphism $T \to W \times _\mathcal {Y} \mathcal{X}$ where $T$ is an algebraic space such that the morphism $T \to W$ is étale. 
+</p>
+</li>
+</ol></p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Assume (1). Then $f$ is DM and since being étale is preserved by base change, we see that (2) holds. 
+    <p>
+      Assume (2). Choose a scheme $V$ and a surjective étale morphism $V \to \mathcal{Y}$. Choose a scheme $U$ and a surjective étale morphism $U \to V \times _\mathcal {Y} \mathcal{X}$ (Lemma <a href="/tag/0CIA" data-tag="0CIA">101.21.7</a>). Thus we see that (3) holds. 
+    <p>
+      Assume $W \to \mathcal{Y}$ and $T \to W \times _\mathcal {Y} \mathcal{X}$ are as in (3). We first check $f$ is DM. Namely, it suffices to check $W \times _\mathcal {Y} \mathcal{X} \to W$ is DM, see Lemma <a href="/tag/06TZ" data-tag="06TZ">101.4.5</a>. By Lemma <a href="/tag/050M" data-tag="050M">101.4.12</a> it suffices to check $W \times _\mathcal {Y} \mathcal{X}$ is DM. This follows from the existence of $T \to W \times _\mathcal {Y} \mathcal{X}$ by (the easy direction of) Theorem <a href="/tag/06N3" data-tag="06N3">101.21.6</a>. 
+    <p>
+      Assume $f$ is DM and $W \to \mathcal{Y}$ and $T \to W \times _\mathcal {Y} \mathcal{X}$ are as in (3). Let $V$ be an algebraic space, let $V \to \mathcal{Y}$ be surjective smooth, let $U$ be an algebraic space, and let $U \to V \times _\mathcal {Y} \mathcal{X}$ is surjective and étale (Lemma <a href="/tag/0CIA" data-tag="0CIA">101.21.7</a>). We have to check that $U \to V$ is étale. It suffices to prove $U \times _\mathcal {Y} W \to V \times _\mathcal {Y} W$ is étale by Descent on Spaces, Lemma <a href="/tag/042B" data-tag="042B">74.11.28</a>. We may replace $\mathcal{X}, \mathcal{Y}, W, T, U, V$ by $\mathcal{X} \times _\mathcal {Y} W, W, W, T, U \times _\mathcal {Y} W, V \times _\mathcal {Y} W$ (small detail omitted). Thus we may assume that $Y = \mathcal{Y}$ is an algebraic space, there exists an algebraic space $T$ and a surjective étale morphism $T \to \mathcal{X}$ such that $T \to Y$ is étale, and $U$ and $V$ are as before. In this case we know that 
+    <p>
+      <div class="equation">
+  \[  U \to V\text{ is étale} \Leftrightarrow \mathcal{X} \to Y\text{ is étale} \Leftrightarrow T \to Y\text{ is étale}  \]
+</div>
+    <p>
+       by the equivalence of properties (1) and (2) of Lemma <a href="/tag/0CIF" data-tag="0CIF">101.34.1</a> and Definition <a href="/tag/0CIL" data-tag="0CIL">101.35.1</a>. This finishes the proof. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0CIR">
+  <p><a class="environment-identifier" href="/tag/0CIR">Lemma <span data-tag="0CIR">101.35.6</span>.</a> Let $\mathcal{X}, \mathcal{Y}$ be algebraic stacks étale over an algebraic stack $\mathcal{Z}$. Any morphism $\mathcal{X} \to \mathcal{Y}$ over $\mathcal{Z}$ is étale. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      The morphism $\mathcal{X} \to \mathcal{Y}$ is DM by Lemma <a href="/tag/050M" data-tag="050M">101.4.12</a>. Let $W \to \mathcal{Z}$ be a surjective smooth morphism whose source is an algebraic space. Let $V \to \mathcal{Y} \times _\mathcal {Z} W$ be a surjective étale morphism whose source is an algebraic space (Lemma <a href="/tag/0CIA" data-tag="0CIA">101.21.7</a>). Let $U \to \mathcal{X} \times _\mathcal {Y} V$ be a surjective étale morphism whose source is an algebraic space (Lemma <a href="/tag/0CIA" data-tag="0CIA">101.21.7</a>). Then 
+    <p>
+      <div class="equation">
+  \[  U \longrightarrow \mathcal{X} \times _\mathcal {Z} W  \]
+</div>
+    <p>
+       is surjective étale as the composition of $U \to \mathcal{X} \times _\mathcal {Y} V$ and the base change of $V \to \mathcal{Y} \times _\mathcal {Z} W$ by $\mathcal{X} \times _\mathcal {Z} W \to \mathcal{Y} \times _\mathcal {Z} W$. Hence it suffices to show that $U \to W$ is étale. Since $U \to W$ and $V \to W$ are étale because $\mathcal{X} \to \mathcal{Z}$ and $\mathcal{Y} \to \mathcal{Z}$ are étale, this follows from the version of the lemma for algebraic spaces, namely Morphisms of Spaces, Lemma <a href="/tag/05W3" data-tag="05W3">67.39.11</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  // move extras from parent element to after environment name and number
+  $("article a[data-toggle]").each(function(index, element) {
+    $(element).insertAfter(($(element).parent().find("a.environment-identifier")));
+  });
+
+  $('article a[data-toggle="popover"]').popover()
+
+  // render mathematics in popovers
+  $("[data-toggle=popover]").on('shown.bs.popover', function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, $("div.popover-body").html()]);
+  });
+});
+  </script>
+
+  
+
+  
+</div>
+
+
+<hr>
+
+<section id="comments">
+  <h2>Comments (0)</h2>
+
+  
+
+  
+</section>
+
+<hr>
+
+<section id="post-comment">
+  <h2>Post a comment</h2>
+  <p>Your email address will not be published. Required fields are marked.
+  <p>In your comment you can use <a href="/markdown">Markdown</a> and LaTeX style mathematics (enclose it like <code>$\pi$</code>). A preview option is available if you wish to see how it works out (just click on the eye in the toolbar).
+  <noscript><p>Unfortunately JavaScript is disabled in your browser, so the comment preview function will not work.</p></noscript>
+
+  <p>All contributions are licensed under the <a href="https://github.com/stacks/stacks-project/blob/master/COPYING">GNU Free Documentation License</a>.
+
+  <form name="comment" id="comment-form" action="/post-comment" method="post">
+    <label for="name">Name<sup>*</sup>:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="mail">E-mail<sup>*</sup>:</label>
+    <input type="email" name="mail" id="mail" required><br>
+
+    <label for="site">Site:</label>
+    <input type="url" name="site" id="site"><br>
+
+    <label>Comment:</label>
+    <textarea name="comment" id="comment-textarea" cols="80" rows="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <script type="text/javascript">
+var easymde = new EasyMDE({
+  autosave: {
+    enabled: true,
+    delay: 1000,
+    uniqueId: "comment-0CIK",
+  },
+  element: $("#comment")[0],
+  forceSync: true,
+  insertTexts: { link: ["\\ref{", "}"], table: ["$", "$"], image: ["\\begin{equation}\n", "\n\\end{equation}\n"] }, // we hack into these insertion methods, I couldn't figure out how to write your own...
+  placeholder: "You can type your comment here, use the preview option to see what it will look like. If your comment is on a lemma, please leave your comment on the page of the lemma. Same with remarks, propositions, theorems, etc.",
+  previewRender: function(plaintext, preview) {
+    // deal with references
+    plaintext = plaintext.replace(/\\ref\{([0-9A-Z]{4})\}/g, "<span class=\"tag\">[$1](/tag/$1)</span>");
+    // deal with \[\] getting replaced to []
+    plaintext = plaintext.replace(/\\\[/g, "\\begin{equation}");
+    plaintext = plaintext.replace(/\\\]/g, "\\end{equation}");
+
+    output = this.parent.markdown(plaintext);
+
+    setTimeout(function() {
+      preview.innerHTML = output;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }, 0);
+
+    return "";
+  },
+  spellChecker: false,
+  status: false,
+  toolbar: [
+    "link", {name: "inline", action: EasyMDE.drawTable, className: "fa fa-usd"}, {name: "block", action: EasyMDE.drawImage, className: "fa fa-square"}, "|",
+    "bold", "italic", "|",
+    "ordered-list", "unordered-list", "|",
+    "preview"
+  ],
+});
+
+// make sure to show tags, not numbers
+var tagToggleHappened = false; // only do this once to not annoy the user too much
+easymde.codemirror.on("change", function() {
+  // if data-tag elements do not have tag attribute we need to make tags visible
+  if (!$("*[data-tag]").hasClass("tag") && !tagToggleHappened)
+    $("section#meta input.toggle").bootstrapToggle("toggle");
+  tagToggleHappened = true;
+});
+
+// prevent form submit when the captcha isn't correct
+// it's a bit silly to use HTML5 validation for this, as bots can figure that out
+// also save the author information to localStorage
+easymde.element.form.addEventListener("submit", function(event) {
+  if ($("#check").val() != $("#hidden-tag").val()) {
+    // explain captcha
+    $("#captcha-message").toggle();
+
+    // stop submit
+    event.preventDefault();
+    return false;
+  }
+
+  // save author information
+  localStorage.setItem("name", $("input#name").val());
+  localStorage.setItem("mail", $("input#mail").val());
+  localStorage.setItem("site", $("input#site").val());
+});
+    </script>
+
+    <p>In order to prevent bots from posting comments, we would like you to prove that you are human. You can do this by <em>filling in the name of the current tag</em> in the following input field. As a reminder, this is tag <span class="tag">0CIK</span>. Beware of the difference between the letter&nbsp;'<span class="tag">O</span>' and the digit&nbsp;'<span class="tag">0</span>'.</p>
+    <!--<p>This <abbr title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</abbr> seems more appropriate than the usual illegible gibberish, right?<br>-->
+    <label for="check">Tag:</label>
+    <input type="text" name="check" id="check" required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Post comment</button>
+    <input type="hidden" name="tag" id="hidden-tag" value="0CIK"><br>
+
+    <p id="captcha-message" style="display: none" class="alert alert-warning" role="alert">The tag you filled in for the captcha is wrong. You need to write <span class="tag">0CIK</span>, in case you are confused.</p>
+
+    <script type="text/javascript">
+// enter in captcha fields causes \ref to appear (?!)
+$("input#check").on("keypress", function(e) {
+  if (e.which == 13) {
+    // always stop the event
+    e.preventDefault();
+
+    // perform clientside check as for actual submit
+    if ($("#check").val() != $("#hidden-tag").val()) {
+      // explain captcha
+      $("#captcha-message").toggle();
+    }
+    else {
+      $("form#comment-form").submit();
+    }
+  }
+});
+    </script>
+  </form>
+</section>
+
+
+
+
+    </section>
+	  <div class="col-lg-4 col-xl-4">
+	    <section id="meta" class="row topbar sticky-top">
+        
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0CIE">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/0CIS">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  <hr>
+  
+    <a href="https://stacks.math.columbia.edu/download/stacks-morphisms.pdf#nameddest=0CIK">View Section <span data-tag="0CIK">101.35</span> as pdf</a>
+  
+
+  
+
+
+      </section>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

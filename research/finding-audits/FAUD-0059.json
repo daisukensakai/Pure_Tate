@@ -6,6 +6,32 @@
   "finding_id": "FND-0075",
   "id": "FAUD-0059",
   "independent": true,
+  "local_evidence_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "29628e10a4d29452693fcf64af7a14a6b52ad614e217ac268c61ff1d3158e1d2",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "packet-corroborated-torsor",
+      "reported_content_sha256": "5e10504685f3f0d4def91ea3400139096facd358fdada5b02629eb28fd6f8254",
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0d627a0bfe3fef60ffbcf2eb9497193f312b47633ba016db02a3c98a1e391f8c",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "claims-Q-coefficient-target",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-03T00:00:00Z",
+      "source_type": "claims_corpus",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
   "merge_target_id": null,
   "reviewer_engine": "grok",
   "schema_version": 1,
@@ -27,13 +53,28 @@
     "model": "finite_etale_S6_torsor_on_stack_not_on_coarse",
     "object": "relative ordered Conf_6(C/B^{bal}) versus reduced-support open in the relative degree-six linear system; descent of cohomology/weights from ordered to unordered model"
   },
+  "source_attestation_migration": {
+    "attested_at": "2026-08-17T00:49:48.656226Z",
+    "errors": [],
+    "raw_artifact_path": "research/finding-audits/raw-pre-attestation/FAUD-0059.json",
+    "raw_artifact_sha256": "6ea29afa91f8bbb1b317f44ee4a6a7defe46d7e956e1907d1d105b914607a140",
+    "reason": "C66-FINDING-SOURCE-ATTESTATION-0001",
+    "transformations": [
+      "normalized html_preprint source_type to preprint",
+      "hashed local evidence file://proof/packets/generated/C66-001-v4.md",
+      "hashed local evidence file://data/claims.jsonl",
+      "moved non-public records to local_evidence_records"
+    ]
+  },
   "source_records": [
     {
       "arxiv_id": "1006.2364",
       "arxiv_version": "v2",
-      "content_sha256": null,
+      "content_sha256": "e9a17307fb68e2189a1003039f2772fdcf04cdea8943825cd34d298b79d1005c",
       "doi": null,
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "exact-finding-check",
+      "reported_content_sha256": null,
       "retrieved_at": "2026-08-03T00:00:00Z",
       "source_type": "preprint",
       "url": "https://arxiv.org/abs/1006.2364"
@@ -41,44 +82,30 @@
     {
       "arxiv_id": "1006.2364",
       "arxiv_version": "v2",
-      "content_sha256": null,
+      "content_sha256": "cf3eb01818cac60c9c1c2767fc2d118f007f411775426cb8b9ef6e7a433c21dc",
       "doi": null,
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "stack-vs-coarse-rational-cohomology",
+      "reported_content_sha256": null,
       "retrieved_at": "2026-08-03T00:00:00Z",
-      "source_type": "html_preprint",
+      "source_type": "preprint",
       "url": "https://ar5iv.labs.arxiv.org/html/1006.2364v2"
     },
     {
       "arxiv_id": "2208.02357",
       "arxiv_version": "v2",
-      "content_sha256": null,
+      "content_sha256": "7b1c904f3817b21d524d8fee4c57e626dbd0723a9f78357526e324c3d8c32dbf",
       "doi": "10.4171/JEMS/1543",
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "campaign-primary-stack-Q-coefficients",
+      "reported_content_sha256": null,
       "retrieved_at": "2026-08-03T00:00:00Z",
       "source_type": "journal",
       "url": "https://arxiv.org/abs/2208.02357"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": "5e10504685f3f0d4def91ea3400139096facd358fdada5b02629eb28fd6f8254",
-      "doi": null,
-      "query_family": "packet-corroborated-torsor",
-      "retrieved_at": "2026-08-03T00:00:00Z",
-      "source_type": "campaign_packet",
-      "url": "file://proof/packets/generated/C66-001-v4.md"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": null,
-      "doi": null,
-      "query_family": "claims-Q-coefficient-target",
-      "retrieved_at": "2026-08-03T00:00:00Z",
-      "source_type": "claims_corpus",
-      "url": "file://data/claims.jsonl"
     }
   ],
+  "sources_verified": true,
   "task_id": "TASK-F-FND-0075",
-  "verdict": "promote"
+  "verdict": "promote",
+  "verified_source_count": 3
 }

@@ -6,6 +6,32 @@
   "finding_id": "FND-0109",
   "id": "FAUD-0105",
   "independent": true,
+  "local_evidence_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "29628e10a4d29452693fcf64af7a14a6b52ad614e217ac268c61ff1d3158e1d2",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
+      "retrieved_at": "2026-08-09T01:35:00Z",
+      "source_type": "campaign_packet",
+      "url": "file://proof/packets/generated/C66-001-v4.md"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0d627a0bfe3fef60ffbcf2eb9497193f312b47633ba016db02a3c98a1e391f8c",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "corpus-claims-cross-check",
+      "reported_content_sha256": "5e0a1b2debcd516c7c42907cb175710b267ecc5745caeb76e49cd8715532ff4f",
+      "retrieved_at": "2026-08-09T01:35:00Z",
+      "source_type": "campaign_claims",
+      "url": "file://data/claims.jsonl"
+    }
+  ],
   "merge_target_id": null,
   "reviewer_engine": "grok",
   "schema_version": 1,
@@ -33,23 +59,28 @@
       "image of U_red in M_{6,6}"
     ]
   },
+  "source_attestation_migration": {
+    "attested_at": "2026-08-17T00:50:02.473560Z",
+    "errors": [],
+    "raw_artifact_path": "research/finding-audits/raw-pre-attestation/FAUD-0105.json",
+    "raw_artifact_sha256": "a3efcc9b8f74587576313211cfef6f7453235794d5296e4cea893f333b5d4709",
+    "reason": "C66-FINDING-SOURCE-ATTESTATION-0001",
+    "transformations": [
+      "hashed local evidence file://proof/packets/generated/C66-001-v4.md",
+      "normalized reference_survey source_type to survey",
+      "hashed local evidence file://data/claims.jsonl",
+      "moved non-public records to local_evidence_records"
+    ]
+  },
   "source_records": [
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": "d61f334875795956d6abfac671fc0773a052ce6e9db62f2a31fffa904ecbb15c",
-      "doi": null,
-      "query_family": "exact-finding-check",
-      "retrieved_at": "2026-08-09T01:35:00Z",
-      "source_type": "campaign_packet",
-      "url": "file://proof/packets/generated/C66-001-v4.md"
-    },
     {
       "arxiv_id": "2208.02357",
       "arxiv_version": "v2",
-      "content_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "content_sha256": "c21fd73890c9f00892d30b1fc02277da0ba33a3965e72072616fe807f1af4e0d",
       "doi": "10.4171/JEMS/1543",
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "primary-ce-lemma",
+      "reported_content_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
       "retrieved_at": "2026-08-09T01:35:00Z",
       "source_type": "preprint",
       "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
@@ -57,24 +88,18 @@
     {
       "arxiv_id": null,
       "arxiv_version": null,
-      "content_sha256": "8f88507e3babc367e86eec98c63cee6c1d4115d38f9ada98ca68fc0c7b6cf722",
+      "content_sha256": "d3e1ea8764b835df8f60c23568700598b4eccc7b1dfb780711b5130390cc4b4b",
       "doi": null,
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "classical-bertini-base-locus",
+      "reported_content_sha256": "8f88507e3babc367e86eec98c63cee6c1d4115d38f9ada98ca68fc0c7b6cf722",
       "retrieved_at": "2026-08-09T01:35:00Z",
-      "source_type": "reference_survey",
+      "source_type": "survey",
       "url": "https://en.wikipedia.org/wiki/Theorem_of_Bertini"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": "5e0a1b2debcd516c7c42907cb175710b267ecc5745caeb76e49cd8715532ff4f",
-      "doi": null,
-      "query_family": "corpus-claims-cross-check",
-      "retrieved_at": "2026-08-09T01:35:00Z",
-      "source_type": "campaign_claims",
-      "url": "file://data/claims.jsonl"
     }
   ],
+  "sources_verified": true,
   "task_id": "TASK-F-FND-0109",
-  "verdict": "promote"
+  "verdict": "promote",
+  "verified_source_count": 2
 }

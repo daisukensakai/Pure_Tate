@@ -1,0 +1,79 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (c(6)=5 so n=6 lies outside published CKgP) and with the packet C66-GEO-Z bottleneck (balanced tetragonal F=O(4)\u2295O(5), failure from the f_2=5 summand of SRC-0004 Lemma 10.6). Primary check against SRC-0004 (Canning\u2013Larson, arXiv:2208.02357v2) Lemma 10.6: deg(W_{f_i}|_C)=4g+12-4f_i and the obstruction degree is deg(\u03c9_C\u2297W_{f_i}^\u2228(\u0393))=4f_i+n-2g-14, with vanishing of H^0 whenever this degree is negative. Substituting g=6 yields n-10 for f=4 and n-6 for f=5. Hence: (i) for n\u22649, deg_{f=4}\u2264-1 so the f=4 summand vanishes identically; (ii) for n\u22645, deg_{f=5}\u2264-1 as well, so both summands vanish and the CE evaluation-failure locus is empty on the balanced tetragonal locus; (iii) at n=6, deg_{f=5}=0 while deg_{f=4}=-4, so the whole obstruction is carried by the f=5 summand and, for an invertible sheaf of degree 0 on a smooth curve, H^0\u22600 iff the sheaf is trivial, i.e. evaluation fails on \u0393 iff O_C(\u0393)\u2245L:=W_5\u2297\u03c9_C^{-1}; (iv) for n\u22657, deg_{f=5}\u22651 so nonvanishing is a positive-degree Brill\u2013Noether-type condition rather than a pure Abel\u2013Jacobi isomorphism. Consequently the degree-0 Abel\u2013Jacobi identification used for (6,6) is structurally specific to the borderline n=6 and does not transport to neighbouring n by the same argument. Compatible with and complementary to corroborated FND-0062 (f=4 degree \u22124 vanishes at n=6) and FND-0063 (f=5 degree 0 gives the AJ form at n=6); those are the (6,6) specializations, while FND-0074 is the n-parametric critical-puncture obstruction (equivalence_group geo-z-n6-is-the-critical-puncture-number). Compatible with FND-0005 (Z nonempty at (6,6) by RR on the degree-0 L) and with FND-0061 (degree control is not by itself a complete CE identification unless the H^0 groups are shown to be the CE obstruction spaces\u2014the present finding is only the degree arithmetic of those summands). Mild scope sharpening only: emptiness for n\u22645 and the AJ/BN dichotomy are statements on the balanced CE family with smooth geometric fibres, not on all of M_{6,n}; unbalanced types and other genera are outside scope. Distinct from FND-0062/FND-0063: do not merge. Merge target: none. Promote candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on independent primary-source verification of Lemma 10.6 and the g=6 specializations.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0074",
+  "id": "FAUD-0058",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case_emphasis": {
+      "g": 6,
+      "n": 6
+    },
+    "g": 6,
+    "locus": "balanced tetragonal Casnati-Ekedahl family with F=O(4)\u2295O(5)",
+    "n": "variable with critical value n=6",
+    "not_claimed": [
+      "unbalanced tetragonal types",
+      "other genera",
+      "full CE evaluation-map identification beyond degree/Serre-duality of the Lemma 10.6 summands",
+      "geometry of positive-degree BN failure loci for n>=7"
+    ],
+    "obstruction_degree_formula": "4f+n-2g-14",
+    "ranges": {
+      "f4_vanishes": "n<=9",
+      "f5_also_vanishes_empty_failure_on_balanced_locus": "n<=5",
+      "f5_degree_zero_Abel_Jacobi": "n=6",
+      "f5_positive_degree_BN": "n>=7"
+    },
+    "specializations": {
+      "f=4": "n-10",
+      "f=5": "n-6"
+    },
+    "statement_type": "critical_puncture_number_and_nontransport_of_degree0_identification",
+    "summands": {
+      "f": [
+        4,
+        5
+      ]
+    }
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "6aa1904a49dd779fa056707e1435017080df46aec3cd8dc418c73923015b411d",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T05:03:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "6aa1904a49dd779fa056707e1435017080df46aec3cd8dc418c73923015b411d",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T05:03:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "92a1728e0b56571314de116bc1a7f1152b8992b23b93d07145211656e07e2988",
+      "doi": null,
+      "query_family": "packet-primary-locator",
+      "retrieved_at": "2026-08-03T05:03:00Z",
+      "source_type": "campaign_packet",
+      "url": "proof/packets/generated/C66-001-v4.md"
+    }
+  ],
+  "task_id": "TASK-F-FND-0074",
+  "verdict": "promote"
+}

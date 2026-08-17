@@ -3,6 +3,7 @@ import hashlib
 import json
 import re
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
@@ -24,7 +25,32 @@ SOURCE_TYPES = {
     "repository",
     "author-page",
     "citation-index",
+    "encyclopedia",
+    "reference",
     "other-primary",
+}
+SOURCE_TYPE_ALIASES = {
+    "reference_work": "reference",
+    "stacks_project": "reference",
+    "stacks": "reference",
+    "notes": "reference",
+    "lecture_notes": "reference",
+    "secondary_reference": "reference",
+    "reference_discussion": "reference",
+    "research_article": "journal",
+    "article": "journal",
+    "journal-preprint": "journal",
+    "book": "journal",
+    "book_chapter": "journal",
+    "monograph": "journal",
+    "preprint_html": "preprint",
+    "html_preprint": "preprint",
+    "preprint_abstract": "preprint",
+    "preprint_pdf": "preprint",
+    "preprint_html_rendering": "preprint",
+    "preprint_html_render": "preprint",
+    "reference_survey": "survey",
+    "web": "other-primary",
 }
 NOVELTY_VERDICTS = {"no_prior_result", "prior_result_found", "inconclusive"}
 
@@ -67,6 +93,37 @@ def source_record_errors(
     return errors
 
 
+def is_public_source_url(url: Any) -> bool:
+    return str(url or "").startswith(("https://", "http://"))
+
+
+def normalize_finding_source_type(source_type: Any) -> str:
+    text = str(source_type or "").strip()
+    if text in SOURCE_TYPES:
+        return text
+    return SOURCE_TYPE_ALIASES.get(text, "other-primary")
+
+
+def local_source_path(url: Any, root: Optional[Path] = None) -> Optional[Path]:
+    base = root or ROOT
+    text = str(url or "").strip()
+    if not text or is_public_source_url(text) or text.startswith("internal:"):
+        return None
+    if text.startswith("file://"):
+        text = text[len("file://") :]
+    if not text:
+        return None
+    candidate = Path(text)
+    if not candidate.is_absolute():
+        candidate = base / text
+    try:
+        resolved = candidate.resolve()
+        resolved.relative_to(base.resolve())
+    except (OSError, ValueError):
+        return None
+    return resolved if resolved.is_file() else None
+
+
 def fetch_public_source(url: str, timeout: int = 30) -> bytes:
     request = urllib.request.Request(
         url,
@@ -74,6 +131,108 @@ def fetch_public_source(url: str, timeout: int = 30) -> bytes:
     )
     with urllib.request.urlopen(request, timeout=timeout) as response:
         return response.read()
+
+
+def fetch_public_source_cached(
+    url: str,
+    timeout: int = 30,
+    fetch_cache: Optional[Dict[str, bytes]] = None,
+) -> bytes:
+    if fetch_cache is not None and url in fetch_cache:
+        return fetch_cache[url]
+    content = fetch_public_source(url, timeout=timeout)
+    if fetch_cache is not None:
+        fetch_cache[url] = content
+    return content
+
+
+def attest_source_records(
+    records: Iterable[Dict[str, Any]],
+    timeout: int = 30,
+    cache: bool = True,
+    require_known_query_families: bool = False,
+    fetch_cache: Optional[Dict[str, bytes]] = None,
+) -> Dict[str, Any]:
+    """Independently fetch and hash source records at harness ingestion.
+
+    Finding-audit agents can identify a source through their web tools, but
+    they cannot reliably hash the exact response bytes later fetched by the
+    harness.  Treat their digest as reported metadata, fetch every public URL
+    ourselves, and make the fetched digest canonical.  Mismatches remain
+    visible in ``reported_content_sha256`` instead of being silently trusted.
+    """
+
+    normalized = []
+    errors = []
+    pending = []
+    failed_indexes = []
+    for index, original in enumerate(records):
+        if not isinstance(original, dict):
+            failed_indexes.append(index)
+            errors.append("source record is not an object")
+            continue
+        record = dict(original)
+        # Validate all metadata while allowing the harness to supply the
+        # canonical digest below.
+        probe = dict(record)
+        probe["content_sha256"] = "0" * 64
+        item_errors = source_record_errors(
+            probe, require_known_query_family=require_known_query_families
+        )
+        if item_errors:
+            failed_indexes.append(index)
+            errors.extend(item_errors)
+            continue
+        pending.append((index, record))
+
+    fetched = {}
+    if pending:
+        with ThreadPoolExecutor(max_workers=min(4, len(pending))) as executor:
+            futures = {
+                executor.submit(
+                    fetch_public_source_cached,
+                    record["url"],
+                    timeout,
+                    fetch_cache,
+                ): (
+                    index,
+                    record,
+                )
+                for index, record in pending
+            }
+            for future in as_completed(futures):
+                index, record = futures[future]
+                try:
+                    fetched[index] = (record, future.result())
+                except Exception as exc:
+                    failed_indexes.append(index)
+                    errors.append(
+                        "failed to retrieve %s: %s" % (record["url"], exc)
+                    )
+
+    by_index = {}
+    for index in sorted(fetched):
+        record, content = fetched[index]
+        actual = hashlib.sha256(content).hexdigest()
+        reported = record.get("content_sha256")
+        if reported != actual:
+            record["reported_content_sha256"] = reported
+        record["content_sha256"] = actual
+        record["hash_attested_by"] = "pure_tate_harness"
+        if cache:
+            destination = ROOT / "research" / "source-cache" / (actual + ".bin")
+            if not destination.exists():
+                atomic_write_bytes(destination, content)
+        by_index[index] = record
+        normalized.append(record)
+    return {
+        "ok": not errors,
+        "errors": errors,
+        "records": normalized,
+        "verified_count": len(normalized),
+        "by_index": by_index,
+        "failed_indexes": sorted(failed_indexes),
+    }
 
 
 def verify_source_records(

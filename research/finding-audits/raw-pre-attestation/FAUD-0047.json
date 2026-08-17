@@ -1,0 +1,56 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, or RED-0001. Independent primary check against SRC-0004 (Canning\u2013Larson, arXiv:2208.02357v2) Lemma 10.6: deg(W_f|_C)=4g+12-4f and deg(\\omega_C\\otimes W_f^\\vee(\\Gamma))=4f+n-2g-14. For balanced F=O(4)\\oplus O(5) at (g,n)=(6,6) and f=4 this is 16+6-12-14=-4. On a smooth curve any line bundle of negative degree has H^0=0, so H^0(\\omega_C\\otimes W_4^\\vee(\\Gamma))=0 for every degree-six \\Gamma and the f=4 summand of the Serre-dual evaluation obstruction vanishes identically. This matches the packet CE convention W_f:=(O_{P(E^\\vee)}(2)\\otimes\\gamma^*O(-f))|_C and justifies the packet\u2019s exclusive focus on the f_2=5 summand for the evaluation-failure locus Z (where deg(\\omega\\otimes W_5^\\vee(\\Gamma))=0). Compatible with corroborated FND-0061: FND-0062 only asserts vanishing of the f=4 H^0 summand, not a complete scheme-theoretic identification of the CE failure locus. Not a merge with FND-0037 despite the finding record\u2019s erroneous candidate_key/equivalence_group label FND-0037 (that corroborated finding concerns the mixed R^1 local system on M_{6,6}\\to M_{6,5}). Distinct from FND-0055 (W_5 vanishing on an open U is not a purity theorem). Merge target: none. Promote from candidate to corroborated on this independent primary-source verification of the degree/-4/H^0=0 calculation.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0062",
+  "id": "FAUD-0047",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "component": "f=4 summand of CE evaluation obstruction",
+    "formula": "deg(\\omega_C\\otimes W_f^\\vee(\\Gamma))=4f+n-2g-14; at (g,n,f)=(6,6,4) this equals -4",
+    "object": "H^0(C,\\omega_C\\otimes W_4^\\vee(\\Gamma)) for smooth genus-6 degree-four covers C\\to P^1 and any degree-six divisor \\Gamma",
+    "splitting": "balanced tetragonal F=O_{P1}(4)\\oplus O_{P1}(5)"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "a474816d27d3895d731eddf883df8bcbd85296562bfb71fedd7ab3d571550c2a",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-03T12:00:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "a474816d27d3895d731eddf883df8bcbd85296562bfb71fedd7ab3d571550c2a",
+      "doi": "10.48550/arXiv.2208.02357",
+      "query_family": "primary-locator-crosscheck",
+      "retrieved_at": "2026-08-03T12:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "a474816d27d3895d731eddf883df8bcbd85296562bfb71fedd7ab3d571550c2a",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "packet-lemma-excerpt",
+      "retrieved_at": "2026-08-03T12:00:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/html/2208.02357v2"
+    }
+  ],
+  "task_id": "TASK-F-FND-0062",
+  "verdict": "promote"
+}

@@ -1,0 +1,201 @@
+{
+  "argument_markdown": "## Source-backed inputs\n\nATT-0065, confirmed by REV-0108 and REV-0109, identifies the scheme-theoretic balanced CE evaluation-failure ideal with the relative Picard triviality locus, under the stated equation-bundle freeness/base-change hypothesis. ATT-0066, confirmed by REV-0110 and REV-0116, constructs the Abel\u2013Jacobi incidence and identifies ordering over its distinct-support open as a finite \u00e9tale S_6-torsor without reducing only one side. ATT-0086, confirmed by REV-0135 and REV-0138, eliminates the h^0(L)=4 stratum and gives the P\u00b2-bundle over a reduced base under the weak normalization. ATT-0088, confirmed by REV-0139 and REV-0142, proves fibrewise nonemptiness of the distinct-support open, its smooth relative dimension two, the identification Z=Ord(U), and the regular codimension-four immersion Z\u2192Conf_6(C/S). These inputs are used only within their verified scopes; in particular S is reduced and the weak normalization remains an explicit hypothesis.\n\n## Proved steps\n\n1. Since AJ is a projective-plane bundle over the integral scheme S, it is integral: locally on S it is P\u00b2\u00d7S. The same local description, together with normality of S and normality of polynomial rings and their localizations over a normal domain, shows that AJ is normal. The nonempty open U is therefore normal and integral. Its relative dimension over S is two, so dim(U)=dim(S)+2.\n\n2. The verified incidence comparison gives a finite \u00e9tale right G-torsor p:Z\u2192U for G=S_6. Choose a geometric point u and a point of Z_u. This identifies Z_u with G. The \u03c0_1^{\u00e9t}(U,u)-action commutes with the right G-action, hence is left multiplication through a homomorphism \u03c1:\u03c0_1^{\u00e9t}(U,u)\u2192G, well-defined up to conjugacy. Write H=im(\u03c1).\n\n3. Connected components of a finite \u00e9tale cover of the connected scheme U correspond to \u03c0_1^{\u00e9t}(U,u)-orbits in its geometric fibre. The orbits in G under left multiplication by H are the left cosets Hg. Hence Z has [G:H] connected components, and the fibre of each component has |H| points. Each component is consequently finite \u00e9tale of degree |H| and surjective over U.\n\n4. A finite \u00e9tale scheme over normal U is normal. In a locally Noetherian normal scheme, irreducible components are pairwise disjoint and open-and-closed; therefore every connected component of Z is irreducible. Thus connected and irreducible components coincide and Irr(Z)=H\\G. Finite morphisms preserve dimension, so every component has dimension dim(U)=dim(S)+2.\n\n5. Right multiplication sends Hg to Hga, so the right G-action is transitive on Irr(Z), and the stabilizer of Hg is {a\u2208G: Hga=Hg}=g^{-1}Hg. The action on geometric points is free because Z\u2192U is a G-torsor. Thus these are component stabilizers for the ordering action, not automorphism groups of pointed curves.\n\n6. The regular codimension-four immersion is the verified smooth-over-S argument from ATT-0088: Z and Conf_6(C/S) are smooth over S of relative dimensions two and six, respectively, and Z is closed by its Fitting presentation. No conclusion is drawn from determinantal expected-codimension numerology.\n\n## Computational hypotheses\n\nNone. No finite experiment or point count is used.\n\n## Gaps and exact scope\n\nThe theorem leaves H undetermined and does not assert full S_6 monodromy. It assumes rather than proves normality or irreducibility of the balanced base. The trivial point stabilizer is only for the S_6 ordering action; Aut(C,\u0393), Aut(C,\u03b3,\u0393), and moduli inertia are not computed. No morphism or closed embedding into M_{6,6}, no analysis of unbalanced CE strata, and no Hodge, Tate, Gysin, or RED-0001 conclusion is claimed.\n\n## Blocked routes\n\nThe vcd-only-vanishing, undecorated-CGP graph-complex, point-count-without-parity-separation, and forgetful-map/local-system routes are not used. In particular the numerical value 21\u221217=4 is not promoted to a codimension or Gysin statement.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0099-1",
+      "justification": "ATT-0065/REV-0108/REV-0109 supply the scheme-theoretic CE/Picard identification; ATT-0066/REV-0110/REV-0116 supply the Abel\u2013Jacobi and torsor construction; ATT-0086/REV-0135/REV-0138 eliminate the jumping stratum; ATT-0088/REV-0139/REV-0142 supply nonemptiness, smoothness, the torsor identification, and regularity.",
+      "statement": "Under the theorem hypotheses, AJ is a P\u00b2-bundle, its distinct-support open U is nonempty and smooth surjective over S of relative dimension two, Z\u2192U is a finite \u00e9tale S_6-torsor of degree 720, and Z\u2192Conf_6(C/S) is a regular immersion of pure codimension four.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0099-2",
+      "justification": "A projective-plane bundle is locally P\u00b2\u00d7S, hence is normal and integral over a normal integral base; a nonempty open preserves both properties. Relative dimension two gives the dimension formula.",
+      "statement": "If S is normal integral, then U is normal integral and has dimension dim(S)+2.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0099-3",
+      "justification": "Finite \u00e9tale connected components are \u03c0_1^{\u00e9t}-orbits in the geometric fibre. Those orbits are the left H-cosets. Normality makes each connected component irreducible, and finiteness preserves dimension.",
+      "statement": "For H equal to the geometric monodromy image of the ordering torsor, Irr(Z) is H\\S_6; hence the number of irreducible components is [S_6:H], every component has degree |H| over U and dimension dim(S)+2, and Z is irreducible exactly when H=S_6.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0099-4",
+      "justification": "Right multiplication acts transitively on H\\S_6 and elementary coset algebra gives the component stabilizer. Point stabilizers vanish by the defining freeness of an S_6-torsor.",
+      "statement": "The right S_6-action is transitive on Irr(Z); the stabilizer of the component Hg is g^{-1}Hg, while every geometric point has trivial stabilizer.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0065-9",
+    "CLM-0066-5",
+    "CLM-0066-6",
+    "CLM-0086-1",
+    "CLM-0086-2",
+    "CLM-0088-3",
+    "CLM-0088-5",
+    "CLM-0088-8",
+    "CLM-0088-9"
+  ],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "vcd-only-vanishing: not used; the result is finite-cover geometry and makes no cohomological vanishing claim."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "undecorated-cgp-top-weight-graph-complex: not used; no graph-complex-to-lowest-weight identification is asserted."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "point-count-without-degree-parity-separation: not used; no finite point count appears."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "forgetful-map-renaming-local-system-unknown: not used; no forgetful morphism or renamed local-system computation is invoked."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Expected determinantal codimension is not used to prove regularity; the regular immersion is imported only in its verified smooth-over-the-base form."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Connected components are upgraded to irreducible components only after imposing normality."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "The balanced model is not treated as a closed locus in M_{6,6}, and the numerical difference 21\u221217=4 is not called a codimension there."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "The free S_6-ordering action is not confused with Aut(C,\u0393) or moduli inertia."
+    }
+  ],
+  "gap_markers": [
+    "GAP-0099-1: The actual geometric monodromy subgroup H\u2264S_6 is not determined; no transposition or full-monodromy occurrence locus is proved.",
+    "GAP-0099-2: Normality and irreducibility of the actual balanced tetragonal base are not proved.",
+    "GAP-0099-3: Aut(C,\u0393), Aut(C,\u03b3,\u0393), their relation, and stack-level inertia remain open.",
+    "GAP-0099-4: No morphism, quasi-finiteness, closedness, purity, lci, codimension, or Gysin statement inside M_{6,6} is established.",
+    "GAP-0099-5: Unbalanced CE strata and closure behavior of the balanced locus remain unconstructed.",
+    "GAP-0099-6: The weak relative-canonical normalization remains an explicit hypothesis.",
+    "GAP-0099-7: No Hodge/Tate conclusion or resolution of RED-0001 is obtained."
+  ],
+  "id": "ATT-0099",
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "identifiers": [
+        "CLM-0065-9",
+        "CLM-0066-5",
+        "CLM-0066-6",
+        "CLM-0086-1",
+        "CLM-0086-2",
+        "CLM-0088-3",
+        "CLM-0088-5",
+        "CLM-0088-8",
+        "CLM-0088-9"
+      ],
+      "moved_from": "source_claim_ids",
+      "moved_to": "dependency_claim_ids",
+      "rule": "DEPENDENCY-CLAIM-SPLIT-0001"
+    }
+  ],
+  "lane": "geometry",
+  "methods_used": [
+    "verified-relative-picard-fitting-identification",
+    "abel-jacobi-projective-bundle-over-reduced-base",
+    "finite-etale-s6-torsor-of-orderings",
+    "etale-fundamental-group-orbit-classification",
+    "normality-connected-component-to-irreducible-component",
+    "finite-morphism-dimension-preservation",
+    "coset-stabilizer-calculation",
+    "regular-immersion-of-schemes-smooth-over-a-common-base"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Over a normal integral balanced base, the previously known finite \u00e9tale ordering torsor admits an exact irreducible-component formula Irr(Z)=H\\S_6, with component degrees |H| and dimensions dim(S)+2.",
+    "The S_6-stabilizer of each irreducible component is identified as a conjugate of geometric monodromy H, while point stabilizers remain trivial; this cleanly separates ordering-action stabilizers from the still-unknown moduli inertia."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "9f5bf258299c9ef2373ab09defd1689c8ab93fc64f1bb92f99c4febef0b83a08",
+  "proof_dependencies": [
+    "ATT-0065",
+    "REV-0108",
+    "REV-0109",
+    "ATT-0066",
+    "REV-0110",
+    "REV-0116",
+    "ATT-0086",
+    "REV-0135",
+    "REV-0138",
+    "ATT-0088",
+    "REV-0139",
+    "REV-0142"
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "The balanced ordered failure model has a complete conditional component formula over a normal integral base: its irreducible components are the monodromy cosets H\\S_6, all have relative dimension two, and their S_6-stabilizers are conjugates of H. This does not compute the actual monodromy subgroup or moduli inertia.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "base": "normal integral finite type over a characteristic-zero field",
+    "g": 6,
+    "hypotheses": [
+      "standard relative degree-four Casnati\u2013Ekedahl resolution",
+      "fibrewise balanced relations splitting O(4)\u2295O(5)",
+      "weak relative-canonical normalization",
+      "ambient equation-bundle finite local freeness and arbitrary base change"
+    ],
+    "n": 6
+  },
+  "theorem_statement": "Let S be a normal integral finite-type scheme over a characteristic-zero field, carrying a smooth proper genus-six family \u03c0:C\u2192S and a finite flat degree-four Casnati\u2013Ekedahl cover \u03b3:C\u2192P\u00b9_S whose relations bundle is fibrewise O(4)\u2295O(5). Assume the weak relative-canonical normalization on every geometric fibre and the finite-local-freeness and base-change hypothesis required for the ambient CE evaluation comparison. Let L=W_5\u2297\u03c9_{C/S}^{-1}; let AJ be the relative Abel\u2013Jacobi incidence of effective degree-six divisors linearly equivalent to L; let U\u2282AJ be the open locus of divisors with six distinct support points; and let Z\u2282Conf_6(C/S) be the scheme-theoretic CE evaluation-failure locus. Then AJ is a P\u00b2-bundle over S, U is normal integral and smooth surjective over S of relative dimension two, and Z\u2192U is the finite \u00e9tale S_6-torsor of orderings, of degree 720. The immersion Z\u2192Conf_6(C/S) is regular of pure codimension four. For a geometric point u of U, identify the right S_6-torsor Z_u with S_6 and let H\u2264S_6 be the image, defined up to conjugacy, of \u03c0_1^{\u00e9t}(U,u) acting by left translations. Then Irr(Z) is the transitive right S_6-set H\\S_6: Z has exactly [S_6:H] irreducible components, every component is finite \u00e9tale of degree |H| over U and has dimension dim(S)+2, and the stabilizer in S_6 of the component represented by Hg is g^{-1}Hg. The stabilizer of every geometric point for the torsor action is trivial. Thus Z is irreducible if and only if H=S_6. If dim(S)=15, every component has dimension 17; the equality 21\u221217=4 is only a numerical comparison and is not a codimension statement inside M_{6,6}."
+}

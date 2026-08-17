@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#d9d8d1">
+
+<title>Section 35.23 (02YJ): Properties of morphisms local in the fpqc topology on the target&mdash;The Stacks project</title>
+
+<meta name="description" content="an open source textbook and reference work on algebraic geometry">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ['tex2jax.js'],
+    jax: ['input/TeX','output/HTML-CSS'],
+    TeX: {
+      extensions: ['AMSmath.js', 'AMSsymbols.js', '/static/XyJax/extensions/TeX/xypic.js'],
+      Macros: {
+        linebreak: ["", 1, ""],
+        },
+      TagSide: 'left'
+    },
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    },
+    'HTML-CSS': {
+    	scale: 100,
+	availableFonts: [],
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+
+
+  <script type="text/javascript" src="/static/js/toggle.js"></script>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/easymde@2.0.1/dist/easymde.min.css" integrity="sha384-IRbzB9px0sfIx90vkN+geaX3F4LVcg/M+k5vmVkfjs5TnRX3MIhGS8Ma06ALKVYp" crossorigin="anonymous">
+  <script src="https://unpkg.com/easymde@2.0.1/dist/easymde.min.js" integrity="sha384-v06sb0t0ToY1YRtVlfD/GCGpIZ/QHYyeH2Gzjvr0ZJI62/50DIzT8XRgQ6JvptVu" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.css" integrity="sha384-8xTxM5sJRAUB0ckdBghB5am+aw+0kC5FfSUzMI+KI+UD8uBCNeSkdi8I1J4+Wjwu" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.js" integrity="sha384-gE5xOW4MVOjJL1A2SbxwvQw/qet6h8Vdv06j3JQGhBW4d1H5hXYB12WsrUBgU439" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid bounded">
+  <div id="first-bar" class="row topbar inner-top top">
+    <header class="col">
+      <h1><a href="/">The Stacks project</a></h1>
+    </header>
+
+    <nav id="header">
+      <ul id="quicklinks">
+        <li><a href="/bibliography">bibliography</a>
+        <li><a href="https://www.math.columbia.edu/~dejong/wordpress/">blog</a>
+      </ul>
+
+      <form id="quicksearch" action="/search">
+        <span id="search-icon"><img src="/static/images/search.svg"></span>
+        <input type="search" name="query" size="16" placeholder="keywords or a tag" value="">
+      </form>
+    </nav>
+  </div>
+
+  <nav id="second-bar" class="row topbar sticky-top">
+    
+      <ul class="col-11 col-sm-11 col-md-11 col-lg-12 col-xl-12" id="crumbs">
+        <li><a href="/browse">Table of contents</a></li>
+        
+  
+  
+    <li>Part <a href="/tag/0ELP" data-tag="0ELP">2</a>: Schemes
+    
+  
+    <li>Chapter <a href="/tag/0238" data-tag="0238">35</a>: Descent
+    
+  
+    <li class="active">Section <a href="/tag/02YJ" data-tag="02YJ">35.23</a>: Properties of morphisms local in the fpqc topology on the target
+    <span id="citation">(<a href="/tag/02YJ/cite">cite</a>)</span>
+  
+
+
+      </ul>
+    
+
+    
+      <div class="col-1 col-sm-1 col-md-1" id="burger">
+        <input type="checkbox" id="burger-input"></input>
+
+        <label id="burger-icon" for="burger-input">
+          <span id="top-bun"></span>
+          <span id="meat"></span>
+          <span id="bottom-bun"></span>
+        </label>
+
+        <div id="burger-content">
+          
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/02KN">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/02YL">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  
+
+
+        </div>
+      </div>
+    
+
+    
+  </nav>
+
+  <div class="row" id="content">
+    <section id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      
+<div class="html" id="tag">
+  
+
+  
+
+  
+
+  <h2 id="descent-section-descending-properties-morphisms-fpqc" class="tex-section"><span data-tag="02YJ">35.23</span> Properties of morphisms local in the fpqc topology on the target</h2>
+
+<p>
+In this section we find a large number of properties of morphisms of schemes which are local on the base in the fpqc topology. By contrast, in Examples, Section <a href="/tag/08J0" data-tag="08J0">110.67</a> we will show that the properties “projective” and “quasi-projective” are not local on the base even in the Zariski topology. 
+</p>
+<p>
+<article class="env-lemma" id="02KQ">
+  <p><a class="environment-identifier" href="/tag/02KQ">Lemma <span data-tag="02KQ">35.23.1</span>.</a> The property $\mathcal{P}(f) =$“$f$ is quasi-compact” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      A base change of a quasi-compact morphism is quasi-compact, see Schemes, Lemma <a href="/tag/01K5" data-tag="01K5">26.19.3</a>. Being quasi-compact is Zariski local on the base, see Schemes, Lemma <a href="/tag/01K4" data-tag="01K4">26.19.2</a>. Finally, let $S' \to S$ be a flat surjective morphism of affine schemes, and let $f : X \to S$ be a morphism. Assume that the base change $f' : X' \to S'$ is quasi-compact. Then $X'$ is quasi-compact, and $X' \to X$ is surjective. Hence $X$ is quasi-compact. This implies that $f$ is quasi-compact. Therefore Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> applies and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02KR">
+  <p><a class="environment-identifier" href="/tag/02KR">Lemma <span data-tag="02KR">35.23.2</span>.</a> The property $\mathcal{P}(f) =$“$f$ is quasi-separated” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Any base change of a quasi-separated morphism is quasi-separated, see Schemes, Lemma <a href="/tag/01KU" data-tag="01KU">26.21.12</a>. Being quasi-separated is Zariski local on the base (from the definition or by Schemes, Lemma <a href="/tag/01KO" data-tag="01KO">26.21.6</a>). Finally, let $S' \to S$ be a flat surjective morphism of affine schemes, and let $f : X \to S$ be a morphism. Assume that the base change $f' : X' \to S'$ is quasi-separated. This means that $\Delta ' : X' \to X'\times _{S'} X'$ is quasi-compact. Note that $\Delta '$ is the base change of $\Delta : X \to X \times _ S X$ via $S' \to S$. By Lemma <a href="/tag/02KQ" data-tag="02KQ">35.23.1</a> this implies $\Delta $ is quasi-compact, and hence $f$ is quasi-separated. Therefore Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> applies and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02KS">
+  <p><a class="environment-identifier" href="/tag/02KS">Lemma <span data-tag="02KS">35.23.3</span>.</a> The property $\mathcal{P}(f) =$“$f$ is universally closed” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      A base change of a universally closed morphism is universally closed by definition. Being universally closed is Zariski local on the base (from the definition or by Morphisms, Lemma <a href="/tag/02K7" data-tag="02K7">29.42.2</a>). Finally, let $S' \to S$ be a flat surjective morphism of affine schemes, and let $f : X \to S$ be a morphism. Assume that the base change $f' : X' \to S'$ is universally closed. Let $T \to S$ be any morphism. Consider the diagram 
+    <p>
+      <div class="equation">
+  \[  \xymatrix{ X' \ar[d] &  S' \times _ S T \times _ S X \ar[d] \ar[r] \ar[l] &  T \times _ S X \ar[d] \\  S' &  S' \times _ S T \ar[r] \ar[l] &  T }  \]
+</div>
+    <p>
+       in which both squares are cartesian. Thus the assumption implies that the middle vertical arrow is closed. The right horizontal arrows are flat, quasi-compact and surjective (as base changes of $S' \to S$). Hence a subset of $T$ is closed if and only if its inverse image in $S' \times _ S T$ is closed, see Morphisms, Lemma <a href="/tag/02JY" data-tag="02JY">29.26.12</a>. An easy diagram chase shows that the right vertical arrow is closed too, and we conclude $X \to S$ is universally closed. Therefore Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> applies and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02KT">
+  <p><a class="environment-identifier" href="/tag/02KT">Lemma <span data-tag="02KT">35.23.4</span>.</a> The property $\mathcal{P}(f) =$“$f$ is universally open” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      The proof is the same as the proof of Lemma <a href="/tag/02KS" data-tag="02KS">35.23.3</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0CEW">
+  <p><a class="environment-identifier" href="/tag/0CEW">Lemma <span data-tag="0CEW">35.23.5</span>.</a> The property $\mathcal{P}(f) =$“$f$ is universally submersive” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      The proof is the same as the proof of Lemma <a href="/tag/02KS" data-tag="02KS">35.23.3</a> using that a quasi-compact flat surjective morphism is universally submersive by Morphisms, Lemma <a href="/tag/02JY" data-tag="02JY">29.26.12</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02KU">
+  <p><a class="environment-identifier" href="/tag/02KU">Lemma <span data-tag="02KU">35.23.6</span>.</a> The property $\mathcal{P}(f) =$“$f$ is separated” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      A base change of a separated morphism is separated, see Schemes, Lemma <a href="/tag/01KU" data-tag="01KU">26.21.12</a>. Being separated is Zariski local on the base (from the definition or by Schemes, Lemma <a href="/tag/01KP" data-tag="01KP">26.21.7</a>). Finally, let $S' \to S$ be a flat surjective morphism of affine schemes, and let $f : X \to S$ be a morphism. Assume that the base change $f' : X' \to S'$ is separated. This means that $\Delta ' : X' \to X'\times _{S'} X'$ is a closed immersion, hence universally closed. Note that $\Delta '$ is the base change of $\Delta : X \to X \times _ S X$ via $S' \to S$. By Lemma <a href="/tag/02KS" data-tag="02KS">35.23.3</a> this implies $\Delta $ is universally closed. Since it is an immersion (Schemes, Lemma <a href="/tag/01KJ" data-tag="01KJ">26.21.2</a>) we conclude $\Delta $ is a closed immersion. Hence $f$ is separated. Therefore Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> applies and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02KV">
+  <p><a class="environment-identifier" href="/tag/02KV">Lemma <span data-tag="02KV">35.23.7</span>.</a> The property $\mathcal{P}(f) =$“$f$ is surjective” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      This is clear. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0H8H">
+  <p><a class="environment-identifier" href="/tag/0H8H">Lemma <span data-tag="0H8H">35.23.8</span>.</a> The property $\mathcal{P}(f) =$“$f$ is quasi-compact and dominant” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      By Morphisms, Lemma <a href="/tag/0H3F" data-tag="0H3F">29.8.4</a>, quasi-compact dominant morphisms are preserved by flat pullback. The other direction is easier. Indeed, quasi-compactness is fpqc local on the base by Lemma <a href="/tag/02KQ" data-tag="02KQ">35.23.1</a>. Being dominant is clearly Zariski local on the base. Finally, let $S' \to S$ be a surjective morphism of schemes (not necessarily flat), and let $f : X \to S$ be a morphism. Assume that the base change $f' : X' \to S'$ is dominant. Then $X' \to S'\to S$ is a composite of two dominant morphisms, hence dominant. Since this is also the composite $X' \to X \to S$, it follows that $X\to S$ is dominant. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+Dominant morphisms are not preserved by flat pullback in full generality, but the following special case is worth mentioning. See also Lemma <a href="/tag/0H8J" data-tag="0H8J">35.24.2</a>. 
+</p>
+<p>
+<article class="env-lemma" id="0H8I">
+  <p><a class="environment-identifier" href="/tag/0H8I">Lemma <span data-tag="0H8I">35.23.9</span>.</a> Let $E/k$ be a field extension. Then a morphism $X \to Y$ over $k$ is dominant if and only if the pullback $X_ E \to Y_ E$ is dominant. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      By Morphisms, Lemma <a href="/tag/0383" data-tag="0383">29.24.4</a>, the morphism $\mathop{\mathrm{Spec}}(E) \to \mathop{\mathrm{Spec}}(k)$ is universally open. So $Y_ E \to Y$ is open. Therefore, if $X \to Y$ is dominant, Morphisms, Lemma <a href="/tag/0H8F" data-tag="0H8F">29.8.5</a> gives that $X_ E \to Y_ E$ is dominant. Conversely, suppose that $X_ E \to Y_ E$ is dominant. The morphism $Y_ E \to Y$ is surjective by Morphisms, Lemma <a href="/tag/01S1" data-tag="01S1">29.9.4</a>, and so the composition $X_ E \to Y_ E \to Y$ is dominant. This is also the composition $X_ E \to X \to Y$, and so $X \to Y$ is dominant. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02KW">
+  <p><a class="environment-identifier" href="/tag/02KW">Lemma <span data-tag="02KW">35.23.10</span>.</a> The property $\mathcal{P}(f) =$“$f$ is universally injective” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      A base change of a universally injective morphism is universally injective (this is formal). Being universally injective is Zariski local on the base; this is clear from the definition. Finally, let $S' \to S$ be a flat surjective morphism of affine schemes, and let $f : X \to S$ be a morphism. Assume that the base change $f' : X' \to S'$ is universally injective. Let $K$ be a field, and let $a, b : \mathop{\mathrm{Spec}}(K) \to X$ be two morphisms such that $f \circ a = f \circ b$. As $S' \to S$ is surjective and by the discussion in Schemes, Section <a href="/tag/01J5" data-tag="01J5">26.13</a> there exists a field extension $K'/K$ and a morphism $\mathop{\mathrm{Spec}}(K') \to S'$ such that the following solid diagram commutes 
+    <p>
+      <div class="equation">
+  \[  \xymatrix{ \mathop{\mathrm{Spec}}(K') \ar[rrd] \ar@{-->}[rd]_{a', b'} \ar[dd] \\  &  X' \ar[r] \ar[d] &  S' \ar[d] \\  \mathop{\mathrm{Spec}}(K) \ar[r]^{a, b} &  X \ar[r] &  S }  \]
+</div>
+    <p>
+       As the square is cartesian we get the two dotted arrows $a'$, $b'$ making the diagram commute. Since $X' \to S'$ is universally injective we get $a' = b'$, by Morphisms, Lemma <a href="/tag/01S4" data-tag="01S4">29.10.2</a>. Clearly this forces $a = b$ (by the discussion in Schemes, Section <a href="/tag/01J5" data-tag="01J5">26.13</a>). Therefore Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> applies and we win. 
+    <p>
+      An alternative proof would be to use the characterization of a universally injective morphism as one whose diagonal is surjective, see Morphisms, Lemma <a href="/tag/01S4" data-tag="01S4">29.10.2</a>. The lemma then follows from the fact that the property of being surjective is fpqc local on the base, see Lemma <a href="/tag/02KV" data-tag="02KV">35.23.7</a>. (Hint: use that the base change of the diagonal is the diagonal of the base change.) 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0CEX">
+  <p><a class="environment-identifier" href="/tag/0CEX">Lemma <span data-tag="0CEX">35.23.11</span>.</a> The property $\mathcal{P}(f) =$“$f$ is a universal homeomorphism” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      This can be proved in exactly the same manner as Lemma <a href="/tag/02KS" data-tag="02KS">35.23.3</a>. Alternatively, one can use that a map of topological spaces is a homeomorphism if and only if it is injective, surjective, and open. Thus a universal homeomorphism is the same thing as a surjective, universally injective, and universally open morphism. Thus the lemma follows from Lemmas <a href="/tag/02KV" data-tag="02KV">35.23.7</a>, <a href="/tag/02KW" data-tag="02KW">35.23.10</a>, and <a href="/tag/02KT" data-tag="02KT">35.23.4</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02KX">
+  <p><a class="environment-identifier" href="/tag/02KX">Lemma <span data-tag="02KX">35.23.12</span>.</a> The property $\mathcal{P}(f) =$“$f$ is locally of finite type” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Being locally of finite type is preserved under base change, see Morphisms, Lemma <a href="/tag/01T4" data-tag="01T4">29.15.4</a>. Being locally of finite type is Zariski local on the base, see Morphisms, Lemma <a href="/tag/01T2" data-tag="01T2">29.15.2</a>. Finally, let $S' \to S$ be a flat surjective morphism of affine schemes, and let $f : X \to S$ be a morphism. Assume that the base change $f' : X' \to S'$ is locally of finite type. Let $U \subset X$ be an affine open. Then $U' = S' \times _ S U$ is affine and of finite type over $S'$. Write $S = \mathop{\mathrm{Spec}}(R)$, $S' = \mathop{\mathrm{Spec}}(R')$, $U = \mathop{\mathrm{Spec}}(A)$, and $U' = \mathop{\mathrm{Spec}}(A')$. We know that $R \to R'$ is faithfully flat, $A' = R' \otimes _ R A$ and $R' \to A'$ is of finite type. We have to show that $R \to A$ is of finite type. This is the result of Algebra, Lemma <a href="/tag/00QP" data-tag="00QP">10.126.1</a>. It follows that $f$ is locally of finite type. Therefore Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> applies and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02KY">
+  <p><a class="environment-identifier" href="/tag/02KY">Lemma <span data-tag="02KY">35.23.13</span>.</a> The property $\mathcal{P}(f) =$“$f$ is locally of finite presentation” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Being locally of finite presentation is preserved under base change, see Morphisms, Lemma <a href="/tag/01TS" data-tag="01TS">29.22.4</a>. Being locally of finite type is Zariski local on the base, see Morphisms, Lemma <a href="/tag/01TQ" data-tag="01TQ">29.22.2</a>. Finally, let $S' \to S$ be a flat surjective morphism of affine schemes, and let $f : X \to S$ be a morphism. Assume that the base change $f' : X' \to S'$ is locally of finite presentation. Let $U \subset X$ be an affine open. Then $U' = S' \times _ S U$ is affine and of finite type over $S'$. Write $S = \mathop{\mathrm{Spec}}(R)$, $S' = \mathop{\mathrm{Spec}}(R')$, $U = \mathop{\mathrm{Spec}}(A)$, and $U' = \mathop{\mathrm{Spec}}(A')$. We know that $R \to R'$ is faithfully flat, $A' = R' \otimes _ R A$ and $R' \to A'$ is of finite presentation. We have to show that $R \to A$ is of finite presentation. This is the result of Algebra, Lemma <a href="/tag/00QQ" data-tag="00QQ">10.126.2</a>. It follows that $f$ is locally of finite presentation. Therefore Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> applies and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02KZ">
+  <p><a class="environment-identifier" href="/tag/02KZ">Lemma <span data-tag="02KZ">35.23.14</span>.</a> The property $\mathcal{P}(f) =$“$f$ is of finite type” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Combine Lemmas <a href="/tag/02KQ" data-tag="02KQ">35.23.1</a> and <a href="/tag/02KX" data-tag="02KX">35.23.12</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02L0">
+  <p><a class="environment-identifier" href="/tag/02L0">Lemma <span data-tag="02L0">35.23.15</span>.</a> The property $\mathcal{P}(f) =$“$f$ is of finite presentation” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Combine Lemmas <a href="/tag/02KQ" data-tag="02KQ">35.23.1</a>, <a href="/tag/02KR" data-tag="02KR">35.23.2</a> and <a href="/tag/02KY" data-tag="02KY">35.23.13</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02L1">
+  <p><a class="environment-identifier" href="/tag/02L1">Lemma <span data-tag="02L1">35.23.16</span>.</a> The property $\mathcal{P}(f) =$“$f$ is proper” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      The lemma follows by combining Lemmas <a href="/tag/02KS" data-tag="02KS">35.23.3</a>, <a href="/tag/02KU" data-tag="02KU">35.23.6</a> and <a href="/tag/02KZ" data-tag="02KZ">35.23.14</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02L2">
+  <p><a class="environment-identifier" href="/tag/02L2">Lemma <span data-tag="02L2">35.23.17</span>.</a> The property $\mathcal{P}(f) =$“$f$ is flat” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Being flat is preserved under arbitrary base change, see Morphisms, Lemma <a href="/tag/01U9" data-tag="01U9">29.26.8</a>. Being flat is Zariski local on the base by definition. Finally, let $S' \to S$ be a flat surjective morphism of affine schemes, and let $f : X \to S$ be a morphism. Assume that the base change $f' : X' \to S'$ is flat. Let $U \subset X$ be an affine open. Then $U' = S' \times _ S U$ is affine. Write $S = \mathop{\mathrm{Spec}}(R)$, $S' = \mathop{\mathrm{Spec}}(R')$, $U = \mathop{\mathrm{Spec}}(A)$, and $U' = \mathop{\mathrm{Spec}}(A')$. We know that $R \to R'$ is faithfully flat, $A' = R' \otimes _ R A$ and $R' \to A'$ is flat. Goal: Show that $R \to A$ is flat. This follows immediately from Algebra, Lemma <a href="/tag/00HJ" data-tag="00HJ">10.39.8</a>. Hence $f$ is flat. Therefore Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> applies and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02L3">
+  <p><a class="environment-identifier" href="/tag/02L3">Lemma <span data-tag="02L3">35.23.18</span>.</a> The property $\mathcal{P}(f) =$“$f$ is an open immersion” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      The property of being an open immersion is stable under base change, see Schemes, Lemma <a href="/tag/01JY" data-tag="01JY">26.18.2</a>. The property of being an open immersion is Zariski local on the base (this is obvious). 
+    <p>
+      Let $S' \to S$ be a flat surjective morphism of affine schemes, and let $f : X \to S$ be a morphism. Assume that the base change $f' : X' \to S'$ is an open immersion. We claim that $f$ is an open immersion. Then $f'$ is universally open, and universally injective. Hence we conclude that $f$ is universally open by Lemma <a href="/tag/02KT" data-tag="02KT">35.23.4</a>, and universally injective by Lemma <a href="/tag/02KW" data-tag="02KW">35.23.10</a>. In particular $f(X) \subset S$ is open. If for every affine open $U \subset f(X)$ we can prove that $f^{-1}(U) \to U$ is an isomorphism, then $f$ is an open immersion and we're done. If $U' \subset S'$ denotes the inverse image of $U$, then $U' \to U$ is a faithfully flat morphism of affines and $(f')^{-1}(U') \to U'$ is an isomorphism (as $f'(X')$ contains $U'$ by our choice of $U$). Thus we reduce to the case discussed in the next paragraph. 
+    <p>
+      Let $S' \to S$ be a flat surjective morphism of affine schemes, let $f : X \to S$ be a morphism, and assume that the base change $f' : X' \to S'$ is an isomorphism. We have to show that $f$ is an isomorphism also. It is clear that $f$ is surjective, universally injective, and universally open (see arguments above for the last two). Hence $f$ is bijective, i.e., $f$ is a homeomorphism. Thus $f$ is affine by Morphisms, Lemma <a href="/tag/04DE" data-tag="04DE">29.46.4</a>. Since 
+    <p>
+      <div class="equation">
+  \[  \mathcal{O}(S') \to \mathcal{O}(X') = \mathcal{O}(S') \otimes _{\mathcal{O}(S)} \mathcal{O}(X)  \]
+</div>
+    <p>
+       is an isomorphism and since $\mathcal{O}(S) \to \mathcal{O}(S')$ is faithfully flat this implies that $\mathcal{O}(S) \to \mathcal{O}(X)$ is an isomorphism. Thus $f$ is an isomorphism. This finishes the proof of the claim above. Therefore Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> applies and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02L4">
+  <p><a class="environment-identifier" href="/tag/02L4">Lemma <span data-tag="02L4">35.23.19</span>.</a> The property $\mathcal{P}(f) =$“$f$ is an isomorphism” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Combine Lemmas <a href="/tag/02KV" data-tag="02KV">35.23.7</a> and <a href="/tag/02L3" data-tag="02L3">35.23.18</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02L5">
+  <p><a class="environment-identifier" href="/tag/02L5">Lemma <span data-tag="02L5">35.23.20</span>.</a> The property $\mathcal{P}(f) =$“$f$ is affine” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      A base change of an affine morphism is affine, see Morphisms, Lemma <a href="/tag/01SD" data-tag="01SD">29.11.9</a>. Being affine is Zariski local on the base, see Morphisms, Lemma <a href="/tag/01S8" data-tag="01S8">29.11.3</a>. Finally, let $g : S' \to S$ be a flat surjective morphism of affine schemes, and let $f : X \to S$ be a morphism. Assume that the base change $f' : X' \to S'$ is affine. In other words, $X'$ is affine, say $X' = \mathop{\mathrm{Spec}}(A')$. Also write $S = \mathop{\mathrm{Spec}}(R)$ and $S' = \mathop{\mathrm{Spec}}(R')$. We have to show that $X$ is affine. 
+    <p>
+      By Lemmas <a href="/tag/02KQ" data-tag="02KQ">35.23.1</a> and <a href="/tag/02KU" data-tag="02KU">35.23.6</a> we see that $X \to S$ is separated and quasi-compact. Thus $f_*\mathcal{O}_ X$ is a quasi-coherent sheaf of $\mathcal{O}_ S$-algebras, see Schemes, Lemma <a href="/tag/01LC" data-tag="01LC">26.24.1</a>. Hence $f_*\mathcal{O}_ X = \widetilde{A}$ for some $R$-algebra $A$. In fact $A = \Gamma (X, \mathcal{O}_ X)$ of course. Also, by flat base change (see for example Cohomology of Schemes, Lemma <a href="/tag/02KH" data-tag="02KH">30.5.2</a>) we have $g^*f_*\mathcal{O}_ X = f'_*\mathcal{O}_{X'}$. In other words, we have $A' = R' \otimes _ R A$. Consider the canonical morphism 
+    <p>
+      <div class="equation">
+  \[  X \longrightarrow \mathop{\mathrm{Spec}}(A)  \]
+</div>
+    <p>
+       over $S$ from Schemes, Lemma <a href="/tag/01I1" data-tag="01I1">26.6.4</a>. By the above the base change of this morphism to $S'$ is an isomorphism. Hence it is an isomorphism by Lemma <a href="/tag/02L4" data-tag="02L4">35.23.19</a>. Therefore Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> applies and we win. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02L6">
+  <p><a class="environment-identifier" href="/tag/02L6">Lemma <span data-tag="02L6">35.23.21</span>.</a> The property $\mathcal{P}(f) =$“$f$ is a closed immersion” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $f : X \to Y$ be a morphism of schemes. Let $\{ Y_ i \to Y\} $ be an fpqc covering. Assume that each $f_ i : Y_ i \times _ Y X \to Y_ i$ is a closed immersion. This implies that each $f_ i$ is affine, see Morphisms, Lemma <a href="/tag/01SE" data-tag="01SE">29.11.10</a>. By Lemma <a href="/tag/02L5" data-tag="02L5">35.23.20</a> we conclude that $f$ is affine. It remains to show that $\mathcal{O}_ Y \to f_*\mathcal{O}_ X$ is surjective. For every $y \in Y$ there exists an $i$ and a point $y_ i \in Y_ i$ mapping to $y$. By Cohomology of Schemes, Lemma <a href="/tag/02KH" data-tag="02KH">30.5.2</a> the sheaf $f_{i, *}(\mathcal{O}_{Y_ i \times _ Y X})$ is the pullback of $f_*\mathcal{O}_ X$. By assumption it is a quotient of $\mathcal{O}_{Y_ i}$. Hence we see that 
+    <p>
+      <div class="equation">
+  \[  \Big( \mathcal{O}_{Y, y} \longrightarrow (f_*\mathcal{O}_ X)_ y \Big) \otimes _{\mathcal{O}_{Y, y}} \mathcal{O}_{Y_ i, y_ i}  \]
+</div>
+    <p>
+       is surjective. Since $\mathcal{O}_{Y_ i, y_ i}$ is faithfully flat over $\mathcal{O}_{Y, y}$ this implies the surjectivity of $\mathcal{O}_{Y, y} \longrightarrow (f_*\mathcal{O}_ X)_ y$ as desired. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02L7">
+  <p><a class="environment-identifier" href="/tag/02L7">Lemma <span data-tag="02L7">35.23.22</span>.</a> The property $\mathcal{P}(f) =$“$f$ is quasi-affine” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $f : X \to Y$ be a morphism of schemes. Let $\{ g_ i : Y_ i \to Y\} $ be an fpqc covering. Assume that each $f_ i : Y_ i \times _ Y X \to Y_ i$ is quasi-affine. This implies that each $f_ i$ is quasi-compact and separated. By Lemmas <a href="/tag/02KQ" data-tag="02KQ">35.23.1</a> and <a href="/tag/02KU" data-tag="02KU">35.23.6</a> this implies that $f$ is quasi-compact and separated. Consider the sheaf of $\mathcal{O}_ Y$-algebras $\mathcal{A} = f_*\mathcal{O}_ X$. By Schemes, Lemma <a href="/tag/01LC" data-tag="01LC">26.24.1</a> it is a quasi-coherent $\mathcal{O}_ Y$-algebra. Consider the canonical morphism 
+    <p>
+      <div class="equation">
+  \[  j : X \longrightarrow \underline{\mathop{\mathrm{Spec}}}_ Y(\mathcal{A})  \]
+</div>
+    <p>
+       see Constructions, Lemma <a href="/tag/01LY" data-tag="01LY">27.4.7</a>. By flat base change (see for example Cohomology of Schemes, Lemma <a href="/tag/02KH" data-tag="02KH">30.5.2</a>) we have $g_ i^*f_*\mathcal{O}_ X = f_{i, *}\mathcal{O}_{X'}$ where $g_ i : Y_ i \to Y$ are the given flat maps. Hence the base change $j_ i$ of $j$ by $g_ i$ is the canonical morphism of Constructions, Lemma <a href="/tag/01LY" data-tag="01LY">27.4.7</a> for the morphism $f_ i$. By assumption and Morphisms, Lemma <a href="/tag/01SM" data-tag="01SM">29.13.3</a> all of these morphisms $j_ i$ are quasi-compact open immersions. Hence, by Lemmas <a href="/tag/02KQ" data-tag="02KQ">35.23.1</a> and <a href="/tag/02L3" data-tag="02L3">35.23.18</a> we see that $j$ is a quasi-compact open immersion. Hence by Morphisms, Lemma <a href="/tag/01SM" data-tag="01SM">29.13.3</a> again we conclude that $f$ is quasi-affine. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02L8">
+  <p><a class="environment-identifier" href="/tag/02L8">Lemma <span data-tag="02L8">35.23.23</span>.</a> The property $\mathcal{P}(f) =$“$f$ is a quasi-compact immersion” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $f : X \to Y$ be a morphism of schemes. Let $\{ Y_ i \to Y\} $ be an fpqc covering. Write $X_ i = Y_ i \times _ Y X$ and $f_ i : X_ i \to Y_ i$ the base change of $f$. Also denote $q_ i : Y_ i \to Y$ the given flat morphisms. Assume each $f_ i$ is a quasi-compact immersion. By Schemes, Lemma <a href="/tag/01L7" data-tag="01L7">26.23.8</a> each $f_ i$ is separated. By Lemmas <a href="/tag/02KQ" data-tag="02KQ">35.23.1</a> and <a href="/tag/02KU" data-tag="02KU">35.23.6</a> this implies that $f$ is quasi-compact and separated. Let $X \to Z \to Y$ be the factorization of $f$ through its scheme theoretic image. By Morphisms, Lemma <a href="/tag/01R8" data-tag="01R8">29.6.3</a> the closed subscheme $Z \subset Y$ is cut out by the quasi-coherent sheaf of ideals $\mathcal{I} = \mathop{\mathrm{Ker}}(\mathcal{O}_ Y \to f_*\mathcal{O}_ X)$ as $f$ is quasi-compact. By flat base change (see for example Cohomology of Schemes, Lemma <a href="/tag/02KH" data-tag="02KH">30.5.2</a>; here we use $f$ is separated) we see $f_{i, *}\mathcal{O}_{X_ i}$ is the pullback $q_ i^*f_*\mathcal{O}_ X$. Hence $Y_ i \times _ Y Z$ is cut out by the quasi-coherent sheaf of ideals $q_ i^*\mathcal{I} = \mathop{\mathrm{Ker}}(\mathcal{O}_{Y_ i} \to f_{i, *}\mathcal{O}_{X_ i})$. By Morphisms, Lemma <a href="/tag/01RG" data-tag="01RG">29.7.7</a> the morphisms $X_ i \to Y_ i \times _ Y Z$ are open immersions. Hence by Lemma <a href="/tag/02L3" data-tag="02L3">35.23.18</a> we see that $X \to Z$ is an open immersion and hence $f$ is an immersion as desired (we already saw it was quasi-compact). 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02L9">
+  <p><a class="environment-identifier" href="/tag/02L9">Lemma <span data-tag="02L9">35.23.24</span>.</a> The property $\mathcal{P}(f) =$“$f$ is integral” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      An integral morphism is the same thing as an affine, universally closed morphism. See Morphisms, Lemma <a href="/tag/01WM" data-tag="01WM">29.45.7</a>. Hence the lemma follows on combining Lemmas <a href="/tag/02KS" data-tag="02KS">35.23.3</a> and <a href="/tag/02L5" data-tag="02L5">35.23.20</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02LA">
+  <p><a class="environment-identifier" href="/tag/02LA">Lemma <span data-tag="02LA">35.23.25</span>.</a> The property $\mathcal{P}(f) =$“$f$ is finite” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      An finite morphism is the same thing as an integral morphism which is locally of finite type. See Morphisms, Lemma <a href="/tag/01WJ" data-tag="01WJ">29.45.4</a>. Hence the lemma follows on combining Lemmas <a href="/tag/02KX" data-tag="02KX">35.23.12</a> and <a href="/tag/02L9" data-tag="02L9">35.23.24</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02VI">
+  <p><a class="environment-identifier" href="/tag/02VI">Lemma <span data-tag="02VI">35.23.26</span>.</a> The properties $\mathcal{P}(f) =$“$f$ is locally quasi-finite” and $\mathcal{P}(f) =$“$f$ is quasi-finite” are fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $f : X \to S$ be a morphism of schemes, and let $\{ S_ i \to S\} $ be an fpqc covering such that each base change $f_ i : X_ i \to S_ i$ is locally quasi-finite. We have already seen (Lemma <a href="/tag/02KX" data-tag="02KX">35.23.12</a>) that “locally of finite type” is fpqc local on the base, and hence we see that $f$ is locally of finite type. Then it follows from Morphisms, Lemma <a href="/tag/01TM" data-tag="01TM">29.21.13</a> that $f$ is locally quasi-finite. The quasi-finite case follows as we have already seen that “quasi-compact” is fpqc local on the base (Lemma <a href="/tag/02KQ" data-tag="02KQ">35.23.1</a>). 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02VJ">
+  <p><a class="environment-identifier" href="/tag/02VJ">Lemma <span data-tag="02VJ">35.23.27</span>.</a> The property $\mathcal{P}(f) =$“$f$ is locally of finite type of relative dimension $d$” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      This follows immediately from the fact that being locally of finite type is fpqc local on the base and Morphisms, Lemma <a href="/tag/02FY" data-tag="02FY">29.29.3</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02VK">
+  <p><a class="environment-identifier" href="/tag/02VK">Lemma <span data-tag="02VK">35.23.28</span>.</a> The property $\mathcal{P}(f) =$“$f$ is syntomic” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      A morphism is syntomic if and only if it is locally of finite presentation, flat, and has locally complete intersections as fibres. We have seen already that being flat and locally of finite presentation are fpqc local on the base (Lemmas <a href="/tag/02L2" data-tag="02L2">35.23.17</a>, and <a href="/tag/02KY" data-tag="02KY">35.23.13</a>). Hence the result follows for syntomic from Morphisms, Lemma <a href="/tag/02V3" data-tag="02V3">29.31.12</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02VL">
+  <p><a class="environment-identifier" href="/tag/02VL">Lemma <span data-tag="02VL">35.23.29</span>.</a> The property $\mathcal{P}(f) =$“$f$ is smooth” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      A morphism is smooth if and only if it is locally of finite presentation, flat, and has smooth fibres. We have seen already that being flat and locally of finite presentation are fpqc local on the base (Lemmas <a href="/tag/02L2" data-tag="02L2">35.23.17</a>, and <a href="/tag/02KY" data-tag="02KY">35.23.13</a>). Hence the result follows for smooth from Morphisms, Lemma <a href="/tag/02V4" data-tag="02V4">29.35.15</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02VM">
+  <p><a class="environment-identifier" href="/tag/02VM">Lemma <span data-tag="02VM">35.23.30</span>.</a> The property $\mathcal{P}(f) =$“$f$ is unramified” is fpqc local on the base. The property $\mathcal{P}(f) =$“$f$ is G-unramified” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      A morphism is unramified (resp. G-unramified) if and only if it is locally of finite type (resp. finite presentation) and its diagonal morphism is an open immersion (see Morphisms, Lemma <a href="/tag/02GE" data-tag="02GE">29.36.13</a>). We have seen already that being locally of finite type (resp. locally of finite presentation) and an open immersion is fpqc local on the base (Lemmas <a href="/tag/02KY" data-tag="02KY">35.23.13</a>, <a href="/tag/02KX" data-tag="02KX">35.23.12</a>, and <a href="/tag/02L3" data-tag="02L3">35.23.18</a>). Hence the result follows formally. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02VN">
+  <p><a class="environment-identifier" href="/tag/02VN">Lemma <span data-tag="02VN">35.23.31</span>.</a> The property $\mathcal{P}(f) =$“$f$ is étale” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      A morphism is étale if and only if it flat and G-unramified. See Morphisms, Lemma <a href="/tag/02GV" data-tag="02GV">29.37.16</a>. We have seen already that being flat and G-unramified are fpqc local on the base (Lemmas <a href="/tag/02L2" data-tag="02L2">35.23.17</a>, and <a href="/tag/02VM" data-tag="02VM">35.23.30</a>). Hence the result follows. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02VO">
+  <p><a class="environment-identifier" href="/tag/02VO">Lemma <span data-tag="02VO">35.23.32</span>.</a> The property $\mathcal{P}(f) =$“$f$ is finite locally free” is fpqc local on the base. Let $d \geq 0$. The property $\mathcal{P}(f) =$“$f$ is finite locally free of degree $d$” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Being finite locally free is equivalent to being finite, flat and locally of finite presentation (Morphisms, Lemma <a href="/tag/02KB" data-tag="02KB">29.49.2</a>). Hence this follows from Lemmas <a href="/tag/02LA" data-tag="02LA">35.23.25</a>, <a href="/tag/02L2" data-tag="02L2">35.23.17</a>, and <a href="/tag/02KY" data-tag="02KY">35.23.13</a>. If $f : Z \to U$ is finite locally free, and $\{ U_ i \to U\} $ is a surjective family of morphisms such that each pullback $Z \times _ U U_ i \to U_ i$ has degree $d$, then $Z \to U$ has degree $d$, for example because we can read off the degree in a point $u \in U$ from the fibre $(f_*\mathcal{O}_ Z)_ u \otimes _{\mathcal{O}_{U, u}} \kappa (u)$. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="02YK">
+  <p><a class="environment-identifier" href="/tag/02YK">Lemma <span data-tag="02YK">35.23.33</span>.</a> The property $\mathcal{P}(f) =$“$f$ is a monomorphism” is fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      Let $f : X \to S$ be a morphism of schemes. Let $\{ S_ i \to S\} $ be an fpqc covering, and assume each of the base changes $f_ i : X_ i \to S_ i$ of $f$ is a monomorphism. Let $a, b : T \to X$ be two morphisms such that $f \circ a = f \circ b$. We have to show that $a = b$. Since $f_ i$ is a monomorphism we see that $a_ i = b_ i$, where $a_ i, b_ i : S_ i \times _ S T \to X_ i$ are the base changes. In particular the compositions $S_ i \times _ S T \to T \to X$ are equal. Since $\coprod S_ i \times _ S T \to T$ is an epimorphism (see e.g. Lemma <a href="/tag/023Q" data-tag="023Q">35.13.7</a>) we conclude $a = b$. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+<p>
+<article class="env-lemma" id="0694">
+  <p><a class="environment-identifier" href="/tag/0694">Lemma <span data-tag="0694">35.23.34</span>.</a> The properties </p>
+  <p><ol>
+  <li><p>
+$\mathcal{P}(f) =$“$f$ is a Koszul-regular immersion”, 
+</p>
+</li><li><p>
+$\mathcal{P}(f) =$“$f$ is an $H_1$-regular immersion”, and 
+</p>
+</li><li><p>
+$\mathcal{P}(f) =$“$f$ is a quasi-regular immersion” 
+</p>
+</li>
+</ol></p>
+  <p> are fpqc local on the base. </p>
+</article> 
+</p>
+<article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      We will use the criterion of Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> to prove this. By Divisors, Definition <a href="/tag/063J" data-tag="063J">31.22.1</a> being a Koszul-regular (resp. $H_1$-regular, quasi-regular) immersion is Zariski local on the base. By Divisors, Lemma <a href="/tag/067P" data-tag="067P">31.22.4</a> being a Koszul-regular (resp. $H_1$-regular, quasi-regular) immersion is preserved under flat base change. The final hypothesis (3) of Lemma <a href="/tag/02KP" data-tag="02KP">35.22.4</a> translates into the following algebra statement: Let $A \to B$ be a faithfully flat ring map. Let $I \subset A$ be an ideal. If $IB$ is locally on $\mathop{\mathrm{Spec}}(B)$ generated by a Koszul-regular (resp. $H_1$-regular, quasi-regular) sequence in $B$, then $I \subset A$ is locally on $\mathop{\mathrm{Spec}}(A)$ generated by a Koszul-regular (resp. $H_1$-regular, quasi-regular) sequence in $A$. This is More on Algebra, Lemma <a href="/tag/068N" data-tag="068N">15.33.4</a>. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  // move extras from parent element to after environment name and number
+  $("article a[data-toggle]").each(function(index, element) {
+    $(element).insertAfter(($(element).parent().find("a.environment-identifier")));
+  });
+
+  $('article a[data-toggle="popover"]').popover()
+
+  // render mathematics in popovers
+  $("[data-toggle=popover]").on('shown.bs.popover', function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, $("div.popover-body").html()]);
+  });
+});
+  </script>
+
+  
+
+  
+</div>
+
+
+<hr>
+
+<section id="comments">
+  <h2>Comments (2)</h2>
+
+  
+    <a id="comment-6031" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/02YJ#comment-6031">Comment #6031</a>
+        by
+        <cite>Butterbrot</cite>
+        on <time datetime="2021-04-03 17:26:23.626918">April 03, 2021 at 17:26 </time>
+      </header>
+
+      <blockquote><p>The heading says target but everything is about the base here.</p></blockquote>
+    </article>
+  
+    <a id="comment-6032" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/02YJ#comment-6032">Comment #6032</a>
+        by
+        <cite><a href="https://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2021-04-04 13:31:55.298457">April 04, 2021 at 13:31 </time>
+      </header>
+
+      <blockquote><p>Target <script type="math/tex">=</script> base</p></blockquote>
+    </article>
+  
+
+  
+</section>
+
+<hr>
+
+<section id="post-comment">
+  <h2>Post a comment</h2>
+  <p>Your email address will not be published. Required fields are marked.
+  <p>In your comment you can use <a href="/markdown">Markdown</a> and LaTeX style mathematics (enclose it like <code>$\pi$</code>). A preview option is available if you wish to see how it works out (just click on the eye in the toolbar).
+  <noscript><p>Unfortunately JavaScript is disabled in your browser, so the comment preview function will not work.</p></noscript>
+
+  <p>All contributions are licensed under the <a href="https://github.com/stacks/stacks-project/blob/master/COPYING">GNU Free Documentation License</a>.
+
+  <form name="comment" id="comment-form" action="/post-comment" method="post">
+    <label for="name">Name<sup>*</sup>:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="mail">E-mail<sup>*</sup>:</label>
+    <input type="email" name="mail" id="mail" required><br>
+
+    <label for="site">Site:</label>
+    <input type="url" name="site" id="site"><br>
+
+    <label>Comment:</label>
+    <textarea name="comment" id="comment-textarea" cols="80" rows="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <script type="text/javascript">
+var easymde = new EasyMDE({
+  autosave: {
+    enabled: true,
+    delay: 1000,
+    uniqueId: "comment-02YJ",
+  },
+  element: $("#comment")[0],
+  forceSync: true,
+  insertTexts: { link: ["\\ref{", "}"], table: ["$", "$"], image: ["\\begin{equation}\n", "\n\\end{equation}\n"] }, // we hack into these insertion methods, I couldn't figure out how to write your own...
+  placeholder: "You can type your comment here, use the preview option to see what it will look like. If your comment is on a lemma, please leave your comment on the page of the lemma. Same with remarks, propositions, theorems, etc.",
+  previewRender: function(plaintext, preview) {
+    // deal with references
+    plaintext = plaintext.replace(/\\ref\{([0-9A-Z]{4})\}/g, "<span class=\"tag\">[$1](/tag/$1)</span>");
+    // deal with \[\] getting replaced to []
+    plaintext = plaintext.replace(/\\\[/g, "\\begin{equation}");
+    plaintext = plaintext.replace(/\\\]/g, "\\end{equation}");
+
+    output = this.parent.markdown(plaintext);
+
+    setTimeout(function() {
+      preview.innerHTML = output;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }, 0);
+
+    return "";
+  },
+  spellChecker: false,
+  status: false,
+  toolbar: [
+    "link", {name: "inline", action: EasyMDE.drawTable, className: "fa fa-usd"}, {name: "block", action: EasyMDE.drawImage, className: "fa fa-square"}, "|",
+    "bold", "italic", "|",
+    "ordered-list", "unordered-list", "|",
+    "preview"
+  ],
+});
+
+// make sure to show tags, not numbers
+var tagToggleHappened = false; // only do this once to not annoy the user too much
+easymde.codemirror.on("change", function() {
+  // if data-tag elements do not have tag attribute we need to make tags visible
+  if (!$("*[data-tag]").hasClass("tag") && !tagToggleHappened)
+    $("section#meta input.toggle").bootstrapToggle("toggle");
+  tagToggleHappened = true;
+});
+
+// prevent form submit when the captcha isn't correct
+// it's a bit silly to use HTML5 validation for this, as bots can figure that out
+// also save the author information to localStorage
+easymde.element.form.addEventListener("submit", function(event) {
+  if ($("#check").val() != $("#hidden-tag").val()) {
+    // explain captcha
+    $("#captcha-message").toggle();
+
+    // stop submit
+    event.preventDefault();
+    return false;
+  }
+
+  // save author information
+  localStorage.setItem("name", $("input#name").val());
+  localStorage.setItem("mail", $("input#mail").val());
+  localStorage.setItem("site", $("input#site").val());
+});
+    </script>
+
+    <p>In order to prevent bots from posting comments, we would like you to prove that you are human. You can do this by <em>filling in the name of the current tag</em> in the following input field. As a reminder, this is tag <span class="tag">02YJ</span>. Beware of the difference between the letter&nbsp;'<span class="tag">O</span>' and the digit&nbsp;'<span class="tag">0</span>'.</p>
+    <!--<p>This <abbr title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</abbr> seems more appropriate than the usual illegible gibberish, right?<br>-->
+    <label for="check">Tag:</label>
+    <input type="text" name="check" id="check" required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Post comment</button>
+    <input type="hidden" name="tag" id="hidden-tag" value="02YJ"><br>
+
+    <p id="captcha-message" style="display: none" class="alert alert-warning" role="alert">The tag you filled in for the captcha is wrong. You need to write <span class="tag">02YJ</span>, in case you are confused.</p>
+
+    <script type="text/javascript">
+// enter in captcha fields causes \ref to appear (?!)
+$("input#check").on("keypress", function(e) {
+  if (e.which == 13) {
+    // always stop the event
+    e.preventDefault();
+
+    // perform clientside check as for actual submit
+    if ($("#check").val() != $("#hidden-tag").val()) {
+      // explain captcha
+      $("#captcha-message").toggle();
+    }
+    else {
+      $("form#comment-form").submit();
+    }
+  }
+});
+    </script>
+  </form>
+</section>
+
+
+
+
+    </section>
+	  <div class="col-lg-4 col-xl-4">
+	    <section id="meta" class="row topbar sticky-top">
+        
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/02KN">previous section</a>
+  
+  
+    <li class="right"><a href="/tag/02YL">next section</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  <hr>
+  
+    <a href="https://stacks.math.columbia.edu/download/descent.pdf#nameddest=02YJ">View Section <span data-tag="02YJ">35.23</span> as pdf</a>
+  
+
+  
+
+
+      </section>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

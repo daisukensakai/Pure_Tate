@@ -6,6 +6,18 @@
   "finding_id": "FND-0034",
   "id": "FAUD-0011",
   "independent": true,
+  "local_evidence_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "3328dd06de022112916840e0cfb21056b3efb6876ac1aff8309e03e24a01a572",
+      "doi": null,
+      "query_family": "residual-list-cross-check",
+      "retrieved_at": "2026-08-02T10:32:00Z",
+      "source_type": "corpus_claim",
+      "url": "file://data/claims.jsonl#RED-0001"
+    }
+  ],
   "merge_target_id": null,
   "reviewer_engine": "grok",
   "schema_version": 1,
@@ -22,13 +34,27 @@
     "not": "Mbar_{5,7}",
     "object": "non-separating irreducible boundary divisor of Mbar_{6,6}"
   },
+  "source_attestation_migration": {
+    "attested_at": "2026-08-17T01:13:46.080656Z",
+    "errors": [],
+    "raw_artifact_path": "research/finding-audits/raw-pre-attestation/FAUD-0011.json",
+    "raw_artifact_sha256": "60dc7c990aee9f710cb3dea6bac365940ed8a7696e9eeda8f30da40c6ffb0d7a",
+    "reason": "C66-FINDING-SOURCE-ATTESTATION-0001",
+    "transformations": [
+      "normalized notes source_type to reference",
+      "moved non-public records to local_evidence_records",
+      "dropped unfetchable https://www.math.uni-bonn.de/~schmitt/ModCurves/Script.pdf"
+    ]
+  },
   "source_records": [
     {
       "arxiv_id": "2209.03113",
       "arxiv_version": "v2",
-      "content_sha256": "a3f1c7e92b4d6e80f15a9c2d7e4b8a1063d5f2e9c1b7a4d8e6f0c3b5a2971846",
+      "content_sha256": "51f96a89e273c4f010bfb68a8640acf17b8e5e84b5864ae3997b9190fa286009",
       "doi": "10.1017/fms.2023.59",
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "exact-finding-check",
+      "reported_content_sha256": "a3f1c7e92b4d6e80f15a9c2d7e4b8a1063d5f2e9c1b7a4d8e6f0c3b5a2971846",
       "retrieved_at": "2026-08-02T10:35:00Z",
       "source_type": "preprint",
       "url": "https://ar5iv.labs.arxiv.org/html/2209.03113v2"
@@ -36,34 +62,18 @@
     {
       "arxiv_id": "2307.08830",
       "arxiv_version": "v3",
-      "content_sha256": "c8d2a4f17e3b9c50a6d8e1f4b2c7a9035e6d1f8b4a2c7e9d0f3b6a8c15e24791",
+      "content_sha256": "507e0f12159070feab13deb76ea039f5ff159784b5a9e68d2097a1ccc67979f2",
       "doi": "10.1017/fmp.2024.24",
+      "hash_attested_by": "pure_tate_harness",
       "query_family": "boundary-sequence-and-depth-one",
+      "reported_content_sha256": "c8d2a4f17e3b9c50a6d8e1f4b2c7a9035e6d1f8b4a2c7e9d0f3b6a8c15e24791",
       "retrieved_at": "2026-08-02T10:34:30Z",
       "source_type": "preprint",
       "url": "https://ar5iv.labs.arxiv.org/html/2307.08830v3"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": "5b7e1d94a2c8f036e9d4b7a1c5f8e2d6a0b3c7f1e4d8a2b6c0f3e7a9d15b2843",
-      "doi": null,
-      "query_family": "clutching-map-nonseparating-divisor",
-      "retrieved_at": "2026-08-02T10:33:50Z",
-      "source_type": "notes",
-      "url": "https://www.math.uni-bonn.de/~schmitt/ModCurves/Script.pdf"
-    },
-    {
-      "arxiv_id": null,
-      "arxiv_version": null,
-      "content_sha256": "3328dd06de022112916840e0cfb21056b3efb6876ac1aff8309e03e24a01a572",
-      "doi": null,
-      "query_family": "residual-list-cross-check",
-      "retrieved_at": "2026-08-02T10:32:00Z",
-      "source_type": "corpus_claim",
-      "url": "file://data/claims.jsonl#RED-0001"
     }
   ],
+  "sources_verified": true,
   "task_id": "TASK-F-FND-0034",
-  "verdict": "promote"
+  "verdict": "promote",
+  "verified_source_count": 2
 }

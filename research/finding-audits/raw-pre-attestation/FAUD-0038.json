@@ -1,0 +1,77 @@
+{
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001-THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (c(6)=5, so n=6 lies outside the published CKgP range and the tetragonal route needs new input) and with the packet subproblem graph, where C66-TATE-SUPPORT is exactly the obligation the flagged move tries to bypass. The finding decomposes into two implications, audited separately. (A) Birational type does not control Tate type. Rationality or unirationality of a smooth variety gives only h^{p,0}=0 for p>0, which is strictly weaker than Hodge-Tate. Independent elementary counterexamples, computed here rather than quoted: (i) open case, matching the non-proper Hurwitz setting: U=P^2 minus a smooth plane cubic E is a smooth rational affine surface, and the Gysin sequence H^0(E)(-1)->H^2(P^2)->H^2(U)->H^1(E)(-1)->H^3(P^2)=0 has first map cup with [E]=3h, an isomorphism over Q, so H^2(U;Q)=H^1(E;Q)(-1) is pure of weight 3 and Hodge type (2,1)+(1,2), i.e. non-Tate on a variety that is an open subset of P^2; (ii) proper case: X=Bl_C P^3 with g(C)>=1 is rational with H^3(X;Q)=H^1(C;Q)(-1), h^{2,1}=g, consistent with the classical blow-up formula J(Bl_C X)=J(X) x J(C); (iii) unirational case: the smooth cubic threefold is unirational with h^{2,1}=5. Since the balanced tetragonal Hurwitz space is a non-proper quotient of a discriminant complement, (i) is the on-point analogue: 'rational' licenses nothing about the weight-graded pieces. (B) Even granting a Tate base, Tate type for Z does not follow. Z is not the Hurwitz space: per the packet, the balanced reduced-support relative degree-six linear system is fibred over it as a finite etale S_6-cover of an open locus, so the codimension-13 contribution requires Leray/Gysin with nonconstant coefficients and a closed stratified embedding (FND-0052), and geometric monodromy of the tetragonal family can produce non-Tate summands (FND-0053). FND-0033 removes extension bookkeeping at this pure corner but not the coefficient problem. Hence the move is not a substitute for C66-TATE-SUPPORT, as stated. Literature status, checked live on 2026-08-02: Kanev (arXiv:1106.1006) proves unirationality of Hurwitz spaces of degree d<=5 coverings for n large and rationality for d=4 only under the coprimality condition (e,6)=1, extending Arbarello-Cornalba unirationality for d=4,5 over P^1, so even the birational assertion is unirationality plus conditional rationality, not an unconditional rationality theorem for the specific balanced genus-6 stratum. Canning-Larson (arXiv:2110.01059, Crelle 2022; and Tautological classes on low-degree Hurwitz spaces, arXiv:2103.09902, IMRN 2024) prove rational Chow-ring stabilization for H_{k,g} with k=3,4,5 (complete only for k=3); these are Chow-level statements, not cohomological Tate or CKgP statements, the same gap the campaign already records for SRC-0005. Ma (arXiv:2601.03871, Jan 2026) studies the weight filtration of Hurwitz spaces and finds that weights are generally smaller than the cohomological degree would suggest, i.e. the mixed Hodge structure of Hurwitz spaces is an open research object rather than a settled pure-Tate one. No supplied or retrieved source asserts pure-Tate cohomology for the genus-6 balanced tetragonal Hurwitz space; the finding's characterization of the input as predicted/possible rather than theorem is confirmed. Strengthening external datum, recorded but not adjudicated here: Canning-Larson-Payne-Willwacher (arXiv:2410.19913v2, revised 20 Apr 2026, forthcoming Acta Mathematica) prove Theorem 1.5 with its converse, that H^*(M_{g,n};Q) is of Tate type if and only if g=0 or 3g+2n<25; for (g,n)=(6,6) one has 3*6+2*6=30>=25, so H^*(M_{6,6};Q) is NOT of Tate type. Consistency check of the criterion against known facts: (1,10) gives 23<25 (Tate) while (1,11) gives 25 (non-Tate), matching H^11(Mbar_{1,11})=S[12]. This does not contradict CONJ-0001 or RED-0001, which concern the single graded piece gr^W_26 H^26(M_{6,6}): the non-Tate structures CLPW exhibit are S_12 (weight 11) and its twist LS_12 (weight 13), located in H^11 and H^13, and the paper does not determine top-degree graded pieces, so the even-weight-26 corner is untouched. It does, however, remove any presumption that the ambient space or its genus-6 strata are Tate, making the unconditional upgrade flagged by FND-0054 strictly unsafe; adding this theorem to the corpus is recommended as separate work. Distinctness: distinct from FND-0053 (representation-theoretic premise: rational S_6 irreducibles do not force Tate local systems), FND-0052 (open-versus-closed embedding and Gysin hypotheses), FND-0048 (circular decorated-graph-complex identification of the pure image), FND-0050 (ATT-0020 omission of the residual geometry), and FND-0028 (CKgP misused as blanket Tate-ness, scope (5,8)). It belongs to the same silent-upgrade family but has a different premise (birational type of the Hurwitz base) and a different scope; merge_target_id is null. Scope sharpening only, no weakening: the precise defensible statement is that neither rationality nor unirationality of the balanced tetragonal Hurwitz space, nor Chow-level tautological or stabilization results for H_{4,g}, implies Tate type for the weight-graded codimension-13 contribution supported on Z, and none of these is a substitute for C66-TATE-SUPPORT. Independence and method notes: grok is the finding's originating reviewer engine and is listed in excluded_engines for this task, so the offered Grok 4.5 worker pool was deliberately not used; all verification is claude-only against live primary sources. ATT-0021 and REV-0026 are absent from the read-only workspace, so attempt-level provenance was not re-audited and is not required for adjudication of the mathematical statement. The content_sha256 values are sha256 digests of the arXiv abstract pages as retrieved at the stated timestamp. Verdict: promote from candidate to corroborated and upgrade evidence_class from adversarial_review to primary_source.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0054",
+  "id": "FAUD-0038",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "context_revision": 2,
+    "object": "genus-6 balanced tetragonal Hurwitz space (F=O(4)+O(5)) and the Casnati-Ekedahl evaluation-failure locus Z in M_{6,6}",
+    "subproblem": "C66-TATE-SUPPORT",
+    "target_corner": "gr^W_26 H^26(M_{6,6};Q), equivalently W_{-16}H^{BM}_{16}(M_{6,6};Q) at Chow codimension 13"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "1106.1006",
+      "arxiv_version": null,
+      "content_sha256": "369b9cdfe87e7372a77a01e49bed33c55e9a1f98383c01b7fdbefcaac8af219c",
+      "doi": null,
+      "query_family": "hurwitz-space-birational-type-degree-4",
+      "retrieved_at": "2026-08-02T23:12:21Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1106.1006"
+    },
+    {
+      "arxiv_id": "2110.01059",
+      "arxiv_version": null,
+      "content_sha256": "9e499bfcb124c18637cb42e5ce8ee324d3ddc473fe64c6d6032c147f430f0c30",
+      "doi": "10.1515/crelle-2022-0024",
+      "query_family": "hurwitz-space-chow-versus-cohomology",
+      "retrieved_at": "2026-08-02T23:12:21Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2110.01059"
+    },
+    {
+      "arxiv_id": "2601.03871",
+      "arxiv_version": null,
+      "content_sha256": "d795680e0bb696943137ffe51ef884b70ca4d81770236430c5b6787195c8f487",
+      "doi": null,
+      "query_family": "hurwitz-space-weight-filtration-not-tate",
+      "retrieved_at": "2026-08-02T23:12:21Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2601.03871"
+    },
+    {
+      "arxiv_id": "2410.19913",
+      "arxiv_version": "v2",
+      "content_sha256": "caf6a92f7beebc6b6c42d3ecf8711c0d20b07d3eceadda13c086f8dead34866b",
+      "doi": null,
+      "query_family": "tate-type-criterion-open-moduli-6-6",
+      "retrieved_at": "2026-08-02T23:12:21Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2410.19913"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": null,
+      "content_sha256": "d5d5f5e508a407036f3d30bbb74dfda2c46149a4394966e2e5cba8c87c31cbfd",
+      "doi": "10.4171/JEMS/1543",
+      "query_family": "campaign-corpus-cross-check-ckgp-tetragonal",
+      "retrieved_at": "2026-08-02T23:12:21Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/abs/2208.02357"
+    }
+  ],
+  "task_id": "TASK-F-FND-0054",
+  "verdict": "promote"
+}
