@@ -1,0 +1,191 @@
+{
+  "attempt_id": "ATT-0101",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0101-1",
+      "note": "Imported clause (AJ a P2-bundle; U smooth surjective of pure relative dimension two; Z canonically Ord(U)). Not verifiable from the dependency artifacts, which are unreachable in this workspace (repo/ is a dangling symlink), but each component is independently corroborated at packet level: FND-0139 and FND-0142 give h^0(L)=3 identically on the balanced+(N) locus (B_4 empty because the only Clifford-equality case is the hyperelliptic-composed pencil, which FND-0125 shows has F=O(2)+O(7)); FND-0107 supplies the correct AJ model and its agreement with Proj(pi_*L) exactly where h^0 is constant; FND-0134 gives nonemptiness and fibrewise density of the reduced-support open; FND-0064 and FND-0141 give the finite etale S_6-ordering torsor and S-smoothness of relative dimension two over a reduced base. S normal implies S reduced, so the Grauert-based reduced-base restriction recorded by REV-0116 and REV-0142 is satisfied. Checked also that W_5 is taken as the canonical degree-sixteen HN quotient rather than a split summand, i.e. the filtered form required by FND-0097, whose exactness inputs hold at (6,6) by the degree bounds of FND-0099 (deg W_4=20>10, deg W_4(-Gamma)=14>10).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0101-2",
+      "note": "S normal Noetherian implies each connected component S_alpha is open, closed, normal and integral. AJ_alpha is normal because Zariski-locally it is P^2 over a normal domain and polynomial extensions/localizations of normal domains are normal; it is connected as a Zariski-locally trivial fibration with connected fibres over a connected base, and normal plus connected plus locally Noetherian gives integral. U_alpha is a nonempty open (nonemptiness from fibrewise density, FND-0134) of an integral normal scheme, hence integral and normal, and dense, so dim U_alpha = dim AJ_alpha = dim S_alpha + 2 for a finite-type k-scheme. Minor presentational compression, not a defect: the attempt's phrase 'Zariski-locally it is P2 times an integral scheme' establishes local integrality only; global integrality needs the connectedness step just given, which is immediate.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0101-3",
+      "note": "Re-derived independently. U_alpha is connected, locally Noetherian and finite type over k, so finite etale covers correspond to finite pi_1^et-sets and connected components to orbits. For a right S_6-torsor, trivializing one geometric fibre by a chosen ordering makes monodromy commute with the right action, hence act by left multiplication through rho_alpha; orbits of left multiplication by H_alpha are the sets H_alpha g, whose number is [S_6:H_alpha]. Z_alpha is etale over the normal U_alpha, hence normal; a locally Noetherian normal scheme is locally integral, so its irreducible components are its connected components. This is exactly the normality hypothesis flagged as load-bearing by FND-0132, and it is retained here rather than assumed away. k algebraically closed makes the arithmetic/geometric monodromy distinction of FND-0148 vacuous.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0101-4",
+      "note": "Each orbit H_alpha g has cardinality |H_alpha|, so each component has degree |H_alpha| over the connected U_alpha; a finite etale map is open and closed, so the image of a component is open and closed in the connected U_alpha, hence all of it (surjectivity). Finite surjective maps preserve dimension, giving dim = dim U_alpha = dim S_alpha + 2. Right multiplication is transitive on {H_alpha g} and the stabilizer of H_alpha g is g^{-1}H_alpha g, conjugate to H_alpha, so the transitivity and stabilizer clauses hold and Z_alpha is irreducible iff [S_6:H_alpha]=1 iff H_alpha=S_6. See finding candidate FC-REV0150-COSET-SIDE for a nomenclature hazard in the phrase 'left cosets' that does not affect the truth of the clause.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0101-5",
+      "note": "Re-derived. At a geometric point of Z the incidence gives O_C(Gamma) = L exactly (the relative-equivalence twist of FND-0133 is trivial on a point), and weak (N) gives L = omega_C(-D) by the degree argument of FND-0105 (deg A = 0), so O_C(D) = omega_C(-Gamma) of degree 4. By FND-0142, h^0(O_C(D)) = 2 on every balanced+(N) fibre, and gamma^* is injective on H^0(P^1,O(1)), so gamma^*H^0(O(1)) is a two-dimensional subspace of a two-dimensional space: the pencil is complete and base-point-free, and gamma is the morphism it defines. Any a fixing every x_i fixes Gamma as a divisor and preserves omega_C, hence preserves omega_C(-Gamma), permutes the members of the complete pencil, and induces b in PGL_2 with b o gamma = gamma o a; b is unique because gamma is surjective, giving injectivity. Direction of the argument matters and is correct here: it starts from Aut(C;x_1,...,x_6), the group relevant to a forgetful map, rather than from Aut(C,gamma,Gamma), which is precisely the failure mode warned about in FND-0137; it is consistent with the functorial reconstruction recorded in FND-0147. The scope disclaimer that this is objectwise and not a full-faithfulness statement is accurate.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-17",
+  "finding_candidates": [
+    {
+      "id": "FC-REV0150-PENCIL-COMPLETENESS-DISCHARGES-AUT",
+      "key": "FC-REV0150-PENCIL-COMPLETENESS-DISCHARGES-AUT",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "objects": [
+          "Aut(C;x_1,...,x_6)",
+          "Aut(C,gamma,Gamma)",
+          "omega_C(-Gamma)",
+          "movable-target cover automorphisms"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "statement": "The FND-0137 obstruction \u2014 that a rigidity argument passing through an induced PGL_2 transformation proves the clause only for Aut(C,gamma,Gamma) and not for the group Aut(C,Gamma) relevant to a forgetful map \u2014 is discharged by exactly one numerical condition, namely completeness of the residual pencil h^0(omega_C(-Gamma)) = h^0(O_C(D)) = 2. Mechanism: an automorphism a fixing the six labelled points fixes Gamma and preserves omega_C, hence preserves omega_C(-Gamma); when h^0 = 2 the pulled-back pencil gamma^*H^0(P^1,O(1)) exhausts H^0(omega_C(-Gamma)), so gamma IS the complete-pencil morphism and a permutes its members, producing the target automorphism b, unique by surjectivity of gamma. The condition is not cosmetic: on any stratum with h^0(omega_C(-Gamma)) >= 3 the pulled-back pencil is a proper subpencil of a net, preservation of omega_C(-Gamma) no longer forces preservation of gamma, and surjectivity of the forgetful homomorphism can genuinely fail. Consequently any downstream artifact citing an inertia or stabilizer isomorphism of this shape must certify h^0 = 2 pointwise on its whole base (at (6,6) this is supplied by fibrewise balancedness via FND-0142 plus FND-0125, and requires (N) via FND-0105 to identify L with omega_C(-D) in the first place), and must not import the clause onto unbalanced, merely generically balanced, or closure strata.",
+      "supports_finding_id": "FND-0137"
+    },
+    {
+      "id": "FC-REV0150-COSET-SIDE",
+      "key": "FC-REV0150-COSET-SIDE",
+      "scope": {
+        "generality": "any right G-torsor over a connected normal locally Noetherian base",
+        "objects": [
+          "finite etale right S_6-torsor Z -> U",
+          "component index set H\\S_6",
+          "right deck action"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "statement": "In the component formula for a RIGHT S_6-torsor, the index set H\\S_6 must be read as the set of orbits of left multiplication by H, i.e. the sets Hg, which under standard nomenclature are right cosets; the phrase 'left cosets H\\S_6' used both in ATT-0101's theorem statement and in the wording of FND-0148 is a mislabel of the correct object. The distinction is typing-critical rather than cosmetic downstream: the right deck action descends to {Hg} (Hg . g' = Hgg', transitive, stabilizer of Hg equal to g^{-1}Hg), whereas on the genuine left-coset set S_6/H = {gH} right multiplication is not well defined at all, so any artifact that writes gH and then applies the deck action, or that computes a stabilizer as gHg^{-1} on that indexing, is ill-typed and will produce the wrong conjugacy bookkeeping. Recommended discipline for downstream C66-GEO-COMP and C66-TATE-* artifacts: write 'the orbit set H\\S_6 of left multiplication' and record the stabilizer as g^{-1}Hg."
+    },
+    {
+      "id": "FC-REV0150-INDUCED-REP-ON-COMPONENTS",
+      "key": "FC-REV0150-INDUCED-REP-ON-COMPONENTS",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "coefficients": "Q",
+        "hypotheses": [
+          "the confirmed ATT-0101 component classification over a normal base",
+          "scheme-level, no stack inertia"
+        ],
+        "objects": [
+          "Z_alpha",
+          "U_alpha",
+          "H_alpha",
+          "H^*(Z_alpha;Q)",
+          "H^{BM}_*(Z_alpha;Q)"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "statement": "A corollary of the confirmed component classification, verified here and not recorded in the packet: because the right S_6-action is transitive on the components of Z_alpha with stabilizer conjugate to H_alpha, all components are isomorphic as U_alpha-schemes, and for any additive S_6-equivariant invariant \u2014 in particular H^*(-;Q) and H^{BM}_*(-;Q) with their mixed Hodge structures \u2014 one has H^*(Z_alpha;Q) = Ind_{H_alpha}^{S_6} H^*(Z_alpha^1;Q), where Z_alpha^1 is the component with stabilizer H_alpha, and the H_alpha-action on H^*(Z_alpha^1) is by the residual deck transformations. Consistency check: taking S_6-invariants returns H^*(Z_alpha^1;Q)^{H_alpha} = H^*(U_alpha;Q), as it must. Two consequences for the downstream nodes. (i) The entire S_6-isotypic structure of the ordered failure locus is determined by the single subgroup H_alpha together with the H_alpha-representation on one component, so the uncomputed H_alpha of GAP-COMP-MONODROMY is the only obstruction to an exact equivariant decomposition \u2014 the component count alone is not additional information. (ii) This is a purely formal induction statement and upgrades nothing to Tate: it is fully compatible with H^*(Z_alpha^1) carrying non-Tate summands, which is precisely the hazard recorded in FND-0053, and it is stated with Q-coefficients on schemes, so it carries none of the integral-coefficient or coarse-space content excluded by FND-0075."
+    }
+  ],
+  "id": "REV-0150",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "a41c91c7e0ae002dba0aca6f0ea7cb40709275468ef2c86f98805f01d487dd7e",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Used only for the scheme-theoretic Fitting/Abel-Jacobi identity, i.e. that the evaluation-failure Fitting structure on Conf_6 agrees with the Abel-Jacobi incidence structure. This is the requirement raised by FND-0046 and the universal determinantal computation Fit_0(coker) = I_e is independently recorded in FND-0096, whose hypotheses (Gamma relatively Cartier finite etale of degree n over the base) are met by B=Conf_6. Artifact itself not readable here; use is within the stated role.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Confirmation attestation for ATT-0065, not an independent mathematical input to ATT-0101; no bound it records is contradicted by the use above.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Confirmation attestation for ATT-0065 including nonreduced scheme-structure caveats. Those caveats are inert here because S is normal, hence reduced, so the compatible-reduction hazard of FND-0087 does not arise.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Used for the Abel-Jacobi incidence, the h^0 stratification and its normalization consequences, and the distinct-support ordering torsor. Independently corroborated by FND-0064, FND-0107 and (for CLM-0066-3, cited there as dual-confirmed) FND-0139. Used within its reduced-base scope.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Confirmation attestation for ATT-0066; no recorded bound is exceeded by ATT-0101's use.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Confirmation attestation for ATT-0066 recording the reduced-base Grauert restriction. ATT-0101 satisfies it: normal implies reduced. This is the single most important scope bound in the dependency set and it is respected.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0086",
+      "note": "Used to remove the h^0(L)=4 branch under balancedness and (N) and to identify the full incidence as a P^2-bundle over a reduced base. Independently corroborated by FND-0139 (B_4 empty under fibrewise balancedness, via FND-0125) and FND-0142 (h^0(D)=2, h^0(L)=3, h^1(L)=2). Balancedness is a hypothesis of ATT-0101 at every point of S, not merely generically, which is what makes this import legitimate.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0135",
+      "note": "Confirmation attestation for ATT-0086; no recorded bound is exceeded.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0138",
+      "note": "Confirmation attestation for ATT-0086; no recorded bound is exceeded.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0088",
+      "note": "The most load-bearing import: fibrewise nonemptiness and density of the reduced-support open, Z = Ord(U), pure relative dimension two, and the codimension-four regular immersion over a reduced base. Independently corroborated by FND-0134 (base-point-freeness plus Bertini give six distinct points on a general member, hence nonempty dense reduced-support open in every fibre) and FND-0141 (Z S-smooth of pure relative dimension two via the ordering-torsor identification). Used strictly over a reduced (indeed normal) base.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0139",
+      "note": "Confirmation attestation for ATT-0088; no recorded bound is exceeded.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0142",
+      "note": "Confirmation attestation for ATT-0088 recording two-jet and reduced-base caveats. The two-jet caveat concerns the nonreduced boundary of the incidence, which ATT-0101 never enters: B=Conf_6 is the pairwise-distinct configuration scheme, so only the reduced-support open is used. Reduced-base caveat satisfied as above.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0101-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "The strongest available attack is on the final stabilizer clause, and it fails only because of a hypothesis the artifact actually carries. The clause asserts that every a in Aut(C;x_1,...,x_6) induces a target automorphism b, i.e. that a pointed automorphism automatically preserves the tetragonal pencil. That inference is legitimate only when the residual pencil is COMPLETE: a preserves omega_C(-Gamma), but this yields b if and only if gamma is the morphism of the complete linear system |omega_C(-Gamma)|, which requires h^0(omega_C(-Gamma)) = h^0(O_C(D)) = 2 exactly. On any fibre where h^0(O_C(D)) = 3, gamma^*H^0(P^1,O(1)) is a proper two-dimensional subpencil of a net, an automorphism preserving omega_C(-Gamma) need not preserve that subpencil, and the forgetful map degenerates precisely into the Aut(C,Gamma) versus Aut(C,gamma,Gamma) failure mode of FND-0137 \u2014 the clause would then be false as stated, not merely unproved. I attempted to produce such a point of Z. The attack is defeated because (i) the theorem hypothesizes fibrewise balanced F_s = O(4)+O(5) at EVERY point of S, not generically, and (ii) FND-0142 shows the only Clifford-equality route to h^0(D)=3 is a hyperelliptic-composed pencil, which FND-0125 computes to have relations bundle exactly F = O(2)+O(7), at splitting-type distance five from balanced. So the bad stratum is empty on S, and h^0(O_C(D)) = 2 holds identically. Had the artifact weakened balancedness to 'generically balanced', or dropped (N) (which is what forces L = omega_C(-D) by the deg A = 0 argument of FND-0105), this clause would be refuted rather than confirmed. Two lesser attacks were also run and did not survive as defects. First, coset-side typing: the statement indexes components by 'the left cosets H_alpha\\S_6', but the orbits of left multiplication by H_alpha are the sets H_alpha g, which under standard naming are RIGHT cosets; the genuine left-coset set S_6/H_alpha carries no well-defined right multiplication, so on that reading the transitivity and stabilizer clauses would be ill-typed. The notation H_alpha\\S_6 and the artifact's own stabilizer computation g^{-1}H_alpha g pin the correct reading, so this is a nomenclature slip (shared with the wording of FND-0148), not a mathematical error; recorded as FC-REV0150-COSET-SIDE. Second, global integrality of AJ_alpha is argued from local triviality alone, which gives only local integrality; the missing half-line (connected fibre bundle over a connected base, plus normality) is immediate. Nothing on the adversary checklist concerning cohomology degree versus Borel-Moore degree, Poincare duality and Tate twists, Gysin or Kunneth shifts, spectral-sequence differentials, semisimplification versus honest Hodge isomorphism, or predicted motives applies, because the artifact asserts no cohomological, weight, or Tate statement at all and says so explicitly (GAP-TATE). Likewise the stack-versus-coarse attack (FND-0144) and the ordered-versus-unordered integral-coefficient attack (FND-0075) find no purchase: the theorem is deliberately scheme-level and per-connected-component, disclaims any component or degree formula over a stack with inertia, and makes no descent to coarse moduli or to M_{6,6}. The one attack surface that the artifact leaves fully open is not a defect in the stated theorem but its scope: H_alpha is uncomputed, so the theorem is consistent with anything from 1 to 720 components, and it therefore supplies no input whatsoever to C66-TATE-SUPPORT. Confirming this lemma advances RED-0001 by exactly nothing, as the artifact itself states.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero and let S be a normal finite-type k-scheme carrying a smooth proper genus-six family pi:C->S, a P1-bundle P->S, and a finite flat degree-four Casnati-Ekedahl cover gamma:C->P satisfying (CE), fibrewise balanced relations F_s=O(4) direct-sum O(5), and the weak relative-canonical normalization (N). Let W_5 be the canonical degree-sixteen quotient in the balanced filtration, L=W_5 tensor omega_{C/S}^{-1}, B=Conf_6(C/S), and let Z be the intrinsic CE evaluation-failure subscheme of B. Let AJ be the relative projective plane representing effective divisors relatively linearly equivalent to L, and let U be its reduced-support open. Then Z is canonically the finite etale right S_6-torsor Ord(U)->U. For every connected component S_alpha of S, U_alpha=U times_S S_alpha is normal and integral. After choosing a geometric point u_alpha and an ordering above it, let H_alpha be the image of the monodromy homomorphism pi_1^et(U_alpha,u_alpha)->S_6. Then the irreducible components of Z_alpha=Z times_S S_alpha are indexed by the left cosets H_alpha\\S_6. There are [S_6:H_alpha] such components; each maps finite etale and surjectively to U_alpha with degree |H_alpha|, has dimension dim(S_alpha)+2, and the right S_6-action is transitive on the component set with component stabilizer conjugate to H_alpha. In particular Z_alpha is irreducible if and only if H_alpha=S_6. Moreover, for every geometric point z=(C,gamma;x_1,...,x_6) of Z, the forgetful homomorphism from automorphisms of the tetragonal cover with movable target, namely pairs (a,b) satisfying a(x_i)=x_i and b composed with gamma=gamma composed with a, to Aut(C;x_1,...,x_6) is an isomorphism. Thus the ordered pointed-curve stabilizer is exactly the cover stabilizer in this explicitly defined sense.",
+  "verdict": "confirmed"
+}

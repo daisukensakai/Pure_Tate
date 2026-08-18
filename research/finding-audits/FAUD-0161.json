@@ -1,0 +1,69 @@
+{
+  "adjudicated_statement": "Let G be a group and H a subgroup of G. The orbits of the left multiplication action of H on G are the sets Hg={hg : h in H}. Under standard elementary nomenclature these are the right cosets of H, and the set of such orbits is denoted H\\G; the left cosets are the sets gH, and the set of left cosets is denoted G/H. The phrase 'left cosets H\\S_6' in ATT-0101's theorem statement and the phrase 'left H_arith-cosets' in FND-0148 are therefore elementary mislabels of the object Hg, even though the notation H\\S_6 itself is the standard symbol for that object. Now let U be a connected scheme, let Z->U be a finite etale right G-torsor, and let H be the image of etale monodromy acting by left multiplication on a geometric fibre after a choice of trivialization. The connected components of Z are indexed by the orbit set H\\G={Hg}. The right deck action of G is well-defined on this set by Hg . g'=Hgg', is transitive, and the stabilizer of Hg is exactly g^{-1}Hg. Right multiplication on the genuine left-coset set G/H={gH} is well-defined if and only if H is normal in G; in particular it is well-defined when H is {1}, A_6, or S_6 inside S_6, and it fails for every non-normal monodromy image. Any artifact that writes gH and then applies the right deck action, or that computes the stabilizer of the component indexed by Hg as gHg^{-1}, is ill-typed unless H is normal, in which case both conjugates equal H. Identifying these connected components with irreducible components additionally requires U to be normal and locally Noetherian. This constraint does not refute the component, degree, dimension, or transitivity clauses of ATT-0101, which already index components by H_alpha g and compute the stabilizer as g^{-1}H_alpha g. Downstream C66-GEO-COMP and C66-TATE-* artifacts must write 'the orbit set H\\G of left multiplication' (equivalently, 'the set of right cosets Hg') and must record the component stabilizer as g^{-1}Hg.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads of ATT-0101 and REV-0150 confirm the contested wording and also show that the attempt's formulas are already the correct ones. ATT-0101 theorem_statement and CLM-0101-3 write that Irr(Z_alpha) is indexed by 'the left cosets H_alpha\\S_6'; argument section 3 says the monodromy orbits 'are precisely the left cosets H_alpha\\G' and then, in the same paragraph, indexes a component by H_alpha g and computes its right-deck stabilizer as g^{-1}H_alpha g. CLM-0101-4's justification repeats 'right multiplication is transitive on left cosets and stabilizes H_alpha g through g^{-1}H_alpha g'. REV-0150 independently re-derives the orbits as the sets H_alpha g, confirms the stabilizer g^{-1}H_alpha g, and records FC-REV0150-COSET-SIDE as a nomenclature slip that 'does not affect the truth of the clause'; strongest_attack likewise says the notation H_alpha\\S_6 together with the stabilizer computation pins the correct reading. Packet FND-0148 (corroborated) uses Irr(Z)=H\\S_6 and 'indexed by left H_arith-cosets' with stabilizer only 'conjugate to H_arith', so it carries the same English mislabel but not a wrong conjugate. Independent public sources agree with the group-theoretic core under elementary nomenclature: Encyclopedia of Mathematics (oldid 35336) defines the left coset as aH={ah:h in H} and the right coset as Ha; Wikipedia Coset revision 1351557349 defines gH as a left coset, Hg as a right coset, writes G/H for {gH} and H\\G for {Hg}, and states that the orbit of g under the left H-action (h,g)|->hg is the right coset Hg, while the orbit under the right H-action is the left coset gH. The same page records that left and right decompositions coincide if and only if H is normal, and that the product of left cosets is the quotient-group operation only in that case. The original candidate therefore overstates that right multiplication on S_6/H={gH} is 'not well defined at all': that product is well-defined precisely when H is normal in G, hence in particular for the normal subgroups {1}, A_6, and S_6 of S_6, and fails for every non-normal monodromy image. The conjugacy bookkeeping hazard is likewise sharpest when H is non-normal: the stabilizer of Hg under the right G-action is g^{-1}Hg, whereas gHg^{-1} is the stabilizer of gH under the left G-action, and these need not be the same conjugate. No contradiction with CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001 (contradicts_claim_ids is empty). Compatible with the mathematical content of FND-0148 (H\\S_6 indexing, degree |H|, stabilizer conjugate to H, arithmetic versus geometric monodromy) while correcting only the adjective 'left'. Compatible with FND-0132 (normality needed to pass from pi_0 to Irr) and with the confirmed ATT-0101 component clauses. Not a merge into FND-0148: that finding is the arithmetic/geometric monodromy distinction, not this typing discipline. Not retired as cosmetic: the English slip in ATT-0101 is harmless only because that artifact already writes Hg and g^{-1}Hg; downstream artifacts that take 'left cosets' literally as {gH} and then apply the right deck action, or that record the stabilizer as gHg^{-1} on the {Hg} indexing, are ill-typed. Promote the corrected statement.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0151",
+  "id": "FAUD-0161",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "does_not_require": [
+      "fibrewise balancedness",
+      "(CE)",
+      "weak relative-canonical normalization (N)",
+      "computation of the monodromy image H"
+    ],
+    "generality": "any group G with subgroup H; applied to any finite etale right G-torsor over a connected base",
+    "hypotheses": [
+      "G a group and H a subgroup",
+      "Z -> U a finite etale right G-torsor",
+      "U connected, so that pi_0(Z) is the monodromy-orbit set H\\G",
+      "U normal and locally Noetherian to identify Irr(Z) with pi_0(Z)"
+    ],
+    "objects": [
+      "finite etale right G-torsor Z -> U",
+      "orbit set H\\G of left multiplication",
+      "right cosets Hg",
+      "right deck action",
+      "component stabilizer g^{-1}Hg"
+    ],
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "41075d105931b2e2e5cd5c1972cc3a7d050d8aacf854c67fbbe6598d9c4e947c",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-17T05:53:48Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/w/index.php?title=Coset&oldid=1351557349&action=raw"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "192c46187b5726e039548292ca7a94b0ffff86ad5c846a486b556704f0260d79",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "41075d105931b2e2e5cd5c1972cc3a7d050d8aacf854c67fbbe6598d9c4e947c",
+      "retrieved_at": "2026-08-17T05:51:30Z",
+      "source_type": "encyclopedia",
+      "url": "https://encyclopediaofmath.org/index.php?title=Coset_in_a_group"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0151",
+  "verdict": "promote",
+  "verified_source_count": 2
+}

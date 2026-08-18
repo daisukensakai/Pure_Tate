@@ -1,0 +1,110 @@
+{
+  "adjudicated_statement": "Let k be an algebraically closed field of characteristic zero and let S be a normal finite-type k-scheme carrying a balanced+(CE)+(N) genus-six family as in ATT-0101. For each connected component S_alpha of S, let U_alpha be the reduced-support open of the Abel-Jacobi P^2-bundle over S_alpha and let Z_alpha -> U_alpha be the finite etale right S_6-torsor Ord(U_alpha). Let H_alpha be the image of etale monodromy pi_1^{et}(U_alpha) -> S_6, acting by left multiplication on a trivialized geometric fibre. The statement is scheme-level: it assumes the confirmed ATT-0101 classification (CLM-0101-3, CLM-0101-4) and does not extend to algebraic stacks with inertia (FND-0144). Then the connected components of Z_alpha coincide with its irreducible components and are indexed by the orbit set H_alpha\\S_6 of left multiplication (the right cosets H_alpha g). The right deck action is transitive on this set, and the stabilizer of the identity-coset component Z_alpha^1 is exactly H_alpha. Right multiplication by any element of S_6 is a U_alpha-automorphism of Z_alpha, so all components are isomorphic as U_alpha-schemes. The residual H_alpha-action on Z_alpha^1 is free and simply transitive on geometric fibres; Z_alpha^1 -> U_alpha is therefore a connected finite etale cover of degree |H_alpha|, hence a Galois cover with group H_alpha. For any additive functor F from finite-type k-schemes (or their Betti analytifications) to Q-vector spaces or to mixed Hodge structures over Q that is functorial for the right S_6-action \u2014 in particular ordinary Betti cohomology H^*(-;Q) and Borel-Moore homology H^{BM}_*(-;Q), each with its mixed Hodge structure \u2014 there is a canonical isomorphism of S_6-objects F(Z_alpha) isomorphic to Ind_{H_alpha}^{S_6} F(Z_alpha^1), where induction is Q[S_6] tensor_{Q[H_alpha]} (-) and the H_alpha-action on F(Z_alpha^1) is the residual deck action. Because |H_alpha| is invertible in Q, the finite-covering transfer identifies F(U_alpha) with F(Z_alpha^1)^{H_alpha}; Frobenius reciprocity then gives F(Z_alpha)^{S_6} isomorphic to F(Z_alpha^1)^{H_alpha} isomorphic to F(U_alpha). Two consequences, with the hypotheses above retained. (i) The S_6-isotypic decomposition of F(Z_alpha) is determined by the pair consisting of the subgroup H_alpha and the H_alpha-object F(Z_alpha^1); the component count [S_6:H_alpha] is not independent data. Computing H_alpha (GAP-COMP-MONODROMY) determines the induction functor but does not compute F(Z_alpha^1) as an H_alpha-object, which remains a separate geometric and Hodge input (GAP-TATE). (ii) The isomorphism is purely formal and upgrades nothing to Tate type: it is compatible with F(Z_alpha^1) carrying non-Tate summands (FND-0053). It is stated with Q-coefficients on schemes, so it carries none of the integral-coefficient or coarse-space content excluded by FND-0075.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads: ATT-0101 theorem_statement and Section 3 / CLM-0101-3 / CLM-0101-4, and REV-0150 checked_claims for those two clauses plus finding_candidate FC-REV0150-INDUCED-REP-ON-COMPONENTS (the exact source of FND-0152). ATT-0101 proves, and REV-0150 confirms, that Z_alpha -> U_alpha is a finite etale right S_6-torsor over a normal integral U_alpha, that Irr(Z_alpha) is the monodromy-orbit set of cardinality [S_6:H_alpha], that each component maps finite etale of degree |H_alpha| onto U_alpha, and that the right S_6-action is transitive on components with stabilizer conjugate to H_alpha. The induction formula is not stated in ATT-0101 (which explicitly records GAP-TATE and asserts no Hodge or Tate conclusion); it is a reviewer corollary. No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. It is compatible with packet FND-0148 (H_alpha is arithmetic monodromy; here k is algebraically closed, so the arithmetic/geometric distinction is vacuous), FND-0151 (index set is the orbit set H_alpha\\S_6 of left multiplication, i.e. right cosets H_alpha g, with stabilizer g^{-1}H_alpha g), FND-0132 (normality is load-bearing for Irr=pi_0), FND-0144 (the formula is scheme-level and does not extend to stacks with inertia), FND-0053 (induction does not force Tate local systems), and FND-0075 (Q-coefficients, no integral or coarse-space descent). Independent primary checks. (1) Finite-group induction: the Q[S_6]-module attached to a transitive permutation of summands with stabilizer H_alpha and H_alpha-module V on the identity-coset summand is Ind_{H_alpha}^{S_6} V = Q[S_6] tensor_{Q[H_alpha]} V (Wikipedia, Induced representation, algebraic construction; Serre GTM 42). Right multiplication by g is a U_alpha-automorphism of the torsor, so all components are isomorphic as U_alpha-schemes and F(Z_alpha) is that induced object for any additive S_6-equivariant F. (2) Residual Galois: Z_alpha^1 is connected of degree |H_alpha| over U_alpha with Aut_{U_alpha}(Z_alpha^1) equal to the component stabilizer H_alpha, hence Z_alpha^1 -> U_alpha is a Galois cover with group H_alpha (Stacks Project Tag 03SF, equivalent conditions (1)-(4)). (3) Invariants: for an n-sheeted covering given by a group action, Hatcher Algebraic Topology Proposition 3G.1 states that with coefficients in a field of characteristic 0 or prime to n, pullback is injective onto the deck-invariants; equivalently, MathOverflow 57076 (Sprehn) records that if |G| is a unit in the coefficient ring then H^*(X/G) -> H^*(X)^G is an isomorphism (Milnor Characteristic Classes exercise). Thus H^*(U_alpha;Q) = H^*(Z_alpha^1;Q)^{H_alpha}, and Frobenius reciprocity gives the S_6-invariant consistency check. The same transfer applies to ordinary homology; Borel-Moore homology is included only as an additive S_6-equivariant functor (finite-sheeted lifts preserve locally finite chains), not as a separate Hatcher citation. Algebraic deck maps are morphisms of mixed Hodge structures, so the Q-linear identifications are MHS identifications. Wording corrections required before promotion: the original '=' must be an isomorphism of S_6-objects; components must be indexed by H_alpha\\S_6 as in FND-0151, not by a mislabelled left-coset set; and consequence (i) overstates when it says uncomputed H_alpha is the only obstruction \u2014 H_alpha determines the induction functor and the component count, but the H_alpha-object F(Z_alpha^1) remains an independent geometric/Hodge input (GAP-TATE). Consequence (ii) is correct and is retained. Distinct from FND-0148, FND-0151, FND-0053, and FND-0075: do not merge. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0152",
+  "id": "FAUD-0162",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "base": "normal finite-type schemes over an algebraically closed characteristic-zero field",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "does_not_assert": [
+      "Tate type of H^*(Z_alpha^1) or H^*(Z_alpha)",
+      "computation of the monodromy image H_alpha",
+      "a component or degree formula over an algebraic stack with inertia",
+      "integral coefficients or coarse-moduli descent"
+    ],
+    "hypotheses": [
+      "confirmed ATT-0101 component classification CLM-0101-3 and CLM-0101-4 over a normal base",
+      "scheme-level, no stack inertia",
+      "Z_alpha -> U_alpha a finite etale right S_6-torsor",
+      "U_alpha normal integral locally Noetherian, so Irr(Z_alpha)=pi_0(Z_alpha)",
+      "components indexed by the orbit set H_alpha\\S_6 of left multiplication (right cosets H_alpha g), with stabilizer of Z_alpha^1 equal to H_alpha",
+      "Q-coefficients, so that |H_alpha| and |S_6| are invertible",
+      "additive S_6-equivariant functor to Q-vector spaces or mixed Hodge structures, including Betti H^*(-;Q) and H^{BM}_*(-;Q)"
+    ],
+    "objects": [
+      "Z_alpha",
+      "U_alpha",
+      "H_alpha",
+      "Z_alpha^1",
+      "H^*(Z_alpha;Q)",
+      "H^{BM}_*(Z_alpha;Q)"
+    ],
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "c88135bc1b9f8a2b4be8406677e85a6f3eb658886a9cf2d2508a25c262095cce",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-17T06:04:30Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=ids|sha1|size&titles=Induced_representation&format=json"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "1304c743da501da2f56281caedda53ed3feb7041961cbcafa699234f82033010",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "c88135bc1b9f8a2b4be8406677e85a6f3eb658886a9cf2d2508a25c262095cce",
+      "retrieved_at": "2026-08-17T06:00:10Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Induced_representation"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "93635733d2e998fe28282d40a4fe70b19dcd3b4e4449fee951eea7433e5310f6",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "galois-cover-and-transfer",
+      "reported_content_sha256": "c88135bc1b9f8a2b4be8406677e85a6f3eb658886a9cf2d2508a25c262095cce",
+      "retrieved_at": "2026-08-17T06:01:20Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/03SF"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "bebb3032bf9021b956da3bd070eb6c67dc662cf849be9cdf6679f677560e5618",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "galois-cover-and-transfer",
+      "reported_content_sha256": "c88135bc1b9f8a2b4be8406677e85a6f3eb658886a9cf2d2508a25c262095cce",
+      "retrieved_at": "2026-08-17T06:02:40Z",
+      "source_type": "author-page",
+      "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "a6936017f132c056b8b62b6b8dff4205ac623f70a065b153728c8caf5d3682d1",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "galois-cover-and-transfer",
+      "reported_content_sha256": "c88135bc1b9f8a2b4be8406677e85a6f3eb658886a9cf2d2508a25c262095cce",
+      "retrieved_at": "2026-08-17T06:03:10Z",
+      "source_type": "other-primary",
+      "url": "https://api.stackexchange.com/2.3/questions/57071/answers?site=mathoverflow&filter=withbody&order=desc&sort=votes"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0152",
+  "verdict": "promote",
+  "verified_source_count": 5
+}

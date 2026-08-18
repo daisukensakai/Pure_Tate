@@ -1,0 +1,200 @@
+{
+  "argument_markdown": "## 1. Source-backed inputs\n\nThe scheme-theoretic identification of the intrinsic evaluation-failure ideal with the Abel-Jacobi relative-triviality ideal is supplied by ATT-0065, especially CLM-0065-4 and CLM-0065-9, within the scope confirmed independently by REV-0108 and REV-0109. ATT-0066, confirmed by REV-0110 and REV-0116, supplies the closed Abel-Jacobi incidence and the stack-level ordering torsor on the same distinct-support scheme, without one-sided reduction. ATT-0086, confirmed by REV-0135 and REV-0138, removes the h^0=4 branch under balancedness and (N), leaving h^0(L)=3 over a reduced base. ATT-0088, confirmed by REV-0139 and REV-0142, supplies the stronger facts needed here: the reduced-support open is nonempty and dense on every geometric fibre; over a reduced base AJ is a P2-bundle; U->S is smooth, surjective, and of pure relative dimension two; and Z is canonically Ord(U), a finite etale S_6-torsor. These inputs make no assertion about components in M_{6,6}, stack inertia, or Tate type, and none is inferred here.\n\n## 2. Normality and irreducibility of the unordered base\n\nBecause S is normal and Noetherian, its connected components S_alpha are open, closed, normal, and integral. The projective bundle AJ_alpha over S_alpha is integral: Zariski-locally it is P2 times an integral scheme. It is also normal, since its standard affine charts are polynomial extensions and localizations of normal domains. The open U_alpha is nonempty by the fibrewise nonemptiness proved in ATT-0088. Hence U_alpha is a nonempty open subscheme of an integral scheme, so it is integral; as an open of the normal AJ_alpha it is normal. Its dimension is dim(S_alpha)+2.\n\n## 3. Monodromy and irreducible components\n\nPut G=S_6. Choose a geometric point u_alpha of U_alpha and a point of the right G-torsor Z_alpha above it. This identifies the geometric fibre with G. Etale monodromy commutes with the right deck action, so it acts on G by left multiplication through a homomorphism rho_alpha:pi_1^et(U_alpha,u_alpha)->G. Let H_alpha be its image. Connected components of a finite etale cover of a connected base correspond to monodromy orbits in one geometric fibre. The orbits here are precisely the left cosets H_alpha\\G; each has |H_alpha| elements. Thus Z_alpha has [G:H_alpha] connected components, and each component is finite etale and surjective of degree |H_alpha| over U_alpha.\n\nA finite etale scheme over a normal scheme is normal. In a locally Noetherian normal scheme the irreducible components are disjoint and open, so each connected component is irreducible. Therefore the connected components just found are exactly the irreducible components of Z_alpha. Finite surjective maps preserve dimension, giving dim(Z_alpha,j)=dim(U_alpha)=dim(S_alpha)+2 for every component. Right multiplication by G is transitive on the left-coset set. The stabilizer of the component indexed by H_alpha g is g^{-1}H_alpha g. This proves the component, degree, dimension, and deck-action clauses. It also gives Z_alpha irreducible exactly when H_alpha=G.\n\nNormality is essential at exactly one point: without it, a connected finite etale cover need not be irreducible. No component formula is asserted for an algebraic stack, where inertia can additionally act on the ordered fibre.\n\n## 4. Pointed stabilizers via recovery of the complete pencil\n\nLet z=(C,gamma;x_1,...,x_6) be a geometric point of Z and Gamma=x_1+...+x_6. The verified incidence identity gives O_C(Gamma)=L. Under (N), ATT-0066 and ATT-0088 give L=omega_C(-D), where D is a fibre divisor of gamma, and h^0(O_C(D))=2. Hence\n\nO_C(D)=omega_C(-Gamma).\n\nThe pulled-back target pencil gamma^*H^0(P1,O(1)) is a two-dimensional subspace of the two-dimensional H^0(C,O_C(D)); it is therefore the complete linear system |D|. Thus gamma is recovered, up to a unique target automorphism, from the ordered pointed curve by the complete pencil |omega_C(-Gamma)|.\n\nLet a belong to Aut(C;x_1,...,x_6). Since a fixes Gamma and preserves the canonical bundle, it preserves O_C(D)=omega_C(-Gamma). Its induced projective action on H^0(O_C(D)) determines b in PGL_2 with b composed with gamma=gamma composed with a. This proves surjectivity from the cover automorphism group of pairs (a,b) to Aut(C;x_1,...,x_6). The target automorphism b is unique because gamma is surjective, so the forgetful homomorphism is also injective. This is an objectwise inertia comparison for points already in Z; it does not construct or prove full faithfulness of a global morphism to M_{6,6}.\n\n## 5. Separation of status\n\nProved steps are Sections 2-4. Source-backed inputs are exactly the cited conclusions of ATT-0065, ATT-0066, ATT-0086, and ATT-0088 within the bounds imposed by their two confirmation reviews each. Computational hypotheses are absent, and no finite experiment is used. Remaining gaps are the actual subgroups H_alpha, irreducibility and normality of the universal balanced base, stack-level component behavior in the presence of inertia, unbalanced and closure strata, any global image in M_{6,6}, and every Hodge or Tate conclusion. Consequently RED-0001 is not resolved.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0101-1",
+      "justification": "This is the precise common scope of ATT-0065/REV-0108/REV-0109, ATT-0066/REV-0110/REV-0116, ATT-0086/REV-0135/REV-0138, and ATT-0088/REV-0139/REV-0142. Normality implies the reducedness required by Grauert.",
+      "statement": "Under the theorem hypotheses, AJ is a P2-bundle, its reduced-support open U is smooth and surjective of pure relative dimension two, and the intrinsic evaluation-failure scheme Z is canonically the finite etale right S_6-torsor Ord(U).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0101-2",
+      "justification": "A connected component of a normal Noetherian scheme is normal integral; its P2-bundle is normal integral, and the verified nonempty open U_alpha inherits both properties and the projective-bundle dimension.",
+      "statement": "For every connected component S_alpha of S, U_alpha is normal integral of dimension dim(S_alpha)+2.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0101-3",
+      "justification": "Finite-etale connected components are monodromy orbits. They are the left H_alpha-cosets after trivializing one fibre. Z_alpha is normal, so its connected and irreducible components coincide.",
+      "statement": "If H_alpha is the image of the etale monodromy of the right S_6-torsor Z_alpha->U_alpha, then Irr(Z_alpha) is indexed by H_alpha\\S_6; hence the number of irreducible components is [S_6:H_alpha].",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0101-4",
+      "justification": "Each monodromy orbit has cardinality |H_alpha|; finite maps preserve dimension; right multiplication is transitive on left cosets and stabilizes H_alpha g through g^{-1}H_alpha g.",
+      "statement": "Every component of Z_alpha maps finite etale surjectively to U_alpha with degree |H_alpha| and has dimension dim(S_alpha)+2; the right S_6-action is transitive on components and a component stabilizer is conjugate to H_alpha.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0101-5",
+      "justification": "The identities O(Gamma)=L=omega_C(-D) and h^0(D)=2 recover gamma as the complete pencil |omega_C(-Gamma)|. Every pointed automorphism therefore induces a unique target automorphism.",
+      "statement": "At every geometric z=(C,gamma;x_1,...,x_6) in Z, forgetting the target automorphism induces an isomorphism between movable-target cover automorphisms and Aut(C;x_1,...,x_6).",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [
+    {
+      "id": "GAP-COMP-BASE",
+      "severity": "high",
+      "statement": "Normality, connectedness, and irreducibility of the universal balanced tetragonal base are not proved."
+    },
+    {
+      "id": "GAP-COMP-MONODROMY",
+      "severity": "high",
+      "statement": "The subgroup H_alpha of S_6 is not computed; fullness, transpositions, and occurrence loci remain open."
+    },
+    {
+      "id": "GAP-COMP-STACK",
+      "severity": "high",
+      "statement": "No irreducible-component or degree formula is asserted over an algebraic stack with nontrivial inertia."
+    },
+    {
+      "id": "GAP-COMP-MODULI",
+      "severity": "high",
+      "statement": "No global image, closure, purity, absolute codimension, or unbalanced boundary analysis in M_{6,6} is supplied."
+    },
+    {
+      "id": "GAP-N",
+      "severity": "medium",
+      "statement": "The weak CE relative-canonical normalization remains an explicit theorem hypothesis."
+    },
+    {
+      "id": "GAP-TATE",
+      "severity": "high",
+      "statement": "No Hodge, weight, support, Gysin, or Tate conclusion is established; RED-0001 remains open."
+    }
+  ],
+  "id": "ATT-0101",
+  "lane": "geometry",
+  "methods_used": [
+    "verified-fitting-abel-jacobi-incidence",
+    "verified-balanced-projective-plane-model",
+    "finite-etale-torsor-monodromy",
+    "normal-scheme-connected-versus-irreducible-components",
+    "finite-morphism-dimension-preservation",
+    "deck-group-action-on-monodromy-cosets",
+    "complete-pencil-recovery-from-pointed-divisor",
+    "objectwise-stabilizer-comparison"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "The finite-cover information is converted into an exact irreducible-component theorem under the minimal additional normality hypothesis: components, their degrees, dimensions, deck-group orbit, and stabilizers are all expressed in terms of the actual monodromy image, without pretending that the image has been computed.",
+    "The ambiguity between Aut(C,gamma,Gamma) and Aut(C,Gamma) is removed for ordered failure points by recovering gamma from the complete pencil |omega_C(-Gamma)|; the theorem explicitly defines movable-target cover automorphisms and proves the two stabilizer groups isomorphic.",
+    "The theorem deliberately remains scheme-level, avoiding the invalid extension of the monodromy-orbit formula to stacks with uncontrolled inertia."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "a41c91c7e0ae002dba0aca6f0ea7cb40709275468ef2c86f98805f01d487dd7e",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0065",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-Z dependency supplying the scheme-theoretic Fitting/Abel-Jacobi identity on ordered disjoint sections."
+    },
+    {
+      "id": "REV-0108",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0065."
+    },
+    {
+      "id": "REV-0109",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0065, including its nonreduced scheme-structure and scope caveats."
+    },
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-H0 dependency supplying the Abel-Jacobi incidence, h^0 stratification, normalization consequences, and distinct-support ordering torsor."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0066."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0066, including the reduced-base Grauert restriction."
+    },
+    {
+      "id": "ATT-0086",
+      "kind": "context_attempt",
+      "role": "Verified context closing the balanced h^0=4 jump and identifying the full Abel-Jacobi incidence as a P2-bundle over a reduced base under (N)."
+    },
+    {
+      "id": "REV-0135",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0086."
+    },
+    {
+      "id": "REV-0138",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0086."
+    },
+    {
+      "id": "ATT-0088",
+      "kind": "context_attempt",
+      "role": "Verified context proving fibrewise reduced-support nonemptiness, Z=Ord(U), relative dimension two, component dominance, and regular immersion over a reduced base."
+    },
+    {
+      "id": "REV-0139",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0088."
+    },
+    {
+      "id": "REV-0142",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0088, including the two-jet and reduced-base caveats."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "Over a normal finite-type scheme base, the balanced ordered failure locus has an exact component classification by the monodromy subgroup of its finite etale S_6-ordering torsor. Every component has the base-component dimension plus two, and the deck action and component degrees are determined by that subgroup. On each geometric failure point, the complete residual tetragonal pencil is recovered from the labelled divisor, so pointed-curve and movable-target cover stabilizers coincide. The actual monodromy subgroup and the geometry of the universal balanced base remain open.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "base": "normal finite-type schemes over an algebraically closed characteristic-zero field",
+    "g": 6,
+    "generality": "balanced degree-four Casnati-Ekedahl families satisfying (CE) and the explicit weak normalization (N); Z is the intrinsic evaluation-failure scheme on the ordered pairwise-distinct configuration scheme",
+    "n": 6,
+    "normality_role": "Normality is load-bearing only for converting connected components of the finite etale cover into irreducible components. The incidence, torsor, smoothness, and relative-dimension statements require only the reduced-base hypotheses of ATT-0088.",
+    "not_covered": "The theorem does not compute H_alpha, prove irreducibility or normality of the universal balanced Hurwitz base, extend the component formula to an algebraic stack with inertia, construct or analyze an image or closure in M_{6,6}, treat unbalanced CE strata or nonreduced bases, prove generic stabilizer triviality, or prove any Gysin, Hodge, weight, purity, or Tate statement.",
+    "stabilizer_convention": "Aut(C;x_1,...,x_6) fixes every labelled point. The cover stabilizer consists of pairs (a,b), with b an automorphism of the target P1 and b composed with gamma=gamma composed with a."
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero and let S be a normal finite-type k-scheme carrying a smooth proper genus-six family pi:C->S, a P1-bundle P->S, and a finite flat degree-four Casnati-Ekedahl cover gamma:C->P satisfying (CE), fibrewise balanced relations F_s=O(4) direct-sum O(5), and the weak relative-canonical normalization (N). Let W_5 be the canonical degree-sixteen quotient in the balanced filtration, L=W_5 tensor omega_{C/S}^{-1}, B=Conf_6(C/S), and let Z be the intrinsic CE evaluation-failure subscheme of B. Let AJ be the relative projective plane representing effective divisors relatively linearly equivalent to L, and let U be its reduced-support open. Then Z is canonically the finite etale right S_6-torsor Ord(U)->U. For every connected component S_alpha of S, U_alpha=U times_S S_alpha is normal and integral. After choosing a geometric point u_alpha and an ordering above it, let H_alpha be the image of the monodromy homomorphism pi_1^et(U_alpha,u_alpha)->S_6. Then the irreducible components of Z_alpha=Z times_S S_alpha are indexed by the left cosets H_alpha\\S_6. There are [S_6:H_alpha] such components; each maps finite etale and surjectively to U_alpha with degree |H_alpha|, has dimension dim(S_alpha)+2, and the right S_6-action is transitive on the component set with component stabilizer conjugate to H_alpha. In particular Z_alpha is irreducible if and only if H_alpha=S_6. Moreover, for every geometric point z=(C,gamma;x_1,...,x_6) of Z, the forgetful homomorphism from automorphisms of the tetragonal cover with movable target, namely pairs (a,b) satisfying a(x_i)=x_i and b composed with gamma=gamma composed with a, to Aut(C;x_1,...,x_6) is an isomorphism. Thus the ordered pointed-curve stabilizer is exactly the cover stabilizer in this explicitly defined sense."
+}

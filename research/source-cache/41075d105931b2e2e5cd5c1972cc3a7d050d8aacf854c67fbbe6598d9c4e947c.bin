@@ -1,0 +1,217 @@
+{{short description|Disjoint, equal-size subsets of a group's underlying set}}
+{{distinguish|Cosette}}
+
+[[File:Left cosets of Z 2 in Z 8.svg|thumb|{{mvar|G}} is the group <math>\mathbb{Z}/8\mathbb{Z}</math>, the [[Integers modulo n|integers mod 8]] under addition. The subgroup {{mvar|H}} contains only 0 and 4. There are four left cosets of {{mvar|H}}: {{mvar|H}} itself, {{math|1 + ''H''}}, {{math|2 + ''H''}}, and {{math|3 + ''H''}} (written using additive notation since this is the [[additive group]]). Together they partition the entire group {{mvar|G}} into equal-size, non-overlapping sets. The [[Index of a subgroup|index]] {{math|[''G'' : ''H'']}} is 4.]]
+
+In [[mathematics]], specifically [[group theory]], a [[subgroup]] {{mvar|H}} of a [[group (mathematics)|group]] {{mvar|G}} may be used to decompose the underlying [[Set (mathematics)|set]] of {{mvar|G}} into [[disjoint sets|disjoint]], equal-size [[subset]]s called '''cosets'''. There are ''left cosets'' and ''right cosets''. Cosets (both left and right) have the same number of elements ([[cardinality]]) as does {{mvar|H}}. Furthermore, {{mvar|H}} itself is both a left coset and a right coset. The number of left cosets of {{mvar|H}} in {{mvar|G}} is equal to the number of right cosets of {{mvar|H}} in {{mvar|G}}. This common value is called the [[Index of a subgroup|index]] of {{mvar|H}} in {{mvar|G}} and is usually denoted by {{math|[''G'' : ''H'']}}.
+
+Cosets are a basic tool in the study of groups; for example, they play a central role in [[Lagrange's theorem (group theory)|Lagrange's theorem]] that states that for any [[finite group]] {{mvar|G}}, the number of elements of every subgroup {{mvar|H}} of {{mvar|G}} divides the number of elements of {{mvar|G}}. Cosets of a particular type of subgroup (a [[normal subgroup]]) can be used as the elements of another group called a [[quotient group|quotient group or factor group]]. Cosets also appear in other areas of mathematics such as [[vector space]]s and [[error-correcting code]]s.
+
+== Definition ==
+Let {{mvar|H}} be a subgroup of the group {{mvar|G}} whose operation is written multiplicatively (juxtaposition denotes the group operation). Given an element {{mvar|g}} of {{mvar|G}}, the '''left cosets''' of {{mvar|H}} in {{mvar|G}} are the sets obtained by multiplying each element of {{mvar|H}} by a fixed element {{mvar|g}} of {{mvar|G}} (where {{mvar|g}} is the left factor). In symbols these are,
+{{block indent|em=1.5|text={{math|1=''gH'' = {{mset|''gh'' : ''h'' an element of ''H''}}}} for {{mvar|g}} in {{mvar|G}}.}}
+The '''right cosets''' are defined similarly, except that the element {{mvar|g}} is now a right factor, that is,
+{{block indent|em=1.5|text={{math|1=''Hg'' = {{mset|''hg'' : ''h'' an element of ''H''}}}} for {{mvar|g}} in {{mvar|G}}.}}
+
+As {{mvar|g}} varies through the group, it would appear that many cosets (right or left) would be generated. Nevertheless, it turns out that any two left cosets (respectively right cosets) are either disjoint or are identical as sets.<ref name=Rotman2006>{{harvnb|Rotman|2006|loc=p. 156}}</ref>
+
+If the group operation is written additively, as is often the case when the group is [[abelian group|abelian]], the notation used changes to {{math|''g'' + ''H''}} or {{math|''H'' + ''g''}}, respectively.
+
+The symbol ''G''/''H'' is sometimes used for the set of (left) cosets {''gH'' : ''g'' an element of ''G''} (see below for a extension to right cosets and double cosets).  However, some authors (including Dummit & Foote and Rotman) reserve this notation specifically for representing the [[quotient group]] formed from the cosets in the case where ''H'' is a ''normal'' subgroup of ''G.'' 
+
+=== First example ===
+Let {{mvar|G}} be the [[dihedral group of order 6|dihedral group of order six]]. Its elements may be represented by {{math|{{mset|''I'', ''a'', ''a''<sup>2</sup>, ''b'', ''ab'', ''a''<sup>2</sup>''b''}}}}. In this group, {{math|1=''a''<sup>3</sup> = ''b''<sup>2</sup> = ''I''}} and {{math|1=''ba'' = ''a''<sup>2</sup>''b''}}. This is enough information to fill in the entire [[Cayley table]]:
+{| class="wikitable" style="text-align:center"
+!∗||{{mvar|I}} ||{{mvar|a}} ||{{math|''a''<sup>2</sup>}} ||{{mvar|b}} ||{{mvar|ab}} ||{{math|''a''<sup>2</sup>''b''}}
+|-
+!{{mvar|I}}
+||{{mvar|I}} ||{{mvar|a}} ||{{math|''a''<sup>2</sup>}} ||{{mvar|b}} ||{{mvar|ab}} ||{{math|''a''<sup>2</sup>''b''}}
+|-
+!{{mvar|a}}
+|{{mvar|a}} ||{{math|''a''<sup>2</sup>}} ||{{mvar|I}} ||{{mvar|ab}} ||{{math|''a''<sup>2</sup>''b''}} ||{{mvar|b}}
+|-
+!{{math|''a''<sup>2</sup>}}
+|{{math|''a''<sup>2</sup>}} ||{{mvar|I}} ||{{mvar|a}} ||{{math|''a''<sup>2</sup>''b''}} ||{{mvar|b}} ||{{mvar|ab}}
+|-
+!{{mvar|b}}
+|{{mvar|b}} ||{{math|''a''<sup>2</sup>''b''}} ||{{mvar|ab}} ||{{mvar|I}} ||{{math|''a''<sup>2</sup>}} || {{mvar| a}}
+|-
+!{{mvar|ab}}
+|{{mvar|ab}} ||{{mvar|b}} ||{{math|''a''<sup>2</sup>''b''}} ||{{mvar|a}} || {{mvar|I}} ||{{math|''a''<sup>2</sup>}}
+|-
+!{{math|''a''<sup>2</sup>''b''}}
+|{{math|''a''<sup>2</sup>''b''}} ||{{mvar|ab}} ||{{mvar|b}} || {{math|''a''<sup>2</sup>}} ||{{mvar|a}} || {{mvar|I}}
+|}
+
+Let {{mvar|T}} be the subgroup {{math|{{mset|''I'', ''b''}}}}. The (distinct) left cosets of {{mvar|T}} are:
+* {{math|1=''IT'' = ''T'' = {{mset|''I'', ''b''}}}},
+* {{math|1=''aT'' = {{mset|''a'', ''ab''}}}}, and
+* {{math|1=''a''<sup>2</sup>''T'' = {{mset|''a''<sup>2</sup>, ''a''<sup>2</sup>''b''}}}}.
+Since all the elements of {{mvar|G}} have now appeared in one of these cosets, generating any more can not give new cosets; any new coset would have to have an element in common with one of these and therefore would be identical to one of these cosets. For instance, {{math|1=''abT'' = {{mset|''ab'', ''a''}} = ''aT''}}.
+
+The right cosets of {{mvar|T}} are:
+* {{math|1=''TI'' = ''T'' = {{mset|''I'', ''b''}}}},
+* {{math|1=''Ta'' = {{mset|''a'', ''ba''}} = {{mset|''a'', ''a''<sup>2</sup>''b''}}}} , and
+* {{math|1=''Ta''<sup>2</sup> = {{mset|''a''<sup>2</sup>, ''ba''<sup>2</sup>}} = {{mset|''a''<sup>2</sup>, ''ab''}}}}.
+
+In this example, except for {{mvar|T}}, no left coset is also a right coset.
+
+Let {{mvar|H}} be the subgroup {{math|{{mset|''I'', ''a'', ''a''<sup>2</sup>}}}}. The left cosets of {{mvar|H}} are {{math|1=''IH'' = ''H''}} and {{math|1=''bH'' = {{mset|''b'', ''ba'', ''ba''<sup>2</sup>}}}}. The right cosets of {{mvar|H}} are {{math|1=''HI'' = ''H''}} and {{math|1=''Hb'' = {{mset|''b'', ''ab'', ''a''<sup>2</sup>''b''}} = {{mset|''b'', ''ba''<sup>2</sup>, ''ba''}}}}. In this case, every left coset of {{mvar|H}} is also a right coset of {{mvar|H}}.<ref name=Dean>{{harvnb|Dean|1990|loc=p. 100}}</ref>
+
+Let {{mvar|H}} be a subgroup of a group {{mvar|G}} and suppose that {{math|''g''<sub>1</sub>}}, {{math|''g''<sub>2</sub> ∈ ''G''}}. The following statements are equivalent:<ref>{{Cite web|url=http://abstract.ups.edu/aata/section-cosets.html|title=AATA Cosets|access-date=2020-12-09|archive-date=2022-01-22|archive-url=https://web.archive.org/web/20220122151749/http://abstract.ups.edu/aata/section-cosets.html|url-status=dead}}</ref>
+* {{math|1=''g''<sub>1</sub>''H'' = ''g''<sub>2</sub>''H''}}
+* {{math|1=''Hg''<sub>1</sub><sup>−1</sup> = ''Hg''<sub>2</sub><sup>−1</sup>}}
+* {{math|1=''g''<sub>1</sub>''H'' ⊂ ''g''<sub>2</sub>''H''}}
+* {{math|1=''g''<sub>2</sub> ∈ ''g''<sub>1</sub>''H''}}
+* {{math|1=''g''<sub>1</sub><sup>−1</sup>''g''<sub>2</sub> ∈ ''H''}}
+
+== Properties ==
+The disjointness of non-identical cosets is a result of the fact that if {{mvar|x}} belongs to {{math|''gH''}} then {{math|1=''gH'' = ''xH''}}. For if {{math|''x'' ∈ ''gH''}} then there must exist an {{math|''a'' ∈ ''H''}} such that {{math|1=''ga'' = ''x''}}. Thus {{math|1=''xH'' = (''ga'')''H'' = ''g''(''aH'')}}. Moreover, since {{math|''H''}} is a group, left multiplication by {{mvar|a}} is a [[bijection]], and {{math|1=''aH'' = ''H''}}.
+
+Thus every element of {{math|''G''}} belongs to exactly one left coset of the subgroup {{math|''H''}},<ref name=Rotman2006 /> and {{math|''H''}} is itself a left coset (and the one that contains the identity).<ref name=Dean />
+
+Two elements being in the same left coset also provide a natural [[equivalence relation]]. Define two elements of {{mvar|G}}, {{mvar|x}} and {{mvar|y}}, to be equivalent with respect to the subgroup {{mvar|H}} if {{math|1=''xH'' = ''yH''}} (or equivalently if {{math|''x''<sup>−1</sup>''y''}} belongs to {{mvar|H}}). The [[equivalence classes]] of this relation are the left cosets of {{mvar|H}}.<ref>{{harvnb|Rotman|2006|loc=p.155}}</ref> As with any set of equivalence classes, they form a [[Partition (set theory)|partition]] of the underlying set. A '''coset representative''' is a [[representative (mathematics)|representative]] in the equivalence class sense. A set of representatives of all the cosets is called a [[Transversal (combinatorics)|transversal]]. There are other types of equivalence relations in a group, such as conjugacy, that form different classes which do not have the properties discussed here.
+
+Similar statements apply to right cosets.
+
+If {{math|''G''}} is an [[abelian group]], then {{math|1=''g'' + ''H'' = ''H'' + ''g''}} for every subgroup {{math|''H''}} of {{math|''G''}} and every element {{mvar|g}} of {{math|''G''}}. For general groups, given an element {{mvar|g}} and a subgroup {{math|''H''}} of a group {{math|''G''}}, the right coset of {{math|''H''}} with respect to {{mvar|g}} is also the left coset of the [[conjugate subgroup]] {{math|''g''<sup>−1</sup>''Hg''}} with respect to {{mvar|g}}, that is, {{math|1=''Hg'' = ''g''(''g''<sup>−1</sup>''Hg'')}}.
+
+=== Normal subgroups ===
+A subgroup {{math|''N''}} of a group {{math|''G''}} is a [[normal subgroup]] of {{math|''G''}} if and only if for all elements {{mvar|g}} of {{math|''G''}} the corresponding left and right cosets are equal, that is, {{math|1=''gN'' = ''Ng''}}. This is the case for the subgroup {{mvar|H}} in the first example above. Furthermore, the cosets of {{math|''N''}} in {{math|''G''}} form a group called the [[quotient group|quotient group or factor group]] {{math|''G''{{hsp}}/{{hsp}}''N''}}.
+
+If {{math|''H''}} is not [[normal subgroup|normal]] in {{math|''G''}}, then its left cosets are different from its right cosets. That is, there is an {{mvar|a}} in {{math|''G''}} such that no element {{mvar|b}} satisfies {{math|1=''aH'' = ''Hb''}}. This means that the partition of {{math|''G''}} into the left cosets of {{math|''H''}} is a different partition than the partition of {{math|''G''}} into right cosets of {{math|''H''}}. This is illustrated by the subgroup {{mvar|T}} in the first example above. (''Some'' cosets may coincide. For example, if {{mvar|a}} is in the [[center (group theory)|center]] of {{math|''G''}}, then {{math|1=''aH'' = ''Ha''}}.)
+
+On the other hand, if the subgroup {{math|''N''}} is normal the set of all cosets forms a group called the quotient group {{math|''G''{{hsp}}/{{hsp}}''N''}} with the operation {{math|∗}} defined by {{math|1=(''aN'') ∗ (''bN'') = ''abN''}}. Since every right coset is a left coset, there is no need to distinguish "left cosets" from "right cosets".
+
+=== Index of a subgroup ===
+{{Main|Index of a subgroup}}
+Every left or right coset of {{math|''H''}} has the same number of elements (or [[cardinality]] in the case of an [[Infinity|infinite]] {{math|''H''}}) as {{math|''H''}} itself. Furthermore, the number of left cosets is equal to the number of right cosets and is known as the '''index''' of {{math|''H''}} in ''G'', written as {{math|[''G'' : ''H'']}}. [[Lagrange's theorem (group theory)|Lagrange's theorem]] allows us to compute the index in the case where {{math|''G''}} and {{math|''H''}} are finite:
+<math display="block">|G| = [G : H]|H|.</math>
+This equation can be generalized to the case where the groups are infinite.
+
+== More examples ==
+
+=== Integers ===
+Let {{math|''G''}} be the [[additive group]] of the integers, {{math|1='''Z''' = ({..., −2, −1, 0, 1, 2, ...}, +)}} and {{math|''H''}} the subgroup {{math|1=(3'''Z''', +) = ({..., −6, −3, 0, 3, 6, ...}, +)}}. Then the cosets of {{math|''H''}} in {{math|''G''}} are the three sets {{math|3'''Z'''}}, {{math|3'''Z''' + 1}}, and {{math|3'''Z''' + 2}}, where {{math|1=3'''Z''' + ''a'' = {{mset|..., −6 + ''a'', −3 + ''a'', ''a'', 3 + ''a'', 6 + ''a'', ...}}}}. These three sets partition the set {{math|'''Z'''}}, so there are no other right cosets of {{mvar|H}}. Due to the [[commutativity]] of addition {{math|1=''H'' + 1 = 1 + ''H''}} and {{math|1=''H'' + 2 = 2 + ''H''}}. That is, every left coset of {{mvar|H}} is also a right coset, so {{mvar|H}} is a normal subgroup.<ref>{{harvnb|Fraleigh|1994|loc=p. 117}}</ref> (The same argument shows that every subgroup of an Abelian group is normal.<ref name=Fraleigh>{{harvnb|Fraleigh|1994|loc=p. 169}}</ref>)
+
+This example may be generalized. Again let {{math|''G''}} be the additive group of the integers, {{math|1='''Z''' = ({..., −2, −1, 0, 1, 2, ...}, +)}}, and now let {{math|''H''}} be the subgroup {{math|1=(''m'''''Z''', +) = ({..., −2''m'', −''m'', 0, ''m'', 2''m'', ...}, +)}}, where {{mvar|m}} is a positive integer. Then the cosets of {{math|''H''}} in {{math|''G''}} are the {{mvar|m}} sets {{math|''m'''''Z'''}}, {{math|''m'''''Z''' + 1}}, ..., {{math|''m'''''Z''' + (''m'' − 1)}}, where {{math|1=''m'''''Z''' + ''a'' = {{mset|..., −2''m'' + ''a'', −''m'' + ''a'', ''a'', ''m'' + ''a'', 2''m'' + ''a'', ...}}}}. There are no more than {{mvar|m}} cosets, because {{math|1=''m'''''Z''' + ''m'' = ''m''('''Z''' + 1) = ''m'''''Z'''}}. The coset {{math|(''m'''''Z''' + ''a'', +)}} is the [[Modular arithmetic#Congruence classes|congruence class]] of {{mvar|a}} modulo {{mvar|m}}.<ref>{{harvnb|Joshi|1989|loc= p. 323}}</ref> The subgroup {{math|''m'''''Z'''}} is normal in {{math|'''Z'''}}, and so, can be used to form the quotient group {{math|'''Z'''{{hsp}}/{{hsp}}''m'''''Z'''}} the group of [[Integers mod n|integers mod {{math|''m''}}]].
+
+=== Vectors ===
+Another example of a coset comes from the theory of [[vector space]]s. The elements (vectors) of a vector space form an [[abelian group]] under [[vector addition]]. The [[linear subspace|subspaces]] of the vector space are [[subgroups]] of this group. For a vector space {{math|''V''}}, a subspace {{math|''W''}}, and a fixed vector {{math|'''a'''}} in {{math|''V''}}, the sets
+<math display="block">\{\mathbf{x} \in V \mid \mathbf{x} = \mathbf{a} + \mathbf{w}, \mathbf{w} \in W\}</math>
+are called [[affine subspace]]s, and are cosets (both left and right, since the group is abelian). In terms of 3-dimensional [[Euclidean space|geometric]] vectors, these affine subspaces are all the "lines" or "planes" [[Parallel (geometry)|parallel]] to the subspace, which is a line or plane going through the origin. For example, consider the [[Plane (geometry)|plane]] {{math|'''R'''<sup>2</sup>}}. If {{mvar|m}} is a line through the origin {{mvar|O}}, then {{mvar|m}} is a subgroup of the abelian group {{math|'''R'''<sup>2</sup>}}. If {{mvar|P}} is in {{math|'''R'''<sup>2</sup>}}, then the coset {{math|''P'' + ''m''}} is a line {{math|''m''′}} parallel to {{mvar|m}} and passing through {{mvar|P}}.<ref>{{harvnb|Rotman|2006|loc=p. 155}}</ref>
+
+=== Matrices ===
+Let {{mvar|G}} be the multiplicative group of matrices,<ref>{{harvnb|Burton|1988|loc=pp. 128, 135}}</ref>
+<math display="block">G = \left \{\begin{bmatrix} a & 0 \\ b & 1 \end{bmatrix} \colon a, b \in \R, a \neq 0 \right\},</math>
+and the subgroup {{mvar|H}} of {{mvar|G}},
+<math display="block">H= \left \{\begin{bmatrix} 1 & 0 \\ c & 1 \end{bmatrix} \colon c \in \mathbb{R} \right\}.</math>
+For a fixed element of {{mvar|G}} consider the left coset
+<math display="block">\begin{align}
+\begin{bmatrix} a & 0 \\ b & 1 \end{bmatrix} H = &~ \left \{\begin{bmatrix} a & 0 \\ b & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 \\ c & 1 \end{bmatrix} \colon c \in \R \right\} \\
+=&~ \left \{\begin{bmatrix} a & 0 \\ b + c & 1 \end{bmatrix} \colon c \in \mathbb{R}\right\} \\
+=&~ \left \{\begin{bmatrix} a & 0 \\ d & 1 \end{bmatrix} \colon d \in \mathbb{R}\right\}.
+\end{align}</math>
+That is, the left cosets consist of all the matrices in {{mvar|G}} having the same upper-left entry. This subgroup {{mvar|H}} is normal in {{mvar|G}}, but the subgroup
+<math display="block">T= \left \{\begin{bmatrix} a & 0 \\ 0 & 1 \end{bmatrix} \colon a \in \mathbb{R} - \{0\} \right\}</math>
+is not normal in {{mvar|G}}.
+
+== As orbits of a group action ==
+{{main|Group action}}
+
+A subgroup {{mvar|H}} of a group {{mvar|G}} can be used to define an [[group action|action]] of {{mvar|H}} on {{mvar|G}} in two natural ways. A ''right action'', {{math|''G'' × ''H'' → ''G''}} given by {{math|(''g'', ''h'') → ''gh''}} or a ''left action'', {{math|''H'' × ''G'' → ''G''}} given by {{math|(''h'', ''g'') → ''hg''}}. The [[Orbit (group theory)|orbit]] of {{mvar|g}} under the right action is the left coset {{mvar|gH}}, while the orbit under the left action is the right coset {{mvar|Hg}}.<ref name=Jacobson>{{harvnb|Jacobson|2009|loc=p. 52}}</ref>
+
+== History ==
+The concept of a coset dates back to [[Galois]]'s work of 1830–31. He introduced a notation but did not provide a name for the concept. The term "co-set" apparently appears for the first time in 1910 in a paper by G. A. Miller in the ''[[Quarterly Journal of Pure and Applied Mathematics]]'' (vol. 41, p.&nbsp;382). Various other terms have been used including the German ''Nebengruppen'' ([[Eduard Ritter von Weber|Weber]]) and ''conjugate group'' ([[William Burnside|Burnside]]).<ref>{{harvnb|Miller|2012|loc=p. 24 footnote}}</ref> (Note that Miller abbreviated his self-citation to the ''Quarterly Journal of Mathematics''; this does not refer to the [[Quarterly Journal of Mathematics|journal of the same name]], which did not start publication until 1930.)
+
+Galois was concerned with deciding when a given [[polynomial equation]] was [[solvable by radicals]]. A tool that he developed was in noting that a subgroup {{mvar|H}} of a group of [[permutation]]s {{mvar|G}} induced two decompositions of {{mvar|G}} (what we now call left and right cosets). If these decompositions coincided, that is, if the left cosets are the same as the right cosets, then there was a way to reduce the problem to one of working over {{mvar|H}} instead of {{mvar|G}}. [[Camille Jordan]] in his commentaries on Galois's work in 1865 and 1869 elaborated on these ideas and defined normal subgroups as we have above, although he did not use this term.<ref name=Fraleigh />
+
+Calling the coset {{mvar|gH}} the ''left coset'' of {{mvar|g}} with respect to {{mvar|H}}, while most common today,<ref name=Jacobson /> has not been universally true in the past. For instance, {{harvtxt|Hall|1959}} would call {{mvar|gH}} a ''right coset'', emphasizing the subgroup being on the right.
+
+== An application from coding theory ==
+{{main|Standard array}}
+A binary [[linear code]] is an {{mvar|n}}-dimensional subspace {{mvar|C}} of an {{mvar|m}}-dimensional vector space {{mvar|V}} over the binary field {{math|GF(2)}}. As {{mvar|V}} is an additive abelian group, {{mvar|C}} is a subgroup of this group. Codes can be used to correct errors that can occur in transmission. When a ''codeword'' (element of {{mvar|C}}) is transmitted some of its bits may be altered in the process and the task of the receiver is to determine the most likely codeword that the corrupted ''received word'' could have started out as. This procedure is called ''decoding'' and if only a few errors are made in transmission it can be done effectively with only a very few mistakes. One method used for decoding uses an arrangement of the elements of {{mvar|V}} (a received word could be any element of {{mvar|V}}) into a [[standard array]]. A standard array is a coset decomposition of {{mvar|V}} put into tabular form in a certain way. Namely, the top row of the array consists of the elements of {{mvar|C}}, written in any order, except that the zero vector should be written first. Then, an element of {{mvar|V}} with a minimal number of ones that does not already appear in the top row is selected and the coset of {{mvar|C}} containing this element is written as the second row (namely, the row is formed by taking the sum of this element with each element of {{mvar|C}} directly above it). This element is called a [[coset leader]] and there may be some choice in selecting it. Now the process is repeated, a new vector with a minimal number of ones that does not already appear is selected as a new coset leader and the coset of {{mvar|C}} containing it is the next row. The process ends when all the vectors of {{mvar|V}} have been sorted into the cosets.
+
+An example of a standard array for the 2-dimensional code {{math|1=''C'' = {{mset|00000, 01101, 10110, 11011}}}} in the 5-dimensional space {{mvar|V}} (with 32 vectors) is as follows:
+
+{| class="wikitable"
+|-
+! 00000 !! 01101 !! 10110 !! 11011
+|-
+| 10000 || 11101 || 00110 || 01011
+|-
+| 01000 || 00101 || 11110 || 10011
+|-
+| 00100 || 01001 || 10010 || 11111
+|-
+| 00010 || 01111 || 10100 || 11001
+|-
+| 00001 || 01100 || 10111 || 11010
+|-
+| 11000 || 10101 || 01110 || 00011
+|-
+| 10001 || 11100 || 00111 || 01010
+|}
+
+The decoding procedure is to find the received word in the table and then add to it the coset leader of the row it is in. Since in binary arithmetic adding is the same operation as subtracting, this always results in an element of {{mvar|C}}. In the event that the transmission errors occurred in precisely the non-zero positions of the coset leader the result will be the right codeword. In this example, if a single error occurs, the method will always correct it, since all possible coset leaders with a single one appear in the array.
+
+[[Syndrome decoding]] can be used to improve the efficiency of this method. It is a method of computing the correct coset (row) that a received word will be in. For an {{mvar|n}}-dimensional code {{mvar|C}} in an {{mvar|m}}-dimensional binary vector space, a [[parity check matrix]] is an {{math|(''m'' − ''n'') × ''m''}} matrix {{mvar|H}} having the property that {{math|1='''x'''''H''<sup>T</sup> = '''0'''}} [[if and only if]] {{math|'''x'''}} is in {{mvar|C}}.<ref>The transpose matrix is used so that the vectors can be written as row vectors.</ref> The vector {{math|'''x'''''H''<sup>T</sup>}} is called the ''syndrome'' of {{math|'''x'''}}, and by [[linearity]], every vector in the same coset will have the same syndrome. To decode, the search is now reduced to finding the coset leader that has the same syndrome as the received word.<ref>{{harvnb|Rotman|2006|loc=p. 423}}</ref>
+
+== Double cosets ==
+{{main|Double coset}}
+Given two subgroups, {{math|''H''}} and {{math|''K''}} (which need not be distinct) of a group {{math|''G''}}, the '''double cosets''' of {{math|''H''}} and {{math|''K''}} in {{math|''G''}} are the sets of the form {{math|1=''HgK'' = {{mset|''hgk'' : ''h'' an element of ''H'', ''k'' an element of ''K''}}}}. These are the left cosets of {{math|''K''}} and right cosets of {{math|''H''}} when {{math|1=''H'' = 1}} and {{math|1=''K'' = 1}} respectively.<ref>{{harvnb|Scott|1987|loc= p. 19}}</ref>
+
+Two double cosets {{math|''HxK''}} and {{math|''HyK''}} are either disjoint or identical.<ref name=Hall>{{harvnb|Hall|1959|loc=pp. 14–15}}</ref> The set of all double cosets for fixed {{mvar|H}} and {{mvar|K}} form a partition of {{mvar|G}}.
+
+A double coset {{math|''HxK''}} contains the complete right cosets of {{mvar|H}} (in {{mvar|G}}) of the form {{math|''Hxk''}}, with {{mvar|k}} an element of {{mvar|K}} and the complete left cosets of {{mvar|K}} (in {{mvar|G}}) of the form {{math|''hxK''}}, with {{mvar|h}} in {{mvar|H}}.<ref name=Hall />
+
+=== Notation ===
+Let {{math|''G''}} be a group with subgroups {{math|''H''}} and {{math|''K''}}. Several authors working with these sets have developed a specialized notation for their work, where<ref>{{citation|first=Gary M.|last=Seitz|chapter=Double Cosets in Algebraic Groups|editor1-first=R.W.|editor1-last=Carter|editor2-first=J.|editor2-last=Saxl|title=Algebraic Groups and their Representation| year=1998|pages=241–257|publisher=Springer|doi=10.1007/978-94-011-5308-9_13|isbn=978-0-7923-5292-1}}</ref><ref>{{citation | first=W. Ethan|last=Duckworth|title=Infiniteness of double coset collections in algebraic groups|journal=Journal of Algebra|volume=273|issue=2|pages=718–733|year=2004|publisher=Elsevier|doi=10.1016/j.jalgebra.2003.08.011|arxiv=math/0305256| s2cid=17839580}}</ref>
+* {{math|''G''{{hsp}}/{{hsp}}''H''}} denotes the set of left cosets {{math|{{mset|''gH'' : ''g'' in ''G''}}}} of {{math|''H''}} in {{math|''G''}}.
+* {{math|''H''{{hsp}}\{{hsp}}''G''}} denotes the set of right cosets {{math|{{mset|''Hg'' : ''g'' in ''G''}}}} of {{math|''H''}} in {{math|''G''}}.
+* {{math|''K''{{hsp}}\{{hsp}}''G''{{hsp}}/{{hsp}}''H''}} denotes the set of double cosets {{math|{{mset|''KgH'' : ''g'' in ''G''}}}} of {{math|''H''}} and {{math|''K''}} in {{math|''G''}}, sometimes referred to as ''double coset space''.
+* {{math|''G''{{hsp}}//{{hsp}}''H''}} denotes the [[double coset]] space {{math|''H''{{hsp}}\{{hsp}}''G''{{hsp}}/{{hsp}}''H''}} of the subgroup {{mvar|H}} in {{mvar|G}}.
+
+== More applications ==
+* Cosets of {{math|'''Q'''}} in {{math|'''R'''}} are used in the construction of [[Vitali set]]s, a type of [[non-measurable set]].
+* Cosets are central in the definition of the [[Transfer (group theory)|transfer]].
+* Cosets are important in computational group theory. For example, [[Optimal solutions for Rubik's Cube#Thistlethwaite's algorithm|Thistlethwaite's algorithm]] for solving [[Rubik's Cube]] relies heavily on cosets.
+* In geometry, a [[Clifford–Klein form]] is a double coset space {{math|Γ{{hsp}}\{{hsp}}''G''{{hsp}}/{{hsp}}''H''}}, where {{math|''G''}} is a [[reductive Lie group]], {{math|''H''}} is a closed subgroup, and {{math|Γ}} is a discrete subgroup (of {{math|''G''}}) that acts [[properly discontinuously]] on the [[homogeneous space]] {{math|''G''{{hsp}}/{{hsp}}''H''}}.
+
+== See also ==
+* [[Heap (mathematics)|Heap]]
+* [[Coset enumeration]]
+
+== Notes ==
+{{reflist}}
+
+== References ==
+* {{citation|first=David M.|last=Burton|title=Abstract Algebra|year=1988|publisher=Wm. C. Brown Publishers|isbn=0-697-06761-0}}
+* {{citation|first=Richard A.|last = Dean|title=Classical Abstract Algebra|year=1990|publisher=Harper and Row|isbn=0-06-041601-7}}
+* {{citation|first=John B.|last=Fraleigh|title=A First Course in Abstract Algebra|year=1994|publisher=Addison-Wesley|edition=5th| isbn=978-0-201-53467-2}}
+* {{citation|first=Marshall|last=Hall, Jr.|title=The Theory of Groups|year=1959|publisher=The Macmillan Company|ref={{SfnRef|Hall|1959}}}}
+* {{citation|first=Nathan|last=Jacobson|author-link=Nathan Jacobson|title=Basic Algebra I|edition=2nd|year=2009|orig-year=1985|publisher=Dover| isbn=978-0-486-47189-1}}
+* {{citation|title=Foundations of Discrete Mathematics
+|first=K. D.|last=Joshi|publisher=New Age International|year=1989|isbn=81-224-0120-1
+|chapter=§5.2 Cosets of Subgroups|pages=322 ff|url=https://books.google.com/books?id=RM1D3mFw2u0C&q=coset}}
+* {{citation|first=G. A.|last=Miller|title=Theory and Applications of Finite Groups|year=2012|orig-year=1916|publisher=Applewood Books|isbn=9781458500700}}
+* {{citation|first=Joseph J.|last=Rotman|title=A First Course in Abstract Algebra with Applications|year=2006|publisher=Prentice-Hall|edition=3rd|isbn=978-0-13-186267-8}}
+* {{citation|title=Group Theory|first=W.R.|last=Scott|publisher=Courier Dover Publications|year=1987|isbn=0-486-65377-3| chapter=§1.7 Cosets and index|pages=19 ff|url=https://books.google.com/books?id=fAPLAgAAQBAJ&q=coset}}
+
+== Further reading ==
+* {{citation |title=The Theory of Groups
+|first=Hans J.|last=Zassenhaus|publisher=Courier Dover Publications|year=1999|isbn=0-486-40922-8
+|chapter=§1.4 Subgroups|pages=10 ff|author-link=Hans Zassenhaus|url=https://books.google.com/books?id=JST37pp9vMUC&q=coset}}
+
+== External links ==
+* {{MathWorld|title=Coset|urlname=Coset|author=Nicolas Bray}}
+* {{MathWorld|title=Left Coset|urlname=LeftCoset}}
+* {{MathWorld|title=Right Coset|urlname=RightCoset}}
+* {{springer|title=Coset in a group|id=C/c026620|last=Ivanova|first=O.A.}}
+* {{PlanetMath|urlname=Coset|title=Coset}}
+* [http://sites.millersville.edu/bikenaga/abstract-algebra-1/cosets/cosets.html Illustrated examples]
+* {{cite web| publisher=The Group Properties Wiki| work=groupprops|url=http://groupprops.subwiki.org/wiki/Coset| title=Coset}}
+
+[[Category:Group theory]]
+
+[[de:Gruppentheorie#Nebenklassen]]
