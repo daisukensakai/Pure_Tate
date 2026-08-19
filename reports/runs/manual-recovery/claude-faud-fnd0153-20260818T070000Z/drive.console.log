@@ -1,0 +1,98 @@
+{
+  "campaign_id": "C66-001",
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "grok": "not_required"
+    },
+    "review": {
+      "claude": "not_required",
+      "grok": "not_required"
+    }
+  },
+  "events": [
+    {
+      "activity_bytes": 1005654,
+      "artifact_sha256": "c083dc36922d7501e2d997471de7106beac1cfee34c4b53fd8c1d8c3f0a31621",
+      "completed_at": "2026-08-18T07:19:10.824756+00:00",
+      "engine": "claude",
+      "engine_pid": 90045,
+      "engine_process_group": 90045,
+      "last_activity_at": "2026-08-18T07:19:09.966075+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 128000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0166.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 90045,
+          "engine_process_group": 90045,
+          "started_at": "2026-08-18T07:09:45.157684+00:00",
+          "supervisor_pid": 90044,
+          "supervisor_process_group": 90044
+        }
+      ],
+      "started_at": "2026-08-18T07:09:45.088411+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 90044,
+      "task_id": "TASK-F-FND-0153"
+    }
+  ],
+  "executed_steps": 1,
+  "pre_run_recoveries": [
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-18T07:09:41.879328+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "recovered output has no valid attempt id",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0062",
+      "trace_path": "research/paired-traces/TRACE-0062.json",
+      "turn_kind": "mathematics",
+      "validation_error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement"
+    }
+  ],
+  "recovered_stale_runs": [],
+  "requested_steps": 1,
+  "research_capability_states": {
+    "finding-audit": {
+      "claude": "pass"
+    },
+    "novelty": {
+      "claude": "pass"
+    }
+  },
+  "run_id": "RUN-C66-001-20260818T070941943914Z-89972",
+  "run_ledger": "reports/runs/RUN-C66-001-20260818T070941943914Z-89972.json",
+  "stop_reason": "step_limit",
+  "unrecovered_validation_traces": [
+    {
+      "artifact_id": null,
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0062",
+      "trace_path": "research/paired-traces/TRACE-0062.json",
+      "turn_kind": "mathematics",
+      "validation_error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement"
+    }
+  ]
+}

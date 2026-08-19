@@ -1,0 +1,86 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "context_revision": 2,
+  "created_on": "2026-08-18",
+  "excluded_engines": [
+    "grok"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "FC-REV0152-TYPE-I-MONODROMY-S6",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-18",
+    "equivalence_group": "FC-REV0152-TYPE-I-MONODROMY-S6",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0155",
+    "impacts_approach_ids": [
+      "C66-GEO-COMP"
+    ],
+    "kind": "lemma",
+    "reviewer_engines": [
+      "grok"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      },
+      "coefficients": "not applicable (permutation representation, not cohomology)",
+      "hypotheses": [
+        "type (i) geometric fibre, or a connected component of a reduced locally Noetherian balanced+(CE)+(N) base meeting the type-(i) locus",
+        "normality of U_alpha for irreducibility and for the FND-0152 identity"
+      ],
+      "objects": [
+        "|L|^{rs}",
+        "Ord(|L|^{rs})",
+        "H_alpha",
+        "Z_alpha"
+      ],
+      "subproblem_id": "C66-GEO-COMP"
+    },
+    "source_attempt_ids": [
+      "ATT-0103"
+    ],
+    "source_review_ids": [
+      "REV-0152"
+    ],
+    "statement": "On a balanced type-(i) geometric fibre the geometric monodromy image of pi_1^{et}(|L|^{rs})->S_6 is the full symmetric group: the point-line incidence is an irreducible P^1-bundle (transitivity); after deleting the diagonal and the finite coincidence locus over non-normal points of the sextic, the ordered-pair incidence is irreducible and dominant of degree 30 (2-transitivity, hence primitivity); a general tangent line is a simple tangency at a smooth point of the dual curve (a transposition, using characteristic-zero reflexivity of the Gauss map and nonvanishing of the Wronskian of the complete g^2_6); Jordan's theorem then gives S_6, so the ordering torsor is connected. Over any connected component S_alpha of a reduced locally Noetherian balanced+(CE)+(N) base that contains at least one type-(i) geometric fibre, functoriality of pi_1^{et} along U_b -> U_alpha forces H_alpha=S_6, hence Z_alpha is connected; if U_alpha is additionally normal, integral and locally Noetherian then Z_alpha is irreducible, [S_6:H_alpha]=1, and the FND-0152 induction functor is the identity. This computes the monodromy image left open by FND-0148 and FND-0152, but only on components that meet the type-(i) locus. In type (ii) the image lies in a conjugate of the imprimitive wreath product S_2 wr S_3 of order 48 and is not S_6. The statement upgrades nothing to Tate type (FND-0053, FND-0152(ii)), does not apply to algebraic stacks with inertia (FND-0144), and does not determine H_alpha on a purely type-(ii) component.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0155",
+  "id": "TASK-F-FND-0155",
+  "input_packet": "proof/packets/generated/C66-001-v4.md",
+  "output": "research/finding-audits/FAUD-0165.json",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "ca719feaeb8f3270182cd7a77a19089905a2bb93beea94a238b0d6ae967698a8",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "qwen",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}

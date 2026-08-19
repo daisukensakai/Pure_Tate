@@ -1,0 +1,102 @@
+{
+  "campaign_id": "C66-001",
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "grok": "not_required"
+    },
+    "review": {
+      "claude": "not_required",
+      "grok": "not_required"
+    }
+  },
+  "events": [
+    {
+      "activity_bytes": 4728,
+      "classification": "infrastructure",
+      "completed_at": "2026-08-18T05:00:08.850176+00:00",
+      "engine": "claude",
+      "engine_pid": 69056,
+      "engine_process_group": 69056,
+      "error": "agent failed with exit 1: You've hit your session limit \u00b7 resets 3:30pm (Asia/Tokyo)",
+      "last_activity_at": "2026-08-18T05:00:07.759631+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 128000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0163.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 69056,
+          "engine_process_group": 69056,
+          "started_at": "2026-08-18T05:00:05.524231+00:00",
+          "supervisor_pid": 69055,
+          "supervisor_process_group": 69055
+        }
+      ],
+      "started_at": "2026-08-18T05:00:05.449318+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 69055,
+      "task_id": "TASK-F-FND-0153",
+      "trace_id": "TRACE-0064",
+      "trace_path": "research/paired-traces/TRACE-0064.json",
+      "trace_sha256": "22bbfecfca9f8208f799c05adfa231da5b808f3c9ef4719083d6163d85e5306e"
+    }
+  ],
+  "executed_steps": 1,
+  "pre_run_recoveries": [
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-18T05:00:01.945020+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "recovered output has no valid attempt id",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0062",
+      "trace_path": "research/paired-traces/TRACE-0062.json",
+      "turn_kind": "mathematics",
+      "validation_error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement"
+    }
+  ],
+  "recovered_stale_runs": [],
+  "requested_steps": 3,
+  "research_capability_states": {
+    "finding-audit": {
+      "claude": "pass"
+    },
+    "novelty": {
+      "claude": "pass"
+    }
+  },
+  "run_id": "RUN-C66-001-20260818T050002009861Z-68968",
+  "run_ledger": "reports/runs/RUN-C66-001-20260818T050002009861Z-68968.json",
+  "stop_reason": "no_eligible_task",
+  "unrecovered_validation_traces": [
+    {
+      "artifact_id": null,
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0062",
+      "trace_path": "research/paired-traces/TRACE-0062.json",
+      "turn_kind": "mathematics",
+      "validation_error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement"
+    }
+  ]
+}

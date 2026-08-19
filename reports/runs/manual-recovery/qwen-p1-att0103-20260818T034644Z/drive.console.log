@@ -1,0 +1,102 @@
+{
+  "campaign_id": "C66-001",
+  "capability_blockers": [],
+  "dry_run": false,
+  "engine_health_states": {
+    "mathematics": {
+      "claude": "not_required"
+    },
+    "review": {
+      "grok": "not_required",
+      "qwen": "pass"
+    }
+  },
+  "events": [
+    {
+      "activity_bytes": 420495,
+      "classification": "infrastructure",
+      "completed_at": "2026-08-18T03:57:08.760632+00:00",
+      "engine": "qwen",
+      "engine_pid": 42825,
+      "engine_process_group": 42825,
+      "error": "agent failed with exit 1: Qwen returned a tool call during its tool-free final round",
+      "last_activity_at": "2026-08-18T03:57:08.424401+00:00",
+      "last_activity_stream": "stderr",
+      "max_output_tokens": 65536,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/reviews/REV-0151.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 42825,
+          "engine_process_group": 42825,
+          "started_at": "2026-08-18T03:46:48.541175+00:00",
+          "supervisor_pid": 42824,
+          "supervisor_process_group": 42824
+        }
+      ],
+      "started_at": "2026-08-18T03:46:48.468286+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 42824,
+      "task_id": "TASK-V-ATT-0103-P1",
+      "trace_id": "TRACE-0063",
+      "trace_path": "research/paired-traces/TRACE-0063.json",
+      "trace_sha256": "d19466a6e449bcd6c03e83b34f36eefa5a6ba9142e85559cece62af47cbde57a"
+    }
+  ],
+  "executed_steps": 1,
+  "pre_run_recoveries": [
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-18T03:46:44.960692+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "recovered output has no valid attempt id",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0062",
+      "trace_path": "research/paired-traces/TRACE-0062.json",
+      "turn_kind": "mathematics",
+      "validation_error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement"
+    }
+  ],
+  "recovered_stale_runs": [],
+  "requested_steps": 1,
+  "research_capability_states": {
+    "finding-audit": {
+      "grok": "pass"
+    },
+    "novelty": {
+      "grok": "pass"
+    }
+  },
+  "run_id": "RUN-C66-001-20260818T034645029315Z-42782",
+  "run_ledger": "reports/runs/RUN-C66-001-20260818T034645029315Z-42782.json",
+  "stop_reason": "engine_failure",
+  "unrecovered_validation_traces": [
+    {
+      "artifact_id": null,
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0062",
+      "trace_path": "research/paired-traces/TRACE-0062.json",
+      "turn_kind": "mathematics",
+      "validation_error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement"
+    }
+  ]
+}

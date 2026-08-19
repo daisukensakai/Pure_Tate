@@ -1,0 +1,94 @@
+{
+  "adjudicated_statement": "Let k be an algebraically closed field of characteristic zero. ATT-0104 states its five conclusions for a finite flat degree-four cover gamma:C->P^1_S of a smooth proper family pi:C->S of geometrically connected genus-six curves over a reduced locally Noetherian k-scheme S, carrying the standard Casnati-Ekedahl resolution (CE), fibrewise balanced relations F_s isomorphic to O(4)+O(5), and the weak relative-canonical normalization (N) retained as an explicit hypothesis. Thus the target of gamma is required to be the trivial P^1-bundle P^1_S. REV-0153 records that the dependency ATT-0088 states the corresponding conclusions for gamma:C->P with s:P->S an arbitrary P^1-bundle, and requires S reduced only where Grauert is used (the projective-bundle and regular-immersion clauses; cf. FND-0149). The Abel-Jacobi models are not identical: ATT-0104 uses AJ=Hilb^6(C/S) x_{Pic^6(C/S)} S, while ATT-0088 uses AJ=P_S(pi_*L); FND-0107 licenses substituting either model after recording constancy of h^0(L_s), which holds on the balanced+(CE)+(N) locus by CLM-0088-3 and FND-0142. The narrowing to a trivial target is sound, because P^1_S is a special case of a P^1-bundle, but it reduces applicability over the universal balanced tetragonal family. Independently, Canning-Larson (arXiv:2208.02357v2, Section 10.2) construct the moduli stack B of pairs of globally generated bundles (E,F) of ranks (3,2) and degree g+3 on P^1 with det E isomorphic to det F, and record a universal P^1-bundle pi:P->B together with universal bundles E and F on P and the universal P^2-bundle P(E^vee)->P; the Hurwitz stack H_{4,g} maps to B by sending a degree-four cover to its Casnati-Ekedahl bundles. Consequently the natural target of the universal tetragonal map is this P^1-bundle, or a PGL_2-quotient/Hurwitz stack, and need not be globally isomorphic to P^1_S. A pencil target arising from a g^1_4 is of the form P(V) for a rank-two vector bundle V, hence is Zariski-locally trivial (Stacks Project tag 0FMS: P(E) trivializes over affines on which E is free). This statement does not assert that a general etale P^1-bundle or Severi-Brauer conic bundle arises as such a target. When C66-TATE-SUPPORT or C66-CEX-LOCAL work over the universal family, they should quote CLM-0088-8 and CLM-0088-9, or record the scheme-to-stack descent of FND-0127, rather than ATT-0104. Two traps. First, the trivial-target narrowing is not needed for global existence of L: on any P^1-bundle target, E and F are bundles on the target and X=P_P(E^vee) carries a canonical global O_X(1), so the filtered relations bundle W, the quotient W_5, and L=W_5 tensor omega_{C/S}^{-1} exist globally (Canning-Larson Section 10.3 writes W:=O(2) tensor gamma^* F^vee as a global rank-two bundle); whenever h^0(L) is constant, P_S(pi_*L) is the projectivization of a vector bundle and is therefore Zariski-locally trivial as a P^2-bundle, and no Severi-Brauer obstruction arises. Second, a residual twist of L by a line bundle pulled back from the base is invisible in Pic_{C/S}: if O_T -> (pi_T)_* O_{C_T} is an isomorphism, the sequence 0 -> Pic(T) -> Pic(C_T) -> Pic_{C/S}(T) is exact (Stacks Project tag 0B9M), so the Abel-Jacobi section is canonical even though L itself is not unique. This finding does not refute ATT-0104 on its stated trivial-target reduced-base scope, does not compute monodromy, components, or Aut(C,Gamma), and asserts no Hodge, weight, purity, or Tate conclusion.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (c(6)=5, so n=6 lies outside the published CKgP range) and with corroborated packet findings FND-0097 (filtered CE over the universal balanced stack), FND-0107 (Abel-Jacobi fibre product versus Proj(pi_*L) after constancy of h^0), FND-0127 (scheme-to-stack descent of ATT-0066), FND-0142 (h^0(L)=3 on every balanced+(CE)+(N) fibre), and FND-0149 (ATT-0088 Parts I-III descend from k-bar to k, reduced where Grauert is used). Distinct from those findings: do not merge. Mandatory originating reads. ATT-0104 theorem_statement opens with gamma:C->P^1_S over a reduced locally Noetherian k-scheme and lists five conclusions; theorem_scope.not_covered explicitly excludes nonreduced or algebraic-stack bases. REV-0153, checking ATT-0088 as a dependency, records that ATT-0088 supplies clauses (1)-(5) essentially verbatim on a strictly wider scope: the target may be any P^1-bundle s:P->S rather than P^1_S, and Parts I-II do not require S reduced; it also records that ATT-0088 uses AJ=P_S(pi_*L) while ATT-0104 uses Hilb^6 x_{Pic^6} S. ATT-0088 itself is absent from this isolated workspace, so the wider-target clause is taken from that originating review together with corroborated FND-0149, not from a fresh re-read of ATT-0088's theorem_statement. Independent public check. Canning-Larson arXiv:2208.02357v2 Section 10.2 (the campaign SRC-0004 paper) constructs the moduli stack B of pairs of globally generated bundles (E,F) of ranks (3,2) and degree g+3 on P^1 with det E isomorphic to det F, and states that there is a universal P^1-bundle pi:P->B, universal bundles E and F on P, and a universal P^2-bundle P(E^vee)->P; H_{4,g} maps to B by sending a degree-four cover to its Casnati-Ekedahl bundles, and the universal curve embeds in the pullback of P(E^vee). Thus the natural target of the universal tetragonal map is a P^1-bundle, not a globally trivial P^1_S. Section 10.3 writes W:=O_{P(E^vee)}(2) tensor gamma^* F^vee as a global rank-two bundle, so W, W_5 and L exist globally on any such target. Stacks Project tag 0FMS records that P(E) trivializes over affines where E is free, so a g^1_4 target of the form P(V) is Zariski-locally trivial even when it is not globally P^1_S. Stacks Project tag 0B9M / pic.tex lemma-flat-geometrically-connected-fibres (fetched-content SHA-256 eb99495b46d3a83628c599f0d195fa90640fbfc7518727c8a427bb058f2dbff4) gives the exact sequence 0 -> Pic(T) -> Pic(X_T) -> Pic_{X/S}(T) whenever O_T -> f_{T*} O_{X_T} is an isomorphism, so a residual twist of L by a pullback from the base is invisible in Pic_{C/S} and the Abel-Jacobi section is canonical. Wording corrections relative to the candidate: do not call the five conclusions identical, because the Abel-Jacobi models differ (FND-0107 licenses the swap after recording constancy of h^0); replace the ambiguous phrase need not be Zariski-trivial by need not be globally isomorphic to P^1_S, while recording that a pencil target is Zariski-locally trivial; do not claim that a general Severi-Brauer conic bundle arises. Promote from candidate to corroborated on this independent verification of the ATT-0104 narrowing, the Canning-Larson universal P^1-bundle, and the two traps. Merge target: none.",
+  "engine": "grok",
+  "evidence_class": "artifact_comparison",
+  "finding_id": "FND-0157",
+  "id": "FAUD-0168",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "does_not_assert": [
+      "that ATT-0104 is false on its stated trivial-target reduced-base scope",
+      "that a general etale P^1-bundle or Severi-Brauer conic bundle arises as the target of a g^1_4",
+      "any monodromy image, component count, or Aut(C,Gamma) computation",
+      "any Hodge, weight, purity, Tate, or M_{6,6} conclusion"
+    ],
+    "hypotheses": [
+      "k algebraically closed of characteristic zero",
+      "S locally Noetherian over k; reduced where Grauert and the ATT-0104 projective-bundle and regular-immersion clauses are used",
+      "pi:C->S a smooth proper family of geometrically connected genus-six curves",
+      "gamma a finite flat degree-four cover carrying the standard Casnati-Ekedahl resolution (CE)",
+      "fibrewise balanced relations F_s isomorphic to O(4)+O(5)",
+      "weak relative-canonical normalization (N), retained as an explicit hypothesis as in FND-0105 and ATT-0104"
+    ],
+    "objects": [
+      "ATT-0104 theorem_statement target of gamma",
+      "ATT-0088 target of gamma as recorded by REV-0153 and FND-0149",
+      "universal balanced tetragonal family",
+      "P^1-bundle target",
+      "Abel-Jacobi models Hilb^6 x_{Pic^6} S and P_S(pi_*L)"
+    ],
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "eb99495b46d3a83628c599f0d195fa90640fbfc7518727c8a427bb058f2dbff4",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-19T00:20:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://raw.githubusercontent.com/stacks/stacks-project/master/pic.tex"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "c21fd73890c9f00892d30b1fc02277da0ba33a3965e72072616fe807f1af4e0d",
+      "doi": "10.4171/JEMS/1543",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-19T00:05:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "3e21e64627aa643ebd5df2922cc453d311f6fb9c93dddde3a57b2906ef3ddc74",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-19T00:18:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://stacks.math.columbia.edu/tag/0FMS"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "88dfe87e360e7e819a528a904fcf568f3fc4e8dcba470c8a343f397d9baadae2",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": null,
+      "retrieved_at": "2026-08-19T00:18:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://stacks.math.columbia.edu/tag/0B9M"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0157",
+  "verdict": "promote",
+  "verified_source_count": 4
+}

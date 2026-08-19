@@ -1,0 +1,91 @@
+{
+  "adjudicated_statement": "Let k be an algebraically closed field of characteristic zero, C a smooth projective connected curve of genus six over k, and gamma : C -> P^1 a finite flat morphism of degree four with gamma_*O_C = O_{P^1} + E^vee, E locally free of rank three and degree nine, i : C -> X = P(E^vee) the relative-canonical (Casnati-Ekedahl) embedding and p : X -> P^1 with p_*O_X(1) = E. Assume (CE) the standard degree-four Casnati-Ekedahl ideal resolution 0 -> O_X(-4) tensor p^*det F -> O_X(-2) tensor p^*F -> I_C -> 0 with F locally free of rank two (necessarily of degree nine under (CE)+(N)); (N) O_X(1)|_C isomorphic to omega_C tensor gamma^*O_{P^1}(2); and (BAL) F isomorphic to O_{P^1}(4) + O_{P^1}(5). Put D := gamma^*O_{P^1}(1) and L := omega_C(-D), so that deg L = 6 and h^0(L) = 3 (imported from ATT-0088/CLM-0088-1 and CLM-0088-3, FND-0139, FND-0142), and assume L is base-point-free -- an assumption that is automatic under (CE)+(N)+(BAL) by FND-0130, FND-0134 and ATT-0103 Proposition 4, whose proof needs the exclusion of the smooth plane quintic. THEN phi_L : C -> P^2 = P(H^0(L)^vee) is a finite morphism onto an integral nondegenerate plane curve X_L with deg(phi_L) * deg(X_L) = 6, and exactly one of the following two mutually exclusive cases occurs. TYPE (i): deg phi_L = 1, X_L is an integral plane sextic of geometric genus six (arithmetic genus ten, total delta invariant four), and phi_L : C -> X_L is its normalization. TYPE (ii): deg phi_L = 2 and X_L is a smooth plane cubic. Writing Y := X_L (an elliptic curve), N := O_{P^2}(1)|_Y in Pic^3(Y) and psi := phi_L : C -> Y, the morphism psi is a bielliptic double cover with psi_*O_C = O_Y + M^{-1} for M in Pic^5(Y) satisfying M^{tensor 2} isomorphic to O_Y(B), B the reduced branch divisor of degree ten; omega_C isomorphic to psi^*M; L isomorphic to psi^*N; D isomorphic to psi^*P with P := M tensor N^{-1} in Pic^2(Y); |D| = psi^*|P|, hence gamma = q o psi up to an automorphism of P^1, where q = phi_{|P|} : Y -> P^1 has degree two; and E isomorphic to O(2) + O(3) + O(4). In particular gamma is non-primitive, factoring through a curve of genus one. EXCLUDED ALTERNATIVES, WITH THEIR STATUS. (1) deg phi_L = 6 is impossible because X_L would be a line, contradicting nondegeneracy of the complete system. (2) deg phi_L = 3 is impossible: X_L would be an integral plane conic, hence smooth and isomorphic to P^1, so L would equal T^{tensor 2} for a base-point-free g^1_3 T; this is excluded by a section count, namely h^0(omega_C - 2D) = h^0(4T - omega_C) = 0 (otherwise D = 2T - A for an effective degree-two A and |D| either fails to be complete of dimension one or acquires a base point, contradicting that D = gamma^*O(1) is a base-point-free pencil with h^0(D) = 2), whence h^0(2D) = 3, sum_i (3 - a_i)_+ = 0 and E is isomorphic to O(3)^{+3}; then E(-3) = O^{+3} identifies the Casnati-Ekedahl generators with a basis of H^0(L), so the balancedness restriction map H^0(Sym^2 E(-6)) -> H^0(L^{tensor 2}) is the multiplication map Sym^2 H^0(L) -> H^0(L^{tensor 2}), whose image lies in the five-dimensional t^*H^0(O_{P^1}(4)) while its source has dimension six; hence h^0(F(-6)) >= 1 and (BAL) fails. (3) A singular cubic image is impossible because its normalization is P^1 and phi_L would lift to a degree-two morphism C -> P^1, making C hyperelliptic; this contradiction uses the IMPORTED result that no balanced (CE)+(BAL) geometric fibre is hyperelliptic (ATT-0088/CLM-0088-2, dual-confirmed by REV-0139 and REV-0142; equivalently FND-0125, which gives F isomorphic to O(2)+O(7) there, and FND-0142). It is not proved by this lemma. (4) Separately, and as an input to base-point-freeness rather than as an alternative inside the dichotomy, no balanced (CE)+(N) fibre is a smooth plane quintic (ATT-0103 Lemma 2, FND-0130): every g^1_4 on a smooth plane quintic is |H - p_0|, so L = H + p_0 has p_0 as a base point, E is isomorphic to O(2)+O(3)+O(4) and the seven-dimensional H^0(Sym^2 E(-6)) maps into the six-dimensional H^0(2H), forcing h^0(F(-6)) >= 1. SCOPE AND LIMITS. This is a statement about a single geometric fibre. It does not assert that C is non-trigonal, only that L is not the square of a base-point-free g^1_3. It does not by itself establish that type (ii) is non-empty: the dichotomy only fails to exclude type (ii), and non-emptiness -- and with it the conclusion that primitivity of gamma is not a property of the balanced locus -- is supplied separately by FND-0154 (ATT-0103 Part (E)), for intermediate genus one only. Non-primitive degree-four pencils through intermediate curves of genus two or three are not analysed; if balanced, such a cover would have to be of type (i), since its phi_L cannot factor through the intermediate curve by degree reasons. Downstream arguments that need phi_L birational -- in particular the type-(i) monodromy computation FND-0155 -- must impose type (i) explicitly. No monodromy, family, stack, Hodge, weight, purity or Tate conclusion is asserted.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "MANDATORY FIRST READS. ATT-0103 (argument_markdown Sections 3-4 and 2.2, claims CLM-0103-3/4/5, gap_markers, theorem_scope) and REV-0152 (checked_claims for CLM-0103-4 and CLM-0103-5, proof_dependency_checks, strongest_attack) were read in full before the packet and the findings backlog. The contested passage is ATT-0103 Proposition 5 together with Lemma 3; REV-0152 records both as 'confirmed' and its strongest_attack is aimed at Part (E), not at the dichotomy. INDEPENDENT RE-DERIVATION ON THE PARENT (no grok worker was used: TASK.json lists 'grok' in excluded_engines and REV-0152 is grok-authored, so using the offered grok helper would have re-imported the very engine whose review is under audit). (1) deg phi_L divides 6 and nondegeneracy of the complete system forces deg X_L >= 2, so deg phi_L is in {1,2,3}; deg phi_L = 6 is degenerate. (2) deg phi_L = 3 gives an integral plane conic, which is necessarily smooth (a singular conic is reducible or non-reduced), hence isomorphic to P^1, hence L = T^{tensor 2} for a base-point-free g^1_3 T. Lemma 3 excludes this; I re-derived its two load-bearing steps. Step 1: omega_C - 2D = 4T - omega_C has degree 2, and h^0 = 1 would give D ~ 2T - A with A effective of degree two; a case analysis on t(A) yields either h^0(D) = 1 or a base point of |D|, both impossible since D = gamma^*O(1) is a base-point-free pencil with h^0(D) = 2. Hence h^0(2D) = chi(2D) = 3, so sum_i (3-a_i)_+ = 0, and with a_i >= 2 and sum a_i = 9 this forces E = O(3)^{+3}. Step 2: E(-3) = O^{+3} sits in gamma_*L with h^0 = 3 = h^0(L), so the CE generators xi_i are a basis of H^0(L) and the restriction map of the balancedness criterion IS the multiplication Sym^2 H^0(L) -> H^0(L^{tensor 2}); since H^0(L) = t^*H^0(O_{P^1}(2)) the image lies in t^*H^0(O_{P^1}(4)) of dimension five, source dimension six, so h^0(F(-6)) >= 1 and (BAL) fails. Both steps check out. (3) deg phi_L = 2 with X_L a singular cubic: normalization P^1, and C smooth lifts, giving a degree-two map C -> P^1, i.e. C hyperelliptic; this is excluded by the IMPORTED ATT-0088/CLM-0088-2 (= FND-0125, FND-0142), not by anything proved in ATT-0103. (4) deg phi_L = 2 with X_L smooth: Y := X_L is elliptic, psi is a degree-two morphism of smooth curves, char 0 makes it Galois with psi_*O_C = O_Y + M^{-1}; Riemann-Hurwitz 10 = 2(2g(Y)-2) + deg B gives deg B = 10 and deg M = 5; omega_Y = O_Y gives omega_C = psi^*(omega_Y tensor M) = psi^*M; L = psi^*N with N = O_{P^2}(1)|_Y of degree three; D = omega_C - L = psi^*(M tensor N^{-1}) = psi^*P with deg P = 2; h^0(psi^*P) = h^0(P) + h^0(P tensor M^{-1}) = 2 + 0 = 2 = h^0(D), so |D| = psi^*|P| and gamma = q o psi with q = phi_{|P|}. The splitting E = O(2)+O(3)+O(4) follows from h^0(D) = 2 (a_i >= 2) and h^0(2D) = h^0(2P) + h^0(2P - M) = 4 + 0 = 4, i.e. sum_i (3-a_i)_+ = 1, whose unique solution with sum a_i = 9 and a_i >= 2 is (2,3,4); (2,2,5) gives 2 and (3,3,3) gives 0. All verified. CORRECTIONS APPLIED TO THE CANDIDATE TEXT (the original is therefore not promoted unchanged). (a) The candidate omits the standing hypotheses that k is algebraically closed of characteristic zero and that gamma is a finite flat degree-four cover with the stated CE data; char 0 is load-bearing for psi_*O_C = O_Y + M^{-1} and for the imported hyperelliptic exclusion, so it is now explicit. (b) 'L = psi^*O_Y(1)' and 'q = phi_{|M tensor O(1)^{-1}|}' use non-intrinsic notation; corrected to L = psi^*N with N = O_{P^2}(1)|_Y in Pic^3(Y) and q = phi_{|P|} with P = M tensor N^{-1} in Pic^2(Y). (c) The candidate's list of 'excluded alternatives' conflates alternatives internal to the dichotomy (deg phi_L in {3,6}, singular cubic image) with two facts of different status: C hyperelliptic is an IMPORTED dependency (ATT-0088/CLM-0088-2), not proved by this lemma, and 'C is not a smooth plane quintic' is an antecedent used to prove base-point-freeness (ATT-0103 Lemma 2, FND-0130), not an alternative for phi_L once L is base-point-free. The adjudicated statement separates the three. (d) The candidate's one-line summary of the trigonal exclusion omits its two load-bearing steps (h^0(4T - omega_C) = 0, and that the xi_i form a basis of H^0(L) so that the restriction map is the multiplication map); both are now stated, since without them 'lands inside the five-dimensional t^*H^0(O(4))' is not justified. (e) MOST SUBSTANTIVE: the closing clause 'primitivity of gamma is not available on the whole balanced locus' does NOT follow from the dichotomy, which only fails to exclude type (ii). It is a non-emptiness assertion requiring ATT-0103 Part (E), separately adjudicated as packet finding FND-0154. The clause is retained but re-attributed rather than asserted as a consequence of the dichotomy. CROSS-CHECKS AGAINST THE PACKET. FND-0154 (corroborated) independently records, for every bielliptic-composed cover of the stated type, E = O(2)+O(3)+O(4) and F = O(4)+O(5); this corroborates the type-(ii) splitting-type clause from the opposite direction (construction rather than classification) and shows the two are consistent. FND-0155 (corroborated) is stated in terms of 'type (i)' and 'type (ii)' but the packet does not otherwise define those labels, so promoting the present finding removes a dangling reference rather than duplicating one; FND-0155 is a monodromy statement and FND-0154 an existence statement, so neither is a merge target (merge_target_id null). No conflict with FND-0130, FND-0134, FND-0139, FND-0142, FND-0125. The slip REV-0152 itself flags (connectedness of the ordering torsor equated with transitivity on six letters) lies in the monodromy claim CLM-0103-6 and was already corrected inside FND-0155; it is not load-bearing for the dichotomy. GAP-0103-3 correctly notes that composites through intermediate genus two or three, if balanced, must be type (i) by degree reasons, so the dichotomy is not weakened by that open case. INDEPENDENT PUBLIC-LITERATURE CHECKS. (i) Bopp-Hoff (arXiv:1807.05121, ar5iv HTML) defines a bundle +_j O(a_j) on P^1 to be balanced iff max_{i,j}|a_j - a_i| <= 1, records that Casnati-Ekedahl [CE96] generalized the relative canonical resolution to finite Gorenstein covers of degree k, and gives deg(N_i) = (g-k-1)(k-2-i)*binom(k-2,i-1) for the syzygy bundles in the scroll normalization. For k = 4, i = 1 this is rank two and degree g-5 = 1 at g = 6; the campaign convention differs by the twist E_scroll = E(-2), under which F = N(4) has degree 1 + 8 = 9 = g+3, matching deg E = 9 and making O(4)+O(5) exactly the balanced splitting type of a rank-two degree-nine bundle. This independently validates the rank/degree numerology on which Lemma 1(4) and both section-count exclusions rest. (ii) Castelnuovo-Severi (Theorem 14 of arXiv:2306.17772, ar5iv HTML: if g(X) > m*g(Y) + n*g(Z) + (m-1)(n-1) then both maps factor through a common cover of degree > 1) gives two consistency checks on type (ii) that the candidate does not perform. A type-(ii) curve has a degree-two map to an elliptic curve; were it also hyperelliptic, 6 > 2*1 + 2*0 + 1 = 3 would force a common degree-two factor X' with Y = X' = P^1, absurd; were it trigonal, 6 > 2*1 + 3*0 + 2 = 4 would force a common factor of degree dividing both 2 and 3, absurd. Hence type-(ii) curves are automatically neither hyperelliptic nor trigonal, so type (ii) neither collides with the imported hyperelliptic exclusion nor secretly re-enters through the excluded case L = T^{tensor 2}. No contradiction was found with any cross-checked claim; the residual defects are the scope and attribution corrections listed above, all of which are now carried in the adjudicated statement. VERDICT RATIONALE: promote (with the corrected statement). The two sibling candidates of REV-0152 are already promoted in packet C66-001-v4, the proof is complete and independently re-derived here, the exclusions are exhaustive, and the only overreach (the primitivity clause) is repaired by attribution rather than by retirement.",
+  "engine": "claude",
+  "evidence_class": "adversarial_review",
+  "finding_id": "FND-0153",
+  "id": "FAUD-0166",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "base": "a single geometric point, i.e. one pair (C,gamma) over an algebraically closed characteristic-zero field; no family, no stack, no base scheme statement is made",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "does_not_assert": [
+      "non-emptiness of type (ii) (supplied separately by FND-0154 / ATT-0103 Part (E))",
+      "non-emptiness of type (i)",
+      "that C is non-trigonal (only that L is not the square of a base-point-free g^1_3)",
+      "any monodromy computation (see FND-0155) and any statement over a family base",
+      "any Hodge, weight, purity, Tate or cohomological conclusion",
+      "any statement about Aut(C,Gamma), stack inertia, or a morphism to M_{6,6}"
+    ],
+    "ground_field": "algebraically closed of characteristic zero",
+    "hypotheses": [
+      "k algebraically closed of characteristic zero (needed for: separability of a degree-two morphism and the eigen-splitting psi_*O_C = O_Y + M^{-1}; the imported hyperelliptic exclusion; Clifford and Riemann-Roch arguments as used)",
+      "C smooth projective connected of genus six; gamma : C -> P^1 finite flat of degree four; gamma_*O_C = O_{P^1} + E^vee with E of rank three and degree nine; i : C -> X = P(E^vee) the relative-canonical (Casnati-Ekedahl) embedding with p_*O_X(1) = E",
+      "(CE) the standard degree-four Casnati-Ekedahl ideal resolution 0 -> O_X(-4) tensor p^*det F -> O_X(-2) tensor p^*F -> I_C -> 0 with F locally free of rank two (degree nine under (CE)+(N))",
+      "(N) O_X(1)|_C isomorphic to omega_C tensor gamma^*O_{P^1}(2) (strong form, residual twist trivial)",
+      "(BAL) F isomorphic to O_{P^1}(4) + O_{P^1}(5)",
+      "D := gamma^*O_{P^1}(1), L := omega_C(-D) of degree six with h^0(L) = 3 (imported: ATT-0088/CLM-0088-1 and CLM-0088-3, FND-0139, FND-0142)",
+      "L base-point-free (redundant under the previous hypotheses: FND-0130, FND-0134, ATT-0103 Proposition 4, whose plane-quintic exclusion is proved there; retained explicitly so the dichotomy can be quoted independently of that proof)"
+    ],
+    "imported_not_proved_here": [
+      "no balanced (CE)+(BAL) geometric fibre is hyperelliptic (ATT-0088/CLM-0088-2, dual-confirmed by REV-0139 and REV-0142; independently FND-0125 with F = O(2)+O(7), and FND-0142)",
+      "h^0(O_C(D)) = 2, h^0(L) = 3, h^1(L) = 2 on every balanced fibre (ATT-0088/CLM-0088-3, FND-0139, FND-0142)"
+    ],
+    "objects": [
+      "phi_L : C -> P^2 = P(H^0(L)^vee)",
+      "X_L = image of phi_L",
+      "type (i): integral plane sextic with normalization C",
+      "type (ii): smooth plane cubic Y with bielliptic psi : C -> Y",
+      "E",
+      "F",
+      "T a base-point-free g^1_3"
+    ],
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "1807.05121",
+      "arxiv_version": null,
+      "content_sha256": "858eb33cda9734fb75f6e22fbacab0455e8c68a717d47ae0012eb3b85d2fe881",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "casnati-ekedahl-degree-four-relations-bundle-rank-degree-and-balancedness",
+      "retrieved_at": "2026-08-18T07:10:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/1807.05121"
+    },
+    {
+      "arxiv_id": "1807.05121",
+      "arxiv_version": null,
+      "content_sha256": "aeda7bb6a5ea4f8e96b355f1269d3e978b3f1adb2ac571bcfb9b0661fb73781a",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "casnati-ekedahl-degree-four-relations-bundle-abstract-page",
+      "retrieved_at": "2026-08-18T07:08:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1807.05121"
+    },
+    {
+      "arxiv_id": "2306.17772",
+      "arxiv_version": null,
+      "content_sha256": "110e1c8a763c7264adbfa05823f3800b5fdcd85c9b7e7c83966d9f5d0a7ef9ca",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "castelnuovo-severi-cross-check-on-type-(ii)-consistency",
+      "retrieved_at": "2026-08-18T07:16:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2306.17772"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0153",
+  "verdict": "promote",
+  "verified_source_count": 3
+}

@@ -1,0 +1,177 @@
+{
+  "argument_markdown": "## Source-backed inputs\n\nATT-0065, dual-confirmed by REV-0108 and REV-0109, supplies the intrinsic Fitting identity, arbitrary locally Noetherian base change, the canonical filtered quotient W_5 of degree 16, and the scheme-theoretic Abel-Jacobi identification on the ordered six-section configuration locus. Only its intrinsic comparison is used; no ambient equation-bundle freeness is inferred.\n\nATT-0066, dual-confirmed by REV-0110 and REV-0116, supplies the fibrewise range h^0(L) in {3,4}, the closed Abel-Jacobi incidence, its constant-h^0 projective-bundle model over reduced strata, and the stack-level finite etale S_6 ordering torsor. Its disclaimers about nonreduced bases and moduli-space components are retained.\n\nATT-0086, dual-confirmed by REV-0135 and REV-0138, supplies CLM-0086-1 and CLM-0086-2: balancedness excludes the h^0(L)=4 branch, and under (N) the incidence is a P^2-bundle with no P^3 piece. ATT-0088, dual-confirmed by REV-0139 and REV-0142, supplies CLM-0088-2, CLM-0088-3, CLM-0088-5, CLM-0088-6, CLM-0088-8 and CLM-0088-9: hyperelliptic exclusion, h^0(L)=3 and h^1(L)=2, fibrewise reduced-support nonemptiness, the intrinsic rank/Fitting table, relative smoothness and dimension two, and regular immersion of codimension four in Conf_6.\n\nSRC-0004 supplies the sign-sensitive convention W_f=(O_X(2)\u2297gamma^*O(-f))|_C and deg(W_f)=4g+12-4f. Thus deg(W_4)=20, deg(W_5)=16 and deg(L)=6. These are source-backed exact calculations, not experimental evidence.\n\n## Proved steps\n\n1. Under (N), ATT-0088 CLM-0088-1 identifies L_s with omega_{C_s}(-D_s), where D_s=gamma_s^*O(1). ATT-0066 gives h^0(L_s) in {3,4}; ATT-0086 CLM-0086-1 excludes the value 4 on every balanced fibre. Hence h^0(L_s)=3. Since deg(L_s)=6 on a genus-six curve, Riemann-Roch gives chi(L_s)=1 and h^1(L_s)=2. The same balanced relation-bundle calculation excludes hyperelliptic fibres. No exclusion of all positive-genus non-primitive factorizations is inferred.\n\n2. Because S is reduced and h^0(L_s)=3 is constant, Grauert gives pi_*L locally free of rank three with base change. The Abel-Jacobi divisor functor therefore agrees with its projectivization, so AJ is a Zariski-locally trivial P^2-bundle. ATT-0088 CLM-0088-5 proves without assuming that L is base-point-free that every fibre contains a reduced divisor and that the nonreduced discriminant has dimension exactly one. Therefore U is a nonempty dense fibrewise open, not a closed locus. Being open in the P^2-bundle, U is S-smooth of relative dimension two and is surjective.\n\n3. By the scheme-theoretic Fitting comparison of ATT-0065 and the ordered-incidence identification of ATT-0066 and ATT-0088, Z is exactly Ord(U), not merely equal to it on geometric points. Ordering six distinct support points is a free finite etale right S_6-action, so Z->U is an S_6-torsor of degree 6!=720 and each geometric-point deck stabilizer is trivial. Finite etale pullback preserves smoothness and relative dimension, giving Z->S smooth, surjective, and pure of relative dimension two. The Fitting presentation makes Z closed in B. Since B->S and Z->S are smooth of relative dimensions six and two, respectively, the closed immersion Z->B is regular of pure codimension four. This conclusion uses relative smoothness, not determinantal expected-codimension numerology.\n\n4. If S is finite type, ATT-0088 CLM-0088-8 gives that every component of Z dominates a component S_alpha and has dimension dim(S_alpha)+2. For the sharper conditional component statement, let U_alpha be connected and normal and identify one geometric torsor fibre with G=S_6 using a chosen ordering. Etale monodromy commutes with the right G-action, hence acts on G by left multiplication through a subgroup H_alpha. Its orbits are exactly H_alpha g, so connected components of the cover are indexed by H_alpha\\G. A finite etale cover of a normal scheme is normal; a connected normal locally Noetherian scheme is irreducible. Thus these connected components are precisely the irreducible components and their number is [G:H_alpha]. Right multiplication by k fixes the component H_alpha g exactly when H_alpha gk=H_alpha g, equivalently k belongs to g^{-1}H_alpha g. This proves the claimed component stabilizer formula with the correct coset convention.\n\n## Computational hypotheses\n\nNone. No finite experiment, point count, or reusable computation is used to establish a universal assertion. The numerical equalities 20, 16, 6, 3, 2, 720, and codimension four follow from the cited geometric lemmas and exact arithmetic.\n\n## Gaps outside the theorem\n\nThe exact subgroup H_alpha is not computed, so the formula does not determine the unconditional number of ordered components. Irreducibility of the balanced base is also unknown. The verified dependencies do not construct or analyze a representable forgetful morphism to M_{6,6}; consequently they give no components, closure, absolute codimension, stabilizers, or inertia in M_{6,6}. They also give no extension to nonreduced bases and no Hodge or Tate conclusion for RED-0001.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0105-1",
+      "justification": "ATT-0066, confirmed by REV-0110 and REV-0116, gives the range {3,4}; ATT-0086 and ATT-0088, confirmed by REV-0135, REV-0138, REV-0139 and REV-0142, exclude the hyperelliptic equality branch and the value 4. Riemann-Roch then gives h^1=2.",
+      "statement": "Under (CE), (BAL), and (N), every geometric fibre is nonhyperelliptic, L_s\u2245omega_{C_s}(-gamma_s^*O(1)), h^0(L_s)=3, h^1(L_s)=2, and the h^0=4 stratum is empty.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0105-2",
+      "justification": "Constancy h^0=3 and reducedness permit Grauert. ATT-0088 CLM-0088-5 and CLM-0088-8, dual-confirmed by REV-0139 and REV-0142, supply reduced-support nonemptiness, the discriminant dimension, and relative smoothness.",
+      "statement": "Over reduced S, AJ is a P^2-bundle and its distinct-support open U is fibrewise nonempty and dense, S-smooth and surjective of relative dimension two, with fibrewise complement of dimension exactly one.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0105-3",
+      "justification": "The scheme-theoretic Fitting identity is ATT-0065, confirmed by REV-0108 and REV-0109. The ordering identification is ATT-0066 and ATT-0088, confirmed by REV-0110, REV-0116, REV-0139 and REV-0142. Regularity follows from the verified relative smoothness of source and ambient configuration scheme.",
+      "statement": "The intrinsic evaluation-failure scheme Z is scheme-theoretically the degree-720 finite etale right S_6-torsor Ord(U), with trivial geometric-point deck stabilizers; Z->S is smooth surjective of relative dimension two and Z->Conf_6(C/S) is a regular closed immersion of codimension four.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0105-4",
+      "justification": "After choosing a point of a right torsor fibre, etale monodromy acts by left multiplication. Its orbits are the right cosets H_alpha g. Normality makes connected components of the finite etale cover irreducible, and H_alpha gk=H_alpha g is equivalent to k\u2208g^{-1}H_alpha g.",
+      "statement": "On a connected normal component U_alpha, if H_alpha\u2282S_6 is the monodromy image, the irreducible components of its ordering cover are indexed by H_alpha\\S_6; the component indexed by H_alpha g has right deck stabilizer g^{-1}H_alpha g.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [
+    "GAP-COMP-MONODROMY: the exact balanced-family monodromy image H_alpha, especially on purely type-(ii) components, remains uncomputed.",
+    "GAP-COMP-BASE-COMPONENTS: irreducibility and connected-component structure of the balanced CE base are undetermined.",
+    "GAP-COMP-MODULI-MAP-INERTIA: no verified representable map, image/closure theorem, or identification of Aut(C,Gamma) inside M_{6,6} is available.",
+    "GAP-COMP-NONREDUCED-UNBALANCED: the projective-bundle, smoothness, and regular-immersion conclusions are not extended to nonreduced bases or unbalanced CE strata.",
+    "GAP-TATE: the relative S_6-torsor and component formula do not establish Tate type or resolve RED-0001."
+  ],
+  "id": "ATT-0105",
+  "lane": "geometry",
+  "methods_used": [
+    "verified-dependency-interface",
+    "casnati-ekedahl-filtered-evaluation",
+    "intrinsic-fitting-ideal-comparison",
+    "relative-abel-jacobi-incidence",
+    "grauert-local-freeness-on-reduced-base",
+    "reduced-support-discriminant-analysis",
+    "finite-etale-s6-ordering-torsor",
+    "fundamental-group-monodromy-orbit-analysis",
+    "normality-connected-component-to-irreducible-component",
+    "regular-immersion-between-relatively-smooth-schemes"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Within the verified relative scope, the finite etale ordering statement is sharpened to the exact conditional irreducible-component and deck-component-stabilizer formula H_alpha\\S_6 and g^{-1}H_alpha g on every connected normal incidence component, without pretending to compute H_alpha.",
+    "The theorem gives a single scope-correct interface combining the empty jump stratum, P^2 incidence, degree-720 ordering cover, relative component dimensions, trivial deck-point stabilizers, and regular codimension-four immersion while separating these from unproved moduli-stack inertia and image assertions."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "268913bb66959a14fac8c9318343983bf9b8ae628714d1baaa46cf6bb8a874fc",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0065",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-Z dependency; intrinsic Fitting/Abel-Jacobi identification and canonical filtered quotient."
+    },
+    {
+      "id": "REV-0108",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0065 within its intrinsic and balanced scope."
+    },
+    {
+      "id": "REV-0109",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0065, including its nonreduced Fitting comparison."
+    },
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "role": "Verified C66-GEO-H0 dependency; h^0 stratification, Abel-Jacobi incidence, and ordering torsor."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0066 with its scheme and reduced-stratum restrictions."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0066 and its Grauert and torsor caveats."
+    },
+    {
+      "id": "ATT-0086",
+      "kind": "attempt",
+      "role": "Dual-confirmed supporting context excluding the balanced h^0=4 jump stratum."
+    },
+    {
+      "id": "REV-0135",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0086."
+    },
+    {
+      "id": "REV-0138",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0086."
+    },
+    {
+      "id": "ATT-0088",
+      "kind": "attempt",
+      "role": "Dual-confirmed supporting context for reduced divisors, ranks, relative dimension, smoothness, and regular immersion."
+    },
+    {
+      "id": "REV-0139",
+      "kind": "confirmation_review",
+      "role": "First independent confirmation of ATT-0088."
+    },
+    {
+      "id": "REV-0142",
+      "kind": "confirmation_review",
+      "role": "Second independent confirmation of ATT-0088, including reduced-base and ordered-configuration scope."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "role": "Sign-sensitive CE convention and degree formula for W_f."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "The verified balanced CE interfaces yield a complete relative description: the jump stratum is empty, the residual incidence is a P^2-bundle with dense distinct-support open, and its ordered evaluation-failure locus is a smooth degree-720 S_6-torsor regularly immersed in relative codimension four. On normal connected incidence components, irreducible components and deck-component stabilizers are exactly H\\S_6 and g^{-1}Hg. The monodromy image and all moduli-stack component and inertia questions remain open.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "base": "Reduced locally Noetherian schemes over an algebraically closed characteristic-zero field; finite type is additionally required only for absolute component dimensions.",
+    "dependency_scope": "ATT-0065 is used only for its intrinsic Fitting and Abel-Jacobi comparison within the six-disjoint-sections scope. ATT-0066 is used only over schemes. ATT-0086 and ATT-0088 supply the balanced jump exclusion, reduced-support geometry, relative dimensions, smoothness, and regular immersion under their stated reduced-base hypotheses.",
+    "g": 6,
+    "hypotheses": "(CE) the standard degree-four Casnati-Ekedahl resolution; (BAL) F_s\u2245O(4)\u2295O(5) on every geometric fibre; (N) the weak relative-canonical CE normalization, retained as an explicit hypothesis.",
+    "n": 6,
+    "not_covered": "Nonreduced bases; unbalanced CE splitting types; coarse-space assertions; exact monodromy H_alpha; irreducibility of the balanced base; stack inertia; Aut(C,Gamma) or Aut(C,gamma,Gamma); representability, full faithfulness, quasi-finiteness, image, closure, or codimension of a map to M_{6,6}; lci or Gysin statements inside M_{6,6}; Hodge, weight, purity, Tate, or RED-0001 conclusions.",
+    "objects": "W_5 is the canonical filtered quotient, not a globally split summand; L and its Abel-Jacobi section are understood up to pullback of a line bundle from S. Z is the intrinsic evaluation-Fitting locus on the ordered configuration scheme, not an ambient equation-bundle locus."
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero and S a reduced locally Noetherian k-scheme. Let pi:C->S be a smooth proper family of geometrically connected genus-six curves, and let gamma:C->P^1_S be finite flat of degree four with the standard degree-four Casnati-Ekedahl resolution and fibrewise balanced relations bundle F_s\u2245O(4)\u2295O(5). Assume the weak CE normalization O_X(1)|_{C_s}\u2245omega_{C_s/P^1}\u2297gamma_s^*A_s on every geometric fibre. Let W_5 be the degree-sixteen quotient in the canonical filtered CE equation bundle, using W_f=(O_X(2)\u2297gamma^*O(-f))|_C, and put L=W_5\u2297omega_{C/S}^{-1}. Let AJ=Hilb^6(C/S)\u00d7_{Pic^6(C/S)}S be the Abel-Jacobi incidence over [L], let U\u2282AJ be its distinct-support open, let B=Conf_6(C/S), and let Z\u2282B be the intrinsic CE evaluation-failure scheme defined by Fit_0(coker(pi_*W->pi_*(W|_Gamma))) for the universal ordered divisor Gamma. Then: (1) no geometric fibre is hyperelliptic, L_s\u2245omega_{C_s}(-gamma_s^*O(1)), h^0(L_s)=3 and h^1(L_s)=2; in particular the h^0=4 stratum is empty. (2) AJ is a Zariski-locally trivial P^2-bundle over S. The open U is fibrewise nonempty and dense, is S-smooth and surjective of pure relative dimension two, and its complement in every geometric P^2-fibre is closed of dimension exactly one; consequently U is not closed fibrewise. (3) Scheme-theoretically, Z is the finite etale right S_6-torsor Ord(U)->U of orderings of the universal reduced divisor, of degree 720. The right S_6-action has trivial geometric-point stabilizers, Z->S is smooth and surjective of pure relative dimension two, and Z->B is a regular closed immersion of pure codimension four. If S is of finite type, every irreducible component of Z dominates an irreducible component S_alpha of S and has dimension dim(S_alpha)+2. (4) More precisely, for any connected normal component U_alpha of U, choose a geometric point and an ordering, and let H_alpha\u2282S_6 be the resulting monodromy image. The irreducible components of Z\u00d7_U U_alpha are indexed by the orbit set H_alpha\\S_6, represented by right cosets H_alpha g; their number is [S_6:H_alpha], and the stabilizer of the component H_alpha g under the right deck action is g^{-1}H_alpha g. This formula does not compute H_alpha. No assertion is made about irreducible components, dimensions, or inertia in M_{6,6}, about a representable forgetful morphism to M_{6,6}, or about Tate type."
+}

@@ -1,0 +1,293 @@
+{
+  "attempt_id": "ATT-0103",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0103-1",
+      "note": "Re-derived. Twisting the two-term CE resolution by O_X(2) and using R^j p_* O_X(-2)=0 (the first negative higher image on a P^2-bundle occurs at t<=-3) gives F=p_*(I_C(2)) and the short exact sequence 0->F->Sym^2 E->gamma_* R->0. Rank/degree: deg(Sym^2 E)=(r+1)deg E=36, chi=42; chi(R)=31 under (N); hence chi(F)=11 and deg F=9. The identification R tensor gamma^*O(-6)=L^{tensor 2} uses the strong form of (N). On P^1, F=O(s)+O(9-s) with s<=4 gives h^0(F(-6))=4-s, vanishing iff s=4. Target dimension 7 is Riemann-Roch for a degree-12 bundle with h^1=0, independent of further geometry.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0103-2",
+      "note": "Re-derived. A smooth plane quintic is neither hyperelliptic nor trigonal (base-point-free pencil trick against |H|). Every g^1_4 is then |H-p_0|: a non-complete pencil of degree 4 would give a g^2_4 and Clifford equality, already excluded. Thus L=H+p_0 has p_0 as a base point, h^0(D)=2 forces a_i>=2, h^0(2D)=h^0(omega-2p_0)=4 forces sum (3-a_i)_+=1, hence E=O(2)+O(3)+O(4). The four monomials with a_i+a_j>=6 all vanish to order at least 2 at p_0 (ord xi_4=2, ord xi_3>=1), so the 7-dimensional source maps into H^0(2H) of dimension 6.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0103-3",
+      "note": "If p is a base point then |D+p| is a g^2_5. A further base point produces a g^2_4 and Clifford equality, hence a hyperelliptic fibre, excluded by ATT-0088/CLM-0088-2. A base-point-free g^2_5 is birational onto a plane quintic of arithmetic genus 6, necessarily smooth, excluded by CLM-0103-2. This supplies the degree-zero case left open by ATT-0088/CLM-0088-4 and matches FND-0130, with the missing classification of g^1_4's included.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0103-4",
+      "note": "Re-derived. H^0(L)=t^*H^0(O(2)) is an isomorphism of 3-dimensional spaces. The case h^0(4T-omega)=1 produces D~2T-A of degree 2 and, in every configuration of A relative to t, either h^0(D)=1 or a base point of |D|, contradicting that D=gamma^*O(1) is a complete base-point-free pencil. Then h^0(2D)=3 forces E=O(3)^3, so res is the multiplication map Sym^2 H^0(L)->H^0(L^{tensor 2}) with image inside the 5-dimensional t^*H^0(O(4)). No Maroni/Hirzebruch input is used. Compatible with a balanced (1,2)-(2,2) complete intersection having the same E but a different H^0(L).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0103-5",
+      "note": "deg phi_L divides 6 and deg X_L>=2. Degree 6 is degenerate; degree 3 is a smooth conic, hence L=T^{tensor 2}, excluded by CLM-0103-4; a singular cubic has geometric genus 0, so the normalization would make C hyperelliptic (alternatively h^0(L)>=4). The remaining degree-2 case is a smooth plane cubic: Riemann-Hurwitz gives deg M=5, omega_C=psi^*M, D=psi^*P with P in Pic^2(Y), and |D|=psi^*|P| because h^0(P-M)=0. Lemma 1(1) at m=1,2 forces E=O(2)+O(3)+O(4). Hyperelliptic fibres are already excluded by the imported CLM-0088-2; plane quintics by CLM-0103-2.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0103-6",
+      "note": "The incidence I is a P^1-bundle over C, hence irreducible, so monodromy is transitive. After deleting the diagonal and the finite coincidence locus Sigma over non-normal points of the sextic, the ordered-pair incidence is irreducible of dimension two and dominant of generic degree 30, so monodromy is 2-transitive, hence primitive. A general tangent line is a simple tangency at a smooth point of the dual curve (char-0 reflexivity of the Gauss map; Wronskian of the g^2_6 has degree 48 and is not identically zero because the system is not composed with a pencil), giving local monodromy a transposition via the comparison of etale and topological fundamental groups in characteristic zero. Jordan's theorem yields S_6. The writeup incorrectly equates connectedness of the S_6-torsor with transitivity on six letters (A_6 would already be transitive while giving two components); that slip is not load-bearing, because G=S_6 is already established and connectedness of Ord is equivalent to G=S_6 by FND-0148/FND-0151.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0103-7",
+      "note": "On a reduced member, j^*l consists of three distinct non-branch points of psi, and phi_L^*l is the disjoint union of the three fibres. The partition is independent of the line, so it is monodromy-invariant. The corresponding imprimitive wreath product has order 2^3*3!=48 and is not S_6. The exact image inside the wreath product is not claimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0103-8",
+      "note": "Existence of (Y,P,M,B) is elementary (four values of M excluded; |M^{tensor 2}| is very ample of degree 10, so Bertini gives a reduced member). Smoothness, connectedness and genus six of C, and finite-flatness of gamma, are immediate. The splitting E=O(2)+oplus O(3)-oplus O(4)- follows from q_*O_Y=O+O(-2) and q_*M=O(1)+O(2), matched against gamma_*omega_C=O(-2)+E(-2) with omega_{P^1} even. The restriction map is iota-equivariant of rank 7=6+1; the odd summand sends x_2 x_4 to a nonzero multiple of mu. Injectivity of the even map Phi is the pole/trace argument: f=nu/mu is a rational section of P with a single simple pole at y_0, hence not iota-invariant because y_0 is unramified; a=0 would make f a pullback; a!=0 produces a quadratic for F=f/tau over q^*k(P^1) whose trace has a simple pole at q(y_0) while c_1/(a c) is regular there. Lemma 1(4) therefore gives (BAL). Hypotheses (CE) and (N) are not reproved; they are imported exactly by the FND-0150-sanctioned pair CE 1996 Theorem 2.1 plus SRC-0004 Lemma 10.6, which SRC-0004 itself cites as [15, Theorem 2.1(2)] for the restriction O(1)|_C cong omega_C tensor gamma^*O(2). Criterion (3.3) of ATT-0100 is not used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0103-9",
+      "note": "U->S is smooth surjective of pure relative dimension two with connected fibres |L_s|^{rs}, so U_alpha is connected. The closed fibre U_b sits in U_alpha and carries the restricted S_6-torsor, so im(pi_1^{et}(U_b)->S_6) is contained in H_alpha. That fibrewise image is S_6 by CLM-0103-6, hence H_alpha=S_6. Connectedness of Z_alpha is then the single-orbit case of FND-0148/FND-0151. The upgrade from connected to irreducible retains the normality/integrality/locally-Noetherian hypothesis demanded by FND-0132. The induction functor of FND-0152 with H_alpha=S_6 is the identity. No irreducibility of S is used, and no statement is made about a purely type-(ii) component. k algebraically closed makes the arithmetic/geometric distinction of FND-0148 vacuous.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-18",
+  "finding_candidates": [
+    {
+      "id": "FC-REV0152-L-BPF",
+      "key": "FC-REV0152-L-BPF",
+      "kind": "lemma",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "hypotheses": [
+          "(CE)",
+          "(BAL)",
+          "(N)"
+        ],
+        "objects": [
+          "L=omega_C(-D)",
+          "smooth plane quintic",
+          "g^1_4"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "statement": "Evidence for FND-0130, with the missing classification of pencils supplied. If L=omega_C(-D) had a base point p on a balanced+(N) genus-six degree-four fibre, then |D+p| is a g^2_5. A further base point of that system produces a g^2_4 and Clifford equality, hence a hyperelliptic fibre, excluded by ATT-0088/CLM-0088-2 and FND-0125. A base-point-free g^2_5 is birational onto a plane quintic of arithmetic genus 6, necessarily smooth. On a smooth plane quintic every g^1_4 is |H-p_0| (non-completeness would again give a g^2_4), so L=H+p_0 has p_0 as a base point, E cong O(2)+O(3)+O(4), and H^0(Sym^2 E(-6))->H^0(L^{tensor 2}) has seven-dimensional source with image inside the six-dimensional H^0(omega_C), hence h^0(F(-6))>=1, contradicting (BAL). Thus L is base-point-free on the balanced locus. The new load-bearing steps are the identification of every g^1_4 as |H-p_0| and the vanishing-order computation at p_0.",
+      "supports_finding_id": "FND-0130"
+    },
+    {
+      "id": "FC-REV0152-PHI-L-DICHOTOMY",
+      "key": "FC-REV0152-PHI-L-DICHOTOMY",
+      "kind": "lemma",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "hypotheses": [
+          "(CE)",
+          "(BAL)",
+          "(N)",
+          "L base-point-free of degree 6 with h^0=3"
+        ],
+        "objects": [
+          "phi_L",
+          "X_L",
+          "type (i) plane sextic",
+          "type (ii) bielliptic cubic"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "statement": "Under (CE)+(BAL)+(N) at genus six, after L is known to be base-point-free, the finite morphism phi_L:C->P^2 onto an irreducible nondegenerate plane curve satisfies deg(phi_L)*deg(X_L)=6 and exactly one of two cases occurs. Type (i): deg phi_L=1 and X_L is a plane sextic with normalization C. Type (ii): deg phi_L=2, X_L is a smooth plane cubic Y, psi=phi_L is a bielliptic double cover with psi_*O_C=O_Y+M^{-1}, deg M=5, omega_C=psi^*M, L=psi^*O_Y(1), gamma=q o psi with q=phi_{|M tensor O(1)^{-1}|} of degree two, and E cong O(2)+O(3)+O(4). The excluded alternatives are deg phi_L in {3,6}, a singular cubic image (normalization P^1, hence C hyperelliptic), a smooth plane quintic, and L cong T^{tensor 2} for a base-point-free g^1_3. The trigonal exclusion is a section count: it forces E cong O(3)^3 and lands the balancedness restriction map inside the five-dimensional pullback t^*H^0(O(4)), so h^0(F(-6))>=1. Downstream arguments that need phi_L birational must impose type (i) explicitly; primitivity of gamma is not available on the whole balanced locus."
+    },
+    {
+      "id": "FC-REV0152-BALANCED-BIELLIPTIC-EXISTS",
+      "key": "FC-REV0152-BALANCED-BIELLIPTIC-EXISTS",
+      "kind": "lemma",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "characteristic": 0,
+        "hypotheses": [
+          "(CE) and (N) supplied by Casnati-Ekedahl 1996 Theorem 2.1 and SRC-0004 Lemma 10.6",
+          "y_0 not a ramification point of q",
+          "B reduced in |M^{tensor 2}|"
+        ],
+        "objects": [
+          "bielliptic double cover of an elliptic curve",
+          "composed degree-four pencil",
+          "F=O(4)+O(5)"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "statement": "A non-primitive degree-four pencil factoring through a smooth genus-one intermediate curve can have balanced Casnati-Ekedahl splitting F cong O(4)+O(5). For every elliptic Y, every P in Pic^2(Y), every M in Pic^5(Y) whose unique point y_0 with O(y_0) cong M tensor P^{-2} is not a ramification point of q=phi_{|P|}, and every reduced B in |M^{tensor 2}|, the double cover psi:C->Y branched along B is a smooth connected genus-six curve and gamma=q o psi is finite flat of degree four with E cong O(2)+O(3)+O(4) and F cong O(4)+O(5), once (CE) and (N) are imported by the FND-0150-sanctioned pair CE 1996 Theorem 2.1 and SRC-0004 Lemma 10.6. Such data exist. Consequently primitivity of gamma is not a property of the balanced locus, and the residual question of FND-0104 is answered affirmatively for intermediate genus one. The argument does not treat intermediate genus two or three, does not assert that a connected component of a balanced base can be purely of type (ii), and does not compute the exact monodromy image inside S_2 wr S_3."
+    },
+    {
+      "id": "FC-REV0152-TYPE-I-MONODROMY-S6",
+      "key": "FC-REV0152-TYPE-I-MONODROMY-S6",
+      "kind": "lemma",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "coefficients": "not applicable (permutation representation, not cohomology)",
+        "hypotheses": [
+          "type (i) geometric fibre, or a connected component of a reduced locally Noetherian balanced+(CE)+(N) base meeting the type-(i) locus",
+          "normality of U_alpha for irreducibility and for the FND-0152 identity"
+        ],
+        "objects": [
+          "|L|^{rs}",
+          "Ord(|L|^{rs})",
+          "H_alpha",
+          "Z_alpha"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "statement": "On a balanced type-(i) geometric fibre the geometric monodromy image of pi_1^{et}(|L|^{rs})->S_6 is the full symmetric group: the point-line incidence is an irreducible P^1-bundle (transitivity); after deleting the diagonal and the finite coincidence locus over non-normal points of the sextic, the ordered-pair incidence is irreducible and dominant of degree 30 (2-transitivity, hence primitivity); a general tangent line is a simple tangency at a smooth point of the dual curve (a transposition, using characteristic-zero reflexivity of the Gauss map and nonvanishing of the Wronskian of the complete g^2_6); Jordan's theorem then gives S_6, so the ordering torsor is connected. Over any connected component S_alpha of a reduced locally Noetherian balanced+(CE)+(N) base that contains at least one type-(i) geometric fibre, functoriality of pi_1^{et} along U_b -> U_alpha forces H_alpha=S_6, hence Z_alpha is connected; if U_alpha is additionally normal, integral and locally Noetherian then Z_alpha is irreducible, [S_6:H_alpha]=1, and the FND-0152 induction functor is the identity. This computes the monodromy image left open by FND-0148 and FND-0152, but only on components that meet the type-(i) locus. In type (ii) the image lies in a conjugate of the imprimitive wreath product S_2 wr S_3 of order 48 and is not S_6. The statement upgrades nothing to Tate type (FND-0053, FND-0152(ii)), does not apply to algebraic stacks with inertia (FND-0144), and does not determine H_alpha on a purely type-(ii) component."
+    }
+  ],
+  "id": "REV-0152",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "ca719feaeb8f3270182cd7a77a19089905a2bb93beea94a238b0d6ae967698a8",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0088",
+      "note": "Load-bearing for [V1]-[V5]: CLM-0088-1 (L=omega_C(-D) and degrees), CLM-0088-2 (no balanced hyperelliptic fibre), CLM-0088-3 (h^0(D)=2, h^0(L)=3, summands of E of degree at least two), CLM-0088-5 (nonempty reduced-support open and fibrewise S_6-torsor), CLM-0088-8 (AJ, U, Z over a reduced base). Dual-confirmed by REV-0139 and REV-0142. Used strictly inside those clauses; base-point-freeness of L is not imported from ATT-0088, which correctly leaves it open.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0139",
+      "note": "Confirmation attestation for ATT-0088. No recorded bound is exceeded by the use above.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0142",
+      "note": "Confirmation attestation for ATT-0088, including the explicit record that ATT-0088 does not assert base-point-freeness of L. The present lemma fills that gap rather than misquoting ATT-0088.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0086",
+      "note": "Used only for emptiness of B_4 / constancy h^0(L)=3 under balancedness (CLM-0086-1, CLM-0086-2). Independently supplied by ATT-0088/CLM-0088-3 and by FND-0139. Dual-confirmed by REV-0135 and REV-0138.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0135",
+      "note": "Confirmation attestation for ATT-0086; no recorded bound is exceeded.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0138",
+      "note": "Confirmation attestation for ATT-0086; no recorded bound is exceeded.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Used only via CLM-0066-3 (B_4 lies in the hyperelliptic non-primitive locus), as an input to the B_4-emptiness package already re-derived in ATT-0086/ATT-0088/FND-0139. Dual-confirmed by REV-0110 and REV-0116. Reduced-base Grauert scope is respected in Part (F).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Confirmation attestation for ATT-0066; no recorded bound is exceeded.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Confirmation attestation for ATT-0066 recording the reduced-base Grauert restriction. Part (F) is stated over a reduced base, so the restriction is met.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Listed as [V7]/CLM-0065-9 (balanced evaluation-failure equals the incidence O_C(Gamma) cong L). The attempt correctly records that this is motivational and is not used in the proofs of (A)-(F). Marked confirmed as unused/non-load-bearing.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Confirmation attestation for ATT-0065. Unused in the load-bearing argument, as for ATT-0065 itself.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Confirmation attestation for ATT-0065, including nonreduced scheme-structure caveats. Unused here; Part (F) is over a reduced base in any case.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Lemma 10.6 and its proof (corpus text around the degree line deg W_f|_C=4g+12-4f, and the citation [15, Theorem 2.1(2)] for O_{P(E^vee)}(1)|_C cong omega_C tensor gamma^* omega_{P^1}^vee) are exactly the (N) half of SRC-IN-1. The packet-convention minus sign in W_5=(O_X(2) tensor gamma^*O(-5))|_C is the one used in the degree computation, matching FND-0105. Used only in Part (E) to discharge (N), as declared.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0105",
+      "note": "Records that the weak form of (N) forces A trivial by the SRC-0004 degree comparison. The theorem takes the strong form of (N) as a hypothesis in (A)-(D) and (F), and imports it from SRC-0004/CE 1996 in (E). Consistent and not overclaimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0125",
+      "note": "Exact hyperelliptic splitting F=O(2)+O(7) independently records the same exclusion as ATT-0088/CLM-0088-2. Used as a parallel citation, not as a substitute for the balancedness criterion proved here.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0132",
+      "note": "Normality is retained as a hypothesis for the upgrade from connectedness of Z_alpha to irreducibility in Part (F), exactly as this finding demands.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0139",
+      "note": "B_4 empty under fibrewise balancedness, via FND-0125. Independently available from ATT-0088/CLM-0088-3. Used within scope.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0142",
+      "note": "Fibrewise h^0(D)=2, h^0(L)=3, h^1(L)=2 under (CE)+(BAL)+(N), and the explicit warning that this constancy is not equivalent to excluding every non-primitive pencil through a positive-genus intermediate curve. Part (E) realises that warning by an actual balanced genus-one composite rather than contradicting it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0148",
+      "note": "Component formula for a right S_6-torsor: connected components indexed by the monodromy-orbit set, and irreducibility after normality. Applied with H_alpha=S_6, so the left/right-coset nomenclature hazard of FND-0151 is vacuous. k algebraically closed makes H_arith=H_geom.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0150",
+      "note": "Prescribes the only legitimate discharge of (CE)+(N) for a concrete smooth degree-four cover: cite Casnati-Ekedahl 1996 Theorem 2.1 for the embedding and two-term resolution, and SRC-0004 Lemma 10.6 for the restriction, and do not infer balancedness from ATT-0100 (3.3) or (2.1). Part (E) follows this route exactly and proves (BAL) from Lemma 1(4).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0151",
+      "note": "Orbit set of left multiplication, right-coset indexing, stabilizer g^{-1}Hg. With H=S_6 the induction and component-count clauses collapse to a single connected (and, under normality, irreducible) torsor. Used correctly.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0152",
+      "note": "Induction Ind_{H_alpha}^{S_6} is the identity functor when H_alpha=S_6. Applied only under the additional normality/integrality hypotheses of Part (F), and without any Tate, stack, or integral-coefficient upgrade, matching the finding's does_not_assert list.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0103-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is the FND-0150 circularity attack on the existence clause (E), and it fails. Clause (E) asserts that an explicit bielliptic-composed cover is balanced. The same pattern that FND-0150 used to leave ATT-0100/CLM-0100-12 unresolved is: construct a smooth genus-six degree-four cover, then invoke a balancedness criterion that was derived only under (CE)+(N), without constructing or citing the Casnati-Ekedahl embedding, the two-term resolution, or the restriction in (N). Here the attack is that Lemma 1(4) (BAL iff the restriction H^0(Sym^2 E(-6))->H^0(L^{tensor 2}) is injective) is itself derived under (CE)+(N), so applying it to the constructed cover cannot produce (BAL) unless (CE)+(N) are independently supplied. The attack fails because the theorem does not hide this: (CE) and (N) are imported by the source-backed pair SRC-IN-1, which is exactly Casnati-Ekedahl 1996 Theorem 2.1 (relative-canonical embedding and two-term resolution for every finite flat Gorenstein cover of degree d>=3) plus SRC-0004 Lemma 10.6 / [15, Theorem 2.1(2)] (O(1)|_C cong omega_C tensor gamma^*O(2)). That is the discharge FND-0150 explicitly authorises. Balancedness is then proved from scratch by an iota-eigenspace computation and a pole/trace argument that never invokes ATT-0100 (2.1) or (3.3). The y_0-unramified hypothesis is used, and is necessary for the non-invariance of f=nu/mu. Secondary attacks that were run and also failed: (1) connectedness of Ord(|L|^{rs}) is written as equivalent to transitivity on six letters, which is false (A_6 is transitive while giving two components), but G=S_6 is independently established by 2-transitivity plus a simple-tangency transposition plus Jordan, so connectedness follows from the correct criterion G=S_6; (2) family monodromy in (F) cannot be read from a single special fibre \u2014 it can, because U_b = |L_b|^{rs} is a closed subscheme of U_alpha and the restricted torsor realises fibrewise monodromy as a subgroup of H_alpha; (3) stack-versus-coarse, integral-versus-rational, cohomology-versus-Borel-Moore, Poincare/Tate bookkeeping, Gysin/Kunneth shifts, spectral-sequence differentials, Aut-invariants versus coinvariants, semisimplification versus a Hodge isomorphism, predicted motives as theorems, silent Tate-to-tautological upgrades, and omitted stable pairs all miss, because (A)-(F) assert no map to M_{6,6}, no stack descent, no integral or coarse statement, and no Hodge, weight, purity or Tate conclusion. Confirming the lemma does not verify RED-0001 and does not compute H_alpha on a purely type-(ii) component.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero, C a smooth projective connected curve of genus 6 over k, and gamma: C -> P^1 a finite flat morphism of degree four, with gamma_*O_C = O_{P^1} + E^vee (E of rank three and degree nine), Casnati-Ekedahl embedding i: C -> X = P(E^vee), p: X -> P^1, p_*O_X(1) = E. Assume (CE) the ideal of i has the standard degree-four Casnati-Ekedahl resolution 0 -> O_X(-4) tensor p^*det F -> O_X(-2) tensor p^*F -> I_C -> 0 with F of rank two; (N) O_X(1)|_C is isomorphic to omega_C tensor gamma^*O_{P^1}(2); and (BAL) F is isomorphic to O_{P^1}(4) + O_{P^1}(5). Put D = gamma^*O_{P^1}(1) and L = W_5 tensor omega_C^{-1} = omega_C(-D), of degree six with h^0(L) = 3. THEN: (A) L is base-point-free, so phi_L: C -> P^2 is a finite morphism onto an irreducible nondegenerate plane curve X_L with deg(phi_L)*deg(X_L) = 6. (B) Exactly one of two cases holds. Case (i): deg(phi_L) = 1 and X_L is a plane sextic with normalization C. Case (ii): deg(phi_L) = 2 and X_L is a smooth plane cubic; writing Y = X_L and psi = phi_L: C -> Y, the curve Y is elliptic, psi is a bielliptic double cover with psi_*O_C = O_Y + M^{-1}, deg M = 5, omega_C = psi^*M, L = psi^*N with N = O_{X_L}(1) of degree three, E is isomorphic to O(2)+O(3)+O(4), and gamma = q o psi where q = phi_{|P|}: Y -> P^1 is the degree-two morphism attached to P = M tensor N^{-1} in Pic^2(Y); in particular gamma is non-primitive and factors through a curve of genus one. The remaining possibilities do not occur: deg(phi_L) is never 3 or 6, X_L is never a singular cubic, C is never hyperelliptic and never a smooth plane quintic, and L is never the square of a base-point-free degree-three pencil. (C) In case (i), let |L|^{rs} be the open subset of |L| = P^2 of divisors with six pairwise-distinct points and Ord(|L|^{rs}) -> |L|^{rs} the finite etale right S_6-torsor of orderings. Then Ord(|L|^{rs}) is connected and the geometric monodromy image of pi_1^{et}(|L|^{rs}) -> S_6 is the full symmetric group S_6. (D) In case (ii), the fibres of psi cut each divisor of |L|^{rs} into three blocks of size two, and this partition is monodromy-invariant; hence the monodromy image lies in the imprimitive wreath subgroup S_2 wr S_3 of order 48 and is not S_6. (E) Case (ii) is nonempty. Let Y be an elliptic curve over k, P in Pic^2(Y) with degree-two morphism q = phi_{|P|}: Y -> P^1, M in Pic^5(Y) such that the unique point y_0 with O_Y(y_0) isomorphic to M tensor P^{-2} is not a ramification point of q, and B in |M^{tensor 2}| reduced; let psi: C -> Y be the double cover branched along B. Then C is smooth connected of genus six, gamma = q o psi is finite flat of degree four, and (C,gamma) satisfies (BAL). Such data exist, and (CE) and (N) hold for every such (C,gamma) by the source-backed input SRC-IN-1. Hence the balanced locus contains tetragonal pencils factoring through a genus-one intermediate curve. (F) Let S be a reduced locally Noetherian k-scheme carrying a genus-six degree-four family satisfying (CE), (BAL) and (N) on every geometric fibre, AJ = P_S(pi_*L), U the reduced-support open of AJ, and Z = Ord(U) -> U the finite etale S_6-torsor of orderings of ATT-0088 (III). If S_alpha is a connected component of S over which some geometric fibre is of type (i), then the geometric monodromy image H_alpha of pi_1^{et}(U_alpha) -> S_6 equals S_6; consequently Z_alpha is connected, and if U_alpha is in addition normal, integral and locally Noetherian then Z_alpha is irreducible, the component index [S_6 : H_alpha] equals one, and the S_6-induction functor of FND-0152 is the identity. No Hodge, weight or Tate conclusion is asserted anywhere in (A)-(F).",
+  "verdict": "confirmed"
+}

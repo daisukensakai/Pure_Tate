@@ -1,0 +1,86 @@
+{
+  "adjudicated_statement": "Let k be an algebraically closed field of characteristic 0. Let Y/k be a smooth genus-one curve, let P\u2208Pic^2(Y), and let q=phi_|P|:Y\u2192P^1 be the associated degree-two morphism. For M\u2208Pic^5(Y) and a reduced divisor B\u2208|M^\u22972|, let psi:C\u2192Y be the double cover with psi_*O_C\u2245O_Y\u2295M^\u22121 and branch divisor B, and put gamma=q\u2218psi. Then C is smooth and connected of genus six, gamma is finite flat Gorenstein of degree four, and its Casnati\u2013Ekedahl bundles split as E\u2245O_P^1(2)\u2295O_P^1(3)\u2295O_P^1(4) and F\u2245O_P^1(4)\u2295O_P^1(5). In the standard relative-canonical convention, O_P(E^\u2228)(1)|_C\u2245omega_C\u2297gamma^*O_P^1(2), det F\u2245det E, and the ideal has the degree-four Casnati\u2013Ekedahl resolution 0\u2192O_X(\u22124)\u2297p^*det E\u2192O_X(\u22122)\u2297p^*F\u2192I_C\u21920. Thus a non-primitive tetragonal pencil factoring through a genus-one curve can lie in the balanced F-locus, so primitivity is not a property of that locus. The extra ATT-0103 condition that the unique y_0 with O_Y(y_0)\u2245M\u2297P^\u22122 be unramified for q is required only by that attempt's pole/trace proof and is not a hypothesis of this adjudicated statement. This establishes existence only for intermediate genus one; it does not address intermediate genera two or three, purely composed connected components of a balanced base, or the exact monodromy image inside S_2 wr S_3.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "The mandatory originating artifacts were checked at their contested passages. ATT-0103, CLM-0103-8 and Proposition 12 in \u00a77 assert that the constructed elliptic double covers have E\u2245O(2)\u2295O(3)\u2295O(4) and F\u2245O(4)\u2295O(5); its pole/trace proof assumes that the point y_0 defined by O_Y(y_0)\u2245M\u2297P^\u22122 is unramified for q. REV-0152 explicitly confirms CLM-0103-8 and explains that this assumption is used to show f=nu/mu is not invariant. The review also correctly requires an independent source for the Casnati\u2013Ekedahl embedding and normalization rather than an inference from ATT-0100. Public primary evidence strengthens and corrects the candidate: Casnati\u2013Del Centina 2002, Theorem 1.3 and Proposition 2.1, give the degree-four Casnati\u2013Ekedahl construction and show that a bielliptic genus-six tetragonal cover has scrollar invariants E=(2,3,4) and F=(4,5). Consequently the y_0-unramified condition is sufficient for ATT-0103's particular argument but is not necessary for the published splitting theorem. The candidate's attribution of (N) to SRC-0004 Lemma 10.6 also requires correction: that lemma uses the identity O(1)|_C\u2245omega_C\u2297gamma^*O(2) and cites Casnati\u2013Ekedahl 1996, Theorem 2.1(2), which is the proving source. There is no contradiction with the claims backlog. FND-0125 concerns hyperelliptic-composed covers with F\u2245O(2)\u2295O(7); FND-0142 already warns that cohomological constancy does not exclude all positive-genus factorizations; and FND-0150 is a dependency gap for a different genus-two attempt. The result answers only the remaining existence question associated with FND-0104 for a genus-one intermediate curve and does not refute FND-0104's hyperelliptic Clifford-equality statement. No existing corroborated finding states this genus-one existence and splitting result, so merger is inappropriate.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0154",
+  "id": "FAUD-0164",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "base_field": "algebraically closed of characteristic 0",
+    "case": {
+      "degree": 4,
+      "genus": 6
+    },
+    "hypotheses": [
+      "Y is a smooth genus-one curve.",
+      "P lies in Pic^2(Y), and q=phi_|P|:Y\u2192P^1 is the associated finite flat degree-two morphism.",
+      "M lies in Pic^5(Y).",
+      "B is a reduced divisor in |M^\u22972|.",
+      "psi:C\u2192Y is the double cover defined by O_Y\u2295M^\u22121 and a section with divisor B.",
+      "The Casnati\u2013Ekedahl bundles use the standard relative-canonical convention."
+    ],
+    "limitations": [
+      "The conclusion does not address factorization through curves of genus two or three.",
+      "It does not establish a connected balanced component consisting entirely of composed bielliptic covers.",
+      "It does not determine the exact monodromy image inside S_2 wr S_3."
+    ],
+    "objects": "Smooth connected genus-six double covers of elliptic curves, composed with degree-two maps from the elliptic curve to P^1; E is the rank-three Tschirnhausen bundle and F the rank-two Casnati\u2013Ekedahl relations bundle.",
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "1504.03756",
+      "arxiv_version": null,
+      "content_sha256": "ea56ab2f0cd83b282e066a4f295eb211cc5513f0fefba78da2b85a8bbc4da1a8",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "casnati-ekedahl-resolution-check",
+      "retrieved_at": "2026-08-18T06:25:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/pdf/1504.03756.pdf"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "f27d56e942d3e7f50b4eb43458d1c68883d4f1a6491d124769e1a808f43f2fb7",
+      "doi": "10.4171/JEMS/1543",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "relative-canonical-normalization-check",
+      "retrieved_at": "2026-08-18T06:25:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/pdf/2208.02357v2.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "e4ee9507758990049b714aa3a894160168b25d96e08fd98f033931d0bafd4968",
+      "doi": "10.1007/s102310100036",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "bielliptic-scrollar-invariants-check",
+      "reported_content_sha256": "452883d2d7b19241b4ad225df7c8f72777df1c8180fdc65657212bd27c6ca28d",
+      "retrieved_at": "2026-08-18T06:25:00Z",
+      "source_type": "journal",
+      "url": "https://doi.org/10.1007/s102310100036"
+    },
+    {
+      "arxiv_id": "2209.09715",
+      "arxiv_version": "v1",
+      "content_sha256": "2f7fa1202f53a1b4945d03f6b301a0788d7cbc1f082c944d2c1da0acd34b30a4",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "bielliptic-relations-bundle-cross-check",
+      "retrieved_at": "2026-08-18T06:25:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/pdf/2209.09715v1.pdf"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0154",
+  "verdict": "promote",
+  "verified_source_count": 4
+}

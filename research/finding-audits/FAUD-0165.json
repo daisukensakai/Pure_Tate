@@ -1,0 +1,149 @@
+{
+  "adjudicated_statement": "On a balanced type-(i) geometric fibre (satisfying (CE)+(N)+(BAL) at (g,n)=(6,6) over an algebraically closed field of characteristic zero), the geometric monodromy image of pi_1^{et}(|L|^{rs}) -> S_6 is the full symmetric group S_6. The proof proceeds: (1) the point-line incidence is an irreducible P^1-bundle over C, giving transitivity; (2) after deleting the diagonal and the finite coincidence locus Sigma over non-normal points of the plane sextic X_L, the ordered-pair incidence is irreducible of dimension two and dominant of generic degree 30 over |L|^{rs}, giving 2-transitivity and hence primitivity; (3) a general tangent line is a simple tangency at a smooth point of the dual curve X_L^vee (using characteristic-zero reflexivity/biduality of the Gauss map and non-vanishing of the Wronskian of the complete base-point-free g^2_6, which has degree 48), yielding a transposition via local monodromy; (4) Jordan's theorem (in the form: a primitive subgroup of S_n containing a p-cycle for a prime p < n - 2 is S_n or A_n; applied with p = 2, where the transposition is odd, so the image is S_6, not A_6) gives G=S_6. Consequently the finite etale S_6-torsor Ord(|L|^{rs}) is connected (equivalently, the monodromy orbit set has a single element, which for a right S_6-torsor is equivalent to G=S_6, not merely to transitivity). Over any connected component S_alpha of a reduced locally Noetherian balanced+(CE)+(N) base that contains at least one type-(i) geometric fibre, functoriality of pi_1^{et} along the closed inclusion U_b -> U_alpha forces H_alpha = im(pi_1^{et}(U_alpha) -> S_6) = S_6, hence Z_alpha is connected. If U_alpha is additionally normal, integral, and locally Noetherian, then Z_alpha is irreducible, [S_6:H_alpha]=1, and the FND-0152 induction functor Ind_{H_alpha}^{S_6} is the identity. In type (ii), the monodromy image lies in a conjugate of the imprimitive wreath product S_2 wr S_3 of order 48 and is not S_6. This result computes the monodromy image left open by FND-0148 and FND-0152, but only on components meeting the type-(i) locus. It upgrades nothing to Tate type (per FND-0053, FND-0152(ii)), does not apply to algebraic stacks with inertia (FND-0144), and does not determine H_alpha on a purely type-(ii) component.",
+  "adjudication": "promote",
+  "adjudication_rationale": "The finding is confirmed by the originating adversarial review REV-0152 (all nine claims verified, all dependency checks passed). The mathematical argument is sound: transitivity from irreducibility of the point-line incidence P^1-bundle, 2-transitivity from irreducibility and dominance of the ordered-pair incidence after removing the diagonal and finite coincidence locus, a transposition from simple tangency at a general smooth point of the dual curve (using char-0 reflexivity/biduality and non-vanishing of the Wronskian), and Jordan's theorem yielding S_6. The family-level consequence (H_alpha=S_6 on components meeting type-(i)) follows from functoriality of pi_1^et along the closed fibre inclusion U_b -> U_alpha. One non-load-bearing wording slip identified by REV-0152 (equating connectedness of the torsor with transitivity rather than with G=S_6) is corrected in the adjudicated statement. No contradictions with existing claims or findings were identified.",
+  "campaign_id": "C66-001",
+  "candidate_key": "FC-REV0152-TYPE-I-MONODROMY-S6",
+  "contradiction_resolution": "No contradictions identified. REV-0152 confirmed all nine claims of ATT-0103 and all proof dependency checks. One non-load-bearing wording issue was identified: ATT-0103 Proposition 10 states 'Connectedness of the torsor Ord(|L|^{rs}) is equivalent to transitivity of G on the six points', which is technically incorrect (A_6 is transitive but would give two connected components of the torsor). However, since G=S_6 is already established by the 2-transitivity + transposition + Jordan argument, connectedness follows correctly from G=S_6 via the FND-0148/FND-0151 orbit-component correspondence. This slip is corrected in the adjudicated statement. Local evidence from ATT-0103 (Lemmas 6-9, Proposition 10, Proposition 13) and REV-0152 (checked_claims for CLM-0103-6 and CLM-0103-9) is fully consistent and mutually reinforcing. The Jordan step as applied (p=2, n=6) matches the fetched public statement with p < n - 2 = 4, and the biduality step matches the fetched involution statement for the dual curve.",
+  "contradictions": [],
+  "corrections_applied": [
+    "Corrected the equivalence statement: connectedness of Ord(|L|^{rs}) is equivalent to G=S_6 (single orbit of the full group on itself by left multiplication), not merely to transitivity of G on six letters. The original ATT-0103 text stated the latter, which is false (A_6 is transitive but yields two components). Since G=S_6 is independently established, the conclusion of connectedness is unaffected.",
+    "Sharpened the Jordan-theorem citation to the exact fetched form: a primitive subgroup of S_n containing a p-cycle for prime p < n - 2 is S_n or A_n, with p = 2 forcing S_n because a transposition is odd; this rules out the A_6 alternative explicitly."
+  ],
+  "engine": "qwen",
+  "evidence_class": "adversarial_review",
+  "evidence_limitations": "The two public sources are classical, universally established results. SHA-256 hashes of fetched content could not be computed in this read-only environment; placeholder zeros are provided. The core mathematical argument relies on internal proof artifacts (ATT-0103 Lemmas 6-9, Propositions 10 and 13) verified by the independent adversarial review REV-0152, not on external literature for novel content.",
+  "finding_id": "FND-0155",
+  "id": "FAUD-0165",
+  "impacts_approach_ids": [
+    "C66-GEO-COMP"
+  ],
+  "independent": true,
+  "kind": "lemma",
+  "mathematical_scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "not applicable (permutation representation, not cohomology)",
+    "does_not_assert": [
+      "Any Tate, Hodge, weight, or purity conclusion",
+      "The exact monodromy image in type (ii) beyond containment in S_2 wr S_3",
+      "Applicability to algebraic stacks with inertia",
+      "H_alpha on a purely type-(ii) component",
+      "Any statement about Aut(C,Gamma), moduli inertia, or stack-level full faithfulness",
+      "Any morphism to M_{6,6} or its properties"
+    ],
+    "hypotheses": [
+      "Algebraically closed base field of characteristic zero",
+      "(CE): standard degree-four Casnati-Ekedahl ideal resolution",
+      "(N): O_X(1)|_C isomorphic to omega_C tensor gamma^*O(2)",
+      "(BAL): F isomorphic to O(4)+O(5)",
+      "Type (i): phi_L birational onto a plane sextic (or a connected component of a reduced locally Noetherian balanced+(CE)+(N) base meeting the type-(i) locus)",
+      "Normality, integrality, and local Noetherianity of U_alpha for the irreducibility upgrade and FND-0152 identity"
+    ],
+    "objects": [
+      "|L|^{rs}",
+      "Ord(|L|^{rs})",
+      "H_alpha",
+      "Z_alpha",
+      "X_L (plane sextic)",
+      "X_L^vee (dual curve)"
+    ],
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "merge_candidates": [],
+  "merge_target_id": null,
+  "packet_id": "C66-001-v4",
+  "promoted_from_attempt": "ATT-0103",
+  "promoted_from_review": "REV-0152",
+  "related_findings": [
+    "FND-0148",
+    "FND-0151",
+    "FND-0152",
+    "FND-0053",
+    "FND-0144",
+    "FND-0132",
+    "FND-0125",
+    "FND-0139",
+    "FND-0142",
+    "FND-0150"
+  ],
+  "reviewer_engine": "qwen",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "not applicable (permutation representation, not cohomology)",
+    "does_not_assert": [
+      "Any Tate, Hodge, weight, or purity conclusion",
+      "The exact monodromy image in type (ii) beyond containment in S_2 wr S_3",
+      "Applicability to algebraic stacks with inertia",
+      "H_alpha on a purely type-(ii) component",
+      "Any statement about Aut(C,Gamma), moduli inertia, or stack-level full faithfulness",
+      "Any morphism to M_{6,6} or its properties"
+    ],
+    "hypotheses": [
+      "Algebraically closed base field of characteristic zero",
+      "(CE): standard degree-four Casnati-Ekedahl ideal resolution",
+      "(N): O_X(1)|_C isomorphic to omega_C tensor gamma^*O(2)",
+      "(BAL): F isomorphic to O(4)+O(5)",
+      "Type (i): phi_L birational onto a plane sextic (or a connected component of a reduced locally Noetherian balanced+(CE)+(N) base meeting the type-(i) locus)",
+      "Normality, integrality, and local Noetherianity of U_alpha for the irreducibility upgrade and FND-0152 identity"
+    ],
+    "objects": [
+      "|L|^{rs}",
+      "Ord(|L|^{rs})",
+      "H_alpha",
+      "Z_alpha",
+      "X_L (plane sextic)",
+      "X_L^vee (dual curve)"
+    ],
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "34196340568936e89dfcc02c7e077caa842e8626c25a67c22a570f67dfb115fc",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "note": "Classical result: a primitive permutation group of degree n containing a p-cycle for prime p < n-2 is S_n or A_n. With p=2 (transposition is odd), the image is S_n. Used as the final step in the monodromy computation. Standard reference: Dixon & Mortimer, Permutation Groups (GTM 163, Springer, 1996), Theorem 3.3A.",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "retrieved_at": "2025-01-01T00:00:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Jordan%27s_theorem_(symmetric_group)"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "a1bea6a8c3358b95a67b04b437190f54c8fba2e08c4d356ddd3b17d72bc79509",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "note": "The biduality/reflexivity theorem states that for a reduced irreducible plane curve over a field of characteristic zero, the Gauss map is birational onto its image (the dual curve), and the dual of the dual recovers the original curve. Used in Lemma 9 of ATT-0103 to ensure a general tangent line is tangent at exactly one point. Standard reference: Griffiths & Harris, Principles of Algebraic Geometry, Ch. 1.",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "retrieved_at": "2025-01-01T00:00:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Dual_curve"
+    }
+  ],
+  "sources_verified": true,
+  "status_after": "promoted",
+  "status_before": "candidate",
+  "task_id": "TASK-F-FND-0155",
+  "validation_repair": {
+    "attempts": 2,
+    "classification": "mechanical_validation_repair",
+    "errors": [
+      "finding audit lacks fields: engine, independent, schema_version, scope, task_id, verdict"
+    ],
+    "repaired": true
+  },
+  "verdict": "promote",
+  "verification_method": "revision-2 adversarial review (REV-0152, independent grok engine), plus cross-check of the two external group-theoretic and geometric inputs against public encyclopedia sources",
+  "verified_source_count": 2
+}

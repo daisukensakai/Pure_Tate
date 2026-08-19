@@ -1,0 +1,86 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "context_revision": 2,
+  "created_on": "2026-08-18",
+  "excluded_engines": [
+    "grok"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "FC-REV0152-BALANCED-BIELLIPTIC-EXISTS",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-18",
+    "equivalence_group": "FC-REV0152-BALANCED-BIELLIPTIC-EXISTS",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0154",
+    "impacts_approach_ids": [
+      "C66-GEO-COMP"
+    ],
+    "kind": "lemma",
+    "reviewer_engines": [
+      "grok"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      },
+      "characteristic": 0,
+      "hypotheses": [
+        "(CE) and (N) supplied by Casnati-Ekedahl 1996 Theorem 2.1 and SRC-0004 Lemma 10.6",
+        "y_0 not a ramification point of q",
+        "B reduced in |M^{tensor 2}|"
+      ],
+      "objects": [
+        "bielliptic double cover of an elliptic curve",
+        "composed degree-four pencil",
+        "F=O(4)+O(5)"
+      ],
+      "subproblem_id": "C66-GEO-COMP"
+    },
+    "source_attempt_ids": [
+      "ATT-0103"
+    ],
+    "source_review_ids": [
+      "REV-0152"
+    ],
+    "statement": "A non-primitive degree-four pencil factoring through a smooth genus-one intermediate curve can have balanced Casnati-Ekedahl splitting F cong O(4)+O(5). For every elliptic Y, every P in Pic^2(Y), every M in Pic^5(Y) whose unique point y_0 with O(y_0) cong M tensor P^{-2} is not a ramification point of q=phi_{|P|}, and every reduced B in |M^{tensor 2}|, the double cover psi:C->Y branched along B is a smooth connected genus-six curve and gamma=q o psi is finite flat of degree four with E cong O(2)+O(3)+O(4) and F cong O(4)+O(5), once (CE) and (N) are imported by the FND-0150-sanctioned pair CE 1996 Theorem 2.1 and SRC-0004 Lemma 10.6. Such data exist. Consequently primitivity of gamma is not a property of the balanced locus, and the residual question of FND-0104 is answered affirmatively for intermediate genus one. The argument does not treat intermediate genus two or three, does not assert that a connected component of a balanced base can be purely of type (ii), and does not compute the exact monodromy image inside S_2 wr S_3.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0154",
+  "id": "TASK-F-FND-0154",
+  "input_packet": "proof/packets/generated/C66-001-v4.md",
+  "output": "research/finding-audits/FAUD-0164.json",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "ca719feaeb8f3270182cd7a77a19089905a2bb93beea94a238b0d6ae967698a8",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "codex",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}

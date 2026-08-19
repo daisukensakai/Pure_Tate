@@ -1,0 +1,131 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-18T23:54:06.719737+00:00",
+  "engine_pools": {
+    "prover": [
+      "claude"
+    ],
+    "research": [
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 1687284,
+      "artifact_sha256": "21274cdb22b460606837dc32a2a8a6f5ec2248d9a80e27af62421a71059f7366",
+      "completed_at": "2026-08-18T23:41:39.140432+00:00",
+      "engine": "grok",
+      "engine_pid": 60762,
+      "engine_process_group": 60762,
+      "last_activity_at": "2026-08-18T23:41:37.339369+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0167.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 60762,
+          "engine_process_group": 60762,
+          "started_at": "2026-08-18T23:28:47.553403+00:00",
+          "supervisor_pid": 60761,
+          "supervisor_process_group": 60761
+        }
+      ],
+      "started_at": "2026-08-18T23:28:47.497781+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 60761,
+      "task_id": "TASK-F-FND-0156"
+    },
+    {
+      "activity_bytes": 1865706,
+      "artifact_sha256": "cf768c811a1a23f861a1bd0d29d7c1e0bd0cd4030e712a50a228089d33cb4c84",
+      "completed_at": "2026-08-18T23:54:05.888312+00:00",
+      "engine": "grok",
+      "engine_pid": 69369,
+      "engine_process_group": 69369,
+      "last_activity_at": "2026-08-18T23:54:04.485678+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0168.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 69369,
+          "engine_process_group": 69369,
+          "started_at": "2026-08-18T23:41:43.733057+00:00",
+          "supervisor_pid": 69368,
+          "supervisor_process_group": 69368
+        }
+      ],
+      "started_at": "2026-08-18T23:41:43.666574+00:00",
+      "state": "completed",
+      "step": 2,
+      "supervisor_pid": 69368,
+      "task_id": "TASK-F-FND-0157"
+    }
+  ],
+  "executed_steps": 2,
+  "parent_pid": 60695,
+  "parent_process_group": 60691,
+  "pre_run_recoveries": [
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-18T23:28:44.208522+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "recovered output has no valid attempt id",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0062",
+      "trace_path": "research/paired-traces/TRACE-0062.json",
+      "turn_kind": "mathematics",
+      "validation_error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement"
+    }
+  ],
+  "requested_steps": 2,
+  "run_id": "RUN-C66-001-20260818T232844273627Z-60695",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-18T23:28:44.273627+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

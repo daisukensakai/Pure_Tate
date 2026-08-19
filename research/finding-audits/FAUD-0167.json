@@ -1,0 +1,80 @@
+{
+  "adjudicated_statement": "Let k be an algebraically closed field of characteristic zero, C a smooth projective geometrically connected curve of genus six, and gamma:C->P^1 a finite flat degree-four cover carrying the standard Casnati-Ekedahl ideal resolution (CE), with relations bundle F isomorphic to O_{P^1}(4)+O_{P^1}(5). Write D:=gamma^*O_{P^1}(1) and let Gamma be a reduced effective divisor of degree n=6. At (g,n)=(6,6) the rank table and minor-ideal package of the filtered evaluation map phi:H^0(W)->H^0(W|Gamma) are blind to the CE line-bundle convention, and therefore cannot disambiguate a statement that names only 'the canonical filtered relations bundle'. PACKET/CE CONVENTION (SRC-0004 Lemma 10.6, with the dual sign required by W:=O_{P(E^vee)}(2) tensor gamma^*F^vee and by the degree line of that lemma, not by the lemma's one-line 'set W_{f_i}=O(2) tensor gamma^*O(f_i)' which omits the minus): W_f=(O_X(2) tensor gamma^*O_{P^1}(-f))|_C for f=4,5, filtered as 0->W_4->W->W_5->0 with deg W_4=20 and deg W_5=16. Then deg W=36, h^1(W)=0, h^0(W)=26, restriction to Gamma has rank 12, N:=omega_C tensor W_5^vee(Gamma) has degree 10-16+6=0, both inequalities d_4-n=14>2g-2=10 and d_5-n=10=2g-2 hold, every geometric fibre of phi has rank 11 or 12, I_j(phi)=O for j<=11, and Fit_0(coker phi)=a_N^*I_e holds for this N. NAIVE READING: W':=gamma^*F with Harder-Narasimhan filtration 0->gamma^*O(5)->W'->gamma^*O(4)->0 (sub of degree 20, quotient of degree 16) produces exactly the same numerical list, with N' of degree 0 and the same Fitting identity for the corresponding a_{N'}. Among balanced degree-four covers the degree coincidence deg(gamma^*O(5))=deg W_4=20 and deg(gamma^*O(4))=deg W_5=16 holds if and only if g=6. The two bundles are not isomorphic in general, and the maps a_N, a_{N'} (hence the schemes V(Fit_0)) differ. Under the weak relative-canonical normalization (N), the packet quotient gives L:=W_5 tensor omega_C^{-1} isomorphic to omega_C(-D) of degree 6, and (CE)+(BAL)+(N) forces h^0(L)=3. The naive quotient gives L':=gamma^*O(4) tensor omega_C^{-1} isomorphic to O_C(4D-K) isomorphic to L tensor O_C(5D-2K), of the same degree 6, with h^0(L')=1+h^0(O_C(2K-4D)). Thus L' isomorphic to L if and only if 5D isomorphic to 2K; and h^0(L')=3 if and only if h^0(2K-4D)=2. The isomorphism 5D isomorphic to 2K implies h^0(L')=3 on balanced fibres (where h^0(D)=2), but the converse is strictly weaker. Neither 5D isomorphic to 2K nor h^0(2K-4D)=2 is supplied by (CE)+(BAL)+(N); the hyperelliptic composed case 5D isomorphic to 2K is excluded from the balanced locus. CONSEQUENCE: the clause h^0(L)=3, with L:=W_5 tensor omega^{-1} for the packet f=5 summand, is the convention-sensitive check. Any downstream statement invoking W_4 or W_5 must restate W_f=(O_X(2) tensor gamma^*O(-f))|_C rather than rely on the numbers 26->12, fibre rank 11 or 12, or I_j=O for j<=11 to pin the convention. This does not assert that h^0 of the naive L' fails to equal 3 on every balanced fibre, and it does not refute ATT-0104 under the packet convention.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "MANDATORY FIRST READS. ATT-0104 (theorem_statement, theorem_scope, argument_markdown steps 1-2, CLM-0104-1/2) and REV-0153 (checked_claims CLM-0104-1/2, strongest_attack, finding_candidates[0] key FC-C66-CE-CONVENTION-RANK-BLIND) were read in full before the packet and the findings backlog. The contested passage is the undefined referent 'the canonical filtered relations bundle' 0->W_4->W->W_5->0 in the ATT-0104 theorem_statement, together with L=W_5 tensor omega^{-1} and the rank table in clause (2). REV-0153 confirms ATT-0104: the strongest_attack tests the naive reading W=gamma^*F with HN filtration, finds that this wrong reading still satisfies clause (2) in full, and fails only in clause (1); the attack is not a refutation because the artifact is hash-bound to the packet CE convention, FND-0097, and CLM-0065-5. The observation is retained as a statement-hygiene finding, not as a refutation of ATT-0104. INDEPENDENT ARITHMETIC. Packet/CE: W=i^*(O_X(2) tensor p^*F^vee), W_f=(O_X(2) tensor gamma^*O(-f))|_C. SRC-0004 Lemma 10.6 (Canning-Larson arXiv:2208.02357v2, independently retrieved from ar5iv HTML, Section 10.3) defines W:=O_{P(E^vee)}(2) tensor gamma^*F^vee and computes deg(W_{f_i}|_C)=2(2g-2+8)-4f_i=4g+12-4f_i, hence at g=6, f=4,5 one has deg W_4=20, deg W_5=16, deg W=36. Both degrees exceed 2g-2=10, so h^1(W)=0 and h^0(W)=chi(W)=36+2(1-6)=26; restriction to a reduced degree-six Gamma has rank 12; N=omega tensor W_5^vee(Gamma) has degree 10-16+6=0; d_4-n=14>10 and d_5-n=10=2g-2, so fibre rank is 11 or 12, I_j=O for j<=11, and Fit_0(coker phi)=a_N^*I_e holds for this N. Naive: W'=gamma^*F with HN filtration 0->gamma^*O(5)->W'->gamma^*O(4)->0, sub degree 4*5=20, quotient degree 4*4=16. The same numerical list is obtained, with N' of degree 0 and the Fitting identity for the corresponding a_{N'}. The degree coincidence deg(gamma^*O(5))=deg W_4 and deg(gamma^*O(4))=deg W_5 is special to g=6: deg W_4=4g-4 and deg W_5=4g-8. PRIMARY-SOURCE SIGN SLIP, not a merge into the finding: Lemma 10.6's sentence 'set W_{f_i}=O(2) tensor gamma^*O(f_i)' omits the dual sign, while both the opening definition W=O(2) tensor gamma^*F^vee and the degree line use O(-f_i). The packet minus sign is the consistent convention; a literal reading of that one sentence would give entirely different degrees and is not the naive reading under audit. WORDING CORRECTION. The candidate asserts that h^0(L')=1+h^0(2K-4D) equals 3 only if 5D isomorphic to 2K. Independently: L'=O(4D-K)=L tensor O(5D-2K), so L' isomorphic to L iff 5D isomorphic to 2K; chi(L')=1 yields h^0(L')=1+h^0(2K-4D), hence h^0(L')=3 iff h^0(2K-4D)=2. The isomorphism implies the h^0 equality on balanced fibres (h^0(D)=2), but the converse is strictly weaker (2K-4D some g^1_4, not necessarily |D|). Neither 5D isomorphic to 2K nor h^0(2K-4D)=2 is supplied by (CE)+(BAL)+(N); the hyperelliptic composed case 5D isomorphic to 2K is excluded from the balanced locus by corroborated FND-0125. Fit_0=a_N^*I_e holds formally in each reading, but N and therefore V(Fit_0) differ when L is not isomorphic to L'. NO CLAIM-LEVEL CONTRADICTION: contradicts_claim_ids is empty; the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. Compatible with THM-0005 (c(6)=5, so n=6 needs residual CE geometry) and with C66-GEO-COMP. Complementary to, not a restatement of, corroborated FND-0097 (splitting versus HN filtration inside the packet convention) and FND-0105 (packet W_5 isomorphic to omega_C^2(-D) from (N) plus the Lemma 10.6 degree). Compatible with FND-0062, FND-0063, FND-0122, which assume the packet W. Merge target: none. Promote candidate to corroborated with the corrected statement; do not promote the original 'only if 5D isomorphic to 2K' wording.",
+  "engine": "grok",
+  "evidence_class": "reviewer_derived_arithmetic",
+  "finding_id": "FND-0156",
+  "id": "FAUD-0167",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "does_not_assert": [
+      "that h^0 of the naive L'=O_C(4D-K) fails to equal 3 on every balanced fibre",
+      "that ATT-0104 is false under the packet CE convention",
+      "any Hodge, weight, purity, Tate, or M_{6,6} conclusion"
+    ],
+    "genus_specificity": "Among balanced degree-four covers, deg(gamma^*O(5))=deg W_4=20 and deg(gamma^*O(4))=deg W_5=16 if and only if g=6. The fibre-rank {11,12} and I_j=O for j<=11 additionally use n=6 so that deg N=0.",
+    "hypotheses": [
+      "(CE) the standard degree-four Casnati-Ekedahl ideal resolution",
+      "(BAL) F isomorphic to O_{P^1}(4)+O_{P^1}(5)",
+      "Gamma a degree-six reduced divisor, as on Conf_6(C)",
+      "(N) is used only for the packet identification L isomorphic to omega_C(-D), not for the rank-table coincidence"
+    ],
+    "objects": [
+      "balanced CE relations bundle W",
+      "filtered evaluation phi",
+      "minor-ideal table",
+      "naive pullback gamma^*F"
+    ],
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "c21fd73890c9f00892d30b1fc02277da0ba33a3965e72072616fe807f1af4e0d",
+      "doi": "10.4171/JEMS/1543",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "d779ab4181d7844dacb769aaabc699477714709d6003c1fa541d28cf81168ec7",
+      "retrieved_at": "2026-08-18T23:35:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "c21fd73890c9f00892d30b1fc02277da0ba33a3965e72072616fe807f1af4e0d",
+      "doi": "10.4171/JEMS/1543",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "degree-serre-duality-lemma",
+      "reported_content_sha256": "d779ab4181d7844dacb769aaabc699477714709d6003c1fa541d28cf81168ec7",
+      "retrieved_at": "2026-08-18T23:35:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "7b1c904f3817b21d524d8fee4c57e626dbd0723a9f78357526e324c3d8c32dbf",
+      "doi": "10.4171/JEMS/1543",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "canning-larson-abstract-page",
+      "reported_content_sha256": "d779ab4181d7844dacb769aaabc699477714709d6003c1fa541d28cf81168ec7",
+      "retrieved_at": "2026-08-18T23:37:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/2208.02357"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0156",
+  "verdict": "promote",
+  "verified_source_count": 3
+}

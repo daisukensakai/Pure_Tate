@@ -1,0 +1,89 @@
+VALIDATION REPAIR RESUME — finish the rejected GEO-COMP artifact.
+
+Your previous turn for TASK-C66-M-003 / C66-GEO-COMP ended with
+stop_reason=end_turn, but the official stream did not contain a
+complete campaign attempt JSON. The harness parsed only the nested
+target dictionary and rejected the turn:
+
+agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement
+
+Spent/failed slot ATT-0102 is closed. Do NOT reopen or overwrite it.
+Official rejected stream: research/paired-traces/TRACE-0062.json
+Finish into the NEW append-only slot: ATT-0103.
+Same Claude session is resumed. Do not restart the mathematics.
+Do not say you will assemble later. Emit the complete JSON now.
+
+Token discipline:
+1. Prefer session memory and the draft below.
+2. At most a few Read/Grep/Glob calls if a required schema field
+   is still empty. Do not re-read the packet end-to-end.
+3. No Grok worker unless a single concrete lookup remains.
+4. Final message: exactly one complete JSON object.
+
+Hard contract:
+- Match proof/CAMPAIGN_ATTEMPT_TEMPLATE.json
+- No Markdown fences, no prose before or after the JSON
+- Copy these identity values exactly:
+- id: "ATT-0103"
+- engine: "claude"
+- task_id: "TASK-C66-M-003"
+- target_claim_id: "RED-0001"
+- packet_id: "C66-001-v4"
+- packet_path: "proof/packets/generated/C66-001-v4.md"
+- packet_sha256: "ca719feaeb8f3270182cd7a77a19089905a2bb93beea94a238b0d6ae967698a8"
+- campaign_id: "C66-001"
+- campaign_revision: 4
+- subproblem_id: "C66-GEO-COMP"
+- target: {"chow_codimension": 13, "compact_cohomology_degree": 16, "compact_tate_type": "Q(-8)", "dimension": 21, "g": 6, "n": 6, "open_bm_degree": 16, "open_bm_tate_type": "Q(8)", "open_bm_weight": -16, "ordinary_cohomology_degree": 26, "ordinary_tate_type": "Q(-13)", "ordinary_weight": 26, "poincare_twist": 21}
+- Include every missing field listed above. Empty lists are fine
+  for experiment_ids, experiment_uses, novelty_claims,
+  failed_approaches_addressed, methods_used, new_inputs,
+  source_claim_ids, and gap_markers when that is honest.
+- argument_markdown, theorem_statement, claims, and summary must
+  be nonempty. status must be a schema enum.
+
+Your previous truncated draft (finish and complete this; do not
+leave ellipses or 'let me assemble' notes):
+{
+  "schema_version": 3,
+  "id": "ATT-0102",
+  "task_id": "TASK-C66-M-003",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "subproblem_id": "C66-GEO-COMP",
+  "lane": "geometry",
+  "result_type": "lemma",
+  "target_claim_id": "RED-0001",
+  "context_revision": 2,
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "ca719feaeb8f3270182cd7a77a19089905a2bb93beea94a238b0d6ae967698a8",
+  "target": {"g": 6, "n": 6, "dimension": 21, "open_bm_degree": 16, "open_bm_tate_type": "Q(8)", "ordinary_cohomology_degree": 26, "ordinary_tate_type": "Q(-13)", "poincare_twist": 21, "chow_codimension": 13, "compact_cohomology_degree": 16, "compact_tate_type": "Q(-8)", "open_bm_weight": -16, "ordinary_weight": 26},
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero, C a smooth projective connected curve of genus 6 over k, and gamma: C -> P^1 a finite flat morphism of degree four, with gamma_*O_C = O_{P^1} + E^vee (E of rank three and degree nine), Casnati-Ekedahl embedding i: C -> X = P(E^vee), p: X -> P^1, p_*O_X(1) = E. Assume (CE) the ideal of i has the standard degree-four Casnati-Ekedahl resolution 0 -> O_X(-4) tensor p^*det F -> O_X(-2) tensor p^*F -> I_C -> 0 with F of rank two; (N) O_X(1)|_C is isomorphic to omega_C tensor gamma^*O_{P^1}(2); and (BAL) F is isomorphic to O_{P^1}(4) + O_{P^1}(5). Put D = gamma^*O_{P^1}(1) and L = W_5 tensor omega_C^{-1} = omega_C(-D), of degree six with h^0(L) = 3. THEN: (A) L is base-point-free, so phi_L: C -> P^2 is a finite morphism onto an irreducible nondegenerate plane curve X_L with deg(phi_L)*deg(X_L) = 6. (B) Exactly one of two cases holds. Case (i): deg(phi_L) = 1 and X_L is a plane sextic with normalization C. Case (ii): deg(phi_L) = 2 and X_L is a smooth plane cubic; writing Y = X_L and psi = phi_L: C -> Y, the curve Y is elliptic, psi is a bielliptic double cover with psi_*O_C = O_Y + M^{-1}, deg M = 5, omega_C = psi^*M, L = psi^*N with N = O_{X_L}(1) of degree three, E is isomorphic to O(2)+O(3)+O(4), and gamma = q o psi where q = phi_{|P|}: Y -> P^1 is the degree-two morphism attached to P = M tensor N^{-1} in Pic^2(Y); in particular gamma is non-primitive and factors through a curve of genus one. The remaining possibilities do not occur: deg(phi_L) is never 3 or 6, X_L is never a singular cubic, C is never hyperelliptic and never a smooth plane quintic, and L is never the square of a base-point-free degree-three pencil. (C) In case (i), let |L|^{rs} be the open subset of |L| = P^2 of divisors with six pairwise-distinct points and Ord(|L|^{rs}) -> |L|^{rs} the finite etale right S_6-torsor of orderings. Then Ord(|L|^{rs}) is connected and the geometric monodromy image of pi_1^{et}(|L|^{rs}) -> S_6 is the full symmetric group S_6. (D) In case (ii), the fibres of psi cut each divisor of |L|^{rs} into three blocks of size two, and this partition is monodromy-invariant; hence the monodromy image lies in the imprimitive wreath subgroup S_2 wr S_3 of order 48 and is not S_6. (E) Case (ii) is nonempty. Let Y be an elliptic curve over k, P in Pic^2(Y) with degree-two morphism q = phi_{|P|}: Y -> P^1, M in Pic^5(Y) such that the unique point y_0 with O_Y(y_0) isomorphic to M tensor P^{-2} is not a ramification point of q, and B in |M^{tensor 2}| reduced; let psi: C -> Y be the double cover branched along B. Then C is smooth connected of genus six, gamma = q o psi is finite flat of degree four, and (C,gamma) satisfies (BAL). Such data exist, and (CE) and (N) hold for every such (C,gamma) by the source-backed input SRC-IN-1. Hence the balanced locus contains tetragonal pencils factoring through a genus-one intermediate curve. (F) Let S be a reduced locally Noetherian k-scheme carrying a genus-six degree-four family satisfying (CE), (BAL) and (N) on every geometric fibre, AJ = P_S(pi_*L), U the reduced-support open of AJ, and Z = Ord(U) -> U the finite etale S_6-torsor of orderings of ATT-0088 (III). If S_alpha is a connected component of S over which some geometric fibre is of type (i), then the geometric monodromy image H_alpha of pi_1^{et}(U_alpha) -> S_6 equals S_6; consequently Z_alpha is connected, and if U_alpha is in addition normal, integral and locally Noetherian then Z_alpha is irreducible, the component index [S_6 : H_alpha] equals one, and the S_6-induction functor of FND-0152 is the identity. No Hodge, weight or Tate conclusion is asserted anywhere in (A)-(F).",
+  ...
+
+Let me now assemble the whole thing.
+
+Supplied files:
+- prompts/CAMPAIGN_MATHEMATICS.md
+- proof/packets/generated/C66-001-v4.md
+- proof/CAMPAIGN_ATTEMPT_TEMPLATE.json
+- proof/attempts/ATT-0065.json
+- proof/reviews/REV-0108.json
+- proof/reviews/REV-0109.json
+- proof/attempts/ATT-0066.json
+- proof/reviews/REV-0110.json
+- proof/reviews/REV-0116.json
+- proof/attempts/ATT-0088.json
+- proof/reviews/REV-0139.json
+- proof/reviews/REV-0142.json
+- proof/attempts/ATT-0086.json
+- proof/reviews/REV-0135.json
+- proof/reviews/REV-0138.json
+- proof/packets/generated/paired-working-context/WORKING-C66-GEO-COMP-22d91b649a55dd07.md
+- proof/packets/generated/paired-working-context/WORKING-EXT-C66-GEO-COMP-eb3f329e199827d1.md
+- proof/packets/generated/paired-working-context/WORKING-ARCHIVE-C66-GEO-COMP-85ec61137004613d.md
+- repo
+- CONTEXT-INDEX.md
+- TASK.json
+- TASK.json (output retargeted to ATT-0103)

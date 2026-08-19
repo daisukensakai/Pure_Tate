@@ -1,0 +1,162 @@
+{
+  "attempt_id": "ATT-0105",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0105-1",
+      "note": "Re-derived independently. SRC-0004 Lemma 10.6 gives deg(W_f|_C)=4g+12-4f, hence deg W_5=16 and deg L=6, so chi(L)=1. The weak form of (N) plus deg(O_X(1)|_C)=2g+6=18 forces the residual twist A to be trivial, so W_5\u2245omega_C^2(-D) and L\u2245omega_C(-D). Then h^0(D)\u22652 by injectivity of gamma^* on H^0(O(1)), Riemann-Roch reads h^0(L)=h^0(D)+1, and D is special, so Clifford gives h^0(D)\u22643 with equality only if C is hyperelliptic. A hyperelliptic genus-six degree-four cover factors as q\u2218h and has F\u2245O(2)\u2295O(7), contradicting (BAL). Thus every geometric fibre is nonhyperelliptic, h^0(D)=2, h^0(L)=3, h^1(L)=2, and the h^0=4 stratum is empty. Matches dual-confirmed CLM-0088-1/2/3 and CLM-0086-1/2. No exclusion of positive-genus non-primitive factorizations is used or needed.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0105-2",
+      "note": "Reduced S and constant h^0=3 give Grauert: pi_*L is locally free of rank three with base change. The closed Abel-Jacobi functor Hilb^6\u00d7_{Pic^6}S then agrees with P_S(pi_*L) over all of S, so AJ is a Zariski-locally trivial P^2-bundle; this is also the content of dual-confirmed CLM-0086-2 in the same fibre-product model. Fibrewise nonemptiness of the distinct-support open, density in each P^2-fibre, and that the nonreduced complement is closed of dimension exactly one, are CLM-0088-5, which does not assume L base-point-free: the fixed part of |L| has degree at most one by Clifford, and a two-jet count on the moving part produces a reduced member in characteristic zero. Openness in a P^2-bundle plus fibrewise nonemptiness gives U\u2192S smooth, surjective, and of pure relative dimension two; U is therefore not closed fibrewise.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0105-3",
+      "note": "On B=Conf_6(C/S) the universal divisor is six disjoint sections, so the ATT-0065 Fitting identity applies: Fit_0(coker phi)=a_N^*I_e scheme-theoretically, not merely on geometric points. T-points are six pairwise-disjoint sections with O(Gamma) relatively isomorphic to L, which is exactly Ord(U). Ordering six distinct points is a free finite etale right S_6-action of degree 720, so geometric-point deck stabilizers are trivial; this is the deck action of Z\u2192U, not Aut(C,Gamma) in M_{6,6}. Finite etale pullback of the S-smooth morphism U\u2192S gives Z\u2192S smooth, surjective, and of pure relative dimension two. B\u2192S is smooth of relative dimension six, so the closed Fitting immersion Z\u2192B is regular of pure codimension four by relative smoothness of source and target, not by determinantal expected-codimension numerology. If S is of finite type, flatness plus going-down and the dimension formula give domination and dim=dim(S_alpha)+2. FND-0075's coarse-moduli caveat does not apply: the base is a fixed scheme family C/S and no quotient by curve automorphisms is taken.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0105-4",
+      "note": "After choosing a geometric point of a connected U_alpha and a trivialization of the right S_6-torsor fibre, etale monodromy commutes with the right deck action and therefore acts on S_6 by left multiplication through a subgroup H_alpha. Connected components of the cover are the orbits H_alpha g. A finite etale cover of a normal scheme is normal, and a connected normal locally Noetherian scheme is irreducible, so these are exactly the irreducible components and there are [S_6:H_alpha] of them. Right multiplication by k fixes the component H_alpha g if and only if k lies in g^{-1}H_alpha g. Because k is algebraically closed, X_{k-bar}=X, so there is no arithmetic-versus-geometric monodromy distinction. Because S and U_alpha are schemes, stack inertia does not act on the ordered fibre. The argument assumes only that U_alpha itself is a connected normal locally Noetherian scheme; it does not require S to be normal, and it does not compute H_alpha.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-19",
+  "finding_candidates": [
+    {
+      "key": "FC-C66-ATT0105-TRIVIAL-P1-TARGET",
+      "kind": "scope_observation",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "objects": [
+          "ATT-0105 theorem scope",
+          "universal balanced tetragonal family"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "statement": "ATT-0105 repeats the ATT-0104 narrowing: gamma is a finite flat cover of the trivial bundle P^1_S, whereas the dual-confirmed source ATT-0088 proves the same geometric conclusions for an arbitrary P^1-bundle target. The restriction is sound but reduces applicability over the universal balanced tetragonal family, whose natural target is a P^1-bundle or PGL_2-quotient. Downstream C66-TATE-SUPPORT and C66-CEX-LOCAL work over that family should quote CLM-0088-8/CLM-0088-9, or record the scheme-to-stack descent, rather than this lemma.",
+      "supports_finding_id": "FND-0157"
+    },
+    {
+      "key": "FC-C66-ATT0105-MONODROMY-NORMALITY-ON-U",
+      "kind": "scope_observation",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "objects": [
+          "U_alpha",
+          "H_alpha",
+          "right cosets H_alpha g",
+          "component stabilizer g^{-1}H_alpha g"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "statement": "Evidence for the FND-0151 component-stabilizer package in the reduced-base C66-GEO-COMP interface. ATT-0105 indexes irreducible components of a right S_6-torsor by the orbit set H_alpha\\S_6 of left multiplication (right cosets H_alpha g) and computes the right-deck stabilizer of the component H_alpha g as g^{-1}H_alpha g, while retaining connectedness, normality, and local Noetherianity of U_alpha as the hypotheses that upgrade pi_0 to Irr. Those hypotheses are imposed on the incidence component, not on the curve-family base S; over a merely reduced S the formula may be vacuous on components of U lying over non-normal components of S, but it applies verbatim whenever a connected component of U is itself normal. The statement does not compute H_alpha and does not extend to algebraic stacks with inertia.",
+      "supports_finding_id": "FND-0151"
+    }
+  ],
+  "id": "REV-0154",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "268913bb66959a14fac8c9318343983bf9b8ae628714d1baaa46cf6bb8a874fc",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Exists; status claimed_complete. Load-bearing for the intrinsic Fitting identity Fit_0(coker phi)=a_N^*I_e and the canonical filtered quotient W_5 of degree 16 (CLM-0065-1,3,4,5,9). Its six-disjoint-sections hypothesis is met on Conf_6(C/S). Base scope (locally Noetherian, not necessarily reduced) is wider than needed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Reviews ATT-0065; verdict confirmed; pass 1; engine grok. No adverse structured check.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Reviews ATT-0065; verdict confirmed; pass 2; engine qwen. Dual confirmation of ATT-0065 as claimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Exists; status claimed_complete. Load-bearing for the range h^0(L) in {3,4} under (N), the closed Abel-Jacobi model Hilb^6\u00d7_{Pic^6}S, and the scheme-theoretic ordered comparison (CLM-0066-2,5,6). Its disclaimers (emptiness of B_4, fibrewise reduced-support nonemptiness, nonreduced bases) are not used as positive inputs; those holes are filled by ATT-0086 and ATT-0088. The 'configuration stack' wording of CLM-0066-6 restricts without change to the scheme Conf_6(C/S).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Reviews ATT-0066; verdict confirmed; pass 1; engine grok. No adverse structured check.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Reviews ATT-0066; verdict confirmed; pass 2; engine claude. Dual confirmation of ATT-0066 as claimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0086",
+      "note": "Exists; status claimed_complete. CLM-0086-1 excludes the balanced h^0=4 branch; CLM-0086-2 gives the Zariski-locally trivial P^2-bundle statement in the Abel-Jacobi fibre-product model this artifact actually uses. Both are over a reduced locally Noetherian base, matching the theorem. The h^0=4 exclusion is also subsumed by CLM-0088-3.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0135",
+      "note": "Reviews ATT-0086; verdict confirmed; pass 1; engine claude. No adverse structured check.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0138",
+      "note": "Reviews ATT-0086; verdict confirmed; pass 2; engine cursor-grok. Dual confirmation of ATT-0086 as claimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0088",
+      "note": "Exists; status claimed_complete; no gap markers. Supplies CLM-0088-1 through CLM-0088-9 as used: L\u2245omega(-D), hyperelliptic exclusion, h^0=3 and h^1=2, fibrewise reduced-support nonemptiness and discriminant dimension one, Fitting/rank table on Conf_6, relative smoothness of dimension two, finite-type component dimensions, and regular immersion of codimension four. Its target may be an arbitrary P^1-bundle and is therefore strictly wider than this artifact's P^1_S; its AJ is P_S(pi_*L) rather than the fibre-product model, identified after constancy of h^0.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0139",
+      "note": "Reviews ATT-0088; verdict confirmed; pass 1; engine codex. Codex is excluded only for the present review task and remains a valid prior confirmation of ATT-0088.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0142",
+      "note": "Reviews ATT-0088; verdict confirmed; pass 2; engine grok. Dual confirmation of ATT-0088 as claimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Load-bearing for the sign-sensitive convention W_f=(O_X(2)\u2297gamma^*O(-f))|_C and the degree formula deg(W_f|_C)=4g+12-4f (Lemma 10.6), which give deg W_4=20, deg W_5=16 and deg L=6. No new source bound is asserted.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0105-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Identity first: ATT-0105 packet_id C66-001-v4, packet_sha256 268913bb66959a14fac8c9318343983bf9b8ae628714d1baaa46cf6bb8a874fc, and packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7 match TASK.json field-for-field; the target dictionary and theorem_statement are verbatim. The listed cohomological axes are vacuous against this lemma: it makes no Borel-Moore, ordinary-cohomology, Poincare-duality, Tate-twist, Gysin, Kunneth, spectral-sequence, semisimplification, or motivic claim, upgrades nothing from pure Tate to algebraic generation, and explicitly disclaims M_{6,6} components, a forgetful map, and Tate type.\n\nStrongest attack: clause (4) over a merely reduced base, together with the scheme-theoretic identification Z=Ord(U). If 'connected normal component U_alpha of U' is read as an irreducible component that is closed but not open, or if normality of U is silently inferred from reducedness of S, then Irr=pi_0 can fail and the monodromy image can be ill-typed; separately, FND-0046 warns that a fibrewise Abel-Jacobi condition is not a Fitting equality, and FND-0144 / FND-0075 warn that stack inertia or passage to coarse moduli can destroy both the free S_6-action and the component count. A companion reading takes the 'canonical filtered CE equation bundle' as gamma^*F, whose HN quotient has the same degrees 20/16, so the rank table cannot pin the convention.\n\nThe attack fails. Clause (4) is conditioned on a connected normal locally Noetherian U_alpha, not on normality of S: a P^2-bundle is normal iff the base is, so over a non-normal component of S the clause may be vacuous, but whenever such a U_alpha exists the standard facts (finite etale over normal is normal; connected normal locally Noetherian is irreducible) identify connected components of the cover with irreducible components. After a choice of geometric point and ordering, etale monodromy acts by left multiplication through H_alpha, the orbits are the right cosets H_alpha g, and the right deck stabilizer of H_alpha g is g^{-1}H_alpha g. Because k is algebraically closed, X_{k-bar}=X and arithmetic versus geometric monodromy does not arise. Because C/S is a scheme family, Conf_6(C/S) and U are schemes: the S_6-action is the free right deck action on labeled distinct points, geometric-point stabilizers are trivial, and no Aut(C,Gamma) or stack inertia is asserted. The Fitting comparison is the dual-confirmed ATT-0065 identity on six disjoint sections, upgraded by ATT-0066/ATT-0088 to a functor-of-points equality Z=Ord(U), not a geometric-point coincidence. The naive-bundle reading is blocked by the theorem's own formula W_f=(O_X(2)\u2297gamma^*O(-f))|_C together with the (N)-dependent isomorphism L\u2245omega(-D) used in clause (1); the rank table is not used to name W_5.\n\nSecond attack: silent swap of AJ=Hilb^6\u00d7_{Pic^6}S against the P_S(pi_*L) model of CLM-0088-8. Fails because CLM-0086-2 proves the fibre-product is already a Zariski-locally trivial P^2-bundle once h^0=3 is constant, and Grauert on reduced S identifies the two functors. Third attack: regular immersion from determinantal expectation 6 versus actual codimension 4. Fails because regularity is deduced from S-smoothness of Z and of Conf_6, a height-four ideal with six generators notwithstanding. Confirming this lemma does not compute H_alpha, does not identify components or inertia in M_{6,6}, and does not touch RED-0001.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero and S a reduced locally Noetherian k-scheme. Let pi:C->S be a smooth proper family of geometrically connected genus-six curves, and let gamma:C->P^1_S be finite flat of degree four with the standard degree-four Casnati-Ekedahl resolution and fibrewise balanced relations bundle F_s\u2245O(4)\u2295O(5). Assume the weak CE normalization O_X(1)|_{C_s}\u2245omega_{C_s/P^1}\u2297gamma_s^*A_s on every geometric fibre. Let W_5 be the degree-sixteen quotient in the canonical filtered CE equation bundle, using W_f=(O_X(2)\u2297gamma^*O(-f))|_C, and put L=W_5\u2297omega_{C/S}^{-1}. Let AJ=Hilb^6(C/S)\u00d7_{Pic^6(C/S)}S be the Abel-Jacobi incidence over [L], let U\u2282AJ be its distinct-support open, let B=Conf_6(C/S), and let Z\u2282B be the intrinsic CE evaluation-failure scheme defined by Fit_0(coker(pi_*W->pi_*(W|_Gamma))) for the universal ordered divisor Gamma. Then: (1) no geometric fibre is hyperelliptic, L_s\u2245omega_{C_s}(-gamma_s^*O(1)), h^0(L_s)=3 and h^1(L_s)=2; in particular the h^0=4 stratum is empty. (2) AJ is a Zariski-locally trivial P^2-bundle over S. The open U is fibrewise nonempty and dense, is S-smooth and surjective of pure relative dimension two, and its complement in every geometric P^2-fibre is closed of dimension exactly one; consequently U is not closed fibrewise. (3) Scheme-theoretically, Z is the finite etale right S_6-torsor Ord(U)->U of orderings of the universal reduced divisor, of degree 720. The right S_6-action has trivial geometric-point stabilizers, Z->S is smooth and surjective of pure relative dimension two, and Z->B is a regular closed immersion of pure codimension four. If S is of finite type, every irreducible component of Z dominates an irreducible component S_alpha of S and has dimension dim(S_alpha)+2. (4) More precisely, for any connected normal component U_alpha of U, choose a geometric point and an ordering, and let H_alpha\u2282S_6 be the resulting monodromy image. The irreducible components of Z\u00d7_U U_alpha are indexed by the orbit set H_alpha\\S_6, represented by right cosets H_alpha g; their number is [S_6:H_alpha], and the stabilizer of the component H_alpha g under the right deck action is g^{-1}H_alpha g. This formula does not compute H_alpha. No assertion is made about irreducible components, dimensions, or inertia in M_{6,6}, about a representable forgetful morphism to M_{6,6}, or about Tate type.",
+  "verdict": "confirmed"
+}

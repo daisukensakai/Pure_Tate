@@ -1186,13 +1186,28 @@ def worker_dispatch_parent_policy(
     One worker identity may be continued for short follow-ups; re-reading
     sources a worker already covered is forbidden token waste.
     """
+    if max_workers <= 1:
+        identity = (
+            "That single worker may run up to %d conversational turns "
+            "(turn 1 = dispatch; turns 2–%d = continue_grok_worker). "
+            "A second worker identity is rejected. "
+            % (max_worker_turns, max_worker_turns)
+        )
+        noun = "worker"
+    else:
+        identity = (
+            "Each worker may run up to %d conversational turns "
+            "(turn 1 = dispatch; turns 2–%d = continue_grok_worker). "
+            "Those %d worker identities may run in parallel. "
+            "A further worker identity is rejected. "
+            % (max_worker_turns, max_worker_turns, max_workers)
+        )
+        noun = "workers"
     return (
         "Optional Grok helpers: you may dispatch at most %d read-only Grok "
-        "worker via the grok-workers MCP tools "
+        "%s via the grok-workers MCP tools "
         "(dispatch_grok_worker, continue_grok_worker, await_grok_worker, "
-        "list_grok_workers, worker_pool_stats). That single worker may run up "
-        "to %d conversational turns (turn 1 = dispatch; turns 2–%d = "
-        "continue_grok_worker). A second worker identity is rejected. Workers "
+        "list_grok_workers, worker_pool_stats). %sWorkers "
         "share this isolated workspace and cannot write files or run shell "
         "commands. Do not nest further workers inside workers.\n\n"
         "Worker-dispatch policy (you are the mastermind):\n"
@@ -1212,7 +1227,7 @@ def worker_dispatch_parent_policy(
         "- Workers are assistive only — you must still return exactly one "
         "final JSON artifact yourself and remain responsible for every "
         "load-bearing step."
-        % (max_workers, max_worker_turns, max_worker_turns)
+        % (max_workers, noun, identity)
     )
 
 
@@ -1730,12 +1745,16 @@ def serve_mcp() -> int:
     mcp = MCPServer(
         name=MCP_SERVER_NAME,
         instructions=(
-            "Hard-capped Grok worker pool. At most %d worker identity and %d "
-            "conversational turns on that identity (dispatch + continue). "
+            "Hard-capped Grok worker pool. At most %d worker %s and %d "
+            "conversational turns on each identity (dispatch + continue). "
             "Parents are masterminds; workers do targeted reading/extraction. "
             "Follow-ups must stay short (redo / more info / gap-fill / narrow "
             "sub-task) without re-dumping principal context."
-            % (pool.max_total, pool.max_worker_turns)
+            % (
+                pool.max_total,
+                "identity" if pool.max_total == 1 else "identities",
+                pool.max_worker_turns,
+            )
         ),
     )
 
@@ -1746,11 +1765,12 @@ def serve_mcp() -> int:
         wait: bool = False,
         timeout_seconds: Optional[float] = None,
     ) -> str:
-        """Dispatch the single read-only Grok worker (turn 1; hard-capped).
+        """Dispatch a read-only Grok worker (turn 1; pool-capped).
 
         Parent remains the mastermind. Give a narrow task with path/ID
         pointers — not a dump of packet/working context you already hold.
         Use continue_grok_worker for short follow-ups on the same worker.
+        Parallel identities are allowed up to the pool's max_total.
         """
         try:
             payload = pool.dispatch(

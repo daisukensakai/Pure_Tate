@@ -1,0 +1,94 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-18T23:15:32.764779+00:00",
+  "engine_pools": {
+    "prover": [
+      "codex"
+    ],
+    "research": [
+      "grok"
+    ],
+    "review": [
+      "claude",
+      "grok"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 1066429,
+      "artifact_sha256": "a26be6aa555ee3ee15e94d74b29683df809c0e1c45bedb13dbc959b592cebb7d",
+      "completed_at": "2026-08-18T23:15:31.914287+00:00",
+      "engine": "claude",
+      "engine_pid": 23661,
+      "engine_process_group": 23661,
+      "last_activity_at": "2026-08-18T23:15:30.900404+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 128000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/reviews/REV-0153.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 23661,
+          "engine_process_group": 23661,
+          "started_at": "2026-08-18T23:00:28.694155+00:00",
+          "supervisor_pid": 23660,
+          "supervisor_process_group": 23660
+        }
+      ],
+      "started_at": "2026-08-18T23:00:28.626588+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 23660,
+      "task_id": "TASK-V-ATT-0104-P1"
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 23595,
+  "parent_process_group": 23591,
+  "pre_run_recoveries": [
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-18T23:00:25.440430+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "recovered output has no valid attempt id",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0062",
+      "trace_path": "research/paired-traces/TRACE-0062.json",
+      "turn_kind": "mathematics",
+      "validation_error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement"
+    }
+  ],
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260818T230025505057Z-23595",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-18T23:00:25.505057+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}
