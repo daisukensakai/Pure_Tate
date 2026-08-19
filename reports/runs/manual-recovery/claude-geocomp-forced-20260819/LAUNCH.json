@@ -2,6 +2,8 @@
   "artifact_id": "ATT-0106",
   "campaign_id": "C66-001",
   "engine": "claude",
+  "error": "agent failed with exit 1: You've hit your session limit \u00b7 resets 9:10pm (Asia/Tokyo)",
+  "event_state": "failed",
   "exact_theorem": "Over a reduced locally Noetherian base carrying a balanced Casnati-Ekedahl genus-six degree-four family satisfying (CE), (BAL), and (N), determine the irreducible components, dimensions, deck and component stabilizers, and finite-cover behavior of the ordered evaluation-failure locus Z. In particular: compute the exact geometric monodromy image H_alpha of the finite etale S_6-ordering cover on every balanced component, including purely type-(ii) components if they exist; decide whether a connected component of the balanced base can consist entirely of type-(ii) fibres; give the resulting component count and component-stabilizer formula; and identify the relevant Aut / inertia groups for the ordered model. This lemma does not resolve the campaign Hodge/Tate group RED-0001.",
   "forced_prompt": "reports/runs/manual-recovery/claude-geocomp-forced-20260819/FORCED_GEO_COMP.md",
   "max_grok_workers": 2,
@@ -34,10 +36,12 @@
   "run_id": "RUN-C66-001-20260819T071855240839Z-98860",
   "run_ledger": "reports/runs/RUN-C66-001-20260819T071855240839Z-98860.json",
   "stamp": "20260819T070000Z",
-  "status": "running",
+  "status": "stopped",
+  "stop_reason": "engine_failure",
   "subproblem_id": "C66-GEO-COMP",
   "task_id": "TASK-C66-M-003",
   "timeout": 10800,
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/manual-recovery/claude-geocomp-forced-20260819/run_forced_geo_comp.py\", line 229, in main\n    artifact = run_task(\n  File \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/pure_tate/agents.py\", line 2667, in run_task\n    _raise_infrastructure_failure(\n  File \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/pure_tate/agents.py\", line 2568, in _raise_infrastructure_failure\n    raise error_type(detail, trace[\"id\"], trace[\"path\"])\npure_tate.paired.ObservableInfrastructureError: agent failed with exit 1: You've hit your session limit \u00b7 resets 9:10pm (Asia/Tokyo)\n",
   "vault": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/manual-recovery/claude-geocomp-forced-20260819",
   "working_context": {
     "archive": {
