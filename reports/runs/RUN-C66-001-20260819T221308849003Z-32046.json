@@ -1,5 +1,6 @@
 {
   "campaign_id": "C66-001",
+  "completed_at": "2026-08-19T23:00:34.972947+00:00",
   "engine_pools": {
     "prover": [
       "claude"
@@ -15,7 +16,22 @@
   },
   "events": [
     {
+      "activity_bytes": 2209201,
+      "completed_at": "2026-08-19T23:00:34.011454+00:00",
       "engine": "claude",
+      "error": "claude resume failed: exit=1 bytes=2209201",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
       "output": "proof/attempts/ATT-0108.json",
       "parent_trace": "TRACE-0068",
       "phase": "mathematics",
@@ -26,17 +42,35 @@
       },
       "resume_of": "ATT-0107",
       "resume_session": "fd85bfb3-3fa5-487b-8827-4089aee6ec6e",
+      "returncode": 1,
       "started_at": "2026-08-19T22:13:08.866899+00:00",
-      "state": "running",
+      "state": "failed",
       "step": 1,
-      "task_id": "TASK-C66-M-003"
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0069",
+      "trace_path": "research/paired-traces/TRACE-0069.json",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/manual-recovery/att0107-claude-geocomp-resume-20260820/run_resume.py\", line 369, in main\n    raise RuntimeError(\nRuntimeError: claude resume failed: exit=1 bytes=2209201\n"
     }
   ],
+  "executed_steps": 1,
   "parent_pid": 32046,
   "parent_process_group": 32043,
   "requested_steps": 1,
   "run_id": "RUN-C66-001-20260819T221308849003Z-32046",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
   "schema_version": 2,
   "started_at": "2026-08-19T22:13:08.849003+00:00",
-  "status": "running"
+  "status": "stopped",
+  "stop_reason": "engine_failure"
 }
