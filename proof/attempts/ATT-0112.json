@@ -1,0 +1,438 @@
+{
+  "argument_markdown": "## 0. Standing conventions, imported inputs, and what is NOT used\n\nThroughout `k` is algebraically closed of characteristic zero; all schemes and algebraic stacks are over `k`. \"Curve\" means smooth projective connected `k`-curve unless stated otherwise.\n\n### 0.1 Casnati-Ekedahl convention (restated explicitly, per FND-0156)\n\nFor a finite flat Gorenstein cover `gamma : C -> P^1` of degree four with `C` a genus-six curve:\n\n* `gamma_*O_C = O direct-sum E^vee` (trace splitting; `4` is invertible in `k`), `E` locally free of rank three. Euler characteristics give `1-6 = chi(O) + chi(E^vee) = 1 + (deg E^vee + 3)`, hence `deg E = 9`.\n* Relative duality gives `gamma_*omega_gamma = (gamma_*O_C)^vee = O direct-sum E`, so `E` sits inside `gamma_*omega_gamma` and adjunction yields `gamma^*E -> omega_gamma := omega_{C/P^1}`.\n* **(N), strong form.** That map is surjective and induces the relative-canonical embedding `i : C -> X = P(E^vee)`, `p : X -> P^1`, `p_*O_X(1) = E`, `i^*O_X(1) = omega_gamma = omega_C tensor gamma^*O_{P^1}(2)`. Degree check: `deg omega_{C/P^1} = (2g-2) + 4*2 = 18`, matching the SRC-0004 line `deg(O_{P(E^vee)}(1)|_C) = 2g-2+4*2 = 18`.\n* **(CE).** The ideal `I_C` has the two-term resolution `0 -> O_X(-4) tensor p^*det F -> O_X(-2) tensor p^*F -> I_C -> 0` with `F` locally free of rank two.\n* `W := i^*(O_X(2) tensor p^*F^vee)`, `W_f := (O_X(2) tensor gamma^*O_{P^1}(-f))|_C`, `D := gamma^*O_{P^1}(1)`, `L := W_5 tensor omega_C^{-1}`. SRC-0004 Lemma 10.6 gives `deg W_f|_C = 4g+12-4f`, i.e. `deg W_4 = 20`, `deg W_5 = 16`, `deg L = 6` at `g = 6`.\n* **Orientation.** `F` is the packet-orientation relations bundle of rank two and degree `+9`: `chi(Sym^2 E) = 4*9+6 = 42` and `chi(gamma_*R) = chi(R) = 36-6+1 = 31` with `R := omega_{C/P^1}^{tensor 2}` of degree `36`, forcing `chi(F) = 11`, `deg F = 9`, matching `deg(O(4)+O(5)) = 9`. The dual reading is excluded by these Euler characteristics (extended-context constraint on CE orientation).\n\n### 0.2 Imported source-backed inputs (cited, not reproved)\n\n* **(S1)** Casnati-Ekedahl 1996, Theorem 2.1, as recorded in the packet at **FND-0150**: every finite flat Gorenstein cover of degree `d >= 3` admits the relative-canonical embedding induced by `alpha^*E -> omega_alpha`, and for `d = 4` the two-term resolution (CE).\n* **(S2)** Canning-Larson arXiv:2208.02357v2, Lemma 10.6 and Section 10.2, as recorded at **FND-0150** and **FND-0157**: `O_{P(E^vee)}(1)|_C = omega_C tensor gamma^*omega_{P^1}^vee`, i.e. (N) in strong form; and the universal Casnati-Ekedahl bundles `(E,F)` exist over the Hurwitz stack.\n* **(S3)** **SRC-0004** Lemma 10.6: `deg(W_f|_C) = 2(2g-2+4*2) - 4f = 4g+12-4f`, and the direct-sum decomposition of the CE obstruction space.\n\nConsequence of (S1)+(S2): on `H` (defined in Section 1) the hypotheses **(CE)** and **(N)** are *not* extra assumptions; they hold at every point. Only **(BAL)** cuts out a proper locus.\n\n### 0.3 Imported adjudicated findings (cited, not reproved)\n\n* **FND-0159**: the fixed-target stack of finite degree-`d` covers of `P^1` by smooth connected genus-`g` curves is smooth of dimension `2d+2g-2` at every point, *independently of the ramification profile*; for `(d,g) = (4,6)` this is `18`. (Its normal-sheaf proof is reproduced and generalised in Lemma 1.2 so that the argument is self-contained and so that the target may be an arbitrary curve.)\n* **FND-0153**: on a balanced `(CE)+(N)+(BAL)` geometric fibre, `phi_L : C -> P^2` is finite onto an integral nondegenerate plane curve and exactly one of two mutually exclusive cases holds: **type (i)**, `deg phi_L = 1` onto a plane sextic; **type (ii)**, `deg phi_L = 2` onto a smooth plane cubic `Y`, in which case `psi := phi_L : C -> Y` is a bielliptic double cover and `gamma = q o psi` with `q : Y -> P^1` of degree two. Its base-point-freeness hypothesis for `L` is automatic under `(CE)+(N)+(BAL)` (FND-0130, FND-0134), and its `h^0(L) = 3` input is imported from ATT-0088/CLM-0088-1, CLM-0088-3, FND-0139, FND-0142.\n* **FND-0158(a)**: no degree-four cover `gamma : C -> P^1` that factors nontrivially through an intermediate smooth projective curve is simply branched.\n* **FND-0154**: balanced type-(ii) covers exist (explicit bielliptic-composed family with `E = O(2)+O(3)+O(4)` and `F = O(4)+O(5)`); in particular `H^bal` is nonempty.\n* **FND-0155**: on a balanced **type-(i)** geometric fibre the geometric monodromy image of `pi_1^et(|L|^{rs}) -> S_6` is all of `S_6`; and over any connected component `S_alpha` of a reduced locally Noetherian balanced+(CE)+(N) base *containing at least one type-(i) geometric fibre*, functoriality of `pi_1^et` along `U_b -> U_alpha` forces `H_alpha = S_6`, hence `Z_alpha` connected.\n* **FND-0151**: for a finite etale right `G`-torsor `Z -> U` over a connected base with monodromy image `H` acting by left multiplication, `pi_0(Z)` is the orbit set `H \\ G` of left multiplication (the set of right cosets `Hg`), the right deck action is transitive on it, and the stabiliser of the component indexed by `Hg` is `g^{-1}Hg`. Connectedness is equivalent to `H = G`, **not** to transitivity of `H` on six letters.\n* **FND-0152**: the induction identity `F(Z_alpha) = Ind_{H_alpha}^{S_6} F(Z_alpha^1)` and `F(Z_alpha)^{S_6} = F(U_alpha)` with `Q`-coefficients over a normal integral locally Noetherian scheme base; and its clause (ii): the identity upgrades nothing to Tate type.\n* **FND-0144**: the scheme-theoretic component/degree formula is not valid over an algebraic stack with inertia. Respected below: every torsor/monodromy statement in clause (E) is made over a **scheme**.\n* **FND-0107**, **FND-0157**: Abel-Jacobi model correctness and its comparison with `P_S(pi_*L)`; base-invisibility of a residual twist of `L`.\n\n### 0.4 Imported verified dependency artifacts\n\n* **ATT-0065** (C66-GEO-Z; dual-confirmed by **REV-0108**, **REV-0109**): `Fit_0(coker phi) = a_N^* I_e`, so the CE evaluation-failure scheme is exactly the Abel-Jacobi incidence `O_C(Gamma) = W_5 tensor omega^{-1}`, scheme-theoretically and after arbitrary base change on the balanced `(6,6)` locus (CLM-0065-4, CLM-0065-9); the *filtered* reduction `coker(phi) = coker(phi_5)` with **no** global splitting (CLM-0065-3, CLM-0065-5).\n* **ATT-0066** (C66-GEO-H0; dual-confirmed by **REV-0110**, **REV-0116**): the `h^0` stratification with `h^0(L_b)` in `{3,4}`, `B_4` closed and contained in the hyperelliptic non-primitive locus (CLM-0066-3); the correct global model is the **closed Abel-Jacobi incidence**, not `Proj(pi_*L)` (CLM-0066-5); and the ordered distinct-support model is a finite etale `S_6`-torsor at stack level (CLM-0066-6). The reducedness caveat for Grauert recorded by REV-0116 is honoured throughout.\n* **ATT-0088** (C66-COMP-RANK; dual-confirmed by **REV-0139**, **REV-0142**): CLM-0088-1 (`A` trivial, `W_5 = omega_C^2(-D)`, `L = omega_C(-D)`, `deg L = 6`), CLM-0088-2 (**no balanced geometric fibre is hyperelliptic**, under `(CE)+(BAL)` alone), CLM-0088-3 (`h^0(O_C(D)) = 2`, `h^0(L) = 3`, `h^1(L) = 2` with no jumping), CLM-0088-5 (`|L|` contains a reduced divisor; the ordered incidence is a finite etale `S_6`-torsor of degree `720` over the reduced-support open), CLM-0088-8 (over a **reduced** base, `pi_*L` locally free of rank three, `AJ = P_S(pi_*L)` a Zariski-locally trivial `P^2`-bundle, `U` `S`-smooth of pure relative dimension two and surjective, `Z` canonically the ordering torsor over `U`).\n* **ATT-0086** (C66-COMP-COMP; dual-confirmed by **REV-0135**, **REV-0138**): the jump stratum is empty, `B_4 = empty`, so `h^0(L) = 3` identically on the balanced locus and the full Abel-Jacobi incidence is a `P^2`-bundle over a reduced base (CLM-0086-1, CLM-0086-2).\n\n### 0.5 Routes deliberately not taken\n\n* No blocked route is used. `vcd-only-vanishing`, `undecorated-cgp-top-weight-graph-complex`, `point-count-without-degree-parity-separation`, `forgetful-map-renaming-local-system-unknown` play no role: this is a pure geometry lemma with no cohomological, weight, or point-counting content, and no finite computation is invoked.\n* **The branch-point-count route is explicitly avoided.** The working context records as a hard constraint that Riemann-Hurwitz total ramification degree `18` does *not* by itself give the branch-point count or a dimension, because collisions and higher ramification change the count. Accordingly, **every** dimension in this artifact is obtained either from deformation theory (normal sheaf, Lemma 1.2, which is insensitive to the ramification profile) or from quasi-finiteness of the discriminant morphism (Lemma 4.1, which uses only that `Br(gamma)` is a divisor of degree `18` *counted with multiplicity* and that it is non-reduced for composed covers). The numerical coincidences noted in Remark 3.4 are recorded as consistency checks only and are **not** proof steps.\n* Openness/density/irreducibility of the balanced stratum is **not** inferred from irreducibility of the classical Hurwitz space (extended-context constraint); openness is proved in Lemma 2.2 by semicontinuity, and irreducibility of `H^bal` is **not** claimed at all.\n* No global splitting `W = W_4 direct-sum W_5` is used (FND-0097); no exactness of `pi_*` is inferred from finiteness of `Gamma` (FND-0099); Grauert is used only over reduced bases (FND-0131); no relative linear system is identified with `Proj(pi_*L)` across jumps (FND-0047, FND-0107); reduction is never applied to only one side of the ordering torsor (FND-0087); no expected-versus-actual codimension is converted into an lci or Gysin statement (FND-0068); no monomorphism into `M_{6,6}` and no `Aut(C,Gamma)` statement is made (FND-0098, FND-0137).\n\n---\n\n## 1. The fixed-target tetragonal stack and its smoothness\n\n**Definition 1.1.** Let `H = H_{4,6}(P^1)` be the category fibred in groupoids over `Sch/k` whose `T`-objects are pairs `(pi : script-C -> T, gamma : script-C -> P^1_T)` with `pi` smooth and proper with geometrically connected genus-six fibres and `gamma` a `T`-morphism which is finite of degree four; morphisms are `T`-isomorphisms of `script-C` commuting with `gamma`.\n\nA morphism from a smooth connected projective curve to `P^1` is either constant or finite, and degree `4 > 0` excludes constancy; hence `H` is exactly the locus in the Kontsevich stack `Mbar_{6,0}(P^1,4)` of stable maps with smooth source. Smoothness of the source is an open condition on `Mbar_{6,0}(P^1,4)`, which is a Deligne-Mumford stack, proper and of finite type over `k`. Therefore:\n\n> **(1.1.a)** `H` is a Deligne-Mumford stack of finite type over `k`.\n\nAutomorphism groups are finite because `Aut(C,gamma)` embeds in `Aut(C)`, finite for `g = 6 >= 2`.\n\n**Lemma 1.2 (normal-sheaf unobstructedness; generalisation of FND-0159 to an arbitrary target curve).** Let `Y` be a curve of genus `h` and let `psi : C -> Y` be a finite morphism of degree `d` from a curve of genus `g`. Then:\n\n1. `d psi : T_C -> psi^*T_Y` is injective as a map of line bundles, and `N_psi := coker(d psi)` is a torsion coherent sheaf, supported on the ramification locus, of length `len(N_psi) = deg(psi^*T_Y) - deg(T_C) = d(2-2h) + 2g-2`.\n2. `H^1(C, N_psi) = 0`.\n3. The stack `Cov_d^g(Y)` of finite degree-`d` covers of the *fixed* `Y` by smooth connected genus-`g` curves is smooth over `k` of pure dimension `d(2-2h)+2g-2`.\n\n*Proof.* (1) In characteristic zero `psi` is separable, so `d psi` is nonzero; a nonzero map of line bundles on an integral scheme is injective, and the cokernel of an injection of line bundles on a curve is torsion, supported where `d psi` vanishes, i.e. on the ramification locus. Its length is the difference of degrees. (2) A coherent sheaf with zero-dimensional support on a Noetherian scheme has vanishing higher cohomology. (3) For a stable map `psi` with smooth source, the deformation and obstruction spaces of `psi` with **fixed target** are the hypercohomology groups `H^0` and `H^1` of the two-term complex `[T_C -> psi^*T_Y]` in degrees `-1, 0`. Since `d psi` is injective as a sheaf map by (1), this complex is quasi-isomorphic to `N_psi` in degree `0`. Hence the deformation space is `H^0(N_psi)`, of dimension `len(N_psi)` by (2) and torsionness, and the obstruction space `H^1(N_psi)` vanishes. Unobstructedness with constant tangent dimension gives smoothness of pure dimension `len(N_psi)`. As in Definition 1.1, a stable map from a smooth connected curve of positive degree to a curve is finite, so `Cov_d^g(Y)` is the smooth-source open of `Mbar_{g,0}(Y,d)`. `QED`\n\n**Corollary 1.3.** `H = Cov_4^6(P^1)` is smooth over `k` of pure dimension `4*(2-0)+2*6-2 = 8+10 = 18`. This is exactly FND-0159 at `(d,g) = (4,6)`, and it is *independent of the ramification profile*. Also `Cov_2^h(P^1)` is smooth of pure dimension `2*2+2h-2 = 2h+2`, and for a fixed curve `Y` of genus `h`, `Cov_2^6(Y)` is smooth of pure dimension `2(2-2h)+10 = 14-4h`; in particular `Cov_2^6(Y)` is empty unless `h <= 3`.\n\n---\n\n## 2. The relations bundle in families and openness of the balanced locus\n\n**Lemma 2.1 (`F` exists in families and commutes with base change).** Let `(script-C -> T, gamma)` be a `T`-object of `H`. Put `gamma_*O_{script-C} = O direct-sum script-E^vee` (trace splitting; `4` invertible), `script-X = P(script-E^vee)`, `p : script-X -> P^1_T`, `i : script-C -> script-X` the relative-canonical embedding of (S1)+(S2), and let\n\n`mu : Sym^2 script-E = p_*O_{script-X}(2) --> gamma_*(omega_{script-C/P^1_T}^{tensor 2}) = gamma_*(i^*O_{script-X}(2))`\n\nbe the restriction map. Then `mu` is a surjection of locally free sheaves of ranks `6` and `4` on `P^1_T`, and `script-F := ker(mu)` is locally free of rank two, of fibrewise degree `9`, and its formation commutes with arbitrary base change `T' -> T`.\n\n*Proof.* `Sym^2 script-E` is locally free of rank `6`; `gamma` is finite flat of degree `4` so `gamma_*` of a line bundle on `script-C` is locally free of rank `4` and commutes with base change. It suffices to prove that `mu` is surjective on every geometric fibre; then Nakayama gives surjectivity of `mu`, and the kernel of a surjection of locally free sheaves is locally free of rank `6-4 = 2` with base-change-compatible formation.\n\nOn a geometric fibre, use (CE). Twisting the resolution by `O_X(2)` gives `0 -> O_X(-2) tensor p^*det F -> p^*F -> I_C(2) -> 0`. For a `P^2`-bundle, `R^j p_* O_X = 0` for `j > 0` and `H^j(P^2, O(-2)) = 0` for all `j` (`H^2(P^2,O(m)) = 0` for `m >= -2`). Hence `p_*(O_X(-2) tensor p^*det F) = 0`, `R^1 p_*(O_X(-2) tensor p^*det F) = 0`, `R^2 p_*(O_X(-2) tensor p^*det F) = 0`, and `R^1 p_*(p^*F) = F tensor R^1p_*O_X = 0`. Therefore `p_*(I_C(2)) = p_*(p^*F) = F` and `R^1p_*(I_C(2)) = 0`. Applying `p_*` to `0 -> I_C(2) -> O_X(2) -> i_*(i^*O_X(2)) -> 0` and using `R^1p_*(I_C(2)) = 0` yields the exact sequence\n\n`0 -> F -> Sym^2 E -> gamma_*(omega_{C/P^1}^{tensor 2}) -> 0`,\n\nwhich is fibrewise surjectivity of `mu`, and identifies `ker(mu)` with the CE relations bundle `F` in the packet orientation. The degree is `9`: `chi(Sym^2 E) = deg Sym^2 E + rk = 4*9+6 = 42` (since `det Sym^2 E = (det E)^{tensor 4}` in rank three), and `chi(gamma_*R) = chi(R) = 36-6+1 = 31` with `deg R = 2*18 = 36`, so `chi(F) = 11` and `deg F = 11-2 = 9`. `QED`\n\n**Lemma 2.2 (`H^bal` is open).** The locus `H^bal` of points where `F` is isomorphic to `O_{P^1}(4) direct-sum O_{P^1}(5)` is an open substack of `H`. Consequently `H^bal` is smooth over `k` of pure dimension `18`; in particular it is reduced and normal, and every nonempty connected component of `H^bal` has dimension exactly `18`.\n\n*Proof.* Openness may be checked on a smooth atlas `T -> H`, where by Lemma 2.1 we have a rank-two `script-F` on `P^1_T` of fibrewise degree `9`. Write a geometric fibre as `script-F_t = O(a) direct-sum O(9-a)` with `a <= 4`. Then\n\n`h^0(script-F_t(-5)) = h^0(O(a-5)) + h^0(O(4-a)) = 0 + (5-a) = 5-a`,\n\nusing `a-5 <= -1`. So `h^0(script-F_t(-5)) = 1` exactly when `a = 4`, i.e. exactly on the balanced locus, and `h^0(script-F_t(-5)) >= 2` otherwise. Upper semicontinuity of `t -> h^0(script-F_t(-5))` for the proper flat morphism `P^1_T -> T` shows `{t : h^0(script-F_t(-5)) <= 1}` is open. (Here `O(-5)` means the pullback of `O_{P^1}(-5)` along `P^1_T -> P^1`, which exists because the target of `gamma` is literally `P^1_T`.) The remaining assertions follow from Corollary 1.3, since an open substack of a stack smooth of pure dimension `18` is smooth of pure dimension `18`, smooth implies reduced and normal, and each nonempty connected component of a stack of pure dimension `18` has dimension `18`. `QED`\n\n> **Remark 2.3.** Purity of dimension in Lemma 2.2 is the only property of `H^bal` used in Section 5. Irreducibility and the number of connected components of `H^bal` are neither needed nor claimed.\n\n---\n\n## 3. The composed locus and its dimension\n\n**Lemma 3.1 (shape of a nontrivial factorization).** Let `(C,gamma)` be a `k`-point of `H` and suppose `gamma = q' o psi'` with `psi' : C -> Y'` and `q' : Y' -> P^1` finite of degree `>= 2` onto a possibly singular integral curve `Y'`. Then, replacing `Y'` by its normalization `Y` (through which `psi'` factors because `C` is smooth), we obtain `gamma = q o psi` with `Y` a curve, `deg psi = deg q = 2`, and `h := g(Y)` in `{0,1,2,3}`.\n\n*Proof.* `deg q * deg psi = 4` with both factors `>= 2` forces `2 * 2`. Riemann-Hurwitz for `psi` gives `2*6-2 = 2(2h-2) + deg R_psi`, i.e. `deg R_psi = 14-4h >= 0`, so `h <= 3`. (Equivalently, `Cov_2^6(Y)` is empty for `h >= 4` by Corollary 1.3.) `QED`\n\n**Lemma 3.2 (dimension of the composed locus).** For each `h` in `{0,1,2,3}`, `H^{comp,h}` is a constructible subset of `|H|` and\n\n`dim H^{comp,h} <= (2h+2) + (14-4h) = 16-2h`.\n\nIn particular `dim H^{comp,0} <= 16`, `dim H^{comp,1} <= 14`, `dim H^{comp,2} <= 12`, `dim H^{comp,3} <= 10`, and `dim H^comp <= 16`.\n\n*Proof.* Fix `h`. Let `B_h := Cov_2^h(P^1)`, the smooth-source open of `Mbar_{h,0}(P^1,2)`; by Corollary 1.3 it is smooth of pure dimension `2h+2`, and it is a finite-type Deligne-Mumford stack. Let `script-Y -> B_h` be its universal source curve, a smooth proper family of genus-`h` curves equipped with `q : script-Y -> P^1_{B_h}` finite of degree two.\n\nLet `script-F_h` be the smooth-source open substack of the *relative* stable-map stack `Mbar_{6,0}(script-Y / B_h, 2)`, which is an algebraic stack of finite type over `B_h` (relative Kontsevich space of stable maps to a projective family; standard). By Definition 1.1's argument, its objects are pairs `(psi, q)` with `psi : C -> Y` finite of degree two, `C` a genus-six curve, `Y` a fibre of `script-Y`. Its geometric fibre over a point `(Y,q)` of `B_h` is `Cov_2^6(Y)`, which by Corollary 1.3 is smooth of pure dimension `14-4h`. Hence\n\n`dim script-F_h <= dim B_h + max fibre dim = (2h+2) + (14-4h) = 16-2h`.\n\nComposition defines a morphism `c_h : script-F_h -> H`, `(psi,q) -> q o psi`: the composite of finite morphisms of degree two is finite of degree four, and the source is a genus-six curve. By Lemma 3.1, the set of `k`-points of `H^{comp,h}` is exactly the image `c_h(script-F_h)(k)`.\n\n`c_h` is quasi-finite. Indeed, let `gamma = q o psi` be a `k`-point of `H`. Then `k(P^1) subset k(Y) subset k(C)` exhibits `k(Y)` as an intermediate field of the finite **separable** (characteristic zero) extension `k(C)/k(P^1)` of degree four. By the primitive element theorem the extension is simple, hence by Steinitz's theorem it has only finitely many intermediate fields; and `Y`, together with `psi` and `q`, is recovered from `k(Y)` as its smooth projective model. Automorphism groups on both sides are finite. So every fibre of `c_h` has finitely many `k`-points, hence dimension zero.\n\nBy Chevalley's theorem the image `c_h(script-F_h)` is constructible; and for a morphism with zero-dimensional fibres between finite-type stacks, each irreducible component of the source maps onto a constructible set of the same dimension as that component, so `dim c_h(script-F_h) <= dim script-F_h <= 16-2h`. `QED`\n\n**Remark 3.3.** Lemma 3.2 makes no genericity assumption on the branch data of `psi` or `q`; it bounds the *whole* composed locus, including the loci where `B` meets `Ram(q)` or contains a `sigma`-pair (the degenerations catalogued in FND-0158(b)).\n\n**Remark 3.4 (consistency checks only; NOT proof steps).** The bounds of Lemma 3.2 agree numerically with branch-point counts: a general type-(ii) cover has `10 + 4 = 14` branch points on `P^1` (FND-0158(b)), a hyperelliptic-composed cover corresponds to `2g+2 = 14` branch points of `h` plus `2` for `q` (giving `16`), and a simply branched degree-four cover has `18` branch points. Per the working-context constraint that total ramification degree does *not* determine the branch-point count or the dimension, these coincidences are recorded here **only** as arithmetic consistency checks; the proof of Lemma 3.2 uses deformation theory (Lemma 1.2) and quasi-finiteness of `c_h`, and nowhere infers a dimension from a branch-point count.\n\n---\n\n## 4. An independent bound via the discriminant morphism\n\nThis section gives a second, logically independent bound. It is redundant given Lemma 3.2 and is included so that the conclusion of Section 5 survives even if the parametrisation of Lemma 3.2 were challenged.\n\n**Lemma 4.1 (the branch morphism is quasi-finite).** For `(script-C, gamma)` over `T`, the discriminant of the rank-four `O_{P^1_T}`-algebra `gamma_*O_{script-C}` is a canonical global section `delta(gamma)` of `(det gamma_*O_{script-C})^{tensor -2}`, whose restriction to a geometric fibre lies in `(det(O direct-sum E^vee))^{tensor -2} = O_{P^1}(18)` and is nonzero (characteristic zero: `gamma` is generically etale). Its divisor is `Br(gamma) = sum_p (e_p-1) gamma(p)`, of degree `18`. This defines a morphism `br : H -> |O_{P^1}(18)| = P^18`, and `br` is quasi-finite.\n\n*Proof.* The discriminant of a finite locally free algebra is canonical and commutes with base change, so `delta` gives a `T`-point of `P(H^0(P^1,O(18)))` (a residual twist by a line bundle pulled back from `T` does not affect the induced morphism to projective space, since `delta` is fibrewise nonzero). In characteristic zero ramification is tame, so the multiplicity of `delta` at a point of `P^1` is `sum_{p over it} (e_p-1)`, and `deg Br(gamma) = 2g-2+2d = 18` by Riemann-Hurwitz. For quasi-finiteness, fix `D` in `P^18(k)` and put `S := supp(D)`, a finite set. Any `gamma` in `br^{-1}(D)(k)` restricts to a connected finite etale cover of degree four of `P^1 minus S`; by Grothendieck-Galois theory such covers correspond to continuous actions of `pi_1^et(P^1 minus S)` on a four-element set, and `pi_1^et(P^1 minus S)` is topologically finitely generated, so there are only finitely many such actions up to isomorphism. Since `C` is the smooth projective model of the etale cover and `gamma` its induced map, `br^{-1}(D)` has finitely many `k`-points, hence dimension zero. `QED`\n\n**Lemma 4.2.** Let `Delta_18` be the locus of non-reduced divisors in `P^18 = |O_{P^1}(18)|`. Then `Delta_18` is closed and irreducible of dimension `17`, and `H^comp` is contained in the closed substack `br^{-1}(Delta_18)`, which has dimension at most `17`.\n\n*Proof.* `Delta_18` is the image of the proper morphism `P^1 x |O_{P^1}(16)| -> |O_{P^1}(18)|`, `(p, D') -> 2p+D'`, whose source is irreducible of dimension `1+16 = 17`; hence `Delta_18` is closed irreducible of dimension at most `17`, and exactly `17` since the map is generically finite. By definition `gamma` is simply branched (in the sense of FND-0158) exactly when every geometric fibre has at most one ramification point, of index two, i.e. exactly when `Br(gamma)` is reduced, i.e. `br(gamma)` is not in `Delta_18`. FND-0158(a) says a nontrivially factoring `gamma` is never simply branched, so `H^comp` is contained in `br^{-1}(Delta_18)`. Since `br` is quasi-finite (Lemma 4.1), `dim br^{-1}(Delta_18) <= dim Delta_18 = 17`. `QED`\n\n---\n\n## 5. Proof of the Theorem\n\n**(A)** is (1.1.a), Corollary 1.3 and Lemma 2.2.\n\n**(B)** is Lemma 3.1, Lemma 3.2, Lemma 4.1 and Lemma 4.2.\n\n**(C).** First, `H^bal` and `H^{comp,0}` are disjoint. A point of `H^{comp,0}` has `gamma = q o psi` with `psi : C -> P^1` of degree two, so `C` is hyperelliptic; by **ATT-0088/CLM-0088-2** (dual-confirmed by REV-0139 and REV-0142) no balanced geometric fibre is hyperelliptic. (Independently, FND-0125 computes `F = O(2) direct-sum O(7)` for such covers, and FND-0142 records the same exclusion.) Second, `H^ii` is contained in `H^{comp,1}`: a type-(ii) point has, by **FND-0153**, `gamma = q o psi` up to an automorphism of `P^1`, with `psi : C -> Y` a bielliptic double cover of the smooth plane cubic `Y` (a genus-one curve) and `q : Y -> P^1` of degree two; the hypotheses of FND-0153 hold at every point of `H^bal` because `(CE)` and `(N)` hold everywhere on `H` by (S1)+(S2), `(BAL)` holds by definition of `H^bal`, `h^0(L) = 3` holds by ATT-0088/CLM-0088-3 together with ATT-0086/CLM-0086-1, CLM-0086-2 (`B_4 = empty`) and FND-0139, FND-0142, and base-point-freeness of `L` is automatic by FND-0130 and FND-0134 as recorded inside FND-0153 itself. Hence\n\n`H^bal intersect H^comp = H^bal intersect (H^{comp,1} union H^{comp,2} union H^{comp,3})`,\n\nof dimension at most `max(14,12,10) = 14` by Lemma 3.2, and `H^ii` is contained in this set. Since `dim H^bal = 18` by Lemma 2.2, the codimension is at least `18-14 = 4`.\n\n**(D).** Let `H_alpha` be a nonempty connected component of `H^bal`. By Lemma 2.2, `dim H_alpha = 18`. Suppose every point of `H_alpha` were of type (ii), i.e. `H_alpha` is contained in `H^ii`. By (C), `H_alpha` is then contained in a set of dimension at most `14`, so `18 = dim H_alpha <= 14`, a contradiction. Hence `H_alpha` contains a type-(i) point. Next, `H^ii` is contained in a constructible set of dimension at most `14`, so its closure `Z-bar` in `H^bal` is closed of dimension at most `14`; the open substack `H^bal minus Z-bar` is contained in `H^i`, and it is dense because `H^bal` has pure dimension `18` while `Z-bar` has dimension at most `14`, so no nonempty open of `H^bal` is contained in `Z-bar`. Nonemptiness of `H^bal` is FND-0154, whence `H^i` is nonempty (this is the non-emptiness of balanced type (i), which FND-0153 explicitly did not assert). Finally, for `Hbar^bal = [H^bal/PGL_2]`: the type of a point depends only on `L = omega_C(-D)` with `D = gamma^*O_{P^1}(1)`, and precomposing `gamma` with an automorphism of the target replaces `D` by a linearly equivalent divisor in the same pencil, so `O_C(D)`, `L`, and hence the type, are `PGL_2`-invariant; `PGL_2` acts with finite stabilisers (they are subgroups of `Aut(C,Gamma)`-type finite groups, since a nontrivial element fixing `gamma` up to the action would give an infinite subgroup of the finite group `Aut(C)` acting faithfully), so `dim Hbar^bal = 18-3 = 15`, matching the packet's pinned computation `dim(Hurwitz) = 18-3 = 15`; because `PGL_2` is connected it acts trivially on `pi_0(H^bal)`, so `pi_0(Hbar^bal) = pi_0(H^bal)`, and the composed locus descends to a set of dimension at most `14-3 = 11`, again of codimension at least four. The argument of the previous paragraph applies verbatim.\n\n(If Lemma 3.2 were set aside, Lemma 4.2 alone still gives `dim H^ii <= 17 < 18` and the contradiction in (D) still holds; only the quantitative codimension-4 and the `dimension >= 15` criterion of (E) would be lost.)\n\n**(E).** Let `V -> H^bal` be a smooth surjective morphism from a `k`-scheme `V` locally of finite type, and let `V_j` be a connected component. Then `V_j -> Spec k` is smooth (composite of smooth morphisms), so `V_j` is a smooth, hence normal, connected locally Noetherian scheme, hence integral; in particular `V_j` is **reduced**, so Grauert applies and FND-0131 is respected. The morphism `V_j -> H^bal` is smooth, hence open, so its image is a nonempty open substack of `H^bal`, of dimension `18 > 14`; by (C) it is therefore not contained in `H^ii`, i.e. the family over `V_j` has a type-(i) geometric fibre. For a general reduced locally Noetherian `S` with target `P^1_S`, the classifying morphism `S -> H^bal` exists, and by (C) an image of dimension at least `15 > 14` cannot lie inside `H^ii`; this is the stated sufficient criterion.\n\nNow fix such a connected component `S_beta` (respectively `V_j`). By **ATT-0088/CLM-0088-8** (base reduced) `pi_*L` is locally free of rank three, `AJ = P_{S_beta}(pi_*L)` is a Zariski-locally trivial `P^2`-bundle, and `U_beta`, its distinct-support open, is `S_beta`-smooth of pure relative dimension two and surjective onto `S_beta`; `Z_beta = Ord(U_beta)` is the finite etale right `S_6`-torsor of orderings, of degree `720`, and by **ATT-0065/CLM-0065-9** together with **ATT-0066/CLM-0066-5, CLM-0066-6** it is canonically the CE evaluation-failure model. (`L` is well defined only up to a twist by a line bundle pulled back from the base; `P_{S_beta}(pi_*L)` and the Abel-Jacobi section are unchanged by such a twist - ATT-0088 and FND-0157.) `U_beta` is connected: `U_beta -> S_beta` is open surjective with connected fibres (nonempty opens of a `P^2` over a field), so a decomposition of `U_beta` into two nonempty opens would descend to a disconnection of `S_beta`.\n\nSince `S_beta` contains a type-(i) geometric fibre, **FND-0155** applies verbatim (reduced locally Noetherian balanced+(CE)+(N) base, connected component containing a type-(i) fibre) and gives `H_beta = im(pi_1^et(U_beta) -> S_6) = S_6`. By **FND-0151** the set `pi_0(Z_beta)` is the orbit set `H_beta \\ S_6` of left multiplication (the right cosets `H_beta g`), with the stabiliser of the component indexed by `H_beta g` equal to `g^{-1} H_beta g`; with `H_beta = S_6` this set is a singleton, so `Z_beta` is connected of degree `720` over `U_beta`, with stabiliser `S_6`. (Connectedness is deduced from `H_beta = S_6`, **not** from transitivity of the monodromy on six letters - the working-context constraint on this point is respected.) On a smooth atlas, `U_beta` is moreover an open of a `P^2`-bundle over the smooth integral `V_j`, hence smooth over `k`, hence normal, and connected, hence integral and locally Noetherian; so connected components of `Z_beta` coincide with its irreducible components (FND-0148, FND-0152 hypotheses) and `Z_beta` is irreducible. Finally, with `H_beta = S_6` the induction functor `Ind_{H_beta}^{S_6}` of **FND-0152** is the identity, so for every additive `S_6`-equivariant functor `F` to `Q`-vector spaces or mixed `Q`-Hodge structures, `F(Z_beta) = F(Z_beta^1)` and `F(Z_beta)^{S_6} = F(U_beta)`. `QED`\n\n---\n\n## 6. What this does and does not deliver\n\n**Delivered.** The C66-GEO-COMP frontier obligation \"whether a connected component of a balanced+(CE)+(N) base can consist entirely of type-(ii) fibres, equivalently whether the type-(i) hypothesis in the family monodromy statement is automatic\" is answered for the universal balanced family and every smooth atlas of it: **no such component exists, and the hypothesis is automatic there.** Quantitatively, the whole non-primitive locus inside the balanced locus has codimension at least four (`<= 14` inside `18`, or `<= 11` inside `15` after the `PGL_2`-quotient), and a checkable sufficient criterion for an arbitrary reduced base is that each connected component have classifying image of dimension at least `15`. As by-products: balanced type-(i) covers exist and are dense in every connected component of the balanced locus (non-emptiness of type (i) was explicitly left open by FND-0153); and every balanced non-primitive cover, of any intermediate genus, lies in a locus of dimension at most `14`.\n\n**Explicitly not delivered.**\n\n1. *No Tate content.* Per FND-0053 and FND-0152(ii), `H_beta = S_6` and the identity induction functor upgrade nothing to Tate type. The `H_alpha`-object `F(Z_alpha^1)` remains a separate geometric and Hodge input.\n2. *No stack-inertia component formula.* FND-0144 stands: clause (E) is stated over schemes only (a smooth atlas, or a reduced locally Noetherian `S`). Nothing is asserted about `[S_6 : H]` irreducible components or stacky degrees over an algebraic stack with inertia.\n3. *Arbitrary bases are not covered.* A base can of course be a single type-(ii) point; the theorem is about the universal balanced family and about bases whose components are not swallowed by the `<= 14`-dimensional type-(ii) locus. This limitation is intrinsic, not a gap.\n4. *Nonreduced bases* are excluded (FND-0131); `H^bal` is smooth hence reduced, which is why Grauert is legitimate here.\n5. *Structure of `H^bal`.* The number of connected components, irreducibility, and whether the type-(ii) locus is closed are neither used nor claimed; in particular no irreducibility is inferred from irreducibility of the classical Hurwitz space.\n6. *Existence* of balanced non-primitive covers with intermediate genus two or three remains open (FND-0153's unanalysed case); only their dimension is bounded (`<= 12` and `<= 10`).\n7. *No `M_{6,6}` statement* of any kind: no image, closure, purity, codimension, Gysin map, monomorphism, or `Aut(C,Gamma)` claim (FND-0098, FND-0137, FND-0052).\n8. *Cited, not reproved*: (S1) Casnati-Ekedahl Theorem 2.1 and (S2) Canning-Larson Lemma 10.6 / Section 10.2 (both recorded at FND-0150, FND-0157); FND-0153, FND-0155, FND-0158(a), FND-0154, FND-0152, FND-0151; and the dependency claims CLM-0065-9, CLM-0066-5/6, CLM-0088-2/3/8, CLM-0086-1/2. FND-0159's proof is reproduced and generalised (Lemma 1.2). Lemma 4.1's finiteness step uses Grothendieck-Galois theory for `pi_1^et(P^1 minus S)`; Section 4 is redundant given Section 3 and the theorem survives without it.\n9. *No finite computation* is used anywhere; Remark 3.4's branch-point arithmetic is a consistency check explicitly excluded from the proof, in accordance with the working-context constraint that total ramification degree does not determine branch-point counts or dimensions.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0112-1",
+      "statement": "For a fixed curve Y of genus h and a finite degree-d cover psi : C -> Y with C a curve of genus g, d(psi) is injective with torsion cokernel N_psi of length d(2-2h)+2g-2 and H^1(N_psi)=0; hence the stack Cov_d^g(Y) of such covers with Y fixed is smooth of pure dimension d(2-2h)+2g-2. In particular H = Cov_4^6(P^1) is a finite-type Deligne-Mumford stack smooth of pure dimension 18, Cov_2^h(P^1) is smooth of pure dimension 2h+2, and Cov_2^6(Y) is smooth of pure dimension 14-4h and empty for h >= 4.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0112-2",
+      "statement": "On H the Casnati-Ekedahl relations bundle in the packet orientation is F = ker(Sym^2 E -> gamma_*(omega_{C/P^1}^{tensor 2})) = p_*(I_C(2)), locally free of rank two and degree +9, with base-change-compatible formation; consequently H^bal = {F isomorphic to O(4)+O(5)} is OPEN in H, hence smooth over k of pure dimension 18, reduced and normal, and every nonempty connected component of H^bal has dimension exactly 18.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0112-3",
+      "statement": "Every nontrivial factorization of gamma in H has both steps of degree two and intermediate genus h in {0,1,2,3}; for each such h the locus H^{comp,h} is constructible with dim H^{comp,h} <= 16-2h, proved by a relative Kontsevich/normal-sheaf count together with quasi-finiteness of the composition morphism (Steinitz finiteness of intermediate fields of a separable extension) and Chevalley. In particular dim H^{comp,1} <= 14.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0112-4",
+      "statement": "The discriminant morphism br : H -> |O_{P^1}(18)| = P^18, gamma -> Br(gamma) = sum_p (e_p-1) gamma(p), is a well-defined quasi-finite morphism of stacks; hence the closed non-simply-branched locus br^{-1}(Delta_18) has dimension at most 17, and by FND-0158(a) it contains H^comp. This bound is logically independent of CLM-0112-3.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0112-5",
+      "statement": "H^bal intersect H^{comp,0} is empty (ATT-0088/CLM-0088-2: no balanced fibre is hyperelliptic) and H^ii is contained in H^{comp,1} (FND-0153); hence dim H^ii <= 14 and the entire non-primitive locus inside H^bal has dimension at most 14, i.e. codimension at least four in H^bal.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0112-6",
+      "statement": "No connected component of H^bal is contained in H^ii: every nonempty connected component of H^bal contains a type-(i) point. The closure of H^ii in H^bal is closed of dimension at most 14 and its open complement is a dense open substack contained in H^i. Since H^bal is nonempty (FND-0154), balanced type-(i) covers exist and are dense in every connected component.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0112-7",
+      "statement": "The type is PGL_2-invariant and PGL_2 is connected, so Hbar^bal = [H^bal/PGL_2] is smooth of pure dimension 15 with pi_0(Hbar^bal) = pi_0(H^bal); the non-primitive locus there has dimension at most 11 and every connected component of Hbar^bal contains a type-(i) point.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0112-8",
+      "statement": "For every connected component S_beta of a smooth atlas of H^bal (or of any reduced locally Noetherian k-scheme carrying a (CE)+(N)+(BAL) family with target P^1_S none of whose components has classifying image inside H^ii, in particular whenever that image has dimension at least 15): U_beta is connected, H_beta = im(pi_1^et(U_beta) -> S_6) = S_6 by FND-0155, the orbit set H_beta \\ S_6 of left multiplication is a singleton with component stabilizer S_6 (FND-0151 normalization), Z_beta = Ord(U_beta) is connected finite etale of degree 720 over U_beta and is irreducible whenever U_beta is normal integral locally Noetherian (automatic on a smooth atlas), and the FND-0152 induction functor is the identity so that F(Z_beta)^{S_6} = F(U_beta) for every additive S_6-equivariant functor F to Q-vector spaces or mixed Q-Hodge structures.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "claude",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "Not used. This artifact is a pure geometry lemma about the balanced tetragonal Hurwitz stack; it makes no cohomological-degree, virtual-cohomological-dimension, or vanishing statement, and asserts no Hodge, weight or Tate conclusion.",
+      "kind": "blocked_route",
+      "subject": "vcd-only-vanishing"
+    },
+    {
+      "disposition": "Not used. No tropical moduli, graph complex, top-weight or gr^W_0 computation appears; the argument never touches the cohomology of any moduli space.",
+      "kind": "blocked_route",
+      "subject": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "disposition": "Not used. No point count, no finite computation, and no experiment of any kind is invoked; experiment_ids and experiment_uses are empty and every dimension is obtained by deformation theory or by quasi-finiteness of an explicit morphism.",
+      "kind": "blocked_route",
+      "subject": "point-count-without-degree-parity-separation"
+    },
+    {
+      "disposition": "Not used. The forgetful map M_{6,6} -> M_{6,5} and its Leray local system play no role; no statement about M_{6,6} of any kind is made.",
+      "kind": "blocked_route",
+      "subject": "forgetful-map-renaming-local-system-unknown"
+    },
+    {
+      "disposition": "Avoided and explicitly flagged. Section 0.5 and Remark 3.4 record that every dimension here comes from the ramification-profile-independent normal-sheaf argument (Lemma 1.2 / FND-0159) or from quasi-finiteness of the discriminant morphism (Lemma 4.1, which uses only the degree-18 divisor with multiplicities, never a count of distinct branch values). The branch-point arithmetic is retained solely as a labelled non-load-bearing consistency check.",
+      "kind": "working_context_constraint",
+      "subject": "Riemann-Hurwitz total ramification degree 18 implies a branch-point count and hence a dimension."
+    },
+    {
+      "disposition": "Avoided. Clause (E) deduces connectedness from H_beta = S_6, and cites FND-0151 for the fact that for a right S_6-torsor connectedness is equivalent to H = S_6 (a single right coset), not to transitivity.",
+      "kind": "working_context_constraint",
+      "subject": "Connectedness of the finite etale S_6-torsor is equivalent to transitivity of the monodromy image on six points."
+    },
+    {
+      "disposition": "Avoided. The FND-0151 normalization is used verbatim: pi_0 is the orbit set H \\ S_6 of left multiplication (the right cosets Hg), with component stabilizer g^{-1}Hg.",
+      "kind": "working_context_constraint",
+      "subject": "Naming the orbits of left multiplication 'left cosets' and computing the component stabilizer as gHg^{-1}."
+    },
+    {
+      "disposition": "Avoided. Clause (E) uses the closed Abel-Jacobi incidence / P_S(pi_*L) over a reduced base with constant h^0(L) = 3 (ATT-0066/CLM-0066-5, ATT-0088/CLM-0088-8, ATT-0086, FND-0107); no Proj model is used across any jump, and B_4 is empty.",
+      "kind": "working_context_constraint",
+      "subject": "Identifying the relative degree-six linear system with Proj(pi_*L) over an arbitrary base."
+    },
+    {
+      "disposition": "Avoided. No global splitting is used or needed; the filtered form (ATT-0065/CLM-0065-3, CLM-0065-5; FND-0097) is what is cited, and Lemma 2.1 works with the kernel of a map of bundles, not with a splitting.",
+      "kind": "working_context_constraint",
+      "subject": "Deducing a global direct-sum splitting W = W_4 + W_5 from fibrewise balancedness."
+    },
+    {
+      "disposition": "Avoided. No such inference is made; the relevant exactness is imported only through the dual-confirmed ATT-0065 claims within their stated degree-vanishing scope (FND-0099).",
+      "kind": "working_context_constraint",
+      "subject": "Inferring exactness of pi_* on the filtration from finiteness of Gamma over the base."
+    },
+    {
+      "disposition": "Avoided. Grauert is applied only over reduced bases: H^bal is smooth hence reduced, every smooth atlas is smooth hence reduced, and the general-base form of clause (E) carries reducedness explicitly (FND-0131).",
+      "kind": "working_context_constraint",
+      "subject": "Concluding local freeness and arbitrary base change from constant fibre dimensions over a possibly nonreduced base."
+    },
+    {
+      "disposition": "Avoided. No statement about M_{6,6}, its subvarieties, closedness, purity, or Gysin maps is made anywhere. The codimension-4 statement proved here is the codimension of the NON-PRIMITIVE locus inside H^bal, an entirely different assertion.",
+      "kind": "working_context_constraint",
+      "subject": "Treating the balanced reduced-support relative linear system as a closed pure-codimension-four subvariety of M_{6,6} and applying a Gysin morphism."
+    },
+    {
+      "disposition": "Avoided. No morphism to M_{6,6} is constructed or used; FND-0098 and FND-0147 are not invoked.",
+      "kind": "working_context_constraint",
+      "subject": "Asserting a monomorphism from the balanced CE model into an evaluation-failure locus in M_{6,6}."
+    },
+    {
+      "disposition": "Avoided. The ordering torsor is used as supplied by ATT-0066/CLM-0066-6 and ATT-0088/CLM-0088-8, with no one-sided reduction (FND-0087).",
+      "kind": "working_context_constraint",
+      "subject": "Forming the ordered-to-unordered construction by reducing only the source."
+    },
+    {
+      "disposition": "Avoided. Irreducibility of Z_beta is asserted only when U_beta is normal, integral and locally Noetherian, which is proved for smooth atlases and stated as a hypothesis otherwise (FND-0132, FND-0148); and no component formula is claimed over a stack with inertia (FND-0144).",
+      "kind": "working_context_constraint",
+      "subject": "Upgrading the count of pi_1^et-orbits to a count of irreducible components without a normality hypothesis on the base."
+    },
+    {
+      "disposition": "Avoided. No Aut(C,Gamma) or M_{6,6} inertia clause is asserted (FND-0137). The only stabilizer computed is the deck-theoretic stabilizer g^{-1}H_beta g of a component of the ordering torsor.",
+      "kind": "working_context_constraint",
+      "subject": "Proving a stabilizer or inertia clause for the forgetful map to M_{6,6} via a PGL_2 transformation fixing the marked images."
+    },
+    {
+      "disposition": "Avoided. No lci, regularity, depth or conormal conclusion is drawn here; ATT-0088/CLM-0088-9 is not used (FND-0068).",
+      "kind": "working_context_constraint",
+      "subject": "Deriving a local complete intersection or regular-immersion conclusion from expected-versus-actual determinantal codimension."
+    },
+    {
+      "disposition": "Avoided and explicitly disclaimed. Section 6 records FND-0053 and FND-0152(ii): H_beta = S_6 and the identity induction functor upgrade nothing to Tate type, and the H_alpha-object F(Z_alpha^1) remains a separate input.",
+      "kind": "working_context_constraint",
+      "subject": "Inferring Tate or only-Tate local systems from rationality of S_6-representations, or upgrading a rational induction identity to Tate type."
+    },
+    {
+      "disposition": "Avoided. ATT-0086/CLM-0086-1, CLM-0086-2 and FND-0139 are cited for B_4 = empty, so only the P^2-bundle case occurs and the k = 4 branch is vacuous.",
+      "kind": "working_context_constraint",
+      "subject": "Positing a balanced component decomposition containing a nonempty jump piece B_4 with fibre P^3."
+    },
+    {
+      "disposition": "Avoided. No stratum-dimension formula is used at all; the jump stratum is empty and the argument works on the smooth pure-dimension-18 stack H^bal.",
+      "kind": "working_context_constraint",
+      "subject": "Using a single stratum dimension for every stratum in dim(I|_{H_k}) = dim(H_k)+k-1."
+    },
+    {
+      "disposition": "Avoided. Irreducibility of H^bal is neither used nor claimed; only purity of dimension (Lemma 2.2) is used, and that is proved from smoothness, not imported from the classical Hurwitz space.",
+      "kind": "working_context_constraint",
+      "subject": "Inferring irreducibility of the balanced open directly from irreducibility of the classical Hurwitz space."
+    },
+    {
+      "disposition": "Avoided. Lemma 2.1 pins the orientation independently by Euler characteristics: chi(Sym^2 E) = 42, chi(gamma_*R) = 31, hence F of rank two and degree +9, matching deg(O(4)+O(5)) = 9 and the packet convention.",
+      "kind": "working_context_constraint",
+      "subject": "Reading the CE relations bundle in the dual orientation so that the pushed-forward relations bundle has degree -9."
+    },
+    {
+      "disposition": "Avoided. Quasi-finiteness is proved directly and globally in both places it is used: for c_h by Steinitz finiteness of intermediate fields of a separable extension (Lemma 3.2), and for br by Grothendieck-Galois finiteness of degree-four etale covers of a punctured line (Lemma 4.1).",
+      "kind": "working_context_constraint",
+      "subject": "Inferring global quasi-finiteness of a morphism from injectivity on one stratum and a fibre-dimension bound on another."
+    },
+    {
+      "disposition": "Respected, not walked. The constancy input is imported from ATT-0088/CLM-0088-3 and FND-0142, which exclude only the hyperelliptic-composed case; this artifact separately bounds the dimension of the positive-genus non-primitive loci rather than claiming they are excluded, and explicitly leaves their existence for intermediate genus two and three open.",
+      "kind": "working_context_constraint",
+      "subject": "Constancy of h^0(omega_C(-D)) on the balanced locus is equivalent to excluding every non-primitive degree-four pencil."
+    }
+  ],
+  "gap_markers": [],
+  "id": "ATT-0112",
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "lane": "geometry",
+  "methods_used": [
+    "kontsevich-stable-map-deformation-theory",
+    "normal-sheaf-unobstructedness-for-finite-covers",
+    "hurwitz-stack-smoothness-and-pure-dimension",
+    "casnati-ekedahl-relations-bundle-as-base-change-compatible-kernel",
+    "upper-semicontinuity-splitting-type-openness",
+    "relative-kontsevich-space-of-two-step-factorizations",
+    "steinitz-finiteness-of-intermediate-fields",
+    "chevalley-constructible-image-dimension-bound",
+    "discriminant-branch-divisor-morphism",
+    "grothendieck-galois-finiteness-of-etale-covers",
+    "connected-component-pure-dimension-contradiction",
+    "connected-group-quotient-preserves-pi0",
+    "smooth-atlas-normality-and-monodromy-functoriality",
+    "finite-etale-torsor-coset-normalization",
+    "riemann-hurwitz-intermediate-genus-bound"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Dimension bound dim H^{comp,h} <= 16-2h for the locus of degree-four genus-six covers of a fixed P^1 factoring through an intermediate curve of genus h, proved by a relative Kontsevich/normal-sheaf count plus quasi-finiteness of composition; in particular the bielliptic-composed locus, which contains the whole type-(ii) locus by FND-0153, has dimension at most 14 inside the smooth 18-dimensional stack H.",
+    "Resolution of the C66-GEO-COMP frontier obligation 'whether a connected component of a balanced+(CE)+(N) base can consist entirely of type-(ii) fibres, equivalently whether the type-(i) hypothesis in the family monodromy statement is automatic': answered in the negative/affirmative respectively for the universal balanced family and every smooth atlas of it, with the quantitative refinement that the non-primitive locus has codimension at least four (14 inside 18, or 11 inside 15 after the PGL_2-quotient).",
+    "Openness of the balanced locus H^bal inside the unrestricted fixed-target tetragonal stack, proved by exhibiting the packet-orientation relations bundle as the base-change-compatible kernel F = ker(Sym^2 E -> gamma_*(omega_{C/P^1}^{tensor 2})) and applying semicontinuity to h^0(F_t(-5)); hence H^bal is smooth of pure dimension 18, which is the purity that drives the whole argument.",
+    "Non-emptiness and density of the balanced type-(i) locus in every connected component of H^bal, which FND-0153 explicitly did not assert.",
+    "A second, logically independent bound (dimension at most 17) obtained from quasi-finiteness of the discriminant morphism br : H -> P^18 together with FND-0158(a), so that the conclusion survives even if the parametrisation of the composed locus is challenged.",
+    "A checkable sufficient criterion for an arbitrary reduced base: if each connected component of S has classifying image of dimension at least 15 in H^bal, the FND-0155 type-(i) hypothesis holds automatically on it."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "b5da42de000e3eb78cfeef12ac80476ba8a1660de443e13c72d49511641b0c22",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0065",
+      "kind": "attempt",
+      "note": "Verified C66-GEO-Z dependency (dual-confirmed by REV-0108 and REV-0109). Used for CLM-0065-9 (the balanced (6,6) CE evaluation-failure scheme is scheme-theoretically the Abel-Jacobi incidence O_C(Gamma) = W_5 tensor omega^{-1}) and CLM-0065-3/CLM-0065-5 (filtered reduction to W_5 with NO global splitting), which is what makes Z_beta in clause (E) the CE evaluation-failure model rather than an unrelated incidence."
+    },
+    {
+      "id": "REV-0108",
+      "kind": "confirmation_review",
+      "note": "First independent confirmation of ATT-0065; its recorded caveat (ambient comparison retains the equation-bundle freeness/base-change hypothesis on q_*script-W) is not relied on here, since only the intrinsic identification is used."
+    },
+    {
+      "id": "REV-0109",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0065; records that the ambient restriction-surjectivity assertion is proved from the CE resolution and not imported from SRC-0004."
+    },
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "note": "Verified C66-GEO-H0 dependency (dual-confirmed by REV-0110 and REV-0116). Used for CLM-0066-5 (the correct global model is the closed Abel-Jacobi incidence, not an unqualified Proj(pi_*L)) and CLM-0066-6 (stack-level finite etale S_6-torsor over the distinct-support open), and for the h^0 stratification framework whose jump stratum is then removed by ATT-0086."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "note": "First independent confirmation of ATT-0066; records that the weak CE normalization is carried as a hypothesis and that B_4 emptiness was correctly not claimed there."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0066; its reducedness caveat for Grauert (FC-H0-NONREDUCED-GRAUERT) is honoured here: every projective-bundle and local-freeness statement in clause (E) is made over a reduced base (a smooth atlas is smooth hence reduced). Its warning that the (H3) negative clauses are scope disclaimers is respected: no failure of the projective-bundle property is cited."
+    },
+    {
+      "id": "ATT-0088",
+      "kind": "attempt",
+      "note": "Verified C66-COMP-RANK context artifact (dual-confirmed by REV-0139 and REV-0142). Used for CLM-0088-2 (no balanced geometric fibre is hyperelliptic, under (CE)+(BAL) alone) in Theorem (C); CLM-0088-1 and CLM-0088-3 (A trivial, L = omega_C(-D), deg L = 6, h^0(L) = 3, h^1(L) = 2) as the input that makes the FND-0153 dichotomy applicable at every point of H^bal; and CLM-0088-8 (over a reduced base: pi_*L locally free of rank three, AJ = P_S(pi_*L) a Zariski-locally trivial P^2-bundle, U S-smooth of pure relative dimension two and surjective, Z the S_6-ordering torsor) as the construction of U_beta and Z_beta in clause (E)."
+    },
+    {
+      "id": "REV-0139",
+      "kind": "confirmation_review",
+      "note": "First independent confirmation of ATT-0088; records that the codimension expectations and excess there are bookkeeping only, with no Gysin or cohomological inference - respected here."
+    },
+    {
+      "id": "REV-0142",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0088; records that Part III assumes S reduced exactly so that Grauert applies, and that the S_6-torsor and regular immersion are stated on Conf_6 and not on coarse M_{6,6} - both respected here."
+    },
+    {
+      "id": "ATT-0086",
+      "kind": "attempt",
+      "note": "Verified C66-COMP-COMP context artifact (dual-confirmed by REV-0135 and REV-0138). Used for CLM-0086-1 and CLM-0086-2: the jump stratum B_4 is empty on the balanced locus, so h^0(L) = 3 identically and the full Abel-Jacobi incidence is a P^2-bundle over a reduced base. This removes the k = 4 branch from the incidence bundle used in clause (E)."
+    },
+    {
+      "id": "REV-0135",
+      "kind": "confirmation_review",
+      "note": "First independent confirmation of ATT-0086; records that the reducedness restriction honours the nonreduced-base obstruction and that no Tate/RED-0001 conclusion is drawn - respected here."
+    },
+    {
+      "id": "REV-0138",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0086; records that emptiness of B_4 does not rely on the weak CE normalization and that the SRC-0004 F-versus-F^vee orientation is consistent - the same orientation is fixed independently here by Euler characteristics in Lemma 2.1."
+    },
+    {
+      "id": "FND-0159",
+      "kind": "adjudicated_finding",
+      "note": "Smoothness and dimension 2d+2g-2 = 18 of the unrestricted fixed-target Hurwitz stack at every point, independently of the ramification profile. Reproduced and generalised to an arbitrary smooth projective target curve in Lemma 1.2; it is the sole source of every dimension in Section 3, and it is precisely the route that avoids the blocked branch-point-count inference."
+    },
+    {
+      "id": "FND-0153",
+      "kind": "adjudicated_finding",
+      "note": "The type (i) / type (ii) dichotomy on a balanced (CE)+(N)+(BAL) geometric fibre, and the type-(ii) conclusion gamma = q o psi with psi : C -> Y bielliptic onto a genus-one curve. This is what places H^ii inside H^{comp,1}. Its base-point-freeness input is automatic by FND-0130 and FND-0134 as recorded inside FND-0153."
+    },
+    {
+      "id": "FND-0158",
+      "kind": "adjudicated_finding",
+      "note": "Part (a): a nontrivially factoring degree-four cover is never simply branched. Used only for the independent, redundant bound of Section 4 (Lemma 4.2). Part (b) is used only in the explicitly non-load-bearing consistency Remark 3.4."
+    },
+    {
+      "id": "FND-0154",
+      "kind": "adjudicated_finding",
+      "note": "Non-emptiness of the balanced locus (explicit bielliptic-composed family with E = O(2)+O(3)+O(4) and F = O(4)+O(5)); used only to make Theorem (D)'s density and type-(i) non-emptiness statements non-vacuous."
+    },
+    {
+      "id": "FND-0155",
+      "kind": "adjudicated_finding",
+      "note": "Type-(i) single-fibre monodromy S_6 and the family clause: over a connected component of a reduced locally Noetherian balanced+(CE)+(N) base containing a type-(i) fibre, H_alpha = S_6 and Z_alpha is connected. Theorem (D) supplies exactly the type-(i) hypothesis that FND-0155 left as an assumption; clause (E) is its consequence, cited and not reproved."
+    },
+    {
+      "id": "FND-0151",
+      "kind": "adjudicated_finding",
+      "note": "Coset nomenclature and stabilizer normalization for a finite etale right S_6-torsor: pi_0(Z) is the orbit set H \\ S_6 of left multiplication (right cosets Hg), stabilizer g^{-1}Hg, and connectedness is equivalent to H = S_6 rather than to transitivity on six letters. Followed verbatim in clause (E)."
+    },
+    {
+      "id": "FND-0152",
+      "kind": "adjudicated_finding",
+      "note": "The induction identity F(Z_alpha) = Ind_{H_alpha}^{S_6} F(Z_alpha^1) and F(Z_alpha)^{S_6} = F(U_alpha) over a normal integral locally Noetherian scheme base with Q-coefficients, together with its clause (ii) that the identity upgrades nothing to Tate type. Used to record that with H_beta = S_6 the induction functor is the identity."
+    },
+    {
+      "id": "FND-0144",
+      "kind": "adjudicated_finding",
+      "note": "The scheme-theoretic component/degree formula is not valid over an algebraic stack with inertia. Respected: every torsor, monodromy and component statement in clause (E) is made over a scheme (a smooth atlas or a reduced locally Noetherian S)."
+    },
+    {
+      "id": "FND-0150",
+      "kind": "adjudicated_finding",
+      "note": "Records that Casnati-Ekedahl 1996 Theorem 2.1 supplies, for every finite flat Gorenstein cover of degree d >= 3, the relative-canonical embedding and (for d = 4) the two-term resolution, and that Canning-Larson Lemma 10.6 records O_{P(E^vee)}(1)|_C = omega_C tensor gamma^*omega_{P^1}^vee. This is the source-backed basis for (S1)+(S2), i.e. for (CE) and strong (N) holding at every point of H rather than being extra hypotheses."
+    },
+    {
+      "id": "FND-0157",
+      "kind": "adjudicated_finding",
+      "note": "Records the Canning-Larson universal Casnati-Ekedahl bundles over the Hurwitz stack, the Zariski-local triviality of pencil targets, and the invisibility in Pic_{C/S} of a residual twist of L pulled back from the base. Used to justify that the Abel-Jacobi section and P_S(pi_*L) are canonical despite L's twist ambiguity."
+    },
+    {
+      "id": "FND-0107",
+      "kind": "adjudicated_finding",
+      "note": "Correctness of the Abel-Jacobi model Sym^d(C/B) x_{Pic^d} B over all of B and its agreement with Proj(pi_*L) exactly over the constant-h^0 open; licenses the model substitution used in clause (E), where h^0(L) = 3 is constant by ATT-0088/CLM-0088-3 and ATT-0086."
+    },
+    {
+      "id": "FND-0125",
+      "kind": "adjudicated_finding",
+      "note": "For a hyperelliptic genus-six degree-four cover, gamma = q o h necessarily, E = O(1)+O(4)^2 and F = O(2)+O(7). Cited as an independent corroboration of the disjointness H^bal intersect H^{comp,0} = empty, whose primary source here is ATT-0088/CLM-0088-2."
+    },
+    {
+      "id": "FND-0130",
+      "kind": "adjudicated_finding",
+      "note": "Smooth plane quintics are excluded from the balanced locus, so L has no base point there; one of the two inputs discharging the base-point-freeness hypothesis of FND-0153."
+    },
+    {
+      "id": "FND-0134",
+      "kind": "adjudicated_finding",
+      "note": "On a balanced fibre satisfying weak CE normalization, h^0(L) = 3 with L base-point-free and the general member of |L| reduced; the second input discharging the base-point-freeness hypothesis of FND-0153."
+    },
+    {
+      "id": "FND-0156",
+      "kind": "adjudicated_finding",
+      "note": "Convention-sensitivity of the clause h^0(L) = 3: any downstream statement invoking W_4 or W_5 must restate W_f = (O_X(2) tensor gamma^*O(-f))|_C rather than rely on the numerical rank table. Section 0.1 restates the convention explicitly and Lemma 2.1 pins the F-orientation by Euler characteristics, exactly as required."
+    },
+    {
+      "id": "FND-0131",
+      "kind": "adjudicated_finding",
+      "note": "Grauert genuinely requires a reduced base. Respected: H^bal is smooth hence reduced, every smooth atlas is smooth hence reduced, and clause (E)'s general-base form carries reducedness as an explicit hypothesis; nothing is asserted over nonreduced bases."
+    },
+    {
+      "id": "FND-0142",
+      "kind": "adjudicated_finding",
+      "note": "Under (CE)+(BAL)+(N) every geometric fibre has h^0(O_C(D)) = 2, h^0(L) = 3, h^1(L) = 2, with the only Clifford-equality obstruction being the hyperelliptic fibre. Corroborates the constancy input used to apply FND-0153 at every point of H^bal."
+    },
+    {
+      "id": "FND-0139",
+      "kind": "adjudicated_finding",
+      "note": "Under the fibrewise-balanced hypothesis the jump stratum is empty, B_4 = empty and h^0(L) is identically 3, so the k = 4 branch of any P^{k-1}-bundle statement is vacuous. Corroborates ATT-0086 for the incidence model used in clause (E)."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "note": "Lemma 10.6: the CE line-bundle convention with the minus sign in gamma^*O(-f) and the degree formula deg(W_f|_C) = 4g+12-4f, giving deg W_4 = 20, deg W_5 = 16 and deg L = 6 at g = 6; also the direct-sum decomposition of the CE obstruction space. Used to fix the convention in Section 0.1 and cross-checked against the Euler-characteristic orientation computation in Lemma 2.1."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "Resolves the C66-GEO-COMP frontier obligation on the type-(i) hypothesis. Working on the fixed-target tetragonal stack H (smooth of pure dimension 18 by a ramification-profile-independent normal-sheaf argument, FND-0159), the balanced locus H^bal is shown to be OPEN, hence itself smooth of pure dimension 18, so every connected component has dimension 18. The bielliptic-composed locus - which by FND-0153 contains the whole type-(ii) locus - is bounded above in dimension by 14 via a relative Kontsevich/normal-sheaf count for the two-step factorization together with quasi-finiteness of the composition map (finitely many intermediate fields of a separable extension). A second, independent bound of 17 comes from quasi-finiteness of the discriminant morphism br : H -> P^18 combined with FND-0158(a). Since 14 < 18 (and 17 < 18), no connected component of H^bal can consist entirely of type-(ii) fibres: every connected component meets type (i), which is therefore nonempty and dense with complement of codimension at least four; the same holds after the PGL_2-quotient in dimension 15. Consequently the type-(i) hypothesis in the family monodromy statement FND-0155 is automatic on the universal balanced family and on every connected component of every smooth atlas of it, so there H = S_6, the ordering torsor Z is connected (irreducible under the normality that a smooth atlas supplies) of degree 720, and the FND-0152 induction functor is the identity. No Hodge, weight or Tate conclusion is drawn, no stack-inertia component formula is used, and no finite experiment is used.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "base": "the universal fixed-target tetragonal stack H and its balanced open H^bal (smooth, hence reduced and normal); payload clause (E) is stated only over SCHEMES (smooth atlases of H^bal, or reduced locally Noetherian k-schemes with target P^1_S)",
+    "cover": {
+      "degree": 4,
+      "genus": 6
+    },
+    "frontier_obligation_addressed": "Whether a connected component of a balanced+(CE)+(N) base can consist entirely of type-(ii) fibres, equivalently whether the type-(i) hypothesis in the family monodromy statement (FND-0155) is automatic. Answered: on the universal balanced family and on every smooth atlas of it, no such component exists and the hypothesis is automatic.",
+    "g": 6,
+    "ground_field": "algebraically closed of characteristic zero",
+    "n": 6,
+    "not_covered": [
+      "Hodge, weight, purity, Tate, Borel-Moore, motivic or RED-0001 conclusions of any kind",
+      "algebraic stacks with inertia: the [S_6:H] irreducible-component and stacky-degree formula over a stack base is NOT claimed (FND-0144)",
+      "nonreduced bases (Grauert fails; FND-0131)",
+      "integral coefficients and coarse-moduli descent (FND-0075)",
+      "any image, closure, purity, codimension, monomorphism, Gysin or Aut(C,Gamma) statement in or about M_{6,6}",
+      "the number of connected components of H^bal, its irreducibility, or irreducibility of the balanced splitting stratum (extended-context constraint: this may not be inferred from irreducibility of the classical Hurwitz space)",
+      "existence or non-existence of balanced non-primitive covers with intermediate curve of genus two or three (only their dimension is bounded)",
+      "the exact monodromy image on a hypothetical purely type-(ii) component beyond FND-0161, and the H_alpha-object F(Z_alpha^1)",
+      "unbalanced CE splitting strata"
+    ],
+    "objects": [
+      "H = H_{4,6}(P^1)",
+      "H^bal",
+      "H^{comp,h} for h in {0,1,2,3}",
+      "H^ii, H^i",
+      "F = p_*(I_C(2))",
+      "br : H -> P^18",
+      "Hbar^bal = [H^bal/PGL_2]",
+      "U_beta, Z_beta = Ord(U_beta), H_beta"
+    ]
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero. Let H = H_{4,6}(P^1) denote the moduli stack over k of pairs (C,gamma) with C a smooth projective connected curve of genus six and gamma : C -> P^1 a finite morphism of degree four onto a FIXED P^1, morphisms being isomorphisms of C commuting with gamma; equivalently, H is the open substack of the Kontsevich stack Mbar_{6,0}(P^1,4) whose source curve is smooth. Every gamma in H is finite flat Gorenstein, hence (imported source input, see Section 0) carries the Casnati-Ekedahl data: gamma_*O_C = O direct-sum E^vee with E locally free of rank three and degree nine; the relative-canonical embedding i : C -> X = P(E^vee) with p : X -> P^1, p_*O_X(1) = E and (N) in strong form i^*O_X(1) = omega_{C/P^1} = omega_C tensor gamma^*O_{P^1}(2); and (CE) the two-term ideal resolution 0 -> O_X(-4) tensor p^*det F -> O_X(-2) tensor p^*F -> I_C -> 0 with F locally free of rank two. Throughout, F is taken in the packet orientation F = p_*(I_C(2)) = ker(Sym^2 E -> gamma_*(omega_{C/P^1}^{tensor 2})), of rank two and degree +9, and W := i^*(O_X(2) tensor p^*F^vee), W_f := (O_X(2) tensor gamma^*O_{P^1}(-f))|_C, D := gamma^*O_{P^1}(1), L := W_5 tensor omega_C^{-1} (FND-0156 convention discipline). Let H^bal be the locus where F is isomorphic to O_{P^1}(4) direct-sum O_{P^1}(5); for h in {0,1,2,3} let H^{comp,h} be the locus of gamma admitting a factorization gamma = q o psi with psi : C -> Y and q : Y -> P^1 finite of degree two and Y a smooth projective connected curve of genus h, and H^comp the union of the H^{comp,h}; let H^ii be the type-(ii) locus of FND-0153 inside H^bal (phi_L : C -> P^2 = P(H^0(L)^vee) finite of degree two onto a smooth plane cubic) and H^i = H^bal minus H^ii its type-(i) complement. THEN: (A) H is a Deligne-Mumford stack of finite type over k, smooth over k of pure dimension 18, and more generally, for Y a fixed smooth projective connected curve of genus h, the stack of finite degree-d covers of Y by smooth projective connected genus-g curves is smooth of pure dimension 2g-2+d(2-2h); H^bal is OPEN in H, hence smooth over k of pure dimension 18, in particular reduced and normal, and every nonempty connected component of H^bal has dimension exactly 18. (B) Every nontrivial factorization of a gamma in H has both steps of degree two and intermediate genus h in {0,1,2,3}; H^{comp,h} is a constructible subset of |H| with dim H^{comp,h} <= 16-2h, so in particular dim H^{comp,1} <= 14 and dim H^comp <= 16. Independently of that count, the discriminant morphism br : H -> |O_{P^1}(18)| = P^18 sending gamma to its branch divisor Br(gamma) = sum_p (e_p - 1) gamma(p) of degree 18 is quasi-finite, so the non-simply-branched locus br^{-1}(Delta_18) (Delta_18 the non-reduced-divisor hypersurface, closed irreducible of dimension 17) is closed of dimension at most 17 and contains H^comp by FND-0158(a). (C) H^bal intersect H^{comp,0} is empty and H^ii is contained in H^{comp,1}; consequently dim H^ii <= 14 and the entire non-primitive locus H^bal intersect H^comp has dimension at most 14, i.e. codimension at least four in H^bal. (D) Therefore NO connected component of H^bal is contained in H^ii: every nonempty connected component of H^bal contains a type-(i) point, the closure of H^ii in H^bal is closed of dimension at most 14, and H^i contains the dense open substack H^bal minus that closure, of complement codimension at least four. Since H^bal is nonempty (FND-0154), the balanced type-(i) locus is nonempty and dense in every connected component. The same statements hold verbatim for the PGL_2-quotient Hbar^bal = [H^bal / PGL_2], which is smooth of pure dimension 15, whose connected components correspond bijectively to those of H^bal (PGL_2 being connected) and in which the non-primitive locus has dimension at most 11, again codimension at least four. (E) Consequently the type-(i) hypothesis of FND-0155 is automatic on the universal balanced family. Precisely: let V be a k-scheme locally of finite type with a smooth surjective morphism V -> H^bal (a smooth atlas), or more generally let S be a reduced locally Noetherian k-scheme carrying a genus-six degree-four family with target P^1_S satisfying (CE)+(N)+(BAL), such that no connected component of S has classifying image contained in H^ii - which holds in particular whenever that image has dimension at least 15. Let S_beta be any connected component, U_beta the distinct-support (reduced-support) open of the Abel-Jacobi P^2-bundle P_{S_beta}(pi_*L) (available by ATT-0088/CLM-0088-8, the base being reduced; equal to the CE evaluation-failure model by ATT-0065/CLM-0065-9 and ATT-0066/CLM-0066-5, CLM-0066-6), and Z_beta = Ord(U_beta) -> U_beta the finite etale right S_6-torsor of orderings of the universal degree-six divisor. Then U_beta is connected, the monodromy image H_beta = im(pi_1^et(U_beta) -> S_6) equals S_6, the orbit set H_beta \\ S_6 of left multiplication (the set of right cosets H_beta g, with component stabilizer g^{-1} H_beta g in the FND-0151 normalization) is a singleton, Z_beta is connected and finite etale of degree 720 over U_beta, and whenever U_beta is in addition normal, integral and locally Noetherian - which holds for every connected component of a smooth atlas - Z_beta is irreducible with stabilizer S_6; the FND-0152 induction functor Ind_{H_beta}^{S_6} is then the identity, so that F(Z_beta)^{S_6} = F(U_beta) for every additive S_6-equivariant functor F to Q-vector spaces or mixed Q-Hodge structures. NOT ASSERTED: any Hodge, weight, purity, Tate, Borel-Moore or RED-0001 conclusion (FND-0053 and FND-0152(ii) stand); any statement over algebraic stacks with inertia (FND-0144 stands), over nonreduced bases, with integral coefficients, or on coarse moduli (FND-0075 stands); any statement about M_{6,6}, its forgetful map, Aut(C,Gamma), closedness, purity, Gysin maps or codimension in M_{6,6}; the number of connected components of H^bal or its irreducibility; existence of balanced non-primitive covers with intermediate genus two or three; the H_alpha object F(Z_alpha^1) as an H_alpha-object."
+}
