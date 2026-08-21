@@ -1,0 +1,246 @@
+{
+  "argument_markdown": "## 0. Scope, status, and what is and is not claimed\n\nThis artifact is an honest wrap-up of an interrupted session on `C66-GEO-COMP`. It does **not** resolve `C66-GEO-COMP`, and it does **not** address the campaign target `RED-0001` = `W_{-16}H^{BM}_{16}(M_{6,6};Q)`. No Hodge, weight, purity, or Tate-type assertion is made anywhere below.\n\nThe material is separated into three registers:\n\n* **(P) Prior, dual-confirmed.** Facts already established in `ATT-0065` (confirmed by `REV-0108`, `REV-0109`) and `ATT-0066` (confirmed by `REV-0110`, `REV-0116`), or recorded as adjudicated packet findings. These are cited, not reproved, and are **not** claimed as results of this session.\n* **(N) New or sharpened this session.** Sections 3, 4.2, 4.3, 4.4 and 5.2.\n* **(G) Remaining frontier.** Section 6, mirrored in `gap_markers`.\n\n## 1. Standing setup and prior inputs (register P)\n\nLet `B` be a reduced locally Noetherian base carrying a family `pi : C -> B` of smooth projective genus-six curves together with a relative degree-four finite flat Gorenstein cover `gamma : C -> P` onto a `P^1`-bundle `P -> B`, satisfying:\n\n* **(CE)** the Casnati-Ekedahl structure theory for degree-four covers applies, with Tschirnhausen bundle `E` of rank three and relations bundle `F` of rank two;\n* **(BAL)** `F` is fibrewise balanced, `F_b ~= O(4) + O(5)` on every geometric fibre;\n* **(N)** the relative-canonical normalization `O_{P(E^vee)}(1)|_C ~= omega_C tensor gamma^* O(2)`.\n\nWrite `W_4`, `W_5` for the two Casnati-Ekedahl line bundles on a geometric fibre, `L := W_5 tensor omega_C^{-1}`, and `D := gamma^*(pt)` the degree-four pencil divisor class.\n\nThe following are taken from the verified dependency artifacts and are used without reproof.\n\n**(P1) Degrees and the residual bundle.** `deg(W_f|_C) = 4g + 12 - 4f`, so at `g = 6`: `deg W_4 = 20`, `deg W_5 = 16`, `deg omega_C = 10`, `deg L = 6`, `chi(L) = 6 - 6 + 1 = 1` (`SRC-0004` Lemma 10.6; `ATT-0065` CLM-0065-5; `ATT-0066` CLM-0066-1).\n\n**(P2) Obstruction localization.** For an effective degree-six divisor `Gamma`, `deg(omega_C tensor W_4^vee(Gamma)) = -4 < 0` and `deg(omega_C tensor W_5^vee(Gamma)) = 0`; hence the `f = 4` summand of the Casnati-Ekedahl obstruction vanishes identically and the `f = 5` summand is nonzero exactly when `O_C(Gamma) ~= L`. Therefore the evaluation-failure locus is, set-theoretically and (by `ATT-0065` CLM-0065-9) scheme-theoretically after arbitrary base change, the relative Abel-Jacobi incidence\n\n  `Z = { (b, Gamma) : Gamma in Sym^6(C_b), O_{C_b}(Gamma) ~= L_b }`.\n\n**(P3) Fibre dimensions and the projective bundle.** Under (BAL)+(N), `M := omega_C^{tensor 2} tensor W_5^vee ~= gamma^*O(1)` has degree four and `h^0(L) = 1 + h^0(M)`; the stratum `h^0(L) = 4` is empty because it forces Clifford equality on `M`, hence hyperellipticity, hence `gamma = q o h` with `E = O(1) + O(4)^2` and `h^0(F(-6)) >= 2`, contradicting balancedness. So `h^0(L_b) = 3` and `h^1(L_b) = 2` identically on the balanced locus (`ATT-0066` CLM-0066-1,2,3; packet findings FND-0103, FND-0104, FND-0125). By Grauert on the reduced base, `pi_*L` is locally free of rank three, compatible with base change, and `Z = P((pi_*L)^vee)` is a Zariski-locally trivial `P^2`-bundle over `B`, smooth and proper of pure relative dimension two (`ATT-0066` CLM-0066-4; FND-0131 for the nonreduced caveat, which is outside the present hypotheses).\n\n**(P4) The ordered model.** Over the reduced-support open `Z^{rs} subset Z` (divisors with six pairwise-distinct points), labelling the six points defines a finite etale right `S_6`-torsor `Z^{ord} -> Z^{rs}`. The correct reduction convention is `I_red -> (I^{red-supp})_red`, reducing source and target together (`ATT-0066` CLM-0066-5, CLM-0066-6; FND-0064, FND-0075).\n\n**(P5) Dimensions.** A `P^2`-bundle over a base component `S_alpha` has components of dimension `dim(S_alpha) + 2`; a finite etale cover preserves dimension, so components of `Z^{ord}` over `S_alpha` also have dimension `dim(S_alpha) + 2`. With the Hurwitz-model count `b = 2g - 2 + 2d = 18`, `dim(Hurwitz) = 18 - 3 = 15`, this gives `dim Z = 17` and numerical codimension `21 - 17 = 4` in `M_{6,6}`.\n\n**(P6) The residual identification.** Under (N), `L ~= omega_C(-D)` and `omega_C tensor L^{-1} ~= O_C(D)` with `h^0(O_C(D)) = 2` on the balanced locus.\n\n## 2. Reformulation of the question\n\nBy (P2)-(P4), the fibre of `Z` over `b in B` is the linear system `|L_b| ~= P^2`, and the ordering cover restricted to that fibre is the `S_6`-cover of the reduced-support open of `|L_b|` obtained by labelling the six points of a divisor. So the geometric monodromy image `H_alpha` on a connected component of the balanced base is the image of `pi_1(Z^{rs}_alpha)` in `S_6`, i.e. the monodromy group of the six-sheeted branched cover determined by the complete base-point-free `g^2_6` given by `L`, together with the monodromy contributed by moving `b` inside `S_alpha`.\n\nThis makes the classification of the residual morphism `phi_L : C -> P^2` the controlling input, which is the subject of the next section.\n\n## 3. (N) Exhaustive trichotomy for `phi_L` on the balanced locus\n\n**Lemma 3.1.** *Let `(C, gamma)` be a geometric fibre of a family satisfying (CE), (BAL), (N). Then `L` is base-point-free of degree six with `h^0(L) = 3`, `phi_L : C -> P^2` is a morphism onto a nondegenerate irreducible reduced plane curve `X`, and exactly one of the following holds:*\n\n* **(i)** `deg X = 6` and `phi_L` is birational onto `X`; `X` is a plane sextic with `p_a(X) = 10` and total delta-invariant `p_a - g = 4`;\n* **(ii)** `deg X = 3`, `X` is a **smooth** plane cubic `E`, and `phi_L` is a degree-two map; equivalently `C` is bielliptic, `psi : C -> E` of degree two, `L ~= psi^*O_E(1)`;\n* **(iii)** `deg X = 2`, `X` is a **smooth** conic `~= P^1`, and `phi_L` is a degree-three map; equivalently `C` is trigonal with pencil `T`, and `L ~= O_C(2T)`.\n\n*Proof.* Base-point-freeness and `h^0(L) = 3` are (P3) together with the recorded base-point analysis: a base point `p` of `L` makes `|L(-p)|` a `g^2_5`; a second base point produces Clifford equality on a `g^2_4` and hence a hyperelliptic fibre, excluded by (BAL) via (P3); and a base-point-free `g^2_5` is birational onto a smooth plane quintic, for which `E ~= O(2) + O(3) + O(4)` and `h^0(F(-6)) >= 1`, so `F` is not balanced. Hence `L` is base-point-free.\n\nSince `|L|` is complete and base-point-free, `phi_L` is a morphism given by the full three-dimensional space of sections, so its image `X` spans `P^2`: `X` is nondegenerate, in particular `deg X >= 2`. `X` is the image of the irreducible reduced curve `C`, hence irreducible and reduced. Write `m := deg(phi_L)` and `e := deg X`; then `m * e = deg L = 6` with `e >= 2`, leaving `(e,m) in {(6,1), (3,2), (2,3)}`.\n\n`(e,m) = (6,1)`: `phi_L` is birational onto a plane sextic; `p_a = (6-1)(6-2)/2 = 10`, and since `C` is the normalization of `X` of geometric genus six, the total delta-invariant is `10 - 6 = 4`. This is case (i).\n\n`(e,m) = (3,2)`: `X` is an irreducible plane cubic, `p_a(X) = 1`. If `X` were singular, its normalization would be `P^1`, and composing `phi_L` with the normalization would give a degree-two morphism `C -> P^1`, i.e. `C` hyperelliptic; but hyperelliptic fibres are excluded under (BAL) by (P3). So `X` is a smooth plane cubic `E`, and `phi_L = psi` is a degree-two cover of an elliptic curve. This is case (ii). Riemann-Hurwitz gives `2*6 - 2 = 2(2*1 - 2) + deg R`, so `deg R = 10`: the bielliptic cover is branched at exactly ten points (all simple, since the cover has degree two).\n\n`(e,m) = (2,3)`: `X` is an irreducible reduced nondegenerate conic in `P^2`, hence a smooth conic, hence isomorphic to `P^1`; `phi_L` composed with that isomorphism is a degree-three morphism `psi_3 : C -> P^1`, i.e. `C` is trigonal, and `L ~= psi_3^*O_{P^1}(2) = O_C(2T)`. This is case (iii). Conversely, on a non-hyperelliptic genus-six curve with trigonal pencil `T`, the three coordinate pullbacks along the Veronese `P^1 -> conic` are independent, so `h^0(2T) >= 3`, while Clifford gives `h^0(2T) <= deg/2 + 1 = 4` with equality only in the Clifford-equality case (excluded since `deg 2T = 6` is neither `0` nor `2g-2 = 10` and `C` is not hyperelliptic); hence `h^0(2T) = 3` exactly. The cases are mutually exclusive because `deg X` and `deg phi_L` are determined by `phi_L`. QED\n\n**Remark 3.2 (why this matters).** The project's recorded case analysis for the ordering cover is a **dichotomy** type (i) / type (ii). Lemma 3.1 shows that, as stated, that dichotomy is not exhaustive on the balanced locus: the recorded exclusions cover hyperelliptic fibres, plane quintics, and base points, but none of them touches `(e,m) = (2,3)`. Either type (iii) must be excluded under (BAL) by a separate argument, or the monodromy and component analysis must be extended to it. This is recorded as a new gap (`GAP-COMP-TYPE-III`). No claim is made here that type (iii) is nonempty; the claim is only that the recorded exclusion list does not close it.\n\n**Lemma 3.3 (structure of the type-(iii) branch).** *In case (iii), `D = omega_C - 2T` is a degree-four divisor class with `h^0(D) = 2`, and `D` is base-point-free unless `omega_C ~= O_C(3T + q)` for some point `q in C`, in which case `D ~= T + q`.*\n\n*Proof.* By (P6), `D = omega_C - L = omega_C - 2T`, of degree `10 - 6 = 4`. Riemann-Roch and `h^0(2T) = 3`, `chi(2T) = 6 - 6 + 1 = 1` give `h^0(D) = h^1(2T) = h^0(2T) - chi(2T) = 2`. A point `q` is a base point of `|D|` iff `h^0(D - q) = 2`, i.e. iff `D - q` is a `g^1_3`. On a non-hyperelliptic curve of genus at least five the `g^1_3` is unique: two independent degree-three maps would give a birational map onto a curve of bidegree `(3,3)` in `P^1 x P^1`, of arithmetic genus `(3-1)(3-1) = 4 < 6`, contradicting Castelnuovo-Severi, and the common-factor step then identifies the two pencils. Hence `D - q ~ T`, so `D ~ T + q` and `omega_C ~ 2T + D ~ 3T + q`. QED\n\n## 4. Block systems, monodromy containments, and the corrected component dictionary\n\n### 4.1 The dictionary (restatement of recorded constraints, not new)\n\nFor a connected base `U_alpha` and a finite etale **right** `S_6`-torsor `Z^{ord}_alpha -> U_alpha` with geometric monodromy image `H_alpha <= S_6`:\n\n* connected components of `Z^{ord}_alpha` are in bijection with the orbit set of left multiplication by `H_alpha` on `S_6`, i.e. with the **right cosets** `H_alpha \\ S_6`; their number is `[S_6 : H_alpha]`;\n* the component indexed by `H_alpha g` has stabilizer `g^{-1} H_alpha g` for the right deck action, **not** `g H_alpha g^{-1}` (these agree for all `g` only when `H_alpha` is normal);\n* the cover is connected iff `H_alpha = S_6`; transitivity of `H_alpha` on six letters is **not** sufficient (e.g. `A_6` is transitive and yields two components);\n* upgrading \"connected components\" to \"irreducible components\" requires normality of the base (or an independent geometric-irreducibility argument), since a connected finite etale cover of a connected locally Noetherian base need not be irreducible.\n\nThese four points are verbatim consequences of the recorded mathematical constraints in the primary working context; they are reproduced here because the counts of Section 4.3 depend on getting them right, and they are explicitly **not** offered as progress.\n\n### 4.2 (N) Canonical block systems\n\n**Lemma 4.2.** *Let `Gamma in |L|^{rs}` be a reduced member.* \n\n*(a) In type (ii), `Gamma = psi^*(p_1 + p_2 + p_3)` where `p_1, p_2, p_3` are the three distinct points of `E` cut by the corresponding line, none of them a branch point of `psi`; hence `Gamma` carries a canonical partition into three blocks of size two, namely the three fibres of `psi`.*\n\n*(b) In type (iii), `Gamma = psi_3^*(q_1 + q_2)` for two distinct points `q_1, q_2` of the conic that are not branch points of `psi_3`; hence `Gamma` carries a canonical partition into two blocks of size three, namely the two fibres of `psi_3`.*\n\n*In both cases the partition is defined intrinsically from `(C, L)` and is therefore preserved by the monodromy of the ordering cover, so:*\n\n* *type (ii): `H_alpha` is contained in a conjugate of the imprimitive wreath product `S_2 wr S_3`, of order `2^3 * 6 = 48`;*\n* *type (iii): `H_alpha` is contained in a conjugate of `S_3 wr S_2`, of order `6^2 * 2 = 72`.*\n\n*Proof.* In type (ii), `L = psi^*O_E(1)` and members of `|L|` are exactly the pullbacks of the degree-three divisors cut on `E subset P^2` by lines (the complete system `|O_E(1)|` has dimension two and pulls back injectively into the three-dimensional `H^0(L)`, hence surjectively). If `Gamma = psi^*(p_1+p_2+p_3)` is reduced with six distinct points, then the `p_i` are pairwise distinct and none is a branch point of `psi` (a branch point would contribute a doubled point). So `Gamma` is the disjoint union of three `psi`-fibres of size two. Type (iii) is identical with `psi_3` and a degree-two divisor on the conic. Since the fibre partition is determined by the intrinsic data `(C, L)`, parallel transport along any loop in `Z^{rs}_alpha` carries blocks to blocks, so the image lands in the stabilizer of a block system, i.e. in a conjugate of the stated wreath product. QED\n\n### 4.3 (N) Consequent component counts and stabilizers on imprimitive components\n\nCombining Lemma 4.2 with the dictionary of 4.1:\n\n* on a connected component of the balanced base all of whose fibres are of type (ii), `[S_6 : H_alpha] >= [S_6 : S_2 wr S_3] = 720/48 = 15`, so the ordered cover has **at least fifteen** connected components, and the stabilizer of the component indexed by `H_alpha g` is `g^{-1} H_alpha g <= g^{-1}(S_2 wr S_3)g`;\n* on a connected component all of whose fibres are of type (iii), `[S_6 : H_alpha] >= [S_6 : S_3 wr S_2] = 720/72 = 10`, so the ordered cover has **at least ten** connected components, with stabilizers `g^{-1}H_alpha g <= g^{-1}(S_3 wr S_2)g`;\n* in particular, on either imprimitive branch `H_alpha != S_6`, so the ordering cover is **disconnected**, and by (P5) each of its components has dimension `dim(S_alpha) + 2`.\n\nThese are lower bounds only. The exact value of `H_alpha` inside the wreath product is **not** determined here (Section 6, `GAP-COMP-TYPEII-IMAGE`). Note that the bound alone already suffices to show that the isotypic decomposition of the cohomology of the ordering cover on such a component cannot be read off from the type-(i) answer.\n\n### 4.4 Status of type (i)\n\nThe project record contains an argument that in type (i) the monodromy is all of `S_6`: irreducibility of the point-line incidence over `C` gives transitivity; the ordered-pair incidence, after deleting the diagonal and the coincidence locus over non-normal points of the plane sextic, is irreducible of dimension two and dominant of generic degree `6*5 = 30` over `|L|^{rs}`, giving 2-transitivity and hence primitivity; a general tangent line is a simple tangency at a smooth point of the dual curve, contributing a transposition; and Jordan's theorem (a primitive subgroup of `S_n` containing a transposition is `S_n`) concludes.\n\nThis session did **not** re-derive that argument, and the record itself lists two of its inputs -- characteristic-zero reflexivity/biduality (birationality of the Gauss map onto the dual curve) and Jordan's theorem -- as frontier obligations if used as inputs rather than independently established. Accordingly, `H_alpha = S_6` on purely type-(i) components is carried here as an inherited, input-contingent statement, not as a claim of this artifact. If it holds, the dictionary of 4.1 gives exactly one component of the ordering cover over such a base component, with full stabilizer `S_6`, of dimension `dim(S_alpha) + 2`.\n\n## 5. Aut and inertia groups for the ordered model\n\n### 5.1 Prior statement (register P)\n\nOn a balanced pair, if `O_C(Gamma) ~= L`, then `|omega_C(-Gamma)|` is the complete base-point-free pencil defining `gamma`, `gamma` is recovered up to `PGL_2`, and `Aut(C, gamma, Gamma) ~= Aut(C, Gamma)` (recorded established fact; consistent with `ATT-0066`).\n\n### 5.2 (N) What this does and does not settle\n\nThe recorded constraint against the naive stabilizer argument is that computing `Aut(C, gamma, Gamma)` -- automorphisms preserving the tetragonal cover *and* the divisor -- is not the same as computing `Aut(C, Gamma)`, since an automorphism preserving `Gamma` need not preserve the pencil, and a nontrivial automorphism of a genus-six curve can fix up to `2g + 2 = 14` points, hence can fix six marked points.\n\nThe synthesis worth recording is that **this particular objection is inert at points of `Z`**: by (P2), every point of `Z` satisfies `O_C(Gamma) ~= L`, and by (P6) `L ~= omega_C(-D)`, so `omega_C(-Gamma) ~= O_C(D)`, whose complete linear system is two-dimensional and is exactly the pulled-back `gamma`-pencil. Thus at any point of `Z` the pencil is canonically reconstructible from `(C, Gamma)` alone, and `Aut(C, gamma, Gamma) = Aut(C, Gamma)` there. The relevant deck/inertia data on the ordered model is then: the right `S_6` deck action on `Z^{ord} -> Z^{rs}` with component stabilizers as in 4.1/4.3, together with `Aut(C, Gamma)` acting on each geometric point.\n\nWhat this does **not** settle, and what remains open, is (a) the stack-level identification of the automorphism groups of the Abel-Jacobi incidence with `Aut(C, gamma, Gamma)` including inertia, and (b) the existence, representability, unramifiedness, quasi-finiteness, and image-closure properties of a morphism from the balanced ordered model to `M_{6,6}`. In particular the recorded five-to-one issue persists: `M_{6,6}` forgets `gamma`, a general genus-six curve carries five distinct `g^1_4`s (`rho(6,1,4) = 6 - 2(6-4+1) = 0`, `#W^2_6 = 5` by the Castelnuovo count, and residuation `L <-> omega_C tensor L^{-1}` is a bijection `W^2_6 <-> W^1_4`), so the underlying forgetful map is generically five-to-one; the reconstruction above removes the *pointwise* ambiguity on `Z` but does not by itself supply representability or quasi-finiteness of a morphism of stacks. These stay open (Section 6).\n\n## 6. Remaining frontier (register G)\n\n1. **`GAP-COMP-TYPEII-IMAGE`.** The exact geometric monodromy image `H_alpha` inside `S_2 wr S_3` on a type-(ii) component. Section 4.3 gives only the containment and the resulting lower bound `[S_6 : H_alpha] >= 15`. Without the exact group, neither the component count nor the `S_6`-isotypic decomposition of the cohomology of the ordering cover on such a component is determined.\n2. **`GAP-COMP-PURE-TYPEII`.** Whether a connected component of a balanced `(CE)+(N)` base can consist entirely of type-(ii) (bielliptic) fibres -- equivalently whether the type-(i) hypothesis in the family monodromy statement is automatic. Undetermined. Note that this splits into two sub-questions not separated in the record: whether bielliptic genus-six curves admit a degree-four pencil with balanced `F` at all, and whether such fibres can fill a whole connected component.\n3. **`GAP-COMP-TYPE-III`** (new this session). Whether the trigonal branch `(e,m) = (2,3)` of Lemma 3.1 -- `L ~= O_C(2T)`, `D ~= omega_C - 2T` -- can occur under (BAL). Until this is settled the recorded type-(i)/type-(ii) dichotomy is not certified exhaustive, and the component analysis is incomplete even granting items 1 and 2. Lemma 3.3 supplies the base-point criterion needed to set up the Casnati-Ekedahl computation in this branch.\n4. **`GAP-COMP-BASE-IRRED`.** Irreducibility of the balanced base. The component correspondence transports components of the base to components of the incidence and of its distinct-support open, but the number of components of the base itself is undetermined; consequently the absolute number of irreducible components of the ordered evaluation-failure locus is undetermined. The upgrade from connected to irreducible components additionally requires normality of the base (4.1), which is not established here.\n5. **`GAP-COMP-AUT-M66`.** The stack-level Aut/inertia identification and the morphism to `M_{6,6}`: existence, representability, unramifiedness, quasi-finiteness, and image-closure, together with extension of the family/Abel-Jacobi/ordering-torsor statements to stacks with inertia and to nonreduced bases (where Grauert local freeness needs a separate lifting argument). Section 5.2 discharges only the pointwise part of the objection.\n\n## 7. What a complete resolution still requires\n\nA gap-free `C66-GEO-COMP` needs, in order: (a) closure of the trichotomy, either by excluding type (iii) under (BAL) or by computing its monodromy inside `S_3 wr S_2`; (b) settling nonemptiness of type (ii) under (BAL) and whether it can fill a component; (c) the exact wreath-subgroup `H_alpha` on each imprimitive component; (d) an independent establishment (or explicit admission as inputs) of reflexivity/biduality and Jordan's theorem for the type-(i) argument; (e) irreducibility and normality of the balanced base; and (f) the stack-level Aut/inertia and `M_{6,6}` morphism package. Items (a), and the containment/count half of (c), are advanced by this artifact; the rest are untouched.\n\nNo route listed in the packet's `blocked_routes` is used anywhere above, and no new input is declared.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0109-1",
+      "justification": "Lemma 3.1. Completeness and base-point-freeness of |L| force the image to be nondegenerate, irreducible and reduced, so deg X >= 2 and deg(X)*deg(phi_L) = 6 leaves exactly (6,1), (3,2), (2,3). A singular plane cubic image would have rational normalization and produce a degree-two map C -> P^1, i.e. a hyperelliptic fibre, excluded under (BAL) by ATT-0066 CLM-0066-3 and packet finding FND-0125. A nondegenerate irreducible reduced conic is smooth, hence isomorphic to P^1. Genus and delta bookkeeping p_a(sextic) = 10, g = 6 gives delta = 4; Riemann-Hurwitz gives branch degree 10 in case (ii). Base-point-freeness and h^0(L) = 3 are inherited from ATT-0066 CLM-0066-1,2,3 and the recorded plane-quintic exclusion.",
+      "statement": "On every geometric fibre of a family satisfying (CE), (BAL), (N), the residual bundle L = W_5 tensor omega_C^{-1} is base-point-free of degree six with h^0(L)=3, and phi_L : C -> P^2 falls into exactly one of three mutually exclusive cases: (i) birational onto a plane sextic with total delta-invariant 4; (ii) degree two onto a smooth plane cubic (C bielliptic, branch divisor of degree 10); (iii) degree three onto a smooth conic (C trigonal, L = O_C(2T)). In particular the recorded type-(i)/type-(ii) dichotomy is not exhaustive as stated, since case (iii) is not covered by the recorded exclusions of hyperelliptic fibres, plane quintics, and base points.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0109-2",
+      "justification": "Lemma 3.3. h^0(2T) = 3 exactly on a non-hyperelliptic genus-six curve (three independent sections from the Veronese conic; Clifford equality excluded since deg 2T = 6 is neither 0 nor 2g-2 = 10). Riemann-Roch gives h^0(D) = h^1(2T) = 3 - 1 = 2. A base point q means D - q is a g^1_3; the g^1_3 on a non-hyperelliptic curve of genus at least five is unique by Castelnuovo-Severi (an independent second g^1_3 would give a bidegree-(3,3) model of arithmetic genus 4 < 6), so D - q is linearly equivalent to T and omega_C = 2T + D = 3T + q.",
+      "statement": "In type (iii), D = omega_C - 2T has degree four and h^0(D) = 2, and D is base-point-free unless omega_C is isomorphic to O_C(3T + q) for some point q, in which case D is linearly equivalent to T + q.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0109-3",
+      "justification": "Lemma 4.2. In type (ii), |L| is the pullback of the complete two-dimensional system |O_E(1)| cut by lines on the smooth plane cubic; reducedness of Gamma forces the three points on E to be distinct and unbranched, so Gamma is a disjoint union of three psi-fibres. Type (iii) is the same argument with a degree-two divisor on the conic. The partition is defined intrinsically from (C, L), hence preserved by parallel transport, so the monodromy image stabilizes a block system.",
+      "statement": "For a reduced member Gamma of |L| in type (ii), Gamma is the disjoint union of three fibres of the bielliptic map psi, giving a canonical monodromy-invariant partition into three blocks of size two; in type (iii), Gamma is the disjoint union of two fibres of the trigonal map, giving a canonical partition into two blocks of size three. Consequently the geometric monodromy image H_alpha of the ordering cover is contained in a conjugate of S_2 wr S_3 (order 48) in type (ii), and in a conjugate of S_3 wr S_2 (order 72) in type (iii).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0109-4",
+      "justification": "Combine CLM-0109-3 with the recorded torsor dictionary (components indexed by the orbit set H_alpha \\ S_6 of right cosets, count [S_6 : H_alpha], stabilizer of the component indexed by H_alpha g equal to g^{-1} H_alpha g, connectedness equivalent to H_alpha = S_6 rather than to transitivity) and with the dimension statement of ATT-0066 CLM-0066-4 plus preservation of dimension under finite etale maps. The index bounds are 720/48 = 15 and 720/72 = 10. The dictionary itself is a restatement of recorded working-context constraints and is not claimed as new; only its application here is.",
+      "statement": "On a connected component of the balanced base consisting entirely of type-(ii) fibres, the finite etale S_6-ordering cover is disconnected with at least [S_6 : S_2 wr S_3] = 15 connected components; on a purely type-(iii) component it has at least [S_6 : S_3 wr S_2] = 10 connected components. In both cases the component indexed by the right coset H_alpha g has deck stabilizer g^{-1} H_alpha g, and each component has dimension dim(S_alpha) + 2.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0109-5",
+      "justification": "By ATT-0065 CLM-0065-9 every point of Z satisfies O_C(Gamma) isomorphic to L, and by the (N) normalization L is isomorphic to omega_C(-D) with h^0(O_C(D)) = 2 on the balanced locus (ATT-0066 CLM-0066-2). Line-bundle algebra gives omega_C(-Gamma) isomorphic to O_C(D); completeness of the pencil and surjectivity of gamma give recovery up to PGL_2. This restates a recorded established fact and adds only the observation that it neutralizes the recorded constraint at points of Z; it does not address stack-level inertia or the morphism to M_{6,6}.",
+      "statement": "At every point of the evaluation-failure locus Z, the tetragonal pencil is canonically reconstructible from (C, Gamma): O_C(Gamma) is isomorphic to L = omega_C(-D), hence omega_C(-Gamma) is isomorphic to O_C(D), whose complete two-dimensional linear system is the pencil defining gamma. Consequently Aut(C, gamma, Gamma) = Aut(C, Gamma) at points of Z, and the recorded objection that an automorphism preserving Gamma need not preserve the pencil is inert on Z.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0109-6",
+      "justification": "Serre duality identifies h^0(omega_C tensor L^{-1}) with h^1(L) and the Riemann-Roch bookkeeping deg L = 6, chi(L) = 1 converts h^0(L) = 3 into h^0(omega_C tensor L^{-1}) = 2 with degree 4, and conversely; the assignment is involutive, hence bijective. rho(6,1,4) = 6 - 2(6-4+1) = 0 and the Castelnuovo formula gives 720/144 = 5. The negative conclusion is the recorded constraint that object-level uniqueness does not imply space-level injectivity.",
+      "statement": "Residuation L -> omega_C tensor L^{-1} is a bijection between the g^2_6's and the g^1_4's of a genus-six curve; with rho(6,1,4) = 0 and the Castelnuovo count #W^2_6 = 5 on a general genus-six curve, the forgetful map from the balanced ordered model to M_{6,6} is generically five-to-one on underlying curves, so pointwise reconstruction of gamma (CLM-0109-5) does not by itself give representability or quasi-finiteness of a morphism of stacks.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": false,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "claude",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Equating connectedness of the finite etale S_6-torsor with transitivity of the monodromy image: avoided; connectedness is used only in the correct form H_alpha = S_6 (Section 4.1)."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Writing the component stabilizer as g H_alpha g^{-1} on left cosets gH: avoided; components are indexed by right cosets H_alpha g with stabilizer g^{-1} H_alpha g (Section 4.1, CLM-0109-4)."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Counting irreducible components from the index [S_6 : H] without a normality hypothesis on the base: avoided; the counts of CLM-0109-4 are stated for connected components, and the normality requirement is recorded as GAP-COMP-BASE-IRRED."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Proving a stabilizer clause by observing that an automorphism induces a PGL_2 transformation of P^1 fixing the marked images and then quoting it for the forgetful map to M_{6,6}: avoided; CLM-0109-5 works in the opposite direction, reconstructing the pencil from (C, Gamma) using O_C(Gamma) = L, and explicitly does not conclude anything about the map to M_{6,6}."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Identifying the relative degree-six linear system with Proj(pi_*L) over an arbitrary base: avoided; the base-independent Abel-Jacobi incidence of ATT-0066 CLM-0066-5 is used, and the P^2-bundle statement is invoked only on the constant-h^0 balanced locus over a reduced base."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Deducing a global direct-sum splitting of W from fibrewise balancedness: avoided; only fibrewise splitting is used, and the family-level statements are quoted from ATT-0065 CLM-0065-3, which proceeds by the filtered snake lemma without a global splitting."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Treating the balanced reduced-support relative linear system as a closed pure-codimension-four subvariety of M_{6,6} and applying Gysin: avoided; codimension four appears only as the numerical statement 21 - 17 = 4 of (P5), with no closedness, purity, or Gysin claim."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Reducing only the source in the ordered-to-unordered construction: avoided; the convention I_red -> (I^{red-supp})_red of ATT-0066 CLM-0066-6 is used."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Positing a nonempty jump piece B_4 with fibre P^3: avoided; the stratum h^0(L) = 4 is empty under (BAL) by ATT-0066 CLM-0066-3, as used in (P3) and in Lemma 3.1."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Concluding pure-Tate cohomology of the failure locus from rationality of the irreducible representations of S_6: not attempted; no Hodge, weight, purity, or Tate-type statement is made anywhere in this artifact."
+    }
+  ],
+  "gap_markers": [
+    {
+      "id": "GAP-COMP-TYPEII-IMAGE",
+      "impact": "Without the exact subgroup, neither the component count nor the S_6-isotypic decomposition of the cohomology of the ordering cover on a purely type-(ii) component is determined.",
+      "statement": "The exact geometric monodromy image H_alpha inside S_2 wr S_3 on a type-(ii) (bielliptic) component is undetermined. Only the containment and the resulting bound [S_6 : H_alpha] >= 15 are established here.",
+      "status": "open"
+    },
+    {
+      "id": "GAP-COMP-PURE-TYPEII",
+      "impact": "Equivalently, whether the type-(i) hypothesis in the family monodromy statement is automatic. Left open.",
+      "statement": "Whether a connected component of a balanced (CE)+(N) base can consist entirely of type-(ii) fibres is undetermined; this splits into (a) whether a bielliptic genus-six curve admits a degree-four pencil with balanced relations bundle F = O(4)+O(5) at all, and (b) whether such fibres can fill an entire connected component.",
+      "status": "open"
+    },
+    {
+      "id": "GAP-COMP-TYPE-III",
+      "impact": "Until settled, the recorded type-(i)/type-(ii) case list is not certified exhaustive, so the component and monodromy analysis is incomplete even granting the other gaps. Lemma 3.3 supplies the base-point data needed to set up the Casnati-Ekedahl computation in this branch.",
+      "statement": "Newly raised by this session: whether the trigonal branch of Lemma 3.1 (L = O_C(2T), D = omega_C - 2T) can occur under (BAL). The recorded exclusions do not close it.",
+      "status": "open"
+    },
+    {
+      "id": "GAP-COMP-BASE-IRRED",
+      "impact": "The absolute number of irreducible components of the ordered evaluation-failure locus is therefore undetermined; the component correspondence only transports components of the base to components of the incidence and of its distinct-support open.",
+      "statement": "Irreducibility of the balanced base is undetermined, and the upgrade from connected components of the etale cover to irreducible components additionally requires normality of the base, which is not established here.",
+      "status": "open"
+    },
+    {
+      "id": "GAP-COMP-AUT-M66",
+      "impact": "CLM-0109-5 discharges only the pointwise part of the recorded objection; CLM-0109-6 records why the generically five-to-one forgetful map keeps the space-level statement open.",
+      "statement": "The stack-level identification of Aut groups for the Abel-Jacobi incidence versus Aut(C, gamma, Gamma) including inertia, and the existence, representability, unramifiedness, quasi-finiteness, and image-closure of a morphism from the balanced ordered model to M_{6,6}, are undetermined; so is the extension of the family, Abel-Jacobi, and ordering-torsor statements to algebraic stacks with inertia and to nonreduced bases, where Grauert local freeness requires a separate lifting argument.",
+      "status": "open"
+    },
+    {
+      "id": "GAP-COMP-TYPEI-INPUTS",
+      "impact": "The one-component, full-stabilizer answer on purely type-(i) components is conditional on those two inputs being established or explicitly admitted.",
+      "statement": "The recorded type-(i) conclusion H_alpha = S_6 is carried here as inherited and input-contingent, not reproved: it rests on characteristic-zero reflexivity/biduality (birationality of the Gauss map onto the dual curve) and on Jordan's theorem that a primitive subgroup of S_n containing a transposition is S_n, both of which the record lists as frontier obligations when used as inputs.",
+      "status": "open"
+    }
+  ],
+  "id": "ATT-0109",
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "lane": "geometry",
+  "methods_used": [
+    "linear-series-classification-of-g26-on-genus-six",
+    "castelnuovo-severi-and-uniqueness-of-the-trigonal-pencil",
+    "clifford-bound-and-hyperelliptic-exclusion-under-balancedness",
+    "riemann-hurwitz-branch-count-for-the-bielliptic-cover",
+    "block-system-imprimitivity-for-monodromy-of-composed-maps",
+    "finite-etale-torsor-coset-dictionary-for-components-and-stabilizers",
+    "grauert-local-freeness-and-projective-bundle-structure-over-a-reduced-base",
+    "abel-jacobi-incidence-model-of-the-evaluation-failure-locus"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Exhaustive trichotomy (Lemma 3.1) for the residual map phi_L on the balanced locus, identifying a third branch -- type (iii), C trigonal with L = O_C(2T) and phi_L three-to-one onto a smooth conic -- that is not covered by the recorded type-(i)/type-(ii) dichotomy nor by the recorded exclusions of hyperelliptic fibres, plane quintics, and base points.",
+    "Base-point criterion for the tetragonal pencil in the trigonal branch (Lemma 3.3): D = omega_C - 2T is base-point-free unless omega_C = O_C(3T + q), in which case D = T + q.",
+    "Canonical block systems on reduced members of |L| in the imprimitive branches, with the resulting monodromy containments H_alpha inside a conjugate of S_2 wr S_3 (type ii) and of S_3 wr S_2 (type iii), and the derived component lower bounds [S_6 : H_alpha] >= 15 and >= 10 together with the corrected conjugated stabilizer formula g^{-1} H_alpha g.",
+    "Observation that the recorded Aut objection is inert at points of Z: O_C(Gamma) = L forces omega_C(-Gamma) = O_C(D), so the pencil is canonically reconstructible and Aut(C, gamma, Gamma) = Aut(C, Gamma) on Z, while stack-level inertia and the M_{6,6} morphism remain untouched."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "268913bb66959a14fac8c9318343983bf9b8ae628714d1baaa46cf6bb8a874fc",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0065",
+      "kind": "attempt",
+      "use": "Scheme-theoretic identification of the Casnati-Ekedahl evaluation-failure locus with the relative Abel-Jacobi incidence O_C(Gamma) = W_5 tensor omega_C^{-1}, with arbitrary base change (CLM-0065-1,3,4,5,7,8,9); filtered snake-lemma reduction to the f=5 summand; R^1 s_* End(F) = 0 from fibrewise balancedness."
+    },
+    {
+      "id": "REV-0108",
+      "kind": "confirmation_review",
+      "use": "Confirmation of ATT-0065."
+    },
+    {
+      "id": "REV-0109",
+      "kind": "confirmation_review",
+      "use": "Confirmation of ATT-0065."
+    },
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "use": "h^0(L) = 3 and h^1(L) = 2 constant on the balanced locus; emptiness of the h^0(L) = 4 stratum via hyperellipticity; M = gamma^*O(1) under (N); P^{k-1}-bundle structure of the relative linear system on constant-h^0 strata; Abel-Jacobi incidence as the base-independent model; finite etale S_6-torsor on the reduced-support open with source-and-target reduction (CLM-0066-1..6)."
+    },
+    {
+      "id": "REV-0110",
+      "kind": "confirmation_review",
+      "use": "Confirmation of ATT-0066."
+    },
+    {
+      "id": "REV-0116",
+      "kind": "confirmation_review",
+      "use": "Confirmation of ATT-0066."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0103",
+    "FND-0104",
+    "FND-0125",
+    "FND-0131",
+    "FND-0064",
+    "FND-0075"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "Partial (wrap-up) progress on C66-GEO-COMP after a session-limit interruption. NOT a complete resolution. New content of this session: (1) an exhaustive trichotomy for the residual map phi_L on the balanced locus, which shows the recorded type-(i)/type-(ii) dichotomy is NOT exhaustive as stated -- a third branch, type (iii) (C trigonal, L = 2T, phi_L three-to-one onto a smooth conic), survives the recorded exclusions (hyperelliptic, plane-quintic, base points) and must be either excluded under (BAL) or analysed; (2) for the two imprimitive branches, the canonical block systems and the resulting monodromy containments H_alpha contained in a conjugate of S_2 wr S_3 (type ii) resp. S_3 wr S_2 (type iii), with the corrected coset dictionary giving component counts [S_6:H_alpha] >= 15 resp. >= 10 and component stabilizers g^{-1}H_alpha g; (3) a base-point criterion for the tetragonal pencil in the trigonal branch (D = omega_C - 2T is base-point-free unless omega_C = O(3T+q)); (4) the observation that on Z itself the objection recorded against the naive Aut argument is discharged, since O_C(Gamma) = L forces omega_C(-Gamma) = O_C(D) and hence Aut(C,gamma,Gamma) = Aut(C,Gamma). Structural facts about Z (Abel-Jacobi incidence, P^2-bundle, relative dimension +2, codimension four in M_{6,6}) are restated with attribution to ATT-0065 and ATT-0066 and are not claimed as new. Four frontier obligations remain explicitly open and are recorded as gap markers: the exact type-(ii) image inside S_2 wr S_3; existence of a purely type-(ii) connected component; irreducibility of the balanced base and hence the absolute component count of Z; and the stack-level Aut/inertia identification together with the morphism to M_{6,6}. A fifth gap, the status of type (iii) under (BAL), is newly raised by this session.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "Over a reduced locally Noetherian base carrying a balanced Casnati-Ekedahl genus-six degree-four family satisfying (CE), (BAL), and (N), determine the irreducible components, dimensions, deck and component stabilizers, and finite-cover behavior of the ordered evaluation-failure locus Z. In particular: compute the exact geometric monodromy image H_alpha of the finite etale S_6-ordering cover on every balanced component, including purely type-(ii) components if they exist; decide whether a connected component of the balanced base can consist entirely of type-(ii) fibres; give the resulting component count and component-stabilizer formula; and identify the relevant Aut / inertia groups for the ordered model. This lemma does not resolve the campaign Hodge/Tate group RED-0001."
+}

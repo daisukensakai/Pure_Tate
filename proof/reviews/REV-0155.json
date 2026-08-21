@@ -1,0 +1,118 @@
+{
+  "attempt_id": "ATT-0109",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CHK-PACKET-BINDING",
+      "note": "The attempt is bound to campaign revision 4, packet C66-001-v4, SHA-256 268913bb66959a14fac8c9318343983bf9b8ae628714d1baaa46cf6bb8a874fc, and the exact (g,n)=(6,6) target copied above.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0109-1",
+      "note": "The asserted surviving type-(iii) branch is incompatible with (BAL). If phi_L has degree 3 onto a conic, then L is 2T for a base-point-free g^1_3. The CE section count gives E isomorphic to O(3)^{oplus 3}, while multiplication Sym^2 H^0(L) to H^0(L^2) has six-dimensional source and image contained in the five-dimensional pullback of H^0(P^1,O(4)). Thus h^0(F(-6)) is at least one, contradicting (BAL). Consequently the assertion that the recorded exclusions do not touch type (iii) is false.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CHK-THEOREM-COVERAGE",
+      "note": "The exact theorem statement is not established. The attempt gives only wreath-product containment and index lower bounds for type (ii), not the exact image H_alpha; it does not decide whether an entire connected balanced component can be purely type (ii); and its pointwise equality Aut(C,gamma,Gamma)=Aut(C,Gamma) does not establish the requested stack-level inertia, representability, or finite-cover assertions.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CHK-ADVERSARIAL-SCOPE",
+      "note": "No rational-to-integral upgrade, Borel-Moore/cohomological degree conversion, Poincare-duality twist, Gysin or Kunneth shift, spectral-sequence degeneration, invariant/coinvariant identification, semisimplification upgrade, motivic prediction, pure-Tate-to-tautological upgrade, or stable-pair reduction is used to prove this geometric lemma. Those attacks therefore do not repair or supersede the failed balancedness check. The stack-versus-coarse issue remains an explicit unresolved part of the theorem.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-20",
+  "finding_candidates": [
+    {
+      "adjudication": "existing_finding_support",
+      "key": "FC-C66-ATT0109-TYPEIII-BAL",
+      "kind": "structural_observation",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "objects": [
+          "balanced Casnati-Ekedahl degree-four families",
+          "the map defined by the complete g^2_6",
+          "type-(iii) component and monodromy claims"
+        ],
+        "subproblem_id": "C66-GEO-COMP"
+      },
+      "statement": "ATT-0109's proposed type-(iii) branch fails because it checks the Brill-Noether factorization of phi_L but omits the resulting CE bundle constraint: the degree-three-to-conic case forces h^0(F(-6))>=1 and hence violates (BAL). Therefore GAP-COMP-TYPE-III is not a surviving geometric frontier, and all component or wreath-product conclusions predicated on balanced type-(iii) fibres are vacuous.",
+      "supports_finding_id": "FND-0153"
+    }
+  ],
+  "id": "REV-0155",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "268913bb66959a14fac8c9318343983bf9b8ae628714d1baaa46cf6bb8a874fc",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Its relative Abel-Jacobi and evaluation-failure identification is used only in Register P and does not imply the failed type-(iii) classification.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "Listed only as prior confirmation of ATT-0065 and non-load-bearing for the disputed new claim.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Listed only as prior confirmation of ATT-0065 and non-load-bearing for the disputed new claim.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "The constant h^0(L)=3, projective-bundle, and ordered-torsor conclusions are used within their stated scope; they do not show that the trigonal conic case satisfies (BAL).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "Listed only as prior confirmation of ATT-0066 and non-load-bearing for the disputed new claim.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Listed only as prior confirmation of ATT-0066 and non-load-bearing for the disputed new claim.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0109-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is the omitted CE balancedness test in CLM-0109-1. The curve-theoretic factorization 6=3*2 permits a degree-three map to a conic, but it does not place that case in the balanced Casnati-Ekedahl locus. For L=2T the induced multiplication map has a six-dimensional source whose image lies in a five-dimensional pullback space, forcing h^0(F(-6))>=1 and violating (BAL), exactly supporting packet finding FND-0153. Thus the proposed trichotomy and its claim that type (iii) survives are wrong; the type-(iii) monodromy and component-count discussion is vacuous. Independently, the attempt remains incomplete for the exact theorem because it leaves exact type-(ii) monodromy, purely type-(ii) connected components, and stack-level Aut/inertia and finite-cover behavior unresolved.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Over a reduced locally Noetherian base carrying a balanced Casnati-Ekedahl genus-six degree-four family satisfying (CE), (BAL), and (N), determine the irreducible components, dimensions, deck and component stabilizers, and finite-cover behavior of the ordered evaluation-failure locus Z. In particular: compute the exact geometric monodromy image H_alpha of the finite etale S_6-ordering cover on every balanced component, including purely type-(ii) components if they exist; decide whether a connected component of the balanced base can consist entirely of type-(ii) fibres; give the resulting component count and component-stabilizer formula; and identify the relevant Aut / inertia groups for the ordered model. This lemma does not resolve the campaign Hodge/Tate group RED-0001.",
+  "verdict": "incomplete"
+}

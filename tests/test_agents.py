@@ -242,20 +242,21 @@ class AgentAdapterTests(unittest.TestCase):
             set(),
         )
         self.assertEqual(decision["request_id"], "check-A")
-        with self.assertRaisesRegex(ValueError, "duplicated"):
-            _parse_codex_controller_decision(
-                json.dumps(
-                    {
-                        "action": "dispatch",
-                        "request": {
-                            "request_id": "check-A",
-                            "description": "Repeat",
-                            "prompt": "Repeat",
-                        },
-                    }
-                ),
-                {"check-A"},
-            )
+        repeated = _parse_codex_controller_decision(
+            json.dumps(
+                {
+                    "action": "dispatch",
+                    "request": {
+                        "request_id": "check-A",
+                        "description": "Repeat",
+                        "prompt": "Repeat",
+                    },
+                }
+            ),
+            {"check-A"},
+        )
+        self.assertEqual(repeated["request_id"], "check-A-r2")
+        self.assertNotEqual(repeated["request_id"], "check-A")
         transcript = _codex_controller_transcript(
             [
                 {

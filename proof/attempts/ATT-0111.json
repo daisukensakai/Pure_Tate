@@ -1,0 +1,210 @@
+{
+  "argument_markdown": "## 0. Imported facts and notation\n\nLet pi:C->S be the genus-six family, gamma:C->P the degree-four cover, D=gamma^*O_P(1), and L=W_5 tensor omega_{C/S}^{-1}, with the harmless ambiguity of tensoring L by a line bundle from S. By ATT-0065, CLM-0065-4 and CLM-0065-9, the evaluation-failure scheme on the ordered configuration space is the Abel-Jacobi incidence O_C(Gamma)=L up to a base twist. By ATT-0088, CLM-0088-1 through CLM-0088-5 and CLM-0088-8, every balanced geometric fibre satisfies\n\nL=omega_C(-D), deg L=6, h^0(L)=3, h^1(L)=2,\n\nand the distinct-support locus in |L| is a nonempty dense open of dimension two. Over reduced S, Grauert therefore gives a rank-three vector bundle pi_*L, the Abel-Jacobi incidence is the P2-bundle AJ=P_S(pi_*L), its distinct-support open U is smooth and surjective over S of pure relative dimension two, and\n\nZ=Ord(U) -> U\n\nis a finite etale right S_6-torsor of total degree 720. These statements use the same reduced-support scheme on both sides of the ordering map; no one-sided reduction is made. The base-point-freeness and exhaustive type dichotomy used below are the geometric conclusions of FND-0153.\n\n## 1. The type-(ii) locus is closed\n\nBecause deg(L^3)=18, Serre duality gives H^1(C_s,L_s^3)=0 on every fibre, and Riemann-Roch gives h^0(L_s^3)=13. Grauert on the reduced base makes pi_*(L^3) locally free of rank 13 and compatible with base change. Multiplication gives a bundle map\n\nnu:Sym^3(pi_*L) -> pi_*(L^3)\n\nof ranks 10 and 13.\n\nBy FND-0153, the morphism phi_L defined by the complete g^2_6 has exactly two possible geometric forms. In type (i), phi_L normalizes an integral plane sextic. Such a sextic cannot be contained in a cubic, so ker(nu_s)=0 and rank(nu_s)=10. In type (ii), phi_L is a double cover of a smooth plane cubic Y, whose homogeneous ideal has a unique cubic generator; hence dim ker(nu_s)=1 and rank(nu_s)=9. No lower rank occurs.\n\nDefine\n\nS_ii=(V(I_10(nu)))_red.\n\nIts geometric points are exactly the type-(ii) fibres, so S_ii is closed and the type-(i) locus is its open complement. On S_ii the map nu has constant rank nine: I_9(nu)=O and, because S_ii is reduced, I_10(nu)=0. Consequently K=ker(nu) is a line bundle.\n\nThe line K supplies a relative cubic equation in the P2-bundle containing the image of C. Its zero scheme Y is a relative effective Cartier divisor: fibrewise the equation is nonzero and regular. Thus Y is flat and finitely presented over S_ii; all geometric fibres are smooth cubics, so Y->S_ii is smooth. The evaluation morphism C->P_S(pi_*L) factors through a morphism psi:C->Y because the cubic belongs to ker(nu). It is proper and fibrewise finite of degree two, hence finite. Both C and Y are flat over S_ii, and every fibre C_s->Y_s is finite flat of degree two; the fibral flatness criterion therefore makes psi finite locally free of rank two.\n\nSince 2 is invertible, trace splits\n\npsi_*O_C=O_Y direct-sum M^{-1}.\n\nChanging sign on M^{-1} defines the unique nontrivial relative involution iota of C over Y. Over U|S_ii the universal reduced divisor D_U is iota-stable and iota acts freely on it. Its quotient E=D_U/<iota> is finite etale of degree three over U, and D_U->E is finite etale of degree two. This is an algebraic reduction of the ordering torsor from S_6 to\n\nW=(S_2)^3 semidirect S_3=S_2 wr S_3.\n\nThe construction works over reducible and nonnormal reduced bases because it is obtained from the constant-rank kernel, not from a scheme-theoretic image.\n\n## 2. Type-(i) monodromy\n\nLet s be a type-(i) geometric fibre and put U_s=|L_s|^rs. The point-line incidence\n\nI_1={(x,l):phi_L(x) lies on l}\n\nis a P1-bundle over the irreducible curve C_s. Its restriction over U_s is irreducible and finite etale of degree six, so the monodromy group G is transitive on the six points.\n\nFor ordered distinct pairs, remove from C_s x C_s the diagonal and the finite locus where two distinct normalization points have the same image. A pair in the remaining irreducible open determines one line, and restriction over U_s gives an irreducible finite etale cover of degree 30. Hence G is transitive on ordered pairs of distinct letters: G is 2-transitive and therefore primitive.\n\nA general tangent to the integral sextic is tangent at one smooth point with contact order two. Here is the required characteristic-zero check. At a nonflex smooth branch, differentiating the tangent-line map shows that the tangent line to the dual curve at the corresponding dual point is the pencil of lines through the original point. Flexes are the zeroes of the nonzero Wronskian of the complete noncomposite g^2_6, hence are finite. If a general tangent line came from two distinct points, the dual curve would have two local branches there with different tangent directions, and that dual point would be singular. Since a general point of the integral dual curve is smooth, the general tangent has a unique tangency point. A transverse trait to the dual discriminant has local equation z^2=t on the two colliding sheets, so its inertia is a transposition.\n\nFinally, if a primitive subgroup G of S_6 contains a transposition, form the graph on six letters whose edges are the transpositions in G conjugate to it. Connected components of this graph form a G-invariant block system. Primitivity makes the graph connected, and edge transpositions of a connected graph generate S_6. Thus G=S_6. This reproves the type-(i) conclusion recorded in FND-0155 without confusing transitivity on six letters with connectedness of the S_6-torsor.\n\n## 3. Exact type-(ii) monodromy\n\nLet s be type (ii). By FND-0153 there are a smooth plane cubic Y, a double cover psi:C->Y with reduced branch divisor B of degree ten, and N=O_P2(1)|Y such that L=psi^*N. The three fibres of psi above the three points of a line section of Y give an invariant partition of the six points into three pairs. Hence G is contained in W.\n\nIdentify |L| with the dual plane. Its discriminant is\n\nDelta=Y^vee union (union over b in B of Delta_b),\n\nwhere Delta_b is the line parametrizing plane lines through b. Choose a general point l_0 of Delta_b. It lies on no other discriminant component, is transverse to Y at b, and cuts Y at b+y_2+y_3 with y_2,y_3 distinct and off B. On a transverse strictly henselian trait with parameter t, the moving intersection point of the line with Y is a simple local parameter through b. Since psi is simply ramified at b, local parameters may be chosen with psi given by u=z^2. After multiplying t by a unit, the two corresponding sheets therefore satisfy z^2=t, while the other four sheets remain etale. Tame inertia interchanges exactly these two sheets. Thus G contains one within-pair transposition.\n\nThe degree-three incidence cover of U_s obtained by remembering one of the three points of l intersect Y is the restriction of a P1-bundle over the irreducible cubic Y, hence is irreducible. The image of G in S_3 is therefore transitive. At a general nonflex tangent line to Y, away from B, two intersection points of Y coalesce simply while psi is etale. A transverse trait interchanges the corresponding two blocks, so the image in S_3 contains a transposition. It is consequently all of S_3.\n\nConjugating the within-pair transposition by lifts in G of elements of S_3 gives the within-pair transposition in each of the three blocks. These generate (S_2)^3. Since G also surjects onto S_3 and is contained in W, it follows that\n\nG=W=S_2 wr S_3, |W|=2^3 times 6=48.\n\nThis discharges the exact-image obligation left open by FND-0155.\n\n## 4. Family monodromy\n\nLet S_alpha be a connected component of S and U_alpha its inverse image in U. The fibres of U->S are connected nonempty opens of P2, and the morphism is open, so U_alpha is connected. Let\n\nH_alpha=im(pi_1^et(U_alpha)->S_6).\n\nIf S_alpha contains a type-(i) geometric fibre, the composite from the fundamental group of that fibre to S_6 already has image S_6 by Section 2. Hence H_alpha=S_6.\n\nIf every geometric fibre of S_alpha is type (ii), then S_alpha is contained in S_ii. The relative factorization D_U->E->U_alpha constructed in Section 1 forces H_alpha to preserve one global 2+2+2 block system, so H_alpha is contained in W. Restriction to any geometric fibre has image W by Section 3, so W is contained in H_alpha. Therefore H_alpha=W.\n\nThus the exact family classification is\n\nH_alpha=S_6 if S_alpha meets type (i),\nH_alpha=W if S_alpha is purely type (ii).\n\nThere are no intermediate monodromy images.\n\n## 5. Connected components, finite-cover degrees, and stabilizers\n\nFor any connected base U' and finite etale right S_6-torsor with monodromy H acting on a trivialized fibre by left multiplication, the monodromy orbits are the right cosets Hg, namely the orbit set H backslash S_6. The canonical right action is Hg dot a=Hga, and\n\nStab_S6(Hg)=g^{-1}Hg.\n\nEach connected component is finite etale and surjective over U' of degree |H|. In particular, connectedness of the torsor is equivalent to H=S_6, not merely to transitivity of H on six letters.\n\nApplied to U_alpha:\n\n1. If S_alpha meets type (i), Z_alpha is connected and Z_alpha->U_alpha has degree 720. Its right-S_6 component stabilizer is S_6.\n2. If S_alpha is purely type (ii), Z_alpha has [S_6:W]=720/48=15 connected components. Each is finite etale of degree 48 over U_alpha, and the component indexed by Wg has stabilizer g^{-1}Wg. The fifteen cosets equivalently parametrize the fifteen pairings of six labels into three unordered pairs.\n\nFor a connected finite etale base change V->U_alpha, the pullback has monodromy H_V equal to the image of pi_1(V) in H_alpha. It has [S_6:H_V] connected components, each of degree |H_V|. Thus further splitting occurs exactly when the base change reduces the monodromy subgroup, not merely because the base change is finite etale.\n\n## 6. Irreducible components and dimensions\n\nConnected and irreducible components must be separated on a reducible or nonnormal base. Let S_beta be an irreducible component of S with its reduced structure. Then S_beta is integral, and U_beta is an integral open in a P2-bundle over it. Let K_beta be the function field of U_beta. The generic fibre of Z over K_beta is a finite etale S_6-torsor over a field, so its field factors are exactly the generic points of the irreducible components of Z dominating U_beta.\n\nBecause S_ii is closed, precisely one of the following occurs:\n\n1. S_beta is not contained in S_ii. Its geometric generic fibre is type (i), the generic monodromy is S_6, and Z|U_beta is connected and irreducible. It is finite etale of degree 720 over U_beta.\n2. S_beta is contained in S_ii. Its generic monodromy is W, and Z|U_beta has fifteen irreducible components. Each is also a connected component of that restriction and is finite etale of degree 48 over U_beta.\n\nConsequently, if a connected component S_alpha contains a_alpha irreducible components of generic type (i) and b_alpha irreducible components of type (ii), then\n\nnumber Irr(Z_alpha)=a_alpha+15 b_alpha.\n\nIf a_alpha is positive, Z_alpha is nevertheless connected because H_alpha=S_6; its irreducible components can meet over intersections of irreducible components of S_alpha. If a_alpha=0, Z_alpha has fifteen connected components, and each connected component contains exactly one irreducible component over every irreducible component of S_alpha. Thus, when b_alpha>1, each of the fifteen connected components is reducible with b_alpha irreducible components.\n\nThe morphisms U->S and Z->S are smooth of pure relative dimension two. Therefore every listed irreducible component has relative dimension two over the irreducible base component it dominates. If S is locally of finite type over k, its absolute dimension is\n\ndim Z_component=dim S_beta+2.\n\nAn irreducible component is finite etale over its corresponding U_beta as stated above. When several base components meet, it need not be open or etale as a cover of the whole reducible U_alpha; the finite-etale degree 720 or 48 over U_alpha belongs to connected components, while the same degree for an irreducible component is asserted over its own U_beta.\n\n## 7. Deck action, full cover automorphisms, and ordered inertia\n\nThe canonical deck action named in the theorem is the free right S_6-action on orderings. It has trivial stabilizer at every geometric point. Its stabilizers on connected components are exactly g^{-1}H_alpha g.\n\nThis canonical S_6-action should not be confused with the full group Aut_U(Z). On a connected U_alpha, finite-etale monodromy identifies Aut_U(Z) with the centralizer of left H_alpha in the symmetric group of the 720-element fibre. Hence\n\nAut_U(Z)=S_6 when H_alpha=S_6,\nAut_U(Z)=W^op wr S_15 when H_alpha=W.\n\nIn the second case the canonical right S_6 is a proper subgroup of the full cover-automorphism group.\n\nAt a geometric ordered point z=(C,gamma;x_1,...,x_6), put Gamma=sum x_i. Since O_C(Gamma)=L=omega_C(-D), one has O_C(D)=omega_C(-Gamma), and ATT-0088 gives h^0(D)=2. Thus gamma is recovered as the complete pencil |omega_C(-Gamma)|. Every automorphism of C fixing all six labelled points acts on this two-dimensional space and induces a unique automorphism of the pencil target. Therefore forgetting the target automorphism gives an isomorphism\n\nAut^mov(C,gamma;x_1,...,x_6) isomorphic to Aut(C;x_1,...,x_6).\n\nNo generic triviality of this group is asserted. As a scheme, Z has trivial inertia at geometric points. No stack-inertia conclusion follows from this scheme statement.\n\nOn a type-(ii) fibre, the bielliptic involution iota preserves the unordered divisor but exchanges the two points in each of its three pairs. Hence iota does not belong to Aut(C;x_1,...,x_6). Over a purely type-(ii) family it induces a U-automorphism of Z that centralizes the canonical right S_6-action. After choosing one block-compatible trivialization it is left multiplication by the central element c of W that swaps all three pairs. It preserves every connected component and is not a single fixed right translation on all fifteen components.\n\n## 8. Existence and the meaning of purely type-(ii)\n\nFND-0154 constructs balanced type-(ii) objects: choose a smooth elliptic curve Y, P in Pic^2(Y), M in Pic^5(Y), a reduced B in |M^2|, form the double cover psi:C->Y branched along B, and compose it with q:Y->P1 defined by |P|. The resulting genus-six degree-four cover has E=O(2)+O(3)+O(4), F=O(4)+O(5), and satisfies the standard (CE) and (N). Taking S=Spec k gives an allowed connected base whose sole component is purely type (ii). Thus, for the literal theorem over arbitrary carrying bases, purely type-(ii) components do exist and the type-(i) hypothesis is not automatic.\n\nFor completeness, this does not create a purely type-(ii) component of the ambient fixed-target balanced Hurwitz scheme. Indeed, within the type-(ii) data one may vary B in the irreducible open of reduced divisors in |M^2|=P9. A general B avoids the four ramification points of q and contains no pair exchanged by the q-involution; then gamma has eighteen distinct simple branch values. At such a point the fixed-target Hurwitz scheme is etale over the configuration space of eighteen branch values and is smooth of dimension eighteen. Type-(ii) maps to a fixed target are parametrized by four branch points for q, one parameter for M in Pic^5(Y), and nine parameters for B, hence form a closed locus of dimension at most fourteen. Balancedness is open because it is the vanishing condition h^0(F(-6))=0. Therefore every simply branched type-(ii) point has balanced type-(i) deformations. Every type-(ii) point is connected inside the reduced-divisor parameter space to such a simply branched point. Hence every type-(ii) point of the ambient fixed-target balanced Hurwitz scheme lies on a component meeting type (i), even though a restricted carrying base may be entirely type (ii).\n\nAll conclusions above concern only the geometry and finite-cover structure of Z. They make no Hodge, weight, purity, Tate, or RED-0001 assertion.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0111-1",
+      "justification": "Argument Section 0, using the verified dependencies ATT-0065, ATT-0066, and ATT-0088, especially CLM-0065-4, CLM-0065-9, CLM-0066-5, CLM-0066-6, and CLM-0088-8.",
+      "statement": "Over the reduced balanced base, the evaluation-failure locus is canonically Z=Ord(U), where U is the distinct-support open in the Abel-Jacobi P2-bundle, and Z->U is a finite etale right S_6-torsor of degree 720; Z->S is smooth surjective of pure relative dimension two.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0111-2",
+      "justification": "Argument Section 1: Grauert makes the multiplication map a rank-10 to rank-13 bundle map; FND-0153 gives fibre ranks 10 and 9; constant rank produces the relative cubic, fibral flatness gives the double cover, trace gives the involution, and the universal divisor factors into etale covers of degrees two and three.",
+      "statement": "The type-(ii) fibres form the reduced closed degeneracy locus S_ii of the cubic multiplication map; over S_ii there is a relative smooth cubic Y, a finite locally free double cover C->Y, a relative involution, and a global reduction of the ordering torsor to W=S_2 wr S_3.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0111-3",
+      "justification": "Argument Section 2 proves 2-transitivity from irreducible point and ordered-pair incidences, obtains a transposition from a general simple tangent, and proves directly that a primitive subgroup containing a transposition is S_6. This also independently verifies FND-0155 on its type-(i) scope.",
+      "statement": "On every type-(i) geometric fibre, the exact monodromy image of the six-point ordering cover is S_6.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0111-4",
+      "justification": "Argument Section 3: the bielliptic fibres give containment in W; Kummer inertia around a general branch-pencil divisor gives one within-pair transposition; cubic tangency and irreducibility of the degree-three incidence give a surjection to S_3; conjugation generates all of (S_2)^3, hence the full wreath product.",
+      "statement": "On every type-(ii) geometric fibre, the exact monodromy image is W=S_2 wr S_3 of order 48.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0111-5",
+      "justification": "Argument Sections 4-5: a type-(i) fibre already supplies S_6; on a pure type-(ii) component the relative block system forces containment in W while every fibre supplies W. The finite-etale orbit dictionary then gives the counts and degrees.",
+      "statement": "For each connected component S_alpha of the given base, H_alpha=S_6 if S_alpha meets type (i), and H_alpha=W if S_alpha is purely type (ii). Consequently Z_alpha is respectively connected of degree 720 over U_alpha, or has fifteen connected components each of degree 48.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0111-6",
+      "justification": "Argument Section 6 counts the field factors of the generic finite-etale torsor over each integral U_beta. The generic monodromy is S_6 or W, and equality of generic and family monodromy makes the connected pieces irreducible even without normality.",
+      "statement": "If S_alpha has a_alpha generically type-(i) irreducible components and b_alpha type-(ii) irreducible components, then Z_alpha has exactly a_alpha+15b_alpha irreducible components. Over a type-(i) base component there is one finite-etale component of degree 720; over a type-(ii) base component there are fifteen of degree 48. All have pure relative dimension two, and dimension dim(S_beta)+2 when the base is locally of finite type.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0111-7",
+      "justification": "Argument Sections 5 and 7 use the left-monodromy/right-deck convention of FND-0151 and compute the centralizer of the monodromy permutation action.",
+      "statement": "For the canonical right S_6-action, components are indexed by right cosets Hg and have stabilizer g^{-1}Hg. The point stabilizer is trivial. On connected U, the full cover-automorphism group is S_6 for H=S_6 and W^op wr S_15 for H=W.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0111-8",
+      "justification": "Argument Section 7 reconstructs gamma as the complete two-dimensional pencil |omega_C(-Gamma)| and distinguishes objectwise pointed automorphisms, the right S_6 deck action, full cover automorphisms, and scheme inertia.",
+      "statement": "At every geometric ordered point, Aut^mov(C,gamma;x_1,...,x_6) is isomorphic to Aut(C;x_1,...,x_6); scheme inertia of Z is trivial. In type (ii), the bielliptic involution preserves the unordered divisor but is not an automorphism of the ordered pointed curve.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0111-9",
+      "justification": "Argument Section 8 uses the verified construction FND-0154 for existence. The ambient assertion follows by deforming the reduced branch divisor to a simply branched one and comparing the 14-dimensional type-(ii) locus with the smooth 18-dimensional fixed-target Hurwitz space, while balancedness remains open.",
+      "statement": "Purely type-(ii) carrying bases exist, so meeting type (i) is not automatic; nevertheless every type-(ii) point of the ambient fixed-target balanced Hurwitz scheme lies on a component meeting type (i).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0111-10",
+      "justification": "The argument is entirely geometric and finite-etale; no cohomological claim is used or derived.",
+      "statement": "C66-GEO-COMP supplies no Hodge, weight, purity, Tate, Borel-Moore, or RED-0001 conclusion.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0065-4",
+    "CLM-0065-9",
+    "CLM-0066-5",
+    "CLM-0066-6",
+    "CLM-0088-1",
+    "CLM-0088-2",
+    "CLM-0088-3",
+    "CLM-0088-5",
+    "CLM-0088-8"
+  ],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Connectedness is computed from H=S_6, not from transitivity on six letters."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Components are indexed by right cosets Hg and their right-action stabilizers are g^{-1}Hg."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Connected and irreducible components are counted separately on reducible or nonnormal bases."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "The relative type-(ii) pairing is constructed from the constant-rank cubic kernel rather than an uncontrolled scheme-theoretic image."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "The bielliptic involution is not identified with ordered-point inertia or with one fixed right translation."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "No stack component, stack inertia, or Hodge/Tate conclusion is inferred."
+    }
+  ],
+  "gap_markers": [],
+  "id": "ATT-0111",
+  "ingest_normalizations": [
+    {
+      "identifiers": [
+        "CLM-0065-4",
+        "CLM-0065-9",
+        "CLM-0066-5",
+        "CLM-0066-6",
+        "CLM-0088-1",
+        "CLM-0088-2",
+        "CLM-0088-3",
+        "CLM-0088-5",
+        "CLM-0088-8"
+      ],
+      "moved_from": "source_claim_ids",
+      "moved_to": "dependency_claim_ids",
+      "rule": "DEPENDENCY-CLAIM-SPLIT-0001"
+    }
+  ],
+  "lane": "geometry",
+  "methods_used": [
+    "abel-jacobi-projective-bundle-model",
+    "finite-etale-s6-ordering-torsor",
+    "constant-rank-cubic-multiplication-degeneracy-locus",
+    "relative-cartier-cubic-and-fibral-flatness",
+    "trace-splitting-relative-double-cover",
+    "point-and-ordered-pair-incidence-monodromy",
+    "simple-tangency-local-inertia",
+    "kummer-inertia-at-double-cover-branch",
+    "wreath-product-generation",
+    "generic-field-component-count",
+    "right-coset-component-stabilizer",
+    "complete-pencil-automorphism-reconstruction",
+    "hurwitz-simple-branch-deformation"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "268913bb66959a14fac8c9318343983bf9b8ae628714d1baaa46cf6bb8a874fc",
+  "proof_dependencies": [
+    "ATT-0065",
+    "ATT-0066",
+    "ATT-0088",
+    "C66-001-v4"
+  ],
+  "result_type": "proof",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0141",
+    "FND-0142",
+    "FND-0151",
+    "FND-0153",
+    "FND-0154",
+    "FND-0155"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-GEO-COMP",
+  "summary": "The ordered evaluation-failure locus is the finite etale right S_6-torsor Z=Ord(U) over the distinct-support open U of a relative P2-bundle. Every fibre is type (i), with monodromy S_6, or type (ii), with exact monodromy W=S_2 wr S_3 of order 48. The type-(ii) locus is a closed determinantal locus and carries a relative bielliptic involution and an algebraic 2+2+2 block system. Thus, on a connected component S_alpha, H_alpha=S_6 if S_alpha meets type (i), while H_alpha=W if every fibre is type (ii). The corresponding numbers of connected components of Z are one and fifteen, with finite-etale degrees 720 and 48 and component stabilizers S_6 and g^{-1}Wg. Irreducible components are counted over irreducible components of S: one over each generically type-(i) component and fifteen over each type-(ii) component. The ordered scheme has trivial scheme inertia; objectwise its pointed automorphism group equals the movable-target cover automorphism group recovered from the complete tetragonal pencil.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "base": "An algebraically closed field k of characteristic zero and a reduced locally Noetherian k-scheme S carrying the stated family. Absolute dimension formulas are asserted when S is locally of finite type over k; without that extra hypothesis the exact statement is pure relative dimension two.",
+    "g": 6,
+    "generality": "The classification is scheme-level and allows S to be disconnected, reducible, and nonnormal. Connected-component monodromy is indexed by connected components of S; irreducible-component counts are indexed separately by irreducible components of S.",
+    "n": 6,
+    "not_covered": "Nonreduced bases, algebraic-stack component degrees or inertia descent, unbalanced splitting types, characteristic two or positive characteristic, and every Hodge, weight, purity, Tate, Gysin, or RED-0001 conclusion."
+  },
+  "theorem_statement": "Over a reduced locally Noetherian base carrying a balanced Casnati-Ekedahl genus-six degree-four family satisfying (CE), (BAL), and (N), determine the irreducible components, dimensions, deck and component stabilizers, and finite-cover behavior of the ordered evaluation-failure locus Z. In particular: compute the exact geometric monodromy image H_alpha of the finite etale S_6-ordering cover on every balanced component, including purely type-(ii) components if they exist; decide whether a connected component of the balanced base can consist entirely of type-(ii) fibres; give the resulting component count and component-stabilizer formula; and identify the relevant Aut / inertia groups for the ordered model. This lemma does not resolve the campaign Hodge/Tate group RED-0001."
+}

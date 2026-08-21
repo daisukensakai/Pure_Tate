@@ -1923,6 +1923,31 @@ def _codex_controller_decision_schema() -> Dict[str, Any]:
     }
 
 
+def _unique_controller_request_id(raw: Any, seen_ids: set[str]) -> str:
+    """Return a valid unused controller request_id.
+
+    Codex often reuses a slug such as grok-worker-1. A duplicate used to abort
+    the whole mathematics turn; mint a suffix instead.
+    """
+    text = str(raw or "").strip()
+    text = re.sub(r"[^A-Za-z0-9_-]", "-", text)
+    if not text or not re.match(r"[A-Za-z0-9]", text):
+        text = "grok-req"
+    text = text[:50]
+    candidate = text
+    ordinal = 2
+    while candidate in seen_ids or not re.fullmatch(
+        r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}", candidate
+    ):
+        suffix = "-r%d" % ordinal
+        candidate = text[: 64 - len(suffix)] + suffix
+        ordinal += 1
+        if ordinal > 128:
+            candidate = "grok-req-%d" % (len(seen_ids) + 1)
+            break
+    return candidate
+
+
 def _parse_codex_controller_decision(
     raw: str, seen_ids: set[str]
 ) -> Dict[str, str]:
@@ -1935,15 +1960,9 @@ def _parse_codex_controller_decision(
     if action != "dispatch" or not isinstance(value.get("request"), dict):
         raise ValueError("controller decision must be dispatch or finalize")
     request = value["request"]
-    request_id = request.get("request_id")
+    request_id = _unique_controller_request_id(request.get("request_id"), seen_ids)
     description = request.get("description")
     prompt = request.get("prompt")
-    if (
-        not isinstance(request_id, str)
-        or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}", request_id)
-        or request_id in seen_ids
-    ):
-        raise ValueError("controller request_id is invalid or duplicated")
     if not isinstance(description, str) or not description.strip() or len(description) > 500:
         raise ValueError("controller request description is invalid")
     if not isinstance(prompt, str) or not prompt.strip() or len(prompt) > 12000:
@@ -1978,25 +1997,86 @@ def _codex_controller_transcript(
     return json.dumps(rows, indent=2, sort_keys=True)
 
 
+def _codex_controller_caps(workers: "WorkerSession") -> tuple[int, int]:
+    env = workers.env_updates or {}
+    try:
+        max_total = int(env.get("GROK_WORKER_MAX_TOTAL") or 1)
+    except (TypeError, ValueError):
+        max_total = 1
+    try:
+        max_turns = int(
+            env.get("GROK_WORKER_MAX_TURNS") or workers.max_worker_turns or 4
+        )
+    except (TypeError, ValueError):
+        max_turns = int(workers.max_worker_turns or 4)
+    return max(1, max_total), max(1, max_turns)
+
+
 def _codex_controller_decision_prompt(
     base_prompt: str,
     transcript: str,
     remaining_requests: int,
     *,
     has_active_worker: bool,
+    max_workers: int = 1,
+    max_worker_turns: int = 4,
+    remaining_identities: int = 0,
 ) -> str:
-    if has_active_worker:
-        request_guidance = (
-            "either action=dispatch with one short follow-up for the existing "
-            "Grok worker (redo / more info / gap-fill / narrow sub-task — the "
-            "harness will continue that worker), or action=finalize when you "
-            "have enough information."
+    if max_workers <= 1:
+        if has_active_worker:
+            request_guidance = (
+                "either action=dispatch with one short follow-up for the existing "
+                "Grok worker (redo / more info / gap-fill / narrow sub-task — the "
+                "harness will continue that worker), or action=finalize when you "
+                "have enough information."
+            )
+        else:
+            request_guidance = (
+                "either action=dispatch with one focused first request for the "
+                "single Grok worker (narrow task + path/ID pointers, not a packet "
+                "dump), or action=finalize when you have enough information."
+            )
+        identity_line = (
+            " remaining logical Grok-worker turns on one worker identity. Review "
+        )
+        worker_rule = (
+            "- Use at most one Grok worker; later rounds continue that same "
+            "worker with short follow-ups. Prefer spending remaining turns over "
+            "early finalize when a simple extract/check remains.\n"
         )
     else:
-        request_guidance = (
-            "either action=dispatch with one focused first request for the "
-            "single Grok worker (narrow task + path/ID pointers, not a packet "
-            "dump), or action=finalize when you have enough information."
+        if remaining_identities > 0:
+            request_guidance = (
+                "either action=dispatch with one focused request for a new Grok "
+                "worker identity (narrow task + path/ID pointers, not a packet "
+                "dump; %d identit%s remaining), or action=finalize when you "
+                "have enough information."
+                % (remaining_identities, "y" if remaining_identities == 1 else "ies")
+            )
+        elif has_active_worker:
+            request_guidance = (
+                "either action=dispatch with one short follow-up for an existing "
+                "Grok worker (redo / more info / gap-fill / narrow sub-task — the "
+                "harness will continue the latest worker), or action=finalize when "
+                "you have enough information."
+            )
+        else:
+            request_guidance = (
+                "either action=dispatch with one focused first request for a Grok "
+                "worker (narrow task + path/ID pointers, not a packet dump), or "
+                "action=finalize when you have enough information."
+            )
+        identity_line = (
+            " remaining logical Grok-worker controller rounds across up to %d "
+            "worker identities (%d turns each). Review "
+            % (max_workers, max_worker_turns)
+        )
+        worker_rule = (
+            "- You may use up to %d Grok workers; dispatch distinct identities "
+            "in parallel on distinct narrow sub-tasks, then continue them with "
+            "short follow-ups. Prefer spending remaining turns over early "
+            "finalize when a simple extract/check remains.\n"
+            % max_workers
         )
     return (
         base_prompt
@@ -2004,17 +2084,16 @@ def _codex_controller_decision_prompt(
         + "You are the mastermind controller. Do not return the task artifact "
         + "on this turn. You have "
         + str(remaining_requests)
-        + " remaining logical Grok-worker turns on one worker identity. Review "
+        + identity_line
         + "the controller transcript below, then return exactly one JSON object "
-        + "matching the decision schema: "
+        + "matching the decision schema. Each dispatch request_id must be a new "
+        + "unique token unused earlier in this transcript. "
         + request_guidance
         + "\n\n"
         + "Division of labor (mandatory):\n"
         + "- Codex owns thinking, analysis, critical decisions, routing, and "
         + "the eventual synthesis structure.\n"
-        + "- Use at most one Grok worker; later rounds continue that same "
-        + "worker with short follow-ups. Prefer spending remaining turns over "
-        + "early finalize when a simple extract/check remains.\n"
+        + worker_rule
         + "- Do not re-read sources a worker already covered; analyze their "
         + "reports instead. Spot-check only if a load-bearing claim is "
         + "contested or the report is incomplete/incoherent.\n"
@@ -2069,15 +2148,16 @@ def _run_codex_controller(
     retry_limit = int(settings["retry_limit"])
     max_attempts = int(settings["max_attempts"])
     max_result_chars = int(settings["max_result_chars"])
+    max_total, max_worker_turns = _codex_controller_caps(workers)
     base_prompt = assemble_prompt(
         task, context_files, expected_artifact_id, "codex", workers_enabled=False
     )
     decision_schema_path = context / "codex-controller-decision-schema.json"
     atomic_write_json(decision_schema_path, _codex_controller_decision_schema())
     pool = GrokWorkerPool(
-        max_concurrent=1,
-        max_total=1,
-        max_worker_turns=max_requests,
+        max_concurrent=max_total,
+        max_total=max_total,
+        max_worker_turns=max_worker_turns,
         model=workers.env_updates.get("GROK_WORKER_MODEL", "grok-4.5"),
         timeout_seconds=int(workers.env_updates.get("GROK_WORKER_TIMEOUT", "300")),
         allow_web=workers.allow_web,
@@ -2092,6 +2172,7 @@ def _run_codex_controller(
     stderr_chunks: List[str] = []
     started = time.monotonic()
     active_worker_id: Optional[str] = None
+    worker_ids: List[str] = []
 
     def invoke(prompt: str, output_path: Path, schema: Optional[Path] = None) -> str:
         remaining = max(1, int(task_timeout - (time.monotonic() - started)))
@@ -2137,6 +2218,9 @@ def _run_codex_controller(
                     _codex_controller_transcript(entries, max_result_chars),
                     max_requests - round_index,
                     has_active_worker=active_worker_id is not None,
+                    max_workers=max_total,
+                    max_worker_turns=max_worker_turns,
+                    remaining_identities=max(0, max_total - len(worker_ids)),
                 ),
                 decision_path,
                 decision_schema_path,
@@ -2147,6 +2231,16 @@ def _run_codex_controller(
                 workers.dispatch_log.log(
                     "controller_decision_invalid", round=round_index + 1, error=str(exc)
                 )
+                if any(
+                    item.get("status") in {"completed", "running"}
+                    for item in entries
+                ):
+                    workers.dispatch_log.log(
+                        "controller_decision_invalid_synthesize",
+                        round=round_index + 1,
+                        error=str(exc),
+                    )
+                    break
                 raise
             if decision["action"] == "finalize":
                 workers.dispatch_log.log("controller_decision_finalized", round=round_index + 1)
@@ -2158,7 +2252,11 @@ def _run_codex_controller(
                 request_id=decision["request_id"],
                 description=decision["description"],
                 prompt_sha256=hashlib.sha256(decision["prompt"].encode("utf-8")).hexdigest(),
-                mode="continue" if active_worker_id else "dispatch",
+                mode=(
+                    "dispatch"
+                    if len(worker_ids) < max_total
+                    else "continue"
+                ),
             )
             entry: Dict[str, Any] = {
                 "request_id": decision["request_id"],
@@ -2170,23 +2268,74 @@ def _run_codex_controller(
             }
             for attempt in range(retry_limit + 1):
                 try:
-                    if active_worker_id is None:
+                    launch_new = len(worker_ids) < max_total
+                    if launch_new:
+                        wait = max_total <= 1
                         result = pool.dispatch(
-                            decision["prompt"], decision["description"], wait=True
+                            decision["prompt"],
+                            decision["description"],
+                            wait=wait,
                         )
                     else:
                         result = pool.continue_worker(
-                            active_worker_id,
+                            active_worker_id or worker_ids[-1],
                             decision["prompt"],
                             decision["description"],
                             wait=True,
                         )
+                    if (
+                        launch_new
+                        and not wait
+                        and result.get("status") in {"queued", "running"}
+                        and hasattr(pool, "await_worker")
+                        and len(worker_ids) + 1 >= max_total
+                    ):
+                        for pending_id in worker_ids + [
+                            str(result.get("worker_id") or "")
+                        ]:
+                            if not pending_id:
+                                continue
+                            try:
+                                awaited = pool.await_worker(pending_id)
+                            except PoolError:
+                                continue
+                            if str(awaited.get("worker_id")) == str(
+                                result.get("worker_id")
+                            ):
+                                result = awaited
+                        for prev in entries:
+                            if prev.get("status") != "running":
+                                continue
+                            pending = (prev.get("worker_ids") or [None])[-1]
+                            if not pending:
+                                continue
+                            try:
+                                done = pool.await_worker(str(pending))
+                            except PoolError:
+                                continue
+                            if done.get("status") == "completed":
+                                prev["status"] = "completed"
+                                prev["result"] = str(done.get("result_text") or "")
+                                prev.pop("error", None)
                 except PoolError as exc:
                     entry["error"] = exc.message
                     break
                 entry["attempts"] += 1
-                entry["worker_ids"].append(str(result.get("worker_id")))
-                active_worker_id = str(result.get("worker_id") or active_worker_id)
+                worker_id = str(result.get("worker_id") or "")
+                if worker_id:
+                    entry["worker_ids"].append(worker_id)
+                    if worker_id not in worker_ids:
+                        worker_ids.append(worker_id)
+                active_worker_id = worker_id or active_worker_id
+                if (
+                    launch_new
+                    and max_total > 1
+                    and result.get("status") in {"queued", "running"}
+                    and len(worker_ids) < max_total
+                ):
+                    entry["status"] = "running"
+                    entry["result"] = ""
+                    break
                 if result.get("status") == "completed":
                     entry["status"] = "completed"
                     entry["result"] = str(result.get("result_text") or "")
@@ -2215,7 +2364,13 @@ def _run_codex_controller(
                         request_id=entry["request_id"],
                         attempt=attempt + 1,
                     )
-            if entry["status"] != "completed":
+            if entry["status"] == "running":
+                workers.dispatch_log.log(
+                    "controller_worker_launched",
+                    request_id=entry["request_id"],
+                    worker_id=(entry.get("worker_ids") or [None])[-1],
+                )
+            elif entry["status"] != "completed":
                 workers.dispatch_log.log(
                     "controller_worker_exhausted",
                     request_id=entry["request_id"],

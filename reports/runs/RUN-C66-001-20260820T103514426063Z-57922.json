@@ -1,0 +1,163 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-20T10:45:25.513979+00:00",
+  "engine_pools": {
+    "prover": [
+      "codex"
+    ],
+    "research": [
+      "grok"
+    ],
+    "review": [
+      "claude",
+      "grok"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 332863,
+      "completed_at": "2026-08-20T10:45:24.639992+00:00",
+      "engine": "codex",
+      "engine_pid": 59027,
+      "engine_process_group": 59027,
+      "error": "controller request_id is invalid or duplicated",
+      "last_activity_at": "2026-08-20T10:45:24.226333+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0110.json",
+      "phase": "mathematics",
+      "pi_override": {
+        "forced_prompt": "reports/runs/manual-recovery/claude-geocomp-forced-20260819/FORCED_GEO_COMP.md",
+        "max_controller_requests": 16,
+        "max_grok_workers": 2,
+        "max_worker_turns": 256
+      },
+      "processes": [
+        {
+          "engine_pid": 57965,
+          "engine_process_group": 57965,
+          "started_at": "2026-08-20T10:35:15.365236+00:00",
+          "supervisor_pid": 57964,
+          "supervisor_process_group": 57964
+        },
+        {
+          "engine_pid": 58307,
+          "engine_process_group": 58307,
+          "started_at": "2026-08-20T10:36:11.738816+00:00",
+          "supervisor_pid": 58305,
+          "supervisor_process_group": 58305
+        },
+        {
+          "engine_pid": 58796,
+          "engine_process_group": 58796,
+          "started_at": "2026-08-20T10:42:59.960119+00:00",
+          "supervisor_pid": 58795,
+          "supervisor_process_group": 58795
+        },
+        {
+          "engine_pid": 59027,
+          "engine_process_group": 59027,
+          "started_at": "2026-08-20T10:45:13.096503+00:00",
+          "supervisor_pid": 59026,
+          "supervisor_process_group": 59026
+        }
+      ],
+      "started_at": "2026-08-20T10:35:14.434264+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 59026,
+      "task_id": "TASK-C66-M-003",
+      "working_context": {
+        "archive": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-ARCHIVE-C66-GEO-COMP-70d5a1097b69ed0a.md",
+          "sha256": "70d5a1097b69ed0a9a3abd2c38bd02685d983984f9fc5d65cfe60ec29d3ce134"
+        },
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-C66-GEO-COMP-82051da1674ee552.md",
+          "sha256": "82051da1674ee5525da393ff5caa040a650656767ff24a7662899420d917ba7e"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-C66-GEO-COMP-2263028c9a6c286b.md",
+          "sha256": "2263028c9a6c286bf574c7f9143916690c017a62e590559aca2c1d4a8be46bff"
+        },
+        "subproblem_id": "C66-GEO-COMP"
+      }
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 57922,
+  "parent_process_group": 57917,
+  "pre_run_recoveries": [
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-20T10:35:13.862460+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "recovered output has no valid attempt id",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0062",
+      "trace_path": "research/paired-traces/TRACE-0062.json",
+      "turn_kind": "mathematics",
+      "validation_error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement"
+    },
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-20T10:35:13.932289+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "You've hit your session limit \u00b7 resets 2:40am (Asia/Tokyo)",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0068",
+      "trace_path": "research/paired-traces/TRACE-0068.json",
+      "turn_kind": "mathematics",
+      "validation_error": "claude resume failed: exit=1 bytes=390541"
+    },
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-20T10:35:14.005777+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "You've hit your session limit \u00b7 resets 12:10pm (Asia/Tokyo)",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0069",
+      "trace_path": "research/paired-traces/TRACE-0069.json",
+      "turn_kind": "mathematics",
+      "validation_error": "claude resume failed: exit=1 bytes=2209201"
+    }
+  ],
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260820T103514426063Z-57922",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-20T10:35:14.426063+00:00",
+  "status": "stopped",
+  "stop_reason": "engine_failure"
+}

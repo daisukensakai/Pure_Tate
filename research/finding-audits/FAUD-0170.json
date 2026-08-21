@@ -1,0 +1,109 @@
+{
+  "adjudicated_statement": "Let k be an algebraically closed field of characteristic zero, and let gamma : C -> P^1 be a finite morphism of degree d from a smooth geometrically connected projective k-curve C of genus g, with the target P^1 held fixed (not taken modulo Aut(P^1)). Then the differential d(gamma) : T_C -> gamma^* T_{P^1} is injective as a map of line bundles, so the Hurwitz normal sheaf N_gamma := coker(d(gamma)) is a torsion coherent sheaf supported on the ramification locus of gamma. Its length equals deg(gamma^* T_{P^1}) - deg(T_C) = 2d + 2g - 2, independently of the ramification profile, and equivalently equals sum_p (e_p - 1) by the Riemann-Hurwitz formula. A coherent sheaf of zero-dimensional support on a Noetherian curve has vanishing H^1, so H^1(C, N_gamma)=0. Consequently the deformation functor of C as a finite P^1-scheme (equivalently, of the pair (C, gamma) with varying source and fixed target, modulo automorphisms of the source over P^1) is unobstructed, with tangent space H^0(C, N_gamma) of k-dimension 2d+2g-2. Therefore the Deligne-Mumford stack of finite degree-d covers of a fixed P^1 by smooth connected genus-g curves -- equivalently the smooth-domain open of the Kontsevich stack M_{g,0}(P^1, d) -- is smooth of dimension 2d+2g-2 at every such point, independently of the ramification profile. For (d,g)=(4,6) this dimension is 18. This is a statement about the unrestricted stack of all ramification types. It is distinct from the classical Hurwitz space of covers with a fixed number r of distinct branch values (or a fixed ramification profile), which is etale over the configuration space of r points and has dimension r; that dimension equals 2d+2g-2 if and only if the cover is simply branched. In particular the unrestricted smoothness statement applies at composed or imprimitive points, which are never simply branched. Finite residual automorphisms, such as the deck involution of a composed cover, give Deligne-Mumford inertia with vanishing Lie algebra and do not change the stack dimension. The statement does not assert closedness of the composed or type-(ii) locus, irreducibility or equidimensionality of the balanced Hurwitz scheme, regularity of the coarse space at stacky points, smoothness of the Aut(P^1)-quotient (dimension 2d+2g-5), or any Hodge, weight, purity, Tate, or RED-0001 conclusion.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads were ATT-0111 and REV-0156. The contested passage is ATT-0111 Section 8 / CLM-0111-9 second half: after constructing an FND-0154 balanced type-(ii) object, the attempt claims a general reduced B in |M^{tensor 2}| yields a cover with eighteen distinct simple branch values, so that the fixed-target Hurwitz scheme is etale over Conf_18 and smooth of dimension 18, whence the at-most-fourteen-dimensional type-(ii) locus cannot fill a component. REV-0156 correctly breaks both steps. For gamma = q o psi with B disjoint from Ram(q) and from its q-involute, the branch locus has fourteen points (ten of type 2+1+1 and four of type (2,2)); ramification degree 10*1+4*2=18 matches Riemann-Hurwitz with fourteen branch values, not eighteen simple ones. Moreover no connected degree-four cover that factors nontrivially is simply branched, because simple branching plus transitivity forces primitive monodromy S_4, while a factorization supplies a block system inside a conjugate of S_2 wr S_2. The follow-up 'connect inside the reduced-divisor parameter space to a simply branched type-(ii) point' is therefore vacuous. That obstruction is the sibling candidate FC-REV0156-COMPOSED-NEVER-SIMPLY-BRANCHED, not the present finding. FC-REV0156-HURWITZ-Nsheaf-SMOOTH is REV-0156's proposed repair: smoothness and dimension 2d+2g-2 of the unrestricted fixed-target stack of all covers, without any simple-branching hypothesis. Primary sources confirm the repair after a wording correction that the original candidate text does not make. Riemann-Hurwitz gives 2g-2 = d(-2) + sum (e_p-1), so length of the different is 2d+2g-2 independently of profile; equivalently deg(gamma^* T_{P^1})-deg(T_C)=2d-(2-2g). In characteristic zero d(gamma) is injective as a map of line bundles, so N_gamma = coker(d(gamma)) is torsion of that length. Stacks Project tag 02UZ (Grothendieck vanishing) yields H^p=0 for p>dim of a Noetherian space, hence H^1(N_gamma)=0. Jason Starr's answer to MO 321080 identifies first-order deformations of a cover of a fixed P^1 with H^0(Omega_u^vee), of dimension b=2g+2d-2, and proves that Omega is pi-flat of that rank on M_{g,0}(P^1,d) in characteristic 0 (or p>d); the same answer shows the fixed-profile locus with n distinct branch points is instead smooth of dimension n and etale onto the configuration space. Romagny-Wewers (Hurwitz spaces, Seminaires et Congres 13) likewise realize the classical simply-branched space as a finite unramified cover of U_r with r=2g+2d-2, and the tame G-Hurwitz space with r marked branch points as smooth of dimension r, etale over Conf_r; the Aut(P^1)-reduced space has dimension r-3. Thus 'smooth of dimension 2d+2g-2 whatever the branching' is true for the unrestricted stack of all finite covers of a fixed P^1 (the smooth-domain open of M_{g,0}(P^1,d)), and false if read as a claim about the classical fixed-profile Hurwitz space, whose dimension equals the number of distinct branch values. For (d,g)=(4,6) the unrestricted dimension is 18, while a general FND-0154 type-(ii) point has fourteen branch values, so ATT-0111's Conf_18/etale picture never applies at those points, but the normal-sheaf smoothness statement still does. Finite residual automorphisms (the deck involution of a composed cover) give Deligne-Mumford inertia with vanishing Lie algebra, so they do not change the stack dimension; they may make the coarse space singular. No claim-level contradiction: contradicts_claim_ids is empty. Packet FND-0085 concerns the finite branch morphism from the simply-branched Hurwitz stack to an open of M_{0,18} and does not assert that every balanced tetragonal cover is simply branched; the present statement is complementary. FND-0154's limitation that it does not produce a purely type-(ii) ambient component is untouched: the present finding supplies only the unrestricted dimension-18 smoothness input, and (as REV-0156 already recorded in does_not_assert) does not prove closedness of the composed locus or the fourteen-dimensional parameter count. The original candidate's opening sentence about 'the repair for the step broken by FC-REV0156-COMPOSED-NEVER-SIMPLY-BRANCHED' is meta-commentary and is removed from the adjudicated statement.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0159",
+  "id": "FAUD-0170",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "characteristic": 0,
+    "cover": {
+      "degree": 4,
+      "genus": 6
+    },
+    "does_not_assert": [
+      "closedness of the composed or type-(ii) locus",
+      "irreducibility or equidimensionality of the balanced Hurwitz scheme",
+      "regularity of the coarse space at points with finite residual automorphisms",
+      "absence of stacky points",
+      "smoothness of the Aut(P^1)-quotient",
+      "any Hodge, weight, purity, Tate, or RED-0001 conclusion"
+    ],
+    "hypotheses": [
+      "k algebraically closed of characteristic zero",
+      "C smooth geometrically connected projective of genus g",
+      "gamma finite of degree d (hence separable)",
+      "target P^1 held fixed"
+    ],
+    "objects": [
+      "unrestricted fixed-target Hurwitz stack of all finite degree-d genus-g covers",
+      "Hurwitz normal sheaf N_gamma"
+    ],
+    "target": "fixed P^1, not modulo Aut(P^1)"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "3174b8cb884a38ff6c2485880b9b60edcb2c065aa086e6739a2411ca8c44d30d",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "7cffda8a3378cf0b54efc74eb2f4e7355c43c65dd5e4a358c95c6f7f4859623c",
+      "retrieved_at": "2026-08-20T23:25:12Z",
+      "source_type": "other-primary",
+      "url": "https://mathoverflow.net/questions/321080/smoothness-of-hurwitz-spaces-with-arbitrary-ramification-profiles"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "b2b74c8e462e8427f4987fb04421eb2d242c7364d1e4ddb6a85af424cfbcd199",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "573fb1eb1130a66d0d5405aeaee4e7a58d4422529d846fa45a1ac34b9fa07e0f",
+      "retrieved_at": "2026-08-20T23:24:48Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/api/rest_v1/page/summary/Riemann%E2%80%93Hurwitz_formula"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "a245710dc2c11d8cabe25a3f560aeff056dd064fdb35785d1fe73b4375bf6c96",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "f1435ad709968c9d8af25b16a01ad88cc8a32c91cf8c23f1d2f86911458fa2bb",
+      "retrieved_at": "2026-08-20T23:24:55Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/02UZ"
+    },
+    {
+      "arxiv_id": "math/0701680",
+      "arxiv_version": "v1",
+      "content_sha256": "fb206a1d6896dc6859f7564c323da07fc56af88a6c49133d9a153bc9343e2569",
+      "doi": "10.48550/arXiv.math.0701680",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "360e86d82a3b3cc1643107307b65b08a1105eeabe6eb949e581ca6bbd37890f4",
+      "retrieved_at": "2026-08-20T23:23:40Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/math/0701680"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "caed858ea899e029b96e3b840e605ad6432cdd1100b93125ef39a0d8abde18a0",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "360e86d82a3b3cc1643107307b65b08a1105eeabe6eb949e581ca6bbd37890f4",
+      "retrieved_at": "2026-08-20T23:24:10Z",
+      "source_type": "survey",
+      "url": "https://perso.univ-rennes1.fr/matthieu.romagny/articles/hurwitz_spaces.pdf"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0159",
+  "verdict": "promote",
+  "verified_source_count": 5
+}

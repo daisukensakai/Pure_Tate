@@ -1,0 +1,145 @@
+{
+  "adjudicated_statement": "Let k be a field of characteristic zero and let S be a reduced locally Noetherian k-scheme, possibly reducible and non-normal, carrying a balanced (CE)+(N)+(BAL) genus-six degree-four family so that U is the distinct-support open of the Abel-Jacobi P^2-bundle AJ=P_S(pi_*L) and Z->U is the finite etale right S_6-torsor of orderings. The statement is scheme-level and does not apply to algebraic stacks with inertia (FND-0144 stands). Let S_beta be an irreducible component of S with its reduced structure, eta its generic point, U_beta=U x_S S_beta, and U_eta the generic fibre of U_beta->S_beta. Then: (1) U->S is smooth of pure relative dimension two. The fibre of AJ over eta is isomorphic to P((pi_*L)_eta) isomorphic to P^2_{kappa(eta)} (Stacks 01OA, 0FCY), and U_eta is a nonempty open subscheme of that P^2, hence regular, normal, and integral, with K(U_beta)=K(U_eta). (2) Because U_eta is normal integral, Gal(K(U_beta)^sep/K(U_beta)) surjects onto pi_1^et(U_eta) (Stacks 0BQI, 0BQM, using 0BQ3). The image H_gen of Gal(K(U_beta))->S_6 therefore equals the arithmetic monodromy image of pi_1^et(U_eta)->S_6. (3) Finite etale morphisms are flat, so every generic point of Z|_{U_beta} maps to the generic point of the integral scheme U_beta (Stacks 03HV). Equivalently, Z|_{U_beta} is finite locally free over a domain, so field factors of the etale S_6-algebra Z_{K(U_beta)} biject with irreducible components of Z|_{U_beta}. The number of those field factors is [S_6:H_gen], with components indexed by the orbit set H_gen\\S_6 of left multiplication (FND-0151). (4) This does not remove the normality hypotheses of FND-0132 and FND-0148 for identifying Irr(Z) with pi_0(Z), and it does not license the unmodified formula '[S_6:H] irreducible components of degree |H|' with H=im(pi_1^et(U_beta)->S_6). In general a connected finite etale cover of a connected locally Noetherian non-normal scheme need not be irreducible (Stacks 0357 and 0BQL use normality for connected implying integral). The bypass is that normality is used on U_eta, where it holds automatically because U_eta is an open in a P^2 over a field, not that U_beta itself is unibranch. (5) Write H_pi1=im(pi_1^et(U_beta)->S_6) and H_geom=im(pi_1^et(U_{eta-bar})->S_6), where kappa(eta)-bar is algebraically closed of characteristic zero so that single-fibre monodromy theorems apply to the geometric generic fibre. Functoriality gives H_geom subseteq H_gen and H_geom subseteq H_pi1. Any structure defined over all of S_beta (in particular the relative 2+2+2 block system over the closed type-(ii) locus S_ii) constrains both H_gen and H_pi1. If the geometric generic fibre is type (i), FND-0155 gives H_geom=S_6, hence H_gen=H_pi1=S_6, so Z|_{U_beta} is connected and irreducible and finite etale of degree 720 over U_beta. If the geometric generic fibre is type (ii) and, separately, its geometric monodromy image is exactly W=S_2 wr S_3, then H_geom=W together with the global block system forces H_gen=H_pi1=W, so Z|_{U_beta} has fifteen connected components, each irreducible, each finite etale of degree 48 over U_beta. The exact type-(ii) image W is not part of this lemma; without it the irreducible-component count is still [S_6:H_gen] with H_geom subseteq H_gen subseteq H_global. (6) Over a non-algebraically-closed ground field, H_gen is arithmetic monodromy of U_eta over kappa(eta) as in FND-0148 and FND-0149. Absolute dimension of each listed component is dim(S_beta)+2 when S is locally of finite type over k; without that extra hypothesis the statement is pure relative dimension two. (7) No Hodge, weight, purity, Tate, Borel-Moore, stack-inertia, or RED-0001 conclusion is asserted.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads: ATT-0111 Section 6 (and CLM-0111-6) counts irreducible components of Z over each reduced irreducible base component S_beta by the field factors of the generic finite-etale torsor, claiming the generic monodromy is S_6 or W so that connected pieces are irreducible even without normality of U_beta. REV-0156 confirmed CLM-0111-6, recorded candidate FC-REV0156-GENERIC-FIBRE-BYPASSES-NORMALITY (now FND-0160), and explicitly warned that ATT-0111 compresses the generic-fibre step and that FND-0144 (stacks) and FND-0148/FND-0149 (arithmetic monodromy) still stand. Independent check against the Stacks Project: (i) a projective bundle P(E) associated to a rank-three vector bundle has fibre over eta isomorphic to P^2_{kappa(eta)} (tags 01OA, 0FCY), so U_eta is a nonempty open of a P^2 over a field, hence regular/normal/integral, and K(U_beta)=K(U_eta); (ii) for a normal integral scheme, Gal(K^sep/K) surjects onto pi_1^et (0BQI for geometrically unibranch/irreducible schemes, 0BQM identifying the quotient with the maximal unramified extension; 0BQ3 says normal implies geometrically unibranch); (iii) finite etale morphisms are flat, so generalizations lift and every generic point of Z|_{U_beta} maps to the generic point of the integral scheme U_beta (03HV), whence field factors of Z_K biject with Irr(Z|_{U_beta}) and number [S_6:H_gen]; (iv) connected finite etale covers of a normal integral scheme are integral (0BQL), because on a normal scheme the irreducible components are open-closed (0357). Thus the candidate is correct as a model-specific relocation of normality onto U_eta, not as a deletion of FND-0132/FND-0148: those findings still block writing Irr=pi_0 and '[S_6:H] irreducible components of degree |H|' with H=im(pi_1^et(U)->S_6) on a general non-normal base (the nodal-cubic-type connected-but-reducible etale cover remains a counterexample to the unmodified formula). FND-0144 is stack inertia, not scheme-normality, and is not touched. The further identification of each irreducible component of Z|_{U_beta} as a connected finite-etale cover of degree |H_gen| over the possibly non-normal U_beta requires H_pi1=H_gen, which on this model follows from the squeeze H_geomsubseteq H_gen, H_geomsubseteq H_pi1, and any S_beta-defined block system constraining both groups, not from unibranchness of U_beta. Type-(i) uses packet-adjudicated FND-0155 (H_geom=S_6). Exact type-(ii) image W is the sibling candidate FC-REV0156-TYPE-II-EXACT-MONODROMY-W and is not imported as a packet fact; without it the irreducible-component count remains [S_6:H_gen] with H_geomsubseteq H_gen subseteq H_global. No contradiction with CLM-0111-6 once the compressed 'generic monodromy is S_6' line is expanded as above. Do not merge with FND-0132, FND-0144, or FND-0148: those remain the general constraints; this is the C66-GEO-COMP bypass. No Hodge/Tate/RED-0001 content.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0160",
+  "id": "FAUD-0171",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "base": "reduced locally Noetherian k-scheme S, possibly reducible and non-normal; Grauert/P^2-bundle clauses use reducedness; absolute dimension dim(S_beta)+2 requires S locally of finite type over k",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "does_not_cover": [
+      "algebraic stacks with inertia (FND-0144)",
+      "nonreduced bases",
+      "the unmodified identification Irr(Z)=pi_0(Z) for a general finite etale cover of a non-normal base",
+      "exact type-(ii) geometric image W as a packet-adjudicated input",
+      "Hodge, weight, purity, Tate, Borel-Moore, or RED-0001 conclusions"
+    ],
+    "ground_field": "characteristic zero; geometric single-fibre monodromy is taken on U after base change to an algebraic closure of kappa(eta)",
+    "hypotheses": [
+      "scheme-level (no stack inertia)",
+      "(CE)+(N)+(BAL) on geometric fibres so that U is a nonempty open of a relative P^2-bundle and Z is finite etale of degree 720",
+      "S_ii closed type-(ii) degeneracy locus when a global block system is used"
+    ],
+    "objects": [
+      "AJ = P_S(pi_*L)",
+      "U = distinct-support open",
+      "Z = Ord(U) finite etale right S_6-torsor",
+      "S_beta reduced irreducible component",
+      "U_eta generic fibre",
+      "H_gen",
+      "H_pi1",
+      "H_geom"
+    ],
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "03ebaa03d06908c480247bf1d4369d30a7dfe55641cd0f4d6694118f4dd660b9",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "0871db3487d12f7618c2439c00ad9cac899c03c74b7bc2d558d52be343ddca20",
+      "retrieved_at": "2026-08-21T00:40:00Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/0BQM"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "29a75bb722d275353fdf6e289145108ae1fa141f18468710082dbdac81eae4dd",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "998902421dbb758850059141c3775792e5016148e05ebfc7aa9e4cf15e956e76",
+      "retrieved_at": "2026-08-21T00:40:00Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/0BQI"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "fc8bbb6c615f4c3da7492a2130434dcc497aba6b9ee1534bc5d2d857e8b8b1e0",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-21T00:45:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=sha1|ids|timestamp&titles=Unibranch_local_ring"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "8e88d980cec4a77d971b6e610da5b84d3c903c2934412b643cb221ec8771a0d9",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "0871db3487d12f7618c2439c00ad9cac899c03c74b7bc2d558d52be343ddca20",
+      "retrieved_at": "2026-08-21T00:38:00Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/0BQL"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "7fb1faf2f92db04e9ea484c9f186ed8e877208493261d0f3f77c2ce3cf2309ae",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "998902421dbb758850059141c3775792e5016148e05ebfc7aa9e4cf15e956e76",
+      "retrieved_at": "2026-08-21T00:39:00Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/0357"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "6b5e8bd8b43ef55400da960dc4d1a59d75de7de5eaef33fba1c1ee2a79464169",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "0871db3487d12f7618c2439c00ad9cac899c03c74b7bc2d558d52be343ddca20",
+      "retrieved_at": "2026-08-21T00:39:00Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/03HV"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "af3855395b9e123088645bb6617082a0ef5df568552686eaddc45b0a6796a6d7",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "998902421dbb758850059141c3775792e5016148e05ebfc7aa9e4cf15e956e76",
+      "retrieved_at": "2026-08-21T00:42:00Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/0FCY"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "64a86cace89758f834c2c6c6584ab5f18141e34883f534b323e23e1492360c07",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "0871db3487d12f7618c2439c00ad9cac899c03c74b7bc2d558d52be343ddca20",
+      "retrieved_at": "2026-08-21T00:43:00Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/01OA"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0160",
+  "verdict": "promote",
+  "verified_source_count": 8
+}

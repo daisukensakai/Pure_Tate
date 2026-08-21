@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#d9d8d1">
+
+<title>Example 27.21.2 (0FCY): Projective space of a vector space&mdash;The Stacks project</title>
+
+<meta name="description" content="an open source textbook and reference work on algebraic geometry">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ['tex2jax.js'],
+    jax: ['input/TeX','output/HTML-CSS'],
+    TeX: {
+      extensions: ['AMSmath.js', 'AMSsymbols.js', '/static/XyJax/extensions/TeX/xypic.js'],
+      Macros: {
+        linebreak: ["", 1, ""],
+        },
+      TagSide: 'left'
+    },
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    },
+    'HTML-CSS': {
+    	scale: 100,
+	availableFonts: [],
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+
+
+  <script type="text/javascript" src="/static/js/toggle.js"></script>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/easymde@2.0.1/dist/easymde.min.css" integrity="sha384-IRbzB9px0sfIx90vkN+geaX3F4LVcg/M+k5vmVkfjs5TnRX3MIhGS8Ma06ALKVYp" crossorigin="anonymous">
+  <script src="https://unpkg.com/easymde@2.0.1/dist/easymde.min.js" integrity="sha384-v06sb0t0ToY1YRtVlfD/GCGpIZ/QHYyeH2Gzjvr0ZJI62/50DIzT8XRgQ6JvptVu" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.css" integrity="sha384-8xTxM5sJRAUB0ckdBghB5am+aw+0kC5FfSUzMI+KI+UD8uBCNeSkdi8I1J4+Wjwu" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.js" integrity="sha384-gE5xOW4MVOjJL1A2SbxwvQw/qet6h8Vdv06j3JQGhBW4d1H5hXYB12WsrUBgU439" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid bounded">
+  <div id="first-bar" class="row topbar inner-top top">
+    <header class="col">
+      <h1><a href="/">The Stacks project</a></h1>
+    </header>
+
+    <nav id="header">
+      <ul id="quicklinks">
+        <li><a href="/bibliography">bibliography</a>
+        <li><a href="https://www.math.columbia.edu/~dejong/wordpress/">blog</a>
+      </ul>
+
+      <form id="quicksearch" action="/search">
+        <span id="search-icon"><img src="/static/images/search.svg"></span>
+        <input type="search" name="query" size="16" placeholder="keywords or a tag" value="">
+      </form>
+    </nav>
+  </div>
+
+  <nav id="second-bar" class="row topbar sticky-top">
+    
+      <ul class="col-11 col-sm-11 col-md-11 col-lg-12 col-xl-12" id="crumbs">
+        <li><a href="/browse">Table of contents</a></li>
+        
+  
+  
+    <li>Part <a href="/tag/0ELP" data-tag="0ELP">2</a>: Schemes
+    
+  
+    <li>Chapter <a href="/tag/01LE" data-tag="01LE">27</a>: Constructions of Schemes
+    
+  
+    <li>Section <a href="/tag/01OA" data-tag="01OA">27.21</a>: Projective bundles
+    
+  
+    <li class="active">Example <a href="/tag/0FCY" data-tag="0FCY">27.21.2</a>: Projective space of a vector space
+    <span id="citation">(<a href="/tag/0FCY/cite">cite</a>)</span>
+  
+
+
+      </ul>
+    
+
+    
+      <div class="col-1 col-sm-1 col-md-1" id="burger">
+        <input type="checkbox" id="burger-input"></input>
+
+        <label id="burger-icon" for="burger-input">
+          <span id="top-bun"></span>
+          <span id="meat"></span>
+          <span id="bottom-bun"></span>
+        </label>
+
+        <div id="burger-content">
+          
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/01OB">previous definition</a>
+  
+  
+    <li class="right"><a href="/tag/01OC">next example</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  
+    <hr>
+
+    <div class="information">
+      
+  <ul class="tag-info">
+    <li class="tag-history"><a href="/tag/0FCY/history">history</a>
+    <li class="tag-statistics"><a href="/tag/0FCY/statistics">statistics</a>
+    
+      <li class="tag-dependencies"><a href="/tag/0FCY/statistics#dependencies">2 tags refer to this tag</a>
+    
+  </ul>
+
+    </div>
+  
+
+
+        </div>
+      </div>
+    
+
+    
+  </nav>
+
+  <div class="row" id="content">
+    <section id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      
+<div class="html" id="tag">
+  
+
+  
+
+  
+
+  <article class="env-example" id="0FCY">
+  <p><a class="environment-identifier" href="/tag/0FCY">Example <span data-tag="0FCY">27.21.2</span> <span class="named">(Projective space of a vector space)</span>.</a>  Let $k$ be a field. Let $V$ be a $k$-vector space. The corresponding <em>projective space</em> is the $k$-scheme </p>
+  <div class="equation">
+  \[  \mathbf{P}(V) = \text{Proj}(\text{Sym}(V))  \]
+</div>
+  <p> where $\text{Sym}(V)$ is the symmetric algebra on $V$ over $k$. Of course we have $\mathbf{P}(V) \cong \mathbf{P}^ n_ k$ if $\dim (V) = n + 1$ because then the symmetric algebra on $V$ is isomorphic to a polynomial ring in $n + 1$ variables. If we think of $V$ as a quasi-coherent module on $\mathop{\mathrm{Spec}}(k)$, then $\mathbf{P}(V)$ is the corresponding projective space bundle over $\mathop{\mathrm{Spec}}(k)$. By the discussion above a $k$-valued point $p$ of $\mathbf{P}(V)$ corresponds to a surjection of $k$-vector spaces $V \to L_ p$ with $\dim (L_ p) = 1$. More generally, let $X$ be a scheme over $k$, let $\mathcal{L}$ be an invertible $\mathcal{O}_ X$-module, and let $\psi : V \to \Gamma (X, \mathcal{L})$ be a $k$-linear map such that $\mathcal{L}$ is generated as an $\mathcal{O}_ X$-module by the sections in the image of $\psi $. Then the discussion above gives a canonical morphism </p>
+  <div class="equation">
+  \[  \varphi _{\mathcal{L}, \psi } : X \longrightarrow \mathbf{P}(V)  \]
+</div>
+  <p> of schemes over $k$ such that there is an isomorphism $\theta : \varphi _{\mathcal{L}, \psi }^*\mathcal{O}_{\mathbf{P}(V)}(1) \to \mathcal{L}$ and such that $\psi $ agrees with the composition </p>
+  <div class="equation">
+  \[  V \to \Gamma (\mathbf{P}(V), \mathcal{O}_{\mathbf{P}(V)}(1)) \to \Gamma (X, \varphi _{\mathcal{L}, \psi }^*\mathcal{O}_{\mathbf{P}(V)}(1)) \to \Gamma (X, \mathcal{L})  \]
+</div>
+  <p> See Lemma <a href="/tag/01NK" data-tag="01NK">27.14.1</a>. If $V \subset \Gamma (X, \mathcal{L})$ is a subspace, then we will denote the morphism constructed above simply as $\varphi _{\mathcal{L}, V}$. If $\dim (V) = n + 1$ and we choose a basis $v_0, \ldots , v_ n$ of $V$ then the diagram </p>
+  <div class="equation">
+  \[  \xymatrix{ X \ar@{=}[d] \ar[rr]_{\varphi _{\mathcal{L}, \psi }} &  &  \mathbf{P}(V) \ar[d]^{\cong } \\  X \ar[rr]^{\varphi _{(\mathcal{L}, (s_0, \ldots , s_ n))}} &  &  \mathbf{P}^ n_ k }  \]
+</div>
+  <p> is commutative, where $s_ i = \psi (v_ i) \in \Gamma (X, \mathcal{L})$, where $\varphi _{(\mathcal{L}, (s_0, \ldots , s_ n))}$ is as in Section <a href="/tag/01ND" data-tag="01ND">27.13</a>, and where the right vertical arrow corresponds to the isomorphism $k[T_0, \ldots , T_ n] \to \text{Sym}(V)$ sending $T_ i$ to $v_ i$. </p>
+</article>
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  // move extras from parent element to after environment name and number
+  $("article a[data-toggle]").each(function(index, element) {
+    $(element).insertAfter(($(element).parent().find("a.environment-identifier")));
+  });
+
+  $('article a[data-toggle="popover"]').popover()
+
+  // render mathematics in popovers
+  $("[data-toggle=popover]").on('shown.bs.popover', function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, $("div.popover-body").html()]);
+  });
+});
+  </script>
+
+  
+
+  
+</div>
+
+
+<hr>
+
+<section id="comments">
+  <h2>Comments (3)</h2>
+
+  
+    <a id="comment-11335" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/0FCY#comment-11335">Comment #11335</a>
+        by
+        <cite>Categorical</cite>
+        on <time datetime="2026-04-13 23:37:49.441044">April 13, 2026 at 23:37 </time>
+      </header>
+
+      <blockquote><p>This is a minor comment. But to make your description of the displayed map <script type="math/tex">X\into P(V)</script> also comes from a surjection <script type="math/tex">p^*V\to L</script> for some globally generated line bundle on <script type="math/tex">L</script> on <script type="math/tex">X</script>. Here <script type="math/tex">p:X\to Spec(k)</script> is the structure morphism. In otherwords your example can be made more canonical.</p></blockquote>
+    </article>
+  
+    <a id="comment-11336" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/0FCY#comment-11336">Comment #11336</a>
+        by
+        <cite>Categorical</cite>
+        on <time datetime="2026-04-13 23:38:58.726018">April 13, 2026 at 23:38 </time>
+      </header>
+
+      <blockquote><p>Sorry the undefined control sequence is the map <script type="math/tex">X \to P(V)</script>
+</p></blockquote>
+    </article>
+  
+    <a id="comment-11496" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/0FCY#comment-11496">Comment #11496</a>
+        by
+        <cite><a href="https://stacks.math.columbia.edu/" rel="author">Stacks Project</a></cite>
+        
+        on <time datetime="2026-05-26 12:52:21.130719">May 26, 2026 at 12:52 </time>
+      </header>
+
+      <blockquote><p>Leaving as is.</p></blockquote>
+    </article>
+  
+
+  
+</section>
+
+<hr>
+
+<section id="post-comment">
+  <h2>Post a comment</h2>
+  <p>Your email address will not be published. Required fields are marked.
+  <p>In your comment you can use <a href="/markdown">Markdown</a> and LaTeX style mathematics (enclose it like <code>$\pi$</code>). A preview option is available if you wish to see how it works out (just click on the eye in the toolbar).
+  <noscript><p>Unfortunately JavaScript is disabled in your browser, so the comment preview function will not work.</p></noscript>
+
+  <p>All contributions are licensed under the <a href="https://github.com/stacks/stacks-project/blob/master/COPYING">GNU Free Documentation License</a>.
+
+  <form name="comment" id="comment-form" action="/post-comment" method="post">
+    <label for="name">Name<sup>*</sup>:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="mail">E-mail<sup>*</sup>:</label>
+    <input type="email" name="mail" id="mail" required><br>
+
+    <label for="site">Site:</label>
+    <input type="url" name="site" id="site"><br>
+
+    <label>Comment:</label>
+    <textarea name="comment" id="comment-textarea" cols="80" rows="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <script type="text/javascript">
+var easymde = new EasyMDE({
+  autosave: {
+    enabled: true,
+    delay: 1000,
+    uniqueId: "comment-0FCY",
+  },
+  element: $("#comment")[0],
+  forceSync: true,
+  insertTexts: { link: ["\\ref{", "}"], table: ["$", "$"], image: ["\\begin{equation}\n", "\n\\end{equation}\n"] }, // we hack into these insertion methods, I couldn't figure out how to write your own...
+  placeholder: "You can type your comment here, use the preview option to see what it will look like. If your comment is on a lemma, please leave your comment on the page of the lemma. Same with remarks, propositions, theorems, etc.",
+  previewRender: function(plaintext, preview) {
+    // deal with references
+    plaintext = plaintext.replace(/\\ref\{([0-9A-Z]{4})\}/g, "<span class=\"tag\">[$1](/tag/$1)</span>");
+    // deal with \[\] getting replaced to []
+    plaintext = plaintext.replace(/\\\[/g, "\\begin{equation}");
+    plaintext = plaintext.replace(/\\\]/g, "\\end{equation}");
+
+    output = this.parent.markdown(plaintext);
+
+    setTimeout(function() {
+      preview.innerHTML = output;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }, 0);
+
+    return "";
+  },
+  spellChecker: false,
+  status: false,
+  toolbar: [
+    "link", {name: "inline", action: EasyMDE.drawTable, className: "fa fa-usd"}, {name: "block", action: EasyMDE.drawImage, className: "fa fa-square"}, "|",
+    "bold", "italic", "|",
+    "ordered-list", "unordered-list", "|",
+    "preview"
+  ],
+});
+
+// make sure to show tags, not numbers
+var tagToggleHappened = false; // only do this once to not annoy the user too much
+easymde.codemirror.on("change", function() {
+  // if data-tag elements do not have tag attribute we need to make tags visible
+  if (!$("*[data-tag]").hasClass("tag") && !tagToggleHappened)
+    $("section#meta input.toggle").bootstrapToggle("toggle");
+  tagToggleHappened = true;
+});
+
+// prevent form submit when the captcha isn't correct
+// it's a bit silly to use HTML5 validation for this, as bots can figure that out
+// also save the author information to localStorage
+easymde.element.form.addEventListener("submit", function(event) {
+  if ($("#check").val() != $("#hidden-tag").val()) {
+    // explain captcha
+    $("#captcha-message").toggle();
+
+    // stop submit
+    event.preventDefault();
+    return false;
+  }
+
+  // save author information
+  localStorage.setItem("name", $("input#name").val());
+  localStorage.setItem("mail", $("input#mail").val());
+  localStorage.setItem("site", $("input#site").val());
+});
+    </script>
+
+    <p>In order to prevent bots from posting comments, we would like you to prove that you are human. You can do this by <em>filling in the name of the current tag</em> in the following input field. As a reminder, this is tag <span class="tag">0FCY</span>. Beware of the difference between the letter&nbsp;'<span class="tag">O</span>' and the digit&nbsp;'<span class="tag">0</span>'.</p>
+    <!--<p>This <abbr title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</abbr> seems more appropriate than the usual illegible gibberish, right?<br>-->
+    <label for="check">Tag:</label>
+    <input type="text" name="check" id="check" required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Post comment</button>
+    <input type="hidden" name="tag" id="hidden-tag" value="0FCY"><br>
+
+    <p id="captcha-message" style="display: none" class="alert alert-warning" role="alert">The tag you filled in for the captcha is wrong. You need to write <span class="tag">0FCY</span>, in case you are confused.</p>
+
+    <script type="text/javascript">
+// enter in captcha fields causes \ref to appear (?!)
+$("input#check").on("keypress", function(e) {
+  if (e.which == 13) {
+    // always stop the event
+    e.preventDefault();
+
+    // perform clientside check as for actual submit
+    if ($("#check").val() != $("#hidden-tag").val()) {
+      // explain captcha
+      $("#captcha-message").toggle();
+    }
+    else {
+      $("form#comment-form").submit();
+    }
+  }
+});
+    </script>
+  </form>
+</section>
+
+
+
+
+    </section>
+	  <div class="col-lg-4 col-xl-4">
+	    <section id="meta" class="row topbar sticky-top">
+        
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/01OB">previous definition</a>
+  
+  
+    <li class="right"><a href="/tag/01OC">next example</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  <hr>
+  
+    <a href="https://stacks.math.columbia.edu/download/constructions.pdf#nameddest=0FCY">View Example <span data-tag="0FCY">27.21.2</span> as pdf</a>
+  
+
+  
+
+    <hr>
+
+    <div class="information">
+      
+  <ul class="tag-info">
+    <li class="tag-history"><a href="/tag/0FCY/history">history</a>
+    <li class="tag-statistics"><a href="/tag/0FCY/statistics">statistics</a>
+    
+      <li class="tag-dependencies"><a href="/tag/0FCY/statistics#dependencies">2 tags refer to this tag</a>
+    
+  </ul>
+
+    </div>
+  
+
+
+      </section>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

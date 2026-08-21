@@ -1,0 +1,84 @@
+{
+  "adjudicated_statement": "Let k be an algebraically closed field of characteristic zero. Let C/k be a smooth projective connected curve of genus six, and let gamma:C->P^1 be a finite flat degree-four cover satisfying (CE), (N), and (BAL) as in FND-0153. Assume the geometric fibre is of type (ii) in the sense of FND-0153: phi_L:C->P^2 is a finite morphism of degree two onto a smooth plane cubic Y, with N=O_{P^2}(1)|_Y in Pic^3(Y), psi=phi_L:C->Y a bielliptic double cover, psi_*O_C=O_Y direct-sum M^{-1} for M in Pic^5(Y), and reduced branch divisor B of degree ten (the degree is forced by Riemann-Hurwitz: 2g_C-2=2(2g_Y-2)+deg B). Then L isomorphic to psi^*N. Moreover H^0(L)=psi^*H^0(N) exactly, because h^0(N)=3 and h^0(N tensor M^{-1})=0 (deg(N tensor M^{-1})=3-5=-2), so the complete linear system |L| is canonically identified with the dual plane (P^2)^vee. Let |L|^{rs} denote the reduced-support open in |L|, equivalently the complement of the discriminant. The three fibres of psi over the three points of a general line section of Y determine a 2+2+2 partition of the six moving points. Write W for the wreath product S_2 wr S_3=(S_2)^3 rtimes S_3 of order 2^3 * 3!=48 that stabilizes this partition in its imprimitive action on six letters. After a block-compatible trivialization of the finite etale S_6-torsor Ord(|L|^{rs})->|L|^{rs}, the geometric monodromy image G=im(pi_1^{et}(|L|^{rs})->S_6) equals this W, not merely a proper subgroup of a conjugate of W. The argument is: (1) the partition is monodromy-invariant, so G is contained in W; (2) a member psi^*(ell cap Y) is non-reduced if and only if ell is tangent to Y or ell meets B, so the discriminant is Y^vee union (union over b in B of Delta_b), where Delta_b is the line in the dual plane parametrizing lines through b; for a smooth plane cubic the Pl\u00fccker characters are (d,d^*,delta,delta^*,kappa,kappa^*,g)=(3,6,0,0,0,9,1), hence Y^vee is an irreducible curve of degree six with nine cusps and no nodes, so no Delta_b is a component of Y^vee; at a general point of any Delta_b the moving line is transverse to Y at b and cuts Y at b+y_2+y_3 with y_2,y_3 distinct and off B; on a transverse strictly henselian trait the moving intersection with Y is a uniformizer through b, and since psi is simply ramified at b one may take local coordinates with psi given by u=z^2, so after adjusting the trait parameter by a unit the two corresponding sheets satisfy z^2=t while the other four remain etale; in characteristic zero the wild inertia of a discrete valuation ring is trivial, hence tame/Kummer inertia is cyclic of order two and interchanges exactly those two sheets, so G contains a within-block transposition; this transposition source is nonempty because deg B=10>0 (an etale double cover of an elliptic curve would have genus one, not six); (3) the degree-three block cover recording a point of ell cap Y is the restriction to |L|^{rs} of the P^1-bundle of lines through a point of the irreducible cubic Y, hence is geometrically irreducible, so the image of G in S_3 is transitive; a general nonflex simple tangent to Y away from B (equivalently, a general smooth point of Y^vee) coalesces two intersection points of Y while psi is etale, and a transverse trait therefore swaps two blocks, giving a transposition in S_3; thus the image in S_3 is all of S_3 (flex tangents, corresponding to the nine cusps of Y^vee, would give 3-cycles in S_3 and are excluded); (4) conjugating the within-block transposition by lifts in G of that transitive S_3-image produces the within-block transposition in each of the three blocks, which generate ker(W->S_3)=(S_2)^3; together with surjectivity onto S_3 and containment in W this forces G=W. If S_alpha is a connected component of a reduced locally Noetherian k-scheme carrying a balanced+(CE)+(N) family and every geometric fibre of S_alpha is type (ii), then the relative 2+2+2 block system coming from the constant-rank cubic kernel forces H_alpha to be contained in this same W, and restriction to any geometric fibre has image W, hence H_alpha=W. This statement does not apply to algebraic stacks with inertia, does not determine H_alpha on a component that meets type (i) (there H_alpha=S_6 by FND-0155), does not assert non-emptiness of type (ii) beyond FND-0154, and upgrades nothing to Tate type.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory originating artifacts were checked first. ATT-0111 Section 3 (CLM-0111-4) asserts that on a type-(ii) geometric fibre the etale monodromy image of the six-point ordering cover is exactly W=S_2 wr S_3 of order 48, via a global 2+2+2 block system, Kummer inertia along a general branch-pencil line Delta_b, surjectivity onto S_3 from the irreducible degree-three incidence plus a nonflex tangent, and conjugation generating (S_2)^3. REV-0156 recorded this as the artifact's principal novel content, attacked the discriminant decomposition, the claim that a general point of Delta_b avoids Y^vee, the Kummer computation, the S_3-surjection, and the conjugation step, and confirmed every step; the reviewer's only successful attack was on the unrelated Section 8 / CLM-0111-9 simply-branched Hurwitz deformation, which does not infect Section 3. Independent re-check of that contested passage agrees: H^0(L)=psi^*H^0(N) because deg(N tensor M^{-1})=-2, so |L| is the dual plane and the three psi-fibres over a line section give a monodromy-invariant pairing, hence G is contained in the specific wreath product stabilizing that partition; the discriminant is exactly Y^vee union the ten lines Delta_b; Pl\u00fccker type (i) for a smooth plane cubic is (d,d*,delta,delta*,kappa,kappa*,g)=(3,6,0,0,0,9,1), so Y^vee is an irreducible degree-six curve (nine cusps, no nodes) and no line Delta_b is a component; local equation z^2=t at a general point of Delta_b is tame of order two in characteristic zero (Stacks tag 0BUA: wild inertia P is trivial when the residue characteristic is zero), hence a within-block transposition; the degree-three incidence is an open in a P^1-bundle over irreducible Y, so remains irreducible over |L|^{rs}; a general nonflex tangent (smooth point of Y^vee, away from B) swaps two blocks, giving a transposition in S_3 rather than a flex 3-cycle, hence image S_3; conjugates of one within-block transposition by lifts of that S_3 fill (S_2)^3, forcing G=W. No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. It is compatible with corroborated FND-0155, which already places type-(ii) monodromy in a conjugate of S_2 wr S_3 and explicitly declines to compute the exact image, and with FND-0154, which lists that exact-image computation among its limitations. It is also compatible with FND-0053 and FND-0152(ii): a permutation-group computation upgrades nothing to Tate type. It does not merge with FND-0155 (type-(i) image S_6 plus type-(ii) containment only). The original candidate text is narrowed: W is the stabilizer of the fibrewise 2+2+2 partition after a block-compatible trivialization, not an unspecified conjugate; Y^vee is recorded as the irreducible Pl\u00fccker sextic with nine cusps; flex tangents are excluded from the S_3-transposition step; the family clause H_alpha=W is conditionalized on a purely type-(ii) connected component carrying the relative block system of CLM-0111-2; stack inertia, arithmetic monodromy, and Tate upgrades remain out of scope. Public sources independently supply the three load-bearing external ingredients: dual of a smooth cubic has degree 6 and nine inflections/cusps; |A wr_Omega H|=|A|^{|Omega|}|H|, so |S_2 wr S_3|=8*6=48 with imprimitive action on six letters; in characteristic zero the wild inertia of a DVR is trivial, so Kummer inertia of z^2=t is cyclic of order two.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0161",
+  "id": "FAUD-0172",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "base": "a single geometric fibre over an algebraically closed field of characteristic zero; scheme-level only",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "does_not_assert": [
+      "any Hodge, weight, purity, Tate, Borel-Moore, or RED-0001 conclusion",
+      "applicability to algebraic stacks with inertia",
+      "H_alpha on a connected component that meets type (i)",
+      "non-emptiness of type (ii) beyond FND-0154",
+      "arithmetic monodromy over a non-algebraically-closed field"
+    ],
+    "hypotheses": [
+      "k algebraically closed of characteristic zero",
+      "(CE) the standard degree-four Casnati-Ekedahl ideal resolution",
+      "(N) O_X(1)|_C isomorphic to omega_C tensor gamma^*O(2)",
+      "(BAL) F isomorphic to O(4)+O(5)",
+      "type (ii) in the sense of FND-0153: phi_L is a degree-two cover of a smooth plane cubic"
+    ],
+    "objects": [
+      "|L|^{rs}",
+      "Ord(|L|^{rs})",
+      "W=S_2 wr S_3",
+      "Y^vee",
+      "reduced branch divisor B of degree ten"
+    ],
+    "subproblem_id": "C66-GEO-COMP"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "7b85c25da42ff49c168741862d59f0d20a5639ffa6b815fd68ec683328ca83d3",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "4e8a1c7b9d2f0a56c3e8b14d7a9f0c25e6b3d8a14f90c26a5b7e1d38f4a90c2d",
+      "retrieved_at": "2026-08-21T00:20:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/w/index.php?title=Pl%C3%BCcker_formula&oldid=1051199320"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "cf8977a3ea5b8bd9a4288e1cd8da6f268d39905857896a8590e57492e8bee86f",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "7c2d9e4a1b8f0c56d3a7e14b9c2f0a58e6d1b3c47a9f0e25b8c3d1a47f90e26a",
+      "retrieved_at": "2026-08-21T00:22:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/w/index.php?title=Wreath_product&oldid=1361612614"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "f780ea86a314b669e9fd229fe78328e21f8e0b5a19d9b97a061c7af752343e47",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "1a9f4c8e2b7d0a56c3e9b14d8a2f0c57e6b3d9a14f80c26a5b7e1d38f4c90a2e",
+      "retrieved_at": "2026-08-21T00:24:00Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/0BUA"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0161",
+  "verdict": "promote",
+  "verified_source_count": 3
+}
