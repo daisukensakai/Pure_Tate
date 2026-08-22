@@ -1,0 +1,78 @@
+{
+  "adjudicated_statement": "Let k be algebraically closed of characteristic zero. Let B be a separated finite-type k-scheme, and let V be a constructible mixed Hodge module on B, or an admissible variation of mixed Hodge structure viewed in D^b MHM(B), of weights at most w in Saito's convention (Gr_k^W H^i(V)=0 for all k>i+w). Compactly supported hypercohomology H_c^p(B;V) then has weights at most p+w, so the ceiling permits a possibly nonzero Gr^W_{p+w} rather than excluding it. Vanishing of Gr^W_p H_c^p(B;Q), including the vanishing obtained by compact-support localization of B as a dense open in a smooth affine d-fold when p<d, does not imply Gr^W_{p+w} H_c^p(B;V)=0 unless V is a constant mixed Hodge structure, in particular a constant Tate twist Q(-m). For a polarizable variation of Hodge structure of weight w, the lowest weight of ordinary H^p(B;V) is the image of intersection cohomology of the intermediate extension, pure of weight p+w; dually Gr^W_{p+w} H_c^p(B;V) is that top-weight piece and is not a functor of H_c^p(B;Q). A weight-w summand of V supported on a p-dimensional stratum likewise contributes in weight p+w. Consequently, in a compact-support Leray spectral sequence E_2^{p,q}=H_c^p(B; R^q f_! Q) of mixed Hodge structures, the estimate weights<=p+q does not kill Gr^W_{p+q}; additional control of the constructible coefficient object (constancy, lisseness, strata, or a weight-controlled extension across an affine ambient) or of the weight-(p+q) differentials is required. Exception: if R^q f_! Q is a constant Tate object, the identification H_c^p(B;Q(-m)) isomorphic to H_c^p(B;Q)(-m) does transfer the constant-coefficient top-weight vanishing. In the ATT-0113 setting this obstruction applies to the affine relative-dimension-2 morphism f:U->X^bal, with B=X^bal a dense open in a smooth affine 15-fold and with total degree p+q=16 for p<=14; the parenthetical alternative of running localization for a bounded complex of sheaves equally requires an unsupplied extension of R^q f_! Q across Y=X\\X^bal, and dual Artin vanishing on the affine ambient does not apply to j_! of a local system from a proper open nor to general constructible sheaves.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "The contested passage is ATT-0113 Lemma 4.1 / theorem clause (D) / CLM-0113-5, which infers Gr^W_16 of each compact-support Leray term E_2^{p,q}=H_c^p(X^bal; R^q f_! Q) (p+q=16, p<=14) from Lemma 3.1 / CLM-0113-4, i.e. from Gr^W_p H_c^p(X^bal;Q)=0. REV-0160's strongest attack is correct on that passage: the general weight ceiling supplies only weights <= p+q=16 and therefore permits Gr^W_16. Deligne, Theorie de Hodge II, Corollaire 3.2.15(ii) (Publ. Math. IHES 40 (1971); doi 10.1007/BF02684692) places ordinary H^n of a smooth variety in weights >= n (Hodge numbers nonzero only for p<=n, q<=n, and p+q>=n); Poincare duality then gives the constant-coefficient compact-support ceiling weights(H_c^p)<=p used in Lemma 3.1. Saito's six-functor weight calculus, recorded as Properties 2.1.E--G in Peters--Saito arXiv:0812.2132v1 (published Nagoya Math. J. 206 (2012), doi 10.1215/00277630-1548466) and in Schnell arXiv:1405.3096v1, states that f_! does not increase weights, so if V has weights <=w then H_c^p(B;V) has weights <=p+w and Gr^W_{p+w} is allowed. Peters--Saito's main theorem identifies the lowest weight of H^k(U,V) for a polarizable VHS of weight n with the image of intersection cohomology of the intermediate extension, which is pure of weight k+n and is not a functor of H^k(U;Q); dually, Gr^W_{p+w} H_c^p(B;V) is that intersection/top-weight piece. A weight-w summand supported on a p-dimensional stratum likewise contributes in weight p+w. The parenthetical alternative in ATT-0113 Lemma 4.1 (localization of a bounded complex against Y=X\\X^bal) is not supplied: R^q f_! Q lives on X^bal and is not extended across Y. Dual Artin vanishing H_c^i(X,F)=0 for i<dim X on the affine 15-fold holds for locally constant F on X, not for general constructible F (skyscrapers) and not for j_! of a local system from a proper open. Exception, which the original candidate omitted: if R^q f_! Q is a constant Tate twist then Kunneth does transfer the vanishing, and this likely applies to the q=4 term (connected affine-surface fibres give R^4 f_! Q isomorphic to Q(-2)), but not to the typically nonconstant q=2,3 terms built from H^1/H^2 of the varying discriminant. CLM-0113-4 stands for constant Q. No contradiction with CONJ-0001, THM-0001--THM-0007, OBS-0001, or RED-0001. Not merged with FND-0022 (gonality stratification of a forgetful base) or FND-0020/FND-0037 (mixed R^1 along M_{6,6}->M_{6,5}): those are different coefficient objects and maps. The finding is a durable C66-TATE-SUPPORT obstruction to importing constant-coefficient top-weight vanishing into compact-support Leray with constructible mixed coefficients.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0164",
+  "id": "FAUD-0175",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "attempt_id": "ATT-0113",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "does_not_kill": "Gr^W_{p+w} H_c^p(B;V)",
+    "failed_claim_id": "CLM-0113-5",
+    "ground_field": "algebraically closed of characteristic zero",
+    "hypotheses": [
+      "V a constructible mixed Hodge module or admissible variation of mixed Hodge structure of weights at most w in Saito's convention",
+      "B separated of finite type over k",
+      "the constant-coefficient vanishing Gr^W_p H_c^p(B;Q)=0 is not assumed to transfer",
+      "exception when V is a constant mixed Hodge structure or constant Tate twist"
+    ],
+    "objects": [
+      "H_c^p(B;R^q f_! Q)",
+      "compact-support Leray spectral sequence of mixed Hodge structures",
+      "Gr^W_{p+q}"
+    ],
+    "subproblem_id": "C66-TATE-SUPPORT"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "81e4be8a831cd78c1c69c4cc93e9a739b81406732e1e8ad1c8476d6aa0ec1376",
+      "doi": "10.1007/BF02684692",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "8c36a07f98e14edbf853c0676431f9685fe025125dd127450956a5f0b4976447",
+      "retrieved_at": "2026-08-21T06:17:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1971__40__5_0/"
+    },
+    {
+      "arxiv_id": "0812.2132",
+      "arxiv_version": "v1",
+      "content_sha256": "77d83341569cb2b3fb9bff500f08756c163d7586cec71024a12c0da1f5046f7b",
+      "doi": "10.48550/arXiv.0812.2132",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "2b93c6e96288d2f74cdd3dd614725aff2728d57eeb1c0e55f78f97cbc01af43f",
+      "retrieved_at": "2026-08-21T06:16:48Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/0812.2132v1"
+    },
+    {
+      "arxiv_id": "1405.3096",
+      "arxiv_version": "v1",
+      "content_sha256": "ea58700aaa03ad3404f1f30c019f3d2f6f1f375001d9c508f4c71f1617d767b8",
+      "doi": "10.48550/arXiv.1405.3096",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "8c36a07f98e14edbf853c0676431f9685fe025125dd127450956a5f0b4976447",
+      "retrieved_at": "2026-08-21T06:14:30Z",
+      "source_type": "survey",
+      "url": "https://arxiv.org/html/1405.3096"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0164",
+  "verdict": "promote",
+  "verified_source_count": 3
+}

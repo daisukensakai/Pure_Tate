@@ -1,0 +1,113 @@
+{
+  "attempt_id": "ATT-0115",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0115-1",
+      "note": "Z\u2192U is a finite \u00e9tale right S_6-torsor, so over Q averaging is exact and Gr^W_16 H_c^16(U;Q)=Gr^W_16 H_c^16(Z;Q)^{S_6}=M_[6]. FND-0165 supplies the corner injection Gr^W_16 H_c^16(U)\u2192Gr^W_16 H_c^16(A) for the open immersion of separated finite-type C-schemes (a connected component of a smooth atlas of the finite-type balanced Hurwitz stack is of this type; the parenthetical 'locally Noetherian' wording is not an extra generality). A\u2192S is a Zariski-locally trivial P^2-bundle once h^0(L_s)=3 identically (packet FND-0139/FND-0142) and Grauert is applied on the reduced base, hence proper, so R\u03c0_!Q=R\u03c0_*Q=Q\u2295Q(-1)[-2]\u2295Q(-2)[-4] as constant Tate objects. Compact-support cohomology of A is therefore H_c^*(S)\u2295H_c^{*-2}(S)(-1)\u2295H_c^{*-4}(S)(-2) as MHS even if S is not proper, and Gr^W_16 of that sum is the displayed three-term target. The argument never identifies H_c(U) with H_c(A).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0115-2",
+      "note": "S_5 fixing one letter acts freely on the S_6-torsor, so Z^(1)=Z/S_5. Rational transfer gives Gr^W_16 H_c^16(Z^(1))=Gr^W_16 H_c^16(Z)^{S_5}. The S_6\u2192S_5 branching rule removes one box: only [6] and [5,1] restrict with a trivial S_5 summand, each with multiplicity one, so the source is M_[6]\u2295M_[5,1] as multiplicity Hodge structures (not the full isotypic subrepresentations). FND-0166, whose remaining hypotheses (CE)+(N)+(BAL), reduced locally Noetherian base, h^0=3, and fibrewise base-point-freeness of L (packet FND-0130/FND-0134) hold on the balanced chart, identifies Z^(1) with the reduced-support open in the universal divisor script-D and identifies script-D\u2192script-C with a Zariski-locally trivial P^1-bundle. FND-0165 then injects the corner of Z^(1) into that of script-D, and the proper P^1-bundle formula identifies the latter with Gr^W_16 H_c^16(script-C)\u2295Gr^W_14 H_c^14(script-C)(-1).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0115-3",
+      "note": "Under (H-S), the three summands in the first target are Q(-8), Q(-7)(-1)=Q(-8), and Q(-6)(-2)=Q(-8). Polarizable pure Q-Hodge structures of a single weight are semisimple, so a subobject of \u2295Q(-8) is again \u2295Q(-8); this is an honest Hodge-structure statement rather than a semisimplification. Duality Gr^W_16 H_c^16 dual to W_{-16}H^{BM}_{16} with no extra Tate twist (FND-0165's convention) sends Q(-8) to Q(8). Over Q, |S_6| is invertible and S_n-irreps are self-dual, so invariants equal coinvariants and T_16(U)=T_16(Z)^{S_6}.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0115-4",
+      "note": "Under (H-C) both summands of the second target are Q(-8). Semisimplicity makes the multiplicity spaces M_[6] and M_[5,1] sums of Q(-8). The rational representations V_[6] and V_[5,1] are pure of type (0,0), so the full isotypic Hodge structures V_\u03bb\u2297M_\u03bb are likewise sums of Q(-8), and their Borel\u2013Moore duals are sums of Q(8). No claim is made about other partitions.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0115-5",
+      "note": "Correctly recorded gap, not a defect in the stated conditional theorem: (H-S) and (H-C) are hypotheses, the remaining S_6-isotypics are uncontrolled, FND-0164 blocks replacing that missing work by a nonconstant-coefficient Leray weight-floor argument, and no Gysin, support-exhaustion, or comparison map to M_{6,6} is asserted. Confirming the lemma does not verify C66-TATE-SUPPORT or discharge RED-0001.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-22",
+  "finding_candidates": [
+    {
+      "adjudication": "supports_existing_packet_finding",
+      "key": "FC-ATT0115-SUPPORTS-FND-0167",
+      "kind": "lemma",
+      "statement": "ATT-0115 reconstructs the two constant-coefficient corner injections and the conditional Q(8) conclusions recorded in FND-0167 from FND-0165, FND-0166, the proper projective-bundle formula with constant Tate coefficients, rational S_6/S_5 transfer, and semisimplicity of pure polarizable weight-16 Hodge structures. It does not identify discriminant-complement cohomology with projective-bundle cohomology, does not run nonconstant-coefficient Leray, and asserts no Gysin or support statement on M_{6,6}.",
+      "supports_finding_id": "FND-0167"
+    }
+  ],
+  "id": "REV-0162",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "c7be40b6ee7514319ea56389f53258474de96387d1e8fa6f7f0c72dfd8b0b46a",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0112",
+      "note": "Used only for balanced smoothness and reduced scheme-atlas geometry (CLM-0112-2), exclusion of a component contained in the type-(ii) locus (CLM-0112-6), the PGL_2-quotient Hurwitz stack (CLM-0112-7), and full S_6 monodromy with F(Z)^{S_6}=F(U) over a scheme atlas (CLM-0112-8). No Hodge, weight, Borel\u2013Moore, or Tate statement is imported.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0157",
+      "note": "First confirmation review of ATT-0112; the four cited claims CLM-0112-2,6,7,8 are confirmed there. Used only as a pointer that the geometric input is dual-confirmed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0158",
+      "note": "Second confirmation of ATT-0112, including the scheme-base and no-Tate caveats of clause (E). That is the scope in which ATT-0115 runs the Z-model.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0165",
+      "note": "Load-bearing corner injection for U\u2282A and Z^(1)\u2282script-D, together with BM/c duality with no extra Tate twist. Applied only to schemes in a smooth chart, which is inside the recorded separated finite-type C-scheme scope; not applied to the Hurwitz stack itself.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0166",
+      "note": "Load-bearing identification of script-D as a P^1-bundle over the universal curve and of Z^(1)=Z/S_5 with the [6] and [5,1] multiplicity spaces for any Q-linear theory with finite-quotient transfer. Hypotheses (CE)+(N)+(BAL), reduced base, h^0(L)=3, and base-point-freeness hold on the balanced chart by the packet facts feeding ATT-0112.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0167",
+      "note": "Records the same two corner injections, the exact (H-C)/(H-S) conditionals, and the excluded scope (other isotypics, nonconstant Leray, M_{6,6}). ATT-0115 reconstructs the injections from FND-0165 and FND-0166 rather than quoting FND-0167 as an unanalysed black box; the finding is used for excluded-scope bookkeeping and is not a circular appeal.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Semisimplicity of pure polarizable Q-Hodge structures of a fixed weight, used to upgrade an injection into \u2295Q(-8) to an honest Tate-type statement for the source. The recorded wording of FND-0033 is the RED-0001 corner, but the same semisimplicity is the standard property of geometric polarizable pure HS of one weight, so the use is not an over-read that creates an extension gap.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0164",
+      "note": "Listed source used only as a negative scope constraint: the proof never transfers a constant-coefficient weight floor to H_c^p(B;R^q f_!Q). Both projective-bundle formulas have constant Tate coefficients Q, Q(-1), Q(-2), which is the explicit exception in FND-0164. Non-load-bearing as a positive input.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0115-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Packet identity checked first: TASK packet_id C66-001-v4, packet_sha256 c7be40b6ee7514319ea56389f53258474de96387d1e8fa6f7f0c72dfd8b0b46a, packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7, campaign_revision 4, subproblem C66-TATE-SUPPORT, and the full target dictionary (g=n=6, dim 21, open BM degree 16 / weight -16 / type Q(8), compact H^16_c type Q(-8), ordinary degree 26 / Q(-13), Poincar\u00e9 twist 21) match ATT-0115 field for field; the theorem_statement is identical to TASK.json. Strongest attack: steps 2\u20133 illicitly identify the lowest-weight compact-support cohomology of the reduced-support opens U and Z^(1) with the projective-bundle cohomology of A\u2192S and script-D\u2192script-C, which would either equate H_c(U) with H_c(A) or run compact-support Leray of U\u2192S with nonconstant R^q g_!Q, both blocked by FND-0164 and by the excluded claims of FND-0165. Outcome: the attack fails. FND-0165 injects only Gr^W_16 H_c^16(U) into Gr^W_16 H_c^16(A), because the connecting term H_c^{15}(A\\U) has weights at most 15; the projective-bundle formula is then applied only to the proper maps A\u2192S and script-D\u2192script-C, whose R\u03c0_!Q=R\u03c0_*Q are sums of constant Tate sheaves, the explicit FND-0164 exception. Secondary attacks also failed: (i) stack versus coarse \u2014 all Hodge statements are over a reduced scheme atlas, not stack-inertia or coarse moduli; (ii) rational versus integral \u2014 averaging and invariants=coinvariants use Q; (iii) cohomology versus Borel\u2013Moore degree \u2014 both 16, with H^{BM}_{16} dual to H_c^{16} and no extra Tate twist, dual of Q(-8) equal to Q(8), Poincar\u00e9 twist 21 unused; (iv) Gysin/K\u00fcnneth shifts \u2014 hyperplane class contributes Q(-1)[-2], so the P^2 (resp. P^1) formula has twists (-1),(-2) (resp. (-1)) and Q(-7)(-1)=Q(-8), Q(-6)(-2)=Q(-8); (v) spectral-sequence differentials \u2014 none, the bundle formula is a decomposition of R\u03c0_*; (vi) graph-automorphism invariants versus coinvariants \u2014 S_6 transfer over Q; (vii) semisimplification \u2014 the corner is pure polarizable of one weight, so a subobject of \u2295Q(-8) is \u2295Q(-8); (viii) predicted motives, algebraic/tautological generation, Gysin into M_{6,6}, omitted stable pairs \u2014 all disclaimed. The finite-type versus locally-Noetherian wording is looser than FND-0165, but a connected component of a smooth atlas of the finite-type balanced Hurwitz stack is separated of finite type over C, which is the intended and load-bearing case. (H-S) and (H-C) remain unproved, as the stated theorem requires. Confirming this lemma does not verify the C66-TATE-SUPPORT case.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Sharp rational Tate-transfer criterion for the balanced Z-model. Let S be a connected reduced locally Noetherian complex scheme in a smooth chart of the balanced genus-six degree-four Hurwitz stack, with no component image contained in the type-(ii) locus. Let p:\ud835\udc9e\u2192S be the pulled-back universal curve, L=W_5\u2297\u03c9_p^{-1}, A=P_S(p_*L), U\u2282A the reduced-support locus, and Z=Ord(U) its finite \u00e9tale right S_6-ordering torsor. Write Gr^W_16 H_c^16(Z;Q)=\u2295_{\u03bb\u22a26} V_\u03bb\u2297M_\u03bb. Then there are natural injections of pure weight-16 Hodge structures M_[6]\u2192Gr^W_16 H_c^16(S;Q)\u2295Gr^W_14 H_c^14(S;Q)(-1)\u2295Gr^W_12 H_c^12(S;Q)(-2) and M_[6]\u2295M_[5,1]\u2192Gr^W_16 H_c^16(\ud835\udc9e;Q)\u2295Gr^W_14 H_c^14(\ud835\udc9e;Q)(-1). Consequently, if Gr^W_{2j}H_c^{2j}(S;Q) is a sum of Q(-j) for j=6,7,8, then T_16(U)=T_16(Z)^{S_6} is a sum of Q(8); and if Gr^W_16 H_c^16(\ud835\udc9e;Q) is a sum of Q(-8) and Gr^W_14 H_c^14(\ud835\udc9e;Q) is a sum of Q(-7), then the [6]- and [5,1]-isotypic parts of T_16(Z):=W_{-16}H^{BM}_{16}(Z;Q) are sums of Q(8).",
+  "verdict": "confirmed"
+}

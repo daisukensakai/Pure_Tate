@@ -1,0 +1,256 @@
+{
+  "argument_markdown": "## 0. Inputs used, routes not taken, and the exact object\n\nThroughout k is algebraically closed of characteristic zero. Conventions for (CE), (N), (BAL), W_f, L, and the packet orientation of F are those of ATT-0112 Section 0.1, citing SRC-0004 Lemma 10.6 and FND-0156; they are not reproved.\n\n### 0.1 Dual-confirmed dependency ATT-0112 (C66-GEO-COMP)\n\nATT-0112, independently confirmed by REV-0157 and REV-0158, is used only through the following clauses, within their recorded scheme-level reduced-base scope:\n\n- CLM-0112-1, CLM-0112-2: H is smooth of pure dimension 18; H^bal is open, hence smooth of pure dimension 18.\n- CLM-0112-4: the discriminant morphism br: H -> |O_{P^1}(18)| = P^{18} is quasi-finite; H^{comp} sits in br^{-1}(Delta_{18}).\n- CLM-0112-5, CLM-0112-6, CLM-0112-7: the type-(ii) / non-primitive locus has dimension at most 14 in H^bal and at most 11 in Hbar^bal = [H^bal/PGL_2]; every connected component of H^bal (and of Hbar^bal) meets type (i).\n- CLM-0112-8 / Theorem (E): on every connected component of a reduced locally Noetherian scheme carrying a (CE)+(N)+(BAL) family with target P^1 whose classifying image is not contained in H^ii (in particular whenever that image has dimension at least 15), U is connected, H_beta = S_6, Z = Ord(U) is connected finite etale of degree 720, and F(Z)^{S_6} isomorphic to F(U) for additive S_6-equivariant F to Q-vector spaces or mixed Q-Hodge structures.\n\nFND-0152(ii), FND-0053, and ATT-0112 Section 6 are respected: the identity induction functor upgrades nothing to Tate type. The content of this artifact is a weight computation on U itself.\n\nImported from ATT-0088/CLM-0088-8 (dual-confirmed by REV-0139, REV-0142), as already used in ATT-0112(E): over a reduced base with (CE)+(BAL)+(N), pi_*L is locally free of rank three, AJ = P(pi_*L) is a Zariski-locally trivial P^2-bundle, U is S-smooth of pure relative dimension two and surjective, and Z is the ordering torsor. Grauert is used only over reduced bases (FND-0131). No global splitting W = W_4 oplus W_5 is used (FND-0097).\n\n### 0.2 The exact cohomological object\n\nThe C66-TATE-SUPPORT obligation is the Tate type of the codimension-13 contribution supported on Z. Numerically (established working-context facts, not reproved as Hodge theorems): dim of the PGL_2-quotient model of Z is 17; Poincare duality on a smooth 17-fold identifies Gr^W_{16} H_c^{16} with Hom(Gr^W_{18} H^{18}, Q(-17)); Borel-Moore duality identifies W_{-16} H^{BM}_{16} with the dual of Gr^W_{16} H_c^{16}; Q(-9)(17) isomorphic to Q(8); a not-asserted Gysin twist Q(-4) would send Q(-9) to Q(-13). Thus vanishing of Gr^W_{16} H_c^{16}(Z;Q) is vanishing of the exact target graded piece on this support, and is of Tate type Q(-8) (the zero group).\n\nFND-0033 (semisimplicity of pure polarizable Q-Hodge structures of fixed weight) is recorded only to note that the zero group is honestly Tate; no extension-class gap is claimed.\n\n### 0.3 Routes not taken\n\nNo blocked route is used. In particular: no vcd vanishing; no CGP/top-weight graph complex; no point count; no forgetful map M_{6,6}->M_{6,5}; no inference of Tate local systems from rationality of S_6-representations (FND-0053); no inference of mixed-Tate cohomology of Hurwitz or of U from a finite branch morphism to M_{0,18} (FND-0085, FND-0054) \u2014 affineness of a finite etale scheme over an affine scheme is used, never Tate-ness of its cohomology; no Gysin map for a pair (M_{6,6}, Z) (FND-0052); no closed pure-codimension-four subvariety of M_{6,6}; no one-sided reduction of the ordering torsor; no global splitting; no Grauert on a nonreduced base.\n\n---\n\n## 1. The simply-branched PGL_2-slice is affine of dimension 15\n\n**Lemma 1.1 (etaleness of br at simple ramification).** Let H^{sb} subset H be the open where Br(gamma) is reduced. Then br: H^{sb} -> P^{18} \\ Delta_{18} is etale.\n\nProof. H is smooth of pure dimension 18 by ATT-0112/CLM-0112-1. Simple branching is open, so H^{sb} is smooth of pure dimension 18. The target P^{18} \\ Delta_{18} is smooth of dimension 18. Quasi-finiteness of br on all of H is ATT-0112/CLM-0112-4, hence on H^{sb}. It remains to check that d(br) is an isomorphism at every k-point of H^{sb}. By ATT-0112 Lemma 1.2, T_gamma H = H^0(C, N_gamma) with N_gamma = coker(d gamma: T_C -> gamma^* T_{P^1}) a torsion sheaf of length 18. At a simply-branched cover there are 18 distinct ramification points, each of index two, so N_gamma is a sum of 18 skyscrapers of length one. A first-order deformation in H^0(N_gamma) moves these 18 ramification points independently, and br records their images on P^1, which remain distinct. Thus d(br)_gamma: H^0(N_gamma) -> T_{Br(gamma)}(P^{18}) is an isomorphism. A quasi-finite unramified morphism between smooth k-schemes of equal dimension is etale. QED\n\n**Lemma 1.2 (the slice X).** Let X be the closed subscheme of H^{sb} on which three distinct branch values are 0, 1, infty (a PGL_2-slice). Then X is a smooth affine k-scheme of pure dimension 15, and the classifying morphism X -> Hbar^{sb} := [H^{sb}/PGL_2] is a PGL_2-torsor trivialization on the slice, in particular a smooth surjection onto the simply-branched open of Hbar^bal after intersecting with H^bal.\n\nProof. PGL_2 acts freely on the locus of 18 distinct points of P^1 (n >= 3). The quotient of P^{18} \\ Delta_{18} by PGL_2 is M_{0,18}. The scheme M_{0,18} is affine: equivalently, M_{0,4} isomorphic to A^1 \\ {0,1} is affine, and each forgetful map M_{0,n} -> M_{0,n-1} is a punctured P^1 minus n-3 points, an affine morphism, so by induction M_{0,n} is affine. Lemma 1.1 is PGL_2-equivariant, so the slice X -> M_{0,18} is etale (the slice is transverse to PGL_2-orbits: three distinct branch values may be moved to 0,1,infty uniquely). A scheme etale over an affine scheme of dimension 15 is affine of dimension 15; smoothness follows from smoothness of M_{0,18} (or from smoothness of H^{sb} and transversality). QED\n\nThis uses only that M_{0,18} is an affine scheme and that X is etale over it. It does not use Keel's theorem, tautological generation, polynomial point counts, or any Hodge statement about M_{0,18} or about X. In particular it does not assert that H^*(X;Q) is mixed Tate, which would be the inference forbidden by FND-0085 and FND-0054.\n\n**Lemma 1.3 (balanced open, type (i), and the incidence).** Let X^bal = X times_H H^bal. Then X^bal is a dense open in X of dimension 15; the classifying image in Hbar^bal has dimension 15, hence is not contained in the type-(ii) locus of dimension at most 11 (ATT-0112/CLM-0112-7). The hypotheses of ATT-0112(E) hold on every connected component of X^bal. Consequently: AJ = P_{X^bal}(pi_* L) is a Zariski-locally trivial P^2-bundle; U -> X^bal is smooth surjective of pure relative dimension two; Z = Ord(U) is a connected finite etale right S_6-torsor of degree 720; U and Z are smooth of pure dimension 17; and F(Z)^{S_6} isomorphic to F(U) as mixed Q-Hodge structures for F any of H^*, H_c^*, H^{BM}_*. (Connectedness of U: the morphism U -> X^bal is open surjective with connected fibres, namely nonempty opens of P^2, so a disconnection of U would descend to a disconnection of the component of X^bal.)\n\nProof. Openness of H^bal in H is ATT-0112/CLM-0112-2, so X^bal is open in X. Density: the complement in X is the unbalanced simply-branched locus, a proper closed subset of the irreducible-or-not smooth 15-fold X (proper because a general simply-branched tetragonal cover is balanced: the splitting type O(4)+O(5) is the unique most balanced type of a rank-two degree-9 bundle, hence generic by semicontinuity of h^0(F(-5)), ATT-0112 Lemma 2.2). Even without irreducibility of X, every connected component of X has dimension 15, and the unbalanced locus cannot fill a component because ATT-0112(D) produces type-(i) points, which are balanced, on every component of H^bal, and simply-branched type-(i) points exist on a dense open of each such component (H^{sb} is dense of dimension 18 in H, type (i) is dense of dimension 18 in H^bal, and FND-0158(a) places all composed/type-(ii) points in the non-simply-branched locus). The rest is ATT-0112(E) plus ATT-0088/CLM-0088-8, the base X^bal being a smooth hence reduced scheme. QED\n\nFND-0075 is respected: descent from Z to U uses Q-coefficients, where S_6-invariants equal coinvariants.\n\n---\n\n## 2. Affine fibres and compact-support Leray\n\n**Lemma 2.1.** Every geometric fibre of U -> X^bal is a smooth affine surface, and U -> X^bal is an affine morphism of pure relative dimension 2.\n\nProof. On each geometric fibre, AJ_s isomorphic to P^2 = |L_s| (h^0(L)=3 by ATT-0088/CLM-0088-3 and ATT-0086: B_4 empty). The fibre U_s is the reduced-support open of |L_s|. By ATT-0112(E) and FND-0158(a), every point of X^bal is simply branched, hence not composed, hence of type (i): phi_L is birational onto an integral plane sextic (FND-0153, whose hypotheses hold by ATT-0112(C)). The non-reduced members of |L_s| = |O_{P^2}(1)|_{sextic}| are the lines meeting the sextic with multiplicity at least two, i.e. a positive-degree curve in the dual plane (the discriminant curve of the linear system). The complement of a positive-degree curve in P^2 is the complement of an ample divisor, hence affine. Relative ampleness of the discriminant on the P^2-bundle gives that U is affine over X^bal. QED\n\nThus, writing f: U -> X^bal: R^q f_! Q = 0 for q < 2 (Andreotti-Frankel / Poincare duality: a smooth affine complex surface has H_c^q = 0 for q < 2), and R^q f_! Q = 0 for q > 4. Deligne's bound: H_c^q of a smooth variety has weights at most q, so each R^q f_! Q is mixed of weights <= q. (No claim is made that these sheaves are Tate; the weight-1 piece coming from H^1 of the discriminant curve / of C is typically non-Tate, which is exactly FND-0053, and is not used as a Tate input.)\n\n---\n\n## 3. Weight vanishing on the balanced open, from the affine ambient\n\n**Lemma 3.1.** Let X be the affine 15-fold of Lemma 1.2 and Y = X \\ X^bal, a closed subscheme. Then for every integer j < 15, the mixed Hodge structure H_c^j(X^bal; Q) has weights at most j-1. In particular Gr^W_j H_c^j(X^bal; Q) = 0.\n\nProof. The compact-support localization sequence of mixed Hodge structures for the pair (X, Y) reads\n\n... -> H_c^{j-1}(Y; Q) -> H_c^j(X^bal; Q) -> H_c^j(X; Q) -> ...\n\nX is smooth affine of dimension 15, so Andreotti-Frankel gives H^i(X; Q) = 0 for i > 15, and Poincare duality on the smooth 15-fold gives H_c^i(X; Q) = 0 for i < 15. Thus for j < 15 the group H_c^j(X; Q) vanishes, and H_c^j(X^bal; Q) is a quotient of H_c^{j-1}(Y; Q). Deligne's bound supplies weights(H_c^{j-1}(Y)) <= j-1, and weights pass to quotients. QED\n\nNo Tate statement about Y or about X is used \u2014 only vanishing of below-dimension compactly supported cohomology on an affine 15-fold, which is Morse theory, and the weight ceiling on compactly supported cohomology of an arbitrary separated finite-type k-scheme.\n\n---\n\n## 4. Vanishing of the exact target graded piece on U and Z\n\n**Lemma 4.1.** Gr^W_{16} H_c^{16}(U; Q) = 0.\n\nProof. Let f: U -> X^bal. The compact-support Leray spectral sequence E_2^{p,q} = H_c^p(X^bal; R^q f_! Q) converges to H_c^{p+q}(U; Q) in the category of mixed Hodge structures (Deligne). For total degree 16, Lemma 2.1 forces q >= 2, hence p = 16-q <= 14 < 15.\n\nThe weight ceiling for compactly supported cohomology with mixed coefficients of weight <= w is weights(H_c^p(base; V)) <= p+w. Taking w <= q (Lemma 2.1) gives weights <= 16 on each E_2^{p,q} with p+q=16. The associated graded Gr^W_{16} of such a term is a subquotient of H_c^p(X^bal; Gr^W_q (R^q f_! Q)), and in particular vanishes unless Gr^W_p H_c^p(X^bal; Q) can support a weight-p summand after twisting by a weight-(16-p) coefficient. Concretely: Gr^W_{16} of H_c^p(X^bal; V) with V of weights <= 16-p is built from Gr^W_r H_c^p(X^bal) with r + (weight of V) = 16 and r <= p (weights of H_c^p are <= p). The only way to reach total weight 16 is to take the top weight Gr^W_p H_c^p(X^bal) tensor a coefficient of weight exactly 16-p. Lemma 3.1 gives Gr^W_p H_c^p(X^bal; Q) = 0 for all p <= 14. Hence every E_2^{p,q} with p+q=16 has Gr^W_{16} = 0. The spectral sequence is a spectral sequence of mixed Hodge structures, so Gr^W_{16} H_c^{16}(U; Q) = 0. QED\n\n(The same conclusion can be phrased without naming Gr^W of the coefficients: H_c^p(X^bal; V) for p < 15 has, by the same localization as Lemma 3.1 applied after a bounded complex of sheaves with weights <= q, weights at most (p-1)+q = 15 when p+q=16. This is slightly cleaner if one prefers not to split V by weight: the localization sequence on X still yields H_c^p(X^bal; V) as a subquotient of H_c^{p-1}(Y; V|_Y) plus H_c^p(X; V_X), the second summand vanishing for p < 15 because X is affine of dimension 15 and Rf_! Q is supported in degrees >=2 so the relevant hypercohomology on X still sits below the affine vanishing line. The Gr^W_p form above is the one recorded in the claim.)\n\n**Lemma 4.2.** The same vanishing holds for Z, and converts to ordinary and Borel-Moore form on U and Z.\n\nProof. Z -> U is finite etale of degree 720 (Lemma 1.3). Finite etale morphisms preserve smoothness, dimension, affineness of fibres over X^bal, and identify H_c^*(Z; Q) with H_c^*(U; local system of rank 720), equivalently (because the cover is a torsor under a finite group, Q-coefficients) with an induced module from H_c^*(U). In particular Gr^W_{16} H_c^{16}(Z; Q) = 0 follows from Lemma 4.1 by applying the same Leray argument to Z -> X^bal (still affine of relative dimension 2: finite etale over an affine morphism is affine) or by finite etale descent. Poincare duality for the smooth 17-fold U: H_c^{16}(U) isomorphic to Hom(H^{18}(U), Q(-17)) as mixed Hodge structures, sending Gr^W_{16} to Hom(Gr^W_{18} H^{18}, Q(-17)); thus Gr^W_{18} H^{18}(U; Q) = 0, and likewise for Z. Borel-Moore duality: W_{-16} H^{BM}_{16}(U; Q) isomorphic to the dual of Gr^W_{16} H_c^{16}(U; Q), hence vanishes, and likewise for Z. The zero group is of type Q(-8) as a pure polarizable Hodge structure of weight 16 (compact), of type Q(8) in Borel-Moore weight -16, and of type Q(-9) in ordinary degree 18. QED\n\nBy Lemma 1.3 the H_alpha-object is F(U), so this is vanishing of the exact target graded piece of the H_alpha-object on the simply-branched balanced model of dimension 17.\n\n---\n\n## 5. What is not proved\n\nLet F_ns be the closed complement of U in the full balanced Abel-Jacobi reduced-support open formed over a smooth atlas of all of Hbar^bal (including non-simply-branched points). By ATT-0112, that non-simply-branched locus in Hbar^bal has dimension at most 14, so the incidence over it has dimension at most 16. The localization sequence\n\nH_c^{16}(U) -> H_c^{16}(U union F_ns) -> H_c^{16}(F_ns)\n\nhas left-hand Gr^W_{16} equal to 0, so Gr^W_{16} H_c^{16} of the full incidence injects into Gr^W_{16} H_c^{16}(F_ns). This reduces the remaining TATE-SUPPORT obligation to the non-simply-branched closed incidence of dimension at most 16. That group is not identified here: dim 16 does not force H_c^{16} to be a fundamental class (the fundamental-class degree would be H_c^{32}), and FND-0085 forbids promoting a quasi-finite branch morphism onto a boundary stratum of Mbar_{0,18} into a Tate theorem. This gap is GAP-TATE-NONSIMPLE below.\n\nNo map to M_{6,6} is constructed, so no Gysin contribution inside H^{26}(M_{6,6}) or W_{-16} H^{BM}_{16}(M_{6,6}) is asserted (C66-TATE-ASSEMBLY).\n\n## Computational hypotheses\n\nNone. No finite experiment is used.\n\n## Gaps\n\nGAP-TATE-NONSIMPLE: Gr^W_{16} H_c^{16} of the complementary closed non-simply-branched balanced incidence is not proved to be Tate. GAP-TATE-M66: no embedding or Gysin into M_{6,6}. GAP-TATE-TARGET: RED-0001 is not resolved.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0113-1",
+      "statement": "On the simply-branched PGL_2-slice X^bal of the balanced tetragonal stack (a reduced smooth scheme of dimension 15 whose classifying image is not contained in the type-(ii) locus), ATT-0112(E) applies: U is connected, Z = Ord(U) is a connected finite etale right S_6-torsor of degree 720, H_beta = S_6, and for ordinary, compactly supported, and Borel-Moore rational cohomology one has F(Z)^{S_6} isomorphic to F(U) as mixed Q-Hodge structures. Thus the H_alpha-object of C66-TATE-SUPPORT is the corresponding cohomology of the unordered 17-dimensional scheme U.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0113-2",
+      "statement": "The branch morphism br: H^{sb} -> P^{18} \\ Delta_{18} is etale (quasi-finite by ATT-0112/CLM-0112-4, and unramified because N_gamma is a sum of 18 length-one skyscrapers at simple ramification points, so d(br) is an isomorphism). The PGL_2-slice X with three branch values at 0,1,infty is therefore finite etale over affine M_{0,18}, hence a smooth affine k-scheme of pure dimension 15. No mixed-Tate or Hodge conclusion about X or M_{0,18} is asserted.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0113-3",
+      "statement": "Every geometric fibre of U -> X^bal is the complement of a positive-degree discriminant curve in P^2 (type (i) plane sextic, using that simply-branched covers are non-composed by FND-0158(a)), hence a smooth affine surface; U -> X^bal is affine of pure relative dimension 2, so R^q f_! Q vanishes for q < 2 and has weights at most q.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0113-4",
+      "statement": "For the affine ambient X of dimension 15, compact-support localization against Y = X \\ X^bal and vanishing of H_c^j(X;Q) for j < 15 imply that H_c^j(X^bal;Q) has weights at most j-1 whenever j < 15, hence Gr^W_j H_c^j(X^bal;Q) = 0 for all j < 15.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0113-5",
+      "statement": "Gr^W_{16} H_c^{16}(U;Q) = 0 and Gr^W_{16} H_c^{16}(Z;Q) = 0. Equivalently Gr^W_{18} H^{18}(U;Q) = Gr^W_{18} H^{18}(Z;Q) = 0 and W_{-16} H^{BM}_{16}(U;Q) = W_{-16} H^{BM}_{16}(Z;Q) = 0. These are the exact target graded pieces of the H_alpha-object on the simply-branched balanced dimension-17 model, and the zero group is of Tate type Q(-8) (compact degree 16), Q(8) (Borel-Moore degree 16), and Q(-9) (ordinary degree 18).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0113-6",
+      "statement": "The same vanishing is not claimed for the complementary closed incidence over the non-simply-branched locus in H^bal. Localization would inject Gr^W_{16} H_c^{16} of the full balanced incidence into that of a closed subset of dimension at most 16, which is a reduction of the remaining TATE-SUPPORT obligation and is not a Tate theorem.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0112-1",
+    "CLM-0112-2",
+    "CLM-0112-4",
+    "CLM-0112-5",
+    "CLM-0112-6",
+    "CLM-0112-7",
+    "CLM-0112-8",
+    "CLM-0088-8",
+    "CLM-0088-3",
+    "CLM-0086-1"
+  ],
+  "engine": "cursor-grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [
+    "GAP-TATE-NONSIMPLE: Gr^W_{16} H_c^{16} of the complementary closed non-simply-branched balanced incidence (dimension at most 16) is not proved Tate; localization reduces the remaining TATE-SUPPORT obligation to that closed subset but does not discharge it.",
+    "GAP-TATE-M66: no representable morphism, image, closure, purity, or Gysin statement from the balanced incidence into M_{6,6} is proved; assembly of the vanishing into W_{-16} H^{BM}_{16}(M_{6,6}) is C66-TATE-ASSEMBLY.",
+    "GAP-TATE-TARGET: RED-0001 is not resolved."
+  ],
+  "id": "ATT-0113",
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "att-0112-automatic-type-i-and-identity-induction",
+    "simply-branched-branch-morphism-etaleness-via-normal-sheaf",
+    "pgl2-slice-finite-etale-over-affine-M-0-18",
+    "andreotti-frankel-vanishing-on-affine-schemes",
+    "compact-support-localization-against-affine-ambient",
+    "deligne-weight-ceiling-on-compactly-supported-cohomology",
+    "compact-support-leray-spectral-sequence-for-affine-surface-fibration",
+    "finite-etale-descent-of-mixed-hodge-structures",
+    "poincare-and-borel-moore-duality-on-a-smooth-17-fold"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Identification, after ATT-0112, of the C66-TATE-SUPPORT H_alpha-object on the universal simply-branched balanced family with the mixed Hodge structure H_c^*(U) (and H^*, H^{BM}_*) of the unordered reduced-support open of the Abel-Jacobi P^2-bundle over an affine 15-dimensional Hurwitz slice.",
+    "Vanishing of the exact target graded piece Gr^W_{16} H_c^{16}(U;Q) = W_{-16} H^{BM}_{16}(U;Q) = 0 on that 17-dimensional model, proved by compact-support Leray for an affine surface fibration together with localization against an affine 15-dimensional ambient, without declaring the Hurwitz space or the fibrewise local systems to be Tate.",
+    "A weight-ceiling argument showing that the typically non-Tate weight-1 local system R^2 f_! Q (H^1 of the discriminant curve) cannot contribute to Gr^W_{16} of H_c^{16} of the total space, because every Leray term in total degree 16 has base compact-support degree at most 14, below the affine vanishing line of the 15-dimensional slice."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "4e2e5eb8a6a488a17764feb3436bc2188598b0007443ffce7b09111d8ce4b436",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0112",
+      "kind": "attempt",
+      "note": "Verified C66-GEO-COMP dependency (dual-confirmed by REV-0157 and REV-0158). Used for smoothness and pure dimension 18 of H and H^bal (CLM-0112-1, CLM-0112-2); quasi-finiteness of br (CLM-0112-4); dimension of the type-(ii) locus (CLM-0112-5, CLM-0112-6, CLM-0112-7); and automatic type-(i) / H_beta = S_6 / F(Z)^{S_6} = F(U) on the dimension-15 slice (CLM-0112-8)."
+    },
+    {
+      "id": "REV-0157",
+      "kind": "confirmation_review",
+      "note": "First independent confirmation of ATT-0112; all eight claims confirmed. Its strongest attack on ramification-profile-independence of dim H = 18 failed, and that independence is reused in Lemma 1.1."
+    },
+    {
+      "id": "REV-0158",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0112; records that clause (E) is a valid stack-to-scheme handoff. Respected: all torsor and monodromy statements here are on the scheme X^bal."
+    },
+    {
+      "id": "ATT-0088",
+      "kind": "attempt",
+      "note": "Dual-confirmed by REV-0139 and REV-0142. CLM-0088-8 supplies the P^2-bundle, reduced-support open, and ordering torsor over the reduced scheme X^bal; CLM-0088-3 supplies h^0(L)=3."
+    },
+    {
+      "id": "REV-0139",
+      "kind": "confirmation_review",
+      "note": "First confirmation of ATT-0088; Gysin/codimension bookkeeping not used here."
+    },
+    {
+      "id": "REV-0142",
+      "kind": "confirmation_review",
+      "note": "Second confirmation of ATT-0088; reduced-base Grauert scope honoured."
+    },
+    {
+      "id": "ATT-0086",
+      "kind": "attempt",
+      "note": "Dual-confirmed by REV-0135 and REV-0138. CLM-0086-1/CLM-0086-2: B_4 empty, so only the P^2-bundle fibre occurs."
+    },
+    {
+      "id": "REV-0135",
+      "kind": "confirmation_review",
+      "note": "First confirmation of ATT-0086."
+    },
+    {
+      "id": "REV-0138",
+      "kind": "confirmation_review",
+      "note": "Second confirmation of ATT-0086."
+    },
+    {
+      "id": "FND-0152",
+      "kind": "adjudicated_finding",
+      "note": "Induction identity with Q-coefficients and clause (ii) that it does not upgrade to Tate type. Used to identify the H_alpha-object with cohomology of U after H_beta = S_6, without claiming Tate from the identification."
+    },
+    {
+      "id": "FND-0158",
+      "kind": "adjudicated_finding",
+      "note": "Part (a): a nontrivially factoring degree-four cover is never simply branched. Used to place every point of X^bal in type (i), so that fibres of U are complements of dual curves of plane sextics."
+    },
+    {
+      "id": "FND-0153",
+      "kind": "adjudicated_finding",
+      "note": "Type (i)/(ii) dichotomy; type (i) is a birational plane sextic. Applied on X^bal after FND-0158(a) removes type (ii)."
+    },
+    {
+      "id": "FND-0155",
+      "kind": "adjudicated_finding",
+      "note": "Family monodromy H_alpha = S_6 on a component containing a type-(i) fibre; the type-(i) hypothesis is supplied by ATT-0112(E) as already packaged in CLM-0112-8."
+    },
+    {
+      "id": "FND-0151",
+      "kind": "adjudicated_finding",
+      "note": "Connectedness of the right S_6-torsor is equivalent to H = S_6, not to transitivity on six letters. Followed verbatim."
+    },
+    {
+      "id": "FND-0075",
+      "kind": "adjudicated_finding",
+      "note": "Q-coefficient descent from ordered to unordered is valid; integral and coarse-space versions are not claimed."
+    },
+    {
+      "id": "FND-0033",
+      "kind": "adjudicated_finding",
+      "note": "Pure polarizable Q-Hodge structures of fixed weight are semisimple, so the zero group is honestly of Tate type Q(-8) in weight 16. No extension-class gap."
+    },
+    {
+      "id": "FND-0085",
+      "kind": "adjudicated_finding",
+      "note": "Respected as a prohibition: finite branch morphism to M_{0,18} is used only for affineness of the etale scheme X, never to conclude mixed-Tate cohomology of X or of U."
+    },
+    {
+      "id": "FND-0053",
+      "kind": "adjudicated_finding",
+      "note": "Respected: fibrewise H^1 of the discriminant curve is not treated as a Tate local system; its possible non-Tate weight-1 piece is killed in the (16,16) corner by the weight ceiling, not by representation theory of S_6."
+    },
+    {
+      "id": "FND-0054",
+      "kind": "adjudicated_finding",
+      "note": "Respected: the Hurwitz space is not declared rational or Tate."
+    },
+    {
+      "id": "FND-0131",
+      "kind": "adjudicated_finding",
+      "note": "Grauert on reduced bases only; X^bal is smooth hence reduced."
+    },
+    {
+      "id": "FND-0144",
+      "kind": "adjudicated_finding",
+      "note": "No stack-inertia component formula; all statements are on the scheme X^bal."
+    },
+    {
+      "id": "FND-0159",
+      "kind": "adjudicated_finding",
+      "note": "Normal-sheaf unobstructedness giving dim H = 18 independently of ramification profile; used via ATT-0112 Lemma 1.2 in the etaleness differential of Lemma 1.1."
+    },
+    {
+      "id": "SRC-0004",
+      "kind": "source",
+      "note": "Lemma 10.6 CE convention, as already fixed in ATT-0112 Section 0.1; not used for any Hodge statement."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "summary": "Using the dual-confirmed ATT-0112, the type-(i) hypothesis is automatic on the simply-branched PGL_2-slice X of the balanced tetragonal stack, so the ordering cover is connected of degree 720 and the H_alpha-object is the Q-cohomology of the unordered reduced-support open U of the Abel-Jacobi P^2-bundle, a smooth 17-fold. The simply-branched Hurwitz slice X is affine of dimension 15 by etaleness of the branch morphism at simple ramification (normal-sheaf differential iso, ATT-0112 Lemma 4.1 plus fibrewise N_gamma = skyscrapers at 18 simple points) over affine M_{0,18}; this uses affineness only, never Tate cohomology of the cover (FND-0085/FND-0054 are not invoked). Fibres of U are affine surfaces, so compact-support Leray to total degree 16 has only terms H_c^p with p <= 14. Localization against the affine 15-dimensional ambient kills Gr^W_j H_c^j on the balanced open for all j < 15, and the weight ceiling then kills Gr^W_{16} of every Leray term. Thus Gr^W_{16} H_c^{16}(U;Q) = W_{-16} H^{BM}_{16}(U;Q) = 0, and likewise for Z, which is the exact target graded piece of the principal (dimension-17, simply-branched) part of the support. The complementary non-simply-branched closed incidence is not treated.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-004",
+  "theorem_scope": {
+    "frontier_obligation_addressed": "The H_alpha-object given by ordinary or Borel-Moore cohomology of a connected component of the ordering cover, as a mixed Hodge structure, on the simply-branched balanced open: after ATT-0112 the induction functor is the identity, so the object is the cohomology of U, and the exact target graded piece of that object vanishes.",
+    "g": 6,
+    "ground_field": "algebraically closed of characteristic zero",
+    "n": 6,
+    "not_covered": [
+      "Tate type of H_c^{16} or H^{BM}_{16} of the complementary closed non-simply-branched balanced incidence (the remaining gap in C66-TATE-SUPPORT)",
+      "any morphism, image, closure, purity, Gysin, or Aut(C,Gamma) statement in M_{6,6} (C66-TATE-ASSEMBLY)",
+      "mixed-Tate cohomology of the Hurwitz space or of a finite pushforward of Q along the branch morphism",
+      "integral coefficients and coarse moduli",
+      "algebraic stacks with inertia and nonreduced bases",
+      "the number of connected components of H^bal",
+      "RED-0001 itself"
+    ],
+    "objects": [
+      "X = simply-branched PGL_2-slice of H^{sb}",
+      "X^bal",
+      "U reduced-support open of the Abel-Jacobi P^2-bundle",
+      "Z = Ord(U)",
+      "Gr^W_{16} H_c^{16}",
+      "W_{-16} H^{BM}_{16}"
+    ]
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero. Let H = H_{4,6}(P^1) and H^bal be as in ATT-0112 (dual-confirmed by REV-0157 and REV-0158): H is the finite-type Deligne-Mumford stack of finite degree-four covers of a fixed P^1 by smooth connected genus-six curves, smooth of pure dimension 18, and H^bal is the open locus where the packet-orientation relations bundle is F isomorphic to O(4)+O(5), likewise smooth of pure dimension 18. Let H^{sb} be the open of simply-branched points (equivalently, the open where the degree-18 branch divisor Br(gamma) is reduced). Let X be the scheme of simply-branched such covers with three distinct branch values rigidified to 0,1,infty; equivalently, X is the PGL_2-slice of H^{sb} (or any finite etale scheme cover of the coarse space of [H^{sb}/PGL_2] obtained by marking three distinct branch values). Let X^bal = X times_H H^bal, and let pi: C -> X^bal, gamma: C -> P^1_{X^bal} be the universal family. Let L = W_5 tensor omega_C^{-1} in the SRC-0004 / FND-0156 convention of ATT-0112 Section 0.1, let AJ = P_{X^bal}(pi_* L) be the Abel-Jacobi P^2-bundle of ATT-0088/CLM-0088-8, let U be its reduced-support open, and let Z = Ord(U) -> U be the finite etale right S_6-torsor of orderings. Write U^{sb}, Z^{sb} for the same objects over X^bal (already simply branched on X). THEN: (A) X is a smooth affine k-scheme of pure dimension 15, finite etale over M_{0,18}; X^bal is a dense open in X; U and Z are smooth of pure dimension 17; by ATT-0112(E) (image dimension 15 is not contained in the type-(ii) locus of dimension at most 11) one has H_beta = S_6, Z connected of degree 720 over the connected scheme U, and for every additive S_6-equivariant functor F to Q-vector spaces or mixed Q-Hodge structures, F(Z)^{S_6} isomorphic to F(U). In particular the H_alpha-object of ordinary, compactly supported, or Borel-Moore cohomology of a connected component of the ordering cover is identified, with Q-coefficients, with the corresponding cohomology of U. (B) Each geometric fibre of U -> X^bal is the complement of a positive-degree curve in P^2, hence a smooth affine surface; thus U -> X^bal is affine of pure relative dimension 2, R^q f_! Q = 0 for q < 2, and each R^q f_! Q is mixed of weights at most q. (C) For the affine ambient X of dimension 15 and Y = X \\ X^bal, the compact-support localization sequence and Deligne's weight bound weights(H_c^m(Y)) <= m imply that for every j < 15 the group H_c^j(X^bal; Q) has weights at most j-1, hence Gr^W_j H_c^j(X^bal; Q) = 0. (D) The compact-support Leray spectral sequence for f: U -> X^bal therefore has E_2^{p,q} = H_c^p(X^bal; R^q f_! Q) contributing to H_c^{16}(U) only for q >= 2 (so p = 16-q <= 14 < 15). The associated graded Gr^W_{16} of each such term vanishes by (C) and the weight ceiling weights(H_c^p(base; V)) <= p + (weight ceiling of V). Consequently Gr^W_{16} H_c^{16}(U; Q) = 0. Finite etale descent gives the same vanishing for Z. Poincare duality on the smooth 17-fold U (resp. Z) yields Gr^W_{18} H^{18}(U; Q) = 0, and Borel-Moore duality yields W_{-16} H^{BM}_{16}(U; Q) = 0 and W_{-16} H^{BM}_{16}(Z; Q) = 0. These vanishing groups are of Tate type Q(-8) (compact), Q(8) (Borel-Moore), and Q(-9) (ordinary H^{18}), matching the exact codimension-13 / target-degree numerics of RED-0001 after the not-asserted codimension-4 Gysin twist Q(-4). NOT ASSERTED: Tate type of the complementary closed incidence over the non-simply-branched locus in H^bal (dimension at most 16 after the PGL_2-slice); any Gysin map, closed embedding, purity, or contribution statement inside M_{6,6}; mixed-Tate cohomology of X, of H^bal, or of a finite pushforward of Q along the branch morphism (FND-0085 and FND-0054 stand); integral coefficients or coarse-space descent (FND-0075 stands); stack-inertia component formulae (FND-0144 stands)."
+}

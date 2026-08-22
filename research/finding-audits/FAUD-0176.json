@@ -1,0 +1,84 @@
+{
+  "adjudicated_statement": "Let X be a separated scheme of finite type over C, let j: V -> X be an open immersion, and let Y=X\\V with its reduced structure. Work with Q-coefficients. For every integer m, compact-support localization is a long exact sequence of mixed Hodge structures containing H_c^{m-1}(Y;Q) -> H_c^m(V;Q) -> H_c^m(X;Q). All weights of H_c^{m-1}(Y;Q) are at most m-1, and morphisms of mixed Hodge structures are strict for the weight filtration; hence Gr_m^W is exact and Gr_m^W H_c^m(V;Q) -> Gr_m^W H_c^m(X;Q) is injective. Define H_m^{BM}(Z;Q):=H_c^m(Z;Q)^vee, with no Tate twist, and T_m(Z):=W_{-m}H_m^{BM}(Z;Q). Then the induced restriction T_m(X) -> T_m(V) is surjective. Equivalently, classes in the kernel created by removing Y are subquotients of H_c^{m-1}(Y;Q), have weights at most m-1, and cannot occupy the weight-equals-degree corner. This statement does not identify H_c^m(V;Q) with H_c^m(X;Q) or with the cohomology of a projective bundle or other compactification, and it makes no claim for Deligne-Mumford stacks without an independently established compact-support mixed-Hodge formalism.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "The exact contested passage in ATT-0114, Lemma 1.1/CLM-0114-1, derives the injection from the compact-support localization sequence, the bound wt H_c^{m-1}(Y) <= m-1, and strictness of the weight filtration; it then dualizes using H_m^{BM}=H_c^m dual with no Tate twist. That reasoning is correct for separated finite-type C-schemes. REV-0161's strongest attack concerned a possible hidden identification of discriminant-complement cohomology with projective-bundle cohomology. The attack does not contradict the lemma: localization proves only that the kernel of H_c^m(V) -> H_c^m(X) has weights at most m-1, hence gives an injection after Gr_m^W; it gives neither an isomorphism of the full groups nor a Leray statement with nonconstant coefficients. The audit does, however, reject the originating attempt's unqualified Deligne-Mumford-stack scope. Deligne's simplicial construction supports ordinary stack cohomology but is not, by itself, a cited construction of compactly supported cohomology or Borel-Moore homology for stacks. Tubach's later six-functor theory supplies a possible modern stack-level repair, but that is additional infrastructure not established in ATT-0114. No independently retrieved primary source explicitly verified the proposed rational compact-support comparison with coarse spaces in the exact Betti mixed-Hodge conventions used there. The promoted statement is therefore narrowed to schemes; this still covers the load-bearing applications U subset A and Z^(1) subset D identified in ATT-0114 and REV-0161. Reduced structure on Y is harmless for rational Betti cohomology. With H_m^{BM}(Z;Q) defined as H_c^m(Z;Q)^vee, no Tate twist occurs; because H_c^m has weights at most m, its dual has weights at least -m, so W_{-m}H_m^{BM} is the dual of Gr_m^W H_c^m. This also fixes the direction: dualizing the corner injection gives T_m(X) -> T_m(V) surjective. The finding is distinct from FND-0164 because it uses a degree drop from m to m-1 on the fixed closed complement, not a transfer of a constant-coefficient weight bound to a nonconstant Leray coefficient object.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0165",
+  "id": "FAUD-0176",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "coefficients": "Q",
+    "degrees": "every integer m",
+    "excluded_claims": [
+      "Deligne-Mumford stacks without a separately verified compact-support mixed-Hodge formalism",
+      "an isomorphism between the full compactly supported cohomology of the open and its compactification",
+      "projective-bundle or discriminant-complement cohomology calculations",
+      "weight transfer through nonconstant coefficient objects in a Leray spectral sequence"
+    ],
+    "functors": [
+      "compactly supported cohomology",
+      "Borel-Moore homology",
+      "mixed Hodge weight filtration"
+    ],
+    "ground_field": "C",
+    "included_claim": "corner-weight injection for an open immersion and its dual Borel-Moore surjection",
+    "objects": [
+      "separated finite-type schemes over C"
+    ],
+    "subproblem_id": "C66-TATE-SUPPORT"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d78d4f46742916cd669279e7db365e4db6a43f38d2dcdec6862c6d27d07216b3",
+      "doi": "10.1007/BF02685881",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "mixed-hodge-strictness-and-weight-bounds",
+      "retrieved_at": "2026-08-21T08:40:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1974__44__5_0.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "8742b2a123ea393db0e87d6a0bae4e362e1245e8c7d2c211a8f2939c8c47f710",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "compact-support-and-borel-moore-mixed-hodge-duality",
+      "retrieved_at": "2026-08-21T08:40:00Z",
+      "source_type": "survey",
+      "url": "https://indico.ictp.it/event/a04204/session/63/contribution/38/material/0/0.pdf"
+    },
+    {
+      "arxiv_id": "2106.07692",
+      "arxiv_version": null,
+      "content_sha256": "ee9cf7cb51cc88f021e4ed2a7d6e00b7c50b8b39c4201f3219317f2522ea1b2b",
+      "doi": "10.1007/s00222-024-01279-9",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "borel-moore-duality-and-stack-compact-support-scope",
+      "retrieved_at": "2026-08-21T08:40:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/pdf/2106.07692"
+    },
+    {
+      "arxiv_id": "2407.02256",
+      "arxiv_version": null,
+      "content_sha256": "aeeadc6815b44a85c195bb5d166fe8b885ea7fb2c928ffa12191f3afcbc775e7",
+      "doi": "10.1017/fms.2025.10122",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "six-operations-and-weights-on-algebraic-stacks",
+      "retrieved_at": "2026-08-21T08:40:00Z",
+      "source_type": "journal",
+      "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/EA17D66A509792ECFF343C8060554F99/S2050509425101229a.pdf/div-class-title-mixed-hodge-modules-on-stacks-div.pdf"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0165",
+  "verdict": "promote",
+  "verified_source_count": 4
+}

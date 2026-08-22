@@ -1,0 +1,103 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients. Let S be a reduced separated finite-type C-scheme carrying the balanced genus-six degree-four setup needed below: a smooth proper genus-six curve pi: script-C -> S and a relative degree-six line bundle L such that h^0(script-C_s,L_s)=3 for every geometric s, formation of pi_*L commutes with base change, and every L_s is base-point-free. Put A=P_S(pi_*L), let script-D be the universal degree-six divisor in script-C times_S A, let Delta be the non-reduced-divisor locus, put U=A minus Delta, and let Z=Ord(U)->U be the finite etale right S_6-torsor of orderings. Assume, as proved in the originating setup from these balanced hypotheses, that A->S is a Zariski-locally trivial P^2-bundle, script-D->script-C is a Zariski-locally trivial P^1-bundle, and Z^(1):=script-D restricted to U equals Z/S_5 for the stabilizer S_5 of one letter. Define T_m(X)=W_{-m}H_m^{BM}(X;Q), canonically dual to Gr^W_m H_c^m(X;Q). Then compact-support localization and the projective-bundle formula give injections of pure polarizable weight-sixteen Hodge structures Gr^W_16 H_c^16(Z;Q)^{S_6}=Gr^W_16 H_c^16(U;Q) into Gr^W_16 H_c^16(S;Q) direct-sum Gr^W_14 H_c^14(S;Q)(-1) direct-sum Gr^W_12 H_c^12(S;Q)(-2), and Gr^W_16 H_c^16(Z;Q)^{S_5}=Gr^W_16 H_c^16(Z^(1);Q) into Gr^W_16 H_c^16(script-C;Q) direct-sum Gr^W_14 H_c^14(script-C;Q)(-1). All coefficient objects in these ambient projective-bundle formulas are constant Tate objects, so the nonconstant-coefficient obstruction FND-0164 does not apply. More precisely, if Gr^W_16 H_c^16(Z;Q)=direct-sum_rho V_rho tensor M_rho is its rational S_6-isotypic decomposition, then Gr^W_16 H_c^16(Z;Q)^{S_5} is isomorphic as a Hodge structure to M_[6] direct-sum M_[5,1], not to the full isotypic subrepresentation. Under (H-C), namely Gr^W_16 H_c^16(script-C;Q) is a finite direct sum of Q(-8) and Gr^W_14 H_c^14(script-C;Q) is a finite direct sum of Q(-7), semisimplicity implies that M_[6] and M_[5,1] are direct sums of Q(-8); consequently the full [6] and [5,1] isotypic components of T_16(Z), after duality, are direct sums of Q(8). Under (H-S), namely Gr^W_{2j}H_c^{2j}(S;Q) is a finite direct sum of Q(-j) for j=6,7,8, the S_6-invariant part of T_16(Z), equivalently T_16(U), is a direct sum of Q(8). Duality reverses the displayed compact-support injections into Borel-Moore surjections. No assertion is made about other S_6-isotypics, the truth of (H-C) or (H-S), nonconstant coefficient systems, or M_{6,6}.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "ATT-0114 and REV-0161 were inspected at the exact CLM-0114-5 through CLM-0114-7 and FC-ATT0114-ISOTYPIC-CONSTANT-TATE-REDUCTION passages before the packet and backlog evidence was considered. REV-0161 confirmed the construction, but the candidate wording requires two corrections. First, dualizing either compact-support injection produces a surjection onto the corresponding Borel-Moore corner, not an injection of T_16(Z). Second, H^*(Z;Q)^{S_5} is not literally the full [6] plus [5,1] isotypic subrepresentation. If H^*(Z)=direct-sum over rho of V_rho tensor M_rho, Frobenius reciprocity and Ind_{S_5}^{S_6}(1)=[6] plus [5,1] give H^*(Z)^{S_5}=M_[6] plus M_[5,1]; these are the multiplicity Hodge structures. Tate-ness of those multiplicity spaces nevertheless implies Tate-ness of the full underlying [6] and [5,1] isotypic Hodge structures because the two rational S_6-representations are pure type (0,0) and self-dual. Deligne's strictness and exactness of Gr^W, the compact-support weight bound, and the projective-bundle decomposition with constant Tate summands support the two injections. Semisimplicity applies because the relevant graded pieces are polarizable pure rational Hodge structures. Thus FND-0164 is not contradicted: localization handles the open complements, while the projective-bundle formulas are used only for the full proper bundles and have constant coefficients Q, Q(-1), and Q(-2). The evidence does not establish (H-C) or (H-S), the remaining isotypics, or any statement about M_{6,6}. There is no contradiction with the curated claim set, whose contradicts_claim_ids list is empty. FND-0033 supplies the general semisimplicity mechanism, FND-0152 supplies related finite-group bookkeeping, and FND-0164 records the nonconstant-coefficient obstruction, but none duplicates this specific level-zero/level-one reduction, so no merge is warranted. Promote the corrected and explicitly conditional statement to corroborated status.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0167",
+  "id": "FAUD-0178",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "base_field": "C",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "conditional_content": [
+      "Tate type for the [6] and [5,1] isotypic components requires (H-C)",
+      "Tate type for the S_6-invariant component requires (H-S)"
+    ],
+    "excluded": [
+      "S_6-isotypic components other than [6] and [5,1]",
+      "Any top-weight vanishing with nonconstant coefficient systems",
+      "Tate-ness of the balanced tetragonal base or universal curve without (H-S) or (H-C)",
+      "Any morphism, Gysin map, support-exhaustion statement, or conclusion about M_{6,6}"
+    ],
+    "objects": [
+      "T_16(Z)",
+      "Gr^W_16 H^16_c(Z;Q)",
+      "S_6-invariant multiplicity space",
+      "[6] and [5,1] multiplicity Hodge structures"
+    ],
+    "subproblem_id": "C66-TATE-SUPPORT",
+    "unconditional_content": [
+      "Corner injections obtained from compact-support localization and projective-bundle formulas with constant Tate coefficients",
+      "Reduction of the trivial and standard multiplicity Hodge structures to constant-coefficient corners of the universal curve"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "748edefb44fded8af67869abfed87062d66977d25b5d12f7d014f1810a063c3f",
+      "doi": "10.1007/BF02684692",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "mixed-hodge-strictness-projective-bundle-semisimplicity",
+      "retrieved_at": "2026-08-21T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1971__40__5_0.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d78d4f46742916cd669279e7db365e4db6a43f38d2dcdec6862c6d27d07216b3",
+      "doi": "10.1007/BF02685881",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "mixed-hodge-localization-and-weight-bounds",
+      "retrieved_at": "2026-08-21T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1974__44__5_0.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d20495d29586af41cd39c7bc45ed61795201973166932793828815f5a27a7d03",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "borel-moore-mixed-hodge-duality",
+      "retrieved_at": "2026-08-21T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/AST_1989__179-180__145_0.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "67167b39645f1c11c83474a201f5a12251385d0b0bfc14c51fa660510cf7c26e",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "borel-moore-compact-support-evaluation-duality",
+      "retrieved_at": "2026-08-21T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/borelmoore.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d821992941e7069efda35af18695a9befd3dd89a912afbd17146ef22b00e4553",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "symmetric-group-branching-trivial-standard",
+      "retrieved_at": "2026-08-21T00:00:00Z",
+      "source_type": "survey",
+      "url": "https://yufeizhao.com/research/youngtab-hcmr.pdf"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0167",
+  "verdict": "promote",
+  "verified_source_count": 5
+}

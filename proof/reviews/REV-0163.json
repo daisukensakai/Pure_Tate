@@ -1,0 +1,154 @@
+{
+  "attempt_id": "ATT-0116",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CL-01",
+      "note": "Poincare reindexing at (g,n)=(6,6) is FND-0001 plus d=3*6-3+6=21 and 2d-16=26. W_{-16}H^{BM}_{16}(M_{6,6};Q) is identified with W_{26}H^{26}(M_{6,6};Q)(21). Stack versus coarse is harmless here: the identity is the standard Q-coefficient duality on the smooth 21-dimensional moduli stack.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CL-02",
+      "note": "Tate-twist arithmetic is mechanical: Q(-13)(21)=Q(8) and the twist (21) sends weight 26 to 26-42=-16. Ordinary type Q(-13) is therefore equivalent to open Borel-Moore type Q(8) of weight -16. No extra Gysin or Kunneth shift is involved in this conversion.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CL-03",
+      "note": "Borel-Moore homology in degree 16 is dual to compactly supported cohomology in the same degree with no extra Tate twist; the dual of Q(-8) is Q(8). This matches the compact-support type in the target dictionary. Rational coefficients are used throughout, so there is no integral-coefficient claim.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CL-04",
+      "note": "For the smooth proper pair (Mbar_{6,6},D), the localization sequence and Deligne weight bounds do identify Gr^W_{16}H^{16}_c(M_{6,6};Q) with K:=ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)) as a pure polarizable Hodge structure of weight 16. This is the entire global compact-support corner, not a Z-supported summand. With Q-coefficients the stacky pair is the standard mixed-Hodge input; the attempt does not pass through an Aut(Gamma) graph complex, so invariants-versus-coinvariants are not load-bearing for this identity alone.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CL-05",
+      "note": "Semisimplicity of pure polarizable rational Hodge structures of a single weight is correct, and K is Tate of type Q(-8) if and only if it is spanned by Hodge (8,8)-classes. That is a tautology about the global group K, not a reduction to Z. The argument's 'hence the contribution supported on Z' and theorem (b)'s iff identifying that contribution with spanning of K are false: K is Gr^W_{16}H^{16}_c of all of M_{6,6}. Semisimplicity supplies no support restriction and no cycle-class map.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "THM-B-IFF",
+      "note": "Load-bearing false equivalence in theorem (b). (i) K is the full lowest-weight compact-support corner, Poincare dual to the global RED-0001 group, not the summand supported on Z; Z-Tate is neither necessary nor sufficient for spanning of K. (ii) Hodge (8,8) is silently upgraded to algebraic cycle classes (Hodge conjecture in codimension 8). (iii) Support on the closure of Z requires a closed stratified embedding of Z into Mbar_{6,6} and a Gysin map; the balanced reduced-support model is only an open piece of the failure locus, so Gysin for (M_{6,6},Z) is unavailable. (iv) Degree check: a closed 17-fold of complex codimension 4 has fundamental class in H^8, not H^{16}; classes in H^{16} would be Gysin images H^8(Z)(-4), i.e. codimension-4 cycles on Z, and that shift is never written. Unbalanced tetragonal failure, non-reduced support, and other stable pairs are omitted once K is treated as Z-supported.",
+      "statement": "The Z-supported contribution is Tate of the exact target type if and only if K is spanned by Hodge (8,8)-classes, equivalently by algebraic fundamental classes of codimension-8 cycles supported on the closure of Z.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CL-06",
+      "note": "The f=4 vanishing (degree -4) and the f=5 Abel-Jacobi criterion O_C(Gamma) isomorphic to L=W_5 tensor omega_C^{-1} are correct on balanced geometric fibres. The rest overreads the geometry dependency. ATT-0112 identifies the ordered evaluation-failure model with the Abel-Jacobi incidence over the Hurwitz base, with I=P(pi_*L) a P^2-bundle of relative dimension 2, U its reduced-support open, and Z=Ord(U) a finite etale S_6-cover; it explicitly does not assert any image, closure, purity, Gysin, or codimension statement in M_{6,6}. The attempt sets Z_red equal to the P^2-bundle I (conflating the closed incidence, its reduced-support open, and the ordering cover) and promotes dim=17 to a locus of numerical codimension 4 in M_{6,6} whose closure supports classes in K.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CL-07",
+      "note": "Recording the H_alpha-object as unproved is honest and avoids renaming the forgetful-map local system as Tate. The claimed equivalence is not: the mixed Hodge structure on a connected component of the S_6-ordering cover, with no cohomological degree, weight, or Gysin twist specified, is not equivalent to spanning of K by algebraic (8,8)-classes on the closure of Z in Mbar_{6,6}. The induction identity F(Z)^{S_6}=F(U) upgrades nothing to Tate type, and no morphism Z to M_{6,6} is constructed in the cited geometry lemma. The gap therefore does not isolate a sufficient remaining obligation for the stated iff-reduction.",
+      "verdict": "failed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-22",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "impacts_approach_ids": [
+        "C66-TATE-SUPPORT"
+      ],
+      "key": "global-K-not-Z-supported-tate-iff",
+      "kind": "obstruction",
+      "statement": "For (g,n)=(6,6), the group K=ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)) is the entire pure weight-16 compact-support corner Gr^W_{16}H^{16}_c(M_{6,6};Q), equivalently the Poincare dual of the RED-0001 open input. Tate type of a contribution supported on the balanced Casnati-Ekedahl locus Z is not equivalent to K being spanned by Hodge (8,8)-classes, nor to K being spanned by algebraic codimension-8 cycles on a closure of Z. Semisimplicity of pure polarizable weight-16 Hodge structures makes 'spanned by Hodge (8,8)-classes' tautological for K itself and supplies neither a support restriction nor an algebraicity statement."
+    },
+    {
+      "adjudication": "supports_existing_packet_finding",
+      "key": "gysin-closed-embedding-balanced-Z",
+      "kind": "obstruction",
+      "statement": "ATT-0116 theorem (b) treats algebraic fundamental classes of codimension-8 cycles supported on the closure of Z as spanning the localization kernel in H^{16}(Mbar_{6,6}). That step requires a closed stratified embedding of the balanced reduced-support model into M_{6,6} and a Gysin map for the pair, which the balanced reduced-support relative linear system does not supply.",
+      "supports_finding_id": "FND-0052"
+    },
+    {
+      "adjudication": "supports_existing_packet_finding",
+      "key": "att0112-no-M66-codimension-or-gysin",
+      "kind": "obstruction",
+      "statement": "ATT-0116 cites dual-confirmed ATT-0112 for Z_red equal to a P^2-bundle of numerical codimension 4 in M_{6,6} whose closure supports classes in K. ATT-0112's recorded scope is the fixed-target balanced Hurwitz stack and reduced scheme atlases; it does not assert image, closure, purity, Gysin, Aut(C,Gamma), or codimension statements in M_{6,6}.",
+      "supports_finding_id": "FND-0162"
+    },
+    {
+      "adjudication": "supports_existing_packet_finding",
+      "key": "ordering-cover-mhs-not-equivalent-to-K",
+      "kind": "obstruction",
+      "statement": "The induction identity for the finite etale S_6-ordering cover upgrades nothing to Tate type. Mixed Hodge structure on a connected component of that cover, with no degree, weight, or Gysin twist specified, is not equivalent to spanning of ker(H^{16}(Mbar_{6,6})->H^{16}(D)) by algebraic (8,8)-classes.",
+      "supports_finding_id": "FND-0152"
+    },
+    {
+      "adjudication": "supports_existing_packet_finding",
+      "key": "localization-kernel-does-not-break-circularity",
+      "kind": "obstruction",
+      "statement": "Rewriting the compact-support corner as ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)) expresses the RED-0001 open input in terms of the still-unknown H^{16}(Mbar_{6,6}) and is not a Z-supported Tate reduction.",
+      "supports_finding_id": "FND-0031"
+    }
+  ],
+  "id": "REV-0163",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "c7be40b6ee7514319ea56389f53258474de96387d1e8fa6f7f0c72dfd8b0b46a",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0112",
+      "note": "Dual-confirmed geometry lemma for the fixed-target balanced Hurwitz stack: H^bal smooth of dimension 18, Hbar^bal of dimension 15, AJ a P^2-bundle over a reduced scheme atlas, U the reduced-support open, Z=Ord(U) connected of degree 720 when H_beta=S_6. Theorem (c) and the support clause of theorem (b) cite it for Z_red=I as a locus of numerical codimension 4 in M_{6,6} whose closure carries classes in K. ATT-0112 Section 6 and its theorem_statement explicitly do not assert any M_{6,6} image, closure, purity, Gysin, Aut(C,Gamma), or codimension statement.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "REV-0157",
+      "note": "First confirmation of ATT-0112 within its Hurwitz-stack and scheme-atlas scope. It does not enlarge that scope to M_{6,6}.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0158",
+      "note": "Second confirmation of ATT-0112, including the no-Tate and no-M_{6,6} caveats of clause (E). Used only as a pointer that the geometric input is dual-confirmed on the Hurwitz side.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "WORKING-C66-TATE-SUPPORT-93c3399bf4ca22a4",
+      "note": "Supplies the Poincare, Tate-twist, BM/compact-support, localization, and semisimplicity bookkeeping used in (a) and in the identification of the global group K. The same working context lists as a hard stop that the balanced reduced-support model is not a closed pure-codimension-four subvariety of M_{6,6} and that Gysin for (M_{6,6},Z) is unavailable; theorem (b) walks that stop. It also records the H_alpha-object and a morphism to M_{6,6} as undischarged frontier obligations, which the attempt treats as equivalent to spanning of K.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "FND-0001",
+      "note": "Mechanically verified Poincare reindexing for all cases; load-bearing for theorem (a) and CL-01.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Semisimplicity of pure polarizable Q-Hodge structures of a fixed weight; there is no semisimplification-versus-isomorphism gap at this corner. It does not identify K with a Z-supported summand.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C66-001-v4",
+      "note": "Packet identity only; unused as a mathematical black box beyond the cited FND-0001 bookkeeping.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0116-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Packet identity checked first: TASK packet_id C66-001-v4, packet_sha256 c7be40b6ee7514319ea56389f53258474de96387d1e8fa6f7f0c72dfd8b0b46a, packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7, campaign_revision 4, subproblem C66-TATE-SUPPORT, and the full target dictionary (g=n=6, dim 21, open BM degree 16 / weight -16 / type Q(8), compact H^{16}_c type Q(-8), ordinary degree 26 / Q(-13), Poincare twist 21) match ATT-0116 field for field; the theorem_statement is identical to TASK.json. Strongest attack: theorem (b) identifies the Z-supported contribution with the global kernel K=Gr^W_{16}H^{16}_c(M_{6,6};Q)=ker(H^{16}(Mbar_{6,6})->H^{16}(D)), then upgrades Hodge (8,8) spanning of that kernel to algebraic codimension-8 cycle classes supported on the closure of Z, and finally equates both with unspecified mixed Hodge structure on a connected component of the S_6-ordering cover. Outcome: the attack succeeds and refutes the stated iff-reduction. K is the entire lowest-weight compact-support corner, Poincare dual to the global RED-0001 group, so Z-Tate is not equivalent to spanning of K. Hodge (8,8) is not equivalent to algebraic classes. Support on Z-bar requires a closed stratified embedding and a Gysin map that the working-context hard stop and ATT-0112 both withhold: the balanced reduced-support model is an open piece, not a closed pure-codimension-4 subvariety of M_{6,6}. Degree/Gysin check: a 17-fold of complex codimension 4 has fundamental class in H^8(-4) not H^{16}; the missing shift is H^8(Z)(-4)->H^{16}(Mbar) or, on the 17-fold itself, Gr^W_{16}H_c^{16}(Z) dual to Gr^W_{18}H^{18}(Z)(17), with a further Q(-4) if a Gysin into ordinary degree 26 is ever written. Secondary attacks: (i) stack versus coarse \u2014 localization at stack level with Q-coefficients is acceptable for the global identity CL-04, but Aut(C,Gamma) and a morphism to M_{6,6} remain frontier; (ii) rational versus integral \u2014 Q-coefficients are used correctly where averaging would appear, and no integral claim is made; (iii) Poincare/Tate-twist arithmetic in (a) survives; (iv) graph-automorphism invariants versus coinvariants are unused; (v) predicted motives are not asserted as theorems, but the algebraic-cycle upgrade is the same silent promotion; (vi) omitted stable pairs (unbalanced CE failure, non-reduced support, boundary) become invisible once K is treated as Z-supported. Confirming the bookkeeping in (a) does not save the reduction. Confirming this lemma would not have verified the C66-TATE-SUPPORT case in any event.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Weakest sufficient Tate-type reduction for the ordinary-degree-26 (Chow-codimension-13) contribution supported on the balanced Casnati-Ekedahl evaluation-failure locus Z in M_{6,6}. (a) The open input is W_{-16}H^{BM}_{16}(M_{6,6};Q) canonically identified by Poincare duality with W_{26}H^{26}(M_{6,6};Q)(21); the asserted ordinary Tate type Q(-13) is equivalent, under the Poincare twist (21), to the open Borel-Moore type Q(8) of weight -16, and, by Borel-Moore/compact-support duality, to the compact-support type Q(-8) in degree 16. (b) For the smooth-proper pair (Mbar_{6,6}, D=Mbar_{6,6}\\M_{6,6}), Gr^W_{16}H^{16}_c(M_{6,6};Q) is canonically K:=ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)), a pure polarizable Hodge structure of weight 16; by semisimplicity of pure polarizable rational Hodge structures, the contribution supported on Z is Tate of the exact target type if and only if K is spanned by Hodge (8,8)-classes, equivalently by algebraic fundamental classes of codimension-8 cycles supported on the closure of Z. (c) By the verified geometry comparison C66-GEO-COMP (ATT-0112, confirmed by REV-0157 and REV-0158), Z_red equals the Abel-Jacobi incidence I, a Zariski-locally trivial P^2-bundle over the 15-dimensional balanced Hurwitz base, so dim Z=17 and its numerical codimension in M_{6,6} is 4; the residual CE obstruction is carried solely by the f=5 summand and is nonzero exactly when O_C(Gamma) is isomorphic to L=W_5 tensor omega_C^{-1}. The single undischarged obligation is to prove the classes in (b) are algebraic/Hodge, equivalently that the mixed Hodge structure on a connected component of the S_6-ordering cover of the reduced-support locus is Tate; this is recorded as the remaining gap, not asserted.",
+  "verdict": "refuted"
+}

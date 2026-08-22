@@ -1,0 +1,167 @@
+{
+  "argument_markdown": "## Source-backed and verified inputs\n\nThe geometric input is exactly the dependency ATT-0112 as dual-confirmed by REV-0157 and REV-0158. In particular, CLM-0112-2 supplies the smooth reduced balanced base, CLM-0112-6 excludes a component contained in the type-(ii) locus, CLM-0112-7 supplies the balanced quotient-stack geometry, and CLM-0112-8 gives full S_6 monodromy and connectedness of the ordering torsor on a smooth atlas. These artifacts do not assert any Tate property.\n\nFrom the established balanced Casnati\u2013Ekedahl calculation, h^0(L_s)=3 on every geometric fibre. Grauert is used only over the stated reduced base, so p_*L is locally free of rank three and A=P_S(p_*L) is a Zariski-locally trivial P^2-bundle. The packet facts FND-0165, FND-0166, and FND-0167 supply the rational compact-support transfer and lowest-weight open-immersion statements used below. FND-0033 supplies semisimplicity of pure polarizable rational Hodge structures.\n\n## Proved steps\n\n1. Because Z\u2192U is a finite \u00e9tale S_6-torsor and the coefficients are rational, averaging is exact and gives Gr^W_16 H_c^16(U;Q)=Gr^W_16 H_c^16(Z;Q)^{S_6}=M_[6].\n\n2. Apply FND-0165 to the open immersion U\u2282A. It gives an injection Gr^W_16 H_c^16(U;Q)\u2192Gr^W_16 H_c^16(A;Q). The projective-bundle formula for the P^2-bundle A\u2192S identifies the target with Gr^W_16 H_c^16(S;Q)\u2295Gr^W_14 H_c^14(S;Q)(-1)\u2295Gr^W_12 H_c^12(S;Q)(-2). This proves the first displayed injection.\n\n3. Put Z^(1)=Z/S_5, where S_5 fixes the first label. Rational transfer gives Gr^W_16 H_c^16(Z^(1);Q)=Gr^W_16 H_c^16(Z;Q)^{S_5}. By the S_6-to-S_5 branching rule, only V_[6] and V_[5,1] have S_5-invariants, each with multiplicity one; hence this Hodge structure is M_[6]\u2295M_[5,1]. By FND-0166, Z^(1) is the reduced-support open in the universal divisor \ud835\udc9f, and \ud835\udc9f\u2192\ud835\udc9e is a Zariski-locally trivial P^1-bundle. FND-0165 followed by the P^1-bundle formula therefore gives the second displayed injection.\n\n4. Under the stated hypothesis on S, every summand in the target of the first injection is a sum of Q(-8), since Q(-7)(-1)=Q(-8) and Q(-6)(-2)=Q(-8). Semisimplicity makes M_[6] a sum of Q(-8). Duality between Gr^W_16 H_c^16 and W_{-16}H^{BM}_{16}, with no additional twist, gives T_16(U)=T_16(Z)^{S_6} as a sum of Q(8).\n\n5. Under the stated hypothesis on \ud835\udc9e, both summands in the target of the second injection are sums of Q(-8). Thus M_[6] and M_[5,1] are sums of Q(-8), and their dual [6]- and [5,1]-isotypic Borel\u2013Moore pieces are sums of Q(8).\n\n## Computational hypotheses\n\nNone. No finite experiment or point count is used.\n\n## Gaps\n\nThe constant-coefficient Tate hypotheses on S and \ud835\udc9e are not proved by ATT-0112, REV-0157, REV-0158, or the packet. The remaining S_6-isotypic multiplicity spaces are uncontrolled; FND-0164 prevents replacing this missing work by a nonconstant-coefficient Leray weight-floor argument. Finally, no stack-level or closed-support comparison with M_{6,6} is asserted. Thus the theorem is a conditional Tate-transfer result on the scheme Z-model, not a proof of the full codimension-13 contribution.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0115-1",
+      "statement": "For the balanced scheme Z-model over Q, the invariant multiplicity M_[6] injects into the three constant-coefficient weight corners of S displayed in the theorem.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0115-2",
+      "statement": "The sum M_[6]\u2295M_[5,1] injects into the two constant-coefficient weight corners of the universal curve \ud835\udc9e displayed in the theorem.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0115-3",
+      "statement": "Hypothesis (H-S), namely Tate type for the degree 12, 14, and 16 constant-coefficient corners of S, implies that T_16(U)=T_16(Z)^{S_6} is a sum of Q(8).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0115-4",
+      "statement": "Hypothesis (H-C), namely Tate type for the degree 14 and 16 constant-coefficient corners of \ud835\udc9e, implies that the [6]- and [5,1]-isotypic parts of T_16(Z) are sums of Q(8).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0115-5",
+      "statement": "Neither (H-S) nor (H-C), nor Tate control of the other S_6-isotypic components, is established here; RED-0001 remains undischarged.",
+      "status": "gap"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": false,
+    "not_reduction_only": false,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0112-2",
+    "CLM-0112-6",
+    "CLM-0112-7",
+    "CLM-0112-8"
+  ],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [
+    {
+      "id": "GAP-0115-HS",
+      "statement": "Prove that Gr^W_{2j}H_c^{2j}(S;Q) is a sum of Q(-j) for j=6,7,8."
+    },
+    {
+      "id": "GAP-0115-HC",
+      "statement": "Prove that Gr^W_16 H_c^16(\ud835\udc9e;Q) and Gr^W_14 H_c^14(\ud835\udc9e;Q) have the required Tate types."
+    },
+    {
+      "id": "GAP-0115-REP",
+      "statement": "Control every S_6-isotypic multiplicity other than [6] and [5,1] by a constant Tate-coefficient comparison."
+    },
+    {
+      "id": "GAP-0115-ASSEMBLY",
+      "statement": "A separate verified stack-level comparison is required before identifying the Z-model contribution with a supported contribution in M_{6,6}."
+    }
+  ],
+  "id": "ATT-0115",
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "rational-finite-group-transfer",
+    "lowest-weight-open-immersion-injection",
+    "projective-bundle-formula",
+    "S_6-to-S_5-branching",
+    "semisimplicity-of-pure-polarizable-Hodge-structures",
+    "compact-support-Borel-Moore-duality"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "c7be40b6ee7514319ea56389f53258474de96387d1e8fa6f7f0c72dfd8b0b46a",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0112",
+      "kind": "verified_dependency_attempt",
+      "note": "Uses only dual-confirmed CLM-0112-2, CLM-0112-6, CLM-0112-7, and CLM-0112-8 for balanced smoothness, componentwise type-(i) density, quotient geometry, and full S_6 ordering monodromy."
+    },
+    {
+      "id": "REV-0157",
+      "kind": "confirmation_review",
+      "note": "First confirmation review for the cited ATT-0112 claims."
+    },
+    {
+      "id": "REV-0158",
+      "kind": "confirmation_review",
+      "note": "Second confirmation review for the cited ATT-0112 claims and their scheme-base and no-Tate caveats."
+    },
+    {
+      "id": "FND-0165",
+      "kind": "established_packet_fact",
+      "note": "Lowest-weight injection for open immersions of separated finite-type complex schemes."
+    },
+    {
+      "id": "FND-0166",
+      "kind": "established_packet_fact",
+      "note": "First-letter quotient and universal-divisor P^1-bundle description."
+    },
+    {
+      "id": "FND-0167",
+      "kind": "established_packet_fact",
+      "note": "Corner injections and their exact excluded scope."
+    },
+    {
+      "id": "FND-0033",
+      "kind": "established_packet_fact",
+      "note": "Semisimplicity at the pure weight corner."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0033",
+    "FND-0164",
+    "FND-0165",
+    "FND-0166",
+    "FND-0167"
+  ],
+  "source_ids": [],
+  "status": "proposed",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "summary": "The verified balanced geometry yields a precise constant-coefficient Tate-transfer theorem for the trivial and standard S_6 multiplicities. The proof uses rational finite-group transfer, two lowest-weight open-immersion injections, and the projective-bundle formula. It does not prove the required constant-coefficient Tate hypotheses on S or \ud835\udc9e, does not control the other S_6-isotypic components, and therefore does not resolve RED-0001.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-004",
+  "theorem_scope": {
+    "base": "reduced locally Noetherian complex schemes in a smooth chart",
+    "coefficients": "Q",
+    "excluded": [
+      "integral coefficients",
+      "coarse-space descent",
+      "nonreduced bases",
+      "stack-inertia cohomology",
+      "remaining S_6-isotypic components",
+      "comparison or Gysin map to M_{6,6}"
+    ],
+    "g": 6,
+    "model": "balanced Casnati\u2013Ekedahl Abel\u2013Jacobi reduced-support ordering model",
+    "n": 6
+  },
+  "theorem_statement": "Sharp rational Tate-transfer criterion for the balanced Z-model. Let S be a connected reduced locally Noetherian complex scheme in a smooth chart of the balanced genus-six degree-four Hurwitz stack, with no component image contained in the type-(ii) locus. Let p:\ud835\udc9e\u2192S be the pulled-back universal curve, L=W_5\u2297\u03c9_p^{-1}, A=P_S(p_*L), U\u2282A the reduced-support locus, and Z=Ord(U) its finite \u00e9tale right S_6-ordering torsor. Write Gr^W_16 H_c^16(Z;Q)=\u2295_{\u03bb\u22a26} V_\u03bb\u2297M_\u03bb. Then there are natural injections of pure weight-16 Hodge structures M_[6]\u2192Gr^W_16 H_c^16(S;Q)\u2295Gr^W_14 H_c^14(S;Q)(-1)\u2295Gr^W_12 H_c^12(S;Q)(-2) and M_[6]\u2295M_[5,1]\u2192Gr^W_16 H_c^16(\ud835\udc9e;Q)\u2295Gr^W_14 H_c^14(\ud835\udc9e;Q)(-1). Consequently, if Gr^W_{2j}H_c^{2j}(S;Q) is a sum of Q(-j) for j=6,7,8, then T_16(U)=T_16(Z)^{S_6} is a sum of Q(8); and if Gr^W_16 H_c^16(\ud835\udc9e;Q) is a sum of Q(-8) and Gr^W_14 H_c^14(\ud835\udc9e;Q) is a sum of Q(-7), then the [6]- and [5,1]-isotypic parts of T_16(Z):=W_{-16}H^{BM}_{16}(Z;Q) are sums of Q(8)."
+}

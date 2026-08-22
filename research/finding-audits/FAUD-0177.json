@@ -1,0 +1,92 @@
+{
+  "adjudicated_statement": "Let S be a reduced locally Noetherian scheme carrying a proper smooth genus-six degree-four family satisfying (CE), (N), and (BAL), with associated fibre-degree-six line bundle L such that h^0(C_s,L_s)=3 for every geometric fibre s and L_s is base-point-free. Let pi:script-C\u2192S be the family, let A be its relative linear system of one-dimensional spaces of sections of L, and let script-D be the universal degree-six divisor in script-C x_S A. Write Delta_script-C for the diagonal in script-C x_S script-C and pr_1,pr_2 for its projections. Then script-G:=pr_{2*}(pr_1^*L(-Delta_script-C)) is locally free of rank two on script-C and is compatible with arbitrary base change. Using the line convention for projectivization, the incidence morphism (p,Gamma)\u21a6p identifies script-D canonically with P_script-C(script-G), hence with a Zariski-locally trivial P^1-bundle over script-C. Let U\u2282A be the reduced-support locus, let Z\u2192U be the finite \u00e9tale right S_6-torsor of orderings, and put Z^(1):=script-D x_A U. Then Z^(1) is open in script-D, is finite \u00e9tale of degree six over U, and is canonically Z/S_5 for the stabilizer S_5 of the first letter. If F is a Q-linear cohomological theory with transfer for free finite \u00e9tale quotients, then F(Z^(1))\u2245F(Z)^{S_5}\u2245Hom_{S_6}(Ind_{S_5}^{S_6}(1),F(Z))\u2245M_[6](F(Z)) direct-sum M_[5,1](F(Z)), because Ind_{S_5}^{S_6}(1)\u2245[6] direct-sum [5,1]. Thus Z^(1) recovers the multiplicity spaces of the [6] and [5,1] isotypic summands; it is not itself their direct sum as S_6-subrepresentations. This applies, where defined, to rational ordinary, compactly supported, or Borel\u2013Moore cohomology and their mixed Hodge structures and weight-graded pieces. It asserts neither Tate type nor control of other S_6-isotypics and does not extend to integral coefficients or functors without finite-quotient transfer.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "The mandatory originating evidence was checked first. ATT-0114, Lemmas 3.1 and 3.2 and claim CLM-0114-4, supplies the incidence-bundle and S_5-quotient arguments; REV-0161 explicitly confirms CLM-0114-4 and raises no objection to those geometric arguments. The extracted candidate nevertheless requires correction. First, its twist must use the diagonal Delta_script-C in script-C x_S script-C, not the separately used discriminant Delta in A. Second, the projectivization is over script-C. Third, the S_5-invariant statement follows independently from Z^(1)=Z/S_5, not from the projective-bundle structure. Fourth, unrestricted H^*(Z) is replaced by a Q-linear cohomological theory with transfer for free finite \u00e9tale quotients: additivity and equivariance alone do not imply F(Z/S_5) congruent to F(Z)^{S_5}. Fifth, these invariants are the [6] and [5,1] multiplicity spaces, not the corresponding isotypic subobjects themselves. Public sources corroborate the reduced-base Grauert input, Zariski-local triviality of P(script-G), and the free finite \u00e9tale quotient; the elementary identity Ind_{S_5}^{S_6}(1) congruent to [6] direct-sum [5,1] then gives the multiplicity-space decomposition by Frobenius reciprocity. This is consistent with FND-0130, FND-0131, FND-0134, FND-0139, FND-0157, and FND-0075. It must not be merged with FND-0152, which concerns induction from a component stabilizer H_alpha rather than the quotient Z/S_5. No claim in data/claims.jsonl contradicts the corrected result.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0166",
+  "id": "FAUD-0177",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "hypotheses": [
+      "(CE)",
+      "(N)",
+      "(BAL)",
+      "S is reduced and locally Noetherian",
+      "the genus-six family is proper and smooth over S",
+      "h^0(L_s)=3 for every geometric fibre",
+      "L is fibrewise base-point-free",
+      "projectivizations use the line convention",
+      "the representation-theoretic assertion uses Q-coefficients and a Q-linear cohomological theory having transfer for free finite \u00e9tale quotients"
+    ],
+    "mathematical_scope": "The promoted result identifies the incidence divisor as a projective bundle and identifies the S_5-invariants of transfer-compatible rational cohomology with the multiplicity spaces for [6] and [5,1]. It does not establish Tate type, control other S_6-isotypics, or apply integrally or to functors lacking finite-quotient transfer.",
+    "objects": [
+      "script-C",
+      "L",
+      "A",
+      "script-D",
+      "script-G",
+      "U",
+      "Z^(1)",
+      "Z"
+    ],
+    "subproblem_id": "C66-TATE-SUPPORT"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "8b374ad0b20596a84210f0be064446c90dedcfa6807ca53ae19eadd330fe713c",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "grauert-reduced-base-constant-cohomology",
+      "retrieved_at": "2026-08-21T08:55:01Z",
+      "source_type": "author-page",
+      "url": "http://math.stanford.edu/~vakil/0506-216/216class4546.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "3e21e64627aa643ebd5df2922cc453d311f6fb9c93dddde3a57b2906ef3ddc74",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "projectivization-zariski-local-triviality",
+      "retrieved_at": "2026-08-21T08:55:01Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0FMS"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "93635733d2e998fe28282d40a4fe70b19dcd3b4e4449fee951eea7433e5310f6",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "finite-etale-free-group-quotient",
+      "retrieved_at": "2026-08-21T08:55:01Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/03SF"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "91f650c47183373f64e3d92b1a8132befa0c231884b164f1b51523bc10480bf2",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "symmetric-group-permutation-representation",
+      "retrieved_at": "2026-08-21T08:55:01Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Representation_theory_of_the_symmetric_group"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0166",
+  "verdict": "promote",
+  "verified_source_count": 4
+}

@@ -1,0 +1,98 @@
+{
+  "adjudicated_statement": "Let k be an algebraically closed field of characteristic zero. Let H = H_{4,6}(P^1) denote the Deligne-Mumford stack over k of pairs (C, gamma) with C a smooth projective connected curve of genus six and gamma : C -> P^1 a finite morphism of degree four onto a fixed P^1 (equivalently, the smooth-source open of the Kontsevich stack Mbar_{6,0}(P^1,4)). Every such gamma is finite flat Gorenstein, hence carries Casnati-Ekedahl data: gamma_* O_C = O direct-sum E^vee with E locally free of rank three and degree nine, and, in the packet orientation, a rank-two relations bundle F := ker(Sym^2 E -> gamma_*(omega_{C/P^1}^{tensor 2})) = p_*(I_C(2)) of degree +9, whose formation on H commutes with arbitrary base change. Let H^bal be the locus of points at which F is isomorphic to O_{P^1}(4) direct-sum O_{P^1}(5). Then H^bal is an open substack of H. Precisely: on a geometric fibre one has F_t isomorphic to O(a) direct-sum O(9-a) with a <= 4 by the Birkhoff-Grothendieck splitting theorem, and h^0(F_t(-5)) = 5-a, which equals 1 if and only if a = 4; the locus {t : h^0(F_t(-5)) <= 1} is open by upper semicontinuity of cohomology for the proper flat morphism P^1_T -> T, using that O(-5) is the pullback of O_{P^1}(-5) along the trivial P^1-bundle P^1_T -> P^1. Combined with the corroborated statement that H is smooth of dimension 18 at every point, independently of ramification profile (FND-0159), every nonempty connected component of H^bal is smooth of dimension 18, and H^bal is reduced and normal. This dimension is inherited from the ramification-profile-independent normal-sheaf count on the unrestricted stack, not from a count of distinct branch values. NOT ASSERTED: nonemptiness of H^bal (supplied separately by FND-0154; independently, a general cover in the classical Hurwitz space H_{4,6} has balanced F by Bujokas-Patel since g = 6 >= (d-3)(d-1) = 3); irreducibility or the number of connected components of H^bal; smoothness of the Aut(P^1)-quotient; any statement about M_{6,6}, Aut(C,Gamma), or stack inertia; any Hodge, weight, purity, Tate, Borel-Moore, or RED-0001 conclusion.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads of the originating artifacts: ATT-0112 Lemma 2.1 constructs the packet-orientation relations bundle as the base-change-compatible kernel F = ker(Sym^2 E -> gamma_*(omega_{C/P^1}^{tensor 2})) = p_*(I_C(2)), locally free of rank two and degree +9 by the Euler characteristics chi(Sym^2 E)=42 and chi(gamma_* R)=31, and Lemma 2.2 proves openness of H^bal by the identity h^0(F_t(-5))=5-a on F_t isomorphic to O(a)+O(9-a) with a<=4, so that balancedness is exactly {h^0<=1}, which is open by upper semicontinuity. This is claim CLM-0112-2. REV-0157 confirmed CLM-0112-2 and recorded that the strongest attack (possible singularity or jumping tangent dimension of the unrestricted stack at highly ramified points) fails in characteristic zero because the deformation complex is quasi-isomorphic to a torsion normal sheaf of length 2d+2g-2. No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (c(6)=5, so n=6 lies outside the published CKgP range) and complementary to corroborated FND-0159, which supplies smoothness of the unrestricted fixed-target stack of dimension 18 at every ramification type and explicitly does not assert equidimensionality of the balanced Hurwitz scheme; FND-0163 fills that gap by openness plus inheritance of dimension, without claiming irreducibility. Distinct from FND-0060 (coarse dimension b-3=15 after Aut(P^1)) and from the sibling ATT-0112 candidate on type-(i) automaticity and codimension four; do not merge. Independent primary checks. (1) Casnati-Ekedahl 1996 Theorem 2.1, as quoted in Bujokas-Patel arXiv:1504.03756 section 2.1, gives the relative-canonical embedding and, after twisting the resolution by O(2) and pushing forward, the exact sequence 0 -> F -> Sym^2 E -> alpha_*(omega_alpha^{tensor 2}) -> 0 with rk F = d(d-3)/2 = 2 and deg F = (d-3)(g+d-1) = 9 at (d,g)=(4,6), matching the packet orientation used in Lemma 2.1. (2) Canning-Larson arXiv:2208.02357v2 section 10.2 constructs the moduli stack B of globally generated pairs (E,F) of ranks (3,2) and degree g+3 with det E isomorphic to det F, and a morphism H_{4,g} -> B sending a degree-four cover to its Casnati-Ekedahl bundles; Lemma 10.6 records the splitting F = O(f1)+O(f2) with f1 <= f2 and the degree formula deg(W_f|_C)=4g+12-4f. Their H_{k,g,n} has no ramification restriction, so it is the unrestricted Hurwitz stack of the finding rather than a simply-branched open. (3) Bujokas-Patel explicitly record that being balanced is an open condition on families of vector bundles on P^1, and prove that a general cover in H_{d,g} has balanced F whenever g >= (d-3)(d-1); at (4,6) this is 6 >= 3, so a general point of the classical Hurwitz space lies in H^bal, consistent with openness and with FND-0154 nonemptiness (not claimed here). (4) Birkhoff-Grothendieck supplies F_t isomorphic to O(a)+O(9-a) with a <= 4 on every geometric fibre over any field; Stacks Project tag 0BDI, together with the standard proper-flat semicontinuity theorem, supplies upper semicontinuity of t |-> h^0(F_t(-5)). The original candidate text is narrowed rather than promoted unchanged: characteristic zero and fixed-target hypotheses are added; the overbroad methodological sentence that all dimension bounds in ATT-0112 come from deformation theory and quasi-finiteness is replaced by the accurate restriction that the dimension 18 of H^bal is inherited from FND-0159 rather than from a count of 18 distinct branch values; irreducibility and nonemptiness are not claimed. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source on this independent grok verification of the CE sequence, the open balanced condition, and the semicontinuity argument in the contested ATT-0112 passage. Merge target: none.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0163",
+  "id": "FAUD-0174",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "characteristic": 0,
+    "cover": {
+      "degree": 4,
+      "genus": 6
+    },
+    "does_not_assert": [
+      "nonemptiness of H^bal",
+      "irreducibility or the number of connected components of H^bal",
+      "smoothness of the Aut(P^1)-quotient",
+      "any statement about M_{6,6}, Aut(C,Gamma), or stack inertia",
+      "any Hodge, weight, purity, Tate, Borel-Moore, or RED-0001 conclusion"
+    ],
+    "ground_field": "algebraically closed of characteristic zero",
+    "hypotheses": [
+      "k algebraically closed of characteristic zero",
+      "Casnati-Ekedahl packet orientation: F locally free of rank two and degree +9",
+      "smoothness of H of dimension 18 at every point, independently of ramification profile (FND-0159)",
+      "O(-5) is the pullback of O_{P^1}(-5) along the trivial bundle P^1_T -> P^1"
+    ],
+    "objects": [
+      "H = H_{4,6}(P^1)",
+      "H^bal",
+      "F = ker(Sym^2 E -> gamma_*(omega_{C/P^1}^{tensor 2}))"
+    ],
+    "target": "fixed P^1, not modulo Aut(P^1)"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "1504.03756",
+      "arxiv_version": "v1",
+      "content_sha256": "0055855af581ff1aafbc67a8addf94775237f083129e4ab16db4f7825e8f34c2",
+      "doi": "10.48550/arXiv.1504.03756",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "89858c3fb35cd75568466c8d0ba8cff6c854e0d09b5397f5a3cdbe7f70c8ab6c",
+      "retrieved_at": "2026-08-21T02:47:30Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/1504.03756"
+    },
+    {
+      "arxiv_id": "2208.02357",
+      "arxiv_version": "v2",
+      "content_sha256": "b1c3c129ea87907e62ab17986fe8335c9c77aad58c02491a41bfb016b3741596",
+      "doi": "10.4171/JEMS/1543",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "6ef63fffb73843d3bb2884561fbcdc63a095cd8dc85c43059419b3b5458e07c3",
+      "retrieved_at": "2026-08-21T02:47:30Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/html/2208.02357v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "41797138d7142553eff35d79c335921c0503dad696ebbb030e42ff0adaed7375",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "0358774901564b4f39febeaec593530a00373c5f1ae9ac942e54e6e4e5faa6f9",
+      "retrieved_at": "2026-08-21T02:47:30Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0BDI"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "6d9161e7e9fa0f246933f9d56587974abaeca3cee3d86eaee5d02e4dc0373867",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "e7f61544d6617b7ca2922b627305273ec15f4da48fcd22140dd957cd366fd7be",
+      "retrieved_at": "2026-08-21T02:47:30Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Birkhoff%E2%80%93Grothendieck_theorem"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0163",
+  "verdict": "promote",
+  "verified_source_count": 4
+}

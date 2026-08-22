@@ -1,0 +1,203 @@
+{
+  "argument_markdown": "## Argument\n\nScope. Work at (g,n)=(6,6), dim M_{6,6}=d=3*6-3+6=21. The exact target group is the open input W_{-16}H^{BM}_{16}(M_{6,6};Q); the target asserts the ordinary-degree-26 (Chow-codimension-13) contribution supported on the balanced CE locus Z is Tate.\n\n### Proved steps\n\n**Step 1 (Poincare reindexing).** For d=3g-3+n the open input W_{-16}H^{BM}_{16}(M_{g,n}) is identified by Poincare duality with W_{2d-16}H^{2d-16}(M_{g,n})(d). At (6,6), d=21 and 2d-16=26, so W_{-16}H^{BM}_{16}(M_{6,6};Q) ~= W_{26}H^{26}(M_{6,6};Q)(21). [Established fact, packet FND-0001, mechanically verified for all cases.]\n\n**Step 2 (Tate-twist arithmetic).** Q(-13)(21)=Q(8), and the twist (21) shifts weight 26 to 26-42=-16. Thus the asserted ordinary type Q(-13) (weight 26) is equivalent to the open Borel-Moore type Q(8) (weight -16). [Mechanical: (-13)+21=8.]\n\n**Step 3 (Borel-Moore/compact-support duality).** Borel-Moore homology is dual to compactly supported cohomology in the same degree with no extra Tate twist: W_{-16}H^{BM}_{16}(X;Q) ~ (Gr^W_{16}H^{16}_c(X;Q))^vee. The dual of Q(-8) is Q(8). Hence the open type Q(8) is equivalent to compact-support type Q(-8) in degree 16. [Established fact.]\n\n**Step 4 (proper-pair localization).** For X=M_{6,6} smooth, Y=Mbar_{6,6} smooth proper, D=Y\\X proper, the localization sequence is exact in MHS and the weight bounds give Gr^W_{16}H^{16}_c(M_{6,6};Q) ~= K:=ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)) as a pure polarizable Hodge structure of weight 16. [Established fact.]\n\n**Step 5 (semisimplicity).** Pure polarizable rational Hodge structures are semisimple, so every subobject of a finite direct sum of Q(-8) is again a finite direct sum of Q(-8). Therefore K (and hence the contribution supported on Z) is Tate of type Q(-8) in compact-support degree 16 -- equivalently Q(-13) in ordinary degree 26 -- if and only if K is spanned by Hodge (8,8)-classes. [Established fact.]\n\n### Source-backed inputs (verified dependency)\n\n**Step 6 (geometry of Z).** By the geometry-comparison dependency C66-GEO-COMP = ATT-0112, confirmed by REV-0157 and REV-0158: on geometric fibres with W~=W_4 oplus W_5, the residual CE obstruction is nonzero at Gamma iff O_C(Gamma)~=L:=W_5 tensor omega_C^{-1}, so (Z_ev)_red=I_red; the Abel-Jacobi incidence I is a Zariski-locally trivial P^2-bundle over the 15-dimensional balanced base, hence dim Z=17 and numerical codimension 21-17=4; deg(W_5)=16, deg(L)=6, chi(L)=1, and the f=4 obstruction (degree -4) vanishes while the f=5 obstruction (degree 0) carries everything. [Dependency artifact ATT-0112 + confirmations REV-0157, REV-0158; reflected in primary working-context established facts.]\n\n### Gap (open frontier, not asserted)\n\n**Step 7.** Steps 1-6 reduce the Tate-type claim to the algebraicity/Hodge-(8,8) property of the weight-16 kernel K supported on the closure of Z. This is equivalent to the Tate type of the mixed Hodge structure on a connected component of the finite etale S_6-ordering cover of the reduced-support locus. The primary working context lists this as an open frontier obligation: the induction isomorphism does not determine the Tate type of that component object. It is NOT proved here and is not assumed. This is the single remaining obligation; it matches the blocked route forbidding renaming the forgetful-map local system as Tate without proof.\n\n### Conclusion\n\nThe contribution supported on Z is Tate of the exact target type Q(-13) (ordinary), Q(8) (open Borel-Moore), Q(-8) (compact-support) if and only if the Step-7 algebraicity obligation is discharged. This is the weakest sufficient reduction: it proves all bookkeeping and imports the verified geometry, and isolates exactly one open Hodge-theoretic gap.\n\n### Blocked routes addressed\n\n- vcd-only-vanishing: not used as the proof route; vcd(M_{6,5})=25<26 vanishing appears only as a background lemma in the working context, while the argument here rests on localization + semisimplicity + geometry of Z.\n- forgetful-map-renaming-local-system-unknown: explicitly avoided; the local system / ordering-cover component is NOT asserted Tate, and its Tate type is recorded as the open gap.\n- undecorated-cgp-top-weight-graph-complex: not used.\n- point-count-without-degree-parity-separation: not used.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "evidence": "Packet adjudicated finding FND-0001 (mechanically verified, cases: all) plus arithmetic d=21, 2d-16=26.",
+      "id": "CL-01",
+      "sources": [
+        "FND-0001",
+        "WORKING-C66-TATE-SUPPORT-93c3399bf4ca22a4"
+      ],
+      "statement": "W_{-16}H^{BM}_{16}(M_{6,6};Q) is canonically identified by Poincare duality with W_{26}H^{26}(M_{6,6};Q)(21), since d=3*6-3+6=21 and 2d-16=26.",
+      "status": "proved"
+    },
+    {
+      "evidence": "Additivity of Tate twists: (-13)+21=8; weight shift 26-2*21=-16.",
+      "id": "CL-02",
+      "sources": [
+        "WORKING-C66-TATE-SUPPORT-93c3399bf4ca22a4"
+      ],
+      "statement": "Q(-13)(21)=Q(8) and the twist (21) sends weight 26 to weight -16; hence the ordinary type Q(-13) is equivalent to the open Borel-Moore type Q(8) of weight -16.",
+      "status": "proved"
+    },
+    {
+      "evidence": "Same-degree Borel-Moore/compact-support duality of mixed Hodge structures.",
+      "id": "CL-03",
+      "sources": [
+        "WORKING-C66-TATE-SUPPORT-93c3399bf4ca22a4"
+      ],
+      "statement": "W_{-16}H^{BM}_{16}(M_{6,6};Q) is dual to Gr^W_{16}H^{16}_c(M_{6,6};Q) with no extra twist; the dual of Q(-8) is Q(8).",
+      "status": "proved"
+    },
+    {
+      "evidence": "Proper-pair localization sequence exact in MHS with Deligne weight bounds and strictness of the weight filtration.",
+      "id": "CL-04",
+      "sources": [
+        "WORKING-C66-TATE-SUPPORT-93c3399bf4ca22a4"
+      ],
+      "statement": "Gr^W_{16}H^{16}_c(M_{6,6};Q) ~= K:=ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)) as a pure polarizable Hodge structure of weight 16.",
+      "status": "proved"
+    },
+    {
+      "evidence": "Semisimplicity of the abelian category of pure polarizable rational Hodge structures of fixed weight.",
+      "id": "CL-05",
+      "sources": [
+        "WORKING-C66-TATE-SUPPORT-93c3399bf4ca22a4"
+      ],
+      "statement": "Pure polarizable rational Hodge structures are semisimple; a subobject of a finite direct sum of Q(-8) is a finite direct sum of Q(-8). Hence K is Tate of type Q(-8) iff it is spanned by Hodge (8,8)-classes.",
+      "status": "proved"
+    },
+    {
+      "evidence": "Verified geometry-comparison dependency C66-GEO-COMP (ATT-0112) with confirmation reviews REV-0157 and REV-0158; deg(W_5)=16, deg(L)=6, chi(L)=1, f=4 obstruction degree -4 vanishes, f=5 obstruction degree 0 carries the locus.",
+      "id": "CL-06",
+      "sources": [
+        "ATT-0112",
+        "REV-0157",
+        "REV-0158",
+        "WORKING-C66-TATE-SUPPORT-93c3399bf4ca22a4"
+      ],
+      "statement": "Z_red equals the Abel-Jacobi incidence I, a Zariski-locally trivial P^2-bundle over the 15-dimensional balanced Hurwitz base, so dim Z=17 and numerical codimension in M_{6,6} is 4; the residual CE obstruction is carried solely by the f=5 summand and is nonzero exactly when O_C(Gamma)~=W_5 tensor omega_C^{-1}.",
+      "status": "source_backed"
+    },
+    {
+      "evidence": "Open frontier obligation in the primary working context: the induction isomorphism does not determine the Tate type of the ordering-cover component object. Not proved and not assumed.",
+      "id": "CL-07",
+      "sources": [
+        "WORKING-C66-TATE-SUPPORT-93c3399bf4ca22a4"
+      ],
+      "statement": "The weight-16 kernel K is generated by algebraic/Hodge (8,8)-classes supported on the closure of Z, equivalently the mixed Hodge structure on a connected component of the S_6-ordering cover of the reduced-support locus is Tate.",
+      "status": "gap"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "qwen",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "Not used as the proof route. The vcd(M_{6,5})=25<26 vanishing is only a background lemma; the argument rests on localization, semisimplicity, and the geometry of Z.",
+      "kind": "blocked_route",
+      "subject": "vcd-only-vanishing"
+    },
+    {
+      "disposition": "Explicitly avoided. The forgetful-map local system / ordering-cover component is not renamed or asserted Tate; its Tate type is recorded as the open gap GAP-01.",
+      "kind": "blocked_route",
+      "subject": "forgetful-map-renaming-local-system-unknown"
+    },
+    {
+      "disposition": "Not used.",
+      "kind": "blocked_route",
+      "subject": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "disposition": "Not used.",
+      "kind": "blocked_route",
+      "subject": "point-count-without-degree-parity-separation"
+    }
+  ],
+  "gap_markers": [
+    {
+      "blocks": [
+        "CL-07"
+      ],
+      "description": "Algebraicity/Hodge-(8,8) property of the weight-16 localization kernel K supported on the closure of Z; equivalently, the mixed Hodge structure on a connected component of the finite etale S_6-ordering cover of the reduced-support locus being Tate. This is the single open frontier obligation and is the only step not discharged.",
+      "id": "GAP-01",
+      "required_for": "Closing the Tate-type conclusion Q(-13)/Q(8)/Q(-8) for the codimension-13 contribution supported on Z."
+    }
+  ],
+  "id": "ATT-0116",
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "poincare-duality-reindexing",
+    "tate-twist-arithmetic",
+    "borel-moore-compact-support-duality",
+    "proper-pair-localization-weight-strictness",
+    "semisimplicity-pure-polarizable-hodge-structures",
+    "casnati-ekedahl-degree-bookkeeping",
+    "abel-jacobi-incidence-identification"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Consolidates the full Tate-type bookkeeping chain (Poincare reindexing, twist arithmetic, BM/compact-support duality, proper-pair localization, semisimplicity) into a single iff-reduction, and pins the exact remaining obligation as the Tate type of a connected component of the S_6-ordering cover, rather than asserting it."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "c7be40b6ee7514319ea56389f53258474de96387d1e8fa6f7f0c72dfd8b0b46a",
+  "proof_dependencies": [
+    {
+      "artifact_id": "ATT-0112",
+      "confirmation_reviews": [
+        "REV-0157",
+        "REV-0158"
+      ],
+      "role": "Verified geometry-comparison dependency C66-GEO-COMP supplying the CE degree bookkeeping, the f=4/f=5 obstruction split, and the identification (Z_ev)_red=I_red with I a P^2-bundle."
+    },
+    {
+      "artifact_id": "WORKING-C66-TATE-SUPPORT-93c3399bf4ca22a4",
+      "role": "Primary mathematical working context: established facts for Poincare reindexing, Tate-twist arithmetic, BM/compact-support duality, proper-pair localization, semisimplicity, and frontier obligations."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0001",
+    "FND-0036",
+    "CL-01",
+    "CL-02",
+    "CL-03",
+    "CL-04",
+    "CL-05",
+    "CL-06"
+  ],
+  "source_ids": [
+    "ATT-0112",
+    "REV-0157",
+    "REV-0158",
+    "WORKING-C66-TATE-SUPPORT-93c3399bf4ca22a4",
+    "C66-001-v4"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "summary": "Reduces the exact Tate-type target to a single open algebraicity/Hodge obligation. Proves the full bookkeeping chain (Poincare reindexing, Tate-twist arithmetic, Borel-Moore/compact-support duality, proper-pair localization to a pure weight-16 kernel, semisimplicity) and imports the verified geometry Z_red=Abel-Jacobi incidence. Establishes that the codimension-13 contribution supported on Z is Tate of type Q(-13)/Q(8)/Q(-8) if and only if the weight-16 localization kernel is generated by algebraic (8,8)-classes; isolates the Tate type of a connected component of the S_6-ordering cover as the precise remaining frontier.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-004",
+  "theorem_scope": {
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "Weakest sufficient Tate-type reduction for the ordinary-degree-26 (Chow-codimension-13) contribution supported on the balanced Casnati-Ekedahl evaluation-failure locus Z in M_{6,6}. (a) The open input is W_{-16}H^{BM}_{16}(M_{6,6};Q) canonically identified by Poincare duality with W_{26}H^{26}(M_{6,6};Q)(21); the asserted ordinary Tate type Q(-13) is equivalent, under the Poincare twist (21), to the open Borel-Moore type Q(8) of weight -16, and, by Borel-Moore/compact-support duality, to the compact-support type Q(-8) in degree 16. (b) For the smooth-proper pair (Mbar_{6,6}, D=Mbar_{6,6}\\M_{6,6}), Gr^W_{16}H^{16}_c(M_{6,6};Q) is canonically K:=ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)), a pure polarizable Hodge structure of weight 16; by semisimplicity of pure polarizable rational Hodge structures, the contribution supported on Z is Tate of the exact target type if and only if K is spanned by Hodge (8,8)-classes, equivalently by algebraic fundamental classes of codimension-8 cycles supported on the closure of Z. (c) By the verified geometry comparison C66-GEO-COMP (ATT-0112, confirmed by REV-0157 and REV-0158), Z_red equals the Abel-Jacobi incidence I, a Zariski-locally trivial P^2-bundle over the 15-dimensional balanced Hurwitz base, so dim Z=17 and its numerical codimension in M_{6,6} is 4; the residual CE obstruction is carried solely by the f=5 summand and is nonzero exactly when O_C(Gamma) is isomorphic to L=W_5 tensor omega_C^{-1}. The single undischarged obligation is to prove the classes in (b) are algebraic/Hodge, equivalently that the mixed Hodge structure on a connected component of the S_6-ordering cover of the reduced-support locus is Tate; this is recorded as the remaining gap, not asserted."
+}

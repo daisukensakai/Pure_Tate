@@ -1,0 +1,95 @@
+{
+  "adjudicated_statement": "Scope: (g,n)=(6,6) over C with Q-coefficients; Mbar_{6,6} the smooth proper Deligne-Mumford stack of dimension d=21, D = Mbar_{6,6} minus M_{6,6} its proper boundary, Z the balanced Casnati-Ekedahl evaluation-failure locus. (1) K := ker(H^{16}(Mbar_{6,6};Q) -> H^{16}(D;Q)) is canonically isomorphic, as a pure polarizable Hodge structure of weight 16, to Gr^W_{16}H^{16}_c(M_{6,6};Q) -- the top weight graded piece of H^{16}_c and the entire degree-16 compact-support corner of M_{6,6} -- and is canonically the Hodge-structure dual of the RED-0001 open input W_{-16}H^{BM}_{16}(M_{6,6};Q), with Q(-8) dual to Q(8). This uses only smoothness of M_{6,6} (weights of H^{16}_c are <= 16), properness of D (weights of H^{15}(D) are <= 15) and strictness. It is a global invariant of M_{6,6} and carries no support condition. The separate Poincare identification W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21) (FND-0001) is a different map and must not be conflated with this duality. (2) For any pure Q-Hodge structure V of weight 16, 'V is a finite direct sum of Q(-8)' and 'V is spanned by its Hodge (8,8)-classes' are the same condition (V_C = V^{8,8}) by the definition of Hodge type; neither polarizability nor semisimplicity of the category of pure polarizable weight-16 Q-Hodge structures is needed for this equivalence, and neither adds information to it. Applied to K, the equivalence is a restatement of the target, not a reduction: it imposes no support condition and produces no cycle class. (Semisimplicity, per FND-0033, only excludes extension gaps at this corner.) (3) Give 'the contribution supported on Z' its only standard meaning by first fixing a closed support Y in M_{6,6} containing the image of Z. Since Gr^W is exact on mixed Hodge structures, the Borel-Moore localization sequence yields an exact sequence W_{-16}H^{BM}_{16}(Y;Q) -> W_{-16}H^{BM}_{16}(M_{6,6};Q) -> W_{-16}H^{BM}_{16}(M_{6,6} minus Y;Q). Consequently: (3a) if the Z-supported contribution means the image of the first map, then K Tate of type Q(-8) implies that contribution is Tate (a sub-object of a type-(8,8) structure is of type (8,8)), so Z-Tate is necessary; but the converse -- the direction the reduction needs -- does not follow, since it additionally requires a support-exhaustion input, namely vanishing or Tate-ness of the quotient injecting into W_{-16}H^{BM}_{16} of the complement of Y. No such input is established for (6,6). (3b) if it means W_{-16}H^{BM}_{16}(Y;Q) itself, then neither direction follows, since only the image of that group is constrained by K. ATT-0116 fixes neither reading. Hence the asserted equivalence 'the contribution supported on Z is Tate of the exact target type if and only if K is spanned by Hodge (8,8)-classes' is unproved and is a non-sequitur in its load-bearing direction. This is a statement about a missing hypothesis, not a demonstration that the two sides have different truth values: if the RED-0001 target is Tate, both sides hold, so the biconditional cannot be refuted by exhibiting differing truth values. (4) 'K is spanned by algebraic fundamental classes of codimension-8 cycles of Mbar_{6,6} supported on a closure of Z' implies 'K is spanned by Hodge (8,8)-classes', but the converse is the Hodge conjecture in codimension 8 on the 21-dimensional Mbar_{6,6}, which is unproved in general beyond the (1,1) case; writing 'equivalently' between the two silently assumes it. (5) Independently of (3) and (4), the support clause carries two further undischarged obligations: (5a) a closed (stratified) embedding of the balanced reduced-support model into M_{6,6}/Mbar_{6,6} together with a Gysin map -- that model is an open piece of the failure locus (FND-0052), and FND-0147 supplies only a representable unramified quasi-finite monomorphism to M_{6,6}, which is not a closed immersion of a pure-codimension-4 closed substack; (5b) the Gysin degree shift H^{8}(Z-tilde;Q)(-4) -> H^{16}(Mbar_{6,6};Q) for a 17-dimensional codimension-4 support with a suitable smooth model Z-tilde. The phrase 'codimension-8 cycles supported on the closure of Z' is itself degree-consistent (codimension 8 in Mbar_{6,6} equals codimension 4 on the 17-dimensional support), so the defect is the unwritten shift and the missing closed embedding, not the codimension label; the fundamental class of the support itself lies in H^{8}, not H^{16}. Not asserted: that K fails to be Tate; that the Z-supported contribution fails to be Tate; that Z-supported classes do not in fact span K; any computation of H^{16}(Mbar_{6,6};Q); any claim for (g,n) other than (6,6), although the logical structure of (2)-(4) is general. Confirmed and untouched: ATT-0116 clause (a) and claims CL-01 through CL-04.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory local reads first. ATT-0116 (proof/attempts/ATT-0116.json): the contested passages are Step 5 of argument_markdown ('Therefore K (and hence the contribution supported on Z) is Tate ... if and only if K is spanned by Hodge (8,8)-classes'), claim CL-05 (status 'proved'), and theorem_statement clause (b) ('the contribution supported on Z is Tate of the exact target type if and only if K is spanned by Hodge (8,8)-classes, equivalently by algebraic fundamental classes of codimension-8 cycles supported on the closure of Z'). REV-0163 (proof/reviews/REV-0163.json): marks CL-05 and the synthetic claim THM-B-IFF 'failed', with strongest_attack asserting that K is the entire lowest-weight compact-support corner and that 'Z-Tate is neither necessary nor sufficient for spanning of K'. FND-0168 is the reviewer's novel_candidate_from_this_review with key 'global-K-not-Z-supported-tate-iff'.\n\nIndependent verification of the uncontested chain. ATT-0116 CL-01 to CL-04 are correct and are not touched by this finding: d = 3*6-3+6 = 21, 2d-16 = 26, Q(-13)(21) = Q(8) with weight 26-42 = -16, H^{BM}_{16} dual to H^{16}_c with no extra twist and Q(-8)^vee = Q(8). CL-04 I re-derived rather than imported: in H^{15}(D;Q) -> H^{16}_c(M_{6,6};Q) -> H^{16}(Mbar_{6,6};Q) -> H^{16}(D;Q), D proper gives weights <= 15 on H^{15}(D), M_{6,6} smooth gives weights <= 16 on H^{16}_c, and strictness makes the image of H^{16}_c in the pure weight-16 group H^{16}(Mbar_{6,6}) equal to Gr^W_{16}H^{16}_c(M_{6,6};Q); that image is exactly K. So the finding's first sentence is confirmed: K is the whole degree-16 compact-support corner, a global invariant of M_{6,6} carrying no support condition, and Gr^W_{16}H^{16}_c is the TOP weight piece of H^{16}_c (dual to the LOWEST weight piece W_{-16}H^{BM}_{16}), consistent with FND-0032's corner orientation.\n\nThree wording corrections applied to the candidate. (i) 'the Poincare dual of the RED-0001 open input' is loose: K is the Q-linear Hodge-structure DUAL of W_{-16}H^{BM}_{16}(M_{6,6};Q) under Borel-Moore/compact-support duality; Poincare duality is the separate twisted identification W_{-16}H^{BM}_{16} = W_{26}H^{26}(M_{6,6};Q)(21) of FND-0001. The adjudicated statement separates the two maps. (ii) The candidate attributes the tautology to semisimplicity. Semisimplicity is not needed: for a pure weight-16 Q-Hodge structure V, 'V is a direct sum of Q(-8)' and 'V is spanned by its Hodge (8,8)-classes' are the same condition V_C = V^{8,8} by definition of Hodge type. Semisimplicity (packet FND-0033) is what rules out extension gaps at this corner; it is not what makes the (8,8)-spanning restatement contentless. (iii) 'is not equivalent to' overreaches as a mathematical assertion. Non-equivalence of two statements cannot be established here, because if the RED-0001 target is Tate both sides are true and the biconditional holds vacuously. The defensible content is that the biconditional is unproved and is a non-sequitur in the load-bearing direction, and that the missing input is a support-exhaustion statement. The adjudicated statement says exactly that.\n\nOne substantive correction to REV-0163, carried into the adjudicated statement. The review's 'neither necessary nor sufficient' is only half right, and which half depends on a reading the attempt never fixes. Fix a closed support Y in M_{6,6} carrying Z. Gr^W is exact on mixed Hodge structures, so the Borel-Moore localization sequence H^{BM}_{16}(Y) -> H^{BM}_{16}(M_{6,6}) -> H^{BM}_{16}(M_{6,6} minus Y) stays exact after applying Gr^W_{-16} = W_{-16} at the lowest weight. Under reading (i), 'the contribution supported on Z' = the image of the first map, a SUB-object of the RED-0001 group: then K Tate implies that contribution Tate (sub-objects of a type-(8,8) structure are type (8,8)), so Z-Tate is necessary, and only sufficiency fails, requiring Tate-ness or vanishing of the piece injecting into the complement's group. Under reading (ii), 'the contribution' = Gr^W_{-16}H^{BM}_{16}(Y) itself, an upstairs group of which only the image is constrained: then neither direction follows. So the review is right that the reduction collapses, but its blanket 'neither necessary nor sufficient' holds only under reading (ii); the ambiguity between the two readings is itself part of the defect and is now recorded.\n\nTwo places where REV-0163 overreads, corrected so the promoted finding does not inherit them. (a) The review's degree check (clause iv) says a codimension-4, 17-dimensional support has fundamental class in H^8 'not H^{16}', treating the attempt's phrase as a degree error. The phrase 'codimension-8 cycles supported on the closure of Z' is in fact degree-consistent: codimension 8 in the 21-dimensional Mbar_{6,6} equals codimension 4 on the 17-dimensional support, and such a cycle does have class in H^{16}. The real defect is that the Gysin shift H^{16-8}(Z-tilde;Q)(-4) -> H^{16}(Mbar_{6,6};Q) is never written and no smooth model or closed embedding is supplied. (b) The review states that no morphism Z -> M_{6,6} is constructed. That is accurate about the cited dependency ATT-0112, but the packet's adjudicated FND-0147 does supply a representable unramified quasi-finite monomorphism from the balanced ordered model to M_{6,6}. The finding must therefore not rest on the absence of any morphism; the correct obstruction is that a monomorphism with locally closed constructible image is not a closed immersion of a pure-codimension-4 closed substack, which is what a Gysin map needs (packet FND-0052, and the working-context hard stop quoted in REV-0163's dependency check).\n\nRelation to existing packet findings; no merge. FND-0031 (circularity of rewriting the corner as ker(H^{16}(Mbar) -> H^{16}(D))), FND-0052 (no closed embedding / no Gysin for (M_{6,6},Z)), FND-0071 (kernel-Tate does not make H^{2r}(Mbar) Tate: the reverse containment issue), FND-0152 (the S_6-induction isomorphism upgrades nothing to Tate) and FND-0167 (Tate conclusions for Z-side corners are conditional on (H-C)/(H-S) and explicitly exclude M_{6,6}) each cover a neighbouring defect, but none states this one: that the localization kernel is the global corner, that the semisimplicity/(8,8) restatement is contentless, and that the missing hypothesis is support exhaustion in the Borel-Moore localization sequence. FND-0168 is distinct and non-redundant, so it is promoted in its own equivalence group rather than merged; merge_target_id is null. It contradicts no adjudicated claim: it refutes only ATT-0116's proposed CL-05/theorem-(b) equivalence, which is a rejected attempt claim, not packet content, hence contradicts_claim_ids stays empty.\n\nPublic-source cross-check. The weight-graded compact-support machinery invoked above (Deligne weight spectral sequence for H^*_c(M_{g,n};Q), E_2-degeneration, and the duality gr_k H^*_c(M_{g,n}) = gr_{6g-8+2n}H^{6g-6+2n-*}(M_{g,n})^vee displayed as equation (9) in section 2.7) is standard and publicly documented in arXiv:2110.05711v2, which supports the corner bookkeeping but contains no support-exhaustion or algebraicity theorem for the (6,6) degree-16 corner. arXiv:1805.10186 (Chan-Galatius-Payne, JAMS 34 (2021) 565-594) fixes the opposite, top-weight corner and so cannot supply the missing input, consistent with FND-0032. Payne's survey arXiv:2605.20453 frames Hodge/Tate-conjecture statements for moduli of curves as verified in a range of cases via the boundary stratification with open problems remaining, i.e. no general algebraicity theorem is available to license the Hodge-to-algebraic upgrade. The Hodge conjecture itself is proved only in the (1,1) case and low-dimensional or special situations and is open for higher codimension in general, so the codimension-8 upgrade on the 21-dimensional Mbar_{6,6} is an assumption, not an equivalence.",
+  "engine": "claude",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0168",
+  "id": "FAUD-0179",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "claude",
+  "schema_version": 1,
+  "scope": {
+    "ambient": "smooth proper Deligne-Mumford stack Mbar_{6,6} of dimension 21 with boundary D = Mbar_{6,6} minus M_{6,6}, D proper",
+    "base_field": "C",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "does_not_assert": [
+      "that K fails to be Tate of type Q(-8)",
+      "that the Z-supported contribution fails to be Tate",
+      "that Z-supported classes do not in fact span K",
+      "any computation of H^{16}(Mbar_{6,6};Q) or of the RED-0001 target",
+      "any claim outside (g,n)=(6,6), although the logical structure of clauses (2)-(4) is general",
+      "any refutation of ATT-0116 clause (a) or of CL-01 through CL-04, which the audit confirms"
+    ],
+    "hypotheses": [
+      "M_{6,6} smooth, so H^k_c(M_{6,6};Q) has weights <= k",
+      "D proper, so H^{15}(D;Q) has weights <= 15",
+      "morphisms of mixed Hodge structures are strict, so Gr^W_k is exact",
+      "Q-coefficients throughout; stack-level Betti cohomology, no integral or coarse-space content",
+      "for clause (3), a closed support in M_{6,6} must be fixed before the phrase 'contribution supported on Z' has a referent"
+    ],
+    "objects": [
+      "K = ker(H^{16}(Mbar_{6,6};Q) -> H^{16}(D;Q))",
+      "Gr^W_{16}H^{16}_c(M_{6,6};Q)",
+      "RED-0001 open input W_{-16}H^{BM}_{16}(M_{6,6};Q)",
+      "balanced Casnati-Ekedahl evaluation-failure locus Z and any closure of its image in M_{6,6}",
+      "ATT-0116 theorem clause (b) and claim CL-05"
+    ],
+    "subproblem_id": "C66-TATE-SUPPORT"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "content_sha256": "fad75e6b0f4cf8c4cb326c3a80a2299273886e641a8a073a8f2d04b6f9ab6597",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-22T00:00:00Z",
+      "source_type": "survey",
+      "url": "https://arxiv.org/abs/2605.20453"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "cfd5850aac427bc2ad4d80ed97132a652e10b8d22610d7ed092122f56300215d",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "algebraicity-upgrade-status",
+      "retrieved_at": "2026-08-22T00:00:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Hodge_conjecture"
+    },
+    {
+      "arxiv_id": "2110.05711",
+      "arxiv_version": "v2",
+      "content_sha256": "2c99b324a4637b6a25e30711b91ed460a89cfdbf88eefb2131074367164db69e",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "weight-graded-compact-support-machinery",
+      "retrieved_at": "2026-08-22T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2110.05711v2"
+    },
+    {
+      "arxiv_id": "1805.10186",
+      "arxiv_version": null,
+      "content_sha256": "3caff830c937a1641e1566397a8dc0e18fc00e534eb591fa6d17aaa5294434ff",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "weight-corner-orientation-crosscheck",
+      "retrieved_at": "2026-08-22T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1805.10186"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0168",
+  "verdict": "promote",
+  "verified_source_count": 4
+}

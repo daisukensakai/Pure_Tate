@@ -1,5 +1,6 @@
 {
   "campaign_id": "C66-001",
+  "completed_at": "2026-08-21T01:09:34.484858+00:00",
   "engine_pools": {
     "prover": [
       "claude"
@@ -14,12 +15,26 @@
   },
   "events": [
     {
-      "activity_bytes": 170,
+      "activity_bytes": 691752,
+      "artifact_sha256": "2a2a9f088343ecaa14d51e7b996567fa4bbfa082fbf639a19fc09f063072f049",
+      "completed_at": "2026-08-21T01:09:33.548688+00:00",
       "engine": "qwen",
       "engine_pid": 49525,
       "engine_process_group": 49525,
-      "last_activity_at": "2026-08-21T00:52:59.206712+00:00",
+      "last_activity_at": "2026-08-21T01:09:33.380687+00:00",
       "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
       "output": "proof/reviews/REV-0157.json",
       "phase": "review",
       "processes": [
@@ -31,20 +46,36 @@
           "supervisor_process_group": 49522
         }
       ],
+      "review_id": "REV-0157",
       "review_pass": 1,
       "started_at": "2026-08-21T00:52:56.787373+00:00",
-      "state": "running",
+      "state": "completed",
       "step": 1,
       "supervisor_pid": 49522,
       "target_attempt_id": "ATT-0112",
-      "task_id": "TASK-V-ATT-0112-P1"
+      "task_id": "TASK-V-ATT-0112-P1",
+      "verdict": "confirmed"
     }
   ],
+  "executed_steps": 1,
   "parent_pid": 49510,
   "parent_process_group": 49507,
   "requested_steps": 1,
   "run_id": "RUN-C66-001-20260821T005256779637Z-49510",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
   "schema_version": 2,
   "started_at": "2026-08-21T00:52:56.779637+00:00",
-  "status": "running"
+  "status": "completed",
+  "stop_reason": "step_limit"
 }

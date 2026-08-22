@@ -1,0 +1,206 @@
+{
+  "attempt_id": "ATT-0114",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0114-1",
+      "note": "Open-closed compact-support localization ... -> H^{m-1}_c(Y) -> H^m_c(V) -> H^m_c(X) is a sequence of MHS. Deligne's bound puts all weights of H^{m-1}_c(Y) at most m-1, so Gr^W_m of the connecting term vanishes. Strictness makes Gr^W_m exact, yielding the injection on the corner. Duality H^{BM}_m dual to H^m_c in the same degree with no extra Tate twist (working-context BM/c duality; dual of Q(-8) is Q(8)) reverses the injection to a surjection T_m(X) -> T_m(V). No smoothness of X or V is used. The argument is a cohomological-degree drop on a fixed space, not a coefficient-weight claim, so it is outside FND-0164. Stacks with Q-coefficients are covered by a simplicial atlas; the load-bearing applications U subset A and Z^(1) subset script-D are schemes.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0114-2",
+      "note": "q:script-D -> A is finite flat of degree six, so the discriminant of the trace form is a canonical section of (det q_*O)^{-2} whose vanishing is the non-etale locus in characteristic zero. FND-0134 supplies a reduced general member on every fibre, so the section is not identically zero on any A_b = P^2; FND-0136 supplies a non-reduced member, so d >= 1. Thus O(Delta) restricts to O_{P^2}(d) with d >= 1, hence is relatively ample on the proper S-scheme A, and the complement of a relatively ample effective Cartier divisor is affine over S. Z -> U is finite hence affine. Fibrewise Artin-Grothendieck / Andreotti-Frankel vanishing on a smooth affine surface gives H^q=0 for q>2; Poincare duality H^q_c dual to H^{4-q}(-2) gives H^q_c=0 for q<2. Proper base change for Rg_! identifies stalks with H^q_c of the fibres, so R^q g_! Q_Z = 0 for q in {0,1} and q>4. Affineness is never inferred from 'open in an affine stack'. No affineness of S is used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0114-3",
+      "note": "Fibrewise localization for proper P^2 = U_b sqcup Delta_b, with Delta_b reduced of pure dimension one. Gr^W_q kills H^{q-1}(Delta_b). The resulting kernel equals ker(H^q(P^2) -> H^q(Delta_b)) because H^q(P^2) is pure of weight q. Vanishing for q=1,3 is vanishing of H^q(P^2); q=0 is injectivity of H^0(P^2) -> H^0(Delta_b) by nonemptiness; q=2 is injectivity of the hyperplane class on a positive-degree plane divisor (each component has positive degree, H^2 of a proper reduced curve is Q(-1) per irreducible component); q=4 is H^4(Delta_b)=0 and H^4(P^2)=Q(-2). Explicitly not converted into a weight bound on R^q f_! Q, and not used in CLM-0114-5 or CLM-0114-6.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0114-4",
+      "note": "h^0(L_b)=3 identically (FND-0139, ATT-0086 via ATT-0112) and base-point-freeness (FND-0130, FND-0134) force evaluation at every p to be surjective, hence h^0(L_b(-p))=2. script-C is smooth over reduced S, so reduced; Grauert applies (FND-0131 respected). The fibre of script-D over p is P(H^0(L_b(-p)))=P^1, identifying script-D with P(script-G). Z^(1)=script-D x_A U is open in script-D and finite etale of degree six over U. The free S_5-action on the S_6-torsor Z realises Z/S_5 = Z^(1). With Q-coefficients, F of a finite free quotient is invariants; Ind_{S_5}^{S_6} triv = Q^6 = [6] oplus [5,1], so F(Z)^{S_5} is exactly those two isotypic components. F(Z)^{S_6}=F(U) is CLM-0112-8.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0114-5",
+      "note": "U open in A, so CLM-0114-1 injects the weight-16 corner of U into that of A. A -> S is a Zariski-locally trivial P^2-bundle, hence proper, so Rf_! Q = Rf_* Q = Q oplus Q(-1)[-2] oplus Q(-2)[-4] as constant Tate objects. Compact-support cohomology of the total space is therefore H_c^*(S, Rf_! Q) = H_c^*(S) oplus H_c^{*-2}(S)(-1) oplus H_c^{*-4}(S)(-2) as MHS, including when S is not proper. Gr^W_16 of the Tate twists is Gr^W_14 H^{14}_c(S)(-1) and Gr^W_12 H^{12}_c(S)(-2). S_6-invariants commute with Gr^W over Q. Dualising gives the BM form T_16(U) as a quotient of T_16(S) oplus T_14(S)(1) oplus T_12(S)(2). The three coefficient objects are constant Tate, which is the explicit exception in FND-0164; no Leray sequence with a local system is used. Work is over a scheme atlas, not the coarse space.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0114-6",
+      "note": "Same corner injection for the open Z^(1) subset script-D, plus the P^1-bundle formula Rf_* Q = Q oplus Q(-1)[-2] on script-D -> script-C, giving Gr^W_16 H^{16}_c(script-D) = Gr^W_16 H^{16}_c(script-C) oplus Gr^W_14 H^{14}_c(script-C)(-1). Source identification is CLM-0114-4. Dual of invariants equals coinvariants over Q, and S_n-irreps are self-dual, so the [6]+[5,1] statement transfers to T_16(Z).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0114-7",
+      "note": "Q(-7)(-1)=Q(-8) and Q(-6)(-2)=Q(-8). Under (H-C) the target of CLM-0114-6 is a finite direct sum of Q(-8); under (H-S) the target of CLM-0114-5 is the same. Pure polarizable Q-Hodge structures of a fixed weight are semisimple (working-context fact; FND-0033 records the same for the campaign corner), so a subobject of oplus Q(-8) is again oplus Q(-8), an honest Hodge-structure statement rather than a semisimplification. Dualising yields oplus Q(8) for the corresponding part of T_16(Z). (H-C) and (H-S) are not asserted. Remaining isotypics, Leray with non-constant coefficients, affineness of S, and every M_{6,6} clause are correctly disclaimed.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-21",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "key": "FC-ATT0114-WEIGHT-TRUNCATION",
+      "kind": "lemma",
+      "scope": {
+        "coefficients": "Q",
+        "ground_field": "C",
+        "objects": [
+          "H^m_c",
+          "H^{BM}_m",
+          "Gr^W_m"
+        ],
+        "subproblem_id": "C66-TATE-SUPPORT"
+      },
+      "statement": "For an open immersion V -> X of separated finite-type Deligne-Mumford stacks over C, and for every m, Gr^W_m H^m_c(V;Q) injects into Gr^W_m H^m_c(X;Q), because the compact-support connecting term H^{m-1}_c(X\\V) has weights at most m-1 and Gr^W_m is exact on mixed Hodge structures. Dually T_m(X) := W_{-m} H^{BM}_m(X;Q) surjects onto T_m(V). Extra classes of an open complement cannot occupy the corner weight = degree. This is strictly weaker than identifying the cohomology of a discriminant complement with projective-bundle cohomology.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "key": "FC-ATT0114-UNIV-DIV-P1-BUNDLE",
+      "kind": "lemma",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "hypotheses": [
+          "(CE)",
+          "(N)",
+          "(BAL)",
+          "S reduced",
+          "h^0(L)=3 identically",
+          "L base-point-free"
+        ],
+        "objects": [
+          "script-D",
+          "script-C",
+          "Z^(1)",
+          "Z"
+        ],
+        "subproblem_id": "C66-TATE-SUPPORT"
+      },
+      "statement": "On a reduced locally Noetherian base carrying a balanced (CE)+(N) genus-six degree-four family with h^0(L)=3 identically and L base-point-free, the universal degree-six divisor script-D, viewed over the universal curve by (p,Gamma) |-> p, is the Zariski-locally trivial P^1-bundle P(pr_{2*}(pr_1^* L(-Delta))). Consequently the level-one reduced-support model Z^(1) = script-D|_U is open in a P^1-bundle and, with Q-coefficients, realises the [6] and [5,1] isotypic components of cohomology of the ordering torsor Z as H^*(Z)^{S_5}.",
+      "supports_finding_id": null
+    },
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "key": "FC-ATT0114-ISOTYPIC-CONSTANT-TATE-REDUCTION",
+      "kind": "lemma",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "coefficients": "Q",
+        "objects": [
+          "T_16(Z)",
+          "Gr^W_16 H^{16}_c(Z)",
+          "S_6-isotypics [6] and [5,1]"
+        ],
+        "subproblem_id": "C66-TATE-SUPPORT"
+      },
+      "statement": "The trivial and standard S_6-isotypic components of the corner Gr^W_16 H^{16}_c(Z;Q), equivalently of T_16(Z), inject as pure polarizable weight-sixteen Hodge structures into constant-Q-coefficient corners of the balanced tetragonal base and its universal curve: Gr^W_16 H^{16}_c(U) injects into Gr^W_16 H^{16}_c(S) oplus Gr^W_14 H^{14}_c(S)(-1) oplus Gr^W_12 H^{12}_c(S)(-2), and Gr^W_16 H^{16}_c(Z^(1)) injects into Gr^W_16 H^{16}_c(script-C) oplus Gr^W_14 H^{14}_c(script-C)(-1). The coefficient objects of both projective-bundle formulas are constant Tate sheaves, so FND-0164 does not obstruct the identification. Semisimplicity then converts Tate-ness of those constant-coefficient corners into Tate type Q(8) for the corresponding part of T_16(Z). Remaining S_6-isotypics are not controlled.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0161",
+  "independent": true,
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "228bab2a3105f96faf570fcea42fc90bee7659aa2fb4dc56f857f1c70364871e",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0112",
+      "note": "Used only for geometric structure: CLM-0112-7 (Hbar^bal smooth of pure dimension 15) and CLM-0112-8 (Z = Ord(U) a finite etale S_6-torsor with F(Z)^{S_6}=F(U) over a scheme atlas). No Hodge, weight, Borel-Moore, or Tate statement is imported. Dual-confirmed by REV-0157 and REV-0158. The P^1-bundle target over an atlas of Hbar^bal is the FND-0157/CLM-0088-8 setting recorded in ATT-0112 Section 0.4, not a stack-inertia component formula.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0157",
+      "note": "Confirmation review of ATT-0112; all eight claims confirmed. Used only as a pointer that the geometric input is dual-confirmed; no Hodge content is taken from the review.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0158",
+      "note": "Second confirmation of ATT-0112. The scheme-level reduced-base scope of clause (E) is the scope in which ATT-0114 applies the model.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0164",
+      "note": "Governing obstruction for this subproblem. Clauses (C) and (D) do not transfer constant-coefficient vanishing to H_c^p(B; R^q f_! Q). They use only the degree-drop localization of CLM-0114-1 and projective-bundle formulas whose coefficients are constant Tate objects Q, Q(-1), Q(-2), which is the exception the finding records. Proposition 2.5 is explicitly not converted into a coefficient-weight bound.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0134",
+      "note": "Base-point-freeness and reduced general member of |L| on the balanced locus. Used in Lemma 2.2(b) (discriminant not identically zero on fibres) and Lemma 3.1 (h^0(L(-p))=2).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0136",
+      "note": "h^0(L(-2p))>=1 for every p, so every complete |L| contains a non-reduced divisor. Used in Lemma 2.2(c) to force Delta_b nonempty and d>=1, hence relative ampleness.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0139",
+      "note": "Fibrewise balancedness implies B_4 empty and h^0(L)=3 identically. Used to make both the P^2-bundle and the P^1-bundle statements global on the balanced base.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0130",
+      "note": "Smooth plane quintics excluded from the balanced locus, so L is base-point-free there. Second base-point-freeness input to Lemma 3.1.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0141",
+      "note": "Over a reduced base, Z is S-smooth of pure relative dimension two. Used for smoothness of Z_b in Lemma 2.2(3) and for Poincare duality on those fibres in Corollary 2.4.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0157",
+      "note": "Global existence of L on a P^1-bundle target, base-invisibility of a residual twist, and Zariski-local triviality of P_S(pi_*L) when h^0(L) is constant. This is why the model is available on a smooth atlas of Hbar^bal rather than only on a trivial-target base.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Semisimplicity of pure polarizable Q-Hodge structures of a fixed weight. Used in (E) to upgrade an injection into oplus Q(-8) to an honest Tate-type statement for the source, with no extension gap. The same semisimplicity is an established working-context fact for geometric MHS, so the use is not an over-reading of the M_{g,n}-specific wording of FND-0033.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0155",
+      "note": "Listed but unused in the load-bearing argument. Type-(i) monodromy S_6 versus type-(ii) containment in S_2 wr S_3 appears only in the explicitly non-load-bearing Remark 4.5. Clauses (C) and (D) never pass through the fibres of g.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Lemma 10.6 used only to fix the packet convention W_f = (O(2) tensor gamma^*O(-f))|_C, giving deg W_5=16 and deg L=6 at g=6. The packet excerpt computes deg W_fi|_C via gamma^*O(-fi) even though the one-line set-statement writes O(fi); the attempt follows the packet/FND-0156 sign. No degree computation is load-bearing in the weight arguments.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0114-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Packet identity checked first: TASK packet_id C66-001-v4, packet_sha256 228bab2a3105f96faf570fcea42fc90bee7659aa2fb4dc56f857f1c70364871e, packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7, campaign_revision 4, subproblem C66-TATE-SUPPORT, and the full target dictionary (g=n=6, dim 21, open BM degree 16 / weight -16 / type Q(8), compact H^16_c type Q(-8), ordinary degree 26 / Q(-13), Poincare twist 21) match ATT-0114 field for field; the theorem_statement is identical to TASK.json. Strongest attack: clauses (C) and (D) are the blocked inference that removing the discriminant from a P^2-bundle (resp. passing to the reduced-support open in the universal divisor) leaves only projective-bundle cohomology in the lowest-weight corner, or equivalently a compact-support Leray sequence to which FND-0164 applies. Outcome: the attack fails. Lemma 1.1 does not identify H^m_c(U) with H^m_c(A). It injects only Gr^W_m H^m_c(U) into Gr^W_m H^m_c(A), because extra classes of the complement are the image of H^{m-1}_c(Delta) and therefore occupy weights at most m-1. The projective-bundle formula is applied only to the full bundles A -> S and script-D -> script-C, which are proper, with Rf_! Q = Rf_* Q a sum of constant Tate sheaves Q, Q(-1), Q(-2) (resp. Q, Q(-1)). That is the explicit FND-0164 exception, not a transfer of Gr^W_p H^p_c(B;Q)=0 to a non-constant coefficient object. Compact-support Kunneth on P^2 x A^1 independently matches H_c^m(A) = oplus_i H_c^{m-2i}(S)(-i), so the formula is not restricted to proper bases. Secondary attacks also failed: (i) Tate-twist signs \u2014 hyperplane class in ordinary cohomology spans Q(-1), giving the standard H^m = oplus H^{m-2i}(-i), and Q(-7)(-1)=Q(-8); BM dualises Q(-8) to Q(8) with no extra twist; (ii) invariants versus coinvariants \u2014 |S_6| is invertible over Q, irreps of S_n are self-dual, and CLM-0112-8 is used only rationally; (iii) stack versus coarse \u2014 all Hodge statements are over a reduced scheme atlas, FND-0144 respected; (iv) Grauert over a nonreduced base \u2014 S and script-C are reduced; (v) semisimplification versus an actual Hodge-structure isomorphism \u2014 the corner is pure polarizable of one weight, so a subobject of oplus Q(-8) is oplus Q(-8); (vi) predicted motives, algebraic/tautological generation, Gysin into M_{6,6}, Aut(C,Gamma), omitted stable pairs \u2014 all disclaimed in (F) and unused. (H-C) and (H-S) remain unproved, as the stated theorem requires. Confirming this lemma does not verify the C66-TATE-SUPPORT case.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Work over C with Q-coefficients; for a separated finite-type Deligne-Mumford stack X over C write T_m(X) := W_{-m} H^{BM}_m(X;Q), so that T_m(X) is canonically dual to Gr^W_m H^m_c(X;Q) with no extra Tate twist, and the Tate type demanded by the exact target at (g,n)=(6,6), m=16 is T_16 = a direct sum of Q(8), equivalently Gr^W_16 H^16_c = a direct sum of Q(-8). Let S be a reduced locally Noetherian C-scheme (in the load-bearing application: a connected component of a smooth atlas of the balanced tetragonal Hurwitz stack Hbar^bal = [H^bal/PGL_2], which is smooth of pure dimension 15 by ATT-0112/CLM-0112-7) carrying a genus-six degree-four family gamma : script-C -> P with P -> S a P^1-bundle, satisfying (CE)+(N)+(BAL) and the standing hypotheses of ATT-0112 clause (E). Let pi : script-C -> S be the universal curve (smooth proper, relative dimension 1); let L := W_5 tensor omega^{-1} be the CE residual bundle of fibre degree six, so that h^0(L_s) = 3 identically (ATT-0086/CLM-0086-1, CLM-0086-2 and FND-0139, imported through ATT-0112) and L_s is base-point-free (FND-0130, FND-0134); let A := P_S(pi_*L) -> S be the resulting Zariski-locally trivial P^2-bundle (ATT-0088/CLM-0088-8 via ATT-0112, with FND-0157 for the P^1-bundle target and for base-invisibility of a residual twist of L), which by ATT-0065/CLM-0065-9 is the relative Casnati-Ekedahl evaluation-failure incidence; let script-D subset script-C x_S A be the universal degree-six divisor, finite flat of degree six over A; let Delta subset A be the non-reduced-divisor locus, U := A minus Delta the reduced-support open, Z := Ord(U) -> U the finite etale right S_6-torsor of orderings of degree 720 (ATT-0112/CLM-0112-8), and Z^(1) := script-D|_U. Over the 15-dimensional base, dim A = dim U = dim Z = 17. THEN: (A) WEIGHT TRUNCATION. For every open immersion V -> X of separated finite-type DM stacks over C and every m, Gr^W_m H^m_c(V;Q) -> Gr^W_m H^m_c(X;Q) is injective; dually T_m(X) -> T_m(V) is surjective. (B) AFFINENESS. Delta is the zero scheme of the discriminant of the rank-six algebra of script-D over A, hence an effective Cartier divisor on A whose restriction to every geometric fibre A_b = |L_b| = P^2 is a nonzero effective plane divisor; therefore Delta is relatively ample over S, U -> S and Z -> S are affine morphisms, every geometric fibre U_b and Z_b is a smooth affine surface, H^q(U_b;Q) = H^q(Z_b;Q) = 0 for q > 2 and H^q_c(U_b;Q) = H^q_c(Z_b;Q) = 0 for q < 2, and consequently R^q g_! Q_Z = 0 for q in {0,1} and for q > 4, where g : Z -> S. (C) LEVEL-0 REDUCTION (unconditional, constant Tate coefficients). There is an injection of pure polarizable Q-Hodge structures of weight sixteen Gr^W_16 H^16_c(Z;Q)^{S_6} = Gr^W_16 H^16_c(U;Q) -> Gr^W_16 H^16_c(S;Q) direct-sum Gr^W_14 H^14_c(S;Q)(-1) direct-sum Gr^W_12 H^12_c(S;Q)(-2); dually T_16(U) is a quotient MHS of T_16(S) direct-sum T_14(S)(1) direct-sum T_12(S)(2). (D) LEVEL-1 REDUCTION (unconditional, constant Tate coefficients). script-D is a Zariski-locally trivial P^1-bundle over script-C, namely script-D = P_{script-C}(script-G) with script-G := pr_{2*}(pr_1^* L(-Delta_{script-C})) locally free of rank two; Z^(1) is open in script-D, is finite etale of degree six over U, and equals Z/S_5 for S_5 the stabiliser of the first letter, so that Gr^W_16 H^16_c(Z^(1);Q) = Gr^W_16 H^16_c(Z;Q)^{S_5} is exactly the sum of the trivial and standard ([6] and [5,1]) S_6-isotypic components of Gr^W_16 H^16_c(Z;Q); and there is an injection of pure polarizable Q-Hodge structures of weight sixteen Gr^W_16 H^16_c(Z^(1);Q) -> Gr^W_16 H^16_c(script-C;Q) direct-sum Gr^W_14 H^14_c(script-C;Q)(-1). (E) WEAKEST SUFFICIENT CRITERION. Assume (H-C): Gr^W_16 H^16_c(script-C;Q) is a direct sum of Q(-8) and Gr^W_14 H^14_c(script-C;Q) is a direct sum of Q(-7). Then the trivial and standard isotypic components of the exact codimension-thirteen Z-supported input T_16(Z) = W_{-16} H^{BM}_16(Z;Q) are direct sums of Q(8). Assume instead only (H-S): Gr^W_{2j} H^{2j}_c(S;Q) is a direct sum of Q(-j) for j in {6,7,8}. Then the S_6-invariant part of T_16(Z), equivalently T_16(U), is a direct sum of Q(8). Both hypotheses are statements about the corner weight = degree of compactly supported cohomology with CONSTANT Q-coefficients, in the three explicit degrees 12, 14, 16, on the fifteen-dimensional balanced tetragonal Hurwitz base and on its sixteen-dimensional universal curve; no local system, no non-constant coefficient object, and no cohomology of any M_{g,n} occurs in them. (F) NOT ASSERTED. Nothing is claimed about the S_6-isotypic components of Gr^W_16 H^16_c(Z;Q) outside {[6],[5,1]}; no vanishing of any Gr^W_{p+q} E_2^{p,q} with non-constant coefficient object is claimed (FND-0164 stands); no affineness or cohomological-dimension statement about S is used or asserted; and no statement whatever is made about M_{6,6}: no morphism Z -> M_{6,6}, no closedness, purity, Gysin map, codimension, Aut(C,Gamma) or inertia clause, and no claim that the balanced model exhausts the closed evaluation-failure locus.",
+  "verdict": "confirmed"
+}

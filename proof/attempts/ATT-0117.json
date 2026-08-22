@@ -1,0 +1,187 @@
+{
+  "argument_markdown": "## Source-backed inputs\n\nThe sole DAG dependency is ATT-0112, and every one of its claims was independently confirmed by REV-0157 and REV-0158. We use CLM-0112-2, CLM-0112-6, CLM-0112-7 and CLM-0112-8: H^bal is smooth of pure dimension 18; Hbar^bal=[H^bal/PGL_2] is smooth of pure dimension 15; every component meets type (i); and on a qualifying scheme atlas the ordering monodromy is S_6. No Tate conclusion is imported from that dependency.\n\nThe packet supplies the balanced-family facts h^0(L_s)=3, base-point-freeness of L_s, nonemptiness of the distinct-support open, rational finite-quotient transfer, the right-coset convention, the incidence presentation D_univ=P_{C_univ}(G), and the corner-weight localization lemma. These are FND-0130, FND-0134, FND-0139, FND-0142, FND-0151, FND-0152, FND-0155, FND-0165, FND-0166 and FND-0167.\n\n## Proof\n\nLet V be as stated. Since Hbar^bal is smooth of pure dimension 15 by ATT-0112/CLM-0112-7, V is a smooth 15-dimensional scheme. A connected regular scheme has disjoint irreducible components, hence V is normal and integral.\n\nPull back H^bal->Hbar^bal along V and call the resulting PGL_2-torsor V_tilde->V. Its fibres are geometrically connected and V is connected, so V_tilde is connected. The map V_tilde->H^bal is etale onto an open substack. By ATT-0112/CLM-0112-6 this open meets the dense type-(i) locus. FND-0155 and ATT-0112/CLM-0112-8 therefore give full S_6 monodromy for the ordering torsor after pullback to V_tilde. The monodromy over U contains the image after any base change, so its image is already S_6.\n\nThe balanced fibre calculations give h^0(L_s)=3 and base-point-freeness for every s. Grauert applies because V is reduced, so pi_*L is locally free of rank three and A=P_V(pi_*L) is a Zariski-locally trivial P^2-bundle. The distinct-support locus U is a nonempty dense open in every fibre. Thus A and U are normal integral of dimension 15+2=17. The right S_6-torsor Z->U has degree 6!=720. For a right torsor its connected components are indexed by the orbit set H\\S_6 for left multiplication, so H=S_6 gives one component; this is the full-image criterion, not mere transitivity on six letters. Since Z is finite etale over normal U, it is normal, and connected normal Z is irreducible. This proves clause (1).\n\nFor clause (2), rational transfer for the free finite quotients gives\n\nGr^W_16 H_c^16(Z;Q)^{S_6}=Gr^W_16 H_c^16(U;Q)\n\nand\n\nGr^W_16 H_c^16(Z;Q)^{S_5}=Gr^W_16 H_c^16(Z^(1);Q).\n\nLet Y=A\\U with its reduced structure. Compact-support localization contains H_c^15(Y)->H_c^16(U)->H_c^16(A). Deligne's bound gives weights at most 15 on H_c^15(Y); strictness of the weight filtration therefore makes Gr^W_16 H_c^16(U)->Gr^W_16 H_c^16(A) injective. The compact-support projective-bundle formula for A->V yields\n\nGr^W_16 H_c^16(A)=Gr^W_16 H_c^16(V) direct-sum Gr^W_14 H_c^14(V)(-1) direct-sum Gr^W_12 H_c^12(V)(-2),\n\nwhich is the first injection.\n\nBase-point-freeness gives h^0(L_s(-p))=2 for every p in C_s. Grauert therefore makes G=pr_{2*}(pr_1^*L(-diagonal)) locally free of rank two, and the incidence divisor is D_univ=P_{C_univ}(G), a Zariski-locally trivial P^1-bundle. Its reduced-support open is Z^(1)=D_univ x_A U=Z/S_5. Applying the same localization argument to Z^(1) inside D_univ and then the P^1-bundle formula gives the second injection.\n\nIf E=direct-sum_rho V_rho tensor M_rho, rational Frobenius reciprocity and Ind_{S_5}^{S_6}(1)=[6] direct-sum [5,1] give E^{S_5}=M_[6] direct-sum M_[5,1]. This representation-theoretic identity identifies multiplicity spaces only; it does not create Tate structure.\n\nUnder (H-S), every summand on the right of the first injection is a sum of Q(-8), because Q(-7)(-1)=Q(-6)(-2)=Q(-8). Under (H-C), the same is true on the right of the second injection. Pure polarizable rational Hodge structures are semisimple, so the corresponding subobjects are sums of Q(-8). Duality between Gr^W_16 H_c^16 and T_16 changes Q(-8) to Q(8), proving clause (3).\n\n## Computational hypotheses and gaps\n\nNo finite computation or experiment is used. The proof does not establish (H-S), (H-C), any remaining S_6-isotypic multiplicity, or any map or support-exhaustion statement in M_{6,6}. These are the explicit gaps below, so RED-0001 is not concluded.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "claims": [
+    {
+      "id": "CLM-0117-1",
+      "statement": "For every connected component V of a separated finite-type etale scheme atlas of Hbar^bal, V is smooth normal integral of dimension 15, the balanced reduced-support ordering model Z has pure dimension 17, its ordering monodromy image is S_6, and Z->U is connected irreducible finite etale of degree 720.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0117-2",
+      "statement": "With Q-coefficients, Gr^W_16 H_c^16(Z)^{S_6}=Gr^W_16 H_c^16(U), while Gr^W_16 H_c^16(Z)^{S_5}=Gr^W_16 H_c^16(Z^(1))=M_[6] direct-sum M_[5,1] for the multiplicity Hodge structures in the rational S_6-isotypic decomposition.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0117-3",
+      "statement": "The S_6-invariant weight-16 corner injects into the degree 16, 14 and 12 constant-coefficient corners of V with twists 0, -1 and -2, and the S_5-invariant corner injects into the degree 16 and 14 constant-coefficient corners of C_univ with twists 0 and -1.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0117-4",
+      "statement": "The explicitly stated hypothesis (H-S) implies that T_16(Z)^{S_6}=T_16(U) is a sum of Q(8), and the explicitly stated hypothesis (H-C) implies that the [6]- and [5,1]-isotypic components of T_16(Z) are sums of Q(8).",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": false,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0112-2",
+    "CLM-0112-6",
+    "CLM-0112-7",
+    "CLM-0112-8"
+  ],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [
+    {
+      "id": "GAP-0117-HS",
+      "statement": "Prove that Gr^W_{2j}H_c^{2j}(V;Q) is a finite direct sum of Q(-j) for j=6,7,8."
+    },
+    {
+      "id": "GAP-0117-HC",
+      "statement": "Prove that Gr^W_16 H_c^16(C_univ;Q) and Gr^W_14 H_c^14(C_univ;Q) have Tate types Q(-8) and Q(-7), respectively."
+    },
+    {
+      "id": "GAP-0117-ISOTYPIC",
+      "statement": "Control every S_6-isotypic multiplicity of Gr^W_16 H_c^16(Z;Q) other than [6] and [5,1]; rational representation theory alone does not constrain its Hodge type."
+    },
+    {
+      "id": "GAP-0117-ASSEMBLY",
+      "statement": "Construct and verify the required closed support in M_{6,6}, the stack-level comparison or singleton-fibre recovery, the Gysin degree shift, and support exhaustion before identifying T_16(Z) with the exact RED-0001 contribution."
+    },
+    {
+      "id": "GAP-0117-SCOPE",
+      "statement": "Nonreduced bases, stack-inertia component formulas, integral coefficients and coarse-moduli descent require separate arguments."
+    }
+  ],
+  "id": "ATT-0117",
+  "ingest_normalizations": [],
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "verified-dependency-specialization",
+    "PGL_2-torsor-descent-to-a-scheme-atlas",
+    "full-monodromy-right-torsor-component-criterion",
+    "compact-support-localization-and-weight-strictness",
+    "projective-bundle-formula-with-constant-Tate-coefficients",
+    "rational-finite-group-transfer",
+    "S_6-to-S_5-branching",
+    "semisimplicity-of-pure-polarizable-Hodge-structures",
+    "compact-support-Borel-Moore-duality"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Combines the dual-confirmed absence of purely type-(ii) balanced components with the PGL_2 quotient to make full S_6 monodromy automatic on every connected 15-dimensional etale atlas chart, yielding a connected irreducible 17-dimensional ordered model before applying the established constant-coefficient corner comparisons."
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_path": "proof/packets/generated/C66-001-v4.md",
+  "packet_sha256": "13f880c2a12fa369d4fc2f75b476e70c0dbc070f25221987d06d1ff452af1c7d",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0112",
+      "kind": "attempt",
+      "note": "Verified C66-GEO-COMP dependency. Uses CLM-0112-2, CLM-0112-6, CLM-0112-7 and CLM-0112-8 for smoothness and dimension of the balanced quotient, density of type (i) in every component, and automatic full S_6 ordering monodromy. No Hodge, weight or Tate conclusion is imported."
+    },
+    {
+      "id": "REV-0157",
+      "kind": "confirmation_review",
+      "note": "First independent confirmation of ATT-0112, including the component-density and scheme-atlas monodromy clauses used here."
+    },
+    {
+      "id": "REV-0158",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0112. Its caveats concerning stack inertia, nonreduced bases, integral coefficients, M_{6,6}, and absence of Tate content are preserved."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0033",
+    "FND-0053",
+    "FND-0054",
+    "FND-0064",
+    "FND-0075",
+    "FND-0130",
+    "FND-0131",
+    "FND-0134",
+    "FND-0139",
+    "FND-0142",
+    "FND-0144",
+    "FND-0151",
+    "FND-0152",
+    "FND-0153",
+    "FND-0155",
+    "FND-0162",
+    "FND-0164",
+    "FND-0165",
+    "FND-0166",
+    "FND-0167",
+    "FND-0168"
+  ],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "summary": "On every 15-dimensional scheme atlas chart of the balanced PGL_2-quotient, the dual-confirmed component theorem ATT-0112 makes the type-(i) monodromy hypothesis automatic. The resulting 17-dimensional ordered model is connected and irreducible with full S_6 monodromy. Compact-support localization and the P^2/P^1 projective-bundle formulas then place the exact weight-16 trivial and standard representation corners inside constant-coefficient weight corners of the balanced base and its universal curve. This proves precise conditional Tate criteria but does not prove those base corners Tate, control the remaining S_6-isotypics, or assemble a supported contribution in M_{6,6}.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-004",
+  "theorem_scope": {
+    "base": "a connected component V of a separated finite-type etale scheme atlas of Hbar^bal=[H^bal/PGL_2]",
+    "coefficients": "Q",
+    "conditional_hypotheses_not_proved": {
+      "H-C": "Gr^W_16 H_c^16(C_univ;Q) is a finite direct sum of Q(-8), and Gr^W_14 H_c^14(C_univ;Q) is a finite direct sum of Q(-7)",
+      "H-S": "Gr^W_{2j}H_c^{2j}(V;Q) is a finite direct sum of Q(-j) for j=6,7,8"
+    },
+    "g": 6,
+    "ground_field": "C",
+    "n": 6,
+    "not_covered": [
+      "Tate type of the full T_16(Z), since S_6-isotypic components other than [6] and [5,1] remain uncontrolled",
+      "proof of either conditional hypothesis (H-S) or (H-C)",
+      "a morphism from Z to M_{6,6}, a closed support there, support exhaustion, purity, Gysin, or RED-0001",
+      "singleton-fibre recovery or stack-level full faithfulness of the forgetful construction",
+      "a base consisting only of a type-(ii) point",
+      "algebraic-stack inertia formulas, nonreduced bases, integral coefficients, or coarse-moduli descent",
+      "existence of balanced composed covers through intermediate curves of genus two or three"
+    ],
+    "objects": [
+      "the pulled-back balanced Casnati-Ekedahl family C_univ->V",
+      "A=P_V(pi_*L)",
+      "the distinct-support open U",
+      "the ordering torsor Z=Ord(U)",
+      "the level-one quotient Z^(1)=Z/S_5"
+    ],
+    "verified_dependency_inputs": [
+      "ATT-0112",
+      "REV-0157",
+      "REV-0158"
+    ]
+  },
+  "theorem_statement": "Theorem (balanced-quotient atlas corner lemma). Work over C with Q-coefficients. Let Hbar^bal=[H^bal/PGL_2], and let V be a connected component of a separated finite-type etale scheme atlas of Hbar^bal. Pull back the universal balanced tetragonal (CE)+(N) family pi:C_univ->V and its degree-six residual line bundle L. Put A=P_V(pi_*L), let U be the distinct-support open, let Z=Ord(U)->U be the finite etale right S_6-torsor of orderings, let D_univ be the universal divisor in C_univ x_V A, and put Z^(1)=D_univ x_A U=Z/S_5. Then: (1) V is smooth, normal and integral of dimension 15; A, U and Z have pure dimension 17. The ordering monodromy over U is S_6, so Z->U is connected of degree 720 and Z is irreducible. (2) Writing E=Gr^W_16 H_c^16(Z;Q), there are canonical injections of pure weight-sixteen Hodge structures E^{S_6}=Gr^W_16 H_c^16(U;Q) -> Gr^W_16 H_c^16(V;Q) direct-sum Gr^W_14 H_c^14(V;Q)(-1) direct-sum Gr^W_12 H_c^12(V;Q)(-2), and E^{S_5}=Gr^W_16 H_c^16(Z^(1);Q) -> Gr^W_16 H_c^16(C_univ;Q) direct-sum Gr^W_14 H_c^14(C_univ;Q)(-1). If E=direct-sum_rho V_rho tensor M_rho is its rational S_6-isotypic decomposition, then E^{S_5}=M_[6] direct-sum M_[5,1]. (3) Consequently, hypothesis (H-S), that Gr^W_{2j}H_c^{2j}(V;Q) is a sum of Q(-j) for j=6,7,8, implies T_16(Z)^{S_6}=T_16(U) is a sum of Q(8); hypothesis (H-C), that Gr^W_16 H_c^16(C_univ;Q) is a sum of Q(-8) and Gr^W_14 H_c^14(C_univ;Q) is a sum of Q(-7), implies that the [6]- and [5,1]-isotypic components of T_16(Z)=W_{-16}H_16^{BM}(Z;Q) are sums of Q(8). Neither (H-S) nor (H-C) is asserted here."
+}

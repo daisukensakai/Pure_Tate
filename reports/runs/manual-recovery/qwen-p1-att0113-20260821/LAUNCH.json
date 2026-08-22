@@ -1,0 +1,18 @@
+{
+  "artifact_id": "REV-0159",
+  "campaign_id": "C66-001",
+  "engine": "qwen",
+  "error": "agent failed with exit 1: Qwen API HTTP 429: {'message': 'Your token-plan 1-week quota has been exhausted. The quota will reset at 08-21 12:50:00 UTC.', 'id': '03abf8e6-9eea-4422-bb57-c5ad1b005657', 'type': 'insufficient_quota', 'code': 'insufficient_quota'}",
+  "event_state": "failed",
+  "note": "Qwen P1 of ATT-0113 cursor-grok TATE-SUPPORT; official first reviewer; no model fallback",
+  "output": "proof/reviews/REV-0159.json",
+  "reservation": "/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/reservations/REV-0159.json",
+  "review_pass": 1,
+  "run_id": "RUN-C66-001-20260821T034932430827Z-78460",
+  "run_ledger": "reports/runs/RUN-C66-001-20260821T034932430827Z-78460.json",
+  "status": "stopped",
+  "stop_reason": "engine_failure",
+  "target_attempt_id": "ATT-0113",
+  "task_id": "TASK-V-ATT-0113-P1",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/manual-recovery/qwen-p1-att0113-20260821/run_rev.py\", line 145, in main\n    artifact = run_task(\n  File \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/pure_tate/agents.py\", line 2822, in run_task\n    _raise_infrastructure_failure(\n  File \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/pure_tate/agents.py\", line 2723, in _raise_infrastructure_failure\n    raise error_type(detail, trace[\"id\"], trace[\"path\"])\npure_tate.paired.ObservableInfrastructureError: agent failed with exit 1: Qwen API HTTP 429: {'message': 'Your token-plan 1-week quota has been exhausted. The quota will reset at 08-21 12:50:00 UTC.', 'id': '03abf8e6-9eea-4422-bb57-c5ad1b005657', 'type': 'insufficient_quota', 'code': 'insufficient_quota'}\n"
+}

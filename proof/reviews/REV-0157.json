@@ -1,0 +1,256 @@
+{
+  "attempt_id": "ATT-0112",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0112-1",
+      "note": "Normal-sheaf unobstructedness for fixed-target covers. In char 0 d(psi):T_C->psi^*T_Y is a nonzero map of line bundles hence injective; coker N_psi is torsion of length deg(psi^*T_Y)-deg(T_C)=d(2-2h)+2g-2, H^1(N_psi)=0. Deformation complex [T_C->psi^*T_Y] quasi-isomorphic to N_psi[0], so smooth of pure dimension len(N_psi). At (d,g,h)=(4,6,0) this is 18. Standard Hurwitz-stack dimension; matches FND-0159, reproved and generalised.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0112-2",
+      "note": "mu:Sym^2 E->gamma_*(omega^2) is fibrewise surjective by the CE resolution (valid for every finite flat Gorenstein degree-4 cover), hence surjective with locally free rank-2 base-change-compatible kernel F, deg F=9 (chi Sym^2 E=42, chi gamma_*R=31, chi F=11). Openness of H^bal: F_t=O(a)+O(9-a), a<=4, h^0(F_t(-5))=5-a>=1, equals 1 iff a=4 (balanced); {h^0<=1} open by upper semicontinuity. Correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0112-3",
+      "note": "Factorization shape (2*2, h<=3 by Riemann-Hurwitz). Dimension: source script-F_h over B_h=Cov_2^h(P^1) (dim 2h+2) has fibre Cov_2^6(Y) (dim 14-4h), so dim<=16-2h; image dimension<=source dimension for finite-type morphism, and c_h is in any case quasi-finite by Steinitz finiteness of intermediate fields of the separable degree-4 extension. Bound dim H^{comp,1}<=14 holds.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0112-4",
+      "note": "Discriminant of the rank-4 algebra gamma_*O_C gives a fibrewise-nonzero section of (det gamma_*O_C)^{-2}, fibrewise O(18); residual base twist does not change the induced map to P^18. Quasi-finiteness: fixed branch support S gives finitely many degree-4 etale covers of P^1\\S (pi_1 topologically finitely generated). Delta_18 closed irreducible dim 17; FND-0158(a) gives H^comp subset br^{-1}(Delta_18). Logically independent and redundant bound, correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0112-5",
+      "note": "H^bal cap H^{comp,0}=empty via CLM-0088-2 (no balanced fibre hyperelliptic; corroborated by FND-0125 F=O(2)+O(7)). H^ii subset H^{comp,1} via FND-0153 type-(ii) factorization through a genus-1 curve. Hence non-primitive locus dim<=max(14,12,10)=14, codim>=18-14=4. Dependencies dual-confirmed/adjudicated.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0112-6",
+      "note": "H^bal smooth pure dim 18, so every connected component has dim 18; a component contained in H^ii would have dim<=14, contradiction. Closure of H^ii dim<=14; complement dense open in H^i. Nonemptiness from FND-0154. Valid pure-dimension argument.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0112-7",
+      "note": "PGL_2 acts on the target with finite stabilisers (subgroups of finite Aut(C)), so dim[H^bal/PGL_2]=18-3=15. PGL_2 connected preserves each connected component (orbits connected), so pi_0 preserved. Non-primitive locus dim<=14-3=11, codim>=4. Correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0112-8",
+      "note": "Smooth atlas components are smooth hence normal/integral/reduced (Grauert honoured, FND-0131). Image open dim 18 not contained in H^ii, so a type-(i) fibre exists; FND-0155 gives H_beta=S_6; FND-0151 gives pi_0(Z_beta)=H_beta\\S_6 singleton, Z_beta connected degree 720; normality gives irreducibility; FND-0152 induction functor is identity. U_beta connected because smooth surjective with connected fibres (open of P^2 minus discriminant hypersurface) over connected base. All inputs dual-confirmed/adjudicated.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2025-01-15",
+  "finding_candidates": [
+    {
+      "key": "balanced-type-i-automatic-codim4",
+      "rationale": "Discharges the hypothesis that FND-0155 left as an assumption; reusable by any downstream campaign step that needs to apply the S_6 family-monodromy statement unconditionally over the balanced locus. Not asserted by FND-0153 or FND-0155 themselves.",
+      "statement": "On the universal balanced tetragonal family and on every connected component of every smooth atlas of H^bal, the type-(i) hypothesis of FND-0155 is automatic: no connected component of H^bal is contained in the type-(ii) locus; equivalently the non-primitive locus has dimension at most 14 inside the smooth 18-dimensional stack H^bal (codimension at least four), and at most 11 after the PGL_2-quotient. Balanced type-(i) covers exist and are dense in every connected component.",
+      "status": "candidate"
+    },
+    {
+      "key": "balanced-locus-open-pure-18",
+      "rationale": "Reusable geometric structure result: openness+purity of the balanced splitting stratum in the fixed-target stack, together with the method (semicontinuity + normal-sheaf + Steinitz quasi-finiteness) that respects the blocked branch-point-count route.",
+      "statement": "The balanced locus H^bal = {F ~= O(4)+O(5)} is OPEN in the unrestricted fixed-target tetragonal stack H_{4,6}(P^1), proved by semicontinuity of h^0(F_t(-5)) on the base-change-compatible CE relations bundle F=ker(Sym^2 E -> gamma_*(omega^2)); hence H^bal is smooth of pure dimension 18, reduced and normal. All dimension bounds are obtained from ramification-profile-independent deformation theory and quasi-finiteness, never from branch-point counts.",
+      "status": "candidate"
+    }
+  ],
+  "id": "REV-0157",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "b5da42de000e3eb78cfeef12ac80476ba8a1660de443e13c72d49511641b0c22",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Dual-confirmed (REV-0108/0109). CLM-0065-9/3/5 identify Z_beta with the CE evaluation-failure model in (E); filtered reduction with no global splitting respected.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0108",
+      "note": "First confirmation of ATT-0065; corroborates the dependency. Non-load-bearing beyond ATT-0065.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0109",
+      "note": "Second confirmation of ATT-0065; non-load-bearing beyond ATT-0065.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Dual-confirmed (REV-0110/0116). CLM-0066-5/6 (closed Abel-Jacobi incidence model; stack-level finite etale S_6-torsor) used in (E).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0110",
+      "note": "First confirmation of ATT-0066; non-load-bearing beyond ATT-0066.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0116",
+      "note": "Second confirmation of ATT-0066; its Grauert-reducedness caveat is honoured (all projective-bundle/local-freeness statements over reduced bases).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0088",
+      "note": "Dual-confirmed (REV-0139/0142). CLM-0088-2 (no balanced hyperelliptic fibre) for (C); CLM-0088-1/3 (L=omega_C(-D), h^0(L)=3) to apply FND-0153; CLM-0088-8 (P^2-bundle and ordering torsor over reduced base) for (E).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0139",
+      "note": "First confirmation of ATT-0088; records codimension expectations are bookkeeping only (no Gysin), respected.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0142",
+      "note": "Second confirmation of ATT-0088; reduced-base assumption and torsor-on-Conf_6 scope respected.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0086",
+      "note": "Dual-confirmed (REV-0135/0138). CLM-0086-1/2 (jump stratum B_4 empty, h^0(L)=3 identically) removes the k=4 branch in (E).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0135",
+      "note": "First confirmation of ATT-0086; non-load-bearing beyond ATT-0086.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0138",
+      "note": "Second confirmation of ATT-0086; F-versus-F^vee orientation consistent with the Euler-characteristic pin in Lemma 2.1.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0159",
+      "note": "Smoothness/dimension 18 of the fixed-target Hurwitz stack independent of ramification profile; reproduced and generalised in Lemma 1.2; sole source of Section 3 dimensions.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0153",
+      "note": "Type (i)/(ii) dichotomy on a balanced fibre; places H^ii inside H^{comp,1}; base-point-freeness automatic via FND-0130/0134 as recorded therein.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0158",
+      "note": "Part (a) (nontrivially factoring cover never simply branched) used for the redundant Section 4 bound; part (b) only in the non-load-bearing Remark 3.4.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0154",
+      "note": "Non-emptiness of H^bal (explicit bielliptic-composed family); makes (D)'s density/type-(i) non-emptiness non-vacuous.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0155",
+      "note": "Type-(i) single-fibre monodromy S_6 and family clause; (D) supplies exactly the type-(i) hypothesis it left as an assumption.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0151",
+      "note": "Coset/stabiliser normalization for a finite etale right S_6-torsor; connectedness equivalent to H=S_6, not transitivity. Followed verbatim.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0152",
+      "note": "Induction identity and clause (ii) (no Tate upgrade); with H_beta=S_6 the induction functor is the identity.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0144",
+      "note": "Stack-inertia component/degree formula invalid over a stack with inertia; honoured by stating all torsor/monodromy claims over schemes only.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0150",
+      "note": "Source-backed record of Casnati-Ekedahl Thm 2.1 and Canning-Larson Lemma 10.6; basis for (CE)+(N) holding at every point of H.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0157",
+      "note": "Universal CE bundles over the Hurwitz stack and base-invisibility of a residual twist of L; justifies canonicity of P_S(pi_*L) and the Abel-Jacobi section.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0107",
+      "note": "Abel-Jacobi model correctness and agreement with Proj(pi_*L) over the constant-h^0 open; licenses the model substitution in (E).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0125",
+      "note": "Hyperelliptic degree-4 covers have F=O(2)+O(7); independent corroboration of H^bal cap H^{comp,0}=empty.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0130",
+      "note": "Smooth plane quintics excluded from the balanced locus, so L has no base point there; discharges part of FND-0153's base-point-freeness input.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0134",
+      "note": "Balanced weak-CE fibre has h^0(L)=3 with L base-point-free and general member reduced; second base-point-freeness input for FND-0153.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0156",
+      "note": "Convention discipline for W_f/L; Section 0.1 restates the convention and Lemma 2.1 pins the F-orientation by Euler characteristics.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0131",
+      "note": "Grauert requires a reduced base; honoured (H^bal smooth hence reduced; smooth atlas reduced; general-base clause carries reducedness).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0142",
+      "note": "h^0(O_C(D))=2, h^0(L)=3, h^1(L)=2 with no jumping under (CE)+(BAL)+(N); constancy input to apply FND-0153 everywhere on H^bal.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0139",
+      "note": "Fibrewise-balanced implies jump stratum empty, B_4=empty, h^0(L) identically 3; corroborates ATT-0086 for the incidence model.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Lemma 10.6 CE line-bundle convention and deg(W_f|_C)=4g+12-4f (deg W_4=20, deg W_5=16, deg L=6 at g=6); convention cross-checked against the Euler-characteristic orientation computation.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0112-P1",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: challenge the load-bearing smoothness/pure-dimension input (Lemma 1.2 / FND-0159) by arguing that the FULL fixed-target Hurwitz stack, rather than only its simply-branched open, could be singular or have varying tangent dimension at wildly/highly ramified covers, which would collapse every downstream dimension count (18 for H, 16-2h for H^{comp,h}, the codimension-4 conclusion). Outcome: the attack FAILS. In characteristic zero d(psi):T_C->psi^*T_Y is a nonzero map of line bundles, hence injective, so the deformation complex [T_C->psi^*T_Y] is quasi-isomorphic to the torsion normal sheaf N_psi. Its length is deg(psi^*T_Y)-deg(T_C)=d(2-2h)+2g-2, which by Riemann-Hurwitz equals deg(R) and is determined solely by (d,g,h) - independent of the ramification profile - while H^1(N_psi)=0 for a torsion sheaf on a curve. Thus tangent dimension is constant (18) and obstructions vanish at every point, giving smoothness of pure dimension across all ramification types. This is precisely the ramification-profile-independent route that avoids the blocked branch-point-count inference. Secondary attacks also failed: (i) the openness of H^bal via h^0(F_t(-5))=5-a (balanced iff a=4, and h^0>=1 always since a<=4) correctly isolates the balanced locus as the open {h^0<=1}; (ii) the composed-locus bound needs only dim(image)<=dim(source), so it survives even if quasi-finiteness of c_h is dropped; (iii) Section 4's discriminant bound is declared redundant, so the theorem stands without it. No stack-vs-coarse, rational-vs-integral, cohomology-vs-Borel-Moore, Tate-twist, Gysin/Kunneth, spectral-sequence, invariants-vs-coinvariants, semisimplification, predicted-motive, or stable-pair attack applies: the theorem is a pure geometry lemma that explicitly disclaims all Hodge/weight/Tate/Borel-Moore/coarse/integral content and states clause (E) only over schemes (respecting FND-0144). Packet hash verified: attempt packet_sha256 b5da42de... matches TASK.json, and packet_binding_sha256 76cc8a6d... matches after HARNESS-IDENTITY-COERCE-0001.",
+  "subproblem_id": "C66-GEO-COMP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let k be an algebraically closed field of characteristic zero. Let H = H_{4,6}(P^1) denote the moduli stack over k of pairs (C,gamma) with C a smooth projective connected curve of genus six and gamma : C -> P^1 a finite morphism of degree four onto a FIXED P^1, morphisms being isomorphisms of C commuting with gamma; equivalently, H is the open substack of the Kontsevich stack Mbar_{6,0}(P^1,4) whose source curve is smooth. Every gamma in H is finite flat Gorenstein, hence (imported source input, see Section 0) carries the Casnati-Ekedahl data: gamma_*O_C = O direct-sum E^vee with E locally free of rank three and degree nine; the relative-canonical embedding i : C -> X = P(E^vee) with p : X -> P^1, p_*O_X(1) = E and (N) in strong form i^*O_X(1) = omega_{C/P^1} = omega_C tensor gamma^*O_{P^1}(2); and (CE) the two-term ideal resolution 0 -> O_X(-4) tensor p^*det F -> O_X(-2) tensor p^*F -> I_C -> 0 with F locally free of rank two. Throughout, F is taken in the packet orientation F = p_*(I_C(2)) = ker(Sym^2 E -> gamma_*(omega_{C/P^1}^{tensor 2})), of rank two and degree +9, and W := i^*(O_X(2) tensor p^*F^vee), W_f := (O_X(2) tensor gamma^*O_{P^1}(-f))|_C, D := gamma^*O_{P^1}(1), L := W_5 tensor omega_C^{-1} (FND-0156 convention discipline). Let H^bal be the locus where F is isomorphic to O_{P^1}(4) direct-sum O_{P^1}(5); for h in {0,1,2,3} let H^{comp,h} be the locus of gamma admitting a factorization gamma = q o psi with psi : C -> Y and q : Y -> P^1 finite of degree two and Y a smooth projective connected curve of genus h, and H^comp the union of the H^{comp,h}; let H^ii be the type-(ii) locus of FND-0153 inside H^bal (phi_L : C -> P^2 = P(H^0(L)^vee) finite of degree two onto a smooth plane cubic) and H^i = H^bal minus H^ii its type-(i) complement. THEN: (A) H is a Deligne-Mumford stack of finite type over k, smooth over k of pure dimension 18, and more generally, for Y a fixed smooth projective connected curve of genus h, the stack of finite degree-d covers of Y by smooth projective connected genus-g curves is smooth of pure dimension 2g-2+d(2-2h); H^bal is OPEN in H, hence smooth over k of pure dimension 18, in particular reduced and normal, and every nonempty connected component of H^bal has dimension exactly 18. (B) Every nontrivial factorization of a gamma in H has both steps of degree two and intermediate genus h in {0,1,2,3}; H^{comp,h} is a constructible subset of |H| with dim H^{comp,h} <= 16-2h, so in particular dim H^{comp,1} <= 14 and dim H^comp <= 16. Independently of that count, the discriminant morphism br : H -> |O_{P^1}(18)| = P^18 sending gamma to its branch divisor Br(gamma) = sum_p (e_p - 1) gamma(p) of degree 18 is quasi-finite, so the non-simply-branched locus br^{-1}(Delta_18) (Delta_18 the non-reduced-divisor hypersurface, closed irreducible of dimension 17) is closed of dimension at most 17 and contains H^comp by FND-0158(a). (C) H^bal intersect H^{comp,0} is empty and H^ii is contained in H^{comp,1}; consequently dim H^ii <= 14 and the entire non-primitive locus H^bal intersect H^comp has dimension at most 14, i.e. codimension at least four in H^bal. (D) Therefore NO connected component of H^bal is contained in H^ii: every nonempty connected component of H^bal contains a type-(i) point, the closure of H^ii in H^bal is closed of dimension at most 14, and H^i contains the dense open substack H^bal minus that closure, of complement codimension at least four. Since H^bal is nonempty (FND-0154), the balanced type-(i) locus is nonempty and dense in every connected component. The same statements hold verbatim for the PGL_2-quotient Hbar^bal = [H^bal / PGL_2], which is smooth of pure dimension 15, whose connected components correspond bijectively to those of H^bal (PGL_2 being connected) and in which the non-primitive locus has dimension at most 11, again codimension at least four. (E) Consequently the type-(i) hypothesis of FND-0155 is automatic on the universal balanced family. Precisely: let V be a k-scheme locally of finite type with a smooth surjective morphism V -> H^bal (a smooth atlas), or more generally let S be a reduced locally Noetherian k-scheme carrying a genus-six degree-four family with target P^1_S satisfying (CE)+(N)+(BAL), such that no connected component of S has classifying image contained in H^ii - which holds in particular whenever that image has dimension at least 15. Let S_beta be any connected component, U_beta the distinct-support (reduced-support) open of the Abel-Jacobi P^2-bundle P_{S_beta}(pi_*L) (available by ATT-0088/CLM-0088-8, the base being reduced; equal to the CE evaluation-failure model by ATT-0065/CLM-0065-9 and ATT-0066/CLM-0066-5, CLM-0066-6), and Z_beta = Ord(U_beta) -> U_beta the finite etale right S_6-torsor of orderings of the universal degree-six divisor. Then U_beta is connected, the monodromy image H_beta = im(pi_1^et(U_beta) -> S_6) equals S_6, the orbit set H_beta \\ S_6 of left multiplication (the set of right cosets H_beta g, with component stabilizer g^{-1} H_beta g in the FND-0151 normalization) is a singleton, Z_beta is connected and finite etale of degree 720 over U_beta, and whenever U_beta is in addition normal, integral and locally Noetherian - which holds for every connected component of a smooth atlas - Z_beta is irreducible with stabilizer S_6; the FND-0152 induction functor Ind_{H_beta}^{S_6} is then the identity, so that F(Z_beta)^{S_6} = F(U_beta) for every additive S_6-equivariant functor F to Q-vector spaces or mixed Q-Hodge structures. NOT ASSERTED: any Hodge, weight, purity, Tate, Borel-Moore or RED-0001 conclusion (FND-0053 and FND-0152(ii) stand); any statement over algebraic stacks with inertia (FND-0144 stands), over nonreduced bases, with integral coefficients, or on coarse moduli (FND-0075 stands); any statement about M_{6,6}, its forgetful map, Aut(C,Gamma), closedness, purity, Gysin maps or codimension in M_{6,6}; the number of connected components of H^bal or its irreducibility; existence of balanced non-primitive covers with intermediate genus two or three; the H_alpha object F(Z_alpha^1) as an H_alpha-object.",
+  "verdict": "confirmed"
+}
