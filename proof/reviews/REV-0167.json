@@ -1,0 +1,204 @@
+{
+  "attempt_id": "ATT-0119",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0119-1",
+      "note": "Recomputed in-review: for Cbar: y^3=x(x-1), the x-map has valuations 1,1,-2 at 0,1,infinity, none divisible by 3, so total ramification there; Riemann-Hurwitz gives 2g-2=3(-2)+3(2)=0, g(Cbar)=1. For C=Cbar minus the three ramification points, the complement Y is 0-dimensional, so H_c^k(Y)=0 for k>=1; compact-support localization then gives H_c^2(C)=H_c^2(Cbar)=Q(-1) and Gr^W_1 H_c^1(C)=H^1(Cbar) of types (1,0),(0,1) (weight-0 piece is Q^3/Q). H_c^0(C)=0. Matches FND-0170.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0119-2",
+      "note": "Compact-support Kunneth as MHS on S=C^8. Degree bookkeeping 2a+b=12, a+b=8 forces a=b=4; Gr^W_12 selects Q(-4) tensor H^1(Cbar)^{tensor 4}; choosing the (1,0) line in each of the four factors gives a nonzero one-dimensional Hodge component of type (8,4), with binomial(8,4) multiplicity. No spectral sequence or differential is involved.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0119-3",
+      "note": "Existence of a simply-branched balanced geometric fibre is adjudicated in packet FND-0172 (Route A dimension comparison and Route B Bujokas-Patel). FND-0158(a) gives simply-branched => non-composed, while FND-0153 type (ii) is composed, so the fibre is type (i) and not in the type-(ii) locus. The constant family over S=C^8 is reduced locally Noetherian, satisfies (CE)+(N)+(BAL) by constant pullback, and its classifying image is a single type-(i) point, so every hypothesis of the exact theorem holds.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0119-4",
+      "note": "For the constant family, pi_*L is free of rank 3, A=S x P^2, U=S x U_0, Z=S x Z_0. U_0 is nonempty by FND-0134 (Bertini: general member six distinct points); it is an open of |L_0|=P^2 with discriminant complement of dimension <=1, hence a smooth connected affine surface. H_c^4(U_0)=Q(-2): localization against Delta_0 uses H_c^k(Delta_0)=0 for k>=3 since dim Delta_0=1 (equivalently Poincare duality on a connected surface, H_c^4(U_0)^vee=H^0(U_0)(2)). The phrase 'isomorphic to P^2' attaches to |L_0|, not to U_0.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0119-5",
+      "note": "Kunneth on U=S x U_0 gives a direct MHS summand H_c^{12}(S) tensor H_c^4(U_0) = H_c^{12}(S)(-2) of H_c^{16}(U); its Gr^W_16 is Gr^W_12 H_c^{12}(S) tensor Q(-2), so the type-(8,4) class yields a nonzero type-(10,6) class. (10,6) obeys Deligne's bound for dim U=10. Finite etale transfer over Q injects Gr^W_16 H_c^{16}(U) into Gr^W_16 H_c^{16}(Z) (trace/pi^*=720 id; FND-0152-style averaging), and the class is S_6-invariant since pulled back from U. A finite direct sum of Q(-8) has only type (8,8), so Gr^W_16 H_c^{16}(Z) and dually T_16(Z), with the theorem's own no-extra-twist convention, are not Tate.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0119-6",
+      "note": "The class is an honest Kunneth summand of H_c^{16}(U) itself, namely the third FND-0167 summand Gr^W_12 H_c^{12}(S)(-2), not a lift of Gr^W_16 H_c^{16}(S). For the product family its restriction to Delta=S x Delta_0 vanishes because H_c^4(Delta_0)=0, so FND-0171's obstruction (which concerns the first summand and the 16-dimensional discriminant over a 15-dimensional base) does not apply. Consistent with FND-0171's explicit statement that Gr^W_16 H_c^{16}(U) and Gr^W_16 H_c^{16}(Z) remained open.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0119-scope-compliance",
+      "note": "No compact-support Leray with constructible coefficients is used (FND-0164 respected by non-use); T_16(Z) is never identified with the global kernel K (FND-0168); no closed embedding, Gysin map, image, or support-exhaustion statement in M_{6,6} is constructed; the disproof exhibits a surviving non-Tate summand inside T_16(Z)/Gr^W_16 H_c^{16}(Z) itself, satisfying the theorem's own disproof criterion. Q-coefficients and scheme-level (no stack inertia) throughout.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2025-01-24",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate_pending_corroboration",
+      "candidate_id": "FC-REV-0167-1",
+      "key": "for-any-allowed-geometric-fibre-c-0-gamma-0-and-any-separated-finite-type-c-sc",
+      "statement": "For any allowed geometric fibre (C_0,gamma_0) and any separated finite-type C-scheme B, the constant clause-(E) family over B has U = B x U_0 with U_0 a smooth connected affine surface open in P^2, and compact-support Kunneth places Gr^W_m H_c^m(B)(-2) as a direct MHS summand of Gr^W_{m+4} H_c^{m+4}(U) for every m, via H_c^4(U_0)=Q(-2). Consequently any theorem asserting Tate type of Gr^W_16 H_c^{16}(Z) uniformly over all allowed bases forces Gr^W_12 H_c^{12}(B) to be Tate for every allowed B, which is false (B=C^8 for the affine Kummer curve of FND-0170 gives a nonzero type-(8,4) component, hence a type-(10,6) class after tensoring with Q(-2)). A repaired C66-TATE-SUPPORT must fix a named base/atlas or impose (H-S)-type corner hypotheses including j=6; universal quantification over reduced locally Noetherian bases is refuted by ATT-0119.",
+      "supports_finding_id": null,
+      "title": "Constant-family Kunneth obstruction to universally quantified Tate claims"
+    },
+    {
+      "adjudication": "novel_candidate_pending_corroboration",
+      "candidate_id": "FC-REV-0167-2",
+      "key": "in-the-fnd-0167-corner-injection-gr-w-16-h-c-16-u-into-gr-w-16-h-c-16-s",
+      "statement": "In the FND-0167 corner injection Gr^W_16 H_c^{16}(U) into Gr^W_16 H_c^{16}(S) + Gr^W_14 H_c^{14}(S)(-1) + Gr^W_12 H_c^{12}(S)(-2), transport of non-Tateness from a base corner summand is controlled by the restriction H_c^{2j}(P^2) -> H_c^{2j}(Delta_0) on the fibre complement Delta_0 (a plane curve, dim 1). The fibre-degree-2j summand survives removal of the discriminant precisely when H_c^{2j}(Delta_0)=0, i.e. when 2j > 2 dim Delta_0. Thus the j=2 summand Gr^W_12 H_c^{12}(S)(-2) always survives in product families (H_c^4 of a curve vanishes), while the j=0 and j=1 summands can be killed or altered by restriction to the 16-dimensional discriminant. This explains why FND-0171 blocks the j=8/first-summand attack of ATT-0118 but does not block the ATT-0119 fibre-fundamental-class attack.",
+      "supports_finding_id": null,
+      "title": "Which FND-0167 corner summands transport non-Tateness to U"
+    },
+    {
+      "adjudication": "novel_candidate_pending_corroboration",
+      "candidate_id": "FC-REV-0167-3",
+      "key": "the-exact-theorem-of-task-c66-m-004-c66-tate-support-is-disproved-by-the-witness",
+      "statement": "The exact theorem of TASK-C66-M-004/C66-TATE-SUPPORT is disproved by the witness S=C^8 equipped with the constant simply-branched balanced type-(i) family: Gr^W_16 H_c^{16}(Z;Q) contains a nonzero Hodge type-(10,6) class, so it is not a finite direct sum of Q(-8) and T_16(Z) is not a finite direct sum of Q(8). The witness lies entirely in the simply-branched locus and already in the S_6-invariant ([6]) isotypic component. This does not resolve RED-0001, does not address a fixed 15-dimensional atlas of Hbar^bal, and does not touch the conditional content of FND-0167, which survives because the witness base violates (H-S) at j=6 and j=7.",
+      "supports_finding_id": null,
+      "title": "Exact C66-TATE-SUPPORT theorem (campaign revision 4) is false as quantified"
+    }
+  ],
+  "id": "REV-0167",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "notes": "Binding check: attempt packet_id C66-001-v4, packet_sha256 53f72092580d582fac76b59aee9b284a0132bdd957156b053b4b98a47c646dd5, and packet_binding_sha256 76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7 all match TASK.json exactly; target dictionary matches TASK.json field by field. Evidence limitation: native web evidence was unavailable; no repo search was performed; all verification used TASK.json, the packet, and the attempt text, with the Hodge computations (Riemann-Hurwitz, localization, Kunneth degree bookkeeping, Tate types, transfer) recomputed independently in this review. The attempt's completion attestation correctly records resolves_exact_target=false: this confirms the disproof of the quantified lemma, not the campaign case RED-0001.",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "53f72092580d582fac76b59aee9b284a0132bdd957156b053b4b98a47c646dd5",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "CLM-0112-2",
+      "note": "H^bal open, smooth, pure dimension 18; substance matches adjudicated packet findings FND-0162/FND-0163.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0112-4",
+      "note": "Non-simply-branched locus dimension bound; packet FND-0172 records this bound (and the <=14 quotient version) as dual-confirmed and uses it in Route A.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0112-6",
+      "note": "No connected component of H^bal is contained in the type-(ii) locus; follows from FND-0162's dim H^ii <= 14 < 18.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0112-8",
+      "note": "Over a reduced locally Noetherian (CE)+(N)+(BAL) base with no component image in the type-(ii) locus, U is the distinct-support open of the Abel-Jacobi P^2-bundle and Z the finite etale S_6-ordering torsor; substance matches packet FND-0160/FND-0149, and for the constant product family it is elementary.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0112",
+      "note": "Dual-confirmed C66-GEO-COMP dependency per the attempt; dual-confirmation status is cross-referenced in the packet (FND-0172 cites CLM-0112-4 as dual-confirmed). Load-bearing only through CLM-0112-2/4/6/8.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0157",
+      "note": "First confirmation of ATT-0112. Indirect and non-load-bearing for this review beyond supporting ATT-0112; not independently re-read.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0158",
+      "note": "Second confirmation of ATT-0112. Indirect and non-load-bearing for this review beyond supporting ATT-0112; not independently re-read.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0158",
+      "note": "Packet text verified. Part (a) is load-bearing: a nontrivially factoring degree-four cover is never simply branched, so a simply-branched balanced fibre is not type (ii).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0172",
+      "note": "Packet text verified. Load-bearing: supplies existence of a simply-branched point of H^bal, which FND-0154 alone cannot supply.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0170",
+      "note": "Packet text verified. Kummer-curve and compact-support Kunneth facts are reproduced in the attempt and were recomputed in this review (H_c^2(C)=Q(-1), Gr^W_1 H_c^1(C)=H^1(Cbar)).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0165",
+      "note": "Packet text verified. Corner exactness of Gr^W and the no-extra-Tate-twist Borel-Moore duality convention are used throughout; constant Q-coefficients only.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0171",
+      "note": "Packet text verified. Used to distinguish the present class from the blocked j=8 atlas-corner lift; the attempt's class avoids the block by being a genuine Kunneth summand of H_c^{16}(U).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0169",
+      "note": "Packet text verified. Cited only to distinguish the present Z-class from the j=8 atlas-corner failure; non-load-bearing for the construction itself.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0168",
+      "note": "Packet text verified. Respected (no identification of T_16(Z) with K); non-load-bearing beyond scope compliance.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0164",
+      "note": "Packet text verified. Unused: the argument uses only Kunneth, localization, Poincare duality on a surface, and finite-etale transfer over Q; no constructible-coefficient compact-support Leray appears.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0152",
+      "note": "Packet text verified. Rational finite-etale transfer identifying H_c(U) with the S_6-invariants of H_c(Z) is scheme-level and applies to the product base.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0153",
+      "note": "Packet text verified. Type (i)/(ii) dichotomy used to identify a simply-branched (hence primitive) balanced fibre as type (i).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0134",
+      "note": "Packet text verified. Load-bearing for nonemptiness of the reduced-support open U_0 (general member of |L| is six distinct points).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0136",
+      "note": "Packet text verified. Supplies a nonreduced member so the discriminant is nonempty; non-load-bearing for H_c^4(U_0)=Q(-2), which only needs the complement to have dimension <=1.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0119-P1",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: the counterexample base S=C^8 has dimension 8, so Z has dimension 10, far from the campaign's intended 17-dimensional model over a 15-dimensional atlas of Hbar^bal; if clause (E) of ATT-0112 secretly required bases whose classifying image has dimension at least 15 (FND-0162's sufficient criterion for automatic type-(i)), the counterexample would be out of scope and the disproof would evaporate. Outcome: the attack fails against the exact statement, which quantifies over every reduced locally Noetherian C-scheme carrying a (CE)+(N)+(BAL) family with no component image in the type-(ii) locus, imposing no dimension, dominance, or non-isotriviality condition; the constant simply-branched type-(i) family over C^8 is in scope, and the exhibited type-(10,6) class is a genuine Kunneth summand of H_c^{16}(U) itself (the third FND-0167 summand), satisfying the theorem's own disproof criterion. Secondary attacks were also checked and fail: (i) H_c^2(C)=Q(-1) for the punctured elliptic Kummer curve is correct because the three-point complement has H_c^k=0 for k>=1 (points have complex dimension 0), not because the punctured curve is proper; (ii) H_c^4(U_0)=Q(-2) is correct because the discriminant complement has complex dimension 1, hence H_c^k=0 for k>=3 (an initial suspicion that H_c^4 of the discriminant curve might be nonzero confused it with H_c^2); (iii) the (10,6) type obeys Deligne's bound for dim U=10 and survives finite-etale transfer over Q by strictness of W; (iv) no constructible Leray (FND-0164), no stack-versus-coarse issue, no integral-coefficient descent, no semisimplification gap, no spectral-sequence differential, and no Gysin shift enters the argument.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Over C with Q-coefficients, on the ordered reduced-support Casnati-Ekedahl evaluation-failure model of ATT-0112 clause (E): let S be a reduced locally Noetherian C-scheme carrying a (CE)+(N)+(BAL) genus-six degree-four family with no connected component image contained in the type-(ii) locus; let U be the distinct-support open of the Abel-Jacobi P^2-bundle A=P_S(pi_*L); let Z=Ord(U) be the finite etale right S_6-torsor of orderings. Write T_16(Z):=W_{-16}H^{BM}_{16}(Z;Q), canonically dual to Gr^W_16 H_c^{16}(Z;Q) with no extra Tate twist. Prove that T_16(Z) is a finite direct sum of Q(8), equivalently Gr^W_16 H_c^{16}(Z;Q) is a finite direct sum of Q(-8). This is the H_alpha-object of this model Z itself, including the simply-branched and complementary non-simply-branched loci in Z and every rational S_6-isotypic component of T_16(Z). It does not include, and is not disproved by failure of, the universally quantified constant-coefficient hypotheses (H-S) or (H-C) of FND-0167: those corners of an atlas S of Hbar^bal or of the universal curve are atlas-dependent, and the j=8 instance of (H-S) is false for some allowed etale atlas components (FND-0169; ATT-0118). Conditional Tate-transfer of the [6] and [5,1] multiplicity spaces under named (H-S)/(H-C) is a lemma, not this theorem. A disproof must exhibit a surviving non-Tate summand in T_16(Z) (equivalently in Gr^W_16 H_c^{16}(Z;Q)), not merely a non-Tate corner of some atlas of Hbar^bal (FND-0171). Do not identify T_16(Z) with the global kernel K=ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)) (FND-0168). Do not construct a closed embedding, Gysin map, image, or support-exhaustion statement in M_{6,6}. Respect FND-0164: compact-support Leray with constructible coefficients does not inherit a top-weight vanishing proved only for constant Q. This lemma does not resolve the campaign Hodge/Tate group RED-0001.",
+  "verdict": "confirmed"
+}

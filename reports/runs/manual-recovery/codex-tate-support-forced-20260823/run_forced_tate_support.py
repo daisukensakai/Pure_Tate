@@ -62,19 +62,33 @@ FORCED_PROMPT = (
     "reports/runs/manual-recovery/codex-tate-support-forced-20260823/FORCED_TATE_SUPPORT.md"
 )
 EXACT_THEOREM = (
-    "Over C with Q-coefficients, on the balanced Casnati-Ekedahl evaluation-failure "
-    "model Z=Ord(U) of a (CE)+(N)+(BAL) genus-six degree-four family on a reduced "
-    "locally Noetherian scheme atlas of the balanced tetragonal stack as in the "
-    "dual-confirmed ATT-0112, prove that the exact target graded piece of the "
-    "H_alpha-object of Z is Tate of type Q(8) in Borel-Moore degree 16 "
-    "(equivalently Gr^W_16 H_c^{16}(Z;Q) is a direct sum of Q(-8)). This includes "
-    "the simply-branched and complementary non-simply-branched loci, every "
-    "S_6-isotypic component, and the constant-coefficient corners of the balanced "
-    "base and universal curve needed under FND-0165 and FND-0167. Do not identify "
-    "this with the global kernel K=ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)) "
-    "(FND-0168). Do not construct a closed embedding, Gysin map, image, or "
-    "support-exhaustion statement in M_{6,6}. This lemma does not resolve the "
-    "campaign Hodge/Tate group RED-0001."
+    "Over C with Q-coefficients, on the ordered reduced-support Casnati-Ekedahl "
+    "evaluation-failure model of ATT-0112 clause (E): let S be a reduced locally "
+    "Noetherian C-scheme carrying a (CE)+(N)+(BAL) genus-six degree-four family "
+    "with no connected component image contained in the type-(ii) locus; let U "
+    "be the distinct-support open of the Abel-Jacobi P^2-bundle A=P_S(pi_*L); "
+    "let Z=Ord(U) be the finite etale right S_6-torsor of orderings. Write "
+    "T_16(Z):=W_{-16}H^{BM}_{16}(Z;Q), canonically dual to Gr^W_16 H_c^{16}(Z;Q) "
+    "with no extra Tate twist. Prove that T_16(Z) is a finite direct sum of Q(8), "
+    "equivalently Gr^W_16 H_c^{16}(Z;Q) is a finite direct sum of Q(-8). This is "
+    "the H_alpha-object of this model Z itself, including the simply-branched and "
+    "complementary non-simply-branched loci in Z and every rational S_6-isotypic "
+    "component of T_16(Z). It does not include, and is not disproved by failure "
+    "of, the universally quantified constant-coefficient hypotheses (H-S) or "
+    "(H-C) of FND-0167: those corners of an atlas S of Hbar^bal or of the "
+    "universal curve are atlas-dependent, and the j=8 instance of (H-S) is false "
+    "for some allowed etale atlas components (FND-0169; ATT-0118). Conditional "
+    "Tate-transfer of the [6] and [5,1] multiplicity spaces under named "
+    "(H-S)/(H-C) is a lemma, not this theorem. A disproof must exhibit a "
+    "surviving non-Tate summand in T_16(Z) (equivalently in Gr^W_16 "
+    "H_c^{16}(Z;Q)), not merely a non-Tate corner of some atlas of Hbar^bal "
+    "(FND-0171). Do not identify T_16(Z) with the global kernel "
+    "K=ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)) (FND-0168). Do not construct a "
+    "closed embedding, Gysin map, image, or support-exhaustion statement in "
+    "M_{6,6}. Respect FND-0164: compact-support Leray with constructible "
+    "coefficients does not inherit a top-weight vanishing proved only for "
+    "constant Q. This lemma does not resolve the campaign Hodge/Tate group "
+    "RED-0001."
 )
 
 grok_workers.max_grok_workers_from_config = lambda _cfg: MAX_GROK_WORKERS
@@ -151,6 +165,15 @@ def main() -> int:
                 )
             if task.get("subproblem_id") != SUBPROBLEM_ID:
                 raise RuntimeError("task subproblem mismatch: %s" % task.get("subproblem_id"))
+            assigned = None
+            for item in campaign.get("subproblems") or []:
+                if item.get("id") == SUBPROBLEM_ID:
+                    assigned = item.get("exact_theorem")
+                    break
+            if assigned != EXACT_THEOREM:
+                raise RuntimeError(
+                    "forced TATE-SUPPORT exact_theorem drifted from campaign"
+                )
             task = attach_working_context(task, campaign)
             task["selected_engine"] = ENGINE
             task["prompt"] = FORCED_PROMPT

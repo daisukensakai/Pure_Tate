@@ -94,6 +94,24 @@ class PacketBindingTests(unittest.TestCase):
                     campaign_packet_binding_sha256("C66-001"), baseline
                 )
 
+    def test_binding_ignores_subproblem_exact_theorem(self):
+        baseline = campaign_packet_binding_sha256("C66-001")
+        content = campaign_packet_record("C66-001")["packet_sha256"]
+        campaign = load_campaign("C66-001")
+        mutated = copy.deepcopy(campaign)
+        for item in mutated["subproblems"]:
+            if item.get("id") == "C66-TATE-SUPPORT":
+                item["exact_theorem"] = "A different cell theorem."
+        with mock.patch(
+            "pure_tate.campaigns.load_campaign", return_value=mutated
+        ):
+            self.assertEqual(
+                campaign_packet_binding_sha256("C66-001"), baseline
+            )
+            self.assertEqual(
+                campaign_packet_record("C66-001")["packet_sha256"], content
+            )
+
     def test_binding_covers_every_identity_bearing_input(self):
         binding = campaign_packet_binding("C66-001")
         self.assertEqual(
@@ -603,14 +621,19 @@ class FocusedCampaignTests(unittest.TestCase):
         tasks = campaign_mathematics_tasks("C66-001")
         by_subproblem = {task["subproblem_id"]: task for task in tasks}
         self.assertEqual(by_subproblem["C66-GEO-Z"]["status"], "verified")
-        # Dual-confirmed GEO-Z and GEO-H0 discharge the early geometry chain, so
-        # GEO-COMP is executable. Downstream Tate/CEX cells still wait on COMP.
+        # Dual-confirmed GEO-Z, GEO-H0, and GEO-COMP (ATT-0112) discharge the
+        # geometry chain. TATE-SUPPORT is executable on T_16(Z); TATE-ASSEMBLY
+        # stays blocked. ATT-0118 is quarantined and does not verify SUPPORT.
         self.assertEqual(by_subproblem["C66-GEO-H0"]["status"], "verified")
         self.assertEqual(
             by_subproblem["C66-GEO-H0"].get("blocked_dependencies") or [],
             [],
         )
-        self.assertEqual(by_subproblem["C66-GEO-COMP"]["status"], "ready")
+        self.assertEqual(by_subproblem["C66-GEO-COMP"]["status"], "verified")
+        self.assertEqual(
+            by_subproblem["C66-GEO-COMP"]["verified_attempt_id"],
+            "ATT-0112",
+        )
         self.assertEqual(
             by_subproblem["C66-GEO-COMP"].get("blocked_dependencies") or [],
             [],
@@ -636,10 +659,21 @@ class FocusedCampaignTests(unittest.TestCase):
                 geo_comp_inputs
             )
         )
-        self.assertEqual(by_subproblem["C66-TATE-SUPPORT"]["status"], "blocked")
+        self.assertEqual(by_subproblem["C66-TATE-SUPPORT"]["status"], "ready")
         self.assertEqual(
-            by_subproblem["C66-TATE-SUPPORT"]["blocked_dependencies"],
-            ["C66-GEO-COMP"],
+            by_subproblem["C66-TATE-SUPPORT"].get("blocked_dependencies") or [],
+            [],
+        )
+        self.assertIsNone(by_subproblem["C66-TATE-SUPPORT"]["verified_attempt_id"])
+        self.assertIn("T_16(Z)", by_subproblem["C66-TATE-SUPPORT"]["exact_theorem"])
+        self.assertNotIn(
+            "constant-coefficient corners of the balanced base",
+            by_subproblem["C66-TATE-SUPPORT"]["exact_theorem"],
+        )
+        self.assertEqual(by_subproblem["C66-TATE-ASSEMBLY"]["status"], "blocked")
+        self.assertEqual(
+            by_subproblem["C66-TATE-ASSEMBLY"]["blocked_dependencies"],
+            ["C66-TATE-SUPPORT"],
         )
         self.assertEqual(by_subproblem["C66-COMP-RANK"]["status"], "verified")
         self.assertEqual(
@@ -656,12 +690,22 @@ class FocusedCampaignTests(unittest.TestCase):
         quarantined = campaign_quarantined_attempt_ids("C66-001")
         self.assertNotIn("ATT-0088", quarantined)
         self.assertIn("ATT-0089", quarantined)
+        self.assertIn("ATT-0118", quarantined)
+        att0118 = ROOT / "proof" / "attempts" / "ATT-0118.json"
+        self.assertEqual(
+            hashlib.sha256(att0118.read_bytes()).hexdigest(),
+            "513a93803e00cc84ee4deefbbfbc6a314b66c6291161e477094bf8ee3f12f58b",
+        )
         from pure_tate.campaign_driver import _load_bearing_experiments
 
         self.assertEqual(_load_bearing_experiments("C66-001"), [])
         report = campaign_status("C66-001")
-        self.assertIn(
+        self.assertNotIn(
             "C66-TATE-SUPPORT requires C66-GEO-COMP",
+            report["unresolved_proof_dependencies"],
+        )
+        self.assertIn(
+            "C66-TATE-ASSEMBLY requires C66-TATE-SUPPORT",
             report["unresolved_proof_dependencies"],
         )
         self.assertNotIn(
@@ -677,6 +721,7 @@ class FocusedCampaignTests(unittest.TestCase):
             [
                 "C66-COMP-COMP",
                 "C66-COMP-RANK",
+                "C66-GEO-COMP",
                 "C66-GEO-H0",
                 "C66-GEO-Z",
             ],

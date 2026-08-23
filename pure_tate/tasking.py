@@ -194,69 +194,71 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
             ).get("artifacts", [])
         ]
         own_verification = verified_dependencies.get(subproblem["id"])
-        tasks.append(
-            {
-                "id": "TASK-C66-M-%03d" % ordinal,
-                "phase": "mathematics",
-                "role": "focused-prover-or-counterexample-searcher",
-                "campaign_id": campaign_id,
-                "campaign_revision": campaign["campaign_revision"],
-                "target_claim_id": campaign["target_claim_id"],
-                "target": packet["target"],
-                "subproblem_id": subproblem["id"],
-                "lane": subproblem["lane"],
-                "subproblem": subproblem,
-                "context_revision": campaign["context_revision"],
-                "packet_id": packet["packet_id"],
-                "packet_sha256": packet["packet_sha256"],
-                "packet_binding_sha256": packet.get("packet_binding_sha256"),
-                "input_packet": packet["packet_path"],
-                "blocked_routes": campaign["blocked_routes"],
-                "new_input_declared": [],
-                "input_artifacts": (
-                    dependency_inputs + context_inputs + experiment_inputs
-                ),
-                "dependency_artifacts": {
-                    dependency_id: verified_dependencies[
-                        dependency_id
-                    ]["attempt_id"]
-                    for dependency_id in dependency_ids
-                    if dependency_id in verified_dependencies
-                },
-                "context_artifacts": {
-                    dependency_id: verified_dependencies[
-                        dependency_id
-                    ]["attempt_id"]
-                    for dependency_id in context_dependency_ids
-                    if dependency_id in verified_dependencies
-                },
-                "verified_attempt_id": (
-                    own_verification["attempt_id"]
-                    if own_verification is not None
-                    else None
-                ),
-                "verification_artifacts": (
-                    own_verification["artifacts"]
-                    if own_verification is not None
-                    else []
-                ),
-                "blocked_dependencies": missing_dependencies,
-                "route_policy": (
-                    "A blocked route may appear in methods_used only when new_inputs "
-                    "contains a matching route and evidence description."
-                ),
-                "prompt": "prompts/CAMPAIGN_MATHEMATICS.md",
-                "output": "proof/attempts/ATT-####.json",
-                "status": (
-                    "verified"
-                    if own_verification is not None
-                    else (
-                        "ready" if not missing_dependencies else "blocked"
-                    )
-                ),
-                "created_on": datetime.date.today().isoformat(),
-            }
-        )
+        task = {
+            "id": "TASK-C66-M-%03d" % ordinal,
+            "phase": "mathematics",
+            "role": "focused-prover-or-counterexample-searcher",
+            "campaign_id": campaign_id,
+            "campaign_revision": campaign["campaign_revision"],
+            "target_claim_id": campaign["target_claim_id"],
+            "target": packet["target"],
+            "subproblem_id": subproblem["id"],
+            "lane": subproblem["lane"],
+            "subproblem": subproblem,
+            "context_revision": campaign["context_revision"],
+            "packet_id": packet["packet_id"],
+            "packet_sha256": packet["packet_sha256"],
+            "packet_binding_sha256": packet.get("packet_binding_sha256"),
+            "input_packet": packet["packet_path"],
+            "blocked_routes": campaign["blocked_routes"],
+            "new_input_declared": [],
+            "input_artifacts": (
+                dependency_inputs + context_inputs + experiment_inputs
+            ),
+            "dependency_artifacts": {
+                dependency_id: verified_dependencies[
+                    dependency_id
+                ]["attempt_id"]
+                for dependency_id in dependency_ids
+                if dependency_id in verified_dependencies
+            },
+            "context_artifacts": {
+                dependency_id: verified_dependencies[
+                    dependency_id
+                ]["attempt_id"]
+                for dependency_id in context_dependency_ids
+                if dependency_id in verified_dependencies
+            },
+            "verified_attempt_id": (
+                own_verification["attempt_id"]
+                if own_verification is not None
+                else None
+            ),
+            "verification_artifacts": (
+                own_verification["artifacts"]
+                if own_verification is not None
+                else []
+            ),
+            "blocked_dependencies": missing_dependencies,
+            "route_policy": (
+                "A blocked route may appear in methods_used only when new_inputs "
+                "contains a matching route and evidence description."
+            ),
+            "prompt": "prompts/CAMPAIGN_MATHEMATICS.md",
+            "output": "proof/attempts/ATT-####.json",
+            "status": (
+                "verified"
+                if own_verification is not None
+                else (
+                    "ready" if not missing_dependencies else "blocked"
+                )
+            ),
+            "created_on": datetime.date.today().isoformat(),
+        }
+        exact_theorem = subproblem.get("exact_theorem")
+        if isinstance(exact_theorem, str) and exact_theorem.strip():
+            task["exact_theorem"] = exact_theorem
+        tasks.append(task)
     return tasks
 
 

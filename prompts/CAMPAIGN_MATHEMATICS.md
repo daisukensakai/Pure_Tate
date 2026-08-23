@@ -34,10 +34,13 @@ substitute for proof:
 - Material found under `repo/` is not proved unless it is a verified dependency
   artifact listed in `TASK.json` or an established working-context fact.
 
-State one exact theorem. Separate proved steps, source-backed inputs, computational
-hypotheses, and gaps. Finite experiments cannot close a proof. Address the applicable
-failed routes listed by the task; do not silently reuse them. A counterexample lane
-must show survival in the exact target, not merely locate non-Tate geometry.
+State one exact theorem. If `TASK.json` contains a nonempty `exact_theorem`, that
+is the assigned theorem to prove or disprove; do not replace it by a stronger
+universally quantified packaging, and do not omit its excluded claims. Separate
+proved steps, source-backed inputs, computational hypotheses, and gaps. Finite
+experiments cannot close a proof. Address the applicable failed routes listed by
+the task; do not silently reuse them. A counterexample lane must show survival in
+the exact target, not merely locate non-Tate geometry.
 
 If genuinely new evidence reopens a blocked route, record it in `new_inputs` with
 the canonical `route`, a nonempty `evidence` explanation, and

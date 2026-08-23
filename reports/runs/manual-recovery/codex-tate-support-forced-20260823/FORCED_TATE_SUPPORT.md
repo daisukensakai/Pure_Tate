@@ -7,15 +7,18 @@ and not `C66-TATE-ASSEMBLY`.
 
 Prove or disprove the exact `C66-TATE-SUPPORT` theorem stated in `TASK.json` as
 `exact_theorem`. Return a complete, gap-free argument that resolves
-`C66-TATE-SUPPORT`: Tate type of the exact codimension-13 contribution
-supported on the balanced evaluation-failure model `Z`.
+`C66-TATE-SUPPORT`: Tate type of `T_16(Z)` (equivalently
+`Gr^W_16 H_c^{16}(Z;Q)`) on the ordered reduced-support model `Z=Ord(U)` of
+ATT-0112 clause (E).
 
 Do not return a reduction, partial result, isolated missing lemma, "better
 effort" summary, or explanation of why the problem is difficult. Do not leave
 TATE-SUPPORT frontier obligations as `gap_markers`. In particular do not leave
-the constant-coefficient corners (H-S)/(H-C), the remaining `S_6`-isotypics, or
-the complementary non-simply-branched incidence as gaps. Keep working—using
-both parallel Grok workers as needed—until the TATE-SUPPORT lemma is complete.
+remaining `S_6`-isotypics of `T_16(Z)` or the complementary non-simply-branched
+incidence inside `Z` as gaps. The universally quantified constant-coefficient
+hypotheses (H-S)/(H-C) of FND-0167 are **not** completeness obligations of this
+lemma (FND-0169, FND-0171). Keep working—using both parallel Grok workers as
+needed—until the TATE-SUPPORT lemma is complete.
 
 This lemma does **not** resolve the campaign exact target
 `W_{-16}H^{BM}_{16}(M_{6,6};Q)`. Set `resolves_exact_target` to false. Do not
@@ -64,9 +67,10 @@ gate. A free-form citation or renamed method does not reopen a blocked route.
 Principal worker override (harness-enforced for this turn):
 
 - You have two Grok worker identities. Dispatch both and let them run in
-  parallel on distinct narrow TATE-SUPPORT sub-tasks (for example: constant-
-  coefficient corners of the balanced 15-fold / universal curve versus the
-  remaining `S_6`-isotypics under FND-0164).
+  parallel on distinct narrow TATE-SUPPORT sub-tasks (for example: remaining
+  `S_6`-isotypics of `T_16(Z)` under FND-0164 versus the complementary
+  non-simply-branched incidence inside `Z`). Do not treat (H-S) or (H-C) on
+  an arbitrary atlas of `Hbar^bal` as part of this lemma.
 - Each identity has a 256-turn continue budget. Treat that as unlimited for
   this session. Prefer spending turns over stopping short.
 - You remain the mastermind. Workers read and extract; you prove and write
