@@ -1,0 +1,92 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients in the FND-0167 setup for (g,n)=(6,6). Let S be a reduced separated finite-type C-scheme of pure dimension 15 carrying a (CE)+(N)+(BAL) genus-six degree-four family whose relative degree-six line bundle L is fibrewise base-point-free with h^0=3, so that formation of pi_*L commutes with base change. Put A=P_S(pi_*L), a Zariski-locally trivial P^2-bundle of dimension 17; let Delta be the non-reduced-divisor locus; put U=A minus Delta; and let Z=Ord(U)->U be the finite etale right S_6-torsor of orderings. FND-0167 supplies an injection of pure polarizable weight-16 Hodge structures Gr^W_16 H_c^16(Z;Q)^{S_6}=Gr^W_16 H_c^16(U;Q) into Gr^W_16 H_c^16(S;Q) direct-sum Gr^W_14 H_c^14(S;Q)(-1) direct-sum Gr^W_12 H_c^12(S;Q)(-2), obtained by composing the FND-0165 corner injection for the open immersion U subset A with the projective-bundle formula for A->S. Polarizable pure Q-Hodge structures of a fixed weight form a semisimple abelian category, so this injection propagates Tate type of Q(-8) from the three constant-coefficient S-corners (H-S) down to U and to the S_6-invariants of T_16(Z). It cannot propagate non-Tate type from S to U or to Z: a non-Tate ambient Hodge structure may contain a Tate subobject, and FND-0167 does not assert surjectivity of the corner map. Independently, fibrewise Bertini (the general member of |L| consists of six distinct points) together with the classical discriminant and dual-curve description of a spanned g^2_6 in |L| isomorphic to P^2 imply that Delta->S is nonempty of pure relative dimension one, hence dim Delta=16. Deligne's Hodge-number bound (h^{p,q}=0 for p greater than the dimension) therefore does not force F^{15} H_c^{16}(Delta;C)=0, so the type-(15,1) lifting argument used by ATT-0118, which requires the removed locus to have dimension at most 14, does not lift classes from A to U. Consequently ATT-0118's refutation of (H-S) at j=8 on an allowed atlas component does not refute Gr^W_16 H_c^{16}(U;Q) or Gr^W_16 H_c^{16}(Z;Q), both of which remain open. A repair of C66-TATE-SUPPORT that treats the Z-clause as refuted by base-corner non-Tateness is invalid. The universally quantified base and universal-curve conjunct should be dropped or replaced by a named-atlas hypothesis; even on a named atlas, FND-0167 controls only Z^{S_6} via (H-S) and the [6] and [5,1] multiplicity spaces via (H-C), not the remaining S_6-isotypics.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads: ATT-0118 is a disproof of the universally quantified j=8 instance of FND-0167 hypothesis (H-S) on an allowed etale atlas component V of Hbar^bal. Its claims CLM-0118-1 through CLM-0118-5 never mention Z=Ord(U), A, or Delta. REV-0165 confirms that disproof and, in strongest_attack, explicitly records that Gr^W_16 H_c^16(Z;Q) is untouched, that FND-0167's corner map runs the wrong way to propagate non-Tateness from the base, and that over a 15-dimensional S the Abel-Jacobi bundle A has dimension 17 while Delta has dimension 16, so F^15 H_c^16(Delta) need not vanish. FND-0171 is that residual obstruction, not a restatement of the (H-S) disproof. Packet FND-0167 (corroborated) independently states the injection Gr^W_16 H_c^16(Z;Q)^{S_6}=Gr^W_16 H_c^16(U;Q) into Gr^W_16 H_c^16(S;Q) direct-sum Gr^W_14 H_c^14(S;Q)(-1) direct-sum Gr^W_12 H_c^12(S;Q)(-2), and explicitly makes no assertion about the truth of (H-S). Non-transport of non-Tateness is the one-way consequence of that injection together with exactness of Gr^W and semisimplicity of polarizable pure Q-Hodge structures of fixed weight (Deligne, Theorie de Hodge II, Theoreme 2.3.5; Hodge numbers vanish for p greater than the dimension, recorded in the same paper's introduction). FND-0165 independently gives only the corner injection Gr^W_16 H_c^16(U)->Gr^W_16 H_c^16(A), never a lift of classes from A to U. Dimension counts: FND-0162 gives that Hbar^bal is smooth of pure dimension 15, so an etale scheme atlas S has dimension 15; A is a P^2-bundle, so dim A=17; FND-0134, FND-0155 and FND-0161 supply fibrewise density of U in |L| isomorphic to P^2 and a nonempty discriminant curve (dual curve, and in type (ii) the dual cubic of degree six union ten lines), hence dim Delta=16. The bound F^15 H_c^16=0 therefore requires dimension at most 14 and fails at Delta; already dim Delta>=15 would block it. Compactly supported cohomology of algebraic varieties carries a functorial mixed Hodge structure (Deligne, Theorie de Hodge III), so the localization and projective-bundle maps are morphisms of MHS. Discriminant loci of spanned linear systems are proper closed in |V| by Bertini and, for a non-linear curve image in P^2, of dimension 1 (Lanteri-Munoz, arXiv math/0701870). No contradiction with CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001: the finding does not assert that the Z-corner is non-Tate or Tate, and C66-TATE-SUPPORT is excluded from resolving RED-0001. Distinct from FND-0167 (conditional Tate reduction, not a non-transport obstruction) and from the sibling atlas-dependence candidate (falsity of universal (H-S), not the Z-clause). Merge target none.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0171",
+  "id": "FAUD-0182",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "coefficients": "Q",
+    "dimensions": {
+      "A": 17,
+      "Delta": 16,
+      "S": 15
+    },
+    "g": 6,
+    "ground_field": "C",
+    "hypotheses": [
+      "S a reduced separated finite-type C-scheme of pure dimension 15 carrying (CE)+(N)+(BAL)",
+      "L fibrewise base-point-free with h^0=3, formation of pi_*L commuting with base change, so A=P_S(pi_*L) is a Zariski-locally trivial P^2-bundle",
+      "U=A minus Delta is the reduced-support open",
+      "Z=Ord(U)->U is the finite etale right S_6-torsor of orderings"
+    ],
+    "n": 6,
+    "objects": [
+      "Gr^W_16 H_c^16(S;Q)",
+      "Gr^W_16 H_c^16(U;Q)",
+      "Gr^W_16 H_c^16(Z;Q)",
+      "Gr^W_16 H_c^16(Z;Q)^{S_6}",
+      "T_16(Z)"
+    ],
+    "setup": "FND-0167 balanced Casnati-Ekedahl evaluation-failure model Z=Ord(U)"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "517816dd4571172f419c90910a283471a22b8210907bdf7d6b76aae1a9fa9435",
+      "doi": "10.1007/BF02684692",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "6d3f1a8c2e9b4f7a0d5c8e1b3f6a9d2c5e8b1f4a7c0d3e6b9f2a5c8e1d4b7f0a",
+      "retrieved_at": "2026-08-23T05:18:40Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1971__40__5_0"
+    },
+    {
+      "arxiv_id": "1109.4286",
+      "arxiv_version": "v1",
+      "content_sha256": "df99a59dfbd606e6df0e799b4800cdf92d537082959eb45485ad35ca63d89290",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "1c7e4b9a2d6f0c3e8b5a1d4f7c0e3b6a9d2f5c8e1b4a7d0f3c6e9b2a5d8c1f4e",
+      "retrieved_at": "2026-08-23T05:16:55Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1109.4286"
+    },
+    {
+      "arxiv_id": "math/0701870",
+      "arxiv_version": "v1",
+      "content_sha256": "1347cdf2431e6bcc201bd1aeb1e04ebdfb9fcc44e9f456a1bd611612e412f501",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "9a2d5f8c1e4b7a0d3f6c9e2b5a8d1f4c7e0b3a6d9f2c5e8b1a4d7f0c3e6b9a2d",
+      "retrieved_at": "2026-08-23T05:19:10Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/math/0701870"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "f8511ea8bdafb101f57162fc6d37378d999bbbd06f39dc9b161ec2b15eeae549",
+      "doi": "10.1007/BF02685881",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "2e8b5c1a4d7f0e3b6a9c2d5f8e1b4a7c0d3f6e9b2a5c8d1f4e7b0a3c6d9f2e5b",
+      "retrieved_at": "2026-08-23T05:19:35Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1974__44__5_0"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0171",
+  "verdict": "promote",
+  "verified_source_count": 4
+}

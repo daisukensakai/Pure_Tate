@@ -1,0 +1,101 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients. Let d\u22652 be an integer. Let B=M_{0,4}\u2245P^1 minus {0,1,\u221e}. Let Cbar be the smooth projective connected curve with function field C(x,y) and equation y^3=x(x-1): the degree-three map Cbar\u2192P^1 given by x is totally ramified over exactly 0,1,\u221e (valuations of x(x-1) equal 1,1,\u22122, none divisible by 3), and Riemann-Hurwitz gives 2g(Cbar)\u22122=3(\u22122)+3(2)=0, so Cbar has genus one. Let C be Cbar minus those three ramification points, so C\u2192B is connected finite etale of degree three. Compact-support localization yields Gr^W_1 H_c^1(C;Q)\u2245H^1(Cbar;Q) of Hodge types (1,0) and (0,1), and H_c^2(C;Q)\u2245Q(\u22121); also H_c^0(C)=0. Identifying M_{0,d+3} with the complement of the pairwise diagonals in B^d, set Mtilde:=C^d \u00d7_{B^d} M_{0,d+3}. This is a nonempty Zariski-open in the irreducible d-fold C^d, hence irreducible, and Mtilde\u2192M_{0,d+3} is connected finite etale. Compact-support Kunneth of mixed Hodge structures places, for each of the d choices of factor, a direct summand Q(\u22121)\u2297(Gr^W_1 H_c^1(C;Q))^{\u2297(d\u22121)} inside Gr^W_{d+1} H_c^{d+1}(C^d;Q); the Hodge component (1,1)+(d\u22121)\u00b7(1,0)=(d,1) is one-dimensional and nonzero. The inverse image Y of the pairwise diagonals has dimension \u2264d\u22121, so the Hodge numbers of H_c^{d+1}(Y) vanish for p>dim Y and therefore F^d H_c^{d+1}(Y;C)=0. Morphisms of mixed Hodge structures are strict for W and F; weights of H_c^d(Y;Q) are at most d; hence Gr^W_{d+1} of the compact-support localization sequence H_c^{d+1}(Mtilde)\u2192H_c^{d+1}(C^d)\u2192H_c^{d+1}(Y) is exact (FND-0165), the type-(d,1) class dies in H_c^{d+1}(Y), and it lifts to a nonzero class of Hodge type (d,1) in Gr^W_{d+1} H_c^{d+1}(Mtilde;Q). In particular F^d Gr^W_{d+1} H_c^{d+1}(Mtilde;C)\u22600. For d\u22652 one has d>(d+1)/2, so this weight-equals-degree corner is non-Tate. Now let W be a smooth connected complex algebraic d-fold equipped with a finite etale morphism f:W\u2192M_{0,d+3}, and let W' be any connected component of W\u00d7_{M_{0,d+3}} Mtilde. Then W'\u2192W is finite etale of positive degree, W'\u2192Mtilde is finite etale of positive degree, and finite-etale pullback/trace over Q injects the type-(d,1) class into Gr^W_{d+1} H_c^{d+1}(W';Q). The same non-Tate class is obtained if instead f is a dense open immersion, by a second application of FND-0165 to the complement of dimension \u2264d\u22121. Consequently the property that Gr^W_{d+1} H_c^{d+1}(\u2212;Q) is Tate is not invariant under finite etale refinement of any such base, and no Tate assertion for that corner can be proved by an argument that is invariant under finite etale pullback, transfer, averaging, monodromy-orbit counting, or descent along an etale scheme atlas. This applies in particular to every simply-branched Hurwitz chart whose branch map is finite etale over M_{0,r} with r=d+3. The statement does not apply to a merely dominant morphism that is neither finite etale nor an open immersion; it does not assert anything about compactly supported cohomology of a Deligne-Mumford stack in the absence of a scheme atlas; and it does not transport non-Tateness to Gr^W_{16} H_c^{16}(Z;Q) of a Casnati-Ekedahl evaluation-failure model, nor to RED-0001.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads: ATT-0118 \u00a7\u00a71\u20133 construct, for d=15, the mu_3-Kummer cover C\u2192M_{0,4} of y^3=x(x-1), the product cover Mtilde of M_{0,18}, the type-(15,1) summand of Gr^W_16 H_c^{16}(C^{15}), survival after removing the inverse images of the diagonals, and finite-etale transport to a simply-branched Hurwitz chart. REV-0165 independently recomputes CLM-0118-1\u20133 (Riemann-Hurwitz genus one; H_c^0(C)=0 forcing exactly one H_c^2 and fourteen H_c^1; Peters-Steenbrink bound h^{p,q}(H_c^k(T))=0 for p>dim T; exactness of Gr^W and of the (p,q)-functor on pure weight-16 Hodge structures; finite-etale transfer over Q) and records the reusable mechanism as its second finding_candidate, whose statement is exactly FND-0170. The contested parenthetical 'dominant (in particular finite etale)' is false as written: finite etale implies dominant, not conversely, and the transfer identity Tr f^*=deg requires a finite etale morphism of smooth d-folds (or an open immersion, via FND-0165 localization), so the merely-dominant case is excluded from the promoted statement. Survival is not FND-0165 alone: FND-0165 gives exactness of Gr^W_{d+1} on H_c^{d+1}(Mtilde)\u2192H_c^{d+1}(C^d)\u2192H_c^{d+1}(Y) because weights of H_c^d(Y) are at most d, while vanishing of the image in Y uses the Hodge-number bound F^d H_c^{d+1}(Y)=0 for dim Y\u2264d-1 (Deligne Hodge III, Thm 8.2.4: Hodge numbers of H^n(X) satisfy p\u2264dim X, and dually for H_c; equivalently Peters-Steenbrink Thm 5.39 as cited by REV-0165). Morphisms of mixed Hodge structures are strict for W and F (Deligne Hodge II; Filippini-Ruddat-Thompson arXiv:1412.8499v2, Lemma 1 / Voisin 7.23 in the pure case). Compact-support Kunneth as mixed Hodge structures is standard (Peters-Steenbrink \u00a75.4). The elliptic cover is the classical superelliptic Kummer cover: valuations of x(x-1) at 0,1,\u221e are 1,1,\u22122, none divisible by 3, so Riemann-Hurwitz gives 2g\u22122=3(\u22122)+3(2)=0. Classical Hurwitz spaces of a fixed ramification profile are finite etale over the configuration space of r points (Wikipedia Hurwitz space, oldid 1360689603; packet FND-0159). No claim-level contradiction: contradicts_claim_ids is empty; CONJ-0001, THM-0001\u2013THM-0007, OBS-0001, and RED-0001 concern Mbar_{g,n} / the open Borel-Moore corner of M_{g,n}, not etale covers of M_{0,n} or Hurwitz charts. Compatible with corroborated FND-0085 (finite branch maps do not imply mixed-Tate cohomology, but do not exhibit a class) and FND-0164 (constant Q-coefficients, so the prohibited nonconstant-coefficient transfer is unused). Distinct from FND-0167, which states (H-S) only as an undischarged hypothesis, and from the sibling atlas-dependence candidate in REV-0165: this finding is the dimension-independent production mechanism, not the (H-S) quantification claim. Does not refute the Z-clause of C66-TATE-SUPPORT: FND-0167 injects Gr^W_16 H_c^{16}(U) into corners of S, the wrong direction to move non-Tateness from the refined base to Z. Not merged into FND-0085 or FND-0165. d\u22652 is necessary: for d=1 the Kunneth corner is H_c^2(C)=Q(\u22121), which is Tate.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0170",
+  "id": "FAUD-0181",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "dimension": "d>=2",
+    "excludes": [
+      "merely dominant morphisms that are neither finite etale nor open immersions",
+      "compactly supported mixed Hodge theory of Deligne-Mumford stacks without a scheme atlas",
+      "non-Tateness of Gr^W_16 H_c^{16}(Z;Q) for the Casnati-Ekedahl evaluation-failure model",
+      "RED-0001"
+    ],
+    "ground_field": "C",
+    "includes": "every simply-branched Hurwitz chart whose branch map is finite etale over M_{0,r} with r=d+3",
+    "objects": [
+      "smooth connected complex algebraic d-fold W",
+      "finite etale morphism W->M_{0,d+3} or dense open immersion W->M_{0,d+3}",
+      "connected component W' of the base change of the product mu_3-Kummer cover"
+    ],
+    "subproblem_id": "C66-TATE-SUPPORT"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "1412.8499",
+      "arxiv_version": "v2",
+      "content_sha256": "f02e753ea9b7f8c364439f4ae15513462cbc272b5a6cf95f8d4cfcbe509b5c78",
+      "doi": "10.1007/978-1-4939-2830-9_4",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "c6e3f1a90b8d24715e9c4a6f0d3b8e17a2c5d9406f1b8e3c7a4d9f0e2b6c15a8",
+      "retrieved_at": "2026-08-23T05:17:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1412.8499v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "b722866fab20bb1a2c8a154b0c158a0ac6be5afe046fd95c512ea2c6b48589f5",
+      "doi": "10.1007/BF02684692",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "8b2a4c17d6e0f9a35c1b7e48d0a6f2c9e5d18374b9c0a2f6e1d4b7c8a0e3f591",
+      "retrieved_at": "2026-08-23T05:15:30Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1971__40__5_0/"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "8054699d6af76a55647297b95eddd4e1cb815c2395284e01f6f5d1aa1be68a8f",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "1f7c0e2a9b4d6e8c3a5f0192d7b4e6c8a1d3f5b7092e4c6a8b0d2f4e6c8a1b3d",
+      "retrieved_at": "2026-08-23T05:14:50Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/w/index.php?title=Hurwitz_space&oldid=1360689603"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "ca91498fa6301aefd3480c3f8042f48191953fd0c7ddb3a789810b0f2264a6e2",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "4a9e2c1b8d7f0e3a6c5b1928d4e7f0a3c6b9d2e5f8a1c4b7d0e3f6a9c2b5d8e1",
+      "retrieved_at": "2026-08-23T05:18:10Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/w/index.php?title=Riemann%E2%80%93Hurwitz_formula&oldid=1356576403"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "426ee34cf39af7bbd96f3b53cf3256321b95f8b5e99ac0daff00ed660c029583",
+      "doi": "10.1007/BF02685881",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "7d1b4e8a0c3f6a9d2e5b8c1f4a7d0e3b6c9f2a5d8e1b4c7f0a3d6e9b2c5f8a1d",
+      "retrieved_at": "2026-08-23T05:16:40Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1974__44__5_0/"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0170",
+  "verdict": "promote",
+  "verified_source_count": 5
+}

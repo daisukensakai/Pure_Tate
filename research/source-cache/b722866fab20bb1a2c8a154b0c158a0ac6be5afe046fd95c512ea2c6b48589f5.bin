@@ -1,0 +1,1076 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- bs5/base -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+<link rel="schema.dc" href="http://purl.org/dc/elemtens/1.1/" />
+<meta name="citation_doi" content="10.1007/BF02684692">
+<meta name="citation_title" content="Théorie de Hodge : II">
+<meta name="citation_author" content="Deligne, Pierre">
+<meta name="citation_publication_date" content="1971">
+<meta name="citation_date" content="1971-12-28">
+<meta name="citation_journal_title" content="Publications Mathématiques de l&#x27;IHÉS">
+<meta name="citation_issn" content="1618-1913">
+<meta name="citation_volume" content="40">
+<meta name="citation_language" content="fr">
+
+<meta name="citation_firstpage" content="5">
+<meta name="citation_lastpage" content="57">
+
+<meta name="citation_pdf_url" content="https://www.numdam.org/item/10.1007/BF02684692.pdf">
+
+
+
+  <title>
+  Théorie de Hodge : II
+</title>
+  
+  <link rel="stylesheet" href="/static/ptf/vendors/font-awesome/css/font-awesome.min.css" />
+  
+  <link rel="stylesheet" href="/static/ptf/vendors/bootstrap5/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/static/ptf/css/bs5/ptf.css" />
+  <link rel="stylesheet" href="/static/ptf/css/bs5/base.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+
+  <link rel="shortcut icon" type="image/svg+xml" href="/static/numdam/img/favicon.ico" />
+
+  
+
+  
+  <link rel="stylesheet" href="/static/ptf/css/bs5/style.css" />
+  <link rel="stylesheet" href="/static/ptf/css/bs5/search-bar.css" />
+  
+  <link rel="stylesheet" href="/static/numdam/vendors/owl-carousel/css/owl.carousel.css">
+  <link rel="stylesheet" href="/static/numdam/vendors/owl-carousel/css/owl.theme.css">
+  <link rel="stylesheet" href="/static/numdam/css/numdam.css" type="text/css"/>
+  
+
+
+
+  
+  
+  <link rel="stylesheet" href="/static/pmihes/css/style_pmihes.css" />
+  
+  
+  
+  
+</head>
+<body class="d-flex flex-column position-relative" >
+  
+    
+
+
+    <div id="top">
+      <div id="bandeau">
+        <div style="float:left">
+          <a href="/" class='no-focus'>
+            <img src="/static/numdam/img/numdam_logo.gif" title='Accueil' alt='Accueil' class='logo no-text-decoration'/>
+          </a>
+        </div>
+        <div class="bandeau-background">
+          <div style="float:left" class="smartphone">
+            <div class="dropdown">
+              <button class="btn light-blue dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <img src='/static/mersenne_cms/img/main-menu.svg' alt='main-menu'/>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="/journals/">Revues</a></li>
+                <li><a href="/actas/">Séminaires</a></li>
+                <li><a href="/proceedings/">Congrès</a></li>
+                <li><a href="/books/">Livres</a></li>
+                <li><a href="/lectures">Notes de cours</a></li>
+                <li><a href="/thesis">Thèses</a></li>
+                <li><a href="/authors">Auteurs</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="onoffswitch-group">
+          <div id="language-switch" title="Cliquer pour afficher le site en anglais">
+            <form id="language-switch-form" action="/i18n/setlang/" method="post"><input type="hidden" name="csrfmiddlewaretoken" value="47YKP9Tk8fbqEaHmGMGXfgUYHVSDGBkaKxta6ZiWQjptGYETnpJbUhflYDfVGDvi">
+              <div class="onoffswitch" id="lang_flags">
+                <input type="checkbox"
+                       name="language"
+                       value="en"
+                       class="onoffswitch-checkbox"
+                       id="lang_onoffswitch"
+                       checked>
+                <label class="onoffswitch-label" for="lang_onoffswitch">
+                  <span class="onoffswitch-inner" data-on="" data-off=""></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </form>
+          </div>
+          <div id="mathml-switch"
+            
+              
+                 title="Cliquer pour afficher le code source TeX"
+              
+            >
+            <form action="/set-formula-display/" method="post"><input type="hidden" name="csrfmiddlewaretoken" value="47YKP9Tk8fbqEaHmGMGXfgUYHVSDGBkaKxta6ZiWQjptGYETnpJbUhflYDfVGDvi">
+              <div class="onoffswitch">
+                <input type="checkbox" name="formula-display" value="tex" class="onoffswitch-checkbox"
+                       id="tex_onoffswitch"
+                       onclick="this.form.submit();"
+                       >
+                <label class="onoffswitch-label" for="tex_onoffswitch">
+                  <span class="onoffswitch-inner" data-on="TeX" data-off="TeX"></span>
+                  <div class="onoffswitch-switch">
+                    <div class="onoffswitch-switch-label">
+                      OFF</div>
+                  </div>
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <nav class="navbar navbar-default navbar-expand-md desktop">
+        <div class="container-fluid">
+          <ul class="nav navbar-nav">
+            <li class="nav-item active"><a class="nav-link"
+                href="/journals/">Revues</a></li>
+            <li class="nav-item"><a class="nav-link"
+                href="/actas/">Séminaires</a></li>
+            <li class="nav-item"><a class="nav-link"
+                href="/proceedings/">Congrès</a></li>
+            <li class="nav-item"><a class="nav-link"
+                href="/books/">Livres</a></li>
+            <li class="nav-item"><a class="nav-link"
+            href="/lectures">Notes de cours</a></li>
+            <li class="nav-item"><a class="nav-link"
+                href="/thesis">Thèses</a></li>
+            
+            
+            <li class="nav-item"><a class="nav-link"
+                href="/authors">Auteurs</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div id="bandeau3">
+        <div class="container" id="search-bar">
+          
+
+
+
+
+<form class="d-flex gap-2 align-items-center align-items-md-start flex-column flex-md-row" method="post" action="/search"><input type="hidden" name="csrfmiddlewaretoken" value="47YKP9Tk8fbqEaHmGMGXfgUYHVSDGBkaKxta6ZiWQjptGYETnpJbUhflYDfVGDvi">
+
+
+  
+
+<div class="px-0 text-nowrap browse-button">
+  <a href="/journals/ALL/" class="btn btn-primary search-button">Parcourir les volumes</a>
+</div>
+
+  <div class="flex-grow-1 d-flex gap-2 w-100 align-items-stretch align-items-lg-start">
+    <div class="flex-grow-1" id="line-container">
+      <div class="d-flex input-group search-group flex-nowrap">
+        <div class="search-group-inner input-group w-100" id="search-input-group">
+          <input class="searchinput form-control" type="text" name="q0" value=""
+                  placeholder="Rechercher des articles, des livres..."/>
+          <i class="searchclear fa fa-remove hidden" role="button"></i>
+          <input type="hidden" name="qt0" value="all">
+          <button type="button" class="btn btn-light dropdown-toggle border-0 rounded-0 border-end d-flex flex-nowrap align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+            
+              Tout
+            
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-item">Tout</a></li>
+            <li><a href="#" class="dropdown-item">Auteur</a></li>
+            <li><a href="#" class="dropdown-item">Titre</a></li>
+            <li><a href="#" class="dropdown-item">Bibliographie</a></li>
+            
+            
+            <li><a href="#" class="dropdown-item">Plein texte</a></li>
+          </ul>
+          
+          <button id="add-search-field" type="button" class="btn btn-light">
+            <i class="fa fa-plus"></i>
+          </button>
+          
+        </div>
+      </div>
+
+      
+      
+        
+      
+    </div>
+
+    
+    
+
+<div class="search-button-div d-flex">
+  <button type="submit" class="btn btn-primary search-button d-flex flex-nowrap align-items-center gap-1" name="Submit">
+    <i class="fa fa-search"></i>
+    <span id="search-button-text" class="d-none d-sm-block">Rechercher</span>
+  </button>
+  
+  
+    <a href="/help/"><img src="/static/mersenne_cms/img/question.png"></a>
+  
+  
+</div>
+    
+  </div>
+
+  
+</form>
+<div id="template-search-form" style="display:none">
+  
+
+<div class="input-group search-group search-group-added d-none d-lg-flex flex-nowrap">
+  <div  class="input-group flex-nowrap">
+    <div style="display:flex" class="input-group-text flex-nowrap justify-content-center align-items-center gap-1 px-2 search_first_box">
+      <input id="not##i##"" class="bt-checkbox" type="checkbox" name="not##i##" /> <label for="not##i##"">NOT</label>
+    </div>
+    <div  class="search-group-inner input-group w-100 p-0">
+      <input class="searchinput form-control rounded-0 border-0 w-100 h-100 px-2 py-1" type="text" name="q##i##"/>
+      <i class="searchclear fa fa-remove hidden"></i>
+    </div>
+  </div>
+
+  <div style="display:none" class="flex-grow-1 input-group">
+    <!-- <div class="container"> -->
+    <!-- <div class="row"> -->
+    <span class="input-group-text search_first_box">Entre</span>
+    <input class="form-control" type="text" name="q-f-##i##" placeholder="Année" />
+    <span class="input-group-text">et</span>
+    <input class="form-control rounded-0" type="text" name="q-l-##i##" placeholder="Année" />
+  <!-- </div> -->
+  <!-- </div> -->
+</div>
+<div class="input-group-btn d-flex flex-nowrap" id="search-group-btn">
+    <input type="hidden" name="qt##i##" value="author">
+    <button type="button" class="btn btn-light dropdown-toggle rounded-0 border-0 border-start border-end" data-bs-toggle="dropdown" aria-expanded="false">
+      
+        Auteur
+      
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#" class="dropdown-item">Tout</a></li>
+      <li><a href="#" class="dropdown-item">Auteur</a></li>
+      <li><a href="#" class="dropdown-item">Titre</a></li>
+      <li><a href="#" class="dropdown-item">Date</a></li>
+      <li><a href="#" class="dropdown-item">Bibliographie</a></li>
+      <li><a href="#" class="dropdown-item">Mots-clés</a></li>
+      
+      <li><a href="#" class="dropdown-item">Plein texte</a></li>
+    </ul>
+    <button type="button" class="btn btn-light border-0 remove-search-field">
+      <i class="fa fa-minus"></i>
+    </button>
+  </div>
+</div><!-- /input-group -->
+
+
+</div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  
+
+  <main class="container 
+article-container
+" style="flex-grow: 1;">
+    
+    <div class="row justify-content-center">
+      
+        <div class="container-fluid d-flex">
+          
+            <!-- Debut content -->
+            
+            <!-- Debut Left -->
+              <div>
+                
+                
+    <div id="content_left">
+      
+    </div>
+
+              </div>
+            <!-- Fin left -->
+            
+
+            
+            <div class="flex-grow-1" style="max-width: 100%;">
+              <!-- Breadcrumb -->
+              
+  
+    
+
+
+<div class="breadcrumb-row d-flex flex-column flex-xl-row gap-2">
+  
+    <div class="col-12">
+  
+    
+    <div class="breadcrumb-lg flex-wrap" style="font-size: 14px">
+      
+      <div class="order-2 order-md-1 col-12 col-md-auto" style="float: left;">
+        <ul class="cms-breadcrumb d-flex flex-nowrap mb-3">
+          
+            
+            
+              <li class="">
+                <a href="/item/PMIHES/">Publications Mathématiques de l'IHÉS</a>
+              </li>
+            
+          
+            
+            
+              <li class="">
+                <a href="/volume/PMIHES_1971__40_/">Tome 40 (1971)</a>
+              </li>
+            
+          
+            
+            
+              <li class="active">
+                <a href="/articles/10.1007/BF02684692/">p. 5-57</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+      
+        <div class="order-1 order-md-2" style="float: left;">
+          <ul class="cms-breadcrumb d-flex mb-1">
+            <li class="breadcrumb-next">
+              <a href="/articles/10.1007/BF02684693/">Suivant</a>
+            </li>
+          </ul>
+        </div>
+      
+    </div>
+    
+    <div class="breadcrumb-sm">
+      
+
+      
+
+      
+        <a href="/articles/10.1007/BF02684693/" class="btn btn-light border"><i class="fa fa-chevron-right"></i></a>
+      
+    </div>
+    <div class="clearfix">
+    </div>
+  </div>
+</div>
+
+
+  
+
+
+              <!-- center_top -->
+              
+              <!-- center_middle -->
+              
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+<div id="article-div" class="article-div">
+  
+  <div >
+    
+
+    
+    <div class="col-12">
+    
+
+      
+        
+      
+      <div style="font-size:18px;margin-bottom:10px">
+        
+
+
+  <span class="common-title article-title">
+    
+    
+    Théorie de Hodge : II
+    
+    
+  </span>
+  
+  
+
+
+
+
+      </div>
+      
+
+
+
+<div class="article-author" style="display:inline-block">
+  
+    
+
+
+
+
+
+  
+
+
+    
+      
+        
+
+
+
+
+  <div style="margin-bottom:5px; font-size: 16px">
+    <a class="author_link" href="/search?&quot;Deligne, Pierre&quot;-c">Deligne, Pierre</a>&nbsp;<sup><a href="https://www.idref.fr/031681182" target="_blank"><img width="16px" height="16px" style="margin-top:-3px; margin-left:3px" src="/static/ptf/img/logo-idref.png" alt="idref"></a></sup>
+</div>
+
+
+      
+      
+
+
+
+
+
+  
+
+
+      
+
+
+
+
+
+  
+
+
+      
+
+
+
+
+
+  
+
+
+      
+
+
+
+
+
+  
+
+
+      
+
+
+
+
+
+  
+
+
+      
+
+
+
+
+
+  
+
+
+    
+    
+      
+        
+
+
+
+
+
+      
+    
+  
+</div>
+
+
+      <div style="margin-bottom:10px">
+        
+
+
+Publications Mathématiques de l'IHÉS, Tome 40 (1971), pp. 5-57
+
+        
+
+
+      </div>
+
+      
+      
+        <div class="binary-file-icon" style="margin-top:20px;margin-bottom:10px">
+          
+<div class="wrapper-float">
+
+
+
+  <div class="d-flex flex-nowrap" style="margin-top:0px">
+    
+      <a href="/item/10.1007/BF02684692.pdf" target="_blank">
+        <img src="/static/ptf/img/pdf.svg">
+      </a>
+    
+    
+      <a href="/item/10.1007/BF02684692.djvu">
+        <img src="/static/ptf/img/djvu.svg">
+      </a>
+    
+    
+    
+    
+    
+  </div>
+
+</div>
+
+        </div>
+      
+      
+      
+    </div>
+
+    
+  </div>
+  
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+        <div>
+          <div class="col-12">
+          
+          
+            
+              <div class="mt-4 mb-4">
+                <ul class="nav nav-tabs article-tab">
+                  
+                    <li class="nav-item">
+                      <a class="nav-link active"
+                         data-bs-toggle="tab"
+                         data-bs-target="#info-tab"
+                         href="#info-tab">Détail</a>
+                    </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle="tab"
+                       data-bs-target="#citation-tab"
+                       href="#citation-tab">Export</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link "
+                       data-bs-toggle="tab"
+                       data-toggle="tab"
+                       data-bs-target="#how-to-cite-tab"
+                       href="#how-to-cite-tab">Comment citer</a>
+                  </li>
+                  
+                  
+                  
+                </ul>
+                <div class="tab-content" style="margin-top:10px">
+                  <div id="info-tab"
+                       class="tab-pane fade show active">
+                    
+                      
+                        Reçu le : <time datetime="1970-09-15">1970-09-15</time>
+                        <br>
+                      
+                      
+                        
+                        
+                      
+                      
+                      
+                        Publié le : <time datetime="1971-12-28">1971-12-28</time>
+                        <br>
+                      
+                    
+                    <!--Mis en ligne le : <time datetime="2026-02-17">2026-02-17</time><br>-->
+                    <div style="margin-top:5px">
+                      
+                        
+                          
+                        
+                        
+                          
+
+  
+    
+      
+      
+      <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=58:16653a" class="badge bg-secondary rounded-pill ref-badge extid-badge">
+        
+        
+        
+        
+        
+        
+        
+        MR
+        
+        
+        
+        
+        
+      </a>
+      &nbsp; 
+
+      
+
+    
+  
+
+
+                        
+                          
+
+  
+    
+      
+      
+      <a href="https://zbmath.org/?q=an:0219.14007" class="badge bg-secondary rounded-pill ref-badge extid-badge">
+        
+        
+        
+        
+        
+        
+        
+        
+        Zbl
+        
+        
+        
+        
+      </a>
+      
+
+      
+
+    
+  
+
+
+                        
+                        
+                        
+                          
+                            
+                          
+                        
+                      
+                    </div>
+                    
+                      
+  
+    
+      DOI : 
+        
+          <a href="https://doi.org/10.1007/BF02684692">10.1007/BF02684692</a>
+        
+        <br>
+    
+  
+
+                    
+                    
+                    
+                    <div style="margin-top:5px">
+                      
+                        
+                      
+                    </div>
+                    
+                    
+                      
+                    
+                    
+                      
+                        
+                          <div style="margin-top:5px">
+                            
+                              
+                            
+                          </div>
+                        
+                      
+                    
+                    
+                    
+                    
+                  </div>
+                  <div id="citation-tab" class="tab-pane fade">
+                    <div class="upper">
+                      <ul class="nav nav-pills">
+                        <li role="presentation" class="nav-item">
+                          <a class="nav-link active"
+                             data-bs-toggle="tab"
+                             data-bs-target="#bibtex"
+                             href="#bibtex">BibTeX</a>
+                        </li>
+                        <li role="presentation" class="nav-item">
+                          <a class="nav-link"
+                             data-bs-toggle="tab"
+                             data-bs-target="#ris"
+                             href="#ris">RIS</a>
+                        </li>
+                        <li role="presentation" class="nav-item">
+                          <a class="nav-link"
+                             data-bs-toggle="tab"
+                             data-bs-target="#enw"
+                             href="#enw">EndNote</a>
+                        </li>
+                      </ul>
+                      <div class="tab-content">
+                        <div id="bibtex" class="tab-pane fade show active">
+                          <pre class="upper-right-content" id="bibtex-div">@article{PMIHES_1971__40__5_0,
+     author = {Deligne, Pierre},
+     title = {Th\&#x27;eorie de {Hodge} : {II}},
+     journal = {Publications Math\&#x27;ematiques de l&#x27;IH\&#x27;ES},
+     pages = {5--57},
+     year = {1971},
+     publisher = {Institut des Hautes \&#x27;Etudes Scientifiques},
+     volume = {40},
+     doi = {10.1007/BF02684692},
+     mrnumber = {58 #16653a},
+     zbl = {0219.14007},
+     language = {fr},
+     url = {https://www.numdam.org/articles/10.1007/BF02684692/}
+}</pre>
+                          <button class="fa fa-clipboard copy-button btn btn-primary"
+                                  data-clipboard-action="copy"
+                                  data-clipboard-target="#bibtex-div"
+                                  aria-hidden="true"
+                                  title="Copier dans le presse-papier"></button>
+                          
+                            <a class="fa fa-download export-button btn btn-primary"
+                               title="Télécharger"
+                               href="/export_citation/PMIHES_1971__40__5_0/bib/"></a>
+                          
+                        </div>
+                        <div id="ris" class="tab-pane fade">
+                          <pre class="upper-right-content" id="ris-div">TY  - JOUR
+AU  - Deligne, Pierre
+TI  - Théorie de Hodge : II
+JO  - Publications Mathématiques de l&#x27;IHÉS
+PY  - 1971
+SP  - 5
+EP  - 57
+VL  - 40
+PB  - Institut des Hautes Études Scientifiques
+UR  - https://www.numdam.org/articles/10.1007/BF02684692/
+DO  - 10.1007/BF02684692
+LA  - fr
+ID  - PMIHES_1971__40__5_0
+ER  - </pre>
+                          <button class="fa fa-clipboard copy-button btn btn-primary"
+                                  data-clipboard-action="copy"
+                                  data-clipboard-target="#ris-div"
+                                  aria-hidden="true"
+                                  title="Copier dans le presse-papier"></button>
+                          
+                            <a class="fa fa-download export-button btn btn-primary"
+                               title="Télécharger"
+                               href="/export_citation/PMIHES_1971__40__5_0/ris/"></a>
+                          
+                        </div>
+                        <div id="enw" class="tab-pane fade">
+                          <pre class="upper-right-content" id="enw-div">%0 Journal Article
+%A Deligne, Pierre
+%T Théorie de Hodge : II
+%J Publications Mathématiques de l&#x27;IHÉS
+%D 1971
+%P 5-57
+%V 40
+%I Institut des Hautes Études Scientifiques
+%U https://www.numdam.org/articles/10.1007/BF02684692/
+%R 10.1007/BF02684692
+%G fr
+%F PMIHES_1971__40__5_0</pre>
+                          <button class="fa fa-clipboard copy-button btn btn-primary"
+                                  data-clipboard-action="copy"
+                                  data-clipboard-target="#enw-div"
+                                  aria-hidden="true"
+                                  title="Copier dans le presse-papier"></button>
+                          
+                            <a class="fa fa-download export-button btn btn-primary"
+                               title="Télécharger"
+                               href="/export_citation/PMIHES_1971__40__5_0/enw/"></a>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="how-to-cite-tab"
+                       class="tab-pane fade ">
+                    <div class="upper-right">
+                      <pre class="upper-right-content" id="how-to-cite-div">Deligne, Pierre. Théorie de Hodge : II. Publications Mathématiques de l'IHÉS, Tome 40 (1971), pp. 5-57. doi: 10.1007/BF02684692</pre>
+                      <button class="fa fa-clipboard copy-button btn btn-primary"
+                              data-clipboard-action="copy"
+                              data-clipboard-target="#how-to-cite-div"
+                              aria-hidden="true"
+                              title="Copier dans le presse-papier"></button>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                  
+                </div>
+              </div>
+            
+          
+          
+    </div>
+  </div>
+
+
+
+  
+
+  
+
+
+
+
+  <div>
+    <div class="col-12">
+      <div style="margin-top:30px;margin-bottom:10px">
+
+        <ul class="nav nav-tabs article-tab"
+            >
+          <li class="nav-item"
+              id="main-citations-li"
+              >
+            <a class="nav-link active"
+               data-bs-toggle="tab"
+               data-bs-target="#references-tab"
+               href="#references-tab">Bibliographie</a>
+          </li>
+          <li class="nav-item" id="citations-html" style="display:none">
+            <a class="nav-link"
+               data-bs-toggle="tab"
+               data-bs-target="#citations-tab"
+               href="#citations-tab">Cité par</a>
+          </li>
+        </ul>
+
+        <div class="tab-content" style="margin-top:10px">
+          
+            <div id="references-tab" class="tab-pane fade show active">
+              <div style="margin-top:11px;margin-bottom: 0px">
+
+
+
+
+  
+    <p class="bibitemcls">[1] <span class="citation-author">M. F. Atiyah</span> and <span class="citation-author">W. V. D. Hodge</span>, <span class="citation-document-title">Integrals of the second kind on an algebraic variety</span>, Ann. of Math., 62 (1955), 56-91. | <a href="https://zbmath.org/?q=an:0068.34401" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=17,533d" class="badge bg-secondary rounded-pill ref-badge">MR</a></p><p class="bibitemcls">[2] <span class="citation-author">P. Deligne</span>, <span class="citation-document-title">Théorème de Lefschetz et critères de dégénérescence de suites spectrales</span>, Publ. Math. I.H.E.S., 35 (1968), 107-126. | <a href="https://zbmath.org/?q=an:0159.22501" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=39:5582" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://www.numdam.org/item/PMIHES_1968__35__107_0" class="badge bg-secondary rounded-pill ref-badge">Numdam</a></p><p class="bibitemcls">[3] <span class="citation-author">P. Deligne</span>, <span class="citation-document-title">Equations différentielles à points singuliers réguliers</span>, Lectures Notes in mathematics, 163, Springer, 1970. | <a href="https://zbmath.org/?q=an:0244.14004" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=54:5232" class="badge bg-secondary rounded-pill ref-badge">MR</a></p><p class="bibitemcls">[4] <span class="citation-author">P. A. Griffiths</span>, <span class="citation-document-title">On the periods of certain rational integrals</span>, I, Ann. of Math., 90, 3 (1969), 460-495. | <a href="https://zbmath.org/?q=an:0215.08103" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=260733" class="badge bg-secondary rounded-pill ref-badge">MR</a></p><p class="bibitemcls">[5] <span class="citation-author">P. A. Griffiths</span>, <span class="citation-document-title">Periods of integrals on algebraic manifolds</span>, III, Publ. Math. I.H.E.S., 38 (1970), 125-180. | <a href="https://zbmath.org/?q=an:0212.53503" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://www.numdam.org/item/PMIHES_1970__38__125_0" class="badge bg-secondary rounded-pill ref-badge">Numdam</a></p><p class="bibitemcls">[6] <span class="citation-author">A. Grothendieck</span>, <span class="citation-document-title">Le groupe de Brauer, III : Exemples et compléments</span>. Dix exposés sur la cohomologie des schémas, North-Holland Publ. Co., 1968. | <a href="https://zbmath.org/?q=an:0198.25901" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=244271" class="badge bg-secondary rounded-pill ref-badge">MR</a></p><p class="bibitemcls">[7] <span class="citation-author">A. Grothendieck</span>, <span class="citation-document-title">Un théorème sur les homomorphismes de schémas abéliens</span>, Inv. Math., 2 (1966), 59-78. | <a href="https://zbmath.org/?q=an:0147.20302" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=217089" class="badge bg-secondary rounded-pill ref-badge">MR</a></p><p class="bibitemcls">[8] <span class="citation-author">H. Hironaka</span>, <span class="citation-document-title">Resolution of singularities of an algebraic variety over a field of characteristic zero</span>, Ann. of Math., 79 (1964), 109-326. | <a href="https://zbmath.org/?q=an:0122.38603" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=199184" class="badge bg-secondary rounded-pill ref-badge">MR</a></p><p class="bibitemcls">[9] <span class="citation-author">W. V. D. Hodge</span>, <span class="citation-document-title">The theory and applications of harmonic integrals</span>, Cambridge Univ. Press, 2e éd., 1952. | <a href="https://zbmath.org/?q=an:0048.15702" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=51571" class="badge bg-secondary rounded-pill ref-badge">MR</a></p><p class="bibitemcls">[10] <span class="citation-author">N. Katz</span>, <span class="citation-document-title">Nilpotent connections and the monodromy theorem. Applications of a result of Turritin</span>, Publ. Math. I.H.E.S., 39 (1971), 175-232. | <a href="https://zbmath.org/?q=an:0221.14007" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://www.numdam.org/item/PMIHES_1970__39__175_0" class="badge bg-secondary rounded-pill ref-badge">Numdam</a></p><p class="bibitemcls">[11] <span class="citation-author">M. Nagata</span>, <span class="citation-document-title">Imbedding of an abstract variety in a complete variety</span>, J. Math. Kyoto, 2, 1 (1962), 1-10. | <a href="https://zbmath.org/?q=an:0109.39503" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=142549" class="badge bg-secondary rounded-pill ref-badge">MR</a></p><p class="bibitemcls">[12] <span class="citation-author">A. Weil</span>, <span class="citation-document-title">Variétés kählériennes</span>, Publ. Inst. Math. Univ. Nancago, VI, Paris, Hermann, 1958. | <a href="https://zbmath.org/?q=an:0137.41103" class="badge bg-secondary rounded-pill ref-badge">Zbl</a></p><p class="bibitemcls">[13] <span class="citation-author">A. Borel</span>, non publié.</p><p class="bibitemcls">[14] <span class="citation-author">P. Deligne</span>, <span class="citation-document-title">Théorie de Hodge</span>, I, Actes du Congrès international des mathématiciens, Nice, 1970. | <a href="https://zbmath.org/?q=an:0219.14006" class="badge bg-secondary rounded-pill ref-badge">Zbl</a></p><p class="bibitemcls">TF <span class="citation-author">R. Godement</span>, <span class="citation-document-title">Topologie algébrique et théorie des faisceaux</span>, Publ. Inst. Math. Univ. Strasbourg, XIII, Paris, Hermann, 1958. | <a href="https://zbmath.org/?q=an:0080.16201" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=102797" class="badge bg-secondary rounded-pill ref-badge">MR</a></p>
+  
+
+</div>
+            </div>
+          
+
+          
+            <div id="citations-tab" class="tab-pane fade show">
+              <div id="citations-div"
+                   data-url="/citedby/10.1007/BF02684692"
+                   style="margin-top:11px;
+                          margin-bottom: 11px"></div>
+              <p>
+                <em>Cité par <span id="citations-number"></span> Sources : <span id="citations-sources"></span></em>
+              </p>
+            </div>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+
+  
+
+
+</div>
+
+
+                <!-- center_footer -->
+             
+            </div>
+
+            
+              <div>
+                
+                
+              </div>
+            
+
+          
+        </div>
+      
+    </div>
+    
+  </main>
+
+  
+    
+<div id="footer">
+  <div class="horizontal-menu menu-footer">
+    <ul>
+      <li><a href="/accessibility/">Accessibilité - non conforme</a></li>
+      <li><a href="/about/">À propos</a></li>
+      <li><a href="/help/">Aide</a></li>
+      <li><a href="/legal/">Mentions légales</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      
+    </ul>
+  </div>
+  <div class="logo-footer">
+    <div class="d-flex">
+      <div class="lg-desktop">
+        <p>Développé par</p>
+      </div>
+      <div>
+        <a href="http://www.mathdoc.fr"><img class="logo-auto" src="/static/numdam/img/logo-mathdoc.png"/></a>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="lg-desktop">
+        <p>Soutenu par</p>
+      </div>
+      <div>
+        <a href="http://www.cnrs.fr/insmi"><img class="logo-auto" src="/static/ptf/img/logo-cnrs.png"/></a>&nbsp;
+        <a href="http://www.univ-grenoble-alpes.fr/"><img class="logo-auto" src="/static/numdam/img/logo-uga.png"/></a>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="lg-desktop">
+        <p>Partenaire de</p>
+      </div>
+      <div>
+        <a href="https://geodesic.mathdoc.fr"><img class="logo-auto" src="/static/numdam/img/geodesic.png"/></a>&nbsp;
+        <a href="http://portail.math.cnrs.fr"><img class="logo-auto" src="/static/numdam/img/logo-portail.png"/></a>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div id="logo-collex">
+        <a href="https://www.collexpersee.eu/"><img class="logo-auto" src="/static/numdam/img/logo-collex.png"/></a>&nbsp;
+      </div>
+      <div id="logo-collex-lg">
+        <a href="https://www.collexpersee.eu/"><img class="logo-auto" src="/static/numdam/img/logo-collex.png"/></a>&nbsp;
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+  <script type="text/javascript" src="/static/ptf/vendors/jquery/js/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="/static/ptf/vendors/bootstrap5/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="/static/ptf/vendors/clipboard/js/clipboard.min.js "></script>
+  
+    <script type="text/javascript" src="/static/ptf/js/mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  
+
+  
+
+<script src="/static/numdam/js/scripts.js "></script>
+<script src="/static/numdam/vendors/owl-carousel/js/owl.carousel.min.js "></script>
+
+
+
+
+  <script type="text/javascript" src="/static/ptf/js/bs5/ptf.js"></script>
+  <script type="text/javascript" src="/static/ptf/js/bs5/search-bar.js"></script>
+  <script type="text/javascript" src="/static/ptf/js/bs5/facets.js"></script>
+</body>
+</html>

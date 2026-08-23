@@ -1,0 +1,69 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "context_revision": 2,
+  "created_on": "2026-08-23",
+  "excluded_engines": [
+    "claude"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "base-non-tateness-does-not-transport-to-z",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-23",
+    "equivalence_group": "base-non-tateness-does-not-transport-to-z",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0171",
+    "impacts_approach_ids": [
+      "C66-TATE-SUPPORT"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "claude"
+    ],
+    "scope": "(g,n)=(6,6) over C with Q-coefficients; the FND-0167 setup with S of dimension 15, A of dimension 17, Delta of dimension 16.",
+    "source_attempt_ids": [
+      "ATT-0118"
+    ],
+    "source_review_ids": [
+      "REV-0165"
+    ],
+    "statement": "Refuting the base corner does not refute the Z-clause, and the campaign's repair should not assume it does. FND-0167's corner map is an INJECTION Gr^W_16 H_c^16(U;Q) -> Gr^W_16 H_c^16(S;Q) direct-sum Gr^W_14 H_c^14(S;Q)(-1) direct-sum Gr^W_12 H_c^12(S;Q)(-2), which propagates Tate-ness downward but cannot propagate non-Tate-ness from S to U or to Z=Ord(U). The dimension route also stalls: over a 15-dimensional S the Abel-Jacobi bundle A=P_S(pi_*L) has dimension 17 and the non-reduced-divisor locus Delta = A minus U has dimension 16, so F^15 H_c^16(Delta;C) need not vanish and the FND-0165 localization gives no lift from A to U. Hence Gr^W_16 H_c^16(Z;Q) remains open, and the correct repair of the C66-TATE-SUPPORT statement is to drop the universally quantified base/universal-curve conjunct, name the atlas on which (H-S)/(H-C) are asserted, and prove the Z-corner directly or conditionally on that named atlas.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0171",
+  "id": "TASK-F-FND-0171",
+  "input_packet": "proof/packets/generated/C66-001-v4.md",
+  "output": "research/finding-audits/FAUD-0182.json",
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "13f880c2a12fa369d4fc2f75b476e70c0dbc070f25221987d06d1ff452af1c7d",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "grok",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}
