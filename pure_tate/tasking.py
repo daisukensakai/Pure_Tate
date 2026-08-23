@@ -89,6 +89,7 @@ def mathematics_tasks(
 def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
     from .artifacts import load_artifacts
     from .campaigns import (
+        campaign_carried_forward_verifications,
         campaign_packet_record,
         campaign_quarantined_attempt_ids,
         campaign_route_policy_errors,
@@ -101,31 +102,70 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
     campaign = load_campaign(campaign_id)
     packet = campaign_packet_record(campaign_id)
     packet.pop("_text")
-    attempts = load_campaign_attempts(campaign_id)
+    attempts = load_campaign_attempts(campaign_id, current_only=False)
     reviews = load_artifacts("reviews")
     quarantined_attempt_ids = campaign_quarantined_attempt_ids(campaign_id)
+    carried_forward = campaign_carried_forward_verifications(campaign_id)
+
+    def carried_record_matches(
+        subproblem_id: str, attempt: Dict[str, Any], confirmations: List[Dict[str, Any]]
+    ) -> bool:
+        record = carried_forward.get(subproblem_id)
+        if not isinstance(record, dict):
+            return False
+        attempt_record = record.get("attempt")
+        if not isinstance(attempt_record, dict) or attempt_record.get("id") != attempt.get("id"):
+            return False
+        attempt_path = Path(str(attempt.get("_path", "")))
+        if not attempt_path.is_file() or attempt_record.get("sha256") != hashlib.sha256(attempt_path.read_bytes()).hexdigest():
+            return False
+        expected_reviews = record.get("reviews")
+        if not isinstance(expected_reviews, list):
+            return False
+        by_id = {item.get("id"): item for item in confirmations}
+        for review_record in expected_reviews:
+            if not isinstance(review_record, dict):
+                return False
+            review = by_id.get(review_record.get("id"))
+            review_path = Path(str((review or {}).get("_path", "")))
+            if not review_path.is_file() or review_record.get("sha256") != hashlib.sha256(review_path.read_bytes()).hexdigest():
+                return False
+        return True
+
     verified_dependencies: Dict[str, Dict[str, Any]] = {}
     for attempt in reversed(attempts):
         subproblem_id = attempt.get("subproblem_id")
+        if not isinstance(subproblem_id, str):
+            continue
+        is_current = attempt.get("campaign_revision") == campaign["campaign_revision"]
+        candidate_reviews = [
+            review
+            for review in reviews
+            if review.get("attempt_id") == attempt.get("id")
+            and review.get("verdict") == "confirmed"
+            and review.get("independent") is True
+            and review.get("reviewer_engine") != attempt.get("engine")
+        ]
+        is_carried = carried_record_matches(
+            subproblem_id, attempt, candidate_reviews
+        )
         if (
-            not isinstance(subproblem_id, str)
-            or attempt.get("id") in quarantined_attempt_ids
+            attempt.get("id") in quarantined_attempt_ids
             or subproblem_id in verified_dependencies
+            or not (is_current or is_carried)
             or not attempt_is_complete(attempt)
-            or not packet_binding_matches(attempt, campaign_id)
+            or (not is_carried and not packet_binding_matches(attempt, campaign_id))
             or campaign_route_policy_errors(campaign, attempt)
         ):
             continue
         confirmations = [
             review
-            for review in reviews
-            if review.get("attempt_id") == attempt.get("id")
-            and review.get("campaign_revision")
-            == campaign["campaign_revision"]
-            and packet_binding_matches(review, campaign_id)
-            and review.get("verdict") == "confirmed"
-            and review.get("independent") is True
-            and review.get("reviewer_engine") != attempt.get("engine")
+            for review in candidate_reviews
+            if is_carried
+            or (
+                review.get("campaign_revision") == campaign["campaign_revision"]
+                and packet_binding_matches(review, campaign_id)
+            )
         ]
         # Extra confirmation passes (e.g. principal override audits) are allowed;
         # the gate only requires that both ordinary passes are present.
@@ -194,6 +234,7 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
             ).get("artifacts", [])
         ]
         own_verification = verified_dependencies.get(subproblem["id"])
+        artifact_contract = subproblem.get("artifact_contract")
         task = {
             "id": "TASK-C66-M-%03d" % ordinal,
             "phase": "mathematics",
@@ -205,6 +246,7 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
             "subproblem_id": subproblem["id"],
             "lane": subproblem["lane"],
             "subproblem": subproblem,
+            "artifact_contract": artifact_contract,
             "context_revision": campaign["context_revision"],
             "packet_id": packet["packet_id"],
             "packet_sha256": packet["packet_sha256"],
@@ -485,6 +527,40 @@ def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
                             "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
                         }
                     )
+            campaign_task: Optional[Dict[str, Any]] = None
+            if attempt.get("campaign_id"):
+                from .campaigns import load_campaign
+
+                campaign = load_campaign(str(attempt["campaign_id"]))
+                known_subproblems = {
+                    item.get("id") for item in campaign.get("subproblems", [])
+                }
+                if attempt.get("subproblem_id") in known_subproblems:
+                    campaign_task = next(
+                        (
+                            item
+                            for item in campaign_mathematics_tasks(
+                                str(attempt["campaign_id"])
+                            )
+                            if item.get("id") == attempt.get("task_id")
+                        ),
+                        None,
+                    )
+                seen_paths = {
+                    str(item.get("path"))
+                    for item in input_artifacts
+                    if isinstance(item, dict)
+                }
+                for artifact_input in (campaign_task or {}).get(
+                    "input_artifacts", []
+                ):
+                    if not isinstance(artifact_input, dict):
+                        continue
+                    path = artifact_input.get("path")
+                    if not isinstance(path, str) or not path or path in seen_paths:
+                        continue
+                    input_artifacts.append(dict(artifact_input))
+                    seen_paths.add(path)
             tasks.append(
                 {
                     "id": review_task_id,
@@ -529,6 +605,9 @@ def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
                             ),
                             "packet_binding_sha256": attempt.get(
                                 "packet_binding_sha256"
+                            ),
+                            "artifact_contract": (campaign_task or {}).get(
+                                "artifact_contract"
                             ),
                         }
                         if attempt.get("campaign_id")

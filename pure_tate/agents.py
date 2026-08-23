@@ -665,6 +665,15 @@ def assemble_prompt(
             "them, or choose incomplete/refuted; the harness rejects confirmed "
             "reviews that carry any adverse structured check."
         )
+        contract = task.get("artifact_contract")
+        if isinstance(contract, dict) and contract.get("object_field"):
+            parts.append(
+                "This cell has a target-interface artifact contract. Verify that "
+                "the candidate supplies the required %s object and that its named "
+                "source, map, target subquotient, and coverage claims really prove "
+                "the stated theorem rather than a surrogate cohomology result."
+                % contract["object_field"]
+            )
     primary_wc = next(
         (
             path
@@ -1622,6 +1631,17 @@ def _validate_artifact(
             route_errors = campaign_route_policy_errors(campaign, artifact)
             if route_errors:
                 raise ValueError(route_errors[0])
+            from .campaigns import artifact_contract_errors
+
+            if artifact.get("status") == "claimed_complete":
+                contract_errors = artifact_contract_errors(
+                    task.get("artifact_contract"), artifact
+                )
+                if contract_errors:
+                    raise ValueError(
+                        "campaign artifact violates contract: %s"
+                        % "; ".join(contract_errors)
+                    )
         if task.get("paired_turn_kind") == "forced-proof":
             if artifact.get("result_type") not in {"proof", "disproof"}:
                 raise ValueError(

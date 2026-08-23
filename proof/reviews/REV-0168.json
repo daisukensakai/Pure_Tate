@@ -1,0 +1,174 @@
+{
+  "attempt_id": "ATT-0119",
+  "campaign_id": "C66-001",
+  "campaign_revision": 4,
+  "checked_claims": [
+    {
+      "claim_id": "CHK-PACKET-TARGET",
+      "note": "TASK-V-ATT-0119-P2 targets ATT-0119 and packet C66-001-v4. The packet SHA-256 is 53f72092580d582fac76b59aee9b284a0132bdd957156b053b4b98a47c646dd5, the campaign and context revisions are 4 and 2, and the target dictionary and theorem_statement match TASK.json. The review judges the universally quantified C66-TATE-SUPPORT lemma, not RED-0001.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0119-1",
+      "note": "For the smooth projective model of y^3=x(x-1), the degree-three map to P^1 is totally ramified over 0, 1, and infinity. Riemann-Hurwitz gives genus one. Removing those three points gives a smooth connected affine curve C with H_c^2(C;Q)=Q(-1), while compact-support localization and strictness give Gr^W_1 H_c^1(C;Q)=H^1(Cbar;Q), with Hodge types (1,0) and (0,1).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0119-2",
+      "note": "Compact-support Kunneth is an isomorphism of mixed Hodge structures. In degree 12 on C^8 every contributing tensor has four H_c^2 factors and four H_c^1 factors. Its weight-12 graded contains Q(-1)^{tensor 4} tensor (Gr^W_1 H_c^1(C))^{tensor 4}; choosing four (1,0) components produces a nonzero Hodge component of type (8,4). This is an actual graded Hodge-structure summand, not merely a semisimplified constituent.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0119-3",
+      "note": "A simply-branched balanced fibre exists and is type (i). The constant family with that fibre over S=C^8 is reduced, locally Noetherian, and satisfies (CE)+(N)+(BAL); its connected classifying image is the chosen type-(i) point and is not contained in type (ii). Clause (E) imposes no dimension-15 or atlas-dominance condition, so this is an allowed base.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0119-4",
+      "note": "For the constant family, pi_*L is the trivial rank-three bundle, the discriminant is S times Delta_0, and therefore U=S times U_0 and Z=S times Z_0. The reduced-support open U_0 is a nonempty smooth connected open surface in P^2. Poincare duality gives H_c^4(U_0;Q)=Hom(H^0(U_0;Q),Q(-2))=Q(-2), consistently with compact-support localization against the proper curve Delta_0.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0119-5",
+      "note": "The degree-(12,4) Kunneth summand is H_c^12(S) tensor H_c^4(U_0)=H_c^12(S)(-2). Since Q(-2) has weight 4 and type (2,2), the type-(8,4) weight-12 class becomes a nonzero type-(10,6) class in Gr^W_16 H_c^16(U). For the finite etale S_6-torsor Z\u2192U, rational pullback is injective because push-pull is multiplication by 720, and its image is the invariants. Thus the class survives in Gr^W_16 H_c^16(Z). Its dual has type (-10,-6), so neither side is a sum of Q(-8) or Q(8), respectively.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0119-6",
+      "note": "The class is already the third Kunneth corner Gr^W_12 H_c^12(S)(-2) of H_c^16(U), supplied by the fibrewise compact-support fundamental class. It is not an attempted lift of the j=8 atlas class Gr^W_16 H_c^16(S), so FND-0171 does not block it. One allowed constant family suffices to disprove the universally quantified theorem.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CHK-ADVERSARIAL-SCOPE",
+      "note": "Stack versus coarse moduli causes no transition: the counterexample is constructed on the scheme S and the schemes U and Z. Rational coefficients are used exactly where averaging by |S_6| is required; no integral assertion is made. Borel-Moore degree 16 is dual to compact-support cohomology degree 16 with no Tate twist, while the only Poincare twist used internally is Q(-2) for a smooth surface; the campaign twist 21 is irrelevant to this lemma. Kunneth adds degrees 12+4 and weights 12+4, with twist (-2), and no Gysin map into M_{6,6} occurs. No spectral sequence or degeneration claim is used. Transfer uses invariants, not coinvariants. A nonzero off-diagonal Hodge type on the pure weight graded directly obstructs Tate type, without relying on semisimplification. No predicted motive, algebraic-cycle generation, tautological generation, or stable-pair exhaustion is asserted or needed.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-23",
+  "finding_candidates": [
+    {
+      "adjudication": "novel_candidate_from_this_review",
+      "evidence": "ATT-0119, independently checked in CLM-0119-1 through CLM-0119-6: compact-support Kunneth for C^8\u00d7U_0, Poincare duality H_c^4(U_0)=Q(-2), and rational transfer along Z\u2192U.",
+      "key": "FC-ATT0119-CONSTANT-FAMILY-NONTATE-Z",
+      "kind": "counterexample",
+      "severity": "high",
+      "statement": "The universally quantified C66-TATE-SUPPORT lemma is false. Let C be the affine elliptic Kummer curve obtained from y^3=x(x-1) by removing its three ramification points, take S=C^8, and equip S with the constant family of a simply-branched balanced type-(i) tetragonal fibre. Then U=S\u00d7U_0 and Z=S\u00d7Z_0 are allowed clause-(E) models, and Gr^W_16 H_c^16(Z;Q) contains in its S_6-invariant part a nonzero Hodge component of type (10,6), arising from Gr^W_12 H_c^12(C^8;Q) tensor H_c^4(U_0;Q). Consequently T_16(Z) is not a direct sum of Q(8). This concerns the model Z itself and does not imply anything about the global kernel K or RED-0001.",
+      "status": "candidate",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0168",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "76cc8a6d6ca02a2a9b1d7857fa11d7278f9732fa823f7be67dd51a354645bcc7",
+  "packet_id": "C66-001-v4",
+  "packet_sha256": "53f72092580d582fac76b59aee9b284a0132bdd957156b053b4b98a47c646dd5",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0112",
+      "note": "Load-bearing only through CLM-0112-2, CLM-0112-4, CLM-0112-6, and CLM-0112-8: existence of the balanced simply-branched locus, exclusion of components contained in type (ii), and construction of U and the ordering torsor over an allowed reduced scheme base.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0157",
+      "note": "First independent confirmation of the ATT-0112 claims imported here.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0158",
+      "note": "Second independent confirmation of ATT-0112, including its scheme-base, stack/coarse, rational-transfer, and no-Tate-upgrade qualifications.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0158",
+      "note": "Used to conclude that a simply-branched degree-four cover cannot factor nontrivially and hence lies in type (i).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0172",
+      "note": "Supplies the existence of a simply-branched balanced point; equivalently this follows from the dimension comparison in ATT-0112.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0170",
+      "note": "Supports the Kummer-curve model and compact-support Kunneth as mixed Hodge structures. ATT-0119 independently repeats the Riemann-Hurwitz and localization calculation and uses a different Kunneth degree.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0165",
+      "note": "Strictness and exactness of weight-graded mixed Hodge structures are used only with constant Q-coefficients and with the correct cohomological and Borel-Moore degree conventions.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0171",
+      "note": "Correctly treated as a scope fence: it blocks transport of the j=8 atlas corner but does not apply to the degree-(12,4) Kunneth summand already present on the product U.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0169",
+      "note": "Non-load-bearing comparison used only to distinguish the present class on Z from the previously recorded atlas-dependent j=8 counterexample.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0168",
+      "note": "Non-load-bearing scope fence respected throughout: T_16(Z) is never identified with the global kernel K.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0164",
+      "note": "Non-load-bearing scope fence respected throughout: no constructible-coefficient compact-support Leray argument or inherited weight-floor claim is used.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0152",
+      "note": "Load-bearing rational finite-group transfer: pullback along the S_6-torsor injects the cohomology of U as the invariant subspace of the cohomology of Z. The argument does not claim an integral splitting.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0153",
+      "note": "Together with simple branching and the balanced hypotheses, identifies the chosen fibre as type (i).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0134",
+      "note": "Supplies nonemptiness of the reduced-support open U_0 for the chosen balanced fibre.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0136",
+      "note": "Supplies a nonreduced member and hence nonemptiness of the plane discriminant. This is not needed for H_c^4(U_0)=Q(-2) once U_0 is known to be a smooth connected surface, but it confirms the stated geometric description.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0119-P2",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is the Gysin/Kunneth and Tate-twist bookkeeping in CLM-0119-4\u20135: if H_c^4(U_0) failed to be Q(-2), if removing the discriminant killed the fibre class, or if compact-support Kunneth introduced a hidden degree or twist, the alleged type-(10,6) class would miss the exact object Gr^W_16 H_c^16(Z). The attack fails. U=S\u00d7U_0 is a genuine product; Poincare duality and localization both give H_c^4(U_0)=Q(-2); Kunneth places Gr^W_12 H_c^12(S)(-2) in degree and weight 16 with type (10,6); and rational finite-etale transfer injects it into the S_6-invariants of Z. The class is therefore a surviving non-Tate summand of the exact lemma object. Secondary attacks also fail: there is no stack/coarse passage, integral averaging, Gysin map into M_{6,6}, spectral sequence, motive prediction, algebraic or tautological-generation upgrade, or omitted-stable-pair exhaustion; Borel-Moore/compact-support duality has no additional twist; and the Hodge-type obstruction is an actual pure graded Hodge-structure statement rather than a semisimplification artifact. Thus this review confirms ATT-0119's disproof of the stated universally quantified lemma, without confirming RED-0001.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Over C with Q-coefficients, on the ordered reduced-support Casnati-Ekedahl evaluation-failure model of ATT-0112 clause (E): let S be a reduced locally Noetherian C-scheme carrying a (CE)+(N)+(BAL) genus-six degree-four family with no connected component image contained in the type-(ii) locus; let U be the distinct-support open of the Abel-Jacobi P^2-bundle A=P_S(pi_*L); let Z=Ord(U) be the finite etale right S_6-torsor of orderings. Write T_16(Z):=W_{-16}H^{BM}_{16}(Z;Q), canonically dual to Gr^W_16 H_c^{16}(Z;Q) with no extra Tate twist. Prove that T_16(Z) is a finite direct sum of Q(8), equivalently Gr^W_16 H_c^{16}(Z;Q) is a finite direct sum of Q(-8). This is the H_alpha-object of this model Z itself, including the simply-branched and complementary non-simply-branched loci in Z and every rational S_6-isotypic component of T_16(Z). It does not include, and is not disproved by failure of, the universally quantified constant-coefficient hypotheses (H-S) or (H-C) of FND-0167: those corners of an atlas S of Hbar^bal or of the universal curve are atlas-dependent, and the j=8 instance of (H-S) is false for some allowed etale atlas components (FND-0169; ATT-0118). Conditional Tate-transfer of the [6] and [5,1] multiplicity spaces under named (H-S)/(H-C) is a lemma, not this theorem. A disproof must exhibit a surviving non-Tate summand in T_16(Z) (equivalently in Gr^W_16 H_c^{16}(Z;Q)), not merely a non-Tate corner of some atlas of Hbar^bal (FND-0171). Do not identify T_16(Z) with the global kernel K=ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)) (FND-0168). Do not construct a closed embedding, Gysin map, image, or support-exhaustion statement in M_{6,6}. Respect FND-0164: compact-support Leray with constructible coefficients does not inherit a top-weight vanishing proved only for constant Q. This lemma does not resolve the campaign Hodge/Tate group RED-0001.",
+  "verdict": "confirmed"
+}

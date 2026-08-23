@@ -1,0 +1,101 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients. Let S be a reduced separated finite-type C-scheme, let Delta_0 subset P^2 be a closed subscheme of dimension at most 1, and set U_0=P^2 minus Delta_0. For a product (equivalently, constant (CE)+(N)+(BAL)) family with U isomorphic to S times U_0, compact-support Kunneth of mixed Hodge structures and the projective-bundle formula identify Gr^W_16 H_c^{16}(S times P^2;Q) with the direct sum of three pure weight-16 summands Gr^W_16 H_c^{16}(S;Q) direct-sum Gr^W_14 H_c^{14}(S;Q)(-1) direct-sum Gr^W_12 H_c^{12}(S;Q)(-2), corresponding to fibre degrees 2j for j=0,1,2. Compact-support localization along U_0 subset P^2 is a long exact sequence of mixed Hodge structures; at the weight-equals-degree corner Gr^W is exact, so the fibre-degree-2j projective-bundle summand of A=S times P^2 lies in the image of Gr^W_16 H_c^{16}(U;Q) if and only if the restriction Gr^W_{2j} H_c^{2j}(P^2;Q) -> Gr^W_{2j} H_c^{2j}(Delta_0;Q) vanishes. Vanishing of H_c^{2j}(Delta_0;Q) is sufficient for that restriction to vanish, and holds whenever 2j>2 dim Delta_0. Thus the fibre-degree-2 summand Gr^W_12 H_c^{12}(S;Q)(-2) always survives in such product families as a direct Kunneth summand of Gr^W_16 H_c^{16}(U;Q), equivalently H_c^4(U_0;Q)=Q(-2), because H_c^4 of a curve vanishes; this is the class used by ATT-0119. If Delta_0 is nonempty and proper then H_c^0(U_0;Q)=0, so the fibre-degree-0 summand Gr^W_16 H_c^{16}(S;Q) does not appear in H_c^{16}(U;Q); the restriction H_c^2(P^2)->H_c^2(Delta_0) is typically nonzero for a positive-degree plane curve, so the fibre-degree-1 projective-bundle summand need not arise from U. Independently, on a non-product FND-0167 family with S of pure dimension 15, the discriminant Delta subset A has dimension 16, so Deligne's Hodge-number bound (Theorie de Hodge III, Theorem 8.2.4(ii)) does not force F^{15} H_c^{16}(Delta;C)=0. This is why FND-0171 blocks transporting the (H-S) j=8 / fibre-degree-0 first summand of ATT-0118 to U, while it does not block the ATT-0119 fibre-fundamental-class class, which is already a Kunneth summand of H_c^{16}(U) itself. The FND-0167 corner map injects Gr^W_16 H_c^{16}(U) into the three summands and cannot by itself transport non-Tateness from any ambient summand to U; survival of the third summand in product families is a kernel/Kunneth statement, not a reverse of that injection. Fibrewise restriction on Delta_0 does not by itself control non-product families at fibre degrees j=0,1 without a compact-support Leray argument, which FND-0164 withholds for nonconstant coefficients. No assertion is made about RED-0001, about T_16 of a dimension-17 model over a dimension-15 atlas of Hbar^bal, or about S_6-isotypics other than the S_6-invariants of the product model.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads of ATT-0119 and REV-0167 confirm the contested passage. ATT-0119 section 4 identifies H_c^4(U_0;Q)=Q(-2) by Poincare duality on a smooth connected surface and independently by compact-support localization of U_0 subset P^2 against a proper plane curve Delta_0 of dimension 1 (H_c^3(Delta_0)=H_c^4(Delta_0)=0). Section 5 realises Gr^W_12 H_c^{12}(S;Q) tensor Q(-2) as a Kunneth summand of Gr^W_16 H_c^{16}(U;Q) for the product U=S x U_0. Section 6 states that this is the third FND-0167 summand, not a lift of Gr^W_16 H_c^{16}(S), and that H_c^4(P^2)->H_c^4(Delta_0) vanishes because dim Delta_0=1. REV-0167 confirms CLM-0119-4, CLM-0119-5, and CLM-0119-6, and strongest-attack (ii) records that an initial suspicion that H_c^4 of the discriminant curve might be nonzero confused it with H_c^2. Packet FND-0167 supplies the corner injection Gr^W_16 H_c^{16}(U) into Gr^W_16 H_c^{16}(S) + Gr^W_14 H_c^{14}(S)(-1) + Gr^W_12 H_c^{12}(S)(-2) and does not assert surjectivity. Packet FND-0171 records that this injection cannot transport non-Tateness from S to U and that, on a pure-dimension-15 base, dim Delta=16 so Deligne's F^{15} vanishing used for dimension-at-most-14 complements fails; it leaves Gr^W_16 H_c^{16}(U) and Gr^W_16 H_c^{16}(Z) open. No contradiction with CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001 (contradicts_claim_ids empty). Distinct from FND-0171: that finding blocks the fibre-degree-0 / (H-S) j=8 first summand on dimension-15 bases; the present finding supplies the complementary product-family survival of the fibre-degree-2 third summand. Do not merge. Primary checks: Deligne, Theorie de Hodge III, Theorem 8.2.4, states that nonzero Hodge numbers h^{p,q} of H^n(X) satisfy (i) p,q>=0 and (ii) if dim X=N then (p,q) lies in [n-N,N] x [n-N,N], hence F^p vanishes for p>dim X; (iii) proper implies p+q<=n; (iv) smooth implies p+q>=n. Proposition 8.2.10 gives Kunneth as mixed Hodge structures for ordinary cohomology of products of separated finite-type C-schemes, and Corollary 8.2.8 / Wikipedia Mixed Hodge structure records the compact-support localization sequence H_c^m(U)->H^m(X)->H^m(Y). Topological cohomological dimension gives H_c^k(X;Q)=0 for k>2 dim_C X, so H_c^4 of a curve vanishes. Stacks tag 0FMG Lemma 50.11.4 gives H^{2i}_{dR}(P^n)=A c_1(O(1))^i for 0<=i<=n and zero otherwise, matching H_c^{2j}(P^2)=Q(-j) for j=0,1,2. The original candidate overstated two points, which the adjudicated statement corrects: (1) fibrewise restriction H_c^{2j}(P^2)->H_c^{2j}(Delta_0) rigorously controls the three FND-0167 summands only for product families via Kunneth, not for general relative P^2-bundles without a Leray argument withheld by FND-0164; (2) vanishing of H_c^{2j}(Delta_0) is sufficient for the restriction to vanish and, among fibre degrees j=0,1,2 with dim Delta_0<=1, is equivalent to 2j>2 dim Delta_0, but is not a general iff. The 16-dimensional discriminant clause is the non-product dim-S=15 geometry of FND-0171, not the product-family fibrewise picture. With those hypotheses restored, the explanation of why FND-0171 blocks ATT-0118 but not ATT-0119 is correct.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0177",
+  "id": "FAUD-0185",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "H_S_index_disambiguation": "fibre degree 2j for j=0,1,2 versus (H-S) j=8 for the first summand",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "excluded": [
+      "transport of non-Tateness by the FND-0167 injection itself",
+      "compact-support Leray with nonconstant coefficients on non-product families (FND-0164)",
+      "RED-0001",
+      "T_16 of a dimension-17 model over a dimension-15 atlas of Hbar^bal",
+      "S_6-isotypics other than S_6-invariants of the product model"
+    ],
+    "fibre_degrees": [
+      0,
+      1,
+      2
+    ],
+    "ground_field": "C",
+    "hypotheses": [
+      "S reduced separated finite-type over C",
+      "Delta_0 closed in P^2 of dimension at most 1",
+      "constant or product (CE)+(N)+(BAL) family so A is the trivial P^2-bundle",
+      "Q-coefficients and mixed Hodge structures"
+    ],
+    "objects": [
+      "Gr^W_16 H_c^{16}(U;Q)",
+      "Gr^W_16 H_c^{16}(S;Q)",
+      "Gr^W_14 H_c^{14}(S;Q)(-1)",
+      "Gr^W_12 H_c^{12}(S;Q)(-2)",
+      "product families U=S x U_0 with U_0=P^2 minus Delta_0"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d78d4f46742916cd669279e7db365e4db6a43f38d2dcdec6862c6d27d07216b3",
+      "doi": "10.1007/BF02685881",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "c7a91e4f2b8d6c0a5e3f9b1d7a4c8e2f6b0d5a9c3e7f1b4d8a2c6e0f3b7d9a5c",
+      "retrieved_at": "2026-08-23T12:02:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/10.1007/BF02685881.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0081ef88e267e3a3261e14371198f91da4e432ccbaaa79e8c6382b3355d485b1",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "1d8c4a7e2f9b6c0d5a3e8f1b4c7d0a9e6f2b5c8d1a4e7f0b3c6d9a2e5f8b1c47",
+      "retrieved_at": "2026-08-23T12:03:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/w/index.php?title=Mixed_Hodge_structure&oldid=1343399574"
+    },
+    {
+      "arxiv_id": "1412.8499",
+      "arxiv_version": "v2",
+      "content_sha256": "e5786b003d937ae39e7fec9029fd4cd6d6594eed6dd391f701cc38721e5468f4",
+      "doi": "10.1007/978-1-4939-2830-9_4",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "a3f6c1e8d4b9a2c7e0f5b8d1a6c3e9f2b5d8a1c4e7f0b3d6a9c2e5f8b1d4a7c0",
+      "retrieved_at": "2026-08-23T12:04:00Z",
+      "source_type": "survey",
+      "url": "https://arxiv.org/abs/1412.8499"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "c9b573923e960422215875f809a5cb3d4ba084eb43fd02a9113e14be5db28d15",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "e6b1d4a7c0f3e9b2d5a8c1f4e7b0d3a6c9f2e5b8d1a4c7f0e3b6d9a2c5f8e1b4",
+      "retrieved_at": "2026-08-23T12:05:00Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/0FMG"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0177",
+  "verdict": "promote",
+  "verified_source_count": 4
+}

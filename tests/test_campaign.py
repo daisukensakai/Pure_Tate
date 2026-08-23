@@ -94,7 +94,7 @@ class PacketBindingTests(unittest.TestCase):
                     campaign_packet_binding_sha256("C66-001"), baseline
                 )
 
-    def test_binding_ignores_subproblem_exact_theorem(self):
+    def test_binding_tracks_subproblem_exact_theorem(self):
         baseline = campaign_packet_binding_sha256("C66-001")
         content = campaign_packet_record("C66-001")["packet_sha256"]
         campaign = load_campaign("C66-001")
@@ -105,12 +105,10 @@ class PacketBindingTests(unittest.TestCase):
         with mock.patch(
             "pure_tate.campaigns.load_campaign", return_value=mutated
         ):
-            self.assertEqual(
+            self.assertNotEqual(
                 campaign_packet_binding_sha256("C66-001"), baseline
             )
-            self.assertEqual(
-                campaign_packet_record("C66-001")["packet_sha256"], content
-            )
+            self.assertEqual(campaign_packet_record("C66-001")["packet_sha256"], content)
 
     def test_binding_covers_every_identity_bearing_input(self):
         binding = campaign_packet_binding("C66-001")
@@ -551,7 +549,7 @@ class FocusedCampaignTests(unittest.TestCase):
     def test_campaign_target_and_four_lanes_are_exact(self):
         campaign = load_campaign("C66-001")
         self.assertEqual(campaign["context_revision"], 2)
-        self.assertEqual(campaign["campaign_revision"], 4)
+        self.assertEqual(campaign["campaign_revision"], 5)
         # Forced exact-theorem work is Opus/GPT-only; ordinary rotation still
         # includes Grok and Qwen for cell mathematics.
         self.assertEqual(
@@ -584,7 +582,7 @@ class FocusedCampaignTests(unittest.TestCase):
         for task in tasks:
             self.assertEqual(task["target"]["ordinary_cohomology_degree"], 26)
             self.assertEqual(task["target"]["chow_codimension"], 13)
-            self.assertEqual(task["packet_id"], "C66-001-v4")
+            self.assertEqual(task["packet_id"], "C66-001-v5")
 
     def test_campaign_packet_quarantines_candidates(self):
         packet = campaign_packet_record("C66-001")["_text"]
@@ -605,9 +603,7 @@ class FocusedCampaignTests(unittest.TestCase):
         )
         report = campaign_status("C66-001")
         self.assertGreaterEqual(report["campaign_progress"]["attempts"], 0)
-        self.assertEqual(
-            report["campaign_progress"]["stale_campaign_attempts"], 15
-        )
+        self.assertGreaterEqual(report["campaign_progress"]["stale_campaign_attempts"], 15)
         self.assertTrue(
             any(
                 item.get("id") == "ATT-0016"
@@ -621,9 +617,8 @@ class FocusedCampaignTests(unittest.TestCase):
         tasks = campaign_mathematics_tasks("C66-001")
         by_subproblem = {task["subproblem_id"]: task for task in tasks}
         self.assertEqual(by_subproblem["C66-GEO-Z"]["status"], "verified")
-        # Dual-confirmed GEO-Z, GEO-H0, and GEO-COMP (ATT-0112) discharge the
-        # geometry chain. TATE-SUPPORT is executable on T_16(Z); TATE-ASSEMBLY
-        # stays blocked. ATT-0118 is quarantined and does not verify SUPPORT.
+        # Hash-pinned geometry remains verified across the interface-only
+        # revision; no support or counterexample work may bypass the new gate.
         self.assertEqual(by_subproblem["C66-GEO-H0"]["status"], "verified")
         self.assertEqual(
             by_subproblem["C66-GEO-H0"].get("blocked_dependencies") or [],
@@ -659,21 +654,31 @@ class FocusedCampaignTests(unittest.TestCase):
                 geo_comp_inputs
             )
         )
-        self.assertEqual(by_subproblem["C66-TATE-SUPPORT"]["status"], "ready")
+        self.assertEqual(by_subproblem["C66-SUPPORT-INTERFACE"]["status"], "ready")
         self.assertEqual(
-            by_subproblem["C66-TATE-SUPPORT"].get("blocked_dependencies") or [],
+            by_subproblem["C66-SUPPORT-INTERFACE"].get("blocked_dependencies") or [],
             [],
         )
+        self.assertEqual(by_subproblem["C66-TATE-SUPPORT"]["status"], "blocked")
+        self.assertEqual(
+            by_subproblem["C66-TATE-SUPPORT"]["blocked_dependencies"],
+            ["C66-SUPPORT-INTERFACE"],
+        )
         self.assertIsNone(by_subproblem["C66-TATE-SUPPORT"]["verified_attempt_id"])
-        self.assertIn("T_16(Z)", by_subproblem["C66-TATE-SUPPORT"]["exact_theorem"])
-        self.assertNotIn(
-            "constant-coefficient corners of the balanced base",
-            by_subproblem["C66-TATE-SUPPORT"]["exact_theorem"],
+        self.assertIn("canonical mixed-Hodge subquotient", by_subproblem["C66-TATE-SUPPORT"]["exact_theorem"])
+        self.assertEqual(
+            by_subproblem["C66-SUPPORT-INTERFACE"]["artifact_contract"]["object_field"],
+            "target_interface_certificate",
         )
         self.assertEqual(by_subproblem["C66-TATE-ASSEMBLY"]["status"], "blocked")
         self.assertEqual(
             by_subproblem["C66-TATE-ASSEMBLY"]["blocked_dependencies"],
             ["C66-TATE-SUPPORT"],
+        )
+        self.assertEqual(by_subproblem["C66-CEX-LOCAL"]["status"], "blocked")
+        self.assertEqual(
+            by_subproblem["C66-CEX-LOCAL"]["blocked_dependencies"],
+            ["C66-SUPPORT-INTERFACE"],
         )
         self.assertEqual(by_subproblem["C66-COMP-RANK"]["status"], "verified")
         self.assertEqual(
@@ -689,8 +694,9 @@ class FocusedCampaignTests(unittest.TestCase):
 
         quarantined = campaign_quarantined_attempt_ids("C66-001")
         self.assertNotIn("ATT-0088", quarantined)
-        self.assertIn("ATT-0089", quarantined)
+        self.assertNotIn("ATT-0089", quarantined)
         self.assertIn("ATT-0118", quarantined)
+        self.assertIn("ATT-0119", quarantined)
         att0118 = ROOT / "proof" / "attempts" / "ATT-0118.json"
         self.assertEqual(
             hashlib.sha256(att0118.read_bytes()).hexdigest(),
@@ -700,8 +706,8 @@ class FocusedCampaignTests(unittest.TestCase):
 
         self.assertEqual(_load_bearing_experiments("C66-001"), [])
         report = campaign_status("C66-001")
-        self.assertNotIn(
-            "C66-TATE-SUPPORT requires C66-GEO-COMP",
+        self.assertIn(
+            "C66-TATE-SUPPORT requires C66-SUPPORT-INTERFACE",
             report["unresolved_proof_dependencies"],
         )
         self.assertIn(
@@ -961,6 +967,10 @@ class FocusedCampaignTests(unittest.TestCase):
             "failed_approaches_addressed": [],
             "methods_used": ["vcd-only-vanishing"],
             "new_inputs": [],
+            "completion_attestation": {
+                "no_undischarged_dependencies": True,
+                "not_reduction_only": True,
+            },
         }
         with self.assertRaisesRegex(ValueError, "blocked campaign route"):
             _validate_artifact(
@@ -1031,6 +1041,98 @@ class FocusedCampaignTests(unittest.TestCase):
                 ROOT / "proof" / "attempts" / "ATT-9999.json",
                 "codex",
             )
+
+    def test_complete_interface_artifact_requires_target_certificate(self):
+        task = next(
+            item
+            for item in campaign_mathematics_tasks("C66-001")
+            if item["subproblem_id"] == "C66-SUPPORT-INTERFACE"
+        )
+        artifact = {
+            "schema_version": 3,
+            "id": "ATT-9999",
+            "task_id": task["id"],
+            "campaign_id": "C66-001",
+            "campaign_revision": 5,
+            "subproblem_id": task["subproblem_id"],
+            "lane": task["lane"],
+            "result_type": "lemma",
+            "target_claim_id": "RED-0001",
+            "context_revision": 2,
+            "packet_id": task["packet_id"],
+            "packet_path": task["input_packet"],
+            "packet_sha256": task["packet_sha256"],
+            "target": task["target"],
+            "theorem_statement": task["exact_theorem"],
+            "summary": "Complete interface claim.",
+            "argument_markdown": "A complete argument.",
+            "claims": [{"id": "CLM-TEST", "statement": "Claim.", "status": "proved"}],
+            "status": "claimed_complete",
+            "source_claim_ids": [],
+            "gap_markers": [],
+            "engine": "codex",
+            "proof_dependencies": [],
+            "experiment_ids": [],
+            "experiment_uses": [],
+            "novelty_claims": [],
+            "failed_approaches_addressed": [],
+            "methods_used": [],
+            "new_inputs": [],
+            "completion_attestation": {
+                "no_undischarged_dependencies": True,
+                "not_reduction_only": True,
+            },
+        }
+        with self.assertRaisesRegex(ValueError, "target_interface_certificate"):
+            _validate_artifact(
+                "mathematics", task, artifact,
+                ROOT / "proof" / "attempts" / "ATT-9999.json", "codex",
+            )
+        artifact["target_interface_certificate"] = {
+            field: "specified"
+            for field in task["artifact_contract"]["required_nonempty_strings"]
+        }
+        _validate_artifact(
+            "mathematics", task, artifact,
+            ROOT / "proof" / "attempts" / "ATT-9999.json", "codex",
+        )
+        support_task = next(
+            item
+            for item in campaign_mathematics_tasks("C66-001")
+            if item["subproblem_id"] == "C66-TATE-SUPPORT"
+        )
+        support_artifact = dict(artifact)
+        support_artifact.update(
+            {
+                "task_id": support_task["id"],
+                "subproblem_id": support_task["subproblem_id"],
+                "lane": support_task["lane"],
+                "theorem_statement": support_task["exact_theorem"],
+            }
+        )
+        support_artifact.pop("target_interface_certificate")
+        with self.assertRaisesRegex(ValueError, "target_interface_reference"):
+            _validate_artifact(
+                "mathematics", support_task, support_artifact,
+                ROOT / "proof" / "attempts" / "ATT-9999.json", "codex",
+            )
+
+    def test_carried_forward_verification_fails_closed_on_hash_mismatch(self):
+        from pure_tate.campaigns import campaign_carried_forward_verifications
+
+        carried = copy.deepcopy(campaign_carried_forward_verifications("C66-001"))
+        carried["C66-GEO-COMP"]["attempt"]["sha256"] = "0" * 64
+        with mock.patch(
+            "pure_tate.campaigns.campaign_carried_forward_verifications",
+            return_value=carried,
+        ):
+            tasks = campaign_mathematics_tasks("C66-001")
+        by_subproblem = {task["subproblem_id"]: task for task in tasks}
+        self.assertEqual(by_subproblem["C66-GEO-COMP"]["status"], "ready")
+        self.assertEqual(
+            by_subproblem["C66-SUPPORT-INTERFACE"]["blocked_dependencies"],
+            ["C66-GEO-COMP"],
+        )
 
     def test_driver_is_bounded_balanced_and_no_spend_in_dry_run(self):
         before = {
@@ -1270,7 +1372,7 @@ class FocusedCampaignTests(unittest.TestCase):
             ["cursor-grok", "qwen"],
         )
         coverage = report["campaign_progress"]["subproblem_engine_coverage"]
-        self.assertEqual(len(coverage), 9)
+        self.assertEqual(len(coverage), 10)
         # Fresh campaigns start empty; after live paired attempts some GEO lanes
         # may already list engines. Novelty still fails closed without verification.
         self.assertFalse(report["case_verification"]["case_verified"])

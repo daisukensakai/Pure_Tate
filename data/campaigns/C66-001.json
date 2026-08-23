@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "C66-001",
-  "campaign_revision": 4,
+  "campaign_revision": 5,
   "context_revision": 2,
   "case": {"g": 6, "n": 6},
   "target_claim_id": "RED-0001",
@@ -40,14 +40,30 @@
     {"id": "C66-GEO-H0", "lane": "geometry", "title": "Stratify the relative degree-six linear system by h0", "dependencies": ["C66-GEO-Z"]},
     {"id": "C66-GEO-COMP", "lane": "geometry", "title": "Determine components, dimensions, stabilizers, and finite-cover behavior", "dependencies": ["C66-GEO-Z", "C66-GEO-H0"], "context_dependencies": ["C66-COMP-RANK", "C66-COMP-COMP"]},
     {
+      "id": "C66-SUPPORT-INTERFACE",
+      "lane": "weakest-sufficient-proof",
+      "title": "Construct the intrinsic CE-support interface to the exact target",
+      "dependencies": ["C66-GEO-COMP"],
+      "exact_theorem": "Let T:=W_{-16}H^{BM}_{16}(M_{6,6};Q). Construct a canonical, atlas-independent CE support-accounting datum (K_Z, T_Z, phi) for the ordered reduced-support evaluation-failure geometry: K_Z must be a named mixed-Hodge term in an explicitly constructed compactification, localization sequence, correspondence, or spectral sequence for M_{6,6}; phi must identify T_Z as a specified subquotient of T with the exact degree, weight, and Tate-twist conventions stated; and an exact filtration, quotient, or spectral-sequence accounting must prove both which part of T is T_Z and that no relevant Z-supported term is omitted. The construction must descend from any presentation/atlas to the same target datum. This theorem makes no Tate assertion and may not assume a closed embedding, Gysin map, support-exhaustion statement, or map to T without proving it.",
+      "artifact_contract": {
+        "object_field": "target_interface_certificate",
+        "required_nonempty_strings": ["canonical_source", "construction", "target_term", "target_map", "degree_weight_twist", "target_subquotient", "coverage", "atlas_invariance"]
+      }
+    },
+    {
       "id": "C66-TATE-SUPPORT",
       "lane": "weakest-sufficient-proof",
-      "title": "Prove Tate type for the exact codimension-13 contribution supported on Z",
-      "dependencies": ["C66-GEO-COMP"],
-      "exact_theorem": "Over C with Q-coefficients, on the ordered reduced-support Casnati-Ekedahl evaluation-failure model of ATT-0112 clause (E): let S be a reduced locally Noetherian C-scheme carrying a (CE)+(N)+(BAL) genus-six degree-four family with no connected component image contained in the type-(ii) locus; let U be the distinct-support open of the Abel-Jacobi P^2-bundle A=P_S(pi_*L); let Z=Ord(U) be the finite etale right S_6-torsor of orderings. Write T_16(Z):=W_{-16}H^{BM}_{16}(Z;Q), canonically dual to Gr^W_16 H_c^{16}(Z;Q) with no extra Tate twist. Prove that T_16(Z) is a finite direct sum of Q(8), equivalently Gr^W_16 H_c^{16}(Z;Q) is a finite direct sum of Q(-8). This is the H_alpha-object of this model Z itself, including the simply-branched and complementary non-simply-branched loci in Z and every rational S_6-isotypic component of T_16(Z). It does not include, and is not disproved by failure of, the universally quantified constant-coefficient hypotheses (H-S) or (H-C) of FND-0167: those corners of an atlas S of Hbar^bal or of the universal curve are atlas-dependent, and the j=8 instance of (H-S) is false for some allowed etale atlas components (FND-0169; ATT-0118). Conditional Tate-transfer of the [6] and [5,1] multiplicity spaces under named (H-S)/(H-C) is a lemma, not this theorem. A disproof must exhibit a surviving non-Tate summand in T_16(Z) (equivalently in Gr^W_16 H_c^{16}(Z;Q)), not merely a non-Tate corner of some atlas of Hbar^bal (FND-0171). Do not identify T_16(Z) with the global kernel K=ker(H^{16}(Mbar_{6,6};Q)->H^{16}(D;Q)) (FND-0168). Do not construct a closed embedding, Gysin map, image, or support-exhaustion statement in M_{6,6}. Respect FND-0164: compact-support Leray with constructible coefficients does not inherit a top-weight vanishing proved only for constant Q. This lemma does not resolve the campaign Hodge/Tate group RED-0001."
+      "title": "Prove Tate type for the canonical CE target subquotient",
+      "dependencies": ["C66-SUPPORT-INTERFACE"],
+      "exact_theorem": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms.",
+      "artifact_contract": {
+        "object_field": "target_interface_reference",
+        "required_nonempty_strings": ["interface_attempt_id", "target_subquotient", "target_map_use", "survival_or_tate_argument"],
+        "required_nonempty_lists": ["interface_claim_ids"]
+      }
     },
-    {"id": "C66-TATE-ASSEMBLY", "lane": "weakest-sufficient-proof", "title": "Assemble the tetragonal contribution into the exact lowest-weight target", "dependencies": ["C66-TATE-SUPPORT"]},
-    {"id": "C66-CEX-LOCAL", "lane": "counterexample", "title": "Search Z for a non-Tate local system or motivic summand", "dependencies": ["C66-GEO-COMP"]},
+    {"id": "C66-TATE-ASSEMBLY", "lane": "weakest-sufficient-proof", "title": "Assemble verified canonical target subquotients into the exact target", "dependencies": ["C66-TATE-SUPPORT"], "exact_theorem": "Using the verified C66-SUPPORT-INTERFACE filtration and the verified Tate type of its T_Z term, prove every named complementary target subquotient is a finite direct sum of Q(8) and that the verified filtration/exact sequence exhausts T:=W_{-16}H^{BM}_{16}(M_{6,6};Q). Conclude T is a finite direct sum of Q(8)."},
+    {"id": "C66-CEX-LOCAL", "lane": "counterexample", "title": "Search the verified CE target interface for a non-Tate subquotient", "dependencies": ["C66-SUPPORT-INTERFACE"], "artifact_contract": {"object_field": "target_interface_reference", "required_nonempty_strings": ["interface_attempt_id", "target_subquotient", "target_map_use", "survival_or_tate_argument"], "required_nonempty_lists": ["interface_claim_ids"]}},
     {"id": "C66-CEX-SURVIVE", "lane": "counterexample", "title": "Test survival of a non-Tate candidate in the exact target", "dependencies": ["C66-CEX-LOCAL"]},
     {"id": "C66-COMP-RANK", "lane": "computation", "title": "Compute determinantal rank-drop ideals and fibre dimensions", "dependencies": ["C66-GEO-Z"], "experiment_id": "EXP-C66-RANK"},
     {"id": "C66-COMP-COMP", "lane": "computation", "title": "Test proposed component decompositions", "dependencies": ["C66-GEO-H0"], "experiment_id": "EXP-C66-COMP"}

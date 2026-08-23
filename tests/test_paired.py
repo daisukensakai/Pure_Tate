@@ -1183,8 +1183,8 @@ class DigestAttributionTests(unittest.TestCase):
 
         mapping = math_task_subproblem_map(self.campaign)
         self.assertEqual(mapping["TASK-C66-M-001"]["subproblem_id"], "C66-GEO-Z")
-        self.assertEqual(mapping["TASK-C66-M-008"]["subproblem_id"], "C66-COMP-RANK")
-        self.assertEqual(mapping["TASK-C66-M-009"]["subproblem_id"], "C66-COMP-COMP")
+        self.assertEqual(mapping["TASK-C66-M-009"]["subproblem_id"], "C66-COMP-RANK")
+        self.assertEqual(mapping["TASK-C66-M-010"]["subproblem_id"], "C66-COMP-COMP")
         ancestors = ancestor_subproblem_ids(self.campaign, "C66-GEO-COMP")
         self.assertEqual(
             ancestors, {"C66-GEO-COMP", "C66-GEO-H0", "C66-GEO-Z"}

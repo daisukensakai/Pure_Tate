@@ -17,7 +17,7 @@ from .targets import CONTEXT_REVISION, open_input_target, target_formula
 
 
 DEFAULT_CAMPAIGN = "C66-001"
-CAMPAIGN_REVISION = 4
+CAMPAIGN_REVISION = 5
 CAMPAIGN_DIR = DATA / "campaigns"
 CAMPAIGN_ARTIFACT_DIR = ROOT / "proof" / "campaign-attempts"
 NOVELTY_DIR = ROOT / "research" / "novelty-audits"
@@ -293,6 +293,8 @@ def campaign_packet_binding(
                 "lane": item["lane"],
                 "title": item["title"],
                 "dependencies": list(item.get("dependencies", [])),
+                "exact_theorem": item.get("exact_theorem", ""),
+                "artifact_contract": item.get("artifact_contract", {}),
             }
             for item in campaign["subproblems"]
         ],
@@ -353,6 +355,55 @@ def campaign_revision_migration(
     except (OSError, json.JSONDecodeError):
         return {}
     return value if isinstance(value, dict) else {}
+
+
+def campaign_carried_forward_verifications(
+    campaign_id: str = DEFAULT_CAMPAIGN,
+) -> Dict[str, Dict[str, Any]]:
+    """Return hash-pinned prior-revision verifications explicitly retained.
+
+    A campaign revision normally makes all prior attempts stale.  A narrow
+    migration exception is allowed only for subproblems whose theorem and
+    dependencies are unchanged; task construction verifies every listed file
+    hash before treating such a record as current context.
+    """
+    migration = campaign_revision_migration(campaign_id)
+    values = migration.get("carry_forward_verifications", {})
+    if not isinstance(values, dict):
+        return {}
+    return {
+        str(subproblem_id): record
+        for subproblem_id, record in values.items()
+        if isinstance(subproblem_id, str) and isinstance(record, dict)
+    }
+
+
+def artifact_contract_errors(
+    contract: Any, artifact: Dict[str, Any]
+) -> List[str]:
+    """Validate a declarative campaign artifact contract.
+
+    Contracts deliberately check only the required interface metadata.  The
+    mathematical truth of those fields remains the subject of independent
+    review, but a worker cannot omit the target-facing data altogether.
+    """
+    if not isinstance(contract, dict):
+        return []
+    object_field = contract.get("object_field")
+    if not isinstance(object_field, str) or not object_field:
+        return ["artifact contract lacks object_field"]
+    value = artifact.get(object_field)
+    if not isinstance(value, dict):
+        return ["artifact lacks object %s" % object_field]
+    errors: List[str] = []
+    for field in contract.get("required_nonempty_strings", []):
+        if not isinstance(value.get(field), str) or not value[field].strip():
+            errors.append("%s.%s must be a nonempty string" % (object_field, field))
+    for field in contract.get("required_nonempty_lists", []):
+        entries = value.get(field)
+        if not isinstance(entries, list) or not entries:
+            errors.append("%s.%s must be a nonempty list" % (object_field, field))
+    return errors
 
 
 def campaign_quarantined_attempt_ids(

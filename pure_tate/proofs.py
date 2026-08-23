@@ -157,11 +157,10 @@ def _migration() -> Dict[str, Any]:
 
 
 def _campaign_migration() -> Dict[str, Any]:
-    path = (
-        ROOT
-        / "proof"
-        / "migrations"
-        / "campaign-C66-001-v4.json"
+    from .campaigns import CAMPAIGN_REVISION
+
+    path = ROOT / "proof" / "migrations" / (
+        "campaign-C66-001-v%s.json" % CAMPAIGN_REVISION
     )
     if not path.exists():
         return {}
@@ -534,6 +533,28 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
                 )
             if attempt.get("task_id") != expected_task:
                 result.errors.append("%s has incorrect task linkage" % attempt_id)
+        if (
+            is_campaign
+            and attempt.get("campaign_revision") == campaign_migration.get(
+                "campaign_revision"
+            )
+            and attempt_is_complete(attempt)
+        ):
+            from .campaigns import artifact_contract_errors, load_campaign
+
+            campaign = load_campaign(str(attempt.get("campaign_id")))
+            subproblem = next(
+                (
+                    item
+                    for item in campaign.get("subproblems", [])
+                    if item.get("id") == attempt.get("subproblem_id")
+                ),
+                {},
+            )
+            for error in artifact_contract_errors(
+                subproblem.get("artifact_contract"), attempt
+            ):
+                result.errors.append("%s violates artifact contract: %s" % (attempt_id, error))
         if migration and isinstance(attempt.get("packet_path"), str):
             packet_path = ROOT / attempt["packet_path"]
             if not packet_path.is_file():
@@ -690,6 +711,17 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
             result.errors.append("%s has no approach description" % attempt_id)
 
     for attempt_id, attempt in attempts_by_id.items():
+        if (
+            attempt_id in stale_campaign_attempts
+            or (
+                campaign_migration.get("stale_prior_revisions") is True
+                and attempt.get("campaign_id")
+                == campaign_migration.get("campaign_id")
+                and attempt.get("campaign_revision")
+                != campaign_migration.get("campaign_revision")
+            )
+        ):
+            continue
         dependency_attempt_ids = {
             dependency_id
             for dependency_id in attempt.get("proof_dependencies", [])

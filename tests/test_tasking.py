@@ -91,7 +91,7 @@ class TaskingTests(unittest.TestCase):
                 json.dumps(
                     self._complete_attempt(
                         campaign_id="C66-001",
-                        campaign_revision=4,
+                        campaign_revision=5,
                         subproblem_id="C66-FULL",
                         packet_binding_sha256="b" * 64,
                     )
