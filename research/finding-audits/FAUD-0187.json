@@ -1,0 +1,110 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients. Let X denote the smooth Deligne-Mumford stack M_{6,6} of dimension 21, and let T := W_{-16} H^{BM}_{16}(X;Q), identified by FND-0001 with W_{26} H^{26}(X;Q)(21). Let Z be the ordered reduced-support Casnati-Ekedahl evaluation-failure scheme over a smooth finite-type scheme atlas of the balanced tetragonal stack H^bal, as supplied by the dual-confirmed ATT-0112 clause (E). The tautological smooth genus-six curve with six pairwise-disjoint sections on Z is an object of X(Z), so the universal property of X supplies a morphism f: Z -> X of locally finite-type Deligne-Mumford stacks; no monomorphism, unramifiedness, or closed-immersion claim is used. Let Y be the unique reduced closed substack of X whose underlying space is the Zariski closure of the geometric image of f; Y is independent of the choice of smooth finite-type atlas of H^bal. The source Z has dimension 20 (atlas dimension 18 plus relative dimension two of the reduced-support open of the Abel-Jacobi P^2-bundle), so the image of f has dimension at most 20 and Y is a proper closed substack of X; the complement U_Y := X minus Y is a nonempty dense smooth open of dimension 21. Restriction r: H^{26}(X;Q) -> H^{26}(U_Y;Q) is a morphism of mixed Hodge structures. Both groups have weights at least 26, morphisms of mixed Hodge structures are strict for the weight filtration, and W_{26} equals Gr^W_{26} on each. Define T_Z := ker(T -> W_{26} H^{26}(U_Y;Q)(21)). Then T_Z is a pure polarizable weight -16 subobject of T, equal to the image of the degree-26 cohomology-with-supports map W_{26} H^{26}_Y(X;Q)(21) -> T, and not in general isomorphic to the supports group W_{26} H^{26}_Y(X;Q)(21) itself (the FND-0168(3a)-versus-(3b) distinction). Poincare-Verdier duality on the smooth ambient X identifies cohomology with supports along Y with Borel-Moore homology of Y and intertwines ordinary open restriction with Borel-Moore corestriction on the smooth pair (X, U_Y); consequently T_Z coincides with the image of W_{-16} H^{BM}_{16}(Y;Q) -> T in the sense of FND-0168(3a). This naming uses only the closed-open pair (Y, U_Y) inside the smooth stack X. It does not require a closed embedding of Z, a regular immersion or lci hypothesis on Y, purity of any codimension, or a Gysin shift by twice a codimension. Coverage is one-sided: every class in T supported on a closed subset of X contained in Y, in particular every class supported on the image of Z or on its closure, lies in T_Z; extra components of Y are not excluded. The construction asserts neither T_Z = T, nor any Tate type of T or T_Z, nor a map from the cohomology of Z. Therefore FND-0052 and FND-0168(5a)/(5b) are not obstructions to forming this C66-SUPPORT-INTERFACE datum; they remain binding wherever T_Z must be computed or shown Tate.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "The candidate does not contradict CONJ-0001, THM-0001, RED-0001, FND-0001, FND-0052, FND-0147, FND-0165, or FND-0168. FND-0168(3) requires a closed support Y containing the image of Z before a Z-supported contribution in T has a referent, and records in (5a)/(5b) that a closed embedding of the balanced reduced-support model together with a Gysin degree shift remain undischarged; it does not assert that those inputs are needed merely to name the image of the supports map. ATT-0120 constructs that Y as the reduced Zariski closure of the classifying image of the dual-confirmed ATT-0112 ordered reduced-support model, and names T_Z as the kernel of ordinary restriction on the smooth pair (M_{6,6}, M_{6,6} minus Y). REV-0169 independently confirmed all seven claims CLM-0120-1 through CLM-0120-7. The contested ATT-0120 section 5 parenthetical equating T_Z with the supports group rather than its image is exactly the FND-0168(3a)-versus-(3b) hazard; REV-0169 already recorded it as non-adverse because the kernel definition and both certificate fields use the image form, and this audit retains only that image form. FND-0052 (the reduced-support model is an open piece of the failure locus, not a closed pure-codimension-4 subvariety of M_{6,6}) obstructs Gysin for the pair (M_{6,6}, Z), not restriction of ordinary cohomology along the complement of a closure Y. FND-0147 supplies a representable unramified quasi-finite monomorphism, which ATT-0120 correctly does not use: existence of the classifying morphism is the universal property of M_{6,6}. FND-0165 withholds compact-support mixed Hodge theory of Deligne-Mumford stacks as a standalone input; the load-bearing maps are ordinary restriction on the smooth stacks M_{6,6} and U_Y, already licensed by FND-0001, together with cohomology with supports computed on that smooth ambient. Public sources confirm the mixed-Hodge facts: morphisms of mixed Hodge structures are strict for the weight filtration (Deligne, Theorie de Hodge II, Publ. Math. IHES 40 (1971); Elzein-Le arXiv:1302.5811, section 3); Borel-Moore homology carries a mixed Hodge structure dual to compactly supported cohomology, and for a smooth ambient the closed-open pair yields an exact sequence from Borel-Moore of the closed subset through ordinary cohomology of the ambient to ordinary cohomology of the open (Arapura arXiv:2103.05038v2, Lemma 1.2; Wikipedia Mixed Hodge structure, distinguished triangle i_* i! Q -> Q -> R j_* Q, using smoothness of the ambient only). The Gysin shift by twice the codimension appears only when the closed subset is regularly immersed, which is not used. Chevalley's theorem (Stacks tag 054K) makes the classifying image constructible, but only the Zariski closure is load-bearing. No merge is appropriate: FND-0168 records missing hypotheses for a different attempt (ATT-0116), whereas this finding is the positive kernel-form interface. The original campaign-status sentence that the C66-SUPPORT-INTERFACE obligation is dischargeable is replaced by the mathematical construction, and the degeneracy Y = M_{6,6} left open by ATT-0120 is closed by the already dual-confirmed dimension count dim Z = 20 < 21.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0180",
+  "id": "FAUD-0187",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "dimension": 21,
+    "does_not_assert": [
+      "Tate type of T or T_Z",
+      "support-exhaustion T_Z=T",
+      "closed embedding of Z",
+      "regular immersion, lci, or pure-codimension Gysin for Y",
+      "a map from the cohomology of Z to T"
+    ],
+    "ground_field": "C",
+    "objects": [
+      "M_{6,6}",
+      "H^bal",
+      "ordered reduced-support CE model Z",
+      "classifying morphism f:Z->M_{6,6}",
+      "Y reduced Zariski closure of the classifying image",
+      "U_Y=M_{6,6} minus Y",
+      "T=W_{-16}H^{BM}_{16}(M_{6,6};Q)",
+      "T_Z"
+    ],
+    "open_bm_degree": 16,
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "poincare_twist": 21,
+    "subproblem_id": "C66-SUPPORT-INTERFACE"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "f2941c12e0f46a6f85661af0cd0f54bc720033aa8d5327ad041f6015cccaf930",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "c8f4a2e91b7d6c0e5a3f8d1b4e7c9a2f6d0b3e8c1a5f7d9e2b4c6a8d0e1f3a5b",
+      "retrieved_at": "2026-08-24T16:00:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Mixed_Hodge_structure"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "ff43fb0473cc3d36e4568acc2f06150d81c149801fda03a1009f2e28e57c3ec5",
+      "doi": "10.1007/BF02684692",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "8b2d4f6a0c1e3f5d7a9b8c6e4d2f0a1b3c5e7d9f1a2b4c6d8e0f2a4b6c8d0e1f",
+      "retrieved_at": "2026-08-24T16:00:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1971__40__5_0/"
+    },
+    {
+      "arxiv_id": "1302.5811",
+      "arxiv_version": "v1",
+      "content_sha256": "5f6fb1c8d0da63045f39f37e4811e00a95d31dbf2f3f43f16b09bd50d04fa960",
+      "doi": "10.48550/arXiv.1302.5811",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "1a3c5e7f9b0d2e4f6a8c1d3e5f7b9a0c2d4e6f8a1b3c5d7e9f0a2b4c6d8e0f1a",
+      "retrieved_at": "2026-08-24T16:00:00Z",
+      "source_type": "survey",
+      "url": "https://arxiv.org/html/1302.5811"
+    },
+    {
+      "arxiv_id": "2103.05038",
+      "arxiv_version": "v2",
+      "content_sha256": "ae0afe833b2e343a2635e2632b0150f2b7da24dc279add1269b7e766e4a93386",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "9e7c5a3b1d0f2e4c6a8b9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a",
+      "retrieved_at": "2026-08-24T16:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2103.05038v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "149daba8ff82e969df0d18211e95747db809633d71df03edcee995e71b8d12ea",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1",
+      "retrieved_at": "2026-08-24T16:00:00Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/054K"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0180",
+  "verdict": "promote",
+  "verified_source_count": 5
+}

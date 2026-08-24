@@ -1,0 +1,86 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients. Let T := W_{-16} H^{BM}_{16}(M_{6,6}; Q), identified by Poincare duality with W_{26} H^{26}(M_{6,6}; Q)(21) (FND-0001). Let Im subset |M_{6,6}| be the set-theoretic image of the classifying morphism to M_{6,6} of the ordered reduced-support Casnati-Ekedahl evaluation-failure model of ATT-0112 clause (E). Let Y subseteq Y' be closed substacks of M_{6,6} with Im subset |Y|. Write U := M_{6,6} minus Y and U' := M_{6,6} minus Y', so U' subseteq U are smooth open substacks of dimension 21. Restriction H^{26}(M_{6,6}; Q) -> H^{26}(U'; Q) factors through H^{26}(U; Q) as a morphism of mixed Hodge structures. Morphisms of mixed Hodge structures are strictly compatible with the weight filtration, so W_{26} is an exact functor. Poincare duality on the smooth opens identifies W_{-16} H^{BM}_{16}(U; Q) with W_{26} H^{26}(U; Q)(21) and likewise for U'. Therefore ker(T -> W_{-16} H^{BM}_{16}(U; Q)) is contained in ker(T -> W_{-16} H^{BM}_{16}(U'; Q)), equivalently ker(T -> W_{26} H^{26}(U; Q)(21)) is contained in ker(T -> W_{26} H^{26}(U'; Q)(21)). A closed subset of |M_{6,6}| carries a unique reduced closed substack structure, so the reduced closed substack Y_0 whose underlying space is the Zariski closure of Im is the unique smallest closed substack containing Im, and the associated kernel T_{Z,Y_0} is the unique smallest kernel-form term among those indexed by closed substacks of M_{6,6} containing Im. This comparison is internal to that kernel-form family and does not constrain other constructions of subobjects of T. Two consequences: (i) the obligation that no class in T supported on a closed subset contained in the image of Z, or in its closure, be omitted is one-sided (the kernel may contain classes supported on extra components of Y, including points of the Zariski closure of Im that do not lie in Im) and is already met by every such Y, in particular by Y_0; (ii) a strictly larger kernel-form term cannot be obtained from a closed support contained in Y_0, so enlarging the kernel-form term toward exhaustion T_{Z,Y}=T requires a closed support not contained in Y_0 and therefore not equal to the reduced CE classifying-image closure. That extra support is not identified with the CE geometry by the kernel-form interface and is not shown Tate by that construction; showing any enlarged term Tate remains a separate C66-TATE-SUPPORT obligation. Support-exhaustion T_{Z,Y}=T is not asserted for any Y, and vanishing of restriction from T to a nonempty complement is not asserted.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads were ATT-0120 and REV-0169. ATT-0120 Sections 4-6 construct the kernel-form datum T_Z := ker(T -> W_{26} H^{26}(M_{6,6} minus Y;Q)(21)) from ordinary restriction along the open complement of the reduced classifying-image closure Y, identify it with FND-0168(3a)'s image of the supports map, and explicitly declare coverage one-sided: the kernel contains every class supported on a closed subset of Y (hence every Z-supported class in the only sense available before a regular embedding) but may also contain classes on extra components of the closure. ATT-0120 does not compare two different closed supports and does not claim uniqueness of a minimal kernel. REV-0169 confirms ATT-0120 and extracts the candidate as a reusable comparison rule, distinct from FND-0168(3a) which fixes one Y. That distinction is correct: corroborated FND-0168(3) records the exact sequence W_{-16} H^{BM}_{16}(Y;Q) -> T -> W_{-16} H^{BM}_{16}(M_{6,6} minus Y;Q) for a single closed support containing the image of Z, and therefore already implies that the kernel-form term equals the image of Borel-Moore homology of Y, but it does not record monotonicity in Y or minimality of the reduced closure. No claim-level contradiction arises: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, RED-0001, FND-0001, FND-0052, or FND-0168. Primary-source checks confirm the two load-bearing lemmas. Deligne, Theorie de Hodge II (Publ. Math. IHES 40 (1971), doi 10.1007/BF02684692), Theorem 2.3.5: the category of mixed Hodge structures is abelian, every morphism is strictly compatible with the weight filtration W, and Gr^W_n is an exact functor. The same paper, Theorem 3.2.5(iii) and 3.2.11.B: the mixed Hodge structure on H^*(X) of a smooth complex algebraic variety is functorial in X, so restriction along an open immersion (in particular U' subset U subset M_{6,6}) is a morphism of mixed Hodge structures; kernels of composed restrictions therefore enlarge as the open shrinks. The same functoriality of restriction is the input that makes the Borel-Moore localization sequence of FND-0168(3) and the right-exact sequence (6.1) of Canning-Larson-Payne, arXiv:2307.08830v3, compatible with open-closed pairs other than the compactification boundary. Stacks Project Tag 0508 / Lemma 100.10.1 (Tag 0509): a closed subset T of |X| for an algebraic stack X carries a unique reduced closed substack Z with |Z|=T, so the reduced Zariski closure of the classifying image is the unique smallest closed substack containing that image and therefore yields the unique smallest kernel-form term in this family. Two wording defects in the candidate are corrected rather than promoted unchanged. First, 'met exactly by that minimal choice' overstates coverage: no-omission holds for every closed Y containing the image, and even the minimal kernel may contain non-CE support on the closure minus the constructible image (ATT-0120 Section 6). Second, 'imports non-CE support that must then be separately shown Tate' is a remaining C66-TATE-SUPPORT obligation inside the kernel-form family, not a theorem that extra support is non-Tate, and Y proper subset Y' need not strictly enlarge the kernel. Merge with FND-0168 is refused. Promote the corrected statement.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0182",
+  "id": "FAUD-0189",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "ground_field": "C",
+    "not_asserted": [
+      "support-exhaustion T_Z=T for any Y",
+      "Tate type of any kernel-form term",
+      "that Y proper subset Y' implies a strict kernel enlargement",
+      "that extra support is non-Tate",
+      "any non-kernel-form construction of a subobject of T"
+    ],
+    "objects": [
+      "T=W_{-16}H^{BM}_{16}(M_{6,6};Q)",
+      "closed substacks Ysubseteq Y' of M_{6,6} containing the CE classifying image",
+      "kernel-form terms ker(T->W_{-16}H^{BM}_{16}(M_{6,6} minus Y;Q))"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "508917bc167df586f769582cd75510ca40c963ac1393a9a3eb8afc30c98840cd",
+      "doi": "10.1007/BF02684692",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-24T00:00:00Z",
+      "source_type": "citation-index",
+      "url": "https://doi.org/api/handles/10.1007/BF02684692"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "714fd2e133829e2428ac73a549dc603f0b95d28ce160fa536ce09a4e18751de9",
+      "doi": "10.1007/BF02684692",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "508917bc167df586f769582cd75510ca40c963ac1393a9a3eb8afc30c98840cd",
+      "retrieved_at": "2026-08-24T00:00:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1971__40__5_0/"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "4ec915e71502383ce05e3f2b3ce7700db56dd5e76ceb4b882978077b64e69a2a",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "508917bc167df586f769582cd75510ca40c963ac1393a9a3eb8afc30c98840cd",
+      "retrieved_at": "2026-08-24T00:00:00Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/0508"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "46da0c100a2bfd74c3c85838a79e8d171d2e52842d8058fe7dda819d1600fade",
+      "doi": "10.1017/fmp.2024.24",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "508917bc167df586f769582cd75510ca40c963ac1393a9a3eb8afc30c98840cd",
+      "retrieved_at": "2026-08-24T00:00:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2307.08830v3"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0182",
+  "verdict": "promote",
+  "verified_source_count": 4
+}

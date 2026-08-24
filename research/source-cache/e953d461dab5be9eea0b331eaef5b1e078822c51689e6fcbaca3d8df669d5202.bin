@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YG9NQFLT3B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YG9NQFLT3B');
+</script>
+<title>Exposé XVII · 7. Appendix (by B. Saint-Donat) — SGA 4</title>
+<meta name="description" content="SGA 4 — Topos Theory and Étale Cohomology of Schemes, Exposé XVII, 7. Appendix (by B. Saint-Donat). In this appendix we shall use the results of \mathrm{VI_B}, whose notation we retain.">
+<link rel="canonical" href="https://grothendiecksga.com/read/sga4/en/XVII-7.html">
+<link rel="alternate" hreflang="fr" href="https://grothendiecksga.com/read/sga4/fr/XVII-7.html">
+<link rel="alternate" hreflang="en" href="https://grothendiecksga.com/read/sga4/en/XVII-7.html">
+<link rel="alternate" hreflang="x-default" href="https://grothendiecksga.com/read/sga4/fr/XVII-7.html">
+<meta property="og:site_name" content="Séminaire de Géométrie Algébrique du Bois-Marie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Exposé XVII · 7. Appendix (by B. Saint-Donat) — SGA 4">
+<meta property="og:description" content="SGA 4 — Topos Theory and Étale Cohomology of Schemes, Exposé XVII, 7. Appendix (by B. Saint-Donat). In this appendix we shall use the results of \mathrm{VI_B}, whose notation we retain.">
+<meta property="og:url" content="https://grothendiecksga.com/read/sga4/en/XVII-7.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" href="../../../icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+<style>
+  :root { --accent:#7a1f1f; --bg:#fbfaf7; --border:#ddd9cf; --text:#1d1d1b; --muted:#6b675e; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; }
+  body { font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+         background:var(--bg); color:var(--text); line-height:1.55; }
+  .crumbs { font-size:.85rem; color:var(--muted); padding:1rem 1.2rem; }
+  .crumbs a { color:var(--accent); text-decoration:none; }
+  main { max-width:46rem; margin:0 auto; padding:0 1.2rem 3rem; }
+  h1 { font-size:1.5rem; line-height:1.3; }
+  h1 .author, h2 .author { display:block; font-size:.85rem; font-weight:400;
+    font-style:italic; color:var(--muted); margin-top:.4rem; }
+  a { color:var(--accent); }
+  .thm { margin:1.1rem 0; padding:.1rem 0; }
+  .thm-head { font-variant:small-caps; }
+  .thm-name, .thm-num { font-weight:700; }
+  .thm-title { font-weight:400; font-style:italic; }
+  .thm-plain .thm-body { font-style:italic; }
+  .thm-plain { border-left:3px solid var(--accent); padding-left:.9rem; }
+  .thm-remark { border-left:3px solid #b9b3a3; padding-left:.9rem; }
+  .thm-body { margin-top:.15rem; }
+  .thm-body p:first-child { display:inline; }
+  .proof { margin:.9rem 0; }
+  .proof-head { color:var(--muted); font-style:italic; }
+  .proof-name { font-style:italic; }
+  .proof-toggle { display:none; }
+  .proof-body { margin:.3rem 0 .3rem .5rem; padding-left:.7rem; border-left:1px dotted #c9c4b6; }
+  ol.enumerate, ol.enumerate-i, ol.enumerate-a, ul.itemize { margin:.5rem 0 .5rem 1.2rem; }
+  .item-label { font-weight:600; margin-right:.3rem; }
+  .footnote-ref sup { color:var(--accent); }
+  #footnotes { margin-top:3rem; border-top:1px solid var(--border); padding-top:.6rem;
+    font-size:.85rem; color:#333; }
+  #footnotes ol { margin:0; padding-left:1.4rem; }
+  #footnotes li { margin:.25rem 0; }
+  #footnotes .backref { margin-left:.3rem; text-decoration:none; }
+  dl.bibliography dt { float:left; clear:left; margin-right:.5rem; font-weight:600; }
+  dl.bibliography dd { margin:0 0 .4rem 2.6rem; }
+  .smallcaps { font-variant:small-caps; }
+  table { border-collapse:collapse; }
+  td, th { padding:.15rem .5rem; }
+  mjx-container[display="true"], mjx-container[jax="SVG"][display="true"] {
+    display:block; overflow-x:auto; overflow-y:hidden; max-width:100%; }
+  .pager { display:flex; justify-content:space-between; gap:1rem; margin:2.5rem 0 0;
+    padding-top:1rem; border-top:1px solid var(--border); font-size:.9rem; }
+  .viewer-link { margin-top:1.2rem; font-size:.85rem; color:var(--muted); }
+  ol.toc-chapters { padding-left:1.2rem; }
+  ol.toc-chapters > li { margin:.8rem 0; }
+  ol.toc-sections { list-style:none; padding-left:1rem; font-size:.95rem; }
+  ol.toc-sections li { margin:.2rem 0; }
+  .toc-author { font-size:.85rem; font-style:italic; color:var(--muted); }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Chapter","name":"Exposé XVII · 7. Appendix (by B. Saint-Donat) — SGA 4","url":"https://grothendiecksga.com/read/sga4/en/XVII-7.html","inLanguage":"en","isPartOf":{"@type":"Book","name":"SGA 4 — Topos Theory and Étale Cohomology of Schemes","url":"https://grothendiecksga.com/read/sga4/en/","author":"A. Grothendieck et al."},"author":"P. Deligne (∗) Appendice de B. Saint-Donat","translationOfWork":{"@id":"https://grothendiecksga.com/read/sga4/fr/XVII-7.html"}}</script>
+<script>window.MathJax = {"loader": {"load": ["[custom]/xypic.js"], "paths": {"custom": "../../../viewer/vendor/xyjax"}}, "tex": {"packages": {"[+]": ["xypic", "ams", "color", "mathtools"]}, "inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "tags": "none", "macros": {}}, "options": {"enableMenu": false}};</script>
+<script src="../../../viewer/vendor/mathjax/tex-svg-full.js" async id="MathJax-script"></script>
+</head>
+<body>
+<nav class="crumbs"><a href="../../../index.html">Home</a> › <a href="../../../read/">Text edition</a> › <a href="./">SGA 4</a> › Exposé XVII</nav>
+<main>
+<h2 id="XVII.7">7. Appendix (by B. Saint-Donat)</h2>
+<h3 id="XVII.7.0">7.0. Preliminaries.</h3>
+<p>In this appendix we shall use the results of \(\mathrm{VI_B}\), whose notation we retain.</p>
+<p><strong>7.0.1.</strong> Let \(\mathrm{Sch}_!\) be the category whose objects are the quasi-compact and quasi-separated schemes, the morphisms being the separated morphisms of finite type of schemes: we denote by \(\mathscr{E}\) the bifibred category over \(\mathrm{Sch}_!\), with fibre categories the categories opposite to topoi, defined by the étale sheaves on the schemes \(\mathrm{VI_B}\) (4.3.0). We fix once and for all an object \(R\) of \(\mathrm{Sch}_!\) and we denote by \(\mathscr{E}_R\) the bifibred category over \(\mathrm{Sch}_{!R}\) deduced from \(\mathscr{E}\). Finally, let \(\mathscr{A}\) be a ring of the topos \(\mathscr{E}^{\circ}_R\) which satisfies the following conditions:</p>
+<ol class="enumerate">
+<li><span class="item-label">(i)</span> \(\mathscr{A}\) is a <u>cocartesian</u> section of \(\mathscr{E}^{\circ}_R\) over \(\mathrm{Sch}_{!R}^{\circ}\).</li>
+<li><span class="item-label">(ii)</span> For every scheme \(X\) of \(\mathrm{Sch}_{!R}\), \(\mathscr{A}_X\) is a <u>torsion</u> sheaf.</li>
+</ol>
+<p>This being posited, we shall work with the category \(\underline{\mathrm{Mod}}(\mathscr{E}^{\circ}_R, \mathscr{A})\) (\(\mathrm{VI_B}\) 1.3.5).</p>
+<p>We propose to define, for every morphism \(f : X \longrightarrow Y\) of \(\mathrm{Sch}_{!R}\), a functor \(Rf_! : D(X, \mathscr{A}_X) \longrightarrow D(Y, \mathscr{A}_Y)\), coinciding with the functor previously defined when \(f\) is compactifiable, and making the categories \(D(X, \mathscr{A}_X)\) for \(X\) varying a cofibred category over \(\mathrm{Sch}_{!R}\).</p>
+<p><strong>7.0.2.</strong> Although all the results of this appendix are stated in the framework made explicit in 7.0.1, one could transcribe them with obvious modifications in the following framework: one takes as section of \(\Gamma(\mathscr{E}^{\circ}_R)\) the constant section with value the constant sheaf \(\mathbb{Z}\) and one restricts, for every scheme \(X\), to the derived category \(D^{*}_{\mathrm{tors}}(X)\) <!-- l'exposant sur D est un astérisque/étoile dans le typescript --> defined by the complexes of sheaves of abelian groups whose cohomology sheaves are of torsion (\(\mathrm{VI_B}\) 4.3.1).</p>
+<div class="thm thm-plain lemma" id="XVII.7.0.3">
+  <div class="thm-head"><span class="thm-name">Lemma</span> <span class="thm-num">7.0.3</span></div>
+  <div class="thm-body">
+  <p><u>Let there be a commutative diagram of schemes</u></p>
+  <p>\[(7.0.3.1) \qquad \xymatrix@C=3em@R=2.5em{
+  X' \ar[r]^{j'} \ar[d]_{f'} &amp; X \ar[d]^{f} \\
+  Y' \ar[r]_{j} &amp; Y
+  }\]</p>
+  <p><u>where</u> \(f\), \(f'\) <u>are proper and</u> \(j\), \(j'\) <u>are immersions. Then for every complex</u> \(K^{\bullet}\) <u>of</u> \(D^{+}_{\mathrm{tors}}(X')\), <u>the canonical arrow</u></p>
+  <p>\[j_! \circ R^+f'(K^{\bullet}) \longrightarrow R^+f \circ j'_!(K^{\bullet})\]</p>
+  <p><u>is an isomorphism.</u></p>
+  </div>
+</div>
+<p>By virtue of the "lemma on way-out functors" (R.D. I (7.1)), it suffices to show that for every integer \(i\) and for every torsion sheaf \(F\), the arrow</p>
+<p>
+
+\[(7.0.3.2) \qquad j_! \circ R^i f'(F) \longrightarrow R^i f \circ j'_!(F)\]
+
+</p>
+<p>is an isomorphism.</p>
+<p>By taking the closed images of \(j\) and \(j'\) we are reduced to the case where \(j\) and \(j'\) are open immersions whose images are everywhere dense: the properness of \(f\) and of \(f'\) then implies that diagram (7.0.3.1) is cartesian. Under these conditions, the base change theorem for a proper morphism, in the form XII 5.2, shows that, for every geometric point \(\xi\) of \(Y\), the arrow \((j_! \circ R^i f'(F))_{\xi} \longrightarrow (R^i f \circ j'_!(F))_{\xi}\) is an isomorphism.</p>
+<p><u>Construction 7.0.4.</u> Let \(D\) be a category, \(X\) and \(Y\) two \(D\)-objects of \(\mathrm{Sch}_{!R}\) such that for every arrow \(\alpha \longrightarrow \beta\) of \(D\), the morphisms \(X_{\beta} \longrightarrow X_{\alpha}\) and \(Y_{\beta} \longrightarrow Y_{\alpha}\) are proper. Let \(j : X \longrightarrow Y\) be a morphism such that for every object \(\alpha\) of \(D\), \(j_{\alpha} : X_{\alpha} \longrightarrow Y_{\alpha}\) is an immersion: the isomorphism (7.0.3.2) for \(i = 0\) satisfies the usual compatibility conditions and allows one to construct an <u>exact</u> functor:</p>
+<p>
+
+\[j_! : \underline{\mathrm{Mod}}(\underline{\Gamma}(\bar{X}), \mathscr{A}) \longrightarrow \underline{\mathrm{Mod}}(\underline{\Gamma}(\bar{Y}), \mathscr{A})\]
+
+</p>
+<p>(cf. \(\mathrm{VI_B}\) 1.2.5 for the notation).</p>
+<p>which induces a triangulated functor, again denoted \(j_!\):</p>
+<p>
+
+\[j_! : D(\underline{\Gamma}(\bar{X}), \mathscr{A}) \longrightarrow D(\underline{\Gamma}(\bar{Y}), \mathscr{A})\]
+
+</p>
+<p>Then, for every object \(\alpha\) of \(D\), we have a commutative diagram, where \(j_{\alpha!}\) denotes the usual "extension by \(0\)" functor:</p>
+<p>
+
+\[\xymatrix@C=3em@R=2.5em{
+D(\underline{\Gamma}(\bar{X}), \mathscr{A}) \ar[r]^{j_!} \ar[d]_{R\, e_{\alpha}^+} &amp; D(\underline{\Gamma}(\bar{Y}), \mathscr{A}) \ar[d]^{R\, e_{\alpha}^+} \\
+D(X_{\alpha}, \mathscr{A}_{X_{\alpha}}) \ar[r]_{j_{\alpha!}} &amp; D(Y_{\alpha}, \mathscr{A}_{Y_{\alpha}})
+}\]
+
+</p>
+<p><u>Construction 7.0.5.</u> Let there be a commutative diagram in \(\mathrm{Sch}_{!R}\)</p>
+<p>
+
+\[(7.0.5.1) \qquad \xymatrix@C=3em@R=2.5em{
+X' \ar[r]^{i'} \ar[d]_{f'} &amp; X \ar[d]^{f} \\
+Y' \ar[r]_{i} &amp; Y
+}\]
+
+</p>
+<p>where \(i\), \(i'\) are immersions, \(f\) a proper morphism and \(f'\) a proper surjective morphism. It defines a commutative diagram of simplicial objects of \(\mathrm{Sch}_{!R}\)</p>
+<p>
+
+\[(7.0.5.2) \qquad \xymatrix@C=3em@R=2.5em{
+[X' \mid Y'] \ar[r]^{j} \ar[d]_{u_{f'}} &amp; [X \mid Y] \ar[d]^{u_f} \\
+C^{\Delta}_{Y'} \ar[r]_{i} &amp; C^{\Delta}_Y
+}\]
+
+</p>
+<p>where \(j_n : [X' \mid Y']_n \longrightarrow [X \mid Y]_n\) is an immersion for every \(n\). With this notation, we have a canonical isomorphism</p>
+<p>
+
+\[i_! \xrightarrow{\;\sim\;} R^+ \bar{u}_{f+} \circ j_! \circ L^+ \bar{u}_{f'}^{+} \, .\]
+
+</p>
+<p>By taking the closed images of \(i\) and \(i'\) we may suppose that \(i\) and \(i'\) are open immersions whose images are everywhere dense. Diagram (7.0.5.1) is then cartesian and \(f\) is <u>surjective</u>. Moreover, for every integer \(n\), \(j_n\) is an open immersion and the diagram</p>
+<p>
+
+\[\xymatrix@C=3em@R=2.5em{
+[X' \mid Y']_n \ar[r]^{j_n} \ar[d] &amp; [X \mid Y]_n \ar[d] \\
+Y' \ar[r]_{i} &amp; Y
+}\]
+
+</p>
+<p>is cartesian.</p>
+<p>Consequently \(L^+ \bar{u}_f^{+} \circ i_!\) is isomorphic to \(j_! \circ L^+ \bar{u}_{f'}^{+}\): using the fact that \(u_f\) is an augmentation of cohomological descent (\(\mathrm{VI_B}\) (4.3.2)), we find a sequence of isomorphisms</p>
+<p>
+
+\[i_! \xrightarrow{\;\sim\;} R^+ \bar{u}_{f+} \circ L^+(\bar{u}_f^{+}) \circ i_! \xrightarrow{\;\sim\;} R^+ \bar{u}_{f+} \circ j_! \circ L^+ \bar{u}_{f'}^{+}\]
+
+</p>
+<p>whence the desired isomorphism.</p>
+<p>Finally, we shall use the following variant of Chow's lemma, whose proof will be found in EGA II 2nd edition, and which is an improvement of (XII 7.1):</p>
+<div class="thm thm-plain lemma" id="XVII.7.0.6">
+  <div class="thm-head"><span class="thm-name">Lemma</span> <span class="thm-num">7.0.6</span></div>
+  <div class="thm-body">
+  <p><u>Let</u> \(S\) <u>be a quasi-compact and quasi-separated scheme and</u> \(f : X \longrightarrow S\) <u>a separated morphism of finite type. Then there exists a commutative diagram</u></p>
+  <p>\[\xymatrix@C=3em@R=2.5em{
+  X' \ar[r]^{p} \ar[d]_{f'} &amp; X \ar[dl]^{f} \\
+  S &amp;
+  }\]</p>
+  <p><u>satisfying the following conditions</u>:</p>
+  <ol class="enumerate">
+  <li><span class="item-label">(i)</span> \(p\) <u>is proper and surjective</u></li>
+  <li><span class="item-label">(ii)</span> <u>there exists a dense open</u> \(U\) <u>of</u> \(X\) <u>such that</u> \(p\) <u>induces an isomorphism of</u> \(p^{-1}(U)\) <u>onto</u> \(U\)</li>
+  <li><span class="item-label">(iii)</span> \(f'\) <u>is quasi-projective.</u></li>
+  </ol>
+  </div>
+</div>
+<h3 id="XVII.7.1">7.1. Definition of \(R^+f_!\)</h3>
+<div class="thm thm-plain definition" id="XVII.7.1.1">
+  <div class="thm-head"><span class="thm-name">Definition</span> <span class="thm-num">7.1.1</span></div>
+  <div class="thm-body">
+  <p><u>Let</u> \(f : X \longrightarrow S\) <u>be a morphism of schemes. A pseudo-compactification of</u> \(f\) <u>consists of the datum of a commutative diagram</u></p>
+  <p>\[(7.1.1.0) \qquad \xymatrix@C=3em@R=2.5em{
+  X_1 \ar[r]^{j_1} \ar[d]_{p_1} &amp; T_1 \ar[ldd]^{f_1} \\
+  X \ar[d]_{f} &amp; \\
+  S &amp;
+  }\]</p>
+  <p><u>where</u> \(p_1\) <u>is proper and surjective,</u> \(j_1\) <u>is an immersion and</u> \(f_1\) <u>is proper.</u></p>
+  </div>
+</div>
+<p><strong>7.1.2.</strong> Let \(f : X \longrightarrow S\) be a morphism of \(\mathrm{Sch}_{!R}\): by Chow's lemma (7.0.6), \(f\) possesses a pseudo-compactification \((p_1, j_1, f_1)\). Diagram (7.1.1.0) defines a morphism</p>
+<p>
+
+\[[X_1 \mid X] \xrightarrow{\;j_1\;} [T_1 \mid S]\]
+
+</p>
+<p>again denoted \(j_1\), such that \(j_{1n}\) is an immersion for every \(n\). We then set \(R^{+(1)}f_! = L^+ \bar{u}_{p_1} \cdot j_{1!} \circ R^+ \bar{u}_{f_1}\), so that one obtains a <u>triangulated</u> functor from \(D^{+}(X, \mathscr{A}_X)\) to \(D^{+}(S, \mathscr{A}_S)\).</p>
+<p><u>Construction 7.1.3.</u> For every pair \(((p_1, j_1, f_1), (p_2, j_2, f_2))\) of pseudo-compactifications of \(f\), we have an isomorphism \(\alpha_{12} : R^{+(1)}f_! \longrightarrow R^{+(2)}f_!\) such that for every other pseudo-compactification \((p_3, j_3, f_3)\), we have \(\alpha_{23} \circ \alpha_{12} = \alpha_{13}\).</p>
+<p>a) One defines a double simplicial system \([[X_1, X_2 \mid X]]\) by setting</p>
+<p>
+
+\[[[X_1, X_2 \mid X]]_{[n] \times [m]} = [X_1 \mid X]_n \times [X_2 \mid X]_m\]
+
+</p>
+<p>Similarly one sets</p>
+<p>
+
+\[[[X_1 \mid X]]_{[n] \times [m]} = [X_1 \mid S]_n \, ,\]
+
+</p>
+<p>the morphisms \([[X_1 \mid X]]_{[n] \times [m]} \longrightarrow [[X_1 \mid X]]_{[n] \times [m']}\) induced by the morphisms \([m'] \longrightarrow [m]\) being all equal to the identity. One defines in the same way the double simplicial systems \([[T_1, T_2 \mid S]]\) and \([[T_1 \mid S]]\), so that one has a commutative diagram</p>
+<p>
+\[\xymatrix@C=1.6em@R=2.2em{
+[[X_1, X_2 \mid X]] \ar[rr]^{j_{12}} \ar[dr] \ar[ddd]_{u_{p_1 p_2}} &amp; &amp; [[T_1, T_2 \mid S]] \ar[dr]^{j} \ar[ddd]|(0.62){u_{f_1 f_2}} &amp; \\
+&amp; [[X_1 \mid X]] \ar[rr]^(0.35){j} \ar[ddl]|{u_{p_1}} &amp; &amp; [[T_1 \mid S]] \ar[ddl]^{u_{f_1}} \\
+\\
+C^{\Delta \times \Delta}_X \ar[rr] &amp; &amp; C^{\Delta \times \Delta}_S &amp;
+}\]
+
+</p>
+<p>where \(j_{12}\) is an immersion degree by degree. The computational procedure set out in \(\mathrm{VI_B}\) (2.3) allows one to construct a morphism</p>
+<p>
+
+\[R^{+(1)}f_! \xrightarrow{\;\alpha_1\;} R^+ \bar{u}_{f_1 f_2} \circ j_{12!} \circ L^+ \bar{u}_{p_1 p_2}^{+} = R^{+(1,2)}f_!\]
+
+</p>
+<p>which is obtained from a morphism of triple complexes of sheaves on \(S\).</p>
+<p>b) \(\alpha_1\) <u>is an isomorphism</u>:</p>
+<p>To prove this, one may fix the first index \(n\) coming from \([[T_1, T_2 \mid S]]_{[n] \times [m]}\) in the preceding morphism of triple complexes and consider the morphism of double complexes thus obtained. One checks that this morphism is none other than the isomorphism defined in lemma 7.0.5 for the diagram</p>
+<p>
+
+\[\xymatrix@C=3em@R=2.5em{
+[X_1 \mid X]_n \times X_2 \ar[r] \ar[d] &amp; [T_1 \mid S]_n \times T_2 \ar[d] \\
+[X_1 \mid X]_n \ar[r] &amp; [T_1 \mid S]_n
+}\]
+
+</p>
+<p>c) One constructs in the same way an isomorphism</p>
+<p>
+
+\[R^{+(2)}f_! \xrightarrow{\;\alpha_2\;} R^+ \bar{u}_{f_1 f_2} \circ j_{12!} \circ L^+ \bar{u}_{p_1 p_2}^{+}\]
+
+</p>
+<p>and one sets \(\alpha_{12} = \alpha_2^{-1} \circ \alpha_1\).</p>
+<p>To verify the relation \(\alpha_{23} \circ \alpha_{12} = \alpha_{13}\), one uses a triple simplicial object: we leave to the reader the task of verifying that one obtains a commutative diagram:</p>
+<p>
+
+\[\xymatrix@C=2.4em@R=2.4em{
+R^{+(2,3)}f_! &amp; R^{+(2)}f_! \ar[l] \ar[r] &amp; R^{+(1,2)}f_! \\
+&amp; R^{+(1,2,3)}f_! \ar[ul] \ar[u]|{\,} \ar[ur] &amp; \\
+R^{+(2)}f_! \ar[u] &amp; R^{+(1,3)}f_! \ar[u] &amp; R^{+(1)}f_! \ar[u]
+}\]
+
+</p>
+<p><u>Construction 7.1.4.</u> Let \(Z \xrightarrow{\;g\;} Y\) <u>and</u> \(Y \xrightarrow{\;f\;} X\) be two morphisms of \(\mathrm{Sch}_{!R}\). For every triple \(((p_1, j_1, f_1), (p_2, j_2, g_2), (p_3, j_3, (fg)_3))\), <u>where</u> \((p_1, j_1, f_1)\) <u>is a pseudo-compactification of</u> \(f\), \((p_2, j_2, g_2)\) <u>a pseudo-compactification of</u> \(g\) <u>and</u> \((p_3, j_3, (fg)_3)\) <u>a pseudo-compactification of</u> \(fg\), <u>we have an isomorphism</u></p>
+<p>
+
+\[R^{+(3)}fg_! \xleftarrow{\;\sim\;} R^{+(2)}g_! \circ R^{+(1)}f_! \quad \text{compatible with the isomorphisms } \alpha_{ij} \text{ defined previously.}\]
+
+</p>
+<p>We shall proceed in several steps:</p>
+<p>7.1.4.1. Let \((p_1, j_1, f_1)\) (resp. \((p_2, j_2, f_2)\)) be a pseudo-compactification of \(f : Y \longrightarrow X\) (resp. of \(g : Z \longrightarrow Y\)):</p>
+<p>
+
+\[(7.1.4.1.1) \qquad \xymatrix@C=2.4em@R=2.6em{
+Z \ar[drr]|(0.45){g} &amp; Z_2 \ar[l]_{p_2} \ar[r]^{j_2} &amp; T_2 \ar[d]^{g_2} \\
+T_1 \ar[dr]_{f_1} &amp; Y_1 \ar[l]_{j_1} \ar[r]^{p_1} &amp; Y \ar[d]^{f} \\
+&amp; &amp; X
+}\]
+
+</p>
+<p>The morphism \(Z' = Z \times_Y Y_1 \longrightarrow Y_1\) deduced from \(g\) by base change is equipped with a pseudo-compactification:</p>
+<p>
+
+\[(7.1.4.1.2) \qquad \xymatrix@C=2.6em@R=2.4em{
+T_2' = T_2 \times_Y Y_1 \ar[r]^-{j_2'} \ar[ddr]_{g_2'} &amp; Z_2 \times_Y Y_1 = Z_2' \ar[d]^{p_2'} \\
+&amp; Z \times_Y Y_1 = Z' \ar[d]^{g'} \\
+&amp; Y_1
+}\]
+
+</p>
+<p>One now chooses a compactification of \(j_1 \cdot g_2'\) .</p>
+<p>
+
+\[(7.1.4.1.3) \qquad \xymatrix@C=3em@R=2.4em{
+T_{12} \ar[r]^-{j_1'} \ar[d]_{g_2''} &amp; T_2 \times_Y Y_1 = T_2' \ar[d]^{g_2'} \\
+T_1 \ar[r] &amp; Y_1
+}\]
+
+</p>
+<p>which defines a pseudo-compactification of the composite \(fg\): we shall denote by \(R^{+(12)}fg_!\) the corresponding functor.</p>
+<p>7.1.4.2. The preceding data allow one to define an isomorphism \(R^{+(12)}fg_! \xleftarrow{\;\sim\;} R^{+(1)}f_! \cdot R^{+(2)}g_!\):</p>
+<p>One has a commutative diagram, where all the arrows are deduced naturally from (7.1.4.1.1), (7.1.4.1.2) and (7.1.4.1.3).</p>
+<p>
+
+\[(7.1.4.2.1) \qquad \xymatrix@C=2.2em@R=2.6em{
+[T_{12} \mid X] \ar[d]_{g_2''} &amp; [T_2' \mid Y] \ar[l]_{j_1'} \ar[d]^{g_2'} &amp; [Z_2' \mid Z] \ar[l]_{j_2'} \ar[dl]^{1} \ar[r]^{r} &amp; C^{\Delta}_Z \ar[d]^{g} \\
+[T_1 \mid X] \ar[drr]_{u_{f_1}} &amp; [Y_1 \mid Y] \ar[l]^{j_1} \ar[r]_{u_{p_1}} &amp; C^{\Delta}_Y \ar[d]^{f} &amp; \\
+&amp; &amp; C^{\Delta}_X &amp;
+}\]
+
+</p>
+<p>We shall define a natural arrow:</p>
+<p>
+
+\[\beta : R^{+(1)}f_! \circ R^{+(2)}g_! \longrightarrow R^{+(12)}fg_!\]
+
+</p>
+<p>which we shall show to be an isomorphism.</p>
+<p>For this we shall use two lemmas:</p>
+<div class="thm thm-plain lemma" id="XVII.7.1.4.2.2">
+  <div class="thm-head"><span class="thm-name">Lemma</span> <span class="thm-num">7.1.4.2.2</span></div>
+  <div class="thm-body">
+  <p><u>Let there be a commutative diagram</u>:</p>
+  <p>\[\xymatrix@C=3em@R=2.4em{
+  X_1 \ar[r]^{j_1} \ar[d]_{p_1} &amp; T_1 \ar[d]^{h'} \\
+  X \ar[r]|{j} \ar[d]_{f} &amp; T \ar[dl]^{h} \\
+  S &amp;
+  }\]</p>
+  <p><u>where</u> \(h\), \(h'\) <u>are proper,</u> \(p_1\) <u>is proper and surjective and</u> \(j\), \(j_1\) <u>are the immersions. Then the canonical arrow</u></p>
+  <p>\[R^+h \circ j_! \longrightarrow R^{+(1)}(hh')_!\]</p>
+  <p><u>is an isomorphism.</u></p>
+  </div>
+</div>
+<p>Indeed, by (7.0.5) the arrow</p>
+<p>
+
+\[j_! \longrightarrow R^+ \bar{u}_{h'} \circ j_{1!} \circ L^+ \bar{u}_{p_1}^{+}\]
+
+</p>
+<p>is an isomorphism. Whence the result by applying \(R^+h\).</p>
+<div class="thm thm-plain lemma" id="XVII.7.1.4.2.3">
+  <div class="thm-head"><span class="thm-name">Lemma</span> <span class="thm-num">7.1.4.2.3</span></div>
+  <div class="thm-body">
+  <p><u>With the notation of diagram</u> (7.1.4.2.1), <u>the canonical arrows</u></p>
+  <p>\[R^{+(1)}f_! \circ R^+ \bar{u}_{p_1} \longrightarrow R^+ \bar{u}_{f_1} \circ j_{1!}\]</p>
+  <p>\[R^{+(2)}g_! \circ R^+ \bar{r} \longrightarrow R^+ \bar{u}_{p_1} \circ R^+ g_2' \circ j_{2!}'\]</p>
+  <p><u>are isomorphisms.</u></p>
+  </div>
+</div>
+<p>We shall establish only the first isomorphism, leaving to the reader the task of deducing the second.</p>
+<p>With obvious notation, one sets \(C = [Y_1 \mid Y] \times_X X_1\) and \(\bar{C} = [T_1 \mid S] \times_S T_1\), so that one has a commutative diagram:</p>
+<p>
+\[\xymatrix@C=2.2em@R=2.4em{
+&amp; \bar{C} \ar[r] &amp; T_1 \\
+C \ar[ur]^{i} \ar[r] \ar[d]_{q} &amp; Y_1 \ar[ur]|{j} \ar[d]^{p_1} \ar[u]|(0.35){f_1} &amp; \\
+[Y_1 \mid Y] \ar[r]_{u_{p_1}} &amp; Y &amp;
+}\]
+
+</p>
+<p>where \(i\) is an immersion, \(q\) is proper and surjective. One then constructs a diagram</p>
+<p>
+
+\[\xymatrix@C=3em@R=2.4em{
+[[C \mid [Y_1 \mid Y]]] \ar[r]^-{i} \ar[d]_{u_q} &amp; [[\bar{C} \mid C^{\Delta}_Y]] \ar[ddl]^{k} \\
+\lvert X_1 \mid X \rvert \ar[d] &amp; \\
+Y &amp;
+}\]
+
+</p>
+<p>and it follows from (7.1.4.2.2) that the functor \(R^+ \bar{u}_{j_1} \circ j_1\) is identified with the functor \(R^+ \bar{k} \circ i_1 \circ L^+ \bar{u}_q\) and, thanks to (7.0.3) and to the base change theorem, this last functor is identified with \(R^{+(1)}f_! \circ R^+ \bar{u}_{p_1}\). The lemma (7.1.4.2.3) being established, one has a sequence of isomorphisms</p>
+<p>
+
+\[\begin{aligned}
+R^{+(3)}fg_! &amp;= R^+ \bar{u}_{f_1} \circ R^+ g_2'' \circ j_{1!} \circ j_{2!}' \circ L^+ \bar{r}^{+} \\
+&amp;\xleftarrow{\phantom{\sim}} R^+ \bar{u}_{f_1 +} \circ j_{1!} \circ R^+ g_2' \circ j_{2!}' \circ L^+ \bar{r}^{+} \\
+&amp;\xleftarrow{\;\sim\;} R^{+(1)}f_! \circ R^+ \bar{u}_{p_1 +} \circ R^+ g_{2+}' \circ j_{2!}' \circ L^+ \bar{r} \\
+&amp;\xleftarrow{\;\sim\;} R^{+(1)}f_! \circ R^{+(2)}g_! \circ R^+ \bar{r} \circ L^+ \bar{r}^{+} \\
+&amp;\xleftarrow{\;\sim\;} R^{+(1)}f_! \circ R^{+(2)}g_!
+\end{aligned}\]
+
+</p>
+<p>whose composite gives \(\beta\).</p>
+<p>7.1.4.3. If \((p_3, j_3, (fg)_3)\) is a pseudo-compactification of \(fg\), one defines an isomorphism</p>
+<p>
+
+\[R^{+(1)}f_! \circ R^{+(2)}g_! \xrightarrow{\;\gamma_{123}\;} R^{+(3)}fg_!\]
+
+</p>
+<p>by composing \(\alpha_{(12)3}\) with \(\beta\).</p>
+<p>7.1.4.4. Let now \((p_1', j_1', f_1')\) and \((p_2', j_2', g_2')\) be two other pseudo-compactifications of \(f\) and of \(g\) and a diagram (7.1.4.3); one checks that the following diagram is commutative:</p>
+<p>
+
+\[\xymatrix@C=3em@R=2.6em{
+R^{+(12)}fg_! \ar[d]_{\alpha_{(12)(1'2')}} &amp; R^{+(1)}f_! \circ R^{+(2)}g_! \ar[l]_-{\beta} \ar[d]^{\alpha_{11'} * \alpha_{22'}} \\
+R^{+(1'2')}fg_! &amp; R^{+(1')}f_! \circ R^{+(2')}g_! \ar[l]^-{\beta'}
+}\]
+
+</p>
+<p>by considering a diagram of the type (7.1.4.4) where the simplicial objects are replaced by double simplicial objects.</p>
+<p>We conclude from this that the following diagram is commutative:</p>
+<p>
+
+\[\xymatrix@C=3em@R=2.6em{
+R^{+(3)}fg_! \ar[d]_{\alpha_{33'}} &amp; R^{+(1)}f_! \circ R^{+(2)}g_! \ar[l]_-{\gamma_{123}} \ar[d]^{\alpha_{11'} * \alpha_{22'}} \\
+R^{+(3')}fg_! &amp; R^{+(1')}f_! \circ R^{+(2')}g_! \ar[l]^-{\gamma_{1'2'3'}}
+}\]
+
+</p>
+<p>for every pseudo-compactification \((p_3', j_3', (fg)_{3'})\) of \(fg\), which completes the proof of 7.1.4.</p>
+<p><strong>7.1.5.</strong> By choosing for every morphism \(f\) of \(\mathrm{Sch}_{!R}\) a pseudo-compactification, in such a way that to an identity morphism is associated the trivial pseudo-compactification, one defines for every morphism \(f : X \longrightarrow Y\) a triangulated functor</p>
+<p>
+
+\[R^+f_! : D^{+}(X, \mathscr{A}_X) \longrightarrow D^{+}(Y, \mathscr{A}_Y)\]
+
+</p>
+<p>and for every pair \((f, g)\) of morphisms, an isomorphism</p>
+<p>
+
+\[R^+fg_! \xrightarrow[\;\sim\;]{c_{fg}} R^+f_! \circ R^+g_!\]
+
+</p>
+<p>Moreover, if \(f\) is an identity, \(R^+f_!\) is the identity functor and \(c_{fg}\) is the identity.</p>
+<div class="thm thm-plain proposition" id="XVII.7.1.6">
+  <div class="thm-head"><span class="thm-name">Proposition</span> <span class="thm-num">7.1.6</span></div>
+  <div class="thm-body">
+  <p><u>The correspondence</u> \(f \longrightarrow R^+f_!\) <u>defines a normalized pseudo-functor from</u> \(\mathrm{Sch}_{!R}\) <u>into the</u> 2-<u>category of categories. In other words, the categories</u> \(D^{+}(X, \mathscr{A}_X)\) <u>for</u> \(X\) <u>an object of</u> \(\mathrm{Sch}_{!R}\) <u>can be organized into a category cofibred over</u> \(\mathrm{Sch}_{!R}\) <u>by setting, for every morphism</u> \(f : X \longrightarrow Y\) <u>of</u> \(\mathrm{Sch}_{!R}\):</p>
+  <p>\[\operatorname{Hom}_f(K, L) = \operatorname{Hom}(R^+f_! K, L)\]</p>
+  <p><u>with</u> \(K \in D^{+}(X, \mathscr{A}_X)\) <u>and</u> \(L \in D^{+}(Y, \mathscr{A}_Y)\).</p>
+  </div>
+</div>
+<p>It is a matter of seeing that the identification \(R^+fg_! \xrightarrow[\;\sim\;]{c_{fg}} Rf_! \circ Rg_!\) is compatible with triple composites. So let \(h : T \longrightarrow Z\), \(g : Z \longrightarrow Y\) and \(f : Y \longrightarrow X\) be three morphisms of \(\mathrm{Sch}_{!R}\): by virtue of what precedes, to verify this compatibility it suffices to verify it after an arbitrary choice of pseudo-compactifications for \(h\), \(g\) and \(f\).</p>
+<p>One has a diagram:</p>
+<p>
+\[(7.1.6.1) \qquad \xymatrix@C=1.8em@R=2.2em{
+T_5 &amp; T_4 \ar[l] \ar[dr] &amp; T_3 \ar[l] &amp; T' \ar[l] \ar[r]^{p_3} \ar[d] &amp; T \ar[d]^{h} \\
+&amp; T_3 \ar[dr] &amp; T_2 \ar[l] \ar[dr] &amp; Z' \ar[l] \ar[r]^{p_2} \ar[d] &amp; Z \ar[d]^{g} \\
+&amp; &amp; T_1 &amp; Y_1 \ar[l] \ar[r]_{p_1} \ar[d] &amp; Y \ar[d]^{f} \\
+&amp; &amp; &amp; &amp; X
+}\]
+
+</p>
+<p>where all the oblique arrows are proper and where \(p_1\), \(p_2\) and \(p_3\) are proper and surjective.</p>
+<p>A diagram of the type (7.1.4.4) constructed on (7.1.6.1) then allows one to conclude.</p>
+<div class="thm thm-plain proposition" id="XVII.7.1.7">
+  <div class="thm-head"><span class="thm-name">Proposition</span> <span class="thm-num">7.1.7</span></div>
+  <div class="thm-body">
+  <p><u>If</u> \(f : X \longrightarrow S\) <u>is a compactifiable morphism, the functor</u> \(Rf_!\) <u>coincides with the one defined in exposé XVII.</u></p>
+  </div>
+</div>
+<p>Indeed, there exists a commutative diagram:</p>
+<p>
+
+\[\xymatrix@C=3em@R=2.4em{
+X_1 \ar[r]^{j_1} \ar[d]_{p_1} &amp; T_1 \ar[d]^{h'} \\
+X \ar[r]|{j} \ar[d]_{f} &amp; T \ar[dl]^{h} \\
+S &amp;
+}\]
+
+</p>
+<p>to which one applies (7.1.4.2.2).</p>
+<div class="thm thm-plain definition" id="XVII.7.1.8">
+  <div class="thm-head"><span class="thm-name">Definition</span> <span class="thm-num">7.1.8</span></div>
+  <div class="thm-body">
+  <p><u>If</u> \(f : X \longrightarrow Y\) <u>is a morphism of</u> \(\mathrm{Sch}_!\), <u>the functor</u> \(R^+f_!\) <u>which we have just defined will be called the direct image functor with proper supports</u> (<u>in the sense of derived categories</u>). <u>The functor</u> \(\mathscr{H}^q \circ R^+f_!\), <u>denoted</u> \(R^q f_!\), <u>will be called the</u> \(q^{\text{th}}\) <u>direct image functor with proper supports.</u></p>
+  </div>
+</div>
+<p>With this notation, we leave to the reader the task of verifying the</p>
+<p><u>Construction 7.1.9.</u> Let \((\pi_1, j_1, f_1)\) be a pseudo-compactification of \(f : X \longrightarrow Y\) and let us denote by \(\pi_1^n\) the canonical morphism \([X_1 \mid X]_n \longrightarrow X\). Then, for every complex \(K^{\bullet}\) of \(D^{+}(X, \mathscr{A}_X)\), there exist two biregular spectral sequences:</p>
+<p>
+
+\[(7.1.9.1) \qquad E_1^{pq} = R^q f_!(K^p) \Longrightarrow R^{p+q} f_!(K^{\bullet})\]
+
+\[(7.1.9.2) \qquad E_1^{pq} = R^q (f \circ \pi_1^p)_! (\pi_1^{p*}(K^{\bullet})) \Longrightarrow R^{p+q} f_!(K^{\bullet})\]
+
+</p>
+<p>(Take for example the canonical flasque resolution of \(j_{1!} \circ L^+ \bar{u}_{p_1}^{+}(K^{\bullet})\) (cf. XVII (4.2)), then its direct image by \(u_{f_1}\).)</p>
+<h3 id="XVII.7.2">7.2. Some properties of \(R^+f_!\).</h3>
+<div class="thm thm-plain proposition" id="XVII.7.2.1">
+  <div class="thm-head"><span class="thm-name">Proposition</span> <span class="thm-num">7.2.1</span></div>
+  <div class="thm-body"><p><u>Let</u> \(f : X \longrightarrow Y\) <u>be a morphism of</u> \(\mathrm{Sch}_{!R}\) <u>of relative dimension</u> \(\leqslant d\). <u>Then the functor</u> \(R^+f_!\) <u>is of cohomological dimension</u> \(\leqslant 2d\).</p></div>
+</div>
+<p>It is a matter of showing that for every sheaf \(F\) of \(\mathscr{A}_X\)-modules on \(X\), we have \(R^i f_!(F) = 0\) for \(i &gt; 2d\). (One then deduces, by a standard argument, that for every complex \(K^{\bullet}\) of \(D^{+}(X, \mathscr{A}_X)\) such that \(H^i(K^{\bullet}) = 0\) for \(i &gt; k\), we have \(R^i f_!(K^{\bullet}) = 0\) for \(i &gt; k + 2d\)).</p>
+<p>Let \(\mathscr{U} = (U_i)_{i \in I}\) be a finite covering of \(X\) by affine opens. One defines (XVII 6.2.9) a left resolution \(K^{\bullet}_{\mathscr{U}} \longrightarrow F\) of \(F\) by setting:</p>
+<p>
+
+\[K^n_{\mathscr{U}} = \bigoplus_{|P| = n+1} j_{P!}\, j_P^*(F)\]
+
+</p>
+<p>where for each subset \(P\) of \(I\), \(j_P\) is the inclusion of \(\bigcap_{i \in P} U_i\) in \(X\).</p>
+<p>One deduces from (7.1.9.1) a spectral sequence</p>
+<p>
+
+\[E_1^{pq} = \bigoplus_{\substack{|P| = p+1 \\ P \subset I}} R^q (fj_P)_!\, j_P^*(F) \Longrightarrow R^{p+q} f_!(F)\]
+
+</p>
+<p>and the fact that \(fj_P\) is compactifiable, a case amenable to exposé XVII, shows that \(E_1^{pq} = 0\) for \(p &gt; 0\) and \(q &gt; 2d\); one then deduces that \(R^n f_!(F) = 0\) for \(n &gt; 2d\), which was to be proved.</p>
+<div class="thm thm-plain proposition" id="XVII.7.2.2">
+  <div class="thm-head"><span class="thm-name">Proposition</span> <span class="thm-num">7.2.2</span></div>
+  <div class="thm-body"><p><u>Let</u> \(f : X \longrightarrow Y\) <u>be a morphism of</u> \(\mathrm{Sch}_{!R}\) <u>and</u> \(K^{\bullet}\) <u>an object of</u> \(D^b(X, \mathscr{A}_X)\) <u>of finite Tor-dimension. Then</u> \(R^+f_!(K^{\bullet})\) <u>is of finite Tor-dimension.</u></p></div>
+</div>
+<p>As previously, let \(\mathscr{U} = (U_i)_{i \in I}\) be a finite covering of \(X\) by affine opens. The functoriality of \(K^n_{\mathscr{U}}\) allows one to manufacture a bounded left resolution of \(K^{\bullet}\) by complexes of finite Tor-dimension, since this last property is verified point by point (XVII (4.1.9)): we shall denote by \(K^{\bullet\bullet}_{\mathscr{U}}\) the double complex thus obtained, the <u>second</u> index corresponding to that of \(K^{\bullet}\). With the conventions of (\(\mathrm{VI_B}\) (2.3.2)), one has for every integer \(n\) an exact sequence, where the operation \(\sigma_{\leqslant n}\) is taken in \(C^{+}(C^{+}(\operatorname{Mod}(X, \mathscr{A}_X)))\):</p>
+<p>
+
+\[0 \longrightarrow (\sigma_{\leqslant n}(K^{\bullet\bullet}_{\mathscr{U}}))_s \longrightarrow (\sigma_{\leqslant n+1}(K^{\bullet\bullet}_{\mathscr{U}}))_s \longrightarrow (-1)^{n+1} K^{n+1, \bullet}_{\mathscr{U}} \longrightarrow 0\]
+
+</p>
+<p>whence a distinguished triangle in \(D^{+}(X, \mathscr{A}_X)\):</p>
+<p>
+
+\[\xymatrix@C=1.4em@R=2.4em{
+&amp; K^{n+1, \bullet}_{\mathscr{U}} \ar[dl] &amp; \\
+(\sigma_{\leqslant n}(K^{\bullet\bullet}_{\mathscr{U}}))_s \ar[rr] &amp; &amp; (\sigma_{\leqslant n+1}(K^{\bullet\bullet}_{\mathscr{U}}))_s \ar[ul]
+}\]
+
+</p>
+<p>Using the fact that \(R^+f_!(K^{n+1, \bullet}_{\mathscr{U}})\) is of finite Tor-dimension for every \(n\) (XVII (5.2.10)), one deduces that \(R^+f_!((\sigma_{\leqslant 0}(K^{\bullet\bullet}_{\mathscr{U}}))_s) = R^+f_!(K^{\bullet})\) is of finite Tor-dimension.</p>
+<div class="thm thm-remark remarque" id="XVII.7.2.3">
+  <div class="thm-head"><span class="thm-name">Remark</span> <span class="thm-num">7.2.3</span></div>
+  <div class="thm-body"><p>The preceding argument does not allow one to assert that \(R^+f_!(K^{\bullet})\) is of Tor-dimension \(\leqslant k\) as soon as \(K^{\bullet}\) is of Tor-dimension \(\leqslant k\) (cf.(3.7)).</p></div>
+</div>
+<div class="thm thm-plain proposition" id="XVII.7.2.4">
+  <div class="thm-head"><span class="thm-name">Proposition</span> <span class="thm-num">7.2.4</span></div>
+  <div class="thm-body">
+  <p><u>Let there be a cartesian diagram in</u> \(\mathrm{Sch}_{!R}\):</p>
+  <p>\[\xymatrix@C=3em@R=2.5em{
+  X' \ar[r]^{g'} \ar[d]_{f'} &amp; X \ar[d]^{f} \\
+  S' \ar[r]_{g} &amp; S
+  }\]</p>
+  <p><u>Then for every complex</u> \(K^{\bullet}\) <u>of</u> \(D^{+}(X, \mathscr{A}_X)\), <u>the canonical morphism</u></p>
+  <p>\[g^* \circ R^+f_!(K^{\bullet}) \xrightarrow{\;ch_{K^{\bullet}}\;} R^+f_! \circ g'^*(K^{\bullet})\]</p>
+  <p><u>is an isomorphism.</u></p>
+  </div>
+</div>
+<p>Let \((\pi_1, j_1, f_1)\) be a pseudo-compactification of \(f\): one deduces from it by base change a pseudo-compactification \((\pi_1', j_1', f_1')\) of \(f'\) and a commutative diagram:</p>
+<p>
+\[\xymatrix@C=1.8em@R=1.8em{
+X_1' \ar[rr]^{j_1'} \ar[dr] \ar[dd]_{\pi_1'} &amp; &amp; T_1' \ar[dr] \ar[dd]|(0.7){f_1'} &amp; \\
+&amp; X_1 \ar[rr]^(0.35){j_1} \ar[dd]|(0.3){\pi_1} &amp; &amp; T_1 \ar[dd]^{f_1} \\
+X' \ar[rr]^(0.65){g'} \ar[dd]_{f'} &amp; &amp; X \ar[dd]^(0.3){f} &amp; \\
+&amp; S' \ar[rr]_{g} &amp; &amp; S \\
+&amp; &amp; &amp;
+}\]
+
+</p>
+<p>which allows one to define the arrow \(ch_K\).</p>
+<p>One then has, by (7.1.9.2), a morphism of biregular spectral sequences:</p>
+<p>
+
+\[\xymatrix@C=2em@R=2.8em{
+g^* \circ R^q(f \circ \pi_1^p)_!\, (\pi_1^{p*}(K^{\bullet})) \ar[r] \ar[d]_{u_1^{pq}} &amp; g^* \circ R^{p+q} f_!(K^{\bullet}) \ar[d]^{ch_K} \\
+R^q(f' \circ \pi_1'^p)_!\, (\pi_1'^{p*}(g'^*(K^{\bullet}))) \ar[r] &amp; R^+f_! \circ g'^*(K)
+}\]
+
+</p>
+<p>and \(ch_K\) is an isomorphism since the same holds for the \(u_1^{pq}\) by (XVII (5.2.6)).</p>
+<h3 id="XVII.7.3">7.3. Definition of \(Rf_!\)</h3>
+<p>We now propose to extend "in a reasonable way" the functor \(R^+f_!\) to a functor \(Rf_! : D(X, \mathscr{A}_X) \longrightarrow D(Y, \mathscr{A}_Y)\), for every morphism \(f\) of \(\mathrm{Sch}_{!R}\).</p>
+<p><strong>7.3.1.</strong> Let \((p_1, j_1, f_1)\) be a pseudo-compactification of \(f\) and \(F\) an \(\mathscr{A}_X\)-module: taking the canonical flasque resolution of \(j_{1!} \circ L^+ \bar{u}_{p_1}^{+}(F)\) (cf. XVII (4.2)), then its direct image by \(f_1\), then the simple complex associated with the double complex thus constructed, one obtains a complex of \(\mathscr{A}_Y\)-modules:</p>
+<p>
+\[(7.3.1.1) \qquad 0 \longrightarrow \mathscr{X}^0(F) \xrightarrow{\;S^0(F)\;} \mathscr{X}^1(F) \; \cdots \; \mathscr{X}^n(F) \xrightarrow{\;S^n(F)\;} \mathscr{X}^{n+1}(F) \; \cdots\]
+
+</p>
+<p>functorial in \(F\) and isomorphic in \(D^{+}(Y, \mathscr{A}_Y)\) to \(R^+f_!(F)\).</p>
+<p>By 7.2.1 \(H^i(\mathscr{X}^{\bullet}(F)) = 0\) for \(i &gt; 2d\), where \(d\) is an integer such that the relative dimension of \(f\) is \(\leqslant d\), so that the complex</p>
+<p>
+
+\[(7.3.1.2) \qquad 0 \longrightarrow \mathscr{X}^0(F) \longrightarrow \mathscr{X}^1(F) \longrightarrow \cdots \mathscr{X}^{2d-1}(F) \longrightarrow \operatorname{Ker} S^{2d}(F) \longrightarrow 0\]
+
+</p>
+<p>is canonically isomorphic in \(D^{+}(Y, \mathscr{A}_Y)\) to the complex (7.3.1.1). Moreover:</p>
+<div class="thm thm-plain lemma" id="XVII.7.3.2">
+  <div class="thm-head"><span class="thm-name">Lemma</span> <span class="thm-num">7.3.2</span></div>
+  <div class="thm-body"><p><u>The functors</u> \(\mathscr{X}^0\), \(\mathscr{X}^1\), \(\ldots\), \(\mathscr{X}^{2d-1}\), \(\operatorname{Ker} S^{2d}\) <u>are exact in</u> \(F\).</p></div>
+</div>
+<p>The exactness of the functors \(\mathscr{X}^n\) follows from the exactness of the canonical flasque resolution and from the fact that the direct image by a morphism of a short exact sequence of flasque sheaves is again a short exact sequence.</p>
+<p>To see the exactness of \(\operatorname{Ker} S^{2d}\), one considers, for a short exact sequence \(0 \longrightarrow F' \longrightarrow F \longrightarrow F'' \longrightarrow 0\) of sheaves on \(X\), the diagram</p>
+<p>
+
+\[\xymatrix@C=2.6em@R=2em{
+\operatorname{Ker} S^{2d}(F') \ar[r] \ar[d] &amp; \mathscr{X}^{2d+1}(F') \ar[r] \ar[d] &amp; \mathscr{X}^{2d+2}(F') \ar[r] \ar[d] &amp; \cdots \\
+\operatorname{Ker} S^{2d}(F) \ar[r] \ar[d] &amp; \mathscr{X}^{2d+1}(F) \ar[r] \ar[d] &amp; \mathscr{X}^{2d+2}(F) \ar[r] \ar[d] &amp; \cdots \\
+\operatorname{Ker} S^{2d}(F'') \ar[r] &amp; \mathscr{X}^{2d+1}(F'') \ar[r] &amp; \mathscr{X}^{2d+2}(F'') \ar[r] &amp; \cdots
+}\]
+
+</p>
+<p>and the exact homology sequence associated with the exact sequence</p>
+<p>
+
+\[0 \longrightarrow \sigma_{\geqslant 2d+1}(\mathscr{X}^{\bullet}(F')) \longrightarrow \sigma_{\geqslant 2d+1}(\mathscr{X}^{\bullet}(F)) \longrightarrow \sigma_{\geqslant 2d+1}(\mathscr{X}^{\bullet}(F'')) \longrightarrow 0\]
+
+</p>
+<p>allows one to conclude.</p>
+<p>One now has the following general lemma:</p>
+<div class="thm thm-plain lemma" id="XVII.7.3.3">
+  <div class="thm-head"><span class="thm-name">Lemma</span> <span class="thm-num">7.3.3</span></div>
+  <div class="thm-body"><p><u>Let</u> \(A\) <u>and</u> \(B\) <u>be two abelian categories and</u> \(Je^{\bullet}\) <u>an object of</u> \(C^b(\operatorname{Fex}(A, B))\) <u>where</u> \(\operatorname{Fex}(A, B)\) <u>denotes the category of exact functors from</u> \(A\) <u>into</u> \(B\). <u>Then, by associating with every complex</u> \(K^{\bullet}\) <u>of</u> \(C(A)\) <u>the simple complex associated with the double complex</u> \(Je^{\bullet}(K^{\bullet})\) <u>one obtains a triangulated functor</u> \(K(A) \longrightarrow K(B)\) <u>which preserves quasi-isomorphisms.</u></p></div>
+</div>
+<p>One writes the functor in question as a composite</p>
+<p>
+
+\[C(A) \longrightarrow C^b(C(B)) \xrightarrow{\;(\ )_s\;} C(B)\]
+
+</p>
+<p>where the functor \((\ )_s\) is the associated simple complex functor and one uses (\(\mathrm{VI_B}\) (2.3.2.2). Remark): the details are left to the reader.</p>
+<div class="thm thm-remark remarque" id="XVII.7.3.4">
+  <div class="thm-head"><span class="thm-name">Exercise</span> <span class="thm-num">7.3.4</span></div>
+  <div class="thm-body">
+  <p>Show that for every complex \(K^{\bullet}\) of \(D^{+}(X, \mathscr{A}_X)\), the canonical arrow</p>
+  <p>\[\tau_{\leqslant 2d}\, \mathscr{H}^{\bullet}(K^{\bullet}) \longrightarrow \mathscr{H}^{\bullet}(K^{\bullet})\]</p>
+  <p>induces a quasi-isomorphism on the associated simple complexes. For this one will remark that the canonical arrow</p>
+  <p>\[\varinjlim_{k \geqslant 2d} (\tau_{\leqslant k}\, \mathscr{H}^{\bullet}(K^{\bullet}))_s \longrightarrow (\mathscr{H}^{\bullet}(K^{\bullet}))_s\]</p>
+  <p>is an isomorphism, and then that the cohomology sheaves of a complex commute with filtered inductive limits.</p>
+  </div>
+</div>
+<p><strong>7.3.5.</strong> Let \(R^{(1)}f_! : D(X, \mathscr{A}_X) \longrightarrow D(Y, \mathscr{A}_Y)\) be the functor defined by (7.3.1.2) thanks to 7.2.3. By virtue of 7.2.4 one can compute it directly from (7.3.1.1) and one can verify that it "does not depend" on the chosen pseudo-compactification. One would then have to verify the statements 7.1.3, 7.1.4 and 7.1.6 by suppressing the exponents \(+\), which the writer did not have the courage to do.</p>
+<div class="thm thm-plain definition" id="XVII.7.3.6">
+  <div class="thm-head"><span class="thm-name">Definition</span> <span class="thm-num">7.3.6</span></div>
+  <div class="thm-body"><p><u>The functor</u> \(Rf_! : D(X, \mathscr{A}_X) \longrightarrow D(Y, \mathscr{A}_Y)\) <u>constructed in</u> 7.3.5 <u>is also called the direct image functor with proper supports.</u></p></div>
+</div>
+<p><strong>7.3.7.</strong> One can then show that the functor \(Rf_!\) commutes with base changes and that the statements (XVII (5.2.9) and (5.2.10)) remain true for every morphism of \(\mathrm{Sch}_{!R}\), which justifies the constructions one has just made.</p>
+<nav class="pager"><span><a href="XVII-6.html" rel="prev">← Previous</a></span><span><a href="./">Table of contents</a></span><span><a href="XVII-bibliographie.html" rel="next">Next →</a></span></nav>
+<p class="viewer-link"><a href="../../../sga4.html#XVII-7">Read in the bilingual viewer (fr · en)</a></p>
+</main>
+<script>
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="#"]');
+  if (!a) return;
+  var id = decodeURIComponent(a.getAttribute('href').slice(1));
+  if (id && !document.getElementById(id)) {
+    e.preventDefault();
+    location.href = '../../../sga4.html#' + id;
+  }
+});
+</script>
+</body>
+</html>

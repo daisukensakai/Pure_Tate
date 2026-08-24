@@ -1,0 +1,185 @@
+{
+  "argument_markdown": "## 0. Scope, conventions, and excluded routes\n\nWork throughout with Q-coefficients. Geometry is that of ATT-0112 (C66-GEO-COMP; dual-confirmed by REV-0157 and REV-0158) over an algebraically closed field of characteristic zero, after base change to C so that Betti mixed Hodge structures are defined. Write X := M_{6,6} for the smooth Deligne-Mumford stack of smooth genus-six curves with six ordered marked points, of dimension d = 21. The target\n\nT := W_{-16} H^{BM}_{16}(X; Q)\n\nis identified with W_{26} H^{26}(X; Q)(21) by Poincar\u00e9 duality (established working-context fact; packet FND-0001). In particular H^{26}(X; Q) is mixed of weights at least 26, so W_{26} H^{26}(X; Q) = Gr^W_{26} H^{26}(X; Q) is a pure polarizable Hodge structure of weight 26, and T is pure of weight -16. Borel-Moore homology is dual to compactly supported cohomology in the same degree with no extra Tate twist (established fact). Morphisms of mixed Hodge structures are strict, so Gr^W_m is an exact functor.\n\nThe mixed Hodge theory used below is exactly the Q-coefficient theory already employed to name T on the smooth stack X and on its open substacks: ordinary cohomology of a smooth finite-type Deligne-Mumford stack, and the restriction map along an open immersion of such stacks. Compactly supported cohomology of a possibly singular closed substack is not used as a standalone input.\n\nCasnati-Ekedahl conventions, (CE)+(N)+(BAL), H = H_{4,6}(P^1), and H^bal = {F isomorphic to O(4)+O(5)} are as in ATT-0112. No global splitting W = W_4 + W_5 is used. No blocked route is used. In particular this argument never invokes vcd-only vanishing, the undecorated top-weight graph complex, a point count, or the forgetful map X -> M_{6,5}. Gysin maps, a closed embedding of the reduced-support model itself into X, support-exhaustion, and a monomorphism f: Z -> X are not assumed; the only map to T that is used is constructed in Section 5 from restriction of ordinary cohomology.\n\n## 1. Source geometry (imported from ATT-0112)\n\nBy ATT-0112/CLM-0112-1 and CLM-0112-2, H is a finite-type Deligne-Mumford stack, smooth of pure dimension 18, and H^bal is open in H, hence itself smooth of pure dimension 18, reduced and normal. By ATT-0112/CLM-0112-6 and CLM-0112-7, every nonempty connected component of H^bal (and of Hbar^bal = [H^bal/PGL_2], smooth of pure dimension 15) contains a type-(i) point.\n\nLet V be a finite-type k-scheme with a smooth surjective morphism V -> H^bal (a smooth atlas; H^bal of finite type supplies a finite-type atlas). Let V_beta be any connected component. ATT-0112/CLM-0112-8, over this reduced locally Noetherian scheme, supplies:\n\n- pi_* L locally free of rank three and AJ = P_{V_beta}(pi_* L) a Zariski-locally trivial P^2-bundle;\n- U_beta the distinct-support (reduced-support) open of AJ, V_beta-smooth of pure relative dimension two and surjective;\n- Z_beta = Ord(U_beta) -> U_beta the finite \u00e9tale right S_6-torsor of orderings of the universal degree-six divisor, of degree 720;\n- Z_beta equal to the CE evaluation-failure model (via the dual-confirmed identifications recorded in ATT-0112 clause (E): ATT-0065/CLM-0065-9 and ATT-0066/CLM-0066-5, CLM-0066-6).\n\nIn particular Z_beta is a smooth finite-type k-scheme. The reduced-support condition and the ordering are applied to the same scheme; no one-sided reduction is used. Grauert is used only over the reduced scheme V_beta.\n\nWrite Z for the disjoint union of the Z_beta as V_beta runs over connected components of a chosen atlas, or equivalently for any single Z_beta when only geometric points of the image are at issue. Nothing below uses a component formula over a stack with inertia (FND-0144).\n\n## 2. The classifying morphism (constructed, not assumed)\n\nOver Z_beta the pullback of the universal curve of AJ is a smooth proper family C_{Z_beta} -> Z_beta of geometrically connected genus-six curves, equipped with six tautological pairwise-disjoint sections sigma_1, ..., sigma_6 whose relative Cartier divisor is the universal reduced member of |L|. This is precisely an object of the fibre category X(Z_beta). By the 2-Yoneda description of the moduli stack, this object is a morphism of locally finite-type Deligne-Mumford stacks\n\nf_beta : Z_beta -> X = M_{6,6}.\n\nNo comparison of Aut(C, gamma, Gamma) with Aut(C, Gamma) is used: existence of f_beta is the universal property of X, which classifies marked curves and does not see the pencil. No claim that f_beta is a monomorphism, unramified, quasi-finite, representable in any stronger sense than a morphism from a scheme to a Deligne-Mumford stack, or a closed immersion, is made. (The blocked monomorphism-without-pencil-recovery route is therefore not taken; pencil recovery is not needed for existence.)\n\nGeometrically, a geometric point of the image is an ordered six-pointed smooth genus-six curve (C, p_1, ..., p_6) for which the p_i are pairwise distinct and O_C(p_1+...+p_6) is isomorphic to L on a balanced tetragonal cover (C, gamma) presenting that point of H^bal. This is a description of geometric points of the image, not a stack-level full-faithfulness statement.\n\n## 3. Atlas-independent closed support Y\n\nThe morphism f_beta is of finite type (source and target are). The set-theoretic image of a finite-type morphism of algebraic stacks locally of finite type over a field is a constructible subset of the Zariski topological space of geometric points (Chevalley for algebraic stacks). Let Im be the union of the geometric images of all f_beta for the connected components of a fixed atlas. Let |Y| be the Zariski closure of Im in |X|, and let Y be the unique reduced closed substack of X with underlying space |Y|. The closed immersion i: Y -> X exists by this definition of Y; it is not a closed embedding of Z_beta, and it is not asserted to be a regular immersion, lci, or of pure codimension four.\n\nAtlas independence. Let V -> H^bal and V' -> H^bal be two smooth finite-type atlases, with associated images Im and Im'. The fibre product W = V times_{H^bal} V' is again a smooth atlas, and the tautological families on Z_W pull back from both sides, so the classifying morphisms commute with the projections Z_W -> Z_V and Z_W -> Z_{V'}. Smooth (in particular, surjective on geometric points) pullback therefore yields Im = Im_W = Im'. Equivalently, a geometric point of H^bal is an isomorphism class of (C, gamma), and a geometric point of Z is an ordering of a reduced member of |L|; both are intrinsic to the moduli problem and independent of presentation. Hence Y, as the reduced closure of that intrinsic set of geometric points of X, is independent of the atlas.\n\nThe same Y is obtained if one starts from an \u00e9tale atlas of Hbar^bal = [H^bal / PGL_2]: precomposition of gamma with an automorphism of the target replaces D by a linearly equivalent divisor in the same pencil, so (C, Gamma) in X is PGL_2-invariant (ATT-0112/CLM-0112-7). The geometric image in X is therefore unchanged.\n\nY is nonempty: H^bal is nonempty (imported in ATT-0112 from FND-0154), and on every balanced geometric fibre the reduced-support open is nonempty (ATT-0112 clause (E) via ATT-0088/CLM-0088-5, CLM-0088-8). Nonemptiness of Y is recorded only to make the construction non-vacuous; vanishing of T_Z is not excluded and is not needed.\n\n## 4. Localization sequence for X along Y\n\nLet U_Y := X \\ Y, an open substack of the smooth stack X, hence itself smooth of dimension 21. Open-closed decomposition supplies the localization triangle in the derived category of mixed Hodge complexes on the analytic site of X,\n\nR Gamma_Y(X, Q) -> R Gamma(X, Q) -> R Gamma(U_Y, Q) -> +1,\n\nor equivalently the long exact sequence of mixed Hodge structures whose degree-26 fragment contains the restriction morphism of ordinary cohomology\n\nr : H^{26}(X; Q) -> H^{26}(U_Y; Q).\n\nThis is a localization sequence for X = M_{6,6}, constructed from the closed-open pair (Y, U_Y). Both X and U_Y are smooth of dimension 21, so H^{26}(X; Q) and H^{26}(U_Y; Q) have weights at least 26, and W_{26} = Gr^W_{26} on each. Strictness yields that\n\nGr^W_{26} r : Gr^W_{26} H^{26}(X; Q) -> Gr^W_{26} H^{26}(U_Y; Q)\n\nis a morphism of pure polarizable Hodge structures of weight 26. Twisting by (21) and applying the Poincar\u00e9 identification of T gives a morphism of pure weight -16 Hodge structures\n\nr_T : T -> W_{26} H^{26}(U_Y; Q)(21).\n\nNo Gysin morphism, no fundamental class of Y, and no degree shift by twice the codimension appear. The map r_T is restriction of ordinary cohomology, which exists for an arbitrary open immersion of smooth stacks and does not require Y to be regularly immersed.\n\n(If one prefers the language of cohomology with supports, ker(r) = im(H^{26}_Y(X; Q) -> H^{26}(X; Q)), so the kernel constructed below is exactly the image of the supports map in the sense of FND-0168(3a), once the closed support Y containing the image of Z has been fixed. The kernel itself is named without treating H_c^*(Y) as a standalone theory.)\n\n## 5. The datum (K_Z, T_Z, phi)\n\nDefine\n\nK_Z := ker(r_T) = ker( T -> W_{26} H^{26}(U_Y; Q)(21) ),\n\nT_Z := K_Z,\n\nphi : K_Z -> T the inclusion of this kernel.\n\nThen:\n\n- K_Z is a named mixed Hodge structure: it is the kernel of W_{26} of restriction in the localization sequence of Section 4 for M_{6,6}. Equivalently it is W_{26} of the degree-26 supports group H^{26}_Y(X; Q), twisted by (21). Degree, weight, and twist are those of T: Borel-Moore degree 16, weight -16, ordinary cohomological degree 26 with Poincar\u00e9 twist (21). No Tate type is asserted.\n- phi is a morphism of mixed Hodge structures, constructed as W_{26}(21) of the restriction map r of Section 4 (or as the supports-to-ambient map). It is not assumed; it is this restriction/kernel inclusion.\n- T_Z is the kernel of r_T, hence a subobject of T, hence a specified subquotient of T. Exactness of Gr^W_{26} on the localization sequence at H^{26}(X) says precisely that T_Z consists of those classes in T whose restriction to U_Y vanishes in W_{26} H^{26}(U_Y; Q)(21).\n\nThis is the CE support-accounting datum attached to the ordered reduced-support evaluation-failure geometry, via the closed support Y constructed from that geometry in Sections 2-3.\n\n## 6. Coverage: no relevant Z-supported term is omitted\n\nBy construction of Y, every geometric point of the image of f_beta lies in Y, so the image of Z is contained in Y and U_Y is disjoint from that image. Any class in T that is supported on a closed subset of X contained in Y (in particular, any class supported on the closure of the image of Z, and any class supported on the image of Z itself) restricts to zero on U_Y, hence lies in ker(r_T) = T_Z.\n\nThus every Z-supported corner class in T, in the only sense available before a regular embedding is proved \u2014 namely, a class in T that vanishes on the complement of a closed support containing the image of Z \u2014 is accounted for in T_Z. The identification is exact at T: T_Z = ker(r_T), so the complementary term in the localization sequence is the image of T in W_{26} H^{26}(U_Y; Q)(21), which is a subobject of the corner of the open complement and is excluded from T_Z by definition.\n\nCoverage is one-sided on purpose. The kernel may include classes supported on extra components of the closure Y (non-reduced members of |L| in the fibrewise discriminant, and any unbalanced or boundary points that happen to lie in the closure). Including extra support does not omit a Z-supported term. Support-exhaustion T_Z = T is not claimed: that would require vanishing or Tate-ness of the complementary corner, which is a C66-TATE-ASSEMBLY input, not this interface.\n\nUnbalanced Casnati-Ekedahl strata that do not meet Y are not part of the ordered reduced-support balanced geometry of ATT-0112 clause (E); they are complementary target terms, not omitted Z-terms of this datum.\n\n## 7. Descent and atlas invariance\n\nK_Z, T_Z, and phi are defined from the pair (X, Y) alone. Section 3 shows that Y is the reduced closure of an atlas-independent set of geometric points of X. Therefore any two presentations \u2014 any two smooth finite-type scheme atlases of H^bal, any \u00e9tale atlas of Hbar^bal, and the stacky incidence over H^bal itself \u2014 produce the same closed substack Y and the same datum (K_Z, T_Z, phi). Rational S_6-invariants versus coinvariants are not needed: the ordered model maps directly to the ordered stack X, and Y is formed in X.\n\n## 8. Explicitly not claimed\n\n- Tate type of T, T_Z, or K_Z; no sum of Q(8) or Q(-8) is asserted (FND-0053, FND-0152(ii), and the theorem's exclusion stand).\n- A closed embedding of Z (or of the reduced-support open of AJ) into X; Z maps to X by f_beta, which is not proper, and Y is a closure of a constructible image, not Z itself (FND-0052).\n- Gysin H^{18}(Y)(-4) -> H^{26}(X), regular immersions, lci structure, purity of codimension, or any degree shift by twice a codimension (FND-0052, FND-0068, FND-0168(5)).\n- Monomorphism, quasi-finiteness, unramifiedness, or inertia isomorphisms for f_beta; Aut(C, Gamma) is not computed (FND-0098, FND-0137). FND-0147 is not invoked.\n- T_Z = T, or that Z-supported classes span T, or that K = ker(H^{16}(Mbar_{6,6}) -> H^{16}(D)) is spanned by classes on Y (FND-0168(3)-(4)).\n- Hodge conjecture identifications of K_Z with algebraic cycle classes.\n- Any statement over nonreduced bases, with integral coefficients, or on coarse moduli.\n- Dimension of Y, equidimensionality of Y, or that dim Y = 17.\n\nThe interface is the weakest sufficient cohomological accounting that names, inside a localization sequence for M_{6,6}, the part of T supported on the atlas-independent closure of the ordered reduced-support CE geometry.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "claims": [
+    {
+      "id": "CLM-0120-1",
+      "statement": "For every connected component V_beta of a smooth finite-type scheme atlas of H^bal, the ordered reduced-support scheme Z_beta of ATT-0112/CLM-0112-8 carries a tautological smooth genus-six curve with six pairwise-disjoint sections, and the universal property of M_{6,6} therefore supplies a morphism f_beta: Z_beta -> M_{6,6} of locally finite-type Deligne-Mumford stacks. No Aut comparison, monomorphism, quasi-finiteness, or closed-immersion claim is included.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0120-2",
+      "statement": "The union of the geometric images of all such f_beta is a constructible subset of |M_{6,6}|, independent of the choice of smooth finite-type atlas (common refinement of atlases, or equivalently intrinsic moduli-theoretic geometric points). Its Zariski closure is the underlying space of a unique reduced closed substack Y of M_{6,6}.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0120-3",
+      "statement": "The open complement U_Y = M_{6,6} minus Y is a smooth Deligne-Mumford stack of dimension 21. Restriction r: H^{26}(M_{6,6};Q) -> H^{26}(U_Y;Q) is a morphism of mixed Hodge structures, both groups have weights at least 26, and W_{26} r is Gr^W_{26} r. Poincar\u00e9 duality identifies T with W_{26} H^{26}(M_{6,6};Q)(21), yielding r_T: T -> W_{26} H^{26}(U_Y;Q)(21).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0120-4",
+      "statement": "The kernel K_Z := ker(r_T) is a pure weight -16 subobject of T. Setting T_Z := K_Z and phi the inclusion gives a CE support-accounting datum (K_Z, T_Z, phi) whose degree, weight, and Poincar\u00e9 twist match those of T. Exactness of Gr^W_{26} at H^{26}(M_{6,6}) identifies T_Z as the classes in T that vanish on U_Y.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0120-5",
+      "statement": "Every class in T supported on a closed subset of M_{6,6} contained in Y, in particular every class supported on the image of Z or on its closure, lies in T_Z. No Z-supported corner class in T is omitted. The complementary term is the image of T in W_{26} H^{26}(U_Y;Q)(21). Support-exhaustion T_Z = T is not asserted.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0120-6",
+      "statement": "The closed substack Y and the datum (K_Z, T_Z, phi) are independent of the smooth finite-type scheme atlas of H^bal and of passage to [H^bal/PGL_2], and therefore descend from any presentation of the ordered reduced-support evaluation-failure geometry to the same target datum.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0120-7",
+      "statement": "The datum makes no Tate assertion. The argument does not use a closed embedding of Z into M_{6,6}, a Gysin map, a regular-immersion or lci hypothesis on Y, a monomorphism f_beta, or an unproved map to T.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0112-1",
+    "CLM-0112-2",
+    "CLM-0112-6",
+    "CLM-0112-7",
+    "CLM-0112-8"
+  ],
+  "engine": "grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [],
+  "id": "ATT-0120",
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "universal-property-classifying-morphism-from-marked-curve-family",
+    "chevalley-constructible-image-for-finite-type-morphisms-of-stacks",
+    "zariski-closure-as-reduced-closed-substack",
+    "atlas-common-refinement-descent-of-geometric-image",
+    "open-closed-localization-sequence-of-mixed-hodge-structures",
+    "weight-strictness-and-Gr-W-exactness-at-the-lowest-weight-corner",
+    "poincare-duality-reindexing-of-the-open-borel-moore-target",
+    "supports-kernel-identification-without-gysin"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Construction of the classifying morphism from the ATT-0112 ordered reduced-support CE model to M_{6,6} by the universal property of marked-curve moduli, without Aut comparison and without claiming a monomorphism.",
+    "Atlas-independent reduced closed substack Y of M_{6,6} obtained as Zariski closure of that classifying image, used as the closed support that FND-0168(3) requires before a Z-supported contribution in T has a referent.",
+    "CE support-accounting datum (K_Z, T_Z, phi) with T_Z = ker(T -> W_{26} H^{26}(M_{6,6} minus Y;Q)(21)), named in the ordinary-cohomology localization sequence of M_{6,6} along Y, matching FND-0168(3a) (image of the supports map) without Gysin, without a closed embedding of Z, and without support-exhaustion."
+  ],
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_path": "proof/packets/generated/C66-001-v5.md",
+  "packet_sha256": "10948ae9a5c284a8d02fe50fd35bca128cef69e6fe52c762dcb9bb28d3adbb27",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0112",
+      "kind": "attempt",
+      "note": "Verified C66-GEO-COMP dependency (dual-confirmed by REV-0157 and REV-0158). Used for CLM-0112-1/2 (H and H^bal smooth of pure dimension 18), CLM-0112-6/7 (type-(i) automatic; Hbar^bal of dimension 15), and CLM-0112-8 (scheme-atlas model: P^2-bundle, reduced-support open, finite \u00e9tale S_6-torsor Z_beta equal to the CE evaluation-failure model). The classifying morphism and localization of the present artifact are built on that scheme-level source and do not use any M_{6,6} statement from ATT-0112 (ATT-0112 asserts none)."
+    },
+    {
+      "id": "REV-0157",
+      "kind": "confirmation_review",
+      "note": "First independent confirmation of ATT-0112. All eight claims confirmed; clause (E) scheme-level and no-Tate caveats honoured."
+    },
+    {
+      "id": "REV-0158",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0112. Stack-to-scheme handoff in clause (E) confirmed; no M_{6,6} content imported beyond the source geometry."
+    },
+    {
+      "id": "ATT-0088",
+      "kind": "attempt",
+      "note": "Nested dual-confirmed input of ATT-0112, used only through CLM-0112-8: CLM-0088-5/8 supply fibrewise reduced-support nonemptiness and the P^2-bundle/ordering-torsor model over a reduced base. No Aut(C,Gamma) or M_{6,6} clause is taken from ATT-0088."
+    },
+    {
+      "id": "ATT-0065",
+      "kind": "attempt",
+      "note": "Nested dual-confirmed input of ATT-0112, used only through CLM-0112-8/CLM-0065-9: Z_beta is the CE evaluation-failure model. Filtered form, no global splitting."
+    },
+    {
+      "id": "ATT-0066",
+      "kind": "attempt",
+      "note": "Nested dual-confirmed input of ATT-0112, used only through CLM-0112-8/CLM-0066-5,6: closed Abel-Jacobi incidence and stack-level S_6-torsor over the distinct-support open."
+    },
+    {
+      "id": "FND-0001",
+      "kind": "adjudicated_finding",
+      "note": "Poincar\u00e9 duality W_{-16} H^{BM}_{16}(M_{6,6};Q) isomorphic to W_{26} H^{26}(M_{6,6};Q)(21); used to match degree, weight, and twist conventions."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-SUPPORT-INTERFACE",
+  "summary": "The ordered reduced-support CE model Z of ATT-0112 clause (E), over any smooth finite-type scheme atlas of H^bal, carries a tautological family of genus-six curves with six pairwise-disjoint sections and therefore a classifying morphism f: Z -> M_{6,6} by the universal property of M_{6,6}. Let Y be the reduced closed substack of M_{6,6} whose underlying space is the Zariski closure of the geometric image of f. This Y is independent of the atlas. The open-closed localization of the smooth stack M_{6,6} along Y gives a morphism of mixed Hodge structures r: H^{26}(M_{6,6};Q) -> H^{26}(M_{6,6}\\Y;Q). Both groups have weights at least 26, so W_{26} equals Gr^W_{26}. Poincar\u00e9 duality identifies T with W_{26} H^{26}(M_{6,6};Q)(21). Set K_Z := ker(W_{26} r (21)) inside T, set T_Z := K_Z, and set phi to be the inclusion. Exactness of Gr^W_{26} identifies T_Z as the classes in T that vanish on the complement of Y, hence as every Y-supported (and therefore every Z-supported) corner class; no such term is omitted. No Tate type, Gysin map, closed embedding of Z, or exhaustion T_Z = T is used or claimed.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "target_interface_certificate": {
+    "atlas_invariance": "Geometric points of Z are orderings of reduced members of |L| on fibres of the balanced tetragonal moduli problem and do not depend on the atlas. Any two smooth finite-type scheme atlases of H^bal have a common refinement on which the tautological families and classifying morphisms pull back, so they determine the same constructible image in M_{6,6} and the same reduced closure Y. The datum (K_Z, T_Z, phi) is defined from the pair (M_{6,6}, Y) alone and is therefore the same for every presentation, including \u00e9tale atlases of [H^bal/PGL_2].",
+    "canonical_source": "Ordered reduced-support Casnati-Ekedahl evaluation-failure scheme Z = Ord(U) over any connected component of a smooth finite-type scheme atlas of H^bal, as supplied by ATT-0112 clause (E)/CLM-0112-8, together with its tautological classifying morphism f: Z -> M_{6,6} sending the universal marked curve to an object of M_{6,6}.",
+    "construction": "Y is the reduced closed substack of M_{6,6} whose underlying space is the Zariski closure of the geometric image of f. The open-closed pair (Y, U_Y = M_{6,6} minus Y) determines the localization sequence of mixed Hodge structures on ordinary cohomology of the smooth stack M_{6,6}, whose degree-26 restriction is r: H^{26}(M_{6,6};Q) -> H^{26}(U_Y;Q).",
+    "coverage": "Exactness of Gr^W_{26} at H^{26}(M_{6,6}) identifies T_Z with all classes in T that vanish on M_{6,6} minus Y. The image of Z is contained in Y, so every class in T supported on that image or on its closure vanishes on the complement and lies in T_Z. Complementary corner classes live in the image of T in W_{26} H^{26}(M_{6,6} minus Y;Q)(21) and are excluded from T_Z by definition. Support-exhaustion T_Z = T is not claimed.",
+    "degree_weight_twist": "Borel-Moore degree 16 and weight -16 on T and on K_Z; equivalently ordinary cohomological degree 26 with Poincar\u00e9 twist (21), using T isomorphic to W_{26} H^{26}(M_{6,6};Q)(21). No Tate type Q(8) or Q(-8) is asserted.",
+    "target_map": "phi is the inclusion K_Z -> T, which is W_{26}(21) of the localization restriction r, equivalently the supports-to-ambient map in degree 26. It is constructed from r; it is not a Gysin map and is not assumed as an unproved map to T.",
+    "target_subquotient": "T_Z := K_Z, the kernel of r_T, as a subobject of T (hence a specified subquotient). Equivalently T_Z is the image of W_{26} H^{26}_Y(M_{6,6};Q)(21) in T.",
+    "target_term": "K_Z := ker(W_{26} r (21)) = ker(T -> W_{26} H^{26}(M_{6,6} minus Y; Q)(21)), equivalently W_{26} of the image of the degree-26 supports map H^{26}_Y(M_{6,6};Q) -> H^{26}(M_{6,6};Q), twisted by (21)."
+  },
+  "task_id": "TASK-C66-M-004",
+  "theorem_scope": {
+    "coefficients": "Q",
+    "g": 6,
+    "ground_field": "C for mixed Hodge structures; geometry after ATT-0112 over an algebraically closed field of characteristic zero, base-changed to C",
+    "n": 6,
+    "not_covered": [
+      "any Tate, purity, or RED-0001 conclusion for T, T_Z, or K_Z",
+      "a closed embedding, regular immersion, lci structure, or Gysin map for Z or for Y inside M_{6,6}",
+      "support-exhaustion T_Z = T",
+      "monomorphism, unramifiedness, quasi-finiteness, or stack-level full faithfulness of f (FND-0147 is not used)",
+      "closedness or purity of the balanced reduced-support model itself in M_{6,6}",
+      "unbalanced Casnati-Ekedahl strata and whether they lie in Y",
+      "integral coefficients, coarse moduli, or stack-inertia component formulae (FND-0144, FND-0075)",
+      "nonreduced bases (Grauert/FND-0131)",
+      "nonzero-ness of T_Z"
+    ],
+    "objects": [
+      "H^bal",
+      "Z = Ord(U) over a smooth scheme atlas of H^bal",
+      "classifying morphism f: Z -> M_{6,6}",
+      "Y = reduced Zariski closure of the classifying image in M_{6,6}",
+      "open complement U_Y = M_{6,6} minus Y",
+      "K_Z",
+      "T_Z",
+      "phi"
+    ]
+  },
+  "theorem_statement": "Let T:=W_{-16}H^{BM}_{16}(M_{6,6};Q). Construct a canonical, atlas-independent CE support-accounting datum (K_Z, T_Z, phi) for the ordered reduced-support evaluation-failure geometry: K_Z must be a named mixed-Hodge term in an explicitly constructed compactification, localization sequence, correspondence, or spectral sequence for M_{6,6}; phi must identify T_Z as a specified subquotient of T with the exact degree, weight, and Tate-twist conventions stated; and an exact filtration, quotient, or spectral-sequence accounting must prove both which part of T is T_Z and that no relevant Z-supported term is omitted. The construction must descend from any presentation/atlas to the same target datum. This theorem makes no Tate assertion and may not assume a closed embedding, Gysin map, support-exhaustion statement, or map to T without proving it."
+}

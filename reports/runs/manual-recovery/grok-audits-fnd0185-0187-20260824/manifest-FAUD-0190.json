@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "context_revision": 2,
+  "created_on": "2026-08-24",
+  "excluded_engines": [
+    "claude"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "kernel-form-tate-reduces-to-lowest-weight-bm-of-the-support",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-24",
+    "equivalence_group": "kernel-form-tate-reduces-to-lowest-weight-bm-of-the-support",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0185",
+    "impacts_approach_ids": [
+      "C66-TATE-SUPPORT"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "claude"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      }
+    },
+    "source_attempt_ids": [
+      "ATT-0121"
+    ],
+    "source_review_ids": [
+      "REV-0171"
+    ],
+    "statement": "Work over C with Q-coefficients at (g,n)=(6,6). Let Y be any closed substack of M_{6,6} and T_Z := ker(T -> W_{26}H^{26}(M_{6,6} minus Y;Q)(21)) the associated kernel-form term. Exactness of W_{-16} on the Borel-Moore localization sequence makes W_{-16}H^{BM}_{16}(Y;Q) -> T have image exactly T_Z, so T_Z is a QUOTIENT of W_{-16}H^{BM}_{16}(Y;Q). That source group is pure polarizable of weight -16: H^{BM}_k of any finite-type object is Q-dual to H_c^k, whose weights are at most k, so Borel-Moore weights in degree k are at least -k and the bottom filtration step W_{-k}H^{BM}_k is pure of weight -k with polarizable graded piece. Since pure polarizable weight -16 Q-Hodge structures form a semisimple abelian category, a quotient of a finite direct sum of Q(8) is a finite direct sum of Q(8). Hence, for the ATT-0120 support Y, 'W_{-16}H^{BM}_{16}(Y;Q) is a finite direct sum of Q(8)' is a SUFFICIENT condition for the exact C66-TATE-SUPPORT theorem, and it requires no closed regular embedding, no lci or purity hypothesis, no Gysin map, and no degree shift by twice a codimension -- only Poincare-Verdier duality on the smooth ambient, which FND-0180 already supplies. It remains sufficient, not necessary, and it says nothing about support-exhaustion T_Z = T.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0185",
+  "id": "TASK-F-FND-0185",
+  "input_packet": "proof/packets/generated/C66-001-v5.md",
+  "output": "research/finding-audits/FAUD-0190.json",
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "fc21ae75eaa03e7f8a0e5d62ae7578b08cb87cdcf52dcc008ee6d48b55d527fb",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "grok",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}

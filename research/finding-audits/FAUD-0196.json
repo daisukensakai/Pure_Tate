@@ -1,0 +1,91 @@
+{
+  "adjudicated_statement": "Let H and X be algebraic stacks. Suppose a subset S of the geometric points |X| is defined as the image of a classifying morphism attached functorially, in the 2-Yoneda sense, to smooth surjective finite-type atlases of H: for every such atlas V->H from an algebraic space there is a finite-type morphism f_V:Z_V->X, and these morphisms are compatible with pullback along morphisms of atlases. Then for any two such atlases V->H and V'->H, the 2-fibre product W=V x_H V' exists as an algebraic space (Stacks Project Tag 04T2); the projections W->V and W->V' are smooth and surjective, hence surjective on geometric points (Tags 04XH, 04XI); and W->H is again a smooth surjective atlas. If Z_(-) is constructed only for scheme bases, one must pass to a scheme presentation of W. The tautological family on Z_W is then the pullback of the families on Z_V and Z_{V'}, so the geometric images of f_V, f_{V'}, and f_W in |X| coincide. Consequently S is independent of the atlas, and the unique reduced closed substack Y of X with |Y| equal to the Zariski closure of S (Tag 0509) is independent of the atlas. Common refinement of atlases of H does not by itself produce a morphism [H/G]->X or identify S with the image arising from an atlas of the quotient: a morphism [H/G]->X exists if and only if the classifying morphism from H is G-equivariant, equivalently the X-valued moduli point is G-invariant on geometric points (Tag 04WM). This lemma does not assert that a scheme-level tautological model constructed on atlases of H transfers to etale atlases of [H/G], and it does not assert atlas-independence of compactly supported cohomology of the atlas. In the campaign case (g,n)=(6,6), with H=H^bal the balanced tetragonal stack, X=M_{6,6}, and G=PGL_2, the extra invariance is ATT-0112/CLM-0112-7; the failure of ATT-0112/CLM-0112-8 to transfer to atlases of Hbar^bal=[H^bal/PGL_2] is the separate finding FND-0187.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. Local originating artifacts were inspected first. ATT-0120 Section 3 and CLM-0120-2/6 argue that if V->H^bal and V'->H^bal are smooth finite-type atlases then W=V x_{H^bal} V' is a smooth atlas, tautological families on Z_W pull back from both sides, geometric images in |M_{6,6}| coincide, and the reduced closure Y is atlas-independent; passage to [H^bal/PGL_2] is separated off as PGL_2-invariance of the M_{6,6}-valued point via CLM-0112-7. REV-0170 confirmed those claims and extracted the present candidate. The stack-theoretic core is independently supplied by the Stacks Project: 2-fibre products of algebraic stacks exist (Tag 04T2/04TD); if V and V' are schemes then W is an algebraic space, not necessarily a scheme (Tag 04TF); |W|->|V| x_{|H|}|V'| is surjective (Tag 04XH) and a representable smooth surjection is surjective on geometric points (Tag 04XI); the topology on |H| is independent of the smooth atlas precisely by the same common-refinement square U''=U x_H U' (Tags 04XL/04XE); and a closed subset of |X| underlies a unique reduced closed substack (Tag 0509). Quotient morphisms [H/G]->X correspond to G-equivariant data (Tag 04WM/04UV), so G-invariance is an extra hypothesis, not a consequence of refining atlases of H. Wording corrections required before promotion: (i) an atlas must be smooth and surjective, with source an algebraic space or scheme; (ii) W need not be a scheme, so a further scheme presentation is required when Z_(-) is constructed only over schemes, as in CLM-0112-8; (iii) functoriality of the classifying maps is a hypothesis, not a formal consequence of fibre products; (iv) common refinement does not transfer the CE scheme model to atlases of [H/G]. Complementary corroborated findings are compatible rather than duplicates: FND-0180 and FND-0181 already use atlas-independence of this Y on H^bal; FND-0169 shows that compactly supported cohomology of an atlas is not a stack invariant, so the present lemma concerns geometric images only; FND-0187 shows that even after PGL_2-invariance of the classifying map, CLM-0112-8 does not transfer verbatim to etale atlases of Hbar^bal. The candidate kind obstruction is retained as a method-boundary: naive descent of the geometric image, or of the tautological family, across [H/G] fails without a separate invariance (and, for the scheme model, a separate repair).",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0184",
+  "id": "FAUD-0196",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "campaign_objects": [
+      "H^bal",
+      "M_{6,6}",
+      "PGL_2",
+      "Hbar^bal=[H^bal/PGL_2]",
+      "ATT-0112/CLM-0112-7",
+      "ATT-0112/CLM-0112-8"
+    ],
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": null,
+    "ground_field": "algebraically closed of characteristic zero, or C",
+    "hypotheses": [
+      "H and X are algebraic stacks",
+      "atlases are smooth and surjective of finite type, with source an algebraic space (or a scheme)",
+      "the classifying morphism is functorial in the 2-Yoneda sense, so tautological families pull back along morphisms of atlases",
+      "a morphism [H/G]->X, or equality of geometric images from H and from [H/G], requires a separate G-equivariance/G-invariance hypothesis"
+    ],
+    "not_covered": [
+      "transfer of the ATT-0112/CLM-0112-8 scheme-level P^2-bundle/ordering-torsor model from atlases of H^bal to etale atlases of [H^bal/PGL_2]",
+      "atlas-independence of compactly supported cohomology of the atlas",
+      "constructibility of S (Chevalley), which is used in CLM-0120-2 but is not required for independence of the reduced closure",
+      "Tate type, Gysin maps, closed embeddings of Z, or support-exhaustion"
+    ],
+    "objects": [
+      "algebraic stacks H and X",
+      "smooth surjective finite-type atlases from algebraic spaces",
+      "2-fibre product W=V x_H V'",
+      "classifying morphisms f_V:Z_V->X",
+      "geometric image S in |X|",
+      "reduced closed substack Y",
+      "quotient presentation [H/G]"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "59d6b6df8f528ed5d3a68d9b9d74622e9b643f3622cc4d381bb46cc27a990016",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-24T02:21:00Z",
+      "source_type": "repository",
+      "url": "https://raw.githubusercontent.com/stacks/stacks-project/master/stacks-properties.tex"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "910da2ebd8683ce7d45ac399f29f28ddb0ac895f7108379d67c3ec040ae0a8e5",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "59d6b6df8f528ed5d3a68d9b9d74622e9b643f3622cc4d381bb46cc27a990016",
+      "retrieved_at": "2026-08-24T02:18:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0509"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "6172432f5ccce62d02efeb6c0a57f8374598c0142e1088b858616a8577c5a626",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "59d6b6df8f528ed5d3a68d9b9d74622e9b643f3622cc4d381bb46cc27a990016",
+      "retrieved_at": "2026-08-24T02:20:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/04XH"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0184",
+  "verdict": "promote",
+  "verified_source_count": 3
+}

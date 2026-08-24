@@ -1,0 +1,229 @@
+{
+  "argument_markdown": "## 0. Scope, interface, and excluded routes\n\nWork throughout with Q-coefficients. Geometry is that of ATT-0112 (C66-GEO-COMP; dual-confirmed by REV-0157 and REV-0158) after base change to C. Write X := M_{6,6} for the smooth Deligne-Mumford stack of dimension d = 21. The target T := W_{-16} H^{BM}_{16}(X; Q) is identified with W_{26} H^{26}(X; Q)(21) by Poincare duality (FND-0001; established working-context fact). Thus T is a pure polarizable Hodge structure of weight -16. Morphisms of mixed Hodge structures are strict, so Gr^W_m and W_m are exact.\n\nThe C66-SUPPORT-INTERFACE datum is the verified attempt ATT-0120, dual-confirmed by REV-0169 and REV-0170, and recorded as FND-0180. Its claims CLM-0120-1 through CLM-0120-7 are used exactly as confirmed. In particular T_Z is not the compactly supported cohomology of a standalone model Z, and there is no map from H_c^{16}(Z) to T.\n\nNo blocked route is used: no vcd-only vanishing, no undecorated CGP top-weight graph complex, no point count, and no forgetful map X -> M_{6,5}. No Gysin map, regular immersion, lci hypothesis, closed embedding of Z, or support-exhaustion T_Z = T is assumed (FND-0052, FND-0168(5), ATT-0120 Section 8). Rational irreducibility of S_6-representations is not used to create Tate structure (working-context constraint; FND-0053, FND-0054).\n\n## 1. The named subquotient T_Z (imported from ATT-0120)\n\nBy ATT-0120/CLM-0120-1, each ordered reduced-support scheme Z_beta of ATT-0112/CLM-0112-8 carries a tautological smooth genus-six curve with six pairwise-disjoint sections, hence a classifying morphism f_beta: Z_beta -> X by the universal property of X. By CLM-0120-2, the union of geometric images is constructible and atlas-independent; its Zariski closure is the underlying space of a unique reduced closed substack Y of X. By CLM-0120-3, U_Y := X minus Y is smooth of dimension 21, restriction r: H^{26}(X; Q) -> H^{26}(U_Y; Q) is a morphism of mixed Hodge structures, both groups have weights at least 26, and Poincare duality supplies r_T: T -> W_{26} H^{26}(U_Y; Q)(21). By CLM-0120-4,\n\nT_Z := K_Z := ker(r_T),\n\nwith phi the inclusion K_Z -> T. Thus T_Z is a subobject of T, hence a specified subquotient, of Borel-Moore degree 16, weight -16, and Poincare twist (21). Exactness of Gr^W_{26} identifies T_Z with the classes in T that vanish on U_Y, equivalently with the image of the degree-26 supports map in the sense of FND-0168(3a) (REV-0169, REV-0170: the loose parenthetical equating T_Z with the supports group itself is not used; only the kernel/image form is used). By CLM-0120-5 the accounting is one-sided: every class supported on a closed subset of Y lies in T_Z, and extra support inflates rather than omits. By CLM-0120-6 the datum is atlas-independent, including passage to etale atlases of Hbar^bal = [H^bal/PGL_2]. By CLM-0120-7 no Tate type is asserted by the interface.\n\nThis is the unique canonical mixed-Hodge subquotient named by the verified C66-SUPPORT-INTERFACE datum. Complementary terms in im(r_T) are excluded from T_Z by definition and are not assembled here.\n\n## 2. Purity of T_Z\n\nT is pure of weight -16. The kernel of a morphism of mixed Hodge structures out of a pure object is a subobject, hence itself pure of weight -16 and polarizable. Therefore T_Z is a pure polarizable rational Hodge structure of weight -16. Semisimplicity of that abelian category (established working-context fact) implies that T_Z is a finite direct sum of Q(8) if and only if every Hodge type of T_Z is (-8,-8). This tautology is recorded only to fix the type dictionary; it is not a geometric input.\n\n## 3. Dimension of Y\n\nBy ATT-0112/CLM-0112-2, H^bal is smooth of pure dimension 18. By ATT-0112/CLM-0112-7, Hbar^bal is smooth of pure dimension 15, and the M_{6,6}-valued point attached to (C, Gamma) is PGL_2-invariant. ATT-0120/CLM-0120-6 therefore realises the same closed substack Y from any etale atlas of Hbar^bal.\n\nLet S be a connected component of a smooth finite-type etale scheme atlas of Hbar^bal. Then S is reduced of dimension 15. Pulling back the universal balanced family, ATT-0112/CLM-0112-8 (Grauert over a reduced base; h^0(L)=3 identically) supplies a Zariski-locally trivial P^2-bundle AJ, a reduced-support open U of pure relative dimension two, and a finite etale S_6-torsor Z = Ord(U) of the same dimension. Hence dim Z = 15+2 = 17. The classifying morphism f: Z -> X is of finite type, so the constructible geometric image has dimension at most 17, and its Zariski closure Y satisfies dim Y <= 17.\n\n(The coarser bound dim Y <= 20 of FND-0181, from the H^bal-level source of dimension 18+2, is compatible and not used. Equality dim Y = 17 is not claimed.)\n\nBy FND-0181, Y is a proper closed substack of the 21-dimensional stack X, so U_Y is a nonempty dense open and T_Z is a genuine proper-support kernel rather than an unnoticed exhaustion T_Z = T.\n\n## 4. Degree-16 vanishing on sources of dimension less than 8\n\nLet W be a separated scheme of finite type over C of dimension delta. Then H_c^k(W; Q) = 0 for k > 2 delta. In particular, if delta < 8 then H_c^{16}(W; Q) = 0, and dually H^{BM}_{16}(W; Q) = 0. This is the ordinary vanishing of compactly supported cohomology above twice the dimension; no Gysin map and no regularity hypothesis appear.\n\nConsequently, if Y' is any closed substack of X admitting a finite-type scheme atlas of dimension less than 8, the image of W_{-16} H^{BM}_{16}(Y'; Q) in T vanishes. By FND-0168(3a) as applied in ATT-0120/REV-0169 (Poincare duality on the smooth pair intertwines Borel-Moore corestriction with ordinary open restriction), the kernel-form term attached to Y' is zero. By FND-0182 this kernel-form term injects into T_Z, so Y' contributes nothing to T_Z.\n\n## 5. Constant and product clause-(E) models have zero image in T_Z\n\nLet (C_0, gamma_0) be a geometric type-(i) fibre of H^bal (nonempty by ATT-0112/CLM-0112-6 and FND-0154). Let Z_0 be the ordered reduced-support fibre over this point: an open in a P^2, of dimension 2, with classifying morphism f_0: Z_0 -> X whose geometric image Im_0 lies in a single Abel-Jacobi P^2 and therefore satisfies dim Im_0 <= 2. Let Y_0 be the reduced closure of Im_0; then dim Y_0 <= 2 < 8.\n\nLet B be any reduced separated finite-type C-scheme, and let Z_B = B x Z_0 be the constant clause-(E) family (the FND-0176/FND-0178 setup). The classifying morphism f_B: Z_B -> X is f_0 composed with projection pr: B x Z_0 -> Z_0, because the marked curve is constant in the B-direction. Hence the geometric image of f_B equals Im_0, and the closed support of f_B is contained in Y_0.\n\nCompact-support pushforward therefore factors as f_{B,!} = f_{0,!} o pr_!. For a Kunneth summand H_c^a(B) tensor H_c^b(Z_0) with a+b = 16, the fibre-integration pr_! is the pairing of H_c^a(B) against H_c^{a-2 dim B} of a point. In the FND-0178 witness one has B of dimension 8 and the surviving class in H_c^{12}(B) tensor H_c^4(U_0), so a = 12 < 16 = 2 dim B, and pr_! of that summand is zero. Independently of Kunneth, Section 4 already gives W_{-16} H^{BM}_{16}(Y_0) = 0, so every class supported on Y_0 has zero image in T. Therefore f_{B,!} vanishes on H_c^{16}(Z_B), and the FND-0178 Hodge type (10,6) class does not survive in T_Z.\n\nThis is the exact exclusion in the theorem: non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. For every constant or product clause-(E) model the target image in T is proved zero, not merely unproved.\n\nThe same vanishing applies to any source whose classifying image has dimension less than 8.\n\n## 6. What would be needed to conclude Tate type, and what is not available\n\nT_Z is the image of W_{26} of the supports map H^{26}_Y(X; Q) -> H^{26}(X; Q), twisted by (21). A Gysin identification of that supports group with a cohomological degree shift of Y would require a closed regular embedding of Y (or a stratification by regularly embedded strata) of known codimension, which FND-0052 and FND-0168(5) record as undischarged and which ATT-0120 explicitly does not supply. The working-context constraint forbids inferring lci, regularity, purity, or Gysin from expected determinantal codimension or from a 17-dimensional constructible image.\n\nA map H_c^{16}(Z) -> T would likewise require proper pushforward along a compactification of f or a Gysin map, neither of which is constructed. REV-0169 records this as a limit on usefulness of the interface, not a defect in its naming of T_Z: the interface transmits no CE-geometric cohomology that can be tested for Tate type inside T.\n\nFND-0167 reduces T_16(Z) to hypotheses (H-S) and (H-C) on a named base, and FND-0178 shows those hypotheses fail for some allowed bases. That computation concerns standalone Z and, by Section 5, does not migrate into T_Z.\n\nThus the Hodge type of the named kernel T_Z is not determined by the available inputs. In particular the statement that T_Z is a finite direct sum of Q(8) is not proved, and no non-Tate subquotient of this named T_Z is exhibited.\n\n## 7. Blocked routes\n\n- vcd-only-vanishing: unused. The argument never invokes vcd(M_{6,5}) or vanishing above virtual cohomological dimension.\n- undecorated-cgp-top-weight-graph-complex: unused. No graph complex, arc complex, or depth-zero weight spectral sequence is opened.\n- point-count-without-degree-parity-separation: unused. No finite field count is used.\n- forgetful-map-renaming-local-system-unknown: unused. The forgetful map X -> M_{6,5} is not used, and no local system is declared Tate by renaming.\n\nThe complementary target terms im(r_T) are not assembled, as the theorem requires.\n",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "claims": [
+    {
+      "id": "CLM-0121-1",
+      "statement": "The verified C66-SUPPORT-INTERFACE datum of ATT-0120, dual-confirmed by REV-0169 and REV-0170, supplies T_Z as the kernel of r_T: T -> W_{26} H^{26}(M_{6,6} minus Y; Q)(21), a pure polarizable weight -16 subobject of T of Borel-Moore degree 16 and Poincare twist (21), with phi the kernel inclusion.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0121-2",
+      "statement": "The same reduced closed substack Y arises from etale atlases of Hbar^bal. Over any connected component of such an atlas the ordered reduced-support model has dimension 15+2=17, so the classifying image has dimension at most 17 and dim Y <= 17. In particular Y is a proper closed substack of M_{6,6}.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0121-3",
+      "statement": "If W is a separated finite-type C-scheme of dimension less than 8, then H_c^{16}(W; Q) = 0 and H^{BM}_{16}(W; Q) = 0. Consequently any closed substack of M_{6,6} admitting such an atlas contributes the zero subspace to T_Z.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0121-4",
+      "statement": "For any constant or product clause-(E) model Z_B = B x Z_0, the classifying morphism to M_{6,6} factors through the fibrewise ordered reduced-support P^2-open Z_0, so the geometric image has dimension at most 2. Therefore f_{B,!} vanishes on H_c^{16}(Z_B), and in particular the FND-0178 Hodge type (10,6) class has zero image in T_Z.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0121-5",
+      "statement": "T_Z is a finite direct sum of Q(8).",
+      "status": "gap"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0120-1",
+    "CLM-0120-2",
+    "CLM-0120-3",
+    "CLM-0120-4",
+    "CLM-0120-5",
+    "CLM-0120-6",
+    "CLM-0120-7",
+    "CLM-0112-2",
+    "CLM-0112-7",
+    "CLM-0112-8"
+  ],
+  "engine": "grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "Unused. No virtual cohomological dimension vanishing is invoked; the argument uses only the ATT-0120 ordinary-cohomology localization along Y.",
+      "kind": "blocked_route",
+      "subject": "vcd-only-vanishing"
+    },
+    {
+      "disposition": "Unused. No graph complex, arc complex, or Getzler-Kapranov E_1 page is opened (FND-0031).",
+      "kind": "blocked_route",
+      "subject": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "disposition": "Unused. No finite-field point count is used to infer Tate type.",
+      "kind": "blocked_route",
+      "subject": "point-count-without-degree-parity-separation"
+    },
+    {
+      "disposition": "Unused. The forgetful map M_{6,6} -> M_{6,5} is not used, and no local system is declared Tate by renaming.",
+      "kind": "blocked_route",
+      "subject": "forgetful-map-renaming-local-system-unknown"
+    }
+  ],
+  "gap_markers": [
+    {
+      "id": "GAP-0121-TATE-TYPE",
+      "statement": "Prove that the named kernel T_Z = ker(T -> W_{26} H^{26}(M_{6,6} minus Y; Q)(21)) is a finite direct sum of Q(8), or exhibit a non-Tate subquotient of this kernel whose image in T is proved nonzero. Available inputs do not supply a Gysin identification of the supports group, a nonzero map from H_c^{16}(Z) to T, or a computation of Hodge types of T_Z. Standalone non-Tate cohomology of Z is excluded as a disproof and, for product models, has been shown to have zero image."
+    }
+  ],
+  "id": "ATT-0121",
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "verified-support-interface-kernel",
+    "atlas-independent-classifying-image-closure",
+    "Hbar-bal-dimension-count-15-plus-2",
+    "compact-support-vanishing-above-twice-dimension",
+    "constant-family-classifying-map-factorization",
+    "Kunneth-fibre-integration-along-a-dummy-base",
+    "weight-strictness-and-exactness-of-W-m"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Sharper bound dim Y <= 17 from the Hbar^bal atlas model of dimension 15+2, compatible with but strictly stronger than the FND-0181 bound dim Y <= 20.",
+    "Proof that every constant or product clause-(E) classifying morphism factors through a fibrewise P^2 of dimension at most 2, so compact-support degree 16, including the FND-0178 type-(10,6) class, has zero image in the named T_Z."
+  ],
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_path": "proof/packets/generated/C66-001-v5.md",
+  "packet_sha256": "fc21ae75eaa03e7f8a0e5d62ae7578b08cb87cdcf52dcc008ee6d48b55d527fb",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0120",
+      "kind": "attempt",
+      "note": "Verified C66-SUPPORT-INTERFACE datum (dual-confirmed by REV-0169 and REV-0170). Supplies T_Z as ker(r_T), Y as reduced classifying-image closure, atlas independence including Hbar^bal, and one-sided coverage. No Tate type is imported."
+    },
+    {
+      "id": "REV-0169",
+      "kind": "confirmation_review",
+      "note": "First independent confirmation of ATT-0120. All seven claims confirmed; kernel/image form of T_Z (FND-0168(3a)) distinguished from the supports group; Poincare duality on the smooth pair intertwines BM corestriction with ordinary restriction."
+    },
+    {
+      "id": "REV-0170",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0120, including the target_interface_certificate and one-sided coverage."
+    },
+    {
+      "id": "ATT-0112",
+      "kind": "attempt",
+      "note": "Verified C66-GEO-COMP input of ATT-0120. Used for CLM-0112-2 (H^bal smooth of dimension 18), CLM-0112-7 (Hbar^bal of dimension 15; PGL_2 invariance of the M_{6,6} point), and CLM-0112-8 (scheme-atlas P^2-bundle, reduced-support open, ordering torsor)."
+    },
+    {
+      "id": "REV-0157",
+      "kind": "confirmation_review",
+      "note": "First independent confirmation of ATT-0112."
+    },
+    {
+      "id": "REV-0158",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0112."
+    },
+    {
+      "id": "FND-0001",
+      "kind": "adjudicated_finding",
+      "note": "Poincare duality W_{-16} H^{BM}_{16}(M_{6,6}; Q) isomorphic to W_{26} H^{26}(M_{6,6}; Q)(21)."
+    },
+    {
+      "id": "FND-0168",
+      "kind": "adjudicated_finding",
+      "note": "Clause (3a): the Z-supported part of T is the image of the supports/BM map along a fixed closed support containing the image of Z, not the supports group itself. Clauses (5a)/(5b) record that Gysin and a closed embedding of the balanced reduced-support model remain undischarged."
+    },
+    {
+      "id": "FND-0178",
+      "kind": "adjudicated_finding",
+      "note": "Standalone non-Tate class of type (10,6) in Gr^W_16 H_c^{16}(Z; Q) for the constant family over C_aff^8. Used only as the product-model class whose image in the named T_Z is proved zero; not used as a disproof of T_Z."
+    },
+    {
+      "id": "FND-0180",
+      "kind": "adjudicated_finding",
+      "note": "Packet record of the ATT-0120 kernel-form interface; does not assert Tate type of T_Z."
+    },
+    {
+      "id": "FND-0181",
+      "kind": "adjudicated_finding",
+      "note": "Y is a proper closed substack; coarser bound dim Y <= 20. Compatible with the sharper bound dim Y <= 17 proved from Hbar^bal atlases; equality dim Y = 17 is not taken from this finding."
+    },
+    {
+      "id": "FND-0182",
+      "kind": "adjudicated_finding",
+      "note": "Monotonicity of kernel-form terms for nested closed supports containing the classifying image."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [
+    "SRC-0004"
+  ],
+  "status": "proposed",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "summary": "Through the verified ATT-0120 interface, T_Z is the kernel of ordinary W_26 restriction from T to the complement of the reduced classifying-image closure Y. This kernel is a pure polarizable weight -16 subobject of T. The same Y arises from etale atlases of Hbar^bal, so dim Y <= 17. Compact-support vanishing in degree 16 on any finite-type scheme of dimension less than 8, together with factorization of constant clause-(E) classifying maps through a fibrewise P^2, proves that every FND-0178 product-model class has zero image in T_Z and therefore is not a disproof. The Hodge type of this named kernel remains open: no Gysin identification or nonzero map from the cohomology of Z is available, and standalone non-Tate cohomology of Z does not constrain T_Z.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "target_interface_reference": {
+    "interface_attempt_id": "ATT-0120",
+    "interface_claim_ids": [
+      "CLM-0120-1",
+      "CLM-0120-2",
+      "CLM-0120-3",
+      "CLM-0120-4",
+      "CLM-0120-5",
+      "CLM-0120-6",
+      "CLM-0120-7"
+    ],
+    "survival_or_tate_argument": "Tate type of this named T_Z is not proved: no Gysin identification of the supports group, and no nonzero map from H_c^{16}(Z) to T, is available. A disproof is likewise not obtained. Every constant or product clause-(E) model, including the FND-0178 witness Z = C_aff^8 x Z_0, has classifying image contained in a fibrewise P^2 of dimension at most 2; H_c^{16} vanishes in dimension less than 8, and fibre-integration along the dummy base kills the Kunneth type-(10,6) class, so the image in T_Z is zero. Non-Tate cohomology of standalone Z, of an arbitrary atlas, or of a source class with unproved (in fact vanishing) target image is excluded by the theorem and is not used as a disproof.",
+    "target_map_use": "phi is the inclusion of this kernel into T, which is W_{26}(21) of ordinary restriction along U_Y = M_{6,6} minus Y (ATT-0120/CLM-0120-3, CLM-0120-4). Compact-support pushforward along classifying morphisms of constant or product clause-(E) models is compared to this kernel by support containment in Y; it is not a Gysin map and is not assumed as an unproved map from H_c^{16}(Z) to T.",
+    "target_subquotient": "T_Z := ker(T -> W_{26} H^{26}(M_{6,6} minus Y; Q)(21)), the ATT-0120/CLM-0120-4 kernel, equivalently the image of W_{26} of the degree-26 supports map along the reduced classifying-image closure Y (FND-0168(3a), FND-0180). Pure of weight -16, Borel-Moore degree 16, Poincare twist (21)."
+  },
+  "task_id": "TASK-C66-M-005",
+  "theorem_scope": {
+    "coefficients": "Q",
+    "g": 6,
+    "ground_field": "C for mixed Hodge structures; geometry after ATT-0112 over an algebraically closed field of characteristic zero, base-changed to C",
+    "n": 6,
+    "not_covered": [
+      "Tate type of T_Z itself",
+      "Tate type of T or support-exhaustion T_Z=T",
+      "closed embedding, regular immersion, lci, or Gysin for Y or Z in M_{6,6}",
+      "a nonzero map from H_c^{16}(Z) to T",
+      "unbalanced Casnati-Ekedahl strata",
+      "integral coefficients, coarse moduli, or nonreduced bases"
+    ],
+    "objects": [
+      "T",
+      "T_Z from ATT-0120",
+      "Y",
+      "U_Y",
+      "classifying morphism f",
+      "constant clause-(E) product models"
+    ]
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms."
+}

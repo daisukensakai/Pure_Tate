@@ -1,0 +1,123 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-24T02:14:33.677905+00:00",
+  "engine_pools": {
+    "prover": [
+      "claude"
+    ],
+    "research": [
+      "codex"
+    ],
+    "review": [
+      "grok",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 278850,
+      "artifact_sha256": "a4337d3c8b1b67241f33884a9df74b377e6e7c33aaf59caaa9928a7030a37732",
+      "audit_id": "FAUD-0193",
+      "completed_at": "2026-08-24T02:13:57.163070+00:00",
+      "engine": "codex",
+      "engine_pid": 94353,
+      "engine_process_group": 94353,
+      "finding_id": "FND-0186",
+      "last_activity_at": "2026-08-24T02:13:56.421391+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0193.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 93604,
+          "engine_process_group": 93604,
+          "started_at": "2026-08-24T02:01:19.573178+00:00",
+          "supervisor_pid": 93603,
+          "supervisor_process_group": 93603
+        },
+        {
+          "engine_pid": 93887,
+          "engine_process_group": 93887,
+          "started_at": "2026-08-24T02:03:43.829044+00:00",
+          "supervisor_pid": 93886,
+          "supervisor_process_group": 93886
+        },
+        {
+          "engine_pid": 94177,
+          "engine_process_group": 94177,
+          "started_at": "2026-08-24T02:07:13.353350+00:00",
+          "supervisor_pid": 94176,
+          "supervisor_process_group": 94176
+        },
+        {
+          "engine_pid": 94311,
+          "engine_process_group": 94311,
+          "started_at": "2026-08-24T02:07:31.558394+00:00",
+          "supervisor_pid": 94310,
+          "supervisor_process_group": 94310
+        },
+        {
+          "engine_pid": 94353,
+          "engine_process_group": 94353,
+          "started_at": "2026-08-24T02:07:39.025675+00:00",
+          "supervisor_pid": 94352,
+          "supervisor_process_group": 94352
+        }
+      ],
+      "started_at": "2026-08-24T02:01:18.684806+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 94352,
+      "task_id": "TASK-F-FND-0186",
+      "verdict": "promote"
+    },
+    {
+      "activity_bytes": 1132,
+      "completed_at": "2026-08-24T02:14:33.677905+00:00",
+      "engine": "codex",
+      "engine_pid": 94881,
+      "engine_process_group": 94881,
+      "error": "campaign parent process disappeared",
+      "finding_id": "FND-0183",
+      "last_activity_at": "2026-08-24T02:14:11.577884+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/finding-audits/FAUD-0194.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 94881,
+          "engine_process_group": 94881,
+          "started_at": "2026-08-24T02:13:58.917635+00:00",
+          "supervisor_pid": 94880,
+          "supervisor_process_group": 94880
+        }
+      ],
+      "started_at": "2026-08-24T02:13:58.055163+00:00",
+      "state": "abandoned",
+      "step": 2,
+      "supervisor_pid": 94880,
+      "task_id": "TASK-F-FND-0183"
+    }
+  ],
+  "executed_steps": 2,
+  "parent_pid": 93597,
+  "parent_process_group": 93594,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260824T020118676472Z-93597",
+  "schema_version": 2,
+  "started_at": "2026-08-24T02:01:18.676472+00:00",
+  "status": "abandoned",
+  "stop_reason": "parent_process_missing"
+}

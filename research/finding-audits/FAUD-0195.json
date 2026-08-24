@@ -1,0 +1,106 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients. Let X be a smooth Deligne-Mumford stack of finite type over C, so that Betti cohomology H^i(X;Q) carries a functorial mixed Hodge structure. Let f: Z -> X be a finite-type morphism from an algebraic stack of finite type over C. Let Y be the unique reduced closed substack of X whose underlying space is the Zariski closure of the constructible geometric image of f, and let U = X minus Y. For all integers i and m and every Tate twist (n), restriction r: H^i(X;Q)(n) -> H^i(U;Q)(n) is a morphism of mixed Hodge structures. Morphisms of mixed Hodge structures are strict for the weight filtration (Deligne, Theorie de Hodge II, Theoreme 2.3.5), equivalently W_m is an exact functor, so ker(W_m r) equals the image of W_m H^i_Y(X;Q)(n) in W_m H^i(X;Q)(n) as a sub-mixed-Hodge structure. When H^i of the smooth stack X has weights at least i and m equals that lowest weight, W_m coincides with Gr^W_m. This identification uses only the closed-open localization triangle of the pair (Y,U) and requires no Gysin map, no regular-immersion or lci hypothesis on Y, no purity of codimension, and no closed immersion of Z. Every class in W_m H^i(X;Q)(n) supported on a closed substack of X contained in Y lies in the kernel. The kernel may strictly contain the span of classes supported on the image of Z; equality with that span, and exhaustion of W_m H^i(X;Q)(n) by the kernel, are separate assertions not supplied by this pattern. At (g,n)=(6,6), with X = M_{6,6}, i = 26, m = 26, twist (21), and f the classifying morphism of the ordered reduced-support Casnati-Ekedahl model, the pattern is the corroborated FND-0180 construction of T_Z, identified there with the FND-0168(3a) image of W_{-16} H^{BM}_{16}(Y;Q) in T.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Inspected the originating artifacts before the packet backlog: ATT-0120 Sections 4-6 and CLM-0120-3/4/5 construct T_Z as ker(W_26 of ordinary restriction along M_{6,6} minus the reduced Zariski closure Y of the Casnati-Ekedahl classifying image) and identify it with the image of W_26 H^{26}_Y(M_{6,6};Q)(21); REV-0170 confirms those claims and extracts the candidate support-kernel-closure-pattern, explicitly warning that overlap with FND-0168(3a) could not be assessed in that pass. The contested identification is Deligne's strictness theorem (Theorie de Hodge II, Theoreme 2.3.5: morphisms of mixed Hodge structures are strict, so W_m is exact on the abelian category of mixed Hodge structures), applied to the closed-open localization triangle, and is the standard meaning of support in Payne, arXiv:2605.20453v1, Section 2.1 (a rational sub-Hodge structure is supported on a closed algebraic subset Z when it lies in ker(H^j(X)->H^j(X minus Z))). Chevalley constructibility of a quasi-compact locally finitely presented image is Stacks Project Tag 054K; the unique reduced closed substack on the Zariski closure is then well-defined. The candidate's appeal to exactness of Gr^W_m is only the associated-graded form of strictness and coincides with the W_m statement on the lowest-weight piece of a smooth stack (weights of H^i at least i), but the original text never quantified the weight index m and so overstated the Gr^W justification. No contradiction with CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001: the pattern asserts no Tate type. It is compatible with THM-0001 (purity only for smooth proper stacks) and with FND-0165 (which withholds an independent compact-support mixed Hodge formalism for stacks, not ordinary cohomology of smooth finite-type stacks). Overlap with FND-0168(3a) is real but not identity: 0168(3a) is the Borel-Moore localization image at weight -16 on M_{6,6}. Packet-corroborated FND-0180 already records the ordinary-cohomology kernel T_Z for this classifying image, identifies it with the FND-0168(3a) image via Poincare-Verdier on the smooth pair, and states one-sided coverage, possible extra components of Y, and the absence of Gysin, lci, and a closed embedding of Z. Packet FND-0182 further records that the reduced classifying-image closure yields the unique smallest kernel-form term and that the kernel may strictly contain classes supported on the image of Z. The candidate is therefore the textbook engine of the already-corroborated FND-0180 instance, not a new obstruction, and is merged into FND-0180 rather than promoted as a general lemma: the originating attempt and review supply (g,n)=(6,6) evidence; FND-0165's stack-level compact-support caveat would have to be discharged for a fully general stack statement; and the inflation warning is already FND-0180/FND-0182.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0183",
+  "id": "FAUD-0195",
+  "independent": true,
+  "merge_target_id": "FND-0180",
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "ground_field": "C",
+    "hypotheses": [
+      "X smooth of finite type over C",
+      "Q-coefficient Betti mixed Hodge structures",
+      "strictness of morphisms of mixed Hodge structures",
+      "closed-open localization triangle"
+    ],
+    "mathematical_scope": "Gysin-free identification of the weight-truncated ordinary-cohomology restriction kernel along the reduced Zariski closure of a finite-type image with the image of cohomology with supports; one-sided coverage; no support-exhaustion",
+    "not_covered": [
+      "support-exhaustion",
+      "Tate type",
+      "Gysin maps, regular immersions, lci structure, or a closed immersion of Z",
+      "identification of the kernel with the cohomology of Z",
+      "an independent compact-support mixed Hodge formalism for a possibly singular closed substack"
+    ],
+    "objects": [
+      "smooth finite-type Deligne-Mumford stacks",
+      "finite-type morphisms",
+      "reduced Zariski closure of a constructible geometric image",
+      "ordinary cohomology with supports"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "content_sha256": "6f32771a6267f9bb1c1f956b3fceba78e450bb8b1aceddd41717bf3cf0a6d21e",
+      "doi": "10.48550/arXiv.2605.20453",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-24T02:22:00Z",
+      "source_type": "citation-index",
+      "url": "https://arxiv.org/bibtex/2605.20453"
+    },
+    {
+      "arxiv_id": "2605.20453",
+      "arxiv_version": "v1",
+      "content_sha256": "70474702a3fe9e9a708f6c85dea0e8fa84593941c422e46092d94f0b45bf1639",
+      "doi": "10.48550/arXiv.2605.20453",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "19f79aab54158ccf4b49da381154373eb9d9832198c665541e987c522fe6e091",
+      "retrieved_at": "2026-08-24T02:19:00Z",
+      "source_type": "survey",
+      "url": "https://arxiv.org/html/2605.20453v1"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "43c67b768ff56fbf03cbb0f34c806f2fa83a898ba7d934fffc818a9dd2363032",
+      "doi": "10.1007/BF02684692",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "8a09efc9a0d83e2631f5d20e0ca0bb4cc101ea5e11b7faa01a0859c0a9ba8ba0",
+      "retrieved_at": "2026-08-24T02:21:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1971__40__5_0/"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "149daba8ff82e969df0d18211e95747db809633d71df03edcee995e71b8d12ea",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "3fc407be290fc957a2defa0d38bd5e362d222aab4725c8b6afd84c5b3c2436d2",
+      "retrieved_at": "2026-08-24T02:20:30Z",
+      "source_type": "repository",
+      "url": "https://stacks.math.columbia.edu/tag/054K"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "46da0c100a2bfd74c3c85838a79e8d171d2e52842d8058fe7dda819d1600fade",
+      "doi": "10.1017/fmp.2024.24",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "19f79aab54158ccf4b49da381154373eb9d9832198c665541e987c522fe6e091",
+      "retrieved_at": "2026-08-24T02:20:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/html/2307.08830v3"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0183",
+  "verdict": "merge",
+  "verified_source_count": 5
+}

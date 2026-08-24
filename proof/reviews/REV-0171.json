@@ -1,0 +1,169 @@
+{
+  "attempt_id": "ATT-0121",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0121-5",
+      "note": "FAILED, and this claim is verbatim the submitted theorem_statement's conclusion. The artifact itself records status 'gap' plus GAP-0121-TATE-TYPE, and section 6 states 'the statement that T_Z is a finite direct sum of Q(8) is not proved'; completion_attestation.resolves_exact_target is false and status is 'proposed'. I re-derived the argument independently and confirm that nothing in sections 1-5 constrains Hodge types: section 2 (purity + semisimplicity, cf. FND-0033) only restates Tate-ness as 'all Hodge types (-8,-8)'; section 3 bounds dim Y; section 4 is a dimension-driven vanishing; section 5 excludes one candidate disproof. Every one of these inputs is Hodge-type-blind on the 8-to-17-dimensional supports that actually carry T_Z, so no combination of them yields the theorem. No non-Tate subquotient of this named T_Z is exhibited either, so the artifact is incomplete rather than refuted.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "TARGET-INTERFACE-REFERENCE",
+      "note": "FAILED on the substantive half of the cell's artifact contract. Structurally the object is complete: interface_attempt_id 'ATT-0120' nonempty, interface_claim_ids nonempty with all seven CLM-0120-1..7, and nonempty target_subquotient, target_map_use, survival_or_tate_argument. The named source (ATT-0120 dual-confirmed by REV-0169/REV-0170), the named map (phi = inclusion of ker(r_T), i.e. W_{26}(21) of ordinary restriction along U_Y) and the named subquotient (ker(T -> W_{26}H^{26}(M_{6,6} minus Y;Q)(21))) are the genuine verified-interface objects, with the FND-0168(3a)-versus-(3b) distinction respected and no surrogate substituted -- in particular H_c^{16}(Z), Gr^W_{16}H_c^{16}(Z), and cohomology of a base/atlas are NOT put in place of T. But the required survival_or_tate_argument concedes 'Tate type of this named T_Z is not proved', and the coverage material it does supply proves only that one candidate disproof (the FND-0178 product-model class) has zero image. A well-formed interface object whose survival component disclaims the conclusion does not discharge the contract.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0121-4",
+      "note": "UNRESOLVED as stated, though its conclusion is correct. Correct part, verified independently: for the constant type-(i) family the classifying image in M_{6,6} is the set of orderings of reduced members of |L_0| on the single fixed curve C_0, of dimension at most 2, so Y_0 has dim <= 2 and W_{-16}H^{BM}_{16}(Y_0;Q)=0 because 16 > 2*2; hence the kernel-form term for Y_0 is zero and no class of the FND-0178 witness can contribute to T_Z. The FND-0178 bookkeeping also checks out: type (8,4) in Gr^W_{12}H_c^{12}(C_aff^8) tensor H_c^4(U_0)=Q(-2) of type (2,2) gives (10,6) in degree 12+4=16, and a=12 differs from 2 dim B=16. Defective part: the claim asserts that 'f_{B,!} vanishes on H_c^{16}(Z_B)' and that 'compact-support pushforward factors as f_{B,!} = f_{0,!} o pr_!'. There is no pushforward H_c^{16}(Z_B) -> H_c^{16}(M_{6,6}) for a non-proper classifying morphism, and the same artifact's section 6, ATT-0120 section 8, and FND-0180 all record that no map from the cohomology of Z to T is available; so the claim quantifies over a morphism it elsewhere denies. The fibre-integration sentence is also garbled ('the pairing of H_c^a(B) against H_c^{a-2 dim B} of a point'): the correct criterion, requiring B smooth of pure dimension b, is that pr_!: H_c^{k}(B x Z_0) -> H_c^{k-2b}(Z_0) kills every Kunneth summand with a != 2b. Secondary scope slip: FND-0182 is invoked for Y_0, which does not contain the full CE classifying image and therefore falls outside that finding's stated hypothesis Im subset |Y|, although plain factorization of restrictions still yields the needed containment ker_{Y_0} subset T_Z. The claim needs recasting purely support-side.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0121-2",
+      "note": "UNRESOLVED, and non-load-bearing for the theorem. The bound dim Y <= 17 is compatible with the packet (FND-0181 itself remarks that the classifying image is PGL_2-invariant, that Hbar^bal has dimension 15 and that 'the corresponding model has dimension 17'), so the artifact's novelty claim here is close to that recorded non-sharpness remark. The derivation, however, applies ATT-0112/CLM-0112-8 over a connected component of an etale atlas of Hbar^bal = [H^bal/PGL_2], whereas that clause is confirmed only over smooth finite-type atlases of H^bal. The obstruction is concrete: the packet's CE convention W_5 = (O_{P(E^vee)}(2) tensor gamma^*F^vee)|_C involves gamma^*O_{P^1}(-5), and over the PGL_2-quotient the target P^1 descends only as a Severi-Brauer/P^1-bundle, whose Brauer class obstructs the odd twist O(5); so W_5, L and pi_*L need not exist as sheaves on such an atlas and 'Zariski-locally trivial P^2-bundle AJ' is not justified there. The dimension count is repairable (the projectivization exists as a Severi-Brauer scheme of relative dimension two, or one argues directly that PGL_2 acts with finite stabilizers since 18-3=15) but no such repair is written. Not load-bearing: the only use made of the bound is properness of Y, which FND-0181 already supplies via dim Y <= 20 < 21.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0121-1",
+      "note": "Confirmed. Re-derived independently rather than imported: T is pure of weight -16, r_T is a morphism of mixed Hodge structures, and the kernel of a morphism out of a pure polarizable object is a pure polarizable subobject of the same weight. All twists and degrees survive attack and agree with the task target dictionary: 26 - 2*21 = -16, BM degree 2*21 - 26 = 16, Q(-13)(21) = Q(8), and Q(8) has weight -16 and Hodge type (-8,-8). The kernel/image form is used throughout and the supports group H^{26}_Y(M_{6,6})(21) is never silently identified with its image, so the FND-0168(3a)/(3b) hazard is avoided. Stack-versus-coarse and integral-versus-rational are handled: Q-coefficients only, stack-level Poincare duality via FND-0001.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0121-3",
+      "note": "Confirmed. For a separated finite-type C-scheme W of dimension delta, H_c^k(W;Q)=0 for k > 2 delta, and H^{BM}_k(W;Q) is the Q-dual of H_c^k(W;Q) in the same degree with no extra twist, so both vanish in degree 16 once delta < 8. The passage from a finite-type scheme atlas to the closed substack is legitimate with Q-coefficients (rational cohomology of a Deligne-Mumford stack agrees with that of its coarse space, and dimension is preserved). The consequence for the kernel-form term follows from exactness of W_{-16} on the Borel-Moore localization sequence, matching FND-0168(3a) and FND-0180. No Gysin map, regularity, or codimension purity is used, consistent with FND-0052 and FND-0168(5).",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-24",
+  "finding_candidates": [
+    {
+      "key": "kernel-form-tate-reduces-to-lowest-weight-bm-of-the-support",
+      "rationale": "Reusable and directly actionable for C66-TATE-SUPPORT: it replaces the obligation the campaign has repeatedly failed to discharge (a closed regular embedding plus Gysin, FND-0052 and FND-0168(5a)/(5b)) by a computation on the support itself, and it corrects ATT-0121 section 6, which declares the Hodge type of T_Z undeterminable precisely because it treats Gysin as necessary. Builds on FND-0180 (which records the identification of T_Z with the image of W_{-16}H^{BM}_{16}(Y;Q)) and FND-0033 (semisimplicity), but neither records the purity of that source group nor the resulting sufficiency statement, so this needs adjudication as a new item rather than as evidence for either.",
+      "statement": "Work over C with Q-coefficients at (g,n)=(6,6). Let Y be any closed substack of M_{6,6} and T_Z := ker(T -> W_{26}H^{26}(M_{6,6} minus Y;Q)(21)) the associated kernel-form term. Exactness of W_{-16} on the Borel-Moore localization sequence makes W_{-16}H^{BM}_{16}(Y;Q) -> T have image exactly T_Z, so T_Z is a QUOTIENT of W_{-16}H^{BM}_{16}(Y;Q). That source group is pure polarizable of weight -16: H^{BM}_k of any finite-type object is Q-dual to H_c^k, whose weights are at most k, so Borel-Moore weights in degree k are at least -k and the bottom filtration step W_{-k}H^{BM}_k is pure of weight -k with polarizable graded piece. Since pure polarizable weight -16 Q-Hodge structures form a semisimple abelian category, a quotient of a finite direct sum of Q(8) is a finite direct sum of Q(8). Hence, for the ATT-0120 support Y, 'W_{-16}H^{BM}_{16}(Y;Q) is a finite direct sum of Q(8)' is a SUFFICIENT condition for the exact C66-TATE-SUPPORT theorem, and it requires no closed regular embedding, no lci or purity hypothesis, no Gysin map, and no degree shift by twice a codimension -- only Poincare-Verdier duality on the smooth ambient, which FND-0180 already supplies. It remains sufficient, not necessary, and it says nothing about support-exhaustion T_Z = T.",
+      "status": "candidate"
+    },
+    {
+      "key": "kernel-form-support-needs-dimension-at-least-eight",
+      "rationale": "A cheap, purely dimensional screening rule that prunes both the proof and the counterexample lanes: it explains structurally why every FND-0176/FND-0178-style constant or product clause-(E) witness is permanently inert against the exact target (their classifying image in M_{6,6} is a fixed curve with varying marked points, dimension at most 2), and it tells C66-CEX-LOCAL and C66-CEX-SURVIVE that only supports of dimension between 8 and 17 can carry a nonzero piece of T_Z. Distinct from FND-0181 and FND-0182, which record properness of Y and monotonicity/minimality of kernel-form terms but no vanishing threshold; distinct from FND-0178, which records the standalone witness and explicitly disclaims any M_{6,6} consequence.",
+      "statement": "For any closed substack Y' of M_{6,6} with dim Y' < 8, the kernel-form term ker(T -> W_{26}H^{26}(M_{6,6} minus Y';Q)(21)) is zero, since H^{BM}_{16}(Y';Q)=0 whenever 16 > 2 dim Y'. Combined with monotonicity of kernel-form terms in the support, this yields a dimension floor for the whole campaign: a closed support can contribute a nonzero subspace to the ATT-0120 term T_Z only if it has dimension at least 8, hence only in the range 8 <= dim <= 17 given dim Y <= 17. In particular every constant or product clause-(E) model, whose classifying image in M_{6,6} is contained in the at-most-two-dimensional set of ordered reduced members of a single linear system on a single fixed curve, contributes exactly zero to T_Z. Such models are therefore inert in BOTH directions: they can neither disprove nor support the exact C66-TATE-SUPPORT theorem, whatever their standalone Hodge types, and their exclusion needs no pushforward on compactly supported cohomology.",
+      "status": "candidate"
+    },
+    {
+      "key": "no-compact-support-pushforward-along-classifying-morphisms",
+      "rationale": "Records a concrete recurrence of the recorded interface limit in a new disguise: not an assumed map to T, but a map presented as an ordinary functorial pushforward of compactly supported cohomology, which is easy to wave through in review because f_! is standard sheaf-theoretic notation. Evidence for the existing finding, not a new one; supplies reviewers with the exact rewrite that keeps such arguments sound.",
+      "statement": "Further instance of the FND-0180 limitation that the kernel-form interface transmits no map from the cohomology of Z to T. ATT-0121 section 5 writes 'compact-support pushforward therefore factors as f_{B,!} = f_{0,!} o pr_!' and 'f_{B,!} vanishes on H_c^{16}(Z_B)', but a classifying morphism f: Z -> M_{6,6} is not proper, so there is no induced map H_c^*(Z) -> H_c^*(M_{6,6}); the sheaf-level f_! does not descend to such a map on cohomology. Any argument of this shape must be rewritten support-side: replace 'the image of the class under f_! is zero' by 'the kernel-form term attached to a closed support containing the classifying image is zero', which is available from the localization sequence alone. The rewritten statement is strictly weaker (it constrains classes in T, not classes on Z) but is the only one the verified interface supports, and it suffices for the theorem's exclusion clause.",
+      "status": "candidate",
+      "supports_finding_id": "FND-0180"
+    },
+    {
+      "key": "clause-E-model-does-not-descend-freely-to-hbar-bal-atlases",
+      "rationale": "Guards a step that is likely to recur, since Hbar^bal is the natural place to get the dimension-17 model and the packet's own FND-0181 gestures at it without proof. The obstruction is specific to the packet's CE convention (the odd twist gamma^*O(-5)) and is invisible if one merely cites CLM-0112-8. Not a restatement of FND-0181's recorded bounds: it is a caveat about how the 17-dimensional model may legitimately be obtained.",
+      "statement": "ATT-0112/CLM-0112-8 (Grauert, pi_*L locally free of rank three, Zariski-locally trivial Abel-Jacobi P^2-bundle, reduced-support open, S_6-ordering torsor) is established over smooth finite-type atlases of H^bal and does not transfer verbatim to etale atlases of Hbar^bal = [H^bal/PGL_2]. The packet convention W_5 = (O_{P(E^vee)}(2) tensor gamma^*F^vee)|_C involves gamma^*O_{P^1}(-5); over the PGL_2-quotient the target P^1 descends only as a Severi-Brauer/P^1-bundle whose Brauer class can obstruct the odd twist O(5), so W_5, L = W_5 tensor omega^{-1} and pi_*L need not exist as sheaves on such an atlas, and Zariski-local triviality of the P^2-bundle is not available there. Projectivization is insensitive to the twist, so the Abel-Jacobi fibration still exists as a Severi-Brauer scheme of relative dimension two and the dimension count 15+2 = 17 survives; alternatively one obtains dim(image) <= 20 - 3 = 17 directly from three-dimensional PGL_2-orbits with finite stabilizers, consistent with dim Hbar^bal = 18 - 3 = 15. Attempts that need the 17-dimensional model must supply one of these two repairs rather than cite CLM-0112-8 unchanged.",
+      "status": "candidate"
+    }
+  ],
+  "id": "REV-0171",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "fc21ae75eaa03e7f8a0e5d62ae7578b08cb87cdcf52dcc008ee6d48b55d527fb",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0120",
+      "note": "Dual-confirmed C66-SUPPORT-INTERFACE datum; used within its confirmed scope (kernel form only, no Tate import, no Gysin, no exhaustion). Recording point, not adverse to this attempt: ATT-0120 records packet_sha256 10948ae9... while TASK and ATT-0121 both record fc21ae75... for packet_id C66-001-v5; the packet_binding_sha256 2054a3c3... agrees across TASK, ATT-0120 and ATT-0121, so this is a packet-revision artifact of the dependency, and ATT-0121's own hashes match the task exactly.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0169",
+      "note": "First independent confirmation of ATT-0120; ATT-0121 uses it exactly as recorded, including its insistence that only the kernel/image form of T_Z is available and that the interface transmits no CE-geometric cohomology testable for Tate type.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0170",
+      "note": "Second independent confirmation of ATT-0120, including the target_interface_certificate; nothing in it is stretched by ATT-0121.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0112",
+      "note": "UNRESOLVED only as to the citation range. CLM-0112-2 (H^bal smooth of pure dimension 18) and CLM-0112-7 (Hbar^bal of dimension 15, PGL_2-invariance of the M_{6,6}-valued point) are used within scope. CLM-0112-8, however, is a clause-(E) statement confirmed over smooth finite-type atlases of H^bal, and ATT-0121 section 3 applies it over a component of an etale atlas of Hbar^bal to obtain the 15+2=17 model; that base change is not covered by the confirmed claim (see CLM-0121-2).",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "REV-0157",
+      "note": "First confirmation of ATT-0112; not load-bearing for the present artifact beyond certifying the cited dimension claims.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0158",
+      "note": "Second confirmation of ATT-0112, including the stack-to-scheme handoff in clause (E); not load-bearing here beyond that certification, and its scheme-level caveat is precisely what CLM-0121-2 strains.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0001",
+      "note": "Poincare reindexing applied exactly as recorded and cross-checked against the task dictionary (weight 26 - 2*21 = -16; BM degree 42-26 = 16). Kept distinct from the different FND-0168(1) duality between the compact-support corner and the target; ATT-0121 does not conflate them.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0168",
+      "note": "Clause (3a) used correctly (image of the supports/BM map along a fixed closed support, not the supports group). Clause (5a)/(5b) is respected: no Gysin, regular immersion, lci, or codimension-four purity is asserted anywhere in the argument.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0178",
+      "note": "Used only as the excluded product-model witness, which is the finding's own scope (it disclaims any M_{6,6} image or support-exhaustion content). Its numerics reproduce independently: C_aff^8 of dimension 8, type (8,4) in Gr^W_{12}H_c^{12}, tensor Q(-2), giving type (10,6) in degree 16.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0180",
+      "note": "Cited as the packet record of the kernel-form interface, correctly with no Tate import. Note that ATT-0121 does not exploit this finding's own Poincare-Verdier statement identifying cohomology with supports along Y with Borel-Moore homology of Y, which is available without any regularity hypothesis; see the strongest attack and the corresponding finding candidate.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0181",
+      "note": "Used for properness of Y. Consistent, and it is the coarser bound that actually carries section 3's conclusion; the finding's own text already contains the dimension-17 remark that ATT-0121 lists as a novelty claim.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0182",
+      "note": "Load-bearing for section 4's step 'the kernel-form term for Y' injects into T_Z'. Applied slightly outside its stated hypothesis (the finding quantifies over closed substacks containing the full CE classifying image Im, whereas the section-5 support Y_0 does not contain Im), but the containment used follows from the same factorization of restrictions on nested opens, so the dependency itself is sound as cited.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Listed source; unused and non-load-bearing in this artifact. The Casnati-Ekedahl conventions enter only through the already dual-confirmed ATT-0112 chain, and no new statement is read off SRC-0004 here.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0121-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack, which succeeds: the artifact submits a no-go memo under the target's positive theorem_statement. Its only conceivable route to 'T_Z is a finite direct sum of Q(8)' is to transport Hodge-type information from the Casnati-Ekedahl source into T, but the verified interface transmits no map from H_c^*(Z) or from any base/atlas into T, and the artifact concedes this in section 6 while nonetheless writing 'f_{B,!} vanishes on H_c^{16}(Z_B)' in section 5 -- an internally inconsistent use of a compactly-supported pushforward along a non-proper classifying morphism (CLM-0121-4). The exclusion of the FND-0178 witness is nevertheless correct on the support side, so this is incompleteness, not refutation. Secondary attacks I ran and which the artifact survived: every twist and degree is consistent (26 - 42 = -16, 42 - 26 = 16, Q(-13)(21)=Q(8), Q(8) of type (-8,-8)); no coarse-moduli or integral-coefficient slippage (Q-coefficients and stack-level Betti throughout); no Gysin or codimension shift is smuggled in; no spectral sequence or differential is opened, so no degeneration hypothesis is needed; no S_6 invariants/coinvariants sleight of hand (the ordered model maps to the ordered stack); no semisimplification-versus-isomorphism gap (purity of the kernel is genuine, cf. FND-0033); no predicted motive and no upgrade of pure Tate to algebraic or tautological generation; the blocked routes are genuinely unused. The sharpest positive criticism, which the artifact gets wrong in the pessimistic direction: section 6 asserts that determining the Hodge type of T_Z would require a Gysin identification of the supports group, but FND-0180 -- which ATT-0121 itself cites -- already records that Poincare-Verdier duality on the smooth ambient identifies H^{26}_Y(M_{6,6}) with Borel-Moore homology of Y with no regularity hypothesis, so exactness of W_{-16} on the localization sequence makes T_Z a quotient of W_{-16}H^{BM}_{16}(Y;Q), which is itself pure polarizable of weight -16 because Borel-Moore weights in degree k are at least -k. Tate-ness of that single group on the at-most-17-dimensional support therefore suffices for the theorem, with no regular immersion, lci hypothesis, or degree shift anywhere. The artifact declares the subproblem stuck while a Gysin-free reduction is available from its own dependencies.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms.",
+  "verdict": "incomplete"
+}

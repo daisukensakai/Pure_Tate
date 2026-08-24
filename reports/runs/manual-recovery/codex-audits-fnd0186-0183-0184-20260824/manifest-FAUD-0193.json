@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "context_revision": 2,
+  "created_on": "2026-08-24",
+  "excluded_engines": [
+    "claude"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "kernel-form-support-needs-dimension-at-least-eight",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-24",
+    "equivalence_group": "kernel-form-support-needs-dimension-at-least-eight",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0186",
+    "impacts_approach_ids": [
+      "C66-TATE-SUPPORT"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "claude"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      }
+    },
+    "source_attempt_ids": [
+      "ATT-0121"
+    ],
+    "source_review_ids": [
+      "REV-0171"
+    ],
+    "statement": "For any closed substack Y' of M_{6,6} with dim Y' < 8, the kernel-form term ker(T -> W_{26}H^{26}(M_{6,6} minus Y';Q)(21)) is zero, since H^{BM}_{16}(Y';Q)=0 whenever 16 > 2 dim Y'. Combined with monotonicity of kernel-form terms in the support, this yields a dimension floor for the whole campaign: a closed support can contribute a nonzero subspace to the ATT-0120 term T_Z only if it has dimension at least 8, hence only in the range 8 <= dim <= 17 given dim Y <= 17. In particular every constant or product clause-(E) model, whose classifying image in M_{6,6} is contained in the at-most-two-dimensional set of ordered reduced members of a single linear system on a single fixed curve, contributes exactly zero to T_Z. Such models are therefore inert in BOTH directions: they can neither disprove nor support the exact C66-TATE-SUPPORT theorem, whatever their standalone Hodge types, and their exclusion needs no pushforward on compactly supported cohomology.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0186",
+  "id": "TASK-F-FND-0186",
+  "input_packet": "proof/packets/generated/C66-001-v5.md",
+  "output": "research/finding-audits/FAUD-0193.json",
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "4c7f44f1bf2949bd953a50b82290a9d2abe644d8388d7254258a8aac201d5b90",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "codex",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}

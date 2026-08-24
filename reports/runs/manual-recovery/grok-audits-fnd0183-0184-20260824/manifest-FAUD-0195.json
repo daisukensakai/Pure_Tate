@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "context_revision": 2,
+  "created_on": "2026-08-24",
+  "excluded_engines": [
+    "qwen"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "support-kernel-closure-pattern",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2025-06-01",
+    "equivalence_group": "support-kernel-closure-pattern",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0183",
+    "impacts_approach_ids": [
+      "C66-SUPPORT-INTERFACE"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "qwen"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      }
+    },
+    "source_attempt_ids": [
+      "ATT-0120"
+    ],
+    "source_review_ids": [
+      "REV-0170"
+    ],
+    "statement": "Let X be a smooth d-dimensional Deligne-Mumford stack over C and f: Z -> X a finite-type morphism. Let Y be the reduced closed substack whose underlying space is the Zariski closure of the geometric image of f. For any degree i and twist (n), the kernel of the restricted localization map W_m H^i(X;Q)(n) -> W_m H^i(X minus Y;Q)(n) is a sub-mixed-Hodge structure equal to the image of W_m H^i_Y(X;Q)(n) in W_m H^i(X;Q)(n), by strictness and exactness of Gr^W_m. It contains every class supported on any closed subset of X contained in Y, requires no Gysin map, no regularity or lci hypothesis on Y, and no closed immersion of Z. It may strictly contain the span of Z-supported classes; equality or exhaustion is a separate assertion not supplied by this pattern.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0183",
+  "id": "TASK-F-FND-0183",
+  "input_packet": "proof/packets/generated/C66-001-v5.md",
+  "output": "research/finding-audits/FAUD-0195.json",
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "dca436e15a23efc2cfd702abb5feaaafc71e4eebf21498147ba9fd770be3b8e2",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "grok",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "artifact_contract": {
+    "object_field": "target_interface_certificate",
+    "required_nonempty_strings": [
+      "canonical_source",
+      "construction",
+      "target_term",
+      "target_map",
+      "degree_weight_twist",
+      "target_subquotient",
+      "coverage",
+      "atlas_invariance"
+    ]
+  },
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "context_revision": 2,
+  "created_on": "2026-08-24",
+  "excluded_reviewer_engines": [
+    "claude",
+    "grok"
+  ],
+  "id": "TASK-V-ATT-0120-P2",
+  "input_artifacts": [
+    {
+      "id": "ATT-0112",
+      "kind": "attempt",
+      "path": "proof/attempts/ATT-0112.json",
+      "sha256": "26d608db11eb5e73c2504ec8f229be7baaa19843a4d7d8397719d7fb93d684fe"
+    },
+    {
+      "id": "REV-0157",
+      "kind": "confirmation_review",
+      "path": "proof/reviews/REV-0157.json",
+      "sha256": "2a2a9f088343ecaa14d51e7b996567fa4bbfa082fbf639a19fc09f063072f049"
+    },
+    {
+      "id": "REV-0158",
+      "kind": "confirmation_review",
+      "path": "proof/reviews/REV-0158.json",
+      "sha256": "556afd8a6b076f1d2b24f85ac7559fdfbe23b70b153519a9811bafbc62fc707d"
+    }
+  ],
+  "input_attempt": "proof/attempts/ATT-0120.json",
+  "input_packet": "proof/packets/generated/C66-001-v5.md",
+  "lane": "weakest-sufficient-proof",
+  "output": "proof/reviews/REV-0170.json",
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "10948ae9a5c284a8d02fe50fd35bca128cef69e6fe52c762dcb9bb28d3adbb27",
+  "phase": "review",
+  "prompt": "prompts/ADVERSARY.md",
+  "prover_engine": "grok",
+  "review_pass": 2,
+  "role": "independent-adversarial-reviewer",
+  "selected_engine": "qwen",
+  "status": "ready",
+  "subproblem_id": "C66-SUPPORT-INTERFACE",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_attempt_id": "ATT-0120",
+  "target_task_id": "TASK-C66-M-004",
+  "theorem_statement": "Let T:=W_{-16}H^{BM}_{16}(M_{6,6};Q). Construct a canonical, atlas-independent CE support-accounting datum (K_Z, T_Z, phi) for the ordered reduced-support evaluation-failure geometry: K_Z must be a named mixed-Hodge term in an explicitly constructed compactification, localization sequence, correspondence, or spectral sequence for M_{6,6}; phi must identify T_Z as a specified subquotient of T with the exact degree, weight, and Tate-twist conventions stated; and an exact filtration, quotient, or spectral-sequence accounting must prove both which part of T is T_Z and that no relevant Z-supported term is omitted. The construction must descend from any presentation/atlas to the same target datum. This theorem makes no Tate assertion and may not assume a closed embedding, Gysin map, support-exhaustion statement, or map to T without proving it."
+}

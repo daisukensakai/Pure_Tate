@@ -1,0 +1,72 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients. Let X=M_{6,6}, let T=W_{-16}H^{BM}_{16}(X;Q), identified with W_{26}H^{26}(X;Q)(21), and for a closed finite-type separated Deligne-Mumford substack Y' of X define K(Y'):=ker(T->W_{26}H^{26}(X\\Y';Q)(21)). Assume the rational compactly supported cohomology of Y' agrees with that of its coarse moduli space, and use the Borel-Moore convention H^{BM}_k(Y';Q)=Hom_Q(H_c^k(Y';Q),Q). Poincare-Verdier localization identifies K(Y') with the image of W_{-16}H^{BM}_{16}(Y';Q) in T. If dim(Y')<8, then H_c^{16}(Y';Q)=H^{BM}_{16}(Y';Q)=0 because 16>2dim(Y'), and therefore K(Y')=0. If Y' is contained in another closed support Y, factorization of open restriction gives K(Y') contained in K(Y). Consequently, a nonzero subspace of the ATT-0120 kernel T_Z supported on a closed Y' contained in its classifying-image closure Y requires dim(Y')>=8. The verified general ceiling is dim(Y)<=20; when the repaired PGL_2-quotient factorization of FND-0187 is included, dim(Y)<=17 and such supports can occur only in the range 8<=dim(Y')<=17. For a constant or product clause-(E) model Z_B=B times Z_0 whose classifying map factors through the fixed-fibre model Z_0 and whose classifying-image closure Y_0 has dim(Y_0)<=2, one has K(Y_0)=0 and K(Y_0) contained in T_Z. This conclusion concerns only target classes supported on Y_0; it asserts no compact-support pushforward from Z_B to T or T_Z, does not determine the Tate type of T_Z, and does not claim that such models are logically useless in proving the theorem.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "ATT-0121 section 4 correctly states the scheme-level vanishing H_c^k(W;Q)=0 for k>2dim(W), hence H_c^{16}(W;Q)=H^{BM}_{16}(W;Q)=0 when dim(W)<8. REV-0171 expressly confirms CLM-0121-3 and the kernel-form consequence. The stack extension is valid here with Q-coefficients through the coarse-space comparison for the relevant Deligne-Mumford quotient substacks. The localization interface of FND-0180 then gives K(Y')=im(W_{-16}H^{BM}_{16}(Y';Q)->T)=0. For arbitrary nested closed supports Y' subset Y, restriction to X\\Y factors through restriction to X\\Y', so K(Y') subset K(Y); the extra full-classifying-image hypothesis appearing in FND-0182 is unnecessary for this elementary monotonicity statement. ATT-0121 section 5 must not be used where it writes f_{B,!}:H_c^{16}(Z_B)->H_c^{16}(X): the nonproper classifying morphism supplies no such cohomological pushforward, exactly as REV-0171 objects. The valid conclusion is only support-side. The attempt's original derivation of dim(Y)<=17 by applying CLM-0112-8 directly over an etale atlas of Hbar^bal is outside that claim's verified scope; the ceiling 17 is retained only because FND-0187 separately repairs it via the PGL_2-quotient factorization. Absent that repair, FND-0181 supplies only dim(Y)<=20. Finally, the candidate's phrase 'inert in BOTH directions' is too broad: K(Y_0)=0 proves that constant/product models cannot supply a nonzero target class through this kernel-form support, but it does not establish that eliminating them cannot be useful supporting evidence, nor does it rule out a future independently constructed interface. Those overstatements are deleted rather than promoted.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0186",
+  "id": "FAUD-0193",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "ground_field": "C",
+    "hypotheses": [
+      "Rational compactly supported cohomology of each relevant Deligne-Mumford quotient stack agrees with that of its coarse moduli space.",
+      "Borel-Moore homology uses H^{BM}_k(-;Q)=Hom_Q(H_c^k(-;Q),Q) in the same degree.",
+      "The identification of K(Y') with the image of W_{-16}H^{BM}_{16}(Y';Q) in T is the localization and Poincare-Verdier interface recorded in FND-0180.",
+      "The sharper upper bound dim(Y)<=17 is used only with the repaired PGL_2-quotient factorization recorded in FND-0187; without that repair the verified bound is dim(Y)<=20 from FND-0181."
+    ],
+    "mathematical_scope": "Degree-16 Borel-Moore dimension vanishing and monotonicity for nested kernel-form supports.",
+    "not_covered": [
+      "Tate type of T or T_Z",
+      "support exhaustion T_Z=T",
+      "existence of any map H_c^*(Z_B;Q)->T or H_c^*(Z_B;Q)->T_Z",
+      "regular embeddings, lci structure, Gysin maps, or codimension purity",
+      "the claim that constant or product models cannot be logically useful in proving the theorem",
+      "interfaces constructed in the future that differ from the present kernel-form interface"
+    ],
+    "objects": [
+      "X=M_{6,6}",
+      "T=W_{-16}H^{BM}_{16}(X;Q)=W_{26}H^{26}(X;Q)(21)",
+      "closed finite-type separated Deligne-Mumford substacks Y' of X",
+      "kernel-form terms K(Y')=ker(T->W_{26}H^{26}(X\\Y';Q)(21))"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "e953d461dab5be9eea0b331eaef5b1e078822c51689e6fcbaca3d8df669d5202",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "compact-support-dimension-bound",
+      "reported_content_sha256": "b08941f27f0af52b8761beff80cf4e9b7a9383163cfa3e12b0986f04c62783b9",
+      "retrieved_at": "2026-08-24T02:11:36Z",
+      "source_type": "other-primary",
+      "url": "https://grothendiecksga.com/read/sga4/en/XVII-7.html"
+    },
+    {
+      "arxiv_id": "1006.2364",
+      "arxiv_version": "v2",
+      "content_sha256": "e9a17307fb68e2189a1003039f2772fdcf04cdea8943825cd34d298b79d1005c",
+      "doi": "10.48550/arXiv.1006.2364",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "dm-stack-coarse-rational-comparison",
+      "reported_content_sha256": "1f8670268d6cc2061135dd08edbf8ebee8a7611d30bef23b6eb05a79b13ff15c",
+      "retrieved_at": "2026-08-24T02:11:36Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1006.2364"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0186",
+  "verdict": "promote",
+  "verified_source_count": 2
+}

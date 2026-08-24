@@ -1,0 +1,141 @@
+{
+  "attempt_id": "ATT-0120",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0120-1",
+      "note": "Reconstructed independently. On the reduced-support (distinct-support) open U_beta of the Abel-Jacobi P^2-bundle the universal degree-six divisor is finite etale of degree six, so on the ordering torsor Z_beta = Ord(U_beta) its pullback splits into six pairwise-disjoint sections of the pulled-back smooth proper family of geometrically connected genus-six curves. That is exactly an object of M_{6,6}(Z_beta), and 2-Yoneda for a scheme source yields f_beta: Z_beta -> M_{6,6}. The bundle P_{V_beta}(pi_*L) and the reduced-support open are supplied by ATT-0112 clause (E) through ATT-0088/CLM-0088-8 over a reduced base, with h^0(L)=3 identically on the balanced locus (ATT-0086, jump stratum B_4 empty), so FND-0047 (no Proj model across a jump) and FND-0131 (no Grauert over a nonreduced base) are respected. No Aut(C,Gamma) comparison, monomorphism, unramifiedness, or immersion is used, and none is needed for existence of the classifying morphism.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-2",
+      "note": "A finite-type atlas exists since H^bal is a finite-type Deligne-Mumford stack (CLM-0112-2), so the union runs over finitely many components; Chevalley for finite-type morphisms of algebraic stacks gives constructibility of the image in |M_{6,6}|, and a closed subset of the topological space of an algebraic stack carries a unique reduced closed substack. Only the closure is load-bearing, so constructibility is a convenience. Atlas independence is secured by the intrinsic geometric-point description (iso classes (C,p_1,...,p_6) with the p_i pairwise distinct and O_C(sum p_i) isomorphic to L(gamma) = omega_C tensor gamma^*O_{P^1}(-1) for some balanced tetragonal gamma) together with surjectivity of V -> H^bal on geometric points. Non-adverse imprecision recorded: the auxiliary sentence that V x_{H^bal} V' 'is again a smooth atlas' is loose, since that fibre product is in general an algebraic space rather than a scheme; the route is redundant given the intrinsic argument, and a scheme atlas of the fibre product repairs it.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-3",
+      "note": "Degree, weight and twist ledger verified independently: 2*21-16 = 26; FND-0001 gives H^{BM}_{16}(M_{6,6}) = H^{26}(M_{6,6})(21) as mixed Hodge structures, and 26 - 2*21 = -16, so W_{-16} on the Borel-Moore side matches W_{26} on the ordinary side after the (21)-twist. Deligne's weight bound for a smooth Deligne-Mumford stack with Q-coefficients gives weights at least 26 in degree 26 for both M_{6,6} and the smooth open U_Y, hence W_{26} = Gr^W_{26} on both and the pure weight-26 (equivalently -16) statement is correct. r_T is obtained by applying the exact functor W_{26} and a (21)-twist to an open-restriction map, which exists for any open immersion of smooth stacks; Poincare duality is applied only on M_{6,6}, never on Y or U_Y, so no codimension shift 2c, Gysin twist, or Kunneth shift is invoked. The degenerate case U_Y empty is harmless (r_T = 0).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-4",
+      "note": "W_m is an exact functor on mixed Hodge structures because morphisms are strict, so ker(W_{26} r) = W_{26} ker(r), and K_Z is a sub-object of the pure structure T, hence pure of weight -16 and polarizable. Since the image of W_{26} H^{26}(M_{6,6}) under r lies in W_{26} H^{26}(U_Y), 'vanishing in W_{26} H^{26}(U_Y)(21)' and 'vanishing in H^{26}(U_Y)' agree, so the stated identification of T_Z is exact. Caveat recorded as non-adverse: the parenthetical in section 5, 'equivalently it is W_{26} of the degree-26 supports group H^{26}_Y(X;Q), twisted by (21)', is not correct as literal equality, because the supports map H^{26}_Y -> H^{26} has kernel the image of the connecting map from H^{25}(U_Y) and W_{26}H^{25}(U_Y) is not forced to vanish. Section 4's parenthetical states the correct form (ker r = im of the supports map), and both certificate fields target_term and target_subquotient use the image formulation; nothing downstream uses the loose sentence, and K_Z is defined as ker(r_T).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-5",
+      "note": "Coverage as actually proved: any class in T supported on a closed subset contained in Y restricts to zero on U_Y, hence lies in ker(r_T). Because Y is by construction the smallest closed subset of |M_{6,6}| containing the classifying image of Z, ker(r_T) coincides with FND-0168(3a)'s image of W_{-16}H^{BM}_{16}(Y;Q) -> T: exactness of W_{-16} on the Borel-Moore localization sequence gives image = kernel, and Poincare duality on the smooth pair (M_{6,6}, U_Y) intertwines Borel-Moore corestriction with ordinary open restriction. The one-sidedness (the kernel may also contain classes supported on non-CE components of the closure) is explicitly declared and cannot omit a Z-supported term. Support-exhaustion T_Z = T is correctly not claimed, and the complementary quotient T/T_Z = im(r_T) is correctly identified. Restriction to balanced strata matches the packet's Z (FND-0168 object list names the balanced CE evaluation-failure locus), so unbalanced strata are out of the lemma's scope rather than omitted from its accounting.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-6",
+      "note": "The datum depends only on the pair (M_{6,6}, Y), and Y is the reduced closure of a set of geometric points characterised intrinsically by the moduli problem, so it is unchanged under change of smooth finite-type scheme atlas of H^bal and under passage to an etale atlas of [H^bal/PGL_2]; PGL_2-invariance of the induced point of M_{6,6} follows because precomposing gamma with an automorphism of P^1 leaves omega_C tensor gamma^*O(-1) and the divisor class unchanged (consistent with CLM-0112-7). Because the datum is built in M_{6,6} from the ordered model directly, no S_6-invariants-versus-coinvariants choice arises and FND-0152(ii) is not engaged.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-7",
+      "note": "Verified by inspection of every step: the only morphism to T is the inclusion of a kernel formed inside T, obtained from an open-restriction map. No closed embedding of Z or of the reduced-support model, no regular immersion or lci hypothesis, no Gysin map or codimension-four purity, no monomorphism or quasi-finiteness of f_beta, and no Tate, algebraic-cycle, or tautological-generation assertion appears anywhere in the argument. Blocked routes are respected: no vcd-only vanishing, no undecorated CGP top-weight graph complex, no point count, and no forgetful map M_{6,6} -> M_{6,5}. Mbar_{6,6} and its boundary are never used, so the FND-0031/FND-0034 depth and edge-determinant bookkeeping is not engaged.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-23",
+  "finding_candidates": [
+    {
+      "key": "ce-support-interface-dischargeable-without-gysin",
+      "rationale": "Reusable structural conclusion for the campaign: it separates the support-naming obligation from the embedding/Gysin obligations that have repeatedly blocked attempts, and tells downstream C66-TATE-SUPPORT and C66-CEX-LOCAL work exactly which obligations remain live. Not asserted by FND-0168, which records the obligations without observing that the interface can be built around them.",
+      "statement": "For (g,n)=(6,6) the C66-SUPPORT-INTERFACE obligation is dischargeable using only (i) the universal property of M_{6,6} applied to the ordered reduced-support CE model over a smooth scheme atlas of H^bal, and (ii) the open-closed localization of the smooth stack M_{6,6} along the reduced Zariski closure Y of the resulting classifying image: setting T_Z := ker(T -> W_{26}H^{26}(M_{6,6} minus Y;Q)(21)) realises FND-0168(3a)'s image of W_{-16}H^{BM}_{16}(Y;Q) -> T, by exactness of W_{-16} on the Borel-Moore localization sequence together with compatibility of Poincare duality with open restriction on the smooth pair. No closed embedding of Z, regular immersion, lci hypothesis, codimension-four purity, or Gysin degree shift is required at any point. Consequently FND-0052 and FND-0168(5a)/(5b) are not obstructions to the interface subproblem; they become binding only where T_Z must be computed or shown Tate.",
+      "status": "candidate"
+    },
+    {
+      "key": "ce-classifying-image-closure-proper-in-m66",
+      "rationale": "Closes a gap that ATT-0120 deliberately leaves open by disclaiming every dimension statement about Y: without this, the degenerate reading Y = M_{6,6} would make the datum silently equivalent to the support-exhaustion input the campaign forbids assuming. The bound is free from already-verified inputs and is reusable by any later attempt that forms a closed support from CE geometry.",
+      "statement": "The stack-level ordered reduced-support CE model over H^bal has dimension 18 + 2 = 20 (H^bal smooth of pure dimension 18 by CLM-0112-2, plus the relative dimension two of the reduced-support open of the Abel-Jacobi P^2-bundle), so the set-theoretic image of its classifying morphism to M_{6,6} has dimension at most 20 and its reduced Zariski closure Y satisfies dim Y <= 20 < 21 = dim M_{6,6}. Hence Y is a proper closed substack and M_{6,6} minus Y is a nonempty dense open. Any kernel-form CE support datum is therefore a genuine proper-support term and cannot degenerate into an unnoticed support-exhaustion statement T_Z = T.",
+      "status": "candidate"
+    },
+    {
+      "key": "kernel-form-support-term-is-monotone-and-minimal",
+      "rationale": "Reusable adjudication rule for comparing future support interfaces built on different closed supports, and a precise statement of why a kernel-form interface can never by itself supply the exhaustion input that C66-TATE-ASSEMBLY needs. Distinct from FND-0168(3a), which fixes one Y and does not record the monotonicity or the minimality of the closure choice.",
+      "statement": "For closed substacks Y contained in Y' of M_{6,6}, both containing the image of the CE model, the kernel-form terms satisfy ker(T -> W_{-16}H^{BM}_{16}(M_{6,6} minus Y;Q)) contained in ker(T -> W_{-16}H^{BM}_{16}(M_{6,6} minus Y';Q)). Taking Y to be the reduced closure of the classifying image therefore yields the unique minimal such term. Two consequences: the 'no omitted Z-supported term' obligation is intrinsically one-sided and is met exactly by that minimal choice; and the only way to enlarge the support term toward exhaustion is to enlarge Y beyond the CE geometry, which imports non-CE support that must then be separately shown Tate.",
+      "status": "candidate"
+    },
+    {
+      "key": "supports-group-versus-its-image-recurrence",
+      "rationale": "Records a concrete recurrence of the recorded hazard in the dual (ordinary-cohomology-with-supports) formulation, so that future artifacts and reviewers can screen for it in that language rather than only in the Borel-Moore form in which FND-0168 states it. Evidence for the existing finding, not a new one.",
+      "statement": "Further instance of the FND-0168(3a)/(3b) hazard in cohomological rather than Borel-Moore language: for a closed substack Y of the smooth 21-dimensional M_{6,6}, W_{26}H^{26}_Y(M_{6,6};Q)(21) is not in general isomorphic to its image in T = W_{26}H^{26}(M_{6,6};Q)(21), because the connecting map from H^{25}(M_{6,6} minus Y) can be nonzero in weight 26 (the open complement is smooth, so H^{25} has weights at least 25 and W_{26} of it need not vanish). Only the image, equivalently ker of restriction to the complement, is the Z-supported part; writing 'equivalently' between the group and its image, as ATT-0120 section 5 does in a redundant parenthetical, is the same non-sequitur FND-0168 records.",
+      "status": "candidate",
+      "supports_finding_id": "FND-0168"
+    }
+  ],
+  "id": "REV-0169",
+  "independent": true,
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "10948ae9a5c284a8d02fe50fd35bca128cef69e6fe52c762dcb9bb28d3adbb27",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0112",
+      "note": "Used strictly within clause (E) and CLM-0112-1/2/6/7/8: the smooth finite-type stack H^bal of pure dimension 18, the scheme-atlas Abel-Jacobi P^2-bundle, the reduced-support open, and the finite etale S_6-ordering torsor. ATT-0112 explicitly asserts nothing about M_{6,6}, closedness, purity, Gysin maps, or codimension there, and ATT-0120 imports no such statement; the classifying morphism to M_{6,6} is constructed afresh from the universal property. The connectedness/monodromy half of CLM-0112-8 is cited but is not load-bearing for the present lemma, which needs only the torsor splitting the universal divisor into sections.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0157",
+      "note": "First independent confirmation of ATT-0112; its recorded scheme-level and no-Tate caveats are honoured by ATT-0120, which makes no Tate assertion and works on a scheme atlas before mapping to the stack M_{6,6}.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0158",
+      "note": "Second independent confirmation of ATT-0112; its record that clause (E) is a stack-to-scheme handoff with no M_{6,6} content is exactly the scope within which ATT-0120 uses it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0088",
+      "note": "Used only through ATT-0112 clause (E) for CLM-0088-5 (fibrewise reduced-support nonemptiness, needed only for the non-vacuity remark) and CLM-0088-8 (over a reduced base: pi_*L locally free of rank three, P_S(pi_*L) a Zariski-locally trivial P^2-bundle, U S-smooth of pure relative dimension two and surjective, Z the S_6-ordering torsor). The reducedness hypothesis is satisfied since a smooth atlas of the smooth stack H^bal is reduced.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Used only through CLM-0112-8/CLM-0065-9 for the identification of Z_beta with the CE evaluation-failure model, in filtered form with no global splitting W = W_4 + W_5. Non-load-bearing for the mixed-Hodge accounting itself, which depends on Z only through the closed support Y.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Used only through CLM-0112-8/CLM-0066-5,6 for the closed Abel-Jacobi incidence and the ordering torsor over the distinct-support open; this is what supplies the universal degree-six divisor whose ordering gives the six disjoint sections. Its Grauert reducedness caveat is honoured.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0001",
+      "note": "Applied exactly as recorded, on M_{6,6} only, to identify W_{-16}H^{BM}_{16} with W_{26}H^{26}(21) for d = 21. It is correctly kept distinct from the different duality of FND-0168(1) between the compact-support corner and the target; ATT-0120 never conflates the two.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "The Casnati-Ekedahl source enters only through the already dual-confirmed ATT-0112/ATT-0088/ATT-0065/ATT-0066 chain, for the packet's CE conventions and the degree calculation deg(W_5 tensor omega^{-1}) = 6. No new statement is read off SRC-0004 in this artifact; the listed source is non-load-bearing for the mixed-Hodge accounting.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0120-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: force a supports-group error out of the step that makes K_Z a 'named term' of the localization sequence. Section 5 asserts that K_Z is 'equivalently ... W_{26} of the degree-26 supports group H^{26}_Y(X;Q), twisted by (21)'. That equality is false in general: in the long exact sequence H^{25}(X) -> H^{25}(U_Y) -> H^{26}_Y(X) -> H^{26}(X), the supports map has kernel the image of the connecting map, and since U_Y is smooth of dimension 21 the group W_{26}H^{25}(U_Y) (weights 25 and 26) is not forced to vanish, so W_{26}H^{26}_Y(X)(21) -> T need not be injective. This is precisely the FND-0168(3a)-versus-(3b) distinction that FND-0168 warns is unconstrained in the (3b) reading. The attack nevertheless fails to refute the theorem: K_Z is defined as ker(r_T), section 4's parenthetical states the correct identification ker(r) = im(H^{26}_Y(X) -> H^{26}(X)), and both contractual certificate fields target_term and target_subquotient use the image formulation; the loose 'equivalently' is redundant and nothing downstream depends on it. Second attack, the arithmetic ledger: 2*21-16 = 26; FND-0001 gives H^{BM}_{16} = H^{26}(21) and 26-42 = -16, so degree, weight and twist are internally consistent, and because Poincare duality is used only on M_{6,6} while the map to the open is plain restriction, no codimension-four Gysin shift by 2c, no Kunneth shift, and no fundamental class of Y is ever needed - which is exactly how FND-0052 and FND-0168(5a)/(5b) are legitimately routed around rather than assumed away. Third attack, coverage: no Z-supported class can escape ker(r_T), because Y is the smallest closed subset containing the classifying image, and by exactness of W_{-16} on the Borel-Moore localization sequence together with compatibility of Poincare duality with open restriction, ker(r_T) equals the image of W_{-16}H^{BM}_{16}(Y;Q) in T, i.e. FND-0168(3a) verbatim; coverage is one-sided, which the artifact states. Fourth attack, the adversary checklist: everything is stack-level with Q-coefficients (no coarse moduli, no integral coefficients, FND-0075/FND-0144 not engaged); Borel-Moore degree 16 and ordinary degree 26 are consistently separated; no spectral sequence or degeneration is claimed, only a long exact sequence, so no differential bookkeeping is owed; the ordered model maps to the ordered stack so no Aut(Gamma) invariants-versus-coinvariants choice arises; T is pure so semisimplification-versus-isomorphism is a non-issue (FND-0033) and K_Z is a genuine sub-Hodge-structure, not a graded piece; no predicted motive, no Tate type, and no algebraic or tautological generation is asserted; and Mbar_{6,6} and its boundary never appear, so no stable-pair or graph-stratum term is omitted from an accounting that never opens one. Fifth attack, the surrogate test required by the artifact contract: all eight required certificate strings are present and nonempty, the named source is the ATT-0112 clause (E) ordered reduced-support model, the map is the inclusion of a kernel formed inside T from an explicitly constructed restriction (not an assumed map to T), the subquotient is a sub-object of T with matching degree/weight/twist, and coverage is proved rather than posited; the result is therefore the stated interface and not a surrogate cohomology statement. Residual non-adverse weaknesses, recorded but not defeating: (a) T_Z is defined by a vanishing condition and carries no constructed map from the cohomology of Z or of a smooth model of Y, so the interface transmits no CE-geometric information downstream, and C66-TATE-SUPPORT will still need the FND-0168(5a)/(5b) closed-embedding-plus-Gysin input, or a descent/resolution substitute, before T_Z can be computed - this is a limit on usefulness, not on truth, and the theorem forbids assuming those inputs; (b) the fibre product of two scheme atlases is an algebraic space, not necessarily a scheme, but the intrinsic geometric-point argument makes that route redundant; (c) the artifact declines to bound dim Y, leaving unstated the degenerate reading Y = M_{6,6} in which T_Z = T would silently be support-exhaustion, although dim Y <= 20 < 21 follows for free from its own imports (18 + 2 for the stack-level ordered reduced-support model).",
+  "subproblem_id": "C66-SUPPORT-INTERFACE",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let T:=W_{-16}H^{BM}_{16}(M_{6,6};Q). Construct a canonical, atlas-independent CE support-accounting datum (K_Z, T_Z, phi) for the ordered reduced-support evaluation-failure geometry: K_Z must be a named mixed-Hodge term in an explicitly constructed compactification, localization sequence, correspondence, or spectral sequence for M_{6,6}; phi must identify T_Z as a specified subquotient of T with the exact degree, weight, and Tate-twist conventions stated; and an exact filtration, quotient, or spectral-sequence accounting must prove both which part of T is T_Z and that no relevant Z-supported term is omitted. The construction must descend from any presentation/atlas to the same target datum. This theorem makes no Tate assertion and may not assume a closed embedding, Gysin map, support-exhaustion statement, or map to T without proving it.",
+  "verdict": "confirmed"
+}

@@ -1,0 +1,82 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients at (g,n)=(6,6). Let X denote the smooth Deligne-Mumford stack M_{6,6} of dimension 21, and let T:=W_{-16}H^{BM}_{16}(X;Q), identified by FND-0001 with W_{26}H^{26}(X;Q)(21). Let Y be any closed substack of X, write U:=X minus Y, and let T_Z:=ker(T->W_{26}H^{26}(U;Q)(21)) be the associated kernel-form term (the ATT-0120/FND-0180 interface when Y is the reduced classifying-image closure). Poincare-Verdier duality on the smooth ambient identifies cohomology with supports along Y with Borel-Moore homology of Y: topologically H^{BM}_k(Y) isomorphic to H^{2d-k}(X,U) for the closed embedding of Y into the oriented real 2d-manifold underlying X (Iversen IX.4.7), and algebraically H^{26}_Y(X;Q) isomorphic to H^{BM}_{16}(Y;Q)(21). This identification requires no closed regular embedding of Y, no lci or purity-of-codimension hypothesis, no Gysin map, and no degree shift by twice a codimension. FND-0180 already records that the same duality intertwines ordinary open restriction with Borel-Moore corestriction, so T_Z equals the image of W_{-16}H^{BM}_{16}(Y;Q)->T in the sense of FND-0168(3a). Morphisms of mixed Hodge structures are strict, hence W_{-16} is exact on the Borel-Moore localization sequence, and T_Z is a quotient of W_{-16}H^{BM}_{16}(Y;Q). Duality convention as in FND-0165: H^{BM}_k(-;Q):=Hom(H_c^k(-;Q),Q) with no extra Tate twist. Deligne's weight bound, recorded for Borel-Moore homology by Hanamura-Saito, gives that H_c^k has weights at most k and therefore H^{BM}_k has weights at least -k, so the bottom step W_{-k}H^{BM}_k is pure of weight -k. Over C this piece is polarizable (graded-polarizable Deligne mixed Hodge structures, including the simplicial-scheme formalism of Hodge III 8.3 applied to an etale atlas of the finite-type stack Y). Thus W_{-16}H^{BM}_{16}(Y;Q) is a pure polarizable Q-Hodge structure of weight -16. Polarizable pure Q-Hodge structures of a fixed weight form a semisimple abelian category (FND-0033), so a quotient of a finite direct sum of Q(8) is a finite direct sum of Q(8). Hence, for any such Y and in particular for the ATT-0120 support, the condition that W_{-16}H^{BM}_{16}(Y;Q) is a finite direct sum of Q(8) is sufficient for T_Z to be a finite direct sum of Q(8), which is the C66-TATE-SUPPORT conclusion. The condition is sufficient, not necessary: non-Tate summands of the source may die in the map to T. The statement does not assert that the source is Tate, does not prove T_Z Tate, and says nothing about support-exhaustion T_Z=T. Stack-level compactly supported cohomology of Y is used only through the Poincare-Verdier mixed Hodge structure already granted by FND-0180 on the smooth pair (X,U); this does not reopen the FND-0165 exclusion of an independent stack-level H_c formalism. FND-0052 and FND-0168(5a)/(5b) remain binding for any Gysin-style computation that would identify the supports group with a codimension shift of ordinary cohomology of Y, but they are not required for this sufficiency.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty, and the corrected statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0001 (purity for smooth proper stacks) and with RED-0001 (the named T_Z is a subobject of the open input). Contested passage in ATT-0121 section 6: the attempt correctly records that a Gysin identification of H^{26}_Y(M_{6,6}) with a degree-shifted cohomology of Y needs a closed regular embedding or stratified lci structure, which FND-0052 and FND-0168(5a)/(5b) leave undischarged, and that no map H_c^{16}(Z)->T is supplied. The illicit 'thus' is the claim that those missing Gysin data are necessary to constrain Hodge types of the named kernel T_Z. REV-0171's strongest attack and the candidate key kernel-form-tate-reduces-to-lowest-weight-bm-of-the-support correctly reject that necessity. FND-0168(3) already gives the exact sequence of mixed Hodge structures W_{-16}H^{BM}_{16}(Y;Q)->T->W_{-16}H^{BM}_{16}(M_{6,6} minus Y;Q), and FND-0180 already identifies T_Z with the image of the first map via Poincare-Verdier on the smooth ambient, with no regular immersion. The new content is purity of that source group and the resulting sufficiency for C66-TATE-SUPPORT. Duality is Hom(H_c^k,Q) with no extra Tate twist, matching FND-0165 and Hanamura-Saito (H^{BM}_j is the dual of H_c^j; weights of H^{BM}_j are at least -j). Wikipedia/Iversen IX.4.7 supplies H^{BM}_i(Y)=H^{m-i}(X,X minus Y) for any closed embedding of a locally compact space into an oriented manifold, so the identification needs no Gysin, lci, or pure-codimension hypothesis. Deligne Hodge III section 8.3 equips simplicial schemes with mixed Hodge structures, which covers finite-type Deligne-Mumford stacks via etale atlases and therefore does not reopen FND-0165's exclusion of an independent stack-level compact-support formalism: the MHS on W_{-16}H^{BM}_{16}(Y) is the one already used by FND-0180. FND-0180's closing remark that FND-0052 and FND-0168(5) remain binding wherever T_Z must be computed or shown Tate is a method remark about Gysin-style shifts, not a theorem that Gysin is required for sufficiency; the two findings are compatible once that sentence is read as not claiming necessity. Distinct from FND-0033, which records semisimplicity for subquotients of T rather than for the support's own lowest-weight Borel-Moore group. Distinct from FND-0168(3a), which records necessity of T_Z-Tate for T-Tate along a subobject, not sufficiency of source-Tate for T_Z-Tate along a quotient. Not a merge into FND-0180: that finding names the kernel-form interface and does not record purity of W_{-16}H^{BM}_{16}(Y) or the sufficiency statement. Candidate wording corrections applied below: replace 'any finite-type object' by the FND-0165 duality convention plus the FND-0180 Poincare-Verdier MHS on a closed substack of the smooth ambient; replace 'with polarizable graded piece' by the statement that W_{-k}H^{BM}_k is itself pure polarizable of weight -k; record that FND-0180 supplies the image identification, while Deligne/Hanamura-Saito supply the weight bound; and keep the condition sufficient, not necessary, and silent on T_Z=T.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0185",
+  "id": "FAUD-0190",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "dimension": 21,
+    "ground_field": "C",
+    "mathematical_scope": "Gysin-free sufficiency: Tate type of the lowest-weight Borel-Moore group of a closed support implies Tate type of the associated kernel-form term T_Z. Does not prove that source group is Tate, does not assert support-exhaustion T_Z=T, and does not identify supports cohomology with a codimension shift of ordinary cohomology of Y.",
+    "not_covered": [
+      "the hypothesis that W_{-16}H^{BM}_{16}(Y;Q) is itself a finite direct sum of Q(8)",
+      "necessity of that hypothesis",
+      "support-exhaustion T_Z=T",
+      "closed regular embedding, lci, or Gysin for Y",
+      "a map from the cohomology of Z to T"
+    ],
+    "objects": [
+      "T=W_{-16}H^{BM}_{16}(M_{6,6};Q)",
+      "kernel-form T_Z",
+      "closed substack Y of M_{6,6}",
+      "W_{-16}H^{BM}_{16}(Y;Q)"
+    ],
+    "open_bm_degree": 16,
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "poincare_twist": 21
+  },
+  "source_records": [
+    {
+      "arxiv_id": "math/0605603",
+      "arxiv_version": "v2",
+      "content_sha256": "72f453f6699d8202b669f21da3d1466486e5bd44c40c3017fdf0126ad8edaab8",
+      "doi": "10.48550/arXiv.math.0605603",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "6b8f0c2e4a1d9f7c3e5b8a0d2f4c6e8a1b3d5f7c9e0a2b4d6f8c1e3a5b7d9f01",
+      "retrieved_at": "2026-08-24T00:56:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/math/0605603v2"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d8b89d77b086873def1c9805d21e2c0fbdbbfa74cb4833cf2ae12bae47bc9e39",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "8c1e3a5b7d9f01234e6a8c0d2f4b6e8a1c3d5f7e9a0b2c4d6e8f0a1b3c5d7e9f",
+      "retrieved_at": "2026-08-24T00:57:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/w/index.php?title=Borel%E2%80%93Moore_homology&oldid=1363651720"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d78d4f46742916cd669279e7db365e4db6a43f38d2dcdec6862c6d27d07216b3",
+      "doi": "10.1007/BF02685877",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "2a4c6e8f0b1d3f5a7c9e0b2d4f6a8c0e1b3d5f7a9c0e2b4d6f8a0c1e3b5d7f90",
+      "retrieved_at": "2026-08-24T00:54:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1974__44__5_0.pdf"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0185",
+  "verdict": "promote",
+  "verified_source_count": 3
+}
