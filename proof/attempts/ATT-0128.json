@@ -1,0 +1,306 @@
+{
+  "argument_markdown": "## 0. Status of this artifact, stated first\n\nThe assigned exact theorem -- that the named C66-SUPPORT-INTERFACE subquotient T_Z of T := W_{-16}H^{BM}_{16}(M_{6,6};Q) is a finite direct sum of Q(8) -- is **not proved here**, and no disproof is offered either. Per FND-0189 I explicitly do **not** claim that the C66-TATE-SUPPORT artifact contract is met, and per FND-0188 I never assume RED-0001 (that T is Tate) at any point.\n\nWhat is proved here, unconditionally, is a localization theorem about the *same* named T_Z:\n\n* **Theorem A.** T_Z is the part of T supported on a closed reduced substack of Y of dimension at most 16. Equivalently: the whole dimension->=17 part of the Casnati-Ekedahl classifying-image closure -- in particular the 17-dimensional ordered reduced-support model that carries the CE geometry -- contributes nothing to T_Z.\n* **Theorem B.** T_Z splits canonically as a finite direct sum of at most nine pure weight -16 pieces indexed by stratum dimension n in {8,...,16}; the n = 8 piece is automatically a finite direct sum of Q(8); the pieces for n <= 7 and n >= 17 vanish.\n* **Corollary C.** If the at most eight groups W_{2n-16}H^{2n-16}(S_{(n)};Q), 9 <= n <= 16, are of Tate type Q(8-n)^{\\oplus m_n}, then T_Z is a finite direct sum of Q(8), i.e. the assigned theorem holds.\n\nTheorem A *derives* the upper cutoff 16 that FND-0191 clause (ii) writes down without derivation (\"residual strata of dimensions 9 through 16\"), and it does so without using FND-0181's dim Y <= 20 or the FND-0187 PGL_2-quotient repair dim Y <= 17: no dimension bound for Y is used at all. It is also carried out entirely inside ordinary Q-cohomology of *smooth* Deligne-Mumford stacks, so it needs no Borel-Moore or compact-support mixed Hodge formalism on the singular substack Y -- exactly the formalism FND-0165 withholds and which FND-0186 has to assume as a hypothesis.\n\nThe residual obligation is recorded as an explicit gap in Section 9.\n\n## 1. Conventions and the imported interface datum\n\nWork over C with Q-coefficients. Write X := M_{6,6}, the smooth separated Deligne-Mumford stack of smooth genus-six curves with six ordered marked points, of pure dimension d = 3*6-3+6 = 21 (established working-context fact). By Poincare duality (established fact; packet FND-0001)\n\n  T := W_{-16}H^{BM}_{16}(X;Q) is identified with W_{26}H^{26}(X;Q)(21),\n\nand since X is smooth, H^{26}(X;Q) has weights >= 26, so W_{26}H^{26}(X;Q) = Gr^W_{26}H^{26}(X;Q) is a pure polarizable Hodge structure of weight 26 and T is pure polarizable of weight -16. The arithmetic ledger is 2*21-16 = 26 and 26-2*21 = -16; the Tate-twist conversion is Q(-13)(21) = Q(8) (established facts, reusable computations).\n\nFrom the verified C66-SUPPORT-INTERFACE datum ATT-0120, dual-confirmed by REV-0169 and REV-0170, I import exactly the following and nothing else:\n\n* **(I1)** [ATT-0120/CLM-0120-2] There is a reduced closed substack Y of X, atlas-independent, whose underlying space is the Zariski closure of the geometric image of the classifying morphism f from the ordered reduced-support Casnati-Ekedahl model. (I use only that Y is *a reduced closed substack of X*; nothing about its dimension, purity, irreducibility, or defining equations is used.)\n* **(I2)** [ATT-0120/CLM-0120-3] U_Y := X minus Y is an open substack of X, smooth of dimension 21; restriction r : H^{26}(X;Q) -> H^{26}(U_Y;Q) is a morphism of mixed Hodge structures; both sides have weights >= 26; and r_T : T -> W_{26}H^{26}(U_Y;Q)(21) is the induced morphism of pure weight -16 Hodge structures.\n* **(I3)** [ATT-0120/CLM-0120-4] T_Z = K_Z := ker(r_T), a subobject of T, with phi : T_Z -> T the inclusion; degree, weight and Poincare twist are those of T.\n* **(I4)** [ATT-0120/CLM-0120-5, CLM-0120-6] The coverage and atlas-invariance clauses: every class in T supported on a closed subset of X contained in Y lies in T_Z, and the datum depends only on the pair (X, Y).\n* **(I5)** [ATT-0120/CLM-0120-7] The datum carries no Tate assertion and uses no Gysin map, closed embedding of Z, or support-exhaustion statement.\n\nNothing below re-derives, strengthens, or repairs any of (I1)-(I5); in particular I do not touch the ATT-0112 source geometry, whose artifacts are not among my dependency artifacts.\n\n## 2. Standard inputs\n\nThese are named as standard theory, not proved here. Each is already in the register that ATT-0120/CLM-0120-3 used and that REV-0169 and REV-0170 confirmed.\n\n* **(S1)** Deligne mixed Hodge structures on ordinary Q-cohomology of smooth separated finite-type Deligne-Mumford stacks over C, functorial for open immersions; for such a stack V, H^m(V;Q) has weights >= m.\n* **(S2)** *Purity / Gysin for a smooth pair.* If V is a smooth separated finite-type DM stack over C of pure dimension D and S is a **smooth** closed substack of V of **pure** codimension c, with open complement V minus S, then there is a long exact sequence of mixed Hodge structures\n\n  ... -> H^{m-2c}(S;Q)(-c) -> H^m(V;Q) -> H^m(V minus S;Q) -> H^{m-2c+1}(S;Q)(-c) -> ...\n\n  This is purity for a closed immersion between objects **both smooth over the base**, which is precisely the route the working-context constraint on determinantal/lci reasoning itself prescribes (\"The valid route is a closed immersion between schemes smooth over the base, whose codimension is the relative-dimension difference\"). No regular-immersion, lci, or expected-codimension hypothesis is invoked, and this is *not* the forbidden Gysin morphism for the pair (M_{6,6}, Z) of FND-0052 / FND-0168(5a): the pairs used below are (X minus Y^{(j+1)}, S_j) with S_j smooth and closed in the smooth ambient **by construction**.\n* **(S3)** *Coarse comparison for ordinary cohomology.* If S is a separated finite-type DM stack over C with coarse space c : S -> S^c, then c_*Q = Q and R^q c_* Q = 0 for q > 0, because the geometric stalks are Q-cohomology of BG for finite groups G, which vanishes in positive degrees with Q-coefficients. Hence H^*(S;Q) = H^*(S^c;Q). This is used **only** to import Artin vanishing for ordinary cohomology; no moduli-theoretic, integral, or compact-support statement on a coarse space is made, so FND-0075 and FND-0165 are not engaged.\n* **(S4)** *Artin vanishing.* For an affine complex variety A of dimension n, H^k(A;Q) = 0 for k > n. (For smooth A this is Andreotti-Frankel: A has the homotopy type of a CW complex of real dimension <= n.)\n* **(S5)** *Strictness.* Morphisms of mixed Hodge structures are strict for W, so W_m and Gr^W_m are exact functors on mixed Hodge structures.\n* **(S6)** *Semisimplicity.* The category of pure polarizable rational Hodge structures of a fixed weight is semisimple abelian; every subobject or quotient of a finite direct sum of Q(8) is again a finite direct sum of Q(8) (established working-context fact).\n\n## 3. Admissible chains\n\n**Lemma 1.** Let Y be a reduced closed substack of X. There exist an integer N and reduced closed substacks\n\n  Y = Y^{(0)} superset Y^{(1)} superset ... superset Y^{(N)} = empty\n\nsuch that, writing S_j := Y^{(j)} minus Y^{(j+1)} and n_j := dim Y^{(j)}, each S_j is a locally closed substack of X which is **smooth of pure dimension n_j**, has **affine coarse space**, and is **closed in X minus Y^{(j+1)}**; moreover n_0 > n_1 > ... > n_{N-1} >= 0.\n\n*Proof.* Recursive. Given a nonempty reduced closed substack Y^{(j)} of dimension d_j, let C_1,...,C_r be its irreducible components of dimension d_j and put\n\n  O := Y^{(j)} minus ( union of the components of dimension < d_j, union of the pairwise intersections C_a cap C_b for a != b, union Sing(Y^{(j)}) ).\n\nIn characteristic zero the smooth locus of a reduced finite-type stack is dense open, so O is open in Y^{(j)}, smooth, of pure dimension d_j, dense in each C_a, and its connected pieces O cap C_a are pairwise disjoint. The coarse space O^c is a locally closed subscheme of the quasi-projective coarse space M_{6,6}, hence quasi-projective, and it is the disjoint union of the (O cap C_a)^c. Choose a nonempty affine open A_a in each (O cap C_a)^c and let S_j be the open substack of O lying over the affine scheme A := A_1 sqcup ... sqcup A_r (a finite disjoint union of affines is affine). Then S_j is smooth of pure dimension d_j with affine coarse space, and it is dense in each C_a.\n\nPut Y^{(j+1)} := Y^{(j)} minus S_j with its reduced structure; it is closed in Y^{(j)}, hence in X. It is the union of the components of dimension < d_j together with the sets C_a minus S_j, each a proper closed subset of the irreducible C_a; hence dim Y^{(j+1)} <= d_j - 1 < n_j. Finally S_j = Y^{(j)} cap (X minus Y^{(j+1)}) is closed in X minus Y^{(j+1)} because Y^{(j)} is closed in X. Strict decrease of the dimensions forces termination with Y^{(N)} = empty. []\n\nBecause the n_j strictly decrease, **each integer occurs at most once** as a stratum dimension. This is what will bound the residual obligation by eight groups.\n\n## 4. The support filtration and its graded pieces\n\nFix an admissible chain as in Lemma 1 and set V_j := X minus Y^{(j)}, an open substack of X, hence smooth of pure dimension 21 by (I2)-style openness. Then V_0 = U_Y, V_N = X, V_j is contained in V_{j+1}, and V_{j+1} minus S_j = V_j.\n\nDefine, for 0 <= j <= N,\n\n  A_j := ker( T -> W_{26}H^{26}(V_j;Q)(21) ),\n\nthe map being W_{26} of the restriction H^{26}(X;Q) -> H^{26}(V_j;Q), twisted by (21). Each A_j is a subobject of T, hence pure polarizable of weight -16.\n\n* A_0 = T_Z, by (I3) (V_0 = U_Y and the map is exactly r_T).\n* A_N = 0, since V_N = X and the restriction is the identity.\n* A_{j+1} is contained in A_j: restriction to V_j factors through restriction to the larger open V_{j+1}, so a class killed on V_{j+1} is killed on V_j.\n\n**Lemma 2.** For each j, the quotient A_j / A_{j+1} is (isomorphic to) a subquotient of\n\n  W_{2n_j-16} H^{2n_j-16}(S_j;Q) (n_j),\n\na pure polarizable Hodge structure of weight -16.\n\n*Proof.* Apply (S2) to the smooth ambient V_{j+1} of pure dimension 21 and its smooth closed substack S_j of pure codimension c_j := 21 - n_j, at m = 26. Since m - 2c_j = 26 - 2(21-n_j) = 2n_j - 16, exactness gives\n\n  ker( H^{26}(V_{j+1};Q) -> H^{26}(V_j;Q) ) = image( H^{2n_j-16}(S_j;Q)(-c_j) -> H^{26}(V_{j+1};Q) ).\n\nBy (S5) the functor W_{26} is exact, so it commutes with kernels and images:\n\n  ker( W_{26}H^{26}(V_{j+1};Q) -> W_{26}H^{26}(V_j;Q) ) = W_{26} image( H^{2n_j-16}(S_j;Q)(-c_j) -> H^{26}(V_{j+1};Q) ),\n\nand the right-hand side is a quotient of W_{26}( H^{2n_j-16}(S_j;Q)(-c_j) ).\n\nNow consider the restriction map alpha : A_j -> W_{26}H^{26}(V_{j+1};Q)(21). Its kernel is A_j cap A_{j+1} = A_{j+1}. Its image lies in the kernel displayed above (twisted by (21)), because every class in A_j already restricts to zero on the smaller open V_j. Hence A_j / A_{j+1} embeds into that kernel, which is a quotient of W_{26}( H^{2n_j-16}(S_j;Q)(-c_j) )(21).\n\nFinally, S_j is smooth, so by (S1) H^{2n_j-16}(S_j;Q) has weights >= 2n_j-16, and therefore H^{2n_j-16}(S_j;Q)(-c_j) has weights >= (2n_j-16) + 2c_j = (2n_j-16) + (42-2n_j) = 26. Consequently W_{26} of it equals W_{2n_j-16}H^{2n_j-16}(S_j;Q)(-c_j), the lowest-weight (\"pure\") piece of the cohomology of the smooth stratum, twisted. Twisting by (21) and using (-c_j) + (21) = n_j gives the stated object; its weight is (2n_j-16) - 2n_j = -16. []\n\n## 5. Vanishing at both ends of the dimension range\n\n**Lemma 3.** With the notation of Lemma 1 and Lemma 2:\n\n**(a)** If n_j >= 17, then H^{2n_j-16}(S_j;Q) = 0 and hence A_j = A_{j+1}.\n\n**(b)** If n_j <= 7, then H^{2n_j-16}(S_j;Q) = 0 and hence A_j = A_{j+1}.\n\n**(c)** If n_j = 8, then W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j) = H^0(S_j;Q)(8), which is Q(8)^{\\oplus #pi_0(S_j)}, a finite direct sum of Q(8).\n\n*Proof.* (a) n_j >= 17 gives 2n_j - 16 = n_j + (n_j - 16) >= n_j + 1 > n_j = dim S_j. By (S3), H^{2n_j-16}(S_j;Q) = H^{2n_j-16}(S_j^c;Q), and S_j^c is an affine variety of dimension n_j, so this vanishes by (S4). Lemma 2 then gives A_j / A_{j+1} = 0.\n\nNote the numerics for the only dimensions that can occur inside the 21-dimensional X: n_j = 17, 18, 19, 20, 21 give 2n_j-16 = 18, 20, 22, 24, 26, each strictly larger than n_j.\n\n(b) n_j <= 7 gives 2n_j - 16 <= -2 < 0, and cohomology in negative degree vanishes. (Equivalently: H^{BM}_{16} of a space of dimension < 8 vanishes because 16 > 2 dim, which is the vanishing already recorded in FND-0186.)\n\n(c) n_j = 8 gives 2n_j - 16 = 0, and H^0(S_j;Q) = Q^{#pi_0(S_j)} is pure of weight 0, so W_0H^0 = H^0. Twisting by (8) gives Q(8)^{\\oplus #pi_0(S_j)}. []\n\n## 6. Theorem A: the support of T_Z collapses to dimension at most 16\n\n**Theorem A.** Let Y be the reduced closed substack of X supplied by (I1) and let T_Z = ker(r_T) be the interface subquotient of (I3). Fix an admissible chain as in Lemma 1 and let j_0 be the least index with n_{j_0} <= 16 (and j_0 := N if no such index exists). Then\n\n  T_Z = ker( T -> W_{26}H^{26}( X minus Y^{(j_0)} ; Q)(21) ),  with dim Y^{(j_0)} <= 16 and Y^{(j_0)} contained in Y.\n\nIn particular, every stratum of the chain of dimension >= 17 contributes nothing to T_Z, and T_Z consists exactly of the classes in T supported on a closed reduced substack of Y of dimension at most 16, i.e. of codimension at least 5 in M_{6,6}.\n\n*Proof.* For j < j_0 we have n_j >= 17, so A_j = A_{j+1} by Lemma 3(a). Hence T_Z = A_0 = A_{j_0}, which is the displayed kernel; and n_{j_0} = dim Y^{(j_0)} <= 16 by the definition of j_0 (if j_0 = N then Y^{(N)} = empty and T_Z = 0, which is the empty direct sum of Q(8) and is consistent with the statement). []\n\nThree remarks on the scope of Theorem A, stated so that it is not overread.\n\n1. **No dimension input for Y is used.** The proof only ever needs dim Y <= dim X = 21, which is automatic for a closed substack. FND-0181's dim Y <= 20 and FND-0186/FND-0187's repaired dim Y <= 17 are consistent with Theorem A but are not used; in particular Theorem A does not depend on the FND-0187 PGL_2-quotient repair, and it does not assert dim Y = 17 or dim Y = 20 (which FND-0181 lists as not covered).\n2. **Theorem A is a general principle, not a separation of T_Z from T.** The same argument applied with Y = X shows that T itself is the part of T supported on a closed substack of dimension at most 16. So Theorem A does **not** distinguish the CE support from the ambient by codimension, and the \"codimension four\" label of the CE model plays no role in it. This is stated explicitly to avoid suggesting a separation that is not proved.\n3. **It is a vanishing from affineness plus a degree inequality, not from smallness.** The archive constraints \"Unnamed lower-dimensional strata contribute only zero or Tate classes to degree-26 cohomology with supports\" and \"Positive-codimension strata cannot contribute to the weight-26 degree-26 term solely because they have smaller dimension\" are respected: the only vanishings proved are (a) 2n-16 > n together with Artin vanishing on an affine coarse space, and (b) 2n-16 < 0. Neither is an inference from smallness of the stratum, and Theorem B below leaves the intermediate dimensions entirely undetermined rather than declaring them zero or Tate.\n\n## 7. Theorem B: canonical splitting into at most nine pieces\n\n**Theorem B.** With the notation above, T_Z carries the finite decreasing filtration T_Z = A_{j_0} superset A_{j_0+1} superset ... superset A_N = 0 by sub-Hodge structures, and\n\n  T_Z is isomorphic to the direct sum over j_0 <= j < N of A_j / A_{j+1},\n\nwhere for each j the piece A_j / A_{j+1} is a subquotient of W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j). Moreover:\n\n* A_j / A_{j+1} = 0 whenever n_j <= 7 or n_j >= 17;\n* A_j / A_{j+1} is a finite direct sum of Q(8) whenever n_j = 8;\n* the remaining pieces are indexed by the dimensions n_j in {9,10,...,16}, and since the n_j strictly decrease there are **at most eight** of them, at most one for each such dimension.\n\n*Proof.* The filtration and the identification of its graded pieces are Lemma 2. Every A_j is a subobject of the pure polarizable weight -16 structure T, hence is itself pure polarizable of weight -16; so are all the graded pieces. By (S6) the category of pure polarizable weight -16 rational Hodge structures is semisimple, so the finite filtration splits and T_Z is the direct sum of its graded pieces. The three bullet points are Lemma 3(a), 3(b), 3(c) together with (S6) (a subquotient of a finite direct sum of Q(8) is a finite direct sum of Q(8)). Strict decrease of the n_j gives the count. []\n\n**Corollary C (sufficient criterion for the assigned theorem).** Suppose that for one admissible chain, and for every j with 9 <= n_j <= 16, the pure weight-(2n_j-16) Hodge structure W_{2n_j-16}H^{2n_j-16}(S_j;Q) is a finite direct sum of Q(8-n_j). Then T_Z is a finite direct sum of Q(8), i.e. the assigned theorem holds.\n\n*Proof.* The twist Q(8-n)(n) = Q(8) has weight -16, matching. Under the hypothesis every graded piece in Theorem B is a subquotient of a finite direct sum of Q(8); by (S6) each is a finite direct sum of Q(8), hence so is their direct sum T_Z. []\n\n## 8. Consistency checks, sharpness, and what a disproof must now do\n\n**Check against FND-0191.** FND-0191 exhibits X' = A x P^{12} with A a complex abelian variety of dimension 9, Y' = A x {pt} of dimension 9 and codimension 12, and shows that the image of W_{-16}H^{BM}_{16}(Y';Q) in W_{-16}H^{BM}_{16}(X';Q) is H^2(A)(9), pure polarizable of weight -16 with Hodge types (-7,-9), (-8,-8), (-9,-7) and hence not a finite direct sum of Q(8). Theorem B reproduces this exactly: the chain has the single stratum S_0 = Y' of dimension n_0 = 9, and its graded piece is W_{2*9-16}H^{2}(A;Q)(9) = H^2(A)(9), since A is proper so H^2(A;Q) is already pure of weight 2. So Theorem B is sharp enough to see the adjudicated counterexample, and dimension 9 -- inside the residual range -- is where it sits.\n\n**Check against FND-0169.** FND-0169 locates a non-Tate class of Hodge type (15,1) in Gr^W_{16}H_c^{16}(V;Q) for a 15-dimensional etale atlas V of Hbar^bal. In the dictionary of Theorem B a stratum of dimension n = 15 contributes W_{14}H^{14}(S;Q)(15), whose Hodge types are (a-15, b-15) with a+b = 14; the choice (a,b) = (0,14) gives type (-15,-1), the dual of (15,1). So that recorded hazard also lies strictly inside the residual range 9 <= n <= 16 and is **not** removed by Theorem A. I make no claim that this class is on Y or that its image in T is nonzero; FND-0178 records that such witnesses do not address the target.\n\n**Sharpness of the cutoff 16.** The cutoff cannot be pushed below 16 by the present method: for a stratum S smooth affine of dimension n <= 16 the degree 2n-16 satisfies 2n-16 <= n, so (S4) gives no vanishing, and already for n = 1 the lowest-weight piece W_1H^1(S;Q) of an affine curve is H^1 of its smooth compactification, which is nonzero and non-Tate in general. So Artin vanishing genuinely stops at 17.\n\n**What a disproof must now do.** By Theorem A, a class living only on the dimension->=17 part of Y -- in particular on the 17-dimensional ordered reduced-support Casnati-Ekedahl model itself, which is where the packet's non-Tate hazards for the CE geometry are usually located -- restricts to zero in this accounting and therefore cannot exhibit a non-Tate subquotient of T_Z. Combined with the theorem's own exclusion clause, a disproof must now (i) produce a non-Tate class in W_{2n-16}H^{2n-16}(S;Q)(n) for a stratum S of Y of dimension 9 <= n <= 16, and (ii) prove that its image in T is nonzero. Neither is attempted here, and non-Tate cohomology of a family base, atlas, product model, or standalone Z remains, per the theorem statement, not a disproof.\n\n## 9. The gap, and blocked routes not walked\n\n**GAP-C66-TATE-STRATA-9-16.** For 9 <= n <= 16, the pure Hodge structure W_{2n-16}H^{2n-16}(S_{(n)};Q) of the dimension-n stratum of an admissible chain for Y is not determined by anything proved here. This is the recorded frontier obligation on the mixed Hodge structure of the Casnati-Ekedahl ordering-cover geometry (\"The H_alpha-object given by ordinary or Borel-Moore cohomology of a connected component of the ordering cover, as a mixed Hodge structure; the induction isomorphism does not determine Tate type of that object\"), now localized to at most eight groups. It is **not discharged**. Consequently the assigned theorem is not established by this artifact, and Corollary C is a proved implication whose antecedent is open; per FND-0189 I do not present it as meeting the C66-TATE-SUPPORT contract.\n\n**Blocked routes and recorded constraints, explicitly not walked.**\n\n* *vcd-only-vanishing*: neither vcd(M_{6,6}) = 26 nor vcd(M_{6,5}) = 25 appears anywhere in the argument. Artin vanishing (S4) is applied only to affine coarse spaces of strata of Y, never to M_{6,6}, never to the target degree, and it yields vanishing of an auxiliary cohomology group, not of the target.\n* *undecorated-cgp-top-weight-graph-complex*: never used; Mbar_{6,6}, its boundary, and top-weight graph complexes never appear.\n* *point-count-without-degree-parity-separation*: no point count, no finite computation of any kind is used.\n* *forgetful-map-renaming-local-system-unknown*: the forgetful map M_{6,6} -> M_{6,5} is never used, and T is never renamed as cohomology with local-system coefficients.\n* FND-0052 / FND-0168(5a),(5b): no closed embedding of the balanced reduced-support model into M_{6,6}, no pure-codimension-four closed substack, no Gysin map for the pair (M_{6,6}, Z), and no degree shift by twice a codimension of Z. Every purity sequence used is (S2) for a pair of smooth objects constructed in Lemma 1.\n* Working-context constraint on expected determinantal codimension implying lci/regular immersion: not used; I use exactly the alternative that constraint itself prescribes, a closed immersion between smooth objects with codimension equal to the dimension difference.\n* FND-0053, FND-0085, FND-0054: no Tate conclusion is drawn from rationality of the irreducible representations of S_6, from a finite branch morphism of the Hurwitz stack to an open of a moduli of pointed rational curves, or from declaring the Hurwitz space rational/Tate. No cohomology of H, H^bal, Hbar^bal, or the ordering cover is computed or assumed anywhere.\n* FND-0165: no compact-support or Borel-Moore mixed Hodge formalism on the singular substack Y is used; the whole argument runs in ordinary Q-cohomology of smooth DM stacks. (FND-0186 by contrast has to assume coarse-space agreement for H_c of the relevant stacks; I need only the ordinary-cohomology comparison (S3).)\n* FND-0188: RED-0001 is never assumed; T is never asserted to be Tate, and no step uses Tate-ness of T.\n* FND-0168(3),(4): no support-exhaustion T_Z = T is claimed, no equivalence between Tate type and spanning by algebraic cycle classes is asserted, and the Hodge conjecture is not used.\n* FND-0181/FND-0187: no dimension bound for Y is used and no equality dim Y = 17 or 20 is asserted.\n* Archive constraint \"An open subset of an affine stack is automatically affine\": not used. Affineness of each S_j is *constructed* in Lemma 1 by choosing an affine open of a quasi-projective coarse space, not inferred from affineness of an ambient.\n\n**Not claimed.** Tate type of T_Z or of T; nonvanishing of T_Z; support-exhaustion; any statement about unbalanced Casnati-Ekedahl strata or whether they lie in Y; any assembly of complementary target terms; anything with integral coefficients, over nonreduced bases, or of moduli-theoretic content on coarse spaces.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "claims": [
+    {
+      "id": "CLM-0128-1",
+      "statement": "For any reduced closed substack Y of X = M_{6,6} there is a finite chain Y = Y^{(0)} superset ... superset Y^{(N)} = empty of reduced closed substacks whose successive differences S_j = Y^{(j)} minus Y^{(j+1)} are smooth of pure dimension n_j = dim Y^{(j)}, have affine coarse space, are closed in X minus Y^{(j+1)}, and satisfy n_0 > n_1 > ... > n_{N-1} >= 0. No dimension bound for Y is needed.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0128-2",
+      "statement": "With A_j := ker(T -> W_{26}H^{26}(X minus Y^{(j)};Q)(21)), one has A_0 = T_Z (the ATT-0120/CLM-0120-4 datum), A_N = 0, and A_{j+1} contained in A_j; and for each j the graded piece A_j/A_{j+1} is a subquotient of the pure weight -16 Hodge structure W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j). The proof uses only the purity sequence for the smooth pair (X minus Y^{(j+1)}, S_j), exactness of W_{26}, and the weight bound for smooth stacks; no Gysin map for (M_{6,6},Z), no closed embedding of Z, and no lci or codimension-purity hypothesis is used.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0128-3",
+      "statement": "If n_j >= 17 then H^{2n_j-16}(S_j;Q) = 0, because 2n_j-16 > n_j = dim S_j and S_j has affine coarse space (Artin/Andreotti-Frankel vanishing via the coarse comparison for ordinary Q-cohomology); consequently A_j = A_{j+1}. If n_j <= 7 then 2n_j-16 < 0 and again A_j = A_{j+1}. If n_j = 8 then the graded piece is a subquotient of H^0(S_j;Q)(8) = Q(8)^{\\oplus #pi_0(S_j)}, hence a finite direct sum of Q(8).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0128-4",
+      "statement": "Theorem A: T_Z = ker(T -> W_{26}H^{26}(X minus Y^{(j_0)};Q)(21)) where Y^{(j_0)} is a closed reduced substack of Y of dimension at most 16. Equivalently, the entire dimension->=17 part of the Casnati-Ekedahl classifying-image closure, including the 17-dimensional ordered reduced-support model, contributes nothing to T_Z, and T_Z is the part of T supported in codimension at least 5. This derives the upper cutoff 16 that FND-0191 clause (ii) states without derivation, and it uses neither FND-0181's dim Y <= 20 nor FND-0187's repaired dim Y <= 17.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0128-5",
+      "statement": "Theorem B: T_Z is isomorphic to the direct sum of the graded pieces A_j/A_{j+1}, each a subquotient of W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j); the pieces with n_j <= 7 or n_j >= 17 vanish, the piece with n_j = 8 is a finite direct sum of Q(8), and the remaining pieces are indexed by dimensions in {9,...,16}, at most one per dimension, hence at most eight of them. The splitting uses semisimplicity of pure polarizable weight -16 rational Hodge structures.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0128-6",
+      "statement": "Corollary C: if for one admissible chain and every j with 9 <= n_j <= 16 the group W_{2n_j-16}H^{2n_j-16}(S_j;Q) is a finite direct sum of Q(8-n_j), then T_Z is a finite direct sum of Q(8). This is a proved implication; its antecedent is the open gap GAP-C66-TATE-STRATA-9-16 and is not established here, so the assigned theorem is not discharged by this artifact.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0128-7",
+      "statement": "Consistency: the FND-0191 model X' = A x P^{12}, Y' = A x {pt} with dim A = 9 is reproduced exactly by Theorem B as the single stratum of dimension 9 with graded piece H^2(A)(9), non-Tate; and the FND-0169 Hodge type (15,1) corresponds to a dimension-15 stratum contributing type (-15,-1). Both lie inside the residual range 9 <= n <= 16, so Theorem A removes neither, and no claim is made that either class lies on Y or has nonzero image in T.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": false,
+    "not_reduction_only": false,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0120-2",
+    "CLM-0120-3",
+    "CLM-0120-4",
+    "CLM-0120-5",
+    "CLM-0120-6",
+    "CLM-0120-7"
+  ],
+  "engine": "claude",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Assuming RED-0001 (T is Tate) to conclude that its subobject T_Z is Tate: barred as circular by FND-0188 and not used; T is never assumed Tate at any step."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Presenting a conditional Tate conclusion as discharging the subproblem contract: barred by FND-0189; the artifact states up front that the assigned theorem is not proved, sets resolves_exact_target false, and records the antecedent of Corollary C as an explicit gap."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Gysin map for the pair (M_{6,6}, Z) or a closed pure-codimension-four embedding of the balanced reduced-support model, and the degree shift H^{18}(Z-tilde;Q)(-4) -> H^{26}: barred by FND-0052 and FND-0168(5a),(5b); replaced by purity for pairs of smooth objects constructed inside the argument, which is the route the working-context lci/expected-codimension constraint itself prescribes."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Deducing pure-Tate cohomology of the obstruction locus from rationality of the irreducible representations of S_6, or from a finite branch morphism of the Hurwitz stack to an open of a moduli of pointed rational curves, or from declaring the balanced tetragonal Hurwitz space rational/Tate: barred by FND-0053, FND-0085, FND-0054; no cohomology of H, H^bal, Hbar^bal, or the ordering cover is computed or assumed, and the affine vanishing used here yields vanishing of an auxiliary group, never Tate type."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Concluding that positive-codimension or unnamed lower-dimensional strata contribute only zero or Tate classes because they are smaller: barred by the archive constraints; the vanishings proved here are from the degree inequality 2n-16 > n plus Artin vanishing (n >= 17) and from negativity of 2n-16 (n <= 7), and the dimensions 9 through 16 are left completely undetermined rather than dismissed."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "vcd-only-vanishing at the target degree: not used; vcd(M_{6,6}) = 26 and vcd(M_{6,5}) = 25 never appear, and Artin vanishing is applied only to affine coarse spaces of strata of Y."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Renaming T through the forgetful map M_{6,6} -> M_{6,5} as cohomology with an unknown local system, the undecorated CGP top-weight graph complex, and point counts without degree-parity separation: none is used."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Inferring affineness of an open substack from affineness of an ambient stack (archive constraint): not used; affineness of each stratum is constructed by choosing an affine open of a quasi-projective coarse space."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Identifying the supports group W_{26}H^{26}_Y(M_{6,6};Q)(21) with its image in T (the FND-0168(3a)/(3b) hazard, recorded again in REV-0169): avoided by never naming a supports group; every object here is a kernel of an open restriction."
+    }
+  ],
+  "gap_markers": [
+    "GAP-C66-TATE-STRATA-9-16: For each n with 9 <= n <= 16, the pure weight-(2n-16) Hodge structure W_{2n-16}H^{2n-16}(S_{(n)};Q) of the dimension-n stratum of an admissible chain for Y is not determined by anything proved here. There are at most eight such groups. This is the recorded frontier obligation on the mixed Hodge structure of the Casnati-Ekedahl ordering-cover geometry, now localized; it is NOT discharged, and consequently the assigned theorem (T_Z is a finite direct sum of Q(8)) is NOT established by this artifact.",
+    "GAP-DEPENDENCE-ON-CHAIN: Theorems A and B are proved for an arbitrary admissible chain, and T_Z is independent of the chain since it is defined from the pair (M_{6,6}, Y) alone; but no canonical chain is singled out, so the eight residual groups are chain-dependent and the artifact does not identify a preferred geometric model for the strata of dimensions 9 through 16 of Y.",
+    "GAP-NONVANISHING: Nothing here shows T_Z is nonzero, and the degenerate reading T_Z = 0 (which would satisfy the assigned theorem trivially as the empty direct sum) is neither proved nor excluded. FND-0181 excludes only the geometric degeneration Y = M_{6,6}, not cohomological vanishing."
+  ],
+  "id": "ATT-0128",
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "open-closed-localization-of-mixed-hodge-structures-on-a-smooth-stack",
+    "purity-sequence-for-a-pair-of-smooth-deligne-mumford-stacks",
+    "artin-andreotti-frankel-vanishing-on-affine-strata",
+    "iterated-smooth-affine-stratification-of-a-reduced-closed-substack",
+    "weight-strictness-and-exactness-of-W-m-on-mixed-hodge-structures",
+    "lowest-weight-corner-identification-for-smooth-strata",
+    "semisimplicity-splitting-of-a-finite-filtration-of-pure-polarizable-hodge-structures",
+    "coarse-space-comparison-for-ordinary-rational-cohomology-of-dm-stacks",
+    "poincare-duality-reindexing-of-the-open-borel-moore-target"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Theorem A: an unconditional proof that the named kernel-form CE support term T_Z is supported on a closed substack of dimension at most 16, obtained by peeling smooth affine strata of dimension >= 17 and applying Artin/Andreotti-Frankel vanishing to the degree inequality 2n-16 > n. This derives the upper cutoff 16 that FND-0191 clause (ii) writes down without derivation, strictly sharpens the range 8 <= dim(Y') <= 17 of FND-0186, and uses no dimension bound for Y at all, hence does not depend on FND-0181's dim Y <= 20 or the FND-0187 PGL_2-quotient repair.",
+    "A formulation of the whole support accounting inside ordinary Q-cohomology of smooth Deligne-Mumford stacks, using only purity for pairs of smooth objects, which avoids the Borel-Moore / compact-support mixed Hodge formalism on the singular support Y that FND-0165 withholds and that FND-0186 has to assume as a hypothesis, and which avoids FND-0052 / FND-0168(5a),(5b) by never forming a Gysin map for (M_{6,6}, Z).",
+    "Theorem B: a canonical splitting of T_Z into at most nine pure weight -16 pieces, one per stratum dimension n in {8,...,16}, with the n = 8 piece automatically a finite direct sum of Q(8) (a strengthening of FND-0186's vanishing for dim < 8 to a Tate statement at dim exactly 8 for the CE support), leaving at most eight undetermined groups; and the observation that this decomposition reproduces the FND-0191 counterexample and the FND-0169 Hodge type (15,1) as its dimension-9 and dimension-15 pieces, which is a sharpness check on the framework.",
+    "A precise relocation of the counterexample burden: by Theorem A, any putative non-Tate class living only on the dimension->=17 part of the CE support -- including the 17-dimensional ordered reduced-support model itself -- restricts to zero in the accounting, so a disproof must exhibit a non-Tate class on a stratum of dimension 9 <= n <= 16 of Y and prove that its image in T is nonzero."
+  ],
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_path": "proof/packets/generated/C66-001-v5.md",
+  "packet_sha256": "8ae2b14911e24aed28afefbce2855d6b35a620fc7b0e1b92123d8aa8432e6b15",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0120",
+      "kind": "attempt",
+      "note": "The verified C66-SUPPORT-INTERFACE datum (dual-confirmed by REV-0169 and REV-0170). Used for CLM-0120-2 (Y is an atlas-independent reduced closed substack of M_{6,6}), CLM-0120-3 (U_Y smooth of dimension 21; r_T with weights >= 26 on both sides; the Poincare identification of T), CLM-0120-4 (T_Z = ker(r_T) as a subobject of T with the stated degree, weight and twist; phi the inclusion), CLM-0120-5/6 (coverage and dependence on the pair (M_{6,6},Y) alone), CLM-0120-7 (no Tate, Gysin, embedding, or exhaustion content). Only that Y is a reduced closed substack is used from CLM-0120-2; no dimension, purity, or irreducibility property of Y is imported."
+    },
+    {
+      "id": "REV-0169",
+      "kind": "confirmation_review",
+      "note": "First independent confirmation of ATT-0120; all seven claims confirmed. Its verification of the degree/weight/twist ledger (2*21-16 = 26, 26-42 = -16) and of the identification T_Z = ker(r_T) = image of W_{-16}H^{BM}_{16}(Y;Q) in T is the form in which the datum is used here. Its recorded caveat that W_{26}H^{26}_Y(X;Q)(21) is not literally isomorphic to its image is respected: the present argument never names a supports group, only kernels of open restrictions."
+    },
+    {
+      "id": "REV-0170",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0120; all seven claims plus the target-interface certificate confirmed. Its explicit endorsement that Q-coefficient stack Poincare duality is valid via the rational cohomology isomorphism with the coarse space is the register in which standard input (S3) is used here, and only for ordinary cohomology of smooth strata."
+    },
+    {
+      "id": "FND-0001",
+      "kind": "adjudicated_finding",
+      "note": "Poincare reindexing W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21) at d = 21. Used only on M_{6,6}, to fix the degree, weight and twist conventions of T; never applied to Y or to any stratum."
+    },
+    {
+      "id": "FND-0168",
+      "kind": "adjudicated_finding",
+      "note": "Clause (3) fixes the only standard meaning of a Z-supported contribution (a closed support must be fixed first) and clause (3a) names the image formulation; the present artifact works with exactly that image, in its equivalent kernel-of-open-restriction form. Clauses (5a) and (5b) are respected: no closed stratified embedding of the balanced model, no Gysin map for (M_{6,6},Z), and no degree shift by twice a codimension of Z is used. Clause (2) and clause (4) are not used: no equivalence with spanning by Hodge classes or by algebraic cycle classes is asserted."
+    },
+    {
+      "id": "FND-0185",
+      "kind": "adjudicated_finding",
+      "note": "Records that W_{-16}H^{BM}_{16}(Y;Q) is pure polarizable of weight -16 and that its Tate type is sufficient for the C66-TATE-SUPPORT conclusion. The present artifact does not need that sufficiency statement, and deliberately avoids the Borel-Moore formalism on the singular Y that FND-0185 invokes via the simplicial/etale-atlas construction; the argument runs entirely in ordinary cohomology of smooth stacks."
+    },
+    {
+      "id": "FND-0186",
+      "kind": "adjudicated_finding",
+      "note": "Records the dimension-threshold vanishing K(Y') = 0 for dim(Y') < 8, the monotonicity K(Y') contained in K(Y) for nested supports, and the range 8 <= dim(Y') <= 17 under the FND-0187 repair. Lemma 3(b) reproves the low end in the present register; Theorem A strictly sharpens the high end from 17 to 16 and does so without the FND-0187 repair or any dimension bound for Y. FND-0186's hypothesis that rational compactly supported cohomology of the relevant stacks agrees with that of their coarse spaces is not needed here."
+    },
+    {
+      "id": "FND-0187",
+      "kind": "adjudicated_finding",
+      "note": "Records the PGL_2-quotient factorization repair giving dim Y <= 17, and that it does not prove equality. Cited only to state that Theorem A does not depend on it."
+    },
+    {
+      "id": "FND-0181",
+      "kind": "adjudicated_finding",
+      "note": "Records the proved ceiling dim Y <= 20 and that Y is a proper closed substack, so the kernel-form term is not forced to equal T by emptiness of the complement. Cited only for context; Theorem A uses no dimension bound for Y."
+    },
+    {
+      "id": "FND-0191",
+      "kind": "adjudicated_finding",
+      "note": "Records that purity, Borel-Moore degree 16, weight -16 and closed support in a smooth 21-fold do not suffice for Tate type, with the model X' = A x P^{12}, Y' = A x {pt}, dim A = 9, whose contribution H^2(A)(9) is non-Tate; and lists as one required additional input the Tate type of the lowest-weight groups on residual strata of dimensions 9 through 16. Theorem B reproduces that model exactly as its dimension-9 graded piece, and Theorem A supplies a proof of the upper cutoff 16 that FND-0191 clause (ii) states without derivation."
+    },
+    {
+      "id": "FND-0188",
+      "kind": "adjudicated_finding",
+      "note": "Bars an artifact whose only Tate antecedent is RED-0001 from the weakest-sufficient-proof lane, as circular in the campaign DAG. Respected: RED-0001 is never assumed, and Corollary C's antecedent concerns strata of Y, not T."
+    },
+    {
+      "id": "FND-0189",
+      "kind": "adjudicated_finding",
+      "note": "Records that schema population is not evidence that the target-interface contract is met and that a Tate conclusion resting on an antecedent listed as an open gap fails the contract. Respected by explicit declaration: this artifact does not claim to meet the contract, states its status up front, and records GAP-C66-TATE-STRATA-9-16."
+    },
+    {
+      "id": "FND-0165",
+      "kind": "adjudicated_finding",
+      "note": "Withholds a compact-support mixed Hodge formalism for Deligne-Mumford stacks. Respected by construction: no H_c or Borel-Moore group of a singular stack is used; every group appearing is ordinary Q-cohomology of a smooth separated finite-type DM stack."
+    },
+    {
+      "id": "FND-0052",
+      "kind": "adjudicated_finding",
+      "note": "The balanced reduced-support model is an open piece of the failure locus, not a closed pure-codimension-four subvariety, so Gysin for (M_{6,6},Z) is unavailable. Respected: every purity sequence used is for a pair of smooth objects constructed in Lemma 1, and no fundamental class or codimension-four shift for Z appears."
+    },
+    {
+      "id": "FND-0053",
+      "kind": "adjudicated_finding",
+      "note": "Rationality of the irreducible representations of S_6 does not force Tate local systems on an S_6-cover. Respected: no Tate conclusion is drawn from representation-theoretic rationality, and no cohomology of the ordering cover is computed or assumed."
+    },
+    {
+      "id": "FND-0085",
+      "kind": "adjudicated_finding",
+      "note": "A finite branch morphism from the Hurwitz stack to an open of M_{0,18} does not imply mixed-Tate cohomology. Respected: no property of the Hurwitz stack beyond what enters through the interface datum is used, and affineness of strata is constructed inside Y rather than inherited from a branch morphism."
+    },
+    {
+      "id": "FND-0169",
+      "kind": "adjudicated_finding",
+      "note": "Locates a non-Tate class of Hodge type (15,1) in Gr^W_16 H_c^{16} of a 15-dimensional etale atlas of Hbar^bal. Used only as a consistency check: it corresponds to a dimension-15 stratum in Theorem B, inside the residual range, so Theorem A does not remove it and no claim is made that it lies on Y or has nonzero image in T."
+    },
+    {
+      "id": "FND-0178",
+      "kind": "adjudicated_finding",
+      "note": "Records that the universally quantified form of the earlier C66-TATE-SUPPORT statement is false and that the witness does not address T_16 of a dimension-17 model over a named 15-dimensional atlas. Respected: the present theorem is the assigned named-subquotient statement, not a universally quantified family statement, and no witness of that kind is used."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [],
+  "status": "proposed",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "summary": "This artifact does NOT prove the assigned theorem; it proves an unconditional localization theorem that strictly narrows the residual obligation, and it records the remainder as an explicit gap. Work over C with Q-coefficients on X = M_{6,6} (smooth DM stack, dim 21), with T = W_{-16}H^{BM}_{16}(X;Q) = W_{26}H^{26}(X;Q)(21) and with the dual-confirmed C66-SUPPORT-INTERFACE datum of ATT-0120 (REV-0169, REV-0170): Y the reduced closed classifying-image closure, T_Z = ker(T -> W_{26}H^{26}(X minus Y;Q)(21)), phi the inclusion. Choose an admissible chain Y = Y^{(0)} superset ... superset Y^{(N)} = empty whose successive differences S_j are smooth of pure dimension n_j = dim Y^{(j)} with affine coarse space; then n_0 > n_1 > ... . Purity for the smooth pair (X minus Y^{(j+1)}, S_j) turns the j-th step of the induced filtration A_j = ker(T -> W_{26}H^{26}(X minus Y^{(j)};Q)(21)) into a subquotient of W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j). Two vanishings follow: for n_j >= 17 one has 2n_j-16 > n_j, so Artin vanishing on the affine coarse space kills the term (Theorem A), and for n_j <= 7 the degree 2n_j-16 is negative. Hence T_Z equals the part of T supported on a closed substack of Y of dimension at most 16 -- the entire dimension->=17 part of the CE support, including the 17-dimensional ordered reduced-support model itself, contributes nothing. By semisimplicity of pure polarizable weight -16 Hodge structures, T_Z splits as a direct sum of at most nine pieces, one for each stratum dimension n in {8,...,16}; the n=8 piece is automatically a finite direct sum of Q(8) (it is a subquotient of H^0(S;Q)(8)). This derives, rather than stipulates, the upper cutoff 16 written in FND-0191(ii), and it does so without FND-0181's dim Y <= 20 or FND-0187's PGL_2-quotient repair dim Y <= 17, and without any Borel-Moore/compact-support formalism on the singular Y (FND-0165). The residual obligation -- Tate type of the at most eight groups W_{2n-16}H^{2n-16}(S_{(n)};Q) for 9 <= n <= 16 -- is recorded as GAP-C66-TATE-STRATA-9-16 and is not discharged; RED-0001 is never assumed (FND-0188), and no claim is made that the C66-TATE-SUPPORT contract of FND-0189 is met.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "target_interface_reference": {
+    "atlas_invariance": "Unchanged from ATT-0120/CLM-0120-6: the datum (K_Z, T_Z, phi) depends only on the pair (M_{6,6}, Y), and Y is atlas-independent. The chain of Lemma 1 is an auxiliary choice made inside M_{6,6} after Y is fixed; T_Z is defined before any chain is chosen and is therefore independent of it, while Theorems A and B hold for every admissible chain. No S_6 invariants-versus-coinvariants choice arises, and no property of any atlas of H^bal is used.",
+    "construction": "Iterated smooth affine stratification of the ATT-0120 support Y, with the interface kernel recomputed at each stage against the enlarging open complements M_{6,6} minus Y^{(j)}. All groups used are ordinary Q-cohomology of smooth separated finite-type Deligne-Mumford stacks; the only exact sequences used are the purity sequences of the smooth pairs (M_{6,6} minus Y^{(j+1)}, S_j).",
+    "coverage": "Coverage is inherited unchanged from ATT-0120/CLM-0120-5: every class in T supported on a closed subset of M_{6,6} contained in Y lies in T_Z, so no Z-supported term is omitted. Theorem A adds that the accounting is unchanged if Y is replaced by the smaller closed substack Y^{(j_0)} of dimension at most 16, so coverage is preserved while the support is strictly reduced. Support-exhaustion T_Z = T is not claimed, and the complementary term remains the image of T in W_{26}H^{26}(M_{6,6} minus Y;Q)(21), outside the scope of this theorem.",
+    "degree_weight_twist": "Borel-Moore degree 16 and weight -16 on T and T_Z; equivalently ordinary cohomological degree 26 with Poincare twist (21), using T = W_{26}H^{26}(M_{6,6};Q)(21) with 2*21-16 = 26 and 26-2*21 = -16. A stratum of pure dimension n has codimension c = 21-n and contributes in degree 26-2c = 2n-16, with weight (2n-16)+2c = 26 before the (21)-twist and -16 after it; the Tate target Q(8) corresponds to Q(8-n) on the stratum, of weight 2n-16, and to Q(-13)(21) on the ambient.",
+    "interface_attempt_id": "ATT-0120",
+    "interface_claim_ids": [
+      "CLM-0120-2",
+      "CLM-0120-3",
+      "CLM-0120-4",
+      "CLM-0120-5",
+      "CLM-0120-6",
+      "CLM-0120-7"
+    ],
+    "survival_or_tate_argument": "NOT A DISCHARGE OF THE CONTRACT. The assigned Tate conclusion for this named T_Z is not established here, and per FND-0189 no claim is made that the target-interface contract is met. What is proved unconditionally, about this exact T_Z and through this exact interface, is the following. Choose a finite chain Y = Y^{(0)} superset ... superset Y^{(N)} = empty of reduced closed substacks whose differences S_j are smooth of pure dimension n_j = dim Y^{(j)} with affine coarse space and n_0 > n_1 > ... (Lemma 1). Put A_j := ker(T -> W_{26}H^{26}(M_{6,6} minus Y^{(j)};Q)(21)), so A_0 = T_Z and A_N = 0. Purity for the smooth pair (M_{6,6} minus Y^{(j+1)}, S_j) in degree 26 with codimension c_j = 21-n_j, together with exactness of W_{26}, makes A_j/A_{j+1} a subquotient of W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j) (Lemma 2). For n_j >= 17 one has 2n_j-16 > n_j = dim S_j, so this group vanishes by Artin/Andreotti-Frankel vanishing on the affine coarse space; for n_j <= 7 the degree 2n_j-16 is negative, so it vanishes; for n_j = 8 it is a subquotient of H^0(S_j;Q)(8), hence a finite direct sum of Q(8) (Lemma 3). Therefore (Theorem A) T_Z equals the kernel of restriction to the complement of a closed substack of Y of dimension at most 16 -- the dimension->=17 part of the Casnati-Ekedahl support, including the 17-dimensional ordered reduced-support model, contributes nothing -- and (Theorem B) by semisimplicity of pure polarizable weight -16 Hodge structures T_Z splits as a direct sum of at most nine pieces indexed by stratum dimensions 8,...,16, the piece at 8 being a finite direct sum of Q(8) and at most eight pieces, one per dimension in {9,...,16}, remaining undetermined. Corollary C is the resulting sufficient criterion: Tate type of those at most eight groups implies T_Z is a finite direct sum of Q(8). That antecedent is the open gap GAP-C66-TATE-STRATA-9-16 and is not supplied by any verified artifact, so the assigned theorem is not proved. No dimension bound for Y is used (so FND-0181's dim Y <= 20 and FND-0187's dim Y <= 17 are not relied upon), RED-0001 is never assumed (FND-0188), no Borel-Moore or compact-support formalism on the singular Y is used (FND-0165), and support-exhaustion T_Z = T is neither used nor claimed. On survival: the accounting is consistent with the adjudicated FND-0191 model, which appears as the dimension-9 graded piece H^2(A)(9), and with the FND-0169 Hodge type (15,1), which appears as a dimension-15 piece; both lie inside the residual range, so neither is removed. Consequently a disproof through this interface must exhibit a non-Tate class in the graded piece of a stratum of Y of dimension 9 <= n <= 16 and prove that its image in T is nonzero; a non-Tate class on a family base, an atlas, a product model, a standalone Z, or on the dimension->=17 part of the support does not suffice, the last case now for the proved reason that it restricts to zero in this accounting.",
+    "target_map_use": "phi is used only as the inclusion of the kernel ker(r_T) into T, exactly as constructed in ATT-0120/CLM-0120-3 and CLM-0120-4 from W_{26} of the open restriction map, twisted by (21). No new map to T is assumed or constructed: the entire argument replaces the single open U_Y by the enlarging chain of opens M_{6,6} minus Y^{(j)} and compares the resulting kernels A_j, all of which are subobjects of T formed by the same kernel-of-restriction construction. No Gysin map, no proper pushforward from a model of Y, no fundamental class, and no codimension shift is used, so FND-0052 and FND-0168(5a),(5b) are not engaged; and no supports group is named, so the FND-0168(3a)/(3b) hazard is not touched.",
+    "target_subquotient": "T_Z = K_Z = ker(r_T), the subobject of T := W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21) defined in ATT-0120/CLM-0120-4 as the kernel of r_T : T -> W_{26}H^{26}(M_{6,6} minus Y;Q)(21), where Y is the atlas-independent reduced closed substack of ATT-0120/CLM-0120-2. It is pure polarizable of weight -16, with Borel-Moore degree 16 and Poincare twist (21). This artifact works with exactly that named subquotient and introduces no other; in particular it does not replace it by W_{-16}H^{BM}_{16}(Y;Q), by a supports group, or by any cohomology of Z, of an atlas, or of a product model."
+  },
+  "task_id": "TASK-C66-M-005",
+  "theorem_scope": {
+    "coefficients": "Q",
+    "g": 6,
+    "ground_field": "C",
+    "n": 6,
+    "not_covered": [
+      "the assigned Tate conclusion itself: Tate type of T_Z is NOT established here",
+      "Tate type, purity, or any RED-0001 conclusion for T",
+      "support-exhaustion T_Z = T, and nonvanishing of T_Z",
+      "any Gysin map, closed embedding, regular immersion, lci structure, or codimension-four purity for Z or Y inside M_{6,6}",
+      "any computation of the mixed Hodge structure of H^bal, of Hbar^bal, of the Hurwitz stack, or of the ordering cover",
+      "any Borel-Moore or compact-support mixed Hodge formalism on the singular substack Y (deliberately avoided; FND-0165)",
+      "equality dim Y = 17 or dim Y = 20; no dimension bound for Y is used",
+      "integral coefficients, nonreduced bases, or moduli-theoretic statements on coarse spaces",
+      "assembly of the complementary target terms (C66-TATE-ASSEMBLY)"
+    ],
+    "objects": [
+      "X = M_{6,6}, smooth separated Deligne-Mumford stack of pure dimension 21",
+      "T = W_{-16}H^{BM}_{16}(X;Q) = W_{26}H^{26}(X;Q)(21), pure polarizable of weight -16",
+      "Y = the reduced closed substack of X supplied by ATT-0120/CLM-0120-2 (reduced Zariski closure of the CE classifying image)",
+      "U_Y = X minus Y, and more generally V_j = X minus Y^{(j)} for an admissible chain",
+      "T_Z = K_Z = ker(T -> W_{26}H^{26}(U_Y;Q)(21)) and phi the inclusion (ATT-0120/CLM-0120-4)",
+      "admissible chain Y = Y^{(0)} superset ... superset Y^{(N)} = empty with smooth pure-dimensional strata S_j of affine coarse space"
+    ]
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms.",
+  "validation_repair": {
+    "classification": "provider_session_metadata_repair",
+    "errors": [
+      "target_interface_reference cites undeclared interface claim(s): CLM-0120-2, CLM-0120-3, CLM-0120-4, CLM-0120-5, CLM-0120-6, CLM-0120-7"
+    ],
+    "parent_attempt_id": "ATT-0127",
+    "parent_trace_id": "TRACE-0091",
+    "repaired": true
+  }
+}

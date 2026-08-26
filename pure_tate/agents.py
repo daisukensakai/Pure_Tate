@@ -1225,6 +1225,89 @@ def _normalize_source_references(artifact: Dict[str, Any]) -> None:
         artifact["ingest_normalizations"] = normalizations
 
 
+def _validate_campaign_provenance(artifact: Dict[str, Any]) -> None:
+    """Fail closed on unknown or indirect campaign provenance references."""
+    from .artifacts import load_artifacts
+    from .findings import load_findings
+    from .proofs import attempt_dependency_attempt_ids
+    from .store import load_repository
+
+    _config, _target, _sources, claims, _edges = load_repository()
+    known_claim_ids = set(claims)
+    known_claim_ids.update(
+        str(item.get("id"))
+        for item in load_findings()
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    )
+    unknown_source_claims = [
+        claim_id
+        for claim_id in artifact.get("source_claim_ids", [])
+        if claim_id not in known_claim_ids
+    ]
+    if unknown_source_claims:
+        raise ValueError(
+            "campaign mathematics cites unknown source claim(s): %s"
+            % ", ".join(unknown_source_claims)
+        )
+
+    attempts_by_id = {
+        str(item.get("id")): item
+        for item in load_artifacts("attempts")
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+    dependency_attempt_ids = attempt_dependency_attempt_ids(artifact)
+    claims_by_attempt = {
+        attempt_id: {
+            str(claim.get("id"))
+            for claim in attempts_by_id.get(attempt_id, {}).get("claims", [])
+            if isinstance(claim, dict) and isinstance(claim.get("id"), str)
+        }
+        for attempt_id in dependency_attempt_ids
+    }
+    declared_dependency_claims = (
+        set().union(*claims_by_attempt.values()) if claims_by_attempt else set()
+    )
+    indirect_claims = [
+        claim_id
+        for claim_id in artifact.get("dependency_claim_ids", [])
+        if claim_id not in declared_dependency_claims
+    ]
+    if indirect_claims:
+        raise ValueError(
+            "campaign mathematics cites dependency claim(s) outside directly declared attempt dependencies: %s"
+            % ", ".join(indirect_claims)
+        )
+
+    reference = artifact.get("target_interface_reference")
+    if reference is None:
+        return
+    if not isinstance(reference, dict):
+        raise ValueError("target_interface_reference must be an object when supplied")
+    interface_attempt_id = reference.get("interface_attempt_id")
+    if interface_attempt_id not in dependency_attempt_ids:
+        raise ValueError(
+            "target_interface_reference.interface_attempt_id must name a directly declared ATT dependency"
+        )
+    interface_claim_ids = reference.get("interface_claim_ids")
+    if not isinstance(interface_claim_ids, list) or not interface_claim_ids or not all(
+        isinstance(claim_id, str) and claim_id for claim_id in interface_claim_ids
+    ):
+        raise ValueError(
+            "target_interface_reference.interface_claim_ids must be a nonempty list of claim identifiers"
+        )
+    undeclared_interface_claims = [
+        claim_id
+        for claim_id in interface_claim_ids
+        if claim_id not in claims_by_attempt.get(interface_attempt_id, set())
+        or claim_id not in artifact.get("dependency_claim_ids", [])
+    ]
+    if undeclared_interface_claims:
+        raise ValueError(
+            "target_interface_reference cites undeclared interface claim(s): %s"
+            % ", ".join(undeclared_interface_claims)
+        )
+
+
 def _normalize_inferred_pairs(raw: Any) -> List[List[int]]:
     if not isinstance(raw, list):
         raise ValueError("inferred_pairs must be a list")
@@ -1611,6 +1694,8 @@ def _validate_artifact(
         if not isinstance(artifact.get("gap_markers"), list):
             raise ValueError("mathematics gap_markers must be a list")
         _normalize_source_references(artifact)
+        if is_campaign:
+            _validate_campaign_provenance(artifact)
         # The harness, not the model, decides whether this attempt is complete.
         # Leaving `status` to the prover let a gap-free, fully proved lemma
         # label itself "proposed" and so lock itself out of its second review
@@ -1897,6 +1982,31 @@ class _ControllerProcess:
         self.stderr = stderr
 
 
+FORCED_CODEX_CONTROLLER_UNBOUNDED = 1_000_000
+
+
+def _is_forced_codex_controller_task(task: Dict[str, Any]) -> bool:
+    """Whether a Codex task is entitled to the PI forced-proof worker policy."""
+    return bool(
+        task.get("forced_resolution")
+        or task.get("paired_turn_kind") == "forced-proof"
+    )
+
+
+def _forced_codex_controller_settings(settings: Dict[str, Any]) -> Dict[str, Any]:
+    """Remove per-worker-round caps for a forced proof, not its task timeout."""
+    forced = dict(settings)
+    forced.update(
+        {
+            "max_requests": FORCED_CODEX_CONTROLLER_UNBOUNDED,
+            "max_attempts": FORCED_CODEX_CONTROLLER_UNBOUNDED,
+            "min_parallel_workers": 2,
+            "unbounded_until_task_timeout": True,
+        }
+    )
+    return forced
+
+
 def _codex_controller_settings(config_root: Dict[str, Any]) -> Dict[str, Any]:
     raw = config_root.get("codex_controller_workers")
     raw = raw if isinstance(raw, dict) else {}
@@ -2168,6 +2278,7 @@ def _run_codex_controller(
     retry_limit = int(settings["retry_limit"])
     max_attempts = int(settings["max_attempts"])
     max_result_chars = int(settings["max_result_chars"])
+    min_parallel_workers = int(settings.get("min_parallel_workers", 0))
     max_total, max_worker_turns = _codex_controller_caps(workers)
     base_prompt = assemble_prompt(
         task, context_files, expected_artifact_id, "codex", workers_enabled=False
@@ -2193,6 +2304,7 @@ def _run_codex_controller(
     started = time.monotonic()
     active_worker_id: Optional[str] = None
     worker_ids: List[str] = []
+    continuation_cursor = 0
 
     def invoke(prompt: str, output_path: Path, schema: Optional[Path] = None) -> str:
         remaining = max(1, int(task_timeout - (time.monotonic() - started)))
@@ -2263,6 +2375,14 @@ def _run_codex_controller(
                     break
                 raise
             if decision["action"] == "finalize":
+                if len(worker_ids) < min_parallel_workers:
+                    workers.dispatch_log.log(
+                        "controller_finalize_deferred_for_parallel_workers",
+                        round=round_index + 1,
+                        required_workers=min_parallel_workers,
+                        dispatched_workers=len(worker_ids),
+                    )
+                    continue
                 workers.dispatch_log.log("controller_decision_finalized", round=round_index + 1)
                 break
             seen_ids.add(decision["request_id"])
@@ -2286,6 +2406,7 @@ def _run_codex_controller(
                 "worker_ids": [],
                 "error": "worker was not dispatched",
             }
+            continuation_worker_id: Optional[str] = None
             for attempt in range(retry_limit + 1):
                 try:
                     launch_new = len(worker_ids) < max_total
@@ -2297,8 +2418,12 @@ def _run_codex_controller(
                             wait=wait,
                         )
                     else:
+                        if continuation_worker_id is None:
+                            continuation_worker_id = worker_ids[
+                                continuation_cursor % len(worker_ids)
+                            ]
                         result = pool.continue_worker(
-                            active_worker_id or worker_ids[-1],
+                            continuation_worker_id,
                             decision["prompt"],
                             decision["description"],
                             wait=True,
@@ -2367,6 +2492,8 @@ def _run_codex_controller(
                         status="completed",
                         turn=result.get("turn_index"),
                     )
+                    if not launch_new:
+                        continuation_cursor += 1
                     break
                 entry["error"] = str(result.get("error") or "worker failed")
                 workers.dispatch_log.log(
@@ -2568,6 +2695,19 @@ def run_task(
         max_workers = max_grok_workers_from_config(engines_root)
         max_worker_turns = max_worker_turns_from_config(engines_root)
         controller_settings = _codex_controller_settings(engines_root)
+        forced_codex_controller = bool(
+            engine_id == "codex"
+            and family == "openai"
+            and _is_forced_codex_controller_task(task)
+        )
+        if forced_codex_controller:
+            # Forced proof turns always begin with two independent Cursor-Grok
+            # workers and may continue them until the enclosing task timeout.
+            max_workers = 2
+            max_worker_turns = FORCED_CODEX_CONTROLLER_UNBOUNDED
+            controller_settings = _forced_codex_controller_settings(
+                controller_settings
+            )
         codex_controller = bool(
             engine_id == "codex"
             and family == "openai"

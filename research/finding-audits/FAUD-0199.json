@@ -1,0 +1,61 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients. Let X=M_{6,6}, let Y be a closed substack of X, set A=W_{-16}H^{BM}_{16}(Y;Q) and T=W_{-16}H^{BM}_{16}(X;Q), and define T_Z=ker(T->W_{26}H^{26}(X\\Y;Q)(21)). Assume the localization/Poincare-Verdier interface identifies T_Z with the image of A in T, giving a surjective morphism of Q-Hodge structures q:A->T_Z, and assume A and T_Z are pure polarizable of weight -16. In the semisimple category of polarizable pure Q-Hodge structures of weight -16, write canonically A=A_Tate direct-sum A_nonTate and T_Z=(T_Z)_Tate direct-sum (T_Z)_nonTate, where the Tate parts are the Q(8)-isotypic components and the non-Tate parts are the sums of all other simple isotypic components. Then q(A_nonTate)=(T_Z)_nonTate. Consequently, T_Z is isomorphic to Q(8)^s for some s>=0 if and only if A_nonTate is contained in ker(q). Equivalently, a proof that T_Z is Tate need only prove that q kills every non-Q(8) simple summand of A, while a disproof through this interface must exhibit such a summand with nonzero image in T_Z. This criterion is equivalent to the target Tate assertion and does not itself prove it; non-Tate cohomology on A, an atlas, a family base, or a standalone model is inconclusive without verified nonzero image in T_Z.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory inspection of ATT-0123 and REV-0175 confirms that the contested passage is REV-0175's proposed biconditional, not ATT-0123's already acknowledged gap CLM-0123-3. ATT-0123 proves only that a Tate source A has Tate quotient T_Z; it neither proves A Tate nor computes T_Z. The candidate's categorical core is correct after correction. Deligne, Theorie de Hodge II, Lemma 4.2.3, states semisimplicity and proves that a polarized homogeneous Hodge structure splits off any subobject by its orthogonal complement; specialized to a point, every epimorphism of polarizable pure Q-Hodge structures splits. The source record's SHA-256 is over the 20,222 UTF-8 bytes of the live fetched textual extraction of the public PDF, not a purported digest of the server's raw PDF binary. Cross-checking FND-0180, FND-0185, and FND-0033 supplies the geometric quotient, purity, and polarizability hypotheses. Several corrections are required: q should be attributed to FND-0180 and FND-0185, with FND-0168(3) providing localization, rather than to the interpretive clause FND-0168(3a); polarizability of A comes from FND-0185, not the narrower geometric scope of FND-0033; a splitting of q exists but is noncanonical and is unnecessary for the biconditional; only the decomposition into simple isotypic components is canonical. Because morphisms between nonisomorphic simple objects in a semisimple category vanish, q carries the Q(8)-isotypic and complementary parts to the corresponding parts of T_Z, and surjectivity gives q(A_nonTate)=(T_Z)_nonTate. Thus the biconditional is valid. It does not contradict FND-0168, FND-0185, or FND-0188, and the atlas, family-base, and product-model examples do not compute q(A_nonTate). However, the candidate's proof-lane wording overclaims: A_nonTate contained in ker(q) is equivalent to the desired conclusion that T_Z is Tate, not an independently checkable sufficient hypothesis that discharges it. The result is a categorical sharpening and exact reformulation of FND-0185, not a separate obstruction or new geometric input, so it should be merged into FND-0185 rather than promoted independently.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0190",
+  "id": "FAUD-0199",
+  "independent": true,
+  "merge_target_id": "FND-0185",
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "does_not_assert": [
+      "that A or T_Z is Tate",
+      "that T_Z=T",
+      "a regular immersion, lci structure, purity-of-codimension statement, or Gysin map for Y",
+      "that cohomology of an atlas, family base, or standalone product model maps nontrivially to T_Z",
+      "a discharge of CLM-0123-3 or C66-TATE-SUPPORT"
+    ],
+    "ground_field": "C",
+    "hypotheses": [
+      "The localization and Poincare-Verdier interface of FND-0180 and FND-0185 identifies T_Z with the image of A in T, so q is a surjective morphism of Q-Hodge structures.",
+      "A is a finite-dimensional pure polarizable Q-Hodge structure of weight -16, as supplied by FND-0185.",
+      "T_Z is a pure polarizable Q-Hodge structure of weight -16, as supplied by FND-0180.",
+      "Polarizable pure Q-Hodge structures of fixed weight form a semisimple abelian category."
+    ],
+    "mathematical_scope": "The Hodge-theoretic criterion applies to every closed substack Y of X for which the stated kernel/image interface is available. Its campaign-lane interpretation applies specifically to the ATT-0120/FND-0180 reduced classifying-image closure.",
+    "objects": [
+      "X=M_{6,6}",
+      "a closed substack Y of X",
+      "A=W_{-16}H^{BM}_{16}(Y;Q)",
+      "T=W_{-16}H^{BM}_{16}(X;Q)",
+      "T_Z=ker(T->W_{26}H^{26}(X\\Y;Q)(21))",
+      "the localization/Poincare-Verdier quotient q:A->T_Z"
+    ]
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "748edefb44fded8af67869abfed87062d66977d25b5d12f7d014f1810a063c3f",
+      "doi": "10.1007/BF02684692",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "b96806bb9e2a08739de4b8ce1ec93be1f890ab1a3e8e30eb1762b34efb16ad9c",
+      "retrieved_at": "2026-08-24T11:35:28Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1971__40__5_0.pdf"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0190",
+  "verdict": "merge",
+  "verified_source_count": 1
+}

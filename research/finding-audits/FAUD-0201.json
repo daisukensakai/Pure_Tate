@@ -1,0 +1,70 @@
+{
+  "adjudicated_statement": "Let d >= 2, let B=M_{0,4}=P^1 minus {0,1,infinity}, let bar(C) be the smooth projective normalization of y^3=x(x-1), and put C=bar(C) minus the points over {0,1,infinity}. Then C -> B is a degree-three finite-\u00e9tale morphism, H_c^0(C;Q)=0, H_c^2(C;Q)=Q(-1), and Gr^W_1 H_c^1(C;Q)=H^1(bar(C);Q) has a nonzero (1,0) part. Identify M_{0,d+3} with the complement of the pairwise diagonals in B^d, and set X=C^d times over B^d with M_{0,d+3}. If W is a smooth connected complex algebraic d-fold and W -> M_{0,d+3} is either finite \u00e9tale or a dense open immersion, then some connected component W' of X times over M_{0,d+3} with W is a connected finite-\u00e9tale cover of W satisfying F^d Gr^W_{d+1} H_c^{d+1}(W';C) != 0. Explicitly, compact-support K\u00fcnneth gives a type-(d,1) class from one H_c^2(C)=Q(-1) factor and d-1 factors from H^{1,0}(bar(C)); the removed diagonal locus, and also the complement of W in the dense-open case, has dimension at most d-1, so its F^d compact-support cohomology vanishes, and localization together with strictness of the weight and Hodge filtrations preserves the class. In the finite-\u00e9tale case, pullback is injective over Q because trace composed with pullback is multiplication by the degree. Since d >= 2, the resulting weight-(d+1) type-(d,1) class is non-Tate. Consequently, Tate-ness of Gr^W_{d+1} H_c^{d+1} for a scheme atlas is not preserved under arbitrary finite-\u00e9tale refinement. This statement does not cover arbitrary dominant morphisms, stack compact-support cohomology without a chosen scheme atlas, Gr^W_{16} H_c^{16}(Z;Q), or RED-0001.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "The mandatory originating artifacts were inspected before the packet and backlog. ATT-0118 proves the d=15 instance: for the degree-three Kummer cover associated with y^3=x(x-1), compact-support K\u00fcnneth produces a type-(15,1) class in Gr^W_16 H_c^16(C^15), localization across the inverse images of the diagonals preserves it, and finite-\u00e9tale trace transports it to the relevant Hurwitz chart. REV-0166 confirms those calculations but separates this geometric lemma from the stronger attempted disproof: failure of the atlas-level (H-S) conjunct does not imply non-Tateness for Z or refute RED-0001. There is no contradiction with any claim listed in TASK.json, whose contradicts_claim_ids is empty. The original FND-0174 wording is nevertheless overbroad: an arbitrary dominant morphism supplies neither the finite-\u00e9tale trace argument nor the localization argument available for a dense open immersion. Its phrase identifying M_{0,d+3} 'equivalently' with the diagonal complement must mean the standard identification of M_{0,d+3} with the ordered-configuration open inside (M_{0,4})^d, not an equivalence of morphism hypotheses. Its methodological conclusion must be restricted to Tate-ness of the specified compact-support corner under finite-\u00e9tale refinement of scheme atlases. The literature check also corrects two citations: Deligne's Hodge III, Theorem 8.2.4(ii), states its bound for ordinary cohomology, and Proposition 8.2.10 states ordinary-cohomology K\u00fcnneth. The compact-support versions used here follow through compactification or duality and the mixed-Hodge-module six operations; Saito's six-functor formalism makes finite-map pullback and trace morphisms of mixed Hodge structures, while the identity Tr composed with pullback equals the degree is the compatible classical covering-space trace calculation rather than a separately numbered assertion in the fetched paper. After these corrections, the lemma coincides with the already corroborated FND-0170, including its finite-\u00e9tale and dense-open cases and its exclusions. FND-0174 should therefore be merged into FND-0170 rather than promoted separately.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0174",
+  "id": "FAUD-0201",
+  "independent": true,
+  "merge_target_id": "FND-0170",
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "allowed_morphisms": [
+      "finite \u00e9tale morphisms W -> M_{0,d+3}",
+      "dense open immersions W -> M_{0,d+3}"
+    ],
+    "base_field": "C",
+    "coefficients": "Q, extended to C for the Hodge filtration",
+    "cohomological_corner": "Gr^W_{d+1} H_c^{d+1}(-;Q)",
+    "conclusion": "A connected finite-\u00e9tale cover W' of W has a nonzero Hodge class of type (d,1), hence F^d Gr^W_{d+1} H_c^{d+1}(W';C) is nonzero and this corner is not Tate.",
+    "dimension": "d >= 2",
+    "exclusions": [
+      "merely dominant morphisms that are neither finite \u00e9tale nor dense open immersions",
+      "compactly supported cohomology of a stack without choosing a scheme atlas",
+      "any inference of non-Tateness for Gr^W_{16} H_c^{16}(Z;Q)",
+      "any conclusion about RED-0001"
+    ],
+    "objects": "Smooth connected complex algebraic d-folds W"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "748edefb44fded8af67869abfed87062d66977d25b5d12f7d014f1810a063c3f",
+      "doi": "10.1007/BF02684692",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check-strictness-and-mixed-hodge-structures",
+      "retrieved_at": "2026-08-24T12:17:01Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1971__40__5_0.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d78d4f46742916cd669279e7db365e4db6a43f38d2dcdec6862c6d27d07216b3",
+      "doi": "10.1007/BF02685881",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check-localization-kunneth-and-hodge-bounds",
+      "retrieved_at": "2026-08-24T12:17:07Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1974__44__5_0.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "19166cbe85f0615ebd1fc18e7d387eb84cf50d4c3bca09ea6e835dd3516e9a00",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check-compact-support-six-functors-and-finite-map-trace",
+      "retrieved_at": "2026-08-24T12:17:16Z",
+      "source_type": "journal",
+      "url": "https://www.jstage.jst.go.jp/article/kyotoms1969/26/2/26_2_221/_pdf"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0174",
+  "verdict": "merge",
+  "verified_source_count": 3
+}

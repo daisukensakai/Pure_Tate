@@ -1,0 +1,94 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-25T05:36:17.573557+00:00",
+  "engine_pools": {
+    "prover": [
+      "claude"
+    ],
+    "research": [
+      "grok"
+    ],
+    "review": [
+      "codex",
+      "grok"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 1849581,
+      "completed_at": "2026-08-25T05:36:16.710453+00:00",
+      "engine": "claude",
+      "engine_pid": 1294,
+      "engine_process_group": 1294,
+      "error": "target_interface_reference cites undeclared interface claim(s): CLM-0120-2, CLM-0120-3, CLM-0120-4, CLM-0120-5, CLM-0120-6, CLM-0120-7",
+      "last_activity_at": "2026-08-25T05:36:15.776409+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0127.json",
+      "phase": "mathematics",
+      "processes": [
+        {
+          "engine_pid": 1294,
+          "engine_process_group": 1294,
+          "started_at": "2026-08-25T05:10:09.921512+00:00",
+          "supervisor_pid": 1293,
+          "supervisor_process_group": 1293
+        }
+      ],
+      "started_at": "2026-08-25T05:10:08.926505+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 1293,
+      "task_id": "TASK-C66-M-005",
+      "trace_id": "TRACE-0091",
+      "trace_path": "research/paired-traces/TRACE-0091.json",
+      "working_context": {
+        "archive": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-ARCHIVE-C66-TATE-SUPPORT-44a2695a28acf0b4.md",
+          "sha256": "44a2695a28acf0b49d5e95964bf53011f8a04f6d4935b401ca6c2515569aea2a"
+        },
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-C66-TATE-SUPPORT-c618a81f1ec00252.md",
+          "sha256": "c618a81f1ec00252c116f9f0d9da18270f00f618ca436d69567ee2c3c8fcfabf"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-C66-TATE-SUPPORT-5fefcaa9f71a2db6.md",
+          "sha256": "5fefcaa9f71a2db6a42a4183f1628c2909c5a93251674505fbf1d1c3eebe26a2"
+        },
+        "subproblem_id": "C66-TATE-SUPPORT"
+      }
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 1283,
+  "parent_process_group": 1283,
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260825T051008919167Z-1283",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-25T05:10:08.919167+00:00",
+  "status": "stopped",
+  "stop_reason": "engine_failure"
+}

@@ -17,7 +17,7 @@ from .targets import CONTEXT_REVISION, open_input_target, target_formula
 
 
 DEFAULT_CAMPAIGN = "C66-001"
-CAMPAIGN_REVISION = 5
+CAMPAIGN_REVISION = 6
 CAMPAIGN_DIR = DATA / "campaigns"
 CAMPAIGN_ARTIFACT_DIR = ROOT / "proof" / "campaign-attempts"
 NOVELTY_DIR = ROOT / "research" / "novelty-audits"
@@ -666,14 +666,9 @@ def case_verified(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
         ]
         engines = {item.get("reviewer_engine") for item in attached}
         passes = {item.get("review_pass") for item in attached}
-        dependencies = {
-            (
-                item.get("id")
-                if isinstance(item, dict)
-                else str(item)
-            )
-            for item in attempt.get("proof_dependencies", [])
-        }
+        from .proofs import proof_dependency_ids
+
+        dependencies = set(proof_dependency_ids(attempt.get("proof_dependencies")))
         dependency_checks_ok = all(
             dependencies.issubset(
                 {

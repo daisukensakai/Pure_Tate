@@ -549,7 +549,7 @@ class FocusedCampaignTests(unittest.TestCase):
     def test_campaign_target_and_four_lanes_are_exact(self):
         campaign = load_campaign("C66-001")
         self.assertEqual(campaign["context_revision"], 2)
-        self.assertEqual(campaign["campaign_revision"], 5)
+        self.assertEqual(campaign["campaign_revision"], 6)
         # Forced exact-theorem work is Opus/GPT-only; ordinary rotation still
         # includes Grok and Qwen for cell mathematics.
         self.assertEqual(
@@ -582,7 +582,7 @@ class FocusedCampaignTests(unittest.TestCase):
         for task in tasks:
             self.assertEqual(task["target"]["ordinary_cohomology_degree"], 26)
             self.assertEqual(task["target"]["chow_codimension"], 13)
-            self.assertEqual(task["packet_id"], "C66-001-v5")
+            self.assertEqual(task["packet_id"], "C66-001-v6")
 
     def test_campaign_packet_quarantines_candidates(self):
         packet = campaign_packet_record("C66-001")["_text"]
@@ -614,7 +614,22 @@ class FocusedCampaignTests(unittest.TestCase):
         )
 
     def test_campaign_dag_blocks_unverified_dependencies(self):
-        tasks = campaign_mathematics_tasks("C66-001")
+        from pure_tate.campaigns import load_campaign_attempts
+
+        original_load_attempts = load_campaign_attempts
+
+        def pre_interface_attempts(*args, **kwargs):
+            return [
+                attempt
+                for attempt in original_load_attempts(*args, **kwargs)
+                if attempt.get("subproblem_id") != "C66-SUPPORT-INTERFACE"
+            ]
+
+        with mock.patch(
+            "pure_tate.campaigns.load_campaign_attempts",
+            side_effect=pre_interface_attempts,
+        ):
+            tasks = campaign_mathematics_tasks("C66-001")
         by_subproblem = {task["subproblem_id"]: task for task in tasks}
         self.assertEqual(by_subproblem["C66-GEO-Z"]["status"], "verified")
         # Hash-pinned geometry remains verified across the interface-only
@@ -662,9 +677,28 @@ class FocusedCampaignTests(unittest.TestCase):
         self.assertEqual(by_subproblem["C66-TATE-SUPPORT"]["status"], "blocked")
         self.assertEqual(
             by_subproblem["C66-TATE-SUPPORT"]["blocked_dependencies"],
-            ["C66-SUPPORT-INTERFACE"],
+            ["C66-SUPPORT-INTERFACE", "C66-SUPPORT-FILTRATION"],
         )
         self.assertIsNone(by_subproblem["C66-TATE-SUPPORT"]["verified_attempt_id"])
+        # The filtration cell is appended last, so its ordinal task id is
+        # TASK-C66-M-011 and the ids of every prior cell are unchanged.  It
+        # blocks on the interface alone, and its contract deliberately omits
+        # survival_or_tate_argument: that field was satisfiable without
+        # concluding anything, which is how it failed every recent review.
+        self.assertEqual(
+            by_subproblem["C66-SUPPORT-FILTRATION"]["blocked_dependencies"],
+            ["C66-SUPPORT-INTERFACE"],
+        )
+        filtration_contract = by_subproblem["C66-SUPPORT-FILTRATION"][
+            "artifact_contract"
+        ]
+        self.assertEqual(
+            filtration_contract["object_field"], "target_interface_reference"
+        )
+        self.assertNotIn(
+            "survival_or_tate_argument",
+            filtration_contract["required_nonempty_strings"],
+        )
         self.assertIn("canonical mixed-Hodge subquotient", by_subproblem["C66-TATE-SUPPORT"]["exact_theorem"])
         self.assertEqual(
             by_subproblem["C66-SUPPORT-INTERFACE"]["artifact_contract"]["object_field"],
@@ -705,7 +739,11 @@ class FocusedCampaignTests(unittest.TestCase):
         from pure_tate.campaign_driver import _load_bearing_experiments
 
         self.assertEqual(_load_bearing_experiments("C66-001"), [])
-        report = campaign_status("C66-001")
+        with mock.patch(
+            "pure_tate.campaigns.load_campaign_attempts",
+            side_effect=pre_interface_attempts,
+        ):
+            report = campaign_status("C66-001")
         self.assertIn(
             "C66-TATE-SUPPORT requires C66-SUPPORT-INTERFACE",
             report["unresolved_proof_dependencies"],
@@ -1053,7 +1091,7 @@ class FocusedCampaignTests(unittest.TestCase):
             "id": "ATT-9999",
             "task_id": task["id"],
             "campaign_id": "C66-001",
-            "campaign_revision": 5,
+            "campaign_revision": 6,
             "subproblem_id": task["subproblem_id"],
             "lane": task["lane"],
             "result_type": "lemma",
@@ -1372,7 +1410,7 @@ class FocusedCampaignTests(unittest.TestCase):
             ["cursor-grok", "qwen"],
         )
         coverage = report["campaign_progress"]["subproblem_engine_coverage"]
-        self.assertEqual(len(coverage), 10)
+        self.assertEqual(len(coverage), 11)
         # Fresh campaigns start empty; after live paired attempts some GEO lanes
         # may already list engines. Novelty still fails closed without verification.
         self.assertFalse(report["case_verification"]["case_verified"])

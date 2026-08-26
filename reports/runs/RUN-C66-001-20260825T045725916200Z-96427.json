@@ -1,0 +1,135 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-25T05:09:35.092898+00:00",
+  "engine_pools": {
+    "prover": [
+      "codex"
+    ],
+    "research": [
+      "cursor-grok"
+    ],
+    "review": [
+      "qwen",
+      "grok"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 1487886,
+      "artifact_sha256": "860494840a00d5adecef4bf564e94328417f4b4bd047d6839213464353e2bf20",
+      "completed_at": "2026-08-25T05:09:34.504855+00:00",
+      "engine": "cursor-grok",
+      "engine_pid": 96430,
+      "engine_process_group": 96430,
+      "last_activity_at": "2026-08-25T05:09:33.437019+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": false,
+          "sent": false
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0204.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 96430,
+          "engine_process_group": 96430,
+          "started_at": "2026-08-25T04:57:26.756304+00:00",
+          "supervisor_pid": 96429,
+          "supervisor_process_group": 96429
+        }
+      ],
+      "started_at": "2026-08-25T04:57:26.721891+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 96429,
+      "task_id": "TASK-F-FND-0191"
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 96427,
+  "parent_process_group": 96427,
+  "pre_run_recoveries": [
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-25T04:57:25.816441+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "trace packet is stale; recovery is not safe",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0062",
+      "trace_path": "research/paired-traces/TRACE-0062.json",
+      "turn_kind": "mathematics",
+      "validation_error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement"
+    },
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-25T04:57:25.833833+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "trace packet is stale; recovery is not safe",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0068",
+      "trace_path": "research/paired-traces/TRACE-0068.json",
+      "turn_kind": "mathematics",
+      "validation_error": "claude resume failed: exit=1 bytes=390541"
+    },
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-25T04:57:25.847230+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "trace packet is stale; recovery is not safe",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0069",
+      "trace_path": "research/paired-traces/TRACE-0069.json",
+      "turn_kind": "mathematics",
+      "validation_error": "claude resume failed: exit=1 bytes=2209201"
+    },
+    {
+      "artifact_id": "ATT-0124",
+      "attempted_at": "2026-08-25T04:57:25.862459+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "target_interface_reference cites undeclared interface claim(s): CLM-0120-1, CLM-0120-2, CLM-0120-3, CLM-0120-4, CLM-0120-5, CLM-0120-6",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-005",
+      "trace_id": "TRACE-0090",
+      "trace_path": "research/paired-traces/TRACE-0090.json",
+      "turn_kind": "mathematics",
+      "validation_error": "target_interface_reference cites undeclared interface claim(s): CLM-0120-1, CLM-0120-2, CLM-0120-3, CLM-0120-4, CLM-0120-5, CLM-0120-6"
+    }
+  ],
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260825T045725916200Z-96427",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": false,
+      "sent": false
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-25T04:57:25.916200+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

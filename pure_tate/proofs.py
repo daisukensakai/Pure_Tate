@@ -33,6 +33,35 @@ COMPLETE_CLAIM_STATUSES = {"proved", None}
 UNRESOLVED_DEPENDENCY_STATUSES = {"unresolved", "open", "missing", "blocked"}
 
 
+def proof_dependency_ids(dependencies: Any) -> List[str]:
+    """Return stable IDs from legacy or structured proof dependencies."""
+    if not isinstance(dependencies, list):
+        return []
+    identifiers: List[str] = []
+    for item in dependencies:
+        if isinstance(item, str):
+            identifier = item
+        elif isinstance(item, dict):
+            identifier = item.get("id") or item.get("artifact_id")
+        else:
+            continue
+        if not isinstance(identifier, str):
+            continue
+        identifier = identifier.strip()
+        if identifier and identifier not in identifiers:
+            identifiers.append(identifier)
+    return identifiers
+
+
+def attempt_dependency_attempt_ids(attempt: Dict[str, Any]) -> List[str]:
+    """Return only the directly declared proof-attempt dependencies."""
+    return [
+        identifier
+        for identifier in proof_dependency_ids(attempt.get("proof_dependencies"))
+        if identifier.startswith("ATT-")
+    ]
+
+
 def attempt_completeness(attempt: Dict[str, Any]) -> Dict[str, Any]:
     """Derive whether an attempt is complete from its structured content.
 
@@ -722,11 +751,7 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
             )
         ):
             continue
-        dependency_attempt_ids = {
-            dependency_id
-            for dependency_id in attempt.get("proof_dependencies", [])
-            if isinstance(dependency_id, str) and dependency_id.startswith("ATT-")
-        }
+        dependency_attempt_ids = set(attempt_dependency_attempt_ids(attempt))
         dependency_claims = {
             claim.get("id")
             for dependency_id in dependency_attempt_ids

@@ -1,0 +1,61 @@
+{
+  "adjudicated_statement": "Over C with Q-coefficients, let Hbar^bal=[H^bal/PGL_2] be the balanced degree-four genus-six Hurwitz stack. Balancedness is required only on the nonempty open of general simply-branched covers supplied by the Bujokas-Patel theorem, not on every simply-branched cover. Using the ordered simple-branch chart over M_0,18, its classical finite-etale branch morphism, the connected finite-etale triple cover C -> M_0,4 obtained from y^3=x(x-1) after deleting the three branch points, and the induced finite-etale refinement of the corresponding open in M_0,18, there exists a connected reduced separated finite-type scheme V with an etale morphism V -> Hbar^bal such that Gr^{15,1} Gr^W_16 H_c^16(V;C) is nonzero. The localization step uses that every removed scheme has dimension at most 14 and, via Deligne's relative compact-support mixed Hodge construction, F^15 H_c^16 of such a scheme vanishes; strictness of morphisms of mixed Hodge structures and finite-etale pullback/trace then preserve a nonzero class of type (15,1). Consequently Gr^W_16 H_c^16(V;Q) is not a direct sum of Q(-8). If U -> Hbar^bal is any reduced separated finite-type etale surjective scheme atlas, then U disjoint-union V is another allowed atlas and its compactly supported cohomology contains this non-Tate direct summand. Thus any condition (H-S) universally requiring Gr^W_16 H_c^16(S;Q) to be a sum of Q(-8) for every such scheme atlas S is false at j=8. This statement concerns cohomology of chosen scheme atlases only: FND-0167 does not assert (H-S), and no conclusion follows about Gr^W_16 H_c^16(Z;Q), T_Z, RED-0001, or stack-level compact-support cohomology.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "ATT-0118 and REV-0166 were checked at the exact passages supporting this finding. They do not contradict one another: REV-0166 confirms the Kummer-cover, Kunneth, localization, finite-etale trace, and atlas-adjunction argument in ATT-0118. Both establish only failure of the universally quantified base-atlas condition (H-S) at j=8; neither establishes non-Tate cohomology of Z or T_Z. The apparent theorem-level conflict is resolved by scope: ATT-0118 refuted a v4 formulation that included (H-S), whereas the current v5 C66-TATE-SUPPORT target is the canonical subquotient T_Z and FND-0167 does not itself assert (H-S). The injection recorded in FND-0167 cannot transport non-Tate-ness from S upward to Z, and the relevant complement for Z has dimension 16, so the F^15-vanishing used for 14-dimensional complements is unavailable there. Primary-source checking also requires two wording repairs. First, Bujokas-Patel proves balancedness for a general cover when g >= (d-3)(d-1); for (d,g)=(4,6) this supplies a nonempty balanced open, not balancedness of every simply-branched cover and not by itself a stack statement. Second, Deligne's Theorem 8.2.4 is stated for ordinary cohomology; the compact-support bound used here is obtained through the relative/support formulation in section 8.3.10(c), after a proper compactification of the same dimension. It gives p <= dim(Y), hence F^15 H_c^16(Y)=0 when dim(Y) <= 14. These corrections leave the counterexample intact. FND-0173 should not be promoted separately because the v5 packet already contains the same corrected result as corroborated FND-0169, together with the necessary Z-nontransport caveat in FND-0171. It is therefore merged into FND-0169 rather than retained or retired as false.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0173",
+  "id": "FAUD-0200",
+  "independent": true,
+  "merge_target_id": "FND-0169",
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "atlas_class": "Reduced separated finite-type scheme atlases; equivalently for this construction, atlases obtained by adjoining a separated finite-type etale chart V to any existing etale surjective scheme atlas",
+    "base_field": "C",
+    "case": {
+      "cover_degree": 4,
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "cohomological_corner": "Gr^W_16 H_c^16(-;Q)",
+    "excluded_conclusions": [
+      "No conclusion about Gr^W_16 H_c^16(Z;Q)",
+      "No conclusion about the canonical CE target subquotient T_Z",
+      "No conclusion about RED-0001",
+      "No stack-level compact-support mixed Hodge structure is asserted"
+    ],
+    "stack": "Hbar^bal=[H^bal/PGL_2], the balanced tetragonal Hurwitz stack"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "d78d4f46742916cd669279e7db365e4db6a43f38d2dcdec6862c6d27d07216b3",
+      "doi": "10.1007/BF02685881",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "compact-support-hodge-filtration-dimension-bound",
+      "reported_content_sha256": "e85729aab319de46add5846aa94b561d65af1053ca412820229ef6541fb7b454",
+      "retrieved_at": "2026-08-24T11:49:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/PMIHES_1974__44__5_0.pdf"
+    },
+    {
+      "arxiv_id": "1504.03756",
+      "arxiv_version": "v1",
+      "content_sha256": "ef514e5b942fb1640a8b35ab0cfd6ed2055607667d68434147b92d8e967d6d7b",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "balanced-casnati-ekedahl-bundle-degree-four-genus-six",
+      "reported_content_sha256": "1cf1722788f449fc156dd4278a02ef929f4a3f2c4f476ba1f975e5318629372a",
+      "retrieved_at": "2026-08-24T11:49:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/abs/1504.03756"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0173",
+  "verdict": "merge",
+  "verified_source_count": 2
+}

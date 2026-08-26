@@ -1,0 +1,118 @@
+{
+  "attempt_id": "ATT-0129",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "checked_claims": [
+    {
+      "claim_id": "PACKET-BINDING",
+      "note": "ATT-0129 binds to packet_id C66-001-v5, packet_sha256 8ae2b14911e24aed28afefbce2855d6b35a620fc7b0e1b92123d8aa8432e6b15, and packet_binding_sha256 2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3, matching TASK.json. The target dictionary and exact theorem_statement also match TASK.json. The required target_interface_reference strings and nonempty interface_claim_ids are present.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0129-1",
+      "note": "Independently reconstructed from the dual-confirmed ATT-0120 interface: Y is the atlas-independent reduced closed classifying-image closure, r_T is W_26(21) of ordinary restriction to U_Y, and T_Z=ker(r_T) is a pure weight -16 subobject of T. CLM-0120-7 and FND-0180 assert no Tate type, vanishing, cycle generation, or map from Z. Degree/weight/twist ledger 2*21-16=26 and 26-42=-16 is consistent with FND-0001.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0129-2",
+      "note": "Independently reconstructed peeling arithmetic, without treating ATT-0128 as dual-confirmed: for a smooth closed stratum of dimension n and codimension c=21-n in a smooth open of M_{6,6}, purity at ordinary degree 26 gives source degree 26-2c=2n-16 and remaining twist (-c)+(21)=n. For n>=17 one has 2n-16>n, so Artin/Andreotti-Frankel vanishing on an affine coarse space kills the term; for n<=7 the degree 2n-16 is negative; for n=8 the piece is a subquotient of H^0(S)(8), hence a finite direct sum of Q(8) by semisimplicity of polarizable pure Hodge structures. For 9<=n<=16 one has 2n-16<=n (equality at n=16, where Artin vanishing requires k>n), so those lowest-weight groups are not discharged. No verified map replaces them by a computation of ker(r_T).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0129-3",
+      "note": "The abelian-ninefold model is a product-space support X'=A x P^{12}, Y'=A x {pt}, not the ATT-0120 closed substack Y of M_{6,6}. No morphism of mixed Hodge structures from H^2(A)(9) to the named T_Z is constructed, and no nonzero image in T_Z is proved. Independently, Y' is proper, hence cannot be a single admissible affine peeling stratum. By the theorem's own disproof clause this is not an interface-surviving counterexample.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0129-4",
+      "note": "No class in the supplied material is proved both non-Tate as a Hodge structure and nonzero in ker(r_T). Atlas or family-base non-Tate classes are excluded by the theorem unless a nonzero target image through the verified interface is proved. The disproof criterion is therefore not met.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0129-5",
+      "note": "The verified interface ATT-0120/CLM-0120-2 through CLM-0120-7 names T_Z but makes no Tate assertion. The peeling remainder in dimensions 9 through 16 is an open antecedent. No interface-surviving non-Tate subquotient of this T_Z is exhibited. The exact theorem and its negation are both unestablished.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "TARGET-INTERFACE-CONTRACT",
+      "note": "Required fields are present and name the genuine ATT-0120 objects: interface_attempt_id ATT-0120, nonempty interface_claim_ids CLM-0120-2 through CLM-0120-7, target_subquotient T_Z=ker(r_T), and target_map_use the kernel inclusion phi. The named source, map, coverage, and atlas-invariance clauses therefore reach the stated kernel rather than a surrogate cohomology group. The substantive contract nevertheless fails: survival_or_tate_argument explicitly withholds an unconditional Tate conclusion and leaves 9<=n<=16 undetermined. Correct schema population plus an inconclusive audit does not prove that T_Z is a finite direct sum of Q(8).",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "ASSIGNED-THEOREM-C66-TATE-SUPPORT",
+      "note": "The assigned theorem is that this named T_Z is a finite direct sum of Q(8). ATT-0129 does not prove that statement, records result_type inconclusive and resolves_exact_target false, and supplies no interface-surviving non-Tate subquotient. The residual lowest-weight groups in dimensions 9 through 16 remain open.",
+      "verdict": "unresolved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-26",
+  "finding_candidates": [
+    {
+      "key": "att-0129-inconclusive-audit-fails-target-interface-contract",
+      "rationale": "Reusable screening rule: an inconclusive C66-TATE-SUPPORT audit that correctly names the ATT-0120 kernel still fails the target-interface contract when survival_or_tate_argument withholds the unconditional Tate conclusion and leaves the dimension-9-through-16 remainder open.",
+      "statement": "ATT-0129 supplies the genuine ATT-0120 target_interface_reference fields, including interface_attempt_id ATT-0120, nonempty interface_claim_ids, target_subquotient T_Z=ker(r_T), and target_map_use phi as the kernel inclusion, but its survival_or_tate_argument explicitly states that no unconditional survival-or-Tate conclusion is available and that contributions for 9<=n<=16 remain undetermined. Candour that result_type is inconclusive and that resolves_exact_target is false does not convert that audit into the assigned theorem that T_Z is a finite direct sum of Q(8).",
+      "status": "candidate",
+      "supports_finding_id": "FND-0189"
+    }
+  ],
+  "id": "REV-0179",
+  "independent": true,
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "8ae2b14911e24aed28afefbce2855d6b35a620fc7b0e1b92123d8aa8432e6b15",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0120",
+      "note": "Dual-confirmed C66-SUPPORT-INTERFACE datum. Used exactly for Y, U_Y, r_T, T_Z=ker(r_T), one-sided coverage, atlas invariance, and the explicit absence of a Tate assertion. Not used to prove Tate type of T_Z.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0169",
+      "note": "First independent confirmation of ATT-0120, including the degree/weight/twist ledger and the kernel-form identification T_Z=ker(r_T). Used only to bind the named target; unused as a Tate proof.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0170",
+      "note": "Second independent confirmation of ATT-0120 and its target-interface certificate. Used only to establish the interface datum. Non-load-bearing for the missing Tate type.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0128",
+      "note": "Fresh, not dual-confirmed. Independently reconstructed, its peeling supplies vanishing for n<=7 and n>=17 and Tate type at n=8, while leaving 9<=n<=16 open. Used only as a localization remainder, not as a proof that T_Z is a finite direct sum of Q(8).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0178",
+      "note": "Pass-1 incomplete review of ATT-0128, not a dual confirmation of a claimed_complete proof. Used only as a record that CLM-0128-1 through CLM-0128-6 were accepted as localization lemmas, that the assigned theorem remained unresolved, and that the one-stratum abelian-ninefold consistency claim failed. Non-load-bearing for any Tate conclusion.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "GAP-C66-TATE-STRATA-9-16",
+      "note": "Load-bearing undischarged antecedent: for each residual affine stratum dimension n from 9 through 16, either W_{2n-16}H^{2n-16}(S_{(n)};Q) is a finite direct sum of Q(8-n), or its image in T_Z vanishes or is Tate. No verified artifact supplies this. Without it the named kernel is not proved to be a finite direct sum of Q(8).",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0129-P1",
+  "reviewer_engine": "cursor-grok",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: the assigned Tate conclusion itself, through the target-interface contract. ATT-0129 correctly names the dual-confirmed ATT-0120 kernel T_Z=ker(r_T) and uses only the constructed inclusion phi, but its survival_or_tate_argument is explicitly non-discharging. Independently reconstructed purity for a smooth pair of dimension n in the smooth 21-fold gives source degree 2n-16 and remaining twist n; Artin/Andreotti-Frankel vanishing on an affine coarse space applies only when 2n-16>n, i.e. n>=17, while n<=7 is negative degree and n=8 is H^0(S)(8). For 9<=n<=16 one has 2n-16<=n, so those graded pieces of the kernel filtration remain possible and are not shown Tate. Semisimplicity splits the pure weight -16 filtration as an actual Hodge-structure isomorphism, not merely after semisimplification, but that splitting cannot upgrade undetermined graded pieces to Q(8). Outcome: the attack succeeds against the theorem; verdict incomplete. Secondary attack, as a putative refutation: the FND-0191 abelian ninefold H^2(A)(9) is a product-model support, not Y, carries no proved nonzero image in this T_Z, and is proper so cannot be one affine peeling stratum; the theorem's disproof clause therefore excludes it, and the attack does not refute the attempt's audit claims. Remaining adversary-checklist attacks were attempted and do not convert incompleteness into refutation or into a proof: Q-coefficients throughout, no integral or coarse-moduli overreach beyond ordinary-cohomology comparison for Artin vanishing; Borel-Moore degree 16 versus ordinary degree 26 with Poincare twist (21) is consistent and is not silently replaced by compact-support degree 16; no forbidden Gysin for (M_{6,6},Z) and no extra Kunneth shift is used on the named kernel; no spectral-sequence differential is claimed; no graph-automorphism invariants-versus-coinvariants step appears; no predicted motive is treated as a theorem; pure Tate is not upgraded to algebraic or tautological generation; complementary stable-pair or assembly terms are correctly omitted. Evidence limitation: no external web evidence was used.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms.",
+  "verdict": "incomplete"
+}

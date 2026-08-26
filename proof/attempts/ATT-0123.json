@@ -1,0 +1,180 @@
+{
+  "argument_markdown": "Source-backed input. By ATT-0120, claims CLM-0120-2 through CLM-0120-5, confirmed by REV-0169 and REV-0170, Y is the reduced Zariski closure of the geometric classifying image and\n\nT_Z = ker(T \u2192 W_{26}H^{26}(M_{6,6} minus Y;Q)(21)) = im(W_{-16}H^{BM}_{16}(Y;Q) \u2192 T).\n\nThe second expression is an image statement. In accordance with REV-0169, it is not an identification of T_Z with the supports group itself. Set A:=W_{-16}H^{BM}_{16}(Y;Q), and let q:A\u2192T_Z be the induced surjection.\n\nProved conditional step. Suppose A is isomorphic to Q(8)^r. The quotient Hodge structure A/ker(q) has only Hodge bidegree (-8,-8): the Hodge filtration on Q(8)^r has a single nontrivial jump, and the quotient filtration has the same property. If s is the rational dimension of A/ker(q), then A/ker(q) is isomorphic to Q(8)^s. Since A/ker(q) is isomorphic to im(q)=T_Z, this proves that a finite Tate decomposition of A is sufficient for the assigned conclusion. This argument uses neither a Gysin map nor a closed-embedding assertion.\n\nUndischarged exact-target step. The verified interface ATT-0120, including CLM-0120-7 and both confirmation reviews REV-0169 and REV-0170, explicitly supplies no Tate computation of A or T_Z and no geometric map from the cohomology of the ordered model Z whose image is known to equal T_Z. Consequently the antecedent A\u2245Q(8)^r is not established. Replacing it by the assertion that T itself is Tate would be circular with the campaign target and is not used.\n\nCounterexample audit. The packet's standalone-Z and constant-family non-Tate constructions do not prove that any such class has nonzero image in T_Z. They therefore do not satisfy the exact disproof clause. No verified non-Tate subquotient of the named T_Z is presently exhibited.\n\nFailed-route audit. The argument does not use vcd-only vanishing, undecorated top-weight graph-complex reasoning, point counting without parity separation, or the forgetful-map/local-system renaming route. It also does not treat Y as a regular immersion, infer Tate cohomology from rational S_6-representations, or transfer non-Tateness from an atlas or family base to the target without proving survival.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "claims": [
+    {
+      "id": "CLM-0123-1",
+      "statement": "For A:=W_{-16}H^{BM}_{16}(Y;Q), the verified C66-SUPPORT-INTERFACE supplies a morphism A\u2192T whose image is exactly the named subquotient T_Z.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0123-2",
+      "statement": "If A is a finite direct sum of Q(8), then its image T_Z is a finite direct sum of Q(8).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0123-3",
+      "statement": "Unconditionally, the named T_Z is a finite direct sum of Q(8).",
+      "status": "gap"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": false,
+    "not_reduction_only": false,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0120-2",
+    "CLM-0120-3",
+    "CLM-0120-4",
+    "CLM-0120-5",
+    "CLM-0120-7"
+  ],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "vcd-only-vanishing: not used"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "undecorated-cgp-top-weight-graph-complex: not used"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "point-count-without-degree-parity-separation: not used"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "forgetful-map-renaming-local-system-unknown: not used"
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "No Gysin or regular-immersion structure is inferred for Y."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "No Tate conclusion is inferred from rationality of S_6-representations."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "No standalone-Z or family-base class is declared to survive in T_Z without a proved nonzero target image."
+    }
+  ],
+  "gap_markers": [
+    {
+      "claim_id": "CLM-0123-3",
+      "description": "No verified input proves that W_{-16}H^{BM}_{16}(Y;Q) is Tate, nor is there an unconditional direct computation of its image T_Z. The proved implication CLM-0123-2 is therefore only conditional and does not establish the exact theorem.",
+      "id": "GAP-0123-1",
+      "severity": "high"
+    }
+  ],
+  "id": "ATT-0123",
+  "ingest_normalizations": [
+    {
+      "expected": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "identifiers": [
+        "CLM-0120-2",
+        "CLM-0120-3",
+        "CLM-0120-4",
+        "CLM-0120-5",
+        "CLM-0120-7"
+      ],
+      "moved_from": "source_claim_ids",
+      "moved_to": "dependency_claim_ids",
+      "rule": "DEPENDENCY-CLAIM-SPLIT-0001"
+    },
+    {
+      "identifiers": [
+        "TARGET-INTERFACE-CERTIFICATE"
+      ],
+      "reason": "This is a target-interface contract label, not a global claim or adjudicated finding. It supplied no mathematical evidence and is retained only in this normalization record.",
+      "removed_from": "source_claim_ids",
+      "rule": "NONCLAIM-PROVENANCE-DROP-0001"
+    }
+  ],
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "verified-support-kernel-interface",
+    "elementary-quotient-of-pure-tate-Hodge-structure"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_path": "proof/packets/generated/C66-001-v5.md",
+  "packet_sha256": "dda8b4ee2729206dd6c448c63790c99d3e79714f2020ef324a2cbbea4a3e73a9",
+  "proof_dependencies": [
+    "ATT-0120",
+    "REV-0169",
+    "REV-0170"
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [],
+  "status": "proposed",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "summary": "The verified interface gives a surjection from the weight-minus-sixteen Borel\u2013Moore group of the reduced image closure Y onto T_Z. An elementary conditional lemma shows that a Tate source would force T_Z to be a finite sum of Q(8). However, neither ATT-0120 nor its two confirmations proves that source Tate, and no verified argument computes the target image directly. No non-Tate class is proved to survive in T_Z. Thus the exact theorem is not proved or disproved.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "target_interface_reference": {
+    "interface_attempt_id": "ATT-0120",
+    "interface_claim_ids": [
+      "CLM-0120-2",
+      "CLM-0120-3",
+      "CLM-0120-4",
+      "CLM-0120-5",
+      "CLM-0120-7"
+    ],
+    "survival_or_tate_argument": "If the verified source W_{-16}H^{BM}_{16}(Y;Q) were Q(8)^r, its quotient image T_Z would be Q(8)^s. No verified artifact establishes that antecedent or a different unconditional Tate computation, and no non-Tate source class is proved to have nonzero image in T_Z; hence the exact theorem remains unresolved.",
+    "target_map_use": "The Borel\u2013Moore localization image gives a surjection W_{-16}H^{BM}_{16}(Y;Q)\u2192T_Z. The argument uses only this image map and never identifies T_Z with the supports group.",
+    "target_subquotient": "T_Z:=ker(r_T), equivalently im(W_{-16}H^{BM}_{16}(Y;Q)\u2192T), where Y is the reduced closure of the verified classifying image."
+  },
+  "task_id": "TASK-C66-M-005",
+  "theorem_scope": {
+    "coefficients": "Q",
+    "excluded_claims": [
+      "No assertion is made about assembly of the complementary target terms.",
+      "Non-Tate cohomology of an atlas, family base, product model, or standalone Z is not treated as an exact-target counterexample.",
+      "No equality between T_Z and the supports group itself is asserted.",
+      "No Gysin, regular-immersion, lci, support-exhaustion, or nonvanishing assertion is made."
+    ],
+    "g": 6,
+    "included_object": "The named ATT-0120 kernel/image subquotient T_Z inside W_{-16}H^{BM}_{16}(M_{6,6};Q).",
+    "n": 6
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms."
+}

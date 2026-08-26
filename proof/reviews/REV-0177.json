@@ -1,0 +1,109 @@
+{
+  "attempt_id": "ATT-0126",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "checked_claims": [
+    {
+      "claim_id": "PACKET-TARGET-BINDING",
+      "note": "ATT-0126 binds to the TASK.json packet C66-001-v5 with packet_sha256 dda8b4ee2729206dd6c448c63790c99d3e79714f2020ef324a2cbbea4a3e73a9 and packet_binding_sha256 2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3. Campaign revision 5, context revision 2, subproblem C66-TATE-SUPPORT, and the target dictionary match TASK.json. The upstream ATT-0120 confirmation reviews record a historical packet_sha256 different from the current task packet, but TASK.json admits those reviews as input artifacts and their packet_binding_sha256 matches; this is noted as a non-load-bearing provenance detail, not a binding failure for ATT-0126.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0126-1",
+      "note": "The verified ATT-0120 interface, confirmed by REV-0169 and REV-0170 and reflected in packet findings FND-0180 and FND-0185, identifies T_Z as ker(T -> W_{26}H^{26}(M_{6,6} minus Y;Q)(21)) and equivalently as the image of W_{-16}H^{BM}_{16}(Y;Q) in T. This uses Poincare-Verdier localization and weight strictness; it does not require a closed embedding of Z, a regular immersion, lci structure, or a Gysin map. The equivalence is correctly to the image, not to the full supports group, avoiding the FND-0168(3b) hazard.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0126-2",
+      "note": "The formal counterexample is valid. For X = A x P^{12} with A an abelian ninefold and Y = A x {pt}, codimension 12 support into the smooth 21-fold X can contribute H^2(A)(-12) in ordinary degree 26; after the Poincare twist (21) this is H^2(A)(9), pure of weight -16 and Borel-Moore degree 16, with off-diagonal Hodge types (-7,-9) and (-9,-7) in addition to (-8,-8). Thus purity, weight -16, Borel-Moore degree 16, and closed support inside a smooth 21-fold do not formally force a direct sum of Q(8).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0126-3",
+      "note": "The exact theorem excludes non-Tate cohomology of arbitrary bases, atlases, product models, or standalone Z unless a nonzero image in the named T_Z is proved. ATT-0126 correctly observes that the admitted standalone or product non-Tate classes do not constitute a disproof of the named T_Z. Packet finding FND-0186 additionally gives kernel vanishing for constant/product models whose classifying-image closure has dimension at most 2, and no general map from arbitrary atlas cohomology to T with proved nonzero image is supplied.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "TARGET-INTERFACE-CONTRACT",
+      "note": "The required target_interface_reference object is present: interface_attempt_id is ATT-0120, interface_claim_ids are nonempty, and target_subquotient and target_map_use name the genuine ATT-0120 kernel and inclusion. However, the substantive contract is not met: survival_or_tate_argument explicitly states that no unconditional Tate or survival argument is available. Therefore the interface reference names the correct object but does not prove the assigned theorem rather than a surrogate cohomology result.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "EXACT-THEOREM",
+      "note": "The assigned statement that this named T_Z is a finite direct sum of Q(8) is neither proved nor disproved by ATT-0126. The attempt's own gap marker records that the Hodge type of im(W_{-16}H^{BM}_{16}(Y;Q) -> T) is undetermined on residual support strata of dimensions 9 through 16, and no admitted artifact proves that every non-Tate summand either is absent from the source or dies in the map to T.",
+      "verdict": "unresolved"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-23",
+  "finding_candidates": [
+    {
+      "key": "purity-weight-support-corner-does-not-force-tate",
+      "rationale": "Reusable blocking principle for future C66-TATE-SUPPORT attempts: the verified interface's purity and weight ledger cannot be upgraded to Tate type without additional geometry.",
+      "statement": "For a smooth complex stack or scheme X of dimension d and a closed support Y, the corner image W_{-k}H^{BM}_k(Y;Q) -> W_{-k}H^{BM}_k(X;Q) can be pure of weight -k and nonzero without being Tate. In particular, for X = A x P^{12} with A an abelian ninefold and Y = A x {pt}, the codimension-12 supported corner contains H^2(A)(9) of weight -16 with Hodge types (-7,-9), (-8,-8), and (-9,-7). Thus any C66-TATE-SUPPORT argument must supply genuine geometric control, such as support dimension at most 8, Tate strata, or killing of non-Tate summands in the map to T; purity, degree, weight, and closed support are insufficient.",
+      "status": "candidate"
+    },
+    {
+      "key": "interface-population-without-survival-att0126-witness",
+      "rationale": "Additional evidence for packet-visible finding FND-0189: correct population of target_interface_reference fields is not itself a discharge of the unconditional Tate theorem.",
+      "statement": "ATT-0126 populates target_interface_reference with the genuine ATT-0120 interface: interface_attempt_id ATT-0120, interface_claim_ids CLM-0120-2 through CLM-0120-7, target_subquotient T_Z = ker(r_T) = im(W_{-16}H^{BM}_{16}(Y;Q) -> T), and target_map_use the verified inclusion phi. Nevertheless its survival_or_tate_argument explicitly states that no unconditional Tate or survival argument is available. This is another witness that schema population of the interface fields is not a substantive discharge of C66-TATE-SUPPORT; the named source, map, and subquotient must actually yield the Tate conclusion with no undischarged hypothesis.",
+      "status": "candidate",
+      "supports_finding_id": "FND-0189"
+    }
+  ],
+  "id": "REV-0177",
+  "independent": true,
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "dda8b4ee2729206dd6c448c63790c99d3e79714f2020ef324a2cbbea4a3e73a9",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0120",
+      "note": "Used correctly as the verified C66-SUPPORT-INTERFACE datum defining Y, the restriction map, T_Z, and the inclusion phi. It supplies naming and localization, not Tate type. Its confirmation by REV-0169 and REV-0170 is accepted for the interface content.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0169",
+      "note": "First confirmation of ATT-0120. It confirms the kernel/image identification and the distinction between the supports group and its image in T. It is not load-bearing for any Tate conclusion, which ATT-0126 does not assert.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0170",
+      "note": "Second confirmation of ATT-0120. It confirms the one-sided coverage clause and the degree/weight/twist ledger. It does not supply the missing Tate input required by C66-TATE-SUPPORT.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0001",
+      "note": "Poincare duality identification T = W_{26}H^{26}(M_{6,6};Q)(21) is used with the correct degree/weight/twist arithmetic: ordinary degree 26, dimension 21, twist 21, giving Borel-Moore degree 16 and weight -16. No integral-coefficient or coarse-moduli variant is used.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C66-TATE-SUPPORT-UNCONDITIONAL-PROOF",
+      "note": "The required unconditional geometric input proving Tate type of the named T_Z is absent. Possible sufficient inputs would include Tate type of W_{-16}H^{BM}_{16}(Y;Q), stratum-by-stratum Tate control of the residual support, support dimension at most 8, or a proof that every non-Tate summand of the source maps to zero in T. ATT-0126 correctly records that none of these is supplied by ATT-0120 or its confirmations.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0126-P1",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: attempt to force the Tate conclusion from the verified ATT-0120 interface using only purity, weight -16, Borel-Moore degree 16, and closed support inside the smooth 21-fold M_{6,6}. This attack fails, and ATT-0126 correctly shows why: Poincare-Verdier localization only identifies T_Z as a pure polarizable weight -16 subobject/image; it does not determine Hodge bidegrees. The abelian-ninefold example A x {pt} in A x P^{12} exhibits off-diagonal types (-7,-9) and (-9,-7) in the same corner, so no formal Poincare twist, semisimplicity, Kunneth shift, or Gysin bookkeeping yields Q(8). Conversely, the strongest disproof attack using packet product-model non-Tate classes such as FND-0176/FND-0178 also fails under the exact theorem statement, because those classes live in arbitrary bases or standalone models and have no proved nonzero image in the named T_Z; constant/product closures can even have zero kernel by FND-0186. Stack-versus-coarse, rational-versus-integral, and invariants-versus-coinvariants hazards are avoided by the Q-coefficient stack-level interface, but avoiding those hazards does not supply the missing Tate input. Outcome: the exact theorem remains unresolved; the attempt is candid about this, so the verdict is incomplete rather than refuted. Evidence limitation: no web evidence was available; the review uses only the supplied local task artifacts.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms.",
+  "verdict": "incomplete"
+}

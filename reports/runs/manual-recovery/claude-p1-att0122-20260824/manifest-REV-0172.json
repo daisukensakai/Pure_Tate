@@ -1,0 +1,75 @@
+{
+  "artifact_contract": {
+    "object_field": "target_interface_reference",
+    "required_nonempty_lists": [
+      "interface_claim_ids"
+    ],
+    "required_nonempty_strings": [
+      "interface_attempt_id",
+      "target_subquotient",
+      "target_map_use",
+      "survival_or_tate_argument"
+    ]
+  },
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "context_revision": 2,
+  "created_on": "2026-08-24",
+  "excluded_reviewer_engines": [
+    "qwen"
+  ],
+  "id": "TASK-V-ATT-0122-P1",
+  "input_artifacts": [
+    {
+      "id": "ATT-0120",
+      "kind": "attempt",
+      "path": "proof/attempts/ATT-0120.json",
+      "sha256": "0a5ac2d4f6c9cf7f080066fe01e6aa02d3be45e13158c926b80d5b232707ab00"
+    },
+    {
+      "id": "REV-0169",
+      "kind": "confirmation_review",
+      "path": "proof/reviews/REV-0169.json",
+      "sha256": "2d41bcde86cf66e2cbc36f8a10743c48904613f787d5d1695cc8bb92b8f17002"
+    },
+    {
+      "id": "REV-0170",
+      "kind": "confirmation_review",
+      "path": "proof/reviews/REV-0170.json",
+      "sha256": "319119a5f38f30beb1edcd9e5fdd63e4321236b089af0f08995a524a567044de"
+    }
+  ],
+  "input_attempt": "proof/attempts/ATT-0122.json",
+  "input_packet": "proof/packets/generated/C66-001-v5.md",
+  "lane": "weakest-sufficient-proof",
+  "output": "proof/reviews/REV-0172.json",
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "23efe9f2f168b57baa4c2cdfb9a7e0112f5bab6837d59adb11ed582ee30200ce",
+  "phase": "review",
+  "prompt": "prompts/ADVERSARY.md",
+  "prover_engine": "qwen",
+  "review_pass": 1,
+  "role": "independent-adversarial-reviewer",
+  "selected_engine": "claude",
+  "status": "ready",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_attempt_id": "ATT-0122",
+  "target_task_id": "TASK-C66-M-005",
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms."
+}

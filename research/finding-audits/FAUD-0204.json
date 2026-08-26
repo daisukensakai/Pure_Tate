@@ -1,0 +1,53 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients. Let X be a smooth complex scheme or Deligne-Mumford stack of pure dimension d, and let Y be a closed finite-type subscheme or closed substack. Mixed Hodge structures on Borel-Moore homology are those of Deligne, and morphisms are strict for the weight filtration. For smooth X the lowest-weight piece W_{-k}H^{BM}_k(X;Q) is pure of weight -k: geometric Poincare duality identifies H^{BM}_k(X) with H_c^{2d-k}(X)(d), whose weights are at most -k, equivalently under the Hom convention H^{BM}_k:=Hom(H_c^k,Q) used by Canning-Larson-Payne. Purity of this piece, the numerical coincidence of Borel-Moore degree k with weight -k, and the mere existence of a closed support Y do not force the image of W_{-k}H^{BM}_k(Y;Q) -> W_{-k}H^{BM}_k(X;Q) to be a Tate Hodge structure. In particular, matching the C66-001 ledger (d,k)=(21,16): let A be a complex abelian variety of dimension 9, let X=A x P^{12} (smooth projective of dimension 21), and let Y=A x {pt} (closed embedding of codimension 12). Then H^*(A;Q) is the exterior algebra on H^1(A;Q) as Hodge structures, H^1(A) is pure of weight 1 with types (1,0) and (0,1) of dimension 9, and H^2(A) is therefore pure of weight 2 with types (2,0), (1,1), (0,2) and h^{2,0}=binomial(9,2)=36 nonzero. Kunneth together with the Gysin map of a point {pt} subset P^{12}, whose class generates H^{24}(P^{12};Q) isomorphic to Q(-12), realises H^2(A)(-12) as a direct summand of H^{26}(X;Q). Geometric Poincare duality with twist (21) identifies this summand with H^2(A)(9) inside W_{-16}H^{BM}_{16}(X;Q), and the Borel-Moore pushforward H^{BM}_{16}(Y;Q) -> H^{BM}_{16}(X;Q) is an isomorphism onto that summand. The Tate-twist convention V(m)^{p,q}=V^{p+m,q+m} (weight decreased by 2m) sends the types of H^2(A) to (-7,-9), (-8,-8), and (-9,-7) on H^2(A)(9), which is polarizable, pure of weight -16, and not a finite direct sum of Q(8). Consequently any argument for the C66-TATE-SUPPORT theorem at (g,n)=(6,6), that the named kernel-form subobject T_Z=im(W_{-16}H^{BM}_{16}(Y;Q)->T) of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) is a finite direct sum of Q(8), cannot conclude from purity, Borel-Moore degree 16, weight -16, and closed support in a smooth 21-fold alone. Additional geometric input is required, such as: (i) dim Y<=8, which forces W_{-16}H^{BM}_{16}(Y;Q) itself to vanish if dim Y<8 or to be a finite direct sum of Q(8) if Y has dimension 8 (top Borel-Moore); (ii) Tate type of the relevant lowest-weight groups on residual strata of dimensions 9 through 16; or (iii) vanishing of every non-Tate summand of W_{-16}H^{BM}_{16}(Y;Q) in the map to T. This statement does not assert that the named T_Z of M_{6,6} is non-Tate, does not refute RED-0001, and does not supply a Gysin computation on the Casnati-Ekedahl classifying-image closure.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads of ATT-0126 and REV-0177 match the assigned candidate. ATT-0126 CLM-0126-2 and its argument_markdown state that weight -16, Borel-Moore degree 16, and closed support in a smooth 21-fold do not force type Q(8), via the closed embedding A x {pt} into A x P^{12} carrying H^2(A)(9) with off-diagonal types (-7,-9) and (-9,-7). REV-0177 confirmed CLM-0126-2, recorded the ordinary identification H^2(A)(-12) inside H^{26}(X) and the Poincare twist (21) yielding H^2(A)(9), and emitted finding_candidates[0] with key purity-weight-support-corner-does-not-force-tate as the FND-0191 text. No claim-level contradiction: contradicts_claim_ids is empty. The obstruction is compatible with THM-0001 (purity of H^k of a smooth proper stack is not Tate type), THM-0003 and RED-0001 (W_{-k}H_k^{BM} is the campaign corner, not a Tate theorem), FND-0033 (semisimplicity of polarizable pure weight -16 Hodge structures makes Tate-ness of a subquotient follow from Tate-ness of an ambient object, not from purity), FND-0185 (Tate-ness of W_{-16}H^{BM}_{16}(Y) is sufficient for T_Z Tate and is not implied by purity), FND-0186 (dim Y<8 forces vanishing of the degree-16 Borel-Moore group; the model support has dimension 9), and FND-0188 (RED-0001 is sufficient but not necessary for T_Z Tate). Do not merge with those findings: they are complementary sufficiency, vanishing, or circularity statements. Independently, Deligne Theorie de Hodge II (2.1.13) supplies Z(n) of type (-n,-n) and weight -2n and (2.2.1)--(3.2.15) purity of H^n of compact Kaehler or complete smooth varieties; Abdulali arXiv:1203.4016v1 records the Tate-twist convention V(m)^{p,q}=V^{p+m,q+m} of weight n-2m; Milne Abelian Varieties v2.00 Theorem 2.3 gives H^r(A;Z) isomorphic to wedge^r H^1(A;Z); Canning-Larson-Payne arXiv:2307.08830v3 (6.1) is the right-exact sequence with quotient W_{-k}H_k^{BM}. These confirm the model arithmetic. The original candidate is corrected: it named a map rather than its image, wrote contains rather than the Kunneth-Gysin isomorphism onto H^2(A)(9), omitted Q-coefficients over C and the hypothesis that A is a complex abelian ninefold so h^{2,0}=binomial(9,2)=36 is nonzero, and did not record that the named T_Z of M_{6,6} is not asserted non-Tate.",
+  "engine": "cursor-grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0191",
+  "id": "FAUD-0204",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "cursor-grok",
+  "schema_version": 1,
+  "scope": {
+    "ambient_dimension": 21,
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "does_not_assert": [
+      "that the named T_Z of M_{6,6} is non-Tate",
+      "that RED-0001 fails",
+      "a Gysin or regular-embedding computation on the Casnati-Ekedahl classifying-image closure inside M_{6,6}"
+    ],
+    "ground_field": "C",
+    "objects": [
+      "image of W_{-k}H^{BM}_k(Y;Q) in W_{-k}H^{BM}_k(X;Q) for X smooth of pure dimension d",
+      "model X=A x P^{12}, Y=A x {pt}, A a complex abelian variety of dimension 9",
+      "named C66-TATE-SUPPORT kernel T_Z of T=W_{-16}H^{BM}_{16}(M_{6,6};Q)"
+    ],
+    "open_bm_degree": 16,
+    "open_bm_weight": -16,
+    "poincare_twist": 21
+  },
+  "source_records": [
+    {
+      "arxiv_id": "1203.4016",
+      "arxiv_version": "v1",
+      "content_sha256": "e38843345cda9a1fcf61248896dfd01b36114e7a0a5e5a65207ea1d10cacbd29",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "85e31097d3a98e2b8dca7da2dba4fe109a0376bcf1d763e9aec30e1855fda12d",
+      "retrieved_at": "2026-08-25T05:03:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/1203.4016v1"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0191",
+  "verdict": "promote",
+  "verified_source_count": 1
+}

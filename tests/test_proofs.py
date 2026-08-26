@@ -4,7 +4,11 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from pure_tate.proofs import audit_proofs
+from pure_tate.proofs import (
+    attempt_dependency_attempt_ids,
+    audit_proofs,
+    proof_dependency_ids,
+)
 from pure_tate.store import load_repository
 
 
@@ -16,6 +20,25 @@ class ProofAuditTests(unittest.TestCase):
     def _write(self, path, value):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(value), encoding="utf-8")
+
+    def test_dependency_identifiers_support_legacy_and_structured_forms(self):
+        dependencies = [
+            "ATT-0001",
+            {"id": "ATT-0002"},
+            {"artifact_id": "ATT-0003"},
+            {"id": "FND-0001"},
+            "ATT-0001",
+            {"id": ""},
+            7,
+        ]
+        self.assertEqual(
+            proof_dependency_ids(dependencies),
+            ["ATT-0001", "ATT-0002", "ATT-0003", "FND-0001"],
+        )
+        self.assertEqual(
+            attempt_dependency_attempt_ids({"proof_dependencies": dependencies}),
+            ["ATT-0001", "ATT-0002", "ATT-0003"],
+        )
 
     def test_claimed_complete_cannot_keep_gap(self):
         with tempfile.TemporaryDirectory() as directory:

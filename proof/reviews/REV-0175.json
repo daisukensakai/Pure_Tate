@@ -1,0 +1,97 @@
+{
+  "attempt_id": "ATT-0123",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0123-3",
+      "note": "This claim IS the exact theorem_statement of the submitted artifact, and the artifact does not prove it. ATT-0123 itself marks it status 'gap', attaches GAP-0123-1 at severity high, and sets completion_attestation.resolves_exact_target=false, no_undischarged_dependencies=false, not_reduction_only=false, with status 'proposed'. I reconstructed the argument independently and confirm there is no unconditional route in it: the only implication offered (CLM-0123-2) has antecedent 'A:=W_{-16}H^{BM}_{16}(Y;Q) is Q(8)^r', and no verified artifact, no confirmed claim of the interface attempt ATT-0120, and no packet finding supplies that antecedent (FND-0185 explicitly does not assert it; FND-0168 explicitly does not assert Tate-ness of the Z-supported contribution). The alternative antecedent 'T is Tate' is RED-0001 itself, which the artifact correctly declines to use as circular and which FND-0188/FND-0189 independently bar from occupying the weakest-sufficient-proof lane. Unconditional conclusion therefore undischarged.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "TARGET-INTERFACE-CERTIFICATE",
+      "note": "Artifact-contract check under the task's artifact_contract (object_field target_interface_reference). Structural prong passes: the object is present with interface_attempt_id='ATT-0120' nonempty, interface_claim_ids=[CLM-0120-2,3,4,5,7] nonempty, and target_subquotient / target_map_use / survival_or_tate_argument all nonempty strings naming the genuine dual-confirmed ATT-0120 interface rather than a surrogate object; the named subquotient is the ATT-0120 kernel/image T_Z inside T with the correct degree/weight/twist (BM degree 16, weight -16; equivalently ordinary degree 26 with twist (21)), and the named map is the Borel-Moore image map, not a Gysin map. Substantive prong fails: survival_or_tate_argument does not prove the stated theorem; it states the conditional and then concedes 'No verified artifact establishes that antecedent ... hence the exact theorem remains unresolved'. FND-0189 is dispositive here: a C66-TATE-SUPPORT artifact that concludes Tate type of this named T_Z only under an undischarged gap fails the target-interface contract even when it names the genuine ATT-0120 interface. The certificate names a correct interface but does not carry a coverage/survival argument that proves the theorem.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0123-1",
+      "note": "True and available, but its cited warrant is misattributed. The claim (interface supplies q:A->T with im(q)=T_Z, A:=W_{-16}H^{BM}_{16}(Y;Q)) is not stated by any confirmed ATT-0120 claim: CLM-0120-3/4 define T_Z only as ker(T -> W_{26}H^{26}(M_{6,6}\\Y;Q)(21)) in ordinary cohomology, and ATT-0120's certificate uses the supports-group image form H^{26}_Y(21), while ATT-0120 section 0 expressly declines standalone theories on the possibly singular closed Y. The Borel-Moore form is nonetheless packet-adjudicated: FND-0168(3) supplies the exact sequence W_{-16}H^{BM}_{16}(Y) -> T -> W_{-16}H^{BM}_{16}(M_{6,6}\\Y) by exactness of Gr^W, FND-0180 records the identification T_Z=im(...) in the FND-0168(3a) sense, and FND-0185 records that the Poincare-Verdier duality H^{26}_Y(X;Q)=H^{BM}_{16}(Y;Q)(21) intertwines ordinary open restriction with Borel-Moore corestriction with no codimension shift. I verified the bookkeeping independently: 2*21-16=26, 26-2*21=-16, the closed-immersion pushforward i_* on Borel-Moore homology is degree- and twist-preserving so no Gysin shift by 2c is smuggled in, and W_{-16} is exact on mixed Hodge structures by strictness. Confirmed as mathematics; the defect is that ATT-0123 cites CLM-0120-2..5 (and a REV-0169 reasoning note plus an uncorroborated review candidate, which the packet's execution boundary declares not to be evidence) instead of FND-0180/FND-0168(3)/FND-0185, none of which appear in its dependency lists.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0123-2",
+      "note": "Correct but not new. Correctness: q is a morphism of mixed Hodge structures, so ker(q) is a sub-object and im(q)=A/ker(q) by strictness; if A=Q(8)^r then A is pure of Hodge type (-8,-8) (Q(8) has type (-8,-8), weight -16, matching open_bm_tate_type/open_bm_weight in the target dictionary, so no twist-sign slip), the quotient Hodge filtration retains the single jump, and a weight -16 Q-Hodge structure concentrated in type (-8,-8) is Q(8)^s. No semisimplification is substituted for an actual isomorphism, and by FND-0033 no extension gap arises at this corner. Novelty: this is verbatim the adjudicated Gysin-free sufficiency of FND-0185 ('the condition that W_{-16}H^{BM}_{16}(Y;Q) is a finite direct sum of Q(8) is sufficient for T_Z to be a finite direct sum of Q(8) ... sufficient, not necessary'), which ATT-0123 neither cites nor strengthens.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-24",
+  "finding_candidates": [
+    {
+      "key": "kernel-form-tate-criterion-nontate-part-in-kernel",
+      "rationale": "Delta versus the packet: FND-0185 gives only the sufficiency direction and remarks informally that non-Tate source summands 'may die in the map to T'; FND-0188 compares that hypothesis with RED-0001; FND-0168(3a) gives necessity from K downwards. None of them records that the interface surjection splits, hence none states the exact criterion, and the splitting is what converts an unusable sufficient condition into a single well-posed question about a canonical subobject of A. Reusable because it applies to every kernel-form term of the FND-0181/FND-0182 nested family, it tells the proof and counterexample lanes that they are computing the same object ker(q) from opposite sides, and it makes precise which non-Tate witnesses (FND-0053, FND-0170, FND-0176) could ever matter. Requires independent corroboration of the isotypic-component step and of polarizability as imported from FND-0185.",
+      "statement": "Let Y be a closed substack of X=M_{6,6}, A:=W_{-16}H^{BM}_{16}(Y;Q), T:=W_{-16}H^{BM}_{16}(X;Q), and let q:A->T_Z be the surjection of FND-0180/FND-0168(3a) onto the kernel-form term. By FND-0185, A is a pure polarizable Q-Hodge structure of weight -16, and polarizable pure Q-Hodge structures of fixed weight form a semisimple abelian category (FND-0033). Hence q splits, A is isomorphic to ker(q) direct-sum T_Z, and morphisms preserve canonical isotypic components, so writing A = A_Tate direct-sum A_nonTate for the canonical splitting into the Q(8)-isotypic part and its complement one gets (T_Z)_nonTate = q(A_nonTate). Therefore T_Z is a finite direct sum of Q(8) if and only if A_nonTate is contained in ker(q). Two lane consequences: a C66-TATE-SUPPORT proof routed through the verified interface source may replace the FND-0185 hypothesis 'A is Tate' by the strictly weaker and canonical 'A_nonTate is contained in ker(q)', and a C66-CEX-LOCAL / C66-CEX-SURVIVE disproof through the same interface must exhibit a non-Tate isotypic summand of A with nonzero image in T, which is the theorem's survival clause in checkable form. Exhibiting a non-Tate class anywhere in A, in an atlas, in a family base, or in a standalone product model settles neither lane.",
+      "status": "candidate"
+    }
+  ],
+  "id": "REV-0175",
+  "independent": true,
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "dda8b4ee2729206dd6c448c63790c99d3e79714f2020ef324a2cbbea4a3e73a9",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0120",
+      "note": "Dual-confirmed C66-SUPPORT-INTERFACE artifact (REV-0169, REV-0170). Used within its declared scope for the definition of T_Z=ker(r_T) and the atlas-independent reduced closure Y; ATT-0123 respects its explicit exclusions (no Gysin, no closed embedding of Z, no regular immersion, no support-exhaustion T_Z=T, no Tate assertion). Note that ATT-0120/REV-0169/REV-0170 record packet_sha256 10948ae9... against the current dda8b4ee..., i.e. an earlier byte-state of packet C66-001-v5; packet_binding_sha256 is identical (2054a3c3...) under HARNESS-IDENTITY-COERCE-0001, so this is recorded as non-adverse.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0169",
+      "note": "Valid first independent confirmation of ATT-0120's seven claims. Used correctly by ATT-0123 for the caveat that T_Z is the image, not the supports group itself (REV-0169's CLM-0120-4 note and its FND-0168-supporting candidate). Recorded tension, non-adverse for this dependency: REV-0169 confirms CLM-0120-3 partly on the ground that 'Poincare duality is applied only on M_{6,6}, never on Y or U_Y', while its CLM-0120-5 note invokes duality on the smooth pair (M_{6,6},U_Y) to obtain the Borel-Moore image form. The tension is now moot because FND-0180 and FND-0185 adjudicate that duality and its compatibility with open restriction at packet level; the point survives only as provenance, i.e. the Borel-Moore form is not carried by ATT-0120's claim statements.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0170",
+      "note": "Valid second independent confirmation (pass 2) of ATT-0120, including its TARGET-INTERFACE-CERTIFICATE check. Its CLM-0120-4 note uses the correct image formulation of the supports term. Its recorded evidence limitation (packet body not re-read) does not affect anything ATT-0123 imports.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0180",
+      "note": "Packet-adjudicated finding supplying the actual warrant for CLM-0123-1 (T_Z:=ker(T->W_{26}H^{26}(U_Y;Q)(21))=im(W_{-16}H^{BM}_{16}(Y;Q)->T) in the FND-0168(3a) sense). Load-bearing for ATT-0123 but absent from its dependency_claim_ids, proof_dependencies, and source_ids.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0185",
+      "note": "Packet-adjudicated finding that already states CLM-0123-2 in full, including purity and polarizability of W_{-16}H^{BM}_{16}(Y;Q), semisimplicity via FND-0033, sufficiency-not-necessity, and the remark that non-Tate source summands may die in the map to T. ATT-0123's 'proved conditional step' duplicates it without citation, so the artifact's proved content is entirely pre-existing.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0189",
+      "note": "Checked and applied to the contract prong: an artifact concluding Tate type of this named T_Z only under an undischarged gap fails the target-interface contract even when it names the genuine ATT-0120 interface. ATT-0123 is exactly that case.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0123-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack, and it succeeds: the artifact never discharges its own theorem_statement, and its target_interface_reference is therefore a correctly-named interface carrying a conditional in place of a proof. ATT-0123 concedes this itself (CLM-0123-3 status 'gap', GAP-0123-1 severity high, resolves_exact_target=false), so the interesting adversarial work is whether anything in it either (i) hides an error that would push to refuted, or (ii) hides an unclaimed advance that would rescue it. Neither holds. On (ii): the artifact's two proved claims are both already adjudicated packet findings. CLM-0123-1 is FND-0180 (with FND-0168(3) and the FND-0185 duality), CLM-0123-2 is FND-0185 verbatim in content ('sufficient, not necessary; non-Tate summands of the source may die in the map to T'). Neither finding is cited anywhere in dependency_claim_ids, proof_dependencies, or source_ids; ATT-0123 instead attributes the Borel-Moore image form to CLM-0120-2..5, which do not state it (CLM-0120-3/4 define T_Z purely as the ordinary-cohomology kernel ker(T->W_{26}H^{26}(M_{6,6}\\Y;Q)(21)), and ATT-0120 section 0 declines standalone theories on the singular closed Y), and to a REV-0169 reasoning note plus an uncorroborated review candidate, which the packet's execution boundary rules out as evidence ('No raw review or candidate finding is evidence in this packet'). That misattribution is a real provenance defect but not a mathematical one, since FND-0180/FND-0185 make the step available. On (i) I ran the full checklist and found no error to exploit. Degrees, weights, twists: 2*21-16=26 and 26-2*21=-16, T is Borel-Moore degree 16 weight -16, Q(8) is Hodge type (-8,-8) of weight -16 (not Q(-8), which is the dual compact-support corner of FND-0168(1)), and ATT-0123 keeps FND-0001's Poincare identification distinct from FND-0168(1)'s duality rather than conflating them. Gysin: none is taken, and the map used, Borel-Moore proper pushforward i_*:H^{BM}_{16}(Y)->H^{BM}_{16}(M_{6,6}), is degree- and twist-preserving, so no shift by twice a codimension and no fundamental class of Y appears; the FND-0052 / FND-0168(5a)/(5b) obligations are routed around, not assumed away, and FND-0147's monomorphism is not upgraded to a closed immersion. Kunneth: no product decomposition is used. Spectral sequences: only a long exact localization sequence, so no differential or degeneration bookkeeping is owed. Stack versus coarse moduli and integral versus rational coefficients: everything is stack-level with Q-coefficients, and no FND-0075/FND-0144 content is engaged. Invariants versus coinvariants under S_6 or graph automorphisms: not engaged, since the ordered model maps to the ordered stack and Y is formed in M_{6,6}; FND-0152(ii) is respected in that no induction/transfer identity is upgraded to Tate type. Semisimplification versus actual isomorphism: CLM-0123-2 is an honest Hodge-structure isomorphism argument on a pure weight -16 object, and FND-0033 removes any extension gap. Predicted motives, and pure Tate upgraded to algebraic or tautological generation: neither appears, and no Hodge-conjecture step of the FND-0168(4) type is taken. Omitted stable pairs: none is omitted because no compactification or boundary accounting is opened at all; the theorem itself excludes assembly of complementary terms, and the one-sided coverage inherited from CLM-0120-5 inflates rather than omits. Second attack, on the disproof clause: the artifact's counterexample audit is correct in refusing FND-0176/FND-0178's (10,6) constant-product witness and any atlas or family-base non-Tateness as a refutation, because the theorem's survival clause demands a non-Tate subquotient of this named T_Z, and FND-0171 records that corner injections do not propagate non-Tateness; so no refutation is available from the artifact's own material either, and refuted is not the correct verdict. Third attack, on the choice of sufficient condition: routing through Tate-ness of A=W_{-16}H^{BM}_{16}(Y;Q) is strictly stronger than the theorem needs, since T_Z is only a quotient of A, and FND-0053, FND-0170 and FND-0176 make it live that A carries non-Tate summands; in the weakest-sufficient-proof lane the artifact thus adopts an antecedent that is both unproved and plausibly false, which is why the conditional cannot be repaired by supplying more of the same interface. Binding check: ATT-0123's packet_id, packet_sha256 (dda8b4ee...), packet_binding_sha256 (2054a3c3...), campaign_revision 5, context_revision 2, task_id TASK-C66-M-005, subproblem_id C66-TATE-SUPPORT, target dictionary field-by-field, and theorem_statement all match TASK.json exactly; engine codex matches prover_engine and this reviewer engine is not in excluded_reviewer_engines. Hashes were verified by recorded-field consistency only, since the workspace is read-only with no shell; the earlier packet_sha256 10948ae9... on ATT-0120/REV-0169/REV-0170 is an earlier byte-state of the same packet under the same binding hash and is recorded as non-adverse.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms.",
+  "verdict": "incomplete"
+}

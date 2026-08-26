@@ -1,0 +1,157 @@
+{
+  "argument_markdown": "Let X=M_{6,6}. By ATT-0120/CLM-0120-2--CLM-0120-4, Y is the reduced Zariski closure of the balanced ordered CE classifying image and T_Z is the kernel of restriction from T to the weight-26 cohomology of X\\Y. Poincare-Verdier localization identifies it with im(W_{-16}H^{BM}_{16}(Y;Q)->T).\n\nThis identification proves only that T_Z is a pure polarizable Hodge structure of weight -16. It does not determine its Hodge bidegrees. In particular, weight -16, Borel-Moore degree 16, and closed support inside a smooth 21-fold do not formally imply type (-8,-8): for an abelian ninefold A, the closed embedding A\u00d7{pt} into A\u00d7P^{12} maps H^2(A)(9) into weight -16 Borel-Moore degree 16 and retains the off-diagonal types (-7,-9) and (-9,-7).\n\nConsequently a proof for this named T_Z requires additional geometry showing either that its image is supported in dimension at most eight, that the relevant lowest-weight groups on every residual stratum are Tate, or that every non-Tate summand of W_{-16}H^{BM}_{16}(Y) lies in the kernel of the map to T. None of these statements is supplied by ATT-0120 or its confirmation reviews. Conversely, the admitted non-Tate classes on arbitrary atlases or standalone CE models have no proved nonzero image in T_Z and therefore do not disprove the theorem.\n\nThus neither the required proof nor the required target-level disproof is established. Marking this artifact claimed_complete would assert an unsupported mathematical conclusion.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "claims": [
+    {
+      "id": "CLM-0126-1",
+      "statement": "The verified interface identifies T_Z with ker(T->W_{26}H^{26}(M_{6,6}\\Y;Q)(21)), equivalently with the image of W_{-16}H^{BM}_{16}(Y;Q) in T.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0126-2",
+      "statement": "Purity of weight -16 and support in a smooth 21-dimensional ambient space do not, without further geometric input, force a Borel-Moore degree-16 image to be a direct sum of Q(8).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0126-3",
+      "statement": "The admitted standalone non-Tate CE-model classes do not constitute a disproof because no nonzero image of such a class in the named T_Z is proved.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": false,
+    "not_reduction_only": false,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0120-2",
+    "CLM-0120-3",
+    "CLM-0120-4",
+    "CLM-0120-5",
+    "CLM-0120-6",
+    "CLM-0120-7"
+  ],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Standalone non-Tate cohomology of an atlas or product CE model does not reach the named target image."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Purity and weight bookkeeping alone do not imply Tate type."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "Artin vanishing lowers the possible support dimension only to 16 and does not control dimensions 9 through 16."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "The verified interface supplies no regular embedding or Gysin computation."
+    }
+  ],
+  "gap_markers": [
+    "The Hodge type of im(W_{-16}H^{BM}_{16}(Y;Q)->T) is undetermined on residual support strata of dimensions 9 through 16, and no non-Tate summand is proved to survive this map."
+  ],
+  "id": "ATT-0126",
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "open-closed-localization-audit",
+    "Poincare-Verdier-support-image-audit",
+    "mixed-Hodge-type-counterexample-audit"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_path": "proof/packets/generated/C66-001-v5.md",
+  "packet_sha256": "dda8b4ee2729206dd6c448c63790c99d3e79714f2020ef324a2cbbea4a3e73a9",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0120",
+      "kind": "attempt",
+      "note": "Verified C66-SUPPORT-INTERFACE defining Y, the restriction map, and the named kernel T_Z."
+    },
+    {
+      "id": "REV-0169",
+      "kind": "confirmation_review",
+      "note": "Independent confirmation of ATT-0120, including the distinction between the supports group and its image in T."
+    },
+    {
+      "id": "REV-0170",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0120 and its one-sided coverage clause."
+    },
+    {
+      "id": "FND-0001",
+      "kind": "adjudicated_finding",
+      "note": "Poincare-duality identification T=W_{26}H^{26}(M_{6,6};Q)(21)."
+    }
+  ],
+  "result_type": "proof",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [],
+  "status": "proposed",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "summary": "No complete proof or disproof can be certified from the admitted data. ATT-0120 identifies the named object as the image of W_{-16}H^{BM}_{16}(Y;Q) in T, but no admitted result proves that image Tate, zero, or non-Tate. Claiming completion would require an unsupported Hodge-type assertion.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "target_interface_reference": {
+    "interface_attempt_id": "ATT-0120",
+    "interface_claim_ids": [
+      "CLM-0120-2",
+      "CLM-0120-3",
+      "CLM-0120-4",
+      "CLM-0120-5",
+      "CLM-0120-6",
+      "CLM-0120-7"
+    ],
+    "survival_or_tate_argument": "No unconditional Tate or survival argument is available: the interface supplies the image map but neither proves its source Tate nor proves that its non-Tate part maps to zero or nonzero.",
+    "target_map_use": "The target map is the verified inclusion phi:T_Z->T obtained from the kernel of open restriction; no Gysin map from the CE atlas or standalone Z is used.",
+    "target_subquotient": "T_Z:=ker(r_T), where r_T:T->W_{26}H^{26}(M_{6,6}\\Y;Q)(21); equivalently T_Z=im(W_{-16}H^{BM}_{16}(Y;Q)->T)."
+  },
+  "task_id": "TASK-C66-M-005",
+  "theorem_scope": {
+    "coefficients": "Q",
+    "g": 6,
+    "ground_field": "C",
+    "n": 6,
+    "not_covered": [
+      "C66-TATE-ASSEMBLY",
+      "the complementary image of T in W_{26}H^{26}(U_Y;Q)(21)",
+      "the campaign target RED-0001"
+    ],
+    "objects": [
+      "T=W_{-16}H^{BM}_{16}(M_{6,6};Q)",
+      "Y, the reduced classifying-image closure supplied by ATT-0120",
+      "U_Y=M_{6,6}\\Y",
+      "T_Z=ker(T->W_{26}H^{26}(U_Y;Q)(21))"
+    ]
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms."
+}

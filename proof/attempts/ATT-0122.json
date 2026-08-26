@@ -1,0 +1,193 @@
+{
+  "argument_markdown": "## 0. Scope, exact target, and result status\n\nWork with Q-coefficients, over C for mixed Hodge structures. Write X := M_{6,6} (smooth Deligne-Mumford stack, dimension d = 21) and T := W_{-16}H^{BM}_{16}(X;Q). The assigned exact theorem is quoted verbatim in theorem_statement. The verified C66-SUPPORT-INTERFACE datum is ATT-0120, dual-confirmed by REV-0169 and REV-0170; every use of that dependency below cites its artifact ID and claim IDs.\n\nResult status, stated up front: the assigned theorem is NOT discharged by the currently verified inputs. This artifact proves the weakest sufficient conditional theorem (Lemma 1, CLM-0122-1/2): the Tate conclusion for T_Z follows formally, by semisimplicity, from the Tate property of T itself, and that hypothesis is shown to be exactly the campaign target RED-0001 in three equivalent guises. It also proves a support-dimension sharpening (Lemma 2, CLM-0122-3: dim Y <= 17, improving the REV-0169 candidate bound dim Y <= 20), and it certifies the exact residual gap (Section 4). No disproof is claimed: no non-Tate subquotient of this named T_Z is exhibited through the verified interface, and the theorem statement itself excludes the surrogate disproof lanes (arbitrary family base, atlas, product model, standalone Z, source classes with unproved nonzero target image).\n\nEvidence limitation: the native web-evidence stage was bounded and unavailable (stage-1 docket). This artifact relies only on the local verified artifacts ATT-0120/REV-0169/REV-0170 and on established working-context facts of the primary file, which was read end-to-end. Extended and archive overflow files were not consulted; constraints recorded in the primary file are respected.\n\nNo blocked route is used: no vcd-only-vanishing, no undecorated-cgp-top-weight-graph-complex, no point-count-without-degree-parity-separation, no forgetful-map-renaming-local-system-unknown. Section 5 addresses each.\n\n## 1. Verified interface inputs (ATT-0120, dual-confirmed by REV-0169 and REV-0170)\n\nFrom ATT-0120/CLM-0120-3 (confirmed by both reviews): with Y the atlas-independent reduced closed substack of X that is the Zariski closure of the classifying image of the ordered reduced-support CE model, the open-closed localization of the smooth stack X along Y gives r: H^{26}(X;Q) -> H^{26}(U_Y;Q), U_Y = X minus Y; both ends have weights at least 26, so W_{26} = Gr^W_{26}; Poincare duality (packet adjudicated finding FND-0001, an established working-context fact) identifies T with W_{26}H^{26}(X;Q)(21), yielding r_T: T -> W_{26}H^{26}(U_Y;Q)(21).\n\nFrom ATT-0120/CLM-0120-4 (confirmed by both reviews): K_Z := ker(r_T) is a pure weight -16 subobject of T; T_Z := K_Z with phi the inclusion is the CE support-accounting datum. REV-0169 (checked note on CLM-0120-4) records that K_Z, as a subobject of the pure structure T, is pure of weight -16 and polarizable.\n\nFrom the confirmed review notes (REV-0169 on CLM-0120-5; REV-0170 on CLM-0120-4): T_Z equals the IMAGE of the supports map, T_Z = im(W_{26}H^{26}_Y(X;Q)(21) -> T), equivalently im(W_{-16}H^{BM}_{16}(Y;Q) -> T) by exactness of W_{-16} on the Borel-Moore localization sequence and compatibility of Poincare duality with open restriction on the smooth pair. This image formulation is used whenever a supports description is needed; the supports group itself is never identified with its image (the FND-0168(3a)/(3b) hazard, flagged by REV-0169).\n\nFrom ATT-0120/CLM-0120-6 and Section 3 (confirmed by both reviews): Y is unchanged if one starts from an etale atlas of Hbar^bal = [H^bal/PGL_2], because the induced X-valued point is PGL_2-invariant (ATT-0120 dependency claim CLM-0112-7, checked in REV-0169/REV-0170 proof_dependency_checks); Hbar^bal is smooth of pure dimension 15 (ATT-0120 dependency claims CLM-0112-6/7); the ordered reduced-support incidence is finite etale over the reduced-support open of the Abel-Jacobi P^2-bundle, of pure relative dimension 2 (ATT-0120 dependency claim CLM-0112-8).\n\n## 2. Lemma 1: weakest sufficient conditional (CLM-0122-1) and its contrapositive (CLM-0122-2)\n\nLemma 1. If T is a finite direct sum of copies of Q(8), then T_Z is a finite direct sum of copies of Q(8).\n\nProof. By CLM-0120-4 (ATT-0120, dual-confirmed), phi identifies T_Z with a subobject of T in the category of rational Hodge structures, and both are pure of weight -16 and polarizable (REV-0169 checked note on CLM-0120-4). The established working-context fact 'Pure polarizable rational Hodge structures are semisimple, so every subobject of a finite direct sum of Q(-m/2) is again a finite direct sum of Q(-m/2)' applies with weight -16, i.e. -m/2 = 8. Hence T_Z, as a subobject of Q(8)^{oplus r}, is Q(8)^{oplus s} for some s <= r. (Equivalently: semisimplicity splits the inclusion T_Z -> T, and Q(8) is simple since it is one-dimensional, so every summand of a finite sum of Q(8)'s is a finite sum of Q(8)'s.) QED.\n\nEquivalent forms of the hypothesis (CLM-0122-1, second part). The following are equivalent, by established working-context facts alone:\n(a) T is a finite direct sum of Q(8);\n(b) Gr^W_{26}H^{26}(M_{6,6};Q) is a finite direct sum of Q(-13), using the Poincare identification T = W_{26}H^{26}(M_{6,6};Q)(21) and the established twist arithmetic Q(-13)(21) = Q(8);\n(c) Gr^W_{16}H_c^{16}(M_{6,6};Q) is a finite direct sum of Q(-8), using the established fact that Borel-Moore homology is dual to compactly supported cohomology in the same degree with no extra Tate twist and that the dual of Q(-8) is Q(8);\n(d) K := ker(H^{16}(Mbar_{6,6};Q) -> H^{16}(D;Q)) is a finite direct sum of Q(-8), using the established proper-pair localization identity Gr^W_{16}H_c^{16}(M_{6,6};Q) ~= K.\nThus the single hypothesis needed by Lemma 1 is exactly the campaign target RED-0001 in its compact-corner form (d).\n\nCorollary (CLM-0122-2, obstruction direction). If T_Z possessed a non-Tate subquotient, then T would not be a finite direct sum of Q(8), i.e. RED-0001 would fail. Proof: contrapositive of Lemma 1, using that in a semisimple category every subquotient of a Tate sum is Tate. Consequence for the campaign DAG: any future proof of RED-0001 discharges the assigned theorem for this T_Z automatically, and any future disproof of the assigned theorem must simultaneously refute RED-0001. The subproblem is therefore welded to the campaign target, not independent of it.\n\n## 3. Lemma 2: support-dimension sharpening (CLM-0122-3)\n\nLemma 2. dim Y <= 17 < 21 = dim M_{6,6}; in particular Y is a proper closed substack and T_Z cannot degenerate into the support-exhaustion term T_Z = T by way of Y = M_{6,6}.\n\nProof. By CLM-0120-6 and ATT-0120 Section 3 (both dual-confirmed), Y is equally obtained from an etale atlas of Hbar^bal = [H^bal/PGL_2], since the X-valued point is PGL_2-invariant (dependency claim CLM-0112-7, checked in REV-0169 and REV-0170). Over such an atlas the ordered reduced-support incidence is finite etale over the reduced-support open of the Abel-Jacobi P^2-bundle, hence of pure dimension dim(Hbar^bal) + 2 = 15 + 2 = 17 (dependency claims CLM-0112-6/7 and CLM-0112-8 as recorded in ATT-0120 Section 1). A finite-type morphism cannot increase dimension of the image, and Zariski closure preserves the dimension bound, so dim Y <= 17. Cross-checks: the pinned reusable computation 'dim Z_dom = 15+2 = 17; codim_{M_{6,6}} Z = 21-17 = 4' (sha256 9316384d93bdc0aca6ac94c2622ceab11148cc8ec1a21f25894c0d8893918565) and the established fact 'A B_3 component of dimension 15 has incidence-source dimension 17'. This sharpens the REV-0169 candidate bound dim Y <= 20 (which used the pre-quotient 18+2 count) by exploiting the confirmed PGL_2-invariance. Scope guard: dim Y <= 17 does not by itself force T_Z = 0 or force Tate type; Gr^W_{16}H_c^{16} of a 17-dimensional closed substack need neither vanish nor be Tate, and no such inference is made.\n\n## 4. Gap certification: why the assigned theorem is not discharged\n\n4.1 The hypothesis of Lemma 1 is RED-0001 (equivalent forms (a)-(d) above). No verified artifact supplies it. The verified interface ATT-0120 defines T_Z by a vanishing condition and transmits no CE-geometric information downstream: REV-0169's strongest attack, residual weakness (a), states that computing T_Z requires the FND-0168(5a)/(5b) closed-embedding-plus-Gysin input, or a descent/resolution substitute, and neither is a verified input. The primary working context records that treating the balanced reduced-support model as a closed pure-codimension-four subvariety with a Gysin map is a hard constraint (not shown), so that route is not walked.\n\n4.2 The established forgetful-tower facts reduce, but do not determine, Gr^W_{26}H^{26}(M_{6,6}): H^{26}(M_{6,6}) ~= H^{25}(M_{6,5}; R^1 p_* Q) (MHS-compatible); 0 -> H -> R^1 p_* Q -> Q(-1)^4 -> 0 with H the weight-1 rank-12 local system of the universal closed genus-6 curve; W_{26}H^{25}(M_{6,5}; Q(-1)^4) = 0 by the weight floor (weights at least 27); and, iterating, the residue-quotient contributions V_r(-1)^{j-2} in degrees d_{j-1} = 19+j have weight 27 and vanish in Gr^W_{26} for j = 2,...,6 (established fact). The surviving piece is controlled by cohomology of the M_{6,j} with coefficients built from the weight-1 local system H; its weight-26 part is not determined by any verified input. Asserting a Tate type for it would be the blocked route forgetful-map-renaming-local-system-unknown; it is not asserted and not renamed.\n\n4.3 T_Z = 0 is not provable from verified inputs either: T_Z = im(W_{-16}H^{BM}_{16}(Y) -> T) (Section 1), and neither the dimension bound of Lemma 2 nor any verified input forces that image to vanish; ATT-0120 Section 3 explicitly records that nonemptiness of Y does not exclude vanishing and that nonzeroness of T_Z is not needed. No vanishing claim is made.\n\n4.4 No disproof is available or claimed. A valid disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface phi: T_Z -> T (ATT-0120/CLM-0120-4). Non-Tate cohomology of the ordering cover, the atlas, the family base, or standalone Z is excluded by the theorem statement and is in any case insufficient: the primary frontier obligation records that the induction isomorphism does not determine the Tate type of the ordering-cover object, and no verified artifact supplies a source class whose image in T_Z is proved nonzero (GAP-0122-3). Hence no counterexample lane is asserted.\n\n## 5. Blocked-route accounting (addressed, not reused)\n\n- vcd-only-vanishing: not used as a route. The established fact FND-0036 (H^{26}(M_{6,5};Q) = 0 since 26 > vcd(M_{6,5}) = 25) is used only as one input inside the separately established, review-confirmed Leray isomorphism of Section 4.2, and a vanishing statement could in any case never supply the Tate structure the assigned theorem requires; the target group sits at 26 = vcd(M_{6,6}), where no such vanishing applies.\n- undecorated-cgp-top-weight-graph-complex: no graph-complex computation is made; in particular no claim that Gr^W_{26}H^{26}(M_{6,6}) vanishes or has a specific rank from an undecorated CGP complex.\n- point-count-without-degree-parity-separation: no point counts over finite fields are used anywhere.\n- forgetful-map-renaming-local-system-unknown: the weight-26 cohomology with universal-curve local-system coefficients is explicitly left undetermined (GAP-0122-2); no Tate rename is applied to it.\n\nNo new_inputs are declared: there is no genuinely new evidence reopening any blocked route.\n\n## 6. Frontier direction (what would discharge the assigned theorem)\n\nAny one of the following verified inputs would close the gap via Lemma 1 or directly:\n(i) a proof of RED-0001 in form (d): K = ker(H^{16}(Mbar_{6,6};Q) -> H^{16}(D;Q)) is a finite direct sum of Q(-8);\n(ii) an FND-0168(5a)/(5b)-type input: a closed stratified embedding of the balanced reduced-support model after h^0/splitting-type stratification, with Gysin, or a descent/resolution substitute computing im(W_{26}H^{26}_Y(X;Q)(21) -> T) from the CE family, together with a Tate identification of the result;\n(iii) a constructed class in T_Z with proved nonzero image under phi and a computed Hodge realization (opening a concrete Tate-versus-non-Tate decision, and, by CLM-0122-2, a RED-0001 test).\nThis artifact does not assemble the complementary target terms, in accordance with the assigned theorem's final sentence: Lemma 1 uses only that T_Z is a subobject of T and makes no claim about im(r_T).\n\n## 7. Explicitly not claimed\n\n- Tate type of T, T_Z, or K_Z; no unconditional sum of Q(8) or Q(-8) is asserted.\n- T_Z = 0, T_Z = T, or support-exhaustion of any kind.\n- Closedness, purity, regular-immersion, lci structure, or a Gysin map for Z or for Y inside M_{6,6}.\n- Monomorphism, quasi-finiteness, unramifiedness, or full faithfulness of the classifying morphism; no Aut(C,Gamma) computation.\n- Any graph-complex evaluation, point count, or vcd-only resolution of the target.\n- Integral coefficients, coarse moduli, nonreduced bases.\n- Assembly of the complementary corner im(r_T).",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "claims": [
+    {
+      "id": "CLM-0122-1",
+      "statement": "Weakest sufficient conditional: if T = W_{-16}H^{BM}_{16}(M_{6,6};Q) is a finite direct sum of Q(8), then T_Z (the ATT-0120 datum, T_Z = ker(r_T) subset T) is a finite direct sum of Q(8). Proof: T_Z is a subobject of the pure polarizable weight -16 structure T (ATT-0120/CLM-0120-4, dual-confirmed by REV-0169/REV-0170); the established semisimplicity fact for pure polarizable rational Hodge structures makes every subobject of a finite sum of Q(8)'s a finite sum of Q(8)'s. The hypothesis is equivalent, via established facts alone, to each of: Gr^W_{26}H^{26}(M_{6,6};Q) a sum of Q(-13) (Poincare reindexing and Q(-13)(21)=Q(8)); Gr^W_{16}H_c^{16}(M_{6,6};Q) a sum of Q(-8) (BM/compact-support duality, dual of Q(-8) is Q(8)); K = ker(H^{16}(Mbar_{6,6};Q) -> H^{16}(D;Q)) a sum of Q(-8) (proper-pair localization identity). This hypothesis is exactly RED-0001.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0122-2",
+      "statement": "Obstruction direction (contrapositive of CLM-0122-1): if T_Z possessed a non-Tate subquotient, then T would not be a finite direct sum of Q(8), i.e. RED-0001 would fail. Hence any proof of RED-0001 discharges the assigned theorem for this T_Z, and any disproof of the assigned theorem must refute RED-0001.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0122-3",
+      "statement": "Support-dimension sharpening: dim Y <= 17 < 21 = dim M_{6,6}, where Y is the ATT-0120 closed support. Proof: by ATT-0120/CLM-0120-6 and Section 3 (dual-confirmed), Y is obtained from an etale atlas of Hbar^bal = [H^bal/PGL_2] because the classifying point is PGL_2-invariant (CLM-0112-7); Hbar^bal has dimension 15 (CLM-0112-6/7) and the ordered reduced-support incidence has pure relative dimension 2 (CLM-0112-8), giving source dimension 17; finite-type images and their closures satisfy the same bound. Cross-checked against the pinned computation dim Z_dom = 15+2 = 17 (sha256 9316384d93bdc0aca6ac94c2622ceab11148cc8ec1a21f25894c0d8893918565). This improves the REV-0169 candidate bound dim Y <= 20 and excludes the degenerate exhaustion reading Y = M_{6,6}; it is not asserted to imply T_Z = 0 or Tate type.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0122-4",
+      "statement": "Image-form description used throughout: T_Z = im(W_{26}H^{26}_Y(M_{6,6};Q)(21) -> T) = im(W_{-16}H^{BM}_{16}(Y;Q) -> T), never the supports group itself. This is the formulation confirmed in REV-0169 (checked note on CLM-0120-5) and REV-0170 (checked note on CLM-0120-4), and it avoids the FND-0168(3a)/(3b) supports-group-versus-image hazard that REV-0169 records as recurring in the ordinary-cohomology language.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0122-5",
+      "statement": "Gap certification: the assigned exact theorem is not discharged by the verified inputs. The only missing input for the proof direction is the Tate property of T, equivalently of K = ker(H^{16}(Mbar_{6,6};Q) -> H^{16}(D;Q)) (CLM-0122-1), which is RED-0001 and is supplied by no verified artifact; the forgetful-tower reduction terminates in undetermined weight-26 cohomology with universal-curve local-system coefficients (established facts, Section 4.2). No disproof direction is available: no non-Tate subquotient of this named T_Z is exhibited through phi, and surrogate lanes are excluded by the theorem statement. No blocked route is reused.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0120-1",
+    "CLM-0120-2",
+    "CLM-0120-3",
+    "CLM-0120-4",
+    "CLM-0120-5",
+    "CLM-0120-6",
+    "CLM-0120-7"
+  ],
+  "engine": "qwen",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "vcd-only-vanishing: not reused. The established FND-0036 vanishing H^{26}(M_{6,5};Q) = 0 (26 > vcd = 25) is used only inside the separately established, review-confirmed Leray isomorphism H^{26}(M_{6,6}) = H^{25}(M_{6,5}; R^1 p_* Q) cited in gap analysis; a vanishing statement cannot supply a Tate structure, and the target sits at 26 = vcd(M_{6,6}) where no such vanishing applies."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "undecorated-cgp-top-weight-graph-complex: not reused. No graph-complex computation is made and no rank or vanishing of Gr^W_{26}H^{26}(M_{6,6}) is inferred from any undecorated CGP complex."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "point-count-without-degree-parity-separation: not reused. No point counts over finite fields appear anywhere in the argument."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "forgetful-map-renaming-local-system-unknown: not reused. The weight-26 cohomology of the M_{6,j} with coefficients in the weight-1 universal-curve local system H is explicitly left undetermined (GAP-0122-2); no Tate type is assigned to it by renaming."
+    }
+  ],
+  "gap_markers": [
+    {
+      "description": "Tate property of T = W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently of K = ker(H^{16}(Mbar_{6,6};Q) -> H^{16}(D;Q)) being a finite direct sum of Q(-8). This is RED-0001 (target_claim_id) and is the exact hypothesis of CLM-0122-1; no verified artifact supplies it.",
+      "id": "GAP-0122-1"
+    },
+    {
+      "description": "Weight-26 part of cohomology of M_{6,j} with coefficients built from the weight-1 universal-curve local system H, after the established residue-quotient contributions (weight 27) are removed. Undetermined by verified inputs; asserting its Tate type would walk the blocked route forgetful-map-renaming-local-system-unknown.",
+      "id": "GAP-0122-2"
+    },
+    {
+      "description": "No verified source class has a proved nonzero image in T_Z under phi. Consequently neither a Tate generator (proof lane) nor a non-Tate subquotient (disproof lane) can currently be exhibited through the verified target interface; the frontier obligation that the induction isomorphism does not determine the Tate type of the ordering-cover object remains open.",
+      "id": "GAP-0122-3"
+    }
+  ],
+  "id": "ATT-0122",
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "semisimplicity-splitting-of-pure-polarizable-subobjects",
+    "poincare-duality-reindexing-of-the-open-borel-moore-target",
+    "tate-twist-arithmetic-q-minus13-to-q8",
+    "bm-compact-support-duality-and-proper-pair-localization-kernel-identity",
+    "pgl2-quotient-dimension-sharpening-of-the-support-closure",
+    "conditional-reduction-of-support-tate-property-to-red0001",
+    "image-form-supports-description-avoiding-fnd0168-hazard"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "Sharpens the REV-0169 candidate bound dim Y <= 20 to dim Y <= 17 by exploiting the confirmed PGL_2-invariance of the classifying point (ATT-0120/CLM-0120-6 via CLM-0112-7), pinning the numerical codimension 4 of the support closure and excluding the exhaustion reading with the stronger bound.",
+    "Proves the exact formal weld between C66-TATE-SUPPORT and the campaign target: T_Z is Tate whenever T is Tate (semisimplicity splitting of the verified kernel inclusion), and conversely any non-Tate subquotient of T_Z would refute RED-0001; consequently the single missing input for the assigned theorem is the Tate property of K = ker(H^{16}(Mbar_{6,6}) -> H^{16}(D)), and no other route can discharge this subproblem without settling that object."
+  ],
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_path": "proof/packets/generated/C66-001-v5.md",
+  "packet_sha256": "23efe9f2f168b57baa4c2cdfb9a7e0112f5bab6837d59adb11ed582ee30200ce",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0120",
+      "kind": "attempt",
+      "note": "Verified C66-SUPPORT-INTERFACE datum (sha256 recorded in TASK.json). Supplies the named datum (K_Z, T_Z, phi) with T_Z = ker(r_T) a pure weight -16 subobject of T (CLM-0120-4), the localization map r_T and weight/twist ledger (CLM-0120-3), atlas independence and PGL_2-invariant reformulation over [H^bal/PGL_2] (CLM-0120-6, Section 3), and the no-Tate-assertion scope (CLM-0120-7). Used only through its confirmed claims; its nested ATT-0112/ATT-0088/ATT-0065/ATT-0066 inputs are used only as recorded in its dependency_claim_ids and checked in the two confirmation reviews."
+    },
+    {
+      "id": "REV-0169",
+      "kind": "confirmation_review",
+      "note": "First independent confirmation of ATT-0120. Used for: polarizability of K_Z as subobject of T (checked note on CLM-0120-4); image-form description T_Z = im(W_{-16}H^{BM}_{16}(Y) -> T) (checked note on CLM-0120-5); the residual-weakness record that the interface transmits no CE-geometric information and that computing T_Z needs FND-0168(5a)/(5b) or a substitute (strongest attack, item (a)); and the candidate bound dim Y <= 20 that CLM-0122-3 sharpens to 17 (candidate treated as unproved, then improved)."
+    },
+    {
+      "id": "REV-0170",
+      "kind": "confirmation_review",
+      "note": "Second independent confirmation of ATT-0120. Used for: the image-form description (checked note on CLM-0120-4), the PGL_2-invariance check underlying CLM-0122-3 (checked note on CLM-0120-6), and the confirmation that no Tate assertion, Gysin map, or closed embedding is contained in the interface (checked note on CLM-0120-7)."
+    },
+    {
+      "id": "FND-0001",
+      "kind": "adjudicated_finding",
+      "note": "Poincare duality reindexing W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21) at d = 21; used as an established working-context fact (mechanically verified, cases all), only on M_{6,6}."
+    }
+  ],
+  "result_type": "lemma",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [],
+  "status": "proposed",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "summary": "For the ATT-0120 verified interface datum T_Z = ker(T -> W_{26}H^{26}(M_{6,6} minus Y;Q)(21)) subset T = W_{-16}H^{BM}_{16}(M_{6,6};Q), dual-confirmed by REV-0169 and REV-0170, the artifact proves the weakest sufficient conditional theorem: since T_Z is a subobject of the pure polarizable weight -16 structure T, the established semisimplicity of pure polarizable Hodge structures implies that T_Z is a finite direct sum of Q(8) whenever T is; the hypothesis is shown equivalent, via established facts, to Gr^W_{26}H^{26}(M_{6,6}) being Q(-13)-Tate, to Gr^W_{16}H_c^{16}(M_{6,6}) being Q(-8)-Tate, and to K = ker(H^{16}(Mbar_{6,6}) -> H^{16}(D)) being Q(-8)-Tate, i.e. exactly RED-0001. Contrapositively, any non-Tate subquotient of T_Z would refute RED-0001. The artifact also sharpens the REV-0169 candidate support bound to dim Y <= 17 < 21 via the confirmed PGL_2-invariance, excluding the exhaustion reading. The assigned exact theorem is not discharged: the RED-0001 hypothesis is supplied by no verified input (the interface transmits no CE-geometric information, and the forgetful-tower reduction terminates in undetermined local-system cohomology), and no valid disproof is available because no non-Tate subquotient of this named T_Z is exhibited through the verified interface. All four blocked routes are addressed and none is reused.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "target_interface_reference": {
+    "interface_attempt_id": "ATT-0120",
+    "interface_claim_ids": [
+      "CLM-0120-1",
+      "CLM-0120-2",
+      "CLM-0120-3",
+      "CLM-0120-4",
+      "CLM-0120-5",
+      "CLM-0120-6",
+      "CLM-0120-7"
+    ],
+    "survival_or_tate_argument": "Tate argument (conditional, proved in CLM-0122-1): T_Z is a subobject of the pure polarizable weight -16 structure T; by the established semisimplicity fact, if T is a finite direct sum of Q(8) - equivalently Gr^W_{26}H^{26}(M_{6,6}) is a sum of Q(-13), equivalently K = ker(H^{16}(Mbar_{6,6}) -> H^{16}(D)) is a sum of Q(-8), i.e. RED-0001 - then the inclusion splits and T_Z is a finite direct sum of Q(8). Contrapositively (CLM-0122-2), any non-Tate subquotient of T_Z would refute RED-0001. Nonzeroness or survival of a specific class in T_Z is not asserted by the interface and is not needed for the conditional. No non-Tate subquotient of this named T_Z is exhibited through phi, and surrogate disproof lanes (family base, atlas, product model, standalone Z, source classes without proved nonzero target image) are excluded by the theorem statement; hence no disproof is claimed. Residual gaps: GAP-0122-1 (the RED-0001 hypothesis), GAP-0122-2 (undetermined local-system cohomology in the forgetful-tower reduction), GAP-0122-3 (no class with proved nonzero image in T_Z).",
+    "target_map_use": "phi: T_Z -> T is the ATT-0120 kernel inclusion (CLM-0120-4), used exactly as the verified embedding of T_Z into the pure polarizable object T so that semisimplicity applies to T_Z as a subobject. It is not used as a Gysin map, no closed embedding of Z is invoked, and no map from the cohomology of Z or of a model of Y is asserted (none exists in the verified inputs, per REV-0169 strongest attack item (a)).",
+    "target_subquotient": "T_Z := K_Z = ker(r_T), where r_T: T = W_{-16}H^{BM}_{16}(M_{6,6};Q) -> W_{26}H^{26}(M_{6,6} minus Y;Q)(21) is the ATT-0120 localization restriction (CLM-0120-3/4, dual-confirmed by REV-0169 and REV-0170). It is a pure polarizable weight -16 subobject of T, equivalently the image of W_{26}H^{26}_Y(M_{6,6};Q)(21) -> T, equivalently im(W_{-16}H^{BM}_{16}(Y;Q) -> T), in the image form confirmed by both reviews (FND-0168 supports-group-versus-image hazard avoided)."
+  },
+  "task_id": "TASK-C66-M-005",
+  "theorem_scope": {
+    "coefficients": "Q",
+    "g": 6,
+    "ground_field": "C for mixed Hodge structures; the CE source geometry is used only through the verified ATT-0120 datum",
+    "n": 6,
+    "not_covered": [
+      "unconditional Tate type of T, T_Z, or K_Z (this is the RED-0001 hypothesis, left open)",
+      "T_Z = 0 or T_Z = T (support-exhaustion)",
+      "a closed embedding, regular immersion, lci structure, or Gysin map for Z or Y inside M_{6,6}",
+      "monomorphism, unramifiedness, quasi-finiteness, or full faithfulness of the classifying morphism",
+      "assembly of the complementary corner im(r_T)",
+      "graph-complex evaluations, point counts, or vcd-only resolutions",
+      "integral coefficients, coarse moduli, nonreduced bases",
+      "nonzeroness of T_Z"
+    ],
+    "objects": [
+      "T = W_{-16}H^{BM}_{16}(M_{6,6};Q)",
+      "ATT-0120 datum (K_Z, T_Z, phi) with T_Z = ker(r_T)",
+      "Y = reduced Zariski closure of the CE classifying image in M_{6,6}",
+      "U_Y = M_{6,6} minus Y",
+      "K = ker(H^{16}(Mbar_{6,6};Q) -> H^{16}(D;Q))"
+    ]
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms."
+}

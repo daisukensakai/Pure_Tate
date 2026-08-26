@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "context_revision": 2,
+  "created_on": "2026-08-24",
+  "excluded_engines": [
+    "claude"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "red0001-sufficient-not-necessary-for-tate-support",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-24",
+    "equivalence_group": "red0001-sufficient-not-necessary-for-tate-support",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0188",
+    "impacts_approach_ids": [
+      "C66-TATE-SUPPORT"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "claude"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      }
+    },
+    "source_attempt_ids": [
+      "ATT-0122"
+    ],
+    "source_review_ids": [
+      "REV-0174"
+    ],
+    "statement": "For C66-TATE-SUPPORT at (g,n)=(6,6), the hypothesis RED-0001 ('T = W_{-16}H^{BM}_{16}(M_{6,6};Q) is a finite direct sum of Q(8)') is sufficient for the Tate type of the interface subquotient T_Z, because T_Z is a subobject of T and FND-0033 applies, but it is not necessary, and no artifact may assert that discharging C66-TATE-SUPPORT requires settling RED-0001. Two adjudicated inputs already discharge the subproblem without touching RED-0001: FND-0185 (Tate-ness of W_{-16}H^{BM}_{16}(Y) implies Tate-ness of T_Z, through the FND-0180 image form T_Z = im(W_{-16}H^{BM}_{16}(Y)->T)) and FND-0186 (dimension-threshold vanishing of the Y'-supported contribution). The FND-0185 hypothesis concerns a closed support of dimension at most 17 and is logically incomparable with RED-0001, so sufficiency in one direction confers no necessity in the other. Only the contrapositive is valid: a non-Tate subquotient of T_Z refutes RED-0001. Consequently a conditional whose antecedent is RED-0001 is campaign-circular and cannot satisfy a weakest-sufficient-proof lane for this subproblem, since a weaker and non-circular sufficient input is already adjudicated.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0188",
+  "id": "TASK-F-FND-0188",
+  "input_packet": "proof/packets/generated/C66-001-v5.md",
+  "output": "research/finding-audits/FAUD-0197.json",
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "23efe9f2f168b57baa4c2cdfb9a7e0112f5bab6837d59adb11ed582ee30200ce",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "grok",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}

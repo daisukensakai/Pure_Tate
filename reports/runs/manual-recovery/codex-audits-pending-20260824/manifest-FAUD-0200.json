@@ -1,0 +1,69 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "context_revision": 2,
+  "created_on": "2026-08-24",
+  "excluded_engines": [
+    "grok"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "hs-j8-false-on-some-hbar-atlas",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-23",
+    "equivalence_group": "hs-j8-false-on-some-hbar-atlas",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0173",
+    "impacts_approach_ids": [
+      "C66-TATE-SUPPORT"
+    ],
+    "kind": "counterexample",
+    "reviewer_engines": [
+      "grok"
+    ],
+    "scope": "(g,n)=(6,6) over C with Q-coefficients; S a reduced separated finite-type scheme atlas of Hbar^bal=[H^bal/PGL_2]; Gr^W_16 H_c^16.",
+    "source_attempt_ids": [
+      "ATT-0118"
+    ],
+    "source_review_ids": [
+      "REV-0166"
+    ],
+    "statement": "The constant-coefficient corner Gr^W_16 H_c^16(S;Q) of a scheme atlas S of the balanced tetragonal stack Hbar^bal is atlas-dependent and can be forced to be non-Tate by adjoining a finite-etale refinement of a simply-branched balanced Hurwitz chart. Concretely, there is a connected etale-atlas component V of Hbar^bal with Gr^{15,1} Gr^W_16 H_c^16(V;C) nonzero, so Gr^W_16 H_c^16(V;Q) is not a direct sum of Q(-8). Hypothesis (H-S) of FND-0167 at j=8 is therefore false for some allowed S, and any C66-TATE-SUPPORT statement that asserts those base corners while quantifying over an unnamed reduced locally Noetherian scheme atlas is false as written. Repair requires naming a specific atlas or passing to a stack-level compact-support mixed Hodge theory, which FND-0165 withholds.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0173",
+  "id": "TASK-F-FND-0173",
+  "input_packet": "proof/packets/generated/C66-001-v5.md",
+  "output": "research/finding-audits/FAUD-0200.json",
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "dda8b4ee2729206dd6c448c63790c99d3e79714f2020ef324a2cbbea4a3e73a9",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "codex",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "context_revision": 2,
+  "created_on": "2026-08-24",
+  "excluded_engines": [
+    "claude"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "kernel-form-tate-criterion-nontate-part-in-kernel",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-24",
+    "equivalence_group": "kernel-form-tate-criterion-nontate-part-in-kernel",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0190",
+    "impacts_approach_ids": [
+      "C66-TATE-SUPPORT"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "claude"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      }
+    },
+    "source_attempt_ids": [
+      "ATT-0123"
+    ],
+    "source_review_ids": [
+      "REV-0175"
+    ],
+    "statement": "Let Y be a closed substack of X=M_{6,6}, A:=W_{-16}H^{BM}_{16}(Y;Q), T:=W_{-16}H^{BM}_{16}(X;Q), and let q:A->T_Z be the surjection of FND-0180/FND-0168(3a) onto the kernel-form term. By FND-0185, A is a pure polarizable Q-Hodge structure of weight -16, and polarizable pure Q-Hodge structures of fixed weight form a semisimple abelian category (FND-0033). Hence q splits, A is isomorphic to ker(q) direct-sum T_Z, and morphisms preserve canonical isotypic components, so writing A = A_Tate direct-sum A_nonTate for the canonical splitting into the Q(8)-isotypic part and its complement one gets (T_Z)_nonTate = q(A_nonTate). Therefore T_Z is a finite direct sum of Q(8) if and only if A_nonTate is contained in ker(q). Two lane consequences: a C66-TATE-SUPPORT proof routed through the verified interface source may replace the FND-0185 hypothesis 'A is Tate' by the strictly weaker and canonical 'A_nonTate is contained in ker(q)', and a C66-CEX-LOCAL / C66-CEX-SURVIVE disproof through the same interface must exhibit a non-Tate isotypic summand of A with nonzero image in T, which is the theorem's survival clause in checkable form. Exhibiting a non-Tate class anywhere in A, in an atlas, in a family base, or in a standalone product model settles neither lane.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0190",
+  "id": "TASK-F-FND-0190",
+  "input_packet": "proof/packets/generated/C66-001-v5.md",
+  "output": "research/finding-audits/FAUD-0199.json",
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "dda8b4ee2729206dd6c448c63790c99d3e79714f2020ef324a2cbbea4a3e73a9",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "codex",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}

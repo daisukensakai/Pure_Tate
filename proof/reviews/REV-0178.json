@@ -1,0 +1,193 @@
+{
+  "attempt_id": "ATT-0128",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "checked_claims": [
+    {
+      "claim_id": "PACKET-BINDING",
+      "note": "ATT-0128 binds to packet_id C66-001-v5, packet_sha256 8ae2b14911e24aed28afefbce2855d6b35a620fc7b0e1b92123d8aa8432e6b15, and packet_binding_sha256 2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3, matching TASK.json. The target dictionary and exact theorem statement also match TASK.json.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0128-1",
+      "note": "The recursive affine peeling construction is structurally sound for pass-1 triage: at each stage a nonempty affine open is chosen in each top-dimensional component of the reduced closed substack, the complement has strictly smaller dimension, and termination follows from Noetherian dimension decrease. The claim uses only existence of affine opens in quasi-projective coarse components and does not rely on a dimension bound for Y.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0128-2",
+      "note": "The filtration A_j and the subquotient bound follow from the purity sequence for the smooth pair (X minus Y^{(j+1)}, S_j), strictness of morphisms of mixed Hodge structures, and the smooth weight bound. The argument correctly avoids a Gysin map for (M_{6,6}, Z) and avoids naming a supports group as if it were equal to its image.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0128-3",
+      "note": "Endpoint vanishings are correct: for n >= 17, 2n-16 > n and Artin/Andreotti-Frankel vanishing on an affine coarse space kills the relevant ordinary cohomology; for n <= 7 the degree 2n-16 is negative; for n = 8 the piece is a subquotient of H^0(S)(8), hence a finite direct sum of Q(8) by semisimplicity.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0128-4",
+      "note": "Theorem A follows from the vanishing of all graded pieces with stratum dimension at least 17: A_0 = A_{j_0}, so T_Z is the kernel of restriction to the complement of a closed reduced substack of Y of dimension at most 16. This is a support-collapse statement, not a proof that T_Z is Tate.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0128-5",
+      "note": "The filtration splits as an isomorphism with the direct sum of graded pieces because pure polarizable rational Hodge structures of fixed weight form a semisimple category. Non-adverse caveat: the splitting supplied by semisimplicity is not canonical, even though the heading uses the word canonical; the claim as stated only needs an isomorphism.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0128-6",
+      "note": "Corollary C is a valid conditional implication: if the residual lowest-weight groups for strata of dimensions 9 through 16 are Tate of the indicated twists, then every graded piece is a subquotient of a direct sum of Q(8), hence T_Z is a direct sum of Q(8). The antecedent is explicitly open in the attempt.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0128-7",
+      "note": "The consistency check against FND-0191 is not established as written. FND-0191's support Y' = A x {pt}, with A a 9-dimensional abelian variety, is proper and not affine, so it cannot be a single admissible stratum in the sense of Lemma 1, which requires affine coarse space. An admissible chain would peel an affine open of A and leave lower-dimensional complement strata. Hence the asserted exact reproduction as a single dimension-9 stratum with graded piece H^2(A)(9) is not proved by the artifact's own machinery.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "ASSIGNED-THEOREM-C66-TATE-SUPPORT",
+      "note": "The exact assigned theorem is not proved. The attempt explicitly states that T_Z is not shown to be a finite direct sum of Q(8) and records GAP-C66-TATE-STRATA-9-16: the Tate type of the at most eight residual groups W_{2n-16}H^{2n-16}(S_{(n)};Q) for 9 <= n <= 16 is not discharged.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "TARGET-INTERFACE-CONTRACT",
+      "note": "The required target_interface_reference fields are present and name the genuine ATT-0120 interface: interface_attempt_id ATT-0120, nonempty interface_claim_ids, target_subquotient T_Z = ker(r_T), target_map_use phi as inclusion, and a nonempty survival_or_tate_argument. However, the substantive contract is not met: survival_or_tate_argument explicitly says it is not a discharge and leaves the Tate antecedent open. Correct interface naming does not convert the conditional localization theorem into the assigned unconditional Tate theorem.",
+      "verdict": "failed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-23",
+  "finding_candidates": [
+    {
+      "key": "att-0128-conditional-gap-fails-target-interface-contract",
+      "rationale": "Reusable screening rule for future C66-TATE-SUPPORT artifacts: if the survival_or_tate_argument is explicitly conditional on an undischarged gap, the contract fails regardless of correct interface naming.",
+      "statement": "ATT-0128 supplies the genuine ATT-0120 target_interface_reference fields, including interface_attempt_id ATT-0120, nonempty interface_claim_ids, target_subquotient T_Z = ker(r_T), and target_map_use phi as inclusion, but its survival_or_tate_argument explicitly states that the Tate conclusion is not discharged and names GAP-C66-TATE-STRATA-9-16. This is further evidence that correct schema population plus a conditional sufficient criterion does not meet the C66-TATE-SUPPORT target-interface contract when the antecedent remains an open gap.",
+      "status": "candidate",
+      "supports_finding_id": "FND-0189"
+    }
+  ],
+  "id": "REV-0178",
+  "independent": true,
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "8ae2b14911e24aed28afefbce2855d6b35a620fc7b0e1b92123d8aa8432e6b15",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0120",
+      "note": "Used for the verified C66-SUPPORT-INTERFACE datum: Y as reduced closed substack, U_Y smooth of dimension 21, r_T, T_Z = ker(r_T), coverage, atlas-invariance, and no-Tate/no-Gysin content. ATT-0128 imports only these interface clauses and does not strengthen them.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0169",
+      "note": "First independent confirmation of ATT-0120. Used only to establish the interface datum; not used to prove the missing Tate type of T_Z.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0170",
+      "note": "Second independent confirmation of ATT-0120, including the target-interface certificate. Used only to establish the interface datum.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0001",
+      "note": "Poincare reindexing W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21) at d = 21. Used only on M_{6,6} to fix degree, weight, and twist conventions.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0168",
+      "note": "Used for the image-versus-supports-group distinction and for the prohibition on Gysin/closed-embedding shortcuts. ATT-0128 respects the distinction by working with kernels of open restrictions.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0185",
+      "note": "Adjudicated sufficiency finding. Non-load-bearing here: ATT-0128 deliberately avoids relying on Borel-Moore formalism on singular Y and does not use the sufficiency hypothesis.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0186",
+      "note": "Dimension-threshold vanishing and monotonicity context. ATT-0128 reproves the low-dimensional vanishing in its own register and sharpens the upper cutoff; the dependency itself is packet-visible and adjudicated.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0187",
+      "note": "PGL_2-quotient repair context. Explicitly not used by ATT-0128; marked confirmed as non-load-bearing context.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0181",
+      "note": "dim Y <= 20 context. Explicitly not used by ATT-0128; marked confirmed as non-load-bearing context.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0191",
+      "note": "Adjudicated counterexample model showing purity, degree, weight, and closed support do not force Tate type. ATT-0128 uses it as a consistency check; the dependency is confirmed, but the attempt's exact reproduction claim CLM-0128-7 is separately marked failed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0188",
+      "note": "Bars circular use of RED-0001. ATT-0128 respects this: RED-0001 is never assumed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0189",
+      "note": "Records that schema population does not discharge the target-interface contract when the Tate conclusion rests on an open gap. ATT-0128 is a further instance of this pattern and explicitly declares non-discharge.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0165",
+      "note": "Withholds compact-support/Borel-Moore mixed-Hodge formalism for DM stacks. ATT-0128 respects this by using ordinary rational cohomology of smooth stacks and coarse comparison only for ordinary cohomology.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0052",
+      "note": "Bars Gysin for (M_{6,6}, Z) because the balanced reduced-support model is not a closed pure-codimension-four subvariety. ATT-0128 respects this by using purity only for smooth pairs constructed by its own peeling.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0053",
+      "note": "Rationality of S_6 representations does not force Tate local systems. Unused/non-load-bearing in ATT-0128.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0085",
+      "note": "Finite branch morphism to M_{0,18} does not imply mixed-Tate cohomology. Unused/non-load-bearing in ATT-0128.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0169",
+      "note": "Non-Tate type (15,1) on an allowed atlas context. Used only as a consistency check; ATT-0128 correctly does not claim that this class lies on Y or survives in T.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0178",
+      "note": "Records failure of the earlier universally quantified C66-TATE-SUPPORT statement. Used only as context; ATT-0128 is scoped to the named ATT-0120 subquotient.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "GAP-C66-TATE-STRATA-9-16",
+      "note": "Missing load-bearing antecedent: for each residual stratum dimension 9 through 16, the pure lowest-weight group W_{2n-16}H^{2n-16}(S_{(n)};Q) must be shown to be a finite direct sum of Q(8-n), or its image in T must be shown to vanish or be Tate. No verified artifact supplies this. Without it, Corollary C does not yield the assigned theorem.",
+      "verdict": "unresolved"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0128-P1",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: attack the load-bearing Tate conclusion itself. ATT-0128 proves only a localization and peeling theorem about the named kernel T_Z. Its own chain of implications reduces the assigned theorem to the Tate type of at most eight residual lowest-weight groups attached to strata of dimensions 9 through 16. That antecedent is explicitly recorded as GAP-C66-TATE-STRATA-9-16 and is not discharged. The peeling argument cannot eliminate those dimensions: for n <= 16 the degree 2n-16 no longer exceeds the affine-stratum dimension n, so Artin/Andreotti-Frankel vanishing stops; for n = 9 the adjudicated FND-0191 model shows that a dimension-9 closed support can contribute a non-Tate pure weight -16 piece H^2(A)(9). Hence the survival_or_tate_argument is conditional, and the target-interface contract is not met even though the interface fields correctly name ATT-0120's T_Z. Outcome: attack succeeds; verdict incomplete. Secondary attack: CLM-0128-7's consistency check is not established because FND-0191's Y' = A x {pt} is proper, not affine, and therefore cannot be a single admissible stratum under Lemma 1; an admissible chain would require affine peeling and lower-dimensional complement strata. Other adversary checklist attacks were attempted and do not overturn the confirmed lemmas: the degree/weight/twist ledger 2*21-16 = 26 and 26-42 = -16 is consistent; Q-coefficients and stack/coarse ordinary-cohomology comparison are used without integral or coarse-moduli overreach; no forbidden Gysin for Z, no Kunneth shift, no spectral-sequence differentials, no invariants-versus-coinvariants step, no predicted-motive upgrade, and no stable-pair assembly are load-bearing. Evidence limitation: no external web evidence was used; the review is based on the supplied local task artifacts.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum. Prove T_Z is a finite direct sum of Q(8). A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof. This theorem does not itself assemble the complementary target terms.",
+  "verdict": "incomplete"
+}

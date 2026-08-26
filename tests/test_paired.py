@@ -1185,6 +1185,16 @@ class DigestAttributionTests(unittest.TestCase):
         self.assertEqual(mapping["TASK-C66-M-001"]["subproblem_id"], "C66-GEO-Z")
         self.assertEqual(mapping["TASK-C66-M-009"]["subproblem_id"], "C66-COMP-RANK")
         self.assertEqual(mapping["TASK-C66-M-010"]["subproblem_id"], "C66-COMP-COMP")
+        # Math task ids are pure list-position ordinals, so a new cell must be
+        # appended rather than inserted: a mid-list insert renumbers
+        # TASK-C66-M-005 and breaks task linkage on every artifact already
+        # written against it.
+        self.assertEqual(
+            mapping["TASK-C66-M-005"]["subproblem_id"], "C66-TATE-SUPPORT"
+        )
+        self.assertEqual(
+            mapping["TASK-C66-M-011"]["subproblem_id"], "C66-SUPPORT-FILTRATION"
+        )
         ancestors = ancestor_subproblem_ids(self.campaign, "C66-GEO-COMP")
         self.assertEqual(
             ancestors, {"C66-GEO-COMP", "C66-GEO-H0", "C66-GEO-Z"}

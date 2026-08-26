@@ -6,6 +6,8 @@ from unittest import mock
 
 from pure_tate.agents import (
     _engine_argv,
+    _forced_codex_controller_settings,
+    _is_forced_codex_controller_task,
     _codex_controller_settings,
     _codex_controller_transcript,
     _parse_codex_controller_decision,
@@ -15,6 +17,7 @@ from pure_tate.agents import (
     _failure_detail,
     _normalize_inferred_pairs,
     _normalize_source_references,
+    _validate_campaign_provenance,
     _qwen_observable_stream,
     _validate_review_verdict_consistency,
     _validate_artifact,
@@ -226,6 +229,22 @@ class AgentAdapterTests(unittest.TestCase):
         self.assertEqual(settings["retry_limit"], 1)
         self.assertEqual(settings["max_attempts"], 8)
         self.assertEqual(settings["max_result_chars"], 500)
+
+    def test_forced_codex_controller_policy_is_unbounded_until_task_timeout(self):
+        self.assertTrue(
+            _is_forced_codex_controller_task({"forced_resolution": True})
+        )
+        self.assertTrue(
+            _is_forced_codex_controller_task({"paired_turn_kind": "forced-proof"})
+        )
+        self.assertFalse(_is_forced_codex_controller_task({"phase": "mathematics"}))
+        settings = _forced_codex_controller_settings(
+            _codex_controller_settings({})
+        )
+        self.assertGreater(settings["max_requests"], 100_000)
+        self.assertGreater(settings["max_attempts"], 100_000)
+        self.assertEqual(settings["min_parallel_workers"], 2)
+        self.assertTrue(settings["unbounded_until_task_timeout"])
 
     def test_codex_controller_decision_and_transcript_validation(self):
         decision = _parse_codex_controller_decision(
@@ -908,6 +927,61 @@ class AgentAdapterTests(unittest.TestCase):
             artifact["ingest_normalizations"][1]["rule"],
             "DEPENDENCY-CLAIM-SPLIT-0001",
         )
+
+    def _campaign_provenance_artifact(self):
+        return {
+            "source_claim_ids": ["THM-VALID"],
+            "proof_dependencies": [{"id": "ATT-INTERFACE"}],
+            "dependency_claim_ids": ["CLM-INTERFACE"],
+            "target_interface_reference": {
+                "interface_attempt_id": "ATT-INTERFACE",
+                "interface_claim_ids": ["CLM-INTERFACE"],
+            },
+        }
+
+    def _campaign_provenance_mocks(self):
+        repository = ({}, {}, {}, {"THM-VALID": object()}, [])
+        attempts = [
+            {
+                "id": "ATT-INTERFACE",
+                "claims": [{"id": "CLM-INTERFACE", "statement": "Known."}],
+            }
+        ]
+        return (
+            mock.patch("pure_tate.store.load_repository", return_value=repository),
+            mock.patch("pure_tate.findings.load_findings", return_value=[]),
+            mock.patch("pure_tate.artifacts.load_artifacts", return_value=attempts),
+        )
+
+    def test_campaign_provenance_accepts_direct_structured_dependency(self):
+        artifact = self._campaign_provenance_artifact()
+        patches = self._campaign_provenance_mocks()
+        with patches[0], patches[1], patches[2]:
+            _validate_campaign_provenance(artifact)
+
+    def test_campaign_provenance_rejects_unknown_or_indirect_references(self):
+        artifact = self._campaign_provenance_artifact()
+        artifact["source_claim_ids"] = ["TARGET-INTERFACE-CERTIFICATE"]
+        patches = self._campaign_provenance_mocks()
+        with patches[0], patches[1], patches[2]:
+            with self.assertRaisesRegex(ValueError, "unknown source claim"):
+                _validate_campaign_provenance(artifact)
+
+        artifact = self._campaign_provenance_artifact()
+        artifact["dependency_claim_ids"] = ["CLM-TRANSITIVE"]
+        patches = self._campaign_provenance_mocks()
+        with patches[0], patches[1], patches[2]:
+            with self.assertRaisesRegex(ValueError, "outside directly declared"):
+                _validate_campaign_provenance(artifact)
+
+        artifact = self._campaign_provenance_artifact()
+        artifact["target_interface_reference"]["interface_claim_ids"] = [
+            "CLM-TRANSITIVE"
+        ]
+        patches = self._campaign_provenance_mocks()
+        with patches[0], patches[1], patches[2]:
+            with self.assertRaisesRegex(ValueError, "undeclared interface claim"):
+                _validate_campaign_provenance(artifact)
 
     def test_review_verdict_must_match_structured_checks(self):
         incomplete_without_adverse = {
