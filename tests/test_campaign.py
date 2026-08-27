@@ -618,11 +618,15 @@ class FocusedCampaignTests(unittest.TestCase):
 
         original_load_attempts = load_campaign_attempts
 
+        # Strip the support cells' own attempts so the DAG gate itself is under
+        # test rather than whatever happens to be verified on disk.
+        ungated = {"C66-SUPPORT-INTERFACE", "C66-SUPPORT-FILTRATION"}
+
         def pre_interface_attempts(*args, **kwargs):
             return [
                 attempt
                 for attempt in original_load_attempts(*args, **kwargs)
-                if attempt.get("subproblem_id") != "C66-SUPPORT-INTERFACE"
+                if attempt.get("subproblem_id") not in ungated
             ]
 
         with mock.patch(
@@ -685,6 +689,7 @@ class FocusedCampaignTests(unittest.TestCase):
         # blocks on the interface alone, and its contract deliberately omits
         # survival_or_tate_argument: that field was satisfiable without
         # concluding anything, which is how it failed every recent review.
+        self.assertEqual(by_subproblem["C66-SUPPORT-FILTRATION"]["status"], "blocked")
         self.assertEqual(
             by_subproblem["C66-SUPPORT-FILTRATION"]["blocked_dependencies"],
             ["C66-SUPPORT-INTERFACE"],

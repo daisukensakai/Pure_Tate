@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#d9d8d1">
+
+<title>Proposition 59.95.6 (0F0V)&mdash;The Stacks project</title>
+
+<meta name="description" content="an open source textbook and reference work on algebraic geometry">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ['tex2jax.js'],
+    jax: ['input/TeX','output/HTML-CSS'],
+    TeX: {
+      extensions: ['AMSmath.js', 'AMSsymbols.js', '/static/XyJax/extensions/TeX/xypic.js'],
+      Macros: {
+        linebreak: ["", 1, ""],
+        },
+      TagSide: 'left'
+    },
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    },
+    'HTML-CSS': {
+    	scale: 100,
+	availableFonts: [],
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+
+<link rel="icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/stacks.ico">
+
+
+  <script type="text/javascript" src="/static/js/toggle.js"></script>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/easymde@2.0.1/dist/easymde.min.css" integrity="sha384-IRbzB9px0sfIx90vkN+geaX3F4LVcg/M+k5vmVkfjs5TnRX3MIhGS8Ma06ALKVYp" crossorigin="anonymous">
+  <script src="https://unpkg.com/easymde@2.0.1/dist/easymde.min.js" integrity="sha384-v06sb0t0ToY1YRtVlfD/GCGpIZ/QHYyeH2Gzjvr0ZJI62/50DIzT8XRgQ6JvptVu" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.css" integrity="sha384-8xTxM5sJRAUB0ckdBghB5am+aw+0kC5FfSUzMI+KI+UD8uBCNeSkdi8I1J4+Wjwu" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-bonsai@2.1.3/jquery.bonsai.js" integrity="sha384-gE5xOW4MVOjJL1A2SbxwvQw/qet6h8Vdv06j3JQGhBW4d1H5hXYB12WsrUBgU439" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid bounded">
+  <div id="first-bar" class="row topbar inner-top top">
+    <header class="col">
+      <h1><a href="/">The Stacks project</a></h1>
+    </header>
+
+    <nav id="header">
+      <ul id="quicklinks">
+        <li><a href="/bibliography">bibliography</a>
+        <li><a href="https://www.math.columbia.edu/~dejong/wordpress/">blog</a>
+      </ul>
+
+      <form id="quicksearch" action="/search">
+        <span id="search-icon"><img src="/static/images/search.svg"></span>
+        <input type="search" name="query" size="16" placeholder="keywords or a tag" value="">
+      </form>
+    </nav>
+  </div>
+
+  <nav id="second-bar" class="row topbar sticky-top">
+    
+      <ul class="col-11 col-sm-11 col-md-11 col-lg-12 col-xl-12" id="crumbs">
+        <li><a href="/browse">Table of contents</a></li>
+        
+  
+  
+    <li>Part <a href="/tag/0ELV" data-tag="0ELV">3</a>: Topics in Scheme Theory
+    
+  
+    <li>Chapter <a href="/tag/03N1" data-tag="03N1">59</a>: Étale Cohomology
+    
+  
+    <li>Section <a href="/tag/0F0P" data-tag="0F0P">59.95</a>: Cohomological dimension
+    
+  
+    <li class="active">Proposition <a href="/tag/0F0V" data-tag="0F0V">59.95.6</a>
+    <span id="citation">(<a href="/tag/0F0V/cite">cite</a>)</span>
+  
+
+
+      </ul>
+    
+
+    
+      <div class="col-1 col-sm-1 col-md-1" id="burger">
+        <input type="checkbox" id="burger-input"></input>
+
+        <label id="burger-icon" for="burger-input">
+          <span id="top-bun"></span>
+          <span id="meat"></span>
+          <span id="bottom-bun"></span>
+        </label>
+
+        <div id="burger-content">
+          
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0F0U">previous lemma</a>
+  
+  
+    <li class="right"><a href="/tag/0F0W">next lemma</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  
+    <hr>
+
+    <div class="information">
+      
+  <ul class="tag-info">
+    <li class="tag-history"><a href="/tag/0F0V/history">history</a>
+    <li class="tag-statistics"><a href="/tag/0F0V/statistics">statistics</a>
+    
+      <li class="tag-dependencies"><a href="/tag/0F0V/statistics#dependencies">2 tags refer to this tag</a>
+    
+  </ul>
+
+    </div>
+  
+
+
+        </div>
+      </div>
+    
+
+    
+  </nav>
+
+  <div class="row" id="content">
+    <section id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      
+<div class="html" id="tag">
+  
+
+  
+
+  
+
+  <article class="env-proposition" id="0F0V">
+  <p><a class="environment-identifier" href="/tag/0F0V">Proposition <span data-tag="0F0V">59.95.6</span>.</a> Let $K$ be a field. Let $X$ be an affine scheme of finite type over $K$. Then we have $\text{cd}(X) \leq \dim (X) + \text{cd}(K)$. </p>
+</article><article class="env-proof">
+    <p>
+      <strong>Proof.</strong>
+      We will prove this by induction on $\dim (X)$. Let $\mathcal{F}$ be an abelian torsion sheaf on $X_{\acute{e}tale}$. 
+    <p>
+      The case $\dim (X) = 0$. In this case the structure morphism $f : X \to \mathop{\mathrm{Spec}}(K)$ is finite. Hence we see that $R^ if_*\mathcal{F} = 0$ for $i > 0$, see Proposition <a href="/tag/03QP" data-tag="03QP">59.55.2</a>. Thus $H^ i_{\acute{e}tale}(X, \mathcal{F}) = H^ i_{\acute{e}tale}(\mathop{\mathrm{Spec}}(K), f_*\mathcal{F})$ by the Leray spectral sequence for $f$ (Cohomology on Sites, Lemma <a href="/tag/0732" data-tag="0732">21.14.5</a>) and the result is clear. 
+    <p>
+      The case $\dim (X) = 1$. This is Lemma <a href="/tag/0F0S" data-tag="0F0S">59.95.3</a>. 
+    <p>
+      Assume $d = \dim (X) > 1$ and the proposition holds for finite type affine schemes of dimension $< d$ over fields. By Noether normalization, see for example Varieties, Lemma <a href="/tag/0CBI" data-tag="0CBI">33.18.2</a>, there exists a finite morphism $f : X \to \mathbf{A}^ d_ K$. Recall that $R^ if_*\mathcal{F} = 0$ for $i > 0$ by Proposition <a href="/tag/03QP" data-tag="03QP">59.55.2</a>. By the Leray spectral sequence for $f$ (Cohomology on Sites, Lemma <a href="/tag/0732" data-tag="0732">21.14.5</a>) we conclude that it suffices to prove the result for $\pi _*\mathcal{F}$ on $\mathbf{A}^ d_ K$. 
+    <p>
+      Interlude I. Let $j : X \to Y$ be an open immersion of smooth $d$-dimensional varieties over $K$ (not necessarily affine) whose complement is the support of an effective Cartier divisor $D$. The sheaves $R^ qj_*\mathcal{F}$ for $q > 0$ are supported on $D$. We claim that $(R^ qj_*\mathcal{F})_{\overline{y}} = 0$ for $a = \text{trdeg}_ K(\kappa (y)) > d - q$. Namely, by Theorem <a href="/tag/03Q9" data-tag="03Q9">59.53.1</a> we have 
+    <p>
+      <div class="equation">
+  \[  (R^ qj_*\mathcal{F})_{\overline{y}} = H^ q(\mathop{\mathrm{Spec}}(\mathcal{O}_{Y, y}^{sh}) \times _ Y X, \mathcal{F})  \]
+</div>
+    <p>
+       Choose a local equation $f \in \mathfrak m_ y \subset \mathcal{O}_{Y, y}$ for $D$. Then we have 
+    <p>
+      <div class="equation">
+  \[  \mathop{\mathrm{Spec}}(\mathcal{O}_{Y, y}^{sh}) \times _ Y X = \mathop{\mathrm{Spec}}(\mathcal{O}_{Y, y}^{sh}[1/f])  \]
+</div>
+    <p>
+       Using Lemma <a href="/tag/0F0U" data-tag="0F0U">59.95.5</a> we get an embedding 
+    <p>
+      <div class="equation">
+  \[  K(t_1, \ldots , t_ a)^{sep}(x) = K(t_1, \ldots , t_ a)^{sep}[x]_{(x)}[1/x] \longrightarrow \mathcal{O}_{Y, y}^{sh}[1/f]  \]
+</div>
+    <p>
+       Since the transcendence degree over $K$ of the fraction field of $\mathcal{O}_{Y, y}^{sh}$ is $d$, we see that $\mathcal{O}_{Y, y}^{sh}[1/f]$ is a filtered colimit of $(d - a - 1)$-dimensional finite type algebras over the field $K(t_1, \ldots , t_ a)^{sep}(x)$ which itself has cohomological dimension $1$ by Lemma <a href="/tag/0F0T" data-tag="0F0T">59.95.4</a>. Thus by induction hypothesis and Lemma <a href="/tag/0F0R" data-tag="0F0R">59.95.2</a> we obtain the desired vanishing. 
+    <p>
+      Interlude II. Let $Z$ be a smooth variety over $K$ of dimension $d - 1$. Let $E_ a \subset Z$ be the set of points $z \in Z$ with $\text{trdeg}_ K(\kappa (z)) \leq a$. Observe that $E_ a$ is closed under specialization, see Varieties, Lemma <a href="/tag/0A21" data-tag="0A21">33.20.3</a>. Suppose that $\mathcal{G}$ is a torsion abelian sheaf on $Z$ whose support is contained in $E_ a$. Then we claim that $H^ b_{\acute{e}tale}(Z, \mathcal{G}) = 0$ for $b > a + \text{cd}(K)$. Namely, we can write $\mathcal{G} = \mathop{\mathrm{colim}}\nolimits \mathcal{G}_ i$ with $\mathcal{G}_ i$ a torsion abelian sheaf supported on a closed subscheme $Z_ i$ contained in $E_ a$, see Lemma <a href="/tag/0F0N" data-tag="0F0N">59.74.5</a>. Then the induction hypothesis kicks in to imply the desired vanishing for $\mathcal{G}_ i$<a class="footnotemark footnote-offset" href="#footnote-1" id="footnote-1-mark"></a><a href="#footnote-1"><sup>1</sup></a>. Finally, we conclude by Theorem <a href="/tag/09YQ" data-tag="09YQ">59.51.3</a>. 
+    <p>
+      Consider the commutative diagram 
+    <p>
+      <div class="equation">
+  \[  \xymatrix{ \mathbf{A}^ d_ K \ar[rd]_ f \ar[rr]_-j &  &  \mathbf{P}^1_ K \times _ K \mathbf{A}^{d - 1}_ K \ar[ld]^ g \\  &  \mathbf{A}^{d - 1}_ K }  \]
+</div>
+    <p>
+       Observe that $j$ is an open immersion of smooth $d$-dimensional varieties whose complement is an effective Cartier divisor $D$. Thus we may use the results obtained in interlude I. We are going to study the relative Leray spectral sequence 
+    <p>
+      <div class="equation">
+  \[  E_2^{p, q} = R^ pg_*R^ qj_*\mathcal{F} \Rightarrow R^{p + q}f_*\mathcal{F}  \]
+</div>
+    <p>
+       Since $R^ qj_*\mathcal{F}$ for $q > 0$ is supported on $D$ and since $g|_ D : D \to \mathbf{A}^{d - 1}_ K$ is an isomorphism, we find $R^ pg_*R^ qj_*\mathcal{F} = 0$ for $p > 0$ and $q > 0$. Moreover, we have $R^ qj_*\mathcal{F} = 0$ for $q > d$. On the other hand, $g$ is a proper morphism of relative dimension $1$. Hence by Lemma <a href="/tag/095U" data-tag="095U">59.92.2</a> we see that $R^ pg_*j_*\mathcal{F} = 0$ for $p > 2$. Thus the $E_2$-page of the spectral sequence looks like this 
+    <p>
+      <div class="equation">
+  \[  \begin{matrix}  g_*R^ dj_*\mathcal{F} 
+
+&  0 
+
+&  0 
+
+\\  \ldots 
+
+&  \ldots 
+
+&  \ldots 
+
+\\  g_*R^2j_*\mathcal{F} 
+
+&  0 
+
+&  0 
+
+\\  g_*R^1j_*\mathcal{F} 
+
+&  0 
+
+&  0 
+
+\\  g_*j_*\mathcal{F} 
+
+&  R^1g_*j_*\mathcal{F} 
+
+&  R^2g_*j_*\mathcal{F} 
+
+\end{matrix}  \]
+</div>
+    <p>
+       We conclude that $R^ qf_*\mathcal{F} = g_*R^ qj_*\mathcal{F}$ for $q > 2$. By interlude I we see that the support of $R^ qf_*\mathcal{F}$ for $q > 2$ is contained in the set of points of $\mathbf{A}^{d - 1}_ K$ whose residue field has transcendence degree $\leq d - q$. By interlude II 
+    <p>
+      <div class="equation">
+  \[  H^ p(\mathbf{A}^{d - 1}_ K, R^ qf_*\mathcal{F}) = 0 \text{ for }p > d - q + \text{cd}(K)\text{ and }q > 2  \]
+</div>
+    <p>
+       On the other hand, by Theorem <a href="/tag/03Q9" data-tag="03Q9">59.53.1</a> we have $R^2f_*\mathcal{F}_{\overline{\eta }} = H^2(\mathbf{A}^1_{\overline{\eta }}, \mathcal{F}) = 0$ (vanishing by the case of dimension $1$) where $\eta $ is the generic point of $\mathbf{A}^{d - 1}_ K$. Hence by interlude II again we see 
+    <p>
+      <div class="equation">
+  \[  H^ p(\mathbf{A}^{d - 1}_ K, R^2f_*\mathcal{F}) = 0 \text{ for }p > d - 2 + \text{cd}(K)  \]
+</div>
+    <p>
+       Finally, we have 
+    <p>
+      <div class="equation">
+  \[  H^ p(\mathbf{A}^{d - 1}_ K, R^ qf_*\mathcal{F}) = 0 \text{ for }p > d - 1 + \text{cd}(K)\text{ and }q = 0, 1  \]
+</div>
+    <p>
+       by induction hypothesis. Combining everything we just said with the Leray spectral sequence $H^ p(\mathbf{A}^{d - 1}_ K, R^ qf_*\mathcal{F}) \Rightarrow H^{p + q}(\mathbf{A}^ d_ K, \mathcal{F})$ we conclude. 
+      <span class="qed">$\square$</span>
+    </p>
+</article>
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  // move extras from parent element to after environment name and number
+  $("article a[data-toggle]").each(function(index, element) {
+    $(element).insertAfter(($(element).parent().find("a.environment-identifier")));
+  });
+
+  $('article a[data-toggle="popover"]').popover()
+
+  // render mathematics in popovers
+  $("[data-toggle=popover]").on('shown.bs.popover', function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, $("div.popover-body").html()]);
+  });
+});
+  </script>
+
+  
+
+  
+    <section id="footnotes">
+    
+      <div><a id="footnote-1" class="footnote-offset"></a><a href="#footnote-1-mark">[1]</a> Here we first use Proposition <a href="/tag/04CA" data-tag="04CA">59.46.4</a> to write $\mathcal{G}_ i$ as the pushforward of a sheaf on $Z_ i$, the induction hypothesis gives the vanishing for this sheaf on $Z_ i$, and the Leray spectral sequence for $Z_ i \to Z$ gives the vanishing for $\mathcal{G}_ i$.</div>
+    
+    </section>
+  
+</div>
+
+
+<hr>
+
+<section id="comments">
+  <h2>Comments (5)</h2>
+
+  
+    <a id="comment-4985" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/0F0V#comment-4985">Comment #4985</a>
+        by
+        <cite>Noah Olander</cite>
+        on <time datetime="2020-03-16 16:15:38.834442">March 16, 2020 at 16:15 </time>
+      </header>
+
+      <blockquote><p>There's a typo right before you write down the E2 page of the spectral sequence: You should write <script type="math/tex">R^p g_*R^q j_*\mathcal{F}=0</script> for <script type="math/tex">p&gt;2</script> instead of <script type="math/tex">R^pj_* \mathcal{F}</script>. </p></blockquote>
+    </article>
+  
+    <a id="comment-4995" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/0F0V#comment-4995">Comment #4995</a>
+        by
+        <cite>Noah Olander</cite>
+        on <time datetime="2020-03-18 11:52:32.796324">March 18, 2020 at 11:52 </time>
+      </header>
+
+      <blockquote><p>I think when you write "On the other hand, by Theorem 03Q9 we have <script type="math/tex">R^2f_*\mathcal{F}_{\overline{\eta}} = H^2 ( \mathbf{A}^1_{\overline{\eta}} , \mathcal{F})</script>, you mean <script type="math/tex">\eta</script> is the generic point of <script type="math/tex">\mathbf{A}^{d-1}</script> but you don't say what <script type="math/tex">\eta</script> is. </p></blockquote>
+    </article>
+  
+    <a id="comment-5230" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/0F0V#comment-5230">Comment #5230</a>
+        by
+        <cite><a href="https://math.columbia.edu/~dejong" rel="author">Johan</a></cite>
+        
+        on <time datetime="2020-06-11 11:03:48.184550">June 11, 2020 at 11:03 </time>
+      </header>
+
+      <blockquote><p>Thanks and both are fixed <a href="https://github.com/stacks/stacks-project/commit/cbfcabf1e5629c6650e513b63c0d2939ae8e6cd1">here</a>.</p></blockquote>
+    </article>
+  
+    <a id="comment-8286" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/0F0V#comment-8286">Comment #8286</a>
+        by
+        <cite>Xiaolong Liu</cite>
+        on <time datetime="2023-03-30 21:13:22.283503">March 30, 2023 at 21:13 </time>
+      </header>
+
+      <blockquote><p>In "Interlude I", we should write "Choose a local equation <script type="math/tex">f\in\mathfrak{m}_y\subset \mathscr{O}_{Y,y}</script>" instead of "Choose a local equation <script type="math/tex">f\in\mathfrak{m}_y=\mathscr{O}_{Y,y}</script>". (Please delete the comment above)</p></blockquote>
+    </article>
+  
+    <a id="comment-8917" class="header-offset"></a>
+    <article>
+      <header>
+        <p><a href="/tag/0F0V#comment-8917">Comment #8917</a>
+        by
+        <cite><a href="https://stacks.math.columbia.edu/" rel="author">Stacks project</a></cite>
+        
+        on <time datetime="2024-04-10 12:53:01.422262">April 10, 2024 at 12:53 </time>
+      </header>
+
+      <blockquote><p>Thanks and fixed <a href="https://github.com/stacks/stacks-project/commit/3edffc06ca87b94d36ebda5d600aa8daf02a7719">here</a>.</p></blockquote>
+    </article>
+  
+
+  
+    <p>There are also:
+    <ul>
+      
+        <li>2 comment(s) on Section <a href="/tag/0F0P#comments" data-tag="0F0P">59.95</a>: Cohomological dimension
+      
+    </ul>
+  
+</section>
+
+<hr>
+
+<section id="post-comment">
+  <h2>Post a comment</h2>
+  <p>Your email address will not be published. Required fields are marked.
+  <p>In your comment you can use <a href="/markdown">Markdown</a> and LaTeX style mathematics (enclose it like <code>$\pi$</code>). A preview option is available if you wish to see how it works out (just click on the eye in the toolbar).
+  <noscript><p>Unfortunately JavaScript is disabled in your browser, so the comment preview function will not work.</p></noscript>
+
+  <p>All contributions are licensed under the <a href="https://github.com/stacks/stacks-project/blob/master/COPYING">GNU Free Documentation License</a>.
+
+  <form name="comment" id="comment-form" action="/post-comment" method="post">
+    <label for="name">Name<sup>*</sup>:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="mail">E-mail<sup>*</sup>:</label>
+    <input type="email" name="mail" id="mail" required><br>
+
+    <label for="site">Site:</label>
+    <input type="url" name="site" id="site"><br>
+
+    <label>Comment:</label>
+    <textarea name="comment" id="comment-textarea" cols="80" rows="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <script type="text/javascript">
+var easymde = new EasyMDE({
+  autosave: {
+    enabled: true,
+    delay: 1000,
+    uniqueId: "comment-0F0V",
+  },
+  element: $("#comment")[0],
+  forceSync: true,
+  insertTexts: { link: ["\\ref{", "}"], table: ["$", "$"], image: ["\\begin{equation}\n", "\n\\end{equation}\n"] }, // we hack into these insertion methods, I couldn't figure out how to write your own...
+  placeholder: "You can type your comment here, use the preview option to see what it will look like. If your comment is on a lemma, please leave your comment on the page of the lemma. Same with remarks, propositions, theorems, etc.",
+  previewRender: function(plaintext, preview) {
+    // deal with references
+    plaintext = plaintext.replace(/\\ref\{([0-9A-Z]{4})\}/g, "<span class=\"tag\">[$1](/tag/$1)</span>");
+    // deal with \[\] getting replaced to []
+    plaintext = plaintext.replace(/\\\[/g, "\\begin{equation}");
+    plaintext = plaintext.replace(/\\\]/g, "\\end{equation}");
+
+    output = this.parent.markdown(plaintext);
+
+    setTimeout(function() {
+      preview.innerHTML = output;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }, 0);
+
+    return "";
+  },
+  spellChecker: false,
+  status: false,
+  toolbar: [
+    "link", {name: "inline", action: EasyMDE.drawTable, className: "fa fa-usd"}, {name: "block", action: EasyMDE.drawImage, className: "fa fa-square"}, "|",
+    "bold", "italic", "|",
+    "ordered-list", "unordered-list", "|",
+    "preview"
+  ],
+});
+
+// make sure to show tags, not numbers
+var tagToggleHappened = false; // only do this once to not annoy the user too much
+easymde.codemirror.on("change", function() {
+  // if data-tag elements do not have tag attribute we need to make tags visible
+  if (!$("*[data-tag]").hasClass("tag") && !tagToggleHappened)
+    $("section#meta input.toggle").bootstrapToggle("toggle");
+  tagToggleHappened = true;
+});
+
+// prevent form submit when the captcha isn't correct
+// it's a bit silly to use HTML5 validation for this, as bots can figure that out
+// also save the author information to localStorage
+easymde.element.form.addEventListener("submit", function(event) {
+  if ($("#check").val() != $("#hidden-tag").val()) {
+    // explain captcha
+    $("#captcha-message").toggle();
+
+    // stop submit
+    event.preventDefault();
+    return false;
+  }
+
+  // save author information
+  localStorage.setItem("name", $("input#name").val());
+  localStorage.setItem("mail", $("input#mail").val());
+  localStorage.setItem("site", $("input#site").val());
+});
+    </script>
+
+    <p>In order to prevent bots from posting comments, we would like you to prove that you are human. You can do this by <em>filling in the name of the current tag</em> in the following input field. As a reminder, this is tag <span class="tag">0F0V</span>. Beware of the difference between the letter&nbsp;'<span class="tag">O</span>' and the digit&nbsp;'<span class="tag">0</span>'.</p>
+    <!--<p>This <abbr title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</abbr> seems more appropriate than the usual illegible gibberish, right?<br>-->
+    <label for="check">Tag:</label>
+    <input type="text" name="check" id="check" required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Post comment</button>
+    <input type="hidden" name="tag" id="hidden-tag" value="0F0V"><br>
+
+    <p id="captcha-message" style="display: none" class="alert alert-warning" role="alert">The tag you filled in for the captcha is wrong. You need to write <span class="tag">0F0V</span>, in case you are confused.</p>
+
+    <script type="text/javascript">
+// enter in captcha fields causes \ref to appear (?!)
+$("input#check").on("keypress", function(e) {
+  if (e.which == 13) {
+    // always stop the event
+    e.preventDefault();
+
+    // perform clientside check as for actual submit
+    if ($("#check").val() != $("#hidden-tag").val()) {
+      // explain captcha
+      $("#captcha-message").toggle();
+    }
+    else {
+      $("form#comment-form").submit();
+    }
+  }
+});
+    </script>
+  </form>
+</section>
+
+
+
+
+    </section>
+	  <div class="col-lg-4 col-xl-4">
+	    <section id="meta" class="row topbar sticky-top">
+        
+  
+  <div class="interaction">
+    
+  
+
+  <ul class="neighbours">
+  
+    <li class="left"><a href="/tag/0F0U">previous lemma</a>
+  
+  
+    <li class="right"><a href="/tag/0F0W">next lemma</a>
+  
+  </ul>
+  <br style="clear:both">
+
+  </div>
+
+  <hr>
+  
+    <a href="https://stacks.math.columbia.edu/download/etale-cohomology.pdf#nameddest=0F0V">View Proposition <span data-tag="0F0V">59.95.6</span> as pdf</a>
+  
+
+  
+
+    <hr>
+
+    <div class="information">
+      
+  <ul class="tag-info">
+    <li class="tag-history"><a href="/tag/0F0V/history">history</a>
+    <li class="tag-statistics"><a href="/tag/0F0V/statistics">statistics</a>
+    
+      <li class="tag-dependencies"><a href="/tag/0F0V/statistics#dependencies">2 tags refer to this tag</a>
+    
+  </ul>
+
+    </div>
+  
+
+
+      </section>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

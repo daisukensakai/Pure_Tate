@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "context_revision": 2,
+  "created_on": "2026-08-27",
+  "excluded_engines": [
+    "claude"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "dim-Y-pins-the-c66-residual-index-set",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-27",
+    "equivalence_group": "dim-Y-pins-the-c66-residual-index-set",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0194",
+    "impacts_approach_ids": [
+      "C66-TATE-SUPPORT"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "claude"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      }
+    },
+    "source_attempt_ids": [
+      "ATT-0132"
+    ],
+    "source_review_ids": [
+      "REV-0182"
+    ],
+    "statement": "At (g,n) = (6,6), for the verified ATT-0120 support Y and any ATT-0130 admissible chain, the top stratum dimension satisfies n_0 = dim Y^{(0)} = dim Y and is therefore the same for every admissible chain, even though the lower residual strata are chain-dependent. Three consequences for C66-TATE-SUPPORT. (a) If dim Y <= 8, the assigned theorem is discharged outright with no work in the residual range: every stratum dimension is then at most 8, so by CLM-0130-3 every graded piece with n_j <= 7 vanishes and the n_j = 8 piece is a finite direct sum of Q(8), and CLM-0130-4 makes T_Z a finite direct sum of Q(8). This is a strictly stronger conclusion than FND-0186, which records only that a kernel-form term K(Y') vanishes when dim Y' < 8. (b) If 9 <= dim Y <= 16, then n = dim Y lies in the residual index set for every admissible chain, so no choice of chain removes the obligation at that index. (c) If dim Y >= 17, the top stratum contributes zero by the Artin endpoint and the residual obligation begins at the largest occurring stratum dimension that is at most 16. Since no verified artifact supplies dim Y (ATT-0120 excludes it; FND-0181 proves only dim Y <= 20; FND-0187 records that the dim Y <= 17 repair is not licensed by citing CLM-0112-8 unchanged and proves no equality), the residual index set of C66-TATE-SUPPORT is currently not even enumerable. Determining dim Y is therefore a prerequisite for any audit-style artifact that seeks to bound the residual work, and is the single geometric number that would either collapse the range entirely, in case (a), or fix where it starts.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0194",
+  "id": "TASK-F-FND-0194",
+  "input_packet": "proof/packets/generated/C66-001-v6.md",
+  "output": "research/finding-audits/FAUD-0208.json",
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "712b4798d59191759fa6e5f3ad67a158073328e994e1430f9a753f0cd178bf43",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "cursor-grok",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}

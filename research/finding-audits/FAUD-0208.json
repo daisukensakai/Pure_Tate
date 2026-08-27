@@ -1,0 +1,81 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients at (g,n)=(6,6). Let X=M_{6,6} be the smooth separated Deligne-Mumford stack of pure dimension 21, and let Y be the atlas-independent reduced closed classifying-image substack of the verified ATT-0120 interface. Let T_Z=ker(r_T) be the named pure weight -16 subobject of T:=W_{-16}H^{BM}_{16}(X;Q). Assume the corroborated FND-0192 support filtration: an admissible chain is a chain of reduced closed substacks Y=Y^(0) superset ... superset Y^(N)=empty whose dimensions n_j:=dim Y^(j) strictly decrease and whose successive differences are smooth of pure dimension n_j with affine coarse space. Then n_0=dim Y^(0)=dim Y for every admissible chain, so the top index is chain-independent even though, by FND-0192(4), residual strata of dimensions 9 through 16 remain chain-dependent. Three consequences for C66-TATE-SUPPORT, using FND-0192(3)-(4) and Artin vanishing H^k(A;Q)=0 only for k>dim A on a possibly singular complex affine variety (Esnault, Theorem 2.1; FND-0192 (S4)). (a) If dim Y<=8, then every n_j<=8. Graded pieces with n_j<=7 vanish and the at most one n_j=8 piece is a finite direct sum of Q(8), possibly zero, so T_Z is a finite direct sum of Q(8) and the assigned theorem is discharged with no work in dimensions 9 through 16. This is strictly stronger than FND-0186, which gives K(Y')=0 only for dim Y'<8 via the compact-support bound 16>2 dim Y'; at dim Y=8 the filtration yields Tate type rather than vanishing. (b) If 9<=dim Y<=16, then n=dim Y occurs as a residual index for every admissible chain, so no choice of chain removes the obligation at that index. Lower residual indices in {9,...,16} minus {dim Y} remain chain-dependent: dim Y pins the top residual index, not the full residual set. (c) If dim Y>=17, the top piece vanishes by Artin vanishing after rational coarse comparison, because the source degree 2 n_0-16 exceeds n_0. Remaining residual indices form a chain-dependent subset of {9,...,16}; dim Y does not enumerate them. Presently no verified artifact computes dim Y: ATT-0120 and FND-0192 assume no dimension of Y; FND-0181 proves only dim Y<=20; FND-0187 records that citing CLM-0112-8 unchanged does not license a PGL_2-quotient repair dim Y<=17 and proves no equality. One therefore cannot yet decide which of (a), (b), (c) holds. Independently of dim Y, FND-0192 already lists the ambient residual range as a subset of {9,...,16}, so that range is enumerable. Determining dim Y is a prerequisite for deciding whether the residual range collapses as in (a) or which top index is forced as in (b), but is not a prerequisite for bounding residual work to those eight dimensions. Not asserted: a value of dim Y; chain-independence of residual strata other than n_0; present discharge of C66-TATE-SUPPORT.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads: ATT-0132 does not claim that dim Y pins residual indices; it fixes one admissible chain, records the residual gap GAP-0132-RESIDUAL-9-16 for occurring G_n with 9<=n<=16, and leaves dim Y untouched. The candidate is REV-0182 finding_candidates key dim-Y-pins-the-c66-residual-index-set, restating strongest_attack prongs (3)-(4): n_0=dim Y^(0)=dim Y for every admissible chain, so 9<=dim Y<=16 makes that index unavoidable, while FND-0181/FND-0187 supply no collapse below 8. Packet FND-0192 defines an admissible chain by Y=Y^(0) superset ... with n_j:=dim Y^(j) strictly decreasing, so n_0=dim Y is definitional and chain-independent; clause (3) gives vanishing for n_j<=7 and n_j>=17 and Q(8) at n_j=8; clause (4) splits T_Z on {8,...,16} and records chain-dependence of residual strata; clause (5) makes residual Tate type equivalent across chains. Those clauses independently confirm (a) and (b) and the chain-dependence remainder of (c). FND-0186 gives K(Y')=0 only for dim Y'<8 by H_c^{16}=H^{BM}_{16}=0 when 16>2 dim Y', so dim Y=8 is a genuine extra Tate-discharge case, not a restatement. FND-0181 proves only dim Y<=20 and excludes equality; FND-0187 records that citing CLM-0112-8 unchanged does not license dim Y<=17 and proves no equality; ATT-0120/FND-0192 assume no dimension of Y. Live check of Esnault, Variation on Artin's vanishing theorem, arXiv math/0406396v1 Theorem 2.1, confirms H^m(X_an,F)=0 for m>dim(X) on a possibly singular complex affine variety, strictly above dimension, matching FND-0192 (S4) and blocking Artin at n=16. Stacks Project tag 0F0V records the etale affine bound cd(X)<=dim(X)+cd(K), likewise strict in the algebraically closed geometric case. No contradiction with RED-0001, CONJ-0001, or THM-0001 through THM-0007. The original claims that the residual index set is not even enumerable and that dim Y is a prerequisite for any audit that bounds residual work are false: FND-0192 already enumerates the ambient residual range as a subset of {9,...,16}. Those overclaims are withdrawn. The surviving trichotomy and the chain-independence of n_0 are not recorded in FND-0192(4)-(5), which address chain-dependence of residual strata and chain-independence of the residual Tate condition, so the finding is not merged. It is not merged with FND-0186, which bounds supports rather than discharging T_Z at dim Y=8. FND-0194 is absent from packet C66-001-v6, which quarantines unadjudicated candidates.",
+  "engine": "cursor-grok",
+  "evidence_class": "adversarial_review",
+  "finding_id": "FND-0194",
+  "id": "FAUD-0208",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "cursor-grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "ground_field": "C",
+    "hypotheses": [
+      "FND-0192 admissible-chain definition Y=Y^(0) with strictly decreasing n_j=dim Y^(j) and FND-0192 clauses (3)-(5)",
+      "Artin vanishing H^k(A;Q)=0 only for k>dim A on a possibly singular complex affine variety (Esnault Theorem 2.1)",
+      "rational coarse comparison H^*(S;Q)=H^*(S^c;Q) for separated finite-inertia DM stacks"
+    ],
+    "not_covered": [
+      "a computation or equality for dim Y",
+      "chain-independence of residual strata other than the top index n_0",
+      "present discharge of C66-TATE-SUPPORT",
+      "Artin vanishing at degree equal to dimension"
+    ],
+    "objects": [
+      "ATT-0120 reduced classifying-image closure Y",
+      "FND-0192/ATT-0130 admissible chains",
+      "T_Z=ker(r_T)",
+      "C66-TATE-SUPPORT residual indices in dimensions 9 through 16"
+    ],
+    "subproblem_id": "C66-TATE-SUPPORT"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "math/0406396",
+      "arxiv_version": "v1",
+      "content_sha256": "fad2d2d48acad4bb46558e67bb796898ebda9bbaba3b678638df5c57df753132",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "1b7c12f38368f4a685d59c390c971ab4b89f2461ff0a1ed9f8d7b5635e05cbb4",
+      "retrieved_at": "2026-08-26T22:56:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/math/0406396v1"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "319087c62dd9e24c8e8a8f5b08446b78948555ab89146b1bcbeef46a88ae0475",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "bd6ea79640231f117077e6b9cdf1ae4aec0975f382d1dd0b9f4f26aeb8609d40",
+      "retrieved_at": "2026-08-26T22:54:00Z",
+      "source_type": "reference",
+      "url": "https://stacks.math.columbia.edu/tag/0F0V"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "f42af52445d45bd57b2455006f420c3be938ee648f6ed48daef89a39d30d85fe",
+      "doi": "10.1016/j.aim.2004.10.023",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "7ef8ced2e4b24d1e1dc8084daca55a20ede305da73f981616995a7216734c5f8",
+      "retrieved_at": "2026-08-26T22:55:00Z",
+      "source_type": "citation-index",
+      "url": "https://api.crossref.org/works/10.1016/j.aim.2004.10.023"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0194",
+  "verdict": "promote",
+  "verified_source_count": 3
+}

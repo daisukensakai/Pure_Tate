@@ -1,0 +1,117 @@
+{
+  "attempt_id": "ATT-0130",
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0130-1",
+      "note": "The affine-peeling construction is valid for a reduced finite-type closed substack of the smooth separated DM stack M_{6,6}. At each stage one removes lower-dimensional components, pairwise intersections, and the singular locus, leaving a dense smooth open of the top-dimensional components. Its coarse space is locally closed in the quasi-projective coarse space of M_{6,6}, hence quasi-projective, and admits a dense affine open on each top-dimensional component. A finite disjoint union of affine schemes is affine. Defining Y^{(j+1)} as the reduced complement makes S_j closed in X minus Y^{(j+1)} and forces strict dimension decrease. No external dimension bound for Y is used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0130-2",
+      "note": "For V_j = X minus Y^{(j)}, the A_j are kernels of morphisms from the pure weight -16 object T to pure weight -16 targets, hence sub-Hodge structures. A_0 = T_Z by ATT-0120/CLM-0120-4, A_N = 0 because V_N = X, and monotonicity follows from functoriality of restriction. The graded-piece bound uses only the purity long exact sequence for the smooth pair (V_{j+1}, S_j), exactness of W_{26}, and the smooth weight bound. The arithmetic 26 - 2(21 - n_j) = 2n_j - 16 and (- (21 - n_j)) + 21 = n_j is correct, giving a pure weight -16 target. The proof claims only a subquotient, not an isomorphism with a supports group, and uses no Gysin, closed embedding, fundamental class, regular immersion, or codimension shift for Y or for Z.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0130-3",
+      "note": "For n_j <= 7 the ordinary degree 2n_j - 16 is negative, so the source vanishes. For n_j >= 17 the degree 2n_j - 16 is strictly larger than dim S_j = n_j; rational coarse comparison H^*(S_j;Q) = H^*(S_j^c;Q) for finite-inertia DM stacks reduces to the affine coarse space, and Artin vanishing kills that degree. For n_j = 8 the source is H^0(S_j;Q)(8), a finite direct sum of Q(8), and semisimplicity of pure polarizable weight -16 Hodge structures makes every subquotient again a finite direct sum of Q(8).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0130-4",
+      "note": "The filtration T_Z = A_0 superset ... superset A_N = 0 lies inside the semisimple abelian category of pure polarizable rational Hodge structures of weight -16. Hence it splits noncanonically as a direct sum of its graded pieces. The endpoint vanishings remove all n_j outside {8,...,16}. Strict decrease of the n_j gives at most one stratum per dimension, hence at most eight pieces in 9 <= n_j <= 16.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0130-5",
+      "note": "The sufficiency clause is proved as an implication only. If, for some admissible chain, every residual graded piece with 9 <= n_j <= 16 is a finite direct sum of Q(8), then the noncanonical splitting identifies T_Z with the direct sum of those pieces and the n_j = 8 piece, already Q(8). The instance using W_{2n_j-16}H^{2n_j-16}(S_j;Q) = finite direct sum of Q(8-n_j) is valid because twisting by (n_j) gives Q(8). The antecedent is not asserted, and the residual range 9 through 16 is correctly excluded from this theorem rather than carried as a dependency.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "TARGET-INTERFACE-REFERENCE",
+      "note": "The candidate supplies the required target_interface_reference object. interface_attempt_id is ATT-0120 and interface_claim_ids is nonempty. All required nonempty strings are present: target_subquotient, target_map_use, degree_weight_twist, admissible_chain, support_filtration, graded_piece_identification, endpoint_resolution, sufficiency_implication, and residual_range_out_of_scope. The named source is the verified ATT-0120 datum, the map is the inclusion of ker(r_T) into T, the target subquotient is exactly T_Z = ker(r_T), and the coverage argument proves the assigned filtration theorem rather than a surrogate cohomology statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "PACKET-BINDING-AND-SCOPE",
+      "note": "Attempt packet_id C66-001-v6, packet_sha256 4ffd7ea891266d3e97484cb0aa6f4343d35f8982ead3031ea3fbf4688bc04a70, and packet_binding_sha256 99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d match TASK.json. campaign_id, campaign_revision 6, context_revision 2, subproblem_id C66-SUPPORT-FILTRATION, target dictionary, and theorem_statement also match. The attempt does not resolve RED-0001 and correctly records resolves_exact_target false.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-24",
+  "finding_candidates": [
+    {
+      "key": "affine-peeling-support-filtration-for-ce-kernel",
+      "rationale": "Reusable for downstream C66-TATE-SUPPORT and C66-CEX-LOCAL work because it isolates the exact residual obligation and blocks recurring attacks based on supports-group-versus-image, Gysin shifts for the whole support Y, and stack-versus-coarse Artin vanishing, provided rational coarse comparison is retained.",
+      "statement": "For the ATT-0120 kernel T_Z inside T = W_{-16}H^{BM}_{16}(M_{6,6};Q), the reduced closed support Y can be peeled into finitely many smooth affine-coarse strata with strictly decreasing dimensions, producing a decreasing kernel filtration A_j whose graded pieces are subquotients of W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j). Strata with n_j <= 7 or n_j >= 17 contribute zero, strata with n_j = 8 contribute only finite direct sums of Q(8), and semisimplicity splits T_Z noncanonically as the direct sum of the surviving pieces with 8 <= n_j <= 16. Thus the only substantive antecedent for T_Z to be a finite direct sum of Q(8) is Tate control of residual strata of dimensions 9 through 16; no dimension bound on Y, no Gysin map for Y or Z, and no closed embedding of Z is required.",
+      "status": "candidate"
+    }
+  ],
+  "id": "REV-0180",
+  "independent": true,
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "4ffd7ea891266d3e97484cb0aa6f4343d35f8982ead3031ea3fbf4688bc04a70",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0120",
+      "note": "Used only for the verified interface datum: Y is an atlas-independent reduced closed substack of M_{6,6}; U_Y is smooth of dimension 21; r_T is W_{26} of open restriction twisted by (21); T_Z = ker(r_T) is a pure weight -16 subobject of T; the datum depends only on (X,Y); and no Tate, Gysin, closed-embedding, or exhaustion content is imported. CLM-0120-5 is non-load-bearing for the filtration beyond one-sided coverage context but is confirmed. All used claims are within the scope confirmed by REV-0169 and REV-0170.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0169",
+      "note": "First independent confirmation of ATT-0120. It confirms the interface claims used here and records the supports-group-versus-image caveat. ATT-0130 respects that caveat by never identifying a supports group with its image and by working only with kernels of open restriction.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0170",
+      "note": "Second independent confirmation of ATT-0120, including the target-interface certificate. Its confirmation of rational stack/coarse comparison is used only for ordinary cohomology of smooth finite-inertia DM strata, not for integral coefficients or coarse moduli descent beyond Q-coefficients.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0001",
+      "note": "Supplies the Poincare reindexing W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21) at d = 21. The arithmetic 2*21 - 16 = 26 and 26 - 2*21 = -16 is consistent with the task target dictionary. It is applied only to M_{6,6}, not to Y or to any stratum.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Packet-visible adjudicated finding confirming semisimplicity of pure polarizable rational Hodge structures at this corner and the absence of an extension obstruction. Used only to split the pure weight -16 filtration and to identify subquotients of finite direct sums of Q(8).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLASSICAL-MHS-TOOLKIT",
+      "note": "Standard established inputs: mixed Hodge structures on ordinary rational cohomology of smooth finite-type DM stacks; weight bound H^m has weights at least m; purity for a smooth closed pair of pure codimension; strictness and exactness of W_m; semisimplicity of pure polarizable rational Hodge structures; quasi-projectivity of the coarse space of M_{6,6}; existence of dense affine opens in quasi-projective varieties; generic smoothness in characteristic zero. These are used within their usual scope and are load-bearing for clauses (i) and (ii).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLASSICAL-ARTIN-VANISHING",
+      "note": "Standard Artin/Andreotti-Frankel/Hamm vanishing for affine complex varieties: H^k(A;Q) = 0 for k > dim A. Combined with rational coarse comparison for finite-inertia DM stacks, it supplies the n_j >= 17 endpoint vanishing. No integral-coefficient or coarse-moduli statement beyond rational ordinary cohomology is used.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0130-P1",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: force the proof into the supports-group-versus-image trap and break the top-dimensional affine-peeling step. In the purity sequence for (V_{j+1}, S_j), the map from H^{2n_j-16}(S_j)(-(21-n_j)) to H^{26}(V_{j+1}) need not be injective, because the connecting map from H^{25}(V_j) can contribute in weight 26. If ATT-0130 had identified A_j/A_{j+1} with the full supports group W_{26}H^{26}_{S_j}(V_{j+1})(21), or with W_{2n_j-16}H^{2n_j-16}(S_j)(n_j) itself, the argument would fail, as warned by the FND-0168(3a)/(3b) hazard. A second prong attacks the n_j >= 17 vanishing: S_j is a DM stack, and Artin vanishing on its affine coarse space requires rational coarse comparison H^*(S_j;Q) = H^*(S_j^c;Q); if that comparison failed for finite-inertia stacks, the high-dimensional endpoint vanishings would collapse. Outcome: both prongs fail. The attempt never names a supports group and proves only that A_j/A_{j+1} embeds into the kernel of W_{26}-restriction, hence is a subquotient of the image of the purity source; exactness of W_{26} makes this legitimate. For separated finite-inertia DM stacks over C with Q-coefficients, R c_* Q = Q, so rational coarse comparison holds and Artin vanishing applies to the affine coarse space. The Tate-twist and weight arithmetic is consistent: 26 - 2(21-n_j) = 2n_j - 16, the (-c_j) twist raises the weight floor to 26, and the final (21)-twist gives (n_j) and weight -16. Semisimplicity supplies an actual Hodge-structure splitting of the filtration inside the pure polarizable weight -16 category, not a mere semisimplification. The prohibited Gysin/regular-immersion/codimension-shift route is not used for Y or for any model of Z; purity is used only for the constructed smooth pairs (X minus Y^{(j+1)}, S_j), exactly as the theorem permits. Evidence limitation: no external web evidence was used; the verdict rests on the supplied local artifacts and standard classical inputs recorded as dependencies.",
+  "subproblem_id": "C66-SUPPORT-FILTRATION",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let T := W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), let X := M_{6,6}, and let (K_Z, T_Z, phi) be the datum of a verified C66-SUPPORT-INTERFACE attempt, with Y the reduced closed substack of X that datum names and T_Z = ker(r_T) its named subobject of T. Call a chain Y = Y^{(0)} superset Y^{(1)} superset ... superset Y^{(N)} = empty of reduced closed substacks of X admissible if the dimensions strictly decrease and, for every j, the difference S_j := Y^{(j)} minus Y^{(j+1)} is smooth of pure dimension n_j = dim Y^{(j)}, has affine coarse space, and is closed in X minus Y^{(j+1)}. Prove all of the following unconditionally, without assuming RED-0001 and without assuming Tate type, purity, or vanishing of any group not proved here. (i) An admissible chain for Y exists, by explicit construction, using no dimension bound for Y. (ii) For every admissible chain, the subobjects A_j := ker(T -> W_{26}H^{26}(X minus Y^{(j)};Q)(21)) form a finite decreasing filtration of T by sub-Hodge structures with A_0 = T_Z and A_N = 0, and each graded piece A_j/A_{j+1} is a subquotient of the pure polarizable weight -16 structure W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j); this must be established from purity for the smooth pair (X minus Y^{(j+1)}, S_j) in degree 26 and codimension 21-n_j, exactness of W_{26}, and the weight bound for smooth stacks, and may use no Gysin map, closed embedding, fundamental class, regular immersion, or codimension shift for Y or for any model of Z inside X. (iii) A_j/A_{j+1} = 0 whenever n_j <= 7 or n_j >= 17, the two vanishings proved respectively from 2n_j-16 < 0 and from 2n_j-16 > n_j = dim S_j with affine coarse space; and A_j/A_{j+1} is a finite direct sum of Q(8) whenever n_j = 8. (iv) T_Z is isomorphic, not necessarily canonically, to the direct sum of the graded pieces A_j/A_{j+1} indexed by the stratum dimensions n_j in {8, ..., 16}, of which at most one occurs per dimension, so at most eight pieces lie in the range 9 <= n_j <= 16. (v) The implication: if for some admissible chain every graded piece with 9 <= n_j <= 16 is a finite direct sum of Q(8) -- for instance if each W_{2n_j-16}H^{2n_j-16}(S_j;Q) is a finite direct sum of Q(8-n_j) -- then T_Z is a finite direct sum of Q(8). Scope. This theorem is a reduction, and an artifact proving (i) through (v) discharges it in full and outright: it carries no undischarged dependency of its own and does not reduce its own assigned theorem to anything else, even though its content reduces C66-TATE-SUPPORT; resolves_exact_target remains false because RED-0001 is untouched. The following are excluded from this theorem by its own terms, are not gaps in it, and no gap marker is to be recorded for them. It determines nothing about W_{2n-16}H^{2n-16}(S_{(n)};Q), nor about the corresponding graded piece, for any n with 9 <= n <= 16; that range is the assigned obligation of C66-TATE-SUPPORT and must be neither claimed nor carried here as an open dependency. It asserts no Tate type for T_Z: clause (v) is proved as an implication only, and its antecedent is deliberately left open. It asserts no lower bound on T_Z, neither proving nor excluding T_Z = 0, and clauses (i) through (v) have the same content in either case. It singles out no canonical or preferred admissible chain and needs none, because T_Z depends only on the pair (X, Y) and clauses (ii) through (iv) are proved for every admissible chain; chain-dependence of the residual strata is outside its scope, not a defect in it. It claims no realization of any adjudicated non-Tate model as a single admissible stratum, a proper support being inadmissible. It does not itself assemble the complementary target terms.",
+  "verdict": "confirmed"
+}

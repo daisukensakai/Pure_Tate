@@ -1,0 +1,124 @@
+{
+  "attempt_id": "ATT-0132",
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "checked_claims": [
+    {
+      "claim_id": "THEOREM-DISCHARGE",
+      "note": "The exact theorem_statement demands a proof that the named T_Z is a finite direct sum of Q(8) (or, alternatively, a disproof through the verified target interface). ATT-0132 establishes neither. Its claims array is empty, result_type is 'incomplete', theorem_scope.outcome states 'The exact theorem is neither proved nor disproved by this artifact', and completion_attestation.not_reduction_only is false. The artifact is an accurate residual audit of the verified reduction, not a discharge of the assigned theorem. This is a failure to prove the exact statement submitted, not a complaint that a lemma fails to settle the global campaign target: the submitted statement IS the C66-TATE-SUPPORT theorem, quoted verbatim from TASK.json.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "GAP-0132-RESIDUAL-9-16",
+      "note": "The attempt's own gap marker, and the load-bearing obstruction. For one fixed admissible chain, every occurring graded piece G_n with 9 <= n <= 16 must be proved zero or a finite direct sum of Q(8); no admitted input determines W_{2n-16}H^{2n-16}(S_(n);Q) or the image subquotient G_n. I independently confirm the gap is real and not an artifact of timidity: see strongest_attack, where four routes to close it from admitted and packet-visible inputs (boundary-case Artin at n=16, purity-implies-Tate on the lowest-weight piece, chain-shopping, and the dim-Y route through FND-0186/FND-0181/FND-0187) all fail. The gap is correctly recorded as open and blocks application of ATT-0130/CLM-0130-5.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "TARGET-INTERFACE-REFERENCE",
+      "note": "Two prongs must be separated. Naming prong: satisfied. The object is present; interface_claim_ids (CLM-0120-2..7) and filtration_claim_ids (CLM-0130-1..5) are nonempty and all cited claim ids exist and are dual-confirmed (REV-0169/REV-0170 for ATT-0120; REV-0180/REV-0181 for ATT-0130); interface_attempt_id ATT-0120 and filtration_attempt_id ATT-0130 are the genuine verified artifacts; target_subquotient is exactly T_Z = K_Z = ker(r_T) inside T = W_{26}H^{26}(M_{6,6};Q)(21), not a surrogate; target_map_use is exactly the inclusion of ker(r_T) into T built from W_{26} of ordinary open restriction twisted by (21), with no Gysin map, proper pushforward, or fundamental class; chain_and_strata correctly reports the graded piece as only a subquotient of the source group, so the FND-0168(3a)/(3b) supports-group-versus-image hazard is not incurred; and no family-base, atlas, product-model, or standalone-Z cohomology is substituted. Substantive prong: failed. residual_piece_resolution is 'Unresolved' and unconditional_conclusion states that no unconditional Tate or non-Tate conclusion for the named T_Z is established. The named source, map and subquotient therefore do not prove the stated theorem. This is the FND-0189 modality test applied to a null conclusion rather than to a conditional one: schema-population of a correctly named target_interface_reference is not evidence that the contract is met, and a field that honestly reports 'no conclusion' fails the contract exactly as a field reporting a conclusion under an undischarged antecedent does.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "RESIDUAL-DEGREE-RANGE-ARITHMETIC",
+      "note": "Independently recomputed. For n = 9..16 the source degree 2n-16 is 2,4,6,8,10,12,14,16, so 0 <= 2n-16 <= n across the whole residual range, with equality 2n-16 = n exactly at n = 16. Hence the ATT-0130 negative-degree vanishing (n <= 7, degree < 0) and the Artin endpoint vanishing (n >= 17, degree > dim, applied to the affine coarse space after rational finite-inertia comparison) are both genuinely inapplicable, the boundary case n = 16 included, since Artin/Esnault gives vanishing only for k strictly greater than dim. Twist arithmetic also checks: W_{2n-16}H^{2n-16}(S_(n);Q)(n) has weight (2n-16) - 2n = -16, matching the pure weight -16 of T, and the ledger 2*21-16 = 26, 26-2*21 = -16, 26-2(21-n) = 2n-16, -(21-n)+21 = n is consistent with the task target dictionary.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "SUBQUOTIENT-VERSUS-SOURCE-SURVIVAL",
+      "note": "ATT-0132 correctly refuses both illegitimate directions. It does not identify G_n with W_{2n-16}H^{2n-16}(S_(n);Q)(n) (only a subquotient is available, because the connecting map from H^{25}(V_j) need not vanish in weight 26), and it correctly records that a non-Tate source group is not a disproof unless the corresponding graded piece is itself proved non-Tate. It likewise makes no claim that a source class survives in G_n. The semisimplicity use is also correctly scoped: per FND-0033 and CLM-0130-4 the splitting of T_Z into graded pieces is an actual, if noncanonical, Hodge-structure isomorphism inside the semisimple category of pure polarizable weight -16 structures, not a semisimplification, and ATT-0132 explicitly notes that semisimplicity does not force an arbitrary pure weight -16 structure to be Tate.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "FND-0053-PARAPHRASE",
+      "note": "Non-load-bearing prose defect. ATT-0132 writes 'Rational S_6 representation theory or a finite branch morphism cannot create Tate cohomology, as explicitly prohibited by the mathematical constraints.' FND-0053 states the converse-direction fact: that S_6 has rational irreducible representations does not IMPLY that an S_6-cover of a relative configuration or linear-system space carries only Tate local systems, since geometric monodromy of the tetragonal family can still produce non-Tate summands. The paraphrase reverses the implication into a prohibition that FND-0053 does not record. Nothing in the artifact rests on it; the recorded gap and the audit are unaffected. Left unresolved rather than failed because it affects only the artifact's characterisation of a blocked route, not any step of its reasoning.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "PACKET-BINDING-AND-SCOPE",
+      "note": "ATT-0132 packet_id C66-001-v6, packet_sha256 712b4798d59191759fa6e5f3ad67a158073328e994e1430f9a753f0cd178bf43, and packet_binding_sha256 99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d all match TASK.json, as do campaign_id, campaign_revision 6, context_revision 2, subproblem_id C66-TATE-SUPPORT, task_id TASK-C66-M-005 (TASK.target_task_id), the full thirteen-key target dictionary, and the theorem_statement verbatim. Noted without prejudice: dependency ATT-0130 and its reviews REV-0180/REV-0181 carry packet_sha256 4ffd7ea891266d3e97484cb0aa6f4343d35f8982ead3031ea3fbf4688bc04a70 under the same packet_id C66-001-v6, i.e. packet-body drift across regenerations; the stable packet_binding_sha256 agrees throughout, so the binding is intact and this is not adverse to ATT-0132.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-27",
+  "finding_candidates": [
+    {
+      "key": "dim-Y-pins-the-c66-residual-index-set",
+      "rationale": "Reusable for C66-TATE-SUPPORT and C66-CEX-LOCAL. It converts the vague obligation 'handle dimensions 9 through 16' into a concrete prerequisite, identifies an unconditional discharge route that no attempt has attempted, and blocks in advance the recurring chain-shopping manoeuvre by pinning the chain-independent top index. It is distinct from FND-0186 (which bounds supports, not the whole theorem), from FND-0181 and FND-0187 (which bound or fail to bound dim Y without drawing the filtration consequence), and from FND-0192(4)-(5) (which record chain-dependence of residual strata and chain-independence of the residual condition, but not the chain-independence of n_0 nor the dim Y <= 8 collapse).",
+      "statement": "At (g,n) = (6,6), for the verified ATT-0120 support Y and any ATT-0130 admissible chain, the top stratum dimension satisfies n_0 = dim Y^{(0)} = dim Y and is therefore the same for every admissible chain, even though the lower residual strata are chain-dependent. Three consequences for C66-TATE-SUPPORT. (a) If dim Y <= 8, the assigned theorem is discharged outright with no work in the residual range: every stratum dimension is then at most 8, so by CLM-0130-3 every graded piece with n_j <= 7 vanishes and the n_j = 8 piece is a finite direct sum of Q(8), and CLM-0130-4 makes T_Z a finite direct sum of Q(8). This is a strictly stronger conclusion than FND-0186, which records only that a kernel-form term K(Y') vanishes when dim Y' < 8. (b) If 9 <= dim Y <= 16, then n = dim Y lies in the residual index set for every admissible chain, so no choice of chain removes the obligation at that index. (c) If dim Y >= 17, the top stratum contributes zero by the Artin endpoint and the residual obligation begins at the largest occurring stratum dimension that is at most 16. Since no verified artifact supplies dim Y (ATT-0120 excludes it; FND-0181 proves only dim Y <= 20; FND-0187 records that the dim Y <= 17 repair is not licensed by citing CLM-0112-8 unchanged and proves no equality), the residual index set of C66-TATE-SUPPORT is currently not even enumerable. Determining dim Y is therefore a prerequisite for any audit-style artifact that seeks to bound the residual work, and is the single geometric number that would either collapse the range entirely, in case (a), or fix where it starts.",
+      "status": "candidate"
+    },
+    {
+      "key": "null-conclusion-fails-the-target-interface-contract",
+      "rationale": "Adds the null-conclusion case to the adjudicated FND-0189 modality test, which currently covers only the conditional case witnessed by ATT-0122. Reusable by every future reviewer facing a well-formed but non-concluding C66-TATE-SUPPORT artifact, and it supplies the precise two-prong reporting pattern that keeps such a check adverse rather than being scored as a pass on schema grounds. Offered as evidence extending FND-0189 rather than as an independent finding.",
+      "statement": "The FND-0189 modality test for the C66-TATE-SUPPORT target-interface artifact contract extends from conditional conclusions to null ones. An artifact whose theorem_statement is the assigned unconditional theorem, and whose target_interface_reference is fully populated with the genuine verified objects (interface and filtration attempt ids, nonempty claim id lists, target_subquotient exactly T_Z = ker(r_T), target_map_use exactly the inclusion built from W_{26} of ordinary open restriction twisted by (21), with no surrogate family-base, atlas, product-model or standalone-Z cohomology substituted), still fails the contract when its resolution and conclusion fields report that nothing is established. Schema-population plus candour is not discharge, and an explicitly empty unconditional_conclusion fails the substantive test exactly as an antecedent listed as an open gap does. ATT-0132 is the witness: every named object is the genuine dual-confirmed ATT-0120 and ATT-0130 datum and every arithmetic check passes, yet residual_piece_resolution reads 'Unresolved' and unconditional_conclusion states that no unconditional Tate or non-Tate conclusion for the named T_Z is established. Corollary for reviewers: on such an artifact the target-interface check must be split into a naming prong, which can pass, and a substantive prong, which fails, and the naming prong passing is not grounds for a confirmed verdict.",
+      "status": "candidate",
+      "supports_finding_id": "FND-0189"
+    }
+  ],
+  "id": "REV-0182",
+  "independent": true,
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "712b4798d59191759fa6e5f3ad67a158073328e994e1430f9a753f0cd178bf43",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0120",
+      "note": "Verified C66-SUPPORT-INTERFACE datum, dual-confirmed by REV-0169 and REV-0170. ATT-0132 imports it only through CLM-0120-2..7 for the atlas-independent reduced closed substack Y, the open restriction r_T, the pure weight -16 subobject T_Z = ker(r_T), atlas independence, one-sided coverage, and the prohibition on unconstructed Gysin or embedding maps. No dimension, purity, irreducibility, or lci property of Y is imported, and none is available: ATT-0120 explicitly excludes dim Y.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0169",
+      "note": "First independent confirmation of ATT-0120, all seven claims confirmed. Its supports-group-versus-image caveat is respected by ATT-0132, which never names a supports group and works only with kernels of open restriction.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0170",
+      "note": "Second independent confirmation of ATT-0120 including the target-interface certificate. Its rational stack/coarse comparison scope is used by ATT-0132 only indirectly, through the ATT-0130 endpoint vanishings, and only for ordinary Q-cohomology of smooth strata; no integral or coarse-moduli statement is inherited.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0130",
+      "note": "Verified C66-SUPPORT-FILTRATION result, dual-confirmed by REV-0180 and REV-0181 and adjudicated as packet finding FND-0192. ATT-0132 uses CLM-0130-1..5 within scope: admissible chain, graded pieces as subquotients of W_{2n-16}H^{2n-16}(S_(n);Q)(n), endpoint resolutions at n <= 7, n >= 17 and n = 8, noncanonical splitting, and the sufficiency implication. I re-derived the codimension and twist bookkeeping (c = 21-n, degree 26-2c = 2n-16, twist -c+21 = n, weight -16) and it is correct. ATT-0132 does not overstate CLM-0130-5, which it correctly cites as an implication only.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0180",
+      "note": "First confirmation of ATT-0130. Its limitation that residual pieces are subquotients rather than identified supports groups is respected verbatim by ATT-0132's chain_and_strata and residual_piece_resolution fields.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0181",
+      "note": "Second confirmation of ATT-0130. Its restrictions against unproved degeneration, Kunneth decomposition, algebraic or tautological generation, and motivic upgrades are respected: ATT-0132 invokes no spectral sequence, no Kunneth splitting, no predicted motive, and no upgrade of pure Tate type to algebraic or tautological generation.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0192",
+      "note": "Packet-visible adjudication of the ATT-0130 filtration, not cited by ATT-0132 but load-bearing context for this review. Its clause (5) strengthens CLM-0130-5 to an equivalence: T_Z is a finite direct sum of Q(8) if and only if every residual graded piece with 9 <= n_j <= 16 is, for one and hence for every admissible chain. Its clause (6) records that stratum-level Tate control is sufficient but not necessary. Both are consistent with ATT-0132's audit and with this verdict; the equivalence in particular closes the chain-shopping escape tested in strongest_attack.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0132-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "The submitted artifact declines to conclude, so the strongest available attack is not against a proof step but against its negative audit: show that the recorded residual gap is spurious because dimensions 9 through 16 are already closable from admitted or packet-visible inputs, which would make ATT-0132 needlessly incomplete and its target_interface_reference resolution wrong. Four prongs, all pressed and all failed. (1) Boundary-case Artin. At n = 16 the source degree 2n-16 = 16 equals dim S_(16), so one hopes the affine-coarse vanishing extends to equality. It does not: (S4) as recorded (Esnault, Variation on Artin's vanishing theorem, Thm 2.1) gives H^k(A;Q) = 0 only for k > dim A, and no strengthening to k = dim A exists for singular or smooth affine varieties; H^n of a smooth affine n-fold is generically nonzero. The same failure recurs at every n in 9..16 where 2n-16 < n strictly. (2) Purity forced to Tate. One hopes that W_{2n-16}H^{2n-16}(S_(n);Q), being the lowest-weight piece and hence pure, and being twisted to weight exactly -16, must be a sum of Q(8-n). It need not be: the lowest-weight piece of a smooth variety is the image of H^{2n-16} of a smooth compactification, pure but generically transcendental, so already at n = 9 the group W_2H^2 of a smooth affine 9-fold can carry (2,0) classes. This is exactly the hazard adjudicated as FND-0191, which supplies a model at the identical (d,k) = (21,16) ledger, X = A x P^{12} with A abelian of dimension 9 and Y = A x {pt}, realising H^2(A)(9) as a polarizable pure weight -16 non-Tate image of W_{-16}H^{BM}_{16}(Y;Q) in W_{-16}H^{BM}_{16}(X;Q). Purity, Borel-Moore degree 16, weight -16, and closed support in a smooth 21-fold are jointly insufficient. (3) Chain-shopping. CLM-0130-5 quantifies existentially over admissible chains and FND-0192(4) records that residual strata are chain-dependent, so one hopes to choose a chain with no stratum of dimension 9 through 16. This fails twice over: n_0 = dim Y^{(0)} = dim Y is the same for every admissible chain, so if 9 <= dim Y <= 16 the residual index set contains n = dim Y unavoidably; and FND-0192(5) makes the residual Tate condition hold for one admissible chain if and only if it holds for every one, because each graded piece is a subquotient of A_0 = T_Z. Chain choice is provably not an escape. (4) The dimension route. FND-0186 gives K(Y') = 0 for dim Y' < 8, so a sufficiently small support would collapse the range outright. But the only verified ceiling is FND-0181's dim Y <= 20, and FND-0187 records that the PGL_2-quotient repair yielding dim Y <= 17 is not supplied by citing CLM-0112-8 unchanged and does not prove equality anyway. Both ceilings are far above 8, so nothing collapses. Outcome: every prong fails, the gap is genuine, and the incomplete verdict stands on the artifact's own honest terms rather than on reviewer scepticism. Secondary sweep for silent upgrades found none of the usual defects: no stack-versus-coarse slip (coarse comparison enters only through the already-confirmed ATT-0130 endpoint at n >= 17, rationally, on smooth strata); Q-coefficients throughout with no integral claim; Borel-Moore degree 16 and ordinary degree 26 never conflated, and every Tate twist (21), (n), (-c) recomputed and correct; no Gysin or Kunneth shift for Y or for any model of Z; no spectral sequence and hence no degeneration assumption; no invariants-versus-coinvariants step, since the ordered model maps directly to the ordered stack and Y is formed in M_{6,6}; semisimplification never substituted for a Hodge isomorphism, FND-0033 supplying an actual splitting; no predicted motive used as a theorem; pure Tate type never upgraded to algebraic or tautological generation, this being an explicit excluded_claim; and no omitted stable pairs, the Deligne-Mumford boundary and graph complexes never entering. The single defect found is the reversed paraphrase of FND-0053, which is non-load-bearing. Evidence limitation: no external web evidence was used; the verdict rests on TASK.json, the submitted artifact, its four dependency reviews, the two dependency attempts, and packet C66-001-v6. One Grok worker was dispatched for packet extraction and returned no output before its timeout, so all packet reading underlying this review was performed directly by the reviewer.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum, and take as given the support filtration of a verified C66-SUPPORT-FILTRATION result: an admissible chain for Y, and a finite filtration of T_Z by sub-Hodge structures whose graded pieces are indexed by the stratum dimensions n of that chain, each a subquotient of W_{2n-16}H^{2n-16}(S_{(n)};Q)(n), zero for n <= 7 and for n >= 17, a finite direct sum of Q(8) for n = 8, and at most one per dimension, so that at most eight pieces remain, at most one for each n with 9 <= n <= 16. Prove T_Z is a finite direct sum of Q(8). By the verified implication of that filtration it is sufficient to fix one admissible chain and prove, for each of its strata of dimension n with 9 <= n <= 16, that the corresponding graded piece is a finite direct sum of Q(8), for instance by determining W_{2n-16}H^{2n-16}(S_{(n)};Q) or by proving that the graded piece vanishes; any other complete proof of the displayed conclusion is equally admissible. A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof, and neither is a non-Tate group W_{2n-16}H^{2n-16}(S_{(n)};Q) unless the corresponding graded piece of the verified filtration is itself proved non-Tate. This theorem does not itself assemble the complementary target terms.",
+  "verdict": "incomplete"
+}

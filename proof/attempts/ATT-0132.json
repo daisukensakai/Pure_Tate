@@ -1,0 +1,187 @@
+{
+  "argument_markdown": "Source-backed inputs.\n\nATT-0120, dual-confirmed by REV-0169 and REV-0170, supplies the atlas-independent reduced closed support Y, the ordinary open-restriction map r_T, and the named pure weight -16 sub-Hodge structure T_Z = ker(r_T) inside T. The supports group itself is not identified with T_Z; only its image under the supports map equals the kernel.\n\nATT-0130, dual-confirmed by REV-0180 and REV-0181, supplies an admissible chain Y = Y^(0) superset ... superset Y^(N) = empty and a decreasing filtration A_j of T_Z. For a stratum S_(n) of dimension n, let G_n denote its graded piece. The verified assertion is only that G_n is a subquotient of W_{2n-16}H^{2n-16}(S_(n);Q)(n). The pieces vanish for n <= 7 and n >= 17, and the n = 8 piece is a finite direct sum of Q(8). Semisimplicity gives a noncanonical direct-sum splitting of T_Z into these graded pieces.\n\nResidual audit.\n\nFor n = 9,10,11,12,13,14,15,16, the respective source degrees are 2,4,6,8,10,12,14,16. Thus 0 <= 2n-16 <= n throughout the residual range. Negative-degree vanishing does not apply, and Artin vanishing for an affine coarse space requires degree strictly greater than its dimension, so it does not apply either, including at equality for n = 16.\n\nThe primary balanced tetragonal Casnati\u2013Ekedahl context identifies fibrewise obstruction geometry and an ordered reduced-support incidence, but it supplies no proved ordinary-cohomology calculation for any S_(n), no proved affine paving or mixed-Tate stratification of those strata, and no map proving that a source class survives in G_n. Its recorded frontier obligations include the mixed Hodge structures of ordering-cover components and the stack-level comparison with the image closure in M_{6,6}. Those obligations cannot be treated as inputs. Rational S_6 representation theory or a finite branch morphism cannot create Tate cohomology, as explicitly prohibited by the mathematical constraints.\n\nSemisimplicity removes extension ambiguity only after the simple factors of each G_n are known; it does not force an arbitrary pure weight -16 Hodge structure to be Tate. Conversely, non-Tate cohomology in a source group would not disprove the theorem unless a non-Tate subquotient were proved to survive in the named G_n and hence in T_Z.\n\nGap.\n\nNo occurring G_n for 9 <= n <= 16 is proved zero or a finite direct sum of Q(8). Therefore the verified sufficiency implication cannot be applied. No non-Tate G_n is proved either, so there is also no disproof through the required target interface.\n\nComputational hypotheses and experiments: none.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "claims": [],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": false,
+    "resolves_exact_target": false
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [
+    "CLM-0120-2",
+    "CLM-0120-3",
+    "CLM-0120-4",
+    "CLM-0120-5",
+    "CLM-0120-6",
+    "CLM-0120-7",
+    "CLM-0130-1",
+    "CLM-0130-2",
+    "CLM-0130-3",
+    "CLM-0130-4",
+    "CLM-0130-5"
+  ],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [
+    {
+      "blocking_effect": "Without this residual resolution, ATT-0130/CLM-0130-5 does not imply that T_Z is Tate; without a proved non-Tate survivor in some G_n, the exact theorem is not disproved either.",
+      "id": "GAP-0132-RESIDUAL-9-16",
+      "statement": "For one fixed admissible chain, every occurring graded piece G_n with 9 <= n <= 16 must be proved zero or a finite direct sum of Q(8). No admitted input determines W_{2n-16}H^{2n-16}(S_(n);Q) sufficiently or determines the image subquotient G_n.",
+      "status": "open"
+    }
+  ],
+  "id": "ATT-0132",
+  "ingest_normalizations": [
+    {
+      "identifiers": [
+        "CLM-0120-2",
+        "CLM-0120-3",
+        "CLM-0120-4",
+        "CLM-0120-5",
+        "CLM-0120-6",
+        "CLM-0120-7",
+        "CLM-0130-1",
+        "CLM-0130-2",
+        "CLM-0130-3",
+        "CLM-0130-4",
+        "CLM-0130-5"
+      ],
+      "moved_from": "source_claim_ids",
+      "moved_to": "dependency_claim_ids",
+      "rule": "DEPENDENCY-CLAIM-SPLIT-0001"
+    },
+    {
+      "identifiers": [
+        "ATT-0120",
+        "REV-0169",
+        "REV-0170",
+        "ATT-0130",
+        "REV-0180",
+        "REV-0181"
+      ],
+      "reason": "These are proof-artifact dependencies, not bibliographic sources. source_ids is validated against data/sources.jsonl (SRC-*) plus packet-visible finding ids, so attempt and review ids there are unresolvable and blocked campaign structural integrity. Every dropped identifier is already declared in proof_dependencies with its role and note, so no provenance is lost by this drop. Same defect as ATT-0129.",
+      "removed_from": "source_ids",
+      "rule": "NONSOURCE-PROVENANCE-DROP-0001"
+    }
+  ],
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "verified-target-interface-audit",
+    "verified-support-filtration-audit",
+    "residual-degree-range-check",
+    "subquotient-versus-source-survival-check",
+    "semisimplicity-scope-check"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_path": "proof/packets/generated/C66-001-v6.md",
+  "packet_sha256": "712b4798d59191759fa6e5f3ad67a158073328e994e1430f9a753f0cd178bf43",
+  "proof_dependencies": [
+    {
+      "id": "ATT-0120",
+      "kind": "attempt",
+      "note": "Verified C66-SUPPORT-INTERFACE datum. Used through CLM-0120-2 through CLM-0120-7 for Y, r_T, T_Z = ker(r_T), atlas independence, one-sided support coverage, and the prohibition on unconstructed Gysin or embedding maps."
+    },
+    {
+      "id": "REV-0169",
+      "kind": "confirmation_review",
+      "note": "First confirmation of ATT-0120. Its supports-group-versus-image caveat is respected."
+    },
+    {
+      "id": "REV-0170",
+      "kind": "confirmation_review",
+      "note": "Second confirmation of ATT-0120 and its target-interface certificate."
+    },
+    {
+      "id": "ATT-0130",
+      "kind": "attempt",
+      "note": "Verified C66-SUPPORT-FILTRATION result. Used through CLM-0130-1 through CLM-0130-5 for the admissible chain, subquotient filtration, endpoint resolutions, noncanonical splitting, and residual sufficiency implication."
+    },
+    {
+      "id": "REV-0180",
+      "kind": "confirmation_review",
+      "note": "First confirmation of ATT-0130, including the limitation that residual pieces are subquotients rather than identified supports groups."
+    },
+    {
+      "id": "REV-0181",
+      "kind": "confirmation_review",
+      "note": "Second confirmation of ATT-0130. Its restrictions against unproved degeneration, Kunneth, algebraic-generation, and motivic upgrades are respected."
+    }
+  ],
+  "result_type": "incomplete",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [],
+  "status": "proposed",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "summary": "The verified interface ATT-0120 and verified filtration ATT-0130 reduce the exact target to the occurring graded pieces in dimensions 9 through 16. None of the admitted inputs determines those pieces, proves them zero, or proves them Tate. In this range the source degree 2n-16 is nonnegative and at most n, so neither endpoint argument of ATT-0130 applies. The graded pieces are only subquotients of the displayed source groups, and no admitted Casnati\u2013Ekedahl input computes their images in T_Z. Consequently ATT-0132 records the precise residual gap and does not claim a proof or disproof.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "target_interface_reference": {
+    "chain_and_strata": "Fix one admissible ATT-0130 chain Y = Y^(0) superset ... superset Y^(N) = empty. Its dimensions strictly decrease, and S_(n) denotes the unique smooth affine-coarse stratum of dimension n when it occurs. The associated graded piece G_n is only a subquotient of W_{2n-16}H^{2n-16}(S_(n);Q)(n).",
+    "filtration_attempt_id": "ATT-0130",
+    "filtration_claim_ids": [
+      "CLM-0130-1",
+      "CLM-0130-2",
+      "CLM-0130-3",
+      "CLM-0130-4",
+      "CLM-0130-5"
+    ],
+    "interface_attempt_id": "ATT-0120",
+    "interface_claim_ids": [
+      "CLM-0120-2",
+      "CLM-0120-3",
+      "CLM-0120-4",
+      "CLM-0120-5",
+      "CLM-0120-6",
+      "CLM-0120-7"
+    ],
+    "residual_piece_resolution": "Unresolved. For every occurring n with 9 <= n <= 16, ATT-0132 proves neither that G_n vanishes nor that G_n is a finite direct sum of Q(8). It also proves no non-Tate G_n. The verified endpoint arguments do not apply because 0 <= 2n-16 <= n.",
+    "target_map_use": "The only target map used is the inclusion T_Z = ker(r_T) into T constructed in ATT-0120 from W_{26} of ordinary open restriction, twisted by (21). No supports group is identified with its image, and no Gysin map, proper pushforward, fundamental class, or unproved map from Y or Z to T is used.",
+    "target_subquotient": "T_Z = K_Z = ker(r_T), the pure weight -16 subobject of T := W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21) defined by ATT-0120/CLM-0120-4 from ordinary open restriction to M_{6,6} minus Y.",
+    "unconditional_conclusion": "No unconditional Tate or non-Tate conclusion for the named T_Z is established in ATT-0132. The exact theorem is neither proved nor disproved, and complementary target terms are not assembled."
+  },
+  "task_id": "TASK-C66-M-005",
+  "theorem_scope": {
+    "coefficients": "Q",
+    "excluded_claims": [
+      "assembly of complementary target terms",
+      "a disproof from non-Tate cohomology not proved to survive in the named T_Z",
+      "identification of a graded piece with its source cohomology group",
+      "a Gysin map, regular immersion, or codimension shift for Y or Z",
+      "algebraic or tautological generation inferred from pure Tate Hodge type"
+    ],
+    "g": 6,
+    "n": 6,
+    "objects": [
+      "T = W_{-16}H^{BM}_{16}(M_{6,6};Q)",
+      "the ATT-0120 support Y and kernel T_Z",
+      "one admissible ATT-0130 chain and its filtration",
+      "the occurring residual graded pieces in dimensions 9 through 16"
+    ],
+    "outcome": "The exact theorem is neither proved nor disproved by this artifact."
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum, and take as given the support filtration of a verified C66-SUPPORT-FILTRATION result: an admissible chain for Y, and a finite filtration of T_Z by sub-Hodge structures whose graded pieces are indexed by the stratum dimensions n of that chain, each a subquotient of W_{2n-16}H^{2n-16}(S_{(n)};Q)(n), zero for n <= 7 and for n >= 17, a finite direct sum of Q(8) for n = 8, and at most one per dimension, so that at most eight pieces remain, at most one for each n with 9 <= n <= 16. Prove T_Z is a finite direct sum of Q(8). By the verified implication of that filtration it is sufficient to fix one admissible chain and prove, for each of its strata of dimension n with 9 <= n <= 16, that the corresponding graded piece is a finite direct sum of Q(8), for instance by determining W_{2n-16}H^{2n-16}(S_{(n)};Q) or by proving that the graded piece vanishes; any other complete proof of the displayed conclusion is equally admissible. A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof, and neither is a non-Tate group W_{2n-16}H^{2n-16}(S_{(n)};Q) unless the corresponding graded piece of the verified filtration is itself proved non-Tate. This theorem does not itself assemble the complementary target terms."
+}

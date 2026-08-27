@@ -1,0 +1,28 @@
+{
+  "artifact_id": "ATT-0131",
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "engine": "qwen",
+  "error": "agent failed with exit 1: Qwen API HTTP 429: {'message': 'Your token-plan 1-week quota has been exhausted. The quota will reset at 08-29 00:11:00 UTC.', 'id': '6ca17db8-d64e-4640-a2f8-004b3e44e81c', 'type': 'insufficient_quota', 'code': 'insufficient_quota'}",
+  "output": "proof/attempts/ATT-0131.json",
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "status": "stopped",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "task_id": "TASK-C66-M-005",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/manual-recovery/qwen-tate-support-v6-20260826/run_attempt.py\", line 70, in main\n    artifact = run_task(task, ENGINE, output, timeout=TIMEOUT)\n  File \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/pure_tate/agents.py\", line 2982, in run_task\n    _raise_infrastructure_failure(\n  File \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/pure_tate/agents.py\", line 2883, in _raise_infrastructure_failure\n    raise error_type(detail, trace[\"id\"], trace[\"path\"])\npure_tate.paired.ObservableInfrastructureError: agent failed with exit 1: Qwen API HTTP 429: {'message': 'Your token-plan 1-week quota has been exhausted. The quota will reset at 08-29 00:11:00 UTC.', 'id': '6ca17db8-d64e-4640-a2f8-004b3e44e81c', 'type': 'insufficient_quota', 'code': 'insufficient_quota'}\n",
+  "working_context": {
+    "archive": {
+      "path": "proof/packets/generated/paired-working-context/WORKING-ARCHIVE-C66-TATE-SUPPORT-5c1301763b53877b.md",
+      "sha256": "5c1301763b53877b878070bcadc05febec202811b422dc1e5349eb7482486a40"
+    },
+    "extended": {
+      "path": "proof/packets/generated/paired-working-context/WORKING-EXT-C66-TATE-SUPPORT-c618a81f1ec00252.md",
+      "sha256": "c618a81f1ec00252c116f9f0d9da18270f00f618ca436d69567ee2c3c8fcfabf"
+    },
+    "primary": {
+      "path": "proof/packets/generated/paired-working-context/WORKING-C66-TATE-SUPPORT-5fefcaa9f71a2db6.md",
+      "sha256": "5fefcaa9f71a2db6a42a4183f1628c2909c5a93251674505fbf1d1c3eebe26a2"
+    },
+    "subproblem_id": "C66-TATE-SUPPORT"
+  }
+}

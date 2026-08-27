@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "context_revision": 2,
+  "created_on": "2026-08-26",
+  "excluded_engines": [
+    "qwen"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "affine-peeling-support-filtration-for-ce-kernel",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-24",
+    "equivalence_group": "affine-peeling-support-filtration-for-ce-kernel",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0192",
+    "impacts_approach_ids": [
+      "C66-SUPPORT-FILTRATION"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "qwen"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      }
+    },
+    "source_attempt_ids": [
+      "ATT-0130"
+    ],
+    "source_review_ids": [
+      "REV-0180"
+    ],
+    "statement": "For the ATT-0120 kernel T_Z inside T = W_{-16}H^{BM}_{16}(M_{6,6};Q), the reduced closed support Y can be peeled into finitely many smooth affine-coarse strata with strictly decreasing dimensions, producing a decreasing kernel filtration A_j whose graded pieces are subquotients of W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j). Strata with n_j <= 7 or n_j >= 17 contribute zero, strata with n_j = 8 contribute only finite direct sums of Q(8), and semisimplicity splits T_Z noncanonically as the direct sum of the surviving pieces with 8 <= n_j <= 16. Thus the only substantive antecedent for T_Z to be a finite direct sum of Q(8) is Tate control of residual strata of dimensions 9 through 16; no dimension bound on Y, no Gysin map for Y or Z, and no closed embedding of Z is required.",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0192",
+  "id": "TASK-F-FND-0192",
+  "input_packet": "proof/packets/generated/C66-001-v6.md",
+  "output": "research/finding-audits/FAUD-0205.json",
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "4ffd7ea891266d3e97484cb0aa6f4343d35f8982ead3031ea3fbf4688bc04a70",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "claude",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}

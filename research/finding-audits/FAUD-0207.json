@@ -1,0 +1,118 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients at (g,n)=(6,6). Let X:=M_{6,6} be the smooth separated finite-type Deligne-Mumford stack of pure dimension 21 with finite inertia and quasi-projective coarse space, and let T:=W_{-16}H^{BM}_{16}(X;Q)=W_{26}H^{26}(X;Q)(21), a pure polarizable Hodge structure of weight -16. Let Y be the atlas-independent reduced closed substack of X named by the verified C66-SUPPORT-INTERFACE datum (ATT-0120/CLM-0120-2); no dimension, purity, irreducibility, regular-immersion, or lci property of Y is assumed. Let T_Z:=ker(r_T) with r_T:T->W_{26}H^{26}(X minus Y;Q)(21). Call a chain Y=Y^{(0)} superset ... superset Y^{(N)}=empty admissible if the dimensions n_j:=dim Y^{(j)} strictly decrease and, for every j, S_j:=Y^{(j)} minus Y^{(j+1)} is smooth of pure dimension n_j, has affine coarse space, and is closed in X minus Y^{(j+1)}. Assume: (S1) ordinary Q-cohomology of smooth separated finite-type DM stacks over C carries functorial mixed Hodge structures with H^m of weights at least m; (S2) the purity long exact sequence of mixed Hodge structures for a smooth closed substack of pure codimension c in a smooth DM stack (imported via an etale atlas and Q-descent; not proved in ATT-0130); (S3) H^*(S;Q)=H^*(S^c;Q) for separated finite-inertia DM stacks over C (Behrend, Cohomology of Stacks, Proposition 36; the stack need not be proper); (S4) H^k(A;Q)=0 for k>dim A for a possibly singular complex affine variety A (Esnault, Variation on Artin's vanishing theorem, Theorem 2.1, equivalently journal Theorem 1); (S5) morphisms of mixed Hodge structures are strict for W; (S6) pure polarizable rational Hodge structures of a fixed weight form a semisimple abelian category. Then an admissible chain exists by peeling, at each stage, a dense smooth open of the top-dimensional part whose coarse space is a finite disjoint union of affine opens. For every admissible chain, A_j:=ker(T->W_{26}H^{26}(X minus Y^{(j)};Q)(21)) is a finite decreasing filtration of T by sub-Hodge structures with A_0=T_Z and A_N=0, and each graded piece A_j/A_{j+1} is a subquotient, not in general an isomorphism, of the pure polarizable weight -16 structure W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j). The piece vanishes for n_j<=7 because 2n_j-16<0, and for n_j>=17 because 2n_j-16>n_j=dim S_j^c and (S3) plus (S4) kill the source; for n_j=8 the piece is a finite direct sum of Q(8), possibly zero. Semisimplicity supplies a not-necessarily-canonical isomorphism of T_Z with the direct sum of the graded pieces indexed by n_j in {8,...,16}, at most one stratum per dimension, hence at most eight residual pieces with 9<=n_j<=16. T_Z is a finite direct sum of Q(8) if and only if, for one admissible chain, equivalently for every admissible chain, every residual graded piece with 9<=n_j<=16 is a finite direct sum of Q(8). Not asserted: Tate type of T or of T_Z except as that equivalence; the groups W_{2n-16}H^{2n-16}(S_{(n)};Q) for 9<=n<=16; support-exhaustion T_Z=T; a preferred chain; any Gysin map, regular immersion, closed embedding, or codimension shift for Y or for a model of Z; integral-coefficient coarse comparison; RED-0001.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads: ATT-0130 Lemmas 1-5 / CLM-0130-1 through CLM-0130-5 prove existence of an admissible affine-coarse peeling of the ATT-0120 reduced closed support Y, the kernel filtration A_j of T with A_0=T_Z and A_N=0, subquotient identification of each graded piece with W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j) via purity for the constructed smooth pair (X\\Y^{(j+1)},S_j) only, endpoint vanishings n_j<=7 and n_j>=17, Q(8) type at n_j=8, noncanonical semisimple splitting, and a one-way sufficiency implication for residual dimensions 9..16. REV-0181 (codex, review_pass 2) confirms every claim and the target-interface certificate, records the same candidate_key C66-AFFINE-COARSE-KERNEL-FILTRATION, and answers its strongest attack: affineness lives on a possibly singular coarse space and integral stack/coarse comparison fails, but ordinary rational cohomology of a separated finite-inertia DM stack agrees with that of the coarse space, after which affine Artin/Hamm vanishing applies. Independently, Behrend, Cohomology of Stacks, Proposition 36 states that a topological Deligne-Mumford stack (etale source/target and proper diagonal; the stack itself need not be proper) has H^k(-;Q) isomorphic to that of its coarse space. Esnault, Variation on Artin's vanishing theorem, arXiv Theorem 2.1 equals journal Theorem 1 (Adv. Math. 198 (2005) 435-438): for an affine complex variety, possibly singular, and a constructible sheaf F, H^m(X_an,F)=0 for m>dim(X); constant Q is constructible, so this licenses ATT-0130 (S4) on coarse spaces. Andreotti-Frankel supplies only the smooth affine/Stein case and is therefore strictly weaker than the load-bearing singular affine vanishing. The candidate one-liner from REV-0181 is true after those hypotheses but is too loose: it says 'Tate' rather than a finite direct sum of Q(8), possibly zero; it does not name the kernel filtration A_j, the subquotient (not isomorphism) caveat, Q-coefficients, or the residual range 9..16; and ATT-0130 (v) is only 'if', whereas FND-0192 clause (5) correctly upgrades to an iff because each graded piece is a subquotient of T_Z and (S6) preserves the Q(8)-sum property. No claim-level contradiction: contradicts_claim_ids is empty; the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001, and is complementary to corroborated FND-0191 (purity plus closed support alone do not force Tate type; residual dimensions 9 through 16 remain the C66-TATE-SUPPORT obligation), FND-0185 (a different BM-of-Y sufficiency), FND-0052 and FND-0168(5) (Gysin for Y or Z is not used), and FND-0033 (semisimplicity). Packet C66-001-v6 already contains corroborated FND-0192 as the fully scoped form of this same ATT-0130 mechanism, with unadjudicated candidates quarantined; FND-0193 is that quarantined REV-0181 compression and should be merged into FND-0192 rather than promoted as a second finding.",
+  "engine": "cursor-grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0193",
+  "id": "FAUD-0207",
+  "independent": true,
+  "merge_target_id": "FND-0192",
+  "reviewer_engine": "cursor-grok",
+  "schema_version": 1,
+  "scope": {
+    "ambient": "X=M_{6,6}, smooth separated finite-type DM stack of pure dimension 21 with finite inertia and quasi-projective coarse space",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "ground_field": "C for mixed Hodge structures; underlying geometry over an algebraically closed field of characteristic zero, base-changed to C",
+    "hypotheses": [
+      "Y reduced closed in X; no dimension, purity, irreducibility, regular-immersion, or lci property of Y",
+      "(S1) ordinary Q-cohomology of smooth separated finite-type DM stacks over C carries functorial MHS with weights of H^m at least m",
+      "(S2) purity long exact sequence of MHS for a smooth closed substack of pure codimension c in a smooth DM stack, imported via etale atlas and Q-descent",
+      "(S3) rational coarse comparison H^*(S;Q)=H^*(S^c;Q) for separated finite-inertia DM stacks; the stack need not be proper",
+      "(S4) Artin vanishing H^k(A;Q)=0 for k>dim A on a possibly singular complex affine variety",
+      "(S5) strictness of MHS morphisms for W",
+      "(S6) semisimplicity of pure polarizable rational Hodge structures of a fixed weight"
+    ],
+    "not_covered": [
+      "Tate type of T_Z or of T except as an equivalence with residual graded pieces",
+      "W_{2n-16}H^{2n-16}(S_{(n)};Q) for 9<=n<=16",
+      "support-exhaustion T_Z=T",
+      "preferred admissible chain",
+      "Gysin, regular immersion, or closed embedding for Y or Z",
+      "integral-coefficient coarse comparison",
+      "RED-0001"
+    ],
+    "objects": [
+      "T=W_{-16}H^{BM}_{16}(X;Q)=W_{26}H^{26}(X;Q)(21)",
+      "Y the ATT-0120 reduced closed support",
+      "T_Z=ker(r_T)",
+      "admissible chains and strata S_j",
+      "kernel filtration A_j"
+    ],
+    "thresholds": {
+      "residual": "9<=n_j<=16 undetermined",
+      "tate_endpoint": "n_j=8 of type finite direct sum of Q(8), possibly zero",
+      "vanish_high": "n_j>=17",
+      "vanish_low": "n_j<=7"
+    }
+  },
+  "source_records": [
+    {
+      "arxiv_id": "math/0406396",
+      "arxiv_version": "v1",
+      "content_sha256": "fad2d2d48acad4bb46558e67bb796898ebda9bbaba3b678638df5c57df753132",
+      "doi": "10.1016/j.aim.2004.10.023",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "4c6841c4642382c77b128a3545894313034d42822b338520159acc22d2f64094",
+      "retrieved_at": "2026-08-26T22:43:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/math/0406396"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "337f4c3a7a562a1311d35324a1b4455f5beefe053defedff58d7b8ff4863f319",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "ca17fbf66b307599d2619d980386739f01604890a0b172aadd2070762c26a0ec",
+      "retrieved_at": "2026-08-26T22:45:00Z",
+      "source_type": "author-page",
+      "url": "https://personal.math.ubc.ca/~behrend/CohSta-1.pdf"
+    },
+    {
+      "arxiv_id": "math/0406396",
+      "arxiv_version": "v1",
+      "content_sha256": "0bdea65a9fb62e514ab37ce8d729ed488c05006854dfa66a2aa1267ee0f50c05",
+      "doi": "10.1016/j.aim.2004.10.023",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "27d89b88d1bc1aa0160ef3e0bfd9628ff49fee74886957b563c4523b5602d5d6",
+      "retrieved_at": "2026-08-26T22:44:00Z",
+      "source_type": "journal",
+      "url": "http://page.mi.fu-berlin.de/esnault/preprints/helene/75-artin-vanishing.pdf"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "0b94d9235fe6383c38d6ee64ef50c4626af78e3923c0036e51f44810cb2009d9",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "retrieved_at": "2026-08-26T22:48:00Z",
+      "source_type": "encyclopedia",
+      "url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=ids|timestamp|sha1&titles=Andreotti%E2%80%93Frankel_theorem&format=json"
+    },
+    {
+      "arxiv_id": "math/0406396",
+      "arxiv_version": "v1",
+      "content_sha256": "f42af52445d45bd57b2455006f420c3be938ee648f6ed48daef89a39d30d85fe",
+      "doi": "10.1016/j.aim.2004.10.023",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "4c6841c4642382c77b128a3545894313034d42822b338520159acc22d2f64094",
+      "retrieved_at": "2026-08-26T22:48:00Z",
+      "source_type": "citation-index",
+      "url": "https://api.crossref.org/works/10.1016/j.aim.2004.10.023"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0193",
+  "verdict": "merge",
+  "verified_source_count": 5
+}

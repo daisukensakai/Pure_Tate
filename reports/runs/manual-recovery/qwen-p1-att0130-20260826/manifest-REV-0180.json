@@ -1,0 +1,81 @@
+{
+  "artifact_contract": {
+    "object_field": "target_interface_reference",
+    "required_nonempty_lists": [
+      "interface_claim_ids"
+    ],
+    "required_nonempty_strings": [
+      "interface_attempt_id",
+      "target_subquotient",
+      "target_map_use",
+      "degree_weight_twist",
+      "admissible_chain",
+      "support_filtration",
+      "graded_piece_identification",
+      "endpoint_resolution",
+      "sufficiency_implication",
+      "residual_range_out_of_scope"
+    ]
+  },
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "context_revision": 2,
+  "created_on": "2026-08-26",
+  "excluded_reviewer_engines": [
+    "cursor-grok"
+  ],
+  "id": "TASK-V-ATT-0130-P1",
+  "input_artifacts": [
+    {
+      "id": "ATT-0120",
+      "kind": "attempt",
+      "path": "proof/attempts/ATT-0120.json",
+      "sha256": "0a5ac2d4f6c9cf7f080066fe01e6aa02d3be45e13158c926b80d5b232707ab00"
+    },
+    {
+      "id": "REV-0169",
+      "kind": "confirmation_review",
+      "path": "proof/reviews/REV-0169.json",
+      "sha256": "2d41bcde86cf66e2cbc36f8a10743c48904613f787d5d1695cc8bb92b8f17002"
+    },
+    {
+      "id": "REV-0170",
+      "kind": "confirmation_review",
+      "path": "proof/reviews/REV-0170.json",
+      "sha256": "319119a5f38f30beb1edcd9e5fdd63e4321236b089af0f08995a524a567044de"
+    }
+  ],
+  "input_attempt": "proof/attempts/ATT-0130.json",
+  "input_packet": "proof/packets/generated/C66-001-v6.md",
+  "lane": "weakest-sufficient-proof",
+  "output": "proof/reviews/REV-0180.json",
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "4ffd7ea891266d3e97484cb0aa6f4343d35f8982ead3031ea3fbf4688bc04a70",
+  "phase": "review",
+  "prompt": "prompts/ADVERSARY.md",
+  "prover_engine": "cursor-grok",
+  "review_pass": 1,
+  "role": "independent-adversarial-reviewer",
+  "selected_engine": "qwen",
+  "status": "ready",
+  "subproblem_id": "C66-SUPPORT-FILTRATION",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_attempt_id": "ATT-0130",
+  "target_task_id": "TASK-C66-M-011",
+  "theorem_statement": "Let T := W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), let X := M_{6,6}, and let (K_Z, T_Z, phi) be the datum of a verified C66-SUPPORT-INTERFACE attempt, with Y the reduced closed substack of X that datum names and T_Z = ker(r_T) its named subobject of T. Call a chain Y = Y^{(0)} superset Y^{(1)} superset ... superset Y^{(N)} = empty of reduced closed substacks of X admissible if the dimensions strictly decrease and, for every j, the difference S_j := Y^{(j)} minus Y^{(j+1)} is smooth of pure dimension n_j = dim Y^{(j)}, has affine coarse space, and is closed in X minus Y^{(j+1)}. Prove all of the following unconditionally, without assuming RED-0001 and without assuming Tate type, purity, or vanishing of any group not proved here. (i) An admissible chain for Y exists, by explicit construction, using no dimension bound for Y. (ii) For every admissible chain, the subobjects A_j := ker(T -> W_{26}H^{26}(X minus Y^{(j)};Q)(21)) form a finite decreasing filtration of T by sub-Hodge structures with A_0 = T_Z and A_N = 0, and each graded piece A_j/A_{j+1} is a subquotient of the pure polarizable weight -16 structure W_{2n_j-16}H^{2n_j-16}(S_j;Q)(n_j); this must be established from purity for the smooth pair (X minus Y^{(j+1)}, S_j) in degree 26 and codimension 21-n_j, exactness of W_{26}, and the weight bound for smooth stacks, and may use no Gysin map, closed embedding, fundamental class, regular immersion, or codimension shift for Y or for any model of Z inside X. (iii) A_j/A_{j+1} = 0 whenever n_j <= 7 or n_j >= 17, the two vanishings proved respectively from 2n_j-16 < 0 and from 2n_j-16 > n_j = dim S_j with affine coarse space; and A_j/A_{j+1} is a finite direct sum of Q(8) whenever n_j = 8. (iv) T_Z is isomorphic, not necessarily canonically, to the direct sum of the graded pieces A_j/A_{j+1} indexed by the stratum dimensions n_j in {8, ..., 16}, of which at most one occurs per dimension, so at most eight pieces lie in the range 9 <= n_j <= 16. (v) The implication: if for some admissible chain every graded piece with 9 <= n_j <= 16 is a finite direct sum of Q(8) -- for instance if each W_{2n_j-16}H^{2n_j-16}(S_j;Q) is a finite direct sum of Q(8-n_j) -- then T_Z is a finite direct sum of Q(8). Scope. This theorem is a reduction, and an artifact proving (i) through (v) discharges it in full and outright: it carries no undischarged dependency of its own and does not reduce its own assigned theorem to anything else, even though its content reduces C66-TATE-SUPPORT; resolves_exact_target remains false because RED-0001 is untouched. The following are excluded from this theorem by its own terms, are not gaps in it, and no gap marker is to be recorded for them. It determines nothing about W_{2n-16}H^{2n-16}(S_{(n)};Q), nor about the corresponding graded piece, for any n with 9 <= n <= 16; that range is the assigned obligation of C66-TATE-SUPPORT and must be neither claimed nor carried here as an open dependency. It asserts no Tate type for T_Z: clause (v) is proved as an implication only, and its antecedent is deliberately left open. It asserts no lower bound on T_Z, neither proving nor excluding T_Z = 0, and clauses (i) through (v) have the same content in either case. It singles out no canonical or preferred admissible chain and needs none, because T_Z depends only on the pair (X, Y) and clauses (ii) through (iv) are proved for every admissible chain; chain-dependence of the residual strata is outside its scope, not a defect in it. It claims no realization of any adjudicated non-Tate model as a single admissible stratum, a proper support being inadmissible. It does not itself assemble the complementary target terms."
+}
