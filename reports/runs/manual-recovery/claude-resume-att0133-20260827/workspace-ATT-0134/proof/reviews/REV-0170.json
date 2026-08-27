@@ -1,0 +1,136 @@
+{
+  "attempt_id": "ATT-0120",
+  "campaign_id": "C66-001",
+  "campaign_revision": 5,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0120-1",
+      "note": "The tautological family over Z_beta is the pullback of the universal curve from the confirmed ATT-0112/CLM-0112-8 scheme model; the six ordered sections arise by splitting the finite etale degree-six divisor over the ordering torsor, hence are pairwise disjoint. Existence of f_beta follows from the 2-Yoneda universal property of M_{6,6}; no Aut comparison, monomorphism, quasi-finiteness, or closed-immersion claim is needed or made.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-2",
+      "note": "Chevalley constructibility for finite-type morphisms of algebraic stacks gives a constructible geometric image in |M_{6,6}|. The common-refinement argument (W = V x_{H^bal} V' is a smooth atlas, surjective on geometric points over both V and V', with tautological families pulled back from both sides) shows the image is independent of the atlas. The Zariski closure of a closed-under-refinement constructible set underlies a unique reduced closed substack Y.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-3",
+      "note": "U_Y is open in the smooth 21-dimensional DM stack M_{6,6}, hence smooth of dimension 21; weights on H^{26} of smooth finite-type DM stacks (Q coefficients, via rational cohomology isomorphism with the coarse space) are >= 26, so W_{26} = Gr^W_{26} on both ends. Restriction is a morphism of mixed Hodge structures and strictness gives r(W_{26}) subset W_{26}. The Poincare reindexing T = W_{26}H^{26}(M_{6,6};Q)(21) matches FND-0001 and the task's own convention arithmetic: 26 - 2*21 = -16.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-4",
+      "note": "The kernel of a morphism out of a pure weight -16 Hodge structure is a pure weight -16 subobject. With T_Z := K_Z and phi the inclusion, T_Z is a subobject, hence a specified subquotient, of T with BM degree 16, weight -16, and Poincare twist (21). Exactness of Gr^W_{26} at H^{26}(M_{6,6}) identifies T_Z with the classes vanishing on U_Y, equivalently with the image of W_{26}H^{26}_Y(M_{6,6};Q)(21) in T; no Gysin map or regularity of Y is used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-5",
+      "note": "One-sided coverage holds by functoriality of supports: im(Z) subset Y, so any class in T supported on a closed subset contained in Y (in particular on im(Z) or on its closure) factors through H^*_Y and restricts to zero on U_Y, hence lies in T_Z = ker(r_T). The kernel may strictly contain the span of genuinely Z-supported classes because Y can carry extra components; that is inflation, not omission, and support-exhaustion T_Z = T is explicitly out of scope. This matches the exact theorem wording 'no relevant Z-supported term is omitted'.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-6",
+      "note": "The datum (K_Z, T_Z, phi) is defined from the pair (M_{6,6}, Y) alone, and Y is atlas-independent by CLM-0120-2. Passage to an etale atlas of [H^bal/PGL_2] reduces to the confirmed dependency CLM-0112-7 (the M_{6,6}-valued point is PGL_2-invariant). Rational S_6 invariants versus coinvariants are never needed because the ordered model maps directly to the ordered stack M_{6,6}.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0120-7",
+      "note": "Verified by inspection of the argument: no Tate type is asserted for T, T_Z, or K_Z; no closed embedding of Z into M_{6,6}, no Gysin map, no regular-immersion or lci claim on Y, no monomorphism claim, and no unproved map to T. The only map to T is the constructed kernel inclusion phi. All blocked routes listed in Section 8 remain unused.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "TARGET-INTERFACE-CERTIFICATE",
+      "note": "All eight required non-empty strings are present: canonical_source, construction, target_term, target_map, degree_weight_twist, target_subquotient, coverage, atlas_invariance. The certificate proves the stated theorem rather than a surrogate cohomology result: target_term is the localization kernel inside T, target_map is the constructed inclusion (not an assumed map), target_subquotient is a genuine subobject of T, and coverage is the exact one-sided containment the theorem requires. Binding check: attempt packet_id, packet_sha256, packet_binding_sha256, campaign_revision 5, context_revision 2, task_id TASK-C66-M-004, subproblem_id, and target dictionary all match TASK.json exactly.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2025-06-01",
+  "finding_candidates": [
+    {
+      "key": "support-kernel-closure-pattern",
+      "note": "Novel candidate extracted from the ATT-0120 pass-2 confirmation; remains a candidate until independently corroborated. Possible overlap with packet-visible findings such as FND-0168(3a) could not be assessed because the packet body was not re-read in this pass; adjudicators should check for duplication before promotion.",
+      "statement": "Let X be a smooth d-dimensional Deligne-Mumford stack over C and f: Z -> X a finite-type morphism. Let Y be the reduced closed substack whose underlying space is the Zariski closure of the geometric image of f. For any degree i and twist (n), the kernel of the restricted localization map W_m H^i(X;Q)(n) -> W_m H^i(X minus Y;Q)(n) is a sub-mixed-Hodge structure equal to the image of W_m H^i_Y(X;Q)(n) in W_m H^i(X;Q)(n), by strictness and exactness of Gr^W_m. It contains every class supported on any closed subset of X contained in Y, requires no Gysin map, no regularity or lci hypothesis on Y, and no closed immersion of Z. It may strictly contain the span of Z-supported classes; equality or exhaustion is a separate assertion not supplied by this pattern.",
+      "status": "candidate"
+    },
+    {
+      "key": "common-refinement-atlas-descent",
+      "note": "Novel candidate extracted from the ATT-0120 atlas-invariance argument (CLM-0120-2/6); the G-invariance step here rests on the confirmed dependency CLM-0112-7. Remains a candidate until independently corroborated.",
+      "statement": "If a subset S of the geometric points of a target stack X is defined as the image of a tautological classifying map attached functorially to atlases of a source stack H, then for any two smooth finite-type atlases V and V' of H the fibre product W = V x_H V' is again a smooth atlas, surjective on geometric points over both, whose tautological family pulls back from both sides; hence the geometric images from V, V', and W in X coincide, and the reduced Zariski closure of S in X is independent of the atlas. Descent across a quotient presentation [H/G] additionally requires a separate proof that the X-valued moduli point is G-invariant.",
+      "status": "candidate"
+    }
+  ],
+  "id": "REV-0170",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "2054a3c35e383c0cbb907463a0ab1ba29709d1784ddf3703e58f12322a4805a3",
+  "packet_id": "C66-001-v5",
+  "packet_sha256": "10948ae9a5c284a8d02fe50fd35bca128cef69e6fe52c762dcb9bb28d3adbb27",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0112",
+      "note": "Verified input artifact (sha256 recorded in TASK.json), dual-confirmed by REV-0157 and REV-0158. ATT-0120 uses only CLM-0112-1/2 (H and H^bal smooth of pure dimension 18), CLM-0112-6/7 (type-(i) points; Hbar^bal dimension 15; PGL_2 invariance), and CLM-0112-8 (scheme-atlas model: P^2-bundle, distinct-support open, finite etale S_6-ordering torsor identified with the CE evaluation-failure model). No M_{6,6} statement is imported from it.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0157",
+      "note": "Input confirmation review of ATT-0112; establishes the first independent confirmation of the scheme-level source geometry used here.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0158",
+      "note": "Input confirmation review of ATT-0112; establishes the second independent confirmation, including the stack-to-scheme handoff in clause (E).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0088",
+      "note": "Nested dual-confirmed input of ATT-0112, used only through CLM-0112-8 (CLM-0088-5/8: fibrewise reduced-support nonemptiness and the P^2-bundle/ordering-torsor model over a reduced base). Verified upstream in the ATT-0112 confirmations; no direct M_{6,6} or Aut content is taken.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0065",
+      "note": "Nested dual-confirmed input of ATT-0112, used only through CLM-0112-8/CLM-0065-9 (Z_beta is the CE evaluation-failure model, filtered form, no global splitting). Verified upstream in the ATT-0112 confirmations.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0066",
+      "note": "Nested dual-confirmed input of ATT-0112, used only through CLM-0112-8/CLM-0066-5,6 (closed Abel-Jacobi incidence and stack-level S_6-torsor over the distinct-support open). Verified upstream in the ATT-0112 confirmations.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0001",
+      "note": "Adjudicated finding supplying the Poincare reindexing W_{-16}H^{BM}_{16}(M_{6,6};Q) = W_{26}H^{26}(M_{6,6};Q)(21). Twist direction independently cross-checked against the task target dictionary: ordinary weight 26 minus 2 times poincare_twist 21 equals open_bm_weight -16; BM degree 16 equals 2*21 - 26. Q-coefficient stack PD is valid via rational cohomology isomorphism with the coarse moduli space; integral and coarse-moduli variants are explicitly out of scope.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0120-P2",
+  "reviewer_engine": "qwen",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: closure-inflation and one-sided coverage. Y is the reduced Zariski closure of the CE classifying image and may carry extra components (non-reduced members of the pencil in the fibrewise discriminant, and any unbalanced or boundary points lying in the closure). Then T_Z = ker(r_T) is the entire Y-supported corner and may strictly contain the span of genuinely Z-supported classes; if the theorem demanded that T_Z equal exactly the Z-supported contribution, or that T_Z exhaust T, the proof would fail. Outcome: the exact theorem statement asks only (i) which part of T is T_Z, answered exactly by strictness and exactness of Gr^W_{26} as T_Z = ker(r_T) = im(W_{26}H^{26}_Y(M_{6,6};Q)(21) -> T), and (ii) that no relevant Z-supported term is omitted, which the one-sided containment proves because im(Z) subset Y forces every class supported on im(Z), on its closure, or on any closed subset contained in Y to restrict to zero on U_Y and hence lie in T_Z. Inflation adds terms; it omits none. The attempt explicitly disclaims support-exhaustion, Gysin maps, a closed embedding of Z, monomorphism, and every Tate assertion, so the blocked-route attacks also fail. Runner-up attacks and outcomes: (a) Poincare duality and Tate twist direction on the smooth DM stack M_{6,6} with Q coefficients - checked: H^{BM}_{16} = H^{26}(21), weight 26 - 42 = -16, matching FND-0001 and the target dictionary; integral coefficients and coarse moduli are excluded by scope. (b) Degeneration or spectral-sequence differentials - none are used; only the formal open-closed long exact sequence and weight strictness. (c) Invariants versus coinvariants under S_6 - avoided because the ordered model maps directly to the ordered stack. (d) Semisimplification versus actual Hodge-structure isomorphism - Poincare duality and Gr^W exactness are actual MHS statements, not semisimplifications. (e) Omitted stable pairs - irrelevant: the construction lives entirely inside the smooth open stack M_{6,6} and uses a localization sequence, which the theorem explicitly accepts in place of a compactification. Evidence limitation: native web-evidence stage was unavailable; this review uses only the local task artifacts. The packet body and upstream attempt bodies were not re-read in this pass; reliance is on TASK.json-recorded hashes and the input confirmation reviews REV-0157/REV-0158, and packet hash binding was verified against TASK.json.",
+  "subproblem_id": "C66-SUPPORT-INTERFACE",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let T:=W_{-16}H^{BM}_{16}(M_{6,6};Q). Construct a canonical, atlas-independent CE support-accounting datum (K_Z, T_Z, phi) for the ordered reduced-support evaluation-failure geometry: K_Z must be a named mixed-Hodge term in an explicitly constructed compactification, localization sequence, correspondence, or spectral sequence for M_{6,6}; phi must identify T_Z as a specified subquotient of T with the exact degree, weight, and Tate-twist conventions stated; and an exact filtration, quotient, or spectral-sequence accounting must prove both which part of T is T_Z and that no relevant Z-supported term is omitted. The construction must descend from any presentation/atlas to the same target datum. This theorem makes no Tate assertion and may not assume a closed embedding, Gysin map, support-exhaustion statement, or map to T without proving it.",
+  "verdict": "confirmed"
+}

@@ -1,0 +1,165 @@
+{
+  "attempt_id": "ATT-0134",
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "checked_claims": [
+    {
+      "claim_id": "PACKET-BINDING-AND-SCOPE",
+      "note": "ATT-0134 matches TASK.json on campaign C66-001 revision 6, subproblem C66-TATE-SUPPORT, task TASK-C66-M-005, packet C66-001-v6, packet and binding hashes, the complete 13-field target dictionary, and the exact theorem statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "TARGET-INTERFACE-REFERENCE",
+      "note": "The required target_interface_reference object is present and correctly names ATT-0120, ATT-0130, the ordinary-restriction map, and T_Z=ker(r_T). Its substantive coverage requirement fails: residual_piece_resolution expressly leaves every possible residual graded piece in dimensions 9 through 16 unresolved and merely relocates a stronger obligation to K(Yhat). Thus the named source, map, target subquotient, and coverage assertions do not prove the assigned theorem.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0134-1",
+      "note": "The degeneracy locus Yhat=(rk(phi)<=4)_red is closed and atlas-independent. Fibrewise ker(phi)=H^0(omega(-Gamma)), and Riemann-Roch and Serre duality give h^0(omega(-Gamma))>=2 exactly when h^0(O(Gamma))>=3. No purity or lci property of Yhat is asserted or used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0134-2",
+      "note": "The claimed containment Y subset Yhat is load-bearing but is not supplied by CLM-0120-2. The argument treats O_C(Gamma) isomorphic to L and h^0(L)=3 as established context, although those assertions require undeclared normalization input, ATT-0112 clause (E), FND-0063, and the hypotheses behind FND-0142. The proposed cross-check L isomorphic to omega(-D) invokes the same GAP-Z-W5D identification that FND-0105 forbids silently promoting to established context.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0134-3",
+      "note": "The abstract monotonicity K(V) subset K(V') for V subset V' is valid, as is the actual Hodge-substructure consequence from FND-0033. The particular inclusion T_Z=K(Y) subset K(Yhat), however, depends on the unresolved CLM-0134-2. Even if established, it would only transfer Tate type from K(Yhat), whose Tate type is not proved.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0134-4",
+      "note": "The incidence stack D inside Gr(2,E) is proper over X and has set-theoretic image Yhat. The pointwise trichotomy for the degree k of the pencil is consistent with classical curve theory. This claim alone does not construct the parameter-space morphism needed by the subsequent dimension estimate.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0134-5",
+      "note": "The bound dim(D)<=17 estimates dim(D_k) by the dimension of a moduli stack of unmarked pairs (C,W) plus a linear-system dimension, but no algebraic morphism from D_k to that finite-type stack, with controlled fibres, is constructed. The Riemann-Roch and Clifford arithmetic is consistent, but it does not justify dimension additivity. Consequently dim(Yhat)<=17 and dim(Y)<=17 are not established.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "CLM-0134-6",
+      "note": "FND-0192 permits the filtration construction for an arbitrary reduced closed substack, so it may be applied formally to Yhat. The asserted endpoint improvement for the named Y-chain depends on the unresolved containment and dimension bound. More importantly, neither the Y-chain nor the Yhat-chain resolves any residual piece in dimensions 9 through 16.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "GAP-0134-1",
+      "note": "For every possible residual dimension 9 through 16, ATT-0134 proves neither that W_{2n-16}H^{2n-16}(S_(n);Q) is Tate or zero nor that the corresponding verified graded piece is Tate or zero. Artin vanishing does not apply because 2n-16<=n in this range. This is precisely the undischarged antecedent of CLM-0130-5.",
+      "verdict": "unresolved"
+    },
+    {
+      "claim_id": "GAP-0134-2",
+      "note": "ATT-0134 correctly records that no lower bound dim(Y)>=8 has been established and does not use such a bound to collapse the residual range.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "COEFFICIENT-DEGREE-AND-SHIFT-AUDIT",
+      "note": "No additional failure arises from stack versus coarse moduli, rational versus integral coefficients, Borel-Moore versus ordinary cohomological degree, Poincare duality, Tate twists, Gysin shifts, or Kunneth shifts. The Poincare reindexing W_{-16}H_16^{BM}(X)=W_{26}H^{26}(X)(21) is used only for the smooth 21-dimensional stack X=M_{6,6}; rational coefficients are maintained; and no Gysin or Kunneth construction for singular Y, Yhat, or Z is used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "SPECTRAL-AUTOMORPHISM-MOTIVE-AND-BOUNDARY-AUDIT",
+      "note": "No spectral-sequence degeneration, graph-automorphism invariants/coinvariants comparison, predicted motive, algebraic or tautological generation upgrade, or stable-pairs contribution is used in the attempted proof. FND-0033 concerns actual subobjects in the semisimple category of polarizable pure rational Hodge structures, not merely semisimplification. These surfaces are unused or non-load-bearing for the exact submitted theorem.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-27",
+  "finding_candidates": [],
+  "id": "REV-0183",
+  "independent": true,
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "291c493b7bb82873209f91b93f42db3638d398fe2bff781c61aad39f1f43b3e2",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0120",
+      "note": "Correctly supplies Y, the ordinary restriction map r_T, and the named target sub-Hodge structure T_Z=ker(r_T). ATT-0134's overreading of the geometric content of CLM-0120-2 is not a defect in ATT-0120.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0169",
+      "note": "The distinction between a supports group and its image in the target is respected; ATT-0134 does not identify T_Z with a cohomology-with-supports group.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0170",
+      "note": "The verified interface's rational-coefficient and stack-theoretic scope is respected.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0130",
+      "note": "Its filtration and conditional implication are used within scope. ATT-0134 does not supply the antecedent of CLM-0130-5; that failure is recorded separately.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0180",
+      "note": "Rational stack/coarse comparison and affine Artin vanishing remain confined to the endpoint range n>=17.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "REV-0181",
+      "note": "The subquotient-not-supports distinction and the restriction of purity to smooth closed pairs are preserved.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0001",
+      "note": "Poincare duality and the twist (21) are applied only on the smooth stack M_{6,6}, with degrees and weights correctly reindexed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "If K(Yhat) were a finite direct sum of Q(8), its sub-Hodge structure T_Z would be such a sum by semisimplicity. ATT-0134 does not assert that the hypothesis has been proved.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0192",
+      "note": "The filtration theorem applies to reduced closed substacks and identifies the residual pieces of an admissible Y-chain as the exact remaining Tate-support obligation. Its conditional conclusion is not overstated.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0130-5-ANTECEDENT",
+      "note": "No admissible chain for the named Y is exhibited whose graded pieces in all dimensions 9 through 16 are proved to vanish or be finite sums of Q(8). The proposed Yhat enlargement also leaves the corresponding stronger residual problem unresolved.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "CLM-0134-2-SOURCE-BRIDGE",
+      "note": "The bridge from the ATT-0120 classifying image to h^0(O_C(Gamma))>=3 depends on undeclared normalization and Casnati-Ekedahl identifications rather than the cited interface claims.",
+      "verdict": "unresolved"
+    },
+    {
+      "dependency_id": "CLASSICAL-CURVE-THEORY",
+      "note": "Riemann-Roch, Serre duality, Clifford bounds, and the pointwise pencil classification are used correctly. They do not supply the missing algebraic parameter-space morphism in CLM-0134-5.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLASSICAL-MHS-TOOLKIT",
+      "note": "The uses of ordinary rational mixed Hodge structures, strictness, Grassmannian properness, and semisimplicity are sound and do not discharge the geometric or residual gaps.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0134-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "ATT-0134 does not cross the target interface's substantive coverage boundary: it explicitly leaves every residual graded piece in dimensions 9 through 16 unresolved, so the antecedent of CLM-0130-5 remains undischarged and the exact conclusion that T_Z is a finite direct sum of Q(8) does not follow. Enlarging the support to Yhat cannot repair this: the claimed inclusion T_Z subset K(Yhat) relies on an unsupported normalization-dependent containment Y subset Yhat, and even a valid inclusion would only transfer Tate type from K(Yhat), whose residual pieces are equally unresolved. Independently, the claimed dimension bound dim(Y)<=17 rests on an unconstructed morphism from the incidence strata to pencil moduli. Thus the new geometry neither proves the named target subquotient Tate nor supplies a complete surrogate theorem.",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum, and take as given the support filtration of a verified C66-SUPPORT-FILTRATION result: an admissible chain for Y, and a finite filtration of T_Z by sub-Hodge structures whose graded pieces are indexed by the stratum dimensions n of that chain, each a subquotient of W_{2n-16}H^{2n-16}(S_{(n)};Q)(n), zero for n <= 7 and for n >= 17, a finite direct sum of Q(8) for n = 8, and at most one per dimension, so that at most eight pieces remain, at most one for each n with 9 <= n <= 16. Prove T_Z is a finite direct sum of Q(8). By the verified implication of that filtration it is sufficient to fix one admissible chain and prove, for each of its strata of dimension n with 9 <= n <= 16, that the corresponding graded piece is a finite direct sum of Q(8), for instance by determining W_{2n-16}H^{2n-16}(S_{(n)};Q) or by proving that the graded piece vanishes; any other complete proof of the displayed conclusion is equally admissible. A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof, and neither is a non-Tate group W_{2n-16}H^{2n-16}(S_{(n)};Q) unless the corresponding graded piece of the verified filtration is itself proved non-Tate. This theorem does not itself assemble the complementary target terms.",
+  "verdict": "incomplete"
+}

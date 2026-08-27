@@ -1,0 +1,97 @@
+{
+  "artifact_contract": {
+    "object_field": "target_interface_reference",
+    "required_nonempty_lists": [
+      "interface_claim_ids",
+      "filtration_claim_ids"
+    ],
+    "required_nonempty_strings": [
+      "interface_attempt_id",
+      "target_subquotient",
+      "target_map_use",
+      "filtration_attempt_id",
+      "chain_and_strata",
+      "residual_piece_resolution",
+      "unconditional_conclusion"
+    ]
+  },
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "context_revision": 2,
+  "created_on": "2026-08-27",
+  "excluded_reviewer_engines": [
+    "claude"
+  ],
+  "id": "TASK-V-ATT-0134-P1",
+  "input_artifacts": [
+    {
+      "id": "ATT-0120",
+      "kind": "attempt",
+      "path": "proof/attempts/ATT-0120.json",
+      "sha256": "0a5ac2d4f6c9cf7f080066fe01e6aa02d3be45e13158c926b80d5b232707ab00"
+    },
+    {
+      "id": "REV-0169",
+      "kind": "confirmation_review",
+      "path": "proof/reviews/REV-0169.json",
+      "sha256": "2d41bcde86cf66e2cbc36f8a10743c48904613f787d5d1695cc8bb92b8f17002"
+    },
+    {
+      "id": "REV-0170",
+      "kind": "confirmation_review",
+      "path": "proof/reviews/REV-0170.json",
+      "sha256": "319119a5f38f30beb1edcd9e5fdd63e4321236b089af0f08995a524a567044de"
+    },
+    {
+      "id": "ATT-0130",
+      "kind": "attempt",
+      "path": "proof/attempts/ATT-0130.json",
+      "sha256": "f106e802cbfc948c9198ff0f58d64c3b9e972b31d6931b1a28f38769763ddd8f"
+    },
+    {
+      "id": "REV-0180",
+      "kind": "confirmation_review",
+      "path": "proof/reviews/REV-0180.json",
+      "sha256": "a6b7df875c2819f232fca9c0bffc057a11b28751f81a7e53c96b88dfc9739ad4"
+    },
+    {
+      "id": "REV-0181",
+      "kind": "confirmation_review",
+      "path": "proof/reviews/REV-0181.json",
+      "sha256": "a5078c08d432b38662bf89454e9a9e7a403ca7b902effe26134eafbf9e95739b"
+    }
+  ],
+  "input_attempt": "proof/attempts/ATT-0134.json",
+  "input_packet": "proof/packets/generated/C66-001-v6.md",
+  "lane": "weakest-sufficient-proof",
+  "output": "proof/reviews/REV-0183.json",
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "291c493b7bb82873209f91b93f42db3638d398fe2bff781c61aad39f1f43b3e2",
+  "phase": "review",
+  "prompt": "prompts/ADVERSARY.md",
+  "prover_engine": "claude",
+  "review_pass": 1,
+  "role": "independent-adversarial-reviewer",
+  "selected_engine": "codex",
+  "status": "ready",
+  "subproblem_id": "C66-TATE-SUPPORT",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_attempt_id": "ATT-0134",
+  "target_task_id": "TASK-C66-M-005",
+  "theorem_statement": "Let T_Z be the canonical mixed-Hodge subquotient of T:=W_{-16}H^{BM}_{16}(M_{6,6};Q) supplied by a verified C66-SUPPORT-INTERFACE datum, and take as given the support filtration of a verified C66-SUPPORT-FILTRATION result: an admissible chain for Y, and a finite filtration of T_Z by sub-Hodge structures whose graded pieces are indexed by the stratum dimensions n of that chain, each a subquotient of W_{2n-16}H^{2n-16}(S_{(n)};Q)(n), zero for n <= 7 and for n >= 17, a finite direct sum of Q(8) for n = 8, and at most one per dimension, so that at most eight pieces remain, at most one for each n with 9 <= n <= 16. Prove T_Z is a finite direct sum of Q(8). By the verified implication of that filtration it is sufficient to fix one admissible chain and prove, for each of its strata of dimension n with 9 <= n <= 16, that the corresponding graded piece is a finite direct sum of Q(8), for instance by determining W_{2n-16}H^{2n-16}(S_{(n)};Q) or by proving that the graded piece vanishes; any other complete proof of the displayed conclusion is equally admissible. A disproof must exhibit a non-Tate subquotient of this named T_Z through the verified target interface; non-Tate cohomology of an arbitrary family base, atlas, product model, standalone Z, or a source class whose target image is not proved nonzero is not a disproof, and neither is a non-Tate group W_{2n-16}H^{2n-16}(S_{(n)};Q) unless the corresponding graded piece of the verified filtration is itself proved non-Tate. This theorem does not itself assemble the complementary target terms."
+}
