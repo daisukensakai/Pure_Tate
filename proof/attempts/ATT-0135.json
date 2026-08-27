@@ -1,0 +1,179 @@
+{
+  "argument_markdown": "Put X_{g,n}=M_{g,n}. All cohomology has rational coefficients.\n\n1. Pure-weight finite-generation formula.\n\nFor each forgetful map pi_i:X_{g,n}->X_{g,n-1}, define\n\nPhi_{g,n}^k := sum_i pi_i^* W_k H^k(X_{g,n-1})\n\nand define\n\nPsi_{g,n}^k := sum_i psi_i Phi_{g,n}^{k-2}.\n\nFor g>=2, there is an isomorphism of pure weight-k Hodge structures\n\nW_k H^k(X_{g,n})/(Phi_{g,n}^k+Psi_{g,n}^k)\n  ~= direct_sum_{|lambda|=n} W_k H^{k-n}(M_g;V_lambda) tensor V_{lambda^T}.   (1)\n\nHere V_lambda is the irreducible symplectic local system of weight |lambda| and V_{lambda^T} is the corresponding rational symmetric-group representation.\n\nFor completeness, (1) follows as follows. Let pi:C->M_g be the universal closed curve and let f:C^n->M_g be its n-fold fibre product. The open inclusion X_{g,n}->C^n induces a surjection on the lowest weight W_k in degree k: after taking a common smooth normal-crossings compactification, W_k of either smooth open is the image of the compactification cohomology, and the restriction map factors that image. Since f is smooth and proper, its Leray spectral sequence degenerates at E_2. Kunneth therefore gives\n\nH^k(C^n)=direct_sum H^p(M_g;R^{i_1}pi_*Q tensor ... tensor R^{i_n}pi_*Q),\n\nwhere p+i_1+...+i_n=k and each i_s belongs to {0,1,2}. Pullbacks from C^{n-1} span precisely the summands having some i_s=0. Modulo those summands, multiplication by psi_s spans the summands having i_s=2, because psi_s restricts to the nonzero canonical class in H^2 of the fibre. Thus the remaining term has i_1=...=i_n=1 and is\n\nH^{k-n}(M_g;(R^1 pi_*Q)^{tensor n}).\n\nThe Kunneth component of each diagonal class Delta_{ij}, which restricts to zero on X_{g,n}, inserts the symplectic form into the i-th and j-th tensor positions. Quotienting by these contraction images gives the symplectically traceless decomposition\n\ndirect_sum_{|lambda|=n} V_lambda tensor V_{lambda^T}.\n\nAll maps are morphisms of mixed Hodge structures. Since V_lambda has weight n, taking weight k gives exactly (1). This independently establishes the specialized input used below.\n\n2. The primitive six-marking quotient vanishes.\n\nApply (1) with (g,n,k)=(6,6,26). Its right side is\n\ndirect_sum_{|lambda|=6} W_26 H^20(M_6;V_lambda) tensor V_{lambda^T}.   (2)\n\nHarer's virtual-cohomological-dimension formula gives vcd(Mod_6)=4*6-5=19. This bound applies to every rational local coefficient module: choose a torsion-free normal finite-index subgroup Gamma of Mod_6. It has cohomological dimension 19, hence H^20(Gamma;V_lambda)=0. The Hochschild-Serre spectral sequence for Gamma normal in Mod_6 has finite quotient; its positive-degree rational cohomology vanishes, so H^20(Mod_6;V_lambda)=H^20(Gamma;V_lambda)^{Mod_6/Gamma}=0. Therefore every summand in (2) is zero, and\n\nW_26 H^26(X_{6,6})=Phi_{6,6}^{26}+Psi_{6,6}^{26}.   (3)\n\n3. The degree-26 pullback part vanishes.\n\nFor five ordered markings,\n\nvcd(PMod_{6,5})=4*6-4+5=25.\n\nThe same finite-index argument gives H^26(X_{6,5})=0. Consequently\n\nPhi_{6,6}^{26}=sum_i pi_i^*W_26H^26(X_{6,5})=0.   (4)\n\nCombining (3) and (4),\n\nW_26H^26(X_{6,6})=Psi_{6,6}^{26}.   (5)\n\n4. The remaining psi-multiple part has type Q(-13).\n\nThe verified CKgP theorem THM-0005 applies to X_{6,5}, because 5=c(6). It gives surjectivity of the cycle-class map onto every lowest-weight group and A^*(X_{6,5})=R^*(X_{6,5}). Hence, in degree 24,\n\nW_24H^24(X_{6,5}) ~= Q(-12)^{direct_sum a}\n\nfor some finite a: every generating codimension-12 cycle class has Hodge type (12,12), and every subquotient of their span has the same type. It follows that Phi_{6,6}^{24}, being a sum of pullback images of this group, is a finite direct sum of Q(-12).\n\nEach psi_i is an algebraic codimension-one class of Hodge type Q(-1). Therefore the cup-product maps\n\nQ(-1) tensor Phi_{6,6}^{24} -> W_26H^26(X_{6,6})\n\nhave images that are finite direct sums of Q(-13). By definition their sum is Psi_{6,6}^{26}. Equation (5) consequently exhibits W_26H^26(X_{6,6}) as a quotient of a finite direct sum of Q(-13). Since the target is pure of weight 26, equivalently because polarizable pure Hodge structures of fixed weight are semisimple, there is a finite r>=0 such that\n\nW_26H^26(M_{6,6};Q) ~= Q(-13)^{direct_sum r}.   (6)\n\n5. Conversion to the exact Borel-Moore target.\n\nThe smooth Deligne-Mumford stack M_{6,6} has complex dimension\n\nd=3*6-3+6=21.\n\nPoincare duality for smooth finite-type Deligne-Mumford stacks gives an isomorphism of mixed Hodge structures\n\nW_{-16}H^{BM}_{16}(M_{6,6};Q)\n  ~= W_26H^26(M_{6,6};Q)(21).\n\nUsing (6) and Q(-13)(21)=Q(8), this becomes\n\nW_{-16}H^{BM}_{16}(M_{6,6};Q) ~= Q(8)^{direct_sum r}.\n\nThus the exact group is a finite direct sum of Q(8), as asserted. The case r=0 is allowed. No non-Tate summand survives.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "claims": [
+    {
+      "id": "CLM-0135-1",
+      "justification": "The smooth-proper Leray decomposition for the n-fold universal curve separates the R^0, R^1, and R^2 Kunneth factors. Pullbacks remove factors R^0, psi-multiples remove factors R^2, and diagonal classes remove symplectic contractions from (R^1)^{tensor n}; symplectic Schur-Weyl decomposition gives the stated primitive quotient. All constructions respect mixed Hodge structures and weights.",
+      "statement": "For g>=2, W_kH^k(M_{g,n})/(Phi_{g,n}^k+Psi_{g,n}^k) is isomorphic to the direct sum over |lambda|=n of W_kH^{k-n}(M_g;V_lambda) tensor V_{lambda^T}.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0135-2",
+      "justification": "CLM-0135-1 identifies it with a sum of W_26H^20(M_6;V_lambda) for |lambda|=6. Since vcd(Mod_6)=19, degree-20 cohomology vanishes for every rational local coefficient module.",
+      "statement": "The primitive quotient W_26H^26(M_{6,6})/(Phi_{6,6}^{26}+Psi_{6,6}^{26}) vanishes.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0135-3",
+      "justification": "Every summand is pulled back from H^26(M_{6,5}); this group vanishes because 26 exceeds vcd(PMod_{6,5})=25.",
+      "statement": "Phi_{6,6}^{26}=0.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0135-4",
+      "justification": "THM-0005 applies at n=5=c(6), giving CKgP, tautological Chow, and surjectivity of codimension-12 cycle classes onto the pure weight-24 group.",
+      "statement": "W_24H^24(M_{6,5};Q) is a finite direct sum of Q(-12).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0135-5",
+      "justification": "By CLM-0135-2 and CLM-0135-3 the target equals Psi. This subspace is generated by products of psi_i of type Q(-1) with pullbacks of the Q(-12)-sum from CLM-0135-4, hence is a quotient of a finite direct sum of Q(-13).",
+      "statement": "Psi_{6,6}^{26}, and hence W_26H^26(M_{6,6};Q), is a finite direct sum of Q(-13).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0135-6",
+      "justification": "Poincare duality in dimension 21 identifies it with W_26H^26(M_{6,6};Q)(21), and Q(-13)(21)=Q(8). Apply CLM-0135-5.",
+      "statement": "W_{-16}H^{BM}_{16}(M_{6,6};Q) is a finite direct sum of Q(8).",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "No vanishing is inferred from 26=vcd(M_{6,6}); virtual cohomological dimension is applied only to H^20(M_6;V_lambda), where 20>19, and H^26(M_{6,5}), where 26>25."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "The local-system obstruction is computed by the pure-weight quotient formula rather than renamed through a forgetful Leray sequence."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "No undecorated top-weight graph complex, compactification degree-16 assertion, point count, finite-cover Tate inference, or Casnati-Ekedahl support-exhaustion assertion is used."
+    },
+    {
+      "disposition": "",
+      "kind": "working_context_constraint",
+      "subject": "The CE support graph is bypassed by an independent computation of the whole exact target, not used as an unverified assembly."
+    }
+  ],
+  "gap_markers": [],
+  "id": "ATT-0135",
+  "ingest_normalizations": [
+    {
+      "expected": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "lane": "full-resolution",
+  "methods_used": [
+    "pure-weight finite-generation quotient",
+    "smooth-proper Leray degeneration",
+    "Kunneth decomposition for the universal curve",
+    "symplectic Schur-Weyl decomposition",
+    "virtual cohomological dimension with local coefficients",
+    "Chow-Kunneth generation property",
+    "mixed-Hodge Tate-type bookkeeping",
+    "Poincare duality"
+  ],
+  "new_inputs": [
+    {
+      "evidence": "The prohibited inference at the target degree remains unused. The independently proved SRC-0002 Lemma 3.1 quotient formula first isolates a primitive quotient in H^20(M_6;V_lambda), where degree 20 is strictly above vcd 19; THM-0005 then controls the complementary pullback and psi terms. This new structural input makes the residual use of vcd valid and resolves, rather than merely renames, the exact target.",
+      "evidence_claim_ids": [
+        "FND-0035",
+        "FND-0036",
+        "THM-0005"
+      ],
+      "route": "vcd-only-vanishing"
+    }
+  ],
+  "novelty_claims": [
+    {
+      "id": "NOV-0135-1",
+      "statement": "Specializing the supplied Canning-Larson-Payne pure-weight quotient formula at (g,n,k)=(6,6,26) places every primitive six-marking term in local-system degree 20 on M_6, strictly above vcd(Mod_6)=19.",
+      "status": "proved"
+    },
+    {
+      "id": "NOV-0135-2",
+      "statement": "After the primitive quotient and degree-26 pullbacks vanish, the entire exact ordinary target is generated by psi-multiples of the verified Tate group W_24H^24(M_{6,5}), giving a direct proof of the full target without the CE support-filtration route.",
+      "status": "proved"
+    }
+  ],
+  "observable_trace_id": "TRACE-0105",
+  "observable_trace_sha256": "a1aa6fa39f345b17d6a43aecbaa70abcd5117a1d24633933d35cd451f7f777fb",
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_path": "proof/packets/generated/C66-001-v6.md",
+  "packet_sha256": "291c493b7bb82873209f91b93f42db3638d398fe2bff781c61aad39f1f43b3e2",
+  "paired_attempt_policy_revision": 2,
+  "paired_problem_key": "06b7695d66225b8502f14149286fcf0111561b471a17c358ebbc4a503d6bda00",
+  "paired_theorem_sha256": "c5e3507db1b4cef8fddb7c6bc92044dd75181ad33ae1649739f76e893e013cd3",
+  "paired_turn_kind": "forced-proof",
+  "proof_dependencies": [
+    "FND-0001",
+    "FND-0033",
+    "FND-0035",
+    "FND-0036",
+    "THM-0005",
+    "SRC-0002"
+  ],
+  "result_type": "proof",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0001",
+    "FND-0033",
+    "FND-0035",
+    "FND-0036",
+    "THM-0005"
+  ],
+  "source_ids": [
+    "SRC-0002",
+    "SRC-0004"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-FULL",
+  "summary": "The pure-weight finite-generation formula of Canning-Larson-Payne identifies the quotient of W_26 H^26(M_{6,6}) by pullbacks and psi-multiples with a sum of H^20(M_6;V_lambda) for |lambda|=6. Every such group vanishes because vcd(Mod_6)=19. The degree-26 pullback part also vanishes because vcd(PMod_{6,5})=25, while the remaining psi-multiple part is Tate because W_24 H^24(M_{6,5}) is algebraic and of type Q(-12) by the verified CKgP theorem. Thus W_26 H^26(M_{6,6}) is a finite direct sum of Q(-13), and Poincare duality with twist (21) gives the asserted direct sum of Q(8).",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-001-FORCED-FULL",
+  "theorem_scope": {
+    "category": "rational mixed Hodge structures",
+    "coefficients": "Q",
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group."
+}
