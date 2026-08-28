@@ -1,0 +1,462 @@
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=green!40!black,
+  urlcolor=blue!60!black]{hyperref}
+
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\BM}{\mathrm{BM}}
+\newcommand{\RH}{\mathrm{RH}}
+\newcommand{\Mod}{\operatorname{Mod}}
+\newcommand{\PMod}{\operatorname{PMod}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\vcd}{\operatorname{vcd}}
+\newcommand{\im}{\operatorname{im}}
+
+\DeclareMathOperator{\codim}{codim}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title[The lowest-weight cohomology of $\M_{6,6}$]
+  {The lowest-weight cohomology of $\mathcal{M}_{6,6}$ is Tate}
+\author{GPT-5.6, Claude Opus 5, Qwen 3.8, Grok 4.6, and Daisuke Ken Sakai}
+\date{26 August 2026}
+
+\begin{document}
+
+\begin{abstract}
+We determine the Hodge type of the lowest-weight part of
+$H^{26}(\M_{6,6};\Q)$.  We prove that
+\[
+  W_{26}H^{26}(\M_{6,6};\Q)
+  =\RH^{26}(\M_{6,6};\Q)
+  \cong \Q(-13)^{\oplus r}
+\]
+for some $r\geq 0$.  Equivalently,
+$W_{-16}H^{\BM}_{16}(\M_{6,6};\Q)\cong\Q(8)^{\oplus r}$.
+The proof combines the description by Canning--Larson--Payne of the
+primitive quotient of the lowest-weight cohomology of $\M_{g,n}$ with
+Harer's computation of the virtual cohomological dimension.  The primitive
+quotient vanishes in the case at hand, as does the contribution pulled back
+from $\M_{6,5}$.  The remaining classes are products of cotangent-line
+classes with lowest-weight classes on $\M_{6,5}$; the latter are algebraic by
+the sharp genus-six Chow--K\"unneth generation result.  The argument does not
+determine the multiplicity $r$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $\M_{g,n}$ be the Deligne--Mumford stack of smooth complex curves of
+genus $g$ with $n$ ordered marked points.  We work throughout with rational
+cohomology and with the mixed Hodge structures carried by the cohomology of
+complex algebraic stacks.  The group considered in this paper is
+\[
+  W_{26}H^{26}(\M_{6,6};\Q),
+\]
+the lowest-weight part of the degree-$26$ cohomology.  Its Hodge type is the
+open contribution associated with the pair $(g,n)=(6,6)$ in the degree-$16$
+boundary induction for the moduli stack of stable curves.  Indeed,
+$\dim_{\mathbf C}\M_{6,6}=21$, and Poincar\'e duality identifies it, after a
+Tate twist, with the weight-$-16$ part of degree-$16$ Borel--Moore homology.
+
+Our main result is the following.
+
+\begin{theorem}\label{thm:main}
+There is a nonnegative integer $r$ such that
+\begin{align*}
+  W_{26}H^{26}(\M_{6,6};\Q)
+    &=\RH^{26}(\M_{6,6};\Q)
+      \cong \Q(-13)^{\oplus r},\\
+  W_{-16}H^{\BM}_{16}(\M_{6,6};\Q)
+    &\cong \Q(8)^{\oplus r},\\
+  \Gr^{W}_{16}H^{16}_c(\M_{6,6};\Q)
+    &\cong \Q(-8)^{\oplus r}.
+\end{align*}
+Here $\RH^*$ denotes tautological cohomology.  The assertion includes the
+possibility $r=0$.
+\end{theorem}
+
+The proof is short once two published structural results are put together at
+their exact numerical limits.  Canning, Larson, and Payne describe the
+quotient of $W_kH^k(\M_{g,n})$ by classes pulled back from one fewer marking
+and by their products with cotangent-line classes
+\cite[Lemma~3.1]{CanningLarsonPayne}.  At $(g,n,k)=(6,6,26)$, the quotient is
+built from degree-$20$ cohomology of symplectic local systems on $\M_6$.
+Harer's formula gives $\vcd(\Mod_6)=19$, so every such group vanishes.  The
+part pulled back from $\M_{6,5}$ vanishes as well, because
+$\vcd(\PMod_{6,5})=25$.
+
+It remains to determine the Hodge type of classes obtained by multiplying
+pullbacks from $W_{24}H^{24}(\M_{6,5})$ by cotangent-line classes.  This is
+where the sharp endpoint of the known Chow--K\"unneth generation range is
+essential: the genus-six bound is five marked points
+\cite[Table~1]{CanningLarsonPayne}.  Proposition~4.5 of
+\cite{CanningLarsonPayne} therefore shows that
+$W_{24}H^{24}(\M_{6,5})$ is tautological and hence of type $(12,12)$.
+Multiplication by a cotangent-line class gives type $(13,13)$.
+
+The argument uses virtual cohomological dimension only in degrees strictly
+above the relevant bounds: degree $20>19$ on $\M_6$ and degree $26>25$ on
+$\M_{6,5}$.  In particular, it does not infer any vanishing from the equality
+$26=\vcd(\PMod_{6,6})$.  We also stress that Theorem~\ref{thm:main} determines
+the Hodge type, but not the dimension, of the group.
+
+\section{Conventions and the forgetful subspaces}
+
+The Tate Hodge structure $\Q(m)$ has weight $-2m$.  For a smooth complex
+algebraic stack $X$, the weights on $H^j(X;\Q)$ are at least $j$; consequently
+$W_jH^j(X;\Q)$ is a pure Hodge structure of weight $j$.  We use the increasing
+weight filtration.  Our conventions agree with those of
+\cite{CanningLarsonPayne}.  The basic mixed Hodge theory is due to Deligne
+\cite{DeligneHodgeII}; rational cohomology and Poincar\'e duality for
+Deligne--Mumford stacks may be obtained from a finite level cover and are also
+discussed in \cite{BehrendStacks}.
+
+For $1\leq i\leq n$, let
+\[
+  \pi_i\colon \M_{g,n}\longrightarrow \M_{g,n-1}
+\]
+be the map forgetting the $i$th marking, and let
+$\psi_i=c_1(L_i)\in H^2(\M_{g,n};\Q)$ be the first Chern class of the
+corresponding cotangent line.  Following \cite[Sections~2--3]
+{CanningLarsonPayne}, define
+\begin{align}
+  \Phi^k_{g,n}
+    &:=\sum_{i=1}^n
+      \pi_i^*W_kH^k(\M_{g,n-1};\Q),\label{eq:Phi}\\
+  \Psi^k_{g,n}
+    &:=\sum_{i=1}^n \psi_i\smile\Phi^{k-2}_{g,n}.
+      \label{eq:Psi}
+\end{align}
+Thus $\Phi^k_{g,n}$ consists of lowest-weight classes inherited from one
+fewer marking, while $\Psi^k_{g,n}$ is generated by such classes after one
+multiplication by a cotangent-line class.
+
+Every algebraic cycle of codimension $a$ has cohomology class of Hodge type
+$(a,a)$ and weight $2a$.  In particular,
+\[
+  \RH^k(\M_{g,n};\Q)\subseteq W_kH^k(\M_{g,n};\Q),
+\]
+with both sides zero in odd degree for the tautological contribution.  The
+classes $\psi_i$ are tautological and have type $\Q(-1)$.
+
+\section{The primitive quotient and algebraicity at five markings}
+
+We recall the two results about pure cohomology that will be used in the
+proof.  Let $\mathbb V_\lambda$ denote the irreducible symplectic local system
+on $\M_g$ indexed by a partition
+$\lambda=(\lambda_1\geq\cdots\geq\lambda_g\geq0)$, and put
+$|\lambda|=\sum_i\lambda_i$.  If $|\lambda|=n$, write
+$V_{\lambda^{\mathsf T}}$ for the corresponding rational representation of
+the symmetric group; as a Hodge structure it has type $(0,0)$.
+
+\begin{proposition}[Canning--Larson--Payne]\label{prop:primitive}
+If $g\geq2$, then there is an isomorphism of pure rational Hodge structures
+\begin{equation}\label{eq:primitive}
+ \frac{W_kH^k(\M_{g,n};\Q)}{\Phi^k_{g,n}+\Psi^k_{g,n}}
+ \cong
+ \bigoplus_{|\lambda|=n}
+ W_kH^{k-n}(\M_g;\mathbb V_\lambda)
+ \otimes V_{\lambda^{\mathsf T}}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+This is \cite[Lemma~3.1(a)]{CanningLarsonPayne}.  We briefly recall the
+geometry behind the formula.  If $\pi\colon\mathcal C\to\M_g$ is the universal
+closed curve, then $\M_{g,n}$ is the complement of the pairwise diagonals in
+the $n$-fold fiber power $\mathcal C^n$ over $\M_g$.  Restriction from the
+fiber power surjects onto the lowest-weight cohomology of $\M_{g,n}$.  The
+smooth-proper Leray decomposition for $\mathcal C^n\to\M_g$ has K\"unneth
+indices in $\{0,1,2\}^n$.  The summands with a zero index are generated by
+forgetful pullbacks.  More precisely, the identification of the index-two
+summands modulo the zero-index summands is made by the relative
+Chow--K\"unneth projector $\pi_2$ of Petersen--Tavakol--Yin
+\cite[Sections~5.1 and 5.2.2]{PetersenTavakolYin}; it is not inferred merely
+from the restriction of a cotangent-line class to a fiber.  The image of this
+projector is generated by the cotangent-line contribution in
+\eqref{eq:Psi}.  The all-index-one term is the $n$th tensor power of
+$R^1\pi_*\Q$; quotienting by contractions coming from the diagonals leaves
+precisely the symplectic local systems of weight $n$ in
+\eqref{eq:primitive}.
+\end{proof}
+
+The second input identifies lowest-weight cohomology with algebraic classes
+at the endpoint of the presently known genus-six range.
+
+\begin{proposition}\label{prop:algebraic}
+For every $k$,
+\[
+  W_kH^k(\M_{6,5};\Q)=\RH^k(\M_{6,5};\Q).
+\]
+In particular, for some $a\geq0$,
+\[
+  W_{24}H^{24}(\M_{6,5};\Q)
+  \cong \Q(-12)^{\oplus a}.
+\]
+\end{proposition}
+
+\begin{proof}
+Table~1 of Canning--Larson--Payne records the inclusive genus-six bound
+$c(6)=5$ for the Chow--K\"unneth generation property and tautological Chow
+ring of the open stack $\M_{6,n}$.  Their Lemma~4.3 and Proposition~4.5 then
+give
+\cite[Table~1, Lemma~4.3, and Proposition~4.5]{CanningLarsonPayne}
+\[
+  W_kH^k(\M_{6,5};\Q)=\RH^k(\M_{6,5};\Q)
+\]
+for every $k$.  In degree $24$, every
+class on the right is the class of a rational linear combination of
+codimension-$12$ tautological cycles, so the Hodge structure is concentrated
+in type $(12,12)$.  It is therefore a finite direct sum of $\Q(-12)$.
+\end{proof}
+
+\section{Virtual cohomological dimension}
+
+Let $\Mod_g$ be the mapping class group of a closed oriented surface of genus
+$g$, and let $\PMod_{g,n}$ be the pure mapping class group with $n$ ordered
+punctures.  The analytic stacks $\M_g$ and $\M_{g,n}$ have the homotopy types
+of the corresponding classifying stacks, since Teichm\"uller space is
+contractible.  Hence cohomology of a rational local system agrees with group
+cohomology of the associated rational module.
+
+\begin{lemma}\label{lem:vcdcoeff}
+Let $\Gamma$ be a virtually torsion-free group of virtual cohomological
+dimension $d$.  If $L$ is a rational $\Gamma$-module, then
+\[
+  H^q(\Gamma;L)=0\qquad(q>d).
+\]
+\end{lemma}
+
+\begin{proof}
+Choose a torsion-free normal subgroup $\Gamma'\triangleleft\Gamma$ of finite
+index with cohomological dimension $d$.  Then
+$H^q(\Gamma';L)=0$ for $q>d$.  In the Hochschild--Serre spectral sequence for
+$1\to\Gamma'\to\Gamma\to F\to1$, the group $F$ is finite.  Since the
+coefficient field has characteristic zero, taking $F$-invariants is exact and
+$H^p(F;U)=0$ for $p>0$ and every rational $F$-module $U$.  The spectral
+sequence therefore gives
+\[
+  H^q(\Gamma;L)\cong H^q(\Gamma';L)^F,
+\]
+which vanishes for $q>d$.  See also \cite[Chapter~VII]{BrownGroups}.
+\end{proof}
+
+Harer computed \cite[Theorem~4.1]{HarerVCD}
+\begin{equation}\label{eq:vcd}
+ \vcd(\Mod_g)=4g-5,
+ \qquad
+ \vcd(\PMod_{g,n})=4g-4+n\quad(n>0),
+\end{equation}
+for $g\geq2$.  The two instances needed below are therefore
+\[
+  \vcd(\Mod_6)=19,
+  \qquad
+  \vcd(\PMod_{6,5})=25.
+\]
+
+\begin{corollary}\label{cor:vcdvanishing}
+The following vanishings hold:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $H^{20}(\M_6;\mathbb V)=0$ for every finite-dimensional rational local
+  system $\mathbb V$;
+\item $H^{26}(\M_{6,5};\Q)=0$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Apply Lemma~\ref{lem:vcdcoeff} and \eqref{eq:vcd}.  The first degree is
+$20>19$, and the second is $26>25$.
+\end{proof}
+
+\section{Proof of the main theorem}
+
+We first determine the entire lowest-weight group in ordinary cohomology.
+
+\begin{proposition}\label{prop:psi}
+One has
+\[
+  W_{26}H^{26}(\M_{6,6};\Q)=\Psi^{26}_{6,6}.
+\]
+\end{proposition}
+
+\begin{proof}
+Apply Proposition~\ref{prop:primitive} with $(g,n,k)=(6,6,26)$.  Its
+right-hand side is
+\[
+  \bigoplus_{|\lambda|=6}
+  W_{26}H^{20}(\M_6;\mathbb V_\lambda)
+  \otimes V_{\lambda^{\mathsf T}},
+\]
+which vanishes by Corollary~\ref{cor:vcdvanishing}(i).  It follows that
+\begin{equation}\label{eq:PhiPsi}
+  W_{26}H^{26}(\M_{6,6};\Q)
+  =\Phi^{26}_{6,6}+\Psi^{26}_{6,6}.
+\end{equation}
+On the other hand, Corollary~\ref{cor:vcdvanishing}(ii) and the definition
+\eqref{eq:Phi} give
+\[
+  \Phi^{26}_{6,6}
+  =\sum_{i=1}^6\pi_i^*W_{26}H^{26}(\M_{6,5};\Q)=0.
+\]
+Substituting this in \eqref{eq:PhiPsi} proves the proposition.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+By Proposition~\ref{prop:algebraic}, each summand used to generate
+$\Phi^{24}_{6,6}$ is a quotient of a finite direct sum of copies of
+$\Q(-12)$.  Hence $\Phi^{24}_{6,6}$ is concentrated in Hodge type $(12,12)$.
+Cup product with $\psi_i$, an algebraic class of type $(1,1)$, is a morphism
+of Hodge structures
+\[
+  \Q(-1)\otimes\Phi^{24}_{6,6}
+  \longrightarrow W_{26}H^{26}(\M_{6,6};\Q).
+\]
+It follows that $\Psi^{26}_{6,6}$ is concentrated in type $(13,13)$.  By
+Proposition~\ref{prop:psi}, the same is true of the entire group
+$W_{26}H^{26}(\M_{6,6};\Q)$.  A rational Hodge structure concentrated in
+type $(13,13)$ is, noncanonically, a direct sum of copies of $\Q(-13)$.
+Thus
+\[
+  W_{26}H^{26}(\M_{6,6};\Q)\cong\Q(-13)^{\oplus r}
+\]
+for some $r\geq0$.
+
+Moreover, Proposition~\ref{prop:psi} expresses every class in this group as
+a sum of products of tautological classes.  Thus
+$W_{26}H^{26}(\M_{6,6};\Q)\subseteq\RH^{26}(\M_{6,6};\Q)$.  The reverse
+inclusion holds because every codimension-$13$ tautological cycle class has
+weight $26$.  This proves the first line of the theorem.
+
+It remains to translate the result into degree-$16$ homology.  The complex
+dimension of $\M_{6,6}$ is
+\[
+  d=3g-3+n=21.
+\]
+Poincar\'e duality for the smooth Deligne--Mumford stack $\M_{6,6}$ gives an
+isomorphism of mixed Hodge structures
+\[
+  H^{\BM}_{16}(\M_{6,6};\Q)
+  \cong H^{2d-16}(\M_{6,6};\Q)(d)
+  =H^{26}(\M_{6,6};\Q)(21).
+\]
+Taking the indicated lowest-weight piece yields
+\[
+  W_{-16}H^{\BM}_{16}(\M_{6,6};\Q)
+  \cong W_{26}H^{26}(\M_{6,6};\Q)(21)
+  \cong \Q(-13)^{\oplus r}(21)
+  =\Q(8)^{\oplus r}.
+\]
+Finally, Borel--Moore homology and compactly supported cohomology are dual as
+mixed Hodge structures.  With the standard dual weight filtration, this gives
+\[
+  \Gr^W_{16}H_c^{16}(\M_{6,6};\Q)
+  \cong
+  \operatorname{Hom}_{\Q}\!\left(
+    \Gr^W_{-16}H^{\BM}_{16}(\M_{6,6};\Q),\Q(0)
+  \right).
+\]
+The weights on $H^{\BM}_{16}(\M_{6,6};\Q)$ are at least $-16$, so its
+weight-$-16$ graded piece is $W_{-16}H^{\BM}_{16}$.  Since
+$\Q(8)^\vee=\Q(-8)$, the preceding Borel--Moore calculation therefore gives
+\[
+  \Gr^W_{16}H_c^{16}(\M_{6,6};\Q)
+  \cong\Q(-8)^{\oplus r},
+\]
+as claimed.
+\end{proof}
+
+\section{Remarks on scope}
+
+\begin{remark}[What is proved]
+The proof determines the Hodge type of the full lowest-weight group, not only
+of a specified tautological subspace.  In fact, it proves the stronger
+generation statement
+\[
+  W_{26}H^{26}(\M_{6,6};\Q)=\Psi^{26}_{6,6}
+  =\RH^{26}(\M_{6,6};\Q).
+\]
+Thus no non-Tate summand can survive in this group.
+\end{remark}
+
+\begin{remark}[What is not proved]
+The multiplicity $r$ is not computed.  Nor does the argument assert an
+integral result or identify the cohomology of the stack with that of its
+coarse moduli space.  All statements are about rational mixed Hodge
+structures on Deligne--Mumford stacks over $\mathbf C$.
+\end{remark}
+
+\begin{remark}[Why the numerical endpoint matters]
+The only input that determines Hodge type, rather than merely generation, is
+Proposition~\ref{prop:algebraic} at $n=5$.  The bound $n\leq5$ in genus six is
+inclusive and sharp for the present argument.  No Chow--K\"unneth generation
+statement is applied directly to $\M_{6,6}$.
+\end{remark}
+
+\section*{Acknowledgments}
+
+The human author credits the principal proof development, mathematical
+analysis, drafting, and review underlying this manuscript to the artificial
+intelligence collaborators named in the byline.
+
+\begin{thebibliography}{99}
+
+\bibitem{BehrendStacks}
+K.~Behrend,
+\emph{Cohomology of stacks},
+in \emph{Intersection theory and moduli}, ICTP Lecture Notes, vol.~XIX,
+Abdus Salam International Centre for Theoretical Physics, Trieste, 2004,
+pp.~249--294.
+
+\bibitem{BrownGroups}
+K.~S. Brown,
+\emph{Cohomology of groups},
+Graduate Texts in Mathematics, vol.~87, Springer-Verlag, New York, 1982.
+
+\bibitem{CanningLarsonPayne}
+S.~Canning, H.~Larson, and S.~Payne,
+\emph{Extensions of tautological rings and motivic structures in the
+cohomology of $\overline{\mathcal M}_{g,n}$},
+Forum Math. Pi \textbf{12} (2024), article no.~e23, 31 pp.,
+\href{https://doi.org/10.1017/fmp.2024.24}{doi:10.1017/fmp.2024.24}.
+
+\bibitem{DeligneHodgeII}
+P.~Deligne,
+\emph{Th\'eorie de Hodge. II},
+Publ. Math. Inst. Hautes \'Etudes Sci. \textbf{40} (1971), 5--57,
+\href{https://doi.org/10.1007/BF02684692}{doi:10.1007/BF02684692}.
+
+\bibitem{HarerVCD}
+J.~L. Harer,
+\emph{The virtual cohomological dimension of the mapping class group of an
+orientable surface},
+Invent. Math. \textbf{84} (1986), no.~1, 157--176,
+\href{https://doi.org/10.1007/BF01388737}{doi:10.1007/BF01388737}.
+
+\bibitem{PetersenTavakolYin}
+D.~Petersen, M.~Tavakol, and Q.~Yin,
+\emph{Tautological classes with twisted coefficients},
+Ann. Sci. \'Ec. Norm. Sup\'er. (4) \textbf{54} (2021), no.~5, 1179--1236,
+\href{https://doi.org/10.24033/asens.2479}{doi:10.24033/asens.2479}.
+
+\end{thebibliography}
+
+\end{document}

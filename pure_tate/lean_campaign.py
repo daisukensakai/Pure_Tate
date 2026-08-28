@@ -187,6 +187,18 @@ def validate_campaign_contract(campaign: Dict[str, Any]) -> CheckResult:
         result.errors.append("source attempt id mismatch")
     if source_attempt and source_attempt.get("theorem_statement") != campaign.get("exact_theorem"):
         result.errors.append("campaign exact_theorem is not verbatim from source attempt")
+    shared_signature_path = campaign.get("shared_signature_path")
+    if shared_signature_path is not None:
+        if not isinstance(shared_signature_path, str) or not shared_signature_path:
+            result.errors.append("campaign shared_signature_path must be nonempty")
+        elif not isinstance(campaign.get("shared_signature_sha256"), str):
+            result.errors.append("campaign shared_signature_sha256 is missing")
+        else:
+            shared_signature = ROOT / shared_signature_path
+            if not shared_signature.is_file():
+                result.errors.append("shared Lean signature is missing")
+            elif sha256_path(shared_signature) != campaign.get("shared_signature_sha256"):
+                result.errors.append("shared Lean signature hash drift")
     obligations = campaign.get("obligations")
     if not isinstance(obligations, list) or not obligations:
         result.errors.append("campaign has no obligations")
@@ -214,6 +226,29 @@ def validate_campaign_contract(campaign: Dict[str, Any]) -> CheckResult:
                 result.errors.append(
                     "campaign obligations do not cover the source attempt claims exactly"
                 )
+    optional_obligation_ids = campaign.get("optional_obligation_ids", [])
+    if not isinstance(optional_obligation_ids, list) or not all(
+        isinstance(item, str) for item in optional_obligation_ids
+    ):
+        result.errors.append("campaign optional_obligation_ids must be a string list")
+    elif obligations:
+        obligation_ids = {
+            item.get("id") for item in obligations if isinstance(item, dict)
+        }
+        unknown_optional = sorted(set(optional_obligation_ids) - obligation_ids)
+        if unknown_optional:
+            result.errors.append(
+                "unknown optional obligation ids: %s" % ", ".join(unknown_optional)
+            )
+    optional_axiom_names = campaign.get("optional_axiom_names", [])
+    if not isinstance(optional_axiom_names, list) or not all(
+        isinstance(item, str) and item for item in optional_axiom_names
+    ):
+        result.errors.append("campaign optional_axiom_names must be a string list")
+    elif optional_axiom_names and not optional_obligation_ids:
+        result.errors.append(
+            "campaign optional_axiom_names requires optional_obligation_ids"
+        )
     return result
 
 
@@ -256,6 +291,23 @@ def check_attempt(
     )
     if len(trusted_matches) != 1 or trusted_matches[0] != trusted_text:
         result.errors.append("Claim.lean trusted target prelude is missing or changed")
+    shared_signature_path = campaign.get("shared_signature_path")
+    if isinstance(shared_signature_path, str) and shared_signature_path:
+        shared_text = (ROOT / shared_signature_path).read_text(encoding="utf-8")
+        claim_shared = re.findall(
+            r"^-- LEAN-SHARED-SIGNATURE-BEGIN\s*$\n(.*?)^-- LEAN-SHARED-SIGNATURE-END\s*$",
+            text,
+            re.MULTILINE | re.DOTALL,
+        )
+        model_shared = re.findall(
+            r"^-- LEAN-SHARED-SIGNATURE-BEGIN\s*$\n(.*?)^-- LEAN-SHARED-SIGNATURE-END\s*$",
+            model_text,
+            re.MULTILINE | re.DOTALL,
+        )
+        if len(claim_shared) != 1 or claim_shared[0] != shared_text:
+            result.errors.append("Claim.lean shared signature is missing or changed")
+        if len(model_shared) != 1 or model_shared[0] != shared_text:
+            result.errors.append("Model.lean shared signature is missing or changed")
     expected_headers = {
         "LEAN-CAMPAIGN": campaign_id,
         "LEAN-ATTEMPT": attempt_id,
@@ -283,6 +335,19 @@ def check_attempt(
         result.errors.append("LEAN-THEOREM must be a simple root-namespace identifier")
     if not headers.get("LEAN-WEIGHT"):
         result.errors.append("header LEAN-WEIGHT is missing")
+    optional_obligation_ids = set(campaign.get("optional_obligation_ids", []))
+    optional_theorem = headers.get("LEAN-OPTIONAL-THEOREM", "")
+    if optional_obligation_ids:
+        if not optional_theorem:
+            result.errors.append("header LEAN-OPTIONAL-THEOREM is required")
+        elif not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", optional_theorem):
+            result.errors.append(
+                "LEAN-OPTIONAL-THEOREM must be a simple root-namespace identifier"
+            )
+    elif optional_theorem:
+        result.errors.append(
+            "LEAN-OPTIONAL-THEOREM requires campaign optional_obligation_ids"
+        )
     code_lines = [line.strip() for line in code.splitlines() if line.strip()]
     if not code_lines or code_lines[0] != "set_option autoImplicit false":
         result.errors.append("set_option autoImplicit false must be the first code line")
@@ -355,8 +420,19 @@ def check_attempt(
     expected_print = "#print axioms %s" % theorem if theorem else ""
     if theorem and (not code_lines or code_lines[-1] != expected_print):
         result.errors.append("final #print axioms %s is required" % theorem)
-    if sum(1 for line in code_lines if line.startswith("#print")) != 1:
-        result.errors.append("Claim.lean must contain exactly one #print command")
+    print_count = sum(1 for line in code_lines if line.startswith("#print"))
+    expected_print_count = 2 if optional_obligation_ids else 1
+    if print_count != expected_print_count:
+        result.errors.append(
+            "Claim.lean must contain exactly %d #print command%s"
+            % (expected_print_count, "s" if expected_print_count != 1 else "")
+        )
+    if optional_theorem and (
+        "#print axioms %s" % optional_theorem not in code_lines
+    ):
+        result.errors.append(
+            "#print axioms %s is required" % optional_theorem
+        )
     if CONSTANT_RE.search(code):
         result.errors.append("Claim.lean may not use untracked constant declarations")
     if len(declared) != len(set(declared)):
@@ -488,31 +564,74 @@ def check_attempt(
                 checked_claim_path.unlink(missing_ok=True)
 
     used: List[str] = []
+    optional_used: List[str] = []
     if theorem and lean_exit == 0:
         parsed, parse_error = _parse_used_axioms(lean_output, theorem)
         if parse_error:
             result.errors.append(parse_error)
         else:
             used = parsed or []
+        if optional_theorem:
+            optional_parsed, optional_parse_error = _parse_used_axioms(
+                lean_output, optional_theorem
+            )
+            if optional_parse_error:
+                result.errors.append(optional_parse_error)
+            else:
+                optional_used = optional_parsed or []
     unmapped_used = sorted(
         name for name in used if name not in mappings and name not in CORE_AXIOM_WHITELIST
     )
     if unmapped_used:
         result.errors.append("closed-world axiom violation: %s" % ", ".join(unmapped_used))
-    unused = sorted(name for name in declared if name not in used)
+    used_union = set(used) | set(optional_used)
+    unused = sorted(name for name in declared if name not in used_union)
     if unused:
         result.errors.append("declared axioms are unused: %s" % ", ".join(unused))
+    if optional_obligation_ids:
+        optional_declared = {
+            name for name in declared if mappings.get(name) in optional_obligation_ids
+        }
+        configured_optional = set(campaign.get("optional_axiom_names", []))
+        unknown_configured = sorted(configured_optional - set(declared))
+        if unknown_configured:
+            result.errors.append(
+                "configured optional axioms are not declared: %s"
+                % ", ".join(unknown_configured)
+            )
+        optional_declared |= configured_optional
+        leaked_optional = sorted(optional_declared & set(used))
+        if leaked_optional:
+            result.errors.append(
+                "optional axioms leak into exported theorem: %s"
+                % ", ".join(leaked_optional)
+            )
+        missing_optional = sorted(optional_declared - set(optional_used))
+        if missing_optional:
+            result.errors.append(
+                "optional theorem does not use its declared axioms: %s"
+                % ", ".join(missing_optional)
+            )
+        required_declared = set(declared) - optional_declared
+        missing_required = sorted(required_declared - set(used))
+        if missing_required:
+            result.errors.append(
+                "exported theorem does not use required axioms: %s"
+                % ", ".join(missing_required)
+            )
 
     runtime = {
         "lean_exit": lean_exit,
         "model_exit": model_exit,
         "lean_version": lean_version,
         "theorem": theorem,
+        "optional_theorem": optional_theorem,
         "lean_output": lean_output,
         "model_output": model_output,
     }
     report = _report(
-        campaign, attempt_id, directory, result, manifest, declared, used, runtime, mappings
+        campaign, attempt_id, directory, result, manifest, declared, used, runtime,
+        mappings, optional_used
     )
     if write:
         atomic_write_json(directory / "report.json", report)
@@ -529,6 +648,7 @@ def _report(
     used: List[str],
     runtime: Dict[str, Any],
     mappings: Optional[Dict[str, str]] = None,
+    optional_used: Optional[List[str]] = None,
 ) -> Dict[str, Any]:
     def digest(name: str) -> Optional[str]:
         path = directory / name
@@ -549,12 +669,14 @@ def _report(
         "toolchain": campaign.get("toolchain"),
         "lean_version": runtime.get("lean_version", "n/a"),
         "theorem": runtime.get("theorem"),
+        "optional_theorem": runtime.get("optional_theorem"),
         "lean_exit": runtime.get("lean_exit", -1),
         "model_exit": runtime.get("model_exit", -1),
         "lean_output": runtime.get("lean_output", ""),
         "model_output": runtime.get("model_output", ""),
         "declared_axioms": sorted(declared),
         "used_axioms": sorted(used),
+        "optional_used_axioms": sorted(optional_used or []),
         "axiom_mappings": dict(sorted((mappings or {}).items())),
         "errors": list(result.errors),
         "warnings": list(result.warnings),
