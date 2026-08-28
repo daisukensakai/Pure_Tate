@@ -198,6 +198,41 @@ class TaskingTests(unittest.TestCase):
                 tasks = review_tasks()
         self.assertEqual(tasks, [])
 
+    def test_verification_exempt_self_review_does_not_triage(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            attempts = root / "proof" / "attempts"
+            reviews = root / "proof" / "reviews"
+            attempts.mkdir(parents=True)
+            reviews.mkdir(parents=True)
+            (attempts / "ATT-0001.json").write_text(
+                json.dumps(
+                    self._complete_attempt(status="claimed_complete")
+                ),
+                encoding="utf-8",
+            )
+            (reviews / "REV-0001.json").write_text(
+                json.dumps(
+                    {
+                        "id": "REV-0001",
+                        "attempt_id": "ATT-0001",
+                        "review_pass": 3,
+                        "verdict": "incomplete",
+                        "reviewer_engine": "prover",
+                        "independent": False,
+                        "context_revision": 2,
+                        "self_review_override": {
+                            "authorized_by": "principal_investigator",
+                            "not_counted_for_verification": True,
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with mock.patch("pure_tate.tasking.ROOT", root):
+                tasks = review_tasks()
+        self.assertEqual([task["review_pass"] for task in tasks], [1])
+
 
 if __name__ == "__main__":
     unittest.main()

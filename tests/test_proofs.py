@@ -8,6 +8,7 @@ from pure_tate.proofs import (
     attempt_dependency_attempt_ids,
     audit_proofs,
     proof_dependency_ids,
+    review_is_verification_exempt,
 )
 from pure_tate.store import load_repository
 
@@ -116,6 +117,98 @@ class ProofAuditTests(unittest.TestCase):
             with mock.patch("pure_tate.proofs.ROOT", root):
                 result = audit_proofs(self.claims)
             self.assertEqual(result.errors, [])
+
+    def test_pi_authorized_self_review_is_exempt_from_independence(self):
+        override = {
+            "authorized_by": "principal_investigator",
+            "not_counted_for_verification": True,
+            "quarantined": False,
+        }
+        self.assertTrue(
+            review_is_verification_exempt({"self_review_override": override})
+        )
+        self.assertFalse(review_is_verification_exempt({"independent": False}))
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._write(
+                root / "proof" / "attempts" / "ATT-0001.json",
+                {
+                    "id": "ATT-0001",
+                    "target_claim_id": "RED-0001",
+                    "approach": "test",
+                    "engine": "engine-a",
+                    "status": "verified",
+                    "source_claim_ids": ["THM-0002"],
+                    "gap_markers": [],
+                },
+            )
+            self._write(
+                root / "proof" / "reviews" / "REV-0001.json",
+                {
+                    "id": "REV-0001",
+                    "attempt_id": "ATT-0001",
+                    "verdict": "incomplete",
+                    "reviewer_engine": "engine-a",
+                    "independent": False,
+                    "strongest_attack": "self-attack",
+                    "self_review_override": override,
+                },
+            )
+            with mock.patch("pure_tate.proofs.ROOT", root):
+                result = audit_proofs(self.claims)
+            self.assertFalse(
+                any("is not an independent review" in item for item in result.errors)
+            )
+            self.assertFalse(
+                any("uses the prover engine" in item for item in result.errors)
+            )
+            self.assertTrue(any("two independent" in item for item in result.errors))
+
+    def test_self_review_does_not_count_as_confirmation(self):
+        override = {
+            "authorized_by": "principal_investigator",
+            "not_counted_for_verification": True,
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._write(
+                root / "proof" / "attempts" / "ATT-0001.json",
+                {
+                    "id": "ATT-0001",
+                    "target_claim_id": "RED-0001",
+                    "approach": "test",
+                    "engine": "engine-a",
+                    "status": "verified",
+                    "source_claim_ids": ["THM-0002"],
+                    "gap_markers": [],
+                },
+            )
+            self._write(
+                root / "proof" / "reviews" / "REV-0001.json",
+                {
+                    "id": "REV-0001",
+                    "attempt_id": "ATT-0001",
+                    "verdict": "confirmed",
+                    "reviewer_engine": "engine-a",
+                    "independent": False,
+                    "strongest_attack": "self-confirm",
+                    "self_review_override": override,
+                },
+            )
+            self._write(
+                root / "proof" / "reviews" / "REV-0002.json",
+                {
+                    "id": "REV-0002",
+                    "attempt_id": "ATT-0001",
+                    "verdict": "confirmed",
+                    "reviewer_engine": "engine-b",
+                    "independent": True,
+                    "strongest_attack": "independent confirm",
+                },
+            )
+            with mock.patch("pure_tate.proofs.ROOT", root):
+                result = audit_proofs(self.claims)
+            self.assertTrue(any("two independent" in item for item in result.errors))
 
     def test_packet_visible_finding_is_allowed_in_source_ids(self):
         with tempfile.TemporaryDirectory() as directory:

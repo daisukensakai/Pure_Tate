@@ -95,7 +95,15 @@ def build_board(
             ):
                 status = "stale_context"
             else:
-                attached = reviews_by_attempt.get(str(current_attempt_id), [])
+                from .proofs import review_is_verification_exempt
+
+                attached = [
+                    review
+                    for review in reviews_by_attempt.get(
+                        str(current_attempt_id), []
+                    )
+                    if not review_is_verification_exempt(review)
+                ]
                 verdicts = [review.get("verdict") for review in attached]
                 engines = {
                     review.get("reviewer_engine")

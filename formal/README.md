@@ -1,13 +1,13 @@
 # Lean campaign
 
-`LC66-001` formalizes the exact `(6,6)` proof in `ATT-0135`. Lean is only the
+`LC66-001` formalizes the exact `(6,6)` proof in `ATT-0136`. Lean is only the
 deduction checker. It does not certify that an opaque carrier denotes the right
 cohomology group or that an axiom accurately states a cited theorem. Those semantic
 questions are enforced by two independent, hash-bound reviews.
 
 The campaign is intentionally fail-closed:
 
-- every attempt is bound to the exact `ATT-0135` SHA-256 and to
+- every attempt is bound to the exact `ATT-0136` SHA-256 and to
   `C66-EXACT-TARGET-V1`;
 - the target index is a hash-pinned trusted Lean prelude, and the exported theorem must
   have the literal type `BMIsFiniteTateSum exactC66BMTarget`; attempts cannot replace

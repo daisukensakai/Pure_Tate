@@ -429,7 +429,7 @@ def _migration_at_root() -> Dict[str, Any]:
 
 
 def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
-    from .proofs import derived_attempt_status
+    from .proofs import derived_attempt_status, review_is_verification_exempt
 
     attempts = _load_json_objects(ROOT / "proof" / "attempts", "ATT")
     reviews = _load_json_objects(ROOT / "proof" / "reviews", "REV")
@@ -484,7 +484,11 @@ def review_tasks(attempt_id: Optional[str] = None) -> List[Dict[str, Any]]:
         # from the status string the model chose to write. A complete lemma
         # that labelled itself "proposed" must still earn a second pass.
         status = derived_attempt_status(attempt)
-        attached = reviews_by_attempt.get(str(attempt.get("id")), [])
+        attached = [
+            review
+            for review in reviews_by_attempt.get(str(attempt.get("id")), [])
+            if not review_is_verification_exempt(review)
+        ]
         by_pass = {
             review.get("review_pass"): review
             for review in attached

@@ -1,0 +1,162 @@
+{
+  "attempt_id": "ATT-0136",
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0136-1",
+      "note": "Lowest-weight surjection W_k H^k(C^n) ->> W_k H^k(M_{g,n}). Reconstructed independently: M_{6,6} is the complement of the pairwise diagonals in C^6, hence open dense, so any smooth proper DM compactification Y of C^6 is simultaneously one of M_{6,6}; by Deligne Hodge II 3.2.17 both lowest-weight groups equal im(H^k(Y)->-), and restriction factors that common image. Only the containment direction is used, so the kernel, Gysin exactness for diagonals, and Schur-Weyl are genuinely not invoked. Matches FND-0197 verbatim in scope, including the explicit exclusion of the non-proper f:M_{g,n}->M_g whose R^1 is mixed (FND-0020, FND-0037).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-2",
+      "note": "C^6 -> M_6 is smooth and proper (fibre product of the closed universal curve), R^j pi_* Q concentrated in j=0,1,2, relative Kunneth gives R^q f_* Q = sum_{|i|=q} tensor_s R^{i_s}. The MHS-level splitting (not merely a degeneration of the associated graded) is supplied by the relative Chow-Kunneth projectors, which are algebraic correspondences and hence MHS morphisms, so W_k is additive over the summands. Weight bookkeeping checks: tensor_s R^{i_s} has weight |i|, H^{k-|i|}(M_g;L_{|i|}) has weights >= k, so W_k is its lowest-weight piece in every summand. Note: the displayed expression pi_2 = psi_2/(2g-2) - kappa_1/(2(2g-2)^2) is written as a class on the curve rather than as a correspondence on C x_{M_g} C; it is reproduced verbatim from FND-0196(2) and is used only in Disposal B, which the theorem does not need (Disposal A alone closes the step), so this shorthand is not load-bearing.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-3",
+      "note": "Kunneth inhomogeneity of omega_s = a_s + b_s + c_s is exactly FND-0196, and the attempt states it as a used step rather than a repair. Disposal A verified independently: H^2(M_{g,1};Q) has rank 2 with basis {lambda, omega} for g>=3, forcing the H^1(M_g;V) Leray graded piece of H^2(C) to vanish, which is the rational form of Morita's H_1(Mod_g;H_1(Sigma_g;Z)) = Z/(2g-2); hence b_s = 0 for g=6. Also verified that a_s lies in W_2 H^2(M_g) (H^2(M_6;Q)=Q.lambda, algebraic of type (1,1)) and that b_s would lie in W_2 H^1(M_g;V), so both cross terms land in the correct W_26 summands of the corresponding multi-indices.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-4",
+      "note": "vcd(PMod_{6,5}) = 4g-4+n = 25 < 26; cd of a torsion-free finite-index Gamma equals 25, and rational Hochschild-Serre injects H^26(PMod_{6,5};Q) into H^26(Gamma;Q)=0. Stack cohomology of M_{6,5} is group cohomology of PMod_{6,5}. This is FND-0036 (mechanically_verified) and gives H^26(M_{6,5};Q)=0 outright, which is stronger than the W_26 statement needed. Crucially this is vanishing strictly above vcd of M_{6,5}, not the blocked inference at 26 = vcd(M_{6,6}).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-5",
+      "note": "Reconstructed the whole peel at (6,6,26). Base case: for |i|<=6 the base degree is 26-|i| >= 20 > 19 = vcd(Mod_6), and Harer's vcd with arbitrary rational coefficients (cd(Gamma)=19 plus rational Hochschild-Serre) kills every such summand, including the all-slot-1 primitive term, with no traceless refinement. Combinatorics checked: six slots in {0,1,2} give |i|<=6 whenever no slot equals 2, so every survivor has some i_s=2. Multiplication check: cup with c_s maps the slot-s-reset summand B_{i'} of W_24 H^24(C^6) isomorphically onto A_i, since the base degrees agree (24-(|i|-2) = 26-|i|), R^0 tensor R^2 -> R^2 is the identity, c_s = (2g-2) = 10 times the generator of R^2 pi_* Q = Q(-1), and the Q(-1) twist carries W_24 onto W_26. Error terms: a_s B_{i'} sits in A_{i'} with slot s = 0, hence is pulled back along C^6 -> C^5 and restricts through W_26 H^26(M_{6,5}) = 0; b_s B_{i'} sits in A_{i''} with |i''| = |i|-1 and is handled by the induction whose base |j|<=6 already vanishes (and is identically zero under Disposal A). Compatibility of the slot-s = 0 summand with pullback along the projection is legitimate: the R^0 factor in slot s is the unit Q -> R pi_* Q, so that summand is pr^* of the corresponding C^5 summand, and X_{6,6} -> C^6 -> C^5 factors as X_{6,6} -> X_{6,5} -> C^5. Containment W_26 H^26(M_{6,6}) subset Psi_{6,6}^26 follows with CLM-0136-1. This is FND-0196 disposal (3) specialised as the finding itself anticipates.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-6",
+      "note": "Optional second route. FND-0195 and FND-0198 record CLP Lemma 3.1(a) and the vanishing of every H^20(M_6;V_lambda) at (6,6,26), giving W_26 H^26/(Phi+Psi) = 0 and, with CLM-0136-4, the equality W = Psi. The attempt correctly labels this as not required: Section 5 plus Section 7 already type the group, so no unrecorded SRC-0002 excerpt is load-bearing. Confirmed as stated but non-load-bearing for the theorem.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-7",
+      "note": "This is the only step that supplies Hodge type, and it is used exactly at the recorded boundary. Checked against the campaign claims ledger: THM-0005 (verification_status cross_checked, truth_status established) states that M_{g,n} has CKgP and tautological Chow ring for n <= c(g) with c(3)=c(4)=11, c(5)=7, c(6)=5, c(7)=3, with recorded scope object 'open M', degree 'all pure-weight pieces', coefficients Q, locators SRC-0002 Table 1 p.12 and Proposition 4.5 (via Lemma 4.3). The attempt applies it at (g,n)=(6,5) with 5 = c(6), inside the bound, and explicitly refuses to apply it at n=6. FND-0195 independently records the same table with Tate_range 'n-1 <= c(g)', which at n=6 is the identical instance. Algebraicity is obtained first and type (12,12) = Q(-12) read off from codimension 12; no Tate-to-algebraic upgrade occurs. Degree 24 is vcd(M_{6,5})-1, but the FND-0195 exclusion of 'degree vcd-1' concerns the vcd peel at the target degree (the (8,0)/(8,1) obstruction), not the CKgP input, which FND-0195 itself applies at W_{vcd-2}H^{vcd-2}(M_{g,n-1}).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-8",
+      "note": "Cup product Q(-1) tensor Q(-12) -> Q(-13) is an MHS morphism, and pullback along the smooth forgetful maps is of type (0,0), so Phi_{6,6}^24 is a quotient of a sum of Q(-12) inside W_24 H^24(M_{6,6}) and Psi_{6,6}^26 a quotient of a sum of Q(-13) inside W_26 H^26(M_{6,6}). Purity and polarizability of both targets checked: for smooth M_{6,6} the group H^m has weights in [m,2m], so W_m H^m is the lowest piece and pure, and it is the image of H^m of a smooth proper compactification, hence a quotient of a polarizable pure structure. Semisimplicity of polarizable pure Q-Hodge structures of a fixed weight (FND-0033's principle, applied here at weights 24 and 26 rather than -16) then upgrades the Tate quotient to a Tate direct sum, so this is an honest Hodge-structure isomorphism and not a semisimplification.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-9",
+      "note": "Duality and twist arithmetic verified end to end. d = 3*6-3+6 = 21, 2d-16 = 26, so H^{BM}_{16} = H^{26}(21); weight -16 = 26 - 2*21 corresponds to W_26 on the ordinary side, matching FND-0001 and the task target dictionary (open_bm_degree 16, open_bm_weight -16, ordinary_cohomology_degree 26, poincare_twist 21). Q(-13)(21) = Q(8), of weight -16 and type (-8,-8), matching open_bm_tate_type. Everything is stack-level rational Betti/MHS on the smooth separated DM stack M_{6,6}; no coarse-space identification and no integral statement is used, so the stack-versus-coarse and Q-versus-Z attacks find no purchase. Rank r is not computed and is not needed: the empty sum is admitted by the theorem statement.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-28",
+  "finding_candidates": [
+    {
+      "case": {
+        "g": 6,
+        "n": 6
+      },
+      "key": "c66-full-tate-type-carried-solely-by-boundary-ckgp-instance",
+      "kind": "structural",
+      "statement": "In the fibre-product/vcd peel route to W_26 H^26(M_{6,6};Q), the split between generation and Hodge type is total: Sections corresponding to the lowest-weight surjection, the smooth-proper Kunneth splitting, the Harer local-coefficient vanishing at base degree >= 20, the omega-class disposals, and Phi_{6,6}^26 = 0 together establish only the generation statement W_26 H^26(M_{6,6};Q) = Psi_{6,6}^26, which is type-free and compatible with an arbitrary non-Tate pure weight-26 structure. All type information enters through the single instance W_24 H^24(M_{6,5};Q) = Q(-12)^a, i.e. THM-0005/FND-0195 at the boundary value n-1 = 5 = c(6), applied to the open stack at degree vcd(M_{6,5}) - 1. Consequently the entire (6,6) Tate conclusion via this route has zero slack in the CKgP table: any downward revision of c(6) to 4, or any restriction of THM-0005's recorded scope from the open M_{g,n} to Mbar_{g,n}, refutes the conclusion without touching any other step. Reviewers and provers should treat that one instance, not the peel, as the locus of risk, and any future artifact reusing this route should be required to cite it at exactly the recorded scope rather than as a generic CKgP appeal."
+    },
+    {
+      "case": {
+        "g": 6,
+        "n": 6
+      },
+      "key": "c66-full-peel-route-independent-of-ce-support-dag",
+      "kind": "adjudication",
+      "statement": "The closed-universal-curve peel establishes the exact (6,6) lowest-weight target without any input from the Casnati-Ekedahl support-filtration branch of the campaign DAG (C66-GEO-Z, C66-GEO-H0, C66-GEO-COMP, C66-SUPPORT-INTERFACE, C66-SUPPORT-FILTRATION, C66-TATE-SUPPORT, C66-TATE-ASSEMBLY): its inputs are FND-0001, FND-0033, FND-0036, FND-0195, FND-0196, FND-0197 and THM-0005/SRC-0002 only. FND-0050's general clause that 'any complete attack on the exact lowest-weight target for (g,n)=(6,6) must still confront the packet residual geometry' therefore cannot be read as a proof-theoretic requirement without contradicting the corroborated FND-0195, which reaches the same conclusion by the same non-CE route. FND-0050 should be re-scoped to its witness (an argument that omits both the CE analysis and any independent computation of the whole ordinary target cannot certify absence of a non-Tate summand), and reviewers should not treat DAG position or omission of the tetragonal geometry as an adverse structured check against an artifact that computes the exact ordinary group independently. Symmetrically, FND-0057's bite is the empty proof_dependencies list, not the absence of the CE chain."
+    }
+  ],
+  "id": "REV-0187",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "d6ee01c0d83fec190948ca61ffe703be092a635d0c244d950f169a27407c5d23",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "FND-0001",
+      "note": "Load-bearing in Sections 0 and 8; used exactly as recorded, with d=21 and twist (21).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Load-bearing in Sections 7 and 8. The finding is recorded at weight -16 for the target row; the attempt applies the same semisimplicity principle at weights 24 and 26, which is the general statement about polarizable pure Q-Hodge structures and is the identical usage made inside FND-0195. No extension of the finding beyond its mathematical content.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0035",
+      "note": "Used only negatively, as a constraint. Verified that the argument never infers vanishing from 26 = vcd(M_{6,6}): the two vcd applications are H^26(M_{6,5}) with 26 > 25 and H^20(M_6;L) with 20 > 19. The blocked inference at the target degree is genuinely absent.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0036",
+      "note": "Load-bearing for Phi_{6,6}^26 = 0 (Section 4) and for the slot-0 error terms in Section 5.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0195",
+      "note": "Load-bearing for the CKgP table instance n-1 = 5 = c(6). Worth recording that FND-0195 already asserts the exact conclusion at (6,6) ('W_26 H^26(M_{6,6};Q) is a finite direct sum of Q(-13)'), so ATT-0136 is a written-out proof of an already packet-corroborated statement rather than a new mathematical input; that does not weaken the artifact against its own theorem_statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0196",
+      "note": "Load-bearing in Sections 3 and 5. All three disposals are used as written steps; Disposal A alone suffices at g=6, so the artifact does not depend on the projector shorthand of disposal (2) or on the induction of disposal (3).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0197",
+      "note": "Load-bearing in Section 1, used only in the containment direction the finding licenses, and with the finding's exclusions (kernel, Gysin for diagonals, Schur-Weyl, Kunneth summands as summands of R^* f_* Q for the punctured map) all respected.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0198",
+      "note": "Cited only for the optional Section 6 second proof of W = Psi. Correct as recorded; non-load-bearing for the theorem, since Sections 1, 5 and 7 already type the group.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0005",
+      "note": "Not restated in packet C66-001-v6, so verified directly against the campaign claims ledger (repo/data/claims.jsonl): 'Published CKgP marking bounds through genus 7', scope object 'open M', degree 'all pure-weight pieces', n <= c(g) with c(6)=5, source SRC-0002 Table 1 p.12 and Proposition 4.5, verification_status cross_checked, truth_status established, conditional false. The attempt's usage (n=5 exactly, open stack, pure-weight piece, not applied at n=6) lies inside every recorded scope field, and FND-0195 records the same table independently.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0002",
+      "note": "Load-bearing only through THM-0005. The packet's own primary locator excerpt ('R^*(M_{g,n}) ... for n <= c(g), by [5, Theorem 1.4] and Theorem 1.10. The following is a consequence of Lemma 4.3.') is consistent with the Table 1 / Proposition 4.5 / Lemma 4.3 citation chain the attempt uses; no unrecorded excerpt is relied on.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0136-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is that the entire Tate conclusion hangs on one boundary-exact input and that Sections 1-6 supply no type information whatsoever. Sections 1-6 prove only a generation statement, W_26 H^26(M_{6,6};Q) = Psi_{6,6}^26; they are compatible with Psi carrying an arbitrary non-Tate pure weight-26 structure. Every claim about Hodge type enters at the single step W_24 H^24(M_{6,5};Q) = Q(-12)^a, which needs the CKgP bound applied at n = 5 = c(6) on the OPEN stack, at degree 24 = vcd(M_{6,5}) - 1. There is exactly zero slack: if c(6) were 4, or if the recorded bound were about Mbar_{6,n} rather than the open M_{6,n}, or if the CKgP-to-pure-weight-algebraicity implication cost one marking, the theorem would fail with no other step disturbed. I pressed this and it holds: THM-0005 in the claims ledger records scope 'open M', 'all pure-weight pieces', n <= c(g) with c(6)=5, cross_checked and unconditional, and FND-0195 independently records the same table as Tate_range n-1 <= c(g) and applies it at precisely this instance. The attempt also correctly refuses the adjacent overreach of applying THM-0005 at n=6. The second attack, the FND-0196 slot-1 cross term b_s that sank the ATT-0135 fibre-restriction slogan, also fails: Morita's theorem in its rational form gives H^1(Mod_6;H^1(Sigma_6;Q)) = 0, which I re-derived from rk H^2(M_{g,1};Q) = 2 with basis {lambda, omega}, so b_s = 0 identically and the identification needs neither the projector shorthand nor the induction. The third attack is procedural: the campaign DAG routes C66-FULL through the CE support filtration, and FND-0050 states that any complete (6,6) attack must confront the residual tetragonal geometry, which this artifact bypasses wholesale. That objection cannot be load-bearing against the mathematics, because FND-0195 is itself corroborated and states the same conclusion by the same non-CE peel; the tension is between two packet findings, not a defect in ATT-0136. Remaining attack surfaces checked and found clean: Poincare duality and every twist (d=21, 2d-16=26, Q(-13)(21)=Q(8), weight -16); Kunneth base-degree bookkeeping (26-|i| >= 20 > 19 for |i| <= 6, and the six-slot combinatorics forcing some i_s = 2 once |i| >= 7); degeneration versus an actual splitting (the MHS splitting is by algebraic correspondences, not by E_2-degeneration alone, so no differential or extension is silently assumed); semisimplification versus isomorphism (purity plus polarizability of the lowest-weight pieces makes the Tate quotients honest summands); stack versus coarse and Q versus Z (no coarse or integral identification appears; finite quotients enter only through rational Hochschild-Serre); graph automorphism invariants versus coinvariants (Mbar_{6,6}, strata and decorated graph complexes never appear, so FND-0051 is not engaged); predicted motives used as theorems (none; algebraicity is supplied by CKgP before any Tate claim, so the 'pure Tate silently upgraded to algebraic' failure mode is inverted rather than committed). Task binding verified: target_attempt_id ATT-0136, subproblem C66-FULL, packet_id C66-001-v6, and both packet_sha256 d6ee01c0... and packet_binding_sha256 99a80568... agree between TASK.json and the attempt, and the attempt's theorem_statement and target dictionary reproduce the task's exactly. Verdict confirmed for the submitted theorem_statement only; this confirms the lemma as stated and does not by itself discharge the campaign's other RED-0001 pairs, which the attempt explicitly disclaims in Section 10.",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "confirmed"
+}

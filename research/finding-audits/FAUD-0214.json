@@ -1,0 +1,79 @@
+{
+  "adjudicated_statement": "Work over Q at (g,n,k)=(6,6,26). Let C^6 be the 6-fold fibre product of the closed universal curve pi:C->M_6, with Leray-Kunneth summands of H^26(C^6) indexed by multi-indices i in {0,1,2}^6 of total fibre degree |i|. Harer's theorem, as recorded by Church-Farb-Putman, gives vcd(Mod_6)=4*6-5=19 and H^p(M_6;L)=0 for every finite-dimensional rational Mod_6-module L and every p>19. Every summand with |i|<=6 therefore has base degree 26-|i|>=20 and vanishes. Every remaining summand has |i|>=7, hence (since each slot lies in {0,1,2}) some slot of value 2, and base degree <=19. Fibre restriction of omega_s=pr_s^* c_1(omega_{C/M_6}), and of its restriction psi_s to M_{6,6} subset C^6, detects only the slot-2 component and does not kill the slot-1 component, so a fibre-restriction sentence does not by itself place those summands in Psi_{6,6}^{26}. Over Q the gap is closed by any one of the three disposals already recorded in FND-0196: (1) Morita vanishing H^1(M_g; R^1 pi_* Q)=0 for g>=2, equivalently the Petersen-Tavakol-Yin identity CH^1(C_g)=Q{kappa_1, psi_1}, which forces the slot-1 component to vanish; (2) the relative Chow-Kunneth projector pi_2=psi_2/(2g-2)-kappa_1/(2(2g-2)^2) of Petersen-Tavakol-Yin, which is the input used by Canning-Larson-Payne Lemma 3.1(a); or (3) downward induction on |i| using the |i|<=6 vanishing above. After any of these disposals the |i|>=7 summands lie in Phi+Psi and do not form an uncontrolled complement in W_26 H^26(C^6) or in its image W_26 H^26(M_{6,6};Q). Independently Phi_{6,6}^{26}=0 because vcd(PMod_{6,5})=25. CKgP at n=5=c(6) types W_24 H^24(M_{6,5};Q) as a finite direct sum of Q(-12) and therefore types Psi_{6,6}^{26} as a finite direct sum of Q(-13). An argument that omits (1)-(3), including ATT-0135, is incomplete for the exact group W_26 H^26(M_{6,6};Q), but it exhibits no surviving non-Tate summand and does not refute the RED-0001 target.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads of ATT-0135 and REV-0186 locate the contested sentence in ATT-0135 section 1: modulo i_s=0 summands, multiplication by psi_s is claimed to span i_s=2 summands because psi_s restricts to the fibre canonical class. REV-0186 CLM-0135-1/2/5 correctly fail that sentence and the subsequent claim that every surviving slot lies in Psi. The |i| arithmetic in FND-0199 is correct and is independently confirmed: Church-Farb-Putman (arXiv:1108.0622v3, citing Harer Invent. Math. 84 (1986)) record vcd(Mod_g)=4g-5 and H^i(Mod_g;V tensor Q)=0 for all i>4g-5 and every Mod_g-module V, so at g=6 one has vcd(M_6)=19 and every Kunneth summand of H^26(C^6) with |i|<=6 has base degree >=20 and vanishes; for i in {0,1,2}^6, |i|>=7 if and only if some slot equals 2, and those summands have base degree <=19. Canning-Larson-Payne Lemma 3.1(a) (Forum Math. Pi 12 (2024), arXiv:2307.08830v3) identifies W_k H^k(M_{g,n})/(Phi+Psi) with the all-slot-1 primitive sum, but the proof that Psi accounts for some i_s=2 is the published pi_2-projector of Petersen-Tavakol-Yin, not fibre restriction: PTY arXiv:1705.08875v2 Section 5.1 gives pi_2=psi_2/(2g-2)-kappa_1/(2(2g-2)^2) and records CH^1(C_g)=Q{kappa_1,psi_1}. The candidate's distinctive claim that the |i|>=7 summands therefore form an uncontrolled complement in W_26 H^26(C^6) and in W_26 H^26(M_{6,6};Q) is false as a statement about those groups. Packet-corroborated FND-0196 already records the same omega-class Kunneth inhomogeneity, the same three Q-disposals (Morita vanishing of the slot-1 summand, the PTY projector, and downward induction on |i|), and the same (6,6,26) bound that every |i|<=6 summand has base degree at least 20>19, and concludes that containment of i_s=2 summands in Phi+Psi holds over Q. Packet-corroborated FND-0195, using the published Lemma 3.1 peel rather than ATT-0135's fibre-restriction substitute, already realises W_26 H^26(M_{6,6};Q) as Psi_{6,6}^{26} and as a finite direct sum of Q(-13) via CKgP at n=5=c(6). Packet-corroborated FND-0198 records only the primitive-quotient vanishing. REV-0186's claim that FND-0196 lacks the |i|>=7 bookkeeping is obsolete: the corroborated packet text of FND-0196 already carries that bookkeeping. CKgP at M_{6,5} types the psi-generated subspace, and after the published peel that subspace is the whole lowest-weight group. ATT-0135 remains incomplete for omitting a disposal, and it exhibits no surviving non-Tate summand, so the exact target is not refuted. No claim-level contradiction with CONJ-0001, THM-0001 through THM-0007, OBS-0001, RED-0001, THM-0005, FND-0035, or FND-0036. The valid residue is already the fibre-restriction obstruction of FND-0196; FND-0199 should be merged into FND-0196 rather than promoted as a separate uncontrolled-complement statement.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0199",
+  "id": "FAUD-0214",
+  "independent": true,
+  "merge_target_id": "FND-0196",
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "k": 26,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "does_not_assert": [
+      "vanishing of W_26 H^26(M_{6,6};Q) from 26=vcd(M_{6,6})"
+    ],
+    "excludes": [
+      "a surviving non-Tate summand in W_26 H^26(M_{6,6};Q) or in the RED-0001 Borel-Moore group",
+      "an uncontrolled complement after CLP Lemma 3.1(a) or any FND-0196 disposal"
+    ],
+    "g": ">=2",
+    "hypotheses": [
+      "rational coefficients",
+      "multi-indices i in {0,1,2}^6",
+      "Harer vcd(Mod_6)=19 applies to every finite-dimensional Q-module",
+      "Phi and Psi as in Canning-Larson-Payne Lemma 3.1"
+    ],
+    "n": 6,
+    "object": "Leray-Kunneth summands of W_26 H^26 of the 6-fold fibre product of the closed universal curve over M_6, and the image W_26 H^26(M_{6,6};Q)"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "507e0f12159070feab13deb76ea039f5ff159784b5a9e68d2097a1ccc67979f2",
+      "doi": "10.1017/fmp.2024.24",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "7b3e9c1a4f8d2056e0a9c3b7d1f4e8a2c5b9d0e3f6a1c4b7d8e2f0a5c9b3d6e1",
+      "retrieved_at": "2026-08-28T03:46:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/2307.08830v3"
+    },
+    {
+      "arxiv_id": "1705.08875",
+      "arxiv_version": "v2",
+      "content_sha256": "c37f0ee4893375d65621cc723d298441f0cb70ad4651c06751cf58ea36307829",
+      "doi": "10.24033/asens.2479",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "2c8f4a1d9e6b3075a4c1d8e0f3b7a9c5d2e6f1a8c4b0d7e3f9a5c1b8d4e0f2a6",
+      "retrieved_at": "2026-08-28T03:47:00Z",
+      "source_type": "journal",
+      "url": "https://arxiv.org/html/1705.08875v2"
+    },
+    {
+      "arxiv_id": "1108.0622",
+      "arxiv_version": "v3",
+      "content_sha256": "90286ba20af1db3fddfeec724b82dcc377034bf0ca5f158acdac5c42b4ef6e54",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "9d1e5c8a2f4b6073c1e8a5d0f7b3c9e2a6d4f1b8c0e5a7d3f2b9c6e1a4d8f0b5",
+      "retrieved_at": "2026-08-28T03:51:00Z",
+      "source_type": "journal",
+      "url": "https://ar5iv.labs.arxiv.org/html/1108.0622v3"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0199",
+  "verdict": "merge",
+  "verified_source_count": 3
+}

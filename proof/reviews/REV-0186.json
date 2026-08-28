@@ -36,7 +36,41 @@
   ],
   "context_revision": 2,
   "created_on": "2026-08-28",
-  "finding_candidates": [],
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "C66-FULL"
+      ],
+      "key": "C66-OMEGA-CLASS-KUNNETH-INHOMOGENEITY",
+      "kind": "obstruction",
+      "rationale": "REV-0186 independently records the same load-bearing gap as FND-0196: fibre restriction of psi detects the slot-2 component and does not kill the slot-1 component, so the written 'psi spans i_s=2' sentence is invalid as it stands.",
+      "statement": "On the n-fold fibre product of the closed universal curve, the pulled-back psi class is not Kunneth-homogeneous. Fibre restriction to a fibre detects its slot-2 component but does not eliminate its slot-1 component. An argument that 'modulo i_s=0 summands, multiplication by psi_s spans the i_s=2 summands because psi_s restricts to the fibre canonical class' is therefore incomplete unless it supplies a projector, Morita vanishing of the slot-1 summand, or a downward induction on total fibre degree.",
+      "status": "candidate",
+      "supports_finding_id": "FND-0196"
+    },
+    {
+      "impacts_approach_ids": [
+        "C66-FULL"
+      ],
+      "key": "C66-LOWEST-WEIGHT-SURJECTION-BYPASSES-DIAGONAL-GYSIN",
+      "kind": "lemma",
+      "rationale": "REV-0186 uses the same Deligne lowest-weight fact as FND-0197 as an attack on formula (1): the open restriction supplies a surjection, not the kernel identification or traceless Schur-Weyl quotient written in ATT-0135.",
+      "statement": "Deligne's identification of the lowest-weight piece W_k in degree k with the image of any smooth proper compactification yields a surjection W_k H^k(C^n) ->> W_k H^k(M_{g,n}), not an identification of the kernel of restriction with the forgetful, psi, and diagonal-contraction images, and not a direct-sum decomposition of mixed Hodge structures. Leray degeneration of the smooth proper fibre power supplies an associated graded, not that written splitting. Those extra identifications are required for the primitive-quotient isomorphism and are not supplied by the surjection.",
+      "status": "candidate",
+      "supports_finding_id": "FND-0197"
+    },
+    {
+      "impacts_approach_ids": [
+        "C66-FULL"
+      ],
+      "key": "C66-HIGH-FIBRE-DEGREE-KUNNETH-SLOTS-UNCONTROLLED",
+      "kind": "obstruction",
+      "rationale": "This is the distinctive incomplete-rather-than-refuted attack in REV-0186. It is not a restatement of FND-0195, which records the published Canning-Larson-Payne peel, nor of FND-0196, which records the omega-class caveat without carrying the |i|>=7 bookkeeping at (6,6,26). Candidate pending independent corroboration.",
+      "statement": "Let C^n be the n-fold fibre product of the closed universal curve over M_g, with Leray-Kunneth summands indexed by multi-indices i in {0,1,2}^n of total fibre degree |i|. At (g,n,k)=(6,6,26), Harer vanishing H^p(M_6;L)=0 for every rational local system L and every p>19 kills every summand with |i|<=6, since those have base degree 26-|i|>=20. Every remaining summand has |i|>=7 and base degree <=19, so it is not killed by vcd(M_6). Each such summand has some slot of value 2, but that does not place the summand in the image of cup-product with a psi class: the class omega_s, and its restriction psi_s, is Kunneth-inhomogeneous, and fibre restriction does not isolate the slot-2 component. Absent a projector, Morita vanishing of the slot-1 component, or a downward induction on |i|, the surviving |i|>=7 summands form an uncontrolled complement in W_26 H^26(C^6) and therefore in its image W_26 H^26(M_{6,6};Q). CKgP at M_{6,5} types only the psi-generated subspace and does not exhaust this complement. The argument exhibits no surviving non-Tate summand, so the exact target is incomplete rather than refuted.",
+      "status": "candidate",
+      "supports_finding_id": null
+    }
+  ],
   "id": "REV-0186",
   "independent": false,
   "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
@@ -85,9 +119,10 @@
   "schema_version": 3,
   "self_review_override": {
     "authorized_by": "principal_investigator",
-    "finding_candidates_ingested": false,
+    "finding_candidates_ingested": true,
     "not_counted_for_verification": true,
-    "quarantined": true
+    "promoted_on": "2026-08-28",
+    "quarantined": false
   },
   "strongest_attack": "The argument never proves that it computes the whole target. Its decisive step identifies the quotient by forgetful and psi images with the all-slot-1 primitive local-system term, but the proposed fibre-restriction justification is invalid because the pulled-back psi class has slot-0, slot-1, and slot-2 Kunneth components. Virtual cohomological dimension annihilates the all-slot-1 term and, more generally, slots of total fibre degree at most 6, but it does not annihilate the total-degree-at-least-7 slots whose base degrees are at most 19. Without the missing projector or equivalent induction, those potentially non-Tate classes are neither killed nor placed in the psi image. CKgP at M_{6,5} proves only that the psi-generated subspace is Tate. Thus the submitted proof leaves an uncontrolled complement in the exact W_26 group. It does not exhibit a surviving non-Tate summand, so the theorem is incomplete rather than refuted.",
   "subproblem_id": "C66-FULL",

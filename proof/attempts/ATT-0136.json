@@ -1,0 +1,200 @@
+{
+  "argument_markdown": "This attempt proves the exact theorem. It rewrites the ATT-0135 fibre-product / vcd peel so that the load-bearing identification previously left as a fibre-restriction slogan is written out. No conclusion depends on ATT-0135. The Casnati-Ekedahl support-filtration DAG is unused: the argument computes the whole exact ordinary group, then converts by Poincare duality.\n\nWork throughout over C with Q-coefficients, on Deligne-Mumford stacks. Write X_{g,n} := M_{g,n} for the smooth separated finite-type moduli stack of smooth genus-g curves with n ordered marked points. Let pi : C -> M_g be the universal closed curve and let C^n be its n-fold fibre product over M_g. The open immersion X_{g,n} subset C^n is the complement of the pairwise diagonals. All maps of mixed Hodge structures below are Q-linear; no integral comparison or coarse-space identification is used.\n\n0. Dictionary.\n\nThe stack X_{6,6} is smooth of pure complex dimension d = 3*6-3+6 = 21. Poincare duality for smooth finite-type Deligne-Mumford stacks (packet FND-0001) gives an isomorphism of mixed Hodge structures\n\n  W_{-16} H^{BM}_{16}(X_{6,6};Q)  ~=  W_{26} H^{26}(X_{6,6};Q)(21).\n\nThe group H^{26}(X_{6,6};Q) has weights at least 26, so W_{26} is its lowest-weight piece and is pure polarizable of weight 26. It therefore suffices to prove that W_{26} H^{26}(X_{6,6};Q) is a finite direct sum of Q(-13): the twist Q(-13)(21) = Q(8) then yields the displayed Borel-Moore statement. The case of rank zero is allowed. A disproof would have to exhibit a surviving non-Tate summand in this exact group; none appears.\n\nFor each forgetful map pi_i : X_{g,n} -> X_{g,n-1} write\n\n  Phi_{g,n}^k  :=  sum_i pi_i^* W_k H^k(X_{g,n-1};Q),\n\n  Psi_{g,n}^k  :=  sum_i psi_i Phi_{g,n}^{k-2},\n\nwhere psi_i is the tautological cotangent class of the i-th marking, an algebraic divisor class of type Q(-1).\n\n1. Lowest-weight surjection (containment direction only).\n\nLet k be any integer. Restriction along the open immersion X_{g,n} subset C^n induces a surjection of mixed Hodge structures\n\n  W_k H^k(C^n;Q)  ->>  W_k H^k(X_{g,n};Q).\n\nThis is Deligne's identification of the lowest-weight piece in degree k with the image of any smooth proper compactification (Theorie de Hodge II, Corollaire 3.2.17), applied to a compactification of C^n, which is simultaneously a compactification of the open X_{g,n}; restriction factors that common image. Packet FND-0197 records the stack-level statement and the scope: the surjection does not identify the kernel, does not require Gysin exactness for the diagonals, and does not assert that Kunneth summands of H^*(C^n) are summands of R^* f_* Q for the non-proper map f : X_{g,n} -> M_g. The fibres of that non-proper map are configuration spaces, whose R^1 is mixed of weights 1 and 2 (FND-0020, FND-0037); those hazards are not incurred, because every Leray-Kunneth computation below is for the smooth proper map C^n -> M_g, whose R^1 is the pure weight-1 symplectic local system of the closed universal curve.\n\nConsequently any generation, vanishing, or Tate-type upper bound on W_k H^k(C^n) yields the same upper bound on W_k H^k(X_{g,n}). The submitted theorem uses only this containment. The symplectic Schur-Weyl / traceless identification of a primitive quotient is not load-bearing and is not used.\n\n2. Smooth-proper Kunneth of C^n -> M_g, as mixed Hodge structures.\n\nThe morphism f : C^n -> M_g is smooth and proper. Deligne's degeneration theorem therefore gives E_2-degeneration of its Leray spectral sequence. Relative Kunneth for the fibre product, together with R^j pi_* Q = 0 for j not in {0,1,2}, yields a decomposition of the associated graded of H^k(C^n) into summands\n\n  H^{k-|i|}(M_g; tensor_{s=1}^n R^{i_s} pi_* Q),     i in {0,1,2}^n,   |i| := i_1+...+i_n.\n\nDegeneration alone splits only the associated graded. An actual splitting of mixed Hodge structures is supplied by the relative Chow-Kunneth projectors of Petersen-Tavakol-Yin (Ann. Sci. Ec. Norm. Super. 54 (2021), Sections 5.1 and 5.2.2). These are algebraic correspondences built from the Q-divisor class c_1(omega_{C/M_g})/(2g-2), hence morphisms of mixed Hodge structures, so W_k is additive over the decomposition. Explicitly, the projector onto the R^2 summand of a single factor is\n\n  pi_2  =  psi_2 / (2g-2)  -  kappa_1 / (2 (2g-2)^2),\n\nwhich already lies in the Q-span of a psi class and a pullback from M_g. Write A_i for the resulting direct summand of W_k H^k(C^n;Q) indexed by i. This is the Kunneth splitting used below. (Canning-Larson-Payne Lemma 3.1 cites these projectors; the present section uses them directly and does not treat Lemma 3.1 as an unproved black box.)\n\n3. The class omega_s is not Kunneth-homogeneous.\n\nWrite omega_s := pr_s^* c_1(omega_{C/M_g}) on C^n. Its restriction to X_{g,n} is the tautological class psi_s. Packet FND-0196: omega_s decomposes as a_s + b_s + c_s with\n\n  a_s in H^2(M_g)                  (slot value 0),\n  b_s in H^1(M_g; R^1 pi_* Q)      (slot value 1),\n  c_s in H^0(M_g; R^2 pi_* Q)      (slot value 2).\n\nThe fibre restriction of omega_s is the canonical class of degree 2g-2, so c_s equals 2g-2 times the generator of R^2 pi_* Q ~= Q(-1). Only c_s induces the isomorphism from the i_s=0 summand onto the i_s=2 summand. Cup-product with a_s preserves the multi-index and raises base degree by 2; cup-product with b_s raises the s-th slot by 1. Therefore the sentence \"modulo summands with some slot 0, multiplication by psi_s spans the i_s=2 summands because psi_s restricts to the fibre canonical class\" is incomplete as written: it does not dispose of b_s. That is the exact gap of ATT-0135 Section 1. The three disposals of FND-0196 are recorded here as used steps, not as unwritten repairs.\n\nDisposal A (Morita vanishing of the slot-1 term). For g>=2 one has H^1(Mod_g; H^1(Sigma_g; Q)) = 0. This is the rational form of Morita's theorem H_1(Mod_g; H_1(Sigma_g; Z)) ~= Z/(2g-2) (Proc. Japan Acad. Ser. A 62 (1986), Theorem 1; Hain-Reed, Remarks on Morita). Equivalently H^2(C; Q) has basis {lambda, omega}, so the H^1(M_g; V) summand of H^2(C) is zero. Hence b_s = 0 identically and omega_s = a_s + c_s. Modulo slot-0 summands, cup-product with omega_s coincides with cup-product with c_s.\n\nDisposal B (relative Chow-Kunneth projector). The projector pi_2 displayed in Section 2 already realises the i_s=0 to i_s=2 isomorphism, and already lies in the Q-span of a psi class and a pullback from M_g, hence lands in Psi+Phi after restriction to X_{g,n}. This is the identification used in Canning-Larson-Payne Lemma 3.1(a).\n\nDisposal C (downward induction, specialised at the campaign point). This is written in Section 5, after the independent vanishing of Phi_{6,6}^{26}. It does not use Disposal A.\n\nAny one of A, B, C is sufficient for the theorem. All three are used, so a reviewer who declines one still has the others.\n\n4. The forgetful contribution Phi_{6,6}^{26} vanishes, independently of the primitive quotient.\n\nFor n=5 one has vcd(PMod_{6,5}) = vcd(Mod_{6,5}) = 4*6-4+5 = 25. Choose a torsion-free normal finite-index subgroup Gamma of PMod_{6,5}; then cd(Gamma)=25, so H^{26}(Gamma; Q)=0. Hochschild-Serre for the finite quotient is exact over Q, hence H^{26}(X_{6,5}; Q)=0. Packet FND-0036 is this vanishing. Therefore\n\n  Phi_{6,6}^{26}  =  sum_i pi_i^* W_{26} H^{26}(X_{6,5}; Q)  =  0.     (4)\n\nNo vanishing is drawn from 26 = vcd(X_{6,6}); that inference is the blocked route FND-0035 and is not used. The same finite-index transfer with nontrivial coefficients is used only in Section 5, at degree 20 on M_6, where 20>19.\n\n5. Surviving Kunneth slots at (6,6,26) lie in Psi.\n\nSpecialise Section 2 at (g,n,k)=(6,6,26). Harer's formula gives vcd(Mod_6)=4*6-5=19. For every finite-dimensional rational Mod_6-module L, a torsion-free normal finite-index subgroup Gamma of Mod_6 has cd(Gamma)=19, so H^{20}(Gamma; L)=0, and rational Hochschild-Serre for the finite quotient gives H^{20}(Mod_6; L)=0. Stack cohomology identifies H^*(M_6; L) with H^*(Mod_6; L). Thus every Kunneth summand A_i of W_{26} H^{26}(C^6) with |i|<=6 has base degree 26-|i| >= 20 > 19 and vanishes, for every rational local system on M_6. In particular the all-slot-1 summand (the primitive term) vanishes, without any traceless refinement.\n\nEvery remaining multi-index has |i|>=7. Each slot lies in {0,1,2} and there are six slots, so a multi-index with no slot equal to 2 has |i|<=6. Therefore every surviving A_i has some s with i_s=2.\n\nFix such an i and such an s. Write i' for i with slot s reset to 0, and write i'' for i with slot s reset to 1, so |i''|=|i|-1. Let B_{i'} be the corresponding summand of W_{24} H^{24}(C^6) (slot s = 0). Cup-product with omega_s raises degree by 2 and decomposes as in Section 3, whence\n\n  A_i  =  c_s B_{i'}    as a summand of    omega_s B_{i'} + A_{i'} + A_{i''}.\n\nRestrict to X_{6,6}.\n\n- The class omega_s B_{i'} restricts into psi_s times a pullback of W_{24} H^{24}(X_{6,5}), because slot s = 0 means B_{i'} is pulled back along the s-th factor, and restriction of that pullback to X_{6,6} factors through X_{6,5}. This is a summand of Psi_{6,6}^{26}.\n- The error A_{i'} has slot s = 0, so its restriction factors through W_{26} H^{26}(X_{6,5})=0 by (4).\n- The error A_{i''} has strictly smaller total fibre degree. Proceed by downward induction on |i|. The base of the induction is |j|<=6, already shown to vanish.\n\nThis is FND-0196 Disposal C, specialised at (6,6,26), and is the written answer to the FND-0199 attack (surviving |i|>=7 slots uncontrolled). Combined with the lowest-weight surjection of Section 1,\n\n  W_{26} H^{26}(X_{6,6}; Q)  subset  Psi_{6,6}^{26}.     (5)\n\n(The same argument with Disposal A in place of the induction: b_s=0, so modulo slot-0 one has omega_s = c_s, and every i_s=2 summand is c_s times the slot-reset class; slot-0 errors die by (4). Disposal B is the projector form of the same identification.)\n\n6. Independent second proof of (5), via the published primitive-quotient formula.\n\nCanning-Larson-Payne, Forum Math. Pi 12 (2024), Lemma 3.1(a) (packet FND-0195, FND-0198) gives an isomorphism of pure weight-k Hodge structures\n\n  W_k H^k(X_{g,n}; Q) / (Phi_{g,n}^k + Psi_{g,n}^k)\n    ~=  direct_sum_{|lambda|=n} W_k H^{k-n}(M_g; V_lambda) tensor V_{lambda^T},\n\nwhere V_lambda is the irreducible symplectic local system of weight |lambda|. The published proof uses the closed universal curve, smooth-proper Leray degeneration, the PTY projectors of Section 2, and symplectic contractions of diagonals; it does not use a fibre-restriction slogan. At (g,n,k)=(6,6,26) the right-hand side is a sum of W_{26} H^{20}(M_6; V_lambda). Section 5 already gives H^{20}(M_6; L)=0 for every rational local system L, so the primitive quotient vanishes (FND-0198). Combined with (4) this yields W_{26} H^{26}(X_{6,6}) = Psi_{6,6}^{26} as an equality of subspaces, not merely a containment. This section is not required for the theorem: the containment (5) plus Section 7 already types the whole group. It is recorded so that a reviewer who prefers the published lemma to the induction may use it, and so that the SRC-0002 locator for Lemma 3.1 is the packet-visible findings FND-0195 and FND-0198 rather than an unrecorded excerpt.\n\n7. CKgP types Psi_{6,6}^{26} as Q(-13).\n\nThe verified theorem THM-0005 records c(6)=5 and applies on the open stack X_{g,n} to every pure-weight piece, for n<=c(g). Thus it applies on the nose to X_{6,5}. Its mechanism is Canning-Larson-Payne Table 1 together with Proposition 4.5 via Lemma 4.3: CKgP implies that the cycle-class map surjects onto every W_m H^m, and in fact W_m H^m(X_{6,5}) = RH^m(X_{6,5}). In degree 24 the generating classes have codimension 12, hence Hodge type (12,12)=Q(-12). Polarizable pure Q-Hodge structures of weight 24 are semisimple (FND-0033), so\n\n  W_{24} H^{24}(X_{6,5}; Q)  ~=  Q(-12)^{direct_sum a}\n\nfor some finite a>=0. Pullback along the smooth forgetful maps is of type (0,0), so Phi_{6,6}^{24} is a finite direct sum of Q(-12). Each psi_i is algebraic of type Q(-1). Therefore Psi_{6,6}^{26}, being the sum of the images of the cup-product maps Q(-1) tensor Phi_{6,6}^{24} -> W_{26} H^{26}(X_{6,6}), is a quotient of a finite direct sum of Q(-13). The target is pure polarizable of weight 26, hence semisimple (FND-0033 again), so a quotient of a Tate sum is a Tate sum of the same type:\n\n  W_{26} H^{26}(X_{6,6}; Q)  ~=  Q(-13)^{direct_sum r}     (6)\n\nfor some finite r>=0, using (5). No inference from mere Tate type to algebraicity is used: CKgP supplies algebraicity first. THM-0005 is not applied at n=6, where c(6)=5 < 6 would place X_{6,6} outside the recorded range.\n\n8. Conversion to the exact Borel-Moore target.\n\nSection 0 and (6) give\n\n  W_{-16} H^{BM}_{16}(X_{6,6}; Q)  ~=  Q(-13)^{direct_sum r} (21)  ~=  Q(8)^{direct_sum r}.\n\nThe case r=0 is included. No non-Tate summand survives in this exact group.\n\n9. Blocked routes and recorded constraints, respected.\n\n- vcd-only-vanishing. Virtual cohomological dimension is used only at H^{20}(M_6; L) with 20>19 and at H^{26}(X_{6,5}; Q) with 26>25. No vanishing is inferred from 26=vcd(X_{6,6}). The new structural input that makes these residual uses valid is the identification of the complementary summands with Phi and Psi (Sections 2-6), which is the packet-visible content of FND-0195, FND-0196, FND-0198 together with THM-0005. The blocked inference at the target degree remains unused.\n- forgetful-map-renaming-local-system-unknown. The mixed R^1 of the n-punctured forgetful map is never used (FND-0020, FND-0037). All local-system cohomology is of the closed universal curve, or of M_6 with a finite-dimensional rational symplectic local system, or of X_{6,5} with constant Q-coefficients.\n- undecorated-cgp-top-weight-graph-complex. Mbar_{6,6}, dual complexes, tropical moduli, and graph complexes do not appear.\n- point-count-without-degree-parity-separation. No point count, finite experiment, or numerical identity is used.\n- FND-0050 / CE support. The CE support-filtration route is not used. The argument computes the whole exact ordinary target independently.\n- Stack versus coarse, Q versus Z. Every identification is stack-level rational Betti / MHS. Finite-group cohomology with Q-coefficients vanishes in positive degrees, which is the only use of finite quotients (Hochschild-Serre). No graph-automorphism invariants versus coinvariants appear.\n\n10. What is not claimed.\n\nThe argument does not compute the rank r. It does not settle W_k H^k(X_{g,n}) in degree vcd-1, so it says nothing about (8,0) or (8,1). It does not apply where no published c(g) is available, so it does not settle (8,2). It does not prove an isomorphism of formula (1) by an independent fibre-restriction argument; the containment used for the theorem is Sections 1 and 5, and the published isomorphism is cited only as an optional second proof in Section 6.",
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "claims": [
+    {
+      "id": "CLM-0136-1",
+      "justification": "Deligne, Theorie de Hodge II, Corollaire 3.2.17, applied to a compactification of C^n, which is simultaneously a compactification of the open M_{g,n}. Packet FND-0197. The non-proper forgetful map M_{g,n}->M_g is not used, avoiding FND-0020 and FND-0037.",
+      "statement": "Restriction along M_{g,n} subset C^n induces a surjection W_k H^k(C^n;Q) ->> W_k H^k(M_{g,n};Q) of mixed Hodge structures for every k. Consequently any vanishing, generation, or Tate-type upper bound on the source yields the same upper bound on the target. The kernel of restriction, Gysin exactness for diagonals, and symplectic Schur-Weyl are not used.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0136-2",
+      "justification": "Smooth-proper Leray degenerates at E_2 (Deligne). Degeneration splits only the associated graded; the PTY projectors are algebraic correspondences, hence MHS morphisms, so W_k is additive. Closed-universal-curve R^1 is pure of weight 1.",
+      "statement": "For the smooth proper n-fold fibre product C^n -> M_g, W_k H^k(C^n;Q) splits as a direct sum of mixed Hodge structures A_i = W_k of H^{k-|i|}(M_g; tensor_s R^{i_s} pi_* Q) over i in {0,1,2}^n, via the Petersen-Tavakol-Yin relative Chow-Kunneth projectors. The R^2 projector of a single factor is pi_2 = psi_2/(2g-2) - kappa_1/(2(2g-2)^2), already in the Q-span of a psi class and a pullback from M_g.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0136-3",
+      "justification": "Packet FND-0196, corroborated against Morita, Hain-Reed, Petersen-Tavakol-Yin, and Canning-Larson-Payne. All three disposals are used as written steps.",
+      "statement": "The class omega_s = pr_s^* c_1(omega_{C/M_g}) is not Kunneth-homogeneous: it decomposes as a_s+b_s+c_s in slots 0,1,2, and only c_s realises the i_s=0 to i_s=2 isomorphism. Three disposals place every i_s=2 summand in Phi+Psi after restriction: (A) Morita vanishing H^1(Mod_g; H^1(Sigma_g;Q))=0 for g>=2, so b_s=0; (B) the projector pi_2 of CLM-0136-2; (C) the downward induction of CLM-0136-5. A fibre-restriction sentence does not by itself justify the identification.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0136-4",
+      "justification": "Packet FND-0036. Independent of the primitive quotient. Does not use 26=vcd(M_{6,6}).",
+      "statement": "Phi_{6,6}^{26}=0. Equivalently W_{26} H^{26}(M_{6,5};Q)=0, because vcd(PMod_{6,5})=25 < 26, transferred by rational Hochschild-Serre from a torsion-free finite-index subgroup.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0136-5",
+      "justification": "Church-Farb-Putman record of Harer: H^i(Mod_g; V tensor Q)=0 for all i>4g-5 and all Mod_g-modules V. Induction: A_i = c_s B_{i'} inside omega_s B_{i'} + A_{i'} + A_{i''}, restriction sends omega_s B_{i'} into Psi, A_{i'} through W_{26} H^{26}(M_{6,5})=0, and A_{i''} to smaller |i|. This is the written closure of FND-0196 Disposal C and of the FND-0199 attack.",
+      "statement": "At (g,n,k)=(6,6,26), every Kunneth summand A_i of W_{26} H^{26}(C^6) with |i|<=6 vanishes by Harer vcd(Mod_6)=19 applied to every rational local system (base degree >=20). Every remaining summand has some i_s=2. Downward induction on |i|, using CLM-0136-3 and CLM-0136-4, places every surviving summand in the preimage of Psi_{6,6}^{26}. Combined with CLM-0136-1, W_{26} H^{26}(M_{6,6};Q) is contained in Psi_{6,6}^{26}.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0136-6",
+      "justification": "FND-0195 and FND-0198, corroborated against the published CLP article and Church-Farb-Putman. The published proof uses PTY projectors, not fibre restriction.",
+      "statement": "Independently of CLM-0136-5, Canning-Larson-Payne Lemma 3.1(a) at (6,6,26) identifies the primitive quotient with a sum of W_{26} H^{20}(M_6; V_lambda), which vanishes by the same local-coefficient vcd, so W_{26} H^{26}(M_{6,6};Q)/(Phi+Psi)=0; with CLM-0136-4 this gives equality W=Psi. This is an optional second proof of the containment in CLM-0136-5, citing packet-visible FND-0195 and FND-0198, not an unrecorded SRC-0002 excerpt.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0136-7",
+      "justification": "THM-0005, SRC-0002 Table 1 and Proposition 4.5 via Lemma 4.3, FND-0033. Algebraicity is supplied first; no Tate-to-algebraic upgrade. Not applied at n=6.",
+      "statement": "W_{24} H^{24}(M_{6,5};Q) is a finite direct sum of Q(-12), because THM-0005 applies at n=5=c(6) on the open stack, to every pure-weight piece: CKgP makes the cycle-class map surject onto W_{24}, generating classes have type (12,12), and polarizable pure weight-24 Q-Hodge structures are semisimple.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0136-8",
+      "justification": "Cup product is a morphism of mixed Hodge structures. Semisimplicity upgrades a Tate quotient to a Tate summand.",
+      "statement": "Psi_{6,6}^{26} is a finite direct sum of Q(-13), being generated by cup products of psi_i (algebraic, type Q(-1)) with pullbacks of W_{24} H^{24}(M_{6,5}) (type Q(-12)). Combined with CLM-0136-5 and FND-0033 at weight 26, W_{26} H^{26}(M_{6,6};Q) is a finite direct sum of Q(-13), including rank zero.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0136-9",
+      "justification": "FND-0001 and CLM-0136-8. Coefficients Q throughout; stack-level duality on the smooth DM stack M_{6,6}.",
+      "statement": "W_{-16} H^{BM}_{16}(M_{6,6};Q) is a finite direct sum of Q(8). Poincare duality in dimension 21 identifies it with W_{26} H^{26}(M_{6,6};Q)(21), and Q(-13)(21)=Q(8). No non-Tate summand survives in this exact group.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "grok",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "Virtual cohomological dimension is applied only at H^{20}(M_6;L) with 20>19 and at H^{26}(M_{6,5};Q) with 26>25. No vanishing is inferred from 26=vcd(M_{6,6}). The complementary summands are identified with Phi and Psi by written projectors and induction, which is the new input that makes these residual vcd uses valid.",
+      "kind": "blocked_route",
+      "subject": "vcd-only-vanishing"
+    },
+    {
+      "disposition": "The mixed R^1 of the n-punctured forgetful map is never used. Leray-Kunneth is for the closed universal curve, whose R^1 is pure of weight 1.",
+      "kind": "blocked_route",
+      "subject": "forgetful-map-renaming-local-system-unknown"
+    },
+    {
+      "disposition": "The CE support graph is bypassed by an independent computation of the whole exact ordinary target.",
+      "kind": "working_context_constraint",
+      "subject": "No undecorated top-weight graph complex, compactification degree-16 assertion, point count, finite-cover Tate inference, or Casnati-Ekedahl support-exhaustion assertion is used."
+    },
+    {
+      "disposition": "FND-0196 is stated in Section 3 and closed by Morita, by pi_2, and by the downward induction of Section 5.",
+      "kind": "working_context_constraint",
+      "subject": "A fibre-restriction slogan does not isolate the slot-2 Kunneth summand of omega_s."
+    }
+  ],
+  "gap_markers": [],
+  "id": "ATT-0136",
+  "lane": "full-resolution",
+  "methods_used": [
+    "lowest-weight surjection from a common compactification",
+    "smooth-proper Leray degeneration",
+    "Petersen-Tavakol-Yin relative Chow-Kunneth projectors",
+    "Morita vanishing of H^1(Mod_g; H_1)",
+    "downward induction on Kunneth fibre degree",
+    "virtual cohomological dimension with local coefficients",
+    "Chow-Kunneth generation property",
+    "mixed-Hodge Tate-type bookkeeping",
+    "Poincare duality"
+  ],
+  "new_inputs": [
+    {
+      "evidence": "The prohibited inference at the target degree 26=vcd(M_{6,6}) remains unused. After the written identification of complementary summands with Phi and Psi (FND-0195, FND-0196, FND-0198), virtual cohomological dimension is applied only at H^{20}(M_6;L) where 20>19 and at H^{26}(M_{6,5}) where 26>25. THM-0005 then types the remaining psi-generated subspace at n=5=c(6). This is residual use of vcd after a new structural input, not vanishing at the blocked degree.",
+      "evidence_claim_ids": [
+        "THM-0005",
+        "FND-0035",
+        "FND-0036",
+        "FND-0195",
+        "FND-0196",
+        "FND-0198"
+      ],
+      "route": "vcd-only-vanishing"
+    }
+  ],
+  "novelty_claims": [
+    {
+      "id": "NOV-0136-1",
+      "statement": "The omega-class Kunneth inhomogeneity on C^n is disposed in writing at (6,6,26) by Morita vanishing, by the PTY projector pi_2, and by downward induction on total fibre degree, so every surviving |i|>=7 Kunneth slot of W_26 H^{26}(C^6) restricts into Psi_{6,6}^{26}.",
+      "status": "proved"
+    },
+    {
+      "id": "NOV-0136-2",
+      "statement": "With Phi_{6,6}^{26}=0 and the written slot identification, the exact ordinary target W_26 H^{26}(M_{6,6};Q) equals a psi-multiple of the CKgP group W_24 H^{24}(M_{6,5};Q) and is therefore a finite direct sum of Q(-13), independently of the CE support-filtration route.",
+      "status": "proved"
+    }
+  ],
+  "observable_trace_id": "TRACE-0108",
+  "observable_trace_sha256": "92ca583077561cd4ac6a72a14cc04c3a190de23b9af3d4f6f2dee09722c430b1",
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_path": "proof/packets/generated/C66-001-v6.md",
+  "packet_sha256": "d6ee01c0d83fec190948ca61ffe703be092a635d0c244d950f169a27407c5d23",
+  "paired_attempt_policy_revision": 2,
+  "paired_problem_key": "06b7695d66225b8502f14149286fcf0111561b471a17c358ebbc4a503d6bda00",
+  "paired_theorem_sha256": "c5e3507db1b4cef8fddb7c6bc92044dd75181ad33ae1649739f76e893e013cd3",
+  "paired_turn_kind": "forced-proof",
+  "proof_dependencies": [
+    "FND-0001",
+    "FND-0033",
+    "FND-0035",
+    "FND-0036",
+    "FND-0195",
+    "FND-0196",
+    "FND-0197",
+    "FND-0198",
+    "THM-0005",
+    "SRC-0002"
+  ],
+  "result_type": "proof",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0001",
+    "FND-0033",
+    "FND-0035",
+    "FND-0036",
+    "FND-0195",
+    "FND-0196",
+    "FND-0197",
+    "FND-0198",
+    "THM-0005"
+  ],
+  "source_ids": [
+    "SRC-0002"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C66-FULL",
+  "summary": "Rewrite of the ATT-0135 fibre-product / vcd peel in which the omega-class Kunneth inhomogeneity is stated and closed: Morita vanishing of the slot-1 term, the Petersen-Tavakol-Yin projector pi_2, and a downward induction at (6,6,26) each place every surviving |i|>=7 summand in Psi. Phi_{6,6}^{26} vanishes by vcd(M_{6,5})=25. CKgP at n=5=c(6) types Psi as Q(-13). Poincare duality gives the exact Borel-Moore group as a direct sum of Q(8). The published CLP Lemma 3.1(a) is cited only as an optional second proof of W=Psi, from packet-visible FND-0195 and FND-0198. Schur-Weyl and the kernel of open restriction are unused.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-001-FORCED-FULL",
+  "theorem_scope": {
+    "category": "rational mixed Hodge structures",
+    "coefficients": "Q",
+    "g": 6,
+    "n": 6
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group."
+}

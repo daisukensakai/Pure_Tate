@@ -1,7 +1,7 @@
 set_option autoImplicit false
 -- LEAN-CAMPAIGN LC66-001
 -- LEAN-ATTEMPT LATT-0000
--- LEAN-SOURCE-ATTEMPT ATT-0135
+-- LEAN-SOURCE-ATTEMPT ATT-0136
 -- LEAN-CLAIM-CONTRACT C66-EXACT-TARGET-V1
 -- LEAN-TARGET-SIGNATURE BM(g=6,n=6,degree=16,weight=-16,tate=8);ORD(g=6,n=6,degree=26,weight=26,tate=-13,dimension=21,twist=21);rank>=0
 -- LEAN-THEOREM replace_with_exported_theorem

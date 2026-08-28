@@ -147,6 +147,36 @@ def same_packet_identity(
     ) and packet_binding_matches(right, str(campaign_id))
 
 
+def review_is_verification_exempt(review: Dict[str, Any]) -> bool:
+    """Report whether a review is a PI-authorized extra pass.
+
+    Such a review may live in ``proof/reviews`` and contribute finding
+    candidates, but it is not independent evidence: it does not count toward
+    verification, does not triage an attempt, and may use the prover engine.
+    """
+    override = review.get("self_review_override")
+    if not isinstance(override, dict):
+        return False
+    return (
+        override.get("authorized_by") == "principal_investigator"
+        and override.get("not_counted_for_verification") is True
+    )
+
+
+def _review_task_id(attempt_id: str, review: Dict[str, Any]) -> str:
+    prefix = "TASK-SELF" if review_is_verification_exempt(review) else "TASK-V"
+    return "%s-%s-P%s" % (prefix, attempt_id, review.get("review_pass"))
+
+
+def _confirmation_reviews(reviews: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    return [
+        review
+        for review in reviews
+        if review.get("verdict") == "confirmed"
+        and not review_is_verification_exempt(review)
+    ]
+
+
 def derived_attempt_status(attempt: Dict[str, Any]) -> str:
     """Return the status the harness assigns to an attempt.
 
@@ -803,18 +833,19 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
             result.errors.append(
                 "%s has invalid verdict %r" % (review_id, review.get("verdict"))
             )
-        if not review.get("independent", False):
+        exempt = review_is_verification_exempt(review)
+        if not exempt and not review.get("independent", False):
             result.errors.append("%s is not an independent review" % review_id)
         if not str(review.get("strongest_attack", "")).strip():
             result.errors.append("%s lacks strongest_attack" % review_id)
-        if review.get("reviewer_engine") == attempt.get("engine"):
+        if not exempt and review.get("reviewer_engine") == attempt.get("engine"):
             result.errors.append("%s uses the prover engine" % review_id)
         if migration and not same_packet_identity(review, attempt):
             result.errors.append("%s reviews a different packet" % review_id)
         if migration and review.get("target") != attempt.get("target"):
             result.errors.append("%s reviews a different target" % review_id)
-        if migration and review.get("review_task_id") != (
-            "TASK-V-%s-P%s" % (attempt_id, review.get("review_pass"))
+        if migration and review.get("review_task_id") != _review_task_id(
+            attempt_id, review
         ):
             result.errors.append("%s has incorrect review-task linkage" % review_id)
         if attempt.get("campaign_id"):
@@ -862,11 +893,7 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
                 result.errors.append(
                     "%s has duplicate completed review passes" % attempt_id
                 )
-            confirmations = [
-                review
-                for review in attached
-                if review.get("verdict") == "confirmed"
-            ]
+            confirmations = _confirmation_reviews(attached)
             confirmation_engines = {
                 review.get("reviewer_engine") for review in confirmations
             }
@@ -878,11 +905,9 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
     for attempt_id, attempt in attempts_by_id.items():
         if attempt_id in legacy_attempts or attempt.get("status") != "verified":
             continue
-        confirmations = [
-            review
-            for review in reviews_by_attempt.get(attempt_id, [])
-            if review.get("verdict") == "confirmed"
-        ]
+        confirmations = _confirmation_reviews(
+            reviews_by_attempt.get(attempt_id, [])
+        )
         engines = {review.get("reviewer_engine") for review in confirmations}
         passes = {review.get("review_pass") for review in confirmations}
         # Extra confirmation passes beyond {1, 2} do not invalidate verification.

@@ -12,7 +12,7 @@ report hashes. Then:
    than coarse space, rational coefficients, `(g,n)=(6,6)`, BM degree `16`, weight `-16`,
    Tate type `Q(8)`, and the equivalent ordinary form in degree/weight `26`, type
    `Q(-13)`, dimension/twist `21`; allow rank zero.
-2. Reconstruct every `LEAN-AXIOM` from `ATT-0135`. Reject strengthened premises,
+2. Reconstruct every `LEAN-AXIOM` from `ATT-0136`. Reject strengthened premises,
    conclusion-smuggling, circular encodings, wrong variance, changed indices, and a
    proof of only a proxy object. Check all six obligation IDs.
 3. Inspect `#print axioms`, unused-premise behavior, and `Model.lean`. Explain whether

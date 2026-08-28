@@ -1,0 +1,148 @@
+{
+  "attempt_id": "ATT-0136",
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0136-1",
+      "note": "The lowest-weight restriction surjection is used over Q on the open stack only. No coarse-moduli comparison, integral assertion, diagonal-kernel description, or Schur-Weyl claim is needed.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-2",
+      "note": "The relevant universal-curve fibre power is smooth and proper over M_6. Smooth-proper Leray degeneration together with the stated Chow-Kunneth projectors gives an actual splitting of mixed Hodge structures, so no unexamined differential or associated-graded-only inference remains.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-3",
+      "note": "The non-homogeneity of omega_s is explicitly handled over Q. The proof may use the downward Kunneth-slot induction, so it does not depend on an invalid integral strengthening of Morita vanishing.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-4",
+      "note": "H^26(M_{6,5};Q)=0 follows from vcd(PMod_{6,5})=25. The proof does not incorrectly infer vanishing from degree 26 being the vcd of M_{6,6}.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-5",
+      "note": "For total Kunneth index at most 6, the base degree is at least 20, exceeding vcd(Mod_6)=19. Every remaining summand has a slot 2, and the downward induction, the vanishing of the slot-0 error through M_{6,5}, and the psi contribution have the stated degree shifts.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-6",
+      "note": "The primitive-quotient argument is optional and is scoped only to its vanishing claim. It is not used to infer Tate type.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-7",
+      "note": "The load-bearing type input applies to the open stack M_{6,5} at the inclusive bound n=5=c(6), with Q-coefficients. It supplies algebraicity of the pure-weight piece before Tate type is asserted and is an established theorem input rather than a predicted motive.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-8",
+      "note": "Pullback preserves the Q(-12) type and multiplication by psi contributes Q(-1), making the generated weight-26 terms Q(-13). Semisimplicity in the pure polarizable category upgrades the resulting subquotient to an actual direct sum, not merely a semisimplification statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0136-9",
+      "note": "For complex dimension 21, smooth-stack Poincare duality gives H^BM_16 congruent to H^26(21) with weights shifted from 26 to -16. The Tate twist is Q(-13)(21)=Q(8). The compactly supported Q(-8) corner is not substituted for this group.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ADVERSARIAL-AXES",
+      "note": "No graph-stratum calculation occurs, so invariants versus coinvariants is inapplicable. The Casnati-Ekedahl/stable-pair route is not a dependency because the verified fibre-product peel already reaches the exact ordinary-cohomology group; omitting stable pairs therefore leaves no gap in this proof.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-28",
+  "finding_candidates": [],
+  "id": "REV-0188",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "d6ee01c0d83fec190948ca61ffe703be092a635d0c244d950f169a27407c5d23",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "FND-0001",
+      "note": "Confirms dimension, Borel-Moore/ordinary degree conversion, weight shift, and Q(-13)(21)=Q(8).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Confirms semisimplicity in the relevant pure Hodge-structure category and hence the actual Tate direct-sum conclusion.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0035",
+      "note": "Its vcd warning is respected: no vanishing is inferred at degree vcd(M_{6,6}).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0036",
+      "note": "Confirms H^26(M_{6,5};Q)=0, exactly the vanishing needed for the Phi term.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0195",
+      "note": "Confirms the peel and the open-stack CKgP input at n-1=5=c(6), including the Tate type of W_24 H^24(M_{6,5};Q).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0196",
+      "note": "Confirms the omega_s inhomogeneity and the valid downward Kunneth-slot induction at (g,n,k)=(6,6,26).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0197",
+      "note": "Confirms precisely the lowest-weight restriction surjection used by the proof; excluded kernel and Gysin assertions are not used.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0198",
+      "note": "Confirms the optional primitive-quotient vanishing. The proof does not use it as a source of Tate type.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0005",
+      "note": "The established theorem applies to open M_{g,n}, rational coefficients, and the inclusive bound c(6)=5; it supplies algebraicity of the relevant pure-weight cohomology.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0002",
+      "note": "Supports the open-stack CKgP bound and Proposition 4.5 input used through THM-0005 and FND-0195.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0136-P2",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is against CLM-0136-7: all preceding steps establish only containment in the psi-generated subspace, so every Hodge-type conclusion depends on W_24 H^24(M_{6,5};Q) being algebraic Tate exactly at the zero-slack boundary n=5=c(6). If the bound were strict, applied only to compactified moduli, or gave merely tautological Chow without algebraicity of pure-weight cohomology, the proof would fail. The attack does not refute the attempt because THM-0005 and packet-visible FND-0195 confirm the inclusive open-stack statement and the required algebraicity. The remaining degree, twist, Kunneth, semisimplicity, automorphism, and stable-pair attacks expose no unresolved dependency.",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "confirmed"
+}
