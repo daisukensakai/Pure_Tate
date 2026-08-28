@@ -1,0 +1,66 @@
+{
+  "adjudicated_statement": "Work over C with rational singular cohomology and its mixed Hodge structure. For g>=2, let pi_i:M_{g,n}->M_{g,n-1} forget the ith marking, define Phi_{g,n}^k=sum_i pi_i^*W_k H^k(M_{g,n-1};Q), and define Psi_{g,n}^k=sum_i psi_i Phi_{g,n}^{k-2}. Canning-Larson-Payne Lemma 3.1(a) gives an isomorphism of pure rational Hodge structures W_k H^k(M_{g,n};Q)/(Phi_{g,n}^k+Psi_{g,n}^k) isomorphic to the direct sum over partitions lambda with |lambda|=n and length(lambda)<=g of W_k H^{k-n}(M_g;mathbb V_lambda) tensor V_{lambda^T}, where mathbb V_lambda is the weight-|lambda| rational symplectic local system and V_{lambda^T} is the corresponding rational S_n-module with trivial Hodge structure. At (g,n,k)=(6,6,26), every underlying group H^20(M_6;mathbb V_lambda) vanishes: stack cohomology identifies it with H^20(Mod_6;mathbb V_lambda), and a torsion-free normal finite-index subgroup of Mod_6 has cohomological dimension vcd(Mod_6)=4*6-5=19; Hochschild-Serre for the finite quotient is exact over Q. Consequently W_26 H^26(M_{6,6};Q)/(Phi_{6,6}^26+Psi_{6,6}^26)=0 as a pure rational Hodge structure. This conclusion concerns only the primitive quotient and does not infer vanishing at degree 26 from vcd(Mod_{6,6})=26.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "The mandatory origin check found that ATT-0135, CLM-0135-1 and CLM-0135-2 use the published primitive-quotient formula, while REV-0185 identifies three possible attacks: applicability of vcd to nontrivial symplectic coefficients, the W_26 indexing on degree-20 local-system cohomology, and the informal psi-versus-R^2 projector sketch. The final published Canning-Larson-Payne article resolves the latter two directly: Lemma 3.1(a) states the quotient is the direct sum of W_k H^{k-n}(M_g;mathbb V_lambda) tensor V_{lambda^T}, and its proof uses the closed universal curve, smooth-proper Leray degeneration, the all-R^1 Kunneth term, Petersen-Tavakol-Yin projectors, and symplectic contractions. Thus (g,n,k)=(6,6,26) gives ordinary degree 20 and weight index 26; it does not involve the mixed R^1 of the punctured forgetful map discussed in FND-0037. Church-Farb-Putman explicitly record Harer's result vcd(Mod_g)=4g-5 and the consequent vanishing H^i(Mod_g;V tensor Q)=0 for i>4g-5 and arbitrary Mod_g-modules V. Formally, choose a torsion-free normal finite-index subgroup Gamma of Mod_6 with cd(Gamma)=19. Then H^20(Gamma;mathbb V_lambda)=0, and Hochschild-Serre for the finite quotient Mod_6/Gamma collapses over Q because finite-group invariants are exact, giving H^20(Mod_6;mathbb V_lambda)=0. Hence W_26 of that zero group is zero. This is compatible with FND-0035: FND-0035 only blocks an above-vcd argument at the target degree 26 on Mod_{6,6}, whereas the present application is degree 20>19 on Mod_6. It also does not contradict RED-0001, THM-0005, or any claim listed in contradicts_claim_ids. No equivalent adjudicated finding was found, so merging is unwarranted. The finding is promoted only for the primitive quotient; ATT-0135's later conclusions still require its separate Phi-vanishing and CKgP/Tate inputs.",
+  "engine": "codex",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0198",
+  "id": "FAUD-0212",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "codex",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "k": 26,
+      "n": 6
+    },
+    "category": "rational mixed Hodge structures",
+    "coefficients": "Q",
+    "conclusion": "W_26 H^26(M_{6,6};Q)/(Phi_{6,6}^26+Psi_{6,6}^26)=0",
+    "does_not_assert": [
+      "vanishing of W_26 H^26(M_{6,6};Q) itself",
+      "vanishing from the equality 26=vcd(Mod_{6,6})",
+      "Tate type of the complementary pullback and psi-generated subspace",
+      "the full Borel-Moore target without the separate inputs used later in ATT-0135"
+    ],
+    "hypotheses": [
+      "M_{g,n} is interpreted as the complex moduli Deligne-Mumford stack, so local-system cohomology of M_6 is group cohomology of Mod_6",
+      "the local systems mathbb V_lambda are the finite-dimensional rational symplectic local systems associated with irreducible representations of Sp_{12}",
+      "lambda ranges over partitions of 6 of length at most 6",
+      "W denotes the increasing weight filtration"
+    ],
+    "object": "primitive quotient of the lowest-weight ordinary cohomology of the complex Deligne-Mumford stack M_{6,6}"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "9e2dc8b19e6bd1c56e953272b3f82a345a6a6ae914527dab0778a086f0900535",
+      "doi": "10.1017/fmp.2024.24",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "d8b03b70f8c7e51ec580bd2c81ccfdc2d82d9dca89289f200ba3559a2894406a",
+      "retrieved_at": "2026-08-27T23:19:55.712Z",
+      "source_type": "journal",
+      "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/F23AB2B57A8B38E7AA61F2E1E4FCA86F/S2050508624000246a.pdf/extensions-of-tautological-rings-and-motivic-structures-in-the-cohomology-of-dollaroverline-mathcal-mgndollar.pdf"
+    },
+    {
+      "arxiv_id": "1108.0622",
+      "arxiv_version": "v3",
+      "content_sha256": "70026fd9b3ffaee11d12ad5e2a8ec678d5cb5fb200e97c53d8969529235a8239",
+      "doi": "10.1093/imrn/rnr208",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "vcd-local-coefficient-cross-check",
+      "reported_content_sha256": "56f07cc5396ed869eec3706b1ba04e257a4080db7f77a8529c83c1869808a59e",
+      "retrieved_at": "2026-08-27T23:17:59.767Z",
+      "source_type": "journal",
+      "url": "https://www.math.uchicago.edu/~farb/papers/ratcoho-mcg.pdf"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0198",
+  "verdict": "promote",
+  "verified_source_count": 2
+}

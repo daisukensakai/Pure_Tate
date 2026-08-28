@@ -29,6 +29,12 @@ from .notifications import ntfy_is_configured
 from .paired import recover_attempt_from_trace
 from .packets import write_case_packets
 from .proofs import audit_proofs, proof_status_report
+from .lean_campaign import (
+    DEFAULT_LEAN_CAMPAIGN,
+    audit_campaign as audit_lean_campaign,
+    campaign_status as lean_campaign_status,
+    check_attempt as check_lean_attempt,
+)
 from .research import audit_research_gate, stage_two_ready
 from .reports import (
     case_report,
@@ -203,6 +209,38 @@ def command_proof_audit(args: argparse.Namespace) -> int:
             proof_status_report(claims, board),
         )
     return 0 if result.ok else 1
+
+
+def command_lean_check(args: argparse.Namespace) -> int:
+    try:
+        result, report = check_lean_attempt(
+            args.attempt, campaign_id=args.campaign, write=args.write
+        )
+    except (OSError, ValueError, DataError) as exc:
+        print("ERROR:", exc)
+        return 1
+    print(json.dumps(report, indent=2, sort_keys=True))
+    return 0 if result.ok else 1
+
+
+def command_lean_audit(args: argparse.Namespace) -> int:
+    try:
+        result = audit_lean_campaign(args.campaign)
+    except (OSError, ValueError, DataError) as exc:
+        print("ERROR:", exc)
+        return 1
+    _print_check(result)
+    return 0 if result.ok else 1
+
+
+def command_lean_status(args: argparse.Namespace) -> int:
+    try:
+        status = lean_campaign_status(args.campaign)
+    except (OSError, ValueError, DataError) as exc:
+        print("ERROR:", exc)
+        return 1
+    print(json.dumps(status, indent=2, sort_keys=True))
+    return 0
 
 
 def command_recover_trace(args: argparse.Namespace) -> int:
@@ -860,6 +898,20 @@ def build_parser() -> argparse.ArgumentParser:
     proof_parser = subparsers.add_parser("proof-audit")
     proof_parser.add_argument("--write", action="store_true")
     proof_parser.set_defaults(func=command_proof_audit)
+
+    lean_check_parser = subparsers.add_parser("lean-check")
+    lean_check_parser.add_argument("--attempt", required=True)
+    lean_check_parser.add_argument("--campaign", default=DEFAULT_LEAN_CAMPAIGN)
+    lean_check_parser.add_argument("--write", action="store_true")
+    lean_check_parser.set_defaults(func=command_lean_check)
+
+    lean_audit_parser = subparsers.add_parser("lean-audit")
+    lean_audit_parser.add_argument("--campaign", default=DEFAULT_LEAN_CAMPAIGN)
+    lean_audit_parser.set_defaults(func=command_lean_audit)
+
+    lean_status_parser = subparsers.add_parser("lean-status")
+    lean_status_parser.add_argument("--campaign", default=DEFAULT_LEAN_CAMPAIGN)
+    lean_status_parser.set_defaults(func=command_lean_status)
 
     fetch_parser = subparsers.add_parser("fetch-source")
     fetch_parser.add_argument("source_id")

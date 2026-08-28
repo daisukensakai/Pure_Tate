@@ -1,0 +1,111 @@
+{
+  "attempt_id": "ATT-0135",
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0135-1",
+      "note": "The primitive quotient formula is not established by the submitted argument. The pullback of the psi class to the fibre power is not Kunneth-homogeneous: fibre restriction detects its slot-2 component but does not eliminate its slot-1 component. The required projector, Morita vanishing, or downward-induction argument is absent. Deligne supplies only a lowest-weight surjection from the proper fibre power, not the asserted kernel identification or traceless Schur-Weyl quotient. Degeneration likewise supplies an associated graded, not the written direct-sum decomposition of mixed Hodge structures.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0135-2",
+      "note": "The numerical local-coefficient vcd calculation H^20(M_6;V_lambda)=0 is sound, but it is applied only after the failed primitive-quotient identification. At degree 26, vcd kills Kunneth slots of total fibre degree at most 6; slots of total fibre degree at least 7 have base degree at most 19 and are not killed. The attempt never proves that these surviving slots, each containing a slot of degree 2, lie in the psi image.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0135-3",
+      "note": "The constant-coefficient vcd computation vcd(PMod_{6,5})=25 gives H^26(M_{6,5};Q)=0 and hence the relevant forgetful pullback contribution vanishes. This does not control the unaccounted local-system Kunneth slots.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0135-4",
+      "note": "The CKgP and tautological-Chow input applies at the boundary case n=5=c(6). It makes W_24 H^24(M_{6,5};Q) algebraic and Tate of type Q(-12), so its products with psi classes have type Q(-13). It does not establish that these products exhaust W_26 H^26(M_{6,6};Q).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0135-5",
+      "note": "The equality W_26 H^26(M_{6,6};Q)=Psi_{6,6}^{26} depends on the failed primitive-quotient formula and on the missing containment of all surviving degree-at-least-7 Kunneth slots in the psi image. CKgP types the psi-generated subspace but does not compute the whole target.",
+      "verdict": "failed"
+    },
+    {
+      "claim_id": "CLM-0135-6",
+      "note": "The duality and twist arithmetic are correct: dimension 21 gives W_{-16}H^{BM}_{16}=W_{26}H^{26}(21), and Q(-13)(21)=Q(8). The conclusion for the exact Borel-Moore group nevertheless depends on the unproved claim that the whole ordinary group is psi-generated.",
+      "verdict": "failed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-28",
+  "finding_candidates": [],
+  "id": "REV-0186",
+  "independent": false,
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "d6ee01c0d83fec190948ca61ffe703be092a635d0c244d950f169a27407c5d23",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "FND-0001",
+      "note": "Poincare duality, dimension 21, degree conversion, weight conversion, and twist (21) are used correctly.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Semisimplicity in the pure weight corner justifies passing from algebraic classes or quotients of a fixed Tate type to a direct sum of that Tate structure; it cannot supply the missing exhaustion of the group.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0035",
+      "note": "The attempt does not infer vanishing merely from degree 26 equalling vcd(M_{6,6}); the constraint is respected.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0036",
+      "note": "The verified vanishing H^26(M_{6,5};Q)=0 supports only the forgetful-pullback term.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0005",
+      "note": "Its CKgP and tautological-Chow conclusion is correctly applied to the open moduli space M_{6,5}, not M_{6,6}.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0002",
+      "note": "The packet excerpt supports the Chow/CKgP material but does not license Lemma 3.1 as a black box. ATT-0135 instead claims to prove the primitive quotient formula independently, and that substitute proof fails because fibre restriction does not isolate the slot-2 Kunneth summand and the necessary projector and kernel analysis are absent.",
+      "verdict": "failed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "This listed source is unused and supplies no load-bearing inference in ATT-0135.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 3,
+  "review_task_id": "TASK-SELF-ATT-0135-P3",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "self_review_override": {
+    "authorized_by": "principal_investigator",
+    "finding_candidates_ingested": false,
+    "not_counted_for_verification": true,
+    "quarantined": true
+  },
+  "strongest_attack": "The argument never proves that it computes the whole target. Its decisive step identifies the quotient by forgetful and psi images with the all-slot-1 primitive local-system term, but the proposed fibre-restriction justification is invalid because the pulled-back psi class has slot-0, slot-1, and slot-2 Kunneth components. Virtual cohomological dimension annihilates the all-slot-1 term and, more generally, slots of total fibre degree at most 6, but it does not annihilate the total-degree-at-least-7 slots whose base degrees are at most 19. Without the missing projector or equivalent induction, those potentially non-Tate classes are neither killed nor placed in the psi image. CKgP at M_{6,5} proves only that the psi-generated subspace is Tate. Thus the submitted proof leaves an uncontrolled complement in the exact W_26 group. It does not exhibit a surviving non-Tate summand, so the theorem is incomplete rather than refuted.",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "incomplete"
+}

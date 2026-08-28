@@ -1,0 +1,77 @@
+{
+  "adjudicated_statement": "Work over Q with g>=2. Let pi:C->M_g be the universal closed curve and C^n its n-fold fibre product. Write omega_s=pr_s^* c_1(omega_{C/M_g}); on C this is the class psi_1 of Petersen-Tavakol-Yin, and its restriction to the open configuration space M_{g,n} subset C^n is the tautological psi class. The Leray-Kunneth decomposition of the smooth proper map C^n->M_g splits H^*(C^n) into summands H^{k-|i|}(M_g; tensor_s R^{i_s} pi_* Q) indexed by i in {0,1,2}^n. The class omega_s is not homogeneous for this multi-index: it decomposes as a_s+b_s+c_s with a_s in H^2(M_g) (slot value 0), b_s in H^1(M_g; R^1 pi_* Q) (slot value 1), and c_s in H^0(M_g; R^2 pi_* Q) (slot value 2). The fibre restriction of omega_s is the canonical class of degree 2g-2, so c_s equals 2g-2 times the generator of R^2 pi_* Q isomorphic to Q(-1). Only c_s induces the isomorphism from the i_s=0 summand onto the i_s=2 summand; cup-product with a_s preserves the multi-index while raising base degree by 2, and cup-product with b_s raises the s-th slot by 1. Consequently any argument of the form 'modulo summands with some slot 0, multiplication by psi_s (or omega_s) spans the i_s=2 summands because the class restricts to a nonzero multiple of the fibre canonical class' must dispose of the slot-1 cross term b_s. Three disposals are valid over Q. (1) The slot-1 summand vanishes: H^1(M_g; R^1 pi_* Q) isomorphic to H^1(Mod_g; H^1(Sigma_g; Q))=0 for g>=2. This is the rational form of Morita's theorem H_1(Mod_g; H_1(Sigma_g; Z)) isomorphic to Z/(2g-2) for g>=2, recorded as H^1(Gamma_g, H_Q)=0 by Hain-Reed; equivalently H^2(C; Q) has basis {lambda, omega}, so the H^1(M_g; V) summand of H^2(C) is zero, hence b_s=0 identically and modulo slot-0 summands multiplication by omega_s coincides with multiplication by c_s. (2) The relative Chow-Kunneth projector of Petersen-Tavakol-Yin, pi_2 = psi_2/(2g-2) - kappa_1/(2(2g-2)^2), already lies in the Q-span of a psi class and a pullback from M_g, so it realises the i_s=0 to i_s=2 isomorphism inside Psi+Phi; Canning-Larson-Payne Lemma 3.1 invokes these projectors. (3) Downward induction on |i|: writing A_i for the multi-index summand of W_k H^k(C^n) and B_{i'} for the class with slot s reset to 0, one has A_i = c_s B_{i'} inside omega_s B_{i'} + A_{i'} + A_{i''} with |i''|=|i|-1, using the base case A_j=0 whenever k-|j| exceeds vcd(M_g)=4g-5. Disposal (3) applies in particular at the campaign point (g,n,k)=(6,6,26), where every multi-index with |i|<=6 has base degree at least 20>19. Thus the containment of i_s=2 summands in Phi+Psi holds over Q, but a fibre-restriction sentence does not by itself justify it.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "The contested ATT-0135 sentence is in Section 1 of argument_markdown: modulo those summands with some i_s=0, multiplication by psi_s spans the summands having i_s=2, because psi_s restricts to the nonzero canonical class in H^2 of the fibre. REV-0184 strongest_attack identifies this as the load-bearing incomplete justification, records the candidate C66-OMEGA-CLASS-KUNNETH-INHOMOGENEITY, and supplies two disposals. Independent primary-source check confirms the Kunneth inhomogeneity and those disposals, and adds a third. No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0005 (ATT-0135 applies CKgP only at n=5=c(6)) and with FND-0035/FND-0036 (vcd vanishing is used on M_6 and M_{6,5}, not from 26=vcd(M_{6,6})). Distinct from FND-0020 and FND-0037, which concern the mixed R^1 of a punctured-curve fibration; here the closed universal curve has R^1 pure of weight 1. Merge target: none. Wording corrections: Morita's integral computation is the homology group H_1(Mod_g; H_1(Sigma_g;Z)) isomorphic to Z/(2g-2) for g>=2 (Proc. Japan Acad. Ser. A 62 (1986) Theorem 1; Hain-Reed arXiv:math/9810054v2, Remarks on Morita (5.4)), while the load-bearing rational vanishing is H^1(Mod_g; H^1(Sigma_g;Q))=0, equivalently H^1(Gamma_g, H_Q)=0, which also follows from rank H^2(C_g;Q)=2 with basis {lambda, omega}. Petersen-Tavakol-Yin arXiv:1705.08875v2 Section 5.1 give the explicit relative Chow-Kunneth projector pi_2 = psi_2/(2g-2) - kappa_1/(2(2g-2)^2), already in the Q-span of a psi class and a pullback from M_g; Canning-Larson-Payne arXiv:2307.08830v3 Lemma 3.1 cites these projectors rather than a fibre-restriction sentence. The induction disposal requires vanishing of low-|i| summands, which holds at (6,6,26) because 26-|i|>=20>vcd(M_6)=19. Promote from candidate to corroborated; evidence_class upgraded from adversarial_review to primary_source.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0196",
+  "id": "FAUD-0210",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "g": ">=2",
+    "n": ">=1",
+    "object": "n-fold fibre product of the closed universal curve over M_g"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "math/9810054",
+      "arxiv_version": "v2",
+      "content_sha256": "376a9f0388fb858b268d905e1a4759cd40bba1f6bac72b5525dfd00c8698b398",
+      "doi": "10.48550/arXiv.math.9810054",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "8f3c1a9e6b4d2075c8e2a1f6d9b3c7e0a4f8d2b6c1e5a9d3f7b0c4e8a2d6f1b5",
+      "retrieved_at": "2026-08-28T00:25:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/math/9810054v2"
+    },
+    {
+      "arxiv_id": "1705.08875",
+      "arxiv_version": "v2",
+      "content_sha256": "3bc5d21500147bc94fe09e1beafc592f666bb8256afae1d35195ccdf4a3f0177",
+      "doi": "10.24033/asens.2479",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "relative-kunneth-projectors",
+      "reported_content_sha256": "2b7e9c4a1f6d8035e9c2b7a4d1f6e8c0b3a9d5f2c7e1a4b8d6f0c3e9a5b2d7f1",
+      "retrieved_at": "2026-08-28T00:25:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/1705.08875v2"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "507e0f12159070feab13deb76ea039f5ff159784b5a9e68d2097a1ccc67979f2",
+      "doi": "10.1017/fmp.2024.24",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "pure-weight-quotient-formula",
+      "reported_content_sha256": "6d1a4c8e2b9f7034c1e6a9b2d5f8c0e3a7b4d1f9c2e6a8b5d0f3c7e4a1b9d6f2",
+      "retrieved_at": "2026-08-28T00:25:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2307.08830v3"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "ae8bac78c3b5cd9471a906f7badcc1e05c5024208c400ca18c4cdcbb03b9862e",
+      "doi": "10.3792/pjaa.62.148",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "morita-twisted-homology",
+      "reported_content_sha256": "4e8b2c6a9d1f5047b2e8c5a1d4f7e0c9a3b6d2f8c1e5a7b0d4f9c3e6a2b8d5f1",
+      "retrieved_at": "2026-08-28T00:25:00Z",
+      "source_type": "journal",
+      "url": "https://projecteuclid.org/journalArticle/Download?urlId=10.3792%2Fpjaa.62.148"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0196",
+  "verdict": "promote",
+  "verified_source_count": 4
+}

@@ -1,0 +1,149 @@
+{
+  "attempt_id": "ATT-0135",
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "checked_claims": [
+    {
+      "claim_id": "PACKET-BINDING-AND-SCOPE",
+      "note": "ATT-0135 matches TASK.json on campaign_id C66-001, campaign_revision 6, context_revision 2, subproblem_id C66-FULL, task_id TASK-C66-001-FORCED-FULL, packet_id C66-001-v6, packet_sha256 291c493b7bb82873209f91b93f42db3638d398fe2bff781c61aad39f1f43b3e2, packet_binding_sha256 99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d, the full thirteen-key target dictionary, and the theorem_statement verbatim. prover_engine is codex and this review is by claude, which is not in excluded_reviewer_engines. The single ingest_normalization (HARNESS-IDENTITY-COERCE-0001 on packet_binding_sha256 from null) is a harness coercion and is not adverse.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0135-1",
+      "note": "Independently reconstructed and accepted, with two standard inputs that the artifact leaves unstated but which I verified. (a) The lowest-weight surjection is correct: for an open immersion U into a smooth Y, a common smooth proper compactification X gives W_kH^k(U)=im(H^k(X)->H^k(U)) and im(H^k(X)->H^k(Y))=W_kH^k(Y), so W_kH^k(C^n) surjects onto W_kH^k(M_{g,n}); this is the point at which C^n (closed universal curve, R^1 pure of weight 1) rather than the punctured curve is used, which is exactly what avoids the mixed-R^1 hazard of FND-0020 and the extension hazard of FND-0037. (b) Writing H^k(C^n) as a direct sum of H^{k-|i|}(M_g; tensor R^{i_s}) as mixed Hodge structures needs more than E_2-degeneration, which only splits the associated graded; it is supplied by the Deninger-Murre relative Chow-Kunneth projectors built from the Q-divisor class c_1(omega_{C/M_g})/(2g-2), which are algebraic correspondences and hence MHS morphisms, so W_k is additive over the decomposition. (c) The i_s=0 summands restrict into Phi because M_{g,n}->C^{n-1} factors through M_{g,n-1}. (d) The i_s=2 statement is discussed in the strongest_attack; it is true here. (e) The stated isomorphism form additionally requires that the kernel of restriction meets the (1,...,1) Kunneth component exactly in the diagonal contraction images; the artifact asserts this from the Kunneth component of Delta_{ij} without the Gysin/weight-spectral-sequence exactness step. I accept the isomorphism as the standard statement, and record that only the containment W_kH^k(M_{g,n}) inside Phi+Psi plus vanishing of H^{k-n}(M_g;V^{tensor n}) is load-bearing downstream, so the symplectic Schur-Weyl and traceless-quotient identification carries no weight in the proof of the submitted theorem.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0135-2",
+      "note": "Verified, and verified to be robust to the weakest part of CLM-0135-1. Harer gives vcd(Mod_6)=4g-5=19; for a torsion-free finite-index normal Gamma one has cd(Gamma)=19, hence H^{20}(Gamma;M)=0 for EVERY Q[Gamma]-module M, and rational Hochschild-Serre with finite quotient gives H^{20}(Mod_6;V_lambda)=H^{20}(Gamma;V_lambda)^{Mod_6/Gamma}=0. This is genuine local-coefficient vanishing, not a transfer of constant-coefficient vanishing, so the FND-0164 hazard is not incurred. With k=26, n=6 the base degree is k-n=20>19, so the whole (1,...,1) term vanishes without needing the |lambda|=6 traceless refinement. I checked the stronger fact that every Kunneth multi-index i with |i|<=6 already sits in base degree 26-|i|>=20 and therefore vanishes, so every surviving summand has some i_s=2; the containment W_{26}H^{26}(M_{6,6}) inside Phi+Psi follows. The packet constraint FND-0035 is respected: no vanishing is drawn from 26=vcd(M_{6,6}).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0135-3",
+      "note": "vcd(PMod_{6,5})=4g-4+n=25 and 26>25, so H^{26}(M_{6,5};Q)=0 and Phi_{6,6}^{26}=0. This agrees with the mechanically verified FND-0036. I also checked the consistency point that Kunneth summands with some i_t=0 and |i|>=7 can be nonzero in H^{26}(C^6) yet restrict to zero on M_{6,6}, since their restriction factors through W_{26}H^{26}(M_{6,5})=0; no contradiction arises.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0135-4",
+      "note": "THM-0005 records c(6)=5, so n=5 is inside the published CKgP and tautological-Chow range for genus 6, with scope 'all pure-weight pieces' on the OPEN M_{g,n}; its SRC-0002 locator is Table 1 page 12 together with Proposition 4.5, which derives algebraicity of the pure-weight cohomology. Algebraic generation of W_{24}H^{24}(M_{6,5};Q) by codimension-12 cycle classes forces Hodge type (12,12) throughout, hence a finite direct sum of Q(-12); finiteness holds because H^{24}(M_{6,5};Q) is finite dimensional. The implication used is algebraic implies Tate, which is the licensed direction; the artifact nowhere infers algebraicity or tautological generation from pure Tate type. dim M_{6,5}=20, so codimension 12 is meaningful, and 24<=vcd(M_{6,5})=25, so no degree obstruction competes.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0135-5",
+      "note": "Given CLM-0135-2 and CLM-0135-3 the target equals Psi_{6,6}^{26}=sum_i psi_i Phi_{6,6}^{24}. Each psi_i is the restriction of a class on the smooth proper compactification and is an algebraic divisor class, hence spans a copy of Q(-1) inside W_2H^2. Phi_{6,6}^{24} is a sum of images of W_{24}H^{24}(M_{6,5}) under morphisms of mixed Hodge structures, so by CLM-0135-4 it is a finite direct sum of Q(-12). The cup-product maps Q(-1) tensor Q(-12)^a -> W_{26}H^{26} exhibit the target as a quotient of a finite direct sum of Q(-13), and FND-0033 (polarizable pure Q-Hodge structures of fixed weight form a semisimple abelian category, applied at weight 26) upgrades this to an actual Hodge-structure isomorphism W_{26}H^{26}(M_{6,6};Q)=Q(-13)^r, not merely a semisimplification. r=0 is admitted.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0135-6",
+      "note": "M_{6,6} is a smooth separated Deligne-Mumford stack of pure complex dimension 3*6-3+6=21, so rational Poincare duality gives H^{BM}_{16} isomorphic to H^{2*21-16}(-)(21)=H^{26}(-)(21) as mixed Hodge structures, with weight 26-42=-16; this matches FND-0001 and the task target dictionary (open_bm_degree 16, open_bm_weight -16, poincare_twist 21, ordinary_cohomology_degree 26, ordinary_weight 26). Q(-13)(21)=Q(8) and Q(-13) matches ordinary_tate_type while Q(8) matches open_bm_tate_type. All Tate twists check.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "COEFFICIENT-STACK-AND-SHIFT-AUDIT",
+      "note": "Stack versus coarse moduli: every step is stack-theoretic. H^*(M_6;V_lambda)=H^*(Mod_6;V_lambda) rationally via contractibility of Teichmueller space; M_{g,n}=C^n minus diagonals holds as stacks because Aut of an object of the n-fold fibre product is exactly Aut(C,p_1,...,p_n); Poincare duality is applied only to the smooth DM stack M_{6,6}. Coefficients are Q throughout, including the finite-index transfer in the vcd argument and the semisimplicity argument; no integral statement is made or needed, so the integral hazard recorded for descent models (FND-0075) is not incurred. Borel-Moore versus ordinary degree, the (21) twist, and the Kunneth/Leray degree bookkeeping p+|i|=k with weight floor p+|i|=k were recomputed independently and are correct. Cup product with omega_s raises Leray degree by 2 and twists by Q(-1), matching the weight shift W_{24}->W_{26}.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "AUTOMORPHISM-MOTIVE-AND-STABLE-PAIR-AUDIT",
+      "note": "No stable-graph complex, decorated E_1 term, edge determinant twist, or Aut(Gamma) invariants-versus-coinvariants comparison is used, so FND-0051 and FND-0034 are not engaged. No predicted or conjectural motive is used as a theorem; CONJ-0001 is not invoked. The submitted theorem concerns the single pair (6,6), so no stable pair is omitted from its scope. FND-0050 asserts that a complete attack must confront the packet's CE residual geometry; the artifact does not use the CE support route at all and instead computes the whole exact target independently, which is the disposition FND-0050 contemplates when it faults ATT-0020 for omitting analysis its own route required. That finding does not record a mathematical obstruction to an independent non-CE computation, so it is not adverse here.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-27",
+  "finding_candidates": [
+    {
+      "key": "C66-UNIVERSAL-CURVE-POWER-VCD-PEEL",
+      "rationale": "This is the structural mechanism of ATT-0135 stated in reusable form, separated from the (6,6) arithmetic and from the artifact's decorative Schur-Weyl packaging. It is proposed as novel: nothing packet-visible states the fibre-product peel or the 4g-4 versus 4g-5 comparison, and it is not a restatement of the target dictionary, of FND-0035's recorded vcd bookkeeping, or of the recorded CKgP bounds. Its practical value is that it also identifies where the method stops: it needs n>=1 and CKgP at n-1, so it says nothing about (8,0), (8,1) at degree vcd-1, or (8,2) with no recorded c(8). Remains a candidate pending independent corroboration.",
+      "statement": "Let g>=2, n>=1, C^n the n-fold fibre product of the closed universal curve over M_g, and k=vcd(M_{g,n})=4g-4+n. Because W_kH^k(M_{g,n}) is the image of W_kH^k(C^n) under the open restriction, because H^k(C^n) splits as a direct sum of mixed Hodge structures H^{k-|i|}(M_g; tensor_s R^{i_s}pi_*Q) over multi-indices i in {0,1,2}^n via the Deninger-Murre relative Chow-Kunneth projectors, and because H^p(M_g;L)=0 for every rational local system L and every p>vcd(M_g)=4g-5, every multi-index with |i|<=n sits in base degree k-|i|>=4g-4>4g-5 and vanishes; hence every surviving summand has some i_s=2 and W_{vcd}H^{vcd}(M_{g,n};Q)=sum_i psi_i sum_j pi_j^* W_{vcd-2}H^{vcd-2}(M_{g,n-1};Q). The peel is available because vcd(M_{g,n})-n=4g-4 exceeds vcd(M_g)=4g-5 by exactly one for every n>=1. Consequently the exact ordinary target is Tate whenever W_{vcd-2}H^{vcd-2}(M_{g,n-1};Q) is Tate, which the recorded CKgP range supplies exactly when n-1<=c(g).",
+      "status": "candidate"
+    },
+    {
+      "key": "C66-OMEGA-CLASS-KUNNETH-INHOMOGENEITY",
+      "rationale": "Reusable technical caveat for any pullback-plus-psi generation argument on fibre products of the universal curve, and the exact line ATT-0135 omits. Recording it lets downstream artifacts state the disposal rather than inherit an unjustified step. Novel relative to the packet, which contains no finding about omega_s, psi-multiple generation, or Kunneth inhomogeneity. Candidate pending corroboration.",
+      "statement": "On the n-fold fibre product C^n of the universal curve over M_g, the class omega_s=pr_s^* c_1(omega_{C/M_g}) is not homogeneous for the Kunneth multi-index: it decomposes as a_s+b_s+c_s with a_s in H^2(M_g) (slot value 0), b_s in H^1(M_g;V) (slot value 1) and c_s the R^2 component (slot value 2, coefficient 2g-2). Only c_s carries the i_s=0 to i_s=2 isomorphism, so any argument of the form 'multiplication by psi_s spans the i_s=2 summands modulo the summands with some slot 0' must dispose of the slot-1 cross term b_s. Two disposals are valid: H^1(Mod_g;H_1(Sigma_g;Q))=0 for g>=2 (Morita: the integral group is Z/(2g-2)), which makes b_s=0 identically; or a downward induction on |i| using A_i=c_s B_{i'} inside omega_s B_{i'}+A_{i'}+A_{i''} with |i''|=|i|-1 and the base case A_j=0 for k-|j|>vcd(M_g).",
+      "status": "candidate"
+    },
+    {
+      "key": "C66-LOWEST-WEIGHT-SURJECTION-BYPASSES-DIAGONAL-GYSIN",
+      "rationale": "Separates the sound half of the C^n route from the half that earlier attempts got wrong; it tells future attempts they may drop the diagonal analysis when they only need a bound. Distinct from the packet's findings, none of which address the C^n route; it is also the precise reason the pending unadjudicated candidate raised against an earlier C^n attempt does not apply to ATT-0135. Candidate pending corroboration.",
+      "statement": "For the configuration description M_{g,n}=C^n minus diagonals, an upper bound on W_kH^k(M_{g,n};Q) requires only the lowest-weight surjection W_kH^k(C^n)->>W_kH^k(M_{g,n}), which follows from Deligne's identification of W_k in degree k with the image of any smooth proper compactification, applied to a compactification of C^n. No Gysin exactness for the diagonal divisors, no computation of the kernel of restriction, and no symplectic Schur-Weyl or traceless decomposition of V^{tensor n} is needed for that direction; those are needed only to turn the bound into an isomorphism. Arguments that assert Kunneth summands of H^*(C^n) are summands of R^*f_*Q for f:M_{g,n}->M_g remain invalid, but the surjection route does not make that assertion.",
+      "status": "candidate"
+    }
+  ],
+  "id": "REV-0184",
+  "independent": true,
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "291c493b7bb82873209f91b93f42db3638d398fe2bff781c61aad39f1f43b3e2",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "FND-0001",
+      "note": "The Poincare identification of the open Borel-Moore input with W_{2d-16}H^{2d-16}(M_{g,n})(d) at d=21 is used exactly as recorded, with degrees, weight -16, and the twist (21) all consistent.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Used for its intended purpose: the target is pure polarizable of a single weight, so a quotient of a direct sum of Tate objects is an actual direct sum of the same Tate object. This is the honest Hodge-structure conclusion, not a semisimplification, and no gap marker is spent on exotic extensions, as FND-0033 directs.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0035",
+      "note": "Respected rather than contradicted. FND-0035 forbids drawing vanishing from 26=vcd(M_{6,6}); the artifact draws vcd vanishing only at H^{20}(M_6;V_lambda) with 20>19 and H^{26}(M_{6,5}) with 26>25, and states this explicitly in failed_approaches_addressed. FND-0035's disclaimer that no arbitrary-puncture top-vcd vanishing theorem is asserted leaves this use open.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0036",
+      "note": "Supplies exactly the q=0 vanishing H^{26}(M_{6,5};Q)=0 from 26>vcd(M_{6,5})=25 that CLM-0135-3 needs. The artifact does not import FND-0036's Leray-differential clause, which is unnecessary on its route.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0005",
+      "note": "Applied at n=5=c(6), strictly inside the published range, on the open M_{6,5} (the recorded scope), for a pure-weight piece (the recorded degree scope). Not applied at n=6, where c(6)=5<6 places (6,6) outside the range. Consistent with the campaign's prior in-range uses of the same implication.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0002",
+      "note": "The load-bearing use is the CKgP-to-algebraicity implication behind THM-0005 (Table 1 page 12 and Proposition 4.5, with Lemma 4.3 as the mechanism), which is a packet-recorded locator and is applied within its recorded scope. Non-load-bearing caveat, recorded without prejudice: ATT-0135's new_inputs attributes the pure-weight quotient formula to 'SRC-0002 Lemma 3.1', a locator not among the packet's recorded SRC-0002 excerpts and not independently checkable from the supplied files. This is harmless because Section 1 of the artifact proves the formula from scratch and expressly says so, so no conclusion rests on the unverifiable locator.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0004",
+      "note": "Listed in source_ids but unused and non-load-bearing: the artifact's route bypasses the Casnati-Ekedahl geometry entirely, so SRC-0004 Lemma 10.6 and the W_5 conventions are never invoked.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "HARER-VCD",
+      "note": "Independently recomputed: vcd(Mod_6)=4g-5=19, vcd(Mod_{6,5})=4g-4+n=25, vcd(Mod_{6,6})=26. The structural reason the route works is that vcd(M_{g,n})-n=4g-4 exceeds vcd(M_g)=4g-5 by exactly one for every n>=1, so peeling all n points at once lands one degree above the unpointed vcd. The bound is applied to arbitrary rational local coefficients through cd of a torsion-free finite-index subgroup, which is the correct form of the statement.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLASSICAL-MHS-AND-DEGENERATION-TOOLKIT",
+      "note": "Deligne's lowest-weight description of W_kH^k of a smooth variety, the weight bounds p+w<=weight<=2p+w for H^p of a smooth base with a weight-w admissible variation, Deligne E_2-degeneration for the smooth proper f:C^n->M_g, canonical relative Kunneth for the fibre product, and the Deninger-Murre relative Chow-Kunneth splitting are used soundly. The only place degeneration alone would be insufficient (splitting H^k rather than its associated graded as MHS) is covered by the algebraic-correspondence splitting; the artifact's phrasing compresses this but does not misuse it.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0135-P1",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: the omega_s inhomogeneity attack on the i_s=2 step of Section 1, which is the single load-bearing sentence whose written justification is incomplete. The artifact says 'Modulo those summands [the ones with some i_s=0], multiplication by psi_s spans the summands having i_s=2, because psi_s restricts to the nonzero canonical class in H^2 of the fibre.' On C^n the operative class is omega_s=pr_s^* c_1(omega_{C/M_g}), and omega_s is NOT homogeneous for the Kunneth multi-index: its Leray components lie in H^2(M_g) (slot value 0), H^1(M_g;V) (slot value 1), and H^0(M_g;Q(-1)) (slot value 2, with coefficient 2g-2). Only the last component maps the i_s=0 summand isomorphically onto the i_s=2 summand. Hence omega_s times an i_s=0 class equals the wanted i_s=2 class PLUS an i_s=0 error PLUS an i_s=1 error, and the i_s=1 error is not 'one of those summands', so the quoted sentence does not by itself deliver the containment of the i_s=2 summands in Psi. Since every surviving summand at (6,6,26) has some i_s=2, this containment is exactly what carries equation (5), and (5) carries the theorem. The attack nevertheless fails, for two independent reasons that I verified rather than assumed. First, the i_s=1 error term vanishes identically here: its coefficient is the H^1(M_g;V) component of c_1(omega_{C/M_g}), and by Morita's computation H^1(Mod_g;H_1(Sigma_g;Z)) is Z/(2g-2), so H^1(M_6;V_Q)=0 and omega_s=a_s+c_s exactly. Second, even without that input the containment follows by a purely formal downward induction: writing A_i for the multi-index summand of W_{26}H^{26}(C^6) and B_{i'} for the degree-24 summand with slot s reset to 0, one has A_i=c_s B_{i'} inside omega_s B_{i'}+A_{i'}+A_{i''} where i'' has slot s equal to 1 and |i''|=|i|-1; restriction sends omega_s B_{i'} into psi_s pi_s^* W_{24}H^{24}(M_{6,5}) (inside Psi) and A_{i'} to zero (slot s is 0, so it factors through W_{26}H^{26}(M_{6,5})=0), and A_{i''} is handled by induction, the base case being A_j=0 whenever |j|<=6 because the base degree 26-|j| then exceeds vcd(M_6)=19. Both repairs are two lines; the theorem survives. Runner-up attacks, all of which also failed. (i) Kernel direction of formula (1): identifying the kernel of restriction on the (1,...,1) component with the symplectic contraction images needs the Gysin/weight-spectral-sequence exactness for the diagonal divisors, which the artifact asserts from a Kunneth-component computation only; this is the concern that a pending candidate raised against an earlier C^n attempt (ATT-0017/REV-0023). It does not bite, because the proof of the submitted theorem uses only the containment direction plus outright vanishing of H^{20}(M_6;V^{tensor 6}), so the traceless/Schur-Weyl identification is decorative. (ii) Direct-sum versus filtration: E_2-degeneration splits only the associated graded, so 'H^k(C^n) = direct sum' needs the Deninger-Murre projectors to be an MHS splitting; those projectors exist over M_g with Q coefficients using c_1(omega_{C/M_g})/(2g-2), so W_26 is additive as used. (iii) Weight bookkeeping: I re-derived that every summand of H^{26}(C^6) has weights at least 26, so W_26 is the lowest-weight part everywhere and no summand can leak below the target weight; and that H^{20}(M_6;-) vanishes for ALL local systems, so the vanishing does not depend on the |lambda|=6 refinement. (iv) Blocked-route and citation hygiene: the artifact runs on the packet-blocked 'vcd-only-vanishing' route and declares new input, but its declared evidence ids (FND-0035, FND-0036, THM-0005) are not the quotient formula, and the cited 'SRC-0002 Lemma 3.1' is not a packet-recorded locator; this is a provenance defect only, since Section 1 proves the formula independently and says so. (v) Too-good-to-be-true test: the route generalises to W_{vcd}H^{vcd}(M_{g,n}) for all g>=2, n>=1 and would resolve (3,12), (5,8) and (7,4) as well, which is a reason for suspicion. I checked the boundary instead of the intuition: the route needs CKgP at n-1, and the residual list has n=c(g)+1 in exactly these four cases, while (8,0) and (8,1) sit at vcd-1 (so the peel gives base degree 27=vcd(M_8), no vanishing) and (8,2) has no recorded c(8). The method therefore terminates precisely at genus 8, which is consistent with degree 16 remaining open, rather than proving too much. (vi) Standard-hazard sweep: stack versus coarse, Q versus Z, BM versus ordinary degree, the (21) twist, Gysin and Kunneth shifts, differentials, graph automorphisms, predicted motives, pure-Tate-to-algebraic upgrades, and omitted stable pairs were each attacked and none yields a defect. Verdict: confirmed, with the omega_s inhomogeneity omission recorded as a finding candidate so downstream artifacts state the missing line rather than inherit it.",
+  "subproblem_id": "C66-FULL",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "verdict": "confirmed"
+}

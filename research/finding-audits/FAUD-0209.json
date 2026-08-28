@@ -1,0 +1,72 @@
+{
+  "adjudicated_statement": "Let g>=2, n>=1, and work with rational coefficients on Deligne-Mumford stacks. Write C^n for the n-fold fibre product of the closed universal curve pi:C->M_g, and set k=vcd(M_{g,n})=4g-4+n. The open immersion M_{g,n} subset C^n induces a surjection W_k H^k(C^n;Q) ->> W_k H^k(M_{g,n};Q) by Deligne's identification of the lowest-weight piece in degree k. Canning-Larson-Payne Lemma 3.1(a) then supplies an isomorphism of pure weight-k Hodge structures W_k H^k(M_{g,n};Q)/(Phi_{g,n}^k+Psi_{g,n}^k) congruent to the direct sum over |lambda|=n of W_k H^{k-n}(M_g;V_lambda) tensor V_{lambda^T}, where Phi_{g,n}^k=sum_i pi_i^* W_k H^k(M_{g,n-1};Q) and Psi_{g,n}^k=sum_i psi_i Phi_{g,n}^{k-2}; the identification of Psi with the Kunneth summands having some i_s=2, modulo Phi, is the published pi_2-projector statement of that lemma (Petersen-Tavakol-Yin), not a fibrewise canonical-class slogan. Harer's virtual cohomological dimension gives H^p(M_g;L)=0 for every Q-local system L and every p>vcd(M_g)=4g-5 (equivalently: cohomological dimension of a torsion-free finite-index subgroup, transferred by rational Hochschild-Serre). Hence every multi-index i in {0,1,2}^n with |i|<=n has base degree k-|i|>=4g-4>4g-5 and the primitive quotient vanishes. Independently k=vcd(M_{g,n-1})+1, so Phi_{g,n}^k=0. Therefore W_{vcd} H^{vcd}(M_{g,n};Q)=Psi_{g,n}^{vcd}=sum_i psi_i sum_j pi_j^* W_{vcd-2} H^{vcd-2}(M_{g,n-1};Q). The comparison vcd(M_{g,n})-n=4g-4=vcd(M_g)+1 is independent of n>=1. Each psi_i is algebraic of type Q(-1). Whenever n-1<=c(g) in the published CKgP table c(3)=c(4)=11, c(5)=7, c(6)=5, c(7)=3, Canning-Larson-Payne Proposition 4.5 implies that W_{vcd-2} H^{vcd-2}(M_{g,n-1};Q) is algebraic of Tate type, and semisimplicity of polarizable pure Q-Hodge structures of a single weight realises W_{vcd} H^{vcd}(M_{g,n};Q) as a finite direct sum of Q(-vcd/2). In particular, at the campaign pair (g,n)=(6,6) one has k=26, n-1=5=c(6), and W_26 H^{26}(M_{6,6};Q) is a finite direct sum of Q(-13). The same peel does not kill the primitive term in degree vcd-1 and does not apply where no published c(g) is available.",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "Mandatory first reads: ATT-0135 Section 1 proves a pure-weight quotient (1) by open restriction M_{g,n} subset C^n, Leray-Kunneth of the closed universal curve, and the claim that modulo i_s=0 summands multiplication by psi_s spans i_s=2 summands because psi restricts to the fibre canonical class; it then specialises at (g,n,k)=(6,6,26) and uses Harer to kill the primitive term in degree 20>19 and the pullback term in degree 26>25. REV-0184 confirms that theorem and isolates the same mechanism as candidate C66-UNIVERSAL-CURVE-POWER-VCD-PEEL, while recording that the written i_s=2 sentence is incomplete because omega_s is Kunneth-inhomogeneous. Independent primary checks promote a corrected statement rather than the candidate text. Canning-Larson-Payne, Forum Math. Pi 12 (2024), arXiv:2307.08830v3, Lemma 3.1(a) is exactly ATT-0135's formula (1): restriction W_k H^k(C^n) ->> W_k H^k(M_{g,n}), and W_k H^k(M_{g,n})/(Phi^k+Psi^k) isomorphic to the sum over |lambda|=n of W_k H^{k-n}(M_g;V_lambda) tensor V_{lambda^T}. The published proof uses Deligne, IHES Publ. Math. 35 (1968), for E_2-degeneration of the smooth proper map C^n -> M_g (CLP bibliography [12], Proposition 2.16), relative Kunneth, and the pi_2 projectors of Petersen-Tavakol-Yin, Ann. Sci. Ec. Norm. Super. 54 (2021), Sections 5.1 and 5.2.2, to identify Psi with i_s=2 summands modulo Phi; it does not use Deninger-Murre abelian-scheme projectors. Thus the original Deninger-Murre wording is a misattribution and is retired from the packet statement. Harer's vcd (recalled e.g. in Colin-Jimenez Rolland-Leon Alvarez-Sanchez Saldana, arXiv:2412.14410v1, (2), and in Church-Farb-Putman, arXiv:1108.0622v3: H^i(Mod_g;V tensor Q)=0 for all i>4g-5 and all Mod_g-modules V) kills every |i|<=n summand at k=4g-4+n because the base degree is at least 4g-4. The same bound gives Phi^k=0 since k=vcd(M_{g,n-1})+1. Lemma 3.1 plus those two vanishings therefore yield W_vcd H^{vcd}(M_{g,n};Q)=Psi, not merely a containment. The omega-inhomogeneity attack of REV-0184 is disposed by the published pi_2 identification modulo Phi; the Morita vanishing H^1(Mod_g;H_1(Sigma_g;Q))=0 and the downward induction recorded in REV-0184 are optional alternatives, not extra packet hypotheses once Lemma 3.1 is cited. CLP Table 1 and Proposition 4.5 (via Lemma 4.3) give W_m H^m(M_{g,n-1})=RH^m algebraic of Tate type whenever n-1<=c(g); FND-0033 upgrades the resulting quotient of Q(-1) tensor that Tate group to an actual direct sum. No contradiction with THM-0005, which is applied on the open space M_{g,n-1} inside its recorded range (at (6,6), n-1=5=c(6)). No contradiction with corroborated FND-0035: that finding forbids vanishing drawn from 2d-16=vcd(M_{g,n}) itself, whereas the peel uses vcd(M_g) and vcd(M_{g,n-1}), both strictly below the target degree. Complementary to mechanically verified FND-0036, which is the special case Phi_{6,6}^{26}=0. Not a merge target for FND-0035 or FND-0036. FND-0050 constrains CE-route attempts and does not record a mathematical obstruction to an independent computation of the exact ordinary group. The method does not apply at ordinary degree vcd-1, so it does not settle (8,0) or (8,1), and it does not settle (8,2) without a published c(8).",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0195",
+  "id": "FAUD-0209",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "Tate_range": "n-1<=c(g) for published c(3)=c(4)=11,c(5)=7,c(6)=5,c(7)=3",
+    "campaign_case": {
+      "g": 6,
+      "k": 26,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "degree": "k=vcd(M_{g,n})=4g-4+n",
+    "excludes": [
+      "degree vcd-1",
+      "unpublished c(8)"
+    ],
+    "g": ">=2",
+    "n": ">=1",
+    "object": "lowest-weight ordinary cohomology of the open moduli stack M_{g,n}"
+  },
+  "source_records": [
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "7f6a4b87bf20c7c08e9dba8bdd3619f05896f2595953ef04e2228cc49d002ef6",
+      "doi": "10.1017/fmp.2024.24",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "dbe913d8d2ab3bd6dfbe5ddf1fd2106cc6f0ff4f31c7d9d8e3f43e684a3d1091",
+      "retrieved_at": "2026-08-27T22:52:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2307.08830v3"
+    },
+    {
+      "arxiv_id": "1108.0622",
+      "arxiv_version": "v3",
+      "content_sha256": "db11b60dfd46a5144bbc543959397ba681ad504f5f49cdbd25a64f4369add2c4",
+      "doi": "10.1093/imrn/rnr208",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "7c16ed70ade47ad1048e8875aa684cc5a41e83407cf183215c38cc0844100653",
+      "retrieved_at": "2026-08-27T22:52:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/1108.0622v3"
+    },
+    {
+      "arxiv_id": "2412.14410",
+      "arxiv_version": "v1",
+      "content_sha256": "51a461a692f684be4e1c060fae81daee59032f80cc9162ec903af4df759eaae5",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "dbe913d8d2ab3bd6dfbe5ddf1fd2106cc6f0ff4f31c7d9d8e3f43e684a3d1091",
+      "retrieved_at": "2026-08-27T22:50:00Z",
+      "source_type": "preprint",
+      "url": "https://arxiv.org/html/2412.14410v1"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0195",
+  "verdict": "promote",
+  "verified_source_count": 3
+}

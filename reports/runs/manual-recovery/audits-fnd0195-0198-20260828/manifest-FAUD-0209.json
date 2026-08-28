@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "context_revision": 2,
+  "created_on": "2026-08-28",
+  "excluded_engines": [
+    "claude"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "C66-UNIVERSAL-CURVE-POWER-VCD-PEEL",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-27",
+    "equivalence_group": "C66-UNIVERSAL-CURVE-POWER-VCD-PEEL",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0195",
+    "impacts_approach_ids": [
+      "C66-FULL"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "claude"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      }
+    },
+    "source_attempt_ids": [
+      "ATT-0135"
+    ],
+    "source_review_ids": [
+      "REV-0184"
+    ],
+    "statement": "Let g>=2, n>=1, C^n the n-fold fibre product of the closed universal curve over M_g, and k=vcd(M_{g,n})=4g-4+n. Because W_kH^k(M_{g,n}) is the image of W_kH^k(C^n) under the open restriction, because H^k(C^n) splits as a direct sum of mixed Hodge structures H^{k-|i|}(M_g; tensor_s R^{i_s}pi_*Q) over multi-indices i in {0,1,2}^n via the Deninger-Murre relative Chow-Kunneth projectors, and because H^p(M_g;L)=0 for every rational local system L and every p>vcd(M_g)=4g-5, every multi-index with |i|<=n sits in base degree k-|i|>=4g-4>4g-5 and vanishes; hence every surviving summand has some i_s=2 and W_{vcd}H^{vcd}(M_{g,n};Q)=sum_i psi_i sum_j pi_j^* W_{vcd-2}H^{vcd-2}(M_{g,n-1};Q). The peel is available because vcd(M_{g,n})-n=4g-4 exceeds vcd(M_g)=4g-5 by exactly one for every n>=1. Consequently the exact ordinary target is Tate whenever W_{vcd-2}H^{vcd-2}(M_{g,n-1};Q) is Tate, which the recorded CKgP range supplies exactly when n-1<=c(g).",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0195",
+  "id": "TASK-F-FND-0195",
+  "input_packet": "proof/packets/generated/C66-001-v6.md",
+  "output": "research/finding-audits/FAUD-0209.json",
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "291c493b7bb82873209f91b93f42db3638d398fe2bff781c61aad39f1f43b3e2",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "grok",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}

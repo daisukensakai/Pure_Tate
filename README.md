@@ -224,6 +224,20 @@ python3 -m pure_tate engine-health \
   --inactivity-timeout 60
 ```
 
+## Lean verification campaign for `(6,6)`
+
+The exact proof `ATT-0135` is the immutable source for Lean campaign `LC66-001`.
+The campaign deliberately distinguishes a successful Lean elaboration from a verified
+formalization: an attempt becomes verified only after two independent, provenance-bound
+reviews confirm the exact target signature, every black-box axiom, and the consistency
+model. See `formal/README.md` for the attempt workflow.
+
+```bash
+python3 -m pure_tate lean-check --attempt LATT-0001 --write
+python3 -m pure_tate lean-status
+python3 -m pure_tate lean-audit
+```
+
 Qwen live-web turns use the Model Studio Responses API with `web_search` and
 `web_extractor`. The Singapore Qwen3.7-Max endpoint requires thinking mode when
 `web_extractor` is enabled, so the evidence stage uses a small 2,048-token thinking

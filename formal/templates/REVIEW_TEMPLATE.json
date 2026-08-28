@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "id": "LREV-0000",
+  "attempt_id": "LATT-0000",
+  "campaign_id": "LC66-001",
+  "review_pass": 1,
+  "review_task_id": "TASK-LV-LATT-0000-P1",
+  "review_run_path": "reports/runs/RUN-LC66-001-...json",
+  "reviewer_engine": "engine-id-different-from-prover-and-other-reviewer",
+  "independent": true,
+  "verdict": "incomplete",
+  "campaign_sha256": "sha256-of-formal/campaigns/LC66-001.json",
+  "claim_sha256": "sha256-from-report",
+  "model_sha256": "sha256-from-report",
+  "manifest_sha256": "sha256-from-report",
+  "report_sha256": "sha256-of-generated-report.json",
+  "checked_obligations": [
+    "LC66-OBL-01",
+    "LC66-OBL-02",
+    "LC66-OBL-03",
+    "LC66-OBL-04",
+    "LC66-OBL-05",
+    "LC66-OBL-06"
+  ],
+  "target_checks": {
+    "stack_not_coarse": false,
+    "rational_coefficients": false,
+    "genus_6": false,
+    "markings_6": false,
+    "bm_degree_16": false,
+    "bm_weight_minus_16": false,
+    "bm_tate_index_8": false,
+    "ordinary_degree_26": false,
+    "ordinary_weight_26": false,
+    "ordinary_tate_index_minus_13": false,
+    "dimension_and_twist_21": false,
+    "zero_rank_allowed": false,
+    "whole_group_not_proxy": false
+  },
+  "model_checks": {
+    "models_every_claim_axiom": false,
+    "witness_is_axiom_free": false,
+    "noncollapse_is_material": false,
+    "model_matches_claim_vocabulary": false
+  },
+  "axiom_checks": [
+    {
+      "axiom": "exact-name-from-report",
+      "obligation_id": "LC66-OBL-01",
+      "verdict": "unresolved",
+      "note": "Reconstruct the exact mathematical reading; one entry is required for every reported axiom."
+    }
+  ],
+  "statement_faithfulness": "Compare the exported Lean theorem with C66-EXACT-TARGET-V1 field by field.",
+  "axiom_faithfulness": "Audit every LEAN-AXIOM reading against ATT-0135 and identify any strengthened, circular, or missing premise.",
+  "model_faithfulness": "Audit that Model.lean interprets the actual Claim vocabulary, proves every black box, and supplies material non-collapse witnesses.",
+  "strongest_attack": "Give the strongest attempted countermodel or semantic mismatch and its outcome.",
+  "findings": []
+}

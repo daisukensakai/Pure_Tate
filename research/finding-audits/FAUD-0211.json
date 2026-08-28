@@ -1,0 +1,76 @@
+{
+  "adjudicated_statement": "Work over C with Q-coefficients. Let g>=2 and n>=2. Let pi:C->M_g be the universal closed curve of genus g, and let C^n be its n-fold fibre product over M_g, a smooth separated finite-type Deligne-Mumford stack. Identify M_{g,n} with the open complement in C^n of the union of pairwise diagonals. Then, for every integer k, restriction along this open immersion is a morphism of mixed Hodge structures inducing a surjection W_k H^k(C^n;Q) ->> W_k H^k(M_{g,n};Q). The surjection follows from Deligne, Theorie de Hodge II, Corollaire 3.2.17: for a smooth separated scheme (and, with Q-coefficients, a smooth finite-type Deligne-Mumford stack via a scheme atlas), W_k H^k equals the image of H^k of any smooth proper compactification; a smooth proper compactification of C^n is simultaneously a compactification of the open M_{g,n}, so both lowest-weight groups equal the image of the same compactification cohomology and restriction factors that image. Consequently W_k H^k(M_{g,n};Q) is a quotient of W_k H^k(C^n;Q), and any generation, vanishing, or Tate-type upper bound on the source yields the same upper bound on the target. Identifying the kernel of restriction on W_k, including Gysin exactness for the diagonal divisors and the symplectic Schur-Weyl or traceless decomposition of (R^1 pi_* Q)^{tensor n}, is needed only to upgrade the surjection to an isomorphism (Canning-Larson-Payne Lemma 3.1(a)). This surjection does not assert that Kunneth summands of H^*(C^n) are summands of R^* f_* Q for the non-proper map f:M_{g,n}->M_g; that identification remains invalid, because the fibres are configuration spaces of distinct points and R^1 of the punctured curve is mixed of weights 1 and 2. In particular the statement applies at the campaign case (g,n,k)=(6,6,26).",
+  "campaign_id": "C66-001",
+  "contradiction_resolution": "No claim-level contradiction: contradicts_claim_ids is empty and the statement does not oppose CONJ-0001, THM-0001 through THM-0007, OBS-0001, or RED-0001. It is compatible with THM-0001 (smooth proper stacks have pure weight-k cohomology, used on a compactification) and with corroborated FND-0020/FND-0037 (the route uses the closed universal curve, whose R^1 is pure of weight 1, not the mixed punctured R^1). It is distinct from FND-0048 (image of H^{26}(Mbar_{6,6}) rather than of W_{26}H^{26}(C^6)), FND-0030 (Borel-Moore dual of top-weight compact support), and FND-0165 (compact-support corner injection); do not merge. Local contested passage in ATT-0135 Section 1: the open inclusion M_{g,n}->C^n induces a surjection on lowest weight W_k in degree k because, after a common smooth normal-crossings compactification, W_k of either smooth open is the image of compactification cohomology and restriction factors that image. REV-0184 independently accepted that surjection and recorded that only the containment direction is load-bearing downstream at (6,6,26), because H^{20}(M_6;V^{tensor 6}) vanishes by vcd, so symplectic Schur-Weyl is decorative for the submitted theorem. Primary checks: Deligne, Theorie de Hodge II, Publ. Math. IHES 40 (1971), (3.2.16) and Corollaire (3.2.17) (NUMDAM PDF, journal pp. 39-40) identify W_n H^n(X;Q) of a smooth separated scheme X with the image of H^n of any smooth proper compactification; a compactification of C^n is simultaneously a compactification of the open M_{g,n}, so restriction of that common image is surjective on W_k. Canning-Larson-Payne, arXiv:2307.08830v3, Lemma 3.1 proof, first sentence, states the same surjection for the stack inclusion M_{g,n} subset C^n and uses diagonal classes Delta_{ij} only later to identify the kernel for the isomorphism. The original candidate wording is corrected: an upper bound on the target is a quotient bound via the surjection, not a claim that nothing else is ever needed; the stack setting is licensed by the published CLP statement; Kunneth of the proper map C^n->M_g is not Leray of the non-proper map M_{g,n}->M_g. Promote from candidate to corroborated. Merge target: none.",
+  "engine": "grok",
+  "evidence_class": "primary_source",
+  "finding_id": "FND-0197",
+  "id": "FAUD-0211",
+  "independent": true,
+  "merge_target_id": null,
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "scope": {
+    "campaign_case": {
+      "g": 6,
+      "n": 6
+    },
+    "coefficients": "Q",
+    "excludes": [
+      "identification of ker of restriction on W_k",
+      "Gysin exactness for diagonal divisors",
+      "symplectic Schur-Weyl or traceless isomorphism",
+      "Kunneth summands of H^*(C^n) as summands of R^* f_* Q for f:M_{g,n}->M_g"
+    ],
+    "g": ">=2",
+    "ground_field": "C",
+    "n": ">=2",
+    "objects": [
+      "n-fold fibre product C^n of the closed universal curve over M_g",
+      "open complement of pairwise diagonals identified with M_{g,n}"
+    ],
+    "ordinary_cohomology": "W_k H^k"
+  },
+  "source_records": [
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "748edefb44fded8af67869abfed87062d66977d25b5d12f7d014f1810a063c3f",
+      "doi": "10.1007/BF02684692",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "593570e11ab35c50fc6dde62d2cda30574bf7863e6eb6ae3eaa54a95638b8746",
+      "retrieved_at": "2026-08-28T00:20:00Z",
+      "source_type": "journal",
+      "url": "https://www.numdam.org/item/10.1007/BF02684692.pdf"
+    },
+    {
+      "arxiv_id": "2307.08830",
+      "arxiv_version": "v3",
+      "content_sha256": "507e0f12159070feab13deb76ea039f5ff159784b5a9e68d2097a1ccc67979f2",
+      "doi": "10.1017/fmp.2024.24",
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "2cda8ae807ed0d76b48b0a1ca215bbf3c330ed0fa177e176931574b1ab2d262e",
+      "retrieved_at": "2026-08-28T00:20:00Z",
+      "source_type": "preprint",
+      "url": "https://ar5iv.labs.arxiv.org/html/2307.08830"
+    },
+    {
+      "arxiv_id": null,
+      "arxiv_version": null,
+      "content_sha256": "52bff37d214f02ddc3e5711b5074b0c07b1da8b21beac755f86c69454815a3c1",
+      "doi": null,
+      "hash_attested_by": "pure_tate_harness",
+      "query_family": "exact-finding-check",
+      "reported_content_sha256": "5122d8116aeadb38b1bd4efe15e2ef5b9ee7ddaeccc7947e1a8c71caf0d3b782",
+      "retrieved_at": "2026-08-28T00:20:00Z",
+      "source_type": "other-primary",
+      "url": "https://www2.math.upenn.edu/~siegelch/Notes/MdC.pdf"
+    }
+  ],
+  "sources_verified": true,
+  "task_id": "TASK-F-FND-0197",
+  "verdict": "promote",
+  "verified_source_count": 3
+}

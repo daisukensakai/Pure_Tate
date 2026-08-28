@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "campaign_revision": 6,
+  "context_revision": 2,
+  "created_on": "2026-08-28",
+  "excluded_engines": [
+    "claude"
+  ],
+  "finding": {
+    "adjudication_status": "pending",
+    "campaign_id": "C66-001",
+    "candidate_key": "C66-OMEGA-CLASS-KUNNETH-INHOMOGENEITY",
+    "case": {
+      "g": 6,
+      "n": 6
+    },
+    "contradicts_claim_ids": [],
+    "created_on": "2026-08-27",
+    "equivalence_group": "C66-OMEGA-CLASS-KUNNETH-INHOMOGENEITY",
+    "evidence_class": "adversarial_review",
+    "id": "FND-0196",
+    "impacts_approach_ids": [
+      "C66-FULL"
+    ],
+    "kind": "obstruction",
+    "reviewer_engines": [
+      "claude"
+    ],
+    "scope": {
+      "case": {
+        "g": 6,
+        "n": 6
+      }
+    },
+    "source_attempt_ids": [
+      "ATT-0135"
+    ],
+    "source_review_ids": [
+      "REV-0184"
+    ],
+    "statement": "On the n-fold fibre product C^n of the universal curve over M_g, the class omega_s=pr_s^* c_1(omega_{C/M_g}) is not homogeneous for the Kunneth multi-index: it decomposes as a_s+b_s+c_s with a_s in H^2(M_g) (slot value 0), b_s in H^1(M_g;V) (slot value 1) and c_s the R^2 component (slot value 2, coefficient 2g-2). Only c_s carries the i_s=0 to i_s=2 isomorphism, so any argument of the form 'multiplication by psi_s spans the i_s=2 summands modulo the summands with some slot 0' must dispose of the slot-1 cross term b_s. Two disposals are valid: H^1(Mod_g;H_1(Sigma_g;Q))=0 for g>=2 (Morita: the integral group is Z/(2g-2)), which makes b_s=0 identically; or a downward induction on |i| using A_i=c_s B_{i'} inside omega_s B_{i'}+A_{i'}+A_{i''} with |i''|=|i|-1 and the base case A_j=0 for k-|j|>vcd(M_g).",
+    "status": "candidate",
+    "supporting_artifact_hashes": [],
+    "verification_method": "revision-2 adversarial review"
+  },
+  "finding_id": "FND-0196",
+  "id": "TASK-F-FND-0196",
+  "input_packet": "proof/packets/generated/C66-001-v6.md",
+  "output": "research/finding-audits/FAUD-0210.json",
+  "packet_binding_sha256": "99a80568d1e92aa5a2f912b2d5099456a144f1bdcad229903ed2fec3b5c3110d",
+  "packet_id": "C66-001-v6",
+  "packet_sha256": "291c493b7bb82873209f91b93f42db3638d398fe2bff781c61aad39f1f43b3e2",
+  "phase": "finding-audit",
+  "prompt": "prompts/FINDING_AUDIT.md",
+  "requires_live_web": true,
+  "role": "independent-finding-adjudicator",
+  "selected_engine": "grok",
+  "status": "ready",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  }
+}
