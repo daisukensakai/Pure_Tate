@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "id": "C66BAR-001",
+  "campaign_revision": 2,
+  "context_revision": 2,
+  "case": {"g": 6, "n": 6},
+  "packet_cases": [{"g": 6, "n": 6}, {"g": 5, "n": 8}],
+  "packet_finding_campaign_ids": ["C66-001", "C66BAR-001"],
+  "packet_exact_target": "im(H_{16}(hat{partial} Mbar_{6,6};Q) -> H_{16}(Mbar_{6,6};Q)) is a finite direct sum of Q(8)",
+  "mathematics_prompt": "prompts/CAMPAIGN_MATHEMATICS_BOUNDARY.md",
+  "target_claim_id": "RED-0001",
+  "goal": "Prove that the image of the degree-16 boundary map of Mbar_{6,6} is Tate of type Q(8), or exhibit a surviving non-Tate summand in that image.",
+  "paired_attempt_policy": {
+    "revision": 2,
+    "forced_proof_enabled": false,
+    "engine_order": ["claude", "codex"],
+    "exact_theorem": "The image of the boundary map H_{16}(hat{partial} Mbar_{6,6};Q) -> H_{16}(Mbar_{6,6};Q) from the normalization of the boundary of the moduli stack of stable 6-pointed genus-6 curves is a finite direct sum of Q(8). Equivalently this image is a pure polarizable Tate Hodge structure of weight -16 and type Q(8). A disproof must exhibit a surviving non-Tate summand in this image. This theorem does not re-prove the open residual W_{-16}H^{BM}_{16}(M_{6,6};Q), and does not by itself conclude H^{16}(Mbar_{6,6};Q) cong Q(-8)^{oplus b_16}."
+  },
+  "batch_step_limit": 12,
+  "proof_confirmation_count": 2,
+  "novelty_audit_count": 2,
+  "primary_source_ids": ["SRC-0002", "SRC-0004"],
+  "bottleneck": {
+    "title": "Non-separating boundary divisor",
+    "fields": [
+      {
+        "label": "Boundary sequence",
+        "value": "THM-0003 / SRC-0002 Eq. (6.1): H_{16}(hat{partial} Mbar_{6,6}) -> H_{16}(Mbar_{6,6}) -> W_{-16}H^{BM}_{16}(M_{6,6}) -> 0"
+      },
+      {
+        "label": "Complementary cokernel",
+        "value": "The cokernel is the C66-001 open residual, double-confirmed as ATT-0136; this campaign does not re-prove it"
+      },
+      {
+        "label": "Non-separating normalization",
+        "value": "[Mbar_{5,8}/S_2], where S_2 exchanges the two branches of the node; its ordered atlas Mbar_{5,8} is the unique RED-0001 residual pair in the boundary of Mbar_{6,6}"
+      },
+      {
+        "label": "Separating type",
+        "value": "Quotients [Mbar_Gamma/Aut(Gamma)] for one-edge separating graphs, with ordered atlas Mbar_{g1,n1} x Mbar_{g2,n2}, g1+g2=6 and n1+n2=8; cohomology is taken with Aut(Gamma)-invariants and the determinant-edge convention"
+      }
+    ],
+    "program": [
+      "Identify every component of hat{partial} Mbar_{6,6} as [Mbar_Gamma/Aut(Gamma)], including [Mbar_{5,8}/S_2] for the non-separating graph, and retain the determinant-edge convention.",
+      "Discharge every separating H^{16} Kunneth term from published even cohomology through degree 14 and CKgP/induction on non-residual factors.",
+      "Prove the open residual of (5,8) by the same CLP Lemma 3.1 + Harer + CKgP peel as ATT-0136, at n-1=c(5)=7 and ordinary degree 24.",
+      "Check that the boundary of Mbar_{5,8} is outside RED-0001, assemble compact H^{16}(Mbar_{5,8}) by THM-0003, and conclude that the (6,6) boundary-image is Tate."
+    ]
+  },
+  "blocked_routes": [
+    "vcd-only-vanishing",
+    "undecorated-cgp-top-weight-graph-complex",
+    "point-count-without-degree-parity-separation",
+    "forgetful-map-renaming-local-system-unknown"
+  ],
+  "subproblems": [
+    {
+      "id": "C66BAR-GRAPH",
+      "lane": "geometry",
+      "title": "Identify the normalized boundary of Mbar_{6,6}",
+      "dependencies": [],
+      "exact_theorem": "Let Xbar := Mbar_{6,6} be the moduli stack of stable genus-6 curves with 6 ordered marked points, and let hat{partial} Xbar be the normalization of its reduced boundary divisor. Prove all of the following, with no Tate assertion. (i) The non-separating component has normalization [Mbar_{5,8}/S_2], where S_2 exchanges the two ordered preimages of the node. (ii) For every one-edge separating stable graph Gamma, the corresponding normalized component is [Mbar_Gamma/Aut(Gamma)], where Mbar_Gamma=Mbar_{g1,n1} x Mbar_{g2,n2}, g1+g2=6, n1+n2=8, and both vertices are stable. (iii) Its contribution is (H^*(Mbar_Gamma) tensor det E_Gamma)^{Aut(Gamma)}. This theorem names the source of the campaign boundary map and does not assert Tate type of any cohomology group."
+    },
+    {
+      "id": "C58-OPEN",
+      "target_case": {"g": 5, "n": 8},
+      "lane": "weakest-sufficient-proof",
+      "title": "Discharge the open residual of (5,8)",
+      "dependencies": [],
+      "exact_theorem": "The exact group W_{-16}H^{BM}_{16}(M_{5,8};Q), equivalently W_{24}H^{24}(M_{5,8};Q)(20), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group. This theorem does not conclude H^{16}(Mbar_{5,8};Q) and does not conclude the campaign boundary-image theorem."
+    },
+    {
+      "id": "C58-BOUNDARY",
+      "target_case": {"g": 5, "n": 8},
+      "lane": "weakest-sufficient-proof",
+      "title": "Show the boundary of Mbar_{5,8} lies outside RED-0001",
+      "dependencies": [],
+      "exact_theorem": "Every factor occurring in the normalization of an irreducible boundary divisor of Mbar_{5,8} lies outside the RED-0001 residual list. The non-separating component is [Mbar_{4,10}/S_2]. A separating one-edge graph has ordered atlas Mbar_{g1,n1} x Mbar_{g2,n2} with g1+g2=5, n1+n2=10, and both vertices stable, modulo Aut(Gamma). In particular a genus-5 factor has at most 7 markings and a genus-3 factor has at most 9 markings, so no factor is one of (3,12), (5,8), (6,6), (7,4), (8,0), (8,1), or (8,2). This theorem makes no Tate assertion and does not conclude H^{16}(Mbar_{5,8};Q)."
+    },
+    {
+      "id": "C66BAR-SEP",
+      "lane": "weakest-sufficient-proof",
+      "title": "Type the separating Kunneth terms of H^{16}(Mbar_{6,6})",
+      "dependencies": ["C66BAR-GRAPH"],
+      "exact_theorem": "Using a verified C66BAR-GRAPH identification of the one-edge separating components [Mbar_Gamma/Aut(Gamma)], prove that every Aut(Gamma)-invariant determinant-edge Kunneth summand in degree 16 is a finite direct sum of Q(-8). On the ordered product atlases, the only degree-16 factors that arise have n<=7 and lie outside RED-0001; even degrees <=14 are in the published tautological range. This theorem does not treat the non-separating component [Mbar_{5,8}/S_2] and does not conclude the campaign boundary-image theorem."
+    },
+    {
+      "id": "C58-COMPACT",
+      "target_case": {"g": 5, "n": 8},
+      "lane": "weakest-sufficient-proof",
+      "title": "Assemble compact H^{16}(Mbar_{5,8}) from its open residual",
+      "dependencies": ["C58-OPEN", "C58-BOUNDARY"],
+      "exact_theorem": "Using a verified C58-OPEN residual and a verified C58-BOUNDARY accounting, apply the boundary right-exact sequence of THM-0003 to conclude that H^{16}(Mbar_{5,8};Q) is a finite direct sum of Q(-8). A disproof must exhibit a surviving non-Tate summand in this compact group. This theorem does not conclude the campaign boundary-image theorem."
+    },
+    {
+      "id": "C66BAR-IMAGE",
+      "lane": "weakest-sufficient-proof",
+      "title": "Conclude that the (6,6) boundary-image is Tate",
+      "dependencies": ["C66BAR-GRAPH", "C66BAR-SEP", "C58-COMPACT"],
+      "exact_theorem": "The image of the boundary map H_{16}(hat{partial} Mbar_{6,6};Q) -> H_{16}(Mbar_{6,6};Q) from the normalization of the boundary of the moduli stack of stable 6-pointed genus-6 curves is a finite direct sum of Q(8). Equivalently this image is a pure polarizable Tate Hodge structure of weight -16 and type Q(8). A disproof must exhibit a surviving non-Tate summand in this image. This theorem does not re-prove the open residual W_{-16}H^{BM}_{16}(M_{6,6};Q), and does not by itself conclude H^{16}(Mbar_{6,6};Q) cong Q(-8)^{oplus b_16}."
+    },
+    {
+      "id": "C66BAR-CEX",
+      "lane": "counterexample",
+      "title": "Search the (6,6) boundary-image for a surviving non-Tate summand",
+      "dependencies": ["C66BAR-GRAPH"],
+      "artifact_contract": {
+        "object_field": "boundary_image_reference",
+        "required_nonempty_strings": [
+          "graph_attempt_id",
+          "source_stratum",
+          "target_map_use",
+          "survival_or_tate_argument"
+        ],
+        "required_nonempty_lists": ["graph_claim_ids"]
+      }
+    }
+  ],
+  "experiments": []
+}

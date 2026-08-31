@@ -44,8 +44,8 @@ python3 -m pure_tate tasks --phase micro-research --write
 python3 -m pure_tate engines
 python3 -m pure_tate capability-audit --engines claude grok
 python3 -m pure_tate engine-health --engine qwen --live --level artifact
-python3 -m pure_tate campaign-status --campaign C66-001 --write
-python3 -m pure_tate next --campaign C66-001 --phase forced-proof
+python3 -m pure_tate campaign-status --campaign C66BAR-001 --write
+python3 -m pure_tate next --campaign C66BAR-001 --phase mathematics
 ```
 
 `TARGET.md` is the human-readable scope contract. `data/target.json` is its
@@ -155,15 +155,42 @@ python3 -m pure_tate finding-adjudicate \
   --reason "Independent locator-level reviews establish the same obstruction."
 ```
 
-## Focused `(6,6)` novelty campaign
+## Focused `(6,6)` campaigns
 
-Campaign `C66-001` keeps target context revision 2 and uses campaign revision 4.
+The open residual theorem is complete: `ATT-0136`, with two independent
+confirmations, proves that
+`W_{-16}H^{BM}_{16}(M_{6,6};Q)` is a finite direct sum of `Q(8)`. The remaining
+compact problem is the image of the degree-16 boundary map. `C66BAR-001`
+revision 2 is now the default campaign for that image. Its normalized one-edge
+components are treated as quotient stacks `[Mbar_Gamma/Aut(Gamma)]`; in
+particular the non-separating component is `[Mbar_{5,8}/S_2]`, not the ordered
+atlas `Mbar_{5,8}`. Revision-1 attempts `ATT-0137` and `ATT-0139` are preserved
+as stale historical disproofs of the superseded contracts.
+
+Generate and inspect the boundary-image campaign with:
+
+```bash
+python3 -m pure_tate all
+python3 -m pure_tate campaign-status --campaign C66BAR-001
+python3 -m pure_tate drive \
+  --campaign C66BAR-001 \
+  --steps 12 \
+  --research-engines claude grok \
+  --prover-engines grok claude codex qwen \
+  --review-engines grok qwen codex claude \
+  --dry-run
+```
+
+The earlier `C66-001` campaign remains immutable evidence for the open-residual
+proof and its development history.
+
+Historically, campaign `C66-001` kept target context revision 2 and reached campaign revision 6.
 Its packet focuses on the balanced tetragonal Casnati–Ekedahl failure locus and
 coordinates geometry, weakest-sufficient-proof, counterexample, and computation
 lanes. Revision 2 fixes the CE convention
 `W_5=(O_{P(E^vee)}(2) tensor gamma^*O(-5))|_C`, preserves the revision-1
-attempt byte-for-byte as stale context, and enforces the subproblem DAG. Revision 4
-adds chain-scoped high-tier escalation and periodic forced exact-theorem turns.
+attempt byte-for-byte as stale context, and enforces the subproblem DAG. Later revisions
+added chain-scoped high-tier escalation and periodic forced exact-theorem turns.
 After fresh ordinary proof starts 3 and 6 in each six-start cycle, the harness
 queues one forced turn each for Opus and GPT in the active chain order. Grok and
 Qwen never receive forced-proof work. A substantive unsuccessful forced result
@@ -226,16 +253,18 @@ python3 -m pure_tate engine-health \
 
 ## Lean verification campaign for `(6,6)`
 
-The exact proof `ATT-0135` is the immutable source for Lean campaign `LC66-001`.
+The exact proof `ATT-0136` is the immutable source for Lean campaign `LC66-002`.
 The campaign deliberately distinguishes a successful Lean elaboration from a verified
 formalization: an attempt becomes verified only after two independent, provenance-bound
 reviews confirm the exact target signature, every black-box axiom, and the consistency
-model. See `formal/README.md` for the attempt workflow.
+model. `LATT-0003` mechanically passes with a strengthened material model, but it is
+still only a candidate until the queued Grok and Claude reviews both confirm it. See
+`formal/README.md` for the attempt workflow.
 
 ```bash
-python3 -m pure_tate lean-check --attempt LATT-0001 --write
-python3 -m pure_tate lean-status
-python3 -m pure_tate lean-audit
+python3 -m pure_tate lean-check --attempt LATT-0003 --campaign LC66-002 --write
+python3 -m pure_tate lean-status --campaign LC66-002
+python3 -m pure_tate lean-audit --campaign LC66-002
 ```
 
 Qwen live-web turns use the Model Studio Responses API with `web_search` and

@@ -167,6 +167,7 @@ def record_event(event: Dict[str, Any]) -> Dict[str, Any]:
         event = {
             "theorem_sha256": theorem_sha256(campaign),
             "packet_revision": campaign["campaign_revision"],
+            "problem_key": problem_key(campaign),
             **event,
         }
     row = {
@@ -628,7 +629,11 @@ def recover_attempt_from_trace(
         _validate_artifact,
         load_engines,
     )
-    from .campaigns import campaign_packet_record, load_campaign
+    from .campaigns import (
+        campaign_packet_record,
+        campaign_revision_migration,
+        load_campaign,
+    )
     from .tasking import campaign_mathematics_tasks
 
     trace = _trace_record(trace_id)
@@ -647,9 +652,6 @@ def recover_attempt_from_trace(
     campaign = load_campaign(campaign_id)
     packet = campaign_packet_record(campaign_id)
     from .campaigns import packet_binding_matches
-
-    if not packet_binding_matches(trace, campaign_id):
-        raise ValueError("trace packet is stale; recovery is not safe")
     base_tasks = {
         task["id"]: task for task in campaign_mathematics_tasks(campaign_id)
     }
@@ -668,6 +670,56 @@ def recover_attempt_from_trace(
         task = dict(base)
     if isinstance(trace.get("task_id"), str):
         task["id"] = trace["task_id"]
+
+    trace_path = Path(str(trace["_path"]))
+    trace_sha256 = hashlib.sha256(trace_path.read_bytes()).hexdigest()
+    recovery_migration = None
+    if not packet_binding_matches(trace, campaign_id):
+        migration = campaign_revision_migration(campaign_id)
+        parsed_for_migration = trace.get("parsed_artifact")
+        for record in migration.get("trace_recoveries", []):
+            if not isinstance(record, dict) or not isinstance(
+                parsed_for_migration, dict
+            ):
+                continue
+            theorem = parsed_for_migration.get("theorem_statement")
+            artifact_target = parsed_for_migration.get("target")
+            expected_target = task.get("target")
+            target_case = record.get("target_case")
+            target_matches = (
+                isinstance(artifact_target, dict)
+                and isinstance(expected_target, dict)
+                and all(
+                    key in expected_target and expected_target[key] == value
+                    for key, value in artifact_target.items()
+                )
+            )
+            if (
+                record.get("trace_id") == trace_id
+                and record.get("trace_sha256") == trace_sha256
+                and record.get("source_packet_binding_sha256")
+                == trace.get("packet_binding_sha256")
+                and record.get("source_packet_sha256")
+                == trace.get("packet_sha256")
+                and record.get("source_campaign_revision")
+                == parsed_for_migration.get("campaign_revision")
+                and record.get("destination_campaign_revision")
+                == campaign.get("campaign_revision")
+                and record.get("task_id") == task.get("id")
+                and record.get("subproblem_id") == task.get("subproblem_id")
+                and isinstance(theorem, str)
+                and record.get("theorem_sha256")
+                == hashlib.sha256(theorem.encode("utf-8")).hexdigest()
+                and theorem == task.get("exact_theorem")
+                and isinstance(target_case, dict)
+                and target_case.get("g") == expected_target.get("g")
+                and target_case.get("n") == expected_target.get("n")
+                and target_matches
+            ):
+                recovery_migration = record
+                break
+        if recovery_migration is None:
+            raise ValueError("trace packet is stale; recovery is not safe")
 
     parsed = trace.get("parsed_artifact")
     if isinstance(parsed, dict) and parsed:
@@ -698,20 +750,45 @@ def recover_attempt_from_trace(
     artifact["id"] = output.stem
     _validate_artifact("mathematics", task, artifact, output, engine)
 
-    trace_path = Path(str(trace["_path"]))
-    trace_sha256 = hashlib.sha256(trace_path.read_bytes()).hexdigest()
     artifact["observable_trace_id"] = trace_id
     artifact["observable_trace_sha256"] = trace_sha256
+    recovery_classification = (
+        "revision_migration_recovery"
+        if recovery_migration is not None
+        else "parser_recovery"
+    )
     artifact["recovery"] = {
-        "classification": "parser_recovery",
+        "classification": recovery_classification,
         "recovered_from_trace": trace_id,
         "recovered_at": _timestamp(),
         "reason": (
-            "Recovered from official observable trace after validation/parser "
-            "failure; existing work was never rewritten."
+            "Recovered from official observable trace under an explicit "
+            "hash-bound campaign revision migration; existing work was never "
+            "rewritten."
+            if recovery_migration is not None
+            else "Recovered from official observable trace after validation/"
+            "parser failure; existing work was never rewritten."
         ),
         "protect_from_overwrite": True,
     }
+    if recovery_migration is not None:
+        artifact["recovery"].update(
+            {
+                "migration_id": recovery_migration.get("id"),
+                "source_campaign_revision": recovery_migration.get(
+                    "source_campaign_revision"
+                ),
+                "source_packet_binding_sha256": trace.get(
+                    "packet_binding_sha256"
+                ),
+                "destination_campaign_revision": campaign.get(
+                    "campaign_revision"
+                ),
+                "destination_packet_binding_sha256": packet.get(
+                    "packet_binding_sha256"
+                ),
+            }
+        )
     for field in (
         "paired_turn_kind",
         "paired_problem_key",
@@ -746,9 +823,13 @@ def recover_attempt_from_trace(
         "artifact_id": artifact["id"],
         "artifact_path": str(output.relative_to(ROOT)),
         "artifact_sha256": artifact_sha256,
-        "classification": "parser_recovery",
+        "classification": recovery_classification,
         "protect_from_overwrite": True,
-        "reason": "PARSER-RECOVERY-0001",
+        "reason": (
+            "REVISION-TRACE-RECOVERY-0001"
+            if recovery_migration is not None
+            else "PARSER-RECOVERY-0001"
+        ),
         "source_boundary": trace["source_boundary"],
     }
     ledger["recoveries"].append(receipt)
@@ -759,7 +840,7 @@ def recover_attempt_from_trace(
         "engine": engine,
         "turn_kind": turn_kind,
         "packet_sha256": packet["packet_sha256"],
-        "classification": "parser_recovery",
+        "classification": recovery_classification,
         "trace_id": trace_id,
         "trace_path": str(trace_path.relative_to(ROOT)),
         "trace_sha256": trace_sha256,

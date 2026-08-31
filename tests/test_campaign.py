@@ -1,5 +1,6 @@
 import copy
 import hashlib
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -22,6 +23,7 @@ from pure_tate.campaign_driver import (
     next_campaign_task,
 )
 from pure_tate.campaigns import (
+    DEFAULT_CAMPAIGN,
     campaign_packet_binding,
     campaign_packet_binding_sha256,
     campaign_packet_record,
@@ -109,6 +111,19 @@ class PacketBindingTests(unittest.TestCase):
                 campaign_packet_binding_sha256("C66-001"), baseline
             )
             self.assertEqual(campaign_packet_record("C66-001")["packet_sha256"], content)
+
+    def test_binding_ignores_derived_subproblem_target_case(self):
+        baseline = campaign_packet_binding_sha256("C66BAR-001")
+        campaign = load_campaign("C66BAR-001")
+        mutated = copy.deepcopy(campaign)
+        for item in mutated["subproblems"]:
+            item.pop("target_case", None)
+        with mock.patch(
+            "pure_tate.campaigns.load_campaign", return_value=mutated
+        ):
+            self.assertEqual(
+                campaign_packet_binding_sha256("C66BAR-001"), baseline
+            )
 
     def test_binding_covers_every_identity_bearing_input(self):
         binding = campaign_packet_binding("C66-001")
@@ -747,6 +762,9 @@ class FocusedCampaignTests(unittest.TestCase):
         with mock.patch(
             "pure_tate.campaigns.load_campaign_attempts",
             side_effect=pre_interface_attempts,
+        ), mock.patch(
+            "pure_tate.campaigns.case_verified",
+            return_value={"verified": False, "attempt": None, "reviews": []},
         ):
             report = campaign_status("C66-001")
         self.assertIn(
@@ -1356,6 +1374,19 @@ class FocusedCampaignTests(unittest.TestCase):
         ), mock.patch(
             "pure_tate.paired.pair_state",
             return_value={"state": "standard_under_review"},
+        ), mock.patch(
+            "pure_tate.campaign_driver.case_verified",
+            return_value={"verified": False, "attempt": None, "reviews": []},
+        ), mock.patch(
+            "pure_tate.campaign_driver.campaign_status",
+            return_value={
+                "structural_integrity": "ready",
+                "case_verification": {"case_verified": False},
+                "novelty_certification": {
+                    "novelty_certified": False,
+                    "reason": "case_not_verified",
+                },
+            },
         ):
             result = drive_campaign(
                 "C66-001",
@@ -1391,10 +1422,12 @@ class FocusedCampaignTests(unittest.TestCase):
                 )
 
     def test_novelty_fails_closed_before_case_verification(self):
-        status = novelty_status("C66-001")
+        unverified = {"verified": False, "attempt": None, "reviews": []}
+        with mock.patch("pure_tate.campaigns.case_verified", return_value=unverified):
+            status = novelty_status("C66-001")
+            report = campaign_status("C66-001")
         self.assertFalse(status["certified"])
         self.assertEqual(status["reason"], "case_not_verified")
-        report = campaign_status("C66-001")
         self.assertFalse(report["case_verification"]["case_verified"])
         self.assertFalse(
             report["novelty_certification"]["novelty_certified"]
@@ -1470,6 +1503,154 @@ class FocusedCampaignTests(unittest.TestCase):
                 status = novelty_status("C66-001")
                 self.assertFalse(status["certified"])
                 self.assertEqual(status["reason"], "conflicting_prior_art")
+
+
+class C66BarCampaignTests(unittest.TestCase):
+    def test_default_campaign_is_the_boundary_image_campaign(self):
+        self.assertEqual(DEFAULT_CAMPAIGN, "C66BAR-001")
+        campaign = load_campaign("C66BAR-001")
+        self.assertEqual(campaign["campaign_revision"], 2)
+        self.assertIn(
+            "H_{16}(hat{partial} Mbar_{6,6};Q)",
+            campaign["paired_attempt_policy"]["exact_theorem"],
+        )
+        self.assertNotIn(
+            "W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently",
+            campaign["paired_attempt_policy"]["exact_theorem"][:80],
+        )
+
+    def test_open_residual_cells_are_immediately_executable(self):
+        tasks = {
+            task["subproblem_id"]: task
+            for task in campaign_mathematics_tasks("C66BAR-001")
+        }
+        self.assertEqual(
+            tasks["C58-OPEN"]["blocked_dependencies"],
+            [],
+        )
+        self.assertEqual(tasks["C58-OPEN"]["status"], "ready")
+        self.assertEqual(
+            tasks["C66BAR-GRAPH"]["blocked_dependencies"],
+            [],
+        )
+        self.assertEqual(tasks["C58-BOUNDARY"]["blocked_dependencies"], [])
+        self.assertEqual(
+            tasks["C66BAR-IMAGE"]["blocked_dependencies"],
+            ["C66BAR-SEP", "C58-COMPACT"],
+        )
+        self.assertEqual(
+            tasks["C58-OPEN"]["prompt"],
+            "prompts/CAMPAIGN_MATHEMATICS_BOUNDARY.md",
+        )
+        self.assertEqual(tasks["C58-OPEN"]["packet_id"], "C66BAR-001-v2")
+
+    def test_subproblem_targets_follow_target_case(self):
+        tasks = {
+            task["subproblem_id"]: task
+            for task in campaign_mathematics_tasks("C66BAR-001")
+        }
+        for subproblem_id in ("C58-OPEN", "C58-BOUNDARY", "C58-COMPACT"):
+            self.assertEqual(
+                (tasks[subproblem_id]["target"]["g"], tasks[subproblem_id]["target"]["n"]),
+                (5, 8),
+            )
+            self.assertEqual(
+                tasks[subproblem_id]["target"]["ordinary_cohomology_degree"],
+                24,
+            )
+        for subproblem_id in (
+            "C66BAR-GRAPH",
+            "C66BAR-SEP",
+            "C66BAR-IMAGE",
+            "C66BAR-CEX",
+        ):
+            self.assertEqual(
+                (tasks[subproblem_id]["target"]["g"], tasks[subproblem_id]["target"]["n"]),
+                (6, 6),
+            )
+
+    def test_target_case_must_be_well_formed_and_packet_visible(self):
+        campaign = load_campaign("C66BAR-001")
+        for target_case, message in (
+            ({"g": "5", "n": 8}, "invalid target_case"),
+            ({"g": 4, "n": 10}, "absent from packet_cases"),
+        ):
+            mutated = copy.deepcopy(campaign)
+            mutated["subproblems"][1]["target_case"] = target_case
+            with mock.patch(
+                "pure_tate.campaigns.load_json", return_value=mutated
+            ):
+                with self.assertRaisesRegex(ValueError, message):
+                    load_campaign("C66BAR-001")
+
+    def test_c58_open_artifact_validates_against_its_own_target(self):
+        task = next(
+            item
+            for item in campaign_mathematics_tasks("C66BAR-001")
+            if item["subproblem_id"] == "C58-OPEN"
+        )
+        trace = json.loads(
+            (ROOT / "research" / "paired-traces" / "TRACE-0110.json").read_text()
+        )
+        artifact = copy.deepcopy(trace["parsed_artifact"])
+        _validate_artifact(
+            "mathematics",
+            task,
+            artifact,
+            ROOT / "proof" / "attempts" / "ATT-9997.json",
+            "codex",
+        )
+        self.assertEqual((artifact["target"]["g"], artifact["target"]["n"]), (5, 8))
+        contradictory = copy.deepcopy(trace["parsed_artifact"])
+        contradictory["target"] = next(
+            item["target"]
+            for item in campaign_mathematics_tasks("C66BAR-001")
+            if item["subproblem_id"] == "C66BAR-GRAPH"
+        )
+        with self.assertRaisesRegex(ValueError, "artifact target contradicts"):
+            _validate_artifact(
+                "mathematics",
+                task,
+                contradictory,
+                ROOT / "proof" / "attempts" / "ATT-9996.json",
+                "codex",
+            )
+
+    def test_packet_states_the_boundary_image_and_not_ce_geometry(self):
+        packet = campaign_packet_record("C66BAR-001")["_text"]
+        self.assertIn("hat{partial} Mbar_{6,6}", packet)
+        self.assertIn("Mbar_{5,8}", packet)
+        self.assertIn("[Mbar_{5,8}/S_2]", packet)
+        self.assertIn("[Mbar_Gamma/Aut(Gamma)]", packet)
+        campaign = load_campaign("C66BAR-001")
+        boundary = next(
+            item for item in campaign["subproblems"] if item["id"] == "C58-BOUNDARY"
+        )
+        self.assertIn("genus-5 factor has at most 7 markings", boundary["exact_theorem"])
+        self.assertIn("ATT-0136", packet)
+        self.assertIn("C58-OPEN", packet)
+        self.assertNotIn("F=O_{P1}(4) direct-sum O_{P1}(5)", packet)
+        self.assertNotIn("- `C66-GEO-Z`", packet)
+        c66 = campaign_packet_record("C66-001")["_text"]
+        self.assertIn("F=O_{P1}(4) direct-sum O_{P1}(5)", c66)
+        self.assertIn("C66-GEO-Z", c66)
+
+    def test_revision_one_disproofs_are_preserved_and_stale(self):
+        from pure_tate.campaigns import load_campaign_attempts
+
+        historical = {
+            item["id"]: item
+            for item in load_campaign_attempts("C66BAR-001", current_only=False)
+        }
+        self.assertEqual(historical["ATT-0137"]["campaign_revision"], 1)
+        self.assertEqual(historical["ATT-0139"]["campaign_revision"], 1)
+        current_ids = {
+            item["id"] for item in load_campaign_attempts("C66BAR-001")
+        }
+        self.assertNotIn("ATT-0137", current_ids)
+        self.assertNotIn("ATT-0139", current_ids)
+        self.assertIn("ATT-0140", current_ids)
+        self.assertIn("ATT-0141", current_ids)
 
 
 if __name__ == "__main__":

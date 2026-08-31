@@ -1,0 +1,86 @@
+{
+  "argument_markdown": "Source-backed input: RED-0001 consists of the pairs (3,12), (5,8), (6,6), (7,4), (8,0), (8,1), and (8,2).\n\nProved counterexample: take the one-edge separating dual graph with vertices v_5 and v_0 of genera 5 and 0. Put markings 1 through 6 on v_5 and markings 7 and 8 on v_0. Including the half-edge of the node, the corresponding factor pairs are (5,7) and (0,3). The graph has total genus 5 and eight legs. Both vertices are stable because 2\u00b75\u22122+7=15>0 and 2\u00b70\u22122+3=1>0.\n\nThe associated clutching morphism is Mbar_{5,7} \u00d7 Mbar_{0,3} \u2192 Mbar_{5,8}. Its image is the irreducible separating boundary divisor whose rational component carries markings 7 and 8. One factor therefore has genus 5. This directly contradicts the clause in the exact theorem that every separating product has factors of genus at most 4; the additional genus-3 clause does not include this factor.\n\nThe counterexample does not put a RED-0001 pair on the boundary: (5,7) and (0,3) are both outside the displayed residual list. Thus it refutes precisely the asserted exhaustive genus description after the colon, not the narrower outside-RED-0001 conclusion that could be repaired by adding the genus-5 case n\u22647. No Tate assertion, compact-cohomology conclusion, boundary-image conclusion, or claim about H^{16}(Mbar_{5,8};Q) is made. No computation or unproved hypothesis is used, and there is no remaining gap.",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 1,
+  "claims": [
+    {
+      "id": "ATT-0139-CLM-01",
+      "statement": "The one-edge graph with genus-5 and genus-0 vertices, six legs on the former and two legs on the latter, is a stable dual graph of type (5,8).",
+      "status": "proved"
+    },
+    {
+      "id": "ATT-0139-CLM-02",
+      "statement": "Its clutching stratum is the irreducible separating boundary divisor represented by Mbar_{5,7} \u00d7 Mbar_{0,3}.",
+      "status": "proved"
+    },
+    {
+      "id": "ATT-0139-CLM-03",
+      "statement": "The genus-5 factor Mbar_{5,7} contradicts the exact theorem's assertion that every separating product has factors of genus at most 4.",
+      "status": "proved"
+    },
+    {
+      "id": "ATT-0139-CLM-04",
+      "statement": "The pairs (5,7) and (0,3) are outside RED-0001, so the counterexample makes no claim that a RED-0001 pair occurs on this boundary.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [],
+  "id": "ATT-0139",
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "stable-dual-graph-arithmetic",
+    "deligne-mumford-stability",
+    "clutching-map-construction"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "packet_binding_sha256": "573c965db6dd15b034536547679084d1ec5902b91b504ac438555b0cf9212769",
+  "packet_id": "C66BAR-001-v1",
+  "packet_path": "proof/packets/generated/C66BAR-001-v1.md",
+  "packet_sha256": "496b06549c3a8aa39bce6e256b0d35707910cb73f25e776bb6517721ade779f7",
+  "proof_dependencies": [],
+  "result_type": "disproof",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "RED-0001"
+  ],
+  "source_ids": [],
+  "status": "claimed_complete",
+  "subproblem_id": "C58-BOUNDARY",
+  "summary": "The theorem as written is false because the stable rational-tail boundary divisor Mbar_{5,7} \u00d7 Mbar_{0,3} has a genus-5 factor, contradicting the asserted genus-at-most-4 description, although neither factor belongs to RED-0001.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "g": 5,
+    "n": 8
+  },
+  "theorem_statement": "Every irreducible boundary stratum of Mbar_{5,8} is a pair (g,n) outside the RED-0001 residual list: the non-separating divisor has normalization Mbar_{4,10}, and every separating product has factors of genus at most 4, or of genus 3 with at most 9 markings. This theorem makes no Tate assertion and does not conclude H^{16}(Mbar_{5,8};Q)."
+}

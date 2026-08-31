@@ -1,0 +1,146 @@
+{
+  "attempt_id": "ATT-0140",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "checked_claims": [
+    {
+      "claim_id": "ATT-0140-CLM-01",
+      "note": "Normalization of the reduced boundary = stack N of stable 6-pointed genus-6 curves with a distinguished node. Reconstructed independently: deformations of a pointed nodal curve are unobstructed (Ext^2 of the cotangent complex vanishes: the local-to-global sequence has H^2(T)=0 on a curve and H^1 of a skyscraper Ext^1 = 0), the versal base is Spec C[[u_*, (t_e)]] with reduced boundary {prod_e t_e = 0}, and each branch {t_e=0} is smooth. Normalization commutes with etale (in particular smooth) base change, so the local disjoint unions of branches glue; the branch {t_e=0} is intrinsically the choice of the node e, which is what makes the descent Aut(C,p)-equivariant. The quotient of a normal scheme by a finite group is normal, so N is normal; N -> partial Xbar is finite and generically injective on each component (a generic boundary point has exactly one node), hence is the normalization. Attacked as a possible stack/coarse confusion: the attempt explicitly keeps the descent stack-theoretic (an automorphism fixing a node but exchanging its branches is retained in the inertia of N), which is exactly the point that makes clause (i) a quotient stack rather than Mbar_{5,8}. No defect found.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0140-CLM-02",
+      "note": "N_irr = [Mbar_{5,8}/S_2]. Partial normalization at a non-separating node yields a connected curve of genus 5 with the 6 labelled legs plus the two branch points; stability is preserved because the node is replaced by marked points on the same components. Orderings of the two branch points form an S_2-torsor, and clutching is inverse to partial normalization in families (Knudsen-type gluing), so the equivalence is one of groupoids, not merely of geometric points: Aut(C,p,e) is the group of automorphisms of the normalization preserving the branch pair setwise, which is precisely what [Mbar_{5,8}/S_2] has. Independent cross-checks: dim Mbar_{5,8} = 3*5-3+8 = 20 = 21-1 (codimension one, consistent with FND-0034); Mbar_{5,8} is connected so N_irr is connected and Delta_irr is irreducible; the generic object has trivial automorphisms and no branch-exchanging automorphism, so [Mbar_{5,8}/S_2] -> Delta_irr is birational and, being finite with normal (indeed smooth) source, is the normalization. No defect found.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0140-CLM-03",
+      "note": "Separating components are [Mbar_Gamma/Aut(Gamma)] with Mbar_Gamma = Mbar_{g1,n1} x Mbar_{g2,n2}, g1+g2=6, n1+n2=6+2=8, both vertices stable. Checked for omitted stable pairs: every partition of the 6 labelled legs and every genus splitting occurs, and the only excluded configurations (a genus-0 vertex carrying the node plus fewer than two legs) are excluded exactly by the stability hypothesis already in the theorem statement, so nothing is silently dropped. Checked the subsidiary remark that Aut(Gamma)=1 here: a vertex exchange must carry each labelled leg to itself, hence cannot move a leg across the edge, and at least one vertex carries a leg since n=6>0; the two half-edges of a separating edge lie on different vertices, so no half-edge automorphism exists either. The remark is correct and does not weaken the stated quotient form. No defect found.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0140-CLM-04",
+      "note": "Contribution = (H^*(Mbar_Gamma;Q) tensor det E_Gamma)^{Aut(Gamma)}. Two independent checks. (a) Finite quotient: for finite G acting on a complex DM stack Y, Cartan-Leray plus exactness of G-invariants on Q-vector spaces (averaging) gives H^*([Y/G];Q) = H^*(Y;Q)^G with no surviving differential and with invariants = coinvariants over Q; this is the standard degeneration, not an assumed one. (b) Determinant twist: E(Gamma) is a singleton, every automorphism fixes it, so det Q^{E(Gamma)} is the trivial representation, and the twist is vacuous at one edge. I attacked (b) hard, since FND-0034's parenthetical asserts the opposite for the branch swap; see strongest_attack and finding candidate FC-REV0191-1. The geometric form of the twist confirms the attempt: the sign local system in the weight spectral sequence permutes the m branches through a point and is trivial for m=1, and the smoothing parameter t_e is a section of the tensor product of the two branch tangent lines, on which the branch exchange acts by the canonical (sign-free) commutativity isomorphism. Coefficients are fixed to Q by theorem_scope and by the artifact's opening sentence; the statement is false integrally, but that is outside the declared scope. No defect found.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0140-CLM-05",
+      "note": "Clauses (i)-(iii) hold with no Tate assertion. Exhaustion is correct: N decomposes as an open-and-closed union by the topological type of the distinguished node, which is either non-separating or one of the separating types of CLM-03, and each Mbar_Gamma is connected so each piece is a single component. The artifact is disciplined about scope: it asserts nothing about the image of the boundary map, the open residual, Tate type, or H^16(Mbar_{6,6};Q), and it introduces no predicted motive and no algebraic/tautological generation claim, so the campaign-level hazards recorded in FND-0048, FND-0072 and FND-0054 are not incurred here. Confirming this lemma does not verify the C66BAR-001 case.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-31",
+  "finding_candidates": [
+    {
+      "confidence": "high",
+      "key": "one-edge-det-edge-twist-is-trivial",
+      "load_bearing_for": [
+        "C66BAR-SEP",
+        "C66BAR-IMAGE",
+        "C66BAR-CEX"
+      ],
+      "relation_to_existing_findings": "This CORRECTS the parenthetical clause of FND-0034 ('the determinant twist ... kills contributions whose automorphisms ... swap the two branches of the non-separating node'), which is incorrect as stated. It is not supporting evidence for FND-0034 and is not a semantic duplicate of it: the rest of FND-0034 (Mbar_{5,8} rather than Mbar_{5,7}, dimension 20, depth-one restriction, coupling of (6,6) to the unresolved (5,8) pair, and the presence of the det E_Gamma decoration in the E_1 term) is untouched and independently reconfirmed here. It is distinct from FND-0051, which demands automorphism bookkeeping in general without computing the one-edge twist. Requires explicit adjudication against FND-0034.",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "coefficients": "Q",
+        "generality": "any (g,n) and any one-edge stable graph, separating or not",
+        "ground_field": "C"
+      },
+      "statement": "For every ONE-EDGE stable graph Gamma the determinant-edge twist is the trivial Aut(Gamma)-representation, so the one-edge contribution is ordinary Aut(Gamma)-invariant cohomology: (H^*(Mbar_Gamma;Q) tensor det E_Gamma)^{Aut(Gamma)} = H^*(Mbar_Gamma;Q)^{Aut(Gamma)}. In particular, for the non-separating loop at (g,n)=(6,6) the contribution is the full S_2-INVARIANT part H^*(Mbar_{5,8};Q)^{S_2} under the exchange of the two node markings, not the sign-isotypic (anti-invariant) part. Proof: (1) det E_Gamma is by definition the determinant of the permutation representation on Q^{E(Gamma)}; E(Gamma) is a singleton and every automorphism fixes it, so the representation is trivial regardless of the action on half-edges. (2) Geometrically, the sign local system appearing in the E_1 term of the Deligne weight spectral sequence is the orientation system on the m branches meeting at a point of the codimension-m stratum, and is trivial for m=1; equivalently the residue is along dt_e/t_e, and the smoothing parameter t_e is a section of the tensor product of the two branch tangent lines, on which the branch exchange acts by the canonical commutativity isomorphism, without a sign. (3) Reductio: if the loop contribution were anti-invariant, its H^0 would vanish and the Gysin image of the fundamental class would give delta_irr = 0 in H^2(Mbar_g;Q), contradicting the standard basis {lambda, delta_irr, delta_1, ..., delta_[g/2]}. Consequence for the campaign: no downstream artifact may claim that the determinant-edge convention reduces, cancels, or kills the non-separating (5,8) contribution; C66BAR-SEP, C66BAR-IMAGE and C66BAR-CEX must carry the full S_2-invariant part of the Mbar_{5,8} atlas. Caveat: the identification of quotient-stack cohomology with invariants uses averaging and holds over Q; it is not valid with Z coefficients, so clause (iii) must never be cited integrally. Nontrivial edge-determinant signs can only appear at depth m >= 2, which FND-0031 already shows is irrelevant to this corner.",
+      "status": "candidate",
+      "supports_finding_id": null
+    },
+    {
+      "confidence": "high",
+      "key": "separating-one-edge-graphs-have-trivial-automorphisms-at-n-positive",
+      "load_bearing_for": [
+        "C66BAR-SEP",
+        "C66BAR-IMAGE"
+      ],
+      "relation_to_existing_findings": "Partially discharges the demand of FND-0051 (that any stable-graph organisation of boundary contributions must state the stacky-strata / coarse / invariants-versus-coinvariants passage) for the one-edge separating strata of this campaign, by showing the group is trivial there. Not a duplicate of FND-0051, which records the obligation rather than its resolution, and not a duplicate of FND-0034.",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "coefficients": "Q",
+        "generality": "any (g,n) with n >= 1 and individually labelled legs"
+      },
+      "statement": "When the n legs are individually labelled and n >= 1, every one-edge SEPARATING stable graph Gamma has Aut(Gamma) = 1. A nontrivial automorphism would have to exchange the two vertices (the two half-edges of a separating edge lie on different vertices, so no half-edge-only automorphism exists), but it must fix every labelled leg, and at least one vertex carries a leg since n >= 1; a vertex exchange would move that leg to the other vertex. Consequently, at (g,n)=(6,6), [Mbar_Gamma/Aut(Gamma)] = Mbar_{g1,n1} x Mbar_{g2,n2} on the nose for every separating type, the invariants-versus-coinvariants question is vacuous on the separating side, and the ENTIRE automorphism bookkeeping of hat{partial} Mbar_{6,6} reduces to the single S_2 acting on Mbar_{5,8} by exchanging the two node markings. This does not weaken the quotient notation of clause (ii), which remains true, and it does not license dropping the quotient notation in general (it fails for n=0, where vertex-exchanging automorphisms exist when g1=g2).",
+      "status": "candidate",
+      "supports_finding_id": null
+    },
+    {
+      "confidence": "high",
+      "key": "one-edge-component-degree-and-twist-dictionary",
+      "load_bearing_for": [
+        "C66BAR-SEP",
+        "C66BAR-IMAGE"
+      ],
+      "relation_to_existing_findings": "Not a restatement of the packet target dictionary, which records only ambient (6,6) numbers; this is the component-level translation, including the dimension-20 computation for both boundary types, that ATT-0140's degree-free clause (iii) leaves implicit. Distinct from FND-0001 (Poincare duality for the OPEN input on M_{g,n}) and from FND-0090 (which contrasts the Gysin/weight complex with the simultaneous clutching-pullback kernel rather than fixing degrees and twists on the boundary components).",
+      "scope": {
+        "case": {
+          "g": 6,
+          "n": 6
+        },
+        "coefficients": "Q",
+        "does_not_assert": [
+          "Tate type of any group named",
+          "that ATT-0140 is defective",
+          "any statement about the image of the boundary map"
+        ],
+        "ground_field": "C"
+      },
+      "statement": "Every one-edge component of hat{partial} Mbar_{6,6} is smooth and proper of pure dimension 20: dim Mbar_{5,8} = 3*5-3+8 = 20 for the non-separating type, and (3g1-3+n1)+(3g2-3+n2) = 3*6-6+8 = 20 for every separating type, since g1+g2=6 and n1+n2=8. Clause (iii) of ATT-0140 is a DEGREE-FREE statement about the full graded ring H^*, so consumers must insert the following component-level dictionary before using it in the campaign's boundary map H_16(hat{partial} Mbar_{6,6};Q) -> H_16(Mbar_{6,6};Q). Writing D_Gamma = [Mbar_Gamma/Aut(Gamma)] (dimension 20) and X = Mbar_{6,6} (dimension 21): H_16(D_Gamma;Q) = H^{24}(Mbar_Gamma;Q)^{Aut(Gamma)}(20), the pushforward is the Gysin map of a codimension-one closed embedding, i_*: H^{24}(D_Gamma) -> H^{26}(X)(1), and H_16(X;Q) = H^{26}(X;Q)(21). Hence the campaign's Q(8) target on the boundary-image side corresponds to Q(-12) in ORDINARY degree 24 on the atlas Mbar_Gamma, and, dually via Poincare duality on the 20-dimensional component (H^{24} = (H^{16})^dual(-20), and Q(-8)^dual(-20) = Q(-12)), to Q(-8) in degree 16. The two formulations are consistent, so the packet's degree-16 separating-Kunneth plan and the degree-24 covariant form describe the same obligation; but a Kunneth decomposition must be taken in TOTAL degree 16 on Mbar_{g1,n1} x Mbar_{g2,n2} in the dual formulation, or in total degree 24 in the covariant one, and the two must not be mixed within one computation. The Gysin twist (1) and the Poincare twist (20) on the component, not (21), are the ones that apply at the boundary; using the ambient twist (21) on a component would be off by one.",
+      "status": "candidate",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0191",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "C66BAR-GRAPH",
+      "note": "The campaign graph lists this subproblem with no dependencies, and ATT-0140 declares proof_dependencies=[], source_ids=[], source_claim_ids=[], dependency_claim_ids=[], experiment_ids=[] and gap_markers=[]. I verified that the argument is self-contained: every load-bearing input (unobstructed deformations of pointed nodal curves, normal-crossings local equation of the boundary, normalization commuting with etale base change, clutching inverse to partial normalization, Cartan-Leray with rational coefficients) is either proved in the artifact or is a standard fact I re-derived above, and none of them is an undischarged campaign artifact. There are therefore no unused or non-load-bearing listed sources to adjudicate. Identity check: ATT-0140's packet_id, packet_sha256 (a898256a...), packet_binding_sha256 (6a765b58...), campaign_revision 2, context_revision 2, subproblem_id and the full 13-key target dictionary all match TASK.json exactly, and its theorem_statement is byte-identical to the task's, so there is no target drift to exploit.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0140-P2",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: the determinant-edge convention on the non-separating loop. FND-0034 (corroborated, packet-visible) states that the det E_Gamma twist 'kills contributions whose automorphisms permute edges oddly or swap the two branches of the non-separating node'. If that parenthetical were right, clause (iii) would be false as the attempt reads it: the loop contribution would be the S_2 anti-invariants (sign-isotypic part) of H^*(Mbar_{5,8};Q), not the invariants, and step 4 of ATT-0140 would be a silent invariants-for-coinvariants/sign substitution at exactly the point the campaign depends on. The attack fails, and it fails against the finding, not against the attempt. Three independent arguments: (1) representation-theoretic - E(Gamma) is a singleton, every automorphism fixes it as an element of the edge set, so det Q^{E(Gamma)} is the trivial one-dimensional representation, whatever Aut(Gamma) does to half-edges; (2) geometric - the sign local system in the E_1 term of the Deligne weight spectral sequence is the orientation system on the m branches meeting at a point and is trivial for m=1, and the residue is taken along dt_e/t_e where the smoothing parameter t_e is a section of the tensor product of the two branch tangent lines, on which the branch exchange acts by the canonical commutativity isomorphism with no sign; (3) reductio - anti-invariants would give H^0 of the non-separating component equal to zero, hence delta_irr = 0 in H^2(Mbar_g;Q), contradicting the standard basis {lambda, delta_irr, delta_1, ..., delta_[g/2]}. Recorded as FC-REV0191-1. Secondary attacks, all unsuccessful: (a) stack versus coarse - the attempt keeps the descent stack-theoretic and retains branch-exchanging automorphisms in the inertia, which is precisely why clause (i) is a quotient stack; (b) integral versus rational - clause (iii) as literally written carries no coefficient ring and is false over Z, but theorem_scope fixes Q and the argument opens by fixing Q, so this is a citation caution rather than a defect (downstream artifacts must not invoke clause (iii) integrally); (c) spectral-sequence differentials - the only spectral sequence used is Cartan-Leray, whose collapse is proved by exactness of invariants over Q rather than assumed; (d) omitted stable pairs - the separating enumeration drops only genuinely unstable graphs, which the theorem's own stability hypothesis excludes; (e) normalization technique - N -> partial Xbar is finite, birational and has normal source, so it is the normalization, and quotients of normal schemes by finite groups stay normal; (f) degree, Poincare and Tate bookkeeping - clause (iii) is degree-free and the artifact makes no Hodge, Tate, semisimplification or motivic claim at all, so there is nothing to mis-twist inside the stated theorem; the translation into the campaign's H_16 boundary map does require a dictionary the artifact does not supply, but supplying it is not part of this theorem and I checked that the dictionary is consistent (FC-REV0191-3). Verdict confirmed for the exact theorem_statement only; this does not verify C66BAR-SEP, C66BAR-IMAGE, or the campaign target.",
+  "subproblem_id": "C66BAR-GRAPH",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let Xbar := Mbar_{6,6} be the moduli stack of stable genus-6 curves with 6 ordered marked points, and let hat{partial} Xbar be the normalization of its reduced boundary divisor. Prove all of the following, with no Tate assertion. (i) The non-separating component has normalization [Mbar_{5,8}/S_2], where S_2 exchanges the two ordered preimages of the node. (ii) For every one-edge separating stable graph Gamma, the corresponding normalized component is [Mbar_Gamma/Aut(Gamma)], where Mbar_Gamma=Mbar_{g1,n1} x Mbar_{g2,n2}, g1+g2=6, n1+n2=8, and both vertices are stable. (iii) Its contribution is (H^*(Mbar_Gamma) tensor det E_Gamma)^{Aut(Gamma)}. This theorem names the source of the campaign boundary map and does not assert Tate type of any cohomology group.",
+  "verdict": "confirmed"
+}

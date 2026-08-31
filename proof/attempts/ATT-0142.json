@@ -1,0 +1,185 @@
+{
+  "argument_markdown": "## Exact theorem\n\nThe exact group W_{-16}H^{BM}_{16}(M_{5,8};Q), equivalently W_{24}H^{24}(M_{5,8};Q)(20), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group. This theorem does not conclude H^{16}(Mbar_{5,8};Q) and does not conclude the campaign boundary-image theorem.\n\n## Source-backed inputs\n\nFND-0001 gives, for d=3g-3+n, the Poincare identification W_{-16}H^{BM}_{16}(M_{g,n};Q)=W_{2d-16}H^{2d-16}(M_{g,n};Q)(d). FND-0195 is the established CLP\u2013Harer\u2013CKgP peel in degree k=vcd(M_{g,n})=4g-4+n: when n-1<=c(g), with the published value c(5)=7, it proves that W_k H^k(M_{g,n};Q) is a finite direct sum of Q(-k/2). Its load-bearing ingredients are the lowest-weight restriction surjection of FND-0197, the closed-universal-curve Kunneth/psi disposal of FND-0196, strict Harer vanishings on the smaller pointed space and on M_g with local coefficients, and the published CKgP Tate range. FND-0033 supplies semisimplicity at a fixed pure weight, so the resulting subquotients are honest direct sums of the indicated Tate object.\n\n## Specialization to (5,8)\n\nHere d=3*5-3+8=20 and k=2d-16=24. Also vcd(M_{5,8})=4*5-4+8=24, while n-1=7=c(5). Thus FND-0195 applies at its inclusive published endpoint and yields\n\nW_24 H^24(M_{5,8};Q) = Q(-12)^{oplus r}\n\nfor some finite r>=0.\n\nFor completeness, the numerical peel has the same strict slack at each vanishing step. The pullback term Phi_{5,8}^{24} vanishes because H^24(M_{5,7};Q)=0 and vcd(M_{5,7})=23<24. In the closed universal-curve source C^8 over M_5, every Kunneth multi-index with |i|<=8 has base degree 24-|i|>=16>vcd(M_5)=15 and therefore vanishes for its finite-dimensional rational local system. Every remaining multi-index has some slot equal to 2 and is carried, via the FND-0196 projector/induction, into the psi-generated image from W_22 H^22(M_{5,7};Q). Since 7=c(5), the published CKgP range types that source as Q(-11)^{oplus a}; multiplication by psi, of type Q(-1), makes its image a subquotient of Q(-12)^{oplus b}. The FND-0197 surjection reaches the full target, and fixed-weight semisimplicity gives the displayed direct-sum decomposition.\n\nFinally FND-0001 gives\n\nW_{-16}H^{BM}_{16}(M_{5,8};Q)=W_24H^24(M_{5,8};Q)(20)=Q(-12)(20)^{oplus r}=Q(8)^{oplus r}.\n\nThis proves exactly the assigned theorem.\n\n## Constraints, computations, and gaps\n\nNo finite computation or computational hypothesis is used, and there is no remaining gap. The proof does not infer vanishing from 24=vcd(M_{5,8}); FND-0035 expressly forbids that inference. The strict inequalities 24>23 and 16>15 occur only inside the established peel. No undecorated top-weight CGP/graph-complex calculation, point count, or punctured-curve forgetful Leray argument is used. In particular the mixed R^1 local-system obstruction is not renamed: the Kunneth calculation is on the proper closed universal curve C^8 over M_5. No statement about H^{16}(Mbar_{5,8};Q) or about the campaign boundary-image is made.",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "claims": [
+    {
+      "id": "CLM-0138-1",
+      "justification": "Substitute (g,n)=(5,8) into the all-cases formula FND-0001: d=3g-3+n=20 and 2d-16=24.",
+      "statement": "For d=20, Poincare duality identifies W_{-16}H^{BM}_{16}(M_{5,8};Q) with W_24H^24(M_{5,8};Q)(20).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0138-2",
+      "justification": "Direct arithmetic gives vcd=4g-4+n=24. The published endpoint c(5)=7 is part of FND-0195, and its inequality n-1<=c(g) is inclusive.",
+      "statement": "The hypotheses of the established peel FND-0195 hold at (g,n,k)=(5,8,24): k=vcd(M_{5,8}) and n-1=7=c(5).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0138-3",
+      "justification": "Apply FND-0195 using CLM-0138-2. Equivalently, its FND-0196/FND-0197 peel generates the target from psi times the CKgP-typed group W_22H^22(M_{5,7};Q), and FND-0033 removes any subquotient-versus-isomorphism gap.",
+      "statement": "W_24H^24(M_{5,8};Q) is a finite direct sum of Q(-12).",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0138-4",
+      "justification": "Combine CLM-0138-1 and CLM-0138-3 and use Q(-12)(20)=Q(8).",
+      "statement": "W_{-16}H^{BM}_{16}(M_{5,8};Q) is a finite direct sum of Q(8), with rank zero allowed.",
+      "status": "proved"
+    },
+    {
+      "id": "CLM-0138-5",
+      "justification": "Only the exact open group and its Poincare-dual ordinary lowest-weight group occur; no boundary sequence for Mbar_{5,8} or Mbar_{6,6} is invoked.",
+      "statement": "The proof has no compact-moduli or campaign boundary-image conclusion.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [],
+  "id": "ATT-0142",
+  "ingest_normalizations": [
+    {
+      "expected": "C66BAR-001-v2",
+      "field": "packet_id",
+      "previous": "C66BAR-001-v1",
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "expected": "proof/packets/generated/C66BAR-001-v2.md",
+      "field": "packet_path",
+      "previous": "proof/packets/generated/C66BAR-001-v1.md",
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "expected": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+      "field": "packet_sha256",
+      "previous": "496b06549c3a8aa39bce6e256b0d35707910cb73f25e776bb6517721ade779f7",
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "expected": {
+        "chow_codimension": 12,
+        "compact_cohomology_degree": 16,
+        "compact_tate_type": "Q(-8)",
+        "dimension": 20,
+        "g": 5,
+        "n": 8,
+        "open_bm_degree": 16,
+        "open_bm_tate_type": "Q(8)",
+        "open_bm_weight": -16,
+        "ordinary_cohomology_degree": 24,
+        "ordinary_tate_type": "Q(-12)",
+        "ordinary_weight": 24,
+        "poincare_twist": 20
+      },
+      "field": "target",
+      "previous": {
+        "dimension": 20,
+        "g": 5,
+        "n": 8,
+        "open_bm_degree": 16,
+        "open_bm_tate_type": "Q(8)",
+        "open_bm_weight": -16,
+        "ordinary_cohomology_degree": 24,
+        "ordinary_tate_type": "Q(-12)",
+        "ordinary_weight": 24,
+        "poincare_twist": 20
+      },
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "expected": 2,
+      "field": "campaign_revision",
+      "previous": 1,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    },
+    {
+      "expected": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+      "field": "packet_binding_sha256",
+      "previous": "573c965db6dd15b034536547679084d1ec5902b91b504ac438555b0cf9212769",
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "poincare-duality-weight-reindexing",
+    "clp-harer-ckgp-endpoint-peel",
+    "closed-universal-curve-kunneth-psi-generation",
+    "pure-hodge-semisimplicity"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [
+    "The established endpoint peel FND-0195 is specialized at n-1=7=c(5) to discharge the exact previously unresolved C58-OPEN group, with the correct degree 24 and Poincare twist (20)."
+  ],
+  "observable_trace_id": "TRACE-0110",
+  "observable_trace_sha256": "32834110eaa74d4f9890620e03b4fe961c1ab0d6bc7acb3f58b8aec120e1bf68",
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_path": "proof/packets/generated/C66BAR-001-v2.md",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependencies": [],
+  "recovery": {
+    "classification": "revision_migration_recovery",
+    "destination_campaign_revision": 2,
+    "destination_packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+    "migration_id": "C66BAR-V2-TRACE-0110",
+    "protect_from_overwrite": true,
+    "reason": "Recovered from official observable trace under an explicit hash-bound campaign revision migration; existing work was never rewritten.",
+    "recovered_at": "2026-08-31T06:08:03.912653+00:00",
+    "recovered_from_trace": "TRACE-0110",
+    "source_campaign_revision": 1,
+    "source_packet_binding_sha256": "573c965db6dd15b034536547679084d1ec5902b91b504ac438555b0cf9212769"
+  },
+  "result_type": "proof",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "FND-0001",
+    "FND-0033",
+    "FND-0035",
+    "FND-0195",
+    "FND-0196",
+    "FND-0197"
+  ],
+  "source_ids": [
+    "SRC-0002"
+  ],
+  "status": "claimed_complete",
+  "subproblem_id": "C58-OPEN",
+  "summary": "The established CLP\u2013Harer\u2013CKgP peel FND-0195 applies at the inclusive published endpoint n-1=7=c(5), giving W_24 H^24(M_{5,8};Q) as a finite direct sum of Q(-12); Poincare duality and the twist (20) give the exact Borel\u2013Moore group as a finite direct sum of Q(8).",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-002",
+  "theorem_scope": {
+    "category": "rational mixed Hodge structures",
+    "coefficients": "Q",
+    "g": 5,
+    "n": 8
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{5,8};Q), equivalently W_{24}H^{24}(M_{5,8};Q)(20), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group. This theorem does not conclude H^{16}(Mbar_{5,8};Q) and does not conclude the campaign boundary-image theorem."
+}

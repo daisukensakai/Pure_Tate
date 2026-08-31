@@ -897,6 +897,13 @@ def campaign_status(campaign_id: str = DEFAULT_LEAN_CAMPAIGN) -> Dict[str, Any]:
         attempt_id = directory.name.split("-", 2)[0] + "-" + directory.name.split("-", 2)[1]
         if not ID_RE.fullmatch(attempt_id):
             continue
+        manifest_path = directory / "manifest.json"
+        try:
+            manifest_campaign_id = load_json(manifest_path).get("campaign_id")
+        except Exception:
+            manifest_campaign_id = None
+        if manifest_campaign_id != campaign_id:
+            continue
         check, fresh_report = check_attempt(attempt_id, campaign_id, write=False)
         report_path = directory / "report.json"
         report_matches = report_path.is_file() and load_json(report_path) == fresh_report

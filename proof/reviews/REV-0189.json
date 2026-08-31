@@ -1,0 +1,83 @@
+{
+  "attempt_id": "ATT-0140",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "checked_claims": [
+    {
+      "claim_id": "ATT-0140-CLM-01",
+      "note": "The reduced boundary of the smooth DM stack Mbar_{6,6} is a simple normal crossings divisor. Etale-locally the miniversal base is a smooth complete local ring with independent node-smoothing parameters t_e and reduced equation product_e t_e=0; the normalization is the disjoint union of the smooth branches t_e=0, which is the choice of a distinguished node and descends under etale base change and under residual automorphisms that permute nodes. The resulting DM stack N is normal and finite birational onto the reduced boundary, hence is the normalization. The one-line Ext^2 vanishing is the standard Deligne-Mumford local description rather than a self-contained cotangent-complex computation, but the descended identification is the classical clutching/normalization of the boundary.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0140-CLM-02",
+      "note": "Partial normalization along a distinguished non-separating node yields a connected stable genus-5 curve with the original six ordered marks plus the two unordered preimages of the node, so n=6+2=8 and dim Mbar_{5,8}=20=21-1. Ordering the two preimages is an S_2-torsor on the ordered atlas Mbar_{5,8}; clutching the last two sections is inverse in families. The induced map [Mbar_{5,8}/S_2] -> Delta_irr is finite birational from a normal stack, hence the normalization. This is stack-theoretic, not a coarse or ordered identification; the ordered clutching map is generically degree two and is not itself the normalization. Independently matches SRC-0003: the one-edge loop term is H^*(Mbar_{g-1,n+2})^{S_2} with Aut=S_2 swapping the two half-edges.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0140-CLM-03",
+      "note": "A distinguished separating node splits into two stable pointed components with g1+g2=6 and n1+n2=6+2=8. Identifications with a fixed one-edge stable graph Gamma form an Aut(Gamma)-torsor, and clutching is inverse, including with monodromy of graph identifications, so the component is the quotient stack [Mbar_Gamma/Aut(Gamma)]. Because the six legs are labeled, Aut(Gamma) cannot exchange vertices (an automorphism must fix each labeled leg), so Aut(Gamma) is in fact trivial for every separating one-edge graph in this moduli problem; retaining the quotient notation is the canonical graph construction and is isomorphic to the ordered product atlas. Stability of both vertices is the vertex-stability condition in Gamma.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0140-CLM-04",
+      "note": "For finite G acting on a complex DM stack Y, Cartan-Leray plus averaging over Q gives H^*([Y/G];Q)=H^*(Y;Q)^G; invariants and coinvariants agree over Q. SRC-0003 defines det E(Gamma) as the determinant of the Aut(Gamma)-permutation representation on the set of edges, and writes the first arrow of the weight complex (pullback to the normalization of the boundary, |E|=1) as oplus H^k(Mbar_Gamma)^{Aut} with no extra local system; det E appears in the |E|=2 term. Every graph here has one edge, so Aut fixes that unique edge, det E is the trivial representation, and (H^*(Mbar_Gamma) tensor det E)^{Aut}=H^*(Mbar_Gamma)^{Aut}=H^*([Mbar_Gamma/Aut]). In particular the loop S_2 acts geometrically by swapping the two branch markings of Mbar_{5,8} and trivially on the singleton edge set, so the contribution is ordinary S_2-invariants, which is exactly H^* of the quotient in clause (i). SRC-0002 (8.1) uses the same one-edge-without-det / two-edge-with-det split. The theorem names this source and asserts no Tate type, Gysin twist, or image statement; none is used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0140-CLM-05",
+      "note": "Clauses (i)-(iii) of the exact theorem_statement all hold: every component of hat{partial} Xbar is a one-edge [Mbar_Gamma/Aut(Gamma)], the non-separating summand is [Mbar_{5,8}/S_2], and the cohomological source is the Aut-invariant determinant-edge expression, which for one-edge graphs equals ordinary invariant cohomology of the ordered atlas. No Tate assertion, no claim about the image of H_16(hat{partial} Xbar)->H_16(Xbar), and no conclusion about H^{16}(Mbar_{6,6};Q) is made.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-31",
+  "finding_candidates": [
+    {
+      "impacts_approach_ids": [
+        "weight-spectral-sequence-or-graph-complex"
+      ],
+      "key": "one-edge-det-E-is-trivial-ordinary-invariants",
+      "kind": "observation",
+      "statement": "For every one-edge stable graph Gamma, including the non-separating loop, det E_Gamma is the trivial Aut(Gamma)-representation: it is the determinant of the permutation representation on the set of edges, and Aut(Gamma) fixes the unique edge. Consequently (H^*(Mbar_Gamma;Q) tensor det E_Gamma)^{Aut(Gamma)} equals ordinary invariant cohomology H^*(Mbar_Gamma;Q)^{Aut(Gamma)}, which over Q is H^* of the quotient stack [Mbar_Gamma/Aut(Gamma)]. In particular the (6,6) non-separating contribution is H^*(Mbar_{5,8};Q)^{S_2}, not the branch-swap anti-invariants. SRC-0003 writes the first arrow of the weight complex as the |E|=1 sum of Aut-invariants and tensors det E only at |E|=2; SRC-0002 (8.1) uses the same split. This is the determinant-edge convention on the source of the campaign boundary map, not a Tate assertion.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "weight-spectral-sequence-or-graph-complex"
+      ],
+      "key": "separating-one-edge-aut-trivial-for-labeled-legs",
+      "kind": "observation",
+      "statement": "On Mbar_{6,6} every separating one-edge stable graph Gamma has Aut(Gamma) trivial. An automorphism must fix each of the six labeled legs, so it cannot exchange the two vertices even when those vertices have equal genus and equal valence. Thus [Mbar_Gamma/Aut(Gamma)] is canonically isomorphic to the ordered product atlas Mbar_{g1,n1} x Mbar_{g2,n2} with g1+g2=6, n1+n2=8, and both vertices stable, and the Aut-invariant determinant-edge Kunneth contribution of such a component is ordinary cohomology of that product.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0189",
+  "independent": true,
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependency_checks": [],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0140-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Binding first: TASK.json and ATT-0140 agree on packet_id C66BAR-001-v2, packet_sha256 a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191, packet_binding_sha256 6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54, campaign_revision 2, context_revision 2, subproblem_id C66BAR-GRAPH, the target dictionary, and the exact theorem_statement, so the review is of the assigned lemma, not the global boundary-image theorem. Strongest attack: clause (iii) versus the loop sign. If det E_Gamma were the sign representation of the S_2 that swaps the two branches of the non-separating node, then (H^*(Mbar_{5,8}) tensor det E)^{S_2} would be the anti-invariants, which is not H^*([Mbar_{5,8}/S_2]), and the proof's claim that the loop contribution is ordinary S_2-invariants would refute clause (iii) or else refute the identification of that contribution with the cohomology of the normalized component. Outcome: the attack fails. SRC-0003 (4.1)-(4.2) and SRC-0002 (8.1) define det E as the determinant of the permutation representation on the edge set, write the |E|=1 (normalized-boundary) term as ordinary Aut-invariants, and only tensor det E at |E|=2, where Aut can swap two edges. A singleton edge is fixed by every automorphism, including the loop S_2 that swaps half-edges; the node-smoothing parameter t_e is likewise invariant under (x,y)->(y,x). Thus det E is trivial on every one-edge graph, ordinary invariants equal det-twisted invariants, and both equal rational cohomology of the quotient stack. Runner-up attacks and outcomes: (a) stack versus coarse -- the proof uses [Mbar_Gamma/Aut] and records that ordered clutching is generically degree two, so it does not identify the normalization with Mbar_{5,8} or with a coarse space; (b) invariants versus coinvariants -- over Q they agree by averaging, and the theorem asks for invariants; (c) cohomology degree versus Borel-Moore / Gysin / Tate twists -- the assigned theorem names the source in H^* with no Tate assertion and does not claim the Gysin shift H^{k-2}(-1) or the homology form H_16; (d) Kunneth, spectral-sequence differentials, semisimplification, predicted motives, tautological generation, omitted stable pairs -- unused. The abbreviated Ext^2 vanishing is the standard Deligne-Mumford snc description, independently the starting point of SRC-0003, and is not a load-bearing gap in the clutching identification.",
+  "subproblem_id": "C66BAR-GRAPH",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Let Xbar := Mbar_{6,6} be the moduli stack of stable genus-6 curves with 6 ordered marked points, and let hat{partial} Xbar be the normalization of its reduced boundary divisor. Prove all of the following, with no Tate assertion. (i) The non-separating component has normalization [Mbar_{5,8}/S_2], where S_2 exchanges the two ordered preimages of the node. (ii) For every one-edge separating stable graph Gamma, the corresponding normalized component is [Mbar_Gamma/Aut(Gamma)], where Mbar_Gamma=Mbar_{g1,n1} x Mbar_{g2,n2}, g1+g2=6, n1+n2=8, and both vertices are stable. (iii) Its contribution is (H^*(Mbar_Gamma) tensor det E_Gamma)^{Aut(Gamma)}. This theorem names the source of the campaign boundary map and does not assert Tate type of any cohomology group.",
+  "verdict": "confirmed"
+}

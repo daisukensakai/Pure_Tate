@@ -1,0 +1,119 @@
+{
+  "attempt_id": "ATT-0142",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0138-1",
+      "note": "Poincare duality for the smooth separated DM stack M_{5,8} of dimension d=3*5-3+8=20 identifies H^{BM}_{16} with H^{24}(20). Lowest weight on the ordinary side is W_{24}H^{24}, so W_{-16}H^{BM}_{16}(M_{5,8};Q)=W_{24}H^{24}(M_{5,8};Q)(20). This is FND-0001 specialized at (5,8), matching the task target (open_bm_degree 16, ordinary_cohomology_degree 24, poincare_twist 20). Stack-level rational Betti/MHS only; no coarse-space or integral identification.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0138-2",
+      "note": "vcd(M_{5,8})=4*5-4+8=24 equals the ordinary degree k=24, and n-1=7 equals the published inclusive endpoint c(5)=7. FND-0195 is stated for g>=2, n>=1, k=vcd, Tate_range n-1<=c(g) with c(5)=7, and excludes only degree vcd-1 of the target and unpublished c(8). The target degree is vcd, not vcd-1. Independently: SRC-0002 Table 1 and Proposition 4.5, THM-0005 (open M, all pure-weight pieces, n<=c(g)), and SRC-0004 Lemma 10.13 ('If n<=7, then M_{5,n} has the CKgP and A^*=R^*') all include n=7.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0138-3",
+      "note": "FND-0195 already concludes that whenever n-1<=c(g) at k=vcd, W_{vcd}H^{vcd}(M_{g,n};Q) is a finite direct sum of Q(-vcd/2). Substituting (5,8,24) gives W_{24}H^{24}(M_{5,8};Q)=Q(-12)^{oplus r}. The internal peel reconstruction matches the finding: Phi_{5,8}^{24}=0 because vcd(M_{5,7})=23 and H^{24}(M_{5,7};Q)=0 (strictly above vcd, not the blocked inference at 24=vcd(M_{5,8})); every Kunneth multi-index of C^8->M_5 with |i|<=8 has base degree >=16>vcd(M_5)=15, so the primitive quotient and every no-slot-2 summand vanish; survivors have some i_s=2 and are carried into Psi by FND-0196 (Morita disposal (1) gives b_s=0 for g>=2, and the PTY projector/induction disposals are likewise g-independent); FND-0197 supplies the restriction surjection W_{24}H^{24}(C^8)->W_{24}H^{24}(M_{5,8}) without using the mixed R^1 of the punctured forgetful map. Hodge type enters only through W_{22}H^{22}(M_{5,7};Q): Proposition 4.5 at n=7=c(5) gives algebraicity of every W_k H^k, hence type Q(-11) in even degree 22, and cup with psi of type Q(-1) yields a subquotient of Q(-12). Semisimplicity of polarizable pure weight-24 Hodge structures (inside FND-0195, and the same principle as FND-0033) upgrades that to an honest direct sum. Degree 22=vcd(M_{5,7})-1 is irrelevant: the FND-0195 exclusion of 'degree vcd-1' is about applying the peel at the target, while CKgP/Prop 4.5 has no degree restriction and FND-0195 itself types the source W_{vcd-2}H^{vcd-2}(M_{g,n-1}).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0138-4",
+      "note": "Combine CLM-0138-1 and CLM-0138-3: W_{-16}H^{BM}_{16}(M_{5,8};Q)=Q(-12)(20)^{oplus r}=Q(8)^{oplus r}. Weight check: Q(-12) has weight 24, twist (20) drops weight by 40 to -16, matching open_bm_weight and open_bm_tate_type. Rank r>=0 is admitted by the theorem (empty sum allowed). No compact-moduli, algebraic-cycle, or tautological-generation upgrade is claimed for H^{16}(Mbar_{5,8}).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0138-5",
+      "note": "The argument never invokes the boundary sequence of THM-0003, Aut(Gamma)-invariants or coinvariants, or any Kunneth term of hat{partial}Mbar_{5,8} or hat{partial}Mbar_{6,6}. The theorem_statement itself disclaims H^{16}(Mbar_{5,8};Q) and the campaign boundary-image theorem; the writeup matches that scope.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-31",
+  "finding_candidates": [
+    {
+      "case": {
+        "g": 5,
+        "n": 8
+      },
+      "impacts_approach_ids": [
+        "C58-OPEN"
+      ],
+      "key": "c58-open-tate-type-carried-solely-by-ckgp-endpoint",
+      "kind": "structural",
+      "statement": "In the closed-universal-curve vcd peel at (g,n,k)=(5,8,24), Harer vanishing of the primitive term (base degree 16>15) and of Phi_{5,8}^{24} (24>23) yields only the generation statement W_{24}H^{24}(M_{5,8};Q)=Psi_{5,8}^{24}, which is type-free. All Hodge type enters through the single instance W_{22}H^{22}(M_{5,7};Q)=Q(-11)^a, i.e. THM-0005/FND-0195 at the boundary value n-1=7=c(5), applied to the open stack at degree vcd(M_{5,7})-1. Consequently the (5,8) Tate conclusion via this route has zero slack in the CKgP table: any downward revision of c(5) to 6, or any restriction of THM-0005 from open M_{g,n} to Mbar_{g,n}, refutes the conclusion without touching any other step. Reviewers should treat that one instance, not the peel combinatorics, as the locus of risk.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0193",
+  "independent": true,
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "FND-0001",
+      "note": "Load-bearing Poincare identification, used exactly at d=20 and twist (20). Mechanically verified for all cases.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Recorded case is (6,6), but the load-bearing content used here is the general semisimplicity of polarizable pure Q-Hodge structures of a fixed weight, already included in FND-0195's Tate conclusion at every n-1<=c(g). Purity of W_{24}H^{24}(M_{5,8}) is the lowest-weight piece of a smooth stack (equivalently the FND-0001 dual of the weight -16 BM group). No exotic-extension gap remains.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0035",
+      "note": "Used only as a negative constraint. The argument never infers vanishing from 24=vcd(M_{5,8}). The two vcd applications are H^{24}(M_{5,7}) with 24>23 and H^{16}(M_5;L) with 16>15. Non-load-bearing as a positive input.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0195",
+      "note": "The whole ordinary Tate statement is the (5,8,24) instance of this corroborated general peel: k=vcd, n-1=7=c(5) inclusive, Q(-vcd/2)=Q(-12). Campaign_case (6,6) in the metadata is an instance, not a restriction; the statement names c(5)=7 and the inequality n-1<=c(g). Exclusions (degree vcd-1, unpublished c(8)) are not engaged.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0196",
+      "note": "Cited for the projector/induction identification of i_s=2 summands with Psi. Disposal (1) applies at g=5: Morita H_1(Mod_g;H_1(Sigma_g;Z))=Z/(2g-2) gives H^1(M_g;R^1 pi_* Q)=0 for g>=2, so b_s=0 and omega_s coincides with c_s modulo slot-0. Disposals (2) and (3) are likewise available; (3)'s base |i|<=8 has base degree >=16>15. Not a fibre-restriction slogan.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0197",
+      "note": "Load-bearing only in the surjection direction W_k H^k(C^n)->W_k H^k(M_{g,n}) at n=8>=2. Kernel, Gysin for diagonals, Schur-Weyl, and Kunneth summands of the non-proper punctured map f:M_{5,8}->M_5 are not used, matching the finding's excludes.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0005",
+      "note": "Published CKgP bounds, object open M, degree all pure-weight pieces, n<=c(g) with c(5)=7, SRC-0002 Table 1 / Proposition 4.5 and SRC-0004 Lemma 10.13, established and unconditional. Applied at (g,n)=(5,7) on the open stack, not at n=8 and not on Mbar.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0002",
+      "note": "Load-bearing through FND-0195/THM-0005: Lemma 3.1(a), Lemma 4.3 (CKgP implies W_k H^k algebraic, even degrees Hodge-Tate), Proposition 4.5, and Table 1. No unrecorded excerpt, no Chenevier-Lannes prediction used as a theorem.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0142-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is that all Hodge type in the (5,8) peel is carried by one zero-slack CKgP instance, while the rest of the argument is type-free generation. Harer kills the primitive term (base degree 16>vcd(M_5)=15) and Phi_{5,8}^{24} (24>vcd(M_{5,7})=23), so W_{24}H^{24}(M_{5,8};Q)=Psi_{5,8}^{24}, which could a priori be an arbitrary polarizable pure weight-24 structure. Type enters only at W_{22}H^{22}(M_{5,7};Q)=Q(-11)^a, i.e. THM-0005/FND-0195 at n-1=7=c(5) on the OPEN stack, at degree 22=vcd(M_{5,7})-1. There is no slack: if c(5) were 6, or if the bound concerned Mbar_{5,n} rather than open M_{5,n}, or if CKgP-to-pure-weight algebraicity cost one marking, the theorem would fail with no other step disturbed. This attack was pressed and fails. THM-0005 records object 'open M', degree 'all pure-weight pieces', n<=c(g) with c(5)=7, established and unconditional; SRC-0004 Lemma 10.13 is the inclusive statement 'If n<=7, then M_{5,n} has the CKgP and A^*=R^*'; SRC-0002 Lemma 4.3 then Proposition 4.5 type W_{22}H^{22} as algebraic Hodge-Tate Q(-11); FND-0195 independently records Tate_range n-1<=c(g) and already concludes the direct-sum statement at this endpoint. The adjacent overreach of applying CKgP at n=8 is not committed. Second attack, the FND-0196 slot-1 cross term b_s: fails because Morita's rational vanishing H^1(Mod_g;H^1(Sigma_g;Q))=0 holds for all g>=2, hence at g=5, so b_s=0 identically. Third attack, treating FND-0195 as a (6,6)-only finding: fails because the corroborated statement is for g>=2, n>=1, k=vcd, and names c(5)=7. Remaining surfaces checked clean: Poincare duality and every twist (d=20, 2d-16=24, Q(-12)(20)=Q(8), weight -16); Gysin unused; Kunneth base-degree bookkeeping 24-|i|>=16>15 for |i|<=8, with eight slots in {0,1,2} forcing some i_s=2 once |i|>=9; degeneration versus splitting (Leray of the smooth proper closed universal curve C^8->M_5, not the mixed R^1 of the punctured forgetful map); semisimplification versus isomorphism (purity plus polarizability of the lowest-weight piece, as in FND-0033/FND-0195); stack versus coarse and Q versus Z (no coarse or integral identification); graph-automorphism invariants versus coinvariants (no boundary or Aut(Gamma) appears); predicted motives used as theorems (none; algebraicity is supplied by CKgP before any Tate claim); omitted stable pairs (the theorem is only the (5,8) open residual); FND-0035's blocked vcd-vanishing inference at 24=vcd(M_{5,8}) is absent. Task binding verified: target_attempt_id ATT-0142, subproblem C58-OPEN, packet_id C66BAR-001-v2, packet_sha256 a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191 and packet_binding_sha256 6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54 agree between TASK.json and the attempt, and the attempt's theorem_statement and target dictionary reproduce the task's exactly. Verdict confirmed for the submitted theorem_statement only; this does not discharge C58-BOUNDARY, C58-COMPACT, or the campaign boundary-image theorem.",
+  "subproblem_id": "C58-OPEN",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{5,8};Q), equivalently W_{24}H^{24}(M_{5,8};Q)(20), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group. This theorem does not conclude H^{16}(Mbar_{5,8};Q) and does not conclude the campaign boundary-image theorem.",
+  "verdict": "confirmed"
+}

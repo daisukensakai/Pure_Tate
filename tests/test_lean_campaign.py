@@ -140,6 +140,24 @@ class LeanCampaignTests(unittest.TestCase):
         )
         return root, formal, campaigns, attempts, reviews, directory, campaign
 
+    def test_latt0003_material_model_mechanically_passes(self):
+        result, report = lean_campaign.check_attempt(
+            "LATT-0003", "LC66-002", write=False
+        )
+        self.assertEqual(result.errors, [])
+        self.assertEqual(report["result"], "PASS")
+        model_path = (
+            Path(__file__).resolve().parents[1]
+            / "formal"
+            / "attempts"
+            / "LATT-0003-codex-material-c66"
+            / "Model.lean"
+        )
+        model = model_path.read_text(encoding="utf-8")
+        self.assertIn("have hprobe := hsummands probe", model)
+        self.assertIn("exact ⟨hquotient, hpolarizable, hcontained⟩", model)
+        self.assertNotIn("theorem ax31 : AX31 := by intro _ _ _ _ h; exact h", model)
+
     def _patches(self, root, formal, campaigns, attempts, reviews):
         return mock.patch.multiple(
             lean_campaign,
@@ -237,6 +255,57 @@ class LeanCampaignTests(unittest.TestCase):
             self.assertTrue(
                 any("no independently verified attempt" in error for error in result.errors)
             )
+
+    def test_optional_obligation_has_separate_nonleaking_axiom_closure(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = self._fixture(temporary)
+            root, formal, campaigns, attempts, reviews, directory, campaign = fixture
+            campaign["optional_obligation_ids"] = ["OBL-6"]
+            campaign["optional_axiom_names"] = ["a6"]
+            self._write_json(campaigns / "LC66-001.json", campaign)
+            claim_path = directory / "Claim.lean"
+            text = claim_path.read_text(encoding="utf-8")
+            text = text.replace(
+                "-- LEAN-THEOREM exactTarget",
+                "-- LEAN-THEOREM exactTarget\n-- LEAN-OPTIONAL-THEOREM optionalRoute",
+            )
+            text = text.replace(
+                "axiom a5 : True\n-- LEAN-AXIOM a5 => OBL-5 -- fixture\n"
+                "axiom a6 : True -> True -> True -> True -> True -> "
+                "BMIsFiniteTateSum exactC66BMTarget",
+                "axiom a5 : True -> True -> True -> True -> "
+                "BMIsFiniteTateSum exactC66BMTarget\n"
+                "-- LEAN-AXIOM a5 => OBL-5 -- fixture\n"
+                "axiom a6 : True",
+            )
+            text = text.replace(
+                "theorem exactTarget : BMIsFiniteTateSum exactC66BMTarget := "
+                "a6 a1 a2 a3 a4 a5\n#print axioms exactTarget",
+                "theorem optionalRoute : True := a6\n"
+                "theorem exactTarget : BMIsFiniteTateSum exactC66BMTarget := "
+                "a5 a1 a2 a3 a4\n"
+                "#print axioms optionalRoute\n#print axioms exactTarget",
+            )
+            claim_path.write_text(text, encoding="utf-8")
+            with self._patches(root, formal, campaigns, attempts, reviews):
+                result, report = lean_campaign.check_attempt("LATT-0001")
+            self.assertEqual(result.errors, [])
+            self.assertIn("a6", report["optional_used_axioms"])
+            self.assertNotIn("a6", report["used_axioms"])
+
+    def test_campaign_status_ignores_attempts_from_other_campaigns(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = self._fixture(temporary)
+            root, formal, campaigns, attempts, reviews, _directory, campaign = fixture
+            other_directory = attempts / "LATT-0002-other"
+            other_directory.mkdir()
+            self._write_json(
+                other_directory / "manifest.json",
+                {"id": "LATT-0002", "campaign_id": "LC66-999"},
+            )
+            with self._patches(root, formal, campaigns, attempts, reviews):
+                status = lean_campaign.campaign_status(campaign["id"])
+            self.assertEqual([item["id"] for item in status["attempts"]], ["LATT-0001"])
 
     def test_two_distinct_nonprover_reviews_are_required(self):
         with tempfile.TemporaryDirectory() as temporary:

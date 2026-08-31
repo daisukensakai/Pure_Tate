@@ -1,0 +1,86 @@
+{
+  "argument_markdown": "Source-backed input: RED-0001 is exactly the fixed list (3,12), (5,8), (6,6), (7,4), (8,0), (8,1), (8,2). No other source-backed assertion or dependency is used.\n\nProved steps. Let Gamma be the dual graph of the generic curve in an irreducible boundary divisor of Mbar_{5,8}. It has one edge. For each vertex v, let n_v count both original labeled legs and incident half-edges. Normalizing the unique node gives the clutching atlas attached to Gamma, and forgetting an ordering of graph data gives the stack quotient [Mbar_Gamma/Aut(Gamma)].\n\nIf the edge is a loop, normalization leaves the curve connected. Normalization lowers its genus from 5 to 4 and replaces the node by two marked branches. Thus the ordered atlas is Mbar_{4,10}. Exchanging the two branches does not change the glued curve and is the full graph automorphism group, so the normalized stack component is [Mbar_{4,10}/S_2]. Its sole atlas factor has type (4,10), outside RED-0001.\n\nIf the edge is separating, normalization has two connected components. Write their genera as g1,g2 and their inclusive marking counts as n1,n2. Additivity of arithmetic genus across a separating node gives g1+g2=5. Each of the eight original legs occurs once, and the normalized node supplies one half-edge on each component, so n1+n2=8+2=10. Each component is stable, hence 2g_i-2+n_i>0. The clutching atlas is Mbar_{g1,n1} x Mbar_{g2,n2}, modulo Aut(Gamma). Since g1+g2 is odd, the two vertex genera differ; consequently no graph automorphism exchanges the vertices, although retaining the quotient notation is the stack-theoretically correct convention.\n\nFor a genus-5 factor, the other vertex has genus 0. Stability of that rational vertex gives n_0 at least 3, hence n_5=10-n_0 at most 7. Therefore type (5,8) cannot occur. For a genus-3 factor, the other vertex has genus 2 and carries at least its incident half-edge, so n_2 is at least 1 and n_3=10-n_2 is at most 9. Therefore type (3,12) cannot occur. In every separating graph both genera are nonnegative and sum to 5, while the non-separating factor has genus 4. Thus no factor has genus 6, 7, or 8, excluding (6,6), (7,4), (8,0), (8,1), and (8,2). This exhausts the RED-0001 list.\n\nComputational hypotheses: none. Gaps: none. Failed-route audit: the proof uses only one-edge stable-graph combinatorics and stability. It uses no virtual-cohomological-dimension vanishing, undecorated top-weight graph complex, point counting, or forgetful-map/local-system comparison. It makes no cohomological, Tate, determinant-edge, or H^{16}(Mbar_{5,8};Q) assertion.",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "claims": [
+    {
+      "id": "C58-BOUNDARY-001",
+      "statement": "The stacky non-separating normalization is [Mbar_{4,10}/S_2], with S_2 exchanging the two branches of the node.",
+      "status": "proved"
+    },
+    {
+      "id": "C58-BOUNDARY-002",
+      "statement": "Every separating one-edge normalization has ordered atlas Mbar_{g1,n1} x Mbar_{g2,n2}, modulo Aut(Gamma), with g1+g2=5, n1+n2=10, and both vertices stable.",
+      "status": "proved"
+    },
+    {
+      "id": "C58-BOUNDARY-003",
+      "statement": "A genus-5 separating factor has at most 7 inclusive markings, and a genus-3 separating factor has at most 9 inclusive markings.",
+      "status": "proved"
+    },
+    {
+      "id": "C58-BOUNDARY-004",
+      "statement": "No factor in any irreducible one-edge boundary normalization of Mbar_{5,8} has a type in the RED-0001 residual list.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [],
+  "id": "ATT-0141",
+  "lane": "weakest-sufficient-proof",
+  "methods_used": [
+    "one-edge-stable-graph-classification",
+    "stack-quotient-by-graph-automorphisms",
+    "stability-and-inclusive-marking-bounds"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_path": "proof/packets/generated/C66BAR-001-v2.md",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependencies": [],
+  "result_type": "proof",
+  "schema_version": 3,
+  "source_claim_ids": [
+    "RED-0001"
+  ],
+  "source_ids": [],
+  "status": "claimed_complete",
+  "subproblem_id": "C58-BOUNDARY",
+  "summary": "Classifying one-edge dual graphs of stable 8-pointed genus-5 curves gives the stacky non-separating normalization [Mbar_{4,10}/S_2] and separating product atlases whose inclusive marking counts sum to 10. Stability and edge incidence give the required genus-5 and genus-3 bounds, excluding every RED-0001 pair.",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-003",
+  "theorem_scope": {
+    "g": 5,
+    "n": 8
+  },
+  "theorem_statement": "Every factor occurring in the normalization of an irreducible boundary divisor of Mbar_{5,8} lies outside the RED-0001 residual list. The non-separating component is [Mbar_{4,10}/S_2]. A separating one-edge graph has ordered atlas Mbar_{g1,n1} x Mbar_{g2,n2} with g1+g2=5, n1+n2=10, and both vertices stable, modulo Aut(Gamma). In particular a genus-5 factor has at most 7 markings and a genus-3 factor has at most 9 markings, so no factor is one of (3,12), (5,8), (6,6), (7,4), (8,0), (8,1), or (8,2). This theorem makes no Tate assertion and does not conclude H^{16}(Mbar_{5,8};Q)."
+}

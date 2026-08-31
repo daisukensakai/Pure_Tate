@@ -1,0 +1,85 @@
+{
+  "attempt_id": "ATT-0141",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "checked_claims": [
+    {
+      "claim_id": "TASK-AND-PACKET-IDENTITY",
+      "note": "TASK.json, ATT-0141, and this review agree on campaign C66BAR-001 revision 2, subproblem C58-BOUNDARY, the exact theorem_statement, the (g,n)=(5,8) target dictionary with dimension 20, packet_id C66BAR-001-v2, packet_sha256 a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191, and packet_binding_sha256 6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54. Independent byte hashing of the packet file was not performed in this read-only review.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "RED-0001-LIST",
+      "note": "RED-0001.statement.json lists the unresolved open pairs as (3,12), (5,8), (6,6), (7,4), (8,0), (8,1), (8,2). The attempt uses exactly this list and no other source-backed assertion.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "C58-BOUNDARY-001",
+      "note": "A generic point of an irreducible boundary divisor of Mbar_{5,8} has a unique node, so the dual graph has one edge. A loop drops genus by 1 and replaces the node by two marked branches, giving ordered atlas Mbar_{4,10}. Labeled legs fix Aut(Gamma) as the swap of those two half-edges, so the normalized stack component is [Mbar_{4,10}/S_2]. Dimension check: dim Mbar_{4,10}=19=dim Mbar_{5,8}-1. Type (4,10) is not in RED-0001.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "C58-BOUNDARY-002",
+      "note": "A separating one-edge graph has two vertices with arithmetic genus additivity g1+g2=5 and inclusive marking sum n1+n2=8+2=10 (original legs plus one half-edge on each vertex). Stability is 2g_i-2+n_i>0. Because 5 is odd the vertex genera differ, so Aut(Gamma) cannot swap vertices; the stack quotient notation [Mbar_Gamma/Aut(Gamma)] remains correct and is typically the identity quotient. This is the inclusive-count form of the Knudsen clutching atlas Mbar_{g1,n1} x Mbar_{g2,n2}.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "C58-BOUNDARY-003",
+      "note": "Genus-5 factor: complementary vertex has genus 0, so n_0>=3 and n_5=10-n_0<=7, sharp at the rational-tail divisor Mbar_{5,7} x Mbar_{0,3}. Genus-3 factor: complementary vertex has genus 2 and at least its incident half-edge, so n_2>=1 and n_3<=9, sharp at Delta_{2,empty} of type (3,9) x (2,1). Both bounds are inclusive marking counts.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "C58-BOUNDARY-004",
+      "note": "One-edge types are (4,10) and products over genus pairs (0,5), (1,4), (2,3) with inclusive n-sum 10 and both vertices stable. None of (3,12), (5,8), (6,6), (7,4), (8,0), (8,1), (8,2) occurs: (5,8) would require an unstable rational vertex with n_0=2; (3,12) exceeds the inclusive sum 10; genera 6,7,8 cannot appear because separating genera are nonnegative and sum to 5 while the loop contributes genus 4.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ONE-EDGE-EXHAUSTION",
+      "note": "Irreducible boundary divisors are precisely the one-edge strata. Enumerating the stable pairs does not add residual types beyond the bounds already used. The theorem does not claim a classification of multi-edge graphs.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "STACK-COARSE-AND-SCOPE",
+      "note": "The argument is stack-theoretic ([Mbar_Gamma/Aut(Gamma)], not coarse spaces) and uses Q-irrelevant combinatorics of labeled dual graphs. It makes no cohomological, Borel-Moore, Poincare, Tate-twist, Gysin, Kunneth, spectral-sequence, Aut-invariants-versus-coinvariants, semisimplification, predicted-motive, tautological-generation, or compact H^{16}(Mbar_{5,8};Q) claim. Determinant-edge decoration is not load-bearing for this geometric lemma.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-31",
+  "finding_candidates": [],
+  "id": "REV-0190",
+  "independent": true,
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "RED-0001",
+      "note": "Load-bearing only as the fixed residual list (3,12), (5,8), (6,6), (7,4), (8,0), (8,1), (8,2). No other listed proof dependency or source is used.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0141-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: the separating rational-tail divisor with ordered atlas Mbar_{5,7} x Mbar_{0,3} places a genus-5 factor on the boundary of Mbar_{5,8}, which looks like smuggling the residual pair (5,8) (or like refuting an exhaustive genus-at-most-4 description). Outcome: stability of the genus-0 vertex forces n_0>=3, hence n_5=10-n_0<=7, so the factor is (5,7) not (5,8); the theorem's bound is sharp and exactly excludes (5,8). Secondary attack: multi-edge graphs can realize a vertex of type (3,12) because the inclusive marking sum is 8+2e, so e>=2 allows n_v=12. Outcome: irreducible boundary divisors are one-edge (generic curve has a unique node); multi-edge strata have codimension at least 2 and lie outside the stated theorem. Tertiary attacks on stack versus coarse space, Aut-invariants versus coinvariants, determinant-edge twists, and omitted genera 6-8 all fail: total genus is 5, the loop contributes only (4,10), Aut(Gamma)=S_2 on the loop and is trivial on separating graphs, and the theorem makes no cohomological claim.",
+  "subproblem_id": "C58-BOUNDARY",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "theorem_statement": "Every factor occurring in the normalization of an irreducible boundary divisor of Mbar_{5,8} lies outside the RED-0001 residual list. The non-separating component is [Mbar_{4,10}/S_2]. A separating one-edge graph has ordered atlas Mbar_{g1,n1} x Mbar_{g2,n2} with g1+g2=5, n1+n2=10, and both vertices stable, modulo Aut(Gamma). In particular a genus-5 factor has at most 7 markings and a genus-3 factor has at most 9 markings, so no factor is one of (3,12), (5,8), (6,6), (7,4), (8,0), (8,1), or (8,2). This theorem makes no Tate assertion and does not conclude H^{16}(Mbar_{5,8};Q).",
+  "verdict": "confirmed"
+}

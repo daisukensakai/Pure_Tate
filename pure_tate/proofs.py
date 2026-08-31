@@ -809,7 +809,22 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
                 % (review.get("id", review["_path"]), attempt_id)
             )
             continue
-        attempt = attempts_by_id[attempt_id]
+        # A review of a superseded campaign attempt is historical evidence.
+        # Do not re-interpret its old verdict under the current schema or
+        # theorem contract.
+        reviewed_attempt = attempts_by_id[attempt_id]
+        if (
+            attempt_id in stale_campaign_attempts
+            or (
+                campaign_migration.get("stale_prior_revisions") is True
+                and reviewed_attempt.get("campaign_id")
+                == campaign_migration.get("campaign_id")
+                and reviewed_attempt.get("campaign_revision")
+                != campaign_migration.get("campaign_revision")
+            )
+        ):
+            continue
+        attempt = reviewed_attempt
         expected_review_schema = 3 if attempt.get("campaign_id") else 2
         if migration and review.get("schema_version") != expected_review_schema:
             result.errors.append("%s has wrong review schema" % review_id)
@@ -926,7 +941,18 @@ def audit_proofs(claims: Dict[str, Claim]) -> CheckResult:
     verified = [
         attempt for attempt in current_attempts if attempt.get("status") == "verified"
     ]
+    campaign_verified = False
     if not verified:
+        try:
+            from .campaigns import REQUIRED_CAMPAIGN_REVISIONS, case_verified
+
+            campaign_verified = any(
+                case_verified(campaign_id)["verified"]
+                for campaign_id in REQUIRED_CAMPAIGN_REVISIONS
+            )
+        except (OSError, ValueError, KeyError):
+            campaign_verified = False
+    if not verified and not campaign_verified:
         result.warnings.append(
             "structural integrity has no verified mathematics result"
         )
@@ -943,36 +969,39 @@ def _check_pipeline_liveness(
     the subproblem graph has advanced no node at all. Both conditions below are
     silent by construction, so they are reported explicitly.
     """
-    from .campaigns import DEFAULT_CAMPAIGN
+    from .campaigns import REQUIRED_CAMPAIGN_REVISIONS
     from .tasking import campaign_mathematics_tasks, review_tasks
 
-    campaign_attempts = [
-        attempt
-        for attempt in attempts_by_id.values()
-        if attempt.get("campaign_id") == DEFAULT_CAMPAIGN
-    ]
-    if not campaign_attempts:
-        return
-    try:
-        pending_reviews = review_tasks()
-        math_tasks = campaign_mathematics_tasks(DEFAULT_CAMPAIGN)
-    except (OSError, ValueError):
-        return
-    if not pending_reviews and not any(
-        task["status"] == "ready" for task in math_tasks
-    ):
-        result.warnings.append(
-            "%s has %d attempts but no queued review task and no executable "
-            "subproblem: the pipeline cannot advance"
-            % (DEFAULT_CAMPAIGN, len(campaign_attempts))
-        )
-    if len(campaign_attempts) >= 10 and not any(
-        task.get("dependency_artifacts") for task in math_tasks
-    ):
-        result.warnings.append(
-            "%s has %d attempts and no verified subproblem dependency"
-            % (DEFAULT_CAMPAIGN, len(campaign_attempts))
-        )
+    pending_reviews = None
+    for campaign_id in REQUIRED_CAMPAIGN_REVISIONS:
+        campaign_attempts = [
+            attempt
+            for attempt in attempts_by_id.values()
+            if attempt.get("campaign_id") == campaign_id
+        ]
+        if not campaign_attempts:
+            continue
+        try:
+            if pending_reviews is None:
+                pending_reviews = review_tasks()
+            math_tasks = campaign_mathematics_tasks(campaign_id)
+        except (OSError, ValueError):
+            continue
+        if not pending_reviews and not any(
+            task["status"] == "ready" for task in math_tasks
+        ):
+            result.warnings.append(
+                "%s has %d attempts but no queued review task and no executable "
+                "subproblem: the pipeline cannot advance"
+                % (campaign_id, len(campaign_attempts))
+            )
+        if len(campaign_attempts) >= 10 and not any(
+            task.get("dependency_artifacts") for task in math_tasks
+        ):
+            result.warnings.append(
+                "%s has %d attempts and no verified subproblem dependency"
+                % (campaign_id, len(campaign_attempts))
+            )
 
 
 def proof_status_report(

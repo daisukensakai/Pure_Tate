@@ -1,0 +1,178 @@
+{
+  "attempt_id": "ATT-0142",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0138-1",
+      "note": "Twist and degree bookkeeping independently redone. dim M_{5,8}=3*5-3+8=20=d, so PD on the smooth DM stack with Q-coefficients gives H^{BM}_{16} = H^{2d-16}(-)(d) = H^{24}(-)(20). Weight check: Q(20) shifts weight by -40, so weight -16 on the BM side corresponds to weight -16+40=24 on the ordinary side, i.e. W_{-16}H^{BM}_{16} <-> W_{24}H^{24}. Since weights of H^{24} of a smooth stack lie in [24,48], W_{24}H^{24}=gr^W_{24}H^{24} is the lowest-weight piece, matching FND-0032's description of the RED-0001 corner and FND-0001's all-cases statement; -16 is likewise the lowest weight of H^{BM}_{16}. Twist arithmetic Q(-12)(20)=Q(8) and wt Q(8)=-16 both check. No coarse-moduli or integral-coefficient step is involved.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0138-2",
+      "note": "vcd(M_{5,8})=4g-4+n=24 (Harer, g>=1, n>0), and 2d-16=2*20-16=24, so the required ordinary degree equals vcd, exactly as FND-0035 records for (5,8). The FND-0195 hypotheses are g>=2 (5>=2), n>=1 (8>=1), k=vcd, and n-1<=c(g) in the published table; n-1=7 and c(5)=7, so the inclusive inequality holds at equality. FND-0195's declared scope is g>=2, n>=1 with the published table c(3)=c(4)=11, c(5)=7, c(6)=5, c(7)=3, excluding only degree vcd-1 and the unpublished c(8); none of those exclusions is triggered here. The endpoint reading is not an over-extension by the attempt: FND-0195 itself draws its (6,6) conclusion at its own endpoint n-1=5=c(6), so inclusivity is part of the corroborated content rather than an inference added by ATT-0142.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0138-3",
+      "note": "Reconstructed the peel at (5,8) independently rather than accepting the citation. (i) FND-0197 needs g>=2, n>=2: satisfied, so W_24 H^24(C^8) ->> W_24 H^24(M_{5,8}). (ii) Kunneth vanishing: summands H^{24-|i|}(M_5; tensor_s R^{i_s}pi_*Q) vanish by Harer whenever 24-|i|>vcd(M_5)=4g-5=15, i.e. exactly for |i|<=8; the attempt's '24-|i|>=16>15' is the tight form of this. (iii) The complementary range |i|>=9 on n=8 slots forces some i_s=2 by pigeonhole (max sum with all slots <=1 is 8), so every surviving summand is disposed of by FND-0196. All three FND-0196 disposals are available at g=5: (1) H^1(M_g;R^1 pi_* Q)=0 for g>=2; (2) the PTY relative Chow-Kunneth projector; (3) the downward induction, whose base case A_j=0 holds exactly for |j| <= k-vcd(M_g)-1 = (4g-4+n)-(4g-5)-1 = n = 8, so the (6,6)-recorded instance transports with the same shape and not by coincidence. (iv) Phi^{24}_{5,8}=0 because vcd(M_{5,7})=4*5-4+7=23<24; this is above-vcd vanishing on the smaller pointed space, structurally distinct from the at-vcd inference FND-0035 forbids, and the attempt explicitly disclaims the latter. (v) The residual Psi^{24}=sum_i psi_i sum_j pi_j^* W_22 H^22(M_{5,7};Q); CKgP Prop 4.5 applies to M_{5,7} since its marking count 7 equals c(5)=7, typing that pure weight-22 group as Q(-11)^{oplus a}. pi_j^* is a type-(0,0) morphism of MHS and psi_i is algebraic of type Q(-1), so the image is a quotient of Q(-11)(-1)^{oplus a'}=Q(-12)^{oplus a'} in weight 24. (vi) Semisimplicity of polarizable pure Q-Hodge structures of a single weight (invoked inside FND-0195, and recorded as FND-0033) turns that quotient/subquotient statement into an honest direct-sum isomorphism, so there is no semisimplification-versus-isomorphism gap. Direction of the CKgP input is safe: 'algebraic of Tate type' is stronger than the pure-Tate conclusion used, so no pure-Tate class is silently upgraded to algebraic or tautological generation. 24 is even, so Q(-vcd/2)=Q(-12) is well formed. No Gysin map, boundary stratum, graph automorphism, weight spectral sequence, or CGP top-weight input enters, so the invariants/coinvariants, determinant-edge, and differential attacks have no surface here.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0138-4",
+      "note": "Composition of CLM-0138-1 and CLM-0138-3: Q(-12)^{oplus r}(20)=Q(8)^{oplus r}, weight -16 as required. The theorem asserts only 'a direct sum of Q(8)', and the attempt is explicit that r>=0 with the empty sum allowed; it therefore does not smuggle in a nonvanishing claim, and no lower bound is needed for the stated theorem.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0138-5",
+      "note": "Verified by exhaustion of the argument text: no boundary sequence (THM-0003 / SRC-0002 Eq. 6.1) for Mbar_{5,8} or Mbar_{6,6}, no normalized-boundary component analysis, no separating-graph Kunneth term, and no H^{16}(Mbar_{5,8};Q) or (6,6) boundary-image assertion appears. The negative clauses of the theorem statement are honoured, and per the task rules this lemma is judged on its own statement, not on whether it settles the campaign target.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-31",
+  "finding_candidates": [
+    {
+      "key": "clp-peel-vcd-threshold-is-n-uniform",
+      "reusable": true,
+      "scope": {
+        "coefficients": "Q",
+        "degree": "k = vcd(M_{g,n}) = 4g-4+n",
+        "g": ">=2",
+        "n": ">=1",
+        "objects": [
+          "n-fold fibre product C^n of the closed universal curve over M_g",
+          "Leray-Kunneth multi-index summands",
+          "FND-0196 disposal (3)"
+        ],
+        "verified_instances": [
+          {
+            "g": 5,
+            "n": 8
+          },
+          {
+            "g": 6,
+            "n": 6
+          }
+        ]
+      },
+      "statement": "In the FND-0195/FND-0196 peel run at the top degree k = vcd(M_{g,n}) = 4g-4+n, the Kunneth vanishing threshold and the slot-2 pigeonhole are both independent of (g,n). Harer vanishing kills the summand H^{k-|i|}(M_g; tensor_s R^{i_s}pi_* Q) exactly when k-|i| > vcd(M_g) = 4g-5, i.e. exactly for |i| <= k - (4g-5) - 1 = n, since k - vcd(M_g) - 1 = (4g-4+n) - (4g-5) - 1 = n identically. Every surviving multi-index therefore has |i| >= n+1, and on n slots each valued in {0,1,2} this forces some i_s = 2 by pigeonhole (all slots <= 1 gives |i| <= n). Consequently FND-0196's disposal (3) and the 'some slot equals 2' step are structurally uniform in (g,n) for g >= 2, and the recorded (6,6) instance ('|i| <= 6 has base degree at least 20 > 19') is a specialization rather than a case-specific check. Verified instance at (g,n) = (5,8): threshold |i| <= 8, base degree 24-|i| >= 16 > vcd(M_5) = 15, surviving range |i| >= 9 on 8 slots.",
+      "status": "candidate",
+      "supports_finding_id": "FND-0196"
+    },
+    {
+      "key": "red0001-residual-pairs-sit-at-ckgp-endpoint",
+      "reusable": true,
+      "scope": {
+        "coefficients": "Q",
+        "excludes": [
+          "any assertion about the correctness of the published c(g) values themselves",
+          "the vcd-1 pairs (8,0) and (8,1)"
+        ],
+        "objects": [
+          "RED-0001 residual pair list",
+          "FND-0195 published c(g) Tate range",
+          "endpoint condition n-1 = c(g)"
+        ],
+        "pairs": [
+          [
+            3,
+            12
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            8,
+            2
+          ]
+        ]
+      },
+      "statement": "The RED-0001 residual condition 'required ordinary degree 2d-16 equals vcd' is equivalent to the closed form 2g + n = 18: 2(3g-3+n) - 16 = 4g-4+n reduces to 2g+n = 18, reproducing exactly the pairs (3,12), (5,8), (6,6), (7,4), (8,2). Equivalently n-1 = 17-2g. The published CKgP table used by FND-0195 satisfies c(g) = 17-2g precisely for g = 5, 6, 7, and c(3) = 11 = 17-6. Hence for every RED-0001 residual pair with a published c(g), the FND-0195 hypothesis n-1 <= c(g) is met at equality with zero slack, never with margin: (3,12), (5,8), (6,6) and (7,4) all sit exactly on the endpoint, while (8,2) is unreachable only because c(8) is unpublished. Two consequences. (a) These four discharges share a single correlated point of failure: any narrowing of the published CKgP hypothesis to a strict inequality, or any downward correction of one c(g), invalidates the corresponding case outright with no fallback inside the peel, since every other vanishing in the peel carries strict slack of exactly one (k > vcd(M_{g,n-1}) and k-n > vcd(M_g)). (b) The alignment is not a coincidence of the campaign's case list: g = 4 gives n = 10 with n-1 = 9 < c(4) = 11, the unique slack case, and (4,10) is correspondingly absent from the residual list. Reviewers should therefore treat 'the endpoint is inclusive' as a shared load-bearing assumption across these cases rather than as a per-attempt detail, and should not read confirmation of one endpoint case as independent evidence for another.",
+      "status": "candidate",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0194",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "FND-0001",
+      "note": "Adjudicated mechanically_verified with cases 'all', so the (5,8) instance is inside its declared scope; the d=20 specialization reproduces its formula exactly, including the (d) twist.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0195",
+      "note": "Sole load-bearing input. Declared generality g>=2, n>=1 with the published c(g) table covers (5,8); every hypothesis is met and both listed exclusions (degree vcd-1, unpublished c(8)) are untriggered. Its internal steps were re-derived at (5,8) rather than taken on trust; see CLM-0138-3.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0196",
+      "note": "Used for the slot-1 cross-term disposal. Its disposal (1) is stated for all g>=2; disposal (3)'s base-case threshold equals n identically, so the (6,6) instance it records is an instance of a (g,n)-uniform bound and transports to (5,8) with |i|<=8 rather than |i|<=6.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0197",
+      "note": "Hypotheses g>=2, n>=2 met at (5,8); supplies only the surjection W_k H^k(C^n) ->> W_k H^k(M_{g,n}), which is all the attempt uses. Its excluded item -- identifying Kunneth summands of H^*(C^n) with summands of R^* f_* Q for the non-proper f:M_{g,n}->M_g, where the mixed weight-1-and-2 R^1 obstruction of FND-0020/FND-0037 lives -- is correctly not used: the Kunneth computation is run on the proper C^8 over M_5, and the attempt says so explicitly.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Invoked for fixed-weight semisimplicity. Its adjudicated metadata is scoped to case (6,6), so its use at (5,8) is a nominal scope stretch, but this is not load-bearing: the same semisimplicity of polarizable pure Q-Hodge structures of a single weight is invoked internally by FND-0195, and W_24 H^24 of a smooth stack is polarizable pure as the image of H^24 of a smooth proper compactification. The step survives with FND-0033 removed.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0035",
+      "note": "Used as a negative guardrail, and the guardrail is respected: it records 2d-16=vcd for (5,8) (confirmed by direct arithmetic) and forbids inferring vanishing from that equality. The attempt draws no conclusion from 24=vcd(M_{5,8}); its only above-vcd vanishings are 24>23 on M_{5,7} and 16>15 on M_5, both strict and both on different spaces.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0002",
+      "note": "Listed in the attempt's source_ids but non-load-bearing: SRC-0002 supplies the THM-0003 boundary sequence Eq. (6.1), which this lemma deliberately does not invoke (see CLM-0138-5). Recorded as confirmed-and-unused rather than unresolved, since nothing in the argument depends on it.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0142-P2",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack attempted (zero-slack endpoint, single point of failure): the entire theorem rests on one tight inequality, n-1 = 7 = c(5), with no margin, while every other step in the peel carries strict slack (24 > vcd(M_{5,7}) = 23; base degree 16 > vcd(M_5) = 15; and the pigeonhole |i| >= 9 on 8 slots forcing some i_s = 2). Worse, this tightness is structural rather than accidental: the RED-0001 residual condition 2d-16 = vcd is equivalent to 2g+n = 18, i.e. n-1 = 17-2g, and the published table has c(g) = 17-2g precisely for g = 5, 6, 7 (and c(3) = 11 = 17-6). So the CKgP hypothesis is met at equality for (3,12), (5,8), (6,6) and (7,4) alike, and any correction that made the published CKgP range strict, or that lowered c(5) from 7 to 6, would collapse this proof with no fallback -- and would simultaneously collapse FND-0195's own (6,6) conclusion. I could not make this attack land against the packet as bound: FND-0195 is corroborated, states the range with an inclusive '<=', and itself exercises the endpoint at n-1 = 5 = c(6); ATT-0142 therefore uses the endpoint exactly as the adjudicated finding licenses it, and re-litigating c(5) would be re-opening a recorded source bound, not finding a defect in this artifact.\n\nSecondary attacks, all of which failed to land. (1) Transport of a (6,6)-verified mechanism to (5,8): I checked that FND-0196's disposal (3) base case holds for |j| <= k - vcd(M_g) - 1, which equals n identically for k = vcd(M_{g,n}), so the recorded '|i| <= 6, 20 > 19' instance is a specialization of a (g,n)-uniform bound and the '|i| <= 8, 16 > 15' form is correct, not a rescaled guess; likewise the pigeonhole step is uniform. (2) Poincare/twist attack: I re-derived H^{BM}_{16} = H^{24}(20), verified that weight -16 maps to weight 24 under the -2d = -40 shift, that both named groups are the lowest-weight pieces in their degrees, and that Q(-12)(20) = Q(8) has weight -16; nothing is off by a twist or by one unit of weight, and the FND-0020 'mixed R^1, off by one unit of weight' failure mode is absent because no punctured-curve local system is used. (3) Wrong-fibration attack: the Kunneth computation could have been run on the non-proper f: M_{g,n} -> M_g, where the FND-0197-excluded identification and the FND-0037 extension effect would bite; the attempt instead uses the proper C^8 over M_5 and states this, so the obstruction is genuinely avoided rather than renamed. (4) Semisimplification-versus-isomorphism: FND-0033 is nominally scoped to (6,6), but the step is non-load-bearing because FND-0195 invokes the same fixed-weight semisimplicity internally and the group is polarizable pure by Deligne's compactification description. (5) Forbidden at-vcd inference: 24 = vcd(M_{5,8}) is never used to vanish anything; the two vanishings live on M_{5,7} and M_5. (6) Motive-status attack: CKgP Prop 4.5 gives 'algebraic of Tate type' and the proof consumes only 'Tate type', so the flow is strong-to-weak and no predicted motive or tautological-generation claim is smuggled in. (7) Scope attacks that do not apply to this lemma at all: no coarse moduli, no integral coefficients, no Gysin or codimension shift, no boundary stratum, no Aut(Gamma) invariants-versus-coinvariants or determinant-edge convention, no spectral-sequence differential or degeneration claim, and no stable-pair/evaluation-failure geometry (FND-0050/FND-0052 target a different, (6,6)-specific route and are not obligations for this peel). (8) Provenance: ATT-0142 is a revision-migration recovery authored against packet v1, so its citations could in principle have been written against different finding texts; I checked each of FND-0001, FND-0033, FND-0035, FND-0195, FND-0196, FND-0197 against the v2 packet bound by this task and each is present with content that supports the use made of it, and the task packet_sha256 a898256a..., packet_binding_sha256 6a765b58..., campaign_revision 2, context_revision 2, subproblem C58-OPEN and the target dictionary all match the artifact after the recorded HARNESS-IDENTITY-COERCE-0001 normalizations.\n\nConclusion: the artifact is a correct and minimal specialization of a corroborated general finding, and the theorem it states -- the exact open group only, with no compact-moduli and no boundary-image consequence -- is proved. Confirming this lemma does not verify the (5,8) case of the campaign nor the C66BAR boundary-image theorem, and the C58-BOUNDARY, C58-COMPACT, C66BAR-SEP and C66BAR-IMAGE nodes remain open.",
+  "subproblem_id": "C58-OPEN",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "theorem_statement": "The exact group W_{-16}H^{BM}_{16}(M_{5,8};Q), equivalently W_{24}H^{24}(M_{5,8};Q)(20), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group. This theorem does not conclude H^{16}(Mbar_{5,8};Q) and does not conclude the campaign boundary-image theorem.",
+  "verdict": "confirmed"
+}

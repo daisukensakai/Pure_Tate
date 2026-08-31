@@ -500,9 +500,10 @@ def command_stage(args: argparse.Namespace) -> int:
         campaign_ready = False
         print("ERROR: focused campaign context:", exc)
     print(
-        "Focused campaign context %s: C66-001 revision-2 packet %s"
+        "Focused campaign context %s: %s packet %s"
         % (
             "READY" if campaign_ready else "BLOCKED",
+            DEFAULT_CAMPAIGN,
             "is hash-matched" if campaign_ready else "needs regeneration",
         )
     )
@@ -700,6 +701,53 @@ def command_campaign_status(args: argparse.Namespace) -> int:
     return 0
 
 
+def _write_campaign_generated_artifacts(campaign_id: str) -> None:
+    from .experiments import experiment_tasks
+    from .novelty import novelty_tasks
+    from .paired import dry_run_preview
+    from .campaigns import campaign_packet_record, load_campaign
+    from .tasking import campaign_mathematics_tasks, finding_audit_tasks
+
+    write_campaign_status(campaign_id)
+    prefix = ROOT / "tasks" / "generated" / ("campaign-%s" % campaign_id)
+    atomic_write_json(
+        Path(str(prefix) + "-mathematics.json"),
+        campaign_mathematics_tasks(campaign_id),
+    )
+    atomic_write_json(
+        Path(str(prefix) + "-finding-audit.json"),
+        finding_audit_tasks(campaign_id),
+    )
+    atomic_write_json(
+        Path(str(prefix) + "-experiment.json"),
+        experiment_tasks(campaign_id),
+    )
+    atomic_write_json(
+        Path(str(prefix) + "-novelty.json"),
+        novelty_tasks(campaign_id),
+    )
+    atomic_write_json(
+        Path(str(prefix) + "-review.json"),
+        [
+            task
+            for task in review_tasks()
+            if task.get("campaign_id") == campaign_id
+        ],
+    )
+    paired_campaign = load_campaign(campaign_id)
+    paired_packet = campaign_packet_record(campaign_id)
+    atomic_write_json(
+        Path(str(prefix) + "-paired-preview.json"),
+        dry_run_preview(
+            paired_campaign,
+            paired_packet,
+            paired_campaign["paired_attempt_policy"]["engine_order"],
+            paired_campaign["batch_step_limit"],
+            include_untried=False,
+        ),
+    )
+
+
 def command_all(args: argparse.Namespace) -> int:
     config, target, sources, claims, edges = _load()
     validation = validate_repository(config, target, sources, claims, edges)
@@ -796,51 +844,12 @@ def command_all(args: argparse.Namespace) -> int:
         REPORTS_GENERATED / "PORTFOLIO.md",
         proof_status_report(claims, board),
     )
-    write_campaign_packet(DEFAULT_CAMPAIGN)
-    write_campaign_status(DEFAULT_CAMPAIGN)
-    from .experiments import experiment_tasks
-    from .novelty import novelty_tasks
-    from .tasking import campaign_mathematics_tasks, finding_audit_tasks
-
-    atomic_write_json(
-        ROOT / "tasks" / "generated" / "campaign-C66-001-mathematics.json",
-        campaign_mathematics_tasks(DEFAULT_CAMPAIGN),
-    )
-    atomic_write_json(
-        ROOT / "tasks" / "generated" / "campaign-C66-001-finding-audit.json",
-        finding_audit_tasks(DEFAULT_CAMPAIGN),
-    )
-    atomic_write_json(
-        ROOT / "tasks" / "generated" / "campaign-C66-001-experiment.json",
-        experiment_tasks(DEFAULT_CAMPAIGN),
-    )
-    atomic_write_json(
-        ROOT / "tasks" / "generated" / "campaign-C66-001-novelty.json",
-        novelty_tasks(DEFAULT_CAMPAIGN),
-    )
-    atomic_write_json(
-        ROOT / "tasks" / "generated" / "campaign-C66-001-review.json",
-        [
-            task
-            for task in review_tasks()
-            if task.get("campaign_id") == DEFAULT_CAMPAIGN
-        ],
-    )
-    from .paired import dry_run_preview
-    from .campaigns import campaign_packet_record, load_campaign
-
-    paired_campaign = load_campaign(DEFAULT_CAMPAIGN)
-    paired_packet = campaign_packet_record(DEFAULT_CAMPAIGN)
-    atomic_write_json(
-        ROOT / "tasks" / "generated" / "campaign-C66-001-paired-preview.json",
-        dry_run_preview(
-            paired_campaign,
-            paired_packet,
-            paired_campaign["paired_attempt_policy"]["engine_order"],
-            paired_campaign["batch_step_limit"],
-            include_untried=False,
-        ),
-    )
+    campaign_ids = []
+    for campaign_id in ("C66-001", DEFAULT_CAMPAIGN):
+        if campaign_id not in campaign_ids:
+            campaign_ids.append(campaign_id)
+    for campaign_id in campaign_ids:
+        _write_campaign_generated_artifacts(campaign_id)
 
     replay_namespace = argparse.Namespace(degree=14)
     if command_replay(replay_namespace) != 0:
@@ -849,7 +858,7 @@ def command_all(args: argparse.Namespace) -> int:
     if command_replay(replay_namespace) != 0:
         return 1
     print(
-        "Generated revision-2 case packets, revision-4 C66 campaign packet/status, manifests, "
+        "Generated revision-2 case packets, campaign packet/status, manifests, "
         "board, findings, and reports."
     )
     return 0

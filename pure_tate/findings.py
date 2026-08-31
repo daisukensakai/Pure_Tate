@@ -111,11 +111,20 @@ def findings_for_case(
     markings: int,
     visible_only: bool = False,
     campaign_id: Optional[str] = None,
+    allowed_campaign_ids: Optional[Sequence[str]] = None,
 ) -> List[Dict[str, Any]]:
     selected = []
+    allowed = (
+        {item for item in allowed_campaign_ids if isinstance(item, str) and item}
+        if allowed_campaign_ids is not None
+        else None
+    )
     for finding in load_findings():
         finding_campaign = finding.get("campaign_id")
-        if finding_campaign and finding_campaign != campaign_id:
+        if allowed is not None:
+            if finding_campaign and finding_campaign not in allowed:
+                continue
+        elif finding_campaign and finding_campaign != campaign_id:
             continue
         case = finding.get("case")
         applies = case == {"g": genus, "n": markings} or case == "all"

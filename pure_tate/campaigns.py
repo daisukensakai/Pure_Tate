@@ -16,8 +16,12 @@ from .store import DATA, PACKETS_GENERATED, REPORTS_GENERATED, ROOT, atomic_writ
 from .targets import CONTEXT_REVISION, open_input_target, target_formula
 
 
-DEFAULT_CAMPAIGN = "C66-001"
+DEFAULT_CAMPAIGN = "C66BAR-001"
 CAMPAIGN_REVISION = 6
+REQUIRED_CAMPAIGN_REVISIONS = {
+    "C66-001": 6,
+    "C66BAR-001": 2,
+}
 CAMPAIGN_DIR = DATA / "campaigns"
 CAMPAIGN_ARTIFACT_DIR = ROOT / "proof" / "campaign-attempts"
 NOVELTY_DIR = ROOT / "research" / "novelty-audits"
@@ -52,10 +56,14 @@ def load_campaign(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
         raise ValueError("campaign file id mismatch")
     if campaign.get("context_revision") != CONTEXT_REVISION:
         raise ValueError("campaign has stale target context")
-    if campaign.get("campaign_revision") != CAMPAIGN_REVISION:
+    expected_revision = REQUIRED_CAMPAIGN_REVISIONS.get(campaign_id)
+    if (
+        expected_revision is not None
+        and campaign.get("campaign_revision") != expected_revision
+    ):
         raise ValueError("unsupported campaign revision")
     if campaign.get("batch_step_limit") != 12:
-        raise ValueError("C66 campaign must retain its 12-step batch limit")
+        raise ValueError("campaign must retain its 12-step batch limit")
     policy = campaign.get("paired_attempt_policy")
     if (
         not isinstance(policy, dict)
@@ -65,6 +73,30 @@ def load_campaign(campaign_id: str = DEFAULT_CAMPAIGN) -> Dict[str, Any]:
         or not str(policy.get("exact_theorem", "")).strip()
     ):
         raise ValueError("campaign has an invalid paired-attempt policy")
+    packet_cases = campaign.get("packet_cases")
+    if not isinstance(packet_cases, list) or not packet_cases:
+        packet_cases = [campaign.get("case")]
+    allowed_cases = {
+        (item.get("g"), item.get("n"))
+        for item in packet_cases
+        if isinstance(item, dict)
+        and type(item.get("g")) is int
+        and type(item.get("n")) is int
+    }
+    for subproblem in campaign.get("subproblems", []):
+        target_case = subproblem.get("target_case")
+        if target_case is None:
+            continue
+        if (
+            not isinstance(target_case, dict)
+            or type(target_case.get("g")) is not int
+            or type(target_case.get("n")) is not int
+        ):
+            raise ValueError("campaign subproblem has an invalid target_case")
+        if (target_case["g"], target_case["n"]) not in allowed_cases:
+            raise ValueError(
+                "campaign subproblem target_case is absent from packet_cases"
+            )
     return campaign
 
 
@@ -452,38 +484,108 @@ def packet_binding_matches(
     return content in equivalent
 
 
+def _packet_cases(campaign: Dict[str, Any]) -> List[Dict[str, int]]:
+    cases = campaign.get("packet_cases")
+    if isinstance(cases, list) and cases:
+        return [
+            item
+            for item in cases
+            if isinstance(item, dict)
+            and isinstance(item.get("g"), int)
+            and isinstance(item.get("n"), int)
+        ]
+    return [campaign["case"]]
+
+
+def _packet_finding_campaign_ids(campaign: Dict[str, Any]) -> List[str]:
+    ids = campaign.get("packet_finding_campaign_ids")
+    if isinstance(ids, list) and ids:
+        return [item for item in ids if isinstance(item, str) and item.strip()]
+    return [str(campaign["id"])]
+
+
+def campaign_packet_findings(
+    campaign: Dict[str, Any], visible_only: bool = True
+) -> List[Dict[str, Any]]:
+    allowed = _packet_finding_campaign_ids(campaign)
+    selected: List[Dict[str, Any]] = []
+    seen = set()
+    for case in _packet_cases(campaign):
+        for finding in findings_for_case(
+            case["g"],
+            case["n"],
+            visible_only=visible_only,
+            allowed_campaign_ids=allowed,
+        ):
+            finding_id = finding.get("id")
+            if finding_id in seen:
+                continue
+            seen.add(finding_id)
+            selected.append(finding)
+    return selected
+
+
+def _render_bottleneck_lines(campaign: Dict[str, Any]) -> List[str]:
+    bottleneck = campaign["bottleneck"]
+    fields = bottleneck.get("fields")
+    if isinstance(fields, list) and fields:
+        title = bottleneck.get("title")
+        heading = (
+            "## Canonical geometric bottleneck: %s" % title
+            if isinstance(title, str) and title.strip()
+            else "## Canonical geometric bottleneck"
+        )
+        lines = [heading, ""]
+        for field in fields:
+            if not isinstance(field, dict):
+                continue
+            label = field.get("label")
+            value = field.get("value")
+            if isinstance(label, str) and label.strip() and isinstance(value, str):
+                lines.append("- %s: `%s`." % (label, value))
+        lines.extend("- " + item for item in bottleneck.get("program", []))
+        return lines
+    lines = [
+        "## Canonical geometric bottleneck",
+        "",
+        "- Balanced tetragonal splitting: `%s`." % bottleneck["splitting"],
+        "- CE line-bundle convention: `%s`." % bottleneck["ce_line_bundle"],
+        "- Degree calculation: `%s`." % bottleneck["degree_formula"],
+        "- Six-point failure locus: `%s`." % bottleneck["failure_locus"],
+    ]
+    lines.extend("- " + item for item in bottleneck["program"])
+    return lines
+
+
 def render_campaign_packet(campaign_id: str = DEFAULT_CAMPAIGN) -> str:
     campaign = load_campaign(campaign_id)
     case = campaign["case"]
     target = open_input_target(case["g"], case["n"])
-    visible = findings_for_case(
-        case["g"], case["n"], visible_only=True, campaign_id=campaign_id
-    )
+    visible = campaign_packet_findings(campaign, visible_only=True)
+    packet_cases = _packet_cases(campaign)
     quarantined = [
         item
         for item in load_findings()
-        if item.get("case") in ("all", case)
-        and item.get("status") == "candidate"
+        if item.get("status") == "candidate"
+        and item.get("case") in (["all"] + packet_cases)
     ]
+    packet_target = campaign.get("packet_exact_target")
+    exact_target = (
+        packet_target
+        if isinstance(packet_target, str) and packet_target.strip()
+        else target_formula(target)
+    )
     lines = [
         "# Focused campaign packet: %s" % campaign_id,
         "",
         "- Campaign revision: `%d`" % campaign["campaign_revision"],
         "- Target context revision: `%d`" % campaign["context_revision"],
-        "- Exact target: `%s`" % target_formula(target),
+        "- Exact target: `%s`" % exact_target,
         "- Exact theorem: `%s`"
         % campaign["paired_attempt_policy"]["exact_theorem"],
         "",
-        "## Canonical geometric bottleneck",
-        "",
-        "- Balanced tetragonal splitting: `%s`." % campaign["bottleneck"]["splitting"],
-        "- CE line-bundle convention: `%s`."
-        % campaign["bottleneck"]["ce_line_bundle"],
-        "- Degree calculation: `%s`."
-        % campaign["bottleneck"]["degree_formula"],
-        "- Six-point failure locus: `%s`." % campaign["bottleneck"]["failure_locus"],
     ]
-    lines.extend("- " + item for item in campaign["bottleneck"]["program"])
+    lines.extend(_render_bottleneck_lines(campaign))
     lines.extend(["", "## Subproblem graph", ""])
     for item in campaign["subproblems"]:
         dependencies = ", ".join(item.get("dependencies", [])) or "none"

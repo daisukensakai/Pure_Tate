@@ -1,0 +1,137 @@
+{
+  "attempt_id": "ATT-0141",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "checked_claims": [
+    {
+      "claim_id": "C58-BOUNDARY-001",
+      "note": "Loop graph Gamma: one vertex, genus 4, eight labelled legs, two half-edges from the single loop. b_1(Gamma)=E-V+1=1, so vertex genus is 5-1=4; inclusive marking count is 8+2=10; dim Mbar_{4,10}=3*4-3+10=19=dim Mbar_{5,8}-1, confirming codimension one. Aut(Gamma) is exactly the Z/2 exchanging the two half-edges of the loop (labelled legs are fixed, the edge is fixed as a set), so Aut(Gamma)=S_2. The quotient stack [Mbar_{4,10}/S_2] is normal (finite quotient of a smooth DM stack) and the induced finite map to Delta_irr is birational: a generic irreducible one-nodal 8-pointed genus-5 curve has trivial automorphisms and exactly two preimages in Mbar_{4,10}, and S_2 acts freely there. Hence it is the normalization, matching the packet's own convention for the parallel (6,6) statement (packet L12, L14). Stack-versus-coarse attack fails: the claim is made at stack level with the quotient retained, not on coarse moduli. The attempt's phrasing 'exchanging the two branches does not change the glued curve and is the full graph automorphism group' conflates acting trivially on the image with being a graph automorphism, but both facts are independently true, so no defect.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "C58-BOUNDARY-002",
+      "note": "Separating one-edge graph: two vertices, the dual graph is a tree so b_1=0 and additivity of arithmetic genus gives g1+g2=5 (not g1+g2+b_1). Each of the 8 labelled legs sits on exactly one vertex and the normalized node contributes one half-edge to each vertex, so with the inclusive convention n1+n2=8+2=10. This inclusive convention is the one the packet itself uses for (6,6), where n1+n2=8=6+2 (packet L13), so no exclusive/inclusive marking mismatch. Stability of each vertex, 2g_i-2+n_i>0, is required for the graph to be a stable graph. The ordered atlas is Mbar_{g1,n1} x Mbar_{g2,n2} and the component of the boundary normalization is its quotient by Aut(Gamma). Independently checked: since g1+g2=5 is odd the vertex genera differ, and separately the legs are labelled, so Aut(Gamma) is trivial for every separating one-edge graph of Mbar_{5,8}; the 'modulo Aut(Gamma)' clause is therefore true but vacuous here. Invariants-versus-coinvariants attack is empty for the separating part and, for the non-separating part, the theorem makes no cohomological assertion, so no Aut-invariants or determinant-edge bookkeeping is being smuggled.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "C58-BOUNDARY-003",
+      "note": "Genus-5 factor: the complementary vertex has genus 0, whose stability forces n_0>=3, hence n_5=10-n_0<=7. Genus-3 factor: the complementary vertex has genus 2 and carries at least the incident half-edge, so n_2>=1 and n_3=10-n_2<=9 (the genus-2 vertex is stable for every n_2>=0, so no stronger constraint is available and none is claimed). Both bounds are sharp and attained: (5,7)x(0,3) with six legs on the genus-5 vertex and two on the rational vertex, and (3,9)x(2,1) with all eight legs on the genus-3 vertex. Sharpness matters downstream and is recorded as a finding candidate.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "C58-BOUNDARY-004",
+      "note": "Exhaustiveness re-derived independently. Vertex genera arising in one-edge normalizations are 4 (non-separating) and any g1,g2>=0 with g1+g2=5 (separating), so no factor has genus 6, 7 or 8, killing (6,6),(7,4),(8,0),(8,1),(8,2). Genus 5 gives n<=7 so (5,8) is excluded, genus 3 gives n<=9 so (3,12) is excluded. RED-0001 contains no pair of genus 0, 1, 2 or 4, so the non-separating factor (4,10) and all remaining separating factors are automatically outside the list. The list content used is exactly the seven pairs corroborated by the packet at FND-0035. The enumeration of separating types is complete: g1 in {0,...,5} with legs split arbitrarily subject to stability, which is precisely the constraint set the attempt uses.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-31",
+  "finding_candidates": [
+    {
+      "key": "FC-C58-BOUNDARY-ONE-EDGE-SHARP",
+      "kind": "scope-limit",
+      "reusable": true,
+      "scope": {
+        "case": {
+          "g": 5,
+          "n": 8
+        },
+        "objects": [
+          "boundary strata of Mbar_{5,8}",
+          "one-edge stable graphs",
+          "RED-0001 pair list"
+        ],
+        "subproblem_id": "C58-BOUNDARY"
+      },
+      "statement": "The one-edge restriction in the C58-BOUNDARY lemma is load-bearing and sharp: Mbar_{3,12} occurs as the vertex atlas of a codimension-two boundary stratum of Mbar_{5,8}, namely the stable graph with a single genus-3 vertex carrying all eight labelled legs and two loops (b_1=2, total genus 3+2=5, inclusive marking count 8+4=12, stable since 2*3-2+12>0, dim Mbar_{3,12}=18=20-2). Hence the informal subproblem wording 'the boundary of Mbar_{5,8} lies outside RED-0001' is FALSE if read over all boundary strata, and is true only for the normalization of the boundary DIVISOR, i.e. the disjoint union over one-edge graphs of [Mbar_Gamma/Aut(Gamma)], which is what THM-0003's hat{partial} means. Complementarily, (3,12) is the ONLY RED-0001 pair reachable at any depth: a genus-5 vertex forces a tree with all other vertices rational, and each edge at that vertex consumes at least two legs into its rational subtree, so n_v <= (8-2E_v)+E_v = 8-E_v <= 7, excluding (5,8) at every codimension, while vertex genus >= 6 is impossible. Downstream artifacts may cite this lemma only for divisorial (one-edge) normalizations and must not extend it to multi-edge strata, decorated stable-graph complexes, or deeper Gysin sources.",
+      "supports_finding_id": null
+    },
+    {
+      "key": "FC-C58-BOUNDARY-BOUNDS-ATTAINED",
+      "kind": "sharpness",
+      "reusable": true,
+      "scope": {
+        "case": {
+          "g": 5,
+          "n": 8
+        },
+        "objects": [
+          "separating one-edge atlases of Mbar_{5,8}",
+          "Mbar_{5,7}",
+          "Mbar_{4,10}",
+          "Mbar_{3,9}"
+        ],
+        "subproblem_id": "C58-COMPACT"
+      },
+      "statement": "The marking bounds proved for the one-edge boundary of Mbar_{5,8} are attained, so the lemma does not shrink the downstream Kunneth workload to small already-known factors. The genus-5 bound n<=7 is attained by the separating graph Mbar_{5,7} x Mbar_{0,3} (six legs on the genus-5 vertex, two on the rational vertex), and the genus-3 bound n<=9 is attained by Mbar_{3,9} x Mbar_{2,1} (all eight legs on the genus-3 vertex). Together with the non-separating atlas Mbar_{4,10}, the maximal factor types that C58-COMPACT must actually control are (5,7), (4,10) and (3,9), none of which is discharged merely by lying outside RED-0001: 'outside the residual list' is a statement about which pairs remain open in the campaign, not a Tate, purity, or tautological-generation statement about those factors.",
+      "supports_finding_id": null
+    },
+    {
+      "key": "FC-C58-BOUNDARY-AUT-LOCALIZATION",
+      "kind": "convention-localization",
+      "reusable": true,
+      "scope": {
+        "case": {
+          "g": 5,
+          "n": 8
+        },
+        "coefficients": "Q",
+        "objects": [
+          "Aut(Gamma) for one-edge graphs of Mbar_{5,8}",
+          "det E_Gamma convention"
+        ],
+        "subproblem_id": "C58-COMPACT"
+      },
+      "statement": "For Mbar_{5,8} all graph-automorphism bookkeeping in the divisorial boundary is concentrated at a single component. Every separating one-edge graph has trivial Aut(Gamma), for two independent reasons: the eight legs are labelled and must be fixed, and g1+g2=5 is odd so the two vertex genera can never coincide. The only component with nontrivial automorphisms is the non-separating [Mbar_{4,10}/S_2], where the S_2 exchanges the two half-edges of the loop while fixing the unique edge as a set. Consequently, for any downstream cohomological use of hat{partial} Mbar_{5,8}, the invariants-versus-coinvariants question (harmless with Q coefficients, not with Z) and the determinant-edge twist on det E_Gamma can only bite at the non-separating term; the separating Kunneth terms need no Aut(Gamma) correction at all. Note that with a single edge the S_2 acts trivially on the edge SET, so whether it acts by a sign depends on the campaign's branch-swap sign convention rather than on an edge permutation, and that convention must be stated before the non-separating term is evaluated.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0192",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "RED-0001",
+      "note": "Used only as a fixed seven-element list of (g,n) pairs, not as a cohomological hypothesis. The content asserted by the attempt, (3,12),(5,8),(6,6),(7,4),(8,0),(8,1),(8,2), matches the packet's own enumeration at FND-0035 verbatim. No Tate, weight, purity or motivic content of RED-0001 is invoked anywhere in the argument, so the 'predicted motive used as unconditional theorem' and 'pure Tate upgraded to algebraic generation' attacks have no surface.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C58-BOUNDARY",
+      "note": "The packet's subproblem graph records C58-BOUNDARY with 'Dependencies: none' (packet L23), so the attempt's proof_dependencies=[] together with no_undischarged_dependencies=true is consistent here, unlike the FND-0057 situation for C66-FULL. The argument uses no experiment, no computation, and no source beyond the RED-0001 list.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0141-P2",
+  "reviewer_engine": "claude",
+  "schema_version": 3,
+  "strongest_attack": "Binding first: TASK.json and ATT-0141 agree on packet_sha256 a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191, packet_binding_sha256 6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54, the full 13-key target dictionary (g=5, n=8, dim 20, open_bm_degree 16 / Q(8) / weight -16, ordinary degree 24 / Q(-12) / weight 24, poincare_twist 20, chow_codim 12), and the theorem_statement string; the artifact under review is the one the task names. Strongest attack attempted: DEPTH/SCOPE. The lemma is stated for one-edge graphs only, so I attacked the restriction by asking whether RED-0001 pairs re-enter at codimension >= 2, which is how the subproblem's own informal wording ('the boundary of Mbar_{5,8} lies outside RED-0001', packet L23) would be read. This attack SUCCEEDS against the loose wording and FAILS against the stated theorem: the stable graph with a single genus-3 vertex carrying all eight labelled legs and two loops has b_1=2, total genus 3+2=5, inclusive marking count 8+4=12, is stable (2*3-2+12=16>0), and has dim Mbar_{3,12}=18=20-2, so Mbar_{3,12} really does occur as the vertex atlas of a codimension-two boundary stratum of Mbar_{5,8}. The one-edge hypothesis is therefore load-bearing and sharp, not cosmetic. It is legitimate here because THM-0003's hat{partial} is the normalization of the boundary DIVISOR, i.e. the disjoint union over one-edge graphs of [Mbar_Gamma/Aut(Gamma)], which is exactly the convention the packet fixes for the parallel (6,6) case at L12-L14. I also checked the dual question and found the exclusion is even stronger for the other pairs: no boundary stratum of Mbar_{5,8} of any codimension has a genus-5 vertex with 8 inclusive markings, because a genus-5 vertex forces a tree with all other vertices rational, each edge at v consumes at least two legs into its rational subtree, giving n_v <= (8-2E_v)+E_v = 8-E_v <= 7; and genus >= 6 vertices are impossible at any depth. So (3,12) is the unique RED-0001 pair that the one-edge restriction is actually protecting against. Secondary attacks, all failed: (i) stack versus coarse - the non-separating component is asserted as the quotient stack [Mbar_{4,10}/S_2], not as Mbar_{4,10} or a coarse space, and the finite birational map from that normal quotient to Delta_irr is genuinely the normalization; (ii) inclusive versus exclusive marking counts - the n1+n2=10 bookkeeping is 8 legs plus 2 half-edges, matching the packet's (6,6) normalization n1+n2=8, and the RED-0001 pairs are read with the same inclusive convention, so (5,8) and (3,12) are compared like with like; (iii) genus additivity - the separating case correctly uses b_1=0 (tree) and the non-separating case correctly charges b_1=1 to the loop, the standard off-by-one that FND-0034 records for (6,6); (iv) invariants versus coinvariants and the determinant-edge twist - Aut(Gamma) is trivial for every separating one-edge graph of Mbar_{5,8} (odd total genus plus labelled legs) and is S_2 only at the non-separating component, and since the theorem asserts nothing cohomological, no invariants/coinvariants or det E_Gamma convention is being assumed or elided; (v) rational versus integral coefficients, Poincare duality, Tate twists, Gysin and Kunneth shifts, spectral-sequence differentials, semisimplification - all vacuous, the theorem is purely a classification of stable-graph vertex types and the artifact explicitly disclaims any Tate assertion and any conclusion about H^{16}(Mbar_{5,8};Q); (vi) omitted stable pairs - I re-enumerated the separating types independently (g1 in {0,...,5}, legs split subject to stability) and found no case the attempt misses, and the RED-0001 genera not addressed by an explicit bound (0,1,2,4) simply do not appear in the list. One presentational weakness, not a defect: 'the dual graph of the generic curve in an irreducible boundary divisor has one edge' is asserted rather than cited, but under the packet's own hat{partial} convention (L14) this is definitional rather than an unproved input. Verdict confirmed for the stated lemma; this confirms neither the C58-COMPACT assembly nor anything about H^{16}(Mbar_{5,8};Q), and the (4,10) factor being outside RED-0001 does not make it a discharged input.",
+  "subproblem_id": "C58-BOUNDARY",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "theorem_statement": "Every factor occurring in the normalization of an irreducible boundary divisor of Mbar_{5,8} lies outside the RED-0001 residual list. The non-separating component is [Mbar_{4,10}/S_2]. A separating one-edge graph has ordered atlas Mbar_{g1,n1} x Mbar_{g2,n2} with g1+g2=5, n1+n2=10, and both vertices stable, modulo Aut(Gamma). In particular a genus-5 factor has at most 7 markings and a genus-3 factor has at most 9 markings, so no factor is one of (3,12), (5,8), (6,6), (7,4), (8,0), (8,1), or (8,2). This theorem makes no Tate assertion and does not conclude H^{16}(Mbar_{5,8};Q).",
+  "verdict": "confirmed"
+}

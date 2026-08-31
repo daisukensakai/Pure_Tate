@@ -1,0 +1,116 @@
+{
+  "argument_markdown": "## Proof\n\nWork over C with rational coefficients.\n\n### 1. The normalization is the stack of curves with a distinguished node\n\nLet (C;p_1,...,p_6) be a geometric point of Mbar_{6,6}, and let E(C) be its finite set of nodes. Deformations of a pointed nodal curve are unobstructed: the obstruction group in degree two vanishes because the curve is one-dimensional. The local-to-global deformation sequence also shows that the smoothing parameters at the nodes are independent. Consequently, after passing to an \u00e9tale chart, the completed local base has coordinates\n\nC[[u_1,...,u_m,(t_e)_{e in E(C)}]],\n\nwhere the node e persists precisely when t_e=0. The reduced boundary therefore has local equation product_e t_e=0. Its normalization is the disjoint union, over e in E(C), of the smooth branches t_e=0.\n\nThese local branches descend on overlaps: choosing the branch t_e=0 is intrinsically choosing the node e, and normalization commutes with \u00e9tale base change. Hence the normalization hat{partial} Xbar is canonically the Deligne-Mumford stack N whose objects are stable six-pointed genus-6 curves together with a distinguished node. Locally N is the disjoint union of the smooth hyperplanes t_e=0, so it is normal, and its finite map to the reduced boundary is the normalization map. This description also retains nodes that are permuted by automorphisms; the descent quotient is stack-theoretic rather than a coarse or ordered construction.\n\n### 2. The non-separating component\n\nLet N_irr be the open-and-closed part of N on which the distinguished node is non-separating. Partially normalize a family along that node. The result is a connected stable curve of genus 5 carrying the six original ordered sections and the two preimages of the node. Replacing the node by these two marked branches preserves stability. The two branches have no intrinsic ordering; \u00e9tale-locally choosing an ordering gives an object of Mbar_{5,8}, and changing the ordering is exactly the action of S_2 exchanging the last two markings.\n\nConversely, gluing the last two sections of an object of Mbar_{5,8} produces a stable genus-6 curve with a distinguished non-separating node. Gluing and partial normalization are mutually inverse and are compatible with descent. Therefore\n\nN_irr is isomorphic to [Mbar_{5,8}/S_2].\n\nThe ordered clutching atlas Mbar_{5,8} is generically degree two over the boundary component, because the two branch orderings give the same glued curve. Passing to the quotient stack removes precisely this redundancy.\n\n### 3. The separating components\n\nSuppose the distinguished node is separating. Partial normalization gives two connected stable pointed curves. Their genera g_1 and g_2 satisfy g_1+g_2=6. Each component carries the original labeled markings lying on it and one additional marking from the distinguished node; hence the total numbers of markings satisfy n_1+n_2=6+2=8. Stability of the original curve implies stability of both pointed components.\n\nFix the resulting one-edge stable graph Gamma. Choosing an identification of the two normalized components and their flags with the abstract vertices and flags of Gamma gives an object of\n\nMbar_Gamma = Mbar_{g1,n1} x Mbar_{g2,n2}.\n\nTwo such identifications differ exactly by Aut(Gamma). Conversely, gluing the two markings indexed by the half-edges of Gamma produces the separating curve with its distinguished node. These constructions are inverse in families, including families with monodromy among graph identifications. Thus the normalized component of type Gamma is\n\n[Mbar_Gamma/Aut(Gamma)].\n\nBecause the six legs are individually labeled, Aut(Gamma) is in fact trivial for a separating one-edge graph in this particular moduli problem: a vertex exchange would move a labeled leg. Retaining the quotient notation records the canonical graph construction and gives the stated formula.\n\nEvery distinguished node is either non-separating or has one of these separating types. Steps 2 and 3 therefore identify every component of hat{partial} Xbar.\n\n### 4. Cohomological contribution and the determinant convention\n\nFor a finite group G acting on a complex Deligne-Mumford stack Y, the Cartan-Leray spectral sequence is\n\nH^p(G,H^q(Y;Q)) => H^{p+q}([Y/G];Q).\n\nAveraging over G makes invariants an exact functor over Q, so H^p(G,V)=0 for p>0. The spectral sequence consequently gives\n\nH^*([Y/G];Q) = H^*(Y;Q)^G.\n\nApply this with Y=Mbar_Gamma and G=Aut(Gamma). Define det E_Gamma as the determinant of the permutation representation Q^{E(Gamma)} on the edge set. Every graph under consideration has one edge. Every automorphism fixes that unique edge, so det E_Gamma is the trivial Aut(Gamma)-representation. Therefore\n\nH^*([Mbar_Gamma/Aut(Gamma)];Q)\n = H^*(Mbar_Gamma;Q)^{Aut(Gamma)}\n = (H^*(Mbar_Gamma;Q) tensor det E_Gamma)^{Aut(Gamma)}.\n\nIn particular, the S_2 on the loop graph acts geometrically by exchanging the two branch markings of Mbar_{5,8}, but it acts trivially on the determinant of the singleton edge set. Thus the loop contribution consists of ordinary S_2-invariants, not branch-swap anti-invariants.\n\nSince hat{partial} Xbar is the finite disjoint union of these normalized components, its graph-indexed cohomology is the direct sum of the displayed contributions, and the boundary map is the sum of the corresponding clutching pushforwards. This identifies its source only; it makes no assertion about the image, Tate type, the open residual, or H^16(Mbar_{6,6};Q).\n\nSource-backed inputs and dependency artifacts: none were supplied or used. All load-bearing geometric claims were established above from the local deformation description and the mutually inverse normalization/gluing constructions. Computational hypotheses and experiments: none. Gaps: none.",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "claims": [
+    {
+      "id": "ATT-0140-CLM-01",
+      "justification": "\u00c9tale-locally the boundary has equation product_e t_e=0 in independent node-smoothing parameters. Its normalization is the disjoint union of the branches t_e=0, which is precisely the choice of a distinguished node and descends equivariantly under automorphisms.",
+      "statement": "The normalization of the reduced boundary of Mbar_{6,6} is the stack of stable six-pointed genus-6 curves equipped with a distinguished node.",
+      "status": "proved"
+    },
+    {
+      "id": "ATT-0140-CLM-02",
+      "justification": "Partial normalization produces a connected genus-5 curve with six original markings and an unordered pair of branch markings. Ordering the pair is an S_2-torsor, and gluing is inverse to partial normalization.",
+      "statement": "The non-separating normalized component is [Mbar_{5,8}/S_2], with S_2 exchanging the two preimages of the distinguished node.",
+      "status": "proved"
+    },
+    {
+      "id": "ATT-0140-CLM-03",
+      "justification": "Partial normalization separates the curve into the two vertex factors. Identifications with the abstract graph form an Aut(Gamma)-torsor, and clutching is inverse to partial normalization.",
+      "statement": "For every separating one-edge stable graph Gamma, the corresponding normalized component is [Mbar_Gamma/Aut(Gamma)], with Mbar_Gamma=Mbar_{g1,n1} x Mbar_{g2,n2}, g1+g2=6, n1+n2=8, and stable vertices.",
+      "status": "proved"
+    },
+    {
+      "id": "ATT-0140-CLM-04",
+      "justification": "Rational cohomology of a finite quotient stack is invariant cohomology by the Cartan-Leray spectral sequence and averaging. The determinant of the permutation representation on a singleton edge set is trivial, so the invariant cohomology equals the stated determinant-twisted invariant expression.",
+      "statement": "The contribution of a one-edge graph Gamma is (H^*(Mbar_Gamma;Q) tensor det E_Gamma)^{Aut(Gamma)}.",
+      "status": "proved"
+    },
+    {
+      "id": "ATT-0140-CLM-05",
+      "justification": "The distinguished-node normalization exhausts all one-edge types, and Claims ATT-0140-CLM-02 through ATT-0140-CLM-04 identify their quotient stacks and cohomological contributions.",
+      "statement": "Clauses (i), (ii), and (iii) of the exact theorem all hold, without any assertion about Tate type or the image of the boundary map.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [],
+  "gap_markers": [],
+  "id": "ATT-0140",
+  "ingest_normalizations": [
+    {
+      "expected": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "lane": "geometry",
+  "methods_used": [
+    "\u00e9tale-local deformation theory of pointed nodal curves",
+    "normalization of a simple-normal-crossings boundary",
+    "distinguished-node stack",
+    "partial normalization and clutching",
+    "finite quotient stacks",
+    "Cartan-Leray rational cohomology",
+    "edge-set determinant representation"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_path": "proof/packets/generated/C66BAR-001-v2.md",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependencies": [],
+  "result_type": "proof",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [],
+  "status": "claimed_complete",
+  "subproblem_id": "C66BAR-GRAPH",
+  "summary": "The normalization of the reduced boundary is the stack of a stable six-pointed genus-6 curve together with a distinguished node. Normalizing the distinguished node identifies its non-separating part with [Mbar_{5,8}/S_2] and every separating part with [Mbar_Gamma/Aut(Gamma)]. Rational cohomology of each finite quotient is the Aut(Gamma)-invariant cohomology of its ordered atlas. Since a one-edge graph has a trivial edge-set determinant representation, this equals (H^*(Mbar_Gamma) tensor det E_Gamma)^{Aut(Gamma)}.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "category": "complex Deligne-Mumford stacks",
+    "coefficients": "Q",
+    "excluded": [
+      "any Tate assertion",
+      "the boundary-image Tate theorem",
+      "the open residual theorem ATT-0136",
+      "any conclusion about H^16(Mbar_{6,6};Q)",
+      "Casnati-Ekedahl tetragonal geometry"
+    ],
+    "g": 6,
+    "n": 6,
+    "object": "normalization of the reduced one-edge boundary divisor of Mbar_{6,6}"
+  },
+  "theorem_statement": "Let Xbar := Mbar_{6,6} be the moduli stack of stable genus-6 curves with 6 ordered marked points, and let hat{partial} Xbar be the normalization of its reduced boundary divisor. Prove all of the following, with no Tate assertion. (i) The non-separating component has normalization [Mbar_{5,8}/S_2], where S_2 exchanges the two ordered preimages of the node. (ii) For every one-edge separating stable graph Gamma, the corresponding normalized component is [Mbar_Gamma/Aut(Gamma)], where Mbar_Gamma=Mbar_{g1,n1} x Mbar_{g2,n2}, g1+g2=6, n1+n2=8, and both vertices are stable. (iii) Its contribution is (H^*(Mbar_Gamma) tensor det E_Gamma)^{Aut(Gamma)}. This theorem names the source of the campaign boundary map and does not assert Tate type of any cohomology group."
+}

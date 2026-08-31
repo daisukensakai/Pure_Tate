@@ -1,0 +1,272 @@
+{
+  "attempt_id": "LATT-0002",
+  "axiom_checks": [
+    {
+      "axiom": "BMIsFiniteTateSum",
+      "note": "Uninterpreted exact-target predicate from the trusted prelude. The exported theorem instantiates it only at exactC66BMTarget (g=6,n=6,homological degree 16,weight -16,tate 8). Reading reconstructed from ATT-0136 sections 0 and 8: W_{-16} H^{BM}_{16}(M_{6,6};Q) is a finite direct sum of Q(8), including rank zero. It is not a quotient, associated graded, support term, or differently indexed group.",
+      "obligation_id": "VOCAB",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "algebraic_pure_weight_is_tate",
+      "note": "If the cycle-class map surjects onto lowest weight and the group is polarizable of weight 2c, it is a finite Q(-c) sum. Instantiated only at OpenPureIndex M_{6,5} in degree/weight 24 with c=12, after CKgP. Algebraicity is a hypothesis, so there is no Tate-to-algebraic upgrade. Not applied at n=6.",
+      "obligation_id": "LC66-OBL-07",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "bm_tate_sum_from_twisted_pure",
+      "note": "Poincare duality identification of the BM target with the ordinary lowest-weight group, plus PureIsFiniteTateSum of that whole group, plus Q(t)(d)=Q(t+d), yields BMIsFiniteTateSum. Instantiated with d=21, t=-13, u=8 on exactC66BMTarget and pureM66deg26. Rank is unmentioned, so rank zero is allowed. Transports the whole group, not a subquotient.",
+      "obligation_id": "LC66-OBL-09",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "ckgp_holds_in_range",
+      "note": "CKgP on the open stack for markings <= c(g). With ckgp_marking_bound_genus_six this is n<=5 at genus 6. Used at moduliM65; the n=6 instance is not derivable and the model witness NC05 refutes CKgP at six markings.",
+      "obligation_id": "LC66-OBL-07",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "ckgp_marking_bound_genus_six",
+      "note": "Records c(6)=5 inclusively, matching THM-0005 / ATT-0136 section 7. Combined with ckgp_holds_in_range this is the zero-slack boundary used to type W_24 H^{24}(M_{6,5};Q), never M_{6,6}.",
+      "obligation_id": "LC66-OBL-07",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "clp_primitive_quotient_formula",
+      "note": "Optional CLP Lemma 3.1(a): the primitive quotient of lowest-weight open cohomology is a local-system sum with base degree k-n and partition size n. Instantiated at (6,6,26) as H^{20}(M_6;V_lambda) with |lambda|=6. Present only in the optional theorem closure; not load-bearing for the BM theorem.",
+      "obligation_id": "LC66-OBL-06",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "constant_coefficient_vanishing_above_vcd",
+      "note": "Ordinary rational cohomology vanishes strictly above vcd. Used as H^{26}(M_{6,5};Q)=0 from vcd=25, which is ATT-0136 (4) and the slot-zero disposal. No inference from 26=vcd(M_{6,6}).",
+      "obligation_id": "LC66-OBL-04",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "containment_transfers_along_surjection",
+      "note": "If lowest-weight restriction ClosedPureIndex -> OpenPureIndex surjects, the closed source splits by Chow-Kunneth, and every length-equal-to-factors Kunneth summand restricts into Psi of the open target, then the whole open target is ContainedInPsi. This is the containment direction of ATT-0136 section 1 plus section 5; kernel, Gysin, and Schur-Weyl are absent. Distinct types prevent an identity reading.",
+      "obligation_id": "LC66-OBL-01",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "cycle_class_surjectivity_from_ckgp",
+      "note": "CKgP implies the cycle-class map surjects onto the lowest-weight piece of the same open space. Applied to pureM65deg24 after CKgP at n=5, supplying algebraicity before Tate type is read off.",
+      "obligation_id": "LC66-OBL-07",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "deligne_lowest_weight_restriction_surjection",
+      "note": "Heterogeneous Deligne lowest-weight surjection W_k H^k(C^n) ->> W_k H^k(M_{g,n}) when genus matches, factors equal markings, degree and weight match, and degree=weight. This is Hodge II Cor. 3.2.17 / FND-0197. It does not split, does not identify kernels, and is not the non-proper forgetful map to M_g. Wrong-factor, wrong-marking, and wrong-degree instances fail the alignment hypotheses throughout, not only at the named constants sourceC6deg26 and pureM66deg26.",
+      "obligation_id": "LC66-OBL-01",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "deligne_smooth_proper_leray_degeneration",
+      "note": "E2 degeneration for the smooth proper unmarked universal curve, g>=2. OBL-02 is respected: this flag alone does not yield KunnethSplittingByChowKunnethProjectors; the splitting axiom still demands algebraic PTY correspondences and the R^2 projector form.",
+      "obligation_id": "LC66-OBL-02",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "equality_from_vanishing_primitive_quotient_and_phi",
+      "note": "Optional equality W=Psi from a vanishing primitive quotient and vanishing Phi. Used only to prove optional_primitive_route_equals_psi. The BM theorem never mentions EqualsPsi and instead uses ContainedInPsi from the Kunneth route.",
+      "obligation_id": "LC66-OBL-06",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "harer_vcd_pointed",
+      "note": "vcd(PMod_{g,n})=4g-4+n for n>=1, g>=2. Instantiated at (6,5) as 25. Not applied as a vanishing statement at (6,6).",
+      "obligation_id": "LC66-OBL-04",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "harer_vcd_unpointed",
+      "note": "vcd(Mod_g)=4g-5 for unmarked g>=2. Instantiated at g=6 as 19, the Harer bound used for local-system vanishing of Kunneth base degrees.",
+      "obligation_id": "LC66-OBL-05",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "kunneth_splitting_of_pure_weight_source",
+      "note": "Actual mixed-Hodge splitting of W_k H^k(C^n) into A_i, requiring E2 degeneration, algebraic PTY correspondences, and the explicit R^2 projector, on ClosedPureIndex only, with unmarked base of matching genus, at least one factor, and lowest weight. OpenPureIndex cannot inhabit this predicate. E2 degeneration is not treated as sufficient.",
+      "obligation_id": "LC66-OBL-02",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "kunneth_summand_vanishes_below_base_degree",
+      "note": "Kunneth summand A_i of the closed source vanishes when every rational local system on unmarked M_g vanishes in degree k-|i|, with |i| the sum of slotVal in {0,1,2}. At (6,6,26) this is 26-|i|>19, i.e. |i|<=6. Indices and variance match ATT-0136 section 5.",
+      "obligation_id": "LC66-OBL-05",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "local_coefficient_vanishing_above_vcd",
+      "note": "Every finite-dimensional rational local system on unmarked M_g vanishes strictly above vcd. Used in the BM theorem at base degrees >=20 and reused, legitimately, by the optional primitive-quotient route at degree 20. Not smuggled as a Tate-type input.",
+      "obligation_id": "LC66-OBL-05",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "lowest_weight_is_pure_polarizable",
+      "note": "Lowest-weight cohomology of the smooth open stack is pure polarizable. Used at (6,5,24) for CKgP typing and at (6,6,26) for the semisimplicity upgrade of the whole group. Matches FND-0033 as used in ATT-0136 sections 7-8.",
+      "obligation_id": "LC66-OBL-07",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "morita_slot_one_vanishing",
+      "note": "Rational Morita vanishing H^1(Mod_g;H^1(Sigma_g;Q))=0 for g>=2, disposing the slot-one summand b_s of omega_s. Feeds OmegaMultiplicationHitsSlotTwo together with the slot decomposition and the R^2 projector, matching ATT-0136 Disposal A as a written step.",
+      "obligation_id": "LC66-OBL-03",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "omega_class_slot_decomposition",
+      "note": "omega_s=a_s+b_s+c_s in slots 0,1,2, with only c_s the R^2 isomorphism. This is the FND-0196 inhomogeneity; multiplication by omega is not identified with its R^2 component without the repair.",
+      "obligation_id": "LC66-OBL-03",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "omega_multiplication_hits_slot_two_modulo_errors",
+      "note": "From the slot decomposition, Morita vanishing of b_s, and the R^2 projector in the psi-plus-pullback span, cup-product with omega reaches slot two modulo the tracked slot-zero and slot-one errors. This is the packaged content of Disposals A and B, then consumed by the OBL-05 induction (Disposal C). Premises are those ATT-0136 actually uses; the conclusion is not the Tate type of M_{6,6}.",
+      "obligation_id": "LC66-OBL-03",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "phi_is_pullback_span",
+      "note": "Definition of Phi as the span of forgetful pullbacks from n-1 in the same degree and weight. Used at (6,6)->(6,5) in degrees 26 and 24. Does not rename the mixed R^1 of the punctured forgetful map as a local system on M_g.",
+      "obligation_id": "LC66-OBL-04",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "phi_tate_from_pullback_source",
+      "note": "Forgetful pullbacks preserve Tate type, so Phi_{6,6}^{24} inherits Q(-12) from W_24 H^{24}(M_{6,5};Q). Type (0,0) pullback as in ATT-0136 section 7. Does not type Phi^{26} or the n=6 lowest-weight group by itself.",
+      "obligation_id": "LC66-OBL-08",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "phi_vanishes_from_pullback_source",
+      "note": "Phi vanishes when the n-1 ordinary cohomology in the same degree vanishes. Campaign-declared optional: used only to feed the optional W=Psi equality. The BM path instead uses OrdinaryCohomologyVanishes at (M_{6,5},26) directly as the slot-zero disposal, which is the same ATT-0136 vanishing and does not leak this axiom into the exported theorem.",
+      "obligation_id": "LC66-OBL-04",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "poincare_duality_bm_twist",
+      "note": "Stack-level rational Poincare duality: d=3g-3+n, ordinary degree 2d minus BM degree, ordinary weight equals that degree, BM weight equals ordinary weight minus 2d. Instantiated as d=21, ordinary (26,26), BM weight -16. Encodes the identification of groups, not Tate type. No coarse-space or compactly-supported Q(-8) substitute.",
+      "obligation_id": "LC66-OBL-09",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "polarizable_semisimplicity_upgrade",
+      "note": "If the whole lowest-weight open group is contained in Psi, is polarizable, and Psi is a quotient of a finite Tate sum of type t, then the whole group is a finite Tate sum of type t. Distinct predicates prevent treating a Psi-quotient as already the theorem. Semisimplicity of polarizable pure Q-Hodge structures (FND-0033 at weight 26) upgrades a subobject of a Tate quotient to an honest direct sum, not a semisimplification of a mixed object. ContainedInPsi is the Kunneth-route generation statement, not the optional EqualsPsi.",
+      "obligation_id": "LC66-OBL-08",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "primitive_quotient_vanishes_from_local_coefficients",
+      "note": "Optional: if the primitive quotient is a local-system sum and H^{k-n}(M_g;V)=0, the quotient vanishes. At (6,6,26) this is H^{20}(M_6;V_lambda)=0 from 20>19. Absent from the BM axiom closure.",
+      "obligation_id": "LC66-OBL-06",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "psi_class_is_tate_divisor",
+      "note": "The tautological psi class on an n>=1 open moduli space is algebraic of type Q(-1). Matches ATT-0136 dictionary and section 7. Does not assert algebraicity of W_26 H^{26}(M_{6,6}).",
+      "obligation_id": "LC66-OBL-08",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "psi_is_psi_multiple_span",
+      "note": "Definition of Psi as psi times the same-space group two degrees and two weights lower. Used both in the OBL-05 induction (omega/B_{i'} lands in Psi) and in the OBL-08 Tate assembly. Mapping to OBL-04 is the definitional slot; the reading is the ATT-0136 Psi dictionary, not a hidden vanishing.",
+      "obligation_id": "LC66-OBL-04",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "psi_products_are_tate_quotient",
+      "note": "Psi, being generated by Q(-1) cup Phi of type Q(-12), is a quotient of a finite Q(-13) sum. Concludes PsiIsQuotientOfFiniteTateSum, not PureIsFiniteTateSum, so the whole-group statement still needs containment plus polarizable semisimplicity. Twist arithmetic t=a+b is explicit.",
+      "obligation_id": "LC66-OBL-08",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "pty_projectors_are_algebraic_correspondences",
+      "note": "Petersen-Tavakol-Yin relative Chow-Kunneth projectors are algebraic correspondences, hence morphisms of mixed Hodge structures, so W_k is additive over the splitting. Required for an actual splitting rather than an associated-graded decomposition.",
+      "obligation_id": "LC66-OBL-02",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "pty_r_two_projector_form",
+      "note": "The R^2 projector is pi_2 = psi_2/(2g-2) - kappa_1/(2(2g-2)^2), already in the Q-span of a psi class and a pullback from M_g. This is ATT-0136 section 2 / Disposal B. It is a hypothesis of the closed-source splitting and of omega-hits-slot-two, not a conclusion about the open target.",
+      "obligation_id": "LC66-OBL-02",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "slot_two_summand_restricts_into_psi_modulo_errors",
+      "note": "One downward-induction step at the campaign point. Hypotheses: slots = pre ++ [2] ++ post; errZero / errOne are the syntactic resets to 0 and 1 on the same closed source; OmegaMultiplicationHitsSlotTwo on M_6; alignment of the closed source with the open target; Psi spanned by the degree-2-lower open group; that group spanned by forgetful pullbacks from n-1; H^{tgt.degree}(M_{g,n-1})=0; and KunnethSummandRestrictsIntoPsi of errOne. Slot-one is disposed by the strictly smaller total (reset 2 to 1 decreases |i| by 1). Slot-zero is disposed by ordinary vanishing in the original degree on n-1, matching ATT-0136 (restriction of A_{i'} through W_k H^k(M_{g,n-1})=0), not by inducting on errZero. errZero is only a slot-pattern witness, which is not unused-premise laundering of a stronger statement. The omega/B_{i'} landing in Psi is the open Psi/Phi spanning at degrees k and k-2, packaging the closed degree-(k-2) class B_{i'} as in Disposal C. Premises are exactly those of ATT-0136 section 5.",
+      "obligation_id": "LC66-OBL-05",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "tate_twist_shift_add",
+      "note": "Q(a)(b)=Q(a+b). Instantiated as (-13)+21=8, converting the ordinary Q(-13) statement into the BM Q(8) statement. Purely the Tate-twist dictionary of ATT-0136 section 0.",
+      "obligation_id": "LC66-OBL-09",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "vanishing_summand_restricts_into_psi",
+      "note": "A vanishing closed Kunneth summand restricts into Psi of an aligned open target (zero lies in every subspace). Used as the |i|<=6 base of the induction after Harer vanishing. Alignment again uses distinct closed/open types and factors=markings.",
+      "obligation_id": "LC66-OBL-05",
+      "verdict": "confirmed"
+    },
+    {
+      "axiom": "vocab",
+      "note": "Uninterpreted C66Vocabulary whose type is the hash-pinned shared signature. It is a carrier of predicates, not a hidden proof of the BM conclusion. EqualsPsi, PrimitiveQuotientIsLocalSystemSum, PrimitiveQuotientVanishes, and PhiVanishes are fields of this structure but are never applied on the BM path, so OBL-06 is not concealed inside vocab.",
+      "obligation_id": "VOCAB",
+      "verdict": "confirmed"
+    }
+  ],
+  "axiom_faithfulness": "Every LEAN-AXIOM was reconstructed from ATT-0136 (REV-0187/REV-0188 used only as prior confirmation of that source proof). OBL-01 is a heterogeneous ClosedPureIndex-to-OpenPureIndex lowest-weight surjection plus transfer of containment; it does not split and does not use M_{g,n}->M_g. OBL-02 requires algebraic PTY correspondences and the explicit R^2 projector in addition to E2 degeneration, and the splitting predicate is typed only on ClosedPureIndex. OBL-03 records omega_s=a_s+b_s+c_s, Morita vanishing of b_s, and omega-hits-slot-two modulo errors rather than identifying omega with its R^2 component. OBL-04 is H^{26}(M_{6,5};Q)=0 from vcd(PMod_{6,5})=25, used as Phi's source vanishing and as the slot-zero disposal; the named PhiVanishes packaging is optional and does not leak. OBL-05 is a genuine six-slot List Slot induction: lenOf=6=factors, base |i|<=6 from 26-|i|>=20>19, combinatorics that a length-6 list with total>6 contains a 2, strict fuel decrease when resetting 2 to 1, slot-one by IH, slot-zero by the ATT-0136 vanishing, not by a fake identity. OBL-06 is independently printed and is absent from the BM closure (the four campaign-declared optional names clp_primitive_quotient_formula, phi_vanishes_from_pullback_source, primitive_quotient_vanishes_from_local_coefficients, equality_from_vanishing_primitive_quotient_and_phi occur in optional_primitive_route_equals_psi and not in c66_exact_bm_is_finite_tate_sum; they are not hidden through vocab). OBL-07 types W_24 H^{24}(M_{6,5}) as Q(-12) by CKgP at n=5=c(6) on the open stack, never at n=6. OBL-08 assembles Psi as a Q(-13) quotient from psi of type Q(-1) and Phi of type Q(-12), then upgrades the whole contained polarizable group. OBL-09 is duality in dimension 21 with Q(-13)(21)=Q(8). No strengthened premises, weakened conclusions, circular carriers, wrong variance, or unused-premise laundering were found.",
+  "campaign_id": "LC66-002",
+  "campaign_sha256": "68c158e84a4b09ab02ac04c67bdea6b0db42d821b017be6868a0b50d4cc4569f",
+  "checked_obligations": [
+    "LC66-OBL-01",
+    "LC66-OBL-02",
+    "LC66-OBL-03",
+    "LC66-OBL-04",
+    "LC66-OBL-05",
+    "LC66-OBL-06",
+    "LC66-OBL-07",
+    "LC66-OBL-08",
+    "LC66-OBL-09"
+  ],
+  "claim_sha256": "58cfb755e110a66a716f915004bf327d7abadbe3901488328505ad86e72b75e6",
+  "findings": [],
+  "id": "LREV-0003",
+  "independent": true,
+  "manifest_sha256": "37a992cedb02b3f84b797a7cac61a0aac86379e392177f43cdf9b6dfbe0c7949",
+  "model_checks": {
+    "model_matches_claim_vocabulary": true,
+    "models_every_claim_axiom": true,
+    "noncollapse_is_material": true,
+    "witness_is_axiom_free": true
+  },
+  "model_faithfulness": "Claim.lean and Model.lean embed the same C66Vocabulary region as formal/C66SeparatedSignature.lean.inc (hash 0456ade3127aa74d77118951addcae1c151feb7e86600cf3ca04123e6a5a4126); BMTargetIndex in Claim matches formal/TrustedC66Target.lean.inc. modelVocabulary is a single concrete instance of that signature, not a second vocabulary. AX01-AX34 are the 34 mathematical Claim axiom schemas and are all proved; BMIsFiniteTateSum and vocab are interpreted rather than assumed. The model witness depends only on Lean core axioms propext, Classical.choice, and Quot.sound. Non-collapse is material for the repaired boundary: ClosedPureIndex and OpenPureIndex are disjoint types, so the closed source cannot inhabit open-only predicates and the open target cannot inhabit KunnethSplittingByChowKunnethProjectors or KunnethIndex.source; RestrictionSurjectsOnLowestWeight is a heterogeneous relation requiring genus, factors=markings, degree, weight, and lowest weight, so it cannot be identity-on-indices; NC02 shows a five-factor source does not restrict to the six-marking target; NC03/NC04 distinguish off-diagonal and wrong Tate index; NC05 fails CKgP at n=6; NC06 fails local-system vanishing at the vcd threshold rather than strictly above; NC08/NC09 fail the wrong BM Tate index and the wrong duality dimension. Restriction, Kunneth source, open target, Psi-containment versus off-diagonal, and the Tate/duality numerical conclusions are therefore distinguished. Remaining arithmetic proxies (ContainedInPsi as degree=weight, PureIsFiniteTateSum as weight+2t=0, KunnethSummandRestrictsIntoPsi as aligned plus vanishes-or-hasTwo) make some generation axioms slack in the model, but they do not re-identify the closed fibre power with the open stack or make every predicate true, and EqualsPsi remains a strictly stronger vcd test than ContainedInPsi.",
+  "model_sha256": "6d4d488adc59076a8a942f0f0e66ae50fbfa4c025f3398bf74f8859aa12941bf",
+  "report_sha256": "cfe9f7d10bfab8a7d93c5ea7c0b32827a570ec552fadef64b48a6740ddac0b91",
+  "review_pass": 1,
+  "review_run_path": "reports/runs/RUN-LC66-002-LATT-0002-GROK-P1.json",
+  "review_task_id": "TASK-LV-LATT-0002-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 1,
+  "statement_faithfulness": "The exported theorem is c66_exact_bm_is_finite_tate_sum : BMIsFiniteTateSum exactC66BMTarget. The trusted prelude pins exactC66BMTarget to genus 6, markings 6, homological degree 16, weight -16, Tate index 8, which is C66-EXACT-TARGET-V1 and ATT-0136's exact group W_{-16} H^{BM}_{16}(M_{6,6};Q). The ordinary form appears only through an explicit duality step: poincare_duality_bm_twist with d=3*6-3+6=21 identifies that BM group with W_26 H^{26}(M_{6,6};Q)(21), ordinaryTate is PureIsFiniteTateSum of OpenPureIndex (M_{6,6}, degree 26, weight 26) with t=-13, and tate_twist_shift_add gives Q(-13)(21)=Q(8). Coefficients remain the rational MHS setting of the source; no coarse-space object is introduced. Rank is unconstrained, so the empty sum is allowed. The theorem is not about a quotient, associated graded, support term, or a differently indexed group: polarizable_semisimplicity_upgrade concludes PureIsFiniteTateSum of the same open index that ContainedInPsi concerns, then duality transports that whole group.",
+  "strongest_attack": "The strongest attack is an identity-on-indices / fibre-power-equals-open-stack reading: if ClosedPureIndex were secretly the same carrier as OpenPureIndex, restriction could be reflexivity and Kunneth could run on M_{6,6}. Outcome: the types are disjoint in every axiom and lemma, not merely at the names sourceC6deg26 and pureM66deg26; RestrictionSurjectsOnLowestWeight demands genus, factor/marking, degree and weight alignment plus lowest weight; a type-correct five-factor source fails restriction to the six-marking target; wrong-degree and wrong-marking instances fail the same alignment; KunnethIndex.source and KunnethSplittingByChowKunnethProjectors accept only ClosedPureIndex. Second attack: OBL-06 smuggled through vocab or a shared axiom into the exported theorem. Outcome: the four campaign-declared optional axiom names are absent from c66_exact_bm_is_finite_tate_sum and present in optional_primitive_route_equals_psi; EqualsPsi and the primitive-quotient predicates are unused on the BM path; the BM theorem uses ContainedInPsi from the six-slot induction. Third attack: fake induction (wrong slot count, non-strict decrease, undisposed errors). Outcome: Lean proves lenOf=6, |i|<=6 vanishing from 26-|i|>=20>19, existence of a 2 when length<total, fuel drop by 1 on resetting 2 to 1, slot-one by IH, slot-zero by H^{26}(M_{6,5})=0, all ATT-0136 premises. Fourth attack: cosmetic arithmetic model collapsing Psi and Tate to lowest-weight numerics. Outcome: those interpretations are arithmetic and some generation axioms are slack, but the type distinction, 5-versus-6 restriction failure, CKgP boundary, strict vcd, wrong Tate index, and wrong duality dimension remain material failed instances, so the model is a consistency witness of the shared signature rather than a collapse of the repaired carriers.",
+  "target_checks": {
+    "bm_degree_16": true,
+    "bm_tate_index_8": true,
+    "bm_weight_minus_16": true,
+    "dimension_and_twist_21": true,
+    "genus_6": true,
+    "markings_6": true,
+    "ordinary_degree_26": true,
+    "ordinary_tate_index_minus_13": true,
+    "ordinary_weight_26": true,
+    "rational_coefficients": true,
+    "stack_not_coarse": true,
+    "whole_group_not_proxy": true,
+    "zero_rank_allowed": true
+  },
+  "verdict": "confirmed"
+}

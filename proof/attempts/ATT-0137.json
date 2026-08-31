@@ -1,0 +1,115 @@
+{
+  "argument_markdown": "## Disproof\n\nLet Y=Mbar_{5,{1,...,6,a,b}}, and let sigma exchange the two final ordered marks a and b. Gluing a to b defines the clutching morphism xi:Y->Xbar. Let Delta_irr be its reduced image, the non-separating boundary component.\n\nThe morphism xi is sigma-invariant and therefore factors through Q:=[Y/<sigma>]. The induced morphism phi:Q->Delta_irr is finite: clutching is proper, and a stable curve has only finitely many nodes and hence finitely many choices of a node and its two branches to normalize. It is representable because an automorphism of a pointed normalization inducing the identity on the glued curve must itself be the identity. The quotient Q is normal since Y is smooth and the acting group is finite.\n\nA generic point of Delta_irr represents an irreducible curve with exactly one node, six ordered smooth markings, and no automorphisms. Its normalization is a smooth genus-5 curve with the six original markings and the unordered pair {a,b} of preimages of the node. Consequently phi is generically one-to-one and hence birational. A finite birational morphism from the normal stack Q is the normalization of the reduced component. Thus\n\nhat{Delta}_irr is isomorphic to [Mbar_{5,8}/<sigma>].\n\nIn contrast, xi:Y->Delta_irr is generically degree two: the two distinct ordered points (C;p_1,...,p_6,a,b) and (C;p_1,...,p_6,b,a) have the same glued curve. Generic source and target stabilizers are both trivial, so this degree is genuine and is not absorbed by stack inertia. Therefore xi itself cannot be a normalization morphism, which must be birational.\n\nTo rule out the possibility that Q might nevertheless be abstractly isomorphic to Y, use rational cohomology. The finite-group Cartan-Leray spectral sequence gives H^2(Q;Q)=H^2(Y;Q)^{<sigma>}. The class psi_a-psi_b is sigma-anti-invariant and nonzero. Indeed, take the complete fibre F of the forgetful map Y->Mbar_{5,7} over a general smooth pointed curve, forgetting b. The universal-curve identities give integral_F psi_b=2g-2+7=15 and integral_F psi_a=1, the latter coming from the collision divisor of a and b. Hence integral_F(psi_a-psi_b)=-14, so this anti-invariant class is nonzero. Since sigma has order two, H^2(Y;Q) is the direct sum of its invariant and anti-invariant subspaces; therefore dim H^2(Q;Q)<dim H^2(Y;Q). In particular Q is not isomorphic to Y as a stack or as a rational-cohomology object.\n\nFor the one-loop graph, Aut(Gamma)=<sigma>. Clause (iii) explicitly imposes this automorphism, with the declared determinant convention, on the ordered graph source Y. That operation is compatible with the quotient description and does not turn the generically degree-two ordered clutching map into a normalization. No assertion here refutes the intended normalized product description for separating graphs in clause (ii), but the theorem requires all three clauses, so the false clause (i) disproves the exact conjunction.\n\nSource-backed inputs: none. Dependency artifacts: none were supplied or required. Computational hypotheses and experiments: none. Gaps: none. No Tate-type or boundary-image conclusion is made.",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 1,
+  "claims": [
+    {
+      "id": "ATT-0137-CLM-01",
+      "statement": "The clutching map Mbar_{5,8}->Delta_irr is generically degree two because it orders the two preimages of the node, while the glued curve remembers only their unordered pair.",
+      "status": "proved"
+    },
+    {
+      "id": "ATT-0137-CLM-02",
+      "statement": "The finite birational morphism [Mbar_{5,8}/<sigma>]->Delta_irr is the normalization of the reduced non-separating boundary component.",
+      "status": "proved"
+    },
+    {
+      "id": "ATT-0137-CLM-03",
+      "statement": "The quotient stack [Mbar_{5,8}/<sigma>] is not abstractly isomorphic to Mbar_{5,8}, since psi_a-psi_b is a nonzero anti-invariant class and the two stacks have different rational H^2 dimensions.",
+      "status": "proved"
+    },
+    {
+      "id": "ATT-0137-CLM-04",
+      "statement": "Clause (i), and therefore the exact conjunction (i)-(iii), is false; no Tate assertion or boundary-image claim is implicated.",
+      "status": "proved"
+    }
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  },
+  "context_revision": 2,
+  "dependency_claim_ids": [],
+  "engine": "codex",
+  "experiment_ids": [],
+  "experiment_uses": [],
+  "failed_approaches_addressed": [
+    {
+      "disposition": "Not used; the disproof is entirely geometric.",
+      "kind": "blocked_route",
+      "subject": "vcd-only-vanishing"
+    },
+    {
+      "disposition": "Not used; only the one-edge clutching source and its actual graph automorphism are considered.",
+      "kind": "blocked_route",
+      "subject": "undecorated-cgp-top-weight-graph-complex"
+    },
+    {
+      "disposition": "Not used; no finite computation or point count appears.",
+      "kind": "blocked_route",
+      "subject": "point-count-without-degree-parity-separation"
+    },
+    {
+      "disposition": "Not used; the forgetful morphism is used only as an algebraic test curve for psi classes, not for a Leray or local-system argument.",
+      "kind": "blocked_route",
+      "subject": "forgetful-map-renaming-local-system-unknown"
+    }
+  ],
+  "gap_markers": [],
+  "id": "ATT-0137",
+  "lane": "geometry",
+  "methods_used": [
+    "non-separating clutching geometry",
+    "finite quotient stacks",
+    "generic-degree and normalization",
+    "finite-group rational cohomology",
+    "psi-class test-curve intersection"
+  ],
+  "new_inputs": [],
+  "novelty_claims": [],
+  "packet_binding_sha256": "573c965db6dd15b034536547679084d1ec5902b91b504ac438555b0cf9212769",
+  "packet_id": "C66BAR-001-v1",
+  "packet_path": "proof/packets/generated/C66BAR-001-v1.md",
+  "packet_sha256": "496b06549c3a8aa39bce6e256b0d35707910cb73f25e776bb6517721ade779f7",
+  "proof_dependencies": [],
+  "result_type": "disproof",
+  "schema_version": 3,
+  "source_claim_ids": [],
+  "source_ids": [],
+  "status": "claimed_complete",
+  "subproblem_id": "C66BAR-GRAPH",
+  "summary": "The exact conjunction is false. If sigma exchanges the two gluing marks, the normalization of the non-separating boundary component is the quotient stack [Mbar_{5,8}/<sigma>], not the ordered stack Mbar_{5,8}. The ordered clutching map is generically degree two, and the quotient is not even abstractly isomorphic to Mbar_{5,8}, as their rational H^2 dimensions differ.",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "target_claim_id": "RED-0001",
+  "task_id": "TASK-C66-M-001",
+  "theorem_scope": {
+    "excluded": [
+      "any Tate assertion",
+      "the boundary-image theorem",
+      "the open residual theorem ATT-0136",
+      "any conclusion about H^16(Mbar_{6,6};Q)"
+    ],
+    "failed_conjunct": "(i)",
+    "g": 6,
+    "n": 6,
+    "object": "normalization of the boundary divisor of the ordered-mark Deligne-Mumford stack Mbar_{6,6}"
+  },
+  "theorem_statement": "Let Xbar := Mbar_{6,6} be the moduli stack of stable genus-6 curves with 6 ordered marked points, and let hat{partial} Xbar be the normalization of its boundary divisor. Prove all of the following, with no Tate assertion. (i) The non-separating boundary component has normalization isomorphic to Mbar_{5,8}. (ii) Every separating boundary component is a product Mbar_{g1,n1} x Mbar_{g2,n2} with g1+g2=6, n1+n2=8, and both factors stable. (iii) The contribution of a one-edge dual graph Gamma is taken in (H^*(Mbar_Gamma) tensor det E_Gamma)^{Aut(Gamma)}. This theorem names the source of the campaign boundary map and does not assert Tate type of any cohomology group."
+}

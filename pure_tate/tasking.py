@@ -9,7 +9,7 @@ from .models import Claim, Source
 from .packets import case_packet_record
 from .research import stage_two_ready
 from .store import ROOT, load_jsonl
-from .targets import CONTEXT_REVISION
+from .targets import CONTEXT_REVISION, open_input_target
 
 
 APPROACHES = [
@@ -196,6 +196,10 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
         }
     tasks = []
     for ordinal, subproblem in enumerate(campaign["subproblems"], 1):
+        target_case = subproblem.get("target_case", campaign["case"])
+        subproblem_target = open_input_target(
+            target_case["g"], target_case["n"]
+        ).as_dict()
         experiment_inputs = []
         experiment_id = subproblem.get("experiment_id")
         if experiment_id:
@@ -242,7 +246,7 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
             "campaign_id": campaign_id,
             "campaign_revision": campaign["campaign_revision"],
             "target_claim_id": campaign["target_claim_id"],
-            "target": packet["target"],
+            "target": subproblem_target,
             "subproblem_id": subproblem["id"],
             "lane": subproblem["lane"],
             "subproblem": subproblem,
@@ -286,7 +290,9 @@ def campaign_mathematics_tasks(campaign_id: str) -> List[Dict[str, Any]]:
                 "A blocked route may appear in methods_used only when new_inputs "
                 "contains a matching route and evidence description."
             ),
-            "prompt": "prompts/CAMPAIGN_MATHEMATICS.md",
+            "prompt": campaign.get(
+                "mathematics_prompt", "prompts/CAMPAIGN_MATHEMATICS.md"
+            ),
             "output": "proof/attempts/ATT-####.json",
             "status": (
                 "verified"

@@ -1170,6 +1170,60 @@ class PairedAttemptPolicyTests(unittest.TestCase):
                 # After recovery the trace is no longer pending.
                 self.assertEqual(unrecovered_validation_traces("C66-001"), [])
 
+    def test_hash_bound_revision_migration_recovers_only_exact_trace(self):
+        from pure_tate.paired import recover_attempt_from_trace
+
+        source = ROOT / "research" / "paired-traces" / "TRACE-0110.json"
+        with tempfile.TemporaryDirectory(dir=ROOT) as directory:
+            root = Path(directory)
+            traces = root / "traces"
+            attempts = root / "attempts"
+            recoveries = root / "recoveries.json"
+            traces.mkdir()
+            attempts.mkdir()
+            trace_path = traces / "TRACE-0110.json"
+            trace_path.write_bytes(source.read_bytes())
+            patches = (
+                mock.patch("pure_tate.paired.TRACE_DIR", traces),
+                mock.patch("pure_tate.paired.RECOVERY_LEDGER_PATH", recoveries),
+                mock.patch("pure_tate.paired.ROOT", root),
+                mock.patch("pure_tate.paired.record_event", return_value={}),
+            )
+            with patches[0], patches[1], patches[2], patches[3]:
+                with mock.patch(
+                    "pure_tate.campaigns.campaign_revision_migration",
+                    return_value={"trace_recoveries": []},
+                ):
+                    with self.assertRaisesRegex(
+                        ValueError, "trace packet is stale"
+                    ):
+                        recover_attempt_from_trace(
+                            "TRACE-0110", attempts / "ATT-8802.json"
+                        )
+                receipt = recover_attempt_from_trace(
+                    "TRACE-0110", attempts / "ATT-8802.json"
+                )
+                self.assertEqual(
+                    receipt["classification"], "revision_migration_recovery"
+                )
+                recovered = json.loads(
+                    (attempts / "ATT-8802.json").read_text(encoding="utf-8")
+                )
+                self.assertEqual(recovered["campaign_revision"], 2)
+                self.assertEqual((recovered["target"]["g"], recovered["target"]["n"]), (5, 8))
+                self.assertEqual(
+                    recovered["recovery"]["migration_id"],
+                    "C66BAR-V2-TRACE-0110",
+                )
+
+                changed = json.loads(trace_path.read_text(encoding="utf-8"))
+                changed["parsed_artifact"]["theorem_statement"] += " Changed."
+                trace_path.write_text(json.dumps(changed), encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "trace packet is stale"):
+                    recover_attempt_from_trace(
+                        "TRACE-0110", attempts / "ATT-8803.json"
+                    )
+
 
 class DigestAttributionTests(unittest.TestCase):
     def setUp(self):
