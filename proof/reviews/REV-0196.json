@@ -1,0 +1,217 @@
+{
+  "attempt_id": "ATT-0143",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "checked_claims": [
+    {
+      "claim_id": "CHK-PACKET-TARGET",
+      "note": "TASK-V-ATT-0143-P2, ATT-0143, and the packet agree on packet_id C66BAR-001-v2, packet_sha256 a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191, packet_binding_sha256 6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54, campaign_revision 2, context_revision 2, subproblem_id C66BAR-SEP, the 13-key target dictionary, and the exact theorem_statement. The review is of that separating-Kunneth lemma, not of the campaign boundary-image theorem and not of H^{16}(Mbar_{6,6};Q).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0143-CLM-01",
+      "note": "A stable-graph automorphism fixes each numbered leg. Vertex exchange would have to carry S_1 onto S_2 while fixing labels; disjointness then forces S_1=S_2=empty and n=0, contradicting n=6. The two half-edges of a separating edge lie on distinct vertices, so there is no half-edge-only automorphism either. Thus Aut(Gamma)=1, the quotient stack equals the ordered product atlas, and (H^{16} tensor det E_Gamma)^{Aut} equals H^{16} of the atlas under any det convention. Stack-versus-coarse and invariants-versus-coinvariants attacks are vacuous on this side. The argument uses labelled legs and n>=1 and is not asserted for n=0. Independent of the disputed FND-0034 parenthetical, which concerns only the excluded loop.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0143-CLM-02",
+      "note": "One-edge separating: g_1+g_2=6, n_1+n_2=6+2=8 (each vertex carries the node half-edge), d_1+d_2=3*6-6+8=20. Stability 2g_j-2+n_j>0 is the integer bound m_j=2g_j+n_j>=3, hence m_i<=17 and n_i<=7. Both extremes exist: (6,5)x(0,3) and (5,7)x(1,1). Omitted-stable-pair attack fails: the only dropped configurations are genuinely unstable ((0,2) as complement of (6,6), or a genus-0 vertex with n<3). Inclusive marking is the same convention as ATT-0140-CLM-03.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0143-CLM-03",
+      "note": "Lemma M reconstructed: non-separating one-edge sends (g,n) to (g-1,n+2), preserving 2g+n and dropping dimension by 1; separating one-edge has m_1+m_2=m+2 with complementary m_j>=3, so m_i<=m-1, and d_1+d_2=d-1. General graphs: contract all but one edge, then every vertex of Gamma is a vertex of a stable graph of a vertex pair of that one-edge graph, so g and m compose. Lemma A's induction uses only the one-edge steps; the general-graph clause is used only to keep the whole induction tree inside g<=6, m<=17.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0143-CLM-04",
+      "note": "Corollary M2 is direct arithmetic against SRC-0002 Table 1 (L638-L641): c(0)=inf, c(3)=c(4)=11, c(5)=7, c(6)=5. For g<=6 and 2g+n<=17 one has n<=11 at g=3, n<=9<=11 at g=4, n<=7 at g=5, n<=5 at g=6. The bounds are attained at g=3,5,6, so the range is exactly the CKgP range in those genera, not a slack estimate. Genus 1 and 2 are deliberately omitted here: c(1)=c(2)=10 would fail for n up to 15 and 13 respectively.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0143-CLM-05",
+      "note": "Kunneth for rational cohomology of smooth proper DM stacks over C is an isomorphism of Hodge structures with no extra Tate twist: Q(-a/2) tensor Q(-b/2)=Q(-8) when a+b=16 are even. Odd-odd bidegrees: min(a,b) is odd and <=7, so that factor vanishes by SRC-0003 L15-L16 (Bergstrom-Faber-Payne: H^k(Mbar_{g,n})=0 for odd k<=9, all g,n), used only for k in {1,3,5,7}. No vanishing is claimed in degrees 9,11,13,15, matching SRC-0003 Theorem 1.1 (H^{11}(Mbar_{1,n}) nonzero for n>=11) and SRC-0002 L97-L99. Even mixed bidegrees lie in [2,14] and are Q(-k/2) by THM-0002 / SRC-0002 Theorem 1.5(3) L81-L84 and L92. The (16,0)/(0,16) summands are the hypothesis. This is published tautological range, not a silent upgrade of pure Tate.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0143-CLM-06",
+      "note": "Lemma A holds. Induction on d=3g-3+n, vanishing for 2d<16. Genus 1: THM-0006 / SRC-0002 L332, algebraic codimension-8 classes in a pure weight-16 group (THM-0001) give type (8,8)=Q(-8), no n bound. Genus 2: THM-0007 / SRC-0002 Corollary 2.7 L362 with k=8<=10, same algebraicity, all n. Remaining g in {0,3,4,5,6} have n<=c(g) by CLM-04. One-edge atlases have strictly smaller dimension and stay in g<=6, m<=17 by Lemma M; non-separating preserves m and drops g, separating drops m by at least 1. Product atlases are typed by Proposition K plus the inductive H^{16} of both vertices. Contribution of each Gamma is a Hodge subobject of H_16(Mbar_Gamma) under any Aut/det convention (averaging over Q), hence Q(8) by (P1). Open input: SRC-0002 Proposition 4.5 L643-L648 gives W_{2d-16}H^{2d-16}(M_{g,n})=RH^{2d-16}=Q(-(d-8)), and FND-0001 supplies W_{-16}H^{BM}_{16} cong that group twisted by (d), with Q(-(d-8))(d)=Q(8). THM-0003 / SRC-0002 (6.1) L1219-L1221 is a right-exact sequence of weight -16 polarizable Hodge structures; image of the first map and cokernel are both Q(8)^oplus, so the middle is an extension of Q(8) by Q(8) and splits by FND-0033. Duality (0.1) returns H^{16}=Q(-8)^oplus. No residual pair is an input: (6,6) and (5,8) have m=18. Degree-16 predictions of SRC-0002 L93 and CONJ-0001 are unused. Predicted-motive and tautological-generation attacks fail: the degree-16 output is a Hodge-structure isomorphism to Q(-8)^oplus, not an algebraic-generation claim except where THM-0006/0007 already supply it.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0143-CLM-07",
+      "note": "Independently recomputed: (3,12),(5,8),(6,6),(7,4),(8,2) have 2g+n=18; (8,0) has m=16 and g=8; (8,1) has m=17 and g=8. Vertices of a (6,6) separating graph have g_i<=6 and m_i<=17, and both inequalities persist along Lemma M. Both tests are required: (8,0) and (8,1) satisfy m<=17. Only the seven-pair list is taken from RED-0001; its inferred status is not used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "ATT-0143-CLM-08",
+      "note": "The assigned theorem follows: CLM-02 puts both vertices in the Lemma A range, Proposition K types every degree-16 Kunneth summand as Q(-8)^oplus, and CLM-01 identifies those summands with the Aut-invariant determinant-edge contributions and with H^{16} of the quotient stack. Degree-16 factors are the (16,0) and (0,16) summands, with n_i<=7 and off RED-0001; all other nonzero summands are even-even in [2,14]. The non-separating component and the boundary-image theorem are untouched, matching theorem_scope.excluded. Confirming this lemma does not verify C66BAR-IMAGE or H^{16}(Mbar_{6,6};Q).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "THM-0001",
+      "note": "Source-verified registry claim: H^k of a smooth proper DM stack over C is pure of weight k. Used for Mbar_{g,n} and for each [Mbar_Gamma/Aut(Gamma)] (smooth proper as a finite quotient of a product of Mbars).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "THM-0002",
+      "note": "Cross-checked: SRC-0002 Theorem 1.5(3) L81-L84 (H_k tautological for even k<=14) and L92 (H^k cong oplus L^{k/2} for even k<=14). Used only for even mixed Kunneth degrees in [2,14], never for degree 16.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "THM-0003",
+      "note": "Source-verified: SRC-0002 Eq. (6.1) L1219-L1221 is the right-exact sequence H_k(hat-partial Mbar)->H_k(Mbar)->W_{-k}H^{BM}_k(M)->0, used in Lemma A (7d) at k=16 as a sequence of Hodge structures. Homology of the normalization, not a Gysin spectral sequence; FND-0090 is not incurred.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "THM-0005",
+      "note": "Cross-checked against SRC-0002 Table 1 L638-L641. Only c(0)=inf, c(3)=c(4)=11, c(5)=7, c(6)=5 are used, via Corollary M2, never c(1) or c(2).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "THM-0006",
+      "note": "Source-verified at SRC-0002 L332: all even cohomology in genus 1 is represented by tautological boundary strata. Supplies H^{16}(Mbar_{1,n})=Q(-8)^oplus with no n restriction, which is essential because the Lemma A range allows n<=15 > c(1)=10.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "THM-0007",
+      "note": "Source-verified at SRC-0002 Corollary 2.7 L362: H^{2k}(Mbar_{2,n})=RH^{2k} for k<=10 and all n. At k=8 this types H^{16} for genus 2, including the pairs with n=11,12,13 that lie in m<=17 but outside c(2)=10.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "SRC-0003-odd-vanishing",
+      "note": "The one load-bearing input without a registry id. SRC-0003 L15-L16 states as a theorem (citing Bergstrom-Faber-Payne) that H^k(Mbar_{g,n}) vanishes for all odd k<=9 and all g,n. Used once, in Proposition K case 1, and only for odd k<=7. Not a prediction; SRC-0003 Theorem 1.2 (even k<=12 Hodge-Tate) is correctly recorded as unused and weaker than THM-0002 in the range used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "RED-0001",
+      "note": "Listed source_claim_id, used only as the enumeration of the seven residual pairs. Truth status inferred is not consumed. Disjointness is an independent numerical check (CLM-07).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "SRC-0004",
+      "note": "Listed in ATT-0143 source_ids but unused as a direct citation. CKgP bounds are taken from THM-0005 and SRC-0002 Table 1. Non-load-bearing.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CHK-ADVERSARIAL-SCOPE",
+      "note": "Stack vs coarse: Aut=1 so [Mbar_Gamma/Aut]=the ordered atlas; induction uses stack cohomology of finite quotients. Coefficients Q throughout; averaging identifies invariants with coinvariants; nothing integral. Ordinary H^{16} on the product atlas, homology only through (0.1) inside THM-0003; ambient Poincare twist 21 is never applied to a 20-dimensional component; FND-0001 twist is Q(-(d-8))(d)=Q(8). Kunneth unshifted; Gysin unused. Cartan-Leray collapses by exactness of Q-invariants, not by an assumed degeneration. Aut-invariants are subobjects, hence Tate if the ambient is. Semisimplicity at a single pure weight is an actual splitting (FND-0033), not a semisimplification. Degree 16,18,20 predictions unused. Pure Tate is not upgraded to tautological generation for the degree-16 factors. No stable pair is omitted except unstable graphs excluded by the theorem's own stability hypothesis.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-08-31",
+  "finding_candidates": [
+    {
+      "confidence": "high",
+      "key": "degree-16-tate-for-g-le-6-and-2g-plus-n-le-17",
+      "kind": "lemma",
+      "load_bearing_for": [
+        "C66BAR-SEP",
+        "C66BAR-IMAGE",
+        "C58-COMPACT"
+      ],
+      "relation_to_existing_findings": "Not a restatement of the packet target, of RED-0001, or of FND-0072: this types H^{16}(Mbar_{g,n}) in a range that excludes (6,6) and (5,8). Distinct from FND-0035 (vcd comparison on residual pairs) and from THM-0002 (even k<=14, all g,n). Downstream C58-COMPACT may reuse it for factors with g<=6 and 2g+n<=17 (e.g. (5,7), (3,9), (3,11)) but not for (4,10), which has 2g+n=18.",
+      "scope": {
+        "coefficients": "Q",
+        "does_not_assert": [
+          "H^{16}(Mbar_{6,6};Q) is Tate",
+          "H^{16}(Mbar_{5,8};Q) is Tate",
+          "the campaign boundary-image theorem",
+          "tautological generation of H^{16} except in genus 1 and 2 where THM-0006 and THM-0007 already give it"
+        ],
+        "generality": "every stable pair with g<=6 and 2g+n<=17",
+        "ground_field": "C"
+      },
+      "statement": "For every stable pair (g,n) with g<=6 and m=2g+n<=17, H^{16}(Mbar_{g,n};Q) is a finite direct sum of Q(-8) as polarizable Hodge structures (including the zero group when 2 dim Mbar <16). Proof structure: induction on dim Mbar_{g,n} via THM-0003; genus 1 by THM-0006 and genus 2 by THM-0007 (k=8), both without an n bound; remaining genera {0,3,4,5,6} have n<=c(g) by the arithmetic n<=17-2g against SRC-0002 Table 1, so the open input W_{-16}H^{BM}_{16}(M_{g,n}) is Q(8)^oplus by SRC-0002 Proposition 4.5, algebraicity, and FND-0001; one-edge vertices stay in the same (g,m) range at strictly smaller dimension; product atlases in degree 16 are typed by odd vanishing for min(a,b)<=7 and THM-0002 for even degrees in [2,14]. The range is disjoint from the RED-0001 list. This is an honest Hodge-structure isomorphism at weight 16 by semisimplicity of polarizable pure structures of a fixed weight, not a semisimplification.",
+      "status": "candidate",
+      "supports_finding_id": null
+    },
+    {
+      "confidence": "high",
+      "key": "red-0001-excluded-by-genus-or-2g-plus-n-equals-18",
+      "kind": "bookkeeping",
+      "load_bearing_for": [
+        "C66BAR-SEP",
+        "C66BAR-IMAGE"
+      ],
+      "relation_to_existing_findings": "Not a duplicate of FND-0035, which records vcd versus ordinary degree 2d-16 on the same seven pairs. Not a restatement of RED-0001's residual claim or of the packet target dictionary. It is a numerical exclusion criterion for induction trees.",
+      "scope": {
+        "coefficients": "Q",
+        "does_not_assert": [
+          "any Tate type",
+          "that RED-0001 is complete as an obstruction list"
+        ],
+        "objects": [
+          "RED-0001 residual list",
+          "vertices of one-edge separating graphs of (6,6)",
+          "pairs reachable by iterated one-edge degeneration"
+        ]
+      },
+      "statement": "Every pair on the RED-0001 list (3,12), (5,8), (6,6), (7,4), (8,0), (8,1), (8,2) has either g>=7 or 2g+n=18. Consequently any induction or degeneration that remains inside g<=6 and 2g+n<=17 never meets a residual pair. Both tests are required: (8,0) and (8,1) satisfy 2g+n<=17 and are excluded only by genus; (3,12), (5,8), (6,6) have g<=6 and are excluded only by m=18. Along one-edge graphs, g is nonincreasing and 2g+n is nonincreasing, dropping by at least 1 at each separating step and staying constant at a non-separating step. In particular no vertex of a one-edge separating graph of (6,6), and no pair in the degree-16 boundary induction of such a vertex, is residual. The criterion uses only the list of seven pairs, not RED-0001's truth status.",
+      "status": "candidate",
+      "supports_finding_id": null
+    },
+    {
+      "confidence": "high",
+      "key": "odd-kunneth-in-total-degree-16-has-min-at-most-7",
+      "kind": "degree-parity",
+      "load_bearing_for": [
+        "C66BAR-SEP",
+        "C58-COMPACT"
+      ],
+      "relation_to_existing_findings": "Not a restatement of OBS-0001 or of SRC-0002's degree-16 prediction. Complements THM-0002 (even k<=14) by recording why odd vanishing through degree 9, used only up to 7, kills every odd Kunneth factor in total degree 16 without any odd-vanishing statement in degrees 9,11,13,15.",
+      "scope": {
+        "coefficients": "Q",
+        "does_not_assert": [
+          "vanishing of H^9, H^{11}, H^{13}, or H^{15}",
+          "any statement about the non-separating (5,8) atlas"
+        ],
+        "generality": "any product of two Mbar_{g_i,n_i} and total ordinary degree 16"
+      },
+      "statement": "For integers a,b>=0 with a+b=16, if a is odd then b is odd and min(a,b) lies in {1,3,5,7}. Hence in H^{16}(Mbar_{g1,n1} x Mbar_{g2,n2};Q) every odd Kunneth summand has a factor in odd degree <=7, which vanishes for all stable pairs by the published odd vanishing H^k(Mbar_{g,n};Q)=0 for odd k<=9. The eight ordered odd bidegrees are (1,15),(3,13),(5,11),(7,9) and their transposes. No universal odd vanishing above degree 9 is used or needed; in particular SRC-0003 Theorem 1.1 (H^{11}(Mbar_{1,n}) nonzero for n>=11) is compatible. Remaining nonzero summands are even-even: mixed ones have both degrees in [2,14] and are Q(-8) by THM-0002, and the two axis summands are H^{16} tensor H^0.",
+      "status": "candidate",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0196",
+  "independent": true,
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0140",
+      "note": "Listed proof dependency (C66BAR-GRAPH recovered to ATT-0140). Double-confirmed by REV-0189 and REV-0191 on CLM-01, CLM-03, CLM-04, which are exactly the three claims consumed: normalization is the distinguished-node stack, separating components are [Mbar_Gamma/Aut(Gamma)] with g1+g2=6, n1+n2=8, and the contribution is (H^* tensor det E)^{Aut}. The (g,n)-uniform form used in Lemma A (7a) is re-derived there from the same clutching/normalization argument, which does not use g=6 or n=6; only a convention-free subobject bound is needed, so the disputed loop-sign parenthetical of FND-0034 is not inherited. Identity: ATT-0140 packet_id, packet_sha256, packet_binding_sha256, campaign_revision, context_revision, and target dictionary match this task.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C66BAR-GRAPH",
+      "note": "Campaign-graph name of ATT-0140. The assigned theorem is conditional on a verified identification of the separating components; that identification is the confirmed ATT-0140 lemma and is used only on the separating side. Confirming C66BAR-SEP does not re-verify the non-separating clause of C66BAR-GRAPH and does not verify C66BAR-IMAGE.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0143-P2",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "Binding first: packet_id C66BAR-001-v2, packet_sha256 a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191, packet_binding_sha256 6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54, campaign_revision 2, context_revision 2, subproblem_id C66BAR-SEP, target dictionary, and theorem_statement all match TASK.json and ATT-0143, so the review is of the separating-Kunneth lemma, not the campaign boundary-image theorem. Strongest attack: the induction of Lemma A appears to leave the published CKgP range. Starting from the attained vertex (6,5) (m=17), iterated non-separating degeneration yields (5,7), (4,9), (3,11), (2,13), (1,15), (0,17), all with m=17. At genus 2 one has n=13>c(2)=10, and at genus 1 n=15>c(1)=10, so SRC-0002 Proposition 4.5 does not supply W_k H^k=RH^k for those pairs. If Lemma A had run a uniform CKgP-plus-boundary-sequence argument in all genera, the induction would invoke an unproved open input exactly on this chain and the claim would be incomplete. Outcome: the attack fails. The attempt special-cases g=1 by THM-0006 (SRC-0002 L332, all even genus-1 cohomology tautological, no n bound) and g=2 by THM-0007 (SRC-0002 Corollary 2.7 L362, H^{16}=RH^{16} for k=8<=10, all n), and applies Proposition 4.5 only for g in {0,3,4,5,6}, where Corollary M2 gives n<=c(g) with equality at g=3,5,6. The special-casing is load-bearing, not cosmetic: it is exactly the repair that keeps the induction inside published theorems. Runner-up attacks, all unsuccessful: (a) inclusive-versus-exclusive markings putting the residual pair (5,8) on a vertex -- n_i=|S_i|+1 so n_1+n_2=8 and n_i<=7, and (5,8) would require an unstable complement; the near-miss (5,7)x(1,1) sits on n=c(5)=7; (b) degree/twist mixup -- ordinary Kunneth is in total degree 16 on the atlas, homology is used only via Hom(H^{16},Q) inside THM-0003, FND-0001 is Q(-(d-8))(d)=Q(8), and the ambient twist 21 is never applied to a 20-dimensional component; (c) Aut/det on the loop -- Aut=1 on every separating one-edge graph at n=6, so the twist is vacuous under any convention, and in the induction the contribution is only a subobject of a Tate group; (d) odd Kunneth in degrees 9-15 -- every odd-odd bidegree summing to 16 has min<=7; (e) predicted degree-16 motives -- SRC-0002 L93 and CONJ-0001 unused; (f) semisimplification -- polarizable pure weight -16 is semisimple (FND-0033), so the assembled H_16 is isomorphic to Q(8)^oplus, not merely so after semisimplification; (g) generalizing ATT-0140 beyond (6,6) -- (7a) re-derives clutching uniformly and uses only the convention-free subobject bound. Verdict confirmed for the exact theorem_statement only.",
+  "subproblem_id": "C66BAR-SEP",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "Using a verified C66BAR-GRAPH identification of the one-edge separating components [Mbar_Gamma/Aut(Gamma)], prove that every Aut(Gamma)-invariant determinant-edge Kunneth summand in degree 16 is a finite direct sum of Q(-8). On the ordered product atlases, the only degree-16 factors that arise have n<=7 and lie outside RED-0001; even degrees <=14 are in the published tautological range. This theorem does not treat the non-separating component [Mbar_{5,8}/S_2] and does not conclude the campaign boundary-image theorem.",
+  "verdict": "confirmed"
+}

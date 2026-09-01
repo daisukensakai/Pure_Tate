@@ -1,0 +1,135 @@
+[
+  {
+    "id": "TASK-C66-M-005",
+    "phase": "mathematics",
+    "role": "focused-prover-or-counterexample-searcher",
+    "campaign_id": "C66BAR-001",
+    "campaign_revision": 2,
+    "target_claim_id": "RED-0001",
+    "target": {
+      "g": 5,
+      "n": 8,
+      "dimension": 20,
+      "compact_cohomology_degree": 16,
+      "compact_tate_type": "Q(-8)",
+      "open_bm_degree": 16,
+      "open_bm_weight": -16,
+      "open_bm_tate_type": "Q(8)",
+      "ordinary_cohomology_degree": 24,
+      "ordinary_weight": 24,
+      "ordinary_tate_type": "Q(-12)",
+      "poincare_twist": 20,
+      "chow_codimension": 12
+    },
+    "subproblem_id": "C58-COMPACT",
+    "lane": "weakest-sufficient-proof",
+    "subproblem": {
+      "id": "C58-COMPACT",
+      "target_case": {
+        "g": 5,
+        "n": 8
+      },
+      "lane": "weakest-sufficient-proof",
+      "title": "Assemble compact H^{16}(Mbar_{5,8}) from its open residual",
+      "dependencies": [
+        "C58-OPEN",
+        "C58-BOUNDARY"
+      ],
+      "exact_theorem": "Using a verified C58-OPEN residual and a verified C58-BOUNDARY accounting, apply the boundary right-exact sequence of THM-0003 to conclude that H^{16}(Mbar_{5,8};Q) is a finite direct sum of Q(-8). A disproof must exhibit a surviving non-Tate summand in this compact group. This theorem does not conclude the campaign boundary-image theorem."
+    },
+    "artifact_contract": null,
+    "context_revision": 2,
+    "packet_id": "C66BAR-001-v2",
+    "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+    "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+    "input_packet": "proof/packets/generated/C66BAR-001-v2.md",
+    "blocked_routes": [
+      "vcd-only-vanishing",
+      "undecorated-cgp-top-weight-graph-complex",
+      "point-count-without-degree-parity-separation",
+      "forgetful-map-renaming-local-system-unknown"
+    ],
+    "new_input_declared": [],
+    "input_artifacts": [
+      {
+        "kind": "attempt",
+        "id": "ATT-0142",
+        "path": "proof/attempts/ATT-0142.json",
+        "sha256": "99cd02dfa10eef4773c9826fb7d1808107ca0a2410e7cc0d8574b9fa851fed64"
+      },
+      {
+        "kind": "confirmation_review",
+        "id": "REV-0193",
+        "path": "proof/reviews/REV-0193.json",
+        "sha256": "ef9a25a95a19daa391da7b57596bed2a48f84ac896e4fc85b681f396257af27b"
+      },
+      {
+        "kind": "confirmation_review",
+        "id": "REV-0194",
+        "path": "proof/reviews/REV-0194.json",
+        "sha256": "14ff2326d136ec2e67c11815251327c06b4c3896fde8b25712fb557d7679ecc3"
+      },
+      {
+        "kind": "attempt",
+        "id": "ATT-0141",
+        "path": "proof/attempts/ATT-0141.json",
+        "sha256": "fd240d8eeb9e4cac0ffd70007bfd5a563ab4a2822436bdc59409fbe018e85a23"
+      },
+      {
+        "kind": "confirmation_review",
+        "id": "REV-0190",
+        "path": "proof/reviews/REV-0190.json",
+        "sha256": "3c057402902e83ebc42bcbf2ef16f40785078c6f8347c4de37b576073d4d6e26"
+      },
+      {
+        "kind": "confirmation_review",
+        "id": "REV-0192",
+        "path": "proof/reviews/REV-0192.json",
+        "sha256": "2409e0a5b5e8eeb64f1a1ad2d838b6e06126f3b916b6493621c1f021af862aa7"
+      },
+      {
+        "path": "proof/packets/generated/paired-working-context/WORKING-C58-COMPACT-5496aa0f0053ff6a.md",
+        "sha256": "5496aa0f0053ff6a6d5bab4ff79fed290b7d7b2fe3db0f1d44099e597acb5763"
+      },
+      {
+        "path": "proof/packets/generated/paired-working-context/WORKING-EXT-C58-COMPACT-a46bc4a3ba042247.md",
+        "sha256": "a46bc4a3ba042247709b2e44c4e56d1affd20b81662238e28040b409c883d032"
+      },
+      {
+        "path": "proof/packets/generated/paired-working-context/WORKING-ARCHIVE-C58-COMPACT-a617d26ae500138e.md",
+        "sha256": "a617d26ae500138e15dd10be4df6791b5fca714134064fb86050f5d93a9b96e0"
+      }
+    ],
+    "dependency_artifacts": {
+      "C58-OPEN": "ATT-0142",
+      "C58-BOUNDARY": "ATT-0141"
+    },
+    "context_artifacts": {},
+    "verified_attempt_id": null,
+    "verification_artifacts": [],
+    "blocked_dependencies": [],
+    "route_policy": "A blocked route may appear in methods_used only when new_inputs contains a matching route and evidence description.",
+    "prompt": "prompts/CAMPAIGN_MATHEMATICS_BOUNDARY.md",
+    "output": "proof/attempts/ATT-0144.json",
+    "status": "ready",
+    "created_on": "2026-08-31",
+    "exact_theorem": "Using a verified C58-OPEN residual and a verified C58-BOUNDARY accounting, apply the boundary right-exact sequence of THM-0003 to conclude that H^{16}(Mbar_{5,8};Q) is a finite direct sum of Q(-8). A disproof must exhibit a surviving non-Tate summand in this compact group. This theorem does not conclude the campaign boundary-image theorem.",
+    "working_context": {
+      "primary": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-C58-COMPACT-5496aa0f0053ff6a.md",
+        "sha256": "5496aa0f0053ff6a6d5bab4ff79fed290b7d7b2fe3db0f1d44099e597acb5763"
+      },
+      "extended": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-EXT-C58-COMPACT-a46bc4a3ba042247.md",
+        "sha256": "a46bc4a3ba042247709b2e44c4e56d1affd20b81662238e28040b409c883d032"
+      },
+      "archive": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-ARCHIVE-C58-COMPACT-a617d26ae500138e.md",
+        "sha256": "a617d26ae500138e15dd10be4df6791b5fca714134064fb86050f5d93a9b96e0"
+      },
+      "subproblem_id": "C58-COMPACT"
+    },
+    "selected_engine": "claude",
+    "routing_chain_id": "proof:C66BAR-001:TASK-C66-M-005"
+  }
+]

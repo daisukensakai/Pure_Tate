@@ -1,0 +1,238 @@
+{
+  "attempt_id": "ATT-0145",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "checked_claims": [
+    {
+      "claim_id": "CLM-0145-1",
+      "note": "The stable-graph genus and half-edge identities give sum_v(2g_v-2+n_v)=2g-2+n.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-2",
+      "note": "The reachable set is closed under one-edge vertex types, dimension drops by one, and its only RED-0001 pairs are (5,8) at depth zero and (3,12) at depth two.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-3",
+      "note": "Exact duality of finite-dimensional rational mixed Hodge structures turns THM-0003 at homological degree 16 into the asserted left-exact cohomology sequence. No Gysin degree shift or Tate twist belongs in this linear-dual formulation.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-4",
+      "note": "For a finite graph-automorphism group over Q, quotient-stack cohomology is computed by invariants; invariants and coinvariants are exact and dual as required. Taking a character-twisted invariant subspace of Q(-8) copies cannot introduce another Hodge type.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-5",
+      "note": "For the stated nonexceptional pairs, FND-0001 and THM-0005 give K=(W_jH^j(d))^vee with j=2d-16, hence Q(j/2-d)=Q(-8); odd j gives zero.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-6",
+      "note": "ATT-0142 types K(5,8). At (3,12), d=18 and j=20=vcd; the inclusive n-1=11=c(3) case of FND-0195 gives W_20H^20=Q(-10) copies, so (Q(-10)(18))^vee=Q(-8) copies.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-7",
+      "note": "THM-0006 and THM-0007 identify the relevant compact even cohomology with tautological cycle classes. Their degree-16 classes are algebraic of type (8,8), and purity gives actual copies of Q(-8); no converse from pure Tate to algebraic generation is used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-8",
+      "note": "If i+j=16 are both odd, min(i,j)<=7. The published odd-cohomology vanishing range through degree 9 therefore kills one factor in every such Kunneth summand.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-9",
+      "note": "Induction on dimension covers every stable pair in the reachable set. Even Kunneth slots below 16 use THM-0002, endpoint slots use induction, odd-odd slots vanish, and the depth-two exceptional pair (3,12) is explicitly handled. No stable pair needed by the induction is omitted.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-10",
+      "note": "The quotient H^16/K embeds into a boundary group consisting only of Q(-8) copies. Polarizable pure weight-16 rational Hodge structures are semisimple, so the resulting extension splits as an actual Hodge-structure isomorphism, not merely after semisimplification. On the smooth proper 20-dimensional stack, Poincare duality gives H_16=Q(8) copies and H^24=Q(-12) copies with the stated twists.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-11",
+      "note": "The proof is expressly limited to the compact (5,8) lemma and makes no boundary-image or global campaign conclusion.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-09-01",
+  "finding_candidates": [],
+  "id": "REV-0198",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0141",
+      "note": "Supplies the normalized one-edge boundary geometry, including [Mbar_{4,10}/S_2] and the separating atlases; it is not used as a Tate theorem.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0142",
+      "note": "Supplies the verified C58-OPEN residual and the identification W_{-16}H^{BM}_{16}(M_{5,8};Q)=Q(8)^{oplus}, whose dual is K(5,8)=Q(-8)^{oplus}.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0138-1",
+      "note": "Correctly identifies the degree-16 Borel-Moore term with W_24H^24(M_{5,8};Q)(20).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0138-3",
+      "note": "Correctly types W_24H^24(M_{5,8};Q) as copies of Q(-12).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "CLM-0138-4",
+      "note": "The twist Q(-12)(20)=Q(8) and subsequent dual Q(-8) are correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C58-BOUNDARY-001",
+      "note": "Correctly records the nonseparating quotient stack and branch-swap S_2 action.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C58-BOUNDARY-002",
+      "note": "Correctly records the separating ordered atlases and trivial graph automorphisms in the stated (5,8) case.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C58-BOUNDARY-003",
+      "note": "The inclusive marking bounds used for the one-edge factors are correct.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "C58-BOUNDARY-004",
+      "note": "Correctly excludes RED-0001 pairs only among the immediate one-edge factors; the proof separately handles the depth-two pair (3,12).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0001",
+      "note": "Correctly supplies purity and polarizability for the smooth proper Deligne-Mumford stacks and finite quotient stacks used.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0002",
+      "note": "Correctly types the even Kunneth factors in degrees 2 through 14.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0003",
+      "note": "The boundary right-exact sequence is applied at degree 16 and dualized without confusing homological, Borel-Moore, or Gysin degrees.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0005",
+      "note": "Applied only within its recorded genus and marking bounds; exceptional reachable pairs are discharged separately.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0006",
+      "note": "Supports the genus-one compact shortcut.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0007",
+      "note": "Supports the genus-two compact shortcut in degree 16.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0001",
+      "note": "The formula W_{-16}H^{BM}_{16}=W_{2d-16}H^{2d-16}(d) and all resulting Tate twists are used correctly.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0031",
+      "note": "Used only to check compatibility and non-circularity of the boundary corner, not as an independent Tate input.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0032",
+      "note": "Non-load-bearing; cited only to exclude a different top-weight route.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Semisimplicity applies to the actual category of polarizable pure rational Hodge structures of fixed weight and yields genuine splitting.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0035",
+      "note": "Non-load-bearing as a vanishing result; it is used only to identify the vcd endpoint requiring separate treatment.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0195",
+      "note": "Applies at (3,12) with k=vcd=20 and n-1=c(3)=11 inclusively; neither recorded exclusion is engaged.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0196",
+      "note": "The slot-one cross-term disposal used in the (3,12) peel applies for genus 3.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0197",
+      "note": "The closed-universal-curve restriction statement applies at n=12 and avoids an unsupported punctured-curve replacement.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "RED-0001",
+      "note": "Used only as the recorded seven-pair list, not as a motive, purity, or Tate theorem.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0001",
+      "note": "Provides the load-bearing published odd-cohomology vanishing range needed for the odd-odd Kunneth terms.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0002",
+      "note": "Provides the cited boundary sequence and compact/open Tate-range results.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0003",
+      "note": "Independently corroborates the odd-cohomology vanishing range used.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 2,
+  "review_task_id": "TASK-V-ATT-0145-P2",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is the hidden depth-two residual (3,12): the nonseparating divisor [Mbar_{4,10}/S_2] has a further nonseparating boundary Mbar_{3,12}, so immediate one-edge exclusion from RED-0001 is insufficient. This is load-bearing because (3,12) lies exactly at j=2d-16=vcd=20 and n-1=c(3)=11, with only endpoint-level slack in the peel argument. The attack does not succeed. FND-0195 includes this equality case, its exclusions are not engaged, and the peel uses the closed universal curve, Harer vanishing, Morita disposal, the vcd vanishing of M_{3,11}, and the Q(-9) psi-source with the correct Q(-1) shift. Thus K(3,12)=(Q(-10)(18))^vee=Q(-8). The remaining stack-versus-coarse, rational invariants-versus-coinvariants, degree and twist, Kunneth parity, determinant-character, and semisimplicity checks also close without leaving a surviving non-Tate summand.",
+  "subproblem_id": "C58-COMPACT",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "theorem_statement": "Using a verified C58-OPEN residual and a verified C58-BOUNDARY accounting, apply the boundary right-exact sequence of THM-0003 to conclude that H^{16}(Mbar_{5,8};Q) is a finite direct sum of Q(-8). A disproof must exhibit a surviving non-Tate summand in this compact group. This theorem does not conclude the campaign boundary-image theorem.",
+  "verdict": "confirmed"
+}

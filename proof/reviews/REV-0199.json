@@ -1,0 +1,118 @@
+{
+  "attempt_id": "ATT-0146",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "checked_claims": [
+    {
+      "claim_id": "PACKET-AND-TARGET-IDENTITY",
+      "note": "The review target is ATT-0146 and the supplied packet identity is C66BAR-001-v2 with SHA-256 a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191. The exact theorem reviewed is only the Tate type of the boundary-map image.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0146-1",
+      "note": "The normalization is the distinguished-node stack and is exhausted by one-edge stable graphs: the loop component [Mbar_{5,8}/S_2] and the separating products. Multi-edge graphs occur inside these compact components rather than as additional irreducible components. Every component is smooth proper of dimension 20.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0146-2",
+      "note": "The component Poincare twist is (20), while the ambient twist is (21). For each proper 20-dimensional component B, H_{16}(B) is dual to H^{16}(B), equivalently H^{24}(B)(20). Rational quotient-stack cohomology is the finite-group invariant part. No integral or coarse-moduli assertion is used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0146-3",
+      "note": "The separating contribution is covered by ATT-0143 in total cohomological degree 16. Its stable one-edge vertices satisfy the recorded bounds, their graph automorphism groups are trivial in this labelled setting, and every relevant Kunneth summand has type Q(-8). No omitted pair such as (4,10) can occur because the two separating vertices have eight total incident labelled and gluing legs.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0146-4",
+      "note": "ATT-0145 supplies H^{16}(Mbar_{5,8};Q) as a finite sum of Q(-8). Passing to the rational S_2-invariant part preserves this Tate type. For the one-edge loop graph det(E) is trivial, so the quotient-stack contribution is the full invariant part, not an anti-invariant substitute.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0146-5",
+      "note": "Finite disjoint-union additivity gives H^{16}(hat{partial} Mbar_{6,6};Q) as Q(-8)^{oplus N}; duality gives its degree-16 homology as Q(8)^{oplus N}. Properness prevents any ordinary-versus-Borel-Moore ambiguity at the endpoints.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0146-6",
+      "note": "A subobject or quotient of a finite sum of the single Hodge type Q(-8), respectively Q(8), has the same single type and is an actual finite direct sum of that Tate structure. This is an isomorphism of polarizable Hodge structures, not merely a statement after semisimplification.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0146-7",
+      "note": "For the proper normalization map, degree-16 homology pushforward is dual to degree-16 cohomology restriction, with no Gysin degree shift or extra twist in that formulation. In the equivalent Gysin formulation H^{24}(hat{partial})(20) maps through the codimension-one Gysin twist (1) to H^{26}(Mbar)(21), so all degrees and Tate twists agree. Strictness identifies the image with the dual of the restriction image.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0146-8",
+      "note": "The image is a quotient of the Tate source, equivalently the dual of a subobject of H^{16} of the normalized boundary. It is therefore Q(8)^{oplus m} for some 0 <= m <= N, proving the exact theorem statement without determining its rank.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0146-9",
+      "note": "The adversarial lanes do not produce a surviving non-Tate summand: automorphism invariants, component duality, Kunneth decomposition, and the image construction all preserve the established single Tate type.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0146-10",
+      "note": "The argument does not invoke a predicted motive, degeneration of an unverified spectral sequence, algebraic or tautological generation, the open residual, or Tate purity of H^{16}(Mbar_{6,6}). Those excluded conclusions are not required for the stated boundary-image theorem.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-09-01",
+  "finding_candidates": [],
+  "id": "REV-0199",
+  "independent": true,
+  "ingest_normalizations": [
+    {
+      "expected": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+      "field": "packet_binding_sha256",
+      "previous": null,
+      "rule": "HARNESS-IDENTITY-COERCE-0001"
+    }
+  ],
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0140",
+      "note": "Used within scope for the distinguished-node normalization, the exhaustive one-edge component list, and the quotient-stack automorphism formula. At one edge det(E) is trivial, so the loop contribution uses ordinary rational S_2-invariants.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0143",
+      "note": "Used within scope for the separating degree-16 Tate calculation and the vertex and automorphism bounds. The non-separating component is not delegated to this dependency.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0145",
+      "note": "Used within scope for the actual Hodge-structure isomorphism H^{16}(Mbar_{5,8};Q) = Q(-8)^{oplus r} and preservation of that type under the finite S_2-invariant construction. No global boundary-image conclusion is imported.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0146-P1",
+  "reviewer_engine": "codex",
+  "schema_version": 3,
+  "strongest_attack": "Strongest attack: the first map can be written as a codimension-one Gysin map H^{24}(hat{partial} Mbar_{6,6}) -> H^{26}(Mbar_{6,6})(1), so confusing it with an unshifted degree-16 restriction, using the ambient Poincare twist (21) on the 20-dimensional source, or decomposing the wrong Kunneth degree could change the claimed Tate type. The attack fails: proper homology pushforward is dual to restriction in the same degree with no twist, while the equivalent Gysin description combines the source twist (20) with the Gysin twist (1) to give the ambient twist (21). Thus the homological source and its image have type Q(8), and strictness makes the image an actual Tate quotient even though the ambient homology need not be Tate.",
+  "subproblem_id": "C66BAR-IMAGE",
+  "target": {
+    "chow_codimension": 13,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 21,
+    "g": 6,
+    "n": 6,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 26,
+    "ordinary_tate_type": "Q(-13)",
+    "ordinary_weight": 26,
+    "poincare_twist": 21
+  },
+  "theorem_statement": "The image of the boundary map H_{16}(hat{partial} Mbar_{6,6};Q) -> H_{16}(Mbar_{6,6};Q) from the normalization of the boundary of the moduli stack of stable 6-pointed genus-6 curves is a finite direct sum of Q(8). Equivalently this image is a pure polarizable Tate Hodge structure of weight -16 and type Q(8). A disproof must exhibit a surviving non-Tate summand in this image. This theorem does not re-prove the open residual W_{-16}H^{BM}_{16}(M_{6,6};Q), and does not by itself conclude H^{16}(Mbar_{6,6};Q) cong Q(-8)^{oplus b_16}.",
+  "verdict": "confirmed"
+}

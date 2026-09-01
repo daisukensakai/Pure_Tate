@@ -54,6 +54,25 @@ MAP_RE = re.compile(
 )
 HEADER_RE = re.compile(r"^-- (LEAN-[A-Z-]+)\s+(.+)$", re.MULTILINE)
 ID_RE = re.compile(r"LATT-\d{4}")
+LEAN_TYPE_RE = re.compile(
+    r"[A-Za-z_][A-Za-z0-9_.]*(?:\s+[A-Za-z_][A-Za-z0-9_.]*)*"
+)
+TARGET_CHECK_RE = re.compile(r"[a-z][a-z0-9_]*")
+DEFAULT_REVIEW_TARGET_CHECKS = (
+    "stack_not_coarse",
+    "rational_coefficients",
+    "genus_6",
+    "markings_6",
+    "bm_degree_16",
+    "bm_weight_minus_16",
+    "bm_tate_index_8",
+    "ordinary_degree_26",
+    "ordinary_weight_26",
+    "ordinary_tate_index_minus_13",
+    "dimension_and_twist_21",
+    "zero_rank_allowed",
+    "whole_group_not_proxy",
+)
 
 
 def sha256_path(path: Path) -> str:
@@ -141,6 +160,29 @@ def _required_strings(
             result.errors.append("%s missing nonempty %s" % (label, field))
 
 
+def _review_target_checks(campaign: Dict[str, Any]) -> Tuple[str, ...]:
+    configured = campaign.get("review_target_checks")
+    if configured is None:
+        return DEFAULT_REVIEW_TARGET_CHECKS
+    return tuple(configured) if isinstance(configured, list) else ()
+
+
+def _dependency_hashes(campaign: Dict[str, Any]) -> Dict[str, str]:
+    hashes: Dict[str, str] = {}
+    for item in campaign.get("dependency_artifacts", []):
+        if isinstance(item, dict) and isinstance(item.get("id"), str):
+            hashes[item["id"]] = str(item.get("sha256", ""))
+    for item in campaign.get("verified_lean_dependencies", []):
+        if not isinstance(item, dict):
+            continue
+        prefix = "lean:%s:%s" % (
+            item.get("campaign_id", ""), item.get("attempt_id", "")
+        )
+        hashes[prefix + ":campaign"] = str(item.get("campaign_sha256", ""))
+        hashes[prefix + ":report"] = str(item.get("report_sha256", ""))
+    return dict(sorted(hashes.items()))
+
+
 def validate_campaign_contract(campaign: Dict[str, Any]) -> CheckResult:
     result = CheckResult()
     _required_strings(
@@ -164,6 +206,22 @@ def validate_campaign_contract(campaign: Dict[str, Any]) -> CheckResult:
     )
     if campaign.get("minimum_independent_reviews") != 2:
         result.errors.append("campaign must require exactly two or more reviews (minimum 2)")
+    required_type = campaign.get("required_theorem_type")
+    if isinstance(required_type, str) and not LEAN_TYPE_RE.fullmatch(required_type):
+        result.errors.append("campaign required_theorem_type is not a safe simple Lean type")
+    target_checks = campaign.get("review_target_checks")
+    if target_checks is not None and (
+        not isinstance(target_checks, list)
+        or not target_checks
+        or len(target_checks) != len(set(target_checks))
+        or any(
+            not isinstance(item, str) or not TARGET_CHECK_RE.fullmatch(item)
+            for item in target_checks
+        )
+    ):
+        result.errors.append(
+            "campaign review_target_checks must be unique snake_case names"
+        )
     pin_path = FORMAL / "lean-toolchain"
     if not pin_path.is_file() or pin_path.read_text(encoding="utf-8").strip() != campaign.get("toolchain"):
         result.errors.append("formal/lean-toolchain does not match the campaign pin")
@@ -249,6 +307,97 @@ def validate_campaign_contract(campaign: Dict[str, Any]) -> CheckResult:
         result.errors.append(
             "campaign optional_axiom_names requires optional_obligation_ids"
         )
+
+    dependency_artifacts = campaign.get("dependency_artifacts", [])
+    if not isinstance(dependency_artifacts, list):
+        result.errors.append("campaign dependency_artifacts must be a list")
+        dependency_artifacts = []
+    dependency_ids: List[str] = []
+    for number, item in enumerate(dependency_artifacts, 1):
+        if not isinstance(item, dict):
+            result.errors.append("dependency artifact %d is not an object" % number)
+            continue
+        _required_strings(
+            result, item, ("id", "path", "sha256"),
+            "dependency artifact %d" % number,
+        )
+        identifier = item.get("id")
+        if isinstance(identifier, str):
+            dependency_ids.append(identifier)
+        path = ROOT / str(item.get("path", ""))
+        if not path.is_file():
+            result.errors.append("dependency artifact %d is missing" % number)
+        elif sha256_path(path) != item.get("sha256"):
+            result.errors.append("dependency artifact %d hash drift" % number)
+    if len(dependency_ids) != len(set(dependency_ids)):
+        result.errors.append("dependency artifact ids are not unique")
+
+    verified_dependencies = campaign.get("verified_lean_dependencies", [])
+    if not isinstance(verified_dependencies, list):
+        result.errors.append("campaign verified_lean_dependencies must be a list")
+        verified_dependencies = []
+    for number, item in enumerate(verified_dependencies, 1):
+        label = "verified Lean dependency %d" % number
+        if not isinstance(item, dict):
+            result.errors.append(label + " is not an object")
+            continue
+        _required_strings(
+            result,
+            item,
+            (
+                "campaign_id",
+                "attempt_id",
+                "theorem",
+                "required_theorem_type",
+                "campaign_sha256",
+                "report_path",
+                "report_sha256",
+            ),
+            label,
+        )
+        dependency_campaign_id = item.get("campaign_id")
+        if dependency_campaign_id == campaign.get("id"):
+            result.errors.append(label + " may not point to its own campaign")
+            continue
+        dependency_campaign_file = campaign_path(str(dependency_campaign_id))
+        if not dependency_campaign_file.is_file():
+            result.errors.append(label + " campaign is missing")
+            continue
+        if sha256_path(dependency_campaign_file) != item.get("campaign_sha256"):
+            result.errors.append(label + " campaign hash drift")
+        try:
+            dependency_campaign = load_campaign(str(dependency_campaign_id))
+        except Exception as exc:
+            result.errors.append(label + " campaign is invalid: %s" % exc)
+            continue
+        if dependency_campaign.get("required_theorem_type") != item.get(
+            "required_theorem_type"
+        ):
+            result.errors.append(label + " theorem type mismatch")
+        report_path = ROOT / str(item.get("report_path", ""))
+        if not report_path.is_file():
+            result.errors.append(label + " report is missing")
+            continue
+        if sha256_path(report_path) != item.get("report_sha256"):
+            result.errors.append(label + " report hash drift")
+        try:
+            dependency_report = load_json(report_path)
+        except Exception as exc:
+            result.errors.append(label + " report is invalid: %s" % exc)
+            continue
+        if dependency_report.get("attempt_id") != item.get("attempt_id"):
+            result.errors.append(label + " attempt mismatch")
+        if dependency_report.get("theorem") != item.get("theorem"):
+            result.errors.append(label + " theorem mismatch")
+        try:
+            dependency_status = campaign_status(str(dependency_campaign_id))
+        except Exception as exc:
+            result.errors.append(label + " status failed: %s" % exc)
+        else:
+            if item.get("attempt_id") not in dependency_status.get(
+                "verified_attempts", []
+            ):
+                result.errors.append(label + " attempt is not independently verified")
     return result
 
 
@@ -503,8 +652,8 @@ def check_attempt(
             ) as checked_claim:
                 checked_claim.write(text)
                 checked_claim.write(
-                    "\n#check (_root_.%s : _root_.BMIsFiniteTateSum "
-                    "_root_.exactC66BMTarget)\n" % theorem
+                    "\n#check (_root_.%s : %s)\n"
+                    % (theorem, campaign["required_theorem_type"])
                 )
                 checked_claim_path = Path(checked_claim.name)
             lean_run = subprocess.run(
@@ -816,21 +965,7 @@ def validate_review(
     ):
         result.errors.append("%s does not check every obligation exactly once" % label)
     target_checks = review.get("target_checks")
-    required_target_checks = {
-        "stack_not_coarse",
-        "rational_coefficients",
-        "genus_6",
-        "markings_6",
-        "bm_degree_16",
-        "bm_weight_minus_16",
-        "bm_tate_index_8",
-        "ordinary_degree_26",
-        "ordinary_weight_26",
-        "ordinary_tate_index_minus_13",
-        "dimension_and_twist_21",
-        "zero_rank_allowed",
-        "whole_group_not_proxy",
-    }
+    required_target_checks = set(_review_target_checks(campaign))
     if not isinstance(target_checks, dict) or set(target_checks) != required_target_checks:
         result.errors.append("%s target_checks has the wrong fields" % label)
     elif any(not isinstance(value, bool) for value in target_checks.values()):
@@ -839,6 +974,10 @@ def validate_review(
         value is not True for value in target_checks.values()
     ):
         result.errors.append("%s does not confirm every exact-target field" % label)
+    expected_dependency_hashes = _dependency_hashes(campaign)
+    if expected_dependency_hashes:
+        if review.get("dependency_hashes") != expected_dependency_hashes:
+            result.errors.append("%s dependency_hashes mismatch" % label)
     model_checks = review.get("model_checks")
     required_model_checks = {
         "models_every_claim_axiom",

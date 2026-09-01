@@ -1,0 +1,234 @@
+{
+  "attempt_id": "ATT-0145",
+  "campaign_id": "C66BAR-001",
+  "campaign_revision": 2,
+  "checked_claims": [
+    {
+      "claim_id": "PACKET-AND-TARGET-IDENTITY",
+      "note": "TASK.json, ATT-0145, and this review agree on campaign C66BAR-001 revision 2, subproblem C58-COMPACT, review_pass 1, theorem_statement, the (g,n)=(5,8) target dictionary (d=20, compact degree 16 of type Q(-8), open BM degree 16 of type Q(8) and weight -16, ordinary degree 24 of type Q(-12), Poincare twist 20), packet_id C66BAR-001-v2, packet_sha256 a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191, and packet_binding_sha256 6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54. Independent byte hashing of the packet file was not performed in this read-only review.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-1",
+      "note": "Stable-graph counting: each of the n labelled legs lies on one vertex and each edge contributes one half-edge to each end, so sum_v n_v = n+2|E|. Arithmetic genus gives sum_v g_v = g-b_1 with b_1=|E|-|V|+1. Substituting yields sum_v (2g_v-2+n_v)=2g-2+n. Stack-level, Q-irrelevant combinatorics; no coarse-space identification.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-2",
+      "note": "S:={stable (g',n'): g'<=5 and a(g',n'):=2g'-2+n'<=16} contains (5,8) since a(5,8)=16. One-edge vertices have g_v<=g and, by CLM-0145-1 plus stability a_v>=1, each a_v<=a(g,n)<=16, so S is closed under one-edge vertex types. Dimension drop is d-1 for both the loop (d(g-1,n+2)=d-1) and a separating edge (d1+d2=d-1). RED-0001 members with g>=6 are excluded by g'<=5. The remaining list members (5,8) and (3,12) both have a=16; a vertex with a_v=16 is necessarily the unique vertex, hence the empty graph when g_v=5 and the two-loop graph (b_1=2, n_v=8+4=12) when g_v=3. No other RED-0001 pair lies in S.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-3",
+      "note": "SRC-0002 Eq. (6.1)/THM-0003 is the right-exact sequence of mixed Hodge structures H_k(hat{partial})->H_k(Mbar)->W_{-k}H^{BM}_k(M)->0, scoped to all stable (g,n) and all k. Duality on finite-dimensional Q-MHS reverses arrows and converts right-exactness into left-exactness. For proper DM stacks, H_k(-;Q) is dual to H^k(-;Q), so at k=16 one obtains 0->K(g,n)->H^{16}(Mbar_{g,n};Q)->H^{16}(hat{partial}Mbar_{g,n};Q) with no Gysin shift and no extra Tate twist. hat{partial} is the disjoint union over one-edge graphs of [Mbar_Gamma/Aut(Gamma)] by Knudsen clutching (packet convention); with Q-coefficients H^{16}([Mbar_Gamma/Aut];Q)=H^{16}(Mbar_Gamma;Q)^{Aut}. ATT-0141 (C58-BOUNDARY-001/002, REV-0190/REV-0192) specialises this at (5,8).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-4",
+      "note": "A one-edge graph has Aut acting on a one-element edge set, so det E_Gamma is at worst a sign character chi. For W a finite direct sum of Q(-8), any subspace of (W tensor chi), in particular the invariants (W tensor chi)^A, remains of Hodge type (8,8). This is only an upper bound of Tate type; it does not identify ranks. At (5,8), ATT-0141/REV-0192 give Aut trivial on every separating graph (g1+g2=5 odd, legs labelled) and Aut=S_2 only on [Mbar_{4,10}/S_2]. Homology of a quotient is coinvariants, cohomology is invariants; dual of coinvariants is invariants, so the convention is consistent across (*).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-5",
+      "note": "S forces n<=18 (g=0), n<=12 (g=3), n<=10 (g=4), n<=8 (g=5). Excluding (3,12) and (5,8), THM-0005/SRC-0002 Table 1 and Proposition 4.5 apply on the OPEN stack at every pure-weight degree: genus 0 unrestricted, g=3 with n<=11=c(3), g=4 with n<=10<=11=c(4), g=5 with n<=7=c(5). Thus W_j H^j(M_{g,n};Q) is algebraic of Tate type (zero if j odd). FND-0001 converts this at j=2d-16 into K(g,n)=Q(-8)^{oplus m} by Q(-j/2)(d)^vee=Q(j/2-d) and j/2-d=-8. No use of RED-0001 as a Tate statement, and no widening of c(1) or c(2).",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-6",
+      "note": "For (3,12): d=18, 2d-16=20=vcd(M_{3,12}), n-1=11=c(3). FND-0195 is stated for g>=2, n>=1, k=vcd, Tate range n-1<=c(g) inclusive with c(3)=11 listed, excluding only degree vcd-1 and unpublished c(8); neither exclusion is engaged. Independently rechecked: FND-0197 at g=3,n=12>=2; Harer kills H^{20-|i|}(M_3; tensor R^{i_s}pi_*Q) for |i|<=12 since 20-|i|>=8>vcd(M_3)=7 (the n-uniform identity k-|i|>=4g-4); |i|>=13 on twelve slots in {0,1,2} forces some i_s=2; FND-0196 disposal (1) is Morita vanishing for all g>=2; Phi vanishes because vcd(M_{3,11})=19<20; residual Psi is psi of type Q(-1) times W_{18}H^{18}(M_{3,11};Q), typed Q(-9) by THM-0005/Prop 4.5 at the inclusive endpoint n=11=c(3) on the OPEN stack (CKgP has no degree restriction; the FND-0195 vcd-1 exclusion is about applying the peel at the target). FND-0033 upgrades the subquotient to Q(-10)^{oplus m}. Then Q(-10)(18)^vee=Q(-8). For (5,8) this is ATT-0142 CLM-0138-3/4, double-confirmed by REV-0193 and REV-0194.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-7",
+      "note": "THM-0006 (SRC-0002: 'When g=1, all even cohomology is tautological [26]', scoped even/all n) and THM-0007 (SRC-0002 Corollary 2.7: H^{2k}(Mbar_{2,n})=RH^{2k} for k<=10, all n) apply at degree 16, i.e. k=8<=10. Tautological classes are algebraic of type (p,p); THM-0001 gives purity of weight 16, so the groups are finite direct sums of Q(-8) (empty when 16>2d). This shortcuts genus 1 and 2 entirely, so the published c(1)=c(2)=10 range is never invoked, even though S contains (1,n) up to n=16 and (2,n) up to n=14.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-8",
+      "note": "Kunneth for Q-MHS on a product of two proper stacks: summands with i+j=16 and i,j both odd are the pairs (1,15),(3,13),(5,11),(7,9) and swaps, so min(i,j) is in {1,3,5,7}. SRC-0001 Section 2.4 (notation: Mg,n is the smooth proper stack of stable curves) records H^k(Mbar_{g,n})=0 for odd k<11, all g,n, citing BFP24; SRC-0003 introduction independently records vanishing for odd k<=9, all g,n. The argument only needs k<=7, well inside both statements. In particular H^{11} (which may carry S_{12}) never pairs with a nonzero odd partner in total degree 16. No point count or Serre characteristic is used.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-9",
+      "note": "Induction on d=3g-3+n is well-founded. Base d<=7: 16>2d so H^{16}=0. For g in {1,2} apply CLM-0145-7. Otherwise CLM-0145-5/6 type K; CLM-0145-2 puts every one-edge factor in S at dimension d-1; Step 6 types H^{16}(Mbar_Gamma) by IH on the (16,0) and (0,16) Kunneth slots, THM-0002 (SRC-0002 Theorem 1.5(3): H^k(Mbar) congruent to Q(-k/2) for even k<=14, all g,n) on even slots with 2<=i,j<=14, and CLM-0145-8 on odd-odd slots; CLM-0145-4 preserves Tate type under Aut/det. Sequence (*) realises H^{16}(Mbar) as an extension of a subobject of a Q(-8) sum by a Q(-8) sum. THM-0001: Mbar and hat{partial} (disjoint union of smooth proper stack quotients) have H^{16} pure of weight 16. FND-0033: polarizable pure Q-HS of a fixed weight are semisimple, so the subobject is Q(-8)^{oplus} and the extension splits as an actual Hodge-structure isomorphism, not merely a semisimplification.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-10",
+      "note": "Specialise CLM-0145-9 at (5,8) in S with d=20. Kernel of (*) is K(5,8), typed Q(-8)^{oplus} by ATT-0142. The target is H^{16} of the ATT-0141 components [Mbar_{4,10}/S_2] and separating products with g1+g2=5, n1+n2=10, all in S at dimension 19 and covered by the Proposition, THM-0002, and odd vanishing; maximal types (4,10),(5,7),(3,9) are handled by THM-0005 (10<=c(4), 7=c(5), 9<=c(3)) plus their own boundary induction, which is where (3,12) enters as the non-separating divisor of Mbar_{4,10} and is discharged by CLM-0145-6. Poincare on the smooth proper 20-fold: H^{16}=Q(-8)^{oplus b} iff H_{16}=Q(8)^{oplus b} iff H^{24} congruent to Hom(H^{16},Q(-20))=Q(-12)^{oplus b}. Rank b>=0 is admitted; no tautological-generation or algebraic-cycle upgrade of H^{16}(Mbar_{5,8}) is claimed.",
+      "verdict": "confirmed"
+    },
+    {
+      "claim_id": "CLM-0145-11",
+      "note": "Verified by exhaustion: (6,6) appears only as a negative scope statement. The induction closes at (5,8) because S meets RED-0001 only in (5,8) and (3,12); the analogous reachable set for (6,6) contains (6,6) itself. No campaign boundary-image assertion, no re-proof of ATT-0136, no H^{16}(Mbar_{6,6}) claim, and no CONJ-0001.",
+      "verdict": "confirmed"
+    }
+  ],
+  "context_revision": 2,
+  "created_on": "2026-09-01",
+  "finding_candidates": [
+    {
+      "case": {
+        "g": 5,
+        "n": 8
+      },
+      "impacts_approach_ids": [
+        "C58-COMPACT"
+      ],
+      "key": "c58-compact-marking-budget-closes-red0001-at-two-pairs",
+      "kind": "structural",
+      "reusable": true,
+      "statement": "For a stable graph of type (g,n), sum over vertices of a(g_v,n_v):=2g_v-2+n_v equals a(g,n). Consequently the set S of stable pairs with g'<=5 and a(g',n')<=16 is closed under passing to vertex types of one-edge graphs, each such factor has dimension one less, and S meets the RED-0001 list exactly in (5,8) (the empty graph) and (3,12) (the unique vertex of a two-loop graph, equivalently the non-separating divisor of Mbar_{4,10}). Compact H^{16} on S can therefore be assembled from THM-0003, published CKgP on every other open corner, the verified (5,8) open residual, and a single FND-0195 evaluation at (3,12); the informal slogan that the boundary of Mbar_{5,8} lies outside RED-0001 is not used and is false beyond codimension one.",
+      "supports_finding_id": null
+    },
+    {
+      "impacts_approach_ids": [
+        "C58-COMPACT",
+        "C66BAR-SEP"
+      ],
+      "key": "h16-product-kunneth-odd-odd-killed-by-degree-7",
+      "kind": "structural",
+      "reusable": true,
+      "scope": {
+        "coefficients": "Q",
+        "degree": 16,
+        "objects": [
+          "Kunneth decomposition of H^{16} of a product of two Mbar factors",
+          "odd cohomology of Mbar_{g,n}"
+        ]
+      },
+      "statement": "In the Kunneth decomposition of H^{16}(Mbar_{g1,n1} x Mbar_{g2,n2};Q), every summand with both degrees odd has min(i,j) in {1,3,5,7}. Vanishing of H^k(Mbar_{g,n};Q) for odd k<=7, all g,n (BFP24, recorded in SRC-0001 Section 2.4 and SRC-0003), therefore kills every odd-odd term. In particular a copy of S_{12} in H^{11} cannot contribute to a product in total degree 16, because its complementary factor would have to be H^5=0. No point count, Serre characteristic, or vanishing in degrees 9,11,13,15 is required for this parity separation.",
+      "supports_finding_id": null
+    }
+  ],
+  "id": "REV-0197",
+  "independent": true,
+  "packet_binding_sha256": "6a765b58376ddfd3446271493007689a0f0aa98ecd4931dc4ae2eabb6610db54",
+  "packet_id": "C66BAR-001-v2",
+  "packet_sha256": "a898256aaf8511a3d1cb2fcd8b257b2280656f698053d628ac21d697ef9bd191",
+  "proof_dependency_checks": [
+    {
+      "dependency_id": "ATT-0142",
+      "note": "Listed proof dependency. Theorem used verbatim: W_{-16}H^{BM}_{16}(M_{5,8};Q) is a finite direct sum of Q(8) (CLM-0138-1, CLM-0138-3, CLM-0138-4). Double-confirmed by REV-0193 and REV-0194. Supplies K(5,8)=Q(-8)^{oplus} and is not re-proved.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "ATT-0141",
+      "note": "Listed proof dependency. Used verbatim for the one-edge decomposition of hat{partial}Mbar_{5,8}: non-separating [Mbar_{4,10}/S_2], separating atlases Mbar_{g1,n1}x Mbar_{g2,n2} with g1+g2=5, n1+n2=10, Aut trivial on separating graphs, and no divisorial factor in RED-0001 (C58-BOUNDARY-001 through 004). Double-confirmed by REV-0190 and REV-0192. The proof respects REV-0192's scope limit (divisorial only; (3,12) appears at codimension two) and never treats 'outside RED-0001' as a Tate input.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0001",
+      "note": "Purity of H^{16} of the smooth proper stacks Mbar_{g,n} and of each [Mbar_Gamma/Aut(Gamma)]. Load-bearing for the semisimple extension split in Step 7.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0002",
+      "note": "SRC-0002 Theorem 1.5(3) and the implication H^k(Mbar) congruent to Q(-k/2) for even k<=14, all g,n. Load-bearing for Kunneth slots with 2<=i,j<=14 even. Not applied at degree 16.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0003",
+      "note": "SRC-0002 Eq. (6.1), scoped to all g,n and all degrees. Load-bearing as the sequence being dualised at k=16. Ordinary homology of hat{partial}, not a Gysin/weight-spectral-sequence term, so no determinant-edge or codimension shift enters the exactness claim.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0005",
+      "note": "SRC-0002 Table 1 and Proposition 4.5, object open M, all pure-weight pieces, n<=c(g) with c(3)=c(4)=11, c(5)=7, genus 0 unrestricted. Applied only inside those bounds: every (g,n) in S with g in {0,3,4,5} other than (3,12) and (5,8), and the (3,11) source of the (3,12) peel. Never applied at n=8 for g=5, never on Mbar, never with unpublished c(8) or with c(1),c(2).",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0006",
+      "note": "All even cohomology of Mbar_{1,n} tautological, all n. Load-bearing shortcut for compact H^{16} in genus 1, which keeps the induction out of the n<=10 CKgP range in genus 1.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "THM-0007",
+      "note": "SRC-0002 Corollary 2.7: H^{2k}(Mbar_{2,n})=RH^{2k} for k<=10, all n. Applied at k=8. Load-bearing genus-2 shortcut.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0001",
+      "note": "Mechanically verified for all cases. Converts W_{-16}H^{BM}_{16} into W_{2d-16}H^{2d-16}(d). Twist arithmetic at every pair in S, including (5,8) with d=20 and (3,12) with d=18, was re-derived.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0195",
+      "note": "Load-bearing at (3,12): g=3>=2, n=12>=1, k=vcd=20, n-1=11=c(3) inclusive, exclusions untriggered. The corroborated statement already concludes a finite direct sum of Q(-vcd/2); internals were rechecked rather than taken on trust. Campaign_case (6,6) is an instance, not a restriction; the statement names c(3)=11.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0196",
+      "note": "Used only inside the (3,12) peel recheck, for the slot-1 cross term. Disposal (1) is Morita vanishing for all g>=2, hence at g=3. Not used as a fibre-restriction slogan, and not used on the punctured forgetful map.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0197",
+      "note": "Used only inside the (3,12) peel recheck, and only in the surjection direction W_k H^k(C^{12})->>W_k H^k(M_{3,12}) at n=12>=2. Kernel, diagonal Gysin, Schur-Weyl, and Kunneth of the non-proper punctured map are not used, matching the finding's excludes.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0033",
+      "note": "Semisimplicity of polarizable pure Q-HS of a fixed weight, used at weight 16 for the extension split in Step 7 and inside the (3,12) peel. Recorded case (6,6) is an instance of the general abelian-category fact; purity of H^{16}(Mbar) and of W_{20}H^{20}(M_{3,12}) supplies polarizability. No exotic-extension gap remains.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0031",
+      "note": "Used only as a negative constraint: the argument runs compact groups from strictly smaller open corners plus the imported (5,8) open residual, the opposite direction from the m=0 circularity. Confirmed as a respected non-load-bearing guardrail.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0032",
+      "note": "Used only as a negative constraint: no CGP/tropical/graph-complex input. Confirmed as unused for the positive argument.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "FND-0035",
+      "note": "Used only as a negative constraint. The argument never infers vanishing from 2d-16=vcd at (3,12) or (5,8). The only above-vcd vanishings are strict and auxiliary inside the (3,12) peel (20>19, 8>7) and inside ATT-0142. Confirmed as a respected guardrail.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "RED-0001",
+      "note": "Used only as the fixed seven-element list, exactly as ATT-0141 used it. No Tate, purity, or motivic content of the reduction is invoked.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0001",
+      "note": "Load-bearing for odd vanishing: Section 2.4 'Odd examples' states H^k(Mbar_{g,n})=0 for odd k<11, all g,n, citing BFP24. Notation check: SRC-0001 p.1 declares Mg,n the smooth proper stack of stable curves. Also supplies THM-0001 purity.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0002",
+      "note": "Load-bearing for Eq. (6.1), Theorem 1.5(3), Table 1, Proposition 4.5, Corollary 2.7, and the genus-one even tautological citation. No Chenevier-Lannes prediction is used as a theorem; degree 16 remains the open prediction that this lemma settles only at (5,8) compact.",
+      "verdict": "confirmed"
+    },
+    {
+      "dependency_id": "SRC-0003",
+      "note": "Load-bearing independently for odd vanishing: introduction records H^k(Mbar_{g,n})=0 for odd k<=9, all g,n. The Kunneth step only needs k<=7.",
+      "verdict": "confirmed"
+    }
+  ],
+  "review_pass": 1,
+  "review_task_id": "TASK-V-ATT-0145-P1",
+  "reviewer_engine": "grok",
+  "schema_version": 3,
+  "strongest_attack": "The strongest attack is that the induction is not a one-edge argument on Mbar_{5,8} at all: H^{16}(Mbar_{5,8}) requires H^{16}(Mbar_{4,10}), whose non-separating divisor is Mbar_{3,12}, and (3,12) is itself a RED-0001 residual pair. Typing K(3,12) is then a zero-slack FND-0195 instance (n-1=11=c(3), k=vcd=20=2d-16), with all Hodge type carried by the single CKgP evaluation W_{18}H^{18}(M_{3,11};Q)=Q(-9)^a on the OPEN stack; every other peel vanishing has slack of one (20>19, 8>7). This is the same single point of failure as ATT-0142 at (5,8) and FND-0195 at (6,6), and it is exactly the depth-two phenomenon that makes the informal plan step 'the boundary of Mbar_{5,8} lies outside RED-0001' false beyond codimension one. The attack was pressed and fails. FND-0195 is corroborated for g>=2, n>=1, k=vcd, with the inclusive published table that names c(3)=11; neither listed exclusion (degree vcd-1, unpublished c(8)) is engaged; the internals were re-derived at (3,12) rather than imported from the (6,6) or (5,8) arithmetic; THM-0005/Prop 4.5 types every W_k H^k of open M_{3,11} with no degree restriction, so the source degree 18=vcd(M_{3,11})-1 is irrelevant to CKgP. The argument never uses 'outside RED-0001' as a Tate hypothesis: (3,12) is met head-on, and every other K on S is typed by THM-0005 inside n<=c(g) or by ATT-0142. Secondary attacks, all of which failed. (1) Dualizing THM-0003 might smuggle a Gysin shift or det-E twist: Eq. (6.1) is ordinary homology of hat{partial}, so dualisation is restriction H^{16}(Mbar)->H^{16}(hat{partial}) with no twist; det-E is a graph-complex/weight-spectral-sequence decoration, and even if imposed it is at worst a sign character on a one-edge graph whose invariants cannot enlarge Hodge type. (2) Odd-odd Kunneth could carry S_{12} from H^{11} tensor H^5: min(i,j)<=7, and BFP24 vanishing on compact Mbar (SRC-0001 Section 2.4, SRC-0003; notation Mg,n = stable-curve stack) kills the smaller factor. (3) Genus 1 and 2 in S overflow c(1)=c(2)=10: they are not routed through K at all, but through THM-0006 (all even degrees, all n) and THM-0007 at k=8<=10. (4) Semisimplification versus isomorphism: all three terms of (*) are polarizable pure of weight 16, so FND-0033 makes the extension an honest split as Q(-8) sums. (5) Stack versus coarse and Q versus Z: all identifications are stack-level with Q-coefficients; H^*([X/G];Q)=H^*(X)^G, and invariants equal coinvariants rationally. (6) Pure Tate upgraded to algebraic or tautological generation of H^{16}(Mbar_{5,8}): the theorem asserts only Tate type; tautological generation is used only as a stronger input from THM-0006/0007/0002 to deduce type (8,8). (7) Predicted motives used as theorems: none; algebraicity enters only through CKgP or tautological spanning. (8) Omitted stable pairs: S is closed under one-edge vertex types and contains every separating type with g1+g2=g and n1+n2=n+2 subject to stability; pairs with g>=6 are excluded by the genus bound. (9) Forbidden at-vcd vanishing and CGP top-weight: not used. (10) Punctured-curve mixed R^1 (FND-0020/FND-0037): the only Leray input is the closed universal curve inside FND-0195. Confirming this lemma does not verify the campaign boundary-image theorem, H^{16}(Mbar_{6,6}), or CONJ-0001.",
+  "subproblem_id": "C58-COMPACT",
+  "target": {
+    "chow_codimension": 12,
+    "compact_cohomology_degree": 16,
+    "compact_tate_type": "Q(-8)",
+    "dimension": 20,
+    "g": 5,
+    "n": 8,
+    "open_bm_degree": 16,
+    "open_bm_tate_type": "Q(8)",
+    "open_bm_weight": -16,
+    "ordinary_cohomology_degree": 24,
+    "ordinary_tate_type": "Q(-12)",
+    "ordinary_weight": 24,
+    "poincare_twist": 20
+  },
+  "theorem_statement": "Using a verified C58-OPEN residual and a verified C58-BOUNDARY accounting, apply the boundary right-exact sequence of THM-0003 to conclude that H^{16}(Mbar_{5,8};Q) is a finite direct sum of Q(-8). A disproof must exhibit a surviving non-Tate summand in this compact group. This theorem does not conclude the campaign boundary-image theorem.",
+  "verdict": "confirmed"
+}

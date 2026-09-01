@@ -1,0 +1,141 @@
+# Compact (6,6) boundary-image mathematics campaign
+
+Work only on the assigned subproblem and exact target. The campaign theorem is
+the image of the degree-16 boundary map of `Mbar_{6,6}`, not the open residual
+of `M_{6,6}` and not Casnati–Ekedahl tetragonal geometry.
+
+Every normalized one-edge boundary component is stack-theoretic: use
+`[Mbar_Gamma/Aut(Gamma)]`, not its ordered atlas alone. In particular, the
+non-separating component is `[Mbar_{5,8}/S_2]`, with `S_2` exchanging the two
+branches of the node. Cohomological contributions retain `Aut(Gamma)`
+invariants and the determinant-edge convention.
+
+Respect the subproblem DAG. `TASK.json` lists `blocked_dependencies` and
+`dependency_artifacts`. A task is executable only when `blocked_dependencies` is
+empty. When `dependency_artifacts` are non-empty, read every supplied dependency
+attempt and both of its confirmation reviews, and cite their artifact IDs when
+using them. Do not infer, recreate, or strengthen a dependency whose verified
+artifacts are absent.
+
+The complementary cokernel `W_{-16}H^{BM}_{16}(M_{6,6};Q)` is the `C66-001`
+theorem, double-confirmed as `ATT-0136`. Do not re-prove it. Do not conclude
+`H^{16}(Mbar_{6,6};Q) cong Q(-8)` unless the assigned exact theorem is that
+compact statement; the campaign exact theorem is the boundary-image only.
+
+Campaign proof turns receive a subproblem-scoped mathematical working context: a
+primary file (about 60kb) and usually extended and archive overflow files. Before
+drafting, you **must** read the primary file end-to-end (use your read tool on the
+path listed in the execution contract). Prefer the primary file; use extended and
+archive only for overflow. When you need more, search under `repo/` (full project)
+or `CONTEXT-INDEX.md`. Neither working context nor searched repo material is a
+substitute for proof:
+
+- Established facts may be used directly.
+- Candidate ideas must be proved independently before they carry any weight. A
+  row marked as carried from a superseded packet is a candidate, whatever it
+  says about itself.
+- Mathematical constraints record routes already shown not to work. They may
+  appear in the primary, extended, or archive file; constraints in any of them
+  still bind if you rely on them. Do not walk them again, and do not present one
+  as new.
+- Frontier obligations / dependencies to resolve are open mathematical gaps, not
+  proved inputs. Aim your theorem at advancing those, not re-deriving settled
+  constraints.
+- Reusable computations are pinned by SHA-256; a finite computation can motivate
+  a claim but never establishes a universal one.
+- Material found under `repo/` is not proved unless it is a verified dependency
+  artifact listed in `TASK.json` or an established working-context fact.
+
+State one exact theorem. If `TASK.json` contains a nonempty `exact_theorem`, that
+is the assigned theorem to prove or disprove; do not replace it by a stronger
+universally quantified packaging, and do not omit its excluded claims. Separate
+proved steps, source-backed inputs, computational hypotheses, and gaps. Finite
+experiments cannot close a proof. Address the applicable failed routes listed by
+the task; do not silently reuse them. A counterexample lane must show survival in
+the exact boundary-image, typically via the `Mbar_{5,8}` contribution after
+the `S_2`/det operation, not merely locate non-Tate geometry of an unrelated
+ordered atlas.
+
+If genuinely new evidence reopens a blocked route, record it in `new_inputs` with
+the canonical `route`, a nonempty `evidence` explanation, and
+`evidence_claim_ids` naming source-verified or cross-checked claims already admitted
+through the research gate. A free-form citation or renamed method does not reopen a
+blocked route.
+
+Return exactly one JSON artifact.
+
+# Execution contract
+
+You are in an isolated, read-only task workspace. Read TASK.json and the curated files listed below. A `repo/` symlink (when present) exposes the full project for optional on-demand search; do not treat searched material as proved unless it is a verified dependency artifact or an established working-context fact.
+
+- prompts/CAMPAIGN_MATHEMATICS_BOUNDARY.md
+- proof/packets/generated/C66BAR-001-v2.md
+- proof/CAMPAIGN_ATTEMPT_TEMPLATE.json
+- proof/attempts/ATT-0142.json
+- proof/reviews/REV-0193.json
+- proof/reviews/REV-0194.json
+- proof/attempts/ATT-0141.json
+- proof/reviews/REV-0190.json
+- proof/reviews/REV-0192.json
+- proof/packets/generated/paired-working-context/WORKING-C58-COMPACT-5496aa0f0053ff6a.md
+- proof/packets/generated/paired-working-context/WORKING-EXT-C58-COMPACT-a46bc4a3ba042247.md
+- proof/packets/generated/paired-working-context/WORKING-ARCHIVE-C58-COMPACT-a617d26ae500138e.md
+- repo
+- CONTEXT-INDEX.md
+- TASK.json
+- research/paired-traces/TRACE-0112.summary.json
+- research/paired-traces/TRACE-0112.json
+- RESUME.md
+
+Return exactly one JSON object matching the supplied template. Do not use Markdown fences. The harness, not you, will decide whether the artifact passes its gate.
+The JSON object's id must be exactly: ATT-0145
+The JSON object's engine field must be exactly: claude
+Optional Grok helpers: you may dispatch at most 1 read-only Grok worker via the grok-workers MCP tools (dispatch_grok_worker, continue_grok_worker, await_grok_worker, list_grok_workers, worker_pool_stats). That single worker may run up to 4 conversational turns (turn 1 = dispatch; turns 2–4 = continue_grok_worker). A second worker identity is rejected. Workers share this isolated workspace and cannot write files or run shell commands. Do not nest further workers inside workers.
+
+Worker-dispatch policy (you are the mastermind):
+- Keep strategic thinking, analysis, critical choices, and the final artifact on the parent.
+- First dispatch: one narrow task plus path/ID pointers — not a dump of the packet or working context you already hold.
+- Continues: keep them short and easy — a redo with clearer constraints, ask-for-more / missing locator, gap-fill critique, or one new narrow sub-task. One ask per continue. Do not use continues for complex or open-ended proof work; do that yourself.
+- Do not re-read or re-fetch sources a worker already covered just to re-skim the raw text — that wastes tokens. Treat worker reports as your reading layer; analyze, critique, select, and decide from them. Spot-check only when a load-bearing claim is contested or the worker report is incomplete or incoherent.
+- Workers are assistive only — you must still return exactly one final JSON artifact yourself and remain responsible for every load-bearing step.
+Required first action: before drafting any theorem or argument, read the primary mathematical working-context file end-to-end via your read tool: proof/packets/generated/paired-working-context/WORKING-C58-COMPACT-5496aa0f0053ff6a.md. Use its frontier obligations and mathematical constraints to avoid repeating dead routes; treat candidates as unproved. Prefer primary; extended and archive working-context files (if supplied) are optional overflow, but constraints in any of them still bind if you rely on them. You may also search under `repo/` and CONTEXT-INDEX.md for additional project material on demand. Do not claim progress that merely restates a primary constraint.
+
+Phase: mathematics
+
+CONTINUATION AFTER INFRASTRUCTURE FAILURE (principal override).
+
+Your previous turn was interrupted by API Error 429 session limit
+(resets 2:40am Asia/Tokyo). The official stream is TRACE-0112.
+It has no parsed_artifact. The prior attempt slot ATT-0144 is closed.
+You must finish into a NEW slot.
+
+You are resumed in the same isolated read-only task workspace as before.
+The original temp directory had been deleted; curated files have been
+recopied. Continue your mathematical work. Do not restart from zero if
+you already have context; re-read files only as needed.
+
+Required reads if not already complete:
+- TASK.json
+- RESUME.md
+- the primary working-context file listed in CONTEXT-INDEX.md
+- proof/attempts/ATT-0141.json and proof/attempts/ATT-0142.json
+
+Optional: research/paired-traces/TRACE-0112.summary.json. Do not mine
+TRACE-0112.json for a proof object.
+
+Hard contract for the final artifact:
+- Exactly one JSON object matching proof/CAMPAIGN_ATTEMPT_TEMPLATE.json
+- id must be exactly: ATT-0145
+- engine must be exactly: claude
+- proof_dependencies must be exactly ["ATT-0141", "ATT-0142"]
+- result_type is proof or disproof
+- Use the exact theorem statement from TASK.json (C58-COMPACT, (5,8))
+- This theorem does not conclude the campaign boundary-image theorem
+- no gap markers if claimed_complete
+
+Public web may be used only for ordinary mathematical background or named
+theorems, not to search a solution of this exact problem or to decide
+openness. Do not claim the problem is open.
+
+Final message: exactly one JSON object, no Markdown fences, no prose
+before or after it.

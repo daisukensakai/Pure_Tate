@@ -245,6 +245,67 @@ class LeanCampaignTests(unittest.TestCase):
                 result, _report = lean_campaign.check_attempt("LATT-0001")
             self.assertTrue(any("failed elaboration" in error for error in result.errors))
 
+    def test_campaign_required_theorem_type_controls_the_lean_check(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = self._fixture(temporary)
+            root, formal, campaigns, attempts, reviews, _directory, campaign = fixture
+            campaign["required_theorem_type"] = "False"
+            self._write_json(campaigns / "LC66-001.json", campaign)
+            with self._patches(root, formal, campaigns, attempts, reviews):
+                result, _report = lean_campaign.check_attempt("LATT-0001")
+            self.assertTrue(any("failed elaboration" in error for error in result.errors))
+
+    def test_campaign_rejects_unsafe_required_theorem_type(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = self._fixture(temporary)
+            root, formal, campaigns, attempts, reviews, _directory, campaign = fixture
+            campaign["required_theorem_type"] = "True); #check False; (True"
+            self._write_json(campaigns / "LC66-001.json", campaign)
+            with self._patches(root, formal, campaigns, attempts, reviews):
+                result = lean_campaign.validate_campaign_contract(campaign)
+            self.assertTrue(any("safe simple Lean type" in error for error in result.errors))
+
+    def test_dependency_artifact_hash_drift_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = self._fixture(temporary)
+            root, formal, campaigns, attempts, reviews, _directory, campaign = fixture
+            campaign["dependency_artifacts"] = [
+                {
+                    "id": "source-proof",
+                    "path": "proof/attempts/ATT-0135.json",
+                    "sha256": "0" * 64,
+                }
+            ]
+            with self._patches(root, formal, campaigns, attempts, reviews):
+                result = lean_campaign.validate_campaign_contract(campaign)
+            self.assertTrue(any("dependency artifact 1 hash drift" in error for error in result.errors))
+
+    def test_unreviewed_lean_dependency_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = self._fixture(temporary)
+            root, formal, campaigns, attempts, reviews, directory, campaign = fixture
+            with self._patches(root, formal, campaigns, attempts, reviews):
+                check, report = lean_campaign.check_attempt("LATT-0001", write=True)
+                self.assertTrue(check.ok)
+                campaign["verified_lean_dependencies"] = [
+                    {
+                        "campaign_id": "LC66-001",
+                        "attempt_id": "LATT-0001",
+                        "theorem": "exactTarget",
+                        "required_theorem_type": "BMIsFiniteTateSum exactC66BMTarget",
+                        "campaign_sha256": hashlib.sha256(
+                            (campaigns / "LC66-001.json").read_bytes()
+                        ).hexdigest(),
+                        "report_path": str((directory / "report.json").relative_to(root)),
+                        "report_sha256": hashlib.sha256(
+                            (directory / "report.json").read_bytes()
+                        ).hexdigest(),
+                    }
+                ]
+                campaign["id"] = "LC66C-001"
+                result = lean_campaign.validate_campaign_contract(campaign)
+            self.assertTrue(any("not independently verified" in error for error in result.errors))
+
     def test_audit_fails_closed_after_an_unreviewed_attempt_exists(self):
         with tempfile.TemporaryDirectory() as temporary:
             fixture = self._fixture(temporary)

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "id": "ATT-0147",
+  "status": "claimed_complete",
+  "campaign_id": "C66-COMPACT-ASSEMBLY",
+  "task_id": "TASK-C66-COMPACT-ASSEMBLY",
+  "subproblem_id": "C66-COMPACT-H16",
+  "engine": "human-curated-assembly",
+  "result_type": "proof",
+  "theorem_statement": "For the complex Deligne-Mumford stack of stable genus-six curves with six ordered markings and rational coefficients, H^{16}(Mbar_{6,6};Q) is a finite direct sum of Q(-8), with rank zero allowed. Equivalently, if b_16 is its rational dimension, then H^{16}(Mbar_{6,6};Q) is isomorphic to Q(-8)^{oplus b_16} as a polarizable rational Hodge structure. No integral, coarse-moduli, algebraic-generation, tautological-generation, or Betti-number formula is asserted.",
+  "summary": "The right-exact boundary sequence has boundary image equal to the kernel of the compact-to-open map. ATT-0146 makes that image a finite Q(8)-sum and ATT-0136 makes the open Borel-Moore quotient a finite Q(8)-sum. Smooth proper purity and semisimplicity split the resulting short exact sequence, so compact homology in degree sixteen is a finite Q(8)-sum. Proper rational duality gives the asserted Q(-8)-type for compact cohomology in the same degree.",
+  "source_ids": [
+    "THM-0001",
+    "THM-0003",
+    "FND-0033"
+  ],
+  "proof_dependencies": [
+    "ATT-0136",
+    "REV-0187",
+    "REV-0188",
+    "ATT-0146",
+    "REV-0199",
+    "REV-0200"
+  ],
+  "claims": [
+    {
+      "id": "CLM-0147-1",
+      "status": "proved",
+      "statement": "The exact open quotient W_{-16}H^{BM}_{16}(M_{6,6};Q) is a finite direct sum of Q(8), with rank zero allowed.",
+      "justification": "This is exactly ATT-0136, independently confirmed by REV-0187 and REV-0188, and is the theorem targeted by Lean campaign LC66-002."
+    },
+    {
+      "id": "CLM-0147-2",
+      "status": "proved",
+      "statement": "The image of H_{16}(hat{partial}Mbar_{6,6};Q) in H_{16}(Mbar_{6,6};Q) is a finite direct sum of Q(8), with rank zero allowed, and the proper pushforward has no Gysin degree shift or extra Tate twist.",
+      "justification": "This is exactly ATT-0146, independently confirmed by REV-0199 and REV-0200."
+    },
+    {
+      "id": "CLM-0147-3",
+      "status": "proved",
+      "statement": "Specializing THM-0003 to (g,n,k)=(6,6,16), right exactness gives a short exact sequence 0 -> im(nu_*) -> H_{16}(Mbar_{6,6};Q) -> W_{-16}H^{BM}_{16}(M_{6,6};Q) -> 0 in rational mixed Hodge structures; the boundary image is the kernel and the open term is the quotient.",
+      "justification": "Exactness at compact homology identifies the kernel with the image, and right exactness makes the compact-to-open map surjective. No regular-embedding or cohomological Gysin reinterpretation is used."
+    },
+    {
+      "id": "CLM-0147-4",
+      "status": "proved",
+      "statement": "H_{16}(Mbar_{6,6};Q) is a pure polarizable rational Hodge structure of weight -16.",
+      "justification": "Mbar_{6,6} is a smooth proper complex Deligne-Mumford stack, so H^{16} is pure polarizable of weight 16 by THM-0001, and rational Hodge duality gives the stated homological form."
+    },
+    {
+      "id": "CLM-0147-5",
+      "status": "proved",
+      "statement": "A short exact sequence whose subobject and quotient are finite direct sums of Q(8), and whose middle object is pure polarizable of weight -16, has middle object isomorphic to a finite direct sum of Q(8). Applied to CLM-0147-1 through CLM-0147-4, H_{16}(Mbar_{6,6};Q) is a finite direct sum of Q(8).",
+      "justification": "Polarizable pure rational Hodge structures of fixed weight are semisimple (FND-0033); the extension splits, and direct sums add."
+    },
+    {
+      "id": "CLM-0147-6",
+      "status": "proved",
+      "statement": "Proper rational homology-cohomology duality identifies H_{16}(Mbar_{6,6};Q) with H^{16}(Mbar_{6,6};Q)^vee, with no degree shift. Dualizing Q(8) gives Q(-8), hence the whole compact cohomology group H^{16}(Mbar_{6,6};Q) is a finite direct sum of Q(-8), with unspecified finite rank and rank zero allowed.",
+      "justification": "For a proper complex Deligne-Mumford stack, ordinary homology is the rational Hodge dual of ordinary cohomology in the same degree. This is not the dimension-21 Poincare-duality formula used for the open Borel-Moore term."
+    }
+  ],
+  "gap_markers": [],
+  "failed_approaches_addressed": [
+    "Do not replace proper same-degree duality by the open dimension-21 Borel-Moore Poincare twist.",
+    "Do not insert a codimension-one Gysin shift into the finite boundary pushforward.",
+    "Do not identify the boundary source with its image or the open quotient with the compact middle object.",
+    "Do not infer algebraic or tautological generation from Hodge-Tate type."
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  }
+}

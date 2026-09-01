@@ -1,0 +1,3175 @@
+===== PAGE 1 =====
+arXiv:2211.16061v1  [math.AG]  29 Nov 2022
+AN ALGORITHM TO COMPUTE THE FUNDAMENT AL CLASSES
+OF SPIN COMPONENTS OF STRA T A OF DIFFERENTIALS
+YIU MAN WONG
+Abstract. We construct an algorithm for computing the cycle classes of the spin
+components of a stratum of diﬀerentials in the moduli space o f stable curves Mg,n. In
+addition, we implement it within the Sage package admcycles. Our main strategy is
+to reconstruct these cycles by their restrictions to the bou ndary of Mg,n via clutching
+maps. These restrictions can be computed recursively by sma ller dimensional spin
+classes and determine the original class via a certain syste m of linear equations. To
+study the spin parities on the boundary of a stratum of diﬀere ntials of even type, we
+make use of the moduli space of multi-scale diﬀerentials int roduced in [BCGGM19].
+As an application of our algorithm, one can verify a conjectu re on spin double
+ramiﬁcation cycles stated in [CSS21] in many examples, by us ing the results computed
+by our algorithm.
+Contents
+1. Introduction 1
+2. Background 7
+3. Prong-matching and spin parity of a welded surface 13
+4. Vanishing of the rational cohomology of Mg, 2 at v.c.d. 17
+5. Preparatory material for the computation of spin stratum classes 22
+6. The algorithm to compute the spin stratum classes 35
+7. Conjectural formula of the spin twisted DR cycle 42
+Appendix A. Examples and Sage commands 45
+Appendix B. Computation Results of [
+Hg(µ )]spin ∈ RH∗(Mg,n ) 52
+References 54
+1. Introduction
+Let PΩMg,n (µ ) be a (projectivized) moduli space of diﬀerentials with labe lled sin-
+gularities of orders prescribed by an integer partition µ = (m1,...,m n) ∈ Zn of 2g − 2.
+For brevity, we will call the space PΩMg,n (µ ) a stratum of diﬀerentials and the
+partitionµ a signature. The space PΩMg,n (µ ) parametrizes pairs
+(
+(C,p 1,...,p n), [ω ]
+)
+,
+where (C,p 1,...,p n) is a genus g Riemann surface with n marked points while [ω ] is the
+scaling equivalence class of a diﬀerential ω whose divisor is ∑n
+i=1mipi. A (projectivized)
+Research of the author is supported by the DFG-project MO 188 4/2-1 and the Collaborative Re-
+search Centre TRR 326 “Geometry and Arithmetic of Uniformiz ed Structures”.
+1
+
+===== PAGE 2 =====
+2 YIU MAN WONG
+stratum PΩMg,n (µ ) can be embedded into Mg,n and we denote the image and its clo-
+sure in Mg,n by Hg(µ ) resp. Hg(µ ). The space Hg(µ ) is called the Deligne-Mumford
+compactiﬁcation of a (projectivized) stratum of diﬀerentia ls. Since Hg(µ ) is a closed
+substack of Mg,n , it induces a cycle class [ Hg(µ )] ∈ H∗(Mg,n, Q). The deﬁnitions of
+strata of diﬀerentials and the Deligne-Mumford compactiﬁca tion can be extended to
+k-diﬀerentials. For a given signature µ = (m1,...,m n), where ∑
+imi =k(2g − 2), we de-
+note the embedding of a (projectiviezed) stratum of k-diﬀerentials of type µ into Mg,n
+and its closure in Mg,n by Hk
+g (µ ) resp. H
+k
+g(µ ). The computation of the cycle classes
+[
+H
+k
+g (µ )] in CH ∗(
+Mg,n, Q) or H ∗(M, Q) is a problem that has been recently solved (cf.
+[Sau19], [Sch16], [HS21], [BHPSS20]).
+The complete classiﬁcation of connected components of a str atum of 1-diﬀerentials
+can be found in [KZ03] and [Boi15]. On the other hand, the prob lem of classifying
+the connected components for strata of k-diﬀerentials is still not completely solved (cf.
+[CG21]). An important invariant of a stratum of k-diﬀerentials is the spin parity
+which will be recalled in Section 2.1. In general, if k is odd and µ is of even type ,
+i.e. the integers m1,..,m n are all even, then the connected components of a stratum of
+k-diﬀerentials of type µ can be partitioned into two non-empty sets according to spin
+parities. Throughout this paper, if there is an object O that admits spin parities, then
+the spin components of it will be denoted by O+ resp. O− . By taking into account
+the spin components of a stratum of diﬀerentials, one can spli t the computation of
+algebro-geometric invariants of a stratum into two compone nts according to the spin
+parity. For instance, the formulae of Masur-Veech volumes o f the spin components of a
+stratum have been derived in [CMSZ20]; the formulae of the in tegral of ψ -classes on the
+Deligne-Mumford compactiﬁcation of spin components of a st ratum of k-diﬀerentials
+are proved in [CSS21]. Despite these pieces of information a bout the spin components,
+the problem of computing the cycle classes [ H
+k
+g (µ )+] resp. [
+H
+k
+g (µ )− ] remains open.
+These classes are important because they allow us to do many c omputations in the
+intersection theory of the spin components by reducing to in tersections on
+Mg,n .
+Fork = 1, the stratum Hg(µ ) has pure complex dimension g if µ has any negative
+entry (so that Hg(µ ) parameterizes meromorphic diﬀerentials) and of g − 1 otherwise
+(for the space parameterizing holomorphic diﬀerentials). I n this text, we construct an
+algorithm to split the fundamental class of a stratum of 1-di ﬀerentials of even type
+[Hg(µ )] ∈ H j(Mg,n ; Q), where we let j = 2g resp. j = 2g − 2 if we are working
+on strata of meromorphic resp. holomorphic diﬀerentials, in to the spin components
+[Hg(µ )− ] and [ Hg(µ )+]. For short, we will call the fundamental class of a stratum o f
+diﬀerentials [Hg(µ )] a stratum class. To do the recursive computation, it will be more
+convenient if we instead compute the spin stratum class , which is deﬁned as:
+[Hg(µ )]spin := [Hg(µ )+] − [Hg(µ )− ].
+Note that since there already exist recursive algorithms to compute the stratum classes
+[Hg(µ )], the spin stratum class [ Hg(µ )]spin will determine [ Hg(µ )− ] and [ Hg(µ )+].
+Remark 1.1. More generally, any (algebraic/cohomological) class on a s tratum of k-
+diﬀerentials which admits a spin structure can be split into a sum of two summands
+
+===== PAGE 3 =====
+COMPUTING SPIN STRATUM CLASSES 3
+corresponding to the even and odd spin parities respectivel y. Thus one can also deﬁne
+a linear map:
+•spin : H∗(PΞMg,n (µ )) − → H∗(PΞMg,n (µ ))
+w =w+ +w− ↦→ w+ − w−
+In our text, given a class w, we denote its spin variant by wspin. For instance, the spin
+stratum class of k-diﬀerentials will be denoted by [ H
+k
+g (µ )]spin; the tautological classes
+ξspin and ψ spin on strata of diﬀerentials will appear in Section 5.3.
+1.1. The outline of our strategy. Given a dual graph Γ of some stable curve of
+genusg and n marked points, there is a natural clutching morphism
+ξΓ :
+MΓ :=
+∏
+v∈ V (Γ)
+Mgv,n v − → Mg,n.
+The strategy of our recursive algorithm is to compute [ Hg(µ )]spin by solving a system
+of linear equations from clutching pullbacks, which reduce the problem to computing
+the spin stratum classes [ Hg′(µ ′)]spin of smaller genera or fewer singularities. By prov-
+ing that H 2g− 2(Mg,n ; Q) = 0 in Theorem 4.1, we can strengthen a result of [AC98]
+(Proposition 5.1), which will guarantee the injectivity of the direct sum of clutching
+pullbacks with respect to one-edge stable graphs Γ
+⊕ Γξ∗
+Γ : H j(Mg,n ; Q) − →
+⨁
+Γ
+Hj(MΓ; Q),(1.1)
+for j within some appropriate range. By such a result, one can actu ally already con-
+struct a theoretical algorithm to compute the spin stratum c lasses. However, in practice,
+the cohomology of moduli spaces of stable curves
+Mg,n , for allg,n , is not entirely known.
+Thus, it is not possible to directly implement the strategy w e mentioned above. It will
+only be feasible if we restrict our computation to the tautol ogical ring RH ∗(Mg,n ), on
+which we have a better understanding of the generators and re lations. The drawback
+is that if a spin stratum class is not tautological, then our a lgorithm implemented
+in admcycles will raise errors. Thus, the ﬁrst assumption we need to make f or our
+implementation of the algorithm is that the spin stratum cla sses are tautological.
+A bottleneck for programming the aforementioned strategy i s that the clutching
+pullback with respect to the self-loop graph will not reduce the computation complexity
+(see Section 5.4). However, we observed that, in many cases w here the number of
+marked points n is larger equal to 3, the injectivity of (1.1) holds when we re strict the
+clutching pullbacks to the tautological ring RH ∗(Mg,n ) even without including the non-
+compact type graph. This means that in the recursive computa tion of a spin stratum
+class, we only need to perform the clutching pullback with re spect to the self-loop graph
+at most once. This ensures that the runtime of our algorithm w ill not be unreasonably
+long.
+However, we are not able to prove that the phenomenon above is always true in this
+paper. Hence, we rephrase this into an assumption of the suﬃciency of compact
+type clutching (Assumption 5.3), by which we mean that the direct sum of clut ching
+
+===== PAGE 4 =====
+4 YIU MAN WONG
+pullbacks, restricting to RH ∗(Mg,n ), with respect to one-edge graphs of compact type
+is injective for g ≥ 1,n ≥ 3 and for codimension j which is not too large.
+Our implemented algorithm for computing spin stratum class es in this paper will be
+based on two assumptions: First, the spin stratum classes ar e tautological; second, the
+assumption of the suﬃciency of compact type clutching. For p articular g,n and j, it
+is known that the tautological classes generate the cohomol ogy groups:
+• g = 0 and for any n and j (cf. [Kee92]);
+• g = 1 and n< 11, for any j (cf. [GP03]);
+• g = 2 and n< 20, and for any even number j (cf. [Pet16]);
+• g = 3 and n = 0, 1,..., 8 (cf. [Ber08], [GL99], [Get98], [CL22]);
+• g = 4 and n = 0, 1,..., 6 (cf. [CL22]);
+• and more cf. [CL22].
+Thus, in the cases listed above, the ﬁrst assumption is autom atically true. On the other
+hand, the second assumption has been checked by the Sage package admcycles on the
+tautological ring and it is true for ( g,n ) equal to
+(1, 3), (1, 4), (1, 5), (1, 6), (2, 3), (2, 4), (2, 5), (3, 3), (3, 4), (4, 3).(1.2)
+To summarise, the assumptions we made are automatically tru e for the values of g,n
+listed above. We have used the implemented algorithm to comp ute the spin stratum
+classes for plenty of signatures where ( g,n ) is equal to
+(2, 1), (2, 2), (2, 3), (2, 4), (3, 1), (3, 2), (3, 3), (4, 1), (4, 2), (4, 3).(1.3)
+The results by the implemented algorithm for ( g,n ) in the list above are guaranteed to
+be correct.
+Lastly, we explain how we compute each individual clutching pullback. Indeed, we
+apply the Clutching Pullback Formula (5.3) of [ Hg(µ )]spin. The formula is derived by
+using the spin structure on the moduli space of multi-scale d iﬀerentials PΞMg,n (µ ) (the
+deﬁnitions will be recalled in Section 2.2), which deﬁnes a c ompactiﬁcation of the stra-
+tum of diﬀerentials PΩMg,n (µ ). The compactiﬁcation PΩMg,n (µ ) ⊂ PΞMg,n (µ ) has
+normal crossing boundary divisors and a proper morphism p : PΞMg,n (µ ) − → Mg,n
+by sending a multi-scale diﬀerential to its underlying stabl e curve. The advantage to
+working with the compactiﬁcation PΞMg,n (µ ) is that the set of connected components
+of PΞMg,n (µ ) is in bijection with the set of connected components of PΩMg,n (µ ),
+whereas in the Deligne-Mumford compactiﬁcation the spin co mponents can have inter-
+sections on the boundary. This implies that the closures of d iﬀerent spin components
+are still disjoint, thus the spin parity on a multi-scale diﬀe rential of even type can be
+deﬁned as the spin parity of the diﬀerentials lying in the neig hbourhood. As a result,
+PΞMg,n (µ ) has spin components and
+p∗
+(
+[PΞMg,n (µ )+]
+)
+= [Hg(µ )+]
+p∗
+(
+[PΞMg,n (µ )− ]
+)
+= [Hg(µ )− ]
+p∗
+(
+[PΞMg,n (µ )]spin)
+= [Hg(µ )]spin.
+Note that deriving the Clutching Pullback Formula (5.3) req uires an understanding
+of how the spin parity behaves on the boundary strata of PΞMg,n (µ ). The spin parity
+
+===== PAGE 5 =====
+COMPUTING SPIN STRATUM CLASSES 5
+of a multi-scale diﬀerential lying on the boundary can be comp uted in the following
+way:
+• First, we undegenerate the multi-scale diﬀerential to a usua l diﬀerential which
+can be realized by a ﬂat surface
+• Then, we compute the spin parity by the explicit Formula (2.1 ) for the Arf
+invariant.
+1.2. Main results. Our ﬁrst observation on the spin parity of a multi-scale diﬀer ential
+is the following proposition. We brieﬂy deﬁne the objects in volved in the following
+proposition (readers are referred to Section 2 for the detai ls).
+• An enhanced level graph is a graph whose edges are weighted by positive
+integers (which we call enhancements) and there is a full ord er on the set of
+vertices (which can be realized by placing the vertices on di ﬀerent levels).
+• A twisted diﬀerential of type µ on a stable curve (X;z1,...,z n) is a collection
+of non-zero meromorphic diﬀerentials on the irreducible com ponents of X such
+that their order of poles and zeros at z1,...,z n are prescribed by µ . A twisted
+diﬀerential is compatible with an enhanced level graph ∆ if ∆ is the dual
+graph of ( X;z1,...,z n), and the orders of poles and zeros at the nodal points
+are prescribed by the enhancements (altered by ± 1).
+• A (global) prong-matching is a collection of cyclic-order-reversing bijections
+which prescribe the matchings of horizontal geodesics (wit h respect to the mero-
+morphic diﬀerentials) converging to the nodal points from tw o components.
+Proposition 1.2. Let η be a twisted diﬀerential of type µ and compatible with an
+enhanced level graph ∆. Then we have the following classiﬁcation of the spin parity o f
+the multi-scale diﬀerentials whose underlying twisted diﬀ erential is η:
+(1) If ∆ has any edge of even enhancement (non-zero), then half of the (global)
+prong-matchings on η will give us a multi-scale diﬀerential of even spin and
+half of the prong-matchings will give us a welded surface of o dd spin.
+(2) If all the edges in ∆ are of odd enhancements, then the spin parity of any multi-
+scale diﬀerential whose underlying twisted diﬀerential is η is just the sum of the
+spin parities of the components of η.
+The boundary divisors D∆ in PΞMg,n (µ ) are parametrized by enhanced level graphs
+∆ such that either the number of levels is 2 and there is no horizontal edge (an
+edge connecting two vertices on the same level), or there is e xactly one level and one
+horizontal edge. We denote the set of two-level graphs witho ut horizontal edges of a
+given stratum by LG 1(µ ). For short, we call such a level graph ∆ a vertical two-
+level graph . The degree of the map p|D∆ is equal to the number of prong matching
+equivalence classes
+∏
+e∈ E(∆ κ e
+ℓ∆
+, where ℓ∆ is the l.c.m. of the enhancements. In addition,
+the image p(D∆) will be equal to the image of
+ξ∆ :p⊤ (PΞM∆, ⊤ ) × p⊥ (PΞM∆, ⊥ ) ⊂ M∆ − → Mg,n,
+where PΞM∆, ⊤ and PΞM∆, ⊥ are the level strata corresponding to the top and bottom
+level of ∆. We have the following corollary to Proposition 1. 2. We deﬁne [ D∆]spin =
+[D+
+∆] − [D−
+∆] ∈ CH1(PΞMg,n (µ )).
+
+===== PAGE 6 =====
+6 YIU MAN WONG
+Corollary 1.3. Letp : PΞMg,n (µ ) − → Mg,n be the proper projection morphism. For
+∆ ∈ LG1(µ ), if all edges of ∆ are of odd enhancements, then
+p∗
+(
+[D∆]spin)
+∈ CH∗(Mg,n )
+=
+∏
+e∈ E(∆)κe
+|Aut(∆)|ℓ∆
+ξ∆∗
+(
+π ∗
+⊤ ([PΞM∆, ⊤ ]spin) ·π ∗
+⊥ ([PΞM∆, ⊥ ]spin)
+)
+Otherwise, if there is an edge of even enhancement, then we ha ve
+p∗[D∆]spin = 0.
+Although Corollary 1.3 will not be applied directly in the co mputation of the clutch-
+ing pullback a spin stratum class, it will be used combining w ith the residue resolving
+(Proposition 5.9). Furthermore, the principle of Corollar y 1.3 is used to derive the
+Clutching Pullback Formula of a spin stratum class. More pre cisely, if ∆ has any edge
+of even enhancement, then the term corresponding to ∆ in the C lutching Pullback
+Formula will be zero. Otherwise, the term corresponding to ∆ will be just a product
+of the spin stratum classes on the top level and that on the bot tom level.
+Theorem 1.4. The spin stratum classes [Hg(µ )]spin ∈ H∗(Mg,n ; Q) are recursively
+computable.
+Theorem 1.4 only guarantees a solution in H ∗(Mg,n, Q). In practice, we work with
+the Sage package admcycles, by which we can only compute the solution in the tauto-
+logical ring. Since admcycles uses the generalised Faber-Zagier relations (cf. [Pix12],
+[PPZ15],[Jan17]) to compute for a basis of the tautological ring. As a result, the correct-
+ness of our implemented algorithm will depend on the assumpt ion that the generalised
+Faber-Zagier relations span the complete set of relations o f the decorated strata classes
+(which serve as the additive generators) in the tautologica l ring. We have the following
+conditional result:
+Theorem 1.5. Assume that the generalised Faber-Zagier relations span th e whole set
+of relations of the decorated strata classes in the tautolog ical ring. If the spin stratum
+classes are tautological and the assumption of the suﬃcienc y of compact type clutching
+(Assumption 5.3) holds, for all g ≤ g0 and n ≤ n0, then the algorithm we implemented
+in admcycles will yield the correct spin stratum classes [Hg(µ )]spin such that g ≤ g0
+and n ≤ n0.
+By the implemented algorithm, we have computed the spin stra tum classes of plenty
+of diﬀerent signatures for ( g,n ) within the range (1.3), where the tautological ring is
+just the cohomology ring and the assumption of Faber-Zagier relations can be veriﬁed
+by Poincar´ e duality. Thus, in such range, our results are ju st the exact results.
+1.3. Applications. First, we want to give an overview of the strategies to comput e
+cycle classes [ H
+k
+g (µ )] in CH ∗(
+Mg,n ) or H ∗(Mg,n ). In [Sau19], Sauvaget has constructed
+an algorithm to compute the stratum class of 1-diﬀerentials [ Hg(µ )] in H ∗(Mg,n ) and he
+shows that the stratum classes are tautological. Later in [F P18], Farkas and Pandhahri-
+pande conjectured that the sum of the stratum class of 1-diﬀer entials and the boundary
+terms is equal to the twisted double ramiﬁcation cycle (the d eﬁnition will be recalled in
+
+===== PAGE 7 =====
+COMPUTING SPIN STRATUM CLASSES 7
+Section 2.2). In [Sch16], Schmitt extended this conjecture tok-diﬀerentials and gave a
+recursion to extract the stratum classes [ H
+k
+g(µ )] from the conjectured equations. This
+conjecture has been ﬁnally proved by [HS21] and [BHPSS20].
+In [CSS21], Constantini, Sauvaget and Schmitt have constru cted the spin variant
+of the twisted double ramiﬁcation cycles. In addition, they conjectured an equation
+that is similar to the one conjectured by Farkas and Pandhari pande in [FP18], stating
+that the sum of the spin stratum class and some boundary terms is equal to the spin
+double ramiﬁcation cycle. (The exact formulation will be re called in Conjecture 7.2 in
+Section 7.3.) Within the range in List (1.2), the spin stratu m classes we computed agree
+with Conjecture 7.2. Thus, the algorithm of our paper can hel p verify the conjecture
+in the range where computer power is suﬃcient to perform the c omputation.
+Note that all the spin stratum classes of holomorphic strata of 1-diﬀerentials are
+computed for g ≤ 4, and they lie in the tautological ring (see Appendix B). Hen ce,
+Conjecture 7.2 will enable us to recursively compute the spi n stratum classes [ Hk
+g (µ )]spin
+by tautological classes. Hence, if we assume the conjecture about the spin stratum
+classes (Conjecture 7.2) to be true, then we have the followi ng proposition:
+Proposition 1.6. Let k be an odd positive integer and µ be a signature of even type.
+If Conjecture 7.2 is true, then the spin stratum classes [Hk
+g (µ )]spin are tautologcial for
+g ≤ 4.
+Acknowledgement. The authors acknowledge support by the DFG under Grant MO18 84/2-
+1 and the Collaborative Research Centre TRR 326 Geometry and Arithmetic of Uni-
+formized Structures, project number 444845124. In addition, the author thanks t he ad-
+vice of Martin M¨ oller and the comments by Johannes Horn, Joh annes Schmitt, Adrien
+Sauvaget and Matteo Constantini.
+2. Background
+In this section, we will ﬁrst deﬁne the spin parity of a ﬂat sur face (or equivalently
+a diﬀerential on a compact Riemann surface). Then we will intr oduce multi-scale
+diﬀerentials and their associated welded surfaces. Further more, we will explain how
+to extend the deﬁnition of spin parity to a welded surface and the plumbed surface
+associated to a multi-scale diﬀerential. In the end, we will e xplain why the spin parity
+of a welded surface is equal to that of a plumbed surface.
+2.1. Spin parities. In this subsection, we introduce the spin parity of a ﬂat surf ace.
+First, we start with some terminology on a topological surfa ce, then we will dive into
+the spin parity on a ﬂat surface. By abusing symbols, we will d enote a simple loop
+on a topological surface X and its corresponding cycle in H 1(X, Z) both by the same
+letter.
+The algebraic intersection number i(•, •) induces a symplectic form on H1(X, Z),
+where X is a compact orientable surface. Two cycles α,β form a symplectic pair if
+their intersection number i(α,β ) is ± 1. Let the genus of X beg. Then a generating set
+{γ1,...,γ 2g} of H 1(X, Z) is a symplectic basis if it can be partitioned into symplectic
+pairs such that any two cycles from diﬀerent symplectic pairs have zero intersection
+number.
+
+===== PAGE 8 =====
+8 YIU MAN WONG
+Let (X,ω ) be a ﬂat surface induced by a diﬀerential ω on the compact Riemann
+surface X and γ : [0, 1] − → (X,ω ) be a smooth simple curve not passing through the
+conical singularities. On a ﬂat surface, parallel translat ions along a smooth simple loop
+(avoiding the conical singularities) will preserve the dir ection of a vector. This implies
+that we can deﬁne the north direction at each point (except fo r the conical singularities)
+simultaneously and deﬁne a continuous map
+Tγ : [0, 1] − → S1 θ ↦→ ˙γ(θ)/ ∥ ˙γ(θ)∥
+There is a unique lift ˜Tγ : [0, 1] − → R if we ﬁx the starting point on R to be the origin.
+We deﬁne the turning number or index ind(γ) to be ˜Tγ (1). If ω is a diﬀerential
+of even type, then ind( γ) (mod 2) will be invariant under the deformation of γ. Let
+{a1,...,a g,b 1,...,b g} be a symplectic basis of H 1(X, Z). Then the parity of spin of a
+ﬂat surface (X,ω ) is deﬁned as:
+(2.1) φ((X,ω )) =
+g∑
+i=1
+(ind(ai) + 1)(ind(bi) + 1) (mod 2)
+It has been shown in [Joh80] that the parity of spin does not de pend on the choice of
+a symplectic basis and is a locally constant function on a str atum of diﬀerentials of
+even type. We have now deﬁned the parity of spin on a compact ﬂa t surface. Actually,
+we can extend the deﬁnition to the case that the diﬀerential ω of the pair ( X,ω )
+is meromorphic. Let P be the set of poles of the meromorphic diﬀerential ω , then
+one can realize X \ P by a noncompact orientable surface carrying a ﬂat metric wit h
+conical singularities. We call such a ﬂat realization of a me romorphic diﬀerential a
+noncompact ﬂat surface . A symplectic basis on X can be realised by smooth simple
+closed loops on X \ P which circumvent the conical singularities. By observatio n, one
+can see that if ω is of even type, the turning numbers (mod 2) are independent o f the
+choice of realizations. Hence, the deﬁnition of spin pariti es in (2.1) can be also applied
+to noncompact ﬂat surfaces associated to meromorphic diﬀere ntials of even type (cf.
+[Boi15]).
+Remark 2.1. Note that there is another equivalent deﬁnition of spin pari ties from
+the perspective of theta characteristics. A theta characteristic is a line bundle L
+on a Riemann surface X such that L⊗ 2 ≃ ω X, where ω X is the canonical sheaf on X.
+Given a ﬂat surface ( X,ω ), where ω is of even type, the sheaf OX( 1
+2 div(ω )) is a theta
+characteristic. The rank of the group of global sections h0(X, OX ( 1
+2 div(ω ))) (mod 2)
+coincides with the parity of spin we deﬁned above (cf. [Joh80 ]).
+Remark 2.2. There are two diﬀerent ways to deﬁne the spin parity of a k-diﬀerential
+of even type η on a compact Riemann surface X.
+The ﬁrst deﬁnition can be applied to any k ∈ N: one can construct a canonical
+cover φ : ˆX − → X (cf. [CG21]) such that φ ∗η =ω ⊗ k whereω is a 1-diﬀerential on ˆX;
+the spin parity of η is then deﬁned to be that of ω .
+
+===== PAGE 9 =====
+COMPUTING SPIN STRATUM CLASSES 9
+The second deﬁnition can be applied to any k ∈ N \ 2N: one can deﬁne a theta
+characteristic
+L =ω ⊗ (− k+1)/ 2
+X ⊗ O X ( 1
+2 div(η));
+the spin parity of η is deﬁned to be h0(X,L ) (mod 2). Notice that for k >1, these two
+deﬁnitions do not coincide with each other. For example, if X is a genus 0 curve, then
+the spin parity of a k-diﬀerentialη with respect to the ﬁrst deﬁnition may be odd while
+the spin parity of η with respect to the second deﬁnition is always even. In this t ext,
+when we mention the spin components of a stratum of k-diﬀerentials Hk
+g (µ ) ⊂ Mg,n ,
+the spin parity refers to the second deﬁnition.
+2.2. Multi-scale diﬀerentials and prong-matchings. We will in this subsection re-
+call the deﬁnition of twisted k-diﬀerentials, enhanced level graphs and prong-matchings.
+In order to deﬁne k-twisted canonical divisors, we introduce twisted diﬀerent ials and
+enhanced level graphs for general values of k. However, in the deﬁnition of multi-scale
+diﬀerentials and the rest of the text, we will mainly focus on t he case that k = 1.
+Deﬁnition 2.3. A twisted k-diﬀerential of type µ = ( m1,...,m n) on a stable
+curve (X, z = (z1,...,z n)) a tuple of diﬀerentials η = (ηv)v, where ηv is a diﬀeren-
+tial on the irreducible component Xv of X such that the following conditions hold.
+(1) If zi is in Xv, then ord zi(ηv) = µ i.
+(2) If q1 ∈ Xv1 and q2 ∈ Xv2 are identiﬁed as a node of X, then
+ordq1(ηv1 ) + ordq2(ηv2 ) = − 2k.
+(3) If k = 1 and at a node ( q1,q 2) the equation ord q1(ηv1) = ord q2(ηv2) = − 1 holds,
+then
+resq1(ηv1) + resq2(ηv2) = 0.
+(4) The diﬀerentials ηv have no poles or zeros away from the nodes and the given
+marked points.
+△
+In this text, a twisted diﬀerential simply refers to a twisted 1-diﬀerential. Some
+crucial information of a twisted diﬀerential can be describe d by an enhanced level
+graph. An enhanced level graph ∆ consists of:
+(i) a dual graph ¯∆ of (X, z);
+(ii) a level function ℓ :V ( ¯∆) − → { 0, − 1, − 2,... } such that ℓ− 1(0) is nonempty;
+(iii) for each vertical edge e an assigned positive integer κe which is called enhance-
+ment.
+We say that a twisted k-diﬀerential η is compatible with ∆ if for the order on V ( ¯∆)
+induced by ℓ:
+(iv) Given an edge e connecting vertices v1,v 2 in ∆, ℓ(v1) = ℓ(v2) if and only if
+ordq1(ηv1) = ord q2(ηv2 ) = −k. If ℓ(v1) > ℓ(v2), then ord q1(ηv1 ) = κe − k and
+ordq2(ηv2) = −κe − k.
+If not speciﬁed, by saying that a twisted 1-diﬀerential η is compatible with ∆, the
+residues of the poles of η should also satisfy the following condition called the global
+
+===== PAGE 10 =====
+10 YIU MAN WONG
+residue condition (GRC). Since the GRC for general k is technical and will not be
+used explicitly in our text, we will only state the GRC for k = 1 here.
+(v) For every level L, a connected component Y , which has no leg representing a
+marked pole, of the subgraph ∆ >L (which is a graph consisting of edges and
+vertices above level L) will give us a residue condition. Let e1,...,e m be edges
+connecting Y to vertices on level L. Then the residue condition induced by Y
+is
+m∑
+j=1
+resq−
+j
+(ηe−
+j
+) = 0,
+wheree−
+j is the lower vertex of edge ej andq−
+j is the point in Xe−
+j
+representing
+the node.
+We will abuse the notation for edges so that we write q for both a node in X and also
+the corresponding edge in the compatible graph.
+Remark 2.4. Let D = ∑
+imipi be a Weil Divisor on a stable curve X, where pi are
+nonsingular points on X and ∑
+imi = k(2g − 2). We call D a twisted k-canonical
+divisor if there is a twisted k-diﬀerential whose poles and zeros away from the nodal
+points are exactly prescribed by D; in addition, the twisted k-diﬀerential has to be
+compatible with some enhanced level structure on the dual gr aph of X in the sense of
+condition (iv).
+The rest of the text (except Section 7) will mainly focus on th e case k = 1, thus if
+not speciﬁed, a diﬀerential will refer to a 1-diﬀerential.
+Let η be a twisted diﬀerential. Each component ηv of the twisted diﬀerential η
+endows Xv with a ﬂat structure. Moreover, for two points q+,q − in ˜X = ⨆
+v∈ V (∆)Xv
+corresponding to a vertical node q (a node corresponding to a vertical edge), there will
+be the same number of horizontal geodesics converging to the se points. We call these
+geodesics prongs. The horizontal geodesics (of direction to east) which run t owards
+the vertical node are incoming prongs and the others are outgoing prongs . We
+denote the set of incoming prongs and the set of outgoing pron gs at x by P in
+x and
+P out
+x respectively. There is a natural cyclic order on the set of pr ongs. A local prong-
+matching at node q is a cyclic-order-reversing bijection σq :P in
+q− − → P out
+q+ and a global
+prong-matching is a collection σ of local prong-matchings at every vertical node.
+LetX be a stable curve; η be a twisted 1-diﬀerential compatible with some enhanced
+level structure on the dual graph ¯∆ of X; σ be a global prong-matching. There is a
+natural action of the level rescaling group CL on the pair ( η, σ) (here L is the
+number of levels), as now we describe:
+(1) Let d = (dj)j=0, − 1,..., − L+1 ∈ CL. We deﬁne
+d ·η =
+(
+exp(i2πd ℓ(v)) ·ηv
+)
+v∈ V (∆).
+(2) For each vertical node q, we let
+d ·σq :P in
+q− − → P out
+q+
+
+===== PAGE 11 =====
+COMPUTING SPIN STRATUM CLASSES 11
+be the map σq precomposed and postcomposed by the rotations by the angles
+− 2π Re(dℓ(q− ))/κ q and 2π Re(dℓ(q+))/κ q respectively, so that d ·σq remains to
+be a prong-matching.
+Let
+ι :CL− 1֒→CL
+(d− 1,...,d − L+1) ↦→ (0,d − 1,...,d − L+1)
+be the natural inclusion. We call CL− 1 the reduced level rescaling group . The
+action of CL− 1 on ( η, σ) is induced by that of the level rescaling group.
+Deﬁnition 2.5. A multi-scale diﬀerential is a tuple ( η, ∆, σ) consisting of a twisted
+1-diﬀerential η of type µ on a stable curve ( X, z) such that η is compatible with the
+enhanced level structure ∆ on the underlying dual graph ¯∆ of ( X, z). Furthermore,
+σ is a global prong-matching of η. Two multi-scale diﬀerentials are equivalent if they
+diﬀer by the action of the reduced level rescaling group CL− 1. The moduli space of
+multi-scale diﬀerentials of type µ is denoted by Ξ Mg,n(µ ).
+On the projectivized space PΞMg,n(µ ), two multi-scale diﬀerentials are equivalent
+if they diﬀer by the action of the level rescaling group CL. △
+Remark 2.6. We call the subgroup ZL ⊂ CL the level rotation group . It acts on
+the twisted diﬀerentials trivially while it rotates the pron g-matchings. Two multi-scale
+diﬀerentials whose underlying twisted diﬀerentials are the s ame are equivalent if and
+only if their prong-matchings diﬀer by the action of the level rotation group. Thus, in
+this text, we are only interested in the equivalence classes of prong-matchings.
+2.3. Generalised stratum. We now introduce the generalised stratum. The gen-
+eralised strata arise naturally if we consider each level of a (connected) enhanced level
+graph. It is a product of strata of diﬀerentials:
+ΩMg, n(µ) =
+k∏
+ν=1
+ΩMgν,n ν (µ ν ).
+It parametrizes diﬀerentials on disconnected compact Riema nn surfaces. Similar to
+a moduli space of multi-scale diﬀerentials which compactiﬁe s a stratum of diﬀeren-
+tials, there is a compactiﬁcation of a (projectivized) gene ralised stratum PΩMg, n(µ),
+which we denote by PΞMg, n(µ) := P
+(∏k
+ν=1 ΞMgν ,n ν (µ ν )
+)
+. According to [CMZ20b],
+PΩMg, n(µ) ⊂ PΞ
+Mg, n(µ) is a compactiﬁcation with normal crossing boundary divi-
+sors. The boundary strata of PΞMg, n(µ) are parametrized by (disconnected) enhanced
+level graphs.
+Moreover, if we consider a level below zero, there are also ex tra residue conditions
+induced by the global residue condition. Hence, we also intr oduce the notion of a
+generalised stratum with residue conditions ΩMR
+g, n(µ). Here, R refers to the
+residue space cut out by a set of residue conditions. Let Hp be the set of pairs ( ν,i )
+wherei is a marking of the component ν such that the marking i is a pole. A collection
+R of residue conditions consists of a partition λR of Hp with parts λ (j). A part λ (j)
+
+===== PAGE 12 =====
+12 YIU MAN WONG
+represents a residue equation ∑
+(ν,i )∈ λ (j)
+rν,i = 0
+Thus,
+R = {(rν,i )(ν,j )∈ Hp :
+∑
+(ν,i )∈ λ (j)
+rν,i = 0,λ (j) ∈ λR}
+Remark 2.7. In analogy to the case of a usual stratum of diﬀerentials (i.e. with only
+one signature), we also call the projection pushforward of t he fundamental class of a
+generalised stratum p∗
+(
+[PΩMg, n(µ)]
+)
+∈ H ∗(∏
+i Mgi,n i, Q) a stratum class . If all the
+signatures of a generalised stratum are of even type, we call such generalised stratum
+a generalised stratum of even type . Given a generalised stratum of even type, we
+can deﬁne the class
+p∗
+(
+[PΩMg, n(µ)]spin)
+=p∗
+(
+[PΩMg, n(µ)+]
+)
+− p∗
+(
+[PΩMg, n(µ)− ]
+)
+and call it a spin stratum class .
+Remark 2.8. From now on, for brevity, we will call a (projectivized) modu li space of
+multi-scale diﬀerentials, which compactiﬁes a (projectivi zed) stratum of diﬀerentials,
+a compactiﬁed stratum. Similarly, a compactiﬁed generalised stratum refers to
+a (projectivized) moduli space of multi-scale diﬀerentials of type µ on disconnected
+stable curves which compactiﬁes a (projectivized) general ised stratum.
+2.4. The spin parities of welded surfaces and plumbed surfaces. In this sub-
+section, we will brieﬂy introduce the welded surface and plu mbed surface associated to
+a multi-scale diﬀerential. We refer the readers to [BCGGM19] for more details. Then
+we will deﬁne the spin parities on them and show why these two s pin parities coincide
+with each other.
+Given a multi-scale diﬀerential ( η, ∆, σ), a welded surface is a topological surface
+X σ with a map f :X σ − → X such that
+• the preimage of a node is a simple loop which we call a seam;
+• away from the seams, f is an isomorphism;
+• the glueing of two boundaries circles of the preimages of two irreducible com-
+ponents of X (to form a seam) is determined by the prong-matchings.
+For instance, the compact closed surface in Figure 2 is a weld ed surface associated to
+the nodal curve in Figure 1. Notice that the twisted diﬀerenti al η endows X σ with a
+piecewise ﬂat structure. From now on, if not speciﬁed, the we lded surface associated to
+a multi-scale diﬀerential will refer to the topological weld ed surface plus the piecewise
+ﬂat structure on it.
+Now we will brieﬂy introduce the plumbing surfaces. Accordi ng to [BCGGM18],
+given a multi-scale diﬀerential ( η, ∆, σ) such that X is not smooth, one can construct a
+family of ﬂat surfaces which is controlled by a collection of parameterst− 1,...,t − L+1 ∈ C
+indexed by the levels below zero. A generic ﬁber is a connecte d ﬂat surface, while the
+ﬁber over t− 1 = ... = t− L+1 = 0 is the disconnected ﬂat surface associated to the
+twisted diﬀerential η. This deformation family of ﬂat surfaces is called a plumbing
+family. A connected ﬁber of the deformation family will be called a plumbed surface.
+
+===== PAGE 13 =====
+COMPUTING SPIN STRATUM CLASSES 13
+A plumbed surface is just a ﬂat surface and its spin parity is d eﬁned as that of a ﬂat
+surface. The construction of a plumbed surface is actually q uite technical, nevertheless,
+if we only want to make arguments on the spin parity, it suﬃces to just consider the
+welded surface.
+A welded surface X σ is an orientable closed surface. By considering the piecewi se
+ﬂat structure on the welded surface, one can still calculate the turning number of a
+smooth simple loop if the curve is transverse to the seams.
+Deﬁnition 2.9. Let
+X σ be a welded surface and γ : [0, 1] − → X σ be a smooth simple
+loop such that it is transverse to the seams. Let 0 = y0 < y1 < ... < y N = 1 be a
+partition of the unit interval such that γ
+(
+(yj,y j+1)
+)
+does not intersect any seam for
+j = 0,...,N − 1. The turning number of γ is deﬁned as
+ind(γ) =
+N − 1∑
+j=0
+ind(γ|[yj ,y j+1])
+Then the spin parity of a welded surface is just computed by the Formula 2.1,
+where the symplectic basis is chosen for H1(X σ, Z). In addition, on a disconnected
+welded surface, the spin parity is just deﬁned to be the sum of the spin parities on the
+connected components. △
+Proposition 2.10. Given a multi-scale diﬀerential of even type, the spin parit y of the
+welded surface associated to it equals the spin parity of a pl umbed surface associated to
+it.
+Sketch of proof. Note that the ﬂat picture of a plumbed surface diﬀers from a wel ded
+surface by deleting some strips and disc neighbourhoods (cf . [BCGGM18] for the
+ﬂat picture of a plumbed surface). For every simple closed cu rve on the plumbed
+surface, one can complete it to a simple closed curve on the we lded surface which is
+transverse to the seams. The turning number of the completed curve will be the same
+as that of the original curve. As a result, a symplectic basis on the plumbed surface
+induces a symplectic basis on the welded surface such that th e turning numbers remain
+unchanged. /char1d
+By the above proposition, we can determine the parity of a mul ti-scale diﬀerential
+of even type by computing (2.1) on the welded surface with res pect to simple closed
+curves transverse to seams.
+3. Prong-matching and spin parity of a welded surface
+In this section, we construct a basis of homology on the welde d surface associated to
+a multi-scale diﬀerential. This basis is convenient for comp uting the spin parity and we
+call such basis a ∆-adapted symplectic basis. The idea comes from the paper [Ben20],
+where Benirschke constructed a ∆-adapted basis of the relat ive homology H1(X σ \ P,Z ),
+namely a basis comprised of generators coming from each irre ducible component of X
+and generators capturing the homology of the enhanced level graph ∆. Here, X σ is
+a welded surface compatible with the enhanced level graph ∆; P and Z are the sets
+of poles and zeros corresponding to the legs of ∆ respectivel y. In our text, we need a
+
+===== PAGE 14 =====
+14 YIU MAN WONG
+1
+1
+1
+Figure 1. A nodal curve and its dual graph
+Figure 2. The associated welded surface and a ∆-adapted symplectic
+basis
+symplectic basis to compute the spin parity. That is why we ca nnot directly adopt the
+∆-adapted basis constructed in [Ben20]. More precisely, we have to ensure that the
+choice of generating cycles of the graph can be completed to a symplectic basis on the
+welded surface. On the other hand, the idea behind our deﬁnit ion is very similar to the
+deﬁnition in [Ben20]: we both want to construct a basis consi sting of cycles from lifting
+of the bases of homology on various components, and cycles th at cross the seams.
+3.1. ∆ -adapted symplectic basis on a welded surface. Let X σ be a welded sur-
+face compatible with a level graph ∆. A cycle γ onX σ is called a graph cycle if it can
+be realized as a simple loop γ such that the geometric intersection numbers ⟨γ,δ ⟩ ≤ 1
+for each seam δ but not all the intersection numbers are zero. A cycle δ onX σ is called
+a vanishing cycle if it is the homology class of some seam. A cycle which can be
+realised by a simple loop not intersecting any seam is called a non-crossing cycle .
+Example 3.1. Consider the nodal curve in Figure 1, on the associated welde d surface
+(Figure 2 left) we have a blue loop γb and a red loop γr. We can see that there is a
+seam such that the geometric intersection number with γb is 2. However, γr intersects
+all the seams only once. Thus γr is a graph cycle while γb is not.
+Note that a graph cycle γ induces a loop on ∆ which consists of edges whose corre-
+sponding seam intersects with γ.
+
+===== PAGE 15 =====
+COMPUTING SPIN STRATUM CLASSES 15
+Deﬁnition 3.2. LetX σ be a welded surface which is compatible with a level graph ∆.
+A ∆ -adapted symplectic basis on a welded surface X σ is a symplectic basis
+such that it contains a set of graph cycles whose associated l oops on ∆ form a basis
+ofH1(∆, Z) and moreover, remaining cycles are either non-crossing cy cles or vanishing
+cycles dual to the graph cycles. △
+Example 3.3. Let us consider the welded surface in Example 3.1. The blue cy cles in
+Figure 2 right are non-crossing cycles and the brown one is a g raph cycle and the red
+one is a vanishing cycle. They constitute a ∆-adapted symple ctic basis on the welded
+surface.
+3.2. Algorithm to construct a ∆-adapted symplectic basis. This subsection is to
+prove the existence of a ∆-adapted symplectic basis. Notice that we are arguing just by
+topological properties of a nodal curve and its dual graph. T hus, for every topological
+welded surface, our claim of the existence of a ∆-adapted sym plectic basis still holds.
+To construct a ∆-adapted symplectic basis on the welded surf ace
+X σ, it is equivalent
+to ﬁnding a basis of H 1(∆). However, not every spanning tree can give us a set of
+fundamental cycles that can be completed to a ∆-adapted symp lectic basis. Namely,
+the simple closed curves on the welded surface, which realiz e the fundamental cycles of
+the graph, cannot be chosen to be disjoint. The following exa mple will illustrate the
+problem.
+Example 3.4. Consider the following graph, where the black edges constit ute a span-
+ning tree T0 and every coloured edge gives rise to a fundamental cycle
+d
+ab c
+v∗ e
+q1
+q2 q3 q4
+q5
+Five edges are connected to d and any two of them share a fundamental cycle induced
+by T0. Hence, if we want to realize the graph cycles as some closed c urves, any two
+nodal marked points in Cd will be connected by a segment. Then there will be some
+segments that intersect with each other because the 5 nodal m arked points and the
+segments connecting them form a K5-graph, which is not planar.
+We now show how this problem can be circumvented. Suppose we a re given a
+spanning tree T0 of a graph ∆, we can apply the following iteration to obtain a t ree
+T . This tree will induce a collection of graph cycles such that on each Cv the nodal
+marked points and the segments connecting them form a planar graph. The main idea
+is to reduce the number of edges in a spanning tree adjacent to a vertex.
+(1) Take an initial vertex v∗ such that it is only connected to one edge in T0. The
+vertexv∗ is ﬁxed throughout the iteration. On Tk, for every vertex v exceptv∗,
+
+===== PAGE 16 =====
+16 YIU MAN WONG
+there is exactly one edge adjacent to v going towards v∗, which we denote as
+e(k)
+v and others are all going away from v∗.
+(2) Let {q(k)
+1 ,...,q (k)
+g′ } be edges of ∆ not included in Tk and cq(k)
+i
+the fundamental
+cycles formed by adding q(k)
+i in the tree. Let w be a vertex of distance k + 1
+to v∗ in Tk. For any two edges adjacent to w, which are not e(k)
+w and share a
+fundamental cycle cq(k)
+i
+, we replace one of these two edges by q(k)
+i . The edge
+q(k)
+i should be connected only to vertices that are of distance gre ater equal k + 1
+to v∗. We carry out this operation until all the vertices of distan ce k + 1 to
+v∗ in Tk have no going-away edges sharing a fundamental cycle. The re sulting
+tree will be set to be Tk+1.
+(3) Notice that the set of vertices of distance k′ to v∗ in Tk, where k′ ≤ k, will
+be also the set of vertices of distance k′ to v∗ in Tk+1. Thus our operation in
+(2) will not change the distances we ﬁxed in earlier stages. W e terminate the
+iteration when we have exhausted all the vertices.
+Let Σ v be the graph whose vertices are the nodal marked points on Cv, while its edges
+are segments connecting them. Now we show that the ﬁnal spann ing tree T from the
+iteration above will give us on each Cv a graph Σ v that is planar. First, notice that
+there are 3 types of vertices in Σ v which represent:
+(i) a node which is represented by an edge adjacent to vertex v in the tree T
+towards the initial vertex v∗,
+(ii) a node which is represented by an edge adjacent to vertex v in the tree T away
+v∗ and
+(iii) a node which is represented by an edge, not in the tree T
+If the Σ v is induced by the result spanning tree T from the iteration, then the vertices
+of the same type are not connected. There is only one vertex of type (i) in Σ v and
+every vertex of type (iii) in Σ v has only one edge to some vertex of type (ii). Moreover,
+the unique vertex of type (i) is only connected to vertices of type (ii). Thus, any cycle
+in Σ v can only consist of multiple edges between the unique vertex of type (i) and a
+vertex of type (ii). This kind of Σ v is always planar. Indeed, if we regard the multiple
+edges between the unique vertex of type (i) and a vertex of typ e (ii) as one edge, the
+resulting graph Σ ′
+v will be a tree. As adding an extra edge between two vertices wi ll
+also add an extra face, the Euler characteristic will not cha nge. Hence, the graph Σ v
+induced by the resulting tree T is planar. Hence, we can now assert the existence of a
+∆-adapted symplectic basis on a welded surface. Finally, we can present our proof of
+Proposition 3.5.
+Proposition 3.5. Let
+X σ be a welded surface compatible with an enhanced level
+graph ∆. Then there exists a ∆-adapted symplectic basis on X σ. Moreover, if ∆
+has an edge of even enhancements, then the basis can be so chos en that it contains a
+vanishing cycle corresponding to an edge of even enhancemen t.
+Proof. Notice that every vertex of ∆ can only be adjacent to an even nu mber of edges
+of even enhancements, and hence by contracting all the edges of odd enhancements,
+we will get a graph whose vertices are of even degree. It is wel l-known that every edge
+
+===== PAGE 17 =====
+COMPUTING SPIN STRATUM CLASSES 17
+of such a graph is non-separating. Thus, every edge of even en hancement in a level
+graph is non-separating. Let ∆ ′ be the graph obtained by removing the chosen edge.
+We can apply our algorithm to generate a spanning tree T for a ∆ ′-adapted symplectic
+basis. It is easy to see that we can construct a ∆-adapted symp lectic basis by using
+the spanning tree T of ∆ ′. /char1d
+3.3. How a prong-matching rotation changes the spin parity. In this subsection,
+we will describe how the spin parity changes when we change th e prong-matching at a
+node.
+The ﬁnite group PΓ = ∏
+e∈ E(∆) Z/κ eZ is called the prong rotation group . Now
+let rq = (0,.., 0,l, 0,... 0) (only the component for e = q is l), where κq > l >0, be
+a representative of an element in the prong rotation group. T hen it acts on a global
+prong-matching σ by altering the local prong-matching σq. It precomposes the cyclic-
+order-reversing bijection σq : P in
+q− − → P out
+q+ with a rotation by 2πl
+κ q (in the ascending
+direction with respect to the cyclic order on P in
+q− ).
+We denote the new welded surface obtained by applying rq on the prong-matchings
+be X rqσ. Let γ on X σ be a loop representing a graph cycle passing through the seam
+corresponding to q. After we apply the prong rotation rq, γ will be a broken loop
+on X rqσ. By connecting the two ends of the broken loop by an arc of the s eam cycle
+of q we will get back a loop rqγ on X rqσ. By smoothing the loop, one can easily see
+that ind(γ) − ind(rqγ) = l (mod 2).
+Another easy observation is that if q is of odd enhancement, the vanishing cycle
+ofq will have odd turning number. Hence by expression (2.1), a sy mplectic pair which
+includes the vanishing cycle associated to q will contribute 0 to the spin parity, no
+matter which prong-matching is chosen.
+Now we have the preparatory material to present the proof of P roposition 1.2.
+Proof of Proposition 1.2. If there is an edge of even enhancement, then by Proposi-
+tion 3.5, we can choose a symplectic basis such that it contai ns a vanishing cycle α
+corresponding to an edge of even enhancement. Let β be the dual of α in the symplec-
+tic basis. By a generating local rotation at that edge, the tu rning number of β will
+increase by 1, while the turning numbers of other cycles in th e symplectic basis remain
+unchanged. Hence, half of the prong-matchings give us an eve n spin and the other half
+of the pair of prong-matchings give us an odd spin.
+Let ∆ ′ be the graph obtained by splitting all the edges of odd enhanc ements in ∆
+into legs. If h1(∆′) = 0 , then there is no graph cycle in the (disconnected) welde d
+surface corresponding to ∆ ′. Hence, rotating any local prong-matching will not change
+the turning number (mod 2) of members in a ∆-adapted symplect ic basis, thus the
+spin parity will remain unchanged. As a result, the spin pari ty of the welded surface
+associated to ∆ ′ is just the same as that of the welded surface associated to ∆.
+/char1d
+4. V anishing of the rational cohomology of Mg, 2 at v.c.d.
+In this section, we want to prove Theorem 4.1 which will be one of the input to prove
+Proposition 5.1 on the injectivity of clutching pullbacks. Let Mod g (resp. Mod g,n ) be
+
+===== PAGE 18 =====
+18 YIU MAN WONG
+the mapping class group of an oriented closed genus g surface (resp. with n-punctures).
+It is well-known that
+H i(Mg,n ; Q) ≃ H i(Modg,n ; Q)
+It has been shown by Harer ([Har86]) that Mod g resp. Mod g, 1 are virtual duality
+group of virtual cohomological dimension 4 g − 5 resp. 4 g − 3, i.e. there exists a
+dualizing module called Steinberg module St g (that will be deﬁned later) such that for
+any torsion-free ﬁnite index subgroup G< Modg (resp. G′< Modg, 1) and Mod g (resp.
+Modg, 1) module A, we have
+H i(G,A ) = H4g− 5− i(G, Stg ⊗ ZA)
+H i(G′,A ) = H4g− 3− i(G′, Stg ⊗ ZA),
+whereG (resp. G′) acts on St g ⊗ ZA by diagonal action. If we take rational coeﬃcients,
+then the virtual duality implies
+H i(Modg,A ⊗ Z Q) = H4g− 5− i(Modg, Stg ⊗ ZA ⊗ Z Q)
+H i(Modg, 1,A ⊗ Z Q) = H4g− 3− i(Modg, 1, Stg ⊗ ZA ⊗ Z Q),
+In [CFP12], it has been proved that the coinvariant (St g)Modg = 0 and this leads to
+H 4g− 3(Mg; Q) = H 4g− 5(Mg, 1; Q) = 0. Our aim in this section is to extend the result
+for Mg, 2:
+Theorem 4.1. For any g ≥ 1, we have H 4g− 2(Mg, 2; Q) = 0 .
+4.1. The Steinberg module Stg. In this subsection, we describe the Steinberg mod-
+ule St g. Let G be a torsion-free ﬁnite index subgroup of Mod g (resp. Mod g, 1). Then
+it acts on the Teichm¨ uller space Tg (resp. Tg, 1) freely and properly discontinuously,
+which implies that the quotient space will be a manifold. Iva nov [Iva90] and Harer
+[Har86] have constructed some contractible bordiﬁcation T of the Teichm¨ uller space
+such that the quotient space is compact. According to Theore m 6.2 of [BE73], the
+dualizing module for G is then the reduced homology ˜H2g− 2(∂T ; Z). Ivanov [Iva87]
+(resp. Harer [Har86]) has proved that ∂T g (resp. ∂T g, 1) is homotopy equivalent to the
+curve complex Cg (resp. Cg, 1) constructed by Harvey in [Har16].
+In [Har86], Harer showed that Cg, 1 is Modg, 1-equivariantly homotopy equivalent to Cg.
+This means that the virtual dualizing modules of Mod g and Modg, 1 are the same and the
+Modg, 1-action on it is just induced by the surjective homomorphism Modg, 1 − → Modg.
+In addition, in Harer’s construction of the cellular decomp osition of the Teichm¨ uller
+space Tg, 1, he introduced the arc complex A(Sg,n ).
+Deﬁnition 4.2. Let Sg,n be a genus g closed surface with n marked points. Then a
+k-arc system on it is a collection of isotopy classes (relativ e to the marked points) of k
+arcs and closed loops ([ α 0], [α 1],..., [α k− 1]) such that α 0,...,α k− 1 intersects only at the
+marked points. The arc complex A(Sg,n ) is the simplicial complex whose k-simplices
+are k + 1-arc systems and the face relations are induced by inclusi on. △
+An arc system ([ α 0], [α 1],..., [α k]) is a ﬁlling system if Sg,n \ ∪ iα i is a disjoint
+union of disks. An arc system is called oriented if the arcs are ordered. We denote
+
+===== PAGE 19 =====
+COMPUTING SPIN STRATUM CLASSES 19
+p
+Figure 3. A ﬁlling system (left) and its chord diagram
+the closed subcomplex of A(Sg,n ) consisting of arc systems that do not ﬁll Sg,n by
+A∞ (Sg,n ). Harer [Har86] has shown that A∞ (Sg, 1) is homotopy equivalent to Cg. Since
+A(Sg, 1) is contractible, we have
+Stg = ˜H2g− 2(A∞ (Sg, 1); Z) ≃ H2g− 1(A(Sg, 1)/ A∞ (Sg, 1); Z)
+Let Fj be the free abelian group generated by oriented ﬁlling syste ms which consist
+of 2g +j arcs. Note that a ﬁlling system has at least 2 g arcs and F• is just the cellular
+chain complex C•(A(Sg, 1)/ A∞ (Sg, 1); Z) shifted by 2 g − 1.
+Proposition 4.3 ([Bro12]). We have a ﬁnite resolution of the Steinberg module Stg:
+0 − → F 4g− 3 − → ... − → F 1 − → F 0 − → Stg − → 0,
+where the maps are cellular chain maps. Moreover, if we tenso r the resolution by Q,
+then we get a projective resolution of Stg ⊗ ZQ.
+Corollary 4.4 ([Bro12]). LetA be a Modg- (or Modg, 1-) module. Then
+H i(Modg, 1; Q ⊗ ZA) ≃ H4g− 3− i((F• ⊗ Z Q) ⊗ Modg,1A)
+H i(Modg; Q ⊗ ZA) ≃ H4g− 3− i((F• ⊗ Z Q) ⊗ Modg A).
+4.2. Chord diagrams. In order to keep track of the ﬁlling systems, it is convenient
+to use a chord diagram to represent them. Given an arc system o nSg, 1, if we cut out a
+disk neighbourhood of the marked point and deform the cut arc s away from the marked
+point, then we will get a collection of chords of the boundary circle (for instance, see
+Figure 3).
+Deﬁnition 4.5. A labelled k-chord diagram is a collection of (2 g +k) chords of
+an oriented circle such that we labelled them by isotopy clas ses of arcs on Sg, 1. The
+orientation of the chords has to be compatible with that of th e circle. △
+Given an oriented ﬁlling system, one can construct a labelle d chord diagram asso-
+ciated with it. We call a chord diagram proper if it really comes from an oriented
+ﬁlling system. A labelled chord diagram with 2 g +k chords is proper if and only if (cf.
+[Bro12]):
+• there are no parallel edges (include chords and edges of the c ircle), i.e. no two
+edges can deform to another without changing the intersecti ons of chords;
+
+===== PAGE 20 =====
+20 YIU MAN WONG
+a1
+a2
+a2g
+Figure 4. The chord diagram corresponding to ﬁlling system φ g
+• there are k cycles if we trace along the chords and edges (each chord and e dge
+can be gone through twice) of the circle.
+The advantage to work on chord diagrams is that Mod g, 1 (or Mod g) acts transitively
+on the set of labelled chord diagrams of the same topological type (i.e. the underlying
+topological spaces of 1-complexes are orientation preserv ing isomorphic). It will be
+convenient to make some argument about the generators of St g by just considering the
+chord diagrams of some certain topological type.
+Let x1,...,x 2g be a standard set of generators of the fundamental group of a g enus
+g closed surface. Let φ g be the ﬁlling system with 2 g arcs so that the associated chord
+diagram is as depicted in Figure 4, where
+a1 =x1
+ai =
+{
+xi if i = 2j
+xix− 1
+i− 2 if i = 2j + 1
+Proposition 4.6 ([Bro12]). The Steinberg module Stg is generated by [φ g] as a Modg, 1-
+(or Modg-) module. Moreover, the class of any ﬁlling system whose cho rd diagram has
+more than one connected component of chords will be trivial i n Stg.
+4.3. Proof of Theorem 4.1. To prove Theorem 4.1, it is equivalent to proving that
+H 4g− 2(Modg, 2; Q) = 0. According to [Bir69], we have the following exact seque nce
+relating the mapping class group Mod g, 1 and Mod g, 2:
+1 − → π1(Sg, 1 \ { p1},p 2) − → Modg, 2 − → Modg, 1 − → 0,(4.1)
+where the ﬁrst arrow is induced by point pushing and the secon d arrow is just forgetting
+a marked point. We can then apply the Lyndon-Hochschild-Ser re spectral sequence of
+group cohomology to such exact sequence, i.e. there is a spec tral sequence of cohomo-
+logical type
+Ep,q
+2 =H p(
+Modg, 1;H q(π1(Sg,n \ { p1},p 2); Q)
+)
+=⇒ H p+q(Modg, 2; Q).
+
+===== PAGE 21 =====
+COMPUTING SPIN STRATUM CLASSES 21
+Note that π1(Sg,n \ { p1},p 2) is a free group generated by 2 g elements, and we have
+H q(π1(Sg,n \ { p1},p 2); Q) =
+
+
+
+
+
+Q if q = 0
+Q2g if q = 1
+0 otherwise
+Forg = 1, due to Eichler-Shimura isomorphism and the fact that the re is no nontrivial
+odd weight modular form, we have H 1(SL(2, Z); Q[x,y ]1) = 0, where Q[x,y ]1 is the
+space of Q-linear function on Q2. Thus, we only need to consider the case where g >1.
+Since the virtual cohomological dimension of Mod g, 1 is 4g − 3, the terms Ep,q
+2 where
+p +q = 4g − 2 can only be non-trivial if p = 4g − 3 and q = 1. Hence, we need to show
+that H 4g− 3(Modg, 1; Q2g) = 0. The action of Mod g, 1 on Q2g comes from the action of
+Modg, 2 on π1(Sg,n \ { p1},p 2). It is obvious that any point pushing with respect to p1
+will act trivially on Q2g which is isomorphic to the abelianization of π1(Sg,p 1) tensored
+with Q. Since we also have the exact sequence
+1 − → π1(Sg,p 1) − → Modg, 1 − → Modg − → 1,
+the Mod g, 1-module structure on Q2g is induced by the Mod g-module structure on it
+via the map Mod g, 1 − → Modg. Moreover, by Corollary 4.4, we have
+H 4g− 3(Modg, 1; Q2g) ≃ H0(Modg, 1; Stg ⊗ ZQ2g)
+≃ H0(Modg; Stg ⊗ ZQ2g)
+≃ H0(F• ⊗ Modg Q2g)
+Thus, once we can show that H0(F• ⊗ Modg Q2g) = 0, the theorem is proved. We end
+our proof with the following proposition.
+Proposition 4.7. Let Q2g be the Modg- (or Modg, 1-) module we described above. Then
+H0(F• ⊗ Modg Q2g) = 0 .
+Proof. Forg = 1, by the virtual duality and our reasoning above, we are don e. The
+argument we give now is for g >1. Note that H0(Modg; Stg ⊗ ZQ2g) is just the coinvari-
+ant (St g ⊗ ZQ2g)Modg . Then by Proposition 4.6, it is generated by {[φ g] ⊗ x∨
+i } because
+{x1,...,x 2g} form a basis for H1(Sg, 1; Q). Here, x∨
+i refers to the intersection product
+(−,x i) with respect to xi. Thus, it suﬃces to show that φ g ⊗ x∨
+i lies in the image of
+the cellular chain map
+∂ ⊗ id : F1 ⊗ Modg Q2g − → F 0 ⊗ Modg Q2g
+for every i.
+Forg >1, we consider the ﬁlling system corresponding to Figure 5, w herea1,...,a 2g
+as deﬁned before and a2g+1 =x− 1
+2g− 1. The cellular chain map image will be
+(∂ ⊗ 1)(φ ′
+g ⊗ a∨
+i ) =
+(2g+1∑
+j=1
+(− 1)i− 1(a1,..., ˆaj,...,a 2g+1)
+)
+⊗ a∨
+i
+By Proposition 4.6, the terms for j = 2, 3,..., 2g will be zero because the corresponding
+
+===== PAGE 22 =====
+22 YIU MAN WONG
+a1
+a2
+a2g
+a2g+1
+Figure 5. The chord diagram corresponding to ﬁlling system φ ′
+g
+chord diagram will be disconnected. In addition, there is so me t ∈ Modg mapping ai
+to ai+1 for i = 1,..., 2g. Hence, for i = 1, 2,..., 2g, we have
+(∂ ⊗ 1)(φ ′
+g ⊗ a∨
+i ) =(t ·φ g) ⊗ a∨
+i +φ g ⊗ a∨
+i
+=φ g ⊗ (t ·ai)∨ +φ g ⊗ a∨
+i
+=φ g ⊗ a∨
+i+1 +φ g ⊗ a∨
+i
+These yield for i = 1,..., 2g + 1
+[φ g ⊗ a∨
+i ] = ( − 1)i− 1[φ g ⊗ a∨
+1 ] ∈ (Stg ⊗ ZQ2g)Modg.
+Then we have
+(g + 1)[φ g ⊗ x∨
+1 ] =[φ g ⊗ x∨
+1 ] +
+( g− 1∑
+j=1
+[φ g ⊗ (x∨
+2j+1 − x∨
+2j− 1)]
+)
++ [−φ g ⊗ x∨
+2g− 1] = 0
+Thus, [φ g ⊗ x∨
+1 ] = 0 and one can easily deduce that [ φ g ⊗ x∨
+i ] = 0 for i = 1,..., 2g. /char1d
+5. Preparatory material for the computation of spin stratum cl asses
+The goal of this section is to provide technical details abou t how to compute the
+clutching pullback of a (spin) stratum class. In addition, w e will explain why the
+clutching pullbacks will give us a solution under certain as sumptions. In Section 5.1 to
+Section 5.2, we will explain how this pullback mechanism wor ks, while in Section 5.3
+to Section 5.6, we will demonstrate how to do the actual compu tation when we reduce
+to the case of lower genus or fewer marked points.
+5.1. Injectivity of clutching pullbacks. Recall that given a stable graph Γ of
+genusg and n legs, there is a natural morphism
+ξΓ :
+MΓ =
+∏
+v∈ V (Γ)
+Mg(v),n (v) − → Mg,n,
+which is called the clutching map. We have mentioned in the in troduction that in order
+to compute the spin stratum classes [ Hg(µ )]spin, we will compute the clutching pullback
+of them and solve a system of linear equations.
+The existence of a solution is clear. The uniqueness of the so lution is due to the
+strengthened version of a result in [AC98].
+
+===== PAGE 23 =====
+COMPUTING SPIN STRATUM CLASSES 23
+Proposition 5.1. Consider the clutching maps ξΓ : MΓ − → Mg,n , where Γ are stable
+graphs of genus g and n-legs and with only one edge, the direct sum of pullback maps
+⊕ Γξ∗
+Γ : H j(Mg,n ; Q) − →
+⨁
+Γ
+Hj(MΓ; Q)
+is injective if j ≤ d(g,n ), where
+d(g,n ) =
+
+
+
+
+
+
+
+
+
+2n − 7 if g = 0
+2g − 1 if n = 0, 1
+2g if n = 2
+2g − 3 +n otherwise
+(5.1)
+Proof. The ﬁrst thing diﬀerent from the original version is the ﬁrst r ow of d(g,n ).
+Indeed, according to [Kee92], the cohomology ring H ∗(
+M0,n ; Q) is generated by cycle
+classes of boundary strata. In particular, the cohomology g roups of odd degrees are
+trivial. Moreover, a cycle class of a boundary stratum of M0,n can be written as a
+product of classes of boundary divisors. If a class x of even codimension j ≤ 2n − 8
+lies in the kernel of the sum of clutching pullbacks, then any intersection product
+x ·∏
+i=1,...,j [DΓi] will also be zero because x ·[DΓ] = ξΓ∗ξ∗
+Γ(x). Due to Poincar´ e duality,
+this will force that x = 0.
+The other thing diﬀerent from the original version is the seco nd and third rows
+of the values of d(g,n ). According to Theorem 1 in [CFP12] and our proof in Sec-
+tion 4.1, H 4g− 5(Mg, Q) = H 4g− 3(Mg, 1, Q) = H 4g− 2(Mg, 2, Q) = 0. This implies that
+H2g− 1
+c (Mg; Q) = H 2g− 1
+c (Mg, 1; Q) = H 2g
+c (Mg, 2; Q) = 0. Then by the long exact se-
+quence:
+... − → Hj
+c(Mg,n ; Q) − → Hj(
+Mg,n ; Q) − → Hj(∂Mg,n ; Q) − → ...,
+we can conclude that H j(Mg,n ; Q) − → Hj(∂Mg,n ; Q) is injective if j ≤ d(g,n ).
+Then, by the same argument of Lemma 2.6 in [AC98], it yields th at
+⊕ Γξ∗
+Γ : H j(Mg,n ; Q) − →
+⨁
+Γ
+Hj(MΓ; Q)
+is injective for j ≤ d(g,n ). /char1d
+Remark 5.2. If Hg(µ ) is a meromorphic stratum, then the stratum classes [ Hg(µ )] lie
+in the degree 2g component of the tautological ring RH 2g(Mg,n ) ⊆ H2g(Mg,n ); if Hg(µ )
+is a holomorphic stratum, then the stratum class lies in RH 2g− 2(Mg,n ) ⊆ H2g− 2(Mg,n ).
+Thus, for meromorphic strata and n = 2, the codimension of the (spin) stratum class
+will be out of the range of injectivity d(g,n ) = 2g − 3 +n in the original proposition in
+[AC98]. That is why we need to improve d(g, 2) to 2g.
+In practice, computing the clutching pullback of a stratum c lass with respect to the
+self-node graph Γ 0 will be very diﬃcult, especially if our signature µ already contains
+a pair of simple poles. We will illustrate the problem in Sect ion 5.5. Hence, we want
+to assume that the injectivity is still guaranteed if we negl ect the clutching pullback
+with respect to Γ 0 under the condition n ≥ 3.
+
+===== PAGE 24 =====
+24 YIU MAN WONG
+Assumption 5.3. Forg >0,n ≥ 3, the pullback map
+⊕ Γ̸=Γ0ξ∗
+Γ : Hk(Mg,n ) − →
+⨁
+Γ
+Hk(MΓ)
+is injective if k ≤ 2g − 3 +n.
+This assumption is tested to be true for the cases of ( g,n ) equal
+(1, 3), (1, 4), (1, 5), (1, 6), (2, 3), (2, 4), (2, 5), (3, 3), (3, 4), (4, 3)
+for which our computer is capable to do the calculations by admcycles in a reasonable
+time.
+5.2. Clutching Pullback F ormula. In this subsection, we aim to establish a for-
+mula for doing intersection theory with the (spin) stratum c lass. Recall that in the
+introduction we mentioned that we want to compute the clutch ing pullback
+ξ∗
+Γ
+(
+[
+Hg(µ )]spin)
+=ξ∗
+Γp∗
+(
+[PMg,n (µ )]spin)
+,
+where Γ is a one-edge stable graph of genus g andn leg. We will ﬁrst proceed to derive
+the formula for the stratum class, and then give the spin vari ant of it.
+We will apply the excess intersection formula (see for examp le [Ful16] Prop. 17.4.1)
+to derive our pullback formula for ξ∗
+Γ. First, we have to identify the ﬁber product
+FΓ,µ PΞMg,n (µ )
+MΓ Mg,n
+t1
+t2 p
+ξΓ
+and the top Chern class of the excess normal bundle E =t∗
+2NΓ/ Nt1, where NΓ and Nt1
+are the normal bundles with respect to ιΓ resp. t1. Then
+ξ∗
+Γp∗
+(
+[PΞ
+Mg,n (µ )]
+)
+=t2∗ctop(E).
+Let ∆ and Γ be stable graphs. A graph contraction of ∆ to Γ is deﬁned as a pair
+of maps between the set of half edges (i.e. H(∆) and H(Γ)) resp. the set of vertices
+(i.e.V (∆) and V (Γ)):
+(
+fv :V (∆) ։ V (Γ), f h :H(Γ)֒→H(∆)
+)
+,
+satisfying the following conditions:
+(i) For any half edge h0 ∈ H(Γ) at a vertex v0 ∈ V (Γ), the image fh(h0) ∈ H(∆)
+should be at a vertex in f − 1
+v (v0),
+(ii) the map fh respects markings and edges are mapped to edges
+(iii) for any vertex v0 ∈ V (Γ), the subgraph in ∆ consisting of all the vertices in
+f − 1
+v (v0) and the half edges adjacent to them is a connected stable gra ph of
+genusg(v0) and |H(Γ)v0 |-markings.
+A Γ -structure on ∆ is just a graph contraction of ∆ to Γ.
+
+===== PAGE 25 =====
+COMPUTING SPIN STRATUM CLASSES 25
+Proposition 5.4. Given a signature µ = (m1,...,m n) such that ∑mi = 2g − 2, then
+for a one-edge stable graph Γ, we have the equality
+ξ∗
+Γ
+(
+[Hg(µ )]
+)
+=
+∑
+ΓH
+f
+⇝Γ
+1
+|Aut(Γ)|ξf ∗pΓ
+(
+[PΞMΓH ]
+)
++
+∑
+∆
+f
+⇝Γ
+∆∈ LG1(µ )
+1
+|Aut(∆)| ·
+∏
+e∈ E(∆)κe
+κf
+·ξf ∗
+(
+π ∗
+⊤p⊤
+∗ [PΞ
+M∆, ⊤ ] ·π ∗
+⊥p⊥
+∗ [PΞ
+M∆, ⊥ ]
+)
+(5.2)
+where ΓH is the horizontal level graph whose underlying graph is Γ and κf is the en-
+hancement of the image edge in ∆ corresponding to the single edge in Γ via f .
+Before we prove the above formula, we have to understand the ﬁ ber product FΓ,µ .
+Deﬁnition 5.5. Letπ : X − → B be a family of stable curves such that the dual graph
+of every ﬁber is some degeneration of Γ. Then a Γ-marking on X is the following data:
+• a collection of |E(Γ)| sections σ1,...,σ |E(Γ)| with image in the singular locus of
+π ;
+• a collection of |H(Γ)|sectionsσ1, 1,σ 1, 2,σ 2, 1,...,σ |E(Γ)|, 2 of the normalization ˜X
+of X ;
+• a collection of |V (Γ)| connected components of X \ ∪ |E(Γ)|
+i=0 σi
+such that each ﬁber nodal curve is marked according to Γ. △
+We can regard MΓ as the stack of families of stable curves with a Γ-marking. As a
+result, one can easily see that the ﬁber product FΓ,µ is just the moduli stack of families
+of multi-scale diﬀerentials ( X, η) with a Γ-marking on X . Let LG 1(µ ) be the set of
+level graphs compatible with signature µ such that the codimension of D∆ is 1.
+Lemma 5.6. The natural morphism
+j := ⊔jf :
+∐
+∆∈ LG1(µ )
+∆
+f
+⇝Γ
+D∆,f − → F Γ,µ ,
+whereD∆,f is the stack of families of multi-scale diﬀerentials with a ∆-marking on the
+underlying family of curves and a Γ structuref on ∆ being speciﬁed, is ﬁnite, ﬂat and
+surjective.
+Proof. Notice that a family of multi-scale diﬀerentials ( X, η) compatible with a level
+graph ∆ whose underlying family of stable curves has a partia l normalization according
+to Γ if and only if there is a Γ-structure on ∆. The morphism
+∐
+∆∈ LG1(µ )
+∆⇝Γ
+D∆ × Mg,n MΓ − → F Γ,µ
+is ´ etale. Moreover,
+
+===== PAGE 26 =====
+26 YIU MAN WONG
+D∆ × Mg,n M∆ × Mg,n MΓ − → D∆ × Mg,n MΓ
+is ﬁnite, ﬂat and surjective. Note that
+M∆ × Mg,n MΓ ≃
+∐
+∆
+f
+⇝Γ
+M∆
+Hence, j is ﬁnite, ﬂat and surjective.
+/char1d
+Lemma 5.7. The zeroth Chern class of the excess bundle is
+c0(t∗
+2NΓ/ Nt1) =
+∑
+∆∈ LG1(µ )
+∆⇝Γ
+1
+|Aut(∆)|jf, ∗
+(
+c0(j∗
+ft∗
+2NΓ/ Nt1◦jf )
+)
+Proof. First note that
+j∗
+f (t∗
+2NΓ/ Nt1) = j∗
+ft∗
+2NΓ/j ∗
+f Nt1
+andj∗
+f Nt1 = Nt1◦jf . In addition, if Q is an irreducible component of FΓ,µ , then for any
+[C] ∈ CH0(Q),
+j∗j∗([C]) = deg Q(j) ·[C].
+Since the degree of the morphism jf is just |Aut(∆)|, it yields the formula above.
+/char1d
+Now we can give the proof of Proposition 5.4.
+Proof of Proposition 5.4. We ﬁrst consider those ∆ which are two level graphs, i.e.
+∆ ∈ LG1, then we consider the case that ∆ = Γ H. Let ( h,h ′) be the edge ( h andh′ are
+the half-edges) of the one-edge graph Γ and Lh be the section pullback of the dualizing
+sheaf of
+MΓ. Then the normal bundle NξΓ is just L∨
+h ⊗ L ∨
+h′ (cf. [ACG11]). According
+to the proof of Proposition 7.2 in [CMZ20b], there is a short e xact sequence of coherent
+sheaves on D∆,f (at least outside a subvariety of codimension two)
+0 − → N ⊗ ℓ(∆)/κ f
+t1◦jf
+− → j∗
+ft∗
+2NξΓ − → Q − → 0,
+where Nt1◦jf is the normal bundle of D∆,f − → PΞ
+Mg,n (µ ). Here, ℓ(∆) is the l.c.m of
+the enhancements of the vertical edges of ∆. As a result, Q has rank 0 and by default
+the zeroth Chern class of Q is just 1. Hence, the zeroth Chern class of j∗
+ft∗
+2NξΓ/ Nt1◦jf
+is just ℓ(∆)
+κ f
+.
+If ∆ = Γ H, then we have
+Nt1◦jf ≃ j∗
+ft∗
+2NξΓ
+Hence, the zeroth Chern class of the excess bundle on this com ponent will be just 1.
+By Lemma 5.7 and due to the fact that t2 ◦jf =ξf ◦p∆, we have
+
+===== PAGE 27 =====
+COMPUTING SPIN STRATUM CLASSES 27
+t2, ∗
+(
+c0(t∗
+2NΓ/ Nt1)
+)
+=
+∑
+ΓH
+f
+⇝Γ
+1
+|Aut(Γ)|ξf ∗pΓ∗
+(
+[DΓH ,f ]
+)
++
+∑
+∆
+f
+⇝Γ
+∆∈ LG1(µ )
+1
+|Aut(∆)| ·ℓ(∆)
+κf
+·ξf ∗p∆∗
+(
+[D∆,f ]
+)
+Note that the degree of the morphism p∆ is just the number of equivalence class of
+prong matchings which is just
+∏
+e∈ E(∆) κ e
+ℓ(∆) . Since the image of p∆ is just p⊤ (PΞM∆, ⊤ ) ×
+p⊥ (PΞM∆, ⊥ ), one gets the Clutching Pullback Formula 5.2. /char1d
+By the same method as in Corollary 1.3 to determine the spin va riant of the pro-
+jection pushforward of divisor associated to a two-level gr aph, we now state the spin
+version of (5.2):
+Proposition 5.8. Given a one-edge stable graph Γ, the Clutching Pullback Formula
+for the spin stratum class is:
+ξ∗
+Γp∗
+(
+[PΞMg,n (µ )]spin)
+=
+∑
+ΓH
+f
+⇝Γ
+1
+|Aut(Γ)|ξf ∗pΓ∗
+(
+[PΞMΓH ]spin
+)
++
+∑
+∆
+f
+⇝Γ
+∆∈ LGodd
+1 (µ )
+1
+|Aut(∆)| ·
+∏
+e∈ E(∆)κe
+κf
+·
+ξf ∗
+(
+π ∗
+⊤p⊤∗ [PΞM∆, ⊤ ]spin ·π ∗
+⊥p⊥∗ [PΞM∆, ⊥ ]spin
+)
+(5.3)
+In Section A.1, we will give an example to illustrate how to us e the clutching pull-
+back formula to compute the clutching pullbacks of a stratum class. Then later in
+Section A.2, we will demonstrate the use of the clutching pul lback formula to compute
+the clutching pullbacks of a spin stratum class and reconstr uct that spin stratum class.
+5.3. Resolving the residue conditions R of a generalised stratum. Assume
+that we are given a signature µ and the spin stratum class of the level strata in the
+spaces M∆, ⊤ and M∆, ⊥ . Then by applying the Clutching Pullback Formula (5.3) on
+each one-edge graph, we get a system of linear equations. Acc ording to Proposition 5.1,
+this system of linear equations has a unique solution which i s the spin stratum class.
+Hence, it is crucial to compute the spin stratum class of a lev el stratum.
+Due to the global residue conditions, the generalised strat um associated to the lower
+level can have residue conditions. For such a (spin) stratum class, it is not possible
+to use the method of solving a system of linear equations from clutching pullbacks.
+Namely, the codimension of the (spin) stratum class is too hi gh such that it is outside
+the range in Proposition 5.1. Nevertheless, the (spin) stra tum class of a stratum with
+residue conditions is closely related to the (spin) stratum class of its ambient stratum
+which has one residue condition less. We can actually recurs ively compute the spin
+
+===== PAGE 28 =====
+28 YIU MAN WONG
+stratum class of a stratum with residue conditions from the s pin stratum class of a
+stratum with no residue conditions.
+Our main tools to resolve the residue conditions of a compact iﬁed generalised stratum
+are the following two propositions which are originally fro m [Sau19], and proved in
+[CMZ20b] for the versions on the compactiﬁed generalised st ratum.
+Let g, n, µ be tuples of integers. On a (projectivized) generalised str atum PΞM
+R
+g, n(µ)
+that admits spin structure, every (algebraic/cohomologic al) class can be written as the
+sum of summands carrying the even and odd spins. Hence, we can in general deﬁne
+the spin variant of a class. For example, let ξ be the class c1(O(1)) on PΞ
+M
+R
+g, n(µ),
+and ψ (ν,i ) be the ψ -class at the i-th marked point on the component ν. We write ξspin
+and ψ spin
+(ν,i ) for the spin variants of ξ- and ψ -classes.
+Assume that after we remove one residue condition from the se t of residue condi-
+tions inducing R, the new residue space R0 is strictly larger than conditions R0, then
+PΞ
+M
+R
+g, n(µ) will be a subvariety of codimension one in PΞ
+M
+R0
+g, n(µ).
+Proposition 5.9. The class of the stratum PΞM
+R
+g, n(µ) with residue condition R com-
+pares inside the Chow ring of the generalized stratum
+B = PΞM
+R0
+g, n(µ) to the class ξ
+by the formula
+[PΞM
+R
+g, n(µ)] = −ξ −
+∑
+∆∈ LGR
+1 (
+B)
+ℓ∆[D∆]
+where LGR
+1 (
+B) is the set of two-level graphs such that the removed residue c ondition
+from R will induce no extra condition on the top level. In particular , if both PΞM
+R
+g, n(µ)
+and
+B admit spin structure, then we have
+[PΞM
+R
+g, n(µ)]spin = −ξspin −
+∑
+∆∈ LGR
+1 (
+B)
+ℓ∆[D∆]spin
+The following proposition tells us that ξ-class can actually be expressed as ψ -class
+plus boundary terms. This enable us easily compute the proje ction pushforward of the
+(spin) fundamental class of a stratum to Mg,n .
+Proposition 5.10. The class ξ on B = PΞM
+R
+g, n(µ) can be expressed as
+ξ = (mν,i + 1)ψ (ν,i ) −
+∑
+∆∈ (ν,i) LG1(
+B)
+ℓ∆[D∆]
+where (ν,i ) LG1(B) is the set of two-level graphs with the leg (ν,i ) on the lower level;
+mν,i is the order of singularity at the leg (ν,i ). In particular, if B admits spin structure,
+then
+ξspin = (mν,i + 1)ψ spin
+(ν,i ) −
+∑
+∆∈ (ν,i) LG1(B)
+ℓ∆[D∆]spin
+The spin variants of the above propositions require that all the involved strata admit
+spin structure. However, if we want to resolve a residue rela tion on a pair of simple
+
+===== PAGE 29 =====
+COMPUTING SPIN STRATUM CLASSES 29
+poles (i.e. of the form r1 +r2 = 0), then the ambient stratum will no more admit a spin
+structure and the spin variant of the above propositions can not apply. In the recursion
+of computing the spin stratum classes, there is a case where w e cannot directly apply
+the clutching pullback method so that we have to resolve the r esidue condition on a
+pair of simple poles. This will be handled in Proposition 5.1 4 of Section 5.5.
+By Proposition 5.10, Proposition 5.9 and Proposition 5.14, computing the projection
+pushforward of (the spin variant of) the fundamental class o f a generalised stratum with
+residue conditions can be boiled down to computing stratum c lasses of smaller genus or
+fewer markings. Hence, now we basically have all the ingredi ents one would expect to
+carry out the recursive computation of the spin stratum clas ses. However, in fact, we
+still have some problems in some special cases if we really st art the recursion. These
+will be handled in the next two subsections.
+5.4. Clutching pullback of Γ0. In this subsection, we will explain why we in general
+want to avoid computing the clutching pullback with respect to the self-loop graph Γ 0.
+To compute the clutching pullback ξΓ0 of the (spin) stratum class of signature µ , we
+inevitably need to know the stratum class p∗[PΞM
+R
+g− 1,n +2(µ ′)] ∈ H2g(
+Mg− 1,n +2), where
+µ ′ = (m1,...,m n, − 1, − 1) and R is induced by the residue condition rn+1 +rn+2 = 0.
+If we recursively compute the clutching pullback of a stratu m class with respect to
+Γ0 , we will get into a bottleneck. Namely, we will end up with som e level stratum that
+actually represents a complicated horizontal level graph. The following example may
+give some insight into it.
+Example 5.11. Let µ = (6). Then by repeating the clutching pullback of non-
+separable Γ, we will end up computing the spin stratum class p∗[PΞ
+M
+R
+0, 9(6, − 18)spin],
+where R consists of the residue conditions
+r2 +r3 = 0, r 4 +r5 = 0, r 6 +r7 = 0
+Notice that the residue conditions above imply r8 +r9 = 0. One of the vertical two-level
+graphs of that stratum will be as the following:
+− 12 − 14
+− 16 − 18
+− 13 − 15
+− 17 − 19
+2 2
+− 4 − 4
+6
+The top level stratum illustrates the following horizontal level graph
+2 2
+
+===== PAGE 30 =====
+30 YIU MAN WONG
+for which we do not have a method to reduce the computation of t he spin stratum class
+to the computation of the spin stratum class of each componen t.
+However, we expect that we will not always need to consider th e clutching pullback of
+Γ0. In the practice of application of Theorem 5.1 we observe tha t in actual computation
+for n ≥ 3 the common kernel of all clutching pullbacks except that wi th respect to Γ 0
+is already trivial. Although we cannot give a proof of Assump tion 5.3, we can propose
+a recursion scheme based on this assumption.
+Nevertheless, we still need to handle the spin stratum class es of strata of diﬀerentials
+that have simple poles. Now if we want to construct the recurs ion, then the base cases
+of our recursion will be for g = 0:
+(i) µ does not contain any − 1,
+(ii) or µ = (2k, − 2k, − 1, − 1),
+(iii) or µ = (0, − 1, − 1).
+Case (i) is obvious. Since there is no symplectic basis on a sp here, the spin will just
+be taken as 0. Case (ii) and (iii) will be discussed in the next subsection based on the
+perspective of ﬂat surfaces.
+5.5. Spin stratum classes of signatures containing simple poles. In this sub-
+section, we will show how to handle the stratum of even type up to pairs of simple
+poles with residue condition relating them. According to [B oi15], we can view a mero-
+morphic diﬀerential as a non-compact ﬂat surface, i.e. a surf ace obtained by glueing
+inﬁnite half-cylinders and inﬁnite half-planes on R2 such that there is no boundary.
+A pair of simple poles with the residue condition r1 +r2 = 0 relating them can be
+visualized as two inﬁnite half-cylinders of the same width b ut in opposite direction.
+Any ﬂat surface ( X,ω ) with simple poles (which are paired up by residue condition s)
+can canonically form a ﬂat surface ( X ′,ω ′) of larger genus by cutting and glueing the
+half inﬁnite cylinders. If the signature µ contains only even numbers and − 1s (paired
+up by residue conditions), then the spin parity of (X,ω ) is deﬁned to be the spin
+parity of ( X ′,ω ′). The following two propositions are some easy results on th e spin
+stratum classes of stratum that has genus 0.
+Proposition 5.12. The ﬂat surface of signature µ = (0, − 1, − 1) has odd parity.
+Proof. After cutting and glueing the inﬁnite half-cylinders, we ge t a ﬂat torus. A ﬂat
+torus always has odd parity. /char1d
+Proposition 5.13. Let k ∈ Z≥ 0. The spin stratum class of
+H
+R
+(2k, − 2k, − 1, − 1),
+where R is induced by the residue condition r3 +r4 = 0, is equal to ψ 1.
+Proof. First, note that PΩMR
+0, 4(2k, − 2k, − 1, − 1) has dimension 0. Hence, we just need
+to count the number of such ﬂat surfaces of even parity and of o dd parity. Consider
+a ﬂat surface corresponding to the signature (2 k, − 2k, − 1, − 1) with residue space R.
+Then due to the realization of non-compact ﬂat surfaces by ha lf-planes and cylinders
+that were constructed in [Boi15], we have 2(2 k − 1) half planes and 2 half- inﬁnite
+cylinders of opposite directions and the same width. Then by computing the spin
+
+===== PAGE 31 =====
+COMPUTING SPIN STRATUM CLASSES 31
+parities of such ﬂat surfaces where the half inﬁnite cylinde rs are glued to diﬀerent half-
+planes, we will know that the number of ﬂat surfaces of even sp in will be larger than
+that of odd spin by 1.
+a1
+a3
+a4k− 3
+a1
+a2
+a2b
+ca4k− 2
+a4k− 2
+b
+c
+/char1d
+In general for the signature µ = (a, −b, − 12s) and a set of residue conditions R
+which pair up the simple poles, in order to compute the spin st ratum class, we need to
+resolve a residue condition pairing two simple poles instea d of computing the clutching
+pullbacks. This is because the codimension of the class will be outside the range of
+injectivity (5.1) of clutching pullbacks. More generally, if we are dealing with some
+stratum of diﬀerentials
+• whose signature is of the form µ = (µ ′, − 12s), whereµ ′ is a partition of 2g− 2+2s
+by even integers containing some negative entry;
+• with a set of residue conditions R pairing the simple poles up,
+then we can directly express the spin stratum classes in the C how ring of ambient
+stratum, which is of the same signature but with a set of resid ue conditions R0 such
+that the residue condition on the ﬁrst pair of simple poles is removed. Before we state
+the following proposition, we want to deﬁne some special set of two-level graphs of the
+ambient stratum B = PΞM
+R0
+g,n (µ ). We denote
+• by LG R
+1 (
+B) the set of level graphs such that the the ﬁrst and second simp le
+poles are on the top level and their residue sum is forced to be zero;
+• by LG⊤
+1 (
+B) (resp. LG ⊥
+1 (
+B)) the set of level graphs such that the the ﬁrst simple
+pole is on the top (resp. bottom) level while the second simpl e pole is on the
+bottom (resp. top) level.
+Proposition 5.14. Let µ = (µ ′, − 12s) be a signature and R (resp. R0) be a set of
+residue conditions as we mentioned above. Then the cycle clas s of PΞM
+R
+g,n (µ ) in the
+Chow ring of
+B = PΞM
+R0
+g,n (µ ) can be expressed as follow:
+[PΞM
+R
+g,n (µ )] = −
+∑
+∆∈ LGR
+1 (
+B)
+ℓ∆[D∆] +
+∑
+∆∈ LG⊤
+1 (
+B)
+ℓ∆[D∆].(5.4)
+Similarly, the spin stratum class can be expressed as follow :
+
+===== PAGE 32 =====
+32 YIU MAN WONG
+[PΞM
+R
+g,n (µ )]spin = −
+∑
+∆∈ LGR
+1 (
+B)
+ℓ∆[D∆]spin,(5.5)
+Proof. We ﬁrst prove Equation (5.4). Let f : PΞ
+M
+R0
+g,n (µ ) − → P1 be the extension of
+the map
+˜f :PΩMR0
+g,n (µ ) − → P1
+(X,η ) ↦→ [− resp1(η) : res p2(η)],
+where p1 and p2 are the ﬁrst two simple poles. Then it is easy to see that the in verse
+image of {1} is just the union of PΞM
+R
+g,n (µ ) and D∆ for D∆ ∈ LGR
+1 (
+B) while the
+inverse image of {∞} is the union of D∆ for ∆ ∈ LG⊤
+1 (
+B). Then Equation (5.4) is just
+obtained by considering the multiplicities of the irreduci ble components of the inverse
+image. The multiplicity of D∆ is just ℓ∆ because the residues on the bottom level
+decays like tℓ∆.
+Second, our strategy to prove Equation (5.5) is to construct a map from the ambient
+stratum to P1 such that the spin components will be lying in the inverse ima ges of
+two diﬀerent points on P1. Without loss of generality, we will assume B is connected
+(otherwise we can restrict to a connected component of B). We claim that the generator
+of the monodromy π1(P1 \ { 0, ∞} , 1) ≃ Z will be lifted to a path in B \ f − 1({0, ∞} )
+connecting two elements of f − 1(1) of opposite spin. (We will prove our claim later.)
+This will lead to the reducibility of the ﬁber product
+F B
+P1 P1,
+p
+¯f f
+q
+whereq :z ↦→ z2. Indeed, the generator of the monodromy π1(P1 \ { 0, ∞} , 1) ≃ Z via ¯f
+(P1 on the left hand side) will be lifted to a path in in F \ ¯f − 1({0, ∞} ) connecting two
+elements in ¯f − 1(1) of the same spin. Thus, the spin components of the inverse image
+¯f − 1(1) will lie on diﬀerent connected components of F \ ¯f − 1({0, ∞} ). Let X + resp.
+X − be the irreducible components of F containing the spin components of ¯f − 1(1). It
+is obvious that both X + andX − are isomorphic to B. Hence, by considering the map
+ρ :B ∼− → X
++ ¯f
+− → P1,
+we see that ρ− 1(1) (resp. ρ− 1(− 1)) is isomorphic to the even (resp. odd) spin compo-
+nent of f − 1(1). This implies that
+[PΞM
+R
+g,n (µ )+] +
+∑
+∆∈ LGR
+1 (
+B)
+ℓ∆[D+
+∆] = [ PΞM
+R
+g,n (µ )− ] +
+∑
+∆∈ LGR
+1 (
+B)
+ℓ∆[D−
+∆]
+and it yields Equation (5.5).
+Now it remains to show the claim on monodromy. We ﬁx a collecti on of curves
+{α 1,...,α g+s,β 1,...,β g+s} on the ﬂat surface ( X,η ) (where we assume X is smooth,
+
+===== PAGE 33 =====
+COMPUTING SPIN STRATUM CLASSES 33
+a a
+b bβ ′
+g+1
+βg+1
+α g+1
+a a
+b
+b
+β ′
+g+1
+βg+1
+α g+1
+Figure 6. Deformation of pair ( α g+1,β g+1) along the loop γ
+otherwise we consider the welded surface associated to it) c orresponding to an element
+in f − 1(1) such that
+• α i only intersects βi (transversally at one point) and vice versa;
+• [α 1],..., [α g], [β1],..., [βg] form a symplectic basis of the underlying closed surface
+• βg+1,...,β g+s are geodesic closed curves around the simple poles (one simp le
+pole for every pair of simple poles, we denote by β ′
+g+1,...,β ′
+g+s the geodesic
+closed curves of the opposite simple poles);
+• α g+1,...,α g+s are curves connecting the geodesic closed curves βj,β ′
+j , such that
+they are perpendicular to the βj,β ′
+j.
+Let w = ∑g+s
+i=1 (ind(α i) + 1)(ind(βi) + 1). Note that w (mod 2) will be the spin
+parity of ( X,η ). Let γ(t) = e2πit (where t ∈ [0, 1]) be a loop on P1 \ { 0, ∞} based
+at 1. If we deform ( X,η ) along some lift of γ in B, then we will end up with some
+(X ′,η ′) of opposite spin. Indeed, the turning numbers of α 1,...,α g,α g+2,...,β 1,...,β g+s
+are locally constant along the deformation path as they take integral values. On the
+other hand, the turning number of α g+1 will change by 1 as the turning angle of α g+1
+changes continuously along the the deformation path (see Fi gure 6). This means that
+the Arf invariants of the original resp. resulting symplect ic basis will diﬀer by 1. This
+completes our proof.
+/char1d
+Remark 5.15. Proposition 5.13 can be also deduced from Proposition 5.14.
+5.6. Computation of the spin stratum class of certain horizontal level graphs.
+In a moduli space of multi-scale diﬀerentials of type µ , whereµ is of even type, there will
+be no boundary stratum associated to some one-edge horizont al enhanced level graph
+of compact type. However, in the computation of clutching pu llback with respect to Γ 0
+(according to Assumption 5.3, this will only be applied to th e case that µ = (m1,m 2)),
+we will encounter signatures of the form µ ′ = (m1,m 2, − 1, − 1). Then we have to take
+care of some horizontal level graphs of compact type. This wi ll happen if and only if
+m1,m 2 ≥ 0. Hence, in this section, we will explain how to tackle this p roblem.
+
+===== PAGE 34 =====
+34 YIU MAN WONG
+To compute the spin stratum class of a holomorphic stratum of signature µ =
+(m1,...,m n), we will have to compute ﬁrst the spin stratum class of the me romor-
+phic stratum of signature µ ′ = (m1,...,m n, − 1, − 1). If n ≥ 2, then the multi-scale
+diﬀerentials of type µ ′ can be compatible with some one-edge horizontal level graph s of
+compact type. As all the integers mi ≥ 0, the one-edge horizontal graphs of compact
+type (associated to signature µ ′) will always be composed of two vertices such that
+there are two simple poles (and no other poles) on each vertex . The following example
+illustrates what kind of horizontal level graphs of compact type we will have to take
+into account.
+Example 5.16. Let µ = (2, 2) and µ ′ = (2, 2, − 1, − 1). We want to compute
+ξ∗
+Γp∗
+(
+[PΞ
+Mg,n (2, 2, − 1, − 1)]spin)
+, where Γ is the following stable graph:
+1 1
+p1
+p3 p4
+p2
+By the Clutching Pullback Formula, we will need to compute th e projection pushfor-
+ward of the divisor class corresponding to the following lev el graph Γ H:
+1 1
+2
+− 1
+− 1
+− 1
+− 1
+2
+As in Example 5.11, the spin parity of a multi-scale diﬀerenti al associated with such
+kind of level graph seems to be hard to determine. Nonetheles s, the good thing here is
+that the spin parity on each vertex is still well deﬁned. The r eason is, if we look at a
+single vertex, the simple poles are still paired by residue c ondition.
+However, one needs to be careful that the spin parity of a mult i-scale diﬀerential
+associated with the level graph above is not just the sum of th e spin parities at the
+vertices. Indeed, if we cut the horizontal edge and consider the ﬂat surface correspond-
+ing to each vertex, we will doubly count the turning number co ntribution of the loop
+formed by the ” − 1”-legs. Hence, we should eliminate this eﬀect. The correct w ay
+to count is to take the sum of spin parities of the vertices and then minus one. Let
+µ 0 = (m0, 1,...,m 0,n 0, − 1, − 1) and µ 1 = (m1, 1,...,m 1,n 1, − 1, − 1) be the signatures on
+the two vertices respectively. Then we have
+(5.6) pΓH ∗([PΞ
+MΓH ]spin) = −π ∗
+0p0∗([PΞMg0,n 0(µ 0)]spin) ·π ∗
+1p1∗([PΞMg1,n 1(µ 1)]spin),
+where π0,π 1 are the projection map of MΓ to its components.
+In Example 5.16, each vertex is of the signature (2 , − 1, − 1), thus the corresponding
+stratum of diﬀerentials has only the odd spin component. As a r esult,pΓH ∗([PΞMΓH ]spin) =
+−pΓH ∗([PΞMΓH ]).
+
+===== PAGE 35 =====
+COMPUTING SPIN STRATUM CLASSES 35
+Remark 5.17. For a stratum whose signature µ is of even type, there will be no one-
+edge horizontal level graph which is of compact type. Otherw ise, the degree of the
+diﬀerentials on each vertex would be odd.
+Assume that µ is minimal (i.e. there will be only one entry and the entry is n on-
+negative) and µ ′ be the signature obtained by adding − 1s to µ . Then there will be no
+one-edge horizontal level graph of compact type for µ ′. The reason is that there will be
+a vertex of signature with only negative entries. This can on ly be possible if the vertex
+has genus 0. This will force that the vertex has at least 3 legs . Since three poles will
+sum up to strictly less than − 2, this kind of vertex will not be possible.
+Now, we really have all the tools we need to construct our recu rsive algorithm. We
+will explain the algorithm in the next section in detail.
+6. The algorithm to compute the spin stratum classes
+In this section, we will show the architecture of our algorit hm. Then we will enumer-
+ate some cases one can easily cross-check our results with. B efore we start, let us clarify
+the background of the sage package we used. Our codes are base d on the Sage package
+admcycles and its subpackage diffstrata. The package admcycles has been designed
+for doing intersection theory in the tautological rings of m oduli spaces of stable curves
+(cf. [DSZ20]). Moreover, it can compute a basis for each comp onent RH 2k(Mg,n ) of
+the tautological ring by assuming the generalized Faber-Za gier relations. On the other
+hand, the subpackage diffstrata is programmed for doing intersection theory in the
+tautological rings of the compactiﬁed generalised strata ( cf. [CMZ20a]).
+6.1. Description of the algorithm. Our algorithm is mainly based on the following
+tools we introduced in Section 5:
+(i) Proposition 5.1 asserts the existence of a unique soluti on to the system of
+linear equations obtained by clutching pullbacks with resp ect to one-edge stable
+graphs. The basis of the tautological ring can be computed by admcycles.
+(ii) Assumption 5.3 allows us to avoid doing clutching pullb ack with respect to Γ 0
+if the number of markings is larger than 2. This will reduce th e computation
+complexity.
+(iii) To compute the clutching pullback of the spin stratum c lass with respect to a
+one-edge graph Γ, we apply the Clutching Pullback Formula (5 .3).
+(iv) In the computation of a single term of the excess interse ction formula, Proposi-
+tion 5.9, Proposition 5.10 and Proposition 5.14 allow us to p ass the spin variant
+of the fundamental class of a compactiﬁed generalised strat um to a tautological
+class of the ambient stratum. Recursively, one can instead c ompute the projec-
+tion pushforwards of a tautological class of a compactiﬁed g eneralised stratum
+with no residue condition.
+(v) If we encounter a horizontal level graph, we can just use t he method introduced
+in Section 5.6 to determine the spin parity.
+(vi) By Corollary 1.3, we can ignore the computation of the pr ojection pushforward
+p∗([D∆]spin) = 0 if ∆ has any vertical edge of even enhancement.
+
+===== PAGE 36 =====
+36 YIU MAN WONG
+(vii) Proposition 5.12 and Proposition 5.13 gives an explic it formula to compute the
+base cases (the signature is of the form (0 , − 1, − 1) and (2 k, − 2k, − 1, − 1)) in
+the recursion. In addition, a diﬀerential of even type and g = 0, which has no
+simple poles, will have even spin by default.
+Our algorithm is designed not only to compute the spin stratu m class (which can be
+regarded as the projection pushforward of the spin variant o f the fundamental class of
+a compactiﬁed stratum), but also the projection pushforwar d of the spin variant of a
+tautological class of a compactiﬁed generalised stratum.
+Before we dig into the details of the algorithm, we introduce some terminology in our
+algorithm. An additive generator is analogous to a decorated stratum in the tautolog-
+ical rings of moduli spaces of stable curves. More precisely , an additive generator of the
+tautological ring of a compactiﬁed generalised stratum PΞM
+R
+g, n(µ) is just a product of
+aψ -polynomial with the cycle class of a boundary stratum [ B∆]spin ∈ R∗(PΞ
+M
+R
+g, n(µ)).
+Here,B∆ refers to the boundary stratum, which is associated to the le vel graph ∆. Our
+algorithm will only support additive generators associate d with level graphs without
+horizontal edges . A tautological class is just a Q-linear combination of additive
+generators.
+Algorithm 6.1. This algorithm will convert the spin variant of a tautologic al class of a
+compactiﬁed generalised stratum PΞ
+M
+R
+g, n(µ) (which admits spin structure) to a prod-
+uct tautological class of the moduli space of disconnected s table curves ∏
+g∈ g,n ∈ n
+Mg,n .
+It consists of the following steps:
+Step 1: First, we break down the input tautological class into addit ive generators
+and reduce the computation on the single additive generator . As an additive
+generator A is just f (ψ) ·[B∆] (where f (ψ) is a ψ -polynomial), the projection
+pushforwardp∗(A) will be just f (ψ) ·p∗([B∆]).
+Step 2: It reduces to compute p∗([B∆]). If ∆ is the trivial level graph, we
+will jump to Step 3. Otherwise, we extract the level strata PΞM∆,i (where
+i = 0, − 1,..., −L + 1) from the levels of ∆. Then we compute the projection
+pushforwards of the spin variant of the fundamental classes of each level stra-
+tum and clutch the classes together to yield p∗([B∆]). (Here, if ∆ has any edge
+of even enhancement, p∗([B∆]) will be zero.)
+Step 3: At this stage, we have to compute the projection pushforward of the
+spin variant of the fundamental class of a compactiﬁed gener alised stratum
+PΞM
+R
+g, n(µ) on ∏
+g∈ g,n ∈ n
+Mg,n . If there is no residue condition (or the poles
+are only paired up simple poles), then we will go to Step 4 in ca se the tuple g
+has only one entry; while it will just return 0 in case the gene ralised stratum
+has more than one product components due to dimensional reas on. Otherwise,
+we will resolve the residue conditions and express the spin v ariant of the fun-
+damental classes as a tautological class of the ambient stra tum. After that, we
+will return to Step 1.
+Step 4: The algorithm now needs to compute the spin stratum class of a signa-
+ture µ of even type. If g = 0 or the signature is of the form (0 , − 1, − 1) and
+(2k, − 2k, − 1, − 1), we will apply our results of the base cases. Otherwise, we
+
+===== PAGE 37 =====
+COMPUTING SPIN STRATUM CLASSES 37
+will compute the clutching pullbacks of the spin stratum cla ss with respect to
+one-edge stable graphs (self-loop graph Γ 0 will be ignored if the length of µ is
+greater than 2). To apply the Clutching Pullback Formula to a speciﬁc one-
+edge graph Γ, we will sort out the two-level graphs or horizon tal graphs with a
+Γ-structure.
+Step 5: At this stage, we need to compute a single term in the Clutchin g Pullback
+Formula associated to some codimension-1 level graph ∆ with a Γ-structure.
+We extract the top resp. bottom level stratum PΞM∆, ⊤ resp. PΞM∆, ⊥ . Then
+we compute the projection pushforward of the spin variant of the fundamental
+classes of level these strata (return to Step 3) and clutch th ese classes to yield
+a tautological class in MΓ.
+Step 6: After we have computed the clutching pullbacks of the spin st ratum class
+and expressed the pullback classes by the basis computed by admcycles, we
+will solve the system of linear equations and yield the spin s tratum class which
+is expressed in a basis computed by admcycles.
+If we just want to theoretically show that the spin stratum cl asses are recursively
+computable, we can drop Assumption 5.3 and argue just by Prop osition 5.1 and the
+Clutching Pullback Formula.
+Proof of Theorem 1.4. We can proceed with the algorithm above, but pretend we have
+a basis for the cohomology ring of every moduli space of stabl e curves
+Mg,n . Let
+µ = (m1,...,m r, (− 1, − 1)t) be a signature of even type (the expression ( − 1, − 1)t means
+that we have 2t simple poles and these simple poles are paired up by residue c ondition)
+where − 2t + ∑r
+i=1mi = 2g − 2. The codimension of the spin stratum class of such
+signature will be
+k =
+{
+2g + 2t − 2 if all mi are non-negative
+2g + 2t otherwise
+Recall the range of injectivity in Proposition 5.1:
+d(g,n ) =
+
+
+
+
+
+
+
+
+
+2n − 7 if g = 0
+2g − 2 if n = 0, 1
+2g if n = 2
+2g − 2 +n otherwise
+Note that the number of markings n =r + 2t. In addition,
+{
+r ≥ 1 if all mi are positive
+r ≥ 2 otherwise.
+Forg = 0, the range d(g,n ) = 2(r + 2t) − 7 = 2r + 4t − 7. If all mi are positive, then
+the codimension is 2t− 2 andd(g,n )− (2t− 2) = 2r+2t− 5 ≥ 0 unlessr = 1,t = 1, which
+is the case of µ = (0, − 1, − 1). Otherwise, the codimension will be 2 t andd(g,n ) − 2t =
+2r + 2t − 7 ≥ 0 unless r = 2,t = 1, which is the case of µ = (2k, − 2k, − 1, − 1). Since the
+initial cases µ = (0, − 1, − 1) and µ = (2k, − 2k, − 1, − 1) are known, we can recursively
+
+===== PAGE 38 =====
+38 YIU MAN WONG
+compute the spin stratum classes for g = 0 by the algorithm above theoretically via
+the clutching pullback formula and solving a system of linea r equations.
+Forg >0, we have
+k =
+{
+2g − 3 + (1 + 2t) ≤ 2g − 3 + (r + 2t) = d(g,n ) if all mi are non-negative
+2g − 3 + (3 + 2t) ≤ 2g − 3 + (r + 2t) = d(g,n ) if r ≥ 3
+The remaining signatures for g > 0 which we cannot apply the clutching pullback
+method will be of the form ( a, −b, (− 1, − 1)t). By Proposition 5.14, the spin stratum
+classes of these signatures can be reduced to the computatio n for spin stratum classes
+on which the clutching pullback method can be applied. /char1d
+After we have presented our algorithm, we want to explain why the recursion based
+on Assumption 5.3 will work. The main problem is whether the e mergence of simple
+poles will ﬁnally reduce to the cases we manage to handle.
+(i) If µ = (m1,...,m n) is of even type, then the signature µ ′ = (m1,...,m n, − 1, − 1)
+(obtained by degenerating to irreducible nodal curve) will have length of at least
+3. By Assumption 5.3, to compute the spin stratum class, it su ﬃces to compute
+the clutching pullbacks with respect to the one-edge stable graphs of compact
+type. Thus, in the recursion, we only need to consider spin st ratum classes of
+signatures containing at most one pair of simple poles.
+(ii) Moreover, the signatures µ ′ = (m1,...,m n, − 1, − 1) appearing in the computa-
+tion of clutching pullback with respect to the Γ 0 are of length less equal to
+4. This is because if n ≥ 3, then we will not need to compute the clutching
+pullbacks with respect to Γ 0 due to Assumption 5.3.
+(iii) Our algorithm only needs to handle horizontal level gr aphs of compact type
+for signatures of the form ( m1,m 2, − 1, − 1) where m1,m 2 ≥ 0. Then according
+to Section 5.6, we will reduce to compute the spin stratum cla sses associated
+to signatures µ 0 = (m0, − 1, − 1) and µ 1 = (m1, − 1, − 1) respectively. For both
+signatures, Assumption 5.3 still applies, so we will not nee d to do the clutching
+pullback with respect to Γ 0.
+(iv) The recursion of computing spin stratum class associat ed to a signature of the
+formµ = (m0,m 1) will end up either with the computation for signatures of th e
+form (2k, − 2k, − 1, − 1) or with the computation for the signature (0 , − 1, − 1).
+Proof of Theorem 1.5. By the discussion above, if Assumption 5.3 is true for g ≤ g0
+and n ≤ n0, then our algorithm will control the computation of clutchi ng pullbacks
+for signatures that we manage to handle within admcycles. Then as in the proof of
+Theorem 1.4, we can conclude that for g ≤ g0 and n ≤ n0, our algorithm will yield the
+correct spin stratum class. /char1d
+We will give some explicit examples of computing the spin str atum classes in Sec-
+tion A.2.
+6.2. Sage commands for handling (spin) stratum. We now show how to input
+a (spin) additive generator or tautological class in diffstrata and call the methods
+we have coded to compute the spin stratum classes. We ﬁrst nee d to deﬁne a stratum
+
+===== PAGE 39 =====
+COMPUTING SPIN STRATUM CLASSES 39
+(with/without spin structure): either using the class GeneralisedStratum or its sub-
+class SpinStratum. For example, we can input the compactiﬁed generalised stra tum
+of diﬀerentials of even type PΞM
+R
+1, 3(4, − 2, − 2), where the residue condition is r2 = 0,
+by the following code:
+sage: from admcycles.diffstrata import *
+sage: from admcycles.diffstrata.spinstratum import SpinStratum, addspin
+sage: X = SpinStratum([Signature((4,-2,-2))],res_cond=[[(0, 1)]])
+# alternatively
+sage: X_nospin = GeneralisedStratum([Signature((4,-2,-2))], res_cond=[[(0,1)]])
+sage: X = addspin(X_nospin)
+An object in the class GeneralisedStratum has a list bics of vertical two-level
+graphs. For example, if we want to enter a (spin) additive gen erator of the stratum
+above :
+sage: from admcycles.diffstrata.spinstratum import AG_with_spin, AG_addspin
+sage: A = AG_with_spin(X,((2,),0),leg_dict={1:2,2:1})
+# alternatively
+sage: A_nospin = AdditiveGenerator(X_nospin,((2,),0),leg_di ct={1:2,2:1})
+sage: A = AG_addspin(A_nospin)
+The tuple ((2 , ), 0) refers to the 3rd two-level graph on the list bics. If we enter
+((), 0), then it refers to the underlying level graph of the genera lised stratum itself.
+The condition leg dict={1:2,2:1} means that the level graph is decorated by the
+monomial ψ 2
+1ψ 2. The tautological class corresponding to two times of this a dditive
+generator will be:
+from admcycles.diffstrata.spinstratum import ELGT_with_spin, ELGT_addspin
+sage: E = ELGT_with_spin(X,[(2,A)])
+# alternatively
+sage: E_nospin = ELGTautClass(X_nospin,[(2,A_nospin)])
+sage: E = ELGT_addspin(E_nospin)
+Hence, if we enter the following codes, it will represent the (spin) stratum class in the
+tautological ring of PΞMg,n (µ ).
+sage: A_nospin = AdditiveGenerator(X,((),0)) # no spin
+sage: E_nospin = ELGTautClass(X,[(1,A)]) # no spin
+sage: A = AG_with_spin(X,((),0))
+sage: E = ELGT_with_spin(X,[(1,A)])
+To compute the (spin) stratum class in the tautological ring of Mg,n , one can use
+the following:
+sage: stratum_cl = E_nospin.to_prodtautclass().pushforward( ) #nospin
+sage: spin_stratum_cl = E.to_prodtautclass_spin().pushforwa rd()
+
+===== PAGE 40 =====
+40 YIU MAN WONG
+6.3. Cross-checking our results with existing results. The spin stratum class for
+a stratum of diﬀerentials on genus 1 curves can be easily deter mined. The odd spin
+stratum H1(µ )− coincides with the stratum H1(µ ′), where 2 µ ′ = µ . Indeed, one can
+see that from the perspective of theta characteristics. Let (C;p1,...,p n) be an marked
+elliptic curve and µ = (2m1,..., 2mn) be a signature such that ∑
+imi = 0. Then
+the sheaf OC (∑
+imipi) has a global section if and only if it is isomorphic to OC ≃
+ω C. In other words, h0(OC (∑mipi)) = 1 if ∑mipi is a canonical divisor, otherwise
+h0(OC (∑mipi)) = 0. This implies that the H1(2m1,..., 2mn)− ≃ H 1(m1,...,m n).
+Hence,
+[H1(2m1,..., 2mn)]spin = [H1(2m1,..., 2mn)] − 2[H1(m1,...,m n)]
+Due to the fact that all the explicit computations have to be d one by admcycles,
+we will show in Section 6.4 how one can cross-check our result s of spin stratum classes
+in Sage with the existing results. We will demonstrate the Sage commands for doing
+the cross-check for the following signatures:
+• g = 1: µ = (4, 4, − 8) (by the discussion above);
+• g = 2: µ = (2) (cf. [KZ03]) and µ = (4, − 2) (cf. [SZ20], [Boi15]);
+• g = 3: µ = (4) and µ = (2, 2) (cf. [KZ03].
+6.4. Cross-checking the results in Sage. We apply the following methods in admcycles
+to check the results for µ = (4, 4, − 8):
+sage: from admcycles import *
+sage: from admcycles.diffstrata import *
+sage: from admcycles.diffstrata.spinstratum import Spin_strataclass
+sage: Spinclass = Strataclass(1,1,(4,4,-8))- 2*Strataclass(1 ,1,(2,2,-4))
+sage: Spinclass.basis_vector()
+(0, -17, 9, 33, -26)
+sage: X = SpinStratum([Signature((4,4,-8))])
+sage: A=AG_with_spin(X,((),0))
+sage: E=ELGT_with_spin(X,[(1,A)])
+sage: our_result = E.to_prodtautclass_spin().pushforward()
+sage: our_result.basis_vector()
+(0, -17, 9, 33, -26)
+# alternatively, we have a simpler method Spin_strataclass
+sage: Spin_strataclass((4,4,-8)).basis_vector()
+(0, -17, 9, 33, -26)
+Ifµ = (2), according to [KZ03], the stratum of type (2) is connect ed and hyperelliptic
+of odd spin, thus we have [ H(2)]spin = − [H(2)].
+sage: Spinclass = -Strataclass(2,1,(2,))
+sage: Spinclass.basis_vector()
+(1/2, -7/2, 1/2)
+sage: X = SpinStratum([Signature((2,))])
+sage: A=AG_with_spin(X,((),0))
+sage: E=ELGT_with_spin(X,[(1,A)])
+sage: our_result = E.to_prodtautclass_spin().pushforward()
+
+===== PAGE 41 =====
+COMPUTING SPIN STRATUM CLASSES 41
+sage: our_result.basis_vector()
+(1/2, -7/2, 1/2)
+Ifµ = (4, − 2), the stratum of diﬀerentials has a hyperelliptic componen t of odd spin
+and a component of even spin, according to [Boi15]. In [SZ20] , Schmitt and van Zelm
+have used the method of clutching pullbacks to compute the fu ndamental class of loci
+of admissible covers in Mg,n . The hyperelliptic locus is a special case. The method is
+built-in in admcycles.
+sage: G = CyclicPermutationGroup(2)
+sage: H = HurData(G,[G[1],G[1],G[1],G[1],G[1],G[1]])
+sage: Hyp = (1/factorial(4))*Hidentify(2,H,markings=[1,2])
+sage: Spinclass = Strataclass(2,1,(4,-2)) - 2*Hyp
+sage: Spinclass.basis_vector()
+(-63/2, 21/2, -22, -27, 44, 41, 54, 63/2, -147/2, 21/2, -1, -6 , -21/2, 0)
+sage: X = SpinStratum([Signature((4,-2))])
+sage: A=AG_with_spin(X,((),0))
+sage: E=ELGT_with_spin(X,[(1,A)])
+sage: our_result = E.to_prodtautclass_spin().pushforward()
+sage: our_result.basis_vector()
+(-63/2, 21/2, -22, -27, 44, 41, 54, 63/2, -147/2, 21/2, -1, -6 , -21/2, 0)
+If µ = (4), according to [KZ03], the diﬀerential stratum has a hype relliptic compo-
+nent of even spin and a component of odd spin. Hence we can use t he same trick as
+before.
+sage: G = CyclicPermutationGroup(2)
+sage: H = HurData(G,[G[1],G[1],G[1],G[1],G[1],G[1],G[1],G[1 ]])
+sage: Hyp = (1/factorial(7))*Hidentify(3,H,markings=[1])
+sage: Spinclass = 2*Hyp - Strataclass(3,1,(4,))
+sage: Spinclass.basis_vector()
+(-729, 1099/12, -787/12, 213, -1151/12, 33/2, 533/2, 985/1 2, -779/12, -78,
+219/2, 19/2, 50, -2213/12, -197/24, 35)
+sage: X = SpinStratum([Signature((4,))])
+sage: A=AG_with_spin(X,((),0))
+sage: E=ELGT_with_spin(X,[(1,A)])
+sage: our_result = E.to_prodtautclass_spin().pushforward()
+sage: our_result.basis_vector()
+(-729, 1099/12, -787/12, 213, -1151/12, 33/2, 533/2, 985/1 2, -779/12, -78,
+219/2, 19/2, 50, -2213/12, -197/24, 35)
+Remark 6.2. The fundamental class of the hyperelliptic component was ac tually also
+computed by Chen in [CT16]:
+[H3(4)+] =ψ (18λ − 2δ0 − 9δ{1}
+1 − 6δ{1}
+1 ) − λ(45λ − 19
+2 δ0 − 24δ{1}
+2 )
+− 1
+2δ2
+0 − 5
+2δ0δ{1}
+2 − 3(δ{1}
+2 )2
+One can check that it coincides with the class computed in admcycles.
+
+===== PAGE 42 =====
+42 YIU MAN WONG
+sage: Hyp.basis_vector()
+(577/2, -36, 49/2, -81, 77/2, -8, -108, -65/2, 25, 31, -83/2, -7/2, -41/2,
+151/2, 13/4, -14)
+sage: chen_Hyp = psiclass(1,3,1)*(18*lambdaclass(1,3,1)- tau tgens(3,1,1)[4]-9*
+tautgens(3,1,1)[3]-6*tautgens(3,1,1)[2])-lambdaclass(1,3,1)*(45*
+lambdaclass(1,3,1)-(19/4)*tautgens(3,1,1)[4]-24*tautgens(3,1,1)[2])-(1/8)*
+tautgens(3,1,1)[4]^2-(5/4)*tautgens(3,1,1)[4]*tautgens(3,1,1)[2]-3*
+tautgens(3,1,1)[2]^2
+sage: chen_Hyp.basis_vector()
+(577/2, -36, 49/2, -81, 77/2, -8, -108, -65/2, 25, 31, -83/2, -7/2, -41/2,
+151/2, 13/4, -14)
+Ifµ = (2, 2), the stratum also has exactly two components, namely the h yperelliptic
+component and the odd spin component. We can use the same meth od as in the case
+of µ = (4) to compute the spin stratum class. The result agrees wit h the spin stratum
+class yielded by our algorithm.
+In the next section, we will introduce the conjecture of the t wisted spin double
+ramiﬁcation cycles, and show how our algorithm can be improv ed by making use of it.
+7. Conjectural formula of the spin twisted DR cycle
+In this section, we will ﬁrst introduce the theorem of twiste d double ramiﬁcation
+cycles (twisted DR cycle) and then state the conjectural for mula of the spin twisted
+double ramiﬁcation cycle from [CSS21]. We now recall the deﬁ nition of a twisted double
+ramiﬁcation cycle. A k-twisted double ramiﬁcation cycle DRg(a), where the k-
+ramiﬁcation vector a = (a1,...,a n) is a tuple of integers summing up to k(2g − 2 +n),
+is a cycle on Mg,n compactifying the condition ω ⊗ k
+log ≃ O C (a1p1 +... +anpn). Notice
+that given a signature µ = (m1,...,m n) of a stratum of k-diﬀerentials (i.e. ∑
+imi =
+k(2g − 2)), one can deﬁne a k-twisted double ramiﬁcation cycle DR g(aµ ) by letting
+aµ = (m1 +k,...,m n +k).
+7.1. A formula of the k-twisted double ramiﬁcation cycles. Now we will intro-
+duce various geometric approaches to express the k-twisted double ramiﬁcation cycles.
+For the (non-twisted) double ramiﬁcation cycles, Pixton ha s constructed a formula ex-
+pressed in terms of generators of the tautological ring of Mg,n , which has been proved
+in [JPPZ17]. The formula of double ramiﬁcation cycles with t argets was later proved
+in [JPPZ20].
+The formula for k-twisted double ramiﬁcation cycles is very similar to Pixto n’s for-
+mula. We need to give some deﬁnitions to state the formula. Le t a = (a1,...,a n) be a
+k-ramiﬁcation vector. An admissible k-weighting (mod r) w of a dual graph Γ is
+a function w : H(Γ) − → { 0, 1,...,r − 1}, where H(Γ) is the set of half edges and legs
+of Γ, such that
+• for hi, which is corresponding to marking i ∈ { 1,...,n }, one has w(hi) = ai
+(mod r),
+• for any edge e consisting of two half edge h,h ′, we have w(h) + w(h′) = 0
+(mod r),
+
+===== PAGE 43 =====
+COMPUTING SPIN STRATUM CLASSES 43
+• for any v ∈ V (Γ),
+∑
+h∈ HΓ(v)
+w(h) = k(2g(v) − 2 +n(v)) (mod r),
+where HΓ(v) is the set of half-edges and legs incident to v.
+We deﬁne a mixed degree tautological class:
+P r, •
+g (a) =
+∑
+Γ∈ Gg,n
+∑
+w∈ WΓ,r(a)
+1
+|Aut(Γ)|
+1
+rh1(Γ) Conta, Γ,w,
+where Gg,n is the set of all dual graphs with genus g and n; WΓ,r (a) is the set of
+admissible k-weightings (mod r) on Γ with respect to the ramiﬁcation vector a; and
+Conta, Γ,w
+=ξΓ∗
+[ ∏
+v∈ V (Γ)
+exp(−kκ 1[v])
+n∏
+i=1
+exp(a2
+iψ hi)
+∏
+e=(h,h ′)∈ E(Γ)
+1 − exp(−w(h)w(h′)(ψ h +ψ h′))
+ψ h +ψ h′
+]
+.
+For suﬃciently large values of r, the class P r, •
+g (a) is a mixed degree tautological class
+on Mg,n whose coeﬃcients are polynomials in r. We denote the class we obtained by
+substituting r = 0 to the polynomials by P •
+g (a).
+Finally, we can give the formula of the k-twisted double ramiﬁcation cycle:
+DRg(a) = 2 − gP g
+g (a),(7.1)
+where P g
+g (a) is the degree g terms of P •
+g (a).
+7.2. The theorem of k-twisted DR cycle. In [FP18], Farkas and Pandharipande
+have given a conjecture that the 1-twisted double ramiﬁcati on cycle DR g(aµ ) agrees
+with the weighted fundamental class of the moduli space of tw isted canonical divisors
+[ ˜Hg(µ )]. One can recall the deﬁnition of twisted k-canonical divisors by Remark 2.4.
+Later in [Sch16], the conjecture has been generalised for k >1. The generalised con-
+jecture was later proved in [HS21] and [BHPSS20]. A simple star graph is a vertical
+two-level enhanced level graph of type µ = (m1,...,m n) (where ∑
+imi = k(2g − 2))
+such that:
+• there is only one vertex v0 (which is called the center) on the bottom level;
+• there is no leg on the top level representing a pole;
+• all the orders of poles and zeros of any vertex on the top level are divisible by
+k.
+We denote the set of simple star graphs compatible to a given s ignature µ bySG1(µ ),
+now we can state the theorem of the k-twisted double ramiﬁcation cycles.
+
+===== PAGE 44 =====
+44 YIU MAN WONG
+Theorem 7.1 ([HS21],[BHPSS20]). Let g,n ≥ 0 and k >0, and µ = (m1,...,m n) ∈
+Zn \ kZn
+≥ 0 such that ∑
+iai =k(2g − 2). Then we have
+DRg(aµ ) =
+∑
+∆∈ SG1(µ )
+∏
+e∈ E(∆)κe
+kN0|Aut(∆)|ξ∆∗
+[
+[
+H
+k
+g(v)(µ [v],κ [v] − k)
+]
+·(7.2)
+∏
+v∈ V (∆⊥ )
+[
+Hg(v)(µ [v]
+k ,κ[v] − k
+k )
+]
+]
+,(7.3)
+where κe is the enhancement of the edge e and N0 is the number of vertices on the
+top level. In addition, Hg(v)(µ [v],κ [v] − k) is the stratum k-diﬀerentials of signature
+prescribed by µ [v] and the enhancements of edges adhered to v.
+7.3. The conjecture on spin k-twisted DR cycle. We will ﬁrst deﬁne the spin dou-
+ble ramiﬁcation cycle and then state the conjecture of the sp in version of Theorem 7.1.
+Letk be a positive odd integer and a be a ramiﬁcation vector whose entries are all odd.
+We deﬁne the spin variant of the mixed degree tautological cl assP r, •
+g (a) (where r is an
+even number) as:
+P r, spin, •
+g (a) =
+∑
+Γ∈ Gg,n
+∑
+w∈ WΓ,r,odd(a)
+1
+2g− h1(Γ)|Aut(Γ)|
+1
+rh1(Γ) Conta, Γ,w,
+where WΓ,r,odd (a) is the set of admissible k-weightings such that all the edges are
+weighted by odd numbers. For suﬃciently large values of r, P r, spin, •
+g (a) is a mixed
+degree tautological class whose coeﬃcients are polynomial s in r. We denote the class
+we obtained by substituting r = 0 to the polynomials by P spin, •
+g (a).
+The formula of a spin k-twisted double ramiﬁcation cycle ramiﬁcation cycle
+is:
+DRspin
+g (a) = 2 − gP spin,g
+g (a).
+Finally, we can state the conjecture on the spin k-twisted double ramiﬁcation cycles:
+Conjecture 7.2 ([CSS21]). Let g,n ≥ 0 and k be a positive odd integer. In addition,
+let µ = (m1,...,m n) ∈ Zn \ kZn
+≥ 0 such that ∑
+iai = k(2g − 2) and all the entries of µ
+are even. Then we have
+DRspin
+g (aµ ) =
+∑
+∆∈ SGodd
+1 (µ )
+∏
+e∈ E(∆)κe
+kN0|Aut(∆)|ξ∆∗
+[
+[
+H
+k
+g(v)(µ [v],κ [v] − k)
+] spin·
+∏
+v∈ V (∆⊥ )
+[
+Hg(v)(µ [v]
+k ,κ[v] − k
+k )
+] spin
+]
+,
+(7.4)
+where SGodd
+1 (µ ) is the subset of SG1(µ ) consisting of the level graphs such that the
+enhancement of every edge is odd.
+The left hand side of (7.4) is already computable in admcycles but the right hand
+side requires us to compute the spin stratum classes of strat a of k-diﬀerentials. For
+k = 1, the algorithms we developed can help compute the right ha nd side so that we
+
+===== PAGE 45 =====
+COMPUTING SPIN STRATUM CLASSES 45
+can verify the conjecture for plenty of signatures µ = (m1,...,m n) ( ∑
+imi = 2g − 2) of
+meromorphic strata where ( g,n ) equal:
+(2, 2), (2, 3), (2, 4), (2, 5), (3, 2), (3, 3), (4, 2).
+Note that on the right hand side of (7.4), the contribution of a vertex on the top level
+of a simple star graph is just the spin stratum class of some ho lomorphic stratum of
+1-diﬀerential. Thus, if we assume the conjecture to be true, t hen we can ﬁrst use our al-
+gorithm to compute the spin stratum classes of strata of holo morphic 1-diﬀerentials and
+compute the spin stratum classes of strata of meromorphic k-diﬀerentials by recursively
+solving the equation (7.4).
+In admcycles, one can directly call the function Strataclass to compute the spin
+stratum class for a signature of even type. Moreover, one can also use the keyword
+argument spin conj=True to apply Conjecture 7.2 to the computation of the spin
+stratum class.
+sage: from admcycles import *
+sage: cl1=Strataclass(1,1,(6,-4),spin=True,spin_conj=True)
+sage: cl2=Strataclass(1,1,(6,-4),spin=True)
+sage: cl1 == cl2
+True
+Appendix A. Examples and Sage commands
+A.1. Example: Applying the clutching pullback formula to [H1(4, − 2, − 2)]. Be-
+fore we start to consider the clutching pullback explicitly , let us introduce the notation
+of boundary strata of Mg,n :
+• Consider P ⊆ I = {1,...,n } and g ≥ q ≥ 0, we use SP
+q to denote the boundary
+stratum of curves with one node and the markings in P lie in the component of
+genusq. Notice that SP
+q =SP c
+g− q, where P c is the complement of P . We use δP
+q
+to denote the fundamental class of the corresponding bounda ry stratum and
+ΓP
+q the corresponding dual graph.
+• S0 refers to the boundary stratum parametrizing curves with ex actly one self-
+node and δ0 is referred to as its fundamental class. We denote the dual gr aph
+of this boundary stratum by Γ 0.
+Furthermore, recall that on PΞ
+Mg,n (µ ), a boundary stratum is parametrised by some
+enhanced level graph ∆. A codimension one boundary stratum o f PΞMg,n (µ ) is
+parametrized by some enhanced level graph ∆ that has exactly one horizontal edge
+or is vertical with two levels. We use the following notation s to denote the divisor
+corresponding to a one-edge horizontal graph:
+(i) Dh is referred to as the divisor corresponding to the boundary s tratum corre-
+sponding to the self-loop graph;
+(ii) DP
+q is referred to as the divisor with respect to the boundary str atum associated
+to the one-edge horizontal level graph of compact type such t hat the markings
+in P lie in the component of genus q;
+
+===== PAGE 46 =====
+46 YIU MAN WONG
+(iii) We will also use Γ P
+q and Γ 0 to denote the level graph of the divisors in (i) and
+(ii).
+We now consider the stratum class [
+H1(4, − 2, − 2)] ∈ H 2(M1, 3). The boundary di-
+visors of the moduli space PΞM1, 3(4, − 2, − 2) are parametrized by vertical two-level
+graphs or one-edge horizontal graphs. We now consider the cl utching pullback of
+[H1(4, − 2, − 2)] with respect to the one-edge stable graphs. The vertical two-level
+graphs and one-edge horizontal graphs which have some Γ 0-structures are:
+(A) 4 − 21
+− 22
+0 0
+− 2 − 2
+(B) 4 − 22
+− 21
+0 0
+− 2 − 2
+(C) 4
+− 22− 21
+2 0
+− 4 − 2
+(D) 4
+− 22− 21
+1 1
+− 3 − 3 4
+− 2
+− 2
+− 1
+− 1
+(E)
+In this example, MΓ0 = M0, 5. The contribution of each of the above vertical two-level
+graphs or one-edge horizontal graphs to ξ∗
+Γ0[H1(4, − 2, − 2)] are:
+(A) There are four Γ 0-structures on Graph A. They map the 4-th and 5-th markings
+of M0, 5 to any one of the vertical edges and each edge gives us two poss ibilities
+to allocate the markings. Hence, its contribution of is
+1
+2 · 1
+1 · 1
+1
+[
+5 21
+4 3 ]
++ 1
+2 · 1
+1 · 1
+1
+[
+4 21
+5 3 ]
++ 1
+2 · 1
+1 · 1
+1
+[
+1 52
+3 4 ]
++ 1
+2 · 1
+1 · 1
+1
+[
+1 42
+3 5 ]
+=
+[
+5 21
+4 3 ]
++
+[
+4 21
+5 3 ]
+(B) Similarly, the contribution of Graph (B) is
+
+===== PAGE 47 =====
+COMPUTING SPIN STRATUM CLASSES 47
+1
+2 · 1
+1 · 1
+1
+[
+5 31
+4 2 ]
++ 1
+2 · 1
+1 · 1
+1
+[
+4 31
+5 2 ]
++ 1
+2 · 1
+1 · 1
+1
+[
+1 53
+2 4 ]
++ 1
+2 · 1
+1 · 1
+1
+[
+1 43
+2 5 ]
+=
+[
+5 31
+4 2 ]
++
+[
+4 31
+5 2 ]
+(C) Graph (C) has also four Γ 0-structures but they are not symmetric because the
+two vertical edges are not interchangeable. For the Γ 0-structures by which the
+edge of Γ 0 is mapped to the left edge of the level graph, κf = 3. If the edge of
+Γ0 is mapped to another edge, then κf = 1. Thus, the contribution of Graph
+(C) is
+1
+1 · 3
+3 · 3
+3
+[
+15
+24 3 ]
++ 1
+1 · 3
+3 · 3
+3
+[
+14
+25 3 ]
++ 1
+1 · 3
+1 · 3
+3
+[
+51
+32 4 ]
++ 1
+1 · 3
+1 · 3
+3
+[
+41
+32 5 ]
+= 4
+[
+15
+24 3 ]
++4
+[
+14
+25 3 ]
+(D) The contribution of Graph (D) is
+1
+2 · 2
+2 · 4
+2
+[
+15
+24 3 ]
++ 1
+2 · 2
+2 · 4
+2
+[
+14
+25 3 ]
++ 1
+2 · 2
+2 · 4
+2
+[
+51
+32 4 ]
++ 1
+2 · 2
+2 · 4
+2
+[
+41
+32 5 ]
+= 2
+[
+15
+24 3 ]
++2
+[
+14
+25 3 ]
+(E) The contribution of the graph (E) will be just the class [ H
+R
+0 (4, − 2, − 2, − 1, − 1)]
+where R is induced by the residue condition r4 +r5 = 0.
+To check whether we are correct, we can use the method totensorTautbasis in the
+Sage package admcycles (the commands cf. [DSZ20]). We ﬁrst compute the clutching
+pullback:
+sage: from admcycles import *
+
+===== PAGE 48 =====
+48 YIU MAN WONG
+sage: stratum_class = Strataclass(1,1,(4,-2,-2))
+sage: stgraph = StableGraph([0],[[1,2,3,4,5]],[(4,5)])
+sage: pull = stgraph.boundary_pullback(stratum_class)
+sage: pull.totensorTautbasis(1,vecout=True)
+(10, 5, -7, -7, 0)
+On the other hand, we compute the result we get from the clutch ing pullback formula:
+sage: A_contr=tautgens(0,5,1)[8]+tautgens(0,5,1)[7]
+sage: B_contr=tautgens(0,5,1)[11]+tautgens(0,5,1)[10]
+sage: C_contr=4*tautgens(0,5,1)[15]+4*tautgens(0,5,1)[14]
+sage: D_contr=2*tautgens(0,5,1)[15]+2*tautgens(0,5,1)[14]
+sage: E_contr= Strataclass(0,1,(4,-2,-2,-1,-1), res_cond=(( 0,0,0,1,1),))
+sage: (A_contr+B_contr+C_contr+D_contr+E_contr).basis_vector()
+(10, 5, -7, -7, 0)
+Now we will do the clutching pullback with respect to other on e-edge stable graphs.
+There is only one vertical two-level graph (or one-edge hori zontal graph) which is
+degenerations to Γ {1}
+1 , namely
+1
+2
+− 2 − 2
+− 4
+4(F)
+Hence, ξ∗
+Γ{ 1}
+1
+([H1(4, − 2, − 2)]) ∈ CH 1(MΓ{ 1}
+1
+) will be equal to the following
+1
+1 · 3
+3 · 3
+3
+(
+π ∗
+⊤ ([M0, 3]) ·π ∗
+⊥ ([H1(4, − 4)])
+)
+= 15π ∗
+⊥ψ 1
+We have also the following vertical two-level graphs:
+
+===== PAGE 49 =====
+COMPUTING SPIN STRATUM CLASSES 49
+12
+4 − 22
+− 4
+− 21
+(G)
+12
+4 − 21
+− 4
+− 22
+(H)
+10
+4 − 2
+− 2
+− 2(I)
+1
+4
+− 2 − 2
+− 4
+20
+− 2
+(J)
+Graph (G) is a degeneration of Γ {2}
+1 , while graph (H) is a degeneration of Γ {3}
+1 . Similarly,
+we have
+ξ∗
+Γ{ 2}
+1
+([H1(4, − 2, − 2)]) = 1
+1 · 3
+3 · 3
+3
+(
+π ∗
+⊤ ([H1(2, − 2)]) ·π ∗
+⊥ ([M0, 3])
+)
+= 3π ∗
+⊤ψ 1
+ξ∗
+Γ{ 3}
+1
+([H1(4, − 2, − 2)]) = 1
+1 · 3
+3 · 3
+3
+(
+π ∗
+⊤ ([H1(2, − 2)]) ·π ∗
+⊥ ([M0, 3])
+)
+= 3π ∗
+⊤ψ 1
+Graph (I) and (J) are degenerations of Γ ∅
+1. However, note that the top level of graph
+(J) has more than one vertices without any residue condition relating the legs of them.
+Thus, the projection pushforward of graph (J) is zero. Then w e have
+ξ∗
+Γ∅
+1
+([
+H1(4, − 2, − 2)]) = 1
+1 · 1
+1 · 1
+1
+(
+π ∗
+⊤ ([M1, 1) ·π ∗
+⊥ ([H
+R
+0 (4, − 2, − 2, − 2)])
+)
+=π ∗
+⊥ψ 4,
+where R represent the residue condition of r4 = 0.
+A.2. Examples of computing the spin stratum class by clutching pullbacks.
+In this subsection, we will present examples of computing th e spin stratum class (with
+and without residue conditions). In the following example, we will consider the stratum
+H1(4, − 2, − 2)] which has been investigated in Section A.1.
+Example A.1. The two-level graphs of PΞ
+M1, 3(4, − 2, − 2), which are of compact type,
+are
+
+===== PAGE 50 =====
+50 YIU MAN WONG
+1
+2
+− 21 − 22
+− 4
+4(F)
+12
+4 − 22
+− 4
+− 21
+(G)
+12
+4 − 21
+− 4
+− 22
+(H)
+10
+4 − 22
+− 2
+− 21
+(I)
+1
+4
+− 21 − 22
+− 4
+20
+− 2
+(J)
+Notice that the top level of the graph ( J) has two components which can be scaled
+independently. Thus pJ∗[PΞMJ ]spin = 0 as the image will be of lower dimension. Hence
+it will not aﬀect the spin stratum class.
+The pushforward of the spin variant of the divisor class of th e boundary stratum,
+which is associated to the level graph (F), on the moduli spac e of disconnected stable
+curves MF :
+pF ∗[PΞMF ]spin =π ∗
+⊤ [H(2, − 2, − 2)]spin ·π ∗
+⊥ [H1, 2(4, − 4)]spin.
+As µ = (2, − 2, − 2) is a signature of a stratum of diﬀerentials on genus 0 curves . By
+default,
+[H(2, − 2, − 2)]spin =[H(2, − 2, − 2)]
+=[M0, 3]
+On the other hand, one can show that
+[H1, 2(4, − 4)]spin = 9ψ 1
+Hence,
+pF ∗[PΞMA]spin = 9π ∗
+⊥ψ 1
+Now we can do the computations of the clutching pullbacks:
+• Only the enhanced level graphs (F) and (J) have Γ {1}
+1 -structures. Thus, by the
+excess intersection formula, we conclude that
+ξ∗
+Γ{ 1}
+1
+[H1(4, − 2, − 2)]spin = 9π ∗
+⊥ψ 1.
+
+===== PAGE 51 =====
+COMPUTING SPIN STRATUM CLASSES 51
+Only the enhanced level graph (G) has Γ {2}
+1 -structure. One can compute that
+[H1(2, − 2)]spin = 3ψ 1. Thus, we have:
+ξ∗
+Γ{ 2}
+1
+[H1(4, − 2, − 2)]spin = 9π ∗
+⊤ψ 1
+• Only the enhanced level graph (H) has Γ {3}
+1 -structure, thus we have:
+ξ∗
+Γ{ 3}
+1
+[H1(4, − 2, − 2)]spin = 3π ∗
+⊤ψ 1
+• Only the enhanced level graph (I) has Γ ∅
+1-structure, hence:
+ξ∗
+Γ∅
+1
+[
+H1(4, − 2, − 2)]spin = −π ∗
+⊥ψ 1
+By using the function totensorTautbasis() in admcycles, we can convert the
+product tautological classes above into vectors. Now we can make use of the basis of
+RH 2(M1, 3) given by admcycles:
+RH2(M1, 3) = ⟨κ1,ψ 1,ψ 2,ψ 3,δ {1}
+1 ⟩
+By solving the collection of linear equations, we get
+[H1(4, − 2, − 2)]spin =(0, 1, 3, 3, − 8) = ψ 1 + 3(ψ 2 +ψ 3) − 8δ{1}
+1
+In the next example, we will illustrate how we resolve a resid ue condition.
+Example A.2. Now we consider the spin stratum classes [ H
+R
+1 (4, − 2, − 2)]spin, where R
+represents the residue condition r3 = 0. We will ﬁrst apply Proposition 5.9 to resolve
+the residue condition. The level graphs in Section A.1 such t hat the residue condition
+r3 = 0 induces no extra condition on the top level are the followi ng:
+(A) 4 − 21
+− 22
+0 0
+− 2 − 2
+(B) 4 − 22
+− 21
+0 0
+− 2 − 2
+12
+4 − 22
+− 4
+− 21
+(G)
+12
+4 − 21
+− 4
+− 22
+(H)
+10
+4 − 22
+− 2
+− 21
+(I)
+
+===== PAGE 52 =====
+52 YIU MAN WONG
+Notice that only the graph (I) has odd spin (due to the top leve l). The other graphs
+are all of even spin. Thus, we have
+[PΞM
+R
+1, 3(4, − 2, − 2)]spin = −ξspin − [DA] − [DB] − 3[DG] − 3[DH ] + [DI ].
+By Proposition 5.10, if we take the reference leg to be the thi rd marked point, then
+we have
+ξspin = (− 2 + 1)ψ spin
+3 − [DB] − 3[DG] + [DI ]
+Then,
+[PΞ
+M
+R
+1, 3(4, − 2, − 2)]spin =ψ spin
+3 − [DA] − 3[DH ]
+By the result in Example A.1, we then have
+[
+H
+R
+1 (4, − 2, − 2)]spin =p∗[PΞ
+M
+R
+1, 3(4, − 2, − 2)]spin
+=p∗(ψ spin
+3 − [DA] − 3[DH ])
+=ψ 3 ·[
+H1(4, − 2, − 2)]spin − p∗[DA] − 3p∗[DH]
+=
+(
+ψ 3(ψ 1 + 3ψ 2 + 3ψ 3) − 8ψ 3δ{1}
+1
+)
+−
+[
+21
+3
+]
+− 3(3ψ 3) ·
+[
+1
+21
+3
+]
+.
+Appendix B. Computation Results of [Hg(µ )]spin ∈ RH∗(Mg,n )
+In the following, we will list some of our results of the spin c lasses for (g,n ) equal to
+(2, 1), (2, 2), (2, 3), (2, 4), (3, 1), (3, 2), (3, 3), (4, 1), (4, 2), (4, 3)
+This also implies that Assumption 5.3 holds during the compu tation for the spin stra-
+tum classes of strata compatible to the values of (g,n ) above. Our results will be written
+in vector form, whereas the basis is computed by admcycles. For (g,n ) = (3, 3), (4, 2),
+the expression of spin stratum classes of meromorphic strat a will be super lengthy, so
+we will not list them here.
+For (g,n ) = (2, 1), by our recursion, we get
+Spin_Class(2,) = (1/2, -7/2, 1/2)
+For (g,n ) = (2, 2),
+Spin_Class(-6, 8) = (-1563/2, 521/2, -637, -602, 1274, 1021 , 1204, 1563/2,
+-3647/2, 521/2, -116, -81, -521/2, 0)
+Spin_Class(-4, 6) = (-423/2, 141/2, -174, -159, 348, 273, 31 8, 423/2, -987/2,
+141/2, -33, -18, -141/2, 0)
+Spin_Class(-2, 4) = (-63/2, 21/2, -27, -22, 54, 41, 44, 63/2, -147/2, 21/2,
+-6, -1, -21/2, 0)
+
+===== PAGE 53 =====
+COMPUTING SPIN STRATUM CLASSES 53
+The spin stratum classes we listed above are expressed in the basis of RH 4(M2, 2, Q),
+which consists of:
+κ2,κ 2
+1,κ 1ψ 1,κ 1ψ 2,ψ 1ψ 2,ψ 2
+1,ψ 2
+2,...
+Remark B.1. The ﬁrst entry of the basis of RH 2j(
+Mg,n, Q) constructed by admcycles
+is by default just κj.
+From now on, the vector of the spin stratum class will be quite lengthy. Thus we
+will only give the ﬁrst few entries. For ( g,n ) = (2, 3),
+Spin_Class(-1, -1, 4) = (0, 0, 4, 0, ...)
+Spin_Class(-6, -6, 14) = (-10623/2, 3541/2, -4067, -5329, . ..)
+Spin_Class(-6, -2, 10) = (-3039/2, 1013/2, -995, -1517, ... )
+Spin_Class(-6, 4, 4) = (-1023/2, 341/2, -167, -514, ...)
+Spin_Class(-4, 2, 4) = (-162, 54, -58, -162, ...)
+For (g,n ) = (2, 4),
+Spin_Class(-6, -6, -2, 16) = (-6208, 3129, -7270, -8261, ... )
+Spin_Class(-6, -4, 2, 10) = (-5777/2, 1053/2, -2027/2, -244 1/2, ...)
+For (g,n ) = (3, 1),
+Spin_Class(4,) = (-729, 1099/12, -787/12, 213, ...)
+For (g,n ) = (3, 2),
+Spin_Class(-4, 8) = (-34167333/140, 14160639/280, -97662 7/280, -358429/40,
+...)
+Spin_Class(2, 2) = (159/4, -179/48, -7/24, -7/24, ...)
+For (g,n ) = (4, 1),
+Spin_Class(6,) = (-1125203/120, 85013/48, -325/3, -65089 /24, ...)
+For (g,n ) = (4, 2),
+Spin_Class(2, 4) = (59623999/840, -156407/16, 302305/672 , -229619/112, ...)
+for (g,n ) = (4, 3),
+Spin_Class(2,2,2) = (-1572061/48, 42127/9, -64043/288, - 116291/72, ...)
+One can input our result in admcycles by the method Tautvb to tautclass. The
+following is the example for µ = (2, 2),
+
+===== PAGE 54 =====
+54 YIU MAN WONG
+sage: from admcycles import *
+sage: Spin_Class_2_2_vb = (159/4, -179/48, -7/24, -7/24, -131/4 8, -23/24,
+-131/48, 149/24, -83/16, 271/48, 77/48, 77/48, -193/8, -18 5/48, 127/48,
+395/48, 221/48, -73/8, -185/48, 127/48, 395/48, 221/48, -7 3/8, -185/48,
+-41/48, 389/48, 389/48, -23/8, 51/8, -139/16, -323/16, 1/8 , -25/4, -11/4,
+-11/4, -23/4, 973/48, 37/96, -5/2, 23/96, 23/96, -25/32)
+sage: Spin_Class_2_2 = Tautvb_to_tautclass(Spin_Class_2_2_v b, g=3, n=2, r=2)
+Here r is the codimension of our class.
+References
+[AC98] Enrico Arbarello and Maurizio Cornalba. “Calculati ng cohomology groups
+of moduli spaces of curves via algebraic geometry”. In: Publications
+Math´ ematiques de l’Institut des Hautes ´Etudes Scientiﬁques
+88.1 (1998), pp. 97–127.
+[ACG11] Enrico Arbarello, Maurizio Cornalba, and Phillip G riﬃths. Geometry
+of Algebraic Curves, Volume II with a contribution by Joseph
+Daniel Harris . Grundlehren der mathematischen Wissenschaften. Springer-
+Verlag Berlin Heidelberg, 2011. isbn: 9783540693925.
+[BCGGM18] Matt Bainbridge, Dawei Chen, Quentin Gendron, Sa muel Grushevsky,
+and Martin M¨ oller. “Compactiﬁcation of strata of abelian d iﬀerentials”.
+In: Duke Mathematical Journal 167.12 (2018), pp. 2347–2416.
+[BCGGM19] Matt Bainbridge, Dawei Chen, Quentin Gendron, Sa muel Grushevsky,
+and Martin M¨ oller. “The moduli space of multi-scale diﬀeren tials”. In:
+arXiv preprint arXiv:1910.13492 (2019).
+[BE73] Robert Bieri and Beno Eckmann. “Groups with homologi cal duality”.
+In: Inventiones mathematicae 20.2 (1973), pp. 103–124.
+[Ben20] Frederik Benirschke. “The boundary of linear subva rieties”. In: arXiv
+preprint arXiv:2007.02502 (2020).
+[Ber08] Jonas Bergstr¨ om. “Cohomology of moduli spaces of c urves of genus three
+via point counts”. In: (2008).
+[BHPSS20] Younghan Bae, David Holmes, Rahul Pandharipande , Johannes Schmitt,
+and Rosa Schwarz. “Pixton’s formula and Abel-Jacobi theory on the
+Picard stack”. In: arXiv preprint arXiv:2004.08676 (2020).
+[Bir69] Joan S Birman. “Mapping class groups and their relat ionship to braid
+groups”. In: Communications on Pure and Applied Mathematics
+22.2 (1969), pp. 213–238.
+[Boi15] Corentin Boissy. “Connected components of the stra ta of the moduli
+space of meromorphic diﬀerentials”. In: Commentarii Mathematici
+Helvetici 90.2 (2015), pp. 255–286.
+[Bro12] Nathan Broaddus. “Homology of the curve complex and the Steinberg
+module of the mapping class group”. In: Duke Mathematical Journal
+161.10 (2012), pp. 1943–1969.
+
+===== PAGE 55 =====
+REFERENCES 55
+[CFP12] Thomas Church, Benson Farb, and Andrew Putman. “The rational co-
+homology of the mapping class group vanishes in its virtual c ohomologi-
+cal dimension”. In: International Mathematics Research Notices
+2012.21 (2012), pp. 5025–5030.
+[CG21] Dawei Chen and Quentin Gendron. “Towards a classiﬁca tion of con-
+nected components of the strata of k-diﬀerentials”. In: arXiv preprint
+arXiv:2101.01650 (2021).
+[CL22] Samir Canning and Hannah Larson. “On the Chow and coho mology
+rings of moduli spaces of stable curves”. In: arXiv preprint arXiv:2208.02357
+(2022).
+[CMSZ20] Dawei Chen, Martin M¨ oller, Adrien Sauvaget, and D on Zagier. “Masur–
+Veech volumes and intersection theory on moduli spaces of ab elian dif-
+ferentials”. In: Inventiones mathematicae 222 (2020), pp. 283–373.
+[CMZ20a] Matteo Costantini, Martin M¨ oller, and Jonathan Z achhuber. “diﬀstrata–
+a Sage package for calculations in the tautological ring of t he moduli
+space of Abelian diﬀerentials”. In: arXiv preprint arXiv:2006.12815
+(2020).
+[CMZ20b] Matteo Costantini, Martin M¨ oller, and Jonathan Z achhuber. “The Chern
+classes and the Euler characteristic of the moduli spaces of abelian dif-
+ferentials”. In: arXiv preprint arXiv:2006.12803 (2020).
+[CSS21] Matteo Costantini, Adrien Sauvaget, and Johannes S chmitt. “Integrals
+ofψ -classes on twisted double ramiﬁcation cycles and spaces of diﬀeren-
+tials”. In: arXiv preprint arXiv:2112.04238 (2021).
+[CT16] Dawei Chen and Nicola Tarasca. “Loci of curves with su bcanonical
+points in low genus”. In: Mathematische Zeitschrift 284.3 (2016),
+pp. 683–714.
+[DSZ20] Vincent Delecroix, Johannes Schmitt, and Jason van Zelm. “admcycles–a
+Sage package for calculations in the tautological ring of th e moduli space
+of stable curves”. In: arXiv preprint arXiv:2002.01709 (2020).
+[FP18] Gavril Farkas and Rahul Pandharipande. “The moduli s pace of twisted
+canonical divisors”. In: Journal of the Institute of Mathematics
+of Jussieu 17.3 (2018), pp. 615–672.
+[Ful16] William Fulton. Intersection theory. Princeton University Press, 2016.
+[Get98] Ezra Getzler. “Topological recursion relations in genus 2”. In: arXiv
+preprint math/9801003 (1998).
+[GL99] Ezra Getzler and Eduard Looijenga. “The Hodge polyno mial of \ Mbar
+{3, 1 }”. In: arXiv preprint math/9910174 (1999).
+[GP03] Thomas Graber and Rahul Pandharipande. “Constructi ons of nontauto-
+logical classes of moduli spaces of curves”. In: Michigan Mathemati-
+cal Journal 51.1 (2003), pp. 93–110.
+[Har16] Willam J Harvey. “Boundary structure of the modular group”. In: Rie-
+mann Surfaces Related Topics (AM-97), Volume 97 . Princeton
+University Press, 2016, pp. 245–252.
+
+===== PAGE 56 =====
+56 REFERENCES
+[Har86] John L Harer. “The virtual cohomological dimension of the mapping
+class group of an orientable surface”. In: Inventiones mathematicae
+84.1 (1986), pp. 157–176.
+[HS21] David Holmes and Johannes Schmitt. “Inﬁnitesimal st ructure of the
+pluricanonical double ramiﬁcation locus”. In: Compositio Mathemat-
+ica 157.10 (2021), pp. 2280–2337.
+[Iva87] Nikolai V Ivanov. “Complexes of curves and the Teich m¨ uller modular
+group”. In: Russian Mathematical Surveys 42.3 (1987), p. 55.
+[Iva90] NV Ivanov. “Attaching corners to Teichmuller space ”. In: Leningrad
+Math. J. 1 (1990), pp. 1177–1205.
+[Jan17] Felix Janda. “Relations on Mg,n via equivariant Gromov-Witten theory
+of P1. Algebr. Geom., 4 (3): 311–336”. In: arXiv preprint arXiv:1509.08421
+(2017).
+[Joh80] Dennis Johnson. “Spin structures and quadratic for ms on surfaces”. In:
+Journal of the London Mathematical Society 2.2 (1980), pp. 365–
+373.
+[JPPZ17] Felix Janda, Rahul Pandharipande, Aaron Pixton, a nd Dimitri Zvonk-
+ine. “Double ramiﬁcation cycles on the moduli spaces of curv es”. In:
+Publications math´ ematiques de l’IH´ES 125.1 (2017), pp. 221–266.
+[JPPZ20] Felix Janda, Rahul Pandharipande, Aaron Pixton, a nd Dimitri Zvonk-
+ine. “Double ramiﬁcation cycles with target varieties”. In : Journal of
+Topology 13.4 (2020), pp. 1725–1766.
+[Kee92] Sean Keel. “Intersection theory of moduli space of s table n-pointed
+curves of genus zero”. In: Transactions of the American Mathe-
+matical Society (1992), pp. 545–574.
+[KZ03] Maxim Kontsevich and Anton Zorich. “Connected compo nents of the
+moduli spaces of Abelian diﬀerentials with prescribed singu larities”. In:
+Inventiones mathematicae 153.3 (2003), pp. 631–678.
+[Pet16] Dan Petersen. “Tautological rings of spaces of poin ted genus two curves
+of compact type”. In: Compositio Mathematica 152.7 (2016), pp. 1398–
+1420.
+[Pix12] Aaron Pixton. “Conjectural relations in the tautol ogical ring of Mg,n ”.
+In: arXiv preprint arXiv:1207.1918 (2012).
+[PPZ15] Rahul Pandharipande, Aaron Pixton, and Dimitri Zvo nkine. “Relations
+on Mg,n via 3-spin structures”. In: Journal of the American Math-
+ematical Society 28.1 (2015), pp. 279–309.
+[Sau19] Adrien Sauvaget. “Cohomology classes of strata of d iﬀerentials”. In: Ge-
+ometry & Topology 23.3 (2019), pp. 1085–1171.
+[Sch16] Johannes Schmitt. “Dimension theory of the moduli s pace of twisted
+k-diﬀerentials”. In: arXiv preprint arXiv:1607.08429 (2016).
+[SZ20] Johannes Schmitt and Jason van Zelm. “Intersections of loci of admis-
+sible covers with tautological classes”. In: Selecta Mathematica 26.5
+(2020), pp. 1–69.
+
+===== PAGE 57 =====
+REFERENCES 57
+Institut f¨ur Mathematik, Goethe-Universit¨at Frankfurt, Robert-Mayer-Str. 6-8, 60325
+Frankfurt am Main, Germany
+Email address : wong@math.uni-frankfurt.de
