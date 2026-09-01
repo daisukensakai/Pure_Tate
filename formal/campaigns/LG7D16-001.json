@@ -1,0 +1,110 @@
+{
+  "schema_version": 3,
+  "id": "LG7D16-001",
+  "title": "Lean verification campaign for Tate degree-sixteen cohomology in genus at most seven",
+  "source_attempt_id": "ATT-0148",
+  "source_attempt_path": "proof/attempts/ATT-0148.json",
+  "source_attempt_sha256": "de32cf33bd2ff0fb02a0de0516fef21c359d7835d5dc878b893af5830ddac910",
+  "claim_contract_id": "G7D16-COMPACT-H16-TARGET-V1",
+  "exact_theorem": "For every stable pair (g,n) with g at most 7, the degree-sixteen rational cohomology of the complex Deligne-Mumford stack Mbar_{g,n} of stable genus-g curves with n ordered markings is a finite direct sum of Q(-8), with rank zero allowed. Equivalently H^{16}(Mbar_{g,n};Q) is isomorphic to Q(-8)^{oplus b_{g,n}} as a polarizable rational Hodge structure. No Betti-number formula, algebraic or tautological generation, integral statement, or coarse-moduli statement is asserted.",
+  "lean_target_contract": "The exported theorem must quantify over every StablePairIndex p satisfying 3 <= 2*g+n and g <= 7, and conclude the whole-group compact cohomology predicate at stable compactified complex DM stack geometry, rational coefficients, ordered markings, cohomological degree 16, weight 16 and Tate index -8. Rank is finite but unspecified and may be zero. Selected examples, an open or coarse space, an image, quotient, associated graded, semisimplification, algebraic-generation claim, or differently indexed group does not satisfy this contract.",
+  "target_signature": "ALL(stable(g,n),g<=7)=>COMPACT-DM-STACK(ordered,Q,H^16,weight=16,tate=-8,whole-group,rank>=0)",
+  "trusted_prelude_path": "formal/TrustedG7D16Target.lean.inc",
+  "trusted_prelude_sha256": "7c7bb11a2b7c73245de7ee8e04f7014075485b2dddaa24e27aeac95c7dde58ac",
+  "trusted_prelude_in_model": true,
+  "shared_signature_path": "formal/G7D16Signature.lean.inc",
+  "shared_signature_sha256": "567dad87c178b45a17d98ec4b4c2cb0add7cd6a22428d2de098f1e0d08adec13",
+  "required_theorem_type": "AllStableGenusAtMostSevenCompactH16IsTate CompactH16IsFiniteTateSum",
+  "toolchain": "leanprover/lean4:v4.32.1",
+  "timeout_seconds": 120,
+  "minimum_independent_reviews": 2,
+  "review_target_checks": [
+    "complex_dm_stack",
+    "stable_compactification_not_open",
+    "stack_not_coarse",
+    "rational_coefficients",
+    "ordered_markings",
+    "all_stable_pairs",
+    "genus_at_most_seven",
+    "cohomological_degree_sixteen",
+    "weight_sixteen",
+    "tate_index_minus_eight",
+    "zero_rank_allowed",
+    "whole_group_not_proxy",
+    "no_generation_or_rank_claim"
+  ],
+  "dependency_artifacts": [
+    {
+      "id": "genus-le-seven-manuscript",
+      "path": "paper/degree16_genus_le7.tex",
+      "sha256": "81194aa341d62d1a0eb1775e458c5b1c310cb24efafc3bc21563e8d5da9775aa"
+    },
+    {
+      "id": "liu-repair-claude-rev2",
+      "path": "reports/runs/manual-recovery/liu-claude-rev2-20260901/CLAUDE-REV2-REPORT.md",
+      "sha256": "d805df65a3e29c424a5be059854f6137ab3fe1c9108be14f2f140c8fa35a12b1"
+    },
+    {
+      "id": "liu-repair-codex-rev3",
+      "path": "reports/runs/manual-recovery/liu-codex-rev3-20260901/CODEX-P2-REPORT.md",
+      "sha256": "3698ec21c787e01ea3b86827ec9764cba8cb22f7723fdbbecca0790ba8b434e5"
+    }
+  ],
+  "verified_lean_dependencies": [],
+  "optional_obligation_ids": [],
+  "optional_axiom_names": [],
+  "review_policy": {
+    "reviewers_must_differ_from_prover": true,
+    "reviewer_engines_must_be_distinct": true,
+    "both_reviews_must_bind_all_artifact_hashes": true,
+    "both_reviews_must_bind_dependency_hashes": true,
+    "both_reviews_must_check_statement_and_every_axiom": true
+  },
+  "obligations": [
+    {
+      "id": "G7D16-OBL-01",
+      "source_claim_id": "CLM-0148-1",
+      "statement": "Represent the repaired M_{5,8} input, not Liu's unrepaired Corollary 3.9: the CKgP, tautological Chow, cohomological Ionel vanishing, and exact open BM conversion must be available as distinct premises."
+    },
+    {
+      "id": "G7D16-OBL-02",
+      "source_claim_id": "CLM-0148-2",
+      "statement": "Represent the five critical endpoint vanishings with strict vcd inequalities, inclusive marking endpoints, and the Ionel-Looijenga source vanishing; do not use at-vcd vanishing."
+    },
+    {
+      "id": "G7D16-OBL-03",
+      "source_claim_id": "CLM-0148-3",
+      "statement": "Represent the complete open Borel-Moore result for every stable pair with 3<=g<=7, including the stronger zero range 2g+n>=11 and the remaining published-range Tate cases."
+    },
+    {
+      "id": "G7D16-OBL-04",
+      "source_claim_id": "CLM-0148-4",
+      "statement": "Represent the genus 0,1,2 degree-sixteen base cases, odd compact vanishing through degree nine, and even compact Tate type through degree fourteen as separate audited inputs."
+    },
+    {
+      "id": "G7D16-OBL-05",
+      "source_claim_id": "CLM-0148-5",
+      "statement": "Type one-edge boundary factors separately from their parent and prove stability, non-increasing genus, and strict decrease of the induction complexity."
+    },
+    {
+      "id": "G7D16-OBL-06",
+      "source_claim_id": "CLM-0148-6",
+      "statement": "Represent the boundary Kunneth assembly, odd-odd disposal, positive even-even Tate typing, finite graph invariants, and passage from the normalized boundary source to its homological image."
+    },
+    {
+      "id": "G7D16-OBL-07",
+      "source_claim_id": "CLM-0148-7",
+      "statement": "Represent the degree-preserving, untwisted right-exact boundary sequence with distinct boundary-image, compact-homology, and open-BM carriers and the correct kernel/quotient orientation."
+    },
+    {
+      "id": "G7D16-OBL-08",
+      "source_claim_id": "CLM-0148-8",
+      "statement": "Represent smooth-proper purity, same-weight semisimplicity, and proper same-degree H_16/H^16 duality with Q(8) dual to Q(-8), never the open dimension-dependent Poincare twist."
+    },
+    {
+      "id": "G7D16-OBL-09",
+      "source_claim_id": "CLM-0148-9",
+      "statement": "Carry out genuine well-founded strong induction for every stable pair with g<=7; no finite list of examples or same-complexity recursive premise is acceptable."
+    }
+  ]
+}

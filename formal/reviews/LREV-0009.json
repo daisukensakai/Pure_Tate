@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "id": "LREV-0009",
+  "attempt_id": "LATT-0005",
+  "campaign_id": "LG7D16-002",
+  "review_pass": 2,
+  "review_task_id": "TASK-LV-LATT-0005-P2",
+  "review_run_path": "reports/runs/RUN-LG7D16-002-LATT-0005-CLAUDE-P2.json",
+  "reviewer_engine": "claude",
+  "independent": true,
+  "verdict": "incomplete",
+  "campaign_sha256": "0727dc53fc937ba4f255089bf1c7715de58a53830c47ea12b081cc0cbc2ad81f",
+  "claim_sha256": "6a06ea9f8972a14373ffb0084ad66f393fb05d4cd484b72b1e7fd374889b8e13",
+  "model_sha256": "dda44389c3804e38239c3b853a089069c02ea9b089479db76a7a7fedc999d2a3",
+  "manifest_sha256": "1c75309d278cd440a6c0eec7091afd4221abb0a5b0632016b837544f199ea078",
+  "report_sha256": "398c391024e769f5354e63cbf3b9743168514b673258edefb6115a2843e6fcb2",
+  "dependency_hashes": {
+    "claude-p1-latt0004-findings": "d26253fadcc0872855cb8aa23ed2a6a41c2b2ddc60c2dc1170482f920c00267b",
+    "genus-le-seven-manuscript": "81194aa341d62d1a0eb1775e458c5b1c310cb24efafc3bc21563e8d5da9775aa",
+    "liu-repair-claude-rev2": "d805df65a3e29c424a5be059854f6137ab3fe1c9108be14f2f140c8fa35a12b1",
+    "liu-repair-codex-rev3": "3698ec21c787e01ea3b86827ec9764cba8cb22f7723fdbbecca0790ba8b434e5"
+  },
+  "checked_obligations": [
+    "G7D16-OBL-01",
+    "G7D16-OBL-02",
+    "G7D16-OBL-03",
+    "G7D16-OBL-04",
+    "G7D16-OBL-05",
+    "G7D16-OBL-06",
+    "G7D16-OBL-07",
+    "G7D16-OBL-08",
+    "G7D16-OBL-09"
+  ],
+  "target_checks": {
+    "complex_dm_stack": true,
+    "stable_compactification_not_open": true,
+    "stack_not_coarse": true,
+    "rational_coefficients": true,
+    "ordered_markings": true,
+    "all_stable_pairs": true,
+    "genus_at_most_seven": true,
+    "cohomological_degree_sixteen": true,
+    "weight_sixteen": true,
+    "tate_index_minus_eight": true,
+    "zero_rank_allowed": true,
+    "whole_group_not_proxy": true,
+    "open_term_is_lowest_weight_piece": true,
+    "no_generation_or_rank_claim": true
+  },
+  "model_checks": {
+    "models_every_claim_axiom": true,
+    "witness_is_axiom_free": true,
+    "noncollapse_is_material": true,
+    "model_matches_claim_vocabulary": true
+  },
+  "axiom_checks": [
+    {
+      "axiom": "CompactH16IsFiniteTateSum",
+      "obligation_id": "VOCAB",
+      "verdict": "confirmed",
+      "note": "Declared as an opaque `axiom CompactH16IsFiniteTateSum : CompactH16TargetIndex -> Prop` (Claim.lean:295), never defined, so the exported theorem is a deduction about an arbitrary predicate constrained only by the listed axioms; the conclusion cannot be smuggled in by definition. The harness elaborates `#check (_root_.genus_at_most_seven_compact_h16_is_tate : AllStableGenusAtMostSevenCompactH16IsTate CompactH16IsFiniteTateSum)` (lean_campaign.py:666), so the carrier is pinned to the campaign's required_theorem_type. Model.lean interprets it as `t = compactH16Target t.pair AND IsStablePair t.pair AND t.pair.genus <= 7`, refuted at ten perturbations (NC03-NC12). Confirmed."
+    },
+    {
+      "axiom": "boundary_factor_complexity_decreases",
+      "obligation_id": "G7D16-OBL-09",
+      "verdict": "confirmed",
+      "note": "Reads: PairComplexity q < PairComplexity p for every one-edge factor. PairComplexity = 3g+n = d+3 with d = 3g-3+n, so this is exactly the manuscript's 'each individual factor has dimension smaller than d', on Nat and without truncated subtraction. It is the well-foundedness input; q = p and any same-complexity factor are excluded outright, and Model NC24 refutes OneEdgeBoundaryFactor stable66 stable66. Confirmed."
+    },
+    {
+      "axiom": "boundary_factor_genus_le_parent",
+      "obligation_id": "G7D16-OBL-05",
+      "verdict": "confirmed",
+      "note": "Reads: a one-edge factor never increases genus. Matches g = h^1(Gamma) + sum g_v, so every vertex genus is at most g. It is what keeps q.genus <= 7 in the recursive call via Nat.le_trans. Confirmed."
+    },
+    {
+      "axiom": "boundary_factor_is_stable",
+      "obligation_id": "G7D16-OBL-05",
+      "verdict": "confirmed",
+      "note": "Reads: every one-edge boundary factor is itself a stable pair. Matches CLM-0148-5 and the induction section's stable-graph bookkeeping (2g_v - 2 + n_v > 0 at every vertex). It is what transports IsStablePair to q in the recursive call. Confirmed."
+    },
+    {
+      "axiom": "boundary_image_is_kernel",
+      "obligation_id": "G7D16-OBL-07",
+      "verdict": "confirmed",
+      "note": "Reads: given right exactness and kernelOrientation = boundaryImageIsKernel, the boundary image is the kernel. This is eq:boundary-short, where I_{g,n} is the kernel and the open term the quotient. In Claim.lean the orientation equation is discharged by rfl because boundarySequenceIndex pins the field, so within the Claim it is a typed gate rather than a contingent hypothesis; its force is that KernelOrientation.compactHomologyIsKernel would not typecheck. The independence LREV-0007-F04 asked for is supplied in the model by NC22. Confirmed."
+    },
+    {
+      "axiom": "boundary_image_tate_from_one_edge_graphs",
+      "obligation_id": "G7D16-OBL-06",
+      "verdict": "confirmed",
+      "note": "Reads: for stable p with g <= 7, given odd vanishing through nine, even Tate through fourteen and the degree-sixteen hypothesis at every one-edge factor, the boundary image is a finite Q(8)-sum. This is CLM-0148-6 and eq:boundary-cohom-induction/eq:boundary-hom-induction. The passage from the normalized boundary source to its homological image is carried by the conclusion's carrier, boundaryImageIndex p, whose objectKind is `image` and which is a distinct type from CompactHomologyIndex. lem:kunneth, eq:quotient-invariants finite graph invariants and the sum over the finitely many one-edge graphs are aggregated inside this single black box rather than separately typed; that is an aggregation, not a misstatement, and the two low-degree premises it consumes are exactly the ones lem:kunneth needs. Confirmed."
+    },
+    {
+      "axiom": "boundary_sequence_right_exact",
+      "obligation_id": "G7D16-OBL-07",
+      "verdict": "confirmed",
+      "note": "Reads: a sequence whose boundary, compact and open carriers are the canonical ones, oriented boundaryToCompactToOpen with degreeShift 0 and tateTwist 0, is right exact. This is prop:boundary-sequence, CLP Equation (6.1), together with the manuscript's explicit remark that the first map has neither a degree shift nor a Tate twist. The premise list deliberately omits kernelOrientation, so right exactness and the kernel premise stay independent; Model NC19-NC21 refute the reversed, shifted and twisted sequences and NC22 exhibits a sequence that is right exact with the wrong kernel orientation. Confirmed."
+    },
+    {
+      "axiom": "compact_base_genus_zero_one_two",
+      "obligation_id": "G7D16-OBL-04",
+      "verdict": "confirmed",
+      "note": "Reads: for every stable pair of genus at most 2, H^16 of the compact stack is a finite Q(-8)-sum. Matches prop:compact-inputs (iii)-(iv) via Keel for genus zero, Petersen Corollary 1.2 for genus one and CLP Corollary 2.7 for genus two, and it is stated for all n, not a finite list. It is the only axiom that asserts the target predicate outright, and it is confined to g <= 2, so the g >= 3 conclusion is never assumed. Confirmed."
+    },
+    {
+      "axiom": "compact_homology_pure_polarizable",
+      "obligation_id": "G7D16-OBL-08",
+      "verdict": "confirmed",
+      "note": "Reads: for a stable pair, H_16(Mbar_{g,n};Q) with purityKind purePolarizable is pure polarizable. This is smooth-proper purity from the weights subsection: for smooth proper X the structures are polarizable and pure of weight -i in homology. The purityKind equation is rfl-discharged in the Claim, as for the kernel orientation. Independence is supplied in the model, where rightExactModel compares only normalizedCompact s.compact so an impure middle term can still be right exact. Confirmed."
+    },
+    {
+      "axiom": "critical_endpoint_vanishes_from_typed_inputs",
+      "obligation_id": "G7D16-OBL-02",
+      "verdict": "unresolved",
+      "note": "Unresolved. The premise shape is right and the genus-five branch `(e.pair.genus = 5 -> vocab.GenusFiveEndpointVanishing)` correctly routes (5,8) through the repaired input while remaining vacuous at the other four records. But the axiom demands the primitive-quotient, strict-vcd, inclusive-CKgP and Ionel-psi-source premises uniformly at all five records, whereas tab:critical and cor:critical-vanishing run that one-marking argument only at (3,12), (6,6) and (7,4); (4,10) is a direct Canning-Larson-Payne range case (n = 10 <= c(4) = 11, Ionel at codimension 11) and (5,8) is cor:liu-input at codimension 12. The direct-range justification for (4,10) has no premise anywhere in the development, and the record's ionelCodimension values 10 and 11 at (4,10) and (5,8) are the uniform psi-source codimension (k-2)/2, not the codimensions 11 and 12 the manuscript actually uses there. The conclusion CriticalEndpointVanishes is true at all five endpoints and the uniform route does go through at (4,10) under n-1 <= c(4), so nothing false is derived; the audit trail is over-attributed. See LREV-0009-F02."
+    },
+    {
+      "axiom": "even_compact_tate_through_fourteen",
+      "obligation_id": "G7D16-OBL-04",
+      "verdict": "confirmed",
+      "note": "Reads: positive even compact cohomology through degree fourteen is Tate of its forced type; prop:compact-inputs (ii) via CLP Theorem 1.5(3) and Poincare duality. Matches lem:kunneth's positive even-even step where both degrees are at most fourteen and Q(-p/2) tensor Q(-q/2) = Q(-8). Confirmed."
+    },
+    {
+      "axiom": "genus_five_ckgp",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "Reads: M_{5,8} has the Chow-Kunneth generation property. Matches Theorem thm:genus-five-input (second clause) of the manuscript and Claim 2 of both Liu dependency reports (Claude rev2 'judged true, not established as written'; Codex rev3 'confirmed'). Now a premise distinct from the Chow equality, from the Ionel input and from the BM conversion, which is the first half of the LREV-0007-F01 repair. It is consumed only by genus_five_endpoint_from_repaired_inputs and reaches the exported theorem through endpointG5Vanishes; the harness's declared-subset-of-used check confirms it is load-bearing. Confirmed."
+    },
+    {
+      "axiom": "genus_five_endpoint_from_repaired_inputs",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "A four-argument assembly `CKgP -> TautologicalChow -> IonelCohomological -> OpenBMConversion -> GenusFiveEndpointVanishing`. Premise order and arity are exactly the four repaired inputs; nothing is fused and no fifth premise is smuggled in. Claim.lean:459 applies it to all four axioms, and the result is used only through the `e.pair.genus = 5` branch of critical_endpoint_vanishes_from_typed_inputs at endpointG5. This completes the LREV-0007-F01 repair. Confirmed."
+    },
+    {
+      "axiom": "genus_five_ionel_cohomological_vanishing",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "As an OBL-01 premise this is faithful: it is Ionel's theorem used only on the cycle-class image at (5,8), never as a Chow-level vanishing claim, matching prop:ionel plus cor:liu-input and repair item (g) of the Claude rev2 report and 'CLP plus Ionel: complete' of the Codex rev3 report. Confirmed in that role. Its reuse as the licensing premise of ionel_kills_critical_psi_source at the genus 3, 4, 6 and 7 endpoints is a separate defect, recorded against that axiom and as LREV-0009-F01."
+    },
+    {
+      "axiom": "genus_five_open_bm_conversion",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "Reads: CLP Lemma 4.3 pure-weight conversion followed by the exact Poincare twist W_24 H^24(M_{5,8}) -> W_{-16} H^BM_16(M_{5,8}) at d = 20. This is the premise LREV-0007-F01 found entirely absent in LATT-0004. It matches cor:liu-input's final step and Claim 4 of both Liu reports (d = 20, 2d-i = 24, the twist by (20) lowers weight 24 to -16). Distinct from the Chow and Ionel premises. Confirmed."
+    },
+    {
+      "axiom": "genus_five_tautological_chow",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "Reads: A^*(M_{5,8}) = R^*(M_{5,8}) with rational coefficients. Matches thm:genus-five-input (first clause) and Claim 1 of the two Liu reports. Kept strictly at Chow level and separate from genus_five_ionel_cohomological_vanishing, so the Chow-versus-cohomology firewall that ATT-0148 lists among its failed approaches is now visible in the artifact rather than taken on the manuscript's word. Confirmed."
+    },
+    {
+      "axiom": "inclusive_ckgp_endpoint",
+      "obligation_id": "G7D16-OBL-02",
+      "verdict": "failed",
+      "note": "Failed as a representation of CLP Table 1. The gate is `e.pair.markings = e.ckgpMarkingEndpoint + 1`, but every pinned record sets ckgpMarkingEndpoint to n-1 (11,9,7,5,3), so the premise is true by construction of the record and carries no Table 1 content. eq:c-table gives c(3)=11, c(4)=11, c(5)=7, c(6)=5, c(7)=3; the identity n-1 = c(g) that the axiom comment and CLM-0148-2 assert holds at (3,12), (5,8), (6,6), (7,4) but fails at (4,10), where n-1 = 9 while c(4) = 11. Substituting the true c(4) = 11 into the record makes `inclusive_ckgp_endpoint endpointG4 _ (by decide)` require 10 = 12 and breaks elaboration. Under the equality reading the record is false at endpointG4; under the weaker n-1 <= c(g) reading, which is what the mathematics actually needs and which does hold at (4,10), the field encodes nothing and the marker is a proxy. No CLP Table 1 value appears anywhere in the pinned data. See LREV-0009-F02."
+    },
+    {
+      "axiom": "ionel_kills_critical_psi_source",
+      "obligation_id": "G7D16-OBL-02",
+      "verdict": "failed",
+      "note": "Failed. The axiom concludes `vocab.IonelKillsPsiSource e` for every critical endpoint from `vocab.GenusFiveIonelCohomologicalVanishing`, and Claim.lean:469, 478, 496 and 505 discharge it with genus_five_ionel_cohomological_vanishing at endpointG3, endpointG4, endpointG6 and endpointG7. The manuscript's input here is prop:ionel, Ionel-Looijenga for all g >= 2, and CLM-0148-2 names 'Ionel-Looijenga vanishing' as its own premise; LATT-0004 carried it as the separate general field vocab.IonelLooijengaVanishing with axiom ionel_looijenga_vanishing mapped to G7D16-OBL-02. The V2 signature deletes that field, so the repaired development derives Ionel vanishing at (7,4) in codimension 13 from a premise that asserts only the genus-five statement. That is a strengthened premise and a breach of the OBL-01 firewall the repair existed to build. The codimension gate `e.pair.genus <= e.ionelCodimension` is additionally vacuous: with codimensions 9,10,11,12,13 against genera 3..7 it cannot fail for any value at or above the genus. See LREV-0009-F01."
+    },
+    {
+      "axiom": "odd_compact_vanishing_through_nine",
+      "obligation_id": "G7D16-OBL-04",
+      "verdict": "confirmed",
+      "note": "Reads: odd compact cohomology vanishes through degree nine; prop:compact-inputs (i), Bergstrom-Faber-Payne Theorem 1.1. Used only as a premise of boundary_image_tate_from_one_edge_graphs, matching lem:kunneth's odd-odd disposal where min(p,q) <= 7. Confirmed."
+    },
+    {
+      "axiom": "open_bm_vanishes_strong_range",
+      "obligation_id": "G7D16-OBL-03",
+      "verdict": "confirmed",
+      "note": "Reads: for stable p with 3 <= g <= 7 and 11 <= 2g+n, and given all five endpoint vanishings, the lowest-weight open Borel-Moore term vanishes. This is the second assertion of prop:open-all ('a_{g,n} = 0 whenever 2g+n >= 11'), whose proof uses j/2 = 3g+n-11 >= g for n > 0 and 3g-11 >= g-1 for n = 0. It is an explicit zero predicate on the OpenBMVanishes carrier, converted to Tate type only afterwards by zero_open_bm_is_tate, exactly as LREV-0007-F03 required. The bound is on 2g+n with markings : Nat unbounded, so the branch covers every large-marking case. Model NC17 witnesses it at (6,6). Confirmed."
+    },
+    {
+      "axiom": "proper_duality_transfers_tate",
+      "obligation_id": "G7D16-OBL-08",
+      "verdict": "confirmed",
+      "note": "Reads: Tate compact homology plus proper same-degree duality gives Tate compact cohomology at the same index. Q(8) has weight -16 and Q(-8) weight 16, so the sign flip recorded by weightSign = tateSign = -1 is exactly the dualization, with no dimension-dependent twist. This is the final 'Dualizing proves (main)' step of the induction. It is the only axiom producing the target predicate in the g >= 3 branch, and it consumes rather than assumes the inductive content. Confirmed."
+    },
+    {
+      "axiom": "proper_same_degree_duality",
+      "obligation_id": "G7D16-OBL-08",
+      "verdict": "confirmed",
+      "note": "Reads: for a stable pair, the canonical properDualityIndex holds. That index fixes kind = properSameDegree, homologicalDegree = cohomologicalDegree = 16, weightSign = tateSign = -1 and ambientDimensionTwist = 0, which is eq:proper-dual, H_i(X;Q) = H^i(X;Q)^dual for proper X, and not the smooth open Poincare formula eq:pd-smooth. Model NC26 refutes ambientDimensionTwist := 21, the actual complex dimension of Mbar_{6,6}, and NC27 refutes kind := openPoincareDimensionTwist. Confirmed."
+    },
+    {
+      "axiom": "published_open_bm_tate_below_zero_range",
+      "obligation_id": "G7D16-OBL-03",
+      "verdict": "confirmed",
+      "note": "Reads: for stable p with 3 <= g <= 7 and 2g+n < 11, given PublishedOpenRangeControl, the open term is a finite Q(8)-sum. Together with open_bm_vanishes_strong_range the two branches are exhaustive and disjoint; the below-11 branch is exactly (3,0..4), (4,0..2), (5,0), all inside eq:c-table's direct ranges. Both branches occur in the exported axiom closure. Model NC18 witnesses (3,0) as Tate but not vanishing, so the two predicates are materially distinct. Confirmed."
+    },
+    {
+      "axiom": "published_open_range_control",
+      "obligation_id": "G7D16-OBL-03",
+      "verdict": "confirmed",
+      "note": "Reads: the audited remaining published-range open calculations outside the critical endpoints. It gates published_open_bm_tate_below_zero_range, matching the direct Canning-Larson-Payne ranges of eq:c-table used in prop:open-all. Confirmed."
+    },
+    {
+      "axiom": "semisimple_boundary_extension",
+      "obligation_id": "G7D16-OBL-08",
+      "verdict": "confirmed",
+      "note": "Reads: from right exactness, the kernel orientation, a Tate boundary sub, a Tate open quotient and a pure middle term, the compact homology is a finite Q(8)-sum. This is the semisimplicity step of eq:induction-extension: every subobject or quotient of Q(m)^N is a sum of Q(m), and polarizable pure Hodge structures of fixed weight form a semisimple category. The axiom quantifies over arbitrary (s,b,o,h) with only the three projection equalities, but within the closed axiom set BoundarySequenceIsRightExact has exactly one production rule, which pins all of s.boundary, s.compact and s.openPart to the canonical carriers at homological degree 16, weight -16 and Tate index 8, so mismatched-carrier instantiations are unreachable. Purity is genuinely load-bearing in the model: with the purity premise deleted, impureSequence satisfies every remaining hypothesis while homTateModel impureHomology is false, so the weakened axiom would be refuted. Confirmed."
+    },
+    {
+      "axiom": "strict_phi_vcd_at_critical_endpoint",
+      "obligation_id": "G7D16-OBL-02",
+      "verdict": "confirmed",
+      "note": "Premise `e.smallerPointedVcd < e.ordinaryDegree`, i.e. vcd(PMod_{g,n-1}) = 4g-4+(n-1) = k-1 < k, matching prop:endpoint-vanishing's Phi^k = 0 step. Records give 19<20, 21<22, 23<24, 25<26, 27<28, all strict and all discharged by `decide`; NC15 refutes smallerPointedVcd := 26 at endpointG6. Note that eq:critical-arithmetic's forbidden at-vcd comparison (k against vcd(M_{g,n}) = k on the critical line) is not merely rejected but inexpressible: no field of CriticalEndpointIndex holds vcd(M_{g,n}). Confirmed."
+    },
+    {
+      "axiom": "strict_primitive_vcd_at_critical_endpoint",
+      "obligation_id": "G7D16-OBL-02",
+      "verdict": "confirmed",
+      "note": "Premise `e.unpointedVcd < e.primitiveDegree`, i.e. 4g-5 < 4g-4, is the manuscript's strict inequality k-n = 4g-4 > 4g-5 = vcd(Mod_g) from prop:endpoint-vanishing. The pinned records give 7<8, 11<12, 15<16, 19<20, 23<24, each discharged by `decide`, so an at-vcd record (equality) would fail to elaborate; Model NC14 refutes the perturbation unpointedVcd := 20 at endpointG6. This is the substantive half of the LREV-0007-F02 repair and it holds. Confirmed."
+    },
+    {
+      "axiom": "vocab",
+      "obligation_id": "VOCAB",
+      "verdict": "confirmed",
+      "note": "`axiom vocab : G7D16VocabularyV2` over the byte-pinned signature (22 fields). Every mathematical premise is a field of this one structure, so no premise can be introduced outside the pinned vocabulary. I diffed Claim.lean:73-292 and Model.lean:69-290 against formal/G7D16SignatureV2.lean.inc: both are byte-identical and both hash to 75cb754272441b4ee068c9daf28f7884f9792c2a62cf75065e9e9019f90dcc19. Model.lean supplies modelVocabulary interpreting all 22 fields concretely. Confirmed."
+    },
+    {
+      "axiom": "zero_open_bm_is_tate",
+      "obligation_id": "G7D16-OBL-03",
+      "verdict": "confirmed",
+      "note": "Reads: a vanishing open term is a finite Q(8)-sum, which is where rank zero is made explicit. Stated for an arbitrary OpenBMIndex rather than only the canonical one, which is harmless since it only weakens a hypothesis about an already-vanishing group. Confirmed."
+    }
+  ],
+  "predecessor_repair_adjudication": {
+    "note": "Determined independently by re-deriving each LREV-0007 finding against LATT-0005, not by reading the repair report or any other assessment.",
+    "LREV-0007-F01": "repaired. The fused vocab.RepairedGenusFiveInput is replaced by four distinct vocabulary fields and four distinct axioms (genus_five_ckgp, genus_five_tautological_chow, genus_five_ionel_cohomological_vanishing, genus_five_open_bm_conversion), assembled by genus_five_endpoint_from_repaired_inputs; the previously absent CLP Lemma 4.3 plus Poincare open-BM conversion now has its own premise. All four are in the exported axiom closure and reach the theorem through endpointG5Vanishes. Caveat: the repair leaks in the other direction, since the Ionel field of this OBL-01 group now also discharges OBL-02 at four non-genus-five endpoints (LREV-0009-F01).",
+    "LREV-0007-F02": "partially repaired. The typed vcd data is real and the at-vcd shortcut is now inexpressible as well as refuted (NC14, NC15): five endpoint records, strict primitive and smaller-pointed inequalities, decide-discharged against byte-pinned values. Not repaired: the inclusive-endpoint marker the remedy asked for records n-1 rather than c(g), so it is self-satisfying and carries no CLP Table 1 content, and it disagrees with c(4) = 11 at (4,10) (LREV-0009-F02).",
+    "LREV-0007-F03": "repaired. open_bm_vanishes_strong_range asserts an explicit zero predicate on the OpenBMVanishes carrier for 3 <= g <= 7 with 11 <= 2g+n, converted to Tate type only afterwards by zero_open_bm_is_tate, with published_open_bm_tate_below_zero_range covering 2g+n < 11. Both branches occur in the exported closure and NC17/NC18 show they are materially distinct.",
+    "LREV-0007-F04": "repaired in substance, by a different mechanism than the remedy proposed. Kernel: NC22 exhibits a right-exact sequence with the wrong kernel orientation, so BoundaryImageIsKernel is no longer equivalent to BoundarySequenceIsRightExact. Purity: rightExactModel now compares only normalizedCompact s.compact, which decouples right exactness from purity and makes impureSequence possible; I verified that AX25 with the purity premise deleted is refuted by it, so purity is independently load-bearing. The redundancy F04 named (pureModel h derivable from the other conjuncts of homTateModel h) is still present, and NC23 omits the conclusion half of the witness (LREV-0009-F03).",
+    "LREV-0007-F05": "repaired at campaign level. The V2 prelude adds CohomologyObjectKind.lowestWeightPiece and the V2 signature sets openBMIndex.objectKind to it, so the open carrier denotes W_{-16} H^BM_16 rather than the whole Borel-Moore group; NC13 refutes the wholeGroup variant. The semantic misreading F05 warned about is closed.",
+    "LREV-0007-F06": "not applicable to the attempt; it recorded that the predecessor session could not execute a digest tool. This session recomputed all twelve pinned sha256 values with shasum -a 256 and all twelve match, and additionally recomputed the digests of the two pinned blocks as extracted from Claim.lean and Model.lean."
+  },
+  "statement_faithfulness": "The exported theorem is genus_at_most_seven_compact_h16_is_tate : AllStableGenusAtMostSevenCompactH16IsTate CompactH16IsFiniteTateSum, which is the campaign's required_theorem_type verbatim; lean_campaign.py:666 appends #check (_root_.<theorem> : <required_theorem_type>) to a temporary copy of Claim.lean and requires it to elaborate, so the type is mechanically pinned rather than merely asserted in a header. I re-derived both pinned blocks byte for byte rather than trusting their digests: Claim.lean:11-69 and Model.lean:7-67 are identical to formal/TrustedG7D16TargetV2.lean.inc and hash to b4d0f37e09e4b9cb69df12a321da739190179c85d5d486faeffd1829880bd641; Claim.lean:73-292 and Model.lean:69-290 are identical to formal/G7D16SignatureV2.lean.inc and hash to 75cb754272441b4ee068c9daf28f7884f9792c2a62cf75065e9e9019f90dcc19. Unfolding the prelude gives: forall p : StablePairIndex, IsStablePair p -> p.genus <= 7 -> CompactH16IsFiniteTateSum (compactH16Target p). Field by field. Geometry: compactH16Target fixes GeometryKind.stableCompactifiedDMStack, so the object is the stable compactified complex Deligne-Mumford stack Mbar_{g,n}, not the open stack and not a coarse space; Model NC03 and NC04 refute both substitutions. Coefficients: CoefficientKind.rational, NC05 refutes integral. Markings: MarkingKind.ordered, NC06 refutes unordered; Remark rem:scope and the manuscript's opening confirm ordered markings, rational coefficients and stacks. Quantifier range: markings : Nat is unbounded and IsStablePair p unfolds to 3 <= 2*p.genus + p.markings, which over the integers is exactly 2g-2+n > 0, so the theorem ranges over every stable pair with arbitrarily many ordered markings; it is not a finite list, no upper bound on n is smuggled in anywhere, and both branches of the open split (2g+n >= 11 and 2g+n < 11) are stated as bounds on 2g+n rather than on n. Genus: p.genus <= 7, with NC07 refuting genus eight and NC08 refuting an unstable pair. Object: objectKind = CohomologyObjectKind.wholeGroup, and since image, quotient, associatedGraded, semisimplification and lowestWeightPiece are distinct constructors of the same DecidableEq enum, no proxy can be substituted; NC12 refutes the quotient. Degree, weight, Tate index: 16, 16, -8, refuted at 15, 15 and +8 by NC09, NC10 and NC11. Q(-8) has weight 16 and type (8,8) by the manuscript's weights subsection, so weight 16 with tateIndex -8 is the correct pairing. Rank: CompactH16IsFiniteTateSum is an opaque axiom, nothing asserts a rank, a Betti number, algebraic or tautological generation, or an integral or coarse statement, and zero_open_bm_is_tate makes rank zero explicitly admissible. The open carrier is separately correct and is the one field LREV-0007-F05 flagged: openBMIndex now has objectKind = CohomologyObjectKind.lowestWeightPiece at homologicalDegree 16, weight -16, tateIndex 8, so it denotes W_{-16} H^BM_16(M_{g,n};Q) and not the whole Borel-Moore group; NC13 refutes the wholeGroup variant. All fourteen campaign target checks pass. The statement layer is faithful; the defects I record are in the axiom layer.",
+  "axiom_faithfulness": "All 29 declared axioms were reconstructed against ATT-0148 and paper/degree16_genus_le7.tex: 26 confirmed, 2 failed, 1 unresolved. Axiom closure. report.json's used_axioms is exactly the 29 declared axioms plus propext and Quot.sound, so every declared premise is load-bearing (the harness enforces both directions: closed-world at lean_campaign.py:744 and no-unused at :751) and there is no proof escape. I re-ran the static gates myself: no forbidden token (sorry, admit, native_decide, opaque, unsafe, extern, implemented_by, import) in either file, no #eval and no macro/elab/syntax command extension, Model.lean declares no axiom and no constant, Claim.lean's first code line is set_option autoImplicit false, each file contains exactly one #print, LEAN-MODELS names all 29 axioms exactly once, and every declared axiom carries a LEAN-AXIOM mapping. Classical.choice is absent even though the whitelist would permit it, because both by_cases split decidable Nat orders. The Model witness closes over propext and Quot.sound only. All nine obligation IDs appear in the mapping table. Induction. compact_h16_by_complexity uses Nat.strongRecOn on c = PairComplexity p = 3g+n, so the hypothesis is available at every strictly smaller complexity; PairComplexity = d+3 for d = 3g-3+n, order-equivalent to the manuscript's induction and free of truncated Nat subtraction. The base branch is p.genus <= 2 discharged by compact_base_genus_zero_one_two for all n; the step derives 3 <= p.genus by omega and calls ih only at PairComplexity q < PairComplexity p supplied by boundary_factor_complexity_decreases, with stability and the genus bound transported by boundary_factor_is_stable and boundary_factor_genus_le_parent. q = p and any same-complexity factor are excluded by the strict inequality, and NC24 refutes OneEdgeBoundaryFactor stable66 stable66 in the model. No axiom asserts the target predicate at genus three or above, so there is no conclusion-smuggling and no circularity. Open split. openBMTateForRange does by_cases on 11 <= 2g+n; the upper branch produces an explicit zero via open_bm_vanishes_strong_range on the OpenBMVanishes carrier and only then converts by zero_open_bm_is_tate, while the lower branch uses published_open_bm_tate_below_zero_range gated on published_open_range_control. The two branches are exhaustive and disjoint, the lower one covering exactly (3,0..4), (4,0..2), (5,0), and all four axioms occur in the exported closure. NC17 and NC18 show the two predicates are materially distinct in the model. Boundary and duality. The sequence carrier is boundary image -> compact homology -> lowest-weight open BM with orientation boundaryToCompactToOpen, degreeShift 0 and tateTwist 0, matching CLP Equation (6.1) and the manuscript's explicit no-shift no-twist remark; the three carriers are distinct types with objectKind image, wholeGroup and lowestWeightPiece, all at homological degree 16, weight -16, Tate index 8. Right exactness and the kernel orientation are separate predicates with separate production rules. Duality is properSameDegree with homologicalDegree = cohomologicalDegree = 16, weightSign = tateSign = -1 and ambientDimensionTwist = 0, which is eq:proper-dual and not the smooth open formula eq:pd-smooth; NC26 refutes an ambient twist of 21, the actual dimension of Mbar_{6,6}, and NC27 refutes openPoincareDimensionTwist. The two failures are both in the endpoint layer. ionel_kills_critical_psi_source licenses the Ionel psi-source vanishing at all five endpoints from vocab.GenusFiveIonelCohomologicalVanishing, so a genus-five premise discharges genus 3, 4, 6 and 7 conclusions and the general Ionel-Looijenga input of prop:ionel and CLM-0148-2 has no premise at all, LATT-0004's vocab.IonelLooijengaVanishing having been dropped from the V2 signature (LREV-0009-F01). inclusive_ckgp_endpoint checks n = ckgpMarkingEndpoint + 1 against records that set ckgpMarkingEndpoint to n-1, so it is true by construction and encodes nothing from eq:c-table; at (4,10) the recorded 9 is not c(4) = 11, and substituting the true value breaks elaboration (LREV-0009-F02). critical_endpoint_vanishes_from_typed_inputs is left unresolved because it imposes the one-marking argument uniformly at all five records while the manuscript runs it only at (3,12), (6,6) and (7,4). The four repaired M_{5,8} premises themselves are clean: CKgP, A^* = R^*, cohomological Ionel and the CLP/Poincare open-BM conversion are four distinct vocabulary fields, four distinct axioms, all four consumed by genus_five_endpoint_from_repaired_inputs and all four in the exported closure, with the genus-five branch reaching the theorem only through endpointG5Vanishes.",
+  "model_faithfulness": "Model.lean is a genuine interpretation, not a cosmetic one. It embeds both pinned blocks verbatim (verified by byte diff and digest), declares no axiom and no constant, and interprets all 22 vocabulary fields plus the target predicate concretely. I compared each of AX01 through AX27 against its Claim axiom mechanically after normalising whitespace and rewriting V back to vocab: all 27 are textually identical to the corresponding Claim axiom, with the same binders, premise order and index arguments, and together with the two carrier interpretations they cover all 29 declared axioms, matching the LEAN-MODELS header. The witness g7d16_repaired_model_is_consistent_and_materially_noncollapsing proves the 27 axiom instances plus 27 non-collapse statements and closes over propext and Quot.sound only, so it is axiom-free relative to the campaign. Non-collapse is substantive rather than decorative. The interpreted target holds at canonical in-range indices (NC01 at (6,6), NC02 at (7,8)) and is provably false at ten perturbations: open geometry, coarse geometry, integral coefficients, unordered markings, degree 15, weight 15, Tate index +8, the quotient object kind, genus eight and an unstable pair. NC13 separates the lowest-weight open piece from the whole Borel-Moore group. NC19-NC21 refute a reversed orientation, a degree shift of one and a Tate twist of one. NC24 refutes a same-complexity recursion. NC26 and NC27 refute the two duality perturbations. Two structural separations that LREV-0007-F04 demanded are now real. First, kernelModel s is rightExactModel s conjoined with an orientation condition that rightExactModel does not force, and NC22 exhibits wrongKernelSequence as right exact but not kernel-oriented, so the two predicates are no longer equivalent in the model. Second, rightExactModel compares only normalizedCompact s.compact against the canonical index, stripping purityKind, which is what lets impureSequence be right exact with an impure middle term; NC23 then shows every other premise of AX25 holding while purity fails. I checked the half NC23 omits and it holds: homTateModel h requires h = compactHomologyIndex h.pair, which forces purePolarizable, so homTateModel impureHomology is false and AX25 without its purity premise is refuted by impureSequence. Purity is therefore independently load-bearing, though the packaged witness does not say so (LREV-0009-F03), and pureModel h is still formally redundant inside homTateModel h, so what repairs F04 is the normalisation in rightExactModel rather than the redundancy F04 named. NC25 is a genuine second separation: at the genus-two pair (2,0) the boundary image is Tate while compact homology is not, because the open premise requires 3 <= genus. The model does not collapse: OneEdgeBoundaryFactor is satisfiable (any small stable q under a large p), so the recursion is not vacuously discharged, and the vocabulary is not uniformly true. Two weaknesses. NC14-NC16 perturb fields of endpointG6 and therefore also fail IsCriticalEndpoint, so they do not isolate the arithmetic gates they advertise (LREV-0009-F04); the gates are nonetheless load-bearing in Claim.lean, where each is discharged by decide against the byte-pinned record values. And no witness tests a wrong ionelCodimension or a wrong ckgpMarkingEndpoint, which is where the endpoint data is actually weak. All four model checks pass.",
+  "strongest_attack": "I ran three attacks. First, the at-vcd shortcut that eq:critical-arithmetic forbids: on the critical line 2g+n = 18 one has k = 4g-4+n = vcd(M_{g,n}) exactly, so a proof that concluded W_kH^k = 0 from the vcd of M_{g,n} itself would be invalid, and LREV-0007-F02 held that LATT-0004 could not exclude it. The attack fails decisively against LATT-0005, and not merely because a witness rejects it: the forbidden comparison is inexpressible. CriticalEndpointIndex has no field holding vcd(M_{g,n}); the only two comparisons available are unpointedVcd < primitiveDegree, which is 4g-5 < 4g-4 for vcd(Mod_g) against the primitive degree, and smallerPointedVcd < ordinaryDegree, which is k-1 < k for vcd(PMod_{g,n-1}) against k. Both are strict, both are discharged by decide against byte-pinned values, and an at-vcd record would fail to elaborate. This half of the F02 repair is sound. Second, the countermodel against semisimple_boundary_extension that LREV-0007 attempted, now retried against the richer V2 carriers: instantiate it with mismatched (s,b,o,h) so that a Tate kernel and a Tate quotient produce a middle term that is a sum of two different Tate twists. It still fails. Within the closed axiom set BoundarySequenceIsRightExact has exactly one production rule, boundary_sequence_right_exact, which pins s.boundary, s.compact and s.openPart to the canonical carriers, all at homological degree 16, weight -16 and Tate index 8; and the V2 addition of purityKind does not open a hole, because the purity premise is separately required and, as verified above, cannot be dropped. Third, and this one lands. I attacked the inclusive CKgP marking endpoint by substituting the manuscript's own eq:c-table values into the pinned records. c(3) = 11, c(4) = 11, c(5) = 7, c(6) = 5, c(7) = 3. For endpointG3, endpointG5, endpointG6 and endpointG7 the recorded ckgpMarkingEndpoint already equals c(g) and the gate n = c(g)+1 holds. For endpointG4 the record carries 9, not c(4) = 11, and replacing it by the true value turns inclusive_ckgp_endpoint endpointG4 _ (by decide) into a demand that 10 = 12, which fails: the development is consistent only with the value that is not c(4). The correct diagnosis follows. Every record sets ckgpMarkingEndpoint to n-1, so the gate is true by construction of the record and no value of eq:c-table appears anywhere in the pinned data; the datum is a proxy for n-1 wearing the name of c(g). The mathematics at (4,10) does go through under the inequality n-1 = 9 <= c(4) = 11 that the argument actually needs, so nothing false is derived, but the marker LREV-0007-F02 asked for is not present, and tab:critical shows the manuscript never runs the one-marking argument at (4,10) at all, handling it in the direct Canning-Larson-Payne range with Ionel at codimension 11 rather than the recorded 10. The same probe applied to the Ionel input exposed the sharper defect: the general Ionel-Looijenga premise that four of the five endpoints require was deleted from the V2 signature, and its slot is filled by the genus-five premise, so the artifact assumes that a statement about M_{5,8} suffices to kill the psi source at (7,4) in codimension 13. Those two outcomes are LREV-0009-F02 and F01.",
+  "findings": [
+    {
+      "id": "LREV-0009-F01",
+      "obligation_id": "G7D16-OBL-02",
+      "severity": "blocking",
+      "location": "formal/attempts/LATT-0005-codex-g7d16-repair/Claim.lean:343",
+      "summary": "The general Ionel-Looijenga premise required at four of the five critical endpoints is absent, and its place is taken by the genus-five-specific one. ionel_kills_critical_psi_source concludes vocab.IonelKillsPsiSource e for EVERY critical endpoint from vocab.GenusFiveIonelCohomologicalVanishing, and Claim.lean:469, 478, 496, 505 discharge it with genus_five_ionel_cohomological_vanishing at endpointG3, endpointG4, endpointG6 and endpointG7. The manuscript's input is prop:ionel, Ionel-Looijenga for all g >= 2, applied to the psi source in codimension (k-2)/2 >= g; CLM-0148-2 names 'Ionel-Looijenga vanishing' as a premise in its own right, and LATT-0004 carried it as the separate general field vocab.IonelLooijengaVanishing with axiom ionel_looijenga_vanishing mapped to G7D16-OBL-02. The V2 signature deletes that field, so LATT-0005 now derives Ionel vanishing at (7,4) in codimension 13 from a premise asserting only the genus-five statement. This is a strengthened trusted premise, and it breaches in the opposite direction the OBL-01 four-premise firewall that the repair was built to establish: an OBL-01 M_{5,8} input is discharging OBL-02's Ionel source bound at four non-genus-five endpoints. Nothing false is derived, since Ionel-Looijenga is true in general, but the black box as stated is not what the source supports. The accompanying gate e.pair.genus <= e.ionelCodimension is vacuous: with codimensions 9,10,11,12,13 against genera 3..7 it cannot fail.",
+      "remedy": "Restore a general Ionel-Looijenga field to the pinned signature (a successor to LATT-0004's vocab.IonelLooijengaVanishing), thread it rather than GenusFiveIonelCohomologicalVanishing into ionel_kills_critical_psi_source, and keep the genus-five field for the M_{5,8} corollary only. Strengthen the codimension gate so that it can fail, for example by requiring e.ionelCodimension to equal the endpoint's own (k-2)/2 rather than merely dominating the genus."
+    },
+    {
+      "id": "LREV-0009-F02",
+      "obligation_id": "G7D16-OBL-02",
+      "severity": "material",
+      "location": "formal/G7D16SignatureV2.lean.inc:155",
+      "summary": "The inclusive CKgP marking endpoint is a self-satisfying proxy, and the (4,10) endpoint is routed through an argument the source does not use there. Every pinned record sets ckgpMarkingEndpoint to n-1 (11,9,7,5,3), so inclusive_ckgp_endpoint's gate e.pair.markings = e.ckgpMarkingEndpoint + 1 is true by construction of the record and encodes no CLP Table 1 content; no value of eq:c-table appears anywhere in the pinned data. The identity n-1 = c(g) asserted by the axiom comment and by CLM-0148-2 holds at (3,12), (5,8), (6,6) and (7,4) but fails at (4,10), where n-1 = 9 while c(4) = 11, so under the equality reading the pinned endpointG4 record is false, and under the weaker n-1 <= c(g) reading, which is what the mathematics needs and which does hold, the field is inert. Relatedly, critical_endpoint_vanishes_from_typed_inputs demands the primitive-quotient, strict-vcd, inclusive-CKgP and Ionel-psi-source premises uniformly at all five records, whereas tab:critical and cor:critical-vanishing run that one-marking argument only at (3,12), (6,6), (7,4); (4,10) is a direct Canning-Larson-Payne range case with Ionel at codimension 11 and (5,8) is cor:liu-input at codimension 12, while the records carry the uniform psi-source values 10 and 11. The direct-range justification for (4,10) has no premise anywhere in the development. This is the residue of LREV-0007-F02, whose remedy asked specifically for a marker n-1 = c(g); the strict-vcd half of that remedy is genuinely repaired, this half is not.",
+      "remedy": "Populate ckgpMarkingEndpoint with c(g) from eq:c-table (11,11,7,5,3) and weaken the gate to e.pair.markings <= e.ckgpMarkingEndpoint + 1, so the datum is an external Table 1 value that a wrong record can violate; add a non-collapse witness rejecting a record whose markings exceed c(g)+1. Either give (4,10) its own direct-range premise, or restrict critical_endpoint_vanishes_from_typed_inputs's one-marking premises to the three endpoints that use them and record the codimensions actually invoked (11 at (4,10), 12 at (5,8))."
+    },
+    {
+      "id": "LREV-0009-F03",
+      "obligation_id": "G7D16-OBL-08",
+      "severity": "minor",
+      "location": "formal/attempts/LATT-0005-codex-g7d16-repair/Model.lean:616",
+      "summary": "The impureSequence witness stops one conjunct short of the property it is there to establish. NC23 asserts that impureSequence is right exact, has the boundary image as kernel, has a Tate boundary and a Tate open part, and that impureHomology is not pure, but it does not assert that the extension conclusion fails, unlike NC22 and NC25 which each carry both halves. I verified the missing half independently: homTateModel h requires h = compactHomologyIndex h.pair, which forces purityKind = purePolarizable, so homTateModel impureHomology is false and AX25 with its purity premise deleted is refuted by impureSequence. Purity is therefore genuinely load-bearing, and it is load-bearing because rightExactModel compares only normalizedCompact s.compact, which is the real mechanism repairing LREV-0007-F04 rather than the redundancy that finding named; pureModel h is in fact still derivable from the other conjuncts of homTateModel h. The model property holds, only the packaged non-collapse theorem does not record it.",
+      "remedy": "Add the conjunct NOT V.CompactHomologyIsFiniteTateSum impureHomology to NC23 so the witness demonstrates that the Tate conclusion does not follow without purity, matching the shape of NC22 and NC25."
+    },
+    {
+      "id": "LREV-0009-F04",
+      "obligation_id": "G7D16-OBL-02",
+      "severity": "observation",
+      "location": "formal/attempts/LATT-0005-codex-g7d16-repair/Model.lean:566",
+      "summary": "The at-vcd non-collapse witnesses are over-determined. atPrimitiveVcd, atSmallerPointedVcd and nonInclusiveEndpoint each perturb a field of endpointG6, so they also fail the IsCriticalEndpoint conjunct of strictPrimitiveModel, strictPhiModel and inclusiveEndpointModel; NC14-NC16 are therefore true for a reason that does not isolate the arithmetic gate. The gates are nonetheless genuinely load-bearing in Claim.lean, where each is discharged by decide against the byte-pinned record values, so an at-vcd record would fail to elaborate. Recorded because the witnesses read as stronger evidence than they are.",
+      "remedy": "State the non-collapse witnesses against the arithmetic conjunct alone, for example as NOT (atPrimitiveVcd.unpointedVcd < atPrimitiveVcd.primitiveDegree), so that they isolate the strict inequality rather than the record identity."
+    },
+    {
+      "id": "LREV-0009-F05",
+      "obligation_id": "G7D16-OBL-06",
+      "severity": "observation",
+      "location": "formal/attempts/LATT-0005-codex-g7d16-repair/Claim.lean:405",
+      "summary": "Two bookkeeping remarks that do not affect faithfulness. First, boundary_image_tate_from_one_edge_graphs aggregates lem:kunneth, the odd-odd and positive even-even disposal, the eq:quotient-invariants finite graph invariants and the sum over one-edge graphs into a single black box; only the two low-degree compact premises and the per-factor hypothesis are separately typed. The passage to the homological image is represented, by the distinct boundaryImageIndex carrier with objectKind = image. Second, report.json maps boundary_factor_complexity_decreases to G7D16-OBL-09 although G7D16-OBL-05 also demands strict decrease of the induction complexity; all three factor axioms exist and are load-bearing, so OBL-05 is discharged in substance and only the mapping table attributes one of them elsewhere.",
+      "remedy": "Optionally type the finite graph-automorphism invariance as its own premise, and record boundary_factor_complexity_decreases against both G7D16-OBL-05 and G7D16-OBL-09 if the mapping schema permits multiple obligations."
+    }
+  ]
+}

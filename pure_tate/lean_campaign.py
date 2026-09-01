@@ -222,6 +222,8 @@ def validate_campaign_contract(campaign: Dict[str, Any]) -> CheckResult:
         result.errors.append(
             "campaign review_target_checks must be unique snake_case names"
         )
+    if campaign.get("trusted_prelude_in_model") not in {None, False, True}:
+        result.errors.append("campaign trusted_prelude_in_model must be boolean")
     pin_path = FORMAL / "lean-toolchain"
     if not pin_path.is_file() or pin_path.read_text(encoding="utf-8").strip() != campaign.get("toolchain"):
         result.errors.append("formal/lean-toolchain does not match the campaign pin")
@@ -440,6 +442,16 @@ def check_attempt(
     )
     if len(trusted_matches) != 1 or trusted_matches[0] != trusted_text:
         result.errors.append("Claim.lean trusted target prelude is missing or changed")
+    if campaign.get("trusted_prelude_in_model") is True:
+        model_trusted_matches = re.findall(
+            r"^-- LEAN-TRUSTED-PRELUDE-BEGIN\s*$\n(.*?)^-- LEAN-TRUSTED-PRELUDE-END\s*$",
+            model_text,
+            re.MULTILINE | re.DOTALL,
+        )
+        if len(model_trusted_matches) != 1 or model_trusted_matches[0] != trusted_text:
+            result.errors.append(
+                "Model.lean trusted target prelude is missing or changed"
+            )
     shared_signature_path = campaign.get("shared_signature_path")
     if isinstance(shared_signature_path, str) and shared_signature_path:
         shared_text = (ROOT / shared_signature_path).read_text(encoding="utf-8")

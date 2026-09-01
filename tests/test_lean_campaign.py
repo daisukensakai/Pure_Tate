@@ -158,6 +158,77 @@ class LeanCampaignTests(unittest.TestCase):
         self.assertIn("exact ⟨hquotient, hpolarizable, hcontained⟩", model)
         self.assertNotIn("theorem ax31 : AX31 := by intro _ _ _ _ h; exact h", model)
 
+    def test_latt0004_universal_g7d16_model_mechanically_passes(self):
+        result, report = lean_campaign.check_attempt(
+            "LATT-0004", "LG7D16-001", write=False
+        )
+        self.assertEqual(result.errors, [])
+        self.assertEqual(report["result"], "PASS")
+        model_path = (
+            Path(__file__).resolve().parents[1]
+            / "formal"
+            / "attempts"
+            / "LATT-0004-codex-g7d16"
+            / "Model.lean"
+        )
+        model = model_path.read_text(encoding="utf-8")
+        for witness in (
+            "wrongOpenTarget",
+            "wrongCoarseTarget",
+            "wrongIntegralTarget",
+            "wrongUnorderedTarget",
+            "wrongDegreeTarget",
+            "wrongWeightTarget",
+            "wrongTateTarget",
+            "quotientTarget",
+            "reversedSequence",
+            "shiftedSequence",
+            "twistedSequence",
+            "ambientTwistedDuality",
+            "openPoincareDuality",
+        ):
+            self.assertIn(witness, model)
+        claim = (model_path.parent / "Claim.lean").read_text(encoding="utf-8")
+        self.assertIn("induction c using Nat.strongRecOn", claim)
+        self.assertIn("boundary_factor_complexity_decreases", claim)
+
+    def test_latt0005_repair_encodes_claude_p1_blockers(self):
+        result, report = lean_campaign.check_attempt(
+            "LATT-0005", "LG7D16-002", write=False
+        )
+        self.assertEqual(result.errors, [])
+        self.assertEqual(report["result"], "PASS")
+        attempt = (
+            Path(__file__).resolve().parents[1]
+            / "formal"
+            / "attempts"
+            / "LATT-0005-codex-g7d16-repair"
+        )
+        claim = (attempt / "Claim.lean").read_text(encoding="utf-8")
+        for required in (
+            "genus_five_ckgp",
+            "genus_five_tautological_chow",
+            "genus_five_ionel_cohomological_vanishing",
+            "genus_five_open_bm_conversion",
+            "endpointG3Vanishes",
+            "endpointG4Vanishes",
+            "endpointG5Vanishes",
+            "endpointG6Vanishes",
+            "endpointG7Vanishes",
+            "open_bm_vanishes_strong_range",
+            "published_open_bm_tate_below_zero_range",
+        ):
+            self.assertIn(required, claim)
+        model = (attempt / "Model.lean").read_text(encoding="utf-8")
+        for witness in (
+            "atPrimitiveVcd",
+            "atSmallerPointedVcd",
+            "wrongKernelSequence",
+            "impureSequence",
+            "wholeOpenBM",
+        ):
+            self.assertIn(witness, model)
+
     def _patches(self, root, formal, campaigns, attempts, reviews):
         return mock.patch.multiple(
             lean_campaign,
@@ -196,6 +267,21 @@ class LeanCampaignTests(unittest.TestCase):
             with self._patches(root, formal, campaigns, attempts, reviews):
                 result, _report = lean_campaign.check_attempt("LATT-0001")
             self.assertTrue(any("forbidden Model.lean" in error for error in result.errors))
+
+    def test_campaign_can_require_trusted_target_prelude_in_model(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = self._fixture(temporary)
+            root, formal, campaigns, attempts, reviews, _directory, campaign = fixture
+            campaign["trusted_prelude_in_model"] = True
+            self._write_json(campaigns / "LC66-001.json", campaign)
+            with self._patches(root, formal, campaigns, attempts, reviews):
+                result, _report = lean_campaign.check_attempt("LATT-0001")
+            self.assertTrue(
+                any(
+                    "Model.lean trusted target prelude is missing or changed" in error
+                    for error in result.errors
+                )
+            )
 
     def test_spoofable_eval_output_is_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:
