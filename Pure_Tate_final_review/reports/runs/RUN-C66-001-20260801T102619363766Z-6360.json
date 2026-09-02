@@ -1,0 +1,74 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-01T10:59:31.568710+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "codex",
+      "claude"
+    ],
+    "research": [
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "codex",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 1709316,
+      "artifact_sha256": "d12aaccfe907ac5c6e28f187f4197d973e790f58fcec765bba772ed11d04358f",
+      "completed_at": "2026-08-01T10:38:43.862635+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-08-01T10:38:43.262874+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/attempts/ATT-0034.json",
+      "phase": "forced-proof",
+      "started_at": "2026-08-01T10:26:19.881209+00:00",
+      "state": "completed",
+      "step": 1,
+      "task_id": "TASK-C66-001-FORCED-FULL"
+    },
+    {
+      "activity_bytes": 55424,
+      "artifact_sha256": "f6300ddd21198b006d4a645ee32e740d08fb5b9ac08ad6690600b26df85ddc80",
+      "completed_at": "2026-08-01T10:48:52.978529+00:00",
+      "engine": "codex",
+      "last_activity_at": "2026-08-01T10:48:52.762708+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/reviews/REV-0042.json",
+      "phase": "review",
+      "started_at": "2026-08-01T10:38:44.374006+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-V-ATT-0034-P1"
+    },
+    {
+      "activity_bytes": 86735,
+      "artifact_sha256": "b28c3ad0b6e2f114cb779cd242882d840882adf27a7f14731afbdb3f2d5c7d43",
+      "completed_at": "2026-08-01T10:59:31.568004+00:00",
+      "engine": "codex",
+      "last_activity_at": "2026-08-01T10:59:31.390072+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0014.json",
+      "phase": "trace-mining",
+      "started_at": "2026-08-01T10:48:53.559272+00:00",
+      "state": "completed",
+      "step": 3,
+      "task_id": "TASK-C66-001-MINE-GROK-FORCED_PROOF",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-f3ac8b288274cff5.md",
+        "sha256": "f3ac8b288274cff5f0cac90e9624ddb497ffa22d35cc7579928a2930a85a4123"
+      }
+    }
+  ],
+  "executed_steps": 3,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260801T102619363766Z-6360",
+  "schema_version": 1,
+  "started_at": "2026-08-01T10:26:19.363766+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

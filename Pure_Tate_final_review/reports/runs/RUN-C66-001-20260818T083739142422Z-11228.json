@@ -1,0 +1,161 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-18T08:59:56.327683+00:00",
+  "engine_pools": {
+    "prover": [
+      "codex"
+    ],
+    "research": [
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 1174694,
+      "completed_at": "2026-08-18T08:47:24.581678+00:00",
+      "engine": "grok",
+      "engine_pid": 11239,
+      "engine_process_group": 11239,
+      "error": "trace miner must be cross-engine",
+      "last_activity_at": "2026-08-18T08:47:23.861794+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/paired-digests/DIGEST-0033.json",
+      "phase": "trace-mining",
+      "processes": [
+        {
+          "engine_pid": 11239,
+          "engine_process_group": 11239,
+          "started_at": "2026-08-18T08:37:40.035986+00:00",
+          "supervisor_pid": 11235,
+          "supervisor_process_group": 11235
+        }
+      ],
+      "started_at": "2026-08-18T08:37:39.160230+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 11235,
+      "task_id": "TASK-C66-001-MINE-GROK-MATHEMATICS",
+      "trace_id": "TRACE-0066",
+      "trace_path": "research/paired-traces/TRACE-0066.json"
+    },
+    {
+      "activity_bytes": 297125,
+      "artifact_sha256": "88fd661a94c8acf9c31e7150204eaf10aa2b024284e4d385de1b1964b80d16e4",
+      "attempt_id": "ATT-0104",
+      "completed_at": "2026-08-18T08:59:55.480154+00:00",
+      "engine": "codex",
+      "engine_pid": 19843,
+      "engine_process_group": 19843,
+      "last_activity_at": "2026-08-18T08:59:55.115065+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0104.json",
+      "phase": "mathematics",
+      "processes": [
+        {
+          "engine_pid": 18254,
+          "engine_process_group": 18254,
+          "started_at": "2026-08-18T08:47:27.041034+00:00",
+          "supervisor_pid": 18253,
+          "supervisor_process_group": 18253
+        },
+        {
+          "engine_pid": 19127,
+          "engine_process_group": 19127,
+          "started_at": "2026-08-18T08:50:54.297183+00:00",
+          "supervisor_pid": 19126,
+          "supervisor_process_group": 19126
+        },
+        {
+          "engine_pid": 19363,
+          "engine_process_group": 19363,
+          "started_at": "2026-08-18T08:52:44.752475+00:00",
+          "supervisor_pid": 19362,
+          "supervisor_process_group": 19362
+        },
+        {
+          "engine_pid": 19618,
+          "engine_process_group": 19618,
+          "started_at": "2026-08-18T08:55:04.107091+00:00",
+          "supervisor_pid": 19617,
+          "supervisor_process_group": 19617
+        },
+        {
+          "engine_pid": 19843,
+          "engine_process_group": 19843,
+          "started_at": "2026-08-18T08:56:42.627628+00:00",
+          "supervisor_pid": 19842,
+          "supervisor_process_group": 19842
+        }
+      ],
+      "started_at": "2026-08-18T08:47:25.798168+00:00",
+      "state": "completed",
+      "step": 2,
+      "supervisor_pid": 19842,
+      "task_id": "TASK-C66-M-003",
+      "working_context": {
+        "archive": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-ARCHIVE-C66-GEO-COMP-501f211030665abf.md",
+          "sha256": "501f211030665abf821b161da03f7d2a616010810e96a0cba5353776c1948f7b"
+        },
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-C66-GEO-COMP-eb3f329e199827d1.md",
+          "sha256": "eb3f329e199827d1710a633496094bc7ee8209289a14dba34ce8eb597f512ee9"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-C66-GEO-COMP-22d91b649a55dd07.md",
+          "sha256": "22d91b649a55dd0759deef2116f826fb23f76524093f4c48843d8713f1fd2c79"
+        },
+        "subproblem_id": "C66-GEO-COMP"
+      }
+    }
+  ],
+  "executed_steps": 2,
+  "parent_pid": 11228,
+  "parent_process_group": 11225,
+  "requested_steps": 2,
+  "run_id": "RUN-C66-001-20260818T083739142422Z-11228",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-18T08:37:39.142422+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

@@ -1,0 +1,57 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-17T02:40:37.969541+00:00",
+  "engine_pools": {
+    "prover": [
+      "claude"
+    ],
+    "research": [
+      "qwen"
+    ],
+    "review": [
+      "qwen",
+      "grok"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 219824,
+      "completed_at": "2026-08-17T02:40:37.968300+00:00",
+      "engine": "qwen",
+      "engine_pid": 51649,
+      "engine_process_group": 51649,
+      "error": "finding audit source verification failed: source record uses unknown source type; source record URL is not public HTTP(S)",
+      "last_activity_at": "2026-08-17T02:40:37.928907+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 65536,
+      "output": "research/finding-audits/FAUD-0157.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 51649,
+          "engine_process_group": 51649,
+          "started_at": "2026-08-17T02:35:15.054879+00:00",
+          "supervisor_pid": 51648,
+          "supervisor_process_group": 51648
+        }
+      ],
+      "started_at": "2026-08-17T02:35:15.004167+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 51648,
+      "task_id": "TASK-F-FND-0150",
+      "trace_id": "TRACE-0054",
+      "trace_path": "research/paired-traces/TRACE-0054.json",
+      "trace_sha256": "b49e354e1aeda2745f011922c0412e997e0fc5d87cfe3b9301f26fb8639deb2f"
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 51616,
+  "parent_process_group": 51616,
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260817T023511404923Z-51616",
+  "schema_version": 2,
+  "started_at": "2026-08-17T02:35:11.404923+00:00",
+  "status": "completed_with_failures",
+  "stop_reason": "step_limit_with_failures"
+}

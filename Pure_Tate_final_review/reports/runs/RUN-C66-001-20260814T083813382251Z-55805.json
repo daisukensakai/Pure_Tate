@@ -1,0 +1,95 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-14T08:38:17.647363+00:00",
+  "engine_pools": {
+    "prover": [
+      "claude",
+      "codex"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "claude",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 3585,
+      "completed_at": "2026-08-14T08:38:17.310090+00:00",
+      "engine": "claude",
+      "engine_pid": 55927,
+      "engine_process_group": 55927,
+      "error": "agent failed with exit 1: Not logged in \u00b7 Please run /login",
+      "last_activity_at": "2026-08-14T08:38:17.066601+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 128000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": false
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "sent": false
+        }
+      },
+      "output": "proof/attempts/ATT-0091.json",
+      "phase": "forced-proof",
+      "processes": [
+        {
+          "engine_pid": 55927,
+          "engine_process_group": 55927,
+          "started_at": "2026-08-14T08:38:16.288490+00:00",
+          "supervisor_pid": 55926,
+          "supervisor_process_group": 55926
+        }
+      ],
+      "started_at": "2026-08-14T08:38:16.242489+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 55926,
+      "task_id": "TASK-C66-001-FORCED-FULL",
+      "trace_id": "TRACE-0040",
+      "trace_path": "research/paired-traces/TRACE-0040.json",
+      "trace_sha256": "21289853840a157c66632eee3c0794dbefeaaf5436ae173f6036335595d58c32",
+      "working_context": {
+        "archive": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-ARCHIVE-3edd30373c49110c.md",
+          "sha256": "3edd30373c49110cedd5ecb54f0658317c57a7e3632e0ce999578d34ee59f763"
+        },
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-7fe37bd026d50034.md",
+          "sha256": "7fe37bd026d50034cedd1020bd4b420a676a4b640e4160323b71f7f28c62736d"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-cf53e8ebd0f521ba.md",
+          "sha256": "cf53e8ebd0f521ba506ad90567ddb11d5045d51f4f2e04d584ebc7ed14bbe339"
+        }
+      }
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 55805,
+  "parent_process_group": 55805,
+  "requested_steps": 2,
+  "run_id": "RUN-C66-001-20260814T083813382251Z-55805",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": false
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "sent": false
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-14T08:38:13.382251+00:00",
+  "status": "stopped",
+  "stop_reason": "engine_failure"
+}

@@ -1,0 +1,45 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-01T07:58:30.219764+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "gemini",
+      "codex",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 638744,
+      "completed_at": "2026-08-01T07:58:30.219006+00:00",
+      "engine": "grok",
+      "error": "agent watchdog: interrupted after 285.0s; stderr: \u001b[2m2026-08-01T07:53:46.285095Z\u001b[0m \u001b[33m WARN\u001b[0m disallowedTools entry matched nothing \u001b[3magent\u001b[0m\u001b[2m=\u001b[0mgrok-build-plan \u001b[3mtool\u001b[0m\u001b[2m=\u001b[0mrun_terminal_command\n\u001b[2m2026-08-01T07:53:46.285110Z\u001b[0m \u001b[33m WARN\u001b[0m disallowedTools entry matched nothing \u001b[3magent\u001b[0m\u001b[2m=\u001b[0mgrok-build-plan \u001b[3mtool\u001b[0m\u001b[2m=\u001b[0mopen_page\n\u001b[2m2026-08-01T07:53:53.575566Z\u001b[0m \u001b[31mERROR\u001b[0m tool_error: tool_output_error \u001b[3msession_id\u001b[0m\u001b[2m=\u001b[0m019fbc50-97d2-7b41-89ec-3e7d2fbd2aee \u001b[3mtool_name\u001b[0m\u001b[2m=\u001b[0m\"read_file\" \u001b[3meffective_tool_name\u001b[0m\u001b[2m=\u001b[0m\"read_file\" \u001b[3mmodel_id\u001b[0m\u001b[2m=\u001b[0m\"grok-4.5\" \u001b[3merror_kind\u001b[0m\u001b[2m=\u001b[0m\"tool_output_error\"\n\u001b[2m2026-08-01T07:53:57.908746Z\u001b[0m \u001b[31mERROR\u001b[0m tool_error: tool_output_error \u001b[3msession_id\u001b[0m\u001b[2m=\u001b[0m019fbc50-97d2-7b41-89ec-3e7d2fbd2aee \u001b[3mtool_name\u001b",
+      "last_activity_at": "2026-08-01T07:58:30.133367+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0013.json",
+      "phase": "trace-mining",
+      "started_at": "2026-08-01T07:53:45.158081+00:00",
+      "state": "failed",
+      "step": 1,
+      "task_id": "TASK-C66-001-MINE-CLAUDE-STANDARD_FALLBACK"
+    }
+  ],
+  "executed_steps": 1,
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260801T075344828137Z-93944",
+  "schema_version": 1,
+  "started_at": "2026-08-01T07:53:44.828137+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

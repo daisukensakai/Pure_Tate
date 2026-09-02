@@ -1,0 +1,97 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-07-31T02:09:36.585563+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ],
+    "research": [
+      "grok",
+      "claude"
+    ],
+    "review": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 40123,
+      "completed_at": "2026-07-31T02:04:02.123402+00:00",
+      "engine": "gemini",
+      "error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement",
+      "last_activity_at": "2026-07-31T02:04:02.104967+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/attempts/ATT-0022.json",
+      "phase": "standard-fallback",
+      "started_at": "2026-07-31T02:01:49.048629+00:00",
+      "state": "substantive_rejected",
+      "step": 1,
+      "task_id": "TASK-C66-M-001",
+      "trace_id": "TRACE-0005",
+      "trace_path": "research/paired-traces/TRACE-0005.json"
+    },
+    {
+      "activity_bytes": 15286,
+      "artifact_sha256": "40f07688ceeb7d5e8e5fbf52bdfae45f452b22f710b32d8472a65547c9e901fb",
+      "completed_at": "2026-07-31T02:06:44.812366+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-07-31T02:06:44.399656+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0004.json",
+      "phase": "trace-mining",
+      "started_at": "2026-07-31T02:04:02.326905+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-C66-001-MINE-GEMINI-STANDARD_FALLBACK",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-a97039011ecf21cc.md",
+        "sha256": "a97039011ecf21cc733c40a89dccc702f97fcfb427adf8eedf928597a681849c"
+      }
+    },
+    {
+      "activity_bytes": 18869,
+      "artifact_sha256": "bc51faed078a9b27118fed6443de6a63f09fe7fec80defa9fef063bc75f8c3fe",
+      "completed_at": "2026-07-31T02:08:13.512580+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-07-31T02:08:13.079296+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0005.json",
+      "phase": "trace-mining",
+      "started_at": "2026-07-31T02:06:45.029229+00:00",
+      "state": "completed",
+      "step": 3,
+      "task_id": "TASK-C66-001-MINE-CODEX-FORCED_PROOF",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-56648a8465662b01.md",
+        "sha256": "56648a8465662b01343626e34fa0ac3e82d1a10c55cb44d857651c93ac8e7d7e"
+      }
+    },
+    {
+      "activity_bytes": 82683,
+      "artifact_sha256": "c9b694ceb401bc3ac2a7d80c16bd7d2c954fb9bc79b04d8cbc306d8866ac5ba7",
+      "completed_at": "2026-07-31T02:09:36.584860+00:00",
+      "engine": "codex",
+      "last_activity_at": "2026-07-31T02:09:36.446817+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/attempts/ATT-0023.json",
+      "phase": "standard-fallback",
+      "started_at": "2026-07-31T02:08:13.732849+00:00",
+      "state": "completed",
+      "step": 4,
+      "task_id": "TASK-C66-M-001"
+    }
+  ],
+  "executed_steps": 4,
+  "requested_steps": 4,
+  "run_id": "RUN-C66-001-20260731T020148834080Z-9253",
+  "schema_version": 1,
+  "started_at": "2026-07-31T02:01:48.834080+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

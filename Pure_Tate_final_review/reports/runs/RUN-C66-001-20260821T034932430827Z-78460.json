@@ -1,0 +1,79 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-21T03:54:47.631671+00:00",
+  "engine_pools": {
+    "prover": [
+      "cursor-grok"
+    ],
+    "research": [
+      "grok"
+    ],
+    "review": [
+      "qwen",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 190544,
+      "completed_at": "2026-08-21T03:54:46.802379+00:00",
+      "engine": "qwen",
+      "engine_pid": 78464,
+      "engine_process_group": 78464,
+      "error": "agent failed with exit 1: Qwen API HTTP 429: {'message': 'Your token-plan 1-week quota has been exhausted. The quota will reset at 08-21 12:50:00 UTC.', 'id': '03abf8e6-9eea-4422-bb57-c5ad1b005657', 'type': 'insufficient_quota', 'code': 'insufficient_quota'}",
+      "last_activity_at": "2026-08-21T03:54:46.729311+00:00",
+      "last_activity_stream": "stderr",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/reviews/REV-0159.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 78464,
+          "engine_process_group": 78464,
+          "started_at": "2026-08-21T03:49:33.318589+00:00",
+          "supervisor_pid": 78463,
+          "supervisor_process_group": 78463
+        }
+      ],
+      "review_pass": 1,
+      "started_at": "2026-08-21T03:49:32.437448+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 78463,
+      "target_attempt_id": "ATT-0113",
+      "task_id": "TASK-V-ATT-0113-P1"
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 78460,
+  "parent_process_group": 78457,
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260821T034932430827Z-78460",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-21T03:49:32.430827+00:00",
+  "status": "stopped",
+  "stop_reason": "engine_failure"
+}

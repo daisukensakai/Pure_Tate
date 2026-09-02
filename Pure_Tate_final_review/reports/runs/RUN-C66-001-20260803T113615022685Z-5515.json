@@ -1,0 +1,123 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-03T11:47:14.846358+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "qwen"
+    ],
+    "research": [
+      "claude",
+      "grok",
+      "qwen"
+    ],
+    "review": [
+      "grok",
+      "qwen",
+      "claude",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 411565,
+      "artifact_sha256": "060d1b9d50d9687e9b1e9a0d9c393f927e4a87da81c28f5073117102a476208c",
+      "completed_at": "2026-08-03T11:39:55.208916+00:00",
+      "engine": "grok",
+      "engine_pid": 5519,
+      "engine_process_group": 5519,
+      "last_activity_at": "2026-08-03T11:39:54.402244+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0038.json",
+      "phase": "mathematics",
+      "processes": [
+        {
+          "engine_pid": 5519,
+          "engine_process_group": 5519,
+          "started_at": "2026-08-03T11:36:15.438269+00:00",
+          "supervisor_pid": 5518,
+          "supervisor_process_group": 5518
+        }
+      ],
+      "started_at": "2026-08-03T11:36:15.372393+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 5518,
+      "task_id": "TASK-C66-M-001"
+    },
+    {
+      "activity_bytes": 309428,
+      "artifact_sha256": "d016fca99b8a57964dfe185c03e5f34eaf9832d538cc569606e331a6a2c3d10d",
+      "completed_at": "2026-08-03T11:47:13.224300+00:00",
+      "engine": "qwen",
+      "engine_pid": 6582,
+      "engine_process_group": 6582,
+      "last_activity_at": "2026-08-03T11:47:12.912875+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/reviews/REV-0046.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 6582,
+          "engine_process_group": 6582,
+          "started_at": "2026-08-03T11:39:56.438994+00:00",
+          "supervisor_pid": 6581,
+          "supervisor_process_group": 6581
+        }
+      ],
+      "started_at": "2026-08-03T11:39:56.367128+00:00",
+      "state": "completed",
+      "step": 2,
+      "supervisor_pid": 6581,
+      "task_id": "TASK-V-ATT-0038-P1"
+    }
+  ],
+  "executed_steps": 2,
+  "parent_pid": 5515,
+  "parent_process_group": 5512,
+  "requested_steps": 6,
+  "run_id": "RUN-C66-001-20260803T113615022685Z-5515",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-03T11:36:15.022685+00:00",
+  "status": "completed",
+  "stop_reason": "no_eligible_task"
+}

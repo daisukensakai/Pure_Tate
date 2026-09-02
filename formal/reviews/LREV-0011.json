@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "id": "LREV-0011",
+  "attempt_id": "LATT-0009",
+  "campaign_id": "LG7D16-006",
+  "review_pass": 1,
+  "review_task_id": "TASK-LV-LATT-0009-P1",
+  "review_run_path": "reports/runs/RUN-LG7D16-006-LATT-0009-CLAUDE-P1.json",
+  "reviewer_engine": "claude",
+  "independent": true,
+  "verdict": "incomplete",
+  "campaign_sha256": "521c449f2e27d5f08048a5d3f735a19a7f0d094374548d3080c136e420caa8dd",
+  "claim_sha256": "5d64d4c0432bb03f78ef0b04b073fc43b66052a19693268161289eb0f5a56b55",
+  "model_sha256": "fb2f860b51e2a03ee33cb4be684fb27c525d1cdf2a11be0bc70df6920b19deb1",
+  "manifest_sha256": "04158d035788680a217a52e0f5d5c1a36486badc14d7f823b0a3eca1cc7f2f9a",
+  "report_sha256": "90651f5d2f9b97b470122e3be8f730a24bf3430c8c214f0a8ad53fa4097c983f",
+  "dependency_hashes": {
+    "genus-le-seven-manuscript-v2": "5f80e754ae3cfacdd3d44c48750f42aefc57b93e46b3136fe513ef051f2b59b3"
+  },
+  "checked_obligations": [
+    "G7D16-OBL-01",
+    "G7D16-OBL-02",
+    "G7D16-OBL-03",
+    "G7D16-OBL-04",
+    "G7D16-OBL-05",
+    "G7D16-OBL-06",
+    "G7D16-OBL-07",
+    "G7D16-OBL-08",
+    "G7D16-OBL-09"
+  ],
+  "target_checks": {
+    "complex_dm_stack": true,
+    "stable_compactification_not_open": true,
+    "stack_not_coarse": true,
+    "rational_coefficients": true,
+    "ordered_markings": true,
+    "all_stable_pairs": true,
+    "genus_at_most_seven": true,
+    "cohomological_degree_sixteen": true,
+    "weight_sixteen": true,
+    "tate_index_minus_eight": true,
+    "zero_rank_allowed": true,
+    "whole_group_not_proxy": true,
+    "open_term_is_lowest_weight_piece": true,
+    "no_generation_or_rank_claim": true
+  },
+  "model_checks": {
+    "models_every_claim_axiom": true,
+    "witness_is_axiom_free": true,
+    "noncollapse_is_material": true,
+    "model_matches_claim_vocabulary": true
+  },
+  "axiom_checks": [
+    {
+      "axiom": "CompactH16IsFiniteTateSum",
+      "obligation_id": "VOCAB",
+      "verdict": "confirmed",
+      "note": "VOCAB. Uninterpreted predicate on CompactH16TargetIndex; carries no rank, generation or algebraicity content. Correct: the contract forbids a Betti-number or generation claim. Model realizes it concretely, so it is not vacuous."
+    },
+    {
+      "axiom": "bfp_whole_open_bm_vanishes_above_critical_line",
+      "obligation_id": "G7D16-OBL-09",
+      "verdict": "confirmed",
+      "note": "Bergstrom-Faber-Payne Proposition 2.1 typed on the WHOLE open Borel-Moore group with the exact n>=2 and 2g+n>18 gates. Verified against manuscript eq:BFP-BM: 16 < 2g-2+n for n>=2 is exactly 2g+n>18. Demonstrated INDEPENDENT: a countermodel satisfying the other 33 axioms but not this one makes the target false at (7,8). Not consumed by any other regime."
+    },
+    {
+      "axiom": "boundary_factor_complexity_decreases",
+      "obligation_id": "G7D16-OBL-08",
+      "verdict": "confirmed",
+      "note": "Strict decrease of PairComplexity = 3g+n. The manuscript's measure is complex dimension d = 3g-3+n; the two differ by the constant 3, so the strict orders coincide. Independently verified that both the loop factor (3g+n-1) and each separating factor are strictly below the parent for every stable configuration. Genuine well-founded measure, not a finite case list."
+    },
+    {
+      "axiom": "boundary_factor_genus_le_parent",
+      "obligation_id": "G7D16-OBL-04",
+      "verdict": "confirmed",
+      "note": "Every vertex genus is at most g (loop gives g-1; separating gives g_1+g_2=g). Faithful, and load-bearing: it is what keeps the induction inside genus <= 7."
+    },
+    {
+      "axiom": "boundary_factor_is_stable",
+      "obligation_id": "G7D16-OBL-04",
+      "verdict": "confirmed",
+      "note": "Manuscript induction section: every vertex of a one-edge stable graph is stable. Faithful."
+    },
+    {
+      "axiom": "boundary_image_is_kernel",
+      "obligation_id": "G7D16-OBL-06",
+      "verdict": "confirmed",
+      "note": "Manuscript eq:boundary-short. Separate correct kernel/quotient orientation premise; the wrong orientation is right-exact but not kernel (NC28), exactly the separation OBL-06 demands."
+    },
+    {
+      "axiom": "boundary_image_tate_from_one_edge_graphs",
+      "obligation_id": "G7D16-OBL-05",
+      "verdict": "confirmed",
+      "note": "Passage from the normalized boundary source to its homological image through a distinct image carrier (objectKind=image). Folds manuscript eq:boundary-cohom-induction, eq:boundary-hom-induction and the 'image is a quotient of Q(8)^N' step into one premise; that is a coarsening, but the distinct image carrier is present and NC32 shows the image carrier does not by itself give compact homology."
+    },
+    {
+      "axiom": "boundary_sequence_right_exact",
+      "obligation_id": "G7D16-OBL-06",
+      "verdict": "confirmed",
+      "note": "Manuscript Proposition 'boundary-sequence' = CLP Equation (6.1), degree-preserving and untwisted. Lean pins degreeShift=0, tateTwist=0, orientation=boundaryToCompactToOpen and is deliberately blind to kernelOrientation and to the purity tag, keeping both independent. Reversed, shifted and twisted sequences refused (NC25-NC27)."
+    },
+    {
+      "axiom": "clp_pure_tautological_at_endpoint",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "Faithful to CLP Table 1 + Proposition 4.5 as stated at manuscript eq:c-table / eq:CLP-pure-taut. Gated on n <= c(g) with c(g) forced to equal clpMarkingBound g by EndpointArithmeticIsCoherent. Consumed only on the (4,10) direct route (NC17 shows it fails at the four one-marking records)."
+    },
+    {
+      "axiom": "clp_pure_tautological_at_smaller_pointed",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "Same published result applied at (g,n-1), gated on n-1 <= c(g). This is exactly the manuscript's 'In all four cases, n-1=c(g)' step feeding W_{k-2}H^{k-2}(M_{g,n-1};Q)=RH^{k-2}. Index-correct: smallerPointedMarkings = n-1 is pinned by coherence."
+    },
+    {
+      "axiom": "clp_pure_tautological_in_open_range",
+      "obligation_id": "G7D16-OBL-02",
+      "verdict": "confirmed",
+      "note": "CLP Proposition 4.5 for the pair itself, gated on 3<=g<=7 and n <= clpMarkingBound g. Observation: below the critical line this gate is automatically satisfied (verified for all g in 3..7: n <= 17-2g <= c(g)), so it constrains nothing in that regime. This is a true fact about Table 1, not a defect, but the CLP bound is not a live restriction below the line."
+    },
+    {
+      "axiom": "compact_base_genus_zero_one_two",
+      "obligation_id": "G7D16-OBL-03",
+      "verdict": "confirmed",
+      "note": "Genus 0, 1, 2 in degree sixteen for EVERY stable n. Checked against manuscript Proposition 'compact-inputs'(iii)-(iv): Keel for genus zero, Petersen Corollary 1.2 for genus one, CLP Corollary 2.7 (H^{2k} tautological for k<=10, taken at k=8) for genus two. The manuscript's genus-two input is genuinely uniform in n, so the Lean universal quantifier is not a strengthening."
+    },
+    {
+      "axiom": "compact_homology_pure_polarizable",
+      "obligation_id": "G7D16-OBL-07",
+      "verdict": "confirmed",
+      "note": "Purity conclusion licensed by the input plus the purity tag. The distinctness from the input is real in the model (NC29 exhibits an impure middle term satisfying every other extension premise whose Tate conclusion fails), which is precisely OBL-07's model requirement."
+    },
+    {
+      "axiom": "critical_endpoint_vanishes_direct_range",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "The direct published Canning-Larson-Payne route, gated on route=directPublishedRange AND n <= c(g). Double-gated: endpointG5 fails both (route mismatch and 8<=7 false), so genus five cannot reach the direct range. Matches the manuscript's treatment of (4,10)."
+    },
+    {
+      "axiom": "critical_endpoint_vanishes_one_marking",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "The one-marking primitive-quotient route, gated on IsCriticalEndpoint and route=oneMarkingPrimitiveQuotient, consuming all four derived premises. Matches manuscript Proposition 'endpoint-vanishing' ingredient for ingredient. Unavailable at (4,10) (NC35). Demonstrated INDEPENDENT and load-bearing: a countermodel satisfying the other 33 axioms but not this one makes the target false at (6,6) (see strongest_attack). Note: the CLP primitive-quotient formula itself (CLP Lemma 3.1(a) via the Petersen-Tavakol-Yin relative projector) and Lemma 'vcd-rational' have no separate carriers and are folded in here; OBL-01 does not require them separately."
+    },
+    {
+      "axiom": "even_compact_tate_through_fourteen",
+      "obligation_id": "G7D16-OBL-03",
+      "verdict": "confirmed",
+      "note": "Manuscript Proposition 'compact-inputs'(ii), CLP Theorem 1.5(3) plus Poincare duality. Distinct nullary carrier consumed only by Kunneth."
+    },
+    {
+      "axiom": "finite_graph_automorphism_invariants",
+      "obligation_id": "G7D16-OBL-05",
+      "verdict": "confirmed",
+      "note": "Manuscript eq:quotient-invariants: rational finite-group invariants introduce no new Hodge type. Typed separately from Kunneth, as OBL-05 requires."
+    },
+    {
+      "axiom": "inclusive_ckgp_endpoint",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "The 'inclusive endpoint' condition: c(g) < n (pair outside the direct published range) and n-1 = c(g) (its one-marking source sits exactly at the Table 1 endpoint), plus the CLP input at (g,n-1). Equality, not inequality, as the manuscript states. Refused at (4,10), where 11 < 10 is false (NC16). Shrinking c(g) breaks coherence (NC18)."
+    },
+    {
+      "axiom": "ionel_kills_critical_psi_source",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "General Ionel applied at (g, n-1) in codimension (k-2)/2, gated by 2*ionelCodimension+2 = ordinaryDegree. Independently recomputed: codimensions 9, 11, 12, 13 for (3,12), (5,8), (6,6), (7,4), each >= g, matching the manuscript verbatim. psiSourceIonelIndex inherits open geometry and rational coefficients from the record."
+    },
+    {
+      "axiom": "ionel_kills_endpoint_group",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "General Ionel at the endpoint group itself in codimension k/2, gated by 2*ionelCodimension = ordinaryDegree. Used only at (4,10): k=22, codim 11 >= 4, matching the manuscript's '(4,10) ... its codimension is 11>=4'. Refused at endpointG3 (NC21)."
+    },
+    {
+      "axiom": "ionel_looijenga_cohomological_vanishing",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "Faithful to manuscript Proposition 'ionel' (line 407): g>=2, RH^{2c}(M_{g,n};Q)=0 for c>=g when n>0 and c>=g-1 when n=0. The Lean gates are exactly those two conditional clauses plus level=cohomological, geometry=smoothOpenDMStack, coefficients=rational. Chow-level Ionel is refused (NC19); compact geometry and integral coefficients are refused (NC37). One general premise, not per-case."
+    },
+    {
+      "axiom": "kunneth_types_product_factors",
+      "obligation_id": "G7D16-OBL-05",
+      "verdict": "confirmed",
+      "note": "Manuscript Lemma 'kunneth'. Correctly consumes BOTH low-degree compact inputs as hypotheses rather than restating them, so it is distinct from what it uses (OBL-05)."
+    },
+    {
+      "axiom": "lowest_weight_piece_vanishes_from_whole_group",
+      "obligation_id": "G7D16-OBL-09",
+      "verdict": "confirmed",
+      "note": "The only bridge from WholeOpenBMVanishes to OpenBMVanishes: the lowest-weight piece of a zero group is zero. Mathematically trivial and correctly typed as a separate carrier, satisfying OBL-09's distinct-bridge requirement. NC13/NC41 show the whole-group and lowest-weight carriers are not conflated."
+    },
+    {
+      "axiom": "odd_compact_vanishing_through_nine",
+      "obligation_id": "G7D16-OBL-03",
+      "verdict": "confirmed",
+      "note": "Manuscript Proposition 'compact-inputs'(i), BFP Theorem 1.1. Typed as a distinct nullary carrier consumed only by Kunneth."
+    },
+    {
+      "axiom": "open_bm_vanishes_below_critical_line",
+      "obligation_id": "G7D16-OBL-02",
+      "verdict": "confirmed",
+      "note": "The 11 <= 2g+n < 18 regime, exposing the Ionel threshold codimension via c+11 = 3g+n, i.e. c = j/2 = 3g+n-11. Independently recomputed for every stable pair with 3<=g<=7 in this range (31 pairs): 2c = j always, and c>=g for n>0, c>=g-1 for n=0. Matches manuscript Proposition 'open-all' exactly."
+    },
+    {
+      "axiom": "open_bm_vanishes_on_critical_line",
+      "obligation_id": "G7D16-OBL-02",
+      "verdict": "confirmed",
+      "note": "The critical-line regime, reachable ONLY through CriticalEndpointVanishes for an endpoint record whose pair equals (g,n). Verified that no other axiom can produce OpenBMVanishes or OpenBMIsFiniteTateSum at 2g+n=18: the below-line axiom requires 2g+n<18, the published axiom requires 2g+n<11, and BFP requires 2g+n>18. The guard is airtight. NC39 shows (2,14) and (8,2) on the line are not covered."
+    },
+    {
+      "axiom": "proper_duality_transfers_tate",
+      "obligation_id": "G7D16-OBL-07",
+      "verdict": "confirmed",
+      "note": "Q(8) in homology dualizes to Q(-8) in cohomology in the same degree, with weightSign and tateSign both -1 and zero ambient twist. Delivers the contract's weight 16 / Tate index -8 target. Faithful."
+    },
+    {
+      "axiom": "proper_same_degree_duality",
+      "obligation_id": "G7D16-OBL-07",
+      "verdict": "confirmed",
+      "note": "Manuscript eq:proper-dual, H_i(X;Q) = H^i(X;Q)^dual for proper X. Lean pins kind=properSameDegree, homologicalDegree=cohomologicalDegree=16, ambientDimensionTwist=0. The open dimension-dependent Poincare twist and a nonzero ambient twist are both refused (NC33, NC34), which is the exact error OBL-07 names."
+    },
+    {
+      "axiom": "published_open_bm_tate_below_zero_range",
+      "obligation_id": "G7D16-OBL-02",
+      "verdict": "confirmed",
+      "note": "Consumes the typed control and the CLP input to give Tate-ness (not vanishing) in the nonzero range. Correct: the manuscript only claims a_{g,n}=0 for 2g+n>=11, so asserting Tate rather than zero here is the faithful, weaker statement."
+    },
+    {
+      "axiom": "published_open_range_control",
+      "obligation_id": "G7D16-OBL-02",
+      "verdict": "confirmed",
+      "note": "The remaining 2g+n < 11 pairs (9 pairs: (3,0..4), (4,0..2), (5,0)), typed by the pair and gated on the Table 1 bound. Refused at (6,6) and at genus eight (NC40). Faithful to the manuscript's direct-CLP-range paragraph; the manuscript's separate 'j<0 gives zero by dimension' case is folded in, which is a coarsening within the audited-black-box scope."
+    },
+    {
+      "axiom": "semisimple_boundary_extension",
+      "obligation_id": "G7D16-OBL-07",
+      "verdict": "confirmed",
+      "note": "Manuscript: semisimplicity of polarizable pure Hodge structures of fixed weight splits an extension of Q(8)-copies by Q(8)-copies. All five inputs are explicit: right exactness, kernel orientation, sub, quotient and purity. Purity is not derivable from the others (NC29)."
+    },
+    {
+      "axiom": "smooth_proper_purity_input",
+      "obligation_id": "G7D16-OBL-07",
+      "verdict": "confirmed",
+      "note": "Smooth-proper input pinned to the canonical homology index up to the purity tag only. A perturbed weight, open geometry or image objectKind is refused (NC36, NC30). Faithful to the manuscript's 'for smooth proper X these structures are polarizable and pure of weights i and -i'."
+    },
+    {
+      "axiom": "strict_phi_vcd_at_critical_endpoint",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "Encodes k > vcd(PMod_{g,n-1}) = 4g-4+(n-1) = k-1, the manuscript's step giving Phi^k=0. Verified independently: for all five records smallerPointedVcd equals both k-1 and 4g-4+(n-1). Like the primitive clause this is forced by coherence, so it tests the record's arithmetic rather than adding a gate."
+    },
+    {
+      "axiom": "strict_primitive_vcd_at_critical_endpoint",
+      "obligation_id": "G7D16-OBL-01",
+      "verdict": "confirmed",
+      "note": "Encodes k-n = 4g-4 > 4g-5 = vcd(Mod_g) (manuscript eq:critical-arithmetic and Harer eq:harer-vcd). unpointedVcd is pinned by unpointedVcd+5 = 4g, i.e. exactly 4g-5. Strictness is a consequence of coherence rather than an independent gate; that is the right direction (the inequality is derived from the encoded arithmetic, not assumed). At-vcd perturbation refused (NC22/NC24)."
+    },
+    {
+      "axiom": "vocab",
+      "obligation_id": "VOCAB",
+      "verdict": "confirmed",
+      "note": "VOCAB. The V5 record of 27 opaque predicates. Verified byte-identical to the pinned formal/G7D16SignatureV5.lean.inc (8ab2da3a...) in both Claim.lean and Model.lean. Ionel, CLP-range, BFP whole-group, purity input, purity conclusion, kernel and duality are separate fields, so no route can borrow another's carrier."
+    },
+    {
+      "axiom": "zero_open_bm_is_tate",
+      "obligation_id": "G7D16-OBL-02",
+      "verdict": "confirmed",
+      "note": "Zero is a finite Q(8)-sum with rank zero. Faithful; this is where 'rank zero allowed' enters, matching the contract's zero_rank_allowed field."
+    }
+  ],
+  "statement_faithfulness": "Recomputed every bound hash independently: campaign 521c449f..., Claim 5d64d4c0..., Model fb2f860b..., manifest 04158d03..., report 90651f5d..., trusted prelude b4d0f37e..., shared signature 8ab2da3a..., source proof ATT-0149 e0368a38..., manuscript 5f80e754... . All match the campaign contract and the committed report. Re-ran lean-check --attempt LATT-0009 --campaign LG7D16-006 with no --write: result PASS, lean_exit 0, model_exit 0, errors [], warnings [], Lean 4.32.1 as pinned; lean-status reports committed_report_matches true. Verified by diff that the trusted prelude and the V5 shared signature are embedded byte-identically in BOTH Claim.lean and Model.lean. The exported theorem is genus_at_most_seven_compact_h16_is_tate : AllStableGenusAtMostSevenCompactH16IsTate CompactH16IsFiniteTateSum, the literal required_theorem_type. Unfolding the trusted definition it quantifies over EVERY StablePairIndex p with IsStablePair p (3 <= 2g+n) and p.genus <= 7 and concludes P (compactH16Target p), where compactH16Target pins geometry=stableCompactifiedDMStack, coefficients=rational, markingsKind=ordered, objectKind=wholeGroup, cohomologicalDegree=16, weight=16, tateIndex=-8. Field by field against G7D16-COMPACT-H16-TARGET-V2: complex DM stack yes; stable compactification, not the open stack (NC03); stack, not coarse space (NC04); rational, not integral (NC05); ordered, not unordered (NC06); all stable pairs, no example list; genus at most seven, with genus eight excluded (NC07) and unstable (1,0) excluded (NC08); degree sixteen (NC09); weight sixteen (NC10); Tate index minus eight (NC11); rank unspecified and zero allowed, since the predicate is opaque and no rank, Betti-number, algebraicity or tautological-generation claim appears anywhere in the file; whole group, not a quotient, image, associated graded or semisimplification (NC12); and the OPEN term is openBMIndex with objectKind=lowestWeightPiece, never the whole Borel-Moore group, with the whole-group carrier separately refuted as Tate (NC13) and the two carriers kept distinct throughout (NC41). All fourteen contract target checks pass. Scanned Claim.lean for proof escapes: no import, no sorry, no admit, no native_decide, no unsafe, no opaque, no extern, no macro/syntax/elab, no instance, no #eval; the only option is set_option autoImplicit false. Exactly 36 axiom declarations, matching declared_axioms; #print axioms adds only propext and Quot.sound, so the assembly is choice-free.",
+  "axiom_faithfulness": "All 36 declared axioms appear in the printed closure, so no premise is dead weight, and every axiom maps to a campaign obligation with all nine obligations represented (OBL-01 x10, OBL-02 x6, OBL-03 x3, OBL-04 x2, OBL-05 x3, OBL-06 x2, OBL-07 x5, OBL-08 x1, OBL-09 x2, VOCAB x2). Each axiom was reconstructed against ATT-0149 and the hash-bound manuscript; the per-axiom notes carry the readings. I re-derived the arithmetic outside Lean for every stable pair with 3 <= g <= 7. The four open regimes (2g+n<11 published, 11<=2g+n<18 below-line, 2g+n=18 critical line, 2g+n>18 BFP) are disjoint and exhaustive with no defects: in the BFP regime g<=7 forces n>=5, so the n>=2 gate of BFP Proposition 2.1 is met and 16 < 2g-2+n holds exactly; in the below-line regime the exposed codimension c = 3g+n-11 always equals j/2 and always clears the Ionel threshold (c>=g for n>0, c>=g-1 for n=0); the critical line contains exactly the five pairs (3,12), (4,10), (5,8), (6,6), (7,4) that have records. All five endpoint records reproduce the manuscript exactly: k = 2d-16 = 6g+2n-22; primitive degree k-n = 4g-4 strictly above vcd(Mod_g) = 4g-5; smallerPointedVcd = 4g-4+(n-1) = k-1 strictly below k; n-1 = c(g) on the four one-marking routes with c(g) < n; psi-source codimensions 9, 11, 12, 13 each at least g; and (4,10) alone on the direct route with n=10 <= c(4)=11 and endpoint codimension 11 >= 4. clpMarkingBound reproduces manuscript Table 1 (eq:c-table) for g=1..7. Two conservative deviations, neither load-bearing. (a) clpMarkingBound 0 = 0 where Table 1 has c(0) = infinity; every consumer requires 3 <= g, so g=0 is never reached, and the deviation only tightens a gate. (b) The manuscript's 'j<0 gives zero by dimension' case is folded into published_open_range_control rather than exposed. One structural observation, not a defect: given EndpointArithmeticIsCoherent, both strictness premises (unpointedVcd < primitiveDegree and smallerPointedVcd < ordinaryDegree) are logically forced, so they are theorems about the records rather than live gates. This is the correct direction, since it derives the inequalities from encoded arithmetic instead of assuming them. Likewise, below the critical line the gate n <= clpMarkingBound g is automatically satisfied for every g in 3..7, so Table 1 does not restrict that regime; that is a true fact about the table, not a smuggled premise. No strengthened premise, conclusion smuggling, circular encoding, variance error, index change or proxy object was found. In particular there is no genus-five Chow, CKgP or Liu premise anywhere, Ionel is one general premise at cohomological level, and Ionel at Chow level, at compact geometry or with integral coefficients is refused by the model. The one un-itemized published input is the CLP primitive-quotient formula itself (CLP Lemma 3.1(a), via the Petersen-Tavakol-Yin relative projector) together with Harer's vcd values and the coefficient-form vcd lemma; these have no separate carriers in the V5 signature and are folded inside critical_endpoint_vanishes_one_marking. OBL-01 does not require separate carriers, so this is within contract, but it is the largest single black box in the endpoint route and a P2 reviewer should weigh it.",
+  "model_faithfulness": "Model.lean embeds the identical trusted prelude and V5 signature (verified by byte diff), so it interprets the actual Claim vocabulary rather than a lookalike. It gives concrete definitions for all 27 vocabulary fields and for the target predicate, states all 34 non-VOCAB axioms as AX01-AX34, proves every one, and proves 41 non-collapse witnesses. The conjunction g7d16_load_bearing_model_is_consistent_and_materially_noncollapsing typechecks and 'does not depend on any axioms' - independently reproduced. The axiom set is therefore consistent. The model is genuinely non-collapsing, not a model that makes every predicate true: NC03-NC12 refute eight distinct target perturbations, NC13 refutes whole-open-group confusion, NC15 exhibits a pair that is Tate but not vanishing, NC19/NC20/NC37 refute Chow-level, sub-threshold, compact-geometry and integral Ionel, NC22-NC24 refute at-vcd and incoherent endpoint records, NC25-NC28 refute reversed, shifted, twisted and wrong-kernel sequences, NC30/NC36 refute perturbed purity inputs, NC31 refutes same-complexity recursion, NC33/NC34 refute ambient-twisted and open Poincare duality, and NC39/NC40 refute critical-line pairs in genus two and genus eight. It meets both model requirements the obligations state explicitly: NC28 separates right exactness from the kernel premise (OBL-06), and NC29 exhibits a sequence satisfying every other extension premise whose Tate conclusion fails because the middle term is impure (OBL-07). Two limits worth recording. First, the model is the syntactic one: each conclusion is interpreted as the conjunction of the premises of the axiom that concludes it. That makes consistency and index discrimination genuine, but it means the model can never test whether an axiom is TRUE of actual cohomology - only that the index bookkeeping is coherent. Second, and more concretely, the model's target predicate is 't = compactH16Target t.pair and IsStablePair t.pair and t.pair.genus <= 7', which is insensitive to the assembly. It therefore stays true at (6,6) and (7,8) even if a whole route is deleted, so the NC suite cannot witness that the endpoint routes or BFP are load-bearing at the target. That gap is real but repairable, and I closed it myself with the two countermodels described under strongest_attack.",
+  "strongest_attack": "The campaign's own README concedes the residual risk: 'no black-box architecture can force an axiom to use its premises', so the four-regime split makes a bypass VISIBLE but not impossible. My strongest attack targeted exactly that - whether the (5,8)/(6,6) one-marking derivation and the BFP premise are load-bearing or merely decorative. A Lean PASS and #print axioms show only that the proof AS WRITTEN mentions them, not that they are needed. I therefore built two independence countermodels in bare Lean 4.32.1, each reusing the attempt's own prelude, V5 signature and model bodies verbatim, and each replacing the target predicate with an assembly-tracking one ('genus <= 2 or homTateModel (compactHomologyIndex t.pair)') so that a deleted route can actually be observed at the target. ATTACK 1 (against G7D16-OBL-01). Delete the one-marking disjunct from CriticalEndpointVanishes. Result: attack_models_all_but_ax09 proves the other 33 axioms still hold; attack_refutes_ax09 proves critical_endpoint_vanishes_one_marking genuinely fails; attack_target_fails_at_66 proves the target is FALSE at compactH16Target (6,6). All three are axiom-free. ATTACK 2 (against G7D16-OBL-09). Delete Bergstrom-Faber-Payne whole-group vanishing. Result: attack2_models_all_but_ax11 proves the other 33 axioms still hold; attack2_refutes_ax11 proves the premise fails; attack2_target_fails_at_78 proves the target is FALSE at compactH16Target (7,8). All three are axiom-free. Both attacks FAILED to break the attempt, and in failing they certify what the campaign claims. The one-marking primitive-quotient derivation is independent of the other 35 axioms and strictly necessary for the four critical endpoints; BFP is independent and strictly necessary above the critical line; and the regimes genuinely do not cover for one another. Separately I verified by exhaustion that at 2g+n=18 there is NO axiom other than open_bm_vanishes_on_critical_line that can produce OpenBMVanishes or OpenBMIsFiniteTateSum, since the below-line axiom demands 2g+n<18, the published axiom demands 2g+n<11 and BFP demands 2g+n>18; the guard is airtight. The bare-assertion bypass the README feared is not present. The attack that did land is not mathematical. LATT-0009's Claim.lean and Model.lean are byte-identical to LATT-0008's apart from two identifier comments - after normalising those, Claim hashes bf208070d01e201ee82511951d047723ca51937be000d2535df08c6884f97566 and Model hashes d6cc5fcc4dd52069a875614c76fda307aede57ed9a85949a2fe1a83bb0dff115 for BOTH attempts - yet prover_engine changed from claude to codex. Under review_policy.reviewers_must_differ_from_prover the recorded prover engine is what gates reviewer independence, so a misrecorded prover can admit a reviewer who is in fact the author. That is a live hole in the fail-closed architecture, and it is why this review is incomplete rather than confirmed.",
+  "findings": [
+    {
+      "id": "LREV-0011-F01",
+      "severity": "high",
+      "category": "provenance",
+      "summary": "prover_engine is contradicted by byte-level evidence, which can defeat the reviewer-independence gate",
+      "detail": "LATT-0009 records prover_engine 'codex'. Its Claim.lean and Model.lean are byte-identical to LATT-0008 (prover_engine 'claude') apart from the LEAN-CAMPAIGN/LEAN-ATTEMPT/LEAN-MODEL-WITNESS identifier comments; normalising those two identifiers yields identical SHA-256 for both files across both attempts. Independent re-derivation of 1901 identical lines including all comment prose is not plausible; this is an adoption. Because review_policy.reviewers_must_differ_from_prover keys off the recorded engine, a 'claude' P1 or P2 reviewer would be admitted for LATT-0009 while actually being the author of its content.",
+      "recommendation": "Record the true provenance - either set prover_engine to the engine that authored the content, or add an explicit adopted_from/derived_from field naming LATT-0008 and its engine - and treat BOTH claude and codex as non-independent for LATT-0009 until that is settled. This review is filed under reviewer_engine 'claude' and is therefore itself affected."
+    },
+    {
+      "id": "LREV-0011-F02",
+      "severity": "medium",
+      "category": "manifest-accuracy",
+      "summary": "The manifest claims a Model.lean repair that did not occur",
+      "detail": "LATT-0009's manifest notes state it 'carries the repaired concrete Model.lean proofs for the one-marking endpoint assembly and the genus-at-most-two base input'. diff shows Model.lean differs from LATT-0008's only in the LEAN-MODEL-WITNESS comment. LATT-0008's own committed report already records result PASS, model_exit 0, errors []. No repair was made and none was needed.",
+      "recommendation": "Correct the notes to describe what actually changed (campaign rebinding only), so the immutable attempt record does not overstate the work."
+    },
+    {
+      "id": "LREV-0011-F03",
+      "severity": "medium",
+      "category": "provenance",
+      "summary": "Dangling campaign LG7D16-005 and missing review LREV-0010 leave the repair lineage unauditable",
+      "detail": "The manifest says LATT-0009 'adds the missing LG7D16-005 campaign binding and manifest'. It does not: LATT-0009 binds a NEW campaign LG7D16-006, formal/campaigns/LG7D16-005.json still does not exist, and LATT-0008 remains permanently bound to a nonexistent campaign. Separately, LATT-0008's notes attribute the entire four-regime redesign to findings F02-F07 of LREV-0010, but no LREV-0010 artifact, dispatch file or run receipt exists anywhere in the repository. The design rationale for the structure this review is auditing cannot be checked against its stated source.",
+      "recommendation": "Either publish LG7D16-005 and LREV-0010 or amend both manifests to stop referencing artifacts that do not exist."
+    },
+    {
+      "id": "LREV-0011-F04",
+      "severity": "low",
+      "category": "model-coverage",
+      "summary": "The non-collapse suite cannot witness deletion of a whole open-range route",
+      "detail": "Model.lean interprets the target as 't = compactH16Target t.pair and IsStablePair t.pair and t.pair.genus <= 7', independent of the assembly, so it remains true at (6,6) and (7,8) even with critical_endpoint_vanishes_one_marking or the BFP premise removed. NC01-NC41 establish index discrimination and the two load-bearing witnesses the obligations name explicitly (NC28 for OBL-06, NC29 for OBL-07), but nothing witnesses route load-bearing at the target - which is the property the attempt is named for.",
+      "recommendation": "Adopt the two countermodels supplied under strongest_attack (or an equivalent assembly-tracking target interpretation) into a successor Model.lean, so the property is asserted by the artifact rather than only by a reviewer."
+    },
+    {
+      "id": "LREV-0011-F05",
+      "severity": "informational",
+      "category": "faithfulness",
+      "summary": "clpMarkingBound 0 = 0 where manuscript Table 1 has c(0) = infinity",
+      "detail": "A conservative deviation in the safe direction (it can only make a gate harder to satisfy) and never reached, since every consumer requires 3 <= g. No effect on the theorem.",
+      "recommendation": "None required; note it if the signature is ever reused at genus zero."
+    },
+    {
+      "id": "LREV-0011-F06",
+      "severity": "informational",
+      "category": "coverage",
+      "summary": "The CLP primitive-quotient formula has no independent carrier",
+      "detail": "CLP Lemma 3.1(a) (via the Petersen-Tavakol-Yin relative projector), Harer's vcd values and the coefficient-form vcd lemma are folded inside critical_endpoint_vanishes_one_marking rather than exposed as premises. OBL-01 does not require separate carriers, so this is within contract, but it is the largest un-itemized published input on the endpoint route.",
+      "recommendation": "Consider a distinct PrimitiveQuotientFormula carrier in a V6 signature if the endpoint route is revised again."
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-19T15:52:45.334625+00:00",
+  "engine_pools": {
+    "prover": [
+      "claude"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "codex",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 390541,
+      "completed_at": "2026-08-19T15:52:44.505780+00:00",
+      "engine": "claude",
+      "error": "claude resume failed: exit=1 bytes=390541",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0107.json",
+      "parent_trace": "TRACE-0067",
+      "phase": "mathematics",
+      "pi_override": {
+        "forced_prompt": "reports/runs/manual-recovery/claude-geocomp-forced-20260819/FORCED_GEO_COMP.md",
+        "max_grok_workers": 2,
+        "max_worker_turns": 256
+      },
+      "resume_of": "ATT-0106",
+      "resume_session": "fd85bfb3-3fa5-487b-8827-4089aee6ec6e",
+      "returncode": 1,
+      "started_at": "2026-08-19T12:44:43.297099+00:00",
+      "state": "failed",
+      "step": 1,
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0068",
+      "trace_path": "research/paired-traces/TRACE-0068.json",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/ken/Desktop/Work/exploratory/Pure_Tate/reports/runs/manual-recovery/att0106-claude-geocomp-resume-20260819/run_resume.py\", line 365, in main\n    raise RuntimeError(\nRuntimeError: claude resume failed: exit=1 bytes=390541\n"
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 29044,
+  "parent_process_group": 29041,
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260819T124443281176Z-29044",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-19T12:44:43.281176+00:00",
+  "status": "stopped",
+  "stop_reason": "engine_failure"
+}

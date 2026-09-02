@@ -1,0 +1,82 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-04T08:46:08.722839+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "qwen",
+      "codex"
+    ],
+    "research": [
+      "grok",
+      "qwen"
+    ],
+    "review": [
+      "grok",
+      "qwen",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 1192,
+      "completed_at": "2026-08-04T08:46:07.343245+00:00",
+      "engine": "qwen",
+      "engine_pid": 29411,
+      "engine_process_group": 29411,
+      "error": "agent failed with exit 1: Qwen API HTTP 429: {'message': 'Your token-plan 1-week quota has been exhausted. The quota will reset at 08-09 04:12:00 UTC.', 'id': '97987cd8-60fb-4ec5-b968-fdda3241e383', 'type': 'insufficient_quota', 'code': 'insufficient_quota'}",
+      "last_activity_at": "2026-08-04T08:46:07.322511+00:00",
+      "last_activity_stream": "stderr",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/reviews/REV-0084.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 29411,
+          "engine_process_group": 29411,
+          "started_at": "2026-08-04T08:46:06.315782+00:00",
+          "supervisor_pid": 29410,
+          "supervisor_process_group": 29410
+        }
+      ],
+      "started_at": "2026-08-04T08:46:06.268273+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 29410,
+      "task_id": "TASK-V-ATT-0044-P2"
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 29408,
+  "parent_process_group": 29404,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260804T084605971333Z-29408",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-04T08:46:05.971333+00:00",
+  "status": "completed_with_failures",
+  "stop_reason": "step_limit_with_failures"
+}

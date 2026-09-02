@@ -1,0 +1,159 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-03T06:26:34.422054+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "qwen",
+      "codex"
+    ],
+    "research": [
+      "grok",
+      "qwen",
+      "codex"
+    ],
+    "review": [
+      "grok",
+      "qwen",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 1434893,
+      "artifact_sha256": "cca1994b1990cc254eaa1682f62fdb699ba93240d5ed45492e3e30465428f2b8",
+      "completed_at": "2026-08-03T06:13:19.786485+00:00",
+      "engine": "grok",
+      "engine_pid": 61846,
+      "engine_process_group": 61846,
+      "last_activity_at": "2026-08-03T06:13:19.040811+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0063.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 61846,
+          "engine_process_group": 61846,
+          "started_at": "2026-08-03T06:10:48.378447+00:00",
+          "supervisor_pid": 61844,
+          "supervisor_process_group": 61844
+        }
+      ],
+      "started_at": "2026-08-03T06:10:48.326657+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 61844,
+      "task_id": "TASK-F-FND-0086"
+    },
+    {
+      "activity_bytes": 895424,
+      "artifact_sha256": "fe577406d982921907fa047db635b2af10a77ab406b582ceaa49912165740c3e",
+      "completed_at": "2026-08-03T06:16:07.753300+00:00",
+      "engine": "grok",
+      "engine_pid": 63419,
+      "engine_process_group": 63419,
+      "last_activity_at": "2026-08-03T06:16:07.016256+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0064.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 63419,
+          "engine_process_group": 63419,
+          "started_at": "2026-08-03T06:13:21.126022+00:00",
+          "supervisor_pid": 63418,
+          "supervisor_process_group": 63418
+        }
+      ],
+      "started_at": "2026-08-03T06:13:21.078291+00:00",
+      "state": "completed",
+      "step": 2,
+      "supervisor_pid": 63418,
+      "task_id": "TASK-F-FND-0087"
+    },
+    {
+      "activity_bytes": 59,
+      "completed_at": "2026-08-03T06:26:33.121038+00:00",
+      "engine": "qwen",
+      "engine_pid": 65153,
+      "engine_process_group": 65153,
+      "error": "agent failed with exit 1: Qwen returned a tool call during its tool-free final round",
+      "last_activity_at": "2026-08-03T06:26:32.860897+00:00",
+      "last_activity_stream": "stderr",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0065.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 65153,
+          "engine_process_group": 65153,
+          "started_at": "2026-08-03T06:16:09.087166+00:00",
+          "supervisor_pid": 65152,
+          "supervisor_process_group": 65152
+        }
+      ],
+      "started_at": "2026-08-03T06:16:09.040807+00:00",
+      "state": "failed",
+      "step": 3,
+      "supervisor_pid": 65152,
+      "task_id": "TASK-F-FND-0088"
+    }
+  ],
+  "executed_steps": 3,
+  "parent_pid": 61843,
+  "parent_process_group": 61833,
+  "requested_steps": 12,
+  "run_id": "RUN-C66-001-20260803T061048028550Z-61843",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-03T06:10:48.028550+00:00",
+  "status": "stopped",
+  "stop_reason": "capability_failure"
+}

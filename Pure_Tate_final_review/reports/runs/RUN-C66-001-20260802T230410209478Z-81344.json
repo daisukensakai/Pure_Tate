@@ -1,0 +1,77 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-02T23:30:20.112830+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "qwen"
+    ],
+    "research": [
+      "grok",
+      "claude",
+      "qwen"
+    ],
+    "review": [
+      "grok",
+      "claude",
+      "codex",
+      "qwen"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 693112,
+      "artifact_sha256": "36fab2a2f82579ee4877f6b41c88d41759588737ccff2697c5f2c8906a0be946",
+      "completed_at": "2026-08-02T23:13:24.507282+00:00",
+      "engine": "claude",
+      "last_activity_at": "2026-08-02T23:13:23.696854+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "research/finding-audits/FAUD-0038.json",
+      "phase": "finding-audit",
+      "started_at": "2026-08-02T23:04:10.407202+00:00",
+      "state": "completed",
+      "step": 1,
+      "task_id": "TASK-F-FND-0054"
+    },
+    {
+      "activity_bytes": 641260,
+      "artifact_sha256": "4faa477b333dcc27ad572b04ff5c0823b52f020e3011d30257890e1e1b09f86b",
+      "completed_at": "2026-08-02T23:22:07.310901+00:00",
+      "engine": "claude",
+      "last_activity_at": "2026-08-02T23:22:06.493685+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "research/finding-audits/FAUD-0040.json",
+      "phase": "finding-audit",
+      "started_at": "2026-08-02T23:13:24.739847+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-F-FND-0055"
+    },
+    {
+      "activity_bytes": 475790,
+      "completed_at": "2026-08-02T23:30:20.111777+00:00",
+      "engine": "claude",
+      "error": "agent failed with exit 1: {\"type\":\"system\",\"subtype\":\"init\",\"cwd\":\"/private/var/folders/r_/40tyr0nj6zn_yqb74rw_351c0000gn/T/pure-tate-agent-_m30ehsu\",\"session_id\":\"b0f5bc28-1e60-4868-8d32-e4bfe49386fd\",\"tools\":[\"Task\",\"CronCreate\",\"CronDelete\",\"CronList\",\"DesignSync\",\"EnterWorktree\",\"ExitWorktree\",\"Glob\",\"Grep\",\"ListMcpResourcesTool\",\"Monitor\",\"NotebookEdit\",\"PushNotification\",\"Read\",\"ReadMcpResourceDirTool\",\"ReadMcpResourceTool\",\"RemoteTrigger\",\"ReportFindings\",\"ScheduleWakeup\",\"SendMessage\",\"Skill\",\"TaskCreate\",\"TaskGet\",\"TaskList\",\"TaskOutput\",\"TaskStop\",\"TaskUpdate\",\"ToolSearch\",\"WebFetch\",\"WebSearch\",\"mcp__grok-workers__await_grok_worker\",\"mcp__grok-workers__cancel_grok_worker\",\"mcp__grok-workers__dispatch_grok_worker\",\"mcp__grok-workers__list_grok_workers\",\"mcp__grok-workers__worker_pool_stats\"],\"mcp_servers\":[{\"name\":\"grok-workers\",\"status\":\"connected\"}],\"model\":\"claude-opus-5\",\"permissionMode\":\"bypassPermissions\",\"slash_commands\":[\"design-sync\",\"dataviz\",\"update-config\",\"verify\",\"debug\",\"code-review\",\"s",
+      "last_activity_at": "2026-08-02T23:30:19.322641+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "research/finding-audits/FAUD-0043.json",
+      "phase": "finding-audit",
+      "started_at": "2026-08-02T23:22:07.543511+00:00",
+      "state": "failed",
+      "step": 3,
+      "task_id": "TASK-F-FND-0056"
+    }
+  ],
+  "executed_steps": 3,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260802T230410209478Z-81344",
+  "schema_version": 1,
+  "started_at": "2026-08-02T23:04:10.209478+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

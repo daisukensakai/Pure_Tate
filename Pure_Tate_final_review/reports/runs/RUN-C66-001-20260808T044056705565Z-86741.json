@@ -1,0 +1,82 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-08T05:00:09.459699+00:00",
+  "engine_pools": {
+    "prover": [
+      "qwen"
+    ],
+    "research": [
+      "qwen",
+      "claude"
+    ],
+    "review": [
+      "qwen",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 987252,
+      "artifact_sha256": "f590e0ea0ae67b2d56f342543b8ef847f2e565059f42c6cc40eec8119231236c",
+      "completed_at": "2026-08-08T04:52:41.816045+00:00",
+      "engine": "claude",
+      "engine_pid": 86745,
+      "engine_process_group": 86745,
+      "last_activity_at": "2026-08-08T04:52:40.886337+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "proof/reviews/REV-0098.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 86745,
+          "engine_process_group": 86745,
+          "started_at": "2026-08-08T04:40:57.332006+00:00",
+          "supervisor_pid": 86744,
+          "supervisor_process_group": 86744
+        }
+      ],
+      "started_at": "2026-08-08T04:40:57.289873+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 86744,
+      "task_id": "TASK-V-ATT-0057-P1"
+    },
+    {
+      "activity_bytes": 358823,
+      "artifact_sha256": "33ce9af84179eb748a304dd0c177366c346f047549fda246ca3c0e4f45e1f82c",
+      "completed_at": "2026-08-08T05:00:09.459183+00:00",
+      "engine": "qwen",
+      "engine_pid": 88802,
+      "engine_process_group": 88802,
+      "last_activity_at": "2026-08-08T05:00:09.266462+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 65536,
+      "output": "research/finding-audits/FAUD-0098.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 88802,
+          "engine_process_group": 88802,
+          "started_at": "2026-08-08T04:52:42.461062+00:00",
+          "supervisor_pid": 88801,
+          "supervisor_process_group": 88801
+        }
+      ],
+      "started_at": "2026-08-08T04:52:42.433550+00:00",
+      "state": "completed",
+      "step": 2,
+      "supervisor_pid": 88801,
+      "task_id": "TASK-F-FND-0103"
+    }
+  ],
+  "executed_steps": 2,
+  "parent_pid": 86741,
+  "parent_process_group": 86734,
+  "requested_steps": 2,
+  "run_id": "RUN-C66-001-20260808T044056705565Z-86741",
+  "schema_version": 2,
+  "started_at": "2026-08-08T04:40:56.705565+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

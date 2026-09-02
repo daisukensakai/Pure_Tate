@@ -1,0 +1,78 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-03T07:29:28.352212+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "qwen",
+      "codex"
+    ],
+    "research": [
+      "qwen"
+    ],
+    "review": [
+      "grok",
+      "qwen",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "completed_at": "2026-08-03T07:29:27.002105+00:00",
+      "engine": "qwen",
+      "engine_pid": 66200,
+      "engine_process_group": 66200,
+      "error": "agent watchdog: inactivity timeout after 3600.0s; stderr: no stderr",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0065.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 66200,
+          "engine_process_group": 66200,
+          "started_at": "2026-08-03T06:29:26.738326+00:00",
+          "supervisor_pid": 66199,
+          "supervisor_process_group": 66199
+        }
+      ],
+      "started_at": "2026-08-03T06:29:26.687149+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 66199,
+      "task_id": "TASK-F-FND-0088"
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 66192,
+  "parent_process_group": 66180,
+  "requested_steps": 6,
+  "run_id": "RUN-C66-001-20260803T062926376942Z-66192",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-03T06:29:26.376942+00:00",
+  "status": "completed_with_failures",
+  "stop_reason": "no_eligible_task"
+}

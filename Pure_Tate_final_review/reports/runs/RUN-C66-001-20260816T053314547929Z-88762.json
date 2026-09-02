@@ -1,0 +1,82 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-16T05:50:51.498196+00:00",
+  "engine_pools": {
+    "prover": [
+      "codex"
+    ],
+    "research": [
+      "grok"
+    ],
+    "review": [
+      "claude",
+      "qwen"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 1480330,
+      "artifact_sha256": "3f4254c4ea3ccfaa9f724bb5da3c8b66cdaf7d0ae48b6212bb7350b95db9aee4",
+      "completed_at": "2026-08-16T05:42:12.467723+00:00",
+      "engine": "grok",
+      "engine_pid": 88948,
+      "engine_process_group": 88948,
+      "last_activity_at": "2026-08-16T05:42:10.764038+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/finding-audits/FAUD-0154.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 88948,
+          "engine_process_group": 88948,
+          "started_at": "2026-08-16T05:33:17.553978+00:00",
+          "supervisor_pid": 88947,
+          "supervisor_process_group": 88947
+        }
+      ],
+      "started_at": "2026-08-16T05:33:17.514344+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 88947,
+      "task_id": "TASK-F-FND-0148"
+    },
+    {
+      "activity_bytes": 1308739,
+      "completed_at": "2026-08-16T05:50:51.497020+00:00",
+      "engine": "grok",
+      "engine_pid": 93326,
+      "engine_process_group": 93326,
+      "error": "finding audit source verification failed: source record uses unknown source type; source record URL is not public HTTP(S); source record uses unknown source type; source record uses unknown source type; source record uses unknown source type; source record uses unknown source type",
+      "last_activity_at": "2026-08-16T05:50:50.198803+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/finding-audits/FAUD-0155.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 93326,
+          "engine_process_group": 93326,
+          "started_at": "2026-08-16T05:42:15.039048+00:00",
+          "supervisor_pid": 93325,
+          "supervisor_process_group": 93325
+        }
+      ],
+      "started_at": "2026-08-16T05:42:15.012204+00:00",
+      "state": "failed",
+      "step": 2,
+      "supervisor_pid": 93325,
+      "task_id": "TASK-F-FND-0149",
+      "trace_id": "TRACE-0047",
+      "trace_path": "research/paired-traces/TRACE-0047.json",
+      "trace_sha256": "ff778f792202b3fb0e9041620cd673c5317ede9bfda51a11f6af35e84e9233bb"
+    }
+  ],
+  "executed_steps": 2,
+  "parent_pid": 88762,
+  "parent_process_group": 88762,
+  "requested_steps": 2,
+  "run_id": "RUN-C66-001-20260816T053314547929Z-88762",
+  "schema_version": 2,
+  "started_at": "2026-08-16T05:33:14.547929+00:00",
+  "status": "completed_with_failures",
+  "stop_reason": "step_limit_with_failures"
+}

@@ -1,0 +1,61 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-01T00:24:43.461269+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude"
+    ],
+    "research": [
+      "grok",
+      "claude"
+    ],
+    "review": [
+      "grok",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 356990,
+      "artifact_sha256": "ed50d74f9c39186cafd19d67c763077316a04decb7036e0dfef05bf70c2d7a94",
+      "completed_at": "2026-08-01T00:20:30.235256+00:00",
+      "engine": "claude",
+      "last_activity_at": "2026-08-01T00:20:29.691266+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "proof/reviews/REV-0036.json",
+      "phase": "review",
+      "started_at": "2026-08-01T00:15:19.502978+00:00",
+      "state": "completed",
+      "step": 1,
+      "task_id": "TASK-V-ATT-0028-P1"
+    },
+    {
+      "activity_bytes": 382616,
+      "artifact_sha256": "252e12741b38f197ca0a4036b486c83648eb1cecfb4d4e438559daac11176327",
+      "completed_at": "2026-08-01T00:24:43.460571+00:00",
+      "engine": "claude",
+      "last_activity_at": "2026-08-01T00:24:42.917754+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "research/paired-digests/DIGEST-0010.json",
+      "phase": "trace-mining",
+      "started_at": "2026-08-01T00:20:30.682471+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-C66-001-MINE-GROK-STANDARD_FALLBACK",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-07c20221a1c0f312.md",
+        "sha256": "07c20221a1c0f312bbf36c095359a889869335e390ccbafbcf577be08fe52e43"
+      }
+    }
+  ],
+  "executed_steps": 2,
+  "requested_steps": 2,
+  "run_id": "RUN-C66-001-20260801T001519091625Z-63329",
+  "schema_version": 1,
+  "started_at": "2026-08-01T00:15:19.091625+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

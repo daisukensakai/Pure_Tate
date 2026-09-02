@@ -1,0 +1,94 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-08T05:53:20.686239+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "qwen",
+      "claude",
+      "codex"
+    ],
+    "research": [
+      "grok",
+      "claude",
+      "qwen"
+    ],
+    "review": [
+      "grok",
+      "qwen",
+      "claude",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "completed_at": "2026-08-08T05:51:33.716831+00:00",
+      "engine": "claude",
+      "error": "high-tier chain is not open: proof:C66-001:TASK-C66-M-008",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0058.json",
+      "phase": "standard-fallback",
+      "started_at": "2026-08-08T05:51:33.716146+00:00",
+      "state": "failed",
+      "step": 1,
+      "task_id": "TASK-C66-M-008",
+      "working_context": {
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-def9eb3ef6c036f1.md",
+          "sha256": "def9eb3ef6c036f1e22e1f708d5b27b47c47d372cc35c9f91130cb357b9c5bbc"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-7a483703948f9ea9.md",
+          "sha256": "7a483703948f9ea9e14a358b223001cc0472934d907b839e1b2f731b9d1302cf"
+        }
+      }
+    },
+    {
+      "activity_bytes": 472,
+      "completed_at": "2026-08-08T05:53:20.686239+00:00",
+      "engine": "grok",
+      "engine_pid": 92142,
+      "engine_process_group": 92142,
+      "error": "campaign parent process disappeared",
+      "last_activity_at": "2026-08-08T05:51:39.547342+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/finding-audits/FAUD-0099.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 92142,
+          "engine_process_group": 92142,
+          "started_at": "2026-08-08T05:51:35.691165+00:00",
+          "supervisor_pid": 92141,
+          "supervisor_process_group": 92141
+        }
+      ],
+      "started_at": "2026-08-08T05:51:35.653021+00:00",
+      "state": "abandoned",
+      "step": 2,
+      "supervisor_pid": 92141,
+      "task_id": "TASK-F-FND-0104"
+    }
+  ],
+  "executed_steps": 2,
+  "parent_pid": 92108,
+  "parent_process_group": 92094,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260808T055132659324Z-92108",
+  "schema_version": 2,
+  "started_at": "2026-08-08T05:51:32.659324+00:00",
+  "status": "abandoned",
+  "stop_reason": "parent_process_missing"
+}

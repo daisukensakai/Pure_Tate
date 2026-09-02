@@ -1,0 +1,77 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-14T10:01:28.408056+00:00",
+  "engine_pools": {
+    "prover": [
+      "claude",
+      "codex"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "codex",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 909,
+      "completed_at": "2026-08-14T10:01:28.125512+00:00",
+      "engine": "codex",
+      "engine_pid": 58945,
+      "engine_process_group": 58945,
+      "error": "agent failed with exit 1: WARNING: proceeding, even though we could not create PATH aliases: Operation not permitted (os error 1)\n2026-08-14T10:01:27.844350Z  WARN codex_state::runtime: failed to open state db at /Users/ken/.codex/state_5.sqlite: failed to open state DB at /Users/ken/.codex/state_5.sqlite: error returned from database: (code: 8) attempt to write a readonly database\n2026-08-14T10:01:27.845311Z  WARN codex_rollout::state_db: failed to initialize state runtime: failed to initialize state runtime at /Users/ken/.codex: failed to open state DB at /Users/ken/.codex/state_5.sqlite: error returned from database: (code: 8) attempt to write a readonly database: error returned from database: (code: 8) attempt to write a readonly database: (code: 8) attempt to write a readonly database\nReading additional input from stdin...\nError: failed to initialize in-process app-server client: Operation not permitted (os error 1)",
+      "last_activity_at": "2026-08-14T10:01:27.861136+00:00",
+      "last_activity_stream": "stderr",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": false
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "sent": false
+        }
+      },
+      "output": "proof/reviews/REV-0143.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 58945,
+          "engine_process_group": 58945,
+          "started_at": "2026-08-14T10:01:27.597798+00:00",
+          "supervisor_pid": 58944,
+          "supervisor_process_group": 58944
+        }
+      ],
+      "started_at": "2026-08-14T10:01:27.565742+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 58944,
+      "task_id": "TASK-V-ATT-0092-P1"
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 58812,
+  "parent_process_group": 58812,
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260814T100125338240Z-58812",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": false
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "sent": false
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-14T10:01:25.338240+00:00",
+  "status": "completed_with_failures",
+  "stop_reason": "step_limit_with_failures"
+}

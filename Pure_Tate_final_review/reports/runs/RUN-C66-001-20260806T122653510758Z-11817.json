@@ -1,0 +1,127 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-06T12:50:54.988166+00:00",
+  "engine_pools": {
+    "prover": [
+      "claude"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "claude",
+      "grok"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 1267561,
+      "artifact_sha256": "305247ba7f484c2bf808c2785ba667ae6f674be4011baa1d8bf3be2b761e0570",
+      "completed_at": "2026-08-06T12:32:19.057809+00:00",
+      "engine": "grok",
+      "engine_pid": 11820,
+      "engine_process_group": 11820,
+      "last_activity_at": "2026-08-06T12:32:18.308709+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0094.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 11820,
+          "engine_process_group": 11820,
+          "started_at": "2026-08-06T12:26:53.903838+00:00",
+          "supervisor_pid": 11819,
+          "supervisor_process_group": 11819
+        }
+      ],
+      "started_at": "2026-08-06T12:26:53.861446+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 11819,
+      "task_id": "TASK-F-FND-0101"
+    },
+    {
+      "activity_bytes": 1225092,
+      "artifact_sha256": "3b91f56332e124fc163e846de258f4b21b1341149ff5be8f70bf4dc960c2765c",
+      "completed_at": "2026-08-06T12:50:54.233587+00:00",
+      "engine": "claude",
+      "engine_pid": 12061,
+      "engine_process_group": 12061,
+      "last_activity_at": "2026-08-06T12:50:53.178558+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0048.json",
+      "phase": "mathematics",
+      "processes": [
+        {
+          "engine_pid": 12061,
+          "engine_process_group": 12061,
+          "started_at": "2026-08-06T12:32:20.296082+00:00",
+          "supervisor_pid": 12060,
+          "supervisor_process_group": 12060
+        }
+      ],
+      "started_at": "2026-08-06T12:32:20.250739+00:00",
+      "state": "completed",
+      "step": 2,
+      "supervisor_pid": 12060,
+      "task_id": "TASK-C66-M-001",
+      "working_context": {
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-34b35a0583c655ab.md",
+          "sha256": "34b35a0583c655ab5955ccd06a3690faadb35076b5f74335bf3aeb9dc9f0158d"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-864c30eef5a1fdd9.md",
+          "sha256": "864c30eef5a1fdd960b006e3ea2ad6899875a84a0f8f85ab63f13c2f26685f4b"
+        }
+      }
+    }
+  ],
+  "executed_steps": 2,
+  "parent_pid": 11817,
+  "parent_process_group": 11812,
+  "requested_steps": 2,
+  "run_id": "RUN-C66-001-20260806T122653510758Z-11817",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-06T12:26:53.510758+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

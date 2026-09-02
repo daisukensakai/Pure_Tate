@@ -1,0 +1,59 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-07-31T03:51:14.405439+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ],
+    "research": [
+      "grok",
+      "claude"
+    ],
+    "review": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 14502,
+      "artifact_sha256": "e157eb994b896c68615c8fef38f421d0d39092894afbee032f7b44d01fd5674d",
+      "completed_at": "2026-07-31T03:48:46.232373+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-07-31T03:48:45.809557+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/reviews/REV-0027.json",
+      "phase": "review",
+      "started_at": "2026-07-31T03:46:00.865977+00:00",
+      "state": "completed",
+      "step": 1,
+      "task_id": "TASK-V-ATT-0022-P1"
+    },
+    {
+      "activity_bytes": 14153,
+      "completed_at": "2026-07-31T03:51:14.404302+00:00",
+      "engine": "grok",
+      "error": "review finding_candidates must be structured objects",
+      "last_activity_at": "2026-07-31T03:51:13.984935+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/reviews/REV-0029.json",
+      "phase": "review",
+      "started_at": "2026-07-31T03:48:46.436941+00:00",
+      "state": "failed",
+      "step": 2,
+      "task_id": "TASK-V-ATT-0023-P1"
+    }
+  ],
+  "executed_steps": 2,
+  "requested_steps": 6,
+  "run_id": "RUN-C66-001-20260731T034600673429Z-13926",
+  "schema_version": 1,
+  "started_at": "2026-07-31T03:46:00.673429+00:00",
+  "status": "stopped",
+  "stop_reason": "artifact_validation_failure"
+}

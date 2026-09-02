@@ -1,0 +1,79 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-24T05:05:39.761805+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok"
+    ],
+    "research": [
+      "grok"
+    ],
+    "review": [
+      "claude",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 7463,
+      "completed_at": "2026-08-24T05:05:38.877262+00:00",
+      "engine": "claude",
+      "engine_pid": 8093,
+      "engine_process_group": 8093,
+      "error": "agent failed with exit 1: API Error: 529 Overloaded. This is a server-side issue, usually temporary \u2014 try again in a moment. If it persists, check https://status.claude.com.",
+      "last_activity_at": "2026-08-24T05:05:37.956939+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/reviews/REV-0173.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 8093,
+          "engine_process_group": 8093,
+          "started_at": "2026-08-24T05:01:15.644437+00:00",
+          "supervisor_pid": 8092,
+          "supervisor_process_group": 8092
+        }
+      ],
+      "review_pass": 1,
+      "started_at": "2026-08-24T05:01:14.742594+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 8092,
+      "target_attempt_id": "ATT-0122",
+      "task_id": "TASK-V-ATT-0122-P1"
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 8086,
+  "parent_process_group": 8083,
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260824T050114733786Z-8086",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-24T05:01:14.733786+00:00",
+  "status": "stopped",
+  "stop_reason": "engine_failure"
+}

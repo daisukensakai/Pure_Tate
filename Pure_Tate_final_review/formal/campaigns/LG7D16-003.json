@@ -1,0 +1,116 @@
+{
+  "schema_version": 3,
+  "id": "LG7D16-003",
+  "title": "Route-separated Lean verification campaign for Tate degree-sixteen cohomology in genus at most seven",
+  "source_attempt_id": "ATT-0148",
+  "source_attempt_path": "proof/attempts/ATT-0148.json",
+  "source_attempt_sha256": "de32cf33bd2ff0fb02a0de0516fef21c359d7835d5dc878b893af5830ddac910",
+  "claim_contract_id": "G7D16-COMPACT-H16-TARGET-V2",
+  "exact_theorem": "For every stable pair (g,n) with g at most 7, the degree-sixteen rational cohomology of the complex Deligne-Mumford stack Mbar_{g,n} of stable genus-g curves with n ordered markings is a finite direct sum of Q(-8), with rank zero allowed. Equivalently H^{16}(Mbar_{g,n};Q) is isomorphic to Q(-8)^{oplus b_{g,n}} as a polarizable rational Hodge structure. No Betti-number formula, algebraic or tautological generation, integral statement, or coarse-moduli statement is asserted.",
+  "lean_target_contract": "The exported theorem must quantify over every StablePairIndex p satisfying 3 <= 2*g+n and g <= 7, and conclude the whole-group compact cohomology predicate at stable compactified complex DM stack geometry, rational coefficients, ordered markings, cohomological degree 16, weight 16 and Tate index -8. Rank is finite but unspecified and may be zero. The open term is explicitly the lowest-weight piece W_{-16} H_16^BM, not the whole Borel-Moore group. Selected examples, an open or coarse space, an image, quotient, associated graded, semisimplification, algebraic-generation claim, or differently indexed group does not satisfy this contract.",
+  "target_signature": "ALL(stable(g,n),g<=7)=>COMPACT-DM-STACK(ordered,Q,H^16,weight=16,tate=-8,whole-group,rank>=0);OPEN-TERM=LOWEST-WEIGHT-BM",
+  "trusted_prelude_path": "formal/TrustedG7D16TargetV2.lean.inc",
+  "trusted_prelude_sha256": "b4d0f37e09e4b9cb69df12a321da739190179c85d5d486faeffd1829880bd641",
+  "trusted_prelude_in_model": true,
+  "shared_signature_path": "formal/G7D16SignatureV3.lean.inc",
+  "shared_signature_sha256": "8dd75927be39a960f81713cdaf2efbcde849e77ca5fabb99f9c53d1190956b9d",
+  "required_theorem_type": "AllStableGenusAtMostSevenCompactH16IsTate CompactH16IsFiniteTateSum",
+  "toolchain": "leanprover/lean4:v4.32.1",
+  "timeout_seconds": 120,
+  "minimum_independent_reviews": 2,
+  "review_target_checks": [
+    "complex_dm_stack",
+    "stable_compactification_not_open",
+    "stack_not_coarse",
+    "rational_coefficients",
+    "ordered_markings",
+    "all_stable_pairs",
+    "genus_at_most_seven",
+    "cohomological_degree_sixteen",
+    "weight_sixteen",
+    "tate_index_minus_eight",
+    "zero_rank_allowed",
+    "whole_group_not_proxy",
+    "open_term_is_lowest_weight_piece",
+    "no_generation_or_rank_claim"
+  ],
+  "dependency_artifacts": [
+    {
+      "id": "genus-le-seven-manuscript",
+      "path": "paper/degree16_genus_le7.tex",
+      "sha256": "81194aa341d62d1a0eb1775e458c5b1c310cb24efafc3bc21563e8d5da9775aa"
+    },
+    {
+      "id": "liu-repair-claude-rev2",
+      "path": "reports/runs/manual-recovery/liu-claude-rev2-20260901/CLAUDE-REV2-REPORT.md",
+      "sha256": "d805df65a3e29c424a5be059854f6137ab3fe1c9108be14f2f140c8fa35a12b1"
+    },
+    {
+      "id": "liu-repair-codex-rev3",
+      "path": "reports/runs/manual-recovery/liu-codex-rev3-20260901/CODEX-P2-REPORT.md",
+      "sha256": "3698ec21c787e01ea3b86827ec9764cba8cb22f7723fdbbecca0790ba8b434e5"
+    },
+    {
+      "id": "claude-p1-latt0004-findings",
+      "path": "formal/reviews/LREV-0007.json",
+      "sha256": "d26253fadcc0872855cb8aa23ed2a6a41c2b2ddc60c2dc1170482f920c00267b"
+    }
+  ],
+  "verified_lean_dependencies": [],
+  "optional_obligation_ids": [],
+  "optional_axiom_names": [],
+  "review_policy": {
+    "reviewers_must_differ_from_prover": true,
+    "reviewer_engines_must_be_distinct": true,
+    "both_reviews_must_bind_all_artifact_hashes": true,
+    "both_reviews_must_bind_dependency_hashes": true,
+    "both_reviews_must_check_statement_and_every_axiom": true
+  },
+  "obligations": [
+    {
+      "id": "G7D16-OBL-01",
+      "source_claim_id": "CLM-0148-1",
+      "statement": "Represent the repaired M_{5,8} input as four distinct premises: Chow-Kunneth generation for M_{5,8}, the tautological Chow equality A^*=R^*, the cohomological Ionel vanishing supplied as the shared general Ionel-Looijenga premise instantiated at genus five and codimension twelve, and the exact CLP Lemma 4.3 plus Poincare open Borel-Moore conversion. No Chow/cohomology conflation, and no genus-five premise may license a conclusion at any other genus."
+    },
+    {
+      "id": "G7D16-OBL-02",
+      "source_claim_id": "CLM-0148-2",
+      "statement": "Represent exactly five critical endpoint records for genera three through seven whose arithmetic is mechanically checked against the critical line 2g+n=18, and route each endpoint through the argument the source actually uses: the one-marking primitive-quotient argument at (3,12), (6,6) and (7,4), the direct published Canning-Larson-Payne range at (4,10), and the repaired genus-five input at (5,8). The CLP Table 1 marking bound c(g) must be carried as a datum independent of n-1 and must be load-bearing in selecting the route. Ionel-Looijenga must be a single general premise carrying explicit genus, markings, codimension and cohomological level. Mechanically reject at-vcd vanishing and Chow-level Ionel."
+    },
+    {
+      "id": "G7D16-OBL-03",
+      "source_claim_id": "CLM-0148-3",
+      "statement": "Represent the complete open Borel-Moore result for every stable pair with 3<=g<=7, including a distinct vanishing predicate in the stronger zero range 2g+n>=11 whose Ionel threshold arithmetic is exposed, and the remaining published-range Tate cases."
+    },
+    {
+      "id": "G7D16-OBL-04",
+      "source_claim_id": "CLM-0148-4",
+      "statement": "Represent the genus 0,1,2 degree-sixteen base cases, odd compact vanishing through degree nine, and even compact Tate type through degree fourteen as separate audited inputs."
+    },
+    {
+      "id": "G7D16-OBL-05",
+      "source_claim_id": "CLM-0148-5",
+      "statement": "Type one-edge boundary factors separately from their parent and prove that every factor is stable and does not increase genus."
+    },
+    {
+      "id": "G7D16-OBL-06",
+      "source_claim_id": "CLM-0148-6",
+      "statement": "Represent the boundary Kunneth assembly and the finite graph-automorphism invariants as premises distinct from the low-degree compact inputs they consume, and pass from the normalized boundary source to its homological image through a distinct image carrier."
+    },
+    {
+      "id": "G7D16-OBL-07",
+      "source_claim_id": "CLM-0148-7",
+      "statement": "Represent the degree-preserving, untwisted right-exact boundary sequence with distinct boundary-image, compact-homology, and lowest-weight open-BM carriers and the correct kernel/quotient orientation; the model must separate right exactness from the kernel premise."
+    },
+    {
+      "id": "G7D16-OBL-08",
+      "source_claim_id": "CLM-0148-8",
+      "statement": "Represent smooth-proper purity as an input distinct from the purity tag it licenses, same-weight semisimplicity, and proper same-degree H_16/H^16 duality with Q(8) dual to Q(-8), never the open dimension-dependent Poincare twist; the model must make purity independently load-bearing by exhibiting a sequence that satisfies every other extension premise and whose Tate conclusion fails."
+    },
+    {
+      "id": "G7D16-OBL-09",
+      "source_claim_id": "CLM-0148-9",
+      "statement": "Carry out genuine well-founded strong induction on the complexity 3g+n for every stable pair with g<=7, with a strictly decreasing complexity premise at every one-edge factor; no finite list of examples and no same-complexity recursive premise is acceptable."
+    }
+  ]
+}

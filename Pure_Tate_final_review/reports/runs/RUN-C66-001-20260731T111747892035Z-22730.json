@@ -1,0 +1,73 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-07-31T11:31:12.516780+00:00",
+  "engine_pools": {
+    "prover": [
+      "claude"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 62065,
+      "completed_at": "2026-07-31T11:18:57.736958+00:00",
+      "engine": "grok",
+      "error": "trace digest lacks fields: engine",
+      "last_activity_at": "2026-07-31T11:18:57.212701+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0008.json",
+      "phase": "trace-mining",
+      "started_at": "2026-07-31T11:17:48.104347+00:00",
+      "state": "failed",
+      "step": 1,
+      "task_id": "TASK-C66-001-MINE-CLAUDE-INFRASTRUCTURE_FORCED_PROOF"
+    },
+    {
+      "activity_bytes": 64472,
+      "artifact_sha256": "84af7beae5268df068a429cd9efab6943c6480ce91a2121fbf66cca30ac85cf3",
+      "completed_at": "2026-07-31T11:20:01.368682+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-07-31T11:20:01.138571+00:00",
+      "last_activity_stream": "stderr",
+      "output": "research/paired-digests/DIGEST-0008.json",
+      "phase": "trace-mining",
+      "started_at": "2026-07-31T11:18:57.941491+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-C66-001-MINE-CLAUDE-INFRASTRUCTURE_FORCED_PROOF",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-c7d20f882e080165.md",
+        "sha256": "c7d20f882e0801653da2a4557d7dd96e9e1efb9d18ef1443e591347570685f66"
+      }
+    },
+    {
+      "activity_bytes": 781681,
+      "artifact_sha256": "6f17efc9749c3b955fb05ad094abbbc9765cf8a4b7df98c3b944c3e4567cbc9b",
+      "completed_at": "2026-07-31T11:31:12.516080+00:00",
+      "engine": "claude",
+      "last_activity_at": "2026-07-31T11:31:12.156674+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "proof/attempts/ATT-0025.json",
+      "phase": "forced-proof",
+      "started_at": "2026-07-31T11:20:01.570403+00:00",
+      "state": "completed",
+      "step": 3,
+      "task_id": "TASK-C66-001-FORCED-FULL"
+    }
+  ],
+  "executed_steps": 3,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260731T111747892035Z-22730",
+  "schema_version": 1,
+  "started_at": "2026-07-31T11:17:47.892035+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

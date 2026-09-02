@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "id": "ATT-0149",
+  "status": "claimed_complete",
+  "campaign_id": "G7D16",
+  "task_id": "TASK-G7D16-MAIN",
+  "subproblem_id": "GENUS-LE-SEVEN-COMPACT-H16",
+  "engine": "manuscript-bound-assembly",
+  "result_type": "proof",
+  "theorem_statement": "For every stable pair (g,n) with g at most 7, the degree-sixteen rational cohomology of the complex Deligne-Mumford stack Mbar_{g,n} of stable genus-g curves with n ordered markings is a finite direct sum of Q(-8), with rank zero allowed. Equivalently H^{16}(Mbar_{g,n};Q) is isomorphic to Q(-8)^{oplus b_{g,n}} as a polarizable rational Hodge structure. No Betti-number formula, algebraic or tautological generation, integral statement, or coarse-moduli statement is asserted.",
+  "summary": "Ionel-Looijenga tautological vanishing, the Canning-Larson-Payne primitive-quotient formula, strict virtual-cohomological-dimension bounds, and the published CKgP ranges type every open term through genus seven. Four critical endpoints, including (5,8), use the one-marking argument; only (4,10) uses the direct published range. Strong induction on 3g-3+n types the normalized one-edge boundary using low-degree compact Tate results, odd vanishing, Kunneth, and finite-group invariants. The right-exact boundary sequence and semisimplicity type compact homology by Q(8); proper same-degree duality gives Q(-8) in cohomology.",
+  "source_ids": [
+    "THM-0001",
+    "THM-0002",
+    "THM-0003",
+    "THM-0005",
+    "THM-0006",
+    "THM-0007",
+    "FND-0033",
+    "BFP-ODD-VANISHING",
+    "IONEL-LOOIJENGA"
+  ],
+  "proof_dependencies": [
+    "output/zenodo/degree16_genus_le7_v2/degree16_genus_le7.tex"
+  ],
+  "claims": [
+    {
+      "id": "CLM-0149-1",
+      "status": "proved",
+      "statement": "The primitive-quotient formula, strict virtual-cohomological-dimension vanishings, the inclusive CKgP marking endpoints, and Ionel-Looijenga vanishing give W_kH^k(M_{g,n};Q)=0 at (g,n,k)=(3,12,20),(5,8,24),(6,6,26),(7,4,28); the direct published-range case (4,10) also vanishes.",
+      "justification": "This is Proposition 'endpoint-vanishing' and Corollary 'critical-vanishing' of the revised manuscript. On every one-marking route the primitive degree is k-n=4g-4>vcd(Mod_g)=4g-5, the pullback source degree k exceeds vcd(PMod_{g,n-1})=k-1, and the psi source is tautological at n-1=c(g) in codimensions 9, 11, 12, and 13. Thus (5,8) uses the same published one-marking argument and no genus-five Chow or CKgP premise."
+    },
+    {
+      "id": "CLM-0149-2",
+      "status": "proved",
+      "statement": "For every stable pair with 3<=g<=7, W_{-16}H^{BM}_{16}(M_{g,n};Q) is a finite direct sum of Q(8), and it is zero whenever 2g+n>=11.",
+      "justification": "This is Proposition 'open-all'. BFP removes the high-marking range, Poincare duality reduces the rest to lowest weight, published CLP ranges handle all noncritical cases, and CLM-0149-1 handles the endpoints. Ionel-Looijenga gives the asserted stronger vanishing."
+    },
+    {
+      "id": "CLM-0149-3",
+      "status": "proved",
+      "statement": "The compact base inputs hold: odd cohomology through degree nine vanishes; positive even cohomology through degree fourteen is Tate of its forced type; and H^{16} is Q(-8)-Tate for every stable pair of genus zero, one, or two.",
+      "justification": "Bergstrom-Faber-Payne supplies odd vanishing, Canning-Larson-Payne supplies even degree at most fourteen, Keel supplies genus zero, Petersen genus one, and CLP Corollary 2.7 genus two."
+    },
+    {
+      "id": "CLM-0149-4",
+      "status": "proved",
+      "statement": "For a one-edge stable graph of type (g,n), every vertex pair is stable, has genus at most g, and has strictly smaller complex dimension than (g,n); a loop has ordered atlas Mbar_{g-1,n+2}, while a separating edge has a product of two smaller-dimensional factors.",
+      "justification": "This is the stable-graph and dimension bookkeeping in the induction section: partial normalization at the distinguished node lowers total complex dimension by one, and each stable factor has nonnegative dimension strictly below the parent."
+    },
+    {
+      "id": "CLM-0149-5",
+      "status": "proved",
+      "statement": "If every degree-sixteen compact factor on a one-edge normalized boundary is Q(-8)-Tate, then Kunneth, the compact low-degree inputs, and rational graph-automorphism invariants make H^{16} of the normalized boundary Q(-8)-Tate and its boundary image in compact homology Q(8)-Tate.",
+      "justification": "Odd-odd Kunneth summands vanish because one degree is at most seven; positive even-even summands have degrees at most fourteen; axis terms use the degree-sixteen factor hypotheses. Finite rational invariants and quotients cannot introduce another Hodge type."
+    },
+    {
+      "id": "CLM-0149-6",
+      "status": "proved",
+      "statement": "For every stable pair, the normalized-boundary map, compact homology, and lowest-weight open Borel-Moore term form a right-exact sequence in degree sixteen with no Gysin degree shift or Tate twist; its image is the kernel and the open term is the quotient.",
+      "justification": "This is CLP Equation (6.1), stated as the right-exact boundary proposition in the manuscript, followed by the definition of the boundary image."
+    },
+    {
+      "id": "CLM-0149-7",
+      "status": "proved",
+      "statement": "Compact homology H_{16}(Mbar_{g,n};Q) is pure polarizable of weight -16. A short exact sequence with Q(8)-Tate kernel and quotient therefore has Q(8)-Tate middle term, and proper same-degree rational duality transfers this to Q(-8)-Tate H^{16}.",
+      "justification": "Smooth proper purity and rational Hodge duality give the middle object; semisimplicity of polarizable pure Hodge structures of fixed weight splits the extension. Proper duality is same-degree duality, not the dimension-dependent open Borel-Moore formula."
+    },
+    {
+      "id": "CLM-0149-8",
+      "status": "proved",
+      "statement": "Strong induction on complex dimension proves the exact theorem simultaneously for every stable (g,n) with g<=7: genera zero through two are base inputs, and in genera three through seven every one-edge boundary factor lies at smaller dimension while the open quotient is CLM-0149-2.",
+      "justification": "CLM-0149-4 makes the induction well founded; CLM-0149-5 types the boundary image; CLM-0149-6/7 assemble and dualize the compact group. No induction hypothesis is used at the same or larger dimension."
+    }
+  ],
+  "gap_markers": [],
+  "failed_approaches_addressed": [
+    "Do not introduce a separate genus-five Chow or CKgP premise: the (5,8) endpoint is a one-marking case with source (5,7)=c(5) and Ionel codimension eleven.",
+    "Do not infer Chow-level vanishing from Ionel; only tautological cohomology vanishing is used.",
+    "Do not replace the normalized-boundary proper pushforward by a shifted Gysin map.",
+    "Do not collapse a boundary source, its image, compact homology, and the open quotient to one carrier.",
+    "Do not claim tautological or algebraic generation of H^{16} from its Tate Hodge type."
+  ],
+  "completion_attestation": {
+    "exact_problem_web_search_used": false,
+    "no_problem_status_claim": true,
+    "no_undischarged_dependencies": true,
+    "not_reduction_only": true,
+    "resolves_exact_target": true
+  }
+}

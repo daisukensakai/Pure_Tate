@@ -1,0 +1,53 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-07-31T06:46:19.497090+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "codex",
+      "gemini"
+    ],
+    "research": [
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "codex",
+      "gemini"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 39310,
+      "artifact_sha256": "0c1fccd5861c0c4b679f36ab4783d2a65c2f1842f0d89d2938566b0cff90f3c5",
+      "completed_at": "2026-07-31T06:46:19.177417+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-07-31T06:46:18.394907+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/finding-audits/FAUD-0001.json",
+      "phase": "finding-audit",
+      "started_at": "2026-07-31T06:43:55.502801+00:00",
+      "state": "completed",
+      "step": 1,
+      "task_id": "TASK-F-FND-0005"
+    },
+    {
+      "completed_at": "2026-07-31T06:46:19.496519+00:00",
+      "engine": "grok",
+      "error": "task packet hash mismatch: expected cf490d84d529bced74b21df9760195cb62ff10bf227a1d0bf8fe4a72f082d944, got 96775421e0e1440fb7c04fd11e156d83ab93facfaa0ed861bde18398bb5d254e",
+      "output": "proof/attempts/ATT-0024.json",
+      "phase": "forced-proof",
+      "started_at": "2026-07-31T06:46:19.495478+00:00",
+      "state": "failed",
+      "step": 2,
+      "task_id": "TASK-C66-001-FORCED-FULL"
+    }
+  ],
+  "executed_steps": 2,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260731T064355204530Z-5562",
+  "schema_version": 1,
+  "started_at": "2026-07-31T06:43:55.204530+00:00",
+  "status": "stopped",
+  "stop_reason": "artifact_validation_failure"
+}

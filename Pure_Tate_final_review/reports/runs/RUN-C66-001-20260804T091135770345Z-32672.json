@@ -1,0 +1,144 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-04T09:31:19.043777+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex"
+    ],
+    "research": [
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "claude",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 930253,
+      "artifact_sha256": "646b56553d37f8410158b8d5c4f2079d8a2c9dfb4cfbf88904806b98cbac37a5",
+      "completed_at": "2026-08-04T09:28:07.370462+00:00",
+      "engine": "claude",
+      "engine_pid": 32675,
+      "engine_process_group": 32675,
+      "last_activity_at": "2026-08-04T09:28:06.462752+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/reviews/REV-0089.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 32675,
+          "engine_process_group": 32675,
+          "started_at": "2026-08-04T09:11:36.084919+00:00",
+          "supervisor_pid": 32674,
+          "supervisor_process_group": 32674
+        }
+      ],
+      "started_at": "2026-08-04T09:11:36.033165+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 32674,
+      "task_id": "TASK-V-ATT-0044-P2"
+    },
+    {
+      "activity_bytes": 615930,
+      "artifact_sha256": "a2ca0a56466009e545043ab4f44de5dc5cd4194771f6e2e41f99f86d1fad3ec2",
+      "completed_at": "2026-08-04T09:31:18.028887+00:00",
+      "engine": "grok",
+      "engine_pid": 47377,
+      "engine_process_group": 47377,
+      "last_activity_at": "2026-08-04T09:31:17.328754+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/paired-digests/DIGEST-0018.json",
+      "phase": "trace-mining",
+      "processes": [
+        {
+          "engine_pid": 47377,
+          "engine_process_group": 47377,
+          "started_at": "2026-08-04T09:28:08.569778+00:00",
+          "supervisor_pid": 47376,
+          "supervisor_process_group": 47376
+        }
+      ],
+      "started_at": "2026-08-04T09:28:08.526630+00:00",
+      "state": "completed",
+      "step": 2,
+      "supervisor_pid": 47376,
+      "task_id": "TASK-C66-001-MINE-CODEX-STANDARD_FALLBACK",
+      "working_context": {
+        "archive": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-ARCHIVE-da40d91432d02e1a.md",
+          "sha256": "da40d91432d02e1a72f965138b6e9c046fa54a680888421f3bd490e1c5ade3c4"
+        },
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-028c7a5f09dc9cfd.md",
+          "sha256": "028c7a5f09dc9cfd74000a80dbc019a1f6d4553fbc88ff068a5b612852625c05"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-26cb1f1f59a1ca76.md",
+          "sha256": "26cb1f1f59a1ca762427551ae813227f74a2957ace36b0719a3ad639d1f07e48"
+        },
+        "stats": {
+          "bytes_archive": 52336,
+          "bytes_extended": 29638,
+          "bytes_primary": 59652,
+          "rows_archived": 263,
+          "rows_demoted": 93,
+          "rows_extended": 83,
+          "rows_fresh": 60,
+          "rows_primary": 229,
+          "rows_total": 575
+        }
+      }
+    }
+  ],
+  "executed_steps": 2,
+  "parent_pid": 32672,
+  "parent_process_group": 32669,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260804T091135770345Z-32672",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-04T09:11:35.770345+00:00",
+  "status": "completed",
+  "stop_reason": "no_eligible_task"
+}

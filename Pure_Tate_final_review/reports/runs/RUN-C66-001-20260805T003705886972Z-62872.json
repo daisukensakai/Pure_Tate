@@ -1,0 +1,156 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-05T01:07:06.026330+00:00",
+  "engine_pools": {
+    "prover": [
+      "claude",
+      "grok"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "claude",
+      "grok"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 483210,
+      "artifact_sha256": "a0ee3b8d77c2b3f70912dd6914a50aee8edb99d4abc206616c5004c5acc2f582",
+      "completed_at": "2026-08-05T00:43:05.149001+00:00",
+      "engine": "grok",
+      "engine_pid": 62875,
+      "engine_process_group": 62875,
+      "last_activity_at": "2026-08-05T00:43:04.207774+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0046.json",
+      "phase": "mathematics",
+      "processes": [
+        {
+          "engine_pid": 62875,
+          "engine_process_group": 62875,
+          "started_at": "2026-08-05T00:37:06.118276+00:00",
+          "supervisor_pid": 62874,
+          "supervisor_process_group": 62874
+        }
+      ],
+      "started_at": "2026-08-05T00:37:06.092777+00:00",
+      "state": "completed",
+      "step": 1,
+      "supervisor_pid": 62874,
+      "task_id": "TASK-C66-M-001"
+    },
+    {
+      "activity_bytes": 954153,
+      "artifact_sha256": "166843e8ec4729b2d23d6a626fba128f6b19fcb3a7e489f29c5e6602afc5240e",
+      "completed_at": "2026-08-05T01:02:05.381789+00:00",
+      "engine": "claude",
+      "engine_pid": 64249,
+      "engine_process_group": 64249,
+      "last_activity_at": "2026-08-05T01:02:04.284648+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/reviews/REV-0090.json",
+      "phase": "review",
+      "processes": [
+        {
+          "engine_pid": 64249,
+          "engine_process_group": 64249,
+          "started_at": "2026-08-05T00:43:06.201084+00:00",
+          "supervisor_pid": 64248,
+          "supervisor_process_group": 64248
+        }
+      ],
+      "started_at": "2026-08-05T00:43:06.171423+00:00",
+      "state": "completed",
+      "step": 2,
+      "supervisor_pid": 64248,
+      "task_id": "TASK-V-ATT-0046-P1"
+    },
+    {
+      "activity_bytes": 1253365,
+      "artifact_sha256": "169a445aef5d8a8d627b38684b06abd64e5a047076cb28df69bab18bbf946749",
+      "completed_at": "2026-08-05T01:07:05.318828+00:00",
+      "engine": "grok",
+      "engine_pid": 75625,
+      "engine_process_group": 75625,
+      "last_activity_at": "2026-08-05T01:07:04.345258+00:00",
+      "last_activity_stream": "stdout",
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "research/finding-audits/FAUD-0091.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 75625,
+          "engine_process_group": 75625,
+          "started_at": "2026-08-05T01:02:06.661591+00:00",
+          "supervisor_pid": 75624,
+          "supervisor_process_group": 75624
+        }
+      ],
+      "started_at": "2026-08-05T01:02:06.622441+00:00",
+      "state": "completed",
+      "step": 3,
+      "supervisor_pid": 75624,
+      "task_id": "TASK-F-FND-0098"
+    }
+  ],
+  "executed_steps": 3,
+  "parent_pid": 62872,
+  "parent_process_group": 62868,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260805T003705886972Z-62872",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-05T00:37:05.886972+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

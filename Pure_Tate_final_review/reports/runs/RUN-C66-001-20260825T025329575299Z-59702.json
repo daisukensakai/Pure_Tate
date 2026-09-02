@@ -1,0 +1,95 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-25T02:53:30.293267+00:00",
+  "engine_pools": {
+    "prover": [
+      "codex"
+    ],
+    "research": [
+      "qwen"
+    ],
+    "review": [
+      "qwen",
+      "grok"
+    ]
+  },
+  "events": [],
+  "executed_steps": 0,
+  "parent_pid": 59702,
+  "parent_process_group": 59702,
+  "pre_run_recoveries": [
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-25T02:53:29.487283+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "trace packet is stale; recovery is not safe",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0062",
+      "trace_path": "research/paired-traces/TRACE-0062.json",
+      "turn_kind": "mathematics",
+      "validation_error": "agent artifact lacks fields: argument_markdown, campaign_id, campaign_revision, claims, context_revision, engine, experiment_ids, experiment_uses, failed_approaches_addressed, gap_markers, id, lane, methods_used, new_inputs, novelty_claims, packet_id, packet_path, packet_sha256, proof_dependencies, result_type, schema_version, source_claim_ids, status, subproblem_id, summary, target, target_claim_id, task_id, theorem_statement"
+    },
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-25T02:53:29.502005+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "trace packet is stale; recovery is not safe",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0068",
+      "trace_path": "research/paired-traces/TRACE-0068.json",
+      "turn_kind": "mathematics",
+      "validation_error": "claude resume failed: exit=1 bytes=390541"
+    },
+    {
+      "artifact_id": null,
+      "attempted_at": "2026-08-25T02:53:29.513800+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "trace packet is stale; recovery is not safe",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-003",
+      "trace_id": "TRACE-0069",
+      "trace_path": "research/paired-traces/TRACE-0069.json",
+      "turn_kind": "mathematics",
+      "validation_error": "claude resume failed: exit=1 bytes=2209201"
+    },
+    {
+      "artifact_id": "ATT-0124",
+      "attempted_at": "2026-08-25T02:53:29.527444+00:00",
+      "campaign_id": "C66-001",
+      "classification": "validation_failure",
+      "engine": "claude",
+      "error": "target_interface_reference cites undeclared interface claim(s): CLM-0120-1, CLM-0120-2, CLM-0120-3, CLM-0120-4, CLM-0120-5, CLM-0120-6",
+      "status": "recovery_failed",
+      "task_id": "TASK-C66-M-005",
+      "trace_id": "TRACE-0090",
+      "trace_path": "research/paired-traces/TRACE-0090.json",
+      "turn_kind": "mathematics",
+      "validation_error": "target_interface_reference cites undeclared interface claim(s): CLM-0120-1, CLM-0120-2, CLM-0120-3, CLM-0120-4, CLM-0120-5, CLM-0120-6"
+    }
+  ],
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260825T025329575299Z-59702",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": false,
+      "sent": false
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "sent": false
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-25T02:53:29.575299+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

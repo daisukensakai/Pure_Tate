@@ -1,0 +1,79 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-03T00:39:13.779941+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "codex",
+      "qwen"
+    ],
+    "research": [
+      "qwen"
+    ],
+    "review": [
+      "grok",
+      "codex",
+      "qwen"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 37,
+      "completed_at": "2026-08-03T00:39:13.681891+00:00",
+      "engine": "qwen",
+      "engine_pid": 6190,
+      "engine_process_group": 6190,
+      "error": "agent failed with exit 1: Qwen exceeded the 3 tool-round limit",
+      "last_activity_at": "2026-08-03T00:39:13.532196+00:00",
+      "last_activity_stream": "stderr",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": "UnicodeEncodeError: 'latin-1' codec can't encode character '\\u2022' in position 10: ordinal not in range(256)",
+          "sent": false
+        }
+      },
+      "output": "research/finding-audits/FAUD-0041.json",
+      "phase": "finding-audit",
+      "processes": [
+        {
+          "engine_pid": 6190,
+          "engine_process_group": 6190,
+          "started_at": "2026-08-03T00:32:29.203134+00:00",
+          "supervisor_pid": 6189,
+          "supervisor_process_group": 6189
+        }
+      ],
+      "started_at": "2026-08-03T00:32:29.172519+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 6189,
+      "task_id": "TASK-F-FND-0056"
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 6183,
+  "parent_process_group": 6183,
+  "requested_steps": 1,
+  "run_id": "RUN-C66-001-20260803T003229007524Z-6183",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": "UnicodeEncodeError: 'latin-1' codec can't encode character '\\u2022' in position 10: ordinal not in range(256)",
+      "sent": false
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-03T00:32:29.007524+00:00",
+  "status": "completed_with_failures",
+  "stop_reason": "step_limit_with_failures"
+}

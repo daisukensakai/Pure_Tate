@@ -1,0 +1,87 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-07-31T12:35:54.274226+00:00",
+  "engine_pools": {
+    "prover": [
+      "claude"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 87428,
+      "artifact_sha256": "126e121e799888616273a9cba27210c4360d0e57ead17cb7497719840e6585da",
+      "completed_at": "2026-07-31T12:12:32.029763+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-07-31T12:12:31.593192+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0009.json",
+      "phase": "trace-mining",
+      "started_at": "2026-07-31T12:10:56.764145+00:00",
+      "state": "completed",
+      "step": 1,
+      "task_id": "TASK-C66-001-MINE-CLAUDE-FORCED_PROOF",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-a25d05fd55d4c0bc.md",
+        "sha256": "a25d05fd55d4c0bc4eff613c93b98628c272de89934cd622f60a3f65190e18db"
+      }
+    },
+    {
+      "activity_bytes": 1049898,
+      "artifact_sha256": "049f0fdb06fc33a235db64657f8126d122578808434924f9759b33b4a3057a2a",
+      "completed_at": "2026-07-31T12:28:48.556682+00:00",
+      "engine": "claude",
+      "last_activity_at": "2026-07-31T12:28:47.997543+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "output": "proof/attempts/ATT-0026.json",
+      "phase": "standard-fallback",
+      "started_at": "2026-07-31T12:12:32.249601+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-C66-M-001"
+    },
+    {
+      "activity_bytes": 170260,
+      "completed_at": "2026-07-31T12:34:12.024563+00:00",
+      "engine": "grok",
+      "error": "confirmed review contains a failed or unresolved structured check",
+      "last_activity_at": "2026-07-31T12:34:11.700217+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/reviews/REV-0033.json",
+      "phase": "review",
+      "started_at": "2026-07-31T12:28:48.767492+00:00",
+      "state": "failed",
+      "step": 3,
+      "task_id": "TASK-V-ATT-0026-P1"
+    },
+    {
+      "activity_bytes": 94716,
+      "artifact_sha256": "6f258331384a1c999caa74629a6ade5b3d0ad82b9d28ed214153560a6af23dda",
+      "completed_at": "2026-07-31T12:35:54.273691+00:00",
+      "engine": "codex",
+      "last_activity_at": "2026-07-31T12:35:54.117825+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/reviews/REV-0034.json",
+      "phase": "review",
+      "started_at": "2026-07-31T12:34:12.239948+00:00",
+      "state": "completed",
+      "step": 4,
+      "task_id": "TASK-V-ATT-0026-P1"
+    }
+  ],
+  "executed_steps": 4,
+  "requested_steps": 4,
+  "run_id": "RUN-C66-001-20260731T121056542869Z-35826",
+  "schema_version": 1,
+  "started_at": "2026-07-31T12:10:56.542869+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}

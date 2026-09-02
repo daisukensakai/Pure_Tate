@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "LATT-0001",
+  "campaign_id": "LC66-001",
+  "source_attempt_id": "ATT-0136",
+  "source_attempt_sha256": "1914ce98716727a27568047a6e691122b8da3edd4a65f988d75a11c37e919687",
+  "claim_contract_id": "C66-EXACT-TARGET-V1",
+  "prover_engine": "claude",
+  "formalization_scope": "local deduction over audited black boxes",
+  "notes": "Claim.lean derives the trusted predicate BMIsFiniteTateSum exactC66BMTarget, where exactC66BMTarget is the hash-pinned index (genus 6, markings 6, homological degree 16, weight -16, Tate index 8). The conclusion is therefore the exact open Borel-Moore group W_{-16}H^{BM}_{16}(M_{6,6};Q) of ATT-0136, not a quotient, associated graded, support term, semisimplification or unindexed Tate predicate. Every intermediate object is carried by an Int-indexed record (ModuliIndex, PureIndex, KunnethIndex, LocalSystemIndex) so that Lean, not a comment, checks the bookkeeping: 4*6-5=19 < 20 = 26-6, 4*6-4+5=25 < 26, six slots in {0,1,2} force |i|<=6 when no slot is 2, 5 <= c(6)=5, 24=2*12 with Tate index -12, -13 = -1 + -12, 3*6-3+6=21, 26 = 2*21-16, -16 = 26-2*21 and 8 = -13+21. The load-bearing route is ATT-0136 Sections 1-5 and 7-9, i.e. CLM-0136-1 (restriction surjection, containment direction only), CLM-0136-2 (Petersen-Tavakol-Yin relative Chow-Kuenneth projectors, including the explicit R^2 projector; E_2 degeneration alone is recorded as insufficient), CLM-0136-3 (omega_s = a_s + b_s + c_s and the disposal of both cross terms), CLM-0136-4 (Phi_{6,6}^{26}=0 from vcd(PMod_{6,5})=25), CLM-0136-5 (Kuenneth base-degree vanishing for |i|<=6 plus the well-founded downward induction on total fibre degree, with the slot-zero error routed through the five-marking vanishing), CLM-0136-7 (CKgP exactly at n=5=c(6)), CLM-0136-8 (psi-product and semisimplicity) and CLM-0136-9 (Poincare duality and the twist). CLM-0136-6, the published primitive-quotient route, is encoded as LC66-OBL-06 but is deliberately non-load-bearing: it derives an independent equality witness that the exported theorem does not consume, and Lean's #print axioms records the containment route as the one that carries c66_exact_bm_is_finite_tate_sum. The downward induction is discharged inside Lean by well-founded recursion on the natural-number total fibre degree, not asserted as an axiom. Model.lean is an axiom-free arithmetic interpretation of the whole Claim vocabulary in which every mathematical axiom becomes a theorem and non-collapse witnesses show the target predicate and the load-bearing intermediate predicates are not definitionally True.",
+  "source_reviews": [
+    "proof/reviews/REV-0187.json",
+    "proof/reviews/REV-0188.json"
+  ]
+}

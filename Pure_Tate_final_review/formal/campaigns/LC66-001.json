@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "id": "LC66-001",
+  "title": "Lean verification campaign for the exact (6,6) Pure Tate proof",
+  "source_attempt_id": "ATT-0136",
+  "source_attempt_path": "proof/attempts/ATT-0136.json",
+  "source_attempt_sha256": "1914ce98716727a27568047a6e691122b8da3edd4a65f988d75a11c37e919687",
+  "claim_contract_id": "C66-EXACT-TARGET-V1",
+  "exact_theorem": "The exact group W_{-16}H^{BM}_{16}(M_{6,6};Q), equivalently W_{26}H^{26}(M_{6,6};Q)(21), is a direct sum of Q(8); a disproof must exhibit a surviving non-Tate summand in this exact group.",
+  "lean_target_contract": "The exported Lean theorem must conclude the BM target predicate for g=6, n=6, homological degree 16, weight -16 and Tate twist +8. The ordinary-cohomology form may occur only through an explicit equivalence using dimension 21, cohomological degree 26, weight 26, Tate index -13 and twist 21. The zero-rank case is allowed. No theorem about a quotient, associated graded, support term, semisimplification, arbitrary carrier, or differently indexed group satisfies this contract.",
+  "target_signature": "BM(g=6,n=6,degree=16,weight=-16,tate=8);ORD(g=6,n=6,degree=26,weight=26,tate=-13,dimension=21,twist=21);rank>=0",
+  "trusted_prelude_path": "formal/TrustedC66Target.lean.inc",
+  "trusted_prelude_sha256": "be78d0949ab9ae1c28129586629f979a156d30b635e0e4e9b61b243d550e8762",
+  "required_theorem_type": "BMIsFiniteTateSum exactC66BMTarget",
+  "toolchain": "leanprover/lean4:v4.32.1",
+  "timeout_seconds": 120,
+  "minimum_independent_reviews": 2,
+  "review_policy": {
+    "reviewers_must_differ_from_prover": true,
+    "reviewer_engines_must_be_distinct": true,
+    "both_reviews_must_bind_all_artifact_hashes": true,
+    "both_reviews_must_check_statement_and_every_axiom": true
+  },
+  "obligations": [
+    {
+      "id": "LC66-OBL-01",
+      "source_claim_id": "CLM-0136-1",
+      "statement": "Faithfully encode the pure-weight restriction surjection from the closed universal-curve fibre power to the open moduli stack; do not assume a splitting or use the non-proper forgetful map to M_g."
+    },
+    {
+      "id": "LC66-OBL-02",
+      "source_claim_id": "CLM-0136-2",
+      "statement": "Faithfully encode the Petersen-Tavakol-Yin relative Chow-Kuenneth splitting of the pure-weight source, including the explicit R^2 projector; E_2 degeneration alone is insufficient."
+    },
+    {
+      "id": "LC66-OBL-03",
+      "source_claim_id": "CLM-0136-3",
+      "statement": "Faithfully encode the non-homogeneous decomposition omega_s=a_s+b_s+c_s and a valid disposal of its slot-one and slot-zero errors; do not identify multiplication by omega_s with its R^2 component without this repair."
+    },
+    {
+      "id": "LC66-OBL-04",
+      "source_claim_id": "CLM-0136-4",
+      "statement": "Faithfully encode Phi_{6,6}^{26}=0 from H^26(M_{6,5};Q)=0 because 26 exceeds vcd(PMod_{6,5})=25."
+    },
+    {
+      "id": "LC66-OBL-05",
+      "source_claim_id": "CLM-0136-5",
+      "statement": "Faithfully encode the Kunneth-summand argument: summands of total fibre degree at most six vanish above vcd(Mod_6)=19, and a well-founded downward induction disposes of every remaining slot-two summand into Psi after restriction."
+    },
+    {
+      "id": "LC66-OBL-06",
+      "source_claim_id": "CLM-0136-6",
+      "statement": "If the optional primitive-quotient route is represented, keep it explicitly independent and non-load-bearing, with H^20(M_6;V_lambda)=0 because 20 exceeds vcd(Mod_6)=19."
+    },
+    {
+      "id": "LC66-OBL-07",
+      "source_claim_id": "CLM-0136-7",
+      "statement": "Faithfully encode W_24 H^24(M_{6,5};Q) as a finite sum of Q(-12), using CKgP and algebraic-cycle generation exactly at n=5=c(6), never at n=6."
+    },
+    {
+      "id": "LC66-OBL-08",
+      "source_claim_id": "CLM-0136-8",
+      "statement": "Faithfully encode the psi-product and pure-Hodge semisimplicity assembly proving the whole W_26 H^26(M_{6,6};Q), not merely a quotient or subobject, is a finite sum of Q(-13)."
+    },
+    {
+      "id": "LC66-OBL-09",
+      "source_claim_id": "CLM-0136-9",
+      "statement": "Faithfully encode Poincare duality in dimension 21 and Q(-13)(21)=Q(8), yielding the exact BM group W_{-16}H^{BM}_{16}(M_{6,6};Q)."
+    }
+  ]
+}

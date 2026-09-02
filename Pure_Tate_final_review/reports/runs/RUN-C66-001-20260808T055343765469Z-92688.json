@@ -1,0 +1,98 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-08T06:18:28.228159+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "qwen",
+      "claude",
+      "codex"
+    ],
+    "research": [
+      "grok",
+      "claude",
+      "qwen"
+    ],
+    "review": [
+      "grok",
+      "qwen",
+      "claude",
+      "codex"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 1612292,
+      "completed_at": "2026-08-08T06:18:27.286386+00:00",
+      "engine": "claude",
+      "engine_pid": 92701,
+      "engine_process_group": 92701,
+      "error": "agent failed with exit 1: You've hit your session limit \u00b7 resets 6:40pm (Asia/Tokyo)",
+      "last_activity_at": "2026-08-08T06:18:26.327638+00:00",
+      "last_activity_stream": "stdout",
+      "max_output_tokens": 64000,
+      "notification_delivery": {
+        "desktop": {
+          "enabled": true,
+          "sent": true
+        },
+        "ntfy": {
+          "enabled": true,
+          "error": null,
+          "sent": true,
+          "status": 200
+        }
+      },
+      "output": "proof/attempts/ATT-0059.json",
+      "phase": "standard-fallback",
+      "processes": [
+        {
+          "engine_pid": 92701,
+          "engine_process_group": 92701,
+          "started_at": "2026-08-08T05:53:44.877122+00:00",
+          "supervisor_pid": 92700,
+          "supervisor_process_group": 92700
+        }
+      ],
+      "started_at": "2026-08-08T05:53:44.838505+00:00",
+      "state": "failed",
+      "step": 1,
+      "supervisor_pid": 92700,
+      "task_id": "TASK-C66-M-008",
+      "trace_id": "TRACE-0031",
+      "trace_path": "research/paired-traces/TRACE-0031.json",
+      "trace_sha256": "23625bf11026786714f49b695c2b467eda0b706d4f44ea5192a3d3e33075bfef",
+      "working_context": {
+        "extended": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-EXT-def9eb3ef6c036f1.md",
+          "sha256": "def9eb3ef6c036f1e22e1f708d5b27b47c47d372cc35c9f91130cb357b9c5bbc"
+        },
+        "primary": {
+          "path": "proof/packets/generated/paired-working-context/WORKING-7a483703948f9ea9.md",
+          "sha256": "7a483703948f9ea9e14a358b223001cc0472934d907b839e1b2f731b9d1302cf"
+        }
+      }
+    }
+  ],
+  "executed_steps": 1,
+  "parent_pid": 92688,
+  "parent_process_group": 92664,
+  "requested_steps": 3,
+  "run_id": "RUN-C66-001-20260808T055343765469Z-92688",
+  "run_notification_delivery": {
+    "desktop": {
+      "enabled": true,
+      "sent": true
+    },
+    "ntfy": {
+      "enabled": true,
+      "error": null,
+      "sent": true,
+      "status": 200
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-08-08T05:53:43.765469+00:00",
+  "status": "stopped",
+  "stop_reason": "engine_failure"
+}

@@ -1,0 +1,123 @@
+{
+  "campaign_id": "C66-001",
+  "completed_at": "2026-08-01T12:52:18.639013+00:00",
+  "engine_pools": {
+    "prover": [
+      "grok",
+      "claude",
+      "codex",
+      "gemini"
+    ],
+    "research": [
+      "claude",
+      "grok"
+    ],
+    "review": [
+      "grok",
+      "gemini",
+      "codex",
+      "claude"
+    ]
+  },
+  "events": [
+    {
+      "activity_bytes": 839319,
+      "artifact_sha256": "322a11c65b0865ac7875b0313b0c42f279ef8064d8cab4b8be9838f3de8cc3f5",
+      "completed_at": "2026-08-01T11:25:57.001039+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-08-01T11:25:56.480684+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/attempts/ATT-0035.json",
+      "phase": "standard-fallback",
+      "started_at": "2026-08-01T11:20:41.805846+00:00",
+      "state": "completed",
+      "step": 1,
+      "task_id": "TASK-C66-M-001"
+    },
+    {
+      "activity_bytes": 63051,
+      "artifact_sha256": "cf5d8617cfed39c62f0aa9b99d953ad88301a5ea825f085e191663d3187af2cf",
+      "completed_at": "2026-08-01T11:44:02.986911+00:00",
+      "engine": "codex",
+      "last_activity_at": "2026-08-01T11:44:02.857524+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/reviews/REV-0043.json",
+      "phase": "review",
+      "started_at": "2026-08-01T11:25:57.531813+00:00",
+      "state": "completed",
+      "step": 2,
+      "task_id": "TASK-V-ATT-0035-P1"
+    },
+    {
+      "activity_bytes": 62193,
+      "artifact_sha256": "f4387c5a42f39692cf146ab85d4c9a6827c189cd87952a591724966e2992e975",
+      "completed_at": "2026-08-01T11:49:39.044418+00:00",
+      "engine": "codex",
+      "last_activity_at": "2026-08-01T11:49:38.902914+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0015.json",
+      "phase": "trace-mining",
+      "started_at": "2026-08-01T11:44:03.348634+00:00",
+      "state": "completed",
+      "step": 3,
+      "task_id": "TASK-C66-001-MINE-GROK-STANDARD_FALLBACK",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-2c5565a13b7a0c14.md",
+        "sha256": "2c5565a13b7a0c142e06550e03f0262060298b584e6c529df85c5a573061ec3c"
+      }
+    },
+    {
+      "activity_bytes": 217717,
+      "artifact_sha256": "4738f483b6cdc4a3edebf184a1d469ca229e38f14140ce0c19984f087090e655",
+      "completed_at": "2026-08-01T12:34:16.036617+00:00",
+      "engine": "codex",
+      "last_activity_at": "2026-08-01T12:34:15.778934+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/attempts/ATT-0037.json",
+      "phase": "forced-proof",
+      "started_at": "2026-08-01T11:49:39.426454+00:00",
+      "state": "completed",
+      "step": 4,
+      "task_id": "TASK-C66-001-FORCED-FULL"
+    },
+    {
+      "activity_bytes": 400207,
+      "artifact_sha256": "fb7878392dd0e360414062dfa35c0dbd23c256f86704f9b1c6327f2a50d204c1",
+      "completed_at": "2026-08-01T12:48:00.001198+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-08-01T12:47:59.428303+00:00",
+      "last_activity_stream": "stdout",
+      "output": "proof/reviews/REV-0045.json",
+      "phase": "review",
+      "started_at": "2026-08-01T12:34:16.401185+00:00",
+      "state": "completed",
+      "step": 5,
+      "task_id": "TASK-V-ATT-0037-P1"
+    },
+    {
+      "activity_bytes": 502742,
+      "artifact_sha256": "f75424795f35b9f4421e8ab68f74edadea1e23310d832f5cf5c32f340a088a69",
+      "completed_at": "2026-08-01T12:52:18.638382+00:00",
+      "engine": "grok",
+      "last_activity_at": "2026-08-01T12:52:18.118490+00:00",
+      "last_activity_stream": "stdout",
+      "output": "research/paired-digests/DIGEST-0016.json",
+      "phase": "trace-mining",
+      "started_at": "2026-08-01T12:48:00.418834+00:00",
+      "state": "completed",
+      "step": 6,
+      "task_id": "TASK-C66-001-MINE-CODEX-FORCED_PROOF",
+      "working_context": {
+        "path": "proof/packets/generated/paired-working-context/WORKING-670f085363b2bed1.md",
+        "sha256": "670f085363b2bed184269f1bc213811ef6e6c0eb9ab4570127d8a9353c081fc8"
+      }
+    }
+  ],
+  "executed_steps": 6,
+  "requested_steps": 6,
+  "run_id": "RUN-C66-001-20260801T112041236697Z-11895",
+  "schema_version": 1,
+  "started_at": "2026-08-01T11:20:41.236697+00:00",
+  "status": "completed",
+  "stop_reason": "step_limit"
+}
